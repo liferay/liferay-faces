@@ -9,11 +9,12 @@
 	<version>3.0.0-BETA1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<description>Parent POM for all Liferay Faces projects</description>
-
-	<scm>
-		<developerConnection>scm:https://github.com/liferay/liferay-faces</developerConnection>
-	</scm>
-
+    
+    <organization>
+        <name>liferay.com</name>
+        <url>http://www.liferay.com</url>
+    </organization>
+    
 	<issueManagement>
 		<system>Atlassian JIRA</system>
 		<url>http://issues.liferay.com/browse/FACES</url>
@@ -45,12 +46,13 @@
 			<organizationUrl>http://www.mimacom.com</organizationUrl>
 		</developer>
 	</developers>
-
-	<ciManagement>
-		<system>Jenkins</system>
-		<url>http://jenkins.liferay.com</url>
-	</ciManagement>
-
+    
+    <scm>
+        <connection>scm:git:https://github.com/liferay/liferay-faces</connection>
+        <developerConnection>scm:git:https://github.com/liferay/liferay-faces</developerConnection>
+        <url>scm:git:https://github.com/liferay/liferay-faces</url>
+    </scm>
+    
 	<distributionManagement>
 		<repository>
 			<id>liferay-releases</id>
@@ -61,11 +63,6 @@
 			<url>${liferay-deploy-path-snapshots}</url>
 		</snapshotRepository>
 	</distributionManagement>
-
-	<organization>
-		<name>liferay.com</name>
-		<url>http://www.liferay.com</url>
-	</organization>
 
 	<modules>
 		<module>alloy</module>
