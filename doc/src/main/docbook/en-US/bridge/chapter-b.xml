@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xsi:schemaLocation="http://docbook.org/ns/docbook http://docbook.org/xml/5.0/xsd/docbook.xsd"
+	xmlns="http://docbook.org/ns/docbook" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:ns="http://docbook.org/ns/docbook">
+	<title>Portlet Standard</title>
+	<sect1 revision="1">
+		<title>Overview</title>
+		<para> Portlets are web applications that are designed to run inside a portlet container that implements either
+			the Portlet 1.0 (<link xlink:href="http://www.jcp.org/en/jsr/detail?id=168">JSR 168</link>) or Portlet 2.0
+				(<link xlink:href="http://www.jcp.org/en/jsr/detail?id=286">JSR 286</link>) standard. Portlet containers
+			provide a layer of abstraction over the Java EE Servlet API, and consequently require a servlet container
+			like Apache Tomcat to function. The reference implementation for Portlet 1.0 and 2.0 is the Apache Pluto
+			project: <link xlink:href="http://portals.apache.org/pluto">http://portals.apache.org/pluto</link>. </para>
+		<para>Portals are standalone systems that use a portlet container as the runtime engine for executing portlets.
+			When a portal is asked to deliver a portal page to the end-user’s web browser, each portlet is asked to
+			render itself as a fragment of HTML. It is the job of the portal to aggregate these HTML fragments into a
+			complete HTML document.</para>
+	</sect1>
+	<sect1>
+		<title>Portlet Lifecycle</title>
+		<para>The Portlet 1.0 standard defines two lifecycle phases for the execution of a portlet that a compliant
+			portlet container must support: The first is the javax.portlet.PortletRequest.RENDER_PHASE, in which the
+			portlet container asks each portlet to render itself as a fragment of HTML. The second is the
+			javax.portlet.PortletRequest.ACTION_PHASE, in which the portlet container invokes actions related to HTML
+			form submission. When the portal receives an HTTP GET request for a portal page, the portlet container
+			executes the portlet lifecycle and each of the portlets on the page undergoes the RENDER_PHASE. When the
+			portal receives an HTTP POST request, the portlet container executes the portlet lifecycle and the portlet
+			associated with the HTML form submission will first undergo the ACTION_PHASE before the RENDER_PHASE is
+			invoked for all of the portlets on the page.</para>
+		<para>The Portlet 2.0 standard adds two more lifecycle phases that define the execution of a portlet. The first
+			is the javax.portlet.PortletRequest.EVENT_PHASE, in which the portlet container broadcasts events that are
+			the result of an HTML form submission. During this phase, the portlet container asks each portlet to process
+			events that they are interested in. The typical use case for the EVENT_PHASE is to achieve Inter-Portlet
+			Communication (IPC), whereby two or more portlets on a portal page share data in some way. The other new
+			phase added by the Portlet 2.0 standard is the javax.portlet.PortletRequest.RESOURCE_PHASE, in which the
+			portlet container asks a specific portlet to perform resource-related processing. One typical use case for
+			the RESOURCE_PHASE is for an individual portlet to process Ajax requests. Another typical use case for the
+			RESOURCE_PHASE is for an individual portlet to generate non-HTML content (for download purposes) such as a
+			PDF or spreadsheet document.</para>
+	</sect1>
+	<sect1>
+		<title>Portlet Modes</title>
+		<para>The Portlet 1.0 and 2.0 standards define three portlet modes that a compliant portlet container must
+			support: javax.portlet.PortletMode.VIEW, javax.portlet.PortletMode.EDIT, and javax.portlet.PortletMode.HELP.
+			Portal vendors and portlet developers may supply custom modes as well. VIEW mode refers to the rendered
+			portlet markup that is encountered by the user under normal circumstances. Perhaps a clearer name would be
+			&quot;normal&quot; mode or &quot;typical&quot; mode, because the word &quot;view&quot; is also used by
+			developers to review to the &quot;view&quot; concern of the MVC design pattern. EDIT mode refers to the
+			rendered portlet markup that is encountered by the user when selecting custom values for portlet
+			preferences. Perhaps a clearer name would be &quot;preferences&quot; mode. Finally, HELP mode refers to the
+			rendered portlet markup that is encountered by the user when seeking help regarding the usage and/or
+			functionality of the portlet.</para>
+		<figure>
+			<title>Portlet VIEW Mode</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/portlet-view-mode.png" width="400px"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<figure>
+			<title>Portlet EDIT Mode</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/portlet-edit-mode.png" width="400px"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<figure>
+			<title>Portlet HELP Mode</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/portlet-help-mode.png" width="400px"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+	</sect1>
+	<sect1>
+		<title>Portlet Window States</title>
+		<para>Portals typically manifest the rendered markup of a portlet in a rectangular section of the browser known
+			as a portlet window. The Portlet 1.0 and 2.0 standards define three window states that a compliant portlet
+			container must support: javax.portlet.WindowState.NORMAL, javax.portlet.WindowState.MAXIMIZED, and
+			javax.portlet.WindowState.MINIMIZED. The NORMAL window state refers to the way in which the portlet
+			container displays the rendered markup of a portlet when it can appear on the same portal page as other
+			portlets. The MAXIMIZED window state refers to the way in which the portlet container displays the rendered
+			markup of a portlet when it is the only portlet on a page, or when the portlet is to be rendered more
+			prominently than other portlets on a page. Finally, the MINIMIZED window state refers to the way in which
+			the portlet container displays a portlet when the markup is not to be rendered.</para>
+	</sect1>
+	<sect1>
+		<title>Portlet Preferences</title>
+		<para>Developers often have the requirement to provide the end-user with the ability to personalize the portlet
+			behavior in some way. To meet this requirement, the Portlet 1.0 and 2.0 standards provide the ability to
+			define preferences for each portlet. Preference names and default values can be defined in the
+			WEB-INF/portlet.xml configuration file. Portal end-users start out interacting with the portlet user
+			interface in portlet VIEW mode but can switch to portlet EDIT mode in order to select custom preference
+			values.</para>
+		<example>
+			<title>Specifying preference names and associated default values in the WEB-INF/portlet.xml configuration
+				file</title>
+			<programlisting>
+&lt;portlet-app&gt;
+	&lt;portlet&gt;
+		...
+		&lt;portlet-preferences&gt;
+			&lt;preference&gt;
+				&lt;name&gt;datePattern&lt;/name&gt;
+				&lt;value&gt;MM/dd/yyyy&lt;/value&gt;
+			&lt;/preference&gt;
+			&lt;preference&gt;
+				&lt;name&gt;unitedStatesPhoneFormat&lt;/name&gt;
+				&lt;value&gt;###-###-####&lt;/value&gt;
+			&lt;/preference&gt;
+		&lt;/portlet-preferences&gt;
+		...
+	&lt;/portlet&gt;
+&lt;/portlet-app&gt; </programlisting>
+		</example>
+	</sect1>
+	<sect1 xml:id="portlet2ipc">
+		<title>Inter-Portlet Communication</title>
+		<para>Inter-Portlet Communication (IPC) is a technique whereby two or more portlets on a portal page share data
+			in some way. In a typical IPC use case, user interactions with one portlet affect the rendered markup of
+			another portlet. The Portlet 2.0 standard provides two techniques to achieve IPC: Public Render Parameters
+			and Server-Side Events.</para>
+		<para>The Public Render Parameters technique provides a way for portlets to share data by setting public/shared
+			parameter names in a URL controlled by the portal. While the benefit of this approach is that it is
+			relatively easy to implement, the drawback is that only small amounts of data can be shared. Typically the
+			kind of data that is shared is simply the value of a database primary key.</para>
+		<para>The Server-Side Events technique provides a way for portlets to share data using an event-listener design.
+			When using this form of IPC, the portlet container acts as broker and distributes events and payload (data)
+			to portlets. One requirement of this approach is that the payload must implement the java.io.Serializable
+			interface since it might be sent to a portlet in another WAR running in a different classloader.</para>
+		<para>It could be argued that the Portlet 2.0 approaches for IPC have a common drawback in that they can lead to
+			a potentially disruptive end-user experience. This is because they cause either an HTTP GET or HTTP POST
+			which results in a full page refresh. Technologies such as ICEfaces Ajax Push can be used to solve this
+			problem. Refer to the <link xlink:href="#ajaxpushipc">Ajax Push IPC</link> section of this document for more
+			details. </para>
+		<figure>
+			<title>Illustration of Standard Portlet 2.0 IPC</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/ipc-standard.png" width="400px"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+	</sect1>
+</chapter>

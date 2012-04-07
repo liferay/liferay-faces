@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xsi:schemaLocation="http://docbook.org/ns/docbook http://docbook.org/xml/5.0/xsd/docbook.xsd"
+	xmlns="http://docbook.org/ns/docbook" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:ns="http://docbook.org/ns/docbook">
+	<title>LiferayFacesContext</title>
+	<para>JSF web application developers typically call <ns:link
+			xlink:href="http://docs.oracle.com/cd/E17802_01/j2ee/javaee/javaserverfaces/2.0/docs/api/javax/faces/context/FacesContext.html#getCurrentInstance()"
+			>FacesContext.getCurrentInstance()</ns:link> in order to obtain the <ns:code>ThreadLocal</ns:code> singleton
+		instance associated with the current request. While JSF portlet developers can certainly do the same, it's
+		easier to call LiferayFacesContext.getInstance() which returns an application-scoped singleton instance. </para>
+	<para>
+		<example>
+			<title>Obtaining the LiferayFacesContext Singleton Instance</title>
+			<programlisting>
+public class SessionScopedManagedBean {
+
+	private final LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+	
+	public List&lt;DlFileEntry&gt; getDocuments() {
+		List&lt;DLFileEntry&gt; documents;
+		try {
+			documents = DLFileEntryLocalServiceUtil.getFileEntries(folderId);
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			// Don't have to call LiferayFacesContext.getInstance() first since
+			// a reference to it was obtained when the bean was created.
+			liferayFacesContext.addGlobalUnexpectedErrorMessage();
+		}
+		return documents;
+	}
+}</programlisting>
+		</example>
+	</para>
+	<para>LiferayFacesContext is an abstract class that extends the JSF <ns:link
+			xlink:href="http://docs.oracle.com/cd/E17802_01/j2ee/javaee/javaserverfaces/2.0/docs/api/javax/faces/context/FacesContext.html"
+			>FacesContext</ns:link> abstract class. Because of thism it supplies all the same method signatures and can
+		therefore do anything that <ns:link
+			xlink:href="http://docs.oracle.com/cd/E17802_01/j2ee/javaee/javaserverfaces/2.0/docs/api/javax/faces/context/FacesContext.html"
+			>FacesContext</ns:link> can do. The LiferayFacesContext implements the <link
+			xlink:href="http://en.wikipedia.org/wiki/Delegation_pattern">delegation design pattern</link> for methods
+		defined by <ns:link
+			xlink:href="http://docs.oracle.com/cd/E17802_01/j2ee/javaee/javaserverfaces/2.0/docs/api/javax/faces/context/FacesContext.html"
+			>FacesContext</ns:link> by first calling <ns:link
+			xlink:href="http://docs.oracle.com/cd/E17802_01/j2ee/javaee/javaserverfaces/2.0/docs/api/javax/faces/context/FacesContext.html#getCurrentInstance()"
+			>FacesContext.getCurrentInstance()</ns:link> and then delegating to corresponding methods. The benefit of
+		using this technique is that JSF portlet developers only have to call LiferayFacesContext.getInstance() once,
+		and can save the singleton object reference for future use.</para>
+</chapter>

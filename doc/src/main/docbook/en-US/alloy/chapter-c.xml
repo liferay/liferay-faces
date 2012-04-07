@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xsi:schemaLocation="http://docbook.org/ns/docbook http://docbook.org/xml/5.0/xsd/docbook.xsd"
+	xmlns="http://docbook.org/ns/docbook" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:ns="http://docbook.org/ns/docbook">
+	<title>Composite Component Tags</title>
+
+	<para>Liferay Faces Alloy provides the following Facelet Composite Component tags as part of its component suite.</para>
+	<table>
+		<title>Facelet Composite Component Tags</title>
+		<tgroup cols="2">
+			<thead>
+				<row>
+					<entry>Tag</entry>
+					<entry>Description</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>
+						<literal>
+							<link xlink:href="#aui-cc-button">aui-cc:button</link>
+						</literal>
+					</entry>
+					<entry>Renders a div with CSS class name &quot;aui-button&quot; and a child input element with CSS
+						class name &quot;aui-button-input&quot;.</entry>
+				</row>
+				<row>
+					<entry>
+						<literal>
+							<link xlink:href="#aui-cc-input">aui-cc:input</link>
+						</literal>
+					</entry>
+					<entry>Renders either an input (type=text), textarea, input (type="secret"), input
+						(type="checkbox"), or input (type="radio") with appropriate Alloy UI CSS class names, according
+						to the value of the type attribute.</entry>
+				</row>
+				<row>
+					<entry>
+						<literal>
+							<link xlink:href="#aui-cc-message">aui-cc:message</link>
+						</literal>
+					</entry>
+					<entry>Encapsulates a standard JSF h:message tag with JSR 286 (Portlet 2.0) CSS class names.</entry>
+				</row>
+				<row>
+					<entry>
+						<literal>
+							<link xlink:href="#aui-cc-messages">aui-cc:messages</link>
+						</literal>
+					</entry>
+					<entry>Encapsulates a standard JSF h:messages tag with JSR 286 (Portlet 2.0) CSS class
+						names.</entry>
+				</row>
+				<row>
+					<entry>
+						<literal>
+							<link xlink:href="#aui-cc-select">aui-cc:select</link>
+						</literal>
+					</entry>
+					<entry>Encapsulates a standard JSF h:selectOneMenu tag with CSS class name &quot;aui-field-input
+						aui-field-input-select aui-field-input-menu&quot;.</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</table>
+	<sect1 xml:id="aui-cc-button">
+		<title>The aui-cc:button tag</title>
+		<para>The <ns:code>aui-cc:button</ns:code> renders a div with CSS class name &quot;aui-button&quot; and a child
+			input element with CSS class name &quot;aui-button-input&quot;.</para>
+		<table>
+			<title>Attributes</title>
+			<tgroup cols="2">
+				<thead>
+					<row>
+						<entry>Attribute</entry>
+						<entry>Type</entry>
+						<entry>Description</entry>
+						<entry>Required</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>id</entry>
+						<entry>String</entry>
+						<entry>The identifier of the component</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>cssClass</entry>
+						<entry>String</entry>
+						<entry>The name of a CSS class that is to be rendered within the class attribute.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>immediate</entry>
+						<entry>Boolean</entry>
+						<entry>Boolean flag indicating whether or not actions and action listeners are to be executed
+							during the APPLY_REQUEST_VALUES phase of the JSF lifecycle. The default value is
+							“false”.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>label</entry>
+						<entry>String</entry>
+						<entry>The text value for the rendered label of the button.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>rendered</entry>
+						<entry>Boolean</entry>
+						<entry>Boolean flag indicating whether or not this component is to be rendered during the
+							RENDER_RESPONSE phase of the JSF lifecycle. The default value is “true”.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>styleClass</entry>
+						<entry>String</entry>
+						<entry>The name of a CSS class that is to be rendered within the class attribute.</entry>
+						<entry>false</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</sect1>
+	<sect1 xml:id="aui-cc-input">
+		<title>The aui-cc:input tag</title>
+		<para>The <ns:code>aui-cc:input</ns:code> renders either an input (type=text), textarea, input (type="secret"),
+			input (type="checkbox"), or input (type="radio") with appropriate Alloy UI CSS class names, according to the
+			value of the type attribute.</para>
+		<table>
+			<title>Attributes</title>
+			<tgroup cols="2">
+				<thead>
+					<row>
+						<entry>Attribute</entry>
+						<entry>Type</entry>
+						<entry>Description</entry>
+						<entry>Required</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>id</entry>
+						<entry>String</entry>
+						<entry>The identifier of the component</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>cssClass</entry>
+						<entry>String</entry>
+						<entry>The name of a CSS class that is to be rendered within the class attribute.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>cols</entry>
+						<entry>String</entry>
+						<entry>The number of columns for the rendered textarea.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>disabled</entry>
+						<entry>Boolean</entry>
+						<entry>This is an HTML pass-thru type of attribute. The default value is “false”.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>inlineLabel</entry>
+						<entry>String</entry>
+						<entry>The position of the label. Valid values are: left, right.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>inlineMessage</entry>
+						<entry>String</entry>
+						<entry>Boolean flag indicating whether or not there should be an inline h:message tag included.
+							The default value is “false”.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>label</entry>
+						<entry>String</entry>
+						<entry>The text value for the rendered label of the button.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>onblur</entry>
+						<entry>String</entry>
+						<entry>This is an HTML pass-thru type of attribute.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>onchange</entry>
+						<entry>String</entry>
+						<entry>This is an HTML pass-thru type of attribute.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>readonly</entry>
+						<entry>Boolean</entry>
+						<entry>This is an HTML pass-thru type of attribute. The default value is “false”.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>required</entry>
+						<entry>Boolean</entry>
+						<entry>Boolean flag indicating whether or not it is required for the user to supply a value for
+							this component. The default value is “false”.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>rendered</entry>
+						<entry>Boolean</entry>
+						<entry>Boolean flag indicating whether or not this component is to be rendered during the
+							RENDER_RESPONSE phase of the JSF lifecycle. The default value is “true”.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>rows</entry>
+						<entry>String</entry>
+						<entry>The number of rows for the rendered textarea.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>size</entry>
+						<entry>String</entry>
+						<entry>The size/width of the rendered input text box.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>style</entry>
+						<entry>String</entry>
+						<entry>This is an HTML pass-thru type of attribute.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>styleClass</entry>
+						<entry>String</entry>
+						<entry>The name of a CSS class that is to be rendered within the class attribute.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>type</entry>
+						<entry>String</entry>
+						<entry>The type of input field. Valid values are: text, textarea, password, checkbox,
+							boolean.</entry>
+						<entry>false</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</sect1>
+	<sect1 xml:id="aui-cc-message">
+		<title>The aui-cc:message tag</title>
+		<para>The <ns:code>aui-cc:message</ns:code> encapsulates a standard JSF h:message tag with JSR 286 (Portlet 2.0)
+			CSS class names.</para>
+		<table>
+			<title>Attributes</title>
+			<tgroup cols="2">
+				<thead>
+					<row>
+						<entry>Attribute</entry>
+						<entry>Type</entry>
+						<entry>Description</entry>
+						<entry>Required</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>id</entry>
+						<entry>String</entry>
+						<entry>The identifier of the component</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>for</entry>
+						<entry>String</entry>
+						<entry>The id of the component for which this message is associated.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>rendered</entry>
+						<entry>Boolean</entry>
+						<entry>Boolean flag indicating whether or not this component is to be rendered during the
+							RENDER_RESPONSE phase of the JSF lifecycle. The default value is “true”.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>styleClass</entry>
+						<entry>String</entry>
+						<entry>The name of a CSS class that is to be rendered within the class attribute.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>style</entry>
+						<entry>String</entry>
+						<entry>This is an HTML pass-thru type of attribute.</entry>
+						<entry>false</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</sect1>
+	<sect1 xml:id="aui-cc-messages">
+		<title>The aui-cc:messages tag</title>
+		<para>The <ns:code>aui-cc:messages</ns:code> encapsulates a standard JSF h:messages tag with JSR 286 (Portlet
+			2.0) CSS class names.</para>
+		<table>
+			<title>Attributes</title>
+			<tgroup cols="2">
+				<thead>
+					<row>
+						<entry>Attribute</entry>
+						<entry>Type</entry>
+						<entry>Description</entry>
+						<entry>Required</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>id</entry>
+						<entry>String</entry>
+						<entry>The identifier of the component</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>globalOnly</entry>
+						<entry>Boolean</entry>
+						<entry>Boolean flag indicating whether or not this component is to render only the global
+							messages, meaning, messages that are not associated with an individual component. The
+							default value is “false”.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>layout</entry>
+						<entry>String</entry>
+						<entry>The layout of the list of messages. Valid values are: list, table.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>rendered</entry>
+						<entry>Boolean</entry>
+						<entry>Boolean flag indicating whether or not this component is to be rendered during the
+							RENDER_RESPONSE phase of the JSF lifecycle. The default value is “true”.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>styleClass</entry>
+						<entry>String</entry>
+						<entry>The name of a CSS class that is to be rendered within the class attribute.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>style</entry>
+						<entry>String</entry>
+						<entry>This is an HTML pass-thru type of attribute.</entry>
+						<entry>false</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</sect1>
+	<sect1 xml:id="aui-cc-select">
+		<title>The aui-cc:select tag</title>
+		<para>The <ns:code>aui-cc:select</ns:code> encapsulates a standard JSF h:selectOneMenu tag with CSS class name
+			&quot;aui-field-input aui-field-input-select aui-field-input-menu&quot;. NOTE that sometimes the JSF
+			implementation performs more reliably if a simple h:selectOneMenu is used instead of this tag.</para>
+		<table>
+			<title>Attributes</title>
+			<tgroup cols="2">
+				<thead>
+					<row>
+						<entry>Attribute</entry>
+						<entry>Type</entry>
+						<entry>Description</entry>
+						<entry>Required</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>id</entry>
+						<entry>String</entry>
+						<entry>The identifier of the component</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>inlineMessage</entry>
+						<entry>String</entry>
+						<entry>Boolean flag indicating whether or not there should be an inline h:message tag included.
+							The default value is “false”.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>label</entry>
+						<entry>String</entry>
+						<entry>The text value for the rendered label.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>rendered</entry>
+						<entry>Boolean</entry>
+						<entry>Boolean flag indicating whether or not this component is to be rendered during the
+							RENDER_RESPONSE phase of the JSF lifecycle. The default value is “true”.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>value</entry>
+						<entry>java.util.List</entry>
+						<entry>The list of items that are to appear in the drop down list.</entry>
+						<entry>false</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</sect1>
+</chapter>

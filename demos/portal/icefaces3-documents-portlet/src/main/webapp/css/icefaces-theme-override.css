@@ -1,0 +1,67 @@
+/* START TREE */
+.dlp .selectedNodetrue span{
+    font-weight:bold;
+}
+
+.dlp .iceTree a:hover .iceOutTxt {
+    color: #318496;
+}
+
+.dlp .iceTree {
+}
+
+/* END TREE */
+
+.dlp .docPanel-contents {
+}
+
+.dlp .iceDatTbl {
+	margin: 0px;
+	width: 100%;
+}
+
+.dlp .iceOutConStat {
+	margin: 0px;
+}
+
+.dlp .iceSelOneMnu {
+	padding: 1px 1px 1px 1px;
+}
+
+.dlp .iceInpTxt {
+	margin: 0px;
+}
+
+.dlp .iceOutLbl {
+	padding: 1px 4px 1px 0px;
+}
+
+.dlp .icePnlClpsbl, .dlp .icePnlClpsblColpsd {
+	padding: 5px 5px 5px 5px;
+}
+
+.dlp .icePnlClpsblHdr div, .icePnlClpsblHdr-dis div {
+    background-repeat: no-repeat;
+    background-position: left top;
+    height: 17px;
+	background-image: url( "../images/arrow-down.png" );
+}
+
+.dlp .icePnlClpsblHdr span, .icePnlClpsblHdr-dis span {
+	color: #111552;
+	font-style: italic;
+	padding-left: 20px;
+}
+
+.dlp .icePnlClpsblColpsdHdr div, .icePnlClpsblColpsdHdr-dis div{
+    background-repeat: no-repeat;
+    background-position: left top;
+    height: 17px;
+	background-image: url( "../images/arrow-collapsed.png" );
+}
+
+.dlp .icePnlClpsblColpsdHdr span, .icePnlClpsblColpsdHdr-dis span{
+	color: #111552;
+	font-style: italic;
+	padding-left: 20px;
+}

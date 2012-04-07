@@ -1,0 +1,50 @@
+.dp .iceDatTbl {
+	margin: 0px;
+	width: 100%;
+}
+
+.dp .iceOutConStat {
+	margin: 0px;
+}
+
+.dp .iceSelOneMnu {
+	padding: 1px 1px 1px 1px;
+}
+
+.dp .iceInpTxt {
+	margin: 0px;
+}
+
+.dp .iceOutLbl {
+	padding: 1px 4px 1px 0px;
+}
+
+.dp .icePnlClpsbl, .dp .icePnlClpsblColpsd {
+	padding: 5px 5px 5px 5px;
+}
+
+.dp .icePnlClpsblHdr div, .icePnlClpsblHdr-dis div {
+    background-repeat: no-repeat;
+    background-position: left top;
+    height: 17px;
+	background-image: url( "../images/arrow-down.png" );
+}
+
+.dp .icePnlClpsblHdr span, .icePnlClpsblHdr-dis span {
+	color: #111552;
+	font-style: italic;
+	padding-left: 20px;
+}
+
+.dp .icePnlClpsblColpsdHdr div, .icePnlClpsblColpsdHdr-dis div{
+    background-repeat: no-repeat;
+    background-position: left top;
+    height: 17px;
+	background-image: url( "../images/arrow-collapsed.png" );
+}
+
+.dp .icePnlClpsblColpsdHdr span, .icePnlClpsblColpsdHdr-dis span{
+	color: #111552;
+	font-style: italic;
+	padding-left: 20px;
+}

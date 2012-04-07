@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+	version="2.1">
+	<tlib-version>3.0.0</tlib-version>
+	<short-name>bridge</short-name>
+	<uri>http://liferay.com/faces/bridge</uri>
+	<tag>
+		<description>File Upload</description>
+		<name>inputFile</name>
+		<tag-class>com.liferay.faces.bridge.taglib.InputFileTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<description><![CDATA[The unique ID for the component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean flag indicating immediate processing.]]></description>
+			<name>immediate</name>
+			<required>false</required>
+			<deferred-value>
+				<type>boolean</type>
+			</deferred-value>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean flag indicating whether or not the component should be rendered.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<deferred-value>
+				<type>boolean</type>
+			</deferred-value>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean flag indicating whether or not the value is required.]]></description>
+			<name>required</name>
+			<required>false</required>
+			<deferred-value>
+				<type>boolean</type>
+			</deferred-value>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The value of the component.]]></description>
+			<name>value</name>
+			<required>false</required>
+			<deferred-value>
+				<type>java.lang.Object</type>
+			</deferred-value>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Pass-thru boolean flag indicating whether or not the component is disabled.]]></description>
+			<name>disabled</name>
+			<required>false</required>
+			<deferred-value>
+				<type>boolean</type>
+			</deferred-value>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The size of the text field.]]></description>
+			<name>size</name>
+			<required>false</required>
+			<deferred-value>
+				<type>int</type>
+			</deferred-value>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Pass through style.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<deferred-value>
+				<type>java.lang.String</type>
+			</deferred-value>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS classes.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<deferred-value>
+				<type>java.lang.String</type>
+			</deferred-value>
+		</attribute>
+		<attribute>
+			<description><![CDATA[EL expression for binding.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<deferred-value>
+				<type>javax.faces.component.UIComponent</type>
+			</deferred-value>
+		</attribute>
+	</tag>
+</taglib>

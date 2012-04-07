@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
+
+	<cc:interface>
+		<cc:attribute name="cssClass" required="false" />
+		<cc:attribute name="styleClass" required="false" />
+	</cc:interface>
+
+	<cc:implementation>
+		<h:panelGroup layout="block" styleClass="lfr-portlet-toolbar #{cc.attrs.cssClass} #{cc.attrs.styleClass}">
+			<cc:insertChildren />
+		</h:panelGroup>
+	</cc:implementation>
+
+</ui:component>

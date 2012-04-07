@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:aui="http://liferay.com/faces/aui" xmlns:aui-cc="http://liferay.com/faces/aui-cc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
+
+	<cc:interface>
+		<cc:attribute name="cols" required="false" />
+		<cc:attribute name="cssClass" required="false" />
+		<cc:attribute name="disabled" default="false" required="false" />
+		<cc:attribute name="inlineLabel" default="left" required="false" />
+		<cc:attribute name="inlineMessage" default="false" required="false" />
+		<cc:attribute name="label" required="true" />
+		<cc:attribute name="onblur" required="false" />
+		<cc:attribute name="onchange" required="false" />
+		<cc:attribute name="readonly" default="false" required="false" />
+		<cc:attribute name="required" default="false" required="false" />
+		<cc:attribute name="rows" required="false" />
+		<cc:attribute name="size" required="false" />
+		<cc:attribute name="style" required="false" />
+		<cc:attribute name="styleClass" required="false" />
+		<cc:attribute name="type" default="text" required="false" />
+		<cc:attribute name="validatorMessage" required="false" />
+		<cc:attribute name="value" required="true" />
+		<cc:editableValueHolder name="inputText" targets="t1" />
+	</cc:interface>
+
+	<cc:implementation>
+
+		<aui:field cssClass="#{cc.attrs.cssClass}" inlineLabel="#{cc.attrs.inlineLabel}" label="#{cc.attrs.label}" styleClass="#{cc.attrs.styleClass}"
+			type="#{cc.attrs.type}">
+			<c:choose>
+				<c:when test="#{cc.attrs.type == 'text'}">
+					<c:choose>
+						<c:when test="#{empty cc.attrs.validatorMessage}">
+							<h:inputText id="t1" disabled="#{cc.attrs.disabled}" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}" required="#{cc.attrs.required}" readonly="#{cc.attrs.readonly}"
+								size="#{cc.attrs.size}" style="#{cc.attrs.style}" styleClass="aui-field-input aui-field-input-text" value="#{cc.attrs.value}" />
+						</c:when>
+						<c:otherwise>
+							<h:inputText id="t1" disabled="#{cc.attrs.disabled}" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}" required="#{cc.attrs.required}" readonly="#{cc.attrs.readonly}"
+								size="#{cc.attrs.size}" style="#{cc.attrs.style}" styleClass="aui-field-input aui-field-input-text"
+								validatorMessage="#{cc.attrs.validatorMessage}" value="#{cc.attrs.value}" />
+						</c:otherwise>
+					</c:choose>
+				</c:when>
+				<c:when test="#{cc.attrs.type == 'textarea'}">
+					<c:choose>
+						<c:when test="#{empty cc.attrs.validatorMessage}">
+							<h:inputTextarea id="t1" cols="#{cc.attrs.cols}" disabled="#{cc.attrs.disabled}" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}" readonly="#{cc.attrs.readonly}"
+								required="#{cc.attrs.required}" rows="#{cc.attrs.rows}" size="#{cc.attrs.size}" style="#{cc.attrs.style}"
+								styleClass="aui-field-input aui-field-input-text" value="#{cc.attrs.value}" />
+						</c:when>
+						<c:otherwise>
+							<h:inputTextarea id="t1" cols="#{cc.attrs.cols}" disabled="#{cc.attrs.disabled}" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}" readonly="#{cc.attrs.readonly}"
+								required="#{cc.attrs.required}" rows="#{cc.attrs.rows}" style="#{cc.attrs.style}" size="#{cc.attrs.size}"
+								styleClass="aui-field-input aui-field-input-text" validatorMessage="#{cc.attrs.validatorMessage}" value="#{cc.attrs.value}" />
+						</c:otherwise>
+					</c:choose>
+				</c:when>
+				<c:when test="#{cc.attrs.type == 'password'}">
+					<c:choose>
+						<c:when test="#{empty cc.attrs.validatorMessage}">
+							<h:inputSecret id="t1" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}" required="#{cc.attrs.required}" size="#{cc.attrs.size}" style="#{cc.attrs.style}"
+								styleClass="aui-field-input aui-field-input-text" value="#{cc.attrs.value}" />
+						</c:when>
+						<c:otherwise>
+							<h:inputSecret id="t1" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}" required="#{cc.attrs.required}" size="#{cc.attrs.size}" style="#{cc.attrs.style}"
+								styleClass="aui-field-input aui-field-input-text" validatorMessage="#{cc.attrs.validatorMessage}" value="#{cc.attrs.value}" />
+						</c:otherwise>
+					</c:choose>
+				</c:when>
+				<c:when test="#{(cc.attrs.type == 'checkbox') || (cc.attrs.type == 'boolean')}">
+					<c:choose>
+						<c:when test="#{empty cc.attrs.validatorMessage}">
+							<h:selectBooleanCheckbox id="t1" label="#{cc.attrs.label}" onchange="#{cc.attrs.onchange}" required="#{cc.attrs.required}" style="#{cc.attrs.style}"
+								styleClass="aui-field-input aui-field-input-choice" value="#{cc.attrs.value}" />
+						</c:when>
+						<c:otherwise>
+							<h:selectBooleanCheckbox id="t1" label="#{cc.attrs.label}" onchange="#{cc.attrs.onchange}" required="#{cc.attrs.required}" style="#{cc.attrs.style}"
+								styleClass="aui-field-input aui-field-input-choice" validatorMessage="#{cc.attrs.validatorMessage}" value="#{cc.attrs.value}" />
+						</c:otherwise>
+					</c:choose>
+				</c:when>
+			</c:choose>
+			<c:if test="#{cc.attrs.inlineMessage}">
+				<aui-cc:message for="t1" style="display: inline;" />
+			</c:if>
+		</aui:field>
+	</cc:implementation>
+
+</ui:component>

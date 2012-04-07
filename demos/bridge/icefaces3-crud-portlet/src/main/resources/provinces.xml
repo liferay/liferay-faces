@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resultsets>
+	<resultset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		<row>
+			<column name="provinceId">1</column>
+			<column name="provinceName">DE</column>
+		</row>
+		<row>
+			<column name="provinceId">2</column>
+			<column name="provinceName">GA</column>
+		</row>
+		<row>
+			<column name="provinceId">3</column>
+			<column name="provinceName">FL</column>
+		</row>
+		<row>
+			<column name="provinceId">4</column>
+			<column name="provinceName">MD</column>
+		</row>
+		<row>
+			<column name="provinceId">5</column>
+			<column name="provinceName">NC</column>
+		</row>
+		<row>
+			<column name="provinceId">6</column>
+			<column name="provinceName">NJ</column>
+		</row>
+		<row>
+			<column name="provinceId">7</column>
+			<column name="provinceName">NY</column>
+		</row>
+		<row>
+			<column name="provinceId">8</column>
+			<column name="provinceName">SC</column>
+		</row>
+		<row>
+			<column name="provinceId">9</column>
+			<column name="provinceName">VA</column>
+		</row>
+	</resultset>
+</resultsets>

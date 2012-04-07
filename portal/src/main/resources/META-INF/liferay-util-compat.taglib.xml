@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
+	version="2.0">
+	<namespace>http://portletfaces.org/liferayfaces/liferay-util</namespace>
+	<function>
+		<function-name>findDataModel</function-name>
+		<function-class>com.liferay.faces.portal.el.FaceletUtil</function-class>
+		<function-signature>javax.faces.model.DataModel findDataModel(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<function-name>escapeURL</function-name>
+		<function-class>com.liferay.portal.kernel.util.HttpUtil</function-class>
+		<function-signature>java.lang.String encodeURL(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<function-name>portalProperty</function-name>
+		<function-class>com.liferay.portal.kernel.util.PropsUtil</function-class>
+		<function-signature>java.lang.String get(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<function-name>stringReplace</function-name>
+		<function-class>com.liferay.portal.kernel.util.StringUtil</function-class>
+		<function-signature>java.lang.String replace(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	</function>
+	<tag>
+		<tag-name>validateCaptcha</tag-name>
+		<validator>
+			<validator-id>com.liferay.faces.portal.CaptchaValidator</validator-id>
+		</validator>
+		<attribute>
+			<name>binding</name>
+			<type>com.liferay.faces.portal.validator.CaptchaValidator</type>
+		</attribute>
+		<attribute>
+			<name>disabled</name>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<name>for</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<tag-name>validateRichTextLength</tag-name>
+		<validator>
+			<validator-id>com.liferay.faces.portal.RichTextLengthValidator</validator-id>
+		</validator>
+		<attribute>
+			<name>binding</name>
+			<type>javax.faces.validator.LengthValidator</type>
+		</attribute>
+		<attribute>
+			<name>disabled</name>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<name>for</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>maximum</name>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<name>minimum</name>
+			<type>java.lang.Integer</type>
+		</attribute>
+	</tag>
+</facelet-taglib>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xsi:schemaLocation="http://docbook.org/ns/docbook http://docbook.org/xml/5.0/xsd/docbook.xsd"
+	xmlns="http://docbook.org/ns/docbook" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:ns="http://docbook.org/ns/docbook">
+	<title>Liferay Faces Bridge Configuration</title>
+	<sect1 revision="1">
+		<title>Overview</title>
+		<para>The JSR 329 standard defines several configuration options prefixed with the javax.portlet.faces
+			namespace. Liferay Faces Bridge defines additional implementation specific options prefixed with the
+			com.liferay.faces.bridge namespace.</para>
+	</sect1>
+	<sect1 revision="1">
+		<title>Bridge Request Scope</title>
+		<para>One of the key requirements in creating a JSF portlet bridge is managing JSF request-scoped data within
+			the Portlet lifecycle. This is normally referred to as the "Bridge Request Scope" by JSR 329. The lifespan
+			of the BridgeRequestScope works like this:</para>
+		<para><orderedlist>
+				<listitem>
+					<para>ActionRequest/EventRequest: BridgeRequestScope begins</para>
+				</listitem>
+				<listitem>
+					<para>RenderRequest: BridgeRequestScope is preserved</para>
+				</listitem>
+				<listitem>
+					<para>Subsequent RenderRequest: BridgeRequestScope is reused</para>
+				</listitem>
+				<listitem>
+					<para>Subsequent ActionRequest/EventRequest: BridgeRequestScope ends, and a new BridgeRequestScope
+						begins</para>
+				</listitem>
+				<listitem>
+					<para>If the session expires or is invalidated, then similar to the PortletSession scope, all
+						BridgeRequestScope instances associated with the session are made avialable for garbage
+						collection by the JVM</para>
+				</listitem>
+			</orderedlist>The main use-case for having the BridgeRequestScope preserved in #2 (above) is for "re-render"
+			of portlets. One example would be when two or more JSF portlets are placed on a portal page (Portlets X and
+			Y), and those portlets are not using f:ajax for form submission. In such a case, if the user were to submit
+			a form (via full ActionRequest postback) in Portlet X, and then submit a form in Portlet Y, then Portlet X
+			should be re-rendered with its previously submitted form data.</para>
+		<para>With the advent of JSF 2 and Ajax, there are four drawbacks for supporting this use-case as the default
+			behavior:</para>
+		<para><itemizedlist>
+				<listitem>
+					<para>Request-scoped data basically semi-session-scoped in nature, because the BridgeRequestScope is
+						preserved (even though the user might NEVER click the Submit button again).</para>
+				</listitem>
+				<listitem>
+					<para>BridgeRequestScope can't be stored in the PortletSession because the data is Request-scoped in
+						nature, and the data stored in the scope isn't guaranteed to be Serializable for replication.
+						Therefore it doesn't really work well in a clustered deployment.</para>
+				</listitem>
+				<listitem>
+					<para>The developer might have to specify the javax.portlet.faces.MAX_MANAGED_REQUEST_SCOPES
+						init-param in the WEB-INF/web.xml descriptor in order to tune the memory settings on the
+						server.</para>
+				</listitem>
+				<listitem>
+					<para>The developer is forced to add a &lt;listener> for the BridgeSessionListener to the
+						WEB-INF/web.xml descriptor.</para>
+				</listitem>
+			</itemizedlist>Therefore, since Liferay Faces Bridge is designed for JSF 2 and Ajax in mind, the bridge
+			makes the following assumptions:</para>
+		<para><itemizedlist>
+				<listitem>
+					<para>That developers are not primarily concerned about the "re-render" of portlets use-case
+						mentioned above.</para>
+				</listitem>
+				<listitem>
+					<para>That developers don't want any of the drawbacks mentioned above.</para>
+				</listitem>
+				<listitem>
+					<para>That developers are making heavy use of the f:ajax tag (or implicitly doing so with ICEfaces)
+						and submitting forms via Ajax with their modern-day portlets.</para>
+				</listitem>
+				<listitem>
+					<para>That developers want to be as zero-config as possible, and don't want to be forced to add
+						anything to the WEB-INF/web.xml descriptor.</para>
+				</listitem>
+			</itemizedlist>Consequently, the default behavior of Liferay Faces Bridge is to cause the
+			BridgeRequestScope to end at the end of the RenderRequest. If the standard behavior is desired, then the
+			following options can be placed in the WEB-INF/web.xml descriptor.</para>
+		<example>
+			<title>Specifying standard behavior for BridgeRequestScope lifespan via the WEB-INF/web.xml descriptor</title>
+			<programlisting>&lt;!-- The default value of the following -->
+&lt;!-- context-param is false, meaning that -->
+&lt;!-- Liferay Faces Bridge will cause -->
+&lt;!-- the BridgeRequestScope to end after -->
+&lt;!-- the RENDER_PHASE of the portlet -->
+&lt;!-- lifecycle. Setting the value to true -->
+&lt;!-- will cause Liferay Faces Bridge to -->
+&lt;!-- cause the BridgeRequestScope to last -->
+&lt;!-- until the next ACTION_PHASE or -->
+&lt;!-- EVENT_PHASE of the portlet lifecycle. -->
+&lt;context-param>
+	&lt;param-name>com.liferay.faces.bridge.bridgeRequestScopePreserved&lt;/param-name>
+	&lt;param-value>true&lt;/param-value>
+&lt;/context-param>
+&lt;!-- The default value of the following -->
+&lt;!-- context-param is 100. It defines -->
+&lt;!-- the maximum number of BridgeRequestScope -->
+&lt;!-- instances to keep in memory on the server -->
+&lt;!-- if the bridgeRequestScopePreserved -->
+&lt;!-- option is true. -->
+&lt;context-param>
+	&lt;param-name>javax.portlet.faces.MAX_MANAGED_REQUEST_SCOPES&lt;/param-name>
+	&lt;param-value>2000&lt;/param-value>
+&lt;/context-param>
+&lt;!-- The following listener is required to cleanup -->
+&lt;!-- BridgeRequestScope instances upon session timeout -->
+&lt;listener>
+	&lt;listener-class>com.liferay.faces.bridge.servlet.BridgeSessionListener&lt;/listener-class>
+&lt;/listener></programlisting>
+		</example>
+		<para>Alternatively, the com.liferay.faces.bridge.bridgeRequestScopePreserved value can be specified on a
+			portlet-by-portlet basis in the WEB-INF/portlet.xml descriptor.</para>
+	</sect1>
+	<sect1>
+		<title>PreDestroy &amp; BridgePreDestroy Annotations</title>
+		<para>When JSF developers want to perform cleanup on managed-beans before they are destroyed, they typically
+			annotate a method inside the bean with the @PreDestroy annotation. However, section 6.8.1 of the JSR 329
+			standard discusses the need for the @BridgePreDestroy and @BridgeRequestScopeAttributeAdded annotations in
+			the bridge API.</para>
+		<note>
+			<title>In-Depth Discussion Avialable Online</title>
+			<para>For a in-depth discussion of this issue, please refer to <link
+					xlink:href="http://issues.liferay.com/browse/FACES-146"
+					>http://issues.liferay.com/browse/FACES-146</link></para>
+		</note>
+		<para>In order to explain this requirement, it is necessary to make a distinction between <emphasis
+				role="italic">local</emphasis> portals and <emphasis role="italic">remote</emphasis> portals. Local
+			portals invoke portlets that are deployed within the same (local) servlet container. Remote portals invoke
+			portlets that are deployed elsewhere via WSRP (Web Services for Remote Portlets). The @BridgePreDestroy and
+			@BridgeRequestScopeAttributeAdded annotations were introduced into the JSR 329 standard primarily to support
+			WSRP in remote portals. That being the case, the standard indicates that developers should always use
+			@BridgePreDestroy instead of @PreDestroy. Liferay Faces Bridge however takes a different approach: rather
+			than assuming the remote portal use-case, Liferay Faces Bridge assumes the local portal use-case. When
+			developing with a local portal like Liferay, Liferay Faces Bridge ensures that the standard @PreDestroy
+			annotation works as expected. This means there is no reason to use the @BridgeRequestScope annotation with a
+			local portal when using Liferay Faces Bridge. Developers must manually configure Liferay Faces Bridge
+			via the WEB-INF/web.xml descriptor in order to leverage the @BridgePreDestroy and
+			@BridgeRequestScopeAttributeAdded annotations for WSRP.</para>
+		<example>
+			<title>Specifying support for @BridgePreDestroy and @BridgeRequestScopeAttributeAdded in the WEB-INF/web.xml
+				descriptor</title>
+			<para><programlisting>&lt;!-- The default value of the following -->
+&lt;!-- context-param is false, meaning that -->
+&lt;!-- Liferay Faces Bridge will invoke -->
+&lt;!-- methods annotated with @PreDestroy -->
+&lt;!-- over those annoated with -->
+&lt;!-- @BridgePreDestroy. -->
+&lt;!-- Setting the value of the following -->
+&lt;!-- context-param instructs Liferay Faces -->
+&lt;!-- Bridge to prefer the @BridgePreDestroy -->
+&lt;!-- annotation over the standard @PreDestroy -->
+&lt;!-- annotation in order to support a WSRP -->
+&lt;!-- remote portal environment. -->
+&lt;context-param>
+	&lt;param-name>com.liferay.faces.bridge.preferPreDestroy&lt;/param-name>
+	&lt;param-value>false&lt;/param-value>
+&lt;/context-param>
+&lt;!-- The following listener is required to support -->
+&lt;!-- the @BridgeRequestScopeAttributeAdded -->
+&lt;!-- annotation in a WSRP remote portal environment. -->
+&lt;listener>
+	&lt;listener-class>com.liferay.faces.bridge.servlet.BridgeRequestAttributeListener&lt;/listener-class>
+&lt;/listener></programlisting></para>
+		</example>
+		<para>Alternatively, the com.liferay.faces.bridge.preferPreDestroy value can be specified on a portlet-by-portlet
+			basis in the WEB-INF/portlet.xml descriptor.</para>
+	</sect1>
+	<sect1>
+		<title>Portlet Container Abilities</title>
+		<para>Liferay Faces Bridge can be run in a variety of portlet containers (Liferay, Pluto, etc.) and is aware
+			of some of the abilities (or limitations) of these containers. Regardless, Liferay Faces Bridge enables
+			the developer to configure the abilities of the portlet container in the WEB-INF/web.xml descriptor.</para>
+		<example>
+			<title>Setting portlet container abilities via the WEB-INF/web.xml descriptor</title>
+			<programlisting>&lt;!-- The default value of the following -->
+&lt;!-- context-param depends on which -->
+&lt;!-- portlet container the bridge -->
+&lt;!-- is running in. The value determines -->
+&lt;!-- whether or not the bridge resource -->
+&lt;!-- handler will attempt to set the -->
+&lt;!-- status code of downloaded resources -->
+&lt;!-- to values like -->
+&lt;!-- HttpServletResponse.SC_NOT_MODIFIED -->
+&lt;context-param>
+	&lt;param-name>com.liferay.faces.bridge.containerAbleToSetHttpStatusCode&lt;/param-name>
+	&lt;param-value>true&lt;/param-value>
+&lt;/context-param></programlisting>
+		</example>
+	</sect1>
+	<sect1>
+		<title>Portlet Namespace Optimization</title>
+		<para>The JSR 329 standard requires the bridge implementation to prepend the portlet namespace to the value of
+			the "id" attribute of every component that is rendered by a JSF view. This guarantees the uniqueness of the
+			"id" attribute when there are multiple JSF portlets on a portal page that contain similar component
+			hierarchies and naming. Also, the JSR 329 standard indicates that the bridge implementation of the
+			ExternalContext.encodeNamesapce(String) method is to prepend the value of
+			javax.portlet.PortletResponse.getNamespace() to the specified String. The problem is that since the value
+			returned by getNamespace() can be a lengthy string, the size of the rendered HTML portal page can become
+			unnecessarily large. This can be especially non-performant when using the f:ajax tag in a Facelet view in
+			order to perform partial-updates the browser's DOM.</para>
+		<para>Liferay Faces Bridge has a built-in optimization that minimizes the value returned by the the
+			ExternalContext.encodeNamesapce(String) method, while still guaranteeing uniqueness. Developers must
+			manually configure Liferay Faces Bridge via the WEB-INF/web.xml descriptor in order to disable the
+			namespace optimization and leverage the default behavior specified by JSR 329.</para>
+		<example>
+			<title>Disabling the namespace optimization via the WEB-INF/web.xml descriptor</title>
+			<programlisting>&lt;!-- The default value of the following -->
+&lt;!-- context-param is true, meaning that -->
+&lt;!-- Liferay Faces Bridge will optimize -->
+&lt;!-- the portlet namespace. Setting the value -->
+&lt;!-- of the following context-param to false -->
+&lt;!-- disables the optimization. -->
+&lt;context-param>
+	&lt;param-name>com.liferay.faces.bridge.optimizePortletNamespace&lt;/param-name>
+	&lt;param-value>false&lt;/param-value>
+&lt;/context-param></programlisting>
+		</example>
+	</sect1>
+	<sect1>
+		<title>Resolving XML Entities</title>
+		<para>Liferay Faces Bridge provides the ability to set a flag indicating whether or not XML entities are
+			required to be resolved when parsing faces-config.xml files in the classpath. The default value of this
+			option is false.</para>
+		<example>
+			<title>Specifying the resolving of XML entities via the WEB-INF/web.xml descriptor</title>
+			<programlisting>&lt;!-- The default value of the following -->
+&lt;!-- context-param is false. -->
+&lt;context-param>
+	&lt;param-name>com.liferay.faces.bridge.resolveXMLEntities&lt;/param-name>
+	&lt;param-value>true&lt;/param-value>
+&lt;/context-param></programlisting>
+		</example>
+	</sect1>
+	<sect1>
+		<title>Resource Buffer Size</title>
+		<para>Liferay Faces Bridge provides the ability to set the size of the buffer used to load resources into
+			memory as the file contents are being copied to the response. The default value of this option is 1024
+			(1KB).</para>
+		<example>
+			<title>Specifying the resource buffer size via the WEB-INF/web.xml descriptor</title>
+			<programlisting>&lt;!-- The default value of the following -->
+&lt;!-- context-param is 1024. -->
+&lt;context-param>
+	&lt;param-name>com.liferay.faces.bridge.resourceBufferSize&lt;/param-name>
+	&lt;param-value>4096&lt;/param-value>
+&lt;/context-param></programlisting>
+		</example>
+		<para>Alternatively, the com.liferay.faces.bridge.resourceBufferSize value can be specified on a portlet-by-portlet
+			basis in the WEB-INF/portlet.xml descriptor.</para>
+	</sect1>
+</chapter>

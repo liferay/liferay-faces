@@ -1,0 +1,103 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.liferay.faces.demos</groupId>
+		<artifactId>liferay-faces-demos</artifactId>
+		<version>3.0.0-BETA1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>liferay-faces-bridge-demos</artifactId>
+	<name>${project.artifactId}</name>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>icefaces3-compat-portlet</module>
+		<module>icefaces3-crud-portlet</module>
+		<module>icefaces3-ipc-ajax-push-portlet</module>
+		<module>icefaces3-portlet</module>
+		<module>jsf2-export-pdf-portlet</module>
+		<module>jsf2-ipc-events-portlet</module>
+		<module>jsf2-ipc-pub-render-params-portlet</module>
+		<module>jsf2-portlet</module>
+		<module>jsf2-jsp-portlet</module>
+		<module>primefaces3-portlet</module>
+		<module>richfaces4-portlet</module>
+	</modules>
+
+	<profiles>
+		<profile>
+			<id>pluto</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webXml>${project.build.directory}/pluto-resources/web.xml</webXml>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.portals.pluto</groupId>
+						<artifactId>maven-pluto-plugin</artifactId>
+						<version>${pluto.version}</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.portals.pluto</groupId>
+								<artifactId>pluto-util</artifactId>
+								<version>${pluto.version}</version>
+								<scope>runtime</scope>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>assemble</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>clean</id>
+								<phase>clean</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<delete failonerror="false" includeemptydirs="true"
+											verbose="true">
+											<fileset dir="${pluto.deploy.dir}">
+												<include name="${project.name}*/" />
+												<include name="${project.name}*.war" />
+											</fileset>
+										</delete>
+									</target>
+								</configuration>
+							</execution>
+							<execution>
+								<phase>install</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<copy todir="${pluto.deploy.dir}">
+											<fileset dir="target">
+												<include name="${project.name}*.war" />
+											</fileset>
+										</copy>
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

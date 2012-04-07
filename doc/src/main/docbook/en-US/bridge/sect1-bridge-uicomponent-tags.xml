@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect1 revision="1" xml:id="bridge-uicomponent-tags" xsi:schemaLocation="http://docbook.org/ns/docbook http://docbook.org/xml/5.0/xsd/docbook.xsd"
+xmlns="http://docbook.org/ns/docbook" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:ns="http://docbook.org/ns/docbook">
+	<title>Bridge UIComponent Tags</title>
+	<para>Liferay Faces Bridge provides the following bridge-specific UIComponent tags as part of its component
+		suite.</para>
+	<table>
+		<title>UIComponent Tags</title>
+		<tgroup cols="2">
+			<thead>
+				<row>
+					<entry>Tag</entry>
+					<entry>Description</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>
+						<literal>
+							<link xlink:href="#bridge-inputFile">bridge:inputFile</link>
+						</literal>
+					</entry>
+					<entry>Renders an HTML <ns:code>&lt;input type="file" /></ns:code> tag which provides file
+						upload capability.</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</table>
+	<sect2 xml:id="bridge-inputFile">
+		<title>The bridge:inputFile tag</title>
+		<para>The <ns:code>bridge:inputFile</ns:code> tag renders an HTML <ns:code>&lt;input type="file"
+				/></ns:code> tag which enables file upload capability.</para>
+		<note>
+			<title>Dependency on JARs from apache.org</title>
+			<para>Usage of this tag requires the Apache <ns:code>commons-fileupload</ns:code> and
+					<ns:code>commons-io</ns:code> dependencies. See the <link
+						xlink:href="http://www.liferay.com/community/liferay-projects/liferay-faces/demos#jsf2-portlet"
+					>Demo JSF2 Portlet</link> at liferay.com for more details.</para>
+		</note>
+		<table>
+			<title>Attributes</title>
+			<tgroup cols="2">
+				<thead>
+					<row>
+						<entry>Attribute</entry>
+						<entry>Type</entry>
+						<entry>Description</entry>
+						<entry>Required</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>id</entry>
+						<entry>String</entry>
+						<entry>The identifier of the component</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>binding</entry>
+						<entry>com.liferay.faces.bridge.component.HtmlInputFile</entry>
+						<entry>An EL expression that represents a JavaBean proeprty for the corresponding
+							HtmlInputFile component in the runtime component tree.</entry>
+						<entry>true</entry>
+					</row>
+					<row>
+						<entry>rendered</entry>
+						<entry>Boolean</entry>
+						<entry>Boolean flag indicating whether or not this component is to be rendered during the
+							RENDER_RESPONSE phase of the JSF lifecycle. The default value is “true”.</entry>
+						<entry>false</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+		<example>
+			<title>Example usage of bridge:inputFile tag</title>
+			<programlisting>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:bridge="http://liferay.com/faces/bridge"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"&gt;
+	&lt;h:head /&gt;
+	&lt;h:body"&gt;
+		&lt;h:form&gt;
+			&lt;bridge:inputFile binding="#{backingBean.attachment1}" /&gt;
+			&lt;h:commandButton actionListener="#{backingBean.uploadAttachments}"
+				value="Submit" /&gt;
+		&lt;/h:form&gt;
+	&lt;/h:body&gt;
+&lt;/f:view&gt;
+</programlisting>
+		</example>
+		<example>
+			<title>Backing Bean Java Code</title>
+			<programlisting>
+@ManagedBean(name = "backingBean")
+@ViewScoped
+public class BackingBean implements Serializable {
+
+	private transient HtmlInputFile attachment1;
+	public void uploadAttachments(ActionEvent actionEvent) {
+
+		UploadedFile uploadedFile1 = attachment1.getUploadedFile();
+		System.err.println("Uploaded file:" + uploadedFile1.getName());
+	}
+}</programlisting>
+		</example>
+	</sect2>
+</sect1>

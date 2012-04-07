@@ -1,0 +1,80 @@
+/**
+ * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+package com.liferay.faces.portal.listener;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+import com.liferay.faces.bridge.logging.Logger;
+import com.liferay.faces.bridge.logging.LoggerFactory;
+
+
+/**
+ * This listener is required when using LiferayFaces in a Servet 2.5 container such as Tomcat 6. It is not required when
+ * using LiferayFaces in a Servlet 3.0+ container like Tomcat 7. It provides the ability to use the
+ * liferay-ui:input-editor in a JSF portlet.
+ *
+ * @author  Neil Griffin
+ */
+public class StartupListener implements ServletContextListener {
+
+	private static final Logger logger = LoggerFactory.getLogger(StartupListener.class);
+
+	public void contextDestroyed(ServletContextEvent servletContextEvent) {
+		// This method is required by the interface but has no functionality.
+	}
+
+	public void contextInitialized(ServletContextEvent servletContextEvent) {
+
+		try {
+			URL jspURL = getClass().getClassLoader().getResource("META-INF/resources/liferay-ui/jsp/input-editor.jsp");
+
+			if (jspURL != null) {
+				String realPath = servletContextEvent.getServletContext().getRealPath("/");
+				File destFolder = new File(realPath, "resources/liferay-ui/jsp");
+				destFolder.mkdirs();
+
+				File destFile = new File(destFolder, "input-editor.jsp");
+				InputStream inputStream = jspURL.openStream();
+				OutputStream outputStream = new FileOutputStream(destFile);
+				byte[] bytes = new byte[1024];
+				int bytesRead;
+
+				while ((bytesRead = inputStream.read(bytes)) != -1) {
+					outputStream.write(bytes, 0, bytesRead);
+				}
+
+				outputStream.flush();
+				outputStream.close();
+				inputStream.close();
+				logger.info("Copied input-editor.jsp from LiferayFaces JAR to context path file=[{0}]",
+					destFile.getAbsolutePath());
+			}
+			else {
+				logger.warn(
+					"Unable to find input-editor.jsp in LiferayFaces JAR which means liferay-ui:input-editor won't work");
+			}
+		}
+		catch (Exception e) {
+			logger.error(e);
+		}
+	}
+
+}

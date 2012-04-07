@@ -1,0 +1,7 @@
+.classpath
+.project
+.settings
+doc/src/main/docbook/style
+target
+rebel.xml
+*.sh

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.liferay.com/xml/ns/liferay-faces-bridge-2.0-extension"
+	xmlns:bridge="http://www.liferay.com/xml/ns/liferay-faces-bridge-2.0-extension"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:javaee="http://java.sun.com/xml/ns/javaee">
+	<xs:element name="excluded-attributes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="excluded-attribute" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="excluded-attribute" type="xs:string" />
+	<xs:element name="public-parameter-mappings">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded"
+					ref="public-parameter-mapping" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="public-parameter-mapping">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="parameter" type="xs:string" />
+				<xs:element name="model-el" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="write-behind-response-wrappers">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="1"
+					name="render-response-wrapper-class" type="xs:string" />
+				<xs:element minOccurs="0" maxOccurs="1"
+					name="resource-response-wrapper-class" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

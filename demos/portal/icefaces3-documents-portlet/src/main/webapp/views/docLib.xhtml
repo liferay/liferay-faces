@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:aui="http://liferay.com/faces/aui" xmlns:aui-cc="http://liferay.com/faces/aui-cc"
+	xmlns:liferay-ui="http://liferay.com/faces/ui" xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:icecore="http://www.icefaces.org/icefaces/core">
+	<icecore:config render="true" />
+	<ice:form id="f2" styleClass="aui-form dlp">
+		<ice:panelGroup rendered="#{docLibViewBean.popupRendered}">
+			<aui:layout>
+				<aui-cc:messages globalOnly="true" layout="table" />
+				<aui:fieldset label="#{i18n['add-folder']}">
+					<aui-cc:input inlineMessage="true" label="#{i18n['folder-name']}" required="true" value="#{docLibBackingBean.folderName}" />
+					<aui-cc:input inlineMessage="true" label="#{i18n['description']}" required="false" cols="100" rows="10" type="textarea"
+						value="#{docLibBackingBean.folderDescription}" />
+					<aui:button-row>
+						<aui-cc:button type="submit">
+							<f:actionListener for="click" binding="#{docLibBackingBean.addFolderActionListener}" />
+						</aui-cc:button>
+						<aui-cc:button immediate="true" type="cancel">
+							<f:actionListener for="click" binding="#{docLibBackingBean.popDownActionListener}" />
+						</aui-cc:button>
+					</aui:button-row>
+				</aui:fieldset>
+			</aui:layout>
+		</ice:panelGroup>
+		<ice:panelGroup rendered="#{!docLibViewBean.popupRendered}">
+			<aui:layout>
+				<aui:column columnWidth="25" first="true">
+					<liferay-ui:panel-container>
+						<liferay-ui:panel title="#{i18n['folders']}">
+							<ice:tree id="tree" value="#{docLibModelBean.folderTreeModel}" var="treeNode" hideRootNode="false" hideNavigation="false"
+								imageDir="#{request.contextPath}/xmlhttp/css/xp/css-images/">
+								<ice:treeNode>
+									<f:facet name="icon">
+										<ice:panelGroup style="display: inline">
+											<ice:graphicImage value="/xmlhttp/css/xp/css-images/#{treeNode.userObject.icon}" />
+										</ice:panelGroup>
+									</f:facet>
+									<f:facet name="content">
+										<ice:panelGroup styleClass="selectedNode#{treeNode.userObject eq docLibModelBean.selectedFolderUserObject}" style="display: inline">
+											<ice:commandLink actionListener="#{docLibBackingBean.treeNodeSelected}">
+												<f:param name="folderId" value="#{treeNode.userObject.dlFolder.folderId}" />
+												<ice:outputText id="TreeNode" value="#{treeNode.userObject.text}" />
+											</ice:commandLink>
+										</ice:panelGroup>
+									</f:facet>
+								</ice:treeNode>
+							</ice:tree>
+						</liferay-ui:panel>
+					</liferay-ui:panel-container>
+				</aui:column>
+				<aui:column columnWidth="50">
+					<liferay-ui:panel-container>
+						<liferay-ui:panel styleClass="docPanel" title="#{i18n['documents']}">
+							<liferay-ui:ice-page-iterator for="documents" />
+							<ice:dataTable id="documents" columnClasses="valign-middle" rows="#{docLibModelBean.documentDataModel.rowsPerPage}" sortColumn="#{docLibModelBean.documentDataModel.sortColumn}" sortAscending="#{docLibModelBean.documentDataModel.sortAscending}"
+								value="#{docLibModelBean.documentDataModel}" var="dlFileEntry">
+								<ice:column>
+									<f:facet name="header">
+										<ice:commandSortHeader columnName="title">
+											<h:outputText value="#{i18n['file-name']}" />
+										</ice:commandSortHeader>
+									</f:facet>
+									<ice:outputLink rendered="#{dlFileEntry.permittedToView}" target="_blank" value="#{dlFileEntry.url}">
+										<h:graphicImage alt="#{dlFileEntry.extension}" value="#{liferay.themeImagesURL}/file_system/small/#{dlFileEntry.extension}.png" />
+										<h:outputText value="#{dlFileEntry.title}" />
+									</ice:outputLink>
+									<h:outputText rendered="#{!dlFileEntry.permittedToView}" value="#{dlFileEntry.title}" />
+								</ice:column>
+								<ice:column>
+									<f:facet name="header">
+										<ice:commandSortHeader columnName="size">
+											<h:outputText value="#{i18n['size']}" />
+										</ice:commandSortHeader>
+									</f:facet>
+									<h:outputText value="#{dlFileEntry.kilobytes}" />
+								</ice:column>
+								<ice:column>
+									<f:facet name="header">
+										<ice:commandSortHeader columnName="userName">
+											<h:outputText value="#{i18n['owner']}" />
+										</ice:commandSortHeader>
+									</f:facet>
+									<h:outputText value="#{dlFileEntry.userName}" />
+								</ice:column>
+								<ice:column>
+									<f:facet name="header">
+										<ice:commandSortHeader columnName="readCount">
+											<h:outputText value="#{i18n['downloads']}" />
+										</ice:commandSortHeader>
+									</f:facet>
+									<h:outputText value="#{dlFileEntry.readCount}" />
+								</ice:column>
+							</ice:dataTable>
+							<liferay-ui:info message="there-are-no-documents" rendered="#{docLibModelBean.documentDataModel.rowCount == 0}" />
+						</liferay-ui:panel>
+					</liferay-ui:panel-container>
+				</aui:column>
+				<c:set value="#{docLibModelBean.selectedFolderUserObject.text}" var="selectedFolderName" />
+				<aui:column columnWidth="25" last="true" styleClass="lfr-asset-column lfr-asset-column-actions">
+					<h:panelGroup layout="block" styleClass="lfr-asset-summary">
+						<h:panelGroup styleClass="lfr-asset-avatar">
+							<h:graphicImage alt="#{selectedFolderName}" value="#{liferay.themeImagesURL}/file_system/large/folder_full_document.png" />
+						</h:panelGroup>
+						<h:panelGroup layout="block" styleClass="lfr-asset-name">
+							<h4>#{selectedFolderName}</h4>
+						</h:panelGroup>
+					</h:panelGroup>
+					<liferay-ui:icon-menu>
+						<liferay-ui:icon image="add_folder" message="add-folder" rendered="#{docLibBackingBean.permittedToAddFolder}">
+							<f:actionListener for="click" binding="#{docLibBackingBean.popUpActionListener}" />
+						</liferay-ui:icon>
+						<liferay-ui:icon href="#{docLibViewBean.addDocumentURL}" image="../document_library/add_document" message="add-document"
+							rendered="#{docLibBackingBean.permittedToAddDocument}" />
+					</liferay-ui:icon-menu>
+				</aui:column>
+			</aui:layout>
+		</ice:panelGroup>
+	</ice:form>
+</ui:composition>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ice="http://www.icesoft.com/icefaces/component" xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
+
+	<cc:interface>
+		<cc:attribute name="cssClass" required="false" />
+		<cc:attribute name="for" required="true" />
+		<cc:attribute name="firstLabel" required="false" />
+		<cc:attribute name="firstIconRendered" default="true" required="false" />
+		<cc:attribute name="lastLabel" required="false" />
+		<cc:attribute name="lastIconRendered" default="true" required="false" />
+		<cc:attribute name="paginator" default="true" required="false" />
+		<cc:attribute name="paginatorMaxPages" default="7" required="false" />
+		<cc:attribute name="previousLabel" required="false" />
+		<cc:attribute name="previousIconRendered" default="true" required="false" />
+		<cc:attribute name="nextLabel" required="false" />
+		<cc:attribute name="nextIconRendered" default="true" required="false" />
+		<cc:attribute name="fastRewindLabel" required="false" />
+		<cc:attribute name="fastRewindIconRendered" default="false" required="false" />
+		<cc:attribute name="fastForwardLabel" required="false" />
+		<cc:attribute name="fastForwardIconRendered" default="false" required="false" />
+		<cc:attribute name="style" required="false" />
+		<cc:attribute name="styleClass" required="false" />
+	</cc:interface>
+
+	<cc:implementation>
+
+		<c:set var="firstLabel" value="#{cc.attrs.firstLabel}" />
+		<c:if test="#{empty firstLabel}">
+			<c:set var="firstLabel" value="#{i18n['first']}" />
+		</c:if>
+		<c:set var="lastLabel" value="#{cc.attrs.lastLabel}" />
+		<c:if test="#{empty lastLabel}">
+			<c:set var="lastLabel" value="#{i18n['last']}" />
+		</c:if>
+		<c:set var="previousLabel" value="#{cc.attrs.previousLabel}" />
+		<c:if test="#{empty previousLabel}">
+			<c:set var="previousLabel" value="#{i18n['previous']}" />
+		</c:if>
+		<c:set var="nextLabel" value="#{cc.attrs.nextLabel}" />
+		<c:if test="#{empty nextLabel}">
+			<c:set var="nextLabel" value="#{i18n['next']}" />
+		</c:if>
+		<c:set var="fastRewindLabel" value="#{cc.attrs.fastRewindLabel}" />
+		<c:if test="#{empty fastRewindLabel}">
+			<c:set var="fastRewindLabel" value="Fast Rewind" />
+		</c:if>
+		<c:set var="fastForwardLabel" value="#{cc.attrs.fastForwardLabel}" />
+		<c:if test="#{empty fastForwardLabel}">
+			<c:set var="fastForwardLabel" value="Fast Forward" />
+		</c:if>
+
+		<ui:remove>
+			<!-- NOTE that we have to prepend the "for" attribute with a colon until ICE-6398 can be fixed -->
+		</ui:remove>
+		<ice:dataPaginator for=":#{cc.attrs.for}" firstRowIndexVar="firstRowIndex" lastRowIndexVar="lastRowIndex" pageCountVar="pageCount"
+			paginator="#{cc.attrs.paginator}" paginatorMaxPages="#{cc.attrs.paginatorMaxPages}" pageIndexVar="pageIndex" rowsCountVar="rowsCount"
+			style="#{cc.attrs.style}" styleClass="#{cc.attrs.cssClass} #{cc.attrs.styleClass}">
+			<c:if test="#{cc.attrs.firstIconRendered}">
+				<f:facet name="first">
+					<ice:panelGroup style="display: inline;" styleClass="icecompat-page-links">
+						<ice:graphicImage alt="#{firstLabel}" rendered="#{pageIndex &lt;= 1}" style="border:none;" url="/xmlhttp/css/xp/css-images/arrow-first-dis.gif" value="#{firstLabel}" />
+						<ice:graphicImage alt="#{firstLabel}" rendered="#{pageIndex > 1}" style="border:none;" url="/xmlhttp/css/xp/css-images/arrow-first.gif" value="#{firstLabel}" />
+					</ice:panelGroup>
+				</f:facet>
+			</c:if>
+			<c:if test="#{cc.attrs.lastIconRendered}">
+				<f:facet name="last">
+					<ice:panelGroup style="display: inline;" styleClass="icecompat-page-links">
+						<ice:graphicImage alt="#{lastLabel}" rendered="#{pageIndex == pageCount}" style="border:none;" url="/xmlhttp/css/xp/css-images/arrow-last-dis.gif" value="#{lastLabel}" />
+						<ice:graphicImage alt="#{lastLabel}" rendered="#{pageIndex != pageCount}" style="border:none;" url="/xmlhttp/css/xp/css-images/arrow-last.gif" value="#{lastLabel}" />
+					</ice:panelGroup>
+				</f:facet>
+			</c:if>
+			<c:if test="#{cc.attrs.previousIconRendered}">
+				<f:facet name="previous">
+					<ice:panelGroup style="display: inline;" styleClass="icecompat-page-links">
+						<ice:graphicImage alt="#{previousLabel}" rendered="#{pageIndex &lt;= 1}" style="border:none;" url="/xmlhttp/css/xp/css-images/arrow-previous-dis.gif" value="#{previousLabel}" />
+						<ice:graphicImage alt="#{previousLabel}" rendered="#{pageIndex > 1}" style="border:none;" url="/xmlhttp/css/xp/css-images/arrow-previous.gif" value="#{previousLabel}" />
+					</ice:panelGroup>
+				</f:facet>
+			</c:if>
+			<c:if test="#{cc.attrs.nextIconRendered}">
+				<f:facet name="next">
+					<ice:panelGroup style="display: inline;" styleClass="icecompat-page-links">
+						<ice:graphicImage alt="#{nextLabel}" rendered="#{pageIndex == pageCount}" style="border:none;" url="/xmlhttp/css/xp/css-images/arrow-next-dis.gif" value="#{nextLabel}" />
+						<ice:graphicImage alt="#{nextLabel}" rendered="#{pageIndex != pageCount}" style="border:none;" url="/xmlhttp/css/xp/css-images/arrow-next.gif" value="#{nextLabel}" />
+					</ice:panelGroup>
+				</f:facet>
+			</c:if>
+			<c:if test="#{cc.attrs.fastRewindIconRendered}">
+				<f:facet name="fastrewind">
+					<ice:panelGroup style="display: inline;" styleClass="icecompat-page-links">
+						<ice:graphicImage alt="#{fastRewindLabel}" rendered="#{pageIndex &lt;= 1}" style="border:none;" url="/xmlhttp/css/xp/css-images/arrow-fr-dis.gif" value="#{fastRewindLabel}" />
+						<ice:graphicImage alt="#{fastRewindLabel}" rendered="#{pageIndex > 1}" style="border:none;" url="/xmlhttp/css/xp/css-images/arrow-fr.gif" value="#{fastRewindLabel}" />
+					</ice:panelGroup>
+				</f:facet>
+			</c:if>
+			<c:if test="#{cc.attrs.fastForwardIconRendered}">
+				<f:facet name="fastforward">
+					<ice:panelGroup style="display: inline;" styleClass="icecompat-page-links">
+						<ice:graphicImage alt="#{fastForwardLabel}" rendered="#{pageIndex == pageCount}" style="border:none;" url="/xmlhttp/css/xp/css-images/arrow-ff-dis.gif" value="#{fastForwardLabel}" />
+						<ice:graphicImage alt="#{fastForwardLabel}" rendered="#{pageIndex != pageCount}" style="border:none;" url="/xmlhttp/css/xp/css-images/arrow-ff.gif" value="#{fastForwardLabel}" />
+					</ice:panelGroup>
+				</f:facet>
+			</c:if>
+		</ice:dataPaginator>
+
+	</cc:implementation>
+
+</ui:component>

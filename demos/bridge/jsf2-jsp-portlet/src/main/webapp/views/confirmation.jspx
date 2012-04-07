@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" version="2.1">
+
+	<f:view>
+		<h:messages />
+		<h:form>
+			<!-- Test JSF 2 Flash scope -->
+			<h:outputText value="#{i18n['dear']} #{bridgeFlash['firstName']}," />
+			<br />
+			<h:outputText value="#{i18n['thank-you-for-applying-for-a-job-with-our-organization']}" />
+			<hr />
+			<!-- Test JSF 2 implicit navigation -->
+			<h:commandButton action="/views/portletViewMode.jspx" value="#{i18n['submit-another-application']}" />
+		</h:form>
+	</f:view>
+</jsp:root>

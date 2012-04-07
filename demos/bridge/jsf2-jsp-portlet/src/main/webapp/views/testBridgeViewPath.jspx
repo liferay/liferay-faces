@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" version="2.1">
+
+	<f:view>
+		<h:panelGrid columns="2">
+			<h:outputLabel for="requestParameterName" value="Request Parameter Name:" />
+			<h:outputText id="requestParameterName" value="_jsfBridgeViewPath" />
+			<h:outputLabel for="requestAttributeName" value="Request Attribute Name:" />
+			<h:outputText id="requestAttributeName" value="javax.portlet.faces.viewPath" />
+			<h:outputLabel for="attributeValue" value="Request Attribute Value:" />
+			<h:outputText id="attributeValue" value="#{request.getAttribute('javax.portlet.faces.viewPath')}" />
+		</h:panelGrid>
+	</f:view>
+
+</jsp:root>

@@ -1,0 +1,12 @@
+.icp .fullName {
+	font-weight: bold;
+}
+
+.icp .content {
+	display: inline;
+}
+
+.icp .displayDate {
+	display: block;
+	font-style: italic;
+}

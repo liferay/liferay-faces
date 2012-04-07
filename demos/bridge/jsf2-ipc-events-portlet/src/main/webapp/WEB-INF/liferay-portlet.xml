@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 5.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_5_2_0.dtd">
+
+<liferay-portlet-app>
+	<portlet>
+		<portlet-name>1</portlet-name>
+		<instanceable>false</instanceable>
+		<ajaxable>false</ajaxable>
+	</portlet>
+	<portlet>
+		<portlet-name>2</portlet-name>
+		<instanceable>false</instanceable>
+		<ajaxable>false</ajaxable>
+	</portlet>
+</liferay-portlet-app>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" version="2.1">
+
+	<f:view>
+		<f:subview id="head">
+			<jsp:include page="styling.jspx" />
+		</f:subview>
+		<f:subview id="portletPreferences">
+			<jsp:include page="portletPreferences.jspx" />
+		</f:subview>
+	</f:view>
+
+</jsp:root>

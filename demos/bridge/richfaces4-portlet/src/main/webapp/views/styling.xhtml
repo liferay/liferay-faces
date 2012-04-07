@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:remove>
+		<!--
+			The benefit of using the link element is that the CSS resource loads faster because it doesn't invoke a
+			portlet ResourceURL, and therefore doesn't run the JSF lifecycle to obtain the resource's URL. The drawback
+			is that the CSS resource can't use the #{resource[''} EL-expression inside it.
+		-->
+	</ui:remove>
+	<link href="#{request.contextPath}/css/portlet.css" rel="stylesheet" type="text/css" />
+	<link href="#{request.contextPath}/css/liferay-theme-override.css" rel="stylesheet" type="text/css" />
+	<ui:remove>
+		<!--
+			The benefit of using the h:outputStylesheet tag the CSS resource can use the #{resource['']} EL-expression
+			inside it.
+		-->
+	</ui:remove>
+	<h:outputStylesheet library="example" name="example.css" />
+	<c:if test="#{!aui.provided}">
+		<h:outputStylesheet library="aui-skin-classic" name="css/aui-skin-classic-all-min.css" />
+	</c:if>
+
+</ui:composition>

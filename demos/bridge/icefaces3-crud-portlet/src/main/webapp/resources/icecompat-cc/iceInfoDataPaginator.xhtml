@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:cc="http://java.sun.com/jsf/composite" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
+
+	<cc:interface>
+		<cc:attribute name="cssClass" required="false" />
+		<cc:attribute name="for" required="true" />
+		<cc:attribute name="style" required="false" />
+		<cc:attribute name="styleClass" required="false" />
+	</cc:interface>
+
+	<cc:implementation>
+		<ui:remove>
+			<!-- NOTE that we have to prepend the "for" attribute with a colon until ICE-6398 can be fixed -->
+		</ui:remove>
+		<ice:dataPaginator for=":#{cc.attrs.for}" firstRowIndexVar="firstRowIndex" lastRowIndexVar="lastRowIndex" pageCountVar="pageCount"
+			pageIndexVar="pageIndex" rowsCountVar="rowsCount" style="#{cc.attrs.style}" styleClass="#{cc.attrs.cssClass} #{cc.attrs.styleClass} search-results">
+			<ice:outputFormat value="#{i18n['showing-x-x-of-x-results']}">
+				<f:param value="#{firstRowIndex}" />
+				<f:param value="#{lastRowIndex}" />
+				<f:param value="#{rowsCount}" />
+				<f:param value="#{pageIndex}" />
+				<f:param value="#{pageCount}" />
+			</ice:outputFormat>
+		</ice:dataPaginator>
+	</cc:implementation>
+
+</ui:component>
