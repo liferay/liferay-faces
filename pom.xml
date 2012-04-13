@@ -68,7 +68,7 @@
 		<module>bridge-impl</module>
 		<module>portal</module>
 		<module>doc</module>
-<!--		<module>demos</module> -->
+		<module>demos</module> 
 	</modules>
 
 	<properties>
