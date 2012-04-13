@@ -28,9 +28,8 @@
 				</aui:column>
 				<aui:column>
 					<aui:fieldset label="#{i18n['administration']}">
-						<aui-cc:select inlineMessage="true" label="#{i18n['status']}" required="true" value="#{usersModelBean.selectedUser.active}">
-							<f:selectItem itemLabel="#{i18n['active']}" itemValue="true" />
-							<f:selectItem itemLabel="#{i18n['inactive']}" itemValue="false" />
+						<aui-cc:select inlineMessage="true" label="#{i18n['status']}" required="true" value="#{usersModelBean.selectedUser.status}">
+							<f:selectItems value="#{usersModelBean.statusSelectItems}" />
 						</aui-cc:select>
 					</aui:fieldset>
 				</aui:column>
@@ -78,9 +77,8 @@
 							</aui:column>
 							<aui:column>
 								<aui-cc:select inlineMessage="true" label="#{i18n['status']}" required="true"
-									value="#{usersModelBean.searchCriteria.active}">
-									<f:selectItem itemLabel="#{i18n['active']}" itemValue="true" />
-									<f:selectItem itemLabel="#{i18n['inactive']}" itemValue="false" />
+									value="#{usersModelBean.searchCriteria.status}">
+									<f:selectItems value="#{usersModelBean.statusSelectItems}" />
 								</aui-cc:select>
 							</aui:column>
 							<aui:button-row>

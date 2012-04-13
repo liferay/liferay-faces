@@ -14,16 +14,20 @@
 package com.liferay.faces.demos.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.DataModel;
+import javax.faces.model.SelectItem;
 
 import com.liferay.faces.demos.list.SearchCriteria;
 import com.liferay.faces.demos.list.UserLazyDataModel;
 import com.liferay.faces.portal.context.LiferayFacesContext;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.User;
 
 
@@ -46,6 +50,7 @@ public class UsersModelBean implements Serializable {
 	private transient DataModel<User> userDataModel;
 	private transient SearchCriteria searchCriteria;
 	private transient User selectedUser;
+	private transient List<SelectItem> statusSelectItems;
 
 	public void forceListReload() {
 		userDataModel = null;
@@ -77,5 +82,20 @@ public class UsersModelBean implements Serializable {
 
 	public void setSelectedUser(User selectedUser) {
 		this.selectedUser = selectedUser;
+	}
+
+	public List<SelectItem> getStatusSelectItems() {
+
+		if (statusSelectItems == null) {
+			statusSelectItems = new ArrayList<SelectItem>();
+			statusSelectItems.add(new SelectItem(WorkflowConstants.STATUS_ANY,
+					liferayFacesContext.getMessage("any-status")));
+			statusSelectItems.add(new SelectItem(WorkflowConstants.STATUS_APPROVED,
+					liferayFacesContext.getMessage("active")));
+			statusSelectItems.add(new SelectItem(WorkflowConstants.STATUS_INACTIVE,
+					liferayFacesContext.getMessage("inactive")));
+		}
+
+		return statusSelectItems;
 	}
 }
