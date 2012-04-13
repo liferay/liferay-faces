@@ -14,19 +14,17 @@
 package com.liferay.faces.demos.bean;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-
-import com.liferay.documentlibrary.DuplicateFileException;
-import com.liferay.documentlibrary.FileNameException;
-import com.liferay.documentlibrary.FileSizeException;
-import com.liferay.documentlibrary.SourceFileNameException;
 
 import com.liferay.faces.bridge.component.HtmlInputFile;
 import com.liferay.faces.bridge.component.UploadedFile;
@@ -42,8 +40,14 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.ServiceContext;
 
+import com.liferay.portlet.documentlibrary.DuplicateFileException;
+import com.liferay.portlet.documentlibrary.FileNameException;
+import com.liferay.portlet.documentlibrary.FileSizeException;
+import com.liferay.portlet.documentlibrary.SourceFileNameException;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 
 
 /**
@@ -113,19 +117,23 @@ public class DocUploadBackingBean {
 				String title = name;
 				String description = null;
 				String changeLog = null;
-				String extraSettings = null;
 				File file = new File(uploadedFile.getAbsolutePath());
 				ServiceContext serviceContext = new ServiceContext();
 
 				// Temporary: Make the default setting be that community members can view the file. Need to develop a
 				// "Viewable By" permissions Facelet composite component UI similar to
 				// portal-web/docroot/html/taglib/ui/input_permissions/page.jsp
-				serviceContext.setAddCommunityPermissions(true);
+				serviceContext.setAddGroupPermissions(true);
 
 				try {
-					DLFileEntryServiceUtil.addFileEntry(dlFolder.getGroupId(), dlFolder.getFolderId(), name, title,
-						description, changeLog, extraSettings, file, serviceContext);
+					long fileEntryTypeId = DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT;
+					Map<String, Fields> fieldsMap = new HashMap<String, Fields>();
+					FileInputStream inputStream = new FileInputStream(file);
+					DLFileEntryServiceUtil.addFileEntry(dlFolder.getGroupId(), dlFolder.getRepositoryId(),
+						dlFolder.getFolderId(), name, uploadedFile.getContentType(), title, description, changeLog,
+						fileEntryTypeId, fieldsMap, file, inputStream, file.length(), serviceContext);
 					docLibModelBean.forceDocumentRequery();
+					inputStream.close();
 					file.delete();
 				}
 				catch (DuplicateFileException e) {

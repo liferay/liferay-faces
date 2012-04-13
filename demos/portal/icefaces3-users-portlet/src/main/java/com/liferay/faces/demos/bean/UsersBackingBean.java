@@ -99,7 +99,7 @@ public class UsersBackingBean {
 			User user = usersModelBean.getSelectedUser();
 
 			try {
-				UserLocalServiceUtil.updateActive(user.getUserId(), user.isActive());
+				UserLocalServiceUtil.updateStatus(user.getUserId(), user.getStatus());
 				UserLocalServiceUtil.updateUser(user);
 			}
 			catch (Exception e) {

@@ -21,7 +21,6 @@ import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 import com.liferay.faces.demos.expando.UserExpando;
 import com.liferay.faces.demos.model.Registrant;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
@@ -41,9 +40,8 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.PhoneUtil;
-
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
 
 /**
@@ -103,7 +101,7 @@ public class RegistrantServiceUtil {
 
 		// Disable the ability to login until someone approves the account.
 		if (!active) {
-			UserLocalServiceUtil.updateActive(user.getUserId(), false);
+			UserLocalServiceUtil.updateStatus(user.getUserId(), user.getStatus());
 		}
 
 		// Add mobile phone.
@@ -152,7 +150,7 @@ public class RegistrantServiceUtil {
 				// Note: Exception will be thrown if we don't set the PrinicpalThreadLocal name.
 				String principalNameBackup = PrincipalThreadLocal.getName();
 				PrincipalThreadLocal.setName(creatorUserId);
-				EnterpriseAdminUtil.updatePhones(Contact.class.getName(), registrant.getContactId(), phones);
+				UsersAdminUtil.updatePhones(Contact.class.getName(), registrant.getContactId(), phones);
 				PrincipalThreadLocal.setName(principalNameBackup);
 				PermissionThreadLocal.setPermissionChecker(permissionCheckerBackup);
 			}
@@ -192,18 +190,18 @@ public class RegistrantServiceUtil {
 	}
 
 	private static int getMobilePhoneTypeId() throws SystemException {
-		int businessPhoneTypeId = 0;
+		int phoneTypeId = 0;
 		List<ListType> phoneTypes = ListTypeServiceUtil.getListTypes(PHONE_CLASS_NAME);
 
 		for (ListType phoneType : phoneTypes) {
 
-			if (phoneType.getName().equals("Mobile")) {
-				businessPhoneTypeId = phoneType.getListTypeId();
+			if (phoneType.getName().equals("mobile-phone")) {
+				phoneTypeId = phoneType.getListTypeId();
 
 				break;
 			}
 		}
 
-		return businessPhoneTypeId;
+		return phoneTypeId;
 	}
 }

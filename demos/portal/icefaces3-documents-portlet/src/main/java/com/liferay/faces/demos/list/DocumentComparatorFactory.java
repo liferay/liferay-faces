@@ -15,9 +15,6 @@ package com.liferay.faces.demos.list;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
 
-import com.liferay.portlet.documentlibrary.util.comparator.FileEntryReadCountComparator;
-import com.liferay.portlet.documentlibrary.util.comparator.FileEntryTitleComparator;
-
 
 /**
  * @author  Neil Griffin

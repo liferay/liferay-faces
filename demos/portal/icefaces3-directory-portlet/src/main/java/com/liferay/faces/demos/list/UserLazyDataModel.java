@@ -66,17 +66,20 @@ public class UserLazyDataModel extends LazyDataModel<User> {
 
 			Sort sort = new Sort(getSortColumn(), Sort.STRING_TYPE, !isSortAscending());
 
+			boolean andSearch = Boolean.parseBoolean(searchCriteria.getAndSearch());
+			int status = Integer.parseInt(searchCriteria.getStatus());
+
 			Hits hits = UserLocalServiceUtil.search(companyId, searchCriteria.getFirstName(),
 					searchCriteria.getMiddleName(), searchCriteria.getLastName(), searchCriteria.getScreenName(),
-					searchCriteria.getEmailAddress(), searchCriteria.isActive(), params, searchCriteria.isAndSearch(),
-					QueryUtil.ALL_POS, QueryUtil.ALL_POS, sort);
+					searchCriteria.getEmailAddress(), status, params, andSearch, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, sort);
 			totalCount = hits.getLength();
 
 			logger.debug(
 				"searchCriteria firstName=[{0}] middleName=[{1}] lastName=[{2}] screenName=[{3}] emailAddress=[{4}] active=[{5}] andSearch=[{6}] totalCount=[{7}]",
 				searchCriteria.getFirstName(), searchCriteria.getMiddleName(), searchCriteria.getLastName(),
-				searchCriteria.getScreenName(), searchCriteria.getEmailAddress(), searchCriteria.isActive(),
-				searchCriteria.isAndSearch(), totalCount);
+				searchCriteria.getScreenName(), searchCriteria.getEmailAddress(), searchCriteria.getStatus(), andSearch,
+				totalCount);
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -102,19 +105,22 @@ public class UserLazyDataModel extends LazyDataModel<User> {
 		try {
 			LinkedHashMap<String, Object> params = new LinkedHashMap<String, Object>();
 			int liferayOneRelativeFinishRow = finishRow + 1;
+
+			boolean andSearch = Boolean.parseBoolean(searchCriteria.getAndSearch());
+			int status = Integer.parseInt(searchCriteria.getStatus());
+
 			Hits hits = UserLocalServiceUtil.search(companyId, searchCriteria.getFirstName(),
 					searchCriteria.getMiddleName(), searchCriteria.getLastName(), searchCriteria.getScreenName(),
-					searchCriteria.getEmailAddress(), searchCriteria.isActive(), params, searchCriteria.isAndSearch(),
-					startRow, liferayOneRelativeFinishRow, sort);
+					searchCriteria.getEmailAddress(), status, params, andSearch, startRow,
+					liferayOneRelativeFinishRow, sort);
 
 			List<Document> documentHits = hits.toList();
 
 			logger.debug(
 				"searchCriteria firstName=[{0}] middleName=[{1}] lastName=[{2}] screenName=[{3}] emailAddress=[{4}] active=[{5}] andSearch=[{6}] startRow=[{7}] liferayOneRelativeFinishRow=[{8}] sortColumn=[{9}] reverseOrder=[{10}] hitCount=[{11}]",
 				searchCriteria.getFirstName(), searchCriteria.getMiddleName(), searchCriteria.getLastName(),
-				searchCriteria.getScreenName(), searchCriteria.getEmailAddress(), searchCriteria.isActive(),
-				searchCriteria.isAndSearch(), startRow, liferayOneRelativeFinishRow, sort.getFieldName(),
-				sort.isReverse(), documentHits.size());
+				searchCriteria.getScreenName(), searchCriteria.getEmailAddress(), searchCriteria.getStatus(), andSearch,
+				startRow, liferayOneRelativeFinishRow, sort.getFieldName(), sort.isReverse(), documentHits.size());
 
 			users = new ArrayList<User>(documentHits.size());
 

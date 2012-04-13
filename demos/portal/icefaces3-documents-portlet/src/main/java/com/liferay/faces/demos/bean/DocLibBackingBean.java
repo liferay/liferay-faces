@@ -169,14 +169,17 @@ public class DocLibBackingBean {
 				FolderUserObject folderUserObject = docLibModelBean.getSelectedFolderUserObject();
 				DLFolder dlFolder = folderUserObject.getDlFolder();
 				long groupId = dlFolder.getGroupId();
+				long repositoryId = dlFolder.getRepositoryId();
+				boolean mountPoint = dlFolder.getMountPoint();
 				long parentFolderId = dlFolder.getFolderId();
 				ServiceContext serviceContext = new ServiceContext();
 
 				// Temporary: Make the default setting be that community members can view the file. Need to develop a
 				// "Viewable By" permissions Facelet composite component UI similar to
 				// portal-web/docroot/html/taglib/ui/input_permissions/page.jsp
-				serviceContext.setAddCommunityPermissions(true);
-				DLFolderServiceUtil.addFolder(groupId, parentFolderId, folderName, folderDescription, serviceContext);
+				serviceContext.setAddGroupPermissions(true);
+				DLFolderServiceUtil.addFolder(groupId, repositoryId, mountPoint, parentFolderId, folderName,
+					folderDescription, serviceContext);
 				docLibModelBean.forceTreeRequery();
 				logger.debug("Added folderName=[{0}] description=[{1}]", folderName, folderDescription);
 			}

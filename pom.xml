@@ -68,7 +68,7 @@
 		<module>bridge-impl</module>
 		<module>portal</module>
 		<module>doc</module>
-		<module>demos</module>
+<!--		<module>demos</module> -->
 	</modules>
 
 	<properties>
@@ -148,7 +148,7 @@
 			<dependency>
 				<groupId>com.liferay.portal</groupId>
 				<artifactId>portal-service</artifactId>
-				<version>6.0.6</version>
+				<version>6.1.0</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>

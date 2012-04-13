@@ -85,8 +85,9 @@ public class DLFileEntryPermission {
 			return hasPermission.booleanValue();
 		}
 
-		DLFileVersion latestFileVersion = DLFileVersionLocalServiceUtil.getLatestFileVersion(fileEntry.getGroupId(),
-				fileEntry.getFolderId(), fileEntry.getName());
+		boolean excludeWorkingCopy = true;
+		DLFileVersion latestFileVersion = DLFileVersionLocalServiceUtil.getLatestFileVersion(fileEntry.getFileEntryId(),
+				excludeWorkingCopy);
 
 		if (latestFileVersion.isPending()) {
 			hasPermission = WorkflowPermissionUtil.hasPermission(permissionChecker, fileEntry.getGroupId(),

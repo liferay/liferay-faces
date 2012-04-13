@@ -30,6 +30,11 @@
 							</aui:field>
 						</aui:column>
 						<aui:column>
+							<aui-cc:select inlineMessage="true" label="#{i18n['status']}" required="true" value="#{directoryModelBean.searchCriteria.status}">
+								<f:selectItems value="#{directoryModelBean.statusSelectItems}"/>
+							</aui-cc:select>
+						</aui:column>
+						<aui:column>
 							<aui-cc:select inlineMessage="true" label="#{i18n['search-operator']}" required="true" value="#{directoryModelBean.searchCriteria.andSearch}">
 								<f:selectItem itemLabel="#{i18n['all']}" itemValue="true" />
 								<f:selectItem itemLabel="#{i18n['any']}" itemValue="false" />

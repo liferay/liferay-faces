@@ -20,6 +20,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
@@ -46,7 +47,7 @@ public class FolderTreeNode extends DefaultMutableTreeNode {
 
 		try {
 			List<DLFolder> childDlFolders = DLFolderServiceUtil.getFolders(dlFolder.getGroupId(),
-					dlFolder.getFolderId());
+					dlFolder.getFolderId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 			if (childDlFolders != null) {
 

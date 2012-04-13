@@ -13,13 +13,14 @@
  */
 package com.liferay.faces.demos.list;
 
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
+
 /**
  * @author  Neil Griffin
  */
 public class SearchCriteria {
 
-	private boolean active = true;
-	private boolean andSearch = false;
+	private String andSearch = Boolean.FALSE.toString();
 	private String emailAddress;
 	private boolean formatExpressions = false;
 	private String firstName;
@@ -27,6 +28,7 @@ public class SearchCriteria {
 	private String lastName;
 	private String middleName;
 	private String screenName;
+	private String status = Integer.toString(WorkflowConstants.STATUS_ANY);
 
 	protected String formatExpression(String value) {
 
@@ -43,16 +45,8 @@ public class SearchCriteria {
 		return expression;
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-	public void setAndSearch(boolean andSearch) {
+	public void setAndSearch(String andSearch) {
 		this.andSearch = andSearch;
-	}
-
-	public boolean isActive() {
-		return active;
 	}
 
 	public String getEmailAddress() {
@@ -87,7 +81,7 @@ public class SearchCriteria {
 		this.formatExpressions = formatExpressions;
 	}
 
-	public boolean isAndSearch() {
+	public String getAndSearch() {
 		return andSearch;
 	}
 
@@ -143,6 +137,14 @@ public class SearchCriteria {
 
 	public void setScreenName(String screenName) {
 		this.screenName = screenName;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

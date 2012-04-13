@@ -29,13 +29,12 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 
-import com.liferay.portlet.expando.NoSuchColumnException;
 import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
 
 /**
@@ -78,11 +77,12 @@ public class RegisterExpandoAction extends SimpleAction {
 
 		ExpandoColumn expandoColumn = null;
 
-		try {
-			expandoColumn = ExpandoColumnLocalServiceUtil.getColumn(expandoTable.getTableId(), expandoColumnName);
+		expandoColumn = ExpandoColumnLocalServiceUtil.getColumn(expandoTable.getTableId(), expandoColumnName);
+
+		if (expandoColumn != null) {
 			logger.debug("Expando column=[{0}] exists for modelClassName=[{1}]", expandoColumnName, modelClassName);
 		}
-		catch (NoSuchColumnException e) {
+		else {
 			expandoColumn = ExpandoColumnLocalServiceUtil.addColumn(expandoTable.getTableId(), expandoColumnName,
 					expandoColumnType);
 			logger.debug("Added expando column=[{0}] to modelClassName=[{1}]", expandoColumnName, modelClassName);
@@ -91,7 +91,8 @@ public class RegisterExpandoAction extends SimpleAction {
 		if (indexable) {
 			UnicodeProperties properties;
 			properties = new UnicodeProperties();
-			properties.setProperty(ExpandoBridgeIndexer.INDEXABLE, Boolean.valueOf(true).toString());
+			properties.setProperty(ExpandoColumnConstants.INDEX_TYPE,
+				String.valueOf(ExpandoColumnConstants.INDEX_TYPE_TEXT));
 			expandoColumn.setTypeSettingsProperties(properties);
 			ExpandoColumnLocalServiceUtil.updateExpandoColumn(expandoColumn);
 		}
