@@ -132,8 +132,8 @@ public class BridgeContextImpl implements BridgeContext {
 		// Initialize the portlet container implementation.
 		PortletContainerFactory portletContainerFactory = (PortletContainerFactory) BridgeFactoryFinder.getFactory(
 				PortletContainerFactory.class);
-		this.portletContainer = portletContainerFactory.getPortletContainer(portletContext, portletRequest, portletResponse,
-				portletPhase);
+		this.portletContainer = portletContainerFactory.getPortletContainer(portletContext, portletRequest,
+				portletResponse, portletPhase);
 	}
 
 	public void dispatch(String path) throws IOException {
@@ -243,8 +243,20 @@ public class BridgeContextImpl implements BridgeContext {
 				bridgeActionURL.removeParameter(Bridge.DIRECT_LINK);
 			}
 
-			if (!targetFacesView.isExtensionMapped() && !targetFacesView.isPathMapped()) {
-				bridgeActionURL.setParameter(Bridge.NONFACES_TARGET_PATH_PARAMETER, contextRelativeViewPath);
+			if (bridgeActionURL.isAbsolute()) {
+				// encodeActionURLAbsoluteURLTest: avoid adding _jsfBridgeNonFacesView
+			}
+			else {
+
+				if (url.startsWith(BridgeConstants.CHAR_POUND)) {
+					// encodeActionURLPoundCharTest: avoid adding _jsfBridgeNonFacesView
+				}
+				else {
+
+					if (!targetFacesView.isExtensionMapped() && !targetFacesView.isPathMapped()) {
+						bridgeActionURL.setParameter(Bridge.NONFACES_TARGET_PATH_PARAMETER, contextRelativeViewPath);
+					}
+				}
 			}
 
 		}
@@ -259,9 +271,9 @@ public class BridgeContextImpl implements BridgeContext {
 		String currentFacesViewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
 
 		BridgePartialActionURL bridgePartialActionURL = new BridgePartialActionURLImpl(url, currentFacesViewId, this);
-		
+
 		bridgePartialActionURL.setParameter(BridgeExt.FACES_AJAX_PARAMETER, Boolean.TRUE.toString());
-		
+
 		return bridgePartialActionURL;
 	}
 
@@ -296,7 +308,7 @@ public class BridgeContextImpl implements BridgeContext {
 			// need to remove the "javax.portlet.faces.ViewLink" parameter as required by the Bridge
 			// Spec.
 			bridgeResourceURL.removeParameter(Bridge.VIEW_LINK);
-			
+
 			// Set a flag indicating that this is a view-link type of navigation.
 			bridgeResourceURL.setViewLink(true);
 
