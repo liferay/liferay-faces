@@ -192,18 +192,18 @@ public class RegistrantServiceUtil {
 	}
 
 	private static int getMobilePhoneTypeId() throws SystemException {
-		int businessPhoneTypeId = 0;
+		int phoneTypeId = 0;
 		List<ListType> phoneTypes = ListTypeServiceUtil.getListTypes(PHONE_CLASS_NAME);
 
 		for (ListType phoneType : phoneTypes) {
 
 			if (phoneType.getName().equals("Mobile")) {
-				businessPhoneTypeId = phoneType.getListTypeId();
+				phoneTypeId = phoneType.getListTypeId();
 
 				break;
 			}
 		}
 
-		return businessPhoneTypeId;
+		return phoneTypeId;
 	}
 }
