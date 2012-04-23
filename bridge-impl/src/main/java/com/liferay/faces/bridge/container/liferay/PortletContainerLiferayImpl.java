@@ -37,6 +37,7 @@ import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.application.ResourceHandlerImpl;
 import com.liferay.faces.bridge.container.PortletContainerImpl;
+import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
@@ -130,12 +131,24 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 				this.ableToAddStyleSheetResourceToHead = false;
 			}
 
-			// Otherwise, Liferay is able to add resources to the head section, albeit with a vendor-specific
-			// (non-standard) way.
+			// Otherwise,
 			else {
-				this.ableToAddScriptResourceToHead = true;
-				this.ableToAddScriptTextToHead = true;
-				this.ableToAddStyleSheetResourceToHead = true;
+
+				// If this portlet is running via WSRP, then it is not possible to add resources to the head section
+				// because Liferay doesn't support that feature with WSRP.
+				if (BooleanHelper.isTrueToken(portletRequest.getParameter(LiferayConstants.WSRP))) {
+					this.ableToAddScriptResourceToHead = false;
+					this.ableToAddScriptTextToHead = false;
+					this.ableToAddStyleSheetResourceToHead = false;
+				}
+
+				// Otherwise, Liferay is able to add resources to the head section, albeit with a vendor-specific
+				// (non-standard) way.
+				else {
+					this.ableToAddScriptResourceToHead = true;
+					this.ableToAddScriptTextToHead = true;
+					this.ableToAddStyleSheetResourceToHead = true;
+				}
 			}
 
 			this.ableToSetHttpStatusCode = getContextParamAbleToSetHttpStatusCode(defaultValue);

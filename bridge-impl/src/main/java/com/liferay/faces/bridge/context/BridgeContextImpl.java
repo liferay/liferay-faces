@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,9 @@ import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.config.ServletMapping;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
+import com.liferay.faces.bridge.context.map.RequestHeaderMap;
+import com.liferay.faces.bridge.context.map.RequestHeaderValuesMap;
+import com.liferay.faces.bridge.context.map.RequestParameterMapFactory;
 import com.liferay.faces.bridge.context.url.BridgeActionURL;
 import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
 import com.liferay.faces.bridge.context.url.BridgePartialActionURLImpl;
@@ -97,6 +101,11 @@ public class BridgeContextImpl implements BridgeContext {
 	private boolean renderRedirectAfterDispatch;
 	private BridgeRedirectURL renderRedirectURL;
 	private Boolean renderRedirectEnabled;
+	private Map<String, String> requestHeaderMap;
+	private Map<String, String[]> requestHeaderValuesMap;
+	private Map<String, String> requestParameterMap;
+	private RequestParameterMapFactory requestParameterMapFactory;
+	private Map<String, String[]> requestParameterValuesMap;
 	private StringWrapper requestPathInfo;
 	private String requestServletPath;
 	private Writer responseOutputWriter;
@@ -132,8 +141,11 @@ public class BridgeContextImpl implements BridgeContext {
 		// Initialize the portlet container implementation.
 		PortletContainerFactory portletContainerFactory = (PortletContainerFactory) BridgeFactoryFinder.getFactory(
 				PortletContainerFactory.class);
-		this.portletContainer = portletContainerFactory.getPortletContainer(portletContext, portletRequest, portletResponse,
-				portletPhase);
+		this.portletContainer = portletContainerFactory.getPortletContainer(portletContext, portletRequest,
+				portletResponse, portletPhase);
+
+		// Initialize the RequestParameterMapFactory instance.
+		requestParameterMapFactory = new RequestParameterMapFactory(this);
 	}
 
 	public void dispatch(String path) throws IOException {
@@ -259,9 +271,9 @@ public class BridgeContextImpl implements BridgeContext {
 		String currentFacesViewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
 
 		BridgePartialActionURL bridgePartialActionURL = new BridgePartialActionURLImpl(url, currentFacesViewId, this);
-		
+
 		bridgePartialActionURL.setParameter(BridgeExt.FACES_AJAX_PARAMETER, Boolean.TRUE.toString());
-		
+
 		return bridgePartialActionURL;
 	}
 
@@ -296,7 +308,7 @@ public class BridgeContextImpl implements BridgeContext {
 			// need to remove the "javax.portlet.faces.ViewLink" parameter as required by the Bridge
 			// Spec.
 			bridgeResourceURL.removeParameter(Bridge.VIEW_LINK);
-			
+
 			// Set a flag indicating that this is a view-link type of navigation.
 			bridgeResourceURL.setViewLink(true);
 
@@ -817,6 +829,10 @@ public class BridgeContextImpl implements BridgeContext {
 	public void setPortletRequest(PortletRequest portletRequest) {
 		this.portletRequest = portletRequest;
 		this.portletContainer.setPortletRequest(portletRequest);
+		this.requestParameterMap = null;
+		this.requestParameterValuesMap = null;
+		this.requestHeaderMap = null;
+		this.requestHeaderValuesMap = null;
 	}
 
 	public Bridge.PortletPhase getPortletRequestPhase() {
@@ -865,6 +881,43 @@ public class BridgeContextImpl implements BridgeContext {
 
 	public void setRenderRedirectURL(BridgeRedirectURL renderRedirectURL) {
 		this.renderRedirectURL = renderRedirectURL;
+	}
+
+	public Map<String, String> getRequestHeaderMap() {
+
+		if (requestHeaderMap == null) {
+			requestHeaderMap = Collections.unmodifiableMap(new RequestHeaderMap(getRequestHeaderValuesMap()));
+		}
+
+		return requestHeaderMap;
+	}
+
+	public Map<String, String[]> getRequestHeaderValuesMap() {
+
+		if (requestHeaderValuesMap == null) {
+			requestHeaderValuesMap = Collections.unmodifiableMap(new RequestHeaderValuesMap(portletRequest,
+						getRequestParameterMap()));
+		}
+
+		return requestHeaderValuesMap;
+	}
+
+	public Map<String, String> getRequestParameterMap() {
+
+		if (requestParameterMap == null) {
+			requestParameterMap = requestParameterMapFactory.getRequestParameterMap();
+		}
+
+		return requestParameterMap;
+	}
+
+	public Map<String, String[]> getRequestParameterValuesMap() {
+
+		if (requestParameterValuesMap == null) {
+			requestParameterValuesMap = requestParameterMapFactory.getRequestParameterValuesMap();
+		}
+
+		return requestParameterValuesMap;
 	}
 
 	public String getRequestPathInfo() {

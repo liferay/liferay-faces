@@ -28,10 +28,6 @@ import com.liferay.faces.bridge.context.BridgeContext;
  */
 public class PortletContainerFactoryImpl extends PortletContainerFactory {
 
-	// Private Constants
-	private static final String OBJECT_NAME_PREFIX_LIFERAY = "com.liferay";
-	private static final String OBJECT_NAME_PREFIX_PLUTO = "org.apache.pluto";
-
 	// Private Data Members
 	private PortletContainerFactory wrappedFactory;
 
@@ -55,11 +51,11 @@ public class PortletContainerFactoryImpl extends PortletContainerFactory {
 
 		if (portletContainer == null) {
 
-			if (isLiferayObject(portletRequest)) {
+			if (PortletContainerDetector.isLiferayObject(portletRequest)) {
 				portletContainer = new PortletContainerLiferayImpl(portletContext, portletRequest, portletResponse,
 						portletPhase, portletResponse.getNamespace());
 			}
-			else if (isPlutoObject(portletRequest)) {
+			else if (PortletContainerDetector.isPlutoObject(portletRequest)) {
 				portletContainer = new PortletContainerPlutoImpl(portletRequest, portletResponse, portletPhase,
 						portletResponse.getNamespace());
 			}
@@ -73,40 +69,6 @@ public class PortletContainerFactoryImpl extends PortletContainerFactory {
 		portletContainer.setPortletResponse(portletResponse);
 
 		return portletContainer;
-	}
-
-	/**
-	 * Determines whether or not the specified object is one created by Liferay Portal.
-	 *
-	 * @param   portletURL  The portletURL that may have been created by Liferay Portal.
-	 *
-	 * @return  true if the specified portletURL was created by Liferay Portal.
-	 */
-	protected boolean isLiferayObject(Object obj) {
-
-		if (obj != null) {
-			return obj.getClass().getName().startsWith(OBJECT_NAME_PREFIX_LIFERAY);
-		}
-		else {
-			return false;
-		}
-	}
-
-	/**
-	 * Determines whether or not the specified object is one created by Pluto.
-	 *
-	 * @param   portletURL  The portletURL that may have been created by Pluto.
-	 *
-	 * @return  true if the specified portletURL was created by Pluto.
-	 */
-	protected boolean isPlutoObject(Object obj) {
-
-		if (obj != null) {
-			return obj.getClass().getName().startsWith(OBJECT_NAME_PREFIX_PLUTO);
-		}
-		else {
-			return false;
-		}
 	}
 
 	public PortletContainerFactory getWrapped() {

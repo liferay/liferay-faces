@@ -54,9 +54,6 @@ import com.liferay.faces.bridge.logging.LoggerFactory;
  */
 public abstract class BridgeURLBaseImpl implements BridgeURL {
 
-	// Private Constants
-	public static final String RELATIVE_PATH_PREFIX = "../";
-
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeURLBaseImpl.class);
 
@@ -64,6 +61,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 	protected static final String PORTLET_ACTION = "portlet:action";
 	protected static final String PORTLET_RENDER = "portlet:render";
 	protected static final String PORTLET_RESOURCE = "portlet:resource";
+	protected static final String RELATIVE_PATH_PREFIX = "../";
 
 	// Private Data Members
 	private String contextPath;
@@ -522,7 +520,12 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 							if (nameValueArray != null) {
 
-								if (nameValueArray.length == 2) {
+								if (nameValueArray.length == 1) {
+									String name = nameValueArray[0];
+									String value = BridgeConstants.EMPTY;
+									parameters.put(name, new String[] { value });
+								}
+								else if (nameValueArray.length == 2) {
 									String name = nameValueArray[0];
 									String value = nameValueArray[1];
 									parameters.put(name, new String[] { value });

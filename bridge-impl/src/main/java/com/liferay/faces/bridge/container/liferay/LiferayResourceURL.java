@@ -23,8 +23,11 @@ import javax.portlet.WindowState;
  */
 public class LiferayResourceURL extends LiferayBaseURL implements ResourceURL {
 
+	// Private Constants
+
 	// Private Data Members
 	private String cacheLevel;
+	private String resourceId;
 	private String toStringValue;
 
 	public LiferayResourceURL(ParsedBaseURL parsedLiferayURL, String responseNamespace) {
@@ -40,22 +43,29 @@ public class LiferayResourceURL extends LiferayBaseURL implements ResourceURL {
 			// case for a ResourceURL.
 			LiferayReleaseInfo liferayReleaseInfo = new LiferayReleaseInfo();
 			int liferayBuildNumber = liferayReleaseInfo.getBuildNumber();
+			boolean firstParameter = false;
+
+			String superToString = super.toString();
+			StringBuilder url = new StringBuilder(superToString);
+
+			if (resourceId != null) {
+				appendParameterToURL(firstParameter, LiferayConstants.P_P_RESOURCE_ID, resourceId, url);
+			}
+			else if (superToString.startsWith(LiferayConstants.WSRP)) {
+				appendParameterToURL(firstParameter, LiferayConstants.P_P_RESOURCE_ID, LiferayConstants.WSRP, url);
+			}
 
 			if ((liferayBuildNumber >= 5200) && (liferayBuildNumber < 6000)) {
-				StringBuilder url = new StringBuilder(super.toString());
 
 				// Add the p_p_mode parameter with value "view".
-				boolean firstParameter = false;
 				appendParameterToURL(firstParameter, LiferayConstants.P_P_MODE, PortletMode.VIEW.toString(), url);
 
 				// Add the p_p_state parameter with value "normal".
 				appendParameterToURL(firstParameter, LiferayConstants.P_P_STATE, WindowState.NORMAL.toString(), url);
 
-				toStringValue = url.toString();
 			}
-			else {
-				toStringValue = super.toString();
-			}
+
+			toStringValue = url.toString();
 		}
 
 		return toStringValue;
@@ -75,7 +85,7 @@ public class LiferayResourceURL extends LiferayBaseURL implements ResourceURL {
 	}
 
 	public void setResourceID(String resourceId) {
-		// Ignore
+		this.resourceId = resourceId;
 	}
 
 }

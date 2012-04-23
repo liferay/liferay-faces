@@ -18,6 +18,7 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,6 +29,7 @@ import javax.portlet.PortletSecurityException;
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.bridge.util.URLParameter;
 
 
 /**
@@ -46,10 +48,11 @@ public abstract class LiferayBaseURL implements BaseURL {
 	// Private Data Members
 	Map<String, String[]> parameterMap;
 	private ParsedBaseURL parsedLiferayURL;
-
-	private String responseNamespace;
 	private String toStringValue;
 
+	// Protected Data Members
+	protected String responseNamespace;
+	
 	public LiferayBaseURL(ParsedBaseURL parsedLiferayURL, String responseNamespace) {
 		this.parsedLiferayURL = parsedLiferayURL;
 		this.responseNamespace = responseNamespace;
@@ -100,6 +103,10 @@ public abstract class LiferayBaseURL implements BaseURL {
 			url.append(parsedLiferayURL.getPrefix());
 
 			// Add request parameters from the request parameter map.
+			String namespace = responseNamespace;
+			if (namespace.startsWith(LiferayConstants.WSRP)) {
+				namespace = BridgeConstants.EMPTY;
+			}
 			boolean firstParameter = true;
 			Set<Map.Entry<String, String[]>> mapEntries = this.getParameterMap().entrySet();
 
@@ -114,7 +121,7 @@ public abstract class LiferayBaseURL implements BaseURL {
 
 						if (isValidParameter(parameterValue)) {
 
-							appendParameterToURL(firstParameter, responseNamespace + parameterName,
+							appendParameterToURL(firstParameter, namespace + parameterName,
 								encode(parameterValue), url);
 
 							if (firstParameter) {
@@ -122,6 +129,16 @@ public abstract class LiferayBaseURL implements BaseURL {
 							}
 						}
 					}
+				}
+			}
+
+			// Add WSRP URL parameters
+			List<URLParameter> wsrpParameters = parsedLiferayURL.getWsrpParameters();
+			for (URLParameter wsrpParameter: wsrpParameters) {
+				
+				appendParameterToURL(firstParameter, wsrpParameter.getName(), wsrpParameter.getValue(), url);
+				if (firstParameter) {
+					firstParameter = false;
 				}
 			}
 

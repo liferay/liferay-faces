@@ -268,6 +268,14 @@ public interface BridgeContext {
 	 */
 	void setRenderRedirectURL(BridgeRedirectURL renderRedirectURL);
 
+	public Map<String, String> getRequestHeaderMap();
+
+	public Map<String, String[]> getRequestHeaderValuesMap();
+
+	public Map<String, String> getRequestParameterMap();
+
+	public Map<String, String[]> getRequestParameterValuesMap();
+
 	/**
 	 * Returns the pathInfo associated with the current viewId.
 	 */

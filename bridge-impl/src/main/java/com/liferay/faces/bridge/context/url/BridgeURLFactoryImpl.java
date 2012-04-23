@@ -16,7 +16,9 @@ package com.liferay.faces.bridge.context.url;
 import java.util.List;
 import java.util.Map;
 
+import com.liferay.faces.bridge.container.PortletContainerDetector;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.context.url.liferay.BridgeResourceURLLiferayImpl;
 
 
 /**
@@ -24,6 +26,7 @@ import com.liferay.faces.bridge.context.BridgeContext;
  */
 public class BridgeURLFactoryImpl extends BridgeURLFactory {
 
+	// Private Data Members
 	private BridgeURLFactory wrappedBridgeURLFactory;
 
 	public BridgeURLFactoryImpl(BridgeURLFactory bridgeURLFactory) {
@@ -43,7 +46,13 @@ public class BridgeURLFactoryImpl extends BridgeURLFactory {
 
 	@Override
 	public BridgeResourceURL getBridgeResourceURL(String url, String currentFacesViewId, BridgeContext bridgeContext) {
-		return new BridgeResourceURLImpl(url, currentFacesViewId, bridgeContext);
+
+		if (PortletContainerDetector.isLiferayObject(bridgeContext.getPortletConfig())) {
+			return new BridgeResourceURLLiferayImpl(url, currentFacesViewId, bridgeContext);
+		}
+		else {
+			return new BridgeResourceURLImpl(url, currentFacesViewId, bridgeContext);
+		}
 	}
 
 	public BridgeURLFactory getWrapped() {

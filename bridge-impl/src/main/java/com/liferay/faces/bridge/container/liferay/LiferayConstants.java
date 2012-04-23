@@ -30,6 +30,7 @@ public class LiferayConstants {
 	public static final String P_P_ID = "p_p_id";
 	public static final String P_P_MODE = "p_p_mode";
 	public static final String P_P_LIFECYCLE = "p_p_lifecycle";
+	public static final String P_P_RESOURCE_ID = "p_p_resource_id";
 	public static final String P_P_STATE = "p_p_state";
-
+	public static final String WSRP = "wsrp";
 }

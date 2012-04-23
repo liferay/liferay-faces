@@ -60,9 +60,6 @@ import com.liferay.faces.bridge.context.map.ApplicationMap;
 import com.liferay.faces.bridge.context.map.InitParameterMap;
 import com.liferay.faces.bridge.context.map.RequestAttributeMap;
 import com.liferay.faces.bridge.context.map.RequestCookieMap;
-import com.liferay.faces.bridge.context.map.RequestHeaderMap;
-import com.liferay.faces.bridge.context.map.RequestHeaderValuesMap;
-import com.liferay.faces.bridge.context.map.RequestParameterMapFactory;
 import com.liferay.faces.bridge.context.map.SessionMap;
 import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.lifecycle.CongruousTask;
@@ -105,10 +102,7 @@ public class ExternalContextImpl extends ExternalContext {
 	private Bridge.PortletPhase portletPhase;
 	private Map<String, Object> requestAttributeMap;
 	private String requestContextPath;
-	private Map<String, String> requestHeaderMap;
-	private Map<String, String[]> requestHeaderValuesMap;
 	private Iterator<Locale> requestLocales;
-	private Map<String, String> requestParameterMap;
 	private String responseNamespace;
 	private Map<String, Object> sessionMap;
 
@@ -120,7 +114,6 @@ public class ExternalContextImpl extends ExternalContext {
 	private String portletContextName;
 	private String remoteUser;
 	private Map<String, Object> requestCookieMap;
-	private Map<String, String[]> requestParameterValuesMap;
 	private Locale requestLocale;
 	private String responseContentType;
 	private Principal userPrincipal;
@@ -429,18 +422,6 @@ public class ExternalContextImpl extends ExternalContext {
 		// Initialize the request locales.
 		requestLocales = new LocaleIterator(portletRequest.getLocales());
 
-		// Initialize the request parameter maps.
-		RequestParameterMapFactory requestParameterMapFactory = new RequestParameterMapFactory(bridgeContext);
-		requestParameterMap = requestParameterMapFactory.getRequestParameterMap();
-		requestParameterValuesMap = requestParameterMapFactory.getRequestParameterValuesMap();
-
-		// Initialize the request header values map.
-		requestHeaderValuesMap = Collections.unmodifiableMap(new RequestHeaderValuesMap(portletRequest,
-					requestParameterMap));
-
-		// Initialize the request header map.
-		requestHeaderMap = Collections.unmodifiableMap(new RequestHeaderMap(requestHeaderValuesMap));
-
 		// Initialize the response content type.
 		if (portletResponse instanceof MimeResponse) {
 			MimeResponse mimeResponse = (MimeResponse) portletResponse;
@@ -745,12 +726,12 @@ public class ExternalContextImpl extends ExternalContext {
 
 	@Override
 	public Map<String, String> getRequestHeaderMap() {
-		return requestHeaderMap;
+		return bridgeContext.getRequestHeaderMap();
 	}
 
 	@Override
 	public Map<String, String[]> getRequestHeaderValuesMap() {
-		return requestHeaderValuesMap;
+		return bridgeContext.getRequestHeaderValuesMap();
 	}
 
 	@Override
@@ -775,7 +756,7 @@ public class ExternalContextImpl extends ExternalContext {
 
 	@Override
 	public Map<String, String> getRequestParameterMap() {
-		return requestParameterMap;
+		return bridgeContext.getRequestParameterMap();
 	}
 
 	@Override
@@ -785,7 +766,7 @@ public class ExternalContextImpl extends ExternalContext {
 
 	@Override
 	public Map<String, String[]> getRequestParameterValuesMap() {
-		return requestParameterValuesMap;
+		return bridgeContext.getRequestParameterValuesMap();
 	}
 
 	/**

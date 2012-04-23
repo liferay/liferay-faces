@@ -23,6 +23,7 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
+import com.liferay.faces.bridge.container.liferay.LiferayConstants;
 import com.liferay.faces.bridge.event.IPCPhaseListener;
 import com.liferay.faces.bridge.event.ManagedBeanScopePhaseListener;
 import com.liferay.faces.bridge.helper.BooleanHelper;
@@ -68,7 +69,8 @@ public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 				// Ask the Faces resource handler to copy the contents of the resource to the response.
 				resourceHandler.handleResourceRequest(facesContext);
 			}
-			else if (resourceRequest.getResourceID() != null) {
+			else if ((resourceRequest.getResourceID() != null) &&
+					!resourceRequest.getResourceID().equals(LiferayConstants.WSRP)) {
 
 				logger.debug("Detected non-Faces resource");
 
@@ -85,7 +87,10 @@ public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 
 				if (logger.isDebugEnabled()) {
 
-					if (BooleanHelper.isTrueToken(resourceRequest.getParameter(BridgeExt.FACES_AJAX_PARAMETER))) {
+					String facesAjaxParameter = bridgeContext.getRequestParameterMap().get(
+							BridgeExt.FACES_AJAX_PARAMETER);
+
+					if (BooleanHelper.isTrueToken(facesAjaxParameter)) {
 						logger.debug("Detected Ajax ResourceRequest");
 					}
 					else {

@@ -37,8 +37,8 @@ import com.liferay.faces.bridge.renderkit.primefaces.PrimeFacesFileUploadRendere
 public class RenderKitBridgeImpl extends RenderKitWrapper {
 
 	// Private Constants
-	private static final String JAVAX_FACES_OUTPUT = UIOutput.COMPONENT_FAMILY;
 	private static final String JAVAX_FACES_HEAD = "javax.faces.Head";
+	private static final String JAVAX_FACES_OUTPUT = UIOutput.COMPONENT_FAMILY;
 	private static final Object ICEFACES_HEAD_RENDERER = "org.icefaces.ace.renderkit.HeadRenderer";
 	private static final String PRIMEFACES_FAMILY = "org.primefaces.component";
 	private static final String PRIMEFACES_HEAD_RENDERER = "org.primefaces.renderkit.HeadRenderer";
