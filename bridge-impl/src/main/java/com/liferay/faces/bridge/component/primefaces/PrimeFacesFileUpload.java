@@ -34,6 +34,7 @@ public class PrimeFacesFileUpload extends UIInputWrapper {
 	private static final Logger logger = LoggerFactory.getLogger(PrimeFacesFileUpload.class);
 
 	// Public Constants
+	public static final String AJAX_FILE_UPLOAD = "ajax.file.upload";
 	public static final String MODE_SIMPLE = "simple";
 	public static final String RENDERER_TYPE = "org.primefaces.component.FileUploadRenderer";
 

@@ -71,7 +71,6 @@ public class PortletContainerImpl implements PortletContainer {
 	private Map<String, PortletURL> actionURLCache;
 	private BridgeConfig bridgeConfig;
 	private boolean markupHeadElementSupported;
-	private PortletRequest portletRequest;
 	private Bridge.PortletPhase portletRequestPhase;
 	private Map<String, PortletURL> renderURLCache;
 	private String requestQueryString;
@@ -83,6 +82,7 @@ public class PortletContainerImpl implements PortletContainer {
 	protected PortletConfig portletConfig;
 	protected PortletContext portletContext;
 	protected PortletResponse portletResponse;
+	protected PortletRequest portletRequest;
 
 	public PortletContainerImpl(PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest, PortletResponse portletResponse,
 		Bridge.PortletPhase portletRequestPhase) {

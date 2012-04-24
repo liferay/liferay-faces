@@ -438,21 +438,22 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 			responseNamespace = portletResponse.getNamespace();
 
 			if (responseNamespace.startsWith(BridgeConstants.WSRP_REWRITE)) {
-				StringBuilder buf = new StringBuilder();
-				buf.append(portletConfig.getPortletName());
-				buf.append(LiferayConstants.WAR_SEPARATOR);
-				buf.append(portletContext.getPortletContextName());
-
-				LiferayThemeDisplay liferayThemeDisplay = liferayPortletRequest.getLiferayThemeDisplay();
-				LiferayPortletDisplay liferayPortletDisplay = liferayThemeDisplay.getLiferayPortletDisplay();
-				String instanceId = liferayPortletDisplay.getInstanceId();
-
-				if (instanceId != null) {
-					buf.append(LiferayConstants.INSTANCE_SEPARATOR);
-					buf.append(instanceId);
-				}
-
-				responseNamespace = buf.toString();
+				responseNamespace = LiferayPortalUtil.getPortletId(portletRequest);
+//				StringBuilder buf = new StringBuilder();
+//				buf.append(portletConfig.getPortletName());
+//				buf.append(LiferayConstants.WAR_SEPARATOR);
+//				buf.append(portletContext.getPortletContextName());
+//
+//				LiferayThemeDisplay liferayThemeDisplay = liferayPortletRequest.getLiferayThemeDisplay();
+//				LiferayPortletDisplay liferayPortletDisplay = liferayThemeDisplay.getLiferayPortletDisplay();
+//				String instanceId = liferayPortletDisplay.getInstanceId();
+//
+//				if (instanceId != null) {
+//					buf.append(LiferayConstants.INSTANCE_SEPARATOR);
+//					buf.append(instanceId);
+//				}
+//
+//				responseNamespace = buf.toString();
 			}
 		}
 

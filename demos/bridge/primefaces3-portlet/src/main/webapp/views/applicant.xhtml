@@ -145,9 +145,7 @@
 				<h:messages />
 				<h:panelGrid columns="1">
 					<h3>#{i18n['attachments']}</h3>
-					<bridge:inputFile binding="#{applicantBackingBean.attachment1}" />
-					<bridge:inputFile binding="#{applicantBackingBean.attachment2}" />
-					<bridge:inputFile binding="#{applicantBackingBean.attachment3}" />
+					<p:fileUpload mode="advanced" value="#{applicantBackingBean.uploadedFile1}" />
 				</h:panelGrid>
 				<h:commandButton actionListener="#{applicantBackingBean.uploadAttachments}" value="#{i18n['submit']}" />
 			</h:form>

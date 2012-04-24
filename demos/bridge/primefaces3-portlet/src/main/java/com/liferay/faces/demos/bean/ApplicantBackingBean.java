@@ -25,11 +25,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
-import com.liferay.faces.bridge.component.HtmlInputFile;
 import com.liferay.faces.bridge.component.UploadedFile;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 import com.liferay.faces.demos.dto.City;
+import com.liferay.faces.demos.dto.PrimeUploadedFile;
 import com.liferay.faces.demos.util.FacesMessageUtil;
 
 
@@ -58,9 +58,9 @@ public class ApplicantBackingBean implements Serializable {
 	private boolean commentsRendered = false;
 	private boolean fileUploaderRendered = false;
 
-	private transient HtmlInputFile attachment1;
-	private transient HtmlInputFile attachment2;
-	private transient HtmlInputFile attachment3;
+	private transient org.primefaces.model.UploadedFile uploadedFile1;
+	private transient org.primefaces.model.UploadedFile uploadedFile2;
+	private transient org.primefaces.model.UploadedFile uploadedFile3;
 
 	public void addAttachment(ActionEvent actionEvent) {
 		fileUploaderRendered = true;
@@ -177,28 +177,25 @@ public class ApplicantBackingBean implements Serializable {
 			nextId++;
 		}
 
-		UploadedFile uploadedFile1 = attachment1.getUploadedFile();
-
 		if (uploadedFile1 != null) {
-			uploadedFile1.setId(Integer.toString(nextId++));
-			uploadedFiles.add(uploadedFile1);
-			logger.debug("uploadedFile1=[{0}]", uploadedFile1.getName());
+			PrimeUploadedFile primeUploadedFile = new PrimeUploadedFile(uploadedFile1);
+			primeUploadedFile.setId(Integer.toString(nextId++));
+			uploadedFiles.add(primeUploadedFile);
+			logger.debug("uploadedFile1=[{0}]", primeUploadedFile.getName());
 		}
-
-		UploadedFile uploadedFile2 = attachment2.getUploadedFile();
 
 		if (uploadedFile2 != null) {
-			uploadedFile2.setId(Integer.toString(nextId++));
-			uploadedFiles.add(uploadedFile2);
-			logger.debug("uploadedFile2=[{0}]", uploadedFile2.getName());
+			PrimeUploadedFile primeUploadedFile = new PrimeUploadedFile(uploadedFile2);
+			primeUploadedFile.setId(Integer.toString(nextId++));
+			uploadedFiles.add(primeUploadedFile);
+			logger.debug("uploadedFile2=[{0}]", primeUploadedFile.getName());
 		}
 
-		UploadedFile uploadedFile3 = attachment3.getUploadedFile();
-
 		if (uploadedFile3 != null) {
-			uploadedFile3.setId(Integer.toString(nextId++));
-			uploadedFiles.add(uploadedFile3);
-			logger.debug("uploadedFile3=[{0}]", uploadedFile3.getName());
+			PrimeUploadedFile primeUploadedFile = new PrimeUploadedFile(uploadedFile3);
+			primeUploadedFile.setId(Integer.toString(nextId++));
+			uploadedFiles.add(primeUploadedFile);
+			logger.debug("uploadedFile3=[{0}]", primeUploadedFile.getName());
 		}
 
 		fileUploaderRendered = false;
@@ -208,30 +205,6 @@ public class ApplicantBackingBean implements Serializable {
 
 		// Injected via @ManagedProperty annotation
 		this.applicantModelBean = applicantModelBean;
-	}
-
-	public HtmlInputFile getAttachment1() {
-		return attachment1;
-	}
-
-	public void setAttachment1(HtmlInputFile attachment1) {
-		this.attachment1 = attachment1;
-	}
-
-	public HtmlInputFile getAttachment2() {
-		return attachment2;
-	}
-
-	public void setAttachment2(HtmlInputFile attachment2) {
-		this.attachment2 = attachment2;
-	}
-
-	public HtmlInputFile getAttachment3() {
-		return attachment3;
-	}
-
-	public void setAttachment3(HtmlInputFile attachment3) {
-		this.attachment3 = attachment3;
 	}
 
 	public void setCommentsRendered(boolean commentsRendered) {
@@ -250,5 +223,29 @@ public class ApplicantBackingBean implements Serializable {
 
 		// Injected via @ManagedProperty annotation
 		this.listModelBean = listModelBean;
+	}
+
+	public org.primefaces.model.UploadedFile getUploadedFile1() {
+		return uploadedFile1;
+	}
+
+	public void setUploadedFile1(org.primefaces.model.UploadedFile uploadedFile1) {
+		this.uploadedFile1 = uploadedFile1;
+	}
+
+	public org.primefaces.model.UploadedFile getUploadedFile2() {
+		return uploadedFile2;
+	}
+
+	public void setUploadedFile2(org.primefaces.model.UploadedFile uploadedFile2) {
+		this.uploadedFile2 = uploadedFile2;
+	}
+
+	public org.primefaces.model.UploadedFile getUploadedFile3() {
+		return uploadedFile3;
+	}
+
+	public void setUploadedFile3(org.primefaces.model.UploadedFile uploadedFile3) {
+		this.uploadedFile3 = uploadedFile3;
 	}
 }

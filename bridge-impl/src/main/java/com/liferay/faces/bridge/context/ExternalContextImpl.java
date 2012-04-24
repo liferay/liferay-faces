@@ -50,6 +50,7 @@ import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentRequest;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentResponse;
 import com.liferay.faces.bridge.application.view.BridgeWriteBehindResponseFactory;
+import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
@@ -176,7 +177,13 @@ public class ExternalContextImpl extends ExternalContext {
 
 	@Override
 	public String encodeActionURL(String url) {
-		return bridgeContext.encodeActionURL(url).toString();
+
+		if (isEncodingFormWithPrimeFacesAjaxFileUpload()) {
+			return encodePartialActionURL(url);
+		}
+		else {
+			return bridgeContext.encodeActionURL(url).toString();
+		}
 	}
 
 	@Override
@@ -486,6 +493,16 @@ public class ExternalContextImpl extends ExternalContext {
 		}
 		else {
 			return lifecycleIncongruityMap.isResponseCommitted();
+		}
+	}
+
+	protected boolean isEncodingFormWithPrimeFacesAjaxFileUpload() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		if (facesContext.getAttributes().get(PrimeFacesFileUpload.AJAX_FILE_UPLOAD) != null) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 

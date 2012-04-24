@@ -15,6 +15,7 @@ package com.liferay.faces.bridge.renderkit.html_basic;
 
 import java.io.Writer;
 
+import javax.faces.component.UIForm;
 import javax.faces.component.UIOutput;
 import javax.faces.component.UIPanel;
 import javax.faces.context.ResponseWriter;
@@ -37,6 +38,7 @@ import com.liferay.faces.bridge.renderkit.primefaces.PrimeFacesFileUploadRendere
 public class RenderKitBridgeImpl extends RenderKitWrapper {
 
 	// Private Constants
+	private static final String JAVAX_FACES_FORM = "javax.faces.Form";
 	private static final String JAVAX_FACES_HEAD = "javax.faces.Head";
 	private static final String JAVAX_FACES_OUTPUT = UIOutput.COMPONENT_FAMILY;
 	private static final Object ICEFACES_HEAD_RENDERER = "org.icefaces.ace.renderkit.HeadRenderer";
@@ -83,6 +85,9 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 			else {
 				renderer = new HeadRendererBridgeImpl();
 			}
+		}
+		else if (UIForm.COMPONENT_FAMILY.equals(family) && JAVAX_FACES_FORM.equals(rendererType)) {
+			renderer = new FormRendererBridgeImpl(renderer);
 		}
 		else if (UIPanel.COMPONENT_FAMILY.equals(family) && DataPaginator.RENDERER_TYPE.equals(rendererType)) {
 
