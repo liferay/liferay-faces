@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.demos.list;
 
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
+
 /**
  * @author  Neil Griffin
  */
@@ -26,7 +28,7 @@ public class SearchCriteria {
 	private String lastName;
 	private String middleName;
 	private String screenName;
-	private String status;
+	private String status = Integer.toString(WorkflowConstants.STATUS_ANY);
 
 	protected String formatExpression(String value) {
 
