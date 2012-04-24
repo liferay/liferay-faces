@@ -13,8 +13,9 @@
  */
 package com.liferay.faces.bridge.context.map;
 
-import javax.portlet.ActionRequest;
+import javax.portlet.ClientDataRequest;
 import javax.portlet.faces.Bridge;
+import javax.portlet.faces.Bridge.PortletPhase;
 
 import com.liferay.faces.bridge.context.BridgeContext;
 
@@ -33,13 +34,16 @@ public class RequestParameterMapFactory {
 
 	public RequestParameterMapFactory(BridgeContext bridgeContext) {
 
-		if (bridgeContext.getPortletRequestPhase() == Bridge.PortletPhase.ACTION_PHASE) {
-			ActionRequest actionRequest = (ActionRequest) bridgeContext.getPortletRequest();
-			String contentType = actionRequest.getContentType();
+		PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
+
+		if ((portletRequestPhase == Bridge.PortletPhase.ACTION_PHASE) ||
+				(portletRequestPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
+			ClientDataRequest clientDataRequest = (ClientDataRequest) bridgeContext.getPortletRequest();
+			String contentType = clientDataRequest.getContentType();
 
 			if ((contentType != null) && contentType.toLowerCase().startsWith(MULTIPART_CONTENT_TYPE_PREFIX)) {
 				RequestParameterMapMultiPartImpl requestParameterMapMultiPartImpl =
-					new RequestParameterMapMultiPartImpl(bridgeContext, actionRequest);
+					new RequestParameterMapMultiPartImpl(bridgeContext, clientDataRequest);
 				requestParameterMap = requestParameterMapMultiPartImpl;
 				requestParameterValuesMap = new RequestParameterValuesMapMultiPartImpl(
 						requestParameterMapMultiPartImpl);

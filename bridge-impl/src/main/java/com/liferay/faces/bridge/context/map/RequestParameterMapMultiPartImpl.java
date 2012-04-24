@@ -13,20 +13,33 @@
  */
 package com.liferay.faces.bridge.context.map;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
 import javax.faces.render.ResponseStateManager;
 import javax.portlet.ActionRequest;
+import javax.portlet.ClientDataRequest;
+import javax.portlet.PortalContext;
 import javax.portlet.PortletContext;
+import javax.portlet.PortletMode;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletSession;
+import javax.portlet.ResourceRequest;
+import javax.portlet.WindowState;
+import javax.servlet.http.Cookie;
 
 import org.apache.commons.fileupload.FileItemHeaders;
 import org.apache.commons.fileupload.disk.DiskFileItem;
@@ -61,11 +74,12 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 	private Map<String, String> requestParameterMap;
 	private Map<String, UploadedFile> requestParameterFileMap;
 
-	public RequestParameterMapMultiPartImpl(BridgeContext bridgeContext, ActionRequest actionRequest) {
+	@SuppressWarnings("unchecked")
+	public RequestParameterMapMultiPartImpl(BridgeContext bridgeContext, ClientDataRequest clientDataRequest) {
 
 		try {
 
-			PortletSession portletSession = actionRequest.getPortletSession();
+			PortletSession portletSession = clientDataRequest.getPortletSession();
 			PortletContext portletContext = portletSession.getPortletContext();
 
 			// Determine the uploaded files directory path according to the JSF 2.2 proposal:
@@ -158,7 +172,7 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 
 			// FACES-271: Include name+value pairs found in the ActionRequest.
 			PortletContainer portletContainer = bridgeContext.getPortletContainer();
-			Set<Map.Entry<String, String[]>> actionRequestParameterSet = actionRequest.getParameterMap().entrySet();
+			Set<Map.Entry<String, String[]>> actionRequestParameterSet = clientDataRequest.getParameterMap().entrySet();
 
 			for (Map.Entry<String, String[]> mapEntry : actionRequestParameterSet) {
 
@@ -172,8 +186,16 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 				}
 			}
 
-			@SuppressWarnings("unchecked")
-			List<DiskFileItem> diskFileItems = portletFileUpload.parseRequest(actionRequest);
+			List<DiskFileItem> diskFileItems = null;
+
+			if (clientDataRequest instanceof ResourceRequest) {
+				ResourceRequest resourceRequest = (ResourceRequest) clientDataRequest;
+				diskFileItems = portletFileUpload.parseRequest(new ActionRequestAdapter(resourceRequest));
+			}
+			else {
+				ActionRequest actionRequest = (ActionRequest) clientDataRequest;
+				diskFileItems = portletFileUpload.parseRequest(actionRequest);
+			}
 
 			boolean foundAtLeastOneUploadedFile = false;
 
@@ -227,14 +249,12 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 							FileItemHeaders fileItemHeaders = diskFileItem.getHeaders();
 
 							if (fileItemHeaders != null) {
-								@SuppressWarnings("unchecked")
 								Iterator<String> headerNameItr = fileItemHeaders.getHeaderNames();
 
 								if (headerNameItr != null) {
 
 									while (headerNameItr.hasNext()) {
 										String headerName = headerNameItr.next();
-										@SuppressWarnings("unchecked")
 										Iterator<String> headerValuesItr = fileItemHeaders.getHeaders(headerName);
 										List<String> headerValues = new ArrayList<String>();
 
@@ -267,7 +287,7 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 					}
 				}
 
-				actionRequest.setAttribute(PARAM_UPLOADED_FILES, requestParameterFileMap);
+				clientDataRequest.setAttribute(PARAM_UPLOADED_FILES, requestParameterFileMap);
 			}
 
 			if (!foundAtLeastOneUploadedFile) {
@@ -337,4 +357,198 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 		return Collections.enumeration(requestParameterMap.keySet());
 	}
 
+	/**
+	 * Since {@link PortletFileUpload#parseRequest(ActionRequest)} only works with {@link ActionRequest}, this adapter
+	 * class is necessary to force commons-fileupload to work with ResourceRequest (Ajax file upload).
+	 *
+	 * @author  Neil Griffin
+	 */
+	protected class ActionRequestAdapter implements ActionRequest {
+
+		private ResourceRequest resourceRequest;
+
+		public ActionRequestAdapter(ResourceRequest resourceRequest) {
+			this.resourceRequest = resourceRequest;
+		}
+
+		public void removeAttribute(String name) {
+			resourceRequest.removeAttribute(name);
+		}
+
+		public Object getAttribute(String name) {
+			return resourceRequest.getAttribute(name);
+		}
+
+		public void setAttribute(String name, Object value) {
+			resourceRequest.setAttribute(name, value);
+		}
+
+		public Enumeration<String> getAttributeNames() {
+			return resourceRequest.getAttributeNames();
+		}
+
+		public String getAuthType() {
+			return resourceRequest.getAuthType();
+		}
+
+		public String getCharacterEncoding() {
+			return resourceRequest.getCharacterEncoding();
+		}
+
+		public void setCharacterEncoding(String enc) throws UnsupportedEncodingException {
+			resourceRequest.setCharacterEncoding(enc);
+		}
+
+		public int getContentLength() {
+			return resourceRequest.getContentLength();
+		}
+
+		public String getContentType() {
+			return resourceRequest.getContentType();
+		}
+
+		public String getContextPath() {
+			return resourceRequest.getContextPath();
+		}
+
+		public Cookie[] getCookies() {
+			return resourceRequest.getCookies();
+		}
+
+		public boolean isPortletModeAllowed(PortletMode mode) {
+			return resourceRequest.isPortletModeAllowed(mode);
+		}
+
+		public boolean isRequestedSessionIdValid() {
+			return resourceRequest.isRequestedSessionIdValid();
+		}
+
+		public boolean isWindowStateAllowed(WindowState state) {
+			return resourceRequest.isWindowStateAllowed(state);
+		}
+
+		public boolean isSecure() {
+			return resourceRequest.isSecure();
+		}
+
+		public boolean isUserInRole(String role) {
+			return resourceRequest.isUserInRole(role);
+		}
+
+		public Locale getLocale() {
+			return resourceRequest.getLocale();
+		}
+
+		public Enumeration<Locale> getLocales() {
+			return resourceRequest.getLocales();
+		}
+
+		public String getMethod() {
+			return resourceRequest.getMethod();
+		}
+
+		public String getParameter(String name) {
+			return resourceRequest.getParameter(name);
+		}
+
+		public Map<String, String[]> getParameterMap() {
+			return resourceRequest.getParameterMap();
+		}
+
+		public Enumeration<String> getParameterNames() {
+			return resourceRequest.getParameterNames();
+		}
+
+		public String[] getParameterValues(String name) {
+			return resourceRequest.getParameterValues(name);
+		}
+
+		public PortalContext getPortalContext() {
+			return resourceRequest.getPortalContext();
+		}
+
+		public InputStream getPortletInputStream() throws IOException {
+			return resourceRequest.getPortletInputStream();
+		}
+
+		public PortletMode getPortletMode() {
+			return resourceRequest.getPortletMode();
+		}
+
+		public PortletSession getPortletSession() {
+			return resourceRequest.getPortletSession();
+		}
+
+		public PortletSession getPortletSession(boolean create) {
+			return resourceRequest.getPortletSession();
+		}
+
+		public PortletPreferences getPreferences() {
+			return resourceRequest.getPreferences();
+		}
+
+		public Map<String, String[]> getPrivateParameterMap() {
+			return resourceRequest.getPrivateParameterMap();
+		}
+
+		public Enumeration<String> getProperties(String name) {
+			return resourceRequest.getProperties(name);
+		}
+
+		public String getProperty(String name) {
+			return resourceRequest.getProperty(name);
+		}
+
+		public Enumeration<String> getPropertyNames() {
+			return resourceRequest.getPropertyNames();
+		}
+
+		public Map<String, String[]> getPublicParameterMap() {
+			return resourceRequest.getPublicParameterMap();
+		}
+
+		public BufferedReader getReader() throws UnsupportedEncodingException, IOException {
+			return resourceRequest.getReader();
+		}
+
+		public String getRemoteUser() {
+			return resourceRequest.getRemoteUser();
+		}
+
+		public String getRequestedSessionId() {
+			return resourceRequest.getRequestedSessionId();
+		}
+
+		public String getResponseContentType() {
+			return resourceRequest.getResponseContentType();
+		}
+
+		public Enumeration<String> getResponseContentTypes() {
+			return resourceRequest.getResponseContentTypes();
+		}
+
+		public String getScheme() {
+			return resourceRequest.getScheme();
+		}
+
+		public String getServerName() {
+			return resourceRequest.getServerName();
+		}
+
+		public int getServerPort() {
+			return resourceRequest.getServerPort();
+		}
+
+		public Principal getUserPrincipal() {
+			return resourceRequest.getUserPrincipal();
+		}
+
+		public String getWindowID() {
+			return resourceRequest.getWindowID();
+		}
+
+		public WindowState getWindowState() {
+			return resourceRequest.getWindowState();
+		}
+	}
 }
