@@ -48,6 +48,8 @@ import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
  */
 public interface BridgeContext {
 
+	String getResponseNamespace();
+
 	/**
 	 * Creates a {@link PortletRequestDispatcher} for the specified <code>path</code> and issues a forward/include as
 	 * appropriate.

@@ -17,6 +17,8 @@ import javax.portlet.PortletMode;
 import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
 
+import com.liferay.faces.bridge.BridgeConstants;
+
 
 /**
  * @author  Neil Griffin
@@ -51,8 +53,8 @@ public class LiferayResourceURL extends LiferayBaseURL implements ResourceURL {
 			if (resourceId != null) {
 				appendParameterToURL(firstParameter, LiferayConstants.P_P_RESOURCE_ID, resourceId, url);
 			}
-			else if (superToString.startsWith(LiferayConstants.WSRP)) {
-				appendParameterToURL(firstParameter, LiferayConstants.P_P_RESOURCE_ID, LiferayConstants.WSRP, url);
+			else if (superToString.startsWith(BridgeConstants.WSRP)) {
+				appendParameterToURL(firstParameter, LiferayConstants.P_P_RESOURCE_ID, BridgeConstants.WSRP, url);
 			}
 
 			if ((liferayBuildNumber >= 5200) && (liferayBuildNumber < 6000)) {

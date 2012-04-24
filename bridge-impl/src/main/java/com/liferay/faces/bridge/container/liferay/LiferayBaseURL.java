@@ -104,7 +104,7 @@ public abstract class LiferayBaseURL implements BaseURL {
 
 			// Add request parameters from the request parameter map.
 			String namespace = responseNamespace;
-			if (namespace.startsWith(LiferayConstants.WSRP)) {
+			if (namespace.startsWith(BridgeConstants.WSRP)) {
 				namespace = BridgeConstants.EMPTY;
 			}
 			boolean firstParameter = true;

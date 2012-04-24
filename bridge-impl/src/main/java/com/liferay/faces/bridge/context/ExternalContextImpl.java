@@ -86,7 +86,6 @@ public class ExternalContextImpl extends ExternalContext {
 	private static final String COOKIE_PROPERTY_MAX_AGE = "maxAge";
 	private static final String COOKIE_PROPERTY_PATH = "path";
 	private static final String COOKIE_PROPERTY_SECURE = "secure";
-	private static final String NON_NUMERIC_NAMESPACE_PREFIX = "A";
 
 	// Private Data Members
 	private PortletContext portletContext;
@@ -103,7 +102,6 @@ public class ExternalContextImpl extends ExternalContext {
 	private Map<String, Object> requestAttributeMap;
 	private String requestContextPath;
 	private Iterator<Locale> requestLocales;
-	private String responseNamespace;
 	private Map<String, Object> sessionMap;
 
 	// Lazily-initialized objects
@@ -254,7 +252,7 @@ public class ExternalContextImpl extends ExternalContext {
 	 */
 	@Override
 	public String encodeNamespace(String name) {
-		return responseNamespace + name;
+		return bridgeContext.getResponseNamespace() + name;
 	}
 
 	/**
@@ -426,65 +424,6 @@ public class ExternalContextImpl extends ExternalContext {
 		if (portletResponse instanceof MimeResponse) {
 			MimeResponse mimeResponse = (MimeResponse) portletResponse;
 			responseContentType = mimeResponse.getContentType();
-		}
-
-		// If the namespace should be optimized (minimized), then perform the optimization.
-		String optimizePortletNamespaceInitParam = getInitParameter(
-				BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE1);
-
-		if (optimizePortletNamespaceInitParam == null) {
-
-			// Backward compatibility
-			optimizePortletNamespaceInitParam = getInitParameter(
-					BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE2);
-		}
-
-		// Initialize the response namespace.
-		responseNamespace = portletResponse.getNamespace();
-
-		boolean optimizePortletNamespace = BooleanHelper.toBoolean(optimizePortletNamespaceInitParam, true);
-		boolean addedNamespacePrefix = false;
-
-		if (optimizePortletNamespace) {
-
-			// Since the namespace is going to appear in every single clientId and name attribute of the rendered
-			// view, this needs to be shortened as much as possible -- four characters should be enough to keep the
-			// namespace unique.
-			int hashCode = responseNamespace.hashCode();
-
-			if (hashCode < 0) {
-				hashCode = hashCode * -1;
-			}
-
-			String namespaceHashCode = Integer.toString(hashCode);
-			int namespaceHashCodeLength = namespaceHashCode.length();
-
-			if (namespaceHashCodeLength > 4) {
-
-				// FACES-67: Taking the last four characters is more likely to force uniqueness than the first four.
-				namespaceHashCode = namespaceHashCode.substring(namespaceHashCodeLength - 4);
-			}
-
-			if (namespaceHashCode.length() < responseNamespace.length()) {
-
-				// Note that unless we prepend the hash namespace with some non-numeric string, IE might encounter
-				// JavaScript problems with ICEfaces. http://issues.liferay.com/browse/FACES-12
-				responseNamespace = NON_NUMERIC_NAMESPACE_PREFIX + namespaceHashCode;
-				addedNamespacePrefix = true;
-			}
-		}
-
-		if (!addedNamespacePrefix) {
-
-			// TODO: This should be refactored to the PortletResponseAdapter#getNamespace() method and only done for
-			// Liferay.
-			//
-			// Note that unless we prepend the responseNamespace with some string, Liferay's
-			// PortletRequestImpl.init(HttpServletRequest, Portlet, InvokerPortlet, PortletContext, WindowState,
-			// PortletMode, PortletPreferences, long) method will remove the namespace that
-			// PortletNamingContainerUIViewRoot adds to request parameters. For more information refer to:
-			// http://issues.liferay.com/browse/LPS-3082 and http://issues.liferay.com/browse/LPS-3184
-			responseNamespace = NON_NUMERIC_NAMESPACE_PREFIX + responseNamespace;
 		}
 
 		// Restore the portletRequest and/or portletResponse in the BridgeContext if necessary.

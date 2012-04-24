@@ -96,8 +96,8 @@ public class BridgePhaseActionImpl extends BridgePhaseBaseImpl {
 			// Spec 6.6 (Namespacing)
 			indicateNamespacingToConsumers(facesContext.getViewRoot(), actionResponse);
 		}
-		catch (Exception e) {
-			throw new BridgeException(e);
+		catch (Throwable t) {
+			throw new BridgeException(t);
 		}
 		finally {
 

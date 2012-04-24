@@ -34,5 +34,7 @@ public class BridgeConstants {
 	public static final String CHAR_UNDERSCORE = "_";
 	public static final String EMPTY = "";
 	public static final String UTF8 = "UTF-8";
+	public static final String WSRP = "wsrp";
+	public static final String WSRP_REWRITE = "wsrp_rewrite";
 
 }

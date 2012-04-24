@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.container;
 
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -39,29 +40,29 @@ public class PortletContainerFactoryImpl extends PortletContainerFactory {
 	 * @see  {@link PortletContainerFactory#getPortletContainer(BridgeContext)}
 	 */
 	@Override
-	public PortletContainer getPortletContainer(PortletContext portletContext, PortletRequest portletRequest,
-		PortletResponse portletResponse, Bridge.PortletPhase portletPhase) {
+	public PortletContainer getPortletContainer(PortletConfig portletConfig, PortletContext portletContext,
+		PortletRequest portletRequest, PortletResponse portletResponse, Bridge.PortletPhase portletPhase) {
 
 		PortletContainer portletContainer = null;
 
 		if (wrappedFactory != null) {
-			portletContainer = wrappedFactory.getPortletContainer(portletContext, portletRequest, portletResponse,
-					portletPhase);
+			portletContainer = wrappedFactory.getPortletContainer(portletConfig, portletContext, portletRequest,
+					portletResponse, portletPhase);
 		}
 
 		if (portletContainer == null) {
 
 			if (PortletContainerDetector.isLiferayObject(portletRequest)) {
-				portletContainer = new PortletContainerLiferayImpl(portletContext, portletRequest, portletResponse,
-						portletPhase, portletResponse.getNamespace());
+				portletContainer = new PortletContainerLiferayImpl(portletConfig, portletContext, portletRequest,
+						portletResponse, portletPhase);
 			}
 			else if (PortletContainerDetector.isPlutoObject(portletRequest)) {
-				portletContainer = new PortletContainerPlutoImpl(portletRequest, portletResponse, portletPhase,
-						portletResponse.getNamespace());
+				portletContainer = new PortletContainerPlutoImpl(portletConfig, portletContext, portletRequest,
+						portletResponse, portletPhase);
 			}
 			else {
-				portletContainer = new PortletContainerImpl(portletRequest, portletResponse, portletPhase,
-						portletResponse.getNamespace());
+				portletContainer = new PortletContainerImpl(portletConfig, portletContext, portletRequest,
+						portletResponse, portletPhase);
 			}
 		}
 

@@ -29,6 +29,8 @@ import javax.portlet.ActionResponse;
 import javax.portlet.BaseURL;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortalContext;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
@@ -36,6 +38,7 @@ import javax.portlet.ResourceResponse;
 import javax.portlet.ResourceURL;
 import javax.portlet.faces.Bridge;
 
+import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.application.ResourceHandlerImpl;
 import com.liferay.faces.bridge.config.BridgeConfig;
@@ -70,19 +73,24 @@ public class PortletContainerImpl implements PortletContainer {
 	private boolean markupHeadElementSupported;
 	private PortletRequest portletRequest;
 	private Bridge.PortletPhase portletRequestPhase;
-	private PortletResponse portletResponse;
 	private Map<String, PortletURL> renderURLCache;
 	private String requestQueryString;
 	private String requestURL;
 	private String responseNamespace;
 	private Map<String, ResourceURL> resourceURLCache;
+	
+	// Protected Data Members
+	protected PortletConfig portletConfig;
+	protected PortletContext portletContext;
+	protected PortletResponse portletResponse;
 
-	public PortletContainerImpl(PortletRequest portletRequest, PortletResponse portletResponse,
-		Bridge.PortletPhase portletRequestPhase, String responseNamespace) {
+	public PortletContainerImpl(PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest, PortletResponse portletResponse,
+		Bridge.PortletPhase portletRequestPhase) {
+		this.portletConfig = portletConfig;
+		this.portletContext = portletContext;
 		this.portletRequest = portletRequest;
 		this.portletResponse = portletResponse;
 		this.portletRequestPhase = portletRequestPhase;
-		this.responseNamespace = responseNamespace;
 
 		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
 				BridgeConfigFactory.class);
@@ -524,12 +532,14 @@ public class PortletContainerImpl implements PortletContainer {
 			// Note that this is an approximation (best guess) of the original URL.
 			StringBuilder buf = new StringBuilder();
 			buf.append(portletRequest.getScheme());
-			buf.append("://");
+			buf.append(BridgeConstants.CHAR_COLON);
+			buf.append(BridgeConstants.CHAR_FORWARD_SLASH);
+			buf.append(BridgeConstants.CHAR_FORWARD_SLASH);
 			buf.append(portletRequest.getServerName());
-			buf.append(":");
+			buf.append(BridgeConstants.CHAR_COLON);
 			buf.append(portletRequest.getServerPort());
 			buf.append(portletRequest.getContextPath());
-			buf.append("?");
+			buf.append(BridgeConstants.CHAR_QUESTION_MARK);
 			buf.append(getRequestQueryString());
 			requestURL = buf.toString();
 		}
@@ -537,7 +547,17 @@ public class PortletContainerImpl implements PortletContainer {
 		return requestURL;
 	}
 
-	protected String getResponseNamespace() {
+	public String getResponseNamespace() {
+		
+		if (responseNamespace == null) {
+
+			responseNamespace = portletResponse.getNamespace();
+
+			if (BridgeConstants.WSRP_REWRITE.equals(responseNamespace)) {
+				responseNamespace = portletConfig.getPortletName() + portletContext.getPortletContextName();
+			}
+		}
+
 		return responseNamespace;
 	}
 

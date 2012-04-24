@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.container;
 
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -37,6 +38,6 @@ public abstract class PortletContainerFactory implements FactoryWrapper<PortletC
 	 * Gets an instance of PortletContainer according to the type of portlet container (Liferay, etc.) that created in
 	 * the specified portletRequest.
 	 */
-	public abstract PortletContainer getPortletContainer(PortletContext portletContext, PortletRequest portletRequest,
-		PortletResponse portletResponse, Bridge.PortletPhase portletPhase);
+	public abstract PortletContainer getPortletContainer(PortletConfig portletConfig, PortletContext portletContext,
+		PortletRequest portletRequest, PortletResponse portletResponse, Bridge.PortletPhase portletPhase);
 }

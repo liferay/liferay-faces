@@ -25,6 +25,7 @@ import javax.faces.context.ResponseWriter;
 import javax.portlet.ActionResponse;
 import javax.portlet.BaseURL;
 import javax.portlet.MimeResponse;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -35,6 +36,7 @@ import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
 import javax.portlet.faces.Bridge;
 
+import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.application.ResourceHandlerImpl;
 import com.liferay.faces.bridge.container.PortletContainerImpl;
 import com.liferay.faces.bridge.helper.BooleanHelper;
@@ -73,27 +75,30 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 	private ParsedPortletURL parsedLiferayActionURL;
 	private ParsedPortletURL parsedLiferayRenderURL;
 	private ParsedBaseURL parsedLiferayResourceURL;
+	private String portletResponseNamespace;
 	private String requestURL;
+	private String responseNamespace;
 
-	public PortletContainerLiferayImpl(PortletContext portletContext, PortletRequest portletRequest,
-		PortletResponse portletResponse, Bridge.PortletPhase portletRequestPhase, String responseNamespace) {
+	public PortletContainerLiferayImpl(PortletConfig portletConfig, PortletContext portletContext,
+		PortletRequest portletRequest, PortletResponse portletResponse, Bridge.PortletPhase portletRequestPhase) {
 
 		// Initialize the superclass.
-		super(portletRequest, portletResponse, portletRequestPhase, responseNamespace);
+		super(portletConfig, portletContext, portletRequest, portletResponse, portletRequestPhase);
 
 		try {
 
 			// Initialize the private data members.
+			this.portletResponseNamespace = portletResponse.getNamespace();
 			LiferayPortletRequest liferayPortletRequest = new LiferayPortletRequest(portletRequest);
 			LiferayThemeDisplay liferayThemeDisplay = liferayPortletRequest.getLiferayThemeDisplay();
 			this.liferayPortletRequest = liferayPortletRequest;
 
 			// Initialize the pseudo-constants.
-			NAMESPACED_P_P_COL_ID = responseNamespace + LiferayConstants.P_P_COL_ID;
-			NAMESPACED_P_P_COL_POS = responseNamespace + LiferayConstants.P_P_COL_POS;
-			NAMESPACED_P_P_COL_COUNT = responseNamespace + LiferayConstants.P_P_COL_COUNT;
-			NAMESPACED_P_P_MODE = responseNamespace + LiferayConstants.P_P_MODE;
-			NAMESPACED_P_P_STATE = responseNamespace + LiferayConstants.P_P_STATE;
+			NAMESPACED_P_P_COL_ID = portletResponseNamespace + LiferayConstants.P_P_COL_ID;
+			NAMESPACED_P_P_COL_POS = portletResponseNamespace + LiferayConstants.P_P_COL_POS;
+			NAMESPACED_P_P_COL_COUNT = portletResponseNamespace + LiferayConstants.P_P_COL_COUNT;
+			NAMESPACED_P_P_MODE = portletResponseNamespace + LiferayConstants.P_P_MODE;
+			NAMESPACED_P_P_STATE = portletResponseNamespace + LiferayConstants.P_P_STATE;
 
 			// Save the render attributes.
 			if (portletRequest instanceof RenderRequest) {
@@ -136,7 +141,7 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 
 				// If this portlet is running via WSRP, then it is not possible to add resources to the head section
 				// because Liferay doesn't support that feature with WSRP.
-				if (BooleanHelper.isTrueToken(portletRequest.getParameter(LiferayConstants.WSRP))) {
+				if (BooleanHelper.isTrueToken(portletRequest.getParameter(BridgeConstants.WSRP))) {
 					this.ableToAddScriptResourceToHead = false;
 					this.ableToAddScriptTextToHead = false;
 					this.ableToAddStyleSheetResourceToHead = false;
@@ -253,17 +258,17 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 
 	@Override
 	protected PortletURL createActionURL(MimeResponse mimeResponse) {
-		return new LiferayActionURL(getParsedLiferayActionURL(mimeResponse), getResponseNamespace());
+		return new LiferayActionURL(getParsedLiferayActionURL(mimeResponse), portletResponseNamespace);
 	}
 
 	@Override
 	protected PortletURL createRenderURL(MimeResponse mimeResponse) {
-		return new LiferayRenderURL(getParsedLiferayRenderURL(mimeResponse), getResponseNamespace());
+		return new LiferayRenderURL(getParsedLiferayRenderURL(mimeResponse), portletResponseNamespace);
 	}
 
 	@Override
 	protected ResourceURL createResourceURL(MimeResponse mimeResponse) {
-		return new LiferayResourceURL(getParsedLiferayResourceURL(mimeResponse), getResponseNamespace());
+		return new LiferayResourceURL(getParsedLiferayResourceURL(mimeResponse), portletResponseNamespace);
 	}
 
 	/**
@@ -423,6 +428,35 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 		}
 
 		return requestURL;
+	}
+
+	@Override
+	public String getResponseNamespace() {
+
+		if (responseNamespace == null) {
+
+			responseNamespace = portletResponse.getNamespace();
+
+			if (responseNamespace.startsWith(BridgeConstants.WSRP_REWRITE)) {
+				StringBuilder buf = new StringBuilder();
+				buf.append(portletConfig.getPortletName());
+				buf.append(LiferayConstants.WAR_SEPARATOR);
+				buf.append(portletContext.getPortletContextName());
+
+				LiferayThemeDisplay liferayThemeDisplay = liferayPortletRequest.getLiferayThemeDisplay();
+				LiferayPortletDisplay liferayPortletDisplay = liferayThemeDisplay.getLiferayPortletDisplay();
+				String instanceId = liferayPortletDisplay.getInstanceId();
+
+				if (instanceId != null) {
+					buf.append(LiferayConstants.INSTANCE_SEPARATOR);
+					buf.append(instanceId);
+				}
+
+				responseNamespace = buf.toString();
+			}
+		}
+
+		return responseNamespace;
 	}
 
 }

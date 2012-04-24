@@ -69,7 +69,7 @@ public class ParsedBaseURL {
 					}
 				}
 
-				if (nameValuePair.startsWith(LiferayConstants.WSRP)) {
+				if (nameValuePair.startsWith(BridgeConstants.WSRP)) {
 					int equalsPos = nameValuePair.indexOf(BridgeConstants.CHAR_EQUALS);
 
 					if (equalsPos > 0) {

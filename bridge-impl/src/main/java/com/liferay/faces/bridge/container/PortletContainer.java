@@ -44,6 +44,11 @@ public interface PortletContainer {
 	public PortletURL createActionURL(String fromURL) throws MalformedURLException;
 
 	/**
+	 * Returns the response namespace.
+	 */
+	public String getResponseNamespace();
+	
+	/**
 	 * Creates a portlet resource URL that is suitable for partial requests (Ajax).
 	 *
 	 * @param   fromURL  The URL to copy from.
