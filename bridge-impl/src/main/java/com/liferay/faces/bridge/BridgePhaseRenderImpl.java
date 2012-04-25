@@ -85,8 +85,8 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 			catch (BridgeException e) {
 				throw e;
 			}
-			catch (Exception e) {
-				throw new BridgeException(e);
+			catch (Throwable t) {
+				throw new BridgeException(t);
 			}
 			finally {
 

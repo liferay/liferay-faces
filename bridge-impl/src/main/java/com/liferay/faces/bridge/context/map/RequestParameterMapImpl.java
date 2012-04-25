@@ -71,7 +71,19 @@ public class RequestParameterMapImpl extends RequestParameterMap {
 
 			// Determine whether or not the key is present in the parameter-map within the PortletRequest. This should
 			// be a quick lookup (minimal performance impact).
-			found = portletRequest.getParameterMap().containsKey(key);
+			Map<String, String[]> parameterMap = portletRequest.getParameterMap();
+			found = parameterMap.containsKey(key);
+
+			if (!found) {
+
+				// NOTE: If the parameterMap.containsKey(String) method call returned true, then trust that fact and let
+				// this method return true as well. Otherwise, don't trust it! This might be a Liferay WSRP producer
+				// portlet in which NamespaceServletRequest.getParameterMap().containsKey(String) erroneously returns
+				// false. Just in case, try again by seeing if the parameter has a value. If it does, then let this
+				// method return true.
+				String value = portletRequest.getParameter((String) key);
+				found = ((value != null) && (value.length() > 0));
+			}
 
 			// If the key was not present in the quick lookup, then
 			if (!found) {
@@ -94,6 +106,9 @@ public class RequestParameterMapImpl extends RequestParameterMap {
 								found = true;
 							}
 						}
+					}
+					else {
+						found = true;
 					}
 				}
 

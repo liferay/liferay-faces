@@ -5,11 +5,13 @@
 	<portlet>
 		<portlet-name>customersPortlet</portlet-name>
 		<instanceable>false</instanceable>
+		<remoteable>true</remoteable>
 		<ajaxable>false</ajaxable>
 	</portlet>
 	<portlet>
 		<portlet-name>bookingsPortlet</portlet-name>
 		<instanceable>false</instanceable>
+		<remoteable>true</remoteable>
 		<ajaxable>false</ajaxable>
 	</portlet>
 </liferay-portlet-app>

@@ -160,29 +160,35 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 					// Parse the name and value from the name=value pair.
 					String[] nameValueArray = queryParameter.split("[=]");
 
-					// If the name and value were valid, then
-					if (nameValueArray.length == 2) {
-						String name = nameValueArray[0];
+					String name = null;
+					String[] values = null;
+
+					if (nameValueArray.length == 1) {
+						name = nameValueArray[0];
+						values = new String[] { BridgeConstants.EMPTY };
+					}
+					else if (nameValueArray.length == 2) {
+						name = nameValueArray[0];
 
 						// If the parameter name is present in the parameter map, then that means it should be appended
 						// to the return value. Otherwise, it should not be appended, because absence from the parameter
 						// map means that it was deliberately removed.
-						String[] values = parameterMap.get(name);
+						values = parameterMap.get(name);
+					}
 
-						if ((values != null) && (values.length > 0)) {
+					if ((name != null) && (values != null) && (values.length > 0)) {
 
-							if (firstParam) {
-								firstParam = false;
-							}
-							else {
-								buf.append(BridgeConstants.CHAR_AMPERSAND);
-							}
-
-							buf.append(name);
-							buf.append(BridgeConstants.CHAR_EQUALS);
-							buf.append(values[0]);
-							processedParameterNames.add(name);
+						if (firstParam) {
+							firstParam = false;
 						}
+						else {
+							buf.append(BridgeConstants.CHAR_AMPERSAND);
+						}
+
+						buf.append(name);
+						buf.append(BridgeConstants.CHAR_EQUALS);
+						buf.append(values[0]);
+						processedParameterNames.add(name);
 					}
 
 					// Otherwise, log an error.

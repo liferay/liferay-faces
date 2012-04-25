@@ -23,8 +23,8 @@ import com.liferay.faces.bridge.logging.LoggerFactory;
 
 
 /**
- * Wrapper around the org.primefaces.component.fileupload.FileUploadRenderer which has Servlet-API dependencies with
- * Apache Commons-FileUpload.
+ * This is a wrapper around the org.primefaces.component.fileupload.FileUpload component that has decorator methods that
+ * call the wrapped component via reflection in order to avoid a compile-time dependency.
  *
  * @author  Neil Griffin
  */
@@ -34,6 +34,7 @@ public class PrimeFacesFileUpload extends UIInputWrapper {
 	private static final Logger logger = LoggerFactory.getLogger(PrimeFacesFileUpload.class);
 
 	// Public Constants
+	public static final String AJAX_FILE_UPLOAD = "ajax.file.upload";
 	public static final String MODE_SIMPLE = "simple";
 	public static final String RENDERER_TYPE = "org.primefaces.component.FileUploadRenderer";
 

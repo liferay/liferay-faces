@@ -50,6 +50,7 @@ import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentRequest;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentResponse;
 import com.liferay.faces.bridge.application.view.BridgeWriteBehindResponseFactory;
+import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
@@ -60,9 +61,6 @@ import com.liferay.faces.bridge.context.map.ApplicationMap;
 import com.liferay.faces.bridge.context.map.InitParameterMap;
 import com.liferay.faces.bridge.context.map.RequestAttributeMap;
 import com.liferay.faces.bridge.context.map.RequestCookieMap;
-import com.liferay.faces.bridge.context.map.RequestHeaderMap;
-import com.liferay.faces.bridge.context.map.RequestHeaderValuesMap;
-import com.liferay.faces.bridge.context.map.RequestParameterMapFactory;
 import com.liferay.faces.bridge.context.map.SessionMap;
 import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.lifecycle.CongruousTask;
@@ -89,7 +87,6 @@ public class ExternalContextImpl extends ExternalContext {
 	private static final String COOKIE_PROPERTY_MAX_AGE = "maxAge";
 	private static final String COOKIE_PROPERTY_PATH = "path";
 	private static final String COOKIE_PROPERTY_SECURE = "secure";
-	private static final String NON_NUMERIC_NAMESPACE_PREFIX = "A";
 
 	// Private Data Members
 	private PortletContext portletContext;
@@ -105,11 +102,7 @@ public class ExternalContextImpl extends ExternalContext {
 	private Bridge.PortletPhase portletPhase;
 	private Map<String, Object> requestAttributeMap;
 	private String requestContextPath;
-	private Map<String, String> requestHeaderMap;
-	private Map<String, String[]> requestHeaderValuesMap;
 	private Iterator<Locale> requestLocales;
-	private Map<String, String> requestParameterMap;
-	private String responseNamespace;
 	private Map<String, Object> sessionMap;
 
 	// Lazily-initialized objects
@@ -120,7 +113,6 @@ public class ExternalContextImpl extends ExternalContext {
 	private String portletContextName;
 	private String remoteUser;
 	private Map<String, Object> requestCookieMap;
-	private Map<String, String[]> requestParameterValuesMap;
 	private Locale requestLocale;
 	private String responseContentType;
 	private Principal userPrincipal;
@@ -185,7 +177,13 @@ public class ExternalContextImpl extends ExternalContext {
 
 	@Override
 	public String encodeActionURL(String url) {
-		return bridgeContext.encodeActionURL(url).toString();
+
+		if (isEncodingFormWithPrimeFacesAjaxFileUpload()) {
+			return encodePartialActionURL(url);
+		}
+		else {
+			return bridgeContext.encodeActionURL(url).toString();
+		}
 	}
 
 	@Override
@@ -261,7 +259,7 @@ public class ExternalContextImpl extends ExternalContext {
 	 */
 	@Override
 	public String encodeNamespace(String name) {
-		return responseNamespace + name;
+		return bridgeContext.getResponseNamespace() + name;
 	}
 
 	/**
@@ -429,81 +427,10 @@ public class ExternalContextImpl extends ExternalContext {
 		// Initialize the request locales.
 		requestLocales = new LocaleIterator(portletRequest.getLocales());
 
-		// Initialize the request parameter maps.
-		RequestParameterMapFactory requestParameterMapFactory = new RequestParameterMapFactory(bridgeContext);
-		requestParameterMap = requestParameterMapFactory.getRequestParameterMap();
-		requestParameterValuesMap = requestParameterMapFactory.getRequestParameterValuesMap();
-
-		// Initialize the request header values map.
-		requestHeaderValuesMap = Collections.unmodifiableMap(new RequestHeaderValuesMap(portletRequest,
-					requestParameterMap));
-
-		// Initialize the request header map.
-		requestHeaderMap = Collections.unmodifiableMap(new RequestHeaderMap(requestHeaderValuesMap));
-
 		// Initialize the response content type.
 		if (portletResponse instanceof MimeResponse) {
 			MimeResponse mimeResponse = (MimeResponse) portletResponse;
 			responseContentType = mimeResponse.getContentType();
-		}
-
-		// If the namespace should be optimized (minimized), then perform the optimization.
-		String optimizePortletNamespaceInitParam = getInitParameter(
-				BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE1);
-
-		if (optimizePortletNamespaceInitParam == null) {
-
-			// Backward compatibility
-			optimizePortletNamespaceInitParam = getInitParameter(
-					BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE2);
-		}
-
-		// Initialize the response namespace.
-		responseNamespace = portletResponse.getNamespace();
-
-		boolean optimizePortletNamespace = BooleanHelper.toBoolean(optimizePortletNamespaceInitParam, true);
-		boolean addedNamespacePrefix = false;
-
-		if (optimizePortletNamespace) {
-
-			// Since the namespace is going to appear in every single clientId and name attribute of the rendered
-			// view, this needs to be shortened as much as possible -- four characters should be enough to keep the
-			// namespace unique.
-			int hashCode = responseNamespace.hashCode();
-
-			if (hashCode < 0) {
-				hashCode = hashCode * -1;
-			}
-
-			String namespaceHashCode = Integer.toString(hashCode);
-			int namespaceHashCodeLength = namespaceHashCode.length();
-
-			if (namespaceHashCodeLength > 4) {
-
-				// FACES-67: Taking the last four characters is more likely to force uniqueness than the first four.
-				namespaceHashCode = namespaceHashCode.substring(namespaceHashCodeLength - 4);
-			}
-
-			if (namespaceHashCode.length() < responseNamespace.length()) {
-
-				// Note that unless we prepend the hash namespace with some non-numeric string, IE might encounter
-				// JavaScript problems with ICEfaces. http://issues.liferay.com/browse/FACES-12
-				responseNamespace = NON_NUMERIC_NAMESPACE_PREFIX + namespaceHashCode;
-				addedNamespacePrefix = true;
-			}
-		}
-
-		if (!addedNamespacePrefix) {
-
-			// TODO: This should be refactored to the PortletResponseAdapter#getNamespace() method and only done for
-			// Liferay.
-			//
-			// Note that unless we prepend the responseNamespace with some string, Liferay's
-			// PortletRequestImpl.init(HttpServletRequest, Portlet, InvokerPortlet, PortletContext, WindowState,
-			// PortletMode, PortletPreferences, long) method will remove the namespace that
-			// PortletNamingContainerUIViewRoot adds to request parameters. For more information refer to:
-			// http://issues.liferay.com/browse/LPS-3082 and http://issues.liferay.com/browse/LPS-3184
-			responseNamespace = NON_NUMERIC_NAMESPACE_PREFIX + responseNamespace;
 		}
 
 		// Restore the portletRequest and/or portletResponse in the BridgeContext if necessary.
@@ -566,6 +493,16 @@ public class ExternalContextImpl extends ExternalContext {
 		}
 		else {
 			return lifecycleIncongruityMap.isResponseCommitted();
+		}
+	}
+
+	protected boolean isEncodingFormWithPrimeFacesAjaxFileUpload() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		if (facesContext.getAttributes().get(PrimeFacesFileUpload.AJAX_FILE_UPLOAD) != null) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 
@@ -745,12 +682,12 @@ public class ExternalContextImpl extends ExternalContext {
 
 	@Override
 	public Map<String, String> getRequestHeaderMap() {
-		return requestHeaderMap;
+		return bridgeContext.getRequestHeaderMap();
 	}
 
 	@Override
 	public Map<String, String[]> getRequestHeaderValuesMap() {
-		return requestHeaderValuesMap;
+		return bridgeContext.getRequestHeaderValuesMap();
 	}
 
 	@Override
@@ -775,7 +712,7 @@ public class ExternalContextImpl extends ExternalContext {
 
 	@Override
 	public Map<String, String> getRequestParameterMap() {
-		return requestParameterMap;
+		return bridgeContext.getRequestParameterMap();
 	}
 
 	@Override
@@ -785,7 +722,7 @@ public class ExternalContextImpl extends ExternalContext {
 
 	@Override
 	public Map<String, String[]> getRequestParameterValuesMap() {
-		return requestParameterValuesMap;
+		return bridgeContext.getRequestParameterValuesMap();
 	}
 
 	/**

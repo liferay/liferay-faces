@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.container;
 
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -28,10 +29,6 @@ import com.liferay.faces.bridge.context.BridgeContext;
  */
 public class PortletContainerFactoryImpl extends PortletContainerFactory {
 
-	// Private Constants
-	private static final String OBJECT_NAME_PREFIX_LIFERAY = "com.liferay";
-	private static final String OBJECT_NAME_PREFIX_PLUTO = "org.apache.pluto";
-
 	// Private Data Members
 	private PortletContainerFactory wrappedFactory;
 
@@ -43,29 +40,29 @@ public class PortletContainerFactoryImpl extends PortletContainerFactory {
 	 * @see  {@link PortletContainerFactory#getPortletContainer(BridgeContext)}
 	 */
 	@Override
-	public PortletContainer getPortletContainer(PortletContext portletContext, PortletRequest portletRequest,
-		PortletResponse portletResponse, Bridge.PortletPhase portletPhase) {
+	public PortletContainer getPortletContainer(PortletConfig portletConfig, PortletContext portletContext,
+		PortletRequest portletRequest, PortletResponse portletResponse, Bridge.PortletPhase portletPhase) {
 
 		PortletContainer portletContainer = null;
 
 		if (wrappedFactory != null) {
-			portletContainer = wrappedFactory.getPortletContainer(portletContext, portletRequest, portletResponse,
-					portletPhase);
+			portletContainer = wrappedFactory.getPortletContainer(portletConfig, portletContext, portletRequest,
+					portletResponse, portletPhase);
 		}
 
 		if (portletContainer == null) {
 
-			if (isLiferayObject(portletRequest)) {
-				portletContainer = new PortletContainerLiferayImpl(portletContext, portletRequest, portletResponse,
-						portletPhase, portletResponse.getNamespace());
+			if (PortletContainerDetector.isLiferayObject(portletRequest)) {
+				portletContainer = new PortletContainerLiferayImpl(portletConfig, portletContext, portletRequest,
+						portletResponse, portletPhase);
 			}
-			else if (isPlutoObject(portletRequest)) {
-				portletContainer = new PortletContainerPlutoImpl(portletRequest, portletResponse, portletPhase,
-						portletResponse.getNamespace());
+			else if (PortletContainerDetector.isPlutoObject(portletRequest)) {
+				portletContainer = new PortletContainerPlutoImpl(portletConfig, portletContext, portletRequest,
+						portletResponse, portletPhase);
 			}
 			else {
-				portletContainer = new PortletContainerImpl(portletRequest, portletResponse, portletPhase,
-						portletResponse.getNamespace());
+				portletContainer = new PortletContainerImpl(portletConfig, portletContext, portletRequest,
+						portletResponse, portletPhase);
 			}
 		}
 
@@ -73,40 +70,6 @@ public class PortletContainerFactoryImpl extends PortletContainerFactory {
 		portletContainer.setPortletResponse(portletResponse);
 
 		return portletContainer;
-	}
-
-	/**
-	 * Determines whether or not the specified object is one created by Liferay Portal.
-	 *
-	 * @param   portletURL  The portletURL that may have been created by Liferay Portal.
-	 *
-	 * @return  true if the specified portletURL was created by Liferay Portal.
-	 */
-	protected boolean isLiferayObject(Object obj) {
-
-		if (obj != null) {
-			return obj.getClass().getName().startsWith(OBJECT_NAME_PREFIX_LIFERAY);
-		}
-		else {
-			return false;
-		}
-	}
-
-	/**
-	 * Determines whether or not the specified object is one created by Pluto.
-	 *
-	 * @param   portletURL  The portletURL that may have been created by Pluto.
-	 *
-	 * @return  true if the specified portletURL was created by Pluto.
-	 */
-	protected boolean isPlutoObject(Object obj) {
-
-		if (obj != null) {
-			return obj.getClass().getName().startsWith(OBJECT_NAME_PREFIX_PLUTO);
-		}
-		else {
-			return false;
-		}
 	}
 
 	public PortletContainerFactory getWrapped() {

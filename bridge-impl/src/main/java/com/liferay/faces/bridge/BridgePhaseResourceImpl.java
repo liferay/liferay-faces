@@ -68,7 +68,8 @@ public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 				// Ask the Faces resource handler to copy the contents of the resource to the response.
 				resourceHandler.handleResourceRequest(facesContext);
 			}
-			else if (resourceRequest.getResourceID() != null) {
+			else if ((resourceRequest.getResourceID() != null) &&
+					!resourceRequest.getResourceID().equals(BridgeConstants.WSRP)) {
 
 				logger.debug("Detected non-Faces resource");
 
@@ -85,7 +86,10 @@ public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 
 				if (logger.isDebugEnabled()) {
 
-					if (BooleanHelper.isTrueToken(resourceRequest.getParameter(BridgeExt.FACES_AJAX_PARAMETER))) {
+					String facesAjaxParameter = bridgeContext.getRequestParameterMap().get(
+							BridgeExt.FACES_AJAX_PARAMETER);
+
+					if (BooleanHelper.isTrueToken(facesAjaxParameter)) {
 						logger.debug("Detected Ajax ResourceRequest");
 					}
 					else {
@@ -122,8 +126,8 @@ public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 
 			cleanup(resourceRequest);
 		}
-		catch (Exception e) {
-			throw new BridgeException(e);
+		catch (Throwable t) {
+			throw new BridgeException(t);
 		}
 		finally {
 

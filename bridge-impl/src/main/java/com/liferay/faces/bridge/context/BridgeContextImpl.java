@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,9 @@ import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.config.ServletMapping;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
+import com.liferay.faces.bridge.context.map.RequestHeaderMap;
+import com.liferay.faces.bridge.context.map.RequestHeaderValuesMap;
+import com.liferay.faces.bridge.context.map.RequestParameterMapFactory;
 import com.liferay.faces.bridge.context.url.BridgeActionURL;
 import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
 import com.liferay.faces.bridge.context.url.BridgePartialActionURLImpl;
@@ -70,6 +74,9 @@ public class BridgeContextImpl implements BridgeContext {
 
 	// Public Constants
 	public static final String ATTR_RESPONSE_NAMESPACE = "com.liferay.faces.bridge.responseNamespace";
+
+	// Private Constants
+	private static final String NON_NUMERIC_NAMESPACE_PREFIX = "A";
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeContextImpl.class);
@@ -97,8 +104,14 @@ public class BridgeContextImpl implements BridgeContext {
 	private boolean renderRedirectAfterDispatch;
 	private BridgeRedirectURL renderRedirectURL;
 	private Boolean renderRedirectEnabled;
+	private Map<String, String> requestHeaderMap;
+	private Map<String, String[]> requestHeaderValuesMap;
+	private Map<String, String> requestParameterMap;
+	private RequestParameterMapFactory requestParameterMapFactory;
+	private Map<String, String[]> requestParameterValuesMap;
 	private StringWrapper requestPathInfo;
 	private String requestServletPath;
+	private String responseNamespace;
 	private Writer responseOutputWriter;
 	private String savedViewState;
 	private String viewIdAndQueryString;
@@ -132,8 +145,8 @@ public class BridgeContextImpl implements BridgeContext {
 		// Initialize the portlet container implementation.
 		PortletContainerFactory portletContainerFactory = (PortletContainerFactory) BridgeFactoryFinder.getFactory(
 				PortletContainerFactory.class);
-		this.portletContainer = portletContainerFactory.getPortletContainer(portletContext, portletRequest,
-				portletResponse, portletPhase);
+		this.portletContainer = portletContainerFactory.getPortletContainer(portletConfig, portletContext,
+				portletRequest, portletResponse, portletPhase);
 	}
 
 	public void dispatch(String path) throws IOException {
@@ -243,20 +256,8 @@ public class BridgeContextImpl implements BridgeContext {
 				bridgeActionURL.removeParameter(Bridge.DIRECT_LINK);
 			}
 
-			if (bridgeActionURL.isAbsolute()) {
-				// encodeActionURLAbsoluteURLTest: avoid adding _jsfBridgeNonFacesView
-			}
-			else {
-
-				if (url.startsWith(BridgeConstants.CHAR_POUND)) {
-					// encodeActionURLPoundCharTest: avoid adding _jsfBridgeNonFacesView
-				}
-				else {
-
-					if (!targetFacesView.isExtensionMapped() && !targetFacesView.isPathMapped()) {
-						bridgeActionURL.setParameter(Bridge.NONFACES_TARGET_PATH_PARAMETER, contextRelativeViewPath);
-					}
-				}
+			if (!targetFacesView.isExtensionMapped() && !targetFacesView.isPathMapped()) {
+				bridgeActionURL.setParameter(Bridge.NONFACES_TARGET_PATH_PARAMETER, contextRelativeViewPath);
 			}
 
 		}
@@ -829,6 +830,11 @@ public class BridgeContextImpl implements BridgeContext {
 	public void setPortletRequest(PortletRequest portletRequest) {
 		this.portletRequest = portletRequest;
 		this.portletContainer.setPortletRequest(portletRequest);
+		this.requestParameterMap = null;
+		this.requestParameterMapFactory = null;
+		this.requestParameterValuesMap = null;
+		this.requestHeaderMap = null;
+		this.requestHeaderValuesMap = null;
 	}
 
 	public Bridge.PortletPhase getPortletRequestPhase() {
@@ -877,6 +883,52 @@ public class BridgeContextImpl implements BridgeContext {
 
 	public void setRenderRedirectURL(BridgeRedirectURL renderRedirectURL) {
 		this.renderRedirectURL = renderRedirectURL;
+	}
+
+	public Map<String, String> getRequestHeaderMap() {
+
+		if (requestHeaderMap == null) {
+			requestHeaderMap = Collections.unmodifiableMap(new RequestHeaderMap(getRequestHeaderValuesMap()));
+		}
+
+		return requestHeaderMap;
+	}
+
+	public Map<String, String[]> getRequestHeaderValuesMap() {
+
+		if (requestHeaderValuesMap == null) {
+			requestHeaderValuesMap = Collections.unmodifiableMap(new RequestHeaderValuesMap(portletRequest,
+						getRequestParameterMap()));
+		}
+
+		return requestHeaderValuesMap;
+	}
+
+	public Map<String, String> getRequestParameterMap() {
+
+		if (requestParameterMap == null) {
+			requestParameterMap = getRequestParameterMapFactory().getRequestParameterMap();
+		}
+
+		return requestParameterMap;
+	}
+
+	protected RequestParameterMapFactory getRequestParameterMapFactory() {
+
+		if (requestParameterMapFactory == null) {
+			requestParameterMapFactory = new RequestParameterMapFactory(this);
+		}
+
+		return requestParameterMapFactory;
+	}
+
+	public Map<String, String[]> getRequestParameterValuesMap() {
+
+		if (requestParameterValuesMap == null) {
+			requestParameterValuesMap = getRequestParameterMapFactory().getRequestParameterValuesMap();
+		}
+
+		return requestParameterValuesMap;
 	}
 
 	public String getRequestPathInfo() {
@@ -969,6 +1021,74 @@ public class BridgeContextImpl implements BridgeContext {
 		}
 
 		return requestServletPath;
+	}
+
+	public String getResponseNamespace() {
+
+		if (responseNamespace == null) {
+
+			// If the namespace should be optimized (minimized), then perform the optimization.
+			String optimizePortletNamespaceInitParam = getInitParameter(
+					BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE1);
+
+			if (optimizePortletNamespaceInitParam == null) {
+
+				// Backward compatibility
+				optimizePortletNamespaceInitParam = getInitParameter(
+						BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE2);
+			}
+
+			// Initialize the response namespace.
+			responseNamespace = portletContainer.getResponseNamespace();
+
+			boolean optimizePortletNamespace = BooleanHelper.toBoolean(optimizePortletNamespaceInitParam, true);
+			boolean addedNamespacePrefix = false;
+
+			if (optimizePortletNamespace) {
+
+				// Since the namespace is going to appear in every single clientId and name attribute of the rendered
+				// view, this needs to be shortened as much as possible -- four characters should be enough to keep the
+				// namespace unique.
+				int hashCode = responseNamespace.hashCode();
+
+				if (hashCode < 0) {
+					hashCode = hashCode * -1;
+				}
+
+				String namespaceHashCode = Integer.toString(hashCode);
+				int namespaceHashCodeLength = namespaceHashCode.length();
+
+				if (namespaceHashCodeLength > 4) {
+
+					// FACES-67: Taking the last four characters is more likely to force uniqueness than the first four.
+					namespaceHashCode = namespaceHashCode.substring(namespaceHashCodeLength - 4);
+				}
+
+				if (namespaceHashCode.length() < responseNamespace.length()) {
+
+					// Note that unless we prepend the hash namespace with some non-numeric string, IE might encounter
+					// JavaScript problems with ICEfaces. http://issues.liferay.com/browse/FACES-12
+					responseNamespace = NON_NUMERIC_NAMESPACE_PREFIX + namespaceHashCode;
+					addedNamespacePrefix = true;
+				}
+			}
+
+			if (!addedNamespacePrefix) {
+
+				// TODO: This should be refactored to the PortletResponseAdapter#getNamespace() method and only done for
+				// Liferay.
+				//
+				// Note that unless we prepend the responseNamespace with some string, Liferay's
+				// PortletRequestImpl.init(HttpServletRequest, Portlet, InvokerPortlet, PortletContext, WindowState,
+				// PortletMode, PortletPreferences, long) method will remove the namespace that
+				// PortletNamingContainerUIViewRoot adds to request parameters. For more information refer to:
+				// http://issues.liferay.com/browse/LPS-3082 and http://issues.liferay.com/browse/LPS-3184
+				responseNamespace = NON_NUMERIC_NAMESPACE_PREFIX + responseNamespace;
+			}
+
+		}
+
+		return responseNamespace;
 	}
 
 	public Writer getResponseOutputWriter() throws IOException {

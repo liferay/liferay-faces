@@ -32,6 +32,7 @@ public class LiferayPortletDisplay {
 	private static final String METHOD_NAME_GET_COLUMN_COUNT = "getColumnCount";
 	private static final String METHOD_NAME_GET_COLUMN_ID = "getColumnId";
 	private static final String METHOD_NAME_GET_COLUMN_POS = "getColumnPos";
+	private static final String METHOD_NAME_GET_INSTANCE_ID = "getInstanceId";
 
 	// Private Data Members
 	private Object wrappedPortletDisplay;
@@ -50,6 +51,10 @@ public class LiferayPortletDisplay {
 
 	public String getColumnPos() {
 		return getMethodReturnValue(wrappedPortletDisplay, METHOD_NAME_GET_COLUMN_POS);
+	}
+
+	public String getInstanceId() {
+		return getMethodReturnValue(wrappedPortletDisplay, METHOD_NAME_GET_INSTANCE_ID);
 	}
 
 	protected String getMethodReturnValue(Object object, String methodName) {

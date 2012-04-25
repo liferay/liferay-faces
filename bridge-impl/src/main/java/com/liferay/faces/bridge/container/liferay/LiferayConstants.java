@@ -19,6 +19,7 @@ package com.liferay.faces.bridge.container.liferay;
 public class LiferayConstants {
 
 	// Public Constants
+	public static final String INSTANCE_SEPARATOR = "_INSTANCE_";
 	public static final String LIFECYCLE_ACTION_PHASE_ID = "1";
 	public static final String LIFECYCLE_RENDER_PHASE_ID = "0";
 	public static final String LIFECYCLE_RESOURCE_PHASE_ID = "2";
@@ -30,6 +31,7 @@ public class LiferayConstants {
 	public static final String P_P_ID = "p_p_id";
 	public static final String P_P_MODE = "p_p_mode";
 	public static final String P_P_LIFECYCLE = "p_p_lifecycle";
+	public static final String P_P_RESOURCE_ID = "p_p_resource_id";
 	public static final String P_P_STATE = "p_p_state";
-
+	public static final String WAR_SEPARATOR = "_WAR_";
 }

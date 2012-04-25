@@ -21,6 +21,11 @@
 		<param-name>com.sun.faces.expressionFactory</param-name>
 		<param-value>org.jboss.el.ExpressionFactoryImpl</param-value>
 	</context-param>
+	<!-- Workaround for http://issues.liferay.com/browse/FACES-1194 -->
+	<context-param>
+		<param-name>com.liferay.faces.bridge.primeFileUploadForceResourceURL</param-name>
+		<param-value>true</param-value>
+	</context-param>
 	<!-- The following listener is required for deployment on JBoss AS. See FACES-183 for more info. -->
 	<!--
 	<listener>

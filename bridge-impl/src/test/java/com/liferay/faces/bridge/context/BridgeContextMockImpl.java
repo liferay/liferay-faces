@@ -200,11 +200,31 @@ public class BridgeContextMockImpl implements BridgeContext {
 		throw new UnsupportedOperationException();
 	}
 
+	public Map<String, String> getRequestHeaderMap() {
+		throw new UnsupportedOperationException();
+	}
+
+	public Map<String, String[]> getRequestHeaderValuesMap() {
+		throw new UnsupportedOperationException();
+	}
+
+	public Map<String, String> getRequestParameterMap() {
+		throw new UnsupportedOperationException();
+	}
+
+	public Map<String, String[]> getRequestParameterValuesMap() {
+		throw new UnsupportedOperationException();
+	}
+
 	public String getRequestPathInfo() {
 		throw new UnsupportedOperationException();
 	}
 
 	public String getRequestServletPath() {
+		throw new UnsupportedOperationException();
+	}
+
+	public String getResponseNamespace() {
 		throw new UnsupportedOperationException();
 	}
 
