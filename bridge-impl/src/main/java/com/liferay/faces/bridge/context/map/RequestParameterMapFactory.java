@@ -13,8 +13,8 @@
  */
 package com.liferay.faces.bridge.context.map;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.faces.Bridge;
+import javax.portlet.ClientDataRequest;
+import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.context.BridgeContext;
 
@@ -26,6 +26,7 @@ public class RequestParameterMapFactory {
 
 	// Private Constants
 	private static final String MULTIPART_CONTENT_TYPE_PREFIX = "multipart/";
+	private static final String ICEFACES_FILE_ENTRY_FQCN = "org.icefaces.ace.component.fileentry.FileEntry";
 
 	// Private Data Members
 	private RequestParameterMap requestParameterMap;
@@ -33,13 +34,18 @@ public class RequestParameterMapFactory {
 
 	public RequestParameterMapFactory(BridgeContext bridgeContext) {
 
-		if (bridgeContext.getPortletRequestPhase() == Bridge.PortletPhase.ACTION_PHASE) {
-			ActionRequest actionRequest = (ActionRequest) bridgeContext.getPortletRequest();
-			String contentType = actionRequest.getContentType();
+		PortletRequest portletRequest = bridgeContext.getPortletRequest();
 
-			if ((contentType != null) && contentType.toLowerCase().startsWith(MULTIPART_CONTENT_TYPE_PREFIX)) {
+		if (portletRequest instanceof ClientDataRequest) {
+			ClientDataRequest clientDataRequest = (ClientDataRequest) portletRequest;
+			String contentType = clientDataRequest.getContentType();
+
+			// Note that ICEfaces ace:fileEntry cannot rely on RequestParameterValuesMapImpl because it relies on its
+			// own mechanism for handling file upload.
+			if ((contentType != null) && contentType.toLowerCase().startsWith(MULTIPART_CONTENT_TYPE_PREFIX) &&
+					!isICEfacesPresent()) {
 				RequestParameterMapMultiPartImpl requestParameterMapMultiPartImpl =
-					new RequestParameterMapMultiPartImpl(bridgeContext, actionRequest);
+					new RequestParameterMapMultiPartImpl(bridgeContext, clientDataRequest);
 				requestParameterMap = requestParameterMapMultiPartImpl;
 				requestParameterValuesMap = new RequestParameterValuesMapMultiPartImpl(
 						requestParameterMapMultiPartImpl);
@@ -61,5 +67,19 @@ public class RequestParameterMapFactory {
 
 	public RequestParameterValuesMap getRequestParameterValuesMap() {
 		return requestParameterValuesMap;
+	}
+
+	protected boolean isICEfacesPresent() {
+
+		boolean iceFacesPresent = Boolean.TRUE;
+
+		try {
+			Class.forName(ICEFACES_FILE_ENTRY_FQCN);
+		}
+		catch (ClassNotFoundException e) {
+			iceFacesPresent = Boolean.FALSE;
+		}
+
+		return iceFacesPresent;
 	}
 }

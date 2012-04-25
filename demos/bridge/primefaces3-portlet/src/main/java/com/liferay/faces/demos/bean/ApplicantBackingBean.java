@@ -20,16 +20,17 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.component.UICommand;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
-import com.liferay.faces.bridge.component.HtmlInputFile;
+import org.primefaces.event.FileUploadEvent;
+
 import com.liferay.faces.bridge.component.UploadedFile;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 import com.liferay.faces.demos.dto.City;
+import com.liferay.faces.demos.dto.UploadedFileWrapper;
 import com.liferay.faces.demos.util.FacesMessageUtil;
 
 
@@ -56,20 +57,9 @@ public class ApplicantBackingBean implements Serializable {
 
 	// JavaBeans Properties for UI
 	private boolean commentsRendered = false;
-	private boolean fileUploaderRendered = false;
-
-	private transient HtmlInputFile attachment1;
-	private transient HtmlInputFile attachment2;
-	private transient HtmlInputFile attachment3;
-
-	public void addAttachment(ActionEvent actionEvent) {
-		fileUploaderRendered = true;
-	}
+	private String uploadedFileId;
 
 	public void deleteUploadedFile(ActionEvent actionEvent) {
-
-		UICommand uiCommand = (UICommand) actionEvent.getComponent();
-		String fileId = (String) uiCommand.getValue();
 
 		try {
 			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
@@ -78,7 +68,7 @@ public class ApplicantBackingBean implements Serializable {
 
 			for (UploadedFile uploadedFile : uploadedFiles) {
 
-				if (uploadedFile.getId().equals(fileId)) {
+				if (uploadedFile.getId().equals(uploadedFileId)) {
 					uploadedFileToDelete = uploadedFile;
 
 					break;
@@ -95,6 +85,22 @@ public class ApplicantBackingBean implements Serializable {
 		catch (Exception e) {
 			logger.error(e);
 		}
+	}
+
+	public void handleFileUpload(FileUploadEvent event) {
+		int nextId = 0;
+		List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
+		int totalUploadedFiles = uploadedFiles.size();
+
+		if (totalUploadedFiles > 0) {
+			nextId = Integer.parseInt(uploadedFiles.get(totalUploadedFiles - 1).getId());
+			nextId++;
+		}
+
+		UploadedFileWrapper uploadedFileWrapper = new UploadedFileWrapper(event.getFile());
+		uploadedFileWrapper.setId(Integer.toString(nextId++));
+		uploadedFiles.add(uploadedFileWrapper);
+		logger.debug("uploadedFile=[{0}]", uploadedFileWrapper.getName());
 	}
 
 	public void postalCodeListener(ValueChangeEvent valueChangeEvent) {
@@ -166,72 +172,10 @@ public class ApplicantBackingBean implements Serializable {
 		commentsRendered = !commentsRendered;
 	}
 
-	public void uploadAttachments(ActionEvent actionEvent) {
-
-		int nextId = 0;
-		List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
-		int totalUploadedFiles = uploadedFiles.size();
-
-		if (totalUploadedFiles > 0) {
-			nextId = Integer.parseInt(uploadedFiles.get(totalUploadedFiles - 1).getId());
-			nextId++;
-		}
-
-		UploadedFile uploadedFile1 = attachment1.getUploadedFile();
-
-		if (uploadedFile1 != null) {
-			uploadedFile1.setId(Integer.toString(nextId++));
-			uploadedFiles.add(uploadedFile1);
-			logger.debug("uploadedFile1=[{0}]", uploadedFile1.getName());
-		}
-
-		UploadedFile uploadedFile2 = attachment2.getUploadedFile();
-
-		if (uploadedFile2 != null) {
-			uploadedFile2.setId(Integer.toString(nextId++));
-			uploadedFiles.add(uploadedFile2);
-			logger.debug("uploadedFile2=[{0}]", uploadedFile2.getName());
-		}
-
-		UploadedFile uploadedFile3 = attachment3.getUploadedFile();
-
-		if (uploadedFile3 != null) {
-			uploadedFile3.setId(Integer.toString(nextId++));
-			uploadedFiles.add(uploadedFile3);
-			logger.debug("uploadedFile3=[{0}]", uploadedFile3.getName());
-		}
-
-		fileUploaderRendered = false;
-	}
-
 	public void setApplicantModelBean(ApplicantModelBean applicantModelBean) {
 
 		// Injected via @ManagedProperty annotation
 		this.applicantModelBean = applicantModelBean;
-	}
-
-	public HtmlInputFile getAttachment1() {
-		return attachment1;
-	}
-
-	public void setAttachment1(HtmlInputFile attachment1) {
-		this.attachment1 = attachment1;
-	}
-
-	public HtmlInputFile getAttachment2() {
-		return attachment2;
-	}
-
-	public void setAttachment2(HtmlInputFile attachment2) {
-		this.attachment2 = attachment2;
-	}
-
-	public HtmlInputFile getAttachment3() {
-		return attachment3;
-	}
-
-	public void setAttachment3(HtmlInputFile attachment3) {
-		this.attachment3 = attachment3;
 	}
 
 	public void setCommentsRendered(boolean commentsRendered) {
@@ -242,13 +186,17 @@ public class ApplicantBackingBean implements Serializable {
 		return commentsRendered;
 	}
 
-	public boolean isFileUploaderRendered() {
-		return fileUploaderRendered;
-	}
-
 	public void setListModelBean(ListModelBean listModelBean) {
 
 		// Injected via @ManagedProperty annotation
 		this.listModelBean = listModelBean;
+	}
+
+	public String getUploadedFileId() {
+		return uploadedFileId;
+	}
+
+	public void setUploadedFileId(String uploadedFileId) {
+		this.uploadedFileId = uploadedFileId;
 	}
 }

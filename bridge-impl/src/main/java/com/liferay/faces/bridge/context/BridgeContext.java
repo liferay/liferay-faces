@@ -48,6 +48,8 @@ import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
  */
 public interface BridgeContext {
 
+	String getResponseNamespace();
+
 	/**
 	 * Creates a {@link PortletRequestDispatcher} for the specified <code>path</code> and issues a forward/include as
 	 * appropriate.
@@ -267,6 +269,14 @@ public interface BridgeContext {
 	 * Sets the render-redirect URL that is associated with a render-redirect.
 	 */
 	void setRenderRedirectURL(BridgeRedirectURL renderRedirectURL);
+
+	public Map<String, String> getRequestHeaderMap();
+
+	public Map<String, String[]> getRequestHeaderValuesMap();
+
+	public Map<String, String> getRequestParameterMap();
+
+	public Map<String, String[]> getRequestParameterValuesMap();
 
 	/**
 	 * Returns the pathInfo associated with the current viewId.

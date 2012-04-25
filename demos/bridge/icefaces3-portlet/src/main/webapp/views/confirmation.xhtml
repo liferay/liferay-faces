@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
 	xmlns:example-cc="http://java.sun.com/jsf/composite/example-cc" xmlns:ui="http://java.sun.com/jsf/facelets">
 	<h:head />
 	<h:body styleClass="icefaces3-portlet">
@@ -8,6 +9,12 @@
 		<h:messages />
 		<h:form>
 			<icecore:singleSubmit />
+			<ace:menuBar id="menuRadios" autoSubmenuDisplay="false">
+				<ace:menuItem value="Entrevistas" />
+				<ace:menuItem value="Historial" />
+				<ace:menuItem value="Quienes somos" />
+				<ace:menuItem value="Contactenos" />
+			</ace:menuBar>
 			<!-- Test JSF 2 Flash scope -->
 			<h:outputText value="#{i18n['dear']} #{bridgeFlash['firstName']}," />
 			<br />
