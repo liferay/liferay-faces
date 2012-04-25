@@ -40,10 +40,10 @@ import com.liferay.faces.bridge.renderkit.html_basic.RendererWrapper;
 /**
  * @author  Neil Griffin
  */
-public class PrimeFacesFileUploadRenderer extends RendererWrapper {
+public class FileUploadRendererPrimeFacesImpl extends RendererWrapper {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(PrimeFacesFileUploadRenderer.class);
+	private static final Logger logger = LoggerFactory.getLogger(FileUploadRendererPrimeFacesImpl.class);
 
 	// Private Constants
 	private static final String FQCN_DEFAULT_UPLOADED_FILE = "org.primefaces.model.DefaultUploadedFile";
@@ -53,7 +53,7 @@ public class PrimeFacesFileUploadRenderer extends RendererWrapper {
 	// Private Data Members
 	private Renderer wrappedRenderer;
 
-	public PrimeFacesFileUploadRenderer(Renderer renderer) {
+	public FileUploadRendererPrimeFacesImpl(Renderer renderer) {
 		this.wrappedRenderer = renderer;
 	}
 

@@ -26,7 +26,7 @@ import com.liferay.faces.bridge.component.UploadedFile;
 /**
  * @author  Neil Griffin
  */
-public class PrimeUploadedFile implements UploadedFile, FacesWrapper<org.primefaces.model.UploadedFile> {
+public class UploadedFileWrapper implements UploadedFile, FacesWrapper<org.primefaces.model.UploadedFile> {
 
 	// Private Data Members
 	private Map<String, Object> attributeMap;
@@ -36,7 +36,7 @@ public class PrimeUploadedFile implements UploadedFile, FacesWrapper<org.primefa
 	private Status status;
 	private org.primefaces.model.UploadedFile wrappedUploadedFile;
 
-	public PrimeUploadedFile(org.primefaces.model.UploadedFile uploadedFile) {
+	public UploadedFileWrapper(org.primefaces.model.UploadedFile uploadedFile) {
 		this.wrappedUploadedFile = uploadedFile;
 		this.attributeMap = new HashMap<String, Object>();
 	}

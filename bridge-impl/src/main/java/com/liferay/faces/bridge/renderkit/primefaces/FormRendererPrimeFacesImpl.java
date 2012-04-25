@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.renderkit.html_basic;
+package com.liferay.faces.bridge.renderkit.primefaces;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,6 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
+import com.liferay.faces.bridge.renderkit.html_basic.RendererWrapper;
 
 
 /**
@@ -31,7 +32,7 @@ import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
  * @see     http://code.google.com/p/primefaces/issues/detail?id=2905
  * @author  Neil Griffin
  */
-public class FormRendererBridgeImpl extends RendererWrapper {
+public class FormRendererPrimeFacesImpl extends RendererWrapper {
 
 	// Private Constants
 	private static final String ENCTYPE = "enctype";
@@ -40,7 +41,7 @@ public class FormRendererBridgeImpl extends RendererWrapper {
 	// Private Data Members
 	private Renderer wrappedRenderer;
 
-	public FormRendererBridgeImpl(Renderer renderer) {
+	public FormRendererPrimeFacesImpl(Renderer renderer) {
 		this.wrappedRenderer = renderer;
 	}
 
