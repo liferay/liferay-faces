@@ -25,11 +25,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
+import org.primefaces.event.FileUploadEvent;
+
 import com.liferay.faces.bridge.component.UploadedFile;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 import com.liferay.faces.demos.dto.City;
-import com.liferay.faces.demos.dto.PrimeUploadedFile;
+import com.liferay.faces.demos.dto.UploadedFileWrapper;
 import com.liferay.faces.demos.util.FacesMessageUtil;
 
 
@@ -56,16 +58,23 @@ public class ApplicantBackingBean implements Serializable {
 
 	// JavaBeans Properties for UI
 	private boolean commentsRendered = false;
-	private boolean fileUploaderRendered = false;
 
-	private transient org.primefaces.model.UploadedFile uploadedFile1;
-	private transient org.primefaces.model.UploadedFile uploadedFile2;
-	private transient org.primefaces.model.UploadedFile uploadedFile3;
+    public void handleFileUpload(FileUploadEvent event) {  
+		int nextId = 0;
+		List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
+		int totalUploadedFiles = uploadedFiles.size();
 
-	public void addAttachment(ActionEvent actionEvent) {
-		fileUploaderRendered = true;
-	}
+		if (totalUploadedFiles > 0) {
+			nextId = Integer.parseInt(uploadedFiles.get(totalUploadedFiles - 1).getId());
+			nextId++;
+		}
 
+		UploadedFileWrapper uploadedFileWrapper = new UploadedFileWrapper(event.getFile());
+		uploadedFileWrapper.setId(Integer.toString(nextId++));
+		uploadedFiles.add(uploadedFileWrapper);
+		logger.debug("uploadedFile=[{0}]", uploadedFileWrapper.getName());
+    }
+    
 	public void deleteUploadedFile(ActionEvent actionEvent) {
 
 		UICommand uiCommand = (UICommand) actionEvent.getComponent();
@@ -166,41 +175,6 @@ public class ApplicantBackingBean implements Serializable {
 		commentsRendered = !commentsRendered;
 	}
 
-	public void uploadAttachments(ActionEvent actionEvent) {
-
-		int nextId = 0;
-		List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
-		int totalUploadedFiles = uploadedFiles.size();
-
-		if (totalUploadedFiles > 0) {
-			nextId = Integer.parseInt(uploadedFiles.get(totalUploadedFiles - 1).getId());
-			nextId++;
-		}
-
-		if (uploadedFile1 != null) {
-			PrimeUploadedFile primeUploadedFile = new PrimeUploadedFile(uploadedFile1);
-			primeUploadedFile.setId(Integer.toString(nextId++));
-			uploadedFiles.add(primeUploadedFile);
-			logger.debug("uploadedFile1=[{0}]", primeUploadedFile.getName());
-		}
-
-		if (uploadedFile2 != null) {
-			PrimeUploadedFile primeUploadedFile = new PrimeUploadedFile(uploadedFile2);
-			primeUploadedFile.setId(Integer.toString(nextId++));
-			uploadedFiles.add(primeUploadedFile);
-			logger.debug("uploadedFile2=[{0}]", primeUploadedFile.getName());
-		}
-
-		if (uploadedFile3 != null) {
-			PrimeUploadedFile primeUploadedFile = new PrimeUploadedFile(uploadedFile3);
-			primeUploadedFile.setId(Integer.toString(nextId++));
-			uploadedFiles.add(primeUploadedFile);
-			logger.debug("uploadedFile3=[{0}]", primeUploadedFile.getName());
-		}
-
-		fileUploaderRendered = false;
-	}
-
 	public void setApplicantModelBean(ApplicantModelBean applicantModelBean) {
 
 		// Injected via @ManagedProperty annotation
@@ -215,37 +189,9 @@ public class ApplicantBackingBean implements Serializable {
 		return commentsRendered;
 	}
 
-	public boolean isFileUploaderRendered() {
-		return fileUploaderRendered;
-	}
-
 	public void setListModelBean(ListModelBean listModelBean) {
 
 		// Injected via @ManagedProperty annotation
 		this.listModelBean = listModelBean;
-	}
-
-	public org.primefaces.model.UploadedFile getUploadedFile1() {
-		return uploadedFile1;
-	}
-
-	public void setUploadedFile1(org.primefaces.model.UploadedFile uploadedFile1) {
-		this.uploadedFile1 = uploadedFile1;
-	}
-
-	public org.primefaces.model.UploadedFile getUploadedFile2() {
-		return uploadedFile2;
-	}
-
-	public void setUploadedFile2(org.primefaces.model.UploadedFile uploadedFile2) {
-		this.uploadedFile2 = uploadedFile2;
-	}
-
-	public org.primefaces.model.UploadedFile getUploadedFile3() {
-		return uploadedFile3;
-	}
-
-	public void setUploadedFile3(org.primefaces.model.UploadedFile uploadedFile3) {
-		this.uploadedFile3 = uploadedFile3;
 	}
 }

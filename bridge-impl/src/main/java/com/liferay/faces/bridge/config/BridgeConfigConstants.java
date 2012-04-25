@@ -45,7 +45,6 @@ public class BridgeConfigConstants {
 	public static final String PARAM_OPTIMIZE_PORTLET_NAMESPACE1 = "com.liferay.faces.bridge.optimizePortletNamespace";
 	public static final String PARAM_OPTIMIZE_PORTLET_NAMESPACE2 = "org.portletfaces.bridge.optimizePortletNamespace";
 
-
 	/**
 	 * Boolean indicating whether or not methods annotated with the &#064;PreDestroy annotation are preferably invoked
 	 * over the &#064;BridgePreDestroy annotation. Default value is true. The reason why, is because local portals like
@@ -54,6 +53,13 @@ public class BridgeConfigConstants {
 	 */
 	public static final String PARAM_PREFER_PRE_DESTROY1 = "com.liferay.faces.bridge.preferPreDestroy";
 	public static final String PARAM_PREFER_PRE_DESTROY2 = "org.portletfaces.bridge.preferPreDestroy";
+
+	/**
+	 * Boolean indicating whether or not the PrimeFaces p:fileUpload should be forced to use a ResourceURL. See:
+	 * http://issues.liferay.com/browse/FACES-1194
+	 */
+	public static final String PARAM_PRIME_FILE_UPLOAD_FORCE_RESOURCE_URL =
+		"com.liferay.faces.bridge.primeFileUploadForceResourceURL";
 
 	/**
 	 * Boolean indicating whether or not the render-redirect standard feature is enabled. Default value is false for

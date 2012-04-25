@@ -172,6 +172,7 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 
 			// Get the namespace that might be found in request parameter names.
 			String namespace = bridgeContext.getPortletContainer().getResponseNamespace();
+			System.err.println("!@#$ namespace=" + namespace);
 
 			// FACES-271: Include name+value pairs found in the ActionRequest.
 			PortletContainer portletContainer = bridgeContext.getPortletContainer();
@@ -180,8 +181,9 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 			for (Map.Entry<String, String[]> mapEntry : actionRequestParameterSet) {
 
 				String parameterName = mapEntry.getKey();
-				if ((parameterName != null) && parameterName.startsWith(namespace)) {
-					parameterName = parameterName.substring(namespace.length());
+				int pos = parameterName.indexOf(namespace);
+				if (pos >= 0) {
+					parameterName = parameterName.substring(pos + namespace.length());
 				}
 			
 				String[] parameterValues = mapEntry.getValue();
@@ -211,8 +213,9 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 				for (DiskFileItem diskFileItem : diskFileItems) {
 
 					String fieldName = diskFileItem.getFieldName();
-					if ((fieldName != null) && fieldName.startsWith(namespace)) {
-						fieldName = fieldName.substring(namespace.length());
+					int pos = fieldName.indexOf(namespace);
+					if (pos >= 0) {
+						fieldName = fieldName.substring(pos + namespace.length());
 					}
 
 					if (diskFileItem.isFormField()) {

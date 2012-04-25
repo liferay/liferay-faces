@@ -18,6 +18,7 @@ import java.io.Writer;
 import javax.faces.component.UIForm;
 import javax.faces.component.UIOutput;
 import javax.faces.component.UIPanel;
+import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.RenderKit;
 import javax.faces.render.RenderKitWrapper;
@@ -25,11 +26,14 @@ import javax.faces.render.Renderer;
 
 import com.liferay.faces.bridge.component.icefaces.DataPaginator;
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
+import com.liferay.faces.bridge.config.BridgeConfigConstants;
+import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.renderkit.bridge.ResponseWriterBridgeImpl;
 import com.liferay.faces.bridge.renderkit.icefaces.DataPaginatorRenderer;
 import com.liferay.faces.bridge.renderkit.icefaces.HeadRendererICEfacesImpl;
+import com.liferay.faces.bridge.renderkit.primefaces.FileUploadRendererPrimeFacesImpl;
+import com.liferay.faces.bridge.renderkit.primefaces.FormRendererPrimeFacesImpl;
 import com.liferay.faces.bridge.renderkit.primefaces.HeadRendererPrimeFacesImpl;
-import com.liferay.faces.bridge.renderkit.primefaces.PrimeFacesFileUploadRenderer;
 
 
 /**
@@ -87,7 +91,14 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 			}
 		}
 		else if (UIForm.COMPONENT_FAMILY.equals(family) && JAVAX_FACES_FORM.equals(rendererType)) {
-			renderer = new FormRendererBridgeImpl(renderer);
+
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			String primeFileUploadForceResourceURL = facesContext.getExternalContext().getInitParameter(
+					BridgeConfigConstants.PARAM_PRIME_FILE_UPLOAD_FORCE_RESOURCE_URL);
+
+			if (BooleanHelper.isBooleanToken(primeFileUploadForceResourceURL)) {
+				renderer = new FormRendererPrimeFacesImpl(renderer);
+			}
 		}
 		else if (UIPanel.COMPONENT_FAMILY.equals(family) && DataPaginator.RENDERER_TYPE.equals(rendererType)) {
 
@@ -95,7 +106,7 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 			renderer = new DataPaginatorRenderer(renderer);
 		}
 		else if (PRIMEFACES_FAMILY.equals(family) && PrimeFacesFileUpload.RENDERER_TYPE.equals(rendererType)) {
-			renderer = new PrimeFacesFileUploadRenderer(renderer);
+			renderer = new FileUploadRendererPrimeFacesImpl(renderer);
 		}
 
 		return renderer;
