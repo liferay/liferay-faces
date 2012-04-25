@@ -20,7 +20,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.component.UICommand;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
@@ -58,27 +57,9 @@ public class ApplicantBackingBean implements Serializable {
 
 	// JavaBeans Properties for UI
 	private boolean commentsRendered = false;
+	private String uploadedFileId;
 
-    public void handleFileUpload(FileUploadEvent event) {  
-		int nextId = 0;
-		List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
-		int totalUploadedFiles = uploadedFiles.size();
-
-		if (totalUploadedFiles > 0) {
-			nextId = Integer.parseInt(uploadedFiles.get(totalUploadedFiles - 1).getId());
-			nextId++;
-		}
-
-		UploadedFileWrapper uploadedFileWrapper = new UploadedFileWrapper(event.getFile());
-		uploadedFileWrapper.setId(Integer.toString(nextId++));
-		uploadedFiles.add(uploadedFileWrapper);
-		logger.debug("uploadedFile=[{0}]", uploadedFileWrapper.getName());
-    }
-    
 	public void deleteUploadedFile(ActionEvent actionEvent) {
-
-		UICommand uiCommand = (UICommand) actionEvent.getComponent();
-		String fileId = (String) uiCommand.getValue();
 
 		try {
 			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
@@ -87,7 +68,7 @@ public class ApplicantBackingBean implements Serializable {
 
 			for (UploadedFile uploadedFile : uploadedFiles) {
 
-				if (uploadedFile.getId().equals(fileId)) {
+				if (uploadedFile.getId().equals(uploadedFileId)) {
 					uploadedFileToDelete = uploadedFile;
 
 					break;
@@ -104,6 +85,22 @@ public class ApplicantBackingBean implements Serializable {
 		catch (Exception e) {
 			logger.error(e);
 		}
+	}
+
+	public void handleFileUpload(FileUploadEvent event) {
+		int nextId = 0;
+		List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
+		int totalUploadedFiles = uploadedFiles.size();
+
+		if (totalUploadedFiles > 0) {
+			nextId = Integer.parseInt(uploadedFiles.get(totalUploadedFiles - 1).getId());
+			nextId++;
+		}
+
+		UploadedFileWrapper uploadedFileWrapper = new UploadedFileWrapper(event.getFile());
+		uploadedFileWrapper.setId(Integer.toString(nextId++));
+		uploadedFiles.add(uploadedFileWrapper);
+		logger.debug("uploadedFile=[{0}]", uploadedFileWrapper.getName());
 	}
 
 	public void postalCodeListener(ValueChangeEvent valueChangeEvent) {
@@ -193,5 +190,13 @@ public class ApplicantBackingBean implements Serializable {
 
 		// Injected via @ManagedProperty annotation
 		this.listModelBean = listModelBean;
+	}
+
+	public String getUploadedFileId() {
+		return uploadedFileId;
+	}
+
+	public void setUploadedFileId(String uploadedFileId) {
+		this.uploadedFileId = uploadedFileId;
 	}
 }
