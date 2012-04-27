@@ -172,7 +172,6 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 
 			// Get the namespace that might be found in request parameter names.
 			String namespace = bridgeContext.getPortletContainer().getResponseNamespace();
-			System.err.println("!@#$ namespace=" + namespace);
 
 			// FACES-271: Include name+value pairs found in the ActionRequest.
 			PortletContainer portletContainer = bridgeContext.getPortletContainer();
