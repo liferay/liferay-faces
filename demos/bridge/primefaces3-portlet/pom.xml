@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.faces.demos</groupId>
 		<artifactId>liferay-faces-bridge-demos</artifactId>
-		<version>3.0.0-BETA2</version>
+		<version>3.0.0-RC1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>primefaces3-portlet</artifactId>
