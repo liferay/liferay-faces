@@ -32,7 +32,7 @@ import com.liferay.faces.demos.service.CustomerService;
 public class CustomerEditedEventHandler implements BridgeEventHandler {
 
 	// Logger
-	private static Logger logger = LoggerFactory.getLogger(CustomerEditedEventHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(CustomerEditedEventHandler.class);
 
 	public EventNavigationResult handleEvent(FacesContext facesContext, Event event) {
 		EventNavigationResult eventNavigationResult = null;

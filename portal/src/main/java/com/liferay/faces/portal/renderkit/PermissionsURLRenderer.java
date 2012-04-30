@@ -48,7 +48,7 @@ public class PermissionsURLRenderer extends Renderer {
 	private static final String PORTLET_CONFIGURATION = "86";
 
 	// Logger
-	private static Logger logger = LoggerFactory.getLogger(PermissionsURLRenderer.class);
+	private static final Logger logger = LoggerFactory.getLogger(PermissionsURLRenderer.class);
 
 	@Override
 	public void encodeBegin(FacesContext context, UIComponent component) throws IOException {

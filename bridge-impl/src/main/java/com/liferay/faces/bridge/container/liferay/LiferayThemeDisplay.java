@@ -31,7 +31,7 @@ public class LiferayThemeDisplay {
 	private static final String METHOD_NAME_GET_URL_PORTAL = "getURLPortal";
 
 	// Logger
-	Logger logger = LoggerFactory.getLogger(LiferayThemeDisplay.class);
+	private static final Logger logger = LoggerFactory.getLogger(LiferayThemeDisplay.class);
 
 	Object wrappedThemeDisplay;
 

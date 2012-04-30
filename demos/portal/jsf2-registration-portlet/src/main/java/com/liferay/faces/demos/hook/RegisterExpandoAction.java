@@ -45,7 +45,7 @@ import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
  */
 public class RegisterExpandoAction extends SimpleAction {
 
-	Logger logger = LoggerFactory.getLogger(RegisterExpandoAction.class);
+	private static final Logger logger = LoggerFactory.getLogger(RegisterExpandoAction.class);
 
 	@Override
 	public void run(String[] companyIds) throws ActionException {

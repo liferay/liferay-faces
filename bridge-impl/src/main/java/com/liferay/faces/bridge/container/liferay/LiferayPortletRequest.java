@@ -33,7 +33,7 @@ public class LiferayPortletRequest {
 	private static final String METHOD_NAME_GET_ORIGINAL_HTTP_SERVLET_REQUEST = "getOriginalHttpServletRequest";
 
 	// Logger
-	Logger logger = LoggerFactory.getLogger(LiferayPortletRequest.class);
+	private static final Logger logger = LoggerFactory.getLogger(LiferayPortletRequest.class);
 
 	// Private Data Members
 	private PortletRequest wrappedPortletRequest;
