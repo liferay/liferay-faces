@@ -33,7 +33,7 @@ public class LiferayPortletResponse {
 	private static final String METHOD_NAME_SET_REDIRECT_LOCATION = "setRedirectLocation";
 
 	// Logger
-	Logger logger = LoggerFactory.getLogger(LiferayPortletResponse.class);
+	private static final Logger logger = LoggerFactory.getLogger(LiferayPortletResponse.class);
 
 	// Private Data Members
 	private PortletResponse wrappedPortletResponse;

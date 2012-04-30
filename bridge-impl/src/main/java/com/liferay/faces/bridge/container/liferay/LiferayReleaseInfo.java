@@ -29,7 +29,7 @@ public class LiferayReleaseInfo {
 	private static final String METHOD_GET_BUILD_NUMBER = "getBuildNumber";
 
 	// Logger
-	Logger logger = LoggerFactory.getLogger(LiferayReleaseInfo.class);
+	private static final Logger logger = LoggerFactory.getLogger(LiferayReleaseInfo.class);
 
 	// Private Data Members
 	private Integer buildNumber = new Integer(0);

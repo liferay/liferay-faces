@@ -44,7 +44,7 @@ import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
  */
 public class RegisterExpandoAction extends SimpleAction {
 
-	Logger logger = LoggerFactory.getLogger(RegisterExpandoAction.class);
+	private static final Logger logger = LoggerFactory.getLogger(RegisterExpandoAction.class);
 
 	@Override
 	public void run(String[] companyIds) throws ActionException {
