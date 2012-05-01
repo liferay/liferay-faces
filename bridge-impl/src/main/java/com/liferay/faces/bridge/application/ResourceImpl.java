@@ -60,6 +60,8 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 	private static final String HTTP_SPEC_DATE_PATTERN = "EEE, dd MMM yyyy HH:mm:ss zzz";
 
 	// Private Constants: Resources that can't be cached.
+	private static final String EXTENSION_FACES = ".faces";
+	private static final String LIBRARY_NAME_JAVAX_FACES = "javax.faces";
 	private static final String RESOURCE_NAME_JSF_JS = "jsf.js";
 	private static final String RESOURCE_NAME_ICEFACES_BRIDGE = "bridge.js";
 	private static final String RESOURCE_NAME_ICEFACES_PUSH = "icepush.js";
@@ -302,16 +304,27 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 							// If the servlet-mapping extension is found, then remove it since this is an implicit
 							// Servlet-API dependency on the FacesServlet that has no meaning in a portlet environment.
 							if (pos > 0) {
+
 								requestPath = requestPath.substring(0, pos) +
 									requestPath.substring(pos + extension.length());
 								logger.debug("Removed extension=[{0}] from requestPath=[{1}]", extension, requestPath);
 							}
 							else if (requestPath.endsWith(extension)) {
 
-								// Sometimes resources like the ICEfaces bridge.js file don't have a library name (ln=)
-								// parameter and simply look like this: /my-portlet/javax.faces.resource/bridge.js.faces
-								requestPath = requestPath.substring(0, requestPath.lastIndexOf(extension));
-								logger.debug("Removed extension=[{0}] from requestPath=[{1}]", extension, requestPath);
+								if (extension.equals(EXTENSION_FACES) &&
+										requestPath.endsWith(LIBRARY_NAME_JAVAX_FACES)) {
+									// Special case: Don't remove ".faces" if request path ends with "javax.faces"
+									// http://issues.liferay.com/browse/FACES-1202
+								}
+								else {
+
+									// Sometimes resources like the ICEfaces bridge.js file don't have a library name
+									// (ln=) parameter and simply look like this:
+									// /my-portlet/javax.faces.resource/bridge.js.faces
+									requestPath = requestPath.substring(0, requestPath.lastIndexOf(extension));
+									logger.debug("Removed extension=[{0}] from requestPath=[{1}]", extension,
+										requestPath);
+								}
 							}
 						}
 					}
