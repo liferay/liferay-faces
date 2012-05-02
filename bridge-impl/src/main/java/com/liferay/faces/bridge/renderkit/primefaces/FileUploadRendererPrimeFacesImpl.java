@@ -14,9 +14,11 @@
 package com.liferay.faces.bridge.renderkit.primefaces;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.RandomAccessFile;
 import java.lang.reflect.Constructor;
 import java.util.Map;
 
@@ -137,7 +139,24 @@ public class FileUploadRendererPrimeFacesImpl extends RendererWrapper {
 		}
 
 		public byte[] get() {
-			throw new UnsupportedOperationException();
+
+			byte[] bytes = null;
+
+			try {
+				File file = new File(uploadedFile.getAbsolutePath());
+
+				if (file.exists()) {
+					RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
+					bytes = new byte[(int) randomAccessFile.length()];
+					randomAccessFile.readFully(bytes);
+					randomAccessFile.close();
+				}
+			}
+			catch (Exception e) {
+				logger.error(e);
+			}
+
+			return bytes;
 		}
 
 		public void write(File file) throws Exception {
@@ -149,7 +168,7 @@ public class FileUploadRendererPrimeFacesImpl extends RendererWrapper {
 		}
 
 		public boolean isFormField() {
-			return true;
+			return false;
 		}
 
 		public String getFieldName() {
@@ -165,11 +184,11 @@ public class FileUploadRendererPrimeFacesImpl extends RendererWrapper {
 		}
 
 		public InputStream getInputStream() throws IOException {
-			throw new UnsupportedOperationException();
+			return new FileInputStream(uploadedFile.getAbsolutePath());
 		}
 
 		public String getName() {
-			return uploadedFile.getName();
+			return uploadedFile.getAbsolutePath();
 		}
 
 		public OutputStream getOutputStream() throws IOException {

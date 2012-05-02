@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.demos.dto;
 
+import java.io.File;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -46,7 +47,7 @@ public class UploadedFileWrapper implements UploadedFile, FacesWrapper<org.prime
 	}
 
 	public void setAbsolutePath(String absolutePath) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 	public Object getAttribute(String name) {
@@ -102,7 +103,7 @@ public class UploadedFileWrapper implements UploadedFile, FacesWrapper<org.prime
 	}
 
 	public String getName() {
-		return wrappedUploadedFile.getFileName();
+		return new File(wrappedUploadedFile.getFileName()).getName();
 	}
 
 	public void setName(String name) {
