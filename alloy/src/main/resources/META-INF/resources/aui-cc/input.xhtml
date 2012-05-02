@@ -62,11 +62,12 @@
 					<c:choose>
 						<c:when test="#{empty cc.attrs.validatorMessage}">
 							<h:inputSecret id="t1" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}" required="#{cc.attrs.required}" size="#{cc.attrs.size}" style="#{cc.attrs.style}"
-								styleClass="aui-field-input aui-field-input-text" value="#{cc.attrs.value}" />
+								styleClass="aui-field-input aui-field-input-text" value="#{cc.attrs.value}" disabled="#{cc.attrs.disabled}" readonly="#{cc.attrs.readonly}" />
 						</c:when>
 						<c:otherwise>
 							<h:inputSecret id="t1" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}" required="#{cc.attrs.required}" size="#{cc.attrs.size}" style="#{cc.attrs.style}"
-								styleClass="aui-field-input aui-field-input-text" validatorMessage="#{cc.attrs.validatorMessage}" value="#{cc.attrs.value}" />
+								styleClass="aui-field-input aui-field-input-text" validatorMessage="#{cc.attrs.validatorMessage}" value="#{cc.attrs.value}" disabled="#{cc.attrs.disabled}"
+								readonly="#{cc.attrs.readonly}" />
 						</c:otherwise>
 					</c:choose>
 				</c:when>
@@ -74,11 +75,12 @@
 					<c:choose>
 						<c:when test="#{empty cc.attrs.validatorMessage}">
 							<h:selectBooleanCheckbox id="t1" label="#{cc.attrs.label}" onchange="#{cc.attrs.onchange}" required="#{cc.attrs.required}" style="#{cc.attrs.style}"
-								styleClass="aui-field-input aui-field-input-choice" value="#{cc.attrs.value}" />
+								styleClass="aui-field-input aui-field-input-choice" value="#{cc.attrs.value}" disabled="#{cc.attrs.disabled}" readonly="#{cc.attrs.readonly}" />
 						</c:when>
 						<c:otherwise>
 							<h:selectBooleanCheckbox id="t1" label="#{cc.attrs.label}" onchange="#{cc.attrs.onchange}" required="#{cc.attrs.required}" style="#{cc.attrs.style}"
-								styleClass="aui-field-input aui-field-input-choice" validatorMessage="#{cc.attrs.validatorMessage}" value="#{cc.attrs.value}" />
+								styleClass="aui-field-input aui-field-input-choice" validatorMessage="#{cc.attrs.validatorMessage}" value="#{cc.attrs.value}" disabled="#{cc.attrs.disabled}"
+								readonly="#{cc.attrs.readonly}" />
 						</c:otherwise>
 					</c:choose>
 				</c:when>
