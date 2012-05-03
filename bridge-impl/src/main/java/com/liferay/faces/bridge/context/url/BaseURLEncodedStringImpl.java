@@ -20,6 +20,8 @@ import javax.portlet.BaseURL;
 import javax.portlet.PortletResponse;
 
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.logging.Logger;
+import com.liferay.faces.bridge.logging.LoggerFactory;
 
 
 /**
@@ -31,6 +33,9 @@ import com.liferay.faces.bridge.context.BridgeContext;
  */
 public abstract class BaseURLEncodedStringImpl extends BaseURLNonEncodedStringImpl {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(BaseURLEncodedStringImpl.class);
+
 	// Private Data Members
 	private PortletResponse portletResponse;
 
@@ -41,7 +46,18 @@ public abstract class BaseURLEncodedStringImpl extends BaseURLNonEncodedStringIm
 
 	@Override
 	public String toString() {
-		return portletResponse.encodeURL(super.toString());
+
+		String stringValue = null;
+
+		try {
+			stringValue = super.toString();
+			stringValue = portletResponse.encodeURL(stringValue);
+		}
+		catch (Exception e) {
+			logger.error(e);
+		}
+
+		return stringValue;
 	}
 
 }
