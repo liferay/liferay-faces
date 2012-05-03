@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.application;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -232,18 +233,7 @@ public class ResourceHandlerImpl extends ResourceHandlerWrapper {
 							}
 						}
 
-						// Set the response buffer size.
-						int responseBufferSize = byteBuffer.capacity();
-						externalContext.setResponseBufferSize(responseBufferSize);
-
-						if (logger.isTraceEnabled()) {
-
-							// Surround with isTraceEnabled check in order to avoid unnecessary conversion of
-							// int to String.
-							logger.trace("Handling - responseBufferSize=[{0}]", Integer.toString(responseBufferSize));
-						}
-
-						// Set the response content type.
+						// Set the response Content-Type header.
 						String responseContentType = resource.getContentType();
 						logger.trace("Handling - responseContentType=[{0}]", responseContentType);
 
@@ -251,10 +241,14 @@ public class ResourceHandlerImpl extends ResourceHandlerWrapper {
 							externalContext.setResponseContentType(responseContentType);
 						}
 
-						// Copy the bytes in the resource's input stream to the response's output stream.
+						// Rather than write the input stream directly to the PortletResponse, write it to an
+						// intermediate ByteArrayOutputStream so that the length can be calculated for the
+						// Content-Length header. See: http://issues.liferay.com/browse/FACES-1207
+						ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(bufferSize);
+
 						int responseContentLength = 0;
 						readableByteChannel = Channels.newChannel(inputStream);
-						writableByteChannel = Channels.newChannel(externalContext.getResponseOutputStream());
+						writableByteChannel = Channels.newChannel(byteArrayOutputStream);
 
 						int bytesRead = readableByteChannel.read(byteBuffer);
 
@@ -288,9 +282,24 @@ public class ResourceHandlerImpl extends ResourceHandlerWrapper {
 							}
 						}
 
-						// Now that we know how big the file is, set the response content length.
+						// Now that we know how big the file is, set the response Content-Length header and the status.
 						externalContext.setResponseContentLength(responseContentLength);
 						externalContext.setResponseStatus(HttpServletResponse.SC_OK);
+
+						// Set the response buffer size.
+						externalContext.setResponseBufferSize(responseContentLength);
+
+						if (logger.isTraceEnabled()) {
+
+							// Surround with isTraceEnabled check in order to avoid unnecessary conversion of
+							// int to String.
+							logger.trace("Handling - responseBufferSize=[{0}]", Integer.toString(responseContentLength));
+						}
+
+
+						// Write the data to the response.
+						byteArrayOutputStream.writeTo(externalContext.getResponseOutputStream());
+						byteArrayOutputStream.close();
 
 						if (logger.isDebugEnabled()) {
 							logger.debug(
