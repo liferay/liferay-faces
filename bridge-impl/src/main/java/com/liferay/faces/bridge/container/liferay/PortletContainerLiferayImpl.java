@@ -23,7 +23,6 @@ import java.util.Set;
 
 import javax.faces.context.ResponseWriter;
 import javax.portlet.ActionResponse;
-import javax.portlet.BaseURL;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -37,14 +36,12 @@ import javax.portlet.WindowState;
 import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.application.ResourceHandlerImpl;
 import com.liferay.faces.bridge.container.PortletContainerImpl;
 import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriterLiferayImpl;
-import com.liferay.faces.bridge.util.RequestParameter;
 
 
 /**
@@ -174,7 +171,7 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 
 		PortletURL redirectURL = liferayPortletResponse.createRenderURL();
 
-		copyRequestParameters(fromURL, redirectURL, false);
+		copyRequestParameters(fromURL, redirectURL);
 
 		if (parameters != null) {
 			Set<String> parameterNames = parameters.keySet();
@@ -222,37 +219,6 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 		}
 		else {
 			super.redirect(url);
-		}
-	}
-
-	@Override
-	protected void copyRequestParameters(String fromURL, BaseURL toURL, boolean facesResource)
-		throws MalformedURLException {
-		List<RequestParameter> requestParameters = parseRequestParameters(fromURL);
-
-		boolean foundLibraryName = false;
-		boolean foundVersion = false;
-
-		if (requestParameters != null) {
-
-			for (RequestParameter requestParameter : requestParameters) {
-				String name = requestParameter.getName();
-				String value = requestParameter.getValue();
-				toURL.setParameter(name, value);
-
-				if (facesResource) {
-
-					if (!foundLibraryName) {
-						foundLibraryName = (ResourceHandlerImpl.REQUEST_PARAM_LIBRARY_NAME.equals(name));
-					}
-
-					if (!foundVersion) {
-						foundVersion = (ResourceHandlerImpl.REQUEST_PARAM_VERSION.equals(name));
-					}
-				}
-
-				logger.debug("Copied parameter to portletURL name=[{0}] value=[{1}]", name, value);
-			}
 		}
 	}
 
@@ -439,21 +405,6 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 
 			if (responseNamespace.startsWith(BridgeConstants.WSRP_REWRITE)) {
 				responseNamespace = LiferayPortalUtil.getPortletId(portletRequest);
-//				StringBuilder buf = new StringBuilder();
-//				buf.append(portletConfig.getPortletName());
-//				buf.append(LiferayConstants.WAR_SEPARATOR);
-//				buf.append(portletContext.getPortletContextName());
-//
-//				LiferayThemeDisplay liferayThemeDisplay = liferayPortletRequest.getLiferayThemeDisplay();
-//				LiferayPortletDisplay liferayPortletDisplay = liferayThemeDisplay.getLiferayPortletDisplay();
-//				String instanceId = liferayPortletDisplay.getInstanceId();
-//
-//				if (instanceId != null) {
-//					buf.append(LiferayConstants.INSTANCE_SEPARATOR);
-//					buf.append(instanceId);
-//				}
-//
-//				responseNamespace = buf.toString();
 			}
 		}
 
