@@ -114,7 +114,7 @@ public class PortletContainerImpl implements PortletContainer {
 
 				MimeResponse mimeResponse = (MimeResponse) portletResponse;
 				actionURL = createActionURL(mimeResponse);
-				copyRequestParameters(fromURL, actionURL, false);
+				copyRequestParameters(fromURL, actionURL);
 				actionURLCache.put(fromURL, actionURL);
 			}
 			catch (ClassCastException e) {
@@ -150,7 +150,7 @@ public class PortletContainerImpl implements PortletContainer {
 
 				MimeResponse mimeResponse = (MimeResponse) portletResponse;
 				redirectURL = mimeResponse.createRenderURL();
-				copyRequestParameters(fromURL, redirectURL, false);
+				copyRequestParameters(fromURL, redirectURL);
 
 				if (parameters != null) {
 					Set<String> parameterNames = parameters.keySet();
@@ -187,7 +187,7 @@ public class PortletContainerImpl implements PortletContainer {
 
 					MimeResponse mimeResponse = (MimeResponse) portletResponse;
 					renderURL = createRenderURL(mimeResponse);
-					copyRequestParameters(fromURL, renderURL, false);
+					copyRequestParameters(fromURL, renderURL);
 					renderURLCache.put(fromURL, renderURL);
 				}
 				catch (ClassCastException e) {
@@ -219,7 +219,6 @@ public class PortletContainerImpl implements PortletContainer {
 
 				// If the "javax.faces.resource" token is found in the URL, then
 				int tokenPos = fromURL.indexOf(ResourceHandlerImpl.JAVAX_FACES_RESOURCE);
-				boolean resourceNameFound = false;
 
 				if (tokenPos >= 0) {
 
@@ -239,7 +238,6 @@ public class PortletContainerImpl implements PortletContainer {
 
 					if (slashPos > 0) {
 						resourceName = resourceName.substring(slashPos + 1);
-						resourceNameFound = true;
 					}
 					else {
 						logger.error("There is no slash after the [{0}] token in resourceURL=[{1}]",
@@ -252,7 +250,7 @@ public class PortletContainerImpl implements PortletContainer {
 				}
 
 				// Copy the request parameters to the portlet resource URL.
-				copyRequestParameters(fromURL, resourceURL, resourceNameFound);
+				copyRequestParameters(fromURL, resourceURL);
 
 				resourceURLCache.put(fromURL, resourceURL);
 			}
@@ -317,7 +315,7 @@ public class PortletContainerImpl implements PortletContainer {
 	 *
 	 * @throws  MalformedURLException
 	 */
-	protected void copyRequestParameters(String fromURL, BaseURL toURL, boolean facesResource)
+	protected void copyRequestParameters(String fromURL, BaseURL toURL)
 		throws MalformedURLException {
 		List<RequestParameter> requestParameters = parseRequestParameters(fromURL);
 

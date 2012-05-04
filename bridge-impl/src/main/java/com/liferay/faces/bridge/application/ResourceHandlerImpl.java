@@ -50,7 +50,6 @@ public class ResourceHandlerImpl extends ResourceHandlerWrapper {
 	public static final String JAVAX_FACES_RESOURCE = "javax.faces.resource";
 	public static final String RICH_FACES_RESOURCE = "rfRes";
 	public static final String REQUEST_PARAM_LIBRARY_NAME = "ln";
-	public static final String REQUEST_PARAM_VERSION = "v";
 
 	// Private Constants
 	private static final String ENCODED_RESOURCE_TOKEN = "javax.faces.resource=";
@@ -156,8 +155,12 @@ public class ResourceHandlerImpl extends ResourceHandlerWrapper {
 		// resource to the response.
 		if (resourceName != null) {
 			String libraryName = requestParameterMap.get(REQUEST_PARAM_LIBRARY_NAME);
-			String locale = null; // See comments above regarding Ryan Lubke's blog.
-			String version = null; // See comments above regarding Ryan Lubke's blog.
+			// Ryan Lubke's blog indicates that the locale and version are handled automatically, so the assumption
+			// is that the bridge doesn't need to handle the "loc" and "v" request parameters. Additionally, the
+			// ResourceHandler.createResource(...) methods don't take locale/version parameters, so there is
+			// nothing we can do about it here. See: https://blogs.oracle.com/rlubke/entry/jsf_2_0_new_feature5
+			String locale = null;
+			String version = null;
 
 			if (logger.isTraceEnabled()) {
 
