@@ -80,13 +80,6 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		portletRequest.removeAttribute(Bridge.PORTLET_LIFECYCLE_PHASE);
 	}
 
-	/**
-	 * Sets the viewId history in the session
-	 */
-	protected void foo() {
-
-	}
-
 	protected void indicateNamespacingToConsumers(UIViewRoot uiViewRoot, PortletResponse portletResponse) {
 
 		if (uiViewRoot != null) {
