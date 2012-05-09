@@ -3,11 +3,6 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
-	<!-- Instruct JBoss AS to look for the JSF implementation within the portlet WAR. -->
-	<context-param>
-		<param-name>org.jboss.jbossfaces.WAR_BUNDLES_JSF_IMPL</param-name>
-		<param-value>true</param-value>
-	</context-param>
 	<!-- Instruct Mojarra to utilize JBoss-EL instead of the EL implementation provided by the servlet container. -->
 	<context-param>
 		<param-name>com.sun.faces.expressionFactory</param-name>
@@ -19,12 +14,6 @@
 		<param-name>org.icefaces.uniqueResourceURLs</param-name>
 		<param-value>false</param-value>
 	</context-param>
-	<!-- The following listener is required for deployment on JBoss AS. See FACES-183 for more info. -->
-	<!--
-	<listener>
-		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
-	</listener>
-	-->
 	<!-- Although the FacesServlet will not be invoked by any portlet requests, it is required to initialize JSF. -->
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
@@ -42,13 +31,6 @@
 		<url-pattern>/xmlhttp/*</url-pattern>
 	</servlet-mapping>
 	<!-- END: Compatibility with ICEfaces 1.8 components -->
-	<!-- Setup the mail session so that it can be shared by the portlet WAR. -->
-	<resource-ref>
-		<res-ref-name>mail/MailSession</res-ref-name>
-		<res-type>javax.mail.Session</res-type>
-		<res-auth>Container</res-auth>
-		<res-sharing-scope>Shareable</res-sharing-scope>
-	</resource-ref>
 	<!-- Prevent direct access to Facelet view XHTML by the userAgent (browser). --> 
 	<security-constraint>
 		<web-resource-collection>
