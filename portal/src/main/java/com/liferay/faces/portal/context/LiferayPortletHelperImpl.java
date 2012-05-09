@@ -21,6 +21,7 @@ import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.portal.bean.Liferay;
 import com.liferay.faces.portal.security.AuthorizationException;
 
 import com.liferay.portal.kernel.exception.SystemException;
@@ -50,9 +51,6 @@ public class LiferayPortletHelperImpl implements LiferayPortletHelper, Serializa
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(LiferayPortletHelperImpl.class);
-
-	// Private Constants
-	private static final String REQUEST_ATTR_LIFERAY_RENDER_PORTLET = "RENDER_PORTLET";
 
 	public void checkUserPortletPermission(String actionId) throws AuthorizationException {
 
@@ -127,6 +125,13 @@ public class LiferayPortletHelperImpl implements LiferayPortletHelper, Serializa
 		return getThemeDisplay().getLayout();
 	}
 
+	protected Liferay getLiferayManagedBean() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+
+		return (Liferay) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null,
+				"liferay");
+	}
+
 	public PermissionChecker getPermissionChecker() {
 		return getThemeDisplay().getPermissionChecker();
 	}
@@ -140,7 +145,18 @@ public class LiferayPortletHelperImpl implements LiferayPortletHelper, Serializa
 	}
 
 	public Portlet getPortlet() {
-		return (Portlet) getPortletRequest().getAttribute(REQUEST_ATTR_LIFERAY_RENDER_PORTLET);
+
+		// Attempt to get the Portlet object from the "RENDER_PORTLET" request attribute.
+		Portlet portlet = (Portlet) getPortletRequest().getAttribute(WebKeys.RENDER_PORTLET);
+
+		// FACES-1212: If the request attribute was null, then this method is being called outside of the RENDER_PHASE
+		// of the portlet lifecycle. In that case, use the cached version of the Portlet object from the "liferay"
+		// ViewScoped managed-bean.
+		if (portlet == null) {
+			portlet = getLiferayManagedBean().getPortlet();
+		}
+
+		return portlet;
 	}
 
 	public String getPortletInstanceId() {

@@ -17,6 +17,7 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.portlet.PortletRequest;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
@@ -25,6 +26,7 @@ import com.liferay.faces.portal.el.ThemeImageURLMap;
 import com.liferay.faces.portal.helper.BooleanHelper;
 import com.liferay.faces.portal.security.UserPermissionMap;
 
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
@@ -63,6 +65,15 @@ public class Liferay implements Serializable {
 	private transient String themeImagesURL;
 	private transient User user;
 	private transient UserPermissionMap userPermissionMap;
+
+	public Liferay() {
+
+		// FACES-1212: Cache the "RENDER_PORTLET" request attribute here in the constructor since it is only
+		// available during the RENDER_PHASE of the portlet lifecycle.
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		PortletRequest portletRequest = (PortletRequest) facesContext.getExternalContext().getRequest();
+		portlet = (Portlet) portletRequest.getAttribute(WebKeys.RENDER_PORTLET);
+	}
 
 	public int getBuildNumber() {
 		return liferayFacesContext.getBuildNumber();
@@ -149,11 +160,6 @@ public class Liferay implements Serializable {
 	 * Returns the containing Liferay {@link Portlet} associated with the {@link PortletRequest}.
 	 */
 	public Portlet getPortlet() {
-
-		if (portlet == null) {
-			portlet = liferayFacesContext.getPortlet();
-		}
-
 		return portlet;
 	}
 
