@@ -9,8 +9,8 @@
 	</parent>
 	<groupId>com.liferay.faces.demos</groupId>
 	<artifactId>liferay-faces-demos</artifactId>
-	<name>${project.artifactId}</name>
 	<packaging>pom</packaging>
+	<name>Liferay Faces Demos</name>
 
 	<modules>
 		<module>bridge</module>

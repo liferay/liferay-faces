@@ -8,8 +8,8 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>icefaces3-ipc-ajax-push-portlet</artifactId>
-	<name>${project.artifactId}</name>
 	<packaging>war</packaging>
+	<name>ICEfaces3 IPC Ajax Push Portlet</name>
 
 	<dependencies>
 		<dependency>

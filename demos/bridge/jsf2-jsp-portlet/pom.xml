@@ -8,8 +8,8 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>jsf2-jsp-portlet</artifactId>
-	<name>${project.artifactId}</name>
 	<packaging>war</packaging>
+	<name>JSF2 JSP Portlet</name>
 
 	<dependencies>
 		<dependency>

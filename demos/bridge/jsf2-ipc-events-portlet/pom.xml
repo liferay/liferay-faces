@@ -8,8 +8,8 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>jsf2-ipc-events-portlet</artifactId>
-	<name>${project.artifactId}</name>
 	<packaging>war</packaging>
+	<name>JSF2 IPC Events Portlet</name>
 
 	<dependencies>
 		<dependency>

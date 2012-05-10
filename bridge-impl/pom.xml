@@ -8,7 +8,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>liferay-faces-bridge-impl</artifactId>
-	<name>${project.artifactId}</name>
+	<name>Liferay Faces Bridge</name>
 	<description>Implementation of the API for Liferay Faces Bridge</description>
 
 	<dependencies>

@@ -8,7 +8,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>liferay-faces-portal</artifactId>
-	<name>${project.artifactId}</name>
+	<name>Liferay Faces Portal</name>
 
 	<dependencies>
 		<dependency>

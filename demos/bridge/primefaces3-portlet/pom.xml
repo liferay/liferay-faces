@@ -8,8 +8,8 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>primefaces3-portlet</artifactId>
-	<name>${project.artifactId}</name>
 	<packaging>war</packaging>
+	<name>PrimeFaces3 Portlet</name>
 
 	<dependencies>
 		<dependency>

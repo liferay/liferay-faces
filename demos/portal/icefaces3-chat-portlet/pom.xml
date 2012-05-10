@@ -8,9 +8,8 @@
         <relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>icefaces3-chat-portlet</artifactId>
-	<name>${project.artifactId}</name>
 	<packaging>war</packaging>
-
+	<name>ICEfaces3 Chat Portlet</name>
 	<description>This plugin is a chat portlet that utilizes ICEfaces Ajax Push Inter-Portlet Communication (IPC).</description>
 
 	<dependencies>

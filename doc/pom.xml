@@ -7,7 +7,7 @@
 		<version>3.0.0-RC1-SNAPSHOT</version>
 	</parent>
 	<artifactId>liferay-faces-doc</artifactId>
-	<name>${project.artifactId}</name>
+	<name>Liferay Faces Documentation</name>
 
 	<build>
 		<plugins>
