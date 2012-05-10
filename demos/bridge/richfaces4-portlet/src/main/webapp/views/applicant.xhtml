@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:a4j="http://richfaces.org/a4j" xmlns:aui="http://liferay.com/faces/aui"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:bridge="http://liferay.com/faces/bridge"
-	xmlns:example-cc="http://java.sun.com/jsf/composite/example-cc" xmlns:rich="http://richfaces.org/rich"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:aui="http://liferay.com/faces/aui" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:bridge="http://liferay.com/faces/bridge" xmlns:example-cc="http://java.sun.com/jsf/composite/example-cc"
+	xmlns:rich="http://richfaces.org/rich" xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<aui:layout id="l1" rendered="#{!applicantBackingBean.fileUploaderRendered}">
 		<example-cc:clipboard label="#{i18n['job-application']}" />
@@ -108,9 +108,7 @@
 				<aui:column id="c2a" styleClass="uploaded-files">
 					<h:messages globalOnly="true" layout="table" />
 					<h3>#{i18n['attachments']}</h3>
-					<h:dataTable headerClass="portlet-section-header results-header"
-						rowClasses="portlet-section-body results-row, portlet-section-alternate results-row alt"
-						value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
+					<rich:dataTable value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
 						<h:column>
 							<h:commandButton actionListener="#{applicantBackingBean.deleteUploadedFile}"
 								image="#{resource['example:icon-delete.png']}"
@@ -131,7 +129,7 @@
 							</f:facet>
 							<h:outputText value="#{uploadedFile.size}" />
 						</h:column>
-					</h:dataTable>
+					</rich:dataTable>
 					<hr />
 					<h:commandButton actionListener="#{applicantBackingBean.addAttachment}" immediate="true"
 						value="#{i18n['add-attachment']}" />
