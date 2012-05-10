@@ -13,6 +13,10 @@
  */
 package com.liferay.faces.bridge;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.EventRequest;
@@ -27,17 +31,11 @@ import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 import javax.portlet.faces.BridgeUninitializedException;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
-
 
 /**
  * @author  Neil Griffin
  */
 public class BridgeImpl implements Bridge {
-
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(BridgeImpl.class);
 
 	// Private Data Members
 	private boolean initialized = false;
@@ -45,7 +43,6 @@ public class BridgeImpl implements Bridge {
 	private PortletConfig portletConfig;
 
 	public void destroy() {
-		logger.trace("destroy this=[{0}]", this);
 		initialized = false;
 	}
 
@@ -105,7 +102,21 @@ public class BridgeImpl implements Bridge {
 	}
 
 	public void init(PortletConfig portletConfig) throws BridgeException {
-		logger.trace("init(PortletConfig) this=[{0}]", this);
+		Package pkg = BridgeImpl.class.getPackage();
+		StringBuilder info = new StringBuilder();
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss,SSS");
+		String timestamp = dateFormat.format(Calendar.getInstance().getTime());
+		info.append(timestamp);
+		info.append(BridgeConstants.CHAR_SPACE);
+		info.append("INFO");
+		info.append(BridgeConstants.CHAR_SPACE);
+		info.append(BridgeConstants.CHAR_SPACE);
+		info.append("[BridgeImpl] Initializing");
+		info.append(BridgeConstants.CHAR_SPACE);
+		info.append(pkg.getImplementationTitle());
+		info.append(BridgeConstants.CHAR_SPACE);
+		info.append(pkg.getImplementationVersion());
+		System.out.println(info.toString());
 		this.initialized = true;
 		this.portletConfig = portletConfig;
 		BridgeFactoryFinder.setPortletConfig(portletConfig);
