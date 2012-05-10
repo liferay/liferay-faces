@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:portlet="http://java.sun.com/portlet" version="2.1">
+<jsp:root xmlns:aui="http://liferay.com/faces/aui" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:portlet="http://java.sun.com/portlet" version="2.1">
 
 	<p>This text should appear BEFORE f:view</p>
 	<f:view>
@@ -11,6 +11,12 @@
 		<f:subview id="applicant">
 			<jsp:include page="applicant.jspx" />
 		</f:subview>
+		<br />
+		<aui:layout>
+			<aui:column>
+				<em><h:outputText value="#{bridge.title} #{bridge.version}" /></em>
+			</aui:column>
+		</aui:layout>
 	</f:view>
 	<p>This text should appear AFTER f:view</p>
 	<hr />
