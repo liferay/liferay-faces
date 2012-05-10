@@ -101,22 +101,29 @@ public class BridgeImpl implements Bridge {
 
 	}
 
+	public String getTitle() {
+		return BridgeImpl.class.getPackage().getImplementationTitle();
+	}
+	
+	public String getVersion() {
+		return BridgeImpl.class.getPackage().getImplementationVersion();
+	}
+
 	public void init(PortletConfig portletConfig) throws BridgeException {
-		Package pkg = BridgeImpl.class.getPackage();
-		StringBuilder info = new StringBuilder();
+		StringBuilder logMessage = new StringBuilder();
 		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss,SSS");
 		String timestamp = dateFormat.format(Calendar.getInstance().getTime());
-		info.append(timestamp);
-		info.append(BridgeConstants.CHAR_SPACE);
-		info.append("INFO");
-		info.append(BridgeConstants.CHAR_SPACE);
-		info.append(BridgeConstants.CHAR_SPACE);
-		info.append("[BridgeImpl] Initializing");
-		info.append(BridgeConstants.CHAR_SPACE);
-		info.append(pkg.getImplementationTitle());
-		info.append(BridgeConstants.CHAR_SPACE);
-		info.append(pkg.getImplementationVersion());
-		System.out.println(info.toString());
+		logMessage.append(timestamp);
+		logMessage.append(BridgeConstants.CHAR_SPACE);
+		logMessage.append("INFO");
+		logMessage.append(BridgeConstants.CHAR_SPACE);
+		logMessage.append(BridgeConstants.CHAR_SPACE);
+		logMessage.append("[BridgeImpl] Initializing");
+		logMessage.append(BridgeConstants.CHAR_SPACE);
+		logMessage.append(getTitle());
+		logMessage.append(BridgeConstants.CHAR_SPACE);
+		logMessage.append(getVersion());
+		System.out.println(logMessage.toString());
 		this.initialized = true;
 		this.portletConfig = portletConfig;
 		BridgeFactoryFinder.setPortletConfig(portletConfig);

@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<f:view xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<h:head />
 	<h:body styleClass="icefaces3-portlet ltr">
 		<ui:include src="styling.xhtml" />
 		<ui:include src="applicant.xhtml" />
+		<br />
+		<aui:layout>
+			<aui:column>
+				<em><h:outputText value="#{bridge.title} #{bridge.version}" /></em>
+			</aui:column>
+		</aui:layout>
 	</h:body>
 </f:view>
