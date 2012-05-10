@@ -20,6 +20,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -30,6 +31,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 
+import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.container.PortletContainer;
@@ -53,6 +55,38 @@ public class ResourceHandlerImpl extends ResourceHandlerWrapper {
 
 	// Private Constants
 	private static final String ENCODED_RESOURCE_TOKEN = "javax.faces.resource=";
+	private static final String EXTENSION_CSS = ".css";
+	private static final String RICHFACES_STATIC_RESOURCE = "org.richfaces.staticResource";
+
+	// FACES-1214
+	protected enum RichFacesImageResource {
+		TYPE1("org.richfaces", "../../org.richfaces.images/", "richfaces-type1"),
+		TYPE2("org.richfaces", "../../", "richfaces-type2"),
+		TYPE3("org.richfaces.images", "../org.richfaces.images/", "richfaces-type3"),
+		TYPE4("org.richfaces.images", "org.richfaces.images/", "richfaces-type4");
+
+		private String libraryName;
+		private String pathPrefix;
+		private String substitutionToken;
+
+		private RichFacesImageResource(String libraryName, String pathPrefix, String substitutionToken) {
+			this.libraryName = libraryName;
+			this.pathPrefix = pathPrefix;
+			this.substitutionToken = substitutionToken;
+		}
+
+		public String getLibraryName() {
+			return libraryName;
+		}
+
+		public String getPathPrefix() {
+			return pathPrefix;
+		}
+
+		public String getSubstitutionToken() {
+			return substitutionToken;
+		}
+	}
 
 	// Private Data Members
 	private Integer resourceBufferSize;
@@ -155,6 +189,7 @@ public class ResourceHandlerImpl extends ResourceHandlerWrapper {
 		// resource to the response.
 		if (resourceName != null) {
 			String libraryName = requestParameterMap.get(REQUEST_PARAM_LIBRARY_NAME);
+
 			// Ryan Lubke's blog indicates that the locale and version are handled automatically, so the assumption
 			// is that the bridge doesn't need to handle the "loc" and "v" request parameters. Additionally, the
 			// ResourceHandler.createResource(...) methods don't take locale/version parameters, so there is
@@ -296,9 +331,19 @@ public class ResourceHandlerImpl extends ResourceHandlerWrapper {
 
 							// Surround with isTraceEnabled check in order to avoid unnecessary conversion of
 							// int to String.
-							logger.trace("Handling - responseBufferSize=[{0}]", Integer.toString(responseContentLength));
+							logger.trace("Handling - responseBufferSize=[{0}]",
+								Integer.toString(responseContentLength));
 						}
 
+						// If this is a RichFaces CSS resource like packed.css or skinning.css, then fix the URLs
+						// inside of the CSS text before sending it back as part of the response. For more info, see
+						// http://issues.liferay.com/browse/FACES-1214
+						if (resourceName.startsWith(RICHFACES_STATIC_RESOURCE) && resourceName.indexOf(EXTENSION_CSS) > 0) {
+
+							String cssText = fixRichFacesImageURLs(facesContext, byteArrayOutputStream.toString());
+							byteArrayOutputStream = new ByteArrayOutputStream();
+							byteArrayOutputStream.write(cssText.getBytes());
+						}
 
 						// Write the data to the response.
 						byteArrayOutputStream.writeTo(externalContext.getResponseOutputStream());
@@ -360,6 +405,85 @@ public class ResourceHandlerImpl extends ResourceHandlerWrapper {
 				JAVAX_FACES_RESOURCE);
 			wrappedResourceHandler.handleResourceRequest(facesContext);
 		}
+	}
+
+	/**
+	 * This method is part of a fix for FACES-1214. Some of the RichFacess CSS resources have relative URLs that must be
+	 * translated to ResourceURLs so that they work in a portlet environment.
+	 */
+	protected String fixRichFacesImageURLs(FacesContext facesContext, String cssText) {
+
+		// Since the same image URL often appears more then once, maintain a cache of URLs for fast lookup.
+		Map<String, String> resourceURLCache = new HashMap<String, String>();
+		ResourceHandler resourceHandler = facesContext.getApplication().getResourceHandler();
+
+		// For each of the RichFaces image resource types:
+		for (RichFacesImageResource richFacesImageResource : RichFacesImageResource.values()) {
+
+			// Parse the specified CSS text, and replace each relative URL with a ResourceURL.
+			boolean doneProcessingURLs = false;
+
+			while (!doneProcessingURLs) {
+
+				String pathPrefix = richFacesImageResource.getPathPrefix();
+				int urlStartPos = cssText.indexOf(pathPrefix);
+
+				if (urlStartPos > 0) {
+
+					int fileNameStartPos = urlStartPos + pathPrefix.length();
+
+					int dotPos = cssText.indexOf(BridgeConstants.CHAR_PERIOD, fileNameStartPos);
+
+					if (dotPos > 0) {
+						boolean doneFindingExtension = false;
+						int extensionStartPos = dotPos + 1;
+						int extensionFinishPos = extensionStartPos;
+
+						while (!doneFindingExtension) {
+
+							if ((extensionFinishPos < cssText.length()) &&
+									Character.isLetterOrDigit(cssText.charAt(extensionFinishPos))) {
+								extensionFinishPos++;
+							}
+							else {
+								doneFindingExtension = true;
+							}
+						}
+
+						String imageResourceName = cssText.substring(fileNameStartPos, extensionFinishPos);
+						String imageResourceURL = resourceURLCache.get(imageResourceName);
+
+						if (imageResourceURL == null) {
+							String libraryName = richFacesImageResource.getLibraryName();
+							String substitutionToken = richFacesImageResource.getSubstitutionToken();
+							Resource imageResource = resourceHandler.createResource(imageResourceName, libraryName);
+							imageResourceURL = imageResource.getRequestPath();
+							imageResourceURL = imageResourceURL.replaceAll(libraryName, substitutionToken);
+							resourceURLCache.put(imageResourceName, imageResourceURL);
+						}
+
+						StringBuilder buf = new StringBuilder();
+						buf.append(cssText.substring(0, urlStartPos));
+						buf.append(imageResourceURL);
+						buf.append(cssText.substring(extensionFinishPos));
+						cssText = buf.toString();
+					}
+					else {
+						logger.error("Unable to find image filename in URL");
+					}
+				}
+				else {
+					doneProcessingURLs = true;
+				}
+			}
+		}
+
+		for (RichFacesImageResource richFacesImageResource : RichFacesImageResource.values()) {
+			cssText = cssText.replace(richFacesImageResource.getSubstitutionToken(),
+					richFacesImageResource.getLibraryName());
+		}
+
+		return cssText;
 	}
 
 	/**
