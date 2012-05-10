@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.liferay.faces</groupId>
 	<artifactId>liferay-faces</artifactId>
-	<name>${project.artifactId}</name>
 	<version>3.1.0-RC1-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<name>Liferay Faces Parent</name>
 	<description>Parent POM for all Liferay Faces projects</description>
-    
-    <organization>
-        <name>liferay.com</name>
-        <url>http://www.liferay.com</url>
-    </organization>
-    
+
+	<organization>
+		<name>Liferay, Inc.</name>
+		<url>http://www.liferay.com</url>
+	</organization>
+
 	<issueManagement>
 		<system>Atlassian JIRA</system>
 		<url>http://issues.liferay.com/browse/FACES</url>
@@ -45,13 +46,13 @@
 			<organizationUrl>http://www.mimacom.com</organizationUrl>
 		</developer>
 	</developers>
-    
-    <scm>
-        <connection>scm:git:https://github.com/liferay/liferay-faces</connection>
-        <developerConnection>scm:git:https://github.com/liferay/liferay-faces</developerConnection>
-        <url>scm:git:https://github.com/liferay/liferay-faces</url>
-    </scm>
-    
+
+	<scm>
+		<connection>scm:git:https://github.com/liferay/liferay-faces</connection>
+		<developerConnection>scm:git:https://github.com/liferay/liferay-faces</developerConnection>
+		<url>scm:git:https://github.com/liferay/liferay-faces</url>
+	</scm>
+
 	<distributionManagement>
 		<repository>
 			<id>liferay-releases</id>
@@ -68,10 +69,11 @@
 		<module>bridge-impl</module>
 		<module>portal</module>
 		<module>doc</module>
-		<module>demos</module> 
+		<module>demos</module>
 	</modules>
 
 	<properties>
+		<codename>Galatia</codename>
 		<icefaces3.version>3.0.1</icefaces3.version>
 		<log4j.version>1.2.14</log4j.version>
 		<mojarra.version>2.1.3-b02</mojarra.version>
@@ -81,7 +83,7 @@
 	</properties>
 
 	<build>
-		<pluginManagement>
+			<pluginManagement>
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -102,9 +104,13 @@
 					<artifactId>maven-jar-plugin</artifactId>
 					<configuration>
 						<archive>
-							<manifest>
-								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-							</manifest>
+							<manifestEntries>
+								<Built-By>Release Manager</Built-By>
+								<Implementation-Title>${project.name}</Implementation-Title>
+								<Implementation-Version>${project.version} (${codename} / ${timestamp} AD)</Implementation-Version>
+								<Implementation-Vendor-Id>com.liferay</Implementation-Vendor-Id>
+								<Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
+							</manifestEntries>
 						</archive>
 					</configuration>
 				</plugin>
@@ -123,8 +129,56 @@
 					<!-- http://jira.codehaus.org/browse/SCM-444 -->
 					<version>(,1.4]</version>
 				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>buildnumber-maven-plugin</artifactId>
+					<version>1.1</version>
+					<executions>
+						<execution>
+							<phase>initialize</phase>
+							<goals>
+								<goal>create-timestamp</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<doCheck>false</doCheck>
+						<doUpdate>false</doUpdate>
+						<timestampFormat>MMM d, yyyy</timestampFormat>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo</groupId>
+										<artifactId>buildnumber-maven-plugin</artifactId>
+										<versionRange>[1.1,)</versionRange>
+										<goals>
+											<goal>create-timestamp</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
 	</build>
 
 	<profiles>

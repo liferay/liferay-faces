@@ -8,9 +8,8 @@
         <relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>jsf2-registration-portlet</artifactId>
-	<name>${project.artifactId}</name>
 	<packaging>war</packaging>
-
+	<name>JSF2 Registration Portlet</name>
 	<description>This plugin is an alternate JSF 2 portlet for the Liferay Create-Account feature.</description>
 
 	<dependencies>

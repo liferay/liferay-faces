@@ -8,10 +8,10 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>icefaces3-crud-portlet</artifactId>
-	<name>${project.artifactId}</name>
+	<name>ICEfaces3 CRUD Portlet</name>
 	<packaging>war</packaging>
 
-	<description>This plugin is an example CRUD (Create, Read, Update, Delete) portlet built with ICEfaces 2.</description>
+	<description>This plugin is an example CRUD (Create, Read, Update, Delete) portlet built with ICEfaces.</description>
 
 	<dependencies>
 		<dependency>

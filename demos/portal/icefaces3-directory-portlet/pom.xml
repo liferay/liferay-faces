@@ -8,10 +8,9 @@
         <relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>icefaces3-directory-portlet</artifactId>
-	<name>${project.artifactId}</name>
 	<packaging>war</packaging>
-
-	<description>This plugin is an alternate portlet for the Liferay Directory that utilizes ICEfaces 2.x.</description>
+	<name>ICEfaces3 Directory Portlet</name>
+	<description>This plugin is an alternate portlet for the Liferay Directory that utilizes ICEfaces.</description>
 
 	<dependencies>
 		<dependency>

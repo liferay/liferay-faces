@@ -8,8 +8,8 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>liferay-faces-bridge-demos</artifactId>
-	<name>${project.artifactId}</name>
 	<packaging>pom</packaging>
+	<name>Liferay Faces Bridge Demos</name>
 
 	<modules>
 		<module>icefaces3-compat-portlet</module>

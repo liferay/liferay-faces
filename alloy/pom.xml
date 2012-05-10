@@ -7,7 +7,7 @@
 		<version>3.1.0-RC1-SNAPSHOT</version>
 	</parent>
 	<artifactId>liferay-faces-alloy</artifactId>
-	<name>${project.artifactId}</name>
+	<name>Liferay Faces Alloy</name>
 
 	<build>
 		<plugins>

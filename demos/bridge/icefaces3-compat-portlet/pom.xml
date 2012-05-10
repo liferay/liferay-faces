@@ -8,7 +8,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>icefaces3-compat-portlet</artifactId>
-	<name>${project.artifactId}</name>
+	<name>ICEfaces3 Compat Portlet</name>
 	<packaging>war</packaging>
 
 	<dependencies>

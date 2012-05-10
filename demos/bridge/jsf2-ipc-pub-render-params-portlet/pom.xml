@@ -8,8 +8,8 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>jsf2-ipc-pub-render-params-portlet</artifactId>
-	<name>${project.artifactId}</name>
 	<packaging>war</packaging>
+	<name>JSF2 IPC Public Render Parameters Portlet</name>
 
 	<dependencies>
 		<dependency>
