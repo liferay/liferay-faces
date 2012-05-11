@@ -69,6 +69,8 @@ public class BridgeActionURLImpl extends BridgeResponseURLImpl implements Bridge
 			// Otherwise, if the URL string starts with a "#" character, or it's an absolute URL that is external to
 			// this portlet, then simply return the URL string as required by the Bridge Spec.
 			else if (url.startsWith(BridgeConstants.CHAR_POUND) || (isAbsolute() && isExternal())) {
+				
+				// TCK TestPage084: encodeActionURLPoundCharTest
 				baseURL = new BaseURLNonEncodedStringImpl(url, getParameterMap());
 			}
 
