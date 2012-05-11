@@ -48,8 +48,6 @@ import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
  */
 public interface BridgeContext {
 
-	String getResponseNamespace();
-
 	/**
 	 * Creates a {@link PortletRequestDispatcher} for the specified <code>path</code> and issues a forward/include as
 	 * appropriate.
@@ -180,8 +178,25 @@ public interface BridgeContext {
 	/**
 	 * Returns the viewId associated with the specified <code>viewPath</code> by examining the servlet-mapping entries
 	 * from the WEB-INF/web.xml descriptor.
+	 *
+	 * @param   viewPath  The path to the view.
+	 *
+	 * @return  The viewId associated with the specified <code>viewPath</code> (providing that the view physically
+	 *          exists). Otherwise returns null.
 	 */
 	String getFacesViewIdFromPath(String viewPath);
+
+	/**
+	 * Returns the viewId associated with the specified <code>viewPath</code> by examining the servlet-mapping entries
+	 * from the WEB-INF/web.xml descriptor.
+	 *
+	 * @param   viewPath   The path to the view.
+	 * @param   mustExist  Flag indicating whether or not the view must physically exist in order for the viewId to be
+	 *                     returned.
+	 *
+	 * @return  The viewId associated with the specified <code>viewPath</code>. Otherwise returns null.
+	 */
+	String getFacesViewIdFromPath(String viewPath, boolean mustExist);
 
 	/**
 	 * Returns the query-string part of the to-view-id of the last navigation-rule that fired, or the query-string part
@@ -287,6 +302,8 @@ public interface BridgeContext {
 	 * Returns the servletPath associated with the current viewId.
 	 */
 	String getRequestServletPath();
+
+	String getResponseNamespace();
 
 	/**
 	 * Returns a {@link Writer} that is meant to be used as a return value for {@link

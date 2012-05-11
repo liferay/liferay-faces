@@ -185,14 +185,14 @@ public class BridgeResourceURLImpl extends BridgeURLBaseImpl implements BridgeRe
 			String windowState = getParameter(Bridge.PORTLET_WINDOWSTATE_PARAMETER);
 			boolean secure = BooleanHelper.toBoolean(getParameter(Bridge.PORTLET_SECURE_PARAMETER));
 
-			// If the URL targets a Faces viewId, then return a PortletURL (Render URL) that targets the view with the
-			// appropriate PortletMode, WindowState, and Security settings built into the URL.
+			// If the URL targets a Faces viewId, then return a PortletURL (Action URL) that targets the view with the
+			// appropriate PortletMode, WindowState, and Security settings built into the URL. For more info, see
+			// JavaDoc comments for {@link Bridge#VIEW_LINK}.
 			if (isFacesViewTarget()) {
 
-				// TODO: Oddly enough, there are no TCK tests for this condition. Need to set a breakpoint here and
-				// retry all the TCK tests just to make sure.
-				baseURL = new RenderURLFacesTargetImpl(urlWithModifiedParameters, portletMode, windowState, secure,
-						bridgeContext);
+				// TCK TestPage135: encodeResourceURLViewLinkTest
+				baseURL = new PortletURLFacesTargetActionImpl(bridgeContext, urlWithModifiedParameters, portletMode,
+						windowState, secure);
 			}
 
 			// Otherwise, return a PortletURL (Render URL) that contains the "_jsfBridgeNonFacesView" render parameter,
@@ -214,8 +214,8 @@ public class BridgeResourceURLImpl extends BridgeURLBaseImpl implements BridgeRe
 				// TCK TestPage106: encodeActionURLNonJSFViewWithInvalidModeResourceTest
 				// TCK TestPage107: encodeActionURLNonJSFViewWithWindowStateResourceTest
 				// TCK TestPage108: encodeActionURLNonJSFViewWithInvalidWindowStateResourceTest
-				baseURL = new RenderURLNonFacesTargetImpl(urlWithModifiedParameters, getContextRelativePath(),
-						portletMode, windowState, secure, bridgeContext);
+				baseURL = new PortletURLNonFacesTargetRenderImpl(bridgeContext, urlWithModifiedParameters, portletMode,
+						windowState, secure, getContextRelativePath());
 			}
 		}
 

@@ -124,6 +124,10 @@ public class BridgeContextMockImpl implements BridgeContext {
 		throw new UnsupportedOperationException();
 	}
 
+	public String getFacesViewIdFromPath(String viewPath, boolean mustExist) {
+		throw new UnsupportedOperationException();
+	}
+
 	public String getFacesViewQueryString() {
 		throw new UnsupportedOperationException();
 	}

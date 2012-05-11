@@ -15,7 +15,7 @@ package com.liferay.faces.bridge.context.url;
 
 import java.net.MalformedURLException;
 
-import javax.portlet.faces.Bridge;
+import javax.portlet.PortletURL;
 
 import com.liferay.faces.bridge.context.BridgeContext;
 
@@ -23,12 +23,16 @@ import com.liferay.faces.bridge.context.BridgeContext;
 /**
  * @author  Neil Griffin
  */
-public class RenderURLNonFacesTargetImpl extends RenderURLFacesTargetImpl {
+public class PortletURLNonFacesTargetRenderImpl extends PortletURLNonFacesTarget {
 
-	public RenderURLNonFacesTargetImpl(String url, String contextRelativePath, String portletMode, String windowState,
-		boolean secure, BridgeContext bridgeContext) throws MalformedURLException {
-		super(url, portletMode, windowState, secure, bridgeContext);
-		getWrapped().setParameter(Bridge.NONFACES_TARGET_PATH_PARAMETER, contextRelativePath);
+	public PortletURLNonFacesTargetRenderImpl(BridgeContext bridgeContext, String url, String portletMode,
+		String windowState, boolean secure, String contextRelativePath) throws MalformedURLException {
+		super(bridgeContext, url, portletMode, windowState, secure, contextRelativePath);
+	}
+
+	@Override
+	public PortletURL createPortletURL(BridgeContext bridgeContext, String url) throws MalformedURLException {
+		return bridgeContext.getPortletContainer().createRenderURL(url);
 	}
 
 }
