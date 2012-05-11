@@ -191,6 +191,7 @@ public class BridgeResourceURLImpl extends BridgeURLBaseImpl implements BridgeRe
 			if (isFacesViewTarget()) {
 
 				// TCK TestPage135: encodeResourceURLViewLinkTest
+				// TCK TestPage136: encodeResourceURLViewLinkWithBackLinkTest
 				baseURL = new PortletURLFacesTargetActionImpl(bridgeContext, urlWithModifiedParameters, portletMode,
 						windowState, secure);
 			}
