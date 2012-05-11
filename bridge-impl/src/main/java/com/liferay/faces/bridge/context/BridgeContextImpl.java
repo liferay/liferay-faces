@@ -726,6 +726,10 @@ public class BridgeContextImpl implements BridgeContext {
 	}
 
 	public String getFacesViewIdFromPath(String viewPath) {
+		return getFacesViewIdFromPath(viewPath, true);
+	}
+
+	public String getFacesViewIdFromPath(String viewPath, boolean mustExist) {
 
 		String facesViewId = null;
 
@@ -753,21 +757,29 @@ public class BridgeContextImpl implements BridgeContext {
 						int pos = viewPath.lastIndexOf(BridgeConstants.CHAR_PERIOD);
 
 						if (pos > 0) {
-							String resourcePath = viewPath.substring(0, pos) + defaultSuffix;
 
-							try {
-								URL resourceURL = getPortletContext().getResource(resourcePath);
+							if (mustExist) {
+								String resourcePath = viewPath.substring(0, pos) + defaultSuffix;
 
-								// If the file exists, then we've determined the viewId from the viewPath.
-								if (resourceURL != null) {
-									facesViewId = viewPath;
+								try {
+									URL resourceURL = getPortletContext().getResource(resourcePath);
 
-									break;
+									// If the file exists, then we've determined the viewId from the viewPath.
+									if (resourceURL != null) {
+										facesViewId = viewPath;
+
+										break;
+									}
+
 								}
-
+								catch (MalformedURLException e) {
+									logger.error(e);
+								}
 							}
-							catch (MalformedURLException e) {
-								logger.error(e);
+							else {
+								facesViewId = viewPath;
+
+								break;
 							}
 						}
 					}

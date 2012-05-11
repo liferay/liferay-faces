@@ -31,23 +31,23 @@ import com.liferay.faces.bridge.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class RenderURLFacesTargetImpl extends PortletURLWrapper {
+public abstract class PortletURLFacesTarget extends PortletURLWrapper {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(RenderURLFacesTargetImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(PortletURLFacesTarget.class);
 
-	// Protected Data Members
-	private PortletURL wrappedRenderURL;
+	// Private Data Members
+	private PortletURL wrappedPortletURL;
 
-	public RenderURLFacesTargetImpl(String url, String portletMode, String windowState, boolean secure,
-		BridgeContext bridgeContext) throws MalformedURLException {
+	public PortletURLFacesTarget(BridgeContext bridgeContext, String url, String portletMode, String windowState,
+		boolean secure) throws MalformedURLException {
 
-		this.wrappedRenderURL = bridgeContext.getPortletContainer().createRenderURL(url);
+		this.wrappedPortletURL = createPortletURL(bridgeContext, url);
 
 		if (portletMode != null) {
 
 			try {
-				this.wrappedRenderURL.setPortletMode(new PortletMode(portletMode));
+				this.wrappedPortletURL.setPortletMode(new PortletMode(portletMode));
 			}
 			catch (PortletModeException e) {
 				logger.error(e.getMessage());
@@ -57,7 +57,7 @@ public class RenderURLFacesTargetImpl extends PortletURLWrapper {
 		if (windowState != null) {
 
 			try {
-				this.wrappedRenderURL.setWindowState(new WindowState(windowState));
+				this.wrappedPortletURL.setWindowState(new WindowState(windowState));
 			}
 			catch (WindowStateException e) {
 				logger.error(e.getMessage());
@@ -65,16 +65,18 @@ public class RenderURLFacesTargetImpl extends PortletURLWrapper {
 		}
 
 		try {
-			this.wrappedRenderURL.setSecure(secure);
+			this.wrappedPortletURL.setSecure(secure);
 		}
 		catch (PortletSecurityException e) {
 			logger.error(e.getMessage());
 		}
+
 	}
+
+	public abstract PortletURL createPortletURL(BridgeContext bridgeContext, String url) throws MalformedURLException;
 
 	@Override
 	public PortletURL getWrapped() {
-		return wrappedRenderURL;
+		return wrappedPortletURL;
 	}
-
 }

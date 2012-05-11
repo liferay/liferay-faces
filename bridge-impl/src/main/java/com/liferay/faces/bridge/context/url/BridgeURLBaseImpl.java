@@ -681,7 +681,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 				// If the context relative view path maps to an actual Faces View due to a serlvet-mapping entry, then
 				// return true.
-				potentialFacesViewId = bridgeContext.getFacesViewIdFromPath(potentialFacesViewId);
+				potentialFacesViewId = bridgeContext.getFacesViewIdFromPath(potentialFacesViewId, false);
 
 				if (potentialFacesViewId != null) {
 					facesViewTarget = Boolean.TRUE;
