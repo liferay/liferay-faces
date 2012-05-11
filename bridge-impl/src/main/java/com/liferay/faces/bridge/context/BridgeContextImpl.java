@@ -256,7 +256,8 @@ public class BridgeContextImpl implements BridgeContext {
 				bridgeActionURL.removeParameter(Bridge.DIRECT_LINK);
 			}
 
-			if (!targetFacesView.isExtensionMapped() && !targetFacesView.isPathMapped()) {
+			if (!targetFacesView.isExtensionMapped() && !targetFacesView.isPathMapped() &&
+					!url.startsWith(BridgeConstants.CHAR_POUND)) {
 				bridgeActionURL.setParameter(Bridge.NONFACES_TARGET_PATH_PARAMETER, contextRelativeViewPath);
 			}
 
