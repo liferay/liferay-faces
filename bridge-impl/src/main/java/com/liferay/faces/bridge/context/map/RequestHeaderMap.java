@@ -41,14 +41,22 @@ public class RequestHeaderMap extends CaseInsensitiveHashMap<String> {
 				String[] value = mapEntry.getValue();
 
 				if ((value != null) && (value.length > 0)) {
-					put(key, value[0]);
+					super.put(key, value[0]);
 					logger.debug("Adding {0}=[{1}] to header map", key, value);
 				}
 				else {
-					put(key, null);
+					super.put(key, null);
 					logger.debug("Adding {0}=[null] to header map", key);
 				}
 			}
 		}
 	}
+
+	@Override
+	public String put(String key, String value) {
+
+		// TCK TestPage142: getRequestHeaderMapRenderTest
+		throw new UnsupportedOperationException();
+	}
+
 }

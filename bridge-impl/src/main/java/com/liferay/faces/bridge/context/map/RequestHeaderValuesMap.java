@@ -20,6 +20,7 @@ import javax.portlet.ClientDataRequest;
 import javax.portlet.PortletRequest;
 import javax.portlet.ResourceRequest;
 
+import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.logging.Logger;
@@ -32,6 +33,7 @@ import com.liferay.faces.bridge.logging.LoggerFactory;
 public class RequestHeaderValuesMap extends CaseInsensitiveHashMap<String[]> {
 
 	// Private Constants
+	private static final String CHARSET = "charset";
 	private static final String PARTIAL_AJAX = "partial/ajax";
 
 	// serialVersionUID
@@ -169,28 +171,32 @@ public class RequestHeaderValuesMap extends CaseInsensitiveHashMap<String[]> {
 
 		// If the specified portletRequest contains characterSetEncoding and contentType information, then
 		// use that to build the header.
-		String contentType = portletRequest.getResponseContentType();
-		String characterSetEncoding = null;
-
 		if (portletRequest instanceof ClientDataRequest) {
 			ClientDataRequest clientDataRequest = (ClientDataRequest) portletRequest;
-			contentType = clientDataRequest.getContentType();
-			characterSetEncoding = clientDataRequest.getCharacterEncoding();
+			String contentType = clientDataRequest.getContentType();
+			String characterSetEncoding = clientDataRequest.getCharacterEncoding();
+
+			StringBuilder header = new StringBuilder();
+			header.append(HEADER_CONTENT_TYPE);
+			header.append(BridgeConstants.CHAR_COLON);
+			header.append(BridgeConstants.CHAR_SPACE);
+			header.append(contentType);
+
+			if (characterSetEncoding != null) {
+				header.append(BridgeConstants.CHAR_SEMICOLON);
+				header.append(BridgeConstants.CHAR_SPACE);
+				header.append(CHARSET);
+				header.append(BridgeConstants.CHAR_EQUALS);
+				header.append(characterSetEncoding);
+			}
+
+			String contentTypeHeader = header.toString();
+			logger.debug("Adding contentTypeHeader=[{0}] to header map", contentTypeHeader);
+			put(HEADER_CONTENT_TYPE, new String[] { header.toString() });
 		}
-
-		StringBuilder header = new StringBuilder();
-		header.append(HEADER_CONTENT_TYPE);
-		header.append(": ");
-		header.append(contentType);
-
-		if (characterSetEncoding != null) {
-			header.append("; charset=");
-			header.append(characterSetEncoding);
+		else {
+			// TCK TestPage142: getRequestHeaderMapRenderTest
 		}
-
-		String contentTypeHeader = header.toString();
-		logger.debug("Adding contentTypeHeader=[{0}] to header map", contentTypeHeader);
-		put(HEADER_CONTENT_TYPE, new String[] { header.toString() });
 	}
 
 	protected void addFacesRequestPartialAjaxHeader(PortletRequest portletRequest) {

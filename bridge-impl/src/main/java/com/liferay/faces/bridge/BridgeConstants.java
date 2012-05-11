@@ -30,6 +30,7 @@ public class BridgeConstants {
 	public static final String CHAR_PERIOD = ".";
 	public static final String CHAR_POUND = "#";
 	public static final String CHAR_QUESTION_MARK = "?";
+	public static final Object CHAR_SEMICOLON = ";";
 	public static final String CHAR_SPACE = " ";
 	public static final String CHAR_UNDERSCORE = "_";
 	public static final String EMPTY = "";
