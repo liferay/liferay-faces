@@ -25,6 +25,8 @@ public class BridgeConstants {
 	public static final String CHAR_ASTERISK = "*";
 	public static final String CHAR_AT = "@";
 	public static final String CHAR_COLON = ":";
+	public static final Object CHAR_COMMA = ",";
+	public static final Object CHAR_DASH = "-";
 	public static final String CHAR_EQUALS = "=";
 	public static final String CHAR_FORWARD_SLASH = "/";
 	public static final String CHAR_PERIOD = ".";

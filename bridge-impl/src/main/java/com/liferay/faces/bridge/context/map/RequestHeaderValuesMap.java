@@ -14,6 +14,7 @@
 package com.liferay.faces.bridge.context.map;
 
 import java.util.Enumeration;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.ClientDataRequest;
@@ -44,6 +45,7 @@ public class RequestHeaderValuesMap extends CaseInsensitiveHashMap<String[]> {
 
 	// Private Constants
 	private static final String HEADER_ACCEPT = "Accept";
+	private static final String HEADER_ACCEPT_LANGUAGE = "Accept-Language";
 	private static final String HEADER_CONTENT_TYPE = "Content-Type";
 	private static final String HEADER_FACES_REQUEST = "Faces-Request";
 
@@ -56,43 +58,74 @@ public class RequestHeaderValuesMap extends CaseInsensitiveHashMap<String[]> {
 		if (propertyNames != null) {
 
 			while (propertyNames.hasMoreElements()) {
+
+				boolean addHeader = true;
 				String name = propertyNames.nextElement();
-				Enumeration<String> values = portletRequest.getProperties(name);
-				String[] valuesAsArray = null;
 
-				if (values != null) {
-					int totalValues = 0;
+				if (name.equalsIgnoreCase(HEADER_ACCEPT_LANGUAGE)) {
+					Enumeration<Locale> locales = portletRequest.getLocales();
 
-					while (values.hasMoreElements()) {
-						values.nextElement();
-						totalValues++;
-					}
+					if (locales != null) {
+						addHeader = false;
 
-					valuesAsArray = new String[totalValues];
-					values = portletRequest.getProperties(name);
+						StringBuilder buf = new StringBuilder();
 
-					for (int i = 0; values.hasMoreElements(); i++) {
-						valuesAsArray[i] = values.nextElement();
+						for (int i = 0; locales.hasMoreElements(); i++) {
+
+							if (i > 0) {
+								buf.append(BridgeConstants.CHAR_COMMA);
+							}
+
+							Locale locale = locales.nextElement();
+							buf.append(locale.getLanguage());
+							
+							String country = locale.getCountry();
+							if ((country != null) && (country.length() > 0)) {
+								buf.append(BridgeConstants.CHAR_DASH);
+								buf.append(country);
+							}
+						}
+
+						super.put(name, new String[] { buf.toString() });
 					}
 				}
 
-				put(name, valuesAsArray);
+				if (addHeader) {
+					Enumeration<String> properties = portletRequest.getProperties(name);
 
-				// NOTE: Need to check that the portlet container actually provided a value before the bridge can claim
-				// that it has detected "Accept", "Content-Type", or "Faces-Request".
-				// http://issues.liferay.com/browse/FACES-34
-				if ((valuesAsArray != null) && (valuesAsArray.length > 0)) {
+					StringBuilder buf = new StringBuilder();
 
-					if (!foundAccept) {
-						foundAccept = name.equalsIgnoreCase(HEADER_ACCEPT);
+					if (properties != null) {
+
+						for (int i = 0; properties.hasMoreElements(); i++) {
+
+							if (i > 0) {
+								buf.append(BridgeConstants.CHAR_COMMA);
+							}
+
+							buf.append(properties.nextElement());
+						}
 					}
 
-					if (!foundContentType) {
-						foundContentType = name.equalsIgnoreCase(HEADER_CONTENT_TYPE);
-					}
+					String values = buf.toString();
+					super.put(name, new String[] { values });
 
-					if (!foundFacesRequest) {
-						foundFacesRequest = name.equalsIgnoreCase(HEADER_FACES_REQUEST);
+					// NOTE: Need to check that the portlet container actually provided a value before the bridge can
+					// claim that it has detected "Accept", "Content-Type", or "Faces-Request".
+					// http://issues.liferay.com/browse/FACES-34
+					if ((values != null) && (values.length() > 0)) {
+
+						if (!foundAccept) {
+							foundAccept = name.equalsIgnoreCase(HEADER_ACCEPT);
+						}
+
+						if (!foundContentType) {
+							foundContentType = name.equalsIgnoreCase(HEADER_CONTENT_TYPE);
+						}
+
+						if (!foundFacesRequest) {
+							foundFacesRequest = name.equalsIgnoreCase(HEADER_FACES_REQUEST);
+						}
 					}
 				}
 			}
