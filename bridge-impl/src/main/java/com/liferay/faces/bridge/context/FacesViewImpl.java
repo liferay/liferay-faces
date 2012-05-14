@@ -15,6 +15,7 @@ package com.liferay.faces.bridge.context;
 
 import java.util.List;
 
+import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
@@ -30,6 +31,9 @@ public class FacesViewImpl implements FacesView {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(FacesViewImpl.class);
+
+	// Private Constants
+	private static final String EXTENSION_JSP = ".jsp";
 
 	// Private Data Members
 	private String viewId;
@@ -89,6 +93,18 @@ public class FacesViewImpl implements FacesView {
 					if (facesServletMapping.isMatch(viewId)) {
 						this.extension = facesServletMapping.getExtension();
 						this.extensionMapped = true;
+
+						// See: http://issues.liferay.com/browse/FACES-1224
+						if (EXTENSION_JSP.equals(this.extension)) {
+
+							// TCK TestPage159: getRequestServletPathTest
+							int pos = viewId.lastIndexOf(BridgeConstants.CHAR_PERIOD);
+
+							if (pos > 0) {
+								this.extension = facesServletMappings.get(0).getExtension();
+								this.viewId = viewId.substring(0, pos) + this.extension;
+							}
+						}
 
 						break;
 					}
