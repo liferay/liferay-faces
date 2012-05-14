@@ -38,10 +38,12 @@ public class LifecycleIncongruityMap {
 	private static final String RESPONSE_STATUS = "_pfbResponseStatus";
 
 	// Private Data Members
+	private boolean managementEnabled;
 	private Map<String, Object> requestMap;
 
-	public LifecycleIncongruityMap(Map<String, Object> requestMap) {
+	public LifecycleIncongruityMap(Map<String, Object> requestMap, boolean managementEnabled) {
 		this.requestMap = requestMap;
+		this.managementEnabled = managementEnabled;
 	}
 
 	public Object get(String key) {
@@ -49,55 +51,95 @@ public class LifecycleIncongruityMap {
 	}
 
 	public void put(String key, Object value) {
-		requestMap.put(key, value);
+
+		if (managementEnabled) {
+			requestMap.put(key, value);
+		}
 	}
 
 	public void putRequestCharacterEncoding(String requestCharacterEncoding) {
-		requestMap.put(REQUEST_CHARACTER_ENCODING, requestCharacterEncoding);
+
+		if (managementEnabled) {
+			requestMap.put(REQUEST_CHARACTER_ENCODING, requestCharacterEncoding);
+		}
 	}
 
 	public void putRequestContentLength(int requestContentLength) {
-		requestMap.put(REQUEST_CONTENT_LENGTH, Integer.valueOf(requestContentLength));
+
+		if (managementEnabled) {
+
+			requestMap.put(REQUEST_CONTENT_LENGTH, Integer.valueOf(requestContentLength));
+		}
 	}
 
 	public void putRequestContentType(String requestContentType) {
-		requestMap.put(REQUEST_CONTENT_TYPE, requestContentType);
+
+		if (managementEnabled) {
+			requestMap.put(REQUEST_CONTENT_TYPE, requestContentType);
+		}
 	}
 
 	public void putResponseBufferSize(int responseBufferSize) {
-		requestMap.put(RESPONSE_BUFFER_SIZE, Integer.valueOf(responseBufferSize));
+
+		if (managementEnabled) {
+			requestMap.put(RESPONSE_BUFFER_SIZE, Integer.valueOf(responseBufferSize));
+		}
 	}
 
 	public void putResponseCharacterEncoding(String responseCharacterEncoding) {
-		requestMap.put(RESPONSE_CHARACTER_ENCODING, responseCharacterEncoding);
+
+		if (managementEnabled) {
+			requestMap.put(RESPONSE_CHARACTER_ENCODING, responseCharacterEncoding);
+		}
 	}
 
 	public void putResponseCommitted(boolean responseCommitted) {
-		requestMap.put(RESPONSE_COMMITTED, Boolean.valueOf(responseCommitted));
+
+		if (managementEnabled) {
+			requestMap.put(RESPONSE_COMMITTED, Boolean.valueOf(responseCommitted));
+		}
 	}
 
 	public void putResponseContentLength(int responseContentLength) {
-		requestMap.put(RESPONSE_CONTENT_LENGTH, Integer.valueOf(responseContentLength));
+
+		if (managementEnabled) {
+			requestMap.put(RESPONSE_CONTENT_LENGTH, Integer.valueOf(responseContentLength));
+		}
 	}
 
 	public void putResponseContentType(String responseContentType) {
-		requestMap.put(RESPONSE_CONTENT_TYPE, responseContentType);
+
+		if (managementEnabled) {
+			requestMap.put(RESPONSE_CONTENT_TYPE, responseContentType);
+		}
 	}
 
 	public void putResponseOutputStream(DelayedResponseOutputStream delayedResponseOutputStream) {
-		requestMap.put(RESPONSE_OUTPUT_STREAM, delayedResponseOutputStream);
+
+		if (managementEnabled) {
+			requestMap.put(RESPONSE_OUTPUT_STREAM, delayedResponseOutputStream);
+		}
 	}
 
 	public void putResponseOutputWriter(DelayedResponseOutputWriter delayedResponseOutputWriter) {
-		requestMap.put(RESPONSE_OUTPUT_WRITER, delayedResponseOutputWriter);
+
+		if (managementEnabled) {
+			requestMap.put(RESPONSE_OUTPUT_WRITER, delayedResponseOutputWriter);
+		}
 	}
 
 	public void putResponseStatus(int responseStatus) {
-		requestMap.put(RESPONSE_STATUS, Integer.valueOf(responseStatus));
+
+		if (managementEnabled) {
+			requestMap.put(RESPONSE_STATUS, Integer.valueOf(responseStatus));
+		}
 	}
 
 	public void putResponseToBeReset(boolean responseToBeReset) {
-		requestMap.put(RESPONSE_TO_BE_RESET, Boolean.valueOf(responseToBeReset));
+
+		if (managementEnabled) {
+			requestMap.put(RESPONSE_TO_BE_RESET, Boolean.valueOf(responseToBeReset));
+		}
 	}
 
 	public boolean isResponseCommitted() {

@@ -92,6 +92,9 @@ public class ExternalContextImpl extends ExternalContext {
 	private PortletRequest portletRequest;
 	private PortletResponse portletResponse;
 
+	// Constructor-initialized objects
+	private boolean manageIncongruities;
+
 	// Pre-initialized objects
 	private ApplicationMap applicationMap;
 	private BridgeConfig bridgeConfig;
@@ -123,6 +126,19 @@ public class ExternalContextImpl extends ExternalContext {
 		this.portletResponse = portletResponse;
 
 		try {
+
+			// Get the bridge configuration.
+			BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
+					BridgeConfigFactory.class);
+			bridgeConfig = bridgeConfigFactory.getBridgeConfig();
+
+			// Get the BridgeContext.
+			bridgeContext = (BridgeContext) portletRequest.getAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+
+			// Determines whether or not lifecycle incongruities should be managed.
+			manageIncongruities = BooleanHelper.toBoolean(getInitParameter(
+						BridgeConfigConstants.PARAM_MANAGE_INCONGRUITIES), true);
+
 			boolean requestChanged = false;
 			boolean responseChanged = false;
 			preInitializeObjects(requestChanged, responseChanged);
@@ -360,14 +376,6 @@ public class ExternalContextImpl extends ExternalContext {
 	 */
 	protected void preInitializeObjects(boolean requestChanged, boolean responseChanged) {
 
-		// Get the bridge configuration.
-		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
-				BridgeConfigFactory.class);
-		bridgeConfig = bridgeConfigFactory.getBridgeConfig();
-
-		// Get the BridgeContext.
-		bridgeContext = (BridgeContext) portletRequest.getAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
-
 		// Note: The ICEfaces 2 ace:fileEntry component has an associated {@link
 		// org.icefaces.component.fileentry.FileEntryPhaseListener} that calls {@link #setRequest(Object}} with an
 		// instance of {@link org.icefaces.component.fileentry.FileUploadPortletRequestWrapper}. If the portletRequest
@@ -412,10 +420,10 @@ public class ExternalContextImpl extends ExternalContext {
 		sessionMap = new SessionMap(portletRequest.getPortletSession(), PortletSession.PORTLET_SCOPE, preferPreDestroy);
 
 		// Initialize the map for storing portlet lifecycle incongruities.
-		lifecycleIncongruityMap = new LifecycleIncongruityMap(applicationMap);
+		lifecycleIncongruityMap = new LifecycleIncongruityMap(applicationMap, manageIncongruities);
 
 		// Initialize the portlet lifecycle incogruity manager.
-		lifecycleIncongruityManager = new LifecycleIncongruityManager(lifecycleIncongruityMap);
+		lifecycleIncongruityManager = new LifecycleIncongruityManager(lifecycleIncongruityMap, manageIncongruities);
 
 		// Initialize the init parameter map.
 		initParameterMap = Collections.unmodifiableMap(new InitParameterMap(portletContext));
