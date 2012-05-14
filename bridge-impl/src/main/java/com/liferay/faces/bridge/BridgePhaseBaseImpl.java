@@ -47,6 +47,10 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgePhaseBaseImpl.class);
 
+	// Private Constants
+	private static final String PATH_INFO_ATTRIBUTE = "javax.servlet.include.path_info";
+	private static final String SERVLET_PATH_ATTRIBUTE = "javax.servlet.include.servlet_path";
+
 	// Protected Data Members
 	protected BridgeConfig bridgeConfig;
 	protected BridgeContext bridgeContext = null;
@@ -61,6 +65,8 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 	// Private Data Members
 	private FacesContextFactory facesContextFactory;
 	private String facesLifecycleId;
+	private String pathInfo;
+	private String servletPath;
 
 	public BridgePhaseBaseImpl(PortletConfig portletConfig) {
 		this.portletConfig = portletConfig;
@@ -78,6 +84,10 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		// Cleanup request attributes.
 		portletRequest.removeAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
 		portletRequest.removeAttribute(Bridge.PORTLET_LIFECYCLE_PHASE);
+
+		// Restore the cached attributes.
+		portletRequest.setAttribute(PATH_INFO_ATTRIBUTE, pathInfo);
+		portletRequest.setAttribute(SERVLET_PATH_ATTRIBUTE, servletPath);
 	}
 
 	protected void indicateNamespacingToConsumers(UIViewRoot uiViewRoot, PortletResponse portletResponse) {
@@ -131,6 +141,17 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 
 		// Get the FacesContext.
 		facesContext = getFacesContext(portletRequest, portletResponse);
+
+		// Some portlet containers (like the one provided by Liferay Portal) uses a servlet dispatcher when executing
+		// the portlet lifecycle. This approach requires the portal to save some standard Servlet-API request attributes
+		// like javax.servlet.include.path_info and javax.servlet.include.servlet_path. Unfortunately, some JSF
+		// implementations (like Mojarra) assume a servlet (non-portlet) environment and check for attributes. In order
+		// to prevent the JSF implementation from working with bad values, the attributes must be removed before the
+		// Faces lifecycle is run, and then restored afterwards.
+		pathInfo = (String) portletRequest.getAttribute(PATH_INFO_ATTRIBUTE);
+		portletRequest.removeAttribute(PATH_INFO_ATTRIBUTE);
+		servletPath = (String) portletRequest.getAttribute(SERVLET_PATH_ATTRIBUTE);
+		portletRequest.removeAttribute(SERVLET_PATH_ATTRIBUTE);
 
 		// Save the BridgeContext as a FacesContext attribute so that it can be picked up elsewhere in the
 		// bridge. PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-206
