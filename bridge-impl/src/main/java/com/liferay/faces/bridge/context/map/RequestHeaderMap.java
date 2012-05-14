@@ -52,11 +52,4 @@ public class RequestHeaderMap extends CaseInsensitiveHashMap<String> {
 		}
 	}
 
-	@Override
-	public String put(String key, String value) {
-
-		// TCK TestPage142: getRequestHeaderMapRenderTest
-		throw new UnsupportedOperationException();
-	}
-
 }
