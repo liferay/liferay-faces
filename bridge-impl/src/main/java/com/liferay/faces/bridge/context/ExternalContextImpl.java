@@ -70,7 +70,6 @@ import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 import com.liferay.faces.bridge.util.FileNameUtil;
 import com.liferay.faces.bridge.util.LocaleIterator;
-import com.liferay.faces.bridge.util.StringIterator;
 
 
 /**
