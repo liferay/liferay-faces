@@ -717,7 +717,7 @@ public class ExternalContextImpl extends ExternalContext {
 
 	@Override
 	public Iterator<String> getRequestParameterNames() {
-		return new StringIterator(portletRequest.getParameterNames());
+		return getRequestParameterMap().keySet().iterator();
 	}
 
 	@Override
