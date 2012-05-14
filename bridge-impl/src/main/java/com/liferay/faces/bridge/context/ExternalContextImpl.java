@@ -662,7 +662,7 @@ public class ExternalContextImpl extends ExternalContext {
 
 		if (portletRequest instanceof ClientDataRequest) {
 			ClientDataRequest clientDataRequest = (ClientDataRequest) portletRequest;
-			requestContentType = clientDataRequest.getResponseContentType();
+			requestContentType = clientDataRequest.getContentType();
 			lifecycleIncongruityMap.putRequestContentType(requestContentType);
 		}
 		else {
