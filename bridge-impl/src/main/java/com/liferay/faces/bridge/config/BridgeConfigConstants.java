@@ -39,6 +39,12 @@ public class BridgeConfigConstants {
 	public static final String PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED2 = "org.portletfaces.bridgeRequestScopePreserved";
 
 	/**
+	 * Boolean indicating whether or not the bridge should manage incongruities between the JSF lifecycle and the
+	 * Portlet lifecycle. The default is true.
+	 */
+	public static final String PARAM_MANAGE_INCONGRUITIES = "com.liferay.faces.bridge.manageIncongruities";
+
+	/**
 	 * Boolean indicating whether or not the portlet namespace should be optimized (minimized) in order to provide the
 	 * shortest possible rendered clientIds. Default value is true.
 	 */

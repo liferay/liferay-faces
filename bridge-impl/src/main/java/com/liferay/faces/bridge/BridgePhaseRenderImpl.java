@@ -34,6 +34,7 @@ import javax.portlet.faces.BridgeException;
 
 import com.liferay.faces.bridge.application.BridgeNavigationHandler;
 import com.liferay.faces.bridge.application.BridgeNavigationHandlerImpl;
+import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.context.ExternalContextImpl;
 import com.liferay.faces.bridge.context.ResponseOutputWriter;
 import com.liferay.faces.bridge.context.flash.BridgeFlash;
@@ -41,6 +42,7 @@ import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.event.IPCPhaseListener;
 import com.liferay.faces.bridge.event.ManagedBeanScopePhaseListener;
 import com.liferay.faces.bridge.event.RenderRequestPhaseListener;
+import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityManager;
 import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityMap;
 import com.liferay.faces.bridge.logging.Logger;
@@ -231,14 +233,19 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 		BridgeNavigationHandler bridgeNavigationHandler = getBridgeNavigationHandler(facesContext);
 		bridgeNavigationHandler.handleNavigation(facesContext, fromPortletMode, toPortletMode);
 
+		// Determines whether or not lifecycle incongruities should be managed.
+		boolean manageIncongruities = BooleanHelper.toBoolean(bridgeContext.getInitParameter(
+					BridgeConfigConstants.PARAM_MANAGE_INCONGRUITIES), true);
+
 		// Now that we're executing the RENDER_PHASE of the Portlet lifecycle, before the JSF
 		// RENDER_RESPONSE phase is executed, we have to fix some incongruities between the Portlet
 		// lifecycle and the JSF lifecycle that may have occurred during the ACTION_PHASE of the Portlet
 		// lifecycle.
 		ExternalContext externalContext = facesContext.getExternalContext();
-		LifecycleIncongruityMap lifecycleIncongruityMap = new LifecycleIncongruityMap(externalContext.getRequestMap());
+		LifecycleIncongruityMap lifecycleIncongruityMap = new LifecycleIncongruityMap(externalContext.getRequestMap(),
+				manageIncongruities);
 		LifecycleIncongruityManager lifecycleIncongruityManager = new LifecycleIncongruityManager(
-				lifecycleIncongruityMap);
+				lifecycleIncongruityMap, manageIncongruities);
 		lifecycleIncongruityManager.makeCongruous(externalContext);
 
 		// Execute the RENDER_RESPONSE phase of the faces lifecycle. Note that we need to add the

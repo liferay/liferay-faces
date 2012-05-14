@@ -54,18 +54,24 @@ public class LifecycleIncongruityManager {
 	// Private Data Members
 	private List<CongruousTask> congruousTaskList;
 	private LifecycleIncongruityMap lifecycleIncongruityMap;
+	private boolean managementEnabled;
 
 	@SuppressWarnings("unchecked")
-	public LifecycleIncongruityManager(LifecycleIncongruityMap lifecycleIncongruityMap) {
+	public LifecycleIncongruityManager(LifecycleIncongruityMap lifecycleIncongruityMap, boolean managementEnabled) {
 		this.congruousTaskList = (List<CongruousTask>) lifecycleIncongruityMap.get(INCONGRUITY_LIST);
 
 		if (this.congruousTaskList == null) {
 			this.congruousTaskList = new ArrayList<CongruousTask>();
 		}
+
+		this.managementEnabled = managementEnabled;
 	}
 
 	public void addCongruousTask(CongruousTask congruousTask) {
-		congruousTaskList.add(congruousTask);
+
+		if (managementEnabled) {
+			congruousTaskList.add(congruousTask);
+		}
 	}
 
 	/**
@@ -78,76 +84,77 @@ public class LifecycleIncongruityManager {
 	 */
 	public void makeCongruous(ExternalContext externalContext) throws IOException {
 
-		logger.debug("congruousTaskList.size()=[{0}]", congruousTaskList.size());
+		if (managementEnabled) {
+			logger.debug("congruousTaskList.size()=[{0}]", congruousTaskList.size());
 
-		for (CongruousTask congruousTask : congruousTaskList) {
+			for (CongruousTask congruousTask : congruousTaskList) {
 
-			if (congruousTask == CongruousTask.RESPONSE_FLUSH_BUFFER) {
-				logger.debug("responseFlushBuffer");
-				externalContext.responseFlushBuffer();
-			}
-			else if (congruousTask == CongruousTask.RESPONSE_RESET) {
-				logger.debug("responseReset");
-				externalContext.responseReset();
-			}
-			else if (congruousTask == CongruousTask.SET_REQUEST_CHARACTER_ENCODING) {
-				String requestCharacterEncoding = lifecycleIncongruityMap.getRequestCharacterEncoding();
-				logger.debug("setRequestCharacterEncoding(\"{0}\")", requestCharacterEncoding);
-				externalContext.setRequestCharacterEncoding(requestCharacterEncoding);
-			}
-			else if (congruousTask == CongruousTask.SET_RESPONSE_BUFFER_SIZE) {
-				int responseBufferSize = lifecycleIncongruityMap.getResponseBufferSize();
-				logger.debug("setResponseBufferSize(\"{0}\")", responseBufferSize);
-				externalContext.setResponseBufferSize(responseBufferSize);
-			}
-			else if (congruousTask == CongruousTask.SET_RESPONSE_CHARACTER_ENCODING) {
-				String responseCharacterEncoding = lifecycleIncongruityMap.getResponseCharacterEncoding();
-				logger.debug("setResponseCharacterEncoding(\"{0}\")", responseCharacterEncoding);
-				externalContext.setResponseCharacterEncoding(responseCharacterEncoding);
-			}
-			else if (congruousTask == CongruousTask.SET_RESPONSE_CONTENT_LENGTH) {
-				int responseContentLength = lifecycleIncongruityMap.getResponseContentLength();
-				logger.debug("setResponseContentLength(\"{0}\")", responseContentLength);
-				externalContext.setResponseContentLength(responseContentLength);
-			}
-			else if (congruousTask == CongruousTask.SET_RESPONSE_CONTENT_TYPE) {
-				String responseContentType = lifecycleIncongruityMap.getResponseContentType();
-				logger.debug("setResponseContentType(\"{0}\")", responseContentType);
-				externalContext.setResponseContentType(responseContentType);
-			}
-			else if (congruousTask == CongruousTask.WRITE_RESPONSE_OUTPUT_WRITER) {
-				DelayedResponseOutputWriter delayedResponseOutputWriter =
-					lifecycleIncongruityMap.getResponseOutputWriter();
-				String delayedOutput = delayedResponseOutputWriter.toString();
-				logger.debug("writing responseOutputWriter, delayedOutput=[{0}]", delayedOutput);
-
-				if ((delayedOutput != null) && (delayedOutput.length() > 0)) {
-					Writer outputWriter = externalContext.getResponseOutputWriter();
-					outputWriter.write(delayedOutput);
+				if (congruousTask == CongruousTask.RESPONSE_FLUSH_BUFFER) {
+					logger.debug("responseFlushBuffer");
+					externalContext.responseFlushBuffer();
 				}
-
-				lifecycleIncongruityMap.putResponseOutputWriter(null);
-			}
-			else if (congruousTask == CongruousTask.WRITE_RESPONSE_OUTPUT_STREAM) {
-				DelayedResponseOutputStream delayedResponseOutputStream =
-					lifecycleIncongruityMap.getResponseOutputStream();
-				byte[] delayedOutputByteArray = delayedResponseOutputStream.toByteArray();
-				int length = 0;
-
-				if (delayedOutputByteArray != null) {
-					length = delayedOutputByteArray.length;
+				else if (congruousTask == CongruousTask.RESPONSE_RESET) {
+					logger.debug("responseReset");
+					externalContext.responseReset();
 				}
-
-				logger.debug("writing responseOutputStream, delayedOutputByteArray.length=[{0}]", length);
-
-				if ((delayedOutputByteArray != null) && (length > 0)) {
-					OutputStream outputStream = externalContext.getResponseOutputStream();
-					outputStream.write(delayedOutputByteArray);
+				else if (congruousTask == CongruousTask.SET_REQUEST_CHARACTER_ENCODING) {
+					String requestCharacterEncoding = lifecycleIncongruityMap.getRequestCharacterEncoding();
+					logger.debug("setRequestCharacterEncoding(\"{0}\")", requestCharacterEncoding);
+					externalContext.setRequestCharacterEncoding(requestCharacterEncoding);
 				}
+				else if (congruousTask == CongruousTask.SET_RESPONSE_BUFFER_SIZE) {
+					int responseBufferSize = lifecycleIncongruityMap.getResponseBufferSize();
+					logger.debug("setResponseBufferSize(\"{0}\")", responseBufferSize);
+					externalContext.setResponseBufferSize(responseBufferSize);
+				}
+				else if (congruousTask == CongruousTask.SET_RESPONSE_CHARACTER_ENCODING) {
+					String responseCharacterEncoding = lifecycleIncongruityMap.getResponseCharacterEncoding();
+					logger.debug("setResponseCharacterEncoding(\"{0}\")", responseCharacterEncoding);
+					externalContext.setResponseCharacterEncoding(responseCharacterEncoding);
+				}
+				else if (congruousTask == CongruousTask.SET_RESPONSE_CONTENT_LENGTH) {
+					int responseContentLength = lifecycleIncongruityMap.getResponseContentLength();
+					logger.debug("setResponseContentLength(\"{0}\")", responseContentLength);
+					externalContext.setResponseContentLength(responseContentLength);
+				}
+				else if (congruousTask == CongruousTask.SET_RESPONSE_CONTENT_TYPE) {
+					String responseContentType = lifecycleIncongruityMap.getResponseContentType();
+					logger.debug("setResponseContentType(\"{0}\")", responseContentType);
+					externalContext.setResponseContentType(responseContentType);
+				}
+				else if (congruousTask == CongruousTask.WRITE_RESPONSE_OUTPUT_WRITER) {
+					DelayedResponseOutputWriter delayedResponseOutputWriter =
+						lifecycleIncongruityMap.getResponseOutputWriter();
+					String delayedOutput = delayedResponseOutputWriter.toString();
+					logger.debug("writing responseOutputWriter, delayedOutput=[{0}]", delayedOutput);
 
-				lifecycleIncongruityMap.putResponseOutputStream(null);
+					if ((delayedOutput != null) && (delayedOutput.length() > 0)) {
+						Writer outputWriter = externalContext.getResponseOutputWriter();
+						outputWriter.write(delayedOutput);
+					}
+
+					lifecycleIncongruityMap.putResponseOutputWriter(null);
+				}
+				else if (congruousTask == CongruousTask.WRITE_RESPONSE_OUTPUT_STREAM) {
+					DelayedResponseOutputStream delayedResponseOutputStream =
+						lifecycleIncongruityMap.getResponseOutputStream();
+					byte[] delayedOutputByteArray = delayedResponseOutputStream.toByteArray();
+					int length = 0;
+
+					if (delayedOutputByteArray != null) {
+						length = delayedOutputByteArray.length;
+					}
+
+					logger.debug("writing responseOutputStream, delayedOutputByteArray.length=[{0}]", length);
+
+					if ((delayedOutputByteArray != null) && (length > 0)) {
+						OutputStream outputStream = externalContext.getResponseOutputStream();
+						outputStream.write(delayedOutputByteArray);
+					}
+
+					lifecycleIncongruityMap.putResponseOutputStream(null);
+				}
 			}
 		}
 	}
-
 }
