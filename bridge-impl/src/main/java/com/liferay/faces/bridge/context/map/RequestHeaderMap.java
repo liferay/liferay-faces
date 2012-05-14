@@ -41,11 +41,11 @@ public class RequestHeaderMap extends CaseInsensitiveHashMap<String> {
 				String[] value = mapEntry.getValue();
 
 				if ((value != null) && (value.length > 0)) {
-					super.put(key, value[0]);
+					put(key, value[0]);
 					logger.debug("Adding {0}=[{1}] to header map", key, value);
 				}
 				else {
-					super.put(key, null);
+					put(key, null);
 					logger.debug("Adding {0}=[null] to header map", key);
 				}
 			}
