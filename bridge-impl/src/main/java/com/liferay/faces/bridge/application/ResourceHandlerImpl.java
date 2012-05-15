@@ -50,20 +50,22 @@ public class ResourceHandlerImpl extends ResourceHandlerWrapper {
 
 	// Public Constants
 	public static final String JAVAX_FACES_RESOURCE = "javax.faces.resource";
+	public static final String ORG_RICHFACES = "org.richfaces";
 	public static final String RICH_FACES_RESOURCE = "rfRes";
 	public static final String REQUEST_PARAM_LIBRARY_NAME = "ln";
 
 	// Private Constants
 	private static final String ENCODED_RESOURCE_TOKEN = "javax.faces.resource=";
 	private static final String EXTENSION_CSS = ".css";
+	private static final String ORG_RICHFACES_IMAGES = "org.richfaces.images";
 	private static final String RICHFACES_STATIC_RESOURCE = "org.richfaces.staticResource";
 
 	// FACES-1214
 	protected enum RichFacesImageResource {
-		TYPE1("org.richfaces", "../../org.richfaces.images/", "richfaces-type1"),
-		TYPE2("org.richfaces", "../../", "richfaces-type2"),
-		TYPE3("org.richfaces.images", "../org.richfaces.images/", "richfaces-type3"),
-		TYPE4("org.richfaces.images", "org.richfaces.images/", "richfaces-type4");
+		TYPE1(ORG_RICHFACES, "../../org.richfaces.images/", "richfaces-type1"),
+		TYPE2(ORG_RICHFACES, "../../", "richfaces-type2"),
+		TYPE3(ORG_RICHFACES_IMAGES, "../org.richfaces.images/", "richfaces-type3"),
+		TYPE4(ORG_RICHFACES_IMAGES, "org.richfaces.images/", "richfaces-type4");
 
 		private String libraryName;
 		private String pathPrefix;
@@ -450,16 +452,17 @@ public class ResourceHandlerImpl extends ResourceHandlerWrapper {
 							}
 						}
 
-						String imageResourceName = cssText.substring(fileNameStartPos, extensionFinishPos);
-						String imageResourceURL = resourceURLCache.get(imageResourceName);
+						String relativePathKey = cssText.substring(urlStartPos, extensionFinishPos);
+						String imageResourceURL = resourceURLCache.get(relativePathKey);
 
 						if (imageResourceURL == null) {
+							String resourceName = cssText.substring(fileNameStartPos, extensionFinishPos);
 							String libraryName = richFacesImageResource.getLibraryName();
 							String substitutionToken = richFacesImageResource.getSubstitutionToken();
-							Resource imageResource = resourceHandler.createResource(imageResourceName, libraryName);
+							Resource imageResource = resourceHandler.createResource(resourceName, libraryName);
 							imageResourceURL = imageResource.getRequestPath();
 							imageResourceURL = imageResourceURL.replaceAll(libraryName, substitutionToken);
-							resourceURLCache.put(imageResourceName, imageResourceURL);
+							resourceURLCache.put(relativePathKey, imageResourceURL);
 						}
 
 						StringBuilder buf = new StringBuilder();
