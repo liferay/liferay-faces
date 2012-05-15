@@ -272,15 +272,15 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 	public String getRequestPath() {
 
 		// Get the requestPath value from the wrapped resource.
-		String requestPath = wrappedResource.getRequestPath();
+		String wrappedRequestPath = wrappedResource.getRequestPath();
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 
 		// For each extension-mapped servlet-mapping found in web.xml, remove the extension from the wrapped requestPath
 		// value. This is necessary because both Mojarra and MyFaces assume a servlet environment and automatically
 		// append extension-mapped suffixes which have no meaning in a portlet environment.
-		if (requestPath != null) {
+		if (wrappedRequestPath != null) {
 
-			if (requestPath.contains(ResourceHandler.RESOURCE_IDENTIFIER)) {
+			if (wrappedRequestPath.contains(ResourceHandler.RESOURCE_IDENTIFIER)) {
 				BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
 						BridgeConfigFactory.class);
 				BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig();
@@ -299,20 +299,21 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 							// an indicator that ".faces" needs to be removed from the requestPath.
 							String token = extension + BridgeConstants.CHAR_QUESTION_MARK +
 								ResourceHandlerImpl.REQUEST_PARAM_LIBRARY_NAME;
-							int pos = requestPath.indexOf(token);
+							int pos = wrappedRequestPath.indexOf(token);
 
 							// If the servlet-mapping extension is found, then remove it since this is an implicit
 							// Servlet-API dependency on the FacesServlet that has no meaning in a portlet environment.
 							if (pos > 0) {
 
-								requestPath = requestPath.substring(0, pos) +
-									requestPath.substring(pos + extension.length());
-								logger.debug("Removed extension=[{0}] from requestPath=[{1}]", extension, requestPath);
+								wrappedRequestPath = wrappedRequestPath.substring(0, pos) +
+									wrappedRequestPath.substring(pos + extension.length());
+								logger.debug("Removed extension=[{0}] from requestPath=[{1}]", extension,
+									wrappedRequestPath);
 							}
-							else if (requestPath.endsWith(extension)) {
+							else if (wrappedRequestPath.endsWith(extension)) {
 
 								if (extension.equals(EXTENSION_FACES) &&
-										requestPath.endsWith(LIBRARY_NAME_JAVAX_FACES)) {
+										wrappedRequestPath.endsWith(LIBRARY_NAME_JAVAX_FACES)) {
 									// Special case: Don't remove ".faces" if request path ends with "javax.faces"
 									// http://issues.liferay.com/browse/FACES-1202
 								}
@@ -321,20 +322,37 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 									// Sometimes resources like the ICEfaces bridge.js file don't have a library name
 									// (ln=) parameter and simply look like this:
 									// /my-portlet/javax.faces.resource/bridge.js.faces
-									requestPath = requestPath.substring(0, requestPath.lastIndexOf(extension));
+									wrappedRequestPath = wrappedRequestPath.substring(0,
+											wrappedRequestPath.lastIndexOf(extension));
 									logger.debug("Removed extension=[{0}] from requestPath=[{1}]", extension,
-										requestPath);
+										wrappedRequestPath);
 								}
 							}
 						}
 					}
 				}
 			}
+
+			// If the wrapped request path ends with "org.richfaces" then
+			if (wrappedRequestPath.endsWith(ResourceHandlerImpl.ORG_RICHFACES)) {
+
+				// Check to see if the resource physically exists in the META-INF/resources/org.richfaces folder of the
+				// RichFaces JAR. If it does, then this qualifies as a special case in which the
+				// ResourceHandlerImpl#fixRichFacesImageURLs(FacesContext, String) method is unable to handle resources
+				// such as "node_icon.gif" and the library name must be "org.richfaces.images" instead of
+				// "org.richfaces".
+				String resourcePath = "META-INF/resources/org.richfaces/" + getResourceName();
+				URL resourceURL = getClass().getClassLoader().getResource(resourcePath);
+
+				if (resourceURL != null) {
+					wrappedRequestPath = wrappedRequestPath + ".images";
+				}
+			}
 		}
 
 		// In order to have Mojarra's ScriptRenderer and StylesheetRenderer function properly, this method first encodes
 		// the URL returned by the wrapped resource.
-		String encodedResourceURL = facesContext.getExternalContext().encodeResourceURL(requestPath);
+		String encodedResourceURL = facesContext.getExternalContext().encodeResourceURL(wrappedRequestPath);
 
 		return encodedResourceURL;
 	}
