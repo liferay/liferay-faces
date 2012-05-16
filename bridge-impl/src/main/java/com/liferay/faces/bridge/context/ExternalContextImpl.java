@@ -132,13 +132,6 @@ public class ExternalContextImpl extends ExternalContext {
 					BridgeConfigFactory.class);
 			bridgeConfig = bridgeConfigFactory.getBridgeConfig();
 
-			// Get the BridgeContext.
-			bridgeContext = (BridgeContext) portletRequest.getAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
-
-			// Determines whether or not lifecycle incongruities should be managed.
-			manageIncongruities = BooleanHelper.toBoolean(getInitParameter(
-						BridgeConfigConstants.PARAM_MANAGE_INCONGRUITIES), true);
-
 			boolean requestChanged = false;
 			boolean responseChanged = false;
 			preInitializeObjects(requestChanged, responseChanged);
@@ -375,6 +368,13 @@ public class ExternalContextImpl extends ExternalContext {
 	 *                          was called.
 	 */
 	protected void preInitializeObjects(boolean requestChanged, boolean responseChanged) {
+
+		// Get the BridgeContext.
+		bridgeContext = (BridgeContext) portletRequest.getAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+
+		// Determines whether or not lifecycle incongruities should be managed.
+		manageIncongruities = BooleanHelper.toBoolean(getInitParameter(
+					BridgeConfigConstants.PARAM_MANAGE_INCONGRUITIES), true);
 
 		// Note: The ICEfaces 2 ace:fileEntry component has an associated {@link
 		// org.icefaces.component.fileentry.FileEntryPhaseListener} that calls {@link #setRequest(Object}} with an
