@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head />
+	<h:body>
+		<ui:include src="styling.xhtml" />
+		<h:form id="f1">
+			<h:messages />
+			<h:inputHidden value="#{bookingsModelBean.customer.customerId}" />
+			<h:panelGroup>
+				<h:panelGrid columns="1" style="width: 100%;" rowClasses="portlet-section-header results-header">
+					<h:outputText value="#{i18n['customer']}" />
+				</h:panelGrid>
+				<h:panelGrid columns="3">
+					<h:outputLabel for="firstName" value="#{i18n['firstName']}" />
+					<h:inputText id="firstName" required="true" value="#{bookingsModelBean.customer.firstName}" />
+					<h:message for="firstName" />
+					<h:outputLabel for="lastName" value="#{i18n['lastName']}" />
+					<h:inputText id="lastName" required="true" value="#{bookingsModelBean.customer.lastName}" />
+					<h:message for="lastName" />
+				</h:panelGrid>
+			</h:panelGroup>
+			<ui:repeat value="#{bookingsModelBean.customer.bookings}" var="booking">
+				<h:panelGroup>
+					<h:panelGrid columns="1" style="width: 100%;" rowClasses="portlet-section-header results-header">
+						<h:outputText value="#{i18n['booking']}" />
+					</h:panelGrid>
+					<h:panelGrid columns="3">
+						<h:outputLabel for="bookingTypeId" value="#{i18n['bookingTypeId']}" />
+						<h:selectOneMenu id="bookingTypeId" required="true" value="#{booking.bookingTypeId}">
+							<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
+							<f:selectItems itemValue="#{bookingType.bookingTypeId}" itemLabel="#{bookingType.bookingTypeName}"
+								value="#{listModelBean.bookingTypes}" var="bookingType" />
+						</h:selectOneMenu>
+						<h:message for="bookingTypeId" />
+						<h:outputLabel for="startDate" value="#{i18n['startDate']}" />
+						<h:inputText id="startDate" required="true" value="#{booking.startDate}">
+							<f:convertDateTime pattern="MM/dd/yyyy" />
+						</h:inputText>
+						<h:message for="startDate" />
+						<h:outputLabel for="finishDate" value="#{i18n['finishDate']}" />
+						<h:inputText id="finishDate" required="true" value="#{booking.finishDate}">
+							<f:convertDateTime pattern="MM/dd/yyyy" />
+						</h:inputText>
+						<h:message for="finishDate" />
+					</h:panelGrid>
+				</h:panelGroup>
+			</ui:repeat>
+			<hr />
+			<h:commandButton action="#{bookingsBackingBean.submit}" value="#{i18n['submit']}" />
+		</h:form>
+	</h:body>
+</f:view>
