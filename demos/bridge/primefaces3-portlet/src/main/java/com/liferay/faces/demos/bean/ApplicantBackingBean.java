@@ -100,7 +100,8 @@ public class ApplicantBackingBean implements Serializable {
 		UploadedFileWrapper uploadedFileWrapper = new UploadedFileWrapper(event.getFile());
 		uploadedFileWrapper.setId(Integer.toString(nextId++));
 		uploadedFiles.add(uploadedFileWrapper);
-		logger.debug("uploadedFile=[{0}]", uploadedFileWrapper.getAbsolutePath());
+		logger.debug("Received fileName=[{0}] absolutePath=[{1}]", uploadedFileWrapper.getName(),
+			uploadedFileWrapper.getAbsolutePath());
 	}
 
 	public void postalCodeListener(ValueChangeEvent valueChangeEvent) {

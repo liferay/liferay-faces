@@ -15,10 +15,12 @@ package com.liferay.faces.bridge.renderkit.primefaces;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.util.Map;
 
@@ -31,6 +33,7 @@ import javax.faces.render.Renderer;
 
 import org.apache.commons.fileupload.FileItem;
 
+import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.component.UploadedFile;
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.context.map.RequestParameterMap;
@@ -135,6 +138,8 @@ public class FileUploadRendererPrimeFacesImpl extends RendererWrapper {
 		}
 
 		public void delete() {
+
+			// Will never be called by the PrimeFaces UploadedFile interface.
 			throw new UnsupportedOperationException();
 		}
 
@@ -150,6 +155,7 @@ public class FileUploadRendererPrimeFacesImpl extends RendererWrapper {
 					bytes = new byte[(int) randomAccessFile.length()];
 					randomAccessFile.readFully(bytes);
 					randomAccessFile.close();
+					file.delete();
 				}
 			}
 			catch (Exception e) {
@@ -160,6 +166,8 @@ public class FileUploadRendererPrimeFacesImpl extends RendererWrapper {
 		}
 
 		public void write(File file) throws Exception {
+
+			// Will never be called by the PrimeFaces UploadedFile interface.
 			throw new UnsupportedOperationException();
 		}
 
@@ -180,18 +188,22 @@ public class FileUploadRendererPrimeFacesImpl extends RendererWrapper {
 		}
 
 		public void setFormField(boolean state) {
+
+			// Will never be called by the PrimeFaces UploadedFile interface.
 			throw new UnsupportedOperationException();
 		}
 
 		public InputStream getInputStream() throws IOException {
-			return new FileInputStream(uploadedFile.getAbsolutePath());
+			return new UploadedFileInputStream(uploadedFile.getAbsolutePath());
 		}
 
 		public String getName() {
-			return uploadedFile.getAbsolutePath();
+			return uploadedFile.getName();
 		}
 
 		public OutputStream getOutputStream() throws IOException {
+
+			// Will never be called by the PrimeFaces UploadedFile interface.
 			throw new UnsupportedOperationException();
 		}
 
@@ -200,15 +212,53 @@ public class FileUploadRendererPrimeFacesImpl extends RendererWrapper {
 		}
 
 		public String getString() {
-			throw new UnsupportedOperationException();
+			return getString(BridgeConstants.UTF8);
 		}
 
 		public String getString(String encoding) {
-			throw new UnsupportedOperationException();
+			String stringValue = null;
+			byte[] bytes = get();
+
+			if (bytes != null) {
+
+				try {
+					stringValue = new String(bytes, encoding);
+				}
+				catch (UnsupportedEncodingException e) {
+					logger.error(e);
+				}
+			}
+
+			return stringValue;
 		}
 
 		public boolean isInMemory() {
 			return false;
+		}
+
+	}
+
+	protected class UploadedFileInputStream extends FileInputStream {
+
+		// Private Data Members
+		private String absolutePath;
+
+		public UploadedFileInputStream(String absolutePath) throws FileNotFoundException {
+			super(absolutePath);
+			this.absolutePath = absolutePath;
+		}
+
+		@Override
+		public void close() throws IOException {
+			super.close();
+
+			try {
+				File file = new File(absolutePath);
+				file.delete();
+			}
+			catch (Exception e) {
+				logger.error(e);
+			}
 		}
 
 	}

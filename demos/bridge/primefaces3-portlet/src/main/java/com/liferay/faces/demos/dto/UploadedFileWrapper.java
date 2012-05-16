@@ -14,6 +14,9 @@
 package com.liferay.faces.demos.dto;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +25,8 @@ import java.util.Map;
 import javax.faces.FacesWrapper;
 
 import com.liferay.faces.bridge.component.UploadedFile;
+import com.liferay.faces.bridge.logging.Logger;
+import com.liferay.faces.bridge.logging.LoggerFactory;
 
 
 /**
@@ -29,7 +34,11 @@ import com.liferay.faces.bridge.component.UploadedFile;
  */
 public class UploadedFileWrapper implements UploadedFile, FacesWrapper<org.primefaces.model.UploadedFile> {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(UploadedFileWrapper.class);
+
 	// Private Data Members
+	private String absolutePath;
 	private Map<String, Object> attributeMap;
 	private String charSet;
 	private Exception exception;
@@ -43,7 +52,23 @@ public class UploadedFileWrapper implements UploadedFile, FacesWrapper<org.prime
 	}
 
 	public String getAbsolutePath() {
-		return wrappedUploadedFile.getFileName();
+
+		if (absolutePath == null) {
+
+			try {
+				File tempFolder = new File(System.getProperty("java.io.tmpdir"));
+				File tempFile = File.createTempFile("upload", ".dat", tempFolder);
+				OutputStream outputStream = new FileOutputStream(tempFile);
+				outputStream.write(wrappedUploadedFile.getContents());
+				outputStream.close();
+				absolutePath = tempFile.getAbsolutePath();
+			}
+			catch (IOException e) {
+				logger.error(e);
+			}
+		}
+
+		return absolutePath;
 	}
 
 	public void setAbsolutePath(String absolutePath) {
@@ -103,7 +128,7 @@ public class UploadedFileWrapper implements UploadedFile, FacesWrapper<org.prime
 	}
 
 	public String getName() {
-		return new File(wrappedUploadedFile.getFileName()).getName();
+		return wrappedUploadedFile.getFileName();
 	}
 
 	public void setName(String name) {
