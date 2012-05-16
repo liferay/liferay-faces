@@ -34,6 +34,7 @@ public class PortletContainerPlutoImpl extends PortletContainerImpl {
 	// Private Constants
 	private static final String CONTENT_TYPE_APPLICATION_XHTML_XML = "application/xhtml+xml";
 	private static final String CONTENT_TYPE_TEXT_HTML = "text/html";
+	private static final String CONTENT_TYPE_TEXT_XML = "text/xml";
 
 	public PortletContainerPlutoImpl(PortletConfig portletConfig, PortletContext portletContext,
 		PortletRequest portletRequest, PortletResponse portletResponse, Bridge.PortletPhase portletRequestPhase) {
@@ -54,10 +55,10 @@ public class PortletContainerPlutoImpl extends PortletContainerImpl {
 
 		String contentTypeForPluto = null;
 
-		// If the specified contentType is "application/xhtml+xml" use "text/html" instead. That's the only value that
-		// Pluto's RenderResponseImpl.setContentType(String) will be happy with, even though Pluto's "ACCEPT" header
-		// claims it can accept "application/xhtml+xml".
-		if (CONTENT_TYPE_APPLICATION_XHTML_XML.equals(contentType)) {
+		// If the specified contentType is "application/xhtml+xml" or "text/xml" then use "text/html" instead. That's
+		// the only value that Pluto's RenderResponseImpl.setContentType(String) will be happy with, even though Pluto's
+		// "ACCEPT" header claims it can accept "application/xhtml+xml".
+		if (CONTENT_TYPE_APPLICATION_XHTML_XML.equals(contentType) || CONTENT_TYPE_TEXT_XML.equals(contentType)) {
 			contentTypeForPluto = CONTENT_TYPE_TEXT_HTML;
 		}
 
