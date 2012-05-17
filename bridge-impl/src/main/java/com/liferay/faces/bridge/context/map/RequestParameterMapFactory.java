@@ -16,6 +16,8 @@ package com.liferay.faces.bridge.context.map;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.PortletRequest;
 
+import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.bridge.config.Product;
 import com.liferay.faces.bridge.context.BridgeContext;
 
 
@@ -23,10 +25,6 @@ import com.liferay.faces.bridge.context.BridgeContext;
  * @author  Neil Griffin
  */
 public class RequestParameterMapFactory {
-
-	// Private Constants
-	private static final String MULTIPART_CONTENT_TYPE_PREFIX = "multipart/";
-	private static final String ICEFACES_FILE_ENTRY_FQCN = "org.icefaces.ace.component.fileentry.FileEntry";
 
 	// Private Data Members
 	private RequestParameterMap requestParameterMap;
@@ -42,8 +40,9 @@ public class RequestParameterMapFactory {
 
 			// Note that ICEfaces ace:fileEntry cannot rely on RequestParameterValuesMapImpl because it relies on its
 			// own mechanism for handling file upload.
-			if ((contentType != null) && contentType.toLowerCase().startsWith(MULTIPART_CONTENT_TYPE_PREFIX) &&
-					!isICEfacesPresent()) {
+			Product iceFaces = bridgeContext.getBridgeConfig().getProducts().get(BridgeConstants.ICEFACES);
+			if ((contentType != null) && contentType.toLowerCase().startsWith(BridgeConstants.MULTIPART_CONTENT_TYPE_PREFIX) &&
+					!iceFaces.isDetected()) {
 				RequestParameterMapMultiPartImpl requestParameterMapMultiPartImpl =
 					new RequestParameterMapMultiPartImpl(bridgeContext, clientDataRequest);
 				requestParameterMap = requestParameterMapMultiPartImpl;
@@ -67,19 +66,5 @@ public class RequestParameterMapFactory {
 
 	public RequestParameterValuesMap getRequestParameterValuesMap() {
 		return requestParameterValuesMap;
-	}
-
-	protected boolean isICEfacesPresent() {
-
-		boolean iceFacesPresent = Boolean.TRUE;
-
-		try {
-			Class.forName(ICEFACES_FILE_ENTRY_FQCN);
-		}
-		catch (ClassNotFoundException e) {
-			iceFacesPresent = Boolean.FALSE;
-		}
-
-		return iceFacesPresent;
 	}
 }
