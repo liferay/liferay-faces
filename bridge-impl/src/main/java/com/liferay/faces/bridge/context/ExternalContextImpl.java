@@ -45,6 +45,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponseWrapper;
 
+import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentRequest;
@@ -54,6 +55,7 @@ import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
+import com.liferay.faces.bridge.config.Product;
 import com.liferay.faces.bridge.context.flash.BridgeFlash;
 import com.liferay.faces.bridge.context.flash.BridgeFlashFactory;
 import com.liferay.faces.bridge.context.flash.FlashHttpServletResponse;
@@ -111,6 +113,7 @@ public class ExternalContextImpl extends ExternalContext {
 	private ServletResponse facesImplementationServletResponse;
 	private String authType;
 	private BridgeFlash bridgeFlash;
+	private Boolean iceFacesLegacyMode;
 	private Map<String, String> initParameterMap;
 	private String portletContextName;
 	private String remoteUser;
@@ -505,6 +508,7 @@ public class ExternalContextImpl extends ExternalContext {
 
 	protected boolean isEncodingFormWithPrimeFacesAjaxFileUpload() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
+
 		if (facesContext.getAttributes().get(PrimeFacesFileUpload.AJAX_FILE_UPLOAD) != null) {
 			return true;
 		}
@@ -516,6 +520,30 @@ public class ExternalContextImpl extends ExternalContext {
 	@Override
 	public boolean isUserInRole(String role) {
 		return portletRequest.isUserInRole(role);
+	}
+
+	protected boolean isICEfacesLegacyMode(ClientDataRequest clientDataRequest) {
+
+		if (iceFacesLegacyMode == null) {
+
+			iceFacesLegacyMode = Boolean.FALSE;
+
+			Product iceFaces = bridgeConfig.getProducts().get(BridgeConstants.ICEFACES);
+
+			if (iceFaces.isDetected() &&
+					((iceFaces.getMajorVersion() == 2) ||
+						((iceFaces.getMajorVersion() == 3) && (iceFaces.getMinorVersion() == 0)))) {
+
+				String requestContentType = clientDataRequest.getContentType();
+
+				if ((requestContentType != null) &&
+						requestContentType.toLowerCase().startsWith(BridgeConstants.MULTIPART_CONTENT_TYPE_PREFIX)) {
+					iceFacesLegacyMode = Boolean.TRUE;
+				}
+			}
+		}
+
+		return iceFacesLegacyMode;
 	}
 
 	@Override
@@ -662,7 +690,16 @@ public class ExternalContextImpl extends ExternalContext {
 
 		if (portletRequest instanceof ClientDataRequest) {
 			ClientDataRequest clientDataRequest = (ClientDataRequest) portletRequest;
-			requestContentType = clientDataRequest.getContentType();
+
+			// If using ICEfaces 3.0.x/2.0.x then need to return the legacy value.
+			// http://issues.liferay.com/browse/FACES-1228
+			if (isICEfacesLegacyMode(clientDataRequest)) {
+				requestContentType = clientDataRequest.getResponseContentType();
+			}
+			else {
+				requestContentType = clientDataRequest.getContentType();
+			}
+
 			lifecycleIncongruityMap.putRequestContentType(requestContentType);
 		}
 		else {
