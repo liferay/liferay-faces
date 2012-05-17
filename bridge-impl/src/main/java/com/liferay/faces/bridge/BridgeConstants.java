@@ -18,9 +18,7 @@ package com.liferay.faces.bridge;
  */
 public class BridgeConstants {
 
-	// Public Constants
-	public static final String BOOLEAN_FALSE = "false";
-	public static final String BOOLEAN_TRUE = "true";
+	// Character Constants
 	public static final String CHAR_AMPERSAND = "&";
 	public static final String CHAR_ASTERISK = "*";
 	public static final String CHAR_AT = "@";
@@ -36,6 +34,24 @@ public class BridgeConstants {
 	public static final String CHAR_SPACE = " ";
 	public static final String CHAR_UNDERSCORE = "_";
 	public static final String EMPTY = "";
+	
+	// ICEfaces Constants
+	public static final String ICEFACES = "ICEfaces";
+	
+	// Liferay Constants
+	public static final String LIFERAY_PORTAL = "Liferay Portal";
+	public static final String LIFERAY_FACES_ALLOY = "Liferay Faces Alloy";
+	public static final String LIFERAY_FACES_BRIDGE = "Liferay Faces Bridge";
+	public static final String LIFERAY_FACES_PORTAL = "Liferay Faces Portal";
+
+	// PrimeFaces Constants
+	public static final String PRIMEFACES = "PrimeFaces";
+	
+	// RichFaces Constants
+	public static final String RICHFACES = "RichFaces";
+
+	// Miscellaneous Constants
+	public static final String MULTIPART_CONTENT_TYPE_PREFIX = "multipart/";
 	public static final String UTF8 = "UTF-8";
 	public static final String WSRP = "wsrp";
 	public static final String WSRP_REWRITE = "wsrp_rewrite";

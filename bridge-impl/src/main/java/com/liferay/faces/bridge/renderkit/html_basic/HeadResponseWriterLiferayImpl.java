@@ -23,6 +23,7 @@ import javax.portlet.PortletRequest;
 import org.w3c.dom.Element;
 
 import com.liferay.faces.bridge.container.liferay.StringBundlerUtil;
+import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 
@@ -42,11 +43,11 @@ public class HeadResponseWriterLiferayImpl extends HeadResponseWriter {
 	private static final Logger logger = LoggerFactory.getLogger(HeadResponseWriterLiferayImpl.class);
 
 	// Private Data Members
-	private PortletRequest portletRequest;
+	private BridgeContext bridgeContext;
 
-	public HeadResponseWriterLiferayImpl(ResponseWriter wrappedResponseWriter, PortletRequest portletRequest) {
+	public HeadResponseWriterLiferayImpl(BridgeContext bridgeContext, ResponseWriter wrappedResponseWriter) {
 		super(wrappedResponseWriter);
-		this.portletRequest = portletRequest;
+		this.bridgeContext = bridgeContext;
 	}
 
 	@Override
@@ -66,6 +67,7 @@ public class HeadResponseWriterLiferayImpl extends HeadResponseWriter {
 			if (!ELEMENT_HEAD.equals(element.getNodeName())) {
 				String elementAsString = element.toString();
 
+				PortletRequest portletRequest = bridgeContext.getPortletRequest();
 				Object stringBundler = portletRequest.getAttribute(LIFERAY_SHARED_PAGE_TOP);
 
 				if (stringBundler == null) {

@@ -85,6 +85,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private static final Logger logger = LoggerFactory.getLogger(BridgeConfigImpl.class);
 
 	// Private Data Members
+	private Map<String, Object> attributes;
 	private BridgeContextFactory bridgeContextFactory;
 	private BridgePhaseFactory bridgePhaseFactory;
 	private BridgeRequestScopeFactory bridgeRequestScopeFactory;
@@ -96,6 +97,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private List<ServletMapping> facesServletMappings;
 	private PortletContainerFactory portletContainerFactory;
 	private PortletContext portletContext;
+	private ProductMap products;
 	private Map<String, String[]> publicParameterMappings = new HashMap<String, String[]>();
 	private String viewIdRenderParameterName;
 	private String viewIdResourceParameterName;
@@ -253,6 +255,19 @@ public class BridgeConfigImpl implements BridgeConfig {
 					logger.debug("Added implicit extension-mapped servlet-mapping for urlPattern=[{0}]", urlPattern);
 				}
 			}
+
+			// Initialize the map of products
+			products = new ProductMap();
+
+			// Initialize the map of attributes
+			attributes = new HashMap<String, Object>();
+			attributes.put(BridgeContextFactory.class.getName(), bridgeContextFactory);
+			attributes.put(BridgePhaseFactory.class.getName(), bridgePhaseFactory);
+			attributes.put(BridgeRequestScopeFactory.class.getName(), bridgeRequestScopeFactory);
+			attributes.put(BridgeRequestScopeManagerFactory.class.getName(), bridgeRequestScopeManagerFactory);
+			attributes.put(BridgeWriteBehindResponseFactory.class.getName(), bridgeWriteBehindResponseFactory);
+			attributes.put(BridgeURLFactory.class.getName(), bridgeURLFactory);
+			attributes.put(PortletContainerFactory.class.getName(), portletContainerFactory);
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -296,44 +311,16 @@ public class BridgeConfigImpl implements BridgeConfig {
 		return classInstance;
 	}
 
-	public Object getAttribute(String name) {
-
-		Object value = null;
-
-		if (name != null) {
-
-			if (name.equals(BridgeContextFactory.class.getName())) {
-				value = bridgeContextFactory;
-			}
-			else if (name.equals(BridgePhaseFactory.class.getName())) {
-				value = bridgePhaseFactory;
-			}
-			else if (name.equals(BridgeRequestScopeFactory.class.getName())) {
-				value = bridgeRequestScopeFactory;
-			}
-			else if (name.equals(BridgeRequestScopeManagerFactory.class.getName())) {
-				value = bridgeRequestScopeManagerFactory;
-			}
-			else if (name.equals(BridgeWriteBehindResponseFactory.class.getName())) {
-				value = bridgeWriteBehindResponseFactory;
-			}
-			else if (name.equals(BridgeURLFactory.class.getName())) {
-				value = bridgeURLFactory;
-			}
-			else if (name.equals(PortletContainerFactory.class.getName())) {
-				value = portletContainerFactory;
-			}
-		}
-
-		return value;
-	}
-
-	public String getContextParameter(String name) {
-		return portletContext.getInitParameter(name);
+	public Map<String, Object> getAttributes() {
+		return attributes;
 	}
 
 	public List<String> getConfiguredExtensions() {
 		return defaultSuffixes;
+	}
+
+	public String getContextParameter(String name) {
+		return portletContext.getInitParameter(name);
 	}
 
 	public Set<String> getExcludedRequestAttributes() {
@@ -342,6 +329,10 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 	public List<ServletMapping> getFacesServletMappings() {
 		return facesServletMappings;
+	}
+
+	public Map<String, Product> getProducts() {
+		return products;
 	}
 
 	public Map<String, String[]> getPublicParameterMappings() {
