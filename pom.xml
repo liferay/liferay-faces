@@ -83,7 +83,7 @@
 	</properties>
 
 	<build>
-			<pluginManagement>
+		<pluginManagement>
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -303,6 +303,32 @@
 				<groupId>org.apache.myfaces.portlet-bridge</groupId>
 				<artifactId>portlet-bridge-api</artifactId>
 				<version>2.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.icefaces</groupId>
+				<artifactId>icefaces</artifactId>
+				<version>${icefaces3.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.glassfish</groupId>
+						<artifactId>javax.faces</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.icefaces</groupId>
+				<artifactId>icefaces-ace</artifactId>
+				<version>${icefaces3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.icefaces</groupId>
+				<artifactId>icefaces-compat</artifactId>
+				<version>${icefaces3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.icefaces</groupId>
+				<artifactId>icepush</artifactId>
+				<version>${icefaces3.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.richfaces.ui</groupId>
