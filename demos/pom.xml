@@ -93,13 +93,13 @@
 								<configuration>
 									<target>
 										<delete failonerror="false" includeemptydirs="true" verbose="true">
-											<fileset dir="${liferay.auto.deploy.dir}" includes="${project.name}*.war" />
+											<fileset dir="${liferay.auto.deploy.dir}" includes="${project.artifactId}*.war" />
 										</delete>
 										<delete failonerror="false" includeemptydirs="true" verbose="true">
-											<fileset dir="${liferay.deploy.dir}/${project.name}" />
-											<fileset dir="${liferay.deploy.dir}/${project.name}.war" />
+											<fileset dir="${liferay.deploy.dir}/${project.artifactId}" />
+											<fileset dir="${liferay.deploy.dir}/${project.artifactId}.war" />
 											<fileset dir="${liferay.deploy.dir}">
-												<include name="*${project.name}.war.deployed"/>
+												<include name="*${project.artifactId}.war.deployed"/>
 											</fileset>
 										</delete>
 									</target>
