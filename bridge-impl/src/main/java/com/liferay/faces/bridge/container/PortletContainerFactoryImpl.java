@@ -13,11 +13,7 @@
  */
 package com.liferay.faces.bridge.container;
 
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
-import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.container.liferay.PortletContainerLiferayImpl;
 import com.liferay.faces.bridge.container.pluto.PortletContainerPlutoImpl;
@@ -40,34 +36,28 @@ public class PortletContainerFactoryImpl extends PortletContainerFactory {
 	 * @see  {@link PortletContainerFactory#getPortletContainer(BridgeContext)}
 	 */
 	@Override
-	public PortletContainer getPortletContainer(PortletConfig portletConfig, PortletContext portletContext,
-		PortletRequest portletRequest, PortletResponse portletResponse, Bridge.PortletPhase portletPhase) {
+	public PortletContainer getPortletContainer(BridgeContext bridgeContext) {
 
 		PortletContainer portletContainer = null;
 
 		if (wrappedFactory != null) {
-			portletContainer = wrappedFactory.getPortletContainer(portletConfig, portletContext, portletRequest,
-					portletResponse, portletPhase);
+			portletContainer = wrappedFactory.getPortletContainer(bridgeContext);
 		}
 
 		if (portletContainer == null) {
 
+			PortletRequest portletRequest = bridgeContext.getPortletRequest();
+
 			if (PortletContainerDetector.isLiferayObject(portletRequest)) {
-				portletContainer = new PortletContainerLiferayImpl(portletConfig, portletContext, portletRequest,
-						portletResponse, portletPhase);
+				portletContainer = new PortletContainerLiferayImpl(bridgeContext);
 			}
 			else if (PortletContainerDetector.isPlutoObject(portletRequest)) {
-				portletContainer = new PortletContainerPlutoImpl(portletConfig, portletContext, portletRequest,
-						portletResponse, portletPhase);
+				portletContainer = new PortletContainerPlutoImpl(bridgeContext);
 			}
 			else {
-				portletContainer = new PortletContainerImpl(portletConfig, portletContext, portletRequest,
-						portletResponse, portletPhase);
+				portletContainer = new PortletContainerImpl(bridgeContext);
 			}
 		}
-
-		portletContainer.setPortletRequest(portletRequest);
-		portletContainer.setPortletResponse(portletResponse);
 
 		return portletContainer;
 	}

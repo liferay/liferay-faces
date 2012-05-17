@@ -30,7 +30,6 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeUtil;
 
 import com.liferay.faces.bridge.BridgeExt;
-import com.liferay.faces.bridge.BridgeImpl;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.map.SessionMap;
@@ -47,7 +46,7 @@ public class ELResolverImpl extends ELResolver {
 
 	private static final String ACTION_REQUEST = "actionRequest";
 	private static final String ACTION_RESPONSE = "actionResponse";
-	private static final String BRIDGE = "bridge";
+	private static final String BRIDGE_CONTEXT = "bridgeContext";
 	private static final String EVENT_REQUEST = "eventRequest";
 	private static final String EVENT_RESPONSE = "eventResponse";
 	private static final String FLASH = "bridgeFlash"; // http://java.net/jira/browse/JAVASERVERFACES-1964
@@ -70,7 +69,7 @@ public class ELResolverImpl extends ELResolver {
 		// Initialize hash set of supported EL variable names.
 		VAR_NAMES.add(ACTION_REQUEST);
 		VAR_NAMES.add(ACTION_RESPONSE);
-		VAR_NAMES.add(BRIDGE);
+		VAR_NAMES.add(BRIDGE_CONTEXT);
 		VAR_NAMES.add(EVENT_REQUEST);
 		VAR_NAMES.add(EVENT_RESPONSE);
 		VAR_NAMES.add(FLASH);
@@ -89,7 +88,7 @@ public class ELResolverImpl extends ELResolver {
 		// Initialize the list of static feature descriptors.
 		addFeatureDescriptor(ACTION_REQUEST, String.class);
 		addFeatureDescriptor(ACTION_RESPONSE, String.class);
-		addFeatureDescriptor(BRIDGE, String.class);
+		addFeatureDescriptor(BRIDGE_CONTEXT, String.class);
 		addFeatureDescriptor(EVENT_REQUEST, String.class);
 		addFeatureDescriptor(EVENT_RESPONSE, String.class);
 		addFeatureDescriptor(FLASH, String.class);
@@ -150,8 +149,9 @@ public class ELResolverImpl extends ELResolver {
 					throw new ELException("Unable to get actionResponse during " + portletPhase);
 				}
 			}
-			else if (varName.equals(BRIDGE)) {
-				value = new BridgeImpl();
+			else if (varName.equals(BRIDGE_CONTEXT)) {
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				value = getPortletRequest(facesContext).getAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
 			}
 			else if (varName.equals(EVENT_REQUEST)) {
 				Bridge.PortletPhase portletPhase = BridgeUtil.getPortletRequestPhase();

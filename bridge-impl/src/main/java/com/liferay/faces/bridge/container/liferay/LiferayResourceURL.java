@@ -29,11 +29,13 @@ public class LiferayResourceURL extends LiferayBaseURL implements ResourceURL {
 
 	// Private Data Members
 	private String cacheLevel;
+	private int liferayBuildNumber;
 	private String resourceId;
 	private String toStringValue;
 
-	public LiferayResourceURL(ParsedBaseURL parsedLiferayURL, String responseNamespace) {
+	public LiferayResourceURL(ParsedBaseURL parsedLiferayURL, String responseNamespace, int liferayBuildNumber) {
 		super(parsedLiferayURL, responseNamespace);
+		this.liferayBuildNumber = liferayBuildNumber;
 	}
 
 	@Override
@@ -43,8 +45,6 @@ public class LiferayResourceURL extends LiferayBaseURL implements ResourceURL {
 
 			// FACES-863: Liferay 5.2 requires the p_p_mode and p_p_state parameters even though this shouldn't be the
 			// case for a ResourceURL.
-			LiferayReleaseInfo liferayReleaseInfo = new LiferayReleaseInfo();
-			int liferayBuildNumber = liferayReleaseInfo.getBuildNumber();
 			boolean firstParameter = false;
 
 			String superToString = super.toString();

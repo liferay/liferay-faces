@@ -29,9 +29,14 @@ import javax.portlet.ResourceRequest;
 public interface BridgeConfig {
 
 	/**
-	 * Returns the value of the specified (implementation dependent) attribute name.
+	 * Returns a map containing product information for detected products.
 	 */
-	public Object getAttribute(String name);
+	public Map<String, Product> getProducts();
+	
+	/**
+	 * Returns a map of bridge configuration attributes.
+	 */
+	public Map<String, Object> getAttributes();
 
 	/**
 	 * Returns the value associated with the specified parameter name from the WEB-INF/web.xml descriptor.

@@ -145,8 +145,7 @@ public class BridgeContextImpl implements BridgeContext {
 		// Initialize the portlet container implementation.
 		PortletContainerFactory portletContainerFactory = (PortletContainerFactory) BridgeFactoryFinder.getFactory(
 				PortletContainerFactory.class);
-		this.portletContainer = portletContainerFactory.getPortletContainer(portletConfig, portletContext,
-				portletRequest, portletResponse, portletPhase);
+		this.portletContainer = portletContainerFactory.getPortletContainer(this);
 	}
 
 	public void dispatch(String path) throws IOException {
@@ -252,7 +251,7 @@ public class BridgeContextImpl implements BridgeContext {
 			// "false", then remove it from the map of parameters as required by the Bridge Spec.
 			String directLinkParam = bridgeActionURL.getParameter(Bridge.DIRECT_LINK);
 
-			if (BridgeConstants.BOOLEAN_FALSE.equalsIgnoreCase(directLinkParam)) {
+			if (BooleanHelper.isFalseToken(directLinkParam)) {
 				bridgeActionURL.removeParameter(Bridge.DIRECT_LINK);
 			}
 
@@ -842,7 +841,6 @@ public class BridgeContextImpl implements BridgeContext {
 
 	public void setPortletRequest(PortletRequest portletRequest) {
 		this.portletRequest = portletRequest;
-		this.portletContainer.setPortletRequest(portletRequest);
 		this.requestParameterMap = null;
 		this.requestParameterMapFactory = null;
 		this.requestParameterValuesMap = null;
@@ -860,7 +858,6 @@ public class BridgeContextImpl implements BridgeContext {
 
 	public void setPortletResponse(PortletResponse portletResponse) {
 		this.portletResponse = portletResponse;
-		this.portletContainer.setPortletResponse(portletResponse);
 	}
 
 	public List<String> getPreFacesRequestAttrNames() {

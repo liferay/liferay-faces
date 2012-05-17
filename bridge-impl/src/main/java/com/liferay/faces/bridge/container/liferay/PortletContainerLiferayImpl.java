@@ -24,7 +24,6 @@ import java.util.Set;
 import javax.faces.context.ResponseWriter;
 import javax.portlet.ActionResponse;
 import javax.portlet.MimeResponse;
-import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -33,10 +32,11 @@ import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
-import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.bridge.config.Product;
 import com.liferay.faces.bridge.container.PortletContainerImpl;
+import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
@@ -68,6 +68,7 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 	private boolean ableToAddScriptTextToHead;
 	private boolean ableToAddStyleSheetResourceToHead;
 	private boolean ableToSetHttpStatusCode;
+	private int liferayBuildNumber;
 	private LiferayPortletRequest liferayPortletRequest;
 	private ParsedPortletURL parsedLiferayActionURL;
 	private ParsedPortletURL parsedLiferayRenderURL;
@@ -76,16 +77,17 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 	private String requestURL;
 	private String responseNamespace;
 
-	public PortletContainerLiferayImpl(PortletConfig portletConfig, PortletContext portletContext,
-		PortletRequest portletRequest, PortletResponse portletResponse, Bridge.PortletPhase portletRequestPhase) {
+	public PortletContainerLiferayImpl(BridgeContext bridgeContext) {
 
 		// Initialize the superclass.
-		super(portletConfig, portletContext, portletRequest, portletResponse, portletRequestPhase);
+		super(bridgeContext);
 
 		try {
 
 			// Initialize the private data members.
-			this.portletResponseNamespace = portletResponse.getNamespace();
+			this.portletResponseNamespace = bridgeContext.getPortletResponse().getNamespace();
+
+			PortletRequest portletRequest = bridgeContext.getPortletRequest();
 			LiferayPortletRequest liferayPortletRequest = new LiferayPortletRequest(portletRequest);
 			LiferayThemeDisplay liferayThemeDisplay = liferayPortletRequest.getLiferayThemeDisplay();
 			this.liferayPortletRequest = liferayPortletRequest;
@@ -101,12 +103,13 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 			if (portletRequest instanceof RenderRequest) {
 				PortletMode portletMode = portletRequest.getPortletMode();
 				WindowState windowState = portletRequest.getWindowState();
-				saveRenderAttributes(portletMode, windowState, liferayThemeDisplay, responseNamespace, portletContext);
+				saveRenderAttributes(portletMode, windowState, liferayThemeDisplay, responseNamespace,
+					bridgeContext.getPortletContext());
 			}
 
 			// Determine the Liferay version number.
-			LiferayReleaseInfo liferayReleaseInfo = new LiferayReleaseInfo();
-			int liferayBuildNumber = liferayReleaseInfo.getBuildNumber();
+			Product liferayPortal = bridgeContext.getBridgeConfig().getProducts().get(BridgeConstants.LIFERAY_PORTAL);
+			liferayBuildNumber = liferayPortal.getBuildId();
 
 			if (logger.isDebugEnabled()) {
 				logger.debug("Detected Liferay build number {0}", Long.toString(liferayBuildNumber));
@@ -167,7 +170,8 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 	public PortletURL createRedirectURL(String fromURL, Map<String, List<String>> parameters)
 		throws MalformedURLException {
 
-		LiferayPortletResponse liferayPortletResponse = new LiferayPortletResponse(getPortletResponse());
+		LiferayPortletResponse liferayPortletResponse = new LiferayPortletResponse(getBridgeContext()
+				.getPortletResponse());
 
 		PortletURL redirectURL = liferayPortletResponse.createRenderURL();
 
@@ -211,7 +215,7 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 	@Override
 	public void redirect(String url) throws IOException {
 
-		PortletResponse portletResponse = getPortletResponse();
+		PortletResponse portletResponse = getBridgeContext().getPortletResponse();
 
 		if (portletResponse instanceof ActionResponse) {
 			LiferayPortletResponse liferayActionResponse = new LiferayPortletResponse(portletResponse);
@@ -234,7 +238,8 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 
 	@Override
 	protected ResourceURL createResourceURL(MimeResponse mimeResponse) {
-		return new LiferayResourceURL(getParsedLiferayResourceURL(mimeResponse), portletResponseNamespace);
+		return new LiferayResourceURL(getParsedLiferayResourceURL(mimeResponse), portletResponseNamespace,
+				liferayBuildNumber);
 	}
 
 	/**
@@ -341,8 +346,8 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 	@Override
 	public HeadResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter) {
 
-		HeadResponseWriter headResponseWriter = new HeadResponseWriterLiferayImpl(wrappableResponseWriter,
-				getPortletRequest());
+		HeadResponseWriter headResponseWriter = new HeadResponseWriterLiferayImpl(getBridgeContext(),
+				wrappableResponseWriter);
 
 		return headResponseWriter;
 	}
@@ -401,10 +406,10 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 
 		if (responseNamespace == null) {
 
-			responseNamespace = portletResponse.getNamespace();
+			responseNamespace = getBridgeContext().getPortletResponse().getNamespace();
 
 			if (responseNamespace.startsWith(BridgeConstants.WSRP_REWRITE)) {
-				responseNamespace = LiferayPortalUtil.getPortletId(portletRequest);
+				responseNamespace = LiferayPortalUtil.getPortletId(getBridgeContext().getPortletRequest());
 			}
 		}
 

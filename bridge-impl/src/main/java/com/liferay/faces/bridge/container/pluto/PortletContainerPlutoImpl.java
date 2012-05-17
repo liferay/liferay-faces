@@ -16,14 +16,10 @@ package com.liferay.faces.bridge.container.pluto;
 import java.net.MalformedURLException;
 
 import javax.portlet.MimeResponse;
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletContext;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.ResourceURL;
-import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.container.PortletContainerImpl;
+import com.liferay.faces.bridge.context.BridgeContext;
 
 
 /**
@@ -36,9 +32,8 @@ public class PortletContainerPlutoImpl extends PortletContainerImpl {
 	private static final String CONTENT_TYPE_TEXT_HTML = "text/html";
 	private static final String CONTENT_TYPE_TEXT_XML = "text/xml";
 
-	public PortletContainerPlutoImpl(PortletConfig portletConfig, PortletContext portletContext,
-		PortletRequest portletRequest, PortletResponse portletResponse, Bridge.PortletPhase portletRequestPhase) {
-		super(portletConfig, portletContext, portletRequest, portletResponse, portletRequestPhase);
+	public PortletContainerPlutoImpl(BridgeContext bridgeContext) {
+		super(bridgeContext);
 	}
 
 	/**

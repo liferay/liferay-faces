@@ -67,7 +67,7 @@ public class BridgeFactoryFinderImpl extends BridgeFactoryFinder {
 			factory = bridgeFactoryCache.get(clazz);
 
 			if (factory == null) {
-				factory = (FactoryWrapper<?>) bridgeConfig.getAttribute(clazz.getName());
+				factory = (FactoryWrapper<?>) bridgeConfig.getAttributes().get(clazz.getName());
 
 				if (factory != null) {
 					bridgeFactoryCache.put(clazz, factory);

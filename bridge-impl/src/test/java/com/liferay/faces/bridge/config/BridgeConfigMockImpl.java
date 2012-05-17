@@ -27,6 +27,14 @@ public class BridgeConfigMockImpl implements BridgeConfig {
 		throw new UnsupportedOperationException();
 	}
 
+	public Map<String, Object> getAttributes() {
+		throw new UnsupportedOperationException();
+	}
+
+	public List<String> getConfiguredExtensions() {
+		throw new UnsupportedOperationException();
+	}
+
 	public String getContextParameter(String name) {
 		throw new UnsupportedOperationException();
 	}
@@ -36,6 +44,10 @@ public class BridgeConfigMockImpl implements BridgeConfig {
 	}
 
 	public List<ServletMapping> getFacesServletMappings() {
+		throw new UnsupportedOperationException();
+	}
+
+	public Map<String, Product> getProducts() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -56,10 +68,6 @@ public class BridgeConfigMockImpl implements BridgeConfig {
 	}
 
 	public String getWriteBehindResourceResponseWrapper() {
-		throw new UnsupportedOperationException();
-	}
-
-	public List<String> getConfiguredExtensions() {
 		throw new UnsupportedOperationException();
 	}
 

@@ -20,8 +20,6 @@ import java.util.Map;
 
 import javax.faces.context.ResponseWriter;
 import javax.portlet.MimeResponse;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceResponse;
 import javax.portlet.ResourceURL;
@@ -43,11 +41,6 @@ public interface PortletContainer {
 	 */
 	public PortletURL createActionURL(String fromURL) throws MalformedURLException;
 
-	/**
-	 * Returns the response namespace.
-	 */
-	public String getResponseNamespace();
-	
 	/**
 	 * Creates a portlet resource URL that is suitable for partial requests (Ajax).
 	 *
@@ -172,26 +165,6 @@ public interface PortletContainer {
 	public void setMimeResponseContentType(MimeResponse mimeResponse, String contentType);
 
 	/**
-	 * Gets the encapsulated PortletRequest.
-	 */
-	public PortletRequest getPortletRequest();
-
-	/**
-	 * Sets the encapsulated PortletRequest to the specified value.
-	 */
-	public void setPortletRequest(PortletRequest portletRequest);
-
-	/**
-	 * Gets the encapsulated PortletResponse.
-	 */
-	public PortletResponse getPortletResponse();
-
-	/**
-	 * Sets the encapsulated PortletResponse to the specified value.
-	 */
-	public void setPortletResponse(PortletResponse portletResponse);
-
-	/**
 	 * This is a convenience method that gets the specified request parameter value. While this could normally be done
 	 * by simply calling PortletRequest.getParameter(String), this method provides the portlet container abstraction
 	 * layer with an opportunity to fix/correct/massage the parameter value as required. Therefore, any implementing
@@ -228,4 +201,9 @@ public interface PortletContainer {
 	 * Returns the URL requested by the user-agent (browser).
 	 */
 	public String getRequestURL();
+
+	/**
+	 * Returns the response namespace.
+	 */
+	public String getResponseNamespace();
 }

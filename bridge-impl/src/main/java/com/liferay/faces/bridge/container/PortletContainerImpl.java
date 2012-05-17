@@ -29,21 +29,19 @@ import javax.portlet.ActionResponse;
 import javax.portlet.BaseURL;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortalContext;
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceResponse;
 import javax.portlet.ResourceURL;
 import javax.portlet.faces.Bridge;
+import javax.portlet.faces.Bridge.PortletPhase;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.application.ResourceHandlerImpl;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
-import com.liferay.faces.bridge.config.BridgeConfigFactory;
+import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
@@ -69,34 +67,19 @@ public class PortletContainerImpl implements PortletContainer {
 	// Private Data Members
 	private Boolean ableToSetHttpStatusCode;
 	private Map<String, PortletURL> actionURLCache;
-	private BridgeConfig bridgeConfig;
+	private BridgeContext bridgeContext;
 	private boolean markupHeadElementSupported;
-	private Bridge.PortletPhase portletRequestPhase;
 	private Map<String, PortletURL> renderURLCache;
 	private String requestQueryString;
 	private String requestURL;
 	private String responseNamespace;
 	private Map<String, ResourceURL> resourceURLCache;
-	
-	// Protected Data Members
-	protected PortletConfig portletConfig;
-	protected PortletContext portletContext;
-	protected PortletResponse portletResponse;
-	protected PortletRequest portletRequest;
 
-	public PortletContainerImpl(PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest, PortletResponse portletResponse,
-		Bridge.PortletPhase portletRequestPhase) {
-		this.portletConfig = portletConfig;
-		this.portletContext = portletContext;
-		this.portletRequest = portletRequest;
-		this.portletResponse = portletResponse;
-		this.portletRequestPhase = portletRequestPhase;
+	public PortletContainerImpl(BridgeContext bridgeContext) {
 
-		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
-				BridgeConfigFactory.class);
-		bridgeConfig = bridgeConfigFactory.getBridgeConfig();
+		this.bridgeContext = bridgeContext;
 
-		String portalVendorClaim = portletRequest.getPortalContext().getProperty(
+		String portalVendorClaim = bridgeContext.getPortletRequest().getPortalContext().getProperty(
 				PortalContext.MARKUP_HEAD_ELEMENT_SUPPORT);
 		this.markupHeadElementSupported = (portalVendorClaim != null);
 		this.actionURLCache = new HashMap<String, PortletURL>();
@@ -112,7 +95,7 @@ public class PortletContainerImpl implements PortletContainer {
 			try {
 				logger.debug("createActionURL fromURL=[" + fromURL + "]");
 
-				MimeResponse mimeResponse = (MimeResponse) portletResponse;
+				MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
 				actionURL = createActionURL(mimeResponse);
 				copyRequestParameters(fromURL, actionURL);
 				actionURLCache.put(fromURL, actionURL);
@@ -142,13 +125,15 @@ public class PortletContainerImpl implements PortletContainer {
 
 		PortletURL redirectURL = null;
 
+		PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
+
 		if ((portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE) ||
 				(portletRequestPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
 
 			try {
 				logger.debug("createRedirectURL fromURL=[" + fromURL + "]");
 
-				MimeResponse mimeResponse = (MimeResponse) portletResponse;
+				MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
 				redirectURL = mimeResponse.createRenderURL();
 				copyRequestParameters(fromURL, redirectURL);
 
@@ -179,13 +164,15 @@ public class PortletContainerImpl implements PortletContainer {
 
 		if (renderURL == null) {
 
+			PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
+
 			if ((portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE) ||
 					(portletRequestPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
 
 				try {
 					logger.debug("createRenderURL fromURL=[" + fromURL + "]");
 
-					MimeResponse mimeResponse = (MimeResponse) portletResponse;
+					MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
 					renderURL = createRenderURL(mimeResponse);
 					copyRequestParameters(fromURL, renderURL);
 					renderURLCache.put(fromURL, renderURL);
@@ -208,7 +195,7 @@ public class PortletContainerImpl implements PortletContainer {
 				logger.debug("createResourceURL fromURL=[" + fromURL + "]");
 
 				// Ask the portlet container to create a portlet resource URL.
-				MimeResponse mimeResponse = (MimeResponse) portletResponse;
+				MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
 				resourceURL = createResourceURL(mimeResponse);
 
 				// Note: RichFaces specifies /rfRes instead of /javax.faces.resource in resource URLs. This is a hack.
@@ -270,6 +257,8 @@ public class PortletContainerImpl implements PortletContainer {
 
 	public void redirect(String url) throws IOException {
 
+		PortletResponse portletResponse = bridgeContext.getPortletResponse();
+
 		if (portletResponse instanceof ActionResponse) {
 			ActionResponse actionResponse = (ActionResponse) portletResponse;
 			actionResponse.sendRedirect(url);
@@ -303,7 +292,8 @@ public class PortletContainerImpl implements PortletContainer {
 			}
 		}
 		else {
-			throw new UnsupportedEncodingException("Unable to redirect during " + portletRequestPhase);
+			throw new UnsupportedEncodingException("Unable to redirect during " +
+				bridgeContext.getPortletRequestPhase());
 		}
 	}
 
@@ -315,8 +305,7 @@ public class PortletContainerImpl implements PortletContainer {
 	 *
 	 * @throws  MalformedURLException
 	 */
-	protected void copyRequestParameters(String fromURL, BaseURL toURL)
-		throws MalformedURLException {
+	protected void copyRequestParameters(String fromURL, BaseURL toURL) throws MalformedURLException {
 		List<RequestParameter> requestParameters = parseRequestParameters(fromURL);
 
 		if (requestParameters != null) {
@@ -388,7 +377,12 @@ public class PortletContainerImpl implements PortletContainer {
 		return requestParameters;
 	}
 
+	protected BridgeContext getBridgeContext() {
+		return bridgeContext;
+	}
+
 	protected boolean getContextParamAbleToSetHttpStatusCode(boolean defaultValue) {
+		BridgeConfig bridgeConfig = bridgeContext.getBridgeConfig();
 		String contextParamValue = bridgeConfig.getContextParameter(
 				BridgeConfigConstants.PARAM_CONTAINER_ABLE_TO_SET_HTTP_STATUS_CODE1);
 
@@ -450,7 +444,8 @@ public class PortletContainerImpl implements PortletContainer {
 
 	public HeadResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter) {
 
-		HeadResponseWriter headResponseWriter = new HeadResponseWriterImpl(wrappableResponseWriter, portletResponse);
+		HeadResponseWriter headResponseWriter = new HeadResponseWriterImpl(wrappableResponseWriter,
+				bridgeContext.getPortletResponse());
 
 		return headResponseWriter;
 	}
@@ -465,29 +460,13 @@ public class PortletContainerImpl implements PortletContainer {
 		mimeResponse.setContentType(contentType);
 	}
 
-	public PortletRequest getPortletRequest() {
-		return portletRequest;
-	}
-
-	public void setPortletRequest(PortletRequest portletRequest) {
-		this.portletRequest = portletRequest;
-	}
-
-	public PortletResponse getPortletResponse() {
-		return portletResponse;
-	}
-
-	public void setPortletResponse(PortletResponse portletResponse) {
-		this.portletResponse = portletResponse;
-	}
-
 	public String getRequestParameter(String name) {
-		return fixRequestParameterValue(getPortletRequest().getParameter(name));
+		return fixRequestParameterValue(bridgeContext.getPortletRequest().getParameter(name));
 	}
 
 	public String[] getRequestParameterValues(String name) {
 		String[] values = null;
-		String[] originalValues = getPortletRequest().getParameterValues(name);
+		String[] originalValues = bridgeContext.getPortletRequest().getParameterValues(name);
 
 		if (originalValues != null) {
 			values = new String[originalValues.length];
@@ -503,6 +482,7 @@ public class PortletContainerImpl implements PortletContainer {
 	public String getRequestQueryString() {
 
 		if (requestQueryString == null) {
+			PortletRequest portletRequest = bridgeContext.getPortletRequest();
 			requestQueryString = (String) portletRequest.getAttribute(REQUEST_ATTR_QUERY_STRING);
 
 			if (requestQueryString == null) {
@@ -529,6 +509,7 @@ public class PortletContainerImpl implements PortletContainer {
 
 			// Note that this is an approximation (best guess) of the original URL.
 			StringBuilder buf = new StringBuilder();
+			PortletRequest portletRequest = bridgeContext.getPortletRequest();
 			buf.append(portletRequest.getScheme());
 			buf.append(BridgeConstants.CHAR_COLON);
 			buf.append(BridgeConstants.CHAR_FORWARD_SLASH);
@@ -546,13 +527,14 @@ public class PortletContainerImpl implements PortletContainer {
 	}
 
 	public String getResponseNamespace() {
-		
+
 		if (responseNamespace == null) {
 
-			responseNamespace = portletResponse.getNamespace();
+			responseNamespace = bridgeContext.getPortletResponse().getNamespace();
 
 			if (BridgeConstants.WSRP_REWRITE.equals(responseNamespace)) {
-				responseNamespace = portletConfig.getPortletName() + portletContext.getPortletContextName();
+				responseNamespace = bridgeContext.getPortletConfig().getPortletName() +
+					bridgeContext.getPortletContext().getPortletContextName();
 			}
 		}
 
