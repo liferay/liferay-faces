@@ -71,8 +71,8 @@
 									<target>
 										<delete failonerror="false" includeemptydirs="true" verbose="true">
 											<fileset dir="${pluto.deploy.dir}">
-												<include name="${project.name}*/" />
-												<include name="${project.name}*.war" />
+												<include name="${project.artifactId}*/" />
+												<include name="${project.artifactId}*.war" />
 											</fileset>
 										</delete>
 									</target>
@@ -87,7 +87,7 @@
 									<target>
 										<copy todir="${pluto.deploy.dir}">
 											<fileset dir="target">
-												<include name="${project.name}*.war" />
+												<include name="${project.artifactId}*.war" />
 											</fileset>
 										</copy>
 									</target>
