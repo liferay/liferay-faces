@@ -13,6 +13,11 @@
  */
 package com.liferay.faces.bridge.config;
 
+import java.lang.reflect.Method;
+
+import com.liferay.faces.bridge.BridgeConstants;
+
+
 /**
  * @author  Neil Griffin
  */
@@ -21,10 +26,15 @@ public class ProductLiferayPortalImpl extends ProductBaseImpl {
 	public ProductLiferayPortalImpl() {
 
 		try {
+			this.title = BridgeConstants.LIFERAY_PORTAL;
+
 			Class<?> releaseInfoClass = Class.forName("com.liferay.portal.kernel.util.ReleaseInfo");
-			this.buildId = parseInt((String) releaseInfoClass.getDeclaredField("build").get(String.class));
-			initVersionInfo((String) releaseInfoClass.getDeclaredField("version").get(String.class));
-			this.title = (String) releaseInfoClass.getDeclaredField("name").get(String.class);
+			Class<?>[] emptyClassArray = new Class[] {};
+			Object[] emptyObjectArray = new Object[] {};
+			Method method = releaseInfoClass.getMethod("getBuildNumber", emptyClassArray);
+			this.buildId = (Integer) method.invoke(null, emptyObjectArray);
+			method = releaseInfoClass.getMethod("getVersion", emptyClassArray);
+			initVersionInfo((String) method.invoke(null, emptyObjectArray));
 
 			if (this.majorVersion > 0) {
 				this.detected = true;

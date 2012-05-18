@@ -45,9 +45,6 @@ public class ProductMap extends HashMap<String, Product> {
 		String name = (String) key;
 		Product value = super.get(name);
 
-		if (BridgeConstants.RICHFACES.equals(name)) {
-			value = null;
-		}
 		if (value == null) {
 
 			if (BridgeConstants.ICEFACES.equals(name)) {
