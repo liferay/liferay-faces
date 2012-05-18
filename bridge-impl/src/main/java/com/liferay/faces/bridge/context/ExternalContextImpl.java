@@ -528,16 +528,17 @@ public class ExternalContextImpl extends ExternalContext {
 
 			iceFacesLegacyMode = Boolean.FALSE;
 
-			Product iceFaces = bridgeConfig.getProducts().get(BridgeConstants.ICEFACES);
+			String requestContentType = clientDataRequest.getContentType();
 
-			if (iceFaces.isDetected() &&
-					((iceFaces.getMajorVersion() == 2) ||
-						((iceFaces.getMajorVersion() == 3) && (iceFaces.getMinorVersion() == 0)))) {
+			if ((requestContentType != null) &&
+					requestContentType.toLowerCase().startsWith(BridgeConstants.MULTIPART_CONTENT_TYPE_PREFIX)) {
 
-				String requestContentType = clientDataRequest.getContentType();
+				Product iceFaces = bridgeConfig.getProducts().get(BridgeConstants.ICEFACES);
 
-				if ((requestContentType != null) &&
-						requestContentType.toLowerCase().startsWith(BridgeConstants.MULTIPART_CONTENT_TYPE_PREFIX)) {
+				if (iceFaces.isDetected() &&
+						((iceFaces.getMajorVersion() == 2) ||
+							((iceFaces.getMajorVersion() == 3) && (iceFaces.getMinorVersion() == 0)))) {
+
 					iceFacesLegacyMode = Boolean.TRUE;
 				}
 			}
