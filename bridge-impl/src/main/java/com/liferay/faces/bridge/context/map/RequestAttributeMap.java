@@ -18,6 +18,7 @@ import java.util.Enumeration;
 import javax.faces.context.ExternalContext;
 import javax.portlet.PortletRequest;
 
+import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.util.AbstractPropertyMap;
 import com.liferay.faces.bridge.util.AbstractPropertyMapEntry;
 import com.liferay.faces.bridge.util.ManagedBeanUtil;
