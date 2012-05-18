@@ -62,7 +62,15 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 
 	@Override
 	protected Object getProperty(String name) {
-		return portletRequest.getAttribute(name);
+
+		// Versions of Liferay Portal prior to 6.1 have a bug in PortletRequest.removeAttribute(String) that needs to
+		// be worked-around in this class. See: http://issues.liferay.com/browse/FACES-1233
+		if (BridgeConstants.REQ_ATTR_PATH_INFO.equals(name) || BridgeConstants.REQ_ATTR_SERVLET_PATH.equals(name)) {
+			return null;
+		}
+		else {
+			return portletRequest.getAttribute(name);
+		}
 	}
 
 	@Override
