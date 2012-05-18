@@ -33,7 +33,6 @@ public class BridgeConstants {
 	public static final Object CHAR_SEMICOLON = ";";
 	public static final String CHAR_SPACE = " ";
 	public static final String CHAR_UNDERSCORE = "_";
-	public static final String EMPTY = "";
 	
 	// ICEfaces Constants
 	public static final String ICEFACES = "ICEfaces";
@@ -46,14 +45,20 @@ public class BridgeConstants {
 
 	// PrimeFaces Constants
 	public static final String PRIMEFACES = "PrimeFaces";
+
+	// Request Attribute Names
+	public static final String REQ_ATTR_PATH_INFO = "javax.servlet.include.path_info";
+	public static final String REQ_ATTR_SERVLET_PATH = "javax.servlet.include.servlet_path";
 	
 	// RichFaces Constants
 	public static final String RICHFACES = "RichFaces";
-
-	// Miscellaneous Constants
-	public static final String MULTIPART_CONTENT_TYPE_PREFIX = "multipart/";
-	public static final String UTF8 = "UTF-8";
+	
+	// WSRP Constants
 	public static final String WSRP = "wsrp";
 	public static final String WSRP_REWRITE = "wsrp_rewrite";
-
+	
+	// Miscellaneous Constants
+	public static final String EMPTY = "";
+	public static final String MULTIPART_CONTENT_TYPE_PREFIX = "multipart/";
+	public static final String UTF8 = "UTF-8";
 }
