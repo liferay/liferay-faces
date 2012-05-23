@@ -18,12 +18,15 @@ import java.io.Writer;
 import javax.faces.component.UIForm;
 import javax.faces.component.UIOutput;
 import javax.faces.component.UIPanel;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.RenderKit;
 import javax.faces.render.RenderKitWrapper;
 import javax.faces.render.Renderer;
 
+import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.component.icefaces.DataPaginator;
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
@@ -48,6 +51,7 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 	private static final Object ICEFACES_HEAD_RENDERER = "org.icefaces.ace.renderkit.HeadRenderer";
 	private static final String PRIMEFACES_FAMILY = "org.primefaces.component";
 	private static final String PRIMEFACES_HEAD_RENDERER = "org.primefaces.renderkit.HeadRenderer";
+	private static final String SCRIPT_RENDERER_TYPE = "javax.faces.resource.Script";
 
 	// Private Data Members
 	private RenderKit wrappedRenderKit;
@@ -99,6 +103,9 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 			if (BooleanHelper.isBooleanToken(primeFileUploadForceResourceURL)) {
 				renderer = new FormRendererPrimeFacesImpl(renderer);
 			}
+		}
+		else if (UIOutput.COMPONENT_FAMILY.equals(family) && SCRIPT_RENDERER_TYPE.equals(rendererType)) {
+			renderer = new ScriptRendererBridgeImpl(renderer);
 		}
 		else if (UIPanel.COMPONENT_FAMILY.equals(family) && DataPaginator.RENDERER_TYPE.equals(rendererType)) {
 

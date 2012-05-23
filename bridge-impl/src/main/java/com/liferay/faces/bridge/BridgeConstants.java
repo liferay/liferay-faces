@@ -25,8 +25,11 @@ public class BridgeConstants {
 	public static final String CHAR_COLON = ":";
 	public static final Object CHAR_COMMA = ",";
 	public static final Object CHAR_DASH = "-";
+	public static final String CHAR_DOUBLE_QUOTE = "\"";
 	public static final String CHAR_EQUALS = "=";
 	public static final String CHAR_FORWARD_SLASH = "/";
+	public static final String CHAR_GREATER_THAN = ">";
+	public static final String CHAR_LESS_THAN = "<";
 	public static final String CHAR_PERIOD = ".";
 	public static final String CHAR_POUND = "#";
 	public static final String CHAR_QUESTION_MARK = "?";
