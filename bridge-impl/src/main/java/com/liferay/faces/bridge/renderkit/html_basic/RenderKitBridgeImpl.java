@@ -29,8 +29,8 @@ import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.component.icefaces.DataPaginator;
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
-import com.liferay.faces.bridge.config.BridgeConfigConstants;
-import com.liferay.faces.bridge.helper.BooleanHelper;
+import com.liferay.faces.bridge.config.Product;
+import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.renderkit.bridge.ResponseWriterBridgeImpl;
 import com.liferay.faces.bridge.renderkit.icefaces.DataPaginatorRenderer;
 import com.liferay.faces.bridge.renderkit.icefaces.HeadRendererICEfacesImpl;
@@ -96,11 +96,15 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 		}
 		else if (UIForm.COMPONENT_FAMILY.equals(family) && JAVAX_FACES_FORM.equals(rendererType)) {
 
+			// If the PrimeFaces p:fileUpload should be forced to use a ResourceURL, then return a special
+			// form renderer. http://issues.liferay.com/browse/FACES-1194
 			FacesContext facesContext = FacesContext.getCurrentInstance();
-			String primeFileUploadForceResourceURL = facesContext.getExternalContext().getInitParameter(
-					BridgeConfigConstants.PARAM_PRIME_FILE_UPLOAD_FORCE_RESOURCE_URL);
+			ExternalContext externalContext = facesContext.getExternalContext();
+			BridgeContext bridgeContext = (BridgeContext) externalContext.getRequestMap().get(
+					BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+			Product primeFaces = bridgeContext.getBridgeConfig().getProducts().get(BridgeConstants.PRIMEFACES);
 
-			if (BooleanHelper.isBooleanToken(primeFileUploadForceResourceURL)) {
+			if (primeFaces.isDetected() && (primeFaces.getMajorVersion() == 3) && (primeFaces.getMinorVersion() < 3)) {
 				renderer = new FormRendererPrimeFacesImpl(renderer);
 			}
 		}
