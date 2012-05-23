@@ -17,6 +17,7 @@ import javax.faces.FacesException;
 import javax.faces.application.Application;
 import javax.faces.application.ApplicationWrapper;
 import javax.faces.application.NavigationHandler;
+import javax.faces.application.ResourceHandler;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
@@ -134,6 +135,17 @@ public class ApplicationImpl extends ApplicationWrapper {
 		}
 
 		return super.getNavigationHandler();
+	}
+
+	@Override
+	public ResourceHandler getResourceHandler() {
+
+		ResourceHandler resourceHandler = super.getResourceHandler();
+		if (resourceHandler != null) {
+			resourceHandler = new ResourceHandlerOuterImpl(resourceHandler);
+		}
+
+		return resourceHandler;
 	}
 
 	/**
