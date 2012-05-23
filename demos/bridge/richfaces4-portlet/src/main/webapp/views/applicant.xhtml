@@ -5,26 +5,26 @@
 	xmlns:bridge="http://liferay.com/faces/bridge" xmlns:example-cc="http://java.sun.com/jsf/composite/example-cc"
 	xmlns:rich="http://richfaces.org/rich" xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<aui:layout id="l1" rendered="#{!applicantBackingBean.fileUploaderRendered}">
+	<aui:layout id="l1">
 		<example-cc:clipboard label="#{i18n['job-application']}" />
 		<example-cc:sponsorButton />
 		<example-cc:divider />
 		<aui:column id="c1">
 			<h:form id="f1">
-				<h:messages globalOnly="true" layout="table" />
+				<rich:messages globalOnly="true" layout="table" />
 				<aui:fieldset id="fs1">
 					<aui:column id="c1a">
 						<aui:field id="firstNameField" label="#{i18n['first-name']}">
 							<h:inputText id="firstName" required="true" value="#{applicantModelBean.firstName}">
 								<a4j:ajax render="firstNameField" />
 							</h:inputText>
-							<h:message for="firstName" />
+							<rich:message for="firstName" />
 						</aui:field>
 						<aui:field id="lastNameField" label="#{i18n['last-name']}">
 							<h:inputText id="lastName" required="true" value="#{applicantModelBean.lastName}">
 								<a4j:ajax render="lastNameField" />
 							</h:inputText>
-							<h:message for="lastName" />
+							<rich:message for="lastName" />
 						</aui:field>
 						<aui:field id="emailAddressField" label="#{i18n['email-address']}">
 							<h:inputText id="emailAddress" required="true" validatorMessage="#{i18n['invalid-email-address']}"
@@ -32,13 +32,13 @@
 								<f:validateRegex pattern=".+[@].+[.].+" />
 								<a4j:ajax render="emailAddressField" />
 							</h:inputText>
-							<h:message for="emailAddress" />
+							<rich:message for="emailAddress" />
 						</aui:field>
 						<aui:field id="phoneNumberField" label="#{i18n['phone-number']}">
 							<h:inputText id="phoneNumber" required="true" value="#{applicantModelBean.phoneNumber}">
 								<a4j:ajax render="phoneNumberField" />
 							</h:inputText>
-							<h:message for="phoneNumber" />
+							<rich:message for="phoneNumber" />
 						</aui:field>
 					</aui:column>
 					<aui:column id="c1b">
@@ -48,13 +48,13 @@
 								<f:convertDateTime pattern="#{portletPreferencesValues['datePattern'][0]}" />
 								<a4j:ajax render="dateOfBirthField" />
 							</rich:calendar>
-							<h:message for="dateOfBirth" />
+							<rich:message for="dateOfBirth" />
 						</aui:field>
 						<aui:field id="cityField" label="#{i18n['city']}">
 							<h:inputText id="city" required="true" value="#{applicantModelBean.city}">
 								<a4j:ajax render="cityField" />
 							</h:inputText>
-							<h:message id="cityMessage" for="city" />
+							<rich:message id="cityMessage" for="city" />
 						</aui:field>
 						<aui:field id="provinceIdField" label="#{i18n['state-province']}">
 							<h:selectOneMenu id="provinceId" required="true" value="#{applicantModelBean.provinceId}">
@@ -63,7 +63,7 @@
 									value="#{listModelBean.provinces}" var="province" />
 								<a4j:ajax render="provinceIdField" />
 							</h:selectOneMenu>
-							<h:message id="provinceIdMessage" for="provinceId" />
+							<rich:message id="provinceIdMessage" for="provinceId" />
 						</aui:field>
 						<aui:field id="postalCodeField" label="#{i18n['zip-postal']}">
 							<h:inputText id="postalCode" required="true" value="#{applicantModelBean.postalCode}"
@@ -71,7 +71,7 @@
 								<a4j:ajax render="cityField provinceIdField postalCodeField" />
 							</h:inputText>
 							<img src="#{resource['example:icon-help.png']}" title="#{i18n['postal-code-hint']}" />
-							<h:message id="postalCodeMessage" for="postalCode" />
+							<rich:message id="postalCodeMessage" for="postalCode" />
 						</aui:field>
 					</aui:column>
 				</aui:fieldset>
@@ -79,24 +79,20 @@
 					<aui:column>
 						<aui:field id="commentsField" label="#{i18n['comments']}">
 							<h:panelGroup id="showHide" layout="block">
-								<a4j:ajax render="commentsField">
-									<h:commandLink actionListener="#{applicantBackingBean.toggleComments}"
-										rendered="#{!applicantBackingBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
-									<h:commandLink actionListener="#{applicantBackingBean.toggleComments}"
-										rendered="#{applicantBackingBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
-								</a4j:ajax>
+								<a4j:commandLink actionListener="#{applicantBackingBean.toggleComments}" render="commentsField"
+									rendered="#{!applicantBackingBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
+								<a4j:commandLink actionListener="#{applicantBackingBean.toggleComments}" render="commentsField"
+									rendered="#{applicantBackingBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
 							</h:panelGroup>
 							<h:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantBackingBean.commentsRendered}"
 								value="#{applicantModelBean.comments}">
-								<a4j:ajax />
+								<f:ajax />
 							</h:inputTextarea>
 						</aui:field>
 					</aui:column>
 				</aui:fieldset>
 				<hr />
-				<h:commandButton action="#{applicantBackingBean.submit}" value="#{i18n['submit']}">
-					<a4j:ajax execute="@form" render="@form" />
-				</h:commandButton>
+				<a4j:commandButton action="#{applicantBackingBean.submit}" execute="@form" render="@all" value="#{i18n['submit']}" />
 				<!-- Test 5.4.2 Encoding PortletMode changes in Faces navigation -->
 				<h:commandButton
 					action="/views/portletEditMode.xhtml?javax.portlet.faces.PortletMode=edit&amp;javax.portlet.faces.WindowState=maximized"
@@ -104,50 +100,45 @@
 			</h:form>
 		</aui:column>
 		<aui:column id="c2">
+			<rich:popupPanel id="popup" modal="true" resizeable="true">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['confirmation']}" />
+				</f:facet>
+				<h:outputText value="#{i18n['are-you-sure-you-want-to-delete-this']}" />
+				<h:form>
+					<a4j:commandButton actionListener="#{applicantBackingBean.deleteUploadedFile}" execute="@form"
+						onclick="#{rich:component('popup')}.hide(); return true;" render="uploadedFilesTable" value="#{i18n['yes']}" />
+					<a4j:commandButton onclick="#{rich:component('popup')}.hide(); return false;" value="#{i18n['no']}" />
+				</h:form>
+			</rich:popupPanel>
 			<h:form id="f1">
 				<aui:column id="c2a" styleClass="uploaded-files">
-					<h:messages globalOnly="true" layout="table" />
+					<rich:messages globalOnly="true" layout="table" />
 					<h3>#{i18n['attachments']}</h3>
-					<rich:dataTable value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
-						<h:column>
-							<h:commandButton actionListener="#{applicantBackingBean.deleteUploadedFile}"
-								image="#{resource['example:icon-delete.png']}"
-								onclick="if (! confirm('#{i18n['are-you-sure-you-want-to-delete-this']}')) {return false;}"
-								value="#{uploadedFile.id}">
-								<a4j:ajax render="@form" />
-							</h:commandButton>
-						</h:column>
-						<h:column>
+					<rich:dataTable id="uploadedFilesTable" value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
+						<rich:column>
+							<a4j:commandButton image="#{resource['example:icon-delete.png']}"
+								onclick="#{rich:component('popup')}.show(); return true;" value="#{uploadedFile.id}">
+								<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantBackingBean.uploadedFileId}" />
+							</a4j:commandButton>
+						</rich:column>
+						<rich:column>
 							<f:facet name="header">
 								<h:outputText value="#{i18n['file-name']}" />
 							</f:facet>
 							<h:outputText value="#{uploadedFile.name}" />
-						</h:column>
-						<h:column>
+						</rich:column>
+						<rich:column>
 							<f:facet name="header">
 								<h:outputText value="#{i18n['size']}" />
 							</f:facet>
 							<h:outputText value="#{uploadedFile.size}" />
-						</h:column>
+						</rich:column>
 					</rich:dataTable>
-					<hr />
-					<h:commandButton actionListener="#{applicantBackingBean.addAttachment}" immediate="true"
-						value="#{i18n['add-attachment']}" />
+					<rich:fileUpload fileUploadListener="#{applicantBackingBean.handleFileUpload}">
+						<a4j:ajax event="uploadcomplete" execute="@none" render="uploadedFilesTable" />
+					</rich:fileUpload>
 				</aui:column>
-			</h:form>
-		</aui:column>
-	</aui:layout>
-	<aui:layout id="l2" rendered="#{applicantBackingBean.fileUploaderRendered}">
-		<aui:column id="c1">
-			<h:form id="f1" enctype="multipart/form-data">
-				<h:messages />
-				<h:panelGrid columns="1">
-					<h3>#{i18n['attachments']}</h3>
-					<bridge:inputFile binding="#{applicantBackingBean.attachment1}" />
-					<bridge:inputFile binding="#{applicantBackingBean.attachment2}" />
-					<bridge:inputFile binding="#{applicantBackingBean.attachment3}" />
-				</h:panelGrid>
-				<h:commandButton actionListener="#{applicantBackingBean.uploadAttachments}" value="#{i18n['submit']}" />
 			</h:form>
 		</aui:column>
 	</aui:layout>
