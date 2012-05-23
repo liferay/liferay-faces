@@ -38,7 +38,7 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.PortletPhase;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.application.ResourceHandlerImpl;
+import com.liferay.faces.bridge.application.ResourceHandlerInnerImpl;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
@@ -198,14 +198,8 @@ public class PortletContainerImpl implements PortletContainer {
 				MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
 				resourceURL = createResourceURL(mimeResponse);
 
-				// Note: RichFaces specifies /rfRes instead of /javax.faces.resource in resource URLs. This is a hack.
-				if (fromURL.indexOf(ResourceHandlerImpl.RICH_FACES_RESOURCE) > 0) {
-					fromURL = fromURL.replaceFirst(ResourceHandlerImpl.RICH_FACES_RESOURCE,
-							ResourceHandlerImpl.JAVAX_FACES_RESOURCE);
-				}
-
 				// If the "javax.faces.resource" token is found in the URL, then
-				int tokenPos = fromURL.indexOf(ResourceHandlerImpl.JAVAX_FACES_RESOURCE);
+				int tokenPos = fromURL.indexOf(ResourceHandlerInnerImpl.JAVAX_FACES_RESOURCE);
 
 				if (tokenPos >= 0) {
 
@@ -228,12 +222,12 @@ public class PortletContainerImpl implements PortletContainer {
 					}
 					else {
 						logger.error("There is no slash after the [{0}] token in resourceURL=[{1}]",
-							ResourceHandlerImpl.JAVAX_FACES_RESOURCE, fromURL);
+							ResourceHandlerInnerImpl.JAVAX_FACES_RESOURCE, fromURL);
 					}
 
-					resourceURL.setParameter(ResourceHandlerImpl.JAVAX_FACES_RESOURCE, resourceName);
+					resourceURL.setParameter(ResourceHandlerInnerImpl.JAVAX_FACES_RESOURCE, resourceName);
 					logger.debug("Added parameter to portletURL name=[{0}] value=[{1}]",
-						ResourceHandlerImpl.JAVAX_FACES_RESOURCE, resourceName);
+						ResourceHandlerInnerImpl.JAVAX_FACES_RESOURCE, resourceName);
 				}
 
 				// Copy the request parameters to the portlet resource URL.

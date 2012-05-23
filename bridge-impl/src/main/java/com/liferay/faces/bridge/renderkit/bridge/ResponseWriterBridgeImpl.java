@@ -291,6 +291,12 @@ public class ResponseWriterBridgeImpl extends ResponseWriterWrapper {
 	}
 
 	@Override
+	public void writeURIAttribute(String name, Object value, String property) throws IOException {
+
+		super.writeURIAttribute(name, value, property);
+	}
+
+	@Override
 	public ResponseWriter getWrapped() {
 		return wrappedResponseWriter;
 	}

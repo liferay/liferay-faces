@@ -26,7 +26,7 @@ import javax.portlet.ResourceURL;
 import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.application.ResourceHandlerImpl;
+import com.liferay.faces.bridge.application.ResourceHandlerInnerImpl;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.helper.BooleanHelper;
@@ -263,11 +263,11 @@ public class BridgeResourceURLImpl extends BridgeURLBaseImpl implements BridgeRe
 	}
 
 	public boolean isEncodedFaces2ResourceURL() {
-		return ResourceHandlerImpl.isEncodedFacesResourceURL(url);
+		return ResourceHandlerInnerImpl.isEncodedFacesResourceURL(url);
 	}
 
 	public boolean isFaces2ResourceURL() {
-		return ResourceHandlerImpl.isFacesResourceURL(url);
+		return ResourceHandlerInnerImpl.isFacesResourceURL(url);
 	}
 
 	public void setViewLink(boolean viewLink) {
