@@ -1115,7 +1115,7 @@ public class BridgeContextImpl implements BridgeContext {
 				}
 
 				if (renderRedirectEnabled) {
-					responseOutputWriter = new ResponseOutputWriterImpl(mimeResponse.getWriter());
+					responseOutputWriter = new RenderRedirectWriterImpl(mimeResponse.getWriter());
 				}
 				else {
 					responseOutputWriter = mimeResponse.getWriter();

@@ -36,7 +36,7 @@ import com.liferay.faces.bridge.application.BridgeNavigationHandler;
 import com.liferay.faces.bridge.application.BridgeNavigationHandlerImpl;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.context.ExternalContextImpl;
-import com.liferay.faces.bridge.context.ResponseOutputWriter;
+import com.liferay.faces.bridge.context.RenderRedirectWriter;
 import com.liferay.faces.bridge.context.flash.BridgeFlash;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.event.IPCPhaseListener;
@@ -277,8 +277,8 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 			// ResponseOutputWriter has buffered up markup that must be discarded. This is because we don't want the
 			// markup from the original Faces view to be included with the markup of Faces view found in the redirect
 			// URL.
-			if (writer instanceof ResponseOutputWriter) {
-				ResponseOutputWriter responseOutputWriter = (ResponseOutputWriter) writer;
+			if (writer instanceof RenderRedirectWriter) {
+				RenderRedirectWriter responseOutputWriter = (RenderRedirectWriter) writer;
 				responseOutputWriter.discard();
 			}
 
@@ -291,8 +291,8 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 		else {
 
 			// In the case that a render-redirect took place, need to render the buffered markup to the response.
-			if (writer instanceof ResponseOutputWriter) {
-				ResponseOutputWriter responseOutputWriter = (ResponseOutputWriter) writer;
+			if (writer instanceof RenderRedirectWriter) {
+				RenderRedirectWriter responseOutputWriter = (RenderRedirectWriter) writer;
 				responseOutputWriter.render();
 			}
 		}

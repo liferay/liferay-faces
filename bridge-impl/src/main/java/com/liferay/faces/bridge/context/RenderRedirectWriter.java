@@ -16,15 +16,15 @@ package com.liferay.faces.bridge.context;
 import java.io.IOException;
 import java.io.Writer;
 
-import javax.faces.FacesWrapper;
+import javax.portlet.PortletResponse;
 
 
 /**
  * Wraps a {@link PortletResponse} {@link Writer} in order to support render-redirect by buffering response output.
  *
- * @author  Neil Griffin
+ * @author  ngriffin
  */
-public abstract class ResponseOutputWriter extends Writer implements FacesWrapper<Writer> {
+public abstract class RenderRedirectWriter extends WriterWrapper {
 
 	/**
 	 * Discards the buffered response output so that it will not be written to the wrapped {@link Writer}.
@@ -37,4 +37,5 @@ public abstract class ResponseOutputWriter extends Writer implements FacesWrappe
 	 * @throws  IOException
 	 */
 	public abstract void render() throws IOException;
+
 }

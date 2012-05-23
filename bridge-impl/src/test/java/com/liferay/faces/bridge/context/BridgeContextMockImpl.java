@@ -27,6 +27,7 @@ package com.liferay.faces.bridge.context;
  * details.
  */
 import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +40,6 @@ import javax.portlet.faces.Bridge.PortletPhase;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainer;
-import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.BridgeActionURL;
 import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
@@ -232,7 +232,7 @@ public class BridgeContextMockImpl implements BridgeContext {
 		throw new UnsupportedOperationException();
 	}
 
-	public ResponseOutputWriter getResponseOutputWriter() throws IOException {
+	public Writer getResponseOutputWriter() throws IOException {
 		throw new UnsupportedOperationException();
 	}
 

@@ -27,13 +27,13 @@ import java.util.List;
  *
  * @author  Neil Griffin
  */
-public class ResponseOutputWriterImpl extends ResponseOutputWriter {
+public class RenderRedirectWriterImpl extends RenderRedirectWriter {
 
 	// Private Data Members
 	private Writer wrappedWriter;
 	private List<OutputOperation> outputOperationList;
 
-	public ResponseOutputWriterImpl(Writer writer) {
+	public RenderRedirectWriterImpl(Writer writer) {
 		this.wrappedWriter = writer;
 		this.outputOperationList = new ArrayList<OutputOperation>();
 	}
