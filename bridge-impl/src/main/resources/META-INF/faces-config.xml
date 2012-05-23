@@ -20,7 +20,7 @@
 			</bridge:write-behind-response-wrappers>
 		</application-extension>
 		<el-resolver>com.liferay.faces.bridge.el.ELResolverImpl</el-resolver>
-		<resource-handler>com.liferay.faces.bridge.application.ResourceHandlerImpl</resource-handler>
+		<resource-handler>com.liferay.faces.bridge.application.ResourceHandlerInnerImpl</resource-handler>
 		<view-handler>com.liferay.faces.bridge.application.ViewHandlerImpl</view-handler>
 	</application>
 	<component>

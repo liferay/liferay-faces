@@ -298,7 +298,7 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 							// "/javax.faces.resource/jsf.js.faces?ln=javax.faces" and so we look for the ".faces?ln" as
 							// an indicator that ".faces" needs to be removed from the requestPath.
 							String token = extension + BridgeConstants.CHAR_QUESTION_MARK +
-								ResourceHandlerImpl.REQUEST_PARAM_LIBRARY_NAME;
+								ResourceHandlerInnerImpl.REQUEST_PARAM_LIBRARY_NAME;
 							int pos = wrappedRequestPath.indexOf(token);
 
 							// If the servlet-mapping extension is found, then remove it since this is an implicit
@@ -334,7 +334,7 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 			}
 
 			// If the wrapped request path ends with "org.richfaces" then
-			if (wrappedRequestPath.endsWith(ResourceHandlerImpl.ORG_RICHFACES)) {
+			if (wrappedRequestPath.endsWith(ResourceHandlerInnerImpl.ORG_RICHFACES)) {
 
 				// Check to see if the resource physically exists in the META-INF/resources/org.richfaces folder of the
 				// RichFaces JAR. If it does, then this qualifies as a special case in which the

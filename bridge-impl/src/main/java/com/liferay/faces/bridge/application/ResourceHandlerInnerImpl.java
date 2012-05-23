@@ -41,17 +41,23 @@ import com.liferay.faces.bridge.logging.LoggerFactory;
 
 
 /**
+ * Unlike the {@link ResourceHandlerOuterImpl} class, this class is designed to be the innermost {@link ResourceHandler}
+ * in the chain-of-responsibility (only the Mojarra/MyFaces ResourceHandlerImpl has a more inner status). In order to
+ * achive this innermost status, it is registered in the application section of the bridge's faces-config.xml
+ * descriptor. It is responsible for wrapping resources created by Mojarra/MyFaces so that resource URLs will work in a
+ * portlet environment. It is also responsible for serving up resources via the {@link
+ * #handleResourceRequest(FacesContext)} method.
+ *
  * @author  Neil Griffin
  */
-public class ResourceHandlerImpl extends ResourceHandlerWrapper {
+public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(ResourceHandlerImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(ResourceHandlerInnerImpl.class);
 
 	// Public Constants
 	public static final String JAVAX_FACES_RESOURCE = "javax.faces.resource";
 	public static final String ORG_RICHFACES = "org.richfaces";
-	public static final String RICH_FACES_RESOURCE = "rfRes";
 	public static final String REQUEST_PARAM_LIBRARY_NAME = "ln";
 
 	// Private Constants
@@ -94,7 +100,7 @@ public class ResourceHandlerImpl extends ResourceHandlerWrapper {
 	private Integer resourceBufferSize;
 	private ResourceHandler wrappedResourceHandler;
 
-	public ResourceHandlerImpl(ResourceHandler wrappedResourceHandler) {
+	public ResourceHandlerInnerImpl(ResourceHandler wrappedResourceHandler) {
 		this.wrappedResourceHandler = wrappedResourceHandler;
 	}
 
@@ -340,11 +346,19 @@ public class ResourceHandlerImpl extends ResourceHandlerWrapper {
 						// If this is a RichFaces CSS resource like packed.css or skinning.css, then fix the URLs
 						// inside of the CSS text before sending it back as part of the response. For more info, see
 						// http://issues.liferay.com/browse/FACES-1214
-						if (resourceName.startsWith(RICHFACES_STATIC_RESOURCE) && resourceName.indexOf(EXTENSION_CSS) > 0) {
+						if (resourceName.startsWith(RICHFACES_STATIC_RESOURCE) &&
+								(resourceName.indexOf(EXTENSION_CSS) > 0)) {
 
 							String cssText = fixRichFacesImageURLs(facesContext, byteArrayOutputStream.toString());
 							byteArrayOutputStream = new ByteArrayOutputStream();
 							byteArrayOutputStream.write(cssText.getBytes());
+						}
+
+						if (resourceName.indexOf("packed.js") >= 0) {
+							String javaScriptText = fixRichFacesFileUpload(facesContext,
+									byteArrayOutputStream.toString());
+							byteArrayOutputStream = new ByteArrayOutputStream();
+							byteArrayOutputStream.write(javaScriptText.getBytes());
 						}
 
 						// Write the data to the response.
@@ -487,6 +501,23 @@ public class ResourceHandlerImpl extends ResourceHandlerWrapper {
 		}
 
 		return cssText;
+	}
+
+	private String fixRichFacesFileUpload(FacesContext facesContext, String javaScriptText) {
+
+		String token = "this.form.attr(\"action\", originalAction + delimiter + UID + \"=\" + this.loadableItem.uid);";
+		int pos = javaScriptText.indexOf(token);
+
+		if (pos > 0) {
+			StringBuilder buf = new StringBuilder();
+			buf.append(javaScriptText.substring(0, pos));
+			buf.append(
+				"this.form.attr(\"action\", this.form.children(\"input[name='javax.faces.encodedURL']\").val() + delimiter + UID + \"=\" + this.loadableItem.uid);");
+			buf.append(javaScriptText.substring(pos + token.length() + 1));
+			javaScriptText = buf.toString();
+		}
+
+		return javaScriptText;
 	}
 
 	/**
