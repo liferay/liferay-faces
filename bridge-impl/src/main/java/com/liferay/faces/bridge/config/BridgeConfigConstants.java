@@ -61,13 +61,6 @@ public class BridgeConfigConstants {
 	public static final String PARAM_PREFER_PRE_DESTROY2 = "org.portletfaces.bridge.preferPreDestroy";
 
 	/**
-	 * Boolean indicating whether or not the PrimeFaces p:fileUpload should be forced to use a ResourceURL. See:
-	 * http://issues.liferay.com/browse/FACES-1194
-	 */
-	public static final String PARAM_PRIME_FILE_UPLOAD_FORCE_RESOURCE_URL =
-		"com.liferay.faces.bridge.primeFileUploadForceResourceURL";
-
-	/**
 	 * Boolean indicating whether or not the render-redirect standard feature is enabled. Default value is false for
 	 * performance.
 	 */
