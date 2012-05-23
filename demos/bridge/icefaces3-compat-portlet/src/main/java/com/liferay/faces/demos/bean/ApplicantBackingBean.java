@@ -32,8 +32,8 @@ import org.icefaces.ace.component.fileentry.FileEntryResults;
 import com.liferay.faces.bridge.component.UploadedFile;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
-import com.liferay.faces.demos.dto.ACEUploadedFile;
 import com.liferay.faces.demos.dto.City;
+import com.liferay.faces.demos.dto.UploadedFileWrapper;
 import com.liferay.faces.demos.util.FacesMessageUtil;
 
 
@@ -84,7 +84,7 @@ public class ApplicantBackingBean implements Serializable {
 		String fileId = (String) uiCommand.getValue();
 
 		try {
-			List<ACEUploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
+			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
 
 			UploadedFile uploadedFileToDelete = null;
 
@@ -119,8 +119,9 @@ public class ApplicantBackingBean implements Serializable {
 
 				if (fileInfo.isSaved()) {
 
-					ACEUploadedFile aceUploadedFile = new ACEUploadedFile(Long.toString(nextFileId++), fileInfo);
-					List<ACEUploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
+					UploadedFileWrapper aceUploadedFile = new UploadedFileWrapper(Long.toString(nextFileId++),
+							fileInfo);
+					List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
 
 					synchronized (uploadedFiles) {
 						uploadedFiles.add(aceUploadedFile);
@@ -163,11 +164,11 @@ public class ApplicantBackingBean implements Serializable {
 			logger.debug("postalCode=" + applicantModelBean.getPostalCode());
 			logger.debug("comments=" + applicantModelBean.getComments());
 
-			List<ACEUploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
+			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
 
 			if (uploadedFiles != null) {
 
-				for (ACEUploadedFile uploadedFile : uploadedFiles) {
+				for (UploadedFile uploadedFile : uploadedFiles) {
 
 					if (logger.isDebugEnabled()) {
 						logger.debug("uploadedFile=" + uploadedFile.getName());
@@ -178,7 +179,7 @@ public class ApplicantBackingBean implements Serializable {
 
 		// Delete the uploaded files.
 		try {
-			List<ACEUploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
+			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
 
 			for (UploadedFile uploadedFile : uploadedFiles) {
 				File file = new File(uploadedFile.getAbsolutePath());

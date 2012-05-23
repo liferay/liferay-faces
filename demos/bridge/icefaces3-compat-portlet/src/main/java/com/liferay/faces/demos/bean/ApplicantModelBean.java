@@ -21,7 +21,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import com.liferay.faces.demos.dto.ACEUploadedFile;
+import com.liferay.faces.bridge.component.UploadedFile;
 
 
 /**
@@ -37,7 +37,7 @@ public class ApplicantModelBean implements Serializable {
 	private static final long serialVersionUID = 7459628254337818761L;
 
 	// Private Data Members
-	private List<ACEUploadedFile> uploadedFiles;
+	private List<UploadedFile> uploadedFiles;
 	private String city;
 	private String comments;
 	private Date dateOfBirth;
@@ -58,7 +58,7 @@ public class ApplicantModelBean implements Serializable {
 	}
 
 	public void clearProperties() {
-		uploadedFiles = new ArrayList<ACEUploadedFile>();
+		uploadedFiles = new ArrayList<UploadedFile>();
 		city = null;
 		comments = null;
 		dateOfBirth = null;
@@ -193,7 +193,7 @@ public class ApplicantModelBean implements Serializable {
 		}
 	}
 
-	public List<ACEUploadedFile> getUploadedFiles() {
+	public List<UploadedFile> getUploadedFiles() {
 		return uploadedFiles;
 	}
 }
