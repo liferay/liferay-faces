@@ -41,6 +41,9 @@ public class BodyRenderer extends BridgeRenderer {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BodyRenderer.class);
 
+	// Public Constants
+	public static final String ATTR_RENDERING_BODY = "com.liferay.faces.bridge.RenderingBody";
+
 	// Private Constants
 	private static final String ATTR_STYLE_CLASS = "styleClass";
 	private static final String ELEMENT_DIV = "div";
@@ -91,7 +94,7 @@ public class BodyRenderer extends BridgeRenderer {
 			}
 		}
 
-		// Render all of the stylesheet resources, since they often need to be loaded as clost to the top as possible.
+		// Render all of the stylesheet resources, since they often need to be loaded as close to the top as possible.
 		UIViewRoot uiViewRoot = facesContext.getViewRoot();
 		List<UIComponent> uiComponentResources = uiViewRoot.getComponentResources(facesContext, TARGET_BODY);
 
@@ -134,6 +137,10 @@ public class BodyRenderer extends BridgeRenderer {
 
 				if (!TARGET_HEAD.equals(originalTarget)) {
 
+					// Set a flag indicating that the bridge is rendering the body (not the head).
+					facesContext.getAttributes().put(ATTR_RENDERING_BODY, Boolean.TRUE);
+					
+					// Render the current resource.
 					uiComponentResource.encodeAll(facesContext);
 
 					if (logger.isDebugEnabled()) {
