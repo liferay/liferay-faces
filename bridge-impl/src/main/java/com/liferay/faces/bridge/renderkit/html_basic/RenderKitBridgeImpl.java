@@ -37,6 +37,7 @@ import com.liferay.faces.bridge.renderkit.icefaces.HeadRendererICEfacesImpl;
 import com.liferay.faces.bridge.renderkit.primefaces.FileUploadRendererPrimeFacesImpl;
 import com.liferay.faces.bridge.renderkit.primefaces.FormRendererPrimeFacesImpl;
 import com.liferay.faces.bridge.renderkit.primefaces.HeadRendererPrimeFacesImpl;
+import com.liferay.faces.bridge.renderkit.richfaces.FileUploadRendererRichFacesImpl;
 
 
 /**
@@ -51,6 +52,8 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 	private static final Object ICEFACES_HEAD_RENDERER = "org.icefaces.ace.renderkit.HeadRenderer";
 	private static final String PRIMEFACES_FAMILY = "org.primefaces.component";
 	private static final String PRIMEFACES_HEAD_RENDERER = "org.primefaces.renderkit.HeadRenderer";
+	private static final String RICHFACES_FILE_UPLOAD_FAMILY = "org.richfaces.FileUpload";
+	private static final String RICHFACES_FILE_UPLOAD_RENDERER_TYPE = "org.richfaces.FileUploadRenderer";
 	private static final String SCRIPT_RENDERER_TYPE = "javax.faces.resource.Script";
 
 	// Private Data Members
@@ -119,6 +122,10 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 		else if (PRIMEFACES_FAMILY.equals(family) && PrimeFacesFileUpload.RENDERER_TYPE.equals(rendererType)) {
 			renderer = new FileUploadRendererPrimeFacesImpl(renderer);
 		}
+		else if (RICHFACES_FILE_UPLOAD_FAMILY.equals(family) &&
+				RICHFACES_FILE_UPLOAD_RENDERER_TYPE.equals(rendererType)) {
+			renderer = new FileUploadRendererRichFacesImpl(renderer);
+		}
 
 		return renderer;
 	}
@@ -129,3 +136,4 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 	}
 
 }
+
