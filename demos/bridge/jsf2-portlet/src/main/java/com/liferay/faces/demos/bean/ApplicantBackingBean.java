@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.demos.bean;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
@@ -25,10 +24,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
-import com.liferay.faces.bridge.component.HtmlInputFile;
-import com.liferay.faces.bridge.component.UploadedFile;
+import com.liferay.faces.bridge.event.FileUploadEvent;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.demos.dto.City;
 import com.liferay.faces.demos.util.FacesMessageUtil;
 
@@ -56,15 +55,6 @@ public class ApplicantBackingBean implements Serializable {
 
 	// JavaBeans Properties for UI
 	private boolean commentsRendered = false;
-	private boolean fileUploaderRendered = false;
-
-	private transient HtmlInputFile attachment1;
-	private transient HtmlInputFile attachment2;
-	private transient HtmlInputFile attachment3;
-
-	public void addAttachment(ActionEvent actionEvent) {
-		fileUploaderRendered = true;
-	}
 
 	public void deleteUploadedFile(ActionEvent actionEvent) {
 
@@ -86,15 +76,22 @@ public class ApplicantBackingBean implements Serializable {
 			}
 
 			if (uploadedFileToDelete != null) {
-				File file = new File(uploadedFileToDelete.getAbsolutePath());
-				file.delete();
+				uploadedFileToDelete.delete();
 				uploadedFiles.remove(uploadedFileToDelete);
-				logger.debug("Deleted file=[{0}]", file);
+				logger.debug("Deleted file=[{0}]", uploadedFileToDelete.getName());
 			}
 		}
 		catch (Exception e) {
 			logger.error(e);
 		}
+	}
+
+	public void handleFileUpload(FileUploadEvent fileUploadEvent) throws Exception {
+		List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
+		UploadedFile uploadedFile = fileUploadEvent.getUploadedFile();
+		uploadedFiles.add(uploadedFile);
+		logger.debug("Received fileName=[{0}] absolutePath=[{1}]", uploadedFile.getName(),
+			uploadedFile.getAbsolutePath());
 	}
 
 	public void postalCodeListener(ValueChangeEvent valueChangeEvent) {
@@ -139,9 +136,8 @@ public class ApplicantBackingBean implements Serializable {
 			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
 
 			for (UploadedFile uploadedFile : uploadedFiles) {
-				File file = new File(uploadedFile.getAbsolutePath());
-				file.delete();
-				logger.debug("Deleted file=[{0}]", file);
+				uploadedFile.delete();
+				logger.debug("Deleted file=[{0}]", uploadedFile.getName());
 			}
 
 			// Store the applicant's first name in JSF 2 Flash Scope so that it can be picked up
@@ -166,72 +162,10 @@ public class ApplicantBackingBean implements Serializable {
 		commentsRendered = !commentsRendered;
 	}
 
-	public void uploadAttachments(ActionEvent actionEvent) {
-
-		int nextId = 0;
-		List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
-		int totalUploadedFiles = uploadedFiles.size();
-
-		if (totalUploadedFiles > 0) {
-			nextId = Integer.parseInt(uploadedFiles.get(totalUploadedFiles - 1).getId());
-			nextId++;
-		}
-
-		UploadedFile uploadedFile1 = attachment1.getUploadedFile();
-
-		if (uploadedFile1 != null) {
-			uploadedFile1.setId(Integer.toString(nextId++));
-			uploadedFiles.add(uploadedFile1);
-			logger.debug("uploadedFile1=[{0}]", uploadedFile1.getName());
-		}
-
-		UploadedFile uploadedFile2 = attachment2.getUploadedFile();
-
-		if (uploadedFile2 != null) {
-			uploadedFile2.setId(Integer.toString(nextId++));
-			uploadedFiles.add(uploadedFile2);
-			logger.debug("uploadedFile2=[{0}]", uploadedFile2.getName());
-		}
-
-		UploadedFile uploadedFile3 = attachment3.getUploadedFile();
-
-		if (uploadedFile3 != null) {
-			uploadedFile3.setId(Integer.toString(nextId++));
-			uploadedFiles.add(uploadedFile3);
-			logger.debug("uploadedFile3=[{0}]", uploadedFile3.getName());
-		}
-
-		fileUploaderRendered = false;
-	}
-
 	public void setApplicantModelBean(ApplicantModelBean applicantModelBean) {
 
 		// Injected via @ManagedProperty annotation
 		this.applicantModelBean = applicantModelBean;
-	}
-
-	public HtmlInputFile getAttachment1() {
-		return attachment1;
-	}
-
-	public void setAttachment1(HtmlInputFile attachment1) {
-		this.attachment1 = attachment1;
-	}
-
-	public HtmlInputFile getAttachment2() {
-		return attachment2;
-	}
-
-	public void setAttachment2(HtmlInputFile attachment2) {
-		this.attachment2 = attachment2;
-	}
-
-	public HtmlInputFile getAttachment3() {
-		return attachment3;
-	}
-
-	public void setAttachment3(HtmlInputFile attachment3) {
-		this.attachment3 = attachment3;
 	}
 
 	public void setCommentsRendered(boolean commentsRendered) {
@@ -240,10 +174,6 @@ public class ApplicantBackingBean implements Serializable {
 
 	public boolean isCommentsRendered() {
 		return commentsRendered;
-	}
-
-	public boolean isFileUploaderRendered() {
-		return fileUploaderRendered;
 	}
 
 	public void setListModelBean(ListModelBean listModelBean) {

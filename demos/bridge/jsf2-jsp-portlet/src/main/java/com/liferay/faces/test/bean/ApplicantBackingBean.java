@@ -25,9 +25,9 @@ import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
 import com.liferay.faces.bridge.component.HtmlInputFile;
-import com.liferay.faces.bridge.component.UploadedFile;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.test.dto.City;
 import com.liferay.faces.test.util.FacesMessageUtil;
 
@@ -166,19 +166,11 @@ public class ApplicantBackingBean implements Serializable {
 
 	public void uploadAttachments(ActionEvent actionEvent) {
 
-		int nextId = 0;
 		List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
-		int totalUploadedFiles = uploadedFiles.size();
-
-		if (totalUploadedFiles > 0) {
-			nextId = Integer.parseInt(uploadedFiles.get(totalUploadedFiles - 1).getId());
-			nextId++;
-		}
 
 		UploadedFile uploadedFile1 = attachment1.getUploadedFile();
 
 		if (uploadedFile1 != null) {
-			uploadedFile1.setId(Integer.toString(nextId++));
 			uploadedFiles.add(uploadedFile1);
 			logger.debug("uploadedFile1=[{0}]", uploadedFile1.getName());
 		}
@@ -186,7 +178,6 @@ public class ApplicantBackingBean implements Serializable {
 		UploadedFile uploadedFile2 = attachment2.getUploadedFile();
 
 		if (uploadedFile2 != null) {
-			uploadedFile2.setId(Integer.toString(nextId++));
 			uploadedFiles.add(uploadedFile2);
 			logger.debug("uploadedFile2=[{0}]", uploadedFile2.getName());
 		}
@@ -194,7 +185,6 @@ public class ApplicantBackingBean implements Serializable {
 		UploadedFile uploadedFile3 = attachment3.getUploadedFile();
 
 		if (uploadedFile3 != null) {
-			uploadedFile3.setId(Integer.toString(nextId++));
 			uploadedFiles.add(uploadedFile3);
 			logger.debug("uploadedFile3=[{0}]", uploadedFile3.getName());
 		}

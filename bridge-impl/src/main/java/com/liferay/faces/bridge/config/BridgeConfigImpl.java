@@ -49,6 +49,7 @@ import com.liferay.faces.bridge.context.url.BridgeURLFactory;
 import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.bridge.model.UploadedFileFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
 
@@ -68,6 +69,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private static final String FACES_VIEW_ID_RENDER = "_facesViewIdRender";
 	private static final String FACES_VIEW_ID_RESOURCE = "_facesViewIdResource";
 	private static final String FACES_SERVLET_FQCN = FacesServlet.class.getName();
+	private static final String FACTORY_NOT_FOUND_MSG = "Factory not found in any faces-config.xml files: [{0}]";
 	private static final String PORTLET_CONTAINER_FACTORY = "portlet-container-factory";
 	private static final String FACES_CONFIG_META_INF_PATH = "META-INF/faces-config.xml";
 	private static final String FACES_CONFIG_WEB_INF_PATH = "/WEB-INF/faces-config.xml";
@@ -77,6 +79,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private static final String SERVLET_CLASS = "servlet-class";
 	private static final String SERVLET_MAPPING = "servlet-mapping";
 	private static final String SERVLET_NAME = "servlet-name";
+	private static final String UPLOADED_FILE_FACTORY = "uploaded-file-factory";
 	private static final String URL_PATTERN = "url-pattern";
 	private static final String WEB_XML_PATH = "/WEB-INF/web.xml";
 	private static final String WEB_XML_LIFERAY_PATH = "/WEB-INF/liferay-web.xml";
@@ -99,6 +102,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private PortletContext portletContext;
 	private ProductMap products;
 	private Map<String, String[]> publicParameterMappings = new HashMap<String, String[]>();
+	private UploadedFileFactory uploadedFileFactory;
 	private String viewIdRenderParameterName;
 	private String viewIdResourceParameterName;
 	private String writeBehindRenderResponseWrapper;
@@ -173,33 +177,35 @@ public class BridgeConfigImpl implements BridgeConfig {
 			}
 
 			if (bridgePhaseFactory == null) {
-				logger.error("Factory not found in any faces-config.xml files: [{0}]", BRIDGE_PHASE_FACTORY);
+				logger.error(FACTORY_NOT_FOUND_MSG, BRIDGE_PHASE_FACTORY);
 			}
 
 			if (bridgeContextFactory == null) {
-				logger.error("Factory not found in any faces-config.xml files: [{0}]", BRIDGE_CONTEXT_FACTORY);
+				logger.error(FACTORY_NOT_FOUND_MSG, BRIDGE_CONTEXT_FACTORY);
 			}
 
 			if (bridgeRequestScopeFactory == null) {
-				logger.error("Factory not found in any faces-config.xml files: [{0}]", BRIDGE_REQUEST_SCOPE_FACTORY);
+				logger.error(FACTORY_NOT_FOUND_MSG, BRIDGE_REQUEST_SCOPE_FACTORY);
 			}
 
 			if (bridgeRequestScopeManagerFactory == null) {
-				logger.error("Factory not found in any faces-config.xml files: [{0}]",
-					BRIDGE_REQUEST_SCOPE_MANAGER_FACTORY);
+				logger.error(FACTORY_NOT_FOUND_MSG, BRIDGE_REQUEST_SCOPE_MANAGER_FACTORY);
 			}
 
 			if (bridgeWriteBehindResponseFactory == null) {
-				logger.error("Factory not found in any faces-config.xml files: [{0}]",
-					BRIDGE_WRITE_BEHIND_RESPONSE_FACTORY);
+				logger.error(FACTORY_NOT_FOUND_MSG, BRIDGE_WRITE_BEHIND_RESPONSE_FACTORY);
 			}
 
 			if (bridgeURLFactory == null) {
-				logger.error("Factory not found in any faces-config.xml files: [{0}]", BRIDGE_URL_FACTORY);
+				logger.error(FACTORY_NOT_FOUND_MSG, BRIDGE_URL_FACTORY);
 			}
 
 			if (portletContainerFactory == null) {
-				logger.error("Factory not found in any faces-config.xml files: [{0}]", PORTLET_CONTAINER_FACTORY);
+				logger.error(FACTORY_NOT_FOUND_MSG, PORTLET_CONTAINER_FACTORY);
+			}
+
+			if (uploadedFileFactory == null) {
+				logger.error(FACTORY_NOT_FOUND_MSG, UPLOADED_FILE_FACTORY);
 			}
 
 			// Parse the WEB-INF/web.xml descriptor.
@@ -268,6 +274,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 			attributes.put(BridgeWriteBehindResponseFactory.class.getName(), bridgeWriteBehindResponseFactory);
 			attributes.put(BridgeURLFactory.class.getName(), bridgeURLFactory);
 			attributes.put(PortletContainerFactory.class.getName(), portletContainerFactory);
+			attributes.put(UploadedFileFactory.class.getName(), uploadedFileFactory);
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -451,6 +458,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 		private boolean parsingRenderResponseWrapperClass = false;
 		private boolean parsingResourceResponseWrapperClass = false;
 		private String parameter;
+		private boolean parsingUploadedFileFactory = false;
 
 		public FacesConfigHandler(boolean resolveEntities) {
 			super(resolveEntities);
@@ -643,6 +651,26 @@ public class BridgeConfigImpl implements BridgeConfig {
 				writeBehindResourceResponseWrapper = content.toString().trim();
 				logger.debug("resource-response-wrapper-class=[{0}]", writeBehindResourceResponseWrapper);
 			}
+			else if (parsingUploadedFileFactory) {
+				String factoryClassName = content.toString().trim();
+
+				if (factoryClassName.length() > 0) {
+
+					try {
+						UploadedFileFactory wrappedFactory = BridgeConfigImpl.this.uploadedFileFactory;
+						BridgeConfigImpl.this.uploadedFileFactory = (UploadedFileFactory) newFactoryInstance(
+								factoryClassName, UploadedFileFactory.class, wrappedFactory);
+						logger.debug("Instantiated UploadedFileFactory=[{0}] wrappedFactory=[{1}]", factoryClassName,
+							wrappedFactory);
+					}
+					catch (ClassNotFoundException e) {
+						logger.error("{0} : factoryClassName=[{1}]", e.getClass().getName(), factoryClassName);
+					}
+					catch (Exception e) {
+						logger.error(e.getMessage(), e);
+					}
+				}
+			}
 
 			content = null;
 			parsingBridgeContextFactory = false;
@@ -657,6 +685,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 			parsingPortletContainerFactory = false;
 			parsingRenderResponseWrapperClass = false;
 			parsingResourceResponseWrapperClass = false;
+			parsingUploadedFileFactory = false;
 		}
 
 		@Override
@@ -701,6 +730,9 @@ public class BridgeConfigImpl implements BridgeConfig {
 			}
 			else if (localName.equals(RESOURCE_RESPONSE_WRAPPER_CLASS)) {
 				parsingResourceResponseWrapperClass = true;
+			}
+			else if (localName.equals(UPLOADED_FILE_FACTORY)) {
+				parsingUploadedFileFactory = true;
 			}
 		}
 

@@ -57,6 +57,14 @@
 			</deferred-value>
 		</attribute>
 		<attribute>
+			<description><![CDATA[Pass through multiple.]]></description>
+			<name>multiple</name>
+			<required>false</required>
+			<deferred-value>
+				<type>java.lang.String</type>
+			</deferred-value>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The size of the text field.]]></description>
 			<name>size</name>
 			<required>false</required>
@@ -86,6 +94,14 @@
 			<required>false</required>
 			<deferred-value>
 				<type>javax.faces.component.UIComponent</type>
+			</deferred-value>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Method expression for listener.]]></description>
+			<name>fileUploadListener</name>
+			<required>false</required>
+			<deferred-value>
+				<type>javax.el.MethodExpression</type>
 			</deferred-value>
 		</attribute>
 	</tag>

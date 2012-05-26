@@ -13,22 +13,23 @@
  */
 package com.liferay.faces.demos.bean;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
+import javax.portlet.PortletSession;
 
 import org.primefaces.event.FileUploadEvent;
 
-import com.liferay.faces.bridge.component.UploadedFile;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.demos.dto.City;
 import com.liferay.faces.demos.dto.UploadedFileWrapper;
 import com.liferay.faces.demos.util.FacesMessageUtil;
@@ -76,10 +77,9 @@ public class ApplicantBackingBean implements Serializable {
 			}
 
 			if (uploadedFileToDelete != null) {
-				File file = new File(uploadedFileToDelete.getAbsolutePath());
-				file.delete();
+				uploadedFileToDelete.delete();
 				uploadedFiles.remove(uploadedFileToDelete);
-				logger.debug("Deleted file=[{0}]", file);
+				logger.debug("Deleted file=[{0}]", uploadedFileToDelete.getName());
 			}
 		}
 		catch (Exception e) {
@@ -88,17 +88,13 @@ public class ApplicantBackingBean implements Serializable {
 	}
 
 	public void handleFileUpload(FileUploadEvent event) {
-		int nextId = 0;
 		List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
-		int totalUploadedFiles = uploadedFiles.size();
-
-		if (totalUploadedFiles > 0) {
-			nextId = Integer.parseInt(uploadedFiles.get(totalUploadedFiles - 1).getId());
-			nextId++;
-		}
-
-		UploadedFileWrapper uploadedFileWrapper = new UploadedFileWrapper(event.getFile());
-		uploadedFileWrapper.setId(Integer.toString(nextId++));
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		PortletSession portletSession = (PortletSession) externalContext.getSession(false);
+		String uniqueFolderName = portletSession.getId();
+		org.primefaces.model.UploadedFile uploadedFile = event.getFile();
+		UploadedFileWrapper uploadedFileWrapper = new UploadedFileWrapper(uploadedFile, UploadedFile.Status.FILE_SAVED,
+				uniqueFolderName);
 		uploadedFiles.add(uploadedFileWrapper);
 		logger.debug("Received fileName=[{0}] absolutePath=[{1}]", uploadedFileWrapper.getName(),
 			uploadedFileWrapper.getAbsolutePath());
@@ -146,9 +142,8 @@ public class ApplicantBackingBean implements Serializable {
 			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
 
 			for (UploadedFile uploadedFile : uploadedFiles) {
-				File file = new File(uploadedFile.getAbsolutePath());
-				file.delete();
-				logger.debug("Deleted file=[{0}]", file);
+				uploadedFile.delete();
+				logger.debug("Deleted file=[{0}]", uploadedFile.getName());
 			}
 
 			// Store the applicant's first name in JSF 2 Flash Scope so that it can be picked up

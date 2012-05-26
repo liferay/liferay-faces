@@ -9,11 +9,17 @@
 		<tag-name>inputFile</tag-name>
 		<component>
 			<component-type>javax.faces.HtmlInputFile</component-type>
+			<handler-class>com.liferay.faces.bridge.component.HtmlInputFileHandler</handler-class>
 		</component>
 		<!-- Attributes related to type="file" -->
 		<attribute>
 			<name>accept</name>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>fileUploadListener</name>
+			<required>false</required>
+			<type>javax.el.MethodExpression</type>
 		</attribute>
 		<attribute>
 			<name>size</name>
@@ -57,6 +63,11 @@
 		</attribute>
 		<attribute>
 			<name>xml:lang</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<!-- HTML5 attributes -->
+		<attribute>
+			<name>multiple</name>
 			<type>java.lang.String</type>
 		</attribute>
 		<!-- Event attributes -->

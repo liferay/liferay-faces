@@ -21,9 +21,8 @@ import java.io.RandomAccessFile;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
@@ -31,10 +30,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.FacesEvent;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.bridge.component.UploadedFile;
 import com.liferay.faces.bridge.context.map.RequestParameterMap;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.bridge.renderkit.html_basic.RendererWrapper;
 
 
@@ -62,7 +61,8 @@ public class FileUploadRendererRichFacesImpl extends RendererWrapper {
 
 	/**
 	 * This method overrides the {@link #decode(FacesContext, UIComponent)} method so that it can avoid a Servlet-API
-	 * dependency in the RichFaces FileUploadRenderer.
+	 * dependency in the RichFaces FileUploadRenderer. Note that rich:fileUpload will do an Ajax postback and invoke the
+	 * JSF lifecycle for each individual file.
 	 */
 	@Override
 	public void decode(FacesContext facesContext, UIComponent uiComponent) {
@@ -75,40 +75,31 @@ public class FileUploadRendererRichFacesImpl extends RendererWrapper {
 			// Get the UploadedFile from the request attribute map.
 			Map<String, Object> requestAttributeMap = externalContext.getRequestMap();
 			@SuppressWarnings("unchecked")
-			Map<String, UploadedFile> facesFileMap = (Map<String, UploadedFile>) requestAttributeMap.get(
-					RequestParameterMap.PARAM_UPLOADED_FILES);
+			Map<String, List<UploadedFile>> uploadedFilesMap = (Map<String, List<UploadedFile>>)
+				requestAttributeMap.get(RequestParameterMap.PARAM_UPLOADED_FILES);
 
-			if (facesFileMap != null) {
+			if (uploadedFilesMap != null) {
 
 				// Use reflection to create a dynamic proxy class that implements the RichFaces UploadedFile interface.
 				Class<?> uploadedFileInterface = Class.forName(RICHFACES_UPLOADED_FILE_FQCN);
 				Class<?> fileUploadEventClass = Class.forName(RICHFACES_FILE_UPLOAD_EVENT_FQCN);
 				ClassLoader classLoader = uploadedFileInterface.getClassLoader();
 
-				// For each UploadedFile found in the request map:
-				Set<Entry<String, UploadedFile>> entrySet = facesFileMap.entrySet();
+				List<UploadedFile> uploadedFiles = uploadedFilesMap.get(clientId);
 
-				if (entrySet != null) {
+				if (uploadedFiles != null) {
 
-					for (Map.Entry<String, UploadedFile> mapEntry : entrySet) {
+					for (UploadedFile uploadedFile : uploadedFiles) {
+						RichFacesUploadedFileHandler richFacesUploadedFileHandler = new RichFacesUploadedFileHandler(
+								uploadedFile);
+						Object richFacesUploadedFile = Proxy.newProxyInstance(classLoader,
+								new Class[] { uploadedFileInterface }, richFacesUploadedFileHandler);
+						FacesEvent fileUploadEvent = (FacesEvent) fileUploadEventClass.getConstructor(UIComponent.class,
+								uploadedFileInterface).newInstance(uiComponent, richFacesUploadedFile);
 
-						if (mapEntry.getKey().equals(clientId)) {
-
-							// Use reflection to create an instance of the RichFaces FileUploadEvent class.
-							UploadedFile uploadedFile = mapEntry.getValue();
-							RichFacesUploadedFileHandler richFacesUploadedFileHandler =
-								new RichFacesUploadedFileHandler(uploadedFile);
-							Object richFacesUploadedFile = Proxy.newProxyInstance(classLoader,
-									new Class[] { uploadedFileInterface }, richFacesUploadedFileHandler);
-
-							FacesEvent fileUploadEvent = (FacesEvent) fileUploadEventClass.getConstructor(
-									UIComponent.class, uploadedFileInterface).newInstance(uiComponent,
-									richFacesUploadedFile);
-
-							// Queue the RichFaces FileUploadEvent instance so that it can be handled with an
-							// ActionListener.
-							uiComponent.queueEvent(fileUploadEvent);
-						}
+						// Queue the RichFaces FileUploadEvent instance so that it can be handled with an
+						// ActionListener.
+						uiComponent.queueEvent(fileUploadEvent);
 					}
 				}
 			}

@@ -110,7 +110,7 @@
 						</ace:column>
 					</ace:dataTable>
 					<ace:fileEntry id="fileEntryComp" absolutePath="#{applicantBackingBean.fileUploadAbsolutePath}"
-						fileEntryListener="#{applicantBackingBean.fileEntryListener}" />
+						fileEntryListener="#{applicantBackingBean.handleFileUpload}" />
 					<h:commandButton value="#{i18n['add-attachment']}" />
 				</aui:column>
 			</h:form>

@@ -14,17 +14,21 @@
 package com.liferay.faces.demos.dto;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Enumeration;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.RandomAccessFile;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.faces.FacesWrapper;
 
-import com.liferay.faces.bridge.component.UploadedFile;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.bridge.model.UploadedFile;
 
 
 /**
@@ -36,116 +40,137 @@ public class UploadedFileWrapper implements UploadedFile, FacesWrapper<org.richf
 	private static final Logger logger = LoggerFactory.getLogger(UploadedFileWrapper.class);
 
 	// Private Data Members
-	private String absolutePath;
 	private Map<String, Object> attributeMap;
-	private String charSet;
-	private Exception exception;
+	private File file;
 	private String id;
 	private Status status;
 	private org.richfaces.model.UploadedFile wrappedUploadedFile;
 
-	public UploadedFileWrapper(org.richfaces.model.UploadedFile uploadedFile) {
+	public UploadedFileWrapper(org.richfaces.model.UploadedFile uploadedFile, String uniqueFolderName) {
+		this(uploadedFile, UploadedFile.Status.FILE_SAVED, uniqueFolderName);
+	}
+
+	public UploadedFileWrapper(org.richfaces.model.UploadedFile uploadedFile, UploadedFile.Status status,
+		String uniqueFolderName) {
 		this.wrappedUploadedFile = uploadedFile;
 		this.attributeMap = new HashMap<String, Object>();
+		this.id = Long.toString(((long) hashCode()) + System.currentTimeMillis());
+		this.status = status;
+		this.file = getFile(uniqueFolderName);
+	}
+
+	public void delete() throws IOException {
+		if (file != null) {
+			file.delete();
+		}
+	}
+
+	public void write(String fileName) throws IOException {
+		OutputStream outputStream = new FileOutputStream(fileName);
+		outputStream.write(getBytes());
+		outputStream.close();
 	}
 
 	public String getAbsolutePath() {
+		String absolutePath = null;
 
-		if (absolutePath == null) {
-
-			try {
-				File tempFolder = new File(System.getProperty("java.io.tmpdir"));
-				File tempFile = File.createTempFile("upload", ".dat", tempFolder);
-				absolutePath = tempFile.getAbsolutePath();
-				wrappedUploadedFile.write(absolutePath);
-				wrappedUploadedFile.delete();
-			}
-			catch (IOException e) {
-				logger.error(e);
-			}
+		if (file != null) {
+			absolutePath = file.getAbsolutePath();
 		}
 
 		return absolutePath;
 	}
 
-	public void setAbsolutePath(String absolutePath) {
-		throw new UnsupportedOperationException();
+	public Map<String, Object> getAttributes() {
+		return attributeMap;
 	}
 
-	public Object getAttribute(String name) {
-		return attributeMap.get(name);
-	}
+	public byte[] getBytes() throws IOException {
 
-	public void setAttribute(String name, Object value) {
-		attributeMap.put(name, value);
+		byte[] bytes = null;
+
+		if ((file != null) && (file.exists())) {
+			RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
+			bytes = new byte[(int) randomAccessFile.length()];
+			randomAccessFile.readFully(bytes);
+			randomAccessFile.close();
+		}
+
+		return bytes;
 	}
 
 	public String getCharSet() {
-		return charSet;
-	}
-
-	public void setCharSet(String charSet) {
-		this.charSet = charSet;
+		throw new UnsupportedOperationException();
 	}
 
 	public String getContentType() {
 		return wrappedUploadedFile.getContentType();
 	}
 
-	public void setContentType(String contentType) {
-		throw new UnsupportedOperationException();
+	protected File getFile(String uniqueFolderName) {
+
+		File file = null;
+
+		try {
+			File tempFolder = new File(System.getProperty("java.io.tmpdir"));
+			File uniqueFolder = new File(tempFolder, uniqueFolderName);
+
+			if (!uniqueFolder.exists()) {
+				uniqueFolder.mkdirs();
+			}
+
+			String fileNamePrefix = "uploadedFile" + getId();
+			String fileNameSuffix = ".dat";
+			file = File.createTempFile(fileNamePrefix, fileNameSuffix, uniqueFolder);
+
+			OutputStream outputStream = new FileOutputStream(file);
+			outputStream.write(wrappedUploadedFile.getData());
+			outputStream.close();
+			
+			// Delete the file maintained by RichFaces now that a copy of it has been made.
+			wrappedUploadedFile.delete();
+		}
+		catch (Exception e) {
+			logger.error(e);
+		}
+
+		return file;
 	}
 
-	public Exception getException() {
-		return exception;
+	public String getHeader(String name) {
+		return wrappedUploadedFile.getHeader(name);
 	}
 
-	public void setException(Exception exception) {
-		this.exception = exception;
+	public Collection<String> getHeaderNames() {
+		return wrappedUploadedFile.getHeaderNames();
 	}
 
-	public Enumeration<String> getHeaderNames() {
-		throw new UnsupportedOperationException();
-	}
-
-	public List<String> getHeaders(String name) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void setHeaders(String name, List<String> headers) {
-		throw new UnsupportedOperationException();
+	public Collection<String> getHeaders(String name) {
+		return wrappedUploadedFile.getHeaders(name);
 	}
 
 	public String getId() {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public InputStream getInputStream() throws IOException {
+		return new FileInputStream(file);
+	}
+
+	public String getMessage() {
+		throw new UnsupportedOperationException();
 	}
 
 	public String getName() {
 		return wrappedUploadedFile.getName();
 	}
 
-	public void setName(String name) {
-		throw new UnsupportedOperationException();
-	}
-
 	public long getSize() {
 		return wrappedUploadedFile.getSize();
 	}
 
-	public void setSize(long size) {
-		throw new UnsupportedOperationException();
-	}
-
 	public Status getStatus() {
 		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
 	}
 
 	public org.richfaces.model.UploadedFile getWrapped() {
