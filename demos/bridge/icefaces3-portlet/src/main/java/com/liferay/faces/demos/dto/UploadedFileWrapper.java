@@ -13,16 +13,23 @@
  */
 package com.liferay.faces.demos.dto;
 
-import java.util.Enumeration;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.RandomAccessFile;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.faces.FacesWrapper;
 
 import org.icefaces.ace.component.fileentry.FileEntryResults.FileInfo;
+import org.icefaces.ace.component.fileentry.FileEntryStatus;
 
-import com.liferay.faces.bridge.component.UploadedFile;
+import com.liferay.faces.bridge.model.UploadedFile;
 
 
 /**
@@ -34,37 +41,65 @@ import com.liferay.faces.bridge.component.UploadedFile;
 public class UploadedFileWrapper implements UploadedFile, FacesWrapper<FileInfo> {
 
 	// Private Data Members
-	private Map<String, Object> attributeMap;
+	Map<String, Object> attributeMap;
 	private String id;
+	private UploadedFile.Status status;
 	private FileInfo wrappedFileInfo;
 
-	public UploadedFileWrapper(String id, FileInfo fileInfo) {
-		this.id = id;
+	public UploadedFileWrapper(FileInfo fileInfo) {
 		this.wrappedFileInfo = fileInfo;
 		this.attributeMap = new HashMap<String, Object>();
+		this.id = Long.toString(((long) hashCode()) + System.currentTimeMillis());
+
+		FileEntryStatus fileEntryStatus = wrappedFileInfo.getStatus();
+
+		if (fileEntryStatus.isSuccess()) {
+			status = Status.FILE_SAVED;
+		}
+		else {
+			status = Status.ERROR;
+		}
+	}
+
+	public void delete() throws IOException {
+		wrappedFileInfo.getFile().delete();
+	}
+
+	public void write(String fileName) throws IOException {
+		OutputStream outputStream = new FileOutputStream(fileName);
+		outputStream.write(getBytes());
+		outputStream.close();
 	}
 
 	public String getAbsolutePath() {
 		return wrappedFileInfo.getFile().getAbsolutePath();
 	}
 
-	public void setAbsolutePath(String absolutePath) {
-		throw new UnsupportedOperationException();
+	public Map<String, Object> getAttributes() {
+		return attributeMap;
 	}
 
-	public Object getAttribute(String name) {
-		return attributeMap.get(name);
-	}
+	public byte[] getBytes() throws IOException {
+		byte[] bytes = null;
 
-	public void setAttribute(String name, Object value) {
-		attributeMap.put(name, value);
+		try {
+			File file = wrappedFileInfo.getFile();
+
+			if (file.exists()) {
+				RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
+				bytes = new byte[(int) randomAccessFile.length()];
+				randomAccessFile.readFully(bytes);
+				randomAccessFile.close();
+			}
+		}
+		catch (Exception e) {
+			throw new IOException(e.getMessage());
+		}
+
+		return bytes;
 	}
 
 	public String getCharSet() {
-		throw new UnsupportedOperationException();
-	}
-
-	public void setCharSet(String charSet) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -72,27 +107,15 @@ public class UploadedFileWrapper implements UploadedFile, FacesWrapper<FileInfo>
 		return wrappedFileInfo.getContentType();
 	}
 
-	public void setContentType(String contentType) {
+	public String getHeader(String name) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Exception getException() {
+	public Collection<String> getHeaderNames() {
 		throw new UnsupportedOperationException();
 	}
 
-	public void setException(Exception exception) {
-		throw new UnsupportedOperationException();
-	}
-
-	public Enumeration<String> getHeaderNames() {
-		throw new UnsupportedOperationException();
-	}
-
-	public List<String> getHeaders(String name) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void setHeaders(String name, List<String> headers) {
+	public Collection<String> getHeaders(String name) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -100,38 +123,24 @@ public class UploadedFileWrapper implements UploadedFile, FacesWrapper<FileInfo>
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public InputStream getInputStream() throws IOException {
+		return new FileInputStream(wrappedFileInfo.getFile());
+	}
+
+	public String getMessage() {
+		throw new UnsupportedOperationException();
 	}
 
 	public String getName() {
 		return wrappedFileInfo.getFileName();
 	}
 
-	public void setName(String name) {
-		throw new UnsupportedOperationException();
-	}
-
 	public long getSize() {
 		return wrappedFileInfo.getSize();
 	}
 
-	public void setSize(long size) {
-		throw new UnsupportedOperationException();
-	}
-
 	public Status getStatus() {
-
-		if (wrappedFileInfo.getStatus().isSuccess()) {
-			return Status.SAVED;
-		}
-		else {
-			return Status.INVALID;
-		}
-	}
-
-	public void setStatus(Status status) {
-		throw new UnsupportedOperationException();
+		return status;
 	}
 
 	public FileInfo getWrapped() {

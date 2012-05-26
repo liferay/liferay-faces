@@ -11,10 +11,12 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.component;
+package com.liferay.faces.bridge.model;
 
-import java.util.Enumeration;
-import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
+import java.util.Map;
 
 
 /**
@@ -26,49 +28,38 @@ public interface UploadedFile {
 	 * @author  Neil Griffin
 	 */
 	public static enum Status {
-
-		INVALID, INVALID_CONTENT_TYPE, INVALID_NAME_PATTERN, SAVED, SIZE_LIMIT_EXCEEDED
+		ERROR, FILE_SIZE_LIMIT_EXCEEDED, FILE_INVALID_NAME_PATTERN, FILE_SAVED, REQUEST_SIZE_LIMIT_EXCEEDED
 	}
+
+	public void delete() throws IOException;
+
+	public void write(String fileName) throws IOException;
 
 	public String getAbsolutePath();
 
-	public void setAbsolutePath(String absolutePath);
+	public Map<String, Object> getAttributes();
 
-	public Object getAttribute(String name);
-
-	public void setAttribute(String name, Object value);
+	public byte[] getBytes() throws IOException;
 
 	public String getCharSet();
 
-	public void setCharSet(String charSet);
-
 	public String getContentType();
 
-	public void setContentType(String contentType);
+	public String getHeader(String name);
 
-	public Exception getException();
+	public Collection<String> getHeaderNames();
 
-	public void setException(Exception exception);
-
-	public Enumeration<String> getHeaderNames();
-
-	public List<String> getHeaders(String name);
-
-	public void setHeaders(String name, List<String> headers);
+	public Collection<String> getHeaders(String name);
 
 	public String getId();
 
-	public void setId(String id);
+	public InputStream getInputStream() throws IOException;
+
+	public String getMessage();
 
 	public String getName();
 
-	public void setName(String name);
-
 	public long getSize();
 
-	public void setSize(long size);
-
 	public Status getStatus();
-
-	public void setStatus(Status status);
 }

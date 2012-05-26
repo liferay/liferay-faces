@@ -14,19 +14,20 @@
 package com.liferay.faces.bridge.renderkit.bridge;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
+import javax.faces.convert.ConverterException;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.bridge.component.HtmlInputFile;
-import com.liferay.faces.bridge.component.UploadedFile;
 import com.liferay.faces.bridge.context.map.RequestParameterMap;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.bridge.event.FileUploadEvent;
+import com.liferay.faces.bridge.model.UploadedFile;
 
 
 /**
@@ -34,30 +35,32 @@ import com.liferay.faces.bridge.logging.LoggerFactory;
  */
 public class InputFileRenderer extends Renderer {
 
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(InputFileRenderer.class);
-
 	@Override
 	public void decode(FacesContext facesContext, UIComponent uiComponent) {
 		super.decode(facesContext, uiComponent);
 
 		String clientId = uiComponent.getClientId(facesContext);
 		ExternalContext externalContext = facesContext.getExternalContext();
-		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
-		String submittedValue = requestParameterMap.get(clientId);
+		Map<String, Object> requestAttributeMap = externalContext.getRequestMap();
+		@SuppressWarnings("unchecked")
+		Map<String, List<UploadedFile>> uploadedFilesMap = (Map<String, List<UploadedFile>>) requestAttributeMap.get(
+				RequestParameterMap.PARAM_UPLOADED_FILES);
+		List<UploadedFile> uploadedFiles = uploadedFilesMap.get(clientId);
 
-		if (submittedValue != null) {
+		if ((uploadedFiles != null) && (uploadedFiles.size() > 0)) {
+
 			HtmlInputFile htmlInputFile = (HtmlInputFile) uiComponent;
-			htmlInputFile.setSubmittedValue(submittedValue);
 
-			Map<String, Object> requestAttributeMap = externalContext.getRequestMap();
-			@SuppressWarnings("unchecked")
-			Map<String, UploadedFile> facesFileMap = (Map<String, UploadedFile>) requestAttributeMap.get(
-					RequestParameterMap.PARAM_UPLOADED_FILES);
-			UploadedFile uploadedFile = facesFileMap.get(clientId);
-			htmlInputFile.setUploadedFile(uploadedFile);
+			// Support legacy feature that is used in conjunction with the binding attribute.
+			htmlInputFile.setUploadedFile(uploadedFiles.get(0));
 
-			logger.debug("Setting submittedValue=[{0}]", submittedValue);
+			htmlInputFile.setSubmittedValue(uploadedFiles);
+
+			// Queue the FileUploadEventso that each uploaded file can be handled individually with an ActionListener.
+			for (UploadedFile uploadedFile : uploadedFiles) {
+				FileUploadEvent fileUploadEvent = new FileUploadEvent(uiComponent, uploadedFile);
+				uiComponent.queueEvent(fileUploadEvent);
+			}
 		}
 
 	}
@@ -87,6 +90,9 @@ public class InputFileRenderer extends Renderer {
 		writePropertyAttribute(responseWriter, "tabIndex", attributeMap);
 		writePropertyAttribute(responseWriter, "title", attributeMap);
 		writePropertyAttribute(responseWriter, "xml:lang", attributeMap);
+
+		// Write attributes related to HTML5
+		writePropertyAttribute(responseWriter, "multiple", attributeMap);
 
 		// Write event attributes
 		writePropertyAttribute(responseWriter, "onblur", attributeMap);
@@ -125,5 +131,11 @@ public class InputFileRenderer extends Renderer {
 		if (value != null) {
 			responseWriter.writeAttribute(name, value, property);
 		}
+	}
+
+	@Override
+	public Object getConvertedValue(FacesContext context, UIComponent component, Object submittedValue)
+		throws ConverterException {
+		return submittedValue;
 	}
 }

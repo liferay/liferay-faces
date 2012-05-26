@@ -21,7 +21,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import com.liferay.faces.bridge.component.UploadedFile;
+import com.liferay.faces.bridge.model.UploadedFile;
 
 
 /**

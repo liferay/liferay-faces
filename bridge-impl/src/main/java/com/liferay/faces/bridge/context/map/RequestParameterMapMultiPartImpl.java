@@ -42,17 +42,24 @@ import javax.portlet.WindowState;
 import javax.servlet.http.Cookie;
 
 import org.apache.commons.fileupload.FileItemHeaders;
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.InvalidFileNameException;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.portlet.PortletFileUpload;
+import org.apache.commons.fileupload.util.Streams;
 import org.apache.commons.io.FileUtils;
 
-import com.liferay.faces.bridge.UploadedFileImpl;
-import com.liferay.faces.bridge.component.UploadedFile;
+import com.liferay.faces.bridge.BridgeFactoryFinder;
+import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.bridge.model.UploadedFile;
+import com.liferay.faces.bridge.model.UploadedFileFactory;
 import com.liferay.faces.bridge.util.AbstractPropertyMapEntry;
 
 
@@ -72,7 +79,7 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 
 	// Private Data Members
 	private Map<String, String> requestParameterMap;
-	private Map<String, UploadedFile> requestParameterFileMap;
+	private Map<String, List<UploadedFile>> requestParameterFileMap;
 
 	@SuppressWarnings("unchecked")
 	public RequestParameterMapMultiPartImpl(BridgeContext bridgeContext, ClientDataRequest clientDataRequest) {
@@ -105,9 +112,7 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 
 			// Using the portlet sessionId, determine a unique folder path and create the path if it does not exist.
 			String sessionId = portletSession.getId();
-			uploadedFilesDir = uploadedFilesDir + "/" + sessionId;
-
-			File uploadedFilesPath = new File(uploadedFilesDir);
+			File uploadedFilesPath = new File(uploadedFilesDir, sessionId);
 
 			if (!uploadedFilesPath.exists()) {
 
@@ -115,11 +120,11 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 					uploadedFilesPath.mkdirs();
 				}
 				catch (SecurityException e) {
-					uploadedFilesDir = System.getProperty(JAVA_IO_TMPDIR) + "/" + sessionId;
+					uploadedFilesDir = System.getProperty(JAVA_IO_TMPDIR);
 					logger.error(
 						"Security exception message=[{0}] when trying to create unique path=[{1}] so using default system property=[{2}] value=[{3}]",
 						new Object[] { e.getMessage(), uploadedFilesPath.toString(), JAVA_IO_TMPDIR, uploadedFilesDir });
-					uploadedFilesPath = new File(uploadedFilesDir);
+					uploadedFilesPath = new File(uploadedFilesDir, sessionId);
 					uploadedFilesPath.mkdirs();
 				}
 			}
@@ -168,7 +173,7 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 			PortletFileUpload portletFileUpload = new PortletFileUpload(diskFileItemFactory);
 			portletFileUpload.setFileSizeMax(fileMaxSize);
 			requestParameterMap = new HashMap<String, String>();
-			requestParameterFileMap = new HashMap<String, UploadedFile>();
+			requestParameterFileMap = new HashMap<String, List<UploadedFile>>();
 
 			// Get the namespace that might be found in request parameter names.
 			String namespace = bridgeContext.getPortletContainer().getResponseNamespace();
@@ -181,10 +186,11 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 
 				String parameterName = mapEntry.getKey();
 				int pos = parameterName.indexOf(namespace);
+
 				if (pos >= 0) {
 					parameterName = parameterName.substring(pos + namespace.length());
 				}
-			
+
 				String[] parameterValues = mapEntry.getValue();
 
 				if (parameterValues.length > 0) {
@@ -194,117 +200,169 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 				}
 			}
 
-			List<DiskFileItem> diskFileItems = null;
+			UploadedFileFactory uploadedFileFactory = (UploadedFileFactory) BridgeFactoryFinder.getFactory(
+					UploadedFileFactory.class);
 
-			if (clientDataRequest instanceof ResourceRequest) {
-				ResourceRequest resourceRequest = (ResourceRequest) clientDataRequest;
-				diskFileItems = portletFileUpload.parseRequest(new ActionRequestAdapter(resourceRequest));
-			}
-			else {
-				ActionRequest actionRequest = (ActionRequest) clientDataRequest;
-				diskFileItems = portletFileUpload.parseRequest(actionRequest);
-			}
+			// Begin parsing the request for file parts:
+			try {
+				FileItemIterator fileItemIterator = null;
 
-			boolean foundAtLeastOneUploadedFile = false;
+				if (clientDataRequest instanceof ResourceRequest) {
+					ResourceRequest resourceRequest = (ResourceRequest) clientDataRequest;
+					fileItemIterator = portletFileUpload.getItemIterator(new ActionRequestAdapter(resourceRequest));
+				}
+				else {
+					ActionRequest actionRequest = (ActionRequest) clientDataRequest;
+					fileItemIterator = portletFileUpload.getItemIterator(actionRequest);
+				}
 
-			if (diskFileItems != null) {
+				boolean optimizeNamespace = BooleanHelper.toBoolean(bridgeContext.getInitParameter(
+							BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE1), true);
 
-				for (DiskFileItem diskFileItem : diskFileItems) {
+				if (fileItemIterator != null) {
 
-					String fieldName = diskFileItem.getFieldName();
-					int pos = fieldName.indexOf(namespace);
-					if (pos >= 0) {
-						fieldName = fieldName.substring(pos + namespace.length());
-					}
+					int totalFiles = 0;
 
-					if (diskFileItem.isFormField()) {
-						String requestParameterValue = diskFileItem.getString();
-						String fixedRequestParameterValue = portletContainer.fixRequestParameterValue(
-								requestParameterValue);
-						requestParameterMap.put(fieldName, fixedRequestParameterValue);
-						logger.debug("{0}=[{1}]", fieldName, fixedRequestParameterValue);
-					}
-					else {
+					// For each field found in the request:
+					while (fileItemIterator.hasNext()) {
 
-						// Copy the commons-fileupload temporary file to a file in the same temporary location, but
-						// with the filename provided by the user in the upload. This has two benefits:
-						// 1) The temporary file will have a nice meaningful name.
-						// 2) By copying the file, the developer can have access to a semi-permanent file, because the
-						// commmons-fileupload DiskFileItem.finalize() method automatically deletes the temporary one.
-						File tempFile = diskFileItem.getStoreLocation();
+						try {
+							totalFiles++;
 
-						if (tempFile.exists()) {
-							foundAtLeastOneUploadedFile = true;
+							// Get the stream of field data from the request.
+							FileItemStream fieldStream = (FileItemStream) fileItemIterator.next();
 
-							String tempFileName = tempFile.getName();
-							String tempFileAbsolutePath = tempFile.getAbsolutePath();
+							// Get field name from the field stream.
+							String fieldName = fieldStream.getFieldName();
 
-							String copiedFileName = stripIllegalCharacters(diskFileItem.getName());
+							// If namespace optimization is enabled and the namespace is present in the field name,
+							// then remove the portlet namespace from the field name.
+							if (optimizeNamespace) {
+								int pos = fieldName.indexOf(namespace);
 
-							String copiedFileAbsolutePath = tempFileAbsolutePath.replace(tempFileName, copiedFileName);
-							File copiedFile = new File(copiedFileAbsolutePath);
-							FileUtils.copyFile(tempFile, copiedFile);
-
-							UploadedFileImpl uploadedFile = new UploadedFileImpl();
-
-							// absoluteFilePath
-							uploadedFile.setAbsolutePath(copiedFileAbsolutePath);
-
-							// charSet
-							uploadedFile.setCharSet(diskFileItem.getCharSet());
-
-							// contentType
-							uploadedFile.setContentType(diskFileItem.getContentType());
-
-							// headersMap
-							Map<String, List<String>> headersMap = new HashMap<String, List<String>>();
-							FileItemHeaders fileItemHeaders = diskFileItem.getHeaders();
-
-							if (fileItemHeaders != null) {
-								Iterator<String> headerNameItr = fileItemHeaders.getHeaderNames();
-
-								if (headerNameItr != null) {
-
-									while (headerNameItr.hasNext()) {
-										String headerName = headerNameItr.next();
-										Iterator<String> headerValuesItr = fileItemHeaders.getHeaders(headerName);
-										List<String> headerValues = new ArrayList<String>();
-
-										if (headerValuesItr != null) {
-
-											while (headerValuesItr.hasNext()) {
-												String headerValue = headerValuesItr.next();
-												headerValues.add(headerValue);
-											}
-										}
-
-										headersMap.put(headerName, headerValues);
-									}
+								if (pos >= 0) {
+									fieldName = fieldName.substring(pos + namespace.length());
 								}
 							}
 
-							uploadedFile.setHeadersMap(headersMap);
+							// Get the content-type, and file-name from the field stream.
+							String contentType = fieldStream.getContentType();
+							boolean formField = fieldStream.isFormField();
 
-							// name
-							String fileName = diskFileItem.getName();
-							uploadedFile.setName(fileName);
+							String fileName = null;
 
-							// size
-							uploadedFile.setSize(diskFileItem.getSize());
+							try {
+								fileName = fieldStream.getName();
+							}
+							catch (InvalidFileNameException e) {
+								fileName = e.getName();
+							}
 
-							requestParameterMap.put(fieldName, copiedFileAbsolutePath);
-							requestParameterFileMap.put(fieldName, uploadedFile);
-							logger.debug("Received uploaded file fieldName=[{0}] fileName=[{1}]", fieldName, fileName);
+							// Copy the stream of file data to a temporary file. NOTE: This is necessary even if the
+							// current field is a simple form-field because the call below to diskFileItem.getString()
+							// will fail otherwise.
+							DiskFileItem diskFileItem = (DiskFileItem) diskFileItemFactory.createItem(fieldName,
+									contentType, formField, fileName);
+							Streams.copy(fieldStream.openStream(), diskFileItem.getOutputStream(), true);
+
+							// If the current field is a simple form-field, then save the form field value in the map.
+							if (diskFileItem.isFormField()) {
+								String requestParameterValue = diskFileItem.getString(
+										clientDataRequest.getCharacterEncoding());
+								String fixedRequestParameterValue = portletContainer.fixRequestParameterValue(
+										requestParameterValue);
+								requestParameterMap.put(fieldName, fixedRequestParameterValue);
+								logger.debug("{0}=[{1}]", fieldName, fixedRequestParameterValue);
+							}
+							else {
+
+								File tempFile = diskFileItem.getStoreLocation();
+
+								// If the copy was successful, then
+								if (tempFile.exists()) {
+
+									// Copy the commons-fileupload temporary file to a file in the same temporary
+									// location, but with the filename provided by the user in the upload. This has two
+									// benefits: 1) The temporary file will have a nice meaningful name. 2) By copying
+									// the file, the developer can have access to a semi-permanent file, because the
+									// commmons-fileupload DiskFileItem.finalize() method automatically deletes the
+									// temporary one.
+									String tempFileName = tempFile.getName();
+									String tempFileAbsolutePath = tempFile.getAbsolutePath();
+
+									String copiedFileName = stripIllegalCharacters(fileName);
+
+									String copiedFileAbsolutePath = tempFileAbsolutePath.replace(tempFileName,
+											copiedFileName);
+									File copiedFile = new File(copiedFileAbsolutePath);
+									FileUtils.copyFile(tempFile, copiedFile);
+
+									// If present, build up a map of headers.
+									Map<String, List<String>> headersMap = new HashMap<String, List<String>>();
+									FileItemHeaders fileItemHeaders = fieldStream.getHeaders();
+
+									if (fileItemHeaders != null) {
+										Iterator<String> headerNameItr = fileItemHeaders.getHeaderNames();
+
+										if (headerNameItr != null) {
+
+											while (headerNameItr.hasNext()) {
+												String headerName = headerNameItr.next();
+												Iterator<String> headerValuesItr = fileItemHeaders.getHeaders(
+														headerName);
+												List<String> headerValues = new ArrayList<String>();
+
+												if (headerValuesItr != null) {
+
+													while (headerValuesItr.hasNext()) {
+														String headerValue = headerValuesItr.next();
+														headerValues.add(headerValue);
+													}
+												}
+
+												headersMap.put(headerName, headerValues);
+											}
+										}
+									}
+
+									// Put a valid UploadedFile instance into the map that contains all of the
+									// uploaded file's attributes, along with a successful status.
+									Map<String, Object> attributeMap = new HashMap<String, Object>();
+									String id = Long.toString(((long) hashCode()) + System.currentTimeMillis());
+									String message = null;
+									UploadedFile uploadedFile = uploadedFileFactory.getUploadedFile(
+											copiedFileAbsolutePath, attributeMap, diskFileItem.getCharSet(),
+											diskFileItem.getContentType(), headersMap, id, message, fileName,
+											diskFileItem.getSize(), UploadedFile.Status.FILE_SAVED);
+
+									requestParameterMap.put(fieldName, copiedFileAbsolutePath);
+									addUploadedFile(fieldName, uploadedFile);
+									logger.debug("Received uploaded file fieldName=[{0}] fileName=[{1}]", fieldName,
+										fileName);
+								}
+							}
+						}
+						catch (Exception e) {
+							logger.error(e);
+
+							UploadedFile uploadedFile = uploadedFileFactory.getUploadedFile(e);
+							String fieldName = Integer.toString(totalFiles);
+							addUploadedFile(fieldName, uploadedFile);
 						}
 					}
 				}
-
-				clientDataRequest.setAttribute(PARAM_UPLOADED_FILES, requestParameterFileMap);
 			}
 
-			if (!foundAtLeastOneUploadedFile) {
-				logger.warn("No uploaded files are found in the request");
+			// If there was an error in parsing the request for file parts, then put a bogus UploadedFile instance in
+			// the map so that the developer can have some idea that something went wrong.
+			catch (Exception e) {
+				logger.error(e);
+
+				UploadedFile uploadedFile = uploadedFileFactory.getUploadedFile(e);
+				addUploadedFile("unknown", uploadedFile);
 			}
+
+			clientDataRequest.setAttribute(PARAM_UPLOADED_FILES, requestParameterFileMap);
 
 			// If not found in the request, Section 6.9 of the Bridge spec requires that the value of the
 			// ResponseStateManager.RENDER_KIT_ID_PARAM request parameter be set to the value of the
@@ -322,6 +380,17 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
+	}
+
+	protected void addUploadedFile(String fieldName, UploadedFile uploadedFile) {
+		List<UploadedFile> uploadedFiles = requestParameterFileMap.get(fieldName);
+
+		if (uploadedFiles == null) {
+			uploadedFiles = new ArrayList<UploadedFile>();
+			requestParameterFileMap.put(fieldName, uploadedFiles);
+		}
+
+		uploadedFiles.add(uploadedFile);
 	}
 
 	@Override

@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.demos.bean;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
@@ -28,9 +27,9 @@ import org.icefaces.ace.component.fileentry.FileEntry;
 import org.icefaces.ace.component.fileentry.FileEntryEvent;
 import org.icefaces.ace.component.fileentry.FileEntryResults;
 
-import com.liferay.faces.bridge.component.UploadedFile;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.demos.dto.City;
 import com.liferay.faces.demos.dto.UploadedFileWrapper;
 import com.liferay.faces.demos.util.FacesMessageUtil;
@@ -63,7 +62,6 @@ public class ApplicantBackingBean implements Serializable {
 	// JavaBeans Properties for UI
 	private boolean commentsRendered = false;
 	private String fileUploadAbsolutePath;
-	private long nextFileId;
 	private String uploadedFileId;
 
 	public void cityListener(ValueChangeEvent valueChangeEvent) {
@@ -96,10 +94,9 @@ public class ApplicantBackingBean implements Serializable {
 			}
 
 			if (uploadedFileToDelete != null) {
-				File file = new File(uploadedFileToDelete.getAbsolutePath());
-				file.delete();
+				uploadedFileToDelete.delete();
 				uploadedFiles.remove(uploadedFileToDelete);
-				logger.debug("Deleted file=[{0}]", file);
+				logger.debug("Deleted file=[{0}]", uploadedFileToDelete.getName());
 			}
 		}
 		catch (Exception e) {
@@ -107,22 +104,21 @@ public class ApplicantBackingBean implements Serializable {
 		}
 	}
 
-	public void fileEntryListener(FileEntryEvent fileEntryEvent) {
+	public void handleFileUpload(FileEntryEvent fileEntryEvent) {
 
 		try {
+			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
 			FileEntry fileEntry = (FileEntry) fileEntryEvent.getSource();
 			FileEntryResults results = fileEntry.getResults();
 
 			for (FileEntryResults.FileInfo fileInfo : results.getFiles()) {
 
-				if (fileInfo.isSaved()) {
+				UploadedFileWrapper uploadedFile = new UploadedFileWrapper(fileInfo);
 
-					UploadedFileWrapper aceUploadedFile = new UploadedFileWrapper(Long.toString(nextFileId++),
-							fileInfo);
-					List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
+				if (uploadedFile.getStatus() == UploadedFile.Status.FILE_SAVED) {
 
 					synchronized (uploadedFiles) {
-						uploadedFiles.add(aceUploadedFile);
+						uploadedFiles.add(uploadedFile);
 					}
 				}
 			}
@@ -180,9 +176,8 @@ public class ApplicantBackingBean implements Serializable {
 			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
 
 			for (UploadedFile uploadedFile : uploadedFiles) {
-				File file = new File(uploadedFile.getAbsolutePath());
-				file.delete();
-				logger.debug("Deleted file=[{0}]", file);
+				uploadedFile.delete();
+				logger.debug("Deleted file=[{0}]", uploadedFile.getName());
 			}
 
 			// Store the applicant's first name in JSF 2 Flash Scope so that it can be picked up

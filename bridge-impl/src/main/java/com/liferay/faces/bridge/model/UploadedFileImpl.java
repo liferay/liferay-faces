@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.demos.dto;
+package com.liferay.faces.bridge.model;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,49 +20,52 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.io.Serializable;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
-import javax.faces.FacesWrapper;
-
-import org.icefaces.ace.component.fileentry.FileEntryResults.FileInfo;
-import org.icefaces.ace.component.fileentry.FileEntryStatus;
-
-import com.liferay.faces.bridge.model.UploadedFile;
 
 
 /**
- * This class provides a convenient mechanism for converting an ICEfaces {@link FileInfo} object to an instance of the
- * {@link UploadedFile} interface provided by the Liferay Faces Bridge implementation.
- *
  * @author  Neil Griffin
  */
-public class UploadedFileWrapper implements UploadedFile, FacesWrapper<FileInfo> {
+public class UploadedFileImpl implements Serializable, UploadedFile {
 
-	// Private Data Members
-	Map<String, Object> attributeMap;
+	private static final long serialVersionUID = 5511555773653537284L;
+
+	private String absolutePath;
+	private Map<String, Object> attributeMap;
+	private String charSet;
+	private String contentType;
 	private String id;
-	private UploadedFile.Status status;
-	private FileInfo wrappedFileInfo;
+	private Map<String, List<String>> headersMap;
+	private String message;
+	private String name;
+	private long size;
+	private Status status;
 
-	public UploadedFileWrapper(FileInfo fileInfo) {
-		this.wrappedFileInfo = fileInfo;
-		this.attributeMap = new HashMap<String, Object>();
-		this.id = Long.toString(((long) hashCode()) + System.currentTimeMillis());
-
-		FileEntryStatus fileEntryStatus = wrappedFileInfo.getStatus();
-
-		if (fileEntryStatus.isSuccess()) {
-			status = Status.FILE_SAVED;
-		}
-		else {
-			status = Status.ERROR;
-		}
+	public UploadedFileImpl(String absolutePath, Map<String, Object> attributeMap, String charSet, String contentType,
+		Map<String, List<String>> headersMap, String id, String message, String name, long size, Status status) {
+		this.absolutePath = absolutePath;
+		this.attributeMap = attributeMap;
+		this.charSet = charSet;
+		this.contentType = contentType;
+		this.id = id;
+		this.headersMap = headersMap;
+		this.message = message;
+		this.name = name;
+		this.size = size;
+		this.status = status;
 	}
 
 	public void delete() throws IOException {
-		wrappedFileInfo.getFile().delete();
+		File file = new File(absolutePath);
+		file.delete();
+	}
+
+	@Override
+	public String toString() {
+		return this.absolutePath;
 	}
 
 	public void write(String fileName) throws IOException {
@@ -72,7 +75,7 @@ public class UploadedFileWrapper implements UploadedFile, FacesWrapper<FileInfo>
 	}
 
 	public String getAbsolutePath() {
-		return wrappedFileInfo.getFile().getAbsolutePath();
+		return absolutePath;
 	}
 
 	public Map<String, Object> getAttributes() {
@@ -83,7 +86,7 @@ public class UploadedFileWrapper implements UploadedFile, FacesWrapper<FileInfo>
 		byte[] bytes = null;
 
 		try {
-			File file = wrappedFileInfo.getFile();
+			File file = new File(absolutePath);
 
 			if (file.exists()) {
 				RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
@@ -100,23 +103,30 @@ public class UploadedFileWrapper implements UploadedFile, FacesWrapper<FileInfo>
 	}
 
 	public String getCharSet() {
-		throw new UnsupportedOperationException();
+		return charSet;
 	}
 
 	public String getContentType() {
-		return wrappedFileInfo.getContentType();
+		return contentType;
 	}
 
 	public String getHeader(String name) {
-		throw new UnsupportedOperationException();
+		String header = null;
+		List<String> headers = headersMap.get(name);
+
+		if ((headers != null) && (headers.size() > 0)) {
+			header = headers.get(0);
+		}
+
+		return header;
 	}
 
 	public Collection<String> getHeaderNames() {
-		throw new UnsupportedOperationException();
+		return headersMap.keySet();
 	}
 
 	public Collection<String> getHeaders(String name) {
-		throw new UnsupportedOperationException();
+		return headersMap.get(name);
 	}
 
 	public String getId() {
@@ -124,26 +134,23 @@ public class UploadedFileWrapper implements UploadedFile, FacesWrapper<FileInfo>
 	}
 
 	public InputStream getInputStream() throws IOException {
-		return new FileInputStream(wrappedFileInfo.getFile());
+		return new FileInputStream(getAbsolutePath());
 	}
 
 	public String getMessage() {
-		throw new UnsupportedOperationException();
+		return message;
 	}
 
 	public String getName() {
-		return wrappedFileInfo.getFileName();
+		return name;
 	}
 
 	public long getSize() {
-		return wrappedFileInfo.getSize();
+		return size;
 	}
 
 	public Status getStatus() {
 		return status;
 	}
 
-	public FileInfo getWrapped() {
-		return wrappedFileInfo;
-	}
 }

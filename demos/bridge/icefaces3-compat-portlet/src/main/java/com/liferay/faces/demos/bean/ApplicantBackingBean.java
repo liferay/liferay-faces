@@ -13,14 +13,12 @@
  */
 package com.liferay.faces.demos.bean;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.component.UICommand;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
@@ -29,9 +27,9 @@ import org.icefaces.ace.component.fileentry.FileEntry;
 import org.icefaces.ace.component.fileentry.FileEntryEvent;
 import org.icefaces.ace.component.fileentry.FileEntryResults;
 
-import com.liferay.faces.bridge.component.UploadedFile;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.demos.dto.City;
 import com.liferay.faces.demos.dto.UploadedFileWrapper;
 import com.liferay.faces.demos.util.FacesMessageUtil;
@@ -64,7 +62,8 @@ public class ApplicantBackingBean implements Serializable {
 	// JavaBeans Properties for UI
 	private boolean commentsRendered = false;
 	private String fileUploadAbsolutePath;
-	private long nextFileId;
+	private boolean popupRendered;
+	private String uploadedFileId;
 
 	public void cityListener(ValueChangeEvent valueChangeEvent) {
 		String cityNameStartsWith = (String) valueChangeEvent.getNewValue();
@@ -80,8 +79,6 @@ public class ApplicantBackingBean implements Serializable {
 	}
 
 	public void deleteUploadedFile(ActionEvent actionEvent) {
-		UICommand uiCommand = (UICommand) actionEvent.getComponent();
-		String fileId = (String) uiCommand.getValue();
 
 		try {
 			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
@@ -90,7 +87,7 @@ public class ApplicantBackingBean implements Serializable {
 
 			for (UploadedFile uploadedFile : uploadedFiles) {
 
-				if (uploadedFile.getId().equals(fileId)) {
+				if (uploadedFile.getId().equals(uploadedFileId)) {
 					uploadedFileToDelete = uploadedFile;
 
 					break;
@@ -98,33 +95,33 @@ public class ApplicantBackingBean implements Serializable {
 			}
 
 			if (uploadedFileToDelete != null) {
-				File file = new File(uploadedFileToDelete.getAbsolutePath());
-				file.delete();
+				uploadedFileToDelete.delete();
 				uploadedFiles.remove(uploadedFileToDelete);
-				logger.debug("Deleted file=[{0}]", file);
+				logger.debug("Deleted file=[{0}]", uploadedFileToDelete.getName());
 			}
 		}
 		catch (Exception e) {
 			logger.error(e);
 		}
+
+		popupRendered = false;
 	}
 
-	public void fileEntryListener(FileEntryEvent fileEntryEvent) {
+	public void handleFileUpload(FileEntryEvent fileEntryEvent) {
 
 		try {
+			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
 			FileEntry fileEntry = (FileEntry) fileEntryEvent.getSource();
 			FileEntryResults results = fileEntry.getResults();
 
 			for (FileEntryResults.FileInfo fileInfo : results.getFiles()) {
 
-				if (fileInfo.isSaved()) {
+				UploadedFileWrapper uploadedFile = new UploadedFileWrapper(fileInfo);
 
-					UploadedFileWrapper aceUploadedFile = new UploadedFileWrapper(Long.toString(nextFileId++),
-							fileInfo);
-					List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
+				if (uploadedFile.getStatus() == UploadedFile.Status.FILE_SAVED) {
 
 					synchronized (uploadedFiles) {
-						uploadedFiles.add(aceUploadedFile);
+						uploadedFiles.add(uploadedFile);
 					}
 				}
 			}
@@ -182,9 +179,8 @@ public class ApplicantBackingBean implements Serializable {
 			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
 
 			for (UploadedFile uploadedFile : uploadedFiles) {
-				File file = new File(uploadedFile.getAbsolutePath());
-				file.delete();
-				logger.debug("Deleted file=[{0}]", file);
+				uploadedFile.delete();
+				logger.debug("Deleted file=[{0}]", uploadedFile.getName());
 			}
 
 			// Store the applicant's first name in JSF 2 Flash Scope so that it can be picked up
@@ -209,6 +205,10 @@ public class ApplicantBackingBean implements Serializable {
 		commentsRendered = !commentsRendered;
 	}
 
+	public void togglePopup(ActionEvent actionEvent) {
+		popupRendered = !popupRendered;
+	}
+
 	public void setApplicantModelBean(ApplicantModelBean applicantModelBean) {
 
 		// Injected via @ManagedProperty annotation
@@ -221,6 +221,10 @@ public class ApplicantBackingBean implements Serializable {
 
 	public boolean isCommentsRendered() {
 		return commentsRendered;
+	}
+
+	public boolean isPopupRendered() {
+		return popupRendered;
 	}
 
 	public String getFileUploadAbsolutePath() {
@@ -236,5 +240,17 @@ public class ApplicantBackingBean implements Serializable {
 
 		// Injected via @ManagedProperty annotation
 		this.listModelBean = listModelBean;
+	}
+
+	public void setPopupRendered(boolean popupRendered) {
+		this.popupRendered = popupRendered;
+	}
+
+	public String getUploadedFileId() {
+		return uploadedFileId;
+	}
+
+	public void setUploadedFileId(String uploadedFileId) {
+		this.uploadedFileId = uploadedFileId;
 	}
 }
