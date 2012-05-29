@@ -29,7 +29,6 @@ import javax.portlet.PortletSession;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeUtil;
 
-import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.map.SessionMap;
@@ -150,8 +149,7 @@ public class ELResolverImpl extends ELResolver {
 				}
 			}
 			else if (varName.equals(BRIDGE_CONTEXT)) {
-				FacesContext facesContext = FacesContext.getCurrentInstance();
-				value = getPortletRequest(facesContext).getAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+				value = BridgeContext.getCurrentInstance();
 			}
 			else if (varName.equals(EVENT_REQUEST)) {
 				Bridge.PortletPhase portletPhase = BridgeUtil.getPortletRequestPhase();
@@ -205,9 +203,7 @@ public class ELResolverImpl extends ELResolver {
 				}
 			}
 			else if (varName.equals(PORTLET_CONFIG)) {
-				FacesContext facesContext = FacesContext.getCurrentInstance();
-				BridgeContext bridgeContext = (BridgeContext) facesContext.getAttributes().get(
-						BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
 				if (bridgeContext != null) {
 					value = bridgeContext.getPortletConfig();

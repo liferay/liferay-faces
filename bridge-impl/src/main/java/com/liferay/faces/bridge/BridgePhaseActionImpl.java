@@ -100,12 +100,7 @@ public class BridgePhaseActionImpl extends BridgePhaseBaseImpl {
 			throw new BridgeException(t);
 		}
 		finally {
-
-			if (facesContext != null) {
-				facesContext.release();
-			}
-
-			cleanup(actionRequest);
+			cleanup();
 		}
 	}
 }

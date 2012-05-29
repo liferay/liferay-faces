@@ -26,7 +26,6 @@ import javax.faces.context.ResponseWriter;
 import javax.portlet.PortletRequest;
 import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 
-import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.application.ResourceInfo;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
@@ -124,8 +123,7 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 		List<UIComponent> resourcesForRelocatingToBody = new ArrayList<UIComponent>();
 		ExternalContext externalContext = facesContext.getExternalContext();
 		PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
-		BridgeContext bridgeContext = (BridgeContext) facesContext.getAttributes().get(
-				BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		PortletContainer portletContainer = bridgeContext.getPortletContainer();
 		boolean portletContainerAbleToAddScriptResourceToHead = portletContainer.isAbleToAddScriptResourceToHead();
 

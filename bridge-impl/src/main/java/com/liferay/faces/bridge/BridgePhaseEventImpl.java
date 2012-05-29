@@ -110,12 +110,7 @@ public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
 			throw new BridgeException(t);
 		}
 		finally {
-
-			if (facesContext != null) {
-				facesContext.release();
-			}
-
-			cleanup(eventRequest);
+			cleanup();
 		}
 	}
 

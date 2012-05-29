@@ -70,7 +70,7 @@ import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
 /**
  * @author  Neil Griffin
  */
-public class BridgeContextImpl implements BridgeContext {
+public class BridgeContextImpl extends BridgeContext {
 
 	// Public Constants
 	public static final String ATTR_RESPONSE_NAMESPACE = "com.liferay.faces.bridge.responseNamespace";
@@ -146,8 +146,11 @@ public class BridgeContextImpl implements BridgeContext {
 		PortletContainerFactory portletContainerFactory = (PortletContainerFactory) BridgeFactoryFinder.getFactory(
 				PortletContainerFactory.class);
 		this.portletContainer = portletContainerFactory.getPortletContainer(this);
+		
+		setCurrentInstance(this);
 	}
 
+	@Override
 	public void dispatch(String path) throws IOException {
 
 		logger.debug("Acquiring dispatcher for JSP path=[{0}]", path);
@@ -205,6 +208,7 @@ public class BridgeContextImpl implements BridgeContext {
 		}
 	}
 
+	@Override
 	public BridgeActionURL encodeActionURL(String url) {
 
 		logger.debug("encodeActionURL fromURL=[{0}]", url);
@@ -265,6 +269,7 @@ public class BridgeContextImpl implements BridgeContext {
 		return bridgeActionURL;
 	}
 
+	@Override
 	public BridgePartialActionURL encodePartialActionURL(String url) {
 
 		logger.debug("encodePartialActionURL fromURL=[{0}]", url);
@@ -278,6 +283,7 @@ public class BridgeContextImpl implements BridgeContext {
 		return bridgePartialActionURL;
 	}
 
+	@Override
 	public BridgeRedirectURL encodeRedirectURL(String baseUrl, Map<String, List<String>> parameters) {
 
 		logger.debug("encodeRedirectURL fromURL=[{0}]", baseUrl);
@@ -287,6 +293,7 @@ public class BridgeContextImpl implements BridgeContext {
 		return bridgeURLFactory.getBridgeRedirectURL(baseUrl, parameters, currentFacesViewId, this);
 	}
 
+	@Override
 	public BridgeResourceURL encodeResourceURL(String url) {
 
 		logger.debug("encodeResourceURL fromURL=[{0}]", url);
@@ -394,6 +401,7 @@ public class BridgeContextImpl implements BridgeContext {
 		return bridgeResourceURL;
 	}
 
+	@Override
 	public void redirect(String url) throws IOException {
 
 		if (url != null) {
@@ -503,18 +511,60 @@ public class BridgeContextImpl implements BridgeContext {
 		}
 	}
 
+	@Override
+	public void release() {
+		this.attributeMap = null;
+		this.bridgeConfig = null;
+		this.bridgeRequestScopePreserved = null;
+		this.bridgeRequestScope = null;
+		this.bridgeRequestScopeManager = null;
+		this.bridgeURLFactory = null;
+		this.defaultRenderKitId = null;
+		this.defaultViewIdMap = null;
+		this.facesView = null;
+		this.preFacesRequestAttrNames = null;
+		this.portletConfig = null;
+		this.portletContainer = null;
+		this.portletContext = null;
+		this.portletRequest = null;
+		this.portletPhase = null;
+		this.portletResponse = null;
+		this.preserveActionParams = null;
+		this.preservedActionParams = null;
+		this.renderRedirect = false;
+		this.renderRedirectAfterDispatch = false;
+		this.renderRedirectURL = null;
+		this.renderRedirectEnabled = null;
+		this.requestHeaderMap = null;
+		this.requestHeaderValuesMap = null;
+		this.requestParameterMap = null;
+		this.requestParameterMapFactory = null;
+		this.requestParameterValuesMap = null;
+		this.requestPathInfo = null;
+		this.requestServletPath = null;
+		this.responseNamespace = null;
+		this.responseOutputWriter = null;
+		this.savedViewState = null;
+		this.viewIdAndQueryString = null;
+		setCurrentInstance(null);
+	}
+
+	@Override
 	public Map<String, Object> getAttributes() {
 		return attributeMap;
 	}
 
+	@Override
 	public BridgeConfig getBridgeConfig() {
 		return bridgeConfig;
 	}
 
+	@Override
 	public BridgeRequestScope getBridgeRequestScope() {
 		return bridgeRequestScope;
 	}
 
+	@Override
 	public BridgeRequestScopeManager getBridgeRequestScopeManager() {
 		return bridgeRequestScopeManager;
 	}
@@ -523,6 +573,7 @@ public class BridgeContextImpl implements BridgeContext {
 		this.bridgeRequestScopePreserved = bridgeRequestScopePreserved;
 	}
 
+	@Override
 	public boolean isBridgeRequestScopePreserved() {
 
 		if (bridgeRequestScopePreserved == null) {
@@ -545,6 +596,7 @@ public class BridgeContextImpl implements BridgeContext {
 		return bridgeRequestScopePreserved;
 	}
 
+	@Override
 	public String getDefaultRenderKitId() {
 
 		if (defaultRenderKitId == null) {
@@ -556,6 +608,7 @@ public class BridgeContextImpl implements BridgeContext {
 		return defaultRenderKitId;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public Map<String, String> getDefaultViewIdMap() {
 
@@ -604,6 +657,7 @@ public class BridgeContextImpl implements BridgeContext {
 		return facesView;
 	}
 
+	@Override
 	public String getFacesViewId() throws BridgeDefaultViewNotSpecifiedException, BridgeInvalidViewPathException {
 		return getFacesView().getViewId();
 	}
@@ -725,10 +779,12 @@ public class BridgeContextImpl implements BridgeContext {
 		return viewIdAndQueryString;
 	}
 
+	@Override
 	public String getFacesViewIdFromPath(String viewPath) {
 		return getFacesViewIdFromPath(viewPath, true);
 	}
 
+	@Override
 	public String getFacesViewIdFromPath(String viewPath, boolean mustExist) {
 
 		String facesViewId = null;
@@ -805,14 +861,17 @@ public class BridgeContextImpl implements BridgeContext {
 		return facesViewId;
 	}
 
+	@Override
 	public String getFacesViewQueryString() {
 		return getFacesView().getQueryString();
 	}
 
+	@Override
 	public boolean isRenderRedirectAfterDispatch() {
 		return renderRedirectAfterDispatch;
 	}
 
+	@Override
 	public String getInitParameter(String name) {
 		String initParameter = portletConfig.getInitParameter(name);
 
@@ -823,22 +882,27 @@ public class BridgeContextImpl implements BridgeContext {
 		return initParameter;
 	}
 
+	@Override
 	public PortletConfig getPortletConfig() {
 		return portletConfig;
 	}
 
+	@Override
 	public PortletContainer getPortletContainer() {
 		return portletContainer;
 	}
 
+	@Override
 	public PortletContext getPortletContext() {
 		return portletContext;
 	}
 
+	@Override
 	public PortletRequest getPortletRequest() {
 		return portletRequest;
 	}
 
+	@Override
 	public void setPortletRequest(PortletRequest portletRequest) {
 		this.portletRequest = portletRequest;
 		this.requestParameterMap = null;
@@ -848,18 +912,22 @@ public class BridgeContextImpl implements BridgeContext {
 		this.requestHeaderValuesMap = null;
 	}
 
+	@Override
 	public Bridge.PortletPhase getPortletRequestPhase() {
 		return portletPhase;
 	}
 
+	@Override
 	public PortletResponse getPortletResponse() {
 		return portletResponse;
 	}
 
+	@Override
 	public void setPortletResponse(PortletResponse portletResponse) {
 		this.portletResponse = portletResponse;
 	}
 
+	@Override
 	public List<String> getPreFacesRequestAttrNames() {
 		return preFacesRequestAttrNames;
 	}
@@ -868,6 +936,7 @@ public class BridgeContextImpl implements BridgeContext {
 		this.preFacesRequestAttrNames = preFacesRequestAttrNames;
 	}
 
+	@Override
 	public Map<String, String[]> getPreservedActionParams() {
 
 		if (preservedActionParams == null) {
@@ -883,18 +952,22 @@ public class BridgeContextImpl implements BridgeContext {
 		this.preservedActionParams = preservedActionParams;
 	}
 
+	@Override
 	public void setRenderRedirectAfterDispatch(boolean renderRedirectAfterDispatch) {
 		this.renderRedirectAfterDispatch = renderRedirectAfterDispatch;
 	}
 
+	@Override
 	public BridgeRedirectURL getRenderRedirectURL() {
 		return renderRedirectURL;
 	}
 
+	@Override
 	public void setRenderRedirectURL(BridgeRedirectURL renderRedirectURL) {
 		this.renderRedirectURL = renderRedirectURL;
 	}
 
+	@Override
 	public Map<String, String> getRequestHeaderMap() {
 
 		if (requestHeaderMap == null) {
@@ -904,6 +977,7 @@ public class BridgeContextImpl implements BridgeContext {
 		return requestHeaderMap;
 	}
 
+	@Override
 	public Map<String, String[]> getRequestHeaderValuesMap() {
 
 		if (requestHeaderValuesMap == null) {
@@ -914,6 +988,7 @@ public class BridgeContextImpl implements BridgeContext {
 		return requestHeaderValuesMap;
 	}
 
+	@Override
 	public Map<String, String> getRequestParameterMap() {
 
 		if (requestParameterMap == null) {
@@ -932,6 +1007,7 @@ public class BridgeContextImpl implements BridgeContext {
 		return requestParameterMapFactory;
 	}
 
+	@Override
 	public Map<String, String[]> getRequestParameterValuesMap() {
 
 		if (requestParameterValuesMap == null) {
@@ -941,6 +1017,7 @@ public class BridgeContextImpl implements BridgeContext {
 		return requestParameterValuesMap;
 	}
 
+	@Override
 	public String getRequestPathInfo() {
 
 		String returnValue;
@@ -988,6 +1065,7 @@ public class BridgeContextImpl implements BridgeContext {
 		return returnValue;
 	}
 
+	@Override
 	public String getRequestServletPath() {
 
 		if (requestServletPath == null) {
@@ -1033,6 +1111,7 @@ public class BridgeContextImpl implements BridgeContext {
 		return requestServletPath;
 	}
 
+	@Override
 	public String getResponseNamespace() {
 
 		if (responseNamespace == null) {
@@ -1101,6 +1180,7 @@ public class BridgeContextImpl implements BridgeContext {
 		return responseNamespace;
 	}
 
+	@Override
 	public Writer getResponseOutputWriter() throws IOException {
 
 		if (responseOutputWriter == null) {
@@ -1131,6 +1211,7 @@ public class BridgeContextImpl implements BridgeContext {
 		return responseOutputWriter;
 	}
 
+	@Override
 	public boolean isPreserveActionParams() {
 
 		if (preserveActionParams == null) {
@@ -1149,14 +1230,17 @@ public class BridgeContextImpl implements BridgeContext {
 		return preserveActionParams;
 	}
 
+	@Override
 	public String getSavedViewState() {
 		return savedViewState;
 	}
 
+	@Override
 	public void setSavedViewState(String savedViewState) {
 		this.savedViewState = savedViewState;
 	}
 
+	@Override
 	public boolean isRenderRedirect() {
 		return renderRedirect;
 	}

@@ -48,7 +48,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
@@ -198,8 +197,7 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 		}
 
 		// If specified in the WEB-INF/portlet.xml descriptor, then preserve the action parameters.
-		BridgeContext bridgeContext = (BridgeContext) facesContext.getAttributes().get(
-				BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
 		if (bridgeContext.isPreserveActionParams()) {
 			Map<String, String> actionRequestParameterMap = new HashMap<String, String>(
@@ -384,15 +382,10 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 				for (FacesContextAttribute facesContextAttribute : savedFacesContextAttributes) {
 					Object name = facesContextAttribute.getName();
 
-					// Note: Don't want to restore the BridgeContext because that would be invalid data -- it would
-					// contain the ActionRequest/ActionResponse or EventRequest/EventResponse and would overwrite the
-					// current RenderRequest/RenderResponse.
-					if (!BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE.equals(name)) {
-						Object value = facesContextAttribute.getValue();
-						logger.trace("Restoring FacesContext attribute name=[{0}] value=[{1}]", name, value);
-						currentFacesContextAttributes.put(name, value);
-						restoredFacesContextAttibutes = true;
-					}
+					Object value = facesContextAttribute.getValue();
+					logger.trace("Restoring FacesContext attribute name=[{0}] value=[{1}]", name, value);
+					currentFacesContextAttributes.put(name, value);
+					restoredFacesContextAttibutes = true;
 				}
 			}
 

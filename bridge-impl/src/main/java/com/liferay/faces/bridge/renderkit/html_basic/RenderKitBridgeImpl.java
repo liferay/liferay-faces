@@ -18,15 +18,12 @@ import java.io.Writer;
 import javax.faces.component.UIForm;
 import javax.faces.component.UIOutput;
 import javax.faces.component.UIPanel;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.RenderKit;
 import javax.faces.render.RenderKitWrapper;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.component.icefaces.DataPaginator;
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.config.Product;
@@ -101,10 +98,7 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 
 			// If the PrimeFaces p:fileUpload should be forced to use a ResourceURL, then return a special
 			// form renderer. http://issues.liferay.com/browse/FACES-1194
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			ExternalContext externalContext = facesContext.getExternalContext();
-			BridgeContext bridgeContext = (BridgeContext) externalContext.getRequestMap().get(
-					BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 			Product primeFaces = bridgeContext.getBridgeConfig().getProducts().get(BridgeConstants.PRIMEFACES);
 
 			if (primeFaces.isDetected() && (primeFaces.getMajorVersion() == 3) && (primeFaces.getMinorVersion() < 3)) {
