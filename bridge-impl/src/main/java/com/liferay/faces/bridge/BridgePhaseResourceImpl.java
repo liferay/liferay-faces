@@ -123,17 +123,12 @@ public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 				// Spec 6.6 (Namespacing)
 				indicateNamespacingToConsumers(facesContext.getViewRoot(), resourceResponse);
 			}
-
-			cleanup(resourceRequest);
 		}
 		catch (Throwable t) {
 			throw new BridgeException(t);
 		}
 		finally {
-
-			if (facesContext != null) {
-				facesContext.release();
-			}
+			cleanup();
 		}
 
 		logger.debug(Logger.SEPARATOR);

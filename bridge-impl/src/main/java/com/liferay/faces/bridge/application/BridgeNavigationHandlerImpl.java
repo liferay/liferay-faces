@@ -32,7 +32,6 @@ import javax.portlet.StateAwareResponse;
 import javax.portlet.WindowStateException;
 import javax.portlet.faces.Bridge;
 
-import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.BridgeActionURL;
 import com.liferay.faces.bridge.logging.Logger;
@@ -86,8 +85,7 @@ public class BridgeNavigationHandlerImpl extends BridgeNavigationHandler {
 
 				if (toViewId != null) {
 
-					BridgeContext bridgeContext = (BridgeContext) facesContext.getAttributes().get(
-							BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+					BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 					PortletResponse portletResponse = bridgeContext.getPortletResponse();
 
 					if (portletResponse instanceof StateAwareResponse) {
@@ -139,8 +137,7 @@ public class BridgeNavigationHandlerImpl extends BridgeNavigationHandler {
 				logger.debug("Detected portlet mode change");
 
 				String currentViewId = facesContext.getViewRoot().getViewId();
-				BridgeContext bridgeContext = (BridgeContext) facesContext.getAttributes().get(
-						BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 				Map<String, String> defaultViewIdMap = bridgeContext.getDefaultViewIdMap();
 				String portletModeViewId = defaultViewIdMap.get(toPortletModeAsString);
 

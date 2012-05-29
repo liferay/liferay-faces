@@ -13,15 +13,23 @@
  */
 package com.liferay.faces.bridge;
 
+import com.liferay.faces.bridge.context.BridgeContext;
+
+
 /**
  * @author  Neil Griffin
  */
 public interface BridgeExt {
 
-	// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-206
-
-	// NOTE: Changing the value of BRIDGE_CONTEXT_ATTRIBUTE will have a negative impact on the ICEfaces
-	// FileEntryPhaseListener#setPortletRequestWrapper(Object) method.
+	/**
+	 * The name of the {@link PortletRequest} attribute that contains the {@link BridgeContext} instance. NOTE that
+	 * changing the value of BRIDGE_CONTEXT_ATTRIBUTE will have a negative impact on the ICEfaces {@link
+	 * FileEntryPhaseListener#setPortletRequestWrapper(Object)} method.
+	 *
+	 * @deprecated  The new technique for acquiring the BridgeContext instance is to call {@link
+	 *              BridgeContext#getCurrentInstance()}.
+	 */
+	@Deprecated
 	public static final String BRIDGE_CONTEXT_ATTRIBUTE = "javax.portlet.faces.bridgeContext";
 
 	public static final String FACES_AJAX_PARAMETER = "_jsfBridgeAjax";

@@ -32,7 +32,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
@@ -140,9 +139,7 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 
 	@Override
 	public Resource createResource(String resourceName) {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		BridgeContext bridgeContext = (BridgeContext) facesContext.getAttributes().get(
-				BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		Resource wrappableResource = wrappedResourceHandler.createResource(resourceName);
 
 		if (wrappableResource == null) {
@@ -155,9 +152,7 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 
 	@Override
 	public Resource createResource(String resourceName, String libraryName) {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		BridgeContext bridgeContext = (BridgeContext) facesContext.getAttributes().get(
-				BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		Resource wrappableResource = wrappedResourceHandler.createResource(resourceName, libraryName);
 
 		if (wrappableResource == null) {
@@ -170,9 +165,7 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 
 	@Override
 	public Resource createResource(String resourceName, String libraryName, String contentType) {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		BridgeContext bridgeContext = (BridgeContext) facesContext.getAttributes().get(
-				BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		Resource wrappableResource = wrappedResourceHandler.createResource(resourceName, libraryName, contentType);
 
 		if (wrappableResource == null) {
@@ -227,8 +220,7 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 
 			boolean needsUpdate = resource.userAgentNeedsUpdate(facesContext);
 
-			BridgeContext bridgeContext = (BridgeContext) facesContext.getAttributes().get(
-					BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 			PortletContainer portletContainer = bridgeContext.getPortletContainer();
 
 			if (!portletContainer.isAbleToSetHttpStatusCode()) {

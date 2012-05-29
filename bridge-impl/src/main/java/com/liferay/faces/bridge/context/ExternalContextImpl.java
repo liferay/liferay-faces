@@ -46,7 +46,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentRequest;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentResponse;
@@ -373,7 +372,7 @@ public class ExternalContextImpl extends ExternalContext {
 	protected void preInitializeObjects(boolean requestChanged, boolean responseChanged) {
 
 		// Get the BridgeContext.
-		bridgeContext = (BridgeContext) portletRequest.getAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+		bridgeContext = BridgeContext.getCurrentInstance();
 
 		// Determines whether or not lifecycle incongruities should be managed.
 		manageIncongruities = BooleanHelper.toBoolean(getInitParameter(

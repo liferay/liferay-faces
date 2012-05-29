@@ -75,15 +75,30 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		this.bridgeContextFactory = (BridgeContextFactory) BridgeFactoryFinder.getFactory(BridgeContextFactory.class);
 	}
 
-	protected void cleanup(PortletRequest portletRequest) {
+	@SuppressWarnings("deprecation")
+	protected void cleanup() {
 
-		// Cleanup request attributes.
-		portletRequest.removeAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
-		portletRequest.removeAttribute(Bridge.PORTLET_LIFECYCLE_PHASE);
+		if (facesContext != null) {
+			facesContext.release();
+		}
 
-		// Restore the cached attributes.
-		portletRequest.setAttribute(BridgeConstants.REQ_ATTR_PATH_INFO, pathInfo);
-		portletRequest.setAttribute(BridgeConstants.REQ_ATTR_SERVLET_PATH, servletPath);
+		if (bridgeContext != null) {
+
+			// Cleanup request attributes.
+			PortletRequest portletRequest = bridgeContext.getPortletRequest();
+
+			if (portletRequest != null) {
+				portletRequest.removeAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE);
+				portletRequest.removeAttribute(Bridge.PORTLET_LIFECYCLE_PHASE);
+
+				// Restore the cached attributes.
+				portletRequest.setAttribute(BridgeConstants.REQ_ATTR_PATH_INFO, pathInfo);
+				portletRequest.setAttribute(BridgeConstants.REQ_ATTR_SERVLET_PATH, servletPath);
+			}
+			
+			bridgeContext.release();
+		}
+
 	}
 
 	protected void indicateNamespacingToConsumers(UIViewRoot uiViewRoot, PortletResponse portletResponse) {
@@ -108,6 +123,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void init(PortletRequest portletRequest, PortletResponse portletResponse,
 		Bridge.PortletPhase portletPhase) {
 
@@ -148,10 +164,6 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		portletRequest.removeAttribute(BridgeConstants.REQ_ATTR_PATH_INFO);
 		servletPath = (String) portletRequest.getAttribute(BridgeConstants.REQ_ATTR_SERVLET_PATH);
 		portletRequest.removeAttribute(BridgeConstants.REQ_ATTR_SERVLET_PATH);
-
-		// Save the BridgeContext as a FacesContext attribute so that it can be picked up elsewhere in the
-		// bridge. PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-206
-		facesContext.getAttributes().put(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE, bridgeContext);
 
 		// If not set by a previous request, then set the default viewIdHistory for the portlet modes.
 		for (String portletMode : PortletModeHelper.PORTLET_MODE_NAMES) {

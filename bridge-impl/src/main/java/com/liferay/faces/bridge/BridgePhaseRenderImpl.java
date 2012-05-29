@@ -92,17 +92,13 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 			}
 			finally {
 
-				if ((facesContext != null)) {
-					facesContext.release();
-				}
-
 				// If required, cause the BridgeRequestScope to go out-of-scope.
 				if (!bridgeContext.isBridgeRequestScopePreserved()) {
 					bridgeContext.getBridgeRequestScopeManager().removeBridgeRequestScope(bridgeRequestScope,
 						portletContext);
 				}
 
-				cleanup(renderRequest);
+				cleanup();
 			}
 
 			logger.debug(Logger.SEPARATOR);
