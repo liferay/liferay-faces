@@ -13,8 +13,10 @@
  */
 package com.liferay.faces.bridge;
 
+import javax.faces.FactoryFinder;
 import javax.faces.application.ResourceHandler;
-import javax.faces.event.PhaseListener;
+import javax.faces.lifecycle.Lifecycle;
+import javax.faces.lifecycle.LifecycleFactory;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.ResourceRequest;
@@ -23,8 +25,6 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
-import com.liferay.faces.bridge.event.IPCPhaseListener;
-import com.liferay.faces.bridge.event.ManagedBeanScopePhaseListener;
 import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
@@ -39,8 +39,8 @@ public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 	private static final Logger logger = LoggerFactory.getLogger(BridgePhaseResourceImpl.class);
 
 	// Private Data Members
-	ResourceRequest resourceRequest;
-	ResourceResponse resourceResponse;
+	private ResourceRequest resourceRequest;
+	private ResourceResponse resourceResponse;
 
 	public BridgePhaseResourceImpl(ResourceRequest resourceRequest, ResourceResponse resourceResponse,
 		PortletConfig portletConfig) {
@@ -56,7 +56,14 @@ public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 
 		try {
 
-			init(resourceRequest, resourceResponse, Bridge.PortletPhase.RESOURCE_PHASE);
+			// Get the JSF lifecycle instance that is designed to be used with the RESOURCE_PHASE of the portlet
+			// lifecycle.
+			LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
+					FactoryFinder.LIFECYCLE_FACTORY);
+			Lifecycle resourcePhaseFacesLifecycle = lifecycleFactory.getLifecycle(Bridge.PortletPhase.RESOURCE_PHASE
+					.name());
+
+			init(resourceRequest, resourceResponse, Bridge.PortletPhase.RESOURCE_PHASE, resourcePhaseFacesLifecycle);
 
 			// If the Faces resource handler indicates that this is a request for an image/javascript/css type of
 			// resource, then
@@ -100,25 +107,12 @@ public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 				String viewId = bridgeContext.getFacesViewId();
 				logger.debug("Running Faces lifecycle for viewId=[{0}]", viewId);
 
-				// Section 5.2.4 of the JSR 329 Spec requires that a phase listener be registered in order to
-				// handle Portlet 2.0 Public Render Parameters after the RESTORE_VIEW phase of the JSF lifecycle
-				// executes. The IPCPhaseListener satisfies this requirement.
-				PhaseListener ipcPhaseListener = new IPCPhaseListener(bridgeConfig, portletContext, portletName,
-						resourceRequest, resourceResponse);
-				facesLifecycle.addPhaseListener(ipcPhaseListener);
-				facesLifecycle.execute(facesContext);
-				facesLifecycle.removePhaseListener(ipcPhaseListener);
+				// Execute the JSF lifecycle.
+				resourcePhaseFacesLifecycle.execute(facesContext);
 
 				// Also execute the RENDER_RESPONSE phase of the Faces lifecycle, which will ultimately return a
 				// DOM-update back to the jsf.js Javascript code that issued the XmlHttpRequest in the first place.
-				// Note that we need to add the ManagedBeanScopePhaseListener so that after the RENDER_RESPONSE
-				// phase, the managed-beans in request scope will go out-of-scope which will in turn cause any
-				// annotated PreDestroy methods to be called. Note that there is no concept of "bridgeRequestScope"
-				// in a ResourceRequest, so we refer to it as plain-old "request" scope.
-				PhaseListener managedBeanScopePhaseListener = new ManagedBeanScopePhaseListener();
-				facesLifecycle.addPhaseListener(managedBeanScopePhaseListener);
-				facesLifecycle.render(facesContext);
-				facesLifecycle.removePhaseListener(managedBeanScopePhaseListener);
+				resourcePhaseFacesLifecycle.render(facesContext);
 
 				// Spec 6.6 (Namespacing)
 				indicateNamespacingToConsumers(facesContext.getViewRoot(), resourceResponse);
@@ -133,5 +127,4 @@ public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 
 		logger.debug(Logger.SEPARATOR);
 	}
-
 }

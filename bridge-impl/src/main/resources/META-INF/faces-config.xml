@@ -75,6 +75,7 @@
 		<application-factory>com.liferay.faces.bridge.application.ApplicationFactoryImpl</application-factory>
 		<exception-handler-factory>com.liferay.faces.bridge.context.ExceptionHandlerFactoryImpl</exception-handler-factory>
 		<external-context-factory>com.liferay.faces.bridge.context.ExternalContextFactoryImpl</external-context-factory>
+		<lifecycle-factory>com.liferay.faces.bridge.lifecycle.LifecycleFactoryImpl</lifecycle-factory>
 		<view-declaration-language-factory>com.liferay.faces.bridge.application.view.ViewDeclarationLanguageFactoryImpl</view-declaration-language-factory>
 		<factory-extension>
 			<bridge:bridge-context-factory>com.liferay.faces.bridge.context.BridgeContextFactoryImpl</bridge:bridge-context-factory>

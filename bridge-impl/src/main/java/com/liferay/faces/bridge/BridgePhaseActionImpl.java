@@ -13,7 +13,9 @@
  */
 package com.liferay.faces.bridge;
 
-import javax.faces.event.PhaseListener;
+import javax.faces.FactoryFinder;
+import javax.faces.lifecycle.Lifecycle;
+import javax.faces.lifecycle.LifecycleFactory;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
@@ -23,7 +25,6 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
-import com.liferay.faces.bridge.event.IPCPhaseListener;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 
@@ -54,7 +55,14 @@ public class BridgePhaseActionImpl extends BridgePhaseBaseImpl {
 
 		try {
 
-			init(actionRequest, actionResponse, Bridge.PortletPhase.ACTION_PHASE);
+			// Get the JSF lifecycle instance that is designed to be used with the ACTION_PHASE of the portlet
+			// lifecycle.
+			LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
+					FactoryFinder.LIFECYCLE_FACTORY);
+			Lifecycle actionPhaseFacesLifecycle = lifecycleFactory.getLifecycle(Bridge.PortletPhase.ACTION_PHASE
+					.name());
+
+			init(actionRequest, actionResponse, Bridge.PortletPhase.ACTION_PHASE, actionPhaseFacesLifecycle);
 
 			// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-202
 			bridgeRequestScope.setPortletMode(actionRequest.getPortletMode());
@@ -74,15 +82,9 @@ public class BridgePhaseActionImpl extends BridgePhaseBaseImpl {
 				}
 			}
 
-			// Execute all the phases of the JSF lifecycle except for RENDER_RESPONSE since that can only be
-			// executed during the RENDER_PHASE of the portlet lifecycle. Section 5.2.4 of the JSR 329 Spec requires
-			// that a phase listener be registered in order to handle Portlet 2.0 Public Render Parameters after the
-			// RESTORE_VIEW phase of the JSF lifecycle executes. The IPCPhaseListener satisfies this requirement.
-			PhaseListener ipcPhaseListener = new IPCPhaseListener(bridgeConfig, portletContext, portletName,
-					actionRequest, actionResponse);
-			facesLifecycle.addPhaseListener(ipcPhaseListener);
-			facesLifecycle.execute(facesContext);
-			facesLifecycle.removePhaseListener(ipcPhaseListener);
+			// Execute all the phases of the JSF lifecycle except for RENDER_RESPONSE since that can only be executed
+			// during the RENDER_PHASE of the portlet lifecycle.
+			actionPhaseFacesLifecycle.execute(facesContext);
 
 			// Save the faces view root and any messages in the faces context so that they can be restored during
 			// the RENDER_PHASE of the portlet lifecycle.
