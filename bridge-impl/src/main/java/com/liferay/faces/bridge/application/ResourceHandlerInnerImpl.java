@@ -63,6 +63,7 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 	private static final String ENCODED_RESOURCE_TOKEN = "javax.faces.resource=";
 	private static final String EXTENSION_CSS = ".css";
 	private static final String ORG_RICHFACES_IMAGES = "org.richfaces.images";
+	private static final String PACKED_JS = "packed.js";
 	private static final String RICHFACES_STATIC_RESOURCE = "org.richfaces.staticResource";
 
 	// FACES-1214
@@ -320,6 +321,31 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 							}
 						}
 
+						// If this is a RichFaces static resource, then
+						if (resourceName.startsWith(RICHFACES_STATIC_RESOURCE)) {
+
+							// If this is a RichFaces CSS resource like packed.css or skinning.css, then fix the URLs
+							// inside of the CSS text before sending it back as part of the response. For more info, see
+							// http://issues.liferay.com/browse/FACES-1214
+							if (resourceName.indexOf(EXTENSION_CSS) > 0) {
+
+								String cssText = fixRichFacesImageURLs(facesContext, byteArrayOutputStream.toString());
+								responseContentLength = cssText.length();
+								byteArrayOutputStream = new ByteArrayOutputStream();
+								byteArrayOutputStream.write(cssText.getBytes());
+							}
+
+							// Otherwise, if this is the packed.js JavaScript resource, then fix the JS code so that
+							// rich:fileUpload will work.
+							else if (resourceName.indexOf(PACKED_JS) >= 0) {
+								String javaScriptText = fixRichFacesFileUpload(facesContext,
+										byteArrayOutputStream.toString());
+								responseContentLength = javaScriptText.length();
+								byteArrayOutputStream = new ByteArrayOutputStream();
+								byteArrayOutputStream.write(javaScriptText.getBytes());
+							}
+						}
+
 						// Now that we know how big the file is, set the response Content-Length header and the status.
 						externalContext.setResponseContentLength(responseContentLength);
 						externalContext.setResponseStatus(HttpServletResponse.SC_OK);
@@ -335,26 +361,9 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 								Integer.toString(responseContentLength));
 						}
 
-						// If this is a RichFaces CSS resource like packed.css or skinning.css, then fix the URLs
-						// inside of the CSS text before sending it back as part of the response. For more info, see
-						// http://issues.liferay.com/browse/FACES-1214
-						if (resourceName.startsWith(RICHFACES_STATIC_RESOURCE) &&
-								(resourceName.indexOf(EXTENSION_CSS) > 0)) {
-
-							String cssText = fixRichFacesImageURLs(facesContext, byteArrayOutputStream.toString());
-							byteArrayOutputStream = new ByteArrayOutputStream();
-							byteArrayOutputStream.write(cssText.getBytes());
-						}
-
-						if (resourceName.indexOf("packed.js") >= 0) {
-							String javaScriptText = fixRichFacesFileUpload(facesContext,
-									byteArrayOutputStream.toString());
-							byteArrayOutputStream = new ByteArrayOutputStream();
-							byteArrayOutputStream.write(javaScriptText.getBytes());
-						}
-
 						// Write the data to the response.
 						byteArrayOutputStream.writeTo(externalContext.getResponseOutputStream());
+						byteArrayOutputStream.flush();
 						byteArrayOutputStream.close();
 
 						if (logger.isDebugEnabled()) {
@@ -406,6 +415,7 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 						"HANDLED (SC_NOT_MODIFIED) resourceName=[{0}], libraryName[{1}], locale=[{2}], version=[{3}]",
 						new Object[] { resourceName, libraryName, locale, version });
 				}
+
 			}
 		}
 		else {
