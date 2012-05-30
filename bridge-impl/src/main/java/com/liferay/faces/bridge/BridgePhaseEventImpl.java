@@ -13,8 +13,10 @@
  */
 package com.liferay.faces.bridge;
 
+import javax.faces.FactoryFinder;
 import javax.faces.application.NavigationHandler;
-import javax.faces.event.PhaseListener;
+import javax.faces.lifecycle.Lifecycle;
+import javax.faces.lifecycle.LifecycleFactory;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.PortletConfig;
@@ -24,7 +26,6 @@ import javax.portlet.faces.BridgeEventHandler;
 import javax.portlet.faces.BridgeException;
 import javax.portlet.faces.event.EventNavigationResult;
 
-import com.liferay.faces.bridge.event.IPCPhaseListener;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 
@@ -54,21 +55,20 @@ public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
 
 		try {
 
-			init(eventRequest, eventResponse, Bridge.PortletPhase.EVENT_PHASE);
+			// Get the JSF lifecycle instance that is designed to be used with the EVENT_PHASE of the portlet
+			// lifecycle.
+			LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
+					FactoryFinder.LIFECYCLE_FACTORY);
+			Lifecycle eventPhaseFacesLifecycle = lifecycleFactory.getLifecycle(Bridge.PortletPhase.EVENT_PHASE.name());
+
+			init(eventRequest, eventResponse, Bridge.PortletPhase.EVENT_PHASE, eventPhaseFacesLifecycle);
 
 			// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-202
 			bridgeRequestScope.setPortletMode(eventRequest.getPortletMode());
 
-			// Execute the JSF lifecycle so that the RESTORE_VIEW phase executes. Section 5.2.5 of the JSR 329 Spec
-			// requires that there be a phase listener registered that has the ability to short-circuit the JSF
-			// lifecycle. Section 5.3.3 requires that there be a phase listener registered that processes outgoing
-			// Public Render Parameters during the ACTION_PHASE and RENDER_PHASE of the portlet lifecycle. Both
-			// of these requirements are handled by the IPCPhaseListener.
-			PhaseListener ipcPhaseListener = new IPCPhaseListener(bridgeConfig, portletContext, portletName,
-					eventRequest, eventResponse);
-			facesLifecycle.addPhaseListener(ipcPhaseListener);
-			facesLifecycle.execute(facesContext);
-			facesLifecycle.removePhaseListener(ipcPhaseListener);
+			// Execute the JSF lifecycle so that ONLY the RESTORE_VIEW phase executes (this is a feature of the
+			// lifecycle implementation for the EVENT_PHASE of the portlet lifecycle).
+			eventPhaseFacesLifecycle.execute(facesContext);
 
 			// If there is a bridgeEventHandler registered in portlet.xml, then invoke the handler so that it
 			// can process the event payload.

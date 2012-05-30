@@ -19,8 +19,6 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.context.FacesContextFactory;
 import javax.faces.lifecycle.Lifecycle;
-import javax.faces.lifecycle.LifecycleFactory;
-import javax.faces.webapp.FacesServlet;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
@@ -53,14 +51,12 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 	protected BridgeContextFactory bridgeContextFactory;
 	protected BridgeRequestScope bridgeRequestScope = null;
 	protected FacesContext facesContext = null;
-	protected Lifecycle facesLifecycle;
 	protected PortletConfig portletConfig;
 	protected PortletContext portletContext;
 	protected String portletName;
 
 	// Private Data Members
 	private FacesContextFactory facesContextFactory;
-	private String facesLifecycleId;
 	private String pathInfo;
 	private String servletPath;
 
@@ -95,7 +91,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 				portletRequest.setAttribute(BridgeConstants.REQ_ATTR_PATH_INFO, pathInfo);
 				portletRequest.setAttribute(BridgeConstants.REQ_ATTR_SERVLET_PATH, servletPath);
 			}
-			
+
 			bridgeContext.release();
 		}
 
@@ -125,7 +121,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 
 	@SuppressWarnings("deprecation")
 	protected void init(PortletRequest portletRequest, PortletResponse portletResponse,
-		Bridge.PortletPhase portletPhase) {
+		Bridge.PortletPhase portletPhase, Lifecycle lifecycle) {
 
 		// Null check required by the TCK.
 		if (portletRequest == null) {
@@ -146,13 +142,11 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 				portletRequest, portletResponse, portletPhase);
 		bridgeRequestScope = bridgeContext.getBridgeRequestScope();
 
-		// Save the BridgeContext as a request attribute so that it can be picked up by the
-		// ExternalContextImpl during construction, which will happen as a consequence of getting the
-		// FacesContext below.
+		// Save the BridgeContext as a request attribute for legacy versions of ICEfaces.
 		portletRequest.setAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE, bridgeContext);
 
 		// Get the FacesContext.
-		facesContext = getFacesContext(portletRequest, portletResponse);
+		facesContext = getFacesContext(portletRequest, portletResponse, lifecycle);
 
 		// Some portlet containers (like the one provided by Liferay Portal) uses a servlet dispatcher when executing
 		// the portlet lifecycle. This approach requires the portal to save some standard Servlet-API request attributes
@@ -181,10 +175,9 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		}
 	}
 
-	protected FacesContext getFacesContext(PortletRequest portletRequest, PortletResponse portletResponse)
-		throws FacesException {
-		return getFacesContextFactory().getFacesContext(portletContext, portletRequest, portletResponse,
-				getFacesLifecycle());
+	protected FacesContext getFacesContext(PortletRequest portletRequest, PortletResponse portletResponse,
+		Lifecycle lifecycle) throws FacesException {
+		return getFacesContextFactory().getFacesContext(portletContext, portletRequest, portletResponse, lifecycle);
 	}
 
 	protected FacesContextFactory getFacesContextFactory() throws FacesException {
@@ -194,29 +187,5 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		}
 
 		return facesContextFactory;
-	}
-
-	protected Lifecycle getFacesLifecycle() throws FacesException {
-
-		if (facesLifecycle == null) {
-			LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
-					FactoryFinder.LIFECYCLE_FACTORY);
-			facesLifecycle = lifecycleFactory.getLifecycle(getFacesLifecycleId());
-		}
-
-		return facesLifecycle;
-	}
-
-	protected String getFacesLifecycleId() {
-
-		if (facesLifecycleId == null) {
-			facesLifecycleId = portletContext.getInitParameter(FacesServlet.LIFECYCLE_ID_ATTR);
-
-			if (facesLifecycleId == null) {
-				facesLifecycleId = LifecycleFactory.DEFAULT_LIFECYCLE;
-			}
-		}
-
-		return facesLifecycleId;
 	}
 }

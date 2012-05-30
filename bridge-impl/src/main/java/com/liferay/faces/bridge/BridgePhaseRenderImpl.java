@@ -16,13 +16,15 @@ package com.liferay.faces.bridge;
 import java.io.IOException;
 import java.io.Writer;
 
+import javax.faces.FactoryFinder;
 import javax.faces.application.NavigationHandler;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.ExternalContextWrapper;
 import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseListener;
+import javax.faces.lifecycle.Lifecycle;
+import javax.faces.lifecycle.LifecycleFactory;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletSession;
@@ -39,9 +41,6 @@ import com.liferay.faces.bridge.context.ExternalContextImpl;
 import com.liferay.faces.bridge.context.RenderRedirectWriter;
 import com.liferay.faces.bridge.context.flash.BridgeFlash;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
-import com.liferay.faces.bridge.event.IPCPhaseListener;
-import com.liferay.faces.bridge.event.ManagedBeanScopePhaseListener;
-import com.liferay.faces.bridge.event.RenderRequestPhaseListener;
 import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityManager;
 import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityMap;
@@ -112,7 +111,13 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 	protected void execute(BridgeRedirectURL renderRedirectURL) throws BridgeDefaultViewNotSpecifiedException,
 		BridgeException, IOException {
 
-		init(renderRequest, renderResponse, Bridge.PortletPhase.RENDER_PHASE);
+		// Get the JSF lifecycle instance that is designed to be used with the RENDER_PHASE of the portlet
+		// lifecycle.
+		LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
+				FactoryFinder.LIFECYCLE_FACTORY);
+		Lifecycle renderPhaseFacesLifecycle = lifecycleFactory.getLifecycle(Bridge.PortletPhase.RENDER_PHASE.name());
+
+		init(renderRequest, renderResponse, Bridge.PortletPhase.RENDER_PHASE, renderPhaseFacesLifecycle);
 
 		// String[] testPRP = renderRequest.getPublicParameterMap().get("testPRP");
 		// String modelPRP = (String) renderRequest.getAttribute("modelPRP");
@@ -192,22 +197,8 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 
 		if (!facesLifecycleAlreadyExecuted) {
 
-			// Section 5.2.6 of the JSR 329 Spec requires that a phase listener be registered in order to
-			// handle Portlet 2.0 Public Render Parameters after the RESTORE_VIEW phase of the JSF lifecycle
-			// executes. The IPCPhaseListener satisfies this requirement.
-			PhaseListener ipcPhaseListener = new IPCPhaseListener(bridgeConfig, portletContext, portletName,
-					renderRequest, renderResponse);
-
-			// Section 5.2.6 also indicates that the bridge must proactively ensure that only the
-			// RESTORE_VIEW phase executes, and Section 6.4 indicates that a PhaseListener must be used. The
-			// RenderRequestPhaseListener satisfies this requirement.
-			PhaseListener renderRequestPhaseListener = new RenderRequestPhaseListener();
-
-			// Add the phase listeners to the Faces lifecycle.
-			facesLifecycle.addPhaseListener(ipcPhaseListener);
-			facesLifecycle.addPhaseListener(renderRequestPhaseListener);
-
-			// Execute the Faces lifecycle.
+			// Execute the JSF lifecycle so that ONLY the RESTORE_VIEW phase executes (this is a feature of the
+			// lifecycle implementation for the RENDER_PHASE of the portlet lifecycle).
 			try {
 				String viewId = bridgeContext.getFacesViewId();
 				logger.debug("Executing Faces lifecycle for viewId=[{0}]", viewId);
@@ -217,11 +208,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 				throw e;
 			}
 
-			facesLifecycle.execute(facesContext);
-
-			// Remove the phase listeners from the Faces lifecycle.
-			facesLifecycle.removePhaseListener(ipcPhaseListener);
-			facesLifecycle.removePhaseListener(renderRequestPhaseListener);
+			renderPhaseFacesLifecycle.execute(facesContext);
 		}
 
 		// If the PortletMode has changed, then switch to the appropriate PortletMode and navigate to the
@@ -244,15 +231,9 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 				lifecycleIncongruityMap, manageIncongruities);
 		lifecycleIncongruityManager.makeCongruous(externalContext);
 
-		// Execute the RENDER_RESPONSE phase of the faces lifecycle. Note that we need to add the
-		// ManagedBeanScopePhaseListener so that after the RENDER_RESPONSE phase, the managed-beans in
-		// bridgeRequestScope will go out-of-scope which will in turn cause any annotated PreDestroy methods
-		// to be called.
-		PhaseListener managedBeanScopePhaseListener = new ManagedBeanScopePhaseListener();
-		facesLifecycle.addPhaseListener(managedBeanScopePhaseListener);
+		// Execute the RENDER_RESPONSE phase of the faces lifecycle.
 		logger.debug("Executing Faces render");
-		facesLifecycle.render(facesContext);
-		facesLifecycle.removePhaseListener(managedBeanScopePhaseListener);
+		renderPhaseFacesLifecycle.render(facesContext);
 
 		// Set the view history according to Section 5.4.3 of the Bridge Spec.
 		setViewHistory(facesContext.getViewRoot().getViewId());
