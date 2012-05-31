@@ -90,18 +90,23 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 				throw new BridgeException(t);
 			}
 			finally {
-
-				// If required, cause the BridgeRequestScope to go out-of-scope.
-				if (!bridgeContext.isBridgeRequestScopePreserved()) {
-					bridgeContext.getBridgeRequestScopeManager().removeBridgeRequestScope(bridgeRequestScope,
-						portletContext);
-				}
-
 				cleanup();
 			}
 
 			logger.debug(Logger.SEPARATOR);
 		}
+	}
+
+	@Override
+	protected void cleanup() {
+
+		// If required, cause the BridgeRequestScope to go out-of-scope.
+		if ((bridgeContext != null) && !bridgeContext.isBridgeRequestScopePreserved()) {
+			bridgeContext.getBridgeRequestScopeManager().removeBridgeRequestScope(bridgeRequestScope,
+				portletContext);
+		}
+
+		super.cleanup();
 	}
 
 	protected void doFacesHeaders(RenderRequest renderRequest, RenderResponse renderResponse) {
