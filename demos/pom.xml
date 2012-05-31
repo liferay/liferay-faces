@@ -67,62 +67,7 @@
 				</dependency>
 			</dependencies>
 		</profile>
-		<profile>
-			<id>liferay</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>com.liferay.maven.plugins</groupId>
-						<artifactId>liferay-maven-plugin</artifactId>
-						<version>${liferay.version}</version>
-						<configuration>
-							<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
-							<deployDir>${liferay.deploy.dir}</deployDir>
-							<liferayVersion>${liferay.version}</liferayVersion>
-						</configuration>
-					</plugin>
-					<plugin>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>clean</id>
-								<phase>clean</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-								<configuration>
-									<target>
-										<delete failonerror="false" includeemptydirs="true" verbose="true">
-											<fileset dir="${liferay.auto.deploy.dir}" includes="${project.artifactId}*.war" />
-										</delete>
-										<delete failonerror="false" includeemptydirs="true" verbose="true">
-											<fileset dir="${liferay.deploy.dir}/${project.artifactId}" />
-											<fileset dir="${liferay.deploy.dir}/${project.artifactId}.war" />
-											<fileset dir="${liferay.deploy.dir}">
-												<include name="*${project.artifactId}.war.deployed"/>
-											</fileset>
-										</delete>
-									</target>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
 	</profiles>
-
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>2.2</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
 
 	<repositories>
 		<!-- Temporarily need portletfaces repository for custom ICEfaces dependency -->
