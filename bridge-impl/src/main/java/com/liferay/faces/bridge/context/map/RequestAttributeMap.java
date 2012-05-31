@@ -19,6 +19,10 @@ import javax.faces.context.ExternalContext;
 import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.bridge.BridgeFactoryFinder;
+import com.liferay.faces.bridge.config.BridgeConfig;
+import com.liferay.faces.bridge.config.BridgeConfigFactory;
+import com.liferay.faces.bridge.config.Product;
 import com.liferay.faces.bridge.util.AbstractPropertyMap;
 import com.liferay.faces.bridge.util.AbstractPropertyMapEntry;
 import com.liferay.faces.bridge.util.ManagedBeanUtil;
@@ -28,6 +32,19 @@ import com.liferay.faces.bridge.util.ManagedBeanUtil;
  * @author  Neil Griffin
  */
 public class RequestAttributeMap extends AbstractPropertyMap<Object> {
+
+	private static final boolean FACES_1233_WORKAROUND_ENABLED;
+
+	static {
+
+		// Versions of Liferay Portal prior to 6.1 have a bug in PortletRequest.removeAttribute(String) that needs to
+		// be worked-around in this class. See: http://issues.liferay.com/browse/FACES-1233
+		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
+				BridgeConfigFactory.class);
+		BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig();
+		Product liferay = bridgeConfig.getProducts().get(BridgeConstants.LIFERAY_PORTAL);
+		FACES_1233_WORKAROUND_ENABLED = (liferay.isDetected() && (liferay.getBuildId() < 6100));
+	}
 
 	// Private Data Members
 	private PortletRequest portletRequest;
@@ -64,9 +81,9 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 	@Override
 	protected Object getProperty(String name) {
 
-		// Versions of Liferay Portal prior to 6.1 have a bug in PortletRequest.removeAttribute(String) that needs to
-		// be worked-around in this class. See: http://issues.liferay.com/browse/FACES-1233
-		if (BridgeConstants.REQ_ATTR_PATH_INFO.equals(name) || BridgeConstants.REQ_ATTR_SERVLET_PATH.equals(name)) {
+		if ((FACES_1233_WORKAROUND_ENABLED) &&
+				(BridgeConstants.REQ_ATTR_PATH_INFO.equals(name) ||
+					BridgeConstants.REQ_ATTR_SERVLET_PATH.equals(name))) {
 			return null;
 		}
 		else {
