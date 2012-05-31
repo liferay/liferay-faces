@@ -59,13 +59,13 @@ public class LifecycleFactoryImpl extends LifecycleFactory {
 		if (wrappedLifecycleClass != null) {
 
 			try {
-				addLifecycle(Bridge.PortletPhase.ACTION_PHASE.name(),
+				addLifecycleInternal(Bridge.PortletPhase.ACTION_PHASE.name(),
 					new LifecycleBridgePhaseActionImpl((Lifecycle) wrappedLifecycleClass.newInstance()));
-				addLifecycle(Bridge.PortletPhase.EVENT_PHASE.name(),
+				addLifecycleInternal(Bridge.PortletPhase.EVENT_PHASE.name(),
 					new LifecycleBridgePhaseEventImpl((Lifecycle) wrappedLifecycleClass.newInstance()));
-				addLifecycle(Bridge.PortletPhase.RENDER_PHASE.name(),
+				addLifecycleInternal(Bridge.PortletPhase.RENDER_PHASE.name(),
 					new LifecycleBridgePhaseRenderImpl((Lifecycle) wrappedLifecycleClass.newInstance()));
-				addLifecycle(Bridge.PortletPhase.RESOURCE_PHASE.name(),
+				addLifecycleInternal(Bridge.PortletPhase.RESOURCE_PHASE.name(),
 					new LifecycleBridgePhaseResourceImpl((Lifecycle) wrappedLifecycleClass.newInstance()));
 			}
 			catch (Exception e) {
@@ -77,6 +77,16 @@ public class LifecycleFactoryImpl extends LifecycleFactory {
 	@Override
 	public void addLifecycle(String lifecycleId, Lifecycle lifecycle) {
 		wrappedLifecycleFactory.addLifecycle(lifecycleId, lifecycle);
+	}
+
+	protected void addLifecycleInternal(String lifecycleId, Lifecycle lifecycle) {
+
+		try {
+			wrappedLifecycleFactory.addLifecycle(lifecycleId, lifecycle);
+		}
+		catch (IllegalArgumentException e) {
+			// ignore -- sometimes this happens on redeploy of portlet WARs
+		}
 	}
 
 	@Override
