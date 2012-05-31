@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +39,10 @@ import com.liferay.faces.bridge.model.UploadedFile;
  *
  * @author  Neil Griffin
  */
-public class UploadedFileWrapper implements UploadedFile, FacesWrapper<FileInfo> {
+public class UploadedFileWrapper implements Serializable, UploadedFile, FacesWrapper<FileInfo> {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 5356309286451276753L;
 
 	// Private Data Members
 	Map<String, Object> attributeMap;
