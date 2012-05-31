@@ -1,0 +1,27 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-cc="http://liferay.com/faces/aui-cc"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<aui:form name="f">
+		<aui:layout>
+			<aui-cc:messages globalOnly="true" layout="table" />
+			<aui:column>
+				<aui:fieldset label="${symbol_pound}{i18n['personnel-details']}">
+					<aui-cc:input inlineMessage="true" label="${symbol_pound}{i18n['first-name']}"
+						value="${symbol_pound}{welcomeModelBean.firstName}" required="true" />
+					<aui-cc:input inlineMessage="true" label="${symbol_pound}{i18n['last-name']}"
+						value="${symbol_pound}{welcomeModelBean.lastName}" required="true" />
+				</aui:fieldset>
+				<aui:button-row>
+					<h:commandButton actionListener="${symbol_pound}{welcomeBackingBean.submit}"
+						styleClass="aui-button-input aui-button-input-submit"
+						value="${symbol_pound}{i18n['submit']}" />
+				</aui:button-row>
+			</aui:column>
+		</aui:layout>
+	</aui:form>
+</ui:composition>
