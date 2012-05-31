@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>com.liferay.faces</groupId>
+		<artifactId>liferay-faces</artifactId>
+		<version>3.1.0-BETA2-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>maven</artifactId>
+	<packaging>pom</packaging>
+	<name>Liferay Faces Maven Support</name>
+	<description>Parent project for maven support Liferay faces</description>
+	<modules>
+		<module>archetypes</module>
+	</modules>
+</project>

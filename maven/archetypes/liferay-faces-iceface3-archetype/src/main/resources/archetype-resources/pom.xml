@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>${artifactId}</artifactId>
+	<packaging>war</packaging>
+	<groupId>${groupId}</groupId>
+	<version>${version}</version>
+	
+	<name>${artifactId}</name>
+	<description>${artifactId} Liferay ICEfaces3 Project</description>
+	
+	<properties>
+		<icefaces3.version>3.0.1</icefaces3.version>
+		<liferay.version>6.1.0</liferay.version>
+		<liferay.faces.version>3.1.0-BETA2-SNAPSHOT</liferay.faces.version>
+		<mojarra.version>2.1.6</mojarra.version>
+		<portlet.api.version>2.0</portlet.api.version>
+		<!-- Note: PLEASE UPDATE THE BEWLOW MENTIONED PATHS TO SUIT YOUR ENVIRONMENT -->
+		<liferay.home>C:/liferay-portal-6.1.0-ce-ga1</liferay.home>
+		<liferay.auto.deploy.dir>${liferay.home}/deploy</liferay.auto.deploy.dir>
+		<liferay.deploy.dir>${liferay.auto.deploy.dir}</liferay.deploy.dir>
+	</properties>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.liferay.maven.plugins</groupId>
+				<artifactId>liferay-maven-plugin</artifactId>
+				<version>${liferay.version}</version>
+				<configuration>
+					<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
+					<liferayVersion>${liferay.version}</liferayVersion>
+					<pluginType>portlet</pluginType>
+				</configuration>
+			</plugin>
+			<plugin>
+			    <groupId>com.liferay.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+			    <groupId>com.liferay.maven.plugins</groupId> 
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.2</version>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<dependencies>
+		
+		<!-- Liferay Portal Dependencies -->
+		<dependency>
+			<groupId>com.liferay.portal</groupId>
+			<artifactId>portal-service</artifactId>
+			<version>${liferay.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- Liferay Faces Dependencies -->
+		<dependency>
+			<groupId>com.liferay.faces</groupId>
+			<artifactId>liferay-faces-alloy</artifactId>
+			<version>${liferay.faces.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.liferay.faces</groupId>
+			<artifactId>liferay-faces-bridge-impl</artifactId>
+			<version>${liferay.faces.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.liferay.faces</groupId>
+			<artifactId>liferay-faces-portal</artifactId>
+			<version>${liferay.faces.version}</version>
+		</dependency>
+
+		<!-- JSF implementation -->
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>${mojarra.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>${mojarra.version}</version>
+		</dependency>
+
+		<!-- ICEfaces Dependencies -->
+		<dependency>
+			<groupId>org.icefaces</groupId>
+			<artifactId>icefaces</artifactId>
+			<version>${icefaces3.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.icefaces</groupId>
+			<artifactId>icefaces-compat</artifactId>
+			<version>${icefaces3.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.icefaces</groupId>
+			<artifactId>icepush</artifactId>
+			<version>${icefaces3.version}</version>
+		</dependency>
+
+		<!-- Portlet Dependencies -->
+		<dependency>
+			<groupId>javax.portlet</groupId>
+			<artifactId>portlet-api</artifactId>
+			<version>${portlet.api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- Servlet/JSP API -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jboss.seam</groupId>
+			<artifactId>jboss-el</artifactId>
+			<version>2.0.0.GA</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.el</groupId>
+					<artifactId>el-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>jsr250-api</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
+	</dependencies>
+	
+</project>
