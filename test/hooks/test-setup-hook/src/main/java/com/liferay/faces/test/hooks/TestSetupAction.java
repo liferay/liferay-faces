@@ -90,7 +90,7 @@ public class TestSetupAction extends SimpleAction {
 		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 
 		for (PortalPage portalPage : PORTAL_PAGES) {
-			String defaultSiteName = PropsUtil.get(PropsKeys.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
+			String defaultSiteName = PropsUtil.get(PropsKeys.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME);
 			long groupId = GroupLocalServiceUtil.getGroup(companyId, defaultSiteName).getGroupId();
 			setupPage(company.getDefaultUser().getUserId(), groupId, portalPage);
 		}
