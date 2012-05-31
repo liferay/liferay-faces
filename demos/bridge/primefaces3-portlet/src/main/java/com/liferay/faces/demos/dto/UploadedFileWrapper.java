@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +36,11 @@ import com.liferay.faces.bridge.renderkit.primefaces.FileUploadRendererPrimeFace
 /**
  * @author  Neil Griffin
  */
-public class UploadedFileWrapper implements UploadedFile, FacesWrapper<org.primefaces.model.UploadedFile> {
+public class UploadedFileWrapper implements Serializable, UploadedFile,
+	FacesWrapper<org.primefaces.model.UploadedFile> {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 5347502272011734546L;
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(UploadedFileWrapper.class);

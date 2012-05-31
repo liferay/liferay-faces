@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +35,10 @@ import com.liferay.faces.bridge.model.UploadedFile;
 /**
  * @author  Neil Griffin
  */
-public class UploadedFileWrapper implements UploadedFile, FacesWrapper<org.richfaces.model.UploadedFile> {
+public class UploadedFileWrapper implements Serializable, UploadedFile, FacesWrapper<org.richfaces.model.UploadedFile> {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 1396113323129362295L;
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(UploadedFileWrapper.class);
@@ -60,6 +64,7 @@ public class UploadedFileWrapper implements UploadedFile, FacesWrapper<org.richf
 	}
 
 	public void delete() throws IOException {
+
 		if (file != null) {
 			file.delete();
 		}
@@ -126,7 +131,7 @@ public class UploadedFileWrapper implements UploadedFile, FacesWrapper<org.richf
 			OutputStream outputStream = new FileOutputStream(file);
 			outputStream.write(wrappedUploadedFile.getData());
 			outputStream.close();
-			
+
 			// Delete the file maintained by RichFaces now that a copy of it has been made.
 			wrappedUploadedFile.delete();
 		}
