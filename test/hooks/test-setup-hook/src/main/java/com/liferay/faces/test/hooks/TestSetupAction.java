@@ -62,11 +62,12 @@ public class TestSetupAction extends SimpleAction {
 				}));
 		PORTAL_PAGES.add(new PortalPage("ICE3", "1_WAR_icefaces3portlet_INSTANCE_"));
 		PORTAL_PAGES.add(new PortalPage("ICE3-COMPAT", "1_WAR_icefaces3compatportlet_INSTANCE_"));
-		PORTAL_PAGES.add(new PortalPage("ICE3-CRUD", "1_WAR_icefaces3crudportlet_INSTANCE_"));
-		PORTAL_PAGES.add(new PortalPage("ICE3-PUSH", "1_WAR_icefaces3ipcajaxpushportlet_INSTANCE_"));
 		PORTAL_PAGES.add(new PortalPage("ICE3-CHAT", "1_WAR_icefaces3chatportlet_INSTANCE_"));
+		PORTAL_PAGES.add(new PortalPage("ICE3-CRUD", "1_WAR_icefaces3crudportlet_INSTANCE_"));
 		PORTAL_PAGES.add(new PortalPage("ICE3-DIR", "1_WAR_icefaces3directoryportlet_INSTANCE_"));
-		PORTAL_PAGES.add(new PortalPage("ICE3-DIR", "1_WAR_icefaces3documentsportlet_INSTANCE_"));
+		PORTAL_PAGES.add(new PortalPage("ICE3-DOC", "1_WAR_icefaces3documentsportlet_INSTANCE_"));
+		PORTAL_PAGES.add(new PortalPage("ICE3-IPC",
+				new String[] { "1_WAR_icefaces3ipcajaxpushportlet", "2_WAR_icefaces3ipcajaxpushportlet" }));
 		PORTAL_PAGES.add(new PortalPage("PRIME3", "1_WAR_primefaces3portlet_INSTANCE_"));
 		PORTAL_PAGES.add(new PortalPage("RICH4", "1_WAR_richfaces4portlet_INSTANCE_"));
 	}
