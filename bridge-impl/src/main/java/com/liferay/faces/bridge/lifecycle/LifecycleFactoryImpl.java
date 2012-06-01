@@ -91,7 +91,16 @@ public class LifecycleFactoryImpl extends LifecycleFactory {
 
 	@Override
 	public Lifecycle getLifecycle(String lifecycleId) {
-		return wrappedLifecycleFactory.getLifecycle(lifecycleId);
+		Lifecycle lifecycle = wrappedLifecycleFactory.getLifecycle(lifecycleId);
+
+		if (LifecycleFactory.DEFAULT_LIFECYCLE.equals(lifecycleId)) {
+
+			// Workaround bugs in 3rd party component suites that assume there is only one lifecycleId
+			// See: http://issues.liferay.com/browse/FACES-1259
+			lifecycle = new LifecycleListenerImpl(lifecycle);
+		}
+
+		return lifecycle;
 	}
 
 	@Override
