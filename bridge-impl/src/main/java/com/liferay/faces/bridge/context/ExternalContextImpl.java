@@ -31,6 +31,7 @@ import java.util.Set;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
+import javax.portlet.ActionResponse;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletContext;
@@ -983,7 +984,18 @@ public class ExternalContextImpl extends ExternalContext {
 			return characterEncoding;
 		}
 		else {
-			return lifecycleIncongruityMap.getResponseCharacterEncoding();
+			if (manageIncongruities) {
+				return lifecycleIncongruityMap.getResponseCharacterEncoding();
+			}
+			else {
+				if (portletResponse instanceof ActionResponse) {
+					// TestPage169: getResponseCharacterEncodingActionTest
+					throw new IllegalStateException();
+				}
+				else {
+					return null;
+				}
+			}
 		}
 	}
 
