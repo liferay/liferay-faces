@@ -47,6 +47,8 @@ import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
+import com.liferay.faces.bridge.config.BridgeConfigFactory;
+import com.liferay.faces.bridge.config.Product;
 import com.liferay.faces.bridge.config.ServletMapping;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
@@ -77,6 +79,17 @@ public class BridgeContextImpl extends BridgeContext {
 
 	// Private Constants
 	private static final String NON_NUMERIC_NAMESPACE_PREFIX = "A";
+
+	private static final boolean LPS_3184_WORKAROUND_ENABLED;
+
+	static {
+
+		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
+				BridgeConfigFactory.class);
+		BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig();
+		Product liferay = bridgeConfig.getProducts().get(BridgeConstants.LIFERAY_PORTAL);
+		LPS_3184_WORKAROUND_ENABLED = liferay.isDetected();
+	}
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeContextImpl.class);
@@ -146,7 +159,7 @@ public class BridgeContextImpl extends BridgeContext {
 		PortletContainerFactory portletContainerFactory = (PortletContainerFactory) BridgeFactoryFinder.getFactory(
 				PortletContainerFactory.class);
 		this.portletContainer = portletContainerFactory.getPortletContainer(this);
-		
+
 		setCurrentInstance(this);
 	}
 
@@ -1162,16 +1175,13 @@ public class BridgeContextImpl extends BridgeContext {
 				}
 			}
 
-			if (!addedNamespacePrefix) {
+			if (!addedNamespacePrefix && (LPS_3184_WORKAROUND_ENABLED)) {
 
-				// TODO: This should be refactored to the PortletResponseAdapter#getNamespace() method and only done for
-				// Liferay.
-				//
 				// Note that unless we prepend the responseNamespace with some string, Liferay's
 				// PortletRequestImpl.init(HttpServletRequest, Portlet, InvokerPortlet, PortletContext, WindowState,
 				// PortletMode, PortletPreferences, long) method will remove the namespace that
 				// PortletNamingContainerUIViewRoot adds to request parameters. For more information refer to:
-				// http://issues.liferay.com/browse/LPS-3082 and http://issues.liferay.com/browse/LPS-3184
+				// http://issues.liferay.com/browse/LPS-3184
 				responseNamespace = NON_NUMERIC_NAMESPACE_PREFIX + responseNamespace;
 			}
 
