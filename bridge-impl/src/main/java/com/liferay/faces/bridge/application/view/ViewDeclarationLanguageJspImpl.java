@@ -63,7 +63,7 @@ public class ViewDeclarationLanguageJspImpl extends ViewDeclarationLanguageWrapp
 
 		// This code is required by the spec in order to support a JSR 301 legacy feature to support usage of a
 		// servlet filter to capture the AFTER_VIEW_CONTENT. In reality it will likely never be used.
-		Map<Object, Object> attributes = facesContext.getAttributes();
+		Map<String, Object> attributes = facesContext.getExternalContext().getRequestMap();
 		attributes.put(Bridge.RENDER_CONTENT_AFTER_VIEW, Boolean.TRUE);
 		super.renderView(facesContext, uiViewRoot);
 		attributes.remove(Bridge.RENDER_CONTENT_AFTER_VIEW);
