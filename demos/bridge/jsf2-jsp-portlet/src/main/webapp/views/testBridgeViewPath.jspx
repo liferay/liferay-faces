@@ -2,6 +2,7 @@
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core" version="2.1">
 
+	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
 	<f:view>
 		<h:panelGrid columns="2">
 			<h:outputLabel for="requestParameterName" value="Request Parameter Name:" />

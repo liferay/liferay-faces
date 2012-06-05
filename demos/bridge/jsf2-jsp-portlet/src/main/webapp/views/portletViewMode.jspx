@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jsp:root xmlns:aui="http://liferay.com/faces/aui" xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:portlet="http://java.sun.com/portlet" version="2.1">
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:portlet="http://java.sun.com/portlet"  version="2.1">
 
+	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
 	<p>This text should appear BEFORE f:view</p>
 	<f:view>
 		<f:subview id="head">
