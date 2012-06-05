@@ -218,6 +218,11 @@ public class BridgeContextMockImpl extends BridgeContext {
 		return null;
 	}
 
+	@Override
+	public void setProcessingAfterViewContent(boolean processingAfterViewContent) {
+		throw new UnsupportedOperationException();
+	}
+
 	public void setRenderRedirect(boolean renderRedirect) {
 		throw new UnsupportedOperationException();
 	}
@@ -297,6 +302,11 @@ public class BridgeContextMockImpl extends BridgeContext {
 
 	@Override
 	public void setSavedViewState(String savedViewState) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isProcessingAfterViewContent() {
 		throw new UnsupportedOperationException();
 	}
 

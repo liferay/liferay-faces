@@ -21,6 +21,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewDeclarationLanguage;
 import javax.portlet.faces.Bridge;
 
+import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 
@@ -43,17 +44,18 @@ public class ViewDeclarationLanguageJspImpl extends ViewDeclarationLanguageWrapp
 	@Override
 	public void buildView(FacesContext facesContext, UIViewRoot uiViewRoot) throws IOException {
 
-		// Set an attribute on the FacesContext that will be picked up by ExternalContextImpl#getResponse() as a flag
-		// indicating that the JSP AFTER_VIEW_CONTENT feature needs to be activated.
-		facesContext.getAttributes().put(Bridge.AFTER_VIEW_CONTENT, Boolean.TRUE);
+		// Set a flag on the BridgeContenxt that will be picked up by ExternalContextImpl#getResponse()
+		// indicating that JSP AFTER_VIEW_CONTENT processing has been activated.
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+		bridgeContext.setProcessingAfterViewContent(true);
 
 		logger.debug("Activated JSP AFTER_VIEW_CONTENT feature");
 
 		// Have the wrapped VDL build the view.
 		super.buildView(facesContext, uiViewRoot);
 
-		// Remove the attribute now that the JSP AFTER_VIEW_CONTENT feature is to be deactivated.
-		facesContext.getAttributes().remove(Bridge.AFTER_VIEW_CONTENT);
+		// Indicate that JSP AFTER_VIEW_CONTENT processing has been de-activated.
+		bridgeContext.setProcessingAfterViewContent(false);
 
 		logger.debug("De-activated JSP AFTER_VIEW_CONTENT");
 	}
@@ -67,6 +69,22 @@ public class ViewDeclarationLanguageJspImpl extends ViewDeclarationLanguageWrapp
 		attributes.put(Bridge.RENDER_CONTENT_AFTER_VIEW, Boolean.TRUE);
 		super.renderView(facesContext, uiViewRoot);
 		attributes.remove(Bridge.RENDER_CONTENT_AFTER_VIEW);
+
+		// TCK TestPage201: renderContentAfterViewTest
+		Object afterViewContent = facesContext.getExternalContext().getRequestMap().get(Bridge.AFTER_VIEW_CONTENT);
+
+		if (afterViewContent != null) {
+
+			if (afterViewContent instanceof char[]) {
+				facesContext.getResponseWriter().write((char[]) afterViewContent);
+			}
+			else if (afterViewContent instanceof byte[]) {
+				facesContext.getResponseWriter().write(new String((byte[]) afterViewContent));
+			}
+			else {
+				logger.error("Invalid type for {0}={1}", Bridge.AFTER_VIEW_CONTENT, afterViewContent.getClass());
+			}
+		}
 	}
 
 	@Override
