@@ -294,6 +294,13 @@ public abstract class BridgeContext {
 	public abstract Map<String, String[]> getPreservedActionParams();
 
 	/**
+	 * Sets the flag indicating whether or not the bridge is processing {@link Bridge#AFTER_VIEW_CONTENT}.
+	 *
+	 * @param  processingAfterViewContent  <code>true</code> if processing, otherwise <code>false</code>.
+	 */
+	public abstract void setProcessingAfterViewContent(boolean processingAfterViewContent);
+
+	/**
 	 * Sets a flag indicating whether or not a render-redirect has occurred after dispatching to a JSP.
 	 */
 	public abstract void setRenderRedirectAfterDispatch(boolean renderRedirectAfterDispatch);
@@ -356,6 +363,13 @@ public abstract class BridgeContext {
 	 * @param  savedViewState  The saved view state.
 	 */
 	public abstract void setSavedViewState(String savedViewState);
+
+	/**
+	 * Flag indicating whether or not the bridge is processing {@link Bridge#AFTER_VIEW_CONTENT}.
+	 *
+	 * @return  <code>true</code> if processing, otherwise <code>false</code>
+	 */
+	public abstract boolean isProcessingAfterViewContent();
 
 	/**
 	 * Returns the flag indicating whether or not a render redirect occurred.

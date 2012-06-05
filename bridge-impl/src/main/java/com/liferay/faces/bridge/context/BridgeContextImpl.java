@@ -113,6 +113,7 @@ public class BridgeContextImpl extends BridgeContext {
 	private PortletResponse portletResponse;
 	private Boolean preserveActionParams;
 	private Map<String, String[]> preservedActionParams;
+	private boolean processingAfterViewContent;
 	private boolean renderRedirect;
 	private boolean renderRedirectAfterDispatch;
 	private BridgeRedirectURL renderRedirectURL;
@@ -966,6 +967,11 @@ public class BridgeContextImpl extends BridgeContext {
 	}
 
 	@Override
+	public void setProcessingAfterViewContent(boolean processingAfterViewContent) {
+		this.processingAfterViewContent = processingAfterViewContent;
+	}
+
+	@Override
 	public void setRenderRedirectAfterDispatch(boolean renderRedirectAfterDispatch) {
 		this.renderRedirectAfterDispatch = renderRedirectAfterDispatch;
 	}
@@ -1248,6 +1254,11 @@ public class BridgeContextImpl extends BridgeContext {
 	@Override
 	public void setSavedViewState(String savedViewState) {
 		this.savedViewState = savedViewState;
+	}
+
+	@Override
+	public boolean isProcessingAfterViewContent() {
+		return processingAfterViewContent;
 	}
 
 	@Override
