@@ -37,6 +37,7 @@ public class ProductMap extends HashMap<String, Product> {
 		put(BridgeConstants.LIFERAY_PORTAL, null);
 		put(BridgeConstants.PRIMEFACES, null);
 		put(BridgeConstants.RICHFACES, null);
+		put(BridgeConstants.TCK_JSR_329, null);
 	}
 
 	@Override
@@ -73,6 +74,10 @@ public class ProductMap extends HashMap<String, Product> {
 			}
 			else if (BridgeConstants.RICHFACES.equals(name)) {
 				value = new ProductRichFacesImpl();
+				put(name, value);
+			}
+			else if (BridgeConstants.TCK_JSR_329.equals(name)) {
+				value = new ProductTCKJSR329Impl();
 				put(name, value);
 			}
 		}
