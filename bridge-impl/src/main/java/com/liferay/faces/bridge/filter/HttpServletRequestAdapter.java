@@ -21,10 +21,9 @@ import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.faces.FacesWrapper;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
+import javax.portlet.filter.PortletRequestWrapper;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.Cookie;
@@ -33,36 +32,44 @@ import javax.servlet.http.HttpSession;
 
 
 /**
- * This class provides an {@link HttpServletRequest} adapter/wrapper around the current {@link PortletResponse}. Typical
+ * This class provides an {@link HttpServletRequest} adapter/wrapper around the current {@link PortletRequest}. Typical
  * usage is to hack-around Servlet-API dependencies in JSF implementations.
  *
  * @author  Neil Griffin
  */
-public class HttpServletRequestAdapter implements HttpServletRequest, FacesWrapper<PortletRequest> {
+
+public class HttpServletRequestAdapter extends PortletRequestWrapper implements HttpServletRequest {
 
 	// Private Data Members
 	private PortletRequest wrappedPortletRequest;
 
 	public HttpServletRequestAdapter(PortletRequest portletRequest) {
+
+		super(portletRequest);
 		this.wrappedPortletRequest = portletRequest;
 	}
 
+	@Override
 	public void removeAttribute(String name) {
 		getWrapped().removeAttribute(name);
 	}
 
+	@Override
 	public Object getAttribute(String name) {
 		return getWrapped().getAttribute(name);
 	}
 
+	@Override
 	public void setAttribute(String name, Object value) {
 		getWrapped().setAttribute(name, value);
 	}
 
+	@Override
 	public Enumeration<String> getAttributeNames() {
 		return getWrapped().getAttributeNames();
 	}
 
+	@Override
 	public String getAuthType() {
 		return getWrapped().getAuthType();
 	}
@@ -122,14 +129,17 @@ public class HttpServletRequestAdapter implements HttpServletRequest, FacesWrapp
 		}
 	}
 
+	@Override
 	public String getContextPath() {
 		return getWrapped().getContextPath();
 	}
 
+	@Override
 	public Cookie[] getCookies() {
 		return getWrapped().getCookies();
 	}
 
+	@Override
 	public boolean isRequestedSessionIdValid() {
 		return getWrapped().isRequestedSessionIdValid();
 	}
@@ -142,10 +152,12 @@ public class HttpServletRequestAdapter implements HttpServletRequest, FacesWrapp
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public boolean isSecure() {
 		return getWrapped().isSecure();
 	}
 
+	@Override
 	public boolean isUserInRole(String role) {
 		return getWrapped().isUserInRole(role);
 	}
@@ -182,10 +194,12 @@ public class HttpServletRequestAdapter implements HttpServletRequest, FacesWrapp
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Locale getLocale() {
 		return getWrapped().getLocale();
 	}
 
+	@Override
 	public Enumeration<Locale> getLocales() {
 		return getWrapped().getLocales();
 	}
@@ -212,18 +226,22 @@ public class HttpServletRequestAdapter implements HttpServletRequest, FacesWrapp
 		}
 	}
 
+	@Override
 	public String getParameter(String name) {
 		return getWrapped().getParameter(name);
 	}
 
+	@Override
 	public Map<String, String[]> getParameterMap() {
 		return getWrapped().getParameterMap();
 	}
 
+	@Override
 	public Enumeration<String> getParameterNames() {
 		return getWrapped().getParameterNames();
 	}
 
+	@Override
 	public String[] getParameterValues(String name) {
 		return getWrapped().getParameterValues(name);
 	}
@@ -274,6 +292,7 @@ public class HttpServletRequestAdapter implements HttpServletRequest, FacesWrapp
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public String getRemoteUser() {
 		return getWrapped().getRemoteUser();
 	}
@@ -282,6 +301,7 @@ public class HttpServletRequestAdapter implements HttpServletRequest, FacesWrapp
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public String getRequestedSessionId() {
 		return getWrapped().getRequestedSessionId();
 	}
@@ -294,14 +314,17 @@ public class HttpServletRequestAdapter implements HttpServletRequest, FacesWrapp
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public String getScheme() {
 		return getWrapped().getScheme();
 	}
 
+	@Override
 	public String getServerName() {
 		return getWrapped().getServerName();
 	}
 
+	@Override
 	public int getServerPort() {
 		return getWrapped().getServerPort();
 	}
@@ -318,6 +341,7 @@ public class HttpServletRequestAdapter implements HttpServletRequest, FacesWrapp
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Principal getUserPrincipal() {
 		return getWrapped().getUserPrincipal();
 	}
@@ -325,5 +349,4 @@ public class HttpServletRequestAdapter implements HttpServletRequest, FacesWrapp
 	public PortletRequest getWrapped() {
 		return wrappedPortletRequest;
 	}
-
 }
