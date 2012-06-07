@@ -1014,19 +1014,13 @@ public class ExternalContextImpl extends ExternalContext {
 	@Override
 	public String getResponseContentType() {
 
-		if (manageIncongruities) {
-			return responseContentType;
+		if (portletResponse instanceof ActionResponse) {
+
+			// TestPage173: getResponseContentTypeActionTest
+			throw new IllegalStateException();
 		}
 		else {
-
-			if (portletResponse instanceof ActionResponse) {
-
-				// TestPage173: getResponseContentTypeActionTest
-				throw new IllegalStateException();
-			}
-			else {
-				return null;
-			}
+			return responseContentType;
 		}
 	}
 
