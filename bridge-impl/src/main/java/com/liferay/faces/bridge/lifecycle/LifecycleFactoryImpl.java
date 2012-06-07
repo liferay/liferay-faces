@@ -104,12 +104,16 @@ public class LifecycleFactoryImpl extends LifecycleFactory {
 			// TCK TestPage003: lifecycleTest
 			if (TCK_JSR_329_DETECTED) {
 
-				// Because of the multiple-lifecycle design of the bridge's LifecycleFactory implementation, the meaning
-				// of LifecycleFactory.DEFAULT_LIFECYCLE must be interpreted to mean the default lifecycle for the
-				// current {@link Bridge#PortletPhase}.
 				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-				PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
-				lifecycle = wrappedLifecycleFactory.getLifecycle(portletRequestPhase.name());
+				
+				if (bridgeContext != null) {
+
+					// Because of the multiple-lifecycle design of the bridge's LifecycleFactory implementation, the meaning
+					// of LifecycleFactory.DEFAULT_LIFECYCLE must be interpreted to mean the default lifecycle for the
+					// current {@link Bridge#PortletPhase}.
+					PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
+					lifecycle = wrappedLifecycleFactory.getLifecycle(portletRequestPhase.name());
+				}
 			}
 			else {
 
