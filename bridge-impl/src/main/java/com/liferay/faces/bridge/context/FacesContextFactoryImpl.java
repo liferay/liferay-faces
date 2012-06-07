@@ -18,14 +18,21 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.FacesContextFactory;
 import javax.faces.lifecycle.Lifecycle;
 
+import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.bridge.config.ProductMap;
+
 
 /**
- * This class is only necessary in order to pass the FacesContextFactoryServiceProviderTest in the
- * facesContextFactoryServiceProviderTest in the TCK.
+ * This class is necessary in order to pass the facesContextFactoryServiceProviderTest in the TCK. In addition, if the
+ * TCK is detected, then it provides a special FacesContext implementation that handles special cases within the TCK.
  *
  * @author  Neil Griffin
  */
 public class FacesContextFactoryImpl extends FacesContextFactory {
+
+	// Private Constants
+	private static final boolean TCK_JSR_329_DETECTED = ProductMap.getInstance().get(BridgeConstants.TCK_JSR_329)
+		.isDetected();
 
 	// Private Data Members
 	private FacesContextFactory wrappedFacesContextFactory;
@@ -41,7 +48,14 @@ public class FacesContextFactoryImpl extends FacesContextFactory {
 	@Override
 	public FacesContext getFacesContext(Object context, Object request, Object response, Lifecycle lifecycle)
 		throws FacesException {
-		return wrappedFacesContextFactory.getFacesContext(context, request, response, lifecycle);
+
+		FacesContext facesContext = wrappedFacesContextFactory.getFacesContext(context, request, response, lifecycle);
+
+		if (TCK_JSR_329_DETECTED) {
+			facesContext = new FacesContextTCKImpl(facesContext);
+		}
+
+		return facesContext;
 	}
 
 	@Override
