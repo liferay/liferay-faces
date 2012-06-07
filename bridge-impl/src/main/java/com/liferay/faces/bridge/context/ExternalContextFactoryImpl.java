@@ -20,6 +20,8 @@ import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
+import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 
@@ -29,9 +31,15 @@ import com.liferay.faces.bridge.logging.LoggerFactory;
  */
 public class ExternalContextFactoryImpl extends ExternalContextFactory {
 
+	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ExternalContextFactoryImpl.class);
 
-	ExternalContextFactory wrappedFactory;
+	// Private Constants
+	private static final boolean TCK_JSR_329_DETECTED = ProductMap.getInstance().get(BridgeConstants.TCK_JSR_329)
+		.isDetected();
+
+	// Private Data Members
+	private ExternalContextFactory wrappedFactory;
 
 	public ExternalContextFactoryImpl(ExternalContextFactory externalContextFactory) {
 		this.wrappedFactory = externalContextFactory;
@@ -46,8 +54,16 @@ public class ExternalContextFactoryImpl extends ExternalContextFactory {
 		// NOTE: Can't use BridgeUtil.isPortletRequest() here because the FacesContext is in the process of
 		// initialization.
 		if (context instanceof PortletContext) {
-			return new ExternalContextImpl((PortletContext) context, (PortletRequest) request,
-					(PortletResponse) response);
+			ExternalContext externalContext = new ExternalContextImpl((PortletContext) context,
+					(PortletRequest) request, (PortletResponse) response);
+
+			// If the TCK is detected, then wrap the bridge's ExternalContext implementation with a wrapper that can
+			// handle special cases of the TCK.
+			if (TCK_JSR_329_DETECTED) {
+				externalContext = new ExternalContextTCKImpl(externalContext);
+			}
+
+			return externalContext;
 		}
 
 		// Otherwise, it is possible that a request hit the FacesServlet directly, and we should delegate
