@@ -20,12 +20,19 @@ import javax.faces.view.ViewDeclarationLanguageFactory;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.BridgeRenderPolicy;
 
+import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.bridge.config.ProductMap;
+
 
 /**
  * @author  Neil Griffin
  */
 public class ViewDeclarationLanguageFactoryImpl extends ViewDeclarationLanguageFactory {
 
+	// Private Constants
+	private static final boolean TCK_JSR_329_DETECTED = ProductMap.getInstance().get(BridgeConstants.TCK_JSR_329).isDetected();
+	
+	// Private Data Members
 	private ViewDeclarationLanguageFactory wrappedFactory;
 
 	public ViewDeclarationLanguageFactoryImpl(ViewDeclarationLanguageFactory wrappedFactory) {
@@ -63,6 +70,10 @@ public class ViewDeclarationLanguageFactoryImpl extends ViewDeclarationLanguageF
 			// implementation in such a way that Mojarra/MyFaces can execute without throwing an exception.
 			else {
 				viewDeclarationLanguage = new ViewDeclarationLanguageJspImpl(wrappedViewDeclarationLanguage);
+				
+				if (TCK_JSR_329_DETECTED) {
+					viewDeclarationLanguage = new ViewDeclarationLanguageJspTCKImpl(viewDeclarationLanguage);
+				}
 			}
 		}
 
