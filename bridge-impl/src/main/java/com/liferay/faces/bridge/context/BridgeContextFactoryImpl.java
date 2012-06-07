@@ -19,13 +19,19 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.faces.Bridge;
 
+import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.config.BridgeConfig;
+import com.liferay.faces.bridge.config.ProductMap;
 
 
 /**
  * @author  Neil Griffin
  */
 public class BridgeContextFactoryImpl extends BridgeContextFactory {
+
+	// Private Constants
+	private static final boolean TCK_JSR_329_DETECTED = ProductMap.getInstance().get(BridgeConstants.TCK_JSR_329)
+		.isDetected();
 
 	// Private Data Members
 	private BridgeContextFactory wrappedFactory;
@@ -52,6 +58,12 @@ public class BridgeContextFactoryImpl extends BridgeContextFactory {
 		if (bridgeContext == null) {
 			bridgeContext = new BridgeContextImpl(bridgeConfig, portletConfig, portletContext, portletRequest,
 					portletResponse, portletPhase);
+
+			// If the TCK is detected, then wrap the default BridgeContext implementation with a wrapper that can
+			// handle special cases of the TCK.
+			if (TCK_JSR_329_DETECTED) {
+				bridgeContext = new BridgeContextTCKImpl(bridgeContext);
+			}
 		}
 
 		return bridgeContext;
