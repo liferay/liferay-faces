@@ -123,16 +123,6 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 	protected void init(PortletRequest portletRequest, PortletResponse portletResponse,
 		Bridge.PortletPhase portletPhase, Lifecycle lifecycle) {
 
-		// Null check required by the TCK.
-		if (portletRequest == null) {
-			throw new NullPointerException("portletRequest was null");
-		}
-
-		// Null check required by the TCK.
-		if (portletResponse == null) {
-			throw new NullPointerException("portletResponse was null");
-		}
-
 		// Save the Bridge.PortletPhase as a request attribute so that it can be picked up by the
 		// BridgeRequestAttributeListener.
 		portletRequest.setAttribute(Bridge.PORTLET_LIFECYCLE_PHASE, portletPhase);

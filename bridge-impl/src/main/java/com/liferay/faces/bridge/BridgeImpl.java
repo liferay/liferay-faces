@@ -22,6 +22,8 @@ import javax.portlet.ActionResponse;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
@@ -49,6 +51,8 @@ public class BridgeImpl implements Bridge {
 	public void doFacesRequest(ActionRequest actionRequest, ActionResponse actionResponse)
 		throws BridgeDefaultViewNotSpecifiedException, BridgeUninitializedException, BridgeException {
 
+		checkNull(actionRequest, actionResponse);
+
 		if (initialized) {
 			BridgePhase bridgePhase = bridgePhaseFactory.getBridgeActionPhase(actionRequest, actionResponse,
 					portletConfig);
@@ -61,6 +65,8 @@ public class BridgeImpl implements Bridge {
 
 	public void doFacesRequest(EventRequest eventRequest, EventResponse eventResponse)
 		throws BridgeUninitializedException, BridgeException {
+
+		checkNull(eventRequest, eventResponse);
 
 		if (initialized) {
 			BridgePhase bridgePhase = bridgePhaseFactory.getBridgeEventPhase(eventRequest, eventResponse,
@@ -76,6 +82,8 @@ public class BridgeImpl implements Bridge {
 	public void doFacesRequest(RenderRequest renderRequest, RenderResponse renderResponse)
 		throws BridgeDefaultViewNotSpecifiedException, BridgeUninitializedException, BridgeException {
 
+		checkNull(renderRequest, renderResponse);
+		
 		if (initialized) {
 			BridgePhase bridgePhase = bridgePhaseFactory.getBridgeRenderPhase(renderRequest, renderResponse,
 					portletConfig);
@@ -90,6 +98,8 @@ public class BridgeImpl implements Bridge {
 	public void doFacesRequest(ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws BridgeUninitializedException, BridgeException {
 
+		checkNull(resourceRequest, resourceResponse);
+
 		if (initialized) {
 			BridgePhase bridgePhase = bridgePhaseFactory.getBridgeResourcePhase(resourceRequest, resourceResponse,
 					portletConfig);
@@ -99,14 +109,6 @@ public class BridgeImpl implements Bridge {
 			throw new BridgeUninitializedException();
 		}
 
-	}
-
-	public String getTitle() {
-		return BridgeImpl.class.getPackage().getImplementationTitle();
-	}
-	
-	public String getVersion() {
-		return BridgeImpl.class.getPackage().getImplementationVersion();
 	}
 
 	public void init(PortletConfig portletConfig) throws BridgeException {
@@ -128,5 +130,26 @@ public class BridgeImpl implements Bridge {
 		this.portletConfig = portletConfig;
 		BridgeFactoryFinder.setPortletConfig(portletConfig);
 		bridgePhaseFactory = (BridgePhaseFactory) BridgeFactoryFinder.getFactory(BridgePhaseFactory.class);
+	}
+
+	protected void checkNull(PortletRequest portletRequest, PortletResponse portletResponse) {
+
+		// Null check required by the TCK.
+		if (portletRequest == null) {
+			throw new NullPointerException("portletRequest was null");
+		}
+
+		// Null check required by the TCK.
+		if (portletResponse == null) {
+			throw new NullPointerException("portletResponse was null");
+		}
+	}
+
+	public String getTitle() {
+		return BridgeImpl.class.getPackage().getImplementationTitle();
+	}
+
+	public String getVersion() {
+		return BridgeImpl.class.getPackage().getImplementationVersion();
 	}
 }
