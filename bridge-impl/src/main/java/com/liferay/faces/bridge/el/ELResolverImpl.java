@@ -28,6 +28,7 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeUtil;
+import javax.servlet.jsp.JspContext;
 
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
@@ -61,28 +62,33 @@ public class ELResolverImpl extends ELResolver {
 	private static final String RESOURCE_REQUEST = "resourceRequest";
 	private static final String RESOURCE_RESPONSE = "resourceResponse";
 	private static final ArrayList<FeatureDescriptor> FEATURE_DESCRIPTORS = new ArrayList<FeatureDescriptor>();
-	private static final HashSet<String> VAR_NAMES = new HashSet<String>();
+	private static final HashSet<String> FACES_CONTEXT_VAR_NAMES = new HashSet<String>();
+	private static final HashSet<String> JSP_CONTEXT_VAR_NAMES = new HashSet<String>();
 
 	static {
 
-		// Initialize hash set of supported EL variable names.
-		VAR_NAMES.add(ACTION_REQUEST);
-		VAR_NAMES.add(ACTION_RESPONSE);
-		VAR_NAMES.add(BRIDGE_CONTEXT);
-		VAR_NAMES.add(EVENT_REQUEST);
-		VAR_NAMES.add(EVENT_RESPONSE);
-		VAR_NAMES.add(FLASH);
-		VAR_NAMES.add(HTTP_SESSION_SCOPE);
-		VAR_NAMES.add(MUTABLE_PORTLET_PREFERENCES_VALUES);
-		VAR_NAMES.add(PORTLET_CONFIG);
-		VAR_NAMES.add(PORTLET_SESSION);
-		VAR_NAMES.add(PORTLET_SESSION_SCOPE);
-		VAR_NAMES.add(PORTLET_PREFERENCES);
-		VAR_NAMES.add(PORTLET_PREFERENCES_VALUES);
-		VAR_NAMES.add(RENDER_REQUEST);
-		VAR_NAMES.add(RENDER_RESPONSE);
-		VAR_NAMES.add(RESOURCE_REQUEST);
-		VAR_NAMES.add(RESOURCE_RESPONSE);
+		// Initialize hash set of supported EL variable names when running in a Faces context.
+		FACES_CONTEXT_VAR_NAMES.add(ACTION_REQUEST);
+		FACES_CONTEXT_VAR_NAMES.add(ACTION_RESPONSE);
+		FACES_CONTEXT_VAR_NAMES.add(BRIDGE_CONTEXT);
+		FACES_CONTEXT_VAR_NAMES.add(EVENT_REQUEST);
+		FACES_CONTEXT_VAR_NAMES.add(EVENT_RESPONSE);
+		FACES_CONTEXT_VAR_NAMES.add(FLASH);
+		FACES_CONTEXT_VAR_NAMES.add(HTTP_SESSION_SCOPE);
+		FACES_CONTEXT_VAR_NAMES.add(MUTABLE_PORTLET_PREFERENCES_VALUES);
+		FACES_CONTEXT_VAR_NAMES.add(PORTLET_CONFIG);
+		FACES_CONTEXT_VAR_NAMES.add(PORTLET_SESSION);
+		FACES_CONTEXT_VAR_NAMES.add(PORTLET_SESSION_SCOPE);
+		FACES_CONTEXT_VAR_NAMES.add(PORTLET_PREFERENCES);
+		FACES_CONTEXT_VAR_NAMES.add(PORTLET_PREFERENCES_VALUES);
+		FACES_CONTEXT_VAR_NAMES.add(RENDER_REQUEST);
+		FACES_CONTEXT_VAR_NAMES.add(RENDER_RESPONSE);
+		FACES_CONTEXT_VAR_NAMES.add(RESOURCE_REQUEST);
+		FACES_CONTEXT_VAR_NAMES.add(RESOURCE_RESPONSE);
+
+		// Initialize hash set of supported EL variable names when running in a JSP context.
+		JSP_CONTEXT_VAR_NAMES.add(HTTP_SESSION_SCOPE);
+		JSP_CONTEXT_VAR_NAMES.add(MUTABLE_PORTLET_PREFERENCES_VALUES);
 
 		// Initialize the list of static feature descriptors.
 		addFeatureDescriptor(ACTION_REQUEST, String.class);
@@ -115,6 +121,64 @@ public class ELResolverImpl extends ELResolver {
 		featureDescriptor.setValue(ELResolver.TYPE, classType);
 		featureDescriptor.setValue(ELResolver.RESOLVABLE_AT_DESIGN_TIME, true);
 		FEATURE_DESCRIPTORS.add(featureDescriptor);
+	}
+
+	protected Object resolveFacesContext(ELContext elContext, Object base, Object property) {
+
+		Object value = null;
+
+		if (base == null) {
+
+			if (property instanceof String) {
+				String varName = (String) property;
+
+				if (FACES_CONTEXT_VAR_NAMES.contains(varName)) {
+					value = resolveVariable(elContext, varName);
+				}
+			}
+		}
+		else {
+
+			if (property instanceof String) {
+				String propertyName = (String) property;
+				value = resolveProperty(elContext, base, propertyName);
+			}
+		}
+
+		if (value != null) {
+			elContext.setPropertyResolved(true);
+		}
+
+		return value;
+	}
+
+	protected Object resolveJspContext(ELContext elContext, Object base, Object property) {
+
+		Object value = null;
+
+		if (base == null) {
+
+			if (property instanceof String) {
+				String varName = (String) property;
+
+				if (JSP_CONTEXT_VAR_NAMES.contains(varName)) {
+					value = resolveVariable(elContext, varName);
+				}
+			}
+		}
+		else {
+
+			if (property instanceof String) {
+				String propertyName = (String) property;
+				value = resolveProperty(elContext, base, propertyName);
+			}
+		}
+
+		if (value != null) {
+			elContext.setPropertyResolved(true);
+		}
+
+		return value;
 	}
 
 	protected Object resolveProperty(ELContext elContext, Object base, String property) {
@@ -198,6 +262,7 @@ public class ELResolverImpl extends ELResolver {
 			else if (varName.equals(MUTABLE_PORTLET_PREFERENCES_VALUES)) {
 				FacesContext facesContext = FacesContext.getCurrentInstance();
 				PortletRequest portletRequest = getPortletRequest(facesContext);
+
 				if (portletRequest != null) {
 					value = new MutablePreferenceMap(portletRequest.getPreferences());
 				}
@@ -220,6 +285,7 @@ public class ELResolverImpl extends ELResolver {
 			else if (varName.equals(PORTLET_PREFERENCES)) {
 				FacesContext facesContext = FacesContext.getCurrentInstance();
 				PortletRequest portletRequest = getPortletRequest(facesContext);
+
 				if (portletRequest != null) {
 					value = portletRequest.getPreferences();
 				}
@@ -343,31 +409,26 @@ public class ELResolverImpl extends ELResolver {
 		if (elContext == null) {
 
 			// Throw an exception as directed by the JavaDoc for ELContext.
-			throw new NullPointerException("invalid ELContext");
+			throw new NullPointerException();
 		}
 		else {
+
 			Object value = null;
 
-			if (base == null) {
+			// If running inside a JSP context, meaning evaluation of a JSP-syntax (dollar-sign prefixed) EL expression
+			// like ${portletConfig} then
+			if (elContext.getContext(JspContext.class) != null) {
 
-				if (property instanceof String) {
-					String varName = (String) property;
-
-					if (VAR_NAMES.contains(varName)) {
-						value = resolveVariable(elContext, varName);
-					}
-				}
+				// Resolve according to the JSP expression requirements of Section 6.5.2.2 of the JSR 329 Spec.
+				value = resolveJspContext(elContext, base, property);
 			}
+
+			// Otherwise, must be running inside a Faces context, meaning evaluation of a JSF-syntax (hash/pound
+			// prefixed) EL expression like #{portletConfig}
 			else {
 
-				if (property instanceof String) {
-					String propertyName = (String) property;
-					value = resolveProperty(elContext, base, propertyName);
-				}
-			}
-
-			if (value != null) {
-				elContext.setPropertyResolved(true);
+				// Resolve according to the JSF expression requirements of Section 6.5.2.2 of the JSR 329 Spec.
+				value = resolveFacesContext(elContext, base, property);
 			}
 
 			return value;
