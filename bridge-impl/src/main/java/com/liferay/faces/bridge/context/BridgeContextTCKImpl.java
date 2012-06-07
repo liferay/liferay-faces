@@ -29,6 +29,7 @@ public class BridgeContextTCKImpl extends BridgeContextWrapper {
 
 	public BridgeContextTCKImpl(BridgeContext bridgeContext) {
 		this.wrappedBridgeContext = bridgeContext;
+		setCurrentInstance(this);
 	}
 
 	/**
