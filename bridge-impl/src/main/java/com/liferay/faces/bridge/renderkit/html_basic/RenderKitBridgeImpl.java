@@ -27,7 +27,7 @@ import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.component.icefaces.DataPaginator;
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.config.Product;
-import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.renderkit.bridge.ResponseWriterBridgeImpl;
 import com.liferay.faces.bridge.renderkit.icefaces.DataPaginatorRenderer;
 import com.liferay.faces.bridge.renderkit.icefaces.HeadRendererICEfacesImpl;
@@ -98,8 +98,7 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 
 			// If the PrimeFaces p:fileUpload should be forced to use a ResourceURL, then return a special
 			// form renderer. http://issues.liferay.com/browse/FACES-1194
-			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-			Product primeFaces = bridgeContext.getBridgeConfig().getProducts().get(BridgeConstants.PRIMEFACES);
+			Product primeFaces = ProductMap.getInstance().get(BridgeConstants.PRIMEFACES);
 
 			if (primeFaces.isDetected() && (primeFaces.getMajorVersion() == 3) && (primeFaces.getMinorVersion() < 3)) {
 				renderer = new FormRendererPrimeFacesImpl(renderer);
@@ -130,4 +129,3 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 	}
 
 }
-

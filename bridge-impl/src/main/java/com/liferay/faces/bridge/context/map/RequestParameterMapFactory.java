@@ -18,6 +18,7 @@ import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.config.Product;
+import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.context.BridgeContext;
 
 
@@ -40,7 +41,7 @@ public class RequestParameterMapFactory {
 
 			// Note that ICEfaces ace:fileEntry cannot rely on RequestParameterValuesMapImpl because it relies on its
 			// own mechanism for handling file upload.
-			Product iceFaces = bridgeContext.getBridgeConfig().getProducts().get(BridgeConstants.ICEFACES);
+			Product iceFaces = ProductMap.getInstance().get(BridgeConstants.ICEFACES);
 			if ((contentType != null) && contentType.toLowerCase().startsWith(BridgeConstants.MULTIPART_CONTENT_TYPE_PREFIX) &&
 					!iceFaces.isDetected()) {
 				RequestParameterMapMultiPartImpl requestParameterMapMultiPartImpl =

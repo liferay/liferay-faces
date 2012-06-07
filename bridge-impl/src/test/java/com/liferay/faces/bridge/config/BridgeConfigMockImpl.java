@@ -47,10 +47,6 @@ public class BridgeConfigMockImpl implements BridgeConfig {
 		throw new UnsupportedOperationException();
 	}
 
-	public Map<String, Product> getProducts() {
-		throw new UnsupportedOperationException();
-	}
-
 	public Map<String, String[]> getPublicParameterMappings() {
 		throw new UnsupportedOperationException();
 	}

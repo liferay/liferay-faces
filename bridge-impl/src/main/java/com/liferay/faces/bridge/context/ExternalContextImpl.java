@@ -56,6 +56,7 @@ import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
 import com.liferay.faces.bridge.config.Product;
+import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.context.flash.BridgeFlash;
 import com.liferay.faces.bridge.context.flash.BridgeFlashFactory;
 import com.liferay.faces.bridge.context.flash.FlashHttpServletResponse;
@@ -513,7 +514,7 @@ public class ExternalContextImpl extends ExternalContext {
 			if ((requestContentType != null) &&
 					requestContentType.toLowerCase().startsWith(BridgeConstants.MULTIPART_CONTENT_TYPE_PREFIX)) {
 
-				Product iceFaces = bridgeConfig.getProducts().get(BridgeConstants.ICEFACES);
+				Product iceFaces = ProductMap.getInstance().get(BridgeConstants.ICEFACES);
 
 				if (iceFaces.isDetected() &&
 						((iceFaces.getMajorVersion() == 2) ||
