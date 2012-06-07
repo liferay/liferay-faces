@@ -553,6 +553,16 @@ public class BridgeContextImpl extends BridgeContext {
 		setCurrentInstance(null);
 	}
 
+	/**
+	 * This method ensures that {@link BridgeContextWrapper} classes participate in getting the parameter values. For
+	 * example, when running in the TCK, the {@link BridgeContextFactoryImpl} will wrap the default {@link
+	 * BridgeContextImpl} instance with a {@link BridgeContextTCKImpl} wrapper that has an overload of {@link
+	 * #getInitParameter(String)}.
+	 */
+	protected String _getInitParameter(String name) {
+		return BridgeContext.getCurrentInstance().getInitParameter(name);
+	}
+
 	@Override
 	public Map<String, Object> getAttributes() {
 		return attributeMap;
@@ -585,13 +595,12 @@ public class BridgeContextImpl extends BridgeContext {
 			// NOTE: The defaultValue of false deviates from the proposed Spec which has a default of true.
 			// See: http://issues.liferay.com/browse/FACES-219
 			boolean defaultValue = false;
-			String initParam = portletConfig.getInitParameter(
-					BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED1);
+			String initParam = _getInitParameter(BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED1);
 
 			if (initParam == null) {
 
 				// Backwards compatibility
-				initParam = portletConfig.getInitParameter(BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED2);
+				initParam = _getInitParameter(BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED2);
 			}
 
 			bridgeRequestScopePreserved = BooleanHelper.toBoolean(initParam, defaultValue);
@@ -1126,13 +1135,13 @@ public class BridgeContextImpl extends BridgeContext {
 		if (responseNamespace == null) {
 
 			// If the namespace should be optimized (minimized), then perform the optimization.
-			String optimizePortletNamespaceInitParam = getInitParameter(
+			String optimizePortletNamespaceInitParam = _getInitParameter(
 					BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE1);
 
 			if (optimizePortletNamespaceInitParam == null) {
 
 				// Backward compatibility
-				optimizePortletNamespaceInitParam = getInitParameter(
+				optimizePortletNamespaceInitParam = _getInitParameter(
 						BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE2);
 			}
 
@@ -1196,8 +1205,8 @@ public class BridgeContextImpl extends BridgeContext {
 			if (portletPhase == Bridge.PortletPhase.RENDER_PHASE) {
 
 				if (renderRedirectEnabled == null) {
-					renderRedirectEnabled = BooleanHelper.isTrueToken(getInitParameter(
-								BridgeConfigConstants.PARAM_RENDER_REDIRECT_ENABLED));
+					renderRedirectEnabled = BooleanHelper.isTrueToken(BridgeContext.getCurrentInstance()
+							.getInitParameter(BridgeConfigConstants.PARAM_RENDER_REDIRECT_ENABLED));
 				}
 
 				if (renderRedirectEnabled) {

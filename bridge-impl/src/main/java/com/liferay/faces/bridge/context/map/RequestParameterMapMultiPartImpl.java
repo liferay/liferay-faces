@@ -33,7 +33,6 @@ import javax.faces.render.ResponseStateManager;
 import javax.portlet.ActionRequest;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.PortalContext;
-import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletSession;
@@ -87,11 +86,10 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 		try {
 
 			PortletSession portletSession = clientDataRequest.getPortletSession();
-			PortletContext portletContext = portletSession.getPortletContext();
 
 			// Determine the uploaded files directory path according to the JSF 2.2 proposal:
 			// https://javaserverfaces-spec-public.dev.java.net/issues/show_bug.cgi?id=690
-			String uploadedFilesDir = portletContext.getInitParameter(CONTEXT_PARAM_UPLOADED_FILES_DIR);
+			String uploadedFilesDir = bridgeContext.getInitParameter(CONTEXT_PARAM_UPLOADED_FILES_DIR);
 
 			if (uploadedFilesDir == null) {
 				uploadedFilesDir = System.getProperty(JAVA_IO_TMPDIR);
@@ -141,7 +139,7 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 			diskFileItemFactory.setSizeThreshold(0);
 
 			// Determine the max file upload size threshold in bytes.
-			String uploadedFilesMaxSize = portletContext.getInitParameter(CONTEXT_PARAM_UPLOADED_FILE_MAX_SIZE);
+			String uploadedFilesMaxSize = bridgeContext.getInitParameter(CONTEXT_PARAM_UPLOADED_FILE_MAX_SIZE);
 			int fileMaxSize = DEFAULT_FILE_MAX_SIZE;
 
 			if (uploadedFilesMaxSize == null) {
