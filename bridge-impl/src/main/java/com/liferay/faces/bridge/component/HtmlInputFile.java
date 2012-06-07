@@ -53,7 +53,7 @@ public class HtmlInputFile extends UIInput {
 			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			throw new AbortProcessingException(e);
 		}
 	}
 
