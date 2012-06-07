@@ -88,21 +88,21 @@ public class SessionMap extends AbstractPropertyMap<Object> {
 
 	@Override
 	protected void removeProperty(String name) {
-		portletSession.removeAttribute(name);
+		portletSession.removeAttribute(name, scope);
 	}
 
 	@Override
 	protected Object getProperty(String name) {
-		return portletSession.getAttribute(name);
+		return portletSession.getAttribute(name, scope);
 	}
 
 	@Override
 	protected void setProperty(String name, Object value) {
-		portletSession.setAttribute(name, value);
+		portletSession.setAttribute(name, value, scope);
 	}
 
 	@Override
 	protected Enumeration<String> getPropertyNames() {
-		return portletSession.getAttributeNames();
+		return portletSession.getAttributeNames(scope);
 	}
 }
