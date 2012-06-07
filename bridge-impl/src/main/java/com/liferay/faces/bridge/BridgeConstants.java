@@ -37,24 +37,19 @@ public class BridgeConstants {
 	public static final String CHAR_SPACE = " ";
 	public static final String CHAR_UNDERSCORE = "_";
 	
-	// ICEfaces Constants
+	// Product Constants
 	public static final String ICEFACES = "ICEfaces";
-	
-	// Liferay Constants
 	public static final String LIFERAY_PORTAL = "Liferay Portal";
 	public static final String LIFERAY_FACES_ALLOY = "Liferay Faces Alloy";
 	public static final String LIFERAY_FACES_BRIDGE = "Liferay Faces Bridge";
 	public static final String LIFERAY_FACES_PORTAL = "Liferay Faces Portal";
-
-	// PrimeFaces Constants
 	public static final String PRIMEFACES = "PrimeFaces";
+	public static final String RICHFACES = "RichFaces";
+	public static final String TCK_JSR_329 = "TCK JSR 329";
 
 	// Request Attribute Names
 	public static final String REQ_ATTR_PATH_INFO = "javax.servlet.include.path_info";
 	public static final String REQ_ATTR_SERVLET_PATH = "javax.servlet.include.servlet_path";
-	
-	// RichFaces Constants
-	public static final String RICHFACES = "RichFaces";
 	
 	// WSRP Constants
 	public static final String WSRP = "wsrp";
