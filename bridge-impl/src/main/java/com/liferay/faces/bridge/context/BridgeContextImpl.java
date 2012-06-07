@@ -47,8 +47,7 @@ import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
-import com.liferay.faces.bridge.config.BridgeConfigFactory;
-import com.liferay.faces.bridge.config.Product;
+import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.config.ServletMapping;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
@@ -79,17 +78,8 @@ public class BridgeContextImpl extends BridgeContext {
 
 	// Private Constants
 	private static final String NON_NUMERIC_NAMESPACE_PREFIX = "A";
-
-	private static final boolean LPS_3184_WORKAROUND_ENABLED;
-
-	static {
-
-		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
-				BridgeConfigFactory.class);
-		BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig();
-		Product liferay = bridgeConfig.getProducts().get(BridgeConstants.LIFERAY_PORTAL);
-		LPS_3184_WORKAROUND_ENABLED = liferay.isDetected();
-	}
+	private static final boolean LPS_3184_WORKAROUND_ENABLED = ProductMap.getInstance().get(
+			BridgeConstants.LIFERAY_PORTAL).isDetected();
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeContextImpl.class);

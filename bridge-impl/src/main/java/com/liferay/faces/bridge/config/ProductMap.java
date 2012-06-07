@@ -26,63 +26,26 @@ public class ProductMap extends HashMap<String, Product> {
 	// serialVersionUID
 	private static final long serialVersionUID = 8267676322108651138L;
 
-	public ProductMap() {
+	// Singleton Instance
+	private static ProductMap instance = new ProductMap();
 
-		// Initialize the map with the known products, except with null values so that they can be retrieved in a lazy
-		// manner for better performance.
-		put(BridgeConstants.ICEFACES, null);
-		put(BridgeConstants.LIFERAY_FACES_ALLOY, null);
-		put(BridgeConstants.LIFERAY_FACES_BRIDGE, null);
-		put(BridgeConstants.LIFERAY_FACES_PORTAL, null);
-		put(BridgeConstants.LIFERAY_PORTAL, null);
-		put(BridgeConstants.PRIMEFACES, null);
-		put(BridgeConstants.RICHFACES, null);
-		put(BridgeConstants.TCK_JSR_329, null);
+	static {
+		instance.put(BridgeConstants.ICEFACES, new ProductICEfacesImpl());
+		instance.put(BridgeConstants.LIFERAY_FACES_ALLOY, new ProductLiferayFacesAlloyImpl());
+		instance.put(BridgeConstants.LIFERAY_FACES_BRIDGE, new ProductLiferayFacesBridgeImpl());
+		instance.put(BridgeConstants.LIFERAY_FACES_PORTAL, new ProductLiferayFacesPortalImpl());
+		instance.put(BridgeConstants.LIFERAY_PORTAL, new ProductLiferayPortalImpl());
+		instance.put(BridgeConstants.PRIMEFACES, new ProductPrimeFacesImpl());
+		instance.put(BridgeConstants.RICHFACES, new ProductRichFacesImpl());
+		instance.put(BridgeConstants.TCK_JSR_329, new ProductTCKJSR329Impl());
 	}
 
-	@Override
-	public Product get(Object key) {
+	public static ProductMap getInstance() {
+		return instance;
+	}
 
-		String name = (String) key;
-		Product value = super.get(name);
-
-		if (value == null) {
-
-			if (BridgeConstants.ICEFACES.equals(name)) {
-				value = new ProductICEfacesImpl();
-				put(name, value);
-			}
-			else if (BridgeConstants.LIFERAY_FACES_ALLOY.equals(name)) {
-				value = new ProductLiferayFacesAlloyImpl();
-				put(name, value);
-			}
-			else if (BridgeConstants.LIFERAY_FACES_BRIDGE.equals(name)) {
-				value = new ProductLiferayFacesBridgeImpl();
-				put(name, value);
-			}
-			else if (BridgeConstants.LIFERAY_FACES_PORTAL.equals(name)) {
-				value = new ProductLiferayFacesPortalImpl();
-				put(name, value);
-			}
-			else if (BridgeConstants.LIFERAY_PORTAL.equals(name)) {
-				value = new ProductLiferayPortalImpl();
-				put(name, value);
-			}
-			else if (BridgeConstants.PRIMEFACES.equals(name)) {
-				value = new ProductPrimeFacesImpl();
-				put(name, value);
-			}
-			else if (BridgeConstants.RICHFACES.equals(name)) {
-				value = new ProductRichFacesImpl();
-				put(name, value);
-			}
-			else if (BridgeConstants.TCK_JSR_329.equals(name)) {
-				value = new ProductTCKJSR329Impl();
-				put(name, value);
-			}
-		}
-
-		return value;
+	public static void setInstance(ProductMap productMap) {
+		instance = productMap;
 	}
 
 }

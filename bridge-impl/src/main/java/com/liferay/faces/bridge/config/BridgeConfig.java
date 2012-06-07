@@ -29,11 +29,6 @@ import javax.portlet.ResourceRequest;
 public interface BridgeConfig {
 
 	/**
-	 * Returns a map containing product information for detected products.
-	 */
-	public Map<String, Product> getProducts();
-	
-	/**
 	 * Returns a map of bridge configuration attributes.
 	 */
 	public Map<String, Object> getAttributes();

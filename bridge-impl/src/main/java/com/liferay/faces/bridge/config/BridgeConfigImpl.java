@@ -88,7 +88,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private static final Logger logger = LoggerFactory.getLogger(BridgeConfigImpl.class);
 
 	// Private Data Members
-	private Map<String, Object> attributes;
+	private BridgeConfigAttributeMap attributes;
 	private BridgeContextFactory bridgeContextFactory;
 	private BridgePhaseFactory bridgePhaseFactory;
 	private BridgeRequestScopeFactory bridgeRequestScopeFactory;
@@ -100,7 +100,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private List<ServletMapping> facesServletMappings;
 	private PortletContainerFactory portletContainerFactory;
 	private PortletContext portletContext;
-	private ProductMap products;
 	private Map<String, String[]> publicParameterMappings = new HashMap<String, String[]>();
 	private UploadedFileFactory uploadedFileFactory;
 	private String viewIdRenderParameterName;
@@ -262,11 +261,8 @@ public class BridgeConfigImpl implements BridgeConfig {
 				}
 			}
 
-			// Initialize the map of products
-			products = new ProductMap();
-
 			// Initialize the map of attributes
-			attributes = new HashMap<String, Object>();
+			attributes = new BridgeConfigAttributeMap();
 			attributes.put(BridgeContextFactory.class.getName(), bridgeContextFactory);
 			attributes.put(BridgePhaseFactory.class.getName(), bridgePhaseFactory);
 			attributes.put(BridgeRequestScopeFactory.class.getName(), bridgeRequestScopeFactory);
@@ -336,10 +332,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 	public List<ServletMapping> getFacesServletMappings() {
 		return facesServletMappings;
-	}
-
-	public Map<String, Product> getProducts() {
-		return products;
 	}
 
 	public Map<String, String[]> getPublicParameterMappings() {
@@ -831,4 +823,19 @@ public class BridgeConfigImpl implements BridgeConfig {
 		}
 	}
 
+	protected class BridgeConfigAttributeMap extends HashMap<String, Object> {
+
+		// serialVersionUID
+		private static final long serialVersionUID = 8763346476317251569L;
+
+		@Override
+		public Object get(Object key) {
+			Object value = super.get(key);
+			if (value == null) {
+				value = ProductMap.getInstance().get(key);
+			}
+			return value;
+		}
+		
+	}
 }

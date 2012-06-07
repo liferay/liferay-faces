@@ -40,8 +40,7 @@ public class ProductRichFacesImpl extends ProductBaseImpl {
 			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-			// Ignore -- PrimeFaces is likely not present.
+			// Ignore -- RichFaces is likely not present.
 		}
 	}
 }
