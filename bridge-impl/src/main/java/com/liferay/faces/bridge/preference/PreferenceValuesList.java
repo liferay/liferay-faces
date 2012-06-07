@@ -92,6 +92,47 @@ public class PreferenceValuesList implements List<String> {
 		return allFound;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+
+		boolean flag = false;
+
+		if ((obj != null) && (obj instanceof List<?>)) {
+
+			List<?> objList = (List<?>) obj;
+
+			if (objList.size() == this.size()) {
+				flag = true;
+
+				int index = 0;
+
+				for (Object listEntry : objList) {
+
+					if (listEntry instanceof String) {
+						String listEntryAsString = (String) listEntry;
+						String thisEntry = this.get(index);
+
+						if (thisEntry.equals(listEntryAsString)) {
+							index++;
+						}
+						else {
+							flag = false;
+
+							break;
+						}
+					}
+					else {
+						flag = false;
+
+						break;
+					}
+				}
+			}
+		}
+
+		return flag;
+	}
+
 	public String get(int index) {
 		String value = null;
 		String[] values = portletPreferences.getValues(name, null);
