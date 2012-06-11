@@ -18,13 +18,15 @@ import java.lang.reflect.Method;
 
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIOutput;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
+import javax.portlet.MimeResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
 import com.liferay.faces.bridge.logging.Logger;
@@ -112,72 +114,81 @@ public class PermissionsURLRenderer extends Renderer {
 		String permissionsURL = StringPool.BLANK;
 
 		try {
-			RenderResponse renderResponse = liferayFacesContext.getPortletRenderResponse();
+			ExternalContext externalContext = liferayFacesContext.getExternalContext();
+			PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
 
-			PortletURL portletURL = renderResponse.createRenderURL();
-			portletURL.setPortletMode(PortletMode.VIEW);
+			if (portletResponse instanceof MimeResponse) {
+				MimeResponse mimeResponse = (MimeResponse) portletResponse;
+				PortletURL portletURL = mimeResponse.createRenderURL();
+				portletURL.setPortletMode(PortletMode.VIEW);
 
-			Class<?> portletURLClass = portletURL.getClass();
+				Class<?> portletURLClass = portletURL.getClass();
 
-			Method method = portletURLClass.getMethod("setPortletId", new Class[] { String.class });
+				Method method = portletURLClass.getMethod("setPortletId", new Class[] { String.class });
 
-			if (method != null) {
-				method.invoke(portletURL, new Object[] { PORTLET_CONFIGURATION });
-			}
-
-			method = portletURLClass.getMethod("setPlid", new Class[] { long.class });
-
-			if (method != null) {
-				long plid = liferayFacesContext.getPlid();
-				method.invoke(portletURL, new Object[] { new Long(plid) });
-			}
-
-			method = portletURLClass.getMethod("setLifecycle", new Class[] { String.class });
-
-			if (method != null) {
-				method.invoke(portletURL, new Object[] { PortletRequest.RENDER_PHASE });
-			}
-
-			portletURL.setWindowState(WindowState.MAXIMIZED);
-
-			portletURL.setParameter("struts_action", "/portlet_configuration/edit_permissions");
-
-			ThemeDisplay themeDisplay = liferayFacesContext.getThemeDisplay();
-			String redirect = permissionsURLComponent.getRedirect();
-
-			if (redirect != null) {
-				portletURL.setParameter("redirect", redirect);
-
-				if (!themeDisplay.isStateMaximized()) {
-					portletURL.setParameter("returnToFullPageURL", redirect);
+				if (method != null) {
+					method.invoke(portletURL, new Object[] { PORTLET_CONFIGURATION });
 				}
-			}
 
-			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-			portletURL.setParameter("portletResource", portletDisplay.getId());
+				method = portletURLClass.getMethod("setPlid", new Class[] { long.class });
 
-			String modelResource = permissionsURLComponent.getModelResource();
+				if (method != null) {
+					long plid = liferayFacesContext.getPlid();
+					method.invoke(portletURL, new Object[] { new Long(plid) });
+				}
 
-			if (modelResource != null) {
-				portletURL.setParameter("modelResource", modelResource);
+				method = portletURLClass.getMethod("setLifecycle", new Class[] { String.class });
+
+				if (method != null) {
+					method.invoke(portletURL, new Object[] { PortletRequest.RENDER_PHASE });
+				}
+
+				portletURL.setWindowState(WindowState.MAXIMIZED);
+
+				portletURL.setParameter("struts_action", "/portlet_configuration/edit_permissions");
+
+				ThemeDisplay themeDisplay = liferayFacesContext.getThemeDisplay();
+				String redirect = permissionsURLComponent.getRedirect();
+
+				if (redirect != null) {
+					portletURL.setParameter("redirect", redirect);
+
+					if (!themeDisplay.isStateMaximized()) {
+						portletURL.setParameter("returnToFullPageURL", redirect);
+					}
+				}
+
+				PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+				portletURL.setParameter("portletResource", portletDisplay.getId());
+
+				String modelResource = permissionsURLComponent.getModelResource();
+
+				if (modelResource != null) {
+					portletURL.setParameter("modelResource", modelResource);
+				}
+				else {
+					logger.error("modelResource cannot be null");
+				}
+
+				String modelResourceDescription = permissionsURLComponent.getModelResourceDescription();
+
+				if (modelResourceDescription != null) {
+					portletURL.setParameter("modelResourceDescription", modelResourceDescription);
+				}
+
+				String resourcePrimKey = permissionsURLComponent.getResourcePrimKey();
+
+				if (resourcePrimKey != null) {
+					portletURL.setParameter("resourcePrimKey", resourcePrimKey);
+				}
+
+				permissionsURL = portletURL.toString();
 			}
 			else {
-				logger.error("modelResource cannot be null");
+				logger.error(
+					"Unable to create a portlet render URL because PortletResponse=[{0}] is not a MimeResponse",
+					portletResponse);
 			}
-
-			String modelResourceDescription = permissionsURLComponent.getModelResourceDescription();
-
-			if (modelResourceDescription != null) {
-				portletURL.setParameter("modelResourceDescription", modelResourceDescription);
-			}
-
-			String resourcePrimKey = permissionsURLComponent.getResourcePrimKey();
-
-			if (resourcePrimKey != null) {
-				portletURL.setParameter("resourcePrimKey", resourcePrimKey);
-			}
-
-			permissionsURL = portletURL.toString();
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
