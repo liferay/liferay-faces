@@ -25,6 +25,7 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgePublicRenderParameterHandler;
 import javax.portlet.faces.BridgeUtil;
 
+import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
@@ -110,14 +111,30 @@ public class IPCPhaseListener implements PhaseListener {
 				Set<String> publicRenderParameterNames = publicParameterMappings.keySet();
 
 				// For each of the public render parameters found in the WEB-INF/faces-config.xml file:
-				for (String parameterName : publicRenderParameterNames) {
-					String[] modelExpressions = publicParameterMappings.get(parameterName);
+				for (String prefixedParameterName : publicRenderParameterNames) {
+					
+					String[] modelExpressions = publicParameterMappings.get(prefixedParameterName);
 
 					if (modelExpressions != null) {
 
-						for (String originalModelEL : modelExpressions) {
+						String parameterPrefix;
+						String nonPrefixedParameterName;
+						
+						int colonPos = prefixedParameterName.indexOf(BridgeConstants.CHAR_COLON);
 
-							String[] parameterValues = publicParameterMap.get(parameterName);
+						if (colonPos > 0) {
+							parameterPrefix = prefixedParameterName.substring(0, colonPos);
+							nonPrefixedParameterName = prefixedParameterName.substring(colonPos+1);
+						}
+						else {
+							parameterPrefix = null;
+							nonPrefixedParameterName = prefixedParameterName;
+						}
+						
+
+						for (String originalModelEL : modelExpressions) {							
+							
+							String[] parameterValues = publicParameterMap.get(nonPrefixedParameterName);
 							String parameterValue = null;
 
 							if ((parameterValues != null) && (parameterValues.length > 0)) {
@@ -125,12 +142,12 @@ public class IPCPhaseListener implements PhaseListener {
 							}
 
 							PublicRenderParameter publicRenderParameter = new PublicRenderParameter(facesContext,
-									parameterValue, originalModelEL, portletName);
+									parameterPrefix, parameterValue, originalModelEL, portletName);
 
 							if (logger.isTraceEnabled()) {
 								logger.trace(
 									"portletName=[{0}] public render parameter=[{1}] originalModelEL=[{2}] modifiedModelEL=[{3}] injectIntoModel=[{4}]",
-									portletName, parameterName, originalModelEL,
+									portletName, nonPrefixedParameterName, originalModelEL,
 									publicRenderParameter.getModifiedModelEL(),
 									publicRenderParameter.isForThisPortlet());
 							}
@@ -138,13 +155,13 @@ public class IPCPhaseListener implements PhaseListener {
 							if (publicRenderParameter.isForThisPortlet()) {
 
 								logger.debug("Injecting render parameter=[{0}] value=[{1}] into expression=[{2}]",
-									parameterName, parameterValue, publicRenderParameter.getModifiedModelEL());
+										nonPrefixedParameterName, parameterValue, publicRenderParameter.getModifiedModelEL());
 								invokeHandler = publicRenderParameter.injectIntoModel();
 							}
 							else {
 								logger.debug(
 									"NOT injecting render parameter=[{0}] value=[{1}] into expression=[{2}] because it is NOT for this portletName=[{3}]",
-									parameterName, parameterValue, publicRenderParameter.getModifiedModelEL(),
+									nonPrefixedParameterName, parameterValue, publicRenderParameter.getModifiedModelEL(),
 									portletName);
 							}
 						}
@@ -204,14 +221,28 @@ public class IPCPhaseListener implements PhaseListener {
 				Set<String> publicRenderParameterNames = publicParameterMappings.keySet();
 
 				// For each of the public render parameters found in the WEB-INF/faces-config.xml file:
-				for (String parameterName : publicRenderParameterNames) {
-					String[] modelExpressions = publicParameterMappings.get(parameterName);
+				for (String prefixedParameterName : publicRenderParameterNames) {
+					String[] modelExpressions = publicParameterMappings.get(prefixedParameterName);
 
 					if (modelExpressions != null) {
 
+						String parameterPrefix;
+						String nonPrefixedParameterName;
+						
+						int colonPos = prefixedParameterName.indexOf(BridgeConstants.CHAR_COLON);
+
+						if (colonPos > 0) {
+							parameterPrefix = prefixedParameterName.substring(0, colonPos);
+							nonPrefixedParameterName = prefixedParameterName.substring(colonPos+1);
+						}
+						else {
+							parameterPrefix = null;
+							nonPrefixedParameterName = prefixedParameterName;
+						}
+
 						for (String originalModelEL : modelExpressions) {
 
-							String[] parameterValues = publicParameterMap.get(parameterName);
+							String[] parameterValues = publicParameterMap.get(nonPrefixedParameterName);
 							String parameterValue = null;
 
 							if ((parameterValues != null) && (parameterValues.length > 0)) {
@@ -219,7 +250,7 @@ public class IPCPhaseListener implements PhaseListener {
 							}
 
 							PublicRenderParameter publicRenderParameter = new PublicRenderParameter(facesContext,
-									parameterValue, originalModelEL, portletName);
+									parameterPrefix, parameterValue, originalModelEL, portletName);
 
 							if (publicRenderParameter.isForThisPortlet()) {
 								String modelValue = publicRenderParameter.getModelValue();
@@ -228,25 +259,25 @@ public class IPCPhaseListener implements PhaseListener {
 								if (logger.isTraceEnabled()) {
 									logger.trace(
 										"portletName=[{0}] public render parameter=[{1}] parameterValue=[{2}] modelValue=[{3}] modelValueHasChanged=[{4}]",
-										portletName, parameterName, parameterValue, modelValue, modelValueHasChanged);
+										portletName, nonPrefixedParameterName, parameterValue, modelValue, modelValueHasChanged);
 								}
 
 								if (modelValueHasChanged) {
 									logger.debug(
 										"Setting render parameter=[{0}] in response because modelValue=[{1}] has changed",
-										parameterName, modelValue);
-									stateAwareResponse.setRenderParameter(parameterName, modelValue);
+										nonPrefixedParameterName, modelValue);
+									stateAwareResponse.setRenderParameter(nonPrefixedParameterName, modelValue);
 								}
 								else {
 									logger.debug(
 										"NOT setting render parameter=[{0}] in response because modelValue=[{1}] has NOT changed",
-										parameterName, modelValue);
+										nonPrefixedParameterName, modelValue);
 								}
 							}
 							else {
 								logger.debug(
 									"NOT setting render parameter=[{0}] in response because it is NOT for this portletName=[{1}]",
-									parameterName, portletName);
+									nonPrefixedParameterName, portletName);
 							}
 						}
 					}

@@ -7,9 +7,12 @@
 		<application-extension>
 			<bridge:public-parameter-mappings>
 				<bridge:public-parameter-mapping>
-					<parameter>selectedCustomerId</parameter>
-					<model-el>#{customersPortlet:customersModelBean.selectedCustomerId}</model-el>
-					<model-el>#{bookingsPortlet:bookingsModelBean.selectedCustomerId}</model-el>
+					<parameter>customersPortlet:selectedCustomerId</parameter>
+					<model-el>#{customersModelBean.selectedCustomerId}</model-el>
+				</bridge:public-parameter-mapping>
+				<bridge:public-parameter-mapping>
+					<parameter>bookingsPortlet:selectedCustomerId</parameter>
+					<model-el>#{bookingsModelBean.selectedCustomerId}</model-el>
 				</bridge:public-parameter-mapping>
 			</bridge:public-parameter-mappings>
 		</application-extension>

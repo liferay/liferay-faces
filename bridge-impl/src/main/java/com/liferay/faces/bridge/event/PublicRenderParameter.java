@@ -33,50 +33,23 @@ public class PublicRenderParameter {
 	// Private Data Members
 	private FacesContext facesContext;
 	private boolean forThisPortlet;
+	private String modelEL;
 	private String modelValue;
 	private Boolean modelValueChanged;
 	private boolean modelValueRetrieved;
-	private String modifiedModelEL;
 	private String originalRequestValue;
 
-	public PublicRenderParameter(FacesContext facesContext, String originalRequestValue, String originalModelEL,
+	public PublicRenderParameter(FacesContext facesContext, String prefix, String originalRequestValue, String originalModelEL,
 		String portletName) {
 
 		this.facesContext = facesContext;
 		this.originalRequestValue = originalRequestValue;
-		this.modifiedModelEL = originalModelEL;
-
-		// Assume that the parameter name is not prefixed with a portlet name, and that we are to process the model
-		// expression.
-		this.forThisPortlet = true;
-
-		// If the parameter name is indeed prefixed, then according to section 5.3.1 the value should only be injected
-		// into the model if the prefix matches the current portlet name.
-		int colonPos = originalModelEL.indexOf(':');
-
-		if (colonPos > 0) {
-			this.forThisPortlet = false;
-
-			int openCurlyBracePos = originalModelEL.indexOf('{');
-
-			if (openCurlyBracePos > 0) {
-				String prefixedPortletName = originalModelEL.substring(openCurlyBracePos + 1, colonPos);
-				logger.trace("portletName=[{0}] prefixedPortletName=[{1}]", portletName, prefixedPortletName);
-
-				if ((prefixedPortletName != null) && (prefixedPortletName.length() > 0)) {
-
-					this.modifiedModelEL = originalModelEL.substring(0, openCurlyBracePos + 1) +
-						originalModelEL.substring(colonPos + 1);
-
-					logger.trace(
-						"Stripped prefixedPortletName=[{0}] from originalModelEL=[{1}] so that modifiedModelEL=[{2}]",
-						prefixedPortletName, originalModelEL, modifiedModelEL);
-
-					if (portletName.equals(prefixedPortletName)) {
-						this.forThisPortlet = true;
-					}
-				}
-			}
+		this.modelEL = originalModelEL;
+		if (prefix == null) {
+			this.forThisPortlet = true;
+		}
+		else {
+			this.forThisPortlet = prefix.equals(portletName);
 		}
 	}
 
@@ -86,7 +59,7 @@ public class PublicRenderParameter {
 
 			ELContext elContext = facesContext.getELContext();
 			ValueExpression valueExpression = facesContext.getApplication().getExpressionFactory()
-				.createValueExpression(elContext, modifiedModelEL, String.class);
+				.createValueExpression(elContext, modelEL, String.class);
 			valueExpression.setValue(elContext, originalRequestValue);
 
 			return true;
@@ -95,11 +68,11 @@ public class PublicRenderParameter {
 			String exceptionMessage = e.getMessage();
 
 			if (exceptionMessage == null) {
-				logger.error("javax.el.PropertyNotFoundException: model-el=[{0}]", modifiedModelEL);
+				logger.error("javax.el.PropertyNotFoundException: model-el=[{0}]", modelEL);
 			}
 			else {
 				logger.error("javax.el.PropertyNotFoundException: {0}: model-el=[{1}]", exceptionMessage,
-					modifiedModelEL);
+						modelEL);
 			}
 
 			return false;
@@ -137,18 +110,18 @@ public class PublicRenderParameter {
 
 				ELContext elContext = facesContext.getELContext();
 				ValueExpression valueExpression = facesContext.getApplication().getExpressionFactory()
-					.createValueExpression(elContext, modifiedModelEL, String.class);
+					.createValueExpression(elContext, modelEL, String.class);
 				modelValue = (String) valueExpression.getValue(elContext);
 			}
 			catch (PropertyNotFoundException e) {
 				String exceptionMessage = e.getMessage();
 
 				if (exceptionMessage == null) {
-					logger.error("javax.el.PropertyNotFoundException: model-el=[{0}]", modifiedModelEL);
+					logger.error("javax.el.PropertyNotFoundException: model-el=[{0}]", modelEL);
 				}
 				else {
 					logger.error("javax.el.PropertyNotFoundException: {0}: model-el=[{1}]", exceptionMessage,
-						modifiedModelEL);
+							modelEL);
 				}
 			}
 
@@ -159,7 +132,7 @@ public class PublicRenderParameter {
 	}
 
 	public String getModifiedModelEL() {
-		return modifiedModelEL;
+		return modelEL;
 	}
 
 	public boolean isForThisPortlet() {
