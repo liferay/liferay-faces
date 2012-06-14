@@ -23,6 +23,9 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.ExternalContextWrapper;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseEvent;
+import javax.faces.event.PhaseId;
+import javax.faces.event.PhaseListener;
 import javax.faces.lifecycle.Lifecycle;
 import javax.faces.lifecycle.LifecycleFactory;
 import javax.portlet.PortletConfig;
@@ -41,6 +44,7 @@ import com.liferay.faces.bridge.context.ExternalContextImpl;
 import com.liferay.faces.bridge.context.RenderRedirectWriter;
 import com.liferay.faces.bridge.context.flash.BridgeFlash;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
+import com.liferay.faces.bridge.event.IPCPhaseListener;
 import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityManager;
 import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityMap;
@@ -102,8 +106,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 
 		// If required, cause the BridgeRequestScope to go out-of-scope.
 		if ((bridgeContext != null) && !bridgeContext.isBridgeRequestScopePreserved()) {
-			bridgeContext.getBridgeRequestScopeManager().removeBridgeRequestScope(bridgeRequestScope,
-				portletContext);
+			bridgeContext.getBridgeRequestScopeManager().removeBridgeRequestScope(bridgeRequestScope, portletContext);
 		}
 
 		super.cleanup();
@@ -123,10 +126,6 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 		Lifecycle renderPhaseFacesLifecycle = lifecycleFactory.getLifecycle(Bridge.PortletPhase.RENDER_PHASE.name());
 
 		init(renderRequest, renderResponse, Bridge.PortletPhase.RENDER_PHASE, renderPhaseFacesLifecycle);
-
-		// String[] testPRP = renderRequest.getPublicParameterMap().get("testPRP");
-		// String modelPRP = (String) renderRequest.getAttribute("modelPRP");
-		// System.err.println("!@#$ testPRP[]=" + testPRP + " modelPRP=" + modelPRP);
 
 		// If the portlet mode has not changed, then restore the faces view root and messages that would
 		// have been saved during the ACTION_PHASE of the portlet lifecycle. Section 5.4.1 requires that the
@@ -193,17 +192,31 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 			facesContext.getExternalContext().getRequestMap().put(Bridge.IS_POSTBACK_ATTRIBUTE, Boolean.TRUE);
 		}
 
-		// If necessary, execute the appropriate phases of the faces lifecycle. In the case of an initial
-		// (HTTP GET) request, the only phase that will be executed is RESTORE_VIEW. In the case of a
-		// postback request, the RESTORE_VIEW, APPLY_REQUEST_VALUES, PROCESS_VALIDATIONS, UPDATE_MODEL, and
-		// INVOKE_APPLICATION phases will normally be executed.
 		logger.debug("portletName=[{0}] facesLifecycleAlreadyExecuted=[{1}]", portletName,
 			facesLifecycleAlreadyExecuted);
 
-		if (!facesLifecycleAlreadyExecuted) {
+		// If the JSF lifecycle executed back in the ACTION_PHASE of the portlet lifecycle, then
+		if (facesLifecycleAlreadyExecuted) {
 
-			// Execute the JSF lifecycle so that ONLY the RESTORE_VIEW phase executes (this is a feature of the
-			// lifecycle implementation for the RENDER_PHASE of the portlet lifecycle).
+			// TCK TestPage054: prpUpdatedFromActionTest
+			PhaseEvent restoreViewPhaseEvent = new PhaseEvent(facesContext, PhaseId.RESTORE_VIEW,
+					renderPhaseFacesLifecycle);
+			PhaseListener[] phaseListeners = renderPhaseFacesLifecycle.getPhaseListeners();
+
+			for (PhaseListener phaseListener : phaseListeners) {
+
+				if (phaseListener instanceof IPCPhaseListener) {
+					phaseListener.afterPhase(restoreViewPhaseEvent);
+
+					break;
+				}
+			}
+		}
+
+		// Otherwise, in accordance with Section 5.2.6 of the Spec, execute the JSF lifecycle so that ONLY the
+		// RESTORE_VIEW phase executes. Note that this is accomplished by the RenderRequestPhaseListener.
+		else {
+
 			try {
 				String viewId = bridgeContext.getFacesViewId();
 				logger.debug("Executing Faces lifecycle for viewId=[{0}]", viewId);
