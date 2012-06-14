@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -483,18 +484,42 @@ public class BridgeContextImpl extends BridgeContext {
 							}
 						}
 					}
+
+					// Otherwise, if currently executing the RENDER_PHASE of the portlet lifecycle, then
 					else if (portletPhase == Bridge.PortletPhase.RENDER_PHASE) {
 
+						// If the specified URL is for a JSF viewId, then prepare for a render-redirect.
 						if (bridgeRedirectURL.isFacesViewTarget()) {
 							renderRedirect = true;
 							renderRedirectURL = bridgeRedirectURL;
 						}
+
+						// Otherwise,
 						else {
-							throw new IllegalStateException(
-								"6.1.3.1: Unable to redirect to a non-Faces view during the RENDER_PHASE.");
+
+							// If there is a URL parameter specifying a JSF viewId, then prepare for a render-redirect.
+							String viewIdRenderParameterName = bridgeConfig.getViewIdRenderParameterName();
+							String viewIdRenderParameterValue = bridgeRedirectURL.getParameter(
+									viewIdRenderParameterName);
+
+							if (viewIdRenderParameterValue != null) {
+
+								// TCK TestPage 179: redirectRenderPRP1Test
+								renderRedirect = true;
+								viewIdRenderParameterValue = URLDecoder.decode(viewIdRenderParameterValue,
+										BridgeConstants.UTF8);
+								bridgeRedirectURL = bridgeURLFactory.getBridgeRedirectURL(viewIdRenderParameterValue,
+										null, currentFacesViewId, this);
+								renderRedirectURL = bridgeRedirectURL;
+							}
+
+							// Otherwise, throw an IllegalStateException according to Section 6.1.3.1 of the Spec.
+							else {
+								throw new IllegalStateException(
+									"6.1.3.1: Unable to redirect to a non-Faces view during the RENDER_PHASE.");
+							}
 						}
 					}
-
 				}
 			}
 
