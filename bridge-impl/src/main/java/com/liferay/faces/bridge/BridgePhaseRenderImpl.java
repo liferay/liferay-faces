@@ -34,6 +34,7 @@ import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.faces.Bridge;
+import javax.portlet.faces.Bridge.PortletPhase;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
@@ -140,7 +141,11 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 			String toPortletModeAsString = toPortletMode.toString();
 
 			if (fromPortletModeAsString.equals(toPortletModeAsString)) {
-				facesLifecycleAlreadyExecuted = bridgeRequestScope.restoreScopedData(facesContext);
+				bridgeRequestScope.restoreScopedData(facesContext);
+
+				PortletPhase beganInPhase = bridgeRequestScope.getBeganInPhase();
+				facesLifecycleAlreadyExecuted = ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) ||
+						(beganInPhase == Bridge.PortletPhase.EVENT_PHASE));
 			}
 			else {
 				bridgeRequestScope.setPortletModeChanged(true);

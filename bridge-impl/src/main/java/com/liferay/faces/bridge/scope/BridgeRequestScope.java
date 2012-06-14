@@ -21,6 +21,7 @@ import javax.faces.context.Flash;
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletMode;
 import javax.portlet.RenderRequest;
+import javax.portlet.faces.Bridge;
 
 
 /**
@@ -52,11 +53,11 @@ public interface BridgeRequestScope extends ConcurrentMap<String, Object> {
 	 * This method restores the "scoped data" that was preserved by the call to {@link
 	 * #preserveScopedData(FacesContext)} method.
 	 *
-	 * @param   facesContext  The current {@link FacesContext}.
-	 *
-	 * @return  If the "scoped data" was restored, returns true. Otherwise, returns false.
+	 * @param  facesContext  The current {@link FacesContext}.
 	 */
-	boolean restoreScopedData(FacesContext facesContext);
+	void restoreScopedData(FacesContext facesContext);
+
+	public Bridge.PortletPhase getBeganInPhase();
 
 	// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
 	Flash getFlash();

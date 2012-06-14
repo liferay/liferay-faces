@@ -100,7 +100,7 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 
 	// Private Data Members
 	private Map<String, Object> attributeMap;
-	private boolean beganInActionOrEventRequest;
+	private Bridge.PortletPhase beganInPhase;
 	private List<String> excludedAttributeNames;
 	private Flash flash;
 	private String idPrefix;
@@ -145,12 +145,7 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 
 		this.preExistingAttributeNames = getPreExistingRequestAttributeNames(portletRequest);
 
-		Bridge.PortletPhase portletPhase = (Bridge.PortletPhase) portletRequest.getAttribute(
-				Bridge.PORTLET_LIFECYCLE_PHASE);
-
-		if ((portletPhase == Bridge.PortletPhase.ACTION_PHASE) || (portletPhase == Bridge.PortletPhase.EVENT_PHASE)) {
-			beganInActionOrEventRequest = true;
-		}
+		this.beganInPhase = (Bridge.PortletPhase) portletRequest.getAttribute(Bridge.PORTLET_LIFECYCLE_PHASE);
 	}
 
 	/**
@@ -175,125 +170,134 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 		// Get the ExternalContext.
 		ExternalContext externalContext = facesContext.getExternalContext();
 
-		// Save the view root.
-		setAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_VIEW_ROOT, facesContext.getViewRoot());
+		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE)) {
 
-		// If the PortletMode hasn't changed, then preserve the "javax.faces.ViewState" request parameter value.
-		if (!portletModeChanged) {
-			PortletResponse portletResponse = (PortletResponse) facesContext.getExternalContext().getResponse();
+			// Save the view root.
+			setAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_VIEW_ROOT, facesContext.getViewRoot());
 
-			if (portletResponse instanceof ActionResponse) {
-				String viewState = facesContext.getExternalContext().getRequestParameterMap().get(
-						ResponseStateManager.VIEW_STATE_PARAM);
+			// If the PortletMode hasn't changed, then preserve the "javax.faces.ViewState" request parameter value.
+			if (!portletModeChanged) {
+				PortletResponse portletResponse = (PortletResponse) facesContext.getExternalContext().getResponse();
 
-				if (viewState != null) {
+				if (portletResponse instanceof ActionResponse) {
+					String viewState = facesContext.getExternalContext().getRequestParameterMap().get(
+							ResponseStateManager.VIEW_STATE_PARAM);
 
-					// NOTE: Although it is possible to save this as a render parameter, can't use that approach because
-					// portlet containers like Pluto will add the "javax.faces.ViewState" parameter to any ResourceURLs
-					// that are created during the RENDER_PHASE of the portlet lifecycle.
-					setAttribute(ResponseStateManager.VIEW_STATE_PARAM, viewState);
+					if (viewState != null) {
+
+						// NOTE: Although it is possible to save this as a render parameter, can't use that approach
+						// because portlet containers like Pluto will add the "javax.faces.ViewState" parameter to any
+						// ResourceURLs that are created during the RENDER_PHASE of the portlet lifecycle.
+						setAttribute(ResponseStateManager.VIEW_STATE_PARAM, viewState);
+					}
 				}
 			}
-		}
 
-		// If specified in the WEB-INF/portlet.xml descriptor, then preserve the action parameters.
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			// If specified in the WEB-INF/portlet.xml descriptor, then preserve the action parameters.
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
-		if (bridgeContext.isPreserveActionParams()) {
-			Map<String, String> actionRequestParameterMap = new HashMap<String, String>(
-					externalContext.getRequestParameterMap());
-			actionRequestParameterMap.remove(ResponseStateManager.VIEW_STATE_PARAM);
-			actionRequestParameterMap.remove(JAVAX_FACES_ENCODED_URL_PARAM);
-			setAttribute(BRIDGE_REQ_SCOPE_ATTR_ACTION_PARAMS, actionRequestParameterMap);
-		}
-
-		// Save the list of faces messages.
-		List<FacesMessageWrapper> facesMessageWrappers = new ArrayList<FacesMessageWrapper>();
-		Iterator<String> clientIds = facesContext.getClientIdsWithMessages();
-
-		while (clientIds.hasNext()) {
-			String clientId = clientIds.next();
-			Iterator<FacesMessage> facesMessages = facesContext.getMessages(clientId);
-
-			while (facesMessages.hasNext()) {
-				FacesMessage facesMessage = facesMessages.next();
-				FacesMessageWrapper facesMessageWrapper = new FacesMessageWrapper(clientId, facesMessage);
-				facesMessageWrappers.add(facesMessageWrapper);
+			if (bridgeContext.isPreserveActionParams()) {
+				Map<String, String> actionRequestParameterMap = new HashMap<String, String>(
+						externalContext.getRequestParameterMap());
+				actionRequestParameterMap.remove(ResponseStateManager.VIEW_STATE_PARAM);
+				actionRequestParameterMap.remove(JAVAX_FACES_ENCODED_URL_PARAM);
+				setAttribute(BRIDGE_REQ_SCOPE_ATTR_ACTION_PARAMS, actionRequestParameterMap);
 			}
+
+			// Save the list of faces messages.
+			List<FacesMessageWrapper> facesMessageWrappers = new ArrayList<FacesMessageWrapper>();
+			Iterator<String> clientIds = facesContext.getClientIdsWithMessages();
+
+			while (clientIds.hasNext()) {
+				String clientId = clientIds.next();
+				Iterator<FacesMessage> facesMessages = facesContext.getMessages(clientId);
+
+				while (facesMessages.hasNext()) {
+					FacesMessage facesMessage = facesMessages.next();
+					FacesMessageWrapper facesMessageWrapper = new FacesMessageWrapper(clientId, facesMessage);
+					facesMessageWrappers.add(facesMessageWrapper);
+				}
+			}
+
+			if (facesMessageWrappers.size() > 0) {
+				setAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_MESSAGES, facesMessageWrappers);
+			}
+			else {
+				logger.trace("Not saving any faces messages");
+			}
+
+			// NOTE: PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-203 Build up a list
+			// of attributes found in the FacesContext attribute map and save them. It has to be copied in this manner
+			// because the Faces implementation likely calls the clear() method during the call to its
+			// FacesContextImpl.release() method.
+			Map<Object, Object> currentFacesContextAttributes = facesContext.getAttributes();
+			int mapSize = currentFacesContextAttributes.size();
+			List<FacesContextAttribute> savedFacesContextAttributes = new ArrayList<FacesContextAttribute>(mapSize);
+			Iterator<Map.Entry<Object, Object>> itr = currentFacesContextAttributes.entrySet().iterator();
+
+			while (itr.hasNext()) {
+				Map.Entry<Object, Object> mapEntry = itr.next();
+				Object name = mapEntry.getKey();
+				Object value = mapEntry.getValue();
+				logger.trace("Saving FacesContext attribute name=[{0}] value=[{1}]", name, value);
+				savedFacesContextAttributes.add(new FacesContextAttribute(name, value));
+			}
+
+			setAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_CONTEXT_ATTRIBUTES, savedFacesContextAttributes);
 		}
 
-		if (facesMessageWrappers.size() > 0) {
-			setAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_MESSAGES, facesMessageWrappers);
-		}
-		else {
-			logger.trace("Not saving any faces messages");
-		}
+		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
+				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
 
-		// Save the non-excluded request attributes. This would include, for example, managed-bean instances that may
-		// have been created during the ACTION_PHASE that need to survive to the RENDER_PHASE.
-		if ((!redirect) && (!portletModeChanged)) {
-			Map<String, Object> currentRequestAttributes = externalContext.getRequestMap();
+			// Save the non-excluded request attributes. This would include, for example, managed-bean instances that
+			// may have been created during the ACTION_PHASE that need to survive to the RENDER_PHASE.
+			if ((!redirect) && (!portletModeChanged)) {
+				Map<String, Object> currentRequestAttributes = externalContext.getRequestMap();
 
-			if (currentRequestAttributes != null) {
-				List<RequestAttribute> savedRequestAttributes = new ArrayList<RequestAttribute>();
-				Iterator<Map.Entry<String, Object>> itr = currentRequestAttributes.entrySet().iterator();
+				if (currentRequestAttributes != null) {
+					List<RequestAttribute> savedRequestAttributes = new ArrayList<RequestAttribute>();
+					Iterator<Map.Entry<String, Object>> itr = currentRequestAttributes.entrySet().iterator();
 
-				if (itr != null) {
+					if (itr != null) {
 
-					while (itr.hasNext()) {
-						Map.Entry<String, Object> mapEntry = itr.next();
-						String name = mapEntry.getKey();
-						Object value = mapEntry.getValue();
+						while (itr.hasNext()) {
+							Map.Entry<String, Object> mapEntry = itr.next();
+							String name = mapEntry.getKey();
+							Object value = mapEntry.getValue();
 
-						if (isExcludedRequestAttribute(name, value)) {
-							logger.trace("Not saving EXCLUDED attribute name=[{0}]", name);
+							if (isExcludedRequestAttribute(name, value)) {
+								logger.trace("Not saving EXCLUDED attribute name=[{0}]", name);
+							}
+							else if ((value != null) &&
+									(value.getClass().getAnnotation(ExcludeFromManagedRequestScope.class) != null)) {
+								logger.trace(
+									"Not saving EXCLUDED attribute name=[{0}] due to ExcludeFromManagedRequestScope annotation",
+									name);
+							}
+							else {
+								logger.trace("Saving non-excluded request attribute name=[{0}] value=[{1}]", name,
+									value);
+								savedRequestAttributes.add(new RequestAttribute(name, value));
+							}
 						}
-						else if ((value != null) &&
-								(value.getClass().getAnnotation(ExcludeFromManagedRequestScope.class) != null)) {
-							logger.trace(
-								"Not saving EXCLUDED attribute name=[{0}] due to ExcludeFromManagedRequestScope annotation",
-								name);
+
+						if (savedRequestAttributes.size() > 0) {
+							setAttribute(BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES, savedRequestAttributes);
 						}
 						else {
-							logger.trace("Saving non-excluded request attribute name=[{0}] value=[{1}]", name, value);
-							savedRequestAttributes.add(new RequestAttribute(name, value));
+							logger.trace("Not saving any non-excluded request attributes");
 						}
 					}
-
-					if (savedRequestAttributes.size() > 0) {
-						setAttribute(BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES, savedRequestAttributes);
-					}
-					else {
-						logger.trace("Not saving any non-excluded request attributes");
-					}
+				}
+				else {
+					logger.trace(
+						"Not saving any non-excluded request attributes because there are no request attributes!");
 				}
 			}
 			else {
-				logger.trace("Not saving any non-excluded request attributes because there are no request attributes!");
+				logger.trace("Not saving any non-excluded request attributes due to redirect");
 			}
 		}
-		else {
-			logger.trace("Not saving any non-excluded request attributes due to redirect");
-		}
-
-		// NOTE: PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-203 Build up a list of
-		// attributes found in the FacesContext attribute map and save them. It has to be copied in this manner because
-		// the Faces implementation likely calls the clear() method during the call to its FacesContextImpl.release()
-		// method.
-		Map<Object, Object> currentFacesContextAttributes = facesContext.getAttributes();
-		int mapSize = currentFacesContextAttributes.size();
-		List<FacesContextAttribute> savedFacesContextAttributes = new ArrayList<FacesContextAttribute>(mapSize);
-		Iterator<Map.Entry<Object, Object>> itr = currentFacesContextAttributes.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<Object, Object> mapEntry = itr.next();
-			Object name = mapEntry.getKey();
-			Object value = mapEntry.getValue();
-			logger.trace("Saving FacesContext attribute name=[{0}] value=[{1}]", name, value);
-			savedFacesContextAttributes.add(new FacesContextAttribute(name, value));
-		}
-
-		setAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_CONTEXT_ATTRIBUTES, savedFacesContextAttributes);
 	}
 
 	/**
@@ -305,9 +309,9 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 	 * @return  Flag indicating whether or not a restoration took place.
 	 */
 	@SuppressWarnings("unchecked")
-	public boolean restoreScopedData(FacesContext facesContext) {
+	public void restoreScopedData(FacesContext facesContext) {
 
-		if (beganInActionOrEventRequest) {
+		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE)) {
 
 			// Restore the view root that may have been saved during the ACTION_PHASE of the portlet lifecycle.
 			UIViewRoot uiViewRoot = (UIViewRoot) getAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_VIEW_ROOT);
@@ -344,31 +348,6 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 				logger.debug("Did not restore any facesMessages");
 			}
 
-			// Restore the non-excluded request attributes.
-			List<RequestAttribute> savedRequestAttributes = (List<RequestAttribute>) getAttribute(
-					BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES);
-
-			boolean restoredNonExcludedRequestAttributes = false;
-
-			if (savedRequestAttributes != null) {
-				Map<String, Object> currentRequestAttributes = facesContext.getExternalContext().getRequestMap();
-
-				for (RequestAttribute requestAttribute : savedRequestAttributes) {
-					String name = requestAttribute.getName();
-					Object value = requestAttribute.getValue();
-					logger.trace("Restoring non-excluded request attribute name=[{0}] value=[{1}]", name, value);
-					currentRequestAttributes.put(name, value);
-					restoredNonExcludedRequestAttributes = true;
-				}
-			}
-
-			if (restoredNonExcludedRequestAttributes) {
-				logger.debug("Restored non-excluded request attributes");
-			}
-			else {
-				logger.debug("Did not restore any non-excluded request attributes");
-			}
-
 			// NOTE: PROPOSE-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-203 Restore the
 			// FacesContext attributes that may have been saved during the ACTION_PHASE of the portlet lifecycle.
 			List<FacesContextAttribute> savedFacesContextAttributes = (List<FacesContextAttribute>) getAttribute(
@@ -395,11 +374,35 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 			else {
 				logger.debug("Did not restore any FacesContext attributes");
 			}
-
-			return true;
 		}
-		else {
-			return false;
+
+		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
+				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
+
+			// Restore the non-excluded request attributes.
+			List<RequestAttribute> savedRequestAttributes = (List<RequestAttribute>) getAttribute(
+					BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES);
+
+			boolean restoredNonExcludedRequestAttributes = false;
+
+			if (savedRequestAttributes != null) {
+				Map<String, Object> currentRequestAttributes = facesContext.getExternalContext().getRequestMap();
+
+				for (RequestAttribute requestAttribute : savedRequestAttributes) {
+					String name = requestAttribute.getName();
+					Object value = requestAttribute.getValue();
+					logger.trace("Restoring non-excluded request attribute name=[{0}] value=[{1}]", name, value);
+					currentRequestAttributes.put(name, value);
+					restoredNonExcludedRequestAttributes = true;
+				}
+			}
+
+			if (restoredNonExcludedRequestAttributes) {
+				logger.debug("Restored non-excluded request attributes");
+			}
+			else {
+				logger.debug("Did not restore any non-excluded request attributes");
+			}
 		}
 	}
 
@@ -423,6 +426,10 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 
 	public void setAttribute(String key, Object value) {
 		attributeMap.put(key, value);
+	}
+
+	public Bridge.PortletPhase getBeganInPhase() {
+		return beganInPhase;
 	}
 
 	protected boolean isExcludedRequestAttribute(String attributeName, Object value) {

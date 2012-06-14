@@ -24,6 +24,8 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
+import javax.portlet.PortletSession;
+import javax.portlet.ResourceResponse;
 import javax.portlet.StateAwareResponse;
 import javax.portlet.faces.Bridge;
 import javax.servlet.ServletContext;
@@ -49,6 +51,7 @@ public class BridgeRequestScopeManagerImpl implements BridgeRequestScopeManager 
 	private static final String RENDER_PARAM_BRIDGE_REQUEST_SCOPE_ID = "com.liferay.faces.bridge.bridgeRequestScopeId";
 
 	public void removeBridgeRequestScope(BridgeRequestScope bridgeRequestScope, PortletContext portletContext) {
+
 		if (bridgeRequestScope != null) {
 			getBridgeRequestScopeCache(portletContext).remove(bridgeRequestScope.getId());
 		}
@@ -167,44 +170,78 @@ public class BridgeRequestScopeManagerImpl implements BridgeRequestScopeManager 
 		// collisions with bridge request scopes for other portlets, the render parameter name has to be namespaced with
 		// the portlet name.
 		String portletName = portletConfig.getPortletName();
-		String renderParameterName = portletName + RENDER_PARAM_BRIDGE_REQUEST_SCOPE_ID;
-		String bridgeRequestScopeId = (String) portletRequest.getParameter(renderParameterName);
+		String bridgeRequestScopeKey = portletName + RENDER_PARAM_BRIDGE_REQUEST_SCOPE_ID;
 
-		// If there was a render parameter value found for the "id", then return the cached bridge request scope
+		// If there is a render parameter value found for the "id", then return the cached bridge request scope
 		// associated with the "id".
+		String bridgeRequestScopeId = (String) portletRequest.getParameter(bridgeRequestScopeKey);
+
 		if (bridgeRequestScopeId != null) {
 			bridgeRequestScope = getBridgeRequestScopeCache(portletContext).get(bridgeRequestScopeId);
 
 			if (bridgeRequestScope != null) {
 				logger.debug("Found render parameter name=[{0}] value=[{1}] and cached bridgeRequestScope=[{2}]",
-					renderParameterName, bridgeRequestScopeId, bridgeRequestScope);
+					bridgeRequestScopeKey, bridgeRequestScopeId, bridgeRequestScope);
 			}
 			else {
-				logger.debug(
-					"Found render parameter name=[{0}] value=[{1}] but bridgeRequestScope is not in the cache.",
-					renderParameterName, bridgeRequestScopeId);
+				logger.error("Found render parameter name=[{0}] value=[{1}] BUT bridgeRequestScope is not in the cache",
+					bridgeRequestScopeKey, bridgeRequestScopeId);
 			}
 		}
 
-		// If a BridgeRequestScope hasn't been determined by this point, then ask the BridgeRequestScopeFactory to
-		// create a new bridge request scope and return it.
+		// Otherwise, if there is a portlet session attribute found for the "id", then return the cached bridge
+		// request scope associated with the "id". Note: This occurs after an Ajax-based ResourceRequest so that
+		// non-excluded request attributes can be picked up by a subsequent RenderRequest.
+		else {
+
+			// TCK TestPage073: scopeAfterRedisplayResourcePPRTest
+			PortletSession portletSession = portletRequest.getPortletSession();
+			bridgeRequestScopeId = (String) portletSession.getAttribute(bridgeRequestScopeKey);
+
+			if (bridgeRequestScopeId != null) {
+
+				portletSession.removeAttribute(bridgeRequestScopeKey);
+
+				bridgeRequestScope = getBridgeRequestScopeCache(portletContext).get(bridgeRequestScopeId);
+
+				if (bridgeRequestScope != null) {
+
+					logger.debug("Found session attribute name=[{0}] value=[{1}] and cached bridgeRequestScope=[{2}]",
+						bridgeRequestScopeKey, bridgeRequestScopeId, bridgeRequestScope);
+				}
+				else {
+					logger.error(
+						"Found session attribute name=[{0}] value=[{1}] but bridgeRequestScope is not in the cache",
+						bridgeRequestScopeKey, bridgeRequestScopeId);
+				}
+			}
+		}
+
+		// Otherwise, ask the BridgeRequestScopeFactory to create a new bridge request scope and return it.
 		if (bridgeRequestScope == null) {
-			logger.debug("No value found for render parameter name=[{0}]", renderParameterName);
+			logger.debug("No value found for render-parameter/session-attribute name=[{0}]", bridgeRequestScopeKey);
 
 			BridgeRequestScopeFactory bridgeRequestScopeFactory = (BridgeRequestScopeFactory) BridgeFactoryFinder
 				.getFactory(BridgeRequestScopeFactory.class);
 
-			String sessionId = portletRequest.getPortletSession().getId();
+			PortletSession portletSession = portletRequest.getPortletSession();
+			String sessionId = portletSession.getId();
 			String idPrefix = portletName + ":::" + sessionId + ":::";
-			bridgeRequestScope = bridgeRequestScopeFactory.getBridgeRequestScope(portletConfig, portletContext, portletRequest, idPrefix);
+			bridgeRequestScope = bridgeRequestScopeFactory.getBridgeRequestScope(portletConfig, portletContext,
+					portletRequest, idPrefix);
 			bridgeRequestScopeId = bridgeRequestScope.getId();
 
 			if (portletResponse instanceof StateAwareResponse) {
-				logger.debug("Setting render parameter name=[{0}] value=[{1}]", renderParameterName,
+				logger.debug("Setting render parameter name=[{0}] value=[{1}]", bridgeRequestScopeKey,
 					bridgeRequestScopeId);
 
 				StateAwareResponse stateAwareResponse = (StateAwareResponse) portletResponse;
-				stateAwareResponse.setRenderParameter(renderParameterName, bridgeRequestScopeId);
+				stateAwareResponse.setRenderParameter(bridgeRequestScopeKey, bridgeRequestScopeId);
+			}
+			else if (portletResponse instanceof ResourceResponse) {
+
+				// TCK TestPage073: scopeAfterRedisplayResourcePPRTest
+				portletSession.setAttribute(bridgeRequestScopeKey, bridgeRequestScopeId);
 			}
 
 			logger.debug("Caching bridgeRequestScopeId=[{0}] bridgeRequestScope=[{1}]", bridgeRequestScopeId,

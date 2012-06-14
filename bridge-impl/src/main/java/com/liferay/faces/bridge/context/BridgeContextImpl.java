@@ -129,19 +129,15 @@ public class BridgeContextImpl extends BridgeContext {
 		this.portletResponse = portletResponse;
 		this.portletPhase = portletPhase;
 
-		// Note that for the RESOURCE_PHASE, it doesn't make any sense to get the BridgeRequestScope.
-		if (portletPhase != Bridge.PortletPhase.RESOURCE_PHASE) {
+		// Get the RequestScopeManager from the factory.
+		BridgeRequestScopeManagerFactory bridgeRequestScopeManagerFactory = (BridgeRequestScopeManagerFactory)
+			BridgeFactoryFinder.getFactory(BridgeRequestScopeManagerFactory.class);
 
-			// Get the RequestScopeManager from the factory.
-			BridgeRequestScopeManagerFactory bridgeRequestScopeManagerFactory = (BridgeRequestScopeManagerFactory)
-				BridgeFactoryFinder.getFactory(BridgeRequestScopeManagerFactory.class);
+		this.bridgeRequestScopeManager = bridgeRequestScopeManagerFactory.getBridgeRequestScopeManager();
 
-			this.bridgeRequestScopeManager = bridgeRequestScopeManagerFactory.getBridgeRequestScopeManager();
-
-			// Get the BridgeRequestScope from the BridgeRequestScopeManager.
-			this.bridgeRequestScope = bridgeRequestScopeManager.getBridgeRequestScope(portletConfig, portletContext,
-					portletRequest, portletResponse);
-		}
+		// Get the BridgeRequestScope from the BridgeRequestScopeManager.
+		this.bridgeRequestScope = bridgeRequestScopeManager.getBridgeRequestScope(portletConfig, portletContext,
+				portletRequest, portletResponse);
 
 		// Get the BridgeURLFactory instance.
 		this.bridgeURLFactory = (BridgeURLFactory) BridgeFactoryFinder.getFactory(BridgeURLFactory.class);
