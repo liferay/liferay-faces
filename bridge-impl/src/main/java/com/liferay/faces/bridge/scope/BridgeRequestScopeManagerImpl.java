@@ -16,7 +16,6 @@ package com.liferay.faces.bridge.scope;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -48,8 +47,6 @@ public class BridgeRequestScopeManagerImpl implements BridgeRequestScopeManager 
 	private static final int DEFAULT_MAX_MANAGED_REQUEST_SCOPES = 100;
 	private static final String ATTR_BRIDGE_REQUEST_SCOPE_CACHE = "com.liferay.faces.bridge.bridgeRequestScopeCache";
 	private static final String RENDER_PARAM_BRIDGE_REQUEST_SCOPE_ID = "com.liferay.faces.bridge.bridgeRequestScopeId";
-	private static final String SUPPORTED_PUBLIC_RENDER_PARAMETERS_MAP =
-		"com.liferay.faces.bridge.supportedPublicRenderParametersMap";
 
 	public void removeBridgeRequestScope(BridgeRequestScope bridgeRequestScope, PortletContext portletContext) {
 		if (bridgeRequestScope != null) {
@@ -173,46 +170,6 @@ public class BridgeRequestScopeManagerImpl implements BridgeRequestScopeManager 
 		String renderParameterName = portletName + RENDER_PARAM_BRIDGE_REQUEST_SCOPE_ID;
 		String bridgeRequestScopeId = (String) portletRequest.getParameter(renderParameterName);
 
-		// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-209 Special Case: If a
-		// bridgeRequestScopeId was detected in a render parameter, then that means there should be a BridgeRequestScope
-		// in the cache. However, if the current portlet is participating in Inter-Portlet Communication (IPC) via
-		// supported-public-render-parameter entries in portlet.xml, then we need to check if any of the values of these
-		// have changed. If any of them have changed, then the BridgeRequestScope must be removed from the cache so that
-		// a new one will be created below. This will allow the IPC to work correctly.
-		if (bridgeRequestScopeId != null) {
-
-			bridgeRequestScope = getBridgeRequestScopeCache(portletContext).get(bridgeRequestScopeId);
-
-			if (bridgeRequestScope != null) {
-
-				@SuppressWarnings("unchecked")
-				Map<String, String> supportedPublicRenderParametersMap = (Map<String, String>) bridgeRequestScope.get(
-						SUPPORTED_PUBLIC_RENDER_PARAMETERS_MAP);
-				Enumeration<String> supportedPublicRenderParameterNames = portletConfig.getPublicRenderParameterNames();
-
-				if ((supportedPublicRenderParametersMap != null) && (supportedPublicRenderParameterNames != null)) {
-
-					while (supportedPublicRenderParameterNames.hasMoreElements()) {
-						String name = supportedPublicRenderParameterNames.nextElement();
-						String oldValue = supportedPublicRenderParametersMap.get(name);
-						String newValue = portletRequest.getParameter(name);
-
-						if (((oldValue == null) && (newValue != null)) || ((oldValue != null) && (newValue == null)) ||
-								((oldValue != null) && !oldValue.equals(newValue))) {
-							logger.debug(
-								"Removed bridgeRequestScopeId=[{0}] bridgeRequestScope=[{1}] from cache due since public render parameter name=[{2}] changed from oldValue=[{3}] to newValue=[{4}]",
-								new Object[] { bridgeRequestScopeId, bridgeRequestScope, name, oldValue, newValue });
-							getBridgeRequestScopeCache(portletContext).remove(bridgeRequestScopeId);
-							bridgeRequestScopeId = null;
-							bridgeRequestScope = null;
-
-							break;
-						}
-					}
-				}
-			}
-		}
-
 		// If there was a render parameter value found for the "id", then return the cached bridge request scope
 		// associated with the "id".
 		if (bridgeRequestScopeId != null) {
@@ -252,22 +209,6 @@ public class BridgeRequestScopeManagerImpl implements BridgeRequestScopeManager 
 
 			logger.debug("Caching bridgeRequestScopeId=[{0}] bridgeRequestScope=[{1}]", bridgeRequestScopeId,
 				bridgeRequestScope);
-
-			// Save the values of the Supported Public Render Parameters in a map inside the BridgeRequestScope so that
-			// this method can detect value changes on subsequent renders.
-			Map<String, String> supportedPublicRenderParametersMap = new HashMap<String, String>();
-			Enumeration<String> publicRenderParameterNames = portletConfig.getPublicRenderParameterNames();
-
-			if (publicRenderParameterNames != null) {
-
-				while (publicRenderParameterNames.hasMoreElements()) {
-					String name = publicRenderParameterNames.nextElement();
-					String value = portletRequest.getParameter(name);
-					supportedPublicRenderParametersMap.put(name, value);
-				}
-			}
-
-			bridgeRequestScope.put(SUPPORTED_PUBLIC_RENDER_PARAMETERS_MAP, supportedPublicRenderParametersMap);
 
 			getBridgeRequestScopeCache(portletContext).put(bridgeRequestScopeId, bridgeRequestScope);
 		}
