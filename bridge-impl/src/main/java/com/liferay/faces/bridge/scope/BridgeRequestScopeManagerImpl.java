@@ -231,23 +231,34 @@ public class BridgeRequestScopeManagerImpl implements BridgeRequestScopeManager 
 					portletRequest, idPrefix);
 			bridgeRequestScopeId = bridgeRequestScope.getId();
 
+			// Only store the newly created BridgeRequestScope in the cache during the ACTION_PHASE, EVENT_PHASE, or
+			// RESOURCE_PHASE or the portlet lifecycle. No sense in storing it in the cache during the RENDER_PHASE
+			// since the lifespan of a BridgeRequestScope starts with an full postback action (most commonly), and with
+			// Ajax request (less commonly).
+			boolean storeInCache = false;
+
 			if (portletResponse instanceof StateAwareResponse) {
 				logger.debug("Setting render parameter name=[{0}] value=[{1}]", bridgeRequestScopeKey,
 					bridgeRequestScopeId);
 
 				StateAwareResponse stateAwareResponse = (StateAwareResponse) portletResponse;
 				stateAwareResponse.setRenderParameter(bridgeRequestScopeKey, bridgeRequestScopeId);
+				storeInCache = true;
 			}
 			else if (portletResponse instanceof ResourceResponse) {
 
 				// TCK TestPage073: scopeAfterRedisplayResourcePPRTest
 				portletSession.setAttribute(bridgeRequestScopeKey, bridgeRequestScopeId);
+				storeInCache = true;
 			}
 
-			logger.debug("Caching bridgeRequestScopeId=[{0}] bridgeRequestScope=[{1}]", bridgeRequestScopeId,
-				bridgeRequestScope);
+			if (storeInCache) {
+				logger.debug("Caching bridgeRequestScopeId=[{0}] bridgeRequestScope=[{1}]", bridgeRequestScopeId,
+					bridgeRequestScope);
 
-			getBridgeRequestScopeCache(portletContext).put(bridgeRequestScopeId, bridgeRequestScope);
+				getBridgeRequestScopeCache(portletContext).put(bridgeRequestScopeId, bridgeRequestScope);
+			}
+
 		}
 
 		return bridgeRequestScope;
