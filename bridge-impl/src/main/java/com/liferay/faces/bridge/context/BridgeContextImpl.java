@@ -88,6 +88,7 @@ public class BridgeContextImpl extends BridgeContext {
 	// Private Data Members
 	private Map<String, Object> attributeMap = new HashMap<String, Object>();
 	private BridgeConfig bridgeConfig;
+	private Boolean bridgeRequestScopeAjaxEnabled;
 	private Boolean bridgeRequestScopePreserved;
 	private BridgeRequestScope bridgeRequestScope;
 	private BridgeRequestScopeManager bridgeRequestScopeManager;
@@ -135,10 +136,6 @@ public class BridgeContextImpl extends BridgeContext {
 			BridgeFactoryFinder.getFactory(BridgeRequestScopeManagerFactory.class);
 
 		this.bridgeRequestScopeManager = bridgeRequestScopeManagerFactory.getBridgeRequestScopeManager();
-
-		// Get the BridgeRequestScope from the BridgeRequestScopeManager.
-		this.bridgeRequestScope = bridgeRequestScopeManager.getBridgeRequestScope(portletConfig, portletContext,
-				portletRequest, portletResponse);
 
 		// Get the BridgeURLFactory instance.
 		this.bridgeURLFactory = (BridgeURLFactory) BridgeFactoryFinder.getFactory(BridgeURLFactory.class);
@@ -469,7 +466,7 @@ public class BridgeContextImpl extends BridgeContext {
 
 							// Set a flag on the {@link BridgeRequestScope} indicating that a <redirect />
 							// occurred which means that the request attributes should not be preserved.
-							bridgeRequestScope.setRedirect(true);
+							getBridgeRequestScope().setRedirect(true);
 
 							// Apply the PortletMode, WindowState, etc. that may be present in the URL to the response.
 							try {
@@ -596,6 +593,21 @@ public class BridgeContextImpl extends BridgeContext {
 
 	@Override
 	public BridgeRequestScope getBridgeRequestScope() {
+
+		if (bridgeRequestScope == null) {
+
+			boolean createRequestScope = true;
+
+			if (portletPhase == Bridge.PortletPhase.RESOURCE_PHASE) {
+				createRequestScope = isBridgeRequestScopeAjaxEnabled();
+			}
+
+			if (createRequestScope) {
+				bridgeRequestScope = bridgeRequestScopeManager.getBridgeRequestScope(portletConfig, portletContext,
+						portletRequest, portletResponse);
+			}
+		}
+
 		return bridgeRequestScope;
 	}
 
@@ -628,6 +640,16 @@ public class BridgeContextImpl extends BridgeContext {
 		}
 
 		return bridgeRequestScopePreserved;
+	}
+
+	protected boolean isBridgeRequestScopeAjaxEnabled() {
+
+		if (bridgeRequestScopeAjaxEnabled == null) {
+			bridgeRequestScopeAjaxEnabled = BooleanHelper.toBoolean(_getInitParameter(
+						BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_AJAX_ENABLED), false);
+		}
+
+		return bridgeRequestScopeAjaxEnabled;
 	}
 
 	@Override

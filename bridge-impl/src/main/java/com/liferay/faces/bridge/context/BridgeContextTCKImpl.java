@@ -41,7 +41,10 @@ public class BridgeContextTCKImpl extends BridgeContextWrapper {
 
 		String value = super.getInitParameter(name);
 
-		if (BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE1.equals(name) ||
+		if (BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_AJAX_ENABLED.equals(name)) {
+			value = Boolean.TRUE.toString();
+		}
+		else if (BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE1.equals(name) ||
 				(BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE2.equals(name))) {
 			value = Boolean.FALSE.toString();
 		}

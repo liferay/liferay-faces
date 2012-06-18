@@ -114,12 +114,16 @@ public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 				// DOM-update back to the jsf.js Javascript code that issued the XmlHttpRequest in the first place.
 				resourcePhaseFacesLifecycle.render(facesContext);
 
-				// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-202
-				bridgeRequestScope.setPortletMode(resourceRequest.getPortletMode());
+				// If the {@link BridgeConfigConstants#PARAM_BRIDGE_REQUEST_SCOPE_AJAX_ENABLED} feature is enabled, then
+				if (bridgeRequestScope != null) {
 
-				// TCK TestPage073: scopeAfterRedisplayResourcePPRTest -- Preserve the non-excluded request attributes
-				// in the BridgeRequestScope so that they can be restored in subsequent render requests.
-				bridgeRequestScope.preserveScopedData(facesContext);
+					// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-202
+					bridgeRequestScope.setPortletMode(resourceRequest.getPortletMode());
+
+					// TCK TestPage073: scopeAfterRedisplayResourcePPRTest -- Preserve the non-excluded request
+					// attributes in the BridgeRequestScope so that they can be restored in subsequent render requests.
+					bridgeRequestScope.preserveScopedData(facesContext);
+				}
 
 				// Spec 6.6 (Namespacing)
 				indicateNamespacingToConsumers(facesContext.getViewRoot(), resourceResponse);
