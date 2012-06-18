@@ -33,6 +33,9 @@ public class BridgeConfigConstants {
 	public static String PARAM_CONTAINER_ABLE_TO_SET_HTTP_STATUS_CODE2 =
 		"org.portletfaces.bridge.containerAbleToSetHttpStatusCode";
 
+	/** Boolean indicating whether or not the bridge should manage BridgeRequestScope during the RESOURCE_PHASE of the portlet lifecycle. */
+	public static final String PARAM_BRIDGE_REQUEST_SCOPE_AJAX_ENABLED = "com.liferay.faces.bridge.bridgeRequestScopeAjaxEnabled";
+
 	/** Value returned by {@link BridgeContext#isBridgeRequestScopePreserved()}. Default is true. */
 	public static final String PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED1 =
 		"com.liferay.faces.bridge.bridgeRequestScopePreserved";

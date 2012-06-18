@@ -58,7 +58,7 @@ public interface BridgeRequestScopeManager {
 	void removeBridgeRequestScopesBySession(HttpSession httpSession);
 
 	/**
-	 * Either returns an existing {@link BridgeRequestScope} associated with the specified {@link FacesContext} from the
+	 * Either returns an existing {@link BridgeRequestScope} associated with the specified parameters from the
 	 * underlying cache or returns a new one.
 	 *
 	 * @param  portletConfig    The current {@link PortletConfig}.
