@@ -43,7 +43,7 @@ public class LiferayResourceURL extends LiferayBaseURL implements ResourceURL {
 
 		if (toStringValue == null) {
 
-			// FACES-863: Liferay 5.2 requires the p_p_mode and p_p_state parameters even though this shouldn't be the
+			// FACES-383: Liferay 5.2 requires the p_p_mode and p_p_state parameters even though this shouldn't be the
 			// case for a ResourceURL.
 			boolean firstParameter = false;
 
