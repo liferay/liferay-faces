@@ -74,7 +74,9 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 		"com.liferay.faces.bridge.facescontext.attributes";
 	private static final String BRIDGE_REQ_SCOPE_ATTR_FACES_MESSAGES = "com.liferay.faces.bridge.faces.messages";
 	private static final String BRIDGE_REQ_SCOPE_ATTR_FACES_VIEW_ROOT = "com.liferay.faces.bridge.faces.view.root";
-	private static final String BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES =
+
+	// Protected Constants
+	protected static final String BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES =
 		"com.liferay.faces.bridge.faces.request.attributes";
 
 	// Private Constants for EXCLUDED namespaces listed in Section 5.1.2 of the JSR 329 Spec
@@ -176,7 +178,7 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 			setAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_VIEW_ROOT, facesContext.getViewRoot());
 
 			// If the PortletMode hasn't changed, then preserve the "javax.faces.ViewState" request parameter value.
-			if (!portletModeChanged) {
+			if (!isPortletModeChanged()) {
 				PortletResponse portletResponse = (PortletResponse) facesContext.getExternalContext().getResponse();
 
 				if (portletResponse instanceof ActionResponse) {
@@ -249,9 +251,20 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
 				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
 
-			// Save the non-excluded request attributes. This would include, for example, managed-bean instances that
-			// may have been created during the ACTION_PHASE that need to survive to the RENDER_PHASE.
-			if ((!redirect) && (!portletModeChanged)) {
+			// If a redirect occurred, then the non-excluded request attributes are not to be preserved. Note that for
+			// Liferay, not-preserving simply isn't good enough. See
+			// BridgeRequestScopeLiferayImpl#restoreScopedData(FacesContext) for more information.
+			if (isRedirect()) {
+
+				// TCK TestPage062: eventScopeNotRestoredRedirectTest
+				logger.trace("Due to redirect, not saving any non-excluded request attributes");
+			}
+
+			// Otherwise, if the portlet mode hasn't changed, then save the non-excluded request attributes. This would
+			// include, for example, managed-bean instances that may have been created during the ACTION_PHASE that
+			// need to survive to the RENDER_PHASE.
+			else if (!isPortletModeChanged()) {
+
 				Map<String, Object> currentRequestAttributes = externalContext.getRequestMap();
 
 				if (currentRequestAttributes != null) {
@@ -293,9 +306,6 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 					logger.trace(
 						"Not saving any non-excluded request attributes because there are no request attributes!");
 				}
-			}
-			else {
-				logger.trace("Not saving any non-excluded request attributes due to redirect");
 			}
 		}
 	}
@@ -388,12 +398,16 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 			if (savedRequestAttributes != null) {
 				Map<String, Object> currentRequestAttributes = facesContext.getExternalContext().getRequestMap();
 
-				for (RequestAttribute requestAttribute : savedRequestAttributes) {
-					String name = requestAttribute.getName();
-					Object value = requestAttribute.getValue();
-					logger.trace("Restoring non-excluded request attribute name=[{0}] value=[{1}]", name, value);
-					currentRequestAttributes.put(name, value);
-					restoredNonExcludedRequestAttributes = true;
+				// If a redirect did not occur, then restore the non-excluded request attributes.
+				if (!isRedirect()) {
+
+					for (RequestAttribute requestAttribute : savedRequestAttributes) {
+						String name = requestAttribute.getName();
+						Object value = requestAttribute.getValue();
+						logger.trace("Restoring non-excluded request attribute name=[{0}] value=[{1}]", name, value);
+						currentRequestAttributes.put(name, value);
+						restoredNonExcludedRequestAttributes = true;
+					}
 				}
 			}
 
@@ -430,6 +444,10 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 
 	public Bridge.PortletPhase getBeganInPhase() {
 		return beganInPhase;
+	}
+
+	public boolean isPortletModeChanged() {
+		return portletModeChanged;
 	}
 
 	protected boolean isExcludedRequestAttribute(String attributeName, Object value) {
@@ -585,5 +603,9 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 
 	public void setRedirect(boolean redirect) {
 		this.redirect = redirect;
+	}
+
+	public boolean isRedirect() {
+		return redirect;
 	}
 }

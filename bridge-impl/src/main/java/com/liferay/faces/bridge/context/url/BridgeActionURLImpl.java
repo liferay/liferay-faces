@@ -19,6 +19,7 @@ import javax.portlet.BaseURL;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.faces.Bridge;
+import javax.portlet.faces.Bridge.PortletPhase;
 import javax.portlet.faces.BridgeUtil;
 
 import com.liferay.faces.bridge.BridgeConstants;
@@ -48,7 +49,8 @@ public class BridgeActionURLImpl extends BridgeResponseURLImpl implements Bridge
 		BaseURL baseURL = null;
 
 		// If this is executing during the ACTION_PHASE of the portlet lifecycle, then
-		if (BridgeUtil.getPortletRequestPhase() == Bridge.PortletPhase.ACTION_PHASE) {
+		PortletPhase portletRequestPhase = BridgeUtil.getPortletRequestPhase();
+		if (portletRequestPhase == Bridge.PortletPhase.ACTION_PHASE) {
 
 			// The Mojarra MultiViewHandler.getResourceURL(String) method is implemented in such a way that it calls
 			// ExternalContext.encodeActionURL(ExternalContext.encodeResourceURL(url)). The return value of those calls
@@ -104,7 +106,13 @@ public class BridgeActionURLImpl extends BridgeResponseURLImpl implements Bridge
 				}
 				else {
 					String urlWithModifiedParameters = _toString(modeChanged);
-					baseURL = portletContainer.createActionURL(urlWithModifiedParameters);
+					
+					if (portletRequestPhase == Bridge.PortletPhase.EVENT_PHASE) {
+						baseURL = new BaseURLNonEncodedStringImpl(urlWithModifiedParameters);
+					}
+					else {
+						baseURL = portletContainer.createActionURL(urlWithModifiedParameters);
+					}
 				}
 
 				// If the URL string is self-referencing, meaning, it targets the current Faces view, then copy the

@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.application;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -31,6 +32,7 @@ import javax.portlet.PortletResponse;
 import javax.portlet.StateAwareResponse;
 import javax.portlet.WindowStateException;
 import javax.portlet.faces.Bridge;
+import javax.portlet.faces.Bridge.PortletPhase;
 
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.BridgeActionURL;
@@ -60,38 +62,67 @@ public class BridgeNavigationHandlerImpl extends BridgeNavigationHandler {
 
 		NavigationCase navigationCase = getNavigationCase(facesContext, fromAction, outcome);
 
-		wrappedNavigationHandler.handleNavigation(facesContext, fromAction, outcome);
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+
+		PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
+
+		// Ask the wrapped NavigationHandler to perform the navigation unless currently executing the EVENT_PHASE of the
+		// portlet lifecycle. This is because the Mojarra/MyFaces NavigationHandler implementations do not provide an
+		// opportunity to encode the PortletMode and WindowState directly into the response. Instead, handle that below.
+		if (portletRequestPhase != Bridge.PortletPhase.EVENT_PHASE) {
+			wrappedNavigationHandler.handleNavigation(facesContext, fromAction, outcome);
+		}
 
 		if (navigationCase != null) {
 
 			// Hack for http://jira.icesoft.org/browse/ICE-7996
 			Iterator<FacesMessage> itr = facesContext.getMessages();
+
 			while (itr.hasNext()) {
 				FacesMessage facesMessage = itr.next();
+
 				if (facesMessage.getDetail().contains("Unable to find matching navigation case")) {
 					logger.warn("Removed bogus FacesMessage caused by http://jira.icesoft.org/browse/ICE-7996");
 					itr.remove();
 				}
 			}
 
-			// If the navigation-case is NOT a redirect, then need to apply PortletMode, WindowState, etc. that may
-			// be present in the to-view-id to the response. Don't need to worry about the redirect case because
+			// Determine whether or not the to-view-id should be directly encoded to the response, meaning, apply the
+			// PortletMode, WindowState, etc. that may be present in the to-view-id to the response.
+			boolean directlyEncodeToResponse;
+
+			// If running in the EVENT_PHASE, then according to Section 6.1.3.1 of the Spec, then indicate that the
+			// to-view-id should be directly encoded to the response.
+			if (portletRequestPhase == Bridge.PortletPhase.EVENT_PHASE) {
+				directlyEncodeToResponse = true;
+			}
+
+			// Otherwise, if the navigation-case is NOT a redirect, then indicate that the to-view-id should be
+			// directly encoded to the response. Don't need to worry about the redirect case here because
 			// that's handled in the BridgeContext#redirect(String) method. It would be nice to handle the redirect
 			// case here but it needs to stay in BridgeContext#redirect(String) since it's possible for developers
 			// to call ExternalContext.redirect(String) directly from their application.
-			if (!navigationCase.isRedirect()) {
+			else if (!navigationCase.isRedirect()) {
+				directlyEncodeToResponse = true;
+			}
+
+			// Otherwise, indicate that the to-view-id should NOT be directly encoded to the response.
+			else {
+				directlyEncodeToResponse = false;
+			}
+
+			// If required, directly encode the to-view-id to the response.
+			if (directlyEncodeToResponse) {
 
 				String toViewId = navigationCase.getToViewId(facesContext);
 
 				if (toViewId != null) {
 
-					BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 					PortletResponse portletResponse = bridgeContext.getPortletResponse();
 
 					if (portletResponse instanceof StateAwareResponse) {
 
-						BridgeActionURL bridgeActionURL = bridgeContext.encodeActionURL(navigationCase.getToViewId(
-									facesContext));
+						BridgeActionURL bridgeActionURL = bridgeContext.encodeActionURL(toViewId);
 
 						try {
 
@@ -109,11 +140,18 @@ public class BridgeNavigationHandlerImpl extends BridgeNavigationHandler {
 							}
 
 							bridgeActionURL.applyToResponse((StateAwareResponse) portletResponse);
+
+							if (navigationCase.isRedirect()) {
+								bridgeContext.redirect(bridgeActionURL.toString());
+							}
 						}
 						catch (PortletModeException e) {
 							logger.error(e.getMessage());
 						}
 						catch (WindowStateException e) {
+							logger.error(e.getMessage());
+						}
+						catch (IOException e) {
 							logger.error(e.getMessage());
 						}
 					}
