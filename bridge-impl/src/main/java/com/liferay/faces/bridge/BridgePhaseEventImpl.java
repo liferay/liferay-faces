@@ -103,6 +103,9 @@ public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
 			// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
 			bridgeRequestScope.setFlash(facesContext.getExternalContext().getFlash());
 
+			// Maintain the render parameters set in the ACTION_PHASE so that they carry over to the RENDER_PHASE.
+			bridgeContext.getPortletContainer().maintainRenderParameters(eventRequest, eventResponse);
+
 			// Spec 6.6 (Namespacing)
 			indicateNamespacingToConsumers(facesContext.getViewRoot(), eventResponse);
 		}

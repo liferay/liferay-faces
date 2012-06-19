@@ -27,6 +27,8 @@ import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.ResponseWriter;
 import javax.portlet.ActionResponse;
 import javax.portlet.BaseURL;
+import javax.portlet.EventRequest;
+import javax.portlet.EventResponse;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortalContext;
 import javax.portlet.PortletRequest;
@@ -247,6 +249,10 @@ public class PortletContainerImpl implements PortletContainer {
 
 		// In this default implementation, there's nothing to fix, so just return the specified value.
 		return value;
+	}
+
+	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse) {
+		eventResponse.setRenderParameters(eventRequest);
 	}
 
 	public void redirect(String url) throws IOException {
