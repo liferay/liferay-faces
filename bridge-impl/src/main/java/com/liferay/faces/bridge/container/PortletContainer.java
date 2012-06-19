@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.context.ResponseWriter;
+import javax.portlet.EventRequest;
+import javax.portlet.EventResponse;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceResponse;
@@ -140,6 +142,11 @@ public interface PortletContainer {
 	 * @return  True if the portlet container supports it.
 	 */
 	public boolean isAbleToSetResourceResponseBufferSize();
+
+	/**
+	 * Maintains (copies) the render parameters found in the specified EventRequest to the specified EventResponse. 
+	 */
+	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse);
 
 	/**
 	 * Determines whether or not the portlet container has the ability to issue a forward when a dispatch occurs. If

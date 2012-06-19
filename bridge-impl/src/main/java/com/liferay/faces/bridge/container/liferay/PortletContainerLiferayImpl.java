@@ -23,6 +23,8 @@ import java.util.Set;
 
 import javax.faces.context.ResponseWriter;
 import javax.portlet.ActionResponse;
+import javax.portlet.EventRequest;
+import javax.portlet.EventResponse;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
@@ -211,6 +213,17 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 		}
 
 		return value;
+	}
+
+	/**
+	 * The Liferay {@link EventResponseImpl#setRenderParameters(EventRequest)} method is unimplemented. This method
+	 * provides an opportunity to work-around that limitation.
+	 */
+	@Override
+	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse) {
+
+		eventResponse.setRenderParameters(eventRequest.getPublicParameterMap());
+		eventResponse.setRenderParameters(eventRequest.getPrivateParameterMap());
 	}
 
 	@Override
