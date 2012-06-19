@@ -73,6 +73,7 @@ public class DocUploadBackingBean {
 	private HtmlInputFile attachment3;
 	private String maxFileSizeKB;
 
+	@SuppressWarnings("deprecation")
 	public String uploadAttachments() {
 
 		boolean success = true;

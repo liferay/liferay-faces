@@ -36,17 +36,14 @@
 		<dependency>
 			<groupId>org.icefaces</groupId>
 			<artifactId>icefaces</artifactId>
-			<version>${icefaces3.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.icefaces</groupId>
 			<artifactId>icefaces-compat</artifactId>
-			<version>${icefaces3.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.icefaces</groupId>
 			<artifactId>icepush</artifactId>
-			<version>${icefaces3.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.seam</groupId>
