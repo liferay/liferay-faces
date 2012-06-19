@@ -63,6 +63,9 @@ public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
 
 			init(eventRequest, eventResponse, Bridge.PortletPhase.EVENT_PHASE, eventPhaseFacesLifecycle);
 
+			// Restore the BridgeRequestScope that may have started during the ACTION_PHASE.
+			bridgeRequestScope.restoreScopedData(facesContext);
+			
 			// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-202
 			bridgeRequestScope.setPortletMode(eventRequest.getPortletMode());
 
@@ -118,3 +121,4 @@ public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
 	}
 
 }
+
