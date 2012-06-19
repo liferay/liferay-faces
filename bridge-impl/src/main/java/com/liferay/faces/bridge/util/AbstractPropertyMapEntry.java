@@ -30,4 +30,8 @@ public abstract class AbstractPropertyMapEntry<V> implements Map.Entry<String, V
 	public String getKey() {
 		return key;
 	}
+
+	public void remove() {
+		throw new UnsupportedOperationException();
+	}
 }

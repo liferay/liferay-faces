@@ -86,7 +86,7 @@ public abstract class AbstractPropertyMap<V> implements Map<String, V> {
 		Enumeration<String> propertyNames = getPropertyNames();
 
 		if (propertyNames != null) {
-			entrySet = new HashSet<Map.Entry<String, V>>();
+			entrySet = new PropertyMapEntrySet<V>();
 
 			while (propertyNames.hasMoreElements()) {
 				String name = propertyNames.nextElement();
