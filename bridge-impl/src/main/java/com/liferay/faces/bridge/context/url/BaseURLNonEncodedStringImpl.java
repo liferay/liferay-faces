@@ -15,6 +15,7 @@ package com.liferay.faces.bridge.context.url;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -47,6 +48,11 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 	private String query;
 	private String main;
 	private String toStringValue;
+
+	public BaseURLNonEncodedStringImpl(String urlWithParameters) {
+		this.url = urlWithParameters;
+		this.parameterMap = new HashMap<String, String[]>();
+	}
 
 	public BaseURLNonEncodedStringImpl(String url, Map<String, String[]> parameterMap) {
 		this.url = url;

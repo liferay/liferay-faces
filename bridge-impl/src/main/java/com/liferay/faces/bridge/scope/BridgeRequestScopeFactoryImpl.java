@@ -17,12 +17,20 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 
+import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.bridge.config.ProductMap;
+
 
 /**
  * @author  Neil Griffin
  */
 public class BridgeRequestScopeFactoryImpl extends BridgeRequestScopeFactory {
 
+	// Private Constants
+	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(BridgeConstants.LIFERAY_PORTAL)
+		.isDetected();
+
+	// Private Data Members
 	private BridgeRequestScopeFactory wrappedFactory;
 
 	public BridgeRequestScopeFactoryImpl() {
@@ -44,7 +52,15 @@ public class BridgeRequestScopeFactoryImpl extends BridgeRequestScopeFactory {
 		}
 
 		if (bridgeRequestScope == null) {
-			bridgeRequestScope = new BridgeRequestScopeImpl(portletConfig, portletContext, portletRequest, idPrefix);
+
+			if (LIFERAY_PORTAL_DETECTED) {
+				bridgeRequestScope = new BridgeRequestScopeLiferayImpl(portletConfig, portletContext, portletRequest,
+						idPrefix);
+			}
+			else {
+				bridgeRequestScope = new BridgeRequestScopeImpl(portletConfig, portletContext, portletRequest,
+						idPrefix);
+			}
 		}
 
 		return bridgeRequestScope;

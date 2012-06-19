@@ -59,6 +59,13 @@ public interface BridgeRequestScope extends ConcurrentMap<String, Object> {
 
 	public Bridge.PortletPhase getBeganInPhase();
 
+	/**
+	 * Returns a flag indicating whether or not the PortletMode has changed.
+	 *
+	 * @return  <code>true</code> if the portlet mode has changed, otherwise <code>false</code>
+	 */
+	boolean isPortletModeChanged();
+
 	// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
 	Flash getFlash();
 
@@ -97,4 +104,12 @@ public interface BridgeRequestScope extends ConcurrentMap<String, Object> {
 	 * called.
 	 */
 	void setRedirect(boolean redirect);
+
+	/**
+	 * Returns a flag indicating whether or not a <redirect/> was encountered in a navigation-rule.
+	 *
+	 * @return  <code>true</code> indicates that <redirect/> was encountered in a navigation-rule, otherwise <code>
+	 *          false</code>.
+	 */
+	boolean isRedirect();
 }
