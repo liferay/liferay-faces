@@ -164,6 +164,7 @@ public class ApplicantBackingBean implements Serializable {
 		commentsRendered = !commentsRendered;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void uploadAttachments(ActionEvent actionEvent) {
 
 		List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
