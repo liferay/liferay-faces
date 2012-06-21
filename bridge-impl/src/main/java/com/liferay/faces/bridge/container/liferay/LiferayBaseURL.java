@@ -213,6 +213,21 @@ public abstract class LiferayBaseURL implements BaseURL {
 
 			// Always add the p_p_lifecycle parameter.
 			appendParameterToURL(firstParameter, LiferayConstants.P_P_LIFECYCLE, getPortletLifecycleId(), url);
+			
+			// Possibly add the doAsUserId parameter
+			String doAsUserIdToken = parsedLiferayURL.getDoAsUserIdToken();
+			if (doAsUserIdToken != null) 
+				appendParameterToURL(firstParameter, LiferayConstants.DO_AS_USER_ID, doAsUserIdToken, url);
+
+			// Possibly add the doAsUserLanguageIdToken parameter
+			String doAsUserLanguageIdToken = parsedLiferayURL.getDoAsUserLanguageIdToken();
+			if (doAsUserLanguageIdToken != null) 
+				appendParameterToURL(firstParameter, LiferayConstants.DO_AS_USER_LANGUAGE_ID, doAsUserLanguageIdToken, url);
+			
+			// Possibly add the doAsGroupId parameter
+			String doAsGroupIdToken = parsedLiferayURL.getDoAsGroupIdToken();
+			if (doAsGroupIdToken != null)
+				appendParameterToURL(firstParameter, LiferayConstants.DO_AS_GROUP_ID, doAsGroupIdToken, url);
 
 			toStringValue = url.toString();
 		}

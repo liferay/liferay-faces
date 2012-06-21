@@ -31,6 +31,9 @@ public class ParsedBaseURL {
 	private String prefix;
 	private String portalAuthToken;
 	private String portletAuthToken;
+	private String doAsUserIdToken;
+	private String doAsUserLanguageIdToken;
+	private String doAsGroupIdToken;	
 	private String resourceId;
 	private List<URLParameter> wsrpParameters;
 
@@ -79,6 +82,30 @@ public class ParsedBaseURL {
 						wsrpParameters.add(urlParameter);
 					}
 				}
+				
+				if ((doAsUserIdToken == null) && nameValuePair.startsWith(LiferayConstants.DO_AS_USER_ID)) {
+					int equalsPos = nameValuePair.indexOf(BridgeConstants.CHAR_EQUALS);
+
+					if (equalsPos > 0) {
+						doAsUserIdToken = nameValuePair.substring(equalsPos + 1);
+					}
+				}
+				
+				if ((doAsUserLanguageIdToken == null) && nameValuePair.startsWith(LiferayConstants.DO_AS_USER_LANGUAGE_ID)) {
+					int equalsPos = nameValuePair.indexOf(BridgeConstants.CHAR_EQUALS);
+
+					if (equalsPos > 0) {
+						doAsUserLanguageIdToken = nameValuePair.substring(equalsPos + 1);
+					}
+				}
+				
+				if ((doAsGroupIdToken == null) && nameValuePair.startsWith(LiferayConstants.DO_AS_GROUP_ID)) {
+					int equalsPos = nameValuePair.indexOf(BridgeConstants.CHAR_EQUALS);
+
+					if (equalsPos > 0) {
+						doAsGroupIdToken = nameValuePair.substring(equalsPos + 1);
+					}
+				}
 			}
 		}
 	}
@@ -97,6 +124,30 @@ public class ParsedBaseURL {
 
 	public void setPortletAuthToken(String portletAuthToken) {
 		this.portletAuthToken = portletAuthToken;
+	}
+
+	public String getDoAsUserIdToken() {
+		return doAsUserIdToken;
+	}
+
+	public void setDoAsUserIdToken(String doAsUserIdToken) {
+		this.doAsUserIdToken = doAsUserIdToken;
+	}
+
+	public String getDoAsUserLanguageIdToken() {
+		return doAsUserLanguageIdToken;
+	}
+
+	public void setDoAsUserLanguageIdToken(String doAsUserLanguageIdToken) {
+		this.doAsUserLanguageIdToken = doAsUserLanguageIdToken;
+	}
+
+	public String getDoAsGroupIdToken() {
+		return doAsGroupIdToken;
+	}
+
+	public void setDoAsGroupIdToken(String doAsGroupIdToken) {
+		this.doAsGroupIdToken = doAsGroupIdToken;
 	}
 
 	public String getPrefix() {
