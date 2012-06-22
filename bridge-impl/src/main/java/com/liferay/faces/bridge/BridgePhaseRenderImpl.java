@@ -34,7 +34,6 @@ import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.faces.Bridge;
-import javax.portlet.faces.Bridge.PortletPhase;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
@@ -131,27 +130,11 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 		// If the portlet mode has not changed, then restore the faces view root and messages that would
 		// have been saved during the ACTION_PHASE of the portlet lifecycle. Section 5.4.1 requires that the
 		// BridgeRequestScope must not be restored if there is a change in portlet modes detected.
-		boolean facesLifecycleAlreadyExecuted = false;
-		PortletMode fromPortletMode = bridgeRequestScope.getPortletMode();
-		PortletMode toPortletMode = renderRequest.getPortletMode();
+		boolean facesLifecycleExecuted = bridgeRequestScope.isFacesLifecycleExecuted();
+		bridgeRequestScope.restore(facesContext);
 
-		if ((fromPortletMode != null) && (toPortletMode != null)) {
-
-			String fromPortletModeAsString = fromPortletMode.toString();
-			String toPortletModeAsString = toPortletMode.toString();
-
-			if (fromPortletModeAsString.equals(toPortletModeAsString)) {
-				bridgeRequestScope.restoreScopedData(facesContext);
-
-				PortletPhase beganInPhase = bridgeRequestScope.getBeganInPhase();
-				facesLifecycleAlreadyExecuted = ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) ||
-						(beganInPhase == Bridge.PortletPhase.EVENT_PHASE));
-			}
-			else {
-				bridgeRequestScope.setPortletModeChanged(true);
-				bridgeContext.getBridgeRequestScopeManager().removeBridgeRequestScope(bridgeRequestScope,
-					portletContext);
-			}
+		if (bridgeRequestScope.isPortletModeChanged()) {
+			bridgeContext.getBridgeRequestScopeManager().removeBridgeRequestScope(bridgeRequestScope, portletContext);
 		}
 
 		// NOTE: PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
@@ -197,11 +180,10 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 			facesContext.getExternalContext().getRequestMap().put(Bridge.IS_POSTBACK_ATTRIBUTE, Boolean.TRUE);
 		}
 
-		logger.debug("portletName=[{0}] facesLifecycleAlreadyExecuted=[{1}]", portletName,
-			facesLifecycleAlreadyExecuted);
+		logger.debug("portletName=[{0}] facesLifecycleExecuted=[{1}]", portletName, facesLifecycleExecuted);
 
 		// If the JSF lifecycle executed back in the ACTION_PHASE of the portlet lifecycle, then
-		if (facesLifecycleAlreadyExecuted) {
+		if (facesLifecycleExecuted) {
 
 			// TCK TestPage054: prpUpdatedFromActionTest
 			PhaseEvent restoreViewPhaseEvent = new PhaseEvent(facesContext, PhaseId.RESTORE_VIEW,
@@ -234,10 +216,15 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 			renderPhaseFacesLifecycle.execute(facesContext);
 		}
 
-		// If the PortletMode has changed, then switch to the appropriate PortletMode and navigate to the
-		// current viewId in the UIViewRoot.
-		BridgeNavigationHandler bridgeNavigationHandler = getBridgeNavigationHandler(facesContext);
-		bridgeNavigationHandler.handleNavigation(facesContext, fromPortletMode, toPortletMode);
+		// If the PortletMode has changed, and a navigation-rule hasn't yet fired (which could have happened in the
+		// EVENT_PHASE), then switch to the appropriate PortletMode and navigate to the current viewId in the
+		// UIViewRoot.
+		if (bridgeRequestScope.isPortletModeChanged() && !bridgeRequestScope.isNavigationOccurred()) {
+			BridgeNavigationHandler bridgeNavigationHandler = getBridgeNavigationHandler(facesContext);
+			PortletMode fromPortletMode = bridgeRequestScope.getPortletMode();
+			PortletMode toPortletMode = renderRequest.getPortletMode();
+			bridgeNavigationHandler.handleNavigation(facesContext, fromPortletMode, toPortletMode);
+		}
 
 		// Determines whether or not lifecycle incongruities should be managed.
 		boolean manageIncongruities = BooleanHelper.toBoolean(bridgeContext.getInitParameter(

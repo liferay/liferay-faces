@@ -50,11 +50,11 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void restoreScopedData(FacesContext facesContext) {
+	public void restore(FacesContext facesContext) {
 
-		super.restoreScopedData(facesContext);
+		super.restore(facesContext);
 
-		if (isRedirect()) {
+		if (isNavigationOccurred() || isRedirectOccurred()) {
 
 			// TCK TestPage062: eventScopeNotRestoredRedirectTest
 			List<RequestAttribute> savedRequestAttributes = (List<RequestAttribute>) getAttribute(

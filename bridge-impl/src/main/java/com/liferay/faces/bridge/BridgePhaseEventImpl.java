@@ -64,7 +64,7 @@ public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
 			init(eventRequest, eventResponse, Bridge.PortletPhase.EVENT_PHASE, eventPhaseFacesLifecycle);
 
 			// Restore the BridgeRequestScope that may have started during the ACTION_PHASE.
-			bridgeRequestScope.restoreScopedData(facesContext);
+			bridgeRequestScope.restore(facesContext);
 			
 			// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-202
 			bridgeRequestScope.setPortletMode(eventRequest.getPortletMode());
@@ -72,6 +72,9 @@ public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
 			// Execute the JSF lifecycle so that ONLY the RESTORE_VIEW phase executes (this is a feature of the
 			// lifecycle implementation for the EVENT_PHASE of the portlet lifecycle).
 			eventPhaseFacesLifecycle.execute(facesContext);
+			
+			// Set a flag on the bridge request scope indicating that the Faces Lifecycle has executed.
+			bridgeRequestScope.setFacesLifecycleExecuted(true);
 
 			// If there is a bridgeEventHandler registered in portlet.xml, then invoke the handler so that it
 			// can process the event payload.
@@ -88,18 +91,21 @@ public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
 						eventRequest.getEvent());
 
 				if (eventNavigationResult != null) {
+					String oldViewId = facesContext.getViewRoot().getViewId();
 					String fromAction = eventNavigationResult.getFromAction();
 					String outcome = eventNavigationResult.getOutcome();
 					logger.debug("Invoking navigationHandler fromAction=[{0}] outcome=[{1}]", fromAction, outcome);
 
 					NavigationHandler navigationHandler = facesContext.getApplication().getNavigationHandler();
 					navigationHandler.handleNavigation(facesContext, fromAction, outcome);
+					String newViewId = facesContext.getViewRoot().getViewId();
+					bridgeRequestScope.setNavigationOccurred(!oldViewId.equals(newViewId));
 				}
 			}
 
 			// Save the faces view root and any messages in the faces context so that they can be restored during
 			// the RENDER_PHASE of the portlet lifecycle.
-			bridgeRequestScope.preserveScopedData(facesContext);
+			bridgeRequestScope.preserve(facesContext);
 
 			// PROPOSED-FOR-JSR344-API
 			// http://java.net/jira/browse/JAVASERVERFACES_SPEC_PUBLIC-1070

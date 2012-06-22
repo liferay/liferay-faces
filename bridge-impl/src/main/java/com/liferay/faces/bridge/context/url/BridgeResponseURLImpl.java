@@ -50,11 +50,11 @@ public abstract class BridgeResponseURLImpl extends BridgeURLBaseImpl implements
 			// PortletMode on the ActionResponse.
 			if (Bridge.PORTLET_MODE_PARAMETER.equals(urlParameterName)) {
 				PortletMode portletMode = new PortletMode(parameterValue);
-				stateAwareResponse.setPortletMode(portletMode);
 				BridgeRequestScope bridgeRequestScope = bridgeContext.getBridgeRequestScope();
 				if (bridgeRequestScope != null) {
 					PortletRequest portletRequest = bridgeContext.getPortletRequest();
 					if (!portletRequest.getPortletMode().equals(portletMode)) {
+						stateAwareResponse.setPortletMode(portletMode);
 						bridgeRequestScope.setPortletModeChanged(true);
 					}
 				}

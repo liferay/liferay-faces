@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.bridge.application;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -32,7 +31,6 @@ import javax.portlet.PortletResponse;
 import javax.portlet.StateAwareResponse;
 import javax.portlet.WindowStateException;
 import javax.portlet.faces.Bridge;
-import javax.portlet.faces.Bridge.PortletPhase;
 
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.BridgeActionURL;
@@ -64,14 +62,8 @@ public class BridgeNavigationHandlerImpl extends BridgeNavigationHandler {
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
-		PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
-
-		// Ask the wrapped NavigationHandler to perform the navigation unless currently executing the EVENT_PHASE of the
-		// portlet lifecycle. This is because the Mojarra/MyFaces NavigationHandler implementations do not provide an
-		// opportunity to encode the PortletMode and WindowState directly into the response. Instead, handle that below.
-		if (portletRequestPhase != Bridge.PortletPhase.EVENT_PHASE) {
-			wrappedNavigationHandler.handleNavigation(facesContext, fromAction, outcome);
-		}
+		// Ask the wrapped NavigationHandler to perform the navigation.
+		wrappedNavigationHandler.handleNavigation(facesContext, fromAction, outcome);
 
 		if (navigationCase != null) {
 
@@ -87,32 +79,12 @@ public class BridgeNavigationHandlerImpl extends BridgeNavigationHandler {
 				}
 			}
 
-			// Determine whether or not the to-view-id should be directly encoded to the response, meaning, apply the
-			// PortletMode, WindowState, etc. that may be present in the to-view-id to the response.
-			boolean directlyEncodeToResponse;
-
-			// If running in the EVENT_PHASE, then according to Section 6.1.3.1 of the Spec, then indicate that the
-			// to-view-id should be directly encoded to the response.
-			if (portletRequestPhase == Bridge.PortletPhase.EVENT_PHASE) {
-				directlyEncodeToResponse = true;
-			}
-
-			// Otherwise, if the navigation-case is NOT a redirect, then indicate that the to-view-id should be
-			// directly encoded to the response. Don't need to worry about the redirect case here because
-			// that's handled in the BridgeContext#redirect(String) method. It would be nice to handle the redirect
-			// case here but it needs to stay in BridgeContext#redirect(String) since it's possible for developers
-			// to call ExternalContext.redirect(String) directly from their application.
-			else if (!navigationCase.isRedirect()) {
-				directlyEncodeToResponse = true;
-			}
-
-			// Otherwise, indicate that the to-view-id should NOT be directly encoded to the response.
-			else {
-				directlyEncodeToResponse = false;
-			}
-
-			// If required, directly encode the to-view-id to the response.
-			if (directlyEncodeToResponse) {
+			// If the navigation-case is NOT a redirect, then directly encode the {@link PortletMode} and {@link
+			// WindowState} to the response. Don't need to worry about the redirect case here because that's handled in
+			// the BridgeContext#redirect(String) method. It would be nice to handle the redirect case here but it needs
+			// to stay in BridgeContext#redirect(String) since it's possible for developers to call
+			// ExternalContext.redirect(String) directly from their application.
+			if (!navigationCase.isRedirect()) {
 
 				String toViewId = navigationCase.getToViewId(facesContext);
 
@@ -140,18 +112,11 @@ public class BridgeNavigationHandlerImpl extends BridgeNavigationHandler {
 							}
 
 							bridgeActionURL.applyToResponse((StateAwareResponse) portletResponse);
-
-							if (navigationCase.isRedirect()) {
-								bridgeContext.redirect(bridgeActionURL.toString());
-							}
 						}
 						catch (PortletModeException e) {
 							logger.error(e.getMessage());
 						}
 						catch (WindowStateException e) {
-							logger.error(e.getMessage());
-						}
-						catch (IOException e) {
 							logger.error(e.getMessage());
 						}
 					}
@@ -165,36 +130,25 @@ public class BridgeNavigationHandlerImpl extends BridgeNavigationHandler {
 
 		logger.debug("fromPortletMode=[{0}] toPortletMode=[{1}]", fromPortletMode, toPortletMode);
 
-		if ((fromPortletMode != null) && (toPortletMode != null)) {
+		String currentViewId = facesContext.getViewRoot().getViewId();
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+		Map<String, String> defaultViewIdMap = bridgeContext.getDefaultViewIdMap();
+		String portletModeViewId = defaultViewIdMap.get(toPortletMode.toString());
 
-			String fromPortletModeAsString = fromPortletMode.toString();
-			String toPortletModeAsString = toPortletMode.toString();
+		if ((currentViewId != null) && (portletModeViewId != null)) {
 
-			if (!fromPortletModeAsString.equals(toPortletModeAsString)) {
+			if (!currentViewId.equals(portletModeViewId)) {
 
-				logger.debug("Detected portlet mode change");
+				logger.debug("Navigating to viewId=[{0}]", portletModeViewId);
 
-				String currentViewId = facesContext.getViewRoot().getViewId();
-				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-				Map<String, String> defaultViewIdMap = bridgeContext.getDefaultViewIdMap();
-				String portletModeViewId = defaultViewIdMap.get(toPortletModeAsString);
+				ViewHandler viewHandler = facesContext.getApplication().getViewHandler();
+				UIViewRoot viewRoot = viewHandler.createView(facesContext, portletModeViewId);
 
-				if ((currentViewId != null) && (portletModeViewId != null)) {
+				if (viewRoot != null) {
+					facesContext.setViewRoot(viewRoot);
 
-					if (!currentViewId.equals(portletModeViewId)) {
-
-						logger.debug("navigating to viewId=[{0}]", portletModeViewId);
-
-						ViewHandler viewHandler = facesContext.getApplication().getViewHandler();
-						UIViewRoot viewRoot = viewHandler.createView(facesContext, portletModeViewId);
-
-						if (viewRoot != null) {
-							facesContext.setViewRoot(viewRoot);
-
-							PartialViewContext partialViewContext = facesContext.getPartialViewContext();
-							partialViewContext.setRenderAll(true);
-						}
-					}
+					PartialViewContext partialViewContext = facesContext.getPartialViewContext();
+					partialViewContext.setRenderAll(true);
 				}
 			}
 		}
