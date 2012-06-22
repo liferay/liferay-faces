@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.demos.model;
 
-import com.liferay.portal.model.UserWrapper;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 
 
@@ -39,9 +39,10 @@ public class Registrant extends UserWrapper {
 	private String password2;
 	private String mobilePhone;
 	private String screenName;
+	private User wrappedUser;
 
 	public Registrant(long companyId) {
-		super(UserUtil.create(0L));
+		wrappedUser = UserUtil.create(0L);
 		clearProperties();
 		setCompanyId(companyId);
 	}
@@ -157,4 +158,10 @@ public class Registrant extends UserWrapper {
 	public void setScreenName(String screenName) {
 		this.screenName = screenName;
 	}
+
+	@Override
+	public User getWrapped() {
+		return wrappedUser;
+	}
+
 }

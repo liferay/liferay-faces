@@ -17,18 +17,16 @@ import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 import com.liferay.faces.demos.expando.UserExpando;
 import com.liferay.faces.demos.security.PermissionUtil;
-
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.RoleLocalServiceUtil;
-
 import com.liferay.portlet.expando.NoSuchColumnException;
 import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.model.ExpandoColumn;
@@ -69,10 +67,10 @@ public class RegisterExpandoAction extends SimpleAction {
 		ExpandoTable expandoTable = null;
 
 		try {
-			expandoTable = ExpandoTableLocalServiceUtil.getDefaultTable(companyId, modelClassName);
+			expandoTable = ExpandoTableLocalServiceUtil.getDefaultTable(modelClassName);
 		}
 		catch (NoSuchTableException e) {
-			expandoTable = ExpandoTableLocalServiceUtil.addDefaultTable(companyId, modelClassName);
+			expandoTable = ExpandoTableLocalServiceUtil.addDefaultTable(modelClassName);
 			logger.debug("Added expando table for modelClassName=[{0}]", modelClassName);
 		}
 

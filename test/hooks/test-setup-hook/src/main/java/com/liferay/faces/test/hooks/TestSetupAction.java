@@ -20,20 +20,18 @@ import java.util.Locale;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.ServiceContext;
 
 
 /**
@@ -62,10 +60,7 @@ public class TestSetupAction extends SimpleAction {
 				}));
 		PORTAL_PAGES.add(new PortalPage("ICE3", "1_WAR_icefaces3portlet_INSTANCE_"));
 		PORTAL_PAGES.add(new PortalPage("ICE3-COMPAT", "1_WAR_icefaces3compatportlet_INSTANCE_"));
-		PORTAL_PAGES.add(new PortalPage("ICE3-CHAT", "1_WAR_icefaces3chatportlet"));
 		PORTAL_PAGES.add(new PortalPage("ICE3-CRUD", "1_WAR_icefaces3crudportlet_INSTANCE_"));
-		PORTAL_PAGES.add(new PortalPage("ICE3-DIR", "1_WAR_icefaces3directoryportlet"));
-		PORTAL_PAGES.add(new PortalPage("ICE3-DOC", "1_WAR_icefaces3documentsportlet"));
 		PORTAL_PAGES.add(new PortalPage("ICE3-IPC",
 				new String[] { "1_WAR_icefaces3ipcajaxpushportlet", "2_WAR_icefaces3ipcajaxpushportlet" }));
 		PORTAL_PAGES.add(new PortalPage("PRIME3", "1_WAR_primefaces3portlet_INSTANCE_"));
@@ -91,7 +86,7 @@ public class TestSetupAction extends SimpleAction {
 		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 
 		for (PortalPage portalPage : PORTAL_PAGES) {
-			String defaultSiteName = PropsUtil.get(PropsKeys.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME);
+			String defaultSiteName = GroupConstants.GUEST;
 			long groupId = GroupLocalServiceUtil.getGroup(companyId, defaultSiteName).getGroupId();
 			setupPage(company.getDefaultUser().getUserId(), groupId, portalPage);
 		}
@@ -141,10 +136,8 @@ public class TestSetupAction extends SimpleAction {
 			String type = LayoutConstants.TYPE_PORTLET;
 			boolean hidden = false;
 			String friendlyURL = "/" + portalPageName.toLowerCase();
-			ServiceContext serviceContext = new ServiceContext();
-			serviceContext.setScopeGroupId(groupId);
 			portalPageLayout = LayoutLocalServiceUtil.addLayout(userId, groupId, privateLayout, parentLayoutId,
-					portalPageName, portalPageName, portalPageName, type, hidden, friendlyURL, serviceContext);
+					portalPageName, portalPageName, portalPageName, type, hidden, friendlyURL);
 			logger.info("Added page: " + portalPageName);
 		}
 

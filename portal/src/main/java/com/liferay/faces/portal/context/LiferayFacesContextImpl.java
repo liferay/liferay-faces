@@ -53,8 +53,7 @@ import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
 import com.liferay.faces.portal.security.AuthorizationException;
-
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;

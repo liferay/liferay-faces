@@ -24,8 +24,6 @@ import javax.portlet.filter.PortletRequestWrapper;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 import com.liferay.faces.portal.context.LiferayFacesContext;
-
-import com.liferay.portal.kernel.captcha.CaptchaMaxChallengesException;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
 
@@ -68,12 +66,6 @@ public class CaptchaValidator implements Validator {
 			}
 			catch (CaptchaTextException e) {
 				String key = "text-verification-failed";
-				String summary = liferayFacesContext.getMessage(key);
-				FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, summary);
-				throw new ValidatorException(facesMessage);
-			}
-			catch (CaptchaMaxChallengesException e) {
-				String key = "maximum-number-of-captcha-attempts-exceeded";
 				String summary = liferayFacesContext.getMessage(key);
 				FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, summary);
 				throw new ValidatorException(facesMessage);

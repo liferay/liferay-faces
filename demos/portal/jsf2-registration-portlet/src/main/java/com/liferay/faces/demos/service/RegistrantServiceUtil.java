@@ -22,8 +22,8 @@ import com.liferay.faces.bridge.logging.LoggerFactory;
 import com.liferay.faces.demos.expando.UserExpando;
 import com.liferay.faces.demos.model.Registrant;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
@@ -73,7 +73,6 @@ public class RegistrantServiceUtil {
 		}
 
 		String emailAddress = registrant.getEmailAddress();
-		long facebookId = 0;
 		String openId = StringPool.BLANK;
 		String firstName = registrant.getFirstName();
 		String middleName = registrant.getMiddleName();
@@ -94,9 +93,9 @@ public class RegistrantServiceUtil {
 
 		// Add the user to the Liferay database (create an account).
 		User user = UserLocalServiceUtil.addUser(creatorUserId, companyId, autoPassword, password1, password2,
-				autoScreenName, screenName, emailAddress, facebookId, openId, locale, firstName, middleName, lastName,
-				prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
-				roleIds, userGroupIds, sendEmail, serviceContext);
+				autoScreenName, screenName, emailAddress, openId, locale, firstName, middleName, lastName, prefixId,
+				suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds, roleIds,
+				userGroupIds, sendEmail, serviceContext);
 
 		registrant.setUserId(user.getUserId());
 		registrant.setContactId(user.getContactId());

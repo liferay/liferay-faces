@@ -35,8 +35,6 @@ import javax.servlet.http.HttpServletResponseWrapper;
 import com.liferay.portal.kernel.captcha.Captcha;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.PrefsPropsUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.util.PortalUtil;
 
 
@@ -82,7 +80,7 @@ public class CaptchaResource extends Resource {
 			HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
 			HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(portletResponse);
 			CaptchaHttpServletResponse captchaHttpServletResponse = new CaptchaHttpServletResponse(httpServletResponse);
-			String captchaClassName = PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_IMPL);
+			String captchaClassName = "com.liferay.portal.captcha.CaptchaImpl";
 			ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 
 			@SuppressWarnings("unchecked")

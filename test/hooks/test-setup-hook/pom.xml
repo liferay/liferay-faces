@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.faces.test.hooks</groupId>
 		<artifactId>liferay-faces-test-hooks</artifactId>
-		<version>3.0.0-RC2-SNAPSHOT</version>
+		<version>2.9.0-RC2-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>test-setup-hook</artifactId>
@@ -12,6 +12,10 @@
 	<name>Test Setup Hook</name>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.liferay.portal</groupId>
+			<artifactId>portal-kernel</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
 			<artifactId>portal-service</artifactId>

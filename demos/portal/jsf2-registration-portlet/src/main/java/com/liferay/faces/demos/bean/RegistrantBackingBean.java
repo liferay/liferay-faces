@@ -31,11 +31,11 @@ import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.util.PropsKeys;
 
 
 /**
@@ -149,12 +149,6 @@ public class RegistrantBackingBean implements Serializable {
 				break;
 			}
 
-			case UserPasswordException.PASSWORD_TOO_TRIVIAL: {
-				liferayFacesContext.addGlobalErrorMessage("that-password-is-too-trivial");
-
-				break;
-			}
-
 			case UserPasswordException.PASSWORD_TOO_YOUNG: {
 
 				try {
@@ -194,8 +188,16 @@ public class RegistrantBackingBean implements Serializable {
 	public boolean isCaptchaRendered() {
 
 		if (captchaRendered == null) {
-			captchaRendered = Boolean.valueOf(GetterUtil.getBoolean(
-						PropsUtil.get(PropsKeys.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT)));
+			String value;
+
+			try {
+				value = PropsUtil.get(PropsKeys.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT);
+			}
+			catch (Exception e) {
+				value = Boolean.TRUE.toString();
+			}
+
+			captchaRendered = Boolean.valueOf(GetterUtil.getBoolean(value));
 		}
 
 		return captchaRendered.booleanValue();

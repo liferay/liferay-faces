@@ -16,8 +16,7 @@ package com.liferay.faces.portal.context;
 import java.util.List;
 
 import com.liferay.faces.portal.security.AuthorizationException;
-
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;

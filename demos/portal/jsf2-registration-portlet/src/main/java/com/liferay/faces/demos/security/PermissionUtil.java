@@ -15,13 +15,13 @@ package com.liferay.faces.demos.security;
 
 import java.util.Arrays;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
+import com.liferay.portal.util.PropsKeys;
 
 
 /**
@@ -34,7 +34,16 @@ public class PermissionUtil {
 	public static void grantPermissions(long companyId, long roleId, String resourceId, int scope, String primKey,
 		String[] actionKeys) throws PortalException, SystemException {
 
-		if (Long.parseLong(PropsUtil.get(PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM)) < 6) {
+		long userCheckAlgorithm;
+
+		try {
+			userCheckAlgorithm = Long.parseLong(PropsUtil.get(PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM));
+		}
+		catch (Exception e) {
+			userCheckAlgorithm = 5;
+		}
+
+		if (userCheckAlgorithm < 6) {
 
 			for (int i = 0; i < actionKeys.length; i++) {
 				PermissionLocalServiceUtil.setRolePermission(roleId, companyId, resourceId, scope, primKey,

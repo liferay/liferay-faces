@@ -227,7 +227,7 @@
 			<title>WEB-INF/liferay-hook.xml</title>
 			<programlisting>
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;!DOCTYPE hook PUBLIC "-//Liferay//DTD Hook 6.0.0//EN" "http://www.liferay.com/dtd/liferay-hook_6_0_0.dtd"&gt;
+&lt;!DOCTYPE hook PUBLIC "-//Liferay//DTD Hook 5.2.0//EN" "http://www.liferay.com/dtd/liferay-hook_5_2_0.dtd"&gt;
 &lt;hook&gt;
 	&lt;language-properties&gt;Language_en_US.properties&lt;/language-properties&gt;
 &lt;/hook&gt;

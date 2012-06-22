@@ -26,12 +26,12 @@ import com.liferay.faces.portal.el.ThemeImageURLMap;
 import com.liferay.faces.portal.helper.BooleanHelper;
 import com.liferay.faces.portal.security.UserPermissionMap;
 
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 
 
 /**
