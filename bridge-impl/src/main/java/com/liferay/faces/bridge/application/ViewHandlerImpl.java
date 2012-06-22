@@ -32,8 +32,13 @@ import com.liferay.faces.bridge.logging.LoggerFactory;
  */
 public class ViewHandlerImpl extends ViewHandlerWrapper {
 
+	// Private Constants
+	private static final String DOT_REPLACEMENT = "_DOT_";
+
+	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ViewHandlerImpl.class);
 
+	// Private Data Members
 	private ViewHandler wrappedViewHandler;
 
 	public ViewHandlerImpl(ViewHandler viewHandler) {
@@ -52,6 +57,7 @@ public class ViewHandlerImpl extends ViewHandlerWrapper {
 	public UIViewRoot createView(FacesContext context, String viewId) {
 
 		logger.debug("Creating view for viewId=[{0}]", viewId);
+
 		String queryString = null;
 
 		if (viewId != null) {
@@ -72,12 +78,6 @@ public class ViewHandlerImpl extends ViewHandlerWrapper {
 		}
 
 		return uiViewRoot;
-	}
-
-	@Override
-	public UIViewRoot restoreView(FacesContext facesContext, String viewId) {
-		logger.debug("Restoring view for viewId=[{0}]", viewId);
-		return super.restoreView(facesContext, viewId);
 	}
 
 	/**
@@ -105,6 +105,54 @@ public class ViewHandlerImpl extends ViewHandlerWrapper {
 				throw e;
 			}
 		}
+	}
+
+	@Override
+	public UIViewRoot restoreView(FacesContext facesContext, String viewId) {
+		logger.debug("Restoring view for viewId=[{0}]", viewId);
+
+		return super.restoreView(facesContext, viewId);
+	}
+
+	/**
+	 * The purpose of this method is to provide a workaround for an incompatibility with the Mojarra implementation of
+	 * JSF. Specifically, the Mojarra {@link MultiViewHandler#getActionURL(FacesContext, String)} method does not
+	 * properly handle viewId values that contain dot characters as part of the query-string. For example, if the
+	 * specified viewId is "/view.xhtml?javax.portlet.faces.PortletMode=edit" then Mojarra will think the filename
+	 * extension is ".PortletMode" instead of ".xhtml". This method works around the problem by temporarily substituting
+	 * all dot characters in the viewId query-string with a token before delegating to the Mojarra method. After
+	 * delegation, the dot characters are replaced.
+	 */
+	@Override
+	public String getActionURL(FacesContext facesContext, String viewId) {
+
+		String actionURL = null;
+
+		if (viewId != null) {
+			boolean replacedDotChars = false;
+			int questionMarkPos = viewId.indexOf(BridgeConstants.CHAR_QUESTION_MARK);
+
+			if (questionMarkPos > 0) {
+
+				int dotPos = viewId.indexOf(BridgeConstants.CHAR_PERIOD, questionMarkPos);
+
+				if (dotPos > 0) {
+					String queryString = viewId.substring(questionMarkPos);
+					queryString = queryString.replaceAll(BridgeConstants.REGEX_DOT_DELIMITER, DOT_REPLACEMENT);
+					viewId = viewId.substring(0, questionMarkPos) + queryString;
+					replacedDotChars = true;
+				}
+
+			}
+
+			actionURL = super.getActionURL(facesContext, viewId);
+
+			if (replacedDotChars) {
+				actionURL = actionURL.replaceAll(DOT_REPLACEMENT, BridgeConstants.CHAR_PERIOD);
+			}
+		}
+
+		return actionURL;
 	}
 
 	@Override
