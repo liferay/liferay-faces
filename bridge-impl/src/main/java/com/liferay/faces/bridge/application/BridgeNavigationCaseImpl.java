@@ -17,7 +17,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.NavigationCase;
+import javax.faces.context.FacesContext;
 import javax.portlet.faces.Bridge;
+
+import com.liferay.faces.bridge.util.URLUtil;
 
 
 /**
@@ -26,6 +29,7 @@ import javax.portlet.faces.Bridge;
 public class BridgeNavigationCaseImpl extends NavigationCaseWrapper implements BridgeNavigationCase {
 
 	// Private Data Members
+	private Map<String, List<String>> parameters;
 	private NavigationCase wrappedNavigationCase;
 
 	public BridgeNavigationCaseImpl(NavigationCase navigationCase) {
@@ -35,17 +39,33 @@ public class BridgeNavigationCaseImpl extends NavigationCaseWrapper implements B
 	protected String getParameter(String parameterName) {
 
 		String parameter = null;
-		
+
 		Map<String, List<String>> parameterMap = getParameters();
+
 		if (parameterMap != null) {
 			List<String> values = parameterMap.get(parameterName);
-	
+
 			if ((values != null) && (values.size() > 0)) {
 				parameter = values.get(0);
 			}
 		}
 
 		return parameter;
+	}
+
+	@Override
+	public Map<String, List<String>> getParameters() {
+
+		if (parameters == null) {
+			parameters = super.getParameters();
+
+			if (parameters == null) {
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				parameters = URLUtil.parseParameterMapValuesList(wrappedNavigationCase.getToViewId(facesContext));
+			}
+		}
+
+		return parameters;
 	}
 
 	public String getPortletMode() {
