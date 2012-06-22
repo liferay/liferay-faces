@@ -47,6 +47,9 @@ public class BridgeConstants {
 	public static final String RICHFACES = "RichFaces";
 	public static final String TCK_JSR_329 = "TCK JSR 329";
 
+	// Regular Expressions
+	public static final String REGEX_DOT_DELIMITER = "[.]";
+
 	// Request Attribute Names
 	public static final String REQ_ATTR_PATH_INFO = "javax.servlet.include.path_info";
 	public static final String REQ_ATTR_SERVLET_PATH = "javax.servlet.include.servlet_path";
