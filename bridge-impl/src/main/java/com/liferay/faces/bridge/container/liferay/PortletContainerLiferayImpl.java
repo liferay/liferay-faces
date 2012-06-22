@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.faces.context.ResponseWriter;
@@ -222,8 +223,31 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 	@Override
 	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse) {
 
-		eventResponse.setRenderParameters(eventRequest.getPublicParameterMap());
-		eventResponse.setRenderParameters(eventRequest.getPrivateParameterMap());
+		Map<String, String[]> publicParameterMap = eventRequest.getPublicParameterMap();
+
+		if (publicParameterMap != null) {
+			Set<Entry<String, String[]>> entrySet = publicParameterMap.entrySet();
+
+			for (Map.Entry<String, String[]> mapEntry : entrySet) {
+				String key = mapEntry.getKey();
+				String[] values = mapEntry.getValue();
+				eventResponse.setRenderParameter(key, values);
+				logger.trace("Maintaining public render parameter name=[{0}] values=[{1}]", key, values);
+			}
+		}
+
+		Map<String, String[]> privateParameterMap = eventRequest.getPrivateParameterMap();
+
+		if (privateParameterMap != null) {
+			Set<Entry<String, String[]>> entrySet = privateParameterMap.entrySet();
+
+			for (Map.Entry<String, String[]> mapEntry : entrySet) {
+				String key = mapEntry.getKey();
+				String[] values = mapEntry.getValue();
+				eventResponse.setRenderParameter(key, values);
+				logger.trace("Maintaining private render parameter name=[{0}] values=[{1}]", key, values);
+			}
+		}
 	}
 
 	@Override
