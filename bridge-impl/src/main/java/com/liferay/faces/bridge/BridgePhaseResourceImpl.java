@@ -122,7 +122,7 @@ public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 
 					// TCK TestPage073: scopeAfterRedisplayResourcePPRTest -- Preserve the non-excluded request
 					// attributes in the BridgeRequestScope so that they can be restored in subsequent render requests.
-					bridgeRequestScope.preserveScopedData(facesContext);
+					bridgeRequestScope.preserve(facesContext);
 				}
 
 				// Spec 6.6 (Namespacing)

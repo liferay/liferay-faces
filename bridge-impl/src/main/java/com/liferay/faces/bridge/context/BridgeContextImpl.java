@@ -466,7 +466,7 @@ public class BridgeContextImpl extends BridgeContext {
 
 							// Set a flag on the {@link BridgeRequestScope} indicating that a <redirect />
 							// occurred which means that the request attributes should not be preserved.
-							getBridgeRequestScope().setRedirect(true);
+							getBridgeRequestScope().setRedirectOccurred(true);
 
 							// Apply the PortletMode, WindowState, etc. that may be present in the URL to the response.
 							try {
