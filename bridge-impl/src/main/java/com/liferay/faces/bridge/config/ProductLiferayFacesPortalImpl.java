@@ -22,13 +22,6 @@ public class ProductLiferayFacesPortalImpl extends ProductBaseImpl {
 
 	public ProductLiferayFacesPortalImpl() {
 
-		try {
-			this.title = BridgeConstants.LIFERAY_FACES_PORTAL;
-			Class<?> auiPanelClass = Class.forName("com.liferay.faces.portal.context.LiferayFacesContext");
-			init(auiPanelClass.getPackage());
-		}
-		catch (Exception e) {
-			// Ignore -- ICEfaces is likely not present.
-		}
+		init(BridgeConstants.LIFERAY_FACES_PORTAL, "com.liferay.faces.liferayfacesportal");
 	}
 }

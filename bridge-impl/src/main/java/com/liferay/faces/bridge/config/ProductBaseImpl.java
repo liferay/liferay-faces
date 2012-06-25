@@ -55,10 +55,14 @@ public class ProductBaseImpl implements Product {
 		return stringValue;
 	}
 
-	protected void init(Package pkg) {
-		this.title = pkg.getImplementationTitle();
-		initVersionInfo(pkg.getImplementationVersion());
-
+	protected void init(String title, String moduleArtifactId) {
+		try {
+			Class<?> clazz = Thread.currentThread().getContextClassLoader().loadClass(moduleArtifactId + ".Version");
+			this.title = title;
+			initVersionInfo((String)clazz.getDeclaredField("VERSION").get(null));
+		} catch (Exception e) {
+			// Module not implemented
+		}
 		if (this.majorVersion > 0) {
 			detected = true;
 		}
