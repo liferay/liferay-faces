@@ -170,8 +170,6 @@ public class RequestHeaderValuesMap extends CaseInsensitiveHashMap<String[]> {
 	 */
 	protected void addAcceptHeader(PortletRequest portletRequest) {
 		StringBuilder header = new StringBuilder();
-//		header.append(HEADER_ACCEPT);
-//		header.append(": ");
 
 		Enumeration<String> responseContentTypes = portletRequest.getResponseContentTypes();
 		boolean firstElement = true;
