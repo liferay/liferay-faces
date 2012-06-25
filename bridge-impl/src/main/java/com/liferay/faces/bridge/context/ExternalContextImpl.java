@@ -40,6 +40,7 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceResponse;
+import javax.portlet.StateAwareResponse;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeWriteBehindResponse;
 import javax.servlet.ServletResponse;
@@ -959,9 +960,10 @@ public class ExternalContextImpl extends ExternalContext {
 			}
 			else {
 
-				if (portletResponse instanceof ActionResponse) {
+				if (portletResponse instanceof StateAwareResponse) {
 
-					// TestPage169: getResponseCharacterEncodingActionTest
+					// TCK TestPage169: getResponseCharacterEncodingActionTest
+					// TCK TestPage180: getResponseCharacterEncodingEventTest
 					throw new IllegalStateException();
 				}
 				else {
