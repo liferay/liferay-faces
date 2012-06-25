@@ -63,16 +63,16 @@ public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
 			BridgeEventHandler bridgeEventHandler = (BridgeEventHandler) portletContext.getAttribute(
 					bridgeEventHandlerAttributeName);
 
+			// Get the JSF lifecycle instance that is designed to be used with the EVENT_PHASE of the portlet
+			// lifecycle.
+			LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
+					FactoryFinder.LIFECYCLE_FACTORY);
+			Lifecycle eventPhaseFacesLifecycle = lifecycleFactory.getLifecycle(Bridge.PortletPhase.EVENT_PHASE
+					.name());
+
+			init(eventRequest, eventResponse, Bridge.PortletPhase.EVENT_PHASE, eventPhaseFacesLifecycle);
+
 			if (bridgeEventHandler != null) {
-
-				// Get the JSF lifecycle instance that is designed to be used with the EVENT_PHASE of the portlet
-				// lifecycle.
-				LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
-						FactoryFinder.LIFECYCLE_FACTORY);
-				Lifecycle eventPhaseFacesLifecycle = lifecycleFactory.getLifecycle(Bridge.PortletPhase.EVENT_PHASE
-						.name());
-
-				init(eventRequest, eventResponse, Bridge.PortletPhase.EVENT_PHASE, eventPhaseFacesLifecycle);
 
 				// Restore the BridgeRequestScope that may have started during the ACTION_PHASE.
 				bridgeRequestScope.restore(facesContext);
