@@ -61,15 +61,17 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 			List<RequestAttribute> savedRequestAttributes = (List<RequestAttribute>) getAttribute(
 					BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES);
 
-			ExternalContext externalContext = facesContext.getExternalContext();
+			if (savedRequestAttributes != null) {
+				ExternalContext externalContext = facesContext.getExternalContext();
 
-			Map<String, Object> currentRequestAttributes = externalContext.getRequestMap();
+				Map<String, Object> currentRequestAttributes = externalContext.getRequestMap();
 
-			for (RequestAttribute requestAttribute : savedRequestAttributes) {
-				String name = requestAttribute.getName();
-				currentRequestAttributes.remove(name);
-				logger.trace(
-					"Due to redirect, removed request attribute name=[{0}] that had been preserved in the ACTION_PHASE or EVENT_PHASE");
+				for (RequestAttribute requestAttribute : savedRequestAttributes) {
+					String name = requestAttribute.getName();
+					currentRequestAttributes.remove(name);
+					logger.trace(
+						"Due to redirect, removed request attribute name=[{0}] that had been preserved in the ACTION_PHASE or EVENT_PHASE");
+				}
 			}
 		}
 	}
