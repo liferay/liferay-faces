@@ -13,6 +13,10 @@
  */
 package com.liferay.faces.bridge.config;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import com.liferay.faces.bridge.BridgeConstants;
 
 
@@ -55,10 +59,25 @@ public class ProductBaseImpl implements Product {
 		return stringValue;
 	}
 
-	protected void init(Package pkg) {
-		this.title = pkg.getImplementationTitle();
-		initVersionInfo(pkg.getImplementationVersion());
-
+	protected void init(String title, String resourceId) {
+		InputStream is = null;
+		try {
+			is = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourceId);
+			Properties props = new Properties();
+			props.load(is);
+			this.title = title;
+			initVersionInfo(props.getProperty("version"));
+		} catch (Exception e) {
+			// Module not implemented
+		} finally {
+			if (is != null) {
+				try {
+					is.close();
+				} catch (IOException e) {
+					// Ignore
+				}
+			}
+		}
 		if (this.majorVersion > 0) {
 			detected = true;
 		}

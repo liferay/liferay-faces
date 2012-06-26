@@ -23,9 +23,7 @@ public class ProductLiferayFacesAlloyImpl extends ProductBaseImpl {
 	public ProductLiferayFacesAlloyImpl() {
 
 		try {
-			this.title = BridgeConstants.LIFERAY_FACES_ALLOY;
-			Class<?> auiPanelClass = Class.forName("com.liferay.faces.alloy.component.AUIPanel");
-			init(auiPanelClass.getPackage());
+			init(BridgeConstants.LIFERAY_FACES_ALLOY, "liferayfacesalloy.properties");
 		}
 		catch (Exception e) {
 			// Ignore -- ICEfaces is likely not present.
