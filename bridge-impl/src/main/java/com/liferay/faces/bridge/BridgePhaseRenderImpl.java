@@ -15,14 +15,18 @@ package com.liferay.faces.bridge;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Iterator;
 
 import javax.faces.FactoryFinder;
 import javax.faces.application.NavigationHandler;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
+import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.ExternalContextWrapper;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ExceptionQueuedEvent;
+import javax.faces.event.ExceptionQueuedEventContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
@@ -214,9 +218,39 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 			}
 
 			renderPhaseFacesLifecycle.execute(facesContext);
+
 		}
 
-		// If the PortletMode has changed, and a navigation-rule hasn't yet fired (which could have happened in the
+		// If there were any "handled" exceptions queued, then throw a BridgeException.
+		ExceptionHandler exceptionHandler = facesContext.getExceptionHandler();
+		Iterable<ExceptionQueuedEvent> handledExceptionQueuedEvents =
+			exceptionHandler.getHandledExceptionQueuedEvents();
+
+		if (handledExceptionQueuedEvents != null) {
+			Iterator<ExceptionQueuedEvent> itr = handledExceptionQueuedEvents.iterator();
+
+			while (itr.hasNext()) {
+				ExceptionQueuedEvent exceptionQueuedEvent = itr.next();
+				ExceptionQueuedEventContext exceptionQueuedEventContext = exceptionQueuedEvent.getContext();
+				throw new BridgeException(exceptionQueuedEventContext.getException());
+			}
+		}
+
+		// Otherwise, if there were any "handled" exceptions queued, then throw a BridgeException.
+		Iterable<ExceptionQueuedEvent> unhandledExceptionQueuedEvents =
+			exceptionHandler.getUnhandledExceptionQueuedEvents();
+
+		if (unhandledExceptionQueuedEvents != null) {
+			Iterator<ExceptionQueuedEvent> itr = unhandledExceptionQueuedEvents.iterator();
+
+			while (itr.hasNext()) {
+				ExceptionQueuedEvent exceptionQueuedEvent = itr.next();
+				ExceptionQueuedEventContext exceptionQueuedEventContext = exceptionQueuedEvent.getContext();
+				throw new BridgeException(exceptionQueuedEventContext.getException());
+			}
+		}
+
+		// Otherwise, if the PortletMode has changed, and a navigation-rule hasn't yet fired (which could have happened in the
 		// EVENT_PHASE), then switch to the appropriate PortletMode and navigate to the current viewId in the
 		// UIViewRoot.
 		if (bridgeRequestScope.isPortletModeChanged() && !bridgeRequestScope.isNavigationOccurred()) {
@@ -262,15 +296,15 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 
 			// If the render-redirect standard feature is enabled in web.xml or portlet.xml, then the
 			// ResponseOutputWriter has buffered up markup that must be discarded. This is because we don't want the
-			// markup from the original Faces view to be included with the markup of Faces view found in the redirect
-			// URL.
+			// markup from the original Faces view to be included with the markup of Faces view found in the
+			// redirect URL.
 			if (writer instanceof RenderRedirectWriter) {
 				RenderRedirectWriter responseOutputWriter = (RenderRedirectWriter) writer;
 				responseOutputWriter.discard();
 			}
 
-			// Recursively call this method with the render-redirect URL so that the RENDER_RESPONSE phase of the JSF
-			// lifecycle will be re-executed according to the new Faces viewId found in the redirect URL.
+			// Recursively call this method with the render-redirect URL so that the RENDER_RESPONSE phase of the
+			// JSF lifecycle will be re-executed according to the new Faces viewId found in the redirect URL.
 			execute(bridgeContext.getRenderRedirectURL());
 		}
 
