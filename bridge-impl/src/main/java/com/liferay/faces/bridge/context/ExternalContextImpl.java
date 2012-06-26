@@ -31,7 +31,6 @@ import java.util.Set;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
-import javax.portlet.ActionResponse;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletContext;
@@ -40,6 +39,7 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceResponse;
+import javax.portlet.StateAwareResponse;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeWriteBehindResponse;
 import javax.servlet.ServletResponse;
@@ -959,9 +959,10 @@ public class ExternalContextImpl extends ExternalContext {
 			}
 			else {
 
-				if (portletResponse instanceof ActionResponse) {
+				if (portletResponse instanceof StateAwareResponse) {
 
-					// TestPage169: getResponseCharacterEncodingActionTest
+					// TCK TestPage169: getResponseCharacterEncodingActionTest
+					// TCK TestPage180: getResponseCharacterEncodingEventTest
 					throw new IllegalStateException();
 				}
 				else {
@@ -1014,9 +1015,10 @@ public class ExternalContextImpl extends ExternalContext {
 	@Override
 	public String getResponseContentType() {
 
-		if (portletResponse instanceof ActionResponse) {
+		if (portletResponse instanceof StateAwareResponse) {
 
-			// TestPage173: getResponseContentTypeActionTest
+			// TCK TestPage173: getResponseContentTypeActionTest
+			// TCK TestPage174: getResponseContentTypeEventTest
 			throw new IllegalStateException();
 		}
 		else {

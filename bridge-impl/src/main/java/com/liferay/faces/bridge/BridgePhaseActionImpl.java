@@ -85,10 +85,13 @@ public class BridgePhaseActionImpl extends BridgePhaseBaseImpl {
 			// Execute all the phases of the JSF lifecycle except for RENDER_RESPONSE since that can only be executed
 			// during the RENDER_PHASE of the portlet lifecycle.
 			actionPhaseFacesLifecycle.execute(facesContext);
+			
+			// Set a flag on the bridge request scope indicating that the Faces Lifecycle has executed.
+			bridgeRequestScope.setFacesLifecycleExecuted(true);
 
 			// Save the faces view root and any messages in the faces context so that they can be restored during
 			// the RENDER_PHASE of the portlet lifecycle.
-			bridgeRequestScope.preserveScopedData(facesContext);
+			bridgeRequestScope.preserve(facesContext);
 
 			// PROPOSED-FOR-JSR344-API
 			// http://java.net/jira/browse/JAVASERVERFACES_SPEC_PUBLIC-1070

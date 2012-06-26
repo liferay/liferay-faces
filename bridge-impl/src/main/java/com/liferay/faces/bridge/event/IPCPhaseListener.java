@@ -92,7 +92,7 @@ public class IPCPhaseListener implements PhaseListener {
 	/**
 	 * This method processes the "incoming" Public Render Parameters in accordance with Section 5.3.2 of the Spec.
 	 */
-	protected void processIncomingPublicRenderParameters(BridgeContext bridgeContext, FacesContext facesContext) {
+	public void processIncomingPublicRenderParameters(BridgeContext bridgeContext, FacesContext facesContext) {
 
 		try {
 
@@ -202,7 +202,7 @@ public class IPCPhaseListener implements PhaseListener {
 	/**
 	 * This method processes the "outgoing" Public Render Parameters in accordance with Section 5.3.3 of the Spec.
 	 */
-	protected void processOutgoingPublicRenderParameters(BridgeContext bridgeContext, FacesContext facesContext) {
+	public void processOutgoingPublicRenderParameters(BridgeContext bridgeContext, FacesContext facesContext) {
 
 		try {
 			StateAwareResponse stateAwareResponse = (StateAwareResponse) bridgeContext.getPortletResponse();

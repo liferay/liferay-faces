@@ -45,18 +45,19 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 
 	/**
 	 * Unlike Pluto, Liferay will preserve/copy request attributes that were originally set on an {@link ActionRequest}
-	 * into the {@link RenderRequest}. In order for the TCK eventScopeNotRestoredRedirectTest to pass when running in
-	 * Liferay, it is necessary to remove these request attributes.
+	 * into the {@link RenderRequest}. However, the Bridge Spec assumes that they will not be preserved. Therefore is
+	 * necessary to remove these request attributes when running under Liferay.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void restoreScopedData(FacesContext facesContext) {
+	public void restore(FacesContext facesContext) {
 
-		super.restoreScopedData(facesContext);
+		super.restore(facesContext);
 
-		if (isRedirect()) {
+		if (isRedirectOccurred() || isPortletModeChanged()) {
 
 			// TCK TestPage062: eventScopeNotRestoredRedirectTest
+			// TCK TestPage063: eventScopeNotRestoredModeChangedTest
 			List<RequestAttribute> savedRequestAttributes = (List<RequestAttribute>) getAttribute(
 					BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES);
 

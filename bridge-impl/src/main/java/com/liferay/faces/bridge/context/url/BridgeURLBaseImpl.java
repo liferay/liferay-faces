@@ -18,7 +18,6 @@ import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -43,6 +42,7 @@ import com.liferay.faces.bridge.helper.PortletModeHelper;
 import com.liferay.faces.bridge.helper.WindowStateHelper;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.bridge.util.URLUtil;
 
 
 /**
@@ -502,42 +502,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 	public Map<String, String[]> getParameterMap() {
 
 		if (parameters == null) {
-			parameters = new HashMap<String, String[]>();
-
-			if (url != null) {
-				int pos = url.indexOf("?");
-
-				if (pos > 0) {
-					String queryString = url.substring(pos + 1);
-					queryString = queryString.replaceAll("&amp;", "&");
-
-					if ((queryString != null) && (queryString.length() > 0)) {
-
-						String[] queryParameters = queryString.split("[&]");
-
-						for (String queryParameter : queryParameters) {
-							String[] nameValueArray = queryParameter.split("[=]");
-
-							if (nameValueArray != null) {
-
-								if (nameValueArray.length == 1) {
-									String name = nameValueArray[0];
-									String value = BridgeConstants.EMPTY;
-									parameters.put(name, new String[] { value });
-								}
-								else if (nameValueArray.length == 2) {
-									String name = nameValueArray[0];
-									String value = nameValueArray[1];
-									parameters.put(name, new String[] { value });
-								}
-								else {
-									logger.error("Invalid name=value pair=[{0}] in URL=[{1}]", nameValueArray, url);
-								}
-							}
-						}
-					}
-				}
-			}
+			parameters = URLUtil.parseParameterMapValuesArray(url);
 		}
 
 		return parameters;
