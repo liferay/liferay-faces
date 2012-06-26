@@ -194,50 +194,6 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>buildnumber-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<phase>generate-sources</phase>
-						<configuration>
-							<tasks>
-								<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="maven.plugin.classpath"/>
-								<property name="src.dir" value="${project.build.sourceDirectory}" />
-								<propertyregex property="package.name" input="${project.groupId}.${project.artifactId}" regexp="-" replace="" global="true" />
-								<propertyregex property="package.dir" input="${package.name}" regexp="[.]" replace="/" global="true" />
-								
-								<echo file="${src.dir}/${package.dir}/Version.java" message="package ${package.name};${line.separator}" />
-								<echo file="${src.dir}/${package.dir}/Version.java" append="true" message="public final class Version {${line.separator}" />
-								<echo file="${src.dir}/${package.dir}/Version.java" append="true" message=" public static String VERSION=&quot;${project.version}&quot;;${line.separator}" />
-								<echo file="${src.dir}/${package.dir}/Version.java" append="true" message="}${line.separator}" />
-								<echo message="BUILD ${buildtime}" />
-							</tasks>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>ant-contrib</groupId>
-						<artifactId>ant-contrib</artifactId>
-						<version>1.0b3</version>
-						<exclusions>
-							<exclusion>
-								<groupId>ant</groupId>
-								<artifactId>ant</artifactId>
-							</exclusion>
-						</exclusions>
-					</dependency>
-					<dependency>
-						<groupId>org.apache.ant</groupId>
-						<artifactId>ant-nodeps</artifactId>
-						<version>1.8.1</version>
-					</dependency>
-				</dependencies>
-			</plugin>
 		</plugins>
 	</build>
 
