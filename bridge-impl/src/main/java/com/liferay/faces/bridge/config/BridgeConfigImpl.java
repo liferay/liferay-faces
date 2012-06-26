@@ -96,7 +96,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private BridgeWriteBehindResponseFactory bridgeWriteBehindResponseFactory;
 	private BridgeURLFactory bridgeURLFactory;
 	private List<String> defaultSuffixes;
-	private Set<String> excludedBridgeRequestScopeAttributes = new HashSet<String>();
+	private Set<String> excludedBridgeRequestAttributes = new HashSet<String>();
 	private List<ServletMapping> facesServletMappings;
 	private PortletContainerFactory portletContainerFactory;
 	private PortletContext portletContext;
@@ -327,7 +327,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	}
 
 	public Set<String> getExcludedRequestAttributes() {
-		return excludedBridgeRequestScopeAttributes;
+		return excludedBridgeRequestAttributes;
 	}
 
 	public List<ServletMapping> getFacesServletMappings() {
@@ -587,7 +587,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 				String attributeName = content.toString().trim();
 
 				if (attributeName.length() > 0) {
-					BridgeConfigImpl.this.excludedBridgeRequestScopeAttributes.add(attributeName);
+					BridgeConfigImpl.this.excludedBridgeRequestAttributes.add(attributeName);
 				}
 			}
 			else if (parsingModelEL) {
