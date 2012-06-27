@@ -74,10 +74,12 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 		"com.liferay.faces.bridge.facescontext.attributes";
 	private static final String BRIDGE_REQ_SCOPE_ATTR_FACES_MESSAGES = "com.liferay.faces.bridge.faces.messages";
 	private static final String BRIDGE_REQ_SCOPE_ATTR_FACES_VIEW_ROOT = "com.liferay.faces.bridge.faces.view.root";
+	private static final String BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES =
+		"com.liferay.faces.bridge.faces.request.attributes";
 
 	// Protected Constants
-	protected static final String BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES =
-		"com.liferay.faces.bridge.faces.request.attributes";
+	protected static final String BRIDGE_REQ_SCOPE_NON_EXCLUDED_ATTR_NAMES =
+		"com.liferay.faces.bridge.nonExcludedAttributeNames";
 
 	// Private Constants for EXCLUDED namespaces listed in Section 5.1.2 of the JSR 329 Spec
 	private static final String EXCLUDED_NAMESPACE_JAVAX_FACES = "javax.faces";
@@ -254,61 +256,72 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
 				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
 
-			// If a redirect occurred, then the non-excluded request attributes are not to be preserved. Note that for
-			// Liferay, not-preserving simply isn't good enough. See
-			// BridgeRequestScopeLiferayImpl#restoreScopedData(FacesContext) for more information.
+			boolean saveNonExcludedAttributes = true;
+
+			// If a redirect occurred, then indicate that the non-excluded request attributes are not to be preserved.
 			if (isRedirectOccurred()) {
 
 				// TCK TestPage062: eventScopeNotRestoredRedirectTest
 				logger.trace("Due to redirect, not saving any non-excluded request attributes");
+				saveNonExcludedAttributes = false;
 			}
 
-			// Otherwise, if the portlet mode hasn't changed, then save the non-excluded request attributes. This would
-			// include, for example, managed-bean instances that may have been created during the ACTION_PHASE that
-			// need to survive to the RENDER_PHASE.
-			else if (!isPortletModeChanged()) {
+			// Otherwise, if the portlet mode has changed, then indicate that the non-exluded request attributes are
+			// not to be preserved.
+			else if (isPortletModeChanged()) {
+				logger.trace("Due to PortletMode change, not saving any non-excluded request attributes");
+				saveNonExcludedAttributes = false;
+			}
 
-				Map<String, Object> currentRequestAttributes = externalContext.getRequestMap();
+			// If appropriate, save the non-excluded request attributes. This would include, for example, managed-bean
+			// instances that may have been created during the ACTION_PHASE that need to survive to the RENDER_PHASE.
+			Map<String, Object> currentRequestAttributes = externalContext.getRequestMap();
 
-				if (currentRequestAttributes != null) {
-					List<RequestAttribute> savedRequestAttributes = new ArrayList<RequestAttribute>();
-					Iterator<Map.Entry<String, Object>> itr = currentRequestAttributes.entrySet().iterator();
+			if (currentRequestAttributes != null) {
+				List<RequestAttribute> savedRequestAttributes = new ArrayList<RequestAttribute>();
+				List<String> nonExcludedAttributeNames = new ArrayList<String>();
+				Iterator<Map.Entry<String, Object>> itr = currentRequestAttributes.entrySet().iterator();
 
-					if (itr != null) {
+				if (itr != null) {
 
-						while (itr.hasNext()) {
-							Map.Entry<String, Object> mapEntry = itr.next();
-							String name = mapEntry.getKey();
-							Object value = mapEntry.getValue();
+					while (itr.hasNext()) {
+						Map.Entry<String, Object> mapEntry = itr.next();
+						String name = mapEntry.getKey();
+						Object value = mapEntry.getValue();
 
-							if (isExcludedRequestAttribute(name, value)) {
-								logger.trace("Not saving EXCLUDED attribute name=[{0}]", name);
-							}
-							else if ((value != null) &&
-									(value.getClass().getAnnotation(ExcludeFromManagedRequestScope.class) != null)) {
-								logger.trace(
-									"Not saving EXCLUDED attribute name=[{0}] due to ExcludeFromManagedRequestScope annotation",
-									name);
-							}
-							else {
+						if (isExcludedRequestAttribute(name, value)) {
+							logger.trace("Not saving EXCLUDED attribute name=[{0}]", name);
+						}
+						else if ((value != null) &&
+								(value.getClass().getAnnotation(ExcludeFromManagedRequestScope.class) != null)) {
+							logger.trace(
+								"Not saving EXCLUDED attribute name=[{0}] due to ExcludeFromManagedRequestScope annotation",
+								name);
+						}
+						else {
+
+							if (saveNonExcludedAttributes) {
 								logger.trace("Saving non-excluded request attribute name=[{0}] value=[{1}]", name,
 									value);
 								savedRequestAttributes.add(new RequestAttribute(name, value));
 							}
-						}
 
-						if (savedRequestAttributes.size() > 0) {
-							setAttribute(BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES, savedRequestAttributes);
-						}
-						else {
-							logger.trace("Not saving any non-excluded request attributes");
+							nonExcludedAttributeNames.add(name);
 						}
 					}
+
+					if (savedRequestAttributes.size() > 0) {
+						setAttribute(BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES, savedRequestAttributes);
+					}
+					else {
+						logger.trace("Not saving any non-excluded request attributes");
+					}
+
+					setAttribute(BRIDGE_REQ_SCOPE_NON_EXCLUDED_ATTR_NAMES, nonExcludedAttributeNames);
 				}
-				else {
-					logger.trace(
-						"Not saving any non-excluded request attributes because there are no request attributes!");
-				}
+			}
+			else {
+				logger.trace("Not saving any non-excluded request attributes because there are no request attributes!");
 			}
 		}
 	}
@@ -316,12 +329,14 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 	@SuppressWarnings("unchecked")
 	public void restore(FacesContext facesContext) {
 
-		boolean restoreNonExcludedRequestAttributes = ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
+		boolean restoreNonExcludedRequestAttributes = ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) ||
+				(beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
 				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE));
-		
+
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+
 		if (bridgeContext.getPortletRequestPhase() == Bridge.PortletPhase.RENDER_PHASE) {
-			
+
 			if (!portletMode.equals(bridgeContext.getPortletRequest().getPortletMode())) {
 				setPortletModeChanged(true);
 				restoreNonExcludedRequestAttributes = false;
