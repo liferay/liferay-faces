@@ -58,19 +58,19 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 
 			// TCK TestPage062: eventScopeNotRestoredRedirectTest
 			// TCK TestPage063: eventScopeNotRestoredModeChangedTest
-			List<RequestAttribute> savedRequestAttributes = (List<RequestAttribute>) getAttribute(
-					BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES);
+			List<String> nonExcludedAttributeNames = (List<String>) getAttribute(
+					BRIDGE_REQ_SCOPE_NON_EXCLUDED_ATTR_NAMES);
 
-			if (savedRequestAttributes != null) {
+			if (nonExcludedAttributeNames != null) {
 				ExternalContext externalContext = facesContext.getExternalContext();
 
 				Map<String, Object> currentRequestAttributes = externalContext.getRequestMap();
 
-				for (RequestAttribute requestAttribute : savedRequestAttributes) {
-					String name = requestAttribute.getName();
-					currentRequestAttributes.remove(name);
+				for (String attributeName : nonExcludedAttributeNames) {
+					currentRequestAttributes.remove(attributeName);
 					logger.trace(
-						"Due to redirect, removed request attribute name=[{0}] that had been preserved in the ACTION_PHASE or EVENT_PHASE");
+						"Due to redirect, removed request attribute name=[{0}] that had been preserved in the ACTION_PHASE or EVENT_PHASE",
+						attributeName);
 				}
 			}
 		}
