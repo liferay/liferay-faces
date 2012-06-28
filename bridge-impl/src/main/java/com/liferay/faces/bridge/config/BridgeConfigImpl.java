@@ -73,6 +73,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private static final String PORTLET_CONTAINER_FACTORY = "portlet-container-factory";
 	private static final String FACES_CONFIG_META_INF_PATH = "META-INF/faces-config.xml";
 	private static final String FACES_CONFIG_WEB_INF_PATH = "/WEB-INF/faces-config.xml";
+	private static final String NAME = "name";
 	private static final String RENDER_RESPONSE_WRAPPER_CLASS = "render-response-wrapper-class";
 	private static final String RESOURCE_RESPONSE_WRAPPER_CLASS = "resource-response-wrapper-class";
 	private static final String SERVLET = "servlet";
@@ -96,7 +97,8 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private BridgeWriteBehindResponseFactory bridgeWriteBehindResponseFactory;
 	private BridgeURLFactory bridgeURLFactory;
 	private List<String> defaultSuffixes;
-	private Set<String> excludedBridgeRequestScopeAttributes = new HashSet<String>();
+	private Set<String> excludedBridgeRequestAttributes = new HashSet<String>();
+	private String facesConfigName;
 	private List<ServletMapping> facesServletMappings;
 	private PortletContainerFactory portletContainerFactory;
 	private PortletContext portletContext;
@@ -121,6 +123,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 			// Obtain a SAX Parser from the factory.
 			SAXParser saxParser = saxParserFactory.newSAXParser();
+//          saxParser.getParser().setErrorHandler(errorHandler);
 
 			// Determine whether or not entities should be resolved. Due to slow performance in the
 			// SAXEventHandler.resolveEntity(String, String) method it's best to set the default value of this to false.
@@ -137,25 +140,65 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 			boolean resolveEntities = BooleanHelper.toBoolean(initParam, defaultValue);
 
-			// Define a SAX 2 callback event handler for the SAX Parser.
-			FacesConfigHandler facesConfigHandler = new FacesConfigHandler(resolveEntities);
+			// Define the SAX 2 callback event handlers for the SAX Parser.
+			FacesConfigPreHandler facesConfigPreHandler = new FacesConfigPreHandler(resolveEntities);
+			FacesConfigPostHandler facesConfigPostHandler = new FacesConfigPostHandler(resolveEntities);
 
-			// First, parse all of the META-INF/faces-config.xml files found in the classpath. At this time, the JSF
-			// 2.0 <ordering> element is not supported.
+			// First, parse all of the META-INF/faces-config.xml files found in the classpath.
 			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-			Enumeration<URL> facesConfigFiles = classLoader.getResources(FACES_CONFIG_META_INF_PATH);
+			Enumeration<URL> facesConfigURLs = classLoader.getResources(FACES_CONFIG_META_INF_PATH);
 
-			if (facesConfigFiles != null) {
+			List<FacesConfig> facesConfigList = new ArrayList<FacesConfig>();
 
-				while (facesConfigFiles.hasMoreElements()) {
-					URL facesConfigURL = facesConfigFiles.nextElement();
-					logger.debug("Processing faces-config: [{0}]", facesConfigURL);
-					facesConfigHandler.setURL(facesConfigURL);
+			if (facesConfigURLs != null) {
+
+				// Build up a semi-sorted list of faces-config.xml descriptor files, ensuring that the bridge's
+				// META-INF/faces-config.xml descriptor is ordered first. (Note that the JSF 2.0 <ordering> element is
+				// not yet supported.)
+				while (facesConfigURLs.hasMoreElements()) {
+					URL facesConfigURL = facesConfigURLs.nextElement();
+
+					logger.debug("Pre-processing faces-config: [{0}]", facesConfigURL);
+					facesConfigPreHandler.setURL(facesConfigURL);
 
 					InputStream inputStream = facesConfigURL.openStream();
 
 					try {
-						saxParser.parse(inputStream, facesConfigHandler);
+						saxParser.parse(inputStream, facesConfigPreHandler);
+					}
+					catch (SAXParseCompleteException e) {
+						// ignore
+					}
+					catch (Exception e) {
+						logger.error(e.getMessage());
+					}
+
+					if (facesConfigName == null) {
+						facesConfigName = facesConfigURL.toString();
+					}
+
+					FacesConfig facesConfig = new FacesConfig(facesConfigName, facesConfigURL);
+
+					if (BridgeConstants.LIFERAY_FACES_BRIDGE.equals(facesConfigName)) {
+						facesConfigList.add(0, facesConfig);
+					}
+					else {
+						facesConfigList.add(facesConfig);
+					}
+
+					facesConfigName = null;
+				}
+
+				for (FacesConfig facesConfig : facesConfigList) {
+
+					URL facesConfigURL = facesConfig.getURL();
+					logger.debug("Post-processing faces-config: [{0}]", facesConfigURL);
+					facesConfigPostHandler.setURL(facesConfigURL);
+
+					InputStream inputStream = facesConfigURL.openStream();
+
+					try {
+						saxParser.parse(inputStream, facesConfigPostHandler);
 						inputStream.close();
 						saxParser.reset();
 					}
@@ -171,7 +214,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 			if (inputStream != null) {
 				logger.debug("Processing faces-config: [{0}]", FACES_CONFIG_WEB_INF_PATH);
-				saxParser.parse(inputStream, facesConfigHandler);
+				saxParser.parse(inputStream, facesConfigPostHandler);
 				inputStream.close();
 			}
 
@@ -327,7 +370,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	}
 
 	public Set<String> getExcludedRequestAttributes() {
-		return excludedBridgeRequestScopeAttributes;
+		return excludedBridgeRequestAttributes;
 	}
 
 	public List<ServletMapping> getFacesServletMappings() {
@@ -429,7 +472,43 @@ public class BridgeConfigImpl implements BridgeConfig {
 		}
 	}
 
-	protected class FacesConfigHandler extends BaseHandler {
+	protected class BridgeConfigAttributeMap extends HashMap<String, Object> {
+
+		// serialVersionUID
+		private static final long serialVersionUID = 8763346476317251569L;
+
+		@Override
+		public Object get(Object key) {
+			Object value = super.get(key);
+
+			if (value == null) {
+				value = ProductMap.getInstance().get(key);
+			}
+
+			return value;
+		}
+	}
+
+	protected class FacesConfig {
+
+		private String name;
+		private URL url;
+
+		public FacesConfig(String name, URL url) {
+			this.name = name;
+			this.url = url;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public URL getURL() {
+			return url;
+		}
+	}
+
+	protected class FacesConfigPostHandler extends BaseHandler {
 
 		// Private Constants
 		private static final String EXCLUDED_ATTRIBUTE = "excluded-attribute";
@@ -452,12 +531,12 @@ public class BridgeConfigImpl implements BridgeConfig {
 		private String parameter;
 		private boolean parsingUploadedFileFactory = false;
 
-		public FacesConfigHandler(boolean resolveEntities) {
+		public FacesConfigPostHandler(boolean resolveEntities) {
 			super(resolveEntities);
 		}
 
 		@Override
-		public void endElement(String uri, String localName, String name) throws SAXException {
+		public void endElement(String uri, String localName, String qName) throws SAXException {
 
 			if (parsingBridgeContextFactory) {
 				String factoryClassName = content.toString().trim();
@@ -587,7 +666,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 				String attributeName = content.toString().trim();
 
 				if (attributeName.length() > 0) {
-					BridgeConfigImpl.this.excludedBridgeRequestScopeAttributes.add(attributeName);
+					BridgeConfigImpl.this.excludedBridgeRequestAttributes.add(attributeName);
 				}
 			}
 			else if (parsingModelEL) {
@@ -730,6 +809,51 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 	}
 
+	protected class FacesConfigPreHandler extends BaseHandler {
+
+		// Private Data Members
+		private boolean parsingName = false;
+
+		public FacesConfigPreHandler(boolean resolveEntities) {
+			super(resolveEntities);
+		}
+
+		@Override
+		public void endElement(String uri, String localName, String qName) throws SAXException {
+
+			if (parsingName) {
+				facesConfigName = content.toString().trim();
+			}
+
+			content = null;
+			parsingName = false;
+
+			if (facesConfigName != null) {
+
+				// Abort processing since the <name>...</name> has been parsed.
+				throw new SAXParseCompleteException();
+			}
+		}
+
+		@Override
+		public void startElement(String uri, String localName, String elementName, Attributes attributes)
+			throws SAXException {
+
+			logger.trace("localName=[{0}]", localName);
+
+			content = new StringBuilder();
+
+			if (localName.equals(NAME)) {
+				parsingName = true;
+			}
+		}
+
+	}
+
+	protected class SAXParseCompleteException extends SAXException {
+		private static final long serialVersionUID = 1170538769536627765L;
+	}
+
 	protected class WebAppHandler extends BaseHandler {
 
 		// Private Data Members
@@ -746,7 +870,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 		}
 
 		@Override
-		public void endElement(String uri, String localName, String name) throws SAXException {
+		public void endElement(String uri, String localName, String qName) throws SAXException {
 
 			if (parsingServlet) {
 
@@ -769,7 +893,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 					parsingServletName = false;
 				}
 
-				if (SERVLET.equals(name)) {
+				if (SERVLET.equals(qName)) {
 					parsingServlet = false;
 				}
 			}
@@ -790,7 +914,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 					parsingUrlPattern = false;
 				}
 
-				if (SERVLET_MAPPING.equals(name)) {
+				if (SERVLET_MAPPING.equals(qName)) {
 					parsingServletMapping = false;
 				}
 			}
@@ -821,21 +945,5 @@ public class BridgeConfigImpl implements BridgeConfig {
 				parsingUrlPattern = true;
 			}
 		}
-	}
-
-	protected class BridgeConfigAttributeMap extends HashMap<String, Object> {
-
-		// serialVersionUID
-		private static final long serialVersionUID = 8763346476317251569L;
-
-		@Override
-		public Object get(Object key) {
-			Object value = super.get(key);
-			if (value == null) {
-				value = ProductMap.getInstance().get(key);
-			}
-			return value;
-		}
-		
 	}
 }
