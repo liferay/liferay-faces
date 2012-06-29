@@ -37,6 +37,9 @@ public class BridgeConstants {
 	public static final String CHAR_SPACE = " ";
 	public static final String CHAR_UNDERSCORE = "_";
 	
+	// Header Constants
+	public static final String HEADER_USER_AGENT = "User-Agent";
+
 	// Product Constants
 	public static final String ICEFACES = "ICEfaces";
 	public static final String LIFERAY_PORTAL = "Liferay Portal";
