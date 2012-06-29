@@ -573,7 +573,7 @@ public class BridgeContextImpl extends BridgeContext {
 
 	/**
 	 * This method ensures that {@link BridgeContextWrapper} classes participate in getting the parameter values. For
-	 * example, when running in the TCK, the {@link BridgeContextFactoryImpl} will wrap the default {@link
+	 * example, when running in the TCK, the {@link BridgeContextFactoryTCKImpl} class will wrap the default {@link
 	 * BridgeContextImpl} instance with a {@link BridgeContextTCKImpl} wrapper that has an overload of {@link
 	 * #getInitParameter(String)}.
 	 */
@@ -1042,7 +1042,7 @@ public class BridgeContextImpl extends BridgeContext {
 	public Map<String, String[]> getRequestHeaderValuesMap() {
 
 		if (requestHeaderValuesMap == null) {
-			requestHeaderValuesMap = Collections.unmodifiableMap(new RequestHeaderValuesMap(portletRequest,
+			requestHeaderValuesMap = Collections.unmodifiableMap(new RequestHeaderValuesMap(this,
 						getRequestParameterMap()));
 		}
 
