@@ -101,6 +101,11 @@ public interface PortletContainer {
 	public String fixRequestParameterValue(String value);
 
 	/**
+	 * Maintains (copies) the render parameters found in the specified EventRequest to the specified EventResponse.
+	 */
+	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse);
+
+	/**
 	 * Delegates to the underlying ActionResponse to perform a redirect to the specified URL.
 	 */
 	public void redirect(String url) throws IOException;
@@ -142,11 +147,6 @@ public interface PortletContainer {
 	 * @return  True if the portlet container supports it.
 	 */
 	public boolean isAbleToSetResourceResponseBufferSize();
-
-	/**
-	 * Maintains (copies) the render parameters found in the specified EventRequest to the specified EventResponse. 
-	 */
-	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse);
 
 	/**
 	 * Determines whether or not the portlet container has the ability to issue a forward when a dispatch occurs. If
@@ -213,4 +213,9 @@ public interface PortletContainer {
 	 * Returns the response namespace.
 	 */
 	public String getResponseNamespace();
+
+	/**
+	 * Returns the value of the "User-Agent" header from the underlying HttpServletRequest.
+	 */
+	public String[] getUserAgentHeader();
 }

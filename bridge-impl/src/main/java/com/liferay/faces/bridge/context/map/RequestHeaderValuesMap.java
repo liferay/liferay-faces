@@ -23,6 +23,7 @@ import javax.portlet.ResourceRequest;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeExt;
+import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
@@ -49,11 +50,13 @@ public class RequestHeaderValuesMap extends CaseInsensitiveHashMap<String[]> {
 	private static final String HEADER_CONTENT_TYPE = "Content-Type";
 	private static final String HEADER_FACES_REQUEST = "Faces-Request";
 
-	public RequestHeaderValuesMap(PortletRequest portletRequest, Map<String, String> requestParameterMap) {
+	public RequestHeaderValuesMap(BridgeContext bridgeContext, Map<String, String> requestParameterMap) {
+		PortletRequest portletRequest = bridgeContext.getPortletRequest();
 		Enumeration<String> propertyNames = portletRequest.getPropertyNames();
 		boolean foundAccept = false;
 		boolean foundContentType = false;
 		boolean foundFacesRequest = false;
+		boolean foundUserAgent = false;
 
 		if (propertyNames != null) {
 
@@ -78,8 +81,9 @@ public class RequestHeaderValuesMap extends CaseInsensitiveHashMap<String[]> {
 
 							Locale locale = locales.nextElement();
 							buf.append(locale.getLanguage());
-							
+
 							String country = locale.getCountry();
+
 							if ((country != null) && (country.length() > 0)) {
 								buf.append(BridgeConstants.CHAR_DASH);
 								buf.append(country);
@@ -126,6 +130,10 @@ public class RequestHeaderValuesMap extends CaseInsensitiveHashMap<String[]> {
 						if (!foundFacesRequest) {
 							foundFacesRequest = name.equalsIgnoreCase(HEADER_FACES_REQUEST);
 						}
+
+						if (!foundUserAgent) {
+							foundUserAgent = name.equalsIgnoreCase(BridgeConstants.HEADER_USER_AGENT);
+						}
 					}
 				}
 			}
@@ -157,6 +165,10 @@ public class RequestHeaderValuesMap extends CaseInsensitiveHashMap<String[]> {
 					put(HEADER_FACES_REQUEST, new String[] { PARTIAL_AJAX });
 				}
 			}
+		}
+
+		if (!foundUserAgent) {
+			put(BridgeConstants.HEADER_USER_AGENT, bridgeContext.getPortletContainer().getUserAgentHeader());
 		}
 	}
 
