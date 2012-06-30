@@ -432,8 +432,9 @@ public class BridgeContextImpl extends BridgeContext {
 				// Otherwise,
 				else {
 
-					// If currently executing the ACTION_PHASE of the portlet lifecycle, then
-					if ((portletPhase == Bridge.PortletPhase.ACTION_PHASE) || (portletPhase == Bridge.PortletPhase.EVENT_PHASE)) {
+					// If currently executing the ACTION_PHASE or EVENT_PHASE of the portlet lifecycle, then
+					if ((portletPhase == Bridge.PortletPhase.ACTION_PHASE) ||
+							(portletPhase == Bridge.PortletPhase.EVENT_PHASE)) {
 
 						// TCK NOTE: The TCK will invoke this condition during the
 						// TestPage039-requestNoScopeOnRedirectTest and TestPage176-redirectActionTest.
@@ -1322,3 +1323,4 @@ public class BridgeContextImpl extends BridgeContext {
 	}
 
 }
+
