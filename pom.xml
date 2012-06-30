@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.liferay.faces</groupId>
@@ -65,6 +66,7 @@
 
 	<modules>
 		<module>alloy</module>
+		<module>bridge-api</module>
 		<module>bridge-impl</module>
 		<module>portal</module>
 		<module>doc</module>
@@ -107,7 +109,7 @@
 							<manifestEntries>
 								<Built-By>Release Manager</Built-By>
 								<Implementation-Title>${project.name}</Implementation-Title>
-								<Implementation-Version>${project.version} (${codename} / ${timestamp} AD)</Implementation-Version>
+								<Implementation-Version>${full.version}</Implementation-Version>
 								<Implementation-Vendor-Id>com.liferay</Implementation-Vendor-Id>
 								<Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
 							</manifestEntries>
@@ -123,7 +125,7 @@
 							<manifestEntries>
 								<Built-By>Release Manager</Built-By>
 								<Implementation-Title>${project.name}</Implementation-Title>
-								<Implementation-Version>${project.version} (${codename} / ${timestamp} AD)</Implementation-Version>
+								<Implementation-Version>${full.version}</Implementation-Version>
 								<Implementation-Vendor-Id>com.liferay</Implementation-Vendor-Id>
 								<Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
 							</manifestEntries>
@@ -144,6 +146,11 @@
 					<artifactId>maven-scm-providers-git</artifactId>
 					<!-- http://jira.codehaus.org/browse/SCM-444 -->
 					<version>(,1.4]</version>
+				</plugin>
+				<plugin>
+					<groupId>org.appfuse.plugins</groupId>
+					<artifactId>maven-warpath-plugin</artifactId>
+					<version>2.1.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -181,6 +188,19 @@
 									</pluginExecutionFilter>
 									<action>
 										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.appfuse.plugins</groupId>
+										<artifactId>maven-warpath-plugin</artifactId>
+										<versionRange>[2.1.0,)</versionRange>
+										<goals>
+											<goal>add-classes</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -228,11 +248,121 @@
 										</delete>
 										<delete failonerror="false" includeemptydirs="true" verbose="true">
 											<fileset dir="${liferay.deploy.dir}/${project.artifactId}" />
+											<fileset dir="${liferay.deploy.dir}/${project.artifactId}-${project.version}" />
 											<fileset dir="${liferay.deploy.dir}/${project.artifactId}.war" />
 											<fileset dir="${liferay.deploy.dir}">
 												<include name="*${project.artifactId}.war.deployed" />
 											</fileset>
 										</delete>
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>mojarra</id>
+			<activation>
+				<property>
+					<name>!faces-impl</name>
+				</property>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>com.sun.faces</groupId>
+					<artifactId>jsf-api</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.sun.faces</groupId>
+					<artifactId>jsf-impl</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>myfaces</id>
+			<!-- Activate by adding -Dfaces-impl=myfaces -->
+			<activation>
+				<property>
+					<name>faces-impl</name>
+					<value>myfaces</value>
+				</property>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.apache.myfaces.core</groupId>
+					<artifactId>myfaces-api</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.myfaces.core</groupId>
+					<artifactId>myfaces-impl</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>pluto</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webXml>${project.build.directory}/pluto-resources/web.xml</webXml>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.portals.pluto</groupId>
+						<artifactId>maven-pluto-plugin</artifactId>
+						<version>${pluto.version}</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.portals.pluto</groupId>
+								<artifactId>pluto-util</artifactId>
+								<version>${pluto.version}</version>
+								<scope>runtime</scope>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>assemble</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>clean</id>
+								<phase>clean</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<delete failonerror="false" includeemptydirs="true" verbose="true">
+											<fileset dir="${pluto.deploy.dir}">
+												<include name="${project.artifactId}*/" />
+												<include name="${project.artifactId}*.war" />
+											</fileset>
+										</delete>
+									</target>
+								</configuration>
+							</execution>
+							<execution>
+								<phase>install</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<copy todir="${pluto.deploy.dir}">
+											<fileset dir="target">
+												<include name="${project.artifactId}*.war" />
+											</fileset>
+										</copy>
 									</target>
 								</configuration>
 							</execution>
@@ -347,11 +477,6 @@
 				<groupId>org.apache.myfaces.core</groupId>
 				<artifactId>myfaces-impl</artifactId>
 				<version>${myfaces.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.myfaces.portlet-bridge</groupId>
-				<artifactId>portlet-bridge-api</artifactId>
-				<version>2.0.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.icefaces</groupId>
