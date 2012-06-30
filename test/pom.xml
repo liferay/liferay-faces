@@ -13,6 +13,7 @@
 	<name>Liferay Faces Test</name>
 
 	<modules>
+		<module>bridge-tck</module>
 		<module>hooks</module>
 	</modules>
 
