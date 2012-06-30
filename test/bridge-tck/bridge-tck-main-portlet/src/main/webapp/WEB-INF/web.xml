@@ -125,6 +125,13 @@
     <servlet-name>nonFacesResource</servlet-name>
     <servlet-class>org.apache.myfaces.portlet.faces.testsuite.tests.chapter_5.section_5_2.NonFacesResourceServlet</servlet-class>
   </servlet>
+  
+  <!-- BEGIN: LIFERAY PORTAL -->
+  <servlet>
+  	<servlet-name>JspServlet</servlet-name>
+  	<servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
+  </servlet>
+  <!-- END: LIFERAY PORTAL -->
 
   <!-- Faces Servlet Mappings -->
   <!-- 
@@ -146,6 +153,13 @@
     <servlet-name>nonFacesResource</servlet-name>
     <url-pattern>/tck/*</url-pattern>
   </servlet-mapping>
+  
+  <!-- BEGIN: LIFERAY PORTAL -->
+  <servlet-mapping>
+  	<servlet-name>JspServlet</servlet-name>
+  	<url-pattern>/tests/*</url-pattern>
+  </servlet-mapping>
+  <!-- END: LIFERAY PORTAL -->
 
 </web-app>
 
