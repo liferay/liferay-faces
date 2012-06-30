@@ -35,8 +35,8 @@ import com.liferay.faces.bridge.logging.LoggerFactory;
  * feature is responsible for rendering of markup that appears after the closing </f:view> component tag.</p>
  *
  * <p>The Portlet Bridge Spec requires that the {@link Bridge#AFTER_VIEW_CONTENT} feature be supported by implementing
- * the {@link BridgeWriteBehindResponse} interface. However with JSF2 it is possible to have the JSF implementation
- * (Mojarra or MyFaces) handle the entire interleaving process by itself. So although this class implements the {@link
+ * the {@link BridgeWriteBehindResponse} interface. However with it is possible to have the JSF implementation (Mojarra
+ * or MyFaces) handle the entire interleaving process by itself. So although this class implements the {@link
  * BridgeWriteBehindResponse} interface, it only does so for the sake of completeness. The corresponding methods
  * implemented in this class throw {@link UnsupportedOperationException} which is OK since they will never be
  * called.</p>
