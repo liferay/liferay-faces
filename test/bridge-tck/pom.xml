@@ -15,6 +15,7 @@
 
 	<modules>
 		<module>bridge-tck-common</module>
+		<module>bridge-tck-main-portlet</module>
 	</modules>
 
 </project>
