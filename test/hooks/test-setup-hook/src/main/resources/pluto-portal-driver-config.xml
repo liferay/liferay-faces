@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pluto-portal-driver
+	xsi:schemaLocation="http://portals.apache.org/pluto/xsd/pluto-portal-driver-config.xsd                         http://portals.apache.org/pluto/pluto-portal/1.1/pluto-portal-driver-config.xsd"
+	version="1.1" xmlns:pa="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://portals.apache.org/pluto/xsd/pluto-portal-driver-config.xsd">
+	<portal-name>pluto-portal-driver</portal-name>
+	<portal-version>2.0.0</portal-version>
+	<container-name>Pluto Portal Driver</container-name>
+	<supports>
+		<portlet-mode>view</portlet-mode>
+		<portlet-mode>edit</portlet-mode>
+		<portlet-mode>help</portlet-mode>
+		<portlet-mode>config</portlet-mode>
+		<window-state>normal</window-state>
+		<window-state>maximized</window-state>
+		<window-state>minimized</window-state>
+	</supports>
+	<render-config default="TestPage001">
+		<!--Main tests -->
+		<page xmlns="" name="TestPage001" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter3Tests-bridgeVersionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage002" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter3Tests-renderPolicyTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage003" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter3Tests-lifecycleTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage004" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter3Tests-defaultRenderKitIdTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage005" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter3Tests-modeViewIDTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage006" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter3Tests-actionDestroyTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage007" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter3Tests-eventDestroyTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage008" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter3Tests-renderDestroyTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage009" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter3Tests-resourceDestroyTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage010" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter3Tests-doubleDestroyTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage011" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter3Tests-portletSetsViewIdTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage012" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter3Tests-portletSetsViewPathTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage013" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter3Tests-nullRequestActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage014" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter3Tests-nullRequestRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage015" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_1Tests-portletInitializationParametersTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage016" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_1Tests-initMethodTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage017" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_5Tests-requestProcessingNonFacesTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage018" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_6Tests-getBridgeClassNameMethodTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage019" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_7Tests-getDefaultViewIdMapMethodTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage020" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_8Tests-getExcludedRequestAttributesMethodSetListTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage021" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_8Tests-getExcludedRequestAttributesMethodSetSingleValueTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage022" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_8Tests-getExcludedRequestAttributesMethodNotSetTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage023" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_9Tests-isPreserveActionParametersMethodSetTrueTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage024" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_9Tests-isPreserveActionParametersMethodSetFalseTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage025" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_9Tests-isPreserveActionParametersMethodNotSetTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage026" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_10Tests-getResponseContentTypeMethodSetTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage027" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_10Tests-getResponseContentTypeMethodNotSetTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage028" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_11Tests-getResponseCharacterSetEncodingMethodSetTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage029" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_11Tests-getResponseCharacterSetEncodingMethodNotSetTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage030" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_12Tests-getBridgeEventHandlerMethodSetTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage031" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_12Tests-getBridgeEventHandlerMethodNotSetTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage032" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_13Tests-getBridgePublicRenderParameterHandlerMethodSetTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage033" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_13Tests-getBridgePublicRenderParameterHandlerMethodNotSetTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage034" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_14Tests-isAutoDispatchEventsSetTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage035" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_14Tests-isAutoDispatchEventsNotSetTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage036" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter4_2_15Tests-getFacesBridgeMethodTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage037" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_1_2Tests-requestScopeContentsTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage038" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_1_2Tests-requestScopeRestartedOnActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage039" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_1_2Tests-requestNoScopeOnRedirectTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage040" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_1_2Tests-requestNoScopeOnModeChangeTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage041" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_1_2Tests-requestPreserveActionParamsTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage042" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_1_2Tests-requestRenderIgnoresScopeViaCreateViewTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage043" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_1_2Tests-requestRenderRedisplayTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage044" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_1_2Tests-requestRedisplayOutOfScopeTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage045" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_1_2Tests-excludedAttributesTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage046" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-verifyPortletObjectsTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage047" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-verifyPortletPhaseTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage048" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-portletSetsInvalidViewPathTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage049" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-renderRedirectTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage050" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-ignoreCurrentViewIdModeChangeTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage051" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-exceptionThrownWhenNoDefaultViewIdTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage052" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-viewIdWithParam_1_Test-portlet" />
+		</page>
+		<page xmlns="" name="TestPage053" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-viewIdWithParam_2_Test-portlet" />
+		</page>
+		<page xmlns="" name="TestPage054" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-prpUpdatedFromActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage055" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-facesContextReleasedActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage056" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-portletPhaseRemovedActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage057" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-bridgeSetsContentTypeTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage058" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-isPostbackTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage059" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-renderPhaseListenerTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage060" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-eventPhaseListenerTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage061" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-eventScopeRestoredTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage062" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-eventScopeNotRestoredRedirectTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage063" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-eventScopeNotRestoredModeChangedTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage064" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-eventControllerTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage065" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-eventNoHandlerPRPPreservedTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage066" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-facesContextReleasedEventTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage067" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-portletPhaseRemovedEventTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage068" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-facesContextReleasedRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage069" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-portletPhaseRemovedRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage070" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-verifyResourcePhaseTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage071" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-nonFacesResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage072" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-scopeNotRestoredResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage073" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-scopeAfterRedisplayResourcePPRTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage074" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-facesContextReleasedResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage075" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_2Tests-portletPhaseRemovedResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage076" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_3Tests-noViewStateParamOnModeChangeTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage077" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_3Tests-checkViewHistoryTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage078" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_3Tests-navigateToLastViewTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage079" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_3Tests-processPRPInRestoreViewPhaseTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage080" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter5_3Tests-prpModelUpdateTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage081" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_1Tests-facesContextFactoryServiceProviderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage082" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_1Tests-wrappedFacesContextTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage083" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-dispatchUsesForwardTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage084" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLPoundCharTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage085" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLAbsoluteURLTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage086" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLDirectLinkTrueTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage087" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLDirectLinkFalseTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage088" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLPortletRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage089" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLPortletActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage090" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLPortletResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage091" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLJSFViewActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage092" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithParamActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage093" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithModeActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage094" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithInvalidModeActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage095" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithWindowStateActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage096" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithInvalidWindowStateActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage097" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLNonJSFViewRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage098" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLNonJSFViewWithParamRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage099" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLNonJSFViewWithModeRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage100" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLNonJSFViewWithInvalidModeRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage101" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLNonJSFViewWithWindowStateRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage102" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLNonJSFViewWithInvalidWindowStateRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage103" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLNonJSFViewResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage104" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLNonJSFViewWithParamResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage105" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLNonJSFViewWithModeResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage106" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLNonJSFViewWithInvalidModeResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage107" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLNonJSFViewWithWindowStateResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage108" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLNonJSFViewWithInvalidWindowStateResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage109" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLJSFViewEventTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage110" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithParamEventTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage111" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithModeEventTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage112" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithInvalidModeEventTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage113" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithWindowStateEventTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage114" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithInvalidWindowStateEventTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage115" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLJSFViewRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage116" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithParamRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage117" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithModeRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage118" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithInvalidModeRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage119" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithWindowStateRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage120" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithInvalidWindowStateRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage121" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLJSFViewResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage122" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithParamResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage123" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithModeResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage124" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithInvalidModeResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage125" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithWindowStateResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage126" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeActionURLWithInvalidWindowStateResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage127" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeURLEscapingTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage128" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeResourceURLOpaqueTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage129" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeResourceURLForeignExternalURLTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage130" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeResourceURLForeignExternalURLBackLinkTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage131" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeResourceURLRelativeURLTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage132" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeResourceURLRelativeURLBackLinkTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage133" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeResourceURLTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage134" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeResourceURLBackLinkTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage135" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeResourceURLViewLinkTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage136" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeResourceURLViewLinkWithBackLinkTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage137" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeResourceURLWithModeTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage138" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-encodeResourceURLWithWindowStateTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage139" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getSetRequestObjectTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage140" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-setRequestCharacterEncodingRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage141" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-setRequestCharacterEncodingActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage142" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestHeaderMapRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage143" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestHeaderMapEventTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage144" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestHeaderMapActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage145" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestHeaderMapResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage146" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestHeaderValuesMapRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage147" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestHeaderValuesMapEventTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage148" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestHeaderValuesMapActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage149" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestHeaderValuesMapResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage150" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-requestMapCoreTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage151" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-requestMapRequestScopeTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage152" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestParameterMapCoreTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage153" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestParameterPreserveParamsTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage154" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestParameterDefaultViewParamsTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage155" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestParameterNamesCoreTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage156" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestParameterNamesPreserveParamsTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage157" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestParameterNamesDefaultViewParamsTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage158" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestPathInfoTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage159" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestServletPathTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage160" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestCharacterEncodingRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage161" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestCharacterEncodingEventTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage162" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestCharacterEncodingActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage163" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestCharacterEncodingResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage164" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestContentTypeRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage165" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestContentTypeActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage166" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestContentTypeEventTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage167" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getRequestContentTypeResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage168" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getResponseCharacterEncodingRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage169" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getResponseCharacterEncodingActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage170" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getResponseCharacterEncodingEventTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage171" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getResponseCharacterEncodingResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage172" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getResponseContentTypeRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage173" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getResponseContentTypeActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage174" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getResponseContentTypeEventTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage175" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-getResponseContentTypeResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage176" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-redirectActionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage177" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-redirectEventTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage178" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-redirectRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage179" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-redirectRenderPRP1Test-portlet" />
+		</page>
+		<page xmlns="" name="TestPage180" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-redirectRenderPRP2Test-portlet" />
+		</page>
+		<page xmlns="" name="TestPage181" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_1Tests-illegalRedirectRenderTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage182" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-encodeNamespaceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage183" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-getApplicationMapTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage184" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-getAuthTypeTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage185" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-getContextTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage186" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-getInitParameterTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage187" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-getInitParameterMapTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage188" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-getRemoteUserTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage189" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-getRequestContextPathTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage190" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-getRequestCookieMapTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage191" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-getRequestLocaleTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage192" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-getRequestLocalesTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage193" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-getResourceTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage194" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-getResourceAsStreamTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage195" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-getResourcePathsTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage196" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-setResponseCharacterEncodingTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage197" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-getSessionTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage198" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_1_3_2Tests-getSessionMapTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage199" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_2_1Tests-isPortletNamingContainerTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage200" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_2_1Tests-hasRenderContentAfterViewAttributeTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage201" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_2_1Tests-renderContentAfterViewTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage202" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_2_1Tests-implementsBridgeWriteBehindResponseTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage203" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_5_1Tests-JSF_ELTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage204" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_5_1Tests-JSP_ELTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage205" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_6Tests-portletNamingContainerClientIdTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage206" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_6Tests-portletNamingContainerClientIdConsistentTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage207" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_6Tests-portletNamingContainerUIViewRootTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage208" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_6Tests-portletNamingContainerUIViewRootClientIdTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage209" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_7Tests-restoredViewStateParameterTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage210" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_7Tests-setsIsPostbackAttributeTest-portlet" />
+		</page>
+		<page xmlns="" name="TestPage211" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+			<portlet context="/bridge-tck-main-portlet" name="chapter6_9Tests-usesConfiguredRenderKitTest-portlet" />
+		</page>
+		<!--Section3.2 Lifecycle set -->
+	</render-config>
+</pluto-portal-driver>

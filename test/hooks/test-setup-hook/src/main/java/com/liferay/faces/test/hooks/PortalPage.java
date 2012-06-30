@@ -19,23 +19,23 @@ package com.liferay.faces.test.hooks;
 public class PortalPage {
 
 	private String name;
-	private String[] portletNames;
+	private String[] portletIds;
 
-	public PortalPage(String name, String portletName) {
+	public PortalPage(String name, String portletId) {
 		this.name = name;
-		this.portletNames = new String[] { portletName };
+		this.portletIds = new String[] { portletId };
 	}
 
 	public PortalPage(String name, String[] portletNames) {
 		this.name = name;
-		this.portletNames = portletNames;
+		this.portletIds = portletNames;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String[] getPortletNames() {
-		return portletNames;
+	public String[] getPortletIds() {
+		return portletIds;
 	}
 }
