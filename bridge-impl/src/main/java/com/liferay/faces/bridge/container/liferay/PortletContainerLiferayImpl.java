@@ -80,6 +80,7 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 	private String portletResponseNamespace;
 	private String requestURL;
 	private String responseNamespace;
+	private String[] userAgentHeader;
 
 	public PortletContainerLiferayImpl(BridgeContext bridgeContext) {
 
@@ -452,6 +453,16 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 		}
 
 		return responseNamespace;
+	}
+
+	@Override
+	public String[] getUserAgentHeader() {
+
+		if (userAgentHeader == null) {
+			userAgentHeader = liferayPortletRequest.getUserAgentHeader();
+		}
+
+		return userAgentHeader;
 	}
 
 }
