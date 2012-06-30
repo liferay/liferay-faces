@@ -172,12 +172,13 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 	 */
 	public void preserve(FacesContext facesContext) {
 
-		logger.debug("preserveScopedData(facesContext)");
+		logger.debug("preserve(facesContext)");
 
 		// Get the ExternalContext.
 		ExternalContext externalContext = facesContext.getExternalContext();
 
-		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE)) {
+		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
+				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
 
 			// Save the view root.
 			setAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_VIEW_ROOT, facesContext.getViewRoot());
@@ -343,7 +344,8 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 			}
 		}
 
-		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE)) {
+		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
+				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
 
 			// Restore the view root that may have been saved during the ACTION_PHASE of the portlet lifecycle.
 			UIViewRoot uiViewRoot = (UIViewRoot) getAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_VIEW_ROOT);
