@@ -36,11 +36,9 @@ public class ServiceUtil {
 		String description = name;
 		String friendlyURL = StringPool.FORWARD_SLASH +
 			name.toLowerCase().replaceAll(StringPool.SPACE, StringPool.DASH);
-		boolean siteFlag = true;
-		int type = GroupConstants.TYPE_SITE_OPEN;
+		int type = GroupConstants.TYPE_COMMUNITY_OPEN;
 
-		return GroupLocalServiceUtil.addGroup(userId, (String) null, 0L, name, description, type, friendlyURL, siteFlag,
-				active, new ServiceContext());
+		return GroupLocalServiceUtil.addGroup(userId, (String) null, 0L, name, description, type, friendlyURL, active, new ServiceContext());
 	}
 
 	public static Layout addLayout(long userId, long groupId, boolean privateLayout, long parentLayoutId, String name,
