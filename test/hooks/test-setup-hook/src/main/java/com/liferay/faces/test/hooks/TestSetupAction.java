@@ -26,8 +26,6 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
@@ -36,7 +34,6 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -44,7 +41,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 
@@ -107,9 +103,9 @@ public class TestSetupAction extends SimpleAction {
 		}
 	}
 
-	protected void addAllUsersToSite(long companyId, long groupId) throws SystemException, PortalException {
+	protected void addAllUsersToSite(long companyId, long groupId) throws Exception {
 
-		List<User> users = UserLocalServiceUtil.getCompanyUsers(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		List<User> users = UserLocalServiceUtil.getUsers(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		ArrayList<Long> userIdList = new ArrayList<Long>();
 
 		for (User user : users) {
@@ -128,7 +124,7 @@ public class TestSetupAction extends SimpleAction {
 		UserLocalServiceUtil.addGroupUsers(groupId, userIds);
 	}
 
-	protected void setupBridgeDemosSite(long companyId, long userId) throws PortalException, SystemException {
+	protected void setupBridgeDemosSite(long companyId, long userId) throws Exception {
 		Group site = getSite(companyId, userId, "Bridge Demos");
 		long groupId = site.getGroupId();
 		addAllUsersToSite(companyId, groupId);
@@ -138,7 +134,7 @@ public class TestSetupAction extends SimpleAction {
 		}
 	}
 
-	protected void setupBridgeTCKSite(long companyId, long userId) throws PortalException, SystemException, DocumentException {
+	protected void setupBridgeTCKSite(long companyId, long userId) throws Exception, DocumentException {
 		Group site = getSite(companyId, userId, "Bridge TCK");
 		long groupId = site.getGroupId();
 		addAllUsersToSite(companyId, groupId);
@@ -148,12 +144,14 @@ public class TestSetupAction extends SimpleAction {
 		Element rootElement = document.getRootElement();
 		Element renderConfigElement = rootElement.element("render-config");
 		Iterator<Element> pageElementIterator = renderConfigElement.elementIterator("page");
+
 		while (pageElementIterator.hasNext()) {
 			Element pageElement = pageElementIterator.next();
 			Attribute nameAttribute = pageElement.attribute("name");
 			String pageName = nameAttribute.getValue();
 			Element portletElement = pageElement.element("portlet");
 			nameAttribute = portletElement.attribute("name");
+
 			String portletName = nameAttribute.getValue();
 			String liferayPortletName = portletName.replaceAll(StringPool.DASH, StringPool.BLANK);
 			String liferayPortletId = liferayPortletName + "_WAR_bridgetckmainportlet";
@@ -162,7 +160,7 @@ public class TestSetupAction extends SimpleAction {
 		}
 	}
 
-	protected void setupPage(long userId, long groupId, PortalPage portalPage) throws PortalException, SystemException {
+	protected void setupPage(long userId, long groupId, PortalPage portalPage) throws Exception {
 		String portalPageName = portalPage.getName();
 		String[] portletIds = portalPage.getPortletIds();
 		Layout portalPageLayout = getPortalPageLayout(userId, groupId, portalPageName);
@@ -187,7 +185,7 @@ public class TestSetupAction extends SimpleAction {
 		logger.info("Setup page: " + portalPageName);
 	}
 
-	protected void setupPortalDemosSite(long companyId, long userId) throws PortalException, SystemException {
+	protected void setupPortalDemosSite(long companyId, long userId) throws Exception {
 		Group site = getSite(companyId, userId, "Portal Demos");
 		long groupId = site.getGroupId();
 		addAllUsersToSite(companyId, groupId);
@@ -197,14 +195,13 @@ public class TestSetupAction extends SimpleAction {
 		}
 	}
 
-	protected void setupSites(long companyId, long userId) throws PortalException, SystemException, DocumentException {
+	protected void setupSites(long companyId, long userId) throws Exception, DocumentException {
 		setupBridgeDemosSite(companyId, userId);
 		setupPortalDemosSite(companyId, userId);
 		setupBridgeTCKSite(companyId, userId);
 	}
 
-	protected Layout getPortalPageLayout(long userId, long groupId, String portalPageName) throws PortalException,
-		SystemException {
+	protected Layout getPortalPageLayout(long userId, long groupId, String portalPageName) throws Exception {
 		Layout portalPageLayout = null;
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(groupId, false);
 
@@ -221,16 +218,14 @@ public class TestSetupAction extends SimpleAction {
 			String type = LayoutConstants.TYPE_PORTLET;
 			boolean hidden = false;
 			String friendlyURL = "/" + portalPageName.toLowerCase();
-			ServiceContext serviceContext = new ServiceContext();
-			serviceContext.setScopeGroupId(groupId);
-			portalPageLayout = LayoutLocalServiceUtil.addLayout(userId, groupId, privateLayout, parentLayoutId,
-					portalPageName, portalPageName, portalPageName, type, hidden, friendlyURL, serviceContext);
+			portalPageLayout = ServiceUtil.addLayout(userId, groupId, privateLayout, parentLayoutId, portalPageName,
+					portalPageName, portalPageName, type, hidden, friendlyURL);
 		}
 
 		return portalPageLayout;
 	}
 
-	protected Group getSite(long companyId, long userId, String name) throws PortalException, SystemException {
+	protected Group getSite(long companyId, long userId, String name) throws Exception {
 
 		Group site = null;
 
@@ -238,14 +233,7 @@ public class TestSetupAction extends SimpleAction {
 			site = GroupLocalServiceUtil.getGroup(companyId, name);
 		}
 		catch (NoSuchGroupException e) {
-			String description = name;
-			int type = GroupConstants.TYPE_SITE_OPEN;
-			String friendlyURL = StringPool.FORWARD_SLASH +
-				name.toLowerCase().replaceAll(StringPool.SPACE, StringPool.DASH);
-			boolean siteFlag = true;
-			boolean active = true;
-			site = GroupLocalServiceUtil.addGroup(userId, (String) null, 0L, name, description, type, friendlyURL,
-					siteFlag, active, new ServiceContext());
+			ServiceUtil.addActiveOpenGroup(userId, name);
 		}
 
 		return site;
