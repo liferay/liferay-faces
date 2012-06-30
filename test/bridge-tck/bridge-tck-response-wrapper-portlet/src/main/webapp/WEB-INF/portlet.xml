@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  MODIFIED FOR COMPATIBILITY WITH LIFERAY PORTAL
+  
+  01) Replaced all occurrences of "org.apache.myfaces.portlet.faces.testsuite.common.portlet.GenericFacesTestSuitePortlet"
+      with "com.liferay.faces.bridge.tck.LiferayFacesTestSuitePortlet". 
+  -->
+
+    <portlet>
+        <portlet-name>chapter6_2_1Tests-usesConfiguredRenderResponseWrapperTest-portlet</portlet-name>
+        <portlet-class>com.liferay.faces.bridge.tck.LiferayFacesTestSuitePortlet</portlet-class>
+        
+        <init-param>
+          <name>javax.portlet.faces.defaultViewId.view</name>
+          <value>/tests/UsesConfiguredRenderResponseWrapperTest.jsp</value>
+        </init-param>   
+        
+        <expiration-cache>0</expiration-cache>
+
+       <supports>
+         <mime-type>text/html</mime-type>
+       </supports>
+        <portlet-info>
+                <title>chapter6_2_1Tests-usesConfiguredRenderResponseWrapperTest-portlet</title>
+        </portlet-info>
+    </portlet>   
+
+    <portlet>
+        <portlet-name>chapter6_2_1Tests-usesConfiguredResourceResponseWrapperTest-portlet</portlet-name>
+        <portlet-class>com.liferay.faces.bridge.tck.LiferayFacesTestSuitePortlet</portlet-class>
+        
+        <init-param>
+          <name>javax.portlet.faces.defaultViewId.view</name>
+          <value>/tests/ResourceRequestTest.jsp</value>
+        </init-param>   
+        
+        <expiration-cache>0</expiration-cache>
+
+       <supports>
+         <mime-type>text/html</mime-type>
+       </supports>
+        <portlet-info>
+                <title>chapter6_2_1Tests-usesConfiguredResourceResponseWrapperTest-portlet</title>
+        </portlet-info>
+    </portlet> 
+
+</portlet-app>
+
