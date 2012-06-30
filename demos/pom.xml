@@ -28,47 +28,6 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<profiles>
-		<profile>
-			<id>mojarra</id>
-			<activation>
-				<property>
-					<name>!faces-impl</name>
-				</property>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>com.sun.faces</groupId>
-					<artifactId>jsf-api</artifactId>
-				</dependency>
-				<dependency>
-					<groupId>com.sun.faces</groupId>
-					<artifactId>jsf-impl</artifactId>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>myfaces</id>
-			<!-- Activate by adding -Dfaces-impl=myfaces -->
-			<activation>
-				<property>
-					<name>faces-impl</name>
-					<value>myfaces</value>
-				</property>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>org.apache.myfaces.core</groupId>
-					<artifactId>myfaces-api</artifactId>
-				</dependency>
-				<dependency>
-					<groupId>org.apache.myfaces.core</groupId>
-					<artifactId>myfaces-impl</artifactId>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
-
 	<repositories>
 		<!-- Temporarily need portletfaces repository for custom ICEfaces dependency -->
 		<repository>
