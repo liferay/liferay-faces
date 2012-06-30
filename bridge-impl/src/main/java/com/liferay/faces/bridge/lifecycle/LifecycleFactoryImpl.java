@@ -18,11 +18,7 @@ import java.util.Iterator;
 import javax.faces.lifecycle.Lifecycle;
 import javax.faces.lifecycle.LifecycleFactory;
 import javax.portlet.faces.Bridge;
-import javax.portlet.faces.Bridge.PortletPhase;
 
-import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.config.ProductMap;
-import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 
@@ -38,8 +34,6 @@ public class LifecycleFactoryImpl extends LifecycleFactory {
 	// Private Constants
 	private static final String MOJARRA_LIFECYLE_FQCN = "com.sun.faces.lifecycle.LifecycleImpl";
 	private static final String MYFACES_LIFECYCLE_FQCN = "org.apache.myfaces.lifecycle.LifecycleImpl";
-	private static final boolean TCK_JSR_329_DETECTED = ProductMap.getInstance().get(BridgeConstants.TCK_JSR_329)
-		.isDetected();
 
 	// Private Data Members
 	private LifecycleFactory wrappedLifecycleFactory;
@@ -101,26 +95,9 @@ public class LifecycleFactoryImpl extends LifecycleFactory {
 
 		if (LifecycleFactory.DEFAULT_LIFECYCLE.equals(lifecycleId)) {
 
-			// TCK TestPage003: lifecycleTest
-			if (TCK_JSR_329_DETECTED) {
-
-				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-				
-				if (bridgeContext != null) {
-
-					// Because of the multiple-lifecycle design of the bridge's LifecycleFactory implementation, the meaning
-					// of LifecycleFactory.DEFAULT_LIFECYCLE must be interpreted to mean the default lifecycle for the
-					// current {@link Bridge#PortletPhase}.
-					PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
-					lifecycle = wrappedLifecycleFactory.getLifecycle(portletRequestPhase.name());
-				}
-			}
-			else {
-
-				// Workaround bugs in 3rd party component suites that assume there is only one lifecycleId
-				// See: http://issues.liferay.com/browse/FACES-1259
-				lifecycle = new LifecycleListenerImpl(lifecycle);
-			}
+			// Workaround bugs in 3rd party component suites that assume there is only one lifecycleId
+			// See: http://issues.liferay.com/browse/FACES-1259
+			lifecycle = new LifecycleListenerImpl(lifecycle);
 		}
 
 		return lifecycle;

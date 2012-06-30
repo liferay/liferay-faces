@@ -48,7 +48,6 @@ public class BridgeConstants {
 	public static final String LIFERAY_FACES_PORTAL = "Liferay Faces Portal";
 	public static final String PRIMEFACES = "PrimeFaces";
 	public static final String RICHFACES = "RichFaces";
-	public static final String TCK_JSR_329 = "TCK JSR 329";
 
 	// Regular Expressions
 	public static final String REGEX_DOT_DELIMITER = "[.]";
@@ -65,4 +64,6 @@ public class BridgeConstants {
 	public static final String EMPTY = "";
 	public static final String MULTIPART_CONTENT_TYPE_PREFIX = "multipart/";
 	public static final String UTF8 = "UTF-8";
+	
 }
+
