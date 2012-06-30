@@ -15,6 +15,7 @@
 
 	<modules>
 		<module>bridge-tck-compat</module>
+		<module>bridge-tck-lifecycle-set-portlet</module>
 		<module>bridge-tck-main-portlet</module>
 	</modules>
 
