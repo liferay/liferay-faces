@@ -35,6 +35,11 @@ public class BridgeContextTCKImpl extends BridgeContextWrapper {
 	}
 
 	@Override
+	public boolean isBridgeRequestScopePreserved() {
+		return true;
+	}
+
+	@Override
 	public String getInitParameter(String name) {
 
 		String value = super.getInitParameter(name);
