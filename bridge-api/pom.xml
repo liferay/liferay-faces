@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.liferay.faces</groupId>
+		<artifactId>liferay-faces</artifactId>
+		<version>3.1.0-RC2-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>liferay-faces-bridge-api</artifactId>
+	<name>Liferay Faces Bridge API</name>
+	<description>API for Liferay Faces Bridge</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.portlet</groupId>
+			<artifactId>portlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<configuration>
+						<archive>
+							<manifestEntries>
+								<Built-By>Release Manager</Built-By>
+								<Specification-Title>Portlet 2.0 Bridge for JavaServer Faces 1.2</Specification-Title>
+								<Specification-Vendor>Java Community Process (JSR 329)</Specification-Vendor>
+								<Specification-Version>1.0</Specification-Version>
+							</manifestEntries>
+						</archive>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>
