@@ -22,8 +22,6 @@ import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 
-import com.sun.faces.application.view.MultiViewHandler;
-
 
 /**
  * @author  Neil Griffin
