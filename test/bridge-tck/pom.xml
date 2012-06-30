@@ -14,7 +14,7 @@
 	<name>Bridge TCK</name>
 
 	<modules>
-		<module>bridge-tck-common</module>
+		<module>bridge-tck-compat</module>
 		<module>bridge-tck-main-portlet</module>
 	</modules>
 
