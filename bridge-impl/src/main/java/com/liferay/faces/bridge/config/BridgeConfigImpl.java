@@ -73,6 +73,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private static final String PORTLET_CONTAINER_FACTORY = "portlet-container-factory";
 	private static final String FACES_CONFIG_META_INF_PATH = "META-INF/faces-config.xml";
 	private static final String FACES_CONFIG_WEB_INF_PATH = "/WEB-INF/faces-config.xml";
+	private static final String LIFERAY_FACES_BRIDGE = "LiferayFacesBridge";
 	private static final String NAME = "name";
 	private static final String RENDER_RESPONSE_WRAPPER_CLASS = "render-response-wrapper-class";
 	private static final String RESOURCE_RESPONSE_WRAPPER_CLASS = "resource-response-wrapper-class";
@@ -123,7 +124,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 			// Obtain a SAX Parser from the factory.
 			SAXParser saxParser = saxParserFactory.newSAXParser();
-//          saxParser.getParser().setErrorHandler(errorHandler);
 
 			// Determine whether or not entities should be resolved. Due to slow performance in the
 			// SAXEventHandler.resolveEntity(String, String) method it's best to set the default value of this to false.
@@ -179,7 +179,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 					FacesConfig facesConfig = new FacesConfig(facesConfigName, facesConfigURL);
 
-					if (BridgeConstants.LIFERAY_FACES_BRIDGE.equals(facesConfigName)) {
+					if (LIFERAY_FACES_BRIDGE.equals(facesConfigName)) {
 						facesConfigList.add(0, facesConfig);
 					}
 					else {
