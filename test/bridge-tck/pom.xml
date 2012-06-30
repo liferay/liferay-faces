@@ -18,4 +18,13 @@
 		<module>bridge-tck-main-portlet</module>
 	</modules>
 
+	<repositories>
+		<!-- Required for resolution of JSR 329 TCK artifacts -->
+		<repository>
+			<id>third-party-repository.portletfaces.org</id>
+			<name>Liferay 3rd Party Maven Repository</name>
+			<url>http://repository.portletfaces.org/content/repositories/thirdparty</url>
+		</repository>
+	</repositories>
+
 </project>
