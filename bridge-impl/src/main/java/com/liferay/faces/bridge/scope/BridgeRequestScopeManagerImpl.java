@@ -194,6 +194,7 @@ public class BridgeRequestScopeManagerImpl implements BridgeRequestScopeManager 
 		// non-excluded request attributes can be picked up by a subsequent RenderRequest.
 		else {
 
+			// TCK TestPage071: nonFacesResourceTest
 			// TCK TestPage073: scopeAfterRedisplayResourcePPRTest
 			PortletSession portletSession = portletRequest.getPortletSession();
 			bridgeRequestScopeId = (String) portletSession.getAttribute(bridgeRequestScopeKey);
@@ -205,9 +206,19 @@ public class BridgeRequestScopeManagerImpl implements BridgeRequestScopeManager 
 				bridgeRequestScope = getBridgeRequestScopeCache(portletContext).get(bridgeRequestScopeId);
 
 				if (bridgeRequestScope != null) {
-
-					logger.debug("Found session attribute name=[{0}] value=[{1}] and cached bridgeRequestScope=[{2}]",
+					
+					logger.debug("Found (and removed) session-attribute name=[{0}] value=[{1}] and cached bridgeRequestScope=[{2}]",
 						bridgeRequestScopeKey, bridgeRequestScopeId, bridgeRequestScope);
+
+					if (portletResponse instanceof StateAwareResponse) {
+						logger.debug("Setting former session-attribute as render parameter name=[{0}] value=[{1}]", bridgeRequestScopeKey,
+							bridgeRequestScopeId);
+						StateAwareResponse stateAwareResponse = (StateAwareResponse) portletResponse;
+						stateAwareResponse.setRenderParameter(bridgeRequestScopeKey, bridgeRequestScopeId);
+						getBridgeRequestScopeCache(portletContext).put(bridgeRequestScopeId, bridgeRequestScope);
+						logger.debug("Caching former session-attribute bridgeRequestScopeId=[{0}] bridgeRequestScope=[{1}]", bridgeRequestScopeId,
+								bridgeRequestScope);
+					}
 				}
 				else {
 					logger.error(
@@ -247,6 +258,7 @@ public class BridgeRequestScopeManagerImpl implements BridgeRequestScopeManager 
 			}
 			else if (portletResponse instanceof ResourceResponse) {
 
+				// TCK TestPage071: nonFacesResourceTest
 				// TCK TestPage073: scopeAfterRedisplayResourcePPRTest
 				portletSession.setAttribute(bridgeRequestScopeKey, bridgeRequestScopeId);
 				storeInCache = true;
