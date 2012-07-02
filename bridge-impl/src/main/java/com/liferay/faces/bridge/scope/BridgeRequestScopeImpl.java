@@ -293,12 +293,6 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 						if (isExcludedRequestAttribute(name, value)) {
 							logger.trace("Not saving EXCLUDED attribute name=[{0}]", name);
 						}
-						else if ((value != null) &&
-								(value.getClass().getAnnotation(ExcludeFromManagedRequestScope.class) != null)) {
-							logger.trace(
-								"Not saving EXCLUDED attribute name=[{0}] due to ExcludeFromManagedRequestScope annotation",
-								name);
-						}
 						else {
 
 							if (saveNonExcludedAttributes) {
@@ -485,37 +479,16 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 		return redirect;
 	}
 
-	protected boolean isExcludedRequestAttribute(String attributeName, Object value) {
+	protected boolean isExcludedRequestAttribute(String attributeName, Object attributeValue) {
+
 		boolean excluded = false;
 
 		if (!excluded) {
+			excluded = isExcludedRequestAttributeByConfig(attributeName, attributeValue);
+		}
 
-			if (excludedAttributeNames != null) {
-
-				for (String excludedAttribute : excludedAttributeNames) {
-
-					if (attributeName.equals(excludedAttribute)) {
-						excluded = true;
-
-						break;
-					}
-					else if (excludedAttribute.endsWith(BridgeConstants.CHAR_ASTERISK)) {
-
-						String wildcardNamespace = excludedAttribute;
-						int dotPos = wildcardNamespace.lastIndexOf(BridgeConstants.CHAR_PERIOD);
-
-						if (dotPos > 0) {
-							wildcardNamespace = wildcardNamespace.substring(0, dotPos);
-						}
-
-						if (isNamespaceMatch(attributeName, wildcardNamespace)) {
-							excluded = true;
-
-							break;
-						}
-					}
-				}
-			}
+		if (!excluded) {
+			excluded = isExcludedRequestAttributeByAnnotation(attributeValue);
 		}
 
 		if (!excluded) {
@@ -537,14 +510,14 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 		if (!excluded) {
 
 			// EXCLUDED attributes listed in Section 5.1.2 of the JSR 329 Spec
-			excluded = ((value != null) &&
-					((value instanceof ExternalContext) || (value instanceof FacesContext) ||
-						(value instanceof HttpSession) || (value instanceof PortalContext) ||
-						(value instanceof PortletConfig) || (value instanceof PortletContext) ||
-						(value instanceof PortletPreferences) || (value instanceof PortletRequest) ||
-						(value instanceof PortletResponse) || (value instanceof PortletSession) ||
-						(value instanceof ServletConfig) || (value instanceof ServletContext) ||
-						(value instanceof ServletRequest) || (value instanceof ServletResponse)));
+			excluded = ((attributeValue != null) &&
+					((attributeValue instanceof ExternalContext) || (attributeValue instanceof FacesContext) ||
+						(attributeValue instanceof HttpSession) || (attributeValue instanceof PortalContext) ||
+						(attributeValue instanceof PortletConfig) || (attributeValue instanceof PortletContext) ||
+						(attributeValue instanceof PortletPreferences) || (attributeValue instanceof PortletRequest) ||
+						(attributeValue instanceof PortletResponse) || (attributeValue instanceof PortletSession) ||
+						(attributeValue instanceof ServletConfig) || (attributeValue instanceof ServletContext) ||
+						(attributeValue instanceof ServletRequest) || (attributeValue instanceof ServletResponse)));
 		}
 
 		return excluded;
@@ -560,6 +533,40 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 
 	public void setFlash(Flash flash) {
 		this.flash = flash;
+	}
+
+	protected boolean isExcludedRequestAttributeByConfig(String attributeName, Object attributeValue) {
+
+		boolean excluded = false;
+
+		if (excludedAttributeNames != null) {
+
+			for (String excludedAttribute : excludedAttributeNames) {
+
+				if (attributeName.equals(excludedAttribute)) {
+					excluded = true;
+
+					break;
+				}
+				else if (excludedAttribute.endsWith(BridgeConstants.CHAR_ASTERISK)) {
+
+					String wildcardNamespace = excludedAttribute;
+					int dotPos = wildcardNamespace.lastIndexOf(BridgeConstants.CHAR_PERIOD);
+
+					if (dotPos > 0) {
+						wildcardNamespace = wildcardNamespace.substring(0, dotPos);
+					}
+
+					if (isNamespaceMatch(attributeName, wildcardNamespace)) {
+						excluded = true;
+
+						break;
+					}
+				}
+			}
+		}
+
+		return excluded;
 	}
 
 	protected boolean isNamespaceMatch(String attributeName, String namespace) {
@@ -595,6 +602,18 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 		}
 
 		return managedBeanMap;
+	}
+
+	protected boolean isExcludedRequestAttributeByAnnotation(Object attributeValue) {
+
+		boolean excluded = false;
+
+		if ((attributeValue != null) &&
+				(attributeValue.getClass().getAnnotation(ExcludeFromManagedRequestScope.class) != null)) {
+			excluded = true;
+		}
+
+		return excluded;
 	}
 
 	public void setNavigationOccurred(boolean navigationOccurred) {
