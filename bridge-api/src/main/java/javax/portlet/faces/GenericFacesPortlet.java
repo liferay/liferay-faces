@@ -419,7 +419,7 @@ public class GenericFacesPortlet extends GenericPortlet {
 				String[] values = initParamValue.split(CHAR_COMMA);
 
 				for (String value : values) {
-					excludedRequestAttributes.add(value);
+					excludedRequestAttributes.add(value.trim());
 				}
 			}
 		}

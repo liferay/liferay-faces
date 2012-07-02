@@ -13,11 +13,14 @@
  */
 package com.liferay.faces.bridge.scope;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.portlet.ActionRequest;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
@@ -54,6 +57,9 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 
 		super.restore(facesContext);
 
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Map<String, Object> currentRequestAttributes = externalContext.getRequestMap();
+
 		if (isRedirectOccurred() || isPortletModeChanged()) {
 
 			// TCK TestPage062: eventScopeNotRestoredRedirectTest
@@ -62,18 +68,45 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 					BRIDGE_REQ_SCOPE_NON_EXCLUDED_ATTR_NAMES);
 
 			if (nonExcludedAttributeNames != null) {
-				ExternalContext externalContext = facesContext.getExternalContext();
-
-				Map<String, Object> currentRequestAttributes = externalContext.getRequestMap();
 
 				for (String attributeName : nonExcludedAttributeNames) {
 					currentRequestAttributes.remove(attributeName);
-					logger.trace(
-						"Due to redirect, removed request attribute name=[{0}] that had been preserved in the ACTION_PHASE or EVENT_PHASE",
-						attributeName);
+
+					if (logger.isTraceEnabled()) {
+
+						if (isRedirectOccurred()) {
+							logger.trace(
+								"Due to redirect, removed request attribute name=[{0}] that had been preserved in the ACTION_PHASE or EVENT_PHASE",
+								attributeName);
+						}
+						else {
+							logger.trace(
+								"Due to PortletMode change, removed request attribute name=[{0}] that had been preserved in the ACTION_PHASE or EVENT_PHASE",
+								attributeName);
+						}
+					}
 				}
 			}
 		}
+
+		// TCK TestPage045: excludedAttributesTest
+		List<String> attributesToRemove = new ArrayList<String>();
+		Set<java.util.Map.Entry<String, Object>> entrySet = currentRequestAttributes.entrySet();
+
+		for (Map.Entry<String, Object> mapEntry : entrySet) {
+			String attributeName = mapEntry.getKey();
+			Object attributeValue = mapEntry.getValue();
+
+			if (isExcludedRequestAttributeByConfig(attributeName, attributeValue) ||
+					isExcludedRequestAttributeByAnnotation(attributeValue)) {
+				attributesToRemove.add(attributeName);
+			}
+		}
+
+		for (String attributeName : attributesToRemove) {
+			currentRequestAttributes.remove(attributeName);
+		}
+
 	}
 
 }
