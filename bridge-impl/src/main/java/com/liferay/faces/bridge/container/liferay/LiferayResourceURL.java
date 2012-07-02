@@ -29,13 +29,15 @@ public class LiferayResourceURL extends LiferayBaseURL implements ResourceURL {
 
 	// Private Data Members
 	private String cacheLevel;
-	private int liferayBuildNumber;
 	private String resourceId;
+	private boolean portletModeRequired;
+	private boolean windowStateRequired;
 	private String toStringValue;
 
 	public LiferayResourceURL(ParsedBaseURL parsedLiferayURL, String responseNamespace, int liferayBuildNumber) {
 		super(parsedLiferayURL, responseNamespace);
-		this.liferayBuildNumber = liferayBuildNumber;
+		this.portletModeRequired = (liferayBuildNumber >= 5200) && (liferayBuildNumber < 6000);
+		this.windowStateRequired = this.portletModeRequired;
 	}
 
 	@Override
@@ -57,16 +59,6 @@ public class LiferayResourceURL extends LiferayBaseURL implements ResourceURL {
 				appendParameterToURL(firstParameter, LiferayConstants.P_P_RESOURCE_ID, BridgeConstants.WSRP, url);
 			}
 
-			if ((liferayBuildNumber >= 5200) && (liferayBuildNumber < 6000)) {
-
-				// Add the p_p_mode parameter with value "view".
-				appendParameterToURL(firstParameter, LiferayConstants.P_P_MODE, PortletMode.VIEW.toString(), url);
-
-				// Add the p_p_state parameter with value "normal".
-				appendParameterToURL(firstParameter, LiferayConstants.P_P_STATE, WindowState.NORMAL.toString(), url);
-
-			}
-
 			toStringValue = url.toString();
 		}
 
@@ -82,12 +74,44 @@ public class LiferayResourceURL extends LiferayBaseURL implements ResourceURL {
 	}
 
 	@Override
+	public boolean isPortletModeRequired() {
+		return portletModeRequired;
+	}
+
+	@Override
+	public boolean isWindowStateRequired() {
+		return windowStateRequired;
+	}
+
+	@Override
 	public String getPortletLifecycleId() {
 		return LiferayConstants.LIFECYCLE_RESOURCE_PHASE_ID;
 	}
 
+	@Override
+	public PortletMode getPortletMode() {
+
+		if (portletModeRequired) {
+			return PortletMode.VIEW;
+		}
+		else {
+			return null;
+		}
+	}
+
 	public void setResourceID(String resourceId) {
 		this.resourceId = resourceId;
+	}
+
+	@Override
+	public WindowState getWindowState() {
+
+		if (windowStateRequired) {
+			return WindowState.NORMAL;
+		}
+		else {
+			return null;
+		}
 	}
 
 }
