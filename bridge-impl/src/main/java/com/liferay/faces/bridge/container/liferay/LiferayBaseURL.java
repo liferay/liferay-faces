@@ -105,6 +105,25 @@ public abstract class LiferayBaseURL implements BaseURL {
 			// question mark because it's filled with all kinds of unnecessary stuff.
 			url.append(parsedLiferayURL.getPrefix());
 
+			// Possibly add the p_auth parameter.
+			boolean firstParameter = true;
+			String portalAuthToken = parsedLiferayURL.getPortalAuthToken();
+
+			if (portalAuthToken != null) {
+
+				appendParameterToURL(firstParameter, LiferayConstants.P_AUTH, portalAuthToken, url);
+				firstParameter = false;
+			}
+
+			// Possibly add the p_p_auth parameter.
+			String portletAuthToken = parsedLiferayURL.getPortletAuthToken();
+
+			if (portletAuthToken != null) {
+
+				appendParameterToURL(firstParameter, LiferayConstants.P_P_AUTH, portletAuthToken, url);
+				firstParameter = false;
+			}
+
 			// Always add the p_p_id parameter
 			String parameterValue = responseNamespace;
 
@@ -116,7 +135,9 @@ public abstract class LiferayBaseURL implements BaseURL {
 				parameterValue = parameterValue.substring(0, parameterValue.length() - 1);
 			}
 
-			appendParameterToURL(true, LiferayConstants.P_P_ID, parameterValue, url);
+			appendParameterToURL(firstParameter, LiferayConstants.P_P_ID, parameterValue, url);
+
+			firstParameter = false;
 
 			// Always add the p_p_lifecycle parameter.
 			appendParameterToURL(LiferayConstants.P_P_LIFECYCLE, getPortletLifecycleId(), url);
@@ -158,22 +179,6 @@ public abstract class LiferayBaseURL implements BaseURL {
 			// Possibly add the p_p_col_count parameter.
 			parameterValue = (String) applicationMap.get(responseNamespace + LiferayConstants.P_P_COL_COUNT);
 			appendParameterToURL(LiferayConstants.P_P_COL_COUNT, parameterValue, url);
-
-			// Possibly add the p_auth parameter.
-			String portalAuthToken = parsedLiferayURL.getPortalAuthToken();
-
-			if (portalAuthToken != null) {
-
-				appendParameterToURL(LiferayConstants.P_AUTH, portalAuthToken, url);
-			}
-
-			// Possibly add the p_p_auth parameter.
-			String portletAuthToken = parsedLiferayURL.getPortletAuthToken();
-
-			if (portletAuthToken != null) {
-
-				appendParameterToURL(LiferayConstants.P_P_AUTH, portletAuthToken, url);
-			}
 
 			// Add the p_p_col_pos parameter if it is greater than zero (same logic as Liferay's
 			// PortletURLImpl.toString())
