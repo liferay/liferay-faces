@@ -2,9 +2,7 @@
 <!--
   MODIFIED FOR COMPATIBILITY WITH LIFERAY PORTAL
   
-  01) Replaced all occurrences of "Tests-" with "Tests"
-  02) Replaced all occurrences of "Test-portlet" with "Testportlet"
-  03) Changed XML schema to version="2.0" and "web-facesconfig_2_0.xsd"
+  01) Changed XML schema to version="2.0" and "web-facesconfig_2_0.xsd"
 -->
 <faces-config xmlns="http://java.sun.com/xml/ns/javaee" xmlns:bridge="http://www.apache.org/myfaces/xml/ns/bridge/bridge-extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 	<!-- Chapter 3 Test -->
@@ -30,39 +28,39 @@
 			</bridge:excluded-attributes>
 			<bridge:public-parameter-mappings>
 				<bridge:public-parameter-mapping>
-					<parameter>chapter5_2TestseventControllerTestportlet:testPRP</parameter>
+					<parameter>chapter5_2Tests-eventControllerTest-portlet:testPRP</parameter>
 					<model-el>#{modelPRP}</model-el>
 				</bridge:public-parameter-mapping>
 				<bridge:public-parameter-mapping>
-					<parameter>chapter5_2TestseventNoHandlerPRPPreservedTestportlet:testPRP</parameter>
+					<parameter>chapter5_2Tests-eventNoHandlerPRPPreservedTest-portlet:testPRP</parameter>
 					<model-el>#{modelPRP}</model-el>
 				</bridge:public-parameter-mapping>
 				<bridge:public-parameter-mapping>
-					<parameter>chapter5_2TestsprpUpdatedFromActionTestportlet:testPRP</parameter>
+					<parameter>chapter5_2Tests-prpUpdatedFromActionTest-portlet:testPRP</parameter>
 					<model-el>#{modelPRP}</model-el>
 				</bridge:public-parameter-mapping>
 				<bridge:public-parameter-mapping>
-					<parameter>chapter5_3TestsprocessPRPInRestoreViewPhaseTestportlet:testPRP</parameter>
+					<parameter>chapter5_3Tests-processPRPInRestoreViewPhaseTest-portlet:testPRP</parameter>
 					<model-el>#{modelPRP}</model-el>
 				</bridge:public-parameter-mapping>
 				<bridge:public-parameter-mapping>
-					<parameter>chapter5_3TestsprocessPRPInRestoreViewPhaseTestportlet:testPRP2</parameter>
+					<parameter>chapter5_3Tests-processPRPInRestoreViewPhaseTest-portlet:testPRP2</parameter>
 					<model-el>#{modelPRP2}</model-el>
 				</bridge:public-parameter-mapping>
 				<bridge:public-parameter-mapping>
-					<parameter>chapter5_3TestsprpModelUpdateTestportlet:testPRP</parameter>
+					<parameter>chapter5_3Tests-prpModelUpdateTest-portlet:testPRP</parameter>
 					<model-el>#{modelPRP}</model-el>
 				</bridge:public-parameter-mapping>
 				<bridge:public-parameter-mapping>
-					<parameter>chapter5_3TestsprpModelUpdateTestportlet:testPRP2</parameter>
+					<parameter>chapter5_3Tests-prpModelUpdateTest-portlet:testPRP2</parameter>
 					<model-el>#{modelPRP2}</model-el>
 				</bridge:public-parameter-mapping>
 				<bridge:public-parameter-mapping>
-					<parameter>chapter6_1_3_1TestsredirectRenderPRP1Testportlet:testPRP</parameter>
+					<parameter>chapter6_1_3_1Tests-redirectRenderPRP1Test-portlet:testPRP</parameter>
 					<model-el>#{modelPRP}</model-el>
 				</bridge:public-parameter-mapping>
 				<bridge:public-parameter-mapping>
-					<parameter>chapter6_1_3_1TestsredirectRenderPRP2Testportlet:testPRP</parameter>
+					<parameter>chapter6_1_3_1Tests-redirectRenderPRP2Test-portlet:testPRP</parameter>
 					<model-el>#{modelPRP}</model-el>
 				</bridge:public-parameter-mapping>
 			</bridge:public-parameter-mappings>
