@@ -28,6 +28,7 @@ import com.liferay.faces.bridge.util.URLParameter;
 public class ParsedBaseURL {
 
 	// Private Data Members
+	private String cacheability;
 	private String prefix;
 	private String portalAuthToken;
 	private String portletAuthToken;
@@ -53,7 +54,15 @@ public class ParsedBaseURL {
 
 			for (String nameValuePair : nameValuePairs) {
 
-				if ((portalAuthToken == null) && nameValuePair.startsWith(LiferayConstants.P_AUTH)) {
+				if ((cacheability == null) && nameValuePair.startsWith(LiferayConstants.P_P_CACHEABILITY)) {
+					int equalsPos = nameValuePair.indexOf(BridgeConstants.CHAR_EQUALS);
+
+					if (equalsPos > 0) {
+						cacheability = nameValuePair.substring(equalsPos + 1);
+					}
+				}
+
+				else if ((portalAuthToken == null) && nameValuePair.startsWith(LiferayConstants.P_AUTH)) {
 					int equalsPos = nameValuePair.indexOf(BridgeConstants.CHAR_EQUALS);
 
 					if (equalsPos > 0) {
@@ -61,7 +70,7 @@ public class ParsedBaseURL {
 					}
 				}
 
-				if ((portletAuthToken == null) && nameValuePair.startsWith(LiferayConstants.P_P_AUTH)) {
+				else if ((portletAuthToken == null) && nameValuePair.startsWith(LiferayConstants.P_P_AUTH)) {
 					int equalsPos = nameValuePair.indexOf(BridgeConstants.CHAR_EQUALS);
 
 					if (equalsPos > 0) {
@@ -69,7 +78,7 @@ public class ParsedBaseURL {
 					}
 				}
 
-				if (nameValuePair.startsWith(BridgeConstants.WSRP)) {
+				else if (nameValuePair.startsWith(BridgeConstants.WSRP)) {
 					int equalsPos = nameValuePair.indexOf(BridgeConstants.CHAR_EQUALS);
 
 					if (equalsPos > 0) {
@@ -81,6 +90,10 @@ public class ParsedBaseURL {
 				}
 			}
 		}
+	}
+
+	public String getCacheability() {
+		return cacheability;
 	}
 
 	public String getPortalAuthToken() {

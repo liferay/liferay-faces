@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.URLEncoder;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,6 +26,7 @@ import javax.faces.context.FacesContext;
 import javax.portlet.BaseURL;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletSecurityException;
+import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
 
 import com.liferay.faces.bridge.BridgeConstants;
@@ -59,7 +60,7 @@ public abstract class LiferayBaseURL implements BaseURL {
 	public LiferayBaseURL(ParsedBaseURL parsedLiferayURL, String responseNamespace) {
 		this.parsedLiferayURL = parsedLiferayURL;
 		this.responseNamespace = responseNamespace;
-		this.parameterMap = new HashMap<String, String[]>();
+		this.parameterMap = new LinkedHashMap<String, String[]>();
 	}
 
 	public void addProperty(String key, String value) {
@@ -145,6 +146,7 @@ public abstract class LiferayBaseURL implements BaseURL {
 			// Possibly add the p_p_state parameter.
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Map<String, Object> applicationMap = facesContext.getExternalContext().getApplicationMap();
+
 			if (isWindowStateRequired()) {
 				WindowState windowState = getWindowState();
 
@@ -170,6 +172,15 @@ public abstract class LiferayBaseURL implements BaseURL {
 				}
 
 				appendParameterToURL(LiferayConstants.P_P_MODE, parameterValue, url);
+			}
+
+			// Possibly add the p_p_cacheability parameter
+			if (this instanceof ResourceURL) {
+				String cacheability = parsedLiferayURL.getCacheability();
+
+				if (cacheability != null) {
+					appendParameterToURL(LiferayConstants.P_P_CACHEABILITY, cacheability, url);
+				}
 			}
 
 			// Always add the p_p_col_id parameter
@@ -218,8 +229,7 @@ public abstract class LiferayBaseURL implements BaseURL {
 
 						if (isValidParameter(parameterValue)) {
 
-							appendParameterToURL(namespace + parameterName, encode(parameterValue),
-								url);
+							appendParameterToURL(namespace + parameterName, encode(parameterValue), url);
 						}
 					}
 				}
@@ -246,10 +256,11 @@ public abstract class LiferayBaseURL implements BaseURL {
 	public void write(Writer writer, boolean escapeXML) throws IOException {
 
 		String toStringValue = toString();
-		
+
 		if (escapeXML) {
 			toStringValue = FacesURLEncoder.encode(toStringValue, BridgeConstants.UTF8);
 		}
+
 		writer.write(toStringValue);
 	}
 

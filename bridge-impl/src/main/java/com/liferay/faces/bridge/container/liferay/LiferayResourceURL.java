@@ -30,14 +30,10 @@ public class LiferayResourceURL extends LiferayBaseURL implements ResourceURL {
 	// Private Data Members
 	private String cacheLevel;
 	private String resourceId;
-	private boolean portletModeRequired;
-	private boolean windowStateRequired;
 	private String toStringValue;
 
 	public LiferayResourceURL(ParsedBaseURL parsedLiferayURL, String responseNamespace, int liferayBuildNumber) {
 		super(parsedLiferayURL, responseNamespace);
-		this.portletModeRequired = (liferayBuildNumber >= 5200) && (liferayBuildNumber < 6000);
-		this.windowStateRequired = this.portletModeRequired;
 	}
 
 	@Override
@@ -45,18 +41,14 @@ public class LiferayResourceURL extends LiferayBaseURL implements ResourceURL {
 
 		if (toStringValue == null) {
 
-			// FACES-383: Liferay 5.2 requires the p_p_mode and p_p_state parameters even though this shouldn't be the
-			// case for a ResourceURL.
-			boolean firstParameter = false;
-
 			String superToString = super.toString();
 			StringBuilder url = new StringBuilder(superToString);
 
 			if (resourceId != null) {
-				appendParameterToURL(firstParameter, LiferayConstants.P_P_RESOURCE_ID, resourceId, url);
+				appendParameterToURL(LiferayConstants.P_P_RESOURCE_ID, resourceId, url);
 			}
 			else if (superToString.startsWith(BridgeConstants.WSRP)) {
-				appendParameterToURL(firstParameter, LiferayConstants.P_P_RESOURCE_ID, BridgeConstants.WSRP, url);
+				appendParameterToURL(LiferayConstants.P_P_RESOURCE_ID, BridgeConstants.WSRP, url);
 			}
 
 			toStringValue = url.toString();
@@ -75,12 +67,12 @@ public class LiferayResourceURL extends LiferayBaseURL implements ResourceURL {
 
 	@Override
 	public boolean isPortletModeRequired() {
-		return portletModeRequired;
+		return true;
 	}
 
 	@Override
 	public boolean isWindowStateRequired() {
-		return windowStateRequired;
+		return true;
 	}
 
 	@Override
@@ -90,13 +82,7 @@ public class LiferayResourceURL extends LiferayBaseURL implements ResourceURL {
 
 	@Override
 	public PortletMode getPortletMode() {
-
-		if (portletModeRequired) {
-			return PortletMode.VIEW;
-		}
-		else {
-			return null;
-		}
+		return PortletMode.VIEW;
 	}
 
 	public void setResourceID(String resourceId) {
@@ -105,13 +91,7 @@ public class LiferayResourceURL extends LiferayBaseURL implements ResourceURL {
 
 	@Override
 	public WindowState getWindowState() {
-
-		if (windowStateRequired) {
-			return WindowState.NORMAL;
-		}
-		else {
-			return null;
-		}
+		return WindowState.NORMAL;
 	}
 
 }

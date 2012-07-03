@@ -25,6 +25,7 @@ public class LiferayConstants {
 	public static final String LIFECYCLE_RESOURCE_PHASE_ID = "2";
 	public static final String P_AUTH = "p_auth";
 	public static final String P_P_AUTH = "p_p_auth";
+	public static final String P_P_CACHEABILITY = "p_p_cacheability";
 	public static final String P_P_COL_ID = "p_p_col_id";
 	public static final String P_P_COL_POS = "p_p_col_pos";
 	public static final String P_P_COL_COUNT = "p_p_col_count";
