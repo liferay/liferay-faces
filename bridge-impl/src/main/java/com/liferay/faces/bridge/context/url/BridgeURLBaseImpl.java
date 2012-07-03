@@ -722,7 +722,13 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 		if (windowState != null) {
 
 			try {
-				portletURL.setWindowState(new WindowState(windowState));
+				WindowState candidateWindowState = new WindowState(windowState);
+				if (bridgeContext.getPortletRequest().isWindowStateAllowed(candidateWindowState)) {
+					portletURL.setWindowState(candidateWindowState);
+				}
+				else {
+					// TestPage120: encodeActionURLWithInvalidWindowStateRenderTest
+				}
 			}
 			catch (WindowStateException e) {
 				logger.error(e);
