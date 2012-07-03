@@ -519,7 +519,13 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 		if (portletMode != null) {
 
 			try {
-				portletURL.setPortletMode(new PortletMode(portletMode));
+				PortletMode candidatePortletMode = new PortletMode(portletMode);
+				if (bridgeContext.getPortletRequest().isPortletModeAllowed(candidatePortletMode)) {
+					portletURL.setPortletMode(candidatePortletMode);
+				}
+				else {
+					// TestPage118: encodeActionURLWithInvalidModeRenderTest
+				}
 			}
 			catch (PortletModeException e) {
 				logger.error(e);
