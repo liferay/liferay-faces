@@ -128,27 +128,29 @@ public class BridgeNavigationHandlerImpl extends BridgeNavigationHandler {
 	@Override
 	public void handleNavigation(FacesContext facesContext, PortletMode fromPortletMode, PortletMode toPortletMode) {
 
-		logger.debug("fromPortletMode=[{0}] toPortletMode=[{1}]", fromPortletMode, toPortletMode);
+		if ((fromPortletMode != null) && !fromPortletMode.equals(toPortletMode)) {
+			logger.debug("fromPortletMode=[{0}] toPortletMode=[{1}]", fromPortletMode, toPortletMode);
 
-		String currentViewId = facesContext.getViewRoot().getViewId();
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		Map<String, String> defaultViewIdMap = bridgeContext.getDefaultViewIdMap();
-		String portletModeViewId = defaultViewIdMap.get(toPortletMode.toString());
+			String currentViewId = facesContext.getViewRoot().getViewId();
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			Map<String, String> defaultViewIdMap = bridgeContext.getDefaultViewIdMap();
+			String portletModeViewId = defaultViewIdMap.get(toPortletMode.toString());
 
-		if ((currentViewId != null) && (portletModeViewId != null)) {
+			if ((currentViewId != null) && (portletModeViewId != null)) {
 
-			if (!currentViewId.equals(portletModeViewId)) {
+				if (!currentViewId.equals(portletModeViewId)) {
 
-				logger.debug("Navigating to viewId=[{0}]", portletModeViewId);
+					logger.debug("Navigating to viewId=[{0}]", portletModeViewId);
 
-				ViewHandler viewHandler = facesContext.getApplication().getViewHandler();
-				UIViewRoot viewRoot = viewHandler.createView(facesContext, portletModeViewId);
+					ViewHandler viewHandler = facesContext.getApplication().getViewHandler();
+					UIViewRoot viewRoot = viewHandler.createView(facesContext, portletModeViewId);
 
-				if (viewRoot != null) {
-					facesContext.setViewRoot(viewRoot);
+					if (viewRoot != null) {
+						facesContext.setViewRoot(viewRoot);
 
-					PartialViewContext partialViewContext = facesContext.getPartialViewContext();
-					partialViewContext.setRenderAll(true);
+						PartialViewContext partialViewContext = facesContext.getPartialViewContext();
+						partialViewContext.setRenderAll(true);
+					}
 				}
 			}
 		}
