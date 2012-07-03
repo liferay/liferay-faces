@@ -38,7 +38,6 @@ import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.ExternalContextImpl;
 import com.liferay.faces.bridge.helper.BooleanHelper;
-import com.liferay.faces.bridge.helper.PortletModeHelper;
 import com.liferay.faces.bridge.helper.WindowStateHelper;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
@@ -201,7 +200,9 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 			if (Bridge.PORTLET_MODE_PARAMETER.equals(parameterName)) {
 
 				// Only add the "javax.portlet.faces.PortletMode" parameter if it has a valid value.
-				addParameter = PortletModeHelper.isValid(parameterValue);
+				if (parameterValue != null) {
+					addParameter = bridgeContext.getPortletRequest().isPortletModeAllowed(new PortletMode(parameterValue));
+				}
 			}
 			else if (Bridge.PORTLET_SECURE_PARAMETER.equals(parameterName)) {
 				addParameter = BooleanHelper.isBooleanToken(parameterValue);

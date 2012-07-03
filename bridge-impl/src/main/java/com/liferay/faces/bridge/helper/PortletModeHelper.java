@@ -29,18 +29,4 @@ public class PortletModeHelper {
 			PORTLET_MODE_VIEW, PORTLET_MODE_EDIT, PORTLET_MODE_HELP
 		};
 
-	public static boolean isValid(String portletMode) {
-		boolean valid = false;
-
-		for (String curMode : PORTLET_MODE_NAMES) {
-
-			if (curMode.equals(portletMode)) {
-				valid = true;
-
-				break;
-			}
-		}
-
-		return valid;
-	}
 }
