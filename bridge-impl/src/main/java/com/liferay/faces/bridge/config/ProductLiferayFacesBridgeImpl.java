@@ -13,12 +13,14 @@
  */
 package com.liferay.faces.bridge.config;
 
+import com.liferay.faces.bridge.BridgeConstants;
+
 /**
  * @author  Neil Griffin
  */
 public class ProductLiferayFacesBridgeImpl extends ProductBaseImpl {
 
 	public ProductLiferayFacesBridgeImpl() {
-		init(this.getClass().getPackage());
+		init(BridgeConstants.LIFERAY_FACES_BRIDGE, "liferayfacesbridge.properties");
 	}
 }

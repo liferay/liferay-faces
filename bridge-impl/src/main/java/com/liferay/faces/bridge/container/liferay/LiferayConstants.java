@@ -35,4 +35,8 @@ public class LiferayConstants {
 	public static final String P_P_RESOURCE_ID = "p_p_resource_id";
 	public static final String P_P_STATE = "p_p_state";
 	public static final String WAR_SEPARATOR = "_WAR_";
+	public static final String DO_AS_USER_ID = "doAsUserId";
+	public static final String DO_AS_USER_LANGUAGE_ID = "doAsUserLanguageId";
+	public static final String DO_AS_GROUP_ID = "doAsGroupId";
+	
 }
