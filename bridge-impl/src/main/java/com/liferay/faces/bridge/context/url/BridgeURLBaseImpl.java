@@ -38,7 +38,6 @@ import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.ExternalContextImpl;
 import com.liferay.faces.bridge.helper.BooleanHelper;
-import com.liferay.faces.bridge.helper.PortletModeHelper;
 import com.liferay.faces.bridge.helper.WindowStateHelper;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
@@ -201,7 +200,9 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 			if (Bridge.PORTLET_MODE_PARAMETER.equals(parameterName)) {
 
 				// Only add the "javax.portlet.faces.PortletMode" parameter if it has a valid value.
-				addParameter = PortletModeHelper.isValid(parameterValue);
+				if (parameterValue != null) {
+					addParameter = bridgeContext.getPortletRequest().isPortletModeAllowed(new PortletMode(parameterValue));
+				}
 			}
 			else if (Bridge.PORTLET_SECURE_PARAMETER.equals(parameterName)) {
 				addParameter = BooleanHelper.isBooleanToken(parameterValue);
@@ -519,7 +520,13 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 		if (portletMode != null) {
 
 			try {
-				portletURL.setPortletMode(new PortletMode(portletMode));
+				PortletMode candidatePortletMode = new PortletMode(portletMode);
+				if (bridgeContext.getPortletRequest().isPortletModeAllowed(candidatePortletMode)) {
+					portletURL.setPortletMode(candidatePortletMode);
+				}
+				else {
+					// TestPage118: encodeActionURLWithInvalidModeRenderTest
+				}
 			}
 			catch (PortletModeException e) {
 				logger.error(e);
@@ -715,7 +722,13 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 		if (windowState != null) {
 
 			try {
-				portletURL.setWindowState(new WindowState(windowState));
+				WindowState candidateWindowState = new WindowState(windowState);
+				if (bridgeContext.getPortletRequest().isWindowStateAllowed(candidateWindowState)) {
+					portletURL.setWindowState(candidateWindowState);
+				}
+				else {
+					// TestPage120: encodeActionURLWithInvalidWindowStateRenderTest
+				}
 			}
 			catch (WindowStateException e) {
 				logger.error(e);

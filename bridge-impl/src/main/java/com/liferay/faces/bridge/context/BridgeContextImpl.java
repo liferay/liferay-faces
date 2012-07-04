@@ -432,8 +432,9 @@ public class BridgeContextImpl extends BridgeContext {
 				// Otherwise,
 				else {
 
-					// If currently executing the ACTION_PHASE of the portlet lifecycle, then
-					if ((portletPhase == Bridge.PortletPhase.ACTION_PHASE) || (portletPhase == Bridge.PortletPhase.EVENT_PHASE)) {
+					// If currently executing the ACTION_PHASE or EVENT_PHASE of the portlet lifecycle, then
+					if ((portletPhase == Bridge.PortletPhase.ACTION_PHASE) ||
+							(portletPhase == Bridge.PortletPhase.EVENT_PHASE)) {
 
 						// TCK NOTE: The TCK will invoke this condition during the
 						// TestPage039-requestNoScopeOnRedirectTest and TestPage176-redirectActionTest.
@@ -573,7 +574,7 @@ public class BridgeContextImpl extends BridgeContext {
 
 	/**
 	 * This method ensures that {@link BridgeContextWrapper} classes participate in getting the parameter values. For
-	 * example, when running in the TCK, the {@link BridgeContextFactoryImpl} will wrap the default {@link
+	 * example, when running in the TCK, the {@link BridgeContextFactoryTCKImpl} class will wrap the default {@link
 	 * BridgeContextImpl} instance with a {@link BridgeContextTCKImpl} wrapper that has an overload of {@link
 	 * #getInitParameter(String)}.
 	 */
@@ -1042,7 +1043,7 @@ public class BridgeContextImpl extends BridgeContext {
 	public Map<String, String[]> getRequestHeaderValuesMap() {
 
 		if (requestHeaderValuesMap == null) {
-			requestHeaderValuesMap = Collections.unmodifiableMap(new RequestHeaderValuesMap(portletRequest,
+			requestHeaderValuesMap = Collections.unmodifiableMap(new RequestHeaderValuesMap(this,
 						getRequestParameterMap()));
 		}
 
@@ -1322,3 +1323,4 @@ public class BridgeContextImpl extends BridgeContext {
 	}
 
 }
+

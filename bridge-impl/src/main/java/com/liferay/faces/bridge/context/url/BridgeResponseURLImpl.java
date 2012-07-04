@@ -51,9 +51,12 @@ public abstract class BridgeResponseURLImpl extends BridgeURLBaseImpl implements
 			if (Bridge.PORTLET_MODE_PARAMETER.equals(urlParameterName)) {
 				PortletMode portletMode = new PortletMode(parameterValue);
 				BridgeRequestScope bridgeRequestScope = bridgeContext.getBridgeRequestScope();
+
 				if (bridgeRequestScope != null) {
 					PortletRequest portletRequest = bridgeContext.getPortletRequest();
-					if (!portletRequest.getPortletMode().equals(portletMode)) {
+
+					if (!portletRequest.getPortletMode().equals(portletMode) &&
+							portletRequest.isPortletModeAllowed(portletMode)) {
 						stateAwareResponse.setPortletMode(portletMode);
 						bridgeRequestScope.setPortletModeChanged(true);
 					}
@@ -63,7 +66,12 @@ public abstract class BridgeResponseURLImpl extends BridgeURLBaseImpl implements
 			// Otherwise, if the URL contains the "javax.portlet.faces.WindowState" parameter, then
 			// set the WindowState on the ActionResponse.
 			else if (Bridge.PORTLET_WINDOWSTATE_PARAMETER.equals(urlParameterName)) {
-				stateAwareResponse.setWindowState(new WindowState(parameterValue));
+				
+				WindowState windowState = new WindowState(parameterValue);
+				PortletRequest portletRequest = bridgeContext.getPortletRequest();
+				if (portletRequest.isWindowStateAllowed(windowState)) {
+					stateAwareResponse.setWindowState(windowState);
+				}
 			}
 
 			// Otherwise, if the URL contains the "_jsfBridgeNonFacesView" parameter, then set a

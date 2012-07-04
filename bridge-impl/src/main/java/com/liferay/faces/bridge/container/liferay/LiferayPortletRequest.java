@@ -14,10 +14,14 @@
 package com.liferay.faces.bridge.container.liferay;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 
+import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 
@@ -66,5 +70,22 @@ public class LiferayPortletRequest {
 		}
 
 		return themeDisplay;
+	}
+
+	public String[] getUserAgentHeader() {
+		String[] values = null;
+		Enumeration<?> headers = originalHttpServletRequest.getHeaders(BridgeConstants.HEADER_USER_AGENT);
+
+		if (headers != null) {
+			List<String> valueList = new ArrayList<String>();
+
+			while (headers.hasMoreElements()) {
+				valueList.add((String) headers.nextElement());
+			}
+
+			values = valueList.toArray(new String[valueList.size()]);
+		}
+
+		return values;
 	}
 }

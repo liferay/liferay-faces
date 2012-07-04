@@ -14,7 +14,7 @@
 package com.liferay.faces.bridge.util;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -34,7 +34,7 @@ public class URLUtil {
 	private static final Logger logger = LoggerFactory.getLogger(URLUtil.class);
 
 	public static Map<String, String[]> parseParameterMapValuesArray(String url) {
-		Map<String, String[]> parameterMapValuesArray = new HashMap<String, String[]>();
+		Map<String, String[]> parameterMapValuesArray = new LinkedHashMap<String, String[]>();
 
 		if (url != null) {
 			int pos = url.indexOf("?");
@@ -76,7 +76,7 @@ public class URLUtil {
 
 	public static Map<String, List<String>> parseParameterMapValuesList(String url) {
 
-		Map<String, List<String>> parameterMapValuesList = new HashMap<String, List<String>>();
+		Map<String, List<String>> parameterMapValuesList = new LinkedHashMap<String, List<String>>();
 		Map<String, String[]> parameterMapValuesArray = parseParameterMapValuesArray(url);
 		Set<Entry<String, String[]>> entrySet = parameterMapValuesArray.entrySet();
 

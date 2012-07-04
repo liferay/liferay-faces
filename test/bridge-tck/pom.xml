@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.liferay.faces.test</groupId>
+		<artifactId>liferay-faces-test</artifactId>
+		<version>3.1.0-RC2-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<groupId>com.liferay.faces.test.bridge.tck</groupId>
+	<artifactId>liferay-faces-test-bridge-tck</artifactId>
+	<packaging>pom</packaging>
+	<name>Bridge TCK</name>
+
+	<modules>
+		<module>bridge-tck-compat</module>
+		<module>bridge-tck-lifecycle-set-portlet</module>
+		<module>bridge-tck-main-portlet</module>
+		<module>bridge-tck-response-wrapper-portlet</module>
+	</modules>
+
+	<repositories>
+		<!-- Required for resolution of JSR 329 TCK artifacts -->
+		<repository>
+			<id>third-party-repository.portletfaces.org</id>
+			<name>Liferay 3rd Party Maven Repository</name>
+			<url>http://repository.portletfaces.org/content/repositories/thirdparty</url>
+		</repository>
+	</repositories>
+
+</project>

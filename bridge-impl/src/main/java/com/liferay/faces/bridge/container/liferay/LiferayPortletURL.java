@@ -13,9 +13,6 @@
  */
 package com.liferay.faces.bridge.container.liferay;
 
-import java.util.Map;
-
-import javax.faces.context.FacesContext;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletURL;
@@ -30,7 +27,6 @@ public abstract class LiferayPortletURL extends LiferayBaseURL implements Portle
 
 	// Private Data Members
 	private PortletMode portletMode;
-	private String toStringValue;
 	private WindowState windowState;
 
 	public LiferayPortletURL(ParsedPortletURL parsedPortletURL, String responseNamespace) {
@@ -44,48 +40,16 @@ public abstract class LiferayPortletURL extends LiferayBaseURL implements Portle
 	}
 
 	@Override
-	public void resetToString() {
-		super.resetToString();
-		toStringValue = null;
+	public boolean isPortletModeRequired() {
+		return true;
 	}
 
 	@Override
-	public String toString() {
-
-		if (toStringValue == null) {
-			StringBuilder url = new StringBuilder(super.toString());
-
-			// Always add the p_p_mode parameter.
-			boolean firstParameter = false;
-			String parameterValue = null;
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			Map<String, Object> applicationMap = facesContext.getExternalContext().getApplicationMap();
-			if (getPortletMode() == null) {
-				parameterValue = (String) applicationMap.get(getResponseNamespace() + LiferayConstants.P_P_MODE);
-			}
-			else {
-				parameterValue = getPortletMode().toString();
-			}
-
-			appendParameterToURL(firstParameter, LiferayConstants.P_P_MODE, parameterValue, url);
-
-			// Always add the p_p_state parameter.
-			if (getWindowState() == null) {
-				parameterValue = (String) applicationMap.get(getResponseNamespace() + LiferayConstants.P_P_STATE);
-			}
-			else {
-				parameterValue = getWindowState().toString();
-			}
-
-			appendParameterToURL(firstParameter, LiferayConstants.P_P_STATE, parameterValue, url);
-
-			toStringValue = url.toString();
-		}
-
-		return toStringValue;
+	public boolean isWindowStateRequired() {
+		return true;
 	}
 
+	@Override
 	public PortletMode getPortletMode() {
 		return portletMode;
 	}
@@ -95,6 +59,7 @@ public abstract class LiferayPortletURL extends LiferayBaseURL implements Portle
 		resetToString();
 	}
 
+	@Override
 	public WindowState getWindowState() {
 		return windowState;
 	}

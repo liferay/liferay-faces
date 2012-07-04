@@ -541,4 +541,9 @@ public class PortletContainerImpl implements PortletContainer {
 		return responseNamespace;
 	}
 
+	public String[] getUserAgentHeader() {
+
+		// Since the Portlet API doesn't support this header, return a null value.
+		return null;
+	}
 }

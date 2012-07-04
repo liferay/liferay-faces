@@ -17,18 +17,22 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.URLEncoder;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.faces.context.FacesContext;
 import javax.portlet.BaseURL;
+import javax.portlet.PortletMode;
 import javax.portlet.PortletSecurityException;
+import javax.portlet.ResourceURL;
+import javax.portlet.WindowState;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.bridge.util.FacesURLEncoder;
 import com.liferay.faces.bridge.util.URLParameter;
 
 
@@ -52,11 +56,11 @@ public abstract class LiferayBaseURL implements BaseURL {
 
 	// Protected Data Members
 	protected String responseNamespace;
-	
+
 	public LiferayBaseURL(ParsedBaseURL parsedLiferayURL, String responseNamespace) {
 		this.parsedLiferayURL = parsedLiferayURL;
 		this.responseNamespace = responseNamespace;
-		this.parameterMap = new HashMap<String, String[]>();
+		this.parameterMap = new LinkedHashMap<String, String[]>();
 	}
 
 	public void addProperty(String key, String value) {
@@ -102,56 +106,14 @@ public abstract class LiferayBaseURL implements BaseURL {
 			// question mark because it's filled with all kinds of unnecessary stuff.
 			url.append(parsedLiferayURL.getPrefix());
 
-			// Add request parameters from the request parameter map.
-			String namespace = responseNamespace;
-			if (namespace.startsWith(BridgeConstants.WSRP)) {
-				namespace = BridgeConstants.EMPTY;
-			}
-			boolean firstParameter = true;
-			Set<Map.Entry<String, String[]>> mapEntries = this.getParameterMap().entrySet();
-
-			if (mapEntries != null) {
-
-				for (Map.Entry<String, String[]> mapEntry : mapEntries) {
-					String[] values = mapEntry.getValue();
-
-					if ((values != null) && (values.length > 0)) {
-						String parameterName = mapEntry.getKey();
-						String parameterValue = values[0];
-
-						if (isValidParameter(parameterValue)) {
-
-							appendParameterToURL(firstParameter, namespace + parameterName,
-								encode(parameterValue), url);
-
-							if (firstParameter) {
-								firstParameter = false;
-							}
-						}
-					}
-				}
-			}
-
-			// Add WSRP URL parameters
-			List<URLParameter> wsrpParameters = parsedLiferayURL.getWsrpParameters();
-			for (URLParameter wsrpParameter: wsrpParameters) {
-				
-				appendParameterToURL(firstParameter, wsrpParameter.getName(), wsrpParameter.getValue(), url);
-				if (firstParameter) {
-					firstParameter = false;
-				}
-			}
-
 			// Possibly add the p_auth parameter.
+			boolean firstParameter = true;
 			String portalAuthToken = parsedLiferayURL.getPortalAuthToken();
 
 			if (portalAuthToken != null) {
 
 				appendParameterToURL(firstParameter, LiferayConstants.P_AUTH, portalAuthToken, url);
-
-				if (firstParameter) {
-					firstParameter = false;
-				}
+				firstParameter = false;
 			}
 
 			// Possibly add the p_p_auth parameter.
@@ -160,28 +122,11 @@ public abstract class LiferayBaseURL implements BaseURL {
 			if (portletAuthToken != null) {
 
 				appendParameterToURL(firstParameter, LiferayConstants.P_P_AUTH, portletAuthToken, url);
-
-				if (firstParameter) {
-					firstParameter = false;
-				}
-			}
-
-			// Possibly add the p_p_col_count parameter.
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			Map<String, Object> applicationMap = facesContext.getExternalContext().getApplicationMap();
-			String parameterValue = (String) applicationMap.get(responseNamespace + LiferayConstants.P_P_COL_COUNT);
-			appendParameterToURL(firstParameter, LiferayConstants.P_P_COL_COUNT, parameterValue, url);
-
-			if (firstParameter) {
 				firstParameter = false;
 			}
 
-			// Always add the p_p_col_id parameter
-			parameterValue = (String) applicationMap.get(responseNamespace + LiferayConstants.P_P_COL_ID);
-			appendParameterToURL(firstParameter, LiferayConstants.P_P_COL_ID, parameterValue, url);
-
 			// Always add the p_p_id parameter
-			parameterValue = responseNamespace;
+			String parameterValue = responseNamespace;
 
 			if (parameterValue.startsWith(BridgeConstants.CHAR_UNDERSCORE)) {
 				parameterValue = parameterValue.substring(1);
@@ -193,6 +138,59 @@ public abstract class LiferayBaseURL implements BaseURL {
 
 			appendParameterToURL(firstParameter, LiferayConstants.P_P_ID, parameterValue, url);
 
+			firstParameter = false;
+
+			// Always add the p_p_lifecycle parameter.
+			appendParameterToURL(LiferayConstants.P_P_LIFECYCLE, getPortletLifecycleId(), url);
+
+			// Possibly add the p_p_state parameter.
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			Map<String, Object> applicationMap = facesContext.getExternalContext().getApplicationMap();
+
+			if (isWindowStateRequired()) {
+				WindowState windowState = getWindowState();
+
+				if (windowState == null) {
+					parameterValue = (String) applicationMap.get(getResponseNamespace() + LiferayConstants.P_P_STATE);
+				}
+				else {
+					parameterValue = windowState.toString();
+				}
+
+				appendParameterToURL(LiferayConstants.P_P_STATE, parameterValue, url);
+			}
+
+			// Possibly add the p_p_mode parameter.
+			if (isPortletModeRequired()) {
+				PortletMode portletMode = getPortletMode();
+
+				if (portletMode == null) {
+					parameterValue = (String) applicationMap.get(getResponseNamespace() + LiferayConstants.P_P_MODE);
+				}
+				else {
+					parameterValue = portletMode.toString();
+				}
+
+				appendParameterToURL(LiferayConstants.P_P_MODE, parameterValue, url);
+			}
+
+			// Possibly add the p_p_cacheability parameter
+			if (this instanceof ResourceURL) {
+				String cacheability = parsedLiferayURL.getCacheability();
+
+				if (cacheability != null) {
+					appendParameterToURL(LiferayConstants.P_P_CACHEABILITY, cacheability, url);
+				}
+			}
+
+			// Always add the p_p_col_id parameter
+			parameterValue = (String) applicationMap.get(responseNamespace + LiferayConstants.P_P_COL_ID);
+			appendParameterToURL(LiferayConstants.P_P_COL_ID, parameterValue, url);
+
+			// Possibly add the p_p_col_count parameter.
+			parameterValue = (String) applicationMap.get(responseNamespace + LiferayConstants.P_P_COL_COUNT);
+			appendParameterToURL(LiferayConstants.P_P_COL_COUNT, parameterValue, url);
+
 			// Add the p_p_col_pos parameter if it is greater than zero (same logic as Liferay's
 			// PortletURLImpl.toString())
 			parameterValue = (String) applicationMap.get(responseNamespace + LiferayConstants.P_P_COL_POS);
@@ -203,7 +201,7 @@ public abstract class LiferayBaseURL implements BaseURL {
 					int colPos = Integer.parseInt(parameterValue);
 
 					if (colPos > 0) {
-						appendParameterToURL(firstParameter, LiferayConstants.P_P_COL_POS, parameterValue, url);
+						appendParameterToURL(LiferayConstants.P_P_COL_POS, parameterValue, url);
 					}
 				}
 				catch (NumberFormatException e) {
@@ -211,8 +209,39 @@ public abstract class LiferayBaseURL implements BaseURL {
 				}
 			}
 
-			// Always add the p_p_lifecycle parameter.
-			appendParameterToURL(firstParameter, LiferayConstants.P_P_LIFECYCLE, getPortletLifecycleId(), url);
+			// Add request parameters from the request parameter map.
+			String namespace = responseNamespace;
+
+			if (namespace.startsWith(BridgeConstants.WSRP)) {
+				namespace = BridgeConstants.EMPTY;
+			}
+
+			Set<Map.Entry<String, String[]>> mapEntries = this.getParameterMap().entrySet();
+
+			if (mapEntries != null) {
+
+				for (Map.Entry<String, String[]> mapEntry : mapEntries) {
+					String[] values = mapEntry.getValue();
+
+					if ((values != null) && (values.length > 0)) {
+						String parameterName = mapEntry.getKey();
+						parameterValue = values[0];
+
+						if (isValidParameter(parameterValue)) {
+
+							appendParameterToURL(namespace + parameterName, encode(parameterValue), url);
+						}
+					}
+				}
+			}
+
+			// Add WSRP URL parameters
+			List<URLParameter> wsrpParameters = parsedLiferayURL.getWsrpParameters();
+
+			for (URLParameter wsrpParameter : wsrpParameters) {
+
+				appendParameterToURL(wsrpParameter.getName(), wsrpParameter.getValue(), url);
+			}
 			
 			// Possibly add the doAsUserId parameter
 			String doAsUserIdToken = parsedLiferayURL.getDoAsUserIdToken();
@@ -241,9 +270,17 @@ public abstract class LiferayBaseURL implements BaseURL {
 
 	public void write(Writer writer, boolean escapeXML) throws IOException {
 
-		// Although we could write some code to handle the escapeXML flag, we don't support it elsewhere (like in
-		// BaseURLRenderer#encodeEnd(FacesContext, UIComponent, BaseURL baseURL)) so won't do it here either.
-		writer.write(toString());
+		String toStringValue = toString();
+
+		if (escapeXML) {
+			toStringValue = FacesURLEncoder.encode(toStringValue, BridgeConstants.UTF8);
+		}
+
+		writer.write(toStringValue);
+	}
+
+	protected void appendParameterToURL(String parameterName, String parameterValue, StringBuilder url) {
+		appendParameterToURL(false, parameterName, parameterValue, url);
 	}
 
 	protected void appendParameterToURL(boolean firstParameter, String parameterName, String parameterValue,
@@ -258,6 +295,14 @@ public abstract class LiferayBaseURL implements BaseURL {
 		url.append(parameterValue);
 
 		logger.debug("Appended param to URL name=[{0}] parameterValue=[{1}]", parameterName, parameterValue);
+	}
+
+	public boolean isPortletModeRequired() {
+		return false;
+	}
+
+	public boolean isWindowStateRequired() {
+		return false;
 	}
 
 	public void setParameter(String name, String value) {
@@ -281,6 +326,10 @@ public abstract class LiferayBaseURL implements BaseURL {
 
 	public abstract String getPortletLifecycleId();
 
+	public PortletMode getPortletMode() {
+		return null;
+	}
+
 	public void setProperty(String key, String value) {
 		// Ignore
 	}
@@ -295,5 +344,9 @@ public abstract class LiferayBaseURL implements BaseURL {
 
 	public void setSecure(boolean secure) throws PortletSecurityException {
 		// Ignore
+	}
+
+	public WindowState getWindowState() {
+		return null;
 	}
 }
