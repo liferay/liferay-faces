@@ -636,7 +636,13 @@ public class ExternalContextImpl extends ExternalContext {
 		// ClientDataRequest.
 		if (portletRequest instanceof ClientDataRequest) {
 			ClientDataRequest clientDataRequest = (ClientDataRequest) portletRequest;
-			clientDataRequest.setCharacterEncoding(encoding);
+
+			try {
+				clientDataRequest.setCharacterEncoding(encoding);
+			}
+			catch (IllegalStateException e) {
+				// TestPage141: setRequestCharacterEncodingActionTest -- exception is to be ignored
+			}
 		}
 		else {
 			lifecycleIncongruityManager.addCongruousTask(CongruousTask.SET_REQUEST_CHARACTER_ENCODING);
