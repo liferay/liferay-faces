@@ -417,16 +417,12 @@ public class BridgeContextImpl extends BridgeContext {
 
 				// If the specified URL starts with a "#" character, is external to this application, or has a
 				// "javax.portlet.faces.DirectLink" parameter value of "true", then
-				if (url.startsWith(BridgeConstants.CHAR_POUND) || bridgeRedirectURL.isExternal() ||
-						BooleanHelper.isTrueToken(bridgeRedirectURL.getParameter(Bridge.DIRECT_LINK))) {
+				if ((portletPhase == Bridge.PortletPhase.ACTION_PHASE) &&
+						(url.startsWith(BridgeConstants.CHAR_POUND) || bridgeRedirectURL.isExternal() ||
+							BooleanHelper.isTrueToken(bridgeRedirectURL.getParameter(Bridge.DIRECT_LINK)))) {
 
-					// Only perform the redirect during the ACTION_PHASE, since the Bridge Spec requires that the
-					// redirect be ignored during the EVENT_PHASE and RENDER_PHASE.
-					if (portletPhase == Bridge.PortletPhase.ACTION_PHASE) {
-
-						// TCK NOTE: The TCK does not have a test that invokes this condition.
-						portletContainer.redirect(bridgeRedirectURL.toString());
-					}
+					// TCK NOTE: The TCK does not appear to have a test that invokes this condition.
+					portletContainer.redirect(bridgeRedirectURL.toString());
 				}
 
 				// Otherwise,
@@ -1323,4 +1319,3 @@ public class BridgeContextImpl extends BridgeContext {
 	}
 
 }
-
