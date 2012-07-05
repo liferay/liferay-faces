@@ -27,6 +27,7 @@ import javax.portlet.BaseURL;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletSecurityException;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
@@ -201,7 +202,8 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 				// Only add the "javax.portlet.faces.PortletMode" parameter if it has a valid value.
 				if (parameterValue != null) {
-					addParameter = bridgeContext.getPortletRequest().isPortletModeAllowed(new PortletMode(parameterValue));
+					addParameter = bridgeContext.getPortletRequest().isPortletModeAllowed(new PortletMode(
+								parameterValue));
 				}
 			}
 			else if (Bridge.PORTLET_SECURE_PARAMETER.equals(parameterName)) {
@@ -485,6 +487,12 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 		Map<String, String[]> parameterMap = getParameterMap();
 		String[] values = parameterMap.get(name);
 
+		if (values == null) {
+			PortletResponse portletResponse = bridgeContext.getPortletResponse();
+			String responseNamespace = portletResponse.getNamespace();
+			values = parameterMap.get(responseNamespace + name);
+		}
+
 		if ((values != null) && (values.length > 0)) {
 			value = values[0];
 		}
@@ -521,6 +529,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 			try {
 				PortletMode candidatePortletMode = new PortletMode(portletMode);
+
 				if (bridgeContext.getPortletRequest().isPortletModeAllowed(candidatePortletMode)) {
 					portletURL.setPortletMode(candidatePortletMode);
 				}
@@ -723,6 +732,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 			try {
 				WindowState candidateWindowState = new WindowState(windowState);
+
 				if (bridgeContext.getPortletRequest().isWindowStateAllowed(candidateWindowState)) {
 					portletURL.setWindowState(candidateWindowState);
 				}
