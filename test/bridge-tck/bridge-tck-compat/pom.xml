@@ -10,7 +10,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>bridge-tck-compat</artifactId>
-	<name>Bridge TCK Common</name>
+	<name>Bridge TCK Compat</name>
 
 	<dependencies>
 		<dependency>
