@@ -13,33 +13,20 @@
  */
 package com.liferay.faces.bridge.scope;
 
-import java.util.Collections;
-import java.util.LinkedHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
- * This class provides a {@link java.util.Map} style interface for managing a Least Recently Used (LRU) cache of {@link
- * BridgeRequestScope}. Note that it extends {@link LinkedHashMap} which is not synchronized. Therefore instances of
- * this class should be wrapped by calling {@link Collections#synchronizedMap(java.util.Map)}.
+ * This class provides a {@link java.util.Map} style interface for managing cache of {@link BridgeRequestScope}.
  *
  * @author  Neil Griffin
  */
-public class BridgeRequestScopeCache extends LinkedHashMap<String, BridgeRequestScope> {
+public class BridgeRequestScopeCache extends ConcurrentHashMap<String, BridgeRequestScope> {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 4546189667853367660L;
 
-	// Private Data Members
-	private int maxSize;
-
 	public BridgeRequestScopeCache(int maxSize) {
-		super(maxSize, 1.0f, true);
-		this.maxSize = maxSize;
+		super(maxSize, 1.0f);
 	}
-
-	@Override
-	protected boolean removeEldestEntry(java.util.Map.Entry<String, BridgeRequestScope> eldest) {
-		return (size() > maxSize);
-	}
-
 }

@@ -14,7 +14,6 @@
 package com.liferay.faces.bridge.scope;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -206,18 +205,21 @@ public class BridgeRequestScopeManagerImpl implements BridgeRequestScopeManager 
 				bridgeRequestScope = getBridgeRequestScopeCache(portletContext).get(bridgeRequestScopeId);
 
 				if (bridgeRequestScope != null) {
-					
-					logger.debug("Found (and removed) session-attribute name=[{0}] value=[{1}] and cached bridgeRequestScope=[{2}]",
+
+					logger.debug(
+						"Found (and removed) session-attribute name=[{0}] value=[{1}] and cached bridgeRequestScope=[{2}]",
 						bridgeRequestScopeKey, bridgeRequestScopeId, bridgeRequestScope);
 
 					if (portletResponse instanceof StateAwareResponse) {
-						logger.debug("Setting former session-attribute as render parameter name=[{0}] value=[{1}]", bridgeRequestScopeKey,
-							bridgeRequestScopeId);
+						logger.debug("Setting former session-attribute as render parameter name=[{0}] value=[{1}]",
+							bridgeRequestScopeKey, bridgeRequestScopeId);
+
 						StateAwareResponse stateAwareResponse = (StateAwareResponse) portletResponse;
 						stateAwareResponse.setRenderParameter(bridgeRequestScopeKey, bridgeRequestScopeId);
 						getBridgeRequestScopeCache(portletContext).put(bridgeRequestScopeId, bridgeRequestScope);
-						logger.debug("Caching former session-attribute bridgeRequestScopeId=[{0}] bridgeRequestScope=[{1}]", bridgeRequestScopeId,
-								bridgeRequestScope);
+						logger.debug(
+							"Caching former session-attribute bridgeRequestScopeId=[{0}] bridgeRequestScope=[{1}]",
+							bridgeRequestScopeId, bridgeRequestScope);
 					}
 				}
 				else {
@@ -302,7 +304,7 @@ public class BridgeRequestScopeManagerImpl implements BridgeRequestScopeManager 
 					}
 				}
 
-				bridgeRequestScopeCache = Collections.synchronizedMap(new BridgeRequestScopeCache(maxSize));
+				bridgeRequestScopeCache = new BridgeRequestScopeCache(maxSize);
 
 				portletContext.setAttribute(ATTR_BRIDGE_REQUEST_SCOPE_CACHE, bridgeRequestScopeCache);
 			}
