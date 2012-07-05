@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.bridge.tck.context;
 
+import javax.portlet.PortletRequest;
+
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgeContextWrapper;
@@ -20,11 +22,14 @@ import com.liferay.faces.bridge.context.BridgeContextWrapper;
 
 /**
  * This class is intended to be used as a {@link BridgeContextWrapper} around the default BridgeContext implementation.
- * Its purpose is to enable/disable features of Liferay Faces Bridge for compatibility with the TCK.
+ * Its purpose is to enable compatibility between the optimization features of Liferay Faces Bridge and the TCK.
  *
  * @author  Neil Griffin
  */
 public class BridgeContextTCKImpl extends BridgeContextWrapper {
+
+	// Private Constants
+	private static final String LIFERAY_NAMESPACE_PREFIX_HACK = "A_";
 
 	// Private Data Members
 	private BridgeContext wrappedBridgeContext;
@@ -39,6 +44,10 @@ public class BridgeContextTCKImpl extends BridgeContextWrapper {
 		return true;
 	}
 
+	/**
+	 * This method override will enable/disable features of the bridge, so that they do not have to be specified within
+	 * the WEB-INF/portlet.xml descriptor.
+	 */
 	@Override
 	public String getInitParameter(String name) {
 
@@ -59,6 +68,26 @@ public class BridgeContextTCKImpl extends BridgeContextWrapper {
 		}
 
 		return value;
+	}
+
+	/**
+	 * This method override provides compatibility between TestPage182 (encodeNamespaceTest) and Liferay Portal. For
+	 * more information, see: https://issues.apache.org/jira/browse/PORTLETBRIDGE-112
+	 */
+	@Override
+	public String getResponseNamespace() {
+		String responseNamespace = super.getResponseNamespace();
+		PortletRequest portletRequest = super.getPortletRequest();
+		String portletId = (String) portletRequest.getAttribute("PORTLET_ID");
+
+		if ((portletId != null) && (portletId.indexOf("encodeNamespaceTest") > 0)) {
+
+			if (responseNamespace.startsWith(LIFERAY_NAMESPACE_PREFIX_HACK)) {
+				responseNamespace = responseNamespace.substring(LIFERAY_NAMESPACE_PREFIX_HACK.length() - 1);
+			}
+		}
+
+		return responseNamespace;
 	}
 
 	@Override
