@@ -34,5 +34,6 @@ public class LiferayConstants {
 	public static final String P_P_LIFECYCLE = "p_p_lifecycle";
 	public static final String P_P_RESOURCE_ID = "p_p_resource_id";
 	public static final String P_P_STATE = "p_p_state";
+	public static final String PACKAGE_NAMESPACE = "com.liferay";
 	public static final String WAR_SEPARATOR = "_WAR_";
 }

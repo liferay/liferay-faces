@@ -13,14 +13,16 @@
  */
 package com.liferay.faces.bridge.container;
 
+import com.liferay.faces.bridge.container.liferay.LiferayConstants;
+
+
 /**
  * @author  Neil Griffin
  */
 public class PortletContainerDetector {
 
 	// Private Constants
-	private static final String OBJECT_NAME_PREFIX_LIFERAY = "com.liferay";
-	private static final String OBJECT_NAME_PREFIX_PLUTO = "org.apache.pluto";
+	private static final String PLUTO_PACKAGE_NAMESPACE = "org.apache.pluto";
 
 	/**
 	 * Determines whether or not the specified object is one created by Liferay Portal.
@@ -32,7 +34,7 @@ public class PortletContainerDetector {
 	public static boolean isLiferayObject(Object obj) {
 
 		if (obj != null) {
-			return obj.getClass().getName().startsWith(OBJECT_NAME_PREFIX_LIFERAY);
+			return obj.getClass().getName().startsWith(LiferayConstants.PACKAGE_NAMESPACE);
 		}
 		else {
 			return false;
@@ -49,7 +51,7 @@ public class PortletContainerDetector {
 	public static boolean isPlutoObject(Object obj) {
 
 		if (obj != null) {
-			return obj.getClass().getName().startsWith(OBJECT_NAME_PREFIX_PLUTO);
+			return obj.getClass().getName().startsWith(PLUTO_PACKAGE_NAMESPACE);
 		}
 		else {
 			return false;
