@@ -81,26 +81,15 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 	protected static final String BRIDGE_REQ_SCOPE_NON_EXCLUDED_ATTR_NAMES =
 		"com.liferay.faces.bridge.nonExcludedAttributeNames";
 
-	// Private Constants for EXCLUDED namespaces listed in Section 5.1.2 of the JSR 329 Spec
-	private static final String EXCLUDED_NAMESPACE_JAVAX_FACES = "javax.faces";
-	private static final String EXCLUDED_NAMESPACE_JAVAX_PORTLET = "javax.portlet";
-	private static final String EXCLUDED_NAMESPACE_JAVAX_PORTLET_FACES = "javax.portlet.faces";
-	private static final String EXCLUCED_NAMESPACE_JAVAX_SERVLET = "javax.servlet";
-	private static final String EXCLUCED_NAMESPACE_JAVAX_SERVLET_INCLUDE = "javax.servlet.include";
-	private static List<String> STANDARD_EXCLUDED_REQUEST_ATTRIBUTE_NAMESPACES = new ArrayList<String>(3);
+	// Protected Constants for EXCLUDED namespaces listed in Section 5.1.2 of the JSR 329 Spec
+	protected static final String EXCLUDED_NAMESPACE_JAVAX_FACES = "javax.faces";
+	protected static final String EXCLUDED_NAMESPACE_JAVAX_PORTLET = "javax.portlet";
+	protected static final String EXCLUDED_NAMESPACE_JAVAX_PORTLET_FACES = "javax.portlet.faces";
+	protected static final String EXCLUCED_NAMESPACE_JAVAX_SERVLET = "javax.servlet";
+	protected static final String EXCLUCED_NAMESPACE_JAVAX_SERVLET_INCLUDE = "javax.servlet.include";
 
 	// Other Private Constants
 	private static final String JAVAX_FACES_ENCODED_URL_PARAM = "javax.faces.encodedURL";
-
-	static {
-
-		// Build up the static list of standard excluded request attribute namespaces.
-		STANDARD_EXCLUDED_REQUEST_ATTRIBUTE_NAMESPACES.add(EXCLUDED_NAMESPACE_JAVAX_FACES);
-		STANDARD_EXCLUDED_REQUEST_ATTRIBUTE_NAMESPACES.add(EXCLUDED_NAMESPACE_JAVAX_PORTLET);
-		STANDARD_EXCLUDED_REQUEST_ATTRIBUTE_NAMESPACES.add(EXCLUDED_NAMESPACE_JAVAX_PORTLET_FACES);
-		STANDARD_EXCLUDED_REQUEST_ATTRIBUTE_NAMESPACES.add(EXCLUCED_NAMESPACE_JAVAX_SERVLET);
-		STANDARD_EXCLUDED_REQUEST_ATTRIBUTE_NAMESPACES.add(EXCLUCED_NAMESPACE_JAVAX_SERVLET_INCLUDE);
-	}
 
 	// Private Data Members
 	private Map<String, Object> attributeMap;
@@ -287,21 +276,26 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 
 					while (itr.hasNext()) {
 						Map.Entry<String, Object> mapEntry = itr.next();
-						String name = mapEntry.getKey();
-						Object value = mapEntry.getValue();
+						String attributeName = mapEntry.getKey();
+						Object attributeValue = mapEntry.getValue();
 
-						if (isExcludedRequestAttribute(name, value)) {
-							logger.trace("Not saving EXCLUDED attribute name=[{0}]", name);
+						if (isExcludedRequestAttributeByConfig(attributeName, attributeValue) ||
+								isExcludedRequestAttributeByAnnotation(attributeValue) ||
+								isExcludedRequestAttributeByNamespace(attributeName) ||
+								isExcludedRequestAttributeByInstance(attributeName, attributeValue) ||
+								isExcludedRequestAttributeByPreExisting(attributeName)) {
+
+							logger.trace("NOT saving EXCLUDED attribute name=[{0}]", attributeName);
 						}
 						else {
 
 							if (saveNonExcludedAttributes) {
-								logger.trace("Saving non-excluded request attribute name=[{0}] value=[{1}]", name,
-									value);
-								savedRequestAttributes.add(new RequestAttribute(name, value));
+								logger.trace("SAVING non-excluded request attribute name=[{0}] value=[{1}]",
+									attributeName, attributeValue);
+								savedRequestAttributes.add(new RequestAttribute(attributeName, attributeValue));
 							}
 
-							nonExcludedAttributeNames.add(name);
+							nonExcludedAttributeNames.add(attributeName);
 						}
 					}
 
@@ -479,48 +473,31 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 		return redirect;
 	}
 
-	protected boolean isExcludedRequestAttribute(String attributeName, Object attributeValue) {
+	protected boolean isExcludedRequestAttributeByInstance(String attributeName, Object attributeValue) {
 
-		boolean excluded = false;
+		// EXCLUDED attributes listed in Section 5.1.2 of the JSR 329 Spec
+		return ((attributeValue != null) &&
+				((attributeValue instanceof ExternalContext) || (attributeValue instanceof FacesContext) ||
+					(attributeValue instanceof HttpSession) || (attributeValue instanceof PortalContext) ||
+					(attributeValue instanceof PortletConfig) || (attributeValue instanceof PortletContext) ||
+					(attributeValue instanceof PortletPreferences) || (attributeValue instanceof PortletRequest) ||
+					(attributeValue instanceof PortletResponse) || (attributeValue instanceof PortletSession) ||
+					(attributeValue instanceof ServletConfig) || (attributeValue instanceof ServletContext) ||
+					(attributeValue instanceof ServletRequest) || (attributeValue instanceof ServletResponse)));
+	}
 
-		if (!excluded) {
-			excluded = isExcludedRequestAttributeByConfig(attributeName, attributeValue);
+	protected boolean isExcludedRequestAttributeByNamespace(String attributeName) {
+
+		if (isNamespaceMatch(attributeName, EXCLUDED_NAMESPACE_JAVAX_FACES) ||
+				isNamespaceMatch(attributeName, EXCLUDED_NAMESPACE_JAVAX_PORTLET) ||
+				isNamespaceMatch(attributeName, EXCLUDED_NAMESPACE_JAVAX_PORTLET_FACES) ||
+				isNamespaceMatch(attributeName, EXCLUCED_NAMESPACE_JAVAX_SERVLET) ||
+				isNamespaceMatch(attributeName, EXCLUCED_NAMESPACE_JAVAX_SERVLET_INCLUDE)) {
+			return true;
 		}
-
-		if (!excluded) {
-			excluded = isExcludedRequestAttributeByAnnotation(attributeValue);
+		else {
+			return false;
 		}
-
-		if (!excluded) {
-
-			for (String namespace : STANDARD_EXCLUDED_REQUEST_ATTRIBUTE_NAMESPACES) {
-
-				if (isNamespaceMatch(attributeName, namespace)) {
-					excluded = true;
-
-					break;
-				}
-			}
-		}
-
-		if (!excluded) {
-			excluded = preExistingAttributeNames.contains(attributeName);
-		}
-
-		if (!excluded) {
-
-			// EXCLUDED attributes listed in Section 5.1.2 of the JSR 329 Spec
-			excluded = ((attributeValue != null) &&
-					((attributeValue instanceof ExternalContext) || (attributeValue instanceof FacesContext) ||
-						(attributeValue instanceof HttpSession) || (attributeValue instanceof PortalContext) ||
-						(attributeValue instanceof PortletConfig) || (attributeValue instanceof PortletContext) ||
-						(attributeValue instanceof PortletPreferences) || (attributeValue instanceof PortletRequest) ||
-						(attributeValue instanceof PortletResponse) || (attributeValue instanceof PortletSession) ||
-						(attributeValue instanceof ServletConfig) || (attributeValue instanceof ServletContext) ||
-						(attributeValue instanceof ServletRequest) || (attributeValue instanceof ServletResponse)));
-		}
-
-		return excluded;
 	}
 
 	public void setFacesLifecycleExecuted(boolean facesLifecycleExecuted) {
@@ -567,6 +544,10 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 		}
 
 		return excluded;
+	}
+
+	protected boolean isExcludedRequestAttributeByPreExisting(String attributeName) {
+		return preExistingAttributeNames.contains(attributeName);
 	}
 
 	protected boolean isNamespaceMatch(String attributeName, String namespace) {
