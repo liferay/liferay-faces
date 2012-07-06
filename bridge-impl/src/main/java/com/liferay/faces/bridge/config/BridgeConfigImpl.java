@@ -45,6 +45,7 @@ import com.liferay.faces.bridge.BridgePhaseFactory;
 import com.liferay.faces.bridge.application.view.BridgeWriteBehindResponseFactory;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
 import com.liferay.faces.bridge.context.BridgeContextFactory;
+import com.liferay.faces.bridge.context.flash.BridgeFlashFactory;
 import com.liferay.faces.bridge.context.url.BridgeURLFactory;
 import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.logging.Logger;
@@ -61,6 +62,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 	// Private Constants
 	private static final String BRIDGE_CONTEXT_FACTORY = "bridge-context-factory";
+	private static final String BRIDGE_FLASH_FACTORY = "bridge-flash-factory";
 	private static final String BRIDGE_PHASE_FACTORY = "bridge-phase-factory";
 	private static final String BRIDGE_REQUEST_SCOPE_FACTORY = "bridge-request-scope-factory";
 	private static final String BRIDGE_REQUEST_SCOPE_MANAGER_FACTORY = "bridge-request-scope-manager-factory";
@@ -92,6 +94,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	// Private Data Members
 	private BridgeConfigAttributeMap attributes;
 	private BridgeContextFactory bridgeContextFactory;
+	private BridgeFlashFactory bridgeFlashFactory;
 	private BridgePhaseFactory bridgePhaseFactory;
 	private BridgeRequestScopeFactory bridgeRequestScopeFactory;
 	private BridgeRequestScopeManagerFactory bridgeRequestScopeManagerFactory;
@@ -218,6 +221,10 @@ public class BridgeConfigImpl implements BridgeConfig {
 				inputStream.close();
 			}
 
+			if (bridgeFlashFactory == null) {
+				logger.error(FACTORY_NOT_FOUND_MSG, BRIDGE_FLASH_FACTORY);
+			}
+
 			if (bridgePhaseFactory == null) {
 				logger.error(FACTORY_NOT_FOUND_MSG, BRIDGE_PHASE_FACTORY);
 			}
@@ -307,6 +314,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 			// Initialize the map of attributes
 			attributes = new BridgeConfigAttributeMap();
 			attributes.put(BridgeContextFactory.class.getName(), bridgeContextFactory);
+			attributes.put(BridgeFlashFactory.class.getName(), bridgeFlashFactory);
 			attributes.put(BridgePhaseFactory.class.getName(), bridgePhaseFactory);
 			attributes.put(BridgeRequestScopeFactory.class.getName(), bridgeRequestScopeFactory);
 			attributes.put(BridgeRequestScopeManagerFactory.class.getName(), bridgeRequestScopeManagerFactory);
@@ -517,6 +525,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 		// Private Data Members
 		private boolean parsingBridgeContextFactory = false;
+		private boolean parsingBridgeFlashFactory = false;
 		private boolean parsingBridgePhaseFactory = false;
 		private boolean parsingBridgeRequestScopeFactory = false;
 		private boolean parsingBridgeRequestScopeManagerFactory = false;
@@ -548,6 +557,26 @@ public class BridgeConfigImpl implements BridgeConfig {
 						BridgeConfigImpl.this.bridgeContextFactory = (BridgeContextFactory) newFactoryInstance(
 								factoryClassName, BridgeContextFactory.class, wrappedFactory);
 						logger.debug("Instantiated bridgeContextFactory=[{0}] wrappedFactory=[{1}]", factoryClassName,
+							wrappedFactory);
+					}
+					catch (ClassNotFoundException e) {
+						logger.error("{0} : factoryClassName=[{1}]", e.getClass().getName(), factoryClassName);
+					}
+					catch (Exception e) {
+						logger.error(e.getMessage(), e);
+					}
+				}
+			}
+			else if (parsingBridgeFlashFactory) {
+				String factoryClassName = content.toString().trim();
+
+				if (factoryClassName.length() > 0) {
+
+					try {
+						BridgeFlashFactory wrappedFactory = BridgeConfigImpl.this.bridgeFlashFactory;
+						BridgeConfigImpl.this.bridgeFlashFactory = (BridgeFlashFactory) newFactoryInstance(
+								factoryClassName, BridgeFlashFactory.class, wrappedFactory);
+						logger.debug("Instantiated bridgeFlashFactory=[{0}] wrappedFactory=[{1}]", factoryClassName,
 							wrappedFactory);
 					}
 					catch (ClassNotFoundException e) {
@@ -745,6 +774,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 			content = null;
 			parsingBridgeContextFactory = false;
+			parsingBridgeFlashFactory = false;
 			parsingBridgePhaseFactory = false;
 			parsingBridgeRequestScopeFactory = false;
 			parsingBridgeRequestScopeManagerFactory = false;
@@ -768,6 +798,9 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 			if (localName.equals(BRIDGE_CONTEXT_FACTORY)) {
 				parsingBridgeContextFactory = true;
+			}
+			else if (localName.equals(BRIDGE_FLASH_FACTORY)) {
+				parsingBridgeFlashFactory = true;
 			}
 			else if (localName.equals(BRIDGE_PHASE_FACTORY)) {
 				parsingBridgePhaseFactory = true;
