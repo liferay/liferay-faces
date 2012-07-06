@@ -25,6 +25,10 @@
 		</dependency>
 		<!-- END: Only required for bridge:inputFile -->
 		<dependency>
+			<groupId>com.liferay.portal</groupId>
+			<artifactId>portal-service</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>liferay-faces-bridge-api</artifactId>
 			<version>${project.version}</version>
