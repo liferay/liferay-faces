@@ -46,12 +46,11 @@ import com.liferay.faces.bridge.scope.BridgeRequestScopeLiferayImpl;
  * BridgeRequestScopeLiferayImpl} parent class, specifically in the {@link
  * BridgeRequestScopeLiferayImpl#restore(FacesContext)} method.</p>
  *
- * <p>Test Description: The TCK TestPage151 (requestMapRequestScopeTest) performs some tests to make sure that certain
+ * <p>Problem #1: The TCK TestPage151 (requestMapRequestScopeTest) performs some checks to make sure that certain
  * non-excluded request attributes don't survive into the RENDER_PHASE. One of these attributes is named
- * "verifyPreBridgeExclusion" with value "avalue".</p>
- *
- * <p>Problem Description: Due to the design of the Liferay Portlet container, it is not possible for the bridge to
- * programatically determine if the "verifyPreBridgeExclusion" attribute should be removed.</p>
+ * "verifyPreBridgeExclusion" with value "avalue". Due to the design of the Liferay portlet container, it is not
+ * possible for the bridge to programatically determine if the "verifyPreBridgeExclusion" attribute should be
+ * removed.</p>
  *
  * <p>Example: The following is a list of String-based attributes that are present in the Liferay Portal RenderRequest
  * prior to the FacesContext being constructed by the requestMapRequestScopeTest:
@@ -67,12 +66,26 @@ import com.liferay.faces.bridge.scope.BridgeRequestScopeLiferayImpl;
  * possible for the bridge to programatically determine which one of these should be maintained and which should be
  * removed.</p>
  *
- * <p>Conclusion: In order for the requestMapRequestScopeTest to pass under Liferay Portal, it is necessary to
- * explicitly remove the verifyPreBridgeExclusion attribute.</p>
+ * <p>Solution: In order for the requestMapRequestScopeTest to pass under Liferay Portal, it is necessary to explicitly
+ * remove the verifyPreBridgeExclusion attribute.</p>
+ *
+ * <p>Problem #2: The TCK TestPage203 (JSF_ELTest) performs some checks to make sure that objects obtained from the
+ * bridge's ELResolver match expected values stored as request attributes. One of these attributes is
+ * "org.apache.myfaces.portlet.faces.testsuite.common.portletConfig", which is set in the {@link
+ * GenericFacesTestSuitePortlet#initTestRequest(PortletRequest)} method. Again, due to the design of the Liferay portlet
+ * container, it is not possible for the bridge to programatically determine whether or not this value should be
+ * maintained. Since it is an instance of PortletConfig, the {@link BridgeRequestScopeLiferayImpl#restore(FacesContext)}
+ * method will exclude (remove) the request attribute.</p>
+ *
+ * <p>Solution: In order for the JSF_ELTest to pass under Liferay Portal, it is necessary to explicity maintain the
+ * value of the request attribute.</p>
  *
  * @author  Neil Griffin
  */
 public class BridgeRequestScopeLiferayTCKImpl extends BridgeRequestScopeLiferayImpl {
+
+	// Private Constants
+	public static final String TCK_PORTLET_CONFIG = "org.apache.myfaces.portlet.faces.testsuite.common.portletConfig";
 
 	// serialVersionUID
 	private static final long serialVersionUID = 5212644933751947796L;
@@ -85,16 +98,23 @@ public class BridgeRequestScopeLiferayTCKImpl extends BridgeRequestScopeLiferayI
 	@Override
 	public void restore(FacesContext facesContext) {
 
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Map<String, Object> requestMap = externalContext.getRequestMap();
+
+		// TCK TestPage203: JSF_ELTest
+		PortletConfig tckPortletConfig = (PortletConfig) requestMap.get(TCK_PORTLET_CONFIG);
+
 		super.restore(facesContext);
 
 		// TCK TestPage151: requestMapRequestScopeTest
 		if (getBeganInPhase() == Bridge.PortletPhase.ACTION_PHASE) {
 
 			// Explicitly remove the attributes that the requestMapRequestScopeTest checks for.
-			ExternalContext externalContext = facesContext.getExternalContext();
-			Map<String, Object> requestMap = externalContext.getRequestMap();
 			requestMap.remove("verifyPreBridgeExclusion");
 		}
+
+		// TCK TestPage203: JSF_ELTest
+		requestMap.put(TCK_PORTLET_CONFIG, tckPortletConfig);
 	}
 
 }
