@@ -79,6 +79,7 @@
 		<view-declaration-language-factory>com.liferay.faces.bridge.application.view.ViewDeclarationLanguageFactoryImpl</view-declaration-language-factory>
 		<factory-extension>
 			<bridge:bridge-context-factory>com.liferay.faces.bridge.context.BridgeContextFactoryImpl</bridge:bridge-context-factory>
+			<bridge:bridge-flash-factory>com.liferay.faces.bridge.context.flash.BridgeFlashFactoryImpl</bridge:bridge-flash-factory>
 			<bridge:bridge-phase-factory>com.liferay.faces.bridge.BridgePhaseFactoryImpl</bridge:bridge-phase-factory>
 			<bridge:bridge-request-scope-factory>com.liferay.faces.bridge.scope.BridgeRequestScopeFactoryImpl</bridge:bridge-request-scope-factory>
 			<bridge:bridge-request-scope-manager-factory>com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactoryImpl</bridge:bridge-request-scope-manager-factory>

@@ -532,7 +532,8 @@ public class ExternalContextImpl extends ExternalContext {
 	public Flash getFlash() {
 
 		if (bridgeFlash == null) {
-			bridgeFlash = BridgeFlashFactory.getBridgeFlash(this);
+			BridgeFlashFactory bridgeFlashFactory = (BridgeFlashFactory) BridgeFactoryFinder.getFactory(BridgeFlashFactory.class);
+			bridgeFlash = bridgeFlashFactory.getBridgeFlash();
 		}
 
 		return bridgeFlash;
