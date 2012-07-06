@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.scope;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -41,23 +42,56 @@ import com.liferay.faces.bridge.container.liferay.LiferayConstants;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 
+import com.liferay.portal.kernel.util.JavaConstants;
+
 
 /**
  * @author  Neil Griffin
  */
 public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 
-	// Private Constants
-	private static final String JAVAX_PORTLET_CONFIG = "javax.portlet.config";
-	private static final String JAVAX_PORTLET_PORTLET = "javax.portlet.portlet";
-	private static final String JAVAX_PORTLET_REQUEST = "javax.portlet.request";
-	private static final String JAVAX_PORTLET_RESPONSE = "javax.portlet.response";
-
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeRequestScopeLiferayImpl.class);
 
 	// serialVersionUID
 	private static final long serialVersionUID = 1814762389345663517L;
+
+	// Private Constants
+	private static final String[] LIFERAY_ATTRIBUTE_NAMES;
+	private static final String[] PORTLET_REQUEST_ATTRIBUTE_NAMES = new String[] {
+			PortletRequest.CCPP_PROFILE, PortletRequest.LIFECYCLE_PHASE, PortletRequest.RENDER_HEADERS,
+			PortletRequest.RENDER_MARKUP, PortletRequest.RENDER_PART, PortletRequest.USER_INFO
+		};
+
+	static {
+
+		// Set the value of the LIFERAY_JAVAX_CONSTANT_VALUES constant.
+		List<String> fieldList = new ArrayList<String>();
+		Field[] declaredFields = JavaConstants.class.getDeclaredFields();
+
+		for (Field declaredField : declaredFields) {
+
+			String fieldName = declaredField.getName();
+
+			if ((fieldName != null) && fieldName.startsWith("JAVAX")) {
+
+				declaredField.setAccessible(true);
+
+				try {
+					Object value = declaredField.get(null);
+
+					if ((value != null) && (value instanceof String)) {
+						fieldList.add((String) value);
+					}
+				}
+				catch (Exception e) {
+					logger.error(e);
+				}
+			}
+		}
+
+		LIFERAY_ATTRIBUTE_NAMES = fieldList.toArray(new String[fieldList.size()]);
+	}
 
 	public BridgeRequestScopeLiferayImpl(PortletConfig portletConfig, PortletContext portletContext,
 		PortletRequest portletRequest, String idPrefix) {
@@ -111,6 +145,7 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 		List<String> attributesToRemove = new ArrayList<String>();
 		Set<java.util.Map.Entry<String, Object>> entrySet = currentRequestAttributes.entrySet();
 
+		// TCK TestPage037: requestScopeContentsTest
 		// TCK TestPage045: excludedAttributesTest
 		// TCK TestPage151: requestMapRequestScopeTest
 		for (Map.Entry<String, Object> mapEntry : entrySet) {
@@ -155,32 +190,29 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 				// also includes an attribute named "javax.portlet.portlet" that is the current GenericFacesPortlet
 				// (which extends GenericPortlet). But since GenericPortlet implements the PortletConfig interface, need
 				// to prevent it from being excluded as well.
-				if (!JAVAX_PORTLET_CONFIG.equals(attributeName) && !JAVAX_PORTLET_PORTLET.equals(attributeName)) {
+				if (!JavaConstants.JAVAX_PORTLET_CONFIG.equals(attributeName) &&
+						!JavaConstants.JAVAX_PORTLET_PORTLET.equals(attributeName)) {
 					excluded = true;
 				}
 			}
 			else if (attributeValue instanceof PortletRequest) {
 
 				// Liferay Portal includes request attribute named "javax.portlet.request" that must not be excluded.
-				if (!JAVAX_PORTLET_REQUEST.equals(attributeName)) {
+				if (!JavaConstants.JAVAX_PORTLET_REQUEST.equals(attributeName)) {
 					excluded = true;
 				}
 			}
 			else if (attributeValue instanceof PortletResponse) {
 
 				// Liferay Portal includes request attribute named "javax.portlet.response" that must not be excluded.
-				if (!JAVAX_PORTLET_RESPONSE.equals(attributeName)) {
+				if (!JavaConstants.JAVAX_PORTLET_RESPONSE.equals(attributeName)) {
 					excluded = true;
 				}
 			}
 			else if ((attributeValue instanceof PortalContext) || (attributeValue instanceof PortletContext) ||
 					(attributeValue instanceof PortletPreferences) || (attributeValue instanceof PortletSession)) {
 
-				// Can only exclude attributes that are not Liferay objects. For example, Liferay Portal includes
-				// a request attribute named "javax.portlet.request" that must not be excluded.
-				if (!attributeValue.getClass().getName().startsWith(LiferayConstants.PACKAGE_NAMESPACE)) {
-					excluded = true;
-				}
+				excluded = true;
 			}
 			else if ((attributeValue instanceof HttpSession) || (attributeValue instanceof ServletConfig) ||
 					(attributeValue instanceof ServletContext) || (attributeValue instanceof ServletRequest) ||
@@ -228,10 +260,31 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 			}
 		}
 		else if (isNamespaceMatch(attributeName, EXCLUDED_NAMESPACE_JAVAX_PORTLET)) {
+			excluded = true;
+		}
 
-			// Never safe to exclude when running under Liferay Portal. For example, Liferay Portal includes
-			// a request attribute named "javax.portlet.request" that must not be excluded.
-			excluded = false;
+		if (excluded) {
+
+			for (String liferayAttributeName : LIFERAY_ATTRIBUTE_NAMES) {
+
+				if (liferayAttributeName.equals(attributeName)) {
+					excluded = false;
+
+					break;
+				}
+			}
+		}
+
+		if (excluded) {
+
+			for (String portletRequestAttributeName : PORTLET_REQUEST_ATTRIBUTE_NAMES) {
+
+				if (portletRequestAttributeName.equals(attributeName)) {
+					excluded = false;
+
+					break;
+				}
+			}
 		}
 
 		return excluded;
