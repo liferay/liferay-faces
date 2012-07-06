@@ -233,7 +233,7 @@ public class TestSetupAction extends SimpleAction {
 			site = GroupLocalServiceUtil.getGroup(companyId, name);
 		}
 		catch (NoSuchGroupException e) {
-			ServiceUtil.addActiveOpenGroup(userId, name);
+			site = ServiceUtil.addActiveOpenGroup(userId, name);
 		}
 
 		return site;
