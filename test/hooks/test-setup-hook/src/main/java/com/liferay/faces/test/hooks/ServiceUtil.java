@@ -14,6 +14,7 @@
 package com.liferay.faces.test.hooks;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -29,15 +30,16 @@ import com.liferay.portal.service.ServiceContext;
  */
 public class ServiceUtil {
 
-	public static void addActiveOpenGroup(long userId, String name) throws Exception {
+	public static Group addActiveOpenGroup(long userId, String name) throws Exception {
 
 		boolean active = true;
 		String description = name;
 		String friendlyURL = StringPool.FORWARD_SLASH +
 			name.toLowerCase().replaceAll(StringPool.SPACE, StringPool.DASH);
 		int type = GroupConstants.TYPE_COMMUNITY_OPEN;
-		GroupLocalServiceUtil.addGroup(userId, (String) null, 0L, name, description, type, friendlyURL, active,
-			new ServiceContext());
+
+		return GroupLocalServiceUtil.addGroup(userId, (String) null, 0L, name, description, type, friendlyURL, active,
+				new ServiceContext());
 	}
 
 	public static Layout addLayout(long userId, long groupId, boolean privateLayout, long parentLayoutId, String name,
