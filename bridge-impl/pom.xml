@@ -26,7 +26,7 @@
 		<!-- END: Only required for bridge:inputFile -->
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
-			<artifactId>portal-service</artifactId>
+			<artifactId>portal-kernel</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
