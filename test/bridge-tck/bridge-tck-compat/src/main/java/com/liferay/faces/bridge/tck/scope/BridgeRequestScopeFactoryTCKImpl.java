@@ -18,6 +18,8 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 
+import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeFactory;
 
@@ -26,6 +28,10 @@ import com.liferay.faces.bridge.scope.BridgeRequestScopeFactory;
  * @author  Neil Griffin
  */
 public class BridgeRequestScopeFactoryTCKImpl extends BridgeRequestScopeFactory {
+
+	// Private Constants
+	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(BridgeConstants.LIFERAY_PORTAL)
+		.isDetected();
 
 	// Private Data Members
 	private BridgeRequestScopeFactory wrappedBridgeRequestScopeFactory;
@@ -38,7 +44,7 @@ public class BridgeRequestScopeFactoryTCKImpl extends BridgeRequestScopeFactory 
 	public BridgeRequestScope getBridgeRequestScope(PortletConfig portletConfig, PortletContext portletContext,
 		PortletRequest portletRequest, String idPrefix) throws FacesException {
 
-		if (portletConfig.getClass().getName().startsWith("com.liferay.portlet")) {
+		if (LIFERAY_PORTAL_DETECTED) {
 			return new BridgeRequestScopeLiferayTCKImpl(portletConfig, portletContext, portletRequest, idPrefix);
 		}
 		else {
