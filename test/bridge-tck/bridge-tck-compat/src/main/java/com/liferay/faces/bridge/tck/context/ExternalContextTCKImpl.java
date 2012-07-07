@@ -20,6 +20,7 @@ import javax.faces.context.ExternalContextWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.context.flash.FlashHttpServletResponse;
 
 
 /**
@@ -59,7 +60,7 @@ public class ExternalContextTCKImpl extends ExternalContextWrapper {
 
 		// TCK TestPage202: implementsBridgeWriteBehindResponseTest
 		// TCK TestPage204: JSP_ELTest
-		if ((expectingPortletResponse) && (response instanceof HttpServletResponse)) {
+		if ((expectingPortletResponse) && (response instanceof HttpServletResponse) && !(response instanceof FlashHttpServletResponse)) {
 
 			// Note that the TCK "implementsBridgeWriteBehindResponseTest" and "JSP_ELTest" are designed such that they
 			// expect the bridge to implement the JSP {@link Bridge#AFTER_VIEW_CONTENT} feature (ability to interleave
