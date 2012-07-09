@@ -17,7 +17,6 @@ import java.lang.reflect.Constructor;
 
 import javax.faces.FacesException;
 import javax.portlet.MimeResponse;
-import javax.portlet.PortletResponse;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceResponse;
 import javax.portlet.faces.Bridge;
@@ -145,12 +144,26 @@ public class BridgeWriteBehindResponseFactoryImpl extends BridgeWriteBehindRespo
 
 					try {
 
-						// Third, try to call a constructor that takes a PortleResponse as a single parameter, which is
-						// the required signature for any class that extends PortletResponseWrapper.
-						@SuppressWarnings("unchecked")
-						Constructor<BridgeWriteBehindResponse> constructor = (Constructor<BridgeWriteBehindResponse>)
-							bridgeWriteBehindResponseClass.getConstructor(PortletResponse.class);
-						bridgeWriteBehindResponse = constructor.newInstance((PortletResponse) mimeResponse);
+						if (portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE) {
+
+							// Third, try to call a constructor that takes a RenderResponse as a single parameter, which
+							// is the required signature for any class that extends RenderResponseWrapper.
+							@SuppressWarnings("unchecked")
+							Constructor<BridgeWriteBehindResponse> constructor =
+								(Constructor<BridgeWriteBehindResponse>) bridgeWriteBehindResponseClass.getConstructor(
+									RenderResponse.class);
+							bridgeWriteBehindResponse = constructor.newInstance((RenderResponse) mimeResponse);
+						}
+						else {
+
+							// Third, try to call a constructor that takes a ResourceResponse as a single parameter,
+							// which is the required signature for any class that extends RenderResponseWrapper.
+							@SuppressWarnings("unchecked")
+							Constructor<BridgeWriteBehindResponse> constructor =
+								(Constructor<BridgeWriteBehindResponse>) bridgeWriteBehindResponseClass.getConstructor(
+									ResourceResponse.class);
+							bridgeWriteBehindResponse = constructor.newInstance((ResourceResponse) mimeResponse);
+						}
 					}
 					catch (NoSuchMethodException nsme3) {
 
