@@ -203,7 +203,8 @@ public class TestSetupAction extends SimpleAction {
 
 	protected Layout getPortalPageLayout(long userId, long groupId, String portalPageName) throws Exception {
 		Layout portalPageLayout = null;
-		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(groupId, false);
+		boolean privateLayout = true;
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout);
 
 		for (Layout layout : layouts) {
 
@@ -213,7 +214,6 @@ public class TestSetupAction extends SimpleAction {
 		}
 
 		if (portalPageLayout == null) {
-			boolean privateLayout = false;
 			long parentLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 			String type = LayoutConstants.TYPE_PORTLET;
 			boolean hidden = false;

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<!-- NOTE: This file is only necessary in order to prevent maven-pluto-plugin errors when activating the pluto profile -->
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
+</portlet-app>

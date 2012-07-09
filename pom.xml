@@ -82,6 +82,8 @@
 		<myfaces.version>2.1.6</myfaces.version>
 		<primefaces3.version>3.3</primefaces3.version>
 		<richfaces4.version>4.2.0.Final</richfaces4.version>
+		<selenium.version>1.0.1</selenium.version>
+		<tck.version>1.0.0</tck.version>
 	</properties>
 
 	<build>
@@ -142,6 +144,16 @@
 					</configuration>
 				</plugin>
 				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.4.3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-report-plugin</artifactId>
+					<version>2.4.3</version>
+				</plugin>
+				<plugin>
 					<groupId>org.apache.maven.scm</groupId>
 					<artifactId>maven-scm-providers-git</artifactId>
 					<!-- http://jira.codehaus.org/browse/SCM-444 -->
@@ -169,6 +181,11 @@
 						<doUpdate>false</doUpdate>
 						<timestampFormat>MMM d, yyyy</timestampFormat>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>selenium-maven-plugin</artifactId>
+					<version>2.3</version>
 				</plugin>
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
@@ -476,7 +493,7 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.4</version>
+				<version>4.7</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
@@ -488,6 +505,12 @@
 				<groupId>org.apache.myfaces.core</groupId>
 				<artifactId>myfaces-impl</artifactId>
 				<version>${myfaces.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.myfaces.portlet-bridge</groupId>
+				<artifactId>portlet-bridge-tck-jsr329</artifactId>
+				<version>${tck.version}</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.icefaces</groupId>
@@ -540,6 +563,12 @@
 				<groupId>org.primefaces</groupId>
 				<artifactId>primefaces</artifactId>
 				<version>${primefaces3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.seleniumhq.selenium.client-drivers</groupId>
+				<artifactId>selenium-java-client-driver</artifactId>
+				<version>${selenium.version}</version>
+				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
