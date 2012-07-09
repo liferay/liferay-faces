@@ -16,6 +16,9 @@ package com.liferay.faces.bridge.tck.portlet;
 import javax.portlet.RenderResponse;
 import javax.portlet.filter.RenderResponseWrapper;
 
+import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.bridge.config.ProductMap;
+
 
 /**
  * This class is a wrapper around the {@link RenderResponse} implementation provided by the portlet container. Its
@@ -28,14 +31,25 @@ import javax.portlet.filter.RenderResponseWrapper;
  */
 public class RenderResponseTCKImpl extends RenderResponseWrapper {
 
+	// Private Constants
+	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(BridgeConstants.LIFERAY_PORTAL)
+		.isDetected();
+
 	public RenderResponseTCKImpl(RenderResponse response) {
 		super(response);
 	}
 
 	@Override
 	public void setContentType(String contentType) {
-		// TCK TestPage017 (requestProcessingNonFacesTest) does not anticipate this being called. Therefore the
-		// specified contentType value must be ignored in order for the test to pass.
+
+		if (LIFERAY_PORTAL_DETECTED) {
+			// TCK TestPage017 (requestProcessingNonFacesTest) does not anticipate this being called (see class-level
+			// JavaDoc comments). Therefore the specified contentType value must be ignored in order for the test to
+			// pass under when running under Liferay Portal.
+		}
+		else {
+			super.setContentType(contentType);
+		}
 	}
 
 }
