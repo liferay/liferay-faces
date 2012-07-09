@@ -79,9 +79,9 @@
 					<aui:column>
 						<aui:field id="commentsField" label="#{i18n['comments']}">
 							<h:panelGroup id="showHide" layout="block">
-								<a4j:commandLink actionListener="#{applicantBackingBean.toggleComments}" render="commentsField"
+								<a4j:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true" render="commentsField"
 									rendered="#{!applicantBackingBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
-								<a4j:commandLink actionListener="#{applicantBackingBean.toggleComments}" render="commentsField"
+								<a4j:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true" render="commentsField"
 									rendered="#{applicantBackingBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
 							</h:panelGroup>
 							<h:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantBackingBean.commentsRendered}"
