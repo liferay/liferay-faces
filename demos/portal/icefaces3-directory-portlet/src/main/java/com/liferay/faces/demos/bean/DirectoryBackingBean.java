@@ -16,9 +16,12 @@ package com.liferay.faces.demos.bean;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.component.UIData;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ActionListener;
+
+import com.liferay.faces.portal.context.LiferayFacesContext;
 
 
 /**
@@ -31,6 +34,9 @@ public class DirectoryBackingBean {
 	// Injections
 	@ManagedProperty(name = "directoryModelBean", value = "#{directoryModelBean}")
 	private DirectoryModelBean directoryModelBean;
+
+	// Self-Injections
+	private LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 
 	// Private Data Members
 	private SearchActionListener searchActionListener = new SearchActionListener();
@@ -50,6 +56,9 @@ public class DirectoryBackingBean {
 		public void processAction(ActionEvent event) throws AbortProcessingException {
 
 			directoryModelBean.forceListReload();
+			
+			UIData uiData = (UIData) liferayFacesContext.matchComponentInViewRoot("users");
+			uiData.setFirst(0);
 		}
 
 	}
