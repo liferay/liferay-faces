@@ -34,5 +34,5 @@ import com.liferay.faces.bridge.FactoryWrapper;
 public abstract class BridgeRequestScopeFactory implements FactoryWrapper<BridgeRequestScopeFactory> {
 
 	public abstract BridgeRequestScope getBridgeRequestScope(PortletConfig portletConfig, PortletContext portletContext,
-		PortletRequest portletRequest, String idPrefix) throws FacesException;
+		PortletRequest portletRequest) throws FacesException;
 }

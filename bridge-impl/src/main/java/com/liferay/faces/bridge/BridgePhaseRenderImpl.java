@@ -110,7 +110,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 
 		// If required, cause the BridgeRequestScope to go out-of-scope.
 		if ((bridgeContext != null) && !bridgeContext.isBridgeRequestScopePreserved()) {
-			bridgeContext.getBridgeRequestScopeManager().removeBridgeRequestScope(bridgeRequestScope, portletContext);
+			bridgeRequestScopeCache.remove(bridgeRequestScope);
 		}
 
 		super.cleanup();
@@ -135,10 +135,10 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 		// have been saved during the ACTION_PHASE of the portlet lifecycle. Section 5.4.1 requires that the
 		// BridgeRequestScope must not be restored if there is a change in portlet modes detected.
 		boolean facesLifecycleExecuted = bridgeRequestScope.isFacesLifecycleExecuted();
-		bridgeRequestScope.restore(facesContext);
+		bridgeRequestScope.restoreState(facesContext);
 
 		if (bridgeRequestScope.isPortletModeChanged()) {
-			bridgeContext.getBridgeRequestScopeManager().removeBridgeRequestScope(bridgeRequestScope, portletContext);
+			bridgeRequestScopeCache.remove(bridgeRequestScope);
 		}
 
 		// NOTE: PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
@@ -250,8 +250,8 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 			}
 		}
 
-		// Otherwise, if the PortletMode has changed, and a navigation-rule hasn't yet fired (which could have happened in the
-		// EVENT_PHASE), then switch to the appropriate PortletMode and navigate to the current viewId in the
+		// Otherwise, if the PortletMode has changed, and a navigation-rule hasn't yet fired (which could have happened
+		// in the EVENT_PHASE), then switch to the appropriate PortletMode and navigate to the current viewId in the
 		// UIViewRoot.
 		if (bridgeRequestScope.isPortletModeChanged() && !bridgeRequestScope.isNavigationOccurred()) {
 			BridgeNavigationHandler bridgeNavigationHandler = getBridgeNavigationHandler(facesContext);

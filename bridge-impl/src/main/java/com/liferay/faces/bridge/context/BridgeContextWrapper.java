@@ -34,7 +34,6 @@ import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
-import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 
 
 /**
@@ -89,11 +88,6 @@ public abstract class BridgeContextWrapper extends BridgeContext implements Face
 	@Override
 	public BridgeRequestScope getBridgeRequestScope() {
 		return getWrapped().getBridgeRequestScope();
-	}
-
-	@Override
-	public BridgeRequestScopeManager getBridgeRequestScopeManager() {
-		return getWrapped().getBridgeRequestScopeManager();
 	}
 
 	@Override

@@ -75,7 +75,7 @@ public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
 			if (bridgeEventHandler != null) {
 
 				// Restore the BridgeRequestScope that may have started during the ACTION_PHASE.
-				bridgeRequestScope.restore(facesContext);
+				bridgeRequestScope.restoreState(facesContext);
 
 				// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-202
 				bridgeRequestScope.setPortletMode(eventRequest.getPortletMode());
@@ -111,7 +111,8 @@ public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
 
 				// Save the faces view root and any messages in the faces context so that they can be restored during
 				// the RENDER_PHASE of the portlet lifecycle.
-				bridgeRequestScope.preserve(facesContext);
+				bridgeRequestScope.saveState(facesContext);
+				maintainBridgeRequestScope(eventRequest, eventResponse);
 
 				// PROPOSED-FOR-JSR344-API
 				// http://java.net/jira/browse/JAVASERVERFACES_SPEC_PUBLIC-1070

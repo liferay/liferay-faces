@@ -65,8 +65,6 @@ import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
-import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
-import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
 
 
 /**
@@ -88,10 +86,8 @@ public class BridgeContextImpl extends BridgeContext {
 	// Private Data Members
 	private Map<String, Object> attributeMap = new HashMap<String, Object>();
 	private BridgeConfig bridgeConfig;
-	private Boolean bridgeRequestScopeAjaxEnabled;
 	private Boolean bridgeRequestScopePreserved;
 	private BridgeRequestScope bridgeRequestScope;
-	private BridgeRequestScopeManager bridgeRequestScopeManager;
 	private BridgeURLFactory bridgeURLFactory;
 	private String defaultRenderKitId;
 	private Map<String, String> defaultViewIdMap;
@@ -122,20 +118,16 @@ public class BridgeContextImpl extends BridgeContext {
 	private String savedViewState;
 	private String viewIdAndQueryString;
 
-	public BridgeContextImpl(BridgeConfig bridgeConfig, PortletConfig portletConfig, PortletContext portletContext,
-		PortletRequest portletRequest, PortletResponse portletResponse, Bridge.PortletPhase portletPhase) {
+	public BridgeContextImpl(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
+		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,
+		PortletResponse portletResponse, Bridge.PortletPhase portletPhase) {
 		this.bridgeConfig = bridgeConfig;
+		this.bridgeRequestScope = bridgeRequestScope;
 		this.portletConfig = portletConfig;
 		this.portletContext = portletContext;
 		this.portletRequest = portletRequest;
 		this.portletResponse = portletResponse;
 		this.portletPhase = portletPhase;
-
-		// Get the RequestScopeManager from the factory.
-		BridgeRequestScopeManagerFactory bridgeRequestScopeManagerFactory = (BridgeRequestScopeManagerFactory)
-			BridgeFactoryFinder.getFactory(BridgeRequestScopeManagerFactory.class);
-
-		this.bridgeRequestScopeManager = bridgeRequestScopeManagerFactory.getBridgeRequestScopeManager();
 
 		// Get the BridgeURLFactory instance.
 		this.bridgeURLFactory = (BridgeURLFactory) BridgeFactoryFinder.getFactory(BridgeURLFactory.class);
@@ -536,7 +528,6 @@ public class BridgeContextImpl extends BridgeContext {
 		this.bridgeConfig = null;
 		this.bridgeRequestScopePreserved = null;
 		this.bridgeRequestScope = null;
-		this.bridgeRequestScopeManager = null;
 		this.bridgeURLFactory = null;
 		this.defaultRenderKitId = null;
 		this.defaultViewIdMap = null;
@@ -568,16 +559,6 @@ public class BridgeContextImpl extends BridgeContext {
 		setCurrentInstance(null);
 	}
 
-	/**
-	 * This method ensures that {@link BridgeContextWrapper} classes participate in getting the parameter values. For
-	 * example, when running in the TCK, the {@link BridgeContextFactoryTCKImpl} class will wrap the default {@link
-	 * BridgeContextImpl} instance with a {@link BridgeContextTCKImpl} wrapper that has an overload of {@link
-	 * #getInitParameter(String)}.
-	 */
-	protected String _getInitParameter(String name) {
-		return BridgeContext.getCurrentInstance().getInitParameter(name);
-	}
-
 	@Override
 	public Map<String, Object> getAttributes() {
 		return attributeMap;
@@ -590,27 +571,7 @@ public class BridgeContextImpl extends BridgeContext {
 
 	@Override
 	public BridgeRequestScope getBridgeRequestScope() {
-
-		if (bridgeRequestScope == null) {
-
-			boolean createRequestScope = true;
-
-			if (portletPhase == Bridge.PortletPhase.RESOURCE_PHASE) {
-				createRequestScope = isBridgeRequestScopeAjaxEnabled();
-			}
-
-			if (createRequestScope) {
-				bridgeRequestScope = bridgeRequestScopeManager.getBridgeRequestScope(portletConfig, portletContext,
-						portletRequest, portletResponse);
-			}
-		}
-
 		return bridgeRequestScope;
-	}
-
-	@Override
-	public BridgeRequestScopeManager getBridgeRequestScopeManager() {
-		return bridgeRequestScopeManager;
 	}
 
 	public void setBridgeRequestScopePreserved(boolean bridgeRequestScopePreserved) {
@@ -625,28 +586,18 @@ public class BridgeContextImpl extends BridgeContext {
 			// NOTE: The defaultValue of false deviates from the proposed Spec which has a default of true.
 			// See: http://issues.liferay.com/browse/FACES-219
 			boolean defaultValue = false;
-			String initParam = _getInitParameter(BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED1);
+			String initParam = getInitParameter(BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED1);
 
 			if (initParam == null) {
 
 				// Backwards compatibility
-				initParam = _getInitParameter(BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED2);
+				initParam = getInitParameter(BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED2);
 			}
 
 			bridgeRequestScopePreserved = BooleanHelper.toBoolean(initParam, defaultValue);
 		}
 
 		return bridgeRequestScopePreserved;
-	}
-
-	protected boolean isBridgeRequestScopeAjaxEnabled() {
-
-		if (bridgeRequestScopeAjaxEnabled == null) {
-			bridgeRequestScopeAjaxEnabled = BooleanHelper.toBoolean(_getInitParameter(
-						BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_AJAX_ENABLED), false);
-		}
-
-		return bridgeRequestScopeAjaxEnabled;
 	}
 
 	@Override
@@ -1175,13 +1126,13 @@ public class BridgeContextImpl extends BridgeContext {
 		if (responseNamespace == null) {
 
 			// If the namespace should be optimized (minimized), then perform the optimization.
-			String optimizePortletNamespaceInitParam = _getInitParameter(
+			String optimizePortletNamespaceInitParam = getInitParameter(
 					BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE1);
 
 			if (optimizePortletNamespaceInitParam == null) {
 
 				// Backward compatibility
-				optimizePortletNamespaceInitParam = _getInitParameter(
+				optimizePortletNamespaceInitParam = getInitParameter(
 						BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE2);
 			}
 

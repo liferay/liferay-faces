@@ -94,8 +94,8 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 	}
 
 	public BridgeRequestScopeLiferayImpl(PortletConfig portletConfig, PortletContext portletContext,
-		PortletRequest portletRequest, String idPrefix) {
-		super(portletConfig, portletContext, portletRequest, idPrefix);
+		PortletRequest portletRequest) {
+		super(portletConfig, portletContext, portletRequest);
 	}
 
 	/**
@@ -105,9 +105,9 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void restore(FacesContext facesContext) {
+	public void restoreState(FacesContext facesContext) {
 
-		super.restore(facesContext);
+		super.restoreState(facesContext);
 
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, Object> currentRequestAttributes = externalContext.getRequestMap();

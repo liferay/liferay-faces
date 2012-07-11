@@ -26,13 +26,6 @@ import com.liferay.faces.bridge.context.url.liferay.BridgeResourceURLLiferayImpl
  */
 public class BridgeURLFactoryImpl extends BridgeURLFactory {
 
-	// Private Data Members
-	private BridgeURLFactory wrappedBridgeURLFactory;
-
-	public BridgeURLFactoryImpl(BridgeURLFactory bridgeURLFactory) {
-		this.wrappedBridgeURLFactory = bridgeURLFactory;
-	}
-
 	@Override
 	public BridgeActionURL getBridgeActionURL(String url, String currentFacesViewId, BridgeContext bridgeContext) {
 		return new BridgeActionURLImpl(url, currentFacesViewId, bridgeContext);
@@ -56,7 +49,9 @@ public class BridgeURLFactoryImpl extends BridgeURLFactory {
 	}
 
 	public BridgeURLFactory getWrapped() {
-		return wrappedBridgeURLFactory;
+
+		// Since this is the factory instance provided by the bridge, it will never wrap another factory.
+		return null;
 	}
 
 }

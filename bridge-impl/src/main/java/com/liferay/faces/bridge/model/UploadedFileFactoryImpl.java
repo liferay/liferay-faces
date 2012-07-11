@@ -27,17 +27,10 @@ import org.apache.commons.fileupload.FileUploadException;
  */
 public class UploadedFileFactoryImpl extends UploadedFileFactory {
 
-	// Private Data Members
-	UploadedFileFactory wrappedUploadedFileFactory;
-
 	@Override
 	public UploadedFile getUploadedFile(Exception e) {
 
 		UploadedFile uploadedFile = null;
-
-		if (wrappedUploadedFileFactory != null) {
-			uploadedFile = wrappedUploadedFileFactory.getUploadedFile(e);
-		}
 
 		if (uploadedFile == null) {
 
@@ -84,11 +77,6 @@ public class UploadedFileFactoryImpl extends UploadedFileFactory {
 
 		UploadedFile uploadedFile = null;
 
-		if (wrappedUploadedFileFactory != null) {
-			uploadedFile = wrappedUploadedFileFactory.getUploadedFile(absolutePath, attributes, charSet, contentType,
-					headers, id, message, name, size, status);
-		}
-
 		if (uploadedFile == null) {
 			uploadedFile = new UploadedFileImpl(absolutePath, attributes, charSet, contentType, headers, id, message,
 					name, size, status);
@@ -98,7 +86,9 @@ public class UploadedFileFactoryImpl extends UploadedFileFactory {
 	}
 
 	public UploadedFileFactory getWrapped() {
-		return wrappedUploadedFileFactory;
+
+		// Since this is the factory instance provided by the bridge, it will never wrap another factory.
+		return null;
 	}
 
 }

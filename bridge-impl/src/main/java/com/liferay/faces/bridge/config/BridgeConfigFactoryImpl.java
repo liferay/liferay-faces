@@ -24,14 +24,8 @@ public class BridgeConfigFactoryImpl extends BridgeConfigFactory {
 
 	// Private Data Members
 	private BridgeConfig bridgeConfig;
-	private BridgeConfigFactory wrappedFactory;
 
 	public BridgeConfigFactoryImpl(PortletConfig portletConfig) {
-		bridgeConfig = new BridgeConfigImpl(portletConfig);
-	}
-
-	public BridgeConfigFactoryImpl(BridgeConfigFactory bridgeConfigFactory, PortletConfig portletConfig) {
-		wrappedFactory = bridgeConfigFactory;
 		bridgeConfig = new BridgeConfigImpl(portletConfig);
 	}
 
@@ -41,7 +35,9 @@ public class BridgeConfigFactoryImpl extends BridgeConfigFactory {
 	}
 
 	public BridgeConfigFactory getWrapped() {
-		return wrappedFactory;
+
+		// Since this is the factory instance provided by the bridge, it will never wrap another factory.
+		return null;
 	}
 
 }

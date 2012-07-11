@@ -45,7 +45,6 @@ import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
-import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 
 
 /**
@@ -115,11 +114,6 @@ public class BridgeContextMockImpl extends BridgeContext {
 
 	@Override
 	public BridgeRequestScope getBridgeRequestScope() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public BridgeRequestScopeManager getBridgeRequestScopeManager() {
 		throw new UnsupportedOperationException();
 	}
 

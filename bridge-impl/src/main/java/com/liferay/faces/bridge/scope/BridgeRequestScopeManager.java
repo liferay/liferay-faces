@@ -15,9 +15,6 @@ package com.liferay.faces.bridge.scope;
 
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletContext;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionListener;
 
@@ -30,23 +27,12 @@ import javax.servlet.http.HttpSessionListener;
 public interface BridgeRequestScopeManager {
 
 	/**
-	 * Removes the specified {@link BridgeRequestScope} associated with the specified {@link FacesContext} from the
-	 * underlying cache. This method should be called if an exception occurs that somehow invalidates the
-	 * BridgeRequestScope.
-	 *
-	 * @param  bridgeRequestScope  The {@link BridgeRequestScope} that is to be removed.
-	 * @param  portletContext      The current {@link PortletContext}.
-	 */
-	public void removeBridgeRequestScope(BridgeRequestScope bridgeRequestScope, PortletContext portletContext);
-
-	/**
 	 * Removes all {@link BridgeRequestScope} instances that are associated with the specified {@link FacesContext}.
 	 * This should be called if the portlet container unloads an portlet individually.
 	 *
-	 * @param  portletConfig   The current {@link PortletConfig}.
-	 * @param  portletContext  The current {@link PortletContext}.
+	 * @param  portletConfig  The current {@link PortletConfig}.
 	 */
-	public void removeBridgeRequestScopesByPortlet(PortletConfig portletConfig, PortletContext portletContext);
+	public void removeBridgeRequestScopesByPortlet(PortletConfig portletConfig);
 
 	/**
 	 * Removes all of the {@link BridgeRequestScope} instances from the underlying cache that are associated with the
@@ -56,16 +42,4 @@ public interface BridgeRequestScopeManager {
 	 * @param  httpSession  The current {@link HttpSession}.
 	 */
 	void removeBridgeRequestScopesBySession(HttpSession httpSession);
-
-	/**
-	 * Either returns an existing {@link BridgeRequestScope} associated with the specified parameters from the
-	 * underlying cache or returns a new one.
-	 *
-	 * @param  portletConfig    The current {@link PortletConfig}.
-	 * @param  portletContext   The current {@link PortletContext}.
-	 * @param  portletRequest   The current {@link PortletRequest}.
-	 * @param  portletResponse  The current {@link PortletResponse}.
-	 */
-	BridgeRequestScope getBridgeRequestScope(PortletConfig portletConfig, PortletContext portletContext,
-		PortletRequest portletRequest, PortletResponse portletResponse);
 }

@@ -20,6 +20,7 @@ import javax.portlet.PortletResponse;
 import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
+import com.liferay.faces.bridge.scope.BridgeRequestScope;
 
 
 /**
@@ -27,38 +28,21 @@ import com.liferay.faces.bridge.config.BridgeConfig;
  */
 public class BridgeContextFactoryImpl extends BridgeContextFactory {
 
-	// Private Data Members
-	private BridgeContextFactory wrappedFactory;
-
-	public BridgeContextFactoryImpl() {
-	}
-
-	public BridgeContextFactoryImpl(BridgeContextFactory bridgeRequestScopeFactory) {
-		wrappedFactory = bridgeRequestScopeFactory;
-	}
-
 	@Override
-	public BridgeContext getBridgeContext(BridgeConfig bridgeConfig, PortletConfig portletConfig,
-		PortletContext portletContext, PortletRequest portletRequest, PortletResponse portletResponse,
-		Bridge.PortletPhase portletPhase) {
+	public BridgeContext getBridgeContext(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
+		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,
+		PortletResponse portletResponse, Bridge.PortletPhase portletPhase) {
 
-		BridgeContext bridgeContext = null;
-
-		if (wrappedFactory != null) {
-			bridgeContext = wrappedFactory.getBridgeContext(bridgeConfig, portletConfig, portletContext, portletRequest,
-					portletResponse, portletPhase);
-		}
-
-		if (bridgeContext == null) {
-			bridgeContext = new BridgeContextImpl(bridgeConfig, portletConfig, portletContext, portletRequest,
-					portletResponse, portletPhase);
-		}
+		BridgeContext bridgeContext = new BridgeContextImpl(bridgeConfig, bridgeRequestScope, portletConfig,
+				portletContext, portletRequest, portletResponse, portletPhase);
 
 		return bridgeContext;
 	}
 
 	public BridgeContextFactory getWrapped() {
-		return wrappedFactory;
+
+		// Since this is the factory instance provided by the bridge, it will never wrap another factory.
+		return null;
 	}
 
 }

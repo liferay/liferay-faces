@@ -102,18 +102,21 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 	private Map<String, Object> managedBeanMap;
 	private boolean navigationOccurred;
 	private PortletMode portletMode;
+	private String portletName;
 	private boolean portletModeChanged;
 	private Set<String> preExistingAttributeNames;
 	private boolean redirect;
 
 	public BridgeRequestScopeImpl(PortletConfig portletConfig, PortletContext portletContext,
-		PortletRequest portletRequest, String idPrefix) {
+		PortletRequest portletRequest) {
 
 		this.attributeMap = new HashMap<String, Object>();
+		portletName = portletConfig.getPortletName();
 
-		long timeInMillis = Calendar.getInstance().getTimeInMillis();
-		this.idPrefix = idPrefix;
-		this.idSuffix = Long.toString(timeInMillis);
+		PortletSession portletSession = portletRequest.getPortletSession();
+		String sessionId = portletSession.getId();
+		this.idPrefix = portletName + ":::" + sessionId + ":::";
+		this.idSuffix = Long.toString(Calendar.getInstance().getTimeInMillis());
 
 		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
 				BridgeConfigFactory.class);
@@ -126,7 +129,7 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 		// Get the list of excluded BridgeRequestScope attributes from the WEB-INF/portlet.xml descriptor.
 		@SuppressWarnings("unchecked")
 		List<String> portletContextExcludedAttributeNames = (List<String>) portletContext.getAttribute(
-				Bridge.BRIDGE_PACKAGE_PREFIX + portletConfig.getPortletName() + BridgeConstants.CHAR_PERIOD +
+				Bridge.BRIDGE_PACKAGE_PREFIX + portletName + BridgeConstants.CHAR_PERIOD +
 				Bridge.EXCLUDED_REQUEST_ATTRIBUTES);
 
 		// Combine the two lists into a single list of excluded BridgeRequestScope attributes.
@@ -159,12 +162,13 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 	 *
 	 * @param  facesContext  The current faces context.
 	 */
-	public void preserve(FacesContext facesContext) {
+	public void saveState(FacesContext facesContext) {
 
-		logger.debug("preserve(facesContext)");
+		logger.debug("saveState(facesContext)");
 
-		// Get the ExternalContext.
+		// Get the ExternalContext and PortletResponse.
 		ExternalContext externalContext = facesContext.getExternalContext();
+		PortletResponse portletResponse = (PortletResponse) facesContext.getExternalContext().getResponse();
 
 		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
 				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
@@ -174,7 +178,6 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 
 			// If the PortletMode hasn't changed, then preserve the "javax.faces.ViewState" request parameter value.
 			if (!isPortletModeChanged()) {
-				PortletResponse portletResponse = (PortletResponse) facesContext.getExternalContext().getResponse();
 
 				if (portletResponse instanceof ActionResponse) {
 					String viewState = facesContext.getExternalContext().getRequestParameterMap().get(
@@ -316,7 +319,9 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 	}
 
 	@SuppressWarnings("unchecked")
-	public void restore(FacesContext facesContext) {
+	public void restoreState(FacesContext facesContext) {
+
+		logger.debug("restoreState(facesContext)");
 
 		boolean restoreNonExcludedRequestAttributes = ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) ||
 				(beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
