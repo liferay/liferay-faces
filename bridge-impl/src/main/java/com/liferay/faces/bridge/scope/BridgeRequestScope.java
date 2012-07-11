@@ -45,16 +45,16 @@ public interface BridgeRequestScope extends ConcurrentMap<String, Object> {
 	 *
 	 * @param  facesContext  The current {@link FacesContext}.
 	 */
-	void preserve(FacesContext facesContext);
+	void saveState(FacesContext facesContext);
 
 	/**
 	 * This method restores the scoped data that was preserved by the call to {@link
-	 * #preserve(FacesContext)} method as required by section 5.1.2 of the Bridge Spec. This method is
+	 * #saveState(FacesContext)} method as required by section 5.1.2 of the Bridge Spec. This method is
 	 * designed to be called during the EVENT_PHASE and RENDER_PHASE of the portlet lifecycle.
 	 *
 	 * @param  facesContext  The current {@link FacesContext}.
 	 */
-	void restore(FacesContext facesContext);
+	void restoreState(FacesContext facesContext);
 
 	/**
 	 * Returns the flag indicating whether or not the Faces Lifecycle was executed.
@@ -125,7 +125,7 @@ public interface BridgeRequestScope extends ConcurrentMap<String, Object> {
 
 	/**
 	 * Sets a flag indicating whether or not the PortletMode has changed. If <code>true</code> then request attributes
-	 * will not be preserved when the {@link #preserve(FacesContext)} method is called.
+	 * will not be preserved when the {@link #saveState(FacesContext)} method is called.
 	 */
 	void setPortletModeChanged(boolean portletModeChanged);
 

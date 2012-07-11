@@ -21,20 +21,10 @@ import javax.faces.FacesException;
  */
 public class BridgeRequestScopeManagerFactoryImpl extends BridgeRequestScopeManagerFactory {
 
-	private BridgeRequestScopeManagerFactory wrappedFactory;
-
-	public BridgeRequestScopeManagerFactoryImpl(BridgeRequestScopeManagerFactory bridgeRequestScopeManagerFactory) {
-		this.wrappedFactory = bridgeRequestScopeManagerFactory;
-	}
-
 	@Override
 	public BridgeRequestScopeManager getBridgeRequestScopeManager() throws FacesException {
 
 		BridgeRequestScopeManager bridgeRequestScopeManager = null;
-
-		if (wrappedFactory != null) {
-			bridgeRequestScopeManager = wrappedFactory.getBridgeRequestScopeManager();
-		}
 
 		if (bridgeRequestScopeManager == null) {
 			bridgeRequestScopeManager = new BridgeRequestScopeManagerImpl();
@@ -44,7 +34,9 @@ public class BridgeRequestScopeManagerFactoryImpl extends BridgeRequestScopeMana
 	}
 
 	public BridgeRequestScopeManagerFactory getWrapped() {
-		return wrappedFactory;
+
+		// Since this is the factory instance provided by the bridge, it will never wrap another factory.
+		return null;
 	}
 
 }

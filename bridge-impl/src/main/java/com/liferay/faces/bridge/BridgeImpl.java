@@ -33,6 +33,9 @@ import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 import javax.portlet.faces.BridgeUninitializedException;
 
+import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
+import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
+
 
 /**
  * @author  Neil Griffin
@@ -46,6 +49,12 @@ public class BridgeImpl implements Bridge {
 
 	public void destroy() {
 		initialized = false;
+
+		BridgeRequestScopeManagerFactory bridgeRequestScopeManagerFactory = (BridgeRequestScopeManagerFactory)
+			BridgeFactoryFinder.getFactory(BridgeRequestScopeManagerFactory.class);
+		BridgeRequestScopeManager bridgeRequestScopeManager =
+			bridgeRequestScopeManagerFactory.getBridgeRequestScopeManager();
+		bridgeRequestScopeManager.removeBridgeRequestScopesByPortlet(portletConfig);
 	}
 
 	public void doFacesRequest(ActionRequest actionRequest, ActionResponse actionResponse)
@@ -83,7 +92,7 @@ public class BridgeImpl implements Bridge {
 		throws BridgeDefaultViewNotSpecifiedException, BridgeUninitializedException, BridgeException {
 
 		checkNull(renderRequest, renderResponse);
-		
+
 		if (initialized) {
 			BridgePhase bridgePhase = bridgePhaseFactory.getBridgeRenderPhase(renderRequest, renderResponse,
 					portletConfig);

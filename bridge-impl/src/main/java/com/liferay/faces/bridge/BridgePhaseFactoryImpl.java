@@ -30,16 +30,6 @@ import javax.portlet.ResourceResponse;
  */
 public class BridgePhaseFactoryImpl extends BridgePhaseFactory {
 
-	// Private Data Members
-	private BridgePhaseFactory wrappedFactory;
-
-	public BridgePhaseFactoryImpl() {
-	}
-
-	public BridgePhaseFactoryImpl(BridgePhaseFactory bridgeFactory) {
-		this.wrappedFactory = bridgeFactory;
-	}
-
 	@Override
 	public BridgePhase getBridgeActionPhase(ActionRequest actionRequest, ActionResponse actionResponse,
 		PortletConfig portletConfig) throws FacesException {
@@ -66,7 +56,9 @@ public class BridgePhaseFactoryImpl extends BridgePhaseFactory {
 	}
 
 	public BridgePhaseFactory getWrapped() {
-		return wrappedFactory;
+
+		// Since this is the factory instance provided by the bridge, it will never wrap another factory.
+		return null;
 	}
 
 }

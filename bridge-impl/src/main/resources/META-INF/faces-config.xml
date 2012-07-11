@@ -82,6 +82,7 @@
 			<bridge:bridge-flash-factory>com.liferay.faces.bridge.context.flash.BridgeFlashFactoryImpl</bridge:bridge-flash-factory>
 			<bridge:bridge-phase-factory>com.liferay.faces.bridge.BridgePhaseFactoryImpl</bridge:bridge-phase-factory>
 			<bridge:bridge-request-scope-factory>com.liferay.faces.bridge.scope.BridgeRequestScopeFactoryImpl</bridge:bridge-request-scope-factory>
+			<bridge:bridge-request-scope-cache-factory>com.liferay.faces.bridge.scope.BridgeRequestScopeCacheFactoryImpl</bridge:bridge-request-scope-cache-factory>
 			<bridge:bridge-request-scope-manager-factory>com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactoryImpl</bridge:bridge-request-scope-manager-factory>
 			<bridge:bridge-write-behind-response-factory>com.liferay.faces.bridge.application.view.BridgeWriteBehindResponseFactoryImpl</bridge:bridge-write-behind-response-factory>
 			<bridge:bridge-url-factory>com.liferay.faces.bridge.context.url.BridgeURLFactoryImpl</bridge:bridge-url-factory>

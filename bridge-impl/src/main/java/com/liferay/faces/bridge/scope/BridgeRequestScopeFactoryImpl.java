@@ -30,43 +30,21 @@ public class BridgeRequestScopeFactoryImpl extends BridgeRequestScopeFactory {
 	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(BridgeConstants.LIFERAY_PORTAL)
 		.isDetected();
 
-	// Private Data Members
-	private BridgeRequestScopeFactory wrappedFactory;
-
-	public BridgeRequestScopeFactoryImpl() {
-	}
-
-	public BridgeRequestScopeFactoryImpl(BridgeRequestScopeFactory bridgeRequestScopeFactory) {
-		wrappedFactory = bridgeRequestScopeFactory;
-	}
-
 	@Override
 	public BridgeRequestScope getBridgeRequestScope(PortletConfig portletConfig, PortletContext portletContext,
-		PortletRequest portletRequest, String idPrefix) {
+		PortletRequest portletRequest) {
 
-		BridgeRequestScope bridgeRequestScope = null;
-
-		if (wrappedFactory != null) {
-			bridgeRequestScope = wrappedFactory.getBridgeRequestScope(portletConfig, portletContext, portletRequest,
-					idPrefix);
+		if (LIFERAY_PORTAL_DETECTED) {
+			return new BridgeRequestScopeLiferayImpl(portletConfig, portletContext, portletRequest);
 		}
-
-		if (bridgeRequestScope == null) {
-
-			if (LIFERAY_PORTAL_DETECTED) {
-				bridgeRequestScope = new BridgeRequestScopeLiferayImpl(portletConfig, portletContext, portletRequest,
-						idPrefix);
-			}
-			else {
-				bridgeRequestScope = new BridgeRequestScopeImpl(portletConfig, portletContext, portletRequest,
-						idPrefix);
-			}
+		else {
+			return new BridgeRequestScopeImpl(portletConfig, portletContext, portletRequest);
 		}
-
-		return bridgeRequestScope;
 	}
 
 	public BridgeRequestScopeFactory getWrapped() {
-		return wrappedFactory;
+
+		// Since this is the factory instance provided by the bridge, it will never wrap another factory.
+		return null;
 	}
 }

@@ -37,7 +37,6 @@ import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
-import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 
 
 /**
@@ -141,11 +140,6 @@ public abstract class BridgeContext {
 	 * Convenience method that returns the {@link BridgeRequestScope} for this context.
 	 */
 	public abstract BridgeRequestScope getBridgeRequestScope();
-
-	/**
-	 * Convenience method that returns the {@link BridgeRequestScopeManager} for this context.
-	 */
-	public abstract BridgeRequestScopeManager getBridgeRequestScopeManager();
 
 	/**
 	 * Returns the flag indicating whether or not the current {@link BridgeRequestScope} is preserved at the end of the
