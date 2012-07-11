@@ -40,13 +40,8 @@ public class BridgeWriteBehindResponseFactoryImpl extends BridgeWriteBehindRespo
 	private static final Logger logger = LoggerFactory.getLogger(BridgeWriteBehindResponseFactoryImpl.class);
 
 	// Private Data Members
-	private BridgeWriteBehindResponseFactory wrappedFactory;
 	private Class<? extends BridgeWriteBehindResponse> bridgeWriteBehindRenderResponseClass;
 	private Class<? extends BridgeWriteBehindResponse> bridgeWriteBehindResourceResponseClass;
-
-	public BridgeWriteBehindResponseFactoryImpl(BridgeWriteBehindResponseFactory bridgeWriteBehindFactory) {
-		this.wrappedFactory = bridgeWriteBehindFactory;
-	}
 
 	@SuppressWarnings("unchecked")
 	protected Class<? extends BridgeWriteBehindResponse> loadClass(String className,
@@ -183,6 +178,8 @@ public class BridgeWriteBehindResponseFactoryImpl extends BridgeWriteBehindRespo
 	}
 
 	public BridgeWriteBehindResponseFactory getWrapped() {
-		return wrappedFactory;
+
+		// Since this is the factory instance provided by the bridge, it will never wrap another factory.
+		return null;
 	}
 }

@@ -24,17 +24,24 @@ import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
+import javax.portlet.ResourceResponse;
+import javax.portlet.StateAwareResponse;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.annotation.PortletNamingContainer;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
+import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgeContextFactory;
+import com.liferay.faces.bridge.helper.BooleanHelper;
 import com.liferay.faces.bridge.helper.PortletModeHelper;
 import com.liferay.faces.bridge.logging.Logger;
 import com.liferay.faces.bridge.logging.LoggerFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
+import com.liferay.faces.bridge.scope.BridgeRequestScopeCache;
+import com.liferay.faces.bridge.scope.BridgeRequestScopeCacheFactory;
+import com.liferay.faces.bridge.scope.BridgeRequestScopeFactory;
 
 
 /**
@@ -45,12 +52,15 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgePhaseBaseImpl.class);
 
+	// Private Constants
+	private static final String PARAM_BRIDGE_REQUEST_SCOPE_ID = "com.liferay.faces.bridge.bridgeRequestScopeId";
+
 	// Protected Data Members
 	protected BridgeConfig bridgeConfig;
-	protected BridgeContext bridgeContext = null;
-	protected BridgeContextFactory bridgeContextFactory;
-	protected BridgeRequestScope bridgeRequestScope = null;
-	protected FacesContext facesContext = null;
+	protected BridgeContext bridgeContext;
+	protected BridgeRequestScope bridgeRequestScope;
+	protected BridgeRequestScopeCache bridgeRequestScopeCache;
+	protected FacesContext facesContext;
 	protected PortletConfig portletConfig;
 	protected PortletContext portletContext;
 	protected String portletName;
@@ -68,7 +78,10 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
 				BridgeConfigFactory.class);
 		this.bridgeConfig = bridgeConfigFactory.getBridgeConfig();
-		this.bridgeContextFactory = (BridgeContextFactory) BridgeFactoryFinder.getFactory(BridgeContextFactory.class);
+
+		BridgeRequestScopeCacheFactory bridgeRequestScopeCacheFactory = (BridgeRequestScopeCacheFactory)
+			BridgeFactoryFinder.getFactory(BridgeRequestScopeCacheFactory.class);
+		this.bridgeRequestScopeCache = bridgeRequestScopeCacheFactory.getBridgeRequestScopeCache(portletContext);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -127,10 +140,14 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		// BridgeRequestAttributeListener.
 		portletRequest.setAttribute(Bridge.PORTLET_LIFECYCLE_PHASE, portletPhase);
 
-		// Get the BridgeContext, BridgeRequestScopeManager, and BridgeRequestScope.
-		bridgeContext = bridgeContextFactory.getBridgeContext(bridgeConfig, portletConfig, portletContext,
-				portletRequest, portletResponse, portletPhase);
-		bridgeRequestScope = bridgeContext.getBridgeRequestScope();
+		// Initialize the bridge request scope.
+		initBridgeRequestScope(portletRequest, portletResponse, portletPhase);
+
+		// Get the bridge context.
+		BridgeContextFactory bridgeContextFactory = (BridgeContextFactory) BridgeFactoryFinder.getFactory(
+				BridgeContextFactory.class);
+		bridgeContext = bridgeContextFactory.getBridgeContext(bridgeConfig, bridgeRequestScope, portletConfig,
+				portletContext, portletRequest, portletResponse, portletPhase);
 
 		// Save the BridgeContext as a request attribute for legacy versions of ICEfaces.
 		portletRequest.setAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE, bridgeContext);
@@ -165,6 +182,115 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		}
 	}
 
+	protected void initBridgeRequestScope(PortletRequest portletRequest, PortletResponse portletResponse,
+		Bridge.PortletPhase portletPhase) {
+
+		boolean bridgeRequestScopeEnabled = true;
+
+		if (portletPhase == Bridge.PortletPhase.RESOURCE_PHASE) {
+			bridgeRequestScopeEnabled = BooleanHelper.toBoolean(getInitParameter(
+						BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_AJAX_ENABLED), false);
+		}
+
+		if (bridgeRequestScopeEnabled) {
+
+			// Determine if there is a bridge request scope "id" saved as a render parameter. Note that in order to
+			// avoid collisions with bridge request scopes for other portlets, the render parameter name has to be
+			// namespaced with the portlet name.
+			String portletName = portletConfig.getPortletName();
+			String bridgeRequestScopeKey = portletName + PARAM_BRIDGE_REQUEST_SCOPE_ID;
+
+			// If there is a render parameter value found for the "id", then return the cached bridge request scope
+			// associated with the "id".
+			String bridgeRequestScopeId = (String) portletRequest.getParameter(bridgeRequestScopeKey);
+
+			if (bridgeRequestScopeId != null) {
+
+				bridgeRequestScope = bridgeRequestScopeCache.get(bridgeRequestScopeId);
+
+				if (bridgeRequestScope != null) {
+					logger.debug("Found render parameter name=[{0}] value=[{1}] and cached bridgeRequestScope=[{2}]",
+						bridgeRequestScopeKey, bridgeRequestScopeId, bridgeRequestScope);
+				}
+				else {
+					logger.error(
+						"Found render parameter name=[{0}] value=[{1}] BUT bridgeRequestScope is NOT in the cache",
+						bridgeRequestScopeKey, bridgeRequestScopeId);
+				}
+			}
+
+			// Otherwise, if there is a portlet session attribute found for the "id", then return the cached bridge
+			// request scope associated with the "id". Note: This occurs after an Ajax-based ResourceRequest so that
+			// non-excluded request attributes can be picked up by a subsequent RenderRequest.
+			if (bridgeRequestScope == null) {
+
+				// TCK TestPage071: nonFacesResourceTest
+				// TCK TestPage073: scopeAfterRedisplayResourcePPRTest
+				PortletSession portletSession = portletRequest.getPortletSession();
+				bridgeRequestScopeId = (String) portletSession.getAttribute(bridgeRequestScopeKey);
+
+				if (bridgeRequestScopeId != null) {
+
+					portletSession.removeAttribute(bridgeRequestScopeKey);
+
+					bridgeRequestScope = bridgeRequestScopeCache.get(bridgeRequestScopeId);
+
+					if (bridgeRequestScope != null) {
+
+						logger.debug(
+							"Found (and removed) session-attribute name=[{0}] value=[{1}] and cached bridgeRequestScope=[{2}]",
+							bridgeRequestScopeKey, bridgeRequestScopeId, bridgeRequestScope);
+
+						if (portletResponse instanceof StateAwareResponse) {
+							logger.debug("Setting former session-attribute as render parameter name=[{0}] value=[{1}]",
+								bridgeRequestScopeKey, bridgeRequestScopeId);
+
+							StateAwareResponse stateAwareResponse = (StateAwareResponse) portletResponse;
+							stateAwareResponse.setRenderParameter(bridgeRequestScopeKey, bridgeRequestScopeId);
+						}
+					}
+					else {
+						logger.error(
+							"Found session attribute name=[{0}] value=[{1}] but bridgeRequestScope is not in the cache",
+							bridgeRequestScopeKey, bridgeRequestScopeId);
+					}
+				}
+			}
+
+			// Otherwise, return a new factory created instance.
+			if (bridgeRequestScope == null) {
+				BridgeRequestScopeFactory bridgeRequestScopeFactory = (BridgeRequestScopeFactory) BridgeFactoryFinder
+					.getFactory(BridgeRequestScopeFactory.class);
+				bridgeRequestScope = bridgeRequestScopeFactory.getBridgeRequestScope(portletConfig, portletContext,
+						portletRequest);
+			}
+		}
+	}
+
+	protected void maintainBridgeRequestScope(PortletRequest portletRequest, PortletResponse portletResponse) {
+
+		String bridgeRequestScopeId = bridgeRequestScope.getId();
+
+		bridgeRequestScopeCache.put(bridgeRequestScopeId, bridgeRequestScope);
+
+		String bridgeRequestScopeKey = portletName + PARAM_BRIDGE_REQUEST_SCOPE_ID;
+
+		if (portletResponse instanceof StateAwareResponse) {
+			logger.debug("Setting render parameter name=[{0}] value=[{1}]", bridgeRequestScopeKey,
+				bridgeRequestScopeId);
+
+			StateAwareResponse stateAwareResponse = (StateAwareResponse) portletResponse;
+			stateAwareResponse.setRenderParameter(bridgeRequestScopeKey, bridgeRequestScopeId);
+		}
+		else if (portletResponse instanceof ResourceResponse) {
+
+			// TCK TestPage071: nonFacesResourceTest
+			// TCK TestPage073: scopeAfterRedisplayResourcePPRTest
+			PortletSession portletSession = portletRequest.getPortletSession(true);
+			portletSession.setAttribute(bridgeRequestScopeKey, bridgeRequestScopeId);
+		}
+	}
+
 	protected FacesContext getFacesContext(PortletRequest portletRequest, PortletResponse portletResponse,
 		Lifecycle lifecycle) throws FacesException {
 		return getFacesContextFactory().getFacesContext(portletContext, portletRequest, portletResponse, lifecycle);
@@ -177,5 +303,15 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		}
 
 		return facesContextFactory;
+	}
+
+	protected String getInitParameter(String name) {
+		String initParameter = portletConfig.getInitParameter(name);
+
+		if (initParameter == null) {
+			initParameter = portletContext.getInitParameter(name);
+		}
+
+		return initParameter;
 	}
 }

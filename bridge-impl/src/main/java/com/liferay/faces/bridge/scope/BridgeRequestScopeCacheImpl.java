@@ -13,14 +13,22 @@
  */
 package com.liferay.faces.bridge.scope;
 
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
- * This interface defines a {@link java.util.Map} style interface for managing cache of {@link BridgeRequestScope}.
+ * This class provides a {@link java.util.Map} style interface for managing cache of {@link BridgeRequestScope}.
  *
  * @author  Neil Griffin
  */
-public interface BridgeRequestScopeCache extends Map<String, BridgeRequestScope> {
+public class BridgeRequestScopeCacheImpl extends ConcurrentHashMap<String, BridgeRequestScope>
+	implements BridgeRequestScopeCache {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 4546189667853367660L;
+
+	public BridgeRequestScopeCacheImpl(int maxSize) {
+		super(maxSize, 1.0f);
+	}
 
 }

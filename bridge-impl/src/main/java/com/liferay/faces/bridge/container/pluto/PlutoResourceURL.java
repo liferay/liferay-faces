@@ -35,21 +35,6 @@ public class PlutoResourceURL extends ResourceURLWrapper {
 		super(resourceURL);
 	}
 
-	@Override
-	public void setParameter(String name, String[] values) {
-		super.setParameter(name, values);
-	}
-
-	@Override
-	public void setParameters(Map<String, String[]> parameters) {
-		super.setParameters(parameters);
-	}
-
-	@Override
-	public void setParameter(String name, String value) {
-		super.setParameter(name, value);
-	}
-
 	/**
 	 * Pluto has the habit of adding cache tokens to URLs during the RESOURCE_PHASE of the portlet lifecycle that are
 	 * not present during the RENDER_PHASE. Although it would be nice to take advantage of cache-ability of resources,
@@ -78,6 +63,21 @@ public class PlutoResourceURL extends ResourceURLWrapper {
 
 		// Return the normalized URL.
 		return toStringValue;
+	}
+
+	@Override
+	public void setParameter(String name, String[] values) {
+		super.setParameter(name, values);
+	}
+
+	@Override
+	public void setParameter(String name, String value) {
+		super.setParameter(name, value);
+	}
+
+	@Override
+	public void setParameters(Map<String, String[]> parameters) {
+		super.setParameters(parameters);
 	}
 
 }

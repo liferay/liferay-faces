@@ -25,13 +25,6 @@ import com.liferay.faces.bridge.context.BridgeContext;
  */
 public class PortletContainerFactoryImpl extends PortletContainerFactory {
 
-	// Private Data Members
-	private PortletContainerFactory wrappedFactory;
-
-	public PortletContainerFactoryImpl(PortletContainerFactory portletContainerFactory) {
-		this.wrappedFactory = portletContainerFactory;
-	}
-
 	/**
 	 * @see  {@link PortletContainerFactory#getPortletContainer(BridgeContext)}
 	 */
@@ -39,10 +32,6 @@ public class PortletContainerFactoryImpl extends PortletContainerFactory {
 	public PortletContainer getPortletContainer(BridgeContext bridgeContext) {
 
 		PortletContainer portletContainer = null;
-
-		if (wrappedFactory != null) {
-			portletContainer = wrappedFactory.getPortletContainer(bridgeContext);
-		}
 
 		if (portletContainer == null) {
 
@@ -63,6 +52,8 @@ public class PortletContainerFactoryImpl extends PortletContainerFactory {
 	}
 
 	public PortletContainerFactory getWrapped() {
-		return wrappedFactory;
+
+		// Since this is the factory instance provided by the bridge, it will never wrap another factory.
+		return null;
 	}
 }
