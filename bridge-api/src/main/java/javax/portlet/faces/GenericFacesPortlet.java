@@ -68,6 +68,14 @@ public class GenericFacesPortlet extends GenericPortlet {
 
 	@Override
 	public void destroy() {
+
+		try {
+			getBridge().destroy();
+		}
+		catch (PortletException e) {
+			e.printStackTrace();
+		}
+
 		super.destroy();
 	}
 
