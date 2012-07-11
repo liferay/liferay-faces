@@ -44,7 +44,7 @@ import com.liferay.faces.bridge.scope.BridgeRequestScopeLiferayImpl;
  * that the portlet container implements POST-REDIRECT-GET, it is necessary for the bridge to pro-actively remove
  * non-excluded request attributes when running under Liferay Portal. This is in fact the approach taken by the {@link
  * BridgeRequestScopeLiferayImpl} parent class, specifically in the {@link
- * BridgeRequestScopeLiferayImpl#restore(FacesContext)} method.</p>
+ * BridgeRequestScopeLiferayImpl#restoreState(FacesContext)} method.</p>
  *
  * <p>Problem #1: The TCK TestPage151 (requestMapRequestScopeTest) performs some checks to make sure that certain
  * non-excluded request attributes don't survive into the RENDER_PHASE. One of these attributes is named
@@ -74,7 +74,7 @@ import com.liferay.faces.bridge.scope.BridgeRequestScopeLiferayImpl;
  * "org.apache.myfaces.portlet.faces.testsuite.common.portletConfig", which is set in the {@link
  * GenericFacesTestSuitePortlet#initTestRequest(PortletRequest)} method. Again, due to the design of the Liferay portlet
  * container, it is not possible for the bridge to programatically determine whether or not this value should be
- * maintained. Since it is an instance of PortletConfig, the {@link BridgeRequestScopeLiferayImpl#restore(FacesContext)}
+ * maintained. Since it is an instance of PortletConfig, the {@link BridgeRequestScopeLiferayImpl#restoreState(FacesContext)}
  * method will exclude (remove) the request attribute.</p>
  *
  * <p>Solution: In order for the JSF_ELTest to pass under Liferay Portal, it is necessary to explicity maintain the
@@ -91,12 +91,12 @@ public class BridgeRequestScopeLiferayTCKImpl extends BridgeRequestScopeLiferayI
 	private static final long serialVersionUID = 5212644933751947796L;
 
 	public BridgeRequestScopeLiferayTCKImpl(PortletConfig portletConfig, PortletContext portletContext,
-		PortletRequest portletRequest, String idPrefix) {
-		super(portletConfig, portletContext, portletRequest, idPrefix);
+		PortletRequest portletRequest) {
+		super(portletConfig, portletContext, portletRequest);
 	}
 
 	@Override
-	public void restore(FacesContext facesContext) {
+	public void restoreState(FacesContext facesContext) {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, Object> requestMap = externalContext.getRequestMap();
@@ -104,7 +104,7 @@ public class BridgeRequestScopeLiferayTCKImpl extends BridgeRequestScopeLiferayI
 		// TCK TestPage203: JSF_ELTest
 		PortletConfig tckPortletConfig = (PortletConfig) requestMap.get(TCK_PORTLET_CONFIG);
 
-		super.restore(facesContext);
+		super.restoreState(facesContext);
 
 		// TCK TestPage151: requestMapRequestScopeTest
 		if (getBeganInPhase() == Bridge.PortletPhase.ACTION_PHASE) {
