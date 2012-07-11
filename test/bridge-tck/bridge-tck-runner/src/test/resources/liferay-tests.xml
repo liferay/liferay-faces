@@ -2,7 +2,6 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="group/bridge-tck/testpage001">bridgeVersionTest</entry>
-	<!--
 	<entry key="group/bridge-tck/testpage002">renderPolicyTest</entry>
 	<entry key="group/bridge-tck/testpage003">lifecycleTest</entry>
 	<entry key="group/bridge-tck/testpage004">defaultRenderKitIdTest</entry>
@@ -213,5 +212,4 @@
 	<entry key="group/bridge-tck/testpage209">restoredViewStateParameterTest</entry>
 	<entry key="group/bridge-tck/testpage210">setsIsPostbackAttributeTest</entry>
 	<entry key="group/bridge-tck/testpage211">usesConfiguredRenderKitTest</entry>
-	-->
 </properties>

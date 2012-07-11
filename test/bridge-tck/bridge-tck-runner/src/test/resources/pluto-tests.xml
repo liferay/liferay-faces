@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<!-- NOTE: Event-based tests are commented out because they are not compatible with Pluto -->
+<!--
+NOTE:
+* Many event-based tests are commented-out because they are not compatible with Pluto's implementation of Events IPC.
+* The setRequestCharacterEncodingActionTest is commented-out because of a known bug in Pluto (according to the TCK User's Guide).
+* The scopeNotRestoredResourceTest is commented-out because the Pluto ResourceURL#toString() method automatically adds public
+* render parameters to ResourceURLs (which includes the public render parameter for the bridgeRequestScopeId).
+-->
 <properties>
 	<entry key="pluto/portal/TestPage001">bridgeVersionTest</entry>
 	<entry key="pluto/portal/TestPage002">renderPolicyTest</entry>
@@ -73,7 +79,7 @@
 	<entry key="pluto/portal/TestPage069">portletPhaseRemovedRenderTest</entry>
 	<entry key="pluto/portal/TestPage070">verifyResourcePhaseTest</entry>
 	<entry key="pluto/portal/TestPage071">nonFacesResourceTest</entry>
-	<entry key="pluto/portal/TestPage072">scopeNotRestoredResourceTest</entry>
+<!-- 	<entry key="pluto/portal/TestPage072">scopeNotRestoredResourceTest</entry> -->
 	<entry key="pluto/portal/TestPage073">scopeAfterRedisplayResourcePPRTest</entry>
 	<entry key="pluto/portal/TestPage074">facesContextReleasedResourceTest</entry>
 	<entry key="pluto/portal/TestPage075">portletPhaseRemovedResourceTest</entry>
@@ -142,7 +148,7 @@
 	<entry key="pluto/portal/TestPage138">encodeResourceURLWithWindowStateTest</entry>
 	<entry key="pluto/portal/TestPage139">getSetRequestObjectTest</entry>
 	<entry key="pluto/portal/TestPage140">setRequestCharacterEncodingRenderTest</entry>
-	<entry key="pluto/portal/TestPage141">setRequestCharacterEncodingActionTest</entry>
+<!-- 	<entry key="pluto/portal/TestPage141">setRequestCharacterEncodingActionTest</entry> -->
 	<entry key="pluto/portal/TestPage142">getRequestHeaderMapRenderTest</entry>
 <!-- 	<entry key="pluto/portal/TestPage143">getRequestHeaderMapEventTest</entry> -->
 	<entry key="pluto/portal/TestPage144">getRequestHeaderMapActionTest</entry>
