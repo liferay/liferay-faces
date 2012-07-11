@@ -15,7 +15,6 @@ package com.liferay.faces.bridge.tck.context;
 
 import javax.portlet.PortletRequest;
 
-import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgeContextWrapper;
 
@@ -42,32 +41,6 @@ public class BridgeContextTCKImpl extends BridgeContextWrapper {
 	@Override
 	public boolean isBridgeRequestScopePreserved() {
 		return true;
-	}
-
-	/**
-	 * This method override will enable/disable features of the bridge, so that they do not have to be specified within
-	 * the WEB-INF/portlet.xml descriptor.
-	 */
-	@Override
-	public String getInitParameter(String name) {
-
-		String value = super.getInitParameter(name);
-
-		if (BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_AJAX_ENABLED.equals(name)) {
-			value = Boolean.TRUE.toString();
-		}
-		else if (BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE1.equals(name) ||
-				(BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE2.equals(name))) {
-			value = Boolean.FALSE.toString();
-		}
-		else if (BridgeConfigConstants.PARAM_MANAGE_INCONGRUITIES.equals(name)) {
-			value = Boolean.FALSE.toString();
-		}
-		else if (BridgeConfigConstants.PARAM_RENDER_REDIRECT_ENABLED.equals(name)) {
-			value = Boolean.TRUE.toString();
-		}
-
-		return value;
 	}
 
 	/**

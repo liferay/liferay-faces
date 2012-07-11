@@ -22,6 +22,7 @@ import javax.portlet.faces.Bridge;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgeContextFactory;
+import com.liferay.faces.bridge.scope.BridgeRequestScope;
 
 
 /**
@@ -40,12 +41,12 @@ public class BridgeContextFactoryTCKImpl extends BridgeContextFactory {
 	}
 
 	@Override
-	public BridgeContext getBridgeContext(BridgeConfig bridgeConfig, PortletConfig portletConfig,
-		PortletContext portletContext, PortletRequest portletRequest, PortletResponse portletResponse,
-		Bridge.PortletPhase portletPhase) {
+	public BridgeContext getBridgeContext(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
+		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,
+		PortletResponse portletResponse, Bridge.PortletPhase portletPhase) {
 
-		BridgeContext wrappedBridgeContext = getWrapped().getBridgeContext(bridgeConfig, portletConfig, portletContext,
-				portletRequest, portletResponse, portletPhase);
+		BridgeContext wrappedBridgeContext = getWrapped().getBridgeContext(bridgeConfig, bridgeRequestScope,
+				portletConfig, portletContext, portletRequest, portletResponse, portletPhase);
 
 		BridgeContext bridgeContext = new BridgeContextTCKImpl(wrappedBridgeContext);
 
