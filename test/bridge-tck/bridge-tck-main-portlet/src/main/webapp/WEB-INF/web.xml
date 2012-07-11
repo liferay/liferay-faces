@@ -1,26 +1,5 @@
 <?xml version = '1.0' encoding = 'ISO-8859-1'?>
 <!--
-  MODIFIED FOR COMPATIBILITY WITH LIFERAY PORTAL
-
-  The TCK TestPage017 (requestProcessingNonFacesTest) issues a non-Faces request for "/tests/chapter4_2_5Result.jsp" but
-  the Liferay Portal does not properly handle this unless an explicit servlet-mapping exists for the Tomcat JspServlet.
-  Specifically, the Liferay PortletRequestDispatcherImpl#dispatch(PortletRequest, PortletResponse, boolean, boolean)
-  protected method will not properly initialize the pathInfo and servletPath variables that it uses to construct the
-  PortletServletRequest.
-
-  In order to ensure that PortletRequestDispatcherImpl is compatibile with Bridge.NONFACES_TARGET_PATH_PARAMETER
-  (_jsfBridgeNonFacesView), the following entries must be added to the WEB-INF/web.xml descriptor:
-
-  <servlet>
-  	<servlet-name>JspServlet</servlet-name>
-  	<servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>JspServlet</servlet-name>
-  	<url-pattern>/tests/*</url-pattern>
-  </servlet-mapping>
--->
-<!--
     Licensed to the Apache Software Foundation (ASF) under one
     or more contributor license agreements.  See the NOTICE file
     distributed with this work for additional information
@@ -44,6 +23,26 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
   <display-name>bridge_Test_web</display-name>
+  
+  <!-- LIFERAY: BEGIN -->
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.bridgeRequestScopeAjaxEnabled</param-name>
+  	<param-value>true</param-value>
+  </context-param> 
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.optimizePortletNamespace</param-name>
+  	<param-value>false</param-value>
+  </context-param> 
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.manageIncongruities</param-name>
+  	<param-value>false</param-value>
+  </context-param> 
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.renderRedirectEnabled</param-name>
+  	<param-value>true</param-value>
+  </context-param> 
+  <!-- LIFERAY: END -->
+ 
   <context-param>
     <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
     <param-value>.jsp</param-value>
@@ -126,13 +125,6 @@
     <servlet-class>org.apache.myfaces.portlet.faces.testsuite.tests.chapter_5.section_5_2.NonFacesResourceServlet</servlet-class>
   </servlet>
   
-  <!-- BEGIN: LIFERAY PORTAL -->
-  <servlet>
-  	<servlet-name>JspServlet</servlet-name>
-  	<servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
-  </servlet>
-  <!-- END: LIFERAY PORTAL -->
-
   <!-- Faces Servlet Mappings -->
   <!-- 
     In this demo application, I chose to use suffix mapping.  I did this because it makes urls
@@ -154,12 +146,5 @@
     <url-pattern>/tck/*</url-pattern>
   </servlet-mapping>
   
-  <!-- BEGIN: LIFERAY PORTAL -->
-  <servlet-mapping>
-  	<servlet-name>JspServlet</servlet-name>
-  	<url-pattern>/tests/*</url-pattern>
-  </servlet-mapping>
-  <!-- END: LIFERAY PORTAL -->
-
 </web-app>
 

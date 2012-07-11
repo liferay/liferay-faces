@@ -33,7 +33,7 @@
 				<bridge.tck.selenium.port>4444</bridge.tck.selenium.port>
 				<bridge.tck.login.file>src/test/resources/${bridge.tck.portal}-login.properties</bridge.tck.login.file>
 				<bridge.tck.test.exclusions.file>target/test-classes/test-exclusions.xml</bridge.tck.test.exclusions.file>
-				<bridge.tck.test.file>src/test/resources/${bridge.tck.portal}-test.xml</bridge.tck.test.file>
+				<bridge.tck.test.file>src/test/resources/${bridge.tck.portal}-tests.xml</bridge.tck.test.file>
 				<bridge.tck.test.host>localhost</bridge.tck.test.host>
 				<bridge.tck.test.port>8080</bridge.tck.test.port>
 			</properties>
@@ -55,6 +55,7 @@
 									<goal>unpack-dependencies</goal>
 								</goals>
 								<configuration>
+									<includeArtifactIds>portlet-bridge-tck-jsr329</includeArtifactIds>
 									<includes>**/*.xml,org/apache/myfaces/portlet/faces/signature/*,org/apache/myfaces/portlet/faces/tckharness/*</includes>
 									<outputDirectory>target/test-classes</outputDirectory>
 								</configuration>
