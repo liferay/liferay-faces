@@ -42,14 +42,13 @@ public class BridgeRequestScopeFactoryTCKImpl extends BridgeRequestScopeFactory 
 
 	@Override
 	public BridgeRequestScope getBridgeRequestScope(PortletConfig portletConfig, PortletContext portletContext,
-		PortletRequest portletRequest, String idPrefix) throws FacesException {
+		PortletRequest portletRequest) throws FacesException {
 
 		if (LIFERAY_PORTAL_DETECTED) {
-			return new BridgeRequestScopeLiferayTCKImpl(portletConfig, portletContext, portletRequest, idPrefix);
+			return new BridgeRequestScopeLiferayTCKImpl(portletConfig, portletContext, portletRequest);
 		}
 		else {
-			return wrappedBridgeRequestScopeFactory.getBridgeRequestScope(portletConfig, portletContext, portletRequest,
-					idPrefix);
+			return wrappedBridgeRequestScopeFactory.getBridgeRequestScope(portletConfig, portletContext, portletRequest);
 		}
 	}
 
