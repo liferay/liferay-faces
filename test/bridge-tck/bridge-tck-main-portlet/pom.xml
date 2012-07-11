@@ -64,6 +64,22 @@
 		</dependency>
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>liferay</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webXml>src/main/webapp/WEB-INF/web-liferay.xml</webXml>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<!-- Note that this pom.xml provides similar functionality as the maven-assembly-plugin -->
 	<!-- but the "unpack" approach found below meets our needs better than the maven-assembly-plugin -->
 	<build>
