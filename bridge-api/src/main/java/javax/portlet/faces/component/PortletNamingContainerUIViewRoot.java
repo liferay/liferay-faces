@@ -19,6 +19,7 @@ import javax.faces.component.NamingContainer;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.portlet.faces.BridgeUtil;
 import javax.portlet.faces.annotation.PortletNamingContainer;
 
 
@@ -39,12 +40,18 @@ public class PortletNamingContainerUIViewRoot extends UIViewRoot implements Nami
 	@Override
 	public String getContainerClientId(FacesContext facesContext) {
 
-		if (namespace == null) {
-			ExternalContext externalContext = facesContext.getExternalContext();
-			namespace = externalContext.encodeNamespace("");
-		}
+		if (BridgeUtil.isPortletRequest()) {
 
-		return namespace;
+			if (namespace == null) {
+				ExternalContext externalContext = facesContext.getExternalContext();
+				namespace = externalContext.encodeNamespace("");
+			}
+
+			return namespace;
+		}
+		else {
+			return null;
+		}
 	}
 
 }

@@ -13,6 +13,9 @@
  */
 package com.liferay.faces.bridge.component;
 
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.portlet.faces.BridgeUtil;
 import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 
 
@@ -25,5 +28,24 @@ public class UIViewRootBridgeImpl extends PortletNamingContainerUIViewRoot {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 1523062041951774729L;
+
+	/**
+	 * <p>This method fixes a problem with {@link UIComponent#findComponent(String)} where sometimes it is unable to
+	 * find components due to incorrect clientId values. For more info, see the following issues:
+	 *
+	 * <ul>
+	 *   <li>http://issues.liferay.com/browse/FACES-198</li>
+	 *   <li>http://jira.icesoft.org/browse/ICE-6659</li>
+	 *   <li>http://jira.icesoft.org/browse/ICE-6667</li>
+	 * </ul>
+	 * </p>
+	 */
+	@Override
+	public void setId(String id) {
+
+		if (BridgeUtil.isPortletRequest()) {
+			super.setId(getContainerClientId(FacesContext.getCurrentInstance()));
+		}
+	}
 
 }
