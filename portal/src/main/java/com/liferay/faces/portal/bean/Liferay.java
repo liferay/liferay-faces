@@ -23,8 +23,8 @@ import javax.portlet.PortletRequest;
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.portal.el.PortraitURLMap;
 import com.liferay.faces.portal.el.ThemeImageURLMap;
-import com.liferay.faces.portal.helper.BooleanHelper;
 import com.liferay.faces.portal.security.UserPermissionMap;
+import com.liferay.faces.util.helper.BooleanHelper;
 
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;

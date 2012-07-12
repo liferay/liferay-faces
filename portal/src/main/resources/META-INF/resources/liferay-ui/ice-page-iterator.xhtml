@@ -37,7 +37,7 @@
 						</c:if>
 						<h:commandButton id="row-marks-delete" disabled="#{markedRowCount == 0}" onclick="if (! confirm('#{deleteWarning}')) {return false;}"
 							style="margin-right: 10px;" value="#{deleteLabel}">
-							<f:actionListener type="com.liferay.faces.portal.listener.RowMarksActionListener" />
+							<f:actionListener type="com.liferay.faces.portal.listener.LiferayRowMarksActionListener" />
 							<ui:remove>
 								<!-- Note that the "for" parameter is picked up by the RowMarksActionListener so that it knows which component it is "for" -->
 							</ui:remove>

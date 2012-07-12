@@ -19,8 +19,8 @@ import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletRequest;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.portal.bean.Liferay;
 import com.liferay.faces.portal.security.AuthorizationException;
 

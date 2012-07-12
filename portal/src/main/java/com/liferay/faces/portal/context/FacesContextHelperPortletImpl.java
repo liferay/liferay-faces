@@ -20,6 +20,8 @@ import javax.faces.context.FacesContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
 
+import com.liferay.faces.util.context.FacesContextHelperImpl;
+
 
 /**
  * @author  Neil Griffin
