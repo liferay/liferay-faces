@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.liferay.faces</groupId>
 	<artifactId>liferay-faces</artifactId>
-	<version>3.1.0-RC2-SNAPSHOT</version>
+	<version>3.1.0-rc2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Liferay Faces Parent</name>
 	<description>Parent POM for all Liferay Faces projects</description>
