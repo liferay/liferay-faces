@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.demos.expando.UserExpando;
 import com.liferay.faces.demos.model.Registrant;
 import com.liferay.portal.kernel.exception.PortalException;

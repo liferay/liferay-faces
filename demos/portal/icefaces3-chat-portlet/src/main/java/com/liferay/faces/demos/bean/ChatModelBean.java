@@ -19,8 +19,8 @@ import javax.faces.bean.ViewScoped;
 
 import com.icesoft.faces.async.render.SessionRenderer;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.demos.list.UserLazyDataModel;
 import com.liferay.faces.portal.context.LiferayFacesContext;
 

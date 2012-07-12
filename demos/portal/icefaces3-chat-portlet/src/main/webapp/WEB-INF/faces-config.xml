@@ -9,6 +9,6 @@
 		<message-bundle>i18nFaces</message-bundle>
 	</application>
 <!--	<lifecycle>-->
-<!--		<phase-listener>com.liferay.faces.bridge.lifecycle.BridgeDebugPhaseListener</phase-listener>-->
+<!--		<phase-listener>com.liferay.faces.util.lifecycle.DebugPhaseListener</phase-listener>-->
 <!--	</lifecycle>-->
 </faces-config>

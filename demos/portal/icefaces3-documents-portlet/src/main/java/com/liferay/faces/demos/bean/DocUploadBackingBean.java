@@ -27,8 +27,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.bridge.component.HtmlInputFile;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.demos.tree.FolderUserObject;
 import com.liferay.faces.portal.context.LiferayFacesContext;
