@@ -26,8 +26,8 @@ import javax.faces.event.ActionEvent;
 import javax.portlet.ActionResponse;
 import javax.xml.namespace.QName;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.demos.dto.Customer;
 
 

@@ -3,6 +3,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:example-cc="http://java.sun.com/jsf/composite/example-cc"
 	xmlns:ice="http://www.icesoft.com/icefaces/component" xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:liferay-security="http://liferay.com/faces/security"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:ace="http://www.icefaces.org/icefaces/components">
 
 	<aui:layout id="l1">
@@ -13,6 +14,11 @@
 			<h:form id="f1">
 				<icecore:singleSubmit />
 				<h:messages globalOnly="true" layout="table" />
+				<img src="#{liferay.themeImagesURL}/common/edit.png" />
+				<liferay-security:permissionsURL modelResource="com.liferay.portal.model.User" modelResourceDescription="Current User" resourcePrimKey="#{liferay.user.userId}">
+					<h:outputText value="Permissions" />
+				</liferay-security:permissionsURL>
+				<ice:graphicImage value="#{liferay.themeImagesURL}/common/edit.png" />
 				<aui:fieldset id="fs1">
 					<aui:column id="c1a">
 						<aui:field label="#{i18n['first-name']}">
