@@ -20,8 +20,8 @@ import javax.portlet.BaseURL;
 import javax.portlet.PortletResponse;
 
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**

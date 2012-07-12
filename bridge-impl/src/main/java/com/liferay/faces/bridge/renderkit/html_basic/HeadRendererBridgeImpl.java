@@ -29,8 +29,8 @@ import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 import com.liferay.faces.bridge.application.ResourceInfo;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.bridge.renderkit.bridge.BridgeRenderer;
 
 

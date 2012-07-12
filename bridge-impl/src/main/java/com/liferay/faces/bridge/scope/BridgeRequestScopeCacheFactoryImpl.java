@@ -16,8 +16,8 @@ package com.liferay.faces.bridge.scope;
 import javax.portlet.PortletContext;
 import javax.portlet.faces.Bridge;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**

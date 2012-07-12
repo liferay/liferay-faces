@@ -18,8 +18,8 @@ import java.io.Writer;
 import java.lang.reflect.Method;
 import java.net.URLEncoder;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**

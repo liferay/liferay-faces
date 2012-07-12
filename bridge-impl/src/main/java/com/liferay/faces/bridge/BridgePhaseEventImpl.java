@@ -28,8 +28,8 @@ import javax.portlet.faces.BridgeException;
 import javax.portlet.faces.event.EventNavigationResult;
 
 import com.liferay.faces.bridge.event.IPCPhaseListener;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**

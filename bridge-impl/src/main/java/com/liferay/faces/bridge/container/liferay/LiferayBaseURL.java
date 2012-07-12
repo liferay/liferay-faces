@@ -30,8 +30,8 @@ import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.bridge.util.FacesURLEncoder;
 import com.liferay.faces.bridge.util.URLParameter;
 

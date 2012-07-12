@@ -38,10 +38,10 @@ import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.ExternalContextImpl;
-import com.liferay.faces.bridge.helper.BooleanHelper;
+import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.bridge.helper.WindowStateHelper;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.bridge.util.URLUtil;
 
 

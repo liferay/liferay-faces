@@ -65,12 +65,12 @@ import com.liferay.faces.bridge.context.map.InitParameterMap;
 import com.liferay.faces.bridge.context.map.RequestAttributeMap;
 import com.liferay.faces.bridge.context.map.RequestCookieMap;
 import com.liferay.faces.bridge.context.map.SessionMap;
-import com.liferay.faces.bridge.helper.BooleanHelper;
+import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.bridge.lifecycle.CongruousTask;
 import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityManager;
 import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityMap;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.bridge.util.FileNameUtil;
 import com.liferay.faces.bridge.util.LocaleIterator;
 
