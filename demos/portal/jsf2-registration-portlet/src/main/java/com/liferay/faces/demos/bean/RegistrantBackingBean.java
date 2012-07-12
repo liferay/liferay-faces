@@ -21,8 +21,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.demos.model.Registrant;
 import com.liferay.faces.demos.service.RegistrantServiceUtil;
 import com.liferay.faces.portal.context.LiferayFacesContext;

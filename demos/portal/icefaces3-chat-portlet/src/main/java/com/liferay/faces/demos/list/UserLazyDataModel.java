@@ -18,10 +18,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.model.LazyDataModel;
 import com.liferay.faces.demos.service.OnlineUserServiceUtil;
-import com.liferay.faces.portal.model.LazyDataModel;
 
 import com.liferay.portal.model.User;
 

@@ -13,8 +13,8 @@
  */
 package com.liferay.faces.demos.list;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.User;
