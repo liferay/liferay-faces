@@ -6,7 +6,7 @@
 	<namespace>http://liferay.com/faces/util</namespace>
 	<function>
 		<function-name>findDataModel</function-name>
-		<function-class>com.liferay.faces.portal.el.FaceletUtil</function-class>
+		<function-class>com.liferay.faces.util.el.FaceletUtil</function-class>
 		<function-signature>javax.faces.model.DataModel findDataModel(java.lang.String)</function-signature>
 	</function>
 	<function>
