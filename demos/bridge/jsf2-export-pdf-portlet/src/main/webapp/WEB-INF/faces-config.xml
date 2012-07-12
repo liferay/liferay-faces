@@ -14,6 +14,6 @@
 		<resource-handler>com.liferay.faces.demos.resource.CustomerResourceHandler</resource-handler>
 	</application>
 	<lifecycle>
-		<phase-listener>com.liferay.faces.bridge.lifecycle.BridgeDebugPhaseListener</phase-listener>
+		<phase-listener>com.liferay.faces.util.lifecycle.DebugPhaseListener</phase-listener>
 	</lifecycle>
 </faces-config>

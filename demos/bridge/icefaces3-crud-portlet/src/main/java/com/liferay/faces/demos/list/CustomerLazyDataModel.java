@@ -18,7 +18,7 @@ import java.util.List;
 
 import com.liferay.faces.demos.dto.Customer;
 import com.liferay.faces.demos.service.CustomerService;
-import com.liferay.faces.demos.util.LazyDataModel;
+import com.liferay.faces.util.model.LazyDataModel;
 
 
 /**

@@ -51,6 +51,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.faces</groupId>
+			<artifactId>liferay-faces-portal</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.liferay.faces</groupId>
 			<artifactId>liferay-faces-alloy</artifactId>
 			<version>${project.version}</version>
 		</dependency>
