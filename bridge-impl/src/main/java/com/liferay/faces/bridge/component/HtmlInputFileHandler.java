@@ -24,7 +24,7 @@ import javax.faces.view.facelets.MetadataTarget;
 import javax.faces.view.facelets.TagAttribute;
 
 import com.liferay.faces.bridge.event.FileUploadEvent;
-import com.liferay.faces.bridge.view.facelets.MethodMetadata;
+import com.liferay.faces.util.view.facelets.MethodMetadata;
 
 
 /**

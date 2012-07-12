@@ -19,8 +19,8 @@ import java.lang.reflect.Method;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**

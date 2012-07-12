@@ -25,8 +25,8 @@ import javax.portlet.BaseURL;
 import javax.portlet.PortletSecurityException;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**

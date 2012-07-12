@@ -35,7 +35,7 @@ import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.map.SessionMap;
 import com.liferay.faces.bridge.filter.HttpServletRequestAdapter;
 import com.liferay.faces.bridge.filter.HttpServletResponseAdapter;
-import com.liferay.faces.bridge.helper.BooleanHelper;
+import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.bridge.preference.MutablePreferenceMap;
 
 

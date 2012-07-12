@@ -25,8 +25,8 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**

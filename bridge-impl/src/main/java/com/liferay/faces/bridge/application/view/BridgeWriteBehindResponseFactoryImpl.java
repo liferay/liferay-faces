@@ -27,8 +27,8 @@ import javax.servlet.ServletResponse;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**

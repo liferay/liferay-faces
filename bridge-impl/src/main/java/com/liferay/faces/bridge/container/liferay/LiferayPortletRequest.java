@@ -22,8 +22,8 @@ import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**

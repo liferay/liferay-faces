@@ -29,9 +29,9 @@ import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.application.ResourceHandlerInnerImpl;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.helper.BooleanHelper;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**

@@ -16,8 +16,8 @@ package com.liferay.faces.bridge.context.map;
 import java.util.Map;
 import java.util.Set;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
