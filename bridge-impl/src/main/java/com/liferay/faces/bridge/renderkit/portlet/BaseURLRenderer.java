@@ -29,8 +29,8 @@ import com.liferay.faces.bridge.component.PortletParam;
 import com.liferay.faces.bridge.component.PortletProperty;
 import com.liferay.faces.bridge.component.PortletRenderURL;
 import com.liferay.faces.bridge.component.PortletResourceURL;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**

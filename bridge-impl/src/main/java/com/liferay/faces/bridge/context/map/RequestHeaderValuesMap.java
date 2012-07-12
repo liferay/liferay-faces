@@ -24,9 +24,9 @@ import javax.portlet.ResourceRequest;
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.helper.BooleanHelper;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**

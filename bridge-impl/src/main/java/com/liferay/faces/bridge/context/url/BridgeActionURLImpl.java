@@ -25,7 +25,7 @@ import javax.portlet.faces.BridgeUtil;
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.helper.BooleanHelper;
+import com.liferay.faces.util.helper.BooleanHelper;
 
 
 /**

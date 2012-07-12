@@ -28,8 +28,8 @@ import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 import com.liferay.faces.bridge.component.UIViewRootBridgeImpl;
 import com.liferay.faces.bridge.component.icefaces.DataPaginator;
 import com.liferay.faces.bridge.component.icefaces.DataPaginatorBridgeImpl;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**

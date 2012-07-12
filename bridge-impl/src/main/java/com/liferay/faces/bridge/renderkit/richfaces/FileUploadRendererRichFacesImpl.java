@@ -31,8 +31,8 @@ import javax.faces.event.FacesEvent;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.bridge.context.map.RequestParameterMap;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.bridge.renderkit.html_basic.RendererWrapper;
 

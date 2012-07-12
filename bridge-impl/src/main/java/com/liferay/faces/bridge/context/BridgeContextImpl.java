@@ -61,9 +61,9 @@ import com.liferay.faces.bridge.context.url.BridgePartialActionURLImpl;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
 import com.liferay.faces.bridge.context.url.BridgeURLFactory;
-import com.liferay.faces.bridge.helper.BooleanHelper;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 
 

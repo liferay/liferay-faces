@@ -18,8 +18,8 @@ import java.lang.reflect.Method;
 import javax.faces.component.UIInput;
 
 import com.liferay.faces.bridge.component.UIInputWrapper;
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
