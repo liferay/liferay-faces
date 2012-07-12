@@ -23,11 +23,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.LengthValidator;
 import javax.faces.validator.ValidatorException;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.context.MessageContext;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.portal.component.UIComponentHelper;
 import com.liferay.faces.portal.context.LiferayFacesContext;
-import com.liferay.faces.portal.context.MessageContext;
 
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.StringPool;
  * Validator that is meant to be used in conjunction with the liferay-ui:input-editor component in order to validate
  * length on the server-side.
  *
+ * @author  Neil Griffin
  * @author  Joe Ssemwogerere
  */
 public class RichTextLengthValidator extends LengthValidator {

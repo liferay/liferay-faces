@@ -17,8 +17,9 @@ import javax.el.ELContext;
 import javax.el.ELException;
 import javax.el.PropertyNotWritableException;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.el.ELResolverBase;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
