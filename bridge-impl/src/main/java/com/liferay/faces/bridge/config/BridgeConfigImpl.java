@@ -47,13 +47,13 @@ import com.liferay.faces.bridge.container.PortletContainerFactory;
 import com.liferay.faces.bridge.context.BridgeContextFactory;
 import com.liferay.faces.bridge.context.flash.BridgeFlashFactory;
 import com.liferay.faces.bridge.context.url.BridgeURLFactory;
-import com.liferay.faces.util.helper.BooleanHelper;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.bridge.model.UploadedFileFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeCacheFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
+import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -89,6 +89,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private static final String URL_PATTERN = "url-pattern";
 	private static final String WEB_XML_PATH = "/WEB-INF/web.xml";
 	private static final String WEB_XML_LIFERAY_PATH = "/WEB-INF/liferay-web.xml";
+	private static final String WEB_FRAGMENT_META_INF_PATH = "META-INF/web-fragment.xml";
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeConfigImpl.class);
@@ -214,7 +215,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 				}
 			}
 
-			// Second, parse the WEB-INF/faces-config.xml found in the classpath. Any entries made here will take
+			// Second, parse the WEB-INF/faces-config.xml descriptor. Any entries made here will take
 			// precedence over those found previously.
 			InputStream inputStream = portletContext.getResourceAsStream(FACES_CONFIG_WEB_INF_PATH);
 
@@ -264,8 +265,31 @@ public class BridgeConfigImpl implements BridgeConfig {
 				logger.error(FACTORY_NOT_FOUND_MSG, UPLOADED_FILE_FACTORY);
 			}
 
-			// Parse the WEB-INF/web.xml descriptor.
+			// Parse the Servlet 3.0 META-INF/web-fragment.xml descriptor files found in the classpath.
 			facesServletMappings = new ArrayList<ServletMapping>();
+
+			Enumeration<URL> webFragmentURLs = classLoader.getResources(WEB_FRAGMENT_META_INF_PATH);
+
+			if (webFragmentURLs != null) {
+
+				while (webFragmentURLs.hasMoreElements()) {
+					URL webFragmentURL = webFragmentURLs.nextElement();
+					inputStream = webFragmentURL.openStream();
+
+					WebAppHandler webAppHandler = new WebAppHandler(resolveEntities);
+
+					try {
+						saxParser.parse(inputStream, webAppHandler);
+						inputStream.close();
+						saxParser.reset();
+					}
+					catch (Exception e) {
+						logger.error(e.getMessage());
+					}
+				}
+			}
+
+			// Parse the WEB-INF/web.xml descriptor.
 			inputStream = portletContext.getResourceAsStream(WEB_XML_PATH);
 
 			if (inputStream != null) {
