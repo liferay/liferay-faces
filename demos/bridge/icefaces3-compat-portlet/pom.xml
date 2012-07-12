@@ -54,6 +54,11 @@
 			<artifactId>liferay-faces-bridge-impl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.liferay.faces</groupId>
+			<artifactId>liferay-faces-portal</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 	</dependencies>
 

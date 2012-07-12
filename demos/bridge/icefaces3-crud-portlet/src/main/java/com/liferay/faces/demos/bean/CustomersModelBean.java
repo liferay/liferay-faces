@@ -29,7 +29,7 @@ import com.liferay.faces.demos.dto.Province;
 import com.liferay.faces.demos.list.CustomerLazyDataModel;
 import com.liferay.faces.demos.service.CustomerService;
 import com.liferay.faces.demos.service.ProvinceService;
-import com.liferay.faces.demos.util.LazyDataModel;
+import com.liferay.faces.util.model.LazyDataModel;
 
 
 /**
