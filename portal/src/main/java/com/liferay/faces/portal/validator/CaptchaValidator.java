@@ -21,8 +21,8 @@ import javax.faces.validator.ValidatorException;
 import javax.portlet.PortletRequest;
 import javax.portlet.filter.PortletRequestWrapper;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;

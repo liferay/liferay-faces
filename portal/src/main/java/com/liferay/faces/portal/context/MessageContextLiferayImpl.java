@@ -15,6 +15,7 @@ package com.liferay.faces.portal.context;
 
 import java.util.Locale;
 
+import com.liferay.faces.util.context.MessageContextImpl;
 import com.liferay.portal.kernel.language.LanguageUtil;
 
 

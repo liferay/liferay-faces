@@ -15,8 +15,9 @@ package com.liferay.faces.portal.context;
 
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.context.FacesContextHelper;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -49,18 +50,6 @@ public abstract class LiferayFacesContext extends FacesContext implements FacesC
 	public static void setInstance(LiferayFacesContext liferayFacesContext) {
 		instance = liferayFacesContext;
 	}
-
-	/**
-	 * Adds a global information message to the current FacesContext with the standard Liferay
-	 * "your-request-processed-successfully" key as the messageId.
-	 */
-	public abstract void addGlobalSuccessInfoMessage();
-
-	/**
-	 * Adds a global error message to the current FacesContext with the standard Liferay "an-unexpected-error-occurred"
-	 * key as the messageId.
-	 */
-	public abstract void addGlobalUnexpectedErrorMessage();
 
 	/**
 	 * Returns the Liferay build number.

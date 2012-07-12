@@ -29,8 +29,8 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
-import com.liferay.faces.bridge.logging.Logger;
-import com.liferay.faces.bridge.logging.LoggerFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.portal.component.PermissionsURL;
 import com.liferay.faces.portal.context.LiferayFacesContext;
 

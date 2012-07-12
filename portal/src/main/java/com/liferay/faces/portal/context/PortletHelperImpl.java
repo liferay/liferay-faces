@@ -32,9 +32,9 @@ import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 
-import com.liferay.faces.portal.helper.BooleanHelper;
-import com.liferay.faces.portal.helper.IntegerHelper;
-import com.liferay.faces.portal.helper.ShortHelper;
+import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.helper.IntegerHelper;
+import com.liferay.faces.util.helper.ShortHelper;
 
 
 /**

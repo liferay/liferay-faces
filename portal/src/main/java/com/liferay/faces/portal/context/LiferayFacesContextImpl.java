@@ -77,10 +77,6 @@ public class LiferayFacesContextImpl extends LiferayFacesContext implements Seri
 	// by Mojarra. All of the private data members are marked as transient since they are lazy-initialized.
 	private static final long serialVersionUID = 905195020822157073L;
 
-	// Private Constants
-	private static final String LIFERAY_UNEXPECTED_ERROR_MSG_ID = "an-unexpected-error-occurred";
-	private static final String LIFERAY_SUCCESS_INFO_MSG_ID = "your-request-processed-successfully";
-
 	// Private Data Members
 	FacesContextHelper facesContextHelper = new FacesContextHelperPortletImpl();
 	LiferayPortletHelper liferayPortletHelper = new LiferayPortletHelperImpl();
@@ -88,6 +84,7 @@ public class LiferayFacesContextImpl extends LiferayFacesContext implements Seri
 
 	public LiferayFacesContextImpl() {
 		setInstance(this);
+		MessageContext.setInstance(new MessageContextLiferayImpl());
 	}
 
 	/**
@@ -158,7 +155,6 @@ public class LiferayFacesContextImpl extends LiferayFacesContext implements Seri
 	 */
 	public void addGlobalInfoMessage(String messageId) {
 		facesContextHelper.addGlobalInfoMessage(messageId);
-
 	}
 
 	/**
@@ -173,23 +169,20 @@ public class LiferayFacesContextImpl extends LiferayFacesContext implements Seri
 	 */
 	public void addGlobalInfoMessage(String messageId, Object... arguments) {
 		facesContextHelper.addGlobalInfoMessage(messageId, arguments);
-
 	}
 
 	/**
-	 * @see  LiferayFacesContext#addGlobalSuccessInfoMessage()
+	 * @see  FacesContextHelper#addGlobalSuccessInfoMessage()
 	 */
-	@Override
 	public void addGlobalSuccessInfoMessage() {
-		addGlobalInfoMessage(LIFERAY_SUCCESS_INFO_MSG_ID);
+		facesContextHelper.addGlobalSuccessInfoMessage();
 	}
 
 	/**
-	 * @see  LiferayFacesContext#addGlobalUnexpectedErrorMessage()
+	 * @see  FacesContextHelper#addGlobalUnexpectedErrorMessage()
 	 */
-	@Override
 	public void addGlobalUnexpectedErrorMessage() {
-		addGlobalErrorMessage(LIFERAY_UNEXPECTED_ERROR_MSG_ID);
+		facesContextHelper.addGlobalUnexpectedErrorMessage();
 	}
 
 	/**
@@ -509,6 +502,9 @@ public class LiferayFacesContextImpl extends LiferayFacesContext implements Seri
 		FacesContext.getCurrentInstance().setExceptionHandler(exceptionHandler);
 	}
 
+	/**
+	 * @since  JSF 1.0
+	 */
 	@Override
 	public ExternalContext getExternalContext() {
 		return FacesContext.getCurrentInstance().getExternalContext();
@@ -591,6 +587,9 @@ public class LiferayFacesContextImpl extends LiferayFacesContext implements Seri
 		return locale;
 	}
 
+	/**
+	 * @since  JSF 1.0
+	 */
 	@Override
 	public Severity getMaximumSeverity() {
 		return FacesContext.getCurrentInstance().getMaximumSeverity();
