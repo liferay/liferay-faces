@@ -65,6 +65,7 @@
 	</distributionManagement>
 
 	<modules>
+		<module>util</module>
 		<module>alloy</module>
 		<module>bridge-api</module>
 		<module>bridge-impl</module>
