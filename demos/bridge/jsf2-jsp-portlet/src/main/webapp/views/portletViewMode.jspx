@@ -16,8 +16,8 @@
 		<aui:layout>
 			<aui:column>
 				<ul>
-					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.products['Liferay Faces Alloy']}" /></em></li>
-					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.products['Liferay Faces Bridge']}" /></em></li>
+					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Alloy']}" /></em></li>
+					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Bridge']}" /></em></li>
 				</ul>
 			</aui:column>
 		</aui:layout>
