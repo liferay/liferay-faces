@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.portal.bean;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
@@ -41,14 +43,13 @@ import com.liferay.portal.theme.ThemeDisplay;
 @ViewScoped
 public class Liferay implements Serializable {
 
-	// serialVersionUID Note: This class implements Serializable only to avoid extraneous stacktraces from being thrown
-	// by Mojarra. All of the private data members are marked as transient since they are lazy-initialized.
+	// serialVersionUID
 	private static final long serialVersionUID = 2084947229350893151L;
 
 	// Self-Injections
 	private transient LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 
-	// Private Data Members
+	// Private Data Members: All marked as transient since they are lazy-initialized.
 	private transient Long companyId;
 	private transient String documentLibraryURL;
 	private transient String imageURL;
@@ -73,6 +74,15 @@ public class Liferay implements Serializable {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		PortletRequest portletRequest = (PortletRequest) facesContext.getExternalContext().getRequest();
 		portlet = (Portlet) portletRequest.getAttribute(WebKeys.RENDER_PORTLET);
+	}
+
+	/**
+	 * This method is necessary in order to re-self-inject the {@link LiferayFacesContext} during deserialization. For
+	 * more information, see: http://issues.liferay.com/browse/FACES-1168
+	 */
+	private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+		objectInputStream.defaultReadObject();
+		liferayFacesContext = LiferayFacesContext.getInstance();
 	}
 
 	public int getBuildNumber() {
