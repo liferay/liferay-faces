@@ -30,10 +30,10 @@ import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.bridge.util.FacesURLEncoder;
 import com.liferay.faces.bridge.util.URLParameter;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -74,7 +74,7 @@ public abstract class LiferayBaseURL implements BaseURL {
 		if (value != null) {
 
 			if (value.length() == 0) {
-				encodedValue = " ";
+				encodedValue = BridgeConstants.CHAR_SPACE;
 			}
 			else {
 
@@ -83,7 +83,7 @@ public abstract class LiferayBaseURL implements BaseURL {
 				}
 				catch (UnsupportedEncodingException e) {
 					logger.error(e);
-					encodedValue = " ";
+					encodedValue = BridgeConstants.CHAR_SPACE;
 				}
 			}
 		}
@@ -108,7 +108,8 @@ public abstract class LiferayBaseURL implements BaseURL {
 
 			// Possibly add the p_auth parameter.
 			boolean firstParameter = true;
-			String portalAuthToken = parsedLiferayURL.getPortalAuthToken();
+			Map<String, String> parsedLiferayURLParameterMap = parsedLiferayURL.getParameterMap();
+			String portalAuthToken = parsedLiferayURLParameterMap.get(LiferayConstants.P_AUTH);
 
 			if (portalAuthToken != null) {
 
@@ -117,7 +118,7 @@ public abstract class LiferayBaseURL implements BaseURL {
 			}
 
 			// Possibly add the p_p_auth parameter.
-			String portletAuthToken = parsedLiferayURL.getPortletAuthToken();
+			String portletAuthToken = parsedLiferayURLParameterMap.get(LiferayConstants.P_P_AUTH);
 
 			if (portletAuthToken != null) {
 
@@ -160,6 +161,13 @@ public abstract class LiferayBaseURL implements BaseURL {
 				appendParameterToURL(LiferayConstants.P_P_STATE, parameterValue, url);
 			}
 
+			// Possibly add the p_p_state_rcv parameter.
+			String stateRestoreCurrentView = parsedLiferayURLParameterMap.get(LiferayConstants.P_P_STATE_RCV);
+
+			if (stateRestoreCurrentView != null) {
+				appendParameterToURL(LiferayConstants.P_P_STATE_RCV, stateRestoreCurrentView, url);
+			}
+
 			// Possibly add the p_p_mode parameter.
 			if (isPortletModeRequired()) {
 				PortletMode portletMode = getPortletMode();
@@ -176,7 +184,7 @@ public abstract class LiferayBaseURL implements BaseURL {
 
 			// Possibly add the p_p_cacheability parameter
 			if (this instanceof ResourceURL) {
-				String cacheability = parsedLiferayURL.getCacheability();
+				String cacheability = parsedLiferayURLParameterMap.get(LiferayConstants.P_P_CACHEABILITY);
 
 				if (cacheability != null) {
 					appendParameterToURL(LiferayConstants.P_P_CACHEABILITY, cacheability, url);
@@ -209,6 +217,47 @@ public abstract class LiferayBaseURL implements BaseURL {
 				}
 			}
 
+			// Possibly add the p_o_p_id parameter.
+			String outerPortletId = parsedLiferayURLParameterMap.get(LiferayConstants.P_O_P_ID);
+
+			if (outerPortletId != null) {
+				appendParameterToURL(LiferayConstants.P_O_P_ID, parameterValue, url);
+			}
+
+			// Possibly add the doAsUserId parameter.
+			String doAsUserId = parsedLiferayURLParameterMap.get(LiferayConstants.DO_AS_USER_ID);
+
+			if (doAsUserId != null) {
+				appendParameterToURL(LiferayConstants.DO_AS_USER_ID, doAsUserId, url);
+			}
+
+			// Possibly add the doAsUserLanguageId parameter.
+			String doAsUserLanguageId = parsedLiferayURLParameterMap.get(LiferayConstants.DO_AS_USER_LANGUAGE_ID);
+
+			if (doAsUserLanguageId != null) {
+				appendParameterToURL(LiferayConstants.DO_AS_USER_LANGUAGE_ID, doAsUserLanguageId, url);
+			}
+
+			// Possibly add the doAsGroupId parameter.
+			String doAsGroupId = parsedLiferayURLParameterMap.get(LiferayConstants.DO_AS_GROUP_ID);
+
+			if (doAsGroupId != null) {
+				appendParameterToURL(LiferayConstants.DO_AS_GROUP_ID, doAsGroupId, url);
+			}
+
+			// Possibly add the refererPlid parameter.
+			String refererPlid = parsedLiferayURLParameterMap.get(LiferayConstants.REFERER_PLID);
+
+			if (refererPlid != null) {
+				appendParameterToURL(LiferayConstants.REFERER_PLID, refererPlid, url);
+			}
+
+			// Possibly add the controlPanelCategory parameter.
+			String controlPanelCategory = parsedLiferayURLParameterMap.get(LiferayConstants.CONTROL_PANEL_CATEGORY);
+			if (controlPanelCategory != null) {
+				appendParameterToURL(LiferayConstants.CONTROL_PANEL_CATEGORY, controlPanelCategory, url);
+			}
+			
 			// Add request parameters from the request parameter map.
 			String namespace = responseNamespace;
 
