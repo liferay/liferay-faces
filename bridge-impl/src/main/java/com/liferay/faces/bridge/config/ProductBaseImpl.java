@@ -52,9 +52,19 @@ public class ProductBaseImpl implements Product {
 		return stringValue;
 	}
 
-	protected void init(Package pkg) {
-		this.title = pkg.getImplementationTitle();
-		initVersionInfo(pkg.getImplementationVersion());
+	protected void init(Class<?> clazz, String expectedTitle) {
+
+		Package pkg = clazz.getPackage();
+
+		if ((pkg != null) && (pkg.getImplementationVersion() != null)) {
+			this.title = pkg.getImplementationTitle();
+			initVersionInfo(pkg.getImplementationVersion());
+		}
+		else {
+			PackageManifest packageManifest = new PackageManifest(clazz, expectedTitle);
+			this.title = packageManifest.getImplementationTitle();
+			initVersionInfo(packageManifest.getImplementationVersion());
+		}
 
 		if (this.majorVersion > 0) {
 			detected = true;
@@ -110,6 +120,10 @@ public class ProductBaseImpl implements Product {
 
 	public int getMinorVersion() {
 		return minorVersion;
+	}
+
+	protected Package getPackage() {
+		return null;
 	}
 
 	public int getRevisionVersion() {
