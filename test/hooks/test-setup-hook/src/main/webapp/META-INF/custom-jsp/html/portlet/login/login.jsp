@@ -107,7 +107,7 @@
 			</aui:fieldset>
 
 			<aui:button-row>
-				<aui:button type="submit" value="sign-in" />
+				<aui:button id="j_login" type="submit" value="sign-in" />
 			</aui:button-row>
 		</aui:form>
 
