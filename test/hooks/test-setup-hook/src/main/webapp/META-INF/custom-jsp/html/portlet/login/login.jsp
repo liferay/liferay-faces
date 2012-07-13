@@ -122,7 +122,7 @@
 			</c:if>
 
 			<div class="button-holder">
-				<input type="submit" value="<liferay-ui:message key="sign-in" />" />
+				<input id="j_login" type="submit" value="<liferay-ui:message key="sign-in" />" />
 			</div>
 		</fieldset>
 
