@@ -265,8 +265,14 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 
 							// If the current field is a simple form-field, then save the form field value in the map.
 							if (diskFileItem.isFormField()) {
-								String requestParameterValue = diskFileItem.getString(
-										clientDataRequest.getCharacterEncoding());
+								String characterEncoding = clientDataRequest.getCharacterEncoding();
+								String requestParameterValue = null;
+								if (characterEncoding == null) {
+									requestParameterValue = diskFileItem.getString();
+								}
+								else {
+									requestParameterValue = diskFileItem.getString(characterEncoding);
+								}
 								String fixedRequestParameterValue = portletContainer.fixRequestParameterValue(
 										requestParameterValue);
 								requestParameterMap.put(fieldName, fixedRequestParameterValue);
