@@ -35,7 +35,7 @@
 				<bridge.tck.test.exclusions.file>target/test-classes/test-exclusions.xml</bridge.tck.test.exclusions.file>
 				<bridge.tck.test.file>src/test/resources/${bridge.tck.portal}-tests.xml</bridge.tck.test.file>
 				<bridge.tck.test.host>localhost</bridge.tck.test.host>
-				<bridge.tck.test.port>8080</bridge.tck.test.port>
+				<bridge.tck.test.port>8090</bridge.tck.test.port>
 			</properties>
 			<build>
 				<plugins>
