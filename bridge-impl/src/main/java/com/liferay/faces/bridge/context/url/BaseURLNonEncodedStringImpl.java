@@ -23,6 +23,7 @@ import java.util.Set;
 
 import javax.portlet.BaseURL;
 import javax.portlet.PortletSecurityException;
+import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.util.logging.Logger;
@@ -199,7 +200,12 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 
 					// Otherwise, log an error.
 					else {
-						logger.error("Invalid name=value pair=[{0}] in URL=[{1}]", queryParameter, url);
+
+						// Note that "javax.portlet.faces.BackLink" is sometimes deliberately removed and therefore is
+						// not an error.
+						if (!Bridge.BACK_LINK.equals(name)) {
+							logger.error("Invalid name=value pair=[{0}] in URL=[{1}]", queryParameter, url);
+						}
 					}
 				}
 			}
