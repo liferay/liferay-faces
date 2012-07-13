@@ -14,7 +14,9 @@
 package com.liferay.faces.bridge.container.liferay;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.BaseURL;
 
@@ -28,16 +30,14 @@ import com.liferay.faces.bridge.util.URLParameter;
 public class ParsedBaseURL {
 
 	// Private Data Members
-	private String cacheability;
 	private String prefix;
-	private String portalAuthToken;
-	private String portletAuthToken;
-	private String resourceId;
+	private Map<String, String> parameterMap;
 	private List<URLParameter> wsrpParameters;
 
 	public ParsedBaseURL(BaseURL baseURL) {
 
 		String toStringValue = baseURL.toString();
+		parameterMap = new HashMap<String, String>();
 		wsrpParameters = new ArrayList<URLParameter>();
 
 		String queryString = toStringValue;
@@ -54,74 +54,23 @@ public class ParsedBaseURL {
 
 			for (String nameValuePair : nameValuePairs) {
 
-				if ((cacheability == null) && nameValuePair.startsWith(LiferayConstants.P_P_CACHEABILITY)) {
-					int equalsPos = nameValuePair.indexOf(BridgeConstants.CHAR_EQUALS);
+				int equalsPos = nameValuePair.indexOf(BridgeConstants.CHAR_EQUALS);
 
-					if (equalsPos > 0) {
-						cacheability = nameValuePair.substring(equalsPos + 1);
-					}
-				}
-
-				else if ((portalAuthToken == null) && nameValuePair.startsWith(LiferayConstants.P_AUTH)) {
-					int equalsPos = nameValuePair.indexOf(BridgeConstants.CHAR_EQUALS);
-
-					if (equalsPos > 0) {
-						portalAuthToken = nameValuePair.substring(equalsPos + 1);
-					}
-				}
-
-				else if ((portletAuthToken == null) && nameValuePair.startsWith(LiferayConstants.P_P_AUTH)) {
-					int equalsPos = nameValuePair.indexOf(BridgeConstants.CHAR_EQUALS);
-
-					if (equalsPos > 0) {
-						portletAuthToken = nameValuePair.substring(equalsPos + 1);
-					}
-				}
-
-				else if (nameValuePair.startsWith(BridgeConstants.WSRP)) {
-					int equalsPos = nameValuePair.indexOf(BridgeConstants.CHAR_EQUALS);
-
-					if (equalsPos > 0) {
-						String name = nameValuePair.substring(0, equalsPos);
-						String value = nameValuePair.substring(equalsPos + 1);
-						URLParameter urlParameter = new URLParameter(name, value);
-						wsrpParameters.add(urlParameter);
-					}
+				if (equalsPos > 0) {
+					String name = nameValuePair.substring(0, equalsPos);
+					String value = nameValuePair.substring(equalsPos + 1);
+					parameterMap.put(name, value);
 				}
 			}
 		}
 	}
 
-	public String getCacheability() {
-		return cacheability;
-	}
-
-	public String getPortalAuthToken() {
-		return portalAuthToken;
-	}
-
-	public void setPortalAuthToken(String portalAuthToken) {
-		this.portalAuthToken = portalAuthToken;
-	}
-
-	public String getPortletAuthToken() {
-		return portletAuthToken;
-	}
-
-	public void setPortletAuthToken(String portletAuthToken) {
-		this.portletAuthToken = portletAuthToken;
+	public Map<String, String> getParameterMap() {
+		return parameterMap;
 	}
 
 	public String getPrefix() {
 		return prefix;
-	}
-
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
-
-	public String getResourceId() {
-		return resourceId;
 	}
 
 	public List<URLParameter> getWsrpParameters() {
