@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.context.url.liferay;
 
+import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.BridgeResourceURLImpl;
 
@@ -21,9 +22,6 @@ import com.liferay.faces.bridge.context.url.BridgeResourceURLImpl;
  * @author  Neil Griffin
  */
 public class BridgeResourceURLLiferayImpl extends BridgeResourceURLImpl {
-
-	// Private Constants
-	private static final String WSRP_REWRITE = "wsrp_rewrite";
 
 	// Private Data Members
 	private Boolean external;
@@ -40,7 +38,7 @@ public class BridgeResourceURLLiferayImpl extends BridgeResourceURLImpl {
 
 			if (external) {
 
-				if (url.startsWith(WSRP_REWRITE)) {
+				if (url.startsWith(BridgeConstants.WSRP_REWRITE)) {
 					external = Boolean.FALSE;
 				}
 			}
