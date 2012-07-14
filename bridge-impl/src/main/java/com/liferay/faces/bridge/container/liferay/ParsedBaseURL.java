@@ -57,9 +57,17 @@ public class ParsedBaseURL {
 				int equalsPos = nameValuePair.indexOf(BridgeConstants.CHAR_EQUALS);
 
 				if (equalsPos > 0) {
+
 					String name = nameValuePair.substring(0, equalsPos);
 					String value = nameValuePair.substring(equalsPos + 1);
-					parameterMap.put(name, value);
+
+					if (nameValuePair.startsWith(BridgeConstants.WSRP)) {
+						URLParameter urlParameter = new URLParameter(name, value);
+						wsrpParameters.add(urlParameter);
+					}
+					else {
+						parameterMap.put(name, value);
+					}
 				}
 			}
 		}
