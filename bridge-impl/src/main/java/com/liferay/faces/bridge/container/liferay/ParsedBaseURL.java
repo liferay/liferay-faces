@@ -48,7 +48,7 @@ public class ParsedBaseURL {
 			queryString = toStringValue.substring(queryPos + 1);
 		}
 
-		String[] nameValuePairs = queryString.split("[&]");
+		String[] nameValuePairs = queryString.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
 
 		if (nameValuePairs != null) {
 

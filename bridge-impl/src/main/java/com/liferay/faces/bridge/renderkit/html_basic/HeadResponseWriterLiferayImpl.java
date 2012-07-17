@@ -22,10 +22,12 @@ import javax.portlet.PortletRequest;
 
 import org.w3c.dom.Element;
 
-import com.liferay.faces.bridge.container.liferay.StringBundlerUtil;
+import com.liferay.faces.bridge.container.liferay.LiferayConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+
+import com.liferay.portal.kernel.util.StringBundler;
 
 
 /**
@@ -35,9 +37,6 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * @author  Neil Griffin
  */
 public class HeadResponseWriterLiferayImpl extends HeadResponseWriter {
-
-	// Private Constants
-	public static final String LIFERAY_SHARED_PAGE_TOP = "LIFERAY_SHARED_PAGE_TOP";
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(HeadResponseWriterLiferayImpl.class);
@@ -68,20 +67,18 @@ public class HeadResponseWriterLiferayImpl extends HeadResponseWriter {
 				String elementAsString = element.toString();
 
 				PortletRequest portletRequest = bridgeContext.getPortletRequest();
-				Object stringBundler = portletRequest.getAttribute(LIFERAY_SHARED_PAGE_TOP);
+				StringBundler stringBundler = (StringBundler) portletRequest.getAttribute(
+						LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
 
 				if (stringBundler == null) {
-					stringBundler = StringBundlerUtil.create();
+					stringBundler = new StringBundler();
 				}
 
-				StringBundlerUtil.append(stringBundler, elementAsString);
+				stringBundler.append(elementAsString);
 
-				portletRequest.setAttribute(LIFERAY_SHARED_PAGE_TOP, stringBundler);
+				portletRequest.setAttribute(LiferayConstants.LIFERAY_SHARED_PAGE_TOP, stringBundler);
 
-				if (logger.isDebugEnabled()) {
-					logger.debug("Added resource to Liferay's <head>...</head> section element=[" + elementAsString +
-						"]");
-				}
+				logger.debug("Added resource to Liferay's <head>...</head> section, element=[{0}]", elementAsString);
 			}
 		}
 		catch (EmptyStackException e) {

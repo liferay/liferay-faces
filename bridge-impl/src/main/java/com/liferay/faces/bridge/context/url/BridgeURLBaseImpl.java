@@ -369,7 +369,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 					String subURL = url.substring(ampersandPos);
 
-					if (subURL.startsWith("&amp;")) {
+					if (subURL.startsWith(BridgeConstants.ENCODED_AMERSAND)) {
 						escaped = Boolean.TRUE;
 						ampersandPos = url.indexOf(BridgeConstants.CHAR_AMPERSAND, ampersandPos + 1);
 					}

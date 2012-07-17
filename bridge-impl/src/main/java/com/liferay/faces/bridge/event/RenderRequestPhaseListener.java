@@ -17,6 +17,9 @@ import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
+import com.liferay.faces.bridge.container.PortletContainer;
+import com.liferay.faces.bridge.context.BridgeContext;
+
 
 /**
  * Section 5.2.6 of the Spec indicates that the bridge must proactively ensure that only the RESTORE_VIEW phase
@@ -30,7 +33,15 @@ public class RenderRequestPhaseListener implements PhaseListener {
 	private static final long serialVersionUID = 8470095938465172618L;
 
 	public void afterPhase(PhaseEvent phaseEvent) {
-		phaseEvent.getFacesContext().renderResponse();
+
+		if (phaseEvent.getPhaseId() == PhaseId.RENDER_RESPONSE) {
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			PortletContainer portletContainer = bridgeContext.getPortletContainer();
+			portletContainer.postRenderResponse();
+		}
+		else {
+			phaseEvent.getFacesContext().renderResponse();
+		}
 	}
 
 	public void beforePhase(PhaseEvent phaseEvent) {
@@ -38,7 +49,7 @@ public class RenderRequestPhaseListener implements PhaseListener {
 	}
 
 	public PhaseId getPhaseId() {
-		return PhaseId.RESTORE_VIEW;
+		return PhaseId.ANY_PHASE;
 	}
 
 }

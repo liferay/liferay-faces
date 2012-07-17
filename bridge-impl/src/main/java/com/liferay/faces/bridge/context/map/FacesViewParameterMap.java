@@ -15,10 +15,12 @@ package com.liferay.faces.bridge.context.map;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.portlet.faces.Bridge;
 
+import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -53,7 +55,7 @@ public class FacesViewParameterMap extends HashMap<String, String> {
 
 		if ((facesViewQueryString != null) && (facesViewQueryString.length() > 0)) {
 
-			String[] queryParameters = facesViewQueryString.split("[&]");
+			String[] queryParameters = facesViewQueryString.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
 
 			for (String queryParameter : queryParameters) {
 				String[] nameValueArray = queryParameter.split("[=]");

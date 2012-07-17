@@ -55,9 +55,7 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 	private static final Logger logger = LoggerFactory.getLogger(ResourceHandlerInnerImpl.class);
 
 	// Public Constants
-	public static final String JAVAX_FACES_RESOURCE = "javax.faces.resource";
 	public static final String ORG_RICHFACES = "org.richfaces";
-	public static final String REQUEST_PARAM_LIBRARY_NAME = "ln";
 
 	// Private Constants
 	private static final String ENCODED_RESOURCE_TOKEN = "javax.faces.resource=";
@@ -130,7 +128,7 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 	 */
 	public static boolean isFacesResourceURL(String url) {
 
-		if ((url != null) && (url.indexOf(JAVAX_FACES_RESOURCE) >= 0)) {
+		if ((url != null) && (url.indexOf(BridgeConstants.JAVAX_FACES_RESOURCE) >= 0)) {
 			return true;
 		}
 		else {
@@ -182,7 +180,7 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
-		String resourceName = requestParameterMap.get(JAVAX_FACES_RESOURCE);
+		String resourceName = requestParameterMap.get(BridgeConstants.JAVAX_FACES_RESOURCE);
 
 		// Assume that the resource  ExternalContext.encodeResourceURL(String) was properly called, and that
 		// which adds the "javax.faces.resource" request parameter.
@@ -190,7 +188,7 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 		// assume that calling resource.getInputStream() will provide the ability to send the contents of the
 		// resource to the response.
 		if (resourceName != null) {
-			String libraryName = requestParameterMap.get(REQUEST_PARAM_LIBRARY_NAME);
+			String libraryName = requestParameterMap.get(BridgeConstants.LN);
 
 			// Ryan Lubke's blog indicates that the locale and version are handled automatically, so the assumption
 			// is that the bridge doesn't need to handle the "loc" and "v" request parameters. Additionally, the
@@ -420,7 +418,7 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 		}
 		else {
 			logger.debug("NOT HANDLED - Missing request parameter {0} so delegating handleResourceRequest to chain",
-				JAVAX_FACES_RESOURCE);
+				BridgeConstants.JAVAX_FACES_RESOURCE);
 			wrappedResourceHandler.handleResourceRequest(facesContext);
 		}
 	}
@@ -570,17 +568,17 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 		// the resource and we return true.
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
-		String resourceId = requestParameterMap.get(JAVAX_FACES_RESOURCE);
+		String resourceId = requestParameterMap.get(BridgeConstants.JAVAX_FACES_RESOURCE);
 
 		if (resourceId != null) {
 			logger.debug("Bridge found {0} request parameter and recognized resourceId=[{1}] as a resource",
-				new Object[] { JAVAX_FACES_RESOURCE, resourceId });
+				new Object[] { BridgeConstants.JAVAX_FACES_RESOURCE, resourceId });
 
 			return true;
 		}
 		else {
 			logger.debug("Bridge did not find the {0} request parameter so delegating isResourceRequest to chain",
-				JAVAX_FACES_RESOURCE);
+				BridgeConstants.JAVAX_FACES_RESOURCE);
 
 			return wrappedResourceHandler.isResourceRequest(facesContext);
 		}
