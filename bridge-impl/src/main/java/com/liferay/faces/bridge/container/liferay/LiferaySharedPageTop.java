@@ -30,7 +30,6 @@ import com.liferay.faces.bridge.renderkit.html_basic.HeadResource;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-import com.liferay.portal.kernel.util.StringBundler;
 
 
 /**
@@ -51,7 +50,7 @@ public class LiferaySharedPageTop {
 	// Private Data Members
 	private List<HeadResource> headResources;
 
-	public LiferaySharedPageTop(StringBundler stringBundler) {
+	public LiferaySharedPageTop(StringBuilder stringBundler) {
 
 		try {
 			headResources = new ArrayList<HeadResource>();
@@ -64,7 +63,7 @@ public class LiferaySharedPageTop {
 			// Obtain a SAX Parser from the factory.
 			SAXParser saxParser = saxParserFactory.newSAXParser();
 			SharedPageTopHandler sharedPageTopHandler = new SharedPageTopHandler();
-			StringBundler xmlDocument = new StringBundler();
+			StringBuilder xmlDocument = new StringBuilder();
 			xmlDocument.append(XML_DOCUMENT_DECLARATION);
 			xmlDocument.append(BridgeConstants.CHAR_LESS_THAN);
 			xmlDocument.append(LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
@@ -117,8 +116,8 @@ public class LiferaySharedPageTop {
 
 	}
 
-	public StringBundler toStringBundler() {
-		StringBundler stringBundler = new StringBundler();
+	public StringBuilder toStringBundler() {
+		StringBuilder stringBundler = new StringBuilder();
 
 		for (HeadResource headResource : headResources) {
 			stringBundler.append(headResource.toString());

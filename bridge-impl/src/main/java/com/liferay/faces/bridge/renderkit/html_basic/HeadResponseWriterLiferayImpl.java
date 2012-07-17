@@ -27,8 +27,6 @@ import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-import com.liferay.portal.kernel.util.StringBundler;
-
 
 /**
  * Custom {@link ResponseWriter} that has the ability to write to the <head>...</head> section of the portal page via
@@ -67,11 +65,11 @@ public class HeadResponseWriterLiferayImpl extends HeadResponseWriter {
 				String elementAsString = element.toString();
 
 				PortletRequest portletRequest = bridgeContext.getPortletRequest();
-				StringBundler stringBundler = (StringBundler) portletRequest.getAttribute(
+				StringBuilder stringBundler = (StringBuilder) portletRequest.getAttribute(
 						LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
 
 				if (stringBundler == null) {
-					stringBundler = new StringBundler();
+					stringBundler = new StringBuilder();
 				}
 
 				stringBundler.append(elementAsString);

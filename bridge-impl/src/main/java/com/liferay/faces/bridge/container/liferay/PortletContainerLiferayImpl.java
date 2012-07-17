@@ -47,8 +47,6 @@ import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-import com.liferay.portal.kernel.util.StringBundler;
-
 
 /**
  * @author  Neil Griffin
@@ -260,7 +258,7 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
 
-		StringBundler stringBundler = (StringBundler) portletRequest.getAttribute(
+		StringBuilder stringBundler = (StringBuilder) portletRequest.getAttribute(
 				LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
 
 		if (stringBundler != null) {
