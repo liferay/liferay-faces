@@ -40,16 +40,15 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.PortletPhase;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.application.ResourceHandlerInnerImpl;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.util.helper.BooleanHelper;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriterImpl;
 import com.liferay.faces.bridge.util.RequestParameter;
+import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -201,7 +200,7 @@ public class PortletContainerImpl implements PortletContainer {
 				resourceURL = createResourceURL(mimeResponse);
 
 				// If the "javax.faces.resource" token is found in the URL, then
-				int tokenPos = fromURL.indexOf(ResourceHandlerInnerImpl.JAVAX_FACES_RESOURCE);
+				int tokenPos = fromURL.indexOf(BridgeConstants.JAVAX_FACES_RESOURCE);
 
 				if (tokenPos >= 0) {
 
@@ -224,12 +223,12 @@ public class PortletContainerImpl implements PortletContainer {
 					}
 					else {
 						logger.error("There is no slash after the [{0}] token in resourceURL=[{1}]",
-							ResourceHandlerInnerImpl.JAVAX_FACES_RESOURCE, fromURL);
+							BridgeConstants.JAVAX_FACES_RESOURCE, fromURL);
 					}
 
-					resourceURL.setParameter(ResourceHandlerInnerImpl.JAVAX_FACES_RESOURCE, resourceName);
+					resourceURL.setParameter(BridgeConstants.JAVAX_FACES_RESOURCE, resourceName);
 					logger.debug("Added parameter to portletURL name=[{0}] value=[{1}]",
-						ResourceHandlerInnerImpl.JAVAX_FACES_RESOURCE, resourceName);
+						BridgeConstants.JAVAX_FACES_RESOURCE, resourceName);
 				}
 
 				// Copy the request parameters to the portlet resource URL.
@@ -253,6 +252,10 @@ public class PortletContainerImpl implements PortletContainer {
 
 	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse) {
 		eventResponse.setRenderParameters(eventRequest);
+	}
+
+	public void postRenderResponse() {
+		// No-op
 	}
 
 	public void redirect(String url) throws IOException {
@@ -353,7 +356,7 @@ public class PortletContainerImpl implements PortletContainer {
 				if ((queryString != null) && (queryString.length() > 0)) {
 					requestParameters = new ArrayList<RequestParameter>();
 
-					String[] queryParameters = queryString.split("[&]");
+					String[] queryParameters = queryString.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
 
 					for (String queryParameter : queryParameters) {
 						String[] nameValueArray = queryParameter.split("[=]");

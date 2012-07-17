@@ -22,9 +22,10 @@ import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.ResponseWriter;
 import javax.faces.context.ResponseWriterWrapper;
 
+import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.bridge.renderkit.html_basic.BodyRenderer;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.bridge.renderkit.html_basic.BodyRenderer;
 
 
 /**
@@ -76,7 +77,6 @@ public class ResponseWriterBridgeImpl extends ResponseWriterWrapper {
 	private static final String ELEMENT_INPUT = "input";
 	private static final String ELEMENT_PARTIAL_RESPONSE = "partial-response";
 	private static final String ELEMENT_UPDATE = "update";
-	private static final String GREATER_THAN = ">";
 	private static final String TYPE_HIDDEN = "hidden";
 	private static final String VALUE_OFF = "off";
 	private static final String XML_MARKER = "<?xml";
@@ -220,7 +220,7 @@ public class ResponseWriterBridgeImpl extends ResponseWriterWrapper {
 
 				logger.trace("filtering marker");
 
-				int greaterThanPos = data.indexOf(GREATER_THAN);
+				int greaterThanPos = data.indexOf(BridgeConstants.CHAR_GREATER_THAN);
 
 				if (greaterThanPos > 0) {
 					len -= (greaterThanPos + 1);

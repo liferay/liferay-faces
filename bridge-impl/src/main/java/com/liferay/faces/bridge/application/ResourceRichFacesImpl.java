@@ -60,7 +60,7 @@ public class ResourceRichFacesImpl extends ResourceWrapper {
 				ExternalContext externalContext = facesContext.getExternalContext();
 				StringBuilder buf = new StringBuilder();
 				buf.append(BridgeConstants.CHAR_FORWARD_SLASH);
-				buf.append(ResourceHandlerInnerImpl.JAVAX_FACES_RESOURCE);
+				buf.append(BridgeConstants.JAVAX_FACES_RESOURCE);
 				buf.append(BridgeConstants.CHAR_FORWARD_SLASH);
 				buf.append(requestPath.substring(pos + RICHFACES_PATH_TOKEN.length()));
 				requestPath = externalContext.encodeResourceURL(buf.toString());

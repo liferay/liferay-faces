@@ -157,7 +157,7 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 			// The TCK expects query parameters to appear in exactly the same order as they do in the query-string of
 			// the original URL. For this reason, need to iterate over the parameters found in the original
 			// query-string.
-			String[] queryParameters = originalQuery.split("[&]");
+			String[] queryParameters = originalQuery.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
 
 			// For each parameter found in the original query-string:
 			for (String queryParameter : queryParameters) {
