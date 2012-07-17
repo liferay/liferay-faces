@@ -32,9 +32,6 @@ import com.liferay.faces.bridge.util.FacesURLEncoder;
  */
 public class ScriptRendererBridgeImpl extends RendererWrapper {
 
-	// Private Constants
-	private static final String ATTR_SRC = "src";
-
 	// Private Data Members
 	private Renderer wrappedRenderer;
 
@@ -114,7 +111,7 @@ public class ScriptRendererBridgeImpl extends RendererWrapper {
 		@Override
 		public void writeURIAttribute(String name, Object value, String property) throws IOException {
 
-			if ((value != null) && (value instanceof String) && ATTR_SRC.equals(name)) {
+			if ((value != null) && (value instanceof String) && BridgeConstants.SRC.equals(name)) {
 				String encoding = wrappedResponseWriter.getCharacterEncoding();
 				String encodedURI = FacesURLEncoder.encode((String) value, encoding);
 
