@@ -218,4 +218,6 @@ public interface PortletContainer {
 	 * Returns the value of the "User-Agent" header from the underlying HttpServletRequest.
 	 */
 	public String[] getUserAgentHeader();
+
+	public void postRenderResponse();
 }

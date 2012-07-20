@@ -41,11 +41,11 @@ public class URLUtil {
 
 			if (pos > 0) {
 				String queryString = url.substring(pos + 1);
-				queryString = queryString.replaceAll("&amp;", "&");
+				queryString = queryString.replaceAll(BridgeConstants.ENCODED_AMERSAND, BridgeConstants.CHAR_AMPERSAND);
 
 				if ((queryString != null) && (queryString.length() > 0)) {
 
-					String[] queryParameters = queryString.split("[&]");
+					String[] queryParameters = queryString.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
 
 					for (String queryParameter : queryParameters) {
 						String[] nameValueArray = queryParameter.split("[=]");

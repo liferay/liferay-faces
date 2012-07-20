@@ -27,6 +27,7 @@ public class LiferayConstants {
 	public static final String LIFECYCLE_ACTION_PHASE_ID = "1";
 	public static final String LIFECYCLE_RENDER_PHASE_ID = "0";
 	public static final String LIFECYCLE_RESOURCE_PHASE_ID = "2";
+	public static final String LIFERAY_SHARED_PAGE_TOP = "LIFERAY_SHARED_PAGE_TOP";
 	public static final String P_AUTH = "p_auth";
 	public static final String P_P_AUTH = "p_p_auth";
 	public static final String P_P_CACHEABILITY = "p_p_cacheability";
