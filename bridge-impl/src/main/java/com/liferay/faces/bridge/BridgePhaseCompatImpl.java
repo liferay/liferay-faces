@@ -30,12 +30,12 @@ import javax.faces.event.ExceptionQueuedEventContext;
  */
 public abstract class BridgePhaseCompatImpl implements BridgePhase {
 
-	public void handleJSF2ResourceRequest(FacesContext facesContext) throws IOException {
+	protected void handleJSF2ResourceRequest(FacesContext facesContext) throws IOException {
 		ResourceHandler resourceHandler = facesContext.getApplication().getResourceHandler();
 		resourceHandler.handleResourceRequest(facesContext);
 	}
 
-	public Throwable getJSF2HandledException(FacesContext facesContext) {
+	protected Throwable getJSF2HandledException(FacesContext facesContext) {
 
 		Throwable handledException = null;
 
@@ -58,7 +58,7 @@ public abstract class BridgePhaseCompatImpl implements BridgePhase {
 		return handledException;
 	}
 
-	public Throwable getJSF2UnhandledException(FacesContext facesContext) {
+	protected Throwable getJSF2UnhandledException(FacesContext facesContext) {
 
 		Throwable unhandledException = null;
 		ExceptionHandler exceptionHandler = facesContext.getExceptionHandler();
@@ -80,7 +80,7 @@ public abstract class BridgePhaseCompatImpl implements BridgePhase {
 		return unhandledException;
 	}
 
-	public boolean isJSF2ResourceRequest(FacesContext facesContext) {
+	protected boolean isJSF2ResourceRequest(FacesContext facesContext) {
 		ResourceHandler resourceHandler = facesContext.getApplication().getResourceHandler();
 
 		return resourceHandler.isResourceRequest(facesContext);

@@ -97,7 +97,7 @@ public abstract class HeadResponseWriter extends ResponseWriterWrapper {
 		}
 	}
 
-	@Override
+	// In order to stay compatible with JSF1, must not specify @Override annotation
 	public void endCDATA() throws IOException {
 
 		try {
@@ -124,7 +124,7 @@ public abstract class HeadResponseWriter extends ResponseWriterWrapper {
 		}
 	}
 
-	@Override
+	// In order to stay compatible with JSF1, must not specify @Override annotation
 	public void startCDATA() throws IOException {
 
 		try {
