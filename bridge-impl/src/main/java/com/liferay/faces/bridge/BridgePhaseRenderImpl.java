@@ -23,7 +23,6 @@ import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExternalContext;
-import javax.faces.context.ExternalContextWrapper;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
@@ -48,9 +47,7 @@ import com.liferay.faces.bridge.application.BridgeNavigationHandler;
 import com.liferay.faces.bridge.application.BridgeNavigationHandlerImpl;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.container.PortletContainer;
-import com.liferay.faces.bridge.context.ExternalContextImpl;
 import com.liferay.faces.bridge.context.RenderRedirectWriter;
-import com.liferay.faces.bridge.context.flash.BridgeFlash;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.event.IPCPhaseListener;
 import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityManager;
@@ -143,27 +140,6 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 
 		if (bridgeRequestScope.isPortletModeChanged()) {
 			bridgeRequestScopeCache.remove(bridgeRequestScope);
-		}
-
-		// NOTE: PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
-		// Restore the flash scope.
-		BridgeFlash bridgeFlash = (BridgeFlash) bridgeRequestScope.getFlash();
-
-		if (bridgeFlash != null) {
-			ExternalContext externalContext = facesContext.getExternalContext();
-
-			while (externalContext instanceof ExternalContextWrapper) {
-				ExternalContextWrapper externalContextWrapper = (ExternalContextWrapper) externalContext;
-				externalContext = externalContextWrapper.getWrapped();
-			}
-
-			if (externalContext instanceof ExternalContextImpl) {
-				ExternalContextImpl externalContextImpl = (ExternalContextImpl) externalContext;
-				externalContextImpl.setBridgeFlash(bridgeFlash);
-			}
-			else {
-				logger.error("Unable to get access to the bridge ExternalContextImpl");
-			}
 		}
 
 		// If a render-redirect URL was specified, then it is necessary to create a new view from the URL and place it
