@@ -49,7 +49,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public abstract class BridgePhaseBaseImpl implements BridgePhase {
+public abstract class BridgePhaseBaseImpl extends BridgePhaseCompatImpl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgePhaseBaseImpl.class);

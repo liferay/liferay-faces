@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.scope;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
@@ -28,7 +29,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
 import javax.faces.render.ResponseStateManager;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -42,6 +42,7 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 import javax.portlet.faces.Bridge;
+import javax.portlet.faces.Bridge.PortletPhase;
 import javax.portlet.faces.annotation.ExcludeFromManagedRequestScope;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -62,7 +63,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> implements BridgeRequestScope {
+public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl implements BridgeRequestScope, Serializable {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 7113251688518329851L;
@@ -98,7 +99,6 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 	private Bridge.PortletPhase beganInPhase;
 	private List<String> excludedAttributeNames;
 	private boolean facesLifecycleExecuted;
-	private Flash flash;
 	private String idPrefix;
 	private String idSuffix;
 	private Map<String, Object> managedBeanMap;
@@ -226,7 +226,8 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
-		if (bridgeContext.getPortletRequestPhase() == Bridge.PortletPhase.RENDER_PHASE) {
+		PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
+		if (portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE) {
 
 			if (!portletMode.equals(bridgeContext.getPortletRequest().getPortletMode())) {
 				setPortletModeChanged(true);
@@ -331,6 +332,14 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 				logger.debug("Did not restore any non-excluded request attributes");
 			}
 		}
+
+		// If running in the RENDER_PHASE, then the Flash scope must be restored.
+		if (portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE) {
+
+			// NOTE: PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
+			// Restore the flash scope.
+			restoreFlashState(facesContext);
+		}
 	}
 
 	/**
@@ -344,6 +353,7 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 		logger.debug("saveState(facesContext)");
 
 		// Get the ExternalContext and PortletResponse.
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
 		PortletResponse portletResponse = (PortletResponse) facesContext.getExternalContext().getResponse();
 
@@ -371,8 +381,6 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 			}
 
 			// If specified in the WEB-INF/portlet.xml descriptor, then preserve the action parameters.
-			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-
 			if (bridgeContext.isPreserveActionParams()) {
 				Map<String, String> actionRequestParameterMap = new HashMap<String, String>(
 						externalContext.getRequestParameterMap());
@@ -493,6 +501,18 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 				logger.trace("Not saving any non-excluded request attributes because there are no request attributes!");
 			}
 		}
+
+		// If running in the ACTION_PHASE or EVENT_PHASE, then the Flash scope must be saved as well so that it can be
+		// restored.
+		Bridge.PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
+
+		if ((portletRequestPhase == Bridge.PortletPhase.ACTION_PHASE) ||
+				(portletRequestPhase == Bridge.PortletPhase.EVENT_PHASE)) {
+
+			// PROPOSED-FOR-JSR344-API: http://java.net/jira/browse/JAVASERVERFACES_SPEC_PUBLIC-1070
+			// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
+			saveFlashState(facesContext);
+		}
 	}
 
 	/**
@@ -566,14 +586,6 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 
 	public void setFacesLifecycleExecuted(boolean facesLifecycleExecuted) {
 		this.facesLifecycleExecuted = facesLifecycleExecuted;
-	}
-
-	public Flash getFlash() {
-		return flash;
-	}
-
-	public void setFlash(Flash flash) {
-		this.flash = flash;
 	}
 
 	protected boolean isExcludedRequestAttributeByConfig(String attributeName, Object attributeValue) {
