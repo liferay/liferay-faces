@@ -22,6 +22,7 @@ import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.FactoryWrapper;
 import com.liferay.faces.bridge.config.BridgeConfig;
+import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 
 
@@ -39,5 +40,6 @@ public abstract class BridgeContextFactory implements FactoryWrapper<BridgeConte
 
 	public abstract BridgeContext getBridgeContext(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
 		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,
-		PortletResponse portletResponse, Bridge.PortletPhase portletPhase) throws FacesException;
+		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, PortletContainer portletContainer)
+		throws FacesException;
 }

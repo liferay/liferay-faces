@@ -13,12 +13,14 @@
  */
 package com.liferay.faces.bridge.tck.container;
 
+import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.container.PortletContainerDetector;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
-import com.liferay.faces.bridge.context.BridgeContext;
 
 
 /**
@@ -34,19 +36,19 @@ public class PortletContainerFactoryTCKImpl extends PortletContainerFactory {
 	}
 
 	@Override
-	public PortletContainer getPortletContainer(BridgeContext bridgeContext) {
+	public PortletContainer getPortletContainer(PortletRequest portletRequest, PortletResponse portletResponse,
+		PortletContext portletContext, BridgeConfig bridgeConfig) {
 
 		PortletContainer portletContainer = null;
 
-		PortletRequest portletRequest = bridgeContext.getPortletRequest();
-
 		if (PortletContainerDetector.isPlutoObject(portletRequest)) {
-			portletContainer = new PortletContainerPlutoTCKImpl(bridgeContext);
+			portletContainer = new PortletContainerPlutoTCKImpl(portletRequest, bridgeConfig);
 		}
 		else {
 
 			if (wrappedPortletContainerFactory != null) {
-				portletContainer = wrappedPortletContainerFactory.getPortletContainer(bridgeContext);
+				portletContainer = wrappedPortletContainerFactory.getPortletContainer(portletRequest, portletResponse,
+						portletContext, bridgeConfig);
 			}
 		}
 
