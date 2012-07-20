@@ -18,16 +18,17 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import javax.faces.FacesWrapper;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.xml.namespace.QName;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class PortletConfigWrapper implements PortletConfig, FacesWrapper<PortletConfig> {
+public abstract class PortletConfigWrapper implements PortletConfig, Wrapper<PortletConfig> {
 
 	public Map<String, String[]> getContainerRuntimeOptions() {
 		return getWrapped().getContainerRuntimeOptions();

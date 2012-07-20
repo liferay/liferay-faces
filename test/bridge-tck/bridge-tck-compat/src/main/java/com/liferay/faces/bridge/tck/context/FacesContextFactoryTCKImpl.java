@@ -18,6 +18,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.FacesContextFactory;
 import javax.faces.lifecycle.Lifecycle;
 
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
@@ -26,7 +27,7 @@ import javax.faces.lifecycle.Lifecycle;
  *
  * @author  Neil Griffin
  */
-public class FacesContextFactoryTCKImpl extends FacesContextFactory {
+public class FacesContextFactoryTCKImpl extends FacesContextFactory implements Wrapper<FacesContextFactory> {
 
 	// Private Data Members
 	private FacesContextFactory wrappedFacesContextFactory;
@@ -46,7 +47,6 @@ public class FacesContextFactoryTCKImpl extends FacesContextFactory {
 		return facesContext;
 	}
 
-	@Override
 	public FacesContextFactory getWrapped() {
 		return wrappedFacesContextFactory;
 	}
