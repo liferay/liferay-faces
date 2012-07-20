@@ -32,6 +32,9 @@ import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriterImpl;
  */
 public abstract class PortletContainerCompatImpl implements PortletContainer {
 
+	// serialVersionUID
+	private static final long serialVersionUID = 2694729758648266705L;
+
 	protected void redirectJSF2PartialResponse(FacesContext facesContext, ResourceResponse resourceResponse, String url)
 		throws IOException {
 		resourceResponse.setContentType("text/xml");
