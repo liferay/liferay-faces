@@ -1,8 +1,0 @@
-/* Note the following fixes an ice:panelTab rendering height problem in Liferay 6 */
-.icePnlTbLblLnk, .LftTop, .MidTop, .RtTop, .LftBtm, .MidBtm, .RtBtm {
-	line-height: 1px;
-}
-
-.iicp .icePnlTbSetCnt {
-	background-color: #fff;
-}
