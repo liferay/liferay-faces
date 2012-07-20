@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" version="2.1">
+
+	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
+	<link href="${pageContext.request.contextPath}/css/portlet.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath}/css/liferay-theme-override.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath}/css/example.css" rel="stylesheet" type="text/css" />
+	<c:if test="${!aui.provided}">
+		<link href="${pageContext.request.contextPath}/css/aui-skin-classic-all-min.css" rel="stylesheet" type="text/css" />
+	</c:if>
+
+</jsp:root>
