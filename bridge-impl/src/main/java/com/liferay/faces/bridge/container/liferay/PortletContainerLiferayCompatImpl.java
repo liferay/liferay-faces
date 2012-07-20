@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.container.liferay;
 
+import javax.faces.context.ResponseWriter;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.portlet.PortletRequest;
@@ -20,6 +21,8 @@ import javax.portlet.PortletRequest;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainerImpl;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
+import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriterLiferayImpl;
 
 import com.liferay.portal.kernel.util.StringBundler;
 
@@ -85,6 +88,16 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 		if (stringBundler != null) {
 			liferaySharedPageTopLength = stringBundler.length();
 		}
+	}
+
+	@Override
+	public HeadResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter) {
+
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+		HeadResponseWriter headResponseWriter = new HeadResponseWriterLiferayImpl(bridgeContext,
+				wrappableResponseWriter);
+
+		return headResponseWriter;
 	}
 
 	@Override
