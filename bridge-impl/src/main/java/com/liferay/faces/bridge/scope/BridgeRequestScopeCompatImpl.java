@@ -13,6 +13,11 @@
  */
 package com.liferay.faces.bridge.scope;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import javax.faces.context.ExternalContext;
 import javax.faces.context.ExternalContextWrapper;
 import javax.faces.context.FacesContext;
@@ -29,10 +34,14 @@ import com.liferay.faces.util.logging.LoggerFactory;
  *
  * @author  Neil Griffin
  */
-public class BridgeRequestScopeCompatImpl {
+public abstract class BridgeRequestScopeCompatImpl extends BridgeRequestScopeBaseImpl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeRequestScopeCompatImpl.class);
+
+	// Private Constants
+	private static final String BRIDGE_REQ_SCOPE_ATTR_FACES_CONTEXT_ATTRIBUTES =
+		"com.liferay.faces.bridge.facescontext.attributes";
 
 	// Private Data Members
 	private Flash flash;
@@ -58,7 +67,53 @@ public class BridgeRequestScopeCompatImpl {
 		}
 	}
 
+	protected void restoreJSF2FacesContextAttributes(FacesContext facesContext) {
+
+		@SuppressWarnings("unchecked")
+		List<FacesContextAttribute> savedFacesContextAttributes = (List<FacesContextAttribute>) getAttribute(
+				BRIDGE_REQ_SCOPE_ATTR_FACES_CONTEXT_ATTRIBUTES);
+
+		boolean restoredFacesContextAttibutes = false;
+
+		if (savedFacesContextAttributes != null) {
+			Map<Object, Object> currentFacesContextAttributes = facesContext.getAttributes();
+
+			for (FacesContextAttribute facesContextAttribute : savedFacesContextAttributes) {
+				Object name = facesContextAttribute.getName();
+
+				Object value = facesContextAttribute.getValue();
+				logger.trace("Restoring FacesContext attribute name=[{0}] value=[{1}]", name, value);
+				currentFacesContextAttributes.put(name, value);
+				restoredFacesContextAttibutes = true;
+			}
+		}
+
+		if (restoredFacesContextAttibutes) {
+			logger.debug("Restored FacesContext attributes");
+		}
+		else {
+			logger.debug("Did not restore any FacesContext attributes");
+		}
+	}
+
 	protected void saveFlashState(FacesContext facesContext) {
 		flash = facesContext.getExternalContext().getFlash();
+	}
+
+	protected void saveJSF2FacesContextAttributes(FacesContext facesContext) {
+		Map<Object, Object> currentFacesContextAttributes = facesContext.getAttributes();
+		int mapSize = currentFacesContextAttributes.size();
+		List<FacesContextAttribute> savedFacesContextAttributes = new ArrayList<FacesContextAttribute>(mapSize);
+		Iterator<Map.Entry<Object, Object>> itr = currentFacesContextAttributes.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry<Object, Object> mapEntry = itr.next();
+			Object name = mapEntry.getKey();
+			Object value = mapEntry.getValue();
+			logger.trace("Saving FacesContext attribute name=[{0}] value=[{1}]", name, value);
+			savedFacesContextAttributes.add(new FacesContextAttribute(name, value));
+		}
+
+		setAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_CONTEXT_ATTRIBUTES, savedFacesContextAttributes);
 	}
 }

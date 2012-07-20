@@ -63,7 +63,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl implements BridgeRequestScope, Serializable {
+public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl implements Serializable {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 7113251688518329851L;
@@ -73,8 +73,6 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 
 	// Private Constants for Bridge Request Scope Attributes
 	private static final String BRIDGE_REQ_SCOPE_ATTR_ACTION_PARAMS = "com.liferay.faces.bridge.actionParams";
-	private static final String BRIDGE_REQ_SCOPE_ATTR_FACES_CONTEXT_ATTRIBUTES =
-		"com.liferay.faces.bridge.facescontext.attributes";
 	private static final String BRIDGE_REQ_SCOPE_ATTR_FACES_MESSAGES = "com.liferay.faces.bridge.faces.messages";
 	private static final String BRIDGE_REQ_SCOPE_ATTR_FACES_VIEW_ROOT = "com.liferay.faces.bridge.faces.view.root";
 	private static final String BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES =
@@ -95,7 +93,6 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 	private static final String JAVAX_FACES_ENCODED_URL_PARAM = "javax.faces.encodedURL";
 
 	// Private Data Members
-	private Map<String, Object> attributeMap;
 	private Bridge.PortletPhase beganInPhase;
 	private List<String> excludedAttributeNames;
 	private boolean facesLifecycleExecuted;
@@ -112,7 +109,6 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 	public BridgeRequestScopeImpl(PortletConfig portletConfig, PortletContext portletContext,
 		PortletRequest portletRequest) {
 
-		this.attributeMap = new HashMap<String, Object>();
 		portletName = portletConfig.getPortletName();
 
 		PortletSession portletSession = portletRequest.getPortletSession();
@@ -227,6 +223,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
 		PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
+
 		if (portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE) {
 
 			if (!portletMode.equals(bridgeContext.getPortletRequest().getPortletMode())) {
@@ -275,30 +272,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 
 			// NOTE: PROPOSE-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-203 Restore the
 			// FacesContext attributes that may have been saved during the ACTION_PHASE of the portlet lifecycle.
-			List<FacesContextAttribute> savedFacesContextAttributes = (List<FacesContextAttribute>) getAttribute(
-					BRIDGE_REQ_SCOPE_ATTR_FACES_CONTEXT_ATTRIBUTES);
-
-			boolean restoredFacesContextAttibutes = false;
-
-			if (savedFacesContextAttributes != null) {
-				Map<Object, Object> currentFacesContextAttributes = facesContext.getAttributes();
-
-				for (FacesContextAttribute facesContextAttribute : savedFacesContextAttributes) {
-					Object name = facesContextAttribute.getName();
-
-					Object value = facesContextAttribute.getValue();
-					logger.trace("Restoring FacesContext attribute name=[{0}] value=[{1}]", name, value);
-					currentFacesContextAttributes.put(name, value);
-					restoredFacesContextAttibutes = true;
-				}
-			}
-
-			if (restoredFacesContextAttibutes) {
-				logger.debug("Restored FacesContext attributes");
-			}
-			else {
-				logger.debug("Did not restore any FacesContext attributes");
-			}
+			restoreJSF2FacesContextAttributes(facesContext);
 		}
 
 		if (restoreNonExcludedRequestAttributes) {
@@ -415,20 +389,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 			// of attributes found in the FacesContext attribute map and save them. It has to be copied in this manner
 			// because the Faces implementation likely calls the clear() method during the call to its
 			// FacesContextImpl.release() method.
-			Map<Object, Object> currentFacesContextAttributes = facesContext.getAttributes();
-			int mapSize = currentFacesContextAttributes.size();
-			List<FacesContextAttribute> savedFacesContextAttributes = new ArrayList<FacesContextAttribute>(mapSize);
-			Iterator<Map.Entry<Object, Object>> itr = currentFacesContextAttributes.entrySet().iterator();
-
-			while (itr.hasNext()) {
-				Map.Entry<Object, Object> mapEntry = itr.next();
-				Object name = mapEntry.getKey();
-				Object value = mapEntry.getValue();
-				logger.trace("Saving FacesContext attribute name=[{0}] value=[{1}]", name, value);
-				savedFacesContextAttributes.add(new FacesContextAttribute(name, value));
-			}
-
-			setAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_CONTEXT_ATTRIBUTES, savedFacesContextAttributes);
+			saveJSF2FacesContextAttributes(facesContext);
 		}
 
 		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
@@ -527,14 +488,6 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 		buf.append(Integer.toHexString(hashCode()));
 
 		return buf.toString();
-	}
-
-	public Object getAttribute(String key) {
-		return attributeMap.get(key);
-	}
-
-	public void setAttribute(String key, Object value) {
-		attributeMap.put(key, value);
 	}
 
 	public Bridge.PortletPhase getBeganInPhase() {
