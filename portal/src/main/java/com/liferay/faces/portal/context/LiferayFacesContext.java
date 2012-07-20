@@ -30,7 +30,7 @@ public abstract class LiferayFacesContext extends FacesContext implements FacesC
 	private static final Logger logger = LoggerFactory.getLogger(LiferayFacesContext.class);
 
 	// Singleton Instance
-	private static transient LiferayFacesContext instance;
+	private static transient LiferayFacesContext instance = new LiferayFacesContextImpl();
 
 	/**
 	 * Returns the implementation singleton instance.

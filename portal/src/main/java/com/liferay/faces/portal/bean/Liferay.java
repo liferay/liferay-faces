@@ -17,8 +17,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletRequest;
 
@@ -39,8 +37,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 /**
  * @author  Neil Griffin
  */
-@ManagedBean(name = "liferay")
-@ViewScoped
 public class Liferay implements Serializable {
 
 	// serialVersionUID
