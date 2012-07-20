@@ -14,9 +14,10 @@
 package com.liferay.faces.bridge.tck.container;
 
 import javax.faces.context.ExternalContext;
+import javax.portlet.PortletRequest;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.pluto.PortletContainerPlutoImpl;
-import com.liferay.faces.bridge.context.BridgeContext;
 
 
 /**
@@ -31,8 +32,8 @@ public class PortletContainerPlutoTCKImpl extends PortletContainerPlutoImpl {
 			"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:13.0) Gecko/20100101 Firefox/13.0.1"
 		};
 
-	public PortletContainerPlutoTCKImpl(BridgeContext bridgeContext) {
-		super(bridgeContext);
+	public PortletContainerPlutoTCKImpl(PortletRequest portletRequest, BridgeConfig bridgeConfig) {
+		super(portletRequest, bridgeConfig);
 	}
 
 	/**

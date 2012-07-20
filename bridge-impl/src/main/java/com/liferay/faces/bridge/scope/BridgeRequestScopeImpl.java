@@ -30,6 +30,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.faces.render.ResponseStateManager;
+import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortalContext;
 import javax.portlet.PortletConfig;
@@ -39,6 +40,7 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
+import javax.portlet.RenderRequest;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.annotation.ExcludeFromManagedRequestScope;
 import javax.servlet.ServletConfig;
@@ -52,9 +54,9 @@ import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.util.FacesMessageWrapper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.bridge.util.FacesMessageWrapper;
 
 
 /**
@@ -154,6 +156,181 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 	@Override
 	public int hashCode() {
 		return System.identityHashCode(this);
+	}
+
+	/**
+	 * Unlike Pluto, Liferay will preserve/copy request attributes that were originally set on an {@link ActionRequest}
+	 * into the {@link RenderRequest}. However, the Bridge Spec assumes that they will not be preserved. Therefore is
+	 * necessary to remove these request attributes when running under Liferay.
+	 */
+	public void removeExcludedAttributes(RenderRequest renderRequest) {
+
+		if (isRedirectOccurred() || isPortletModeChanged()) {
+
+			// TCK TestPage062: eventScopeNotRestoredRedirectTest
+			// TCK TestPage063: eventScopeNotRestoredModeChangedTest
+			@SuppressWarnings("unchecked")
+			List<String> nonExcludedAttributeNames = (List<String>) getAttribute(
+					BRIDGE_REQ_SCOPE_NON_EXCLUDED_ATTR_NAMES);
+
+			if (nonExcludedAttributeNames != null) {
+
+				for (String attributeName : nonExcludedAttributeNames) {
+					renderRequest.removeAttribute(attributeName);
+
+					if (logger.isTraceEnabled()) {
+
+						if (isRedirectOccurred()) {
+							logger.trace(
+								"Due to redirect, removed request attribute name=[{0}] that had been preserved in the ACTION_PHASE or EVENT_PHASE",
+								attributeName);
+						}
+						else {
+							logger.trace(
+								"Due to PortletMode change, removed request attribute name=[{0}] that had been preserved in the ACTION_PHASE or EVENT_PHASE",
+								attributeName);
+						}
+					}
+				}
+			}
+		}
+
+		// Iterate through all of the request attributes and build up a list of those that are to be removed.
+		Enumeration<String> attributeNames = renderRequest.getAttributeNames();
+
+		// TCK TestPage037: requestScopeContentsTest
+		// TCK TestPage045: excludedAttributesTest
+		// TCK TestPage151: requestMapRequestScopeTest
+		while (attributeNames.hasMoreElements()) {
+			String attributeName = attributeNames.nextElement();
+			Object attributeValue = renderRequest.getAttribute(attributeName);
+
+			if (isExcludedRequestAttributeByConfig(attributeName, attributeValue) ||
+					isExcludedRequestAttributeByAnnotation(attributeValue) ||
+					isExcludedRequestAttributeByInstance(attributeName, attributeValue) ||
+					isExcludedRequestAttributeByNamespace(attributeName)) {
+
+				renderRequest.removeAttribute(attributeName);
+			}
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public void restoreState(FacesContext facesContext) {
+
+		logger.debug("restoreState(facesContext)");
+
+		boolean restoreNonExcludedRequestAttributes = ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) ||
+				(beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
+				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE));
+
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+
+		if (bridgeContext.getPortletRequestPhase() == Bridge.PortletPhase.RENDER_PHASE) {
+
+			if (!portletMode.equals(bridgeContext.getPortletRequest().getPortletMode())) {
+				setPortletModeChanged(true);
+				restoreNonExcludedRequestAttributes = false;
+			}
+		}
+
+		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
+				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
+
+			// Restore the view root that may have been saved during the ACTION_PHASE of the portlet lifecycle.
+			UIViewRoot uiViewRoot = (UIViewRoot) getAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_VIEW_ROOT);
+
+			if (uiViewRoot != null) {
+				facesContext.setViewRoot(uiViewRoot);
+				logger.debug("Restored viewId=[{0}] uiViewRoot=[{1}]", uiViewRoot.getViewId(), uiViewRoot);
+			}
+			else {
+				logger.debug("Did not restore uiViewRoot");
+			}
+
+			// Restore the faces messages that may have been saved during the ACTION_PHASE of the portlet lifecycle.
+			List<FacesMessageWrapper> facesMessages = (List<FacesMessageWrapper>) getAttribute(
+					BRIDGE_REQ_SCOPE_ATTR_FACES_MESSAGES);
+
+			boolean restoredFacesMessages = false;
+
+			if (facesMessages != null) {
+
+				for (FacesMessageWrapper facesMessageWrapper : facesMessages) {
+					String clientId = facesMessageWrapper.getClientId();
+					FacesMessage facesMessage = facesMessageWrapper.getFacesMessage();
+					facesContext.addMessage(clientId, facesMessage);
+					logger.trace("Restored facesMessage=[{0}]", facesMessage.getSummary());
+					restoredFacesMessages = true;
+				}
+			}
+
+			if (restoredFacesMessages) {
+				logger.debug("Restored facesMessages");
+			}
+			else {
+				logger.debug("Did not restore any facesMessages");
+			}
+
+			// NOTE: PROPOSE-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-203 Restore the
+			// FacesContext attributes that may have been saved during the ACTION_PHASE of the portlet lifecycle.
+			List<FacesContextAttribute> savedFacesContextAttributes = (List<FacesContextAttribute>) getAttribute(
+					BRIDGE_REQ_SCOPE_ATTR_FACES_CONTEXT_ATTRIBUTES);
+
+			boolean restoredFacesContextAttibutes = false;
+
+			if (savedFacesContextAttributes != null) {
+				Map<Object, Object> currentFacesContextAttributes = facesContext.getAttributes();
+
+				for (FacesContextAttribute facesContextAttribute : savedFacesContextAttributes) {
+					Object name = facesContextAttribute.getName();
+
+					Object value = facesContextAttribute.getValue();
+					logger.trace("Restoring FacesContext attribute name=[{0}] value=[{1}]", name, value);
+					currentFacesContextAttributes.put(name, value);
+					restoredFacesContextAttibutes = true;
+				}
+			}
+
+			if (restoredFacesContextAttibutes) {
+				logger.debug("Restored FacesContext attributes");
+			}
+			else {
+				logger.debug("Did not restore any FacesContext attributes");
+			}
+		}
+
+		if (restoreNonExcludedRequestAttributes) {
+
+			// Restore the non-excluded request attributes.
+			List<RequestAttribute> savedRequestAttributes = (List<RequestAttribute>) getAttribute(
+					BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES);
+
+			boolean restoredNonExcludedRequestAttributes = false;
+
+			if (savedRequestAttributes != null) {
+				Map<String, Object> currentRequestAttributes = facesContext.getExternalContext().getRequestMap();
+
+				// If a redirect did not occur, then restore the non-excluded request attributes.
+				if (!isRedirectOccurred()) {
+
+					for (RequestAttribute requestAttribute : savedRequestAttributes) {
+						String name = requestAttribute.getName();
+						Object value = requestAttribute.getValue();
+						logger.trace("Restoring non-excluded request attribute name=[{0}] value=[{1}]", name, value);
+						currentRequestAttributes.put(name, value);
+						restoredNonExcludedRequestAttributes = true;
+					}
+				}
+			}
+
+			if (restoredNonExcludedRequestAttributes) {
+				logger.debug("Restored non-excluded request attributes");
+			}
+			else {
+				logger.debug("Did not restore any non-excluded request attributes");
+			}
+		}
 	}
 
 	/**
@@ -314,124 +491,6 @@ public class BridgeRequestScopeImpl extends ConcurrentHashMap<String, Object> im
 			}
 			else {
 				logger.trace("Not saving any non-excluded request attributes because there are no request attributes!");
-			}
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	public void restoreState(FacesContext facesContext) {
-
-		logger.debug("restoreState(facesContext)");
-
-		boolean restoreNonExcludedRequestAttributes = ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) ||
-				(beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
-				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE));
-
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-
-		if (bridgeContext.getPortletRequestPhase() == Bridge.PortletPhase.RENDER_PHASE) {
-
-			if (!portletMode.equals(bridgeContext.getPortletRequest().getPortletMode())) {
-				setPortletModeChanged(true);
-				restoreNonExcludedRequestAttributes = false;
-			}
-		}
-
-		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
-				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
-
-			// Restore the view root that may have been saved during the ACTION_PHASE of the portlet lifecycle.
-			UIViewRoot uiViewRoot = (UIViewRoot) getAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_VIEW_ROOT);
-
-			if (uiViewRoot != null) {
-				facesContext.setViewRoot(uiViewRoot);
-				logger.debug("Restored viewId=[{0}] uiViewRoot=[{1}]", uiViewRoot.getViewId(), uiViewRoot);
-			}
-			else {
-				logger.debug("Did not restore uiViewRoot");
-			}
-
-			// Restore the faces messages that may have been saved during the ACTION_PHASE of the portlet lifecycle.
-			List<FacesMessageWrapper> facesMessages = (List<FacesMessageWrapper>) getAttribute(
-					BRIDGE_REQ_SCOPE_ATTR_FACES_MESSAGES);
-
-			boolean restoredFacesMessages = false;
-
-			if (facesMessages != null) {
-
-				for (FacesMessageWrapper facesMessageWrapper : facesMessages) {
-					String clientId = facesMessageWrapper.getClientId();
-					FacesMessage facesMessage = facesMessageWrapper.getFacesMessage();
-					facesContext.addMessage(clientId, facesMessage);
-					logger.trace("Restored facesMessage=[{0}]", facesMessage.getSummary());
-					restoredFacesMessages = true;
-				}
-			}
-
-			if (restoredFacesMessages) {
-				logger.debug("Restored facesMessages");
-			}
-			else {
-				logger.debug("Did not restore any facesMessages");
-			}
-
-			// NOTE: PROPOSE-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-203 Restore the
-			// FacesContext attributes that may have been saved during the ACTION_PHASE of the portlet lifecycle.
-			List<FacesContextAttribute> savedFacesContextAttributes = (List<FacesContextAttribute>) getAttribute(
-					BRIDGE_REQ_SCOPE_ATTR_FACES_CONTEXT_ATTRIBUTES);
-
-			boolean restoredFacesContextAttibutes = false;
-
-			if (savedFacesContextAttributes != null) {
-				Map<Object, Object> currentFacesContextAttributes = facesContext.getAttributes();
-
-				for (FacesContextAttribute facesContextAttribute : savedFacesContextAttributes) {
-					Object name = facesContextAttribute.getName();
-
-					Object value = facesContextAttribute.getValue();
-					logger.trace("Restoring FacesContext attribute name=[{0}] value=[{1}]", name, value);
-					currentFacesContextAttributes.put(name, value);
-					restoredFacesContextAttibutes = true;
-				}
-			}
-
-			if (restoredFacesContextAttibutes) {
-				logger.debug("Restored FacesContext attributes");
-			}
-			else {
-				logger.debug("Did not restore any FacesContext attributes");
-			}
-		}
-
-		if (restoreNonExcludedRequestAttributes) {
-
-			// Restore the non-excluded request attributes.
-			List<RequestAttribute> savedRequestAttributes = (List<RequestAttribute>) getAttribute(
-					BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES);
-
-			boolean restoredNonExcludedRequestAttributes = false;
-
-			if (savedRequestAttributes != null) {
-				Map<String, Object> currentRequestAttributes = facesContext.getExternalContext().getRequestMap();
-
-				// If a redirect did not occur, then restore the non-excluded request attributes.
-				if (!isRedirectOccurred()) {
-
-					for (RequestAttribute requestAttribute : savedRequestAttributes) {
-						String name = requestAttribute.getName();
-						Object value = requestAttribute.getValue();
-						logger.trace("Restoring non-excluded request attribute name=[{0}] value=[{1}]", name, value);
-						currentRequestAttributes.put(name, value);
-						restoredNonExcludedRequestAttributes = true;
-					}
-				}
-			}
-
-			if (restoredNonExcludedRequestAttributes) {
-				logger.debug("Restored non-excluded request attributes");
-			}
-			else {
-				logger.debug("Did not restore any non-excluded request attributes");
 			}
 		}
 	}

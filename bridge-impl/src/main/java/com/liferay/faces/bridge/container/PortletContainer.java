@@ -105,6 +105,8 @@ public interface PortletContainer {
 	 */
 	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse);
 
+	public void postRenderResponse();
+
 	/**
 	 * Delegates to the underlying ActionResponse to perform a redirect to the specified URL.
 	 */
@@ -133,6 +135,15 @@ public interface PortletContainer {
 	 * @return  True if the portlet container supports it.
 	 */
 	public boolean isAbleToAddStyleSheetResourceToHead();
+
+	/**
+	 * Flag indicating whether or not the portlet container supports/implements the POST-REDIRECT-GET design pattern,
+	 * meaning that the ACTION_PHASE originates from an HTTP POST request, and the RENDER_PHASE is a subsequent HTTP GET
+	 * request.
+	 *
+	 * @return  <code>true</code> if the POST-REDIRECT-GET design pattern is supported, otherwise <code>false</code>.
+	 */
+	public boolean isPostRedirectGetSupported();
 
 	/**
 	 * Determines whether or not the portlet container has the ability to support the Portlet 2.0 standard mechanism of
@@ -218,6 +229,4 @@ public interface PortletContainer {
 	 * Returns the value of the "User-Agent" header from the underlying HttpServletRequest.
 	 */
 	public String[] getUserAgentHeader();
-
-	public void postRenderResponse();
 }

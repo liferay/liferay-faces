@@ -32,16 +32,18 @@ import javax.portlet.faces.annotation.PortletNamingContainer;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
+import com.liferay.faces.bridge.container.PortletContainer;
+import com.liferay.faces.bridge.container.PortletContainerFactory;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgeContextFactory;
-import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.bridge.helper.PortletModeHelper;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeCache;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeCacheFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeFactory;
+import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -140,14 +142,20 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		// BridgeRequestAttributeListener.
 		portletRequest.setAttribute(Bridge.PORTLET_LIFECYCLE_PHASE, portletPhase);
 
+		// Initialize the portlet container implementation.
+		PortletContainerFactory portletContainerFactory = (PortletContainerFactory) BridgeFactoryFinder.getFactory(
+				PortletContainerFactory.class);
+		PortletContainer portletContainer = portletContainerFactory.getPortletContainer(portletRequest, portletResponse,
+				portletContext, bridgeConfig);
+
 		// Initialize the bridge request scope.
-		initBridgeRequestScope(portletRequest, portletResponse, portletPhase);
+		initBridgeRequestScope(portletRequest, portletResponse, portletPhase, portletContainer);
 
 		// Get the bridge context.
 		BridgeContextFactory bridgeContextFactory = (BridgeContextFactory) BridgeFactoryFinder.getFactory(
 				BridgeContextFactory.class);
 		bridgeContext = bridgeContextFactory.getBridgeContext(bridgeConfig, bridgeRequestScope, portletConfig,
-				portletContext, portletRequest, portletResponse, portletPhase);
+				portletContext, portletRequest, portletResponse, portletPhase, portletContainer);
 
 		// Save the BridgeContext as a request attribute for legacy versions of ICEfaces.
 		portletRequest.setAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE, bridgeContext);
@@ -183,7 +191,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 	}
 
 	protected void initBridgeRequestScope(PortletRequest portletRequest, PortletResponse portletResponse,
-		Bridge.PortletPhase portletPhase) {
+		Bridge.PortletPhase portletPhase, PortletContainer portletContainer) {
 
 		boolean bridgeRequestScopeEnabled = true;
 
