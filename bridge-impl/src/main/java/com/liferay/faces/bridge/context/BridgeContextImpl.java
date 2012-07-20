@@ -26,7 +26,6 @@ import java.util.Map;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
-import javax.faces.context.PartialViewContext;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -69,7 +68,7 @@ import com.liferay.faces.bridge.scope.BridgeRequestScope;
 /**
  * @author  Neil Griffin
  */
-public class BridgeContextImpl extends BridgeContext {
+public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 	// Public Constants
 	public static final String ATTR_RESPONSE_NAMESPACE = "com.liferay.faces.bridge.responseNamespace";
@@ -439,11 +438,7 @@ public class BridgeContextImpl extends BridgeContext {
 							facesContext.setViewRoot(newViewRoot);
 
 							// Update the PartialViewContext.
-							PartialViewContext partialViewContext = facesContext.getPartialViewContext();
-
-							if (!partialViewContext.isRenderAll()) {
-								partialViewContext.setRenderAll(true);
-							}
+							partialViewContextRenderAll(facesContext);
 
 							// Set the response as "complete" in the FacesContext.
 							facesContext.responseComplete();
