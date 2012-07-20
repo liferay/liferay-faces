@@ -23,8 +23,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.faces.context.FacesContext;
-import javax.faces.context.PartialResponseWriter;
-import javax.faces.context.ResponseWriter;
 import javax.portlet.ActionResponse;
 import javax.portlet.BaseURL;
 import javax.portlet.EventRequest;
@@ -43,8 +41,6 @@ import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
-import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriterImpl;
 import com.liferay.faces.bridge.util.RequestParameter;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
@@ -54,7 +50,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class PortletContainerImpl implements PortletContainer {
+public class PortletContainerImpl extends PortletContainerCompatImpl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(PortletContainerImpl.class);
@@ -84,10 +80,6 @@ public class PortletContainerImpl implements PortletContainer {
 		this.actionURLCache = new HashMap<String, PortletURL>();
 		this.renderURLCache = new HashMap<String, PortletURL>();
 		this.resourceURLCache = new HashMap<String, ResourceURL>();
-	}
-
-	public boolean isPostRedirectGetSupported() {
-		return true;
 	}
 
 	public PortletURL createActionURL(String fromURL) throws MalformedURLException {
@@ -276,25 +268,8 @@ public class PortletContainerImpl implements PortletContainer {
 		else if (portletResponse instanceof ResourceResponse) {
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 
-			if (facesContext.getPartialViewContext().isPartialRequest()) {
-				ResourceResponse resourceResponse = (ResourceResponse) portletResponse;
-				resourceResponse.setContentType("text/xml");
-				resourceResponse.setCharacterEncoding("UTF-8");
-
-				PartialResponseWriter partialResponseWriter;
-				ResponseWriter responseWriter = facesContext.getResponseWriter();
-
-				if (responseWriter instanceof PartialResponseWriter) {
-					partialResponseWriter = (PartialResponseWriter) responseWriter;
-				}
-				else {
-					partialResponseWriter = facesContext.getPartialViewContext().getPartialResponseWriter();
-				}
-
-				partialResponseWriter.startDocument();
-				partialResponseWriter.redirect(url);
-				partialResponseWriter.endDocument();
-				facesContext.responseComplete();
+			if (isJSF2PartialRequest(facesContext)) {
+				redirectJSF2PartialResponse(facesContext, (ResourceResponse) portletResponse, url);
 			}
 			else {
 				throw new UnsupportedEncodingException(
@@ -413,6 +388,10 @@ public class PortletContainerImpl implements PortletContainer {
 		return isMarkupHeadElementSupported();
 	}
 
+	public boolean isPostRedirectGetSupported() {
+		return true;
+	}
+
 	/**
 	 * Determines whether or not the portlet container supports the standard Portlet 2.0 mechanism for adding resources
 	 * to the <head>...</head> section of the rendered portal page. Section PLT.12.5.4 of the Portlet 2.0 spec indicates
@@ -447,15 +426,6 @@ public class PortletContainerImpl implements PortletContainer {
 		return true;
 	}
 
-	public HeadResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter) {
-
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		HeadResponseWriter headResponseWriter = new HeadResponseWriterImpl(wrappableResponseWriter,
-				bridgeContext.getPortletResponse());
-
-		return headResponseWriter;
-	}
-
 	public long getHttpServletRequestDateHeader(String name) {
 
 		// Unsupported by default implementation.
@@ -468,6 +438,7 @@ public class PortletContainerImpl implements PortletContainer {
 
 	public String getRequestParameter(String name) {
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+
 		return fixRequestParameterValue(bridgeContext.getPortletRequest().getParameter(name));
 	}
 
