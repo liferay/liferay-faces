@@ -14,7 +14,6 @@
 package com.liferay.faces.bridge;
 
 import javax.faces.FactoryFinder;
-import javax.faces.application.ResourceHandler;
 import javax.faces.lifecycle.Lifecycle;
 import javax.faces.lifecycle.LifecycleFactory;
 import javax.portlet.PortletConfig;
@@ -67,13 +66,12 @@ public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 
 			// If the Faces resource handler indicates that this is a request for an image/javascript/css type of
 			// resource, then
-			ResourceHandler resourceHandler = facesContext.getApplication().getResourceHandler();
+			if (isJSF2ResourceRequest(facesContext)) {
 
-			if (resourceHandler.isResourceRequest(facesContext)) {
 				logger.debug("Detected JSF2 resource request");
 
 				// Ask the Faces resource handler to copy the contents of the resource to the response.
-				resourceHandler.handleResourceRequest(facesContext);
+				handleJSF2ResourceRequest(facesContext);
 			}
 			else if ((resourceRequest.getResourceID() != null) &&
 					!resourceRequest.getResourceID().equals(BridgeConstants.WSRP)) {

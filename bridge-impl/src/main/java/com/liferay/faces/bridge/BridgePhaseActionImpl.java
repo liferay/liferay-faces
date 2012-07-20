@@ -94,11 +94,6 @@ public class BridgePhaseActionImpl extends BridgePhaseBaseImpl {
 			bridgeRequestScope.saveState(facesContext);
 			maintainBridgeRequestScope(actionRequest, actionResponse);
 
-			// PROPOSED-FOR-JSR344-API
-			// http://java.net/jira/browse/JAVASERVERFACES_SPEC_PUBLIC-1070
-			// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
-			bridgeRequestScope.setFlash(facesContext.getExternalContext().getFlash());
-
 			// Spec 6.6 (Namespacing)
 			indicateNamespacingToConsumers(facesContext.getViewRoot(), actionResponse);
 		}
