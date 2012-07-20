@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.context.ResponseWriter;
+import javax.faces.event.PhaseListener;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.MimeResponse;
@@ -30,7 +31,7 @@ import javax.portlet.ResourceURL;
 /**
  * @author  Neil Griffin
  */
-public interface PortletContainer {
+public interface PortletContainer extends PhaseListener {
 
 	/**
 	 * Creates a portlet action URL and copies query parameters that might be present in the specified URL.
@@ -104,8 +105,6 @@ public interface PortletContainer {
 	 * Maintains (copies) the render parameters found in the specified EventRequest to the specified EventResponse.
 	 */
 	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse);
-
-	public void postRenderResponse();
 
 	/**
 	 * Delegates to the underlying ActionResponse to perform a redirect to the specified URL.
