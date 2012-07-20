@@ -398,16 +398,6 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	}
 
 	@Override
-	public HeadResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter) {
-
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		HeadResponseWriter headResponseWriter = new HeadResponseWriterLiferayImpl(bridgeContext,
-				wrappableResponseWriter);
-
-		return headResponseWriter;
-	}
-
-	@Override
 	public long getHttpServletRequestDateHeader(String name) {
 		return liferayPortletRequest.getDateHeader(name);
 	}
