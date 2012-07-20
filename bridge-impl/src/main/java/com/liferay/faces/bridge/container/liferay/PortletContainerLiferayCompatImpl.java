@@ -19,9 +19,6 @@ import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainerImpl;
-import com.liferay.faces.bridge.context.BridgeContext;
-
-import com.liferay.portal.kernel.util.StringBundler;
 
 
 /**
@@ -34,37 +31,13 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 	// serialVersionUID
 	private static final long serialVersionUID = 8713570232856573935L;
 
-	// Private Data Members
-	private int liferaySharedPageTopLength;
-
 	public PortletContainerLiferayCompatImpl(PortletRequest portletRequest, BridgeConfig bridgeConfig) {
 		super(portletRequest, bridgeConfig);
 	}
 
-	/**
-	 * This method is called after the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle. It's purpose is to
-	 * remove duplicate resources from the LIFERAY_SHARED_PAGE_TOP request attribute. For more information, see:
-	 * http://issues.liferay.com/browse/FACES-1216
-	 */
 	@Override
 	public void afterPhase(PhaseEvent phaseEvent) {
-
-		if (liferaySharedPageTopLength > 0) {
-			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-
-			PortletRequest portletRequest = bridgeContext.getPortletRequest();
-
-			StringBundler stringBundler = (StringBundler) portletRequest.getAttribute(
-					LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
-
-			if (stringBundler != null) {
-
-				LiferaySharedPageTop liferaySharedPageTop = new LiferaySharedPageTop(stringBundler);
-				liferaySharedPageTop.removeDuplicates();
-				stringBundler = liferaySharedPageTop.toStringBundler();
-				portletRequest.setAttribute(LiferayConstants.LIFERAY_SHARED_PAGE_TOP, stringBundler);
-			}
-		}
+		// no-op for JSF 1.2
 	}
 
 	/**
@@ -74,17 +47,7 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 	 */
 	@Override
 	public void beforePhase(PhaseEvent phaseEvent) {
-		liferaySharedPageTopLength = 0;
-
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-
-		PortletRequest portletRequest = bridgeContext.getPortletRequest();
-		StringBundler stringBundler = (StringBundler) portletRequest.getAttribute(
-				LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
-
-		if (stringBundler != null) {
-			liferaySharedPageTopLength = stringBundler.length();
-		}
+		// no-op for JSF 1.2
 	}
 
 	@Override
