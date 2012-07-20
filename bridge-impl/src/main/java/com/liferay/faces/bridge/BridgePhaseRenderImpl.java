@@ -15,17 +15,13 @@ package com.liferay.faces.bridge;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Iterator;
 
 import javax.faces.FactoryFinder;
 import javax.faces.application.NavigationHandler;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
-import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ExceptionQueuedEvent;
-import javax.faces.event.ExceptionQueuedEventContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
@@ -202,32 +198,17 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 		}
 
 		// If there were any "handled" exceptions queued, then throw a BridgeException.
-		ExceptionHandler exceptionHandler = facesContext.getExceptionHandler();
-		Iterable<ExceptionQueuedEvent> handledExceptionQueuedEvents =
-			exceptionHandler.getHandledExceptionQueuedEvents();
+		Throwable handledException = getJSF2HandledException(facesContext);
 
-		if (handledExceptionQueuedEvents != null) {
-			Iterator<ExceptionQueuedEvent> itr = handledExceptionQueuedEvents.iterator();
-
-			while (itr.hasNext()) {
-				ExceptionQueuedEvent exceptionQueuedEvent = itr.next();
-				ExceptionQueuedEventContext exceptionQueuedEventContext = exceptionQueuedEvent.getContext();
-				throw new BridgeException(exceptionQueuedEventContext.getException());
-			}
+		if (handledException != null) {
+			throw new BridgeException(handledException);
 		}
 
-		// Otherwise, if there were any "handled" exceptions queued, then throw a BridgeException.
-		Iterable<ExceptionQueuedEvent> unhandledExceptionQueuedEvents =
-			exceptionHandler.getUnhandledExceptionQueuedEvents();
+		// Otherwise, if there were any "unhandled" exceptions queued, then throw a BridgeException.
+		Throwable unhandledException = getJSF2UnhandledException(facesContext);
 
-		if (unhandledExceptionQueuedEvents != null) {
-			Iterator<ExceptionQueuedEvent> itr = unhandledExceptionQueuedEvents.iterator();
-
-			while (itr.hasNext()) {
-				ExceptionQueuedEvent exceptionQueuedEvent = itr.next();
-				ExceptionQueuedEventContext exceptionQueuedEventContext = exceptionQueuedEvent.getContext();
-				throw new BridgeException(exceptionQueuedEventContext.getException());
-			}
+		if (unhandledException != null) {
+			throw new BridgeException(unhandledException);
 		}
 
 		// Otherwise, if the PortletMode has changed, and a navigation-rule hasn't yet fired (which could have happened
