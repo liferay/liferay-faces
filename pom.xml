@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.liferay.faces</groupId>
 	<artifactId>liferay-faces</artifactId>
-	<version>3.1.0-ga1-SNAPSHOT</version>
+	<version>2.1.0-rc3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Liferay Faces Parent</name>
 	<description>Parent POM for all Liferay Faces projects</description>
@@ -75,14 +75,11 @@
 	</modules>
 
 	<properties>
-		<codename>Galatia</codename>
+		<codename>Athens</codename>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
-		<icefaces3.version>3.0.1</icefaces3.version>
 		<log4j.version>1.2.14</log4j.version>
-		<mojarra.version>2.1.3-b02</mojarra.version>
+		<mojarra.version>1.2_15</mojarra.version>
 		<myfaces.version>2.1.6</myfaces.version>
-		<primefaces3.version>3.3</primefaces3.version>
-		<richfaces4.version>4.2.0.Final</richfaces4.version>
 		<selenium.version>1.0.1</selenium.version>
 		<tck.version>1.0.0</tck.version>
 	</properties>
@@ -289,11 +286,11 @@
 			</activation>
 			<dependencies>
 				<dependency>
-					<groupId>com.sun.faces</groupId>
+					<groupId>javax.faces</groupId>
 					<artifactId>jsf-api</artifactId>
 				</dependency>
 				<dependency>
-					<groupId>com.sun.faces</groupId>
+					<groupId>javax.faces</groupId>
 					<artifactId>jsf-impl</artifactId>
 				</dependency>
 			</dependencies>
@@ -413,16 +410,6 @@
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
-				<groupId>com.sun.faces</groupId>
-				<artifactId>jsf-api</artifactId>
-				<version>${mojarra.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.faces</groupId>
-				<artifactId>jsf-impl</artifactId>
-				<version>${mojarra.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>commons-fileupload</groupId>
 				<artifactId>commons-fileupload</artifactId>
 				<version>1.2.2</version>
@@ -452,10 +439,12 @@
 			<dependency>
 				<groupId>javax.faces</groupId>
 				<artifactId>jsf-api</artifactId>
-				<!-- Since the JSF 2.1 API is backward compatible with the JSF 2.0 API, go with 2.0 as the -->
-				<!-- lowest common denominator for backward compatibility. -->
-				<version>2.0</version>
-				<scope>provided</scope>
+				<version>${mojarra.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.faces</groupId>
+				<artifactId>jsf-impl</artifactId>
+				<version>${mojarra.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.portlet</groupId>
@@ -503,42 +492,6 @@
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
-				<groupId>org.icefaces</groupId>
-				<artifactId>icefaces</artifactId>
-				<version>${icefaces3.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.glassfish</groupId>
-						<artifactId>javax.faces</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>org.icefaces</groupId>
-				<artifactId>icefaces-ace</artifactId>
-				<version>${icefaces3.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.icefaces</groupId>
-				<artifactId>icefaces-compat</artifactId>
-				<version>${icefaces3.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.icefaces</groupId>
-				<artifactId>icepush</artifactId>
-				<version>${icefaces3.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.richfaces.ui</groupId>
-				<artifactId>richfaces-components-ui</artifactId>
-				<version>${richfaces4.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.richfaces.core</groupId>
-				<artifactId>richfaces-core-impl</artifactId>
-				<version>${richfaces4.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>org.jboss.seam</groupId>
 				<artifactId>jboss-el</artifactId>
 				<version>2.0.0.GA</version>
@@ -548,11 +501,6 @@
 						<artifactId>el-api</artifactId>
 					</exclusion>
 				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>org.primefaces</groupId>
-				<artifactId>primefaces</artifactId>
-				<version>${primefaces3.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.seleniumhq.selenium.client-drivers</groupId>
@@ -582,9 +530,9 @@
 
 	<repositories>
 		<repository>
-			<id>maven2-repository.dev.java.net</id>
+			<id>maven1-repository.dev.java.net</id>
 			<name>Java.net Repository for Maven</name>
-			<url>http://download.java.net/maven/2/</url>
+			<url>http://download.java.net/maven/1/</url>
 		</repository>
 		<repository>
 			<id>maven2-repository.jboss.org</id>

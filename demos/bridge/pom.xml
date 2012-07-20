@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.faces.demos</groupId>
 		<artifactId>liferay-faces-demos</artifactId>
-		<version>3.1.0-ga1-SNAPSHOT</version>
+		<version>2.1.0-rc3-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>liferay-faces-bridge-demos</artifactId>
@@ -12,18 +12,10 @@
 	<name>Liferay Faces Bridge Demos</name>
 
 	<modules>
-		<module>icefaces3-compat-portlet</module>
-		<module>icefaces3-crud-portlet</module>
-		<module>icefaces3-ipc-ajax-push-portlet</module>
-		<module>icefaces3-portlet</module>
-		<module>jsf2-export-pdf-portlet</module>
-		<module>jsf2-ipc-events-bookings-portlet</module>
-		<module>jsf2-ipc-events-customers-portlet</module>
-		<module>jsf2-ipc-pub-render-params-portlet</module>
-		<module>jsf2-portlet</module>
-		<module>jsf2-jsp-portlet</module>
-		<module>primefaces3-portlet</module>
-		<module>richfaces4-portlet</module>
+		<module>jsf1-ipc-events-bookings-portlet</module>
+		<module>jsf1-ipc-events-customers-portlet</module>
+		<module>jsf1-ipc-pub-render-params-portlet</module>
+		<module>jsf1-jsp-portlet</module>
 	</modules>
 
 </project>
