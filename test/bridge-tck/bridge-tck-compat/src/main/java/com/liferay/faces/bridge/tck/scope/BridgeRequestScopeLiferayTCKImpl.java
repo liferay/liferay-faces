@@ -13,9 +13,6 @@
  */
 package com.liferay.faces.bridge.tck.scope;
 
-import java.util.Map;
-
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletConfig;
@@ -74,8 +71,8 @@ import com.liferay.faces.bridge.scope.BridgeRequestScopeLiferayImpl;
  * "org.apache.myfaces.portlet.faces.testsuite.common.portletConfig", which is set in the {@link
  * GenericFacesTestSuitePortlet#initTestRequest(PortletRequest)} method. Again, due to the design of the Liferay portlet
  * container, it is not possible for the bridge to programatically determine whether or not this value should be
- * maintained. Since it is an instance of PortletConfig, the {@link BridgeRequestScopeLiferayImpl#restoreState(FacesContext)}
- * method will exclude (remove) the request attribute.</p>
+ * maintained. Since it is an instance of PortletConfig, the {@link
+ * BridgeRequestScopeLiferayImpl#restoreState(FacesContext)} method will exclude (remove) the request attribute.</p>
  *
  * <p>Solution: In order for the JSF_ELTest to pass under Liferay Portal, it is necessary to explicity maintain the
  * value of the request attribute.</p>
@@ -96,25 +93,22 @@ public class BridgeRequestScopeLiferayTCKImpl extends BridgeRequestScopeLiferayI
 	}
 
 	@Override
-	public void restoreState(FacesContext facesContext) {
-
-		ExternalContext externalContext = facesContext.getExternalContext();
-		Map<String, Object> requestMap = externalContext.getRequestMap();
+	public void removeExcludedAttributes(RenderRequest renderRequest) {
 
 		// TCK TestPage203: JSF_ELTest
-		PortletConfig tckPortletConfig = (PortletConfig) requestMap.get(TCK_PORTLET_CONFIG);
+		PortletConfig tckPortletConfig = (PortletConfig) renderRequest.getAttribute(TCK_PORTLET_CONFIG);
 
-		super.restoreState(facesContext);
+		super.removeExcludedAttributes(renderRequest);
 
 		// TCK TestPage151: requestMapRequestScopeTest
 		if (getBeganInPhase() == Bridge.PortletPhase.ACTION_PHASE) {
 
 			// Explicitly remove the attributes that the requestMapRequestScopeTest checks for.
-			requestMap.remove("verifyPreBridgeExclusion");
+			renderRequest.removeAttribute("verifyPreBridgeExclusion");
 		}
 
 		// TCK TestPage203: JSF_ELTest
-		requestMap.put(TCK_PORTLET_CONFIG, tckPortletConfig);
+		renderRequest.setAttribute(TCK_PORTLET_CONFIG, tckPortletConfig);
 	}
 
 }

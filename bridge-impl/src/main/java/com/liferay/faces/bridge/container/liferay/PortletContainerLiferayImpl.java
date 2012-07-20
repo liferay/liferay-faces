@@ -37,6 +37,7 @@ import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
 
 import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.Product;
 import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.container.PortletContainerImpl;
@@ -82,17 +83,17 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 	private String responseNamespace;
 	private String[] userAgentHeader;
 
-	public PortletContainerLiferayImpl(BridgeContext bridgeContext) {
+	public PortletContainerLiferayImpl(PortletRequest portletRequest, PortletResponse portletResponse,
+		PortletContext portletContext, BridgeConfig bridgeConfig) {
 
 		// Initialize the superclass.
-		super(bridgeContext);
+		super(portletRequest, bridgeConfig);
 
 		try {
 
 			// Initialize the private data members.
-			this.portletResponseNamespace = bridgeContext.getPortletResponse().getNamespace();
+			this.portletResponseNamespace = portletResponse.getNamespace();
 
-			PortletRequest portletRequest = bridgeContext.getPortletRequest();
 			LiferayPortletRequest liferayPortletRequest = new LiferayPortletRequest(portletRequest);
 			LiferayThemeDisplay liferayThemeDisplay = liferayPortletRequest.getLiferayThemeDisplay();
 			this.liferayPortletRequest = liferayPortletRequest;
@@ -108,8 +109,7 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 			if (portletRequest instanceof RenderRequest) {
 				PortletMode portletMode = portletRequest.getPortletMode();
 				WindowState windowState = portletRequest.getWindowState();
-				saveRenderAttributes(portletMode, windowState, liferayThemeDisplay, responseNamespace,
-					bridgeContext.getPortletContext());
+				saveRenderAttributes(portletMode, windowState, liferayThemeDisplay, responseNamespace, portletContext);
 			}
 
 			// Determine the Liferay version number.
@@ -175,8 +175,8 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 	public PortletURL createRedirectURL(String fromURL, Map<String, List<String>> parameters)
 		throws MalformedURLException {
 
-		LiferayPortletResponse liferayPortletResponse = new LiferayPortletResponse(getBridgeContext()
-				.getPortletResponse());
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+		LiferayPortletResponse liferayPortletResponse = new LiferayPortletResponse(bridgeContext.getPortletResponse());
 
 		PortletURL redirectURL = liferayPortletResponse.createRenderURL();
 
@@ -254,7 +254,7 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 	@Override
 	public void postRenderResponse() {
 
-		BridgeContext bridgeContext = getBridgeContext();
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
 
@@ -273,7 +273,9 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 	@Override
 	public void redirect(String url) throws IOException {
 
-		PortletResponse portletResponse = getBridgeContext().getPortletResponse();
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+
+		PortletResponse portletResponse = bridgeContext.getPortletResponse();
 
 		if (portletResponse instanceof ActionResponse) {
 			LiferayPortletResponse liferayActionResponse = new LiferayPortletResponse(portletResponse);
@@ -359,6 +361,17 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 	}
 
 	/**
+	 * Liferay Portal does not implement the POST-REDIRECT-GET design pattern. Rather, the ACTION_PHASE and RENDER_PHASE
+	 * are both part of a single HTTP POST request.
+	 *
+	 * @return  <code>false</code> since Liferay Portal does not implement the POST-REDIRECT-GET design pattern.
+	 */
+	@Override
+	public boolean isPostRedirectGetSupported() {
+		return false;
+	}
+
+	/**
 	 * Determines whether or not the portlet container supports the standard Portlet 2.0 mechanism for adding resources
 	 * to the <head>...</head> section of the rendered portal page. Section PLT.12.5.4 of the Portlet 2.0 spec indicates
 	 * that this is an "optional" feature for vendors to implement. Liferay Portal added support for this feature in
@@ -367,7 +380,7 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 	 * @see     <a href="http://issues.liferay.com/browse/LPE-2729">LPE-2729</a>
 	 * @see     <a href="http://issues.liferay.com/browse/LPS-11767">LPS-11767</a>
 	 *
-	 * @return  False since Liferay doesn't support it reliably.
+	 * @return  <code>false</code> since Liferay doesn't support it reliably.
 	 */
 	@Override
 	protected boolean isMarkupHeadElementSupported() {
@@ -404,7 +417,8 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 	@Override
 	public HeadResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter) {
 
-		HeadResponseWriter headResponseWriter = new HeadResponseWriterLiferayImpl(getBridgeContext(),
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+		HeadResponseWriter headResponseWriter = new HeadResponseWriterLiferayImpl(bridgeContext,
 				wrappableResponseWriter);
 
 		return headResponseWriter;
@@ -464,10 +478,11 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 
 		if (responseNamespace == null) {
 
-			responseNamespace = getBridgeContext().getPortletResponse().getNamespace();
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			responseNamespace = bridgeContext.getPortletResponse().getNamespace();
 
 			if (responseNamespace.startsWith(BridgeConstants.WSRP_REWRITE)) {
-				responseNamespace = LiferayPortalUtil.getPortletId(getBridgeContext().getPortletRequest());
+				responseNamespace = LiferayPortalUtil.getPortletId(bridgeContext.getPortletRequest());
 			}
 		}
 

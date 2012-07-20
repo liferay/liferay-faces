@@ -51,7 +51,6 @@ import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.config.ServletMapping;
 import com.liferay.faces.bridge.container.PortletContainer;
-import com.liferay.faces.bridge.container.PortletContainerFactory;
 import com.liferay.faces.bridge.context.map.RequestHeaderMap;
 import com.liferay.faces.bridge.context.map.RequestHeaderValuesMap;
 import com.liferay.faces.bridge.context.map.RequestParameterMapFactory;
@@ -120,7 +119,7 @@ public class BridgeContextImpl extends BridgeContext {
 
 	public BridgeContextImpl(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
 		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,
-		PortletResponse portletResponse, Bridge.PortletPhase portletPhase) {
+		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, PortletContainer portletContainer) {
 		this.bridgeConfig = bridgeConfig;
 		this.bridgeRequestScope = bridgeRequestScope;
 		this.portletConfig = portletConfig;
@@ -128,14 +127,10 @@ public class BridgeContextImpl extends BridgeContext {
 		this.portletRequest = portletRequest;
 		this.portletResponse = portletResponse;
 		this.portletPhase = portletPhase;
+		this.portletContainer = portletContainer;
 
 		// Get the BridgeURLFactory instance.
 		this.bridgeURLFactory = (BridgeURLFactory) BridgeFactoryFinder.getFactory(BridgeURLFactory.class);
-
-		// Initialize the portlet container implementation.
-		PortletContainerFactory portletContainerFactory = (PortletContainerFactory) BridgeFactoryFinder.getFactory(
-				PortletContainerFactory.class);
-		this.portletContainer = portletContainerFactory.getPortletContainer(this);
 
 		setCurrentInstance(this);
 	}
