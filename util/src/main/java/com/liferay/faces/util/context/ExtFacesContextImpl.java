@@ -14,7 +14,6 @@
 package com.liferay.faces.util.context;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -22,17 +21,13 @@ import javax.el.ELContext;
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
-import javax.faces.application.ProjectStage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIForm;
 import javax.faces.component.UIViewRoot;
-import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.context.PartialViewContext;
 import javax.faces.context.ResponseStream;
 import javax.faces.context.ResponseWriter;
-import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.faces.render.RenderKit;
 
@@ -300,27 +295,11 @@ public class ExtFacesContextImpl extends ExtFacesContext {
 	}
 
 	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public void validationFailed() {
-		FacesContext.getCurrentInstance().validationFailed();
-	}
-
-	/**
 	 * @since  JSF 1.0
 	 */
 	@Override
 	public Application getApplication() {
 		return FacesContext.getCurrentInstance().getApplication();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public Map<Object, Object> getAttributes() {
-		return FacesContext.getCurrentInstance().getAttributes();
 	}
 
 	/**
@@ -332,59 +311,11 @@ public class ExtFacesContextImpl extends ExtFacesContext {
 	}
 
 	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public PhaseId getCurrentPhaseId() {
-		return FacesContext.getCurrentInstance().getCurrentPhaseId();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public void setCurrentPhaseId(PhaseId currentPhaseId) {
-		FacesContext.getCurrentInstance().setCurrentPhaseId(currentPhaseId);
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public boolean isValidationFailed() {
-		return FacesContext.getCurrentInstance().isValidationFailed();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public boolean isProjectStage(ProjectStage stage) {
-		return FacesContext.getCurrentInstance().isProjectStage(stage);
-	}
-
-	/**
 	 * @since  JSF 1.2
 	 */
 	@Override
 	public ELContext getELContext() {
 		return FacesContext.getCurrentInstance().getELContext();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public ExceptionHandler getExceptionHandler() {
-		return FacesContext.getCurrentInstance().getExceptionHandler();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public void setExceptionHandler(ExceptionHandler exceptionHandler) {
-		FacesContext.getCurrentInstance().setExceptionHandler(exceptionHandler);
 	}
 
 	/**
@@ -400,14 +331,6 @@ public class ExtFacesContextImpl extends ExtFacesContext {
 	 */
 	public FacesContext getFacesContext() {
 		return FacesContext.getCurrentInstance();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public boolean isPostback() {
-		return FacesContext.getCurrentInstance().isPostback();
 	}
 
 	/**
@@ -467,22 +390,6 @@ public class ExtFacesContextImpl extends ExtFacesContext {
 	}
 
 	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public List<FacesMessage> getMessageList() {
-		return FacesContext.getCurrentInstance().getMessageList();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public List<FacesMessage> getMessageList(String clientId) {
-		return FacesContext.getCurrentInstance().getMessageList(clientId);
-	}
-
-	/**
 	 * @since  JSF 1.0
 	 */
 	@Override
@@ -511,22 +418,6 @@ public class ExtFacesContextImpl extends ExtFacesContext {
 	public UIForm getParentForm(UIComponent uiComponent) {
 
 		return facesContextHelper.getParentForm(uiComponent);
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public PartialViewContext getPartialViewContext() {
-		return FacesContext.getCurrentInstance().getPartialViewContext();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public void setProcessingEvents(boolean processingEvents) {
-		FacesContext.getCurrentInstance().setProcessingEvents(processingEvents);
 	}
 
 	/**
@@ -670,14 +561,6 @@ public class ExtFacesContextImpl extends ExtFacesContext {
 	@Override
 	public void setResponseWriter(ResponseWriter responseWriter) {
 		FacesContext.getCurrentInstance().setResponseWriter(responseWriter);
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public boolean isProcessingEvents() {
-		return FacesContext.getCurrentInstance().isProcessingEvents();
 	}
 
 	/**
