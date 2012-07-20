@@ -15,6 +15,9 @@ package com.liferay.faces.bridge.lifecycle;
 
 import javax.faces.lifecycle.Lifecycle;
 
+import com.liferay.faces.bridge.event.IPCPhaseListener;
+import com.liferay.faces.bridge.event.PortletContainerProxyPhaseListener;
+
 
 /**
  * @author  Neil Griffin
@@ -26,6 +29,14 @@ public class LifecycleBridgePhaseBaseImpl extends LifecycleWrapper {
 
 	public LifecycleBridgePhaseBaseImpl(Lifecycle lifecycle) {
 		this.wrappedLifecycle = lifecycle;
+
+		// Section 5.2.4 of the JSR 329 Spec requires that a phase listener be registered in order to handle Portlet 2.0
+		// Public Render Parameters after the RESTORE_VIEW phase of the JSF lifecycle executes. The IPCPhaseListener
+		// satisfies this requirement.
+		addPhaseListener(new IPCPhaseListener());
+
+		// Add the PortletContainerProxyPhaseListener so that the PortletContainer will be able to listen to the phases.
+		addPhaseListener(new PortletContainerProxyPhaseListener());
 	}
 
 	public Lifecycle getWrapped() {

@@ -28,6 +28,9 @@ import com.liferay.faces.bridge.container.PortletContainerImpl;
  */
 public class PortletContainerPlutoImpl extends PortletContainerImpl {
 
+	// serialVersionUID
+	private static final long serialVersionUID = 2488317466257094615L;
+
 	// Private Constants
 	private static final String CONTENT_TYPE_APPLICATION_XHTML_XML = "application/xhtml+xml";
 	private static final String CONTENT_TYPE_TEXT_HTML = "text/html";

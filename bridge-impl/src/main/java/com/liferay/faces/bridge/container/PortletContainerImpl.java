@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseEvent;
+import javax.faces.event.PhaseId;
 import javax.portlet.ActionResponse;
 import javax.portlet.BaseURL;
 import javax.portlet.EventRequest;
@@ -52,6 +54,9 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 public class PortletContainerImpl extends PortletContainerCompatImpl {
 
+	// serialVersionUID
+	private static final long serialVersionUID = 293072155166625509L;
+
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(PortletContainerImpl.class);
 
@@ -80,6 +85,14 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 		this.actionURLCache = new HashMap<String, PortletURL>();
 		this.renderURLCache = new HashMap<String, PortletURL>();
 		this.resourceURLCache = new HashMap<String, ResourceURL>();
+	}
+
+	public void afterPhase(PhaseEvent phaseEvent) {
+		// no-op
+	}
+
+	public void beforePhase(PhaseEvent event) {
+		// no-op
 	}
 
 	public PortletURL createActionURL(String fromURL) throws MalformedURLException {
@@ -250,10 +263,6 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 
 	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse) {
 		eventResponse.setRenderParameters(eventRequest);
-	}
-
-	public void postRenderResponse() {
-		// No-op
 	}
 
 	public void redirect(String url) throws IOException {
@@ -434,6 +443,12 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 
 	public void setMimeResponseContentType(MimeResponse mimeResponse, String contentType) {
 		mimeResponse.setContentType(contentType);
+	}
+
+	public PhaseId getPhaseId() {
+
+		// no-op
+		return null;
 	}
 
 	public String getRequestParameter(String name) {

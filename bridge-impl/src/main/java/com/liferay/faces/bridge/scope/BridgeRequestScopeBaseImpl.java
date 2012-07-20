@@ -11,18 +11,29 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.lifecycle;
+package com.liferay.faces.bridge.scope;
 
-import javax.faces.lifecycle.Lifecycle;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
  * @author  Neil Griffin
  */
-public class LifecycleBridgePhaseActionImpl extends LifecycleBridgePhaseBaseImpl {
+public abstract class BridgeRequestScopeBaseImpl implements BridgeRequestScope {
 
-	public LifecycleBridgePhaseActionImpl(Lifecycle lifecycle) {
-		super(lifecycle);
+	// Private Data Members
+	private Map<String, Object> attributeMap;
+
+	public BridgeRequestScopeBaseImpl() {
+		this.attributeMap = new HashMap<String, Object>();
 	}
 
+	public Object getAttribute(String key) {
+		return attributeMap.get(key);
+	}
+
+	public void setAttribute(String key, Object value) {
+		attributeMap.put(key, value);
+	}
 }

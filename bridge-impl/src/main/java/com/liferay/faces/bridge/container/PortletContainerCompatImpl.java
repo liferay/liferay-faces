@@ -29,6 +29,9 @@ import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
  */
 public abstract class PortletContainerCompatImpl implements PortletContainer {
 
+	// serialVersionUID
+	private static final long serialVersionUID = 2694729758648266705L;
+
 	protected void redirectJSF2PartialResponse(FacesContext facesContext, ResourceResponse resourceResponse, String url)
 		throws IOException {
 		// no-op for JSF 1.x
