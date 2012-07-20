@@ -15,8 +15,6 @@ package com.liferay.faces.bridge.lifecycle;
 
 import javax.faces.lifecycle.Lifecycle;
 
-import com.liferay.faces.bridge.event.IPCPhaseListener;
-
 
 /**
  * @author  Neil Griffin
@@ -25,12 +23,6 @@ public class LifecycleBridgePhaseEventImpl extends LifecycleBridgePhaseBaseImpl 
 
 	public LifecycleBridgePhaseEventImpl(Lifecycle lifecycle) {
 		super(lifecycle);
-
-		// Section 5.2.5 of the JSR 329 Spec requires that there be a phase listener registered that has the ability to
-		// short-circuit the JSF lifecycle. Section 5.3.3 requires that there be a phase listener registered that
-		// processes outgoing Public Render Parameters during the ACTION_PHASE and RENDER_PHASE of the portlet
-		// lifecycle. Both of these requirements are handled by the IPCPhaseListener.
-		addPhaseListener(new IPCPhaseListener());
 	}
 
 }

@@ -15,7 +15,6 @@ package com.liferay.faces.bridge.lifecycle;
 
 import javax.faces.lifecycle.Lifecycle;
 
-import com.liferay.faces.bridge.event.IPCPhaseListener;
 import com.liferay.faces.bridge.event.ManagedBeanScopePhaseListener;
 
 
@@ -26,11 +25,6 @@ public class LifecycleBridgePhaseResourceImpl extends LifecycleBridgePhaseBaseIm
 
 	public LifecycleBridgePhaseResourceImpl(Lifecycle lifecycle) {
 		super(lifecycle);
-
-		// Section 5.2.4 of the JSR 329 Spec requires that a phase listener be registered in order to
-		// handle Portlet 2.0 Public Render Parameters after the RESTORE_VIEW phase of the JSF lifecycle
-		// executes. The IPCPhaseListener satisfies this requirement.
-		addPhaseListener(new IPCPhaseListener());
 
 		// Also need to add the ManagedBeanScopePhaseListener so that after the RENDER_RESPONSE phase, the managed-beans
 		// in request scope will go out-of-scope which will in turn cause any annotated PreDestroy methods to be called.

@@ -40,7 +40,6 @@ import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.Product;
 import com.liferay.faces.bridge.config.ProductMap;
-import com.liferay.faces.bridge.container.PortletContainerImpl;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriterLiferayImpl;
@@ -48,13 +47,14 @@ import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-import com.liferay.portal.kernel.util.StringBundler;
-
 
 /**
  * @author  Neil Griffin
  */
-public class PortletContainerLiferayImpl extends PortletContainerImpl {
+public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatImpl {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 4751433245905676075L;
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(PortletContainerLiferayImpl.class);
@@ -250,25 +250,6 @@ public class PortletContainerLiferayImpl extends PortletContainerImpl {
 				eventResponse.setRenderParameter(key, values);
 				logger.trace("Maintaining private render parameter name=[{0}] values=[{1}]", key, values);
 			}
-		}
-	}
-
-	@Override
-	public void postRenderResponse() {
-
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-
-		PortletRequest portletRequest = bridgeContext.getPortletRequest();
-
-		StringBundler stringBundler = (StringBundler) portletRequest.getAttribute(
-				LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
-
-		if (stringBundler != null) {
-
-			LiferaySharedPageTop liferaySharedPageTop = new LiferaySharedPageTop(stringBundler);
-			liferaySharedPageTop.removeDuplicates();
-			stringBundler = liferaySharedPageTop.toStringBundler();
-			portletRequest.setAttribute(LiferayConstants.LIFERAY_SHARED_PAGE_TOP, stringBundler);
 		}
 	}
 
