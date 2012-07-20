@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.faces.context.ResponseWriter;
 import javax.portlet.ActionResponse;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
@@ -41,8 +40,6 @@ import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.Product;
 import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
-import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriterLiferayImpl;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
