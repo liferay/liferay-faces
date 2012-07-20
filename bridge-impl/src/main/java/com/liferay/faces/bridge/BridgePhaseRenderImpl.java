@@ -34,24 +34,28 @@ import javax.faces.lifecycle.Lifecycle;
 import javax.faces.lifecycle.LifecycleFactory;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.faces.Bridge;
+import javax.portlet.faces.Bridge.PortletPhase;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
 import com.liferay.faces.bridge.application.BridgeNavigationHandler;
 import com.liferay.faces.bridge.application.BridgeNavigationHandlerImpl;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
+import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.ExternalContextImpl;
 import com.liferay.faces.bridge.context.RenderRedirectWriter;
 import com.liferay.faces.bridge.context.flash.BridgeFlash;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.event.IPCPhaseListener;
-import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityManager;
 import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityMap;
+import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -316,6 +320,27 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 				RenderRedirectWriter responseOutputWriter = (RenderRedirectWriter) writer;
 				responseOutputWriter.render();
 			}
+		}
+	}
+
+	@Override
+	protected void initBridgeRequestScope(PortletRequest portletRequest, PortletResponse portletResponse,
+		PortletPhase portletPhase, PortletContainer portletContainer) {
+
+		super.initBridgeRequestScope(portletRequest, portletResponse, portletPhase, portletContainer);
+
+		// If the portlet container does not support the POST-REDIRECT-GET design pattern, then the ACTION_PHASE and
+		// RENDER_PHASE are both part of a single HTTP POST request. In such cases, the excluded request attributes must
+		// be pro-actively removed here in the RENDER_PHASE (providing that the bridge request scope was created in the
+		// ACTION_PHASE). Note that this must take place prior to the FacesContext getting constructed. This is because
+		// the FacesContextFactory delegation chain might consult a request attribute that is supposed to be excluded.
+		// This is indeed the case with Apache Trinidad {@link
+		// org.apache.myfaces.trinidadinternal.context.FacesContextFactoryImpl.CacheRenderKit} constructor, which
+		// consults a request attribute named "org.apache.myfaces.trinidad.util.RequestStateMap" that must first be
+		// excluded.
+		if (!portletContainer.isPostRedirectGetSupported() &&
+				(bridgeRequestScope.getBeganInPhase() == Bridge.PortletPhase.ACTION_PHASE)) {
+			bridgeRequestScope.removeExcludedAttributes(renderRequest);
 		}
 	}
 

@@ -68,7 +68,7 @@ public class PortletContainerImpl implements PortletContainer {
 	// Private Data Members
 	private Boolean ableToSetHttpStatusCode;
 	private Map<String, PortletURL> actionURLCache;
-	private BridgeContext bridgeContext;
+	private BridgeConfig bridgeConfig;
 	private boolean markupHeadElementSupported;
 	private Map<String, PortletURL> renderURLCache;
 	private String requestQueryString;
@@ -76,16 +76,18 @@ public class PortletContainerImpl implements PortletContainer {
 	private String responseNamespace;
 	private Map<String, ResourceURL> resourceURLCache;
 
-	public PortletContainerImpl(BridgeContext bridgeContext) {
-
-		this.bridgeContext = bridgeContext;
-
-		String portalVendorClaim = bridgeContext.getPortletRequest().getPortalContext().getProperty(
+	public PortletContainerImpl(PortletRequest portletRequest, BridgeConfig bridgeConfig) {
+		String portalVendorClaim = portletRequest.getPortalContext().getProperty(
 				PortalContext.MARKUP_HEAD_ELEMENT_SUPPORT);
+		this.bridgeConfig = bridgeConfig;
 		this.markupHeadElementSupported = (portalVendorClaim != null);
 		this.actionURLCache = new HashMap<String, PortletURL>();
 		this.renderURLCache = new HashMap<String, PortletURL>();
 		this.resourceURLCache = new HashMap<String, ResourceURL>();
+	}
+
+	public boolean isPostRedirectGetSupported() {
+		return true;
 	}
 
 	public PortletURL createActionURL(String fromURL) throws MalformedURLException {
@@ -96,6 +98,7 @@ public class PortletContainerImpl implements PortletContainer {
 			try {
 				logger.debug("createActionURL fromURL=[" + fromURL + "]");
 
+				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 				MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
 				actionURL = createActionURL(mimeResponse);
 				copyRequestParameters(fromURL, actionURL);
@@ -126,6 +129,7 @@ public class PortletContainerImpl implements PortletContainer {
 
 		PortletURL redirectURL = null;
 
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
 
 		if ((portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE) ||
@@ -165,6 +169,7 @@ public class PortletContainerImpl implements PortletContainer {
 
 		if (renderURL == null) {
 
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 			PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
 
 			if ((portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE) ||
@@ -196,6 +201,7 @@ public class PortletContainerImpl implements PortletContainer {
 				logger.debug("createResourceURL fromURL=[" + fromURL + "]");
 
 				// Ask the portlet container to create a portlet resource URL.
+				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 				MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
 				resourceURL = createResourceURL(mimeResponse);
 
@@ -260,6 +266,7 @@ public class PortletContainerImpl implements PortletContainer {
 
 	public void redirect(String url) throws IOException {
 
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		PortletResponse portletResponse = bridgeContext.getPortletResponse();
 
 		if (portletResponse instanceof ActionResponse) {
@@ -380,12 +387,7 @@ public class PortletContainerImpl implements PortletContainer {
 		return requestParameters;
 	}
 
-	protected BridgeContext getBridgeContext() {
-		return bridgeContext;
-	}
-
 	protected boolean getContextParamAbleToSetHttpStatusCode(boolean defaultValue) {
-		BridgeConfig bridgeConfig = bridgeContext.getBridgeConfig();
 		String contextParamValue = bridgeConfig.getContextParameter(
 				BridgeConfigConstants.PARAM_CONTAINER_ABLE_TO_SET_HTTP_STATUS_CODE1);
 
@@ -447,6 +449,7 @@ public class PortletContainerImpl implements PortletContainer {
 
 	public HeadResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter) {
 
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		HeadResponseWriter headResponseWriter = new HeadResponseWriterImpl(wrappableResponseWriter,
 				bridgeContext.getPortletResponse());
 
@@ -464,11 +467,13 @@ public class PortletContainerImpl implements PortletContainer {
 	}
 
 	public String getRequestParameter(String name) {
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		return fixRequestParameterValue(bridgeContext.getPortletRequest().getParameter(name));
 	}
 
 	public String[] getRequestParameterValues(String name) {
 		String[] values = null;
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		String[] originalValues = bridgeContext.getPortletRequest().getParameterValues(name);
 
 		if (originalValues != null) {
@@ -485,6 +490,7 @@ public class PortletContainerImpl implements PortletContainer {
 	public String getRequestQueryString() {
 
 		if (requestQueryString == null) {
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 			PortletRequest portletRequest = bridgeContext.getPortletRequest();
 			requestQueryString = (String) portletRequest.getAttribute(REQUEST_ATTR_QUERY_STRING);
 
@@ -512,6 +518,7 @@ public class PortletContainerImpl implements PortletContainer {
 
 			// Note that this is an approximation (best guess) of the original URL.
 			StringBuilder buf = new StringBuilder();
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 			PortletRequest portletRequest = bridgeContext.getPortletRequest();
 			buf.append(portletRequest.getScheme());
 			buf.append(BridgeConstants.CHAR_COLON);
@@ -533,6 +540,7 @@ public class PortletContainerImpl implements PortletContainer {
 
 		if (responseNamespace == null) {
 
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 			responseNamespace = bridgeContext.getPortletResponse().getNamespace();
 
 			if (BridgeConstants.WSRP_REWRITE.equals(responseNamespace)) {

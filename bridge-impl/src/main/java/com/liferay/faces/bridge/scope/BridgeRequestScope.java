@@ -21,6 +21,9 @@ import javax.faces.context.Flash;
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletMode;
 import javax.portlet.RenderRequest;
+import javax.portlet.faces.Bridge;
+
+import com.liferay.faces.bridge.container.PortletContainer;
 
 
 /**
@@ -39,22 +42,38 @@ import javax.portlet.RenderRequest;
 public interface BridgeRequestScope extends ConcurrentMap<String, Object> {
 
 	/**
-	 * This method preserves the scoped data (as defined in Section 5.1.2 of the Bridge Spec). It should only be
-	 * called during the {@link javax.portlet.PortletRequest#ACTION_PHASE} and {@link
-	 * javax.portlet.PortletRequest#EVENT_PHASE} of the portlet lifecycle.
+	 * This method removes the excluded request attributes. It is designed to be called at the beginning of the
+	 * RENDER_PHASE of the portlet lifecycle. However, it is only necessary to call this method if {@link
+	 * PortletContainer#isPostRedirectGetSupported()} returns <code>false</code>. This is because portlet containers
+	 * that do indeed implement the POST-REDIRECT-GET design pattern would not have any excluded request attributes
+	 * carry-over from the ActionRequest to the RenderRequest.
+	 */
+	void removeExcludedAttributes(RenderRequest renderRequest);
+
+	/**
+	 * This method restores the scoped data that was preserved by the call to {@link #saveState(FacesContext)} method as
+	 * required by section 5.1.2 of the Bridge Spec. This method is designed to be called during the EVENT_PHASE and
+	 * RENDER_PHASE of the portlet lifecycle.
+	 *
+	 * @param  facesContext  The current {@link FacesContext}.
+	 */
+	void restoreState(FacesContext facesContext);
+
+	/**
+	 * This method preserves the scoped data (as defined in Section 5.1.2 of the Bridge Spec). It should only be called
+	 * during the {@link javax.portlet.PortletRequest#ACTION_PHASE} and {@link javax.portlet.PortletRequest#EVENT_PHASE}
+	 * of the portlet lifecycle.
 	 *
 	 * @param  facesContext  The current {@link FacesContext}.
 	 */
 	void saveState(FacesContext facesContext);
 
 	/**
-	 * This method restores the scoped data that was preserved by the call to {@link
-	 * #saveState(FacesContext)} method as required by section 5.1.2 of the Bridge Spec. This method is
-	 * designed to be called during the EVENT_PHASE and RENDER_PHASE of the portlet lifecycle.
+	 * Determines the {@link Bridge#PortletPhase} in which the bridge request scope instance was created.
 	 *
-	 * @param  facesContext  The current {@link FacesContext}.
+	 * @return  The {@link Bridge#PortletPhase} in which the bridge request scope instance was created.
 	 */
-	void restoreState(FacesContext facesContext);
+	public Bridge.PortletPhase getBeganInPhase();
 
 	/**
 	 * Returns the flag indicating whether or not the Faces Lifecycle was executed.
