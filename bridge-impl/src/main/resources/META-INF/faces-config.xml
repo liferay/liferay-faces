@@ -49,6 +49,7 @@
 			<bridge:bridge-url-factory>com.liferay.faces.bridge.context.url.BridgeURLFactoryImpl</bridge:bridge-url-factory>
 			<bridge:portlet-container-factory>com.liferay.faces.bridge.container.PortletContainerFactoryImpl</bridge:portlet-container-factory>
 			<bridge:uploaded-file-factory>com.liferay.faces.bridge.model.UploadedFileFactoryImpl</bridge:uploaded-file-factory>
+			<bridge:view-handler-factory>com.liferay.faces.bridge.application.ViewHandlerFactoryImpl</bridge:view-handler-factory>
 		</factory-extension>
 	</factory>
 	<render-kit>
