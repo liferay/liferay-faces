@@ -14,13 +14,8 @@
 package com.liferay.faces.bridge;
 
 import java.io.IOException;
-import java.util.Iterator;
 
-import javax.faces.application.ResourceHandler;
-import javax.faces.context.ExceptionHandler;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ExceptionQueuedEvent;
-import javax.faces.event.ExceptionQueuedEventContext;
 
 
 /**
@@ -31,58 +26,24 @@ import javax.faces.event.ExceptionQueuedEventContext;
 public abstract class BridgePhaseCompatImpl implements BridgePhase {
 
 	public void handleJSF2ResourceRequest(FacesContext facesContext) throws IOException {
-		ResourceHandler resourceHandler = facesContext.getApplication().getResourceHandler();
-		resourceHandler.handleResourceRequest(facesContext);
+		// no-op for JSF 1.x
 	}
 
 	public Throwable getJSF2HandledException(FacesContext facesContext) {
 
-		Throwable handledException = null;
-
-		ExceptionHandler exceptionHandler = facesContext.getExceptionHandler();
-		Iterable<ExceptionQueuedEvent> handledExceptionQueuedEvents =
-			exceptionHandler.getHandledExceptionQueuedEvents();
-
-		if (handledExceptionQueuedEvents != null) {
-			Iterator<ExceptionQueuedEvent> itr = handledExceptionQueuedEvents.iterator();
-
-			while (itr.hasNext()) {
-				ExceptionQueuedEvent exceptionQueuedEvent = itr.next();
-				ExceptionQueuedEventContext exceptionQueuedEventContext = exceptionQueuedEvent.getContext();
-				handledException = exceptionQueuedEventContext.getException();
-
-				break;
-			}
-		}
-
-		return handledException;
+		// no-op for JSF 1.x
+		return null;
 	}
 
 	public Throwable getJSF2UnhandledException(FacesContext facesContext) {
 
-		Throwable unhandledException = null;
-		ExceptionHandler exceptionHandler = facesContext.getExceptionHandler();
-		Iterable<ExceptionQueuedEvent> unhandledExceptionQueuedEvents =
-			exceptionHandler.getUnhandledExceptionQueuedEvents();
-
-		if (unhandledExceptionQueuedEvents != null) {
-			Iterator<ExceptionQueuedEvent> itr = unhandledExceptionQueuedEvents.iterator();
-
-			while (itr.hasNext()) {
-				ExceptionQueuedEvent exceptionQueuedEvent = itr.next();
-				ExceptionQueuedEventContext exceptionQueuedEventContext = exceptionQueuedEvent.getContext();
-				unhandledException = exceptionQueuedEventContext.getException();
-
-				break;
-			}
-		}
-
-		return unhandledException;
+		// no-op for JSF 1.x
+		return null;
 	}
 
 	public boolean isJSF2ResourceRequest(FacesContext facesContext) {
-		ResourceHandler resourceHandler = facesContext.getApplication().getResourceHandler();
 
-		return resourceHandler.isResourceRequest(facesContext);
+		// no-op for JSF 1.x
+		return false;
 	}
 }
