@@ -160,7 +160,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 		// Bridge.IS_POSTBACK_ATTRIBUTE from the Bridge API, because JSF 2.0 introduced the
 		// FacesContext#isPostBack() method.
 		// http://javaserverfaces.java.net/nonav/docs/2.0/javadocs/javax/faces/context/FacesContext.html#isPostback()
-		if (facesContext.isPostback()) {
+		if (bridgeRequestScope.getBeganInPhase() == Bridge.PortletPhase.ACTION_PHASE) {
 			facesContext.getExternalContext().getRequestMap().put(Bridge.IS_POSTBACK_ATTRIBUTE, Boolean.TRUE);
 		}
 
