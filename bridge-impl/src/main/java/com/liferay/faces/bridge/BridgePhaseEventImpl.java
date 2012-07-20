@@ -114,11 +114,6 @@ public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
 				bridgeRequestScope.saveState(facesContext);
 				maintainBridgeRequestScope(eventRequest, eventResponse);
 
-				// PROPOSED-FOR-JSR344-API
-				// http://java.net/jira/browse/JAVASERVERFACES_SPEC_PUBLIC-1070
-				// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
-				bridgeRequestScope.setFlash(facesContext.getExternalContext().getFlash());
-
 				// Process the outgoing public render parameters.
 				// TCK TestPage064: eventControllerTest
 				processOutgoingPublicRenderParameters(eventPhaseFacesLifecycle);

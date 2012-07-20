@@ -14,10 +14,8 @@
 package com.liferay.faces.bridge.scope;
 
 import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
 
 import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletMode;
 import javax.portlet.RenderRequest;
@@ -39,7 +37,7 @@ import com.liferay.faces.bridge.container.PortletContainer;
  *
  * @author  Neil Griffin
  */
-public interface BridgeRequestScope extends ConcurrentMap<String, Object> {
+public interface BridgeRequestScope {
 
 	/**
 	 * This method removes the excluded request attributes. It is designed to be called at the beginning of the
@@ -111,12 +109,6 @@ public interface BridgeRequestScope extends ConcurrentMap<String, Object> {
 	 *                                 <code>false</code>.
 	 */
 	void setFacesLifecycleExecuted(boolean facesLifecycleExecuted);
-
-	// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
-	Flash getFlash();
-
-	// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
-	void setFlash(Flash flash);
 
 	/**
 	 * Returns the unique identifier, which is prefixed with the value passed to {@link #setIdPrefix(String)}.
