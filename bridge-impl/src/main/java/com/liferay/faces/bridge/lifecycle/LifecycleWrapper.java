@@ -14,16 +14,17 @@
 package com.liferay.faces.bridge.lifecycle;
 
 import javax.faces.FacesException;
-import javax.faces.FacesWrapper;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseListener;
 import javax.faces.lifecycle.Lifecycle;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class LifecycleWrapper extends Lifecycle implements FacesWrapper<Lifecycle> {
+public abstract class LifecycleWrapper extends Lifecycle implements Wrapper<Lifecycle> {
 
 	@Override
 	public void addPhaseListener(PhaseListener listener) {

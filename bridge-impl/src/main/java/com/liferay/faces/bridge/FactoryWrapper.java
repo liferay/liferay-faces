@@ -13,13 +13,13 @@
  */
 package com.liferay.faces.bridge;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public interface FactoryWrapper<T> extends FacesWrapper<T> {
+public interface FactoryWrapper<T> extends Wrapper<T> {
 
 	public abstract T getWrapped();
 

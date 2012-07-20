@@ -15,17 +15,18 @@ package com.liferay.faces.bridge.renderkit.html_basic;
 
 import java.io.IOException;
 
-import javax.faces.FacesWrapper;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.ConverterException;
 import javax.faces.render.Renderer;
 
+import com.liferay.faces.util.helper.Wrapper;
+
 
 /**
  * @author  Neil Griffin
  */
-public abstract class RendererWrapper extends Renderer implements FacesWrapper<Renderer> {
+public abstract class RendererWrapper extends Renderer implements Wrapper<Renderer> {
 
 	@Override
 	public String convertClientId(FacesContext context, String clientId) {

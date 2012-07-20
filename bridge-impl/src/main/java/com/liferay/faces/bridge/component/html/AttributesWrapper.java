@@ -17,13 +17,13 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class AttributesWrapper implements Map<String, Object>, FacesWrapper<Map<String, Object>> {
+public abstract class AttributesWrapper implements Map<String, Object>, Wrapper<Map<String, Object>> {
 
 	public void clear() {
 		getWrapped().clear();
