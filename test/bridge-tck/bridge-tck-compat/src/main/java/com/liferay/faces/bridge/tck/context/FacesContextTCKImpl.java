@@ -13,9 +13,11 @@
  */
 package com.liferay.faces.bridge.tck.context;
 
+import javax.el.ELContext;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.bridge.tck.el.ELContextTCKImpl;
 import com.liferay.faces.util.context.FacesContextWrapper;
 
 
@@ -28,11 +30,30 @@ import com.liferay.faces.util.context.FacesContextWrapper;
 public class FacesContextTCKImpl extends FacesContextWrapper {
 
 	// Private Data Members
-	ExternalContext externalContext;
-	FacesContext wrappedFacesContext;
+	private ELContext elContext;
+	private ExternalContext externalContext;
+	private FacesContext wrappedFacesContext;
 
 	public FacesContextTCKImpl(FacesContext facesContext) {
 		this.wrappedFacesContext = facesContext;
+	}
+
+	/**
+	 * This method wraps the Mojarra/MyFaces {@link ELContext} with an implementation that handles a special case of the
+	 * TCK.
+	 */
+	@Override
+	public ELContext getELContext() {
+
+		if (elContext == null) {
+			elContext = super.getELContext();
+
+			if (!(elContext instanceof ELContextTCKImpl)) {
+				elContext = new ELContextTCKImpl(elContext);
+			}
+		}
+
+		return elContext;
 	}
 
 	@Override
