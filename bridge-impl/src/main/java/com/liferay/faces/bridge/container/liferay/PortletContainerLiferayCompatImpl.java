@@ -20,6 +20,7 @@ import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainerImpl;
+import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
 
 
 /**
@@ -54,11 +55,8 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 	@Override
 	public HeadResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter) {
 
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		HeadResponseWriter headResponseWriter = new HeadResponseWriterLiferayImpl(bridgeContext,
-				wrappableResponseWriter);
-
-		return headResponseWriter;
+		// no-op for JSF 1.2
+		return null;
 	}
 
 	@Override

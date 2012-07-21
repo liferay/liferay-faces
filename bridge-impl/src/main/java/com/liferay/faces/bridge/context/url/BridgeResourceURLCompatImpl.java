@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.bridge.context.url;
 
-import com.liferay.faces.bridge.application.ResourceHandlerInnerImpl;
 import com.liferay.faces.bridge.context.BridgeContext;
 
 
@@ -29,11 +28,15 @@ public abstract class BridgeResourceURLCompatImpl extends BridgeURLBaseImpl impl
 	}
 
 	public boolean isEncodedFaces2ResourceURL() {
-		return ResourceHandlerInnerImpl.isEncodedFacesResourceURL(url);
+
+		// no-op for JSF 1.2
+		return false;
 	}
 
 	public boolean isFaces2ResourceURL() {
-		return ResourceHandlerInnerImpl.isFacesResourceURL(url);
+
+		// no-op for JSF 1.2
+		return false;
 	}
 
 }

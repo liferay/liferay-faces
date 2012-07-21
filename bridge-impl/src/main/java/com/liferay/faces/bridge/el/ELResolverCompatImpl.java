@@ -25,6 +25,8 @@ import javax.faces.context.FacesContext;
 public abstract class ELResolverCompatImpl extends ELResolver {
 
 	protected Object getFlash(FacesContext facesContext) {
-		return facesContext.getExternalContext().getFlash();
+
+		// no-op for JSF 1.2
+		return null;
 	}
 }
