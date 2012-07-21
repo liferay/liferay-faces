@@ -2,6 +2,13 @@
 <faces-config xmlns="http://java.sun.com/xml/ns/javaee" xmlns:bridge="http://www.liferay.com/xml/ns/liferay-faces-bridge-2.0-extension"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+	<application>
+		<application-extension>
+			<bridge:excluded-attributes>
+				<bridge:excluded-attribute>org.apache.myfaces.trinidad.util.RequestStateMap</bridge:excluded-attribute>
+			</bridge:excluded-attributes>
+		</application-extension>
+	</application>
 	<factory>
 		<faces-context-factory>com.liferay.faces.bridge.tck.context.FacesContextFactoryTCKImpl</faces-context-factory>
 		<lifecycle-factory>com.liferay.faces.bridge.tck.lifecycle.LifecycleFactoryTCKImpl</lifecycle-factory>
