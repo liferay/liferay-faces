@@ -18,7 +18,6 @@ import javax.el.ELResolver;
 import javax.faces.context.FacesContext;
 
 
-
 /**
  * This class is designed to be an {@link ELResolverWrapper} around the Mojarra/MyFaces {@link ELResolver}
  * implementation. Its purpose is to handle special cases of the TCK.
@@ -44,9 +43,7 @@ public class ELResolverTCKImpl extends ELResolverWrapper {
 		// TestPage203: JSF_ELTest
 		if (FACES_CONTEXT.equals(property)) {
 
-			// Note that the Mojarra 2.x com.sun.faces.el.ImplicitObjectELResolver.getValue(ELContext context, Object
-			// base, Object property) method returns an instance of com.sun.faces.context.FacesContextImpl but the JSR
-			// 329 TCK (which is JSF/Mojarra 1.2 based) simply expects FacesContext.getCurrentInstance().
+			// JSR 329 TCK Challenge: https://issues.apache.org/jira/browse/PORTLETBRIDGE-224
 			value = FacesContext.getCurrentInstance();
 		}
 
