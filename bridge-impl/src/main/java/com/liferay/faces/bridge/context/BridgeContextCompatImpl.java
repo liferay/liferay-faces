@@ -14,7 +14,6 @@
 package com.liferay.faces.bridge.context;
 
 import javax.faces.context.FacesContext;
-import javax.faces.context.PartialViewContext;
 
 
 /**
@@ -25,11 +24,6 @@ import javax.faces.context.PartialViewContext;
 public abstract class BridgeContextCompatImpl extends BridgeContext {
 
 	protected void partialViewContextRenderAll(FacesContext facesContext) {
-
-		PartialViewContext partialViewContext = facesContext.getPartialViewContext();
-
-		if (!partialViewContext.isRenderAll()) {
-			partialViewContext.setRenderAll(true);
-		}
+		// no-op for JSF 1.2
 	}
 }
