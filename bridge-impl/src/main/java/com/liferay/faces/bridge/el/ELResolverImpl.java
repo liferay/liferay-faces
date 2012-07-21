@@ -35,14 +35,14 @@ import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.map.SessionMap;
 import com.liferay.faces.bridge.filter.HttpServletRequestAdapter;
 import com.liferay.faces.bridge.filter.HttpServletResponseAdapter;
-import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.bridge.preference.MutablePreferenceMap;
+import com.liferay.faces.util.helper.BooleanHelper;
 
 
 /**
  * @author  Neil Griffin
  */
-public class ELResolverImpl extends ELResolver {
+public class ELResolverImpl extends ELResolverCompatImpl {
 
 	private static final String ACTION_REQUEST = "actionRequest";
 	private static final String ACTION_RESPONSE = "actionResponse";
@@ -239,7 +239,7 @@ public class ELResolverImpl extends ELResolver {
 			}
 			else if (varName.equals(FLASH)) {
 				FacesContext facesContext = FacesContext.getCurrentInstance();
-				value = facesContext.getExternalContext().getFlash();
+				value = getFlash(facesContext);
 			}
 			else if (varName.equals(HTTP_SESSION_SCOPE)) {
 				FacesContext facesContext = FacesContext.getCurrentInstance();
