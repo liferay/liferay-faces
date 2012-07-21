@@ -15,7 +15,6 @@
 		<factory-extension>
 			<bridge:bridge-context-factory>com.liferay.faces.bridge.tck.context.BridgeContextFactoryTCKImpl</bridge:bridge-context-factory>
 			<bridge:bridge-request-scope-factory>com.liferay.faces.bridge.tck.scope.BridgeRequestScopeFactoryTCKImpl</bridge:bridge-request-scope-factory>
-			<bridge:portlet-container-factory>com.liferay.faces.bridge.tck.container.PortletContainerFactoryTCKImpl</bridge:portlet-container-factory>
 		</factory-extension>
 	</factory>
 </faces-config>
