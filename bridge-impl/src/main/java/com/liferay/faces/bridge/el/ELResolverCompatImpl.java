@@ -11,10 +11,10 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.context.url;
+package com.liferay.faces.bridge.el;
 
-import com.liferay.faces.bridge.application.ResourceHandlerInnerImpl;
-import com.liferay.faces.bridge.context.BridgeContext;
+import javax.el.ELResolver;
+import javax.faces.context.FacesContext;
 
 
 /**
@@ -22,18 +22,9 @@ import com.liferay.faces.bridge.context.BridgeContext;
  *
  * @author  Neil Griffin
  */
-public abstract class BridgeResourceURLCompatImpl extends BridgeURLBaseImpl implements BridgeResourceURL {
+public abstract class ELResolverCompatImpl extends ELResolver {
 
-	public BridgeResourceURLCompatImpl(String url, String currentFacesViewId, BridgeContext bridgeContext) {
-		super(url, currentFacesViewId, bridgeContext);
+	protected Object getFlash(FacesContext facesContext) {
+		return facesContext.getExternalContext().getFlash();
 	}
-
-	public boolean isEncodedFaces2ResourceURL() {
-		return ResourceHandlerInnerImpl.isEncodedFacesResourceURL(url);
-	}
-
-	public boolean isFaces2ResourceURL() {
-		return ResourceHandlerInnerImpl.isFacesResourceURL(url);
-	}
-
 }
