@@ -26,7 +26,6 @@ import javax.portlet.ResourceURL;
 import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.application.ResourceHandlerInnerImpl;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.helper.BooleanHelper;
@@ -37,7 +36,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class BridgeResourceURLImpl extends BridgeURLBaseImpl implements BridgeResourceURL {
+public class BridgeResourceURLImpl extends BridgeResourceURLCompatImpl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeResourceURLImpl.class);
@@ -260,14 +259,6 @@ public class BridgeResourceURLImpl extends BridgeURLBaseImpl implements BridgeRe
 
 	public void setInProtocol(boolean inProtocol) {
 		this.inProtocol = inProtocol;
-	}
-
-	public boolean isEncodedFaces2ResourceURL() {
-		return ResourceHandlerInnerImpl.isEncodedFacesResourceURL(url);
-	}
-
-	public boolean isFaces2ResourceURL() {
-		return ResourceHandlerInnerImpl.isFacesResourceURL(url);
 	}
 
 	public void setViewLink(boolean viewLink) {
