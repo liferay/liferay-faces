@@ -28,6 +28,10 @@ import com.liferay.faces.bridge.container.pluto.PortletContainerPlutoImpl;
  */
 public class PortletContainerPlutoTCKImpl extends PortletContainerPlutoImpl {
 
+	// serialVersionUID
+	private static final long serialVersionUID = 3044933521403224720L;
+
+	// Private Constants
 	private static final String[] USER_AGENT_HEADER_VALUES = new String[] {
 			"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:13.0) Gecko/20100101 Firefox/13.0.1"
 		};
