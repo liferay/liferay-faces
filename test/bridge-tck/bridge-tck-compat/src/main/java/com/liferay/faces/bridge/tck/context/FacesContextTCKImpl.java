@@ -29,8 +29,8 @@ import com.liferay.faces.bridge.tck.el.ELContextTCKImpl;
 public class FacesContextTCKImpl extends FacesContextWrapper {
 
 	// Private Data Members
-	ELContext elContext;
-	FacesContext wrappedFacesContext;
+	private ELContext elContext;
+	private FacesContext wrappedFacesContext;
 
 	public FacesContextTCKImpl(FacesContext facesContext) {
 		this.wrappedFacesContext = facesContext;
