@@ -15,108 +15,70 @@ package com.liferay.faces.bridge.context;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.Principal;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
 import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
-import javax.portlet.PortletURL;
 import javax.portlet.ResourceResponse;
 import javax.portlet.StateAwareResponse;
-import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeWriteBehindResponse;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponseWrapper;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentRequest;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentResponse;
 import com.liferay.faces.bridge.application.view.BridgeWriteBehindResponseFactory;
-import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
-import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
-import com.liferay.faces.bridge.config.BridgeConfigFactory;
-import com.liferay.faces.bridge.config.Product;
-import com.liferay.faces.bridge.config.ProductMap;
-import com.liferay.faces.bridge.context.flash.BridgeFlash;
-import com.liferay.faces.bridge.context.flash.BridgeFlashFactory;
 import com.liferay.faces.bridge.context.flash.FlashHttpServletResponse;
 import com.liferay.faces.bridge.context.map.ApplicationMap;
 import com.liferay.faces.bridge.context.map.InitParameterMap;
 import com.liferay.faces.bridge.context.map.RequestAttributeMap;
 import com.liferay.faces.bridge.context.map.RequestCookieMap;
 import com.liferay.faces.bridge.context.map.SessionMap;
-import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.bridge.lifecycle.CongruousTask;
 import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityManager;
 import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityMap;
+import com.liferay.faces.bridge.util.LocaleIterator;
+import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.bridge.util.FileNameUtil;
-import com.liferay.faces.bridge.util.LocaleIterator;
 
 
 /**
  * @author  Neil Griffin
  */
-public class ExternalContextImpl extends ExternalContext {
+public class ExternalContextImpl extends ExternalContextCompatImpl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ExternalContextImpl.class);
 
-	// Private Constants
-	private static final String COOKIE_PROPERTY_COMMENT = "comment";
-	private static final String COOKIE_PROPERTY_DOMAIN = "domain";
-	private static final String COOKIE_PROPERTY_MAX_AGE = "maxAge";
-	private static final String COOKIE_PROPERTY_PATH = "path";
-	private static final String COOKIE_PROPERTY_SECURE = "secure";
-
-	// Private Data Members
-	private PortletContext portletContext;
-	private PortletRequest portletRequest;
-	private PortletResponse portletResponse;
-
 	// Constructor-initialized objects
 	private boolean manageIncongruities;
 
-	// Pre-initialized objects
+	// Pre-initialized Data Members
 	private ApplicationMap applicationMap;
-	private BridgeConfig bridgeConfig;
 	private BridgeContext bridgeContext;
-	private LifecycleIncongruityMap lifecycleIncongruityMap;
-	private LifecycleIncongruityManager lifecycleIncongruityManager;
-	private Bridge.PortletPhase portletPhase;
 	private Map<String, Object> requestAttributeMap;
-	private String requestContextPath;
 	private Iterator<Locale> requestLocales;
 	private Map<String, Object> sessionMap;
 
-	// Lazily-initialized objects
-	private ServletResponse facesImplementationServletResponse;
+	// Lazily-Initialized Data Members
 	private String authType;
-	private BridgeFlash bridgeFlash;
-	private Boolean iceFacesLegacyMode;
 	private Map<String, String> initParameterMap;
-	private String portletContextName;
 	private String remoteUser;
 	private Map<String, Object> requestCookieMap;
 	private Locale requestLocale;
@@ -125,60 +87,16 @@ public class ExternalContextImpl extends ExternalContext {
 
 	public ExternalContextImpl(PortletContext portletContext, PortletRequest portletRequest,
 		PortletResponse portletResponse) {
-		this.portletContext = portletContext;
-		this.portletRequest = portletRequest;
-		this.portletResponse = portletResponse;
+
+		super(portletContext, portletRequest, portletResponse);
 
 		try {
-
-			// Get the bridge configuration.
-			BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
-					BridgeConfigFactory.class);
-			bridgeConfig = bridgeConfigFactory.getBridgeConfig();
-
 			boolean requestChanged = false;
 			boolean responseChanged = false;
 			preInitializeObjects(requestChanged, responseChanged);
 		}
 		catch (Exception e) {
 			logger.error(e);
-		}
-	}
-
-	@Override
-	public void addResponseCookie(String name, String value, Map<String, Object> properties) {
-		Cookie cookie = new Cookie(name, value);
-
-		if ((properties != null) && !properties.isEmpty()) {
-
-			try {
-				cookie.setComment((String) properties.get(COOKIE_PROPERTY_COMMENT));
-				cookie.setDomain((String) properties.get(COOKIE_PROPERTY_DOMAIN));
-				cookie.setMaxAge((Integer) properties.get(COOKIE_PROPERTY_MAX_AGE));
-				cookie.setPath((String) properties.get(COOKIE_PROPERTY_PATH));
-				cookie.setSecure((Boolean) properties.get(COOKIE_PROPERTY_SECURE));
-			}
-			catch (ClassCastException e) {
-				logger.error(e.getMessage(), e);
-			}
-		}
-
-		portletResponse.addProperty(cookie);
-	}
-
-	/**
-	 * @see  ExternalContext#addResponseHeader(String, String)
-	 */
-	@Override
-	public void addResponseHeader(String name, String value) {
-
-		if (portletResponse instanceof ResourceResponse) {
-			ResourceResponse resourceResponse = (ResourceResponse) portletResponse;
-			resourceResponse.addProperty(name, value);
-		}
-		else {
-			logger.warn("Unable to call {0} for portletResponse=[{1}] because it is not a ResourceResponse.",
-				"portletResponse.addProperty(String, String)", portletResponse.getClass().getName());
 		}
 	}
 
@@ -198,74 +116,6 @@ public class ExternalContextImpl extends ExternalContext {
 		}
 	}
 
-	@Override
-	public String encodeBookmarkableURL(String baseUrl, Map<String, List<String>> parameters) {
-
-		String renderURL = null;
-
-		if (baseUrl != null) {
-			String viewId = baseUrl;
-
-			if (baseUrl.startsWith(requestContextPath)) {
-				viewId = baseUrl.substring(requestContextPath.length());
-			}
-
-			try {
-
-				if ((portletPhase == Bridge.PortletPhase.RENDER_PHASE) ||
-						(portletPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
-					PortletURL portletRenderURL = bridgeContext.getPortletContainer().createRenderURL(baseUrl);
-					portletRenderURL.setParameter(bridgeConfig.getViewIdRenderParameterName(), viewId);
-
-					if (parameters != null) {
-
-						for (Map.Entry<String, List<String>> parameter : parameters.entrySet()) {
-							String name = parameter.getKey();
-
-							if (name != null) {
-								List<String> values = parameter.getValue();
-
-								if (values != null) {
-									int size = values.size();
-
-									if (size > 0) {
-
-										if (size == 1) {
-											String value = values.get(0);
-
-											if (value != null) {
-												portletRenderURL.setParameter(name, value);
-											}
-										}
-										else {
-											logger.warn("Unable to append multiple values for parameter name=[{0]",
-												name);
-										}
-									}
-								}
-							}
-						}
-					}
-
-					renderURL = portletRenderURL.toString();
-				}
-				else {
-					logger.error(
-						"Unable to encode bookmarkable URL during Bridge.PortletPhase.[{0}] -- you should call BridgeUtil.getPortletRequestPhase() and check for Bridge.PortletPhase.RENDER_PHASE or Bridge.PortletPhase.RESOURCE_PHASE before calling ExternalContext.encodeBookmarkableURL(...).",
-						portletPhase);
-				}
-			}
-			catch (Exception e) {
-				logger.error(e.getMessage(), e);
-			}
-		}
-		else {
-			logger.warn("Unable to encode RenderURL for url=[null]");
-		}
-
-		return renderURL;
-	}
-
 	/**
 	 * @see  ExternalContext#encodeNamespace(String)
 	 */
@@ -275,29 +125,11 @@ public class ExternalContextImpl extends ExternalContext {
 	}
 
 	/**
-	 * @see  ExternalContext#encodePartialActionURL(String)
-	 */
-	@Override
-	public String encodePartialActionURL(String url) {
-		return bridgeContext.encodePartialActionURL(url).toString();
-	}
-
-	@Override
-	public String encodeRedirectURL(String baseUrl, Map<String, List<String>> parameters) {
-		return bridgeContext.encodeRedirectURL(baseUrl, parameters).toString();
-	}
-
-	/**
 	 * @see  ExternalContext#encodeResourceURL(String)
 	 */
 	@Override
 	public String encodeResourceURL(String url) {
 		return bridgeContext.encodeResourceURL(url).toString();
-	}
-
-	@Override
-	public void invalidateSession() {
-		portletRequest.getPortletSession().invalidate();
 	}
 
 	@Override
@@ -313,52 +145,6 @@ public class ExternalContextImpl extends ExternalContext {
 	@Override
 	public void redirect(String url) throws IOException {
 		bridgeContext.redirect(url);
-	}
-
-	@Override
-	public void responseFlushBuffer() throws IOException {
-
-		if (portletResponse instanceof MimeResponse) {
-
-			if (facesImplementationServletResponse != null) {
-
-				// This happens when Mojarra's JspViewHandlingStrategy#buildView(FacesContext context, UIViewRoot)
-				// executes.
-				facesImplementationServletResponse.flushBuffer();
-			}
-			else {
-				MimeResponse mimeResponse = (MimeResponse) portletResponse;
-				mimeResponse.flushBuffer();
-			}
-		}
-		else {
-			lifecycleIncongruityManager.addCongruousTask(CongruousTask.RESPONSE_FLUSH_BUFFER);
-		}
-	}
-
-	@Override
-	public void responseReset() {
-
-		if (portletResponse instanceof MimeResponse) {
-			MimeResponse mimeResponse = (MimeResponse) portletResponse;
-			mimeResponse.reset();
-		}
-		else {
-			lifecycleIncongruityManager.addCongruousTask(CongruousTask.RESPONSE_RESET);
-		}
-	}
-
-	/**
-	 * The Portlet API does not have an equivalent to {@link HttpServletResponse.sendError(int, String)}. Since the
-	 * Mojarra JSF implementation basically only calls this when a Facelet is not found, better in a portlet environment
-	 * to simply log an error and throw an IOException up the call stack so that the portlet will give the portlet
-	 * container a chance to render an error message.
-	 */
-	@Override
-	public void responseSendError(int statusCode, String message) throws IOException {
-		String errorMessage = "Status code " + statusCode + ": " + message;
-		logger.error(errorMessage);
-		throw new IOException(errorMessage);
 	}
 
 	/**
@@ -449,94 +235,14 @@ public class ExternalContextImpl extends ExternalContext {
 		return authType;
 	}
 
-	// NOTE: PROPOSED-FOR-JSR344-API
-	// http://java.net/jira/browse/JAVASERVERFACES_SPEC_PUBLIC-1070
-	// NOTE: PROPOSED-FOR-BRIDGE3-API (Called by BridgeRequestScope in order to restore the Flash scope)
-	// https://issues.apache.org/jira/browse/PORTLETBRIDGE-207
-	public void setBridgeFlash(BridgeFlash bridgeFlash) {
-		this.bridgeFlash = bridgeFlash;
-	}
-
 	@Override
 	public Object getContext() {
 		return portletContext;
 	}
 
 	@Override
-	public String getContextName() {
-
-		if (portletContextName == null) {
-			portletContextName = portletContext.getPortletContextName();
-		}
-
-		return portletContextName;
-	}
-
-	@Override
-	public boolean isResponseCommitted() {
-
-		if (portletResponse instanceof MimeResponse) {
-			MimeResponse mimeResponse = (MimeResponse) portletResponse;
-			boolean responseCommitted = mimeResponse.isCommitted();
-			lifecycleIncongruityMap.putResponseCommitted(responseCommitted);
-
-			return responseCommitted;
-		}
-		else {
-			return lifecycleIncongruityMap.isResponseCommitted();
-		}
-	}
-
-	protected boolean isEncodingFormWithPrimeFacesAjaxFileUpload() {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-
-		if (facesContext.getAttributes().get(PrimeFacesFileUpload.AJAX_FILE_UPLOAD) != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	@Override
 	public boolean isUserInRole(String role) {
 		return portletRequest.isUserInRole(role);
-	}
-
-	protected boolean isICEfacesLegacyMode(ClientDataRequest clientDataRequest) {
-
-		if (iceFacesLegacyMode == null) {
-
-			iceFacesLegacyMode = Boolean.FALSE;
-
-			String requestContentType = clientDataRequest.getContentType();
-
-			if ((requestContentType != null) &&
-					requestContentType.toLowerCase().startsWith(BridgeConstants.MULTIPART_CONTENT_TYPE_PREFIX)) {
-
-				Product iceFaces = ProductMap.getInstance().get(BridgeConstants.ICEFACES);
-
-				if (iceFaces.isDetected() &&
-						((iceFaces.getMajorVersion() == 2) ||
-							((iceFaces.getMajorVersion() == 3) && (iceFaces.getMinorVersion() == 0)))) {
-
-					iceFacesLegacyMode = Boolean.TRUE;
-				}
-			}
-		}
-
-		return iceFacesLegacyMode;
-	}
-
-	@Override
-	public Flash getFlash() {
-
-		if (bridgeFlash == null) {
-			BridgeFlashFactory bridgeFlashFactory = (BridgeFlashFactory) BridgeFactoryFinder.getFactory(BridgeFlashFactory.class);
-			bridgeFlash = bridgeFlashFactory.getBridgeFlash();
-		}
-
-		return bridgeFlash;
 	}
 
 	@Override
@@ -547,25 +253,6 @@ public class ExternalContextImpl extends ExternalContext {
 	@Override
 	public Map<String, String> getInitParameterMap() {
 		return initParameterMap;
-	}
-
-	/**
-	 * @see  ExternalContext#getMimeType(String)
-	 */
-	@Override
-	public String getMimeType(String fileName) {
-		String mimeType = portletContext.getMimeType(fileName);
-
-		if ((mimeType == null) || (mimeType.length() == 0)) {
-			mimeType = FileNameUtil.getFileNameMimeType(fileName);
-		}
-
-		return mimeType;
-	}
-
-	@Override
-	public String getRealPath(String path) {
-		return portletContext.getRealPath(path);
 	}
 
 	@Override
@@ -650,23 +337,6 @@ public class ExternalContextImpl extends ExternalContext {
 		}
 
 		lifecycleIncongruityMap.putRequestCharacterEncoding(encoding);
-	}
-
-	@Override
-	public int getRequestContentLength() {
-
-		int requestContentLength = -1;
-
-		if (portletRequest instanceof ClientDataRequest) {
-			ClientDataRequest clientDataRequest = (ClientDataRequest) portletRequest;
-			requestContentLength = clientDataRequest.getContentLength();
-			lifecycleIncongruityMap.putRequestContentLength(requestContentLength);
-		}
-		else {
-			requestContentLength = lifecycleIncongruityMap.getRequestContentLength();
-		}
-
-		return requestContentLength;
 	}
 
 	@Override
@@ -764,21 +434,6 @@ public class ExternalContextImpl extends ExternalContext {
 		return bridgeContext.getRequestPathInfo();
 	}
 
-	@Override
-	public String getRequestScheme() {
-		return portletRequest.getScheme();
-	}
-
-	@Override
-	public String getRequestServerName() {
-		return portletRequest.getServerName();
-	}
-
-	@Override
-	public int getRequestServerPort() {
-		return portletRequest.getServerPort();
-	}
-
 	/**
 	 * Section 6.1.3.1 of the JSR 329 spec describes the logic for this method.
 	 */
@@ -824,7 +479,7 @@ public class ExternalContextImpl extends ExternalContext {
 		}
 		else {
 
-			if ((bridgeFlash != null) && bridgeFlash.isServletResponseRequired()) {
+			if (isBridgeFlashServletResponseRequired()) {
 				return new FlashHttpServletResponse(portletResponse, getRequestLocale());
 			}
 			else {
@@ -915,41 +570,6 @@ public class ExternalContextImpl extends ExternalContext {
 	}
 
 	@Override
-	public int getResponseBufferSize() {
-
-		if (portletResponse instanceof MimeResponse) {
-			MimeResponse mimeResponse = (MimeResponse) portletResponse;
-			int responseBufferSize = mimeResponse.getBufferSize();
-			lifecycleIncongruityMap.putResponseBufferSize(responseBufferSize);
-
-			return responseBufferSize;
-		}
-		else {
-			return lifecycleIncongruityMap.getResponseBufferSize();
-		}
-	}
-
-	/**
-	 * @see  javax.faces.context.ExternalContext#setResponseBufferSize(int)
-	 */
-	@Override
-	public void setResponseBufferSize(int size) {
-
-		if (bridgeContext.getPortletContainer().isAbleToSetResourceResponseBufferSize()) {
-
-			if (portletResponse instanceof ResourceResponse) {
-				ResourceResponse resourceResponse = (ResourceResponse) portletResponse;
-				resourceResponse.setBufferSize(size);
-			}
-			else {
-				lifecycleIncongruityManager.addCongruousTask(CongruousTask.SET_RESPONSE_BUFFER_SIZE);
-			}
-		}
-
-		lifecycleIncongruityMap.putResponseBufferSize(size);
-	}
-
-	@Override
 	public String getResponseCharacterEncoding() {
 
 		if (portletResponse instanceof MimeResponse) {
@@ -1000,23 +620,6 @@ public class ExternalContextImpl extends ExternalContext {
 	}
 
 	/**
-	 * @see  javax.faces.context.ExternalContext#setResponseContentLength(int)
-	 */
-	@Override
-	public void setResponseContentLength(int length) {
-
-		if (portletResponse instanceof ResourceResponse) {
-			ResourceResponse resourceResponse = (ResourceResponse) portletResponse;
-			resourceResponse.setContentLength(length);
-		}
-		else {
-			lifecycleIncongruityManager.addCongruousTask(CongruousTask.SET_RESPONSE_CONTENT_LENGTH);
-		}
-
-		lifecycleIncongruityMap.putResponseContentLength(length);
-	}
-
-	/**
 	 * @see  javax.faces.context.ExternalContext#getResponseContentType()
 	 */
 	@Override
@@ -1031,107 +634,6 @@ public class ExternalContextImpl extends ExternalContext {
 		else {
 			return responseContentType;
 		}
-	}
-
-	/**
-	 * @see  ExternalContext#setResponseContentType(String)
-	 */
-	@Override
-	public void setResponseContentType(String contentType) {
-
-		if (portletResponse instanceof MimeResponse) {
-			MimeResponse mimeResponse = (MimeResponse) portletResponse;
-			bridgeContext.getPortletContainer().setMimeResponseContentType(mimeResponse, contentType);
-		}
-		else {
-			lifecycleIncongruityManager.addCongruousTask(CongruousTask.SET_RESPONSE_CONTENT_TYPE);
-		}
-
-		lifecycleIncongruityMap.putResponseContentType(contentType);
-	}
-
-	/**
-	 * @see  ExternalContext#setResponseHeader(String, String)
-	 */
-	@Override
-	public void setResponseHeader(String name, String value) {
-		addResponseHeader(name, value);
-	}
-
-	/**
-	 * @see  javax.faces.context.ExternalContext#getResponseOutputStream()
-	 */
-	@Override
-	public OutputStream getResponseOutputStream() throws IOException {
-
-		if (portletResponse instanceof MimeResponse) {
-
-			if (facesImplementationServletResponse != null) {
-				logger.debug("Delegating to AFTER_VIEW_CONTENT servletResponse=[{0}]",
-					facesImplementationServletResponse);
-
-				return facesImplementationServletResponse.getOutputStream();
-			}
-			else {
-				MimeResponse mimeResponse = (MimeResponse) portletResponse;
-
-				return mimeResponse.getPortletOutputStream();
-			}
-		}
-		else {
-			lifecycleIncongruityManager.addCongruousTask(CongruousTask.WRITE_RESPONSE_OUTPUT_STREAM);
-
-			return lifecycleIncongruityMap.getResponseOutputStream();
-		}
-	}
-
-	/**
-	 * @see  javax.faces.context.ExternalContext#getResponseOutputWriter()
-	 */
-	@Override
-	public Writer getResponseOutputWriter() throws IOException {
-
-		if (portletResponse instanceof MimeResponse) {
-
-			if (facesImplementationServletResponse != null) {
-				logger.debug("Delegating to AFTER_VIEW_CONTENT servletResponse=[{0}]",
-					facesImplementationServletResponse);
-
-				return facesImplementationServletResponse.getWriter();
-			}
-			else {
-				return bridgeContext.getResponseOutputWriter();
-			}
-
-		}
-		else {
-			lifecycleIncongruityManager.addCongruousTask(CongruousTask.WRITE_RESPONSE_OUTPUT_WRITER);
-
-			return lifecycleIncongruityMap.getResponseOutputWriter();
-		}
-	}
-
-	/**
-	 * Sets the status of the portlet response to the specified status code. Note that this is only possible for a
-	 * portlet request of type PortletResponse because that is the only type of portlet response that is delivered
-	 * directly back to the client (without additional markup added by the portlet container).
-	 *
-	 * @see  ExternalContext#setResponseStatus(int)
-	 */
-	@Override
-	public void setResponseStatus(int statusCode) {
-
-		if (portletResponse instanceof ResourceResponse) {
-			ResourceResponse resourceResponse = (ResourceResponse) portletResponse;
-			resourceResponse.setProperty(ResourceResponse.HTTP_STATUS_CODE, Integer.toString(statusCode));
-		}
-
-		lifecycleIncongruityMap.putResponseStatus(statusCode);
-	}
-
-	@Override
-	public Object getSession(boolean create) {
-		return portletRequest.getPortletSession(create);
 	}
 
 	@Override
