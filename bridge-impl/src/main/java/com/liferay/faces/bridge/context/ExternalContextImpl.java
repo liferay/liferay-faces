@@ -43,7 +43,6 @@ import com.liferay.faces.bridge.application.view.BridgeAfterViewContentRequest;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentResponse;
 import com.liferay.faces.bridge.application.view.BridgeWriteBehindResponseFactory;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
-import com.liferay.faces.bridge.context.flash.FlashHttpServletResponse;
 import com.liferay.faces.bridge.context.map.ApplicationMap;
 import com.liferay.faces.bridge.context.map.InitParameterMap;
 import com.liferay.faces.bridge.context.map.RequestAttributeMap;
@@ -480,7 +479,7 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 		else {
 
 			if (isBridgeFlashServletResponseRequired()) {
-				return new FlashHttpServletResponse(portletResponse, getRequestLocale());
+				return createFlashHttpServletResponse();
 			}
 			else {
 				return portletResponse;
@@ -634,6 +633,14 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 		else {
 			return responseContentType;
 		}
+	}
+
+	/**
+	 * @see  {@link ExternalContext#getSession(boolean)}
+	 */
+	@Override
+	public Object getSession(boolean create) {
+		return portletRequest.getPortletSession(create);
 	}
 
 	@Override
