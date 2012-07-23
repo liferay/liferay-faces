@@ -15,11 +15,8 @@ package com.liferay.faces.bridge.component;
 
 import javax.el.MethodExpression;
 import javax.faces.component.UIInput;
-import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.FacesEvent;
-
-import com.liferay.faces.bridge.event.FileUploadEvent;
 
 
 /**
@@ -34,25 +31,16 @@ public class HtmlInputFileCompat extends UIInput {
 	public void broadcast(FacesEvent facesEvent) throws AbortProcessingException {
 		super.broadcast(facesEvent);
 
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-
-		try {
-			MethodExpression methodExpression = getFileUploadListener();
-
-			if ((methodExpression != null) && (facesEvent instanceof FileUploadEvent)) {
-				methodExpression.invoke(facesContext.getELContext(), new Object[] { facesEvent });
-			}
-		}
-		catch (Exception e) {
-			throw new AbortProcessingException(e);
-		}
+		// no-op for JSF 1.2
 	}
 
 	public MethodExpression getFileUploadListener() {
-		return (MethodExpression) getStateHelper().eval(FILE_UPLOAD_LISTENER, null);
+
+		// no-op for JSF 1.2
+		return null;
 	}
 
 	public void setFileUploadListener(MethodExpression fileUploadListener) {
-		getStateHelper().put(FILE_UPLOAD_LISTENER, fileUploadListener);
+		// no-op for JSF 1.2
 	}
 }
