@@ -16,7 +16,6 @@ package com.liferay.faces.bridge.util;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
-import javax.faces.bean.ManagedBean;
 import javax.portlet.faces.annotation.BridgePreDestroy;
 
 import com.liferay.faces.util.logging.Logger;
@@ -76,12 +75,8 @@ public class ManagedBeanUtil {
 	 */
 	public static boolean hasManagedBeanAnnotation(Object object) {
 
-		if ((object != null) && (object.getClass().getAnnotation(ManagedBean.class) != null)) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		// no-op for JSF 1.2
+		return false;
 	}
 
 	/**
