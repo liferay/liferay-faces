@@ -14,15 +14,6 @@
 package com.liferay.faces.bridge.application;
 
 import javax.faces.application.Application;
-import javax.faces.application.ApplicationWrapper;
-import javax.faces.application.ResourceHandler;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-
-import com.liferay.faces.bridge.component.icefaces.DataPaginator;
-import com.liferay.faces.bridge.component.icefaces.DataPaginatorBridgeImpl;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -32,52 +23,11 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 public abstract class ApplicationCompatImpl extends ApplicationWrapper {
 
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(ApplicationCompatImpl.class);
-
 	// Private Data Members
 	private Application wrappedApplication;
 
 	public ApplicationCompatImpl(Application application) {
 		this.wrappedApplication = application;
-	}
-
-	@Override
-	public UIComponent createComponent(FacesContext facesContext, String componentType, String rendererType) {
-
-		UIComponent wrappedUIComponent = wrappedApplication.createComponent(facesContext, componentType, rendererType);
-
-		if (componentType.equals(DataPaginator.COMPONENT_TYPE)) {
-
-			// Workaround for: http://jira.icesoft.org/browse/ICE-6398
-			DataPaginator dataPaginator = new DataPaginatorBridgeImpl(wrappedUIComponent);
-
-			try {
-				dataPaginator.setUIData(dataPaginator.findUIData(facesContext));
-				wrappedUIComponent = dataPaginator;
-			}
-			catch (Exception e) {
-				logger.error(e);
-			}
-		}
-
-		return wrappedUIComponent;
-	}
-
-	/**
-	 * @see    {@link Application#getResourceHandler()}
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public ResourceHandler getResourceHandler() {
-
-		ResourceHandler resourceHandler = super.getResourceHandler();
-
-		if (resourceHandler != null) {
-			resourceHandler = new ResourceHandlerOuterImpl(resourceHandler);
-		}
-
-		return resourceHandler;
 	}
 
 	/**
