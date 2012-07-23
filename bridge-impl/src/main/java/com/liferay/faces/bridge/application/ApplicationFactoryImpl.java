@@ -16,11 +16,13 @@ package com.liferay.faces.bridge.application;
 import javax.faces.application.Application;
 import javax.faces.application.ApplicationFactory;
 
+import com.liferay.faces.util.helper.Wrapper;
+
 
 /**
  * @author  Neil Griffin
  */
-public class ApplicationFactoryImpl extends ApplicationFactory {
+public class ApplicationFactoryImpl extends ApplicationFactory implements Wrapper<ApplicationFactory> {
 
 	private ApplicationFactory wrappedFactory;
 
@@ -38,7 +40,6 @@ public class ApplicationFactoryImpl extends ApplicationFactory {
 		wrappedFactory.setApplication(application);
 	}
 
-	@Override
 	public ApplicationFactory getWrapped() {
 		return wrappedFactory;
 	}
