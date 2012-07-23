@@ -21,6 +21,7 @@ import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.faces.context.FacesContext;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.PortletRequest;
 import javax.portlet.filter.PortletRequestWrapper;
@@ -84,7 +85,11 @@ public class HttpServletRequestAdapter extends PortletRequestWrapper implements 
 			return clientDataRequest.getCharacterEncoding();
 		}
 		else {
-			throw new UnsupportedOperationException();
+
+			// Required for JSF 1.2 but JSF 2.0 is able to simply throw an UnsupportedOperationException
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+
+			return facesContext.getExternalContext().getRequestCharacterEncoding();
 		}
 	}
 
