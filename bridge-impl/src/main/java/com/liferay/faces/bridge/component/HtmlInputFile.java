@@ -13,23 +13,13 @@
  */
 package com.liferay.faces.bridge.component;
 
-import javax.el.MethodExpression;
-import javax.faces.component.UIInput;
-import javax.faces.context.FacesContext;
-import javax.faces.event.AbortProcessingException;
-import javax.faces.event.FacesEvent;
-
-import com.liferay.faces.bridge.event.FileUploadEvent;
 import com.liferay.faces.bridge.model.UploadedFile;
 
 
 /**
  * @author  Neil Griffin
  */
-public class HtmlInputFile extends UIInput {
-
-	// Private Constants
-	public static final String FILE_UPLOAD_LISTENER = "fileUploadListener";
+public class HtmlInputFile extends HtmlInputFileCompat {
 
 	// Private Data Members
 	private UploadedFile uploadedFile;
@@ -37,32 +27,6 @@ public class HtmlInputFile extends UIInput {
 	public HtmlInputFile() {
 		super();
 		setRendererType("javax.faces.InputFile");
-	}
-
-	@Override
-	public void broadcast(FacesEvent facesEvent) throws AbortProcessingException {
-		super.broadcast(facesEvent);
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-
-		try {
-			MethodExpression methodExpression = getFileUploadListener();
-
-			if ((methodExpression != null) && (facesEvent instanceof FileUploadEvent)) {
-				methodExpression.invoke(facesContext.getELContext(), new Object[] { facesEvent });
-			}
-		}
-		catch (Exception e) {
-			throw new AbortProcessingException(e);
-		}
-	}
-
-	public MethodExpression getFileUploadListener() {
-		return (MethodExpression) getStateHelper().eval(FILE_UPLOAD_LISTENER, null);
-	}
-
-	public void setFileUploadListener(MethodExpression fileUploadListener) {
-		getStateHelper().put(FILE_UPLOAD_LISTENER, fileUploadListener);
 	}
 
 	/**
