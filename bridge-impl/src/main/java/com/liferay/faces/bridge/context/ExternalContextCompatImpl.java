@@ -32,6 +32,7 @@ import javax.portlet.ResourceResponse;
 import javax.portlet.faces.Bridge;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
@@ -42,6 +43,7 @@ import com.liferay.faces.bridge.config.Product;
 import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.context.flash.BridgeFlash;
 import com.liferay.faces.bridge.context.flash.BridgeFlashFactory;
+import com.liferay.faces.bridge.context.flash.FlashHttpServletResponse;
 import com.liferay.faces.bridge.lifecycle.CongruousTask;
 import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityManager;
 import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityMap;
@@ -293,6 +295,10 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 		String errorMessage = "Status code " + statusCode + ": " + message;
 		logger.error(errorMessage);
 		throw new IOException(errorMessage);
+	}
+
+	protected HttpServletResponse createFlashHttpServletResponse() {
+		return new FlashHttpServletResponse(portletResponse, getRequestLocale());
 	}
 
 	// NOTE: PROPOSED-FOR-JSR344-API
@@ -617,14 +623,5 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 		}
 
 		lifecycleIncongruityMap.putResponseStatus(statusCode);
-	}
-
-	/**
-	 * @see    {@link ExternalContext#getSession(boolean)}
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public Object getSession(boolean create) {
-		return portletRequest.getPortletSession(create);
 	}
 }
