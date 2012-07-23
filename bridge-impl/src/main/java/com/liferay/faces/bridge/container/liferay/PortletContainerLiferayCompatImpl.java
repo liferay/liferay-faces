@@ -24,8 +24,6 @@ import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriterLiferayImpl;
 
-import com.liferay.portal.kernel.util.StringBundler;
-
 
 /**
  * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
@@ -57,7 +55,7 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 
 			PortletRequest portletRequest = bridgeContext.getPortletRequest();
 
-			StringBundler stringBundler = (StringBundler) portletRequest.getAttribute(
+			StringBuilder stringBundler = (StringBuilder) portletRequest.getAttribute(
 					LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
 
 			if (stringBundler != null) {
@@ -82,7 +80,7 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
-		StringBundler stringBundler = (StringBundler) portletRequest.getAttribute(
+		StringBuilder stringBundler = (StringBuilder) portletRequest.getAttribute(
 				LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
 
 		if (stringBundler != null) {
