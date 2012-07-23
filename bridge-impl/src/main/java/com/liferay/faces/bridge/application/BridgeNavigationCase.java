@@ -16,7 +16,6 @@ package com.liferay.faces.bridge.application;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.application.NavigationCase;
 import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
 import javax.portlet.faces.Bridge;
