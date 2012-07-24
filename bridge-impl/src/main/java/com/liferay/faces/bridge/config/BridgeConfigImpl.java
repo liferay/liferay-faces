@@ -73,6 +73,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private static final String FACES_VIEW_ID_RESOURCE = "_facesViewIdResource";
 	private static final String FACES_SERVLET_FQCN = FacesServlet.class.getName();
 	private static final String FACTORY_NOT_FOUND_MSG = "Factory not found in any faces-config.xml files: [{0}]";
+	private static final String INCONGRUITY_CONTEXT_FACTORY = "incongruity-context-factory";
 	private static final String PORTLET_CONTAINER_FACTORY = "portlet-container-factory";
 	private static final String FACES_CONFIG_META_INF_PATH = "META-INF/faces-config.xml";
 	private static final String FACES_CONFIG_WEB_INF_PATH = "/WEB-INF/faces-config.xml";
@@ -107,6 +108,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private Set<String> excludedBridgeRequestAttributes = new HashSet<String>();
 	private String facesConfigName;
 	private List<ServletMapping> facesServletMappings;
+	private IncongruityContextFactory incongruityContextFactory;
 	private PortletContainerFactory portletContainerFactory;
 	private PortletContext portletContext;
 	private Map<String, String[]> publicParameterMappings = new HashMap<String, String[]>();
@@ -253,6 +255,10 @@ public class BridgeConfigImpl implements BridgeConfig {
 				logger.error(FACTORY_NOT_FOUND_MSG, BRIDGE_URL_FACTORY);
 			}
 
+			if (incongruityContextFactory == null) {
+				logger.error(FACTORY_NOT_FOUND_MSG, INCONGRUITY_CONTEXT_FACTORY);
+			}
+
 			if (portletContainerFactory == null) {
 				logger.error(FACTORY_NOT_FOUND_MSG, PORTLET_CONTAINER_FACTORY);
 			}
@@ -351,6 +357,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 			attributes.put(BridgeRequestScopeManagerFactory.class.getName(), bridgeRequestScopeManagerFactory);
 			attributes.put(BridgeWriteBehindResponseFactory.class.getName(), bridgeWriteBehindResponseFactory);
 			attributes.put(BridgeURLFactory.class.getName(), bridgeURLFactory);
+			attributes.put(IncongruityContextFactory.class.getName(), incongruityContextFactory);
 			attributes.put(PortletContainerFactory.class.getName(), portletContainerFactory);
 			attributes.put(UploadedFileFactory.class.getName(), uploadedFileFactory);
 			attributes.put(ViewHandlerFactory.class.getName(), viewHandlerFactory);
@@ -564,6 +571,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 		private boolean parsingBridgeWriteBehindResponseFactory = false;
 		private boolean parsingBridgeURLFactory = false;
 		private boolean parsingExcludedAttribute = false;
+		private boolean parsingIncongruityContextFactory;
 		private boolean parsingModelEL = false;
 		private boolean parsingParameter = false;
 		private boolean parsingPortletContainerFactory = false;
@@ -732,6 +740,26 @@ public class BridgeConfigImpl implements BridgeConfig {
 					BridgeConfigImpl.this.excludedBridgeRequestAttributes.add(attributeName);
 				}
 			}
+			else if (parsingIncongruityContextFactory) {
+				String factoryClassName = content.toString().trim();
+
+				if (factoryClassName.length() > 0) {
+
+					try {
+						IncongruityContextFactory wrappedFactory = BridgeConfigImpl.this.incongruityContextFactory;
+						BridgeConfigImpl.this.incongruityContextFactory = (IncongruityContextFactory)
+							newFactoryInstance(factoryClassName, IncongruityContextFactory.class, wrappedFactory);
+						logger.debug("Instantiated LifecycleIncongruityManagerFactory=[{0}] wrappedFactory=[{1}]",
+							factoryClassName, wrappedFactory);
+					}
+					catch (ClassNotFoundException e) {
+						logger.error("{0} : factoryClassName=[{1}]", e.getClass().getName(), factoryClassName);
+					}
+					catch (Exception e) {
+						logger.error(e.getMessage(), e);
+					}
+				}
+			}
 			else if (parsingModelEL) {
 
 				String additionalValue = content.toString().trim();
@@ -835,6 +863,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 			parsingBridgeWriteBehindResponseFactory = false;
 			parsingBridgeURLFactory = false;
 			parsingExcludedAttribute = false;
+			parsingIncongruityContextFactory = false;
 			parsingModelEL = false;
 			parsingParameter = false;
 			parsingPortletContainerFactory = false;
@@ -874,6 +903,9 @@ public class BridgeConfigImpl implements BridgeConfig {
 			}
 			else if (localName.equals(EXCLUDED_ATTRIBUTE)) {
 				parsingExcludedAttribute = true;
+			}
+			else if (localName.equals(INCONGRUITY_CONTEXT_FACTORY)) {
+				parsingIncongruityContextFactory = true;
 			}
 			else if (localName.equals(MODEL_EL)) {
 				parsingModelEL = true;

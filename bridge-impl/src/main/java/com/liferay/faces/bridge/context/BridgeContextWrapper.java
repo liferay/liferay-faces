@@ -131,6 +131,11 @@ public abstract class BridgeContextWrapper extends BridgeContext implements Wrap
 	}
 
 	@Override
+	public IncongruityContext getIncongruityContext() {
+		return getWrapped().getIncongruityContext();
+	}
+
+	@Override
 	public String getInitParameter(String name) {
 		return getWrapped().getInitParameter(name);
 	}

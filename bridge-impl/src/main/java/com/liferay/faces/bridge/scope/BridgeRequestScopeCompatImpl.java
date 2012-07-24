@@ -38,4 +38,12 @@ public abstract class BridgeRequestScopeCompatImpl extends BridgeRequestScopeBas
 	protected void saveJSF2FacesContextAttributes(FacesContext facesContext) {
 		// no-op for JSF 1.x
 	}
+
+	protected class FacesContextAttribute extends NameValuePair<Object, Object> {
+
+		public FacesContextAttribute(Object name, Object value) {
+			super(name, value);
+		}
+	}
+
 }

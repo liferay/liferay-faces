@@ -59,10 +59,10 @@ import com.liferay.faces.bridge.context.url.BridgePartialActionURLImpl;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
 import com.liferay.faces.bridge.context.url.BridgeURLFactory;
+import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.bridge.scope.BridgeRequestScope;
 
 
 /**
@@ -90,6 +90,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	private String defaultRenderKitId;
 	private Map<String, String> defaultViewIdMap;
 	private FacesView facesView;
+	private IncongruityContext incongruityContext;
 	private List<String> preFacesRequestAttrNames;
 	private PortletConfig portletConfig;
 	private PortletContainer portletContainer;
@@ -118,7 +119,9 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 	public BridgeContextImpl(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
 		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,
-		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, PortletContainer portletContainer) {
+		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, PortletContainer portletContainer,
+		IncongruityContext incongruityContext) {
+
 		this.bridgeConfig = bridgeConfig;
 		this.bridgeRequestScope = bridgeRequestScope;
 		this.portletConfig = portletConfig;
@@ -127,6 +130,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		this.portletResponse = portletResponse;
 		this.portletPhase = portletPhase;
 		this.portletContainer = portletContainer;
+		this.incongruityContext = incongruityContext;
 
 		// Get the BridgeURLFactory instance.
 		this.bridgeURLFactory = (BridgeURLFactory) BridgeFactoryFinder.getFactory(BridgeURLFactory.class);
@@ -863,6 +867,11 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	@Override
 	public boolean isRenderRedirectAfterDispatch() {
 		return renderRedirectAfterDispatch;
+	}
+
+	@Override
+	public IncongruityContext getIncongruityContext() {
+		return incongruityContext;
 	}
 
 	@Override

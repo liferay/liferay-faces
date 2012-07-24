@@ -11,11 +11,22 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.lifecycle;
+package com.liferay.faces.bridge.context;
 
 /**
  * @author  Neil Griffin
  */
-public enum CongruousTask {
-	SET_REQUEST_CHARACTER_ENCODING, SET_RESPONSE_CHARACTER_ENCODING
+public class IncongruityContextFactoryImpl extends IncongruityContextFactory {
+
+	@Override
+	public IncongruityContext getIncongruityContext() {
+		return new IncongruityContextImpl();
+	}
+
+	public IncongruityContextFactory getWrapped() {
+
+		// Since this is the factory instance provided by the bridge, it will never wrap another factory.
+		return null;
+	}
+
 }
