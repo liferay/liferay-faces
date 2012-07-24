@@ -29,4 +29,23 @@ public abstract class IncongruityContextCompatImpl extends IncongruityContextBas
 		// no-op for JSF 1.2
 	}
 
+	@Override
+	public void setRequestContentLength(int length) {
+
+		// no-op for JSF 1.2
+	}
+
+	@Override
+	public void setResponseCommitted(boolean committed) {
+
+		// no-op for JSF 1.2
+	}
+
+	@Override
+	public int getResponseContentLength() {
+
+		// no-op for JSF 1.2
+		return 0;
+	}
+
 }

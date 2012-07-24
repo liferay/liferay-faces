@@ -37,6 +37,7 @@ public class IncongruityContextImpl extends IncongruityContextCompatImpl {
 		ExternalContext externalContext = facesContext.getExternalContext();
 
 		Set<IncongruousAction> incongruousActions = getIncongruousActions();
+
 		for (IncongruousAction incongruousAction : incongruousActions) {
 
 			if (incongruousAction == IncongruousAction.SET_REQUEST_CHARACTER_ENCODING) {
@@ -54,5 +55,4 @@ public class IncongruityContextImpl extends IncongruityContextCompatImpl {
 			}
 		}
 	}
-
 }
