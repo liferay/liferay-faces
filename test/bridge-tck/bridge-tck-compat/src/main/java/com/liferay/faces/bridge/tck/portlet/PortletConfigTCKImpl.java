@@ -21,8 +21,7 @@ import javax.portlet.PortletConfig;
  * This class is a wrapper around the {@link PortletConfig} implementation provided by the portlet container. Its
  * purpose is to provide an override of the {@link PortletConfig#getPortletName()} method that returns the same value
  * specified in the portlet-name element in the WEB-INF/portlet.xml descriptor. This is necessary when running the TCK
- * under Liferay Portal, since the Liferay {@link PortletConfigImpl#getPortletName()} method removes dashes and other
- * non-alpha-numeric characters specified in the portlet-name element.
+ * under Liferay Portal. For more info, see: https://issues.apache.org/jira/browse/PORTLETBRIDGE-225
  *
  * @author  Neil Griffin
  */
@@ -44,7 +43,8 @@ public class PortletConfigTCKImpl extends PortletConfigWrapper {
 
 		if (liferay) {
 
-			// Example: Transform "chapter5_2TestsisPostbackTestportlet" to "chapter5_2Tests-isPostbackTest-portlet"
+			// JSR 329 TCK Challenge: https://issues.apache.org/jira/browse/PORTLETBRIDGE-225
+			// Example: Transform "chapter5_2TestsisPostbackTestportlet" to "chapter5_2Tests-isPostbackTest-portlet"			
 			portletName = portletName.replaceFirst("Tests", "Tests-");
 			portletName = portletName.replaceAll("portlet$", "-portlet");
 		}

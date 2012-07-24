@@ -55,7 +55,9 @@ import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.util.FacesMessageWrapper;
+import com.liferay.faces.bridge.util.NameValuePair;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -75,6 +77,8 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 	private static final String BRIDGE_REQ_SCOPE_ATTR_ACTION_PARAMS = "com.liferay.faces.bridge.actionParams";
 	private static final String BRIDGE_REQ_SCOPE_ATTR_FACES_MESSAGES = "com.liferay.faces.bridge.faces.messages";
 	private static final String BRIDGE_REQ_SCOPE_ATTR_FACES_VIEW_ROOT = "com.liferay.faces.bridge.faces.view.root";
+	private static final String BRIDGE_REQ_SCOPE_ATTR_INCONGRUITY_CONTEXT_ATTRIBUTES =
+		"com.liferay.faces.bridge.incongruitycontext.attributes";
 	private static final String BRIDGE_REQ_SCOPE_ATTR_REQUEST_ATTRIBUTES =
 		"com.liferay.faces.bridge.faces.request.attributes";
 
@@ -314,6 +318,26 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 			// Restore the flash scope.
 			restoreFlashState(facesContext);
 		}
+
+		// If running in the RENDER_PHASE, then the incongruity context must be restored.
+		if (((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE)) &&
+				(portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE)) {
+
+			List<IncongruityAttribute> savedIncongruityAttributes = (List<IncongruityAttribute>) getAttribute(
+					BRIDGE_REQ_SCOPE_ATTR_INCONGRUITY_CONTEXT_ATTRIBUTES);
+
+			if (savedIncongruityAttributes != null) {
+
+				IncongruityContext incongruityContext = bridgeContext.getIncongruityContext();
+				Map<String, Object> incongruityContextAttributes = incongruityContext.getAttributes();
+
+				for (IncongruityAttribute incongruityAttribute : savedIncongruityAttributes) {
+					String key = incongruityAttribute.getName();
+					Object value = incongruityAttribute.getValue();
+					incongruityContextAttributes.put(key, value);
+				}
+			}
+		}
 	}
 
 	/**
@@ -473,6 +497,28 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 			// PROPOSED-FOR-JSR344-API: http://java.net/jira/browse/JAVASERVERFACES_SPEC_PUBLIC-1070
 			// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
 			saveFlashState(facesContext);
+		}
+
+		// If running in the ACTION_PHASE or EVENT_PHASE, then the incongruity context must be saved as well so that it
+		// can be restored.
+		if ((portletRequestPhase == Bridge.PortletPhase.ACTION_PHASE) ||
+				(portletRequestPhase == Bridge.PortletPhase.EVENT_PHASE)) {
+
+			IncongruityContext incongruityContext = bridgeContext.getIncongruityContext();
+			Map<String, Object> incongruityAttributeMap = incongruityContext.getAttributes();
+			int mapSize = incongruityAttributeMap.size();
+			List<IncongruityAttribute> savedIncongruityAttributes = new ArrayList<IncongruityAttribute>(mapSize);
+			Iterator<Map.Entry<String, Object>> itr = incongruityAttributeMap.entrySet().iterator();
+
+			while (itr.hasNext()) {
+				Map.Entry<String, Object> mapEntry = itr.next();
+				String name = mapEntry.getKey();
+				Object value = mapEntry.getValue();
+				logger.trace("Saving IncongruityContext attribute name=[{0}] value=[{1}]", name, value);
+				savedIncongruityAttributes.add(new IncongruityAttribute(name, value));
+			}
+
+			setAttribute(BRIDGE_REQ_SCOPE_ATTR_INCONGRUITY_CONTEXT_ATTRIBUTES, savedIncongruityAttributes);
 		}
 	}
 
@@ -675,5 +721,19 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 
 	public void setRedirectOccurred(boolean redirect) {
 		this.redirect = redirect;
+	}
+
+	protected class IncongruityAttribute extends NameValuePair<String, Object> {
+
+		public IncongruityAttribute(String name, Object value) {
+			super(name, value);
+		}
+	}
+
+	protected class RequestAttribute extends NameValuePair<String, Object> {
+
+		public RequestAttribute(String name, Object value) {
+			super(name, value);
+		}
 	}
 }

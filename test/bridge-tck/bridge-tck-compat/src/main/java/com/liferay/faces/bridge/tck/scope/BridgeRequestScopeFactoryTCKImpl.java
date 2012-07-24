@@ -48,7 +48,8 @@ public class BridgeRequestScopeFactoryTCKImpl extends BridgeRequestScopeFactory 
 			return new BridgeRequestScopeLiferayTCKImpl(portletConfig, portletContext, portletRequest);
 		}
 		else {
-			return wrappedBridgeRequestScopeFactory.getBridgeRequestScope(portletConfig, portletContext, portletRequest);
+			return wrappedBridgeRequestScopeFactory.getBridgeRequestScope(portletConfig, portletContext,
+					portletRequest);
 		}
 	}
 
