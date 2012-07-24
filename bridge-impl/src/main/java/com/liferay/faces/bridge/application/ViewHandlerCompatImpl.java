@@ -102,7 +102,23 @@ public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
 			ViewHandler viewHandler = viewHandlerFactory.getViewHandler();
 			viewHandler.renderView(facesContext, uiViewRoot);
 		}
-
+		
 		attributes.remove(Bridge.RENDER_CONTENT_AFTER_VIEW);
+
+		// TCK TestPage201: renderContentAfterViewTest
+		Object afterViewContent = facesContext.getExternalContext().getRequestMap().get(Bridge.AFTER_VIEW_CONTENT);
+
+		if (afterViewContent != null) {
+
+			if (afterViewContent instanceof char[]) {
+				facesContext.getResponseWriter().write((char[]) afterViewContent);
+			}
+			else if (afterViewContent instanceof byte[]) {
+				facesContext.getResponseWriter().write(new String((byte[]) afterViewContent));
+			}
+			else {
+				logger.error("Invalid type for {0}={1}", Bridge.AFTER_VIEW_CONTENT, afterViewContent.getClass());
+			}
+		}
 	}
 }
