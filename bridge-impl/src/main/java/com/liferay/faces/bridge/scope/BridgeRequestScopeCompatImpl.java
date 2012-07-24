@@ -15,6 +15,8 @@ package com.liferay.faces.bridge.scope;
 
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.bridge.util.NameValuePair;
+
 
 /**
  * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
