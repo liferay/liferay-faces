@@ -40,6 +40,7 @@ import com.liferay.faces.bridge.scope.BridgeRequestScope;
  * @author  Neil Griffin
  */
 public abstract class BridgeContextWrapper extends BridgeContext implements FacesWrapper<BridgeContext> {
+
 	@Override
 	public void dispatch(String path) throws IOException {
 		getWrapped().dispatch(path);
@@ -128,6 +129,11 @@ public abstract class BridgeContextWrapper extends BridgeContext implements Face
 	@Override
 	public boolean isRenderRedirectAfterDispatch() {
 		return getWrapped().isRenderRedirectAfterDispatch();
+	}
+
+	@Override
+	public IncongruityContext getIncongruityContext() {
+		return getWrapped().getIncongruityContext();
 	}
 
 	@Override

@@ -36,6 +36,8 @@ import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgeContextFactory;
+import com.liferay.faces.bridge.context.IncongruityContext;
+import com.liferay.faces.bridge.context.IncongruityContextFactory;
 import com.liferay.faces.bridge.helper.PortletModeHelper;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeCache;
@@ -63,6 +65,7 @@ public abstract class BridgePhaseBaseImpl extends BridgePhaseCompatImpl {
 	protected BridgeRequestScope bridgeRequestScope;
 	protected BridgeRequestScopeCache bridgeRequestScopeCache;
 	protected FacesContext facesContext;
+	protected IncongruityContext incongruityContext;
 	protected PortletConfig portletConfig;
 	protected PortletContext portletContext;
 	protected String portletName;
@@ -80,6 +83,11 @@ public abstract class BridgePhaseBaseImpl extends BridgePhaseCompatImpl {
 		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
 				BridgeConfigFactory.class);
 		this.bridgeConfig = bridgeConfigFactory.getBridgeConfig();
+
+		// Initialize the incongruity context implementation.
+		IncongruityContextFactory incongruityContextFactory = (IncongruityContextFactory) BridgeFactoryFinder
+			.getFactory(IncongruityContextFactory.class);
+		this.incongruityContext = incongruityContextFactory.getIncongruityContext();
 
 		BridgeRequestScopeCacheFactory bridgeRequestScopeCacheFactory = (BridgeRequestScopeCacheFactory)
 			BridgeFactoryFinder.getFactory(BridgeRequestScopeCacheFactory.class);
@@ -149,13 +157,13 @@ public abstract class BridgePhaseBaseImpl extends BridgePhaseCompatImpl {
 				portletContext, bridgeConfig);
 
 		// Initialize the bridge request scope.
-		initBridgeRequestScope(portletRequest, portletResponse, portletPhase, portletContainer);
+		initBridgeRequestScope(portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
 
 		// Get the bridge context.
 		BridgeContextFactory bridgeContextFactory = (BridgeContextFactory) BridgeFactoryFinder.getFactory(
 				BridgeContextFactory.class);
 		bridgeContext = bridgeContextFactory.getBridgeContext(bridgeConfig, bridgeRequestScope, portletConfig,
-				portletContext, portletRequest, portletResponse, portletPhase, portletContainer);
+				portletContext, portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
 
 		// Save the BridgeContext as a request attribute for legacy versions of ICEfaces.
 		portletRequest.setAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE, bridgeContext);
@@ -191,7 +199,7 @@ public abstract class BridgePhaseBaseImpl extends BridgePhaseCompatImpl {
 	}
 
 	protected void initBridgeRequestScope(PortletRequest portletRequest, PortletResponse portletResponse,
-		Bridge.PortletPhase portletPhase, PortletContainer portletContainer) {
+		Bridge.PortletPhase portletPhase, PortletContainer portletContainer, IncongruityContext incongruityContext) {
 
 		boolean bridgeRequestScopeEnabled = true;
 

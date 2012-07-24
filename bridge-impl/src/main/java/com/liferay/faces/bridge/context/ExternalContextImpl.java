@@ -48,9 +48,6 @@ import com.liferay.faces.bridge.context.map.InitParameterMap;
 import com.liferay.faces.bridge.context.map.RequestAttributeMap;
 import com.liferay.faces.bridge.context.map.RequestCookieMap;
 import com.liferay.faces.bridge.context.map.SessionMap;
-import com.liferay.faces.bridge.lifecycle.CongruousTask;
-import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityManager;
-import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityMap;
 import com.liferay.faces.bridge.util.LocaleIterator;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
@@ -65,12 +62,8 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ExternalContextImpl.class);
 
-	// Constructor-initialized objects
-	private boolean manageIncongruities;
-
 	// Pre-initialized Data Members
 	private ApplicationMap applicationMap;
-	private BridgeContext bridgeContext;
 	private Map<String, Object> requestAttributeMap;
 	private Iterator<Locale> requestLocales;
 	private Map<String, Object> sessionMap;
@@ -158,13 +151,6 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 	 */
 	protected void preInitializeObjects(boolean requestChanged, boolean responseChanged) {
 
-		// Get the BridgeContext.
-		bridgeContext = BridgeContext.getCurrentInstance();
-
-		// Determines whether or not lifecycle incongruities should be managed.
-		manageIncongruities = BooleanHelper.toBoolean(getInitParameter(
-					BridgeConfigConstants.PARAM_MANAGE_INCONGRUITIES), true);
-
 		if (requestChanged) {
 			bridgeContext.setPortletRequest(portletRequest);
 		}
@@ -196,12 +182,6 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 
 		// Initialize the session map.
 		sessionMap = new SessionMap(portletRequest.getPortletSession(), PortletSession.PORTLET_SCOPE, preferPreDestroy);
-
-		// Initialize the map for storing portlet lifecycle incongruities.
-		lifecycleIncongruityMap = new LifecycleIncongruityMap(applicationMap, manageIncongruities);
-
-		// Initialize the portlet lifecycle incogruity manager.
-		lifecycleIncongruityManager = new LifecycleIncongruityManager(lifecycleIncongruityMap, manageIncongruities);
 
 		// Initialize the init parameter map.
 		initParameterMap = Collections.unmodifiableMap(new InitParameterMap(portletContext));
@@ -299,18 +279,35 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 
 	@Override
 	public String getRequestCharacterEncoding() {
-		String requestCharacterEncoding = null;
 
 		if (portletRequest instanceof ClientDataRequest) {
 			ClientDataRequest clientDataRequest = (ClientDataRequest) portletRequest;
-			requestCharacterEncoding = clientDataRequest.getCharacterEncoding();
-			lifecycleIncongruityMap.putRequestCharacterEncoding(requestCharacterEncoding);
+			String requestCharacterEncoding = clientDataRequest.getCharacterEncoding();
+
+			if (manageIncongruities) {
+
+				try {
+					incongruityContext.setRequestCharacterEncoding(requestCharacterEncoding);
+				}
+				catch (Exception e) {
+					logger.error(e);
+				}
+			}
+
+			return requestCharacterEncoding;
 		}
 		else {
-			requestCharacterEncoding = lifecycleIncongruityMap.getRequestCharacterEncoding();
-		}
 
-		return requestCharacterEncoding;
+			if (manageIncongruities) {
+				return incongruityContext.getRequestCharacterEncoding();
+			}
+			else {
+
+				// The Mojarra 2.x {@link MultiViewHandler#initView(FacesContext)} method expects a null value to be
+				// returned, so throwing an IllegalStateException is not an option.
+				return null;
+			}
+		}
 	}
 
 	@Override
@@ -332,21 +329,27 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 			}
 		}
 		else {
-			lifecycleIncongruityManager.addCongruousTask(CongruousTask.SET_REQUEST_CHARACTER_ENCODING);
-		}
 
-		lifecycleIncongruityMap.putRequestCharacterEncoding(encoding);
+			if (manageIncongruities) {
+				incongruityContext.setRequestCharacterEncoding(encoding);
+			}
+			else {
+				// TestPage140: setRequestCharacterEncodingRenderTest expects this to be a no-op so throwing an
+                // IllegalStateException is not an option.
+			}
+		}
 	}
 
 	@Override
 	public String getRequestContentType() {
-		String requestContentType = null;
 
 		if (portletRequest instanceof ClientDataRequest) {
 			ClientDataRequest clientDataRequest = (ClientDataRequest) portletRequest;
 
 			// If using ICEfaces 3.0.x/2.0.x then need to return the legacy value.
 			// http://issues.liferay.com/browse/FACES-1228
+			String requestContentType = null;
+
 			if (isICEfacesLegacyMode(clientDataRequest)) {
 				requestContentType = clientDataRequest.getResponseContentType();
 			}
@@ -354,13 +357,24 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 				requestContentType = clientDataRequest.getContentType();
 			}
 
-			lifecycleIncongruityMap.putRequestContentType(requestContentType);
+			if (manageIncongruities) {
+				incongruityContext.setRequestContentType(requestContentType);
+			}
+
+			return requestContentType;
 		}
 		else {
-			requestContentType = lifecycleIncongruityMap.getRequestContentType();
-		}
 
-		return requestContentType;
+			if (manageIncongruities) {
+				return incongruityContext.getRequestContentType();
+			}
+			else {
+
+				// TestPage166: getRequestContentTypeEventTest expects this condition to return null so throwing an
+				// IllegalStateException is not an option.
+				return null;
+			}
+		}
 	}
 
 	@Override
@@ -574,14 +588,17 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 		if (portletResponse instanceof MimeResponse) {
 			MimeResponse mimeResponse = (MimeResponse) portletResponse;
 			String characterEncoding = mimeResponse.getCharacterEncoding();
-			lifecycleIncongruityMap.putResponseCharacterEncoding(characterEncoding);
+
+			if (manageIncongruities) {
+				incongruityContext.setResponseCharacterEncoding(characterEncoding);
+			}
 
 			return characterEncoding;
 		}
 		else {
 
 			if (manageIncongruities) {
-				return lifecycleIncongruityMap.getResponseCharacterEncoding();
+				return incongruityContext.getResponseCharacterEncoding();
 			}
 			else {
 
@@ -611,10 +628,15 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 				resourceResponse.setCharacterEncoding(encoding);
 			}
 			else {
-				lifecycleIncongruityManager.addCongruousTask(CongruousTask.SET_RESPONSE_CHARACTER_ENCODING);
-			}
 
-			lifecycleIncongruityMap.putResponseCharacterEncoding(encoding);
+				if (manageIncongruities) {
+					incongruityContext.setResponseCharacterEncoding(encoding);
+				}
+				else {
+					// TestPage196: setResponseCharacterEncodingTest expects this to be a no-op so throwing
+					// IllegalStateException is not an option.
+				}
+			}
 		}
 	}
 

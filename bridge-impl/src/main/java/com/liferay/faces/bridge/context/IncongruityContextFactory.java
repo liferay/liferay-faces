@@ -13,22 +13,12 @@
  */
 package com.liferay.faces.bridge.context;
 
-import javax.faces.FacesException;
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletContext;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
-import javax.portlet.faces.Bridge;
-
 import com.liferay.faces.bridge.FactoryWrapper;
-import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.container.PortletContainer;
-import com.liferay.faces.bridge.scope.BridgeRequestScope;
 
 
 /**
  * This abstract class provides a contract for defining a factory that knows how to create instances of type {@link
- * BridgeContext}. It is inspired by the factory pattern found in the JSF API like {@link
+ * IncongruityContext}. It is inspired by the factory pattern found in the JSF API like {@link
  * javax.faces.context.FacesContextFactory} and {@link javax.faces.context.ExternalContextFactory}. By implementing the
  * {@link javax.faces.FacesWrapper} interface, the class provides implementations with the opportunity to wrap another
  * factory (participate in a chain-of-responsibility pattern). If an implementation wraps a factory, then it should
@@ -36,10 +26,7 @@ import com.liferay.faces.bridge.scope.BridgeRequestScope;
  *
  * @author  Neil Griffin
  */
-public abstract class BridgeContextFactory implements FactoryWrapper<BridgeContextFactory> {
+public abstract class IncongruityContextFactory implements FactoryWrapper<IncongruityContextFactory> {
 
-	public abstract BridgeContext getBridgeContext(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
-		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,
-		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, PortletContainer portletContainer,
-		IncongruityContext incongruityContext) throws FacesException;
+	public abstract IncongruityContext getIncongruityContext();
 }
