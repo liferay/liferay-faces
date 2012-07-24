@@ -24,20 +24,14 @@ import javax.faces.component.html.HtmlInputHidden;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewDeclarationLanguage;
-import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.application.view.ViewDeclarationLanguageWrapper;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
  * @author  Neil Griffin
  */
 public class ViewDeclarationLanguageJspTCKImpl extends ViewDeclarationLanguageWrapper {
-
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(ViewDeclarationLanguageJspTCKImpl.class);
 
 	// Private Data Members
 	private ViewDeclarationLanguage wrappedViewDeclarationLanguage;
@@ -47,10 +41,9 @@ public class ViewDeclarationLanguageJspTCKImpl extends ViewDeclarationLanguageWr
 	}
 
 	@Override
-	public void buildView(FacesContext facesContext, UIViewRoot uiViewRoot)
-			throws IOException {
+	public void buildView(FacesContext facesContext, UIViewRoot uiViewRoot) throws IOException {
 		super.buildView(facesContext, uiViewRoot);
-		
+
 		UIComponent coreForm = findCoreFormRecurse(uiViewRoot);
 
 		if (coreForm != null) {
@@ -77,7 +70,7 @@ public class ViewDeclarationLanguageJspTCKImpl extends ViewDeclarationLanguageWr
 			EncodedURLHiddenField encodedURLHiddenField = new EncodedURLHiddenField();
 			encodedURLHiddenField.setValue(encodedPartialActionURL);
 			coreForm.getChildren().add(encodedURLHiddenField);
-		}		
+		}
 	}
 
 	protected UIComponent findCoreFormRecurse(UIComponent uiComponent) {
@@ -100,27 +93,6 @@ public class ViewDeclarationLanguageJspTCKImpl extends ViewDeclarationLanguageWr
 
 		return coreForm;
 	}
-	@Override
-	public void renderView(FacesContext facesContext, UIViewRoot uiViewRoot) throws IOException {
-
-		super.renderView(facesContext, uiViewRoot);
-
-		// TCK TestPage201: renderContentAfterViewTest
-		Object afterViewContent = facesContext.getExternalContext().getRequestMap().get(Bridge.AFTER_VIEW_CONTENT);
-
-		if (afterViewContent != null) {
-
-			if (afterViewContent instanceof char[]) {
-				facesContext.getResponseWriter().write((char[]) afterViewContent);
-			}
-			else if (afterViewContent instanceof byte[]) {
-				facesContext.getResponseWriter().write(new String((byte[]) afterViewContent));
-			}
-			else {
-				logger.error("Invalid type for {0}={1}", Bridge.AFTER_VIEW_CONTENT, afterViewContent.getClass());
-			}
-		}
-	}
 
 	@Override
 	public ViewDeclarationLanguage getWrapped() {
@@ -137,4 +109,3 @@ public class ViewDeclarationLanguageJspTCKImpl extends ViewDeclarationLanguageWr
 	}
 
 }
-
