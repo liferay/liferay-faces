@@ -86,6 +86,14 @@ public abstract class IncongruityContextCompatImpl extends IncongruityContextBas
 	 * @since  JSF 2.0
 	 */
 	@Override
+	public String encodeRedirectURL(String baseUrl, Map<String, List<String>> parameters) {
+		throw new IllegalStateException();
+	}
+
+	/**
+	 * @since  JSF 2.0
+	 */
+	@Override
 	public void invalidateSession() {
 		throw new IllegalStateException();
 	}
@@ -193,6 +201,7 @@ public abstract class IncongruityContextCompatImpl extends IncongruityContextBas
 	@Override
 	public boolean isResponseCommitted() {
 		Boolean responseCommitted = (Boolean) attributeMap.get(RESPONSE_COMMITTED);
+
 		if (responseCommitted == null) {
 			return Boolean.FALSE;
 		}
