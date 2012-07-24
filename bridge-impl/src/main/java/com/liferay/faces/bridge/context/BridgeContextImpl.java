@@ -47,7 +47,6 @@ import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
-import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.config.ServletMapping;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.map.RequestHeaderMap;
@@ -75,8 +74,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 	// Private Constants
 	private static final String NON_NUMERIC_NAMESPACE_PREFIX = "A";
-	private static final boolean LPS_3184_WORKAROUND_ENABLED = ProductMap.getInstance().get(
-			BridgeConstants.LIFERAY_PORTAL).isDetected();
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeContextImpl.class);
@@ -1139,7 +1136,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			responseNamespace = portletContainer.getResponseNamespace();
 
 			boolean optimizePortletNamespace = BooleanHelper.toBoolean(optimizePortletNamespaceInitParam, true);
-			boolean addedNamespacePrefix = false;
 
 			if (optimizePortletNamespace) {
 
@@ -1166,20 +1162,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 					// Note that unless we prepend the hash namespace with some non-numeric string, IE might encounter
 					// JavaScript problems with ICEfaces. http://issues.liferay.com/browse/FACES-12
 					responseNamespace = NON_NUMERIC_NAMESPACE_PREFIX + namespaceHashCode;
-					addedNamespacePrefix = true;
 				}
 			}
-
-			if (!addedNamespacePrefix && (LPS_3184_WORKAROUND_ENABLED)) {
-
-				// Note that unless we prepend the responseNamespace with some string, Liferay's
-				// PortletRequestImpl.init(HttpServletRequest, Portlet, InvokerPortlet, PortletContext, WindowState,
-				// PortletMode, PortletPreferences, long) method will remove the namespace that
-				// PortletNamingContainerUIViewRoot adds to request parameters. For more information refer to:
-				// http://issues.liferay.com/browse/LPS-3184
-				responseNamespace = NON_NUMERIC_NAMESPACE_PREFIX + responseNamespace;
-			}
-
 		}
 
 		return responseNamespace;
