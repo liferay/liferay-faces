@@ -14,7 +14,10 @@
 package com.liferay.faces.bridge.context;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -99,6 +102,11 @@ public abstract class IncongruityContextBaseImpl extends IncongruityContext {
 
 	@Override
 	public String getAuthType() {
+		throw new IllegalStateException();
+	}
+
+	@Override
+	public Object getContext() {
 		throw new IllegalStateException();
 	}
 
@@ -214,6 +222,21 @@ public abstract class IncongruityContextBaseImpl extends IncongruityContext {
 
 	@Override
 	public String getRequestServletPath() {
+		throw new IllegalStateException();
+	}
+
+	@Override
+	public URL getResource(String path) throws MalformedURLException {
+		throw new IllegalStateException();
+	}
+
+	@Override
+	public InputStream getResourceAsStream(String path) {
+		throw new IllegalStateException();
+	}
+
+	@Override
+	public Set<String> getResourcePaths(String path) {
 		throw new IllegalStateException();
 	}
 
