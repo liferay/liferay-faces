@@ -25,6 +25,7 @@ import javax.faces.context.Flash;
 
 import com.liferay.faces.bridge.context.ExternalContextImpl;
 import com.liferay.faces.bridge.context.flash.BridgeFlash;
+import com.liferay.faces.bridge.util.NameValuePair;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -116,4 +117,12 @@ public abstract class BridgeRequestScopeCompatImpl extends BridgeRequestScopeBas
 
 		setAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_CONTEXT_ATTRIBUTES, savedFacesContextAttributes);
 	}
+
+	protected class FacesContextAttribute extends NameValuePair<Object, Object> {
+
+		public FacesContextAttribute(Object name, Object value) {
+			super(name, value);
+		}
+	}
+
 }

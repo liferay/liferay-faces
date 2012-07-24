@@ -229,6 +229,8 @@ public abstract class BridgeContext {
 	 */
 	public abstract boolean isRenderRedirectAfterDispatch();
 
+	public abstract IncongruityContext getIncongruityContext();
+
 	/**
 	 * NOTE: PROPOSE-FOR-BRIDGE3-API Returns the value of the specified initialization parameter. If found, return the
 	 * value of the {@link PortletConfig#getInitParameter(String)} method. Otherwise, return the value of the {@link

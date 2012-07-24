@@ -20,7 +20,6 @@ import javax.faces.FactoryFinder;
 import javax.faces.application.NavigationHandler;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
@@ -43,11 +42,10 @@ import com.liferay.faces.bridge.application.BridgeNavigationHandler;
 import com.liferay.faces.bridge.application.BridgeNavigationHandlerImpl;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.container.PortletContainer;
+import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.context.RenderRedirectWriter;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.event.IPCPhaseListener;
-import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityManager;
-import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityMap;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -229,12 +227,9 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 		// RENDER_RESPONSE phase is executed, we have to fix some incongruities between the Portlet
 		// lifecycle and the JSF lifecycle that may have occurred during the ACTION_PHASE of the Portlet
 		// lifecycle.
-		ExternalContext externalContext = facesContext.getExternalContext();
-		LifecycleIncongruityMap lifecycleIncongruityMap = new LifecycleIncongruityMap(externalContext.getRequestMap(),
-				manageIncongruities);
-		LifecycleIncongruityManager lifecycleIncongruityManager = new LifecycleIncongruityManager(
-				lifecycleIncongruityMap, manageIncongruities);
-		lifecycleIncongruityManager.makeCongruous(externalContext);
+		if (manageIncongruities) {
+			incongruityContext.makeCongruous(facesContext);
+		}
 
 		// Execute the RENDER_RESPONSE phase of the faces lifecycle.
 		logger.debug("Executing Faces render");
@@ -282,9 +277,10 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 
 	@Override
 	protected void initBridgeRequestScope(PortletRequest portletRequest, PortletResponse portletResponse,
-		PortletPhase portletPhase, PortletContainer portletContainer) {
+		PortletPhase portletPhase, PortletContainer portletContainer, IncongruityContext incongruityContext) {
 
-		super.initBridgeRequestScope(portletRequest, portletResponse, portletPhase, portletContainer);
+		super.initBridgeRequestScope(portletRequest, portletResponse, portletPhase, portletContainer,
+			incongruityContext);
 
 		// If the portlet container does not support the POST-REDIRECT-GET design pattern, then the ACTION_PHASE and
 		// RENDER_PHASE are both part of a single HTTP POST request. In such cases, the excluded request attributes must

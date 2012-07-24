@@ -21,6 +21,8 @@ import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.faces.Bridge;
 
+import org.apache.myfaces.portlet.faces.testsuite.common.portlet.GenericFacesTestSuitePortlet;
+
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeLiferayImpl;
 

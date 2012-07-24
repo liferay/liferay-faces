@@ -158,6 +158,11 @@ public class BridgeContextMockImpl extends BridgeContext {
 	}
 
 	@Override
+	public IncongruityContext getIncongruityContext() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public String getInitParameter(String name) {
 		throw new UnsupportedOperationException();
 	}
@@ -312,5 +317,4 @@ public class BridgeContextMockImpl extends BridgeContext {
 	public void setViewHistory(PortletMode portletMode, String viewId) {
 		throw new UnsupportedOperationException();
 	}
-
 }

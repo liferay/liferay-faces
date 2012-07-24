@@ -32,10 +32,11 @@ public class BridgeContextFactoryImpl extends BridgeContextFactory {
 	@Override
 	public BridgeContext getBridgeContext(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
 		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,
-		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, PortletContainer portletContainer) {
+		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, PortletContainer portletContainer,
+		IncongruityContext incongruityContext) {
 
 		BridgeContext bridgeContext = new BridgeContextImpl(bridgeConfig, bridgeRequestScope, portletConfig,
-				portletContext, portletRequest, portletResponse, portletPhase, portletContainer);
+				portletContext, portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
 
 		return bridgeContext;
 	}

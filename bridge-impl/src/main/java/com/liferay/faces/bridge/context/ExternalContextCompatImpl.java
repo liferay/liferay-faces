@@ -38,16 +38,15 @@ import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.config.BridgeConfig;
+import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
 import com.liferay.faces.bridge.config.Product;
 import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.context.flash.BridgeFlash;
 import com.liferay.faces.bridge.context.flash.BridgeFlashFactory;
 import com.liferay.faces.bridge.context.flash.FlashHttpServletResponse;
-import com.liferay.faces.bridge.lifecycle.CongruousTask;
-import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityManager;
-import com.liferay.faces.bridge.lifecycle.LifecycleIncongruityMap;
 import com.liferay.faces.bridge.util.FileNameUtil;
+import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -70,16 +69,18 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 	private static final String COOKIE_PROPERTY_SECURE = "secure";
 
 	// Lazy-Initialized Data Members
-	private BridgeConfig bridgeConfig;
-	private BridgeContext bridgeContext;
 	private BridgeFlash bridgeFlash;
 	private Boolean iceFacesLegacyMode;
 	private String portletContextName;
 
+	// Private Data Members
+	private BridgeConfig bridgeConfig;
+
 	// Protected Data Members
+	protected BridgeContext bridgeContext;
 	protected ServletResponse facesImplementationServletResponse;
-	protected LifecycleIncongruityManager lifecycleIncongruityManager;
-	protected LifecycleIncongruityMap lifecycleIncongruityMap;
+	protected IncongruityContext incongruityContext;
+	protected boolean manageIncongruities;
 	protected PortletContext portletContext;
 	protected PortletRequest portletRequest;
 	protected PortletResponse portletResponse;
@@ -96,7 +97,16 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 		// Get the bridge configuration.
 		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
 				BridgeConfigFactory.class);
-		bridgeConfig = bridgeConfigFactory.getBridgeConfig();
+		this.bridgeConfig = bridgeConfigFactory.getBridgeConfig();
+
+		// Get the BridgeContext.
+		this.bridgeContext = BridgeContext.getCurrentInstance();
+		
+		this.incongruityContext = bridgeContext.getIncongruityContext();
+
+		// Determine whether or not lifecycle incongruities should be managed.
+		this.manageIncongruities = BooleanHelper.toBoolean(bridgeContext.getInitParameter(
+					BridgeConfigConstants.PARAM_MANAGE_INCONGRUITIES), true);
 	}
 
 	/**
@@ -261,7 +271,13 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 			}
 		}
 		else {
-			lifecycleIncongruityManager.addCongruousTask(CongruousTask.RESPONSE_FLUSH_BUFFER);
+
+			if (manageIncongruities) {
+				incongruityContext.responseFlushBuffer();
+			}
+			else {
+				throw new IllegalStateException();
+			}
 		}
 	}
 
@@ -277,7 +293,13 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 			mimeResponse.reset();
 		}
 		else {
-			lifecycleIncongruityManager.addCongruousTask(CongruousTask.RESPONSE_RESET);
+
+			if (manageIncongruities) {
+				incongruityContext.responseReset();
+			}
+			else {
+				throw new IllegalStateException();
+			}
 		}
 	}
 
@@ -333,12 +355,21 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 		if (portletResponse instanceof MimeResponse) {
 			MimeResponse mimeResponse = (MimeResponse) portletResponse;
 			boolean responseCommitted = mimeResponse.isCommitted();
-			lifecycleIncongruityMap.putResponseCommitted(responseCommitted);
+
+			if (manageIncongruities) {
+				incongruityContext.setResponseCommitted(responseCommitted);
+			}
 
 			return responseCommitted;
 		}
 		else {
-			return lifecycleIncongruityMap.isResponseCommitted();
+
+			if (manageIncongruities) {
+				return incongruityContext.isResponseCommitted();
+			}
+			else {
+				throw new IllegalStateException();
+			}
 		}
 	}
 
@@ -430,13 +461,22 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 		if (portletRequest instanceof ClientDataRequest) {
 			ClientDataRequest clientDataRequest = (ClientDataRequest) portletRequest;
 			requestContentLength = clientDataRequest.getContentLength();
-			lifecycleIncongruityMap.putRequestContentLength(requestContentLength);
+
+			if (manageIncongruities) {
+				incongruityContext.setRequestContentLength(requestContentLength);
+			}
+
+			return requestContentLength;
 		}
 		else {
-			requestContentLength = lifecycleIncongruityMap.getRequestContentLength();
-		}
 
-		return requestContentLength;
+			if (manageIncongruities) {
+				return incongruityContext.getRequestContentLength();
+			}
+			else {
+				throw new IllegalStateException();
+			}
+		}
 	}
 
 	/**
@@ -476,12 +516,21 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 		if (portletResponse instanceof MimeResponse) {
 			MimeResponse mimeResponse = (MimeResponse) portletResponse;
 			int responseBufferSize = mimeResponse.getBufferSize();
-			lifecycleIncongruityMap.putResponseBufferSize(responseBufferSize);
+
+			if (manageIncongruities) {
+				incongruityContext.setResponseBufferSize(responseBufferSize);
+			}
 
 			return responseBufferSize;
 		}
 		else {
-			return lifecycleIncongruityMap.getResponseBufferSize();
+
+			if (manageIncongruities) {
+				return incongruityContext.getResponseBufferSize();
+			}
+			else {
+				throw new IllegalStateException();
+			}
 		}
 	}
 
@@ -492,18 +541,22 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 	@Override
 	public void setResponseBufferSize(int size) {
 
-		if (bridgeContext.getPortletContainer().isAbleToSetResourceResponseBufferSize()) {
+		if (portletResponse instanceof ResourceResponse) {
 
-			if (portletResponse instanceof ResourceResponse) {
+			if (bridgeContext.getPortletContainer().isAbleToSetResourceResponseBufferSize()) {
 				ResourceResponse resourceResponse = (ResourceResponse) portletResponse;
 				resourceResponse.setBufferSize(size);
 			}
+		}
+		else {
+
+			if (manageIncongruities) {
+				incongruityContext.setResponseBufferSize(size);
+			}
 			else {
-				lifecycleIncongruityManager.addCongruousTask(CongruousTask.SET_RESPONSE_BUFFER_SIZE);
+				throw new IllegalStateException();
 			}
 		}
-
-		lifecycleIncongruityMap.putResponseBufferSize(size);
 	}
 
 	/**
@@ -518,10 +571,14 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 			resourceResponse.setContentLength(length);
 		}
 		else {
-			lifecycleIncongruityManager.addCongruousTask(CongruousTask.SET_RESPONSE_CONTENT_LENGTH);
-		}
 
-		lifecycleIncongruityMap.putResponseContentLength(length);
+			if (manageIncongruities) {
+				incongruityContext.setResponseContentLength(length);
+			}
+			else {
+				throw new IllegalStateException();
+			}
+		}
 	}
 
 	/**
@@ -536,10 +593,14 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 			bridgeContext.getPortletContainer().setMimeResponseContentType(mimeResponse, contentType);
 		}
 		else {
-			lifecycleIncongruityManager.addCongruousTask(CongruousTask.SET_RESPONSE_CONTENT_TYPE);
-		}
 
-		lifecycleIncongruityMap.putResponseContentType(contentType);
+			if (manageIncongruities) {
+				incongruityContext.setResponseContentType(contentType);
+			}
+			else {
+				throw new IllegalStateException();
+			}
+		}
 	}
 
 	/**
@@ -573,9 +634,13 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 			}
 		}
 		else {
-			lifecycleIncongruityManager.addCongruousTask(CongruousTask.WRITE_RESPONSE_OUTPUT_STREAM);
 
-			return lifecycleIncongruityMap.getResponseOutputStream();
+			if (manageIncongruities) {
+				return incongruityContext.getResponseOutputStream();
+			}
+			else {
+				throw new IllegalStateException();
+			}
 		}
 	}
 
@@ -600,9 +665,13 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 
 		}
 		else {
-			lifecycleIncongruityManager.addCongruousTask(CongruousTask.WRITE_RESPONSE_OUTPUT_WRITER);
 
-			return lifecycleIncongruityMap.getResponseOutputWriter();
+			if (manageIncongruities) {
+				return incongruityContext.getResponseOutputWriter();
+			}
+			else {
+				throw new IllegalStateException();
+			}
 		}
 	}
 
@@ -621,7 +690,14 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 			ResourceResponse resourceResponse = (ResourceResponse) portletResponse;
 			resourceResponse.setProperty(ResourceResponse.HTTP_STATUS_CODE, Integer.toString(statusCode));
 		}
+		else {
 
-		lifecycleIncongruityMap.putResponseStatus(statusCode);
+			if (manageIncongruities) {
+				incongruityContext.setResponseStatus(statusCode);
+			}
+			else {
+				throw new IllegalStateException();
+			}
+		}
 	}
 }
