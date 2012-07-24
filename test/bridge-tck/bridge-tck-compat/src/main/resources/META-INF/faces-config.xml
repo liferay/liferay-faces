@@ -13,7 +13,6 @@
 		<lifecycle-factory>com.liferay.faces.bridge.tck.lifecycle.LifecycleFactoryTCKImpl</lifecycle-factory>
 		<view-declaration-language-factory>com.liferay.faces.bridge.tck.application.view.ViewDeclarationLanguageFactoryTCKImpl</view-declaration-language-factory>
 		<factory-extension>
-			<bridge:bridge-context-factory>com.liferay.faces.bridge.tck.context.BridgeContextFactoryTCKImpl</bridge:bridge-context-factory>
 			<bridge:bridge-request-scope-factory>com.liferay.faces.bridge.tck.scope.BridgeRequestScopeFactoryTCKImpl</bridge:bridge-request-scope-factory>
 			<bridge:portlet-container-factory>com.liferay.faces.bridge.tck.container.PortletContainerFactoryTCKImpl</bridge:portlet-container-factory>
 		</factory-extension>
