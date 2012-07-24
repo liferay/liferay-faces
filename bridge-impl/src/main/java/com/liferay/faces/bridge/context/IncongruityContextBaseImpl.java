@@ -107,9 +107,7 @@ public abstract class IncongruityContextBaseImpl extends IncongruityContext {
 
 	@Override
 	public Object getContext() {
-
-		// TODO Auto-generated method stub
-		return null;
+		throw new IllegalStateException();
 	}
 
 	@Override
