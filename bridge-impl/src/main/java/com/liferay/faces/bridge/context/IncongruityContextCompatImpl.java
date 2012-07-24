@@ -14,14 +14,10 @@
 package com.liferay.faces.bridge.context;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.Flash;
@@ -183,14 +179,6 @@ public abstract class IncongruityContextCompatImpl extends IncongruityContextBas
 	 * @since  JSF 2.0
 	 */
 	@Override
-	public Object getContext() {
-		throw new IllegalStateException();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
 	public String getContextName() {
 		throw new IllegalStateException();
 	}
@@ -271,30 +259,6 @@ public abstract class IncongruityContextCompatImpl extends IncongruityContextBas
 	 */
 	@Override
 	public int getRequestServerPort() {
-		throw new IllegalStateException();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public URL getResource(String path) throws MalformedURLException {
-		throw new IllegalStateException();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public InputStream getResourceAsStream(String path) {
-		throw new IllegalStateException();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public Set<String> getResourcePaths(String path) {
 		throw new IllegalStateException();
 	}
 
