@@ -46,6 +46,7 @@ import com.liferay.faces.bridge.application.ViewHandlerFactory;
 import com.liferay.faces.bridge.application.view.BridgeWriteBehindResponseFactory;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
 import com.liferay.faces.bridge.context.BridgeContextFactory;
+import com.liferay.faces.bridge.context.IncongruityContextFactory;
 import com.liferay.faces.bridge.context.url.BridgeURLFactory;
 import com.liferay.faces.bridge.model.UploadedFileFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeCacheFactory;
