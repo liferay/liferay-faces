@@ -14,7 +14,6 @@
 package com.liferay.faces.bridge.application;
 
 import javax.faces.application.ViewHandler;
-import javax.faces.application.ViewHandlerWrapper;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
@@ -22,11 +21,13 @@ import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
+import com.sun.faces.application.view.MultiViewHandler;
+
 
 /**
  * @author  Neil Griffin
  */
-public class ViewHandlerImpl extends ViewHandlerWrapper {
+public class ViewHandlerImpl extends ViewHandlerCompatImpl {
 
 	// Private Constants
 	private static final String DOT_REPLACEMENT = "_DOT_";
