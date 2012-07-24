@@ -19,7 +19,6 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -48,6 +47,7 @@ public abstract class IncongruityContextBaseImpl extends IncongruityContext {
 
 	public IncongruityContextBaseImpl() {
 		this.attributeMap = new HashMap<String, Object>();
+
 		Set<IncongruousAction> incongruousActions = new HashSet<IncongruousAction>();
 		this.attributeMap.put(INCONGRUOUS_ACTIONS, incongruousActions);
 	}
@@ -64,11 +64,6 @@ public abstract class IncongruityContextBaseImpl extends IncongruityContext {
 
 	@Override
 	public String encodeNamespace(String name) {
-		throw new IllegalStateException();
-	}
-
-	@Override
-	public String encodeRedirectURL(String baseUrl, Map<String, List<String>> parameters) {
 		throw new IllegalStateException();
 	}
 
@@ -112,6 +107,11 @@ public abstract class IncongruityContextBaseImpl extends IncongruityContext {
 		throw new IllegalStateException();
 	}
 
+	@SuppressWarnings("unchecked")
+	protected Set<IncongruousAction> getIncongruousActions() {
+		return (Set<IncongruousAction>) attributeMap.get(INCONGRUOUS_ACTIONS);
+	}
+
 	@Override
 	public String getInitParameter(String name) {
 		throw new IllegalStateException();
@@ -139,11 +139,6 @@ public abstract class IncongruityContextBaseImpl extends IncongruityContext {
 	@Override
 	public String getRequestCharacterEncoding() {
 		return (String) attributeMap.get(REQUEST_CHARACTER_ENCODING);
-	}
-
-	@SuppressWarnings("unchecked")
-	protected Set<IncongruousAction> getIncongruousActions() {
-		return (Set<IncongruousAction>) attributeMap.get(INCONGRUOUS_ACTIONS);
 	}
 
 	@Override
