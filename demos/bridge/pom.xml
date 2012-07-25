@@ -12,9 +12,9 @@
 	<name>Liferay Faces Bridge Demos</name>
 
 	<modules>
-		<module>jsf1-ipc-events-bookings-portlet</module>
-		<module>jsf1-ipc-events-customers-portlet</module>
-		<module>jsf1-ipc-pub-render-params-portlet</module>
+<!-- 		<module>jsf1-ipc-events-bookings-portlet</module> -->
+<!-- 		<module>jsf1-ipc-events-customers-portlet</module> -->
+<!-- 		<module>jsf1-ipc-pub-render-params-portlet</module> -->
 		<module>jsf1-jsp-portlet</module>
 	</modules>
 
