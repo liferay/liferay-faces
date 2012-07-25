@@ -39,6 +39,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 import com.liferay.faces.bridge.BridgeFactoryFinder;
+import com.liferay.faces.bridge.application.view.BridgeAfterViewContentRequest;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentResponse;
 import com.liferay.faces.bridge.application.view.BridgeWriteBehindSupportFactory;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
@@ -69,6 +70,8 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 
 	// Lazily-Initialized Data Members
 	private String authType;
+	private BridgeAfterViewContentRequest bridgeAfterViewContentRequest;
+	private BridgeAfterViewContentResponse bridgeAfterViewContentResponse;
 	private Map<String, String> initParameterMap;
 	private String remoteUser;
 	private Map<String, Object> requestCookieMap;
@@ -255,10 +258,16 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 
 			logger.debug("Detected JSP AFTER_VIEW_CONTENT processing as activated");
 
-			BridgeWriteBehindSupportFactory bridgeWriteBehindSupportFactory = (BridgeWriteBehindSupportFactory)
-				BridgeFactoryFinder.getFactory(BridgeWriteBehindSupportFactory.class);
+			if ((bridgeAfterViewContentRequest == null) ||
+					(bridgeAfterViewContentRequest.getWrapped() != portletRequest)) {
 
-			return bridgeWriteBehindSupportFactory.getBridgeAfterViewContentRequest(portletRequest);
+				BridgeWriteBehindSupportFactory bridgeWriteBehindSupportFactory = (BridgeWriteBehindSupportFactory)
+					BridgeFactoryFinder.getFactory(BridgeWriteBehindSupportFactory.class);
+				bridgeAfterViewContentRequest = bridgeWriteBehindSupportFactory.getBridgeAfterViewContentRequest(
+						portletRequest);
+			}
+
+			return bridgeAfterViewContentRequest;
 		}
 		else {
 			return portletRequest;
@@ -486,11 +495,16 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 			logger.debug("Detected JSP AFTER_VIEW_CONTENT feature as activated");
 
 			if (facesImplementationServletResponse == null) {
-				BridgeWriteBehindSupportFactory bridgeWriteBehindSupportFactory = (BridgeWriteBehindSupportFactory)
-					BridgeFactoryFinder.getFactory(BridgeWriteBehindSupportFactory.class);
 
-				return bridgeWriteBehindSupportFactory.getBridgeAfterViewContentResponse(portletResponse,
-						getRequestLocale());
+				if ((bridgeAfterViewContentResponse == null) ||
+						(bridgeAfterViewContentResponse.getWrapped() != portletResponse)) {
+					BridgeWriteBehindSupportFactory bridgeWriteBehindSupportFactory = (BridgeWriteBehindSupportFactory)
+						BridgeFactoryFinder.getFactory(BridgeWriteBehindSupportFactory.class);
+					bridgeAfterViewContentResponse = bridgeWriteBehindSupportFactory.getBridgeAfterViewContentResponse(
+							portletResponse, getRequestLocale());
+				}
+
+				return bridgeAfterViewContentResponse;
 			}
 			else {
 				return facesImplementationServletResponse;
