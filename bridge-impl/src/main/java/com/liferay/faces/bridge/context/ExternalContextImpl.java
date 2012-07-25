@@ -39,9 +39,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 import com.liferay.faces.bridge.BridgeFactoryFinder;
-import com.liferay.faces.bridge.application.view.BridgeAfterViewContentRequest;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentResponse;
-import com.liferay.faces.bridge.application.view.BridgeWriteBehindResponseFactory;
+import com.liferay.faces.bridge.application.view.BridgeWriteBehindSupportFactory;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.context.map.ApplicationMap;
 import com.liferay.faces.bridge.context.map.InitParameterMap;
@@ -256,7 +255,10 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 
 			logger.debug("Detected JSP AFTER_VIEW_CONTENT processing as activated");
 
-			return new BridgeAfterViewContentRequest(portletRequest);
+			BridgeWriteBehindSupportFactory bridgeWriteBehindSupportFactory = (BridgeWriteBehindSupportFactory)
+				BridgeFactoryFinder.getFactory(BridgeWriteBehindSupportFactory.class);
+
+			return bridgeWriteBehindSupportFactory.getBridgeAfterViewContentRequest(portletRequest);
 		}
 		else {
 			return portletRequest;
@@ -335,7 +337,7 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 			}
 			else {
 				// TestPage140: setRequestCharacterEncodingRenderTest expects this to be a no-op so throwing an
-                // IllegalStateException is not an option.
+				// IllegalStateException is not an option.
 			}
 		}
 	}
@@ -484,7 +486,11 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 			logger.debug("Detected JSP AFTER_VIEW_CONTENT feature as activated");
 
 			if (facesImplementationServletResponse == null) {
-				return new BridgeAfterViewContentResponse(portletResponse, getRequestLocale());
+				BridgeWriteBehindSupportFactory bridgeWriteBehindSupportFactory = (BridgeWriteBehindSupportFactory)
+					BridgeFactoryFinder.getFactory(BridgeWriteBehindSupportFactory.class);
+
+				return bridgeWriteBehindSupportFactory.getBridgeAfterViewContentResponse(portletResponse,
+						getRequestLocale());
 			}
 			else {
 				return facesImplementationServletResponse;
@@ -530,11 +536,10 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 						wrappedServletResponse;
 					PortletResponse wrappedPortletResponse = bridgeAfterViewContentPreResponse.getWrapped();
 
-					BridgeWriteBehindResponseFactory bridgeWriteBehindResponseFactory =
-						(BridgeWriteBehindResponseFactory) BridgeFactoryFinder.getFactory(
-							BridgeWriteBehindResponseFactory.class);
+					BridgeWriteBehindSupportFactory bridgeWriteBehindSupportFactory = (BridgeWriteBehindSupportFactory)
+						BridgeFactoryFinder.getFactory(BridgeWriteBehindSupportFactory.class);
 					BridgeWriteBehindResponse bridgeWriteBehindResponse =
-						bridgeWriteBehindResponseFactory.getBridgeWriteBehindResponse((MimeResponse)
+						bridgeWriteBehindSupportFactory.getBridgeWriteBehindResponse((MimeResponse)
 							wrappedPortletResponse, facesImplementationServletResponse);
 
 					// Note: See comments in BridgeContextImpl#dispatch(String) regarding Liferay's inability to

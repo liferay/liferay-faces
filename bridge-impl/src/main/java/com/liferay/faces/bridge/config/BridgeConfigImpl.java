@@ -68,7 +68,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private static final String BRIDGE_REQUEST_SCOPE_FACTORY = "bridge-request-scope-factory";
 	private static final String BRIDGE_REQUEST_SCOPE_CACHE_FACTORY = "bridge-request-scope-cache-factory";
 	private static final String BRIDGE_REQUEST_SCOPE_MANAGER_FACTORY = "bridge-request-scope-manager-factory";
-	private static final String BRIDGE_WRITE_BEHIND_RESPONSE_FACTORY = "bridge-write-behind-response-factory";
+	private static final String BRIDGE_WRITE_BEHIND_SUPPORT_FACTORY = "bridge-write-behind-support-factory";
 	private static final String BRIDGE_URL_FACTORY = "bridge-url-factory";
 	private static final String FACES_VIEW_ID_RENDER = "_facesViewIdRender";
 	private static final String FACES_VIEW_ID_RESOURCE = "_facesViewIdResource";
@@ -103,7 +103,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private BridgeRequestScopeFactory bridgeRequestScopeFactory;
 	private BridgeRequestScopeCacheFactory bridgeRequestScopeCacheFactory;
 	private BridgeRequestScopeManagerFactory bridgeRequestScopeManagerFactory;
-	private BridgeWriteBehindResponseFactory bridgeWriteBehindResponseFactory;
+	private BridgeWriteBehindSupportFactory bridgeWriteBehindSupportFactory;
 	private BridgeURLFactory bridgeURLFactory;
 	private List<String> defaultSuffixes;
 	private Set<String> excludedBridgeRequestAttributes = new HashSet<String>();
@@ -248,8 +248,8 @@ public class BridgeConfigImpl implements BridgeConfig {
 				logger.error(FACTORY_NOT_FOUND_MSG, BRIDGE_REQUEST_SCOPE_MANAGER_FACTORY);
 			}
 
-			if (bridgeWriteBehindResponseFactory == null) {
-				logger.error(FACTORY_NOT_FOUND_MSG, BRIDGE_WRITE_BEHIND_RESPONSE_FACTORY);
+			if (bridgeWriteBehindSupportFactory == null) {
+				logger.error(FACTORY_NOT_FOUND_MSG, BRIDGE_WRITE_BEHIND_SUPPORT_FACTORY);
 			}
 
 			if (bridgeURLFactory == null) {
@@ -356,7 +356,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 			attributes.put(BridgeRequestScopeFactory.class.getName(), bridgeRequestScopeFactory);
 			attributes.put(BridgeRequestScopeCacheFactory.class.getName(), bridgeRequestScopeCacheFactory);
 			attributes.put(BridgeRequestScopeManagerFactory.class.getName(), bridgeRequestScopeManagerFactory);
-			attributes.put(BridgeWriteBehindResponseFactory.class.getName(), bridgeWriteBehindResponseFactory);
+			attributes.put(BridgeWriteBehindSupportFactory.class.getName(), bridgeWriteBehindSupportFactory);
 			attributes.put(BridgeURLFactory.class.getName(), bridgeURLFactory);
 			attributes.put(IncongruityContextFactory.class.getName(), incongruityContextFactory);
 			attributes.put(PortletContainerFactory.class.getName(), portletContainerFactory);
@@ -569,7 +569,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 		private boolean parsingBridgeRequestScopeFactory = false;
 		private boolean parsingBridgeRequestScopeCacheFactory = false;
 		private boolean parsingBridgeRequestScopeManagerFactory = false;
-		private boolean parsingBridgeWriteBehindResponseFactory = false;
+		private boolean parsingBridgeWriteBehindSupportFactory = false;
 		private boolean parsingBridgeURLFactory = false;
 		private boolean parsingExcludedAttribute = false;
 		private boolean parsingIncongruityContextFactory;
@@ -692,18 +692,18 @@ public class BridgeConfigImpl implements BridgeConfig {
 					}
 				}
 			}
-			else if (parsingBridgeWriteBehindResponseFactory) {
+			else if (parsingBridgeWriteBehindSupportFactory) {
 				String factoryClassName = content.toString().trim();
 
 				if (factoryClassName.length() > 0) {
 
 					try {
-						BridgeWriteBehindResponseFactory wrappedFactory =
-							BridgeConfigImpl.this.bridgeWriteBehindResponseFactory;
-						BridgeConfigImpl.this.bridgeWriteBehindResponseFactory = (BridgeWriteBehindResponseFactory)
-							newFactoryInstance(factoryClassName, BridgeWriteBehindResponseFactory.class,
+						BridgeWriteBehindSupportFactory wrappedFactory =
+							BridgeConfigImpl.this.bridgeWriteBehindSupportFactory;
+						BridgeConfigImpl.this.bridgeWriteBehindSupportFactory = (BridgeWriteBehindSupportFactory)
+							newFactoryInstance(factoryClassName, BridgeWriteBehindSupportFactory.class,
 								wrappedFactory);
-						logger.debug("Instantiated BridgeWriteBehindResponseFactory=[{0}] wrappedFactory=[{1}]",
+						logger.debug("Instantiated BridgeWriteBehindSupportFactory=[{0}] wrappedFactory=[{1}]",
 							factoryClassName, wrappedFactory);
 					}
 					catch (ClassNotFoundException e) {
@@ -750,7 +750,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 						IncongruityContextFactory wrappedFactory = BridgeConfigImpl.this.incongruityContextFactory;
 						BridgeConfigImpl.this.incongruityContextFactory = (IncongruityContextFactory)
 							newFactoryInstance(factoryClassName, IncongruityContextFactory.class, wrappedFactory);
-						logger.debug("Instantiated LifecycleIncongruityManagerFactory=[{0}] wrappedFactory=[{1}]",
+						logger.debug("Instantiated IncongruityContextFactory=[{0}] wrappedFactory=[{1}]",
 							factoryClassName, wrappedFactory);
 					}
 					catch (ClassNotFoundException e) {
@@ -861,7 +861,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 			parsingBridgeRequestScopeFactory = false;
 			parsingBridgeRequestScopeCacheFactory = false;
 			parsingBridgeRequestScopeManagerFactory = false;
-			parsingBridgeWriteBehindResponseFactory = false;
+			parsingBridgeWriteBehindSupportFactory = false;
 			parsingBridgeURLFactory = false;
 			parsingExcludedAttribute = false;
 			parsingIncongruityContextFactory = false;
@@ -896,8 +896,8 @@ public class BridgeConfigImpl implements BridgeConfig {
 			else if (localName.equals(BRIDGE_REQUEST_SCOPE_MANAGER_FACTORY)) {
 				parsingBridgeRequestScopeManagerFactory = true;
 			}
-			else if (localName.equals(BRIDGE_WRITE_BEHIND_RESPONSE_FACTORY)) {
-				parsingBridgeWriteBehindResponseFactory = true;
+			else if (localName.equals(BRIDGE_WRITE_BEHIND_SUPPORT_FACTORY)) {
+				parsingBridgeWriteBehindSupportFactory = true;
 			}
 			else if (localName.equals(BRIDGE_URL_FACTORY)) {
 				parsingBridgeURLFactory = true;
