@@ -18,6 +18,7 @@ import java.util.Locale;
 import javax.portlet.PortletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import com.liferay.faces.bridge.context.ExternalContextImpl;
 import com.liferay.faces.bridge.filter.HttpServletResponseAdapter;
 
 
@@ -29,10 +30,16 @@ import com.liferay.faces.bridge.filter.HttpServletResponseAdapter;
  *
  * @author  Neil Griffin
  */
-public class BridgeAfterViewContentResponse extends HttpServletResponseAdapter {
+public abstract class BridgeAfterViewContentResponse extends HttpServletResponseAdapter {
 
 	public BridgeAfterViewContentResponse(PortletResponse portletResponse, Locale requestLocale) {
 		super(portletResponse, requestLocale);
 	}
 
+	public void setRenderParameter(String key, String value) {
+		// Note that there is a bug in the Trinidad RequestStateMap.saveState(ExternalContext) method such that it
+		// attempts to call a setRenderParameter(String, String) method during a RenderResponse. But the method
+		// signature is only found on StateAwareResponse (ActionResponse / EventResponse). This method serves as a no-op
+		// in order to prevent a NoSuchMethodException from being thrown by Trinidad.
+	}
 }

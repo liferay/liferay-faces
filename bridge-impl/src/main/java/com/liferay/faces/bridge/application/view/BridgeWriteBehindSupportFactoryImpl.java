@@ -14,10 +14,15 @@
 package com.liferay.faces.bridge.application.view;
 
 import java.lang.reflect.Constructor;
+import java.util.Locale;
 
 import javax.faces.FacesException;
 import javax.portlet.MimeResponse;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
+import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeUtil;
@@ -34,10 +39,10 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class BridgeWriteBehindResponseFactoryImpl extends BridgeWriteBehindResponseFactory {
+public class BridgeWriteBehindSupportFactoryImpl extends BridgeWriteBehindSupportFactory {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(BridgeWriteBehindResponseFactoryImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(BridgeWriteBehindSupportFactoryImpl.class);
 
 	// Private Data Members
 	private Class<? extends BridgeWriteBehindResponse> bridgeWriteBehindRenderResponseClass;
@@ -70,6 +75,35 @@ public class BridgeWriteBehindResponseFactoryImpl extends BridgeWriteBehindRespo
 		}
 
 		return bridgeWriteBehindResponseClass;
+	}
+
+	@Override
+	public BridgeAfterViewContentRequest getBridgeAfterViewContentRequest(PortletRequest portletRequest) {
+
+		if (portletRequest instanceof RenderRequest) {
+			return new BridgeAfterViewContentRequestRenderImpl((RenderRequest) portletRequest);
+		}
+		else if (portletRequest instanceof ResourceRequest) {
+			return new BridgeAfterViewContentRequestResourceImpl((ResourceRequest) portletRequest);
+		}
+		else {
+			return null;
+		}
+	}
+
+	@Override
+	public BridgeAfterViewContentResponse getBridgeAfterViewContentResponse(PortletResponse portletResponse,
+		Locale locale) {
+
+		if (portletResponse instanceof RenderResponse) {
+			return new BridgeAfterViewContentResponseRenderImpl((RenderResponse) portletResponse, locale);
+		}
+		else if (portletResponse instanceof ResourceResponse) {
+			return new BridgeAfterViewContentResponseResourceImpl((ResourceResponse) portletResponse, locale);
+		}
+		else {
+			return null;
+		}
 	}
 
 	@Override
@@ -177,7 +211,7 @@ public class BridgeWriteBehindResponseFactoryImpl extends BridgeWriteBehindRespo
 		return bridgeWriteBehindResponse;
 	}
 
-	public BridgeWriteBehindResponseFactory getWrapped() {
+	public BridgeWriteBehindSupportFactory getWrapped() {
 
 		// Since this is the factory instance provided by the bridge, it will never wrap another factory.
 		return null;
