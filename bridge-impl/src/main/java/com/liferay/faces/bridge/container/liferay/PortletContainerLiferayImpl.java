@@ -80,7 +80,6 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	private String portletResponseNamespace;
 	private String requestURL;
 	private String responseNamespace;
-	private String[] userAgentHeader;
 
 	public PortletContainerLiferayImpl(PortletRequest portletRequest, PortletResponse portletResponse,
 		PortletContext portletContext, BridgeConfig bridgeConfig) {
@@ -395,6 +394,11 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	}
 
 	@Override
+	public String[] getHeader(String name) {
+		return liferayPortletRequest.getHeader(name);
+	}
+
+	@Override
 	public long getHttpServletRequestDateHeader(String name) {
 		return liferayPortletRequest.getDateHeader(name);
 	}
@@ -458,15 +462,4 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 
 		return responseNamespace;
 	}
-
-	@Override
-	public String[] getUserAgentHeader() {
-
-		if (userAgentHeader == null) {
-			userAgentHeader = liferayPortletRequest.getUserAgentHeader();
-		}
-
-		return userAgentHeader;
-	}
-
 }

@@ -51,8 +51,14 @@ public class PortletContainerPlutoTCKImpl extends PortletContainerPlutoImpl {
 	 * bogus value here.
 	 */
 	@Override
-	public String[] getUserAgentHeader() {
-		return USER_AGENT_HEADER_VALUES;
+	public String[] getHeader(String name) {
+		
+		String[] header = super.getHeader(name);
+		
+		if ((header == null) && "User-Agent".equalsIgnoreCase(name)) {
+			header = USER_AGENT_HEADER_VALUES;
+		}
+		return header;
 	}
 
 }
