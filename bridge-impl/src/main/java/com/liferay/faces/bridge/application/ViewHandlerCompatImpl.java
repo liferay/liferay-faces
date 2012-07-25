@@ -16,6 +16,9 @@ package com.liferay.faces.bridge.application;
 import java.io.IOException;
 import java.util.Map;
 
+import javax.el.ELContext;
+import javax.el.ExpressionFactory;
+import javax.el.ValueExpression;
 import javax.faces.FacesException;
 import javax.faces.application.ViewHandler;
 import javax.faces.application.ViewHandlerWrapper;
@@ -25,6 +28,7 @@ import javax.faces.context.FacesContext;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.BridgeRenderPolicy;
 
+import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.logging.Logger;
@@ -40,6 +44,9 @@ public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ViewHandlerCompatImpl.class);
+
+	// Private Constants
+	private static final String EL_EXPRESSION_PREFIX = "#{";
 
 	@Override
 	public void renderView(FacesContext facesContext, UIViewRoot uiViewRoot) throws IOException, FacesException {
@@ -102,7 +109,7 @@ public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
 			ViewHandler viewHandler = viewHandlerFactory.getViewHandler();
 			viewHandler.renderView(facesContext, uiViewRoot);
 		}
-		
+
 		attributes.remove(Bridge.RENDER_CONTENT_AFTER_VIEW);
 
 		// TCK TestPage201: renderContentAfterViewTest
@@ -135,7 +142,20 @@ public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
 	 */
 	protected String evaluateExpressionJSF1(FacesContext facesContext, String viewId) {
 
-		// This method has overridden behavior for JSF 1 but simply returns the specified viewId for JSF 2
+		int pos = viewId.indexOf(EL_EXPRESSION_PREFIX);
+
+		if (pos > 0) {
+			ExpressionFactory expressionFactory = facesContext.getApplication().getExpressionFactory();
+			ELContext elContext = facesContext.getELContext();
+			ValueExpression valueExpression = expressionFactory.createValueExpression(elContext, viewId, String.class);
+			viewId = (String) valueExpression.getValue(elContext);
+
+			if ((viewId != null) && !viewId.startsWith(BridgeConstants.CHAR_FORWARD_SLASH)) {
+				viewId = BridgeConstants.CHAR_FORWARD_SLASH + viewId;
+			}
+		}
+
 		return viewId;
 	}
 }
+
