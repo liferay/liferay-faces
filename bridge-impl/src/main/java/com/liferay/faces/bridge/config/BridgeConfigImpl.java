@@ -43,7 +43,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgePhaseFactory;
 import com.liferay.faces.bridge.application.ViewHandlerFactory;
-import com.liferay.faces.bridge.application.view.BridgeWriteBehindResponseFactory;
+import com.liferay.faces.bridge.application.view.BridgeWriteBehindSupportFactory;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
 import com.liferay.faces.bridge.context.BridgeContextFactory;
 import com.liferay.faces.bridge.context.IncongruityContextFactory;
@@ -701,8 +701,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 						BridgeWriteBehindSupportFactory wrappedFactory =
 							BridgeConfigImpl.this.bridgeWriteBehindSupportFactory;
 						BridgeConfigImpl.this.bridgeWriteBehindSupportFactory = (BridgeWriteBehindSupportFactory)
-							newFactoryInstance(factoryClassName, BridgeWriteBehindSupportFactory.class,
-								wrappedFactory);
+							newFactoryInstance(factoryClassName, BridgeWriteBehindSupportFactory.class, wrappedFactory);
 						logger.debug("Instantiated BridgeWriteBehindSupportFactory=[{0}] wrappedFactory=[{1}]",
 							factoryClassName, wrappedFactory);
 					}
