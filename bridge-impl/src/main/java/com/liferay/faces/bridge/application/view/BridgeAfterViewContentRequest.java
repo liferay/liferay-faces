@@ -29,10 +29,9 @@ import com.liferay.faces.bridge.filter.HttpServletResponseAdapter;
  *
  * @author  Neil Griffin
  */
-public class BridgeAfterViewContentRequest extends HttpServletRequestAdapter {
+public abstract class BridgeAfterViewContentRequest extends HttpServletRequestAdapter {
 
 	public BridgeAfterViewContentRequest(PortletRequest portletRequest) {
 		super(portletRequest);
 	}
-
 }

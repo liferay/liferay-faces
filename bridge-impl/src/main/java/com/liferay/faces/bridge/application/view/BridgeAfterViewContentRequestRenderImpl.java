@@ -13,19 +13,24 @@
  */
 package com.liferay.faces.bridge.application.view;
 
-import javax.faces.FacesException;
-import javax.portlet.MimeResponse;
-import javax.portlet.faces.BridgeWriteBehindResponse;
-import javax.servlet.ServletResponse;
-
-import com.liferay.faces.bridge.FactoryWrapper;
+import javax.portlet.RenderRequest;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class BridgeWriteBehindResponseFactory implements FactoryWrapper<BridgeWriteBehindResponseFactory> {
+public class BridgeAfterViewContentRequestRenderImpl extends BridgeAfterViewContentRequest implements RenderRequest {
 
-	public abstract BridgeWriteBehindResponse getBridgeWriteBehindResponse(MimeResponse mimeResponse,
-		ServletResponse servletResponse) throws FacesException;
+	// Private Data Members
+	private RenderRequest wrappedRenderRequest;
+
+	public BridgeAfterViewContentRequestRenderImpl(RenderRequest renderRequest) {
+		super(renderRequest);
+		this.wrappedRenderRequest = renderRequest;
+	}
+
+	public String getETag() {
+		return wrappedRenderRequest.getETag();
+	}
+
 }
