@@ -31,7 +31,24 @@ public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
 	@Override
 	public void renderView(FacesContext context, UIViewRoot viewToRender) throws IOException, FacesException {
 
-		// This method is has overridden behavior for JSF 1 but is simply a pass-through for JSF 2
+		// This method has overridden behavior for JSF 1 but is simply a pass-through for JSF 2
 		super.renderView(context, viewToRender);
+	}
+
+	/**
+	 * Mojarra 1.x does not have the ability to process faces-config navigation-rule entries with to-view-id containing
+	 * EL-expressions. This method compensates for that shortcoming by evaluating the EL-expression that may be present
+	 * in the specified viewId.
+	 *
+	 * @param   facesContext  The current FacesContext.
+	 * @param   viewId        The viewId that may contain an EL expression.
+	 *
+	 * @return  If an EL-expression was present in the specified viewId, then returns the evaluated expression.
+	 *          Otherwise, returns the specified viewId unchanged.
+	 */
+	protected String evaluateExpressionJSF1(FacesContext facesContext, String viewId) {
+
+		// This method has overridden behavior for JSF 1 but simply returns the specified viewId for JSF 2
+		return viewId;
 	}
 }
