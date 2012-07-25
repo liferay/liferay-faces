@@ -6,14 +6,17 @@
 		<application-extension>
 			<bridge:excluded-attributes>
 				<bridge:excluded-attribute>org.apache.myfaces.trinidad.util.RequestStateMap</bridge:excluded-attribute>
+				<!-- TCK TestPage151 (requestMapRequestScopeTest) Challenge: https://issues.apache.org/jira/browse/PORTLETBRIDGE-227 -->
+				<bridge:excluded-attribute>verifyPreBridgeExclusion</bridge:excluded-attribute>
 			</bridge:excluded-attributes>
+			<bridge:included-attributes>
+				<!-- TCK TestPage203 (JSF_ELTest) Challenge: https://issues.apache.org/jira/browse/PORTLETBRIDGE-227 -->
+				<bridge:included-attribute>org.apache.myfaces.portlet.faces.testsuite.common.portletConfig</bridge:included-attribute>
+			</bridge:included-attributes>
 		</application-extension>
 	</application>
 	<factory>
 		<faces-context-factory>com.liferay.faces.bridge.tck.context.FacesContextFactoryTCKImpl</faces-context-factory>
 		<lifecycle-factory>com.liferay.faces.bridge.tck.lifecycle.LifecycleFactoryTCKImpl</lifecycle-factory>
-		<factory-extension>
-			<bridge:bridge-request-scope-factory>com.liferay.faces.bridge.tck.scope.BridgeRequestScopeFactoryTCKImpl</bridge:bridge-request-scope-factory>
-		</factory-extension>
 	</factory>
 </faces-config>
