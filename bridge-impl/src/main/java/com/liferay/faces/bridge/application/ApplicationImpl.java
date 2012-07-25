@@ -90,10 +90,14 @@ public class ApplicationImpl extends ApplicationCompatImpl {
 					PortletRequest portletRequest = (PortletRequest) facesContext.getExternalContext().getRequest();
 
 					if (portletRequest != null) {
-						BridgeNavigationHandler bridgeNavigationHandler = new BridgeNavigationHandlerImpl(super
-								.getNavigationHandler());
-						super.setNavigationHandler(bridgeNavigationHandler);
-						wrapHandlerAtRuntime = false;
+
+						NavigationHandler wrappableNavigationHandler = super.getNavigationHandler();
+						if (!(wrappableNavigationHandler instanceof BridgeNavigationHandlerImpl)) {
+							BridgeNavigationHandler bridgeNavigationHandler = new BridgeNavigationHandlerImpl(
+									wrappableNavigationHandler);
+							super.setNavigationHandler(bridgeNavigationHandler);
+							wrapHandlerAtRuntime = false;
+						}
 					}
 				}
 				catch (UnsupportedOperationException e) {
