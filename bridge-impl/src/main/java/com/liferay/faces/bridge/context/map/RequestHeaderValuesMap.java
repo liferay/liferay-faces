@@ -23,6 +23,7 @@ import javax.portlet.ResourceRequest;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeExt;
+import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
@@ -32,7 +33,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class RequestHeaderValuesMap extends CaseInsensitiveHashMap<String[]> {
+public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 
 	// Private Constants
 	private static final String CHARSET = "charset";
@@ -49,6 +50,7 @@ public class RequestHeaderValuesMap extends CaseInsensitiveHashMap<String[]> {
 	private static final String HEADER_ACCEPT_LANGUAGE = "Accept-Language";
 	private static final String HEADER_CONTENT_TYPE = "Content-Type";
 	private static final String HEADER_FACES_REQUEST = "Faces-Request";
+	private static final String HEADER_USER_AGENT = "User-Agent";
 
 	public RequestHeaderValuesMap(BridgeContext bridgeContext, Map<String, String> requestParameterMap) {
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
@@ -132,7 +134,7 @@ public class RequestHeaderValuesMap extends CaseInsensitiveHashMap<String[]> {
 						}
 
 						if (!foundUserAgent) {
-							foundUserAgent = name.equalsIgnoreCase(BridgeConstants.HEADER_USER_AGENT);
+							foundUserAgent = name.equalsIgnoreCase(HEADER_USER_AGENT);
 						}
 					}
 				}
@@ -167,9 +169,13 @@ public class RequestHeaderValuesMap extends CaseInsensitiveHashMap<String[]> {
 			}
 		}
 
+		PortletContainer portletContainer = bridgeContext.getPortletContainer();
+
 		if (!foundUserAgent) {
-			put(BridgeConstants.HEADER_USER_AGENT, bridgeContext.getPortletContainer().getUserAgentHeader());
+			put(HEADER_USER_AGENT, portletContainer.getHeader(HEADER_USER_AGENT));
 		}
+		
+		addJSF1Headers(portletContainer);
 	}
 
 	/**

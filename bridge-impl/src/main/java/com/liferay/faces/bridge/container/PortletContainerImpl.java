@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -435,6 +436,19 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 		return true;
 	}
 
+	public String[] getHeader(String name) {
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+		PortletRequest portletRequest = bridgeContext.getPortletRequest();
+		Enumeration<String> properties = portletRequest.getProperties(name);
+		List<String> propertyList = new ArrayList<String>();
+
+		while (properties.hasMoreElements()) {
+			propertyList.add(properties.nextElement());
+		}
+
+		return propertyList.toArray(new String[propertyList.size()]);
+	}
+
 	public long getHttpServletRequestDateHeader(String name) {
 
 		// Unsupported by default implementation.
@@ -536,11 +550,5 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 		}
 
 		return responseNamespace;
-	}
-
-	public String[] getUserAgentHeader() {
-
-		// Since the Portlet API doesn't support this header, return a null value.
-		return null;
 	}
 }

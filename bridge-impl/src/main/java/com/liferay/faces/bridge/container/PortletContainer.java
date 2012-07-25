@@ -166,6 +166,11 @@ public interface PortletContainer extends PhaseListener {
 	 */
 	public boolean isAbleToForwardOnDispatch();
 
+	/**
+	 * Returns the value of the header with the specified name from the underlying HttpServletRequest.
+	 */
+	public String[] getHeader(String name);
+
 	public ResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter);
 
 	/**
@@ -223,9 +228,4 @@ public interface PortletContainer extends PhaseListener {
 	 * Returns the response namespace.
 	 */
 	public String getResponseNamespace();
-
-	/**
-	 * Returns the value of the "User-Agent" header from the underlying HttpServletRequest.
-	 */
-	public String[] getUserAgentHeader();
 }
