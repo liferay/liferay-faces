@@ -108,6 +108,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private BridgeURLFactory bridgeURLFactory;
 	private List<String> defaultSuffixes;
 	private Set<String> excludedBridgeRequestAttributes = new HashSet<String>();
+	private Set<String> includedBridgeRequestAttributes = new HashSet<String>();
 	private String facesConfigName;
 	private List<ServletMapping> facesServletMappings;
 	private IncongruityContextFactory incongruityContextFactory;
@@ -425,6 +426,10 @@ public class BridgeConfigImpl implements BridgeConfig {
 		return facesServletMappings;
 	}
 
+	public Set<String> getIncludedRequestAttributes() {
+		return includedBridgeRequestAttributes;
+	}
+
 	public Map<String, String[]> getPublicParameterMappings() {
 		return publicParameterMappings;
 	}
@@ -560,6 +565,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 		// Private Constants
 		private static final String EXCLUDED_ATTRIBUTE = "excluded-attribute";
+		private static final String INCLUDED_ATTRIBUTE = "included-attribute";
 		private static final String MODEL_EL = "model-el";
 		private static final String PARAMETER = "parameter";
 
@@ -573,6 +579,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 		private boolean parsingBridgeWriteBehindSupportFactory = false;
 		private boolean parsingBridgeURLFactory = false;
 		private boolean parsingExcludedAttribute = false;
+		private boolean parsingIncludedAttribute = false;
 		private boolean parsingIncongruityContextFactory;
 		private boolean parsingModelEL = false;
 		private boolean parsingParameter = false;
@@ -761,6 +768,13 @@ public class BridgeConfigImpl implements BridgeConfig {
 					BridgeConfigImpl.this.excludedBridgeRequestAttributes.add(attributeName);
 				}
 			}
+			else if (parsingIncludedAttribute) {
+				String attributeName = content.toString().trim();
+
+				if (attributeName.length() > 0) {
+					BridgeConfigImpl.this.includedBridgeRequestAttributes.add(attributeName);
+				}
+			}
 			else if (parsingIncongruityContextFactory) {
 				String factoryClassName = content.toString().trim();
 
@@ -865,6 +879,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 			parsingBridgeWriteBehindSupportFactory = false;
 			parsingBridgeURLFactory = false;
 			parsingExcludedAttribute = false;
+			parsingIncludedAttribute = false;
 			parsingIncongruityContextFactory = false;
 			parsingModelEL = false;
 			parsingParameter = false;
@@ -907,6 +922,9 @@ public class BridgeConfigImpl implements BridgeConfig {
 			}
 			else if (localName.equals(EXCLUDED_ATTRIBUTE)) {
 				parsingExcludedAttribute = true;
+			}
+			else if (localName.equals(INCLUDED_ATTRIBUTE)) {
+				parsingIncludedAttribute = true;
 			}
 			else if (localName.equals(INCONGRUITY_CONTEXT_FACTORY)) {
 				parsingIncongruityContextFactory = true;
