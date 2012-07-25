@@ -21,7 +21,6 @@ import java.util.List;
 import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -63,18 +62,9 @@ public class LiferayPortletRequest {
 		return originalHttpServletRequest.getDateHeader(name);
 	}
 
-	public LiferayThemeDisplay getLiferayThemeDisplay() {
-
-		if (themeDisplay == null) {
-			themeDisplay = new LiferayThemeDisplay(wrappedPortletRequest.getAttribute(REQ_ATTR_LIFERAY_THEME_DISPLAY));
-		}
-
-		return themeDisplay;
-	}
-
-	public String[] getUserAgentHeader() {
+	public String[] getHeader(String name) {
 		String[] values = null;
-		Enumeration<?> headers = originalHttpServletRequest.getHeaders(BridgeConstants.HEADER_USER_AGENT);
+		Enumeration<?> headers = originalHttpServletRequest.getHeaders(name);
 
 		if (headers != null) {
 			List<String> valueList = new ArrayList<String>();
@@ -87,5 +77,14 @@ public class LiferayPortletRequest {
 		}
 
 		return values;
+	}
+
+	public LiferayThemeDisplay getLiferayThemeDisplay() {
+
+		if (themeDisplay == null) {
+			themeDisplay = new LiferayThemeDisplay(wrappedPortletRequest.getAttribute(REQ_ATTR_LIFERAY_THEME_DISPLAY));
+		}
+
+		return themeDisplay;
 	}
 }

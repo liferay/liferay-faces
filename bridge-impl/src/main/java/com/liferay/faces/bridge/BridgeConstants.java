@@ -40,9 +40,6 @@ public class BridgeConstants {
 	// Encoded Strings
 	public static final String ENCODED_AMERSAND = "&amp;";
 	
-	// Header Constants
-	public static final String HEADER_USER_AGENT = "User-Agent";
-
 	// Product Constants
 	public static final String ICEFACES = "ICEfaces";
 	public static final String LIFERAY_PORTAL = "Liferay Portal";
