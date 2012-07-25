@@ -49,13 +49,15 @@ public class ViewHandlerImpl extends ViewHandlerCompatImpl {
 	 * and then adds it back.
 	 */
 	@Override
-	public UIViewRoot createView(FacesContext context, String viewId) {
+	public UIViewRoot createView(FacesContext facesContext, String viewId) {
 
 		logger.debug("Creating view for viewId=[{0}]", viewId);
 
 		String queryString = null;
 
 		if (viewId != null) {
+			
+			viewId = evaluateExpressionJSF1(facesContext, viewId);
 			int pos = viewId.indexOf(BridgeConstants.CHAR_QUESTION_MARK);
 
 			if (pos > 0) {
@@ -65,7 +67,7 @@ public class ViewHandlerImpl extends ViewHandlerCompatImpl {
 			}
 		}
 
-		UIViewRoot uiViewRoot = super.createView(context, viewId);
+		UIViewRoot uiViewRoot = super.createView(facesContext, viewId);
 
 		if (queryString != null) {
 			logger.debug("Adding back query-string viewId=[{0}]", viewId);
