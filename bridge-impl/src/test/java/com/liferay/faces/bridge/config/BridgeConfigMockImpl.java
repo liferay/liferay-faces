@@ -47,6 +47,10 @@ public class BridgeConfigMockImpl implements BridgeConfig {
 		throw new UnsupportedOperationException();
 	}
 
+	public Set<String> getIncludedRequestAttributes() {
+		throw new UnsupportedOperationException();
+	}
+
 	public Map<String, String[]> getPublicParameterMappings() {
 		throw new UnsupportedOperationException();
 	}
@@ -66,5 +70,4 @@ public class BridgeConfigMockImpl implements BridgeConfig {
 	public String getWriteBehindResourceResponseWrapper() {
 		throw new UnsupportedOperationException();
 	}
-
 }

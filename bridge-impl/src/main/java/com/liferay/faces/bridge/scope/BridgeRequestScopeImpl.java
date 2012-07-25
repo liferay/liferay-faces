@@ -94,7 +94,9 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 	protected static final String EXCLUCED_NAMESPACE_JAVAX_SERVLET_INCLUDE = "javax.servlet.include";
 
 	// Other Private Constants
+	private static final String INCLUDED_REQUEST_ATTRIBUTES = "includedRequestAttributes";
 	private static final String JAVAX_FACES_ENCODED_URL_PARAM = "javax.faces.encodedURL";
+	private static final String LIFERAY_FACES_PACKAGE_PREFIX = "com.liferay.faces.";
 
 	// Private Data Members
 	private Bridge.PortletPhase beganInPhase;
@@ -102,6 +104,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 	private boolean facesLifecycleExecuted;
 	private String idPrefix;
 	private String idSuffix;
+	private List<String> includedAttributeNames;
 	private Map<String, Object> managedBeanMap;
 	private boolean navigationOccurred;
 	private PortletMode portletMode;
@@ -143,6 +146,25 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 			this.excludedAttributeNames.addAll(portletContextExcludedAttributeNames);
 		}
 
+		this.includedAttributeNames = new ArrayList<String>();
+
+		// Get the list of included BridgeRequestScope attributes from the faces-config.xml descriptors.
+		Set<String> facesConfigIncludedAttributeNames = bridgeConfig.getIncludedRequestAttributes();
+
+		// Get the list of included BridgeRequestScope attributes from the WEB-INF/portlet.xml descriptor.
+		@SuppressWarnings("unchecked")
+		List<String> portletContextIncludedAttributenames = (List<String>) portletContext.getAttribute(
+				LIFERAY_FACES_PACKAGE_PREFIX + portletName + BridgeConstants.CHAR_PERIOD + INCLUDED_REQUEST_ATTRIBUTES);
+
+		// Combine the two lists into a single list of included BridgeRequestScope attributes.
+		if (facesConfigIncludedAttributeNames != null) {
+			this.includedAttributeNames.addAll(facesConfigIncludedAttributeNames);
+		}
+
+		if (portletContextIncludedAttributenames != null) {
+			this.includedAttributeNames.addAll(portletContextIncludedAttributenames);
+		}
+
 		this.portletMode = PortletMode.VIEW;
 		this.preExistingAttributeNames = getPreExistingRequestAttributeNames(portletRequest);
 
@@ -176,6 +198,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 			if (nonExcludedAttributeNames != null) {
 
 				for (String attributeName : nonExcludedAttributeNames) {
+
 					renderRequest.removeAttribute(attributeName);
 
 					if (logger.isTraceEnabled()) {
@@ -205,12 +228,24 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 			String attributeName = attributeNames.nextElement();
 			Object attributeValue = renderRequest.getAttribute(attributeName);
 
-			if (isExcludedRequestAttributeByConfig(attributeName, attributeValue) ||
-					isExcludedRequestAttributeByAnnotation(attributeValue) ||
-					isExcludedRequestAttributeByInstance(attributeName, attributeValue) ||
-					isExcludedRequestAttributeByNamespace(attributeName)) {
+			if (isIncludedRequestAttributeByConfig(attributeName)) {
+				logger.debug(
+					"Kept included request attribute name=[{0}] that had been preserved in the ACTION_PHASE or EVENT_PHASE",
+					attributeName);
+			}
+			else {
 
-				renderRequest.removeAttribute(attributeName);
+				if (isExcludedRequestAttributeByConfig(attributeName, attributeValue) ||
+						isExcludedRequestAttributeByAnnotation(attributeValue) ||
+						isExcludedRequestAttributeByInstance(attributeName, attributeValue) ||
+						isExcludedRequestAttributeByNamespace(attributeName)) {
+
+					renderRequest.removeAttribute(attributeName);
+
+					logger.debug(
+						"Removed request attribute name=[{0}] that had been preserved in the ACTION_PHASE or EVENT_PHASE",
+						attributeName);
+				}
 			}
 		}
 	}
@@ -623,6 +658,40 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 
 	protected boolean isExcludedRequestAttributeByPreExisting(String attributeName) {
 		return preExistingAttributeNames.contains(attributeName);
+	}
+
+	protected boolean isIncludedRequestAttributeByConfig(String attributeName) {
+
+		boolean included = false;
+
+		if (includedAttributeNames != null) {
+
+			for (String includedAttribute : includedAttributeNames) {
+
+				if (attributeName.equals(includedAttribute)) {
+					included = true;
+
+					break;
+				}
+				else if (includedAttribute.endsWith(BridgeConstants.CHAR_ASTERISK)) {
+
+					String wildcardNamespace = includedAttribute;
+					int dotPos = wildcardNamespace.lastIndexOf(BridgeConstants.CHAR_PERIOD);
+
+					if (dotPos > 0) {
+						wildcardNamespace = wildcardNamespace.substring(0, dotPos);
+					}
+
+					if (isNamespaceMatch(attributeName, wildcardNamespace)) {
+						included = true;
+
+						break;
+					}
+				}
+			}
+		}
+
+		return included;
 	}
 
 	protected boolean isNamespaceMatch(String attributeName, String namespace) {
