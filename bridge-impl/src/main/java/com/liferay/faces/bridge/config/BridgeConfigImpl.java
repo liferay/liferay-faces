@@ -183,13 +183,23 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage());
 					}
 
+					// If the name is not set, then the <name> element was omitted. In JSF 2.x the <name> element is
+					// optional, and it JSF 1.x <name> element is not permitted by the XML Schema. Regardless, use the
+					// URL as the name in order to uniquely identify the configuration.
 					if (facesConfigName == null) {
+
+						// Example #1 (JRebel ClassLoader URL):
+						// file:/Projects/liferay-faces/bridge-impl/target/classes/META-INF/faces-config.xml
+						// Example #2 (Typical ClassLoader URL):
+						// jar:file:/Servers/liferay-portal/tomcat/webapps/WEB-INF/lib/liferay-faces-bridge-impl.jar!/META-INF/faces-config.xml
 						facesConfigName = facesConfigURL.toString();
 					}
 
 					FacesConfig facesConfig = new FacesConfig(facesConfigName, facesConfigURL);
 
-					if (LIFERAY_FACES_BRIDGE.equals(facesConfigName)) {
+					if (LIFERAY_FACES_BRIDGE.equals(facesConfigName) ||
+							((facesConfigName.indexOf("liferay-faces") >= 0) &&
+								(facesConfigName.indexOf("bridge-impl") > 0))) {
 						facesConfigList.add(0, facesConfig);
 					}
 					else {
