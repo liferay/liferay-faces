@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge;
 
+import javax.el.ELContext;
 import javax.faces.FacesException;
 import javax.faces.FactoryFinder;
 import javax.faces.component.UIViewRoot;
@@ -309,7 +310,10 @@ public abstract class BridgePhaseBaseImpl extends BridgePhaseCompatImpl {
 
 	protected FacesContext getFacesContext(PortletRequest portletRequest, PortletResponse portletResponse,
 		Lifecycle lifecycle) throws FacesException {
-		return getFacesContextFactory().getFacesContext(portletContext, portletRequest, portletResponse, lifecycle);
+		FacesContext newFacesContext = getFacesContextFactory().getFacesContext(portletContext, portletRequest, portletResponse, lifecycle);
+		ELContext elContext = newFacesContext.getELContext();
+		elContext.putContext(FacesContext.class, newFacesContext);
+		return newFacesContext;
 	}
 
 	protected FacesContextFactory getFacesContextFactory() throws FacesException {

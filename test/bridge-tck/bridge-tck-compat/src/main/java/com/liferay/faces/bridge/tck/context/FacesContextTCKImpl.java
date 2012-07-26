@@ -13,47 +13,26 @@
  */
 package com.liferay.faces.bridge.tck.context;
 
-import javax.el.ELContext;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.bridge.tck.el.ELContextTCKImpl;
-import com.liferay.faces.util.context.FacesContextWrapper;
+import javax.faces.context.FacesContextWrapper;
 
 
 /**
  * This class is designed to be a {@link FacesContextWrapper} around the Mojarra/MyFaces {@link FacesContext}
- * implementation. Its purpose is to handle special cases of the TCK.
+ * implementation. Its purpose is to fulfill the requirements of TestPage082 (facesContextFactoryServiceProviderTest).
+ * For JSF 2.x, it is possible to have a portlet bridge that does not wrap the FacesContext, so this test should not be
+ * necessary for JSF 2.x versions of the TCK.
  *
  * @author  Neil Griffin
  */
 public class FacesContextTCKImpl extends FacesContextWrapper {
 
 	// Private Data Members
-	private ELContext elContext;
-	private ExternalContext externalContext;
 	private FacesContext wrappedFacesContext;
 
 	public FacesContextTCKImpl(FacesContext facesContext) {
 		this.wrappedFacesContext = facesContext;
-	}
-
-	/**
-	 * This method wraps the Mojarra/MyFaces {@link ELContext} with an implementation that handles a special case of the
-	 * TCK.
-	 */
-	@Override
-	public ELContext getELContext() {
-
-		if (elContext == null) {
-			elContext = super.getELContext();
-
-			if (!(elContext instanceof ELContextTCKImpl)) {
-				elContext = new ELContextTCKImpl(elContext);
-			}
-		}
-
-		return elContext;
 	}
 
 	@Override
