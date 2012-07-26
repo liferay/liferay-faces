@@ -17,7 +17,6 @@
 		<module>bridge-tck-lifecycle-set-portlet</module>
 		<module>bridge-tck-main-portlet</module>
 		<module>bridge-tck-response-wrapper-portlet</module>
-		<module>bridge-tck-runner</module>
 	</modules>
 
 	<repositories>
