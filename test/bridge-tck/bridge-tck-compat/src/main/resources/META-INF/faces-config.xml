@@ -5,12 +5,6 @@
 	<name>LiferayFacesBridgeTCKCommon</name>
 	<application>
 		<view-handler>com.liferay.faces.bridge.tck.application.ViewHandlerTCKImpl</view-handler>
-		<application-extension>
-			<bridge:excluded-attributes>
-				<!-- TCK TestPage151 (requestMapRequestScopeTest) Challenge: https://issues.apache.org/jira/browse/PORTLETBRIDGE-227 -->
-				<bridge:excluded-attribute>verifyPreBridgeExclusion</bridge:excluded-attribute>
-			</bridge:excluded-attributes>
-		</application-extension>
 	</application>
 	<factory>
 		<!-- TestPage082 (facesContextFactoryServiceProviderTest) loads factory from META-INF/services/javax.faces.context.FacesContextFactory 
