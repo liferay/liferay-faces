@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.bridge.context;
 
-import javax.el.ELContext;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.lifecycle.Lifecycle;
@@ -39,14 +38,6 @@ public class FacesContextImpl extends FacesContextWrapper {
 		this.wrappedFacesContext = facesContext;
 		this.externalContext = new ExternalContextImpl(portletContext, portletRequest, portletResponse);
 		setCurrentInstance(this);
-	}
-
-	@Override
-	public ELContext getELContext() {
-		
-		ELContext elContext = wrappedFacesContext.getELContext();
-		elContext.putContext(FacesContext.class, this);
-		return elContext;
 	}
 
 	@Override
