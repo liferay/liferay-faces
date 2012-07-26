@@ -13,7 +13,6 @@
 		</application-extension>
 	</application>
 	<factory>
-		<faces-context-factory>com.liferay.faces.bridge.tck.context.FacesContextFactoryTCKImpl</faces-context-factory>
 		<lifecycle-factory>com.liferay.faces.bridge.tck.lifecycle.LifecycleFactoryTCKImpl</lifecycle-factory>
 	</factory>
 </faces-config>
