@@ -57,12 +57,6 @@ public interface BridgeConfig {
 	Set<String> getExcludedRequestAttributes();
 
 	/**
-	 * Returns a list of attribute names that are to be included with the {@link BridgeRequestScope} as defined in the
-	 * bridge:included-attributes element within the faces-config.xml descriptor.
-	 */
-	Set<String> getIncludedRequestAttributes();
-
-	/**
 	 * Returns a list of servlet-mapping entries from the WEB-INF/web.xml descriptor that are mapped to the Faces
 	 * Servlet.
 	 */
