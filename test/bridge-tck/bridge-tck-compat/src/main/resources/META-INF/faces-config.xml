@@ -10,10 +10,6 @@
 				<!-- TCK TestPage151 (requestMapRequestScopeTest) Challenge: https://issues.apache.org/jira/browse/PORTLETBRIDGE-227 -->
 				<bridge:excluded-attribute>verifyPreBridgeExclusion</bridge:excluded-attribute>
 			</bridge:excluded-attributes>
-			<bridge:included-attributes>
-				<!-- TCK TestPage203 (JSF_ELTest) Challenge: https://issues.apache.org/jira/browse/PORTLETBRIDGE-227 -->
-				<bridge:included-attribute>org.apache.myfaces.portlet.faces.testsuite.common.portletConfig</bridge:included-attribute>
-			</bridge:included-attributes>
 		</application-extension>
 	</application>
 	<factory>
