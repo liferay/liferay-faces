@@ -7,6 +7,7 @@
 		<application-extension>
 			<bridge:excluded-attributes>
 				<bridge:excluded-attribute>com.liferay.faces.bridge.context.BridgeContext</bridge:excluded-attribute>
+				<bridge:excluded-attribute>org.apache.myfaces.trinidad.util.RequestStateMap</bridge:excluded-attribute>
 			</bridge:excluded-attributes>
 			<bridge:write-behind-response-wrappers>
 				<bridge:render-response-wrapper-class>com.liferay.faces.bridge.application.view.BridgeWriteBehindResponseRenderImpl</bridge:render-response-wrapper-class>
