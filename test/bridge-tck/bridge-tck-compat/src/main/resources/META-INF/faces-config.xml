@@ -13,7 +13,6 @@
 		</application-extension>
 	</application>
 	<factory>
-		<external-context-factory>com.liferay.faces.bridge.tck.context.ExternalContextFactoryTCKImpl</external-context-factory>
 		<!-- TestPage082 (facesContextFactoryServiceProviderTest) loads factory from META-INF/services/javax.faces.context.FacesContextFactory 
 			<faces-context-factory>com.liferay.faces.bridge.tck.context.FacesContextFactoryTCKImpl</faces-context-factory> -->
 		<lifecycle-factory>com.liferay.faces.bridge.tck.lifecycle.LifecycleFactoryTCKImpl</lifecycle-factory>

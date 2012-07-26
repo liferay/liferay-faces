@@ -44,8 +44,9 @@ public class ViewDeclarationLanguageJspImpl extends ViewDeclarationLanguageWrapp
 	@Override
 	public void buildView(FacesContext facesContext, UIViewRoot uiViewRoot) throws IOException {
 
-		// Set a flag on the BridgeContenxt that will be picked up by ExternalContextImpl#getResponse()
-		// indicating that JSP AFTER_VIEW_CONTENT processing has been activated.
+		// Set a flag on the BridgeContext indicating that JSP AFTER_VIEW_CONTENT processing has been activated. The
+		// flag is referenced by {@link ExternalContextImpl#getRequest()} and {@link ExternalContextImpl#getResponse()}
+		// and is unset by {@link ExternalContextImpl#dispatch(String)}.
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		bridgeContext.setProcessingAfterViewContent(true);
 
@@ -53,11 +54,6 @@ public class ViewDeclarationLanguageJspImpl extends ViewDeclarationLanguageWrapp
 
 		// Have the wrapped VDL build the view.
 		super.buildView(facesContext, uiViewRoot);
-
-		// Indicate that JSP AFTER_VIEW_CONTENT processing has been de-activated.
-		bridgeContext.setProcessingAfterViewContent(false);
-
-		logger.debug("De-activated JSP AFTER_VIEW_CONTENT");
 	}
 
 	@Override
