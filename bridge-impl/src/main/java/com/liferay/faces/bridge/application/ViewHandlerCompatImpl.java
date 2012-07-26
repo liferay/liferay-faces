@@ -84,9 +84,9 @@ public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
 
 	protected void _buildView(FacesContext facesContext, UIViewRoot uiViewRoot) {
 
-		// Set a flag on the BridgeContenxt that will be picked up by ExternalContextImpl#getResponse()
-		// indicating that JSP AFTER_VIEW_CONTENT processing has been activated. Flag will be unset by
-		// {@link ExternalContextImpl#setResponse(Object)}.
+		// Set a flag on the BridgeContext indicating that JSP AFTER_VIEW_CONTENT processing has been activated. The
+		// flag is referenced by {@link ExternalContextImpl#getRequest()} and {@link ExternalContextImpl#getResponse()}
+		// and is unset by {@link ExternalContextImpl#dispatch(String)}.
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		bridgeContext.setProcessingAfterViewContent(true);
 
