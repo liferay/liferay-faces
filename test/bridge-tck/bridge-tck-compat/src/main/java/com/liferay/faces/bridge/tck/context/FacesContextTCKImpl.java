@@ -15,7 +15,7 @@ package com.liferay.faces.bridge.tck.context;
 
 import javax.faces.context.FacesContext;
 
-import javax.faces.context.FacesContextWrapper;
+import com.liferay.faces.util.context.FacesContextWrapper;
 
 
 /**
@@ -33,16 +33,6 @@ public class FacesContextTCKImpl extends FacesContextWrapper {
 
 	public FacesContextTCKImpl(FacesContext facesContext) {
 		this.wrappedFacesContext = facesContext;
-	}
-
-	@Override
-	public ExternalContext getExternalContext() {
-
-		if (externalContext == null) {
-			externalContext = new ExternalContextTCKImpl(wrappedFacesContext.getExternalContext());
-		}
-
-		return externalContext;
 	}
 
 	@Override
