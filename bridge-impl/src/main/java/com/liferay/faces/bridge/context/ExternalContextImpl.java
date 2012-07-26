@@ -96,6 +96,15 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 
 	@Override
 	public void dispatch(String path) throws IOException {
+
+		// Indicate that JSP AFTER_VIEW_CONTENT processing has been de-activated. This will make it possible for the
+		// Mojarra JspViewHandlingStrategy#executePageToBuildView(FacesContext, UIViewRoot) method to successfully call
+		// {@link ExternalContextImpl#setResponse(Object)} in order to undo the ViewHandlerResponseWrapper and restore
+		// the original PortletResponse.
+		bridgeContext.setProcessingAfterViewContent(false);
+
+		logger.debug("De-activated JSP AFTER_VIEW_CONTENT");
+
 		bridgeContext.dispatch(path);
 	}
 
@@ -255,8 +264,6 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 		// JspViewDeclarationLanguage#buildView(FacesContext, UIViewRoot) method has a Servlet API dependency due to
 		// explicit casts to HttpServletRequest.
 		if (bridgeContext.isProcessingAfterViewContent()) {
-
-			logger.debug("Detected JSP AFTER_VIEW_CONTENT processing as activated");
 
 			if ((bridgeAfterViewContentRequest == null) ||
 					(bridgeAfterViewContentRequest.getWrapped() != portletRequest)) {
@@ -491,8 +498,6 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 		// to HttpServletResponse. Additionally, the MyFaces JspViewDeclarationLanguage#buildView(FacesContext,
 		// UIViewRoot) method has an explicit cast to HttpServletResponse.
 		if (bridgeContext.isProcessingAfterViewContent()) {
-
-			logger.debug("Detected JSP AFTER_VIEW_CONTENT feature as activated");
 
 			if (facesImplementationServletResponse == null) {
 
