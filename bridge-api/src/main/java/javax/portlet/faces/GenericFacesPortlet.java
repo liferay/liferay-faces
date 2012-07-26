@@ -54,8 +54,6 @@ public class GenericFacesPortlet extends GenericPortlet {
 	private static final String BRIDGE_AUTO_DISPATCH_EVENTS = "javax.portlet.faces.autoDispatchEvents";
 	private static final String CHAR_COMMA = ",";
 	private static final String CHAR_DOT = ".";
-	private static final String INCLUDED_REQUEST_ATTRIBUTES = "includedRequestAttributes";
-	private static final String LIFERAY_FACES_PACKAGE_PREFIX = "com.liferay.faces.";
 
 	// Private Data Members
 	private Boolean autoDispatchEvents;
@@ -65,7 +63,6 @@ public class GenericFacesPortlet extends GenericPortlet {
 	private BridgePublicRenderParameterHandler bridgePublicRenderParameterHandler;
 	private Map<String, String> defaultViewIdMap;
 	private List<String> excludedRequestAttributes;
-	private List<String> includedRequestAttributes;
 	private String portletName;
 	private Boolean preserveActionParameters;
 
@@ -104,11 +101,6 @@ public class GenericFacesPortlet extends GenericPortlet {
 		// with name "javax.portlet.faces.<portlet-name>.excludedRequestAttributes"
 		attributeName = Bridge.BRIDGE_PACKAGE_PREFIX + portletName + CHAR_DOT + Bridge.EXCLUDED_REQUEST_ATTRIBUTES;
 		portletContext.setAttribute(attributeName, getExcludedRequestAttributes());
-
-		// Save the "com.liferay.faces.includedRequestAttributes" init-param value(s) as a portlet context attribute
-		// with name "com.liferay.faces.<portlet-name>.includedRequestAttributes"
-		attributeName = LIFERAY_FACES_PACKAGE_PREFIX + portletName + CHAR_DOT + INCLUDED_REQUEST_ATTRIBUTES;
-		portletContext.setAttribute(attributeName, getIncludedRequestAttributes());
 
 		// Save the "javax.portlet.faces.preserveActionParams" init-param value as a portlet context attribute with name
 		// "javax.portlet.faces.<portlet-name>.preserveActionParams"
@@ -441,28 +433,6 @@ public class GenericFacesPortlet extends GenericPortlet {
 		}
 
 		return excludedRequestAttributes;
-	}
-
-	public List<String> getIncludedRequestAttributes() {
-
-		if (includedRequestAttributes == null) {
-
-			String initParamName = LIFERAY_FACES_PACKAGE_PREFIX + INCLUDED_REQUEST_ATTRIBUTES;
-			String initParamValue = getPortletConfig().getInitParameter(initParamName);
-
-			if (initParamValue != null) {
-
-				includedRequestAttributes = new ArrayList<String>();
-
-				String[] values = initParamValue.split(CHAR_COMMA);
-
-				for (String value : values) {
-					includedRequestAttributes.add(value.trim());
-				}
-			}
-		}
-
-		return includedRequestAttributes;
 	}
 
 	public Bridge getFacesBridge(PortletRequest portletRequest, PortletResponse portletResponse)
