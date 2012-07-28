@@ -32,6 +32,10 @@ import com.liferay.faces.util.helper.BooleanHelper;
  */
 public abstract class ExternalContextCompatImpl extends ExternalContext {
 
+	// Private Constants
+	private static final String TRINIDAD_DISABLE_DIALOG_OUTCOMES =
+		"org.apache.myfaces.trinidad.DISABLE_DIALOG_OUTCOMES";
+
 	// Protected Data Members
 	protected BridgeContext bridgeContext;
 	protected ServletResponse facesImplementationServletResponse;
@@ -58,6 +62,23 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 		// Determine whether or not lifecycle incongruities should be managed.
 		this.manageIncongruities = BooleanHelper.toBoolean(bridgeContext.getInitParameter(
 					BridgeConfigConstants.PARAM_MANAGE_INCONGRUITIES), true);
+
+		// Disable the Apache Trinidad 1.2.x "dialog:" URL feature as it causes navigation-handler failures during the
+		// EVENT_PHASE of the portlet lifecycle. For more information on the feature, see:
+		// http://jsfatwork.irian.at/book_de/trinidad.html
+		portletContext.setAttribute(TRINIDAD_DISABLE_DIALOG_OUTCOMES, Boolean.TRUE);
+	}
+
+	public String encodePartialActionURL(String url) {
+
+		// no-op for JSF 1.2
+		return url;
+	}
+
+	protected ServletResponse createFlashHttpServletResponse() {
+
+		// no-op for JSF 1.2
+		return null;
 	}
 
 	protected boolean isBridgeFlashServletResponseRequired() {
@@ -76,17 +97,5 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 
 		// no-op for JSF 1.2
 		return false;
-	}
-	
-	protected ServletResponse createFlashHttpServletResponse() {
-		
-		// no-op for JSF 1.2
-		return null;
-	}
-
-	public String encodePartialActionURL(String url) {
-		
-		// no-op for JSF 1.2
-		return url;
 	}
 }
