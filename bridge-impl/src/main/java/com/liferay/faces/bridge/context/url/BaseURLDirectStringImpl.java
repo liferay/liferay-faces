@@ -23,9 +23,9 @@ import com.liferay.faces.bridge.BridgeConstants;
 
 
 /**
- * This class represents a simple "direct" {@link BaseURL}, meaning an implementation that wraps a context-relative path
- * and constructs an absolute path URL based on the scheme, server name, and port found in the {@link PortletRequest}.
- * The only methods that are meant to be called is {@link BaseURLDirectStringImpl#toString()} and {@link
+ * This class represents a simple "direct" {@link BaseURL}, meaning an implementation that wraps a path and constructs
+ * an absolute path URL based on the scheme, server name, and port found in the {@link PortletRequest}. The only methods
+ * that are meant to be called is {@link BaseURLDirectStringImpl#toString()} and {@link
  * BaseURLDirectStringImpl#write(Writer, boolean)}. All other methods throw an {@link UnsupportedOperationException}.
  *
  * @author  Neil Griffin
@@ -33,13 +33,13 @@ import com.liferay.faces.bridge.BridgeConstants;
 public class BaseURLDirectStringImpl extends BaseURLNonEncodedStringImpl {
 
 	// Private Data Members
-	private String contextRelativePath;
+	private String path;
 	private PortletRequest portletRequest;
 
-	public BaseURLDirectStringImpl(String url, Map<String, String[]> parameterMap, String contextRelativePath,
+	public BaseURLDirectStringImpl(String url, Map<String, String[]> parameterMap, String path,
 		PortletRequest portletRequest) {
 		super(url, parameterMap);
-		this.contextRelativePath = contextRelativePath;
+		this.path = path;
 		this.portletRequest = portletRequest;
 	}
 
@@ -54,7 +54,7 @@ public class BaseURLDirectStringImpl extends BaseURLNonEncodedStringImpl {
 		buf.append(portletRequest.getServerName());
 		buf.append(BridgeConstants.CHAR_COLON);
 		buf.append(portletRequest.getServerPort());
-		buf.append(contextRelativePath);
+		buf.append(path);
 
 		String queryString = getQuery();
 
