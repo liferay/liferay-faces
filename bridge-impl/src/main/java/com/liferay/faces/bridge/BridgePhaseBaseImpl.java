@@ -314,7 +314,7 @@ public abstract class BridgePhaseBaseImpl extends BridgePhaseCompatImpl {
 		FacesContext newFacesContext = getFacesContextFactory().getFacesContext(portletContext, portletRequest,
 				portletResponse, lifecycle);
 
-		// TestPage203 (JSF_ELTest) ensure that facesContext implicit object is set to the current instance.
+		// TCK TestPage203 (JSF_ELTest) ensure that the #{facesContext} implicit object is set to the current instance.
 		ELContext elContext = newFacesContext.getELContext();
 		elContext.putContext(FacesContext.class, newFacesContext);
 
