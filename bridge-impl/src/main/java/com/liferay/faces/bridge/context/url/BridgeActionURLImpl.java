@@ -79,7 +79,7 @@ public class BridgeActionURLImpl extends BridgeResponseURLImpl implements Bridge
 			// Otherwise, if the URL string has a "javax.portlet.faces.DirectLink" parameter with a value of "true",
 			// then return an absolute path (to the path in the URL string) as required by the Bridge Spec.
 			else if (isExternal() || BooleanHelper.isTrueToken(getParameter(Bridge.DIRECT_LINK))) {
-				baseURL = new BaseURLDirectStringImpl(url, getParameterMap(), getContextRelativePath(), portletRequest);
+				baseURL = new BaseURLDirectStringImpl(url, getParameterMap(), getURI().getPath(), portletRequest);
 			}
 			else {
 				String portletMode = removeParameter(Bridge.PORTLET_MODE_PARAMETER);

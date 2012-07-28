@@ -215,7 +215,7 @@ public class BridgeResourceURLImpl extends BridgeResourceURLCompatImpl {
 				// TCK TestPage107: encodeActionURLNonJSFViewWithWindowStateResourceTest
 				// TCK TestPage108: encodeActionURLNonJSFViewWithInvalidWindowStateResourceTest
 				baseURL = new PortletURLNonFacesTargetRenderImpl(bridgeContext, urlWithModifiedParameters, portletMode,
-						windowState, secure, getContextRelativePath());
+						windowState, secure, getURI().getPath());
 			}
 		}
 
@@ -246,12 +246,12 @@ public class BridgeResourceURLImpl extends BridgeResourceURLCompatImpl {
 			baseURL = resourceURL;
 		}
 
-		// Otherwise, assume that the URL is for an internal resource like "/resources/foo.png" and return a BaseURL
-		// string representation of it that contains the context-path.
+		// Otherwise, assume that the URL is for an resource external to the portlet context like
+		// "/portalcontext/resources/foo.png" and return a BaseURL string representation of it.
 		else {
 
 			// TCK TestPage133: encodeResourceURLTest
-			baseURL = new BaseURLEncodedInternalStringImpl(url, getParameterMap(), bridgeContext);
+			baseURL = new BaseURLEncodedExternalStringImpl(url, getParameterMap(), bridgeContext);
 		}
 
 		return baseURL;
