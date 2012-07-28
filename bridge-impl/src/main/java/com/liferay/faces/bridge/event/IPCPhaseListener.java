@@ -112,58 +112,66 @@ public class IPCPhaseListener implements PhaseListener {
 
 				// For each of the public render parameters found in the WEB-INF/faces-config.xml file:
 				for (String prefixedParameterName : publicRenderParameterNames) {
-					
+
 					String[] modelExpressions = publicParameterMappings.get(prefixedParameterName);
 
 					if (modelExpressions != null) {
 
 						String parameterPrefix;
 						String nonPrefixedParameterName;
-						
+
 						int colonPos = prefixedParameterName.indexOf(BridgeConstants.CHAR_COLON);
 
 						if (colonPos > 0) {
 							parameterPrefix = prefixedParameterName.substring(0, colonPos);
-							nonPrefixedParameterName = prefixedParameterName.substring(colonPos+1);
+							nonPrefixedParameterName = prefixedParameterName.substring(colonPos + 1);
 						}
 						else {
 							parameterPrefix = null;
 							nonPrefixedParameterName = prefixedParameterName;
 						}
-						
 
-						for (String originalModelEL : modelExpressions) {							
-							
-							String[] parameterValues = publicParameterMap.get(nonPrefixedParameterName);
-							String parameterValue = null;
+						if (publicParameterMap.containsKey(nonPrefixedParameterName)) {
 
-							if ((parameterValues != null) && (parameterValues.length > 0)) {
-								parameterValue = parameterValues[0];
+							for (String originalModelEL : modelExpressions) {
+
+								String[] parameterValues = publicParameterMap.get(nonPrefixedParameterName);
+								String parameterValue = null;
+
+								if ((parameterValues != null) && (parameterValues.length > 0)) {
+									parameterValue = parameterValues[0];
+								}
+
+								PublicRenderParameter publicRenderParameter = new PublicRenderParameter(facesContext,
+										parameterPrefix, parameterValue, originalModelEL, portletName);
+
+								if (logger.isTraceEnabled()) {
+									logger.trace(
+										"portletName=[{0}] public render parameter=[{1}] originalModelEL=[{2}] modifiedModelEL=[{3}] isForThisPortlet=[{4}]",
+										portletName, nonPrefixedParameterName, originalModelEL,
+										publicRenderParameter.getModifiedModelEL(),
+										publicRenderParameter.isForThisPortlet());
+								}
+
+								if (publicRenderParameter.isForThisPortlet()) {
+
+									logger.debug("Injecting render parameter=[{0}] value=[{1}] into expression=[{2}]",
+										nonPrefixedParameterName, parameterValue,
+										publicRenderParameter.getModifiedModelEL());
+									invokeHandler = publicRenderParameter.injectIntoModel();
+								}
+								else {
+									logger.debug(
+										"NOT injecting render parameter=[{0}] value=[{1}] into expression=[{2}] because it is NOT for this portletName=[{3}]",
+										nonPrefixedParameterName, parameterValue,
+										publicRenderParameter.getModifiedModelEL(), portletName);
+								}
 							}
-
-							PublicRenderParameter publicRenderParameter = new PublicRenderParameter(facesContext,
-									parameterPrefix, parameterValue, originalModelEL, portletName);
-
-							if (logger.isTraceEnabled()) {
-								logger.trace(
-									"portletName=[{0}] public render parameter=[{1}] originalModelEL=[{2}] modifiedModelEL=[{3}] injectIntoModel=[{4}]",
-									portletName, nonPrefixedParameterName, originalModelEL,
-									publicRenderParameter.getModifiedModelEL(),
-									publicRenderParameter.isForThisPortlet());
-							}
-
-							if (publicRenderParameter.isForThisPortlet()) {
-
-								logger.debug("Injecting render parameter=[{0}] value=[{1}] into expression=[{2}]",
-										nonPrefixedParameterName, parameterValue, publicRenderParameter.getModifiedModelEL());
-								invokeHandler = publicRenderParameter.injectIntoModel();
-							}
-							else {
-								logger.debug(
-									"NOT injecting render parameter=[{0}] value=[{1}] into expression=[{2}] because it is NOT for this portletName=[{3}]",
-									nonPrefixedParameterName, parameterValue, publicRenderParameter.getModifiedModelEL(),
-									portletName);
-							}
+						}
+						else {
+							logger.debug(
+								"NOT injecting render parameter=[{0}] because it is not found in the public parameter map",
+								nonPrefixedParameterName);
 						}
 					}
 				}
@@ -228,12 +236,12 @@ public class IPCPhaseListener implements PhaseListener {
 
 						String parameterPrefix;
 						String nonPrefixedParameterName;
-						
+
 						int colonPos = prefixedParameterName.indexOf(BridgeConstants.CHAR_COLON);
 
 						if (colonPos > 0) {
 							parameterPrefix = prefixedParameterName.substring(0, colonPos);
-							nonPrefixedParameterName = prefixedParameterName.substring(colonPos+1);
+							nonPrefixedParameterName = prefixedParameterName.substring(colonPos + 1);
 						}
 						else {
 							parameterPrefix = null;
@@ -253,13 +261,15 @@ public class IPCPhaseListener implements PhaseListener {
 									parameterPrefix, parameterValue, originalModelEL, portletName);
 
 							if (publicRenderParameter.isForThisPortlet()) {
+
 								String modelValue = publicRenderParameter.getModelValue();
 								boolean modelValueHasChanged = publicRenderParameter.isModelValueChanged();
 
 								if (logger.isTraceEnabled()) {
 									logger.trace(
 										"portletName=[{0}] public render parameter=[{1}] parameterValue=[{2}] modelValue=[{3}] modelValueHasChanged=[{4}]",
-										portletName, nonPrefixedParameterName, parameterValue, modelValue, modelValueHasChanged);
+										portletName, nonPrefixedParameterName, parameterValue, modelValue,
+										modelValueHasChanged);
 								}
 
 								if (modelValueHasChanged) {
