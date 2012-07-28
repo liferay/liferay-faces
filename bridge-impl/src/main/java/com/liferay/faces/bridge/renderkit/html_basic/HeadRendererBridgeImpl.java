@@ -15,6 +15,7 @@ package com.liferay.faces.bridge.renderkit.html_basic;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -29,9 +30,9 @@ import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 import com.liferay.faces.bridge.application.ResourceInfo;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.renderkit.bridge.BridgeRenderer;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.bridge.renderkit.bridge.BridgeRenderer;
 
 
 /**
@@ -127,10 +128,18 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 		PortletContainer portletContainer = bridgeContext.getPortletContainer();
 		boolean portletContainerAbleToAddScriptResourceToHead = portletContainer.isAbleToAddScriptResourceToHead();
 
-		// Note: The HeadManagedBean is a ViewScoped manage-bean that keeps a list of resources that have
-		// been added to the <head> section of the portal page.
+		// Note: The HeadManagedBean is a ViewScoped manage-bean that keeps a list of resources that have been added to
+		// the <head> section of the portal page. Note that the HeadManagedBean will be null in a JSP context since
+		// there is no h:head JSP component tag in JSF 2.x.
 		HeadManagedBean headManagedBean = HeadManagedBean.getInstance(facesContext);
-		Set<String> headResourceIdsFromManagedBean = headManagedBean.getHeadResourceIds();
+
+		Set<String> headResourceIdsFromManagedBean = null;
+
+		if (headManagedBean == null) {
+			headResourceIdsFromManagedBean = new HashSet<String>();
+		} else {
+			headResourceIdsFromManagedBean = headManagedBean.getHeadResourceIds();
+		}
 
 		// For each resource in the ViewRoot: Determine if it should added to the <head> section of the portal page,
 		// or if it should be relocated to the body (which is actually not a <body> element, but a <div> element
