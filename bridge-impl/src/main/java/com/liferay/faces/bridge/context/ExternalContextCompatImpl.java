@@ -101,7 +101,7 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 
 		// Get the BridgeContext.
 		this.bridgeContext = BridgeContext.getCurrentInstance();
-		
+
 		this.incongruityContext = bridgeContext.getIncongruityContext();
 
 		// Determine whether or not lifecycle incongruities should be managed.
@@ -696,7 +696,8 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 				incongruityContext.setResponseStatus(statusCode);
 			}
 			else {
-				throw new IllegalStateException();
+				// Mojarra will call this method if a runtime exception occurs during execution of the JSF lifecycle, so
+                // must not throw an IllegalStateException.
 			}
 		}
 	}
