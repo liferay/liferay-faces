@@ -84,7 +84,7 @@
 		<primefaces3.version>3.3</primefaces3.version>
 		<richfaces4.version>4.2.0.Final</richfaces4.version>
 		<selenium.version>1.0.1</selenium.version>
-		<tck.version>1.0.0</tck.version>
+		<tck.version>jsr329-1.0.1-SNAPSHOT</tck.version>
 	</properties>
 
 	<build>
@@ -495,12 +495,6 @@
 				<groupId>org.apache.myfaces.core</groupId>
 				<artifactId>myfaces-impl</artifactId>
 				<version>${myfaces.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.myfaces.portlet-bridge</groupId>
-				<artifactId>portlet-bridge-tck-jsr329</artifactId>
-				<version>${tck.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.icefaces</groupId>
