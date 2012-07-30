@@ -47,6 +47,7 @@ import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
+import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.config.ServletMapping;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.map.RequestHeaderMap;
@@ -74,6 +75,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 	// Private Constants
 	private static final String NON_NUMERIC_NAMESPACE_PREFIX = "A";
+	private static final boolean TCK_JSR_329_DETECTED = ProductMap.getInstance().get(BridgeConstants.TCK_JSR_329)
+		.isDetected();
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeContextImpl.class);
@@ -873,10 +876,23 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 	@Override
 	public String getInitParameter(String name) {
+
 		String initParameter = portletConfig.getInitParameter(name);
 
 		if (initParameter == null) {
 			initParameter = portletContext.getInitParameter(name);
+		}
+
+		if (TCK_JSR_329_DETECTED) {
+
+			if (BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_AJAX_ENABLED.equals(name) ||
+					BridgeConfigConstants.PARAM_RENDER_REDIRECT_ENABLED.equals(name)) {
+				initParameter = Boolean.TRUE.toString();
+			}
+			else if (BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE1.equals(name) ||
+					BridgeConfigConstants.PARAM_MANAGE_INCONGRUITIES.equals(name)) {
+				initParameter = Boolean.FALSE.toString();
+			}
 		}
 
 		return initParameter;
