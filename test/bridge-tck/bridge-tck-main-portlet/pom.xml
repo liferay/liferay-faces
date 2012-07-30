@@ -47,17 +47,31 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.myfaces.portlet-bridge</groupId>
-			<artifactId>portlet-bridge-tck-jsr329</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.myfaces.portlet-bridge</groupId>
-			<artifactId>portlet-bridge-tck-main-jsr329</artifactId>
+			<artifactId>portlet-bridge-tck-main</artifactId>
 			<version>${tck.version}</version>
 			<type>war</type>
+			<exclusions>
+				<exclusion>
+					<groupId>com.bekk.boss</groupId>
+					<artifactId>maven-jetty-pluto-embedded</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.faces</groupId>
+					<artifactId>jsf-impl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.myfaces.portlet-bridge</groupId>
+					<artifactId>portlet-bridge-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.myfaces.portlet-bridge</groupId>
+					<artifactId>portlet-bridge-impl</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.myfaces.portlet-bridge</groupId>
-			<artifactId>portlet-bridge-tck-main-jsr329</artifactId>
+			<artifactId>portlet-bridge-tck-main</artifactId>
 			<version>${tck.version}</version>
 			<type>warpath</type>
 		</dependency>
@@ -116,7 +130,7 @@
 									<goal>unpack-dependencies</goal>
 								</goals>
 								<configuration>
-									<includeArtifactIds>portlet-bridge-tck-jsr329</includeArtifactIds>
+									<includeArtifactIds>portlet-bridge-tck-harness</includeArtifactIds>
 									<includes>**/*.xml,org/apache/myfaces/portlet/faces/signature/*,org/apache/myfaces/portlet/faces/tckharness/*</includes>
 									<outputDirectory>target/test-classes</outputDirectory>
 								</configuration>
@@ -236,7 +250,8 @@
 				</dependency>
 				<dependency>
 					<groupId>org.apache.myfaces.portlet-bridge</groupId>
-					<artifactId>portlet-bridge-tck-jsr329</artifactId>
+					<artifactId>portlet-bridge-tck-harness</artifactId>
+					<version>${tck.version}</version>
 				</dependency>
 			</dependencies>
 		</profile>
