@@ -39,13 +39,16 @@ public class BridgeConstants {
 
 	// Encoded Strings
 	public static final String ENCODED_AMERSAND = "&amp;";
-	
+
 	// Product Constants
 	public static final String ICEFACES = "ICEfaces";
+	public static final String JSF = "JSF";
 	public static final String LIFERAY_PORTAL = "Liferay Portal";
 	public static final String LIFERAY_FACES_ALLOY = "Liferay Faces Alloy";
 	public static final String LIFERAY_FACES_BRIDGE = "Liferay Faces Bridge";
 	public static final String LIFERAY_FACES_PORTAL = "Liferay Faces Portal";
+	public static final String MOJARRA = "Mojarra";
+	public static final String MYFACES = "MyFaces";
 	public static final String PRIMEFACES = "PrimeFaces";
 	public static final String RICHFACES = "RichFaces";
 	public static final String TCK_JSR_329 = "TCK JSR 329";
