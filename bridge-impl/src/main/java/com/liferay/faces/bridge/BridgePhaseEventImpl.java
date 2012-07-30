@@ -13,11 +13,9 @@
  */
 package com.liferay.faces.bridge;
 
-import javax.faces.FactoryFinder;
 import javax.faces.application.NavigationHandler;
 import javax.faces.event.PhaseListener;
 import javax.faces.lifecycle.Lifecycle;
-import javax.faces.lifecycle.LifecycleFactory;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.PortletConfig;
@@ -63,14 +61,7 @@ public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
 			BridgeEventHandler bridgeEventHandler = (BridgeEventHandler) portletContext.getAttribute(
 					bridgeEventHandlerAttributeName);
 
-			// Get the JSF lifecycle instance that is designed to be used with the EVENT_PHASE of the portlet
-			// lifecycle.
-			LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
-					FactoryFinder.LIFECYCLE_FACTORY);
-			Lifecycle eventPhaseFacesLifecycle = lifecycleFactory.getLifecycle(Bridge.PortletPhase.EVENT_PHASE
-					.name());
-
-			init(eventRequest, eventResponse, Bridge.PortletPhase.EVENT_PHASE, eventPhaseFacesLifecycle);
+			init(eventRequest, eventResponse, Bridge.PortletPhase.EVENT_PHASE);
 
 			if (bridgeEventHandler != null) {
 
@@ -80,9 +71,9 @@ public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
 				// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-202
 				bridgeRequestScope.setPortletMode(eventRequest.getPortletMode());
 
-				// Execute the JSF lifecycle so that ONLY the RESTORE_VIEW phase executes (this is a feature of the
-				// lifecycle implementation for the EVENT_PHASE of the portlet lifecycle).
-				eventPhaseFacesLifecycle.execute(facesContext);
+				// Execute the JSF lifecycle so that ONLY the RESTORE_VIEW phase executes (note that this this is
+				// accomplished by the IPCPhaseListener).
+				facesLifecycle.execute(facesContext);
 
 				// Set a flag on the bridge request scope indicating that the Faces Lifecycle has executed.
 				bridgeRequestScope.setFacesLifecycleExecuted(true);
@@ -116,7 +107,7 @@ public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
 
 				// Process the outgoing public render parameters.
 				// TCK TestPage064: eventControllerTest
-				processOutgoingPublicRenderParameters(eventPhaseFacesLifecycle);
+				processOutgoingPublicRenderParameters(facesLifecycle);
 			}
 
 			// Maintain the render parameters set in the ACTION_PHASE so that they carry over to the RENDER_PHASE.

@@ -16,6 +16,9 @@ package com.liferay.faces.bridge.event;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
+import javax.portlet.faces.Bridge;
+
+import com.liferay.faces.bridge.context.BridgeContext;
 
 
 /**
@@ -30,7 +33,10 @@ public class RenderRequestPhaseListener implements PhaseListener {
 	private static final long serialVersionUID = 8470095938465172618L;
 
 	public void afterPhase(PhaseEvent phaseEvent) {
-		phaseEvent.getFacesContext().renderResponse();
+
+		if (BridgeContext.getCurrentInstance().getPortletRequestPhase() == Bridge.PortletPhase.RENDER_PHASE) {
+			phaseEvent.getFacesContext().renderResponse();
+		}
 	}
 
 	public void beforePhase(PhaseEvent phaseEvent) {

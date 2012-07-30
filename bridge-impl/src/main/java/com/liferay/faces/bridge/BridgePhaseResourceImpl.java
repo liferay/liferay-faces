@@ -13,9 +13,6 @@
  */
 package com.liferay.faces.bridge;
 
-import javax.faces.FactoryFinder;
-import javax.faces.lifecycle.Lifecycle;
-import javax.faces.lifecycle.LifecycleFactory;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.ResourceRequest;
@@ -55,14 +52,7 @@ public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 
 		try {
 
-			// Get the JSF lifecycle instance that is designed to be used with the RESOURCE_PHASE of the portlet
-			// lifecycle.
-			LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
-					FactoryFinder.LIFECYCLE_FACTORY);
-			Lifecycle resourcePhaseFacesLifecycle = lifecycleFactory.getLifecycle(Bridge.PortletPhase.RESOURCE_PHASE
-					.name());
-
-			init(resourceRequest, resourceResponse, Bridge.PortletPhase.RESOURCE_PHASE, resourcePhaseFacesLifecycle);
+			init(resourceRequest, resourceResponse, Bridge.PortletPhase.RESOURCE_PHASE);
 
 			// If the Faces resource handler indicates that this is a request for an image/javascript/css type of
 			// resource, then
@@ -106,11 +96,11 @@ public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 				logger.debug("Running Faces lifecycle for viewId=[{0}]", viewId);
 
 				// Execute the JSF lifecycle.
-				resourcePhaseFacesLifecycle.execute(facesContext);
+				facesLifecycle.execute(facesContext);
 
 				// Also execute the RENDER_RESPONSE phase of the Faces lifecycle, which will ultimately return a
 				// DOM-update back to the jsf.js Javascript code that issued the XmlHttpRequest in the first place.
-				resourcePhaseFacesLifecycle.render(facesContext);
+				facesLifecycle.render(facesContext);
 
 				// If the {@link BridgeConfigConstants#PARAM_BRIDGE_REQUEST_SCOPE_AJAX_ENABLED} feature is enabled, then
 				if (bridgeRequestScope != null) {
