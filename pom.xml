@@ -82,7 +82,7 @@
 		<mojarra.version>1.2_14</mojarra.version>
 		<myfaces.version>2.1.6</myfaces.version>
 		<selenium.version>1.0.1</selenium.version>
-		<tck.version>1.0.0</tck.version>
+		<tck.version>jsr329-1.0.1-SNAPSHOT</tck.version>
 	</properties>
 
 	<build>
