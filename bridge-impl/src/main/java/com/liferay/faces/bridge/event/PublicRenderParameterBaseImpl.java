@@ -13,21 +13,27 @@
  */
 package com.liferay.faces.bridge.event;
 
-import javax.faces.context.FacesContext;
-
-
 /**
  * @author  Neil Griffin
  */
-public interface PublicRenderParameter {
+public abstract class PublicRenderParameterBaseImpl implements PublicRenderParameter {
 
-	public boolean injectIntoModel(FacesContext facesContext);
+	// Protected Data Members
+	protected boolean forThisPortlet;
+	protected String modelEL;
+	protected String originalRequestValue;
 
-	public boolean isModelValueChanged(FacesContext facesContext);
+	public PublicRenderParameterBaseImpl(String prefix, String originalRequestValue, String originalModelEL,
+		String portletName) {
 
-	public String getModelValue(FacesContext facesContext);
+		this.originalRequestValue = originalRequestValue;
+		this.modelEL = originalModelEL;
 
-	public String getModifiedModelEL();
-
-	public boolean isForThisPortlet();
+		if (prefix == null) {
+			this.forThisPortlet = true;
+		}
+		else {
+			this.forThisPortlet = prefix.equals(portletName);
+		}
+	}
 }
