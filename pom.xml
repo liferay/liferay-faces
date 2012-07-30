@@ -78,8 +78,7 @@
 		<codename>Athens</codename>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<log4j.version>1.2.14</log4j.version>
-		<!-- Mojarra 1.2_15 causes TCK TestPage064 (eventControllerTest) to fail. See: http://java.net/jira/browse/JAVASERVERFACES-1803 -->
-		<mojarra.version>1.2_14</mojarra.version>
+		<mojarra.version>1.2_15</mojarra.version>
 		<myfaces.version>2.1.6</myfaces.version>
 		<selenium.version>1.0.1</selenium.version>
 		<tck.version>jsr329-1.0.1-SNAPSHOT</tck.version>
