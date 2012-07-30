@@ -13,9 +13,6 @@
  */
 package com.liferay.faces.bridge;
 
-import javax.faces.FactoryFinder;
-import javax.faces.lifecycle.Lifecycle;
-import javax.faces.lifecycle.LifecycleFactory;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
@@ -55,14 +52,7 @@ public class BridgePhaseActionImpl extends BridgePhaseBaseImpl {
 
 		try {
 
-			// Get the JSF lifecycle instance that is designed to be used with the ACTION_PHASE of the portlet
-			// lifecycle.
-			LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
-					FactoryFinder.LIFECYCLE_FACTORY);
-			Lifecycle actionPhaseFacesLifecycle = lifecycleFactory.getLifecycle(Bridge.PortletPhase.ACTION_PHASE
-					.name());
-
-			init(actionRequest, actionResponse, Bridge.PortletPhase.ACTION_PHASE, actionPhaseFacesLifecycle);
+			init(actionRequest, actionResponse, Bridge.PortletPhase.ACTION_PHASE);
 
 			// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-202
 			bridgeRequestScope.setPortletMode(actionRequest.getPortletMode());
@@ -84,7 +74,7 @@ public class BridgePhaseActionImpl extends BridgePhaseBaseImpl {
 
 			// Execute all the phases of the JSF lifecycle except for RENDER_RESPONSE since that can only be executed
 			// during the RENDER_PHASE of the portlet lifecycle.
-			actionPhaseFacesLifecycle.execute(facesContext);
+			facesLifecycle.execute(facesContext);
 
 			// Set a flag on the bridge request scope indicating that the Faces Lifecycle has executed.
 			bridgeRequestScope.setFacesLifecycleExecuted(true);

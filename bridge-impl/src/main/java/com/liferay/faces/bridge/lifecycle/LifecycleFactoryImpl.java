@@ -17,7 +17,6 @@ import java.util.Iterator;
 
 import javax.faces.lifecycle.Lifecycle;
 import javax.faces.lifecycle.LifecycleFactory;
-import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -37,6 +36,7 @@ public class LifecycleFactoryImpl extends LifecycleFactory {
 
 	// Private Data Members
 	private LifecycleFactory wrappedLifecycleFactory;
+	private Lifecycle defaultLifecycle;
 
 	public LifecycleFactoryImpl(LifecycleFactory lifecycleFactory) {
 		this.wrappedLifecycleFactory = lifecycleFactory;
@@ -59,14 +59,7 @@ public class LifecycleFactoryImpl extends LifecycleFactory {
 		if (wrappedLifecycleClass != null) {
 
 			try {
-				addLifecycleInternal(Bridge.PortletPhase.ACTION_PHASE.name(),
-					new LifecycleBridgePhaseActionImpl((Lifecycle) wrappedLifecycleClass.newInstance()));
-				addLifecycleInternal(Bridge.PortletPhase.EVENT_PHASE.name(),
-					new LifecycleBridgePhaseEventImpl((Lifecycle) wrappedLifecycleClass.newInstance()));
-				addLifecycleInternal(Bridge.PortletPhase.RENDER_PHASE.name(),
-					new LifecycleBridgePhaseRenderImpl((Lifecycle) wrappedLifecycleClass.newInstance()));
-				addLifecycleInternal(Bridge.PortletPhase.RESOURCE_PHASE.name(),
-					new LifecycleBridgePhaseResourceImpl((Lifecycle) wrappedLifecycleClass.newInstance()));
+				defaultLifecycle = new LifecycleImpl((Lifecycle) wrappedLifecycleClass.newInstance());
 			}
 			catch (Exception e) {
 				logger.error(e);
@@ -79,28 +72,15 @@ public class LifecycleFactoryImpl extends LifecycleFactory {
 		wrappedLifecycleFactory.addLifecycle(lifecycleId, lifecycle);
 	}
 
-	protected void addLifecycleInternal(String lifecycleId, Lifecycle lifecycle) {
-
-		try {
-			wrappedLifecycleFactory.addLifecycle(lifecycleId, lifecycle);
-		}
-		catch (IllegalArgumentException e) {
-			// ignore -- sometimes this happens on redeploy of portlet WARs
-		}
-	}
-
 	@Override
 	public Lifecycle getLifecycle(String lifecycleId) {
-		Lifecycle lifecycle = wrappedLifecycleFactory.getLifecycle(lifecycleId);
 
 		if (LifecycleFactory.DEFAULT_LIFECYCLE.equals(lifecycleId)) {
-
-			// Workaround bugs in 3rd party component suites that assume there is only one lifecycleId
-			// See: http://issues.liferay.com/browse/FACES-1259
-			lifecycle = new LifecycleListenerImpl(lifecycle);
+			return defaultLifecycle;
 		}
-
-		return lifecycle;
+		else {
+			return wrappedLifecycleFactory.getLifecycle(lifecycleId);
+		}
 	}
 
 	@Override

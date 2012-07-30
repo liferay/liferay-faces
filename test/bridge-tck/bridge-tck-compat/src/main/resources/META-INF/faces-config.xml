@@ -9,7 +9,6 @@
 	<factory>
 		<!-- TestPage082 (facesContextFactoryServiceProviderTest) loads factory from META-INF/services/javax.faces.context.FacesContextFactory 
 			<faces-context-factory>com.liferay.faces.bridge.tck.context.FacesContextFactoryTCKImpl</faces-context-factory> -->
-		<lifecycle-factory>com.liferay.faces.bridge.tck.lifecycle.LifecycleFactoryTCKImpl</lifecycle-factory>
 		<view-declaration-language-factory>com.liferay.faces.bridge.tck.application.view.ViewDeclarationLanguageFactoryTCKImpl</view-declaration-language-factory>
 		<factory-extension>
 			<bridge:portlet-container-factory>com.liferay.faces.bridge.tck.container.PortletContainerFactoryTCKImpl</bridge:portlet-container-factory>
