@@ -23,8 +23,8 @@ public class BridgeConstants {
 	public static final String CHAR_ASTERISK = "*";
 	public static final String CHAR_AT = "@";
 	public static final String CHAR_COLON = ":";
-	public static final Object CHAR_COMMA = ",";
-	public static final Object CHAR_DASH = "-";
+	public static final String CHAR_COMMA = ",";
+	public static final String CHAR_DASH = "-";
 	public static final String CHAR_DOUBLE_QUOTE = "\"";
 	public static final String CHAR_EQUALS = "=";
 	public static final String CHAR_FORWARD_SLASH = "/";
@@ -33,7 +33,7 @@ public class BridgeConstants {
 	public static final String CHAR_PERIOD = ".";
 	public static final String CHAR_POUND = "#";
 	public static final String CHAR_QUESTION_MARK = "?";
-	public static final Object CHAR_SEMICOLON = ";";
+	public static final String CHAR_SEMICOLON = ";";
 	public static final String CHAR_SPACE = " ";
 	public static final String CHAR_UNDERSCORE = "_";
 
@@ -48,6 +48,7 @@ public class BridgeConstants {
 	public static final String LIFERAY_FACES_PORTAL = "Liferay Faces Portal";
 	public static final String PRIMEFACES = "PrimeFaces";
 	public static final String RICHFACES = "RichFaces";
+	public static final String TCK_JSR_329 = "TCK JSR 329";
 
 	// Regular Expressions
 	public static final String REGEX_AMPERSAND_DELIMITER = "[&]";
