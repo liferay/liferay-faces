@@ -16,7 +16,6 @@ package com.liferay.faces.bridge;
 import java.io.IOException;
 import java.io.Writer;
 
-import javax.faces.FactoryFinder;
 import javax.faces.application.NavigationHandler;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
@@ -24,8 +23,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
-import javax.faces.lifecycle.Lifecycle;
-import javax.faces.lifecycle.LifecycleFactory;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -118,13 +115,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 	protected void execute(BridgeRedirectURL renderRedirectURL) throws BridgeDefaultViewNotSpecifiedException,
 		BridgeException, IOException {
 
-		// Get the JSF lifecycle instance that is designed to be used with the RENDER_PHASE of the portlet
-		// lifecycle.
-		LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
-				FactoryFinder.LIFECYCLE_FACTORY);
-		Lifecycle renderPhaseFacesLifecycle = lifecycleFactory.getLifecycle(Bridge.PortletPhase.RENDER_PHASE.name());
-
-		init(renderRequest, renderResponse, Bridge.PortletPhase.RENDER_PHASE, renderPhaseFacesLifecycle);
+		init(renderRequest, renderResponse, Bridge.PortletPhase.RENDER_PHASE);
 
 		// If the portlet mode has not changed, then restore the faces view root and messages that would
 		// have been saved during the ACTION_PHASE of the portlet lifecycle. Section 5.4.1 requires that the
@@ -164,9 +155,8 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 		if (facesLifecycleExecuted) {
 
 			// TCK TestPage054: prpUpdatedFromActionTest
-			PhaseEvent restoreViewPhaseEvent = new PhaseEvent(facesContext, PhaseId.RESTORE_VIEW,
-					renderPhaseFacesLifecycle);
-			PhaseListener[] phaseListeners = renderPhaseFacesLifecycle.getPhaseListeners();
+			PhaseEvent restoreViewPhaseEvent = new PhaseEvent(facesContext, PhaseId.RESTORE_VIEW, facesLifecycle);
+			PhaseListener[] phaseListeners = facesLifecycle.getPhaseListeners();
 
 			for (PhaseListener phaseListener : phaseListeners) {
 
@@ -191,7 +181,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 				throw e;
 			}
 
-			renderPhaseFacesLifecycle.execute(facesContext);
+			facesLifecycle.execute(facesContext);
 
 		}
 
@@ -233,7 +223,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseBaseImpl {
 
 		// Execute the RENDER_RESPONSE phase of the faces lifecycle.
 		logger.debug("Executing Faces render");
-		renderPhaseFacesLifecycle.render(facesContext);
+		facesLifecycle.render(facesContext);
 
 		// Set the view history according to Section 5.4.3 of the Bridge Spec.
 		setViewHistory(facesContext.getViewRoot().getViewId());

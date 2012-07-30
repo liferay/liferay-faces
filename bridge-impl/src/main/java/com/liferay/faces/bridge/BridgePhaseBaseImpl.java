@@ -20,6 +20,7 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.context.FacesContextFactory;
 import javax.faces.lifecycle.Lifecycle;
+import javax.faces.lifecycle.LifecycleFactory;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
@@ -67,6 +68,7 @@ public abstract class BridgePhaseBaseImpl extends BridgePhaseCompatImpl {
 	protected BridgeRequestScopeCache bridgeRequestScopeCache;
 	protected FacesContext facesContext;
 	protected IncongruityContext incongruityContext;
+	protected Lifecycle facesLifecycle;
 	protected PortletConfig portletConfig;
 	protected PortletContext portletContext;
 	protected String portletName;
@@ -90,9 +92,15 @@ public abstract class BridgePhaseBaseImpl extends BridgePhaseCompatImpl {
 			.getFactory(IncongruityContextFactory.class);
 		this.incongruityContext = incongruityContextFactory.getIncongruityContext();
 
+		// Get the bridge request scope cache from the factory.
 		BridgeRequestScopeCacheFactory bridgeRequestScopeCacheFactory = (BridgeRequestScopeCacheFactory)
 			BridgeFactoryFinder.getFactory(BridgeRequestScopeCacheFactory.class);
 		this.bridgeRequestScopeCache = bridgeRequestScopeCacheFactory.getBridgeRequestScopeCache(portletContext);
+
+		// Get the default lifecycle instance from the factory.
+		LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
+				FactoryFinder.LIFECYCLE_FACTORY);
+		this.facesLifecycle = lifecycleFactory.getLifecycle(LifecycleFactory.DEFAULT_LIFECYCLE);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -145,7 +153,7 @@ public abstract class BridgePhaseBaseImpl extends BridgePhaseCompatImpl {
 
 	@SuppressWarnings("deprecation")
 	protected void init(PortletRequest portletRequest, PortletResponse portletResponse,
-		Bridge.PortletPhase portletPhase, Lifecycle lifecycle) {
+		Bridge.PortletPhase portletPhase) {
 
 		// Save the Bridge.PortletPhase as a request attribute so that it can be picked up by the
 		// BridgeRequestAttributeListener.
@@ -168,9 +176,9 @@ public abstract class BridgePhaseBaseImpl extends BridgePhaseCompatImpl {
 
 		// Save the BridgeContext as a request attribute for legacy versions of ICEfaces.
 		portletRequest.setAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE, bridgeContext);
-
+		
 		// Get the FacesContext.
-		facesContext = getFacesContext(portletRequest, portletResponse, lifecycle);
+		facesContext = getFacesContext(portletRequest, portletResponse, facesLifecycle);
 
 		// Some portlet containers (like the one provided by Liferay Portal) uses a servlet dispatcher when executing
 		// the portlet lifecycle. This approach requires the portal to save some standard Servlet-API request attributes

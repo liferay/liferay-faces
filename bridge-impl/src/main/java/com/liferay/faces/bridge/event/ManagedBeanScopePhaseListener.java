@@ -23,7 +23,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
+import javax.portlet.faces.Bridge;
+import javax.portlet.faces.Bridge.PortletPhase;
 
+import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.util.ManagedBeanUtil;
 
 
@@ -52,34 +55,41 @@ public class ManagedBeanScopePhaseListener implements PhaseListener {
 
 		if (phaseEvent.getPhaseId() == PhaseId.RENDER_RESPONSE) {
 
-			// Remove any managed-beans in request scope. According to the JSF 2.0 JavaDocs for {@link
-			// ExternalContext.getRequestMap}, before a managed-bean is removed from the map, any public no-argument
-			// void return methods annotated with javax.annotation.PreDestroy must be called first. Note that the
-			// bridge {@link RequestAttributeMap.remove(Object)} method will ensure that any
-			// @PreDestroy method(s) are called. The JavaDocs also state that this should only be the case for
-			// objects that are actually managed-beans. Currently the only check we do here is for the {@link
-			// ManagedBean} annotation. If beans are defined via managed-bean entries in faces-config.xml then they
-			// will not have their PreDestroy method(s) invoked. Tackling that case would involve scanning all the
-			// faces-config.xml files in the classpath which is a bit more involved than time currently allows...
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			Map<String, Object> requestScope = facesContext.getExternalContext().getRequestMap();
-			List<String> managedBeanKeysToRemove = new ArrayList<String>();
-			Set<Map.Entry<String, Object>> mapEntries = requestScope.entrySet();
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
 
-			if (mapEntries != null) {
+			if ((portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE) ||
+					(portletRequestPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
 
-				for (Map.Entry<String, Object> mapEntry : mapEntries) {
-					String managedBeanKey = mapEntry.getKey();
-					Object obj = mapEntry.getValue();
+				// Remove any managed-beans in request scope. According to the JSF 2.0 JavaDocs for {@link
+				// ExternalContext.getRequestMap}, before a managed-bean is removed from the map, any public no-argument
+				// void return methods annotated with javax.annotation.PreDestroy must be called first. Note that the
+				// bridge {@link RequestAttributeMap.remove(Object)} method will ensure that any @PreDestroy method(s)
+				// are called. The JavaDocs also state that this should only be the case for objects that are actually
+				// managed-beans. Currently the only check we do here is for the {@link ManagedBean} annotation. If
+				// beans are defined via managed-bean entries in faces-config.xml then they will not have their
+				// PreDestroy method(s) invoked. Tackling that case would involve scanning all the faces-config.xml
+				// files in the classpath which is a bit more involved than time currently allows...
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				Map<String, Object> requestScope = facesContext.getExternalContext().getRequestMap();
+				List<String> managedBeanKeysToRemove = new ArrayList<String>();
+				Set<Map.Entry<String, Object>> mapEntries = requestScope.entrySet();
 
-					if (ManagedBeanUtil.hasManagedBeanAnnotation(obj)) {
-						managedBeanKeysToRemove.add(managedBeanKey);
+				if (mapEntries != null) {
+
+					for (Map.Entry<String, Object> mapEntry : mapEntries) {
+						String managedBeanKey = mapEntry.getKey();
+						Object obj = mapEntry.getValue();
+
+						if (ManagedBeanUtil.hasManagedBeanAnnotation(obj)) {
+							managedBeanKeysToRemove.add(managedBeanKey);
+						}
 					}
 				}
-			}
 
-			for (String managedBeanKey : managedBeanKeysToRemove) {
-				requestScope.remove(managedBeanKey);
+				for (String managedBeanKey : managedBeanKeysToRemove) {
+					requestScope.remove(managedBeanKey);
+				}
 			}
 		}
 	}
