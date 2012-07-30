@@ -25,6 +25,11 @@
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<!-- MyFaces will not initialize unless a servlet-mapping to the Faces Servlet is present. -->
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
 	<!-- BEGIN: Compatibility with ICEfaces 1.8 components -->
 	<servlet>
 		<servlet-name>Resource Servlet</servlet-name>
