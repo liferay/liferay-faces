@@ -31,6 +31,7 @@ public class ProductMap extends HashMap<String, Product> {
 
 	static {
 		instance.put(BridgeConstants.ICEFACES, new ProductICEfacesImpl());
+		instance.put(BridgeConstants.JSF, new ProductJSFImpl());
 		instance.put(BridgeConstants.LIFERAY_FACES_ALLOY, new ProductLiferayFacesAlloyImpl());
 		instance.put(BridgeConstants.LIFERAY_FACES_BRIDGE, new ProductLiferayFacesBridgeImpl());
 		instance.put(BridgeConstants.LIFERAY_FACES_PORTAL, new ProductLiferayFacesPortalImpl());

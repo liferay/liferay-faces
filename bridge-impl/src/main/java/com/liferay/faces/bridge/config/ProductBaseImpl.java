@@ -21,6 +21,9 @@ import com.liferay.faces.bridge.BridgeConstants;
  */
 public class ProductBaseImpl implements Product {
 
+	// Private Constants
+	private static final String REGEX_VERSION_DELIMITER = "[.[-]_]";
+
 	// Protected Data Members
 	protected int buildId;
 	protected boolean detected;
@@ -75,7 +78,7 @@ public class ProductBaseImpl implements Product {
 
 		this.version = version;
 
-		String[] versionParts = version.split(BridgeConstants.REGEX_DOT_DELIMITER);
+		String[] versionParts = version.split(REGEX_VERSION_DELIMITER);
 
 		if (versionParts != null) {
 
