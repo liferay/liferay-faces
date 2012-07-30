@@ -22,6 +22,11 @@
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<!-- MyFaces will not initialize unless a servlet-mapping to the Faces Servlet is present. -->
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
 	<!-- Prevent direct access to Facelet view XHTML by the userAgent (browser). --> 
 	<security-constraint>
 		<web-resource-collection>
