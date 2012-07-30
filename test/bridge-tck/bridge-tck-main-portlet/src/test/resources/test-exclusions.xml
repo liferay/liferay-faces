@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<!-- Test excluded because it relies on a (Mojarra) implementation dependency.  
+     I.e. this test will run fine in a Mojarra JSF environment but not in others (like MyFaces) 
+
+     Note:  to run this test you will need to uncomment out the comment in the include-war-modules profile in the TCK's root .pom -->
+
+<entry key="renderPolicyTest"/>
+
+<!-- The following tests are excluded because encoding/supporting the secure URL feature isn't required in the portlet spec
+     so not all containers may support it.
+
+     If your portlet container does support secureURLs you should run this test manually -->
+
+<entry key="encodeActionURLWithSecurityActionTest"/>
+<entry key="encodeActionURLWithInvalidSecurityActionTest"/>
+<entry key="encodeActionURLWithSecurityRenderTest"/>
+<entry key="encodeActionURLWithInvalidSecurityRenderTest"/>
+
+<!-- The following tests are excluded because PreDestroy support/notification relies on servletContext listeners - however when
+     running in a local portal the portletContainer (is likely) executed using servlet cross-context support.  The servlet spec
+     doesn't define if/how a cross-context app's servletContext listener is called when the primary app needs to make a notification.  
+     Thus in a local portlet container these tests often don't work because the bridge isn't notified.  
+
+     If your portlet container does support servletContext listener notification (that a request has ended) you should run these tests manually.
+     For example if you are using a remote (WSRP-based) portlet container, this test should work. -->
+
+<entry key="requestMapPreDestroyRemoveWithinActionTest"/>
+<entry key="sessionMapPreDestroyRemoveTest"/>
+
+</properties>
