@@ -142,7 +142,7 @@ public class IPCPhaseListener implements PhaseListener {
 									parameterValue = parameterValues[0];
 								}
 
-								PublicRenderParameter publicRenderParameter = new PublicRenderParameter(facesContext,
+								PublicRenderParameter publicRenderParameter = new PublicRenderParameterImpl(
 										parameterPrefix, parameterValue, originalModelEL, portletName);
 
 								if (logger.isTraceEnabled()) {
@@ -158,7 +158,7 @@ public class IPCPhaseListener implements PhaseListener {
 									logger.debug("Injecting render parameter=[{0}] value=[{1}] into expression=[{2}]",
 										nonPrefixedParameterName, parameterValue,
 										publicRenderParameter.getModifiedModelEL());
-									invokeHandler = publicRenderParameter.injectIntoModel();
+									invokeHandler = publicRenderParameter.injectIntoModel(facesContext);
 								}
 								else {
 									logger.debug(
@@ -257,13 +257,13 @@ public class IPCPhaseListener implements PhaseListener {
 								parameterValue = parameterValues[0];
 							}
 
-							PublicRenderParameter publicRenderParameter = new PublicRenderParameter(facesContext,
-									parameterPrefix, parameterValue, originalModelEL, portletName);
+							PublicRenderParameter publicRenderParameter = new PublicRenderParameterImpl(parameterPrefix,
+									parameterValue, originalModelEL, portletName);
 
 							if (publicRenderParameter.isForThisPortlet()) {
 
-								String modelValue = publicRenderParameter.getModelValue();
-								boolean modelValueHasChanged = publicRenderParameter.isModelValueChanged();
+								String modelValue = publicRenderParameter.getModelValue(facesContext);
+								boolean modelValueHasChanged = publicRenderParameter.isModelValueChanged(facesContext);
 
 								if (logger.isTraceEnabled()) {
 									logger.trace(
