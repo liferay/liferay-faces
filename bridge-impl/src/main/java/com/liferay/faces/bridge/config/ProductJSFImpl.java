@@ -15,19 +15,32 @@ package com.liferay.faces.bridge.config;
 
 import com.liferay.faces.bridge.BridgeConstants;
 
+
 /**
  * @author  Neil Griffin
  */
 public class ProductJSFImpl extends ProductBaseImpl {
 
+	// Private Constants
+	private static final String SNAPSHOT = "-SNAPSHOT";
+
+	// Private Data Members
+	private boolean mojarra;
+	private String toStringValue;
+
 	public ProductJSFImpl() {
+
 		try {
 			Class<?> jsfImplClass;
+
 			try {
 				this.title = BridgeConstants.MOJARRA;
 				jsfImplClass = Class.forName("com.sun.faces.RIConstants");
 				init(jsfImplClass, BridgeConstants.MOJARRA);
-			} catch (ClassNotFoundException e) {
+				mojarra = true;
+
+			}
+			catch (ClassNotFoundException e) {
 				this.title = BridgeConstants.MYFACES;
 				jsfImplClass = Class.forName("org.apache.myfaces.util.ContainerUtils");
 				init(jsfImplClass, BridgeConstants.MYFACES);
@@ -37,4 +50,25 @@ public class ProductJSFImpl extends ProductBaseImpl {
 			// Ignore -- ICEfaces is likely not present.
 		}
 	}
+
+	@Override
+	public String toString() {
+
+		if (toStringValue == null) {
+			toStringValue = super.toString();
+
+			// Some versions of Mojarra are mislabeled "-SNAPSHOT" (i.e.: "1.2_15-20100816-SNAPSHOT")
+			if (mojarra && (toStringValue != null)) {
+				int pos = toStringValue.indexOf(SNAPSHOT);
+
+				if (pos > 0) {
+					toStringValue = toStringValue.substring(0, pos);
+				}
+			}
+		}
+
+		return toStringValue;
+
+	}
+
 }
