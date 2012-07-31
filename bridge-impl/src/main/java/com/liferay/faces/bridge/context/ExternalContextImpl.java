@@ -76,7 +76,6 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 	private String remoteUser;
 	private Map<String, Object> requestCookieMap;
 	private Locale requestLocale;
-	private String responseContentType;
 	private Principal userPrincipal;
 
 	public ExternalContextImpl(PortletContext portletContext, PortletRequest portletRequest,
@@ -202,16 +201,6 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 
 		// Initialize the request locales.
 		requestLocales = new LocaleIterator(portletRequest.getLocales());
-
-		// Initialize the response content type.
-		if (portletResponse instanceof MimeResponse) {
-			MimeResponse mimeResponse = (MimeResponse) portletResponse;
-			responseContentType = mimeResponse.getContentType();
-
-			if (responseContentType == null) {
-				responseContentType = portletRequest.getResponseContentType();
-			}
-		}
 	}
 
 	@Override
@@ -669,19 +658,28 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 	}
 
 	/**
-	 * @see  javax.faces.context.ExternalContext#getResponseContentType()
+	 * @see  {@link ExternalContext#getResponseContentType()}
 	 */
 	@Override
 	public String getResponseContentType() {
 
-		if (portletResponse instanceof StateAwareResponse) {
+		if (portletResponse instanceof MimeResponse) {
+
+			MimeResponse mimeResponse = (MimeResponse) portletResponse;
+
+			String responseContentType = mimeResponse.getContentType();
+
+			if (responseContentType == null) {
+				responseContentType = portletRequest.getResponseContentType();
+			}
+
+			return responseContentType;
+		}
+		else {
 
 			// TCK TestPage173: getResponseContentTypeActionTest
 			// TCK TestPage174: getResponseContentTypeEventTest
 			throw new IllegalStateException();
-		}
-		else {
-			return responseContentType;
 		}
 	}
 
