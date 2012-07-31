@@ -33,7 +33,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class BridgePhaseEventImpl extends BridgePhaseBaseImpl {
+public class BridgePhaseEventImpl extends BridgePhaseCompatImpl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgePhaseEventImpl.class);

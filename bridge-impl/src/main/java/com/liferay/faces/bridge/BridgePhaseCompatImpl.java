@@ -21,6 +21,10 @@ import javax.faces.context.ExceptionHandler;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
+import javax.portlet.faces.Bridge.PortletPhase;
 
 
 /**
@@ -28,7 +32,19 @@ import javax.faces.event.ExceptionQueuedEventContext;
  *
  * @author  Neil Griffin
  */
-public abstract class BridgePhaseCompatImpl implements BridgePhase {
+public abstract class BridgePhaseCompatImpl extends BridgePhaseBaseImpl {
+
+	public BridgePhaseCompatImpl(PortletConfig portletConfig) {
+		super(portletConfig);
+	}
+
+	@Override
+	protected void init(PortletRequest portletRequest,
+			PortletResponse portletResponse, PortletPhase portletPhase) {
+		
+		// This is simply a pass-thru for JSF2.
+		super.init(portletRequest, portletResponse, portletPhase);
+	}
 
 	protected void handleJSF2ResourceRequest(FacesContext facesContext) throws IOException {
 		ResourceHandler resourceHandler = facesContext.getApplication().getResourceHandler();
