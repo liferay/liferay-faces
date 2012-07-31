@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.test.bean;
+package com.liferay.faces.demos.bean;
 
 import java.util.Enumeration;
 import java.util.Map;
@@ -26,7 +26,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
 import javax.portlet.faces.preference.Preference;
 
-import com.liferay.faces.test.util.FacesMessageUtil;
+import com.liferay.faces.demos.util.FacesMessageUtil;
 
 
 /**

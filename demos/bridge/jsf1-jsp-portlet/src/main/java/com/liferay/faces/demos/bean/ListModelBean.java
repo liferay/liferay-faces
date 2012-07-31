@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.test.bean;
+package com.liferay.faces.demos.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,8 +19,8 @@ import java.util.List;
 
 import javax.faces.model.SelectItem;
 
-import com.liferay.faces.test.dto.City;
-import com.liferay.faces.test.dto.Province;
+import com.liferay.faces.demos.dto.City;
+import com.liferay.faces.demos.dto.Province;
 
 
 /**
