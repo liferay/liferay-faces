@@ -3,14 +3,6 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
-	<!-- Set the JSF 2 PROJECT_STAGE to Development so that the JSF implementation will do the following at runtime: -->
-	<!-- 1. Log more verbose messages. -->
-	<!-- 2. Render tips and/or warnings in the view markup. -->
-	<!-- 3. Cause the default ExceptionHandler to display a developer-friendly error page. -->
-	<context-param>
-		<param-name>javax.faces.PROJECT_STAGE</param-name>
-		<param-value>Development</param-value>
-	</context-param>
 	<context-param>
 		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
 		<param-value>.jspx</param-value>
@@ -54,4 +46,5 @@
 	<security-role>
 		<role-name>nobody</role-name>
 	</security-role>
+
 </web-app>
