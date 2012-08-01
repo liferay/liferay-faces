@@ -15,8 +15,7 @@ package com.liferay.faces.bridge.component;
 
 import javax.el.MethodExpression;
 import javax.faces.component.UIInput;
-import javax.faces.event.AbortProcessingException;
-import javax.faces.event.FacesEvent;
+import javax.faces.context.FacesContext;
 
 
 /**
@@ -24,23 +23,42 @@ import javax.faces.event.FacesEvent;
  */
 public class HtmlInputFileCompat extends UIInput {
 
-	// Private Constants
+	// Public Constants
 	public static final String FILE_UPLOAD_LISTENER = "fileUploadListener";
 
-	@Override
-	public void broadcast(FacesEvent facesEvent) throws AbortProcessingException {
-		super.broadcast(facesEvent);
+	// Private Data Members
+	private MethodExpression fileUploadListener;
+	private String multiple;
+	private String style;
+	private String styleClass;
 
-		// no-op for JSF 1.2
+	@Override
+	public void restoreState(FacesContext context, Object state) {
+		Object[] values = (Object[]) state;
+		super.restoreState(context, values[0]);
+		fileUploadListener = (javax.el.MethodExpression) values[1];
+		multiple = (java.lang.String) values[2];
+		style = (java.lang.String) values[3];
+		styleClass = (java.lang.String) values[4];
+	}
+
+	@Override
+	public Object saveState(FacesContext context) {
+		Object[] values = new Object[5];
+		values[0] = super.saveState(context);
+		values[1] = fileUploadListener;
+		values[2] = multiple;
+		values[3] = style;
+		values[4] = styleClass;
+
+		return ((Object) values);
 	}
 
 	public MethodExpression getFileUploadListener() {
-
-		// no-op for JSF 1.2
-		return null;
+		return fileUploadListener;
 	}
 
 	public void setFileUploadListener(MethodExpression fileUploadListener) {
-		// no-op for JSF 1.2
+		this.fileUploadListener = fileUploadListener;
 	}
 }
