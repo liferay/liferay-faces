@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ice="http://www.icesoft.com/icefaces/component" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ice:portlet styleClass="example-icefaces-portlet">
+		<ui:include src="styling.xhtml" />
+		<ice:form id="f" partialSubmit="true" styleClass="example-icefaces-portlet">
+			<ice:dataTable id="c" value="#{customersModelBean.allCustomers}" var="customer">
+				<ice:column>
+					<ice:commandButton actionListener="#{customersBackingBean.selectionListener}" image="/images/edit.gif"
+						value="#{customer}" />
+					<ui:remove>
+						<!-- 					<ice:rowSelector multiple="false" selectionListener="#{customersBackingBean.selectionListener}" -->
+						<!-- 						value="#{customer.selected}" /> -->
+					</ui:remove>
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<ice:outputText value="#{i18n['customerId']}" />
+					</f:facet>
+					<ice:outputText value="#{customer.customerId}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<ice:outputText value="#{i18n['firstName']}" />
+					</f:facet>
+					<ice:outputText value="#{customer.firstName}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<ice:outputText value="#{i18n['lastName']}" />
+					</f:facet>
+					<ice:outputText value="#{customer.lastName}" />
+				</ice:column>
+			</ice:dataTable>
+		</ice:form>
+	</ice:portlet>
+
+</f:view>

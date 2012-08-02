@@ -1,0 +1,49 @@
+.example-icefaces-portlet .iceDatTbl {
+	margin: 0px;
+}
+
+.example-icefaces-portlet .iceOutConStat {
+	margin: 0px;
+}
+
+.example-icefaces-portlet .iceSelOneMnu {
+	padding: 1px 1px 1px 1px;
+}
+
+.example-icefaces-portlet .iceInpTxt {
+	margin: 0px;
+}
+
+.example-icefaces-portlet .iceOutLbl {
+	padding: 1px 4px 1px 0px;
+}
+
+.example-icefaces-portlet .icePnlClpsbl, .example-icefaces-portlet .icePnlClpsblColpsd {
+	padding: 5px 5px 5px 5px;
+}
+
+.example-icefaces-portlet .icePnlClpsblHdr div, .icePnlClpsblHdr-dis div {
+    background-repeat: no-repeat;
+    background-position: left top;
+    height: 17px;
+	background-image: url( "../images/arrow-down.png" );
+}
+
+.example-icefaces-portlet .icePnlClpsblHdr span, .icePnlClpsblHdr-dis span {
+	color: #111552;
+	font-style: italic;
+	padding-left: 20px;
+}
+
+.example-icefaces-portlet .icePnlClpsblColpsdHdr div, .icePnlClpsblColpsdHdr-dis div{
+    background-repeat: no-repeat;
+    background-position: left top;
+    height: 17px;
+	background-image: url( "../images/arrow-collapsed.png" );
+}
+
+.example-icefaces-portlet .icePnlClpsblColpsdHdr span, .icePnlClpsblColpsdHdr-dis span{
+	color: #111552;
+	font-style: italic;
+	padding-left: 20px;
+}

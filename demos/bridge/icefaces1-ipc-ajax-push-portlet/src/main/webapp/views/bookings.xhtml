@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ice:portlet styleClass="example-icefaces-portlet">
+		<ui:include src="styling.xhtml" />
+		<ice:form id="f" partialSubmit="true" styleClass="example-icefaces-portlet">
+			<ice:panelCollapsible expanded="true" rendered="#{customersModelBean.selected != null}">
+				<f:facet name="header">
+					<ice:panelGroup styleClass="iconPlaceHolder">
+						<ice:outputText value="#{i18n['customer']}" />
+					</ice:panelGroup>
+				</f:facet>
+				<ice:panelGrid columns="3">
+					<ice:outputLabel for="firstName" value="#{i18n['firstName']}" />
+					<ice:inputText id="firstName" partialSubmit="true" required="true" value="#{customersModelBean.selected.firstName}"
+						valueChangeListener="#{customersModelBean.valueChangeListener}" />
+					<ice:message for="firstName" />
+					<ice:outputLabel for="lastName" value="#{i18n['lastName']}" />
+					<ice:inputText id="lastName" partialSubmit="true" required="true" value="#{customersModelBean.selected.lastName}"
+						valueChangeListener="#{customersModelBean.valueChangeListener}" />
+					<ice:message for="lastName" />
+				</ice:panelGrid>
+			</ice:panelCollapsible>
+			<ui:repeat value="#{customersModelBean.selected.bookings}" var="booking">
+				<ice:panelCollapsible expanded="true">
+					<f:facet name="header">
+						<ice:panelGroup styleClass="iconPlaceHolder">
+							<ice:outputText value="#{i18n['booking']}" />
+						</ice:panelGroup>
+					</f:facet>
+					<ice:panelGrid columns="3">
+						<ice:outputLabel for="bookingTypeId" value="#{i18n['bookingTypeId']}" />
+						<ice:selectOneMenu partialSubmit="true" required="true" value="#{booking.bookingTypeId}">
+							<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
+							<f:selectItems value="#{listModelBean.bookingTypeSelectItems}" />
+						</ice:selectOneMenu>
+						<ice:message for="bookingTypeId" />
+						<ice:outputLabel for="startDate" value="#{i18n['startDate']}" />
+						<ice:selectInputDate partialSubmit="true" renderAsPopup="true" required="true" value="#{booking.startDate}" />
+						<ice:message for="startDate" />
+						<ice:outputLabel for="finishDate" value="#{i18n['finishDate']}" />
+						<ice:selectInputDate partialSubmit="true" renderAsPopup="true" required="true" value="#{booking.finishDate}" />
+						<ice:message for="finishDate" />
+					</ice:panelGrid>
+				</ice:panelCollapsible>
+			</ui:repeat>
+		</ice:form>
+	</ice:portlet>
+</f:view>
