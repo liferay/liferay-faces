@@ -11,27 +11,23 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.product;
 
 /**
  * @author  Neil Griffin
  */
-public interface Product {
+public class ProductLiferayFacesPortalImpl extends ProductBaseImpl {
 
-	@Override
-	String toString();
+	public ProductLiferayFacesPortalImpl() {
 
-	int getBuildId();
+		try {
+			this.title = ProductConstants.LIFERAY_FACES_PORTAL;
 
-	boolean isDetected();
-
-	int getMajorVersion();
-
-	int getMinorVersion();
-
-	int getRevisionVersion();
-
-	String getTitle();
-
-	String getVersion();
+			Class<?> auiPanelClass = Class.forName("com.liferay.faces.portal.context.LiferayFacesContext");
+			init(auiPanelClass, ProductConstants.LIFERAY_FACES_PORTAL);
+		}
+		catch (Exception e) {
+			// Ignore -- ICEfaces is likely not present.
+		}
+	}
 }

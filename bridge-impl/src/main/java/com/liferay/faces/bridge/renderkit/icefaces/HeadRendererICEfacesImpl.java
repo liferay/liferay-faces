@@ -23,10 +23,10 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.component.ResourceComponent;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadRendererBridgeImpl;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -79,9 +79,9 @@ public class HeadRendererICEfacesImpl extends HeadRendererBridgeImpl {
 					primeFacesThemeName.equals(ICEFACES_THEME_NAME_RIME)) {
 				StringBuilder buf = new StringBuilder();
 				buf.append(ICEFACES_THEME_DIR);
-				buf.append(BridgeConstants.CHAR_FORWARD_SLASH);
+				buf.append(StringPool.FORWARD_SLASH);
 				buf.append(primeFacesThemeName);
-				buf.append(BridgeConstants.CHAR_FORWARD_SLASH);
+				buf.append(StringPool.FORWARD_SLASH);
 				buf.append(ICEFACES_THEME_RESOURCE_NAME);
 				resourceName = buf.toString();
 				resourceLibrary = ICEFACES_LIBRARY_NAME_ACE;

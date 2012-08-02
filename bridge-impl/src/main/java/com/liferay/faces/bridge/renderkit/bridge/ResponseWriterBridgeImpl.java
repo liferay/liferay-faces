@@ -22,8 +22,8 @@ import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.ResponseWriter;
 import javax.faces.context.ResponseWriterWrapper;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.renderkit.html_basic.BodyRenderer;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -220,7 +220,7 @@ public class ResponseWriterBridgeImpl extends ResponseWriterWrapper {
 
 				logger.trace("filtering marker");
 
-				int greaterThanPos = data.indexOf(BridgeConstants.CHAR_GREATER_THAN);
+				int greaterThanPos = data.indexOf(StringPool.GREATER_THAN);
 
 				if (greaterThanPos > 0) {
 					len -= (greaterThanPos + 1);

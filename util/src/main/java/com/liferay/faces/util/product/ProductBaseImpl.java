@@ -11,9 +11,9 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.product;
 
-import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -42,7 +42,7 @@ public class ProductBaseImpl implements Product {
 
 			if (title != null) {
 				buf.append(title);
-				buf.append(BridgeConstants.CHAR_SPACE);
+				buf.append(StringPool.SPACE);
 			}
 
 			if (version != null) {

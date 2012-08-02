@@ -11,9 +11,9 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.product;
 
-import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -33,9 +33,9 @@ public class ProductICEfacesImpl extends ProductBaseImpl {
 
 			StringBuilder buf = new StringBuilder();
 			buf.append(this.majorVersion);
-			buf.append(BridgeConstants.CHAR_PERIOD);
+			buf.append(StringPool.PERIOD);
 			buf.append(this.minorVersion);
-			buf.append(BridgeConstants.CHAR_PERIOD);
+			buf.append(StringPool.PERIOD);
 			buf.append(this.revisionVersion);
 			this.version = buf.toString();
 

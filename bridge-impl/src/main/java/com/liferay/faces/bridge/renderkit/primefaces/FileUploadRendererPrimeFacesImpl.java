@@ -34,13 +34,13 @@ import javax.faces.render.Renderer;
 
 import org.apache.commons.fileupload.FileItem;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.context.map.RequestParameterMap;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.bridge.renderkit.html_basic.RendererWrapper;
+import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -228,7 +228,7 @@ public class FileUploadRendererPrimeFacesImpl extends RendererWrapper {
 		}
 
 		public String getString() {
-			return getString(BridgeConstants.UTF8);
+			return getString(StringPool.UTF8);
 		}
 
 		public String getString(String encoding) {

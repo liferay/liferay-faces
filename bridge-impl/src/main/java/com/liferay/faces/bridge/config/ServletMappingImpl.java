@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.bridge.config;
 
-import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -29,7 +29,7 @@ public class ServletMappingImpl implements ServletMapping {
 	private static final Logger logger = LoggerFactory.getLogger(ServletMappingImpl.class);
 
 	// Private Strings
-	private static final String EXTENSION_WILDCARD = BridgeConstants.CHAR_ASTERISK + BridgeConstants.CHAR_PERIOD;
+	private static final String EXTENSION_WILDCARD = StringPool.ASTERISK + StringPool.PERIOD;
 
 	// Private Data Members
 	private String extension;
@@ -45,12 +45,10 @@ public class ServletMappingImpl implements ServletMapping {
 
 			// If the specified urlPattern is path-mapped (like /views/foo/bar/*), then set a flag and remember the
 			// path (/views/foo/bar).
-			if (urlPattern.startsWith(BridgeConstants.CHAR_FORWARD_SLASH) &&
-					urlPattern.endsWith(BridgeConstants.CHAR_ASTERISK)) {
+			if (urlPattern.startsWith(StringPool.FORWARD_SLASH) && urlPattern.endsWith(StringPool.ASTERISK)) {
 				pathMapped = true;
 				path = urlPattern.substring(0,
-						urlPattern.length() - BridgeConstants.CHAR_FORWARD_SLASH.length() -
-						BridgeConstants.CHAR_ASTERISK.length());
+						urlPattern.length() - StringPool.FORWARD_SLASH.length() - StringPool.ASTERISK.length());
 			}
 
 			// Otherwise, if the specified urlPattern is extension-mapped (like *.faces), then set a flag and remember
@@ -59,7 +57,7 @@ public class ServletMappingImpl implements ServletMapping {
 
 				if (urlPattern.startsWith(EXTENSION_WILDCARD)) {
 					extensionMapped = true;
-					extension = urlPattern.substring(BridgeConstants.CHAR_ASTERISK.length());
+					extension = urlPattern.substring(StringPool.ASTERISK.length());
 				}
 			}
 		}
@@ -102,7 +100,7 @@ public class ServletMappingImpl implements ServletMapping {
 					urlPattern, extension, uri, match);
 			}
 			else if (pathMapped) {
-				int pos = uri.lastIndexOf(BridgeConstants.CHAR_FORWARD_SLASH);
+				int pos = uri.lastIndexOf(StringPool.FORWARD_SLASH);
 				String uriPath = uri;
 
 				if (pos > 0) {

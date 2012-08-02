@@ -17,16 +17,16 @@ import java.net.URISyntaxException;
 
 import javax.portlet.PortletRequest;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigMockImpl;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgeContextMockImpl;
 import com.liferay.faces.portlet.PortletRequestMockImpl;
-
-import junit.framework.Assert;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -119,7 +119,7 @@ public class BridgeURLTest {
 
 		try {
 			Assert.assertTrue(newBridgeURL("http://www.liferay.com").getContextRelativePath().equals(
-					BridgeConstants.EMPTY));
+					StringPool.EMPTY));
 			Assert.assertTrue(newBridgeURL("/views/foo.xhtml").getContextRelativePath().equals(
 					"/views/foo.xhtml"));
 			Assert.assertTrue(newBridgeURL(CONTEXT_PATH + "/views/foo.xhtml")

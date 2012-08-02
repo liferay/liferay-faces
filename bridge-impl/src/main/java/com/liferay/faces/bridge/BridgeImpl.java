@@ -35,6 +35,7 @@ import javax.portlet.faces.BridgeUninitializedException;
 
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -125,14 +126,14 @@ public class BridgeImpl implements Bridge {
 		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss,SSS");
 		String timestamp = dateFormat.format(Calendar.getInstance().getTime());
 		logMessage.append(timestamp);
-		logMessage.append(BridgeConstants.CHAR_SPACE);
+		logMessage.append(StringPool.SPACE);
 		logMessage.append("INFO");
-		logMessage.append(BridgeConstants.CHAR_SPACE);
-		logMessage.append(BridgeConstants.CHAR_SPACE);
+		logMessage.append(StringPool.SPACE);
+		logMessage.append(StringPool.SPACE);
 		logMessage.append("[BridgeImpl] Initializing");
-		logMessage.append(BridgeConstants.CHAR_SPACE);
+		logMessage.append(StringPool.SPACE);
 		logMessage.append(getTitle());
-		logMessage.append(BridgeConstants.CHAR_SPACE);
+		logMessage.append(StringPool.SPACE);
 		logMessage.append(getVersion());
 		System.out.println(logMessage.toString());
 		this.initialized = true;
