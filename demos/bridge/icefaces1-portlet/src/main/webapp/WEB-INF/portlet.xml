@@ -6,7 +6,7 @@
 	<portlet>
 		<portlet-name>1</portlet-name>
 		<display-name>ICEfaces1</display-name>
-		<portlet-class>com.liferay.faces.bridge.GenericICEfacesPortlet</portlet-class>
+		<portlet-class>com.icesoft.faces.webapp.http.portlet.MainPortlet</portlet-class>
 		<init-param>
 			<name>com.icesoft.faces.VIEW</name>
 			<value>/views/portletViewMode.iface</value>
