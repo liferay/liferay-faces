@@ -24,7 +24,15 @@ public class ProductICEfacesImpl extends ProductBaseImpl {
 	public ProductICEfacesImpl() {
 
 		try {
-			Class<?> productInfoClass = Class.forName("org.icefaces.application.ProductInfo");
+			Class<?> productInfoClass = null;
+
+			try {
+				productInfoClass = Class.forName("org.icefaces.application.ProductInfo");
+			}
+			catch (ClassNotFoundException e) {
+				productInfoClass = Class.forName("com.icesoft.faces.application.ProductInfo");
+			}
+
 			this.buildId = parseInt((String) productInfoClass.getDeclaredField("REVISION").get(String.class));
 			this.majorVersion = parseInt((String) productInfoClass.getDeclaredField("PRIMARY").get(String.class));
 			this.minorVersion = parseInt((String) productInfoClass.getDeclaredField("SECONDARY").get(String.class));
