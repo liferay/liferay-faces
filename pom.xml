@@ -77,6 +77,7 @@
 	<properties>
 		<codename>Athens</codename>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
+		<icefaces1.version>1.8.2</icefaces1.version>
 		<log4j.version>1.2.14</log4j.version>
 		<mojarra.version>1.2_15</mojarra.version>
 		<myfaces.version>2.1.6</myfaces.version>
@@ -410,6 +411,11 @@
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
+				<groupId>com.sun.facelets</groupId>
+				<artifactId>jsf-facelets</artifactId>
+				<version>1.1.15</version>
+			</dependency>
+			<dependency>
 				<groupId>commons-fileupload</groupId>
 				<artifactId>commons-fileupload</artifactId>
 				<version>1.2.2</version>
@@ -484,6 +490,37 @@
 				<groupId>org.apache.myfaces.core</groupId>
 				<artifactId>myfaces-impl</artifactId>
 				<version>${myfaces.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.icefaces</groupId>
+				<artifactId>icefaces</artifactId>
+				<version>${icefaces1.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.el</groupId>
+						<artifactId>el-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.servlet</groupId>
+						<artifactId>servlet-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.icefaces</groupId>
+				<artifactId>icefaces-comps</artifactId>
+				<version>${icefaces1.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.icefaces</groupId>
+				<artifactId>icefaces-facelets</artifactId>
+				<version>${icefaces1.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.el</groupId>
+						<artifactId>el-api</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.jboss.seam</groupId>
