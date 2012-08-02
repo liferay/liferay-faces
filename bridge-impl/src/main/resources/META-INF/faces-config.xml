@@ -62,4 +62,36 @@
 			<renderer-class>com.liferay.faces.bridge.renderkit.bridge.InputFileRenderer</renderer-class>
 		</renderer>
 	</render-kit>
+	<render-kit>
+		<renderer>
+			<description>Default renderer for portlet:renderURL tag</description>
+			<component-family>javax.faces.Output</component-family>
+			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.RenderURLRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.RenderURLRenderer</renderer-class>
+		</renderer>
+	</render-kit>
+	<render-kit>
+		<renderer>
+			<description>Default renderer for portlet:actionURL tag</description>
+			<component-family>javax.faces.Output</component-family>
+			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.ActionURLRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.ActionURLRenderer</renderer-class>
+		</renderer>
+	</render-kit>
+	<render-kit>
+		<renderer>
+			<description>Default renderer for portlet:resourceURL tag</description>
+			<component-family>javax.faces.Output</component-family>
+			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.ResourceURLRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.ResourceURLRenderer</renderer-class>
+		</renderer>
+	</render-kit>
+	<render-kit>
+		<renderer>
+			<description>Default renderer for portlet:namespace tag</description>
+			<component-family>javax.faces.Output</component-family>
+			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.NameSpaceRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.NameSpaceRenderer</renderer-class>
+		</renderer>
+	</render-kit>
 </faces-config>

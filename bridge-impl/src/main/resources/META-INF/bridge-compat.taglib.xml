@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE facelet-taglib PUBLIC "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN" "http://java.sun.com/dtd/facelet-taglib_1_0.dtd">
+<facelet-taglib>
+	<namespace>http://portletfaces.org/bridge</namespace>
+	<tag>
+		<tag-name>inputFile</tag-name>
+		<component>
+			<component-type>javax.faces.HtmlInputFile</component-type>
+			<handler-class>com.liferay.faces.bridge.component.HtmlInputFileHandler</handler-class>
+		</component>
+	</tag>
+</facelet-taglib>
