@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -42,9 +43,12 @@ public class LiferayPortalUtil {
 			Class<?> portalUtilClass = Class.forName(PORTAL_UTIL_FQCN);
 			Method method = portalUtilClass.getMethod(METHOD_NAME_GET_PORTLET_ID, new Class[] { PortletRequest.class });
 			portletId = (String) method.invoke(null, new Object[] { portletRequest });
+
 			if (portletRequest.getParameter(BridgeConstants.WSRP) != null) {
-				// For some reason, when running as a WSRP producer, the underscores are missing from the beginning and end...
-				portletId = BridgeConstants.CHAR_UNDERSCORE + portletId + BridgeConstants.CHAR_UNDERSCORE;
+
+				// For some reason, when running as a WSRP producer, the underscores are missing from the beginning
+				// and end...
+				portletId = StringPool.UNDERSCORE + portletId + StringPool.UNDERSCORE;
 			}
 		}
 		catch (Exception e) {

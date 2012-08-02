@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.product;
 
 import java.io.IOException;
 import java.io.InputStream;

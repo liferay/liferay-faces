@@ -22,10 +22,10 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.PortletPhase;
 import javax.portlet.faces.BridgeUtil;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -50,6 +50,7 @@ public class BridgeActionURLImpl extends BridgeResponseURLImpl implements Bridge
 
 		// If this is executing during the ACTION_PHASE of the portlet lifecycle, then
 		PortletPhase portletRequestPhase = BridgeUtil.getPortletRequestPhase();
+
 		if (portletRequestPhase == Bridge.PortletPhase.ACTION_PHASE) {
 
 			// The Mojarra MultiViewHandler.getResourceURL(String) method is implemented in such a way that it calls
@@ -70,8 +71,8 @@ public class BridgeActionURLImpl extends BridgeResponseURLImpl implements Bridge
 
 			// Otherwise, if the URL string starts with a "#" character, or it's an absolute URL that is external to
 			// this portlet, then simply return the URL string as required by the Bridge Spec.
-			else if (url.startsWith(BridgeConstants.CHAR_POUND) || (isAbsolute() && isExternal())) {
-				
+			else if (url.startsWith(StringPool.POUND) || (isAbsolute() && isExternal())) {
+
 				// TCK TestPage084: encodeActionURLPoundCharTest
 				baseURL = new BaseURLNonEncodedStringImpl(url, getParameterMap());
 			}
@@ -106,7 +107,7 @@ public class BridgeActionURLImpl extends BridgeResponseURLImpl implements Bridge
 				}
 				else {
 					String urlWithModifiedParameters = _toString(modeChanged);
-					
+
 					if (portletRequestPhase == Bridge.PortletPhase.EVENT_PHASE) {
 						baseURL = new BaseURLNonEncodedStringImpl(urlWithModifiedParameters);
 					}

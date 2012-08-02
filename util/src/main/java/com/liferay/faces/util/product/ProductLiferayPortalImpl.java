@@ -11,11 +11,9 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.product;
 
 import java.lang.reflect.Method;
-
-import com.liferay.faces.bridge.BridgeConstants;
 
 
 /**
@@ -26,7 +24,7 @@ public class ProductLiferayPortalImpl extends ProductBaseImpl {
 	public ProductLiferayPortalImpl() {
 
 		try {
-			this.title = BridgeConstants.LIFERAY_PORTAL;
+			this.title = ProductConstants.LIFERAY_PORTAL;
 
 			Class<?> releaseInfoClass = Class.forName("com.liferay.portal.kernel.util.ReleaseInfo");
 			Class<?>[] emptyClassArray = new Class[] {};

@@ -18,6 +18,7 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -56,9 +57,10 @@ public class ViewHandlerImpl extends ViewHandlerCompatImpl {
 		String queryString = null;
 
 		if (viewId != null) {
-			
+
 			viewId = evaluateExpressionJSF1(facesContext, viewId);
-			int pos = viewId.indexOf(BridgeConstants.CHAR_QUESTION_MARK);
+
+			int pos = viewId.indexOf(StringPool.QUESTION_MARK);
 
 			if (pos > 0) {
 				queryString = viewId.substring(pos);
@@ -100,11 +102,11 @@ public class ViewHandlerImpl extends ViewHandlerCompatImpl {
 
 		if (viewId != null) {
 			boolean replacedDotChars = false;
-			int questionMarkPos = viewId.indexOf(BridgeConstants.CHAR_QUESTION_MARK);
+			int questionMarkPos = viewId.indexOf(StringPool.QUESTION_MARK);
 
 			if (questionMarkPos > 0) {
 
-				int dotPos = viewId.indexOf(BridgeConstants.CHAR_PERIOD, questionMarkPos);
+				int dotPos = viewId.indexOf(StringPool.PERIOD, questionMarkPos);
 
 				if (dotPos > 0) {
 					String queryString = viewId.substring(questionMarkPos);
@@ -118,7 +120,7 @@ public class ViewHandlerImpl extends ViewHandlerCompatImpl {
 			actionURL = super.getActionURL(facesContext, viewId);
 
 			if (replacedDotChars) {
-				actionURL = actionURL.replaceAll(DOT_REPLACEMENT, BridgeConstants.CHAR_PERIOD);
+				actionURL = actionURL.replaceAll(DOT_REPLACEMENT, StringPool.PERIOD);
 			}
 		}
 

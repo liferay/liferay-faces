@@ -19,11 +19,12 @@ import javax.faces.context.ExternalContext;
 import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.config.Product;
-import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.util.ManagedBeanUtil;
 import com.liferay.faces.util.map.AbstractPropertyMap;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
+import com.liferay.faces.util.product.Product;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -37,7 +38,7 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 
 		// Versions of Liferay Portal prior to 6.1 have a bug in PortletRequest.removeAttribute(String) that needs to
 		// be worked-around in this class. See: http://issues.liferay.com/browse/FACES-1233
-		Product liferay = ProductMap.getInstance().get(BridgeConstants.LIFERAY_PORTAL);
+		Product liferay = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
 		FACES_1233_WORKAROUND_ENABLED = (liferay.isDetected() && (liferay.getBuildId() < 6100));
 	}
 

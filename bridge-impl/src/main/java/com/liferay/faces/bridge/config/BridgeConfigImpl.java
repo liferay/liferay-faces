@@ -40,7 +40,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgePhaseFactory;
 import com.liferay.faces.bridge.application.ViewHandlerFactory;
 import com.liferay.faces.bridge.application.view.BridgeWriteBehindSupportFactory;
@@ -53,8 +52,10 @@ import com.liferay.faces.bridge.scope.BridgeRequestScopeCacheFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
 import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -333,7 +334,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 				defaultSuffixParam = ViewHandler.DEFAULT_SUFFIX;
 			}
 
-			defaultSuffixes = Arrays.asList(defaultSuffixParam.split(BridgeConstants.CHAR_SPACE));
+			defaultSuffixes = Arrays.asList(defaultSuffixParam.split(StringPool.SPACE));
 
 			// If they don't exist explicitly in web.xml, then setup implicit servlet-mapping entries to the default
 			// suffixes.
@@ -352,7 +353,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 				}
 
 				if (!found) {
-					String urlPattern = BridgeConstants.CHAR_ASTERISK + defaultSuffix;
+					String urlPattern = StringPool.ASTERISK + defaultSuffix;
 					ServletMapping implicitFacesServletMapping = new ServletMappingImpl(urlPattern);
 					facesServletMappings.add(implicitFacesServletMapping);
 					logger.debug("Added implicit extension-mapped servlet-mapping for urlPattern=[{0}]", urlPattern);

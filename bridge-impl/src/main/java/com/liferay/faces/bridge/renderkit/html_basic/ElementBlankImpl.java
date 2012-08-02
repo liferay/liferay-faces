@@ -13,7 +13,8 @@
  */
 package com.liferay.faces.bridge.renderkit.html_basic;
 
-import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.util.lang.StringPool;
+
 
 /**
  * This implementation is a special case that is meant to be used when JSF component renderers do not properly call
@@ -24,7 +25,7 @@ import com.liferay.faces.bridge.BridgeConstants;
 public class ElementBlankImpl extends ElementImpl {
 
 	public ElementBlankImpl() {
-		super(BridgeConstants.EMPTY);
+		super(StringPool.EMPTY);
 	}
 
 	@Override

@@ -11,11 +11,11 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.product;
 
 import java.lang.reflect.Method;
 
-import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -26,13 +26,13 @@ public class ProductRichFacesImpl extends ProductBaseImpl {
 	public ProductRichFacesImpl() {
 
 		try {
-			this.title = BridgeConstants.RICHFACES;
+			this.title = ProductConstants.RICHFACES;
 			Class<?> versionBeanClass = Class.forName("org.richfaces.VersionBean");
 			Object versionObj = versionBeanClass.getDeclaredField("VERSION").get(Object.class);
 			Method method = versionObj.getClass().getMethod("getVersion", new Class[] {});
 			String version = (String) method.invoke(versionObj, (Object[]) null);
 			if (version != null) {
-				version = version.replaceFirst("[^0-9]*", BridgeConstants.EMPTY);
+				version = version.replaceFirst("[^0-9]*", StringPool.EMPTY);
 				initVersionInfo(version);
 			}
 			if (this.majorVersion > 0) {

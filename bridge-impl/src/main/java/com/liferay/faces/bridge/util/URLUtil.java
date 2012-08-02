@@ -21,6 +21,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -41,7 +42,7 @@ public class URLUtil {
 
 			if (pos > 0) {
 				String queryString = url.substring(pos + 1);
-				queryString = queryString.replaceAll(BridgeConstants.ENCODED_AMERSAND, BridgeConstants.CHAR_AMPERSAND);
+				queryString = queryString.replaceAll(StringPool.AMERSAND_ENCODED, StringPool.AMPERSAND);
 
 				if ((queryString != null) && (queryString.length() > 0)) {
 
@@ -54,7 +55,7 @@ public class URLUtil {
 
 							if (nameValueArray.length == 1) {
 								String name = nameValueArray[0];
-								String value = BridgeConstants.EMPTY;
+								String value = StringPool.EMPTY;
 								parameterMapValuesArray.put(name, new String[] { value });
 							}
 							else if (nameValueArray.length == 2) {

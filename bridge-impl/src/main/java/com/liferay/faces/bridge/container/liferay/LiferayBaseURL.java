@@ -32,6 +32,7 @@ import javax.portlet.WindowState;
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.util.FacesURLEncoder;
 import com.liferay.faces.bridge.util.URLParameter;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -69,21 +70,21 @@ public abstract class LiferayBaseURL implements BaseURL {
 
 	public String encode(String value) {
 
-		String encodedValue = BridgeConstants.EMPTY;
+		String encodedValue = StringPool.EMPTY;
 
 		if (value != null) {
 
 			if (value.length() == 0) {
-				encodedValue = BridgeConstants.CHAR_SPACE;
+				encodedValue = StringPool.SPACE;
 			}
 			else {
 
 				try {
-					encodedValue = URLEncoder.encode(value, BridgeConstants.UTF8);
+					encodedValue = URLEncoder.encode(value, StringPool.UTF8);
 				}
 				catch (UnsupportedEncodingException e) {
 					logger.error(e);
-					encodedValue = BridgeConstants.CHAR_SPACE;
+					encodedValue = StringPool.SPACE;
 				}
 			}
 		}
@@ -129,11 +130,11 @@ public abstract class LiferayBaseURL implements BaseURL {
 			// Always add the p_p_id parameter
 			String parameterValue = responseNamespace;
 
-			if (parameterValue.startsWith(BridgeConstants.CHAR_UNDERSCORE)) {
+			if (parameterValue.startsWith(StringPool.UNDERSCORE)) {
 				parameterValue = parameterValue.substring(1);
 			}
 
-			if (parameterValue.endsWith(BridgeConstants.CHAR_UNDERSCORE)) {
+			if (parameterValue.endsWith(StringPool.UNDERSCORE)) {
 				parameterValue = parameterValue.substring(0, parameterValue.length() - 1);
 			}
 
@@ -254,15 +255,16 @@ public abstract class LiferayBaseURL implements BaseURL {
 
 			// Possibly add the controlPanelCategory parameter.
 			String controlPanelCategory = parsedLiferayURLParameterMap.get(LiferayConstants.CONTROL_PANEL_CATEGORY);
+
 			if (controlPanelCategory != null) {
 				appendParameterToURL(LiferayConstants.CONTROL_PANEL_CATEGORY, controlPanelCategory, url);
 			}
-			
+
 			// Add request parameters from the request parameter map.
 			String namespace = responseNamespace;
 
 			if (namespace.startsWith(BridgeConstants.WSRP)) {
-				namespace = BridgeConstants.EMPTY;
+				namespace = StringPool.EMPTY;
 			}
 
 			Set<Map.Entry<String, String[]>> mapEntries = this.getParameterMap().entrySet();
@@ -307,7 +309,7 @@ public abstract class LiferayBaseURL implements BaseURL {
 		String toStringValue = toString();
 
 		if (escapeXML) {
-			toStringValue = FacesURLEncoder.encode(toStringValue, BridgeConstants.UTF8);
+			toStringValue = FacesURLEncoder.encode(toStringValue, StringPool.UTF8);
 		}
 
 		writer.write(toStringValue);
@@ -321,11 +323,11 @@ public abstract class LiferayBaseURL implements BaseURL {
 		StringBuilder url) {
 
 		if (!firstParameter) {
-			url.append(BridgeConstants.CHAR_AMPERSAND);
+			url.append(StringPool.AMPERSAND);
 		}
 
 		url.append(parameterName);
-		url.append(BridgeConstants.CHAR_EQUALS);
+		url.append(StringPool.EQUALS);
 		url.append(parameterValue);
 
 		logger.debug("Appended param to URL name=[{0}] parameterValue=[{1}]", parameterName, parameterValue);

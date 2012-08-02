@@ -23,10 +23,10 @@ import javax.el.ValueExpression;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -40,8 +40,8 @@ public abstract class PublicRenderParameterCompatImpl extends PublicRenderParame
 	private static final Logger logger = LoggerFactory.getLogger(PublicRenderParameterCompatImpl.class);
 
 	// Private Constants
-	private static final boolean MOJARRA_DETECTED = (ProductMap.getInstance().get(BridgeConstants.JSF).getTitle()
-			.toLowerCase().indexOf(BridgeConstants.MOJARRA.toLowerCase()) >= 0);
+	private static final boolean MOJARRA_DETECTED = (ProductMap.getInstance().get(ProductConstants.JSF).getTitle()
+			.toLowerCase().indexOf(ProductConstants.MOJARRA.toLowerCase()) >= 0);
 
 	public PublicRenderParameterCompatImpl(String prefix, String originalRequestValue, String originalModelEL,
 		String portletName) {

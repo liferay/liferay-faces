@@ -28,9 +28,9 @@ import javax.faces.context.FacesContext;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.BridgeRenderPolicy;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -150,12 +150,11 @@ public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
 			ValueExpression valueExpression = expressionFactory.createValueExpression(elContext, viewId, String.class);
 			viewId = (String) valueExpression.getValue(elContext);
 
-			if ((viewId != null) && !viewId.startsWith(BridgeConstants.CHAR_FORWARD_SLASH)) {
-				viewId = BridgeConstants.CHAR_FORWARD_SLASH + viewId;
+			if ((viewId != null) && !viewId.startsWith(StringPool.FORWARD_SLASH)) {
+				viewId = StringPool.FORWARD_SLASH + viewId;
 			}
 		}
 
 		return viewId;
 	}
 }
-

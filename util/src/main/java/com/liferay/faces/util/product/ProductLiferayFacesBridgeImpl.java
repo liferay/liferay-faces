@@ -11,24 +11,14 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
-
-import com.liferay.faces.bridge.BridgeConstants;
+package com.liferay.faces.util.product;
 
 /**
  * @author  Neil Griffin
  */
-public class ProductLiferayFacesPortalImpl extends ProductBaseImpl {
+public class ProductLiferayFacesBridgeImpl extends ProductBaseImpl {
 
-	public ProductLiferayFacesPortalImpl() {
-
-		try {
-			this.title = BridgeConstants.LIFERAY_FACES_PORTAL;
-			Class<?> auiPanelClass = Class.forName("com.liferay.faces.portal.context.LiferayFacesContext");
-			init(auiPanelClass, BridgeConstants.LIFERAY_FACES_PORTAL);
-		}
-		catch (Exception e) {
-			// Ignore -- ICEfaces is likely not present.
-		}
+	public ProductLiferayFacesBridgeImpl() {
+		init(this.getClass(), ProductConstants.LIFERAY_FACES_BRIDGE);
 	}
 }
