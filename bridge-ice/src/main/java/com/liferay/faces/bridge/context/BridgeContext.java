@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.bridge.context;
 
+import javax.el.ELResolver;
+import javax.faces.context.FacesContext;
 import javax.portlet.PortletConfig;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
@@ -23,21 +25,13 @@ import com.liferay.faces.bridge.config.BridgeConfig;
  */
 public abstract class BridgeContext {
 
-	// Private Static Data Members
-	private static ThreadLocal<BridgeContext> instance = new ThreadLocal<BridgeContext>();
-
 	public static BridgeContext getCurrentInstance() {
-		return instance.get();
-	}
 
-	public static void setCurrentInstance(BridgeContext bridgeContext) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String elExpression = "bridgeContext";
+		ELResolver elResolver = facesContext.getApplication().getELResolver();
 
-		if (bridgeContext == null) {
-			instance.remove();
-		}
-		else {
-			instance.set(bridgeContext);
-		}
+		return (BridgeContext) elResolver.getValue(facesContext.getELContext(), null, elExpression);
 	}
 
 	public abstract BridgeConfig getBridgeConfig();

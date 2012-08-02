@@ -212,9 +212,10 @@ public class ELResolverImpl extends ELResolverCompatImpl {
 					throw new ELException("Unable to get actionResponse during " + portletPhase);
 				}
 			}
-			else if (varName.equals(BRIDGE_CONTEXT)) {
-				value = BridgeContext.getCurrentInstance();
-			}
+			// Note: The bridgeContext is a managed-bean and so must not be resolved here.
+			// else if (varName.equals(BRIDGE_CONTEXT)) {
+			//	value = BridgeContext.getCurrentInstance();
+			// }
 			else if (varName.equals(EVENT_REQUEST)) {
 				Bridge.PortletPhase portletPhase = BridgeUtil.getPortletRequestPhase();
 

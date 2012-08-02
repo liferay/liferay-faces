@@ -13,7 +13,10 @@
  */
 package com.liferay.faces.bridge.context;
 
+import javax.faces.context.FacesContext;
 import javax.portlet.PortletConfig;
+
+import com.icesoft.faces.webapp.http.portlet.PortletExternalContext;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigImpl;
@@ -28,8 +31,10 @@ public class BridgeContextImpl extends BridgeContext {
 	private BridgeConfig bridgeConfig;
 	private PortletConfig portletConfig;
 
-	public BridgeContextImpl(PortletConfig portletConfig) {
-		this.portletConfig = portletConfig;
+	public BridgeContextImpl() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		PortletExternalContext portletExternalContext = (PortletExternalContext) facesContext.getExternalContext();
+		this.portletConfig = (PortletConfig) portletExternalContext.getConfig();
 	}
 
 	@Override
