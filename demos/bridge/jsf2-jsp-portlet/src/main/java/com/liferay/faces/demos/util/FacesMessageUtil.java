@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.test.util;
+package com.liferay.faces.demos.util;
 
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
