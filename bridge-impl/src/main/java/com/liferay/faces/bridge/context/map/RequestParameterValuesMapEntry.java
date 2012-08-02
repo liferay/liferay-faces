@@ -14,7 +14,7 @@
 package com.liferay.faces.bridge.context.map;
 
 import com.liferay.faces.bridge.container.PortletContainer;
-import com.liferay.faces.bridge.util.AbstractPropertyMapEntry;
+import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
 
 /**
