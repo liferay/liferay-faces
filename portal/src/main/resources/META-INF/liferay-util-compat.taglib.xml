@@ -1,8 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
-	version="2.0">
+<!DOCTYPE facelet-taglib PUBLIC "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN" "http://java.sun.com/dtd/facelet-taglib_1_0.dtd">
+<facelet-taglib>
 	<namespace>http://portletfaces.org/liferayfaces/liferay-util</namespace>
 	<function>
 		<function-name>findDataModel</function-name>
@@ -29,45 +27,11 @@
 		<validator>
 			<validator-id>com.liferay.faces.portal.CaptchaValidator</validator-id>
 		</validator>
-		<attribute>
-			<name>binding</name>
-			<type>com.liferay.faces.portal.validator.CaptchaValidator</type>
-		</attribute>
-		<attribute>
-			<name>disabled</name>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<name>for</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
 	</tag>
 	<tag>
 		<tag-name>validateRichTextLength</tag-name>
 		<validator>
 			<validator-id>com.liferay.faces.portal.RichTextLengthValidator</validator-id>
 		</validator>
-		<attribute>
-			<name>binding</name>
-			<type>javax.faces.validator.LengthValidator</type>
-		</attribute>
-		<attribute>
-			<name>disabled</name>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<name>for</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<name>maximum</name>
-			<type>java.lang.Integer</type>
-		</attribute>
-		<attribute>
-			<name>minimum</name>
-			<type>java.lang.Integer</type>
-		</attribute>
 	</tag>
 </facelet-taglib>
