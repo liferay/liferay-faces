@@ -68,6 +68,7 @@
 		<module>alloy</module>
 		<module>bridge-api</module>
 		<module>bridge-impl</module>
+		<module>bridge-ice</module>
 		<module>portal</module>
 		<module>doc</module>
 		<module>demos</module>
