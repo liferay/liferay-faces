@@ -21,9 +21,9 @@ import javax.portlet.PortletRequest;
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.config.Product;
 import com.liferay.faces.bridge.config.ProductMap;
-import com.liferay.faces.bridge.util.AbstractPropertyMap;
-import com.liferay.faces.bridge.util.AbstractPropertyMapEntry;
 import com.liferay.faces.bridge.util.ManagedBeanUtil;
+import com.liferay.faces.util.map.AbstractPropertyMap;
+import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
 
 /**

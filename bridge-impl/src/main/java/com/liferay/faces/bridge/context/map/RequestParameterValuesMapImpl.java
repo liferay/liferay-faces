@@ -25,7 +25,7 @@ import javax.portlet.PortletRequest;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
-import com.liferay.faces.bridge.util.AbstractPropertyMapEntry;
+import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
 
 /**

@@ -57,9 +57,9 @@ import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.bridge.model.UploadedFileFactory;
-import com.liferay.faces.bridge.util.AbstractPropertyMapEntry;
 
 
 /**

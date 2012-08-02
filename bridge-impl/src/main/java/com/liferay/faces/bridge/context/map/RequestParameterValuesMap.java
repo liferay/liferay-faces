@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.bridge.context.map;
 
-import com.liferay.faces.bridge.util.AbstractPropertyMap;
+import com.liferay.faces.util.map.AbstractPropertyMap;
 
 
 /**
