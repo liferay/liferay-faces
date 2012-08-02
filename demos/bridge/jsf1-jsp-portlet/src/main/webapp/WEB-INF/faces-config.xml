@@ -15,7 +15,7 @@
 	</lifecycle>
 	<managed-bean>
 		<managed-bean-name>applicantBackingBean</managed-bean-name>
-		<managed-bean-class>com.liferay.faces.test.bean.ApplicantBackingBean</managed-bean-class>
+		<managed-bean-class>com.liferay.faces.demos.bean.ApplicantBackingBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 		<managed-property>
 			<property-name>applicantModelBean</property-name>
@@ -32,22 +32,22 @@
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>applicantModelBean</managed-bean-name>
-		<managed-bean-class>com.liferay.faces.test.bean.ApplicantModelBean</managed-bean-class>
+		<managed-bean-class>com.liferay.faces.demos.bean.ApplicantModelBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>applicantViewBean</managed-bean-name>
-		<managed-bean-class>com.liferay.faces.test.bean.ApplicantViewBean</managed-bean-class>
+		<managed-bean-class>com.liferay.faces.demos.bean.ApplicantViewBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>listModelBean</managed-bean-name>
-		<managed-bean-class>com.liferay.faces.test.bean.ListModelBean</managed-bean-class>
+		<managed-bean-class>com.liferay.faces.demos.bean.ListModelBean</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>portletPreferencesBackingBean</managed-bean-name>
-		<managed-bean-class>com.liferay.faces.test.bean.PortletPreferencesBackingBean</managed-bean-class>
+		<managed-bean-class>com.liferay.faces.demos.bean.PortletPreferencesBackingBean</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>
