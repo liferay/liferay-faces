@@ -17,6 +17,7 @@
 		<module>jsf1-ipc-pub-render-params-portlet</module>
 		<module>jsf1-jsp-portlet</module>
 		<module>jsf1-portlet</module>
+		<module>icefaces1-portlet</module>
 	</modules>
 
 </project>
