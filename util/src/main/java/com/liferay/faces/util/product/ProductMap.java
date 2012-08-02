@@ -11,11 +11,9 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.product;
 
 import java.util.HashMap;
-
-import com.liferay.faces.bridge.BridgeConstants;
 
 
 /**
@@ -30,15 +28,15 @@ public class ProductMap extends HashMap<String, Product> {
 	private static ProductMap instance = new ProductMap();
 
 	static {
-		instance.put(BridgeConstants.ICEFACES, new ProductICEfacesImpl());
-		instance.put(BridgeConstants.JSF, new ProductJSFImpl());
-		instance.put(BridgeConstants.LIFERAY_FACES_ALLOY, new ProductLiferayFacesAlloyImpl());
-		instance.put(BridgeConstants.LIFERAY_FACES_BRIDGE, new ProductLiferayFacesBridgeImpl());
-		instance.put(BridgeConstants.LIFERAY_FACES_PORTAL, new ProductLiferayFacesPortalImpl());
-		instance.put(BridgeConstants.LIFERAY_PORTAL, new ProductLiferayPortalImpl());
-		instance.put(BridgeConstants.PRIMEFACES, new ProductPrimeFacesImpl());
-		instance.put(BridgeConstants.RICHFACES, new ProductRichFacesImpl());
-		instance.put(BridgeConstants.TCK_JSR_329, new ProductTCKJSR329Impl());
+		instance.put(ProductConstants.ICEFACES, new ProductICEfacesImpl());
+		instance.put(ProductConstants.JSF, new ProductJSFImpl());
+		instance.put(ProductConstants.LIFERAY_FACES_ALLOY, new ProductLiferayFacesAlloyImpl());
+		instance.put(ProductConstants.LIFERAY_FACES_BRIDGE, new ProductLiferayFacesBridgeImpl());
+		instance.put(ProductConstants.LIFERAY_FACES_PORTAL, new ProductLiferayFacesPortalImpl());
+		instance.put(ProductConstants.LIFERAY_PORTAL, new ProductLiferayPortalImpl());
+		instance.put(ProductConstants.PRIMEFACES, new ProductPrimeFacesImpl());
+		instance.put(ProductConstants.RICHFACES, new ProductRichFacesImpl());
+		instance.put(ProductConstants.TCK_JSR_329, new ProductTCKJSR329Impl());
 	}
 
 	public static ProductMap getInstance() {

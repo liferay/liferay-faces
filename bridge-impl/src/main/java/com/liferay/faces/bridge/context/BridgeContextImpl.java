@@ -42,12 +42,10 @@ import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeInvalidViewPathException;
 import javax.portlet.faces.GenericFacesPortlet;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
-import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.config.ServletMapping;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.map.RequestHeaderMap;
@@ -61,8 +59,11 @@ import com.liferay.faces.bridge.context.url.BridgeResourceURL;
 import com.liferay.faces.bridge.context.url.BridgeURLFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -75,7 +76,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 	// Private Constants
 	private static final String NON_NUMERIC_NAMESPACE_PREFIX = "A";
-	private static final boolean TCK_JSR_329_DETECTED = ProductMap.getInstance().get(BridgeConstants.TCK_JSR_329)
+	private static final boolean TCK_JSR_329_DETECTED = ProductMap.getInstance().get(ProductConstants.TCK_JSR_329)
 		.isDetected();
 
 	// Logger
@@ -248,7 +249,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			}
 
 			if (!bridgeActionURL.isAbsolute() && !targetFacesView.isExtensionMapped() &&
-					!targetFacesView.isPathMapped() && !url.startsWith(BridgeConstants.CHAR_POUND)) {
+					!targetFacesView.isPathMapped() && !url.startsWith(StringPool.POUND)) {
 				bridgeActionURL.setParameter(Bridge.NONFACES_TARGET_PATH_PARAMETER, contextRelativeViewPath);
 			}
 
@@ -408,7 +409,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 				// If the specified URL starts with a "#" character, is external to this application, or has a
 				// "javax.portlet.faces.DirectLink" parameter value of "true", then
 				if ((portletPhase == Bridge.PortletPhase.ACTION_PHASE) &&
-						(url.startsWith(BridgeConstants.CHAR_POUND) || bridgeRedirectURL.isExternal() ||
+						(url.startsWith(StringPool.POUND) || bridgeRedirectURL.isExternal() ||
 							BooleanHelper.isTrueToken(bridgeRedirectURL.getParameter(Bridge.DIRECT_LINK)))) {
 
 					// TCK NOTE: The TCK does not appear to have a test that invokes this condition.
@@ -487,7 +488,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 								// TCK TestPage 179: redirectRenderPRP1Test
 								renderRedirect = true;
 								viewIdRenderParameterValue = URLDecoder.decode(viewIdRenderParameterValue,
-										BridgeConstants.UTF8);
+										StringPool.UTF8);
 								bridgeRedirectURL = bridgeURLFactory.getBridgeRedirectURL(viewIdRenderParameterValue,
 										null, currentFacesViewId, this);
 								renderRedirectURL = bridgeRedirectURL;
@@ -598,8 +599,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	public String getDefaultRenderKitId() {
 
 		if (defaultRenderKitId == null) {
-			String attributeName = Bridge.BRIDGE_PACKAGE_PREFIX + portletConfig.getPortletName() +
-				BridgeConstants.CHAR_PERIOD + Bridge.DEFAULT_RENDERKIT_ID;
+			String attributeName = Bridge.BRIDGE_PACKAGE_PREFIX + portletConfig.getPortletName() + StringPool.PERIOD +
+				Bridge.DEFAULT_RENDERKIT_ID;
 			defaultRenderKitId = (String) portletContext.getAttribute(attributeName);
 		}
 
@@ -638,7 +639,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			String navigationQueryString = null;
 
 			if (fullViewId != null) {
-				int pos = fullViewId.indexOf(BridgeConstants.CHAR_QUESTION_MARK);
+				int pos = fullViewId.indexOf(StringPool.QUESTION_MARK);
 
 				if (pos > 0) {
 					navigationQueryString = fullViewId.substring(pos + 1);
@@ -702,7 +703,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 				if (viewPath != null) {
 
 					// If present, remove the query string from the specified viewPath.
-					int pos = viewPath.indexOf(BridgeConstants.CHAR_QUESTION_MARK);
+					int pos = viewPath.indexOf(StringPool.QUESTION_MARK);
 
 					if (pos > 0) {
 						viewPath = viewPath.substring(0, pos);
@@ -808,7 +809,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 					for (String defaultSuffix : defaultSuffixes) {
 
-						int pos = viewPath.lastIndexOf(BridgeConstants.CHAR_PERIOD);
+						int pos = viewPath.lastIndexOf(StringPool.PERIOD);
 
 						if (pos > 0) {
 
@@ -1109,8 +1110,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			else if (facesView.isPathMapped()) {
 				requestServletPath = facesView.getViewId();
 
-				int pos = requestServletPath.lastIndexOf(BridgeConstants.CHAR_FORWARD_SLASH +
-						BridgeConstants.CHAR_ASTERISK);
+				int pos = requestServletPath.lastIndexOf(StringPool.FORWARD_SLASH + StringPool.ASTERISK);
 
 				if (pos >= 0) {
 					requestServletPath = requestServletPath.substring(0, pos);
@@ -1123,7 +1123,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			// Otherwise, since there is no servlet-mapping, return an empty string. This is not required by the spec
 			// but seems to work in a Facelets environment where there is no servlet-mapping.
 			else {
-				requestServletPath = BridgeConstants.EMPTY;
+				requestServletPath = StringPool.EMPTY;
 				logger.debug("requestServletPath=[{0}] servletMapping=[NONE] viewId=[{1}]", requestServletPath, viewId);
 			}
 
@@ -1220,8 +1220,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	public boolean isPreserveActionParams() {
 
 		if (preserveActionParams == null) {
-			String initParamName = Bridge.BRIDGE_PACKAGE_PREFIX + portletConfig.getPortletName() +
-				BridgeConstants.CHAR_PERIOD + Bridge.PRESERVE_ACTION_PARAMS;
+			String initParamName = Bridge.BRIDGE_PACKAGE_PREFIX + portletConfig.getPortletName() + StringPool.PERIOD +
+				Bridge.PRESERVE_ACTION_PARAMS;
 			Object initParamValue = portletContext.getAttribute(initParamName);
 
 			if ((initParamValue != null) && (initParamValue instanceof Boolean)) {

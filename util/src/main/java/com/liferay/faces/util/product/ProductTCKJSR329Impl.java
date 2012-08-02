@@ -11,30 +11,30 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
-
-import com.liferay.faces.bridge.BridgeConstants;
+package com.liferay.faces.util.product;
 
 /**
  * @author  Neil Griffin
  */
-public class ProductPrimeFacesImpl extends ProductBaseImpl {
+public class ProductTCKJSR329Impl extends ProductBaseImpl {
 
-	public ProductPrimeFacesImpl() {
+	public ProductTCKJSR329Impl() {
 
 		try {
-			Class<?> constantsClass = Class.forName("org.primefaces.util.Constants");
-			initVersionInfo((String) constantsClass.getDeclaredField("VERSION").get(String.class));
-			this.buildId = (this.majorVersion * 100) + (this.minorVersion * 10) + this.revisionVersion;
-			this.title = BridgeConstants.PRIMEFACES;
 
-			if (this.majorVersion > 0) {
-				this.detected = true;
-			}
+			// Note: The JSR 329 TCK was only ever released as version 1.0.0 so there is no specific version detection
+			// necessary.
+			Class.forName("org.apache.myfaces.portlet.faces.testsuite.annotation.BridgeTest");
+			this.buildId = 100;
+			this.majorVersion = 1;
+			this.minorVersion = 0;
+			this.revisionVersion = 0;
+			this.title = ProductConstants.TCK_JSR_329;
+			this.version = "1.0.0";
+			this.detected = true;
 		}
 		catch (Exception e) {
-			// Ignore -- PrimeFaces is likely not present.
+			// Ignore -- Bridge TCK is likely not present.
 		}
-
 	}
 }

@@ -46,6 +46,7 @@ import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.util.RequestParameter;
 import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -521,14 +522,14 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 			PortletRequest portletRequest = bridgeContext.getPortletRequest();
 			buf.append(portletRequest.getScheme());
-			buf.append(BridgeConstants.CHAR_COLON);
-			buf.append(BridgeConstants.CHAR_FORWARD_SLASH);
-			buf.append(BridgeConstants.CHAR_FORWARD_SLASH);
+			buf.append(StringPool.COLON);
+			buf.append(StringPool.FORWARD_SLASH);
+			buf.append(StringPool.FORWARD_SLASH);
 			buf.append(portletRequest.getServerName());
-			buf.append(BridgeConstants.CHAR_COLON);
+			buf.append(StringPool.COLON);
 			buf.append(portletRequest.getServerPort());
 			buf.append(portletRequest.getContextPath());
-			buf.append(BridgeConstants.CHAR_QUESTION_MARK);
+			buf.append(StringPool.QUESTION_MARK);
 			buf.append(getRequestQueryString());
 			requestURL = buf.toString();
 		}

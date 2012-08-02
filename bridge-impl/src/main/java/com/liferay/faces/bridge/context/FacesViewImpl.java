@@ -15,11 +15,11 @@ package com.liferay.faces.bridge.context;
 
 import java.util.List;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
 import com.liferay.faces.bridge.config.ServletMapping;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -98,7 +98,7 @@ public class FacesViewImpl implements FacesView {
 						if (EXTENSION_JSP.equals(this.extension)) {
 
 							// TCK TestPage159: getRequestServletPathTest
-							int pos = viewId.lastIndexOf(BridgeConstants.CHAR_PERIOD);
+							int pos = viewId.lastIndexOf(StringPool.PERIOD);
 
 							if (pos > 0) {
 								this.extension = facesServletMappings.get(0).getExtension();

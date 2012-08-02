@@ -25,8 +25,8 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgePublicRenderParameterHandler;
 import javax.portlet.faces.BridgeUtil;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -120,7 +120,7 @@ public class IPCPhaseListener implements PhaseListener {
 						String parameterPrefix;
 						String nonPrefixedParameterName;
 
-						int colonPos = prefixedParameterName.indexOf(BridgeConstants.CHAR_COLON);
+						int colonPos = prefixedParameterName.indexOf(StringPool.COLON);
 
 						if (colonPos > 0) {
 							parameterPrefix = prefixedParameterName.substring(0, colonPos);
@@ -237,7 +237,7 @@ public class IPCPhaseListener implements PhaseListener {
 						String parameterPrefix;
 						String nonPrefixedParameterName;
 
-						int colonPos = prefixedParameterName.indexOf(BridgeConstants.CHAR_COLON);
+						int colonPos = prefixedParameterName.indexOf(StringPool.COLON);
 
 						if (colonPos > 0) {
 							parameterPrefix = prefixedParameterName.substring(0, colonPos);

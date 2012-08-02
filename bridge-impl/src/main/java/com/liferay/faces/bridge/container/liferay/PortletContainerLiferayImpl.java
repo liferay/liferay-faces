@@ -37,12 +37,13 @@ import javax.portlet.WindowState;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.config.Product;
-import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.Product;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -111,7 +112,7 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 			}
 
 			// Determine the Liferay version number.
-			Product liferayPortal = ProductMap.getInstance().get(BridgeConstants.LIFERAY_PORTAL);
+			Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
 			liferayBuildNumber = liferayPortal.getBuildId();
 
 			if (logger.isDebugEnabled()) {

@@ -23,11 +23,8 @@ import javax.faces.render.RenderKit;
 import javax.faces.render.RenderKitWrapper;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.component.icefaces.DataPaginator;
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
-import com.liferay.faces.bridge.config.Product;
-import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.renderkit.bridge.ResponseWriterBridgeImpl;
 import com.liferay.faces.bridge.renderkit.icefaces.DataPaginatorRenderer;
 import com.liferay.faces.bridge.renderkit.icefaces.HeadRendererICEfacesImpl;
@@ -35,6 +32,9 @@ import com.liferay.faces.bridge.renderkit.primefaces.FileUploadRendererPrimeFace
 import com.liferay.faces.bridge.renderkit.primefaces.FormRendererPrimeFacesImpl;
 import com.liferay.faces.bridge.renderkit.primefaces.HeadRendererPrimeFacesImpl;
 import com.liferay.faces.bridge.renderkit.richfaces.FileUploadRendererRichFacesImpl;
+import com.liferay.faces.util.product.Product;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -98,7 +98,7 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 
 			// If the PrimeFaces p:fileUpload should be forced to use a ResourceURL, then return a special
 			// form renderer. http://issues.liferay.com/browse/FACES-1194
-			Product primeFaces = ProductMap.getInstance().get(BridgeConstants.PRIMEFACES);
+			Product primeFaces = ProductMap.getInstance().get(ProductConstants.PRIMEFACES);
 
 			if (primeFaces.isDetected() && (primeFaces.getMajorVersion() == 3) && (primeFaces.getMinorVersion() < 3)) {
 				renderer = new FormRendererPrimeFacesImpl(renderer);

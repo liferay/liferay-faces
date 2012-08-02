@@ -21,11 +21,11 @@ import javax.portlet.ClientDataRequest;
 import javax.portlet.PortletRequest;
 import javax.portlet.ResourceRequest;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -78,7 +78,7 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 						for (int i = 0; locales.hasMoreElements(); i++) {
 
 							if (i > 0) {
-								buf.append(BridgeConstants.CHAR_COMMA);
+								buf.append(StringPool.COMMA);
 							}
 
 							Locale locale = locales.nextElement();
@@ -87,7 +87,7 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 							String country = locale.getCountry();
 
 							if ((country != null) && (country.length() > 0)) {
-								buf.append(BridgeConstants.CHAR_DASH);
+								buf.append(StringPool.DASH);
 								buf.append(country);
 							}
 						}
@@ -106,7 +106,7 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 						for (int i = 0; properties.hasMoreElements(); i++) {
 
 							if (i > 0) {
-								buf.append(BridgeConstants.CHAR_COMMA);
+								buf.append(StringPool.COMMA);
 							}
 
 							buf.append(properties.nextElement());
@@ -174,7 +174,7 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 		if (!foundUserAgent) {
 			put(HEADER_USER_AGENT, portletContainer.getHeader(HEADER_USER_AGENT));
 		}
-		
+
 		addJSF1Headers(portletContainer);
 	}
 
@@ -227,15 +227,15 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 
 			StringBuilder header = new StringBuilder();
 			header.append(HEADER_CONTENT_TYPE);
-			header.append(BridgeConstants.CHAR_COLON);
-			header.append(BridgeConstants.CHAR_SPACE);
+			header.append(StringPool.COLON);
+			header.append(StringPool.SPACE);
 			header.append(contentType);
 
 			if (characterSetEncoding != null) {
-				header.append(BridgeConstants.CHAR_SEMICOLON);
-				header.append(BridgeConstants.CHAR_SPACE);
+				header.append(StringPool.SEMICOLON);
+				header.append(StringPool.SPACE);
 				header.append(CHARSET);
-				header.append(BridgeConstants.CHAR_EQUALS);
+				header.append(StringPool.EQUALS);
 				header.append(characterSetEncoding);
 			}
 

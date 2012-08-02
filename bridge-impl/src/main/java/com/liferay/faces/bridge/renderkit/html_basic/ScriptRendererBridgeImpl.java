@@ -23,6 +23,7 @@ import javax.faces.render.Renderer;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.util.FacesURLEncoder;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -80,16 +81,16 @@ public class ScriptRendererBridgeImpl extends RendererWrapper {
 
 		@Override
 		public void endElement(String name) throws IOException {
-			write(BridgeConstants.CHAR_GREATER_THAN);
-			write(BridgeConstants.CHAR_LESS_THAN);
-			write(BridgeConstants.CHAR_FORWARD_SLASH);
+			write(StringPool.GREATER_THAN);
+			write(StringPool.LESS_THAN);
+			write(StringPool.FORWARD_SLASH);
 			write(name);
-			write(BridgeConstants.CHAR_GREATER_THAN);
+			write(StringPool.GREATER_THAN);
 		}
 
 		@Override
 		public void startElement(String name, UIComponent component) throws IOException {
-			write(BridgeConstants.CHAR_LESS_THAN);
+			write(StringPool.LESS_THAN);
 			write(name);
 		}
 
@@ -100,12 +101,12 @@ public class ScriptRendererBridgeImpl extends RendererWrapper {
 
 		@Override
 		public void writeAttribute(String name, Object value, String property) throws IOException {
-			write(BridgeConstants.CHAR_SPACE);
+			write(StringPool.SPACE);
 			write(name);
-			write(BridgeConstants.CHAR_EQUALS);
-			write(BridgeConstants.CHAR_DOUBLE_QUOTE);
+			write(StringPool.EQUALS);
+			write(StringPool.DOUBLE_QUOTE);
 			write((String) value);
-			write(BridgeConstants.CHAR_DOUBLE_QUOTE);
+			write(StringPool.DOUBLE_QUOTE);
 		}
 
 		@Override
@@ -118,7 +119,7 @@ public class ScriptRendererBridgeImpl extends RendererWrapper {
 				if (encodedURI != null) {
 
 					// Remove all the encoded ampersands. See: http://issues.liferay.com/browse/FACES-1236
-					encodedURI = encodedURI.replaceAll("[&]amp;", BridgeConstants.CHAR_AMPERSAND);
+					encodedURI = encodedURI.replaceAll("[&]amp;", StringPool.AMPERSAND);
 				}
 
 				writeAttribute(name, encodedURI, property);

@@ -11,10 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
-
-import com.liferay.faces.bridge.BridgeConstants;
-
+package com.liferay.faces.util.product;
 
 /**
  * @author  Neil Griffin
@@ -34,16 +31,16 @@ public class ProductJSFImpl extends ProductBaseImpl {
 			Class<?> jsfImplClass;
 
 			try {
-				this.title = BridgeConstants.MOJARRA;
+				this.title = ProductConstants.MOJARRA;
 				jsfImplClass = Class.forName("com.sun.faces.RIConstants");
-				init(jsfImplClass, BridgeConstants.MOJARRA);
+				init(jsfImplClass, ProductConstants.MOJARRA);
 				mojarra = true;
 
 			}
 			catch (ClassNotFoundException e) {
-				this.title = BridgeConstants.MYFACES;
+				this.title = ProductConstants.MYFACES;
 				jsfImplClass = Class.forName("org.apache.myfaces.util.ContainerUtils");
-				init(jsfImplClass, BridgeConstants.MYFACES);
+				init(jsfImplClass, ProductConstants.MYFACES);
 			}
 		}
 		catch (Exception e) {

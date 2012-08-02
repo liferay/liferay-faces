@@ -35,6 +35,7 @@ import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -448,7 +449,7 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 
 					int fileNameStartPos = urlStartPos + pathPrefix.length();
 
-					int dotPos = cssText.indexOf(BridgeConstants.CHAR_PERIOD, fileNameStartPos);
+					int dotPos = cssText.indexOf(StringPool.PERIOD, fileNameStartPos);
 
 					if (dotPos > 0) {
 						boolean doneFindingExtension = false;

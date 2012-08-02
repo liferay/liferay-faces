@@ -40,8 +40,6 @@ import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
-import com.liferay.faces.bridge.config.Product;
-import com.liferay.faces.bridge.config.ProductMap;
 import com.liferay.faces.bridge.context.flash.BridgeFlash;
 import com.liferay.faces.bridge.context.flash.BridgeFlashFactory;
 import com.liferay.faces.bridge.context.flash.FlashHttpServletResponse;
@@ -49,6 +47,9 @@ import com.liferay.faces.bridge.util.FileNameUtil;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.Product;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -399,7 +400,7 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 			if ((requestContentType != null) &&
 					requestContentType.toLowerCase().startsWith(BridgeConstants.MULTIPART_CONTENT_TYPE_PREFIX)) {
 
-				Product iceFaces = ProductMap.getInstance().get(BridgeConstants.ICEFACES);
+				Product iceFaces = ProductMap.getInstance().get(ProductConstants.ICEFACES);
 
 				if (iceFaces.isDetected() &&
 						((iceFaces.getMajorVersion() == 2) ||
@@ -697,7 +698,7 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 			}
 			else {
 				// Mojarra will call this method if a runtime exception occurs during execution of the JSF lifecycle, so
-                // must not throw an IllegalStateException.
+				// must not throw an IllegalStateException.
 			}
 		}
 	}
