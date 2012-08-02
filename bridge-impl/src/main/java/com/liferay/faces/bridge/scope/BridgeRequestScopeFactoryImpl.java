@@ -17,8 +17,8 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 
-import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.config.ProductMap;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -27,7 +27,7 @@ import com.liferay.faces.bridge.config.ProductMap;
 public class BridgeRequestScopeFactoryImpl extends BridgeRequestScopeFactory {
 
 	// Private Constants
-	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(BridgeConstants.LIFERAY_PORTAL)
+	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
 		.isDetected();
 
 	@Override

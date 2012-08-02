@@ -50,7 +50,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
@@ -58,6 +57,7 @@ import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.util.FacesMessageWrapper;
 import com.liferay.faces.bridge.util.NameValuePair;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -131,8 +131,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 		// Get the list of excluded BridgeRequestScope attributes from the WEB-INF/portlet.xml descriptor.
 		@SuppressWarnings("unchecked")
 		List<String> portletContextExcludedAttributeNames = (List<String>) portletContext.getAttribute(
-				Bridge.BRIDGE_PACKAGE_PREFIX + portletName + BridgeConstants.CHAR_PERIOD +
-				Bridge.EXCLUDED_REQUEST_ATTRIBUTES);
+				Bridge.BRIDGE_PACKAGE_PREFIX + portletName + StringPool.PERIOD + Bridge.EXCLUDED_REQUEST_ATTRIBUTES);
 
 		// Combine the two lists into a single list of excluded BridgeRequestScope attributes.
 		if (facesConfigExcludedAttributeNames != null) {
@@ -553,7 +552,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 	public String toString() {
 		StringBuilder buf = new StringBuilder();
 		buf.append(getClass().getName());
-		buf.append(BridgeConstants.CHAR_AT);
+		buf.append(StringPool.AT);
 		buf.append(Integer.toHexString(hashCode()));
 
 		return buf.toString();
@@ -623,10 +622,10 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 
 					break;
 				}
-				else if (excludedAttribute.endsWith(BridgeConstants.CHAR_ASTERISK)) {
+				else if (excludedAttribute.endsWith(StringPool.ASTERISK)) {
 
 					String wildcardNamespace = excludedAttribute;
-					int dotPos = wildcardNamespace.lastIndexOf(BridgeConstants.CHAR_PERIOD);
+					int dotPos = wildcardNamespace.lastIndexOf(StringPool.PERIOD);
 
 					if (dotPos > 0) {
 						wildcardNamespace = wildcardNamespace.substring(0, dotPos);
@@ -653,7 +652,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 		boolean match = false;
 
 		String attributeNamespace = attributeName;
-		int dotPos = attributeNamespace.lastIndexOf(BridgeConstants.CHAR_PERIOD);
+		int dotPos = attributeNamespace.lastIndexOf(StringPool.PERIOD);
 
 		if (dotPos > 0) {
 			attributeNamespace = attributeNamespace.substring(0, dotPos);

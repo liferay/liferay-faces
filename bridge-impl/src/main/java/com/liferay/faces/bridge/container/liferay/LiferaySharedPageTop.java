@@ -27,6 +27,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResource;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -66,17 +67,17 @@ public class LiferaySharedPageTop {
 			SharedPageTopHandler sharedPageTopHandler = new SharedPageTopHandler();
 			StringBundler xmlDocument = new StringBundler();
 			xmlDocument.append(XML_DOCUMENT_DECLARATION);
-			xmlDocument.append(BridgeConstants.CHAR_LESS_THAN);
+			xmlDocument.append(StringPool.LESS_THAN);
 			xmlDocument.append(LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
-			xmlDocument.append(BridgeConstants.CHAR_GREATER_THAN);
+			xmlDocument.append(StringPool.GREATER_THAN);
 			xmlDocument.append(stringBundler);
-			xmlDocument.append(BridgeConstants.CHAR_LESS_THAN);
-			xmlDocument.append(BridgeConstants.CHAR_FORWARD_SLASH);
+			xmlDocument.append(StringPool.LESS_THAN);
+			xmlDocument.append(StringPool.FORWARD_SLASH);
 			xmlDocument.append(LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
-			xmlDocument.append(BridgeConstants.CHAR_GREATER_THAN);
+			xmlDocument.append(StringPool.GREATER_THAN);
 
 			String xmlDocumentAsString = xmlDocument.toString().replaceAll(BridgeConstants.REGEX_AMPERSAND_DELIMITER,
-					BridgeConstants.ENCODED_AMERSAND);
+					StringPool.AMERSAND_ENCODED);
 			ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(xmlDocumentAsString.getBytes());
 			saxParser.parse(byteArrayInputStream, sharedPageTopHandler);
 			byteArrayInputStream.close();

@@ -34,15 +34,15 @@ import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 import javax.portlet.faces.Bridge;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.ExternalContextImpl;
-import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.bridge.helper.WindowStateHelper;
+import com.liferay.faces.bridge.util.URLUtil;
+import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.bridge.util.URLUtil;
 
 
 /**
@@ -161,7 +161,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 		StringBuilder buf = new StringBuilder();
 
-		int endPos = url.indexOf(BridgeConstants.CHAR_QUESTION_MARK);
+		int endPos = url.indexOf(StringPool.QUESTION_MARK);
 
 		if (endPos < 0) {
 			endPos = url.length();
@@ -186,7 +186,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 		boolean firstParam = true;
 
-		buf.append(BridgeConstants.CHAR_QUESTION_MARK);
+		buf.append(StringPool.QUESTION_MARK);
 
 		Set<String> parameterNames = getParameterNames();
 
@@ -232,11 +232,11 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 					firstParam = false;
 				}
 				else {
-					buf.append(BridgeConstants.CHAR_AMPERSAND);
+					buf.append(StringPool.AMPERSAND);
 				}
 
 				buf.append(parameterName);
-				buf.append(BridgeConstants.CHAR_EQUALS);
+				buf.append(StringPool.EQUALS);
 				buf.append(parameterValue);
 			}
 		}
@@ -252,12 +252,12 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 				if (!modeChanged) {
 
 					if (!firstParam) {
-						buf.append(BridgeConstants.CHAR_AMPERSAND);
+						buf.append(StringPool.AMPERSAND);
 					}
 
 					buf.append(getViewIdParameterName());
 
-					buf.append(BridgeConstants.CHAR_EQUALS);
+					buf.append(StringPool.EQUALS);
 					buf.append(getContextRelativePath());
 				}
 			}
@@ -280,14 +280,14 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 		boolean match = false;
 
 		String path1 = null;
-		int lastSlashPos = file1.lastIndexOf(BridgeConstants.CHAR_FORWARD_SLASH);
+		int lastSlashPos = file1.lastIndexOf(StringPool.FORWARD_SLASH);
 
 		if (lastSlashPos > 0) {
 			path1 = file1.substring(0, lastSlashPos);
 		}
 
 		String path2 = null;
-		lastSlashPos = file2.lastIndexOf(BridgeConstants.CHAR_FORWARD_SLASH);
+		lastSlashPos = file2.lastIndexOf(StringPool.FORWARD_SLASH);
 
 		if (lastSlashPos > 0) {
 			path2 = file2.substring(0, lastSlashPos);
@@ -296,14 +296,14 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 		if (((path1 == null) && (path2 == null)) || ((path1 != null) && (path2 != null) && path1.equals(path2))) {
 
 			String ext1 = null;
-			int lastDotPos = file1.indexOf(BridgeConstants.CHAR_PERIOD);
+			int lastDotPos = file1.indexOf(StringPool.PERIOD);
 
 			if (lastDotPos > 0) {
 				ext1 = file1.substring(lastDotPos);
 			}
 
 			String ext2 = null;
-			lastDotPos = file2.indexOf(BridgeConstants.CHAR_PERIOD);
+			lastDotPos = file2.indexOf(StringPool.PERIOD);
 
 			if (lastDotPos > 0) {
 				ext2 = file2.substring(lastDotPos);
@@ -324,7 +324,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 			// If the URL is external, then there is no such thing as a context-relative path in this URL. In this case,
 			// return an empty string so that lazy-initialization doesn't take place again.
 			if (isExternal()) {
-				contextRelativePath = BridgeConstants.EMPTY;
+				contextRelativePath = StringPool.EMPTY;
 			}
 
 			// Otherwise,
@@ -359,19 +359,19 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 			escaped = Boolean.FALSE;
 
-			int questionMarkPos = url.indexOf(BridgeConstants.CHAR_QUESTION_MARK);
+			int questionMarkPos = url.indexOf(StringPool.QUESTION_MARK);
 
 			if (questionMarkPos > 0) {
 
-				int ampersandPos = url.indexOf(BridgeConstants.CHAR_AMPERSAND, questionMarkPos);
+				int ampersandPos = url.indexOf(StringPool.AMPERSAND, questionMarkPos);
 
 				while (ampersandPos > questionMarkPos) {
 
 					String subURL = url.substring(ampersandPos);
 
-					if (subURL.startsWith(BridgeConstants.ENCODED_AMERSAND)) {
+					if (subURL.startsWith(StringPool.AMERSAND_ENCODED)) {
 						escaped = Boolean.TRUE;
-						ampersandPos = url.indexOf(BridgeConstants.CHAR_AMPERSAND, ampersandPos + 1);
+						ampersandPos = url.indexOf(StringPool.AMPERSAND, ampersandPos + 1);
 					}
 					else {
 						escaped = Boolean.FALSE;
@@ -408,7 +408,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 			String path = getURI().getPath();
 
 			if ((path != null) && (path.length() > 0) &&
-					(!path.startsWith(BridgeConstants.CHAR_FORWARD_SLASH) || path.startsWith(RELATIVE_PATH_PREFIX))) {
+					(!path.startsWith(StringPool.FORWARD_SLASH) || path.startsWith(RELATIVE_PATH_PREFIX))) {
 				pathRelative = Boolean.TRUE;
 			}
 
@@ -457,7 +457,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 				}
 				else {
 
-					if (!url.startsWith(BridgeConstants.CHAR_FORWARD_SLASH) && !url.startsWith(RELATIVE_PATH_PREFIX)) {
+					if (!url.startsWith(StringPool.FORWARD_SLASH) && !url.startsWith(RELATIVE_PATH_PREFIX)) {
 						external = Boolean.TRUE;
 					}
 				}
@@ -473,8 +473,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 			hierarchical = Boolean.FALSE;
 
-			if ((isAbsolute() && getSchemeSpecificPart().startsWith(BridgeConstants.CHAR_FORWARD_SLASH)) ||
-					isRelative()) {
+			if ((isAbsolute() && getSchemeSpecificPart().startsWith(StringPool.FORWARD_SLASH)) || isRelative()) {
 				hierarchical = Boolean.TRUE;
 			}
 		}
@@ -705,7 +704,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 				logger.error(e1.getMessage());
 
 				try {
-					uri = new URI(BridgeConstants.EMPTY);
+					uri = new URI(StringPool.EMPTY);
 				}
 				catch (URISyntaxException e2) {
 					// ignore -- will never happen

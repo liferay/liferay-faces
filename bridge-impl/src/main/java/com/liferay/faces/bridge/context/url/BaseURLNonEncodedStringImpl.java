@@ -26,6 +26,7 @@ import javax.portlet.PortletSecurityException;
 import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -74,7 +75,7 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 			String queryString = getQuery();
 
 			if (queryString.length() > 0) {
-				buf.append(BridgeConstants.CHAR_QUESTION_MARK);
+				buf.append(StringPool.QUESTION_MARK);
 				buf.append(queryString);
 			}
 
@@ -100,7 +101,7 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 	protected String getMain() {
 
 		if (main == null) {
-			int queryPos = url.indexOf(BridgeConstants.CHAR_QUESTION_MARK);
+			int queryPos = url.indexOf(StringPool.QUESTION_MARK);
 
 			if (queryPos >= 0) {
 				main = url.substring(0, queryPos);
@@ -143,9 +144,9 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 			StringBuilder buf = new StringBuilder();
 
 			// Get the original query-string from the URL.
-			String originalQuery = BridgeConstants.EMPTY;
+			String originalQuery = StringPool.EMPTY;
 			boolean firstParam = true;
-			int queryPos = url.indexOf(BridgeConstants.CHAR_QUESTION_MARK);
+			int queryPos = url.indexOf(StringPool.QUESTION_MARK);
 
 			if (queryPos >= 0) {
 				originalQuery = url.substring(queryPos + 1);
@@ -172,7 +173,7 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 
 					if (nameValueArray.length == 1) {
 						name = nameValueArray[0];
-						values = new String[] { BridgeConstants.EMPTY };
+						values = new String[] { StringPool.EMPTY };
 					}
 					else if (nameValueArray.length == 2) {
 						name = nameValueArray[0];
@@ -189,11 +190,11 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 							firstParam = false;
 						}
 						else {
-							buf.append(BridgeConstants.CHAR_AMPERSAND);
+							buf.append(StringPool.AMPERSAND);
 						}
 
 						buf.append(name);
-						buf.append(BridgeConstants.CHAR_EQUALS);
+						buf.append(StringPool.EQUALS);
 						buf.append(values[0]);
 						processedParameterNames.add(name);
 					}
@@ -227,11 +228,11 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 							firstParam = false;
 						}
 						else {
-							buf.append(BridgeConstants.CHAR_AMPERSAND);
+							buf.append(StringPool.AMPERSAND);
 						}
 
 						buf.append(name);
-						buf.append(BridgeConstants.CHAR_EQUALS);
+						buf.append(StringPool.EQUALS);
 						buf.append(values[0]);
 					}
 				}

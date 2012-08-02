@@ -20,6 +20,7 @@ import org.xml.sax.Attributes;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.util.NameValuePair;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -31,7 +32,7 @@ public class HeadResource {
 	private static final String HREF = "href";
 	private static final String LINK = "link";
 	private static final String SCRIPT = "script";
-	
+
 	// Private Data Members
 	private List<Attribute> attributeList;
 	private boolean duplicate;
@@ -66,14 +67,14 @@ public class HeadResource {
 
 		if (url != null) {
 
-			int queryPos = url.indexOf(BridgeConstants.CHAR_QUESTION_MARK);
+			int queryPos = url.indexOf(StringPool.QUESTION_MARK);
 
 			if (queryPos > 0) {
 				String parameters = url.substring(queryPos + 1);
 				String[] nameValuePairs = parameters.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
 
 				for (String nameValuePair : nameValuePairs) {
-					int equalsPos = nameValuePair.indexOf(BridgeConstants.CHAR_EQUALS);
+					int equalsPos = nameValuePair.indexOf(StringPool.EQUALS);
 
 					if (equalsPos > 0) {
 						String name = nameValuePair.substring(0, equalsPos);
@@ -123,31 +124,31 @@ public class HeadResource {
 	public String toString() {
 
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(BridgeConstants.CHAR_LESS_THAN);
+		stringBuilder.append(StringPool.LESS_THAN);
 		stringBuilder.append(type);
 
 		if (attributeList != null) {
 
 			for (Attribute attribute : attributeList) {
-				stringBuilder.append(BridgeConstants.CHAR_SPACE);
+				stringBuilder.append(StringPool.SPACE);
 				stringBuilder.append(attribute.getName());
-				stringBuilder.append(BridgeConstants.CHAR_EQUALS);
-				stringBuilder.append(BridgeConstants.CHAR_DOUBLE_QUOTE);
+				stringBuilder.append(StringPool.EQUALS);
+				stringBuilder.append(StringPool.DOUBLE_QUOTE);
 				stringBuilder.append(attribute.getValue());
-				stringBuilder.append(BridgeConstants.CHAR_DOUBLE_QUOTE);
+				stringBuilder.append(StringPool.DOUBLE_QUOTE);
 			}
 		}
 
-		stringBuilder.append(BridgeConstants.CHAR_GREATER_THAN);
+		stringBuilder.append(StringPool.GREATER_THAN);
 
 		if (text != null) {
 			stringBuilder.append(text);
 		}
 
-		stringBuilder.append(BridgeConstants.CHAR_LESS_THAN);
-		stringBuilder.append(BridgeConstants.CHAR_FORWARD_SLASH);
+		stringBuilder.append(StringPool.LESS_THAN);
+		stringBuilder.append(StringPool.FORWARD_SLASH);
 		stringBuilder.append(type);
-		stringBuilder.append(BridgeConstants.CHAR_GREATER_THAN);
+		stringBuilder.append(StringPool.GREATER_THAN);
 
 		return stringBuilder.toString();
 	}

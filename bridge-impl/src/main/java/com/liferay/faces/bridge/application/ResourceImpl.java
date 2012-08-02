@@ -38,6 +38,7 @@ import com.liferay.faces.bridge.config.BridgeConfigFactory;
 import com.liferay.faces.bridge.config.ServletMapping;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -297,7 +298,7 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 							// Note: Both Mojarra and MyFaces construct a requestPath that looks something like
 							// "/javax.faces.resource/jsf.js.faces?ln=javax.faces" and so we look for the ".faces?ln" as
 							// an indicator that ".faces" needs to be removed from the requestPath.
-							String token = extension + BridgeConstants.CHAR_QUESTION_MARK + BridgeConstants.LN;
+							String token = extension + StringPool.QUESTION_MARK + BridgeConstants.LN;
 							int pos = wrappedRequestPath.indexOf(token);
 
 							// If the servlet-mapping extension is found, then remove it since this is an implicit

@@ -46,6 +46,7 @@ import com.liferay.faces.bridge.scope.BridgeRequestScopeCache;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeCacheFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeFactory;
 import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -195,7 +196,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		for (String portletMode : PortletModeHelper.PORTLET_MODE_NAMES) {
 			StringBuilder buf = new StringBuilder();
 			buf.append(Bridge.VIEWID_HISTORY);
-			buf.append(BridgeConstants.CHAR_PERIOD);
+			buf.append(StringPool.PERIOD);
 			buf.append(portletMode);
 
 			String attributeName = buf.toString();
