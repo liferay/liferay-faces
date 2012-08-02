@@ -19,6 +19,14 @@ package com.liferay.faces.util.product;
 public class ProductLiferayFacesBridgeImpl extends ProductBaseImpl {
 
 	public ProductLiferayFacesBridgeImpl() {
-		init(this.getClass(), ProductConstants.LIFERAY_FACES_BRIDGE);
+		try {
+			this.title = ProductConstants.LIFERAY_FACES_BRIDGE;
+
+			Class<?> bridgePhaseClass = Class.forName("com.liferay.faces.bridge.context.BridgeContext");
+			init(bridgePhaseClass, ProductConstants.LIFERAY_FACES_BRIDGE);
+		}
+		catch (Exception e) {
+			// Ignore -- Liferay Faces Bridge is likely not present.
+		}
 	}
 }
