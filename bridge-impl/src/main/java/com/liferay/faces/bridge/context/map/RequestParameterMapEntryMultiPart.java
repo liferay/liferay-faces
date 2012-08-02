@@ -15,7 +15,7 @@ package com.liferay.faces.bridge.context.map;
 
 import java.util.Map;
 
-import com.liferay.faces.bridge.util.AbstractPropertyMapEntry;
+import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
 
 /**
