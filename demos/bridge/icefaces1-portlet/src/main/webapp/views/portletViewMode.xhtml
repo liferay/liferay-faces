@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component" xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ice:portlet styleClass="icefaces3-compat-portlet ltr">
+		<ui:include src="styling.xhtml" />
+		<ui:include src="applicant.xhtml" />
+		<br />
+		<aui:layout>
+			<aui:column>
+				<ul>
+					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['JSF']}" /></em></li>
+					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['ICEfaces']}" /></em></li>
+					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Alloy']}" /></em></li>
+					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Bridge']}" /></em></li>
+				</ul>
+			</aui:column>
+		</aui:layout>
+	</ice:portlet>
+</f:view>

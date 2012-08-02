@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
+
+	<ui:remove>
+	<!-- cc:interface -->
+	</ui:remove>
+
+	<c:if test="#{empty label}">
+		<c:set var="label" value="clipboard" />
+	</c:if>
+
+	<ui:remove>
+	<!-- cc:implementation -->
+	</ui:remove>
+
+	<h:panelGroup layout="block" styleClass="clipboard">
+		<span>#{label}</span>
+	</h:panelGroup>
+
+</ui:component>

@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
+	<portlet>
+		<portlet-name>1</portlet-name>
+		<display-name>ICEfaces1</display-name>
+		<portlet-class>com.liferay.faces.bridge.GenericICEfacesPortlet</portlet-class>
+		<init-param>
+			<name>com.icesoft.faces.VIEW</name>
+			<value>/views/portletViewMode.iface</value>
+		</init-param>
+		<init-param>
+			<name>com.icesoft.faces.EDIT</name>
+			<value>/views/portletEditMode.iface</value>
+		</init-param>
+		<init-param>
+			<name>com.icesoft.faces.HELP</name>
+			<value>/views/portletHelpMode.iface</value>
+		</init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>edit</portlet-mode>
+			<portlet-mode>help</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>ICEfaces1</title>
+			<short-title>ICEfaces1</short-title>
+			<keywords>ICEfaces1</keywords>
+		</portlet-info>
+		<portlet-preferences>
+			<preference>
+				<name>datePattern</name>
+				<value>MM/dd/yyyy</value>
+			</preference>
+			<preference>
+				<name>recipientEmailAddress</name>
+				<value>humanresources@some-company-domain.com</value>
+			</preference>
+		</portlet-preferences>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+</portlet-app>
