@@ -18,6 +18,7 @@
 		<module>jsf1-jsp-portlet</module>
 		<module>jsf1-portlet</module>
 		<module>icefaces1-portlet</module>
+		<module>icefaces1-ipc-ajax-push-portlet</module>
 	</modules>
 
 </project>
