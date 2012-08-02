@@ -16,8 +16,6 @@ package com.liferay.faces.util.cdi;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
-import javax.faces.bean.ManagedBean;
-
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
