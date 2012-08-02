@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.test.bean;
+package com.liferay.faces.demos.bean;
 
 import java.io.File;
 import java.io.Serializable;
@@ -28,8 +28,8 @@ import com.liferay.faces.bridge.component.HtmlInputFile;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.bridge.model.UploadedFile;
-import com.liferay.faces.test.dto.City;
-import com.liferay.faces.test.util.FacesMessageUtil;
+import com.liferay.faces.demos.dto.City;
+import com.liferay.faces.demos.util.FacesMessageUtil;
 
 
 /**
