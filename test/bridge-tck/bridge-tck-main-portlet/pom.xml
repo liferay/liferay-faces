@@ -87,12 +87,14 @@
 			</build>
 			<properties>
 				<bridge.tck.portal>liferay</bridge.tck.portal>
+				<bridge.tck.test.base-url>http://${bridge.tck.test.host}:${bridge.tck.test.port}?p_p_id=58&amp;p_p_lifecycle=0&amp;p_p_state=exclusive&amp;p_p_mode=view&amp;saveLastPath=0&amp;_58_struts_action=%2Flogin%2Flogin</bridge.tck.test.base-url>
 			</properties>
 		</profile>
 		<profile>
 			<id>pluto</id>
 			<properties>
 				<bridge.tck.portal>pluto</bridge.tck.portal>
+				<bridge.tck.test.base-url>http://${bridge.tck.test.host}:${bridge.tck.test.port}</bridge.tck.test.base-url>
 			</properties>
 		</profile>
 		<profile>
@@ -149,7 +151,7 @@
 									</property>
 									<property>
 										<name>bridge.tck.test.base-url</name>
-										<value>http://${bridge.tck.test.host}:${bridge.tck.test.port}</value>
+										<value>${bridge.tck.test.base-url}</value>
 									</property>
 									<property>
 										<name>bridge.tck.login.file</name>
