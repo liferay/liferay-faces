@@ -27,7 +27,7 @@ public class ProductLiferayFacesPortalImpl extends ProductBaseImpl {
 			init(auiPanelClass, ProductConstants.LIFERAY_FACES_PORTAL);
 		}
 		catch (Exception e) {
-			// Ignore -- ICEfaces is likely not present.
+			// Ignore -- Liferay Faces Portal is likely not present.
 		}
 	}
 }

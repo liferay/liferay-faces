@@ -27,7 +27,7 @@ public class ProductLiferayFacesAlloyImpl extends ProductBaseImpl {
 			init(auiPanelClass, ProductConstants.LIFERAY_FACES_ALLOY);
 		}
 		catch (Exception e) {
-			// Ignore -- ICEfaces is likely not present.
+			// Ignore -- Liferay Faces Alloy is likely not present.
 		}
 	}
 }
