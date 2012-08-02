@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:example-cc="http://java.sun.com/jsf/composite/example-cc"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:panelGroup styleClass="jsf1-portlet">
+		<ui:include src="styling.xhtml" />
+		<h:messages />
+		<h:form>
+			<!-- Test JSF 2 Flash scope -->
+			<h:outputText value="#{i18n['dear']} #{bridgeFlash['firstName']}," />
+			<br />
+			<h:outputText value="#{i18n['thank-you-for-applying-for-a-job-with-our-organization']}" />
+			<hr />
+			<!-- Test JSF 2 implicit navigation -->
+			<h:commandButton action="/views/portletViewMode.xhtml" value="#{i18n['submit-another-application']}">
+				<f:ajax execute="@form" render="@form" />
+			</h:commandButton>
+		</h:form>
+	</h:panelGroup>
+</f:view>

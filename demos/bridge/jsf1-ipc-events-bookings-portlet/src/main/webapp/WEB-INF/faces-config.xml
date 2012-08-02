@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+    version="1.2">
+
+	<application>
+		<message-bundle>i18nFaces</message-bundle>
+		<resource-bundle>
+			<base-name>i18n</base-name>
+			<var>i18n</var>
+		</resource-bundle>
+		<view-handler>com.liferay.faces.bridge.application.ViewHandlerFaceletImpl</view-handler>
+	</application>
+	<lifecycle>
+		<phase-listener>com.liferay.faces.util.lifecycle.DebugPhaseListener</phase-listener>
+	</lifecycle>
+	<managed-bean>
+		<managed-bean-name>bookingsBackingBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.BookingsBackingBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>bookingsModelBean</property-name>
+			<value>#{bookingsModelBean}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>bookingsModelBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.BookingsModelBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>bookingService</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.service.BookingServiceMockImpl</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>bookingTypeService</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.service.BookingTypeServiceMockImpl</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>customerService</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.service.CustomerServiceMockImpl</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>bookingService</property-name>
+			<value>#{bookingService}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>bookingListModelBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.BookingListModelBean</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>bookingTypeService</property-name>
+			<value>#{bookingTypeService}</value>
+		</managed-property>
+	</managed-bean>
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>ipc.customerSelected</from-outcome>
+			<to-view-id>/views/bookings.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+</faces-config>
