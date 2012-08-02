@@ -11,13 +11,12 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.util;
+package com.liferay.faces.util.cdi;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 import javax.faces.bean.ManagedBean;
-import javax.portlet.faces.annotation.BridgePreDestroy;
 
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -30,7 +29,7 @@ public class ManagedBeanUtil {
 
 	// Private Constants
 	private static final String JAVAX_ANNOTATION_PRE_DESTROY = "javax.annotation.PreDestroy";
-	private static final String JAVAX_ANNOTATION_BRIDGE_PRE_DESTROY = BridgePreDestroy.class.getName();
+	private static final String JAVAX_ANNOTATION_BRIDGE_PRE_DESTROY = "javax.portlet.faces.annotation.BridgePreDestroy";
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ManagedBeanUtil.class);

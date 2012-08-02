@@ -19,7 +19,7 @@ import javax.faces.context.ExternalContext;
 import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.util.ManagedBeanUtil;
+import com.liferay.faces.util.cdi.ManagedBeanUtil;
 import com.liferay.faces.util.map.AbstractPropertyMap;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 import com.liferay.faces.util.product.Product;
