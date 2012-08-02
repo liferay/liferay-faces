@@ -18,8 +18,8 @@ import java.util.Enumeration;
 import javax.portlet.PortletPreferences;
 import javax.portlet.faces.preference.Preference;
 
-import com.liferay.faces.bridge.util.AbstractPropertyMap;
-import com.liferay.faces.bridge.util.AbstractPropertyMapEntry;
+import com.liferay.faces.util.map.AbstractPropertyMap;
+import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
 
 /**

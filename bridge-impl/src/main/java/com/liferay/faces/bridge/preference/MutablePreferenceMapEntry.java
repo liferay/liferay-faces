@@ -15,7 +15,7 @@ package com.liferay.faces.bridge.preference;
 
 import javax.portlet.faces.preference.Preference;
 
-import com.liferay.faces.bridge.util.AbstractPropertyMapEntry;
+import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
 
 /**
