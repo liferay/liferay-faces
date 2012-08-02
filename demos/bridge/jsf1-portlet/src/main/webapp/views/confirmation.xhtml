@@ -6,15 +6,9 @@
 		<ui:include src="styling.xhtml" />
 		<h:messages />
 		<h:form>
-			<!-- Test JSF 2 Flash scope -->
-			<h:outputText value="#{i18n['dear']} #{bridgeFlash['firstName']}," />
-			<br />
 			<h:outputText value="#{i18n['thank-you-for-applying-for-a-job-with-our-organization']}" />
 			<hr />
-			<!-- Test JSF 2 implicit navigation -->
-			<h:commandButton action="/views/portletViewMode.xhtml" value="#{i18n['submit-another-application']}">
-				<f:ajax execute="@form" render="@form" />
-			</h:commandButton>
+			<h:commandButton action="submit-another-application" value="#{i18n['submit-another-application']}" />
 		</h:form>
 	</h:panelGroup>
 </f:view>
