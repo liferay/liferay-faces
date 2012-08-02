@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE facelet-taglib PUBLIC "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN" "http://java.sun.com/dtd/facelet-taglib_1_0.dtd">
+<facelet-taglib>
+	<namespace>http://java.sun.com/portlet_2_0</namespace>
+	<tag>
+		<tag-name>actionURL</tag-name>
+		<component>
+			<component-type>com.liferay.faces.bridge.component.PortletActionURL</component-type>
+		</component>
+	</tag>
+	<tag>
+		<tag-name>defineObjects</tag-name>
+		<component>
+			<component-type>com.liferay.faces.bridge.component.PortletDefineObjects</component-type>
+		</component>
+	</tag>
+	<tag>
+		<tag-name>namespace</tag-name>
+		<component>
+			<component-type>com.liferay.faces.bridge.component.PortletNameSpace</component-type>
+		</component>
+	</tag>
+	<tag>
+		<tag-name>param</tag-name>
+		<component>
+			<component-type>com.liferay.faces.bridge.component.PortletParam</component-type>
+		</component>
+	</tag>
+	<tag>
+		<tag-name>property</tag-name>
+		<component>
+			<component-type>com.liferay.faces.bridge.component.PortletProperty</component-type>
+		</component>
+	</tag>
+	<tag>
+		<tag-name>renderURL</tag-name>
+		<component>
+			<component-type>com.liferay.faces.bridge.component.PortletRenderURL</component-type>
+		</component>
+	</tag>
+	<tag>
+		<tag-name>resourceURL</tag-name>
+		<component>
+			<component-type>com.liferay.faces.bridge.component.PortletResourceURL</component-type>
+		</component>
+	</tag>
+</facelet-taglib>
