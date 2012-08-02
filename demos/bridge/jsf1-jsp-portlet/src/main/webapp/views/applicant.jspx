@@ -47,8 +47,8 @@
 							<h:message id="provinceIdMessage" for="provinceId" />
 						</aui:field>
 						<aui:field id="postalCodeField" label="#{i18n['zip-postal']}">
-							<h:inputText id="postalCode" immediate="true" onchange="this.form.submit()" required="true" value="#{applicantModelBean.postalCode}"
-								valueChangeListener="#{applicantBackingBean.postalCodeListener}" />
+							<h:inputText id="postalCode" immediate="true" onchange="this.form.submit()" required="true"
+								value="#{applicantModelBean.postalCode}" valueChangeListener="#{applicantBackingBean.postalCodeListener}" />
 							<h:graphicImage value="/images/icon-help.png" title="#{i18n['postal-code-hint']}" />
 							<h:message id="postalCodeMessage" for="postalCode" />
 						</aui:field>
@@ -58,9 +58,9 @@
 					<aui:column>
 						<aui:field id="commentsField" label="#{i18n['comments']}">
 							<h:panelGroup id="showHide" layout="block">
-								<h:commandLink actionListener="#{applicantBackingBean.toggleComments}"
+								<h:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true"
 									rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
-								<h:commandLink actionListener="#{applicantBackingBean.toggleComments}"
+								<h:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true"
 									rendered="#{applicantViewBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
 							</h:panelGroup>
 							<h:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantViewBean.commentsRendered}"
