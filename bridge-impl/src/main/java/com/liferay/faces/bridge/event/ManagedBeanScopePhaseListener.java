@@ -27,7 +27,7 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.PortletPhase;
 
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.util.ManagedBeanUtil;
+import com.liferay.faces.util.cdi.ManagedBeanUtil;
 
 
 /**

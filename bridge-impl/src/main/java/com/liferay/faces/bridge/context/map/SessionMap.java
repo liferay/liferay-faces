@@ -20,7 +20,7 @@ import java.util.Set;
 import javax.faces.context.ExternalContext;
 import javax.portlet.PortletSession;
 
-import com.liferay.faces.bridge.util.ManagedBeanUtil;
+import com.liferay.faces.util.cdi.ManagedBeanUtil;
 import com.liferay.faces.util.map.AbstractPropertyMap;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
