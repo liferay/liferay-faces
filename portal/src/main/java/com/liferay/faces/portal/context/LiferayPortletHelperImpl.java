@@ -19,10 +19,10 @@ import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletRequest;
 
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.portal.bean.Liferay;
 import com.liferay.faces.portal.security.AuthorizationException;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
@@ -246,7 +246,16 @@ public class LiferayPortletHelperImpl implements LiferayPortletHelper, Serializa
 			portalURL = themeDisplay.getPortalURL();
 		}
 
-		return portalURL + themeDisplay.getPathThemeImages();
+		String pathThemeImages = themeDisplay.getPathThemeImages();
+
+		if (pathThemeImages.startsWith(portalURL)) {
+
+			// The portalURL will already be included for versions of Liferay Portal newer than 6.1.0 CE GA1
+			return pathThemeImages;
+		}
+		else {
+			return portalURL + pathThemeImages;
+		}
 	}
 
 	public User getUser() {
