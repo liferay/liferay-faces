@@ -305,8 +305,10 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 			logger.debug("Setting render parameter name=[{0}] value=[{1}]", bridgeRequestScopeKey,
 				bridgeRequestScopeId);
 
-			StateAwareResponse stateAwareResponse = (StateAwareResponse) portletResponse;
-			stateAwareResponse.setRenderParameter(bridgeRequestScopeKey, bridgeRequestScopeId);
+			if (!bridgeRequestScope.isRedirectOccurred()) {
+				StateAwareResponse stateAwareResponse = (StateAwareResponse) portletResponse;
+				stateAwareResponse.setRenderParameter(bridgeRequestScopeKey, bridgeRequestScopeId);
+			}
 		}
 		else if (portletResponse instanceof ResourceResponse) {
 
