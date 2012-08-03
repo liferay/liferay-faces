@@ -177,7 +177,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 
 		// Save the BridgeContext as a request attribute for legacy versions of ICEfaces.
 		portletRequest.setAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE, bridgeContext);
-		
+
 		// Get the FacesContext.
 		facesContext = getFacesContext(portletRequest, portletResponse, facesLifecycle);
 
@@ -305,9 +305,29 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 			logger.debug("Setting render parameter name=[{0}] value=[{1}]", bridgeRequestScopeKey,
 				bridgeRequestScopeId);
 
-			if (!bridgeRequestScope.isRedirectOccurred()) {
+			try {
 				StateAwareResponse stateAwareResponse = (StateAwareResponse) portletResponse;
 				stateAwareResponse.setRenderParameter(bridgeRequestScopeKey, bridgeRequestScopeId);
+			}
+			catch (IllegalStateException e) {
+
+				// If a redirect occurred, then swallow/ignore the IllegalStateException
+				if (bridgeRequestScope.isRedirectOccurred()) {
+
+					// The Portlet API JavaDocs indicate that StateAwareResponse.setRenderParameter(String, String) must
+					// throw an IllegalStateException if ActionResponse.sendRedirect(String) was previously called. The
+					// JSR 329 TCK TestPage039 (requestNoScopeOnRedirectTest) and TestPage176 (redirectActionTest) both
+					// perform pseudo-redirects (effectively treated like navigation-rules from one JSF viewId to
+					// another). Since the tests don't actually call ActionResponse.sendRedirect(String), this condition
+					// is never reached by the TCK. However, this condition is a real-world use-case and so the
+					// IllegalStateException must be swallowed/ignored here so that portlet lifecycle processing is able
+					// to continue. For more information, see: http://issues.liferay.com/browse/FACES-1367
+				}
+
+				// Otherwise throw the IllegalStateException.
+				else {
+					throw e;
+				}
 			}
 		}
 		else if (portletResponse instanceof ResourceResponse) {
