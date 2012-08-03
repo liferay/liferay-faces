@@ -2,7 +2,10 @@
 <!--
   MODIFIED FOR COMPATIBILITY WITH LIFERAY PORTAL
 
-  The TCK TestPage017 (requestProcessingNonFacesTest) issues a non-Faces request for "/tests/chapter4_2_5Result.jsp" but
+  1) The "portletConfigWrapperClass" context-param must be added in order for Liferay Portal to be compatible with the
+  portlet-name requirements of the GenericFacesTestSuitePortlet.init(PortletConfig) method.
+
+  2) The TCK TestPage017 (requestProcessingNonFacesTest) issues a non-Faces request for "/tests/chapter4_2_5Result.jsp" but
   the Liferay Portal does not properly handle this unless an explicit servlet-mapping exists for the Tomcat JspServlet.
   Specifically, the Liferay PortletRequestDispatcherImpl#dispatch(PortletRequest, PortletResponse, boolean, boolean)
   protected method will not properly initialize the pathInfo and servletPath variables that it uses to construct the
@@ -44,6 +47,13 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
   <display-name>bridge_Test_web</display-name>
+
+  <!-- BEGIN: LIFERAY PORTAL -->
+  <context-param>
+  	<param-name>portletConfigWrapperClass</param-name>
+  	<param-value>com.liferay.faces.bridge.tck.portlet.PortletConfigWrapper</param-value>
+  </context-param>
+  <!-- END: LIFERAY PORTAL -->
 
   <context-param>
     <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
