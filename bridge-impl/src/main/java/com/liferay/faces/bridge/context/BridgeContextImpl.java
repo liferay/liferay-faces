@@ -412,6 +412,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 						(url.startsWith(StringPool.POUND) || bridgeRedirectURL.isExternal() ||
 							BooleanHelper.isTrueToken(bridgeRedirectURL.getParameter(Bridge.DIRECT_LINK)))) {
 
+					bridgeRequestScope.setRedirectOccurred(true);
+
 					// TCK NOTE: The TCK does not appear to have a test that invokes this condition.
 					portletContainer.redirect(bridgeRedirectURL.toString());
 				}
