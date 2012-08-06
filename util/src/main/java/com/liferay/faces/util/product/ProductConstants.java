@@ -28,6 +28,5 @@ public class ProductConstants {
 	public static final String MYFACES = "MyFaces";
 	public static final String PRIMEFACES = "PrimeFaces";
 	public static final String RICHFACES = "RichFaces";
-	public static final String TCK_JSR_329 = "TCK JSR 329";
 
 }
