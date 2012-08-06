@@ -52,6 +52,8 @@
   	<param-name>portletConfigWrapperClass</param-name>
   	<param-value>com.liferay.faces.bridge.tck.portlet.PortletConfigWrapper</param-value>
   </context-param>
+  <!-- END: LIFERAY PORTAL -->
+  <!-- BEGIN: LIFERAY FACES BRIDGE -->
   <context-param>
   	<param-name>com.liferay.faces.bridge.bridgeRequestScopeAjaxEnabled</param-name>
   	<param-value>true</param-value>
@@ -68,7 +70,7 @@
   	<param-name>com.liferay.faces.bridge.manageIncongruities</param-name>
   	<param-value>false</param-value>
   </context-param>
-  <!-- END: LIFERAY PORTAL -->
+  <!-- END: LIFERAY FACES BRIDGE -->
 
   <context-param>
     <param-name>javax.faces.DEFAULT_SUFFIX</param-name>

@@ -23,6 +23,25 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
   <display-name>bridge_Test_web</display-name>
+
+  <!-- BEGIN: LIFERAY FACES BRIDGE -->
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.bridgeRequestScopeAjaxEnabled</param-name>
+  	<param-value>true</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.renderRedirectEnabled</param-name>
+  	<param-value>true</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.optimizePortletNamespace</param-name>
+  	<param-value>false</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.manageIncongruities</param-name>
+  	<param-value>false</param-value>
+  </context-param>
+  <!-- END: LIFERAY FACES BRIDGE -->
   
    <context-param>
     <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
