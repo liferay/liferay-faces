@@ -62,8 +62,6 @@ import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.product.ProductConstants;
-import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -76,8 +74,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 	// Private Constants
 	private static final String NON_NUMERIC_NAMESPACE_PREFIX = "A";
-	private static final boolean TCK_JSR_329_DETECTED = ProductMap.getInstance().get(ProductConstants.TCK_JSR_329)
-		.isDetected();
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeContextImpl.class);
@@ -884,18 +880,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 		if (initParameter == null) {
 			initParameter = portletContext.getInitParameter(name);
-		}
-
-		if (TCK_JSR_329_DETECTED) {
-
-			if (BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_AJAX_ENABLED.equals(name) ||
-					BridgeConfigConstants.PARAM_RENDER_REDIRECT_ENABLED.equals(name)) {
-				initParameter = Boolean.TRUE.toString();
-			}
-			else if (BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE1.equals(name) ||
-					BridgeConfigConstants.PARAM_MANAGE_INCONGRUITIES.equals(name)) {
-				initParameter = Boolean.FALSE.toString();
-			}
 		}
 
 		return initParameter;
