@@ -70,7 +70,7 @@ public abstract class LiferayBaseURL implements BaseURL {
 
 	public String encode(String value) {
 
-		String encodedValue = StringPool.EMPTY;
+		String encodedValue = StringPool.BLANK;
 
 		if (value != null) {
 
@@ -130,11 +130,11 @@ public abstract class LiferayBaseURL implements BaseURL {
 			// Always add the p_p_id parameter
 			String parameterValue = responseNamespace;
 
-			if (parameterValue.startsWith(StringPool.UNDERSCORE)) {
+			if (parameterValue.startsWith(StringPool.UNDERLINE)) {
 				parameterValue = parameterValue.substring(1);
 			}
 
-			if (parameterValue.endsWith(StringPool.UNDERSCORE)) {
+			if (parameterValue.endsWith(StringPool.UNDERLINE)) {
 				parameterValue = parameterValue.substring(0, parameterValue.length() - 1);
 			}
 
@@ -264,7 +264,7 @@ public abstract class LiferayBaseURL implements BaseURL {
 			String namespace = responseNamespace;
 
 			if (namespace.startsWith(BridgeConstants.WSRP)) {
-				namespace = StringPool.EMPTY;
+				namespace = StringPool.BLANK;
 			}
 
 			Set<Map.Entry<String, String[]>> mapEntries = this.getParameterMap().entrySet();
@@ -327,7 +327,7 @@ public abstract class LiferayBaseURL implements BaseURL {
 		}
 
 		url.append(parameterName);
-		url.append(StringPool.EQUALS);
+		url.append(StringPool.EQUAL);
 		url.append(parameterValue);
 
 		logger.debug("Appended param to URL name=[{0}] parameterValue=[{1}]", parameterName, parameterValue);
