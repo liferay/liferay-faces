@@ -622,7 +622,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 
 					break;
 				}
-				else if (excludedAttribute.endsWith(StringPool.ASTERISK)) {
+				else if (excludedAttribute.endsWith(StringPool.STAR)) {
 
 					String wildcardNamespace = excludedAttribute;
 					int dotPos = wildcardNamespace.lastIndexOf(StringPool.PERIOD);

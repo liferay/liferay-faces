@@ -353,7 +353,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 				}
 
 				if (!found) {
-					String urlPattern = StringPool.ASTERISK + defaultSuffix;
+					String urlPattern = StringPool.STAR + defaultSuffix;
 					ServletMapping implicitFacesServletMapping = new ServletMappingImpl(urlPattern);
 					facesServletMappings.add(implicitFacesServletMapping);
 					logger.debug("Added implicit extension-mapped servlet-mapping for urlPattern=[{0}]", urlPattern);

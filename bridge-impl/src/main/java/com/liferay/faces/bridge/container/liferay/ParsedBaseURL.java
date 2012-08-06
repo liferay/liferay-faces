@@ -42,7 +42,7 @@ public class ParsedBaseURL {
 		wsrpParameters = new ArrayList<URLParameter>();
 
 		String queryString = toStringValue;
-		int queryPos = toStringValue.indexOf(StringPool.QUESTION_MARK);
+		int queryPos = toStringValue.indexOf(StringPool.QUESTION);
 
 		if (queryPos > 0) {
 			prefix = toStringValue.substring(0, queryPos + 1);
@@ -55,7 +55,7 @@ public class ParsedBaseURL {
 
 			for (String nameValuePair : nameValuePairs) {
 
-				int equalsPos = nameValuePair.indexOf(StringPool.EQUALS);
+				int equalsPos = nameValuePair.indexOf(StringPool.EQUAL);
 
 				if (equalsPos > 0) {
 

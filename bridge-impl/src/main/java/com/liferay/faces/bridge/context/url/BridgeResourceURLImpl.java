@@ -63,7 +63,7 @@ public class BridgeResourceURLImpl extends BridgeResourceURLCompatImpl {
 	public void replaceBackLinkParameter(FacesContext facesContext) {
 		String backLinkViewId = facesContext.getViewRoot().getViewId();
 		String backLinkURL = facesContext.getApplication().getViewHandler().getActionURL(facesContext, backLinkViewId);
-		String backLinkEncodedActionURL = StringPool.EMPTY;
+		String backLinkEncodedActionURL = StringPool.BLANK;
 
 		try {
 			backLinkEncodedActionURL = URLEncoder.encode(facesContext.getExternalContext().encodeActionURL(backLinkURL),

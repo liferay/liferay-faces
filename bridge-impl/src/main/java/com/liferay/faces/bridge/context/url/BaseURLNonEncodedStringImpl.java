@@ -75,7 +75,7 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 			String queryString = getQuery();
 
 			if (queryString.length() > 0) {
-				buf.append(StringPool.QUESTION_MARK);
+				buf.append(StringPool.QUESTION);
 				buf.append(queryString);
 			}
 
@@ -101,7 +101,7 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 	protected String getMain() {
 
 		if (main == null) {
-			int queryPos = url.indexOf(StringPool.QUESTION_MARK);
+			int queryPos = url.indexOf(StringPool.QUESTION);
 
 			if (queryPos >= 0) {
 				main = url.substring(0, queryPos);
@@ -144,9 +144,9 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 			StringBuilder buf = new StringBuilder();
 
 			// Get the original query-string from the URL.
-			String originalQuery = StringPool.EMPTY;
+			String originalQuery = StringPool.BLANK;
 			boolean firstParam = true;
-			int queryPos = url.indexOf(StringPool.QUESTION_MARK);
+			int queryPos = url.indexOf(StringPool.QUESTION);
 
 			if (queryPos >= 0) {
 				originalQuery = url.substring(queryPos + 1);
@@ -173,7 +173,7 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 
 					if (nameValueArray.length == 1) {
 						name = nameValueArray[0];
-						values = new String[] { StringPool.EMPTY };
+						values = new String[] { StringPool.BLANK };
 					}
 					else if (nameValueArray.length == 2) {
 						name = nameValueArray[0];
@@ -194,7 +194,7 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 						}
 
 						buf.append(name);
-						buf.append(StringPool.EQUALS);
+						buf.append(StringPool.EQUAL);
 						buf.append(values[0]);
 						processedParameterNames.add(name);
 					}
@@ -232,7 +232,7 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 						}
 
 						buf.append(name);
-						buf.append(StringPool.EQUALS);
+						buf.append(StringPool.EQUAL);
 						buf.append(values[0]);
 					}
 				}
