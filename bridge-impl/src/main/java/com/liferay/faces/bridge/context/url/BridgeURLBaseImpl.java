@@ -161,7 +161,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 		StringBuilder buf = new StringBuilder();
 
-		int endPos = url.indexOf(StringPool.QUESTION_MARK);
+		int endPos = url.indexOf(StringPool.QUESTION);
 
 		if (endPos < 0) {
 			endPos = url.length();
@@ -186,7 +186,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 		boolean firstParam = true;
 
-		buf.append(StringPool.QUESTION_MARK);
+		buf.append(StringPool.QUESTION);
 
 		Set<String> parameterNames = getParameterNames();
 
@@ -236,7 +236,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 				}
 
 				buf.append(parameterName);
-				buf.append(StringPool.EQUALS);
+				buf.append(StringPool.EQUAL);
 				buf.append(parameterValue);
 			}
 		}
@@ -257,7 +257,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 					buf.append(getViewIdParameterName());
 
-					buf.append(StringPool.EQUALS);
+					buf.append(StringPool.EQUAL);
 					buf.append(getContextRelativePath());
 				}
 			}
@@ -324,7 +324,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 			// If the URL is external, then there is no such thing as a context-relative path in this URL. In this case,
 			// return an empty string so that lazy-initialization doesn't take place again.
 			if (isExternal()) {
-				contextRelativePath = StringPool.EMPTY;
+				contextRelativePath = StringPool.BLANK;
 			}
 
 			// Otherwise,
@@ -359,7 +359,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 			escaped = Boolean.FALSE;
 
-			int questionMarkPos = url.indexOf(StringPool.QUESTION_MARK);
+			int questionMarkPos = url.indexOf(StringPool.QUESTION);
 
 			if (questionMarkPos > 0) {
 
@@ -369,7 +369,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 					String subURL = url.substring(ampersandPos);
 
-					if (subURL.startsWith(StringPool.AMERSAND_ENCODED)) {
+					if (subURL.startsWith(StringPool.AMPERSAND_ENCODED)) {
 						escaped = Boolean.TRUE;
 						ampersandPos = url.indexOf(StringPool.AMPERSAND, ampersandPos + 1);
 					}
@@ -704,7 +704,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 				logger.error(e1.getMessage());
 
 				try {
-					uri = new URI(StringPool.EMPTY);
+					uri = new URI(StringPool.BLANK);
 				}
 				catch (URISyntaxException e2) {
 					// ignore -- will never happen

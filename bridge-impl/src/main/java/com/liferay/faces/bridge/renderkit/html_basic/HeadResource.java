@@ -67,14 +67,14 @@ public class HeadResource {
 
 		if (url != null) {
 
-			int queryPos = url.indexOf(StringPool.QUESTION_MARK);
+			int queryPos = url.indexOf(StringPool.QUESTION);
 
 			if (queryPos > 0) {
 				String parameters = url.substring(queryPos + 1);
 				String[] nameValuePairs = parameters.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
 
 				for (String nameValuePair : nameValuePairs) {
-					int equalsPos = nameValuePair.indexOf(StringPool.EQUALS);
+					int equalsPos = nameValuePair.indexOf(StringPool.EQUAL);
 
 					if (equalsPos > 0) {
 						String name = nameValuePair.substring(0, equalsPos);
@@ -132,7 +132,7 @@ public class HeadResource {
 			for (Attribute attribute : attributeList) {
 				stringBuilder.append(StringPool.SPACE);
 				stringBuilder.append(attribute.getName());
-				stringBuilder.append(StringPool.EQUALS);
+				stringBuilder.append(StringPool.EQUAL);
 				stringBuilder.append(StringPool.DOUBLE_QUOTE);
 				stringBuilder.append(attribute.getValue());
 				stringBuilder.append(StringPool.DOUBLE_QUOTE);

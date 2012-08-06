@@ -48,7 +48,7 @@ public class LiferayPortalUtil {
 
 				// For some reason, when running as a WSRP producer, the underscores are missing from the beginning
 				// and end...
-				portletId = StringPool.UNDERSCORE + portletId + StringPool.UNDERSCORE;
+				portletId = StringPool.UNDERLINE + portletId + StringPool.UNDERLINE;
 			}
 		}
 		catch (Exception e) {

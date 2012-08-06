@@ -32,7 +32,7 @@ public class ProductRichFacesImpl extends ProductBaseImpl {
 			Method method = versionObj.getClass().getMethod("getVersion", new Class[] {});
 			String version = (String) method.invoke(versionObj, (Object[]) null);
 			if (version != null) {
-				version = version.replaceFirst("[^0-9]*", StringPool.EMPTY);
+				version = version.replaceFirst("[^0-9]*", StringPool.BLANK);
 				initVersionInfo(version);
 			}
 			if (this.majorVersion > 0) {

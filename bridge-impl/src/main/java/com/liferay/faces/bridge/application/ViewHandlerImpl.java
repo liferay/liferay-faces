@@ -62,7 +62,7 @@ public class ViewHandlerImpl extends ViewHandlerCompatImpl {
 
 			viewId = evaluateExpressionJSF1(facesContext, viewId);
 
-			int pos = viewId.indexOf(StringPool.QUESTION_MARK);
+			int pos = viewId.indexOf(StringPool.QUESTION);
 
 			if (pos > 0) {
 				queryString = viewId.substring(pos);
@@ -104,7 +104,7 @@ public class ViewHandlerImpl extends ViewHandlerCompatImpl {
 
 		if (viewId != null) {
 			boolean replacedDotChars = false;
-			int questionMarkPos = viewId.indexOf(StringPool.QUESTION_MARK);
+			int questionMarkPos = viewId.indexOf(StringPool.QUESTION);
 
 			if (questionMarkPos > 0) {
 

@@ -103,7 +103,7 @@ public class ScriptRendererBridgeImpl extends RendererWrapper {
 		public void writeAttribute(String name, Object value, String property) throws IOException {
 			write(StringPool.SPACE);
 			write(name);
-			write(StringPool.EQUALS);
+			write(StringPool.EQUAL);
 			write(StringPool.DOUBLE_QUOTE);
 			write((String) value);
 			write(StringPool.DOUBLE_QUOTE);

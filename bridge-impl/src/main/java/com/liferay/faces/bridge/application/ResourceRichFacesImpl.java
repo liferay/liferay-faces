@@ -52,9 +52,9 @@ public class ResourceRichFacesImpl extends ResourceWrapper {
 
 				// Some resources like fileUploadProgress will have an extension like ".xhtml" appended to them which
 				// must be removed.
-				requestPath = requestPath.replaceAll("[.]faces", StringPool.EMPTY);
-				requestPath = requestPath.replaceAll("[.]jsf", StringPool.EMPTY);
-				requestPath = requestPath.replaceAll("[.]xhtml", StringPool.EMPTY);
+				requestPath = requestPath.replaceAll("[.]faces", StringPool.BLANK);
+				requestPath = requestPath.replaceAll("[.]jsf", StringPool.BLANK);
+				requestPath = requestPath.replaceAll("[.]xhtml", StringPool.BLANK);
 
 				// Encode the request path as a portlet ResourceURL.
 				FacesContext facesContext = FacesContext.getCurrentInstance();
