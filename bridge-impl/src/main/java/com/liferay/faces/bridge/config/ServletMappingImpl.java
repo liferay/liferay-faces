@@ -29,7 +29,7 @@ public class ServletMappingImpl implements ServletMapping {
 	private static final Logger logger = LoggerFactory.getLogger(ServletMappingImpl.class);
 
 	// Private Strings
-	private static final String EXTENSION_WILDCARD = StringPool.ASTERISK + StringPool.PERIOD;
+	private static final String EXTENSION_WILDCARD = StringPool.STAR + StringPool.PERIOD;
 
 	// Private Data Members
 	private String extension;
@@ -45,10 +45,10 @@ public class ServletMappingImpl implements ServletMapping {
 
 			// If the specified urlPattern is path-mapped (like /views/foo/bar/*), then set a flag and remember the
 			// path (/views/foo/bar).
-			if (urlPattern.startsWith(StringPool.FORWARD_SLASH) && urlPattern.endsWith(StringPool.ASTERISK)) {
+			if (urlPattern.startsWith(StringPool.FORWARD_SLASH) && urlPattern.endsWith(StringPool.STAR)) {
 				pathMapped = true;
 				path = urlPattern.substring(0,
-						urlPattern.length() - StringPool.FORWARD_SLASH.length() - StringPool.ASTERISK.length());
+						urlPattern.length() - StringPool.FORWARD_SLASH.length() - StringPool.STAR.length());
 			}
 
 			// Otherwise, if the specified urlPattern is extension-mapped (like *.faces), then set a flag and remember
@@ -57,7 +57,7 @@ public class ServletMappingImpl implements ServletMapping {
 
 				if (urlPattern.startsWith(EXTENSION_WILDCARD)) {
 					extensionMapped = true;
-					extension = urlPattern.substring(StringPool.ASTERISK.length());
+					extension = urlPattern.substring(StringPool.STAR.length());
 				}
 			}
 		}

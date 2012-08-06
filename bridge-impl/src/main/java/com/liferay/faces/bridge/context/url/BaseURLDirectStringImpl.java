@@ -59,7 +59,7 @@ public class BaseURLDirectStringImpl extends BaseURLNonEncodedStringImpl {
 		String queryString = getQuery();
 
 		if (queryString.length() > 0) {
-			buf.append(StringPool.QUESTION_MARK);
+			buf.append(StringPool.QUESTION);
 			buf.append(queryString);
 		}
 

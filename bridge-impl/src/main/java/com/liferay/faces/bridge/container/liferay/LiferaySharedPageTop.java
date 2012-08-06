@@ -76,7 +76,7 @@ public class LiferaySharedPageTop {
 			xmlDocument.append(StringPool.GREATER_THAN);
 
 			String xmlDocumentAsString = xmlDocument.toString().replaceAll(BridgeConstants.REGEX_AMPERSAND_DELIMITER,
-					StringPool.AMERSAND_ENCODED);
+					StringPool.AMPERSAND_ENCODED);
 			ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(xmlDocumentAsString.getBytes());
 			saxParser.parse(byteArrayInputStream, sharedPageTopHandler);
 			byteArrayInputStream.close();

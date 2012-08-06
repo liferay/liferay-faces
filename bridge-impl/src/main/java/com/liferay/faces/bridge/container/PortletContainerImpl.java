@@ -529,7 +529,7 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 			buf.append(StringPool.COLON);
 			buf.append(portletRequest.getServerPort());
 			buf.append(portletRequest.getContextPath());
-			buf.append(StringPool.QUESTION_MARK);
+			buf.append(StringPool.QUESTION);
 			buf.append(getRequestQueryString());
 			requestURL = buf.toString();
 		}

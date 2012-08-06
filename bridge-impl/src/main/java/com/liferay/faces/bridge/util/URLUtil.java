@@ -42,7 +42,7 @@ public class URLUtil {
 
 			if (pos > 0) {
 				String queryString = url.substring(pos + 1);
-				queryString = queryString.replaceAll(StringPool.AMERSAND_ENCODED, StringPool.AMPERSAND);
+				queryString = queryString.replaceAll(StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
 
 				if ((queryString != null) && (queryString.length() > 0)) {
 
@@ -55,7 +55,7 @@ public class URLUtil {
 
 							if (nameValueArray.length == 1) {
 								String name = nameValueArray[0];
-								String value = StringPool.EMPTY;
+								String value = StringPool.BLANK;
 								parameterMapValuesArray.put(name, new String[] { value });
 							}
 							else if (nameValueArray.length == 2) {

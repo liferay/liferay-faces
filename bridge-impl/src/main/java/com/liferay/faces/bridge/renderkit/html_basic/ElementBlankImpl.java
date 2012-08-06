@@ -25,7 +25,7 @@ import com.liferay.faces.util.lang.StringPool;
 public class ElementBlankImpl extends ElementImpl {
 
 	public ElementBlankImpl() {
-		super(StringPool.EMPTY);
+		super(StringPool.BLANK);
 	}
 
 	@Override

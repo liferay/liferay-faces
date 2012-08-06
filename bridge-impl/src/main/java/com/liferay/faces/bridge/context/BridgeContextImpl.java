@@ -637,7 +637,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			String navigationQueryString = null;
 
 			if (fullViewId != null) {
-				int pos = fullViewId.indexOf(StringPool.QUESTION_MARK);
+				int pos = fullViewId.indexOf(StringPool.QUESTION);
 
 				if (pos > 0) {
 					navigationQueryString = fullViewId.substring(pos + 1);
@@ -701,7 +701,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 				if (viewPath != null) {
 
 					// If present, remove the query string from the specified viewPath.
-					int pos = viewPath.indexOf(StringPool.QUESTION_MARK);
+					int pos = viewPath.indexOf(StringPool.QUESTION);
 
 					if (pos > 0) {
 						viewPath = viewPath.substring(0, pos);
@@ -1096,7 +1096,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			else if (facesView.isPathMapped()) {
 				requestServletPath = facesView.getViewId();
 
-				int pos = requestServletPath.lastIndexOf(StringPool.FORWARD_SLASH + StringPool.ASTERISK);
+				int pos = requestServletPath.lastIndexOf(StringPool.FORWARD_SLASH + StringPool.STAR);
 
 				if (pos >= 0) {
 					requestServletPath = requestServletPath.substring(0, pos);
@@ -1109,7 +1109,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			// Otherwise, since there is no servlet-mapping, return an empty string. This is not required by the spec
 			// but seems to work in a Facelets environment where there is no servlet-mapping.
 			else {
-				requestServletPath = StringPool.EMPTY;
+				requestServletPath = StringPool.BLANK;
 				logger.debug("requestServletPath=[{0}] servletMapping=[NONE] viewId=[{1}]", requestServletPath, viewId);
 			}
 

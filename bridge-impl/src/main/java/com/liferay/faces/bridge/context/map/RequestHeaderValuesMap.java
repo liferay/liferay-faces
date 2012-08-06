@@ -235,7 +235,7 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 				header.append(StringPool.SEMICOLON);
 				header.append(StringPool.SPACE);
 				header.append(CHARSET);
-				header.append(StringPool.EQUALS);
+				header.append(StringPool.EQUAL);
 				header.append(characterSetEncoding);
 			}
 

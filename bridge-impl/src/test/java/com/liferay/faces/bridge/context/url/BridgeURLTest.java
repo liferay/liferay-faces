@@ -119,7 +119,7 @@ public class BridgeURLTest {
 
 		try {
 			Assert.assertTrue(newBridgeURL("http://www.liferay.com").getContextRelativePath().equals(
-					StringPool.EMPTY));
+					StringPool.BLANK));
 			Assert.assertTrue(newBridgeURL("/views/foo.xhtml").getContextRelativePath().equals(
 					"/views/foo.xhtml"));
 			Assert.assertTrue(newBridgeURL(CONTEXT_PATH + "/views/foo.xhtml")
