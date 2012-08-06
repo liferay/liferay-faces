@@ -41,6 +41,24 @@
 			<artifactId>portlet-bridge-tck-section3-2-lifecycle-set</artifactId>
 			<version>${tck.version}</version>
 			<type>war</type>
+			<exclusions>
+				<exclusion>
+					<groupId>com.bekk.boss</groupId>
+					<artifactId>maven-jetty-pluto-embedded</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.faces</groupId>
+					<artifactId>jsf-impl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.myfaces.portlet-bridge</groupId>
+					<artifactId>portlet-bridge-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.myfaces.portlet-bridge</groupId>
+					<artifactId>portlet-bridge-impl</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.myfaces.portlet-bridge</groupId>
