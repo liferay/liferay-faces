@@ -54,24 +54,19 @@ public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		String initParam = externalContext.getInitParameter(Bridge.RENDER_POLICY);
 
+		BridgeRenderPolicy bridgeRenderPolicy = BridgeRenderPolicy.valueOf(initParam);
+
 		// If the developer has specified ALWAYS_DELEGATE in the WEB-INF/web.xml descriptor, then execute
 		// the Mojarra/MyFaces ViewDeclarationLanguage.
-		if (BridgeRenderPolicy.ALWAYS_DELEGATE.toString().equals(initParam)) {
+		if (bridgeRenderPolicy == BridgeRenderPolicy.ALWAYS_DELEGATE) {
 			super.renderView(facesContext, uiViewRoot);
 		}
 
-		// Otherwise, if the developer specified NEVER_DELEGATE or didn't specify a value, then execute the
-		// bridge's JSP ViewDeclarationLanguage implementation. Note that the spec indicates that if the
-		// developer doesn't specify a value, then the bridge first delegates to Mojarra/MyFaces but then
-		// tries its own JSP ViewDeclarationLanguage if an exception is thrown. This is non-performant
-		// because Mojarra/MyFaces will always throw the exception. This bridge implementation avoids this
-		// expensive operation because ViewDeclarationLanguageJspImpl wraps the Mojarra/MyFaces
-		// implementation in such a way that Mojarra/MyFaces can execute without throwing an exception.
+		// Otherwise, if the developer specified NEVER_DELEGATE or didn't specify a value, then execute then emulate
+		// the JSF 2.x distinction between buildView/renderView.
 		else {
-
-			// Emulate the JSF 2.x distinction between buildView/renderView.
 			_buildView(facesContext, uiViewRoot);
-			_renderView(facesContext, uiViewRoot);
+			_renderView(facesContext, uiViewRoot, bridgeRenderPolicy);
 		}
 	}
 
@@ -93,21 +88,39 @@ public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
 		logger.debug("Activated JSP AFTER_VIEW_CONTENT feature");
 	}
 
-	protected void _renderView(FacesContext facesContext, UIViewRoot uiViewRoot) throws IOException, FacesException {
+	protected void _renderView(FacesContext facesContext, UIViewRoot uiViewRoot, BridgeRenderPolicy bridgeRenderPolicy)
+		throws IOException, FacesException {
 
 		// This code is required by the spec in order to support a JSR 301 legacy feature to support usage of a
 		// servlet filter to capture the AFTER_VIEW_CONTENT. In reality it will likely never be used.
 		Map<String, Object> attributes = facesContext.getExternalContext().getRequestMap();
 		attributes.put(Bridge.RENDER_CONTENT_AFTER_VIEW, Boolean.TRUE);
 
-		try {
-			super.renderView(facesContext, uiViewRoot);
-		}
-		catch (FacesException e) {
+		// If the specified render policy is NEVER_DELEGATE, then execute the Mojarra/MyFaces render directly,
+		// bypassing the view-handler chain-of-responsibility.
+		if (bridgeRenderPolicy == BridgeRenderPolicy.NEVER_DELEGATE) {
 			ViewHandlerFactory viewHandlerFactory = (ViewHandlerFactory) BridgeFactoryFinder.getFactory(
 					ViewHandlerFactory.class);
 			ViewHandler viewHandler = viewHandlerFactory.getViewHandler();
 			viewHandler.renderView(facesContext, uiViewRoot);
+		}
+
+		// Otherwise,
+		else {
+
+			// Delegate the render to the view-handler chain-of-responsibility.
+			try {
+				super.renderView(facesContext, uiViewRoot);
+			}
+
+			// If an exception is thrown, then execute the Mojarra/MyFaces render directly, bypassing the view-handler
+			// chain-of-responsibility.
+			catch (FacesException e) {
+				ViewHandlerFactory viewHandlerFactory = (ViewHandlerFactory) BridgeFactoryFinder.getFactory(
+						ViewHandlerFactory.class);
+				ViewHandler viewHandler = viewHandlerFactory.getViewHandler();
+				viewHandler.renderView(facesContext, uiViewRoot);
+			}
 		}
 
 		attributes.remove(Bridge.RENDER_CONTENT_AFTER_VIEW);
