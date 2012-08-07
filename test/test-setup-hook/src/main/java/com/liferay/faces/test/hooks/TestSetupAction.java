@@ -158,6 +158,13 @@ public class TestSetupAction extends SimpleAction {
 			PortalPage portalPage = new PortalPage(pageName, liferayPortletId);
 			setupPage(userId, groupId, portalPage);
 		}
+		
+		setupPage(userId, groupId, new PortalPage("Lifecycle Set", "chapter3TestslifecycleTestportlet_WAR_bridgetcklifecyclesetportlet"));
+		setupPage(userId, groupId, new PortalPage("Render Policy Always Delegate", "chapter3TestsrenderPolicyTestportlet_WAR_bridgetckrenderpolicy1portlet"));
+		setupPage(userId, groupId, new PortalPage("Render Policy Default", "chapter3TestsrenderPolicyTestportlet_WAR_bridgetckrenderpolicy2portlet"));
+		setupPage(userId, groupId, new PortalPage("Render Policy Never Delegate", "chapter3TestsrenderPolicyTestportlet_WAR_bridgetckrenderpolicy3portlet"));
+		setupPage(userId, groupId, new PortalPage("Render Response Wrapper", "chapter6_2_1TestsusesConfiguredRenderResponseWrapperTestportlet_WAR_bridgetckresponsewrapperportlet"));
+		setupPage(userId, groupId, new PortalPage("Resource Response Wrapper", "chapter6_2_1TestsusesConfiguredResourceResponseWrapperTestportlet_WAR_bridgetckresponsewrapperportlet"));
 	}
 
 	protected void setupPage(long userId, long groupId, PortalPage portalPage) throws Exception {
