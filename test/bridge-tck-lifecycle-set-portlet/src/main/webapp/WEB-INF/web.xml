@@ -29,7 +29,10 @@
     <param-value>.jsp</param-value>
   </context-param>
   <context-param>
-    <param-name>javax.portlet.faces.LIFECYCLE_ID</param-name>
+  	<!-- BEGIN: LIFERAY FIX FOR https://issues.apache.org/jira/browse/PORTLETBRIDGE-229 -->
+    <!-- <param-name>javax.portlet.faces.LIFECYCLE_ID</param-name> -->
+    <param-name>javax.faces.LIFECYCLE_ID</param-name>
+    <!-- END: LIFERAY FIX -->
     <param-value>TCKLifecycle</param-value>
   </context-param>
 
