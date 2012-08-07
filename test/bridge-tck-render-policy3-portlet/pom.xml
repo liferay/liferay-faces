@@ -1,0 +1,116 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>com.liferay.faces.test</groupId>
+		<artifactId>liferay-faces-test</artifactId>
+		<version>3.1.0-ga1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>bridge-tck-render-policy3-portlet</artifactId>
+	<name>Bridge TCK Render Policy 3 Never Delegate Portlet</name>
+	<packaging>war</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>bridge-tck-compat</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.liferay.faces</groupId>
+			<artifactId>liferay-faces-bridge-impl</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.portlet</groupId>
+			<artifactId>portlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.myfaces.portlet-bridge</groupId>
+			<artifactId>portlet-bridge-tck-section3-2-render-policy-never-delegate</artifactId>
+			<version>${tck.version}</version>
+			<type>war</type>
+			<exclusions>
+				<exclusion>
+					<groupId>com.bekk.boss</groupId>
+					<artifactId>maven-jetty-pluto-embedded</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.faces</groupId>
+					<artifactId>jsf-impl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.myfaces.portlet-bridge</groupId>
+					<artifactId>portlet-bridge-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.myfaces.portlet-bridge</groupId>
+					<artifactId>portlet-bridge-impl</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.myfaces.portlet-bridge</groupId>
+			<artifactId>portlet-bridge-tck-section3-2-render-policy-never-delegate</artifactId>
+			<version>${tck.version}</version>
+			<type>warpath</type>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>liferay</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webXml>src/main/webapp/WEB-INF/web-liferay.xml</webXml>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<properties>
+				<bridge.tck.portal>liferay</bridge.tck.portal>
+			</properties>
+		</profile>
+	</profiles>
+
+	<!-- Note that this pom.xml provides similar functionality as the maven-assembly-plugin -->
+	<!-- but the "unpack" approach found below meets our needs better than the maven-assembly-plugin -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<dependentWarExcludes>WEB-INF/lib/*</dependentWarExcludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.appfuse.plugins</groupId>
+				<artifactId>maven-warpath-plugin</artifactId>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<goals>
+							<goal>add-classes</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
