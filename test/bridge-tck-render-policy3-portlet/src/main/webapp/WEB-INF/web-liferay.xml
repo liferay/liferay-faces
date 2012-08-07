@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- BEGIN: LIFERAY FIX FOR https://issues.apache.org/jira/browse/PORTLETBRIDGE-230 -->
+<!-- <!DOCTYPE web-app PUBLIC '-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN' 'http://java.sun.com/dtd/web-app_2_3.dtd'> -->
+<!-- <web-app> -->
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+<!-- END: LIFERAY FIX -->
+  <display-name>bridge_Test_web_section3-2-render-policy-never-delegate</display-name>
+
+  <!-- BEGIN: LIFERAY PORTAL -->
+  <context-param>
+  	<param-name>portletConfigWrapperClass</param-name>
+  	<param-value>com.liferay.faces.bridge.tck.portlet.PortletConfigWrapper</param-value>
+  </context-param>
+  <!-- END: LIFERAY PORTAL -->
+
+  <!-- BEGIN: LIFERAY FACES BRIDGE -->
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.bridgeRequestScopeAjaxEnabled</param-name>
+  	<param-value>true</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.renderRedirectEnabled</param-name>
+  	<param-value>true</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.optimizePortletNamespace</param-name>
+  	<param-value>false</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.manageIncongruities</param-name>
+  	<param-value>false</param-value>
+  </context-param>
+  <!-- END: LIFERAY FACES BRIDGE -->
+
+  <context-param>
+    <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+    <param-value>.jsp</param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.portlet.faces.RENDER_POLICY</param-name>
+    <param-value>NEVER_DELEGATE</param-value>
+  </context-param>
+  
+  
+  <!-- Faces Servlet -->
+  <servlet>
+    <servlet-name>faces</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+  </servlet>
+  
+
+  <!-- Faces Servlet Mappings -->
+  <!-- 
+    In this demo application, I chose to use suffix mapping.  I did this because it makes urls
+    in the portlet world look nicer in the source.  The portlet url should be the same 
+    reguardless.
+  -->
+  <servlet-mapping>
+    <servlet-name>faces</servlet-name>
+    <url-pattern>*.jsf</url-pattern>
+  </servlet-mapping>
+</web-app>
+
