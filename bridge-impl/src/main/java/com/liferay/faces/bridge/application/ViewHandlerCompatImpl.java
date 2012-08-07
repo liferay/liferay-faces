@@ -53,8 +53,11 @@ public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
 
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		String initParam = externalContext.getInitParameter(Bridge.RENDER_POLICY);
+		BridgeRenderPolicy bridgeRenderPolicy = BridgeRenderPolicy.DEFAULT;
 
-		BridgeRenderPolicy bridgeRenderPolicy = BridgeRenderPolicy.valueOf(initParam);
+		if (initParam != null) {
+			bridgeRenderPolicy = BridgeRenderPolicy.valueOf(initParam);
+		}
 
 		// If the developer has specified ALWAYS_DELEGATE in the WEB-INF/web.xml descriptor, then execute
 		// the Mojarra/MyFaces ViewDeclarationLanguage.
