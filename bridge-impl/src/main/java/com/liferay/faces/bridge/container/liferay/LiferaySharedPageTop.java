@@ -91,14 +91,15 @@ public class LiferaySharedPageTop {
 
 		int totalHeadResources = headResources.size();
 
-		for (int i = 1; i < totalHeadResources; i++) {
+		for (int i = 0; i < totalHeadResources; i++) {
 
 			HeadResource headResource1 = headResources.get(i);
 
-			for (int j = 0; j < i; j++) {
+			for (int j = i + 1; j < totalHeadResources; j++) {
 				HeadResource headResource2 = headResources.get(j);
 
 				if (!headResource2.isDuplicate() && headResource1.equals(headResource2)) {
+
 					headResource2.setDuplicate(true);
 
 					break;
