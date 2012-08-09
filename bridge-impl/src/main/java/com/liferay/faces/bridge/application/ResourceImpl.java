@@ -63,20 +63,21 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 	// Private Constants: Resources that can't be cached.
 	private static final String EXTENSION_FACES = ".faces";
 	private static final String LIBRARY_NAME_JAVAX_FACES = "javax.faces";
-	private static final String RESOURCE_NAME_JSF_JS = "jsf.js";
-	private static final String RESOURCE_NAME_ICEFACES_BRIDGE = "bridge.js";
-	private static final String RESOURCE_NAME_ICEFACES_PUSH = "icepush.js";
-	private static final String RESOURCE_NAME_ICEFACES_COMPAT = "compat.js";
-	private static final String RESOURCE_NAME_ICEFACES_OTHER_COMPAT = "icefaces-compat.js";
 
 	private static final ArrayList<String> NON_CACHED_RESOURCES = new ArrayList<String>(5);
 
 	static {
-		NON_CACHED_RESOURCES.add(RESOURCE_NAME_JSF_JS);
-		NON_CACHED_RESOURCES.add(RESOURCE_NAME_ICEFACES_BRIDGE);
-		NON_CACHED_RESOURCES.add(RESOURCE_NAME_ICEFACES_PUSH);
-		NON_CACHED_RESOURCES.add(RESOURCE_NAME_ICEFACES_COMPAT);
-		NON_CACHED_RESOURCES.add(RESOURCE_NAME_ICEFACES_OTHER_COMPAT);
+		NON_CACHED_RESOURCES.add("jsf.js");
+		NON_CACHED_RESOURCES.add("bridge.js");
+		NON_CACHED_RESOURCES.add("bridge.uncompressed.js");
+		NON_CACHED_RESOURCES.add("compat.js");
+		NON_CACHED_RESOURCES.add("compat.uncompressed.js");
+		NON_CACHED_RESOURCES.add("icefaces-compat.js");
+		NON_CACHED_RESOURCES.add("icefaces-compat.uncompressed.js");
+		NON_CACHED_RESOURCES.add("icepush.js");
+		NON_CACHED_RESOURCES.add("icepush.uncompressed.js");
+		NON_CACHED_RESOURCES.add("compat.js");
+		NON_CACHED_RESOURCES.add("icefaces-compat.js");
 	}
 
 	// Private Data Members
