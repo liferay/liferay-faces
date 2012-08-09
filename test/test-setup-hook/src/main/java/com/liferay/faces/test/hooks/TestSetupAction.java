@@ -58,7 +58,6 @@ public class TestSetupAction extends SimpleAction {
 		BRIDGE_DEMO_PAGES = new ArrayList<PortalPage>();
 		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF1", "1_WAR_jsf1portlet_INSTANCE_"));
 		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF1-JSP", "1_WAR_jsf1jspportlet_INSTANCE_"));
-		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF1-PDF", "1_WAR_jsf1exportpdfportlet_INSTANCE_"));
 		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF1-EVENTS",
 				new String[] {
 					"customers_WAR_jsf1ipceventscustomersportlet", "bookings_WAR_jsf1ipceventsbookingsportlet"
