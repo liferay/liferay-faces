@@ -104,9 +104,9 @@ public class ScriptRendererBridgeImpl extends RendererWrapper {
 			write(StringPool.SPACE);
 			write(name);
 			write(StringPool.EQUAL);
-			write(StringPool.DOUBLE_QUOTE);
+			write(StringPool.QUOTE);
 			write((String) value);
-			write(StringPool.DOUBLE_QUOTE);
+			write(StringPool.QUOTE);
 		}
 
 		@Override
