@@ -133,9 +133,9 @@ public class HeadResource {
 				stringBuilder.append(StringPool.SPACE);
 				stringBuilder.append(attribute.getName());
 				stringBuilder.append(StringPool.EQUAL);
-				stringBuilder.append(StringPool.DOUBLE_QUOTE);
+				stringBuilder.append(StringPool.QUOTE);
 				stringBuilder.append(attribute.getValue());
-				stringBuilder.append(StringPool.DOUBLE_QUOTE);
+				stringBuilder.append(StringPool.QUOTE);
 			}
 		}
 
