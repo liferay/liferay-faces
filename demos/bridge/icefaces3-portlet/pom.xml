@@ -28,6 +28,11 @@
 			<groupId>org.icefaces</groupId>
 			<artifactId>icefaces-ace</artifactId>
 		</dependency>
+		<!-- Note: icefaces-compat required due to http://jira.icesoft.org/browse/ICE-8444 -->
+		<dependency>
+			<groupId>org.icefaces</groupId>
+			<artifactId>icefaces-compat</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.jboss.seam</groupId>
 			<artifactId>jboss-el</artifactId>
