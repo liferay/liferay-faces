@@ -8,11 +8,6 @@
 		<param-name>com.sun.faces.expressionFactory</param-name>
 		<param-value>org.jboss.el.ExpressionFactoryImpl</param-value>
 	</context-param>
-	<!-- Instruct ICEfaces to abstain from automatically applying DOM rendering to each view. -->
-	<context-param>
-		<param-name>org.icefaces.render.auto</param-name>
-		<param-value>false</param-value>
-	</context-param>
 	<!-- Instruct ICEfaces to abstain from adding a random query parameter to resource URLs (which it does by default -->
 	<!-- in order to prevent caching of JavaScript resources like bridge.js in a servlet-based webapp). -->
 	<context-param>
