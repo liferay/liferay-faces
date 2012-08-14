@@ -15,21 +15,32 @@ package com.liferay.faces.demos.dto;
 
 import java.util.List;
 
+import javax.faces.FacesWrapper;
+
 import com.liferay.portal.model.User;
 
 
 /**
- * This class is a Data Transfer Object (DTO) that represents a chat room.
- *
  * @author  Neil Griffin
  */
-public interface ChatRoom {
+public abstract class ChatRoomWrapper implements ChatRoom, FacesWrapper<ChatRoom> {
 
-	public User findUser(long userId);
+	public User findUser(long userId) {
+		return getWrapped().findUser(userId);
+	}
 
-	public boolean hasUser(long userId);
+	public boolean hasUser(long userId) {
+		return getWrapped().hasUser(userId);
+	}
 
-	public List<ChatMessage> getChatMessages();
+	public List<ChatMessage> getChatMessages() {
+		return getWrapped().getChatMessages();
+	}
 
-	public List<User> getParticipants();
+	public List<User> getParticipants() {
+		return getWrapped().getParticipants();
+	}
+
+	public abstract ChatRoom getWrapped();
+
 }

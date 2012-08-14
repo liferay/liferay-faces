@@ -14,14 +14,13 @@
 package com.liferay.faces.demos.list;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import com.liferay.faces.demos.service.OnlineUserServiceUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.model.LazyDataModel;
-import com.liferay.faces.demos.service.OnlineUserServiceUtil;
 
 import com.liferay.portal.model.User;
 
@@ -40,7 +39,6 @@ public class UserLazyDataModel extends LazyDataModel<User> {
 	// Private Data Members
 	private long companyId;
 	private Set<Long> onlineUserSet;
-	private HashMap<Long, Boolean> onlineStatusMap;
 	private long userId;
 
 	public UserLazyDataModel(long companyId, long userId, int rowsPerPage, Set<Long> onlineUserSet) {
@@ -74,34 +72,12 @@ public class UserLazyDataModel extends LazyDataModel<User> {
 
 		try {
 			users = OnlineUserServiceUtil.find(companyId, userId, startRow, finishRow, onlineUserSet);
-			buildOnlineStatusMap(users);
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
 
 		return users;
-	}
-
-	protected void buildOnlineStatusMap(List<User> users) {
-		onlineStatusMap = new HashMap<Long, Boolean>();
-
-		for (User user : users) {
-			long curUserId = user.getUserId();
-
-			if (!onlineStatusMap.containsKey(curUserId)) {
-				onlineStatusMap.put(curUserId, onlineUserSet.contains(curUserId));
-			}
-		}
-	}
-
-	public HashMap<Long, Boolean> getOnlineStatus() {
-
-		if (onlineStatusMap == null) {
-			onlineStatusMap = new HashMap<Long, Boolean>();
-		}
-
-		return onlineStatusMap;
 	}
 
 	@Override

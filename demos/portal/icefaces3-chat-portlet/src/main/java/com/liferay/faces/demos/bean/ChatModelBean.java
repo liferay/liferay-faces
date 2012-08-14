@@ -13,45 +13,46 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Set;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.faces.bean.CustomScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
 
-import com.icesoft.faces.async.render.SessionRenderer;
+import org.icefaces.application.PortableRenderer;
+import org.icefaces.application.PushRenderer;
 
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.demos.dto.ChatMessage;
+import com.liferay.faces.demos.dto.ChatRoom;
+import com.liferay.faces.demos.dto.ChatRoomImpl;
+import com.liferay.faces.demos.dto.ChatSession;
 import com.liferay.faces.demos.list.UserLazyDataModel;
 import com.liferay.faces.portal.context.LiferayFacesContext;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
-import com.liferay.portal.kernel.json.JSONException;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.model.User;
 
 
 /**
- * This class is a JSF model managed-bean for managing datamodels of online users and status. The bean is ViewScoped so
- * that the bean is tied to a specific user session. In the constructor, the bean registers itself to listen for
- * LIVE_USERS messages from Liferay Portal. When a user signs-in or signs-out of the portal, this bean will use ICEfaces
- * Ajax Push to update the DOM in the participating browsers.
+ * This class is a JSF model managed-bean for managing datamodels of online users and status. When a user signs-in or
+ * signs-out of the portal, this bean will use ICEfaces Ajax Push to update the DOM in the participating browsers.
  *
  * @author  "Neil Griffin"
  */
 
 @ManagedBean(name = "chatModelBean")
-@ViewScoped
-public class ChatModelBean implements MessageListener {
+@CustomScoped(value = "#{window}")
+public class ChatModelBean implements Observer {
 
 	// Private Constants
 	private static final String AJAX_PUSH_SESSION_NAME = "chatSession";
-
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(ChatModelBean.class);
 
 	// Injections
 	@ManagedProperty(name = "applicationModelBean", value = "#{applicationModelBean}")
@@ -61,53 +62,70 @@ public class ChatModelBean implements MessageListener {
 	private final LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 
 	// Private Data Members
+	private PortableRenderer portableRenderer;
 	private UserLazyDataModel userDataModel;
 
+	// Private Data Members
+	private ChatSession currentChatSession;
+
 	public ChatModelBean() {
-		MessageBusUtil.registerMessageListener(DestinationNames.LIVE_USERS, this);
-		SessionRenderer.addCurrentSession(AJAX_PUSH_SESSION_NAME);
+		PushRenderer.addCurrentSession(AJAX_PUSH_SESSION_NAME);
+		portableRenderer = PushRenderer.getPortableRenderer();
+	}
+
+	public void addChatRoomWithUser(User friend) {
+
+		User currentUser = liferayFacesContext.getUser();
+		boolean chatRoomExists = false;
+		long userId1 = currentUser.getUserId();
+		long userId2 = friend.getUserId();
+		List<ChatRoom> chatRooms = applicationModelBean.getChatRooms();
+
+		for (ChatRoom chatRoom : chatRooms) {
+
+			if (chatRoom.hasUser(userId1) && chatRoom.hasUser(userId2)) {
+				chatRoomExists = true;
+			}
+		}
+
+		if (!chatRoomExists) {
+			ChatRoom chatRoom = new ChatRoomImpl();
+			List<User> participants = chatRoom.getParticipants();
+			participants.add(currentUser);
+			participants.add(friend);
+
+			synchronized (applicationModelBean) {
+				chatRooms.add(chatRoom);
+			}
+
+			PushRenderer.render(AJAX_PUSH_SESSION_NAME);
+		}
+	}
+
+	public void addMessageToCurrentChatSession(String messageText) {
+		User currentUser = liferayFacesContext.getUser();
+		ChatMessage chatMessage = new ChatMessage(Calendar.getInstance().getTime(), currentUser, messageText);
+		currentChatSession.getChatMessages().add(chatMessage);
+		PushRenderer.render(AJAX_PUSH_SESSION_NAME);
 	}
 
 	public void forceRequery() {
 		userDataModel = null;
 	}
 
-	public void receive(Message message) {
+	@PostConstruct
+	public void postConstruct() {
+		applicationModelBean.addObserver(this);
+	}
 
-		if (message.getDestinationName().equals(DestinationNames.LIVE_USERS)) {
+	@PreDestroy
+	public void preDestroy() {
+		applicationModelBean.deleteObserver(this);
+	}
 
-			try {
-				JSONObject jsonObject = (JSONObject) JSONFactoryUtil.createJSONObject((String) message.getPayload());
-				Long userId = jsonObject.getLong("userId");
-
-				if (userId != null) {
-
-					Boolean onlineStatus = getDataModel().getOnlineStatus().get(userId);
-
-					if (onlineStatus != null) {
-
-						String command = jsonObject.getString("command");
-
-						if (command != null) {
-
-							if (command.equals("signIn")) {
-								getDataModel().getOnlineStatus().put(userId, Boolean.TRUE);
-							}
-
-							if (command.equals("signOut")) {
-								getDataModel().getOnlineStatus().put(userId, Boolean.FALSE);
-							}
-						}
-
-						SessionRenderer.render(AJAX_PUSH_SESSION_NAME);
-					}
-				}
-			}
-			catch (JSONException e) {
-				logger.error(e.getMessage(), e);
-			}
-
-		}
+	public void update(Observable observable, Object arg1) {
+		userDataModel = null;
+		portableRenderer.render(AJAX_PUSH_SESSION_NAME);
 	}
 
 	public void setApplicationModelBean(ApplicationModelBean applicationModelBean) {
@@ -116,16 +134,46 @@ public class ChatModelBean implements MessageListener {
 		this.applicationModelBean = applicationModelBean;
 	}
 
+	public ChatSession getCurrentChatSession() {
+		return currentChatSession;
+	}
+
+	public void setCurrentChatSession(ChatSession chatSession) {
+		this.currentChatSession = chatSession;
+	}
+
 	public UserLazyDataModel getDataModel() {
 
 		if (userDataModel == null) {
-			int rowsPerPage = liferayFacesContext.getPortletPreferenceAsInt("userRowsPerPage",
-					SearchContainer.DEFAULT_DELTA);
-			userDataModel = new UserLazyDataModel(liferayFacesContext.getCompanyId(), liferayFacesContext.getUserId(),
-					rowsPerPage, applicationModelBean.getOnlineUserSetDeepCopy());
+			int rowsPerPage = SearchContainer.DEFAULT_DELTA;
+			Set<Long> onlineUserSet = applicationModelBean.getOnlineUserSetDeepCopy();
+			long currentUserId = liferayFacesContext.getUserId();
+
+			if (!onlineUserSet.contains(currentUserId)) {
+				onlineUserSet.add(currentUserId);
+			}
+
+			userDataModel = new UserLazyDataModel(liferayFacesContext.getCompanyId(), currentUserId, rowsPerPage,
+					onlineUserSet);
 		}
 
 		return userDataModel;
+	}
+
+	public List<ChatSession> getMyChatSessions() {
+
+		long currentUserId = liferayFacesContext.getUserId();
+		List<ChatSession> myChatSessions = new ArrayList<ChatSession>();
+		List<ChatRoom> chatRooms = applicationModelBean.getChatRooms();
+
+		for (ChatRoom chatRoom : chatRooms) {
+
+			if (chatRoom.hasUser(currentUserId)) {
+				myChatSessions.add(new ChatSession(chatRoom, currentUserId));
+			}
+		}
+
+		return myChatSessions;
 	}
 
 }

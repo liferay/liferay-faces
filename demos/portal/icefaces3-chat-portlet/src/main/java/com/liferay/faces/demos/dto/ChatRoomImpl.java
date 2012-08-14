@@ -13,23 +13,50 @@
  */
 package com.liferay.faces.demos.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.liferay.portal.model.User;
 
 
 /**
- * This class is a Data Transfer Object (DTO) that represents a chat room.
- *
  * @author  Neil Griffin
  */
-public interface ChatRoom {
+public class ChatRoomImpl implements ChatRoom {
+	private List<ChatMessage> chatMessages;
+	private List<User> participants;
 
-	public User findUser(long userId);
+	public ChatRoomImpl() {
+		this.chatMessages = new ArrayList<ChatMessage>();
+		this.participants = new ArrayList<User>();
+	}
 
-	public boolean hasUser(long userId);
+	public User findUser(long userId) {
 
-	public List<ChatMessage> getChatMessages();
+		for (User user : participants) {
 
-	public List<User> getParticipants();
+			if (user.getUserId() == userId) {
+				return user;
+			}
+		}
+
+		return null;
+	}
+
+	public boolean hasUser(long userId) {
+
+		if (findUser(userId) != null) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public List<ChatMessage> getChatMessages() {
+		return chatMessages;
+	}
+
+	public List<User> getParticipants() {
+		return participants;
+	}
 }
