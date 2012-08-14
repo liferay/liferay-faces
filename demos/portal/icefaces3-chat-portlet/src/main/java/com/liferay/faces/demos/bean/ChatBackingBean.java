@@ -16,8 +16,9 @@ package com.liferay.faces.demos.bean;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.PhaseId;
+import javax.faces.event.ValueChangeEvent;
 
-import com.liferay.faces.demos.dto.ChatRoom;
 import com.liferay.faces.portal.context.LiferayFacesContext;
 
 import com.liferay.portal.model.User;
@@ -34,8 +35,8 @@ import com.liferay.portal.model.User;
 public class ChatBackingBean {
 
 	// Injections
-	@ManagedProperty(name = "icePushModelBean", value = "#{icePushModelBean}")
-	private ICEPushModelBean icePushModelBean;
+	@ManagedProperty(name = "chatModelBean", value = "#{chatModelBean}")
+	private ChatModelBean chatModelBean;
 
 	// Self-Injections
 	private LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
@@ -43,31 +44,26 @@ public class ChatBackingBean {
 	// Private Data Members
 	private String messageText;
 
-	public void addMessage(ChatRoom chatRoom) {
-
-		if ((messageText != null) && (messageText.trim().length() > 0)) {
-			icePushModelBean.addMessageToChatRoom(messageText, chatRoom);
-		}
-
-		messageText = null;
-	}
-
 	public void chatWithUser(User user) {
+		chatModelBean.addChatRoomWithUser(user);
+	}
 
-		// Don't allow chat with oneself -- only with others.
-		if (user.getUserId() != liferayFacesContext.getUserId()) {
-			icePushModelBean.addChatRoomWithUser(user);
+	public void messageTextValueChanged(ValueChangeEvent valueChangeEvent) {
+
+		if (liferayFacesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
+			valueChangeEvent.setPhaseId(PhaseId.INVOKE_APPLICATION);
+			valueChangeEvent.getComponent().queueEvent(valueChangeEvent);
+		}
+		else {
+			chatModelBean.addMessageToCurrentChatSession(messageText);
+			messageText = null;
 		}
 	}
 
-	public void closeChat(ChatRoom chatRoom) {
-		icePushModelBean.removeChatRoom(chatRoom);
-	}
-
-	public void setIcePushModelBean(ICEPushModelBean icePushModelBean) {
+	public void setChatModelBean(ChatModelBean chatModelBean) {
 
 		// Injected via ManagedProperty annotation
-		this.icePushModelBean = icePushModelBean;
+		this.chatModelBean = chatModelBean;
 	}
 
 	public String getMessageText() {

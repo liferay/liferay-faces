@@ -13,17 +13,20 @@
  */
 package com.liferay.faces.demos.bean;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Observable;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
+import com.liferay.faces.demos.dto.ChatRoom;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.demos.dto.ChatRoom;
 
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -43,14 +46,14 @@ import com.liferay.portal.kernel.messaging.MessageListener;
  */
 @ManagedBean(name = "applicationModelBean", eager = true)
 @ApplicationScoped
-public class ApplicationModelBean implements MessageListener {
+public class ApplicationModelBean extends Observable implements MessageListener {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ApplicationModelBean.class);
 
 	// Private Data Members
 	private HashSet<Long> onlineUserSet = new HashSet<Long>();
-	private HashMap<String, ChatRoom> chatRooms = new HashMap<String, ChatRoom>();
+	private List<ChatRoom> chatRooms = Collections.synchronizedList(new ArrayList<ChatRoom>());
 
 	@Override
 	public void finalize() {
@@ -82,6 +85,8 @@ public class ApplicationModelBean implements MessageListener {
 
 							if (!onlineUserSet.contains(userId)) {
 								onlineUserSet.add(userId);
+								setChanged();
+								notifyObservers();
 							}
 						}
 
@@ -89,6 +94,8 @@ public class ApplicationModelBean implements MessageListener {
 
 							if (onlineUserSet.contains(userId)) {
 								onlineUserSet.remove(userId);
+								setChanged();
+								notifyObservers();
 							}
 						}
 					}
@@ -100,7 +107,7 @@ public class ApplicationModelBean implements MessageListener {
 		}
 	}
 
-	public HashMap<String, ChatRoom> getChatRooms() {
+	public List<ChatRoom> getChatRooms() {
 		return chatRooms;
 	}
 

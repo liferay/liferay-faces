@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.demos.dto;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.liferay.portal.model.User;
@@ -23,60 +21,15 @@ import com.liferay.portal.model.User;
 /**
  * This class is a Data Transfer Object (DTO) that represents a chat room.
  *
- * @author  "Neil Griffin"
+ * @author  Neil Griffin
  */
-public class ChatRoom {
+public interface ChatRoom {
 
-	private String name;
-	private List<ChatMessage> chatMessages;
-	private List<User> participants;
+	public User findUser(long userId);
 
-	public ChatRoom(String name) {
-		this.name = name;
-		chatMessages = new ArrayList<ChatMessage>();
-		participants = new ArrayList<User>();
-	}
+	public boolean hasUser(long userId);
 
-	public void addMessage(User user, String text) {
-		Date now = new Date();
-		ChatMessage chatMessage = new ChatMessage(now, user, text);
-		chatMessages.add(chatMessage);
-	}
+	public List<ChatMessage> getChatMessages();
 
-	public void addUser(User participant) {
-		participants.add(participant);
-	}
-
-	public User findUser(long userId) {
-
-		for (User user : participants) {
-
-			if (user.getUserId() == userId) {
-				return user;
-			}
-		}
-
-		return null;
-	}
-
-	public boolean hasUser(long userId) {
-
-		if (findUser(userId) != null) {
-			return true;
-		}
-
-		return false;
-	}
-
-	public List<ChatMessage> getChatMessages() {
-		return chatMessages;
-	}
-
-	public void setChatMessages(List<ChatMessage> chatMessages) {
-		this.chatMessages = chatMessages;
-	}
-
-	public String getName() {
-		return name;
-	}
+	public List<User> getParticipants();
 }

@@ -1,69 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns:aui="http://liferay.com/faces/aui" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:ice="http://www.icesoft.com/icefaces/component"
-	xmlns:chat="http://java.sun.com/jsf/composite/chat" xmlns:liferay-ui="http://liferay.com/faces/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-	<ui:include src="styling.xhtml" />
-	<aui:form id="f" styleClass="icp">
-		<aui:layout>
-			<table style="width: 100%">
-				<tr>
-					<td style="vertical-align: top;"><aui:fieldset label="#{i18n['users']}">
-						<liferay-ui:ice-info-data-paginator for="users" />
-						<br />
-						<h:panelGroup styleClass="taglib-page-iterator">
-							<h:panelGroup styleClass="search-pages">
-								<liferay-ui:ice-nav-data-paginator for="users" paginatorMaxPages="5" />
+<ui:composition xmlns:ace="http://www.icefaces.org/icefaces/components" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:outputScript library="chat" name="main.js" />
+	<h:outputStylesheet library="chat" name="main.css" />
+
+	<h:form id="f1">
+		<c:set value="#{chatModelBean.myChatSessions}" var="myChatSessions" />
+		<h:panelGroup styleClass="portlet-chat">
+			<ace:dialog header="#{i18n.replace('online-friends-x', chatModelBean.dataModel.rowCount)}" widgetVar="onlineFriends">
+				<ace:dataTable paginator="true" rows="#{chatModelBean.dataModel.rowsPerPage}" value="#{chatModelBean.dataModel}"
+					var="user">
+					<ace:column>
+						<h:commandLink actionListener="#{chatBackingBean.chatWithUser(user)}" onclick="onlineFriends.hide()"
+							value="#{user.fullName}" />
+					</ace:column>
+				</ace:dataTable>
+			</ace:dialog>
+			<ace:dialog id="currentChatSession" header="#{i18n['chat']}" styleClass="chat-panel" widgetVar="currentChatSession">
+				<h:panelGroup layout="block" styleClass="panel-window">
+					<h:graphicImage styleClass="panel-icon"
+						value="#{liferay.portraitURL[chatModelBean.currentChatSession.friendUserId]}" />
+					<h:panelGroup layout="block" styleClass="panel-title">
+						<h:outputText value="#{chatModelBean.currentChatSession.friendFullName}" />
+					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="panel-profile" />
+					<h:panelGroup id="panelOutput" layout="block" styleClass="panel-output">
+						<ui:repeat value="#{chatModelBean.currentChatSession.chatMessages}" var="chatMessage">
+							<p class="blurb #{chatMessage.getDirection(liferay.user.userId)}">
+								<h:outputText styleClass="name" value="#{chatMessage.user.fullName}" />
+								<h:outputText styleClass="date" value="#{chatMessage.date}">
+									<f:convertDateTime pattern="hh:mm" />
+								</h:outputText>
+								<h:outputText styleClass="text" value="#{chatMessage.text}" />
+							</p>
+						</ui:repeat>
+						<h:inputText id="messageText" style="width: 96%;" valueChangeListener="#{chatBackingBean.messageTextValueChanged}"
+							value="#{chatBackingBean.messageText}" />
+						<script type="text/javascript">
+							iceFacesChat
+									.scrollToBottom('#{liferayFacesContext.matchComponentInViewRoot("panelOutput").clientId}');
+						</script>
+						<script type="text/javascript">
+							iceFacesChat
+									.setFocus('#{liferayFacesContext.matchComponentInViewRoot("messageText").clientId}');
+						</script>
+					</h:panelGroup>
+				</h:panelGroup>
+			</ace:dialog>
+			<h:panelGroup id="chatBar" layout="block" styleClass="chat-bar">
+				<h:panelGroup layout="block" styleClass="chat-tabs-container">
+					<aui:list styleClass="chat-tabs">
+						<aui:list-item styleClass="buddy-list">
+							<h:panelGroup layout="block" styleClass="panel-trigger aui-helper-unselectable">
+								<h:commandLink onclick="onlineFriends.show()" styleClass="trigger-name"
+									value="#{i18n.replace('online-friends-x', chatModelBean.dataModel.rowCount)}" />
 							</h:panelGroup>
-						</h:panelGroup>
-						<c:set value="#{liferay.user.userId}" var="liferayUserId" />
-						<ice:dataTable id="users" rowClasses="results-row,results-row alt" rows="#{chatModelBean.dataModel.rowsPerPage}"
-							value="#{chatModelBean.dataModel}" var="user">
-							<ice:column>
-								<c:set value="#{chatModelBean.dataModel.onlineStatus[user.userId]}" var="userOnline" />
-								<c:set value="#{userOnline and (user.userId != liferayUserId)}" var="ableToChat" />
-								<chat:user onlineStatus="#{userOnline}" portraitWidth="65" user="#{user}" width="100%">
-									<br />
-									<ice:commandButton action="#{chatBackingBean.chatWithUser(user)}" image="/images/start-chat.gif" rendered="#{ableToChat}" />
-									<ice:graphicImage rendered="#{!ableToChat}" value="/images/start-chat-dis.gif" />
-								</chat:user>
-							</ice:column>
-						</ice:dataTable>
-					</aui:fieldset></td>
-					<td style="padding-left: 10px; width: 99%; vertical-align: top;"><aui:fieldset label="#{i18n['chat']}">
-						<ice:messages />
-						<c:set value="#{icePushModelBean.roomsWithUser}" var="chatRoomsWithUser" />
-						<ice:panelTabSet id="chatRooms" rendered="#{!empty chatRoomsWithUser}" value="#{chatRoomsWithUser}" var="chatRoom">
-							<ice:panelTab title="#{chatRoom.name}">
-								<f:facet name="label">
-									<ice:panelGrid columns="2">
-										<h:outputText value="#{chatRoom.name}" />
-										<ice:commandButton actionListener="#{chatBackingBean.closeChat(chatRoom)}" image="/xmlhttp/css/rime/css-images/cal_off.gif"
-											onclick="if (! confirm('#{i18n['are-you-sure-you-want-to-delete-this']}')) {return false;}" style="padding-left: 10px;" />
-									</ice:panelGrid>
-								</f:facet>
-								<ice:panelGroup id="scroller" style="overflow: auto; width: 100%; height: 250px;">
-									<ice:dataTable rowClasses="results-row,results-row alt" width="100%" value="#{chatRoom.chatMessages}" var="chatMessage">
-										<ice:column style="width: 50px;">
-											<chat:user portraitStyleClass="avatar" portraitWidth="30px" showJobTitle="false" showOnlineStatus="false" user="#{chatMessage.user}" />
-										</ice:column>
-										<ice:column>
-											<ice:outputText value="#{chatMessage.date}">
-												<f:convertDateTime pattern="MM/dd/yyyy hh:mm:ss a" timeZone="#{liferay.user.timeZone}" />
-											</ice:outputText>
-											<br />
-											<ice:outputText value="#{chatMessage.text}" />
-										</ice:column>
-									</ice:dataTable>
-									<script type="text/javascript">iceExtScrollPanelGroupToBottom('#{liferayFacesContext.matchComponentInViewRoot("scroller").clientId}', #{chatRoom.chatMessages.size()});</script>
-								</ice:panelGroup>
-								<ice:inputText action="#{chatBackingBean.addMessage(chatRoom)}" size="50" value="#{chatBackingBean.messageText}" />
-								<ice:commandButton action="#{chatBackingBean.addMessage(chatRoom)}" value="#{i18n['add-message']}" />
-							</ice:panelTab>
-						</ice:panelTabSet>
-					</aui:fieldset></td>
-				</tr>
-			</table>
-		</aui:layout>
-	</aui:form>
+						</aui:list-item>
+						<ui:repeat value="#{myChatSessions}" var="chatSession">
+							<aui:list-item styleClass="user user_#{chatSession.friendUserId}">
+								<h:panelGroup styleClass="panel-trigger aui-helper-unselectable">
+									<h:commandLink value="#{chatSession.friendFullName}">
+										<ace:ajax onComplete="currentChatSession.show()" />
+										<f:setPropertyActionListener value="#{chatSession}" target="#{chatModelBean.currentChatSession}" />
+									</h:commandLink>
+								</h:panelGroup>
+							</aui:list-item>
+						</ui:repeat>
+					</aui:list>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:panelGroup>
+	</h:form>
+
 </ui:composition>

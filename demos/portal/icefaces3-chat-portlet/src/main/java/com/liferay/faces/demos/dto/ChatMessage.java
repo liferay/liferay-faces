@@ -25,6 +25,11 @@ import com.liferay.portal.model.User;
  */
 public class ChatMessage {
 
+	// Private Constants
+	private static final String OUTGOING = "outgoing";
+	private static final String INCOMING = "incoming";
+
+	// Private Data Members
 	private Date date;
 	private User user;
 	private String text;
@@ -51,6 +56,16 @@ public class ChatMessage {
 		this.date = date;
 	}
 
+	public String getDirection(long userId) {
+
+		if (userId == user.getUserId()) {
+			return OUTGOING;
+		}
+		else {
+			return INCOMING;
+		}
+	}
+
 	public String getText() {
 		return text;
 	}
@@ -58,5 +73,4 @@ public class ChatMessage {
 	public void setText(String text) {
 		this.text = text;
 	}
-
 }
