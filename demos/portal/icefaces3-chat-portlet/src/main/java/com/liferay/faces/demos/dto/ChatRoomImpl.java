@@ -13,9 +13,6 @@
  */
 package com.liferay.faces.demos.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.liferay.portal.model.User;
 
 
@@ -23,40 +20,37 @@ import com.liferay.portal.model.User;
  * @author  Neil Griffin
  */
 public class ChatRoomImpl implements ChatRoom {
-	private List<ChatMessage> chatMessages;
-	private List<User> participants;
 
-	public ChatRoomImpl() {
-		this.chatMessages = new ArrayList<ChatMessage>();
-		this.participants = new ArrayList<User>();
-	}
+	// Private Data Members
+	private ChatMessageList chatMessageList;
+	private String id;
+	private User user1;
+	private User user2;
 
-	public User findUser(long userId) {
-
-		for (User user : participants) {
-
-			if (user.getUserId() == userId) {
-				return user;
-			}
-		}
-
-		return null;
+	public ChatRoomImpl(User user1, User user2) {
+		this.chatMessageList = new ChatMessageList();
+		this.id = Long.toString(user1.getUserId()) + Long.toString(user2.getUserId());
+		this.user1 = user1;
+		this.user2 = user2;
 	}
 
 	public boolean hasUser(long userId) {
-
-		if (findUser(userId) != null) {
-			return true;
-		}
-
-		return false;
+		return ((user1.getUserId() == userId) || (user2.getUserId() == userId));
 	}
 
-	public List<ChatMessage> getChatMessages() {
-		return chatMessages;
+	public ChatMessageList getChatMessageList() {
+		return chatMessageList;
 	}
 
-	public List<User> getParticipants() {
-		return participants;
+	public String getId() {
+		return id;
+	}
+
+	public User getUser1() {
+		return user1;
+	}
+
+	public User getUser2() {
+		return user2;
 	}
 }

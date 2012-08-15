@@ -3,14 +3,15 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<h:outputScript library="chat" name="main.js" />
-	<h:outputStylesheet library="chat" name="main.css" />
+	<link href="#{request.contextPath}/css/main.css" rel="stylesheet" type="text/css" />
+	<link href="#{request.contextPath}/css/override.css" rel="stylesheet" type="text/css" />
+	<script src="#{request.contextPath}/js/main.js" type="text/javascript"></script>
 
 	<h:form id="f1">
-		<c:set value="#{chatModelBean.myChatSessions}" var="myChatSessions" />
 		<h:panelGroup styleClass="portlet-chat">
-			<ace:dialog header="#{i18n.replace('online-friends-x', chatModelBean.dataModel.rowCount)}" widgetVar="onlineFriends">
-				<ace:dataTable paginator="true" rows="#{chatModelBean.dataModel.rowsPerPage}" value="#{chatModelBean.dataModel}"
+			<ace:dialog header="#{i18n.replace('online-friends-x', chatModelBean.onlineUsers.rowCount)}"
+				widgetVar="onlineFriends">
+				<ace:dataTable paginator="true" rows="#{chatModelBean.onlineUsers.rowsPerPage}" value="#{chatModelBean.onlineUsers}"
 					var="user">
 					<ace:column>
 						<h:commandLink actionListener="#{chatBackingBean.chatWithUser(user)}" onclick="onlineFriends.hide()"
@@ -18,16 +19,19 @@
 					</ace:column>
 				</ace:dataTable>
 			</ace:dialog>
-			<ace:dialog id="currentChatSession" header="#{i18n['chat']}" styleClass="chat-panel" widgetVar="currentChatSession">
+			<ace:dialog id="currentScopedChatRoom" header="#{i18n['chat']}"
+				rendered="#{chatModelBean.currentScopedChatRoom != null}" styleClass="chat-panel" widgetVar="currentScopedChatRoom">
+				<h:commandButton actionListener="#{chatBackingBean.removeScopedChatRoom(chatModelBean.currentScopedChatRoom)}"
+					onclick="currentScopedChatRoom.hide();" style="font-size: 10px;" value="#{i18n['remove']} #{i18n['chat']}" />
 				<h:panelGroup layout="block" styleClass="panel-window">
 					<h:graphicImage styleClass="panel-icon"
-						value="#{liferay.portraitURL[chatModelBean.currentChatSession.friendUserId]}" />
+						value="#{liferay.portraitURL[chatModelBean.currentScopedChatRoom.friendUserId]}" />
 					<h:panelGroup layout="block" styleClass="panel-title">
-						<h:outputText value="#{chatModelBean.currentChatSession.friendFullName}" />
+						<h:outputText value="#{chatModelBean.currentScopedChatRoom.friendFullName}" />
 					</h:panelGroup>
 					<h:panelGroup layout="block" styleClass="panel-profile" />
 					<h:panelGroup id="panelOutput" layout="block" styleClass="panel-output">
-						<ui:repeat value="#{chatModelBean.currentChatSession.chatMessages}" var="chatMessage">
+						<ui:repeat value="#{chatModelBean.currentScopedChatRoom.chatMessageList}" var="chatMessage">
 							<p class="blurb #{chatMessage.getDirection(liferay.user.userId)}">
 								<h:outputText styleClass="name" value="#{chatMessage.user.fullName}" />
 								<h:outputText styleClass="date" value="#{chatMessage.date}">
@@ -55,16 +59,19 @@
 						<aui:list-item styleClass="buddy-list">
 							<h:panelGroup layout="block" styleClass="panel-trigger aui-helper-unselectable">
 								<h:commandLink onclick="onlineFriends.show()" styleClass="trigger-name"
-									value="#{i18n.replace('online-friends-x', chatModelBean.dataModel.rowCount)}" />
+									value="#{i18n.replace('online-friends-x', chatModelBean.onlineUsers.rowCount)}" />
 							</h:panelGroup>
 						</aui:list-item>
-						<ui:repeat value="#{myChatSessions}" var="chatSession">
-							<aui:list-item styleClass="user user_#{chatSession.friendUserId}">
-								<h:panelGroup styleClass="panel-trigger aui-helper-unselectable">
-									<h:commandLink value="#{chatSession.friendFullName}">
-										<ace:ajax onComplete="currentChatSession.show()" />
-										<f:setPropertyActionListener value="#{chatSession}" target="#{chatModelBean.currentChatSession}" />
+						<ui:repeat value="#{chatModelBean.scopedChatRooms}" var="scopedChatRoom">
+							<aui:list-item styleClass="user user_#{scopedChatRoom.friendUserId} #{scopedChatRoom.friendWaiting}">
+								<h:panelGroup layout="block" styleClass="panel-trigger aui-helper-unselectable">
+									<h:commandLink styleClass="" value="#{scopedChatRoom.friendFullName}">
+										<ace:ajax onComplete="currentScopedChatRoom.show()" />
+										<f:setPropertyActionListener value="#{scopedChatRoom}" target="#{chatModelBean.currentScopedChatRoom}" />
 									</h:commandLink>
+									<h:panelGroup layout="block" styleClass="#{scopedChatRoom.unread}">
+										<h:outputText value="#{scopedChatRoom.totalUnread}" />
+									</h:panelGroup>
 								</h:panelGroup>
 							</aui:list-item>
 						</ui:repeat>

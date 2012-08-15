@@ -13,36 +13,21 @@
  */
 package com.liferay.faces.demos.dto;
 
-import javax.faces.FacesWrapper;
+import java.util.ArrayList;
+import java.util.Collections;
 
-import com.liferay.portal.model.User;
+import com.liferay.faces.util.lang.ObservableList;
+import com.liferay.faces.util.lang.Observer;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class ChatRoomWrapper implements ChatRoom, FacesWrapper<ChatRoom> {
+public class ChatRoomList extends ObservableList<ChatRoom> {
 
-	public boolean hasUser(long userId) {
-		return getWrapped().hasUser(userId);
+	public ChatRoomList() {
+		super(Collections.synchronizedList(new ArrayList<ChatRoom>()),
+			Collections.synchronizedList(new ArrayList<Observer>()));
 	}
-
-	public ChatMessageList getChatMessageList() {
-		return getWrapped().getChatMessageList();
-	}
-
-	public String getId() {
-		return getWrapped().getId();
-	}
-
-	public User getUser1() {
-		return getWrapped().getUser1();
-	}
-
-	public User getUser2() {
-		return getWrapped().getUser2();
-	}
-
-	public abstract ChatRoom getWrapped();
 
 }

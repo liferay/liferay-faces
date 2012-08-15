@@ -19,8 +19,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.event.PhaseId;
 import javax.faces.event.ValueChangeEvent;
 
+import com.liferay.faces.demos.dto.ScopedChatRoom;
 import com.liferay.faces.portal.context.LiferayFacesContext;
-
 import com.liferay.portal.model.User;
 
 
@@ -48,6 +48,10 @@ public class ChatBackingBean {
 		chatModelBean.addChatRoomWithUser(user);
 	}
 
+	public void removeScopedChatRoom(ScopedChatRoom scopedChatRoom) {
+		chatModelBean.removeScopedChatRoom(scopedChatRoom);
+	}
+
 	public void messageTextValueChanged(ValueChangeEvent valueChangeEvent) {
 
 		if (liferayFacesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
@@ -55,7 +59,7 @@ public class ChatBackingBean {
 			valueChangeEvent.getComponent().queueEvent(valueChangeEvent);
 		}
 		else {
-			chatModelBean.addMessageToCurrentChatSession(messageText);
+			chatModelBean.addMessage(messageText);
 			messageText = null;
 		}
 	}

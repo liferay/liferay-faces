@@ -16,8 +16,6 @@ package com.liferay.faces.demos.bean;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -30,11 +28,17 @@ import org.icefaces.application.PortableRenderer;
 import org.icefaces.application.PushRenderer;
 
 import com.liferay.faces.demos.dto.ChatMessage;
+import com.liferay.faces.demos.dto.ChatMessageImpl;
 import com.liferay.faces.demos.dto.ChatRoom;
 import com.liferay.faces.demos.dto.ChatRoomImpl;
-import com.liferay.faces.demos.dto.ChatSession;
-import com.liferay.faces.demos.list.UserLazyDataModel;
+import com.liferay.faces.demos.dto.ChatRoomList;
+import com.liferay.faces.demos.dto.ScopedChatRoom;
+import com.liferay.faces.demos.dto.ScopedChatRoomImpl;
+import com.liferay.faces.demos.list.OnlineUserDataModel;
 import com.liferay.faces.portal.context.LiferayFacesContext;
+import com.liferay.faces.util.lang.Observable;
+import com.liferay.faces.util.lang.ObservableList;
+import com.liferay.faces.util.lang.Observer;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.model.User;
@@ -62,11 +66,10 @@ public class ChatModelBean implements Observer {
 	private final LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 
 	// Private Data Members
+	private ScopedChatRoom currentScopedChatRoom;
+	private OnlineUserDataModel onlineUsers;
 	private PortableRenderer portableRenderer;
-	private UserLazyDataModel userDataModel;
-
-	// Private Data Members
-	private ChatSession currentChatSession;
+	private List<ScopedChatRoom> scopedChatRooms;
 
 	public ChatModelBean() {
 		PushRenderer.addCurrentSession(AJAX_PUSH_SESSION_NAME);
@@ -79,9 +82,9 @@ public class ChatModelBean implements Observer {
 		boolean chatRoomExists = false;
 		long userId1 = currentUser.getUserId();
 		long userId2 = friend.getUserId();
-		List<ChatRoom> chatRooms = applicationModelBean.getChatRooms();
+		ChatRoomList chatRoomList = applicationModelBean.getChatRoomList();
 
-		for (ChatRoom chatRoom : chatRooms) {
+		for (ChatRoom chatRoom : chatRoomList) {
 
 			if (chatRoom.hasUser(userId1) && chatRoom.hasUser(userId2)) {
 				chatRoomExists = true;
@@ -89,43 +92,89 @@ public class ChatModelBean implements Observer {
 		}
 
 		if (!chatRoomExists) {
-			ChatRoom chatRoom = new ChatRoomImpl();
-			List<User> participants = chatRoom.getParticipants();
-			participants.add(currentUser);
-			participants.add(friend);
-
-			synchronized (applicationModelBean) {
-				chatRooms.add(chatRoom);
-			}
-
-			PushRenderer.render(AJAX_PUSH_SESSION_NAME);
+			ChatRoom chatRoom = new ChatRoomImpl(currentUser, friend);
+			chatRoomList.add(chatRoom);
 		}
-	}
 
-	public void addMessageToCurrentChatSession(String messageText) {
-		User currentUser = liferayFacesContext.getUser();
-		ChatMessage chatMessage = new ChatMessage(Calendar.getInstance().getTime(), currentUser, messageText);
-		currentChatSession.getChatMessages().add(chatMessage);
+		forceReload();
 		PushRenderer.render(AJAX_PUSH_SESSION_NAME);
 	}
 
-	public void forceRequery() {
-		userDataModel = null;
+	public void addMessage(String messageText) {
+		User currentUser = liferayFacesContext.getUser();
+		ChatMessage chatMessage = new ChatMessageImpl(Calendar.getInstance().getTime(), currentUser, messageText);
+
+		if (currentScopedChatRoom != null) {
+			currentScopedChatRoom.getChatMessageList().add(chatMessage);
+			forceReload();
+			PushRenderer.render(AJAX_PUSH_SESSION_NAME);
+		}
 	}
 
 	@PostConstruct
 	public void postConstruct() {
 		applicationModelBean.addObserver(this);
+
+		ChatRoomList chatRoomList = applicationModelBean.getChatRoomList();
+		chatRoomList.addObserver(this);
 	}
 
 	@PreDestroy
 	public void preDestroy() {
-		applicationModelBean.deleteObserver(this);
+		applicationModelBean.removeObserver(this);
+
+		ChatRoomList chatRoomList = applicationModelBean.getChatRoomList();
+		chatRoomList.removeObserver(this);
 	}
 
-	public void update(Observable observable, Object arg1) {
-		userDataModel = null;
+	public void receiveNotification(Observable observable, Object... args) {
+
+		if (currentScopedChatRoom != null) {
+
+			if (observable instanceof ChatRoomList) {
+
+				if (args[0] == ObservableList.Action.REMOVE) {
+					ChatRoom removedChatRoom = (ChatRoom) args[1];
+
+					if (removedChatRoom.getId() == currentScopedChatRoom.getId()) {
+						currentScopedChatRoom = null;
+					}
+				}
+			}
+		}
+
+		forceReload();
 		portableRenderer.render(AJAX_PUSH_SESSION_NAME);
+	}
+
+	public void removeScopedChatRoom(ScopedChatRoom scopedChatRoom) {
+
+		ChatRoom chatRoomToDelete = null;
+		ChatRoomList chatRoomList = applicationModelBean.getChatRoomList();
+
+		for (ChatRoom chatRoom : chatRoomList) {
+
+			if (chatRoom.getId().equals(scopedChatRoom.getId())) {
+				chatRoomToDelete = chatRoom;
+
+				break;
+			}
+		}
+
+		chatRoomList.remove(chatRoomToDelete);
+
+		if (currentScopedChatRoom == scopedChatRoom) {
+			currentScopedChatRoom = null;
+		}
+
+		forceReload();
+
+		PushRenderer.render(AJAX_PUSH_SESSION_NAME);
+	}
+
+	protected void forceReload() {
+		onlineUsers = null;
+		scopedChatRooms = null;
 	}
 
 	public void setApplicationModelBean(ApplicationModelBean applicationModelBean) {
@@ -134,17 +183,23 @@ public class ChatModelBean implements Observer {
 		this.applicationModelBean = applicationModelBean;
 	}
 
-	public ChatSession getCurrentChatSession() {
-		return currentChatSession;
+	public ScopedChatRoom getCurrentScopedChatRoom() {
+		return currentScopedChatRoom;
 	}
 
-	public void setCurrentChatSession(ChatSession chatSession) {
-		this.currentChatSession = chatSession;
+	public void setCurrentScopedChatRoom(ScopedChatRoom scopedChatRoom) {
+
+		if (this.currentScopedChatRoom != null) {
+			this.currentScopedChatRoom.getChatMessageList().removeObserver(this);
+		}
+
+		scopedChatRoom.getChatMessageList().addObserver(this);
+		this.currentScopedChatRoom = scopedChatRoom;
 	}
 
-	public UserLazyDataModel getDataModel() {
+	public OnlineUserDataModel getOnlineUsers() {
 
-		if (userDataModel == null) {
+		if (onlineUsers == null) {
 			int rowsPerPage = SearchContainer.DEFAULT_DELTA;
 			Set<Long> onlineUserSet = applicationModelBean.getOnlineUserSetDeepCopy();
 			long currentUserId = liferayFacesContext.getUserId();
@@ -153,27 +208,31 @@ public class ChatModelBean implements Observer {
 				onlineUserSet.add(currentUserId);
 			}
 
-			userDataModel = new UserLazyDataModel(liferayFacesContext.getCompanyId(), currentUserId, rowsPerPage,
+			onlineUsers = new OnlineUserDataModel(liferayFacesContext.getCompanyId(), currentUserId, rowsPerPage,
 					onlineUserSet);
 		}
 
-		return userDataModel;
+		return onlineUsers;
 	}
 
-	public List<ChatSession> getMyChatSessions() {
+	public List<ScopedChatRoom> getScopedChatRooms() {
 
-		long currentUserId = liferayFacesContext.getUserId();
-		List<ChatSession> myChatSessions = new ArrayList<ChatSession>();
-		List<ChatRoom> chatRooms = applicationModelBean.getChatRooms();
+		if (scopedChatRooms == null) {
 
-		for (ChatRoom chatRoom : chatRooms) {
+			long currentUserId = liferayFacesContext.getUserId();
+			scopedChatRooms = new ArrayList<ScopedChatRoom>();
 
-			if (chatRoom.hasUser(currentUserId)) {
-				myChatSessions.add(new ChatSession(chatRoom, currentUserId));
+			ChatRoomList chatRoomList = applicationModelBean.getChatRoomList();
+
+			for (ChatRoom chatRoom : chatRoomList) {
+
+				if (chatRoom.hasUser(currentUserId)) {
+					scopedChatRooms.add(new ScopedChatRoomImpl(chatRoom, currentUserId));
+				}
 			}
 		}
 
-		return myChatSessions;
+		return scopedChatRooms;
 	}
 
 }

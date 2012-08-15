@@ -27,21 +27,21 @@ import com.liferay.portal.model.User;
 
 /**
  * This class provides a JSF DataModel layer of abstraction around the Liferay service layer and supports lazy fetches
- * when used in conjunction with an ICEfaces ice:dataTable component tag.
+ * when used in conjunction with a JSF component tag like h:dataTable.
  *
  * @author  "Neil Griffin"
  */
-public class UserLazyDataModel extends LazyDataModel<User> {
+public class OnlineUserDataModel extends LazyDataModel<User> {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(UserLazyDataModel.class);
+	private static final Logger logger = LoggerFactory.getLogger(OnlineUserDataModel.class);
 
 	// Private Data Members
 	private long companyId;
 	private Set<Long> onlineUserSet;
 	private long userId;
 
-	public UserLazyDataModel(long companyId, long userId, int rowsPerPage, Set<Long> onlineUserSet) {
+	public OnlineUserDataModel(long companyId, long userId, int rowsPerPage, Set<Long> onlineUserSet) {
 		this.companyId = companyId;
 		this.userId = userId;
 		setRowsPerPage(rowsPerPage);

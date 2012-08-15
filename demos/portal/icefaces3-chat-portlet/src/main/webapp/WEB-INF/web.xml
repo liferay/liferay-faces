@@ -25,17 +25,6 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
-	<!-- BEGIN: Compatibility with ICEfaces 1.8 components -->
-	<servlet>
-		<servlet-name>Resource Servlet</servlet-name>
-		<servlet-class>com.icesoft.faces.webapp.CompatResourceServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Resource Servlet</servlet-name>
-		<url-pattern>/xmlhttp/*</url-pattern>
-	</servlet-mapping>
-	<!--  END: Compatibility with ICEfaces 1.8 components -->
 	<!-- Prevent direct access to Facelet view XHTML by the userAgent (browser). --> 
 	<security-constraint>
 		<web-resource-collection>

@@ -11,38 +11,16 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.demos.dto;
-
-import javax.faces.FacesWrapper;
-
-import com.liferay.portal.model.User;
-
+package com.liferay.faces.util.lang;
 
 /**
  * @author  Neil Griffin
  */
-public abstract class ChatRoomWrapper implements ChatRoom, FacesWrapper<ChatRoom> {
+public interface Observable {
 
-	public boolean hasUser(long userId) {
-		return getWrapped().hasUser(userId);
-	}
+	public void addObserver(Observer observer);
 
-	public ChatMessageList getChatMessageList() {
-		return getWrapped().getChatMessageList();
-	}
+	public void notifyObservers(Object... args);
 
-	public String getId() {
-		return getWrapped().getId();
-	}
-
-	public User getUser1() {
-		return getWrapped().getUser1();
-	}
-
-	public User getUser2() {
-		return getWrapped().getUser2();
-	}
-
-	public abstract ChatRoom getWrapped();
-
+	public void removeObserver(Observer observer);
 }

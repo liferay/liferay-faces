@@ -13,23 +13,23 @@
  */
 package com.liferay.faces.demos.dto;
 
-import java.util.List;
-
 import com.liferay.portal.model.User;
 
 
 /**
- * This class is a Data Transfer Object (DTO) that represents a chat room.
+ * This interface defines the contract for a Data Transfer Object (DTO) that represents a chat room.
  *
  * @author  Neil Griffin
  */
 public interface ChatRoom {
 
-	public User findUser(long userId);
-
 	public boolean hasUser(long userId);
 
-	public List<ChatMessage> getChatMessages();
+	public ChatMessageList getChatMessageList();
 
-	public List<User> getParticipants();
+	public String getId();
+
+	public User getUser1();
+
+	public User getUser2();
 }

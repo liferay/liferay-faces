@@ -17,14 +17,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Observable;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
-import com.liferay.faces.demos.dto.ChatRoom;
+import com.liferay.faces.demos.dto.ChatRoomList;
+import com.liferay.faces.util.lang.Observable;
+import com.liferay.faces.util.lang.Observer;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -46,18 +47,34 @@ import com.liferay.portal.kernel.messaging.MessageListener;
  */
 @ManagedBean(name = "applicationModelBean", eager = true)
 @ApplicationScoped
-public class ApplicationModelBean extends Observable implements MessageListener {
+public class ApplicationModelBean implements MessageListener, Observable {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ApplicationModelBean.class);
 
+	// Public Constants
+	public static final String SIGN_IN = "signIn";
+	public static final String SIGN_OUT = "signOut";
+
 	// Private Data Members
+	private ChatRoomList chatRoomList = new ChatRoomList();
 	private HashSet<Long> onlineUserSet = new HashSet<Long>();
-	private List<ChatRoom> chatRooms = Collections.synchronizedList(new ArrayList<ChatRoom>());
+	private List<Observer> observers = Collections.synchronizedList(new ArrayList<Observer>());
+
+	public void addObserver(Observer observer) {
+		observers.add(observer);
+	}
 
 	@Override
 	public void finalize() {
 		MessageBusUtil.unregisterMessageListener(DestinationNames.LIVE_USERS, this);
+	}
+
+	public void notifyObservers(Object... args) {
+
+		for (Observer observer : observers) {
+			observer.receiveNotification(this, args);
+		}
 	}
 
 	@PostConstruct
@@ -81,21 +98,19 @@ public class ApplicationModelBean extends Observable implements MessageListener 
 
 					if (command != null) {
 
-						if (command.equals("signIn")) {
+						if (command.equals(SIGN_IN)) {
 
 							if (!onlineUserSet.contains(userId)) {
 								onlineUserSet.add(userId);
-								setChanged();
-								notifyObservers();
+								notifyObservers(userId, SIGN_IN);
 							}
 						}
 
-						if (command.equals("signOut")) {
+						if (command.equals(SIGN_OUT)) {
 
 							if (onlineUserSet.contains(userId)) {
 								onlineUserSet.remove(userId);
-								setChanged();
-								notifyObservers();
+								notifyObservers(userId, SIGN_OUT);
 							}
 						}
 					}
@@ -107,8 +122,12 @@ public class ApplicationModelBean extends Observable implements MessageListener 
 		}
 	}
 
-	public List<ChatRoom> getChatRooms() {
-		return chatRooms;
+	public void removeObserver(Observer observer) {
+		observers.remove(observer);
+	}
+
+	public ChatRoomList getChatRoomList() {
+		return chatRoomList;
 	}
 
 	/**

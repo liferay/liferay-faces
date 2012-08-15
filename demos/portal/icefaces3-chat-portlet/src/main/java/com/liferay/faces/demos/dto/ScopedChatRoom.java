@@ -13,36 +13,18 @@
  */
 package com.liferay.faces.demos.dto;
 
-import javax.faces.FacesWrapper;
-
-import com.liferay.portal.model.User;
-
-
 /**
  * @author  Neil Griffin
  */
-public abstract class ChatRoomWrapper implements ChatRoom, FacesWrapper<ChatRoom> {
+public interface ScopedChatRoom extends ChatRoom {
 
-	public boolean hasUser(long userId) {
-		return getWrapped().hasUser(userId);
-	}
+	public String getFriendFullName();
 
-	public ChatMessageList getChatMessageList() {
-		return getWrapped().getChatMessageList();
-	}
+	public long getFriendUserId();
 
-	public String getId() {
-		return getWrapped().getId();
-	}
+	public String getFriendWaiting();
 
-	public User getUser1() {
-		return getWrapped().getUser1();
-	}
+	public int getTotalUnread();
 
-	public User getUser2() {
-		return getWrapped().getUser2();
-	}
-
-	public abstract ChatRoom getWrapped();
-
+	public String getUnread();
 }
