@@ -206,7 +206,7 @@ public abstract class UIInputWrapper extends UIInput implements FacesWrapper<UII
 
 	@Override
 	public String getClientId(FacesContext facesContext) {
-		return getWrapped().getClientId();
+		return getWrapped().getClientId(facesContext);
 	}
 
 	@Override
