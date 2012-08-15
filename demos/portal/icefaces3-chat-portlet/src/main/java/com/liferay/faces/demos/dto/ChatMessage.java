@@ -19,58 +19,23 @@ import com.liferay.portal.model.User;
 
 
 /**
- * This class is a Data Transfer Object (DTO) that represents a chat message.
+ * This interface defines the contract for a Data Transfer Object (DTO) that represents a chat message.
  *
  * @author  "Neil Griffin"
  */
-public class ChatMessage {
+public interface ChatMessage {
 
-	// Private Constants
-	private static final String OUTGOING = "outgoing";
-	private static final String INCOMING = "incoming";
+	public Date getDate();
 
-	// Private Data Members
-	private Date date;
-	private User user;
-	private String text;
+	public void setDate(Date date);
 
-	public ChatMessage(Date date, User user, String text) {
-		this.date = date;
-		this.user = user;
-		this.text = text;
-	}
+	public String getDirection(long userId);
 
-	public User getuser() {
-		return user;
-	}
+	public String getText();
 
-	public void setuser(User user) {
-		this.user = user;
-	}
+	public void setText(String text);
 
-	public Date getDate() {
-		return date;
-	}
+	public User getUser();
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public String getDirection(long userId) {
-
-		if (userId == user.getUserId()) {
-			return OUTGOING;
-		}
-		else {
-			return INCOMING;
-		}
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
+	public void setUser(User user);
 }

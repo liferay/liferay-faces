@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.demos.dto;
 
+import java.util.Date;
+
 import javax.faces.FacesWrapper;
 
 import com.liferay.portal.model.User;
@@ -21,28 +23,32 @@ import com.liferay.portal.model.User;
 /**
  * @author  Neil Griffin
  */
-public abstract class ChatRoomWrapper implements ChatRoom, FacesWrapper<ChatRoom> {
+public abstract class ChatMessageWrapper implements ChatMessage, FacesWrapper<ChatMessage> {
 
-	public boolean hasUser(long userId) {
-		return getWrapped().hasUser(userId);
+	public Date getDate() {
+		return getWrapped().getDate();
 	}
 
-	public ChatMessageList getChatMessageList() {
-		return getWrapped().getChatMessageList();
+	public void setDate(Date date) {
+		getWrapped().setDate(date);
 	}
 
-	public String getId() {
-		return getWrapped().getId();
+	public String getText() {
+		return getWrapped().getText();
 	}
 
-	public User getUser1() {
-		return getWrapped().getUser1();
+	public void setText(String text) {
+		getWrapped().setText(text);
 	}
 
-	public User getUser2() {
-		return getWrapped().getUser2();
+	public User getUser() {
+		return getWrapped().getUser();
 	}
 
-	public abstract ChatRoom getWrapped();
+	public void setUser(User user) {
+		getWrapped().setUser(user);
+	}
+
+	public abstract ChatMessage getWrapped();
 
 }
