@@ -47,7 +47,7 @@ public class CustomersModelBean {
 	}
 
 	@PreDestroy
-	public void preDestroy() throws Exception {
+	public void preDestroy() {
 		PushRenderer.removeCurrentSession(CUSTOMER_RENDER_GROUP);
 	}
 
