@@ -52,44 +52,44 @@ public class HeadRendererICEfacesImpl extends HeadRendererBridgeImpl {
 
 		// ICEfaces Theme
 		ExternalContext externalContext = facesContext.getExternalContext();
-		String primeFacesThemeName = externalContext.getInitParameter(ICEFACES_THEME_PARAM);
+		String iceFacesThemeName = externalContext.getInitParameter(ICEFACES_THEME_PARAM);
 
-		if (primeFacesThemeName != null) {
+		if (iceFacesThemeName != null) {
 			ELContext elContext = facesContext.getELContext();
 			ExpressionFactory expressionFactory = facesContext.getApplication().getExpressionFactory();
-			ValueExpression valueExpression = expressionFactory.createValueExpression(elContext, primeFacesThemeName,
+			ValueExpression valueExpression = expressionFactory.createValueExpression(elContext, iceFacesThemeName,
 					String.class);
-			primeFacesThemeName = (String) valueExpression.getValue(elContext);
+			iceFacesThemeName = (String) valueExpression.getValue(elContext);
 
 		}
 		else {
-			primeFacesThemeName = ICEFACES_THEME_DEFAULT;
+			iceFacesThemeName = ICEFACES_THEME_DEFAULT;
 		}
 
-		if ((primeFacesThemeName != null) && !primeFacesThemeName.equals(ICEFACES_THEME_NONE)) {
+		if ((iceFacesThemeName != null) && !iceFacesThemeName.equals(ICEFACES_THEME_NONE)) {
 
 			if (resources == null) {
 				resources = new ArrayList<UIComponent>();
 			}
 
 			String resourceName = ICEFACES_THEME_RESOURCE_NAME;
-			String resourceLibrary = ICEFACES_THEME_PREFIX + primeFacesThemeName;
+			String resourceLibrary = ICEFACES_THEME_PREFIX + iceFacesThemeName;
 
-			if (primeFacesThemeName.equals(ICEFACES_THEME_NAME_SAM) ||
-					primeFacesThemeName.equals(ICEFACES_THEME_NAME_RIME)) {
+			if (iceFacesThemeName.equals(ICEFACES_THEME_NAME_SAM) ||
+					iceFacesThemeName.equals(ICEFACES_THEME_NAME_RIME)) {
 				StringBuilder buf = new StringBuilder();
 				buf.append(ICEFACES_THEME_DIR);
 				buf.append(StringPool.FORWARD_SLASH);
-				buf.append(primeFacesThemeName);
+				buf.append(iceFacesThemeName);
 				buf.append(StringPool.FORWARD_SLASH);
 				buf.append(ICEFACES_THEME_RESOURCE_NAME);
 				resourceName = buf.toString();
 				resourceLibrary = ICEFACES_LIBRARY_NAME_ACE;
 			}
 
-			ResourceComponent primeFacesStyleSheet = new ResourceComponent(facesContext, resourceName, resourceLibrary,
+			ResourceComponent iceFacesStyleSheet = new ResourceComponent(facesContext, resourceName, resourceLibrary,
 					HeadResponseWriter.ELEMENT_HEAD);
-			resources.add(primeFacesStyleSheet);
+			resources.add(iceFacesStyleSheet);
 		}
 
 		return resources;
