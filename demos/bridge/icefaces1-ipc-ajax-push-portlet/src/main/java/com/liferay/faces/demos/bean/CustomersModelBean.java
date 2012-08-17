@@ -41,7 +41,7 @@ public class CustomersModelBean {
 	}
 
 	@PreDestroy
-	public void preDestroy() throws Exception {
+	public void preDestroy() {
 		SessionRenderer.removeCurrentSession(CUSTOMER_RENDER_GROUP);
 	}
 
