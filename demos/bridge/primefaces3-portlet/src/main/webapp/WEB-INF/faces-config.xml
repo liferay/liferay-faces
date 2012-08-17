@@ -14,6 +14,7 @@
 	</application>
 	<lifecycle>
 		<phase-listener>com.liferay.faces.util.lifecycle.DebugPhaseListener</phase-listener>
+		<phase-listener>com.liferay.faces.util.lifecycle.ViewScopePhaseListener</phase-listener>
 	</lifecycle>
 	<navigation-rule>
 		<from-view-id>/views/portletViewMode.xhtml</from-view-id>
