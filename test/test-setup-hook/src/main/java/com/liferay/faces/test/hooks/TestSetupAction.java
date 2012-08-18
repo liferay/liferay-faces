@@ -80,7 +80,6 @@ public class TestSetupAction extends SimpleAction {
 
 	static {
 		PORTAL_DEMO_PAGES = new ArrayList<PortalPage>();
-		PORTAL_DEMO_PAGES.add(new PortalPage("ICE3-CHAT", "1_WAR_icefaces3chatportlet"));
 		PORTAL_DEMO_PAGES.add(new PortalPage("ICE3-DIR", "1_WAR_icefaces3directoryportlet"));
 		PORTAL_DEMO_PAGES.add(new PortalPage("ICE3-DOC", "1_WAR_icefaces3documentsportlet"));
 	}
