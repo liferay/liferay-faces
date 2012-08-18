@@ -13,13 +13,17 @@
  */
 package com.liferay.faces.test.hooks;
 
+import java.util.Locale;
+
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.UserLocalServiceUtil;
 
 
 /**
@@ -49,4 +53,34 @@ public class ServiceUtil {
 				description, type, hidden, friendlyURL);
 	}
 
+	public static User addUser(long creatorUserId, long companyId, String firstName, String lastName) throws Exception {
+
+		boolean autoPassword = false;
+		String password1 = "test";
+		String password2 = password1;
+		boolean autoScreenName = false;
+		String screenName = firstName.toLowerCase() + StringPool.PERIOD + lastName.toLowerCase();
+		String emailAddress = screenName + StringPool.AT + "liferay.com";
+		String openId = StringPool.BLANK;
+		Locale locale = Locale.ENGLISH;
+		String middleName = StringPool.BLANK;
+		int prefixId = 0;
+		int suffixId = 0;
+		boolean male = true;
+		int birthdayMonth = 1;
+		int birthdayDay = 1;
+		int birthdayYear = 1970;
+		String jobTitle = StringPool.BLANK;
+		long[] groupIds = new long[] {};
+		long[] organizationIds = new long[] {};
+		long[] roleIds = new long[] {};
+		long[] userGroupIds = new long[] {};
+		boolean sendEmail = false;
+		ServiceContext serviceContext = new ServiceContext();
+
+		return UserLocalServiceUtil.addUser(creatorUserId, companyId, autoPassword, password1, password2,
+				autoScreenName, screenName, emailAddress, openId, locale, firstName, middleName, lastName, prefixId,
+				suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds, roleIds,
+				userGroupIds, sendEmail, serviceContext);
+	}
 }
