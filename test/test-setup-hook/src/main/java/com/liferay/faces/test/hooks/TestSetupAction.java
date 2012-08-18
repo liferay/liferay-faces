@@ -87,11 +87,38 @@ public class TestSetupAction extends SimpleAction {
 				Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 				long userId = company.getDefaultUser().getUserId();
 				setupSites(companyId, userId);
+				setupUsers(companyId, userId);
 			}
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
+	}
+
+	protected void setupUsers(long companyId, long userId) throws Exception {
+		ServiceUtil.addUser(userId, companyId, "John", "Adams");
+		ServiceUtil.addUser(userId, companyId, "Samuel", "Adams");
+		ServiceUtil.addUser(userId, companyId, "Josiah", "Bartlett");
+		ServiceUtil.addUser(userId, companyId, "Carter", "Braxton");
+		ServiceUtil.addUser(userId, companyId, "Charles", "Carroll");
+		ServiceUtil.addUser(userId, companyId, "Benjamin", "Franklin");
+		ServiceUtil.addUser(userId, companyId, "Elbridge", "Gerry");
+		ServiceUtil.addUser(userId, companyId, "John", "Hancock");
+		ServiceUtil.addUser(userId, companyId, "Thomas", "Jefferson");
+		ServiceUtil.addUser(userId, companyId, "Francis", "Lewis");
+		ServiceUtil.addUser(userId, companyId, "Philip", "Livingston");
+		ServiceUtil.addUser(userId, companyId, "Thomas", "McKean");
+		ServiceUtil.addUser(userId, companyId, "Arthur", "Middleton");
+		ServiceUtil.addUser(userId, companyId, "John", "Penn");
+		ServiceUtil.addUser(userId, companyId, "George", "Read");
+		ServiceUtil.addUser(userId, companyId, "John", "Rutledge");
+		ServiceUtil.addUser(userId, companyId, "Roger", "Sherman");
+		ServiceUtil.addUser(userId, companyId, "Thomas", "Stone");
+		ServiceUtil.addUser(userId, companyId, "George", "Taylor");
+		ServiceUtil.addUser(userId, companyId, "George", "Washington");
+		ServiceUtil.addUser(userId, companyId, "John", "Witherspoon");
+		ServiceUtil.addUser(userId, companyId, "Oliver", "Wolcott");
+		ServiceUtil.addUser(userId, companyId, "George", "Wythe");
 	}
 
 	protected void addAllUsersToSite(long companyId, long groupId) throws Exception {
