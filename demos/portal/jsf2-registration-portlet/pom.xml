@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.faces.demos</groupId>
 		<artifactId>liferay-faces-portal-demos</artifactId>
-		<version>2.9.0-ga1-SNAPSHOT</version>
+		<version>3.0.0-legacy-ga1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>jsf2-registration-portlet</artifactId>
