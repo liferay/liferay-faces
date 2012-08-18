@@ -15,6 +15,9 @@ package com.liferay.faces.test.hooks;
 
 import java.util.Locale;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -33,6 +36,9 @@ import com.liferay.portal.service.UserLocalServiceUtil;
  * @author  Neil Griffin
  */
 public class ServiceUtil {
+
+	// Logger
+	private static final Log log = LogFactory.getLog(ServiceUtil.class);
 
 	public static Group addActiveOpenGroup(long userId, String name) throws Exception {
 
@@ -81,9 +87,16 @@ public class ServiceUtil {
 		boolean sendEmail = false;
 		ServiceContext serviceContext = new ServiceContext();
 
-		return UserLocalServiceUtil.addUser(creatorUserId, companyId, autoPassword, password1, password2,
-				autoScreenName, screenName, emailAddress, facebookId, openId, locale, firstName, middleName, lastName,
-				prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
-				roleIds, userGroupIds, sendEmail, serviceContext);
+		User user = UserLocalServiceUtil.fetchUserByScreenName(companyId, screenName);
+		
+		if (user == null) {
+			user = UserLocalServiceUtil.addUser(creatorUserId, companyId, autoPassword, password1, password2,
+					autoScreenName, screenName, emailAddress, facebookId, openId, locale, firstName, middleName, lastName,
+					prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
+					roleIds, userGroupIds, sendEmail, serviceContext);
+			log.info("Added user: " + screenName);
+		}
+
+		return user;
 	}
 }
