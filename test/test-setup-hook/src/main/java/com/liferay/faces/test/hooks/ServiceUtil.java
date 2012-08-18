@@ -92,7 +92,7 @@ public class ServiceUtil {
 		}
 		catch (NoSuchUserException e) {
 			user = UserLocalServiceUtil.addUser(creatorUserId, companyId, autoPassword, password1, password2,
-					autoScreenName, screenName, emailAddress, facebookId, openId, locale, firstName, middleName, lastName,
+					autoScreenName, screenName, emailAddress, openId, locale, firstName, middleName, lastName,
 					prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
 					roleIds, userGroupIds, sendEmail, serviceContext);
 			log.info("Added user: " + screenName);
