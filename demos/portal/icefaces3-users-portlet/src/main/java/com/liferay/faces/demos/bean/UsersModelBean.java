@@ -61,7 +61,7 @@ public class UsersModelBean implements Serializable {
 		if (userDataModel == null) {
 			int rowsPerPage = liferayFacesContext.getPortletPreferenceAsInt("rowsPerPage",
 					SearchContainer.DEFAULT_DELTA);
-			userDataModel = new UserLazyDataModel(liferayFacesContext.getCompanyId(), rowsPerPage, searchCriteria);
+			userDataModel = new UserLazyDataModel(liferayFacesContext.getCompanyId(), rowsPerPage, getSearchCriteria());
 		}
 
 		return userDataModel;
