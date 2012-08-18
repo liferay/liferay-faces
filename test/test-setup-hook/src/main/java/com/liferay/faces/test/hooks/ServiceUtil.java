@@ -18,6 +18,7 @@ import java.util.Locale;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -84,9 +85,12 @@ public class ServiceUtil {
 		boolean sendEmail = false;
 		ServiceContext serviceContext = new ServiceContext();
 
-		User user = UserLocalServiceUtil.fetchUserByScreenName(companyId, screenName);
+		User user = null;
 		
-		if (user == null) {
+		try {
+			user = UserLocalServiceUtil.getUserByScreenName(companyId, screenName);
+		}
+		catch (NoSuchUserException e) {
 			user = UserLocalServiceUtil.addUser(creatorUserId, companyId, autoPassword, password1, password2,
 					autoScreenName, screenName, emailAddress, facebookId, openId, locale, firstName, middleName, lastName,
 					prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
