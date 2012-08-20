@@ -26,4 +26,16 @@
 		<module>richfaces4-portlet</module>
 	</modules>
 
+	<profiles>
+		<profile>
+			<id>pluto</id>
+			<dependencies>
+				<dependency>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
 </project>
