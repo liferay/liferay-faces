@@ -176,7 +176,7 @@ public class RegistrantServiceUtil {
 
 			try {
 				administratorPermissionChecker = PermissionCheckerFactoryUtil.getPermissionCheckerFactory().create(
-						administratorUser, false);
+						administratorUser);
 			}
 			catch (Exception e) {
 				throw new SystemException(e.getMessage(), e);

@@ -60,7 +60,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalPortEventListener;
-
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 
@@ -225,8 +224,19 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getActualURL(groupId, privateLayout, mainPath, friendlyURL, params, requestContext);
 	}
 
+	@Override
+	public Locale[] getAlternateLocales(HttpServletRequest request) throws PortalException, SystemException {
+		return getWrapped().getAlternateLocales(request);
+	}
+
+	@SuppressWarnings("deprecation")
 	public String getAlternateURL(HttpServletRequest request, String canonicalURL, Locale locale) {
 		return getWrapped().getAlternateURL(request, canonicalURL, locale);
+	}
+
+	@Override
+	public String getAlternateURL(String canonicalURL, ThemeDisplay themeDisplay, Locale locale) {
+		return getWrapped().getAlternateURL(canonicalURL, themeDisplay, locale);
 	}
 
 	public Set<String> getAuthTokenIgnoreActions() {
@@ -257,9 +267,16 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getBasicAuthUserId(request, companyId);
 	}
 
+	@SuppressWarnings("deprecation")
 	public String getCanonicalURL(String completeURL, ThemeDisplay themeDisplay) throws PortalException,
 		SystemException {
 		return getWrapped().getCanonicalURL(completeURL, themeDisplay);
+	}
+
+	@Override
+	public String getCanonicalURL(String completeURL, ThemeDisplay themeDisplay, Layout layout) throws PortalException,
+		SystemException {
+		return getWrapped().getCanonicalURL(completeURL, themeDisplay, layout);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -368,6 +385,16 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getCustomSQLFunctionIsNull();
 	}
 
+	@Override
+	public boolean isCDNDynamicResourcesEnabled(HttpServletRequest request) throws PortalException, SystemException {
+		return getWrapped().isCDNDynamicResourcesEnabled(request);
+	}
+
+	@Override
+	public boolean isCDNDynamicResourcesEnabled(long companyId) {
+		return getWrapped().isCDNDynamicResourcesEnabled(companyId);
+	}
+
 	public boolean isValidResourceId(String resourceId) {
 		return getWrapped().isValidResourceId(resourceId);
 	}
@@ -376,21 +403,48 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getDate(month, day, year);
 	}
 
+	@SuppressWarnings("deprecation")
 	public Date getDate(int month, int day, int year, PortalException pe) throws PortalException {
 		return getWrapped().getDate(month, day, year, pe);
 	}
 
+	@Override
+	public Date getDate(int month, int day, int year, Class<? extends PortalException> clazz) throws PortalException {
+		return getWrapped().getDate(month, day, year, clazz);
+	}
+
+	@SuppressWarnings("deprecation")
 	public Date getDate(int month, int day, int year, TimeZone timeZone, PortalException pe) throws PortalException {
 		return getWrapped().getDate(month, day, year, timeZone, pe);
 	}
 
+	@Override
+	public Date getDate(int month, int day, int year, TimeZone timeZone, Class<? extends PortalException> clazz)
+		throws PortalException {
+		return getWrapped().getDate(month, day, year, timeZone, clazz);
+	}
+
+	@SuppressWarnings("deprecation")
 	public Date getDate(int month, int day, int year, int hour, int min, PortalException pe) throws PortalException {
 		return getWrapped().getDate(month, day, year, hour, min, pe);
 	}
 
+	@Override
+	public Date getDate(int month, int day, int year, int hour, int min, Class<? extends PortalException> clazz)
+		throws PortalException {
+		return getWrapped().getDate(month, day, year, hour, min, clazz);
+	}
+
+	@SuppressWarnings("deprecation")
 	public Date getDate(int month, int day, int year, int hour, int min, TimeZone timeZone, PortalException pe)
 		throws PortalException {
 		return getWrapped().getDate(month, day, year, hour, min, timeZone, pe);
+	}
+
+	@Override
+	public Date getDate(int month, int day, int year, int hour, int min, TimeZone timeZone,
+		Class<? extends PortalException> clazz) throws PortalException {
+		return getWrapped().getDate(month, day, year, hour, min, timeZone, clazz);
 	}
 
 	public long getDefaultCompanyId() {
@@ -465,9 +519,21 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getExpandoBridgeAttributes(expandoBridge, portletRequest);
 	}
 
+	@Override
+	public Map<String, Serializable> getExpandoBridgeAttributes(ExpandoBridge expandoBridge,
+		UploadPortletRequest uploadPortletRequest) throws PortalException, SystemException {
+		return getWrapped().getExpandoBridgeAttributes(expandoBridge, uploadPortletRequest);
+	}
+
 	public Serializable getExpandoValue(PortletRequest portletRequest, String name, int type, String displayType)
 		throws PortalException, SystemException {
 		return getWrapped().getExpandoValue(portletRequest, name, type, displayType);
+	}
+
+	@Override
+	public Serializable getExpandoValue(UploadPortletRequest uploadPortletRequest, String name, int type,
+		String displayType) throws PortalException, SystemException {
+		return getWrapped().getExpandoValue(uploadPortletRequest, name, type, displayType);
 	}
 
 	public String getFacebookURL(Portlet portlet, String facebookCanvasPageURL, ThemeDisplay themeDisplay)
@@ -1060,6 +1126,16 @@ public abstract class PortalWrapper implements Portal {
 
 	public boolean isMultipartRequest(HttpServletRequest request) {
 		return getWrapped().isMultipartRequest(request);
+	}
+
+	@Override
+	public String getUniqueElementId(HttpServletRequest request, String namespace, String id) {
+		return getWrapped().getUniqueElementId(request, namespace, id);
+	}
+
+	@Override
+	public String getUniqueElementId(PortletRequest request, String namespace, String id) {
+		return getWrapped().getUniqueElementId(request, namespace, id);
 	}
 
 	public UploadPortletRequest getUploadPortletRequest(PortletRequest portletRequest) {
