@@ -13,11 +13,19 @@
 
 	<description>This plugin is an example CRUD (Create, Read, Update, Delete) portlet built with ICEfaces.</description>
 
+	<profiles>
+		<profile>
+			<id>pluto</id>
+			<dependencies>
+				<dependency>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
 	<dependencies>
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>javax.annotation</groupId>
 			<artifactId>jsr250-api</artifactId>

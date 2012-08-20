@@ -11,11 +11,19 @@
 	<name>ICEfaces3 Compat Portlet</name>
 	<packaging>war</packaging>
 
+	<profiles>
+		<profile>
+			<id>pluto</id>
+			<dependencies>
+				<dependency>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
 	<dependencies>
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>javax.el</groupId>
 			<artifactId>el-api</artifactId>
