@@ -7,7 +7,7 @@
 	<link href="${pageContext.request.contextPath}/css/liferay-theme-override.css" rel="stylesheet" type="text/css" />
 	<link href="${pageContext.request.contextPath}/css/example.css" rel="stylesheet" type="text/css" />
 	<c:if test="${!aui.provided}">
-		<link href="${pageContext.request.contextPath}/css/aui-skin-classic-all-min.css" rel="stylesheet" type="text/css" />
+		<link href="${pageContext.request.contextPath}/aui-skin-classic/css/aui-skin-classic-all-min.css" rel="stylesheet" type="text/css" />
 	</c:if>
 
 </jsp:root>

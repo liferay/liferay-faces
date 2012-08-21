@@ -5,5 +5,8 @@
 	<link href="${request.contextPath}/css/example.css" rel="stylesheet" type="text/css" />
 	<link href="${request.contextPath}/css/portlet.css" rel="stylesheet" type="text/css" />
 	<link href="${request.contextPath}/css/liferay-theme-override.css" rel="stylesheet" type="text/css" />
+	<c:if test="#{!aui.provided}">
+		<link href="${request.contextPath}/aui-skin-classic/css/aui-skin-classic-all-min.css" rel="stylesheet" type="text/css" />
+	</c:if>
 
 </ui:composition>

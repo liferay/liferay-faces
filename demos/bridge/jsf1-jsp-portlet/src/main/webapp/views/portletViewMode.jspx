@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jsp:root xmlns:aui="http://liferay.com/faces/aui" xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:portlet="http://java.sun.com/portlet"  version="2.1">
+	xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:portlet="http://java.sun.com/portlet" version="2.1">
 
 	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
 	<p>This text should appear BEFORE f:view</p>
 	<f:view>
-		<f:subview id="head">
-			<jsp:include page="styling.jspx" />
-		</f:subview>
-		<f:subview id="applicant">
-			<jsp:include page="applicant.jspx" />
-		</f:subview>
-		<br />
-		<aui:layout>
-			<aui:column>
-				<ul>
-					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['JSF']}" /></em></li>
-					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Alloy']}" /></em></li>
-					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Bridge']}" /></em></li>
-				</ul>
-			</aui:column>
-		</aui:layout>
+		<h:panelGroup layout="block" styleClass="jsf1-portlet ltr">
+			<f:subview id="head">
+				<jsp:include page="styling.jspx" />
+			</f:subview>
+			<f:subview id="applicant">
+				<jsp:include page="applicant.jspx" />
+			</f:subview>
+			<br />
+			<aui:layout>
+				<aui:column>
+					<ul>
+						<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['JSF']}" /></em></li>
+						<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Alloy']}" /></em></li>
+						<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Bridge']}" /></em></li>
+					</ul>
+				</aui:column>
+			</aui:layout>
+		</h:panelGroup>
 	</f:view>
 	<p>This text should appear AFTER f:view</p>
 	<hr />
@@ -30,7 +32,8 @@
 		<portlet:param name="_jsfBridgeViewPath" value="/views/testBridgeViewPath.faces" />
 	</portlet:renderURL>
 	<ul>
-		<li><a href="${facesViewPathTestExtensionMappedURL}">Test "javax.portlet.faces.viewPath" attribute (extension-mapped)</a></li>
+		<li><a href="${facesViewPathTestExtensionMappedURL}">Test "javax.portlet.faces.viewPath" attribute
+				(extension-mapped)</a></li>
 	</ul>
 	<portlet:renderURL var="facesViewPathTestPathMappedURL">
 		<portlet:param name="_jsfBridgeViewPath" value="/faces/views/testBridgeViewPath.jspx" />
