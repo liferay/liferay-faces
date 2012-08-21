@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book[
-	<!ENTITY versionNumber "3.1.0-rc2">
+	<!ENTITY versionNumber "2.1.0-ga1">
 	<!ENTITY copyrightYear "2000-2012 ">
 	<!ENTITY copyrightHolder "Liferay, Inc. All rights reserved.">
 ]>
