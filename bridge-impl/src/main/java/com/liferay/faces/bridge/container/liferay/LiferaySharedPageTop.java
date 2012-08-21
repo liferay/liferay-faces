@@ -51,7 +51,7 @@ public class LiferaySharedPageTop {
 	// Private Data Members
 	private List<HeadResource> headResources;
 
-	public LiferaySharedPageTop(StringBuilder stringBundler) {
+	public LiferaySharedPageTop(StringBundler stringBundler) {
 
 		try {
 			headResources = new ArrayList<HeadResource>();
@@ -118,8 +118,8 @@ public class LiferaySharedPageTop {
 
 	}
 
-	public StringBuilder toStringBundler() {
-		StringBuilder stringBundler = new StringBuilder();
+	public StringBundler toStringBundler() {
+		StringBundler stringBundler = new StringBundler();
 
 		for (HeadResource headResource : headResources) {
 			stringBundler.append(headResource.toString());

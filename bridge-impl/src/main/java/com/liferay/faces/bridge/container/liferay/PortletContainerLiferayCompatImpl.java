@@ -55,8 +55,8 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 
 			PortletRequest portletRequest = bridgeContext.getPortletRequest();
 
-			StringBuilder stringBundler = (StringBuilder) portletRequest.getAttribute(
-					LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
+			StringBundler stringBundler = new StringBundler(portletRequest.getAttribute(
+					LiferayConstants.LIFERAY_SHARED_PAGE_TOP));
 
 			if (stringBundler != null) {
 
@@ -80,12 +80,10 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
-		StringBuilder stringBundler = (StringBuilder) portletRequest.getAttribute(
-				LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
+		StringBundler stringBundler = new StringBundler(portletRequest.getAttribute(
+				LiferayConstants.LIFERAY_SHARED_PAGE_TOP));
 
-		if (stringBundler != null) {
-			liferaySharedPageTopLength = stringBundler.length();
-		}
+		liferaySharedPageTopLength = stringBundler.length();
 	}
 
 	@Override

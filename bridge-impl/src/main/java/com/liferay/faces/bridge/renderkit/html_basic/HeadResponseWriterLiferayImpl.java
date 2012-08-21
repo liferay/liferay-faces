@@ -23,6 +23,7 @@ import javax.portlet.PortletRequest;
 import org.w3c.dom.Element;
 
 import com.liferay.faces.bridge.container.liferay.LiferayConstants;
+import com.liferay.faces.bridge.container.liferay.StringBundler;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -65,16 +66,12 @@ public class HeadResponseWriterLiferayImpl extends HeadResponseWriter {
 				String elementAsString = element.toString();
 
 				PortletRequest portletRequest = bridgeContext.getPortletRequest();
-				StringBuilder stringBundler = (StringBuilder) portletRequest.getAttribute(
-						LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
-
-				if (stringBundler == null) {
-					stringBundler = new StringBuilder();
-				}
+				StringBundler stringBundler = new StringBundler(portletRequest.getAttribute(
+						LiferayConstants.LIFERAY_SHARED_PAGE_TOP));
 
 				stringBundler.append(elementAsString);
 
-				portletRequest.setAttribute(LiferayConstants.LIFERAY_SHARED_PAGE_TOP, stringBundler);
+				portletRequest.setAttribute(LiferayConstants.LIFERAY_SHARED_PAGE_TOP, stringBundler.getWrapped());
 
 				logger.debug("Added resource to Liferay's <head>...</head> section, element=[{0}]", elementAsString);
 			}
