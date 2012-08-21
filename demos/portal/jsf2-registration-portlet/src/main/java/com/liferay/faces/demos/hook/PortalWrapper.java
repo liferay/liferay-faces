@@ -60,6 +60,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalPortEventListener;
+
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 
@@ -224,7 +225,6 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getActualURL(groupId, privateLayout, mainPath, friendlyURL, params, requestContext);
 	}
 
-	@Override
 	public Locale[] getAlternateLocales(HttpServletRequest request) throws PortalException, SystemException {
 		return getWrapped().getAlternateLocales(request);
 	}
@@ -234,7 +234,6 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getAlternateURL(request, canonicalURL, locale);
 	}
 
-	@Override
 	public String getAlternateURL(String canonicalURL, ThemeDisplay themeDisplay, Locale locale) {
 		return getWrapped().getAlternateURL(canonicalURL, themeDisplay, locale);
 	}
@@ -273,7 +272,6 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getCanonicalURL(completeURL, themeDisplay);
 	}
 
-	@Override
 	public String getCanonicalURL(String completeURL, ThemeDisplay themeDisplay, Layout layout) throws PortalException,
 		SystemException {
 		return getWrapped().getCanonicalURL(completeURL, themeDisplay, layout);
@@ -385,12 +383,10 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getCustomSQLFunctionIsNull();
 	}
 
-	@Override
 	public boolean isCDNDynamicResourcesEnabled(HttpServletRequest request) throws PortalException, SystemException {
 		return getWrapped().isCDNDynamicResourcesEnabled(request);
 	}
 
-	@Override
 	public boolean isCDNDynamicResourcesEnabled(long companyId) {
 		return getWrapped().isCDNDynamicResourcesEnabled(companyId);
 	}
@@ -408,7 +404,6 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getDate(month, day, year, pe);
 	}
 
-	@Override
 	public Date getDate(int month, int day, int year, Class<? extends PortalException> clazz) throws PortalException {
 		return getWrapped().getDate(month, day, year, clazz);
 	}
@@ -418,7 +413,6 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getDate(month, day, year, timeZone, pe);
 	}
 
-	@Override
 	public Date getDate(int month, int day, int year, TimeZone timeZone, Class<? extends PortalException> clazz)
 		throws PortalException {
 		return getWrapped().getDate(month, day, year, timeZone, clazz);
@@ -429,7 +423,6 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getDate(month, day, year, hour, min, pe);
 	}
 
-	@Override
 	public Date getDate(int month, int day, int year, int hour, int min, Class<? extends PortalException> clazz)
 		throws PortalException {
 		return getWrapped().getDate(month, day, year, hour, min, clazz);
@@ -441,7 +434,6 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getDate(month, day, year, hour, min, timeZone, pe);
 	}
 
-	@Override
 	public Date getDate(int month, int day, int year, int hour, int min, TimeZone timeZone,
 		Class<? extends PortalException> clazz) throws PortalException {
 		return getWrapped().getDate(month, day, year, hour, min, timeZone, clazz);
@@ -519,7 +511,6 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getExpandoBridgeAttributes(expandoBridge, portletRequest);
 	}
 
-	@Override
 	public Map<String, Serializable> getExpandoBridgeAttributes(ExpandoBridge expandoBridge,
 		UploadPortletRequest uploadPortletRequest) throws PortalException, SystemException {
 		return getWrapped().getExpandoBridgeAttributes(expandoBridge, uploadPortletRequest);
@@ -530,7 +521,6 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getExpandoValue(portletRequest, name, type, displayType);
 	}
 
-	@Override
 	public Serializable getExpandoValue(UploadPortletRequest uploadPortletRequest, String name, int type,
 		String displayType) throws PortalException, SystemException {
 		return getWrapped().getExpandoValue(uploadPortletRequest, name, type, displayType);
@@ -1128,12 +1118,10 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().isMultipartRequest(request);
 	}
 
-	@Override
 	public String getUniqueElementId(HttpServletRequest request, String namespace, String id) {
 		return getWrapped().getUniqueElementId(request, namespace, id);
 	}
 
-	@Override
 	public String getUniqueElementId(PortletRequest request, String namespace, String id) {
 		return getWrapped().getUniqueElementId(request, namespace, id);
 	}
