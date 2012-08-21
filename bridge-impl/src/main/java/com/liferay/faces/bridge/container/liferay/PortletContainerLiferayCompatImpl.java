@@ -63,7 +63,7 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 				LiferaySharedPageTop liferaySharedPageTop = new LiferaySharedPageTop(stringBundler);
 				liferaySharedPageTop.removeDuplicates();
 				stringBundler = liferaySharedPageTop.toStringBundler();
-				portletRequest.setAttribute(LiferayConstants.LIFERAY_SHARED_PAGE_TOP, stringBundler);
+				portletRequest.setAttribute(LiferayConstants.LIFERAY_SHARED_PAGE_TOP, stringBundler.getWrapped());
 			}
 		}
 	}
