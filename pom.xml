@@ -83,7 +83,7 @@
 		<mojarra.version>1.2_15</mojarra.version>
 		<myfaces.version>2.1.6</myfaces.version>
 		<selenium.version>1.0.1</selenium.version>
-		<tck.version>jsr329-1.0.1-SNAPSHOT</tck.version>
+		<tck.version>jsr329-1.0.1-liferay</tck.version>
 	</properties>
 
 	<build>
@@ -570,6 +570,11 @@
 			<id>maven2-repository.jboss.org</id>
 			<name>JBoss Maven Repository</name>
 			<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
+		</repository>
+		<repository>
+			<id>thirdparty-repository.portletfaces.org</id>
+			<name>Liferay 3rd Party Maven Repository</name>
+			<url>http://repository.portletfaces.org/content/repositories/thirdparty/</url>
 		</repository>
 		<repository>
 			<id>maven2-repository.primefaces.org</id>

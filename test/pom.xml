@@ -23,19 +23,4 @@
 		<module>test-setup-hook</module>
 	</modules>
 
-	<repositories>
-		<!-- Required for resolution of JSR 329 TCK SNAPSHOT artifacts -->
-		<repository>
-			<id>liferay-snapshots-repository.portletfaces.org</id>
-			<name>Liferay 3rd Party Maven Repository</name>
-			<url>http://repository.portletfaces.org/content/repositories/liferay-snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
 </project>
