@@ -31,40 +31,36 @@ public class UploadedFileFactoryImpl extends UploadedFileFactory {
 	public UploadedFile getUploadedFile(Exception e) {
 
 		UploadedFile uploadedFile = null;
+		FileUploadException fileUploadException = null;
 
-		if (uploadedFile == null) {
+		if (e instanceof FileUploadException) {
+			fileUploadException = (FileUploadException) e;
+		}
 
-			FileUploadException fileUploadException = null;
+		if (e instanceof FileUploadIOException) {
+			Throwable causeThrowable = e.getCause();
 
-			if (e instanceof FileUploadException) {
-				fileUploadException = (FileUploadException) e;
+			if (causeThrowable instanceof FileUploadException) {
+				fileUploadException = (FileUploadException) causeThrowable;
 			}
+		}
 
-			if (e instanceof FileUploadIOException) {
-				Throwable causeThrowable = e.getCause();
+		if (fileUploadException != null) {
 
-				if (causeThrowable instanceof FileUploadException) {
-					fileUploadException = (FileUploadException) causeThrowable;
-				}
+			if (fileUploadException instanceof SizeLimitExceededException) {
+				uploadedFile = new UploadedFileErrorImpl(fileUploadException.getMessage(),
+						UploadedFile.Status.REQUEST_SIZE_LIMIT_EXCEEDED);
 			}
-
-			if (fileUploadException != null) {
-
-				if (fileUploadException instanceof SizeLimitExceededException) {
-					uploadedFile = new UploadedFileErrorImpl(fileUploadException.getMessage(),
-							UploadedFile.Status.REQUEST_SIZE_LIMIT_EXCEEDED);
-				}
-				else if (fileUploadException instanceof FileSizeLimitExceededException) {
-					uploadedFile = new UploadedFileErrorImpl(fileUploadException.getMessage(),
-							UploadedFile.Status.FILE_SIZE_LIMIT_EXCEEDED);
-				}
-				else {
-					uploadedFile = new UploadedFileErrorImpl(fileUploadException.getMessage());
-				}
+			else if (fileUploadException instanceof FileSizeLimitExceededException) {
+				uploadedFile = new UploadedFileErrorImpl(fileUploadException.getMessage(),
+						UploadedFile.Status.FILE_SIZE_LIMIT_EXCEEDED);
 			}
 			else {
-				uploadedFile = new UploadedFileErrorImpl(e.getMessage());
+				uploadedFile = new UploadedFileErrorImpl(fileUploadException.getMessage());
 			}
+		}
+		else {
+			uploadedFile = new UploadedFileErrorImpl(e.getMessage());
 		}
 
 		return uploadedFile;
