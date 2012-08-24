@@ -54,12 +54,12 @@ import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.model.UploadedFile;
+import com.liferay.faces.bridge.model.UploadedFileFactory;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
-import com.liferay.faces.bridge.model.UploadedFile;
-import com.liferay.faces.bridge.model.UploadedFileFactory;
 
 
 /**
@@ -267,12 +267,14 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 							if (diskFileItem.isFormField()) {
 								String characterEncoding = clientDataRequest.getCharacterEncoding();
 								String requestParameterValue = null;
+
 								if (characterEncoding == null) {
 									requestParameterValue = diskFileItem.getString();
 								}
 								else {
 									requestParameterValue = diskFileItem.getString(characterEncoding);
 								}
+
 								String fixedRequestParameterValue = portletContainer.fixRequestParameterValue(
 										requestParameterValue);
 								requestParameterMap.put(fieldName, fixedRequestParameterValue);
@@ -343,6 +345,12 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 									addUploadedFile(fieldName, uploadedFile);
 									logger.debug("Received uploaded file fieldName=[{0}] fileName=[{1}]", fieldName,
 										fileName);
+								}
+								else {
+									Exception e = new IOException(
+											"Failed to copy the stream of file data to a temporary file");
+									UploadedFile uploadedFile = uploadedFileFactory.getUploadedFile(e);
+									addUploadedFile(fieldName, uploadedFile);
 								}
 							}
 						}
