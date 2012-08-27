@@ -52,6 +52,8 @@ import com.liferay.faces.bridge.util.LocaleIterator;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -61,6 +63,11 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ExternalContextImpl.class);
+
+	// Private Constants
+	private static final boolean RICHFACES_DETECTED = ProductMap.getInstance().get(ProductConstants.RICHFACES)
+		.isDetected();
+	private static final String ORG_RICHFACES_EXTENSION = "org.richfaces.extension";
 
 	// Pre-initialized Data Members
 	private ApplicationMap applicationMap;
@@ -123,7 +130,18 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 	 */
 	@Override
 	public String encodeNamespace(String name) {
-		return bridgeContext.getResponseNamespace() + name;
+
+		if (name == null) {
+			return bridgeContext.getResponseNamespace();
+		}
+		else if (RICHFACES_DETECTED && (name.equals(ORG_RICHFACES_EXTENSION))) {
+
+			// http://issues.liferay.com/browse/FACES-1416
+			return name;
+		}
+		else {
+			return bridgeContext.getResponseNamespace() + name;
+		}
 	}
 
 	/**
