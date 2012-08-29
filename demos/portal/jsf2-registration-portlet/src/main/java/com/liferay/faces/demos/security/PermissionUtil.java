@@ -17,9 +17,6 @@ import java.util.Arrays;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 
@@ -34,20 +31,10 @@ public class PermissionUtil {
 	public static void grantPermissions(long companyId, long roleId, String resourceId, int scope, String primKey,
 		String[] actionKeys) throws PortalException, SystemException {
 
-		if (Long.parseLong(PropsUtil.get(PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM)) < 6) {
-
-			for (int i = 0; i < actionKeys.length; i++) {
-				PermissionLocalServiceUtil.setRolePermission(roleId, companyId, resourceId, scope, primKey,
-					actionKeys[i]);
-			}
-		}
-		else {
-
-			for (int i = 0; i < actionKeys.length; i++) {
-				ResourceActionLocalServiceUtil.checkResourceActions(resourceId, Arrays.asList(actionKeys));
-				ResourcePermissionLocalServiceUtil.setResourcePermissions(companyId, resourceId, scope, primKey, roleId,
-					actionKeys);
-			}
+		for (int i = 0; i < actionKeys.length; i++) {
+			ResourceActionLocalServiceUtil.checkResourceActions(resourceId, Arrays.asList(actionKeys));
+			ResourcePermissionLocalServiceUtil.setResourcePermissions(companyId, resourceId, scope, primKey, roleId,
+				actionKeys);
 		}
 	}
 }

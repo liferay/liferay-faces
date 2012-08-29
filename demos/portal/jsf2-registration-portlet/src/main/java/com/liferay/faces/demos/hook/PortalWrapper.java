@@ -54,7 +54,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -68,6 +67,7 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
  * @author  Neil Griffin
  */
 public abstract class PortalWrapper implements Portal {
+
 	public void addPageDescription(String description, HttpServletRequest request) {
 		getWrapped().addPageDescription(description, request);
 	}
@@ -139,30 +139,6 @@ public abstract class PortalWrapper implements Portal {
 		getWrapped().removePortalPortEventListener(portalPortEventListener);
 	}
 
-	public String renderPage(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response,
-		String path) throws IOException, ServletException {
-		return getWrapped().renderPage(servletContext, request, response, path);
-	}
-
-	public String renderPortlet(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response,
-		Portlet portlet, String queryString, boolean writeOutput) throws IOException, ServletException {
-		return getWrapped().renderPortlet(servletContext, request, response, portlet, queryString, writeOutput);
-	}
-
-	public String renderPortlet(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response,
-		Portlet portlet, String queryString, String columnId, Integer columnPos, Integer columnCount,
-		boolean writeOutput) throws IOException, ServletException {
-		return getWrapped().renderPortlet(servletContext, request, response, portlet, queryString, columnId, columnPos,
-				columnCount, writeOutput);
-	}
-
-	public String renderPortlet(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response,
-		Portlet portlet, String queryString, String columnId, Integer columnPos, Integer columnCount, String path,
-		boolean writeOutput) throws IOException, ServletException {
-		return getWrapped().renderPortlet(servletContext, request, response, portlet, queryString, columnId, columnPos,
-				columnCount, path, writeOutput);
-	}
-
 	public void resetCDNHosts() {
 		getWrapped().resetCDNHosts();
 	}
@@ -229,11 +205,6 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getAlternateLocales(request);
 	}
 
-	@SuppressWarnings("deprecation")
-	public String getAlternateURL(HttpServletRequest request, String canonicalURL, Locale locale) {
-		return getWrapped().getAlternateURL(request, canonicalURL, locale);
-	}
-
 	public String getAlternateURL(String canonicalURL, ThemeDisplay themeDisplay, Locale locale) {
 		return getWrapped().getAlternateURL(canonicalURL, themeDisplay, locale);
 	}
@@ -244,10 +215,6 @@ public abstract class PortalWrapper implements Portal {
 
 	public Set<String> getAuthTokenIgnorePortlets() {
 		return getWrapped().getAuthTokenIgnorePortlets();
-	}
-
-	public BaseModel<?> getBaseModel(Resource resource) throws PortalException, SystemException {
-		return getWrapped().getBaseModel(resource);
 	}
 
 	public BaseModel<?> getBaseModel(ResourcePermission resourcePermission) throws PortalException, SystemException {
@@ -266,15 +233,15 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getBasicAuthUserId(request, companyId);
 	}
 
-	@SuppressWarnings("deprecation")
-	public String getCanonicalURL(String completeURL, ThemeDisplay themeDisplay) throws PortalException,
-		SystemException {
-		return getWrapped().getCanonicalURL(completeURL, themeDisplay);
-	}
-
 	public String getCanonicalURL(String completeURL, ThemeDisplay themeDisplay, Layout layout) throws PortalException,
 		SystemException {
 		return getWrapped().getCanonicalURL(completeURL, themeDisplay, layout);
+	}
+
+	@Override
+	public String getCanonicalURL(String completeURL, ThemeDisplay themeDisplay, Layout layout,
+		boolean forceLayoutFriendlyURL) throws PortalException, SystemException {
+		return getWrapped().getCanonicalURL(completeURL, themeDisplay, layout, forceLayoutFriendlyURL);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -351,6 +318,16 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getControlPanelFullURL(scopeGroupId, ppid, params);
 	}
 
+	@Override
+	public long getControlPanelPlid(long companyId) throws PortalException, SystemException {
+		return getWrapped().getControlPanelPlid(companyId);
+	}
+
+	@Override
+	public long getControlPanelPlid(PortletRequest portletRequest) throws PortalException, SystemException {
+		return getWrapped().getControlPanelPlid(portletRequest);
+	}
+
 	public Set<Portlet> getControlPanelPortlets(long companyId, String category) throws SystemException {
 		return getWrapped().getControlPanelPortlets(companyId, category);
 	}
@@ -399,18 +376,8 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getDate(month, day, year);
 	}
 
-	@SuppressWarnings("deprecation")
-	public Date getDate(int month, int day, int year, PortalException pe) throws PortalException {
-		return getWrapped().getDate(month, day, year, pe);
-	}
-
 	public Date getDate(int month, int day, int year, Class<? extends PortalException> clazz) throws PortalException {
 		return getWrapped().getDate(month, day, year, clazz);
-	}
-
-	@SuppressWarnings("deprecation")
-	public Date getDate(int month, int day, int year, TimeZone timeZone, PortalException pe) throws PortalException {
-		return getWrapped().getDate(month, day, year, timeZone, pe);
 	}
 
 	public Date getDate(int month, int day, int year, TimeZone timeZone, Class<? extends PortalException> clazz)
@@ -418,20 +385,9 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getDate(month, day, year, timeZone, clazz);
 	}
 
-	@SuppressWarnings("deprecation")
-	public Date getDate(int month, int day, int year, int hour, int min, PortalException pe) throws PortalException {
-		return getWrapped().getDate(month, day, year, hour, min, pe);
-	}
-
 	public Date getDate(int month, int day, int year, int hour, int min, Class<? extends PortalException> clazz)
 		throws PortalException {
 		return getWrapped().getDate(month, day, year, hour, min, clazz);
-	}
-
-	@SuppressWarnings("deprecation")
-	public Date getDate(int month, int day, int year, int hour, int min, TimeZone timeZone, PortalException pe)
-		throws PortalException {
-		return getWrapped().getDate(month, day, year, hour, min, timeZone, pe);
 	}
 
 	public Date getDate(int month, int day, int year, int hour, int min, TimeZone timeZone,
@@ -931,6 +887,11 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getPortletNamespace(portletId);
 	}
 
+	@Override
+	public String getPortletTitle(RenderRequest renderRequest) {
+		return getWrapped().getPortletTitle(renderRequest);
+	}
+
 	public String getPortletTitle(RenderResponse renderResponse) {
 		return getWrapped().getPortletTitle(renderResponse);
 	}
@@ -1039,8 +1000,14 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getSelectedUser(portletRequest, checkPermission);
 	}
 
-	public ServletContext getServletContext(Portlet portlet, ServletContext servletContext) {
-		return getWrapped().getServletContext(portlet, servletContext);
+	@Override
+	public long[] getSiteAndCompanyGroupIds(long groupId) throws PortalException, SystemException {
+		return getWrapped().getSiteAndCompanyGroupIds(groupId);
+	}
+
+	@Override
+	public long[] getSiteAndCompanyGroupIds(ThemeDisplay themeDisplay) throws PortalException, SystemException {
+		return getWrapped().getSiteAndCompanyGroupIds(themeDisplay);
 	}
 
 	public String getSiteLoginURL(ThemeDisplay themeDisplay) throws PortalException, SystemException {
@@ -1160,6 +1127,11 @@ public abstract class PortalWrapper implements Portal {
 
 	public long getUserId(PortletRequest portletRequest) {
 		return getWrapped().getUserId(portletRequest);
+	}
+
+	@Override
+	public String getUserName(BaseModel<?> baseModel) {
+		return getWrapped().getUserName(baseModel);
 	}
 
 	public String getUserName(long userId, String defaultUserName) {
