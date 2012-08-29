@@ -41,7 +41,7 @@
 			<artifactId>icefaces-compat</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.icefaces</groupId>
+			<groupId>org.icepush</groupId>
 			<artifactId>icepush</artifactId>
 		</dependency>
 		<dependency>
