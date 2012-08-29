@@ -28,12 +28,4 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<repositories>
-		<!-- Temporarily need portletfaces repository for custom ICEfaces dependency -->
-		<repository>
-			<id>maven2-repository-portletfaces.org</id>
-			<url>http://repository.portletfaces.org/content/repositories/portletfaces-releases</url>
-		</repository>
-	</repositories>
-
 </project>
