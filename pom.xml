@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.liferay.faces</groupId>
 	<artifactId>liferay-faces</artifactId>
@@ -52,26 +58,15 @@
 		<url>scm:git:https://github.com/liferay/liferay-faces</url>
 	</scm>
 
-	<distributionManagement>
-		<repository>
-			<id>liferay-releases</id>
-			<url>${liferay-deploy-path-releases}</url>
-		</repository>
-		<snapshotRepository>
-			<id>liferay-snapshots</id>
-			<url>${liferay-deploy-path-snapshots}</url>
-		</snapshotRepository>
-	</distributionManagement>
-
 	<modules>
 		<module>util</module>
 		<module>alloy</module>
 		<module>bridge-api</module>
 		<module>bridge-impl</module>
 		<module>portal</module>
-		<module>doc</module>
 		<module>demos</module>
-		<module>test</module>
+		<!-- <module>test</module> -->
+		<!-- <module>doc</module> -->
 	</modules>
 
 	<properties>
@@ -118,6 +113,11 @@
 							</manifestEntries>
 						</archive>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>1.4</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -206,6 +206,19 @@
 									</pluginExecutionFilter>
 									<action>
 										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-enforcer-plugin</artifactId>
+										<versionRange>[1.0,)</versionRange>
+										<goals>
+											<goal>enforce</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -392,6 +405,21 @@
 		<profile>
 			<id>release</id>
 			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
 				<resources>
 					<resource>
 						<directory>src/main/resources</directory>
@@ -518,7 +546,7 @@
 				<version>${icefaces3.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.icefaces</groupId>
+				<groupId>org.icepush</groupId>
 				<artifactId>icepush</artifactId>
 				<version>${icefaces3.version}</version>
 			</dependency>
@@ -557,13 +585,6 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>maven2-repository.jboss.org</id>
-			<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<reporting>
 		<plugins>
 			<plugin>
@@ -573,28 +594,5 @@
 			</plugin>
 		</plugins>
 	</reporting>
-
-	<repositories>
-		<repository>
-			<id>maven2-repository.dev.java.net</id>
-			<name>Java.net Repository for Maven</name>
-			<url>http://download.java.net/maven/2/</url>
-		</repository>
-		<repository>
-			<id>maven2-repository.jboss.org</id>
-			<name>JBoss Maven Repository</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
-		</repository>
-		<repository>
-			<id>thirdparty-repository.portletfaces.org</id>
-			<name>Liferay 3rd Party Maven Repository</name>
-			<url>http://repository.portletfaces.org/content/repositories/thirdparty/</url>
-		</repository>
-		<repository>
-			<id>maven2-repository.primefaces.org</id>
-			<name>PrimeFaces Maven Repository</name>
-			<url>http://repository.primefaces.org</url>
-		</repository>
-	</repositories>
 
 </project>
