@@ -23,16 +23,18 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.filter.PortletRequestWrapper;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.util.jsp.JspIncludeResponse;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalUtil;
 
 
@@ -45,6 +47,9 @@ public class InputEditorInternalRenderer extends Renderer {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(InputEditorInternalRenderer.class);
+
+	// Private Constants
+	private static final String CKEDITOR = "ckeditor";
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -64,7 +69,9 @@ public class InputEditorInternalRenderer extends Renderer {
 		queryString.append(StringPool.QUESTION);
 		queryString.append("editorImpl");
 		queryString.append(StringPool.EQUAL);
-		queryString.append(attributes.get("editorImpl"));
+
+		String editorImpl = (String) attributes.get("editorImpl");
+		queryString.append(editorImpl);
 		queryString.append(StringPool.AMPERSAND);
 		queryString.append("height");
 		queryString.append(StringPool.EQUAL);
@@ -110,9 +117,48 @@ public class InputEditorInternalRenderer extends Renderer {
 		// Write the captured output from the JSP tag to the Faces responseWriter.
 		if (bufferedResponse != null) {
 
+			if (CKEDITOR.equals(editorImpl) && (getLiferayPortletRequest(portletRequest) instanceof ResourceRequest)) {
+				bufferedResponse = removeAllElements(bufferedResponse, "style");
+				bufferedResponse = removeAllElements(bufferedResponse, "script");
+			}
+
 			// Note: Trim the buffered response since there is typically over 100 newlines at the beginning.
 			responseWriter.write(bufferedResponse.trim());
 		}
 	}
 
+	protected String removeAllElements(String content, String elementName) {
+
+		String beginElementToken = StringPool.LESS_THAN + elementName;
+		String endElementToken = StringPool.FORWARD_SLASH + elementName + StringPool.GREATER_THAN;
+		int endElementLength = endElementToken.length();
+
+		boolean done = false;
+
+		while (!done) {
+			int beginPos = content.indexOf(beginElementToken);
+			int endPos = content.indexOf(endElementToken, beginPos);
+
+			if ((beginPos >= 0) && (endPos > beginPos)) {
+				content = content.substring(0, beginPos) + content.substring(endPos + endElementLength);
+			}
+			else {
+				done = true;
+			}
+		}
+
+		return content;
+	}
+
+	protected PortletRequest getLiferayPortletRequest(PortletRequest portletRequest) {
+
+		PortletRequest liferayPortletRequest = portletRequest;
+
+		if (liferayPortletRequest instanceof PortletRequestWrapper) {
+			PortletRequestWrapper portletRequestWrapper = (PortletRequestWrapper) portletRequest;
+			liferayPortletRequest = getLiferayPortletRequest(portletRequestWrapper.getRequest());
+		}
+
+		return liferayPortletRequest;
+	}
 }
