@@ -146,13 +146,14 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 		// rendered by the bridge's BodyRenderer).
 		for (UIComponent uiComponentResource : uiComponentResources) {
 
-			// If this is taking place during an Ajax request, then
-			if (ajaxRequest) {
+			// If this is taking place during an Ajax request or portlet container is not able to add resources
+			// to the <head> section, then
+			if (ajaxRequest || !portletContainerAbleToAddScriptResourceToHead) {
 
 				// If the resource is already present in the <head> section of the portal page (which would have
 				// taken place during the initial page HTTP-GET render), then there is nothing to do. Otherwise,
-				// since this is Ajax, it is not possible to add it to the <head> section and the resource has to be
-				// relocated to the body.
+				// since this is Ajax or portlet container is not able to add resources to the <head> section, it
+				// is not possible to add it to the <head> section and the resource has to be relocated to the body.
 				ResourceInfo resourceInfo = new ResourceInfo(uiComponentResource);
 				boolean alreadyPresentInPortalPageHead = headResourceIdsFromManagedBean.contains(resourceInfo.getId());
 
@@ -182,18 +183,9 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 
 			// Otherwise,
 			else {
-
 				// If the portlet container has the ability to add resources to the <head> section of the portal
 				// page, then add it to the list of resources that are to be added to the <head> section.
-				if (portletContainerAbleToAddScriptResourceToHead) {
-					resourcesForAddingToHead.add(uiComponentResource);
-				}
-
-				// Otherwise, we have no choice but to add it to the list of resources that are to be relocated to
-				// the body.
-				else {
-					resourcesForRelocatingToBody.add(uiComponentResource);
-				}
+				resourcesForAddingToHead.add(uiComponentResource);
 			}
 		}
 
