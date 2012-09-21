@@ -59,7 +59,6 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 
 	// Private Constants
 	private static final String REQ_PARAM_LIFERAY_BROWSERID = "?browserId=";
-	private static final String RENDER_PORTLET_RESOURCE = "RENDER_PORTLET_RESOURCE";
 
 	// Private Pseudo-Constants Initialized at Construction-Time
 	private String NAMESPACED_P_P_COL_ID;
@@ -129,7 +128,7 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 			}
 
 			// Determine whether or not the portlet was added via $theme.runtime(...)
-			Boolean renderPortletResource = (Boolean) portletRequest.getAttribute(RENDER_PORTLET_RESOURCE);
+			Boolean renderPortletResource = (Boolean) portletRequest.getAttribute(BridgeConstants.RENDER_PORTLET_RESOURCE);
 			boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
 
 			// If this is a runtime portlet, then it is not possible to add resources to the head section since
