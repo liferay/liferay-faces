@@ -27,6 +27,7 @@ import javax.faces.context.ResponseWriter;
 import javax.portlet.PortletRequest;
 import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 
+import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.application.ResourceInfo;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
@@ -126,7 +127,14 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 		PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		PortletContainer portletContainer = bridgeContext.getPortletContainer();
+
+		// Determine whether or not the portlet container is able to add script resources to the head.
 		boolean portletContainerAbleToAddScriptResourceToHead = portletContainer.isAbleToAddScriptResourceToHead();
+
+		// Determine whether or not this might be a Liferay runtime portlet (which does not have the ability to add
+		// script resources to the head).
+		Boolean renderPortletResource = (Boolean) portletRequest.getAttribute(BridgeConstants.RENDER_PORTLET_RESOURCE);
+		boolean liferayRuntimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
 
 		// Note: The HeadManagedBean is a ViewScoped manage-bean that keeps a list of resources that have been added to
 		// the <head> section of the portal page. Note that the HeadManagedBean will be null in a JSP context since
@@ -137,7 +145,8 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 
 		if (headManagedBean == null) {
 			headResourceIdsFromManagedBean = new HashSet<String>();
-		} else {
+		}
+		else {
 			headResourceIdsFromManagedBean = headManagedBean.getHeadResourceIds();
 		}
 
@@ -146,16 +155,18 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 		// rendered by the bridge's BodyRenderer).
 		for (UIComponent uiComponentResource : uiComponentResources) {
 
-			// If this is taking place during an Ajax request, then
-			if (ajaxRequest) {
+			// If this is taking place during an Ajax request or this is a Liferay runtime portlet, then
+			if (ajaxRequest || liferayRuntimePortlet) {
 
-				// If the resource is already present in the <head> section of the portal page (which would have
-				// taken place during the initial page HTTP-GET render), then there is nothing to do. Otherwise,
-				// since this is Ajax, it is not possible to add it to the <head> section and the resource has to be
-				// relocated to the body.
+				// Determine whether or not the resource is already present in the <head> section of the portal page.
+				// Note that this can happen in one of two ways: 1) If this is NON-Liferay-Runtime portlet (currently
+				// doing Ajax) but has already added the resource during initial page HTTP-GET render, or 2) By another
+				// NON-Liferay-Runtime portlet that has already added the same JavaScript resource.
 				ResourceInfo resourceInfo = new ResourceInfo(uiComponentResource);
 				boolean alreadyPresentInPortalPageHead = headResourceIdsFromManagedBean.contains(resourceInfo.getId());
 
+				// If the resource is already present in the <head> section of the portal page, then simply output a
+				// logger message to this fact.
 				if (alreadyPresentInPortalPageHead) {
 
 					if (logger.isDebugEnabled()) {
@@ -167,6 +178,9 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 							});
 					}
 				}
+
+				// Otherwise, since it is not possible to add it to the <head> section, the resource must be relocated
+				// to the body.
 				else {
 					logger.debug(
 						"Relocating resource to body (since it was added via Ajax and is not yet present in head): name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
@@ -175,25 +189,20 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 							resourceInfo.getValue(), resourceInfo.getClassName(),
 						});
 
-					// Add the resource the list of resources that are to be relocated to the body.
 					resourcesForRelocatingToBody.add(uiComponentResource);
 				}
 			}
 
-			// Otherwise,
+			// Otherwise, if the portlet container has the ability to add resources to the <head> section of the
+			// portal page, then add it to the list of resources that are to be added to the <head> section.
+			else if (portletContainerAbleToAddScriptResourceToHead) {
+				resourcesForAddingToHead.add(uiComponentResource);
+			}
+
+			// Otherwise, we have no choice but to add it to the list of resources that are to be relocated to
+			// the body.
 			else {
-
-				// If the portlet container has the ability to add resources to the <head> section of the portal
-				// page, then add it to the list of resources that are to be added to the <head> section.
-				if (portletContainerAbleToAddScriptResourceToHead) {
-					resourcesForAddingToHead.add(uiComponentResource);
-				}
-
-				// Otherwise, we have no choice but to add it to the list of resources that are to be relocated to
-				// the body.
-				else {
-					resourcesForRelocatingToBody.add(uiComponentResource);
-				}
+				resourcesForRelocatingToBody.add(uiComponentResource);
 			}
 		}
 
