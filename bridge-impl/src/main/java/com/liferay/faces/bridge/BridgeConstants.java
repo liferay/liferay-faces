@@ -23,6 +23,7 @@ public class BridgeConstants {
 	public static final String REGEX_DOT_DELIMITER = "[.]";
 
 	// Request Attribute Names
+	public static final String RENDER_PORTLET_RESOURCE = "RENDER_PORTLET_RESOURCE";
 	public static final String REQ_ATTR_PATH_INFO = "javax.servlet.include.path_info";
 	public static final String REQ_ATTR_SERVLET_PATH = "javax.servlet.include.servlet_path";
 
