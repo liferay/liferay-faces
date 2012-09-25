@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jsp/jstl/core"
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:aui="http://liferay.com/faces/aui" xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:cc="http://java.sun.com/jsf/composite"
 	xmlns:liferay-ui="http://liferay.com/faces/ui"
@@ -92,10 +93,6 @@
 							width="#{cc.attrs.width}" />
 					</c:when>
 					<c:otherwise>
-						<h:inputTextarea id="inputText" cols="100" label="#{cc.attrs.label}" onchange="#{cc.attrs.onchange}"
-							required="#{cc.attrs.required}" value="#{cc.attrs.value}" style="display: none;">
-							<cc:insertChildren />
-						</h:inputTextarea>
 						<script language="javascript">CKEDITOR_BASEPATH = '/html/js/editor/ckeditor/';
 function #{responseNamespace}#{prefixedCountCharsMethod}(text) {
 var textLength = 0;
@@ -146,25 +143,59 @@ hiddenField.onchange();
 							</div>
 						</c:if>
 						<c:choose>
-							<c:when test="#{liferay.inlineInputEditor}">
-								<liferay-ui-internal:input-editor
-									editorImpl="#{editorImpl}"
-									height="#{cc.attrs.height}"
-									initMethod="#{prefixedInitMethod}"
-									name="#{cc.clientId}"
-									onChangeMethod="#{prefixedOnChangeMethod}"
-									toolbarSet="#{cc.attrs.toolbarSet}"
-									width="#{cc.attrs.width}" />
+							<c:when test="#{editorImpl == 'bbcode'}">
+								<h:outputStylesheet library="liferayportal" name="/html/portlet/message_boards/css/main.jsp" target="body" />
+								<h:outputScript library="liferayportal" name="/html/portlet/message_boards/js/main.js" target="body" />
+								<h:panelGroup layout="block" styleClass="portlet-message-boards">
+									<h:panelGroup layout="block" styleClass="lfr-textarea message-edit">
+										<h:inputTextarea id="inputText" cols="100" label="#{cc.attrs.label}" onchange="#{cc.attrs.onchange}"
+											required="#{cc.attrs.required}" value="#{cc.attrs.value}">
+											<cc:insertChildren />
+										</h:inputTextarea>
+									</h:panelGroup>
+								</h:panelGroup>
+								<aui:script>
+									var #{responseNamespace}bbCode = null;
+								
+									function #{responseNamespace}getHTML() {
+										return #{responseNamespace}bbCode.getHTML();
+									}
+								</aui:script>
+								<aui:script use="liferay-bbcode-editor">
+									#{responseNamespace}bbCode = new Liferay.Editor.bbCode(
+										{
+											textarea: '##{aui:escapeClientId(cc.clientId)}\\:inputText'
+										}
+									);
+								</aui:script>
 							</c:when>
 							<c:otherwise>
-								<iframe
-									id="#{cc.clientId}content"
-									class="#{cc.attrs.styleClass}"
-									name="#{cc.clientId}content"
-									height="#{cc.attrs.height}"
-									width="#{cc.attrs.width}"
-									src="/html/js/editor/editor.jsp?p_l_id=#{plid}&amp;p_main_path=%2Fc&amp;doAsUserId=#{doAsUserId}&amp;editorImpl=#{editorImpl}&amp;toolbarSet=#{cc.attrs.toolbarSet}&amp;initMethod=#{responseNamespace}#{prefixedInitMethod}&amp;onChangeMethod=#{responseNamespace}#{prefixedOnChangeMethod}&amp;cssPath=#{pathThemeCss}&amp;cssClasses=#{cssClasses}"
-									style="border: none; margin: 0px;" />
+								<h:inputTextarea id="inputText" cols="100" label="#{cc.attrs.label}" onchange="#{cc.attrs.onchange}"
+									required="#{cc.attrs.required}" value="#{cc.attrs.value}" style="display: none;">
+									<cc:insertChildren />
+								</h:inputTextarea>
+								<c:choose>
+									<c:when test="#{liferay.inlineInputEditor}">
+										<liferay-ui-internal:input-editor
+											editorImpl="#{editorImpl}"
+											height="#{cc.attrs.height}"
+											initMethod="#{prefixedInitMethod}"
+											name="#{cc.clientId}"
+											onChangeMethod="#{prefixedOnChangeMethod}"
+											toolbarSet="#{cc.attrs.toolbarSet}"
+											width="#{cc.attrs.width}" />
+									</c:when>
+									<c:otherwise>
+										<iframe
+											id="#{cc.clientId}content"
+											class="#{cc.attrs.styleClass}"
+											name="#{cc.clientId}content"
+											height="#{cc.attrs.height}"
+											width="#{cc.attrs.width}"
+											src="/html/js/editor/editor.jsp?p_l_id=#{plid}&amp;p_main_path=%2Fc&amp;doAsUserId=#{doAsUserId}&amp;editorImpl=#{editorImpl}&amp;toolbarSet=#{cc.attrs.toolbarSet}&amp;initMethod=#{responseNamespace}#{prefixedInitMethod}&amp;onChangeMethod=#{responseNamespace}#{prefixedOnChangeMethod}&amp;cssPath=#{pathThemeCss}&amp;cssClasses=#{cssClasses}"
+											style="border: none; margin: 0px;" />
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 					</c:otherwise>
