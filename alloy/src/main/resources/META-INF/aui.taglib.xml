@@ -4,6 +4,11 @@
    http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 	version="2.0">
 	<namespace>http://liferay.com/faces/aui</namespace>
+	<function>
+		<function-name>escapeClientId</function-name>
+		<function-class>com.liferay.faces.alloy.util.AlloyUtil</function-class>
+		<function-signature>java.lang.String escapeClientId(java.lang.String)</function-signature>
+	</function>
 	<tag>
 		<description>The button-row component.</description>
 		<tag-name>button-row</tag-name>
@@ -375,6 +380,22 @@
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<tag-name>script</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.AUIScript</component-type>
+		</component>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>rendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
 		</attribute>
 	</tag>
 </facelet-taglib>
