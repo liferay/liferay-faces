@@ -39,6 +39,11 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
+			<artifactId>liferay-faces-alloy</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>liferay-faces-bridge-impl</artifactId>
 			<version>${project.version}</version>
 		</dependency>

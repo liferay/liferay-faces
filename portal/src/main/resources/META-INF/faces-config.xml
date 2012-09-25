@@ -5,6 +5,7 @@
 	<application>
 		<el-resolver>com.liferay.faces.portal.el.ExtELResolver</el-resolver>
 		<resource-handler>com.liferay.faces.portal.resource.LiferayFacesResourceHandler</resource-handler>
+		<resource-handler>com.liferay.faces.portal.resource.LiferayPortalResourceHandler</resource-handler>
 	</application>
 	<lifecycle>
 		<phase-listener>com.liferay.faces.portal.lifecycle.LiferayLocalePhaseListener</phase-listener>

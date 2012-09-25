@@ -13,10 +13,17 @@
  */
 package com.liferay.faces.alloy.util;
 
+import com.liferay.faces.util.lang.StringPool;
+
+
 /**
  * @author  Neil Griffin
  */
 public class AlloyUtil {
+
+	// Private Constants
+	private static final String REGEX_COLON = "[:]";
+	private static final String DOUBLE_BACKSLASH_COLON = "\\\\\\\\:";
 
 	public static String appendToCssClasses(String cssClass, String suffix) {
 
@@ -27,7 +34,7 @@ public class AlloyUtil {
 
 			if (value.length() > 0) {
 				StringBuilder buf = new StringBuilder();
-				String[] cssClasses = cssClass.trim().split(" ");
+				String[] cssClasses = cssClass.trim().split(StringPool.SPACE);
 				boolean firstClass = true;
 
 				for (String curCssClass : cssClasses) {
@@ -36,7 +43,7 @@ public class AlloyUtil {
 						firstClass = false;
 					}
 					else {
-						buf.append(" ");
+						buf.append(StringPool.SPACE);
 					}
 
 					buf.append(curCssClass);
@@ -48,5 +55,18 @@ public class AlloyUtil {
 		}
 
 		return value;
+	}
+
+	public static String escapeClientId(String clientId) {
+		String escapedClientId = clientId;
+
+		if (escapedClientId != null) {
+
+			// JSF clientId values contain colons, which must be preceeded by double backslashes in order to have them
+			// work with JavaScript functions like AUI.one(String). http://yuilibrary.com/projects/yui3/ticket/2528057
+			escapedClientId = escapedClientId.replaceAll(REGEX_COLON, DOUBLE_BACKSLASH_COLON);
+		}
+
+		return escapedClientId;
 	}
 }
