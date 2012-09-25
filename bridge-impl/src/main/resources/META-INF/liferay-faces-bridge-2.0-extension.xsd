@@ -7,7 +7,7 @@
 	<xs:element name="excluded-attributes">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="excluded-attribute" />
+				<xs:element ref="bridge:excluded-attribute" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -16,7 +16,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element minOccurs="0" maxOccurs="unbounded"
-					ref="public-parameter-mapping" />
+					ref="bridge:public-parameter-mapping" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
