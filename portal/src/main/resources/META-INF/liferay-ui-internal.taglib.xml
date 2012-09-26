@@ -4,6 +4,11 @@
    http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 	version="2.0">
 	<namespace>http://liferay.com/faces/ui-internal</namespace>
+	<function>
+		<function-name>toUnicodeString</function-name>
+		<function-class>com.liferay.portal.kernel.util.UnicodeFormatter</function-class>
+		<function-signature>java.lang.String toString(java.lang.String)</function-signature>
+	</function>
 	<tag>
 		<tag-name>input-editor</tag-name>
 		<component>
