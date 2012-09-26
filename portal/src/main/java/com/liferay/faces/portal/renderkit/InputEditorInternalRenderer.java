@@ -30,6 +30,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.liferay.faces.portal.servlet.NonNamespacedHttpServletRequest;
 import com.liferay.faces.util.jsp.JspIncludeResponse;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -60,6 +61,8 @@ public class InputEditorInternalRenderer extends Renderer {
 		PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
 		PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
 		HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
+		httpServletRequest = new NonNamespacedHttpServletRequest(httpServletRequest);
+
 		HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(portletResponse);
 
 		// Build up a URL that can be used to invoke the liferay-ui:input-editor JSP tag.
@@ -161,4 +164,5 @@ public class InputEditorInternalRenderer extends Renderer {
 
 		return liferayPortletRequest;
 	}
+
 }
