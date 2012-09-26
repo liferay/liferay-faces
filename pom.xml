@@ -74,6 +74,7 @@
 		<codename>Athens</codename>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces1.version>1.8.2</icefaces1.version>
+		<liferay.version>6.1.1</liferay.version>
 		<log4j.version>1.2.14</log4j.version>
 		<mojarra.version>1.2_15</mojarra.version>
 		<myfaces.version>2.1.6</myfaces.version>
@@ -436,7 +437,13 @@
 			<dependency>
 				<groupId>com.liferay.portal</groupId>
 				<artifactId>portal-service</artifactId>
-				<version>6.1.0</version>
+				<version>${liferay.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.liferay.portal</groupId>
+				<artifactId>util-taglib</artifactId>
+				<version>${liferay.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
