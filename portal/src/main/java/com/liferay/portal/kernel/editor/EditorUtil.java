@@ -15,7 +15,10 @@ package com.liferay.portal.kernel.editor;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.faces.portal.renderkit.InputEditorInternalRenderer;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
+
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -30,12 +33,22 @@ import com.liferay.portal.kernel.util.Validator;
  */
 public class EditorUtil {
 
-	private static final String _EDITOR_WYSIWYG_DEFAULT = PropsUtil.get(PropsKeys.EDITOR_WYSIWYG_DEFAULT);
+	// Private Constants
+	private static final String EDITOR_WYSIWYG_DEFAULT = "editor.wysiwyg.default";
+
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(EditorUtil.class);
 
 	public static String getEditorValue(HttpServletRequest request, String editorImpl) {
 
 		if (Validator.isNull(editorImpl)) {
-			editorImpl = _EDITOR_WYSIWYG_DEFAULT;
+
+			try {
+				editorImpl = PropsUtil.get(EDITOR_WYSIWYG_DEFAULT);
+			}
+			catch (Exception e) {
+				logger.error(e);
+			}
 		}
 
 		return editorImpl;
