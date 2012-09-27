@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pluto-portal-driver
-	xsi:schemaLocation="http://portals.apache.org/pluto/xsd/pluto-portal-driver-config.xsd                         http://portals.apache.org/pluto/pluto-portal/1.1/pluto-portal-driver-config.xsd"
-	version="1.1" xmlns:pa="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://portals.apache.org/pluto/xsd/pluto-portal-driver-config.xsd">
+<!DOCTYPE pluto-portal-driver>
+<!-- NOTE: Using DOCTYPE as a workaround to prevent Eclipse warning -->
+<!-- http://issues.liferay.com/browse/FACES-1433 -->
+<!-- https://issues.apache.org/jira/browse/PLUTO-473 -->
+<pluto-portal-driver>
 	<portal-name>pluto-portal-driver</portal-name>
 	<portal-version>2.0.0</portal-version>
 	<container-name>Pluto Portal Driver</container-name>
