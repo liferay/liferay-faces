@@ -36,6 +36,7 @@ import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
+import com.liferay.portal.kernel.editor.EditorUtil;
 import com.liferay.portal.util.PortalUtil;
 
 
@@ -74,6 +75,11 @@ public class InputEditorInternalRenderer extends Renderer {
 		queryString.append(StringPool.EQUAL);
 
 		String editorImpl = (String) attributes.get("editorImpl");
+
+		if (editorImpl == null) {
+			editorImpl = CKEDITOR;
+		}
+
 		queryString.append(editorImpl);
 		queryString.append(StringPool.AMPERSAND);
 		queryString.append("height");
@@ -120,7 +126,10 @@ public class InputEditorInternalRenderer extends Renderer {
 		// Write the captured output from the JSP tag to the Faces responseWriter.
 		if (bufferedResponse != null) {
 
-			if (CKEDITOR.equals(editorImpl) && (getLiferayPortletRequest(portletRequest) instanceof ResourceRequest)) {
+			String editorType = EditorUtil.getEditorValue(httpServletRequest, editorImpl);
+
+			if ((editorType.indexOf(CKEDITOR) >= 0) &&
+					(getLiferayPortletRequest(portletRequest) instanceof ResourceRequest)) {
 				bufferedResponse = removeAllElements(bufferedResponse, "style");
 				bufferedResponse = removeAllElements(bufferedResponse, "script");
 			}
