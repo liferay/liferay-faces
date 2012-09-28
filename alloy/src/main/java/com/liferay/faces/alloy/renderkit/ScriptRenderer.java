@@ -60,8 +60,7 @@ public class ScriptRenderer extends Renderer {
 				WebKeys.THEME_DISPLAY);
 
 		if (themeDisplay != null) {
-			inline = (themeDisplay.isIsolated() || themeDisplay.isLifecycleResource() ||
-					themeDisplay.isStateExclusive());
+			inline = (themeDisplay.isIsolated() || themeDisplay.isStateExclusive());
 		}
 
 		if (inline) {
