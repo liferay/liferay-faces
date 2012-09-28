@@ -17,14 +17,22 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.portlet.PortletRequest;
+import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainerImpl;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriterLiferayImpl;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 
 
 /**
@@ -33,6 +41,9 @@ import com.liferay.portal.kernel.util.StringBundler;
  * @author  Neil Griffin
  */
 public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
+
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(PortletContainerLiferayCompatImpl.class);
 
 	// serialVersionUID
 	private static final long serialVersionUID = 8713570232856573935L;
@@ -45,15 +56,16 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 	}
 
 	/**
-	 * This method is called after the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle. It's purpose is to
-	 * remove duplicate resources from the LIFERAY_SHARED_PAGE_TOP request attribute. For more information, see:
-	 * http://issues.liferay.com/browse/FACES-1216
+	 * This method is called after the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle.
 	 */
 	@Override
 	public void afterPhase(PhaseEvent phaseEvent) {
 
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+
+		// Remove duplicate resources from the LIFERAY_SHARED_PAGE_TOP request attribute. For more information, see:
+		// http://issues.liferay.com/browse/FACES-1216
 		if (liferaySharedPageTopLength > 0) {
-			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
 			PortletRequest portletRequest = bridgeContext.getPortletRequest();
 
@@ -68,25 +80,60 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 				portletRequest.setAttribute(LiferayConstants.LIFERAY_SHARED_PAGE_TOP, stringBundler);
 			}
 		}
+
+		// Remove the "RENDER_PORTLET" attribute that may have been added by the {@link #beforePhase(PhaseEvent)}
+		// method.
+		if (bridgeContext.getPortletRequestPhase() == Bridge.PortletPhase.RESOURCE_PHASE) {
+
+			PortletRequest portletRequest = bridgeContext.getPortletRequest();
+
+			portletRequest.removeAttribute(WebKeys.RENDER_PORTLET);
+
+		}
 	}
 
 	/**
-	 * This method is called prior to the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle. It's purpose is to
-	 * determine if there are any resources in the LIFERAY_SHARED_PAGE_TOP request attribute, so that execution of the
-	 * {@link #afterPhase(PhaseEvent)} can be optimized.
+	 * This method is called prior to the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle.
 	 */
 	@Override
 	public void beforePhase(PhaseEvent phaseEvent) {
+
+		// Determine if there are any resources in the LIFERAY_SHARED_PAGE_TOP request attribute, so that execution of
+		// the {@link #afterPhase(PhaseEvent)} can be optimized.
 		liferaySharedPageTopLength = 0;
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
 		StringBundler stringBundler = (StringBundler) portletRequest.getAttribute(
 				LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
 
 		if (stringBundler != null) {
 			liferaySharedPageTopLength = stringBundler.length();
+		}
+
+		// If running in the RESOURCE_PHASE of the portlet lifecycle, then
+		if (bridgeContext.getPortletRequestPhase() == Bridge.PortletPhase.RESOURCE_PHASE) {
+
+			// During the RENDER_PHASE of the portlet lifecycle, the Liferay PortletImpl.renderPortlet(...) method adds
+			// the "RENDER_PORTLET" request attribute, which is consulted by the PortletURLImpl.addPortletAuthToken(...)
+			// method when URLs are being constructed. But during the RESOURCE_PHASE, Liferay does not add the
+			// "RENDER_PORTLET" attribute, and the PortletURLImpl.addPortletAuthToken(...) method behaves differently
+			// and ultimately causes the URL to have an additional "p_p_auth" parameter. Since the URL is different, it
+			// will cause ICEfaces to detect a DOM-diff, and will unnecessarily replace markup in the DOM.
+			//
+			// The workaround is to add the "RENDER_PORTLET" attribute here (before the/ RENDER_RESPONSE phase of the
+			// JSF lifecycle executes), and then remove the attribute after the RENDER_RESPONSE phase is complete.
+			// For more information, see: http://issues.liferay.com/browse/FACES-1435
+			String portletId = (String) portletRequest.getAttribute(WebKeys.PORTLET_ID);
+			ThemeDisplay themeDisplay = (ThemeDisplay) portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+			try {
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(themeDisplay.getCompanyId(), portletId);
+				portletRequest.setAttribute(WebKeys.RENDER_PORTLET, portlet);
+			}
+			catch (SystemException e) {
+				logger.error(e);
+			}
 		}
 	}
 
