@@ -35,97 +35,85 @@ public class LoggerDefaultImpl implements Logger {
 		this.logger = java.util.logging.Logger.getLogger(className);
 	}
 
+    @Override
 	public void debug(String message) {
-		debug(message, (Object[]) null);
+		if (isDebugEnabled())
+            this.doLog(java.util.logging.Level.FINE, message, null);
 	}
 
+    @Override
 	public void debug(String message, Object... arguments) {
 
 		if (isDebugEnabled()) {
 			Throwable throwable = getThrowable(arguments);
-
-			if (throwable == null) {
-				logger.log(java.util.logging.Level.FINE, formatMessage(message, arguments));
-			}
-			else {
-				logger.log(java.util.logging.Level.FINE, formatMessage(message, arguments), throwable);
-			}
+            this.doLog(java.util.logging.Level.FINE, formatMessage(message, arguments), throwable);
 		}
+        
 	}
 
+    @Override
 	public void error(Throwable throwable) {
-		error(throwable.getMessage(), throwable);
+		if (isErrorEnabled()) 
+            this.doLog(java.util.logging.Level.SEVERE, throwable.getMessage(), throwable);
 	}
 
+    @Override
 	public void error(String message) {
-		error(message, (Object[]) null);
+		if (isErrorEnabled()) 
+            this.doLog(java.util.logging.Level.SEVERE, message, null);
 	}
 
+    @Override
 	public void error(String message, Object... arguments) {
 
 		if (isErrorEnabled()) {
 			Throwable throwable = getThrowable(arguments);
-
-			if (throwable == null) {
-				logger.log(java.util.logging.Level.SEVERE, formatMessage(message, arguments));
-			}
-			else {
-				logger.log(java.util.logging.Level.SEVERE, formatMessage(message, arguments), throwable);
-			}
+            this.doLog(java.util.logging.Level.SEVERE, formatMessage(message, arguments), throwable);
 		}
 	}
 
+    @Override
 	public void info(String message) {
-		info(message, (Object[]) null);
+		if (isInfoEnabled()) 
+            this.doLog(java.util.logging.Level.INFO, message, null);
 	}
 
+    @Override
 	public void info(String message, Object... arguments) {
 
 		if (isInfoEnabled()) {
 			Throwable throwable = getThrowable(arguments);
-
-			if (throwable == null) {
-				logger.log(java.util.logging.Level.INFO, formatMessage(message, arguments));
-			}
-			else {
-				logger.log(java.util.logging.Level.INFO, formatMessage(message, arguments), throwable);
-			}
+            this.doLog(java.util.logging.Level.INFO, formatMessage(message, arguments), throwable);
 		}
 	}
 
+    @Override
 	public void trace(String message) {
-		trace(message, (Object[]) null);
+		if (isTraceEnabled()) 
+            this.doLog(java.util.logging.Level.FINEST, message , null);
 	}
 
+    @Override
 	public void trace(String message, Object... arguments) {
 
 		if (isTraceEnabled()) {
 			Throwable throwable = getThrowable(arguments);
-
-			if (throwable == null) {
-				logger.log(java.util.logging.Level.FINEST, formatMessage(message, arguments));
-			}
-			else {
-				logger.log(java.util.logging.Level.FINEST, formatMessage(message, arguments), throwable);
-			}
+            this.doLog(java.util.logging.Level.FINEST, formatMessage(message, arguments), throwable);
 		}
 	}
 
+    @Override
 	public void warn(String message) {
-		warn(message, (Object[]) null);
+		if (isWarnEnabled())
+            this.doLog(java.util.logging.Level.WARNING, message, null);
 	}
 
+    @Override
 	public void warn(String message, Object... arguments) {
 
 		if (isWarnEnabled()) {
 			Throwable throwable = getThrowable(arguments);
-
-			if (throwable == null) {
-				logger.log(java.util.logging.Level.WARNING, formatMessage(message, arguments));
-			}
-			else {
-				logger.log(java.util.logging.Level.WARNING, formatMessage(message, arguments), throwable);
-			}
+            this.doLog(java.util.logging.Level.WARNING, formatMessage(message, arguments), throwable);
 		}
 	}
 
@@ -173,6 +161,10 @@ public class LoggerDefaultImpl implements Logger {
 			String formattedMessage = message;
 
 			try {
+                // Toha: MessageFormat needs to special processing of quoting string, but many
+                // don't mention this. For example in many log messages in liferay-brigge-impl you can
+                // meet char (') that cause wrong message processing
+                message=message.replaceAll("'", "''");
 				formattedMessage = MessageFormat.format(message, argumentList.toArray(new Object[] {}));
 			}
 			catch (IllegalArgumentException e) {
@@ -183,22 +175,27 @@ public class LoggerDefaultImpl implements Logger {
 		}
 	}
 
+    @Override
 	public boolean isDebugEnabled() {
 		return logger.isLoggable(java.util.logging.Level.FINE);
 	}
 
+    @Override
 	public boolean isErrorEnabled() {
 		return logger.isLoggable(java.util.logging.Level.SEVERE);
 	}
 
+    @Override
 	public boolean isInfoEnabled() {
 		return logger.isLoggable(java.util.logging.Level.INFO);
 	}
 
+    @Override
 	public boolean isTraceEnabled() {
 		return logger.isLoggable(java.util.logging.Level.FINEST);
 	}
 
+    @Override
 	public boolean isWarnEnabled() {
 		return logger.isLoggable(java.util.logging.Level.WARNING);
 	}
@@ -224,4 +221,18 @@ public class LoggerDefaultImpl implements Logger {
 		return throwable;
 	}
 
+    private void doLog(java.util.logging.Level level, String message, Throwable thr)  {
+        Throwable stackStource = new Throwable();
+        StackTraceElement[] stackTrace = stackStource.getStackTrace();
+        StackTraceElement callerStack = stackTrace[2];
+        java.util.logging.LogRecord logRecord = new java.util.logging.LogRecord(level, message);
+    
+        if (thr!=null)
+            logRecord.setThrown(thr);
+        
+        logRecord.setSourceClassName(callerStack.getClassName());
+        logRecord.setSourceMethodName(callerStack.getMethodName());
+        logger.log(logRecord);
+    }
+    
 }

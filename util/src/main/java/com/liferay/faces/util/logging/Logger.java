@@ -20,24 +20,32 @@ public interface Logger {
 
 	public static final String SEPARATOR = "----------------------------------------------------------------------";
 
-	public void debug(String message);
+    // Toha: Methods (with message only) may be useful for some backward compatibility only  
+    // or to user new versions of bridge-utils without recompiling. 
+    // For newer versions it should be better to remove them.
+	@Deprecated
+    public void debug(String message);
 
 	public void debug(String message, Object... arguments);
 
+	@Deprecated
 	public void error(String message);
 
 	public void error(Throwable throwable);
 
 	public void error(String message, Object... arguments);
 
+	@Deprecated
 	public void info(String message);
 
 	public void info(String message, Object... arguments);
 
+	@Deprecated
 	public void trace(String message);
 
 	public void trace(String message, Object... arguments);
 
+	@Deprecated
 	public void warn(String message);
 
 	public void warn(String message, Object... arguments);
