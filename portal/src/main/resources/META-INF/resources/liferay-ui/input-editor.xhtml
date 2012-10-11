@@ -143,7 +143,7 @@ hiddenField.onchange();
 							</div>
 						</c:if>
 						<c:choose>
-							<c:when test="#{editorImpl.indexOf('bb') >= 0}">
+							<c:when test="#{editorImpl == 'bbcode'}">
 								<h:outputStylesheet library="liferayportal" name="/html/portlet/message_boards/css/main.jsp" target="body" />
 								<h:outputScript library="liferayportal" name="/html/portlet/message_boards/js/main.js" target="body" />
 								<h:panelGroup layout="block" styleClass="portlet-message-boards">
