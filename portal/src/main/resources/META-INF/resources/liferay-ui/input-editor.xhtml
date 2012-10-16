@@ -26,11 +26,11 @@
 		<cc:attribute name="toolbarSet" default="liferay" required="false" />
 		<cc:attribute name="width" default="640" required="false" />
 		<cc:attribute name="value" required="true" />
+		<cc:attribute name="visible" default="true" required="false" />
 		<cc:editableValueHolder name="inputText" targets="inputText" />
 	</cc:interface>
 
 	<cc:implementation>
-
 		<ui:remove>
 			<!-- Unfortunately can't have EL expressions in the default attribute, so have to do it down here in the cc:implementation. -->
 		</ui:remove>
@@ -86,7 +86,7 @@
 				warnClass="portlet-msg-warn" />
 		</c:if>
 		<c:choose>
-			<c:when test="#{cc.rendered}">
+			<c:when test="#{cc.attrs.visible}">
 				<c:choose>
 					<c:when test="#{cc.attrs.disabled}">
 						<h:inputTextarea id="inputText" disabled="true" rows="#{cc.attrs.disabledRows}" value="#{cc.attrs.value}"
@@ -161,6 +161,7 @@ hiddenField.onchange();
 						<c:choose>
 							<c:when test="#{liferay.inlineInputEditor}">
 								<liferay-ui-internal:input-editor
+									visible="true"
 									editorImpl="#{editorImpl}"
 									height="#{cc.attrs.height}"
 									initMethod="#{prefixedInitMethod}"
@@ -184,7 +185,15 @@ hiddenField.onchange();
 				</c:choose>
 			</c:when>
 			<c:otherwise>
-				<h:panelGroup id="#{cc.id}" rendered="false" />
+				<liferay-ui-internal:input-editor
+					visible="false"
+					editorImpl="#{editorImpl}"
+					height="#{cc.attrs.height}"
+					initMethod="#{prefixedInitMethod}"
+					name="#{cc.clientId}"
+					onChangeMethod="#{prefixedOnChangeMethod}"
+					toolbarSet="#{cc.attrs.toolbarSet}"
+					width="#{cc.attrs.width}" />
 			</c:otherwise>
 		</c:choose>
 	</cc:implementation>

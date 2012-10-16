@@ -14,8 +14,10 @@
 package com.liferay.faces.portal.renderkit;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
+import javax.faces.application.Resource;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -30,6 +32,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
+
+import com.liferay.faces.portal.component.InputEditorInternal;
+import com.liferay.faces.portal.resource.LiferayFacesResourceHandler;
 import com.liferay.faces.portal.servlet.NonNamespacedHttpServletRequest;
 import com.liferay.faces.util.jsp.JspIncludeResponse;
 import com.liferay.faces.util.lang.StringPool;
@@ -58,6 +64,32 @@ public class InputEditorInternalRenderer extends Renderer {
 
 		super.encodeBegin(facesContext, uiComponent);
 
+		InputEditorInternal inputEditor =
+			(InputEditorInternal) uiComponent;
+
+		if (inputEditor.isVisible()) {
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("showEditor");
+			}
+
+			showEditor(facesContext, inputEditor);
+		}
+		else {
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("hideEditor");
+			}
+
+			hideEditor(facesContext, inputEditor);
+		}
+
+	}
+
+	protected void showEditor(
+		FacesContext facesContext, InputEditorInternal inputEditor)
+			throws IOException {
+
 		ExternalContext externalContext = facesContext.getExternalContext();
 		PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
 		PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
@@ -68,7 +100,7 @@ public class InputEditorInternalRenderer extends Renderer {
 
 		// Build up a URL that can be used to invoke the liferay-ui:input-editor JSP tag.
 		String url = "/resources/liferay-ui/jsp/input-editor.jsp";
-		Map<String, Object> attributes = uiComponent.getAttributes();
+		Map<String, Object> attributes = inputEditor.getAttributes();
 		StringBuilder queryString = new StringBuilder();
 		queryString.append(StringPool.QUESTION);
 		queryString.append("editorImpl");
@@ -129,7 +161,8 @@ public class InputEditorInternalRenderer extends Renderer {
 			String editorType = EditorUtil.getEditorValue(httpServletRequest, editorImpl);
 
 			if ((editorType.indexOf(CKEDITOR) >= 0) &&
-					(getLiferayPortletRequest(portletRequest) instanceof ResourceRequest)) {
+					(getLiferayPortletRequest(portletRequest) instanceof ResourceRequest) &&
+					(!inputEditor.isPreviouslyVisible())) {
 				bufferedResponse = removeAllElements(bufferedResponse, "style");
 				bufferedResponse = removeAllElements(bufferedResponse, "script");
 			}
@@ -137,6 +170,17 @@ public class InputEditorInternalRenderer extends Renderer {
 			// Note: Trim the buffered response since there is typically over 100 newlines at the beginning.
 			responseWriter.write(bufferedResponse.trim());
 		}
+	}
+
+	protected void hideEditor(
+		FacesContext facesContext, InputEditorInternal inputEditor)
+			throws IOException {
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+
+		responseWriter.startElement(StringPool.SCRIPT, inputEditor);
+		responseWriter.write(_getCleanupScript(facesContext));
+		responseWriter.endElement(StringPool.SCRIPT);
 	}
 
 	protected String removeAllElements(String content, String elementName) {
@@ -172,6 +216,12 @@ public class InputEditorInternalRenderer extends Renderer {
 		}
 
 		return liferayPortletRequest;
+	}
+
+	private String _getCleanupScript(FacesContext facesContext) throws IOException {
+		InputStream _inputStream = getClass().getResourceAsStream(
+			"/META-INF/resources/liferay-ui/input-editor-cleanup.js");
+		return IOUtils.toString(_inputStream);
 	}
 
 }
