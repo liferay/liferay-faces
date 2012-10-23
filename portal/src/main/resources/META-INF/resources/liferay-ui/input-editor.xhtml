@@ -18,6 +18,7 @@
 		<cc:attribute name="label" required="false" />
 		<cc:attribute name="maxLength" required="false" />
 		<cc:attribute name="maxLengthMessage" required="false" />
+		<cc:attribute name="onblur" required="false" />
 		<cc:attribute name="onchange" required="false" />
 		<cc:attribute name="pathThemeCss" required="false" />
 		<cc:attribute name="plid" required="false" />
@@ -26,6 +27,8 @@
 		<cc:attribute name="toolbarSet" default="liferay" required="false" />
 		<cc:attribute name="width" default="640" required="false" />
 		<cc:attribute name="value" required="true" />
+		<cc:clientBehavior name="blur" event="blur" targets="inputText"/>
+		<cc:clientBehavior name="change" event="change" targets="inputText"/>
 		<cc:editableValueHolder name="inputText" targets="inputText" />
 	</cc:interface>
 
@@ -62,6 +65,7 @@
 		<c:set var="responseNamespace" value="#{facesContext.externalContext.response.namespace}" />
 		<c:set var="clientIdPrefix" value="#{liferay-util:stringReplace(cc.clientId, ':', '_')}" />
 		<c:set var="prefixedInitMethod" value="#{clientIdPrefix}initRichText" />
+		<c:set var="prefixedOnBlurMethod" value="#{clientIdPrefix}richTextBlurred" />
 		<c:set var="prefixedOnChangeMethod" value="#{clientIdPrefix}richTextChanged" />
 		<c:set var="prefixedCountCharsMethod" value="#{clientIdPrefix}countTotalAlphaNumChars" />
 		<c:choose>
@@ -118,8 +122,22 @@ messageSpan.firstChild.nodeValue = '#{maxLengthMessage} ' + remaining;
 }
 return hiddenField.value;
 }
+</script>
+<ui:remove>
+<!-- Hack: Sometimes the prefixedOnChangeMethod is called with an empty value, which overwrites the -->
+<!-- initial (non-empty) composite component value. Detecting the presence of the 'firstTime' hidden -->
+<!-- field provides a way of avoiding this condition. -->
+</ui:remove>
+<script>
 function #{responseNamespace}#{prefixedOnChangeMethod}(text) {
 var hiddenField = document.getElementById('#{cc.clientId}:inputText');
+var firstTimeHiddenField = document.getElementById('#{cc.clientId}:firstTime');
+if (firstTimeHiddenField) {
+	firstTimeHiddenField.parentNode.removeChild(firstTimeHiddenField);
+	if ((text.length == 0) &amp;&amp; (hiddenField.value.length &gt; 0)) {
+		return;
+	}
+}
 hiddenField.value = text;
 var maxLength = #{maxLength};
 if (maxLength > 0) {
@@ -137,6 +155,12 @@ messageDiv.className = 'portlet-msg-error';
 }
 hiddenField.onchange();
 }</script>
+<script>
+function #{responseNamespace}#{prefixedOnBlurMethod}() {
+var hiddenField = document.getElementById('#{cc.clientId}:inputText');
+hiddenField.onblur();
+}
+</script>
 						<c:if test="#{!empty cc.attrs.maxLength}">
 							<div id="#{cc.clientId}:mld" class="portlet-msg-info">
 								<h:outputText id="mlm" value="#{maxLengthMessage} #{cc.attrs.maxLength}" />
@@ -154,8 +178,10 @@ hiddenField.onchange();
 								</aui:script>
 							</c:when>
 						</c:choose>
-						<h:inputTextarea id="inputText" cols="100" label="#{cc.attrs.label}" onchange="#{cc.attrs.onchange}"
-							required="#{cc.attrs.required}" value="#{cc.attrs.value}" style="display: none;">
+						<h:inputHidden id="firstTime" type="hidden" />
+						<h:inputTextarea id="inputText" cols="100" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}"
+							onchange="#{cc.attrs.onchange}"	required="#{cc.attrs.required}" value="#{cc.attrs.value}"
+							style="display: none;">
 							<cc:insertChildren />
 						</h:inputTextarea>
 						<c:choose>
@@ -165,6 +191,7 @@ hiddenField.onchange();
 									height="#{cc.attrs.height}"
 									initMethod="#{prefixedInitMethod}"
 									name="#{cc.clientId}"
+									onBlurMethod="#{prefixedOnBlurMethod}"
 									onChangeMethod="#{prefixedOnChangeMethod}"
 									toolbarSet="#{cc.attrs.toolbarSet}"
 									width="#{cc.attrs.width}" />
