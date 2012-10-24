@@ -209,7 +209,8 @@ public class TestSetupAction extends SimpleAction {
 				portletId = portletId + "ABCD";
 			}
 
-			layoutTypePortlet.setPortletIds("column-" + columnNumber, portletId);
+			// NOTE: In Liferay 6.1.x the following call was to setPortletIds() but that method was removed in 6.2.x
+			layoutTypePortlet.addPortletId(userId, portletId, Integer.toString(columnNumber), 1);
 			columnNumber++;
 		}
 
