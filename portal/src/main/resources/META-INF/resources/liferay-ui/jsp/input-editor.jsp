@@ -17,6 +17,7 @@ String height = requestDispatcherParams.get("height");
 String initMethod = requestDispatcherParams.get("initMethod");
 String name = requestDispatcherParams.get("name");
 String onChangeMethod = requestDispatcherParams.get("onChangeMethod");
+boolean skipEditorLoading = Boolean.TRUE.toString().equals(requestDispatcherParams.get("skipEditorLoading"));
 String toolbarSet = requestDispatcherParams.get("toolbarSet");
 String width = requestDispatcherParams.get("width");
 %>
@@ -26,5 +27,6 @@ String width = requestDispatcherParams.get("width");
 	initMethod="<%= initMethod %>"
 	name="<%= name %>"
 	onChangeMethod="<%= onChangeMethod %>"
+	skipEditorLoading="<%= skipEditorLoading %>"
 	toolbarSet="<%= toolbarSet %>"
 	width="<%= width %>" />
