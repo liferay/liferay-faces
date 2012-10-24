@@ -170,6 +170,18 @@ public abstract class PortalWrapper implements Portal {
 		getWrapped().sendError(status, e, request, response);
 	}
 
+	@Override
+	public void sendRSSFeedsDisabledError(HttpServletRequest request, HttpServletResponse response) throws IOException,
+		ServletException {
+		getWrapped().sendRSSFeedsDisabledError(request, response);
+	}
+
+	@Override
+	public void sendRSSFeedsDisabledError(PortletRequest request, PortletResponse response) throws IOException,
+		ServletException {
+		getWrapped().sendRSSFeedsDisabledError(request, response);
+	}
+
 	public void storePreferences(PortletPreferences portletPreferences) throws IOException, ValidatorException {
 		getWrapped().storePreferences(portletPreferences);
 	}
@@ -366,6 +378,11 @@ public abstract class PortalWrapper implements Portal {
 
 	public boolean isCDNDynamicResourcesEnabled(long companyId) {
 		return getWrapped().isCDNDynamicResourcesEnabled(companyId);
+	}
+
+	@Override
+	public boolean isRSSFeedsEnabled() {
+		return getWrapped().isRSSFeedsEnabled();
 	}
 
 	public boolean isValidResourceId(String resourceId) {
@@ -685,10 +702,6 @@ public abstract class PortalWrapper implements Portal {
 
 	public HttpServletRequest getOriginalServletRequest(HttpServletRequest request) {
 		return getWrapped().getOriginalServletRequest(request);
-	}
-
-	public String getOuterPortletId(HttpServletRequest request) {
-		return getWrapped().getOuterPortletId(request);
 	}
 
 	public boolean isSystemGroup(String groupName) {
