@@ -43,6 +43,7 @@ import com.liferay.faces.util.product.ProductMap;
 import com.liferay.portal.kernel.editor.EditorUtil;
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.PortalUtil;
 
 
@@ -208,8 +209,8 @@ public class InputEditorInternalRenderer extends Renderer {
 				// cause the script to be rendered at the bottom of the portal page.
 				else {
 
-					ScriptData scriptData = (ScriptData) externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
-					scriptData.append(onBlurScript, null);
+					ScriptData scriptData = (ScriptData) portletRequest.getAttribute(WebKeys.AUI_SCRIPT_DATA);
+					scriptData.append(getPortletId(portletRequest), onBlurScript, null);
 				}
 
 				// FACES-1439: If the component was rendered on the page on the previous JSF lifecycle, then prevent it
@@ -252,6 +253,16 @@ public class InputEditorInternalRenderer extends Renderer {
 			// Write the captured output from the JSP tag to the Faces responseWriter.
 			responseWriter.write(bufferedResponse);
 		}
+	}
+
+	protected String getPortletId(PortletRequest portletRequest) {
+		String portletId = StringPool.BLANK;
+		Portlet portlet = (Portlet) portletRequest.getAttribute(WebKeys.RENDER_PORTLET);
+
+		if (portlet != null) {
+			portletId = portlet.getPortletId();
+		}
+		return portletId;
 	}
 
 	protected PortletRequest getLiferayPortletRequest(PortletRequest portletRequest) {
