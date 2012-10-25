@@ -40,12 +40,14 @@
 		<c:set var="doAsUserId" value="#{liferay.themeDisplay.doAsUserId}" />
 		<c:choose>
 			<c:when test="#{empty cc.attrs.editorImpl}">
-				<c:set var="editorImpl" value="#{liferay-util:portalProperty('editor.wysiwyg.default')}" />
+				<c:set var="editorImpl" value="editor.wysiwyg.default" />
 			</c:when>
 			<c:otherwise>
 				<c:set var="editorImpl" value="#{cc.attrs.editorImpl}" />
 			</c:otherwise>
 		</c:choose>
+		<c:set var="editorValue" value="#{liferay-util:getEditorValue(editorImpl)}" />
+		<c:set var="editorName" value="#{aui:escapeClientId(cc.clientId)}#{aui:escapeClientId(':inputText')}" />
 		<c:choose>
 			<c:when test="#{empty cc.attrs.maxLength}">
 				<c:set var="maxLength" value="-1" />
@@ -133,10 +135,10 @@ function #{responseNamespace}#{prefixedOnChangeMethod}(text) {
 var hiddenField = document.getElementById('#{cc.clientId}:inputText');
 var firstTimeHiddenField = document.getElementById('#{cc.clientId}:firstTime');
 if (firstTimeHiddenField) {
-	firstTimeHiddenField.parentNode.removeChild(firstTimeHiddenField);
-	if ((text.length == 0) &amp;&amp; (hiddenField.value.length &gt; 0)) {
-		return;
-	}
+firstTimeHiddenField.parentNode.removeChild(firstTimeHiddenField);
+if ((text.length == 0) &amp;&amp; (hiddenField.value.length &gt; 0)) {
+return;
+}
 }
 hiddenField.value = text;
 var maxLength = #{maxLength};
@@ -167,9 +169,17 @@ hiddenField.onblur();
 							</div>
 						</c:if>
 						<c:choose>
-							<c:when test="#{editorImpl == 'bbcode'}">
-								<h:outputStylesheet library="liferayportal" name="/html/portlet/message_boards/css/main.jsp" target="body" />
-								<h:outputScript library="liferayportal" name="/html/portlet/message_boards/js/main.js" target="body" />
+							<c:when test="#{editorValue == 'bbcode'}">
+								<ui:remove>
+									<!-- Originally we tried the following in order to do this automatically: -->
+									<!-- 	<h:outputStylesheet library="liferayportal" name="/html/portlet/message_boards/css/main.css" target="body" /> -->
+									<!-- 	<h:outputScript library="liferayportal" name="/html/portlet/message_boards/js/main.js" target="head" /> -->
+									<!-- And it worked in FireFox and IE9 but it caused JavaScript errors in Chrome. So if developers want -->
+									<!-- to use the bbcode feature (which is actually a message_boards feature anyway), then the following must -->
+									<!-- be added to the WEB-INF/liferay-portlet.xml descriptor: -->
+									<!--	<header-portlet-css>/html/portlet/message_boards/css/main.css</header-portlet-css> -->
+									<!-- 	<footer-portal-javascript>/html/portlet/message_boards/js/main.js</footer-portal-javascript> -->
+								</ui:remove>
 								<h:panelGroup layout="block" styleClass="portlet-message-boards">
 									<h:panelGroup layout="block" styleClass="lfr-textarea message-edit">
 										<h:inputTextarea id="inputText" cols="100" label="#{cc.attrs.label}" onchange="#{cc.attrs.onchange}"
@@ -178,19 +188,11 @@ hiddenField.onblur();
 										</h:inputTextarea>
 									</h:panelGroup>
 								</h:panelGroup>
-								<aui:script>
-									var #{responseNamespace}bbCode = null;
-								
-									function #{responseNamespace}getHTML() {
-										return #{responseNamespace}bbCode.getHTML();
-									}
-								</aui:script>
 								<aui:script use="liferay-bbcode-editor">
-									#{responseNamespace}bbCode = new Liferay.Editor.bbCode(
-										{
-											textarea: '##{aui:escapeClientId(cc.clientId)}\\:inputText'
-										}
-									);
+window['#{editorName}'] = new Liferay.Editor.bbCode(
+{textarea: '##{editorName}'}
+);
+window['#{editorName}'].setHTML(#{responseNamespace}#{prefixedInitMethod}());
 								</aui:script>
 							</c:when>
 							<c:otherwise>
