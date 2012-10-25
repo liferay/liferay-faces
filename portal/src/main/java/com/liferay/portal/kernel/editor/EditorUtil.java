@@ -15,16 +15,14 @@ package com.liferay.portal.kernel.editor;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.faces.portal.renderkit.InputEditorInternalRenderer;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
-
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 
 /**
- * This class is a pseudo-backport of the EditorUtil class which was introduced in Liferay Portal 6.1.x. It's main
+ * This class is a backport of the EditorUtil class which was introduced in Liferay Portal 6.0.12. It's main
  * purpose is to facilitate keeping the {@link InputEditorInternalRenderer} source the same on all branches of the
  * Liferay Faces source.
  *
@@ -33,22 +31,31 @@ import com.liferay.portal.kernel.util.Validator;
  */
 public class EditorUtil {
 
-	// Private Constants
-	private static final String EDITOR_WYSIWYG_DEFAULT = "editor.wysiwyg.default";
-
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(EditorUtil.class);
+	private static final String _EDITOR_WYSIWYG_DEFAULT = PropsUtil.get(PropsKeys.EDITOR_WYSIWYG_DEFAULT);
 
 	public static String getEditorValue(HttpServletRequest request, String editorImpl) {
 
-		if (Validator.isNull(editorImpl)) {
+		if (Validator.isNotNull(editorImpl)) {
+			editorImpl = PropsUtil.get(editorImpl);
+		}
 
-			try {
-				editorImpl = PropsUtil.get(EDITOR_WYSIWYG_DEFAULT);
+		if (!BrowserSnifferUtil.isRtf(request)) {
+
+			if (BrowserSnifferUtil.isSafari(request) && BrowserSnifferUtil.isMobile(request)) {
+
+				editorImpl = "simple";
 			}
-			catch (Exception e) {
-				logger.error(e);
+			else if (BrowserSnifferUtil.isSafari(request) && !editorImpl.contains("simple")) {
+
+				editorImpl = "tinymce_simple";
 			}
+			else {
+				editorImpl = "simple";
+			}
+		}
+
+		if (Validator.isNull(editorImpl)) {
+			editorImpl = _EDITOR_WYSIWYG_DEFAULT;
 		}
 
 		return editorImpl;
