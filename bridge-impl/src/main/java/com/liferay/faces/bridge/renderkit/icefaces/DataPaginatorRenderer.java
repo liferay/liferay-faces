@@ -24,7 +24,7 @@ import com.liferay.faces.bridge.component.icefaces.DataPaginatorBridgeImpl;
 import com.liferay.faces.bridge.component.icefaces.DataPaginatorWrapper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.bridge.renderkit.html_basic.RendererWrapper;
+import com.liferay.faces.util.render.RendererWrapper;
 
 
 /**
