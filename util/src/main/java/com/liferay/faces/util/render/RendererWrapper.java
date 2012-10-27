@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.renderkit.html_basic;
+package com.liferay.faces.util.render;
 
 import java.io.IOException;
 

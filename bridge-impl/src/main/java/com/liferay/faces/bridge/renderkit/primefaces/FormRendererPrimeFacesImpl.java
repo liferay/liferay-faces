@@ -22,7 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
-import com.liferay.faces.bridge.renderkit.html_basic.RendererWrapper;
+import com.liferay.faces.util.render.RendererWrapper;
 
 
 /**

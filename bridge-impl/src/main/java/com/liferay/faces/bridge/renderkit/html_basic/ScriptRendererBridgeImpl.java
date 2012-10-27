@@ -24,6 +24,7 @@ import javax.faces.render.Renderer;
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.util.FacesURLEncoder;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.RendererWrapper;
 
 
 /**
