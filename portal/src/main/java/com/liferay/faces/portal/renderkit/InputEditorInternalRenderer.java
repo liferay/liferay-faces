@@ -39,6 +39,7 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
+import com.liferay.faces.util.render.CleanupRenderer;
 
 import com.liferay.portal.kernel.editor.EditorUtil;
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
@@ -51,7 +52,7 @@ import com.liferay.portal.util.PortalUtil;
  *
  * @author  Neil Griffin
  */
-public class InputEditorInternalRenderer extends Renderer {
+public class InputEditorInternalRenderer extends Renderer implements CleanupRenderer {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(InputEditorInternalRenderer.class);
@@ -180,11 +181,13 @@ public class InputEditorInternalRenderer extends Renderer {
 
 			if (editorType.indexOf(CKEDITOR) >= 0) {
 
+				String namespace = portletResponse.getNamespace();
+
 				// FACES-1441: The liferay-ui:input-editor JSP tag (and associated ckeditor.jsp file) do not provide a
 				// way to hook-in to the "onblur" callback feature of the CKEditor. In order to overcome this
 				// limitation, it is necessary to append a <script>...</script> to the response that provides this
 				// ability.
-				String onBlurScript = getOnBlurScript(editorName, onBlurMethod, portletResponse.getNamespace());
+				String onBlurScript = getOnBlurScript(editorName, onBlurMethod, namespace);
 
 				// If running within an Ajax request, include the "onblur" callback script must be included directly
 				// to the response.
@@ -240,24 +243,84 @@ public class InputEditorInternalRenderer extends Renderer {
 								new Class[] { FacesContext.class, String.class });
 						ParsedResponse parsedResponse = new ParsedResponse(bufferedResponse);
 						bufferedResponse = parsedResponse.getNonScripts();
-						System.err.println("!@#$ ------------------------vvvv------------------------ JavaScriptRunner");
-						System.err.println(parsedResponse.getScripts());
-						System.err.println("!@#$ ------------------------^^^^------------------------ JavaScriptRunner");
-						runScriptMethod.invoke(null, new Object[] { facesContext, parsedResponse.getScripts() });
+
+						String scripts = parsedResponse.getScripts();
+						logger.trace(scripts);
+						runScriptMethod.invoke(null, new Object[] { facesContext, scripts });
 					}
 					catch (Exception e) {
 						logger.error(e);
-
 					}
 				}
 			}
 
 			// Write the captured output from the JSP tag to the Faces responseWriter.
-			System.err.println("!@#$ ------------------------vvvv------------------------ bufferedResponse");
-			System.err.println(bufferedResponse);
-			System.err.println("!@#$ ------------------------^^^^------------------------ bufferedResponse");
+			logger.trace(bufferedResponse);
 			responseWriter.write(bufferedResponse);
 		}
+	}
+
+	public void encodeCleanup(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		PortletResponse portletResponse = (PortletResponse) facesContext.getExternalContext().getResponse();
+		String namespace = portletResponse.getNamespace();
+
+		String editorName = uiComponent.getParent().getParent().getClientId();
+		StringBuilder scriptBuilder = new StringBuilder();
+
+		// Build up a JavaScript fragment that will cleanup the DOM.
+		if (!ICEFACES_DETECTED) {
+			scriptBuilder.append(StringPool.LESS_THAN);
+			scriptBuilder.append(StringPool.SCRIPT);
+			scriptBuilder.append(StringPool.GREATER_THAN);
+			scriptBuilder.append(StringPool.CDATA_OPEN);
+		}
+
+		scriptBuilder.append("var oldEditor = CKEDITOR.instances['");
+		scriptBuilder.append(namespace);
+		scriptBuilder.append(editorName);
+		scriptBuilder.append("']; if (oldEditor) {");
+		scriptBuilder.append("oldEditor.destroy(true);");
+		scriptBuilder.append("delete window['");
+		scriptBuilder.append(namespace);
+		scriptBuilder.append(editorName);
+		scriptBuilder.append("'];");
+		scriptBuilder.append("}");
+
+		if (!ICEFACES_DETECTED) {
+			scriptBuilder.append(StringPool.CDATA_CLOSE);
+			scriptBuilder.append(StringPool.LESS_THAN);
+			scriptBuilder.append(StringPool.FORWARD_SLASH);
+			scriptBuilder.append(StringPool.SCRIPT);
+			scriptBuilder.append(StringPool.GREATER_THAN);
+		}
+
+		String script = scriptBuilder.toString();
+
+		// If ICEfaces is detected, then move the script to the ICEfaces JavaScriptRunner.
+		if (ICEFACES_DETECTED) {
+
+			logger.debug(
+				"Moving CKEditor scripts to ICEfaces JavaScriptRunner in order to preempt DOM-diff for clientId=[{0}]",
+				uiComponent.getClientId());
+
+			try {
+				Class<?> jsRunnerClass = Class.forName(FQCN_ICEFACES_JS_RUNNER);
+				Method runScriptMethod = jsRunnerClass.getMethod(METHOD_RUNSCRIPT,
+						new Class[] { FacesContext.class, String.class });
+				runScriptMethod.invoke(null, new Object[] { facesContext, script });
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		// Otherwise, write the script directly to the response.
+		else {
+			facesContext.getResponseWriter().write(script);
+		}
+
+		logger.trace(script);
 	}
 
 	protected PortletRequest getLiferayPortletRequest(PortletRequest portletRequest) {
