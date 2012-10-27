@@ -14,7 +14,6 @@
 package com.liferay.faces.portal.renderkit;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
@@ -33,6 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.portal.component.InputEditorInternal;
 import com.liferay.faces.portal.servlet.NonNamespacedHttpServletRequest;
+import com.liferay.faces.util.icefaces.ICEfacesJavaScriptRunner;
 import com.liferay.faces.util.jsp.JspIncludeResponse;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -65,8 +65,6 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 	private static final String CKEDITOR = "ckeditor";
 	private static final boolean ICEFACES_DETECTED = ProductMap.getInstance().get(ProductConstants.ICEFACES)
 		.isDetected();
-	private static final String FQCN_ICEFACES_JS_RUNNER = "org.icefaces.util.JavaScriptRunner";
-	private static final String METHOD_RUNSCRIPT = "runScript";
 
 	static {
 		StringBuilder onBlurJS = new StringBuilder();
@@ -237,20 +235,12 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 						"Moving CKEditor scripts to ICEfaces JavaScriptRunner in order to preempt DOM-diff for clientId=[{0}]",
 						inputEditorInternal.getClientId());
 
-					try {
-						Class<?> jsRunnerClass = Class.forName(FQCN_ICEFACES_JS_RUNNER);
-						Method runScriptMethod = jsRunnerClass.getMethod(METHOD_RUNSCRIPT,
-								new Class[] { FacesContext.class, String.class });
-						ParsedResponse parsedResponse = new ParsedResponse(bufferedResponse);
-						bufferedResponse = parsedResponse.getNonScripts();
+					ParsedResponse parsedResponse = new ParsedResponse(bufferedResponse);
+					bufferedResponse = parsedResponse.getNonScripts();
 
-						String scripts = parsedResponse.getScripts();
-						logger.trace(scripts);
-						runScriptMethod.invoke(null, new Object[] { facesContext, scripts });
-					}
-					catch (Exception e) {
-						logger.error(e);
-					}
+					String scripts = parsedResponse.getScripts();
+					ICEfacesJavaScriptRunner.runScript(facesContext, scripts);
+					logger.trace(scripts);
 				}
 			}
 
@@ -304,15 +294,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				"Moving CKEditor scripts to ICEfaces JavaScriptRunner in order to preempt DOM-diff for clientId=[{0}]",
 				uiComponent.getClientId());
 
-			try {
-				Class<?> jsRunnerClass = Class.forName(FQCN_ICEFACES_JS_RUNNER);
-				Method runScriptMethod = jsRunnerClass.getMethod(METHOD_RUNSCRIPT,
-						new Class[] { FacesContext.class, String.class });
-				runScriptMethod.invoke(null, new Object[] { facesContext, script });
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
+			ICEfacesJavaScriptRunner.runScript(facesContext, script);
 		}
 
 		// Otherwise, write the script directly to the response.
