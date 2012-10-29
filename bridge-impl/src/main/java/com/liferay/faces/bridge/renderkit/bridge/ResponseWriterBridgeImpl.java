@@ -186,6 +186,10 @@ public class ResponseWriterBridgeImpl extends ResponseWriterWrapper {
 		else if (ELEMENT_UPDATE.equals(elementName)) {
 			insideUpdate = true;
 		}
+		// Otherwise, if the specified element name is "form" then reset viewStateWritten flag
+		else if (ELEMENT_FORM.equals(elementName)) {
+			viewStateWritten = false;
+		}
 
 		// FACES-1424: Otherwise, if the specified element name is "form" then reset the viewStateWritten flag. This
 		// ensures that in the case of multiple forms,  that the "javax.faces.ViewState" hidden field will be present in
