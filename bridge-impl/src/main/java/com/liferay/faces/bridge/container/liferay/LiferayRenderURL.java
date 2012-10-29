@@ -13,13 +13,15 @@
  */
 package com.liferay.faces.bridge.container.liferay;
 
+import javax.portlet.PortletURL;
+
 /**
  * @author  Neil Griffin
  */
 public class LiferayRenderURL extends LiferayPortletURL {
 
-	public LiferayRenderURL(ParsedPortletURL parsedPortletURL, String responseNamespace) {
-		super(parsedPortletURL, responseNamespace);
+	public LiferayRenderURL(PortletURL portletURL, String responseNamespace) {
+		super(portletURL, responseNamespace);
 	}
 
 	@Override

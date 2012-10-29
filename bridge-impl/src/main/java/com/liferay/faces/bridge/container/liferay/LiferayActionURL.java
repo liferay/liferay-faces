@@ -13,18 +13,25 @@
  */
 package com.liferay.faces.bridge.container.liferay;
 
+import javax.portlet.PortletURL;
+
 /**
  * @author  Neil Griffin
  */
 public class LiferayActionURL extends LiferayPortletURL {
 
-	public LiferayActionURL(ParsedPortletURL parsedPortletURL, String responseNamespace) {
-		super(parsedPortletURL, responseNamespace);
+	public LiferayActionURL(PortletURL portletURL, String responseNamespace) {
+		super(portletURL, responseNamespace);
 	}
 
 	@Override
 	public String getPortletLifecycleId() {
 		return LiferayConstants.LIFECYCLE_ACTION_PHASE_ID;
+	}
+
+	@Override
+	public boolean isWindowStateRequired() {
+		return true;
 	}
 
 }
