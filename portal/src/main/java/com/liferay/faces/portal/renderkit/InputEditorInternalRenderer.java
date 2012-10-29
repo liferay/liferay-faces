@@ -40,10 +40,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 import com.liferay.faces.util.render.CleanupRenderer;
-
 import com.liferay.portal.kernel.editor.EditorUtil;
-import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PortalUtil;
 
 
@@ -187,31 +184,19 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				// ability.
 				String onBlurScript = getOnBlurScript(editorName, onBlurMethod, namespace);
 
-				// If running within an Ajax request, include the "onblur" callback script must be included directly
-				// to the response.
-				if (resourcePhase) {
-
-					StringBuilder scriptMarkup = new StringBuilder();
-					scriptMarkup.append(StringPool.LESS_THAN);
-					scriptMarkup.append(StringPool.SCRIPT);
-					scriptMarkup.append(StringPool.GREATER_THAN);
-					scriptMarkup.append(StringPool.CDATA_OPEN);
-					scriptMarkup.append(onBlurScript);
-					scriptMarkup.append(COMMENT_CDATA_CLOSE);
-					scriptMarkup.append(StringPool.LESS_THAN);
-					scriptMarkup.append(StringPool.FORWARD_SLASH);
-					scriptMarkup.append(StringPool.SCRIPT);
-					scriptMarkup.append(StringPool.GREATER_THAN);
-					bufferedResponse = bufferedResponse.concat(scriptMarkup.toString());
-				}
-
-				// Otherwise, append the script to the "LIFERAY_SHARED_AUI_SCRIPT_DATA" request attribute, which will
-				// cause the script to be rendered at the bottom of the portal page.
-				else {
-
-					ScriptData scriptData = (ScriptData) externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
-					scriptData.append(onBlurScript, null);
-				}
+				// Include the "onblur" callback script directly in the response.
+				StringBuilder scriptMarkup = new StringBuilder();
+				scriptMarkup.append(StringPool.LESS_THAN);
+				scriptMarkup.append(StringPool.SCRIPT);
+				scriptMarkup.append(StringPool.GREATER_THAN);
+				scriptMarkup.append(StringPool.CDATA_OPEN);
+				scriptMarkup.append(onBlurScript);
+				scriptMarkup.append(COMMENT_CDATA_CLOSE);
+				scriptMarkup.append(StringPool.LESS_THAN);
+				scriptMarkup.append(StringPool.FORWARD_SLASH);
+				scriptMarkup.append(StringPool.SCRIPT);
+				scriptMarkup.append(StringPool.GREATER_THAN);
+				bufferedResponse = bufferedResponse.concat(scriptMarkup.toString());
 
 				// FACES-1439: If the component was rendered on the page on the previous JSF lifecycle, then prevent it
 				// from being re-initialized by removing all <script>...</script> elements.
