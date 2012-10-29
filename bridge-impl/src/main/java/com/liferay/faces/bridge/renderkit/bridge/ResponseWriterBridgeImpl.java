@@ -187,6 +187,13 @@ public class ResponseWriterBridgeImpl extends ResponseWriterWrapper {
 			insideUpdate = true;
 		}
 
+		// FACES-1424: Otherwise, if the specified element name is "form" then reset the viewStateWritten flag. This
+		// ensures that in the case of multiple forms,  that the "javax.faces.ViewState" hidden field will be present in
+		// each one.
+		else if (ELEMENT_FORM.equals(elementName) && viewStateWritten) {
+			viewStateWritten = false;
+		}
+
 		// Ask the superclass method to perform the startElement writing, which basically delegates to the Faces
 		// implementation writer (or the ICEfaces DOMResponseWriter) in the chain-of-responsibility.
 		super.startElement(elementName, uiComponent);
