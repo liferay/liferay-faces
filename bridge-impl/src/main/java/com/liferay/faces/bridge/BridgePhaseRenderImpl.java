@@ -103,7 +103,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompatImpl {
 
 		// If required, cause the BridgeRequestScope to go out-of-scope.
 		if ((bridgeContext != null) && !bridgeContext.isBridgeRequestScopePreserved()) {
-			bridgeRequestScopeCache.remove(bridgeRequestScope);
+			bridgeRequestScopeCache.remove(bridgeRequestScope.getId());
 		}
 
 		super.cleanup();
@@ -125,7 +125,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompatImpl {
 		bridgeRequestScope.restoreState(facesContext);
 
 		if (bridgeRequestScope.isPortletModeChanged()) {
-			bridgeRequestScopeCache.remove(bridgeRequestScope);
+			bridgeRequestScopeCache.remove(bridgeRequestScope.getId());
 		}
 
 		// If a render-redirect URL was specified, then it is necessary to create a new view from the URL and place it
