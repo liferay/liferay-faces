@@ -74,9 +74,6 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	private boolean ableToSetHttpStatusCode;
 	private int liferayBuildNumber;
 	private LiferayPortletRequest liferayPortletRequest;
-	private ParsedPortletURL parsedLiferayActionURL;
-	private ParsedPortletURL parsedLiferayRenderURL;
-	private ParsedBaseURL parsedLiferayResourceURL;
 	private String portletResponseNamespace;
 	private String requestURL;
 	private String responseNamespace;
@@ -267,17 +264,17 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 
 	@Override
 	protected PortletURL createActionURL(MimeResponse mimeResponse) {
-		return new LiferayActionURL(getParsedLiferayActionURL(mimeResponse), portletResponseNamespace);
+		return new LiferayActionURL(mimeResponse.createActionURL(), portletResponseNamespace);
 	}
 
 	@Override
 	protected PortletURL createRenderURL(MimeResponse mimeResponse) {
-		return new LiferayRenderURL(getParsedLiferayRenderURL(mimeResponse), portletResponseNamespace);
+		return new LiferayRenderURL(mimeResponse.createRenderURL(), portletResponseNamespace);
 	}
 
 	@Override
 	protected ResourceURL createResourceURL(MimeResponse mimeResponse) {
-		return new LiferayResourceURL(getParsedLiferayResourceURL(mimeResponse), portletResponseNamespace,
+		return new LiferayResourceURL(mimeResponse.createResourceURL(), portletResponseNamespace,
 				liferayBuildNumber);
 	}
 
@@ -401,36 +398,6 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	@Override
 	public long getHttpServletRequestDateHeader(String name) {
 		return liferayPortletRequest.getDateHeader(name);
-	}
-
-	protected ParsedPortletURL getParsedLiferayActionURL(MimeResponse mimeResponse) {
-
-		if (parsedLiferayActionURL == null) {
-			PortletURL liferayActionURL = mimeResponse.createActionURL();
-			parsedLiferayActionURL = new ParsedPortletURL(liferayActionURL);
-		}
-
-		return parsedLiferayActionURL;
-	}
-
-	protected ParsedPortletURL getParsedLiferayRenderURL(MimeResponse mimeResponse) {
-
-		if (parsedLiferayRenderURL == null) {
-			PortletURL liferayRenderURL = mimeResponse.createRenderURL();
-			parsedLiferayRenderURL = new ParsedPortletURL(liferayRenderURL);
-		}
-
-		return parsedLiferayRenderURL;
-	}
-
-	protected ParsedBaseURL getParsedLiferayResourceURL(MimeResponse mimeResponse) {
-
-		if (parsedLiferayResourceURL == null) {
-			ResourceURL liferayResourceURL = mimeResponse.createResourceURL();
-			parsedLiferayResourceURL = new ParsedBaseURL(liferayResourceURL);
-		}
-
-		return parsedLiferayResourceURL;
 	}
 
 	@Override
