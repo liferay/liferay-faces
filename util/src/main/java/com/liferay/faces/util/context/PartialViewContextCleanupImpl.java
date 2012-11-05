@@ -14,7 +14,10 @@
 package com.liferay.faces.util.context;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -57,6 +60,21 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 	@Override
 	public void processPartial(PhaseId phaseId) {
 
+        if (phaseId != PhaseId.RENDER_RESPONSE) {
+            wrappedPartialViewContext.processPartial(phaseId);
+            return;
+        }
+
+        // According to documentation of PartialViewContext
+        // only certain components should be processed
+        Set<String> processIds = new HashSet<String>();
+        if (isRenderAll()) {
+            processIds.add(facesContext.getViewRoot().getClientId());
+        }
+        else {
+            processIds.addAll(getRenderIds());
+        }
+
 		try {
 
 			// If ICEfaces is detected, then call encodeCleanup(...) prior to delegating to the wrapped
@@ -68,7 +86,7 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 			// any calls to {@link JavaScriptRunner#runScript(FacesContext, String)} must be made prior to the
 			// completion of the component tree being rendered in its entirety.
 			if (ICEFACES_DETECTED) {
-				encodeCleanup(facesContext, facesContext.getViewRoot(), true);
+				walkTree(facesContext, facesContext.getViewRoot(), processIds);
 				wrappedPartialViewContext.processPartial(phaseId);
 			}
 
@@ -77,7 +95,7 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 			// partial-response, which is important because script execution blocks rendering.
 			else {
 				wrappedPartialViewContext.processPartial(phaseId);
-				encodeCleanup(facesContext, facesContext.getViewRoot(), true);
+                walkTree(facesContext, facesContext.getViewRoot(), processIds);
 			}
 		}
 		catch (IOException e) {
@@ -88,6 +106,24 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 			throw new RuntimeException(e);
 		}
 	}
+
+    private void walkTree(FacesContext facesContext, UIComponent uiComponent, Collection<String> processIds)
+            throws IOException {
+        final String id = uiComponent.getClientId();
+        if (processIds.contains(id)) {
+            // assume here that rendered is true because this is more possible than false
+            encodeCleanup(facesContext, uiComponent, true);
+            processIds.remove(id);
+        }
+        else {
+            Iterator<UIComponent> itr = uiComponent.getFacetsAndChildren();
+
+            while (itr.hasNext()) {
+                UIComponent childComponent = itr.next();
+                walkTree(facesContext, childComponent, processIds);
+            }
+        }
+    }
 
 	protected void encodeCleanup(FacesContext facesContext, UIComponent uiComponent, boolean parentRendered)
 		throws IOException {
