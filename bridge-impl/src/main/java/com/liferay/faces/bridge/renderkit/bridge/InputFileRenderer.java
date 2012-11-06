@@ -45,6 +45,10 @@ public class InputFileRenderer extends Renderer {
 		@SuppressWarnings("unchecked")
 		Map<String, List<UploadedFile>> uploadedFilesMap = (Map<String, List<UploadedFile>>) requestAttributeMap.get(
 				RequestParameterMap.PARAM_UPLOADED_FILES);
+        if (uploadedFilesMap == null) {
+            return;
+        }
+
 		List<UploadedFile> uploadedFiles = uploadedFilesMap.get(clientId);
 
 		if ((uploadedFiles != null) && (uploadedFiles.size() > 0)) {
