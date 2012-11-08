@@ -98,6 +98,20 @@ public class BridgePhaseResourceImpl extends BridgePhaseCompatImpl {
 				// Execute the JSF lifecycle.
 				facesLifecycle.execute(facesContext);
 
+				// If there were any "handled" exceptions queued, then throw a BridgeException.
+				Throwable handledException = getJSF2HandledException(facesContext);
+
+				if (handledException != null) {
+					throw new BridgeException(handledException);
+				}
+
+				// Otherwise, if there were any "unhandled" exceptions queued, then throw a BridgeException.
+				Throwable unhandledException = getJSF2UnhandledException(facesContext);
+
+				if (unhandledException != null) {
+					throw new BridgeException(unhandledException);
+				}
+
 				// Also execute the RENDER_RESPONSE phase of the Faces lifecycle, which will ultimately return a
 				// DOM-update back to the jsf.js Javascript code that issued the XmlHttpRequest in the first place.
 				facesLifecycle.render(facesContext);
