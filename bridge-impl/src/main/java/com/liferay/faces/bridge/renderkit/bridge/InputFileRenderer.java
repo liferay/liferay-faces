@@ -45,24 +45,28 @@ public class InputFileRenderer extends Renderer {
 		@SuppressWarnings("unchecked")
 		Map<String, List<UploadedFile>> uploadedFilesMap = (Map<String, List<UploadedFile>>) requestAttributeMap.get(
 				RequestParameterMap.PARAM_UPLOADED_FILES);
-		List<UploadedFile> uploadedFiles = uploadedFilesMap.get(clientId);
 
-		if ((uploadedFiles != null) && (uploadedFiles.size() > 0)) {
+		if (uploadedFilesMap != null) {
 
-			HtmlInputFile htmlInputFile = (HtmlInputFile) uiComponent;
+			List<UploadedFile> uploadedFiles = uploadedFilesMap.get(clientId);
 
-			// Support legacy feature that is used in conjunction with the binding attribute.
-			htmlInputFile.setUploadedFile(uploadedFiles.get(0));
+			if ((uploadedFiles != null) && (uploadedFiles.size() > 0)) {
 
-			htmlInputFile.setSubmittedValue(uploadedFiles);
+				HtmlInputFile htmlInputFile = (HtmlInputFile) uiComponent;
 
-			// Queue the FileUploadEventso that each uploaded file can be handled individually with an ActionListener.
-			for (UploadedFile uploadedFile : uploadedFiles) {
-				FileUploadEvent fileUploadEvent = new FileUploadEvent(uiComponent, uploadedFile);
-				uiComponent.queueEvent(fileUploadEvent);
+				// Support legacy feature that is used in conjunction with the binding attribute.
+				htmlInputFile.setUploadedFile(uploadedFiles.get(0));
+
+				htmlInputFile.setSubmittedValue(uploadedFiles);
+
+				// Queue the FileUploadEventso that each uploaded file can be handled individually with an
+				// ActionListener.
+				for (UploadedFile uploadedFile : uploadedFiles) {
+					FileUploadEvent fileUploadEvent = new FileUploadEvent(uiComponent, uploadedFile);
+					uiComponent.queueEvent(fileUploadEvent);
+				}
 			}
 		}
-
 	}
 
 	@Override
