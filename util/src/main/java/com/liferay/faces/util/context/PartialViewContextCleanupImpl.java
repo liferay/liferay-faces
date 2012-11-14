@@ -14,10 +14,22 @@
 package com.liferay.faces.util.context;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.EnumSet;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
+import javax.faces.FactoryFinder;
 import javax.faces.component.UIComponent;
+import javax.faces.component.visit.VisitCallback;
+import javax.faces.component.visit.VisitContext;
+import javax.faces.component.visit.VisitContextFactory;
+import javax.faces.component.visit.VisitHint;
+import javax.faces.component.visit.VisitResult;
 import javax.faces.context.FacesContext;
+import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.PartialViewContext;
 import javax.faces.context.PartialViewContextWrapper;
 import javax.faces.event.PhaseId;
@@ -48,6 +60,7 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 	// Private Data Members
 	private FacesContext facesContext;
 	private PartialViewContext wrappedPartialViewContext;
+	private PartialResponseWriter partialResponseWriter;
 
 	public PartialViewContextCleanupImpl(PartialViewContext partialViewContext, FacesContext facesContext) {
 		this.wrappedPartialViewContext = partialViewContext;
@@ -57,35 +70,52 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 	@Override
 	public void processPartial(PhaseId phaseId) {
 
-		try {
+		if (phaseId == PhaseId.RENDER_RESPONSE) {
 
-			// If ICEfaces is detected, then call encodeCleanup(...) prior to delegating to the wrapped
-			// processPartial(PhaseId) method. The reason for this ordering is due the design of the ICEfaces {@link
-			// DOMPartialViewContext#processPartial(PhaseId)} method. After the processPartial method has encoded all of
-			// the components in the view, it then calls the ICEfaces {@link
-			// JavaScriptRunner#collateScripts(FacesContext)} method, which concatenates all of the scripts that were
-			// added via the {@link JavaScriptRunner#runScript(FacesContext, String)} method. Because of this design,
-			// any calls to {@link JavaScriptRunner#runScript(FacesContext, String)} must be made prior to the
-			// completion of the component tree being rendered in its entirety.
-			if (ICEFACES_DETECTED) {
-				encodeCleanup(facesContext, facesContext.getViewRoot(), true);
+			try {
+
+				// Render the cleanup prior to delegating to the wrapped processPartial(PhaseId) method. Since rendered
+				// cleanup is JavaScript (rather than markup), components that implement {@link UICleanup} need to
+				// "render" all of their JavaScript into the {@link ExtFacesContext#getJavaScriptMap} ahead of time.
+				// This allows the {@link PartialResponseWriterCleanupImpl} or the ICEfaces {@link
+				// DOMPartialViewContext} to place the JavaScript at the end of the partial-response.
+				if (isRenderAll()) {
+					cleanupAll(facesContext);
+				}
+				else {
+					cleanupPartial(facesContext, wrappedPartialViewContext.getRenderIds());
+				}
+
 				wrappedPartialViewContext.processPartial(phaseId);
 			}
+			catch (IOException e) {
 
-			// Otherwise, delegate to the wrapped processPartial(PhaseId) method prior to calling encodeCleanup(...).
-			// This will ensure that any clean up <script>...</script> elements appear at the end of the
-			// partial-response, which is important because script execution blocks rendering.
-			else {
-				wrappedPartialViewContext.processPartial(phaseId);
-				encodeCleanup(facesContext, facesContext.getViewRoot(), true);
+				// Unfortunately the signature for {@link PartialViewContext#processPartial(PhaseId)} does throw
+				// IOException
+				logger.error(e);
+				throw new RuntimeException(e);
 			}
 		}
-		catch (IOException e) {
+		else {
+			wrappedPartialViewContext.processPartial(phaseId);
+		}
+	}
 
-			// Unfortunately the signature for {@link PartialViewContext#processPartial(PhaseId)} does throw
-			// IOException
-			logger.error(e);
-			throw new RuntimeException(e);
+	protected void cleanupAll(FacesContext facesContext) throws IOException {
+		encodeCleanup(facesContext, facesContext.getViewRoot(), true);
+	}
+
+	protected void cleanupPartial(FacesContext facesContext, Collection<String> renderIds) {
+
+		if ((renderIds != null) && (renderIds.size() > 0)) {
+
+			VisitContextFactory visitContextFactory = (VisitContextFactory) FactoryFinder.getFactory(
+					FactoryFinder.VISIT_CONTEXT_FACTORY);
+
+			EnumSet<VisitHint> visitHints = EnumSet.of(VisitHint.EXECUTE_LIFECYCLE);
+			VisitContext visitContext = visitContextFactory.getVisitContext(facesContext, renderIds, visitHints);
+			VisitCallback visitCallback = new VisitCallbackCleanupImpl();
+			facesContext.getViewRoot().visitTree(visitContext, visitCallback);
 		}
 	}
 
@@ -119,8 +149,81 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 	}
 
 	@Override
+	public PartialResponseWriter getPartialResponseWriter() {
+
+		if (ICEFACES_DETECTED) {
+			return super.getPartialResponseWriter();
+		}
+		else {
+
+			if (partialResponseWriter == null) {
+				partialResponseWriter = new PartialResponseWriterCleanupImpl(super.getPartialResponseWriter());
+			}
+
+			return partialResponseWriter;
+		}
+	}
+
+	@Override
 	public PartialViewContext getWrapped() {
 		return wrappedPartialViewContext;
 	}
 
+	/**
+	 * This class serves as a wrapper around the {@link PartialResponseWriter} that will encode the JavaScript cleanup
+	 * fragments within an <eval>...</eval> section just before the end of the partial-response document.
+	 *
+	 * @author  Neil Griffin
+	 */
+	protected class PartialResponseWriterCleanupImpl extends PartialResponseWriterWrapper {
+
+		public PartialResponseWriterCleanupImpl(PartialResponseWriter partialResponseWriter) {
+			super(partialResponseWriter);
+		}
+
+		@Override
+		public void endDocument() throws IOException {
+
+			ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
+			Map<String, String> javaScriptMap = extFacesContext.getJavaScriptMap();
+
+			if (javaScriptMap.size() > 0) {
+				Set<Entry<String, String>> entrySet = javaScriptMap.entrySet();
+
+				super.startEval();
+
+				for (Map.Entry<String, String> mapEntry : entrySet) {
+					super.write(mapEntry.getValue());
+				}
+
+				super.endEval();
+			}
+
+			super.endDocument();
+		}
+
+	}
+
+	protected class VisitCallbackCleanupImpl implements VisitCallback {
+
+		public VisitResult visit(VisitContext visitContext, UIComponent uiComponent) {
+
+			boolean parentRendered = true;
+			UIComponent parent = uiComponent.getParent();
+
+			if (parent != null) {
+				parentRendered = parent.isRendered();
+			}
+
+			try {
+				encodeCleanup(facesContext, uiComponent, parentRendered);
+			}
+			catch (IOException e) {
+				logger.error(e);
+			}
+
+			return VisitResult.REJECT;
+		}
+
+	}
 }

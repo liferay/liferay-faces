@@ -376,4 +376,9 @@ public interface FacesContextHelper {
 	 * Sets the value of the a session attribute using the specified name and value.
 	 */
 	public abstract void setSessionAttribute(String name, Object value);
+	
+	/**
+	 * Returns the map of JavaScript strings that need to be included at the end of a response.
+	 */
+	public abstract Map<String, String> getJavaScriptMap();
 }
