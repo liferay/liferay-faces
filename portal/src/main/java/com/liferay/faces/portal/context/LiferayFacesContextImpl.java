@@ -535,6 +535,13 @@ public class LiferayFacesContextImpl extends LiferayFacesContext implements Seri
 	}
 
 	/**
+	 * @see  FacesContextHelper#getJavaScriptMap()
+	 */
+	public Map<String, String> getJavaScriptMap() {
+		return facesContextHelper.getJavaScriptMap();
+	}
+
+	/**
 	 * @since  JSF 2.0
 	 */
 	@Override

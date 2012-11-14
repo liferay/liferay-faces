@@ -28,7 +28,7 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	private static final Logger logger = LoggerFactory.getLogger(ExtFacesContext.class);
 
 	// Singleton Instance
-	private static transient ExtFacesContext instance = new ExtFacesContextImpl();
+	private static transient ExtFacesContext instance;
 
 	/**
 	 * Returns the implementation singleton instance.

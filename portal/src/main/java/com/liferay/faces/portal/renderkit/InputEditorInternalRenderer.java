@@ -31,14 +31,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.portal.component.InputEditorInternal;
+import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.portal.servlet.NonNamespacedHttpServletRequest;
-import com.liferay.faces.util.icefaces.ICEfacesJavaScriptRunner;
 import com.liferay.faces.util.jsp.JspIncludeResponse;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.product.ProductConstants;
-import com.liferay.faces.util.product.ProductMap;
 import com.liferay.faces.util.render.CleanupRenderer;
 import com.liferay.portal.kernel.editor.EditorUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -60,8 +58,6 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 	private static final String ONBLUR_METHOD_NAME_TOKEN = "%ONBLUR_METHOD_NAME%";
 	private static final String COMMENT_CDATA_CLOSE = "// " + StringPool.CDATA_CLOSE;
 	private static final String CKEDITOR = "ckeditor";
-	private static final boolean ICEFACES_DETECTED = ProductMap.getInstance().get(ProductConstants.ICEFACES)
-		.isDetected();
 
 	static {
 		StringBuilder onBlurJS = new StringBuilder();
@@ -202,29 +198,32 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				// from being re-initialized by removing all <script>...</script> elements.
 				boolean scriptsRemoved = false;
 
+				String clientId = inputEditorInternal.getClientId();
+
 				if (resourcePhase && inputEditorInternal.isPreviouslyRendered()) {
 
-					logger.debug("Preventing re-initialization of CKEditor for clientId=[{0}]",
-						inputEditorInternal.getClientId());
+					logger.debug("Preventing re-initialization of CKEditor for clientId=[{0}]", clientId);
 
 					ParsedResponse parsedResponse = new ParsedResponse(bufferedResponse);
 					bufferedResponse = parsedResponse.getNonScripts();
 					scriptsRemoved = true;
 				}
 
-				// FACES-1422: If ICEfaces is detected, then preempt a DOM-diff by moving the <script>...</script>
-				// elements to the ICEfaces JavaScriptRunner.
-				if (ICEFACES_DETECTED && !scriptsRemoved) {
+				// FACES-1422: Move the scripts to the <eval>...</eval> section of the partial-response so that they
+				// will execute properly. This has the added benefit of preempt a DOM-diff with ICEfaces.
+				if (resourcePhase && !scriptsRemoved) {
 
 					logger.debug(
-						"Moving CKEditor scripts to ICEfaces JavaScriptRunner in order to preempt DOM-diff for clientId=[{0}]",
-						inputEditorInternal.getClientId());
+						"Moving CKEditor scripts to <eval>...</eval> section of the partial-response for clientId=[{0}]",
+						clientId);
 
 					ParsedResponse parsedResponse = new ParsedResponse(bufferedResponse);
 					bufferedResponse = parsedResponse.getNonScripts();
 
 					String scripts = parsedResponse.getScripts();
-					ICEfacesJavaScriptRunner.runScript(facesContext, scripts);
+
+					LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+					liferayFacesContext.getJavaScriptMap().put(clientId, scripts);
 					logger.trace(scripts);
 				}
 			}
@@ -244,13 +243,6 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 		StringBuilder scriptBuilder = new StringBuilder();
 
 		// Build up a JavaScript fragment that will cleanup the DOM.
-		if (!ICEFACES_DETECTED) {
-			scriptBuilder.append(StringPool.LESS_THAN);
-			scriptBuilder.append(StringPool.SCRIPT);
-			scriptBuilder.append(StringPool.GREATER_THAN);
-			scriptBuilder.append(StringPool.CDATA_OPEN);
-		}
-
 		scriptBuilder.append("var oldEditor = CKEDITOR.instances['");
 		scriptBuilder.append(namespace);
 		scriptBuilder.append(editorName);
@@ -262,30 +254,10 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 		scriptBuilder.append("'];");
 		scriptBuilder.append("}");
 
-		if (!ICEFACES_DETECTED) {
-			scriptBuilder.append(StringPool.CDATA_CLOSE);
-			scriptBuilder.append(StringPool.LESS_THAN);
-			scriptBuilder.append(StringPool.FORWARD_SLASH);
-			scriptBuilder.append(StringPool.SCRIPT);
-			scriptBuilder.append(StringPool.GREATER_THAN);
-		}
-
 		String script = scriptBuilder.toString();
 
-		// If ICEfaces is detected, then move the script to the ICEfaces JavaScriptRunner.
-		if (ICEFACES_DETECTED) {
-
-			logger.debug(
-				"Moving CKEditor scripts to ICEfaces JavaScriptRunner in order to preempt DOM-diff for clientId=[{0}]",
-				uiComponent.getClientId());
-
-			ICEfacesJavaScriptRunner.runScript(facesContext, script);
-		}
-
-		// Otherwise, write the script directly to the response.
-		else {
-			facesContext.getResponseWriter().write(script);
-		}
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+		liferayFacesContext.getJavaScriptMap().put(editorName, script);
 
 		logger.trace(script);
 	}

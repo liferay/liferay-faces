@@ -23,6 +23,8 @@ import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.application.ProjectStage;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIForm;
 import javax.faces.component.UIViewRoot;
@@ -40,10 +42,16 @@ import javax.faces.render.RenderKit;
 /**
  * @author  Neil Griffin
  */
+@ManagedBean(name = "extFacesContext", eager = true)
+@ApplicationScoped
 public class ExtFacesContextImpl extends ExtFacesContext {
 
 	// Private Data Members
 	FacesContextHelper facesContextHelper = new FacesContextHelperImpl();
+
+	public ExtFacesContextImpl() {
+		setInstance(this);
+	}
 
 	/**
 	 * @see  FacesContextHelper#addComponentErrorMessage(String, String)
@@ -400,6 +408,10 @@ public class ExtFacesContextImpl extends ExtFacesContext {
 	 */
 	public FacesContext getFacesContext() {
 		return FacesContext.getCurrentInstance();
+	}
+
+	public Map<String, String> getJavaScriptMap() {
+		return facesContextHelper.getJavaScriptMap();
 	}
 
 	/**

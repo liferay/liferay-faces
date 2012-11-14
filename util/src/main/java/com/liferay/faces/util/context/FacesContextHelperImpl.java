@@ -35,6 +35,7 @@ import javax.faces.lifecycle.LifecycleFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.liferay.faces.util.context.map.JavaScriptMap;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.helper.IntegerHelper;
 import com.liferay.faces.util.helper.LongHelper;
@@ -51,6 +52,9 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	// Private Constants
 	private static final String UNEXPECTED_ERROR_MSG_ID = "an-unexpected-error-occurred";
 	private static final String SUCCESS_INFO_MSG_ID = "your-request-processed-successfully";
+
+	// Private Data Members
+	private transient Map<String, String> javaScriptMap;
 
 	public void addComponentErrorMessage(String clientId, String key) {
 
@@ -108,6 +112,20 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	public void addGlobalInfoMessage(String key, Object... arguments) {
 
 		addComponentInfoMessage(null, key, arguments);
+	}
+
+	/**
+	 * @see  FacesContextHelper#addGlobalSuccessInfoMessage()
+	 */
+	public void addGlobalSuccessInfoMessage() {
+		addGlobalInfoMessage(SUCCESS_INFO_MSG_ID);
+	}
+
+	/**
+	 * @see  FacesContextHelper#addGlobalUnexpectedErrorMessage()
+	 */
+	public void addGlobalUnexpectedErrorMessage() {
+		addGlobalErrorMessage(UNEXPECTED_ERROR_MSG_ID);
 	}
 
 	public void addMessage(String clientId, Severity severity, String key) {
@@ -274,6 +292,15 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		return FacesContext.getCurrentInstance();
 	}
 
+	public Map<String, String> getJavaScriptMap() {
+
+		if (javaScriptMap == null) {
+			javaScriptMap = new JavaScriptMap();
+		}
+
+		return javaScriptMap;
+	}
+
 	public Locale getLocale() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		Locale locale = facesContext.getViewRoot().getLocale();
@@ -406,20 +433,5 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		if (httpSession != null) {
 			httpSession.setAttribute(name, value);
 		}
-	}
-
-
-	/**
-	 * @see  FacesContextHelper#addGlobalSuccessInfoMessage()
-	 */
-	public void addGlobalSuccessInfoMessage() {
-		addGlobalInfoMessage(SUCCESS_INFO_MSG_ID);
-	}
-
-	/**
-	 * @see  FacesContextHelper#addGlobalUnexpectedErrorMessage()
-	 */
-	public void addGlobalUnexpectedErrorMessage() {
-		addGlobalErrorMessage(UNEXPECTED_ERROR_MSG_ID);
 	}
 }
