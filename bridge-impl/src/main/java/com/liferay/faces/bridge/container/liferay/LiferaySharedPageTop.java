@@ -19,13 +19,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResource;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -49,6 +47,11 @@ public class LiferaySharedPageTop {
 	// Private Constants
 	private static final String XML_DOCUMENT_DECLARATION = "<?xml version=\"1.0\"?>";
 
+	// FACES-1442: The SAXParserFactory.newSAXParser() method that comes with the JRE suffers from a
+	// performance problem. Use the Liferay factory intead.
+	private static final com.liferay.faces.util.xml.SAXParserFactory saxParserFactory =
+		com.liferay.faces.util.xml.SAXParserFactory.newInstance();
+
 	// Private Data Members
 	private List<HeadResource> headResources;
 
@@ -57,13 +60,6 @@ public class LiferaySharedPageTop {
 		try {
 			headResources = new ArrayList<HeadResource>();
 
-			SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
-			boolean validating = false;
-			saxParserFactory.setValidating(validating);
-			saxParserFactory.setNamespaceAware(true);
-
-			// Obtain a SAX Parser from the factory.
-			SAXParser saxParser = saxParserFactory.newSAXParser();
 			SharedPageTopHandler sharedPageTopHandler = new SharedPageTopHandler();
 			StringBundler xmlDocument = new StringBundler();
 			xmlDocument.append(XML_DOCUMENT_DECLARATION);
@@ -76,10 +72,13 @@ public class LiferaySharedPageTop {
 			xmlDocument.append(LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
 			xmlDocument.append(StringPool.GREATER_THAN);
 
-			String xmlDocumentAsString = xmlDocument.toString().replaceAll(BridgeConstants.REGEX_AMPERSAND_DELIMITER,
-					StringPool.AMPERSAND_ENCODED);
+			String xmlDocumentAsString = xmlDocument.toString();
+
 			ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(xmlDocumentAsString.getBytes());
+
+			SAXParser saxParser = saxParserFactory.newSAXParser();
 			saxParser.parse(byteArrayInputStream, sharedPageTopHandler);
+
 			byteArrayInputStream.close();
 		}
 		catch (Exception e) {
@@ -123,16 +122,55 @@ public class LiferaySharedPageTop {
 		StringBundler stringBundler = new StringBundler();
 
 		for (HeadResource headResource : headResources) {
-			stringBundler.append(headResource.toString());
+			String headResourceMarkup = headResource.toString();
+
+			// One of the by-products of parsing an XML document is that the SAXParser converts "&amp;" to "&" for
+			// attribute values. For example, if the XML document specifies a URL as "foo.jsp?x=1&amp;y=2" then the
+			// parser will set the attribute value "foo.jsp?x=1&y=2". So in order for the string representation
+			// to accurately reflect the values in the original XML document that was parsed, it is necessary to
+			// re-encode the ampersands.
+			headResourceMarkup = encodeAmpersands(headResourceMarkup);
+			stringBundler.append(headResourceMarkup);
 		}
 
 		return stringBundler;
 	}
 
+	protected String encodeAmpersands(String value) {
+
+		String encodedValue = value;
+
+		int ampersandPos = value.indexOf(StringPool.AMPERSAND);
+
+		if (ampersandPos > 0) {
+
+			int startPos = 0;
+			StringBuilder buf = new StringBuilder();
+
+			while (ampersandPos > 0) {
+
+				buf.append(value.substring(startPos, ampersandPos));
+				buf.append(StringPool.AMPERSAND_ENCODED);
+
+				startPos = ampersandPos + 1;
+
+				ampersandPos = value.indexOf(StringPool.AMPERSAND, startPos);
+			}
+
+			if (startPos < value.length()) {
+				buf.append(value.substring(startPos));
+			}
+
+			encodedValue = buf.toString();
+		}
+
+		return encodedValue;
+	}
+
 	protected class SharedPageTopHandler extends DefaultHandler {
 
 		// Private Data Members
-		HeadResource headResource;
+		private HeadResource headResource;
 
 		@Override
 		public void characters(char[] chars, int start, int length) throws SAXException {
@@ -160,8 +198,8 @@ public class LiferaySharedPageTop {
 		public void startElement(String uri, String localName, String qName, Attributes attributes)
 			throws SAXException {
 
-			if (!LiferayConstants.LIFERAY_SHARED_PAGE_TOP.equals(localName)) {
-				headResource = new HeadResource(localName, attributes);
+			if (!LiferayConstants.LIFERAY_SHARED_PAGE_TOP.equals(qName)) {
+				headResource = new HeadResource(qName, attributes);
 				headResources.add(headResource);
 			}
 		}

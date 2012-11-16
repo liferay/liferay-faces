@@ -104,7 +104,7 @@ public class HeadResource {
 		if ((url != null) && url.equals(otherHeadResource.getURL())) {
 			equal = true;
 		}
-		else if (type == otherHeadResource.getType()) {
+		else if (type.equals(otherHeadResource.getType())) {
 
 			String facesResource2 = otherHeadResource.getFacesResource();
 			String facesLibrary2 = otherHeadResource.getFacesLibrary();
