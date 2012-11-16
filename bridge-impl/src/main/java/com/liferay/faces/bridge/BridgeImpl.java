@@ -36,12 +36,17 @@ import javax.portlet.faces.BridgeUninitializedException;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
  * @author  Neil Griffin
  */
 public class BridgeImpl implements Bridge {
+
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(BridgeImpl.class);
 
 	// Private Data Members
 	private boolean initialized = false;
@@ -51,11 +56,18 @@ public class BridgeImpl implements Bridge {
 	public void destroy() {
 		initialized = false;
 
-		BridgeRequestScopeManagerFactory bridgeRequestScopeManagerFactory = (BridgeRequestScopeManagerFactory)
-			BridgeFactoryFinder.getFactory(BridgeRequestScopeManagerFactory.class);
-		BridgeRequestScopeManager bridgeRequestScopeManager =
-			bridgeRequestScopeManagerFactory.getBridgeRequestScopeManager();
-		bridgeRequestScopeManager.removeBridgeRequestScopesByPortlet(portletConfig);
+		// FACES-1450: Surround with try/catch block in order to prevent hot re-deploys from failing in Liferay Portal.
+		try {
+
+			BridgeRequestScopeManagerFactory bridgeRequestScopeManagerFactory = (BridgeRequestScopeManagerFactory)
+				BridgeFactoryFinder.getFactory(BridgeRequestScopeManagerFactory.class);
+			BridgeRequestScopeManager bridgeRequestScopeManager =
+				bridgeRequestScopeManagerFactory.getBridgeRequestScopeManager();
+			bridgeRequestScopeManager.removeBridgeRequestScopesByPortlet(portletConfig);
+		}
+		catch (Throwable t) {
+			logger.warn(t.getMessage());
+		}
 	}
 
 	public void doFacesRequest(ActionRequest actionRequest, ActionResponse actionResponse)
