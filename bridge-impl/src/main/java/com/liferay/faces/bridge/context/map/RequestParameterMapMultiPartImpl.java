@@ -61,6 +61,8 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 
 /**
  * @author  Neil Griffin
@@ -110,6 +112,11 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 
 			// Using the portlet sessionId, determine a unique folder path and create the path if it does not exist.
 			String sessionId = portletSession.getId();
+
+			// FACES-1452: Non-alpha-numeric characters must be removed order to ensure that the folder will be
+			// created properly.
+			sessionId = sessionId.replaceAll("[^A-Za-z0-9]", StringPool.BLANK);
+
 			File uploadedFilesPath = new File(uploadedFilesDir, sessionId);
 
 			if (!uploadedFilesPath.exists()) {
