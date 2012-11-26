@@ -3,7 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
         version="2.1">
-   <tlib-version>3.1.1</tlib-version>
+   <tlib-version>4.1.0</tlib-version>
    <short-name>aui</short-name>
    <uri>http://liferay.com/faces/aui</uri>
    <tag>
@@ -407,6 +407,18 @@
          <required>false</required>
          <deferred-value>
             <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
          </deferred-value>
       </attribute>
    </tag>
@@ -813,6 +825,18 @@
             <type>java.lang.String</type>
          </deferred-value>
       </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
    </tag>
    <tag>
       <description/>
@@ -1215,6 +1239,18 @@
          <required>false</required>
          <deferred-value>
             <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
          </deferred-value>
       </attribute>
    </tag>
@@ -1621,6 +1657,18 @@
             <type>java.lang.String</type>
          </deferred-value>
       </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
    </tag>
    <tag>
       <description/>
@@ -2023,6 +2071,18 @@
          <required>false</required>
          <deferred-value>
             <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
          </deferred-value>
       </attribute>
    </tag>
@@ -2429,6 +2489,18 @@
             <type>java.lang.String</type>
          </deferred-value>
       </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
    </tag>
    <tag>
       <description/>
@@ -2831,6 +2903,18 @@
          <required>false</required>
          <deferred-value>
             <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
          </deferred-value>
       </attribute>
    </tag>
@@ -3237,6 +3321,18 @@
             <type>java.lang.String</type>
          </deferred-value>
       </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
    </tag>
    <tag>
       <description/>
@@ -3639,6 +3735,18 @@
          <required>false</required>
          <deferred-value>
             <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
          </deferred-value>
       </attribute>
    </tag>
@@ -4045,6 +4153,18 @@
             <type>java.lang.String</type>
          </deferred-value>
       </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
    </tag>
    <tag>
       <description/>
@@ -4449,6 +4569,18 @@
             <type>java.lang.String</type>
          </deferred-value>
       </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
    </tag>
    <tag>
       <description/>
@@ -4851,6 +4983,434 @@
          <required>false</required>
          <deferred-value>
             <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+   </tag>
+   <tag>
+      <description/>
+      <name>script</name>
+      <tag-class>com.liferay.faces.alloy.taglib.AUIScriptTag</tag-class>
+      <body-content>JSP</body-content>
+      <attribute>
+         <name>cssClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>styleClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>columnWidth</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>cssClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>first</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>last</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>styleClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>bodyContent</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>centered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>close</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>constrain2view</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>destroyOnClose</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>draggable</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>height</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>modal</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>resizable</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>stack</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>title</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>width</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>cssClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>inlineLabel</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>label</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>styleClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>type</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>column</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>cssClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>label</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>styleClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>cssClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>styleClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>cssClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>styleClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>cssClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>styleClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>cssClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>styleClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>cssClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>styleClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+         <name>rendered</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
          </deferred-value>
       </attribute>
    </tag>
