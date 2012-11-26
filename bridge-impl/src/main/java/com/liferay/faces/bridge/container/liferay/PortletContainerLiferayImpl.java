@@ -128,7 +128,8 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 			}
 
 			// Determine whether or not the portlet was added via $theme.runtime(...)
-			Boolean renderPortletResource = (Boolean) portletRequest.getAttribute(BridgeConstants.RENDER_PORTLET_RESOURCE);
+			Boolean renderPortletResource = (Boolean) portletRequest.getAttribute(
+					BridgeConstants.RENDER_PORTLET_RESOURCE);
 			boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
 
 			// If this is a runtime portlet, then it is not possible to add resources to the head section since
@@ -225,13 +226,36 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 		Map<String, String[]> publicParameterMap = eventRequest.getPublicParameterMap();
 
 		if (publicParameterMap != null) {
+
+			Map<String, String[]> existingResponseRenderParameterMap = eventResponse.getRenderParameterMap();
+
 			Set<Entry<String, String[]>> entrySet = publicParameterMap.entrySet();
 
 			for (Map.Entry<String, String[]> mapEntry : entrySet) {
 				String key = mapEntry.getKey();
-				String[] values = mapEntry.getValue();
-				eventResponse.setRenderParameter(key, values);
-				logger.trace("Maintaining public render parameter name=[{0}] values=[{1}]", key, values);
+
+				boolean alreadyExists = false;
+
+				if (existingResponseRenderParameterMap != null) {
+					alreadyExists = existingResponseRenderParameterMap.containsKey(key);
+				}
+
+				if (alreadyExists) {
+
+					// FACES-1453: Avoid clobbering existing public render parameters set on the EventResponse.
+					if (logger.isTraceEnabled()) {
+						String[] existingValues = existingResponseRenderParameterMap.get(key);
+
+						logger.trace(
+							"Not maintaining public render parameter name=[{0}] values=[{1}] because it already exists",
+							key, existingValues);
+					}
+				}
+				else {
+					String[] values = mapEntry.getValue();
+					eventResponse.setRenderParameter(key, values);
+					logger.trace("Maintaining public render parameter name=[{0}] values=[{1}]", key, values);
+				}
 			}
 		}
 
