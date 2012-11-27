@@ -16,6 +16,9 @@ package com.liferay.faces.util.logging;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.LogRecord;
+
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -23,109 +26,121 @@ import java.util.List;
  */
 public class LoggerDefaultImpl implements Logger {
 
-	// Wrapped logger instance
-	private java.util.logging.Logger logger;
+	// Self-Injections
+	private LogRecordFactory logRecordFactory = new LogRecordFactory();
 
-	// Private Lazy-Initialized Data Memebers
+	// Private Data Members
+	private java.util.logging.Logger wrappedLogger;
 
 	public LoggerDefaultImpl() {
 	}
 
 	public LoggerDefaultImpl(String className) {
-		this.logger = java.util.logging.Logger.getLogger(className);
+		this.wrappedLogger = java.util.logging.Logger.getLogger(className);
 	}
 
 	public void debug(String message) {
-		debug(message, (Object[]) null);
+
+		if (isDebugEnabled()) {
+			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.FINE, message, null);
+			wrappedLogger.log(logRecord);
+		}
 	}
 
 	public void debug(String message, Object... arguments) {
 
 		if (isDebugEnabled()) {
 			Throwable throwable = getThrowable(arguments);
-
-			if (throwable == null) {
-				logger.log(java.util.logging.Level.FINE, formatMessage(message, arguments));
-			}
-			else {
-				logger.log(java.util.logging.Level.FINE, formatMessage(message, arguments), throwable);
-			}
+			String formattedMessage = formatMessage(message, arguments);
+			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.FINE, formattedMessage,
+					throwable);
+			wrappedLogger.log(logRecord);
 		}
+
 	}
 
 	public void error(Throwable throwable) {
-		error(throwable.getMessage(), throwable);
+
+		if (isErrorEnabled()) {
+			String message = throwable.getMessage();
+			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.SEVERE, message, throwable);
+			wrappedLogger.log(logRecord);
+		}
 	}
 
 	public void error(String message) {
-		error(message, (Object[]) null);
+
+		if (isErrorEnabled()) {
+			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.SEVERE, message, null);
+			wrappedLogger.log(logRecord);
+		}
 	}
 
 	public void error(String message, Object... arguments) {
 
 		if (isErrorEnabled()) {
 			Throwable throwable = getThrowable(arguments);
-
-			if (throwable == null) {
-				logger.log(java.util.logging.Level.SEVERE, formatMessage(message, arguments));
-			}
-			else {
-				logger.log(java.util.logging.Level.SEVERE, formatMessage(message, arguments), throwable);
-			}
+			String formattedMessage = formatMessage(message, arguments);
+			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.SEVERE, formattedMessage,
+					throwable);
+			wrappedLogger.log(logRecord);
 		}
 	}
 
 	public void info(String message) {
-		info(message, (Object[]) null);
+
+		if (isInfoEnabled()) {
+			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.INFO, message, null);
+			wrappedLogger.log(logRecord);
+		}
 	}
 
 	public void info(String message, Object... arguments) {
 
 		if (isInfoEnabled()) {
+			String formattedMessage = formatMessage(message, arguments);
 			Throwable throwable = getThrowable(arguments);
-
-			if (throwable == null) {
-				logger.log(java.util.logging.Level.INFO, formatMessage(message, arguments));
-			}
-			else {
-				logger.log(java.util.logging.Level.INFO, formatMessage(message, arguments), throwable);
-			}
+			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.INFO, formattedMessage,
+					throwable);
+			wrappedLogger.log(logRecord);
 		}
 	}
 
 	public void trace(String message) {
-		trace(message, (Object[]) null);
+
+		if (isTraceEnabled()) {
+			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.FINEST, message, null);
+			wrappedLogger.log(logRecord);
+		}
 	}
 
 	public void trace(String message, Object... arguments) {
 
 		if (isTraceEnabled()) {
+			String formattedMessage = formatMessage(message, arguments);
 			Throwable throwable = getThrowable(arguments);
-
-			if (throwable == null) {
-				logger.log(java.util.logging.Level.FINEST, formatMessage(message, arguments));
-			}
-			else {
-				logger.log(java.util.logging.Level.FINEST, formatMessage(message, arguments), throwable);
-			}
+			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.FINEST, formattedMessage,
+					throwable);
+			wrappedLogger.log(logRecord);
 		}
 	}
 
 	public void warn(String message) {
-		warn(message, (Object[]) null);
+
+		if (isWarnEnabled()) {
+			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.WARNING, message, null);
+			wrappedLogger.log(logRecord);
+		}
 	}
 
 	public void warn(String message, Object... arguments) {
 
 		if (isWarnEnabled()) {
 			Throwable throwable = getThrowable(arguments);
-
-			if (throwable == null) {
-				logger.log(java.util.logging.Level.WARNING, formatMessage(message, arguments));
-			}
-			else {
-				logger.log(java.util.logging.Level.WARNING, formatMessage(message, arguments), throwable);
-			}
+			String formattedMessage = formatMessage(message, arguments);
+			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.WARNING, formattedMessage,
+					throwable);
+			wrappedLogger.log(logRecord);
 		}
 	}
 
@@ -173,6 +188,12 @@ public class LoggerDefaultImpl implements Logger {
 			String formattedMessage = message;
 
 			try {
+
+				// MessageFormat requires single quote (apostrophe characters) to be escaped.
+				if (message.indexOf(StringPool.APOSTROPHE) >= 0) {
+					message = message.replaceAll(StringPool.APOSTROPHE, StringPool.DOUBLE_APOSTROPHE);
+				}
+
 				formattedMessage = MessageFormat.format(message, argumentList.toArray(new Object[] {}));
 			}
 			catch (IllegalArgumentException e) {
@@ -184,23 +205,23 @@ public class LoggerDefaultImpl implements Logger {
 	}
 
 	public boolean isDebugEnabled() {
-		return logger.isLoggable(java.util.logging.Level.FINE);
+		return wrappedLogger.isLoggable(java.util.logging.Level.FINE);
 	}
 
 	public boolean isErrorEnabled() {
-		return logger.isLoggable(java.util.logging.Level.SEVERE);
+		return wrappedLogger.isLoggable(java.util.logging.Level.SEVERE);
 	}
 
 	public boolean isInfoEnabled() {
-		return logger.isLoggable(java.util.logging.Level.INFO);
+		return wrappedLogger.isLoggable(java.util.logging.Level.INFO);
 	}
 
 	public boolean isTraceEnabled() {
-		return logger.isLoggable(java.util.logging.Level.FINEST);
+		return wrappedLogger.isLoggable(java.util.logging.Level.FINEST);
 	}
 
 	public boolean isWarnEnabled() {
-		return logger.isLoggable(java.util.logging.Level.WARNING);
+		return wrappedLogger.isLoggable(java.util.logging.Level.WARNING);
 	}
 
 	protected Throwable getThrowable(Object[] arguments) {
@@ -224,4 +245,30 @@ public class LoggerDefaultImpl implements Logger {
 		return throwable;
 	}
 
+	protected class LogRecordFactory {
+
+		public LogRecord getLogRecord(java.util.logging.Level level, String message, Throwable thrown) {
+
+			// Create a new LogRecord instance.
+			LogRecord logRecord = new LogRecord(level, message);
+
+			// Determine the source class name and source method name.
+			Throwable source = new Throwable();
+			StackTraceElement[] stackTraceElements = source.getStackTrace();
+			StackTraceElement callerStackTraceElement = stackTraceElements[2];
+
+			// Set the source class name and source method name.
+			logRecord.setSourceClassName(callerStackTraceElement.getClassName());
+			logRecord.setSourceMethodName(callerStackTraceElement.getMethodName());
+
+			// If specified, set the throwable associated with the log event.
+			if (thrown != null) {
+				logRecord.setThrown(thrown);
+			}
+
+			// Return the new LogRecord instance.
+			return logRecord;
+		}
+
+	}
 }
