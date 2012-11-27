@@ -25,8 +25,8 @@ public class LoggerLog4JImpl extends LoggerDefaultImpl {
 	// Private Constants
 	private static final String CALLING_CLASS_FQCN = LoggerLog4JImpl.class.getName();
 
-	// Private Lazy-Initialized Data Memebers
-	private org.apache.log4j.Logger logger;
+	// Private Data Members
+	private org.apache.log4j.Logger wrappedLogger;
 	private Boolean traceSupported;
 
 	public LoggerLog4JImpl(String className) {
@@ -53,11 +53,25 @@ public class LoggerLog4JImpl extends LoggerDefaultImpl {
 			// the Log4J logger and proceed. Otherwise, don't bother getting the logger, because it will
 			// cause undesirable error output.
 			if (!webappContextStopping) {
-				logger = LogManager.getLogger(className);
+				wrappedLogger = LogManager.getLogger(className);
 			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void debug(String message) {
+
+		if (isDebugEnabled()) {
+
+			try {
+				wrappedLogger.log(CALLING_CLASS_FQCN, Level.DEBUG, message, null);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -67,7 +81,38 @@ public class LoggerLog4JImpl extends LoggerDefaultImpl {
 		if (isDebugEnabled()) {
 
 			try {
-				logger.log(CALLING_CLASS_FQCN, Level.DEBUG, formatMessage(message, arguments), getThrowable(arguments));
+				String formattedMessage = formatMessage(message, arguments);
+				Throwable throwable = getThrowable(arguments);
+				wrappedLogger.log(CALLING_CLASS_FQCN, Level.DEBUG, formattedMessage, throwable);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void error(Throwable throwable) {
+
+		if (isErrorEnabled()) {
+
+			try {
+				String message = throwable.getMessage();
+				wrappedLogger.log(CALLING_CLASS_FQCN, Level.ERROR, message, throwable);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void error(String message) {
+
+		if (isErrorEnabled()) {
+
+			try {
+				wrappedLogger.log(CALLING_CLASS_FQCN, Level.ERROR, message, null);
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -81,7 +126,23 @@ public class LoggerLog4JImpl extends LoggerDefaultImpl {
 		if (isErrorEnabled()) {
 
 			try {
-				logger.log(CALLING_CLASS_FQCN, Level.ERROR, formatMessage(message, arguments), getThrowable(arguments));
+				String formattedMessage = formatMessage(message, arguments);
+				Throwable throwable = getThrowable(arguments);
+				wrappedLogger.log(CALLING_CLASS_FQCN, Level.ERROR, formattedMessage, throwable);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void info(String message) {
+
+		if (isInfoEnabled()) {
+
+			try {
+				wrappedLogger.log(CALLING_CLASS_FQCN, Level.INFO, message, null);
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -95,11 +156,35 @@ public class LoggerLog4JImpl extends LoggerDefaultImpl {
 		if (isInfoEnabled()) {
 
 			try {
-				logger.log(CALLING_CLASS_FQCN, Level.INFO, formatMessage(message, arguments), getThrowable(arguments));
+				String formattedMessage = formatMessage(message, arguments);
+				Throwable throwable = getThrowable(arguments);
+				wrappedLogger.log(CALLING_CLASS_FQCN, Level.INFO, formattedMessage, throwable);
 			}
 			catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	@Override
+	public void trace(String message) {
+
+		if (isTraceSupported()) {
+
+			if (isTraceEnabled()) {
+
+				try {
+					wrappedLogger.log(CALLING_CLASS_FQCN, Level.TRACE, message, null);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		else {
+
+			// Attempt debug if trace is not supported
+			debug(message);
 		}
 	}
 
@@ -111,8 +196,9 @@ public class LoggerLog4JImpl extends LoggerDefaultImpl {
 			if (isTraceEnabled()) {
 
 				try {
-					logger.log(CALLING_CLASS_FQCN, Level.TRACE, formatMessage(message, arguments),
-						getThrowable(arguments));
+					String formattedMessage = formatMessage(message, arguments);
+					Throwable throwable = getThrowable(arguments);
+					wrappedLogger.log(CALLING_CLASS_FQCN, Level.TRACE, formattedMessage, throwable);
 				}
 				catch (Exception e) {
 					e.printStackTrace();
@@ -127,12 +213,28 @@ public class LoggerLog4JImpl extends LoggerDefaultImpl {
 	}
 
 	@Override
+	public void warn(String message) {
+
+		if (isWarnEnabled()) {
+
+			try {
+				wrappedLogger.log(CALLING_CLASS_FQCN, Level.WARN, message, null);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
 	public void warn(String message, Object... arguments) {
 
 		if (isWarnEnabled()) {
 
 			try {
-				logger.log(CALLING_CLASS_FQCN, Level.WARN, formatMessage(message, arguments), getThrowable(arguments));
+				String formattedMessage = formatMessage(message, arguments);
+				Throwable throwable = getThrowable(arguments);
+				wrappedLogger.log(CALLING_CLASS_FQCN, Level.WARN, formattedMessage, throwable);
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -142,27 +244,27 @@ public class LoggerLog4JImpl extends LoggerDefaultImpl {
 
 	@Override
 	public boolean isDebugEnabled() {
-		return logger.isDebugEnabled();
+		return wrappedLogger.isDebugEnabled();
 	}
 
 	@Override
 	public boolean isErrorEnabled() {
-		return logger.isEnabledFor(Level.ERROR);
+		return wrappedLogger.isEnabledFor(Level.ERROR);
 	}
 
 	@Override
 	public boolean isInfoEnabled() {
-		return logger.isInfoEnabled();
+		return wrappedLogger.isInfoEnabled();
 	}
 
 	@Override
 	public boolean isTraceEnabled() {
-		return logger.isTraceEnabled();
+		return wrappedLogger.isTraceEnabled();
 	}
 
 	@Override
 	public boolean isWarnEnabled() {
-		return logger.isEnabledFor(Level.WARN);
+		return wrappedLogger.isEnabledFor(Level.WARN);
 	}
 
 	protected boolean isTraceSupported() {
