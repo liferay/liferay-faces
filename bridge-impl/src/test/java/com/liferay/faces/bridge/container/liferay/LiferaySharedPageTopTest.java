@@ -20,8 +20,6 @@ import org.junit.Test;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-import com.liferay.portal.kernel.util.StringBundler;
-
 import junit.framework.Assert;
 
 
