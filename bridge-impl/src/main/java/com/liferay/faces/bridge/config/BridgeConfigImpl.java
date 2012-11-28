@@ -181,7 +181,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 						// ignore
 					}
 					catch (Exception e) {
-						logger.error(e.getMessage());
+						logger.error(e);
 					}
 
 					// If the name is not set, then the <name> element was omitted. In JSF 2.x the <name> element is
@@ -208,6 +208,13 @@ public class BridgeConfigImpl implements BridgeConfig {
 					}
 
 					facesConfigName = null;
+
+					try {
+						inputStream.close();
+					}
+					catch (IOException e) {
+						logger.error(e);
+					}
 				}
 
 				for (FacesConfig facesConfig : facesConfigList) {
@@ -220,11 +227,23 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 					try {
 						saxParser.parse(inputStream, facesConfigPostHandler);
+					}
+					catch (Exception e) {
+						logger.error(e);
+					}
+
+					try {
 						inputStream.close();
+					}
+					catch (Exception e) {
+						logger.error(e);
+					}
+
+					try {
 						saxParser.reset();
 					}
 					catch (Exception e) {
-						logger.error(e.getMessage());
+						logger.error(e);
 					}
 				}
 			}
