@@ -84,7 +84,7 @@ public class FieldSetRenderer extends Renderer {
 			// <span> inside the <legend>
 			responseWriter.startElement("span", uiComponent);
 			responseWriter.writeAttribute("class", "aui-legend", null);
-			responseWriter.write(label);
+			responseWriter.writeText(label, uiComponent, "label");
 			responseWriter.endElement("span");
 			responseWriter.endElement("legend");
 		}
