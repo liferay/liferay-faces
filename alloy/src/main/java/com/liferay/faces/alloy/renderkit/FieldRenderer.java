@@ -95,7 +95,7 @@ public class FieldRenderer extends Renderer {
 			String label = (String) attributes.get("label");
 
 			if (label != null) {
-				responseWriter.write(label);
+				responseWriter.writeText(label, uiComponent, "label");
 			}
 
 			responseWriter.endElement("label");
@@ -139,7 +139,7 @@ public class FieldRenderer extends Renderer {
 			String label = (String) attributes.get("label");
 
 			if (label != null) {
-				responseWriter.write(label);
+				responseWriter.writeText(label, uiComponent, "label");
 			}
 
 			responseWriter.endElement("label");
