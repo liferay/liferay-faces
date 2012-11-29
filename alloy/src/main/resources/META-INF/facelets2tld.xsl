@@ -28,7 +28,7 @@
 				</xsl:otherwise>
 			</xsl:choose>
 			<body-content>JSP</body-content>
-			<xsl:apply-templates select="/facelet-taglib/tag/attribute"/>
+			<xsl:apply-templates select="attribute"/>
 		</tag>
 	</xsl:template>
 	<xsl:template match="/facelet-taglib/tag/attribute">
