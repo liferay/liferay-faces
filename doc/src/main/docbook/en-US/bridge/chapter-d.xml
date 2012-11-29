@@ -253,4 +253,26 @@
 		<para>Alternatively, the com.liferay.faces.bridge.resourceBufferSize value can be specified on a portlet-by-portlet
 			basis in the WEB-INF/portlet.xml descriptor.</para>
 	</sect1>
+	<sect1>
+		<title>Distincted Request Scoped Managed Beans</title>
+		<para>Liferay Portal provides the ability for developers to specify whether or not request attributes are shared
+		among portlets by specifying the private-request-attributes option in the WEB-INF/liferay-portlet.xml descriptor.
+		The default value of this option is true, meaning that request attributes are NOT shared among portlets. However,
+		this non-shared feature only works for request attributes that are present in the request map and have a non-null
+		value. This can cause a problem for JSF managed-beans in request scope. Specifically, the problem arises when
+		a portal page has two (or more) portlets that each have a request scope managed bean with the same name. For
+		example, if Portlet X and Portlet Y each have a class named BackingBean annotated with @RequestScoped @ManagedBean,
+		then when the JSF runtime is asked to resolve an EL-expression "#{backingBean}", there is no guarantee that the
+		correct instance will be resolved. In order to solve this problem, Liferay Faces Bridge provides the a configuration
+		option that causes request scoped managed beans to be distinct for each portlet.</para>
+		<example>
+			<title>Specifying distinct request scoped managed beans via the WEB-INF/web.xml descriptor</title>
+			<programlisting>&lt;!-- The default value of the following -->
+&lt;!-- context-param is false. -->
+&lt;context-param>
+	&lt;param-name>com.liferay.faces.bridge.distinctRequestScopedManagedBeans&lt;/param-name>
+	&lt;param-value>true&lt;/param-value>
+&lt;/context-param></programlisting>
+		</example>
+	</sect1>
 </chapter>
