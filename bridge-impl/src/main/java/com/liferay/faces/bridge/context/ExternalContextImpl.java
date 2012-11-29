@@ -65,6 +65,8 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 	private static final Logger logger = LoggerFactory.getLogger(ExternalContextImpl.class);
 
 	// Private Constants
+	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
+		.isDetected();
 	private static final boolean RICHFACES_DETECTED = ProductMap.getInstance().get(ProductConstants.RICHFACES)
 		.isDetected();
 	private static final String ORG_RICHFACES_EXTENSION = "org.richfaces.extension";
@@ -205,8 +207,19 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 		// Initialize the application map.
 		applicationMap = new ApplicationMap(portletContext, preferPreDestroy);
 
+		// Determines whether or not JSF @ManagedBean classes annotated with @RequestScoped should be distinct for
+		// each portlet when running under Liferay Portal.
+		boolean distinctRequestScopedManagedBeans = false;
+
+		if (LIFERAY_PORTAL_DETECTED) {
+			distinctRequestScopedManagedBeans = BooleanHelper.toBoolean(getInitParameter(
+						BridgeConfigConstants.PARAM_DISTINCT_REQUEST_SCOPED_MANAGED_BEANS), false);
+		}
+
 		// Initialize the request attribute map.
-		requestAttributeMap = new RequestAttributeMap(portletRequest, preferPreDestroy);
+		requestAttributeMap = new RequestAttributeMap(portletRequest,
+				bridgeContext.getPortletContainer().getResponseNamespace(), preferPreDestroy,
+				distinctRequestScopedManagedBeans);
 
 		// Initialize the session map.
 		sessionMap = new SessionMap(portletRequest.getPortletSession(), PortletSession.PORTLET_SCOPE, preferPreDestroy);

@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.context.map;
 
+import java.lang.annotation.Annotation;
 import java.util.Enumeration;
 
 import javax.faces.context.ExternalContext;
@@ -32,7 +33,9 @@ import com.liferay.faces.util.product.ProductMap;
  */
 public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 
+	// Private Constants
 	private static final boolean FACES_1233_WORKAROUND_ENABLED;
+	private static final String REQUEST_SCOPED_FQCN = "javax.faces.bean.RequestScoped";
 
 	static {
 
@@ -43,12 +46,17 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 	}
 
 	// Private Data Members
+	private boolean distinctRequestScopedManagedBeans;
+	private String namespace;
 	private PortletRequest portletRequest;
 	private boolean preferPreDestroy;
 
-	public RequestAttributeMap(PortletRequest portletRequest, boolean preferPreDestroy) {
+	public RequestAttributeMap(PortletRequest portletRequest, String namespace, boolean preferPreDestroy,
+		boolean distinctRequestScopedManagedBeans) {
 		this.portletRequest = portletRequest;
+		this.namespace = namespace;
 		this.preferPreDestroy = preferPreDestroy;
+		this.distinctRequestScopedManagedBeans = distinctRequestScopedManagedBeans;
 	}
 
 	/**
@@ -83,7 +91,49 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 			return null;
 		}
 		else {
-			return portletRequest.getAttribute(name);
+			Object attributeValue = portletRequest.getAttribute(name);
+
+			// FACES-1446: Strictly enforce Liferay Portal's private-request-attribute feature so that each portlet
+			// will have its own managed-bean instance.
+			if (distinctRequestScopedManagedBeans) {
+
+				if (attributeValue != null) {
+
+					boolean requestScopedBean = false;
+					Annotation[] annotations = attributeValue.getClass().getAnnotations();
+
+					if (annotations != null) {
+
+						for (Annotation annotation : annotations) {
+
+							if (annotation.annotationType().getName().equals(REQUEST_SCOPED_FQCN)) {
+								requestScopedBean = true;
+
+								break;
+							}
+						}
+					}
+
+					if (requestScopedBean) {
+
+						// If the private-request-attribute feature is enabled in WEB-INF/liferay-portlet.xml, then the
+						// NamespaceServletRequest.getAttribute(String) method first tries to get the attribute value by
+						// prepending the portlet namespace. If the value is null, then it attempts to get it WITHOUT
+						// the prepending the portlet namespace. But that causes a problem for @RequestScoped
+						// managed-beans if the same name is used in a different portlet. In the case that the JSF
+						// runtime is trying to resolve an EL-expression like "#{backingBean}", then this method must
+						// return null if the bean has not yet been created (for this portlet) by the JSF managed-bean
+						// facility.
+						Object namespacedAttributeValue = portletRequest.getAttribute(namespace + name);
+
+						if (namespacedAttributeValue != attributeValue) {
+							attributeValue = null;
+						}
+					}
+				}
+			}
+
+			return attributeValue;
 		}
 	}
 
