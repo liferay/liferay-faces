@@ -25,6 +25,7 @@ import java.util.TimeZone;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
@@ -133,6 +134,12 @@ public abstract class PortalWrapper implements Portal {
 
 	public void initCustomSQL() {
 		getWrapped().initCustomSQL();
+	}
+
+	@Override
+	public void invokeTaglibDiscussion(PortletConfig portletConfig, ActionRequest actionRequest,
+		ActionResponse actionResponse) throws Exception {
+		getWrapped().invokeTaglibDiscussion(portletConfig, actionRequest, actionResponse);
 	}
 
 	public void removePortalPortEventListener(PortalPortEventListener portalPortEventListener) {
@@ -522,6 +529,12 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getGroupFriendlyURL(group, privateLayoutSet, themeDisplay);
 	}
 
+	@Override
+	public String getGroupFriendlyURL(Group group, boolean privateLayoutSet, ThemeDisplay themeDisplay, Locale locale)
+		throws PortalException, SystemException {
+		return getWrapped().getGroupFriendlyURL(group, privateLayoutSet, themeDisplay, locale);
+	}
+
 	public String[] getGroupPermissions(HttpServletRequest request) {
 		return getWrapped().getGroupPermissions(request);
 	}
@@ -530,12 +543,32 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getGroupPermissions(portletRequest);
 	}
 
+	@Override
+	public String[] getGroupPermissions(HttpServletRequest request, String className) {
+		return getWrapped().getGroupPermissions(request, className);
+	}
+
+	@Override
+	public String[] getGroupPermissions(PortletRequest portletRequest, String className) {
+		return getWrapped().getGroupPermissions(portletRequest, className);
+	}
+
 	public String[] getGuestPermissions(HttpServletRequest request) {
 		return getWrapped().getGuestPermissions(request);
 	}
 
 	public String[] getGuestPermissions(PortletRequest portletRequest) {
 		return getWrapped().getGuestPermissions(portletRequest);
+	}
+
+	@Override
+	public String[] getGuestPermissions(HttpServletRequest request, String className) {
+		return getWrapped().getGuestPermissions(request, className);
+	}
+
+	@Override
+	public String[] getGuestPermissions(PortletRequest portletRequest, String className) {
+		return getWrapped().getGuestPermissions(portletRequest, className);
 	}
 
 	public String getHomeURL(HttpServletRequest request) throws PortalException, SystemException {
@@ -565,6 +598,11 @@ public abstract class PortalWrapper implements Portal {
 
 	public String getJsSafePortletId(String portletId) {
 		return getWrapped().getJsSafePortletId(portletId);
+	}
+
+	@Override
+	public boolean isGroupFriendlyURL(String fullURL, String groupFriendlyURL, String layoutFriendlyURL) {
+		return getWrapped().isGroupFriendlyURL(fullURL, groupFriendlyURL, layoutFriendlyURL);
 	}
 
 	public String getLayoutActualURL(Layout layout) {
