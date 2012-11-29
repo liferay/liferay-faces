@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
-	version="2.0">
+   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd" version="2.0">
+	<description>Liferay Faces Alloy Facelet component tags.</description>
 	<namespace>http://liferay.com/faces/aui</namespace>
 	<function>
 		<function-name>escapeClientId</function-name>
@@ -10,68 +10,82 @@
 		<function-signature>java.lang.String escapeClientId(java.lang.String)</function-signature>
 	</function>
 	<tag>
-		<description>The button-row component.</description>
+		<description>Renders a span element with CSS class name &quot;aui-button-holder&quot; that will be positioned by Alloy UI CSS.&lt;br/&gt;&lt;br/&gt;Since: 3.2.0/3.1.0/3.0.0/2.1.0</description>
 		<tag-name>button-row</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIButtonRow</component-type>
 		</component>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
+			<display-name></display-name>
+			<icon></icon>
 			<name>cssClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The identifier of the component.</description>
 			<name>id</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
 			<name>rendered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute.</description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
+		<description>Renders a div element with CSS class name &quot;aui-column&quot; that will be positioned by Alloy UI CSS.</description>
 		<tag-name>column</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIColumn</component-type>
 		</component>
 		<attribute>
+			<description>The width of the column.</description>
 			<name>columnWidth</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
 			<name>cssClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this is the first column. The default value is &lt;code&gt;false&lt;/code&gt;.</description>
 			<name>first</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>The identifier of the component.</description>
 			<name>id</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this is the last column. The default value is &lt;code&gt;false&lt;/code&gt;.</description>
 			<name>last</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
 			<name>rendered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute.</description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -118,6 +132,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The identifier of the component.</description>
 			<name>id</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -128,6 +143,7 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
 			<name>rendered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
@@ -160,223 +176,267 @@
 		</converter>
 	</tag>
 	<tag>
+		<description>Renders a span element with CSS class name &quot;aui-field&quot; that will be positioned by Alloy UI CSS.</description>
 		<tag-name>field</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIField</component-type>
 		</component>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
 			<name>cssClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The identifier of the component.</description>
 			<name>id</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The position of the label. Valid values are: &lt;code&gt;left&lt;/code&gt;, &lt;code&gt;right&lt;/code&gt;.</description>
 			<name>inlineLabel</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The text value for the rendered label.</description>
 			<name>label</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
 			<name>rendered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute.</description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The type of field. Valid values are: &lt;code&gt;checkbox&lt;/code&gt;, &lt;code&gt;boolean&lt;/code&gt;, &lt;code&gt;menu&lt;/code&gt;, &lt;code&gt;select&lt;/code&gt;.</description>
 			<name>type</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
+		<description>Renders a fieldset element with CSS class name &quot;aui-fieldset&quot; that will be positioned by Alloy UI CSS.</description>
 		<tag-name>fieldset</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIFieldSet</component-type>
 		</component>
 		<attribute>
+			<description>Boolean flag indicating whether or not this is a column. The default value is &lt;code&gt;false&lt;/code&gt;.</description>
 			<name>column</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
 			<name>cssClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The identifier of the component.</description>
 			<name>id</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The text value for the rendered label.</description>
 			<name>label</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
 			<name>rendered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute.</description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
+		<description>Renders a form element with CSS class name &quot;aui-form&quot; that will be positioned by Alloy UI CSS.</description>
 		<tag-name>form</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIForm</component-type>
 		</component>
 		<attribute>
+			<description>The identifier of the component.</description>
 			<name>id</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
 			<name>rendered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 	</tag>
 	<tag>
+		<description>Renders a div element with CSS class name &quot;aui-layout&quot; that will be positioned by Alloy UI CSS.</description>
 		<tag-name>layout</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUILayout</component-type>
 		</component>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
 			<name>cssClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The identifier of the component.</description>
 			<name>id</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
 			<name>rendered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute.</description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
+		<description>Renders a ul element with CSS class name &quot;aui-list&quot; that will be positioned by Alloy UI CSS.</description>
 		<tag-name>list</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIList</component-type>
 		</component>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
 			<name>cssClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The identifier of the component.</description>
 			<name>id</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
 			<name>rendered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute.</description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
+		<description>Renders an li element with CSS class name &quot;aui-listitem&quot; that will be positioned by Alloy UI CSS.</description>
 		<tag-name>list-item</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIListItem</component-type>
 		</component>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
 			<name>cssClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The identifier of the component.</description>
 			<name>id</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
 			<name>rendered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute.</description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
+		<description>Renders a div element with CSS class name &quot;aui-textboxlist&quot; that will be positioned by Alloy UI CSS.</description>
 		<tag-name>text-box-list</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUITextBoxList</component-type>
 		</component>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
 			<name>cssClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The identifier of the component.</description>
 			<name>id</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the
+							RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
 			<name>rendered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute.</description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
+		<description>Renders an li element with CSS class name &quot;aui-textboxlistentry&quot; that will be positioned by Alloy UI CSS.</description>
 		<tag-name>text-box-list-item</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUITextBoxListItem</component-type>
 		</component>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
 			<name>cssClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The identifier of the component.</description>
 			<name>id</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
 			<name>rendered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute.</description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
