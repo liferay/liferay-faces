@@ -25,6 +25,13 @@ import com.liferay.faces.bridge.context.BridgeContext;
 public class BridgeConfigConstants {
 
 	/**
+	 * Boolean indicating whether or not the bridge should manage BridgeRequestScope during the RESOURCE_PHASE of the
+	 * portlet lifecycle.
+	 */
+	public static final String PARAM_BRIDGE_REQUEST_SCOPE_AJAX_ENABLED =
+		"com.liferay.faces.bridge.bridgeRequestScopeAjaxEnabled";
+
+	/**
 	 * Boolean indicating whether or not the portlet container has the ability to set the HTTP status code for
 	 * resources. Default value is false.
 	 */
@@ -33,8 +40,12 @@ public class BridgeConfigConstants {
 	public static String PARAM_CONTAINER_ABLE_TO_SET_HTTP_STATUS_CODE2 =
 		"org.portletfaces.bridge.containerAbleToSetHttpStatusCode";
 
-	/** Boolean indicating whether or not the bridge should manage BridgeRequestScope during the RESOURCE_PHASE of the portlet lifecycle. */
-	public static final String PARAM_BRIDGE_REQUEST_SCOPE_AJAX_ENABLED = "com.liferay.faces.bridge.bridgeRequestScopeAjaxEnabled";
+	/**
+	 * Boolean indicating whether or not JSF {@link javax.faces.bean.ManagedBean} classes annotated with {@link
+	 * javax.faces.bean.RequestScoped} should be distinct for each portlet. Default value is false.
+	 */
+	public static String PARAM_DISTINCT_REQUEST_SCOPED_MANAGED_BEANS =
+		"com.liferay.faces.bridge.distinctRequestScopedManagedBeans";
 
 	/** Value returned by {@link BridgeContext#isBridgeRequestScopePreserved()}. Default is true. */
 	public static final String PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED1 =
