@@ -354,10 +354,12 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 										fileName);
 								}
 								else {
-									Exception e = new IOException(
-											"Failed to copy the stream of file data to a temporary file");
-									UploadedFile uploadedFile = uploadedFileFactory.getUploadedFile(e);
-									addUploadedFile(fieldName, uploadedFile);
+									if ((fileName != null) && (fileName.trim().length() > 0)) {
+										Exception e = new IOException(
+												"Failed to copy the stream of uploaded file=[" + fileName + "] to a temporary file (possibly a zero-length uploaded file)");
+										UploadedFile uploadedFile = uploadedFileFactory.getUploadedFile(e);
+										addUploadedFile(fieldName, uploadedFile);
+									}
 								}
 							}
 						}
