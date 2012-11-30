@@ -27,12 +27,12 @@ import javax.portlet.PortletSession;
 
 import org.richfaces.event.FileUploadEvent;
 
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.demos.dto.City;
 import com.liferay.faces.demos.dto.UploadedFileWrapper;
 import com.liferay.faces.demos.util.FacesMessageUtil;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -94,9 +94,17 @@ public class ApplicantBackingBean implements Serializable {
 		String uniqueFolderName = portletSession.getId();
 		org.richfaces.model.UploadedFile uploadedFile = fileUploadEvent.getUploadedFile();
 		UploadedFileWrapper uploadedFileWrapper = new UploadedFileWrapper(uploadedFile, uniqueFolderName);
-		uploadedFiles.add(uploadedFileWrapper);
-		logger.debug("Received fileName=[{0}] absolutePath=[{1}]", uploadedFileWrapper.getName(),
-			uploadedFileWrapper.getAbsolutePath());
+
+		if (uploadedFileWrapper.getStatus() == UploadedFile.Status.FILE_SAVED) {
+			uploadedFiles.add(uploadedFileWrapper);
+			logger.debug("Received fileName=[{0}] absolutePath=[{1}]", uploadedFileWrapper.getName(),
+				uploadedFileWrapper.getAbsolutePath());
+		}
+		else {
+			logger.error("Uploaded file status=[" + uploadedFileWrapper.getStatus().toString() + "] " +
+				uploadedFileWrapper.getMessage());
+			FacesMessageUtil.addGlobalUnexpectedErrorMessage(FacesContext.getCurrentInstance());
+		}
 	}
 
 	public void postalCodeListener(ValueChangeEvent valueChangeEvent) {

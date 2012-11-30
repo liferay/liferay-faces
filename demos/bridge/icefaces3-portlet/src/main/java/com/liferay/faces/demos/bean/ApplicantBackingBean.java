@@ -121,6 +121,10 @@ public class ApplicantBackingBean implements Serializable {
 						uploadedFiles.add(uploadedFile);
 					}
 				}
+				else {
+					logger.error("Uploaded file status=[" + uploadedFile.getStatus().toString() + "] " + uploadedFile.getMessage());
+					FacesMessageUtil.addGlobalUnexpectedErrorMessage(FacesContext.getCurrentInstance());
+				}
 			}
 		}
 		catch (Exception e) {

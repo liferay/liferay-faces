@@ -25,11 +25,11 @@ import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
 import com.liferay.faces.bridge.component.HtmlInputFile;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.demos.dto.City;
 import com.liferay.faces.demos.util.FacesMessageUtil;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -67,7 +67,8 @@ public class ApplicantBackingBean implements Serializable {
 
 	public void deleteUploadedFile(ActionEvent actionEvent) {
 
-		String fileId = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("fileId");
+		String fileId = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(
+				"fileId");
 
 		try {
 			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
@@ -167,27 +168,26 @@ public class ApplicantBackingBean implements Serializable {
 	@SuppressWarnings("deprecation")
 	public void uploadAttachments(ActionEvent actionEvent) {
 
-		List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
+		List<UploadedFile> uploadedFileList = applicantModelBean.getUploadedFiles();
 
-		UploadedFile uploadedFile1 = attachment1.getUploadedFile();
+		UploadedFile[] uploadedFiles = new UploadedFile[] {
+				attachment1.getUploadedFile(), attachment2.getUploadedFile(), attachment3.getUploadedFile()
+			};
 
-		if (uploadedFile1 != null) {
-			uploadedFiles.add(uploadedFile1);
-			logger.debug("uploadedFile1=[{0}]", uploadedFile1.getName());
-		}
+		for (UploadedFile uploadedFile : uploadedFiles) {
 
-		UploadedFile uploadedFile2 = attachment2.getUploadedFile();
+			if (uploadedFile != null) {
 
-		if (uploadedFile2 != null) {
-			uploadedFiles.add(uploadedFile2);
-			logger.debug("uploadedFile2=[{0}]", uploadedFile2.getName());
-		}
-
-		UploadedFile uploadedFile3 = attachment3.getUploadedFile();
-
-		if (uploadedFile3 != null) {
-			uploadedFiles.add(uploadedFile3);
-			logger.debug("uploadedFile3=[{0}]", uploadedFile3.getName());
+				if (uploadedFile.getStatus() == UploadedFile.Status.FILE_SAVED) {
+					uploadedFileList.add(uploadedFile);
+					logger.debug("uploadedFile=[{0}]", uploadedFile.getName());
+				}
+				else {
+					logger.error("Uploaded file status=[" + uploadedFile.getStatus().toString() + "] " +
+						uploadedFile.getMessage());
+					FacesMessageUtil.addGlobalUnexpectedErrorMessage(FacesContext.getCurrentInstance());
+				}
+			}
 		}
 
 		fileUploaderRendered = false;
