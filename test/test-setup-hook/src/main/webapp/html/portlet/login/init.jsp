@@ -16,9 +16,15 @@
 
 <%--
 /**
- * This is a dummy file that exists in order to eliminate an Eclipse JSP validation error in the
+ * This is a dummy file that exists in order to eliminate Eclipse JSP validation errors in the
  * src/main/webapp/META-INF/custom-jsp/html/portlet/login/login.jsp file.
  */
 --%>
 
 <%@ page import="com.liferay.portal.theme.ThemeDisplay" %>
+
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
+<%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
