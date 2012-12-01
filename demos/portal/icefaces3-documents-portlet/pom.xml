@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.faces.demos</groupId>
 		<artifactId>liferay-faces-portal-demos</artifactId>
-		<version>3.1.1-ga2</version>
+		<version>3.1.2-ga3-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>icefaces3-documents-portlet</artifactId>
