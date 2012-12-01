@@ -21,6 +21,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.faces.context.FacesContext;
@@ -263,8 +264,82 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 		return value;
 	}
 
+	/**
+	 * FACES-1453: Since {@link EventResponse#setRenderParameters(EventRequest)} would end up clobbering existing
+	 * public/private render parameters, it is necessary to iterate through all of them and only maintain the ones that
+	 * don't already exist in {@link EventResponse#getRenderParameterMap()}.
+	 */
 	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse) {
-		eventResponse.setRenderParameters(eventRequest);
+
+		Map<String, String[]> existingResponseRenderParameterMap = eventResponse.getRenderParameterMap();
+
+		// Maintain the public render parameters.
+		Map<String, String[]> publicParameterMap = eventRequest.getPublicParameterMap();
+
+		if (publicParameterMap != null) {
+
+			Set<Entry<String, String[]>> entrySet = publicParameterMap.entrySet();
+
+			for (Map.Entry<String, String[]> mapEntry : entrySet) {
+				String key = mapEntry.getKey();
+
+				boolean alreadyExists = false;
+
+				if (existingResponseRenderParameterMap != null) {
+					alreadyExists = existingResponseRenderParameterMap.containsKey(key);
+				}
+
+				if (alreadyExists) {
+
+					// FACES-1453: Avoid clobbering existing public render parameters set on the EventResponse.
+					if (logger.isTraceEnabled()) {
+						String[] existingValues = existingResponseRenderParameterMap.get(key);
+
+						logger.trace(
+							"Not maintaining public render parameter name=[{0}] values=[{1}] because it already exists",
+							key, existingValues);
+					}
+				}
+				else {
+					String[] values = mapEntry.getValue();
+					eventResponse.setRenderParameter(key, values);
+					logger.trace("Maintaining public render parameter name=[{0}] values=[{1}]", key, values);
+				}
+			}
+		}
+
+		// Maintain the private render parameters.
+		Map<String, String[]> privateParameterMap = eventRequest.getPrivateParameterMap();
+
+		if (privateParameterMap != null) {
+			Set<Entry<String, String[]>> entrySet = privateParameterMap.entrySet();
+
+			for (Map.Entry<String, String[]> mapEntry : entrySet) {
+				String key = mapEntry.getKey();
+				boolean alreadyExists = false;
+
+				if (existingResponseRenderParameterMap != null) {
+					alreadyExists = existingResponseRenderParameterMap.containsKey(key);
+				}
+
+				if (alreadyExists) {
+
+					// FACES-1453: Avoid clobbering existing private render parameters set on the EventResponse.
+					if (logger.isTraceEnabled()) {
+						String[] existingValues = existingResponseRenderParameterMap.get(key);
+
+						logger.trace(
+							"Not maintaining private render parameter name=[{0}] values=[{1}] because it already exists",
+							key, existingValues);
+					}
+				}
+				else {
+					String[] values = mapEntry.getValue();
+					eventResponse.setRenderParameter(key, values);
+					logger.trace("Maintaining private render parameter name=[{0}] values=[{1}]", key, values);
+				}
+			}
+		}
 	}
 
 	public void redirect(String url) throws IOException {
