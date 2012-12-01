@@ -19,12 +19,9 @@ import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.portlet.ActionResponse;
-import javax.portlet.EventRequest;
-import javax.portlet.EventResponse;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
@@ -214,63 +211,6 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 		}
 
 		return value;
-	}
-
-	/**
-	 * The Liferay {@link EventResponseImpl#setRenderParameters(EventRequest)} method is unimplemented. This method
-	 * provides an opportunity to work-around that limitation.
-	 */
-	@Override
-	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse) {
-
-		Map<String, String[]> publicParameterMap = eventRequest.getPublicParameterMap();
-
-		if (publicParameterMap != null) {
-
-			Map<String, String[]> existingResponseRenderParameterMap = eventResponse.getRenderParameterMap();
-
-			Set<Entry<String, String[]>> entrySet = publicParameterMap.entrySet();
-
-			for (Map.Entry<String, String[]> mapEntry : entrySet) {
-				String key = mapEntry.getKey();
-
-				boolean alreadyExists = false;
-
-				if (existingResponseRenderParameterMap != null) {
-					alreadyExists = existingResponseRenderParameterMap.containsKey(key);
-				}
-
-				if (alreadyExists) {
-
-					// FACES-1453: Avoid clobbering existing public render parameters set on the EventResponse.
-					if (logger.isTraceEnabled()) {
-						String[] existingValues = existingResponseRenderParameterMap.get(key);
-
-						logger.trace(
-							"Not maintaining public render parameter name=[{0}] values=[{1}] because it already exists",
-							key, existingValues);
-					}
-				}
-				else {
-					String[] values = mapEntry.getValue();
-					eventResponse.setRenderParameter(key, values);
-					logger.trace("Maintaining public render parameter name=[{0}] values=[{1}]", key, values);
-				}
-			}
-		}
-
-		Map<String, String[]> privateParameterMap = eventRequest.getPrivateParameterMap();
-
-		if (privateParameterMap != null) {
-			Set<Entry<String, String[]>> entrySet = privateParameterMap.entrySet();
-
-			for (Map.Entry<String, String[]> mapEntry : entrySet) {
-				String key = mapEntry.getKey();
-				String[] values = mapEntry.getValue();
-				eventResponse.setRenderParameter(key, values);
-				logger.trace("Maintaining private render parameter name=[{0}] values=[{1}]", key, values);
-			}
-		}
 	}
 
 	@Override
