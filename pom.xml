@@ -10,7 +10,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.liferay.faces</groupId>
 	<artifactId>liferay-faces</artifactId>
-	<version>3.0.1-legacy-ga2-SNAPSHOT</version>
+	<version>3.0.1-legacy-ga2</version>
 	<packaging>pom</packaging>
 	<name>Liferay Faces Parent</name>
 	<description>Parent POM for all Liferay Faces projects</description>
@@ -219,7 +219,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 								<pluginExecution>
