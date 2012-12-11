@@ -31,6 +31,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.FacesEvent;
 import javax.faces.render.Renderer;
+import javax.faces.render.RendererWrapper;
 
 import org.apache.commons.fileupload.FileItem;
 
@@ -40,7 +41,6 @@ import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.render.RendererWrapper;
 
 
 /**

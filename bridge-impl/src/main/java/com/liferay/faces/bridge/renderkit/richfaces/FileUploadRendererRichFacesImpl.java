@@ -29,12 +29,12 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.FacesEvent;
 import javax.faces.render.Renderer;
+import javax.faces.render.RendererWrapper;
 
 import com.liferay.faces.bridge.context.map.RequestParameterMap;
+import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.render.RendererWrapper;
-import com.liferay.faces.bridge.model.UploadedFile;
 
 
 /**

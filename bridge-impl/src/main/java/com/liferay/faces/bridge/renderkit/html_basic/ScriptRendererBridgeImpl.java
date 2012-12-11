@@ -20,11 +20,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.context.ResponseWriterWrapper;
 import javax.faces.render.Renderer;
+import javax.faces.render.RendererWrapper;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.util.FacesURLEncoder;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.RendererWrapper;
 
 
 /**

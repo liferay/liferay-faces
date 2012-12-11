@@ -20,9 +20,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.render.Renderer;
+import javax.faces.render.RendererWrapper;
 
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
-import com.liferay.faces.util.render.RendererWrapper;
 
 
 /**
