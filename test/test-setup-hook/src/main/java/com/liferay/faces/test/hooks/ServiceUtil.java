@@ -50,8 +50,8 @@ public class ServiceUtil {
 		boolean siteFlag = true;
 		int type = GroupConstants.TYPE_SITE_OPEN;
 
-		return GroupLocalServiceUtil.addGroup(userId, GroupConstants.DEFAULT_PARENT_GROUP_ID, (String) null, 0L, name,
-				description, type, friendlyURL, siteFlag, active, new ServiceContext());
+		return GroupLocalServiceUtil.addGroup(userId, (String) null, 0L, name, description, type, friendlyURL, siteFlag,
+				active, new ServiceContext());
 	}
 
 	public static Layout addLayout(long userId, long groupId, boolean privateLayout, long parentLayoutId, String name,
@@ -91,15 +91,15 @@ public class ServiceUtil {
 		ServiceContext serviceContext = new ServiceContext();
 
 		User user = null;
-
+		
 		try {
 			user = UserLocalServiceUtil.getUserByScreenName(companyId, screenName);
 		}
 		catch (NoSuchUserException e) {
 			user = UserLocalServiceUtil.addUser(creatorUserId, companyId, autoPassword, password1, password2,
-					autoScreenName, screenName, emailAddress, facebookId, openId, locale, firstName, middleName,
-					lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
-					organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
+					autoScreenName, screenName, emailAddress, facebookId, openId, locale, firstName, middleName, lastName,
+					prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
+					roleIds, userGroupIds, sendEmail, serviceContext);
 			log.info("Added user: " + screenName);
 		}
 
