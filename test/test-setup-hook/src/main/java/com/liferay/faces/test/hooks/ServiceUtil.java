@@ -50,8 +50,9 @@ public class ServiceUtil {
 		boolean siteFlag = true;
 		int type = GroupConstants.TYPE_SITE_OPEN;
 
-		return GroupLocalServiceUtil.addGroup(userId, GroupConstants.DEFAULT_PARENT_GROUP_ID, (String) null, 0L, name,
-				description, type, friendlyURL, siteFlag, active, new ServiceContext());
+		return GroupLocalServiceUtil.addGroup(userId, GroupConstants.DEFAULT_PARENT_GROUP_ID, (String) null, 0L,
+				GroupConstants.DEFAULT_LIVE_GROUP_ID, name, description, type, friendlyURL, siteFlag, active,
+				new ServiceContext());
 	}
 
 	public static Layout addLayout(long userId, long groupId, boolean privateLayout, long parentLayoutId, String name,
