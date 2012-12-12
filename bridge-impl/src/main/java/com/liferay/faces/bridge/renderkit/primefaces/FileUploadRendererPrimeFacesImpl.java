@@ -31,6 +31,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.FacesEvent;
 import javax.faces.render.Renderer;
+import javax.faces.render.RendererWrapper;
 
 import org.apache.commons.fileupload.FileItem;
 

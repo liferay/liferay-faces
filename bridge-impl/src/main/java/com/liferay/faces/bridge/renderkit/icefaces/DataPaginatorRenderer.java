@@ -18,13 +18,13 @@ import java.io.IOException;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.render.Renderer;
+import javax.faces.render.RendererWrapper;
 
 import com.liferay.faces.bridge.component.icefaces.DataPaginator;
 import com.liferay.faces.bridge.component.icefaces.DataPaginatorBridgeImpl;
 import com.liferay.faces.bridge.component.icefaces.DataPaginatorWrapper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.render.RendererWrapper;
 
 
 /**

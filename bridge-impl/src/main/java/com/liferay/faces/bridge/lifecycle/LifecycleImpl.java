@@ -14,6 +14,7 @@
 package com.liferay.faces.bridge.lifecycle;
 
 import javax.faces.lifecycle.Lifecycle;
+import javax.faces.lifecycle.LifecycleWrapper;
 
 import com.liferay.faces.bridge.event.IPCPhaseListener;
 import com.liferay.faces.bridge.event.ManagedBeanScopePhaseListener;

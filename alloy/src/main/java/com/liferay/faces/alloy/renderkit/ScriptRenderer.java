@@ -26,7 +26,6 @@ import com.liferay.faces.util.lang.StringPool;
 
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
 
 
@@ -112,16 +111,9 @@ public class ScriptRenderer extends Renderer {
 				externalContext.getRequestMap().put(WebKeys.AUI_SCRIPT_DATA, scriptData);
 			}
 
-			String portletId = StringPool.BLANK;
-			Portlet portlet = (Portlet) facesContext.getExternalContext().getRequestMap().get(WebKeys.RENDER_PORTLET);
-
-			if (portlet != null) {
-				portletId = portlet.getPortletId();
-			}
-
 			Map<String, Object> attributes = uiComponent.getAttributes();
 			String use = (String) attributes.get(USE);
-			scriptData.append(portletId, bufferedResponseWriter.toString(), use);
+			scriptData.append(bufferedResponseWriter.toString(), use);
 			facesContext.setResponseWriter(backupResponseWriter);
 		}
 	}

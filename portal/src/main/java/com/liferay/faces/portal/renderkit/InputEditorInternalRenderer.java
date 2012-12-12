@@ -42,7 +42,6 @@ import com.liferay.faces.util.render.CleanupRenderer;
 import com.liferay.portal.kernel.editor.EditorUtil;
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.PortalUtil;
 
 
@@ -207,7 +206,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				else {
 
 					ScriptData scriptData = (ScriptData) externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
-					scriptData.append(getPortletId(portletRequest), onBlurScript, null);
+					scriptData.append(onBlurScript, null);
 				}
 
 				// FACES-1439: If the component was rendered on the page on the previous JSF lifecycle, then prevent it
@@ -310,17 +309,6 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 		}
 
 		return onBlurScript;
-	}
-
-	protected String getPortletId(PortletRequest portletRequest) {
-		String portletId = StringPool.BLANK;
-		Portlet portlet = (Portlet) portletRequest.getAttribute(WebKeys.RENDER_PORTLET);
-
-		if (portlet != null) {
-			portletId = portlet.getPortletId();
-		}
-
-		return portletId;
 	}
 
 	protected class ParsedResponse {
