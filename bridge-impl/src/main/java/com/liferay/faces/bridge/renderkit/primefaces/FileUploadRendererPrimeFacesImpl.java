@@ -41,7 +41,6 @@ import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.render.RendererWrapper;
 
 
 /**
