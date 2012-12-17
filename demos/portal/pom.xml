@@ -16,6 +16,7 @@
 		<module>icefaces3-directory-portlet</module>
 		<module>icefaces3-documents-portlet</module>
 		<module>icefaces3-users-portlet</module>
+		<module>jsf2-login-portlet</module>
 		<module>jsf2-registration-portlet</module>
 	</modules>
 
