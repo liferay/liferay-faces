@@ -69,6 +69,18 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 		portletContext.setAttribute(TRINIDAD_DISABLE_DIALOG_OUTCOMES, Boolean.TRUE);
 	}
 
+	/**
+	 * Note: The reason why this method appears here in {@link ExternalContextCompatImpl} is because it needs to be
+	 * overridden by {@link ExternalContextCompat22Impl} since it has special requirements for JSF 2.2.
+	 *
+	 * @see    {@link ExternalContext#encodeActionURL(String, Map)}
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public String encodeActionURL(String url) {
+		return bridgeContext.encodeActionURL(url).toString();
+	}
+
 	public String encodePartialActionURL(String url) {
 
 		// no-op for JSF 1.2
