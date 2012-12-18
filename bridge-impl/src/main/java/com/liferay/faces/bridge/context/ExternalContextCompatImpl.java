@@ -177,6 +177,24 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 	}
 
 	/**
+	 * Note: The reason why this method appears here in {@link ExternalContextCompatImpl} is because it needs to be
+	 * overridden by {@link ExternalContextCompat22Impl} since it has special requirements for JSF 2.2.
+	 *
+	 * @see    {@link ExternalContext#encodeActionURL(String, Map)}
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public String encodeActionURL(String url) {
+
+		if (isEncodingFormWithPrimeFacesAjaxFileUpload()) {
+			return encodePartialActionURL(url);
+		}
+		else {
+			return bridgeContext.encodeActionURL(url).toString();
+		}
+	}
+
+	/**
 	 * @see    {@link ExternalContext#encodeBookmarkableURL(String, Map)}
 	 * @since  JSF 2.0
 	 */
