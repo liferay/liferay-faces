@@ -59,7 +59,7 @@ import com.liferay.faces.util.product.ProductMap;
 /**
  * @author  Neil Griffin
  */
-public class ExternalContextImpl extends ExternalContextCompatImpl {
+public class ExternalContextImpl extends ExternalContextCompat22Impl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ExternalContextImpl.class);
@@ -114,17 +114,6 @@ public class ExternalContextImpl extends ExternalContextCompatImpl {
 		logger.debug("De-activated JSP AFTER_VIEW_CONTENT");
 
 		bridgeContext.dispatch(path);
-	}
-
-	@Override
-	public String encodeActionURL(String url) {
-
-		if (isEncodingFormWithPrimeFacesAjaxFileUpload()) {
-			return encodePartialActionURL(url);
-		}
-		else {
-			return bridgeContext.encodeActionURL(url).toString();
-		}
 	}
 
 	/**
