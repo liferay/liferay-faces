@@ -60,6 +60,7 @@
 
 	<modules>
 		<module>util</module>
+		<module>maven</module>
 		<module>alloy</module>
 		<module>bridge-api</module>
 		<module>bridge-impl</module>
@@ -70,10 +71,11 @@
 	</modules>
 
 	<properties>
-		<codename>Galatia</codename>
+		<codename>Ephesus</codename>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces3.version>3.1.0</icefaces3.version>
 		<liferay.version>6.2.0-SNAPSHOT</liferay.version>
+		<liferay.maven.plugin.version>6.1.1</liferay.maven.plugin.version>
 		<log4j.version>1.2.14</log4j.version>
 		<mojarra.version>2.1.3-b02</mojarra.version>
 		<myfaces.version>2.1.8</myfaces.version>
@@ -235,6 +237,19 @@
 										<ignore />
 									</action>
 								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.liferay.faces.maven</groupId>
+										<artifactId>liferay-faces-maven-plugin</artifactId>
+										<versionRange>[3.2.1-ga1-SNAPSHOT,)</versionRange>
+										<goals>
+											<goal>generate-vdldoc</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
 							</pluginExecutions>
 						</lifecycleMappingMetadata>
 					</configuration>
@@ -257,7 +272,7 @@
 					<plugin>
 						<groupId>com.liferay.maven.plugins</groupId>
 						<artifactId>liferay-maven-plugin</artifactId>
-						<version>${liferay.version}</version>
+						<version>${liferay.maven.plugin.version}</version>
 						<configuration>
 							<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
 							<deployDir>${liferay.deploy.dir}</deployDir>
@@ -603,3 +618,4 @@
 	</reporting>
 
 </project>
+

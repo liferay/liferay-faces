@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:cc="http://java.sun.com/jsf/composite" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
 
-	<cc:interface>
+	<cc:interface
+		shortDescription="Facelet composite component that contains a standard &lt;code&gt;h:commandButton&lt;/code&gt; component tag, surrounded by &lt;code&gt;span&lt;/code&gt; elements with Alloy UI CSS class names. It is typically placed inside of an &lt;code&gt;aui:button-row&lt;/code&gt; component tag.&lt;br/&gt;&lt;br/&gt;Since: 3.2.0/3.1.0/3.0.0/2.1.0">
 		<cc:actionSource name="click" targets="cmdButton" />
-		<cc:attribute name="cssClass" required="false" />
+		<br />
+		<cc:attribute name="cssClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute (same as styleClass)." />
 		<cc:attribute name="immediate" default="false" required="false" />
 		<cc:attribute name="label" required="false" />
-		<cc:attribute name="styleClass" required="false" />
+		<cc:attribute name="styleClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute." />
 		<cc:attribute name="type" required="false" />
 	</cc:interface>
 
@@ -24,13 +30,15 @@
 						<c:if test="#{empty label}">
 							<c:set var="label" value="Cancel" />
 						</c:if>
-						<c:set var="buttonCssClass" value="aui-button-input aui-button-input-cancel" />
+						<c:set var="buttonCssClass"
+							value="aui-button-input aui-button-input-cancel" />
 					</c:when>
 					<c:when test="#{cc.attrs.type == 'submit'}">
 						<c:if test="#{empty label}">
 							<c:set var="label" value="Submit" />
 						</c:if>
-						<c:set var="buttonCssClass" value="aui-button-input aui-button-input-submit" />
+						<c:set var="buttonCssClass"
+							value="aui-button-input aui-button-input-submit" />
 					</c:when>
 					<c:otherwise>
 						<c:if test="#{empty label}">
@@ -39,7 +47,9 @@
 						<c:set var="buttonCssClass" value="aui-button-input" />
 					</c:otherwise>
 				</c:choose>
-				<h:commandButton id="cmdButton" immediate="#{cc.attrs.immediate}" styleClass="aui-button-input aui-button-input-cancel" value="#{label}" />
+				<h:commandButton id="cmdButton" immediate="#{cc.attrs.immediate}"
+					styleClass="aui-button-input aui-button-input-cancel"
+					value="#{label}" />
 			</h:panelGroup>
 		</h:panelGroup>
 	</cc:implementation>
