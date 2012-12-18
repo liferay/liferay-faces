@@ -121,11 +121,35 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 		if ((properties != null) && !properties.isEmpty()) {
 
 			try {
-				cookie.setComment((String) properties.get(COOKIE_PROPERTY_COMMENT));
-				cookie.setDomain((String) properties.get(COOKIE_PROPERTY_DOMAIN));
-				cookie.setMaxAge((Integer) properties.get(COOKIE_PROPERTY_MAX_AGE));
-				cookie.setPath((String) properties.get(COOKIE_PROPERTY_PATH));
-				cookie.setSecure((Boolean) properties.get(COOKIE_PROPERTY_SECURE));
+				String comment = (String) properties.get(COOKIE_PROPERTY_COMMENT);
+
+				if (comment != null) {
+					cookie.setComment(comment);
+				}
+
+				String domain = (String) properties.get(COOKIE_PROPERTY_DOMAIN);
+
+				if (domain != null) {
+					cookie.setDomain(domain);
+				}
+
+				Integer maxAge = (Integer) properties.get(COOKIE_PROPERTY_MAX_AGE);
+
+				if (maxAge != null) {
+					cookie.setMaxAge(maxAge);
+				}
+
+				String path = (String) properties.get(COOKIE_PROPERTY_PATH);
+
+				if (path != null) {
+					cookie.setPath(path);
+				}
+
+				Boolean secure = (Boolean) properties.get(COOKIE_PROPERTY_SECURE);
+
+				if (secure != null) {
+					cookie.setSecure(secure);
+				}
 			}
 			catch (ClassCastException e) {
 				logger.error(e.getMessage(), e);
