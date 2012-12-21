@@ -5,3 +5,8 @@ doc/src/main/docbook/style
 target
 rebel.xml
 *.sh
+
+.DS_Store
+build-no_css.xml
+build.xml
+*.~
