@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:example-cc="http://java.sun.com/jsf/composite/example-cc"
+	xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-cc="http://liferay.com/faces/aui-cc"
+	xmlns:liferay-ui="http://liferay.com/faces/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<example-cc:divider />
+	<p:growl id="messages" showDetail="true" rendered="false" />
+	<h:form id="formTree">
+
+		<p:layout id="mainlayout" style="min-width:800px;min-height:200px;">
+			<p:layoutUnit id="left" position="west" resizable="true" size="300"
+				minSize="40" maxSize="300">
+				<h:panelGroup id="panelGroupLeft">
+					<p:fieldset legend="Folders (Don't miss right click)">
+ 				    <p:menubar autoDisplay="false">  
+				                <p:menuitem value="#{i18n['ExpandAll']}" icon="tree_folder_open" 
+				                update=":formTree" 
+				                actionListener="#{docLibModelBean.expandLevel('10')}"
+				                />  
+				                <p:menuitem value="#{i18n['CollapseAll']}" icon="tree_folder_close" 
+				                update=":formTree" 
+				                actionListener="#{docLibModelBean.expandLevel('1')}"
+				                />  
+				    </p:menubar>
+   
+						<p:contextMenu for="treeSingle" nodeType="admin">
+							<p:menuitem value="View (ToBeDone)" icon="view_folder_desc"
+								actionListener="#{docLibBackingBean.folderView}" />
+						</p:contextMenu>
+
+						<p:contextMenu for="treeSingle" nodeType="guest">
+							<p:menuitem value="View" icon="view_folder_desc"
+								actionListener="#{docLibBackingBean.folderView}" />
+						</p:contextMenu>
+
+
+						<p:tree id="treeSingle" value="#{docLibModelBean.root}" var="node"
+								dynamic="true" selectionMode="single"
+								selection="#{docLibModelBean.selectedNode}">
+							<p:ajax event="expand" update=":messages"
+								listener="#{docLibModelBean.onNodeExpand}" />
+							<p:ajax event="collapse" update=":messages"
+								listener="#{docLibModelBean.onNodeCollapse}" />
+							<p:ajax event="select" listener="#{docLibModelBean.onNodeSelect}"
+								update=":messages :formTree:panelGroupCenter :formTree:panelGroupCenterHeader" />
+							<p:ajax event="unselect" update=":messages"
+								listener="#{docLibModelBean.onNodeUnselect}" />
+							<p:treeNode type="admin" expandedIcon="tree_folder_open"
+													 collapsedIcon="tree_folder_close">
+								<h:outputText
+									value="#{node.folderName}  -- #{node.id}" />
+							</p:treeNode>
+							<p:treeNode type="guest" expandedIcon="tree_folder_open_guest"
+													 collapsedIcon="tree_folder_close_guest">
+								<h:outputText
+									value="#{node.folderName} -- #{node.type}" />
+							</p:treeNode>
+						</p:tree>
+					</p:fieldset>
+				</h:panelGroup>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center">
+				<h:panelGroup id="panelGroupCenterHeader" >
+						<p:breadCrumb id="breadCrumb" model="#{docLibModelBean.breadCrumb}"/>
+				    <p:menubar autoDisplay="false">  
+				        <p:submenu label="#{i18n['new']}" icon="add_content" rendered="#{docLibBackingBean.isFolderPermittedTo('DELETE') }">  
+				                <p:menuitem value="#{i18n['folder']}" icon="add_folder" 
+										    update=":formTree:panelGroupCenter" 
+				                			actionListener="#{docLibModelBean.setRenderedPanel('folderAdd')}" 
+				                			rendered="#{docLibBackingBean.isFolderPermittedTo('ADD_FOLDER')}"
+				                			 />
+				                <p:menuitem value="#{i18n['document']}" icon="add_document" 
+										    update=":formTree:panelGroupCenter" 
+				                			actionListener="#{docLibModelBean.setRenderedPanel('documentAdd')}" 
+				                			rendered="#{docLibBackingBean.isFolderPermittedTo('ADD_DOCUMENT')}"
+				                			/>
+				        </p:submenu>  
+				  
+				        <p:submenu label="Admin" icon="admin_tool" rendered="#{docLibBackingBean.isFolderPermittedTo('DELETE') }">   
+				            <p:menuitem value="Edit folder" icon="edit_folder (ToBeDone)" rendered="#{docLibBackingBean.isFolderPermittedTo('DELETE')}" />
+				            <p:menuitem value="Delete folder" icon="delete_folder"  
+				            			rendered="#{docLibBackingBean.isFolderPermittedTo('DELETE')}"
+				            			actionListener="#{docLibBackingBean.folderDelete}"
+				            			disabled="#{docLibModelBean.documentNumber!=0 or docLibModelBean.selectedNode.getChildCount()!=0}"
+										update=":formTree" 
+				             /> 
+				        </p:submenu>  
+				  
+				        <p:submenu label="Permissions" icon="rights_settings" rendered="#{docLibBackingBean.isFolderPermittedTo('DELETE') }">    
+				            <p:menuitem value="Readers (ToBeDone)" icon="viewer_users" url="#" />  
+				            <p:menuitem value="Admins (ToBeDone)" icon="key_users" url="#" />  
+				        </p:submenu>  
+				  
+				    </p:menubar>
+				    
+      				</h:panelGroup>
+					<h:panelGroup id="panelGroupCenter">
+						<aui:column id="columnDocumentAdd"
+							rendered="#{docLibModelBean.renderedPanel == 'documentAdd'}">
+							<aui:fieldset>
+								<liferay-ui:info
+									message="#{i18n.replace('upload-documents-no-larger-than-x-k', docUploadBackingBean.maxFileSizeKB)}" />
+								<p:fileUpload
+									fileUploadListener="#{docUploadBackingBean.handleFileUpload}"
+									mode="advanced" multiple="true" cancelLabel="Reset" />
+
+							</aui:fieldset>
+							<aui:button-row>
+								<h:commandButton action="#{docLibModelBean.documentAddCancel}"
+												 update=":formTree" 
+												 value="#{i18n['done']}" />
+								<h:commandButton action="#{docLibModelBean.documentAddCancel}"
+												 update=":formTree" 
+												 value="#{i18n['cancel']}" />
+							</aui:button-row>
+						</aui:column>
+
+						<aui:column id="columnDocumentList"
+							rendered="#{docLibModelBean.renderedPanel == 'documentList'}">
+							<p:dataTable id="doclist" var="dlPrimefacesDocument"
+								value="#{docLibModelBean.folderPrimefacesDocumentList}"
+								rowKey="#{dlPrimefacesDocument.id}"
+								selection="#{docLibModelBean.selectedPrimefacesDocument}"
+								selectionMode="single"> 											 
+									<p:column headerText="#{docLibModelBean.documentNumber} docs">
+									<p:menuButton value="" for="doclist" >
+										<p:menuitem value="Edit (ToBeDone)" icon="edit_document" />
+										<p:menuitem value="Delete" icon="delete_document"
+											update=":formTree"
+											action="#{docLibModelBean.deletePrimefacesDocument}" />
+									</p:menuButton>
+								</p:column>
+								<p:column id="filename" headerText="#{i18n['file-name']}" sortBy="#{dlPrimefacesDocument.fileEntry.title}">
+									<h:outputLink
+										rendered="#{dlPrimefacesDocument.fileEntry.permittedToView}"
+										value="#{dlPrimefacesDocument.fileEntry.url}">
+										<h:outputText value="#{dlPrimefacesDocument.fileEntry.title}" />
+									</h:outputLink>
+								</p:column>
+								<p:column headerText="#{i18n['size']}" sortBy="#{dlPrimefacesDocument.fileEntry.kilobytes}">
+										<h:outputText value="#{dlPrimefacesDocument.fileEntry.kilobytes}" />
+								</p:column>
+								<p:column headerText="#{i18n['owner']}"  sortBy="#{dlPrimefacesDocument.fileEntry.userNamet}">
+										<h:outputText value="#{dlPrimefacesDocument.fileEntry.userName}" />
+								</p:column>
+								<p:column headerText="#{i18n['downloads']}" sortBy="#{dlPrimefacesDocument.fileEntry.readCount}">
+										<h:outputText value="#{dlPrimefacesDocument.fileEntry.readCount}" />
+								</p:column>
+								<p:column headerText="#{i18n['date']}" sortBy="#{dlPrimefacesDocument.fileEntry.modifiedDate}">
+										<h:outputText value="#{dlPrimefacesDocument.fileEntry.modifiedDate}" />
+								</p:column>
+								<p:column>
+								    <h:outputLink id="lnk" value="#">  
+								        <h:outputText value="#{i18n['description']}" />  
+								    </h:outputLink>  
+								    <p:tooltip for="lnk">  
+								        <h:outputText  value="#{dlPrimefacesDocument.fileEntry.description}" /> 
+								    </p:tooltip>  
+								</p:column>
+    
+							</p:dataTable>
+
+						</aui:column>
+						<aui:column id="columnFolderAdd"
+							rendered="#{docLibModelBean.renderedPanel == 'folderAdd'}">
+							<aui-cc:input inlineMessage="true" label="#{i18n['folder-name']}"
+								required="true" value="#{docLibBackingBean.folderName}" />
+							<aui-cc:input inlineMessage="true" label="#{i18n['description']}"
+								required="false" cols="100" rows="10" type="textarea"
+								value="#{docLibBackingBean.folderDescription}" />
+							<aui:button-row>
+								<p:commandButton value="Submit"
+									actionListener="#{docLibBackingBean.folderAdd}"
+									update=":formTree" />
+								<p:commandButton value="Cancel" immediate="true"
+									update=":formTree"
+									actionListener="#{docLibModelBean.setRenderedPanel('documentList')}" />
+							</aui:button-row>
+						</aui:column>
+					</h:panelGroup>
+
+			</p:layoutUnit>
+		</p:layout>
+	</h:form>
+
+</ui:composition>
+
+

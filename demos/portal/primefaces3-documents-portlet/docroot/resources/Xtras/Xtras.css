@@ -1,0 +1,78 @@
+.tree_folder_open {
+background: url( '#{resource['Xtras:images/folderOpen.gif']}' ) no-repeat  !important;
+padding-right:3px;
+}
+
+.tree_folder_close {
+background: url( '#{resource['Xtras:images/folderClosed.gif']}' ) no-repeat  !important;
+padding-right:3px;
+}
+
+.tree_folder_open_guest {
+background: url( '#{resource['Xtras:images/folderOpen.gif']}' ) no-repeat  !important;
+padding-right:3px;
+}
+
+.tree_folder_close_guest {
+background: url( '#{resource['Xtras:images/folderClosed.gif']}' ) no-repeat  !important;
+padding-right:3px;
+}
+
+.add_content {
+background: url( '#{resource['Xtras:images/add_content.png']}' ) no-repeat !important;
+padding-right:3px;
+}
+
+.add_folder {
+background: url( '#{resource['Xtras:images/add_folder.png']}' ) no-repeat !important;
+padding-right:3px;
+}
+
+.add_document {
+background: url( '#{resource['Xtras:images/add_document.png']}' ) no-repeat !important;
+padding-right:3px;
+}
+
+.delete_document {
+background: url( '#{resource['Xtras:images/b_drop.png']}' ) no-repeat !important;
+padding-right:3px;
+}
+
+.delete_folder {
+background: url( '#{resource['Xtras:images/delete_folder.png']}' ) no-repeat !important;
+padding-right:3px;
+}
+
+.edit_folder {
+background: url( '#{resource['Xtras:images/edit_folder.png']}' ) no-repeat !important;
+padding-right:3px;
+}
+
+.edit_document {
+background: url( '#{resource['Xtras:images/edit.png']}' ) no-repeat !important;
+padding-right:3px;
+}
+
+.rights_settings {
+background: url( '#{resource['Xtras:images/rights_settings.png']}' ) no-repeat !important;
+padding-right:3px;
+}
+.admin_tool {
+background: url( '#{resource['Xtras:images/admin_tool.png']}' ) no-repeat !important;
+padding-right:3px;
+}
+
+.viewer_users {
+background: url( '#{resource['Xtras:images/viewer_users.png']}' ) no-repeat !important;
+padding-right:3px;
+}
+
+.key_users {
+background: url( '#{resource['Xtras:images/key_users.png']}' ) no-repeat !important;
+padding-right:3px;
+}
+
+.view_folder_desc {
+background: url( '#{resource['Xtras:images/view_folder_desc.png']}' ) no-repeat !important;
+padding-right:3px;
+}

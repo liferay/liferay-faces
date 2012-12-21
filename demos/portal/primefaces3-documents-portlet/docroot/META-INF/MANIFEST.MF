@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Vendor: Liferay, Inc.
+Implementation-Title: PrimeFaces3_document Portlet
+Implementation-Version: 3.1.0-RC1 (Galatia / Jun 1, 2012 AD)
+Implementation-Vendor-Id: com.liferay
+Build-Jdk: 1.6.0_31
+Built-By: Release Manager
+Created-By: Apache Maven 3.0.4
+Archiver-Version: Plexus Archiver
+
