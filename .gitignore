@@ -10,3 +10,4 @@ rebel.xml
 build-no_css.xml
 build.xml
 *.~
+classes/*
