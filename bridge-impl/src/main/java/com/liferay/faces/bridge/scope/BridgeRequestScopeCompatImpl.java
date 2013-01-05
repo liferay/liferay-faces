@@ -87,6 +87,8 @@ public abstract class BridgeRequestScopeCompatImpl extends BridgeRequestScopeBas
 				currentFacesContextAttributes.put(name, value);
 				restoredFacesContextAttibutes = true;
 			}
+			
+			savedFacesContextAttributes.clear();
 		}
 
 		if (restoredFacesContextAttibutes) {
