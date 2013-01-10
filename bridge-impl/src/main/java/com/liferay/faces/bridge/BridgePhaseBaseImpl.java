@@ -27,7 +27,6 @@ import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
-import javax.portlet.ResourceResponse;
 import javax.portlet.StateAwareResponse;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.annotation.PortletNamingContainer;
@@ -298,7 +297,8 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		}
 	}
 
-	protected void maintainBridgeRequestScope(PortletRequest portletRequest, PortletResponse portletResponse) {
+	protected void maintainBridgeRequestScope(PortletRequest portletRequest, PortletResponse portletResponse,
+		BridgeRequestScope.Transport bridgeRequestScopeTransport) {
 
 		String bridgeRequestScopeId = bridgeRequestScope.getId();
 
@@ -306,41 +306,45 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 
 		String bridgeRequestScopeKey = portletName + PARAM_BRIDGE_REQUEST_SCOPE_ID;
 
-		if (portletResponse instanceof StateAwareResponse) {
-			logger.debug("Setting render parameter name=[{0}] value=[{1}]", bridgeRequestScopeKey,
-				bridgeRequestScopeId);
-
-			try {
-				StateAwareResponse stateAwareResponse = (StateAwareResponse) portletResponse;
-				stateAwareResponse.setRenderParameter(bridgeRequestScopeKey, bridgeRequestScopeId);
-			}
-			catch (IllegalStateException e) {
-
-				// If a redirect occurred, then swallow/ignore the IllegalStateException
-				if (bridgeRequestScope.isRedirectOccurred()) {
-
-					// The Portlet API JavaDocs indicate that StateAwareResponse.setRenderParameter(String, String) must
-					// throw an IllegalStateException if ActionResponse.sendRedirect(String) was previously called. The
-					// JSR 329 TCK TestPage039 (requestNoScopeOnRedirectTest) and TestPage176 (redirectActionTest) both
-					// perform pseudo-redirects (effectively treated like navigation-rules from one JSF viewId to
-					// another). Since the tests don't actually call ActionResponse.sendRedirect(String), this condition
-					// is never reached by the TCK. However, this condition is a real-world use-case and so the
-					// IllegalStateException must be swallowed/ignored here so that portlet lifecycle processing is able
-					// to continue. For more information, see: http://issues.liferay.com/browse/FACES-1367
-				}
-
-				// Otherwise throw the IllegalStateException.
-				else {
-					throw e;
-				}
-			}
-		}
-		else if (portletResponse instanceof ResourceResponse) {
+		if (bridgeRequestScopeTransport == BridgeRequestScope.Transport.PORTLET_SESSION_ATTRIBUTE) {
 
 			// TCK TestPage071: nonFacesResourceTest
 			// TCK TestPage073: scopeAfterRedisplayResourcePPRTest
 			PortletSession portletSession = portletRequest.getPortletSession(true);
 			portletSession.setAttribute(bridgeRequestScopeKey, bridgeRequestScopeId);
+		}
+		else {
+
+			if (portletResponse instanceof StateAwareResponse) {
+				logger.debug("Setting render parameter name=[{0}] value=[{1}]", bridgeRequestScopeKey,
+					bridgeRequestScopeId);
+
+				try {
+					StateAwareResponse stateAwareResponse = (StateAwareResponse) portletResponse;
+					stateAwareResponse.setRenderParameter(bridgeRequestScopeKey, bridgeRequestScopeId);
+				}
+				catch (IllegalStateException e) {
+
+					// If a redirect occurred, then swallow/ignore the IllegalStateException
+					if (bridgeRequestScope.isRedirectOccurred()) {
+
+						// The Portlet API JavaDocs indicate that StateAwareResponse.setRenderParameter(String, String)
+						// must throw an IllegalStateException if ActionResponse.sendRedirect(String) was previously
+						// called. The JSR 329 TCK TestPage039 (requestNoScopeOnRedirectTest) and TestPage176
+						// (redirectActionTest) both perform pseudo-redirects (effectively treated like navigation-rules
+						// from one JSF viewId to another). Since the tests don't actually call
+						// ActionResponse.sendRedirect(String), this condition is never reached by the TCK. However,
+						// this condition is a real-world use-case and so the IllegalStateException must be
+						// swallowed/ignored here so that portlet lifecycle processing is able to continue. For more
+						// information, see: http://issues.liferay.com/browse/FACES-1367
+					}
+
+					// Otherwise throw the IllegalStateException.
+					else {
+						throw e;
+					}
+				}
+			}
 		}
 	}
 

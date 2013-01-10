@@ -22,6 +22,7 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
+import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -96,7 +97,7 @@ public class BridgePhaseActionImpl extends BridgePhaseCompatImpl {
 			// Save the faces view root and any messages in the faces context so that they can be restored during
 			// the RENDER_PHASE of the portlet lifecycle.
 			bridgeRequestScope.saveState(facesContext);
-			maintainBridgeRequestScope(actionRequest, actionResponse);
+			maintainBridgeRequestScope(actionRequest, actionResponse, BridgeRequestScope.Transport.RENDER_PARAMETER);
 
 			// Spec 6.6 (Namespacing)
 			indicateNamespacingToConsumers(facesContext.getViewRoot(), actionResponse);
