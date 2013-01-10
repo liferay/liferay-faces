@@ -40,6 +40,25 @@ import com.liferay.faces.bridge.container.PortletContainer;
 public interface BridgeRequestScope {
 
 	/**
+	 * @author  Neil Griffin
+	 */
+
+	public static enum Transport {
+
+		/**
+		 * Indicates that the bridge request scope should be carried from the ACTION_PHASE/EVENT_PHASE into the
+		 * RENDER_PHASE by setting a render parameter.
+		 */
+		RENDER_PARAMETER,
+
+		/**
+		 * Indicates that the bridge request scope should be carried from the ACTION_PHASE/EVENT_PHASE into the
+		 * RENDER_PHASE by setting a portlet session attribute.
+		 */
+		PORTLET_SESSION_ATTRIBUTE
+	}
+
+	/**
 	 * This method removes the excluded request attributes. It is designed to be called at the beginning of the
 	 * RENDER_PHASE of the portlet lifecycle. However, it is only necessary to call this method if {@link
 	 * PortletContainer#isPostRedirectGetSupported()} returns <code>false</code>. This is because portlet containers

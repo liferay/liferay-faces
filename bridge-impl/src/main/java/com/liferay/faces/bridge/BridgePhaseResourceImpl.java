@@ -21,6 +21,7 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
+import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -126,7 +127,8 @@ public class BridgePhaseResourceImpl extends BridgePhaseCompatImpl {
 					// TCK TestPage073: scopeAfterRedisplayResourcePPRTest -- Preserve the non-excluded request
 					// attributes in the BridgeRequestScope so that they can be restored in subsequent render requests.
 					bridgeRequestScope.saveState(facesContext);
-					maintainBridgeRequestScope(resourceRequest, resourceResponse);
+					maintainBridgeRequestScope(resourceRequest, resourceResponse,
+						BridgeRequestScope.Transport.PORTLET_SESSION_ATTRIBUTE);
 				}
 
 				// Spec 6.6 (Namespacing)

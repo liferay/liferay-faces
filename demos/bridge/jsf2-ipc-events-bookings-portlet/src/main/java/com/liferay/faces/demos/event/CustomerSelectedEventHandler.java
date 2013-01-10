@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.demos.event;
 
+import java.io.Serializable;
+
 import javax.el.ELContext;
 import javax.el.ValueExpression;
 import javax.faces.context.FacesContext;
@@ -20,10 +22,11 @@ import javax.portlet.Event;
 import javax.portlet.faces.BridgeEventHandler;
 import javax.portlet.faces.event.EventNavigationResult;
 
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.bridge.event.EventPayloadWrapper;
 import com.liferay.faces.demos.bean.BookingsModelBean;
 import com.liferay.faces.demos.dto.Customer;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -39,7 +42,15 @@ public class CustomerSelectedEventHandler implements BridgeEventHandler {
 		String eventQName = event.getQName().toString();
 
 		if (eventQName.equals("{http://liferay.com/events}ipc.customerSelected")) {
-			Customer customer = (Customer) event.getValue();
+			Serializable value = event.getValue();
+
+			// FACES-1465: If the payload is wrapped, then a redirect may have taken place. In any case, get the
+			// payload from the wrapper.
+			if (value instanceof EventPayloadWrapper) {
+				value = ((EventPayloadWrapper) value).getWrapped();
+			}
+
+			Customer customer = (Customer) value;
 			BookingsModelBean bookingsModelBean = getBookingsModelBean(facesContext);
 			bookingsModelBean.setCustomer(customer);
 
