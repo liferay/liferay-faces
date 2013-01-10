@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:view xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
 	<h:head />
 	<h:body>
 		<ui:include src="styling.xhtml" />
 		<h:form id="f1">
+			<h:messages id="feedback" />
 			<h:dataTable value="#{customersModelBean.allCustomers}" var="customer"
 				headerClass="portlet-section-header results-header"
 				rowClasses="portlet-section-body results-row,portlet-section-alternate results-row alt"
@@ -32,6 +33,19 @@
 					<h:outputText value="#{customer.lastName}" />
 				</h:column>
 			</h:dataTable>
+			<c:if test="#{bridgeContext.bridgeConfig.attributes['Liferay Portal'].detected}">
+				<h:selectBooleanCheckbox id="sendRedirect" value="#{customersViewBean.sendRedirect}">
+					<f:ajax render="redirectPages" />
+				</h:selectBooleanCheckbox>
+				<h:outputLabel for="sendRedirect" value="#{i18n['sendRedirect']} #{i18n['liferayOnly']} " />
+				<h:panelGroup id="redirectPages">
+					<h:selectOneMenu value="#{customersViewBean.portalPageId}" rendered="#{customersViewBean.sendRedirect}">
+						<f:selectItems value="#{customersViewBean.portalPages}" var="portalPage" itemValue="#{portalPage.id}"
+							itemLabel="#{portalPage.name}" />
+							<f:ajax render="@form" />
+					</h:selectOneMenu>
+				</h:panelGroup>
+			</c:if>
 		</h:form>
 	</h:body>
 

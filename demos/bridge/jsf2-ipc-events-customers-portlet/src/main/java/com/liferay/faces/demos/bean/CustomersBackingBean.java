@@ -18,6 +18,7 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UICommand;
 import javax.faces.context.ExternalContext;
@@ -26,9 +27,16 @@ import javax.faces.event.ActionEvent;
 import javax.portlet.ActionResponse;
 import javax.xml.namespace.QName;
 
+import com.liferay.faces.bridge.event.EventPayloadWrapper;
+import com.liferay.faces.demos.dto.Customer;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.demos.dto.Customer;
+
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 
 
 /**
@@ -44,6 +52,10 @@ public class CustomersBackingBean implements Serializable {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(CustomersBackingBean.class);
 
+	// Injections
+	@ManagedProperty(name = "customersViewBean", value = "#{customersViewBean}")
+	private CustomersViewBean customersViewBean;
+
 	@PostConstruct
 	public void postConstruct() {
 		logger.trace("@PostConstruct annotation worked");
@@ -55,11 +67,41 @@ public class CustomersBackingBean implements Serializable {
 	}
 
 	public void selectionListener(ActionEvent actionEvent) {
+
 		UICommand uiCommand = (UICommand) actionEvent.getComponent();
 		Customer customer = (Customer) uiCommand.getValue();
 		QName qName = new QName("http://liferay.com/events", "ipc.customerSelected");
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		ActionResponse actionResponse = (ActionResponse) externalContext.getResponse();
-		actionResponse.setEvent(qName, customer);
+
+		Serializable eventPayload = customer;
+
+		// FACES-1465: If the user requested a redirect (Liferay Only), then  and redirect to the selected portal page.
+		if (customersViewBean.isSendRedirect()) {
+
+			// Wrap the event payload with an EventPayloadWrapper and specify that a redirect taking place. Liferay
+			// Faces Bridge will detect the redirect, and maintain the Bridge Request Scope accordingly.
+			eventPayload = new EventPayloadWrapper(customer, true);
+
+			// Issue the redirect to the selected portal page.
+			try {
+				ThemeDisplay themeDisplay = (ThemeDisplay) externalContext.getRequestMap().get(WebKeys.THEME_DISPLAY);
+				Layout layout = LayoutLocalServiceUtil.getLayout(customersViewBean.getPortalPageId());
+				String portalURL = PortalUtil.getPortalURL(themeDisplay);
+				String redirectPortalPageURL = portalURL + PortalUtil.getLayoutFriendlyURL(layout, themeDisplay);
+				externalContext.redirect(redirectPortalPageURL);
+			}
+			catch (Exception e) {
+				logger.error(e);
+			}
+		}
+
+		actionResponse.setEvent(qName, eventPayload);
+	}
+
+	public void setCustomersViewBean(CustomersViewBean customersViewBean) {
+
+		// Injected via @ManagedProperty annotation
+		this.customersViewBean = customersViewBean;
 	}
 }

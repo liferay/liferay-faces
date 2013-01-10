@@ -13,9 +13,12 @@
  */
 package com.liferay.faces.bridge;
 
+import java.io.Serializable;
+
 import javax.faces.application.NavigationHandler;
 import javax.faces.event.PhaseListener;
 import javax.faces.lifecycle.Lifecycle;
+import javax.portlet.Event;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.PortletConfig;
@@ -25,7 +28,9 @@ import javax.portlet.faces.BridgeEventHandler;
 import javax.portlet.faces.BridgeException;
 import javax.portlet.faces.event.EventNavigationResult;
 
+import com.liferay.faces.bridge.event.EventPayloadWrapper;
 import com.liferay.faces.bridge.event.IPCPhaseListener;
+import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -98,8 +103,8 @@ public class BridgePhaseEventImpl extends BridgePhaseCompatImpl {
 				logger.debug("Invoking {0} for class=[{1}]", bridgeEventHandlerAttributeName,
 					bridgeEventHandler.getClass());
 
-				EventNavigationResult eventNavigationResult = bridgeEventHandler.handleEvent(facesContext,
-						eventRequest.getEvent());
+				Event event = eventRequest.getEvent();
+				EventNavigationResult eventNavigationResult = bridgeEventHandler.handleEvent(facesContext, event);
 
 				if (eventNavigationResult != null) {
 					String oldViewId = facesContext.getViewRoot().getViewId();
@@ -117,7 +122,28 @@ public class BridgePhaseEventImpl extends BridgePhaseCompatImpl {
 				// Save the faces view root and any messages in the faces context so that they can be restored during
 				// the RENDER_PHASE of the portlet lifecycle.
 				bridgeRequestScope.saveState(facesContext);
-				maintainBridgeRequestScope(eventRequest, eventResponse);
+
+				// Assume that the bridge request scope should be maintained from the EVENT_PHASE into the
+				// RENDER_PHASE by utilizing render parameters.
+				BridgeRequestScope.Transport bridgeRequestScopeTransport =
+					BridgeRequestScope.Transport.RENDER_PARAMETER;
+				Serializable eventPayload = event.getValue();
+
+				// FACES-1465: If the portlet developer intentionally wrapped the event payload is with an
+				// EventPayloadWrapper, then determine whether or not this is happening during a redirect. If this is
+				// the case, then the bridge request scope must be maintained from the EVENT_PHASE into the RENDER_PHASE
+				// by utilizing a portlet session attribute. This is because render parameters will not survive a
+				// redirect.
+				if ((eventPayload != null) && (eventPayload instanceof EventPayloadWrapper)) {
+					EventPayloadWrapper eventPayloadWrapper = (EventPayloadWrapper) eventPayload;
+
+					if (eventPayloadWrapper.isRedirect()) {
+
+						bridgeRequestScopeTransport = BridgeRequestScope.Transport.PORTLET_SESSION_ATTRIBUTE;
+					}
+				}
+
+				maintainBridgeRequestScope(eventRequest, eventResponse, bridgeRequestScopeTransport);
 
 				// Process the outgoing public render parameters.
 				// TCK TestPage064: eventControllerTest
