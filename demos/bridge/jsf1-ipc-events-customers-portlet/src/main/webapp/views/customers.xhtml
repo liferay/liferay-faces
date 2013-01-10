@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<ui:include src="styling.xhtml" />
@@ -31,6 +32,22 @@
 				<h:outputText value="#{customer.lastName}" />
 			</h:column>
 		</h:dataTable>
+		<c:if test="#{bridgeContext.bridgeConfig.attributes['Liferay Portal'].detected}">
+			<h:selectBooleanCheckbox id="sendRedirect" value="#{customersViewBean.sendRedirect}" />
+			<h:outputLabel for="sendRedirect" value="#{i18n['sendRedirect']} #{i18n['liferayOnly']} " />
+			<h:panelGroup id="redirectPages">
+				<h:selectOneMenu value="#{customersViewBean.portalPageId}">
+					<f:selectItems value="#{customersViewBean.portalPages}" />
+				</h:selectOneMenu>
+				<br />
+				<em><h:outputText value="#{i18n['noteSettings']}" /></em>
+				<pre>
+portlet.event.distribution=layout-set
+layout.default.p_l_reset=false
+tags.compiler.enabled=false
+				</pre>
+			</h:panelGroup>
+		</c:if>
 	</h:form>
 
 </f:view>

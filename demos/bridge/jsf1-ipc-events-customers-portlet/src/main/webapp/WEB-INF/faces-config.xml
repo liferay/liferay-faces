@@ -27,6 +27,10 @@
 		<managed-bean-name>customersBackingBean</managed-bean-name>
 		<managed-bean-class>com.liferay.faces.demos.bean.CustomersBackingBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>customersViewBean</property-name>
+			<value>#{customersViewBean}</value>
+		</managed-property>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>customersModelBean</managed-bean-name>
@@ -36,6 +40,11 @@
 			<property-name>customerService</property-name>
 			<value>#{customerService}</value>
 		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>customersViewBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.CustomersViewBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>customerService</managed-bean-name>
