@@ -90,6 +90,10 @@ public abstract class BridgeRequestScopeCompatImpl extends BridgeRequestScopeBas
 		}
 
 		if (restoredFacesContextAttibutes) {
+
+			// FACES-1463: The map must be cleared in order to prevent instances of the protected inner
+			// FacesContextAttribute class (defined below) from holding on to a reference to its parent (this class).
+			savedFacesContextAttributes.clear();
 			logger.debug("Restored FacesContext attributes");
 		}
 		else {
