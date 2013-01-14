@@ -47,7 +47,7 @@ public class BridgeConfigConstants {
 	public static String PARAM_DISTINCT_REQUEST_SCOPED_MANAGED_BEANS =
 		"com.liferay.faces.bridge.distinctRequestScopedManagedBeans";
 
-	/** Value returned by {@link BridgeContext#isBridgeRequestScopePreserved()}. Default is true. */
+	/** Value returned by {@link BridgeContext#isBridgeRequestScopePreserved()}. Default is false. */
 	public static final String PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED1 =
 		"com.liferay.faces.bridge.bridgeRequestScopePreserved";
 	public static final String PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED2 = "org.portletfaces.bridgeRequestScopePreserved";
