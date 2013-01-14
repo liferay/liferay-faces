@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.scope;
 
+import java.util.Date;
 import java.util.Map;
 
 import javax.faces.context.FacesContext;
@@ -42,7 +43,6 @@ public interface BridgeRequestScope {
 	/**
 	 * @author  Neil Griffin
 	 */
-
 	public static enum Transport {
 
 		/**
@@ -120,6 +120,11 @@ public interface BridgeRequestScope {
 	 *          false</code>.
 	 */
 	boolean isRedirectOccurred();
+
+	/**
+	 * Returns the date in which the scope was created, measured in UTC milliseconds from the epoch.
+	 */
+	public long getDateCreated();
 
 	/**
 	 * Sets the flag indicating whether or not the Faces lifecycle was executed.
