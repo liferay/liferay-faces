@@ -98,6 +98,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 
 	// Private Data Members
 	private Bridge.PortletPhase beganInPhase;
+	private long dateCreated;
 	private List<String> excludedAttributeNames;
 	private boolean facesLifecycleExecuted;
 	private String idPrefix;
@@ -112,6 +113,8 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 
 	public BridgeRequestScopeImpl(PortletConfig portletConfig, PortletContext portletContext,
 		PortletRequest portletRequest) {
+
+		this.dateCreated = Calendar.getInstance().getTimeInMillis();
 
 		portletName = portletConfig.getPortletName();
 
@@ -576,6 +579,10 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 
 	public boolean isRedirectOccurred() {
 		return redirect;
+	}
+
+	public long getDateCreated() {
+		return dateCreated;
 	}
 
 	protected boolean isExcludedRequestAttributeByInstance(String attributeName, Object attributeValue) {
