@@ -26,7 +26,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 public class BridgeRequestScopeCacheFactoryImpl extends BridgeRequestScopeCacheFactory {
 
 	// Private Constants
-	private static final int DEFAULT_MAX_MANAGED_REQUEST_SCOPES = 100;
+	private static final int DEFAULT_MAX_MANAGED_REQUEST_SCOPES = -1; // Unlimited
 	private static final String ATTR_BRIDGE_REQUEST_SCOPE_CACHE = "com.liferay.faces.bridge.bridgeRequestScopeCache";
 
 	// Logger
