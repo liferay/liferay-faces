@@ -13,7 +13,14 @@
  */
 package com.liferay.faces.bridge.scope;
 
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import javax.portlet.faces.Bridge;
+
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -27,8 +34,52 @@ public class BridgeRequestScopeCacheImpl extends ConcurrentHashMap<String, Bridg
 	// serialVersionUID
 	private static final long serialVersionUID = 4546189667853367660L;
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(BridgeRequestScopeCacheImpl.class);
+
+	// Private Data Members
+	private int maxSize;
+
 	public BridgeRequestScopeCacheImpl(int maxSize) {
-		super(maxSize, 1.0f);
+		super();
+		this.maxSize = maxSize;
 	}
 
+	@Override
+	public BridgeRequestScope put(String bridgeRequestScopeId, BridgeRequestScope bridgeRequestScope) {
+
+		// If there is a maximum size threshold for the cache, then
+		if (maxSize != -1) {
+
+			// If the threshold has been exceeded, then remove the eldest entry.
+			if (super.size() > maxSize) {
+
+				// Note: Iterating through the entire map is not the most performant algorithm for determining the
+				// eldest entry, but there don't seem to be any good options for implementing an LRU feature for
+				// ConcurrentHashMap without an external dependency. See:
+				// http://stackoverflow.com/questions/221525/how-would-you-implement-an-lru-cache-in-java-6
+				BridgeRequestScope eldestBridgeRequestScope = null;
+				long oldestDate = bridgeRequestScope.getDateCreated();
+				Set<Map.Entry<String, BridgeRequestScope>> entrySet = super.entrySet();
+
+				for (Map.Entry<String, BridgeRequestScope> mapEntry : entrySet) {
+					BridgeRequestScope currentBridgeRequestScope = mapEntry.getValue();
+
+					if (currentBridgeRequestScope.getDateCreated() < oldestDate) {
+						eldestBridgeRequestScope = currentBridgeRequestScope;
+					}
+				}
+
+				if (eldestBridgeRequestScope != null) {
+					String eldestBridgeRequestScopeId = eldestBridgeRequestScope.getId();
+					super.remove(eldestBridgeRequestScopeId);
+					logger.debug("Exceeded threshold of [{0}] for [{1}], removed eldest bridgeRequestScope id=[{2}]",
+						maxSize, Bridge.MAX_MANAGED_REQUEST_SCOPES, eldestBridgeRequestScopeId);
+				}
+			}
+
+		}
+
+		return super.put(bridgeRequestScopeId, bridgeRequestScope);
+	}
 }
