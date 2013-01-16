@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.bridge.scope;
 
-import java.util.Date;
 import java.util.Map;
 
 import javax.faces.context.FacesContext;
