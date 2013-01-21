@@ -13,15 +13,16 @@
  */
 package com.liferay.faces.bridge.context.url;
 
-import javax.faces.FacesWrapper;
 import javax.faces.context.FacesContext;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
 public abstract class BridgeResourceURLWrapper extends BridgeURLWrapper implements BridgeResourceURL,
-	FacesWrapper<BridgeResourceURL> {
+	Wrapper<BridgeResourceURL> {
 
 	public void replaceBackLinkParameter(FacesContext facesContext) {
 		getWrapped().replaceBackLinkParameter(facesContext);

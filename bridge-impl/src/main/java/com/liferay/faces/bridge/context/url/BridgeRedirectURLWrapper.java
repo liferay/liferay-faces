@@ -13,17 +13,18 @@
  */
 package com.liferay.faces.bridge.context.url;
 
-import javax.faces.FacesWrapper;
 import javax.portlet.PortletModeException;
 import javax.portlet.StateAwareResponse;
 import javax.portlet.WindowStateException;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
 public abstract class BridgeRedirectURLWrapper extends BridgeURLWrapper implements BridgeRedirectURL,
-	FacesWrapper<BridgeRedirectURL> {
+	Wrapper<BridgeRedirectURL> {
 
 	public void applyToResponse(StateAwareResponse stateAwareResponse) throws PortletModeException,
 		WindowStateException {

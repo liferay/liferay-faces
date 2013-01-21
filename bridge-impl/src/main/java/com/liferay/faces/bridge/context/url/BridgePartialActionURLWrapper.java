@@ -13,14 +13,14 @@
  */
 package com.liferay.faces.bridge.context.url;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
 public abstract class BridgePartialActionURLWrapper extends BridgeURLWrapper implements BridgePartialActionURL,
-	FacesWrapper<BridgePartialActionURL> {
+	Wrapper<BridgePartialActionURL> {
 
 	@Override
 	public abstract BridgePartialActionURL getWrapped();
