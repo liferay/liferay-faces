@@ -30,6 +30,9 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeUtil;
 import javax.servlet.jsp.JspContext;
 
+import com.liferay.faces.bridge.BridgeFactoryFinder;
+import com.liferay.faces.bridge.bean.BeanManager;
+import com.liferay.faces.bridge.bean.BeanManagerFactory;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.map.SessionMap;
@@ -256,8 +259,12 @@ public class ELResolverImpl extends ELResolverCompatImpl {
 					initParam = externalContext.getInitParameter(BridgeConfigConstants.PARAM_PREFER_PRE_DESTROY2);
 				}
 
+				BeanManagerFactory beanManagerFactory = (BeanManagerFactory) BridgeFactoryFinder.getFactory(
+						BeanManagerFactory.class);
+				BeanManager beanManager = beanManagerFactory.getBeanManager();
+
 				boolean preferPreDestroy = BooleanHelper.toBoolean(initParam, true);
-				value = new SessionMap(portletSession, PortletSession.APPLICATION_SCOPE, preferPreDestroy);
+				value = new SessionMap(portletSession, beanManager, PortletSession.APPLICATION_SCOPE, preferPreDestroy);
 			}
 			else if (varName.equals(MUTABLE_PORTLET_PREFERENCES_VALUES)) {
 				FacesContext facesContext = FacesContext.getCurrentInstance();
