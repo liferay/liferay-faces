@@ -26,8 +26,10 @@ import javax.faces.event.PhaseListener;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.PortletPhase;
 
+import com.liferay.faces.bridge.BridgeFactoryFinder;
+import com.liferay.faces.bridge.bean.BeanManager;
+import com.liferay.faces.bridge.bean.BeanManagerFactory;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.util.cdi.ManagedBeanUtil;
 
 
 /**
@@ -49,6 +51,7 @@ import com.liferay.faces.util.cdi.ManagedBeanUtil;
  */
 public class ManagedBeanScopePhaseListener implements PhaseListener {
 
+	// serialVersionUID
 	private static final long serialVersionUID = 1713704308484763548L;
 
 	public void afterPhase(PhaseEvent phaseEvent) {
@@ -66,10 +69,7 @@ public class ManagedBeanScopePhaseListener implements PhaseListener {
 				// void return methods annotated with javax.annotation.PreDestroy must be called first. Note that the
 				// bridge {@link RequestAttributeMap.remove(Object)} method will ensure that any @PreDestroy method(s)
 				// are called. The JavaDocs also state that this should only be the case for objects that are actually
-				// managed-beans. Currently the only check we do here is for the {@link ManagedBean} annotation. If
-				// beans are defined via managed-bean entries in faces-config.xml then they will not have their
-				// PreDestroy method(s) invoked. Tackling that case would involve scanning all the faces-config.xml
-				// files in the classpath which is a bit more involved than time currently allows...
+				// managed-beans.
 				FacesContext facesContext = FacesContext.getCurrentInstance();
 				Map<String, Object> requestScope = facesContext.getExternalContext().getRequestMap();
 				List<String> managedBeanKeysToRemove = new ArrayList<String>();
@@ -77,11 +77,15 @@ public class ManagedBeanScopePhaseListener implements PhaseListener {
 
 				if (mapEntries != null) {
 
+					BeanManagerFactory beanManagerFactory = (BeanManagerFactory) BridgeFactoryFinder.getFactory(
+							BeanManagerFactory.class);
+					BeanManager beanManager = beanManagerFactory.getBeanManager();
+
 					for (Map.Entry<String, Object> mapEntry : mapEntries) {
 						String managedBeanKey = mapEntry.getKey();
 						Object obj = mapEntry.getValue();
 
-						if (ManagedBeanUtil.hasManagedBeanAnnotation(obj)) {
+						if (beanManager.isManagedBean(obj)) {
 							managedBeanKeysToRemove.add(managedBeanKey);
 						}
 					}

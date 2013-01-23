@@ -20,7 +20,7 @@ import java.util.Set;
 import javax.faces.context.ExternalContext;
 import javax.portlet.PortletContext;
 
-import com.liferay.faces.util.cdi.ManagedBeanUtil;
+import com.liferay.faces.bridge.bean.BeanManager;
 import com.liferay.faces.util.map.AbstractPropertyMap;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
@@ -31,12 +31,14 @@ import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 public class ApplicationMap extends AbstractPropertyMap<Object> {
 
 	// Private Data Members
+	private BeanManager beanManager;
 	private PortletContext portletContext;
 	private boolean preferPreDestroy;
 
-	public ApplicationMap(PortletContext portletContext, boolean preferPreDestroy) {
+	public ApplicationMap(PortletContext portletContext, BeanManager beanManager, boolean preferPreDestroy) {
 		this.portletContext = portletContext;
 		this.preferPreDestroy = preferPreDestroy;
+		this.beanManager = beanManager;
 	}
 
 	/**
@@ -52,7 +54,10 @@ public class ApplicationMap extends AbstractPropertyMap<Object> {
 
 			for (Map.Entry<String, Object> mapEntry : mapEntries) {
 				Object potentialManagedBean = mapEntry.getValue();
-				ManagedBeanUtil.invokePreDestroyMethods(potentialManagedBean, preferPreDestroy);
+
+				if (beanManager.isManagedBean(potentialManagedBean)) {
+					beanManager.invokePreDestroyMethods(potentialManagedBean, preferPreDestroy);
+				}
 			}
 		}
 
@@ -67,7 +72,10 @@ public class ApplicationMap extends AbstractPropertyMap<Object> {
 	@Override
 	public Object remove(Object key) {
 		Object potentialManagedBean = super.remove(key);
-		ManagedBeanUtil.invokePreDestroyMethods(potentialManagedBean, preferPreDestroy);
+
+		if (beanManager.isManagedBean(potentialManagedBean)) {
+			beanManager.invokePreDestroyMethods(potentialManagedBean, preferPreDestroy);
+		}
 
 		return potentialManagedBean;
 	}
