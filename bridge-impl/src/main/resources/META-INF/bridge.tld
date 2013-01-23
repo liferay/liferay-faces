@@ -5,6 +5,9 @@
 	<tlib-version>3.0.0</tlib-version>
 	<short-name>bridge</short-name>
 	<uri>http://liferay.com/faces/bridge</uri>
+	<listener>
+		<listener-class>com.liferay.faces.bridge.servlet.BridgeSessionListener</listener-class>
+	</listener>
 	<tag>
 		<description>File Upload</description>
 		<name>inputFile</name>

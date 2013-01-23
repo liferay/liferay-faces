@@ -78,6 +78,7 @@
 		<lifecycle-factory>com.liferay.faces.bridge.lifecycle.LifecycleFactoryImpl</lifecycle-factory>
 		<view-declaration-language-factory>com.liferay.faces.bridge.application.view.ViewDeclarationLanguageFactoryImpl</view-declaration-language-factory>
 		<factory-extension>
+			<bridge:bean-manager-factory>com.liferay.faces.bridge.bean.BeanManagerFactoryImpl</bridge:bean-manager-factory>
 			<bridge:bridge-context-factory>com.liferay.faces.bridge.context.BridgeContextFactoryImpl</bridge:bridge-context-factory>
 			<bridge:bridge-flash-factory>com.liferay.faces.bridge.context.flash.BridgeFlashFactoryImpl</bridge:bridge-flash-factory>
 			<bridge:bridge-phase-factory>com.liferay.faces.bridge.BridgePhaseFactoryImpl</bridge:bridge-phase-factory>
