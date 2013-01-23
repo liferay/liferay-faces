@@ -20,7 +20,7 @@ import javax.faces.context.ExternalContext;
 import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.util.cdi.ManagedBeanUtil;
+import com.liferay.faces.bridge.bean.BeanManager;
 import com.liferay.faces.util.map.AbstractPropertyMap;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 import com.liferay.faces.util.product.Product;
@@ -46,17 +46,19 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 	}
 
 	// Private Data Members
+	private BeanManager beanManager;
 	private boolean distinctRequestScopedManagedBeans;
 	private String namespace;
 	private PortletRequest portletRequest;
 	private boolean preferPreDestroy;
 
-	public RequestAttributeMap(PortletRequest portletRequest, String namespace, boolean preferPreDestroy,
-		boolean distinctRequestScopedManagedBeans) {
+	public RequestAttributeMap(PortletRequest portletRequest, BeanManager beanManager, String namespace,
+		boolean preferPreDestroy, boolean distinctRequestScopedManagedBeans) {
 		this.portletRequest = portletRequest;
 		this.namespace = namespace;
 		this.preferPreDestroy = preferPreDestroy;
 		this.distinctRequestScopedManagedBeans = distinctRequestScopedManagedBeans;
+		this.beanManager = beanManager;
 	}
 
 	/**
@@ -67,7 +69,10 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 	@Override
 	public Object remove(Object key) {
 		Object potentialManagedBean = super.remove(key);
-		ManagedBeanUtil.invokePreDestroyMethods(potentialManagedBean, preferPreDestroy);
+
+		if (beanManager.isManagedBean(potentialManagedBean)) {
+			beanManager.invokePreDestroyMethods(potentialManagedBean, preferPreDestroy);
+		}
 
 		return potentialManagedBean;
 	}

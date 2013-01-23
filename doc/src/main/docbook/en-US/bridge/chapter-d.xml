@@ -56,10 +56,6 @@
 						init-param in the WEB-INF/web.xml descriptor in order to tune the memory settings on the
 						server.</para>
 				</listitem>
-				<listitem>
-					<para>The developer is forced to add a &lt;listener> for the BridgeSessionListener to the
-						WEB-INF/web.xml descriptor.</para>
-				</listitem>
 			</itemizedlist>Therefore, since Liferay Faces Bridge is designed for JSF 2 and Ajax in mind, the bridge
 			makes the following assumptions:</para>
 		<para><itemizedlist>
@@ -106,12 +102,7 @@
 &lt;context-param>
 	&lt;param-name>javax.portlet.faces.MAX_MANAGED_REQUEST_SCOPES&lt;/param-name>
 	&lt;param-value>2000&lt;/param-value>
-&lt;/context-param>
-&lt;!-- The following listener is required to cleanup -->
-&lt;!-- BridgeRequestScope instances upon session timeout -->
-&lt;listener>
-	&lt;listener-class>com.liferay.faces.bridge.servlet.BridgeSessionListener&lt;/listener-class>
-&lt;/listener></programlisting>
+&lt;/context-param></programlisting>
 		</example>
 		<para>Alternatively, the com.liferay.faces.bridge.bridgeRequestScopePreserved value can be specified on a
 			portlet-by-portlet basis in the WEB-INF/portlet.xml descriptor.</para>

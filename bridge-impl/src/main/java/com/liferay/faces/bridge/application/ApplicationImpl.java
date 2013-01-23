@@ -13,17 +13,26 @@
  */
 package com.liferay.faces.bridge.application;
 
+import java.util.List;
+
 import javax.faces.FacesException;
 import javax.faces.application.Application;
 import javax.faces.application.NavigationHandler;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
+import javax.faces.event.SystemEvent;
+import javax.faces.event.SystemEventListener;
 import javax.portlet.PortletRequest;
 import javax.portlet.faces.BridgeUtil;
 import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 
 import com.liferay.faces.bridge.component.UIViewRootBridgeImpl;
+import com.liferay.faces.bridge.config.BridgeConfig;
+import com.liferay.faces.bridge.config.ConfiguredSystemEventListener;
+import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -36,8 +45,15 @@ import com.liferay.faces.bridge.component.UIViewRootBridgeImpl;
  */
 public class ApplicationImpl extends ApplicationCompatImpl {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(ApplicationImpl.class);
+
+	// Private Constants
+	private static final String UIVIEWROOT_FQCN = UIViewRoot.class.getName();
+
 	// Private Data Members
-	private boolean wrapHandlerAtRuntime = true;
+	private Boolean subscribeToEventsAtRuntime = Boolean.TRUE;
+	private Boolean wrapHandlerAtRuntime = Boolean.TRUE;
 
 	public ApplicationImpl(Application application) {
 		super(application);
@@ -53,6 +69,64 @@ public class ApplicationImpl extends ApplicationCompatImpl {
 	public UIComponent createComponent(String componentType) throws FacesException {
 
 		if (componentType.equals(UIViewRoot.COMPONENT_TYPE) && BridgeUtil.isPortletRequest()) {
+
+			// NOTE: Mojarra uses a servlet context listener to pre-load all the faces-config.xml files in the
+			// classpath. During this initialization, it will call subscribeToEvent() for source-class
+			// "javax.faces.component.UIViewRoot". But since, Liferay Faces Bridge uses a subclass of UIViewRoot named
+			// UIViewRootBridgeImpl, the events must instead be subscribed for source-class
+			// "com.liferay.faces.bridge.component.UIViewRootBridgeImpl". While this is necessary in general, it is
+			// especially the case for Mojarra since the com.sun.faces.application.view.ViewScopeManager class relies
+			// on javax.faces.event.PostConstructViewMapEvent and javax.faces.event.PreDestroyViewMapEvent in order
+			// to cleanup @ViewScoped managed-beans.
+			if (subscribeToEventsAtRuntime) {
+
+				// Since multiple requests could come in at the same time, event subscription must be synchronized in
+				// order to ensure that it only happens once.
+				synchronized (subscribeToEventsAtRuntime) {
+
+					// Need to check again within the synchronization block, just in case.
+					if (subscribeToEventsAtRuntime) {
+						BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+						BridgeConfig bridgeConfig = bridgeContext.getBridgeConfig();
+						List<ConfiguredSystemEventListener> configuredSystemEventListeners =
+							bridgeConfig.getConfiguredSystemEventListeners();
+
+						if (configuredSystemEventListeners != null) {
+
+							for (ConfiguredSystemEventListener configuredSystemEventListener :
+								configuredSystemEventListeners) {
+
+								if (UIVIEWROOT_FQCN.equals(configuredSystemEventListener.getSourceClass())) {
+
+									try {
+										@SuppressWarnings("unchecked")
+										Class<? extends SystemEvent> systemEventClass = (Class<? extends SystemEvent>)
+											Class.forName(configuredSystemEventListener.getSystemEventClass());
+										@SuppressWarnings("unchecked")
+										Class<? extends SystemEventListener> systemEventListenerClass =
+											(Class<? extends SystemEventListener>) Class.forName(
+												configuredSystemEventListener.getSystemEventListenerClass());
+										SystemEventListener systemEventListener = (SystemEventListener)
+											systemEventListenerClass.newInstance();
+
+										logger.debug(
+											"Subscribing UIViewRootBridgeImpl for systemEventClass=[{0}] systemEventListener=[{1}]",
+											systemEventClass, systemEventListener);
+										subscribeToEvent(systemEventClass, UIViewRootBridgeImpl.class,
+											systemEventListener);
+									}
+									catch (Exception e) {
+										logger.error(e);
+									}
+								}
+							}
+						}
+					}
+
+					subscribeToEventsAtRuntime = false;
+				}
+			}
+
 			return new UIViewRootBridgeImpl();
 		}
 		else {
@@ -81,27 +155,37 @@ public class ApplicationImpl extends ApplicationCompatImpl {
 		// wrapping the Faces default NavigationHandler until a PortletRequest happens at runtime.
 		if (wrapHandlerAtRuntime) {
 
-			FacesContext facesContext = FacesContext.getCurrentInstance();
+			// Since multiple requests could come in at the same time, wrapping must be synchronized in order to
+			// ensure that it only happens once.
+			synchronized (wrapHandlerAtRuntime) {
 
-			if (facesContext != null) {
+				// Need to check again within the synchronization block, just in case.
+				if (wrapHandlerAtRuntime) {
+					FacesContext facesContext = FacesContext.getCurrentInstance();
 
-				try {
+					if (facesContext != null) {
 
-					PortletRequest portletRequest = (PortletRequest) facesContext.getExternalContext().getRequest();
+						try {
 
-					if (portletRequest != null) {
+							PortletRequest portletRequest = (PortletRequest) facesContext.getExternalContext()
+								.getRequest();
 
-						NavigationHandler wrappableNavigationHandler = super.getNavigationHandler();
-						if (!(wrappableNavigationHandler instanceof BridgeNavigationHandlerImpl)) {
-							BridgeNavigationHandler bridgeNavigationHandler = new BridgeNavigationHandlerImpl(
-									wrappableNavigationHandler);
-							super.setNavigationHandler(bridgeNavigationHandler);
-							wrapHandlerAtRuntime = false;
+							if (portletRequest != null) {
+
+								NavigationHandler wrappableNavigationHandler = super.getNavigationHandler();
+
+								if (!(wrappableNavigationHandler instanceof BridgeNavigationHandlerImpl)) {
+									BridgeNavigationHandler bridgeNavigationHandler = new BridgeNavigationHandlerImpl(
+											wrappableNavigationHandler);
+									super.setNavigationHandler(bridgeNavigationHandler);
+									wrapHandlerAtRuntime = false;
+								}
+							}
+						}
+						catch (UnsupportedOperationException e) {
+							// ignore -- MyFaces does not permit calling getRequest() during startup.
 						}
 					}
-				}
-				catch (UnsupportedOperationException e) {
-					// ignore -- MyFaces does not permit calling getRequest() during startup.
 				}
 			}
 		}
