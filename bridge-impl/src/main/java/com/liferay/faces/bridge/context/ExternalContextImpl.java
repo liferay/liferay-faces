@@ -42,6 +42,8 @@ import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentRequest;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentResponse;
 import com.liferay.faces.bridge.application.view.BridgeWriteBehindSupportFactory;
+import com.liferay.faces.bridge.bean.BeanManager;
+import com.liferay.faces.bridge.bean.BeanManagerFactory;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.context.map.ApplicationMap;
 import com.liferay.faces.bridge.context.map.InitParameterMap;
@@ -73,6 +75,7 @@ public class ExternalContextImpl extends ExternalContextCompat22Impl {
 
 	// Pre-initialized Data Members
 	private ApplicationMap applicationMap;
+	private BeanManager beanManager;
 	private Map<String, Object> requestAttributeMap;
 	private Iterator<Locale> requestLocales;
 	private Map<String, Object> sessionMap;
@@ -91,6 +94,10 @@ public class ExternalContextImpl extends ExternalContextCompat22Impl {
 		PortletResponse portletResponse) {
 
 		super(portletContext, portletRequest, portletResponse);
+
+		BeanManagerFactory beanManagerFactory = (BeanManagerFactory) BridgeFactoryFinder.getFactory(
+				BeanManagerFactory.class);
+		this.beanManager = beanManagerFactory.getBeanManager();
 
 		try {
 			boolean requestChanged = false;
@@ -194,7 +201,7 @@ public class ExternalContextImpl extends ExternalContextCompat22Impl {
 		boolean preferPreDestroy = BooleanHelper.toBoolean(preferPreDestroyInitParam, true);
 
 		// Initialize the application map.
-		applicationMap = new ApplicationMap(portletContext, preferPreDestroy);
+		applicationMap = new ApplicationMap(portletContext, beanManager, preferPreDestroy);
 
 		// Determines whether or not JSF @ManagedBean classes annotated with @RequestScoped should be distinct for
 		// each portlet when running under Liferay Portal.
@@ -206,12 +213,13 @@ public class ExternalContextImpl extends ExternalContextCompat22Impl {
 		}
 
 		// Initialize the request attribute map.
-		requestAttributeMap = new RequestAttributeMap(portletRequest,
+		requestAttributeMap = new RequestAttributeMap(portletRequest, beanManager,
 				bridgeContext.getPortletContainer().getResponseNamespace(), preferPreDestroy,
 				distinctRequestScopedManagedBeans);
 
 		// Initialize the session map.
-		sessionMap = new SessionMap(portletRequest.getPortletSession(), PortletSession.PORTLET_SCOPE, preferPreDestroy);
+		sessionMap = new SessionMap(portletRequest.getPortletSession(), beanManager, PortletSession.PORTLET_SCOPE,
+				preferPreDestroy);
 
 		// Initialize the init parameter map.
 		initParameterMap = Collections.unmodifiableMap(new InitParameterMap(portletContext));

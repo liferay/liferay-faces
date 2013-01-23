@@ -20,7 +20,7 @@ import java.util.Set;
 import javax.faces.context.ExternalContext;
 import javax.portlet.PortletSession;
 
-import com.liferay.faces.util.cdi.ManagedBeanUtil;
+import com.liferay.faces.bridge.bean.BeanManager;
 import com.liferay.faces.util.map.AbstractPropertyMap;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
@@ -31,6 +31,7 @@ import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 public class SessionMap extends AbstractPropertyMap<Object> {
 
 	// Private Data Members
+	private BeanManager beanManager;
 	private PortletSession portletSession;
 	private boolean preferPreDestroy;
 	private int scope;
@@ -42,10 +43,11 @@ public class SessionMap extends AbstractPropertyMap<Object> {
 	 * @param  scope           The scope of the session map, which can be PortletSession.PORTLET_SCOPE or
 	 *                         PortletSession.APPLICATION_SCOPE
 	 */
-	public SessionMap(PortletSession portletSession, int scope, boolean preferPreDestroy) {
+	public SessionMap(PortletSession portletSession, BeanManager beanManager, int scope, boolean preferPreDestroy) {
 		this.portletSession = portletSession;
 		this.scope = scope;
 		this.preferPreDestroy = preferPreDestroy;
+		this.beanManager = beanManager;
 	}
 
 	/**
@@ -61,7 +63,10 @@ public class SessionMap extends AbstractPropertyMap<Object> {
 
 			for (Map.Entry<String, Object> mapEntry : mapEntries) {
 				Object potentialManagedBean = mapEntry.getValue();
-				ManagedBeanUtil.invokePreDestroyMethods(potentialManagedBean, preferPreDestroy);
+
+				if (beanManager.isManagedBean(potentialManagedBean)) {
+					beanManager.invokePreDestroyMethods(potentialManagedBean, preferPreDestroy);
+				}
 			}
 		}
 
@@ -76,7 +81,10 @@ public class SessionMap extends AbstractPropertyMap<Object> {
 	@Override
 	public Object remove(Object key) {
 		Object potentialManagedBean = super.remove(key);
-		ManagedBeanUtil.invokePreDestroyMethods(potentialManagedBean, preferPreDestroy);
+
+		if (beanManager.isManagedBean(potentialManagedBean)) {
+			beanManager.invokePreDestroyMethods(potentialManagedBean, preferPreDestroy);
+		}
 
 		return potentialManagedBean;
 	}

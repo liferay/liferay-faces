@@ -35,6 +35,10 @@ public class BridgeConfigMockImpl implements BridgeConfig {
 		throw new UnsupportedOperationException();
 	}
 
+	public List<ConfiguredSystemEventListener> getConfiguredSystemEventListeners() {
+		throw new UnsupportedOperationException();
+	}
+
 	public String getContextParameter(String name) {
 		throw new UnsupportedOperationException();
 	}
