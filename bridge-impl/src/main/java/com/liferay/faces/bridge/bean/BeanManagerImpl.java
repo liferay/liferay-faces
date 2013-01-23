@@ -11,13 +11,18 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.cdi;
+package com.liferay.faces.bridge.bean;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
+import javax.portlet.faces.annotation.BridgePreDestroy;
 
+import com.liferay.faces.bridge.config.ConfiguredBean;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -25,107 +30,30 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class ManagedBeanUtil {
+public class BeanManagerImpl implements BeanManager {
 
 	// Private Constants
 	private static final String JAVAX_ANNOTATION_PRE_DESTROY = "javax.annotation.PreDestroy";
 	private static final String JAVAX_ANNOTATION_BRIDGE_PRE_DESTROY = "javax.portlet.faces.annotation.BridgePreDestroy";
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(ManagedBeanUtil.class);
+	private static final Logger logger = LoggerFactory.getLogger(BeanManagerImpl.class);
 
-	/**
-	 * Determines whether or not the specified method is annotated with the {@link BridgePreDestroy} annotation. Note
-	 * that the method signature must also have a void return type an zero parameters in order for this method to return
-	 * true.
-	 *
-	 * @param   method  The method to check.
-	 *
-	 * @return  true if the specified method is annotated with a PreDestroy annotation.
-	 */
-	public static boolean hasBridgePreDestroyAnnotation(Method method) {
+	// Private Data Members
+	private Set<String> managedBeanFQCNs;
 
-		if (method.getReturnType() == Void.TYPE) {
-			Class<?>[] parameterTypes = method.getParameterTypes();
+	public BeanManagerImpl(List<ConfiguredBean> configuredBeans) {
+		this.managedBeanFQCNs = new HashSet<String>();
 
-			if ((parameterTypes == null) || (parameterTypes.length == 0)) {
-				Annotation[] annotations = method.getAnnotations();
+		if (configuredBeans != null) {
 
-				if (annotations != null) {
-
-					for (Annotation annotation : annotations) {
-
-						if (annotation.annotationType().getName().equals(JAVAX_ANNOTATION_BRIDGE_PRE_DESTROY)) {
-							return true;
-						}
-					}
-				}
+			for (ConfiguredBean configuredBean : configuredBeans) {
+				managedBeanFQCNs.add(configuredBean.getManagedBeanClass());
 			}
 		}
-
-		return false;
 	}
 
-	/**
-	 * Determines whether or not the specified object is annotated as a JSF managed-bean.
-	 *
-	 * @param   obj  The object to check.
-	 *
-	 * @return  true if the specified object is annotated as a JSF managed-bean, otherwise false.
-	 */
-	public static boolean hasManagedBeanAnnotation(Object object) {
-
-		if ((object != null) && (object.getClass().getAnnotation(ManagedBean.class) != null)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	/**
-	 * Determines whether or not the specified method is annotated with the {@link PreDestroy} annotation. Note that the
-	 * method signature must also have a void return type an zero parameters in order for this method to return true.
-	 *
-	 * @param   method  The method to check.
-	 *
-	 * @return  true if the specified method is annotated with a PreDestroy annotation.
-	 */
-	public static boolean hasPreDestroyAnnotation(Method method) {
-
-		if (method.getReturnType() == Void.TYPE) {
-			Class<?>[] parameterTypes = method.getParameterTypes();
-
-			if ((parameterTypes == null) || (parameterTypes.length == 0)) {
-				Annotation[] annotations = method.getAnnotations();
-
-				if (annotations != null) {
-
-					for (Annotation annotation : annotations) {
-
-						if (annotation.annotationType().getName().equals(JAVAX_ANNOTATION_PRE_DESTROY)) {
-							return true;
-						}
-					}
-				}
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * This method services as a convenience routine for invoking all methods of the specified managed-bean are marked
-	 * with the {@link javax.annotation.PreDestroy} annotation. The JavaDocs state that if an exception is thrown by any
-	 * of the PreDestroy annotated methods, they are required to be caught and NOT re-thrown. Instead, exceptions may be
-	 * logged.
-	 *
-	 * @param  managedBean       The managed-bean that is to have its PreDestroy annotated method(s) invoked, if any.
-	 * @param  preferPreDestroy  Boolean flag indicating that methods annotated with &#064;PreDestroy should be
-	 *                           preferably invoked over those annotated with &#064;BridgePreDestroy.
-	 */
-	@SuppressWarnings("restriction")
-	public static void invokePreDestroyMethods(Object managedBean, boolean preferPreDestroy) {
+	public void invokePreDestroyMethods(Object managedBean, boolean preferPreDestroy) {
 
 		if (managedBean != null) {
 
@@ -169,4 +97,101 @@ public class ManagedBeanUtil {
 		}
 	}
 
+	/**
+	 * Determines whether or not the specified method is annotated with the {@link BridgePreDestroy} annotation. Note
+	 * that the method signature must also have a void return type an zero parameters in order for this method to return
+	 * true.
+	 *
+	 * @param   method  The method to check.
+	 *
+	 * @return  true if the specified method is annotated with a PreDestroy annotation.
+	 */
+	protected boolean hasBridgePreDestroyAnnotation(Method method) {
+
+		if (method.getReturnType() == Void.TYPE) {
+			Class<?>[] parameterTypes = method.getParameterTypes();
+
+			if ((parameterTypes == null) || (parameterTypes.length == 0)) {
+				Annotation[] annotations = method.getAnnotations();
+
+				if (annotations != null) {
+
+					for (Annotation annotation : annotations) {
+
+						if (annotation.annotationType().getName().equals(JAVAX_ANNOTATION_BRIDGE_PRE_DESTROY)) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Determines whether or not the specified object is annotated as a JSF managed-bean.
+	 *
+	 * @param   obj  The object to check.
+	 *
+	 * @return  true if the specified object is annotated as a JSF managed-bean, otherwise false.
+	 */
+	protected boolean hasManagedBeanAnnotation(Object object) {
+
+		if ((object != null) && (object.getClass().getAnnotation(ManagedBean.class) != null)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 * Determines whether or not the specified method is annotated with the {@link PreDestroy} annotation. Note that the
+	 * method signature must also have a void return type an zero parameters in order for this method to return true.
+	 *
+	 * @param   method  The method to check.
+	 *
+	 * @return  true if the specified method is annotated with a PreDestroy annotation.
+	 */
+	protected boolean hasPreDestroyAnnotation(Method method) {
+
+		if (method.getReturnType() == Void.TYPE) {
+			Class<?>[] parameterTypes = method.getParameterTypes();
+
+			if ((parameterTypes == null) || (parameterTypes.length == 0)) {
+				Annotation[] annotations = method.getAnnotations();
+
+				if (annotations != null) {
+
+					for (Annotation annotation : annotations) {
+
+						if (annotation.annotationType().getName().equals(JAVAX_ANNOTATION_PRE_DESTROY)) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
+	public boolean isManagedBean(Object value) {
+
+		boolean managedBean = false;
+
+		if (value != null) {
+
+			if (hasManagedBeanAnnotation(value)) {
+				managedBean = true;
+			}
+			else {
+				String managedBeanFQCN = value.getClass().getName();
+				managedBean = managedBeanFQCNs.contains(managedBeanFQCN);
+			}
+		}
+
+		return managedBean;
+	}
 }
