@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,6 +26,7 @@ import java.util.TimeZone;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletException;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
@@ -591,9 +592,11 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getHttpServletResponse(portletResponse);
 	}
 
-	public String getJournalArticleActualURL(long groupId, String mainPath, String friendlyURL,
+	@Override
+	public String getJournalArticleActualURL(long groupId, boolean privateLayout, String mainPath, String friendlyURL,
 		Map<String, String[]> params, Map<String, Object> requestContext) throws PortalException, SystemException {
-		return getWrapped().getJournalArticleActualURL(groupId, mainPath, friendlyURL, params, requestContext);
+		return getWrapped().getJournalArticleActualURL(groupId, privateLayout, mainPath, friendlyURL, params,
+				requestContext);
 	}
 
 	public String getJsSafePortletId(String portletId) {
@@ -876,6 +879,12 @@ public abstract class PortalWrapper implements Portal {
 
 	public List<BreadcrumbEntry> getPortletBreadcrumbs(HttpServletRequest request) {
 		return getWrapped().getPortletBreadcrumbs(request);
+	}
+
+	@Override
+	public PortletConfig getPortletConfig(long companyId, String portletId, ServletContext servletContext)
+		throws PortletException, SystemException {
+		return getPortletConfig(companyId, portletId, servletContext);
 	}
 
 	public String getPortletDescription(Portlet portlet, User user) {
