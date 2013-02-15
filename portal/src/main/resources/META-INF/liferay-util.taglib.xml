@@ -30,6 +30,30 @@
 		<function-signature>java.lang.String replace(java.lang.String, java.lang.String, java.lang.String)</function-signature>
 	</function>
 	<tag>
+		<tag-name>importConstants</tag-name>
+		<handler-class>com.liferay.faces.portal.el.ImportConstants</handler-class>
+		<attribute>
+			<name>cacheEnabled</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<name>classType</name>
+			<required>true</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<name>includeNonPublic</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
 		<tag-name>validateCaptcha</tag-name>
 		<validator>
 			<validator-id>com.liferay.faces.portal.CaptchaValidator</validator-id>
