@@ -287,6 +287,21 @@
 		</attribute>
 	</tag>
 	<tag>
+		<description>Sets the value of the specified var in the EL to a mapping of the public static constants of the specified classType.</description>
+		<tag-name>importConstants</tag-name>
+		<handler-class>com.liferay.faces.alloy.taglib.ImportConstantsTagHandler</handler-class>
+		<attribute>
+			<name>classType</name>
+			<required>true</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
 		<description>Renders a div element with CSS class name &quot;aui-layout&quot; that will be positioned by Alloy UI CSS.</description>
 		<tag-name>layout</tag-name>
 		<component>
