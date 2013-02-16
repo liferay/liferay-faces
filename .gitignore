@@ -5,3 +5,5 @@ doc/src/main/docbook/style
 target
 rebel.xml
 *.sh
+.idea/*
+*.iml
