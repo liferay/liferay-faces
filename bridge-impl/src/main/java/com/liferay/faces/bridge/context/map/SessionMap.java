@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -62,10 +62,13 @@ public class SessionMap extends AbstractPropertyMap<Object> {
 		if (mapEntries != null) {
 
 			for (Map.Entry<String, Object> mapEntry : mapEntries) {
-				Object potentialManagedBean = mapEntry.getValue();
 
-				if (beanManager.isManagedBean(potentialManagedBean)) {
-					beanManager.invokePreDestroyMethods(potentialManagedBean, preferPreDestroy);
+				String potentialManagedBeanName = mapEntry.getKey();
+
+				Object potentialManagedBeanValue = mapEntry.getValue();
+
+				if (beanManager.isManagedBean(potentialManagedBeanName, potentialManagedBeanValue)) {
+					beanManager.invokePreDestroyMethods(potentialManagedBeanValue, preferPreDestroy);
 				}
 			}
 		}
@@ -80,13 +83,15 @@ public class SessionMap extends AbstractPropertyMap<Object> {
 	 */
 	@Override
 	public Object remove(Object key) {
-		Object potentialManagedBean = super.remove(key);
 
-		if (beanManager.isManagedBean(potentialManagedBean)) {
-			beanManager.invokePreDestroyMethods(potentialManagedBean, preferPreDestroy);
+		String potentialManagedBeanName = (String) key;
+		Object potentialManagedBeanValue = super.remove(key);
+
+		if (beanManager.isManagedBean(potentialManagedBeanName, potentialManagedBeanValue)) {
+			beanManager.invokePreDestroyMethods(potentialManagedBeanValue, preferPreDestroy);
 		}
 
-		return potentialManagedBean;
+		return potentialManagedBeanValue;
 	}
 
 	@Override
