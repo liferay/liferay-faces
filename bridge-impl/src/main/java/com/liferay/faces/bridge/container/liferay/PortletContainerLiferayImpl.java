@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -41,6 +41,9 @@ import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
+
+import com.liferay.portal.theme.PortletDisplay;
+import com.liferay.portal.theme.ThemeDisplay;
 
 
 /**
@@ -90,7 +93,7 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 			this.portletResponseNamespace = portletResponse.getNamespace();
 
 			LiferayPortletRequest liferayPortletRequest = new LiferayPortletRequest(portletRequest);
-			LiferayThemeDisplay liferayThemeDisplay = liferayPortletRequest.getLiferayThemeDisplay();
+			ThemeDisplay themeDisplay = liferayPortletRequest.getThemeDisplay();
 			this.liferayPortletRequest = liferayPortletRequest;
 
 			// Initialize the pseudo-constants.
@@ -104,7 +107,7 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 			if (portletRequest instanceof RenderRequest) {
 				PortletMode portletMode = portletRequest.getPortletMode();
 				WindowState windowState = portletRequest.getWindowState();
-				saveRenderAttributes(portletMode, windowState, liferayThemeDisplay, responseNamespace, portletContext);
+				saveRenderAttributes(portletMode, windowState, themeDisplay, responseNamespace, portletContext);
 			}
 
 			// Determine the Liferay version number.
@@ -253,22 +256,22 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	 * @param  responseNamespace  The current response namespace.
 	 * @param  applicationMap     The current ApplicationMap.
 	 */
-	protected void saveRenderAttributes(PortletMode portletMode, WindowState windowState,
-		LiferayThemeDisplay themeDisplay, String responseNamespace, PortletContext portletContext) {
+	protected void saveRenderAttributes(PortletMode portletMode, WindowState windowState, ThemeDisplay themeDisplay,
+		String responseNamespace, PortletContext portletContext) {
 
 		try {
 
 			// Get the PortletDisplay from the ThemeDisplay.
-			LiferayPortletDisplay portletDisplay = themeDisplay.getLiferayPortletDisplay();
+			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 			// Get the p_p_col_id and save it.
 			portletContext.setAttribute(NAMESPACED_P_P_COL_ID, portletDisplay.getColumnId());
 
 			// Get the p_p_col_pos and save it.
-			portletContext.setAttribute(NAMESPACED_P_P_COL_POS, portletDisplay.getColumnPos());
+			portletContext.setAttribute(NAMESPACED_P_P_COL_POS, Integer.toString(portletDisplay.getColumnPos()));
 
 			// Get the p_p_col_count and save it.
-			portletContext.setAttribute(NAMESPACED_P_P_COL_COUNT, portletDisplay.getColumnCount());
+			portletContext.setAttribute(NAMESPACED_P_P_COL_COUNT, Integer.toString(portletDisplay.getColumnCount()));
 
 			// Get the p_p_mode and save it.
 			if (portletMode != null) {
@@ -402,7 +405,7 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 
 		if (requestURL == null) {
 			StringBuilder buf = new StringBuilder();
-			LiferayThemeDisplay themeDisplay = liferayPortletRequest.getLiferayThemeDisplay();
+			ThemeDisplay themeDisplay = liferayPortletRequest.getThemeDisplay();
 			buf.append(themeDisplay.getURLPortal());
 			buf.append(themeDisplay.getURLCurrent());
 			requestURL = buf.toString();
