@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -689,7 +689,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 		private boolean parsingRenderResponseWrapperClass;
 		private boolean parsingResourceResponseWrapperClass;
 		private String parameter;
-		private boolean parsingUploadedFileFactory = false;
+		private boolean parsingUploadedFileFactory;
 		private boolean parsingViewHandlerFactory = false;
 
 		public FacesConfigPostHandler(boolean resolveEntities) {
@@ -718,8 +718,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
-
-				parsingBeanManagerFactory = false;
 			}
 			else if (parsingBridgeContextFactory) {
 				String factoryClassName = content.toString().trim();
@@ -740,8 +738,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
-
-				parsingBridgeContextFactory = false;
 			}
 			else if (parsingBridgePhaseFactory) {
 				String factoryClassName = content.toString().trim();
@@ -762,8 +758,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
-
-				parsingBridgePhaseFactory = false;
 			}
 			else if (parsingBridgeRequestScopeFactory) {
 				String factoryClassName = content.toString().trim();
@@ -784,8 +778,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
-
-				parsingBridgeRequestScopeFactory = false;
 			}
 			else if (parsingBridgeRequestScopeCacheFactory) {
 				String factoryClassName = content.toString().trim();
@@ -807,8 +799,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
-
-				parsingBridgeRequestScopeCacheFactory = false;
 			}
 			else if (parsingBridgeRequestScopeManagerFactory) {
 				String factoryClassName = content.toString().trim();
@@ -831,8 +821,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
-
-				parsingBridgeRequestScopeManagerFactory = false;
 			}
 			else if (parsingBridgeWriteBehindSupportFactory) {
 				String factoryClassName = content.toString().trim();
@@ -854,8 +842,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
-
-				parsingBridgeWriteBehindSupportFactory = false;
 			}
 			else if (parsingBridgeURLFactory) {
 				String factoryClassName = content.toString().trim();
@@ -876,8 +862,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
-
-				parsingBridgeURLFactory = false;
 			}
 			else if (parsingExcludedAttribute) {
 				String attributeName = content.toString().trim();
@@ -885,8 +869,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 				if (attributeName.length() > 0) {
 					BridgeConfigImpl.this.excludedBridgeRequestAttributes.add(attributeName);
 				}
-
-				parsingExcludedAttribute = false;
 			}
 			else if (parsingIncongruityContextFactory) {
 				String factoryClassName = content.toString().trim();
@@ -907,8 +889,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
-
-				parsingIncongruityContextFactory = false;
 			}
 			else if (parsingManagedBeanClass) {
 				managedBeanClass = content.toString().trim();
@@ -949,12 +929,9 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 					BridgeConfigImpl.this.publicParameterMappings.put(parameter, newValue);
 				}
-
-				parsingModelEL = false;
 			}
 			else if (parsingParameter) {
 				parameter = content.toString().trim();
-				parsingParameter = false;
 			}
 			else if (parsingPortletContainerFactory) {
 				String factoryClassName = content.toString().trim();
@@ -975,18 +952,14 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
-
-				parsingPortletContainerFactory = false;
 			}
 			else if (parsingRenderResponseWrapperClass) {
 				writeBehindRenderResponseWrapper = content.toString().trim();
 				logger.debug("render-response-wrapper-class=[{0}]", writeBehindRenderResponseWrapper);
-				parsingRenderResponseWrapperClass = false;
 			}
 			else if (parsingResourceResponseWrapperClass) {
 				writeBehindResourceResponseWrapper = content.toString().trim();
 				logger.debug("resource-response-wrapper-class=[{0}]", writeBehindResourceResponseWrapper);
-				parsingResourceResponseWrapperClass = false;
 			}
 			else if (parsingUploadedFileFactory) {
 				String factoryClassName = content.toString().trim();
@@ -1007,8 +980,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
-
-				parsingUploadedFileFactory = false;
 			}
 			else if (parsingViewHandlerFactory) {
 				String factoryClassName = content.toString().trim();
@@ -1032,6 +1003,23 @@ public class BridgeConfigImpl implements BridgeConfig {
 			}
 
 			content = null;
+			parsingBeanManagerFactory = false;
+			parsingBridgeContextFactory = false;
+			parsingBridgePhaseFactory = false;
+			parsingBridgeRequestScopeFactory = false;
+			parsingBridgeRequestScopeCacheFactory = false;
+			parsingBridgeRequestScopeManagerFactory = false;
+			parsingBridgeWriteBehindSupportFactory = false;
+			parsingBridgeURLFactory = false;
+			parsingExcludedAttribute = false;
+			parsingIncongruityContextFactory = false;
+
+			parsingModelEL = false;
+			parsingParameter = false;
+			parsingPortletContainerFactory = false;
+			parsingRenderResponseWrapperClass = false;
+			parsingResourceResponseWrapperClass = false;
+			parsingUploadedFileFactory = false;
 		}
 
 		@Override

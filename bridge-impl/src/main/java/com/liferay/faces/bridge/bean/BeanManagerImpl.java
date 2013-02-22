@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,14 +15,15 @@ package com.liferay.faces.bridge.bean;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.portlet.faces.annotation.BridgePreDestroy;
 
 import com.liferay.faces.bridge.config.ConfiguredBean;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -35,20 +36,21 @@ public class BeanManagerImpl implements BeanManager {
 	// Private Constants
 	private static final String JAVAX_ANNOTATION_PRE_DESTROY = "javax.annotation.PreDestroy";
 	private static final String JAVAX_ANNOTATION_BRIDGE_PRE_DESTROY = "javax.portlet.faces.annotation.BridgePreDestroy";
+	private static final String JAVAX_PORTLET_P = "javax.portlet.p.";
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BeanManagerImpl.class);
 
 	// Private Data Members
-	private Set<String> managedBeanFQCNs;
+	private Map<String, ConfiguredBean> configuredBeanSet;
 
 	public BeanManagerImpl(List<ConfiguredBean> configuredBeans) {
-		this.managedBeanFQCNs = new HashSet<String>();
+		this.configuredBeanSet = new HashMap<String, ConfiguredBean>();
 
 		if (configuredBeans != null) {
 
 			for (ConfiguredBean configuredBean : configuredBeans) {
-				managedBeanFQCNs.add(configuredBean.getManagedBeanClass());
+				configuredBeanSet.put(configuredBean.getManagedBeanName(), configuredBean);
 			}
 		}
 	}
@@ -177,7 +179,7 @@ public class BeanManagerImpl implements BeanManager {
 		return false;
 	}
 
-	public boolean isManagedBean(Object value) {
+	public boolean isManagedBean(String name, Object value) {
 
 		boolean managedBean = false;
 
@@ -187,8 +189,28 @@ public class BeanManagerImpl implements BeanManager {
 				managedBean = true;
 			}
 			else {
-				String managedBeanFQCN = value.getClass().getName();
-				managedBean = managedBeanFQCNs.contains(managedBeanFQCN);
+
+				if (name != null) {
+
+					// Section PLT.18.3 of the Portlet 2.0 Specification titled "Binding Attributes into a Session"
+					// requires that PortletSession attribute names be namespaced/prefixed with the
+					// "javax.portlet.p.<ID>?" pattern. In order to determine if the specified name is a SessionScoped
+					// managed-bean, it is necessary to first strip the pattern from it.
+					if (name.startsWith(JAVAX_PORTLET_P)) {
+						int pos = name.indexOf(StringPool.QUESTION);
+
+						if (pos > 0) {
+							name = name.substring(pos + 1);
+						}
+					}
+
+					ConfiguredBean configuredBean = configuredBeanSet.get(name);
+
+					if (configuredBean != null) {
+						String managedBeanClass = value.getClass().getName();
+						managedBean = managedBeanClass.equals(configuredBean.getManagedBeanClass());
+					}
+				}
 			}
 		}
 
