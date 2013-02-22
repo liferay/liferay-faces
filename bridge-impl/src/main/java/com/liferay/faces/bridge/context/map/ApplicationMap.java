@@ -53,10 +53,11 @@ public class ApplicationMap extends AbstractPropertyMap<Object> {
 		if (mapEntries != null) {
 
 			for (Map.Entry<String, Object> mapEntry : mapEntries) {
-				Object potentialManagedBean = mapEntry.getValue();
+				String potentialManagedBeanName = mapEntry.getKey();
+				Object potentialManagedBeanValue = mapEntry.getValue();
 
-				if (beanManager.isManagedBean(potentialManagedBean)) {
-					beanManager.invokePreDestroyMethods(potentialManagedBean, preferPreDestroy);
+				if (beanManager.isManagedBean(potentialManagedBeanName, potentialManagedBeanValue)) {
+					beanManager.invokePreDestroyMethods(potentialManagedBeanValue, preferPreDestroy);
 				}
 			}
 		}
@@ -71,13 +72,14 @@ public class ApplicationMap extends AbstractPropertyMap<Object> {
 	 */
 	@Override
 	public Object remove(Object key) {
-		Object potentialManagedBean = super.remove(key);
+		String potentialManagedBeanName = (String) key;
+		Object potentialManagedBeanValue = super.remove(key);
 
-		if (beanManager.isManagedBean(potentialManagedBean)) {
-			beanManager.invokePreDestroyMethods(potentialManagedBean, preferPreDestroy);
+		if (beanManager.isManagedBean(potentialManagedBeanName, potentialManagedBeanValue)) {
+			beanManager.invokePreDestroyMethods(potentialManagedBeanValue, preferPreDestroy);
 		}
 
-		return potentialManagedBean;
+		return potentialManagedBeanValue;
 	}
 
 	@Override

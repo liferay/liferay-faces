@@ -35,6 +35,6 @@ public interface BeanManager {
 	/**
 	 * Determines whether or not the specified value is a bean that is managed by the JSF managed-bean facility.
 	 */
-	public boolean isManagedBean(Object value);
+	public boolean isManagedBean(String name, Object value);
 
 }
