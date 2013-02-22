@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -82,11 +82,13 @@ public class ManagedBeanScopePhaseListener implements PhaseListener {
 					BeanManager beanManager = beanManagerFactory.getBeanManager();
 
 					for (Map.Entry<String, Object> mapEntry : mapEntries) {
-						String managedBeanKey = mapEntry.getKey();
-						Object obj = mapEntry.getValue();
+						String potentialManagedBeanName = mapEntry.getKey();
+						Object potentialManagedBeanValue = mapEntry.getValue();
 
-						if (beanManager.isManagedBean(obj)) {
-							managedBeanKeysToRemove.add(managedBeanKey);
+						// Note that the request attribute name will not have a namespace prefix, so it is fine to
+						// simply pass the attribute name.
+						if (beanManager.isManagedBean(potentialManagedBeanName, potentialManagedBeanValue)) {
+							managedBeanKeysToRemove.add(potentialManagedBeanName);
 						}
 					}
 				}
