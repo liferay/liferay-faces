@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.bridge.servlet;
 
-import java.lang.reflect.Method;
 import java.util.Enumeration;
 
 import javax.faces.bean.SessionScoped;
@@ -50,10 +49,11 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 	private static final Logger logger = LoggerFactory.getLogger(BridgeSessionListener.class);
 
 	// Private Constants
+	private static final String MOJARRA_ACTIVE_VIEW_MAPS = "com.sun.faces.application.view.activeViewMaps";
 	private static final String MOJARRA_INJECTION_PROVIDER_TASK =
 		"com.sun.faces.config.ConfigManager_INJECTION_PROVIDER_TASK";
+	private static final String MOJARRA_PACKAGE_PREFIX = "com.sun.faces";
 	private static final String MOJARRA_VIEW_SCOPE_MANAGER = "com.sun.faces.application.view.viewScopeManager";
-	private static final String SESSION_DESTROYED = "sessionDestroyed";
 
 	// Private Static Data Members
 	private static Object mojarraInjectionProvider;
@@ -102,6 +102,20 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 
 	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
 
+		// Determine which JSF implementation is being used (Mojarra/MyFaces).
+		Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
+		boolean mojarraAbleToCleanup = true;
+
+		if (jsf.getTitle().equals(ProductConstants.MOJARRA) && (jsf.getMajorVersion() == 2) &&
+				(jsf.getMinorVersion() == 1)) {
+
+			if (jsf.getRevisionVersion() < 18) {
+				mojarraAbleToCleanup = false;
+				logger.warn(
+					"Unable to cleanup ViewScoped managed-beans upon session expiration. Please upgrade to Mojarra 2.1.18 or greater.");
+			}
+		}
+
 		// Cleanup instances of BridgeRequestScope that are associated with the expiring session.
 		BridgeRequestScopeManagerFactory bridgeRequestScopeManagerFactory = (BridgeRequestScopeManagerFactory)
 			BridgeFactoryFinder.getFactory(BridgeRequestScopeManagerFactory.class);
@@ -121,7 +135,7 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 
 			String attributeName = attributeNames.nextElement();
 
-			// If the current session attribute name is prefixed with the standard portlet prefix, then it is an
+			// If the current session attribute name is namespaced with the standard portlet prefix, then it is an
 			// attribute that was set using PortletSession.setAttribute(String, Object).
 			if ((attributeName != null) && attributeName.startsWith("javax.portlet.p.")) {
 				int pos = attributeName.indexOf("?");
@@ -133,59 +147,69 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 					if (attributeValue != null) {
 
 						// If the current session attribute value is a JSF managed-bean, then cleanup the bean by
-						// invoking methods annotated with {@link PreDestroy}.
-						if (beanManager.isManagedBean(attributeValue)) {
+						// invoking methods annotated with {@link PreDestroy}. Note that in a webapp/servlet
+						// environment, the cleanup is handled by the Mojarra
+						// WebappLifecycleListener.sessionDestroyed(HttpSessionEvent) method. But in a portlet
+						// environment, Mojarra fails to recognize the session attribute as managed-bean because the
+						// attribute name contains the standard portlet prefix. An alternative approach would be to have
+						// the bridge rename the attribute (by stripping off the standard portlet prefix) so that
+						// Mojarra could find it. But this would not a good solution, because multiple instances of the
+						// same portlet would have the same session attribute names for managed-beans, and only the last
+						// one would get cleaned-up by Mojarra.
+						if (beanManager.isManagedBean(attributeName, attributeValue)) {
 							beanManager.invokePreDestroyMethods(attributeValue, true);
 						}
 
-						// Otherwise, if the current session attribute is Mojarra-vendor-specific, then rename the
-						// attribute by stripping off the standard portlet prefix. This will enable Mojarra's session
-						// expiration features to find attributes that it is expecting.
+						// Otherwise,
 						else {
+
+							// If the current session attribute is Mojarra-vendor-specific, then
 							String fqcn = attributeValue.getClass().getName();
 
-							if ((fqcn != null) && (fqcn.contains("com.sun.faces"))) {
+							if ((fqcn != null) && (fqcn.contains(MOJARRA_PACKAGE_PREFIX))) {
+
+								// Rename the namespaced attribute by stripping off the standard portlet prefix. This
+								// will enable Mojarra's session expiration features to find attributes that it is
+								// expecting.
 								String nonPrefixedName = attributeName.substring(pos + 1);
 								logger.debug("Renaming Mojarra session attributeName=[{0}] -> [{1}]", attributeName,
 									nonPrefixedName);
 								httpSession.setAttribute(nonPrefixedName, attributeValue);
-								httpSession.removeAttribute(attributeName);
+
+								// If this is the attribute that contains all of the active view maps, then
+								if (MOJARRA_ACTIVE_VIEW_MAPS.equals(nonPrefixedName)) {
+
+									if (mojarraAbleToCleanup) {
+
+										// Invoke the Mojarra ViewScopeManager.sessionDestroyed(HttpSessionEvent) method
+										// in order to cleanup the active view maps. Rather than waiting for the servlet
+										// container to call the method during session expiration, it is important to
+										// call it directly within this while-loop for two reasons: 1) If the developer
+										// did not explicitly specify the order of the Mojarra ConfigureListener and
+										// this BridgeSessionListener in WEB-IN/web.xml descriptor (FACES-1483) then
+										// there is no guarantee that the method would get called. 2) In the case of
+										// multiple portlet instances, each instance has its own namespaced attribute in
+										// the session. Renaming each namespaced attribute to
+										// "com.sun.faces.application.view.activeViewMaps" would only enable Mojarra to
+										// cleanup the last one.
+										HttpSessionListener viewScopeManager = (HttpSessionListener)
+											servletContext.getAttribute(MOJARRA_VIEW_SCOPE_MANAGER);
+
+										if (viewScopeManager != null) {
+
+											try {
+												logger.debug(
+													"Asking Mojarra ViewScopeManager to cleanup @ViewScoped managed-beans");
+												viewScopeManager.sessionDestroyed(httpSessionEvent);
+											}
+											catch (Exception e) {
+												logger.error(e);
+											}
+										}
+									}
+								}
 							}
 						}
-					}
-				}
-			}
-		}
-
-		// If Mojarra is detected, then invoke the ViewScopeManager via reflection in order to cleanup ViewScoped
-		// managed-beans.
-		Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
-
-		if (jsf.getTitle().equals(ProductConstants.MOJARRA)) {
-			Object viewScopeManager = servletContext.getAttribute(MOJARRA_VIEW_SCOPE_MANAGER);
-
-			try {
-
-				if (viewScopeManager != null) {
-
-					Method method = viewScopeManager.getClass().getMethod(SESSION_DESTROYED,
-							new Class[] { HttpSessionEvent.class });
-					method.invoke(viewScopeManager, new Object[] { httpSessionEvent });
-
-					logger.debug(
-						"Invoked Mojarra ViewScopeManager.sessionDestroyed(HttpSessionEvent) method in order to cleanup @ViewScoped managed-beans");
-				}
-			}
-			catch (Exception e) {
-
-				if ((jsf.getMajorVersion() == 2) && (jsf.getMinorVersion() == 1)) {
-
-					if (jsf.getRevisionVersion() < 18) {
-						logger.warn(
-							"Unable to cleanup ViewScoped managed-beans upon session expiration. Please upgrade to Mojarra 2.1.18 or greater.");
-					}
-					else {
-						logger.error(e);
 					}
 				}
 			}
