@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,10 +19,14 @@ import java.util.Enumeration;
 import java.util.List;
 
 import javax.portlet.PortletRequest;
+import javax.portlet.filter.PortletRequestWrapper;
 import javax.servlet.http.HttpServletRequest;
 
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
 
 
 /**
@@ -32,7 +36,6 @@ import com.liferay.faces.util.logging.LoggerFactory;
 public class LiferayPortletRequest {
 
 	// Private Constants
-	private static final String REQ_ATTR_LIFERAY_THEME_DISPLAY = "THEME_DISPLAY";
 	private static final String METHOD_NAME_GET_ORIGINAL_HTTP_SERVLET_REQUEST = "getOriginalHttpServletRequest";
 
 	// Logger
@@ -41,10 +44,18 @@ public class LiferayPortletRequest {
 	// Private Data Members
 	private PortletRequest wrappedPortletRequest;
 	private OriginalHttpServletRequest originalHttpServletRequest;
-	private LiferayThemeDisplay themeDisplay;
+	private ThemeDisplay themeDisplay;
 
-	public LiferayPortletRequest(PortletRequest wrappedPortletRequest) {
-		this.wrappedPortletRequest = wrappedPortletRequest;
+	public LiferayPortletRequest(PortletRequest portletRequest) {
+		
+		if (portletRequest != null) {
+			
+			while (portletRequest instanceof PortletRequestWrapper) {
+				PortletRequestWrapper portletRequestWrapper = (PortletRequestWrapper) portletRequest;
+				portletRequest = portletRequestWrapper.getRequest();
+			}
+		}
+		this.wrappedPortletRequest = portletRequest;
 
 		try {
 			Method method = wrappedPortletRequest.getClass().getMethod(METHOD_NAME_GET_ORIGINAL_HTTP_SERVLET_REQUEST,
@@ -79,10 +90,10 @@ public class LiferayPortletRequest {
 		return values;
 	}
 
-	public LiferayThemeDisplay getLiferayThemeDisplay() {
+	public ThemeDisplay getThemeDisplay() {
 
 		if (themeDisplay == null) {
-			themeDisplay = new LiferayThemeDisplay(wrappedPortletRequest.getAttribute(REQ_ATTR_LIFERAY_THEME_DISPLAY));
+			themeDisplay = (ThemeDisplay) wrappedPortletRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		}
 
 		return themeDisplay;
