@@ -39,10 +39,10 @@ public class PortletContainerFactoryImpl extends PortletContainerFactory {
 
 		if (portletContainer == null) {
 
-			if (PortletContainerDetector.isLiferayObject(portletRequest)) {
+			if (PortletContainerDetector.isLiferayPortletRequest(portletRequest)) {
 				portletContainer = new PortletContainerLiferayImpl(portletRequest, portletResponse, portletContext, bridgeConfig);
 			}
-			else if (PortletContainerDetector.isPlutoObject(portletRequest)) {
+			else if (PortletContainerDetector.isPlutoPortletRequest(portletRequest)) {
 				portletContainer = new PortletContainerPlutoImpl(portletRequest, bridgeConfig);
 			}
 			else {
