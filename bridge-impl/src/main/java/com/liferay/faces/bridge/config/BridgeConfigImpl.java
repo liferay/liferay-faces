@@ -43,6 +43,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.liferay.faces.bridge.BridgePhaseFactory;
 import com.liferay.faces.bridge.application.ViewHandlerFactory;
 import com.liferay.faces.bridge.application.view.BridgeWriteBehindSupportFactory;
+import com.liferay.faces.bridge.bean.BeanManagerFactory;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
 import com.liferay.faces.bridge.context.BridgeContextFactory;
 import com.liferay.faces.bridge.context.IncongruityContextFactory;
@@ -64,6 +65,7 @@ import com.liferay.faces.util.product.ProductMap;
 public class BridgeConfigImpl implements BridgeConfig {
 
 	// Private Constants
+	private static final String BEAN_MANAGER_FACTORY = "bean-manager-factory";
 	private static final String BRIDGE_CONTEXT_FACTORY = "bridge-context-factory";
 	private static final String BRIDGE_PHASE_FACTORY = "bridge-phase-factory";
 	private static final String BRIDGE_REQUEST_SCOPE_FACTORY = "bridge-request-scope-factory";
@@ -80,6 +82,10 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private static final String FACES_CONFIG_META_INF_PATH = "META-INF/faces-config.xml";
 	private static final String FACES_CONFIG_WEB_INF_PATH = "/WEB-INF/faces-config.xml";
 	private static final String LIFERAY_FACES_BRIDGE = "LiferayFacesBridge";
+	private static final String MANAGED_BEAN_CLASS = "managed-bean-class";
+	private static final String MANAGED_BEAN_NAME = "managed-bean-name";
+	private static final String MANAGED_BEAN_SCOPE = "managed-bean-scope";
+	private static final String MOJARRA_CONFIG_PATH = "com/sun/faces/jsf-ri-runtime.xml";
 	private static final String NAME = "name";
 	private static final String RENDER_RESPONSE_WRAPPER_CLASS = "render-response-wrapper-class";
 	private static final String RESOURCE_RESPONSE_WRAPPER_CLASS = "resource-response-wrapper-class";
@@ -87,6 +93,10 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private static final String SERVLET_CLASS = "servlet-class";
 	private static final String SERVLET_MAPPING = "servlet-mapping";
 	private static final String SERVLET_NAME = "servlet-name";
+	private static final String SOURCE_CLASS = "source-class";
+	private static final String SYSTEM_EVENT_CLASS = "system-event-class";
+	private static final String SYSTEM_EVENT_LISTENER = "system-event-listener";
+	private static final String SYSTEM_EVENT_LISTENER_CLASS = "system-event-listener-class";
 	private static final String UPLOADED_FILE_FACTORY = "uploaded-file-factory";
 	private static final String URL_PATTERN = "url-pattern";
 	private static final String VIEW_HANDLER_FACTORY = "view-handler-factory";
@@ -99,6 +109,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 	// Private Data Members
 	private BridgeConfigAttributeMap attributes;
+	private BeanManagerFactory beanManagerFactory;
 	private BridgeContextFactory bridgeContextFactory;
 	private BridgePhaseFactory bridgePhaseFactory;
 	private BridgeRequestScopeFactory bridgeRequestScopeFactory;
@@ -106,6 +117,9 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private BridgeRequestScopeManagerFactory bridgeRequestScopeManagerFactory;
 	private BridgeWriteBehindSupportFactory bridgeWriteBehindSupportFactory;
 	private BridgeURLFactory bridgeURLFactory;
+	private List<ConfiguredBean> configuredBeans = new ArrayList<ConfiguredBean>();
+	private List<ConfiguredSystemEventListener> configuredSystemEventListeners =
+		new ArrayList<ConfiguredSystemEventListener>();
 	private List<String> defaultSuffixes;
 	private Set<String> excludedBridgeRequestAttributes = new HashSet<String>();
 	private String facesConfigName;
@@ -114,6 +128,9 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private PortletContainerFactory portletContainerFactory;
 	private PortletContext portletContext;
 	private Map<String, String[]> publicParameterMappings = new HashMap<String, String[]>();
+	private String sourceClass;
+	private String systemEventClass;
+	private String systemEventListenerClass;
 	private UploadedFileFactory uploadedFileFactory;
 	private ViewHandlerFactory viewHandlerFactory;
 	private String viewIdRenderParameterName;
@@ -151,12 +168,57 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 			boolean resolveEntities = BooleanHelper.toBoolean(initParam, defaultValue);
 
-			// Define the SAX 2 callback event handlers for the SAX Parser.
+			MojarraConfigHandler mojarraConfigHandler = new MojarraConfigHandler(resolveEntities);
+
+			// First, parse the Mojarra configuration found in the classpath.
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			Enumeration<URL> mojarraConfigURLs = classLoader.getResources(MOJARRA_CONFIG_PATH);
+
+			if (mojarraConfigURLs != null) {
+
+				boolean processedMojarraConfig = false;
+
+				while (mojarraConfigURLs.hasMoreElements()) {
+
+					URL mojarraConfigURL = mojarraConfigURLs.nextElement();
+
+					if (processedMojarraConfig) {
+						logger.debug("Skipping Mojarra config: [{0}]", mojarraConfigURL);
+					}
+					else {
+
+						logger.debug("Processing Mojarra config: [{0}]", mojarraConfigURL);
+						mojarraConfigHandler.setURL(mojarraConfigURL);
+
+						InputStream inputStream = mojarraConfigURL.openStream();
+
+						try {
+							saxParser.parse(inputStream, mojarraConfigHandler);
+						}
+						catch (SAXParseCompleteException e) {
+							// ignore
+						}
+						catch (Exception e) {
+							logger.error(e);
+						}
+
+						try {
+							inputStream.close();
+						}
+						catch (IOException e) {
+							logger.error(e);
+						}
+
+						processedMojarraConfig = true;
+					}
+				}
+			}
+
+			// Define the SAX 2 callback faces-config event handlers for the SAX Parser.
 			FacesConfigPreHandler facesConfigPreHandler = new FacesConfigPreHandler(resolveEntities);
 			FacesConfigPostHandler facesConfigPostHandler = new FacesConfigPostHandler(resolveEntities);
 
 			// First, parse all of the META-INF/faces-config.xml files found in the classpath.
-			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 			Enumeration<URL> facesConfigURLs = classLoader.getResources(FACES_CONFIG_META_INF_PATH);
 
 			List<FacesConfig> facesConfigList = new ArrayList<FacesConfig>();
@@ -256,6 +318,13 @@ public class BridgeConfigImpl implements BridgeConfig {
 				logger.debug("Processing faces-config: [{0}]", FACES_CONFIG_WEB_INF_PATH);
 				saxParser.parse(inputStream, facesConfigPostHandler);
 				inputStream.close();
+			}
+
+			if (beanManagerFactory == null) {
+				logger.error(FACTORY_NOT_FOUND_MSG, BEAN_MANAGER_FACTORY);
+			}
+			else {
+				beanManagerFactory.setConfiguredBeans(configuredBeans);
 			}
 
 			if (bridgePhaseFactory == null) {
@@ -381,6 +450,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 			// Initialize the map of attributes
 			attributes = new BridgeConfigAttributeMap();
+			attributes.put(BeanManagerFactory.class.getName(), beanManagerFactory);
 			attributes.put(BridgeContextFactory.class.getName(), bridgeContextFactory);
 			attributes.put(BridgePhaseFactory.class.getName(), bridgePhaseFactory);
 			attributes.put(BridgeRequestScopeFactory.class.getName(), bridgeRequestScopeFactory);
@@ -441,6 +511,10 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 	public List<String> getConfiguredExtensions() {
 		return defaultSuffixes;
+	}
+
+	public List<ConfiguredSystemEventListener> getConfiguredSystemEventListeners() {
+		return configuredSystemEventListeners;
 	}
 
 	public String getContextParameter(String name) {
@@ -594,20 +668,26 @@ public class BridgeConfigImpl implements BridgeConfig {
 		private static final String PARAMETER = "parameter";
 
 		// Private Data Members
-		private boolean parsingBridgeContextFactory = false;
-		private boolean parsingBridgePhaseFactory = false;
-		private boolean parsingBridgeRequestScopeFactory = false;
-		private boolean parsingBridgeRequestScopeCacheFactory = false;
-		private boolean parsingBridgeRequestScopeManagerFactory = false;
-		private boolean parsingBridgeWriteBehindSupportFactory = false;
-		private boolean parsingBridgeURLFactory = false;
-		private boolean parsingExcludedAttribute = false;
+		private String managedBeanClass;
+		private String managedBeanName;
+		private boolean parsingManagedBeanClass;
+		private boolean parsingManagedBeanName;
+		private boolean parsingManagedBeanScope;
+		private boolean parsingBeanManagerFactory;
+		private boolean parsingBridgeContextFactory;
+		private boolean parsingBridgePhaseFactory;
+		private boolean parsingBridgeRequestScopeFactory;
+		private boolean parsingBridgeRequestScopeCacheFactory;
+		private boolean parsingBridgeRequestScopeManagerFactory;
+		private boolean parsingBridgeWriteBehindSupportFactory;
+		private boolean parsingBridgeURLFactory;
+		private boolean parsingExcludedAttribute;
 		private boolean parsingIncongruityContextFactory;
-		private boolean parsingModelEL = false;
-		private boolean parsingParameter = false;
-		private boolean parsingPortletContainerFactory = false;
-		private boolean parsingRenderResponseWrapperClass = false;
-		private boolean parsingResourceResponseWrapperClass = false;
+		private boolean parsingModelEL;
+		private boolean parsingParameter;
+		private boolean parsingPortletContainerFactory;
+		private boolean parsingRenderResponseWrapperClass;
+		private boolean parsingResourceResponseWrapperClass;
 		private String parameter;
 		private boolean parsingUploadedFileFactory = false;
 		private boolean parsingViewHandlerFactory = false;
@@ -619,7 +699,29 @@ public class BridgeConfigImpl implements BridgeConfig {
 		@Override
 		public void endElement(String uri, String localName, String qName) throws SAXException {
 
-			if (parsingBridgeContextFactory) {
+			if (parsingBeanManagerFactory) {
+				String factoryClassName = content.toString().trim();
+
+				if (factoryClassName.length() > 0) {
+
+					try {
+						BeanManagerFactory wrappedFactory = BridgeConfigImpl.this.beanManagerFactory;
+						BridgeConfigImpl.this.beanManagerFactory = (BeanManagerFactory) newFactoryInstance(
+								factoryClassName, BeanManagerFactory.class, wrappedFactory);
+						logger.debug("Instantiated beanManagerFactory=[{0}] wrappedFactory=[{1}]", factoryClassName,
+							wrappedFactory);
+					}
+					catch (ClassNotFoundException e) {
+						logger.error("{0} : factoryClassName=[{1}]", e.getClass().getName(), factoryClassName);
+					}
+					catch (Exception e) {
+						logger.error(e.getMessage(), e);
+					}
+				}
+
+				parsingBeanManagerFactory = false;
+			}
+			else if (parsingBridgeContextFactory) {
 				String factoryClassName = content.toString().trim();
 
 				if (factoryClassName.length() > 0) {
@@ -638,6 +740,8 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
+
+				parsingBridgeContextFactory = false;
 			}
 			else if (parsingBridgePhaseFactory) {
 				String factoryClassName = content.toString().trim();
@@ -658,6 +762,8 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
+
+				parsingBridgePhaseFactory = false;
 			}
 			else if (parsingBridgeRequestScopeFactory) {
 				String factoryClassName = content.toString().trim();
@@ -678,6 +784,8 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
+
+				parsingBridgeRequestScopeFactory = false;
 			}
 			else if (parsingBridgeRequestScopeCacheFactory) {
 				String factoryClassName = content.toString().trim();
@@ -699,6 +807,8 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
+
+				parsingBridgeRequestScopeCacheFactory = false;
 			}
 			else if (parsingBridgeRequestScopeManagerFactory) {
 				String factoryClassName = content.toString().trim();
@@ -721,6 +831,8 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
+
+				parsingBridgeRequestScopeManagerFactory = false;
 			}
 			else if (parsingBridgeWriteBehindSupportFactory) {
 				String factoryClassName = content.toString().trim();
@@ -742,6 +854,8 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
+
+				parsingBridgeWriteBehindSupportFactory = false;
 			}
 			else if (parsingBridgeURLFactory) {
 				String factoryClassName = content.toString().trim();
@@ -762,6 +876,8 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
+
+				parsingBridgeURLFactory = false;
 			}
 			else if (parsingExcludedAttribute) {
 				String attributeName = content.toString().trim();
@@ -769,6 +885,8 @@ public class BridgeConfigImpl implements BridgeConfig {
 				if (attributeName.length() > 0) {
 					BridgeConfigImpl.this.excludedBridgeRequestAttributes.add(attributeName);
 				}
+
+				parsingExcludedAttribute = false;
 			}
 			else if (parsingIncongruityContextFactory) {
 				String factoryClassName = content.toString().trim();
@@ -789,6 +907,26 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
+
+				parsingIncongruityContextFactory = false;
+			}
+			else if (parsingManagedBeanClass) {
+				managedBeanClass = content.toString().trim();
+				parsingManagedBeanClass = false;
+			}
+			else if (parsingManagedBeanName) {
+				managedBeanName = content.toString().trim();
+				parsingManagedBeanName = false;
+			}
+			else if (parsingManagedBeanScope) {
+
+				String managedBeanScope = content.toString().trim();
+
+				ConfiguredBean configuredBean = new ConfiguredBeanImpl(managedBeanClass, managedBeanName,
+						managedBeanScope);
+
+				BridgeConfigImpl.this.configuredBeans.add(configuredBean);
+				parsingManagedBeanScope = false;
 			}
 			else if (parsingModelEL) {
 
@@ -811,9 +949,12 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 					BridgeConfigImpl.this.publicParameterMappings.put(parameter, newValue);
 				}
+
+				parsingModelEL = false;
 			}
 			else if (parsingParameter) {
 				parameter = content.toString().trim();
+				parsingParameter = false;
 			}
 			else if (parsingPortletContainerFactory) {
 				String factoryClassName = content.toString().trim();
@@ -834,14 +975,18 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
+
+				parsingPortletContainerFactory = false;
 			}
 			else if (parsingRenderResponseWrapperClass) {
 				writeBehindRenderResponseWrapper = content.toString().trim();
 				logger.debug("render-response-wrapper-class=[{0}]", writeBehindRenderResponseWrapper);
+				parsingRenderResponseWrapperClass = false;
 			}
 			else if (parsingResourceResponseWrapperClass) {
 				writeBehindResourceResponseWrapper = content.toString().trim();
 				logger.debug("resource-response-wrapper-class=[{0}]", writeBehindResourceResponseWrapper);
+				parsingResourceResponseWrapperClass = false;
 			}
 			else if (parsingUploadedFileFactory) {
 				String factoryClassName = content.toString().trim();
@@ -862,6 +1007,8 @@ public class BridgeConfigImpl implements BridgeConfig {
 						logger.error(e.getMessage(), e);
 					}
 				}
+
+				parsingUploadedFileFactory = false;
 			}
 			else if (parsingViewHandlerFactory) {
 				String factoryClassName = content.toString().trim();
@@ -885,22 +1032,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 			}
 
 			content = null;
-			parsingBridgeContextFactory = false;
-			parsingBridgePhaseFactory = false;
-			parsingBridgeRequestScopeFactory = false;
-			parsingBridgeRequestScopeCacheFactory = false;
-			parsingBridgeRequestScopeManagerFactory = false;
-			parsingBridgeWriteBehindSupportFactory = false;
-			parsingBridgeURLFactory = false;
-			parsingExcludedAttribute = false;
-			parsingIncongruityContextFactory = false;
-			parsingModelEL = false;
-			parsingParameter = false;
-			parsingPortletContainerFactory = false;
-			parsingRenderResponseWrapperClass = false;
-			parsingResourceResponseWrapperClass = false;
-			parsingUploadedFileFactory = false;
-			parsingViewHandlerFactory = false;
 		}
 
 		@Override
@@ -910,7 +1041,10 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 			content = new StringBuilder();
 
-			if (localName.equals(BRIDGE_CONTEXT_FACTORY)) {
+			if (localName.equals(BEAN_MANAGER_FACTORY)) {
+				parsingBeanManagerFactory = true;
+			}
+			else if (localName.equals(BRIDGE_CONTEXT_FACTORY)) {
 				parsingBridgeContextFactory = true;
 			}
 			else if (localName.equals(BRIDGE_PHASE_FACTORY)) {
@@ -936,6 +1070,15 @@ public class BridgeConfigImpl implements BridgeConfig {
 			}
 			else if (localName.equals(INCONGRUITY_CONTEXT_FACTORY)) {
 				parsingIncongruityContextFactory = true;
+			}
+			else if (localName.equals(MANAGED_BEAN_CLASS)) {
+				parsingManagedBeanClass = true;
+			}
+			else if (localName.equals(MANAGED_BEAN_NAME)) {
+				parsingManagedBeanName = true;
+			}
+			else if (localName.equals(MANAGED_BEAN_SCOPE)) {
+				parsingManagedBeanScope = true;
 			}
 			else if (localName.equals(MODEL_EL)) {
 				parsingModelEL = true;
@@ -998,6 +1141,68 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 			if (localName.equals(NAME)) {
 				parsingName = true;
+			}
+		}
+
+	}
+
+	protected class MojarraConfigHandler extends BaseHandler {
+
+		// Private Data Members
+		private boolean parsingSourceClass;
+		private boolean parsingSystemEventClass;
+		private boolean parsingSystemEventListener;
+		private boolean parsingSystemEventListenerClass;
+
+		public MojarraConfigHandler(boolean resolveEntities) {
+			super(resolveEntities);
+		}
+
+		@Override
+		public void endElement(String uri, String localName, String qName) throws SAXException {
+
+			if (parsingSourceClass) {
+				sourceClass = content.toString().trim();
+				parsingSourceClass = false;
+			}
+			else if (parsingSystemEventClass) {
+				systemEventClass = content.toString().trim();
+				parsingSystemEventClass = false;
+			}
+			else if (parsingSystemEventListenerClass) {
+				systemEventListenerClass = content.toString().trim();
+				parsingSystemEventListenerClass = false;
+			}
+			else if (parsingSystemEventListener) {
+
+				// NOTE: This has to appear last since system-event-listener is the surrounding element.
+				ConfiguredSystemEventListener configuredSystemEventListener = new ConfiguredSystemEventListenerImpl(
+						sourceClass, systemEventClass, systemEventListenerClass);
+				configuredSystemEventListeners.add(configuredSystemEventListener);
+				parsingSystemEventListener = false;
+			}
+
+			content = null;
+		}
+
+		@Override
+		public void startElement(String uri, String localName, String elementName, Attributes attributes)
+			throws SAXException {
+			logger.trace("localName=[{0}]", localName);
+
+			content = new StringBuilder();
+
+			if (localName.equals(SOURCE_CLASS)) {
+				parsingSourceClass = true;
+			}
+			else if (localName.equals(SYSTEM_EVENT_CLASS)) {
+				parsingSystemEventClass = true;
+			}
+			else if (localName.equals(SYSTEM_EVENT_LISTENER)) {
+				parsingSystemEventListener = true;
+			}
+			else if (localName.equals(SYSTEM_EVENT_LISTENER_CLASS)) {
+				parsingSystemEventListenerClass = true;
 			}
 		}
 
