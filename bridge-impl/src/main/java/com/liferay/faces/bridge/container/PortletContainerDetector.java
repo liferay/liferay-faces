@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,9 @@
  */
 package com.liferay.faces.bridge.container;
 
+import javax.portlet.PortletRequest;
+import javax.portlet.filter.PortletRequestWrapper;
+
 import com.liferay.faces.bridge.container.liferay.LiferayConstants;
 
 
@@ -25,16 +28,24 @@ public class PortletContainerDetector {
 	private static final String PLUTO_PACKAGE_NAMESPACE = "org.apache.pluto";
 
 	/**
-	 * Determines whether or not the specified object is one created by Liferay Portal.
+	 * Determines whether or not the specified {@link PortletRequest} is one created by Liferay Portal. If the specified
+	 * {@link PortletRequest} is an instance of {@link PortletRequestWrapper} then it will work with the wrapped {@link
+	 * PortletRequest}.
 	 *
-	 * @param   portletURL  The portletURL that may have been created by Liferay Portal.
+	 * @param   portletRequest  The current {@link PortletRequest}.
 	 *
-	 * @return  true if the specified portletURL was created by Liferay Portal.
+	 * @return  true if the specified portletRequest was created by Liferay Portal.
 	 */
-	public static boolean isLiferayObject(Object obj) {
+	public static boolean isLiferayPortletRequest(PortletRequest portletRequest) {
 
-		if (obj != null) {
-			return obj.getClass().getName().startsWith(LiferayConstants.PACKAGE_NAMESPACE);
+		if (portletRequest != null) {
+
+			while (portletRequest instanceof PortletRequestWrapper) {
+				PortletRequestWrapper portletRequestWrapper = (PortletRequestWrapper) portletRequest;
+				portletRequest = portletRequestWrapper.getRequest();
+			}
+
+			return portletRequest.getClass().getName().startsWith(LiferayConstants.PACKAGE_NAMESPACE);
 		}
 		else {
 			return false;
@@ -42,16 +53,24 @@ public class PortletContainerDetector {
 	}
 
 	/**
-	 * Determines whether or not the specified object is one created by Pluto.
+	 * Determines whether or not the specified {@link PortletRequest} is one created by Liferay Portal. If the specified
+	 * {@link PortletRequest} is an instance of {@link PortletRequestWrapper} then it will work with the wrapped {@link
+	 * PortletRequest}.
 	 *
-	 * @param   portletURL  The portletURL that may have been created by Pluto.
+	 * @param   portletRequest  The current {@link PortletRequest}.
 	 *
-	 * @return  true if the specified portletURL was created by Pluto.
+	 * @return  true if the specified portletRequest was created by Pluto.
 	 */
-	public static boolean isPlutoObject(Object obj) {
+	public static boolean isPlutoPortletRequest(PortletRequest portletRequest) {
 
-		if (obj != null) {
-			return obj.getClass().getName().startsWith(PLUTO_PACKAGE_NAMESPACE);
+		if (portletRequest != null) {
+
+			while (portletRequest instanceof PortletRequestWrapper) {
+				PortletRequestWrapper portletRequestWrapper = (PortletRequestWrapper) portletRequest;
+				portletRequest = portletRequestWrapper.getRequest();
+			}
+
+			return portletRequest.getClass().getName().startsWith(PLUTO_PACKAGE_NAMESPACE);
 		}
 		else {
 			return false;
