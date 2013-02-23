@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,11 +22,12 @@ import javax.portlet.PortletRequest;
 
 import org.w3c.dom.Element;
 
-import com.liferay.faces.bridge.container.liferay.LiferayConstants;
 import com.liferay.faces.bridge.container.liferay.StringBundler;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+
+import com.liferay.portal.kernel.util.WebKeys;
 
 
 /**
@@ -66,12 +67,11 @@ public class HeadResponseWriterLiferayImpl extends HeadResponseWriter {
 				String elementAsString = element.toString();
 
 				PortletRequest portletRequest = bridgeContext.getPortletRequest();
-				StringBundler stringBundler = new StringBundler(portletRequest.getAttribute(
-						LiferayConstants.LIFERAY_SHARED_PAGE_TOP));
+				StringBundler stringBundler = new StringBundler(portletRequest.getAttribute(WebKeys.PAGE_TOP));
 
 				stringBundler.append(elementAsString);
 
-				portletRequest.setAttribute(LiferayConstants.LIFERAY_SHARED_PAGE_TOP, stringBundler.getWrapped());
+				portletRequest.setAttribute(WebKeys.PAGE_TOP, stringBundler.getWrapped());
 
 				logger.debug("Added resource to Liferay's <head>...</head> section, element=[{0}]", elementAsString);
 			}

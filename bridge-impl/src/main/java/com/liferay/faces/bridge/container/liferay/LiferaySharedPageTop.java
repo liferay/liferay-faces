@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,6 +29,7 @@ import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
+import com.liferay.portal.kernel.util.WebKeys;
 
 
 /**
@@ -63,12 +64,12 @@ public class LiferaySharedPageTop {
 			StringBuilder xmlDocument = new StringBuilder();
 			xmlDocument.append(XML_DOCUMENT_DECLARATION);
 			xmlDocument.append(StringPool.LESS_THAN);
-			xmlDocument.append(LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
+			xmlDocument.append(WebKeys.PAGE_TOP);
 			xmlDocument.append(StringPool.GREATER_THAN);
 			xmlDocument.append(stringBundler);
 			xmlDocument.append(StringPool.LESS_THAN);
 			xmlDocument.append(StringPool.FORWARD_SLASH);
-			xmlDocument.append(LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
+			xmlDocument.append(WebKeys.PAGE_TOP);
 			xmlDocument.append(StringPool.GREATER_THAN);
 
 			String xmlDocumentAsString = xmlDocument.toString();
@@ -197,7 +198,7 @@ public class LiferaySharedPageTop {
 		public void startElement(String uri, String localName, String qName, Attributes attributes)
 			throws SAXException {
 
-			if (!LiferayConstants.LIFERAY_SHARED_PAGE_TOP.equals(qName)) {
+			if (!WebKeys.PAGE_TOP.equals(qName)) {
 				headResource = new HeadResource(qName, attributes);
 				headResources.add(headResource);
 			}
