@@ -41,7 +41,7 @@ public class PortletContainerFactoryTCKImpl extends PortletContainerFactory {
 
 		PortletContainer portletContainer = null;
 
-		if (PortletContainerDetector.isPlutoObject(portletRequest)) {
+		if (PortletContainerDetector.isPlutoPortletRequest(portletRequest)) {
 			portletContainer = new PortletContainerPlutoTCKImpl(portletRequest, bridgeConfig);
 		}
 		else {
