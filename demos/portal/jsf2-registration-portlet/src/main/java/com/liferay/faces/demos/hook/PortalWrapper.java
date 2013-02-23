@@ -516,6 +516,11 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getFirstPageLayoutTypes(pageContext);
 	}
 
+	@Override
+	public String getFullName(String firstName, String middleName, String lastName) {
+		return getWrapped().getFullName(firstName, middleName, lastName);
+	}
+
 	public String getGlobalLibDir() {
 		return getWrapped().getGlobalLibDir();
 	}
@@ -793,6 +798,11 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getPathMain();
 	}
 
+	@Override
+	public String getPathModule() {
+		return getWrapped().getPathModule();
+	}
+
 	public String getPathProxy() {
 		return getWrapped().getPathProxy();
 	}
@@ -1068,6 +1078,11 @@ public abstract class PortalWrapper implements Portal {
 	@Override
 	public long[] getSiteAndCompanyGroupIds(ThemeDisplay themeDisplay) throws PortalException, SystemException {
 		return getWrapped().getSiteAndCompanyGroupIds(themeDisplay);
+	}
+
+	@Override
+	public long getSiteGroupId(long groupId) throws PortalException, SystemException {
+		return getWrapped().getSiteGroupId(groupId);
 	}
 
 	public String getSiteLoginURL(ThemeDisplay themeDisplay) throws PortalException, SystemException {
