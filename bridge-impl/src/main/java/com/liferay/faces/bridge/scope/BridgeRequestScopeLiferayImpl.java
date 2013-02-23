@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -61,20 +61,20 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 
 	static {
 
-		// Set the value of the LIFERAY_JAVAX_CONSTANT_VALUES constant.
+		// Set the value of the LIFERAY_ATTRIBUTE_NAMES constant. Need to use reflection in order to determine all of
+		// the public constants because different versions of the portal source have different sets of constants. This
+		// approach minimizes diffs in the different source branches for the bridge.
 		List<String> fieldList = new ArrayList<String>();
-		Field[] declaredFields = JavaConstants.class.getDeclaredFields();
+		Field[] fields = JavaConstants.class.getFields();
 
-		for (Field declaredField : declaredFields) {
+		for (Field field : fields) {
 
-			String fieldName = declaredField.getName();
+			String fieldName = field.getName();
 
 			if ((fieldName != null) && fieldName.startsWith("JAVAX")) {
 
-				declaredField.setAccessible(true);
-
 				try {
-					Object value = declaredField.get(null);
+					Object value = field.get(null);
 
 					if ((value != null) && (value instanceof String)) {
 						fieldList.add((String) value);
