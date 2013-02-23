@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -69,15 +69,14 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 
 			PortletRequest portletRequest = bridgeContext.getPortletRequest();
 
-			StringBundler stringBundler = (StringBundler) portletRequest.getAttribute(
-					LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
+			StringBundler stringBundler = (StringBundler) portletRequest.getAttribute(WebKeys.PAGE_TOP);
 
 			if (stringBundler != null) {
 
 				LiferaySharedPageTop liferaySharedPageTop = new LiferaySharedPageTop(stringBundler);
 				liferaySharedPageTop.removeDuplicates();
 				stringBundler = liferaySharedPageTop.toStringBundler();
-				portletRequest.setAttribute(LiferayConstants.LIFERAY_SHARED_PAGE_TOP, stringBundler);
+				portletRequest.setAttribute(WebKeys.PAGE_TOP, stringBundler);
 			}
 		}
 
@@ -104,8 +103,7 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
-		StringBundler stringBundler = (StringBundler) portletRequest.getAttribute(
-				LiferayConstants.LIFERAY_SHARED_PAGE_TOP);
+		StringBundler stringBundler = (StringBundler) portletRequest.getAttribute(WebKeys.PAGE_TOP);
 
 		if (stringBundler != null) {
 			liferaySharedPageTopLength = stringBundler.length();
