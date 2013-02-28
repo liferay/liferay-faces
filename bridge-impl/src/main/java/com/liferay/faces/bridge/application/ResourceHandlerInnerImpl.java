@@ -139,40 +139,37 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 
 	@Override
 	public Resource createResource(String resourceName) {
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		Resource wrappableResource = wrappedResourceHandler.createResource(resourceName);
 
 		if (wrappableResource == null) {
 			return new MissingResourceImpl(wrappedResourceHandler, resourceName);
 		}
 		else {
-			return new ResourceImpl(wrappableResource, bridgeContext);
+			return new ResourceImpl(wrappableResource);
 		}
 	}
 
 	@Override
 	public Resource createResource(String resourceName, String libraryName) {
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		Resource wrappableResource = wrappedResourceHandler.createResource(resourceName, libraryName);
 
 		if (wrappableResource == null) {
 			return new MissingResourceImpl(wrappedResourceHandler, resourceName, libraryName);
 		}
 		else {
-			return new ResourceImpl(wrappableResource, bridgeContext);
+			return new ResourceImpl(wrappableResource);
 		}
 	}
 
 	@Override
 	public Resource createResource(String resourceName, String libraryName, String contentType) {
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		Resource wrappableResource = wrappedResourceHandler.createResource(resourceName, libraryName, contentType);
 
 		if (wrappableResource == null) {
 			return new MissingResourceImpl(wrappedResourceHandler, resourceName, libraryName, contentType);
 		}
 		else {
-			return new ResourceImpl(wrappableResource, bridgeContext);
+			return new ResourceImpl(wrappableResource);
 		}
 	}
 
