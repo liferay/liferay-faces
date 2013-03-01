@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -121,8 +121,18 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 
 	protected void encodeCleanup(FacesContext facesContext, UIComponent uiComponent, boolean parentRendered)
 		throws IOException {
+
+		// FACES-1497: Push the specified UIComponent to the EL in order to ensure that EL expressions like
+		// "#{component}" and "{cc}" resolve to the specified UIComponent before attempting to call
+		// UIComponent.isRendered() below.
+		uiComponent.pushComponentToEL(facesContext, uiComponent);
+
+		// Determine whether or not the specified UIComponent is rendered, taking into consideration the
+		// specified flag that indicates whether or not the parent UIComponent is rendered.
 		boolean rendered = (parentRendered && uiComponent.isRendered());
 
+		// If the specified UIComponent has cleanup abilities and it is not rendered, then instruct it to encode its
+		// cleanup markup to the response.
 		if (uiComponent instanceof UICleanup) {
 			UICleanup uiCleanup = (UICleanup) uiComponent;
 
@@ -130,6 +140,8 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 				uiCleanup.encodeCleanup(facesContext);
 			}
 		}
+
+		// Otherwise, recurse through all of the children.
 		else {
 			Iterator<UIComponent> itr = uiComponent.getFacetsAndChildren();
 
@@ -138,6 +150,9 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 				encodeCleanup(facesContext, childUIComponet, rendered);
 			}
 		}
+
+		// FACES-1497: Pop the specified UIComponent from the EL.
+		uiComponent.popComponentFromEL(facesContext);
 	}
 
 	/**
