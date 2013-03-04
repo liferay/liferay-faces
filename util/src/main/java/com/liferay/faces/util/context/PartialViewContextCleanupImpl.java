@@ -224,10 +224,16 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 		public VisitResult visit(VisitContext visitContext, UIComponent uiComponent) {
 
 			boolean parentRendered = true;
-			UIComponent parent = uiComponent.getParent();
+			UIComponent parentUIComponent = uiComponent.getParent();
 
-			if (parent != null) {
-				parentRendered = parent.isRendered();
+			if (parentUIComponent != null) {
+
+				// FACES-1497: Push the parent UIComponent to the EL in order to ensure that EL expressions like
+				// "#{component}" and "{cc}" resolve to the specified UIComponent before attempting to call
+				// parent.isRendered() below.
+				parentUIComponent.pushComponentToEL(facesContext, parentUIComponent);
+
+				parentRendered = parentUIComponent.isRendered();
 			}
 
 			try {
@@ -235,6 +241,12 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 			}
 			catch (IOException e) {
 				logger.error(e);
+			}
+
+			if (parentUIComponent != null) {
+
+				// FACES-1497: Pop the parent UIComponent from the EL.
+				parentUIComponent.popComponentFromEL(facesContext);
 			}
 
 			return VisitResult.REJECT;
