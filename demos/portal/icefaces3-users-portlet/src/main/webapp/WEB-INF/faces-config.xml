@@ -7,6 +7,7 @@
 
 	<application>
 		<message-bundle>i18nFaces</message-bundle>
+		<resource-handler>com.liferay.faces.demos.resource.UserPortraitResourceHandler</resource-handler>
 	</application>
 	<lifecycle>
 		<!--<phase-listener>com.liferay.faces.util.lifecycle.DebugPhaseListener</phase-listener> -->

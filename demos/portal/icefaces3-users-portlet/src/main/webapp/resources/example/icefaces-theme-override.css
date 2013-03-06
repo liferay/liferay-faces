@@ -1,3 +1,7 @@
+.aui-button-holder .ice-pushbutton {
+	display: inline;
+}
+
 .pfusers .iceDatTbl {
 	margin: 0px;
 	width: 100%;
