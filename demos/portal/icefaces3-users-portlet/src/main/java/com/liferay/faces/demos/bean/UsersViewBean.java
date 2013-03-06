@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,6 +20,9 @@ import javax.faces.bean.ViewScoped;
 
 
 /**
+ * This class serves as a bean that remembers the rendered/non-rendered state of the list and form in the users.xhtml
+ * Facelet view.
+ *
  * @author  Neil Griffin
  */
 @ManagedBean(name = "usersViewBean")
