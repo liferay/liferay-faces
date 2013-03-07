@@ -77,15 +77,17 @@ public class Jsf2PortletTest {
 		logger.log(Level.INFO, "clearing email textbox");
 		emailField.clear();
 		logger.log(Level.INFO, "emailField.sendKeys ...");
-//		emailField.sendKeys("test@liferay.com");
+		emailField.sendKeys("test@liferay.com");
 		
-//		passwordField.clear();
+		logger.log(Level.INFO, "passwordField.sendKeys ...");
 //		passwordField.sendKeys("test");
-		
+//		
+//		logger.log(Level.INFO, "signInButton.click() ...");
 //		signInButton.click();
-		
-		// wait until the submit button is displayed
+//		
+//		// wait until the submit button is displayed
 //		logger.log(Level.INFO, "starting to wait ...");
+		
 //		Graphene.waitModel(browser).until(Graphene.element(submitButton).isPresent()).wait(10);
 //		logger.log(Level.INFO, "done waiting ...");
 //		logger.log(Level.INFO, "browser.getPageSource() = " + browser.getPageSource());
