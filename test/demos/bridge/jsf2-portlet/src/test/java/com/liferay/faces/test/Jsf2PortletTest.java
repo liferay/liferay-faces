@@ -20,8 +20,9 @@ import java.util.logging.Level;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-//import static org.jboss.arquillian.graphene.Graphene.waitGui;
-//import static org.jboss.arquillian.graphene.Graphene.waitModel;
+import static org.jboss.arquillian.graphene.Graphene.waitGui;
+import static org.jboss.arquillian.graphene.Graphene.waitAjax;
+import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 @RunWith(Arquillian.class)
 public class Jsf2PortletTest {
@@ -107,7 +108,8 @@ public class Jsf2PortletTest {
 
 		// wait until the submit button is displayed
 		logger.log(Level.INFO, "starting to wait ...");
-		Thread.sleep(1000);
+		waitModel(browser);
+		// Thread.sleep(1000);
 		// Graphene.waitModel(browser).until(Graphene.element(messageError).isPresent()).wait(5);
 		logger.log(Level.INFO,
 				"messageError.getText() = " + messageError.getText());
@@ -138,7 +140,8 @@ public class Jsf2PortletTest {
 		passwordField.sendKeys("test");
 		signInButton.click();
 		logger.log(Level.INFO, "starting to wait ...");
-		Thread.sleep(1000);
+		// Thread.sleep(1000);
+		waitModel(browser);
 
 		logger.log(Level.INFO,
 				"portletBody.getText() = " + portletBody.getText());
