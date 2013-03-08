@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,6 +15,8 @@ package com.liferay.faces.bridge.application;
 
 import javax.faces.application.Application;
 
+import com.liferay.faces.bridge.config.ConfiguredSystemEventListener;
+
 
 /**
  * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
@@ -28,6 +30,10 @@ public abstract class ApplicationCompatImpl extends ApplicationWrapper {
 
 	public ApplicationCompatImpl(Application application) {
 		this.wrappedApplication = application;
+	}
+
+	protected void subscribeToJSF2SystemEvent(ConfiguredSystemEventListener configuredSystemEventListener) {
+		// This is a no-op for JSF 1.2
 	}
 
 	/**
