@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.liferay.faces.test</groupId>
 		<artifactId>liferay-faces-test</artifactId>
-		<version>3.0.1-legacy-ga2-SNAPSHOT</version>
+		<version>3.0.2-legacy-ga3-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
