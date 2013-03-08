@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,7 +27,7 @@ import com.liferay.faces.util.lang.StringPool;
 public class LoggerDefaultImpl implements Logger {
 
 	// Self-Injections
-	private LogRecordFactory logRecordFactory = new LogRecordFactory();
+	private static LogRecordFactory logRecordFactory = LogRecordFactoryImpl.getInstance();
 
 	// Private Data Members
 	private java.util.logging.Logger wrappedLogger;
@@ -245,30 +245,4 @@ public class LoggerDefaultImpl implements Logger {
 		return throwable;
 	}
 
-	protected class LogRecordFactory {
-
-		public LogRecord getLogRecord(java.util.logging.Level level, String message, Throwable thrown) {
-
-			// Create a new LogRecord instance.
-			LogRecord logRecord = new LogRecord(level, message);
-
-			// Determine the source class name and source method name.
-			Throwable source = new Throwable();
-			StackTraceElement[] stackTraceElements = source.getStackTrace();
-			StackTraceElement callerStackTraceElement = stackTraceElements[2];
-
-			// Set the source class name and source method name.
-			logRecord.setSourceClassName(callerStackTraceElement.getClassName());
-			logRecord.setSourceMethodName(callerStackTraceElement.getMethodName());
-
-			// If specified, set the throwable associated with the log event.
-			if (thrown != null) {
-				logRecord.setThrown(thrown);
-			}
-
-			// Return the new LogRecord instance.
-			return logRecord;
-		}
-
-	}
 }
