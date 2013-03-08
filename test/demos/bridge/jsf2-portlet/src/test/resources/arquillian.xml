@@ -10,8 +10,8 @@
     -->
 
     <extension qualifier="webdriver">
+        <!-- <property name="browserCapabilities">firefox</property> -->
         <property name="browserCapabilities">htmlUnit</property>
-<!--         <property name="browserCapabilities">firefox</property> -->
         <property name="javascriptEnabled">true</property>
     </extension>
 
