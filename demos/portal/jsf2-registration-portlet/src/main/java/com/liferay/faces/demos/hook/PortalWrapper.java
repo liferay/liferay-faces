@@ -202,6 +202,11 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().transformCustomSQL(sql);
 	}
 
+	@Override
+	public String transformSQL(String sql) {
+		return getWrapped().transformSQL(sql);
+	}
+
 	public PortletMode updatePortletMode(String portletId, User user, Layout layout, PortletMode portletMode,
 		HttpServletRequest request) {
 		return getWrapped().updatePortletMode(portletId, user, layout, portletMode, request);
