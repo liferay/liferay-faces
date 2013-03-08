@@ -51,10 +51,9 @@
 				</aui:column>
 				<aui:column last="true" columnWidth="15">
 					<aui:fieldset label="#{i18n['administration']}">
-						<aui-cc:select inlineMessage="true" label="#{i18n['status']}" required="true"
-							value="#{usersModelBean.selectedUser.status}">
-							<f:selectItems value="#{usersModelBean.statusSelectItems}" />
-							<f:converter for="selectOneMenu" converterId="javax.faces.Integer" />
+						<aui-cc:select inlineMessage="true" label="#{i18n['status']}" required="true" value="#{usersModelBean.selectedUser.active}">
+							<f:selectItem itemLabel="#{i18n['active']}" itemValue="true" />
+							<f:selectItem itemLabel="#{i18n['inactive']}" itemValue="false" />
 						</aui-cc:select>
 					</aui:fieldset>
 				</aui:column>

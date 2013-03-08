@@ -96,7 +96,7 @@ public class UsersBackingBean {
 			// Update the selected user in the Liferay database.
 			User user = usersModelBean.getSelectedUser();
 			long userId = user.getUserId();
-			UserLocalServiceUtil.updateStatus(userId, user.getStatus());
+			UserLocalServiceUtil.updateActive(user.getUserId(), user.isActive());
 			UserLocalServiceUtil.updateUser(user);
 
 			// If the end-user uploaded a portrait, then update the portrait in the Liferay database. Note that there is

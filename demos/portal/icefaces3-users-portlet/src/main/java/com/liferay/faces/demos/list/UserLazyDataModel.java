@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
@@ -79,7 +78,7 @@ public class UserLazyDataModel extends LazyDataModel<User> implements Serializab
 			Sort sort = new Sort(DEFAULT_SORT_CRITERIA, Sort.STRING_TYPE, !DEFAULT_SORT_ASCENDING);
 
 			boolean andSearch = true;
-			int status = WorkflowConstants.STATUS_ANY;
+			boolean active = true;
 
 			String firstName = null;
 			String middleName = null;
@@ -88,7 +87,7 @@ public class UserLazyDataModel extends LazyDataModel<User> implements Serializab
 			String emailAddress = null;
 
 			Hits hits = UserLocalServiceUtil.search(companyId, firstName, middleName, lastName, screenName,
-					emailAddress, status, params, andSearch, QueryUtil.ALL_POS, QueryUtil.ALL_POS, sort);
+					emailAddress, active, params, andSearch, QueryUtil.ALL_POS, QueryUtil.ALL_POS, sort);
 			totalCount = hits.getLength();
 
 		}
@@ -130,7 +129,7 @@ public class UserLazyDataModel extends LazyDataModel<User> implements Serializab
 			int liferayOneRelativeFinishRow = first + pageSize + 1;
 
 			boolean andSearch = true;
-			int status = WorkflowConstants.STATUS_ANY;
+			boolean active = true;
 
 			String firstName = trimExpresssion(filters.get("firstName"));
 			String middleName = trimExpresssion(filters.get("middleName"));
@@ -140,13 +139,13 @@ public class UserLazyDataModel extends LazyDataModel<User> implements Serializab
 
 			// For the sake of speed, search for users in the index rather than querying the database directly.
 			Hits hits = UserLocalServiceUtil.search(companyId, firstName, middleName, lastName, screenName,
-					emailAddress, status, params, andSearch, first, liferayOneRelativeFinishRow, sort);
+					emailAddress, active, params, andSearch, first, liferayOneRelativeFinishRow, sort);
 
 			List<Document> documentHits = hits.toList();
 
 			logger.debug(
 				("filters firstName=[{0}] middleName=[{1}] lastName=[{2}] screenName=[{3}] emailAddress=[{4}] active=[{5}] andSearch=[{6}] startRow=[{7}] liferayOneRelativeFinishRow=[{8}] sortColumn=[{9}] reverseOrder=[{10}] hitCount=[{11}]"),
-				firstName, middleName, lastName, screenName, emailAddress, status, andSearch, first,
+				firstName, middleName, lastName, screenName, emailAddress, active, andSearch, first,
 				liferayOneRelativeFinishRow, sort.getFieldName(), sort.isReverse(), documentHits.size());
 
 			// Convert the results from the search index into a list of user objects.
