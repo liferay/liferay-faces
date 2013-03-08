@@ -79,17 +79,23 @@
 
 	<profiles>
 		<profile>
+			<id>tomcat</id>
+			<properties>
+				<app.server.type>tomcat</app.server.type>
+				<bridge.tck.test.host>localhost</bridge.tck.test.host>
+				<bridge.tck.test.port>8080</bridge.tck.test.port>
+			</properties>
+		</profile>
+		<profile>
+			<id>websphere</id>
+			<properties>
+				<app.server.type>websphere</app.server.type>
+				<bridge.tck.test.host>192.168.10.110</bridge.tck.test.host>
+				<bridge.tck.test.port>9080</bridge.tck.test.port>
+			</properties>
+		</profile>
+		<profile>
 			<id>liferay</id>
-			<build>
-				<plugins>
-					<plugin>
-						<artifactId>maven-war-plugin</artifactId>
-						<configuration>
-							<webXml>src/main/webapp/WEB-INF/web-liferay.xml</webXml>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
 			<properties>
 				<bridge.tck.portal>liferay</bridge.tck.portal>
 				<bridge.tck.test.base-url>http://${bridge.tck.test.host}:${bridge.tck.test.port}?p_p_id=58&amp;p_p_lifecycle=0&amp;p_p_state=exclusive&amp;p_p_mode=view&amp;saveLastPath=0&amp;_58_struts_action=%2Flogin%2Flogin</bridge.tck.test.base-url>
@@ -111,8 +117,6 @@
 				<bridge.tck.login.file>src/test/resources/${bridge.tck.portal}-login.properties</bridge.tck.login.file>
 				<bridge.tck.test.exclusions.file>target/test-classes/test-exclusions.xml</bridge.tck.test.exclusions.file>
 				<bridge.tck.test.file>src/test/resources/${bridge.tck.portal}-tests.xml</bridge.tck.test.file>
-				<bridge.tck.test.host>localhost</bridge.tck.test.host>
-				<bridge.tck.test.port>8080</bridge.tck.test.port>
 			</properties>
 			<build>
 				<plugins>
@@ -203,8 +207,7 @@
 								</execution>
 							</executions>
 						</plugin>
-						<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build 
-							itself. -->
+						<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
 						<plugin>
 							<groupId>org.eclipse.m2e</groupId>
 							<artifactId>lifecycle-mapping</artifactId>
@@ -268,6 +271,8 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<dependentWarExcludes>WEB-INF/lib/*</dependentWarExcludes>
+					<packagingExcludes>WEB-INF/web-*.xml</packagingExcludes>
+					<webXml>src/main/webapp/WEB-INF/web-${bridge.tck.portal}-${app.server.type}.xml</webXml>
 				</configuration>
 			</plugin>
 			<plugin>
