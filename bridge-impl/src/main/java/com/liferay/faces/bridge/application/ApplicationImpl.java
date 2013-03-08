@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,8 +21,6 @@ import javax.faces.application.NavigationHandler;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
-import javax.faces.event.SystemEvent;
-import javax.faces.event.SystemEventListener;
 import javax.portlet.PortletRequest;
 import javax.portlet.faces.BridgeUtil;
 import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
@@ -31,8 +29,6 @@ import com.liferay.faces.bridge.component.UIViewRootBridgeImpl;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.ConfiguredSystemEventListener;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -44,9 +40,6 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * @author  Neil Griffin
  */
 public class ApplicationImpl extends ApplicationCompatImpl {
-
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(ApplicationImpl.class);
 
 	// Private Constants
 	private static final String UIVIEWROOT_FQCN = UIViewRoot.class.getName();
@@ -97,27 +90,7 @@ public class ApplicationImpl extends ApplicationCompatImpl {
 								configuredSystemEventListeners) {
 
 								if (UIVIEWROOT_FQCN.equals(configuredSystemEventListener.getSourceClass())) {
-
-									try {
-										@SuppressWarnings("unchecked")
-										Class<? extends SystemEvent> systemEventClass = (Class<? extends SystemEvent>)
-											Class.forName(configuredSystemEventListener.getSystemEventClass());
-										@SuppressWarnings("unchecked")
-										Class<? extends SystemEventListener> systemEventListenerClass =
-											(Class<? extends SystemEventListener>) Class.forName(
-												configuredSystemEventListener.getSystemEventListenerClass());
-										SystemEventListener systemEventListener = (SystemEventListener)
-											systemEventListenerClass.newInstance();
-
-										logger.debug(
-											"Subscribing UIViewRootBridgeImpl for systemEventClass=[{0}] systemEventListener=[{1}]",
-											systemEventClass, systemEventListener);
-										subscribeToEvent(systemEventClass, UIViewRootBridgeImpl.class,
-											systemEventListener);
-									}
-									catch (Exception e) {
-										logger.error(e);
-									}
+									subscribeToJSF2SystemEvent(configuredSystemEventListener);
 								}
 							}
 						}
