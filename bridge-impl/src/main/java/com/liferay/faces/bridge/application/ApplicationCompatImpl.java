@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,9 +18,13 @@ import javax.faces.application.ApplicationWrapper;
 import javax.faces.application.ResourceHandler;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.event.SystemEvent;
+import javax.faces.event.SystemEventListener;
 
+import com.liferay.faces.bridge.component.UIViewRootBridgeImpl;
 import com.liferay.faces.bridge.component.icefaces.DataPaginator;
 import com.liferay.faces.bridge.component.icefaces.DataPaginatorBridgeImpl;
+import com.liferay.faces.bridge.config.ConfiguredSystemEventListener;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -62,6 +66,26 @@ public abstract class ApplicationCompatImpl extends ApplicationWrapper {
 		}
 
 		return wrappedUIComponent;
+	}
+
+	protected void subscribeToJSF2SystemEvent(ConfiguredSystemEventListener configuredSystemEventListener) {
+
+		try {
+			@SuppressWarnings("unchecked")
+			Class<? extends SystemEvent> systemEventClass = (Class<? extends SystemEvent>) Class.forName(
+					configuredSystemEventListener.getSystemEventClass());
+			@SuppressWarnings("unchecked")
+			Class<? extends SystemEventListener> systemEventListenerClass = (Class<? extends SystemEventListener>) Class
+				.forName(configuredSystemEventListener.getSystemEventListenerClass());
+			SystemEventListener systemEventListener = (SystemEventListener) systemEventListenerClass.newInstance();
+
+			logger.debug("Subscribing UIViewRootBridgeImpl for systemEventClass=[{0}] systemEventListener=[{1}]",
+				systemEventClass, systemEventListener);
+			subscribeToEvent(systemEventClass, UIViewRootBridgeImpl.class, systemEventListener);
+		}
+		catch (Exception e) {
+			logger.error(e);
+		}
 	}
 
 	/**
