@@ -21,7 +21,6 @@
 		<module>bridge-tck-render-policy3-portlet</module>
 		<module>bridge-tck-response-wrapper-portlet</module>
 		<module>test-setup-hook</module>
-		<module>demos</module>
 	</modules>
 
 </project>
