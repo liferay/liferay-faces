@@ -10,7 +10,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.liferay.faces</groupId>
 	<artifactId>liferay-faces</artifactId>
-	<version>3.2.1-ga1-SNAPSHOT</version>
+	<version>3.2.2-ga3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Liferay Faces Parent</name>
 	<description>Parent POM for all Liferay Faces projects</description>
@@ -242,7 +242,7 @@
 									<pluginExecutionFilter>
 										<groupId>com.liferay.faces.maven</groupId>
 										<artifactId>liferay-faces-maven-plugin</artifactId>
-										<versionRange>[3.2.1-ga1-SNAPSHOT,)</versionRange>
+										<versionRange>[3.2.2-ga3-SNAPSHOT,)</versionRange>
 										<goals>
 											<goal>generate-vdldoc</goal>
 										</goals>

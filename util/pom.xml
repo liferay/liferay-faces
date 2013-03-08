@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.faces</groupId>
 		<artifactId>liferay-faces</artifactId>
-		<version>3.2.1-ga1-SNAPSHOT</version>
+		<version>3.2.2-ga3-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>liferay-faces-util</artifactId>
@@ -23,6 +23,10 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
