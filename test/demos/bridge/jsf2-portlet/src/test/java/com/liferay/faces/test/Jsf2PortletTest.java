@@ -29,13 +29,20 @@ public class Jsf2PortletTest {
 	private final static Logger logger = Logger
 			.getLogger(Jsf2PortletTest.class.getName());
 	
-	@FindBy(id = "_58_login")
+	// @FindBy(id = "_58_login")
+	// //*[@id="A2677:j_idt6:j_idt8:j_idt9:handle"]
+	// //input[contains(@id,'buttonTargetNav2')]
+	@FindBy(xpath = "//input[contains(@id,':handle')]")
 	private WebElement emailField;
 	
-	@FindBy(id = "_58_password")
+	// @FindBy(id = "_58_password")
+	// //*[@id="A2677:j_idt6:j_idt8:j_idt9:password"]
+	@FindBy(xpath = "//input[contains(@id,':password')]")
 	private WebElement passwordField;
 	
-	@FindBy(id = "j_login")
+	// @FindBy(id = "j_login")
+	// //*[@id="A2677:j_idt6:j_idt8"]/div/input
+	@FindBy(xpath = "//input[contains(@id,':j_idt8')]")
 	private WebElement signInButton;
 	
 	@FindBy(xpath = "//input[@type='submit']")
@@ -66,7 +73,12 @@ public class Jsf2PortletTest {
 	@RunAsClient
 	public void signIn() throws Exception {
 		
-		browser.get("http://localhost:8080/group/bridge-demos/jsf2");
+//		String url = "http://localhost:8080/group/bridge-demos/jsf2?js_fast_load=0";
+//		String url = "http://localhost:8080/group/bridge-demos/jsf2";
+		String url = "http://localhost:8080/web/guest/signin";
+		
+		logger.log(Level.INFO, "url = " + url);
+		browser.get(url);
 		
 		assertTrue("emailField is displayed", emailField.isDisplayed());
 		assertTrue("passwordField is displayed", passwordField.isDisplayed());
@@ -80,13 +92,13 @@ public class Jsf2PortletTest {
 		emailField.sendKeys("test@liferay.com");
 		
 		logger.log(Level.INFO, "passwordField.sendKeys ...");
-//		passwordField.sendKeys("test");
-//		
-//		logger.log(Level.INFO, "signInButton.click() ...");
-//		signInButton.click();
-//		
-//		// wait until the submit button is displayed
-//		logger.log(Level.INFO, "starting to wait ...");
+		passwordField.sendKeys("test");
+		
+		logger.log(Level.INFO, "signInButton.click() ...");
+		signInButton.click();
+		
+		// wait until the submit button is displayed
+		logger.log(Level.INFO, "starting to wait ...");
 		
 //		Graphene.waitModel(browser).until(Graphene.element(submitButton).isPresent()).wait(10);
 //		logger.log(Level.INFO, "done waiting ...");
