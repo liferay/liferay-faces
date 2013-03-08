@@ -4,7 +4,6 @@
 <liferay-portlet-app>
 	<portlet>
 		<portlet-name>1</portlet-name>
-		<instanceable>true</instanceable>
 		<remoteable>true</remoteable>
 		<render-weight>1</render-weight>
 		<ajaxable>false</ajaxable>
