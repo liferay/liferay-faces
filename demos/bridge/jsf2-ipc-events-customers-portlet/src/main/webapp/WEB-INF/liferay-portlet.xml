@@ -4,7 +4,6 @@
 <liferay-portlet-app>
 	<portlet>
 		<portlet-name>customers</portlet-name>
-		<instanceable>false</instanceable>
 		<ajaxable>false</ajaxable>
 	</portlet>
 </liferay-portlet-app>
