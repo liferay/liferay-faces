@@ -30,9 +30,23 @@ public class Jsf2PortletTest {
 	// private static final Logger logger;
 	private final static Logger logger = Logger.getLogger(Jsf2PortletTest.class
 			.getName());
-
+	
+	// //*[@id="portlet_1_WAR_jsf2loginportlet"]/header/h1/span[2]
+	// @FindBy(xpath = "//*[@id='portlet_1_WAR_jsf2loginportlet']/header/h1/span[2]")
+	@FindBy(xpath = "//section[@id='portlet_1_WAR_jsf2loginportlet']/header/h1/span[2]")
+	private WebElement portletDisplayName;
+	
 	// //*[@id="A2677:j_idt3"]/ul/li
-	@FindBy(xpath = "//*[@id='A2677:j_idt3']/ul/li")
+	// Authentication failed. Please try again.
+	// //*[@id="A2677:j_idt4"]/ul/li
+	// //ul/li[@class="portlet-msg-error"]
+	// Authentication failed. Please try again.
+	// //*[@id="A2677:j_idt4"]/ul/li
+	// //form[@id='A2677:j_idt4']/ul/li
+	// //*[@id="A2677"]
+	// //*[@id="A2677:j_idt4"]/ul/li
+	// @FindBy(xpath = "//form[@id='A2677:j_idt4']/ul/li")
+	@FindBy(xpath = "//form[@method='post']/ul/li")
 	private WebElement messageError;
 
 	// @FindBy(id = "_58_login")
@@ -48,22 +62,20 @@ public class Jsf2PortletTest {
 
 	// @FindBy(id = "j_login")
 	// //*[@id="A2677:j_idt6:j_idt8"]/div/input
-	@FindBy(xpath = "//input[contains(@name,':j_idt8')]")
+	// //*[@id="A2677:j_idt4:j_idt6"]/div/input
+	// <input type="submit" name="A2677:j_idt4:j_idt6:j_idt9" value="Sign In">
+	// //input[@type='submit' and @value='Sign In']
+	@FindBy(xpath = "//input[@type='submit' and @value='Sign In']")
 	private WebElement signInButton;
 
 	// //*[@id="A2677"]
-	@FindBy(xpath = "//*[@id='A2677']")
+	// <div class="portlet-body" id="aui_3_4_0_1_490">
+	//   <div id="A2677" class="liferay-faces-bridge-body">You are signed in as Test Test.</div> </div>
+	// //section[@id='portlet_1_WAR_jsf2loginportlet']
+	// //div[contains(text(),'You are signed in as')]
+	// @FindBy(xpath = "//*[@id='A2677']")
+	@FindBy(xpath = "//div[contains(text(),'You are signed in as')]")
 	private WebElement portletBody;
-
-	// @FindBy(xpath = "//input[@type='submit']")
-	// private WebElement submitButton;
-	//
-	// @FindBy(xpath = "//input[@type='submit']")
-	// private WebElement suButton;
-
-	// @FindBy(id = "output")
-	// @FindBy(id = "A5601:l1:c1:f1:j_idt30")
-	// id="A5601:l1:c1:f1:j_idt30"
 
 	// By id = By.id("button");
 	// WebElement element = driver.findElement(id);
@@ -77,6 +89,8 @@ public class Jsf2PortletTest {
 	@Before
 	public void getNewSession() {
 		browser.manage().deleteAllCookies();
+		// Shut its dirty mouth
+		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
 	}
 
 	@Test
@@ -87,30 +101,41 @@ public class Jsf2PortletTest {
 		// "http://localhost:8080/group/bridge-demos/jsf2?js_fast_load=0";
 		// String url = "http://localhost:8080/group/bridge-demos/jsf2";
 		String url = "http://localhost:8080/web/guest/signin";
-
 		logger.log(Level.INFO, "url = " + url);
+		
 		browser.get(url);
-
-		assertTrue("emailField is displayed", emailField.isDisplayed());
-		assertTrue("passwordField is displayed", passwordField.isDisplayed());
-		assertTrue("signInButton is displayed", signInButton.isDisplayed());
+		
+		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
+		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
+		assertTrue("portlet is called JSF2 Sign-In", portletDisplayName.getText().contains("JSF2 Sign-In"));
+		
+		logger.log(Level.INFO, "emailField.isDisplayed() = " + emailField.isDisplayed());
+		assertTrue("emailField.isDisplayed()", emailField.isDisplayed());
+		logger.log(Level.INFO, "passwordField.isDisplayed() = " + passwordField.isDisplayed());
+		assertTrue("passwordField.isDisplayed()", passwordField.isDisplayed());
+		logger.log(Level.INFO, "signInButton.isDisplayed() = " + signInButton.isDisplayed());
+		assertTrue("signInButton.isDisplayed()", signInButton.isDisplayed());
 
 		logger.log(Level.INFO, "clearing email textbox");
 		emailField.clear();
 		logger.log(Level.INFO, "emailField.sendKeys ...");
 		emailField.sendKeys("test@liferay.com");
+		logger.log(Level.INFO, "emailField.getText() = " + emailField.getText());
 
 		logger.log(Level.INFO, "passwordField.sendKeys ...");
 		passwordField.sendKeys("not_test");
+		logger.log(Level.INFO, "passwordField.getText() = " + passwordField.getText());
 
 		logger.log(Level.INFO, "signInButton.click() ...");
 		signInButton.click();
 
 		// wait until the submit button is displayed
 		logger.log(Level.INFO, "starting to wait ...");
-		waitModel(browser);
-		// Thread.sleep(1000);
+		waitAjax(browser);
+		// Thread.sleep(3000);
 		// Graphene.waitModel(browser).until(Graphene.element(messageError).isPresent()).wait(5);
+		// logger.log(Level.INFO, "browser.getPageSource() = " + browser.getPageSource());
+		
 		logger.log(Level.INFO,
 				"messageError.getText() = " + messageError.getText());
 		assertTrue("messageError is displayed", messageError.isDisplayed());
@@ -122,53 +147,36 @@ public class Jsf2PortletTest {
 	@Test
 	@RunAsClient
 	public void signIn() throws Exception {
-		
+
 		String url = "http://localhost:8080/web/guest/signin";
 
 		logger.log(Level.INFO, "url = " + url);
 		browser.get(url);
 
-		assertTrue("emailField is displayed", emailField.isDisplayed());
-		assertTrue("passwordField is displayed", passwordField.isDisplayed());
-		assertTrue("signInButton is displayed", signInButton.isDisplayed());
+		assertTrue("emailField.isDisplayed()", emailField.isDisplayed());
+		assertTrue("passwordField.isDisplayed()", passwordField.isDisplayed());
+		assertTrue("signInButton.isDisplayed()", signInButton.isDisplayed());
 
-		logger.log(Level.INFO, "clearing email textbox");
+		logger.log(Level.INFO, "clearing emailField");
 		emailField.clear();
 		logger.log(Level.INFO, "emailField.sendKeys ...");
 		emailField.sendKeys("test@liferay.com");
-		
+		logger.log(Level.INFO, "clearing passwordField");
+		passwordField.clear();
+		logger.log(Level.INFO, "passwordField.sendKeys ...");
 		passwordField.sendKeys("test");
+		
+		logger.log(Level.INFO, "signInButton.click() ...");
 		signInButton.click();
 		logger.log(Level.INFO, "starting to wait ...");
-		// Thread.sleep(1000);
+		// Thread.sleep(3000);
 		waitModel(browser);
 
 		logger.log(Level.INFO,
 				"portletBody.getText() = " + portletBody.getText());
 		assertTrue("portletBody is displayed", portletBody.isDisplayed());
-		assertTrue("Authentication passed",
+		assertTrue("You are signed in",
 				portletBody.getText().contains("You are signed in"));
-
-		// logger.log(Level.INFO, "browser.getPageSource() = " +
-		// browser.getPageSource());
 	}
-
-	// @Test
-	// @RunAsClient
-	// public void renderFacesPortlet() throws Exception {
-	// // browser.get(portalURL.toString());
-	// // browser.get("http://localhost:8080/");
-	// browser.get("http://10.1.1.220:8080/group/bridge-demos/jsf2");
-	//
-	// String src = browser.getPageSource();
-	// logger.log(Level.INFO, "src = " + src);
-	//
-	// assertTrue("Check that page contains output element",
-	// outputField.isDisplayed());
-	// // assertEquals("Field has correct value set", "Submit",
-	// // outputField.getText());
-	// assertEquals("Field has correct value set", "Submit",
-	// outputField.getAttribute("value"));
-	// }
 
 }
