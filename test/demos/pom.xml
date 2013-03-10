@@ -43,6 +43,11 @@
         <version.pluto.portal.testing>1.0.0.Beta1</version.pluto.portal.testing>
         <version.jbossas7.container>7.1.1.Final</version.jbossas7.container>
 
+	<!-- testing selenium
+	<version.selenium>2.28.0</version.selenium>
+	<version.selenium.server>2.28.0</version.selenium.server>
+ -->
+
         <!-- Plugin versions -->
         <version.plugin.surefire>2.12</version.plugin.surefire>
         <version.plugin.checkstyle>2.9.1</version.plugin.checkstyle>
@@ -203,11 +208,73 @@
                 <artifactId>pluto-extension-jsf</artifactId>
                 <version>${version.pluto.portal.testing}</version>
             </dependency>
+
+            <!-- Selenium dependecies
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-server</artifactId>
+                <version>${version.selenium.server}</version>
+            </dependency> 
+
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-api</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-support</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-android-driver</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-chrome-driver</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-firefox-driver</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-htmlunit-driver</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-ie-driver</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-iphone-driver</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-remote-driver</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+ -->
+
         </dependencies>
     </dependencyManagement>
 	
 	<modules>
 		<module>bridge</module>
+		<module>portal</module>
 	</modules>
 	
 	<build>
