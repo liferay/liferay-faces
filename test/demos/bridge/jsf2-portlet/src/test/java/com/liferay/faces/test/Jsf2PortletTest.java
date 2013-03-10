@@ -51,18 +51,9 @@ public class Jsf2PortletTest {
 	private WebElement portletBody;
 
 	// elements for Job Applicants
-	// //*[@id="aui_3_4_0_1_1938"]
-	// //header[@class='portlet-topper']/h1/span
 	@FindBy(xpath = "//header[@class='portlet-topper']/h1/span")
 	private WebElement portletDisplayName;
-	
-	// <img src="http://localhost:8080/group/bridge-demos/jsf2?p_p_id=1_WAR_jsf2portlet_INSTANCE_ABCD&amp;p_p_lifecycle=2&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_cacheability=cacheLevelPage&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_1_WAR_jsf2portlet_INSTANCE_ABCD_javax.faces.resource=liferay-logo.png&amp;_1_WAR_jsf2portlet_INSTANCE_ABCD_ln=example" title="liferay.com">
-	// //*[@id="aui_3_4_0_1_1914"]/div[2]/a/img
-	// //img[contains(@src,'liferay-logo.png')]
-	// @FindBy(xpath = "//img[@title='liferay.com']")
-	// <a href="http://www.liferay.com/community/liferay-projects/liferay-faces" target="_blank" id="aui_3_4_0_1_794"> <img src="http://localhost:8080/group/bridge-demos/jsf2?p_p_id=1_WAR_jsf2portlet_INSTANCE_ABCD&amp;p_p_lifecycle=2&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_cacheability=cacheLevelPage&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_1_WAR_jsf2portlet_INSTANCE_ABCD_javax.faces.resource=liferay-logo.png&amp;_1_WAR_jsf2portlet_INSTANCE_ABCD_ln=example" title="liferay.com" id="aui_3_4_0_1_793"> </a>
-	// @FindBy(xpath = "//a[@src='http://www.liferay.com/community/liferay-projects/liferay-faces']/img")
-	@FindBy(xpath = "//*[@class='sponsor-button']")
+	@FindBy(xpath = "//img[contains(@src,'liferay-logo.png')]")
 	private WebElement logo;
 	
 	@FindBy(xpath = "//input[contains(@id,':firstName')]")
@@ -78,7 +69,7 @@ public class Jsf2PortletTest {
 	private WebElement dateOfBirthField;
 	@FindBy(xpath = "//input[contains(@id,':city')]")
 	private WebElement cityField;
-	@FindBy(xpath = "//input[contains(@id,':provinceId')]")
+	@FindBy(xpath = "//select[contains(@id,':provinceId')]")
 	private WebElement provinceIdField;
 	@FindBy(xpath = "//input[contains(@id,':postalCode')]")
 	private WebElement postalCodeField;
@@ -129,8 +120,8 @@ public class Jsf2PortletTest {
 		logger.log(Level.INFO, "Signing in using browser.navigate().to(url) ...");
 		browser.navigate().to(url);
 		waitModel(browser);
-		Thread.sleep(5000);
-		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
+		Thread.sleep(1000);
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " before signing in ...");
 		
 		emailField.clear();
 		emailField.sendKeys("test@liferay.com");
@@ -138,9 +129,8 @@ public class Jsf2PortletTest {
 		passwordField.sendKeys("test");
 		signInButton.click();
 		waitModel(browser);
-		Thread.sleep(5000);
-		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
-
+		Thread.sleep(1000);
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " after clicking the sign in button and waiting");
 		logger.log(Level.INFO, portletBody.getText());
 		// assertTrue("You are signed in", portletBody.getText().contains("You are signed in"));
 	}
@@ -158,17 +148,13 @@ public class Jsf2PortletTest {
 		logger.log(Level.INFO, "second browser.navigate().to ...");
 		browser.navigate().to("http://localhost:8080/group/bridge-demos/jsf2");
 		waitModel(browser);
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-
-		// logger.log(Level.INFO, "browser.manage().logs().toString() = " + browser.manage().logs().toString());
 		
 		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
 		assertTrue("portletDisplayName.isDisplayed()",portletDisplayName.isDisplayed());
 		
-		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
-		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 		// logger.log(Level.INFO, "browser.getPageSource() = " + browser.getPageSource());
 		
 		assertTrue("logo.isDisplayed()",logo.isDisplayed());
@@ -180,7 +166,7 @@ public class Jsf2PortletTest {
 		
 		assertTrue("dateOfBirthField.isDisplayed()",dateOfBirthField.isDisplayed());
 		assertTrue("cityField.isDisplayed()",cityField.isDisplayed());
-//		assertTrue("provinceIdField.isDisplayed()",provinceIdField.isDisplayed());
+		assertTrue("provinceIdField.isDisplayed()",provinceIdField.isDisplayed());
 		assertTrue("postalCodeField.isDisplayed()",postalCodeField.isDisplayed());
 		assertTrue("postalCodeToolTip.isDisplayed()",postalCodeToolTip.isDisplayed());
 		
