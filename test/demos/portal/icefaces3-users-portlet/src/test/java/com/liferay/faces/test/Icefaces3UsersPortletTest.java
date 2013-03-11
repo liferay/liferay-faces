@@ -158,11 +158,11 @@ public class Icefaces3UsersPortletTest {
 		// Looks like it might have been resolved in 1.8
 		
 		// waitModel(browser);
-//		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
-//		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-//		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
-//		
-//		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
+		
+		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
 //		assertTrue("menuButton.isDisplayed()", menuButton.isDisplayed());
 //		assertTrue("menuPreferences is NOT displayed()", !menuPreferences.isDisplayed());
 //		
