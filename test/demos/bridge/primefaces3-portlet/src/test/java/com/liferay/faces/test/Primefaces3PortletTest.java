@@ -128,8 +128,7 @@ public class Primefaces3PortletTest {
 		url = "http://localhost:8080/web/guest/signin";
 		logger.log(Level.INFO, "browser.navigate().to("+url+")");
 		browser.navigate().to(url);
-		waitModel(browser);
-		Thread.sleep(1000);
+		// waitModel(browser);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " before signing in ...");
 		
 		emailField.clear();
@@ -137,12 +136,10 @@ public class Primefaces3PortletTest {
 		passwordField.clear();
 		passwordField.sendKeys("test");
 		signInButton.click();
-		waitModel(browser);
-		Thread.sleep(1000);
+		// waitModel(browser);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " after clicking the sign in button and waiting");
 		logger.log(Level.INFO, portletBody.getText());
 		// assertTrue("You are signed in", portletBody.getText().contains("You are signed in"));
-		Thread.sleep(1000);
 		
 	}
 	
@@ -150,24 +147,15 @@ public class Primefaces3PortletTest {
 	@RunAsClient
 	@InSequence(1)
 	public void jobApplicant() throws Exception {
-		
-		// You think i like this?  You think I like magic numbers?
-		int foo = 0;
-		while (!browser.getTitle().contains("PRIME3") && foo < 10) {
 			
-			signIn();
-			url = "http://localhost:8080/group/bridge-demos/prime3";
-			logger.log(Level.INFO, "browser.navigate().to("+url+")");
-			browser.navigate().to(url);
-			waitModel(browser);
-			Thread.sleep(2000);
-			logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
-			logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-			logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
-			
-		foo++;
-		}
-		logger.log(Level.INFO, "A measure of how much foo we have at this point ... foo = " + foo);
+		signIn();
+		url = "http://localhost:8080/group/bridge-demos/prime3";
+		logger.log(Level.INFO, "browser.navigate().to("+url+")");
+		browser.navigate().to(url);
+		// waitModel(browser);
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
 		
 		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
 		assertTrue("menuButton.isDisplayed()", menuButton.isDisplayed());

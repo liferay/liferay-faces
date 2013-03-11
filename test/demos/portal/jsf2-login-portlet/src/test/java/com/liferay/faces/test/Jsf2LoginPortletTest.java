@@ -131,7 +131,7 @@ public class Jsf2LoginPortletTest {
 
 		// wait until the submit button is displayed
 		logger.log(Level.INFO, "starting to wait ...");
-		waitAjax(browser);
+		// waitAjax(browser);
 		// Thread.sleep(3000);
 		// Graphene.waitModel(browser).until(Graphene.element(messageError).isPresent()).wait(5);
 		// logger.log(Level.INFO, "browser.getPageSource() = " + browser.getPageSource());
@@ -171,7 +171,7 @@ public class Jsf2LoginPortletTest {
 		signInButton.click();
 		logger.log(Level.INFO, "starting to wait ...");
 		// Thread.sleep(3000);
-		waitModel(browser);
+		// waitModel(browser);
 
 		logger.log(Level.INFO,
 				"portletBody.getText() = " + portletBody.getText());
