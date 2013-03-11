@@ -53,6 +53,11 @@ public class Jsf2PortletTest {
 	// elements for Job Applicants
 	@FindBy(xpath = "//header[@class='portlet-topper']/h1/span")
 	private WebElement portletDisplayName;
+	@FindBy(xpath = "//a[contains(@id,'jsf2portlet') and contains(@id,'menuButton')]")
+	private WebElement menuButton;
+	@FindBy(xpath = "//a[contains(@id,'jsf2portlet') and contains(@id,'menu_preferences')]")
+	private WebElement menuPreferences;
+	
 	@FindBy(xpath = "//img[contains(@src,'liferay-logo.png')]")
 	private WebElement logo;
 	
@@ -73,23 +78,17 @@ public class Jsf2PortletTest {
 	private WebElement provinceIdField;
 	@FindBy(xpath = "//input[contains(@id,':postalCode')]")
 	private WebElement postalCodeField;
-	// <img src="http://localhost:8080/group/bridge-demos/jsf2?p_p_id=1_WAR_jsf2portlet_INSTANCE_ABCD&amp;p_p_lifecycle=2&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_cacheability=cacheLevelPage&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_1_WAR_jsf2portlet_INSTANCE_ABCD_javax.faces.resource=icon-help.png&amp;_1_WAR_jsf2portlet_INSTANCE_ABCD_ln=example" title="Type any of these ZIP codes: 19806, 30329, 32801, 21224, 28202, 07030, 12205, 29201, 24013">
-	// //*[@id="A5601:l1:c1:f1:fs1:c1b:postalCodeField"]/span/span/img
-	// //img[contains(@title,'Type any of these ZIP codes')]
 	@FindBy(xpath = "//img[contains(@title,'Type any of these ZIP codes')]")
 	private WebElement postalCodeToolTip;
 	
-	// <input id="A5601:l1:c2:c2a:f3:j_idt45" name="A5601:l1:c2:c2a:f3:j_idt45" type="file" multiple="multiple">
 	@FindBy(xpath = "//input[@type='file' and @multiple='multiple']")
 	private WebElement multiFileUploadButton;
-	// <input type="submit" name="A5601:l1:c2:c2a:f3:j_idt46" value="Submit" id="aui_3_4_0_1_571">
 	@FindBy(xpath = "//form[@enctype='multipart/form-data']/input[@type='submit' and @value='Submit']")
 	private WebElement submitFilesButton;
 	
 	@FindBy(xpath = "//a[contains(text(),'Show Comments')]")
 	private WebElement showCommentsLink;
 	
-	// //input[@type='submit' and @value='Submit']
 	@FindBy(xpath = "//input[@type='submit' and @value='Submit']")
 	private WebElement submitButton;
 	@FindBy(xpath = "//input[@type='submit' and @value='Edit Preferences']")
@@ -109,15 +108,14 @@ public class Jsf2PortletTest {
 	public void getNewSession() {
 		// Shut its dirty mouth
 		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
+		browser.manage().deleteAllCookies();
+		logger.log(Level.INFO, "browser.manage().deleteAllCookies() ...");
 	}
 
 	public void signIn() throws Exception {
 		
-		// browser.manage().deleteAllCookies();
-		// logger.log(Level.INFO, "browser.manage().deleteAllCookies() ...");
-		
 		url = "http://localhost:8080/web/guest/signin";
-		logger.log(Level.INFO, "Signing in using browser.navigate().to(url) ...");
+		logger.log(Level.INFO, "browser.navigate().to("+url+")");
 		browser.navigate().to(url);
 		waitModel(browser);
 		Thread.sleep(1000);
@@ -133,54 +131,63 @@ public class Jsf2PortletTest {
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " after clicking the sign in button and waiting");
 		logger.log(Level.INFO, portletBody.getText());
 		// assertTrue("You are signed in", portletBody.getText().contains("You are signed in"));
+		Thread.sleep(1000);
+		
 	}
 	
 	@Test
 	@RunAsClient
 	@InSequence(1)
-	public void createJobApplicant() throws Exception {
+	public void jobApplicant() throws Exception {
 		
-		signIn();
+		// You think i like this?  You think I like magic numbers?
+		int foo = 0;
+		while (!browser.getTitle().contains("JSF2") && foo < 10) {
+			
+			signIn();
+			url = "http://localhost:8080/group/bridge-demos/jsf2";
+			logger.log(Level.INFO, "browser.navigate().to("+url+")");
+			browser.navigate().to(url);
+			waitModel(browser);
+			Thread.sleep(2000);
+			logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
+			logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+			logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
+			
+		foo++;
+		}
+		logger.log(Level.INFO, "A measure of how much foo we have at this point ... foo = " + foo);
 		
-		url = "http://localhost:8080/group/bridge-demos/jsf2";
-		logger.log(Level.INFO, "url = " + url);
-		
-		logger.log(Level.INFO, "second browser.navigate().to ...");
-		browser.navigate().to("http://localhost:8080/group/bridge-demos/jsf2");
-		waitModel(browser);
-		Thread.sleep(2000);
-		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
-		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		
-		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
-		assertTrue("portletDisplayName.isDisplayed()",portletDisplayName.isDisplayed());
+		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
+		assertTrue("menuButton.isDisplayed()", menuButton.isDisplayed());
+		assertTrue("menuPreferences is NOT displayed()", !menuPreferences.isDisplayed());
 		
 		// logger.log(Level.INFO, "browser.getPageSource() = " + browser.getPageSource());
 		
 		assertTrue("logo.isDisplayed()",logo.isDisplayed());
 		
-		assertTrue("firstNameField.isDisplayed()",firstNameField.isDisplayed());
-		assertTrue("lastNameField.isDisplayed()",lastNameField.isDisplayed());
-		assertTrue("emailAddressField.isDisplayed()",emailAddressField.isDisplayed());
-		assertTrue("phoneNumberField.isDisplayed()",phoneNumberField.isDisplayed());
+		assertTrue("firstNameField.isDisplayed()", firstNameField.isDisplayed());
+		assertTrue("lastNameField.isDisplayed()", lastNameField.isDisplayed());
+		assertTrue("emailAddressField.isDisplayed()", emailAddressField.isDisplayed());
+		assertTrue("phoneNumberField.isDisplayed()", phoneNumberField.isDisplayed());
 		
-		assertTrue("dateOfBirthField.isDisplayed()",dateOfBirthField.isDisplayed());
-		assertTrue("cityField.isDisplayed()",cityField.isDisplayed());
-		assertTrue("provinceIdField.isDisplayed()",provinceIdField.isDisplayed());
-		assertTrue("postalCodeField.isDisplayed()",postalCodeField.isDisplayed());
-		assertTrue("postalCodeToolTip.isDisplayed()",postalCodeToolTip.isDisplayed());
+		assertTrue("dateOfBirthField.isDisplayed()", dateOfBirthField.isDisplayed());
+		assertTrue("cityField.isDisplayed()", cityField.isDisplayed());
+		assertTrue("provinceIdField.isDisplayed()", provinceIdField.isDisplayed());
+		assertTrue("postalCodeField.isDisplayed()", postalCodeField.isDisplayed());
+		assertTrue("postalCodeToolTip.isDisplayed()", postalCodeToolTip.isDisplayed());
 		
-		assertTrue("multiFileUploadButton.isDisplayed()",multiFileUploadButton.isDisplayed());
-		assertTrue("submitFilesButton.isDisplayed()",submitFilesButton.isDisplayed());
+		assertTrue("multiFileUploadButton.isDisplayed()", multiFileUploadButton.isDisplayed());
+		assertTrue("submitFilesButton.isDisplayed()", submitFilesButton.isDisplayed());
 		
-		assertTrue("showCommentsLink.isDisplayed()",showCommentsLink.isDisplayed());
+		assertTrue("showCommentsLink.isDisplayed()", showCommentsLink.isDisplayed());
 		
-		assertTrue("submitButton.isDisplayed()",submitButton.isDisplayed());
-		assertTrue("editPreferencesButton.isDisplayed()",editPreferencesButton.isDisplayed());
+		assertTrue("submitButton.isDisplayed()", submitButton.isDisplayed());
+		assertTrue("editPreferencesButton.isDisplayed()", editPreferencesButton.isDisplayed());
 		
-		assertTrue("mojarraVersion.isDisplayed()",mojarraVersion.isDisplayed());
-		assertTrue("alloyVersion.isDisplayed()",alloyVersion.isDisplayed());
-		assertTrue("bridgeVersion.isDisplayed()",bridgeVersion.isDisplayed());
+		assertTrue("mojarraVersion.isDisplayed()", mojarraVersion.isDisplayed());
+		assertTrue("alloyVersion.isDisplayed()", alloyVersion.isDisplayed());
+		assertTrue("bridgeVersion.isDisplayed()", bridgeVersion.isDisplayed());
 
 		logger.log(Level.INFO, mojarraVersion.getText());
 		logger.log(Level.INFO, alloyVersion.getText());
