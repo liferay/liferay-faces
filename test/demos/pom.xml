@@ -15,38 +15,17 @@
 	<name>Liferay Faces Test Demos</name>
 	
 	<properties>
-        <!-- JSF2 Implementations -->
-        <version.mojarra2>2.1.13</version.mojarra2>
-
-        <!-- RichFaces 4 versions -->
-        <version.richfaces4>4.3.0.Final</version.richfaces4>
-
-        <!-- GateIn PC version -->
-        <version.gatein.pc>2.4.0.CR01</version.gatein.pc>
-
-        <!-- Spec versions -->
-        <version.portlet>2.0</version.portlet>
-        <version.servlet2>2.5</version.servlet2>
-        <version.servlet3>3.0.1</version.servlet3>
-        <version.jsp>2.1</version.jsp>
-        <version.inject>1</version.inject>
-        <version.cdi>1.0-SP4</version.cdi>
-
+ 
         <!-- Testing versions -->
         <version.junit>4.10</version.junit>
         <version.arquillian>1.0.3.Final</version.arquillian>
-        <version.shrinkwrap.descriptor>2.0.0-alpha-4</version.shrinkwrap.descriptor>
-        <version.shrinkwrap.resolver>2.0.0-alpha-7</version.shrinkwrap.resolver>
         <version.arquillian.graphene>2.0.0.Alpha3</version.arquillian.graphene>
-        <version.arquillian.extension.portal>1.0.0.Beta1</version.arquillian.extension.portal>
-        <version.gatein.portal.testing>1.0.0.Beta2</version.gatein.portal.testing>
-        <version.pluto.portal.testing>1.0.0.Beta1</version.pluto.portal.testing>
-        <version.jbossas7.container>7.1.1.Final</version.jbossas7.container>
+        <version.arquillian.drone>1.1.1.Final</version.arquillian.drone>
 
-	<!-- testing selenium
-	<version.selenium>2.28.0</version.selenium>
-	<version.selenium.server>2.28.0</version.selenium.server>
- -->
+	    <!-- testing selenium
+	    <version.selenium>2.31.0</version.selenium>
+	    <version.selenium.server>2.31.0</version.selenium.server>
+	    -->
 
         <!-- Plugin versions -->
         <version.plugin.surefire>2.12</version.plugin.surefire>
@@ -58,101 +37,7 @@
     
     <dependencyManagement>
         <dependencies>
-            <!-- Project dependencies -->
-            <dependency>
-                <groupId>org.jboss.portletbridge</groupId>
-                <artifactId>portletbridge-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.portletbridge</groupId>
-                <artifactId>portletbridge-impl</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.portletbridge</groupId>
-                <artifactId>portletbridge-extension-richfaces</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.portletbridge</groupId>
-                <artifactId>jsf2-depchain</artifactId>
-                <version>${project.version}</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.portletbridge</groupId>
-                <artifactId>richfaces4-depchain</artifactId>
-                <version>${project.version}</version>
-                <type>pom</type>
-            </dependency>
-
-            <!-- Spec dependencies -->
-            <dependency>
-                <groupId>javax.portlet</groupId>
-                <artifactId>portlet-api</artifactId>
-                <version>${version.portlet}</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>${version.servlet2}</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>${version.servlet3}</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.servlet.jsp</groupId>
-                <artifactId>jsp-api</artifactId>
-                <version>${version.jsp}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.sun.faces</groupId>
-                <artifactId>jsf-api</artifactId>
-                <version>${version.mojarra2}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.sun.faces</groupId>
-                <artifactId>jsf-impl</artifactId>
-                <version>${version.mojarra2}</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.inject</groupId>
-                <artifactId>javax.inject</artifactId>
-                <version>${version.inject}</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.enterprise</groupId>
-                <artifactId>cdi-api</artifactId>
-                <version>${version.cdi}</version>
-            </dependency>
-
-            <!-- RichFaces 4 dependencies -->
-            <dependency>
-                <groupId>org.richfaces</groupId>
-                <artifactId>richfaces-bom</artifactId>
-                <version>${version.richfaces4}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-
-            <!-- Test dependencies -->
-            <dependency>
-                <groupId>org.jboss.shrinkwrap.descriptors</groupId>
-                <artifactId>shrinkwrap-descriptors-bom</artifactId>
-                <version>${version.shrinkwrap.descriptor}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.shrinkwrap.resolver</groupId>
-                <artifactId>shrinkwrap-resolver-bom</artifactId>
-                <version>${version.shrinkwrap.resolver}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
+        
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
@@ -167,12 +52,60 @@
                 <scope>test</scope>
                 <type>pom</type>
             </dependency>
-
+            
+            <!-- Arquillian Drone -->
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${version.junit}</version>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-api</artifactId>
+                <version>${version.arquillian.drone}</version>
+                <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-configuration</artifactId>
+                <version>${version.arquillian.drone}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-impl</artifactId>
+                <version>${version.arquillian.drone}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-spi</artifactId>
+                <version>${version.arquillian.drone}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-webdriver</artifactId>
+                <version>${version.arquillian.drone}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-webdriver-depchain</artifactId>
+                <version>${version.arquillian.drone}</version>
+                <scope>test</scope>
+            </dependency>
+            
+            <!-- Test dependencies
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+                <artifactId>shrinkwrap-descriptors-bom</artifactId>
+                <version>${version.shrinkwrap.descriptor}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-bom</artifactId>
+                <version>${version.shrinkwrap.resolver}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency> 
             <dependency>
                 <groupId>org.jboss.arquillian.extension</groupId>
                 <artifactId>arquillian-portal-impl</artifactId>
@@ -183,32 +116,14 @@
                 <artifactId>arquillian-portal-shrinkwrap-impl</artifactId>
                 <version>${version.arquillian.extension.portal}</version>
             </dependency>
-
-            <!-- GateIn Testing dependencies -->
+             --> 
+             
             <dependency>
-                <groupId>org.jboss.portletbridge.testing.gatein</groupId>
-                <artifactId>gatein-arquillian-extension</artifactId>
-                <version>${version.gatein.portal.testing}</version>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${version.junit}</version>
             </dependency>
-            <dependency>
-                <groupId>org.gatein.pc</groupId>
-                <artifactId>pc-embed</artifactId>
-                <version>${version.gatein.pc}</version>
-            </dependency>
-
-            <!-- Pluto Testing dependencies -->
-            <dependency>
-                <groupId>org.jboss.portletbridge.testing.pluto</groupId>
-                <artifactId>pluto-jetty-bom</artifactId>
-                <version>${version.pluto.portal.testing}</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.portletbridge.testing.pluto</groupId>
-                <artifactId>pluto-extension-jsf</artifactId>
-                <version>${version.pluto.portal.testing}</version>
-            </dependency>
-
+            
             <!-- Selenium dependecies
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
@@ -267,8 +182,8 @@
                 <artifactId>selenium-remote-driver</artifactId>
                 <version>${version.selenium}</version>
             </dependency>
- -->
-
+            -->
+ 
         </dependencies>
     </dependencyManagement>
 	
