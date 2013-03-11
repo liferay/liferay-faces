@@ -73,6 +73,7 @@
     </dependencies>
 
     <modules>
+        <module>icefaces3-users-portlet</module>
         <module>jsf2-login-portlet</module>
     </modules>
 

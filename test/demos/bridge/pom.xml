@@ -74,6 +74,11 @@
 
     <modules>
         <module>jsf2-portlet</module>
+        <module>jsf2-jsp-portlet</module>
+        <module>icefaces3-portlet</module>
+        <module>icefaces3-compat-portlet</module>
+        <module>primefaces3-portlet</module>
+        <module>richfaces4-portlet</module>
     </modules>
 
     <build>
