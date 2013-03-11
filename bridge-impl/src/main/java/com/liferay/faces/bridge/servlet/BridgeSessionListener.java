@@ -43,15 +43,14 @@ import com.liferay.faces.util.product.ProductMap;
  *
  * @author  Neil Griffin
  */
-public class BridgeSessionListener implements HttpSessionListener, ServletContextListener {
+public class BridgeSessionListener extends BridgeSessionListenerCompat implements HttpSessionListener,
+	ServletContextListener {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeSessionListener.class);
 
 	// Private Constants
 	private static final String MOJARRA_ACTIVE_VIEW_MAPS = "com.sun.faces.application.view.activeViewMaps";
-	private static final String MOJARRA_INJECTION_PROVIDER_TASK =
-		"com.sun.faces.config.ConfigManager_INJECTION_PROVIDER_TASK";
 	private static final String MOJARRA_PACKAGE_PREFIX = "com.sun.faces";
 	private static final String MOJARRA_VIEW_SCOPE_MANAGER = "com.sun.faces.application.view.viewScopeManager";
 
@@ -87,7 +86,7 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 
 			if (facesContext != null) {
-				mojarraInjectionProvider = facesContext.getAttributes().get(MOJARRA_INJECTION_PROVIDER_TASK);
+				mojarraInjectionProvider = getMojarraInjectionProvider(facesContext);
 			}
 
 			if (mojarraInjectionProvider == null) {
