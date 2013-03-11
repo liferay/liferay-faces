@@ -15,8 +15,6 @@ package com.liferay.faces.bridge.servlet;
 
 import java.util.Enumeration;
 
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -38,8 +36,7 @@ import com.liferay.faces.util.product.ProductMap;
 
 
 /**
- * This class provides the ability to cleanup {@link SessionScoped} and {@link ViewScoped} managed-beans upon session
- * expiration.
+ * This class provides the ability to cleanup session-scoped and view-scoped managed-beans upon session expiration.
  *
  * @author  Neil Griffin
  */
