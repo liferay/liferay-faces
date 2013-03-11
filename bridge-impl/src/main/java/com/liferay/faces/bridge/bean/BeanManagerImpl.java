@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.bean.ManagedBean;
 import javax.portlet.faces.annotation.BridgePreDestroy;
 
 import com.liferay.faces.bridge.config.ConfiguredBean;
@@ -31,7 +30,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class BeanManagerImpl implements BeanManager {
+public class BeanManagerImpl extends BeanManagerCompatImpl {
 
 	// Private Constants
 	private static final String JAVAX_ANNOTATION_PRE_DESTROY = "javax.annotation.PreDestroy";
@@ -129,23 +128,6 @@ public class BeanManagerImpl implements BeanManager {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Determines whether or not the specified object is annotated as a JSF managed-bean.
-	 *
-	 * @param   obj  The object to check.
-	 *
-	 * @return  true if the specified object is annotated as a JSF managed-bean, otherwise false.
-	 */
-	protected boolean hasManagedBeanAnnotation(Object object) {
-
-		if ((object != null) && (object.getClass().getAnnotation(ManagedBean.class) != null)) {
-			return true;
-		}
-		else {
-			return false;
-		}
 	}
 
 	/**
