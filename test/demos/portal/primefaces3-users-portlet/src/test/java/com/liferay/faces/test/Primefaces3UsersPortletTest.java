@@ -137,12 +137,12 @@ public class Primefaces3UsersPortletTest {
 	@Test
 	@RunAsClient
 	@InSequence(1)
-	public void Icefaces3Users() throws Exception {
+	public void Primefaces3Users() throws Exception {
 			
 		signIn();
-		url = "http://localhost:8080/group/control_panel/manage?p_p_id=1_WAR_icefaces3usersportlet&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view";
-		// http://localhost:8080/group/control_panel/manage?p_p_id=1_WAR_icefaces3usersportlet
-		// http://localhost:8080/group/control_panel/manage?p_p_id=1_WAR_icefaces3usersportlet&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view
+		url = "http://localhost:8080/group/control_panel/manage?p_p_id=1_WAR_primefaces3usersportlet&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view";
+		// http://localhost:8080/group/control_panel/manage?p_p_id=1_WAR_primefaces3usersportlet
+		// http://localhost:8080/group/control_panel/manage?p_p_id=1_WAR_primefaces3usersportlet&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view
 		
 		logger.log(Level.INFO, "browser.navigate().to("+url+")");
 		browser.navigate().to(url);
