@@ -8,6 +8,9 @@
 		<param-name>com.sun.faces.expressionFactory</param-name>
 		<param-value>org.jboss.el.ExpressionFactoryImpl</param-value>
 	</context-param>
+	<listener>
+		<listener-class>com.liferay.faces.demos.servlet.UploadedFileCleanupListener</listener-class>
+	</listener>
 	<!-- Instruct ICEfaces to abstain from adding a random query parameter to resource URLs (which it does by default -->
 	<!-- in order to prevent caching of JavaScript resources like bridge.js in a servlet-based webapp). -->
 	<context-param>
@@ -36,7 +39,7 @@
 		<url-pattern>/xmlhttp/*</url-pattern>
 	</servlet-mapping>
 	<!-- END: Compatibility with ICEfaces 1.8 components -->
-	<!-- Prevent direct access to Facelet view XHTML by the userAgent (browser). --> 
+	<!-- Prevent direct access to Facelet view XHTML by the userAgent (browser). -->
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Facelet View XHTML</web-resource-name>

@@ -44,7 +44,7 @@ import com.liferay.faces.demos.util.UploadedFileUtil;
 public class UploadedFileWrapper implements Serializable, UploadedFile, FacesWrapper<FileInfo> {
 
 	// serialVersionUID
-	private static final long serialVersionUID = 5356309286451276753L;
+	private static final long serialVersionUID = 4395129564014802592L;
 
 	// Private Data Members
 	Map<String, Object> attributeMap;
@@ -96,7 +96,7 @@ public class UploadedFileWrapper implements Serializable, UploadedFile, FacesWra
 	}
 
 	public byte[] getBytes() throws IOException {
-		
+
 		byte[] bytes = null;
 
 		try {

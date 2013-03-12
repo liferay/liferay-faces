@@ -65,6 +65,19 @@ public class UsersBackingBean {
 
 	public void cancel(ActionEvent actionEvent) {
 		usersViewBean.setFormRendered(false);
+		
+		try {
+
+			UploadedFile modelUploadedFile = usersModelBean.getUploadedFile();
+
+			if (modelUploadedFile != null) {
+				usersModelBean.setUploadedFile(null);
+			}
+		}
+		catch (Exception e) {
+			logger.error(e);
+			liferayFacesContext.addGlobalUnexpectedErrorMessage();
+		}
 	}
 
 	public void handleFileUpload(FileEntryEvent fileEntryEvent) {
@@ -107,6 +120,7 @@ public class UsersBackingBean {
 			if (modelUploadedFile != null) {
 				byte[] imageBytes = modelUploadedFile.getBytes();
 				UserLocalServiceUtil.updatePortrait(userId, imageBytes);
+				modelUploadedFile.delete();
 			}
 		}
 		catch (Exception e) {
@@ -115,10 +129,6 @@ public class UsersBackingBean {
 		}
 
 		usersViewBean.setFormRendered(false);
-		usersModelBean.forceListReload();
-	}
-
-	public void search(ActionEvent actionEvent) {
 		usersModelBean.forceListReload();
 	}
 

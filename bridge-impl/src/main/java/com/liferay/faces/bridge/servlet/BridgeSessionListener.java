@@ -15,8 +15,6 @@ package com.liferay.faces.bridge.servlet;
 
 import java.util.Enumeration;
 
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -38,20 +36,18 @@ import com.liferay.faces.util.product.ProductMap;
 
 
 /**
- * This class provides the ability to cleanup {@link SessionScoped} and {@link ViewScoped} managed-beans upon session
- * expiration.
+ * This class provides the ability to cleanup session-scoped and view-scoped managed-beans upon session expiration.
  *
  * @author  Neil Griffin
  */
-public class BridgeSessionListener implements HttpSessionListener, ServletContextListener {
+public class BridgeSessionListener extends BridgeSessionListenerCompat implements HttpSessionListener,
+	ServletContextListener {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeSessionListener.class);
 
 	// Private Constants
 	private static final String MOJARRA_ACTIVE_VIEW_MAPS = "com.sun.faces.application.view.activeViewMaps";
-	private static final String MOJARRA_INJECTION_PROVIDER_TASK =
-		"com.sun.faces.config.ConfigManager_INJECTION_PROVIDER_TASK";
 	private static final String MOJARRA_PACKAGE_PREFIX = "com.sun.faces";
 	private static final String MOJARRA_VIEW_SCOPE_MANAGER = "com.sun.faces.application.view.viewScopeManager";
 
@@ -87,7 +83,7 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 
 			if (facesContext != null) {
-				mojarraInjectionProvider = facesContext.getAttributes().get(MOJARRA_INJECTION_PROVIDER_TASK);
+				mojarraInjectionProvider = getMojarraInjectionProvider(facesContext);
 			}
 
 			if (mojarraInjectionProvider == null) {

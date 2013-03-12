@@ -5,7 +5,7 @@
 		<groupId>com.liferay.faces.demos</groupId>
 		<artifactId>liferay-faces-portal-demos</artifactId>
 		<version>3.1.2-ga3-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>icefaces3-directory-portlet</artifactId>
 	<packaging>war</packaging>
@@ -59,6 +59,16 @@
 			<groupId>com.liferay.faces</groupId>
 			<artifactId>liferay-faces-portal</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>${icefaces3.mojarra.version}</version><!-- $NO-MVN-MAN-VER$ -->
+		</dependency>
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>${icefaces3.mojarra.version}</version><!-- $NO-MVN-MAN-VER$ -->
 		</dependency>
 	</dependencies>
 

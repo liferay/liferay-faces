@@ -18,6 +18,7 @@
 		<module>icefaces3-users-portlet</module>
 		<module>jsf2-login-portlet</module>
 		<module>jsf2-registration-portlet</module>
+		<module>primefaces3-users-portlet</module>
 	</modules>
 
 </project>
