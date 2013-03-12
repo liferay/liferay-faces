@@ -45,7 +45,7 @@ public class UploadedFileWrapper implements Serializable, UploadedFile,
 	FacesWrapper<org.primefaces.model.UploadedFile> {
 
 	// serialVersionUID
-	private static final long serialVersionUID = 5347502272011734546L;
+	private static final long serialVersionUID = 1078847948835811331L;
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(UploadedFileWrapper.class);
