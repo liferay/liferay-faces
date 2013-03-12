@@ -3,7 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
         version="2.1">
-   <tlib-version>3.0.1</tlib-version>
+   <tlib-version>3.0.2</tlib-version>
    <short-name>aui</short-name>
    <uri>http://liferay.com/faces/aui</uri>
    <tag>
@@ -319,7 +319,7 @@
    <tag>
       <description>Sets the value of the specified var in the EL to a mapping of the public static constants of the specified classType.</description>
       <name>importConstants</name>
-      <tag-class>Tag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.ImportConstantsTagHandler</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>classType</name>
