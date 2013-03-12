@@ -35,13 +35,13 @@ public abstract class TestSetupCompatAction extends SimpleAction {
 	 * method.
 	 */
 	protected void clearPermissionChecker() {
-		// This is a no-op for Liferay Portal 6.1
+		// This is a no-op for Liferay Portal 6.0
 	}
 
 	/**
 	 * This method sets up the {@link PermissionChecker} {@link ThreadLocal} prior to performing additional test setup.
 	 */
 	protected void setupPermissionChecker(long companyId) {
-		// This is a no-op for Liferay Portal 6.1
+		// This is a no-op for Liferay Portal 6.0
 	}
 }
