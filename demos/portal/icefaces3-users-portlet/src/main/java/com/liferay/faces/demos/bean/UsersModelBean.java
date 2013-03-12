@@ -26,13 +26,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.portlet.PortletRequest;
 
-import org.icefaces.ace.model.table.LazyDataModel;
-
 import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.demos.list.UserLazyDataModel;
 import com.liferay.faces.demos.resource.UserPortraitResource;
 import com.liferay.faces.portal.context.LiferayFacesContext;
-
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -60,7 +57,7 @@ public class UsersModelBean implements Serializable {
 	private LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 
 	// Private Data Members
-	private transient LazyDataModel<User> userDataModel;
+	private transient UserLazyDataModel userDataModel;
 	private transient User selectedUser;
 	private transient List<SelectItem> statusSelectItems;
 	private transient UploadedFile uploadedFile;
@@ -74,7 +71,7 @@ public class UsersModelBean implements Serializable {
 		uploadedFile = null;
 	}
 
-	public LazyDataModel<User> getDataModel() {
+	public UserLazyDataModel getDataModel() {
 
 		if (userDataModel == null) {
 			int rowsPerPage = liferayFacesContext.getPortletPreferenceAsInt("rowsPerPage",
