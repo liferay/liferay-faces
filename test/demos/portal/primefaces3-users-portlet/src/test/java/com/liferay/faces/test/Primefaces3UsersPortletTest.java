@@ -28,10 +28,10 @@ import static org.jboss.arquillian.graphene.Graphene.waitAjax;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 @RunWith(Arquillian.class)
-public class Icefaces3UsersPortletTest {
+public class Primefaces3UsersPortletTest {
 	
 	// private static final Logger logger;
-	private final static Logger logger = Logger.getLogger(Icefaces3UsersPortletTest.class.getName());
+	private final static Logger logger = Logger.getLogger(Primefaces3UsersPortletTest.class.getName());
 	
 	// @ArquillianResource
 	// URL portalURL;
@@ -50,8 +50,8 @@ public class Icefaces3UsersPortletTest {
 	@FindBy(xpath = "//div[contains(text(),'You are signed in as')]")
 	private WebElement portletBody;
 
-	// elements for Icefaces3Users
-	// <span class="portlet-title-text">ICEfaces3 Users</span>
+	// elements for Primefaces3Users
+	// <span class="portlet-title-text">Primefaces3 Users</span>
 	@FindBy(xpath = "//span[@class='portlet-title-text']")
 	private WebElement portletTitleText;
 	
