@@ -30,7 +30,7 @@ import javax.faces.bean.ViewScoped;
 public class UsersViewBean implements Serializable {
 
 	// serialVersionUID
-	private static final long serialVersionUID = 351876134442958472L;
+	private static final long serialVersionUID = 3791285914294079003L;
 
 	// Private Data Members
 	private boolean formRendered = false;
