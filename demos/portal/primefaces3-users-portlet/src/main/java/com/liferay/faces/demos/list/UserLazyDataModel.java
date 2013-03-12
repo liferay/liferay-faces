@@ -51,7 +51,7 @@ public class UserLazyDataModel extends LazyDataModel<User> implements Serializab
 	private static final Logger logger = LoggerFactory.getLogger(UserLazyDataModel.class);
 
 	// serialVersionUID
-	private static final long serialVersionUID = 9147332173339935105L;
+	private static final long serialVersionUID = 2087063071907939066L;
 
 	// Private Constants
 	private static final String DEFAULT_SORT_CRITERIA = "lastName";
