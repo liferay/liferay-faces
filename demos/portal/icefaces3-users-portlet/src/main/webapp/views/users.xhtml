@@ -39,7 +39,16 @@
 						</aui:field>
 					</aui:fieldset>
 				</aui:column>
-				<aui:column columnWidth="20">
+				<aui:column columnWidth="15">
+					<aui:fieldset label="#{i18n['administration']}">
+						<aui-cc:select inlineMessage="true" label="#{i18n['status']}" required="true"
+							value="#{usersModelBean.selectedUser.status}">
+							<f:selectItems value="#{usersModelBean.statusSelectItems}" />
+							<f:converter for="selectOneMenu" converterId="javax.faces.Integer" />
+						</aui-cc:select>
+					</aui:fieldset>
+				</aui:column>
+				<aui:column>
 					<aui:fieldset label="#{i18n['portrait']}">
 						<aui:field>
 							<h:graphicImage value="#{usersModelBean.selectedUserPortraitURL}" style="width:100px;" />
@@ -47,15 +56,6 @@
 								fileEntryListener="#{usersBackingBean.handleFileUpload}" />
 							<h:commandButton immediate="true" value="#{i18n['upload-image']}" />
 						</aui:field>
-					</aui:fieldset>
-				</aui:column>
-				<aui:column last="true" columnWidth="15">
-					<aui:fieldset label="#{i18n['administration']}">
-						<aui-cc:select inlineMessage="true" label="#{i18n['status']}" required="true"
-							value="#{usersModelBean.selectedUser.status}">
-							<f:selectItems value="#{usersModelBean.statusSelectItems}" />
-							<f:converter for="selectOneMenu" converterId="javax.faces.Integer" />
-						</aui-cc:select>
 					</aui:fieldset>
 				</aui:column>
 				<aui:button-row>
