@@ -16,12 +16,16 @@
 	</xsl:template>
 	<xsl:template match="/facelet-taglib/tag">
 		<xsl:param name="tagName" select="tag-name"/>
+		<xsl:param name="handlerClass" select="handler-class"/>
 		<tag>
 			<description><xsl:value-of select="description" /></description>
 			<name><xsl:value-of select="tag-name" /></name>
 			<xsl:choose>
 				<xsl:when test="starts-with($tagName,'convert')">
 					<tag-class><xsl:value-of select="concat($taglibPackage,'.',upper-case(substring($tagName,1,1)),substring($tagName,2))" />Tag</tag-class>		
+				</xsl:when>
+				<xsl:when test="(string-length($handlerClass) > 0)">
+					<tag-class><xsl:value-of select="$handlerClass" /></tag-class>		
 				</xsl:when>
 				<xsl:otherwise>
 					<tag-class><xsl:value-of select="replace(normalize-space(component),'.*[.]',concat($taglibPackage,'.'))" />Tag</tag-class>
