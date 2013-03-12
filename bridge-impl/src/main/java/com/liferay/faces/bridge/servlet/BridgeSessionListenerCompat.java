@@ -23,11 +23,9 @@ import javax.faces.context.FacesContext;
  */
 public abstract class BridgeSessionListenerCompat {
 
-	// Private Constants
-	private static final String MOJARRA_INJECTION_PROVIDER_TASK =
-		"com.sun.faces.config.ConfigManager_INJECTION_PROVIDER_TASK";
-
 	public Object getMojarraInjectionProvider(FacesContext facesContext) {
-		return facesContext.getAttributes().get(MOJARRA_INJECTION_PROVIDER_TASK);
+
+		// Mojarra 1.2 does not provide a discovery mechanism for the injection provider.
+		return null;
 	}
 }
