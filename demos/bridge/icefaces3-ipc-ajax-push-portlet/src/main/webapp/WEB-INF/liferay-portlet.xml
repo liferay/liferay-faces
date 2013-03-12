@@ -9,7 +9,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>2</portlet-name>
-		<remoteable>true</remoteable>
+		<!-- WSRP not supported on Liferay 5.2 <remoteable>true</remoteable> -->
 		<render-weight>1</render-weight>
 		<ajaxable>false</ajaxable>
 	</portlet>

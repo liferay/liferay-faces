@@ -4,12 +4,12 @@
 <liferay-portlet-app>
 	<portlet>
 		<portlet-name>customersPortlet</portlet-name>
-		<remoteable>true</remoteable>
+		<!-- WSRP not supported on Liferay 5.2 <remoteable>true</remoteable> -->
 		<ajaxable>false</ajaxable>
 	</portlet>
 	<portlet>
 		<portlet-name>bookingsPortlet</portlet-name>
-		<remoteable>true</remoteable>
+		<!-- WSRP not supported on Liferay 5.2 <remoteable>true</remoteable> -->
 		<ajaxable>false</ajaxable>
 	</portlet>
 </liferay-portlet-app>
