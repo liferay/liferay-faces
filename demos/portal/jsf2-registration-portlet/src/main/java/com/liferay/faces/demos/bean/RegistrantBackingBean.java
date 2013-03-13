@@ -53,9 +53,6 @@ public class RegistrantBackingBean implements Serializable {
 	// Logger
 	private static final transient Logger logger = LoggerFactory.getLogger(RegistrantBackingBean.class);
 
-	// Self-Injections
-	private LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-
 	// Injections
 	@ManagedProperty(value = "#{registrantModelBean}")
 	private transient RegistrantModelBean registrantModelBean;
@@ -72,6 +69,7 @@ public class RegistrantBackingBean implements Serializable {
 				submittedRegistrant.getEmailAddress(), submittedRegistrant.getCaptchaText()
 			});
 
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 		long creatorUserId = liferayFacesContext.getUser().getUserId();
 		long companyId = liferayFacesContext.getCompanyId();
 		Locale locale = liferayFacesContext.getLocale();

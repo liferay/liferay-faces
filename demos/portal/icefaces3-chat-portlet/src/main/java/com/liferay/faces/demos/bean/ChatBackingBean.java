@@ -37,10 +37,7 @@ public class ChatBackingBean {
 	// Injections
 	@ManagedProperty(name = "chatModelBean", value = "#{chatModelBean}")
 	private ChatModelBean chatModelBean;
-
-	// Self-Injections
-	private LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-
+	
 	// Private Data Members
 	private String messageText;
 
@@ -53,7 +50,9 @@ public class ChatBackingBean {
 	}
 
 	public void messageTextValueChanged(ValueChangeEvent valueChangeEvent) {
-
+		
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+		
 		if (liferayFacesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
 			valueChangeEvent.setPhaseId(PhaseId.INVOKE_APPLICATION);
 			valueChangeEvent.getComponent().queueEvent(valueChangeEvent);

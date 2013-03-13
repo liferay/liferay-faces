@@ -53,9 +53,6 @@ public class UsersModelBean implements Serializable {
 	// instances of Liferay's User class due to classloader prolems.
 	private static final long serialVersionUID = 7764443248647832200L;
 
-	// Self-Injections
-	private LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-
 	// Private Data Members
 	private transient UserLazyDataModel userDataModel;
 	private transient User selectedUser;
@@ -74,6 +71,7 @@ public class UsersModelBean implements Serializable {
 	public UserLazyDataModel getDataModel() {
 
 		if (userDataModel == null) {
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 			int rowsPerPage = liferayFacesContext.getPortletPreferenceAsInt("rowsPerPage",
 					SearchContainer.DEFAULT_DELTA);
 			userDataModel = new UserLazyDataModel(liferayFacesContext.getCompanyId(), rowsPerPage);
@@ -127,6 +125,7 @@ public class UsersModelBean implements Serializable {
 	public List<SelectItem> getStatusSelectItems() {
 
 		if (statusSelectItems == null) {
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 			statusSelectItems = new ArrayList<SelectItem>();
 			statusSelectItems.add(new SelectItem(WorkflowConstants.STATUS_ANY,
 					liferayFacesContext.getMessage("any-status")));
