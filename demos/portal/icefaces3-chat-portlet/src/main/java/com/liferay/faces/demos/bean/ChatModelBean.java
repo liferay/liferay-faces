@@ -62,9 +62,6 @@ public class ChatModelBean implements Observer {
 	@ManagedProperty(name = "applicationModelBean", value = "#{applicationModelBean}")
 	private ApplicationModelBean applicationModelBean;
 
-	// Self-Injections
-	private final LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-
 	// Private Data Members
 	private ScopedChatRoom currentScopedChatRoom;
 	private OnlineUserDataModel onlineUsers;
@@ -77,7 +74,8 @@ public class ChatModelBean implements Observer {
 	}
 
 	public void addChatRoomWithUser(User friend) {
-
+		
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 		User currentUser = liferayFacesContext.getUser();
 		boolean chatRoomExists = false;
 		long userId1 = currentUser.getUserId();
@@ -101,6 +99,7 @@ public class ChatModelBean implements Observer {
 	}
 
 	public void addMessage(String messageText) {
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 		User currentUser = liferayFacesContext.getUser();
 		ChatMessage chatMessage = new ChatMessageImpl(Calendar.getInstance().getTime(), currentUser, messageText);
 
@@ -200,6 +199,7 @@ public class ChatModelBean implements Observer {
 	public OnlineUserDataModel getOnlineUsers() {
 
 		if (onlineUsers == null) {
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 			int rowsPerPage = SearchContainer.DEFAULT_DELTA;
 			Set<Long> onlineUserSet = applicationModelBean.getOnlineUserSetDeepCopy();
 			long currentUserId = liferayFacesContext.getUserId();
@@ -218,7 +218,8 @@ public class ChatModelBean implements Observer {
 	public List<ScopedChatRoom> getScopedChatRooms() {
 
 		if (scopedChatRooms == null) {
-
+			
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 			long currentUserId = liferayFacesContext.getUserId();
 			scopedChatRooms = new ArrayList<ScopedChatRoom>();
 
