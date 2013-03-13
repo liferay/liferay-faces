@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,6 +21,7 @@ import javax.faces.event.ValueChangeEvent;
 
 import com.liferay.faces.demos.dto.ScopedChatRoom;
 import com.liferay.faces.portal.context.LiferayFacesContext;
+
 import com.liferay.portal.model.User;
 
 
@@ -38,9 +39,6 @@ public class ChatBackingBean {
 	@ManagedProperty(name = "chatModelBean", value = "#{chatModelBean}")
 	private ChatModelBean chatModelBean;
 
-	// Self-Injections
-	private LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-
 	// Private Data Members
 	private String messageText;
 
@@ -48,11 +46,9 @@ public class ChatBackingBean {
 		chatModelBean.addChatRoomWithUser(user);
 	}
 
-	public void removeScopedChatRoom(ScopedChatRoom scopedChatRoom) {
-		chatModelBean.removeScopedChatRoom(scopedChatRoom);
-	}
-
 	public void messageTextValueChanged(ValueChangeEvent valueChangeEvent) {
+
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 
 		if (liferayFacesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
 			valueChangeEvent.setPhaseId(PhaseId.INVOKE_APPLICATION);
@@ -62,6 +58,10 @@ public class ChatBackingBean {
 			chatModelBean.addMessage(messageText);
 			messageText = null;
 		}
+	}
+
+	public void removeScopedChatRoom(ScopedChatRoom scopedChatRoom) {
+		chatModelBean.removeScopedChatRoom(scopedChatRoom);
 	}
 
 	public void setChatModelBean(ChatModelBean chatModelBean) {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,9 +43,6 @@ public class DirectoryModelBean implements Serializable {
 	// instances of Liferay's User class due to classloader prolems.
 	private static final long serialVersionUID = 7763293248647832200L;
 
-	// Self-Injections
-	private LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-
 	// Private Data Members
 	private transient DataModel<User> userDataModel;
 	private transient SearchCriteria searchCriteria;
@@ -59,6 +56,7 @@ public class DirectoryModelBean implements Serializable {
 	public DataModel<User> getDataModel() {
 
 		if (userDataModel == null) {
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 			int rowsPerPage = liferayFacesContext.getPortletPreferenceAsInt("rowsPerPage",
 					SearchContainer.DEFAULT_DELTA);
 			userDataModel = new UserLazyDataModel(liferayFacesContext.getCompanyId(), rowsPerPage, getSearchCriteria());
@@ -87,6 +85,7 @@ public class DirectoryModelBean implements Serializable {
 	public List<SelectItem> getStatusSelectItems() {
 
 		if (statusSelectItems == null) {
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 			statusSelectItems = new ArrayList<SelectItem>();
 			statusSelectItems.add(new SelectItem(WorkflowConstants.STATUS_ANY,
 					liferayFacesContext.getMessage("any-status")));
