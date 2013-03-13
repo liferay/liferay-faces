@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,9 +29,9 @@ import javax.portlet.PortletResponse;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeUtil;
 
+import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.portal.context.LiferayFacesContext;
 
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -48,9 +48,6 @@ public class PreferencesBackingBean {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(PreferencesBackingBean.class);
-
-	// Self-Injections
-	private LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 
 	// Injections
 	@ManagedProperty(name = "docLibModelBean", value = "#{docLibModelBean}")
@@ -71,6 +68,7 @@ public class PreferencesBackingBean {
 
 		try {
 //          groups = GroupLocalServiceUtil.getGroups(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 			User user = liferayFacesContext.getUser();
 			groups = user.getGroups();
 
@@ -91,6 +89,7 @@ public class PreferencesBackingBean {
 	protected class SubmitActionListener implements ActionListener {
 
 		public void processAction(ActionEvent event) throws AbortProcessingException {
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 			PortletPreferences portletPreferences = liferayFacesContext.getPortletPreferences();
 			logger.debug("Saving portlet preference scopeGroupId=[{0}]",
 				portletPreferences.getValue("scopeGroupId", null));

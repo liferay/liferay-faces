@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -56,9 +56,6 @@ public class DocLibModelBean implements Serializable {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(DocLibModelBean.class);
-
-	// Self-Injections
-	private LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 
 	// Private Data Members
 	private transient DocumentDataModel documentDataModel;
@@ -131,6 +128,8 @@ public class DocLibModelBean implements Serializable {
 	public DocumentDataModel getDocumentDataModel() {
 
 		if (documentDataModel == null) {
+
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 			DLFolder dlFolder = getSelectedFolderUserObject().getDlFolder();
 			int rowsPerPage = liferayFacesContext.getPortletPreferenceAsInt("rowsPerPage",
 					SearchContainer.DEFAULT_DELTA);
@@ -154,6 +153,7 @@ public class DocLibModelBean implements Serializable {
 		if (folderTreeModel == null) {
 
 			try {
+				LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 				Group scopeGroup = liferayFacesContext.getThemeDisplay().getScopeGroup();
 				logger.debug("Querying folders for scopeGroupId=[" + scopeGroup.getGroupId() + "] scopeGroupName=[" +
 					scopeGroup.getName() + "]");

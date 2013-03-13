@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -70,9 +70,6 @@ public class DocLibBackingBean {
 	// Private Constants
 	private static final String JAVA_IO_TMPDIR = "java.io.tmpdir";
 
-	// Self-Injections
-	private LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-
 	// Injections
 	@ManagedProperty(name = "docLibModelBean", value = "#{docLibModelBean}")
 	private DocLibModelBean docLibModelBean;
@@ -89,6 +86,8 @@ public class DocLibBackingBean {
 	private Boolean permittedToAddFolder;
 
 	public void addFolder(ActionEvent actionEvent) throws AbortProcessingException {
+
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 
 		try {
 			FolderUserObject folderUserObject = docLibModelBean.getSelectedFolderUserObject();
@@ -116,6 +115,7 @@ public class DocLibBackingBean {
 		try {
 			FileEntry fileEntry = (FileEntry) fileEntryEvent.getSource();
 			FileEntryResults results = fileEntry.getResults();
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 
 			for (FileEntryResults.FileInfo fileInfo : results.getFiles()) {
 
@@ -278,6 +278,7 @@ public class DocLibBackingBean {
 		if (permittedToAddFolder == null) {
 
 			try {
+				LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 				PermissionChecker permissionChecker = liferayFacesContext.getPermissionChecker();
 				DLFolder selectedDLFolder = docLibModelBean.getSelectedFolderUserObject().getDlFolder();
 				long scopeGroupId = selectedDLFolder.getGroupId();
@@ -298,6 +299,7 @@ public class DocLibBackingBean {
 		if (permittedToAddDocument == null) {
 
 			try {
+				LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 				PermissionChecker permissionChecker = liferayFacesContext.getPermissionChecker();
 				DLFolder selectedDLFolder = docLibModelBean.getSelectedFolderUserObject().getDlFolder();
 				long scopeGroupId = selectedDLFolder.getGroupId();

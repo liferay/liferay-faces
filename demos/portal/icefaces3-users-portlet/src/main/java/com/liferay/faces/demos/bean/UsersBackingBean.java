@@ -55,17 +55,16 @@ public class UsersBackingBean {
 	@ManagedProperty(name = "usersViewBean", value = "#{usersViewBean}")
 	private UsersViewBean usersViewBean;
 
-	// Self-Injections
-	private LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-
 	// Private Data Members
 	private String fileUploadAbsolutePath;
 	private String uploadedFileId;
 	private UploadedFile uploadedFile;
 
 	public void cancel(ActionEvent actionEvent) {
+
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 		usersViewBean.setFormRendered(false);
-		
+
 		try {
 
 			UploadedFile modelUploadedFile = usersModelBean.getUploadedFile();
@@ -98,6 +97,8 @@ public class UsersBackingBean {
 		}
 		catch (Exception e) {
 			logger.error(e);
+
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 			liferayFacesContext.addGlobalUnexpectedErrorMessage();
 		}
 	}
@@ -125,6 +126,8 @@ public class UsersBackingBean {
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
+
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 			liferayFacesContext.addGlobalUnexpectedErrorMessage();
 		}
 
@@ -141,6 +144,8 @@ public class UsersBackingBean {
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
+
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 			liferayFacesContext.addGlobalUnexpectedErrorMessage();
 		}
 	}
