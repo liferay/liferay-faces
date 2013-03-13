@@ -57,9 +57,6 @@ public class DocLibModelBean implements Serializable {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(DocLibModelBean.class);
 
-	// Self-Injections
-	private LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-
 	// Private Data Members
 	private transient DocumentDataModel documentDataModel;
 	private transient FolderTreeModel folderTreeModel;
@@ -131,6 +128,8 @@ public class DocLibModelBean implements Serializable {
 	public DocumentDataModel getDocumentDataModel() {
 
 		if (documentDataModel == null) {
+			
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 			DLFolder dlFolder = getSelectedFolderUserObject().getDlFolder();
 			int rowsPerPage = liferayFacesContext.getPortletPreferenceAsInt("rowsPerPage",
 					SearchContainer.DEFAULT_DELTA);
@@ -154,6 +153,7 @@ public class DocLibModelBean implements Serializable {
 		if (folderTreeModel == null) {
 
 			try {
+				LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 				Group scopeGroup = liferayFacesContext.getThemeDisplay().getScopeGroup();
 				logger.debug("Querying folders for scopeGroupId=[" + scopeGroup.getGroupId() + "] scopeGroupName=[" +
 					scopeGroup.getName() + "]");
