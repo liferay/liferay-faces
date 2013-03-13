@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -39,7 +39,9 @@ import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ClassResolverUtil;
 import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassInvoker;
 import com.liferay.portal.kernel.util.Validator;
@@ -65,9 +67,8 @@ public class LoginBackingBean {
 	// Private Constants
 	private static final String LOGIN_UTIL_FQCN = "com.liferay.portlet.login.util.LoginUtil";
 	private static final String LOGIN_METHOD = "login";
-	private static final String[] LOGIN_PARAM_TYPES = new String[] {
-			HttpServletRequest.class.getName(), HttpServletResponse.class.getName(), String.class.getName(),
-			String.class.getName(), boolean.class.getName(), String.class.getName()
+	private static final Class<?>[] LOGIN_PARAM_TYPES = new Class<?>[] {
+			HttpServletRequest.class, HttpServletResponse.class, String.class, String.class, boolean.class, String.class
 		};
 	private static final String NAMESPACE_SERVLET_REQUEST_FQCN = "com.liferay.portal.servlet.NamespaceServletRequest";
 
@@ -108,8 +109,10 @@ public class LoginBackingBean {
 		String feedbackMessageId = null;
 
 		try {
-			PortalClassInvoker.invoke(false, LOGIN_UTIL_FQCN, LOGIN_METHOD, LOGIN_PARAM_TYPES, httpServletRequest,
-				httpServletResponse, handle, password, rememberMe, authType);
+			Class<?> loginUtilClass = ClassResolverUtil.resolveByPortalClassLoader(LOGIN_UTIL_FQCN);
+			MethodKey methodKey = new MethodKey(loginUtilClass, LOGIN_METHOD, LOGIN_PARAM_TYPES);
+			PortalClassInvoker.invoke(false, methodKey, httpServletRequest, httpServletResponse, handle, password,
+				rememberMe, authType);
 			authenticated = true;
 		}
 		catch (AuthException e) {
