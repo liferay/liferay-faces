@@ -35,9 +35,6 @@ public class DirectoryBackingBean {
 	@ManagedProperty(name = "directoryModelBean", value = "#{directoryModelBean}")
 	private DirectoryModelBean directoryModelBean;
 
-	// Self-Injections
-	private LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-
 	// Private Data Members
 	private SearchActionListener searchActionListener = new SearchActionListener();
 
@@ -52,11 +49,12 @@ public class DirectoryBackingBean {
 	}
 
 	protected class SearchActionListener implements ActionListener {
-
+		
 		public void processAction(ActionEvent event) throws AbortProcessingException {
 
 			directoryModelBean.forceListReload();
 			
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 			UIData uiData = (UIData) liferayFacesContext.matchComponentInViewRoot("users");
 			uiData.setFirst(0);
 		}
