@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -35,9 +35,6 @@ public class DirectoryBackingBean {
 	@ManagedProperty(name = "directoryModelBean", value = "#{directoryModelBean}")
 	private DirectoryModelBean directoryModelBean;
 
-	// Self-Injections
-	private LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-
 	// Private Data Members
 	private SearchActionListener searchActionListener = new SearchActionListener();
 
@@ -56,7 +53,8 @@ public class DirectoryBackingBean {
 		public void processAction(ActionEvent event) throws AbortProcessingException {
 
 			directoryModelBean.forceListReload();
-			
+
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 			UIData uiData = (UIData) liferayFacesContext.matchComponentInViewRoot("users");
 			uiData.setFirst(0);
 		}
