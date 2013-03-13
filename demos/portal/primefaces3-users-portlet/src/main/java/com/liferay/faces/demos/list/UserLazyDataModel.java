@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.User;
@@ -56,7 +57,6 @@ public class UserLazyDataModel extends LazyDataModel<User> implements Serializab
 
 	// Private Constants
 	private static final String DEFAULT_SORT_CRITERIA = "lastName";
-	private static final boolean DEFAULT_SORT_ASCENDING = true;
 
 	// Private Data Members
 	private long companyId;
@@ -76,7 +76,7 @@ public class UserLazyDataModel extends LazyDataModel<User> implements Serializab
 			LinkedHashMap<String, Object> params = new LinkedHashMap<String, Object>();
 			params.put("expandoAttributes", null);
 
-			Sort sort = new Sort(DEFAULT_SORT_CRITERIA, Sort.STRING_TYPE, !DEFAULT_SORT_ASCENDING);
+			Sort sort = SortFactoryUtil.getSort(User.class, DEFAULT_SORT_CRITERIA, "asc");
 
 			boolean andSearch = true;
 			int status = WorkflowConstants.STATUS_ANY;
@@ -122,17 +122,15 @@ public class UserLazyDataModel extends LazyDataModel<User> implements Serializab
 		// sort
 		if (sortField != null) {
 
-			boolean ascending = true;
-
 			if (sortOrder.equals(SortOrder.DESCENDING)) {
-				ascending = false;
+				sort = SortFactoryUtil.getSort(User.class, sortField, "desc");
 			}
-
-			sort = new Sort(sortField, Sort.STRING_TYPE, !ascending);
-
+			else {
+				sort = SortFactoryUtil.getSort(User.class, sortField, "asc");
+			}
 		}
 		else {
-			sort = new Sort(DEFAULT_SORT_CRITERIA, Sort.STRING_TYPE, !DEFAULT_SORT_ASCENDING);
+			sort = SortFactoryUtil.getSort(User.class, DEFAULT_SORT_CRITERIA, "asc");
 		}
 
 		try {
