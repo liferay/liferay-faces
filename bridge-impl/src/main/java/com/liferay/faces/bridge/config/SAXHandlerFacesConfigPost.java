@@ -31,8 +31,8 @@ public abstract class SAXHandlerFacesConfigPost extends SAXHandlerBaseImpl {
 	// Protected Constants
 	protected static final String FACTORY_NOT_FOUND_MSG = "Factory not found in any faces-config.xml files: [{0}]";
 
-	// Private Data Members
-	private BridgeConfigAttributeMap bridgeConfigAttributeMap;
+	// Protected Data Members
+	protected BridgeConfigAttributeMap bridgeConfigAttributeMap;
 
 	public SAXHandlerFacesConfigPost(boolean resolveEntities, BridgeConfigAttributeMap bridgeConfigAttributeMap) {
 		super(resolveEntities);
