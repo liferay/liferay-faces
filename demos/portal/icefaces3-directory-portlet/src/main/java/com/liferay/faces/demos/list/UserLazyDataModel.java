@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -41,6 +42,9 @@ public class UserLazyDataModel extends LazyDataModel<User> {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(UserLazyDataModel.class);
 
+	// Private Constants
+	private static final String DEFAULT_SORT_CRITERIA = "lastName";
+
 	// Private Data Members
 	private long companyId;
 	private SearchCriteria searchCriteria;
@@ -49,7 +53,7 @@ public class UserLazyDataModel extends LazyDataModel<User> {
 		this.companyId = companyId;
 		this.searchCriteria = searchCriteria;
 		setRowsPerPage(rowsPerPage);
-		setSortColumn("lastName");
+		setSortColumn(DEFAULT_SORT_CRITERIA);
 		setSortAscending(true);
 	}
 
@@ -64,15 +68,15 @@ public class UserLazyDataModel extends LazyDataModel<User> {
 			LinkedHashMap<String, Object> params = new LinkedHashMap<String, Object>();
 			params.put("expandoAttributes", searchCriteria.getKeywords());
 
-			Sort sort = new Sort(getSortColumn(), Sort.STRING_TYPE, !isSortAscending());
+			Sort sort = SortFactoryUtil.getSort(User.class, DEFAULT_SORT_CRITERIA, "asc");
 
 			boolean andSearch = Boolean.parseBoolean(searchCriteria.getAndSearch());
 			int status = Integer.parseInt(searchCriteria.getStatus());
 
 			Hits hits = UserLocalServiceUtil.search(companyId, searchCriteria.getFirstName(),
 					searchCriteria.getMiddleName(), searchCriteria.getLastName(), searchCriteria.getScreenName(),
-					searchCriteria.getEmailAddress(), status, params, andSearch, QueryUtil.ALL_POS,
-					QueryUtil.ALL_POS, sort);
+					searchCriteria.getEmailAddress(), status, params, andSearch, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					sort);
 			totalCount = hits.getLength();
 
 			logger.debug(
@@ -100,7 +104,15 @@ public class UserLazyDataModel extends LazyDataModel<User> {
 		List<User> users = null;
 		searchCriteria.setFormatExpressions(true);
 
-		Sort sort = new Sort(getSortColumn(), Sort.STRING_TYPE, !isSortAscending());
+		Sort sort;
+
+		// sort
+		if (!isSortAscending()) {
+			sort = SortFactoryUtil.getSort(User.class, getSortColumn(), "desc");
+		}
+		else {
+			sort = SortFactoryUtil.getSort(User.class, getSortColumn(), "asc");
+		}
 
 		try {
 			LinkedHashMap<String, Object> params = new LinkedHashMap<String, Object>();
@@ -111,8 +123,8 @@ public class UserLazyDataModel extends LazyDataModel<User> {
 
 			Hits hits = UserLocalServiceUtil.search(companyId, searchCriteria.getFirstName(),
 					searchCriteria.getMiddleName(), searchCriteria.getLastName(), searchCriteria.getScreenName(),
-					searchCriteria.getEmailAddress(), status, params, andSearch, startRow,
-					liferayOneRelativeFinishRow, sort);
+					searchCriteria.getEmailAddress(), status, params, andSearch, startRow, liferayOneRelativeFinishRow,
+					sort);
 
 			List<Document> documentHits = hits.toList();
 
