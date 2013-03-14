@@ -75,7 +75,7 @@ public class UserLazyDataModel extends LazyDataModel<User> implements Serializab
 			LinkedHashMap<String, Object> params = new LinkedHashMap<String, Object>();
 			params.put("expandoAttributes", null);
 
-			Sort sort = SortFactoryUtil.getSort(User.class, DEFAULT_SORT_CRITERIA, "asc");
+			Sort sort = SortFactoryUtil.create(DEFAULT_SORT_CRITERIA, Sort.STRING_TYPE, true);
 
 			boolean andSearch = true;
 			boolean active = true;
@@ -122,14 +122,14 @@ public class UserLazyDataModel extends LazyDataModel<User> implements Serializab
 		if (sortField != null) {
 
 			if (sortOrder.equals(SortOrder.DESCENDING)) {
-				sort = SortFactoryUtil.getSort(User.class, sortField, "desc");
+				sort = SortFactoryUtil.create(sortField, Sort.STRING_TYPE, false);
 			}
 			else {
-				sort = SortFactoryUtil.getSort(User.class, sortField, "asc");
+				sort = SortFactoryUtil.create(sortField, Sort.STRING_TYPE, true);
 			}
 		}
 		else {
-			sort = SortFactoryUtil.getSort(User.class, DEFAULT_SORT_CRITERIA, "asc");
+			sort = SortFactoryUtil.create(DEFAULT_SORT_CRITERIA, Sort.STRING_TYPE, true);
 		}
 
 		try {
