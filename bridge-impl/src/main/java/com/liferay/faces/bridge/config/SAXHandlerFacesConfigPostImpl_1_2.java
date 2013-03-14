@@ -18,6 +18,8 @@ import org.xml.sax.SAXException;
 
 
 /**
+ * This class provides a compatibility layer that isolates differences for JSF 1.2.
+ *
  * @author  Neil Griffin
  */
 public abstract class SAXHandlerFacesConfigPostImpl_1_2 extends SAXHandlerFacesConfigPost {
