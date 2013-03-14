@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -54,7 +55,6 @@ public class UserLazyDataModel extends LazyDataModel<User> implements Serializab
 
 	// Private Constants
 	private static final String DEFAULT_SORT_CRITERIA = "lastName";
-	private static final boolean DEFAULT_SORT_ASCENDING = true;
 
 	// Private Data Members
 	private long companyId;
@@ -75,7 +75,7 @@ public class UserLazyDataModel extends LazyDataModel<User> implements Serializab
 			LinkedHashMap<String, Object> params = new LinkedHashMap<String, Object>();
 			params.put("expandoAttributes", null);
 
-			Sort sort = new Sort(DEFAULT_SORT_CRITERIA, Sort.STRING_TYPE, !DEFAULT_SORT_ASCENDING);
+			Sort sort = SortFactoryUtil.create(DEFAULT_SORT_CRITERIA, Sort.STRING_TYPE, true);
 
 			boolean andSearch = true;
 			boolean active = true;
@@ -117,11 +117,18 @@ public class UserLazyDataModel extends LazyDataModel<User> implements Serializab
 
 		Sort sort;
 
+		// sort
 		if ((sortCriterias != null) && (sortCriterias.length != 0)) {
-			sort = new Sort(sortCriterias[0].getPropertyName(), Sort.STRING_TYPE, !sortCriterias[0].isAscending());
+
+			if (!sortCriterias[0].isAscending()) {
+				sort = SortFactoryUtil.create(sortCriterias[0].getPropertyName(), Sort.STRING_TYPE, false);
+			}
+			else {
+				sort = SortFactoryUtil.create(sortCriterias[0].getPropertyName(), Sort.STRING_TYPE, true);
+			}
 		}
 		else {
-			sort = new Sort(DEFAULT_SORT_CRITERIA, Sort.STRING_TYPE, !DEFAULT_SORT_ASCENDING);
+			sort = SortFactoryUtil.create(DEFAULT_SORT_CRITERIA, Sort.STRING_TYPE, true);
 		}
 
 		try {
