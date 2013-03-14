@@ -17,6 +17,13 @@
 		<param-name>com.sun.faces.expressionFactory</param-name>
 		<param-value>org.jboss.el.ExpressionFactoryImpl</param-value>
 	</context-param>
+	<!-- Guarantee order of startup listeners (JSF implementation must be specified before the bridge). -->
+	<listener>
+		<listener-class>${faces.impl.startup.listener}</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.liferay.faces.bridge.servlet.BridgeSessionListener</listener-class>
+	</listener>
 	<!--  The following listener is required to handle the BridgeRequestScopeAttributeAdded annotation, but really -->
 	<!--  is only necessary for remote WSRP portlets. -->
 	<listener>
