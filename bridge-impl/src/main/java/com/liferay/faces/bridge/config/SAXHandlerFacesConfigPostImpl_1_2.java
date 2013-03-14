@@ -22,6 +22,8 @@ import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
+ * This class provides a compatibility layer that isolates differences for JSF 1.2.
+ *
  * @author  Neil Griffin
  */
 public abstract class SAXHandlerFacesConfigPostImpl_1_2 extends SAXHandlerFacesConfigPost {
@@ -33,13 +35,11 @@ public abstract class SAXHandlerFacesConfigPostImpl_1_2 extends SAXHandlerFacesC
 	private static final String VIEW_HANDLER_FACTORY = "view-handler-factory";
 
 	// Private Data Members
-	private BridgeConfigAttributeMap bridgeConfigAttributeMap;
 	private boolean parsingViewHandlerFactory;
 
 	public SAXHandlerFacesConfigPostImpl_1_2(boolean resolveEntities,
 		BridgeConfigAttributeMap bridgeConfigAttributeMap) {
 		super(resolveEntities, bridgeConfigAttributeMap);
-		this.bridgeConfigAttributeMap = bridgeConfigAttributeMap;
 	}
 
 	@Override
