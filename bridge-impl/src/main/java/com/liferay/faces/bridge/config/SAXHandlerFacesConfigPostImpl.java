@@ -65,7 +65,6 @@ public class SAXHandlerFacesConfigPostImpl extends SAXHandlerFacesConfigPostImpl
 	private static final String UPLOADED_FILE_FACTORY = "uploaded-file-factory";
 
 	// Private Data Members
-	private BridgeConfigAttributeMap bridgeConfigAttributeMap;
 	private List<ConfiguredBean> configuredBeans;
 	private Set<String> excludedBridgeRequestAttributes;
 	private String managedBeanClass;
@@ -98,7 +97,6 @@ public class SAXHandlerFacesConfigPostImpl extends SAXHandlerFacesConfigPostImpl
 		List<ConfiguredBean> configuredBeans, Set<String> excludedBridgeRequestAttributes,
 		Map<String, String[]> publicParameterMappings) {
 		super(resolveEntities, bridgeConfigAttributeMap);
-		this.bridgeConfigAttributeMap = bridgeConfigAttributeMap;
 		this.configuredBeans = configuredBeans;
 		this.excludedBridgeRequestAttributes = excludedBridgeRequestAttributes;
 		this.publicParameterMappings = publicParameterMappings;
