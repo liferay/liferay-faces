@@ -125,7 +125,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
-					<version>2.2</version>
+					<version>2.3</version>
 					<configuration>
 						<archive>
 							<manifestEntries>
@@ -136,6 +136,7 @@
 								<Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
 							</manifestEntries>
 						</archive>
+						<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -313,6 +314,9 @@
 					<artifactId>jsf-impl</artifactId>
 				</dependency>
 			</dependencies>
+			<properties>
+				<faces.impl.startup.listener>com.sun.faces.config.ConfigureListener</faces.impl.startup.listener>
+			</properties>
 		</profile>
 		<profile>
 			<id>myfaces</id>
@@ -333,6 +337,9 @@
 					<artifactId>myfaces-impl</artifactId>
 				</dependency>
 			</dependencies>
+			<properties>
+				<faces.impl.startup.listener>org.apache.myfaces.webapp.StartupServletContextListener</faces.impl.startup.listener>
+			</properties>
 		</profile>
 		<profile>
 			<id>pluto</id>
