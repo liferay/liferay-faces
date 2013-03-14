@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -41,6 +42,9 @@ public class UserLazyDataModel extends LazyDataModel<User> {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(UserLazyDataModel.class);
 
+	// Private Constants
+	private static final String DEFAULT_SORT_CRITERIA = "lastName";
+
 	// Private Data Members
 	private long companyId;
 	private SearchCriteria searchCriteria;
@@ -49,7 +53,7 @@ public class UserLazyDataModel extends LazyDataModel<User> {
 		this.companyId = companyId;
 		this.searchCriteria = searchCriteria;
 		setRowsPerPage(rowsPerPage);
-		setSortColumn("lastName");
+		setSortColumn(DEFAULT_SORT_CRITERIA);
 		setSortAscending(true);
 	}
 
@@ -64,19 +68,21 @@ public class UserLazyDataModel extends LazyDataModel<User> {
 			LinkedHashMap<String, Object> params = new LinkedHashMap<String, Object>();
 			params.put("expandoAttributes", searchCriteria.getKeywords());
 
-			Sort sort = new Sort(getSortColumn(), Sort.STRING_TYPE, !isSortAscending());
+			Sort sort = SortFactoryUtil.create(DEFAULT_SORT_CRITERIA, Sort.STRING_TYPE, true);
+
+			boolean andSearch = searchCriteria.isAndSearch();
+			boolean active = searchCriteria.isActive();
 
 			Hits hits = UserLocalServiceUtil.search(companyId, searchCriteria.getFirstName(),
 					searchCriteria.getMiddleName(), searchCriteria.getLastName(), searchCriteria.getScreenName(),
-					searchCriteria.getEmailAddress(), searchCriteria.isActive(), params, searchCriteria.isAndSearch(),
-					QueryUtil.ALL_POS, QueryUtil.ALL_POS, sort);
+					searchCriteria.getEmailAddress(), active, params, andSearch, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					sort);
 			totalCount = hits.getLength();
 
 			logger.debug(
 				"searchCriteria firstName=[{0}] middleName=[{1}] lastName=[{2}] screenName=[{3}] emailAddress=[{4}] active=[{5}] andSearch=[{6}] totalCount=[{7}]",
 				searchCriteria.getFirstName(), searchCriteria.getMiddleName(), searchCriteria.getLastName(),
-				searchCriteria.getScreenName(), searchCriteria.getEmailAddress(), searchCriteria.isActive(),
-				searchCriteria.isAndSearch(), totalCount);
+				searchCriteria.getScreenName(), searchCriteria.getEmailAddress(), active, andSearch, totalCount);
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -97,24 +103,35 @@ public class UserLazyDataModel extends LazyDataModel<User> {
 		List<User> users = null;
 		searchCriteria.setFormatExpressions(true);
 
-		Sort sort = new Sort(getSortColumn(), Sort.STRING_TYPE, !isSortAscending());
+		Sort sort;
+
+		// sort
+		if (!isSortAscending()) {
+			sort = SortFactoryUtil.create(getSortColumn(), Sort.STRING_TYPE, false);
+		}
+		else {
+			sort = SortFactoryUtil.create(getSortColumn(), Sort.STRING_TYPE, true);
+		}
 
 		try {
 			LinkedHashMap<String, Object> params = new LinkedHashMap<String, Object>();
 			int liferayOneRelativeFinishRow = finishRow + 1;
+
+			boolean andSearch = searchCriteria.isAndSearch();
+			boolean active = searchCriteria.isActive();
+
 			Hits hits = UserLocalServiceUtil.search(companyId, searchCriteria.getFirstName(),
 					searchCriteria.getMiddleName(), searchCriteria.getLastName(), searchCriteria.getScreenName(),
-					searchCriteria.getEmailAddress(), searchCriteria.isActive(), params, searchCriteria.isAndSearch(),
-					startRow, liferayOneRelativeFinishRow, sort);
+					searchCriteria.getEmailAddress(), active, params, andSearch, startRow, liferayOneRelativeFinishRow,
+					sort);
 
 			List<Document> documentHits = hits.toList();
 
 			logger.debug(
 				"searchCriteria firstName=[{0}] middleName=[{1}] lastName=[{2}] screenName=[{3}] emailAddress=[{4}] active=[{5}] andSearch=[{6}] startRow=[{7}] liferayOneRelativeFinishRow=[{8}] sortColumn=[{9}] reverseOrder=[{10}] hitCount=[{11}]",
 				searchCriteria.getFirstName(), searchCriteria.getMiddleName(), searchCriteria.getLastName(),
-				searchCriteria.getScreenName(), searchCriteria.getEmailAddress(), searchCriteria.isActive(),
-				searchCriteria.isAndSearch(), startRow, liferayOneRelativeFinishRow, sort.getFieldName(),
-				sort.isReverse(), documentHits.size());
+				searchCriteria.getScreenName(), searchCriteria.getEmailAddress(), active, andSearch, startRow,
+				liferayOneRelativeFinishRow, sort.getFieldName(), sort.isReverse(), documentHits.size());
 
 			users = new ArrayList<User>(documentHits.size());
 
