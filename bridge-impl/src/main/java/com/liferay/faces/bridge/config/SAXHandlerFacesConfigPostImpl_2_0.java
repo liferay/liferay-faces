@@ -34,13 +34,11 @@ public abstract class SAXHandlerFacesConfigPostImpl_2_0 extends SAXHandlerFacesC
 	private static final String BRIDGE_FLASH_FACTORY = "bridge-flash-factory";
 
 	// Private Data Members
-	private BridgeConfigAttributeMap bridgeConfigAttributeMap;
 	private boolean parsingBridgeFlashFactory;
 
 	public SAXHandlerFacesConfigPostImpl_2_0(boolean resolveEntities,
 		BridgeConfigAttributeMap bridgeConfigAttributeMap) {
 		super(resolveEntities, bridgeConfigAttributeMap);
-		this.bridgeConfigAttributeMap = bridgeConfigAttributeMap;
 	}
 
 	@Override
