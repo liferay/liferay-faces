@@ -26,6 +26,7 @@ public class TestPages {
 
 	public static final List<PortalPage> BRIDGE_DEMO_PAGES;
 	public static final List<PortalPage> PORTAL_DEMO_PAGES;
+	public static final List<PortalPage> GUEST_PAGES;
 
 	static {
 		BRIDGE_DEMO_PAGES = new ArrayList<PortalPage>();
@@ -56,4 +57,10 @@ public class TestPages {
 		PORTAL_DEMO_PAGES.add(new PortalPage("ICE3-DIR", "1_WAR_icefaces3directoryportlet"));
 		PORTAL_DEMO_PAGES.add(new PortalPage("ICE3-DOC", "1_WAR_icefaces3documentsportlet"));
 	}
+	
+	static {
+		GUEST_PAGES = new ArrayList<PortalPage>();
+		GUEST_PAGES.add(new PortalPage("SignIn", "1_WAR_jsf2loginportlet"));
+	}
+	
 }

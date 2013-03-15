@@ -41,7 +41,7 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-
+import com.liferay.faces.test.hooks.PortalPage;
 
 /**
  * @author  Neil Griffin
@@ -99,7 +99,7 @@ public class TestSetupAction extends TestSetupCompatAction {
 		addAllUsersToSite(companyId, groupId);
 
 		for (PortalPage portalPage : TestPages.BRIDGE_DEMO_PAGES) {
-			setupPage(userId, groupId, portalPage);
+			setupPage(userId, groupId, portalPage, true);
 		}
 	}
 
@@ -125,32 +125,32 @@ public class TestSetupAction extends TestSetupCompatAction {
 			String liferayPortletName = portletName.replaceAll(StringPool.DASH, StringPool.BLANK);
 			String liferayPortletId = liferayPortletName + "_WAR_bridgetckmainportlet";
 			PortalPage portalPage = new PortalPage(pageName, liferayPortletId);
-			setupPage(userId, groupId, portalPage);
+			setupPage(userId, groupId, portalPage, true);
 		}
 
 		setupPage(userId, groupId,
-			new PortalPage("Lifecycle Set", "chapter3TestslifecycleTestportlet_WAR_bridgetcklifecyclesetportlet"));
+			new PortalPage("Lifecycle Set", "chapter3TestslifecycleTestportlet_WAR_bridgetcklifecyclesetportlet"), true);
 		setupPage(userId, groupId,
 			new PortalPage("Render Policy Always Delegate",
-				"chapter3TestsrenderPolicyTestportlet_WAR_bridgetckrenderpolicy1portlet"));
+				"chapter3TestsrenderPolicyTestportlet_WAR_bridgetckrenderpolicy1portlet"), true);
 		setupPage(userId, groupId,
 			new PortalPage("Render Policy Default",
-				"chapter3TestsrenderPolicyTestportlet_WAR_bridgetckrenderpolicy2portlet"));
+				"chapter3TestsrenderPolicyTestportlet_WAR_bridgetckrenderpolicy2portlet"), true);
 		setupPage(userId, groupId,
 			new PortalPage("Render Policy Never Delegate",
-				"chapter3TestsrenderPolicyTestportlet_WAR_bridgetckrenderpolicy3portlet"));
+				"chapter3TestsrenderPolicyTestportlet_WAR_bridgetckrenderpolicy3portlet"), true);
 		setupPage(userId, groupId,
 			new PortalPage("Render Response Wrapper",
-				"chapter6_2_1TestsusesConfiguredRenderResponseWrapperTestportlet_WAR_bridgetckresponsewrapperportlet"));
+				"chapter6_2_1TestsusesConfiguredRenderResponseWrapperTestportlet_WAR_bridgetckresponsewrapperportlet"), true);
 		setupPage(userId, groupId,
 			new PortalPage("Resource Response Wrapper",
-				"chapter6_2_1TestsusesConfiguredResourceResponseWrapperTestportlet_WAR_bridgetckresponsewrapperportlet"));
+				"chapter6_2_1TestsusesConfiguredResourceResponseWrapperTestportlet_WAR_bridgetckresponsewrapperportlet"), true);
 	}
 
-	protected void setupPage(long userId, long groupId, PortalPage portalPage) throws Exception {
+	protected void setupPage(long userId, long groupId, PortalPage portalPage, boolean privateLayout) throws Exception {
 		String portalPageName = portalPage.getName();
 		String[] portletIds = portalPage.getPortletIds();
-		Layout portalPageLayout = getPortalPageLayout(userId, groupId, portalPageName);
+		Layout portalPageLayout = getPortalPageLayout(userId, groupId, portalPageName, privateLayout);
 		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet) portalPageLayout.getLayoutType();
 
 		layoutTypePortlet.setLayoutTemplateId(userId, "2_columns_i", false);
@@ -178,7 +178,17 @@ public class TestSetupAction extends TestSetupCompatAction {
 		addAllUsersToSite(companyId, groupId);
 
 		for (PortalPage portalPage : TestPages.PORTAL_DEMO_PAGES) {
-			setupPage(userId, groupId, portalPage);
+			setupPage(userId, groupId, portalPage, true);
+		}
+	}
+	
+	protected void setupGuestSite(long companyId, long userId) throws Exception {
+		Group site = getSite(companyId, userId, "Guest");
+		long groupId = site.getGroupId();
+		addAllUsersToSite(companyId, groupId);
+
+		for (PortalPage portalPage : TestPages.GUEST_PAGES) {
+			setupPage(userId, groupId, portalPage, false);
 		}
 	}
 
@@ -214,9 +224,9 @@ public class TestSetupAction extends TestSetupCompatAction {
 		ServiceUtil.addUser(userId, companyId, "George", "Wythe");
 	}
 
-	protected Layout getPortalPageLayout(long userId, long groupId, String portalPageName) throws Exception {
+	protected Layout getPortalPageLayout(long userId, long groupId, String portalPageName, boolean privateLayout) throws Exception {
 		Layout portalPageLayout = null;
-		boolean privateLayout = true;
+		// boolean privateLayout = true;
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout);
 
 		for (Layout layout : layouts) {
@@ -244,9 +254,11 @@ public class TestSetupAction extends TestSetupCompatAction {
 
 		try {
 			site = GroupLocalServiceUtil.getGroup(companyId, name);
+			logger.info("getSite: site.getName() = " + site.getName() + " and site.hasPublicLayouts() = " + site.hasPublicLayouts());
 		}
 		catch (NoSuchGroupException e) {
 			site = ServiceUtil.addActiveOpenGroup(userId, name);
+			logger.info("getSite: NoSuchGroupException: ServiceUtil.addActiveOpenGroup(userId, name): site.getName() = " + site.getName());
 		}
 
 		return site;
