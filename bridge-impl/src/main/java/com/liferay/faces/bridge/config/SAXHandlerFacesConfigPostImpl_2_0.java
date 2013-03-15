@@ -23,6 +23,8 @@ import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
+ * This class provides a compatibility layer that isolates differences for JSF 2.0.
+ * 
  * @author  Neil Griffin
  */
 public abstract class SAXHandlerFacesConfigPostImpl_2_0 extends SAXHandlerFacesConfigPostImpl_1_2 {
@@ -34,13 +36,11 @@ public abstract class SAXHandlerFacesConfigPostImpl_2_0 extends SAXHandlerFacesC
 	private static final String BRIDGE_FLASH_FACTORY = "bridge-flash-factory";
 
 	// Private Data Members
-	private BridgeConfigAttributeMap bridgeConfigAttributeMap;
 	private boolean parsingBridgeFlashFactory;
 
 	public SAXHandlerFacesConfigPostImpl_2_0(boolean resolveEntities,
 		BridgeConfigAttributeMap bridgeConfigAttributeMap) {
 		super(resolveEntities, bridgeConfigAttributeMap);
-		this.bridgeConfigAttributeMap = bridgeConfigAttributeMap;
 	}
 
 	@Override

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:aui="http://liferay.com/faces/aui" xmlns:aui-cc="http://liferay.com/faces/aui-cc"
-	xmlns:liferay-ui="http://liferay.com/faces/ui" xmlns:ice="http://www.icesoft.com/icefaces/component"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:icecore="http://www.icefaces.org/icefaces/core">
+<ui:composition xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-cc="http://liferay.com/faces/aui-cc" xmlns:liferay-ui="http://liferay.com/faces/ui"
+	xmlns:ice="http://www.icesoft.com/icefaces/component" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core">
 
 	<h:form id="f2" styleClass="aui-form dp">
 		<aui-cc:messages globalOnly="true" layout="table" />
@@ -13,29 +14,31 @@
 					<aui:fieldset>
 						<aui:column>
 							<aui:field inlineLabel="left" label="#{i18n['last-name']}" type="text">
-								<ice:inputText actionListener="#{directoryBackingBean.searchActionListener.processAction}" styleClass="aui-field-input aui-field-input-text"
-									value="#{directoryModelBean.searchCriteria.lastName}" />
+								<ice:inputText actionListener="#{directoryBackingBean.searchActionListener.processAction}"
+									styleClass="aui-field-input aui-field-input-text" value="#{directoryModelBean.searchCriteria.lastName}" />
 							</aui:field>
 						</aui:column>
 						<aui:column>
 							<aui:field inlineLabel="left" label="#{i18n['first-name']}" type="text">
-								<ice:inputText actionListener="#{directoryBackingBean.searchActionListener.processAction}" styleClass="aui-field-input aui-field-input-text"
-									value="#{directoryModelBean.searchCriteria.firstName}" />
+								<ice:inputText actionListener="#{directoryBackingBean.searchActionListener.processAction}"
+									styleClass="aui-field-input aui-field-input-text" value="#{directoryModelBean.searchCriteria.firstName}" />
 							</aui:field>
 						</aui:column>
 						<aui:column>
 							<aui:field inlineLabel="left" label="#{i18n['email-address']}" type="text">
-								<ice:inputText actionListener="#{directoryBackingBean.searchActionListener.processAction}" styleClass="aui-field-input aui-field-input-text"
-									value="#{directoryModelBean.searchCriteria.emailAddress}" />
+								<ice:inputText actionListener="#{directoryBackingBean.searchActionListener.processAction}"
+									styleClass="aui-field-input aui-field-input-text" value="#{directoryModelBean.searchCriteria.emailAddress}" />
 							</aui:field>
 						</aui:column>
 						<aui:column>
-							<aui-cc:select inlineMessage="true" label="#{i18n['status']}" required="true" value="#{directoryModelBean.searchCriteria.status}">
-								<f:selectItems value="#{directoryModelBean.statusSelectItems}"/>
+							<aui-cc:select inlineMessage="true" label="#{i18n['status']}" required="true"
+								value="#{directoryModelBean.searchCriteria.status}">
+								<f:selectItems value="#{directoryModelBean.statusSelectItems}" />
 							</aui-cc:select>
 						</aui:column>
 						<aui:column>
-							<aui-cc:select inlineMessage="true" label="#{i18n['search-operator']}" required="true" value="#{directoryModelBean.searchCriteria.andSearch}">
+							<aui-cc:select inlineMessage="true" label="#{i18n['search-operator']}" required="true"
+								value="#{directoryModelBean.searchCriteria.andSearch}">
 								<f:selectItem itemLabel="#{i18n['all']}" itemValue="true" />
 								<f:selectItem itemLabel="#{i18n['any']}" itemValue="false" />
 							</aui-cc:select>
@@ -49,15 +52,14 @@
 				</icecore:singleSubmit>
 				<div class="separator" />
 				<liferay-ui:ice-page-iterator for="users" />
-				<ice:dataTable id="users" rows="#{directoryModelBean.dataModel.rowsPerPage}" sortColumn="#{directoryModelBean.dataModel.sortColumn}"
+				<ice:dataTable id="users" rows="#{directoryModelBean.dataModel.rowsPerPage}"
+					sortColumn="#{directoryModelBean.dataModel.sortColumn}"
 					sortAscending="#{directoryModelBean.dataModel.sortAscending}" value="#{directoryModelBean.dataModel}" var="user">
 					<ice:column>
 						<f:facet name="header">
-							<ice:commandSortHeader columnName="picture">
-								<h:outputText value="#{i18n['Picture']}" />
-							</ice:commandSortHeader>
+							<h:outputText value="#{i18n['Picture']}" />
 						</f:facet>
-						<h:graphicImage id="picImage"	url="#{liferay.portraitURL[user]}"	alt="Picture"  height="25"/>
+						<h:graphicImage id="picImage" url="#{liferay.portraitURL[user]}" alt="Picture" height="25" />
 					</ice:column>
 					<ice:column>
 						<f:facet name="header">
