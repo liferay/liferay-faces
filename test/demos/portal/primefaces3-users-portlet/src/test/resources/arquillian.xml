@@ -10,12 +10,27 @@
     -->
 
     <extension qualifier="webdriver">
+    
 <!--         <property name="browserCapabilities">firefox</property> -->
-        <property name="browserCapabilities">chrome</property>
+<!--         <property name="capabilityWebdriverFirefoxBin">/Applications/Firefox.app/Contents/MacOS/firefox</property> -->
+<!--         <property name="capabilityWebdriverFirefoxBin">/Applications/Firefox.app/Contents/MacOS/firefox-bin</property> -->
+<!--         <property name="capabilityWebdriverFirefoxBin">/Applications/Firefox_18.0b2.app/Contents/MacOS/firefox-bin</property> -->
+<!--         <property name="firefoxBinary">/Applications/Firefox_18.0b2.app/Contents/MacOS/firefox-bin</property> -->
+<!-- WARNING: Configuration property "firefoxBinary" is deprecated, please replace it with capability based property "firefox_binary" instead. -->
+<!-- 		<property name="firefox_binary">/Applications/Firefox_18.0b2.app/Contents/MacOS/firefox-bin</property> -->
+<!-- 		<property name="firefox_binary">/Applications/Firefox_17.0b2.app/Contents/MacOS/firefox-bin</property> --> <!-- works -->
+
+<!--         <property name="browserCapabilities">chrome</property> -->
         <property name="chromeDriverBinary">/Users/apple/Downloads/chromedriver</property>
-<!--         <property name="browserCapabilities">htmlUnit</property> -->
+        
+        <property name="browserCapabilities">htmlUnit</property>
         <property name="javascriptEnabled">true</property>
     </extension>
+    
+    <!-- 
+    The list of supported browser via capabilities is: 
+    android chrome firefox htmlUnit internetExplorer iphone opera null 
+    -->
 
     <extension qualifier="graphene">
         <!-- Increase default wait intervals -->
