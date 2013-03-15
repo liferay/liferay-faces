@@ -22,10 +22,9 @@
         <version.arquillian.graphene>2.0.0.Alpha3</version.arquillian.graphene>
         <version.arquillian.drone>1.1.1.Final</version.arquillian.drone>
 
-	    <!-- testing selenium
+	    <!-- testing selenium -->
 	    <version.selenium>2.31.0</version.selenium>
 	    <version.selenium.server>2.31.0</version.selenium.server>
-	    -->
 
         <!-- Plugin versions -->
         <version.plugin.surefire>2.12</version.plugin.surefire>
@@ -124,7 +123,7 @@
                 <version>${version.junit}</version>
             </dependency>
             
-            <!-- Selenium dependecies
+            <!-- Selenium dependecies -->
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-server</artifactId>
@@ -182,7 +181,6 @@
                 <artifactId>selenium-remote-driver</artifactId>
                 <version>${version.selenium}</version>
             </dependency>
-            -->
  
         </dependencies>
     </dependencyManagement>
