@@ -66,8 +66,18 @@ public abstract class ViewDeclarationLanguageWrapper extends ViewDeclarationLang
 	}
 
 	@Override
+	public boolean viewExists(FacesContext facesContext, String viewId) {
+		return getWrapped().viewExists(facesContext, viewId);
+	}
+
+	@Override
 	public BeanInfo getComponentMetadata(FacesContext facesContext, Resource componentResource) {
 		return getWrapped().getComponentMetadata(facesContext, componentResource);
+	}
+
+	@Override
+	public String getId() {
+		return getWrapped().getId();
 	}
 
 	@Override

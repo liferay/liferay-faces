@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,6 +27,7 @@ import javax.portlet.MimeResponse;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
+import javax.portlet.PortletSession;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceResponse;
 import javax.portlet.faces.Bridge;
@@ -178,7 +179,7 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 
 	/**
 	 * Note: The reason why this method appears here in {@link ExternalContextCompatImpl} is because it needs to be
-	 * overridden by {@link ExternalContextCompat22Impl} since it has special requirements for JSF 2.2.
+	 * overridden by {@link ExternalContextCompat_2_2_Impl} since it has special requirements for JSF 2.2.
 	 *
 	 * @see    {@link ExternalContext#encodeActionURL(String, Map)}
 	 * @since  JSF 1.0
@@ -429,6 +430,11 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 		else {
 			return false;
 		}
+	}
+
+	@Override
+	public boolean isSecure() {
+		return portletRequest.isSecure();
 	}
 
 	protected boolean isICEfacesLegacyMode(ClientDataRequest clientDataRequest) {
@@ -743,5 +749,19 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 				// must not throw an IllegalStateException.
 			}
 		}
+	}
+
+	@Override
+	public int getSessionMaxInactiveInterval() {
+
+		PortletSession portletSession = (PortletSession) getSession(true);
+
+		return portletSession.getMaxInactiveInterval();
+	}
+
+	@Override
+	public void setSessionMaxInactiveInterval(int sessionMaxInactiveInterval) {
+		PortletSession portletSession = (PortletSession) getSession(true);
+		portletSession.setMaxInactiveInterval(sessionMaxInactiveInterval);
 	}
 }
