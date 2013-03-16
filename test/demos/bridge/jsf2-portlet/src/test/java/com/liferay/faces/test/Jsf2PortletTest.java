@@ -50,6 +50,7 @@ public class Jsf2PortletTest {
 	@FindBy(xpath = "//div[contains(text(),'You are signed in as')]")
 	private WebElement signedInText;
 	
+	// form tag found after submitting
 	// <div class="portlet-body" id="aui_3_4_0_1_551"> <div id="A5601" class="jsf2-portlet liferay-faces-bridge-body">
 	@FindBy(xpath = "//form[@method='post']")
 	private WebElement formTag;
@@ -74,42 +75,42 @@ public class Jsf2PortletTest {
 	
 	@FindBy(xpath = "//input[contains(@id,':firstName')]")
 	private WebElement firstNameField;
-	@FindBy(xpath = "//input[contains(@id,':firstName')]/following-sibling::span[1]")
+	@FindBy(xpath = "//input[contains(@id,':firstName')]/following-sibling::*[1]")
 	private WebElement firstNameFieldError;
 	
 	@FindBy(xpath = "//input[contains(@id,':lastName')]")
 	private WebElement lastNameField;
-	@FindBy(xpath = "//input[contains(@id,':lastName')]/following-sibling::span[1]")
+	@FindBy(xpath = "//input[contains(@id,':lastName')]/following-sibling::*[1]")
 	private WebElement lastNameFieldError;
 	
 	@FindBy(xpath = "//input[contains(@id,':emailAddress')]")
 	private WebElement emailAddressField;
-	@FindBy(xpath = "//input[contains(@id,':emailAddress')]/following-sibling::span[1]")
+	@FindBy(xpath = "//input[contains(@id,':emailAddress')]/following-sibling::*[1]")
 	private WebElement emailAddressFieldError;
 	
 	@FindBy(xpath = "//input[contains(@id,':phoneNumber')]")
 	private WebElement phoneNumberField;
-	@FindBy(xpath = "//input[contains(@id,':phoneNumber')]/following-sibling::span[1]")
+	@FindBy(xpath = "//input[contains(@id,':phoneNumber')]/following-sibling::*[1]")
 	private WebElement phoneNumberFieldError;
 	
 	@FindBy(xpath = "//input[contains(@id,':dateOfBirth')]")
 	private WebElement dateOfBirthField;
-	@FindBy(xpath = "//input[contains(@id,':dateOfBirth')]/following-sibling::span[1]")
+	@FindBy(xpath = "//input[contains(@id,':dateOfBirth')]/following-sibling::*[1]")
 	private WebElement dateOfBirthFieldError;
 	
 	@FindBy(xpath = "//input[contains(@id,':city')]")
 	private WebElement cityField;
-	@FindBy(xpath = "//input[contains(@id,':city')]/following-sibling::span[1]")
+	@FindBy(xpath = "//input[contains(@id,':city')]/following-sibling::*[1]")
 	private WebElement cityFieldError;
 	
 	@FindBy(xpath = "//select[contains(@id,':provinceId')]")
 	private WebElement provinceIdField;
-	@FindBy(xpath = "//select[contains(@id,':provinceId')]/following-sibling::span[1]")
+	@FindBy(xpath = "//select[contains(@id,':provinceId')]/following-sibling::*[1]")
 	private WebElement provinceIdFieldError;
 	
 	@FindBy(xpath = "//input[contains(@id,':postalCode')]")
 	private WebElement postalCodeField;
-	@FindBy(xpath = "//input[contains(@id,':postalCode')]/following-sibling::span[1]")
+	@FindBy(xpath = "//input[contains(@id,':postalCode')]/following-sibling::*[1]/following-sibling::*[1]")
 	private WebElement postalCodeFieldError;
 	
 	@FindBy(xpath = "//img[contains(@title,'Type any of these ZIP codes')]")
@@ -129,6 +130,8 @@ public class Jsf2PortletTest {
 	
 	@FindBy(xpath = "//input[@type='submit' and @value='Submit']")
 	private WebElement submitButton;
+	@FindBy(xpath = "//input[@type='submit' and @value='Submit']")
+	private WebElement preferencesSubmitButton;
 	@FindBy(xpath = "//input[@type='submit' and @value='Edit Preferences']")
 	private WebElement editPreferencesButton;
 	
@@ -144,8 +147,6 @@ public class Jsf2PortletTest {
 	
 	@Before
 	public void beforeEachTest() {
-		// Shut its dirty mouth
-		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
 		
 //		browser.manage().deleteAllCookies();
 //		logger.log(Level.INFO, "browser.manage().deleteAllCookies() ...");
@@ -154,6 +155,9 @@ public class Jsf2PortletTest {
 
 	public void signIn() throws Exception {
 		
+		// Shut its dirty mouth
+		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
+				
 		url = "http://localhost:8080/web/guest/signin";
 		logger.log(Level.INFO, "browser.navigate().to("+url+")");
 		browser.navigate().to(url);
@@ -221,9 +225,6 @@ public class Jsf2PortletTest {
 		logger.log(Level.INFO, alloyVersion.getText());
 		logger.log(Level.INFO, bridgeVersion.getText());
 		
-		// signInButton.click();
-		// waitModel(browser);
-		
 	}
 	
 	@Test
@@ -279,7 +280,7 @@ public class Jsf2PortletTest {
 		// MM/dd/yyyy
 		datePatternField.clear();
 		datePatternField.sendKeys("MM/dd/yy");
-		submitButton.click();
+		preferencesSubmitButton.click();
 		Thread.sleep(500);
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value').length() = " + 
@@ -317,8 +318,6 @@ public class Jsf2PortletTest {
 		phoneNumberField.clear();
 		dateOfBirthField.clear();
 		cityField.clear();
-		// provinceIdField.clear();
-//		logger.log(Level.INFO, "provinceIdField.getAttribute('value') = " + provinceIdField.getAttribute("value"));
 		postalCodeField.clear();
 		
 		submitButton.click();
@@ -452,6 +451,7 @@ public class Jsf2PortletTest {
 		
 		dateOfBirthField.clear();
 		emailAddressField.clear();
+		postalCodeField.clear();
 		Thread.sleep(500);
 		
 		firstNameField.sendKeys("David");
@@ -460,6 +460,7 @@ public class Jsf2PortletTest {
 		phoneNumberField.sendKeys("(way) too-good");
 		dateOfBirthField.sendKeys("01/02/3456");
 		postalCodeField.sendKeys("32801");
+		phoneNumberField.click();
 		Thread.sleep(500);
 		comments.sendKeys("If as one people speaking the same language, they have begun to do this ...");
 		submitButton.click();
