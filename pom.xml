@@ -73,7 +73,7 @@
 	<properties>
 		<codename>Ephesus</codename>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
-		<icefaces3.version>3.1.0</icefaces3.version>
+		<icefaces3.version>3.2.0</icefaces3.version>
 		<icefaces3.mojarra.version>2.1.6</icefaces3.mojarra.version>
 		<liferay.version>6.2.0-SNAPSHOT</liferay.version>
 		<liferay.maven.plugin.version>6.1.1</liferay.maven.plugin.version>
