@@ -61,7 +61,7 @@ import com.liferay.faces.util.product.ProductMap;
 /**
  * @author  Neil Griffin
  */
-public class ExternalContextImpl extends ExternalContextCompat22Impl {
+public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ExternalContextImpl.class);
