@@ -188,7 +188,6 @@ public class Primefaces3PortletTest {
 		url = "http://localhost:8080/group/bridge-demos/prime3";
 		logger.log(Level.INFO, "browser.navigate().to("+url+")");
 		browser.navigate().to(url);
-		// waitModel(browser);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
@@ -282,9 +281,9 @@ public class Primefaces3PortletTest {
 		int dateLengthAfterReset = 10;
 		
 		menuButton.click();
-		waitGui();
+		Thread.sleep(500);
 		menuPreferences.click();
-		waitModel();
+		Thread.sleep(500);
 		logger.log(Level.INFO, "datePatternField.getAttribute('value') = " + datePatternField.getAttribute("value"));
 		logger.log(Level.INFO, "resetButton.isDisplayed() = " + resetButton.isDisplayed());
 		// MM/dd/yyyy
@@ -320,6 +319,7 @@ public class Primefaces3PortletTest {
 				"date of birth has "+dateLengthAfterReset+" characters after resetting preferences", 
 				dateOfBirthField.getAttribute("value").length() == dateLengthAfterReset
 			);
+		
 	}
 	
 	@Test
@@ -334,10 +334,9 @@ public class Primefaces3PortletTest {
 		dateOfBirthField.clear();
 		cityField.clear();
 		postalCodeField.clear();
-		
 		submitButton.click();
-		waitAjax();
 		Thread.sleep(500);
+		
 		logger.log(Level.INFO, "firstNameFieldError.getText() = " + firstNameFieldError.getText());
 		logger.log(Level.INFO, "lastNameFieldError.getText() = " + lastNameFieldError.getText());
 		logger.log(Level.INFO, "emailAddressFieldError.getText() = " + emailAddressFieldError.getText());
@@ -353,12 +352,14 @@ public class Primefaces3PortletTest {
 	@RunAsClient
 	@InSequence(5)
 	public void cityAndStateAutoPopulate() throws Exception {
+		
 		logger.log(Level.INFO, "before cityField.getAttribute('value') = " + cityField.getAttribute("value"));
 		logger.log(Level.INFO, "before provinceIdField.getAttribute('value') = " + provinceIdField.getAttribute("value"));
 		logger.log(Level.INFO, "before postalCodeField.getAttribute('value') = " + postalCodeField.getAttribute("value"));
 		assertTrue("cityField is empty", (cityField.getAttribute("value").length() == 0));
 		assertTrue("provinceIdField is empty", (provinceIdField.getAttribute("value").length() == 0));
 		assertTrue("postalCodeField is empty", (postalCodeField.getAttribute("value").length() == 0));
+		
 		postalCodeField.sendKeys("32801");
 		phoneNumberField.click();
 		Thread.sleep(500);
@@ -367,7 +368,8 @@ public class Primefaces3PortletTest {
 		logger.log(Level.INFO, "after postalCodeField.getAttribute('value') = " + postalCodeField.getAttribute("value"));
 		assertTrue("cityField contains Orlando", cityField.getAttribute("value").contains("Orlando"));
 		assertTrue("provinceIdField contains 3", provinceIdField.getAttribute("value").contains("3"));
-		assertTrue("postalCodeField contains 32801", postalCodeField.getAttribute("value").contains("32801"));		
+		assertTrue("postalCodeField contains 32801", postalCodeField.getAttribute("value").contains("32801"));
+		
 	}
 	
 	@Test
@@ -389,6 +391,7 @@ public class Primefaces3PortletTest {
 		tags = browser.findElements(By.xpath("//a[contains(text(),'Hide Comments')]/../../child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
 		assertTrue("tag for Hide and tag for textarea are showing", tags == tagsWhileShowing);
+		
 		comments.sendKeys(testing123);
 		phoneNumberField.click();
 		Thread.sleep(500);
@@ -402,6 +405,7 @@ public class Primefaces3PortletTest {
 		Thread.sleep(500);
 		logger.log(Level.INFO, "after hide and show comments.getAttribute('value') = " + comments.getAttribute("value"));
 		assertTrue("comments are still there after hide and show", testing123.equals(comments.getAttribute("value")));
+		
 	}
 	
 	@Test
@@ -412,8 +416,6 @@ public class Primefaces3PortletTest {
 		int tags = 0;
 		int tagsWhileInvalid = 2;
 		int tagsWhileValid = 0;
-		// "Value is required";
-		// "Invalid date format";
 		
 		// checks an invalid dateOfBirth
 		dateOfBirthField.clear();
