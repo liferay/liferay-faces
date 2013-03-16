@@ -4,7 +4,7 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.Graphene;
 import org.jboss.arquillian.graphene.enricher.findby.FindBy;
-//import org.jboss.arquillian.graphene.*;
+// import org.jboss.arquillian.graphene.*;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -30,7 +30,6 @@ import static org.jboss.arquillian.graphene.Graphene.waitModel;
 @RunWith(Arquillian.class)
 public class Jsf2PortletTest {
 	
-	// private static final Logger logger;
 	private final static Logger logger = Logger.getLogger(Jsf2PortletTest.class.getName());
 	
 	// @ArquillianResource
@@ -51,16 +50,15 @@ public class Jsf2PortletTest {
 	private WebElement signedInText;
 	
 	// form tag found after submitting
-	// <div class="portlet-body" id="aui_3_4_0_1_551"> <div id="A5601" class="jsf2-portlet liferay-faces-bridge-body">
 	@FindBy(xpath = "//form[@method='post']")
 	private WebElement formTag;
 	
 	// portlet topper and menu elements
 	@FindBy(xpath = "//header[@class='portlet-topper']/h1/span")
 	private WebElement portletDisplayName;
-	@FindBy(xpath = "//a[contains(@id,'jsf2portlet') and contains(@id,'menuButton')]")
+	@FindBy(xpath = "//a[contains(@id,'menuButton')]")
 	private WebElement menuButton;
-	@FindBy(xpath = "//a[contains(@id,'jsf2portlet') and contains(@id,'menu_preferences')]")
+	@FindBy(xpath = "//a[contains(@id,'menu_preferences')]")
 	private WebElement menuPreferences;
 	
 	// preferences elements
@@ -68,7 +66,7 @@ public class Jsf2PortletTest {
 	private WebElement datePatternField;
 	@FindBy(xpath = "//input[@type='submit' and @value='Reset']")
 	private WebElement resetButton;
-
+	
 	// elements for Job Applicants
 	@FindBy(xpath = "//img[contains(@src,'liferay-logo.png')]")
 	private WebElement logo;
@@ -134,10 +132,15 @@ public class Jsf2PortletTest {
 	private WebElement preferencesSubmitButton;
 	@FindBy(xpath = "//input[@type='submit' and @value='Edit Preferences']")
 	private WebElement editPreferencesButton;
+	@FindBy(xpath = "//a[contains(text(),'Return to Full Page')]")
+	private WebElement returnLink;
 	
 	// //ul/li/em[contains(text(),'Mojarra 2.1.18')]
 	@FindBy(xpath = "//ul/li/em[contains(text(),'Mojarra')]")
 	private WebElement mojarraVersion;
+	
+	
+	
 	// //ul/li/em[contains(text(),'Liferay Faces Alloy 3.1.2')]
 	@FindBy(xpath = "//ul/li/em[contains(text(),'Liferay Faces Alloy')]")
 	private WebElement alloyVersion;
@@ -157,11 +160,10 @@ public class Jsf2PortletTest {
 		
 		// Shut its dirty mouth
 		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
-				
+		
 		url = "http://localhost:8080/web/guest/signin";
 		logger.log(Level.INFO, "browser.navigate().to("+url+")");
 		browser.navigate().to(url);
-		// waitModel(browser);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " before signing in ...");
 		
 		emailField.clear();
@@ -169,7 +171,6 @@ public class Jsf2PortletTest {
 		passwordField.clear();
 		passwordField.sendKeys("test");
 		signInButton.click();
-		// waitModel(browser);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " after clicking the sign in button and waiting");
 		logger.log(Level.INFO, signedInText.getText());
 		// assertTrue("You are signed in", signedInText.getText().contains("You are signed in"));
@@ -211,17 +212,22 @@ public class Jsf2PortletTest {
 		
 		assertTrue("multiFileUploadButton.isDisplayed()", multiFileUploadButton.isDisplayed());
 		assertTrue("submitFilesButton.isDisplayed()", submitFilesButton.isDisplayed());
+		logger.log(Level.INFO, "submitFilesButton.getTagName() = " + submitFilesButton.getTagName());
 		
 		assertTrue("showCommentsLink.isDisplayed()", showCommentsLink.isDisplayed());
 		
 		assertTrue("submitButton.isDisplayed()", submitButton.isDisplayed());
+		logger.log(Level.INFO, "submitButton.getTagName() = " + submitButton.getTagName());
 		assertTrue("editPreferencesButton.isDisplayed()", editPreferencesButton.isDisplayed());
+		logger.log(Level.INFO, "editPreferencesButton.getTagName() = " + editPreferencesButton.getTagName());
 		
 		assertTrue("mojarraVersion.isDisplayed()", mojarraVersion.isDisplayed());
+		
 		assertTrue("alloyVersion.isDisplayed()", alloyVersion.isDisplayed());
 		assertTrue("bridgeVersion.isDisplayed()", bridgeVersion.isDisplayed());
 
 		logger.log(Level.INFO, mojarraVersion.getText());
+		
 		logger.log(Level.INFO, alloyVersion.getText());
 		logger.log(Level.INFO, bridgeVersion.getText());
 		
@@ -298,6 +304,11 @@ public class Jsf2PortletTest {
 		resetButton.click();
 		logger.log(Level.INFO, "resetButton.click() ...");
 		Thread.sleep(500);
+		// reset button takes us back to the job app submission form
+		// so we expect to see date of birth next
+		// we can check it for the reset datePattern
+		// no confirmation of the reset 
+		// no need for extra navigation
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value').length() = " + dateOfBirthField.getAttribute("value").length());
 		
@@ -414,7 +425,7 @@ public class Jsf2PortletTest {
 		logger.log(Level.INFO, "tags = " + tags);
 		assertTrue("Invalid dateOfBirthField validation message displayed", 
 				dateOfBirthFieldError.getText().contains("Invalid date format"));
-		assertTrue("one input tag plus one span tag = 2", tags == tagsWhileInvalid);
+		assertTrue("tags == tagsWhileInvalid? "+tags+" == "+tagsWhileInvalid+"?", tags == tagsWhileInvalid);
 		
 		// checks with no dateOfBirth
 		dateOfBirthField.clear();
@@ -428,7 +439,7 @@ public class Jsf2PortletTest {
 		logger.log(Level.INFO, "tags = " + tags);
 		assertTrue("Value is required for dateOfBirthField message displayed", 
 				dateOfBirthFieldError.getText().contains("Value is required"));
-		assertTrue("one input tag plus one span tag = 2", tags == tagsWhileInvalid);
+		assertTrue("tags == tagsWhileInvalid? "+tags+" == "+tagsWhileInvalid+"?", tags == tagsWhileInvalid);
 		
 		// checks a valid dateOfBirth
 		dateOfBirthField.clear();
@@ -440,7 +451,7 @@ public class Jsf2PortletTest {
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		tags = browser.findElements(By.xpath("//input[contains(@id,':dateOfBirth')]/../child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
-		assertTrue("one input tag plus zero span tags = 1", tags == tagsWhileValid);
+		assertTrue("tags == tagsWhileValid? "+tags+" == "+tagsWhileValid+"?", tags == tagsWhileValid);
 		
 	}
 	

@@ -4,7 +4,7 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.Graphene;
 import org.jboss.arquillian.graphene.enricher.findby.FindBy;
-//import org.jboss.arquillian.graphene.*;
+// import org.jboss.arquillian.graphene.*;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -21,8 +21,6 @@ import java.util.logging.Level;
 //import java.net.URL;
 
 
-
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.jboss.arquillian.graphene.Graphene.waitGui;
@@ -32,7 +30,6 @@ import static org.jboss.arquillian.graphene.Graphene.waitModel;
 @RunWith(Arquillian.class)
 public class Primefaces3PortletTest {
 	
-	// private static final Logger logger;
 	private final static Logger logger = Logger.getLogger(Primefaces3PortletTest.class.getName());
 	
 	// @ArquillianResource
@@ -55,13 +52,13 @@ public class Primefaces3PortletTest {
 	// form tag found after submitting
 	@FindBy(xpath = "//form[@method='post']")
 	private WebElement formTag;
-
+	
 	// portlet topper and menu elements
 	@FindBy(xpath = "//header[@class='portlet-topper']/h1/span")
 	private WebElement portletDisplayName;
-	@FindBy(xpath = "//a[contains(@id,'primefaces3portlet') and contains(@id,'menuButton')]")
+	@FindBy(xpath = "//a[contains(@id,'menuButton')]")
 	private WebElement menuButton;
-	@FindBy(xpath = "//a[contains(@id,'primefaces3portlet') and contains(@id,'menu_preferences')]")
+	@FindBy(xpath = "//a[contains(@id,'menu_preferences')]")
 	private WebElement menuPreferences;
 	
 	// preferences elements
@@ -119,11 +116,8 @@ public class Primefaces3PortletTest {
 	
 	@FindBy(xpath = "//input[@type='file' and @multiple='multiple']")
 	private WebElement multiFileUploadButton;
-	// //form[@enctype='multipart/form-data']/input[@type='submit' and @value='Submit']
-	// //span[contains(text(),'Upload')]
 	@FindBy(xpath = "//span[contains(text(),'Upload')]/..")
 	private WebElement submitFilesButton;
-	// //span[contains(text(),'Cancel')]
 	@FindBy(xpath = "//span[contains(text(),'Cancel')]/..")
 	private WebElement cancelFilesButton;
 	
@@ -134,19 +128,14 @@ public class Primefaces3PortletTest {
 	@FindBy(xpath = "//textarea[contains(@id,':comments')]")
 	private WebElement comments;
 	
-	// @FindBy(xpath = "//input[@type='submit' and @value='Submit']")
-	// //span[contains(text(),'Submit')]
 	@FindBy(xpath = "//span[contains(text(),'Submit')]/..")
 	private WebElement submitButton;
 	@FindBy(xpath = "//input[@type='submit' and @value='Submit']")
 	private WebElement preferencesSubmitButton;
-	// @FindBy(xpath = "//input[@type='submit' and @value='Edit Preferences']")
 	@FindBy(xpath = "//span[contains(text(),'Edit Preferences')]/..")
 	private WebElement editPreferencesButton;
-	// <a class="portlet-icon-back" href="http://localhost:8080/group/bridge-demos/prime3?p_p_id=1_WAR_primefaces3portlet_INSTANCE_ABCD&amp;p_p_lifecycle=0&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1" id="aui_3_4_0_1_518">Return to Full Page</a>
 	@FindBy(xpath = "//a[contains(text(),'Return to Full Page')]")
 	private WebElement returnLink;
-	
 	
 	// //ul/li/em[contains(text(),'Mojarra 2.1.18')]
 	@FindBy(xpath = "//ul/li/em[contains(text(),'Mojarra')]")
@@ -177,7 +166,6 @@ public class Primefaces3PortletTest {
 		url = "http://localhost:8080/web/guest/signin";
 		logger.log(Level.INFO, "browser.navigate().to("+url+")");
 		browser.navigate().to(url);
-		// waitModel(browser);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " before signing in ...");
 		
 		emailField.clear();
@@ -185,10 +173,9 @@ public class Primefaces3PortletTest {
 		passwordField.clear();
 		passwordField.sendKeys("test");
 		signInButton.click();
-		// waitModel(browser);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " after clicking the sign in button and waiting");
 		logger.log(Level.INFO, signedInText.getText());
-		// assertTrue("You are signed in", portletBody.getText().contains("You are signed in"));
+		// assertTrue("You are signed in", signedInText.getText().contains("You are signed in"));
 		
 	}
 	
@@ -230,6 +217,7 @@ public class Primefaces3PortletTest {
 		logger.log(Level.INFO, "submitFilesButton.getTagName() = " + submitFilesButton.getTagName());
 		assertTrue("cancelFilesButton.isDisplayed()", cancelFilesButton.isDisplayed());
 		logger.log(Level.INFO, "cancelFilesButton.getTagName() = " + cancelFilesButton.getTagName());
+		
 		assertTrue("showCommentsLink.isDisplayed()", showCommentsLink.isDisplayed());
 		
 		assertTrue("submitButton.isDisplayed()", submitButton.isDisplayed());
@@ -441,7 +429,7 @@ public class Primefaces3PortletTest {
 		logger.log(Level.INFO, "tags = " + tags);
 		assertTrue("Invalid dateOfBirthField validation message displayed", 
 				dateOfBirthFieldError.getText().contains("Invalid date format"));
-		assertTrue("two child tags", tags == tagsWhileInvalid);
+		assertTrue("tags == tagsWhileInvalid? "+tags+" == "+tagsWhileInvalid+"?", tags == tagsWhileInvalid);
 		
 		// checks with no dateOfBirth
 		dateOfBirthField.clear();
@@ -455,7 +443,7 @@ public class Primefaces3PortletTest {
 		logger.log(Level.INFO, "tags = " + tags);
 		assertTrue("Value is required for dateOfBirthField message displayed", 
 				dateOfBirthFieldError.getText().contains("Value is required"));
-		assertTrue("two child tags", tags == tagsWhileInvalid);
+		assertTrue("tags == tagsWhileInvalid? "+tags+" == "+tagsWhileInvalid+"?", tags == tagsWhileInvalid);
 		
 		// checks a valid dateOfBirth
 		dateOfBirthField.clear();
@@ -467,7 +455,7 @@ public class Primefaces3PortletTest {
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		tags = browser.findElements(By.xpath("//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
-		assertTrue("zero child tags", tags == tagsWhileValid);
+		assertTrue("tags == tagsWhileValid? "+tags+" == "+tagsWhileValid+"?", tags == tagsWhileValid);
 		
 	}
 	
