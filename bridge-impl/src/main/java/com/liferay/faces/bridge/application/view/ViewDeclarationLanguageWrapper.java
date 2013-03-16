@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,11 +15,14 @@ package com.liferay.faces.bridge.application.view;
 
 import java.beans.BeanInfo;
 import java.io.IOException;
+import java.util.List;
 
 import javax.faces.FacesWrapper;
 import javax.faces.application.Resource;
+import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
+import javax.faces.view.AttachedObjectHandler;
 import javax.faces.view.StateManagementStrategy;
 import javax.faces.view.ViewDeclarationLanguage;
 import javax.faces.view.ViewMetadata;
@@ -49,6 +52,17 @@ public abstract class ViewDeclarationLanguageWrapper extends ViewDeclarationLang
 	@Override
 	public UIViewRoot restoreView(FacesContext facesContext, String viewId) {
 		return getWrapped().restoreView(facesContext, viewId);
+	}
+
+	@Override
+	public void retargetAttachedObjects(FacesContext facesContext, UIComponent uiComponent,
+		List<AttachedObjectHandler> handlers) {
+		getWrapped().retargetAttachedObjects(facesContext, uiComponent, handlers);
+	}
+
+	@Override
+	public void retargetMethodExpressions(FacesContext facesContext, UIComponent uiComponent) {
+		getWrapped().retargetMethodExpressions(facesContext, uiComponent);
 	}
 
 	@Override
