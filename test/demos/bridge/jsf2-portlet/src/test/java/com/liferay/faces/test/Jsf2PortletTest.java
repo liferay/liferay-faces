@@ -287,7 +287,7 @@ public class Jsf2PortletTest {
 		datePatternField.clear();
 		datePatternField.sendKeys("MM/dd/yy");
 		preferencesSubmitButton.click();
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value').length() = " + 
 				dateOfBirthField.getAttribute("value").length()
