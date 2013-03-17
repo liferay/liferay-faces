@@ -19,13 +19,13 @@ import javax.portlet.PortletResponse;
 
 
 /**
- * This class provides a compatibility layer that isolates differences between JSF 2.1/2.0 and JSF 2.2.
+ * This class provides a compatibility layer that isolates differences between JSF 2.1 and JSF 2.2.
  *
  * @author  Neil Griffin
  */
-public abstract class ExternalContextCompat22Impl extends ExternalContextCompatImpl {
+public abstract class ExternalContextCompat_2_2_Impl extends ExternalContextCompatImpl {
 
-	public ExternalContextCompat22Impl(PortletContext portletContext, PortletRequest portletRequest,
+	public ExternalContextCompat_2_2_Impl(PortletContext portletContext, PortletRequest portletRequest,
 		PortletResponse portletResponse) {
 		super(portletContext, portletRequest, portletResponse);
 	}
