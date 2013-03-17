@@ -181,7 +181,7 @@ public class Primefaces3PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(1)
+	@InSequence(1000)
 	public void jobApplicantFieldsRender() throws Exception {
 			
 		signIn();
@@ -239,7 +239,7 @@ public class Primefaces3PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(2)
+	@InSequence(2000)
 	public void validateEmail() throws Exception {
 		
 		int tags = 0;
@@ -274,7 +274,7 @@ public class Primefaces3PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(3)
+	@InSequence(3000)
 	public void preferencesAreWorking() throws Exception {
 		
 		// test for both
@@ -338,8 +338,14 @@ public class Primefaces3PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(4)
-	public void resetPreferences() throws Exception {
+	@InSequence(4000)
+	public void reset() throws Exception {
+		
+		// because some test failures throw us into a strange state, 
+		// let's reset preferences and the page we are on
+		logger.log(Level.INFO, "browser.navigate().to("+url+")");
+		browser.navigate().to(url);
+		Thread.sleep(500);
 		menuButton.click();
 		Thread.sleep(500);
 		menuPreferences.click();
@@ -350,11 +356,14 @@ public class Primefaces3PortletTest {
 		logger.log(Level.INFO, "browser.navigate().to("+url+")");
 		browser.navigate().to(url);
 		Thread.sleep(500);
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+		assertTrue("We are on the correct page, which should be, url = " + url, browser.getCurrentUrl().contains(url));
+		
 	}
 	
 	@Test
 	@RunAsClient
-	@InSequence(5)
+	@InSequence(5000)
 	public void allFieldsRequiredUponSubmit() throws Exception {
 		
 		firstNameField.clear();
@@ -389,7 +398,7 @@ public class Primefaces3PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(6)
+	@InSequence(6000)
 	public void cityAndStateAutoPopulate() throws Exception {
 		
 		logger.log(Level.INFO, "before cityField.getAttribute('value') = " + cityField.getAttribute("value"));
@@ -413,7 +422,7 @@ public class Primefaces3PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(7)
+	@InSequence(7000)
 	public void commentsFunctioning() throws Exception {
 		
 		String testing123 = "testing 1, 2, 3";
@@ -451,7 +460,7 @@ public class Primefaces3PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(8)
+	@InSequence(8000)
 	public void dateValidation() throws Exception {
 		
 		int tags = 0;
@@ -518,7 +527,7 @@ public class Primefaces3PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(9)
+	@InSequence(9000)
 	public void submitAndValidate() throws Exception {
 		
 		logger.log(Level.INFO, "clearing fields ...");

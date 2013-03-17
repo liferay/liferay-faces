@@ -179,7 +179,7 @@ public class Jsf2PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(1)
+	@InSequence(1000)
 	public void jobApplicantFieldsRender() throws Exception {
 			
 		signIn();
@@ -235,7 +235,7 @@ public class Jsf2PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(2)
+	@InSequence(2000)
 	public void validateEmail() throws Exception {
 		
 		int tags = 0;
@@ -270,7 +270,7 @@ public class Jsf2PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(3)
+	@InSequence(3000)
 	public void preferencesAreWorking() throws Exception {
 		
 		// test for both
@@ -299,8 +299,7 @@ public class Jsf2PortletTest {
 		preferencesSubmitButton.click();
 		// preferencesSubmitButton takes us back to the job app submission form
 		// so we expect to see date of birth next
-		// we can check it for the reset datePattern
-		// no need for extra navigation
+		// we can check it for the reset datePattern, no need for extra navigation
 		Thread.sleep(1000);
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value').length() = " + 
@@ -318,11 +317,10 @@ public class Jsf2PortletTest {
 		resetButton.click();
 		logger.log(Level.INFO, "resetButton.click() ...");
 		Thread.sleep(500);
-		// reset button sometimes(?) takes us back to the job app submission form
+		// reset button takes us back to the job app submission form when using the jsf2-portlet
 		// so we expect to see date of birth next
-		// we can check it for the reset datePattern
-		// no confirmation of the reset 
-		// no need for extra navigation
+		// we can check then the dateOfBirthField for the reset datePattern
+		// no confirmation of the reset is given in the jsf2-portlet 
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value').length() = " + dateOfBirthField.getAttribute("value").length());
 		
@@ -335,8 +333,14 @@ public class Jsf2PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(4)
-	public void resetPreferences() throws Exception {
+	@InSequence(4000)
+	public void reset() throws Exception {
+		
+		// because some test failures throw us into a strange state, 
+		// let's reset preferences and the page we are on
+		logger.log(Level.INFO, "browser.navigate().to("+url+")");
+		browser.navigate().to(url);
+		Thread.sleep(500);
 		menuButton.click();
 		Thread.sleep(500);
 		menuPreferences.click();
@@ -347,11 +351,14 @@ public class Jsf2PortletTest {
 		logger.log(Level.INFO, "browser.navigate().to("+url+")");
 		browser.navigate().to(url);
 		Thread.sleep(500);
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+		assertTrue("We are on the correct page, which should be, url = " + url, browser.getCurrentUrl().contains(url));
+		
 	}
 	
 	@Test
 	@RunAsClient
-	@InSequence(5)
+	@InSequence(5000)
 	public void allFieldsRequiredUponSubmit() throws Exception {
 		
 		firstNameField.clear();
@@ -386,7 +393,7 @@ public class Jsf2PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(6)
+	@InSequence(6000)
 	public void cityAndStateAutoPopulate() throws Exception {
 		
 		logger.log(Level.INFO, "before cityField.getAttribute('value') = " + cityField.getAttribute("value"));
@@ -410,7 +417,7 @@ public class Jsf2PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(7)
+	@InSequence(7000)
 	public void commentsFunctioning() throws Exception {
 		
 		String testing123 = "testing 1, 2, 3";
@@ -448,7 +455,7 @@ public class Jsf2PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(8)
+	@InSequence(8000)
 	public void dateValidation() throws Exception {
 		
 		int tags = 0;
@@ -515,7 +522,7 @@ public class Jsf2PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(9)
+	@InSequence(9000)
 	public void submitAndValidate() throws Exception {
 		
 		logger.log(Level.INFO, "clearing fields ...");
