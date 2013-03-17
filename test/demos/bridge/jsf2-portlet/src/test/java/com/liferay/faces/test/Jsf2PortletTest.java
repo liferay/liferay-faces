@@ -4,7 +4,6 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.Graphene;
 import org.jboss.arquillian.graphene.enricher.findby.FindBy;
-// import org.jboss.arquillian.graphene.*;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -14,12 +13,17 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.Keys;
+
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import java.io.File;
+import org.apache.commons.io.FileUtils;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 import java.util.logging.Level;
-//import java.net.URL;
-
+// import java.net.URL;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -138,9 +142,9 @@ public class Jsf2PortletTest {
 	// //ul/li/em[contains(text(),'Mojarra 2.1.18')]
 	@FindBy(xpath = "//ul/li/em[contains(text(),'Mojarra')]")
 	private WebElement mojarraVersion;
-	
-	
-	
+	// component
+	// library
+	// version
 	// //ul/li/em[contains(text(),'Liferay Faces Alloy 3.1.2')]
 	@FindBy(xpath = "//ul/li/em[contains(text(),'Liferay Faces Alloy')]")
 	private WebElement alloyVersion;
@@ -186,7 +190,6 @@ public class Jsf2PortletTest {
 		url = "http://localhost:8080/group/bridge-demos/jsf2";
 		logger.log(Level.INFO, "browser.navigate().to("+url+")");
 		browser.navigate().to(url);
-		// waitModel(browser);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
@@ -222,12 +225,12 @@ public class Jsf2PortletTest {
 		logger.log(Level.INFO, "editPreferencesButton.getTagName() = " + editPreferencesButton.getTagName());
 		
 		assertTrue("mojarraVersion.isDisplayed()", mojarraVersion.isDisplayed());
-		
+		// component library version ... maybe liferay facess alloy
 		assertTrue("alloyVersion.isDisplayed()", alloyVersion.isDisplayed());
 		assertTrue("bridgeVersion.isDisplayed()", bridgeVersion.isDisplayed());
 
 		logger.log(Level.INFO, mojarraVersion.getText());
-		
+		// component library version
 		logger.log(Level.INFO, alloyVersion.getText());
 		logger.log(Level.INFO, bridgeVersion.getText());
 		
@@ -253,7 +256,7 @@ public class Jsf2PortletTest {
 		logger.log(Level.INFO, "tags = " + tags);
 		assertTrue("Invalid e-mail address validation message displayed", 
 				emailAddressFieldError.getText().contains("Invalid e-mail address"));
-		assertTrue("one input tag plus one span tag = 2", tags == tagsWhileInvalid);
+		assertTrue("tags == tagsWhileInvalid", tags == tagsWhileInvalid);
 		
 		// checks a valid email address
 		emailAddressField.clear();
@@ -264,7 +267,7 @@ public class Jsf2PortletTest {
 		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
 		tags = browser.findElements(By.xpath("//input[contains(@id,':emailAddress')]/../child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
-		assertTrue("one input tag plus zero span tags = 1", tags == tagsWhileValid);
+		assertTrue("tags == tagsWhileValid", tags == tagsWhileValid);
 		
 	}
 	
@@ -278,15 +281,19 @@ public class Jsf2PortletTest {
 		int dateLengthAfterReset = 10;
 		
 		menuButton.click();
-		waitGui();
+		Thread.sleep(500);
 		menuPreferences.click();
-		waitModel();
+		Thread.sleep(500);
 		logger.log(Level.INFO, "datePatternField.getAttribute('value') = " + datePatternField.getAttribute("value"));
 		logger.log(Level.INFO, "resetButton.isDisplayed() = " + resetButton.isDisplayed());
 		// MM/dd/yyyy
 		datePatternField.clear();
 		datePatternField.sendKeys("MM/dd/yy");
 		preferencesSubmitButton.click();
+		// preferencesSubmitButton takes us back to the job app submission form
+		// so we expect to see date of birth next
+		// we can check it for the reset datePattern
+		// no need for extra navigation
 		Thread.sleep(1000);
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value').length() = " + 
@@ -304,7 +311,7 @@ public class Jsf2PortletTest {
 		resetButton.click();
 		logger.log(Level.INFO, "resetButton.click() ...");
 		Thread.sleep(500);
-		// reset button takes us back to the job app submission form
+		// reset button sometimes(?) takes us back to the job app submission form
 		// so we expect to see date of birth next
 		// we can check it for the reset datePattern
 		// no confirmation of the reset 
@@ -316,6 +323,7 @@ public class Jsf2PortletTest {
 				"date of birth has "+dateLengthAfterReset+" characters after resetting preferences", 
 				dateOfBirthField.getAttribute("value").length() == dateLengthAfterReset
 			);
+		
 	}
 	
 	@Test
@@ -330,10 +338,9 @@ public class Jsf2PortletTest {
 		dateOfBirthField.clear();
 		cityField.clear();
 		postalCodeField.clear();
-		
 		submitButton.click();
-		waitAjax();
 		Thread.sleep(500);
+		
 		logger.log(Level.INFO, "firstNameFieldError.getText() = " + firstNameFieldError.getText());
 		logger.log(Level.INFO, "lastNameFieldError.getText() = " + lastNameFieldError.getText());
 		logger.log(Level.INFO, "emailAddressFieldError.getText() = " + emailAddressFieldError.getText());
@@ -349,12 +356,14 @@ public class Jsf2PortletTest {
 	@RunAsClient
 	@InSequence(5)
 	public void cityAndStateAutoPopulate() throws Exception {
+		
 		logger.log(Level.INFO, "before cityField.getAttribute('value') = " + cityField.getAttribute("value"));
 		logger.log(Level.INFO, "before provinceIdField.getAttribute('value') = " + provinceIdField.getAttribute("value"));
 		logger.log(Level.INFO, "before postalCodeField.getAttribute('value') = " + postalCodeField.getAttribute("value"));
 		assertTrue("cityField is empty", (cityField.getAttribute("value").length() == 0));
 		assertTrue("provinceIdField is empty", (provinceIdField.getAttribute("value").length() == 0));
 		assertTrue("postalCodeField is empty", (postalCodeField.getAttribute("value").length() == 0));
+		
 		postalCodeField.sendKeys("32801");
 		phoneNumberField.click();
 		Thread.sleep(500);
@@ -363,7 +372,8 @@ public class Jsf2PortletTest {
 		logger.log(Level.INFO, "after postalCodeField.getAttribute('value') = " + postalCodeField.getAttribute("value"));
 		assertTrue("cityField contains Orlando", cityField.getAttribute("value").contains("Orlando"));
 		assertTrue("provinceIdField contains 3", provinceIdField.getAttribute("value").contains("3"));
-		assertTrue("postalCodeField contains 32801", postalCodeField.getAttribute("value").contains("32801"));		
+		assertTrue("postalCodeField contains 32801", postalCodeField.getAttribute("value").contains("32801"));
+		
 	}
 	
 	@Test
@@ -385,6 +395,7 @@ public class Jsf2PortletTest {
 		tags = browser.findElements(By.xpath("//a[contains(text(),'Hide Comments')]/../../child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
 		assertTrue("tag for Hide and tag for textarea are showing", tags == tagsWhileShowing);
+		
 		comments.sendKeys(testing123);
 		phoneNumberField.click();
 		Thread.sleep(500);
@@ -398,6 +409,7 @@ public class Jsf2PortletTest {
 		Thread.sleep(500);
 		logger.log(Level.INFO, "after hide and show comments.getAttribute('value') = " + comments.getAttribute("value"));
 		assertTrue("comments are still there after hide and show", testing123.equals(comments.getAttribute("value")));
+		
 	}
 	
 	@Test
@@ -408,8 +420,6 @@ public class Jsf2PortletTest {
 		int tags = 0;
 		int tagsWhileInvalid = 2;
 		int tagsWhileValid = 1;
-		// "Value is required";
-		// "Invalid date format";
 		
 		// checks an invalid dateOfBirth
 		dateOfBirthField.clear();
@@ -421,10 +431,11 @@ public class Jsf2PortletTest {
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthFieldError.isDisplayed() = " + dateOfBirthFieldError.isDisplayed());
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
-		tags = browser.findElements(By.xpath("//input[contains(@id,':dateOfBirth')]/../child::node()")).size();
-		logger.log(Level.INFO, "tags = " + tags);
 		assertTrue("Invalid dateOfBirthField validation message displayed", 
 				dateOfBirthFieldError.getText().contains("Invalid date format"));
+		tags = browser.findElements(By.xpath("//input[contains(@id,':dateOfBirth')]/../child::node()")).size();
+		logger.log(Level.INFO, "tags = " + tags);
+		logger.log(Level.INFO, "asserting: tags == tagsWhileInvalid? "+tags+" == "+tagsWhileInvalid+"? ...");
 		assertTrue("tags == tagsWhileInvalid? "+tags+" == "+tagsWhileInvalid+"?", tags == tagsWhileInvalid);
 		
 		// checks with no dateOfBirth
@@ -435,20 +446,27 @@ public class Jsf2PortletTest {
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthFieldError.isDisplayed() = " + dateOfBirthFieldError.isDisplayed());
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
+		// Should I be this lenient?
+		assertTrue("Value is required for dateOfBirthField message displayed", 
+				dateOfBirthFieldError.getText().contains("Value is required") ||
+				dateOfBirthFieldError.getText().contains("Invalid date format")
+			);
 		tags = browser.findElements(By.xpath("//input[contains(@id,':dateOfBirth')]/../child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
-		assertTrue("Value is required for dateOfBirthField message displayed", 
-				dateOfBirthFieldError.getText().contains("Value is required"));
+		logger.log(Level.INFO, "asserting: tags == tagsWhileInvalid? "+tags+" == "+tagsWhileInvalid+"? ...");
 		assertTrue("tags == tagsWhileInvalid? "+tags+" == "+tagsWhileInvalid+"?", tags == tagsWhileInvalid);
 		
 		// checks a valid dateOfBirth
 		dateOfBirthField.clear();
 		Thread.sleep(500);
+		logger.log(Level.INFO, "Entering a valid dateOfBirth = 01/02/3456 ...");
 		dateOfBirthField.sendKeys("01/02/3456");
 		Thread.sleep(500);
+		logger.log(Level.INFO, "Clicking into the phoneNumberField ...");
 		phoneNumberField.click();
 		Thread.sleep(500);
-		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
+		logger.log(Level.INFO, "Should still contain the valid dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
+		assertTrue("dateOfBirthField is currently showing 01/02/3456 ?", "01/02/3456".equals(dateOfBirthField.getAttribute("value")));
 		tags = browser.findElements(By.xpath("//input[contains(@id,':dateOfBirth')]/../child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
 		assertTrue("tags == tagsWhileValid? "+tags+" == "+tagsWhileValid+"?", tags == tagsWhileValid);
@@ -460,11 +478,17 @@ public class Jsf2PortletTest {
 	@InSequence(8)
 	public void submitAndValidate() throws Exception {
 		
+		logger.log(Level.INFO, "clearing fields ...");
 		dateOfBirthField.clear();
 		emailAddressField.clear();
 		postalCodeField.clear();
+		comments.clear();
 		Thread.sleep(500);
+		logger.log(Level.INFO, "fields were cleared now, but let's see ...");
+		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
+		assertTrue("emailAddressField is empty after clearing and clicking into another field", "".equals(emailAddressField.getAttribute("value")));
 		
+		logger.log(Level.INFO, "entering data ...");
 		firstNameField.sendKeys("David");
 		lastNameField.sendKeys("Samuel");
 		emailAddressField.sendKeys("no_need@just.pray");
@@ -474,6 +498,18 @@ public class Jsf2PortletTest {
 		phoneNumberField.click();
 		Thread.sleep(500);
 		comments.sendKeys("If as one people speaking the same language, they have begun to do this ...");
+		Thread.sleep(500);
+		
+		// asserting correct data is still there
+		assertTrue("firstNameField.getText().equals('David')", firstNameField.getAttribute("value").equals("David"));
+		assertTrue("lastNameField.getText().equals('Samuel')", lastNameField.getAttribute("value").equals("Samuel"));
+		assertTrue("emailAddressField.getText().equals('no_need@just.pray')", emailAddressField.getAttribute("value").equals("no_need@just.pray"));
+		assertTrue("phoneNumberField.getText().equals('(way) too-good')", phoneNumberField.getAttribute("value").equals("(way) too-good"));
+		assertTrue("dateOfBirthField.getText().equals('01/02/3456')", dateOfBirthField.getAttribute("value").equals("01/02/3456"));
+		assertTrue("postalCodeField.getText().equals('32801')", postalCodeField.getAttribute("value").equals("32801"));
+		assertTrue("comments.getText().equals('If as one people speaking the same language, they have begun to do this ...')",
+				comments.getAttribute("value").equals("If as one people speaking the same language, they have begun to do this ..."));
+		
 		submitButton.click();
 		Thread.sleep(500);
 		
