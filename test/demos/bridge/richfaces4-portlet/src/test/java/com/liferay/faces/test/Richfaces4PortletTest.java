@@ -38,7 +38,8 @@ public class Richfaces4PortletTest {
 	
 	// @ArquillianResource
 	// URL portalURL;
-	String url = "http://localhost:8080/web/guest/signin";
+	String signInUrl = "http://localhost:8080/web/guest/signin";
+	String url = "http://localhost:8080/group/bridge-demos/rich4";
 
 	@Drone
 	WebDriver browser;
@@ -161,9 +162,8 @@ public class Richfaces4PortletTest {
 		// Shut its dirty mouth
 		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
 		
-		url = "http://localhost:8080/web/guest/signin";
-		logger.log(Level.INFO, "browser.navigate().to("+url+")");
-		browser.navigate().to(url);
+		logger.log(Level.INFO, "browser.navigate().to("+signInUrl+")");
+		browser.navigate().to(signInUrl);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " before signing in ...");
 		
 		emailField.clear();
@@ -183,7 +183,6 @@ public class Richfaces4PortletTest {
 	public void jobApplicantFieldsRender() throws Exception {
 			
 		signIn();
-		url = "http://localhost:8080/group/bridge-demos/rich4";
 		logger.log(Level.INFO, "browser.navigate().to("+url+")");
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
@@ -278,6 +277,16 @@ public class Richfaces4PortletTest {
 		int dateLengthAfterChange = 8;
 		int dateLengthAfterReset = 10;
 		
+		if (dateOfBirthField.getAttribute("value").equals("")) {
+			// try because it may be read-only (as is the case with richfaces4)
+			try {
+				dateOfBirthField.sendKeys("07/04/1776");
+			} catch (Exception e) {
+				logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+				assertTrue("No exceptions occured when entering a dateOfBirth", false);
+			}
+		}
+		
 		menuButton.click();
 		Thread.sleep(500);
 		menuPreferences.click();
@@ -327,6 +336,22 @@ public class Richfaces4PortletTest {
 	@Test
 	@RunAsClient
 	@InSequence(4)
+	public void resetPreferences() throws Exception {
+		menuButton.click();
+		Thread.sleep(500);
+		menuPreferences.click();
+		Thread.sleep(500);
+		resetButton.click();
+		logger.log(Level.INFO, "resetButton.click() ...");
+		Thread.sleep(500);
+		logger.log(Level.INFO, "browser.navigate().to("+url+")");
+		browser.navigate().to(url);
+		Thread.sleep(500);
+	}
+	
+	@Test
+	@RunAsClient
+	@InSequence(5)
 	public void allFieldsRequiredUponSubmit() throws Exception {
 		
 		firstNameField.clear();
@@ -361,7 +386,7 @@ public class Richfaces4PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(5)
+	@InSequence(6)
 	public void cityAndStateAutoPopulate() throws Exception {
 		
 		logger.log(Level.INFO, "before cityField.getAttribute('value') = " + cityField.getAttribute("value"));
@@ -385,7 +410,7 @@ public class Richfaces4PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(6)
+	@InSequence(7)
 	public void commentsFunctioning() throws Exception {
 		
 		String testing123 = "testing 1, 2, 3";
@@ -423,7 +448,7 @@ public class Richfaces4PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(7)
+	@InSequence(8)
 	public void dateValidation() throws Exception {
 		
 		int tags = 0;
@@ -490,7 +515,7 @@ public class Richfaces4PortletTest {
 	
 	@Test
 	@RunAsClient
-	@InSequence(8)
+	@InSequence(9)
 	public void submitAndValidate() throws Exception {
 		
 		logger.log(Level.INFO, "clearing fields ...");
