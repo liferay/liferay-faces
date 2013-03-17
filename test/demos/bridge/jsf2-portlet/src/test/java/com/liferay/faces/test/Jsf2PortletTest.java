@@ -247,13 +247,13 @@ public class Jsf2PortletTest {
 		phoneNumberField.click();
 		Thread.sleep(500);
 		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
-		logger.log(Level.INFO, "emailAddressFieldError.isDisplayed() = " + emailAddressFieldError.isDisplayed());
-		logger.log(Level.INFO, "emailAddressFieldError.getText() = " + emailAddressFieldError.getText());
 		tags = browser.findElements(By.xpath("//span[contains(text(),'Invalid e-mail address')]")).size();
-		logger.log(Level.INFO, "tags = " + tags);
+		logger.log(Level.INFO, "# of error tags = " + tags);
+		assertTrue("# of error tags == tagsWhileInvalid", tags == tagsWhileInvalid);
 		assertTrue("Invalid e-mail address validation message displayed", 
 				emailAddressFieldError.getText().contains("Invalid e-mail address"));
-		assertTrue("# of error tags == tagsWhileInvalid", tags == tagsWhileInvalid);
+		logger.log(Level.INFO, "emailAddressFieldError.isDisplayed() = " + emailAddressFieldError.isDisplayed());
+		logger.log(Level.INFO, "emailAddressFieldError.getText() = " + emailAddressFieldError.getText());
 		
 		// checks a valid email address
 		emailAddressField.clear();
@@ -361,6 +361,9 @@ public class Jsf2PortletTest {
 	@InSequence(5000)
 	public void allFieldsRequiredUponSubmit() throws Exception {
 		
+		int tagsWhileInvalid = 1;
+		
+		logger.log(Level.INFO, "clearing fields ...");
 		firstNameField.clear();
 		lastNameField.clear();
 		emailAddressField.clear();
@@ -368,8 +371,14 @@ public class Jsf2PortletTest {
 		dateOfBirthField.clear();
 		cityField.clear();
 		postalCodeField.clear();
+		logger.log(Level.INFO, "clicking submit ...");
 		submitButton.click();
 		Thread.sleep(500);
+		
+		logger.log(Level.INFO, "checking for error tags on firstNameField ...");
+		int tags = browser.findElements(By.xpath("//input[contains(@id,':firstName')]/following-sibling::*[1]")).size();
+		logger.log(Level.INFO, "tags = " + tags);
+		assertTrue("# of error tags == tagsWhileInvalid", tags == tagsWhileInvalid);
 		
 		logger.log(Level.INFO, "firstNameFieldError.getText() = " + firstNameFieldError.getText());
 		logger.log(Level.INFO, "lastNameFieldError.getText() = " + lastNameFieldError.getText());
