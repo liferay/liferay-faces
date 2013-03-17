@@ -141,17 +141,13 @@ public class Primefaces3PortletTest {
 	@FindBy(xpath = "//a[contains(text(),'Return to Full Page')]")
 	private WebElement returnLink;
 	
-	// //ul/li/em[contains(text(),'Mojarra 2.1.18')]
-	@FindBy(xpath = "//ul/li/em[contains(text(),'Mojarra')]")
+	@FindBy(xpath = "//*[contains(text(),'Mojarra')]")
 	private WebElement mojarraVersion;
-	// //ul/li/em[contains(text(),'PrimeFaces 3.3')]
-	@FindBy(xpath = "//ul/li/em[contains(text(),'PrimeFaces')]")
+	@FindBy(xpath = "//*[contains(text(),'PrimeFaces ')]")
 	private WebElement primeFacesVersion;
-	// //ul/li/em[contains(text(),'Liferay Faces Alloy 3.1.2')]
-	@FindBy(xpath = "//ul/li/em[contains(text(),'Liferay Faces Alloy')]")
+	@FindBy(xpath = "//*[contains(text(),'Liferay Faces Alloy')]")
 	private WebElement alloyVersion;
-	// //ul/li/em[contains(text(),'Liferay Faces Bridge 3.1.2')]
-	@FindBy(xpath = "//ul/li/em[contains(text(),'Liferay Faces Bridge')]")
+	@FindBy(xpath = "//*[contains(text(),'Liferay Faces Bridge')]")
 	private WebElement bridgeVersion;
 	
 	@Before
@@ -215,6 +211,8 @@ public class Primefaces3PortletTest {
 		assertTrue("postalCodeField.isDisplayed()", postalCodeField.isDisplayed());
 		assertTrue("postalCodeToolTip.isDisplayed()", postalCodeToolTip.isDisplayed());
 		
+		logger.log(Level.INFO, "multiFileUploadButton.getAttribute('id') = " + multiFileUploadButton.getAttribute("id"));
+		logger.log(Level.INFO, "multiFileUploadButton.getAttribute('class') = " + multiFileUploadButton.getAttribute("class"));
 		// assertTrue("multiFileUploadButton.isDisplayed()", multiFileUploadButton.isDisplayed());
 		assertTrue("submitFilesButton.isDisplayed()", submitFilesButton.isDisplayed());
 		logger.log(Level.INFO, "submitFilesButton.getTagName() = " + submitFilesButton.getTagName());
@@ -260,7 +258,7 @@ public class Primefaces3PortletTest {
 		logger.log(Level.INFO, "tags = " + tags);
 		assertTrue("Invalid e-mail address validation message displayed", 
 				emailAddressFieldError.getText().contains("Invalid e-mail address"));
-		assertTrue("tags == tagsWhileInvalid", tags == tagsWhileInvalid);
+		assertTrue("# of error tags == tagsWhileInvalid", tags == tagsWhileInvalid);
 		
 		// checks a valid email address
 		emailAddressField.clear();
@@ -271,7 +269,7 @@ public class Primefaces3PortletTest {
 		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
 		tags = browser.findElements(By.xpath("//input[contains(@id,':emailAddress')]/../child::node()[2]/child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
-		assertTrue("tags == tagsWhileValid", tags == tagsWhileValid);
+		assertTrue("# of error tags == tagsWhileValid", tags == tagsWhileValid);
 		
 	}
 	
@@ -354,6 +352,15 @@ public class Primefaces3PortletTest {
 		logger.log(Level.INFO, "provinceIdFieldError.getText() = " + provinceIdFieldError.getText());
 		logger.log(Level.INFO, "postalCodeFieldError.getText() = " + postalCodeFieldError.getText());
 		
+		assertTrue("firstNameFieldError contains Value is required", firstNameFieldError.getText().contains("Value is required"));
+		assertTrue("lastNameFieldError contains Value is required", lastNameFieldError.getText().contains("Value is required"));
+		assertTrue("emailAddressFieldError contains Value is required", emailAddressFieldError.getText().contains("Value is required"));
+		assertTrue("phoneNumberFieldError contains Value is required", phoneNumberFieldError.getText().contains("Value is required"));
+		assertTrue("dateOfBirthFieldError contains Value is required", dateOfBirthFieldError.getText().contains("Value is required"));
+		assertTrue("cityFieldError contains Value is required", cityFieldError.getText().contains("Value is required"));
+		assertTrue("provinceIdFieldError contains Value is required", provinceIdFieldError.getText().contains("Value is required"));
+		assertTrue("postalCodeFieldError contains Value is required", postalCodeFieldError.getText().contains("Value is required"));
+		
 	}
 	
 	@Test
@@ -392,8 +399,10 @@ public class Primefaces3PortletTest {
 		
 		showCommentsLink.click();
 		Thread.sleep(500);
-		logger.log(Level.INFO, "hideCommentsLink.isDisplayed() = " + hideCommentsLink.isDisplayed());
-		assertTrue("hideCommentsLink is displayed", hideCommentsLink.isDisplayed());
+		
+		int hideCommentsLinks = browser.findElements(By.xpath("//a[contains(text(),'Hide Comments')]")).size();
+		logger.log(Level.INFO, "# of hideCommentsLinks = " + hideCommentsLinks);
+		assertTrue("# of hideCommentsLinks == 1", hideCommentsLinks == 1);
 		logger.log(Level.INFO, "comments.isDisplayed() = " + comments.isDisplayed());
 		assertTrue("comments textarea is displayed", comments.isDisplayed());
 		tags = browser.findElements(By.xpath("//a[contains(text(),'Hide Comments')]/../../child::node()")).size();
@@ -426,7 +435,13 @@ public class Primefaces3PortletTest {
 		int tagsWhileValid = 0;
 		
 		// checks an invalid dateOfBirth
-		dateOfBirthField.clear();
+		try {
+			dateOfBirthField.clear();
+			logger.log(Level.INFO, "No exceptions occured when clearing the dateOfBirthField");
+		} catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			assertTrue("No exceptions occured when clearing the dateOfBirthField", false);
+		}
 		Thread.sleep(500);
 		dateOfBirthField.sendKeys("12/34/5678");
 		Thread.sleep(500);
@@ -486,6 +501,11 @@ public class Primefaces3PortletTest {
 		dateOfBirthField.clear();
 		emailAddressField.clear();
 		postalCodeField.clear();
+		
+		int commentsTextAreas = browser.findElements(By.xpath("//textarea[contains(@id,':comments')]")).size();
+		logger.log(Level.INFO, "# of commentsTextAreas = " + commentsTextAreas);
+		assertTrue("# of commentsTextAreas == 1", commentsTextAreas == 1);
+		
 		comments.clear();
 		Thread.sleep(500);
 		logger.log(Level.INFO, "fields were cleared now, but let's see ...");
