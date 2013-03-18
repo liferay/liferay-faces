@@ -104,19 +104,22 @@ public class Icefaces3CompatPortletTest {
 	private static final String emailAddressFieldXpath = "//input[contains(@id,':emailAddress')]";
 	@FindBy(xpath = emailAddressFieldXpath)
 	private WebElement emailAddressField;
-	@FindBy(xpath = "//input[contains(@id,':emailAddress')]/following-sibling::*[1]/child::node()[1]")
+	private static final String emailAddressFieldErrorXpath = "//input[contains(@id,':emailAddress')]/following-sibling::*[1]/child::node()[1]";
+	@FindBy(xpath = emailAddressFieldErrorXpath)
 	private WebElement emailAddressFieldError;
 	
 	private static final String phoneNumberFieldXpath = "//input[contains(@id,':phoneNumber')]";
 	@FindBy(xpath = phoneNumberFieldXpath)
 	private WebElement phoneNumberField;
-	@FindBy(xpath = "//input[contains(@id,':phoneNumber')]/following-sibling::*[1]")
+	private static final String phoneNumberFieldErrorXpath = "//input[contains(@id,':phoneNumber')]/following-sibling::*[1]";
+	@FindBy(xpath = phoneNumberFieldErrorXpath)
 	private WebElement phoneNumberFieldError;
 	
 	private static final String dateOfBirthFieldXpath = "//input[contains(@id,':dateOfBirth')]";
 	@FindBy(xpath = dateOfBirthFieldXpath)
 	private WebElement dateOfBirthField;
-	@FindBy(xpath = "//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()[1]")
+	private static final String dateOfBirthFieldErrorXpath = "//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()[1]";
+	@FindBy(xpath = dateOfBirthFieldErrorXpath)
 	private WebElement dateOfBirthFieldError;
 	
 	private static final String cityFieldXpath = "//input[contains(@id,':city')]";
@@ -277,23 +280,27 @@ public class Icefaces3CompatPortletTest {
 	public void validateEmail() throws Exception {
 		
 		int tags = 0;
-		int tagsWhileInvalid = 1;
 		int tagsWhileValid = 0;
 		
 		// checks an invalid email address
+		logger.log(Level.INFO, "Entering an invalid email address 'test' ...");
 		emailAddressField.sendKeys("test");
 		phoneNumberField.click();
 		Thread.sleep(500);
 		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
 		tags = browser.findElements(By.xpath("//span[contains(text(),'Invalid e-mail address')]")).size();
 		logger.log(Level.INFO, "# of error tags = " + tags);
-		assertTrue("# of error tags == tagsWhileInvalid", tags == tagsWhileInvalid);
+		assertTrue("There should be an 'Invalid e-mail address' messaged displayed, but "+
+				tags+" error messages are displayed", 
+				tags > tagsWhileValid
+			);
 		assertTrue("Invalid e-mail address validation message displayed", 
 				emailAddressFieldError.getText().contains("Invalid e-mail address"));
 		logger.log(Level.INFO, "emailAddressFieldError.isDisplayed() = " + emailAddressFieldError.isDisplayed());
 		logger.log(Level.INFO, "emailAddressFieldError.getText() = " + emailAddressFieldError.getText());
 		
 		// checks a valid email address
+		logger.log(Level.INFO, "Entering a valid email address 'test@liferay.com' ...");
 		emailAddressField.clear();
 		Thread.sleep(500);
 		emailAddressField.sendKeys("test@liferay.com");
@@ -345,7 +352,9 @@ public class Icefaces3CompatPortletTest {
 			);
 		
 		assertTrue(
-				"date of birth has "+dateLengthAfterChange+" characters after changing preferences to MM/dd/yy", 
+				"dateOfBirthField should have "+dateLengthAfterChange+
+				" characters after changing preferences to MM/dd/yy, but "+
+				dateOfBirthField.getAttribute("value").length()+" != "+dateLengthAfterChange, 
 				dateOfBirthField.getAttribute("value").length() == dateLengthAfterChange
 			);
 		
@@ -456,7 +465,9 @@ public class Icefaces3CompatPortletTest {
 		logger.log(Level.INFO, "after cityField.getAttribute('value') = " + cityField.getAttribute("value"));
 		logger.log(Level.INFO, "after provinceIdField.getAttribute('value') = " + provinceIdField.getAttribute("value"));
 		logger.log(Level.INFO, "after postalCodeField.getAttribute('value') = " + postalCodeField.getAttribute("value"));
-		assertTrue("cityField contains Orlando", cityField.getAttribute("value").contains("Orlando"));
+		assertTrue("cityField should contain 'Orlando' after auto populating from postalCode, but instead contains '"+cityField.getAttribute("value")+"'",
+				cityField.getAttribute("value").contains("Orlando")
+			);
 		assertTrue("provinceIdField contains 3", provinceIdField.getAttribute("value").contains("3"));
 		assertTrue("postalCodeField contains 32801", postalCodeField.getAttribute("value").contains("32801"));
 		
@@ -506,8 +517,8 @@ public class Icefaces3CompatPortletTest {
 	public void dateValidation() throws Exception {
 		
 		int tags = 0;
-		int tagsWhileInvalid = 2;
-		int tagsWhileValid = 1;
+		int tagsWhileValid = 0;
+		String foo = "";
 		
 		// checks an invalid dateOfBirth
 		try {
@@ -518,6 +529,7 @@ public class Icefaces3CompatPortletTest {
 			assertTrue("No exceptions occured when clearing the dateOfBirthField", false);
 		}
 		Thread.sleep(500);
+		logger.log(Level.INFO, "Entering an invalid value for the date of birth ... 12/34/5678 ...");
 		dateOfBirthField.sendKeys("12/34/5678");
 		Thread.sleep(500);
 		submitButton.click();
@@ -527,13 +539,17 @@ public class Icefaces3CompatPortletTest {
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
 		assertTrue("Invalid dateOfBirthField validation message displayed", 
 				dateOfBirthFieldError.getText().contains("Invalid date format"));
-		tags = browser.findElements(By.xpath("//input[contains(@id,':dateOfBirth')]/../child::node()")).size();
+		tags = browser.findElements(By.xpath("//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
-		logger.log(Level.INFO, "asserting: tags == tagsWhileInvalid? "+tags+" == "+tagsWhileInvalid+"? ...");
-		assertTrue("tags == tagsWhileInvalid? "+tags+" == "+tagsWhileInvalid+"?", tags == tagsWhileInvalid);
+		logger.log(Level.INFO, "asserting: tags > tagsWhileValid? "+tags+" > "+tagsWhileValid+"? ...");
+		assertTrue("There should be some kind of error message showing under the dateOfBirthField, "+
+				"but "+tags+" messages are there", 
+				tags > tagsWhileValid
+			);
 		
 		// checks with no dateOfBirth
 		dateOfBirthField.clear();
+		logger.log(Level.INFO, "clearing the dateOfBirthField and then clicking into the phoneNumberField ...");
 		Thread.sleep(500);
 		phoneNumberField.click();
 		Thread.sleep(500);
@@ -541,16 +557,20 @@ public class Icefaces3CompatPortletTest {
 		logger.log(Level.INFO, "dateOfBirthFieldError.isDisplayed() = " + dateOfBirthFieldError.isDisplayed());
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
 		// Should I be this lenient?
-		assertTrue("Value is required for dateOfBirthField message displayed", 
+		assertTrue("dateOfBirthField validation message should be displayed when no date is entered", 
 				dateOfBirthFieldError.getText().contains("Value is required") ||
 				dateOfBirthFieldError.getText().contains("Invalid date format")
 			);
-		tags = browser.findElements(By.xpath("//input[contains(@id,':dateOfBirth')]/../child::node()")).size();
+		tags = browser.findElements(By.xpath("//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
-		logger.log(Level.INFO, "asserting: tags == tagsWhileInvalid? "+tags+" == "+tagsWhileInvalid+"? ...");
-		assertTrue("tags == tagsWhileInvalid? "+tags+" == "+tagsWhileInvalid+"?", tags == tagsWhileInvalid);
+		logger.log(Level.INFO, "asserting: tags > tagsWhileValid? "+tags+" > "+tagsWhileValid+"? ...");
+		assertTrue("There should be some kind of error message showing under the dateOfBirthField, "+
+				"but "+tags+" messages are there", 
+				tags > tagsWhileValid
+			);
 		
 		// checks a valid dateOfBirth
+		foo = "";
 		dateOfBirthField.clear();
 		Thread.sleep(500);
 		logger.log(Level.INFO, "Entering a valid dateOfBirth = 01/02/3456 ...");
@@ -558,12 +578,17 @@ public class Icefaces3CompatPortletTest {
 		Thread.sleep(500);
 		logger.log(Level.INFO, "Clicking into the phoneNumberField ...");
 		phoneNumberField.click();
-		Thread.sleep(500);
-		logger.log(Level.INFO, "Should still contain the valid dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
+		Thread.sleep(1000);
+		logger.log(Level.INFO, "Now the dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		assertTrue("dateOfBirthField is currently showing 01/02/3456 ?", "01/02/3456".equals(dateOfBirthField.getAttribute("value")));
-		tags = browser.findElements(By.xpath("//input[contains(@id,':dateOfBirth')]/../child::node()")).size();
+		// TODO 
+		tags = browser.findElements(By.xpath("//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
-		assertTrue("tags == tagsWhileValid? "+tags+" == "+tagsWhileValid+"?", tags == tagsWhileValid);
+		if (tags > tagsWhileValid) { foo = dateOfBirthFieldError.getText();	}
+		assertTrue("There should be no dateOfBirth validation errors showing when a valid date has been submitted, "+
+				"but '"+foo+"' is now showing there",
+				tags == tagsWhileValid
+			);
 		
 	}
 	
@@ -600,20 +625,43 @@ public class Icefaces3CompatPortletTest {
 		Thread.sleep(500);
 		
 		// asserting correct data is still there
-		assertTrue("firstNameField.getText().equals('David')", firstNameField.getAttribute("value").equals("David"));
-		assertTrue("lastNameField.getText().equals('Samuel')", lastNameField.getAttribute("value").equals("Samuel"));
-		assertTrue("emailAddressField.getText().equals('no_need@just.pray')", emailAddressField.getAttribute("value").equals("no_need@just.pray"));
-		assertTrue("phoneNumberField.getText().equals('(way) too-good')", phoneNumberField.getAttribute("value").equals("(way) too-good"));
-		assertTrue("dateOfBirthField.getText().equals('01/02/3456')", dateOfBirthField.getAttribute("value").equals("01/02/3456"));
-		assertTrue("postalCodeField.getText().equals('32801')", postalCodeField.getAttribute("value").equals("32801"));
-		assertTrue("comments.getText().equals('If as one people speaking the same language, they have begun to do this ...')",
-				comments.getAttribute("value").equals("If as one people speaking the same language, they have begun to do this ..."));
+		assertTrue("asserting that firstNameField.getText().equals('David'), "+
+				"but it is '"+firstNameField.getText()+"'", 
+				firstNameField.getAttribute("value").equals("David")
+			);
+		assertTrue("asserting that lastNameField.getText().equals('Samuel'), "+
+				"but it is '"+lastNameField.getText()+"'", 
+				lastNameField.getAttribute("value").equals("Samuel")
+			);
+		assertTrue("asserting that emailAddressField.getText().equals('no_need@just.pray'), "+
+				"but it is '"+emailAddressField.getText()+"'", 
+				emailAddressField.getAttribute("value").equals("no_need@just.pray")
+			);
+		assertTrue("asserting that phoneNumberField.getText().equals('(way) too-good'), "+
+				"but it is '"+phoneNumberField.getText()+"'", 
+				phoneNumberField.getAttribute("value").equals("(way) too-good")
+			);
+		assertTrue("asserting that dateOfBirthField.getText().equals('01/02/3456'), "+
+				"but it is '"+dateOfBirthField.getText()+"'", 
+				dateOfBirthField.getAttribute("value").equals("01/02/3456")
+			);
+		assertTrue("asserting that postalCodeField.getText().equals('32801'), "+
+				"but it is '"+postalCodeField.getText()+"'", 
+				postalCodeField.getAttribute("value").equals("32801")
+			);
+		assertTrue("asserting that comments.getText().equals('If as one people speaking the same language, they have begun to do this ...'), "+
+				"but it is '"+comments.getText()+"'", 
+				comments.getAttribute("value").equals("If as one people speaking the same language, they have begun to do this ...")
+			);
 		
 		submitButton.click();
 		Thread.sleep(500);
 		
 		logger.log(Level.INFO, "formTag.getText() = " + formTag.getText());
-		assertTrue("Dear David", formTag.getText().contains("Dear David"));
+		assertTrue("The text 'Dear David' should be showing in the portlet after submitting valid data, "+
+				"but it is not", 
+				formTag.getText().contains("Dear David")
+			);
 		
 	}
 
