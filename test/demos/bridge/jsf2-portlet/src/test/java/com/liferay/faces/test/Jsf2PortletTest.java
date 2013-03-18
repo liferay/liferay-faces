@@ -357,7 +357,7 @@ public class Jsf2PortletTest {
 		Thread.sleep(500);
 		resetButton.click();
 		logger.log(Level.INFO, "resetButton.click() ...");
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		// reset button takes us back to the job app submission form when using the jsf2-portlet
 		// so we expect to see date of birth next
 		// we can check then the dateOfBirthField for the reset datePattern

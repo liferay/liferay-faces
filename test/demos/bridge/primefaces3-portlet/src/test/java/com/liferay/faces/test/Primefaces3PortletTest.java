@@ -362,7 +362,7 @@ public class Primefaces3PortletTest {
 		Thread.sleep(500);
 		resetButton.click();
 		logger.log(Level.INFO, "resetButton.click() ...");
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		// Yikes ... we need some more consistency here
 		logger.log(Level.INFO, "browser.navigate().to("+url+")");
 		browser.navigate().to(url);
