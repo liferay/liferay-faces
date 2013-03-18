@@ -45,108 +45,148 @@ public class Richfaces4PortletTest {
 	WebDriver browser;
 	
 	// elements for logging in
-	@FindBy(xpath = "//input[contains(@id,':handle')]")
+	private static final String emailFieldXpath = "//input[contains(@id,':handle')]";
+	@FindBy(xpath = emailFieldXpath)
 	private WebElement emailField;
-	@FindBy(xpath = "//input[contains(@id,':password')]")
+	private static final String passwordFieldXpath = "//input[contains(@id,':password')]";
+	@FindBy(xpath = passwordFieldXpath)
 	private WebElement passwordField;
-	@FindBy(xpath = "//input[@type='submit' and @value='Sign In']")
+	private static final String signInButtonXpath = "//input[@type='submit' and @value='Sign In']";
+	@FindBy(xpath = signInButtonXpath)
 	private WebElement signInButton;
-	@FindBy(xpath = "//div[contains(text(),'You are signed in as')]")
+	private static final String signedInTextXpath = "//div[contains(text(),'You are signed in as')]";
+	@FindBy(xpath = signedInTextXpath)
 	private WebElement signedInText;
 	
 	// form tag found after submitting
-	@FindBy(xpath = "//form[@method='post']")
+	private static final String formTagXpath = "//form[@method='post']";
+	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
 	
 	// portlet topper and menu elements
-	@FindBy(xpath = "//header[@class='portlet-topper']/h1/span")
+	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
+	@FindBy(xpath = portletDisplayNameXpath)
 	private WebElement portletDisplayName;
-	@FindBy(xpath = "//a[contains(@id,'menuButton')]")
+	private static final String menuButtonXpath = "//a[contains(@id,'menuButton')]";
+	@FindBy(xpath = menuButtonXpath)
 	private WebElement menuButton;
-	@FindBy(xpath = "//a[contains(@id,'menu_preferences')]")
+	private static final String menuPreferencesXpath = "//a[contains(@id,'menu_preferences')]";
+	@FindBy(xpath = menuPreferencesXpath)
 	private WebElement menuPreferences;
 	
 	// preferences elements
-	@FindBy(xpath = "//input[contains(@id,':datePattern')]")
+	private static final String datePatternFieldXpath = "//input[contains(@id,':datePattern')]";
+	@FindBy(xpath = datePatternFieldXpath)
 	private WebElement datePatternField;
-	@FindBy(xpath = "//input[@type='submit' and @value='Reset']")
+	private static final String resetButtonXpath = "//input[@type='submit' and @value='Reset']";
+	@FindBy(xpath = resetButtonXpath)
 	private WebElement resetButton;
 	
 	// elements for Job Applicants
-	@FindBy(xpath = "//img[contains(@src,'liferay-logo.png')]")
+	private static final String logoXpath = "//img[contains(@src,'liferay-logo.png')]";
+	@FindBy(xpath = logoXpath)
 	private WebElement logo;
 	
-	@FindBy(xpath = "//input[contains(@id,':firstName')]")
+	private static final String firstNameFieldXpath = "//input[contains(@id,':firstName')]";
+	@FindBy(xpath = firstNameFieldXpath)
 	private WebElement firstNameField;
-	@FindBy(xpath = "//input[contains(@id,':firstName')]/following-sibling::*[1]")
+	private static final String firstNameFieldErrorXpath = "//input[contains(@id,':firstName')]/following-sibling::*[1]";
+	@FindBy(xpath = firstNameFieldErrorXpath)
 	private WebElement firstNameFieldError;
 	
-	@FindBy(xpath = "//input[contains(@id,':lastName')]")
+	private static final String lastNameFieldXpath = "//input[contains(@id,':lastName')]";
+	@FindBy(xpath = lastNameFieldXpath)
 	private WebElement lastNameField;
-	@FindBy(xpath = "//input[contains(@id,':lastName')]/following-sibling::*[1]")
+	private static final String lastNameFieldErrorXpath = "//input[contains(@id,':lastName')]/following-sibling::*[1]";
+	@FindBy(xpath = lastNameFieldErrorXpath)
 	private WebElement lastNameFieldError;
 	
-	@FindBy(xpath = "//input[contains(@id,':emailAddress')]")
+	private static final String emailAddressFieldXpath = "//input[contains(@id,':emailAddress')]";
+	@FindBy(xpath = emailAddressFieldXpath)
 	private WebElement emailAddressField;
 	@FindBy(xpath = "//input[contains(@id,':emailAddress')]/following-sibling::*[1]/child::node()[1]/child::node()[1]")
 	private WebElement emailAddressFieldError;
 	
-	@FindBy(xpath = "//input[contains(@id,':phoneNumber')]")
+	private static final String phoneNumberFieldXpath = "//input[contains(@id,':phoneNumber')]";
+	@FindBy(xpath = phoneNumberFieldXpath)
 	private WebElement phoneNumberField;
-	@FindBy(xpath = "//input[contains(@id,':phoneNumber')]/following-sibling::*[1]")
+	private static final String phoneNumberFieldErrorXpath = "//input[contains(@id,':phoneNumber')]/following-sibling::*[1]";
+	@FindBy(xpath = phoneNumberFieldErrorXpath)
 	private WebElement phoneNumberFieldError;
 	
-	@FindBy(xpath = "//input[contains(@id,':dateOfBirth')]")
+	private static final String dateOfBirthFieldXpath = "//input[contains(@id,':dateOfBirth')]";
+	@FindBy(xpath = dateOfBirthFieldXpath)
 	private WebElement dateOfBirthField;
-	@FindBy(xpath = "//input[contains(@id,':dateOfBirth')]/following-sibling::*[1]")
+	private static final String dateOfBirthFieldErrorXpath = "//input[contains(@id,':dateOfBirth')]/following-sibling::*[1]";
+	@FindBy(xpath = dateOfBirthFieldErrorXpath)
 	private WebElement dateOfBirthFieldError;
 	
-	@FindBy(xpath = "//input[contains(@id,':city')]")
+	private static final String cityFieldXpath = "//input[contains(@id,':city')]";
+	@FindBy(xpath = cityFieldXpath)
 	private WebElement cityField;
-	@FindBy(xpath = "//input[contains(@id,':city')]/following-sibling::*[1]")
+	private static final String cityFieldErrorXpath = "//input[contains(@id,':city')]/following-sibling::*[1]";
+	@FindBy(xpath = cityFieldErrorXpath)
 	private WebElement cityFieldError;
 	
-	@FindBy(xpath = "//select[contains(@id,':provinceId')]")
+	private static final String provinceIdFieldXpath = "//select[contains(@id,':provinceId')]";
+	@FindBy(xpath = provinceIdFieldXpath)
 	private WebElement provinceIdField;
-	@FindBy(xpath = "//select[contains(@id,':provinceId')]/following-sibling::*[1]")
+	private static final String provinceIdFieldErrorXpath = "//select[contains(@id,':provinceId')]/following-sibling::*[1]";
+	@FindBy(xpath = provinceIdFieldErrorXpath)
 	private WebElement provinceIdFieldError;
 	
-	@FindBy(xpath = "//input[contains(@id,':postalCode')]")
+	private static final String postalCodeFieldXpath = "//input[contains(@id,':postalCode')]";
+	@FindBy(xpath = postalCodeFieldXpath)
 	private WebElement postalCodeField;
-	@FindBy(xpath = "//input[contains(@id,':postalCode')]/following-sibling::*[1]/following-sibling::*[1]")
+	private static final String postalCodeFieldErrorXpath = "//input[contains(@id,':postalCode')]/following-sibling::*[1]/following-sibling::*[1]";
+	@FindBy(xpath = postalCodeFieldErrorXpath)
 	private WebElement postalCodeFieldError;
 	
-	@FindBy(xpath = "//img[contains(@title,'Type any of these ZIP codes')]")
+	private static final String postalCodeToolTipXpath = "//img[contains(@title,'Type any of these ZIP codes')]";
+	@FindBy(xpath = postalCodeToolTipXpath)
 	private WebElement postalCodeToolTip;
 	
-	@FindBy(xpath = "//input[@type='file']")
+	private static final String fileUploadButtonXpath = "//input[@type='file']";
+	@FindBy(xpath = fileUploadButtonXpath)
 	private WebElement fileUploadButton;
-	@FindBy(xpath = "//span[contains(text(),'Upload')]")
+	private static final String submitFilesButtonXpath = "//span[contains(text(),'Upload')]";
+	@FindBy(xpath = submitFilesButtonXpath)
 	private WebElement submitFilesButton;
 	
-	@FindBy(xpath = "//a[contains(text(),'Show Comments')]")
+	private static final String showCommentsLinkXpath = "//a[contains(text(),'Show Comments')]";
+	@FindBy(xpath = showCommentsLinkXpath)
 	private WebElement showCommentsLink;
-	@FindBy(xpath = "//a[contains(text(),'Hide Comments')]")
+	private static final String hideCommentsLinkXpath = "//a[contains(text(),'Hide Comments')]";
+	@FindBy(xpath = hideCommentsLinkXpath)
 	private WebElement hideCommentsLink;
-	@FindBy(xpath = "//textarea[contains(@id,':comments')]")
+	private static final String commentsXpath = "//textarea[contains(@id,':comments')]";
+	@FindBy(xpath = commentsXpath)
 	private WebElement comments;
 	
-	@FindBy(xpath = "//input[@type='submit' and @value='Submit']")
+	private static final String submitButtonXpath = "//input[@type='submit' and @value='Submit']";
+	@FindBy(xpath = submitButtonXpath)
 	private WebElement submitButton;
-	@FindBy(xpath = "//input[@type='submit' and @value='Submit']")
+	private static final String preferencesSubmitButtonXpath = "//input[@type='submit' and @value='Submit']";
+	@FindBy(xpath = preferencesSubmitButtonXpath)
 	private WebElement preferencesSubmitButton;
-	@FindBy(xpath = "//input[@type='submit' and @value='Edit Preferences']")
+	private static final String editPreferencesButtonXpath = "//input[@type='submit' and @value='Edit Preferences']";
+	@FindBy(xpath = editPreferencesButtonXpath)
 	private WebElement editPreferencesButton;
-	@FindBy(xpath = "//a[contains(text(),'Return to Full Page')]")
+	private static final String returnLinkXpath = "//a[contains(text(),'Return to Full Page')]";
+	@FindBy(xpath = returnLinkXpath)
 	private WebElement returnLink;
 	
-	@FindBy(xpath = "//*[contains(text(),'Mojarra')]")
+	private static final String mojarraVersionXpath = "//*[contains(text(),'Mojarra')]";
+	@FindBy(xpath = mojarraVersionXpath)
 	private WebElement mojarraVersion;
-	@FindBy(xpath = "//*[contains(text(),'RichFaces ')]")
+	private static final String richFacesVersionXpath = "//*[contains(text(),'RichFaces ')]";
+	@FindBy(xpath = richFacesVersionXpath)
 	private WebElement richFacesVersion;
-	@FindBy(xpath = "//*[contains(text(),'Liferay Faces Alloy')]")
+	private static final String alloyVersionXpath = "//*[contains(text(),'Liferay Faces Alloy')]";
+	@FindBy(xpath = alloyVersionXpath)
 	private WebElement alloyVersion;
-	@FindBy(xpath = "//*[contains(text(),'Liferay Faces Bridge')]")
+	private static final String bridgeVersionXpath = "//*[contains(text(),'Liferay Faces Bridge')]";
+	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
 	
 	@Before
@@ -247,13 +287,13 @@ public class Richfaces4PortletTest {
 		phoneNumberField.click();
 		Thread.sleep(500);
 		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
-		logger.log(Level.INFO, "emailAddressFieldError.isDisplayed() = " + emailAddressFieldError.isDisplayed());
-		logger.log(Level.INFO, "emailAddressFieldError.getText() = " + emailAddressFieldError.getText());
-		tags = browser.findElements(By.xpath("//input[contains(@id,':emailAddress')]/following-sibling::*[1]/child::node()")).size();
-		logger.log(Level.INFO, "tags = " + tags);
+		tags = browser.findElements(By.xpath("//span[contains(text(),'Invalid e-mail address')]")).size();
+		logger.log(Level.INFO, "# of error tags = " + tags);
+		assertTrue("# of error tags == tagsWhileInvalid", tags == tagsWhileInvalid);
 		assertTrue("Invalid e-mail address validation message displayed", 
 				emailAddressFieldError.getText().contains("Invalid e-mail address"));
-		assertTrue("# of error tags == tagsWhileInvalid", tags == tagsWhileInvalid);
+		logger.log(Level.INFO, "emailAddressFieldError.isDisplayed() = " + emailAddressFieldError.isDisplayed());
+		logger.log(Level.INFO, "emailAddressFieldError.getText() = " + emailAddressFieldError.getText());
 		
 		// checks a valid email address
 		emailAddressField.clear();
@@ -262,7 +302,7 @@ public class Richfaces4PortletTest {
 		phoneNumberField.click();
 		Thread.sleep(500);
 		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
-		tags = browser.findElements(By.xpath("//input[contains(@id,':emailAddress')]/following-sibling::*[1]/child::node()")).size();
+		tags = browser.findElements(By.xpath("//span[contains(text(),'Invalid e-mail address')]")).size();
 		logger.log(Level.INFO, "tags = " + tags);
 		assertTrue("# of error tags == tagsWhileValid", tags == tagsWhileValid);
 		
@@ -361,6 +401,9 @@ public class Richfaces4PortletTest {
 	@InSequence(5000)
 	public void allFieldsRequiredUponSubmit() throws Exception {
 		
+		int tagsWhileInvalid = 1;
+		
+		logger.log(Level.INFO, "clearing fields ...");
 		firstNameField.clear();
 		lastNameField.clear();
 		emailAddressField.clear();
@@ -368,8 +411,14 @@ public class Richfaces4PortletTest {
 		// dateOfBirthField.clear();
 		cityField.clear();
 		postalCodeField.clear();
+		logger.log(Level.INFO, "clicking submit ...");
 		submitButton.click();
 		Thread.sleep(500);
+		
+		logger.log(Level.INFO, "checking for error tags on firstNameField ...");
+		int tags = browser.findElements(By.xpath(firstNameFieldErrorXpath)).size();
+		logger.log(Level.INFO, "tags = " + tags);
+		assertTrue("# of error tags == tagsWhileInvalid", tags == tagsWhileInvalid);
 		
 		logger.log(Level.INFO, "firstNameFieldError.getText() = " + firstNameFieldError.getText());
 		logger.log(Level.INFO, "lastNameFieldError.getText() = " + lastNameFieldError.getText());
