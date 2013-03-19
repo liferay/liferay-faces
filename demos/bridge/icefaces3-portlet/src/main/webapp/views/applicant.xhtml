@@ -2,8 +2,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:example-cc="http://java.sun.com/jsf/composite/example-cc"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:ace="http://www.icefaces.org/icefaces/components"
-	xmlns:icecore="http://www.icefaces.org/icefaces/core">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:ace="http://www.icefaces.org/icefaces/components">
 
 	<aui:layout id="l1">
 		<example-cc:clipboard label="#{i18n['job-application']}" />
@@ -11,7 +10,6 @@
 		<example-cc:divider />
 		<aui:column id="c1">
 			<h:form id="f1">
-				<icecore:singleSubmit />
 				<h:messages globalOnly="true" layout="table" />
 				<aui:fieldset id="fs1">
 					<aui:column id="c1a">
