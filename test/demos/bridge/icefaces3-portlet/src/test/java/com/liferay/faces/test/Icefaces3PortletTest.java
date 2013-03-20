@@ -263,7 +263,7 @@ public class Icefaces3PortletTest {
 		// logger.log(Level.INFO, "editPreferencesButton.getTagName() = " + editPreferencesButton.getTagName());
 		
 		assertTrue("mojarraVersion.isDisplayed()", mojarraVersion.isDisplayed());
-		assertTrue("alloyVersion.isDisplayed()", iceFacesVersion.isDisplayed());
+		assertTrue("iceFacesVersion.isDisplayed()", iceFacesVersion.isDisplayed());
 		assertTrue("alloyVersion.isDisplayed()", alloyVersion.isDisplayed());
 		assertTrue("bridgeVersion.isDisplayed()", bridgeVersion.isDisplayed());
 
