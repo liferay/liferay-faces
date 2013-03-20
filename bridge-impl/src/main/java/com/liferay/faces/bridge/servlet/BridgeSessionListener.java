@@ -87,7 +87,8 @@ public class BridgeSessionListener extends BridgeSessionListenerCompat implement
 			}
 
 			if (mojarraInjectionProvider == null) {
-				logger.warn("Unable to determine Mojarra InjectionProvider. For more info, see http://issues.liferay.com/browse/FACES-1511");
+				logger.warn("Unable to determine Mojarra InjectionProvider. " +
+					"For more info, see http://issues.liferay.com/browse/FACES-1511");
 			}
 		}
 	}
@@ -99,7 +100,8 @@ public class BridgeSessionListener extends BridgeSessionListenerCompat implement
 	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
 
 		// Determine which JSF implementation is being used (Mojarra/MyFaces).
-		Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
+		ProductMap productMap = ProductMap.getInstance();
+		Product jsf = productMap.get(ProductConstants.JSF);
 		boolean mojarraAbleToCleanup = true;
 
 		if (jsf.getTitle().equals(ProductConstants.MOJARRA) && (jsf.getMajorVersion() == 2) &&
@@ -107,8 +109,26 @@ public class BridgeSessionListener extends BridgeSessionListenerCompat implement
 
 			if (jsf.getRevisionVersion() < 18) {
 				mojarraAbleToCleanup = false;
-				logger.warn(
-					"Unable to cleanup ViewScoped managed-beans upon session expiration. Please upgrade to Mojarra 2.1.18 or greater.");
+
+				boolean logWarning = true;
+				Product iceFaces = productMap.get(ProductConstants.ICEFACES);
+
+				if (iceFaces.isDetected()) {
+
+					if ((iceFaces.getMajorVersion() == 2) ||
+							((iceFaces.getMajorVersion() == 3) && (iceFaces.getMinorVersion() <= 2))) {
+
+						// Versions of ICEfaces prior to 3.3 can only go as high as Mojarra 2.1.6 so don't bother to
+						// log the warning.
+						logWarning = false;
+					}
+				}
+
+				if (logWarning) {
+					logger.warn("Unable to cleanup ViewScoped managed-beans upon session expiration. " +
+						"Please upgrade to Mojarra 2.1.18 or newer. " +
+						"For more info, see: http://issues.liferay.com/browse/FACES-1470");
+				}
 			}
 		}
 
