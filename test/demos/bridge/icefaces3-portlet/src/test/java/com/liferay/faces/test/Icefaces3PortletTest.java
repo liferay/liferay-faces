@@ -14,9 +14,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.Keys;
-
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.interactions.Actions;
+
 import java.io.File;
 import org.apache.commons.io.FileUtils;
 
@@ -27,6 +28,7 @@ import java.util.logging.Level;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.jboss.arquillian.graphene.Graphene.waitGui;
 import static org.jboss.arquillian.graphene.Graphene.waitAjax;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
@@ -232,7 +234,7 @@ public class Icefaces3PortletTest {
 		
 		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
 		assertTrue("menuButton.isDisplayed()", menuButton.isDisplayed());
-		assertTrue("menuPreferences is NOT displayed()", !menuPreferences.isDisplayed());
+		assertFalse("menuPreferences is NOT displayed()", menuPreferences.isDisplayed());
 		
 		// logger.log(Level.INFO, "browser.getPageSource() = " + browser.getPageSource());
 		
@@ -273,6 +275,67 @@ public class Icefaces3PortletTest {
 		logger.log(Level.INFO, bridgeVersion.getText());
 		
 	}
+	
+	@Test
+	@RunAsClient
+	@InSequence(1500)
+	public void dataEntry() throws Exception {
+		
+		logger.log(Level.INFO, "clicking into the firstNameField ...");
+		firstNameField.click();
+		Thread.sleep(50);
+		logger.log(Level.INFO, "tabbing into the next field ...");
+		firstNameField.sendKeys(Keys.TAB);
+		Thread.sleep(50);
+		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
+		logger.log(Level.INFO, "isThere(firstNameFieldErrorXpath) = " + isThere(firstNameFieldErrorXpath));
+		if (isThere(firstNameFieldErrorXpath)) { // houston we have a problem
+			logger.log(Level.INFO, "firstNameFieldError.isDisplayed() = " + firstNameFieldError.isDisplayed());
+			assertFalse("firstNameFieldError should not be displayed after simply tabbing out of the empty field, having never entered any data.  "+
+					"But we see '"+firstNameFieldError.getText() +"'",
+					firstNameFieldError.isDisplayed()
+				);
+		}
+		
+		logger.log(Level.INFO, "Shift tabbing back into the firstNameField ..."); 
+		(new Actions(browser)).keyDown(Keys.SHIFT).sendKeys(Keys.TAB).keyDown(Keys.SHIFT).perform();
+		Thread.sleep(50);
+		logger.log(Level.INFO, "isThere(firstNameFieldErrorXpath) = " + isThere(firstNameFieldErrorXpath));
+		
+		logger.log(Level.INFO, "entering 'asdf' into the firstNameField and then tabbing out of it...");
+		firstNameField.sendKeys("asdf");
+		firstNameField.sendKeys(Keys.TAB);
+		Thread.sleep(50);
+		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
+		logger.log(Level.INFO, "isThere(firstNameFieldErrorXpath) = " + isThere(firstNameFieldErrorXpath));
+		assertTrue("The data 'asdf' should be in the firstNameField after tabbing out of it", "asdf".equals(firstNameField.getAttribute("value")));
+		
+		logger.log(Level.INFO, "Shift tabbing back into the firstNameField ..."); 
+		(new Actions(browser)).keyDown(Keys.SHIFT).sendKeys(Keys.TAB).keyDown(Keys.SHIFT).perform();
+		Thread.sleep(50);
+		logger.log(Level.INFO, "clearing the firstNameField using the BACKSPACE key, and then tabbing out of the firstNameField ...");
+		firstNameField.sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(50);
+		firstNameField.sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(50);
+		firstNameField.sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(50);
+		firstNameField.sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(50);
+		firstNameField.sendKeys(Keys.TAB);
+		Thread.sleep(50);
+		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
+		assertTrue("The data 'asdf' should no longer be in the firstNameField after clearing it out with BACK_SPACE and then tabbing out.  "+
+				"But we see '"+firstNameField.getAttribute("value") +"'",
+				"".equals(firstNameField.getAttribute("value"))
+			);
+		logger.log(Level.INFO, "isThere(firstNameFieldErrorXpath) = " + isThere(firstNameFieldErrorXpath));
+		assertTrue("The firstNameFieldError should at least be in the DOM somewhere by this point, but it is not there", isThere(firstNameFieldErrorXpath));
+		logger.log(Level.INFO, "firstNameFieldError.getText() = " + firstNameFieldError.getText());
+		assertTrue("The firstNameFieldError should say 'Value is required'", firstNameFieldError.getText().contains("Value is required"));
+		
+	}
+
 	
 	@Test
 	@RunAsClient
@@ -662,6 +725,20 @@ public class Icefaces3PortletTest {
 				formTag.getText().contains("Dear David")
 			);
 		
+	}
+	
+	public boolean isThere(String xpath) {
+		boolean isThere = false;
+		int count = 0;
+		count = browser.findElements(By.xpath(xpath)).size();
+		if (count == 0) { isThere = false; }
+		if (count > 0) { isThere = true; }
+		if (count > 1) {
+			logger.log(Level.WARNING, "The method 'isThere(xpath)' found "+count+" matches using xpath = " + xpath + 
+					" ... the word 'is' implies singluar, or 1, not " + count
+				);
+		}
+		return isThere;
 	}
 
 }
