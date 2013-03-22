@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,7 +16,6 @@ package com.liferay.faces.bridge.context.url;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -153,7 +152,7 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 			}
 
 			// Keep track of all the parameters that are appended to the return value.
-			Set<String> processedParameterNames = new HashSet<String>(parameterMap.size());
+			Map<String, Integer> parameterOccurrenceMap = new HashMap<String, Integer>(parameterMap.size());
 
 			// The TCK expects query parameters to appear in exactly the same order as they do in the query-string of
 			// the original URL. For this reason, need to iterate over the parameters found in the original
@@ -195,8 +194,16 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 
 						buf.append(name);
 						buf.append(StringPool.EQUAL);
-						buf.append(values[0]);
-						processedParameterNames.add(name);
+
+						Integer parameterOccurrences = parameterOccurrenceMap.get(name);
+						if (parameterOccurrences == null) {
+							parameterOccurrences = new Integer(0);
+						}
+						
+						String value = values[parameterOccurrences.intValue()];
+						buf.append(value);
+						parameterOccurrences = new Integer(parameterOccurrences.intValue() + 1);
+						parameterOccurrenceMap.put(name, parameterOccurrences);
 					}
 
 					// Otherwise, log an error.
@@ -219,7 +226,7 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 
 				String name = mapEntry.getKey();
 
-				if (!processedParameterNames.contains(name)) {
+				if (parameterOccurrenceMap.get(name) == null) {
 					String[] values = mapEntry.getValue();
 
 					if ((values != null) && (values.length > 0)) {

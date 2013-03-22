@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 package com.liferay.faces.bridge.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,6 @@ public class URLUtil {
 
 	public static Map<String, String[]> parseParameterMapValuesArray(String url) {
 		Map<String, String[]> parameterMapValuesArray = new LinkedHashMap<String, String[]>();
-
 		if (url != null) {
 			int pos = url.indexOf("?");
 
@@ -53,15 +53,34 @@ public class URLUtil {
 
 						if (nameValueArray != null) {
 
+							String name = nameValueArray[0];
+							String[] existingValues = parameterMapValuesArray.get(name);
+
 							if (nameValueArray.length == 1) {
-								String name = nameValueArray[0];
-								String value = StringPool.BLANK;
-								parameterMapValuesArray.put(name, new String[] { value });
+								String[] newValues = null;
+
+								if (existingValues == null) {
+									newValues = new String[] { StringPool.BLANK };
+								}
+								else {
+									newValues = Arrays.copyOf(existingValues, existingValues.length + 1);
+									newValues[existingValues.length] = StringPool.BLANK;
+								}
+
+								parameterMapValuesArray.put(name, newValues);
 							}
 							else if (nameValueArray.length == 2) {
-								String name = nameValueArray[0];
-								String value = nameValueArray[1];
-								parameterMapValuesArray.put(name, new String[] { value });
+								String[] newValues = null;
+
+								if (existingValues == null) {
+									newValues = new String[] { nameValueArray[1] };
+								}
+								else {
+									newValues = Arrays.copyOf(existingValues, existingValues.length + 1);
+									newValues[existingValues.length] = nameValueArray[1];
+								}
+
+								parameterMapValuesArray.put(name, newValues);
 							}
 							else {
 								logger.error("Invalid name=value pair=[{0}] in URL=[{1}]", nameValueArray, url);
