@@ -34,7 +34,7 @@ import static org.jboss.arquillian.graphene.Graphene.waitAjax;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 @RunWith(Arquillian.class)
-public class Icefaces3CompatPortletTest {
+	public class Icefaces3CompatPortletTest {
 	
 	private final static Logger logger = Logger.getLogger(Icefaces3CompatPortletTest.class.getName());
 	
@@ -184,6 +184,10 @@ public class Icefaces3CompatPortletTest {
 	private static final String bridgeVersionXpath = "//*[contains(text(),'Liferay Faces Bridge')]";
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
+	
+	// xpath for specific tests
+	private static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()";
+	int dateValidationXpathModifier = 0;
 	
 	@Before
 	public void beforeEachTest() {
@@ -606,7 +610,7 @@ public class Icefaces3CompatPortletTest {
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
 		assertTrue("Invalid dateOfBirthField validation message displayed", 
 				dateOfBirthFieldError.getText().contains("Invalid date format"));
-		tags = browser.findElements(By.xpath("//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()")).size();
+		tags = browser.findElements(By.xpath(dateValidationXpath)).size()-dateValidationXpathModifier;
 		logger.log(Level.INFO, "tags = " + tags);
 		logger.log(Level.INFO, "asserting: tags > tagsWhileValid? "+tags+" > "+tagsWhileValid+"? ...");
 		assertTrue("There should be some kind of error message showing under the dateOfBirthField, "+
@@ -628,7 +632,7 @@ public class Icefaces3CompatPortletTest {
 				dateOfBirthFieldError.getText().contains("Value is required") ||
 				dateOfBirthFieldError.getText().contains("Invalid date format")
 			);
-		tags = browser.findElements(By.xpath("//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()")).size();
+		tags = browser.findElements(By.xpath(dateValidationXpath)).size()-dateValidationXpathModifier;
 		logger.log(Level.INFO, "tags = " + tags);
 		logger.log(Level.INFO, "asserting: tags > tagsWhileValid? "+tags+" > "+tagsWhileValid+"? ...");
 		assertTrue("There should be some kind of error message showing under the dateOfBirthField, "+
@@ -648,7 +652,7 @@ public class Icefaces3CompatPortletTest {
 		Thread.sleep(1000);
 		logger.log(Level.INFO, "Now the dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		assertTrue("dateOfBirthField is currently showing 01/02/3456 ?", "01/02/3456".equals(dateOfBirthField.getAttribute("value")));
-		tags = browser.findElements(By.xpath("//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()")).size();
+		tags = browser.findElements(By.xpath(dateValidationXpath)).size()-dateValidationXpathModifier;
 		logger.log(Level.INFO, "tags = " + tags);
 		if (tags > tagsWhileValid) { foo = dateOfBirthFieldError.getText();	}
 		assertTrue("There should be no dateOfBirth validation errors showing when a valid date has been submitted, "+
