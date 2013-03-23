@@ -7,7 +7,7 @@
 		<version>3.2.2-ga3-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>faces-1478-portlet</artifactId>
+	<artifactId>FACES-1478-portlet</artifactId>
 	<packaging>war</packaging>
 	<name>FACES-1478</name>
 
