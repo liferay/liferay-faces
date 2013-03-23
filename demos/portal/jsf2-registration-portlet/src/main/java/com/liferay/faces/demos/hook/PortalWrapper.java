@@ -31,6 +31,7 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
+import javax.portlet.PortletURL;
 import javax.portlet.PreferencesValidator;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -359,6 +360,18 @@ public abstract class PortalWrapper implements Portal {
 
 	public List<Portlet> getControlPanelPortlets(String category, ThemeDisplay themeDisplay) throws SystemException {
 		return getWrapped().getControlPanelPortlets(category, themeDisplay);
+	}
+
+	@Override
+	public PortletURL getControlPanelPortletURL(HttpServletRequest request, String portletId, long referrerPlid,
+		String lifecycle) {
+		return getWrapped().getControlPanelPortletURL(request, portletId, referrerPlid, lifecycle);
+	}
+
+	@Override
+	public PortletURL getControlPanelPortletURL(PortletRequest portletRequest, String portletId, long referrerPlid,
+		String lifecycle) {
+		return getWrapped().getControlPanelPortletURL(portletRequest, portletId, referrerPlid, lifecycle);
 	}
 
 	public String getCreateAccountURL(HttpServletRequest request, ThemeDisplay themeDisplay) throws Exception {
@@ -775,6 +788,7 @@ public abstract class PortalWrapper implements Portal {
 		getWrapped().setPageTitle(title, request);
 	}
 
+	@SuppressWarnings("deprecation")
 	public long getParentGroupId(long scopeGroupId) throws PortalException, SystemException {
 		return getWrapped().getParentGroupId(scopeGroupId);
 	}
