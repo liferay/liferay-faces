@@ -1,0 +1,26 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<h:head />
+	<h:body>
+		<h:form>
+			<h:outputLink value="http://issues.liferay.com/browse/FACES-1478">
+				<h:outputText value="http://issues.liferay.com/browse/FACES-1478" />
+			</h:outputLink>
+			<hr />
+			<h:outputText value="The value of the following URL:" />
+			<br />
+			<h:outputText value="#{testBean.renderUrl}" />
+			<br />
+			<h:outputLink value="#{testBean.renderUrl}">
+				<h:outputText value="should be the same as the href attribute of this link" />
+			</h:outputLink>
+			<br />
+			<h:outputText value="Specifically, there should be two testParam URL parameters:" />
+			<br />
+			<h:outputText value="1) The first occurrence should be testParam=foo" />
+			<br />
+			<h:outputText value="2) The second occurrence should be testParam=bar" />
+		</h:form>
+	</h:body>
+</f:view>
+
