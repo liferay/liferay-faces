@@ -2,30 +2,34 @@
 
 use strict;
 
-my %in = (
-   Icefaces3CompatPortletTest => "./icefaces3-compat-portlet/src/test/java/com/liferay/faces/test/Icefaces3Compat.java",
-   Icefaces3PortletTest => "./icefaces3-portlet/src/test/java/com/liferay/faces/test/Icefaces3.java",
-   Jsf2JspPortletTest => "./jsf2-jsp-portlet/src/test/java/com/liferay/faces/test/Jsf2Jsp.java",
-   Jsf2PortletTest => "./jsf2-portlet/src/test/java/com/liferay/faces/test/Jsf2.java",
-   Primefaces3PortletTest => "./primefaces3-portlet/src/test/java/com/liferay/faces/test/Primefaces3.java",
-   Richfaces4PortletTest => "./richfaces4-portlet/src/test/java/com/liferay/faces/test/Richfaces4.java",
-);
-
+# primitives
 my $template = "./job-application-portlet/src/test/java/com/liferay/faces/test/JobPortletTest.java";
-
-my @class = keys %in;
-my %xpaths = ();
-my $foo;
+my $dateValidationXpathModifier;
 my $variable;
-my @path;
+my $javaFile;
 my $xpath;
 my $dir;
-my $javaFile;
 my $url;
-my $dateValidationXpathModifier;
+my $foo;
+
+# hashes
+my %in = (
+   Jsf2PortletTest => "./jsf2-portlet/src/test/java/com/liferay/faces/test/Jsf2.java",
+   Jsf2JspPortletTest => "./jsf2-jsp-portlet/src/test/java/com/liferay/faces/test/Jsf2Jsp.java",
+   Icefaces3PortletTest => "./icefaces3-portlet/src/test/java/com/liferay/faces/test/Icefaces3.java",
+   Richfaces4PortletTest => "./richfaces4-portlet/src/test/java/com/liferay/faces/test/Richfaces4.java",
+   Primefaces3PortletTest => "./primefaces3-portlet/src/test/java/com/liferay/faces/test/Primefaces3.java",
+   Icefaces3CompatPortletTest => "./icefaces3-compat-portlet/src/test/java/com/liferay/faces/test/Icefaces3Compat.java",
+);
+my %variables = ();
+my %xpaths = ();
 my %out = ();
 
-my %variables = ();
+# lists
+my @class = keys %in;
+my @path;
+
+# parse the Xpath variable names in from the template .java file
 open(TEMPLATE, $template) or die "cannot open $template: $!\n";
 while (<TEMPLATE>) {
    chomp;
@@ -38,17 +42,23 @@ while (<TEMPLATE>) {
 }
 close TEMPLATE;
 
+# iterate through the test classes
 foreach my $class (@class) {
+
+   # get the output file name
    print "class = $class\n";
    $javaFile = "${class}.java";
 
+   # get the output directory name
    $_ = $in{$class};
    s/\w+\.java//;
    $dir = $_;
 
+   # get the full path to the output file
    $out{$class} = $dir . $javaFile;
-#  print "$dir $javaFile\n";
+   # print "$dir $javaFile\n";
 
+   # parse the Xpaths in that are specific to the component library being tested
    print "$in{$class}\n";
    open(IN, $in{$class}) or die "cannot open $in{$class}: $!\n";
    while (<IN>) {
@@ -68,15 +78,15 @@ foreach my $class (@class) {
    }
    close IN;
 
+   # write the output file, using the TEMPLATE file
    open(TEMPLATE, $template) or die "cannot open $template: $!\n";
-   open(OUT, ">$out{$class}") or die "cannot open $out{$class}: $!\n";
+   open(OUT, ">$out{$class}") or die "cannot open $out{$class} for writing: $!\n";
    while (<TEMPLATE>) {
       chomp;
       if (/public class/) {
          print "$_\n";
-         print OUT "	public class $class \{\n";
+         print OUT "public class $class \{\n";
       } elsif (/private final static Logger/) {
-         print "	private final static Logger logger = Logger.getLogger(${class}.class.getName());\n";
          print OUT "	private final static Logger logger = Logger.getLogger(${class}.class.getName());\n";
       } elsif (/String url =/) {
          print "$url\n";
@@ -85,7 +95,6 @@ foreach my $class (@class) {
          ($foo,$foo,$foo,$foo,$variable,$foo,@path) = split;
          print OUT "	private static final String $variable = $xpaths{$variable}\n";
       } elsif (/int dateValidationXpathModifier/) {
-         print "$dateValidationXpathModifier\n";
          print OUT "$dateValidationXpathModifier\n";
       } else {
          print OUT "$_\n";
