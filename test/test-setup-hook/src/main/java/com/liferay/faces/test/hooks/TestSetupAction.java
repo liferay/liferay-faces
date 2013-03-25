@@ -196,6 +196,7 @@ public class TestSetupAction extends TestSetupCompatAction {
 		setupBridgeDemosSite(companyId, userId);
 		setupPortalDemosSite(companyId, userId);
 		setupBridgeTCKSite(companyId, userId);
+		setupGuestSite(companyId, userId);
 	}
 
 	protected void setupUsers(long companyId, long userId) throws Exception {
