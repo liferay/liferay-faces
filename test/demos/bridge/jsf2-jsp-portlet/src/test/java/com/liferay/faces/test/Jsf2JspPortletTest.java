@@ -34,7 +34,7 @@ import static org.jboss.arquillian.graphene.Graphene.waitAjax;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 @RunWith(Arquillian.class)
-	public class Jsf2JspPortletTest {
+public class Jsf2JspPortletTest {
 	
 	private final static Logger logger = Logger.getLogger(Jsf2JspPortletTest.class.getName());
 	

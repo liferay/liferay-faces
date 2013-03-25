@@ -34,7 +34,7 @@ import static org.jboss.arquillian.graphene.Graphene.waitAjax;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 @RunWith(Arquillian.class)
-	public class Icefaces3PortletTest {
+public class Icefaces3PortletTest {
 	
 	private final static Logger logger = Logger.getLogger(Icefaces3PortletTest.class.getName());
 	

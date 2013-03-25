@@ -34,7 +34,7 @@ import static org.jboss.arquillian.graphene.Graphene.waitAjax;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 @RunWith(Arquillian.class)
-	public class Primefaces3PortletTest {
+public class Primefaces3PortletTest {
 	
 	private final static Logger logger = Logger.getLogger(Primefaces3PortletTest.class.getName());
 	
