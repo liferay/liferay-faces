@@ -58,14 +58,6 @@
 &lt;/context-param&gt;
 				</programlisting>
 			</para>
-			<para>Also, if the editor is &quot;inline&quot; and you are using a Servlet 2.5 container such as Tomcat 6,
-				then it is necessary to add the following markup to the portlet's WEB-INF/web.xml deployment descriptor:
-				<programlisting>
-&lt;listener&gt;
-    &lt;listener-class&gt;com.liferay.faces.portal.listener.StartupListener&lt;/listener-class&gt;
-&lt;/listener&gt;
-				</programlisting>
-			</para>
 			<para>If using ICEfaces, then the &quot;inline&quot; version of liferay-ui:input-editor will expose an
 				inefficiency in the Direct2DOM<superscript>TM</superscript> (DOM-diff) algorithm. Typing a single
 				character in the rich text area will cause ICEfaces to detect a DOM-diff, causing the entire
