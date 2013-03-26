@@ -3,11 +3,17 @@
 use strict;
 
 # primitives
+my $issueFile = "faces-issues";
 my $template = "./job-application-portlet/src/test/java/com/liferay/faces/test/JobPortletTest.java";
 my $dateValidationXpathModifier;
 my $variable;
 my $javaFile;
+my($issue, $affected, $test, $method, $assertion);
+my $annotation;
+my $testClass;
 my $xpath;
+my $lineNumber = 0;
+my $line;
 my $dir;
 my $url;
 my $foo;
@@ -23,22 +29,57 @@ my %in = (
 );
 my %variables = ();
 my %xpaths = ();
+my %annotations = ();
+my %methods = ();
 my %out = ();
 
 # lists
 my @class = keys %in;
 my @path;
+my @bar;
+
+# parse the issues from the issues file
+if ( -f "$issueFile" ) {
+   open(ISSUES, $issueFile) or die "cannot open $issueFile: $!\n";
+   while (<ISSUES>) {
+      chomp;
+      next unless /^FACES/;
+      ($issue, $affected, @bar) = split;
+      $_ = $affected;
+      /(\w+)\(/; $method = $1;
+      /\.(\w+)\):/; $testClass= $1;
+      $methods{$testClass . $method} = $issue;
+   }
+   close ISSUES;
+} else {
+   print "no issuesFile ... \n";
+}
 
 # parse the Xpath variable names in from the template .java file
 open(TEMPLATE, $template) or die "cannot open $template: $!\n";
 while (<TEMPLATE>) {
+   $lineNumber += 1;
    chomp;
-   /private..*Xpath/ && do {
+   if (/private..*Xpath/) {
       ($foo,$foo,$foo,$foo,$variable,$foo,@path) = split;
       $xpath = join " ", @path;
       $variables{$variable} = 1;
       # print "$variable\n";
-   };
+   }
+   if (/\@Test/) {
+      $annotation = $lineNumber;
+   }
+   if (/public void \w+\(\) throws Exception/) {
+      # public void jobApplicantRenderViewMode() throws Exception
+      ($foo,$foo,$method,@bar) = split;
+      $_ = $method;
+      s/\(\)//;
+      $method = $_;
+      # print "method = $method\n";
+      if (defined $annotation) {
+         $annotations{$annotation} = $method;
+      }
+   }
 }
 close TEMPLATE;
 
@@ -63,25 +104,27 @@ foreach my $class (@class) {
    open(IN, $in{$class}) or die "cannot open $in{$class}: $!\n";
    while (<IN>) {
       chomp;
-      /String url =/ && do {
+      if(/String url =/) {
          $url = $_;
-      };
-      /private..*Xpath/ && do {
+      }
+      if (/private..*Xpath/) {
          ($foo,$foo,$foo,$foo,$variable,$foo,@path) = split;
          $xpath = join " ", @path;
          $xpaths{$variable} = $xpath;
          # print "$variable $xpath\n";
-      };
-      /int dateValidationXpathModifier/ && do {
+      }
+      if (/int dateValidationXpathModifier/) {
          $dateValidationXpathModifier = $_;
-      };
+      }
    }
    close IN;
 
    # write the output file, using the TEMPLATE file
    open(TEMPLATE, $template) or die "cannot open $template: $!\n";
    open(OUT, ">$out{$class}") or die "cannot open $out{$class} for writing: $!\n";
+   $lineNumber = 0;
    while (<TEMPLATE>) {
+      ++$lineNumber;
       chomp;
       if (/public class/) {
          print "$_\n";
@@ -96,6 +139,15 @@ foreach my $class (@class) {
          print OUT "	private static final String $variable = $xpaths{$variable}\n";
       } elsif (/int dateValidationXpathModifier/) {
          print OUT "$dateValidationXpathModifier\n";
+      } elsif (defined $annotations{$lineNumber}) {
+         if (defined $methods{$class . $annotations{$lineNumber}}) {
+            $issue = $methods{$class . $annotations{$lineNumber}};
+            $method = $annotations{$lineNumber};
+            print OUT "// $issue covers an issue tested by ${method}.  Please refer to $issue for clarification.\n";
+            print OUT "// $_\n";
+         } else {
+            print OUT "$_\n";
+         }
       } else {
          print OUT "$_\n";
       }
