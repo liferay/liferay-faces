@@ -2,8 +2,8 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.liferay.faces.demos</groupId>
-		<artifactId>liferay-faces-bridge-demos</artifactId>
+		<groupId>com.liferay.faces.issues</groupId>
+		<artifactId>liferay-faces-bridge-issues</artifactId>
 		<version>3.0.2-ga3-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
@@ -12,6 +12,10 @@
 	<name>FACES-1478</name>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.liferay.portal</groupId>
+			<artifactId>portal-service</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>javax.portlet</groupId>
 			<artifactId>portlet-api</artifactId>
