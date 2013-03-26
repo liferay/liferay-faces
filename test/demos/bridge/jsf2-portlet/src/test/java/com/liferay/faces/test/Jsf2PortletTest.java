@@ -220,7 +220,7 @@ public class Jsf2PortletTest {
 	@Test
 	@RunAsClient
 	@InSequence(1000)
-	public void jobApplicantFieldsRender() throws Exception {
+	public void jobApplicantRenderViewMode() throws Exception {
 			
 		signIn();
 		logger.log(Level.INFO, "browser.navigate().to("+url+")");
@@ -278,7 +278,7 @@ public class Jsf2PortletTest {
 		Thread.sleep(50);
 		logger.log(Level.INFO, "tabbing into the next field ...");
 		firstNameField.sendKeys(Keys.TAB);
-		Thread.sleep(50);
+		Thread.sleep(500);
 		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
 		logger.log(Level.INFO, "isThere(firstNameFieldErrorXpath) = " + isThere(firstNameFieldErrorXpath));
 		if (isThere(firstNameFieldErrorXpath)) { // houston we have a problem
@@ -371,7 +371,7 @@ public class Jsf2PortletTest {
 	@Test
 	@RunAsClient
 	@InSequence(3000)
-	public void preferencesAreWorking() throws Exception {
+	public void preferencesAndEditMode() throws Exception {
 		
 		// test for both
 		int dateLengthAfterChange = 8;
