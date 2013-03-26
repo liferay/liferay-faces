@@ -27,14 +27,13 @@ import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
- * This listener is required when using LiferayFaces in a Servet 2.5 container such as Tomcat 6. It is not required when
- * using LiferayFaces in a Servlet 3.0+ container like Tomcat 7. It provides the ability to use the
- * liferay-ui:input-editor in a JSF portlet.
+ * This listener provides the ability to use the liferay-ui:input-editor in a JSF portlet.
  *
  * @author  Neil Griffin
  */
 public class StartupListener implements ServletContextListener {
 
+	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(StartupListener.class);
 
 	public void contextDestroyed(ServletContextEvent servletContextEvent) {
