@@ -746,6 +746,12 @@ public class Richfaces4PortletTest {
 		
 		int commentsTextAreas = browser.findElements(By.xpath("//textarea[contains(@id,':comments')]")).size();
 		logger.log(Level.INFO, "# of commentsTextAreas = " + commentsTextAreas);
+		if (commentsTextAreas == 0) { // if comments were not previously exercised, then we may need to show the comments text area.
+			showCommentsLink.click();
+			Thread.sleep(500);
+			commentsTextAreas = browser.findElements(By.xpath("//textarea[contains(@id,':comments')]")).size();
+			logger.log(Level.INFO, "# of commentsTextAreas = " + commentsTextAreas);
+		}
 		assertTrue("# of commentsTextAreas == 1", commentsTextAreas == 1);
 		
 		comments.clear();
