@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:liferay-ui="http://liferay.com/faces/ui">
+<h:head />
+<h:body>
+	<h:form id="f1">
+		<h:outputText value="This is view2.xhtml" />
+		<br />
+		<h:commandButton action="/views/view1.xhtml" value="Click me to navigate to view1.xhtml via Ajax">
+			<f:ajax execute="@form" />
+		</h:commandButton>
+		<h:commandButton action="/views/view1.xhtml" value="Click me to navigate to view1.xhtml via non-Ajax (full postback)" />
+	</h:form>
+</h:body>
+</html>
