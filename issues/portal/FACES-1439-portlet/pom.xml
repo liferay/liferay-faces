@@ -2,23 +2,28 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.liferay.faces.issues</groupId>
-		<artifactId>liferay-faces-bridge-issues</artifactId>
+		<groupId>com.liferay.faces.demos</groupId>
+		<artifactId>liferay-faces-bridge-demos</artifactId>
 		<version>3.1.2-ga3-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>FACES-1478-portlet</artifactId>
+	<artifactId>FACES-1439-portlet</artifactId>
 	<packaging>war</packaging>
-	<name>FACES-1478</name>
+	<name>FACES-1439</name>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.liferay.portal</groupId>
+			<artifactId>portal-service</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>javax.portlet</groupId>
 			<artifactId>portlet-api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.seam</groupId>
-			<artifactId>jboss-el</artifactId>
+			<groupId>com.liferay.faces</groupId>
+			<artifactId>liferay-faces-alloy</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.faces</groupId>
@@ -27,7 +32,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.faces</groupId>
-			<artifactId>liferay-faces-alloy</artifactId>
+			<artifactId>liferay-faces-portal</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
