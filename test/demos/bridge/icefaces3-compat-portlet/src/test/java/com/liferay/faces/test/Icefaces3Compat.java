@@ -19,12 +19,14 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
+
 import org.apache.commons.io.FileUtils;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 // import java.net.URL;
+
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -156,6 +158,16 @@ public class Icefaces3Compat {
 	private static final String commentsXpath = "//textarea[contains(@id,':comments')]";
 	@FindBy(xpath = commentsXpath)
 	private WebElement comments;
+	
+	private static final String fileUploadChooserXpath = "//input[@type='file' and contains(@id,':fileEntryComp')]";
+	@FindBy(xpath = fileUploadChooserXpath)
+	private WebElement fileUploadChooser;
+	private static final String submitFileXpath = "//input[@type='submit' and @value='Add Attachment']";
+	@FindBy(xpath = submitFileXpath)
+	private WebElement submitFile;
+	private static final String uploadedFileXpath = "//tr[contains(@class,'portlet-section-body results-row')]/td[2]";
+	@FindBy(xpath = uploadedFileXpath)
+	private WebElement uploadedFile;
 	
 	private static final String submitButtonXpath = "//input[@type='submit' and @value='Submit']";
 	@FindBy(xpath = submitButtonXpath)

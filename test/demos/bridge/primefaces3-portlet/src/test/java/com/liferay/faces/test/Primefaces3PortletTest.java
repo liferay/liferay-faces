@@ -159,6 +159,16 @@ public class Primefaces3PortletTest {
 	@FindBy(xpath = commentsXpath)
 	private WebElement comments;
 	
+	private static final String fileUploadChooserXpath = "//input[@type='file' and @multiple='multiple']";
+	@FindBy(xpath = fileUploadChooserXpath)
+	private WebElement fileUploadChooser;
+	private static final String submitFileXpath = "//span[contains(text(),'Upload')]";
+	@FindBy(xpath = submitFileXpath)
+	private WebElement submitFile;
+	private static final String uploadedFileXpath = "//tr[@class='ui-widget-content ui-datatable-even']/td[2]";
+	@FindBy(xpath = uploadedFileXpath)
+	private WebElement uploadedFile;
+	
 	private static final String submitButtonXpath = "//span[contains(text(),'Submit')]/..";
 	@FindBy(xpath = submitButtonXpath)
 	private WebElement submitButton;
@@ -251,6 +261,11 @@ public class Primefaces3PortletTest {
 		assertTrue("postalCodeToolTip.isDisplayed()", postalCodeToolTip.isDisplayed());
 		
 		assertTrue("showCommentsLink.isDisplayed()", showCommentsLink.isDisplayed());
+		
+		if (isThere(fileUploadChooserXpath)) {
+			logger.log(Level.INFO, "fileUploadChooser.isDisplayed() = " + fileUploadChooser.isDisplayed());
+			logger.log(Level.INFO, "submitFile.isDisplayed() = " + submitFile.isDisplayed());
+		}
 		
 		assertTrue("submitButton.isDisplayed()", submitButton.isDisplayed());
 		logger.log(Level.INFO, "submitButton.getTagName() = " + submitButton.getTagName());
@@ -660,6 +675,57 @@ public class Primefaces3PortletTest {
 				tags == tagsWhileValid
 			);
 		
+	}
+	
+	@Test
+	@RunAsClient
+	@InSequence(8500)
+	public void fileUpload() throws Exception {
+		
+		boolean uploaded = false;
+		
+		if (isThere(fileUploadChooserXpath)) {
+			logger.log(Level.INFO, "isThere(fileUploadChooserXpath) = " + isThere(fileUploadChooserXpath));
+		} else {
+			logger.log(Level.INFO, "clicking the Add Attachment button ...");
+			browser.findElement(By.xpath("//input[@type='submit' and @value='Add Attachment']")).click();
+			Thread.sleep(500);
+		}
+		logger.log(Level.INFO, "entering in /tmp/kitten.jpg for fileUploadChooser ...");
+		fileUploadChooser.sendKeys("/tmp/kitten.jpg");
+		
+		Thread.sleep(50);
+		logger.log(Level.INFO, "submitting the uploaded file ...");
+		submitFile.click();
+		if (isThere(uploadedFileXpath)) {
+			logger.log(Level.INFO, "uploadedFile.getText() = " + uploadedFile.getText() + " was there immediately");
+			uploaded = true;
+		} else {
+			Thread.sleep(1000);
+			if (isThere(uploadedFileXpath)) {
+				logger.log(Level.INFO, "uploadedFile.getText() = " + uploadedFile.getText() + " was there after 1 second");
+				uploaded = true;
+			} else {
+				Thread.sleep(1000);
+				if (isThere(uploadedFileXpath)) {
+					logger.log(Level.INFO, "uploadedFile.getText() = " + uploadedFile.getText() + " was there after 2 seconds");
+					uploaded = true;
+				} else {
+					Thread.sleep(1000);
+					if (isThere(uploadedFileXpath)) {
+						logger.log(Level.INFO, "uploadedFile.getText() = " + uploadedFile.getText() + " was there after 3 seconds");
+						uploaded = true;
+					} else {
+						logger.log(Level.INFO, "uploadedFile was NOT there after 3 seconds");
+					}
+				}
+			}
+		}
+		if (uploaded) {
+			assertTrue("uploadedFile.getText().contains('kitten') after 3 seconds", uploadedFile.getText().contains("kitten"));
+		} else {
+			assertTrue("file should have been uploaded, but was not ...", uploaded);
+		}
 	}
 	
 	@Test

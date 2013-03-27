@@ -19,12 +19,14 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
+
 import org.apache.commons.io.FileUtils;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 // import java.net.URL;
+
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -156,6 +158,16 @@ public class Primefaces3 {
 	private static final String commentsXpath = "//textarea[contains(@id,':comments')]";
 	@FindBy(xpath = commentsXpath)
 	private WebElement comments;
+	
+	private static final String fileUploadChooserXpath = "//input[@type='file' and @multiple='multiple']";
+	@FindBy(xpath = fileUploadChooserXpath)
+	private WebElement fileUploadChooser;
+	private static final String submitFileXpath = "//span[contains(text(),'Upload')]";
+	@FindBy(xpath = submitFileXpath)
+	private WebElement submitFile;
+	private static final String uploadedFileXpath = "//tr[@class='ui-widget-content ui-datatable-even']/td[2]";
+	@FindBy(xpath = uploadedFileXpath)
+	private WebElement uploadedFile;
 	
 	private static final String submitButtonXpath = "//span[contains(text(),'Submit')]/..";
 	@FindBy(xpath = submitButtonXpath)
