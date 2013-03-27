@@ -687,12 +687,13 @@ public class Richfaces4PortletTest {
 		if (isThere(fileUploadChooserXpath)) {
 			logger.log(Level.INFO, "isThere(fileUploadChooserXpath) = " + isThere(fileUploadChooserXpath));
 		} else {
+			// As of the time of this comment, only the jsf2-jsp-portlet did not render a fileUploadChooser on the front view 
 			logger.log(Level.INFO, "clicking the Add Attachment button ...");
 			browser.findElement(By.xpath("//input[@type='submit' and @value='Add Attachment']")).click();
 			Thread.sleep(500);
 		}
-		logger.log(Level.INFO, "entering in /tmp/kitten.jpg for fileUploadChooser ...");
-		fileUploadChooser.sendKeys("/tmp/kitten.jpg");
+		logger.log(Level.INFO, "entering in /tmp/kitten.png for fileUploadChooser ...");
+		fileUploadChooser.sendKeys("/tmp/kitten.png");
 		
 		Thread.sleep(50);
 		logger.log(Level.INFO, "submitting the uploaded file ...");
