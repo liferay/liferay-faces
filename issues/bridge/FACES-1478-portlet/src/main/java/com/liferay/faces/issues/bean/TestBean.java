@@ -15,8 +15,6 @@ package com.liferay.faces.issues.bean;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.portlet.MimeResponse;
@@ -26,8 +24,6 @@ import javax.portlet.PortletURL;
 /**
  * @author  Neil Griffin
  */
-@ManagedBean
-@RequestScoped
 public class TestBean implements Serializable {
 
 	// serialVersionUID
