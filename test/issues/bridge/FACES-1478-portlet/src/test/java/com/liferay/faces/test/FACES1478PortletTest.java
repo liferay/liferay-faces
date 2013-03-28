@@ -85,9 +85,9 @@ public class FACES1478PortletTest {
 		assertTrue("secondLink.isDisplayed()", secondLink.isDisplayed());
 		
 		int firstParameter = secondLink.getAttribute("href").indexOf("testParam=foo");
-		logger.log(Level.INFO, "firstParameter = " + firstParameter);
+		logger.log(Level.INFO, "The firstParameter was found at position = " + firstParameter);
 		int secondParameter = secondLink.getAttribute("href").indexOf("testParam=bar");
-		logger.log(Level.INFO, "secondParameter = " + secondParameter);
+		logger.log(Level.INFO, "The secondParameter was found at position = " + secondParameter);
 		
 		assertTrue("firstParameter is in the url", firstParameter > -1);
 		assertTrue("secondParameter is in the url", secondParameter > -1);
