@@ -392,16 +392,6 @@ public class JobPortletTest {
 		int dateLengthAfterChange = 8;
 		int dateLengthAfterReset = 10;
 		
-		if (dateOfBirthField.getAttribute("value").equals("")) {
-			// try because it may be read-only (as is the case with richfaces4)
-			try {
-				dateOfBirthField.sendKeys("07/04/1776");
-			} catch (Exception e) {
-				logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
-				assertTrue("No exceptions occured when entering a dateOfBirth", false);
-			}
-		}
-		
 		menuButton.click();
 		Thread.sleep(500);
 		menuPreferences.click();
