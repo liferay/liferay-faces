@@ -47,8 +47,8 @@
 							<ace:dateTimeEntry id="dateOfBirth" renderAsPopup="true" required="true" requiredIndicator="*"
 								value="#{applicantModelBean.dateOfBirth}">
 								<f:convertDateTime pattern="#{portletPreferencesValues['datePattern'][0]}" />
-								<ace:ajax event="dateTextChange" execute="@this" render="dateOfBirthField" />
 								<ace:ajax event="dateSelect" execute="@this" render="dateOfBirthField" />
+								<ace:ajax event="dateTextChange" execute="@this" render="dateOfBirthField" />
 							</ace:dateTimeEntry>
 							<h:message for="dateOfBirth" />
 						</aui:field>
