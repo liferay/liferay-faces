@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:liferay-ui="http://liferay.com/faces/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head />
+	<h:body>
+		<icecore:config messagePersistence="false" />
+		<h:outputLink value="http://issues.liferay.com/browse/FACES-1427">
+			<h:outputText value="http://issues.liferay.com/browse/FACES-1427" />
+		</h:outputLink>
+		<hr />
+		<h:panelGroup id="feedback">
+			<h:messages globalOnly="true" layout="table" />
+		</h:panelGroup>
+		<p>Instructions for testing the BBCODE functionality:</p>
+		<ol>
+			<li>Upload a file by choosing a file with the ace:fileEntry control and click on the Add Attachment button.</li>
+			<li>Verify that the file name appears in the list of attachments just above the ace:fileEntry control.</li>
+			<li>Verify that the FIRST editor is rendered and that the initial value of the text is:<br />comments1-initial-value</li>
+			<li>Verify that the SECOND editor is rendered and that the initial value of the text is:<br />comments2-initial-value</li>
+			<li>Click on the submit button.</li>
+			<li>Verify that the submitted value for FIRST editor is:<br />comments1-initial-value</li>
+			<li>Verify that the submitted value for SECOND editor is:<br />comments2-initial-value</li>
+			<li>Change the word "initial" to "subsequent" in the FIRST editor and click on the bold button in order to make the word <b>subsequent</b> bold.</li>
+			<li>Change the word "initial" to "subsequent" in the SECOND editor and click on the bold button in order to make the word <b>subsequent</b> bold.</li>
+			<li>Click on the submit button.</li>
+			<li>Verify that the submitted value for FIRST editor is:<br />comments1-[b]subsequent[/b]-value</li>
+			<li>Verify that the submitted value for SECOND editor is:<br />comments1-[b]subsequent[/b]-value</li>
+		</ol>
+		<h:form id="f1">
+			<h:dataTable rowClasses="portlet-section-body results-row,portlet-section-alternate results-row alt"
+				value="#{modelBean.uploadedFiles}" var="fileInfo">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Attachments" />
+					</f:facet>
+					<h:outputText value="#{fileInfo.fileName}" />
+				</h:column>
+			</h:dataTable>
+			<ace:fileEntry id="fileEntryComp" absolutePath="#{backingBean.fileUploadAbsolutePath}"
+				fileEntryListener="#{backingBean.handleFileUpload}" maxFileSize="1000000" />
+			<h:commandButton value="Add Attachment" />
+			<hr />
+			<h:panelGroup id="domDiffBlocker">
+				<h:panelGroup id="editors">
+					<liferay-ui:input-editor id="comments1" editorImpl="com.liferay.faces.support.editor1" toolbarSet="bbcode"
+						value="#{modelBean.comments1}" />
+					<liferay-ui:input-editor id="comments2" editorImpl="com.liferay.faces.support.editor2" toolbarSet="bbcode"
+						value="#{modelBean.comments2}" />
+				</h:panelGroup>
+			</h:panelGroup>
+			<hr />
+			<h:outputLabel for="comments1Output" value="Submitted value for first editor:" />
+			<h:outputText id="comments1Output" value="#{modelBean.comments1}" />
+			<hr />
+			<h:outputLabel for="comments2Output" value="Submitted value for second editor:" />
+			<h:outputText id="comments2Output" value="#{modelBean.comments2}" />
+			<hr />
+			<h:commandButton actionListener="#{backingBean.submit}" value="Submit">
+				<f:ajax execute="@form" render=":feedback comments1Output comments2Output" />
+			</h:commandButton>
+		</h:form>
+	</h:body>
+</f:view>
