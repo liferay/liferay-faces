@@ -21,12 +21,12 @@ import javax.faces.context.PartialViewContextFactory;
 /**
  * @author  Neil Griffin
  */
-public class PartialViewContextFactoryImpl extends PartialViewContextFactory {
+public class PartialViewContextFactoryCleanupImpl extends PartialViewContextFactory {
 
 	// Private Data Members
 	private PartialViewContextFactory wrappedPartialViewContextFactory;
 
-	public PartialViewContextFactoryImpl(PartialViewContextFactory partialViewContextFactory) {
+	public PartialViewContextFactoryCleanupImpl(PartialViewContextFactory partialViewContextFactory) {
 		this.wrappedPartialViewContextFactory = partialViewContextFactory;
 	}
 
