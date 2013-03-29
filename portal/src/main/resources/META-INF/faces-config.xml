@@ -7,9 +7,9 @@
 		<resource-handler>com.liferay.faces.portal.resource.LiferayFacesResourceHandler</resource-handler>
 		<resource-handler>com.liferay.faces.portal.resource.LiferayPortalResourceHandler</resource-handler>
 	</application>
-	<lifecycle>
-		<phase-listener>com.liferay.faces.portal.lifecycle.LiferayLocalePhaseListener</phase-listener>
-	</lifecycle>
+	<factory>
+		<partial-view-context-factory>com.liferay.faces.util.context.PartialViewContextFactoryCleanupImpl</partial-view-context-factory>
+	</factory>
 	<component>
 		<component-type>com.liferay.faces.portal.PermissionsURL</component-type>
 		<component-class>com.liferay.faces.portal.component.PermissionsURL</component-class>
@@ -18,6 +18,9 @@
 		<component-type>com.liferay.faces.portal.InputEditorInternal</component-type>
 		<component-class>com.liferay.faces.portal.component.InputEditorInternal</component-class>
 	</component>
+	<lifecycle>
+		<phase-listener>com.liferay.faces.portal.lifecycle.LiferayLocalePhaseListener</phase-listener>
+	</lifecycle>
 	<render-kit>
 		<renderer>
 			<component-family>com.liferay.faces.portal.PermissionsURL</component-family>
