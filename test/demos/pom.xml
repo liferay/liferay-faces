@@ -211,13 +211,6 @@
                             </goals>
                         </execution>
                     </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.jboss.portletbridge</groupId>
-                            <artifactId>portletbridge-build-resources</artifactId>
-                            <version>${project.version}</version>
-                        </dependency>
-                    </dependencies>
                 </plugin>
 
                 <!-- So m2e doesn't throw errors for features it doesn't support in the POM -->
