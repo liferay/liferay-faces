@@ -28,11 +28,17 @@ package com.liferay.faces.issues.bean;
  */
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
+
+import org.icefaces.ace.component.fileentry.FileEntry;
+import org.icefaces.ace.component.fileentry.FileEntryEvent;
+import org.icefaces.ace.component.fileentry.FileEntryResults;
+import org.icefaces.ace.component.fileentry.FileEntryResults.FileInfo;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.logging.Logger;
@@ -52,39 +58,63 @@ public class BackingBean implements Serializable {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BackingBean.class);
 
+	// Private Constants
+	private static final String JAVA_IO_TMPDIR = "java.io.tmpdir";
+
 	// Injections
 	@ManagedProperty(value = "#{modelBean}")
 	private transient ModelBean modelBean;
 
-	// Properties
-	private boolean editor1Rendered = true;
-	private boolean editor2Rendered = true;
+	public void handleFileUpload(FileEntryEvent fileEntryEvent) {
+
+		try {
+			FileEntry fileEntry = (FileEntry) fileEntryEvent.getSource();
+			FileEntryResults results = fileEntry.getResults();
+
+			boolean success = true;
+
+			for (FileEntryResults.FileInfo fileInfo : results.getFiles()) {
+
+				if (fileInfo.getStatus().isSuccess()) {
+					modelBean.getUploadedFiles().add(fileInfo);
+				}
+				else {
+					success = false;
+				}
+
+				logger.debug("Uploaded file=[{0}]", fileInfo.getFileName());
+			}
+
+			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+
+			if (!success) {
+				liferayFacesContext.addGlobalUnexpectedErrorMessage();
+			}
+
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void submit(ActionEvent actionEvent) {
 
 		logger.debug("Submitted form");
 		logger.debug("comments1=" + modelBean.getComments1());
 		logger.debug("comments2=" + modelBean.getComments2());
-		logger.debug("comments3=" + modelBean.getComments3());
+
+		List<FileInfo> uploadedFiles = modelBean.getUploadedFiles();
+
+		for (FileInfo fileInfo : uploadedFiles) {
+			logger.debug("Uploaded file=" + fileInfo.getFileName());
+		}
 
 		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 		liferayFacesContext.addGlobalSuccessInfoMessage();
 	}
 
-	public void toggleEditor1(ActionEvent actionEvent) {
-		editor1Rendered = !editor1Rendered;
-	}
-
-	public void toggleEditor2(ActionEvent actionEvent) {
-		editor2Rendered = !editor2Rendered;
-	}
-
-	public boolean isEditor1Rendered() {
-		return editor1Rendered;
-	}
-
-	public boolean isEditor2Rendered() {
-		return editor2Rendered;
+	public String getFileUploadAbsolutePath() {
+		return System.getProperty(JAVA_IO_TMPDIR);
 	}
 
 	public void setModelBean(ModelBean modelBean) {
