@@ -11,6 +11,6 @@
 		</after>
 	</ordering>
 	<factory>
-		<partial-view-context-factory>com.liferay.faces.util.context.PartialViewContextFactoryImpl</partial-view-context-factory>
+		<partial-view-context-factory>com.liferay.faces.util.context.PartialViewContextFactoryCleanupImpl</partial-view-context-factory>
 	</factory>
 </faces-config>
