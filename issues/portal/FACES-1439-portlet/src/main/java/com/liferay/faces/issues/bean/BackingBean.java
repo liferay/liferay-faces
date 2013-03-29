@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -32,6 +32,7 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.logging.Logger;
@@ -59,7 +60,7 @@ public class BackingBean implements Serializable {
 	private boolean editor1Rendered = true;
 	private boolean editor2Rendered = true;
 
-	public void submit() {
+	public void submit(ActionEvent actionEvent) {
 
 		logger.debug("Submitted form");
 		logger.debug("comments1=" + modelBean.getComments1());
@@ -70,11 +71,11 @@ public class BackingBean implements Serializable {
 		liferayFacesContext.addGlobalSuccessInfoMessage();
 	}
 
-	public void toggleEditor1() {
+	public void toggleEditor1(ActionEvent actionEvent) {
 		editor1Rendered = !editor1Rendered;
 	}
 
-	public void toggleEditor2() {
+	public void toggleEditor2(ActionEvent actionEvent) {
 		editor2Rendered = !editor2Rendered;
 	}
 
