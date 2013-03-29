@@ -17,13 +17,13 @@
 					<aui:column id="c1a">
 						<aui:field id="firstNameField" label="#{i18n['first-name']}">
 							<ace:textEntry id="firstName" required="true" requiredIndicator="*" value="#{applicantModelBean.firstName}">
-								<ace:ajax render="firstNameField" />
+								<ace:ajax execute="@this" render="firstNameField" />
 							</ace:textEntry>
 							<h:message for="firstName" />
 						</aui:field>
 						<aui:field id="lastNameField" label="#{i18n['last-name']}">
 							<ace:textEntry id="lastName" required="true" requiredIndicator="*" value="#{applicantModelBean.lastName}">
-								<ace:ajax render="lastNameField" />
+								<ace:ajax execute="@this" render="lastNameField" />
 							</ace:textEntry>
 							<h:message for="lastName" />
 						</aui:field>
@@ -31,13 +31,13 @@
 							<ace:textEntry id="emailAddress" required="true" requiredIndicator="*"
 								validatorMessage="#{i18n['invalid-email-address']}" value="#{applicantModelBean.emailAddress}">
 								<f:validateRegex pattern=".+[@].+[.].+" />
-								<ace:ajax render="emailAddressField" />
+								<ace:ajax execute="@this" render="emailAddressField" />
 							</ace:textEntry>
 							<h:message for="emailAddress" />
 						</aui:field>
 						<aui:field id="phoneNumberField" label="#{i18n['phone-number']}">
 							<ace:textEntry id="phoneNumber" required="true" requiredIndicator="*" value="#{applicantModelBean.phoneNumber}">
-								<ace:ajax render="phoneNumberField" />
+								<ace:ajax execute="@this" render="phoneNumberField" />
 							</ace:textEntry>
 							<h:message for="phoneNumber" />
 						</aui:field>
@@ -47,13 +47,13 @@
 							<ace:dateTimeEntry id="dateOfBirth" renderAsPopup="true" required="true" requiredIndicator="*"
 								value="#{applicantModelBean.dateOfBirth}">
 								<f:convertDateTime pattern="#{portletPreferencesValues['datePattern'][0]}" />
-								<ace:ajax render="dateOfBirthField" />
+								<ace:ajax execute="@this" render="dateOfBirthField" />
 							</ace:dateTimeEntry>
 							<h:message for="dateOfBirth" />
 						</aui:field>
 						<aui:field id="cityField" label="#{i18n['city']}">
 							<ace:textEntry id="city" required="true" requiredIndicator="*" value="#{applicantModelBean.city}">
-								<ace:ajax render="cityField" />
+								<ace:ajax execute="@this" render="cityField" />
 							</ace:textEntry>
 							<h:message id="cityMessage" for="city" />
 						</aui:field>
@@ -68,7 +68,7 @@
 						<aui:field id="postalCodeField" label="#{i18n['zip-postal']}">
 							<ace:textEntry id="postalCode" required="true" requiredIndicator="*" value="#{applicantModelBean.postalCode}"
 								valueChangeListener="#{applicantBackingBean.postalCodeListener}">
-								<ace:ajax render="postalCodeField provinceIdField cityField" />
+								<ace:ajax execute="@this" render="postalCodeField provinceIdField cityField" />
 							</ace:textEntry>
 							<img src="#{resource['example:icon-help.png']}" title="#{i18n['postal-code-hint']}" />
 							<h:message id="postalCodeMessage" for="postalCode" />
@@ -86,7 +86,7 @@
 							</h:panelGroup>
 							<ace:textAreaEntry id="comments" cols="50" rows="10" rendered="#{applicantBackingBean.commentsRendered}"
 								value="#{applicantModelBean.comments}">
-								<ace:ajax render="@this" />
+								<ace:ajax execute="@this" render="@this" />
 							</ace:textAreaEntry>
 						</aui:field>
 					</aui:column>
