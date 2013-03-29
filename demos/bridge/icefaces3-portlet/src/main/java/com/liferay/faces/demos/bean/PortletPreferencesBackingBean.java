@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,8 +21,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
+import javax.portlet.WindowState;
 import javax.portlet.faces.preference.Preference;
 
 import com.liferay.faces.demos.util.FacesMessageUtil;
@@ -42,7 +45,8 @@ public class PortletPreferencesBackingBean {
 	public void reset() {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		PortletRequest portletRequest = (PortletRequest) facesContext.getExternalContext().getRequest();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
 		PortletPreferences portletPreferences = portletRequest.getPreferences();
 
 		try {
@@ -54,6 +58,11 @@ public class PortletPreferencesBackingBean {
 			}
 
 			portletPreferences.store();
+
+			// Switch the portlet mode back to VIEW.
+			ActionResponse actionResponse = (ActionResponse) externalContext.getResponse();
+			actionResponse.setPortletMode(PortletMode.VIEW);
+			actionResponse.setWindowState(WindowState.NORMAL);
 
 			FacesMessageUtil.addGlobalSuccessInfoMessage(facesContext);
 		}
@@ -103,6 +112,11 @@ public class PortletPreferencesBackingBean {
 
 			// Save the preference values.
 			portletPreferences.store();
+
+			// Switch the portlet mode back to VIEW.
+			ActionResponse actionResponse = (ActionResponse) externalContext.getResponse();
+			actionResponse.setPortletMode(PortletMode.VIEW);
+			actionResponse.setWindowState(WindowState.NORMAL);
 
 			// Report a successful message back to the user as feedback.
 			FacesMessageUtil.addGlobalSuccessInfoMessage(facesContext);
