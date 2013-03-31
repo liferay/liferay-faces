@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,16 +27,28 @@ public class ProductRichFacesImpl extends ProductBaseImpl {
 
 		try {
 			this.title = ProductConstants.RICHFACES;
-			Class<?> versionBeanClass = Class.forName("org.richfaces.VersionBean");
-			Object versionObj = versionBeanClass.getDeclaredField("VERSION").get(Object.class);
-			Method method = versionObj.getClass().getMethod("getVersion", new Class[] {});
-			String version = (String) method.invoke(versionObj, (Object[]) null);
-			if (version != null) {
-				version = version.replaceFirst("[^0-9]*", StringPool.BLANK);
-				initVersionInfo(version);
+
+			try {
+				Class<?> versionBeanClass = Class.forName("org.richfaces.VersionBean");
+				Object versionObj = versionBeanClass.getDeclaredField("VERSION").get(Object.class);
+				Method method = versionObj.getClass().getMethod("getVersion", new Class[] {});
+				String version = (String) method.invoke(versionObj, (Object[]) null);
+
+				if (version != null) {
+					version = version.replaceFirst("[^0-9]*", StringPool.BLANK);
+					initVersionInfo(version);
+				}
+
+				if (this.majorVersion > 0) {
+					this.detected = true;
+				}
 			}
-			if (this.majorVersion > 0) {
-				this.detected = true;
+			catch (SecurityException e) {
+				
+				// Workaround for https://issues.jboss.org/browse/RF-12805
+				Class<?> utilClass = Class.forName("org.richfaces.util.Util");
+				init(utilClass, "RichFaces Core Implementation");
+				this.title = ProductConstants.RICHFACES;
 			}
 		}
 		catch (Exception e) {
