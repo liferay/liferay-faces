@@ -4,6 +4,7 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.Graphene;
 import org.jboss.arquillian.graphene.enricher.findby.FindBy;
+import org.jboss.arquillian.graphene.javascript.JSInterfaceFactory;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -20,12 +21,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.io.File;
+
 import org.apache.commons.io.FileUtils;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 // import java.net.URL;
+
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -43,7 +46,7 @@ public class FACES1427PortletTest {
 	// URL portalURL;
 	String signInUrl = "http://localhost:8080/web/guest/signin";
 	String url = "http://localhost:8080/web/guest/faces-1427";
-
+	
 	@Drone
 	WebDriver browser;
 	
@@ -160,7 +163,7 @@ public class FACES1427PortletTest {
 		fileEntryComponent.sendKeys("/tmp/kitten.png");
 		Thread.sleep(50);
 		addAttachment.click();
-		Thread.sleep(250);
+		Thread.sleep(500);
 		
 		logger.log(Level.INFO, "attachment.isDisplayed() = " + attachment.isDisplayed());
 		logger.log(Level.INFO, "attachment.getText() = " + attachment.getText());
@@ -223,11 +226,16 @@ public class FACES1427PortletTest {
 	public void steps89012() throws Exception {
 		
 		logger.log(Level.INFO, "textarea1.getAttribute('value') = " + textarea1.getAttribute("value"));
+		
+		// click into textarea1
 		textarea1.click();
 		Thread.sleep(250);
 		
+		// move to the beginning of textarea1
 		textarea1.sendKeys(Keys.HOME); // firefox cursor is on the left after the last click, in chromium cursor is on the right of the text ... grr
 		Thread.sleep(250);
+		
+		// arrow over to the word 'initial'
 		textarea1.sendKeys(Keys.ARROW_RIGHT);
 		Thread.sleep(250);
 		textarea1.sendKeys(Keys.ARROW_RIGHT);
@@ -248,6 +256,8 @@ public class FACES1427PortletTest {
 		Thread.sleep(250);
 		textarea1.sendKeys(Keys.ARROW_RIGHT);
 		Thread.sleep(250);
+		
+		// delete the word 'initial'
 		textarea1.sendKeys(Keys.DELETE);
 		Thread.sleep(250);
 		textarea1.sendKeys(Keys.DELETE);
@@ -262,37 +272,55 @@ public class FACES1427PortletTest {
 		Thread.sleep(250);
 		textarea1.sendKeys(Keys.DELETE);
 		Thread.sleep(250);
+		
+		// type the word 'subsequent'
 		textarea1.sendKeys("subsequent");
 		Thread.sleep(250);
 		
 		logger.log(Level.INFO, "textarea1.getAttribute('id') = '" + textarea1.getAttribute("id") + "'");
 		
+//		This executeScript method call below simply selects all of the text textarea1 ... not what we need.
 //		((JavascriptExecutor) browser).executeScript(
 //			"document.getElementById(\"" + textarea1.getAttribute("id") + "\").select();"
 //		);
 		
-		((JavascriptExecutor) browser).executeScript(	
-			"function selectText(field, start, end) { " +
-				"if ( field.createTextRange ) { " +
-					"var selRange = field.createTextRange(); " +
-					"selRange.collapse(true); " +
-					"selRange.moveStart('character', start); " +
-					"selRange.moveEnd('character', end); " +
-					"selRange.select(); " +
-					"field.focus(); " +
-				"} else if ( field.setSelectionRange ) { " +
-					"field.focus(); " +
-					"field.setSelectionRange(start, end); " +
-				"} else if ( typeof field.selectionStart != 'undefined' ) { " +
-					"field.selectionStart = start; " +
-					"field.selectionEnd = end; " +
-					"field.focus(); " +
-				"} " +
-			"}; " +
-			"ta = document.getElementById('" + textarea1.getAttribute("id") + "');" +
-			"selectText(ta, 10, 20);"
-		);
-		Thread.sleep(250);
+//		This executeScript method call below works, but look at it.
+//		It is too ugly, so I decided to replace it with the SelextText interface below
+//		
+//		((JavascriptExecutor) browser).executeScript(	
+//			"function selectText(field, start, end) { " +
+//				"if ( field.createTextRange ) { " +
+//					"var selRange = field.createTextRange(); " +
+//					"selRange.collapse(true); " +
+//					"selRange.moveStart('character', start); " +
+//					"selRange.moveEnd('character', end); " +
+//					"selRange.select(); " +
+//					"field.focus(); " +
+//				"} else if ( field.setSelectionRange ) { " +
+//					"field.focus(); " +
+//					"field.setSelectionRange(start, end); " +
+//				"} else if ( typeof field.selectionStart != 'undefined' ) { " +
+//					"field.selectionStart = start; " +
+//					"field.selectionEnd = end; " +
+//					"field.focus(); " +
+//				"} " +
+//			"}; " +
+//			"ta = document.getElementById('" + textarea1.getAttribute("id") + "');" +
+//			"selectText(ta, 10, 20);"
+//		);
+//		Thread.sleep(250);
+		
+		SelectText selectText = JSInterfaceFactory.create(SelectText.class);
+		
+		logger.log(Level.INFO, "before selecting ... selectText.getSelection(id) = " + selectText.getSelection(textarea1.getAttribute("id")));
+		Thread.sleep(500);
+		
+		logger.log(Level.INFO, "selectText.getSelection('id', 10, 20) ... ");
+		selectText.setSelection(textarea1.getAttribute("id"), 10, 20);
+		Thread.sleep(1000);
+		
+		logger.log(Level.INFO, "after selecting ... selectText.getSelection(id) = " + selectText.getSelection(textarea1.getAttribute("id")));
+		Thread.sleep(500);
 		
 		logger.log(Level.INFO, "isThere(bold1Xpath) = " + isThere(bold1Xpath));
 		logger.log(Level.INFO, "bold1.isDisplayed() = " + bold1.isDisplayed());
@@ -328,6 +356,7 @@ public class FACES1427PortletTest {
 		Thread.sleep(250);
 		(new Actions(browser)).sendKeys(Keys.ARROW_LEFT).perform();
 		Thread.sleep(250);
+		
 		(new Actions(browser)).sendKeys(Keys.BACK_SPACE).perform();
 		Thread.sleep(250);
 		(new Actions(browser)).sendKeys(Keys.BACK_SPACE).perform();
