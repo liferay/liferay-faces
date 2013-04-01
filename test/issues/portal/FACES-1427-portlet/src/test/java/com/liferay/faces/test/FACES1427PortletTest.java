@@ -277,6 +277,7 @@ public class FACES1427PortletTest {
 		textarea1.sendKeys("subsequent");
 		Thread.sleep(250);
 		
+		// select the word 'subsequent' ... easier said than done
 		logger.log(Level.INFO, "textarea1.getAttribute('id') = '" + textarea1.getAttribute("id") + "'");
 		
 //		This executeScript method call below simply selects all of the text textarea1 ... not what we need.
@@ -327,9 +328,11 @@ public class FACES1427PortletTest {
 		logger.log(Level.INFO, "bold1.getAttribute('src') = " + bold1.getAttribute("src"));
 		logger.log(Level.INFO, "bold1.getLocation() = " + bold1.getLocation());
 		logger.log(Level.INFO, "clicking the bold1 button ...");
+		
+		// click the bold1 button to make the word 'subsequent' bold
 		try {
 			bold1.click();
-		} catch (Exception e) {
+		} catch (Exception e) { // apparently things are different in chromium
 			logger.log(Level.INFO, "e.getMessage() = " + e.getMessage());
 			(new Actions(browser)).moveToElement(bold1, 3, 3).click(bold1).build().perform();
 			Thread.sleep(2500);
@@ -340,10 +343,12 @@ public class FACES1427PortletTest {
 		}
 		Thread.sleep(250);
 		
+		// move into iframe1
 		logger.log(Level.INFO, "clicking into iframe1 ...");
 		iframe1.click();
 		Thread.sleep(250);
 		
+		// arrow over to the word 'initial'
 		(new Actions(browser)).sendKeys(Keys.ARROW_LEFT).perform();
 		Thread.sleep(250);
 		(new Actions(browser)).sendKeys(Keys.ARROW_LEFT).perform();
@@ -357,6 +362,7 @@ public class FACES1427PortletTest {
 		(new Actions(browser)).sendKeys(Keys.ARROW_LEFT).perform();
 		Thread.sleep(250);
 		
+		// delete the word 'initial'
 		(new Actions(browser)).sendKeys(Keys.BACK_SPACE).perform();
 		Thread.sleep(250);
 		(new Actions(browser)).sendKeys(Keys.BACK_SPACE).perform();
@@ -371,8 +377,12 @@ public class FACES1427PortletTest {
 		Thread.sleep(250);
 		(new Actions(browser)).sendKeys(Keys.BACK_SPACE).perform();
 		Thread.sleep(250);
+		
+		// type the word 'subsequent'
 		(new Actions(browser)).sendKeys("subsequent").perform();
 		Thread.sleep(250);
+		
+		// select the word 'subsequent' ... easier said than done
 		(new Actions(browser)).keyDown(iframe1, Keys.SHIFT)
 			.sendKeys(Keys.LEFT).sendKeys(Keys.LEFT)
 			.sendKeys(Keys.LEFT).sendKeys(Keys.LEFT)
@@ -381,17 +391,24 @@ public class FACES1427PortletTest {
 			.sendKeys(Keys.LEFT).sendKeys(Keys.LEFT)
 			.keyUp(iframe1, Keys.SHIFT).build().perform();
 		Thread.sleep(250);
+		
+		// click the bold2 button to make the word 'subsequent' bold
 		bold2.click();
 		Thread.sleep(250);
-		iframe1.click();
 		
+		iframe1.click();
+		Thread.sleep(250);
+		
+		// submit the form
 		submit.click();
 		Thread.sleep(250);
-		logger.log(Level.INFO, "isThere(iframe1Xpath) = " + isThere(iframe1Xpath));
 		
+		// log some elements
+		logger.log(Level.INFO, "isThere(iframe1Xpath) = " + isThere(iframe1Xpath));
 		logger.log(Level.INFO, "comments1Output.getText() = " + comments1Output.getText());
 		logger.log(Level.INFO, "comments2Output.getText() = " + comments2Output.getText());
 		
+		// assert to test
 		assertTrue("the submitted value for the FIRST editor should be 'comments1-[b]subsequent[/b]-value', but " +
 			"it is '"+ comments1Output.getText() +"'", comments1Output.getText().equals("comments1-[b]subsequent[/b]-value"));
 		assertTrue("the submitted value for the SECOND editor should be 'comments2-[b]subsequent[/b]-value', but " +

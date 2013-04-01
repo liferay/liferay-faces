@@ -13,8 +13,6 @@
 <!-- 
         The list of supported browser via capabilities is: android chrome firefox htmlUnit internetExplorer iphone opera null
  --> 
-
-        
     </extension>
 
     <extension qualifier="graphene">
