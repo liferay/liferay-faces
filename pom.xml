@@ -42,6 +42,16 @@
 			<organizationUrl>http://www.liferay.com</organizationUrl>
 		</developer>
 		<developer>
+			<name>Vernon Singleton</name>
+			<organization>Liferay, Inc.</organization>
+			<organizationUrl>http://www.liferay.com</organizationUrl>
+		</developer>
+		<developer>
+			<name>Kyle Stiemann</name>
+			<organization>Liferay, Inc.</organization>
+			<organizationUrl>http://www.liferay.com</organizationUrl>
+		</developer>
+		<developer>
 			<name>Atul Patel</name>
 			<organization>Triton Services, Inc.</organization>
 			<organizationUrl>http://www.tritonsvc.com</organizationUrl>
@@ -546,6 +556,14 @@
 					<exclusion>
 						<groupId>org.glassfish</groupId>
 						<artifactId>javax.faces</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.mail</groupId>
+						<artifactId>mail</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.activation</groupId>
+						<artifactId>javax.activation</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>
