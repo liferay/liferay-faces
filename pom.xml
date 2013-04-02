@@ -89,7 +89,7 @@
 		<mojarra.version>2.1.20</mojarra.version>
 		<myfaces.version>2.1.8</myfaces.version>
 		<primefaces3.version>3.5</primefaces3.version>
-		<richfaces4.version>4.2.0.Final</richfaces4.version>
+		<richfaces4.version>4.3.1.Final</richfaces4.version>
 		<selenium.version>1.0.1</selenium.version>
 		<tck.version>jsr329-1.0.1-liferay</tck.version>
 	</properties>
