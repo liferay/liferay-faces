@@ -83,7 +83,7 @@ while (<TEMPLATE>) {
 }
 close TEMPLATE;
 
-# iterate through the test classes
+# iterate through the Test.java classes
 foreach my $class (@class) {
 
    # get the output file name
