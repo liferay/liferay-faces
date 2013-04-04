@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,9 +22,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 
 /**
- * This class is a backport of the EditorUtil class which was introduced in Liferay Portal 6.0.12. It's main
- * purpose is to facilitate keeping the {@link InputEditorInternalRenderer} source the same on all branches of the
- * Liferay Faces source.
+ * This class is a backport of the EditorUtil class which was introduced in Liferay Portal 6.0.12. It's main purpose is
+ * to facilitate keeping the {@link InputEditorInternalRenderer} source the same on all branches of the Liferay Faces
+ * source.
  *
  * @author  Julio Camarero
  * @author  Neil Griffin

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -98,19 +98,6 @@ public class ListModelBean implements Serializable {
 		return provinceId;
 	}
 
-	public List<SelectItem> getProvinceSelectItems() {
-		
-		if (provinceSelectItems == null) {
-			provinceSelectItems = new ArrayList<SelectItem>();
-			List<Province> provinces = getProvinces();
-			for (Province province: provinces) {
-				SelectItem selectItem = new SelectItem(province.getProvinceId(), province.getProvinceName());
-				provinceSelectItems.add(selectItem);
-			}
-		}
-		return provinceSelectItems;
-	}
-
 	public List<Province> getProvinces() {
 
 		if (provinces == null) {
@@ -138,5 +125,21 @@ public class ListModelBean implements Serializable {
 		}
 
 		return this.provinces;
+	}
+
+	public List<SelectItem> getProvinceSelectItems() {
+
+		if (provinceSelectItems == null) {
+			provinceSelectItems = new ArrayList<SelectItem>();
+
+			List<Province> provinces = getProvinces();
+
+			for (Province province : provinces) {
+				SelectItem selectItem = new SelectItem(province.getProvinceId(), province.getProvinceName());
+				provinceSelectItems.add(selectItem);
+			}
+		}
+
+		return provinceSelectItems;
 	}
 }

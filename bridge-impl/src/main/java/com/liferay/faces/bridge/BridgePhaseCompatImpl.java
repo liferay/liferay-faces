@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -38,17 +38,16 @@ public abstract class BridgePhaseCompatImpl extends BridgePhaseBaseImpl {
 		super(portletConfig);
 	}
 
-	@Override
-	protected void init(PortletRequest portletRequest,
-			PortletResponse portletResponse, PortletPhase portletPhase) {
-		
-		// This is simply a pass-thru for JSF2.
-		super.init(portletRequest, portletResponse, portletPhase);
-	}
-
 	protected void handleJSF2ResourceRequest(FacesContext facesContext) throws IOException {
 		ResourceHandler resourceHandler = facesContext.getApplication().getResourceHandler();
 		resourceHandler.handleResourceRequest(facesContext);
+	}
+
+	@Override
+	protected void init(PortletRequest portletRequest, PortletResponse portletResponse, PortletPhase portletPhase) {
+
+		// This is simply a pass-thru for JSF2.
+		super.init(portletRequest, portletResponse, portletPhase);
 	}
 
 	protected Throwable getJSF2HandledException(FacesContext facesContext) {
