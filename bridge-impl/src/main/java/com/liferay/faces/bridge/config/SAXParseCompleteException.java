@@ -20,7 +20,7 @@ import org.xml.sax.SAXException;
  * @author  Neil Griffin
  */
 public class SAXParseCompleteException extends SAXException {
-	
+
 	// serialVersionUID
 	private static final long serialVersionUID = 1170538769536627765L;
 }

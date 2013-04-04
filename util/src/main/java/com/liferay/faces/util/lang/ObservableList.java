@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -117,18 +117,21 @@ public class ObservableList<E> implements List<E>, Observable {
 	public boolean remove(Object o) {
 		boolean result = wrappedList.remove(o);
 		notifyObservers(Action.REMOVE, o);
+
 		return result;
 	}
 
 	public E remove(int index) {
 		E e = wrappedList.remove(index);
 		notifyObservers(Action.REMOVE, e);
+
 		return e;
 	}
 
 	public boolean removeAll(Collection<?> c) {
 		boolean result = wrappedList.removeAll(c);
 		notifyObservers(Action.REMOVE_ALL, c);
+
 		return result;
 	}
 
@@ -140,12 +143,14 @@ public class ObservableList<E> implements List<E>, Observable {
 	public boolean retainAll(Collection<?> c) {
 		boolean result = wrappedList.retainAll(c);
 		notifyObservers(Action.RETAIN_ALL, c);
+
 		return result;
 	}
 
 	public E set(int index, E e) {
 		E result = wrappedList.set(index, e);
 		notifyObservers(Action.SET, index, e);
+
 		return result;
 	}
 

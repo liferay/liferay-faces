@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -32,13 +32,13 @@ import com.liferay.faces.util.logging.LoggerFactory;
 
 /**
  * <p>This class is a JSF {@link PhaseListener} that listens to the {@link PhaseId#INVOKE_APPLICATION} and {@link
- * PhaseId#RENDER_RESPONSE} phases of the JSF lifecycle. Along with {@link HeadManagedBean} and {@link HeadRendererBridgeImpl},
- * this class helps provides a solution to an issue regarding Ajax-initiated execution of navigation-rules in a portlet.
- * When a portal page is first rendered by the portal, all of the portlets on the page participate in the {@link
- * PortletRequest#RENDER_PHASE} of the Portlet lifecycle. During this initial HTTP-GET operation, the bridge has the
- * ability to add JavaScript and CSS resources to the &lt;head&gt; section of the rendered portal page. Subsequent
- * Ajax-initiated execution of the JSF lifecycle via the {@link PortletRequest#RESOURCE_PHASE} are NOT ABLE add
- * resources to the to the &lt;head&gt; section.</p>
+ * PhaseId#RENDER_RESPONSE} phases of the JSF lifecycle. Along with {@link HeadManagedBean} and {@link
+ * HeadRendererBridgeImpl}, this class helps provides a solution to an issue regarding Ajax-initiated execution of
+ * navigation-rules in a portlet. When a portal page is first rendered by the portal, all of the portlets on the page
+ * participate in the {@link PortletRequest#RENDER_PHASE} of the Portlet lifecycle. During this initial HTTP-GET
+ * operation, the bridge has the ability to add JavaScript and CSS resources to the &lt;head&gt; section of the rendered
+ * portal page. Subsequent Ajax-initiated execution of the JSF lifecycle via the {@link PortletRequest#RESOURCE_PHASE}
+ * are NOT ABLE add resources to the to the &lt;head&gt; section.</p>
  *
  * @see     http://issues.liferay.com/browse/FACES-180
  * @author  Neil Griffin

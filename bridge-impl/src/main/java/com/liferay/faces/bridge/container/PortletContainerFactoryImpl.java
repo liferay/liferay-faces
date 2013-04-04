@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,7 +40,8 @@ public class PortletContainerFactoryImpl extends PortletContainerFactory {
 		if (portletContainer == null) {
 
 			if (PortletContainerDetector.isLiferayPortletRequest(portletRequest)) {
-				portletContainer = new PortletContainerLiferayImpl(portletRequest, portletResponse, portletContext, bridgeConfig);
+				portletContainer = new PortletContainerLiferayImpl(portletRequest, portletResponse, portletContext,
+						bridgeConfig);
 			}
 			else if (PortletContainerDetector.isPlutoPortletRequest(portletRequest)) {
 				portletContainer = new PortletContainerPlutoImpl(portletRequest, bridgeConfig);

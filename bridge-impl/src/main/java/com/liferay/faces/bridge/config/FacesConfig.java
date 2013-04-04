@@ -15,6 +15,7 @@ package com.liferay.faces.bridge.config;
 
 import java.net.URL;
 
+
 /**
  * @author  Neil Griffin
  */
