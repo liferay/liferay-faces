@@ -47,14 +47,15 @@ public class LiferayPortletRequest {
 	private ThemeDisplay themeDisplay;
 
 	public LiferayPortletRequest(PortletRequest portletRequest) {
-		
+
 		if (portletRequest != null) {
-			
+
 			while (portletRequest instanceof PortletRequestWrapper) {
 				PortletRequestWrapper portletRequestWrapper = (PortletRequestWrapper) portletRequest;
 				portletRequest = portletRequestWrapper.getRequest();
 			}
 		}
+
 		this.wrappedPortletRequest = portletRequest;
 
 		try {
