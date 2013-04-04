@@ -37,6 +37,7 @@ public class URLUtil {
 
 	public static Map<String, String[]> parseParameterMapValuesArray(String url) {
 		Map<String, String[]> parameterMapValuesArray = new LinkedHashMap<String, String[]>();
+
 		if (url != null) {
 			int pos = url.indexOf("?");
 

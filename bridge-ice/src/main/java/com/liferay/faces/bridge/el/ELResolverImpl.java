@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -212,9 +212,10 @@ public class ELResolverImpl extends ELResolverCompatImpl {
 					throw new ELException("Unable to get actionResponse during " + portletPhase);
 				}
 			}
+
 			// Note: The bridgeContext is a managed-bean and so must not be resolved here.
 			// else if (varName.equals(BRIDGE_CONTEXT)) {
-			//	value = BridgeContext.getCurrentInstance();
+			// value = BridgeContext.getCurrentInstance();
 			// }
 			else if (varName.equals(EVENT_REQUEST)) {
 				Bridge.PortletPhase portletPhase = BridgeUtil.getPortletRequestPhase();

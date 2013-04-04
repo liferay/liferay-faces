@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -66,9 +66,10 @@ public abstract class BridgeResponseURLImpl extends BridgeURLBaseImpl implements
 			// Otherwise, if the URL contains the "javax.portlet.faces.WindowState" parameter, then
 			// set the WindowState on the ActionResponse.
 			else if (Bridge.PORTLET_WINDOWSTATE_PARAMETER.equals(urlParameterName)) {
-				
+
 				WindowState windowState = new WindowState(parameterValue);
 				PortletRequest portletRequest = bridgeContext.getPortletRequest();
+
 				if (portletRequest.isWindowStateAllowed(windowState)) {
 					stateAwareResponse.setWindowState(windowState);
 				}

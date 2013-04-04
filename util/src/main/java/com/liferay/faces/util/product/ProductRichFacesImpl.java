@@ -44,7 +44,7 @@ public class ProductRichFacesImpl extends ProductBaseImpl {
 				}
 			}
 			catch (SecurityException e) {
-				
+
 				// Workaround for https://issues.jboss.org/browse/RF-12805
 				Class<?> utilClass = Class.forName("org.richfaces.util.Util");
 				init(utilClass, "RichFaces Core Implementation");

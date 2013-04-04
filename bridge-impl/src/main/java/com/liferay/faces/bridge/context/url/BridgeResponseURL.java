@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,7 +23,7 @@ import javax.portlet.faces.Bridge;
  * This interface represents a bridge "response" URL, meaning a URL that has convenience methods for representing URLs
  * according to the deviation requirements of {@link javax.faces.context.ExternalContext#encodeResourceURL(String)}
  * listed in Section 6.1.3.1 of the Bridge Spec.
-
+ *
  * @author  Neil Griffin
  */
 public interface BridgeResponseURL extends BridgeURL {

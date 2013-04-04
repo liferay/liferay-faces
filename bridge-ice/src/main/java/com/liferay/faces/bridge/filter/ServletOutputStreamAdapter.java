@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,8 +24,7 @@ import javax.servlet.ServletOutputStream;
 /**
  * This class provides an {@link ServletOutputStream} adapter/wrapper around the {@link OutputStream} provided by the
  * current {@link PortletResponse}. This is necessary in order to hack around a Servlet-API dependencies in the Mojarra
- * implementation of JSF. Refer to usage in {@link HttpServletResponseAdapter#getOutputStream()}
- * for more details.
+ * implementation of JSF. Refer to usage in {@link HttpServletResponseAdapter#getOutputStream()} for more details.
  *
  * @author  Neil Griffin
  */
