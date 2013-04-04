@@ -140,6 +140,16 @@
     <servlet-name>faces</servlet-name>
   </filter-mapping>
   
+  <!-- BEGIN: LIFERAY FACES BRIDGE -->
+  <!-- Guarantee order of startup listeners (JSF implementation must be specified before the bridge). -->
+  <listener>
+    <listener-class>${faces.impl.startup.listener}</listener-class>
+  </listener>
+  <listener>
+    <listener-class>com.liferay.faces.bridge.servlet.BridgeSessionListener</listener-class>
+  </listener>
+  <!-- END: LIFERAY FACES BRIDGE -->
+
   <!-- Faces Servlet -->
   <servlet>
     <servlet-name>faces</servlet-name>
