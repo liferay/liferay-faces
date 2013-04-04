@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,9 +28,8 @@ import com.liferay.portal.service.PhoneServiceUtil;
  */
 public class EnterpriseAdminUtil {
 
-	public static void updatePhones(
-			String className, long classPK, List<Phone> phones)
-		throws PortalException, SystemException {
+	public static void updatePhones(String className, long classPK, List<Phone> phones) throws PortalException,
+		SystemException {
 
 		Set<Long> phoneIds = new HashSet<Long>();
 
@@ -43,14 +42,12 @@ public class EnterpriseAdminUtil {
 			boolean primary = phone.isPrimary();
 
 			if (phoneId <= 0) {
-				phone = PhoneServiceUtil.addPhone(
-					className, classPK, number, extension, typeId, primary);
+				phone = PhoneServiceUtil.addPhone(className, classPK, number, extension, typeId, primary);
 
 				phoneId = phone.getPhoneId();
 			}
 			else {
-				PhoneServiceUtil.updatePhone(
-					phoneId, number, extension, typeId, primary);
+				PhoneServiceUtil.updatePhone(phoneId, number, extension, typeId, primary);
 			}
 
 			phoneIds.add(phoneId);
@@ -59,6 +56,7 @@ public class EnterpriseAdminUtil {
 		phones = PhoneServiceUtil.getPhones(className, classPK);
 
 		for (Phone phone : phones) {
+
 			if (!phoneIds.contains(phone.getPhoneId())) {
 				PhoneServiceUtil.deletePhone(phone.getPhoneId());
 			}

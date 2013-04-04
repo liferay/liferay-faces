@@ -22,7 +22,7 @@ import javax.faces.bean.ViewScoped;
 /**
  * @author  Neil Griffin
  */
-@ManagedBean(name="as7LeakViewScopeBean")
+@ManagedBean(name = "as7LeakViewScopeBean")
 @ViewScoped
 public class AS7LeakViewScopeBean implements Serializable {
 

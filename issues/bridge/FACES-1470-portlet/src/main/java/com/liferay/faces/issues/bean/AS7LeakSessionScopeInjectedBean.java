@@ -23,7 +23,7 @@ import javax.faces.bean.SessionScoped;
 /**
  * @author  Neil Griffin
  */
-@ManagedBean(name="as7LeakSessionScopeInjectedBean")
+@ManagedBean(name = "as7LeakSessionScopeInjectedBean")
 @SessionScoped
 public class AS7LeakSessionScopeInjectedBean implements Serializable {
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,7 +21,6 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * <p>This class has been copied here from portal-service, except that "throws Exception" have been removed from method
  * signatures in order to mirror the signatures found in the Liferay 6.x codebase. This helps eliminate code differences
  * between different branches of Liferay Faces.</p>
- * 
  * <a href="PropsUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
