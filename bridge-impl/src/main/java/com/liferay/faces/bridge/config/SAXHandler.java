@@ -23,7 +23,7 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public abstract class SAXHandler extends DefaultHandler {
 
-	public abstract void setURL(URL url);
-	
 	public abstract void logMissingElementErrors();
+
+	public abstract void setURL(URL url);
 }

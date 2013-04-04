@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,8 +17,6 @@ import java.net.URISyntaxException;
 
 import javax.portlet.PortletRequest;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
@@ -27,6 +25,8 @@ import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgeContextMockImpl;
 import com.liferay.faces.portlet.PortletRequestMockImpl;
 import com.liferay.faces.util.lang.StringPool;
+
+import junit.framework.Assert;
 
 
 /**
@@ -118,12 +118,10 @@ public class BridgeURLTest {
 	public void testViewPath() {
 
 		try {
-			Assert.assertTrue(newBridgeURL("http://www.liferay.com").getContextRelativePath().equals(
-					StringPool.BLANK));
-			Assert.assertTrue(newBridgeURL("/views/foo.xhtml").getContextRelativePath().equals(
+			Assert.assertTrue(newBridgeURL("http://www.liferay.com").getContextRelativePath().equals(StringPool.BLANK));
+			Assert.assertTrue(newBridgeURL("/views/foo.xhtml").getContextRelativePath().equals("/views/foo.xhtml"));
+			Assert.assertTrue(newBridgeURL(CONTEXT_PATH + "/views/foo.xhtml").getContextRelativePath().equals(
 					"/views/foo.xhtml"));
-			Assert.assertTrue(newBridgeURL(CONTEXT_PATH + "/views/foo.xhtml")
-				.getContextRelativePath().equals("/views/foo.xhtml"));
 		}
 		catch (URISyntaxException e) {
 			Assert.fail(e.getMessage());

@@ -49,7 +49,7 @@ public class UserPortraitResource extends Resource {
 
 	// Private Constants
 	private static final String PARAM_LIBRARY_NAME = "ln";
-	
+
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(UserPortraitResource.class);
 
@@ -107,12 +107,11 @@ public class UserPortraitResource extends Resource {
 	 * This method returns the data contained in the specified file as an array of bytes.
 	 */
 	protected byte[] getBytes(File file) throws IOException {
-		
+
 		if ((file == null) || !file.exists()) {
 			return null;
 		}
 
-		
 		RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
 		byte[] bytes = new byte[(int) randomAccessFile.length()];
 		randomAccessFile.readFully(bytes);
@@ -129,10 +128,10 @@ public class UserPortraitResource extends Resource {
 	public InputStream getInputStream() throws IOException {
 
 		byte[] byteArray = null;
-		
+
 		// If the end-user didn't upload a file, then get the file from the Liferay database.
 		if (uploadedFileId == null) {
-			
+
 			try {
 
 				long imageId = user.getPortraitId();
@@ -152,7 +151,7 @@ public class UserPortraitResource extends Resource {
 
 			String absolutePath = getUploadedFile().getAbsolutePath();
 			File file = new File(absolutePath);
-			byteArray = getBytes(file);			
+			byteArray = getBytes(file);
 		}
 
 		return new ByteArrayInputStream(byteArray);

@@ -20,7 +20,7 @@ public class UploadedFileUtil {
 
 	// Public Constants
 	public static final String USER_PORTRAIT = "user-portrait-";
-	
+
 	// Private Constants
 	private static final String JAVA_IO_TMPDIR = "java.io.tmpdir";
 	private static final String TMP = ".tmp";

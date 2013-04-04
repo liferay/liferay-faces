@@ -24,7 +24,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 
 /**
  * This class provides a compatibility layer that isolates differences for JSF 2.0.
- * 
+ *
  * @author  Neil Griffin
  */
 public abstract class SAXHandlerFacesConfigPostImpl_2_0 extends SAXHandlerFacesConfigPostImpl_1_2 {

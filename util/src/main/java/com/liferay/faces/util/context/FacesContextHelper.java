@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -257,6 +257,11 @@ public interface FacesContextHelper {
 	public abstract FacesContext getFacesContext();
 
 	/**
+	 * Returns the map of JavaScript strings that need to be included at the end of a response.
+	 */
+	public abstract Map<String, String> getJavaScriptMap();
+
+	/**
 	 * Returns the locale of the viewRoot of the current JSF FacesContext
 	 */
 	public abstract Locale getLocale();
@@ -376,9 +381,4 @@ public interface FacesContextHelper {
 	 * Sets the value of the a session attribute using the specified name and value.
 	 */
 	public abstract void setSessionAttribute(String name, Object value);
-	
-	/**
-	 * Returns the map of JavaScript strings that need to be included at the end of a response.
-	 */
-	public abstract Map<String, String> getJavaScriptMap();
 }
