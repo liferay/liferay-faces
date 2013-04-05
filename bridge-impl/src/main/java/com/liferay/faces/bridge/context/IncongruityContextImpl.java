@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,6 +37,7 @@ public class IncongruityContextImpl extends IncongruityContextCompatImpl {
 		ExternalContext externalContext = facesContext.getExternalContext();
 
 		Set<IncongruousAction> incongruousActions = getIncongruousActions();
+
 		for (IncongruousAction incongruousAction : incongruousActions) {
 
 			if (incongruousAction == IncongruousAction.SET_REQUEST_CHARACTER_ENCODING) {

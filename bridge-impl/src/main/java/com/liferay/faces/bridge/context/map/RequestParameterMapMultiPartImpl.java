@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -354,9 +354,11 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 										fileName);
 								}
 								else {
+
 									if ((fileName != null) && (fileName.trim().length() > 0)) {
-										Exception e = new IOException(
-												"Failed to copy the stream of uploaded file=[" + fileName + "] to a temporary file (possibly a zero-length uploaded file)");
+										Exception e = new IOException("Failed to copy the stream of uploaded file=[" +
+												fileName +
+												"] to a temporary file (possibly a zero-length uploaded file)");
 										UploadedFile uploadedFile = uploadedFileFactory.getUploadedFile(e);
 										addUploadedFile(fieldName, uploadedFile);
 									}

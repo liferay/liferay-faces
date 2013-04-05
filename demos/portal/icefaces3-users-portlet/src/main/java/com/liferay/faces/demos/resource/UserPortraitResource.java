@@ -49,7 +49,7 @@ public class UserPortraitResource extends Resource {
 
 	// Private Constants
 	private static final String PARAM_LIBRARY_NAME = "ln";
-	
+
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(UserPortraitResource.class);
 

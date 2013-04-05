@@ -20,7 +20,7 @@ import javax.faces.bean.RequestScoped;
 /**
  * @author  Neil Griffin
  */
-@ManagedBean(name="as7LeakRequestScopeBean")
+@ManagedBean(name = "as7LeakRequestScopeBean")
 @RequestScoped
 public class AS7LeakRequestScopeBean {
 

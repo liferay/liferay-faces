@@ -196,10 +196,11 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 						buf.append(StringPool.EQUAL);
 
 						Integer parameterOccurrences = parameterOccurrenceMap.get(name);
+
 						if (parameterOccurrences == null) {
 							parameterOccurrences = new Integer(0);
 						}
-						
+
 						String value = values[parameterOccurrences.intValue()];
 						buf.append(value);
 						parameterOccurrences = new Integer(parameterOccurrences.intValue() + 1);
