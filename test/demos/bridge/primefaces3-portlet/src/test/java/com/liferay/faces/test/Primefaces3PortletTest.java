@@ -508,18 +508,14 @@ public class Primefaces3PortletTest {
 		logger.log(Level.INFO, "provinceIdFieldError.getText() = " + provinceIdFieldError.getText());
 		logger.log(Level.INFO, "postalCodeFieldError.getText() = " + postalCodeFieldError.getText());
 		
-		assertTrue("firstNameFieldError contains Value is required", firstNameFieldError.getText().contains("Value is required"));
-		assertTrue("lastNameFieldError contains Value is required", lastNameFieldError.getText().contains("Value is required"));
-		assertTrue("emailAddressFieldError contains Value is required", emailAddressFieldError.getText().contains("Value is required"));
-		assertTrue("phoneNumberFieldError contains Value is required", phoneNumberFieldError.getText().contains("Value is required"));
-		if ("".equals(dateOfBirthFieldError.getText())) {
-			assertTrue("dateOfBirthFieldError contains Value is required", dateOfBirthFieldError.getText().contains("Value is required"));
-		} else {
-			logger.log(Level.INFO, "dateOfBirthField was not emptied ... cannot assert dateOfBirthField validation");
-		}
-		assertTrue("cityFieldError contains Value is required", cityFieldError.getText().contains("Value is required"));
-		assertTrue("provinceIdFieldError contains Value is required", provinceIdFieldError.getText().contains("Value is required"));
-		assertTrue("postalCodeFieldError contains Value is required", postalCodeFieldError.getText().contains("Value is required"));
+		assertTrue("firstNameFieldError should contain 'Value is required', but instead contains '" + firstNameFieldError.getText() + "'", firstNameFieldError.getText().contains("Value is required"));
+		assertTrue("lastNameFieldError should contain 'Value is required', but instead contains '" + lastNameFieldError.getText() + "'", lastNameFieldError.getText().contains("Value is required"));
+		assertTrue("emailAddressFieldError should contain 'Value is required', but instead contains '" + emailAddressFieldError.getText() + "'", emailAddressFieldError.getText().contains("Value is required"));
+		assertTrue("phoneNumberFieldError should contain 'Value is required', but instead contains '" + phoneNumberFieldError.getText() + "'", phoneNumberFieldError.getText().contains("Value is required"));
+		assertTrue("dateOfBirthFieldError should contain 'Value is required', but instead contains '" + dateOfBirthFieldError.getText() + "'", dateOfBirthFieldError.getText().contains("Value is required"));
+		assertTrue("cityFieldError should contain 'Value is required', but instead contains '" + cityFieldError.getText() + "'", cityFieldError.getText().contains("Value is required"));
+		assertTrue("provinceIdFieldError should contain 'Value is required', but instead contains '" + provinceIdFieldError.getText() + "'", provinceIdFieldError.getText().contains("Value is required"));
+		assertTrue("postalCodeFieldError should contain 'Value is required', but instead contains '" + postalCodeFieldError.getText() + "'", postalCodeFieldError.getText().contains("Value is required"));
 		
 	}
 	
@@ -613,7 +609,7 @@ public class Primefaces3PortletTest {
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthFieldError.isDisplayed() = " + dateOfBirthFieldError.isDisplayed());
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
-		assertTrue("Invalid dateOfBirthField validation message displayed", 
+		assertTrue("dateOfBirthFieldError should contain 'Invalid date format', but insteead contains '"+dateOfBirthFieldError.getText()+"'", 
 				dateOfBirthFieldError.getText().contains("Invalid date format"));
 		tags = browser.findElements(By.xpath(dateValidationXpath)).size()-dateValidationXpathModifier;
 		logger.log(Level.INFO, "tags = " + tags);

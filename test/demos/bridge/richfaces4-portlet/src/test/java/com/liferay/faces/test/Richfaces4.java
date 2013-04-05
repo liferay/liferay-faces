@@ -120,7 +120,7 @@ public class Richfaces4 {
 	private static final String dateOfBirthFieldXpath = "//input[contains(@id,':dateOfBirth')]";
 	@FindBy(xpath = dateOfBirthFieldXpath)
 	private WebElement dateOfBirthField;
-	private static final String dateOfBirthFieldErrorXpath = "//input[contains(@id,':dateOfBirth')]/following-sibling::*[1]";
+	private static final String dateOfBirthFieldErrorXpath = "//span[contains(@id,':dateOfBirthField')]/span/span/span[2]/span[contains(@id,':dateOfBirth')]/span";
 	@FindBy(xpath = dateOfBirthFieldErrorXpath)
 	private WebElement dateOfBirthFieldError;
 	
