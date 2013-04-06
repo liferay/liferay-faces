@@ -20,7 +20,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
-import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.lang.StringPool;
 
@@ -32,7 +31,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 /**
  * @author  Neil Griffin
  */
-public class ScriptRenderer extends Renderer {
+public class ScriptRenderer extends ScriptRendererCompat {
 
 	// Private Constants
 	private static final String AUI_USE = "AUI().use";
@@ -69,7 +68,7 @@ public class ScriptRenderer extends Renderer {
 		// Otherwise, if the current request was triggered by Ajax, then the script must be rendered inline.
 		if (!inline) {
 
-			if (facesContext.getPartialViewContext().isAjaxRequest()) {
+			if (isAjaxRequest(facesContext)) {
 				inline = true;
 			}
 		}
