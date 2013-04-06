@@ -39,7 +39,6 @@
 	</component>
 	<factory>
 		<application-factory>com.liferay.faces.bridge.application.ApplicationFactoryImpl</application-factory>
-		<lifecycle-factory>com.liferay.faces.bridge.lifecycle.LifecycleFactoryImpl</lifecycle-factory>
 		<factory-extension>
 			<bridge:bean-manager-factory>com.liferay.faces.bridge.bean.BeanManagerFactoryImpl</bridge:bean-manager-factory>
 			<bridge:bridge-context-factory>com.liferay.faces.bridge.context.BridgeContextFactoryImpl</bridge:bridge-context-factory>
@@ -55,6 +54,23 @@
 			<bridge:view-handler-factory>com.liferay.faces.bridge.application.ViewHandlerFactoryImpl</bridge:view-handler-factory>
 		</factory-extension>
 	</factory>
+	<lifecycle>
+		<!-- Section 5.2.4 of the JSR 329 Spec requires that a phase listener be registered in order to handle Portlet -->
+		<!-- 2.0 Public Render Parameters after the RESTORE_VIEW phase of the JSF lifecycle executes. The IPCPhaseListener -->
+		<!-- satisfies this requirement. -->
+		<phase-listener>com.liferay.faces.bridge.event.IPCPhaseListener</phase-listener>
+		<!-- Add the PortletContainerProxyPhaseListener so that the PortletContainer will be able to respond to each -->
+		<!-- phase of the JSF lifecycle. -->
+		<phase-listener>com.liferay.faces.bridge.event.ManagedBeanScopePhaseListener</phase-listener>
+		<!-- Section 5.2.6 also indicates that the bridge must proactively ensure that only the- RESTORE_VIEW phase -->
+		<!-- executes, and Section 6.4 indicates that a PhaseListener must be used. The RenderRequestPhaseListener -->
+		<!-- satisfies this requirement. -->
+		<phase-listener>com.liferay.faces.bridge.event.PortletContainerProxyPhaseListener</phase-listener>
+		<!-- Add the ManagedBeanScopePhaseListener so that after the RENDER_RESPONSE phase, the managed-beans in -->
+		<!-- bridgeRequestScope will go out-of-scope which will in turn cause any annotated PreDestroy methods to -->
+		<!-- be called. -->
+		<phase-listener>com.liferay.faces.bridge.event.RenderRequestPhaseListener</phase-listener>
+	</lifecycle>
 	<render-kit>
 		<renderer>
 			<description>HtmlInputFile Renderer</description>
