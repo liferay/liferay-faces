@@ -77,7 +77,6 @@
 		<aui:column id="c2">
 			<h:form id="f1">
 				<aui:column id="c2a" styleClass="uploaded-files">
-					<h:messages globalOnly="true" layout="table" />
 					<h3>
 						<h:outputText value="#{i18n['attachments']}" />
 					</h3>
