@@ -1,24 +1,37 @@
 package com.liferay.faces.test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
+import org.jboss.arquillian.graphene.Graphene;
 import org.jboss.arquillian.graphene.enricher.findby.FindBy;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.interactions.Actions;
+
+import java.io.File;
+import org.apache.commons.io.FileUtils;
+
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+// import java.net.URL;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.jboss.arquillian.graphene.Graphene.waitGui;
+import static org.jboss.arquillian.graphene.Graphene.waitAjax;
+import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 @RunWith(Arquillian.class)
 public class PlutoTest {
@@ -32,9 +45,8 @@ public class PlutoTest {
 
 	@Drone
 	WebDriver browser;
-
+	
 	// elements for logging in
-	// <input type="text" name="j_username" id="j_username">
 	private static final String emailFieldXpath = "//input[@id='j_username']";
 	@FindBy(xpath = emailFieldXpath)
 	private WebElement emailField;
@@ -47,27 +59,23 @@ public class PlutoTest {
 	private static final String signedInTextXpath = "//div[@id='logout']/a";
 	@FindBy(xpath = signedInTextXpath)
 	private WebElement signedInText;
-
+	
 	// form tag found after submitting
 	private static final String formTagXpath = "//form[@method='post']";
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
-
+	
 	// portlet topper and menu elements
-	// <h2 class="title">JSF2</h2>
 	private static final String portletDisplayNameXpath = "//td[@class='header']/h2";
 	@FindBy(xpath = portletDisplayNameXpath)
 	private WebElement portletDisplayName;
-	// <form action="" name="modeSelectionForm" style="display:inline"><select onchange="self.location=this.options[this.selectedIndex].value"><option value="/pluto/portal/__pmjsf2-portlet-30x210x22-ga3-SNAPSHOT0x21!2286517%7C0_help">HELP</option><option value="/pluto/portal/__pmjsf2-portlet-30x210x22-ga3-SNAPSHOT0x21!2286517%7C0_edit">EDIT</option><option value="/pluto/portal/__pmjsf2-portlet-30x210x22-ga3-SNAPSHOT0x21!2286517%7C0_view" selected="true">VIEW</option></select></form>
 	private static final String menuButtonXpath = "//form[@name='modeSelectionForm']/select";
 	@FindBy(xpath = menuButtonXpath)
 	private WebElement menuButton;
-	// private static final String menuPreferencesXpath = "//form[@name='modeSelectionForm']/select/option[contains(text(),'EDIT')]";
-	// <input type="submit" name="A0375:l1:c1:f1:j_idt31" value="Edit Preferences">
 	private static final String menuPreferencesXpath = "//input[@type='submit' and @value='Edit Preferences']";
 	@FindBy(xpath = menuPreferencesXpath)
 	private WebElement menuPreferences;
-
+	
 	// preferences elements
 	private static final String datePatternFieldXpath = "//input[contains(@id,':datePattern')]";
 	@FindBy(xpath = datePatternFieldXpath)
@@ -75,72 +83,72 @@ public class PlutoTest {
 	private static final String resetButtonXpath = "//input[@type='submit' and @value='Reset']";
 	@FindBy(xpath = resetButtonXpath)
 	private WebElement resetButton;
-
+	
 	// elements for Job Applicants
 	private static final String logoXpath = "//img[contains(@src,'liferay-logo.png')]";
 	@FindBy(xpath = logoXpath)
 	private WebElement logo;
-
+	
 	private static final String firstNameFieldXpath = "//input[contains(@id,':firstName')]";
 	@FindBy(xpath = firstNameFieldXpath)
 	private WebElement firstNameField;
 	private static final String firstNameFieldErrorXpath = "//input[contains(@id,':firstName')]/following-sibling::*[1]";
 	@FindBy(xpath = firstNameFieldErrorXpath)
 	private WebElement firstNameFieldError;
-
+	
 	private static final String lastNameFieldXpath = "//input[contains(@id,':lastName')]";
 	@FindBy(xpath = lastNameFieldXpath)
 	private WebElement lastNameField;
 	private static final String lastNameFieldErrorXpath = "//input[contains(@id,':lastName')]/following-sibling::*[1]";
 	@FindBy(xpath = lastNameFieldErrorXpath)
 	private WebElement lastNameFieldError;
-
+	
 	private static final String emailAddressFieldXpath = "//input[contains(@id,':emailAddress')]";
 	@FindBy(xpath = emailAddressFieldXpath)
 	private WebElement emailAddressField;
 	private static final String emailAddressFieldErrorXpath = "//input[contains(@id,':emailAddress')]/following-sibling::*[1]";
 	@FindBy(xpath = emailAddressFieldErrorXpath)
 	private WebElement emailAddressFieldError;
-
+	
 	private static final String phoneNumberFieldXpath = "//input[contains(@id,':phoneNumber')]";
 	@FindBy(xpath = phoneNumberFieldXpath)
 	private WebElement phoneNumberField;
 	private static final String phoneNumberFieldErrorXpath = "//input[contains(@id,':phoneNumber')]/following-sibling::*[1]";
 	@FindBy(xpath = phoneNumberFieldErrorXpath)
 	private WebElement phoneNumberFieldError;
-
+	
 	private static final String dateOfBirthFieldXpath = "//input[contains(@id,':dateOfBirth')]";
 	@FindBy(xpath = dateOfBirthFieldXpath)
 	private WebElement dateOfBirthField;
 	private static final String dateOfBirthFieldErrorXpath = "//input[contains(@id,':dateOfBirth')]/following-sibling::*[1]";
 	@FindBy(xpath = dateOfBirthFieldErrorXpath)
 	private WebElement dateOfBirthFieldError;
-
+	
 	private static final String cityFieldXpath = "//input[contains(@id,':city')]";
 	@FindBy(xpath = cityFieldXpath)
 	private WebElement cityField;
 	private static final String cityFieldErrorXpath = "//input[contains(@id,':city')]/following-sibling::*[1]";
 	@FindBy(xpath = cityFieldErrorXpath)
 	private WebElement cityFieldError;
-
+	
 	private static final String provinceIdFieldXpath = "//select[contains(@id,':provinceId')]";
 	@FindBy(xpath = provinceIdFieldXpath)
 	private WebElement provinceIdField;
 	private static final String provinceIdFieldErrorXpath = "//select[contains(@id,':provinceId')]/following-sibling::*[1]";
 	@FindBy(xpath = provinceIdFieldErrorXpath)
 	private WebElement provinceIdFieldError;
-
+	
 	private static final String postalCodeFieldXpath = "//input[contains(@id,':postalCode')]";
 	@FindBy(xpath = postalCodeFieldXpath)
 	private WebElement postalCodeField;
 	private static final String postalCodeFieldErrorXpath = "//input[contains(@id,':postalCode')]/following-sibling::*[1]/following-sibling::*[1]";
 	@FindBy(xpath = postalCodeFieldErrorXpath)
 	private WebElement postalCodeFieldError;
-
+	
 	private static final String postalCodeToolTipXpath = "//img[contains(@title,'Type any of these ZIP codes')]";
 	@FindBy(xpath = postalCodeToolTipXpath)
 	private WebElement postalCodeToolTip;
-
+	
 	private static final String showCommentsLinkXpath = "//a[contains(text(),'Show Comments')]";
 	@FindBy(xpath = showCommentsLinkXpath)
 	private WebElement showCommentsLink;
@@ -150,7 +158,7 @@ public class PlutoTest {
 	private static final String commentsXpath = "//textarea[contains(@id,':comments')]";
 	@FindBy(xpath = commentsXpath)
 	private WebElement comments;
-
+	
 	private static final String fileUploadChooserXpath = "//input[@type='file' and @multiple='multiple']";
 	@FindBy(xpath = fileUploadChooserXpath)
 	private WebElement fileUploadChooser;
@@ -160,7 +168,7 @@ public class PlutoTest {
 	private static final String uploadedFileXpath = "//tr[@class='portlet-section-body results-row']/td[2]";
 	@FindBy(xpath = uploadedFileXpath)
 	private WebElement uploadedFile;
-
+	
 	private static final String submitButtonXpath = "//input[@type='submit' and @value='Submit']";
 	@FindBy(xpath = submitButtonXpath)
 	private WebElement submitButton;
@@ -173,7 +181,7 @@ public class PlutoTest {
 	private static final String returnLinkXpath = "//a[contains(text(),'Return to Full Page')]";
 	@FindBy(xpath = returnLinkXpath)
 	private WebElement returnLink;
-
+	
 	private static final String mojarraVersionXpath = "//*[contains(text(),'Mojarra')]";
 	@FindBy(xpath = mojarraVersionXpath)
 	private WebElement mojarraVersion;
@@ -186,114 +194,93 @@ public class PlutoTest {
 	private static final String bridgeVersionXpath = "//*[contains(text(),'Liferay Faces Bridge')]";
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
-
+	
 	// xpath for specific tests
 	private static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../child::node()";
 	int dateValidationXpathModifier = 1;
-
+	
 	@Before
 	public void beforeEachTest() {
-
-		// browser.manage().deleteAllCookies();
-		// logger.log(Level.INFO, "browser.manage().deleteAllCookies() ...");
-
+		
+//		browser.manage().deleteAllCookies();
+//		logger.log(Level.INFO, "browser.manage().deleteAllCookies() ...");
+		
 	}
 
 	public void signIn() throws Exception {
-
+		
 		// Shut its dirty mouth
-		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit")
-				.setLevel(Level.OFF);
-
-		logger.log(Level.INFO, "browser.navigate().to(" + signInUrl + ")");
+		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
+		
+		logger.log(Level.INFO, "browser.navigate().to("+signInUrl+")");
 		browser.navigate().to(signInUrl);
-		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle()
-				+ " before signing in ...");
-
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " before signing in ...");
+		
 		emailField.clear();
 		emailField.sendKeys("pluto");
 		passwordField.clear();
 		passwordField.sendKeys("pluto");
 		signInButton.click();
-		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle()
-				+ " after clicking the sign in button and waiting");
-		logger.log(Level.INFO, "We must be signed in because, apparently, we could ... " + signedInText.getText());
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " after clicking the sign in button and waiting");
+		logger.log(Level.INFO, signedInText.getText());
+		// assertTrue("You are signed in", signedInText.getText().contains("You are signed in"));
 		
-		// assertTrue("You are signed in",
-		// signedInText.getText().contains("You are signed in"));
-
 	}
-
+	
 	@Test
 	@RunAsClient
 	@InSequence(1000)
 	public void jobApplicantRenderViewMode() throws Exception {
-
+			
 		signIn();
-		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
+		logger.log(Level.INFO, "browser.navigate().to("+url+")");
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
-		logger.log(Level.INFO,
-				"browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		logger.log(Level.INFO, "portletDisplayName.getText() = "
-				+ portletDisplayName.getText());
-
-		assertTrue("portletDisplayName.isDisplayed()",
-				portletDisplayName.isDisplayed());
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
+		
+		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
 		assertTrue("menuButton.isDisplayed()", menuButton.isDisplayed());
-//		assertFalse("menuPreferences is NOT displayed()",
-//				menuPreferences.isDisplayed());
-
-		// logger.log(Level.INFO, "browser.getPageSource() = " +
-		// browser.getPageSource());
-
+//		assertFalse("menuPreferences is NOT displayed()", menuPreferences.isDisplayed());
+		
+		// logger.log(Level.INFO, "browser.getPageSource() = " + browser.getPageSource());
+		
 		if (isThere(logoXpath)) {
-			assertTrue("logo.isDisplayed()", logo.isDisplayed());
+			assertTrue("logo.isDisplayed()",logo.isDisplayed());
 		}
-
+		
 		assertTrue("firstNameField.isDisplayed()", firstNameField.isDisplayed());
 		assertTrue("lastNameField.isDisplayed()", lastNameField.isDisplayed());
-		assertTrue("emailAddressField.isDisplayed()",
-				emailAddressField.isDisplayed());
-		assertTrue("phoneNumberField.isDisplayed()",
-				phoneNumberField.isDisplayed());
-
-		assertTrue("dateOfBirthField.isDisplayed()",
-				dateOfBirthField.isDisplayed());
+		assertTrue("emailAddressField.isDisplayed()", emailAddressField.isDisplayed());
+		assertTrue("phoneNumberField.isDisplayed()", phoneNumberField.isDisplayed());
+		
+		assertTrue("dateOfBirthField.isDisplayed()", dateOfBirthField.isDisplayed());
 		assertTrue("cityField.isDisplayed()", cityField.isDisplayed());
-		assertTrue("provinceIdField.isDisplayed()",
-				provinceIdField.isDisplayed());
-		assertTrue("postalCodeField.isDisplayed()",
-				postalCodeField.isDisplayed());
-		assertTrue("postalCodeToolTip.isDisplayed()",
-				postalCodeToolTip.isDisplayed());
-
-		assertTrue("showCommentsLink.isDisplayed()",
-				showCommentsLink.isDisplayed());
-
+		assertTrue("provinceIdField.isDisplayed()", provinceIdField.isDisplayed());
+		assertTrue("postalCodeField.isDisplayed()", postalCodeField.isDisplayed());
+		assertTrue("postalCodeToolTip.isDisplayed()", postalCodeToolTip.isDisplayed());
+		
+		assertTrue("showCommentsLink.isDisplayed()", showCommentsLink.isDisplayed());
+		
 		if (isThere(fileUploadChooserXpath)) {
-			logger.log(Level.INFO, "fileUploadChooser.isDisplayed() = "
-					+ fileUploadChooser.isDisplayed());
-			logger.log(Level.INFO,
-					"submitFile.isDisplayed() = " + submitFile.isDisplayed());
+			logger.log(Level.INFO, "fileUploadChooser.isDisplayed() = " + fileUploadChooser.isDisplayed());
+			logger.log(Level.INFO, "submitFile.isDisplayed() = " + submitFile.isDisplayed());
 		}
-
+		
 		assertTrue("submitButton.isDisplayed()", submitButton.isDisplayed());
-		logger.log(Level.INFO,
-				"submitButton.getTagName() = " + submitButton.getTagName());
-
+		logger.log(Level.INFO, "submitButton.getTagName() = " + submitButton.getTagName());
+		
 		assertTrue("mojarraVersion.isDisplayed()", mojarraVersion.isDisplayed());
 		logger.log(Level.INFO, mojarraVersion.getText());
 		if (isThere(componentLibraryVersionXpath)) {
-			assertTrue("componentLibraryVersion.isDisplayed()",
-					componentLibraryVersion.isDisplayed());
+			assertTrue("componentLibraryVersion.isDisplayed()", componentLibraryVersion.isDisplayed());
 			logger.log(Level.INFO, componentLibraryVersion.getText());
 		}
 		assertTrue("alloyVersion.isDisplayed()", alloyVersion.isDisplayed());
 		logger.log(Level.INFO, alloyVersion.getText());
 		assertTrue("bridgeVersion.isDisplayed()", bridgeVersion.isDisplayed());
 		logger.log(Level.INFO, bridgeVersion.getText());
-
+		
 	}
 	
 	@Test
