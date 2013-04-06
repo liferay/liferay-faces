@@ -104,7 +104,6 @@
 		<aui:column id="c2">
 			<aui:column id="c2a" styleClass="uploaded-files">
 				<h:form id="f2">
-					<h:messages globalOnly="true" layout="table" />
 					<h3>#{i18n['attachments']}</h3>
 					<h:dataTable headerClass="portlet-section-header results-header"
 						rowClasses="portlet-section-body results-row, portlet-section-alternate results-row alt"
@@ -133,7 +132,6 @@
 				</h:form>
 				<hr />
 				<h:form id="f3" enctype="multipart/form-data">
-					<h:messages />
 					<h:panelGrid columns="1">
 						<bridge:inputFile fileUploadListener="#{applicantBackingBean.handleFileUpload}" multiple="multiple" />
 					</h:panelGrid>
