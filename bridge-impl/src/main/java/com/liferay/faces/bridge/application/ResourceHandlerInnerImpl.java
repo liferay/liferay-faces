@@ -334,7 +334,7 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 							// Otherwise, if this is the packed.js JavaScript resource, then fix the JS code so that
 							// rich:fileUpload will work.
 							else if (resourceName.indexOf(PACKED_JS) >= 0) {
-								String javaScriptText = fixRichFacesFileUpload(facesContext,
+								String javaScriptText = fixRichFacesPackedDotJs(facesContext,
 										byteArrayOutputStream.toString());
 								responseContentLength = javaScriptText.length();
 								byteArrayOutputStream = new ByteArrayOutputStream();
@@ -501,17 +501,51 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 		return cssText;
 	}
 
-	private String fixRichFacesFileUpload(FacesContext facesContext, String javaScriptText) {
+	private String fixRichFacesPackedDotJs(FacesContext facesContext, String javaScriptText) {
 
+		// Replace the URL used by rich:fileUpload for forum submission.
+		// http://issues.liferay.com/browse/FACES-1234
+		// https://issues.jboss.org/browse/RF-12273
 		String token = "this.form.attr(\"action\", originalAction + delimiter + UID + \"=\" + this.loadableItem.uid);";
 		int pos = javaScriptText.indexOf(token);
 
 		if (pos > 0) {
+			logger.debug("fixRichFacesPackedDotJs: found first token in packed.js");
+
 			StringBuilder buf = new StringBuilder();
 			buf.append(javaScriptText.substring(0, pos));
 			buf.append(
 				"this.form.attr(\"action\", this.form.children(\"input[name='javax.faces.encodedURL']\").val() + delimiter + UID + \"=\" + this.loadableItem.uid);");
 			buf.append(javaScriptText.substring(pos + token.length() + 1));
+			javaScriptText = buf.toString();
+		}
+
+		// Fix JavaScript error "TypeError: jQuery.atmosphere is undefined" by inserting checks for undefined variable.
+		// http://issues.liferay.com/browse/FACES-1532
+		token = "if (jQuery.atmosphere.requests.length > 0) {";
+		pos = javaScriptText.indexOf(token);
+
+		if (pos > 0) {
+			logger.debug("fixRichFacesPackedDotJs: found second token in packed.js");
+
+			StringBuilder buf = new StringBuilder();
+			buf.append(javaScriptText.substring(0, pos));
+			buf.append("if (!jQuery.atmosphere) { return; }; ");
+			buf.append(javaScriptText.substring(pos));
+			javaScriptText = buf.toString();
+		}
+
+		// jQuery.atmosphere.unsubscribe();
+		token = "jQuery.atmosphere.unsubscribe();";
+		pos = javaScriptText.indexOf(token);
+
+		if (pos > 0) {
+			logger.debug("fixRichFacesPackedDotJs: found third token in packed.js");
+
+			StringBuilder buf = new StringBuilder();
+			buf.append(javaScriptText.substring(0, pos));
+			buf.append("if (!jQuery.atmosphere) { return; }; ");
+			buf.append(javaScriptText.substring(pos));
 			javaScriptText = buf.toString();
 		}
 
