@@ -46,14 +46,20 @@ public class ScriptRenderer extends Renderer {
 	private static final String USE = "use";
 
 	// Private Data Members
-	boolean inline;
-	String inlineUse;
+	private boolean inline;
+	private String inlineUse;
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		Map<String, Object> attributes = uiComponent.getAttributes();
 
+		// Assume that the script is not going to be rendered inline, but rather it will be rendered at the bottom of
+		// the page.
+		inline = false;
+
+		// If the current URL is a "refresh" type of URL (isolated) or the window state is exclusive, then the script
+		// must be rendered inline.
 		ThemeDisplay themeDisplay = (ThemeDisplay) facesContext.getExternalContext().getRequestMap().get(
 				WebKeys.THEME_DISPLAY);
 
@@ -61,6 +67,16 @@ public class ScriptRenderer extends Renderer {
 			inline = (themeDisplay.isIsolated() || themeDisplay.isStateExclusive());
 		}
 
+		// Otherwise, if the current request was triggered by Ajax, then the script must be rendered inline.
+		if (!inline) {
+
+			if (facesContext.getPartialViewContext().isAjaxRequest()) {
+				inline = true;
+			}
+		}
+
+		// If the developer specified "inline" as the value of the position attribute, then the script must be
+		// rendered inline.
 		String position = (String) attributes.get(POSITION);
 
 		if (INLINE.equals(position)) {
