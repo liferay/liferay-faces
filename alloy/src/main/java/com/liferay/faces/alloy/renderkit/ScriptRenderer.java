@@ -53,14 +53,18 @@ public class ScriptRenderer extends Renderer {
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		Map<String, Object> attributes = uiComponent.getAttributes();
-		String position = (String) attributes.get(POSITION);
-		inline = INLINE.equals(position);
 
 		ThemeDisplay themeDisplay = (ThemeDisplay) facesContext.getExternalContext().getRequestMap().get(
 				WebKeys.THEME_DISPLAY);
 
 		if (themeDisplay != null) {
 			inline = (themeDisplay.isIsolated() || themeDisplay.isStateExclusive());
+		}
+
+		String position = (String) attributes.get(POSITION);
+
+		if (INLINE.equals(position)) {
+			inline = true;
 		}
 
 		if (inline) {
