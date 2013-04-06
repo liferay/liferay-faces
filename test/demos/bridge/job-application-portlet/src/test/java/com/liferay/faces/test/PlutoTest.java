@@ -405,11 +405,10 @@ public class PlutoTest {
 		int dateLengthAfterChange = 8;
 		int dateLengthAfterReset = 10;
 		
-		Thread.sleep(2000);
 		menuButton.click();
-		Thread.sleep(2000);
+		Thread.sleep(500);
 		menuPreferences.click();
-		Thread.sleep(2000);
+		Thread.sleep(500);
 		logger.log(Level.INFO, "datePatternField.getAttribute('value') = " + datePatternField.getAttribute("value"));
 		logger.log(Level.INFO, "resetButton.isDisplayed() = " + resetButton.isDisplayed());
 		// MM/dd/yyyy
