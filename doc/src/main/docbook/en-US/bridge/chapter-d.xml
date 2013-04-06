@@ -266,4 +266,24 @@
 &lt;/context-param></programlisting>
 		</example>
 	</sect1>
+	<sect1>
+		<title>View Parameters</title>
+		<para>In the case of a portlet RenderRequest, Section 5.2.6 of the JSR 329 Spec requires that the bridge must
+			ensure that only the RESTORE_VIEW and RENDER_RESPONSE phases of the JSF lifecycle execute, and Section 6.4
+			requires that a PhaseListener be used to skip the APPLY_REQUEST_VALUES, PROCESS_VALIDATIONS,
+			UPDATE_MODEL_VALUES, and INVOKE_APPLICATION phases. These requirements prevent the JSF 2.0 "View Parameters"
+			feature from working, because the presence of f:metadata and f:viewParam in a Facelet view makes it necessary
+			for the entire JSF lifecycle be run.</para>
+		<para>Liferay Faces Bridge enables support for View Parameters by default, but provides a configuration
+			option that provides the ability to disable the feature.</para>
+		<example>
+			<title>Disabling the View Parameters feature via the WEB-INF/web.xml descriptor</title>
+			<programlisting>&lt;!-- The default value of the following -->
+&lt;!-- context-param is true. -->
+&lt;context-param>
+	&lt;param-name>com.liferay.faces.bridge.viewParametersEnabled&lt;/param-name>
+	&lt;param-value>false&lt;/param-value>
+&lt;/context-param></programlisting>
+		</example>
+	</sect1>
 </chapter>
