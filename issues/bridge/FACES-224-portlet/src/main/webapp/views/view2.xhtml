@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<h:head />
+	<f:metadata>
+		<f:viewParam name="viewParam1" value="#{testBean.value1}"></f:viewParam>
+		<f:viewParam name="viewParam2" value="#{testBean.value2}"></f:viewParam>
+	</f:metadata>
+	<h:body>
+		<h:outputText value="This is view2.xhtml" />
+		<br />
+		<h:outputText value="viewParam1='#{testBean.value1}' (if the issue is fixed, the value should be equal to 'abc')" />
+		<br />
+		<h:outputText value="viewParam2='#{testBean.value2}' (if the issue is fixed, the value should be equal to 'xyz')" />
+	</h:body>
+</f:view>
+

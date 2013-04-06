@@ -27,14 +27,33 @@ import com.liferay.faces.bridge.context.BridgeContext;
  *
  * @author  Neil Griffin
  */
-public class RenderRequestPhaseListener implements PhaseListener {
+public class RenderRequestPhaseListener extends RenderRequestPhaseListenerCompat implements PhaseListener {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 8470095938465172618L;
 
+	// Protected (Lazy-Initialized) Constants
+	protected static Boolean VIEW_PARAMETERS_ENABLED;
+
+	// Private Data Members
+	private PhaseId phaseId = PhaseId.RESTORE_VIEW;
+
 	public void afterPhase(PhaseEvent phaseEvent) {
 
-		if (BridgeContext.getCurrentInstance().getPortletRequestPhase() == Bridge.PortletPhase.RENDER_PHASE) {
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+
+		if (VIEW_PARAMETERS_ENABLED == null) {
+
+			synchronized (phaseId) {
+
+				if (VIEW_PARAMETERS_ENABLED == null) {
+					VIEW_PARAMETERS_ENABLED = isViewParametersEnabled(bridgeContext);
+				}
+			}
+		}
+
+		// If the JSF 2 "View Parameters" feature is not enabled, then ensure that only the RESTORE_VIEW phase executes.
+		if (!VIEW_PARAMETERS_ENABLED && (bridgeContext.getPortletRequestPhase() == Bridge.PortletPhase.RENDER_PHASE)) {
 			phaseEvent.getFacesContext().renderResponse();
 		}
 	}
@@ -44,7 +63,7 @@ public class RenderRequestPhaseListener implements PhaseListener {
 	}
 
 	public PhaseId getPhaseId() {
-		return PhaseId.RESTORE_VIEW;
+		return phaseId;
 	}
 
 }
