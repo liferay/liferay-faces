@@ -96,4 +96,7 @@ public class BridgeConfigConstants {
 
 	/** Name of the resource request parameter used to encode the viewId */
 	public static final String PARAM_VIEW_ID_RESOURCE = "com.liferay.faces.bridge.viewIdResourceParameterName";
+
+	/** Boolean indicating whether or not the JSF 2 "View Parameters" feature is enabled. Default value is true. */
+	public static String PARAM_VIEW_PARAMTERS_ENABLED = "com.liferay.faces.bridge.viewParametersEnabled";
 }
