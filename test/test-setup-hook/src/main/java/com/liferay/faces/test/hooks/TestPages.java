@@ -15,7 +15,7 @@ package com.liferay.faces.test.hooks;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import com.liferay.faces.test.hooks.PortalPage;
 
 /**
  * The purpose of this class is to isolate source code differences between different versions of Liferay Portal.
