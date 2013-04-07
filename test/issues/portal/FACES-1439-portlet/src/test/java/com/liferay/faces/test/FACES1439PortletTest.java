@@ -41,7 +41,7 @@ public class FACES1439PortletTest {
 	// @ArquillianResource
 	// URL portalURL;
 	String signInUrl = "http://localhost:8080/web/guest/signin";
-	String url = "http://localhost:8080/web/guest/faces-1439";
+	String url = "http://localhost:8080/web/portal-issues/faces-1439";
 
 	@Drone
 	WebDriver browser;

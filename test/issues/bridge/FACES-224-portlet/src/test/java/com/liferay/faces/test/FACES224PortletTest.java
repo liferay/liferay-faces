@@ -34,14 +34,14 @@ import static org.jboss.arquillian.graphene.Graphene.waitAjax;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 @RunWith(Arquillian.class)
-public class FACES1478PortletTest {
+public class FACES224PortletTest {
 	
-	private final static Logger logger = Logger.getLogger(FACES1478PortletTest.class.getName());
+	private final static Logger logger = Logger.getLogger(FACES224PortletTest.class.getName());
 	
 	// @ArquillianResource
 	// URL portalURL;
 	String signInUrl = "http://localhost:8080/web/guest/signin";
-	String url = "http://localhost:8080/web/bridge-issues/faces-1478";
+	String url = "http://localhost:8080/web/bridge-issues/faces-224";
 
 	@Drone
 	WebDriver browser;
@@ -55,9 +55,15 @@ public class FACES1478PortletTest {
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
 	
-	private static final String secondLinkXpath = "//form[@method='post']/a[2]";
-	@FindBy(xpath = secondLinkXpath)
-	private WebElement secondLink;
+	// <input id="A2535:httpGetButton" type="button" value="Click me to render view2.xhtml via HTTP GET">
+	private static final String buttonXpath = "//input[contains(@value,'Click me to render view2.xhtml')]";
+	@FindBy(xpath = buttonXpath)
+	private WebElement button;
+	
+	// <div class="portlet-body" id="aui_3_4_0_1_500"> <div id="A2535" class="liferay-faces-bridge-body">This is view2.xhtml <br>viewParam1='' (if the issue is fixed, the value should be equal to 'abc') <br>viewParam2='' (if the issue is fixed, the value should be equal to 'xyz')</div> </div>
+	private static final String view2DivXpath = "//div[@class='portlet-body']/div[1]";
+	@FindBy(xpath = view2DivXpath)
+	private WebElement view2Div;
 	
 	@Before
 	public void beforeEachTest() {
@@ -70,30 +76,39 @@ public class FACES1478PortletTest {
 	@Test
 	@RunAsClient
 	@InSequence(1000)
-	public void FACES1478PortletParameters() throws Exception {
+	public void FACES224PortletViewMode() throws Exception {
 		
 		logger.log(Level.INFO, "browser.navigate().to("+url+")");
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
-		logger.log(Level.INFO, "formTag.getText() = " + formTag.getText());
-		logger.log(Level.INFO, "secondLink.getAttribute('href') = " + secondLink.getAttribute("href"));
 		
-		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
-		assertTrue("formTag.isDisplayed()", formTag.isDisplayed());
-		assertTrue("secondLink.isDisplayed()", secondLink.isDisplayed());
+		logger.log(Level.INFO, "button.isDisplayed() = " + button.isDisplayed());
 		
-		int firstParameter = secondLink.getAttribute("href").indexOf("testParam=foo");
-		logger.log(Level.INFO, "The firstParameter was found at position = " + firstParameter);
-		int secondParameter = secondLink.getAttribute("href").indexOf("testParam=bar");
-		logger.log(Level.INFO, "The secondParameter was found at position = " + secondParameter);
+		assertTrue("button should be displayed but it is not, nothing found with buttonXpath = " + buttonXpath, button.isDisplayed());
 		
-		assertTrue("firstParameter is in the url", firstParameter > -1);
-		assertTrue("secondParameter is in the url", secondParameter > -1);
-		assertTrue("firstParameter occurs before the secondParameter", firstParameter < secondParameter);
+	}
+	
+	@Test
+	@RunAsClient
+	@InSequence(2000)
+	public void View2() throws Exception {
 		
-		// logger.log(Level.INFO, "browser.getPageSource() = " + browser.getPageSource());
+		button.click();
+		Thread.sleep(500);
+		
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+		
+		logger.log(Level.INFO, "view2Div.isDisplayed() = " + view2Div.isDisplayed());
+		logger.log(Level.INFO, "view2Div.getText() = " + view2Div.getText());
+		
+		logger.log(Level.INFO, "view2Div.getText().contains('viewParam1') = " + view2Div.getText().contains("viewParam1"));
+		logger.log(Level.INFO, "view2Div.getText().contains('viewParam2') = " + view2Div.getText().contains("viewParam2"));
+		Thread.sleep(500);
+		
+		assertTrue("view2Div.getText() should contain viewParam1='abc', but instead it contains '"+view2Div.getText()+"'", view2Div.getText().contains("viewParam1='abc'"));
+		assertTrue("view2Div.getText() should contain viewParam2='xyz', but instead it contains '"+view2Div.getText()+"'", view2Div.getText().contains("viewParam2='xyz'"));
 		
 	}
 		
