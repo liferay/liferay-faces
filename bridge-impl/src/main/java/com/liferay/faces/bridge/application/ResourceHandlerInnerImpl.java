@@ -502,13 +502,16 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 	}
 
 	private String fixRichFacesPackedDotJs(FacesContext facesContext, String javaScriptText) {
-		
-		// replace this token
+
+		// Replace the URL used by rich:fileUpload for forum submission.
+		// http://issues.liferay.com/browse/FACES-1234
+		// https://issues.jboss.org/browse/RF-12273
 		String token = "this.form.attr(\"action\", originalAction + delimiter + UID + \"=\" + this.loadableItem.uid);";
 		int pos = javaScriptText.indexOf(token);
-		
+
 		if (pos > 0) {
 			logger.debug("fixRichFacesPackedDotJs: found first token in packed.js");
+
 			StringBuilder buf = new StringBuilder();
 			buf.append(javaScriptText.substring(0, pos));
 			buf.append(
@@ -516,34 +519,36 @@ public class ResourceHandlerInnerImpl extends ResourceHandlerWrapper {
 			buf.append(javaScriptText.substring(pos + token.length() + 1));
 			javaScriptText = buf.toString();
 		}
-		
-		// prepend to this token
+
+		// Fix JavaScript error "TypeError: jQuery.atmosphere is undefined" by inserting checks for undefined variable.
+		// http://issues.liferay.com/browse/FACES-1532
 		token = "if (jQuery.atmosphere.requests.length > 0) {";
 		pos = javaScriptText.indexOf(token);
-		
+
 		if (pos > 0) {
 			logger.debug("fixRichFacesPackedDotJs: found second token in packed.js");
+
 			StringBuilder buf = new StringBuilder();
 			buf.append(javaScriptText.substring(0, pos));
 			buf.append("if (!jQuery.atmosphere) { return; }; ");
 			buf.append(javaScriptText.substring(pos));
 			javaScriptText = buf.toString();
 		}
-		
+
 		// jQuery.atmosphere.unsubscribe();
-		// prepend to this token
 		token = "jQuery.atmosphere.unsubscribe();";
 		pos = javaScriptText.indexOf(token);
-				
+
 		if (pos > 0) {
 			logger.debug("fixRichFacesPackedDotJs: found third token in packed.js");
+
 			StringBuilder buf = new StringBuilder();
 			buf.append(javaScriptText.substring(0, pos));
 			buf.append("if (!jQuery.atmosphere) { return; }; ");
 			buf.append(javaScriptText.substring(pos));
 			javaScriptText = buf.toString();
 		}
-		
+
 		return javaScriptText;
 	}
 

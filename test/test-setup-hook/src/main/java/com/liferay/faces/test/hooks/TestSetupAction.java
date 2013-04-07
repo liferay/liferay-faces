@@ -93,6 +93,26 @@ public class TestSetupAction extends TestSetupCompatAction {
 		UserLocalServiceUtil.addGroupUsers(groupId, userIds);
 	}
 
+	protected void setupBridgeIssuesSite(long companyId, long userId) throws Exception {
+		Group site = getSite(companyId, userId, "Bridge Issues");
+		long groupId = site.getGroupId();
+		addAllUsersToSite(companyId, groupId);
+
+		for (PortalPage portalPage : TestPages.BRIDGE_ISSUE_PAGES) {
+			setupPage(userId, groupId, portalPage);
+		}
+	}
+
+	protected void setupPortalIssuesSite(long companyId, long userId) throws Exception {
+		Group site = getSite(companyId, userId, "Portal Issues");
+		long groupId = site.getGroupId();
+		addAllUsersToSite(companyId, groupId);
+
+		for (PortalPage portalPage : TestPages.PORTAL_ISSUE_PAGES) {
+			setupPage(userId, groupId, portalPage);
+		}
+	}
+
 	protected void setupBridgeDemosSite(long companyId, long userId) throws Exception {
 		Group site = getSite(companyId, userId, "Bridge Demos");
 		long groupId = site.getGroupId();
@@ -194,7 +214,9 @@ public class TestSetupAction extends TestSetupCompatAction {
 
 	protected void setupSites(long companyId, long userId) throws Exception, DocumentException {
 		setupBridgeDemosSite(companyId, userId);
+		setupBridgeIssuesSite(companyId, userId);
 		setupPortalDemosSite(companyId, userId);
+		setupPortalIssuesSite(companyId, userId);
 		setupBridgeTCKSite(companyId, userId);
 		setupGuestSite(companyId, userId);
 	}

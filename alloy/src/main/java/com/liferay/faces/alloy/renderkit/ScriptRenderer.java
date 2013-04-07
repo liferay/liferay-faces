@@ -20,7 +20,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
-import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.lang.StringPool;
 
@@ -32,7 +31,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 /**
  * @author  Neil Griffin
  */
-public class ScriptRenderer extends Renderer {
+public class ScriptRenderer extends ScriptRendererCompat {
 
 	// Private Constants
 	private static final String AUI_USE = "AUI().use";
@@ -45,21 +44,41 @@ public class ScriptRenderer extends Renderer {
 	private static final String USE = "use";
 
 	// Private Data Members
-	boolean inline;
-	String inlineUse;
+	private boolean inline;
+	private String inlineUse;
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		Map<String, Object> attributes = uiComponent.getAttributes();
-		String position = (String) attributes.get(POSITION);
-		inline = INLINE.equals(position);
 
+		// Assume that the script is not going to be rendered inline, but rather it will be rendered at the bottom of
+		// the page.
+		inline = false;
+
+		// If the current URL is a "refresh" type of URL (isolated) or the window state is exclusive, then the script
+		// must be rendered inline.
 		ThemeDisplay themeDisplay = (ThemeDisplay) facesContext.getExternalContext().getRequestMap().get(
 				WebKeys.THEME_DISPLAY);
 
 		if (themeDisplay != null) {
 			inline = (themeDisplay.isIsolated() || themeDisplay.isStateExclusive());
+		}
+
+		// Otherwise, if the current request was triggered by Ajax, then the script must be rendered inline.
+		if (!inline) {
+
+			if (isAjaxRequest(facesContext)) {
+				inline = true;
+			}
+		}
+
+		// If the developer specified "inline" as the value of the position attribute, then the script must be
+		// rendered inline.
+		String position = (String) attributes.get(POSITION);
+
+		if (INLINE.equals(position)) {
+			inline = true;
 		}
 
 		if (inline) {

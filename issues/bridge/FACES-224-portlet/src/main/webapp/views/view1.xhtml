@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<h:head />
+	<h:body>
+		<a href="http://issues.liferay.com/browse/FACES-224"><span>http://issues.liferay.com/browse/FACES-224</span></a>
+		<hr />
+		<h:outputText value="This is view1.xhtml" />
+		<br />
+		<h:button id="httpGetButton" outcome="view2" value="Click me to render view2.xhtml via HTTP GET">
+			<f:param name="viewParam1" value="abc" />
+			<f:param name="viewParam2" value="xyz" />
+		</h:button>
+	</h:body>
+</f:view>

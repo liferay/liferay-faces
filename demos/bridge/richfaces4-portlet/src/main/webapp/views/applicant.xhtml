@@ -4,9 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:bridge="http://liferay.com/faces/bridge" xmlns:example-cc="http://java.sun.com/jsf/composite/example-cc"
 	xmlns:rich="http://richfaces.org/rich" xmlns:ui="http://java.sun.com/jsf/facelets">
-	
-	<h:outputScript library="issues" name="RF-12182.js" target="head" />
 
+	<h:outputScript library="issues" name="RF-12182.js" target="head" />
 	<aui:layout id="l1">
 		<example-cc:clipboard label="#{i18n['job-application']}" />
 		<example-cc:sponsorButton />
@@ -45,8 +44,10 @@
 					</aui:column>
 					<aui:column id="c1b">
 						<aui:field id="dateOfBirthField" label="#{i18n['birthday']}">
-							<rich:calendar oninputchange="rf12182.workaround(event,'#{rich:clientId('dateOfBirth')}');" id="dateOfBirth" datePattern="#{portletPreferencesValues['datePattern'][0]}" enableManualInput="true" popup="true" required="true" showApplyButton="false"
-								value="#{applicantModelBean.dateOfBirth}">
+							<rich:calendar id="dateOfBirth" datePattern="#{portletPreferencesValues['datePattern'][0]}"
+								enableManualInput="true" popup="true"
+								oninputchange="rf12182.workaround(event,'#{rich:clientId('dateOfBirth')}');" required="true"
+								showApplyButton="false" value="#{applicantModelBean.dateOfBirth}">
 								<f:convertDateTime pattern="#{portletPreferencesValues['datePattern'][0]}" />
 								<a4j:ajax event="change" render="dateOfBirthField" />
 							</rich:calendar>
@@ -115,7 +116,6 @@
 			</rich:popupPanel>
 			<h:form id="f1">
 				<aui:column id="c2a" styleClass="uploaded-files">
-					<rich:messages globalOnly="true" layout="table" />
 					<h3>#{i18n['attachments']}</h3>
 					<rich:dataTable id="uploadedFilesTable" value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
 						<rich:column>
@@ -144,6 +144,6 @@
 			</h:form>
 		</aui:column>
 	</aui:layout>
-    
+
 </ui:composition>
 
