@@ -99,7 +99,7 @@ public class TestSetupAction extends TestSetupCompatAction {
 		addAllUsersToSite(companyId, groupId);
 
 		for (PortalPage portalPage : TestPages.BRIDGE_ISSUE_PAGES) {
-			setupPage(userId, groupId, portalPage);
+			setupPage(userId, groupId, portalPage, false);
 		}
 	}
 
@@ -109,7 +109,7 @@ public class TestSetupAction extends TestSetupCompatAction {
 		addAllUsersToSite(companyId, groupId);
 
 		for (PortalPage portalPage : TestPages.PORTAL_ISSUE_PAGES) {
-			setupPage(userId, groupId, portalPage);
+			setupPage(userId, groupId, portalPage, false);
 		}
 	}
 
