@@ -468,6 +468,12 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The rendered position of the script within the portal page HTML document. Valid values are &lt;code&gt;auto&lt;/code&gt;, &lt;code&gt;bottom&lt;/code&gt;, and &lt;inline&gt;auto&lt;/code&gt;. The default value is &lt;code&gt;auto&lt;/code&gt;.</description>
+			<name>position</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
 			<name>rendered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
