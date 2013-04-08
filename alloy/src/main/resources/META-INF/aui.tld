@@ -487,6 +487,13 @@
          <rtexprvalue>true</rtexprvalue>
       </attribute>
       <attribute>
+         <name>position</name>
+         <required>false</required>
+         <deferred-value>
+            <type>java.lang.Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
          <name>rendered</name>
          <required>false</required>
          <deferred-value>

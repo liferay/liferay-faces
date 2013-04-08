@@ -35,6 +35,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 
 	// Private Constants
 	private static final String AUI_USE = "AUI().use";
+	private static final String BOTTOM = "bottom";
 	private static final String FUNCTION_A = "function(A)";
 	private static final String SCRIPT = "script";
 	private static final String INLINE = "inline";
@@ -77,8 +78,13 @@ public class ScriptRenderer extends ScriptRendererCompat {
 		// rendered inline.
 		String position = (String) attributes.get(POSITION);
 
-		if (INLINE.equals(position)) {
-			inline = true;
+		if (position != null) {
+			if (INLINE.equals(position)) {
+				inline = true;
+			}
+			else if (BOTTOM.equals(position)) {
+				inline = false;
+			}
 		}
 
 		if (inline) {
