@@ -4,7 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:example-cc="http://java.sun.com/jsf/composite/example-cc"
 	xmlns:ice="http://www.icesoft.com/icefaces/component" xmlns:icecore="http://www.icefaces.org/icefaces/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:ace="http://www.icefaces.org/icefaces/components">
-
+	
+	<icecore:config messagePersistence="false" />
 	<aui:layout id="l1">
 		<example-cc:clipboard label="#{i18n['job-application']}" />
 		<example-cc:sponsorButton />
@@ -45,17 +46,6 @@
 						</aui:field>
 						<aui:field label="#{i18n['city']}">
 							<ice:inputText id="city" required="true" value="#{applicantModelBean.city}" />
-							<ui:remove>
-								<ice:selectInputText id="city" immediate="true" listVar="city" listValue="#{listModelBean.filteredCities}"
-									required="true" value="#{applicantModelBean.city}" valueChangeListener="#{applicantBackingBean.cityListener}">
-									<f:facet name="selectInputText">
-										<ice:panelGrid columns="2">
-											<ice:outputText id="autoCompleteCity" value="#{city.cityName}" />
-											<ice:outputText id="autoCompletePostalCode" value="#{city.postalCode}" />
-										</ice:panelGrid>
-									</f:facet>
-								</ice:selectInputText>
-							</ui:remove>
 							<h:message id="cityMessage" for="city" />
 						</aui:field>
 						<aui:field label="#{i18n['state-province']}">
