@@ -19,6 +19,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
@@ -144,6 +146,15 @@ public class ApplicantBackingBean implements Serializable {
 
 			if (city != null) {
 				applicantModelBean.setAutoFillCity(city.getCityName());
+				
+				// begin fix for FACES-1537
+				UIComponent postalCodeInputComponent = valueChangeEvent.getComponent();
+				UIInput cityInputComponent = (UIInput) postalCodeInputComponent.findComponent("city");
+				cityInputComponent.setSubmittedValue(null);
+				cityInputComponent.setValid(true);
+				cityInputComponent.setValue(null);
+				// end fix for FACES-1537
+				
 				applicantModelBean.setAutoFillProvinceId(city.getProvinceId());
 			}
 		}
