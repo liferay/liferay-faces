@@ -31,18 +31,18 @@ import javax.servlet.jsp.PageContext;
 
 
 /**
- * This class serves as a {@link PageContext} adapter for invoking JSP {@link Tag} classes directly for use with
- * Facelets.
+ * This class serves as a {@link PageContext} adapter for invoking JSP {@link Tag} classes directly (outside of JSP)
+ * during the execution of the JSF lifecycle.
  *
  * @author  Neil Griffin
  */
-public class FaceletPageContext extends PageContext {
+public class PageContextAdapter extends PageContext {
 
 	// Private Data Members
 	private HttpServletRequest httpServletRequest;
 	private HttpServletResponse httpServletResponse;
 
-	public FaceletPageContext(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+	public PageContextAdapter(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 		this.httpServletRequest = httpServletRequest;
 		this.httpServletRequest = httpServletRequest;
 	}
