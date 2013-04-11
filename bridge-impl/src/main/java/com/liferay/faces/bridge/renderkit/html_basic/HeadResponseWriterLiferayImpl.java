@@ -19,15 +19,23 @@ import java.util.EmptyStackException;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.BodyContent;
 
 import org.w3c.dom.Element;
 
-import com.liferay.faces.bridge.container.liferay.StringBundler;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.jsp.PageContextAdapter;
+import com.liferay.faces.util.jsp.StringBodyContent;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.util.PortalUtil;
+
+import com.liferay.taglib.util.HtmlTopTag;
 
 
 /**
@@ -64,14 +72,29 @@ public class HeadResponseWriterLiferayImpl extends HeadResponseWriter {
 			logger.trace("POPPED element name=[{0}]", nodeName);
 
 			if (!ELEMENT_HEAD.equals(element.getNodeName())) {
-				String elementAsString = element.toString();
 
+				// Get the underlying HttpServletRequest and HttpServletResponse
 				PortletRequest portletRequest = bridgeContext.getPortletRequest();
-				StringBundler stringBundler = new StringBundler(portletRequest.getAttribute(WebKeys.PAGE_TOP));
+				HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
+				PortletResponse portletResponse = bridgeContext.getPortletResponse();
+				HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(portletResponse);
 
-				stringBundler.append(elementAsString);
+				// Invoke the Liferay HtmlTopTag class directly (rather than using liferay-util:html-top from a JSP).
+				BodyContent bodyContent = new StringBodyContent();
+				String elementAsString = element.toString();
+				HtmlTopTag htmlTopTag = new HtmlTopTag();
+				PageContextAdapter pageContextAdapter = new PageContextAdapter(httpServletRequest, httpServletResponse);
+				htmlTopTag.setPageContext(pageContextAdapter);
+				htmlTopTag.doStartTag();
+				bodyContent.print(elementAsString);
+				htmlTopTag.setBodyContent(bodyContent);
 
-				portletRequest.setAttribute(WebKeys.PAGE_TOP, stringBundler.getWrapped());
+				try {
+					htmlTopTag.doEndTag();
+				}
+				catch (JspException e) {
+					throw new IOException(e.getMessage());
+				}
 
 				logger.debug("Added resource to Liferay's <head>...</head> section, element=[{0}]", elementAsString);
 			}

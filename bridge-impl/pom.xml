@@ -33,6 +33,10 @@
 			<artifactId>portal-service</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.liferay.portal</groupId>
+			<artifactId>util-taglib</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>liferay-faces-bridge-api</artifactId>
 			<version>${project.version}</version>
