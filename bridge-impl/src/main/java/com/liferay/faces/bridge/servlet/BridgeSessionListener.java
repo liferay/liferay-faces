@@ -72,23 +72,29 @@ public class BridgeSessionListener extends BridgeSessionListenerCompat implement
 	 * This method provides the ability to discover the Mojarra InjectionProvider at startup.
 	 */
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
+
 		this.servletContext = servletContextEvent.getServletContext();
 
-		Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
+		// If the Mojarra InjectionProvider hasn't been discovered by a prior portlet instance in this context, then
+		// attempt to discover it.
+		if (mojarraInjectionProvider == null) {
 
-		if (jsf.isDetected() && ProductConstants.MOJARRA.equals(jsf.getTitle())) {
+			Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
 
-			// The Mojarra InjectionProvider instance is stored as a FacesContext attribute during startup, via the
-			// InitFacesContext implementation.
-			FacesContext facesContext = FacesContext.getCurrentInstance();
+			if (jsf.isDetected() && ProductConstants.MOJARRA.equals(jsf.getTitle())) {
 
-			if (facesContext != null) {
-				mojarraInjectionProvider = getMojarraInjectionProvider(facesContext);
-			}
+				// The Mojarra InjectionProvider instance is stored as a FacesContext attribute during startup, via the
+				// InitFacesContext implementation.
+				FacesContext facesContext = FacesContext.getCurrentInstance();
 
-			if (mojarraInjectionProvider == null) {
-				logger.warn("Unable to determine Mojarra InjectionProvider. " +
-					"For more info, see http://issues.liferay.com/browse/FACES-1511");
+				if (facesContext != null) {
+					mojarraInjectionProvider = getMojarraInjectionProvider(facesContext);
+				}
+
+				if (mojarraInjectionProvider == null) {
+					logger.warn("Unable to determine Mojarra InjectionProvider. " +
+						"For more info, see http://issues.liferay.com/browse/FACES-1511");
+				}
 			}
 		}
 	}
