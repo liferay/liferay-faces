@@ -4,7 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:example-cc="http://java.sun.com/jsf/composite/example-cc"
 	xmlns:ice="http://www.icesoft.com/icefaces/component" xmlns:icecore="http://www.icefaces.org/icefaces/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:ace="http://www.icefaces.org/icefaces/components">
-	
+
 	<icecore:config messagePersistence="false" />
 	<aui:layout id="l1">
 		<example-cc:clipboard label="#{i18n['job-application']}" />
@@ -68,12 +68,12 @@
 					<aui:column>
 						<aui:field id="commentsField" label="#{i18n['comments']}">
 							<ice:panelGroup id="showHide" layout="block">
-								<ice:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true"
-									rendered="#{!applicantBackingBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
-								<ice:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true"
-									rendered="#{applicantBackingBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
+								<ice:commandLink actionListener="#{applicantViewBean.toggleComments}" immediate="true"
+									rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
+								<ice:commandLink actionListener="#{applicantViewBean.toggleComments}" immediate="true"
+									rendered="#{applicantViewBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
 							</ice:panelGroup>
-							<ice:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantBackingBean.commentsRendered}"
+							<ice:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantViewBean.commentsRendered}"
 								value="#{applicantModelBean.comments}">
 								<f:ajax />
 							</ice:inputTextarea>
