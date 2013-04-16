@@ -80,12 +80,12 @@
 					<aui:column>
 						<aui:field id="commentsField" label="#{i18n['comments']}">
 							<h:panelGroup id="showHide" layout="block">
-								<h:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true"
-									rendered="#{!applicantBackingBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
-								<h:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true"
-									rendered="#{applicantBackingBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
+								<h:commandLink actionListener="#{applicantViewBean.toggleComments}" immediate="true"
+									rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
+								<h:commandLink actionListener="#{applicantViewBean.toggleComments}" immediate="true"
+									rendered="#{applicantViewBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
 							</h:panelGroup>
-							<ace:textAreaEntry id="comments" cols="50" rows="10" rendered="#{applicantBackingBean.commentsRendered}"
+							<ace:textAreaEntry id="comments" cols="50" rows="10" rendered="#{applicantViewBean.commentsRendered}"
 								value="#{applicantModelBean.comments}">
 								<ace:ajax execute="@this" render="@this" />
 							</ace:textAreaEntry>

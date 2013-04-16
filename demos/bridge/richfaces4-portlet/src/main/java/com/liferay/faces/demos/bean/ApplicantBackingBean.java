@@ -18,7 +18,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -41,7 +41,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * @author  "Neil Griffin"
  */
 @ManagedBean(name = "applicantBackingBean")
-@ViewScoped
+@RequestScoped
 public class ApplicantBackingBean implements Serializable {
 
 	// serialVersionUID
@@ -57,7 +57,6 @@ public class ApplicantBackingBean implements Serializable {
 	private transient ListModelBean listModelBean;
 
 	// JavaBeans Properties for UI
-	private boolean commentsRendered = false;
 	private String uploadedFileId;
 
 	public void deleteUploadedFile(ActionEvent actionEvent) {
@@ -171,22 +170,10 @@ public class ApplicantBackingBean implements Serializable {
 		}
 	}
 
-	public void toggleComments(ActionEvent actionEvent) {
-		commentsRendered = !commentsRendered;
-	}
-
 	public void setApplicantModelBean(ApplicantModelBean applicantModelBean) {
 
 		// Injected via @ManagedProperty annotation
 		this.applicantModelBean = applicantModelBean;
-	}
-
-	public void setCommentsRendered(boolean commentsRendered) {
-		this.commentsRendered = commentsRendered;
-	}
-
-	public boolean isCommentsRendered() {
-		return commentsRendered;
 	}
 
 	public void setListModelBean(ListModelBean listModelBean) {
