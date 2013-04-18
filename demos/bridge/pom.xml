@@ -12,6 +12,7 @@
 	<name>Liferay Faces Bridge Demos</name>
 
 	<modules>
+		<module>jsf2-cdi-portlet</module>
 		<module>jsf2-export-pdf-portlet</module>
 		<module>jsf2-ipc-events-bookings-portlet</module>
 		<module>jsf2-ipc-events-customers-portlet</module>
