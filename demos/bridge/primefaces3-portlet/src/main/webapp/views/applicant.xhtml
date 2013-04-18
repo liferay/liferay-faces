@@ -83,13 +83,13 @@
 						<aui:field id="commentsField" label="#{i18n['comments']}">
 							<h:panelGroup id="showHide" layout="block">
 								<f:ajax render="commentsField">
-									<h:commandLink actionListener="#{applicantBackingBean.toggleComments}"
-										rendered="#{!applicantBackingBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
-									<h:commandLink actionListener="#{applicantBackingBean.toggleComments}"
-										rendered="#{applicantBackingBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
+									<h:commandLink actionListener="#{applicantViewBean.toggleComments}"
+										rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
+									<h:commandLink actionListener="#{applicantViewBean.toggleComments}"
+										rendered="#{applicantViewBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
 								</f:ajax>
 							</h:panelGroup>
-							<p:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantBackingBean.commentsRendered}"
+							<p:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantViewBean.commentsRendered}"
 								value="#{applicantModelBean.comments}">
 								<f:ajax />
 							</p:inputTextarea>
@@ -120,7 +120,7 @@
 					<p:dataTable id="uploadedFilesTable" value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
 						<p:column>
 							<p:commandButton id="showDialogButton" icon="ui-icon-trash" onclick="confirmation.show()">
-								<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantBackingBean.uploadedFileId}" />
+								<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantViewBean.uploadedFileId}" />
 							</p:commandButton>
 						</p:column>
 						<p:column>

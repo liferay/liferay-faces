@@ -4,7 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:example-cc="http://java.sun.com/jsf/composite/example-cc"
 	xmlns:ice="http://www.icesoft.com/icefaces/component" xmlns:icecore="http://www.icefaces.org/icefaces/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:ace="http://www.icefaces.org/icefaces/components">
-	
+
 	<icecore:config messagePersistence="false" />
 	<aui:layout id="l1">
 		<example-cc:clipboard label="#{i18n['job-application']}" />
@@ -68,12 +68,12 @@
 					<aui:column>
 						<aui:field id="commentsField" label="#{i18n['comments']}">
 							<ice:panelGroup id="showHide" layout="block">
-								<ice:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true"
-									rendered="#{!applicantBackingBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
-								<ice:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true"
-									rendered="#{applicantBackingBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
+								<ice:commandLink actionListener="#{applicantViewBean.toggleComments}" immediate="true"
+									rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
+								<ice:commandLink actionListener="#{applicantViewBean.toggleComments}" immediate="true"
+									rendered="#{applicantViewBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
 							</ice:panelGroup>
-							<ice:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantBackingBean.commentsRendered}"
+							<ice:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantViewBean.commentsRendered}"
 								value="#{applicantModelBean.comments}">
 								<f:ajax />
 							</ice:inputTextarea>
@@ -87,7 +87,7 @@
 		<aui:column id="c2">
 			<h:form id="f2">
 				<aui:column id="c2a" styleClass="uploaded-files">
-					<ice:panelPopup visible="#{applicantBackingBean.popupRendered}" rendered="#{applicantBackingBean.popupRendered}"
+					<ice:panelPopup visible="#{applicantViewBean.popupRendered}" rendered="#{applicantViewBean.popupRendered}"
 						modal="true">
 						<f:facet name="header">
 							<ice:outputText value="#{i18n['confirmation']}" />
@@ -95,8 +95,10 @@
 						<f:facet name="body">
 							<ice:outputText value="#{i18n['are-you-sure-you-want-to-delete-this']}" />
 							<hr />
-							<h:commandButton actionListener="#{applicantBackingBean.deleteUploadedFile}" value="#{i18n['yes']}" />
-							<h:commandButton actionListener="#{applicantBackingBean.togglePopup}" value="#{i18n['no']}" />
+							<h:commandButton actionListener="#{applicantBackingBean.deleteUploadedFile}" value="#{i18n['yes']}">
+								<f:setPropertyActionListener value="false" target="#{applicantViewBean.popupRendered}" />
+							</h:commandButton>
+							<h:commandButton actionListener="#{applicantViewBean.togglePopup}" value="#{i18n['no']}" />
 						</f:facet>
 					</ice:panelPopup>
 					<h3>#{i18n['attachments']}</h3>
@@ -104,9 +106,9 @@
 						rowClasses="portlet-section-body results-row, portlet-section-alternate results-row alt"
 						value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
 						<ice:column>
-							<h:commandButton actionListener="#{applicantBackingBean.togglePopup}"
+							<h:commandButton actionListener="#{applicantViewBean.togglePopup}"
 								image="#{resource['example:icon-delete.png']}">
-								<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantBackingBean.uploadedFileId}" />
+								<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantViewBean.uploadedFileId}" />
 							</h:commandButton>
 						</ice:column>
 						<ice:column>

@@ -19,7 +19,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
@@ -38,7 +38,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * @author  "Neil Griffin"
  */
 @ManagedBean(name = "applicantBackingBean")
-@ViewScoped
+@RequestScoped
 public class ApplicantBackingBean implements Serializable {
 
 	// serialVersionUID
@@ -50,20 +50,15 @@ public class ApplicantBackingBean implements Serializable {
 	// Injections
 	@ManagedProperty(value = "#{applicantModelBean}")
 	private transient ApplicantModelBean applicantModelBean;
+	@ManagedProperty(value = "#{applicantViewBean}")
+	private transient ApplicantViewBean applicantViewBean;
 	@ManagedProperty(value = "#{listModelBean}")
 	private transient ListModelBean listModelBean;
 
-	// JavaBeans Properties for UI
-	private boolean commentsRendered = false;
-	private boolean fileUploaderRendered = false;
-
+	// Private Data Members
 	private transient HtmlInputFile attachment1;
 	private transient HtmlInputFile attachment2;
 	private transient HtmlInputFile attachment3;
-
-	public void addAttachment(ActionEvent actionEvent) {
-		fileUploaderRendered = true;
-	}
 
 	public void deleteUploadedFile(ActionEvent actionEvent) {
 
@@ -161,10 +156,6 @@ public class ApplicantBackingBean implements Serializable {
 		}
 	}
 
-	public void toggleComments(ActionEvent actionEvent) {
-		commentsRendered = !commentsRendered;
-	}
-
 	@SuppressWarnings("deprecation")
 	public void uploadAttachments(ActionEvent actionEvent) {
 
@@ -190,13 +181,19 @@ public class ApplicantBackingBean implements Serializable {
 			}
 		}
 
-		fileUploaderRendered = false;
+		applicantViewBean.setFileUploaderRendered(false);
 	}
 
 	public void setApplicantModelBean(ApplicantModelBean applicantModelBean) {
 
 		// Injected via @ManagedProperty annotation
 		this.applicantModelBean = applicantModelBean;
+	}
+
+	public void setApplicantViewBean(ApplicantViewBean applicantViewBean) {
+
+		// Injected via @ManagedProperty annotation
+		this.applicantViewBean = applicantViewBean;
 	}
 
 	public HtmlInputFile getAttachment1() {
@@ -221,18 +218,6 @@ public class ApplicantBackingBean implements Serializable {
 
 	public void setAttachment3(HtmlInputFile attachment3) {
 		this.attachment3 = attachment3;
-	}
-
-	public void setCommentsRendered(boolean commentsRendered) {
-		this.commentsRendered = commentsRendered;
-	}
-
-	public boolean isCommentsRendered() {
-		return commentsRendered;
-	}
-
-	public boolean isFileUploaderRendered() {
-		return fileUploaderRendered;
 	}
 
 	public void setListModelBean(ListModelBean listModelBean) {
