@@ -15,7 +15,6 @@ package com.liferay.faces.demos.bean;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.EventObject;
 import java.util.List;
 
 import javax.faces.context.FacesContext;
@@ -48,18 +47,15 @@ public class ApplicantBackingBean implements Serializable {
 
 	// Injections
 	private transient ApplicantModelBean applicantModelBean;
+	private transient ApplicantViewBean applicantViewBean;
 	private transient ListModelBean listModelBean;
-
-	// JavaBeans Properties for UI
-	private boolean commentsRendered;
-	private int percentComplete;
-	private boolean popupRendered;
-	private String uploadedFileId;
 
 	public void deleteUploadedFile(ActionEvent actionEvent) {
 
 		try {
 			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
+
+			String uploadedFileId = applicantViewBean.getUploadedFileId();
 
 			UploadedFile uploadedFileToDelete = null;
 
@@ -77,17 +73,17 @@ public class ApplicantBackingBean implements Serializable {
 				uploadedFiles.remove(uploadedFileToDelete);
 				logger.debug("Deleted file=[{0}]", uploadedFileToDelete.getName());
 			}
+			
+			applicantViewBean.setPopupRendered(false);
 		}
 		catch (Exception e) {
 			logger.error(e);
 		}
-
-		popupRendered = false;
 	}
 
 	public void fileUploadActionListener(ActionEvent actionEvent) {
 
-		percentComplete = 0;
+		applicantViewBean.setPercentComplete(0);
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 
@@ -121,11 +117,6 @@ public class ApplicantBackingBean implements Serializable {
 			logger.error(e);
 			FacesMessageUtil.addGlobalUnexpectedErrorMessage(facesContext);
 		}
-	}
-
-	public void fileUploadProgressListener(EventObject eventObject) {
-		InputFile inputFile = (InputFile) eventObject.getSource();
-		percentComplete = inputFile.getFileInfo().getPercent();
 	}
 
 	public void postalCodeListener(ValueChangeEvent valueChangeEvent) {
@@ -188,30 +179,16 @@ public class ApplicantBackingBean implements Serializable {
 		}
 	}
 
-	public void toggleComments(ActionEvent actionEvent) {
-		commentsRendered = !commentsRendered;
-	}
-
-	public void togglePopup(ActionEvent actionEvent) {
-		popupRendered = !popupRendered;
-	}
-
 	public void setApplicantModelBean(ApplicantModelBean applicantModelBean) {
 
 		// Injected via WEB-INF/faces-config.xml managed-property
 		this.applicantModelBean = applicantModelBean;
 	}
 
-	public void setCommentsRendered(boolean commentsRendered) {
-		this.commentsRendered = commentsRendered;
-	}
+	public void setApplicantViewBean(ApplicantViewBean applicantViewBean) {
 
-	public boolean isCommentsRendered() {
-		return commentsRendered;
-	}
-
-	public boolean isPopupRendered() {
-		return popupRendered;
+		// Injected via WEB-INF/faces-config.xml managed-property
+		this.applicantViewBean = applicantViewBean;
 	}
 
 	public void setListModelBean(ListModelBean listModelBean) {
@@ -220,23 +197,4 @@ public class ApplicantBackingBean implements Serializable {
 		this.listModelBean = listModelBean;
 	}
 
-	public int getPercentComplete() {
-		return percentComplete;
-	}
-
-	public void setPercentComplete(int percentComplete) {
-		this.percentComplete = percentComplete;
-	}
-
-	public void setPopupRendered(boolean popupRendered) {
-		this.popupRendered = popupRendered;
-	}
-
-	public String getUploadedFileId() {
-		return uploadedFileId;
-	}
-
-	public void setUploadedFileId(String uploadedFileId) {
-		this.uploadedFileId = uploadedFileId;
-	}
 }

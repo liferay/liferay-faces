@@ -25,6 +25,10 @@
 			<value>#{applicantModelBean}</value>
 		</managed-property>
 		<managed-property>
+			<property-name>applicantViewBean</property-name>
+			<value>#{applicantViewBean}</value>
+		</managed-property>
+		<managed-property>
 			<property-name>listModelBean</property-name>
 			<value>#{listModelBean}</value>
 		</managed-property>
@@ -33,6 +37,12 @@
 		<managed-bean-name>applicantModelBean</managed-bean-name>
 		<managed-bean-class>com.liferay.faces.demos.bean.ApplicantModelBean</managed-bean-class>
 		<!-- ICEfaces Extended Request Scope -->
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>applicantViewBean</managed-bean-name>
+		<managed-bean-class>com.liferay.faces.demos.bean.ApplicantViewBean</managed-bean-class>
+		<!-- Note that ICEfaces 1.x changes the behavior JSF 1.x "request" scope into something similar to JSF 2.x @ViewScoped -->
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>

@@ -19,8 +19,8 @@ package com.liferay.faces.demos.bean;
 public class ApplicantViewBean {
 
 	// JavaBeans Properties for UI
-	private boolean commentsRendered = false;
-	private boolean fileUploaderRendered = false;
+	private boolean commentsRendered;
+	private boolean fileUploaderRendered;
 
 	public void setCommentsRendered(boolean commentsRendered) {
 		this.commentsRendered = commentsRendered;

@@ -74,12 +74,12 @@
 					<aui:column>
 						<aui:field id="commentsField" label="#{i18n['comments']}">
 							<ice:panelGroup id="showHide" layout="block">
-								<ice:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true"
-									rendered="#{!applicantBackingBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
-								<ice:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true"
-									rendered="#{applicantBackingBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
+								<ice:commandLink actionListener="#{applicantViewBean.toggleComments}" immediate="true"
+									rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
+								<ice:commandLink actionListener="#{applicantViewBean.toggleComments}" immediate="true"
+									rendered="#{applicantViewBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
 							</ice:panelGroup>
-							<ice:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantBackingBean.commentsRendered}"
+							<ice:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantViewBean.commentsRendered}"
 								value="#{applicantModelBean.comments}" />
 						</aui:field>
 					</aui:column>
@@ -90,7 +90,7 @@
 		</aui:column>
 		<aui:column id="c2">
 			<ice:form id="f2">
-					<ice:panelPopup visible="#{applicantBackingBean.popupRendered}" rendered="#{applicantBackingBean.popupRendered}"
+					<ice:panelPopup visible="#{applicantViewBean.popupRendered}" rendered="#{applicantViewBean.popupRendered}"
 						modal="true">
 						<f:facet name="header">
 							<ice:outputText value="#{i18n['confirmation']}" />
@@ -100,7 +100,7 @@
 								<ice:outputText value="#{i18n['are-you-sure-you-want-to-delete-this']}" />
 								<hr />
 								<ice:commandButton actionListener="#{applicantBackingBean.deleteUploadedFile}" value="#{i18n['yes']}" />
-								<ice:commandButton actionListener="#{applicantBackingBean.togglePopup}" value="#{i18n['no']}" />
+								<ice:commandButton actionListener="#{applicantViewBean.togglePopup}" value="#{i18n['no']}" />
 							</ice:panelGroup>
 						</f:facet>
 					</ice:panelPopup>
@@ -110,8 +110,8 @@
 						rowClasses="portlet-section-body results-row, portlet-section-alternate results-row alt"
 						value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
 						<ice:column>
-							<ice:commandButton actionListener="#{applicantBackingBean.togglePopup}" image="/images/icon-delete.png">
-								<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantBackingBean.uploadedFileId}" />
+							<ice:commandButton actionListener="#{applicantViewBean.togglePopup}" image="/images/icon-delete.png">
+								<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantViewBean.uploadedFileId}" />
 							</ice:commandButton>
 						</ice:column>
 						<ice:column>
@@ -127,9 +127,9 @@
 							<ice:outputText value="#{uploadedFile.size}" />
 						</ice:column>
 					</ice:dataTable>
-					<ice:inputFile id="fileEntryComp" progressListener="#{applicantBackingBean.fileUploadProgressListener}"
+					<ice:inputFile id="fileEntryComp" progressListener="#{applicantViewBean.fileUploadProgressListener}"
 						actionListener="#{applicantBackingBean.fileUploadActionListener}" />
-					<ice:outputProgress value="#{applicantBackingBean.percentComplete}" labelComplete="0%" />
+					<ice:outputProgress value="#{applicantViewBean.percentComplete}" labelComplete="0%" />
 				</aui:column>
 			</ice:form>
 		</aui:column>
