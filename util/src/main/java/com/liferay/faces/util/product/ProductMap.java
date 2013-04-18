@@ -28,6 +28,7 @@ public class ProductMap extends HashMap<String, Product> {
 	private static ProductMap instance = new ProductMap();
 
 	static {
+		instance.put(ProductConstants.CDI, new ProductCDIImpl());
 		instance.put(ProductConstants.ICEFACES, new ProductICEfacesImpl());
 		instance.put(ProductConstants.JSF, new ProductJSFImpl());
 		instance.put(ProductConstants.LIFERAY_FACES_ALLOY, new ProductLiferayFacesAlloyImpl());
