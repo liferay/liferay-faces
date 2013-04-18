@@ -18,6 +18,7 @@ package com.liferay.faces.util.product;
  */
 public class ProductConstants {
 
+	public static final String CDI = "CDI";
 	public static final String ICEFACES = "ICEfaces";
 	public static final String JSF = "JSF";
 	public static final String LIFERAY_PORTAL = "Liferay Portal";
@@ -26,7 +27,9 @@ public class ProductConstants {
 	public static final String LIFERAY_FACES_PORTAL = "Liferay Faces Portal";
 	public static final String MOJARRA = "Mojarra";
 	public static final String MYFACES = "MyFaces";
+	public static final String OPEN_WEB_BEANS = "OpenWebBeans";
 	public static final String PRIMEFACES = "PrimeFaces";
 	public static final String RICHFACES = "RichFaces";
+	public static final String WELD = "Weld";
 
 }
