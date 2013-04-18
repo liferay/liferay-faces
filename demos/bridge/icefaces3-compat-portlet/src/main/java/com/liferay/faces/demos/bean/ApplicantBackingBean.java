@@ -18,7 +18,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
@@ -43,7 +43,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * @author  "Neil Griffin"
  */
 @ManagedBean(name = "applicantBackingBean")
-@ViewScoped
+@RequestScoped
 public class ApplicantBackingBean implements Serializable {
 
 	// serialVersionUID
@@ -58,14 +58,13 @@ public class ApplicantBackingBean implements Serializable {
 	// Injections
 	@ManagedProperty(value = "#{applicantModelBean}")
 	private transient ApplicantModelBean applicantModelBean;
+	@ManagedProperty(value = "#{applicantViewBean}")
+	private transient ApplicantViewBean applicantViewBean;
 	@ManagedProperty(value = "#{listModelBean}")
 	private transient ListModelBean listModelBean;
 
-	// JavaBeans Properties for UI
-	private boolean commentsRendered = false;
+	// Private Data Members
 	private String fileUploadAbsolutePath;
-	private boolean popupRendered;
-	private String uploadedFileId;
 
 	public void cityListener(ValueChangeEvent valueChangeEvent) {
 		String cityNameStartsWith = (String) valueChangeEvent.getNewValue();
@@ -84,6 +83,8 @@ public class ApplicantBackingBean implements Serializable {
 
 		try {
 			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
+
+			String uploadedFileId = applicantViewBean.getUploadedFileId();
 
 			UploadedFile uploadedFileToDelete = null;
 
@@ -105,8 +106,6 @@ public class ApplicantBackingBean implements Serializable {
 		catch (Exception e) {
 			logger.error(e);
 		}
-
-		popupRendered = false;
 	}
 
 	public void handleFileUpload(FileEntryEvent fileEntryEvent) {
@@ -141,7 +140,7 @@ public class ApplicantBackingBean implements Serializable {
 
 			if (city != null) {
 				applicantModelBean.setAutoFillCity(city.getCityName());
-				
+
 				// begin fix for FACES-1537
 				UIComponent postalCodeInputComponent = valueChangeEvent.getComponent();
 				UIInput cityInputComponent = (UIInput) postalCodeInputComponent.findComponent("city");
@@ -149,7 +148,7 @@ public class ApplicantBackingBean implements Serializable {
 				cityInputComponent.setValid(true);
 				cityInputComponent.setValue(null);
 				// end fix for FACES-1537
-				
+
 				applicantModelBean.setAutoFillProvinceId(city.getProvinceId());
 			}
 		}
@@ -212,30 +211,16 @@ public class ApplicantBackingBean implements Serializable {
 		}
 	}
 
-	public void toggleComments(ActionEvent actionEvent) {
-		commentsRendered = !commentsRendered;
-	}
-
-	public void togglePopup(ActionEvent actionEvent) {
-		popupRendered = !popupRendered;
-	}
-
 	public void setApplicantModelBean(ApplicantModelBean applicantModelBean) {
 
 		// Injected via @ManagedProperty annotation
 		this.applicantModelBean = applicantModelBean;
 	}
 
-	public void setCommentsRendered(boolean commentsRendered) {
-		this.commentsRendered = commentsRendered;
-	}
+	public void setApplicantViewBean(ApplicantViewBean applicantViewBean) {
 
-	public boolean isCommentsRendered() {
-		return commentsRendered;
-	}
-
-	public boolean isPopupRendered() {
-		return popupRendered;
+		// Injected via @ManagedProperty annotation
+		this.applicantViewBean = applicantViewBean;
 	}
 
 	public String getFileUploadAbsolutePath() {
@@ -253,15 +238,4 @@ public class ApplicantBackingBean implements Serializable {
 		this.listModelBean = listModelBean;
 	}
 
-	public void setPopupRendered(boolean popupRendered) {
-		this.popupRendered = popupRendered;
-	}
-
-	public String getUploadedFileId() {
-		return uploadedFileId;
-	}
-
-	public void setUploadedFileId(String uploadedFileId) {
-		this.uploadedFileId = uploadedFileId;
-	}
 }

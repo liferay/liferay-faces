@@ -78,13 +78,13 @@
 						<aui:field id="commentsField" label="#{i18n['comments']}">
 							<h:panelGroup id="showHide" layout="block">
 								<f:ajax render="commentsField">
-									<h:commandLink actionListener="#{applicantBackingBean.toggleComments}"
-										rendered="#{!applicantBackingBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
-									<h:commandLink actionListener="#{applicantBackingBean.toggleComments}"
-										rendered="#{applicantBackingBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
+									<h:commandLink actionListener="#{applicantViewBean.toggleComments}"
+										rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
+									<h:commandLink actionListener="#{applicantViewBean.toggleComments}"
+										rendered="#{applicantViewBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
 								</f:ajax>
 							</h:panelGroup>
-							<h:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantBackingBean.commentsRendered}"
+							<h:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantViewBean.commentsRendered}"
 								value="#{applicantModelBean.comments}">
 								<f:ajax />
 							</h:inputTextarea>
