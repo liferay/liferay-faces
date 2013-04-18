@@ -19,8 +19,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -56,7 +59,6 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
-
 
 /**
  * @author  Neil Griffin
@@ -228,7 +230,18 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 		requestContextPath = portletRequest.getContextPath();
 
 		// Initialize the request locales.
-		requestLocales = new LocaleIterator(portletRequest.getLocales());
+		List<Locale> localeList = new ArrayList<Locale>();
+
+		Enumeration<Locale> enumeration = portletRequest.getLocales();
+
+		while (enumeration.hasMoreElements()) {
+			Locale locale = enumeration.nextElement();
+
+			localeList.add(locale);
+		}
+
+		requestLocales = new LocaleIterator(
+			Collections.enumeration(localeList));
 	}
 
 	@Override
