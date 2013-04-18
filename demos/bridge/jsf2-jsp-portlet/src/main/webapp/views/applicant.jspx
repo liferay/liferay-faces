@@ -4,7 +4,7 @@
 	version="2.1">
 
 	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
-	<aui:layout id="l1" rendered="#{!applicantBackingBean.fileUploaderRendered}">
+	<aui:layout id="l1" rendered="#{!applicantViewBean.fileUploaderRendered}">
 		<aui:column id="c1">
 			<h:form id="f1">
 				<h:messages globalOnly="true" layout="table" />
@@ -49,8 +49,8 @@
 							<h:message id="provinceIdMessage" for="provinceId" />
 						</aui:field>
 						<aui:field id="postalCodeField" label="#{i18n['zip-postal']}">
-							<h:inputText id="postalCode" immediate="true" onchange="this.form.submit()" required="true" value="#{applicantModelBean.postalCode}"
-								valueChangeListener="#{applicantBackingBean.postalCodeListener}" />
+							<h:inputText id="postalCode" immediate="true" onchange="this.form.submit()" required="true"
+								value="#{applicantModelBean.postalCode}" valueChangeListener="#{applicantBackingBean.postalCodeListener}" />
 							<h:graphicImage library="example" name="icon-help.png" title="#{i18n['postal-code-hint']}" />
 							<h:message id="postalCodeMessage" for="postalCode" />
 						</aui:field>
@@ -60,12 +60,12 @@
 					<aui:column>
 						<aui:field id="commentsField" label="#{i18n['comments']}">
 							<h:panelGroup id="showHide" layout="block">
-								<h:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true"
-									rendered="#{!applicantBackingBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
-								<h:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true"
-									rendered="#{applicantBackingBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
+								<h:commandLink actionListener="#{applicantViewBean.toggleComments}" immediate="true"
+									rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
+								<h:commandLink actionListener="#{applicantViewBean.toggleComments}" immediate="true"
+									rendered="#{applicantViewBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
 							</h:panelGroup>
-							<h:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantBackingBean.commentsRendered}"
+							<h:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantViewBean.commentsRendered}"
 								value="#{applicantModelBean.comments}" />
 						</aui:field>
 					</aui:column>
@@ -108,18 +108,20 @@
 						</h:column>
 					</h:dataTable>
 					<hr />
-					<h:commandButton actionListener="#{applicantBackingBean.addAttachment}" immediate="true"
+					<h:commandButton actionListener="#{applicantViewBean.addAttachment}" immediate="true"
 						value="#{i18n['add-attachment']}" />
 				</aui:column>
 			</h:form>
 		</aui:column>
 	</aui:layout>
-	<aui:layout id="l2" rendered="#{applicantBackingBean.fileUploaderRendered}">
+	<aui:layout id="l2" rendered="#{applicantViewBean.fileUploaderRendered}">
 		<aui:column id="c1">
 			<h:form id="f1" enctype="multipart/form-data">
 				<h:messages />
 				<h:panelGrid columns="1">
-					<h3><h:outputText value="#{i18n['attachments']}" /></h3>
+					<h3>
+						<h:outputText value="#{i18n['attachments']}" />
+					</h3>
 					<bridge:inputFile binding="#{applicantBackingBean.attachment1}" />
 					<bridge:inputFile binding="#{applicantBackingBean.attachment2}" />
 					<bridge:inputFile binding="#{applicantBackingBean.attachment3}" />

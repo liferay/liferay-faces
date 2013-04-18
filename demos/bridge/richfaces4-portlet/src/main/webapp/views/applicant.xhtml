@@ -82,12 +82,12 @@
 					<aui:column>
 						<aui:field id="commentsField" label="#{i18n['comments']}">
 							<h:panelGroup id="showHide" layout="block">
-								<a4j:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true" render="commentsField"
-									rendered="#{!applicantBackingBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
-								<a4j:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true" render="commentsField"
-									rendered="#{applicantBackingBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
+								<a4j:commandLink actionListener="#{applicantViewBean.toggleComments}" immediate="true" render="commentsField"
+									rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
+								<a4j:commandLink actionListener="#{applicantViewBean.toggleComments}" immediate="true" render="commentsField"
+									rendered="#{applicantViewBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
 							</h:panelGroup>
-							<h:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantBackingBean.commentsRendered}"
+							<h:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantViewBean.commentsRendered}"
 								value="#{applicantModelBean.comments}">
 								<f:ajax />
 							</h:inputTextarea>
@@ -121,7 +121,7 @@
 						<rich:column>
 							<a4j:commandButton image="#{resource['example:icon-delete.png']}"
 								onclick="#{rich:component('popup')}.show(); return true;" value="#{uploadedFile.id}">
-								<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantBackingBean.uploadedFileId}" />
+								<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantViewBean.uploadedFileId}" />
 							</a4j:commandButton>
 						</rich:column>
 						<rich:column>
