@@ -50,6 +50,10 @@
 			<artifactId>jboss-el</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.liferay.cdi</groupId>
+			<artifactId>cdi1-portlet-bridge-shared</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.liferay.faces</groupId>
 			<artifactId>liferay-faces-bridge-impl</artifactId>
 			<version>${project.version}</version>
@@ -58,11 +62,6 @@
 			<groupId>com.liferay.faces</groupId>
 			<artifactId>liferay-faces-alloy</artifactId>
 			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.liferay.cdi</groupId>
-			<artifactId>cdi1-portlet-bridge-shared</artifactId>
-			<version>6.2.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
