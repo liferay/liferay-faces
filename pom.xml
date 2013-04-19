@@ -81,6 +81,7 @@
 	</modules>
 
 	<properties>
+		<cdi.version>1.0-SP4</cdi.version>
 		<codename>Ephesus</codename>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces3.version>3.3.0</icefaces3.version>
@@ -518,6 +519,12 @@
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
+				<groupId>javax.enterprise</groupId>
+				<artifactId>cdi-api</artifactId>
+				<version>${cdi.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
 				<groupId>javax.faces</groupId>
 				<artifactId>jsf-api</artifactId>
 				<version>2.1</version>
@@ -616,6 +623,11 @@
 						<artifactId>el-api</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.weld.servlet</groupId>
+				<artifactId>weld-servlet</artifactId>
+				<version>${weld.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.primefaces</groupId>
