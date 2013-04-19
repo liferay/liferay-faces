@@ -56,21 +56,12 @@
 	<filter>
 		<filter-name>CDIPortletFilter</filter-name>
 		<filter-class>com.liferay.cdi.portlet.bridge.CDIPortletFilter</filter-class>
+		<lifecycle>ACTION_PHASE</lifecycle>
 		<lifecycle>RENDER_PHASE</lifecycle>
+		<lifecycle>RESOURCE_PHASE</lifecycle>
 	</filter>
 	<filter-mapping>
 		<filter-name>CDIPortletFilter</filter-name>
 		<portlet-name>1</portlet-name>
 	</filter-mapping>
-<!-- 	<filter> -->
-<!-- 		<filter-name>CDIPortletFilter</filter-name> -->
-<!-- 		<filter-class>com.liferay.cdi.portlet.bridge.CDIPortletFilter</filter-class> -->
-<!-- 		<lifecycle>ACTION_PHASE</lifecycle> -->
-<!-- 		<lifecycle>RENDER_PHASE</lifecycle> -->
-<!-- 		<lifecycle>RESOURCE_PHASE</lifecycle> -->
-<!-- 	</filter> -->
-<!-- 	<filter-mapping> -->
-<!-- 		<filter-name>CDIPortletFilter</filter-name> -->
-<!-- 		<portlet-name>1</portlet-name> -->
-<!-- 	</filter-mapping> -->
 </portlet-app>
