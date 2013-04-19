@@ -455,6 +455,11 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>com.liferay.cdi</groupId>
+				<artifactId>cdi1-portlet-bridge-shared</artifactId>
+				<version>6.2.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
 				<groupId>com.liferay.portal</groupId>
 				<artifactId>portal-service</artifactId>
 				<version>${liferay.version}</version>
