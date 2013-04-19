@@ -86,7 +86,7 @@
 		<icefaces3.version>3.3.0</icefaces3.version>
 		<liferay.version>6.0.6</liferay.version>
 		<log4j.version>1.2.14</log4j.version>
-		<mojarra.version>2.1.20</mojarra.version>
+		<mojarra.version>2.1.21</mojarra.version>
 		<myfaces.version>2.1.8</myfaces.version>
 		<primefaces3.version>3.5</primefaces3.version>
 		<richfaces4.version>4.3.1.Final</richfaces4.version>
