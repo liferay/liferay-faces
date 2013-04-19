@@ -11,6 +11,19 @@
 	<packaging>war</packaging>
 	<name>JSF2 CDI Portlet</name>
 
+	<profiles>
+		<profile>
+			<id>tomcat</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.weld.servlet</groupId>
+					<artifactId>weld-servlet</artifactId>
+					<version>${weld.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
 	<dependencies>
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -41,11 +54,6 @@
 			<groupId>com.liferay.faces</groupId>
 			<artifactId>liferay-faces-alloy</artifactId>
 			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.weld.servlet</groupId>
-			<artifactId>weld-servlet</artifactId>
-			<version>1.1.10.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.cdi</groupId>
