@@ -92,6 +92,7 @@
 		<richfaces4.version>4.3.1.Final</richfaces4.version>
 		<selenium.version>1.0.1</selenium.version>
 		<tck.version>jsr329-1.0.1-liferay</tck.version>
+		<weld.version>1.1.10.Final</weld.version>
 	</properties>
 
 	<build>
