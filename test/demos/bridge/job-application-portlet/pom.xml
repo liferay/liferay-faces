@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.liferay.faces.test.demos.bridge</groupId>
+		<artifactId>liferay-faces-test-demos-bridge</artifactId>
+		<version>3.1.2-ga3-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	
+	<artifactId>liferay-faces-test-demos-bridge-job-application-portlet</artifactId>
+	<packaging>jar</packaging>
+	<name>job-application-portlet integration tests</name>
+	
+	<properties>
+        <dependency.unpack.skip>false</dependency.unpack.skip>
+    </properties>
+
+    <dependencies>
+    </dependencies>
+
+</project>
