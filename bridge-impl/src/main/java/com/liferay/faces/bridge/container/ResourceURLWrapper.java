@@ -13,45 +13,28 @@
  */
 package com.liferay.faces.bridge.container;
 
-import javax.portlet.BaseURL;
+import javax.faces.FacesWrapper;
 import javax.portlet.ResourceURL;
 
 
 /**
  * @author  Neil Griffin
  */
-public class ResourceURLWrapper extends BaseURLWrapper implements ResourceURL {
-
-	// Protected Data Members
-	protected ResourceURL wrappedResourceURL;
-
-	/**
-	 * Constructor for building a ResourceURLWrapper instance.
-	 *
-	 * @param  resourceURL  The resource URL that is to be wrapped by this wrapper.
-	 */
-	public ResourceURLWrapper(ResourceURL resourceURL) {
-		this.wrappedResourceURL = resourceURL;
-	}
+public abstract class ResourceURLWrapper extends BaseURLWrapper implements ResourceURL, FacesWrapper<ResourceURL> {
 
 	public String getCacheability() {
-		ResourceURL wrappedResourceURL = (ResourceURL) getWrapped();
-
-		return wrappedResourceURL.getCacheability();
+		return getWrapped().getCacheability();
 	}
 
 	public void setCacheability(String cacheLevel) {
-		ResourceURL wrappedResourceURL = (ResourceURL) getWrapped();
-		wrappedResourceURL.setCacheability(cacheLevel);
+		getWrapped().setCacheability(cacheLevel);
 	}
 
 	public void setResourceID(String resourceID) {
-		ResourceURL wrappedResourceURL = (ResourceURL) getWrapped();
-		wrappedResourceURL.setResourceID(resourceID);
+		getWrapped().setResourceID(resourceID);
 	}
 
-	public BaseURL getWrapped() {
-		return wrappedResourceURL;
-	}
+	@Override
+	public abstract ResourceURL getWrapped();
 
 }
