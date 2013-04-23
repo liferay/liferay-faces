@@ -20,13 +20,11 @@ import java.util.Map;
 import javax.portlet.BaseURL;
 import javax.portlet.PortletSecurityException;
 
-import com.liferay.faces.util.helper.Wrapper;
-
 
 /**
  * @author  Neil Griffin
  */
-public abstract class BaseURLWrapper implements BaseURL, Wrapper<BaseURL> {
+public abstract class BaseURLWrapper implements BaseURL {
 
 	public void addProperty(String key, String value) {
 		getWrapped().addProperty(key, value);
@@ -69,4 +67,5 @@ public abstract class BaseURLWrapper implements BaseURL, Wrapper<BaseURL> {
 		getWrapped().setSecure(secure);
 	}
 
+	public abstract BaseURL getWrapped();
 }
