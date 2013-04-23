@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
-import javax.faces.FacesWrapper;
 import javax.portlet.BaseURL;
 import javax.portlet.PortletSecurityException;
 
@@ -25,7 +24,7 @@ import javax.portlet.PortletSecurityException;
 /**
  * @author  Neil Griffin
  */
-public abstract class BaseURLWrapper implements BaseURL, FacesWrapper<BaseURL> {
+public abstract class BaseURLWrapper implements BaseURL {
 
 	public void addProperty(String key, String value) {
 		getWrapped().addProperty(key, value);
@@ -68,4 +67,5 @@ public abstract class BaseURLWrapper implements BaseURL, FacesWrapper<BaseURL> {
 		getWrapped().setSecure(secure);
 	}
 
+	public abstract BaseURL getWrapped();
 }
