@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.container;
 
+import javax.faces.FacesWrapper;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletURL;
@@ -23,35 +24,29 @@ import javax.portlet.WindowStateException;
 /**
  * @author  Neil Griffin
  */
-public abstract class PortletURLWrapper extends BaseURLWrapper implements PortletURL {
+public abstract class PortletURLWrapper extends BaseURLWrapper implements PortletURL, FacesWrapper<PortletURL> {
 
 	public void removePublicRenderParameter(String name) {
-		PortletURL wrappedPortletURL = (PortletURL) getWrapped();
-		wrappedPortletURL.removePublicRenderParameter(name);
+		getWrapped().removePublicRenderParameter(name);
 	}
 
 	public PortletMode getPortletMode() {
-		PortletURL wrappedPortletURL = (PortletURL) getWrapped();
-
-		return wrappedPortletURL.getPortletMode();
+		return getWrapped().getPortletMode();
 	}
 
 	public void setPortletMode(PortletMode portletMode) throws PortletModeException {
-		PortletURL wrappedPortletURL = (PortletURL) getWrapped();
-		wrappedPortletURL.setPortletMode(portletMode);
+		getWrapped().setPortletMode(portletMode);
 	}
 
 	public WindowState getWindowState() {
-		PortletURL wrappedPortletURL = (PortletURL) getWrapped();
-
-		return wrappedPortletURL.getWindowState();
+		return getWrapped().getWindowState();
 	}
 
 	public void setWindowState(WindowState windowState) throws WindowStateException {
-		PortletURL wrappedPortletURL = (PortletURL) getWrapped();
-		wrappedPortletURL.setWindowState(windowState);
+		getWrapped().setWindowState(windowState);
 	}
 
+	@Override
 	public abstract PortletURL getWrapped();
 
 }
