@@ -31,8 +31,11 @@ public class PlutoResourceURL extends ResourceURLWrapper {
 	// Protected Data Members
 	protected String toStringValue;
 
+	// Private Data Members
+	private ResourceURL wrappedResourceURL;
+
 	public PlutoResourceURL(ResourceURL resourceURL) {
-		super(resourceURL);
+		this.wrappedResourceURL = resourceURL;
 	}
 
 	/**
@@ -78,6 +81,11 @@ public class PlutoResourceURL extends ResourceURLWrapper {
 	@Override
 	public void setParameters(Map<String, String[]> parameters) {
 		super.setParameters(parameters);
+	}
+
+	@Override
+	public ResourceURL getWrapped() {
+		return wrappedResourceURL;
 	}
 
 }
