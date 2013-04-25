@@ -13,15 +13,13 @@
  */
 package com.liferay.faces.bridge.container.liferay;
 
-import javax.portlet.PortletURL;
-
-
 /**
- * This is a marker interface that extends the {@link PortletURL} interface in order to provide more readable names for
- * implementing classes.
- *
  * @author  Neil Griffin
  */
-public interface LiferayPortletURL extends PortletURL {
+public class LiferayActionURLImpl extends LiferayPortletURLImpl implements LiferayActionURL {
+
+	public LiferayActionURLImpl(LiferayURLGenerator liferayURLGenerator) {
+		super(liferayURLGenerator);
+	}
 
 }
