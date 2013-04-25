@@ -12,6 +12,7 @@
 	<name>Liferay Faces Portal Issues</name>
 
 	<modules>
+		<module>FACES-257-portlet</module>
 		<module>FACES-1427-portlet</module>
 		<module>FACES-1439-portlet</module>
 	</modules>
