@@ -33,6 +33,7 @@ import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
 
 import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.helper.BooleanHelper;
@@ -72,11 +73,10 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	private boolean ableToAddScriptTextToHead;
 	private boolean ableToAddStyleSheetResourceToHead;
 	private boolean ableToSetHttpStatusCode;
+	private boolean friendlyURLMapperEnabled;
 	private int liferayBuildNumber;
+	private LiferayURLFactory liferayURLFactory;
 	private LiferayPortletRequest liferayPortletRequest;
-	private ParsedPortletURL parsedLiferayActionURL;
-	private ParsedPortletURL parsedLiferayRenderURL;
-	private ParsedBaseURL parsedLiferayResourceURL;
 	private String portletResponseNamespace;
 	private String requestURL;
 	private String responseNamespace;
@@ -161,7 +161,8 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 			}
 
 			this.ableToSetHttpStatusCode = getContextParamAbleToSetHttpStatusCode(defaultValue);
-
+			this.friendlyURLMapperEnabled = (liferayPortletRequest.getPortlet().getFriendlyURLMapperInstance() != null);
+			this.liferayURLFactory = (LiferayURLFactory) BridgeFactoryFinder.getFactory(LiferayURLFactory.class);
 			logger.debug("User-Agent requested URL=[{0}]", getRequestURL());
 
 		}
@@ -234,18 +235,32 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 
 	@Override
 	protected PortletURL createActionURL(MimeResponse mimeResponse) {
-		return new LiferayActionURL(getParsedLiferayActionURL(mimeResponse), portletResponseNamespace);
+
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+		PortletRequest portletRequest = bridgeContext.getPortletRequest();
+
+		return liferayURLFactory.getLiferayActionURL(portletRequest, mimeResponse, portletResponseNamespace,
+				friendlyURLMapperEnabled);
 	}
 
 	@Override
 	protected PortletURL createRenderURL(MimeResponse mimeResponse) {
-		return new LiferayRenderURL(getParsedLiferayRenderURL(mimeResponse), portletResponseNamespace);
+
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+		PortletRequest portletRequest = bridgeContext.getPortletRequest();
+
+		return liferayURLFactory.getLiferayRenderURL(portletRequest, mimeResponse, portletResponseNamespace,
+				friendlyURLMapperEnabled);
 	}
 
 	@Override
 	protected ResourceURL createResourceURL(MimeResponse mimeResponse) {
-		return new LiferayResourceURL(getParsedLiferayResourceURL(mimeResponse), portletResponseNamespace,
-				liferayBuildNumber);
+
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+		PortletRequest portletRequest = bridgeContext.getPortletRequest();
+
+		return liferayURLFactory.getLiferayResourceURL(portletRequest, mimeResponse, portletResponseNamespace,
+				friendlyURLMapperEnabled);
 	}
 
 	/**
@@ -368,36 +383,6 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	@Override
 	public long getHttpServletRequestDateHeader(String name) {
 		return liferayPortletRequest.getDateHeader(name);
-	}
-
-	protected ParsedPortletURL getParsedLiferayActionURL(MimeResponse mimeResponse) {
-
-		if (parsedLiferayActionURL == null) {
-			PortletURL liferayActionURL = mimeResponse.createActionURL();
-			parsedLiferayActionURL = new ParsedPortletURL(liferayActionURL);
-		}
-
-		return parsedLiferayActionURL;
-	}
-
-	protected ParsedPortletURL getParsedLiferayRenderURL(MimeResponse mimeResponse) {
-
-		if (parsedLiferayRenderURL == null) {
-			PortletURL liferayRenderURL = mimeResponse.createRenderURL();
-			parsedLiferayRenderURL = new ParsedPortletURL(liferayRenderURL);
-		}
-
-		return parsedLiferayRenderURL;
-	}
-
-	protected ParsedBaseURL getParsedLiferayResourceURL(MimeResponse mimeResponse) {
-
-		if (parsedLiferayResourceURL == null) {
-			ResourceURL liferayResourceURL = mimeResponse.createResourceURL();
-			parsedLiferayResourceURL = new ParsedBaseURL(liferayResourceURL);
-		}
-
-		return parsedLiferayResourceURL;
 	}
 
 	@Override
