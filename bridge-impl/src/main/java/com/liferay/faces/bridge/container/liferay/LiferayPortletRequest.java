@@ -26,6 +26,7 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
 
 
@@ -37,14 +38,16 @@ public class LiferayPortletRequest {
 
 	// Private Constants
 	private static final String METHOD_NAME_GET_ORIGINAL_HTTP_SERVLET_REQUEST = "getOriginalHttpServletRequest";
+	private static final String METHOD_NAME_GET_PORTLET = "getPortlet";
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(LiferayPortletRequest.class);
 
 	// Private Data Members
-	private PortletRequest wrappedPortletRequest;
 	private OriginalHttpServletRequest originalHttpServletRequest;
+	private Portlet portlet;
 	private ThemeDisplay themeDisplay;
+	private PortletRequest wrappedPortletRequest;
 
 	public LiferayPortletRequest(PortletRequest portletRequest) {
 
@@ -57,6 +60,15 @@ public class LiferayPortletRequest {
 		}
 
 		this.wrappedPortletRequest = portletRequest;
+
+		try {
+			Method method = wrappedPortletRequest.getClass().getMethod(METHOD_NAME_GET_PORTLET, (Class[]) null);
+
+			this.portlet = (Portlet) method.invoke(wrappedPortletRequest, (Object[]) null);
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 
 		try {
 			Method method = wrappedPortletRequest.getClass().getMethod(METHOD_NAME_GET_ORIGINAL_HTTP_SERVLET_REQUEST,
@@ -89,6 +101,10 @@ public class LiferayPortletRequest {
 		}
 
 		return values;
+	}
+
+	public Portlet getPortlet() {
+		return portlet;
 	}
 
 	public ThemeDisplay getThemeDisplay() {

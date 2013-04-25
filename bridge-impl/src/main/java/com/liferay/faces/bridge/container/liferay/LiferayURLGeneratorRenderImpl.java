@@ -13,15 +13,24 @@
  */
 package com.liferay.faces.bridge.container.liferay;
 
-import javax.portlet.PortletURL;
+import javax.portlet.PortletMode;
+import javax.portlet.WindowState;
 
 
 /**
- * This is a marker interface that extends the {@link PortletURL} interface in order to provide more readable names for
- * implementing classes.
+ * See class-level JavaDoc for {@link LiferayURLGeneratorBaseImpl}.
  *
  * @author  Neil Griffin
  */
-public interface LiferayPortletURL extends PortletURL {
+public class LiferayURLGeneratorRenderImpl extends LiferayURLGeneratorBaseImpl {
+
+	public LiferayURLGeneratorRenderImpl(String renderURL, PortletMode portletMode, String responseNamespace,
+		WindowState windowState) {
+		super(renderURL, portletMode, responseNamespace, windowState);
+	}
+
+	public String getPortletLifecycleId() {
+		return LiferayConstants.LIFECYCLE_RENDER_PHASE_ID;
+	}
 
 }
