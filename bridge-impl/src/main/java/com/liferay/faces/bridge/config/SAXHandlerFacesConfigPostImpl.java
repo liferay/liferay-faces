@@ -24,6 +24,7 @@ import com.liferay.faces.bridge.BridgePhaseFactory;
 import com.liferay.faces.bridge.application.view.BridgeWriteBehindSupportFactory;
 import com.liferay.faces.bridge.bean.BeanManagerFactory;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
+import com.liferay.faces.bridge.container.liferay.LiferayURLFactory;
 import com.liferay.faces.bridge.context.BridgeContextFactory;
 import com.liferay.faces.bridge.context.IncongruityContextFactory;
 import com.liferay.faces.bridge.context.url.BridgeURLFactory;
@@ -58,6 +59,7 @@ public class SAXHandlerFacesConfigPostImpl extends SAXHandlerFacesConfigPostImpl
 	private static final String MANAGED_BEAN_NAME = "managed-bean-name";
 	private static final String MANAGED_BEAN_SCOPE = "managed-bean-scope";
 	private static final String MODEL_EL = "model-el";
+	private static final String LIFERAY_URL_FACTORY = "liferay-url-factory";
 	private static final String PARAMETER = "parameter";
 	private static final String PORTLET_CONTAINER_FACTORY = "portlet-container-factory";
 	private static final String RENDER_RESPONSE_WRAPPER_CLASS = "render-response-wrapper-class";
@@ -82,6 +84,7 @@ public class SAXHandlerFacesConfigPostImpl extends SAXHandlerFacesConfigPostImpl
 	private boolean parsingBridgeURLFactory;
 	private boolean parsingExcludedAttribute;
 	private boolean parsingIncongruityContextFactory;
+	private boolean parsingLiferayURLFactory;
 	private boolean parsingModelEL;
 	private boolean parsingParameter;
 	private boolean parsingPortletContainerFactory;
@@ -138,6 +141,9 @@ public class SAXHandlerFacesConfigPostImpl extends SAXHandlerFacesConfigPostImpl
 		}
 		else if (parsingIncongruityContextFactory) {
 			setupFactory(IncongruityContextFactory.class, content.toString().trim());
+		}
+		else if (parsingLiferayURLFactory) {
+			setupFactory(LiferayURLFactory.class, content.toString().trim());
 		}
 		else if (parsingManagedBeanClass) {
 			managedBeanClass = content.toString().trim();
@@ -207,7 +213,7 @@ public class SAXHandlerFacesConfigPostImpl extends SAXHandlerFacesConfigPostImpl
 		parsingBridgeURLFactory = false;
 		parsingExcludedAttribute = false;
 		parsingIncongruityContextFactory = false;
-
+		parsingLiferayURLFactory = false;
 		parsingModelEL = false;
 		parsingParameter = false;
 		parsingPortletContainerFactory = false;
@@ -255,6 +261,10 @@ public class SAXHandlerFacesConfigPostImpl extends SAXHandlerFacesConfigPostImpl
 			logger.error(FACTORY_NOT_FOUND_MSG, INCONGRUITY_CONTEXT_FACTORY);
 		}
 
+		if (bridgeConfigAttributeMap.get(LiferayURLFactory.class.getName()) == null) {
+			logger.error(FACTORY_NOT_FOUND_MSG, LIFERAY_URL_FACTORY);
+		}
+
 		if (bridgeConfigAttributeMap.get(PortletContainerFactory.class.getName()) == null) {
 			logger.error(FACTORY_NOT_FOUND_MSG, PORTLET_CONTAINER_FACTORY);
 		}
@@ -300,6 +310,9 @@ public class SAXHandlerFacesConfigPostImpl extends SAXHandlerFacesConfigPostImpl
 		}
 		else if (localName.equals(INCONGRUITY_CONTEXT_FACTORY)) {
 			parsingIncongruityContextFactory = true;
+		}
+		else if (localName.equals(LIFERAY_URL_FACTORY)) {
+			parsingLiferayURLFactory = true;
 		}
 		else if (localName.equals(MANAGED_BEAN_CLASS)) {
 			parsingManagedBeanClass = true;
