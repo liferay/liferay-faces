@@ -13,15 +13,16 @@
  */
 package com.liferay.faces.bridge.container.liferay;
 
-import javax.faces.FacesWrapper;
 import javax.portlet.PortletURL;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
 public class LiferayRenderURLFriendlyImpl extends LiferayPortletURLFriendlyImpl implements LiferayRenderURL,
-	FacesWrapper<PortletURL> {
+	Wrapper<PortletURL> {
 
 	// Private Data Members
 	private String responseNamespace;

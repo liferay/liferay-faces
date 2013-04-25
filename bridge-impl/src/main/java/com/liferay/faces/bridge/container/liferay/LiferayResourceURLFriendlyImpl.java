@@ -13,15 +13,16 @@
  */
 package com.liferay.faces.bridge.container.liferay;
 
-import javax.faces.FacesWrapper;
 import javax.portlet.ResourceURL;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
 public class LiferayResourceURLFriendlyImpl extends LiferayBaseURLFriendlyImpl implements LiferayResourceURL,
-	FacesWrapper<ResourceURL> {
+	Wrapper<ResourceURL> {
 
 	// Private Data Members
 	private String responseNamespace;
