@@ -13,15 +13,18 @@
  */
 package com.liferay.faces.bridge.container.liferay;
 
-import javax.portlet.PortletURL;
+import java.util.Map;
 
 
 /**
- * This is a marker interface that extends the {@link PortletURL} interface in order to provide more readable names for
- * implementing classes.
+ * This interface defines a contract for generating URLs that are compatible with Liferay Portal.
  *
  * @author  Neil Griffin
  */
-public interface LiferayPortletURL extends PortletURL {
+public interface LiferayURLGenerator {
+
+	public String generateURL(Map<String, String[]> additionalParameterMap);
+
+	public String getPortletLifecycleId();
 
 }
