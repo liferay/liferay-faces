@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<h:head />
+	<h:body>
+		<a href="http://issues.liferay.com/browse/FACES-257"><span>http://issues.liferay.com/browse/FACES-257</span></a>
+		<hr />
+		<ol>
+			<li><h:link value="This is an h:link with URL parameters alpha=1 beta=2 gamma=0 (implied)">
+					<f:param name="alpha" value="1" />
+					<f:param name="beta" value="2" />
+					<f:param name="gamma" value="0" />
+				</h:link><br /> <span>After clicking, the requestedURL should have:</span><br /> <span style="font-weight: bold;">/-/my-friendly-url-mapping/1/my-friendly-action/2</span></li>
+			<li><h:link value="This is an h:link with URL parameters alpha=1 beta=2 gamma=3">
+					<f:param name="alpha" value="1" />
+					<f:param name="beta" value="2" />
+					<f:param name="gamma" value="3" />
+				</h:link><br /> <span>After clicking, the requestedURL should have:</span><br /> <span style="font-weight: bold;">/-/my-friendly-url-mapping/1/my-friendly-action/2/3</span></li>
+			<li><h:button value="This is h:button with URL parameters alpha=4 beta=5 gamma=0 (implied)">
+					<f:param name="alpha" value="4" />
+					<f:param name="beta" value="5" />
+					<f:param name="gamma" value="0" />
+				</h:button><span>After clicking, the requestedURL should have:</span><br /> <span style="font-weight: bold;">/-/my-friendly-url-mapping/4/my-friendly-action/5</span></li>
+			<li><h:button value="This is h:button with URL parameters alpha=4 beta=5 gamma=6">
+					<f:param name="alpha" value="4" />
+					<f:param name="beta" value="5" />
+					<f:param name="gamma" value="6" />
+				</h:button><span>After clicking, the requestedURL should have:</span><br /> <span style="font-weight: bold;">/-/my-friendly-url-mapping/4/my-friendly-action/5/6</span></li>
+		</ol>
+		<br />
+		<h:outputLabel for="alpha" value="portletRequest.getParameter(&quot;alpha&quot;)=" />
+		<h:outputText id="alpha" value="#{testBean.alpha}" />
+		<br />
+		<h:outputLabel for="beta" value="portletRequest.getParameter(&quot;beta&quot;)=" />
+		<h:outputText id="beta" value="#{testBean.beta}" />
+		<br />
+		<h:outputLabel for="gamma" value="portletRequest.getParameter(&quot;gamma&quot;)=" />
+		<h:outputText id="gamma" value="#{testBean.gamma}" />
+		<br />
+		<h:outputLabel for="requestedURL" value="requestedURL=" />
+		<h:outputText id="requestedURL" value="#{testBean.requestedURL}" />
+	</h:body>
+</f:view>
