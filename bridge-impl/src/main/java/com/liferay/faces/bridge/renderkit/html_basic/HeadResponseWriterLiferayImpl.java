@@ -22,7 +22,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyContent;
 
 import org.w3c.dom.Element;
@@ -92,7 +91,7 @@ public class HeadResponseWriterLiferayImpl extends HeadResponseWriter {
 				try {
 					htmlTopTag.doEndTag();
 				}
-				catch (JspException e) {
+				catch (Exception e) {
 					throw new IOException(e.getMessage());
 				}
 
