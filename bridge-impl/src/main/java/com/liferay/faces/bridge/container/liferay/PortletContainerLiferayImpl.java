@@ -237,9 +237,8 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	protected PortletURL createActionURL(MimeResponse mimeResponse) {
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		PortletRequest portletRequest = bridgeContext.getPortletRequest();
 
-		return liferayURLFactory.getLiferayActionURL(portletRequest, mimeResponse, portletResponseNamespace,
+		return liferayURLFactory.getLiferayActionURL(bridgeContext, mimeResponse, portletResponseNamespace,
 				friendlyURLMapperEnabled);
 	}
 
@@ -247,9 +246,8 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	protected PortletURL createRenderURL(MimeResponse mimeResponse) {
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		PortletRequest portletRequest = bridgeContext.getPortletRequest();
 
-		return liferayURLFactory.getLiferayRenderURL(portletRequest, mimeResponse, portletResponseNamespace,
+		return liferayURLFactory.getLiferayRenderURL(bridgeContext, mimeResponse, portletResponseNamespace,
 				friendlyURLMapperEnabled);
 	}
 
@@ -257,9 +255,8 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	protected ResourceURL createResourceURL(MimeResponse mimeResponse) {
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		PortletRequest portletRequest = bridgeContext.getPortletRequest();
 
-		return liferayURLFactory.getLiferayResourceURL(portletRequest, mimeResponse, portletResponseNamespace,
+		return liferayURLFactory.getLiferayResourceURL(bridgeContext, mimeResponse, portletResponseNamespace,
 				friendlyURLMapperEnabled);
 	}
 

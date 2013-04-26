@@ -32,7 +32,6 @@ public abstract class LiferayBaseURLImpl implements LiferayBaseURL {
 	// Private Data Members
 	private LiferayURLGenerator liferayURLGenerator;
 	private Map<String, String[]> parameterMap;
-	private String toStringValue;
 
 	public LiferayBaseURLImpl(LiferayURLGenerator liferayURLGenerator) {
 		this.liferayURLGenerator = liferayURLGenerator;
@@ -41,16 +40,6 @@ public abstract class LiferayBaseURLImpl implements LiferayBaseURL {
 
 	public void addProperty(String key, String value) {
 		// no-op
-	}
-
-	@Override
-	public String toString() {
-
-		if (toStringValue == null) {
-			toStringValue = liferayURLGenerator.generateURL(parameterMap);
-		}
-
-		return toStringValue;
 	}
 
 	public void write(Writer writer) throws IOException {
@@ -66,6 +55,12 @@ public abstract class LiferayBaseURLImpl implements LiferayBaseURL {
 		}
 
 		writer.write(valueAsString);
+	}
+
+	protected abstract void resetToString();
+
+	public LiferayURLGenerator getLiferayURLGenerator() {
+		return liferayURLGenerator;
 	}
 
 	public void setParameter(String name, String value) {
