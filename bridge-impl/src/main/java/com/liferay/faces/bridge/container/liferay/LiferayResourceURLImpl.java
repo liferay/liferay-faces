@@ -16,13 +16,30 @@ package com.liferay.faces.bridge.container.liferay;
 /**
  * @author  Neil Griffin
  */
-public class LiferayResourceURLImpl extends LiferayPortletURLImpl implements LiferayResourceURL {
+public class LiferayResourceURLImpl extends LiferayBaseURLImpl implements LiferayResourceURL {
 
 	// Private Data Members
 	private String cacheLevel;
+	private String resourceId;
+	private String toStringValue;
 
 	public LiferayResourceURLImpl(LiferayURLGenerator liferayURLGenerator) {
 		super(liferayURLGenerator);
+	}
+
+	@Override
+	public String toString() {
+
+		if (toStringValue == null) {
+			toStringValue = getLiferayURLGenerator().generateURL(getParameterMap(), resourceId);
+		}
+
+		return toStringValue;
+	}
+
+	@Override
+	protected void resetToString() {
+		this.toStringValue = null;
 	}
 
 	public String getCacheability() {
@@ -34,7 +51,8 @@ public class LiferayResourceURLImpl extends LiferayPortletURLImpl implements Lif
 	}
 
 	public void setResourceID(String resourceID) {
-		// no-op
+		this.resourceId = resourceID;
+		resetToString();
 	}
 
 }
