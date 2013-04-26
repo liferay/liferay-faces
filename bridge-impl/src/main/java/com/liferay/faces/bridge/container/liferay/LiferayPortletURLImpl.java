@@ -22,11 +22,11 @@ import javax.portlet.WindowStateException;
 /**
  * @author  Neil Griffin
  */
-public abstract class LiferayPortletURLImpl extends LiferayBaseURLImpl
-	implements LiferayPortletURL {
+public abstract class LiferayPortletURLImpl extends LiferayBaseURLImpl implements LiferayPortletURL {
 
 	// Private Data Members
 	private PortletMode portletMode;
+	private String toStringValue;
 	private WindowState windowState;
 
 	public LiferayPortletURLImpl(LiferayURLGenerator liferayURLGenerator) {
@@ -37,12 +37,27 @@ public abstract class LiferayPortletURLImpl extends LiferayBaseURLImpl
 		// no-op
 	}
 
+	@Override
+	public String toString() {
+
+		if (toStringValue == null) {
+			toStringValue = getLiferayURLGenerator().generateURL(getParameterMap(), portletMode, windowState);
+		}
+
+		return toStringValue;
+	}
+
+	protected void resetToString() {
+		this.toStringValue = null;
+	}
+
 	public PortletMode getPortletMode() {
 		return portletMode;
 	}
 
 	public void setPortletMode(PortletMode portletMode) throws PortletModeException {
 		this.portletMode = portletMode;
+		resetToString();
 	}
 
 	public WindowState getWindowState() {
@@ -51,6 +66,7 @@ public abstract class LiferayPortletURLImpl extends LiferayBaseURLImpl
 
 	public void setWindowState(WindowState windowState) throws WindowStateException {
 		this.windowState = windowState;
+		resetToString();
 	}
 
 }

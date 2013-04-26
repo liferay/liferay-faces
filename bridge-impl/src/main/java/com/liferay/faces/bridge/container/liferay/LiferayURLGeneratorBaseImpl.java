@@ -61,10 +61,10 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 	// Private Data Members
 	private String baseURL;
 	private Map<String, String> parameterMap;
-	private PortletMode portletMode;
+	private PortletMode initialPortletMode;
 	private String prefix;
 	private String responseNamespace;
-	private WindowState windowState;
+	private WindowState initialWindowState;
 	private List<URLParameter> wsrpParameters;
 
 	/**
@@ -90,15 +90,29 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 	 */
 	public LiferayURLGeneratorBaseImpl(String baseURL, PortletMode portletMode, String responseNamespace,
 		WindowState windowState) {
-		this.baseURL = baseURL;
-		this.portletMode = portletMode;
-		this.responseNamespace = responseNamespace;
-		this.windowState = windowState;
 
+		this.baseURL = baseURL;
+		this.initialPortletMode = portletMode;
+		this.responseNamespace = responseNamespace;
+		this.initialWindowState = windowState;
 		parse();
 	}
 
 	public String generateURL(Map<String, String[]> additionalParameterMap) {
+		return generateURL(additionalParameterMap, null, null);
+	}
+
+	public String generateURL(Map<String, String[]> additionalParameterMap, String resourceId) {
+		return generateURL(additionalParameterMap, null, resourceId, null);
+	}
+
+	public String generateURL(Map<String, String[]> additionalParameterMap, PortletMode portletMode,
+		WindowState windowState) {
+		return generateURL(additionalParameterMap, portletMode, null, windowState);
+	}
+
+	public String generateURL(Map<String, String[]> additionalParameterMap, PortletMode portletMode, String resourceId,
+		WindowState windowState) {
 
 		String toStringValue = null;
 
@@ -155,11 +169,17 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Map<String, Object> applicationMap = facesContext.getExternalContext().getApplicationMap();
 
-			if (windowState == null) {
+			WindowState urlWindowState = initialWindowState;
+
+			if (windowState != null) {
+				urlWindowState = windowState;
+			}
+
+			if (urlWindowState == null) {
 				parameterValue = (String) applicationMap.get(responseNamespace + LiferayConstants.P_P_STATE);
 			}
 			else {
-				parameterValue = windowState.toString();
+				parameterValue = urlWindowState.toString();
 			}
 
 			appendParameterToURL(LiferayConstants.P_P_STATE, parameterValue, url);
@@ -172,11 +192,17 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			}
 
 			// Add the p_p_mode parameter.
-			if (portletMode == null) {
+			PortletMode urlPortletMode = initialPortletMode;
+
+			if (portletMode != null) {
+				urlPortletMode = portletMode;
+			}
+
+			if (urlPortletMode == null) {
 				parameterValue = (String) applicationMap.get(responseNamespace + LiferayConstants.P_P_MODE);
 			}
 			else {
-				parameterValue = portletMode.toString();
+				parameterValue = urlPortletMode.toString();
 			}
 
 			appendParameterToURL(LiferayConstants.P_P_MODE, parameterValue, url);
@@ -292,6 +318,23 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			for (URLParameter wsrpParameter : wsrpParameters) {
 
 				appendParameterToURL(wsrpParameter.getName(), wsrpParameter.getValue(), url);
+			}
+
+			// Possibly add the p_p_resource_id parameter.
+			String urlResourceId = parameterMap.get(LiferayConstants.P_O_P_ID);
+
+			if (resourceId != null) {
+				urlResourceId = resourceId;
+			}
+
+			if (urlResourceId == null) {
+
+				if (prefix.startsWith(BridgeConstants.WSRP)) {
+					appendParameterToURL(LiferayConstants.P_P_RESOURCE_ID, BridgeConstants.WSRP, url);
+				}
+			}
+			else {
+				appendParameterToURL(LiferayConstants.P_P_RESOURCE_ID, urlResourceId, url);
 			}
 
 			toStringValue = url.toString();
