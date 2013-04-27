@@ -391,7 +391,7 @@ x-has-x-friends={0} has {1} friends.
 		<example>
 			<title>EL Usage of liferay.themeDisplay</title>
 			<programlisting>
-&lt;link href="#{liferay.themeDisplay.uRLSignIn}"&gt;#{i18n['sign-in']}&lt;/link&gt;
+&lt;link href="#{liferay.themeDisplay.URLSignIn}"&gt;#{i18n['sign-in']}&lt;/link&gt;
 </programlisting>
 		</example>
 	</sect1>
