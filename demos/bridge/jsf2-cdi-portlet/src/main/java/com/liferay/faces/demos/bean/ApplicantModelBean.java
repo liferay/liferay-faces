@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 
 import com.liferay.faces.bridge.model.UploadedFile;
@@ -31,7 +31,7 @@ import com.liferay.faces.bridge.model.UploadedFile;
  */
 
 @Named
-@SessionScoped
+@ViewScoped
 public class ApplicantModelBean implements Serializable {
 
 	// serialVersionUID
