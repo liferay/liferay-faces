@@ -16,6 +16,8 @@ package com.liferay.faces.demos.bean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.el.ELResolver;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UICommand;
 import javax.faces.context.FacesContext;
@@ -50,9 +52,10 @@ public class ApplicantBackingBean implements Serializable {
 
 	// Injections
 	@Inject
-	private transient ApplicantModelBean applicantModelBean;
-	@Inject
 	private transient ListModelBean listModelBean;
+
+	// Self-Injections (see postConstruct method for more details)
+	private transient ApplicantModelBean applicantModelBean;
 
 	public void deleteUploadedFile(ActionEvent actionEvent) {
 
@@ -118,6 +121,23 @@ public class ApplicantBackingBean implements Serializable {
 			logger.error(e.getMessage(), e);
 			FacesMessageUtil.addGlobalUnexpectedErrorMessage(FacesContext.getCurrentInstance());
 		}
+	}
+
+	/**
+	 * In JSF 2.0/2.1, beans annotated with {@link javax.faces.bean.ViewScoped} (which are managed by the JSF Managed
+	 * Bean Facility) cannot be injected via the {@link javax.inject.Inject} annotation into beans that are managed by
+	 * CDI. Since this class is annotated with {@link javax.enterprise.context.RequestScoped} and is managed by CDI, it
+	 * is necessary to self-inject the {@link ApplicantModelBean} into this bean instance. JSF 2.2 introduced the new
+	 * javax.faces.view.ViewScoped annotation which is fully compatible with CDI.
+	 */
+	@PostConstruct
+	public void postConstruct() {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String elExpression = "applicantModelBean";
+		ELResolver elResolver = facesContext.getApplication().getELResolver();
+		this.applicantModelBean = (ApplicantModelBean) elResolver.getValue(facesContext.getELContext(), null,
+				elExpression);
 	}
 
 	public String submit() {
