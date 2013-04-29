@@ -96,9 +96,12 @@
 					<f:ajax execute="@form" render="@form" />
 				</h:commandButton>
 				<!-- Test 5.4.2 Encoding PortletMode changes in Faces navigation -->
-				<h:commandButton
-					action="/views/portletEditMode.xhtml?javax.portlet.faces.PortletMode=edit&amp;javax.portlet.faces.WindowState=maximized"
-					immediate="true" value="#{i18n['edit-preferences']}" />
+				<ui:remove>
+					<!-- http://issues.liferay.com/browse/FACES-1555 -->
+					<h:commandButton
+						action="/views/portletEditMode.xhtml?javax.portlet.faces.PortletMode=edit&amp;javax.portlet.faces.WindowState=maximized"
+						immediate="true" value="#{i18n['edit-preferences']}" />
+				</ui:remove>
 			</h:form>
 		</aui:column>
 		<aui:column id="c2">
