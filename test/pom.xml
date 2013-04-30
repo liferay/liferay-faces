@@ -13,13 +13,7 @@
 	<name>Liferay Faces Test</name>
 
 	<modules>
-		<module>bridge-tck-compat</module>
-		<module>bridge-tck-lifecycle-set-portlet</module>
-		<module>bridge-tck-main-portlet</module>
-		<module>bridge-tck-render-policy1-portlet</module>
-		<module>bridge-tck-render-policy2-portlet</module>
-		<module>bridge-tck-render-policy3-portlet</module>
-		<module>bridge-tck-response-wrapper-portlet</module>
+		<module>bridge-tck</module>
 		<module>test-setup-hook</module>
 	</modules>
 
