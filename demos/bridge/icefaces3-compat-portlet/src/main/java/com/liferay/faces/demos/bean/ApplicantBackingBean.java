@@ -139,17 +139,24 @@ public class ApplicantBackingBean implements Serializable {
 			City city = listModelBean.getCityByPostalCode(newPostalCode);
 
 			if (city != null) {
-				String autoFillCity = city.getCityName();
-				applicantModelBean.setAutoFillCity(autoFillCity);
 
-				// Workaround for FACES-1537: Need to set the submitted value for ice:inputText in the component tree.
+				// Workaround for FACES-1537: Need to set the submitted value in the component tree for ice:inputText.
 				UIComponent postalCodeInputComponent = valueChangeEvent.getComponent();
 				UIInput cityInputComponent = (UIInput) postalCodeInputComponent.findComponent("city");
+				String autoFillCity = city.getCityName();
 				cityInputComponent.setSubmittedValue(autoFillCity);
 				cityInputComponent.setValid(true);
 				cityInputComponent.setValue(null);
+				applicantModelBean.setAutoFillCity(autoFillCity);
 
-				applicantModelBean.setAutoFillProvinceId(city.getProvinceId());
+				// Workaround for FACES-1558: Need to set the submitted value and the value in the component tree for
+				// ice:selectInputText.
+				UIInput provinceIdInputComponent = (UIInput) postalCodeInputComponent.findComponent("provinceId");
+				long autoFillProvinceId = city.getProvinceId();
+				provinceIdInputComponent.setSubmittedValue(Long.toString(autoFillProvinceId));
+				provinceIdInputComponent.setValid(true);
+				provinceIdInputComponent.setValue(autoFillProvinceId);
+				applicantModelBean.setAutoFillProvinceId(autoFillProvinceId);
 			}
 		}
 		catch (Exception e) {
