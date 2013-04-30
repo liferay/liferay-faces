@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns:c="http://java.sun.com/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ice="http://www.icesoft.com/icefaces/component" xmlns:pf="http://portletfaces.org/facelets"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<c:if test="#{empty checkAllRendered}">
+		<c:set var="checkAllRendered" value="true" />
+	</c:if>
+	<c:if test="#{empty checkAllIconRendered}">
+		<c:set var="checkAllIconRendered" value="false" />
+	</c:if>
+	<c:if test="#{empty checkAllLabel}">
+		<c:set var="checkAllLabel" value="#{i18n['check-all']}" />
+	</c:if>
+	<c:if test="#{empty checkAllLabelRendered}">
+		<c:set var="checkAllLabelRendered" value="true" />
+	</c:if>
+	<c:if test="#{empty uncheckAllRendered}">
+		<c:set var="uncheckAllRendered" value="true" />
+	</c:if>
+	<c:if test="#{empty uncheckAllIconRendered}">
+		<c:set var="uncheckAllIconRendered" value="false" />
+	</c:if>
+	<c:if test="#{empty uncheckAllLabel}">
+		<c:set var="uncheckAllLabel" value="Uncheck All" />
+	</c:if>
+	<c:if test="#{empty uncheckAllLabelRendered}">
+		<c:set var="uncheckAllLabelRendered" value="true" />
+	</c:if>
+	<c:if test="#{empty deleteRendered}">
+		<c:set var="deleteRendered" value="true" />
+	</c:if>
+	<c:if test="#{empty deleteIconRendered}">
+		<c:set var="deleteIconRendered" value="true" />
+	</c:if>
+	<c:if test="#{empty deleteLabel}">
+		<c:set var="deleteLabel" value="#{i18n['delete']}" />
+	</c:if>
+	<c:if test="#{empty deleteLabelRendered}">
+		<c:set var="deleteLabelRendered" value="true" />
+	</c:if>
+	<c:if test="#{empty deleteWarning}">
+		<c:set var="deleteWarning" value="#{i18n['are-you-sure-you-want-to-delete-this']}" />
+	</c:if>
+	<c:if test="#{empty rowCount}">
+		<c:set var="rowCount" value="0" />
+	</c:if>
+	<c:if test="#{empty actionListenerEnabled}">
+		<c:set var="actionListenerEnabled" value="true" />
+	</c:if>
+	<ice:panelGroup style="#{style}" styleClass="#{styleClass}">
+		<c:if test="#{checkAllRendered}">
+			<ice:commandLink id="check-all" disabled="#{rowCount == 0}">
+				<c:if test="#{checkAllIconRendered}">
+					<ice:graphicImage title="#{i18n['check-all']}" rendered="#{rowCount > 0}" style="vertical-align: middle;" value="/images/check-all.png" />
+					<ice:graphicImage title="#{i18n['check-all']}" rendered="#{rowCount == 0}" style="vertical-align: middle;" value="/images/check-all-dis.png" />
+				</c:if>
+				<c:if test="#{checkAllLabelRendered}">
+					<ice:outputText value="#{checkAllLabel}" style="vertical-align: middle;" />
+				</c:if>
+				<c:if test="#{actionListenerEnabled}">
+					<f:actionListener type="org.edorasframework.extfaces.listener.RowMarksActionListener" />
+				</c:if>
+				<f:param name="for" value="#{for}" />
+				<ui:insert />
+			</ice:commandLink>
+		</c:if>
+		<c:if test="#{uncheckAllRendered}">
+			<ice:commandLink id="uncheck-all" disabled="#{rowCount == 0}">
+				<c:if test="#{uncheckAllIconRendered}">
+					<ice:graphicImage title="#{i18n['uncheck-all']}" rendered="#{rowCount > 0}" style="vertical-align: middle;" value="/images/uncheck-all.png" />
+					<ice:graphicImage title="#{i18n['uncheck-all-dis']}" rendered="#{rowCount == 0}" style="vertical-align: middle;" value="/images/uncheck-all-dis.png" />
+				</c:if>
+				<c:if test="#{uncheckAllLabelRendered}">
+					<ice:outputText value="#{uncheckAllLabel}" style="vertical-align: middle;" />
+				</c:if>
+				<c:if test="#{actionListenerEnabled}">
+					<f:actionListener type="org.edorasframework.extfaces.listener.RowMarksActionListener" />
+				</c:if>
+				<f:param name="for" value="#{for}" />
+				<ui:insert />
+			</ice:commandLink>
+		</c:if>
+		<c:if test="#{deleteRendered}">
+			<ice:commandLink id="delete-checked" disabled="#{rowCount == 0}" onclick="if (! confirm('#{deleteWarning}')) {return false;}">
+				<c:if test="#{deleteIconRendered}">
+					<!-- There is no disabled version of the Liferay delete.png, and its a grayscale trashcan anyway, so use it for both enabled/disabled -->
+					<img alt="#{i18n['delete-checked-items']}" src="#{liferay.themeImageURL['/common/delete.png']}"
+						 style="vertical-align: middle;" title="#{i18n['delete-checked-items']}" />
+				</c:if>
+				<c:if test="#{deleteLabelRendered}">
+					<ice:outputText value="#{deleteLabel}" style="vertical-align: middle;" />
+				</c:if>
+				<f:param name="for" value="#{for}" />
+				<c:if test="#{actionListenerEnabled}">
+					<f:actionListener type="org.edorasframework.extfaces.listener.RowMarksActionListener" />
+				</c:if>
+				<ui:insert />
+			</ice:commandLink>
+		</c:if>
+	</ice:panelGroup>
+
+</ui:composition>

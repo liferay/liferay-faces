@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns:c="http://java.sun.com/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ice="http://www.icesoft.com/icefaces/component" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<c:if test="#{empty paginator}">
+		<c:set var="paginator" value="true" />
+	</c:if>
+	<c:if test="#{empty paginatorMaxPages}">
+		<c:set var="paginatorMaxPages" value="7" />
+	</c:if>
+	<c:if test="#{empty firstIconRendered}">
+		<c:set var="firstIconRendered" value="true" />
+	</c:if>
+	<c:if test="#{empty lastIconRendered}">
+		<c:set var="lastIconRendered" value="true" />
+	</c:if>
+	<c:if test="#{empty previousIconRendered}">
+		<c:set var="previousIconRendered" value="true" />
+	</c:if>
+	<c:if test="#{empty nextIconRendered}">
+		<c:set var="nextIconRendered" value="true" />
+	</c:if>
+	<c:if test="#{empty fastForwardIconRendered}">
+		<c:set var="fastForwardIconRendered" value="false" />
+	</c:if>
+	<c:if test="#{empty fastRewindIconRendered}">
+		<c:set var="fastRewindIconRendered" value="false" />
+	</c:if>
+	<c:if test="#{empty firstLabel}">
+		<c:set var="firstLabel" value="#{i18n['first']}" />
+	</c:if>
+	<c:if test="#{empty lastLabel}">
+		<c:set var="lastLabel" value="#{i18n['last']}" />
+	</c:if>
+	<c:if test="#{empty previousLabel}">
+		<c:set var="previousLabel" value="#{i18n['previous']}" />
+	</c:if>
+	<c:if test="#{empty nextLabel}">
+		<c:set var="nextLabel" value="#{i18n['next']}" />
+	</c:if>
+	<c:if test="#{empty fastRewindLabel}">
+		<c:set var="fastRewindLabel" value="#{i18n['fastRewind']}" />
+	</c:if>
+	<c:if test="#{empty fastForwardLabel}">
+		<c:set var="fastForwardLabel" value="#{i18n['fastForward']}" />
+	</c:if>
+
+	<ice:dataPaginator for="#{for}" firstRowIndexVar="firstRowIndex" lastRowIndexVar="lastRowIndex"
+		pageCountVar="pageCount" paginator="#{paginator}" paginatorMaxPages="#{paginatorMaxPages}" pageIndexVar="pageIndex"
+		rowsCountVar="rowsCount" style="#{style}" styleClass="#{styleClass}">
+		<c:if test="#{firstIconRendered}">
+			<f:facet name="first">
+				<ice:panelGroup style="display: inline;" styleClass="page-links">
+					<ice:outputText rendered="#{pageIndex &lt;= 1}" styleClass="first" value="#{firstLabel}" />
+					<ice:outputText rendered="#{pageIndex > 1}" style="background-position: 0 0%;" styleClass="first"
+						value="#{firstLabel}" />
+				</ice:panelGroup>
+			</f:facet>
+		</c:if>
+		<c:if test="#{lastIconRendered}">
+			<f:facet name="last">
+				<ice:panelGroup style="display: inline;" styleClass="page-links">
+					<ice:outputText rendered="#{pageIndex == pageCount}" styleClass="last" value="#{lastLabel}" />
+					<ice:outputText rendered="#{pageIndex != pageCount}" style="background-position: 100% 0;" styleClass="last" value="#{lastLabel}" />
+				</ice:panelGroup>
+			</f:facet>
+		</c:if>
+		<c:if test="#{previousIconRendered}">
+			<f:facet name="previous">
+				<ice:panelGroup style="display: inline;" styleClass="page-links">
+					<ice:outputText rendered="#{pageIndex &lt;= 1}" styleClass="previous" value="#{previousLabel}" />
+					<ice:outputText rendered="#{pageIndex > 1}" style="background-position: 0 0%;" styleClass="previous" value="#{previousLabel}" />
+				</ice:panelGroup>
+			</f:facet>
+		</c:if>
+		<c:if test="#{nextIconRendered}">
+			<f:facet name="next">
+				<ice:panelGroup style="display: inline;" styleClass="page-links">
+					<ice:outputText rendered="#{pageIndex == pageCount}" styleClass="next" value="#{nextLabel}" />
+					<ice:outputText rendered="#{pageIndex != pageCount}" style="background-position: 100% 0;" styleClass="next" value="#{nextLabel}" />
+				</ice:panelGroup>
+			</f:facet>
+		</c:if>
+		<c:if test="#{fastRewindIconRendered}">
+			<f:facet name="fastrewind">
+				<ice:panelGroup style="display: inline;" styleClass="page-links">
+					<ice:outputText rendered="#{pageIndex &lt;= 1}" styleClass="first" value="#{fastRewindLabel}" />
+					<ice:outputText rendered="#{pageIndex > 1}" style="background-position: 0 0%;" styleClass="first" value="#{fastRewindLabel}" />
+				</ice:panelGroup>
+			</f:facet>
+		</c:if>
+		<c:if test="#{fastForwardIconRendered}">
+			<f:facet name="fastforward">
+				<ice:panelGroup style="display: inline;" styleClass="page-links">
+					<ice:outputText rendered="#{pageIndex == pageCount}" styleClass="last" value="#{fastForwardLabel}" />
+					<ice:outputText rendered="#{pageIndex != pageCount}" style="background-position: 100% 0;" styleClass="last" value="#{fastForwardLabel}" />
+				</ice:panelGroup>
+			</f:facet>
+		</c:if>
+	</ice:dataPaginator>
+
+</ui:composition>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE facelet-taglib PUBLIC
+  "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
+  "https://facelets.dev.java.net/source/browse/*checkout*/facelets/src/etc/facelet-taglib_1_0.dtd">
+<facelet-taglib>
+	<namespace>http://liferay.com/faces/ui</namespace>
+	<tag>
+		<tag-name>ice-check-tool-bar</tag-name>
+		<source>tags/ice-check-tool-bar.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>ice-info-data-paginator</tag-name>
+		<source>tags/ice-info-data-paginator.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>ice-nav-data-paginator</tag-name>
+		<source>tags/ice-nav-data-paginator.xhtml</source>
+	</tag>
+</facelet-taglib>  

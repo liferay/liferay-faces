@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns:c="http://java.sun.com/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ice="http://www.icesoft.com/icefaces/component" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<c:if test="#{empty rendered}">
+		<c:set var="rendered" value="true" />
+	</c:if>
+	<c:if test="#{empty value}">
+		<c:set var="value" value="#{i18n['showing-x-x-of-x-results']}" />
+	</c:if>
+
+	<ice:dataPaginator for="#{for}" firstRowIndexVar="firstRowIndex" lastRowIndexVar="lastRowIndex"
+		pageCountVar="pageCount" pageIndexVar="pageIndex" rendered="#{rendered}" rowsCountVar="rowsCount" style="#{style}"
+		styleClass="#{styleClass} search-results">
+		<ice:outputFormat value="#{value}">
+			<f:param value="#{firstRowIndex}" />
+			<f:param value="#{lastRowIndex}" />
+			<f:param value="#{rowsCount}" />
+			<f:param value="#{pageIndex}" />
+			<f:param value="#{pageCount}" />
+		</ice:outputFormat>
+	</ice:dataPaginator>
+
+</ui:composition>
