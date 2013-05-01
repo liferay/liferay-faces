@@ -15,6 +15,8 @@ package com.liferay.faces.bridge.taglib.liferay;
 
 import java.io.Serializable;
 
+import javax.servlet.jsp.tagext.BodyContent;
+
 
 /**
  * This class provides a compatibility layer that isolates differences between different versions of Liferay Portal.
@@ -27,5 +29,14 @@ public class HtmlTopTagCompat extends com.liferay.taglib.util.HtmlTopTag impleme
 
 	// serialVersionUID
 	private static final long serialVersionUID = 9062668299205537055L;
+
+	@Override
+	public void setBodyContent(BodyContent bodyContent) {
+
+		super.setBodyContent(bodyContent);
+		
+		// Required for Liferay 5.2 compatibility
+		super.doAfterBody();
+	}
 
 }
