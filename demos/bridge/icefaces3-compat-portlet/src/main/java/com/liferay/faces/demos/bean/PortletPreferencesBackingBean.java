@@ -39,8 +39,8 @@ import com.liferay.faces.demos.util.FacesMessageUtil;
 public class PortletPreferencesBackingBean {
 
 	/**
-	 * Resets/restores the values in the portletPreferences.xhtml Facelet composition with portlet preference default
-	 * values.
+	 * Resets/restores the values in the portletPreferences.xhtml Facelet
+	 * composition with portlet preference default values.
 	 */
 	public void reset() {
 
@@ -73,14 +73,19 @@ public class PortletPreferencesBackingBean {
 	}
 
 	/**
-	 * Saves the values in the portletPreferences.xhtml Facelet composition as portlet preferences.
+	 * Saves the values in the portletPreferences.xhtml Facelet composition as
+	 * portlet preferences.
 	 */
 	public void submit() {
 
-		// The JSR 329 specification defines an EL variable named mutablePortletPreferencesValues that is being used in
-		// the portletPreferences.xhtml Facelet composition. This object is of type Map<String, Preference> and is
-		// designed to be a model managed-bean (in a sense) that contain preference values. However the only way to
-		// access this from a Java class is to evaluate an EL expression (effectively self-injecting) the map into
+		// The JSR 329 specification defines an EL variable named
+		// mutablePortletPreferencesValues that is being used in
+		// the portletPreferences.xhtml Facelet composition. This object is of
+		// type Map<String, Preference> and is
+		// designed to be a model managed-bean (in a sense) that contain
+		// preference values. However the only way to
+		// access this from a Java class is to evaluate an EL expression
+		// (effectively self-injecting) the map into
 		// this backing bean.
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
