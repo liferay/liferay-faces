@@ -13,9 +13,15 @@
  */
 package com.liferay.faces.bridge.taglib.liferay;
 
+import java.io.Serializable;
+
+
 /**
  * @author  Neil Griffin
  */
-public class HtmlTopTag extends HtmlTopTagCompat {
+public class HtmlTopTag extends HtmlTopTagCompat implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 7541787073825209250L;
 
 }
