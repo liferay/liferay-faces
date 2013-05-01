@@ -27,14 +27,13 @@ import javax.servlet.jsp.tagext.BodyContent;
 import org.w3c.dom.Element;
 
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.taglib.liferay.HtmlTopTag;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringBodyContent;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
 import com.liferay.portal.util.PortalUtil;
-
-import com.liferay.taglib.util.HtmlTopTag;
 
 
 /**
