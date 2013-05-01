@@ -68,6 +68,7 @@ public class TestPages {
 
 	static {
 		PORTAL_ISSUE_PAGES = new ArrayList<PortalPage>();
+		PORTAL_ISSUE_PAGES.add(new PortalPage("FACES-257", "1_WAR_FACES257portlet"));
 		PORTAL_ISSUE_PAGES.add(new PortalPage("FACES-1427", "1_WAR_FACES1427portlet"));
 		PORTAL_ISSUE_PAGES.add(new PortalPage("FACES-1439", "1_WAR_FACES1439portlet"));
 	}
