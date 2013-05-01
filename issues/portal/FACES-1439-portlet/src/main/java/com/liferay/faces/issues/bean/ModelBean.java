@@ -65,7 +65,6 @@ public class ModelBean implements Serializable {
 	}
 
 	public void setComments3(String comments3) {
-		System.err.println("!@$ comments3=" + comments3);
 		this.comments3 = comments3;
 	}
 }
