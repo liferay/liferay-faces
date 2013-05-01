@@ -13,6 +13,9 @@
  */
 package com.liferay.faces.bridge.taglib.liferay;
 
+import java.io.Serializable;
+
+
 /**
  * This class provides a compatibility layer that isolates differences between different versions of Liferay Portal.
  * Specifically, the {@link com.liferay.taglib.util.HtmlTopTag} works fine on Liferay Portal 6.0 (and above) but
@@ -20,6 +23,9 @@ package com.liferay.faces.bridge.taglib.liferay;
  *
  * @author  Neil Griffin
  */
-public class HtmlTopTagCompat extends com.liferay.taglib.util.HtmlTopTag {
+public class HtmlTopTagCompat extends com.liferay.taglib.util.HtmlTopTag implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 9062668299205537055L;
 
 }
