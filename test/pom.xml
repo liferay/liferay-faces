@@ -13,8 +13,9 @@
 	<name>Liferay Faces Test</name>
 
 	<modules>
-		<module>bridge-tck</module>
 		<module>test-setup-hook</module>
+		<module>bridge-tck</module>
+		<module>integration</module>
 	</modules>
 
 </project>
