@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -81,14 +82,18 @@
 	</modules>
 
 	<properties>
+		<arquillian.version>1.0.3.Final</arquillian.version>
+		<arquillian.drone.version>1.1.1.Final</arquillian.drone.version>
+		<arquillian.graphene.version>2.0.0.Alpha3</arquillian.graphene.version>
 		<codename>Athens</codename>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces1.version>1.8.2</icefaces1.version>
 		<liferay.version>6.1.1</liferay.version>
 		<log4j.version>1.2.14</log4j.version>
 		<mojarra.version>1.2_15</mojarra.version>
-		<myfaces.version>2.1.6</myfaces.version>
-		<selenium.version>1.0.1</selenium.version>
+		<myfaces.version>1.2.12</myfaces.version>
+		<selenium.version>2.31.0</selenium.version>
+		<surefire.version>2.12</surefire.version>
 		<tck.version>jsr329-1.0.1-liferay</tck.version>
 	</properties>
 
@@ -158,12 +163,12 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.4.3</version>
+					<version>${surefire.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-report-plugin</artifactId>
-					<version>2.4.3</version>
+					<version>${surefire.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.scm</groupId>
@@ -531,7 +536,7 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.7</version>
+				<version>4.10</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
@@ -584,6 +589,50 @@
 				</exclusions>
 			</dependency>
 			<dependency>
+				<groupId>org.jboss.arquillian</groupId>
+				<artifactId>arquillian-bom</artifactId>
+				<version>${arquillian.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian.extension</groupId>
+				<artifactId>arquillian-drone-api</artifactId>
+				<version>${arquillian.drone.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian.extension</groupId>
+				<artifactId>arquillian-drone-configuration</artifactId>
+				<version>${arquillian.drone.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian.extension</groupId>
+				<artifactId>arquillian-drone-impl</artifactId>
+				<version>${arquillian.drone.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian.extension</groupId>
+				<artifactId>arquillian-drone-spi</artifactId>
+				<version>${arquillian.drone.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian.extension</groupId>
+				<artifactId>arquillian-drone-webdriver</artifactId>
+				<version>${arquillian.drone.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian.extension</groupId>
+				<artifactId>arquillian-drone-webdriver-depchain</artifactId>
+				<version>${arquillian.drone.version}</version>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian.graphene</groupId>
+				<artifactId>graphene-webdriver</artifactId>
+				<version>${arquillian.graphene.version}</version>
+				<type>pom</type>
+			</dependency>
+			<dependency>
 				<groupId>org.jboss.seam</groupId>
 				<artifactId>jboss-el</artifactId>
 				<version>2.0.0.GA</version>
@@ -595,9 +644,54 @@
 				</exclusions>
 			</dependency>
 			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-server</artifactId>
+				<version>${selenium.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-api</artifactId>
+				<version>${selenium.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-java</artifactId>
+				<version>${selenium.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-support</artifactId>
+				<version>${selenium.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-chrome-driver</artifactId>
+				<version>${selenium.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-firefox-driver</artifactId>
+				<version>${selenium.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-htmlunit-driver</artifactId>
+				<version>${selenium.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-ie-driver</artifactId>
+				<version>${selenium.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-remote-driver</artifactId>
+				<version>${selenium.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.seleniumhq.selenium.client-drivers</groupId>
 				<artifactId>selenium-java-client-driver</artifactId>
-				<version>${selenium.version}</version>
+				<version>1.0.1</version>
 				<scope>test</scope>
 			</dependency>
 		</dependencies>
