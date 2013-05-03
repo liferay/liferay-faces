@@ -59,7 +59,7 @@
 					<ice:outputText value="#{checkAllLabel}" style="vertical-align: middle;" />
 				</c:if>
 				<c:if test="#{actionListenerEnabled}">
-					<f:actionListener type="org.edorasframework.extfaces.listener.RowMarksActionListener" />
+					<f:actionListener type="com.liferay.faces.util.listener.RowMarksActionListener" />
 				</c:if>
 				<f:param name="for" value="#{for}" />
 				<ui:insert />
@@ -75,7 +75,7 @@
 					<ice:outputText value="#{uncheckAllLabel}" style="vertical-align: middle;" />
 				</c:if>
 				<c:if test="#{actionListenerEnabled}">
-					<f:actionListener type="org.edorasframework.extfaces.listener.RowMarksActionListener" />
+					<f:actionListener type="com.liferay.faces.util.listener.RowMarksActionListener" />
 				</c:if>
 				<f:param name="for" value="#{for}" />
 				<ui:insert />
@@ -93,7 +93,7 @@
 				</c:if>
 				<f:param name="for" value="#{for}" />
 				<c:if test="#{actionListenerEnabled}">
-					<f:actionListener type="org.edorasframework.extfaces.listener.RowMarksActionListener" />
+					<f:actionListener type="com.liferay.faces.util.listener.RowMarksActionListener" />
 				</c:if>
 				<ui:insert />
 			</ice:commandLink>
