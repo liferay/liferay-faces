@@ -77,8 +77,9 @@
 		<module>bridge-impl</module>
 		<module>portal</module>
 		<module>demos</module>
-		<!-- <module>test</module> -->
-		<!-- <module>doc</module> -->
+		<module>issues</module>
+		<module>test</module>
+		<module>doc</module>
 	</modules>
 
 	<properties>

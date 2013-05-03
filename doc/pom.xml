@@ -8,6 +8,7 @@
 	</parent>
 	<artifactId>liferay-faces-doc</artifactId>
 	<name>Liferay Faces Documentation</name>
+	<packaging>pom</packaging>
 
 	<build>
 		<plugins>
@@ -37,6 +38,13 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
