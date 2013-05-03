@@ -15,6 +15,9 @@ package com.liferay.faces.bridge.servlet;
 
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
+
 
 /**
  * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
@@ -23,11 +26,22 @@ import javax.faces.context.FacesContext;
  */
 public abstract class BridgeSessionListenerCompat {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(BridgeSessionListenerCompat.class);
+
 	// Private Constants
 	private static final String MOJARRA_INJECTION_PROVIDER_TASK =
 		"com.sun.faces.config.ConfigManager_INJECTION_PROVIDER_TASK";
 
 	public Object getMojarraInjectionProvider(FacesContext facesContext) {
-		return facesContext.getAttributes().get(MOJARRA_INJECTION_PROVIDER_TASK);
+
+		Object mojarraInjectionProvider = facesContext.getAttributes().get(MOJARRA_INJECTION_PROVIDER_TASK);
+
+		if (mojarraInjectionProvider == null) {
+			logger.warn("Unable to determine Mojarra InjectionProvider. " +
+				"For more info, see http://issues.liferay.com/browse/FACES-1511");
+		}
+
+		return mojarraInjectionProvider;
 	}
 }

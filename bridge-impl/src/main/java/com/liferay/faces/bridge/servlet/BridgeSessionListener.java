@@ -90,11 +90,6 @@ public class BridgeSessionListener extends BridgeSessionListenerCompat implement
 				if (facesContext != null) {
 					mojarraInjectionProvider = getMojarraInjectionProvider(facesContext);
 				}
-
-				if (mojarraInjectionProvider == null) {
-					logger.warn("Unable to determine Mojarra InjectionProvider. " +
-						"For more info, see http://issues.liferay.com/browse/FACES-1511");
-				}
 			}
 		}
 	}
