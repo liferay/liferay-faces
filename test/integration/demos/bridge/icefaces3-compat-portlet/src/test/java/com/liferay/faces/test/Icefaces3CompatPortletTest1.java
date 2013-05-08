@@ -39,15 +39,15 @@ import com.liferay.faces.test.util.TesterBase;
  * @author  Liferay Faces Team
  */
 @RunWith(Arquillian.class)
-public class Icefaces3CompatPortletTest extends TesterBase {
+public class Icefaces3CompatPortletTest1 extends TesterBase {
 
 	// form tag found after submitting
 	private static final String formTagXpath = "//form[@method='post']";
 
 	// portlet topper and menu elements
 	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
-	private static final String menuButtonXpath = "//*[contains(text(),'Options')]/..";
-	private static final String menuPreferencesXpath = "//img[contains(@src,'/edit.png')]";
+	private static final String menuButtonXpath = "//a[contains(@id,'menuButton')]";
+	private static final String menuPreferencesXpath = "//a[contains(@id,'menu_preferences')]";
 
 	// preferences elements
 	private static final String datePatternFieldXpath = "//input[contains(@id,':datePattern')]";
@@ -298,7 +298,6 @@ public class Icefaces3CompatPortletTest extends TesterBase {
 		logger.log(Level.INFO, "isThere(firstNameFieldErrorXpath) = " + isThere(firstNameFieldErrorXpath));
 		assertTrue("The firstNameFieldError should at least be in the DOM somewhere by this point, but it is not there",
 			isThere(firstNameFieldErrorXpath));
-		
 		logger.log(Level.INFO, "firstNameFieldError.getText() = " + firstNameFieldError.getText());
 		assertTrue("The firstNameFieldError should say 'Value is required'",
 			firstNameFieldError.getText().contains("Value is required"));
