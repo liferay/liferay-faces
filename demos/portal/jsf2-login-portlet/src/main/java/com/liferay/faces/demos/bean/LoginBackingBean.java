@@ -108,7 +108,6 @@ public class LoginBackingBean {
 
 		try {
 			
-			// TODO call PortalClassInvoker.invoke slightly differently for each version
 			LoginUtilCompat.invokeLogin(
 				LOGIN_UTIL_FQCN,
 				LOGIN_METHOD,
@@ -156,7 +155,6 @@ public class LoginBackingBean {
 				String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 				if (Validator.isNotNull(redirect)) {
-					// TODO back-port PortalUtil to a class called PortalUtilCompat
 					redirect = PortalUtilCompat.escapeRedirect(redirect);
 
 					if (!redirect.startsWith(Http.HTTP)) {
@@ -220,7 +218,6 @@ public class LoginBackingBean {
 
 		String portalURL = null;
 
-		// TODO PropsValuesCompat ???
 		if (PropsValuesCompat.RELAVENT_FOR_THIS_VERSION && 
 			PropsValuesCompat.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS && 
 			!PropsValuesCompat.SESSION_ENABLE_PHISHING_PROTECTION &&
