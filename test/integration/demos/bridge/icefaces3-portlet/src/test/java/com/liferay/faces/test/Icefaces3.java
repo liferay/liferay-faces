@@ -30,12 +30,9 @@ public class Icefaces3 {
 
 	// portlet topper and menu elements
 	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
-//	private static final String menuButtonXpath = "//a[contains(@id,'menuButton')]";
-//	private static final String menuPreferencesXpath = "//a[contains(@id,'menu_preferences')]";
-
 	private static final String menuButtonXpath = "//a[contains(text(),'Options')]";
 	private static final String menuPreferencesXpath = "//img[contains(@src,'/edit.png')]";
-	
+
 	// preferences elements
 	private static final String datePatternFieldXpath = "//input[contains(@id,':datePattern')]";
 	private static final String resetButtonXpath = "//input[@type='submit' and @value='Reset']";
