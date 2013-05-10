@@ -23,7 +23,7 @@
 			<h:panelGroup id="domDiffProtector1">
 				<h:outputText value="backingBean.editor1Rendered=#{backingBean.editor1Rendered}" />
 				<h:panelGroup id="panelGroup1" rendered="#{backingBean.editor1Rendered}">
-					<liferay-ui:input-editor id="inputEditor1" value="#{modelBean.comments1}">
+					<liferay-ui:input-editor id="inputEditor1" editorImpl="#{backingBean.editorImpl}" value="#{modelBean.comments1}">
 						<f:ajax execute="@this" event="change" render=":f1:comments1Output" />
 					</liferay-ui:input-editor>
 				</h:panelGroup>
@@ -38,7 +38,7 @@
 			<h:outputText id="comments2Output" escape="false" value="#{modelBean.comments2}" />
 			<h:panelGroup id="domDiffProtector2">
 				<h:panelGroup id="panelGroup2" rendered="#{backingBean.editor2Rendered}">
-					<liferay-ui:input-editor id="inputEditor2" value="#{modelBean.comments2}">
+					<liferay-ui:input-editor id="inputEditor2" editorImpl="#{backingBean.editorImpl}" value="#{modelBean.comments2}">
 						<f:ajax execute="@this" event="blur" render=":f1:comments2Output" />
 					</liferay-ui:input-editor>
 				</h:panelGroup>
