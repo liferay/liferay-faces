@@ -29,14 +29,19 @@ package com.liferay.faces.issues.bean;
 
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.Product;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -59,7 +64,26 @@ public class BackingBean implements Serializable {
 	// Properties
 	private boolean editor1Rendered = true;
 	private boolean editor2Rendered = true;
+	private String editorImpl;
 
+	public BackingBean() {
+
+		boolean valid = true;
+
+		Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
+		if (liferayPortal.getMajorVersion() < 6) {
+			valid = false;
+		}
+		else if ((liferayPortal.getMajorVersion() == 6) && (liferayPortal.getMinorVersion() == 0) && (liferayPortal.getRevisionVersion() < 12)) {
+			valid = false;
+		}
+		
+		if (!valid) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "This test is only valid on Liferay 6.0.12+", null));
+		}
+	}
+	
 	public void submit(ActionEvent actionEvent) {
 
 		logger.debug("Submitted form");
@@ -69,6 +93,25 @@ public class BackingBean implements Serializable {
 
 		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 		liferayFacesContext.addGlobalSuccessInfoMessage();
+	}
+
+	public String getEditorImpl() {
+		
+		if (editorImpl == null) {
+			Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
+			if (liferayPortal.getMajorVersion() == 6) {
+				
+				editorImpl = "editor.wysiwyg.default";
+
+				if ((liferayPortal.getMinorVersion() == 0) && (liferayPortal.getRevisionVersion() < 12)) {
+					editorImpl = "ckeditor";
+				}
+			}
+			else {
+				editorImpl = "unsupported-liferay-version-" + liferayPortal.getVersion();
+			}
+		}
+		return editorImpl;
 	}
 
 	public void toggleEditor1(ActionEvent actionEvent) {

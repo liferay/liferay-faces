@@ -30,9 +30,11 @@ package com.liferay.faces.issues.bean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.icefaces.ace.component.fileentry.FileEntry;
@@ -43,6 +45,9 @@ import org.icefaces.ace.component.fileentry.FileEntryResults.FileInfo;
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.Product;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -64,6 +69,28 @@ public class BackingBean implements Serializable {
 	// Injections
 	@ManagedProperty(value = "#{modelBean}")
 	private transient ModelBean modelBean;
+
+	// Private Data Members
+	private String editor1Impl;
+	private String editor2Impl;
+
+	public BackingBean() {
+
+		boolean valid = true;
+
+		Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
+		if (liferayPortal.getMajorVersion() < 6) {
+			valid = false;
+		}
+		else if ((liferayPortal.getMajorVersion() == 6) && (liferayPortal.getMinorVersion() == 0) && (liferayPortal.getRevisionVersion() < 12)) {
+			valid = false;
+		}
+		
+		if (!valid) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "This test is only valid on Liferay 6.0.12+", null));
+		}
+	}
 
 	public void handleFileUpload(FileEntryEvent fileEntryEvent) {
 
@@ -95,6 +122,46 @@ public class BackingBean implements Serializable {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public String getEditor1Impl() {
+		
+		if (editor1Impl == null) {
+			Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
+			if (liferayPortal.getMajorVersion() == 6) {
+				
+				editor1Impl = "com.liferay.faces.support.editor1";
+
+				if ((liferayPortal.getMinorVersion() == 0) && (liferayPortal.getRevisionVersion() < 12)) {
+					editor1Impl = "ckeditor";
+				}
+			}
+			else {
+				editor1Impl = "unsupported-liferay-version-" + liferayPortal.getVersion();
+			}
+		}
+
+		return editor1Impl;
+	}
+
+	public String getEditor2Impl() {
+		
+		if (editor2Impl == null) {
+			Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
+			if (liferayPortal.getMajorVersion() == 6) {
+				
+				editor2Impl = "com.liferay.faces.support.editor2";
+
+				if ((liferayPortal.getMinorVersion() == 0) && (liferayPortal.getRevisionVersion() < 12)) {
+					editor2Impl = "ckeditor";
+				}
+			}
+			else {
+				editor2Impl = "unsupported-liferay-version-" + liferayPortal.getVersion();
+			}
+		}
+		
+		return editor2Impl;
 	}
 
 	public void submit(ActionEvent actionEvent) {
