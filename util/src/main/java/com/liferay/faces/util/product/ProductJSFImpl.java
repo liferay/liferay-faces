@@ -44,7 +44,7 @@ public class ProductJSFImpl extends ProductBaseImpl {
 			}
 		}
 		catch (Exception e) {
-			// Ignore -- ICEfaces is likely not present.
+			// Ignore -- JSF implementation is likely not present.
 		}
 	}
 
