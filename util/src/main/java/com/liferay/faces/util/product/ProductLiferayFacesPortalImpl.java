@@ -23,8 +23,8 @@ public class ProductLiferayFacesPortalImpl extends ProductBaseImpl {
 		try {
 			this.title = ProductConstants.LIFERAY_FACES_PORTAL;
 
-			Class<?> auiPanelClass = Class.forName("com.liferay.faces.portal.context.LiferayFacesContext");
-			init(auiPanelClass, ProductConstants.LIFERAY_FACES_PORTAL);
+			Class<?> clazz = Class.forName("com.liferay.faces.portal.context.LiferayFacesContext");
+			init(clazz, ProductConstants.LIFERAY_FACES_PORTAL);
 		}
 		catch (Exception e) {
 			// Ignore -- Liferay Faces Portal is likely not present.
