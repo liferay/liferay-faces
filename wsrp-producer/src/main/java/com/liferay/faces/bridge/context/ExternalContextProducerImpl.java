@@ -16,7 +16,6 @@ package com.liferay.faces.bridge.context;
 import java.util.Map;
 
 import javax.faces.context.ExternalContext;
-import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.context.map.RequestParameterMapProducerImpl;
 
@@ -30,13 +29,13 @@ public class ExternalContextProducerImpl extends ExternalContextWrapper {
 	private static final String LIFERAY_NAMESPACE_PREFIX = "lfr_";
 
 	// Private Data Members
+	private Object request;
 	private Map<String, String> requestParameterMap;
-	private PortletRequest portletRequest;
 	private ExternalContext wrappedExternalContext;
 
-	public ExternalContextProducerImpl(ExternalContext externalContext, PortletRequest portletRequest) {
+	public ExternalContextProducerImpl(ExternalContext externalContext, Object request) {
 		this.wrappedExternalContext = externalContext;
-		this.portletRequest = portletRequest;
+		this.request = request;
 	}
 
 	@Override
@@ -48,7 +47,7 @@ public class ExternalContextProducerImpl extends ExternalContextWrapper {
 	public Map<String, String> getRequestParameterMap() {
 
 		if (requestParameterMap == null) {
-			requestParameterMap = new RequestParameterMapProducerImpl(super.getRequestParameterMap(), portletRequest);
+			requestParameterMap = new RequestParameterMapProducerImpl(super.getRequestParameterMap(), request);
 		}
 
 		return requestParameterMap;

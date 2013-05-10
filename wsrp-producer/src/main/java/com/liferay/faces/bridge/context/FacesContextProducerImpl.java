@@ -15,7 +15,6 @@ package com.liferay.faces.bridge.context;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.portlet.PortletRequest;
 
 
 /**
@@ -25,12 +24,12 @@ public class FacesContextProducerImpl extends FacesContextWrapper {
 
 	// Private Data Members
 	private ExternalContext externalContext;
-	private PortletRequest portletRequest;
+	private Object request;
 	private FacesContext wrappedFacesContext;
 
-	public FacesContextProducerImpl(FacesContext facesContext, PortletRequest portletRequest) {
+	public FacesContextProducerImpl(FacesContext facesContext, Object request) {
 		this.wrappedFacesContext = facesContext;
-		this.portletRequest = portletRequest;
+		this.request = request;
 		setCurrentInstance(this);
 	}
 
@@ -38,7 +37,7 @@ public class FacesContextProducerImpl extends FacesContextWrapper {
 	public ExternalContext getExternalContext() {
 
 		if (externalContext == null) {
-			externalContext = new ExternalContextProducerImpl(getWrapped().getExternalContext(), portletRequest);
+			externalContext = new ExternalContextProducerImpl(getWrapped().getExternalContext(), request);
 		}
 
 		return externalContext;

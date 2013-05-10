@@ -17,6 +17,7 @@ import java.util.Map;
 
 import javax.faces.render.ResponseStateManager;
 import javax.portlet.PortletRequest;
+import javax.servlet.ServletRequest;
 
 
 /**
@@ -29,13 +30,22 @@ public class RequestParameterMapProducerImpl extends RequestParameterMapWrapper 
 
 	// Private Data Members
 	private PortletRequest portletRequest;
+	private ServletRequest servletRequest;
 	private Map<String, String> wrappedMap;
 
-	public RequestParameterMapProducerImpl(Map<String, String> map, PortletRequest portletRequest) {
+	public RequestParameterMapProducerImpl(Map<String, String> map, Object request) {
+
 		this.wrappedMap = map;
-		this.portletRequest = portletRequest;
+
+		if (request instanceof PortletRequest) {
+			this.portletRequest = (PortletRequest) request;
+		}
+		else {
+			this.servletRequest = (ServletRequest) request;
+		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean containsKey(Object key) {
 
@@ -47,7 +57,15 @@ public class RequestParameterMapProducerImpl extends RequestParameterMapWrapper 
 
 			// Determine whether or not the key is present in the parameter-map within the PortletRequest. This should
 			// be a quick lookup (minimal performance impact).
-			Map<String, String[]> parameterMap = portletRequest.getParameterMap();
+			Map<String, String[]> parameterMap = null;
+
+			if (portletRequest != null) {
+				parameterMap = portletRequest.getParameterMap();
+			}
+			else {
+				parameterMap = (Map<String, String[]>) servletRequest.getParameterMap();
+			}
+
 			found = parameterMap.containsKey(key);
 
 			if (!found) {
@@ -55,7 +73,15 @@ public class RequestParameterMapProducerImpl extends RequestParameterMapWrapper 
 				// NOTE: If the parameterMap.containsKey(String) method call returned true, then trust that fact and let
 				// this method return true as well. Otherwise, try again by seeing if the parameter has a value. If it
 				// does, then let this method return true.
-				String value = portletRequest.getParameter((String) key);
+				String value = null;
+
+				if (portletRequest != null) {
+					value = portletRequest.getParameter((String) key);
+				}
+				else {
+					value = servletRequest.getParameter((String) key);
+				}
+
 				found = ((value != null) && (value.length() > 0));
 			}
 
@@ -68,7 +94,14 @@ public class RequestParameterMapProducerImpl extends RequestParameterMapWrapper 
 				// by handling this special case here.
 				if (ResponseStateManager.VIEW_STATE_PARAM.equals(keyAsString)) {
 
-					String viewStateParam = portletRequest.getParameter(ResponseStateManager.VIEW_STATE_PARAM);
+					String viewStateParam = null;
+
+					if (portletRequest != null) {
+						viewStateParam = portletRequest.getParameter(ResponseStateManager.VIEW_STATE_PARAM);
+					}
+					else {
+						viewStateParam = servletRequest.getParameter(ResponseStateManager.VIEW_STATE_PARAM);
+					}
 
 					if (viewStateParam != null) {
 						found = true;

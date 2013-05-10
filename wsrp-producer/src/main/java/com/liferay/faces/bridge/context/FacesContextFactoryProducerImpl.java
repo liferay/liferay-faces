@@ -17,7 +17,6 @@ import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 import javax.faces.context.FacesContextFactory;
 import javax.faces.lifecycle.Lifecycle;
-import javax.portlet.PortletRequest;
 
 
 /**
@@ -37,7 +36,7 @@ public class FacesContextFactoryProducerImpl extends FacesContextFactory {
 		throws FacesException {
 
 		return new FacesContextProducerImpl(wrappedFacesContextFactory.getFacesContext(context, request, response,
-					lifecycle), (PortletRequest) request);
+					lifecycle), request);
 	}
 
 }
