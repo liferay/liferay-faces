@@ -45,9 +45,9 @@
 			<hr />
 			<h:panelGroup id="domDiffBlocker">
 				<h:panelGroup id="editors">
-					<liferay-ui:input-editor id="comments1" editorImpl="com.liferay.faces.support.editor1" toolbarSet="bbcode"
+					<liferay-ui:input-editor id="comments1" editorImpl="#{backingBean.editor1Impl}" toolbarSet="bbcode"
 						value="#{modelBean.comments1}" />
-					<liferay-ui:input-editor id="comments2" editorImpl="com.liferay.faces.support.editor2" toolbarSet="bbcode"
+					<liferay-ui:input-editor id="comments2" editorImpl="#{backingBean.editor2Impl}" toolbarSet="bbcode"
 						value="#{modelBean.comments2}" />
 				</h:panelGroup>
 			</h:panelGroup>
