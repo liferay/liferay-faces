@@ -6,6 +6,13 @@
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Development</param-value>
 	</context-param>
+	<!-- Guarantee order of startup listeners (JSF implementation must be specified before the bridge). -->
+	<listener>
+		<listener-class>${faces.impl.startup.listener}</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.liferay.faces.bridge.servlet.BridgeSessionListener</listener-class>
+	</listener>
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
