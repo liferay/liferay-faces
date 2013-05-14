@@ -186,7 +186,7 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 		assertTrue(
 			"The Last Name Cell of the Test user should be displayed on the page as Test at this point but it is not.",
 			johnAdamsUserLastNameCell.isDisplayed());
-		logger.log(Level.INFO, "testUserLastNameCell.isDisplayed() = " + johnAdamsUserFirstNameCell.isDisplayed());
+		logger.log(Level.INFO, "testUserFirstNameCell.isDisplayed() = " + johnAdamsUserFirstNameCell.isDisplayed());
 		assertTrue(
 			"The First Name Cell of the Test user should be displayed on the page as Test at this point but it is not.",
 			johnAdamsUserFirstNameCell.isDisplayed());
