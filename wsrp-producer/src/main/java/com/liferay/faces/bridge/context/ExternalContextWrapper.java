@@ -15,6 +15,7 @@ package com.liferay.faces.bridge.context;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.Principal;
@@ -108,6 +109,26 @@ public abstract class ExternalContextWrapper extends ExternalContext {
 	}
 
 	@Override
+	public void setRequest(Object request) {
+		getWrapped().setRequest(request);
+	}
+
+	@Override
+	public String getRequestCharacterEncoding() {
+		return getWrapped().getRequestCharacterEncoding();
+	}
+
+	@Override
+	public void setRequestCharacterEncoding(String encoding) throws UnsupportedEncodingException {
+		getWrapped().setRequestCharacterEncoding(encoding);
+	}
+
+	@Override
+	public String getRequestContentType() {
+		return getWrapped().getRequestContentType();
+	}
+
+	@Override
 	public String getRequestContextPath() {
 		return getWrapped().getRequestContextPath();
 	}
@@ -185,6 +206,26 @@ public abstract class ExternalContextWrapper extends ExternalContext {
 	@Override
 	public Object getResponse() {
 		return getWrapped().getResponse();
+	}
+
+	@Override
+	public void setResponse(Object response) {
+		getWrapped().setResponse(response);
+	}
+
+	@Override
+	public String getResponseCharacterEncoding() {
+		return getWrapped().getResponseCharacterEncoding();
+	}
+
+	@Override
+	public void setResponseCharacterEncoding(String encoding) {
+		getWrapped().setResponseCharacterEncoding(encoding);
+	}
+
+	@Override
+	public String getResponseContentType() {
+		return getWrapped().getResponseContentType();
 	}
 
 	@Override
