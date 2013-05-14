@@ -39,9 +39,6 @@ import com.liferay.faces.test.util.TesterBase;
  */
 @RunWith(Arquillian.class)
 public class FACES1439PortletTest extends TesterBase {
-	
-	// Error Message
-	private static final String errorMessageXpath = "//td[text()=' This test is only valid on Liferay 6.0.12+ ']";
 
 	// portlet topper and menu elements
 	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
@@ -69,8 +66,6 @@ public class FACES1439PortletTest extends TesterBase {
 
 	static final String url = "http://localhost:8080/web/portal-issues/faces-1439";
 
-	@FindBy(xpath = errorMessageXpath)
-	private static WebElement errorMessage;
 	@FindBy(xpath = portletDisplayNameXpath)
 	private WebElement portletDisplayName;
 	@FindBy(xpath = showHideOneXpath)
@@ -100,10 +95,6 @@ public class FACES1439PortletTest extends TesterBase {
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
-		
-		if(isThere(errorMessageXpath) && errorMessage.isDisplayed()) {
-			return;
-		}
 
 		logger.log(Level.INFO, "showHideOne.isDisplayed() = " + showHideOne.isDisplayed());
 		logger.log(Level.INFO, "showHideTwo.isDisplayed() = " + showHideTwo.isDisplayed());
@@ -119,10 +110,6 @@ public class FACES1439PortletTest extends TesterBase {
 	@RunAsClient
 	@InSequence(1100)
 	public void htmlEditor1() throws Exception {
-		
-		if(isThere(errorMessageXpath) && errorMessage.isDisplayed()) {
-			return;
-		}
 
 		logger.log(Level.INFO, "Typing into htmlEditor1 ...");
 		iframe1.sendKeys("Hello world 1");
@@ -204,10 +191,6 @@ public class FACES1439PortletTest extends TesterBase {
 	@RunAsClient
 	@InSequence(1200)
 	public void htmlEditor2() throws Exception {
-		
-		if(isThere(errorMessageXpath) && errorMessage.isDisplayed()) {
-			return;
-		}
 
 		logger.log(Level.INFO, "Typing into htmlEditor2 ...");
 		iframe2.click();
@@ -253,10 +236,6 @@ public class FACES1439PortletTest extends TesterBase {
 	@RunAsClient
 	@InSequence(1300)
 	public void inputThree() throws Exception {
-		
-		if(isThere(errorMessageXpath) && errorMessage.isDisplayed()) {
-			return;
-		}
 
 		inputThree.sendKeys("Hello world 3");
 		Thread.sleep(50);
