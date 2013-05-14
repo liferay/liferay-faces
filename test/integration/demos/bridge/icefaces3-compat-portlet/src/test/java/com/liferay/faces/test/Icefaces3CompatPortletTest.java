@@ -46,7 +46,7 @@ public class Icefaces3CompatPortletTest extends TesterBase {
 
 	// portlet topper and menu elements
 	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
-	private static final String menuButtonXpath = "//a[contains(text(),'Options')]";
+	private static final String menuButtonXpath = "//*[contains(text(),'Options')]/..";
 	private static final String menuPreferencesXpath = "//img[contains(@src,'/edit.png')]";
 
 	// preferences elements

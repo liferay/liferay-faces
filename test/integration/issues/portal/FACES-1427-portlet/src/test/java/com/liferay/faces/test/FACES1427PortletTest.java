@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.test;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.logging.Level;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -20,19 +22,14 @@ import org.jboss.arquillian.graphene.enricher.findby.FindBy;
 import org.jboss.arquillian.graphene.javascript.JSInterfaceFactory;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import com.liferay.faces.test.util.TesterBase;;
+import com.liferay.faces.test.util.TesterBase;
 
 
 /**
@@ -40,6 +37,9 @@ import com.liferay.faces.test.util.TesterBase;;
  */
 @RunWith(Arquillian.class)
 public class FACES1427PortletTest extends TesterBase {
+	
+	// Error Message
+	private static final String errorMessageXpath = "//td[text()=' This test is only valid on Liferay 6.0.12+ ']";
 
 	// portlet topper and menu elements
 	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
@@ -72,7 +72,9 @@ public class FACES1427PortletTest extends TesterBase {
 	private static final String comments2OutputXpath = "//span[contains(@id,':comments2Output')]";
 
 	static final String url = "http://localhost:8080/web/portal-issues/faces-1427";
-
+	
+	@FindBy(xpath = errorMessageXpath)
+	private static WebElement errorMessage;
 	@FindBy(xpath = portletDisplayNameXpath)
 	private WebElement portletDisplayName;
 	@FindBy(xpath = fileEntryComponentXpath)
@@ -95,7 +97,7 @@ public class FACES1427PortletTest extends TesterBase {
 	private WebElement comments1Output;
 	@FindBy(xpath = comments2OutputXpath)
 	private WebElement comments2Output;
-
+	
 	@Before
 	public void beforeEachTest() {
 
@@ -116,6 +118,10 @@ public class FACES1427PortletTest extends TesterBase {
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
 		Thread.sleep(250);
+		
+		if(isThere(errorMessageXpath) && errorMessage.isDisplayed()) {
+			return;
+		}
 
 		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
 
@@ -149,6 +155,10 @@ public class FACES1427PortletTest extends TesterBase {
 	@RunAsClient
 	@InSequence(1100)
 	public void steps1and2() throws Exception {
+		
+		if(isThere(errorMessageXpath) && errorMessage.isDisplayed()) {
+			return;
+		}
 
 		fileEntryComponent.sendKeys(getPathToJerseyFile());
 		Thread.sleep(50);
@@ -173,6 +183,10 @@ public class FACES1427PortletTest extends TesterBase {
 	@RunAsClient
 	@InSequence(1200)
 	public void steps34567() throws Exception {
+		
+		if(isThere(errorMessageXpath) && errorMessage.isDisplayed()) {
+			return;
+		}
 
 		logger.log(Level.INFO, "textarea1.getAttribute('value') = " + textarea1.getAttribute("value"));
 
@@ -202,6 +216,10 @@ public class FACES1427PortletTest extends TesterBase {
 	@RunAsClient
 	@InSequence(1300)
 	public void steps89012() throws Exception {
+		
+		if(isThere(errorMessageXpath) && errorMessage.isDisplayed()) {
+			return;
+		}
 
 		logger.log(Level.INFO, "textarea1.getAttribute('value') = " + textarea1.getAttribute("value"));
 
