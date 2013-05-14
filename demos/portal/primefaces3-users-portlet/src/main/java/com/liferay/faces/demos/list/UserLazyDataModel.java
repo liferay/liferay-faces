@@ -122,14 +122,14 @@ public class UserLazyDataModel extends LazyDataModel<User> implements Serializab
 		if (sortField != null) {
 
 			if (sortOrder.equals(SortOrder.DESCENDING)) {
-				sort = SortFactoryUtil.create(sortField, Sort.STRING_TYPE, false);
+				sort = SortFactoryUtil.create(sortField, Sort.STRING_TYPE, true);
 			}
 			else {
-				sort = SortFactoryUtil.create(sortField, Sort.STRING_TYPE, true);
+				sort = SortFactoryUtil.create(sortField, Sort.STRING_TYPE, false);
 			}
 		}
 		else {
-			sort = SortFactoryUtil.create(DEFAULT_SORT_CRITERIA, Sort.STRING_TYPE, true);
+			sort = SortFactoryUtil.create(DEFAULT_SORT_CRITERIA, Sort.STRING_TYPE, false);
 		}
 
 		try {
