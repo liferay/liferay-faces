@@ -71,12 +71,12 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 	private static final String jobTitleColumnHeaderXpath =
 		"//th[contains(@class, 'iceDatTblColHdr') and @scope='col']/a[1]/span[contains(@id,':users:') and text()='Job Title']";
 
-	// Test user's cells in the list view
-	private static final String testUserLastNameCellXpath =
-		"//tr[contains(@class, 'iceDatTblRow') and contains(@id, ':users:')]/td[contains(@class, 'iceDatTblCol2')]/span[contains(text(), 'Test')]";
-	private static final String testUserFirstNameCellXpath =
-		"//tr[contains(@class, 'iceDatTblRow') and contains(@id, ':users:')]/td[contains(@class, 'iceDatTblCol1')]/span[contains(text(), 'Test')]";
-	private static final String testUserEmailAddressCellXpath = "//a[@href='mailto:test@liferay.com']";
+	// John Adams user's cells in the list view
+	private static final String johnAdamsUserLastNameCellXpath =
+		"//tr[contains(@class, 'iceDatTblRow') and contains(@id, ':users:')]/td[contains(@class, 'iceDatTblCol2')]/span[contains(text(), 'Adams')]";
+	private static final String johnAdamsUserFirstNameCellXpath =
+		"//tr[contains(@class, 'iceDatTblRow') and contains(@id, ':users:')]/td[contains(@class, 'iceDatTblCol1')]/span[contains(text(), 'John')]";
+	private static final String johnAdamsUserEmailAddressCellXpath = "//a[@href='mailto:john.adams@liferay.com']";
 
 	static final String url = "http://localhost:8080/group/portal-demos/ice3-dir";
 
@@ -110,12 +110,12 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 	private WebElement emailAddressColumnHeader;
 	@FindBy(xpath = jobTitleColumnHeaderXpath)
 	private WebElement jobTitleColumnHeader;
-	@FindBy(xpath = testUserLastNameCellXpath)
-	private WebElement testUserLastNameCell;
-	@FindBy(xpath = testUserFirstNameCellXpath)
-	private WebElement testUserFirstNameCell;
-	@FindBy(xpath = testUserEmailAddressCellXpath)
-	private WebElement testUserEmailAddressCell;
+	@FindBy(xpath = johnAdamsUserLastNameCellXpath)
+	private WebElement johnAdamsUserLastNameCell;
+	@FindBy(xpath = johnAdamsUserFirstNameCellXpath)
+	private WebElement johnAdamsUserFirstNameCell;
+	@FindBy(xpath = johnAdamsUserEmailAddressCellXpath)
+	private WebElement johnAdamsUserEmailAddressCell;
 
 	@Test
 	@RunAsClient
@@ -176,24 +176,24 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 	@InSequence(2000)
 	public void search() throws Exception {
 
-		lastNameSearchInput.sendKeys("test");
+		lastNameSearchInput.sendKeys("adams");
 
 		searchButton.click();
 
 		Thread.sleep(1000);
 
-		logger.log(Level.INFO, "testUserLastNameCell.isDisplayed() = " + testUserLastNameCell.isDisplayed());
+		logger.log(Level.INFO, "testUserLastNameCell.isDisplayed() = " + johnAdamsUserLastNameCell.isDisplayed());
 		assertTrue(
 			"The Last Name Cell of the Test user should be displayed on the page as Test at this point but it is not.",
-			testUserLastNameCell.isDisplayed());
-		logger.log(Level.INFO, "testUserLastNameCell.isDisplayed() = " + testUserFirstNameCell.isDisplayed());
+			johnAdamsUserLastNameCell.isDisplayed());
+		logger.log(Level.INFO, "testUserLastNameCell.isDisplayed() = " + johnAdamsUserFirstNameCell.isDisplayed());
 		assertTrue(
 			"The First Name Cell of the Test user should be displayed on the page as Test at this point but it is not.",
-			testUserFirstNameCell.isDisplayed());
-		logger.log(Level.INFO, "testUserEmailAddressCell.isDisplayed() = " + testUserEmailAddressCell.isDisplayed());
+			johnAdamsUserFirstNameCell.isDisplayed());
+		logger.log(Level.INFO, "testUserEmailAddressCell.isDisplayed() = " + johnAdamsUserEmailAddressCell.isDisplayed());
 		assertTrue(
 			"The Email Address Cell of the Test user should be displayed on the page as test@liferay.com at this point but it is not.",
-			testUserEmailAddressCell.isDisplayed());
+			johnAdamsUserEmailAddressCell.isDisplayed());
 	}
 
 }
