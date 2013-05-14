@@ -15,6 +15,7 @@ package com.liferay.faces.bridge.context;
 
 import java.util.Iterator;
 
+import javax.el.ELContext;
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
@@ -59,6 +60,11 @@ public abstract class FacesContextWrapper extends FacesContext {
 	@Override
 	public Iterator<String> getClientIdsWithMessages() {
 		return getWrapped().getClientIdsWithMessages();
+	}
+
+	@Override
+	public ELContext getELContext() {
+		return getWrapped().getELContext();
 	}
 
 	@Override
