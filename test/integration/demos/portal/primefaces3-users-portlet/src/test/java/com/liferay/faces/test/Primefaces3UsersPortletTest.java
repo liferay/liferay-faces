@@ -13,20 +13,17 @@
  */
 package com.liferay.faces.test;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.logging.Level;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.graphene.enricher.findby.FindBy;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -41,8 +38,9 @@ import com.liferay.faces.test.util.TesterBase;
 public class Primefaces3UsersPortletTest extends TesterBase {
 
 	// Elements for reseting the John Adams user before running the test
+	private static final String dropdownTestSetupXpath = "//span[contains(text(),'Go To')]/..";
 	private static final String controlPanelTestSetupXpath = "//span[text()=' Control Panel ']";
-	private static final String usersAndOrganizationsLinkTestSetupXpath = "//a[text()=' Users and Organizations ']";
+	private static final String usersLinkTestSetupXpath = "//a[text()=' Users and Organizations ']";
 	private static final String searchAllUsersLinkTestSetupXpath = "//a[text()='Search All Users']";
 	private static final String advancedSearchLinkTestSetupXpath = "//a[contains(text(), 'Advanced')]";
 	private static final String selectStatusTestSetupXpath = "//select[contains(@id, 'status')]";
@@ -72,6 +70,7 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 	private static WebElement errorPassword2TestSetup;
 
 	// elements for Primefaces3Users
+	private static final String primefaces3UsersLinkTestSetupXpath = "//a[contains(@href,'primefaces3usersportlet')]";
 	private static final String portletTitleTextXpath = "//span[@class='portlet-title-text']";
 
 	private static final String menuButtonXpath = "//a[contains(@id,'jsf2portlet') and contains(@id,'menuButton')]";
@@ -175,10 +174,12 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 	static final String url =
 		"http://localhost:8080/group/control_panel/manage?p_p_id=1_WAR_primefaces3usersportlet&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view";
 
+	@FindBy(xpath = dropdownTestSetupXpath)
+	private WebElement dropdownTestSetup;
 	@FindBy(xpath = controlPanelTestSetupXpath)
 	private WebElement controlPanelTestSetup;
-	@FindBy(xpath = usersAndOrganizationsLinkTestSetupXpath)
-	private WebElement usersAndOrganizationsLinkTestSetup;
+	@FindBy(xpath = usersLinkTestSetupXpath)
+	private WebElement usersLinkTestSetup;
 	@FindBy(xpath = searchAllUsersLinkTestSetupXpath)
 	private WebElement searchAllUsersLinkTestSetup;
 	@FindBy(xpath = advancedSearchLinkTestSetupXpath)
@@ -207,6 +208,8 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 	private WebElement jobTitleInputTestSetup;
 	@FindBy(xpath = saveButtonTestSetupXpath)
 	private WebElement saveButtonTestSetup;
+	@FindBy(xpath = primefaces3UsersLinkTestSetupXpath)
+	private WebElement primefaces3UsersLinkTestSetup;
 	@FindBy(xpath = portletTitleTextXpath)
 	private WebElement portletTitleText;
 	@FindBy(xpath = menuButtonXpath)
@@ -311,36 +314,48 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 	@Test
 	@RunAsClient
 	@InSequence(0)
-	public void testSetup() throws Exception {
-
-		browser.manage().deleteAllCookies();
+	public void testSetupActivateUser() throws Exception { // For 3.1.x
 		signIn();
+		(new Actions(browser)).click(dropdownTestSetup);
 		controlPanelTestSetup.click();
-		waitForElement(usersAndOrganizationsLinkTestSetupXpath);
-		usersAndOrganizationsLinkTestSetup.click();
+		waitForElement(usersLinkTestSetupXpath);
+		usersLinkTestSetup.click();
 		waitForElement(searchAllUsersLinkTestSetupXpath);
 		searchAllUsersLinkTestSetup.click();
-		Thread.sleep(1000);
-
+		waitForElement(selectStatusTestSetupXpath);
+		
 		if (isThere(advancedSearchLinkTestSetupXpath) && advancedSearchLinkTestSetup.isDisplayed()) {
 			advancedSearchLinkTestSetup.click();
 		}
-
-		waitForElement(selectStatusTestSetupXpath);
-
+		
 		selectStatusTestSetup.click();
 		(new Actions(browser)).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.TAB).perform();
 		selectStatusTestSetup.submit();
-
+		
+		Thread.sleep(250);		
+		
 		if (isThere(johnAdamsTestSetupXpath)) {
 			johnAdamsMenuTestSetup.click();
 			activateJohnAdamsTestSetup.click();
 		}
+		
+		waitForElement(usersLinkTestSetupXpath);
+	}
+	
+	@Test
+	@RunAsClient
+	@InSequence(500)
+	public void testSetup() throws Exception {
 
-		usersAndOrganizationsLinkTestSetup.click();
+		browser.manage().deleteAllCookies();
+		signIn();
+//		waitForElement(dropdownTestSetupXpath);
+		(new Actions(browser)).click(dropdownTestSetup);
+		controlPanelTestSetup.click();
+		waitForElement(usersLinkTestSetupXpath);
+		usersLinkTestSetup.click();		
 		waitForElement(johnAdamsTestSetupXpath);
 		johnAdamsTestSetup.click();
-
 		waitForElement(emailInputTestSetupXpath);
 
 		if (isThere(deleteLinkTestSetupXpath) && deleteLinkTestSetup.isDisplayed()) {
@@ -371,8 +386,7 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 	@InSequence(1000)
 	public void usersListView() throws Exception {
 
-		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
-		browser.navigate().to(url);
+		primefaces3UsersLinkTestSetup.click();
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 		logger.log(Level.INFO, "portletTitleText.getText() = " + portletTitleText.getText());
@@ -459,14 +473,14 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 			"The Email Address Cell of the John Adams user should be displayed on the page as john.adams@liferay.com at this point but it is not.",
 			johnAdamsUserEmailAddressCell.isDisplayed());
 	}
-
+	
 	@Test
 	@RunAsClient
 	@InSequence(2000)
 	public void specificUserView() throws Exception {
-
+		
+		waitForElement(johnAdamsUserScreenNameCellXpath);
 		johnAdamsUserScreenNameCell.click();
-
 		waitForElement(firstNameFieldXpath);
 
 		logger.log(Level.INFO, "firstNameField.isDisplayed() = " + firstNameField.isDisplayed());
@@ -654,7 +668,6 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 		emailAddressField.sendKeys("A@A.com");
 		jobTitleField.clear();
 		jobTitleField.sendKeys("Aa");
-		dropdownInactiveField.click();
 		submitButton.click();
 
 		logger.log(Level.INFO, "firstNameFieldError.isThere() = " + isThere(firstNameFieldErrorXpath));
@@ -699,10 +712,6 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 
 		waitForElement(firstNameFieldXpath);
 
-		logger.log(Level.INFO, "dropdownInactiveField.isDisplayed() = " + dropdownInactiveField.isDisplayed());
-		assertTrue("The dropdown Inactive Field should be selected now, but it is not.",
-			dropdownInactiveField.isDisplayed());
-
 		firstNameField.clear();
 		firstNameField.sendKeys("John");
 		middleNameField.clear();
@@ -711,7 +720,6 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 		emailAddressField.clear();
 		emailAddressField.sendKeys("john.adams@liferay.com");
 		jobTitleField.clear();
-		dropdownActiveField.click();
 		submitButton.click();
 
 		logger.log(Level.INFO, "firstNameFieldError.isThere() = " + isThere(firstNameFieldErrorXpath));
@@ -746,4 +754,60 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 			johnAdamsUserEmailAddressCell.isDisplayed());
 	}
 
+	@Test
+	@RunAsClient
+	@InSequence(8000)
+	public void deactivateUser() throws Exception{
+		
+		waitForElement(johnAdamsUserScreenNameCellXpath);
+		johnAdamsUserScreenNameCell.click();
+
+		waitForElement(dropdownInactiveFieldXpath);
+		
+		dropdownInactiveField.click();
+				
+		submitButton.click();
+	
+		waitForElement(johnAdamsUserScreenNameCellXpath);
+		johnAdamsUserScreenNameCell.click();
+
+		waitForElement(dropdownActiveFieldXpath);
+		
+		logger.log(Level.INFO, "dropdownInactiveSelectedField.isDisplayed() = " + dropdownInactiveSelectedField.isDisplayed());
+		assertTrue("The dropdown Inactive Field should be selected now, but it is not.",
+			dropdownInactiveSelectedField.isDisplayed());
+		
+		dropdownActiveField.click();
+		
+		submitButton.click();
+		
+		waitForElement(johnAdamsUserScreenNameCellXpath);
+	
+		logger.log(Level.INFO,
+			"johnAdamsUserScreenNameCell.isDisplayed() = " + johnAdamsUserScreenNameCell.isDisplayed());
+		assertTrue(
+			"The Screen Name Cell of the John Adams user should be displayed on the page as john.adams at this point but it is not.",
+			johnAdamsUserScreenNameCell.isDisplayed());
+		logger.log(Level.INFO, "johnAdamsUserLastNameCell.isDisplayed() = " + johnAdamsUserLastNameCell.isDisplayed());
+		assertTrue(
+			"The Last Name Cell of the John Adams user should be displayed on the page as John at this point but it is not.",
+			johnAdamsUserLastNameCell.isDisplayed());
+		logger.log(Level.INFO, "johnAdamsUserLastNameCell.isDisplayed() = " + johnAdamsUserFirstNameCell.isDisplayed());
+		assertTrue(
+			"The First Name Cell of the John Adams user should be displayed on the page as Adams at this point but it is not.",
+			johnAdamsUserFirstNameCell.isDisplayed());
+		logger.log(Level.INFO,
+			"johnAdamsUserEmailAddressCell.isDisplayed() = " + johnAdamsUserEmailAddressCell.isDisplayed());
+		assertTrue(
+			"The Email Address Cell of the John Adams user should be displayed on the page as john.adams@liferay.com at this point but it is not.",
+			johnAdamsUserEmailAddressCell.isDisplayed());
+		
+		johnAdamsUserScreenNameCell.click();
+		waitForElement(dropdownInactiveFieldXpath);
+		
+		logger.log(Level.INFO, "dropdownActiveSelectedField.isDisplayed() = " + dropdownActiveSelectedField.isDisplayed());
+		assertTrue("The dropdown Active Field should be selected now, but it is not.",
+			dropdownActiveSelectedField.isDisplayed());
+	}
 }
+
