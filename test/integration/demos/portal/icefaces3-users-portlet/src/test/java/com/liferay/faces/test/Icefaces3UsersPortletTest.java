@@ -54,8 +54,8 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 	private static final String advancedSearchLinkTestSetupXpath = "//a[contains(text(), 'Advanced')]";
 	private static final String selectStatusTestSetupXpath = "//select[contains(@id, '_status')]";
 	private static final String johnAdamsTestSetupXpath = "//a[text()='john.adams']";
-	private static final String johnAdamsMenuTestSetupXpath = "a[contains(@id, '_john-adams_menuButton')]"; //"//img[contains(@src, 'tool.png')]";//a[contains(@id, 'john-adams_menuButton')]/span[text()='Actions']"; ///child::img[contains(@src, 'activate.png')]";
-	private static final String activateJohnAdamsTestSetupXpath = "//a[contains(@id, 'john-adams_menu_activate')]"; // "//img[contains(@src, 'activate.png')]"; //a[contains(@id, 'john-adams_menu_activate')]"; ///child::img[contains(@src, 'activate.png')]";
+	private static final String johnAdamsMenuTestSetupXpath = "a[contains(@id, '_john-adams_menuButton')]"; 
+	private static final String activateJohnAdamsTestSetupXpath = "//a[contains(@id, 'john-adams_menu_activate')]";
 	private static final String deleteLinkTestSetupXpath = "//span[@class='taglib-text' and text()='Delete']";
 	private static final String emailInputTestSetupXpath = "//input[contains(@id, 'emailAddress')]";
 	private static final String firstNameInputTestSetupXpath = "//input[contains(@id, 'firstName')]";
@@ -309,7 +309,7 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 	@Test
 	@RunAsClient
 	@InSequence(0)
-	public void testSetupActivateUser() throws Exception { // For 3.1.x
+	public void testSetupActivateUser() throws Exception {
 		signIn();
 		(new Actions(browser)).click(dropdownTestSetup);
 		controlPanelTestSetup.click();
@@ -344,7 +344,6 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 
 		browser.manage().deleteAllCookies();
 		signIn();
-		waitForElement(dropdownTestSetupXpath);
 		(new Actions(browser)).click(dropdownTestSetup);
 		controlPanelTestSetup.click();
 		waitForElement(usersLinkTestSetupXpath);
