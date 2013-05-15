@@ -753,10 +753,8 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 	public void deactivateUser() throws Exception{
 		
 		waitForElement(johnAdamsUserScreenNameCellXpath);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-	
+		johnAdamsUserScreenNameCell.click();
+
 		waitForElement(dropdownInactiveFieldXpath);
 		
 		dropdownInactiveField.click();
@@ -764,11 +762,8 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 		submitButton.click();
 	
 		waitForElement(johnAdamsUserScreenNameCellXpath);
-	
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
-		
+		johnAdamsUserScreenNameCell.click();
+
 		waitForElement(dropdownActiveFieldXpath);
 		
 		logger.log(Level.INFO, "dropdownInactiveSelectedField.isDisplayed() = " + dropdownInactiveSelectedField.isDisplayed());
@@ -799,6 +794,10 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 		assertTrue(
 			"The Email Address Cell of the John Adams user should be displayed on the page as john.adams@liferay.com at this point but it is not.",
 			johnAdamsUserEmailAddressCell.isDisplayed());
+		
+		johnAdamsUserScreenNameCell.click();
+		waitForElement(dropdownInactiveFieldXpath);
+		
 		logger.log(Level.INFO, "dropdownActiveSelectedField.isDisplayed() = " + dropdownActiveSelectedField.isDisplayed());
 		assertTrue("The dropdown Active Field should be selected now, but it is not.",
 			dropdownActiveSelectedField.isDisplayed());

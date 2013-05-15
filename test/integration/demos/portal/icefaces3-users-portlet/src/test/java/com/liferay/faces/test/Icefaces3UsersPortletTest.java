@@ -888,9 +888,16 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 		assertTrue(
 			"The Email Address Cell of the John Adams user should be displayed on the page as john.adams@liferay.com at this point but it is not.",
 			johnAdamsUserEmailAddressCell.isDisplayed());
+		
+
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+		Thread.sleep(250);
+		(new Actions(browser)).doubleClick(johnAdamsUserScreenNameCell).perform();
+		
+		waitForElement(dropdownInactiveFieldXpath);
+		
 		logger.log(Level.INFO, "dropdownActiveSelectedField.isDisplayed() = " + dropdownActiveSelectedField.isDisplayed());
 		assertTrue("The dropdown Active Field should be selected now, but it is not.",
 			dropdownActiveSelectedField.isDisplayed());
 	}
-
 }
