@@ -298,7 +298,6 @@ public class Icefaces3CompatPortletTest extends TesterBase {
 		logger.log(Level.INFO, "isThere(firstNameFieldErrorXpath) = " + isThere(firstNameFieldErrorXpath));
 		assertTrue("The firstNameFieldError should at least be in the DOM somewhere by this point, but it is not there",
 			isThere(firstNameFieldErrorXpath));
-		
 		logger.log(Level.INFO, "firstNameFieldError.getText() = " + firstNameFieldError.getText());
 		assertTrue("The firstNameFieldError should say 'Value is required'",
 			firstNameFieldError.getText().contains("Value is required"));
