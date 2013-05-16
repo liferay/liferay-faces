@@ -14,7 +14,6 @@
 
 	<modules>
 		<module>test-setup-hook</module>
-		<module>bridge-tck</module>
 		<module>integration</module>
 	</modules>
 
