@@ -71,17 +71,6 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
  */
 public abstract class PortalWrapper implements Portal {
 
-	@Override
-	public Locale getLocale(HttpServletRequest request, HttpServletResponse response,
-			boolean initialize) {
-		return getWrapped().getLocale(request, response, initialize);
-	}
-
-	@Override
-	public User initUser(HttpServletRequest request) throws Exception {
-		return getWrapped().initUser(request);
-	}
-
 	public void addPageDescription(String description, HttpServletRequest request) {
 		getWrapped().addPageDescription(description, request);
 	}
@@ -147,6 +136,11 @@ public abstract class PortalWrapper implements Portal {
 
 	public void initCustomSQL() {
 		getWrapped().initCustomSQL();
+	}
+
+	@Override
+	public User initUser(HttpServletRequest request) throws Exception {
+		return getWrapped().initUser(request);
 	}
 
 	@Override
@@ -545,6 +539,10 @@ public abstract class PortalWrapper implements Portal {
 		return getWrapped().getFirstPageLayoutTypes(pageContext);
 	}
 
+	public Portlet getFirstSiteAdministrationPortlet(ThemeDisplay themeDisplay) throws SystemException {
+		return getWrapped().getFirstSiteAdministrationPortlet(themeDisplay);
+	}
+
 	@Override
 	public String getFullName(String firstName, String middleName, String lastName) {
 		return getWrapped().getFullName(firstName, middleName, lastName);
@@ -744,6 +742,11 @@ public abstract class PortalWrapper implements Portal {
 
 	public Locale getLocale(RenderRequest renderRequest) {
 		return getWrapped().getLocale(renderRequest);
+	}
+
+	@Override
+	public Locale getLocale(HttpServletRequest request, HttpServletResponse response, boolean initialize) {
+		return getWrapped().getLocale(request, response, initialize);
 	}
 
 	public String getMailId(String mx, String popPortletPrefix, Object... ids) {
@@ -1098,6 +1101,11 @@ public abstract class PortalWrapper implements Portal {
 	public User getSelectedUser(PortletRequest portletRequest, boolean checkPermission) throws PortalException,
 		SystemException {
 		return getWrapped().getSelectedUser(portletRequest, checkPermission);
+	}
+
+	public PortletURL getSiteAdministrationURL(PortletResponse portletResponse, ThemeDisplay themeDisplay)
+		throws SystemException {
+		return getWrapped().getSiteAdministrationURL(portletResponse, themeDisplay);
 	}
 
 	@Override
