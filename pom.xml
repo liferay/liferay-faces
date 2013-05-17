@@ -98,7 +98,7 @@
 		<liferay.app.server.tld.portal.dir>${liferay.app.server.dir}/webapps/ROOT/WEB-INF/tld</liferay.app.server.tld.portal.dir>
 		<liferay.auto.deploy.dir>${liferay.home}/deploy</liferay.auto.deploy.dir>
 		<liferay.deploy.dir>${liferay.app.server.dir}/webapps</liferay.deploy.dir>
-		<liferay.deploy.version>6.1.1</liferay.deploy.version>
+		<liferay.deploy.version>${liferay.api.version}</liferay.deploy.version>
 		<liferay.glassfish.version>3.1.2</liferay.glassfish.version>
 		<liferay.home>${env.PORTALS_HOME}/liferay.com/${liferay.portal}-jsf-1.2</liferay.home>
 		<liferay.jboss.version>7.1.1</liferay.jboss.version>
