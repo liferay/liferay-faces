@@ -89,7 +89,7 @@
 		<codename>Rome</codename>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces3.version>3.3.0</icefaces3.version>
-		<liferay.api.version>5.2.3</liferay.api.version>
+		<liferay.version>5.2.3</liferay.version>
 		<liferay.app.server.deploy.dir>${liferay.app.server.dir}/webapps</liferay.app.server.deploy.dir>
 		<liferay.app.server.dir>${liferay.home}/tomcat-${liferay.tomcat.version}</liferay.app.server.dir>
 		<liferay.app.server.lib.global.dir>${liferay.app.server.dir}/lib/ext</liferay.app.server.lib.global.dir>
@@ -97,11 +97,11 @@
 		<liferay.app.server.tld.portal.dir>${liferay.app.server.dir}/webapps/ROOT/WEB-INF/tld</liferay.app.server.tld.portal.dir>
 		<liferay.auto.deploy.dir>${liferay.home}/deploy</liferay.auto.deploy.dir>
 		<liferay.deploy.dir>${liferay.app.server.dir}/webapps</liferay.deploy.dir>
-		<liferay.deploy.version>${liferay.api.version}</liferay.deploy.version>
+		<liferay.deploy.version>${liferay.version}</liferay.deploy.version>
 		<liferay.glassfish.version>v3.0-Prelude</liferay.glassfish.version>
 		<liferay.home>${env.PORTALS_HOME}/liferay.com/${liferay.portal}</liferay.home>
 		<liferay.jboss.version>5.0.0</liferay.jboss.version>
-		<liferay.maven.plugin.version>${liferay.api.version}</liferay.maven.plugin.version>
+		<liferay.maven.plugin.version>${liferay.version}</liferay.maven.plugin.version>
 		<liferay.portal>liferay-portal-${liferay.deploy.version}</liferay.portal>
 		<liferay.tomcat.version>6.0.18</liferay.tomcat.version>
 		<liferay.weblogic.version>unsupported</liferay.weblogic.version>
@@ -528,19 +528,19 @@
 			<dependency>
 				<groupId>com.liferay.portal</groupId>
 				<artifactId>portal-kernel</artifactId>
-				<version>${liferay.api.version}</version>
+				<version>${liferay.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.liferay.portal</groupId>
 				<artifactId>portal-service</artifactId>
-				<version>${liferay.api.version}</version>
+				<version>${liferay.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.liferay.portal</groupId>
 				<artifactId>util-taglib</artifactId>
-				<version>${liferay.api.version}</version>
+				<version>${liferay.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
