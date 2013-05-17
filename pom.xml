@@ -89,10 +89,32 @@
 		<codename>Rome</codename>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces3.version>3.3.0</icefaces3.version>
-		<liferay.version>5.2.3</liferay.version>
+		<liferay.api.version>5.2.3</liferay.api.version>
+		<liferay.app.server.deploy.dir>${liferay.app.server.dir}/webapps</liferay.app.server.deploy.dir>
+		<liferay.app.server.dir>${liferay.home}/tomcat-${liferay.tomcat.version}</liferay.app.server.dir>
+		<liferay.app.server.lib.global.dir>${liferay.app.server.dir}/lib/ext</liferay.app.server.lib.global.dir>
+		<liferay.app.server.portal.dir>${liferay.app.server.dir}/webapps/ROOT</liferay.app.server.portal.dir>
+		<liferay.app.server.tld.portal.dir>${liferay.app.server.dir}/webapps/ROOT/WEB-INF/tld</liferay.app.server.tld.portal.dir>
+		<liferay.auto.deploy.dir>${liferay.home}/deploy</liferay.auto.deploy.dir>
+		<liferay.deploy.dir>${liferay.app.server.dir}/webapps</liferay.deploy.dir>
+		<liferay.deploy.version>5.2.3</liferay.deploy.version>
+		<liferay.glassfish.version>v3.0-Prelude</liferay.glassfish.version>
+		<liferay.home>${env.PORTALS_HOME}/liferay.com/${liferay.portal}</liferay.home>
+		<liferay.jboss.version>5.0.0</liferay.jboss.version>
+		<liferay.maven.plugin.version>${liferay.api.version}</liferay.maven.plugin.version>
+		<liferay.portal>liferay-portal-${liferay.deploy.version}</liferay.portal>
+		<liferay.tomcat.version>6.0.18</liferay.tomcat.version>
+		<liferay.weblogic.version>unsupported</liferay.weblogic.version>
+		<liferay.websphere.version>unsupported</liferay.websphere.version>
 		<log4j.version>1.2.14</log4j.version>
 		<mojarra.version>2.1.21</mojarra.version>
 		<myfaces.version>2.1.8</myfaces.version>
+		<pluto.deploy.dir>${pluto.tomcat.dir}/webapps</pluto.deploy.dir>
+		<pluto.home>${env.PORTALS_HOME}/liferay.com/${pluto.portal}</pluto.home>
+		<pluto.portal>pluto-${pluto.version}</pluto.portal>
+		<pluto.tomcat.dir>${pluto.home}/tomcat-${pluto.tomcat.version}</pluto.tomcat.dir>
+		<pluto.tomcat.version>7.0.21</pluto.tomcat.version>
+		<pluto.version>2.0.3</pluto.version>
 		<primefaces3.version>3.5</primefaces3.version>
 		<richfaces4.version>4.3.1.Final</richfaces4.version>
 		<selenium.version>2.31.0</selenium.version>
@@ -269,6 +291,27 @@
 	</build>
 
 	<profiles>
+		<profile>
+			<id>ee</id>
+			<properties>
+				<liferay.deploy.version>5.2.9</liferay.deploy.version>
+				<liferay.jboss.version>4.2.3</liferay.jboss.version>
+				<liferay.tomcat.version>6.0.29</liferay.tomcat.version>
+			</properties>
+		</profile>
+		<profile>
+			<id>glassfish</id>
+			<properties>
+				<liferay.app.server.dir>${liferay.home}/glassfish-${liferay.glassfish.version}</liferay.app.server.dir>
+			</properties>
+		</profile>
+		<profile>
+			<id>jboss</id>
+			<properties>
+				<liferay.app.server.dir>${liferay.home}/jboss-tomcat-${liferay.jboss.version}</liferay.app.server.dir>
+				<liferay.deploy.dir>${liferay.app.server.dir}/standalone/deployments</liferay.deploy.dir>
+			</properties>
+		</profile>
 		<profile>
 			<id>liferay</id>
 			<build>
@@ -461,6 +504,18 @@
 				</resources>
 			</build>
 		</profile>
+		<profile>
+			<id>weblogic</id>
+			<properties>
+				<liferay.app.server.dir>${liferay.home}/weblogic-${liferay.weblogic.version}</liferay.app.server.dir>
+			</properties>
+		</profile>
+		<profile>
+			<id>websphere</id>
+			<properties>
+				<liferay.app.server.dir>${liferay.home}/websphere-${liferay.websphere.version}</liferay.app.server.dir>
+			</properties>
+		</profile>
 	</profiles>
 
 	<dependencyManagement>
@@ -479,13 +534,13 @@
 			<dependency>
 				<groupId>com.liferay.portal</groupId>
 				<artifactId>portal-service</artifactId>
-				<version>${liferay.version}</version>
+				<version>${liferay.api.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.liferay.portal</groupId>
 				<artifactId>util-taglib</artifactId>
-				<version>${liferay.version}</version>
+				<version>${liferay.api.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
