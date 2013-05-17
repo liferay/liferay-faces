@@ -47,12 +47,7 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>liferay-faces-alloy</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>liferay-faces-bridge-impl</artifactId>
+			<artifactId>liferay-faces-util</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
