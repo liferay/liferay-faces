@@ -321,12 +321,14 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 		usersLinkTestSetup.click();
 		waitForElement(searchAllUsersLinkTestSetupXpath);
 		searchAllUsersLinkTestSetup.click();
-		waitForElement(selectStatusTestSetupXpath);
 		
+		Thread.sleep(500);
+				
 		if (isThere(advancedSearchLinkTestSetupXpath) && advancedSearchLinkTestSetup.isDisplayed()) {
 			advancedSearchLinkTestSetup.click();
 		}
 		
+		waitForElement(selectStatusTestSetupXpath);
 		selectStatusTestSetup.click();
 		(new Actions(browser)).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.TAB).perform();
 		selectStatusTestSetup.submit();
