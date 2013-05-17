@@ -528,7 +528,7 @@
 			<dependency>
 				<groupId>com.liferay.portal</groupId>
 				<artifactId>portal-kernel</artifactId>
-				<version>${liferay.version}</version>
+				<version>${liferay.api.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
