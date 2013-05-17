@@ -10,13 +10,5 @@
 	</parent>
 	<artifactId>liferay-faces-test-integration-util</artifactId>
 	<name>Liferay Faces Test Utilities</name>
-	
-	<dependencies>
-		<dependency>
-			<groupId>com.liferay.faces</groupId>
-			<artifactId>liferay-faces-util</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-	</dependencies>
 
 </project>
