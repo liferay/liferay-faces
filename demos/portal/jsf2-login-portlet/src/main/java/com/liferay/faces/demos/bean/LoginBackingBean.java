@@ -24,7 +24,6 @@ import javax.portlet.ActionResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.logging.Logger;
@@ -38,20 +37,20 @@ import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
+import com.liferay.portal.kernel.LoginUtilCompat;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ClassResolverUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PortalClassInvoker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.util.PortalUtilCompat;
+import com.liferay.portal.util.PropsValuesCompat;
 
 
 /**
@@ -65,11 +64,6 @@ public class LoginBackingBean {
 	private static final Logger logger = LoggerFactory.getLogger(LoginBackingBean.class);
 
 	// Private Constants
-	private static final String LOGIN_UTIL_FQCN = "com.liferay.portlet.login.util.LoginUtil";
-	private static final String LOGIN_METHOD = "login";
-	private static final Class<?>[] LOGIN_PARAM_TYPES = new Class<?>[] {
-			HttpServletRequest.class, HttpServletResponse.class, String.class, String.class, boolean.class, String.class
-		};
 	private static final String NAMESPACE_SERVLET_REQUEST_FQCN = "com.liferay.portal.servlet.NamespaceServletRequest";
 
 	// Injections
@@ -109,10 +103,10 @@ public class LoginBackingBean {
 		String feedbackMessageId = null;
 
 		try {
-			Class<?> loginUtilClass = ClassResolverUtil.resolveByPortalClassLoader(LOGIN_UTIL_FQCN);
-			MethodKey methodKey = new MethodKey(loginUtilClass, LOGIN_METHOD, LOGIN_PARAM_TYPES);
-			PortalClassInvoker.invoke(false, methodKey, httpServletRequest, httpServletResponse, handle, password,
-				rememberMe, authType);
+
+			LoginUtilCompat.invokeLogin(httpServletRequest, httpServletResponse, handle, password, rememberMe,
+				authType);
+
 			authenticated = true;
 		}
 		catch (AuthException e) {
@@ -151,15 +145,14 @@ public class LoginBackingBean {
 			try {
 				ExternalContext externalContext = liferayFacesContext.getExternalContext();
 
-				if (PropsValues.PORTAL_JAAS_ENABLE) {
-
+				if (PropsValuesCompat.PORTAL_JAAS_ENABLE) {
 					externalContext.redirect(themeDisplay.getPathMain() + "/portal/protected");
 				}
 				else {
 					String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 					if (Validator.isNotNull(redirect)) {
-						redirect = PortalUtil.escapeRedirect(redirect);
+						redirect = PortalUtilCompat.escapeRedirect(redirect);
 
 						if (!redirect.startsWith(Http.HTTP)) {
 							redirect = getCompleteRedirectURL(httpServletRequest, redirect);
@@ -216,22 +209,9 @@ public class LoginBackingBean {
 		return authType;
 	}
 
-	protected String getCompleteRedirectURL(HttpServletRequest request, String redirect) {
+	protected String getCompleteRedirectURL(HttpServletRequest httpServletRequest, String redirect) {
 
-		HttpSession session = request.getSession();
-
-		Boolean httpsInitial = (Boolean) session.getAttribute(WebKeys.HTTPS_INITIAL);
-
-		String portalURL = null;
-
-		if (PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS && !PropsValues.SESSION_ENABLE_PHISHING_PROTECTION &&
-				(httpsInitial != null) && !httpsInitial.booleanValue()) {
-
-			portalURL = PortalUtil.getPortalURL(request, false);
-		}
-		else {
-			portalURL = PortalUtil.getPortalURL(request);
-		}
+		String portalURL = PortalUtilCompat.getPortalURL(httpServletRequest);
 
 		return portalURL.concat(redirect);
 	}
