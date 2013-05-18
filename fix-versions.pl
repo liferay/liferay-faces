@@ -127,8 +127,8 @@ sub do_inplace_edits {
 	#
 	elsif ($file eq "liferay-portlet.xml" and ($File::Find::name =~ /\/src/)) {
 		print "$File::Find::name\n";
-		`perl -pi -e 's/DTD Display ..*\\/\\/EN/DTD Display $portalDtdDisplay\\/\\/EN/' $file`;
-		`perl -pi -e 's/-display_..*\\.dtd/-display_$portalDtdUrl\\.dtd/' $file`;
+		`perl -pi -e 's/DTD Portlet Application ..*\\/\\/EN/DTD Portlet Application $portalDtdDisplay\\/\\/EN/' $file`;
+		`perl -pi -e 's/-portlet-app_..*\\.dtd/-portlet-app_$portalDtdUrl\\.dtd/' $file`;
 	}
  
 	#
