@@ -21,8 +21,9 @@ import com.liferay.portal.kernel.util.PropsUtil;
 /**
  * @author  Neil Griffin
  */
-public class PropsValues {
-
+public class PropsValuesCompat {
+	
+	public static boolean RELAVENT_FOR_THIS_VERSION = true;
 	public static final boolean COMPANY_SECURITY_AUTH_REQUIRES_HTTPS = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS));
 	public static final boolean PORTAL_JAAS_ENABLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PORTAL_JAAS_ENABLE));
