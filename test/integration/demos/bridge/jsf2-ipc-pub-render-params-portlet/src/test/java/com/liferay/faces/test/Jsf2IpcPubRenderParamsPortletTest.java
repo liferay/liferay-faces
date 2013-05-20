@@ -38,7 +38,7 @@ import com.liferay.faces.test.util.TesterBase;
 public class Jsf2IpcPubRenderParamsPortletTest extends TesterBase {
 
 	// portlet topper for customer
-	private static final String customerPortletDisplayNameXpath = "(//header[@class='portlet-topper']/h1/span)[1]";
+	private static final String customerPortletDisplayNameXpath = "//span[@class='portlet-title' and text()=' JSF2 IPC (Pub Render Params) - Customers ']";
 	private static final String briansInputXpath =
 		"//input[@type='image']/../following-sibling::td[1][contains(text(),'1')]/../td[1]/input";
 	private static final String briansFirstNameXpath =
@@ -53,7 +53,7 @@ public class Jsf2IpcPubRenderParamsPortletTest extends TesterBase {
 		"//input[@type='image']/../following-sibling::td[1][contains(text(),'2')]/following-sibling::*[1]/following-sibling::*[1]";
 	
 	// portlet topper for bookings
-	private static final String bookingsPortletDisplayNameXpath = "(//header[@class='portlet-topper']/h1/span)[2]";
+	private static final String bookingsPortletDisplayNameXpath = "//span[@class='portlet-title' and text()=' JSF2 IPC (Pub Render Params) - Bookings ']";
 	// <input id="A8622:f1:firstName" type="text" name="A8622:f1:firstName" value="Brian" class="focus">
 	private static final String firstNameXpath = "//input[contains(@id,':firstName')]";
 	// <input id="A8622:f1:firstName" type="text" name="A8622:f1:firstName" value="Brian" class="focus">
