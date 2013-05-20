@@ -30,7 +30,8 @@ public class Jsf2Cdi {
 
 	// portlet topper and menu elements
 	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
-	private static final String menuButtonXpath = "//a[contains(@id,'menuButton')]";
+	// <a class="dropdown-toggle direction-down max-display-items-15" href="javascript:;" id="_1_WAR_jsf2portlet_INSTANCE_ABCD_kldx_menu" title="Options">
+	private static final String menuButtonXpath = "//a[contains(@id,'_menu') and @title='Options']";
 	private static final String menuPreferencesXpath = "//a[contains(@id,'menu_preferences')]";
 
 	// preferences elements
