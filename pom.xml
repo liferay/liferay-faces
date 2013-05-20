@@ -88,6 +88,11 @@
 		<arquillian.graphene.version>2.0.0.Alpha3</arquillian.graphene.version>
 		<cdi.version>1.0-SP4</cdi.version>
 		<codename>Ephesus</codename>
+		<faces.group.id>com.sun.faces</faces.group.id>
+		<faces.api.artifact.id>jsf-api</faces.api.artifact.id>
+		<faces.impl.artifact.id>jsf-impl</faces.impl.artifact.id>
+		<faces.impl.startup.listener>com.sun.faces.config.ConfigureListener</faces.impl.startup.listener>
+		<faces.version>${mojarra.version}</faces.version>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces3.version>3.3.0</icefaces3.version>
 		<liferay.version>6.2.0-SNAPSHOT</liferay.version>
@@ -317,6 +322,7 @@
 			<id>glassfish</id>
 			<properties>
 				<liferay.app.server.dir>${liferay.home}/glassfish-${liferay.glassfish.version}</liferay.app.server.dir>
+				<liferay.deploy.dir>${liferay.app.server.dir}/domains/domain1/autodeploy</liferay.deploy.dir>
 			</properties>
 		</profile>
 		<profile>
@@ -371,27 +377,6 @@
 			</build>
 		</profile>
 		<profile>
-			<id>mojarra</id>
-			<activation>
-				<property>
-					<name>!faces-impl</name>
-				</property>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>com.sun.faces</groupId>
-					<artifactId>jsf-api</artifactId>
-				</dependency>
-				<dependency>
-					<groupId>com.sun.faces</groupId>
-					<artifactId>jsf-impl</artifactId>
-				</dependency>
-			</dependencies>
-			<properties>
-				<faces.impl.startup.listener>com.sun.faces.config.ConfigureListener</faces.impl.startup.listener>
-			</properties>
-		</profile>
-		<profile>
 			<id>myfaces</id>
 			<!-- Activate by adding -Dfaces-impl=myfaces -->
 			<activation>
@@ -400,18 +385,12 @@
 					<value>myfaces</value>
 				</property>
 			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>org.apache.myfaces.core</groupId>
-					<artifactId>myfaces-api</artifactId>
-				</dependency>
-				<dependency>
-					<groupId>org.apache.myfaces.core</groupId>
-					<artifactId>myfaces-impl</artifactId>
-				</dependency>
-			</dependencies>
 			<properties>
+				<faces.group.id>org.apache.myfaces.core</faces.group.id>
+				<faces.api.artifact.id>myfaces-api</faces.api.artifact.id>
+				<faces.impl.artifact.id>myfaces-impl</faces.impl.artifact.id>
 				<faces.impl.startup.listener>org.apache.myfaces.webapp.StartupServletContextListener</faces.impl.startup.listener>
+				<faces.version>${myfaces.version}</faces.version>
 			</properties>
 		</profile>
 		<profile>
