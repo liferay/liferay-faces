@@ -98,6 +98,11 @@
 					<artifactId>${faces.impl.artifact.id}</artifactId>
 					<version>${faces.version}</version>
 				</dependency>
+				<dependency>
+					<groupId>xerces</groupId>
+					<artifactId>xercesImpl</artifactId>
+					<version>${weblogic.xerces.version}</version>
+				</dependency>
 			</dependencies>
 		</profile>
 		<profile>
