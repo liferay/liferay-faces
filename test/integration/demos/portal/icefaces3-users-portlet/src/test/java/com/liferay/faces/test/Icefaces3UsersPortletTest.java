@@ -51,6 +51,7 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 	private static final String controlPanelTestSetupXpath = "//*[contains(text(),'Control Panel')]";
 	private static final String usersLinkTestSetupXpath = "//img[@alt='Users' and @title='Users']/../..";
 	private static final String searchAllUsersLinkTestSetupXpath = "//a[text()='Search All Users']";
+	private static final String backLinkTestSetupXpath = "//a[contains(text(), 'Back to Users and Organizations Home')]";
 	private static final String advancedSearchLinkTestSetupXpath = "//a[contains(text(), 'Advanced')]";
 	private static final String selectStatusTestSetupXpath = "//select[contains(@id, '_status')]";
 	private static final String johnAdamsTestSetupXpath = "//a[text()='john.adams']";
@@ -187,6 +188,8 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 	private WebElement usersLinkTestSetup;
 	@FindBy(xpath = searchAllUsersLinkTestSetupXpath)
 	private WebElement searchAllUsersLinkTestSetup;
+	@FindBy(xpath = backLinkTestSetupXpath)
+	private WebElement backLinkTestSetup;
 	@FindBy(xpath = advancedSearchLinkTestSetupXpath)
 	private WebElement advancedSearchLinkTestSetup;
 	@FindBy(xpath = selectStatusTestSetupXpath)
@@ -309,32 +312,37 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 //	@Test
 	@RunAsClient
 	@InSequence(0)
-	public void testSetupActivateUser() throws Exception { // For 3.1.x
+	public void testSetupActivateUser() throws Exception {
 		signIn();
 		(new Actions(browser)).click(dropdownTestSetup);
 		controlPanelTestSetup.click();
 		waitForElement(usersLinkTestSetupXpath);
 		usersLinkTestSetup.click();
 		waitForElement(searchAllUsersLinkTestSetupXpath);
-		searchAllUsersLinkTestSetup.click();
-		waitForElement(selectStatusTestSetupXpath);
 		
-		if (isThere(advancedSearchLinkTestSetupXpath) && advancedSearchLinkTestSetup.isDisplayed()) {
-			advancedSearchLinkTestSetup.click();
+		if(!isThere(johnAdamsTestSetupXpath) || !johnAdamsTestSetup.isDisplayed()) {
+			
+			searchAllUsersLinkTestSetup.click();
+			waitForElement(backLinkTestSetupXpath);
+					
+			if (isThere(advancedSearchLinkTestSetupXpath) && advancedSearchLinkTestSetup.isDisplayed()) {
+				advancedSearchLinkTestSetup.click();
+			}
+			
+			waitForElement(selectStatusTestSetupXpath);
+			selectStatusTestSetup.click();
+			(new Actions(browser)).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.TAB).perform();
+			selectStatusTestSetup.submit();
+			
+			Thread.sleep(250);		
+			
+			if (isThere(johnAdamsTestSetupXpath)) {
+				johnAdamsMenuTestSetup.click();
+				activateJohnAdamsTestSetup.click();
+			}
+			
+			waitForElement(usersLinkTestSetupXpath);
 		}
-		
-		selectStatusTestSetup.click();
-		(new Actions(browser)).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.TAB).perform();
-		selectStatusTestSetup.submit();
-		
-		Thread.sleep(250);		
-		
-		if (isThere(johnAdamsTestSetupXpath)) {
-			johnAdamsMenuTestSetup.click();
-			activateJohnAdamsTestSetup.click();
-		}
-		
-		waitForElement(usersLinkTestSetupXpath);
 	}
 	
 	@Test
@@ -344,7 +352,6 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 
 		browser.manage().deleteAllCookies();
 		signIn();
-		waitForElement(dropdownTestSetupXpath);
 		(new Actions(browser)).click(dropdownTestSetup);
 		controlPanelTestSetup.click();
 		waitForElement(usersLinkTestSetupXpath);
