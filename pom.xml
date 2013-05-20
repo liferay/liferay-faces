@@ -123,7 +123,7 @@
 		<pluto.tomcat.version>7.0.21</pluto.tomcat.version>
 		<pluto.version>2.0.3</pluto.version>
 		<primefaces3.version>3.5</primefaces3.version>
-		<richfaces4.version>4.3.1.Final</richfaces4.version>
+		<richfaces4.version>4.3.2.Final</richfaces4.version>
 		<selenium.version>2.31.0</selenium.version>
 		<surefire.version>2.12</surefire.version>
 		<tck.version>jsr329-1.0.1-liferay</tck.version>
