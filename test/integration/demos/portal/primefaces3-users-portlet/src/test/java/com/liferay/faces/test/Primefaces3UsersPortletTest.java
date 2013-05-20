@@ -36,15 +36,24 @@ import com.liferay.faces.test.util.TesterBase;
  */
 @RunWith(Arquillian.class)
 public class Primefaces3UsersPortletTest extends TesterBase {
+	
+	// elements for Primefaces3Users
+	private static final String portletTitleTextXpath = "//span[@class='portlet-title-text']";
+
+	private static final String menuButtonXpath = "//a[contains(@id,'jsf2portlet') and contains(@id,'menuButton')]";
+	private static final String menuPreferencesXpath =
+		"//a[contains(@id,'jsf2portlet') and contains(@id,'menu_preferences')]";
+
+	private static final String logoXpath = "//img[contains(@src,'liferay-logo.png')]";
 
 	// Elements for reseting the John Adams user before running the test
 	private static final String dropdownTestSetupXpath = "//span[contains(text(),'Go To')]/..";
 	private static final String controlPanelTestSetupXpath = "//span[text()=' Control Panel ']";
 	private static final String usersLinkTestSetupXpath = "//a[text()=' Users and Organizations ']";
 	private static final String searchAllUsersLinkTestSetupXpath = "//a[text()='Search All Users']";
+	private static final String backLinkTestSetupXpath = "//a[contains(text(), 'Back to Users and Organizations Home')]";
 	private static final String advancedSearchLinkTestSetupXpath = "//a[contains(text(), 'Advanced')]";
 	private static final String selectStatusTestSetupXpath = "//select[contains(@id, 'status')]";
-	private static final String optionInactiveTestSetupXpath = "//option[text()=' Inactive ']";
 	private static final String johnAdamsTestSetupXpath = "//a[text()='john.adams']";
 	private static final String johnAdamsMenuTestSetupXpath = "//a[contains(@id, 'john-adams_menuButton')]/span[text()='Actions']";
 	private static final String activateJohnAdamsTestSetupXpath = "//a[contains(@id, 'john-adams_menu_activate')]";
@@ -55,30 +64,18 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 	private static final String lastNameInputTestSetupXpath = "//input[contains(@id, 'lastName')]";
 	private static final String jobTitleInputTestSetupXpath = "//input[contains(@id, 'jobTitle')]";
 	private static final String saveButtonTestSetupXpath = "//input[@type='submit' and @value='Save']";
-	private static final String errorMessageTestSetupXpath =
-		"//div[@class='portlet-msg-error' and text()='Your request failed to complete.']";
+	private static final String errorMessageTestSetupXpath = "//div[@class='portlet-msg-error' and text()='Your request failed to complete.']";
 	@FindBy(xpath = errorMessageTestSetupXpath)
 	private static WebElement errorMessageTestSetup;
-	private static final String errorPassword1TestSetupXpath =
-		"//input[contains(@id, 'password1') and @type='password']";
+	private static final String errorPassword1TestSetupXpath = "//input[contains(@id, 'password1') and @type='password']";
 	@FindBy(xpath = errorPassword1TestSetupXpath)
 	private static WebElement errorPassword1TestSetup;
-	private static final String errorPassword2TestSetupXpath =
-		"//input[contains(@id, 'password2') and @type='password']";
+	private static final String errorPassword2TestSetupXpath = "//input[contains(@id, 'password2') and @type='password']";
 	@FindBy(xpath = errorPassword2TestSetupXpath)
 	private static WebElement errorPassword2TestSetup;
 
-	// elements for Primefaces3Users
-	private static final String primefaces3UsersLinkTestSetupXpath = "//a[contains(@href,'primefaces3usersportlet')]";
-	private static final String portletTitleTextXpath = "//span[@class='portlet-title-text']";
-
-	private static final String menuButtonXpath = "//a[contains(@id,'jsf2portlet') and contains(@id,'menuButton')]";
-	private static final String menuPreferencesXpath =
-		"//a[contains(@id,'jsf2portlet') and contains(@id,'menu_preferences')]";
-
-	private static final String logoXpath = "//img[contains(@src,'liferay-logo.png')]";
-
 	// Elements for users' list
+	private static final String primefaces3UsersLinkTestSetupXpath = "//a[contains(@href,'primefaces3usersportlet')]";
 	private static final String screenNameColumnHeaderXpath = "//th[contains(@id,'users:screenName')]/child::span[1]";
 	private static final String screenNameColumnSortIconXpath =
 		"//th[contains(@id,'users:screenName')]/child::span[contains(@class,'ui-sortable-column-icon')]";
@@ -170,9 +167,14 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 	private static final String changedUserEmailAddressCellXpath = "//a[@href='mailto:A@A.com']";
 	private static final String changedUserJobTitleCellXpath = "//span[contains(@id,':jobTitleCell') and text()='Aa']";
 
-	static final String url =
-		"http://localhost:8080/group/control_panel/manage?p_p_id=1_WAR_primefaces3usersportlet&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view";
-
+	@FindBy(xpath = portletTitleTextXpath)
+	private WebElement portletTitleText;
+	@FindBy(xpath = menuButtonXpath)
+	private WebElement menuButton;
+	@FindBy(xpath = menuPreferencesXpath)
+	private WebElement menuPreferences;
+	@FindBy(xpath = logoXpath)
+	private WebElement logo;
 	@FindBy(xpath = dropdownTestSetupXpath)
 	private WebElement dropdownTestSetup;
 	@FindBy(xpath = controlPanelTestSetupXpath)
@@ -181,12 +183,12 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 	private WebElement usersLinkTestSetup;
 	@FindBy(xpath = searchAllUsersLinkTestSetupXpath)
 	private WebElement searchAllUsersLinkTestSetup;
+	@FindBy(xpath = backLinkTestSetupXpath)
+	private WebElement backLinkTestSetup;
 	@FindBy(xpath = advancedSearchLinkTestSetupXpath)
 	private WebElement advancedSearchLinkTestSetup;
 	@FindBy(xpath = selectStatusTestSetupXpath)
 	private WebElement selectStatusTestSetup;
-	@FindBy(xpath = optionInactiveTestSetupXpath)
-	private WebElement optionInactiveTestSetup;
 	@FindBy(xpath = johnAdamsTestSetupXpath)
 	private WebElement johnAdamsTestSetup;
 	@FindBy(xpath = johnAdamsMenuTestSetupXpath)
@@ -209,14 +211,6 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 	private WebElement saveButtonTestSetup;
 	@FindBy(xpath = primefaces3UsersLinkTestSetupXpath)
 	private WebElement primefaces3UsersLinkTestSetup;
-	@FindBy(xpath = portletTitleTextXpath)
-	private WebElement portletTitleText;
-	@FindBy(xpath = menuButtonXpath)
-	private WebElement menuButton;
-	@FindBy(xpath = menuPreferencesXpath)
-	private WebElement menuPreferences;
-	@FindBy(xpath = logoXpath)
-	private WebElement logo;
 	@FindBy(xpath = screenNameColumnHeaderXpath)
 	private WebElement screenNameColumnHeader;
 	@FindBy(xpath = screenNameColumnSortIconXpath)
@@ -293,12 +287,12 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 	private WebElement dropdownInactiveSelectedField;
 	@FindBy(xpath = portraitXpath)
 	private WebElement portrait;
-	@FindBy(xpath = fileUploadButtonXpath)
-	private WebElement fileUploadButton;
 	@FindBy(xpath = changedPortraitXpath)
 	private WebElement changedPortrait;
 	@FindBy(xpath = fileEntryXpath)
 	private WebElement fileEntry;
+	@FindBy(xpath = fileUploadButtonXpath)
+	private WebElement fileUploadButton;
 	@FindBy(xpath = changedUserLastNameCellXpath)
 	private WebElement changedUserLastNameCell;
 	@FindBy(xpath = changedUserFirstNameCellXpath)
@@ -320,27 +314,30 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 		waitForElement(usersLinkTestSetupXpath);
 		usersLinkTestSetup.click();
 		waitForElement(searchAllUsersLinkTestSetupXpath);
-		searchAllUsersLinkTestSetup.click();
 		
-		Thread.sleep(500);
-				
-		if (isThere(advancedSearchLinkTestSetupXpath) && advancedSearchLinkTestSetup.isDisplayed()) {
-			advancedSearchLinkTestSetup.click();
+		if(!isThere(johnAdamsTestSetupXpath) || !johnAdamsTestSetup.isDisplayed()) {
+			
+			searchAllUsersLinkTestSetup.click();
+			waitForElement(backLinkTestSetupXpath);
+					
+			if (isThere(advancedSearchLinkTestSetupXpath) && advancedSearchLinkTestSetup.isDisplayed()) {
+				advancedSearchLinkTestSetup.click();
+			}
+			
+			waitForElement(selectStatusTestSetupXpath);
+			selectStatusTestSetup.click();
+			(new Actions(browser)).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.TAB).perform();
+			selectStatusTestSetup.submit();
+			
+			Thread.sleep(250);		
+			
+			if (isThere(johnAdamsTestSetupXpath)) {
+				johnAdamsMenuTestSetup.click();
+				activateJohnAdamsTestSetup.click();
+			}
+			
+			waitForElement(usersLinkTestSetupXpath);
 		}
-		
-		waitForElement(selectStatusTestSetupXpath);
-		selectStatusTestSetup.click();
-		(new Actions(browser)).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.TAB).perform();
-		selectStatusTestSetup.submit();
-		
-		Thread.sleep(250);		
-		
-		if (isThere(johnAdamsTestSetupXpath)) {
-			johnAdamsMenuTestSetup.click();
-			activateJohnAdamsTestSetup.click();
-		}
-		
-		waitForElement(usersLinkTestSetupXpath);
 	}
 	
 	@Test

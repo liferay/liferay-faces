@@ -47,14 +47,15 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 	private static final String logoXpath = "//img[contains(@src,'liferay-logo.png')]";
 
 	// Elements for reseting the John Adams user before running the test
-	private static final String dropdownTestSetupXpath = "//span[contains(text(),'Go to')]/..";
-	private static final String controlPanelTestSetupXpath = "//*[contains(text(),'Control Panel')]";
+	private static final String dropdownTestSetupXpath = "//span[contains(text(),'Go To')]/..";
+	private static final String controlPanelTestSetupXpath = "//span[text()=' Control Panel ']";
 	private static final String usersLinkTestSetupXpath = "//a[text()=' Users and Organizations ']";
 	private static final String searchAllUsersLinkTestSetupXpath = "//a[text()='Search All Users']";
+	private static final String backLinkTestSetupXpath = "//a[contains(text(), 'Back to Users and Organizations Home')]";
 	private static final String advancedSearchLinkTestSetupXpath = "//a[contains(text(), 'Advanced')]";
-	private static final String selectStatusTestSetupXpath = "//select[contains(@id, '_status')]";
+	private static final String selectStatusTestSetupXpath = "//select[contains(@id, 'status')]";
 	private static final String johnAdamsTestSetupXpath = "//a[text()='john.adams']";
-	private static final String johnAdamsMenuTestSetupXpath = "a[contains(@id, '_john-adams_menuButton')]"; 
+	private static final String johnAdamsMenuTestSetupXpath = "//a[contains(@id, 'john-adams_menuButton')]/span[text()='Actions']";
 	private static final String activateJohnAdamsTestSetupXpath = "//a[contains(@id, 'john-adams_menu_activate')]";
 	private static final String deleteLinkTestSetupXpath = "//span[@class='taglib-text' and text()='Delete']";
 	private static final String emailInputTestSetupXpath = "//input[contains(@id, 'emailAddress')]";
@@ -187,6 +188,8 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 	private WebElement usersLinkTestSetup;
 	@FindBy(xpath = searchAllUsersLinkTestSetupXpath)
 	private WebElement searchAllUsersLinkTestSetup;
+	@FindBy(xpath = backLinkTestSetupXpath)
+	private WebElement backLinkTestSetup;
 	@FindBy(xpath = advancedSearchLinkTestSetupXpath)
 	private WebElement advancedSearchLinkTestSetup;
 	@FindBy(xpath = selectStatusTestSetupXpath)
@@ -316,27 +319,30 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 		waitForElement(usersLinkTestSetupXpath);
 		usersLinkTestSetup.click();
 		waitForElement(searchAllUsersLinkTestSetupXpath);
-		searchAllUsersLinkTestSetup.click();
 		
-		Thread.sleep(500);
-				
-		if (isThere(advancedSearchLinkTestSetupXpath) && advancedSearchLinkTestSetup.isDisplayed()) {
-			advancedSearchLinkTestSetup.click();
+		if(!isThere(johnAdamsTestSetupXpath) || !johnAdamsTestSetup.isDisplayed()) {
+			
+			searchAllUsersLinkTestSetup.click();
+			waitForElement(backLinkTestSetupXpath);
+					
+			if (isThere(advancedSearchLinkTestSetupXpath) && advancedSearchLinkTestSetup.isDisplayed()) {
+				advancedSearchLinkTestSetup.click();
+			}
+			
+			waitForElement(selectStatusTestSetupXpath);
+			selectStatusTestSetup.click();
+			(new Actions(browser)).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.TAB).perform();
+			selectStatusTestSetup.submit();
+			
+			Thread.sleep(250);		
+			
+			if (isThere(johnAdamsTestSetupXpath)) {
+				johnAdamsMenuTestSetup.click();
+				activateJohnAdamsTestSetup.click();
+			}
+			
+			waitForElement(usersLinkTestSetupXpath);
 		}
-		
-		waitForElement(selectStatusTestSetupXpath);
-		selectStatusTestSetup.click();
-		(new Actions(browser)).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.TAB).perform();
-		selectStatusTestSetup.submit();
-		
-		Thread.sleep(250);		
-		
-		if (isThere(johnAdamsTestSetupXpath)) {
-			johnAdamsMenuTestSetup.click();
-			activateJohnAdamsTestSetup.click();
-		}
-		
-		waitForElement(usersLinkTestSetupXpath);
 	}
 	
 	@Test
