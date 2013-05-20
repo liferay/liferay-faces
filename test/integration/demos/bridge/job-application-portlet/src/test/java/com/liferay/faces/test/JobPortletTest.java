@@ -46,7 +46,9 @@ public class JobPortletTest extends TesterBase {
 
 	// portlet topper and menu elements
 	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
-	private static final String menuButtonXpath = "//a[contains(@id,'menuButton')]";
+	// <a class="dropdown-toggle direction-down max-display-items-15" href="javascript:;" id="_1_WAR_jsf2portlet_INSTANCE_ABCD_kldx_menu" title="Options">
+	private static final String menuButtonXpath = "//a[contains(@id,'_menu') and @title='Options']";
+	// <a href=... class="taglib-icon focus" id="_1_WAR_jsf2portlet_INSTANCE_ABCD_kldx_menu_preferences" role="menuitem" tabindex="0">
 	private static final String menuPreferencesXpath = "//a[contains(@id,'menu_preferences')]";
 
 	// preferences elements

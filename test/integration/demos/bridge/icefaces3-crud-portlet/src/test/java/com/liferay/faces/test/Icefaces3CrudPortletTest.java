@@ -39,7 +39,7 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 
 	// portlet topper and menu elements
 	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
-	private static final String menuButtonXpath = "//a[contains(@id,'menuButton')]";
+        private static final String menuButtonXpath = "//a[contains(@id,'_menu') and @title='Options']";
 
 	// Delete button
 	private static final String deleteButtonXpath = "//input[@type='submit' and @value='Delete Selected']";
