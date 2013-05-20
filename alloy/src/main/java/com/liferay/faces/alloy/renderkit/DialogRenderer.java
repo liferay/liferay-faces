@@ -26,6 +26,7 @@ import javax.faces.render.Renderer;
 
 import com.liferay.faces.alloy.util.GetterUtil;
 import com.liferay.faces.alloy.util.StringConstants;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -100,12 +101,12 @@ public class DialogRenderer extends Renderer {
 		writeBooleanAttribute(responseWriter, attributes, "constrain2view", true, false);
 		writeBooleanAttribute(responseWriter, attributes, "destroyOnClose", true, false);
 		writeBooleanAttribute(responseWriter, attributes, "draggable", true, false);
-		writeStringAttribute(responseWriter, attributes, "height", null, false);
+		writeStringAttribute(responseWriter, attributes, "height", null, false, false);
 		writeBooleanAttribute(responseWriter, attributes, "modal", false, false);
 		writeBooleanAttribute(responseWriter, attributes, "resizable", false, false);
 		writeBooleanAttribute(responseWriter, attributes, "stack", true, false);
-		writeStringAttribute(responseWriter, attributes, "title", null, false);
-		writeStringAttribute(responseWriter, attributes, "width", null, true);
+		writeStringAttribute(responseWriter, attributes, "title", null, false, true);
+		writeStringAttribute(responseWriter, attributes, "width", null, true, false);
 		responseWriter.write("}).render();");
 		responseWriter.write("});");
 		responseWriter.write("});");
@@ -115,16 +116,25 @@ public class DialogRenderer extends Renderer {
 	protected void writeBooleanAttribute(ResponseWriter responseWriter, Map<String, Object> attributes, String name,
 		boolean defaultValue, boolean lastAttribute) throws IOException {
 		String value = Boolean.toString(GetterUtil.getBoolean(attributes.get(name), defaultValue));
-		writeStringAttribute(responseWriter, name, value, lastAttribute);
+		writeStringAttribute(responseWriter, name, value, lastAttribute, false);
 	}
 
-	protected void writeStringAttribute(ResponseWriter responseWriter, String name, String value, boolean lastAttribute)
-		throws IOException {
+	protected void writeStringAttribute(ResponseWriter responseWriter, String name, String value, boolean lastAttribute,
+		boolean quote) throws IOException {
 
 		if (value != null) {
 			responseWriter.write(name);
 			responseWriter.write(" : ");
+
+			if (quote) {
+				responseWriter.write(StringPool.QUOTE);
+			}
+
 			responseWriter.write(value);
+
+			if (quote) {
+				responseWriter.write(StringPool.QUOTE);
+			}
 
 			if (!lastAttribute) {
 				responseWriter.write(StringConstants.CHAR_COMMA);
@@ -133,9 +143,9 @@ public class DialogRenderer extends Renderer {
 	}
 
 	protected void writeStringAttribute(ResponseWriter responseWriter, Map<String, Object> attributes, String name,
-		String defaultValue, boolean lastAttribute) throws IOException {
+		String defaultValue, boolean lastAttribute, boolean quote) throws IOException {
 		String value = GetterUtil.getString(attributes.get(name), defaultValue);
-		writeStringAttribute(responseWriter, name, value, lastAttribute);
+		writeStringAttribute(responseWriter, name, value, lastAttribute, quote);
 	}
 
 	@Override
