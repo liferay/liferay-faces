@@ -115,16 +115,22 @@ public class DialogRenderer extends Renderer {
 	protected void writeBooleanAttribute(ResponseWriter responseWriter, Map<String, Object> attributes, String name,
 		boolean defaultValue, boolean lastAttribute) throws IOException {
 		String value = Boolean.toString(GetterUtil.getBoolean(attributes.get(name), defaultValue));
-		writeStringAttribute(responseWriter, name, value, lastAttribute);
+		writeStringAttribute(responseWriter, name, value, lastAttribute, false);
 	}
 
-	protected void writeStringAttribute(ResponseWriter responseWriter, String name, String value, boolean lastAttribute)
+	protected void writeStringAttribute(ResponseWriter responseWriter, String name, String value, boolean lastAttribute, boolean quote)
 		throws IOException {
 
 		if (value != null) {
 			responseWriter.write(name);
 			responseWriter.write(" : ");
+			if (quote) {
+				responseWriter.write("\"");
+			}
 			responseWriter.write(value);
+			if (quote) {
+				responseWriter.write("\"");
+			}
 
 			if (!lastAttribute) {
 				responseWriter.write(StringConstants.CHAR_COMMA);
@@ -135,7 +141,7 @@ public class DialogRenderer extends Renderer {
 	protected void writeStringAttribute(ResponseWriter responseWriter, Map<String, Object> attributes, String name,
 		String defaultValue, boolean lastAttribute) throws IOException {
 		String value = GetterUtil.getString(attributes.get(name), defaultValue);
-		writeStringAttribute(responseWriter, name, value, lastAttribute);
+		writeStringAttribute(responseWriter, name, value, lastAttribute, true);
 	}
 
 	@Override
