@@ -17,9 +17,9 @@
 
 	<modules>
 		<module>jsf2-login-portlet</module>
-		<module>icefaces3-directory-portlet</module>
 		<module>icefaces3-users-portlet</module>
 		<module>primefaces3-users-portlet</module>
+		<module>icefaces3-directory-portlet</module>
 	</modules>
 
 </project>
