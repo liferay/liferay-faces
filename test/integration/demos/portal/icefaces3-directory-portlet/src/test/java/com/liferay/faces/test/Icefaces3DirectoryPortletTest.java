@@ -53,8 +53,6 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 		"//label[@class='aui-field-label' and contains(text(), 'First Name')]/following-sibling::span[@class='aui-field-element']/input[contains(@class, 'iceInpTxt')]";
 	private static final String emailAddressSearchInputXpath =
 		"//label[@class='aui-field-label' and contains(text(), 'Email Address')]/following-sibling::span[@class='aui-field-element']/input[contains(@class, 'iceInpTxt')]";
-//	private static final String dropdownSearchStatusXpath =
-//		"//select[contains(@id,':s1')]/option[@selected='true' and contains(text(), 'Any Status')]/..";
 	private static final String dropdownSearchOperatoreXpath =
 		"//select[contains(@id,':s1')]/option[@selected='true' and contains(text(), 'Any')]/..";
 	private static final String searchButtonXpath =
@@ -94,8 +92,6 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 	private WebElement firstNameSearchInput;
 	@FindBy(xpath = emailAddressSearchInputXpath)
 	private WebElement emailAddressSearchInput;
-//	@FindBy(xpath = dropdownSearchStatusXpath)
-//	private WebElement dropdownSearchStatusField;
 	@FindBy(xpath = dropdownSearchOperatoreXpath)
 	private WebElement dropdownSearchOperatorField;
 	@FindBy(xpath = searchButtonXpath)
@@ -142,9 +138,6 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 		logger.log(Level.INFO, "emailAddressSearchInput.isDisplayed() = " + emailAddressSearchInput.isDisplayed());
 		assertTrue("The Email Address Search Box should be displayed on the page at this point but it is not.",
 			emailAddressSearchInput.isDisplayed());
-//		logger.log(Level.INFO, "dropdownSearchStatusField.isDisplayed() = " + dropdownSearchStatusField.isDisplayed());
-//		assertTrue("The Status Dropdown should be displayed on the page at this point but it is not.",
-//			dropdownSearchStatusField.isDisplayed());
 		logger.log(Level.INFO,
 			"dropdownSearchOperatorField.isDisplayed() = " + dropdownSearchOperatorField.isDisplayed());
 		assertTrue("The Search Operator Dropdown should be displayed on the page at this point but it is not.",
