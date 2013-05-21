@@ -63,7 +63,6 @@ public class TesterBase {
 		browser.navigate().to(signInUrl);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " before signing in ...");
 
-//		waitForElement(emailFieldXpath);
 		emailField.clear();
 		emailField.sendKeys("test@liferay.com");
 		passwordField.clear();
