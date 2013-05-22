@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+	<!--
+	Since Liferay Faces is published to Maven Central, the deployment rules do not permit <repository>
+	or <pluginRepository> entries to appear in any of the pom.xml files. In order to build Liferay Faces
+	from source via Maven, the entries below must be copied to your $HOME/.m2/settings.xml file.
+
+	For more information, see:
+		1) https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+		2) http://blog.sonatype.com/people/2009/02/why-putting-repositories-in-your-poms-is-a-bad-idea/
+	-->
+	<repositories>
+		<!-- Required for JBoss EL -->
+		<repository>
+			<id>public-jboss</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
+		</repository>
+		<!-- Required for PrimeFaces Dependencies -->
+		<repository>
+			<id>primefaces-releases</id>
+			<url>http://repository.primefaces.org</url>
+		</repository>
+		<!-- Required for JSR 329 TCK -->
+		<repository>
+			<id>portletfaces-thirdparty</id>
+			<url>http://repository.portletfaces.org/content/repositories/thirdparty/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<!-- Required for the maven-jdocbook-plugin -->
+		<pluginRepository>
+			<id>maven2-repository.jboss.org</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+</settings>
