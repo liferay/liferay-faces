@@ -17,7 +17,6 @@
 
 	<modules>
 		<module>bridge</module>
-		<module>portal</module>
 	</modules>
 
 	<dependencies>

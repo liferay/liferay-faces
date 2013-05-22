@@ -64,7 +64,7 @@ public class Jsf2IpcPubRenderParamsPortletTest extends TesterBase {
 	// <input type="submit" name="A8622:f1:j_idt28" value="Submit" id="aui_3_4_0_1_2331">
 	private static final String submitXpath = "//input[@type='submit' and @value='Submit']";
 
-	static final String url = "http://localhost:8080/group/bridge-demos/jsf2-prp";
+	static final String url = "http://localhost:8080/group/bridge-demos/jsf1-prp";
 
 	@FindBy(xpath = customerPortletDisplayNameXpath)
 	private WebElement customerPortletDisplayName;
