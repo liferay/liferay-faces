@@ -82,6 +82,7 @@
 	</modules>
 
 	<properties>
+		<app.server.type>tomcat</app.server.type>
 		<arquillian.version>1.0.3.Final</arquillian.version>
 		<arquillian.drone.version>1.1.1.Final</arquillian.drone.version>
 		<arquillian.graphene.version>2.0.0.Alpha3</arquillian.graphene.version>
@@ -307,6 +308,7 @@
 		<profile>
 			<id>glassfish</id>
 			<properties>
+				<app.server.type>glassfish</app.server.type>
 				<liferay.app.server.dir>${liferay.home}/glassfish-${liferay.glassfish.version}</liferay.app.server.dir>
 				<liferay.deploy.dir>${liferay.app.server.dir}/domains/domain1/autodeploy</liferay.deploy.dir>
 			</properties>
@@ -314,6 +316,7 @@
 		<profile>
 			<id>jboss</id>
 			<properties>
+				<app.server.type>jboss</app.server.type>
 				<liferay.app.server.dir>${liferay.home}/jboss-${liferay.jboss.version}</liferay.app.server.dir>
 				<liferay.deploy.dir>${liferay.app.server.dir}/standalone/deployments</liferay.deploy.dir>
 			</properties>
@@ -481,12 +484,14 @@
 		<profile>
 			<id>weblogic</id>
 			<properties>
+				<app.server.type>weblogic</app.server.type>
 				<liferay.app.server.dir>${liferay.home}/weblogic-${liferay.weblogic.version}</liferay.app.server.dir>
 			</properties>
 		</profile>
 		<profile>
 			<id>websphere</id>
 			<properties>
+				<app.server.type>websphere</app.server.type>
 				<liferay.app.server.dir>${liferay.home}/websphere-${liferay.websphere.version}</liferay.app.server.dir>
 			</properties>
 		</profile>
