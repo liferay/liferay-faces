@@ -62,6 +62,5 @@ public class TestPages {
 	
 	static {
 		GUEST_PAGES = new ArrayList<PortalPage>();
-		GUEST_PAGES.add(new PortalPage("JSF1-SIGN-IN", "1_WAR_jsf1loginportlet"));
 	}
 }
