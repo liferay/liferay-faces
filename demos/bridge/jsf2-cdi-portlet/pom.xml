@@ -65,4 +65,17 @@
 		</dependency>
 	</dependencies>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<packagingExcludes>WEB-INF/web-*.xml</packagingExcludes>
+					<webXml>src/main/webapp/WEB-INF/web-${app.server.type}.xml</webXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>
