@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
@@ -23,7 +25,10 @@ import javax.faces.event.ActionEvent;
  */
 @ManagedBean
 @ViewScoped
-public class ApplicantViewBean {
+public class ApplicantViewBean implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 2431684783762529783L;
 
 	// JavaBeans Properties for UI
 	private boolean commentsRendered;
