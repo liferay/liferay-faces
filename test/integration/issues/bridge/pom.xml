@@ -16,8 +16,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>FACES-224-portlet</module>
-		<module>FACES-1470-portlet</module>
 		<module>FACES-1478-portlet</module>
 	</modules>
 
