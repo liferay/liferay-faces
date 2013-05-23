@@ -285,12 +285,8 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			}
 
 			// Add request parameters from the request parameter map.
-			String namespace = responseNamespace;
-
-			if (namespace.startsWith(BridgeConstants.WSRP)) {
-				namespace = StringPool.BLANK;
-			}
-
+			boolean namespaced = !responseNamespace.startsWith(BridgeConstants.WSRP);
+		
 			Set<Map.Entry<String, String[]>> mapEntries = additionalParameterMap.entrySet();
 
 			if (mapEntries != null) {
@@ -307,7 +303,7 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 							if (curParameterValue != null) {
 
 								String encodedParameterValue = encode(curParameterValue);
-								appendNamespacedParameterToURL(parameterName, encodedParameterValue, url);
+								appendParameterToURL(firstParameter, namespaced, parameterName, encodedParameterValue, url);
 							}
 						}
 					}
@@ -341,10 +337,6 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 		}
 
 		return toStringValue;
-	}
-
-	protected void appendNamespacedParameterToURL(String parameterName, String parameterValue, StringBuilder url) {
-		appendParameterToURL(false, true, parameterName, parameterValue, url);
 	}
 
 	protected void appendParameterToURL(String parameterName, String parameterValue, StringBuilder url) {
