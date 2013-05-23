@@ -3,6 +3,12 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd http://xmlns.oracle.com/weblogic/weblogic-web-app http://xmlns.oracle.com/weblogic/weblogic-web-app/1.4/weblogic-web-app.xsd">
 	<wls:container-descriptor>
 		<wls:prefer-web-inf-classes>true</wls:prefer-web-inf-classes>
+		<wls:prefer-application-packages>
+			<wls:package-name>antlr.*</wls:package-name>
+			<wls:package-name>org.apache.commons.lang.*</wls:package-name>
+			<wls:package-name>org.mozilla.*</wls:package-name>
+			<wls:package-name>org.opensaml.*</wls:package-name>
+		</wls:prefer-application-packages>
 		<wls:optimistic-serialization>true</wls:optimistic-serialization>
 		<wls:show-archived-real-path-enabled>true</wls:show-archived-real-path-enabled>
 	</wls:container-descriptor>
