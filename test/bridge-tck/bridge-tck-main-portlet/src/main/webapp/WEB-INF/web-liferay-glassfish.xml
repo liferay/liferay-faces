@@ -1,0 +1,179 @@
+<?xml version = '1.0' encoding = 'ISO-8859-1'?>
+<!--
+  MODIFIED FOR COMPATIBILITY WITH LIFERAY PORTAL ON IBM WEBSPHERE APPLICATION SERVER
+
+  1) Added several context-param entries (see below).
+-->
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+	   
+-->
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+  <display-name>bridge_Test_web</display-name>
+
+  <!-- BEGIN: LIFERAY PORTAL -->
+  <context-param>
+  	<param-name>portletConfigWrapperClass</param-name>
+  	<param-value>com.liferay.faces.bridge.tck.portlet.PortletConfigWrapper</param-value>
+  </context-param>
+  <!-- END: LIFERAY PORTAL -->
+  <!-- BEGIN: LIFERAY FACES BRIDGE -->
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.bridgeRequestScopeAjaxEnabled</param-name>
+  	<param-value>true</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.bridgeRequestScopePreserved</param-name>
+  	<param-value>true</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.renderRedirectEnabled</param-name>
+  	<param-value>true</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.optimizePortletNamespace</param-name>
+  	<param-value>false</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.manageIncongruities</param-name>
+  	<param-value>false</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>com.liferay.faces.bridge.viewParametersEnabled</param-name>
+  	<param-value>false</param-value>
+  </context-param>
+  <!-- END: LIFERAY FACES BRIDGE -->
+
+  <context-param>
+    <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+    <param-value>.jsp</param-value>
+  </context-param>
+
+  <!-- Use client-side state saving.  In Trinidad, it is an
+       optimized, token-based mechanism that is almost always a
+       better choice than the standard JSF server-side state saving. -->
+  <context-param>
+    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+    <param-value>client</param-value>
+    <!--param-value>server</param-value-->
+  </context-param>
+
+  <!-- Trinidad by default uses an optimized client-side state saving
+       mechanism. To disable that, uncomment the following -->
+  <!--context-param>
+    <param-name>org.apache.myfaces.trinidad.CLIENT_STATE_METHOD</param-name>
+    <param-value>all</param-value>
+  </context-param-->
+
+  <!-- Trinidad also supports an optimized strategy for caching some
+   view state at an application level, which significantly improves
+   scalability.  However, it makes it harder to develop (updates to
+   pages will not be noticed until the server is restarted), and in
+   some rare cases cannot be used for some pages (see Trinidad
+   documentation for more information) -->
+  <context-param>
+    <param-name>org.apache.myfaces.trinidad.USE_APPLICATION_VIEW_CACHE</param-name>
+    <param-value>false</param-value>
+  </context-param>
+
+  <!-- If this parameter is enabled, Trinidad will automatically
+       check the modification date of your JSPs, and discard saved
+       state when they change;  this makes development easier,
+       but adds overhead that should be avoided when your application
+       is deployed -->
+  <context-param>
+    <param-name>org.apache.myfaces.trinidad.CHECK_FILE_MODIFICATION</param-name>
+    <param-value>true</param-value>
+  </context-param>
+
+  <!-- Enables Change Persistence at a session scope.  By default,
+       Change Persistence is entirely disabled. The ChangeManager is
+       an API, which can persist component modifications (like,
+       is a showDetail or tree expanded or collapsed). For providing
+       a custom Change Persistence implementation inherit from the 
+       Trinidad API's ChangeManager class. As the value you have 
+       to use the fullqualified class name. -->
+  <context-param>
+    <param-name>org.apache.myfaces.trinidad.CHANGE_PERSISTENCE</param-name>
+    <param-value>session</param-value>
+  </context-param>
+
+  <filter>
+    <filter-name>trinidad</filter-name>
+    <filter-class>org.apache.myfaces.trinidad.webapp.TrinidadFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>trinidad</filter-name>
+    <servlet-name>faces</servlet-name>
+  </filter-mapping>
+
+  <!-- BEGIN: LIFERAY FACES BRIDGE -->
+  <!-- Guarantee order of startup listeners (JSF implementation must be specified before the bridge). -->
+  <listener>
+    <listener-class>${faces.impl.startup.listener}</listener-class>
+  </listener>
+  <listener>
+    <listener-class>com.liferay.faces.bridge.servlet.BridgeSessionListener</listener-class>
+  </listener>
+  <!-- END: LIFERAY FACES BRIDGE -->
+  
+  <!-- Faces Servlet -->
+  <servlet>
+    <servlet-name>faces</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+  </servlet>
+
+  <!-- resource loader servlet -->
+  <servlet>
+    <servlet-name>resources</servlet-name>
+    <servlet-class>org.apache.myfaces.trinidad.webapp.ResourceServlet</servlet-class>
+  </servlet>
+
+  <!-- nonFaces resource used by a test -->
+  <servlet>
+    <servlet-name>nonFacesResource</servlet-name>
+    <servlet-class>org.apache.myfaces.portlet.faces.testsuite.tests.chapter_5.section_5_2.NonFacesResourceServlet</servlet-class>
+  </servlet>
+  
+  <!-- Faces Servlet Mappings -->
+  <!-- 
+    In this demo application, I chose to use suffix mapping.  I did this because it makes urls
+    in the portlet world look nicer in the source.  The portlet url should be the same 
+    reguardless.
+  -->
+  <servlet-mapping>
+    <servlet-name>faces</servlet-name>
+    <url-pattern>*.jsf</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>resources</servlet-name>
+    <url-pattern>/adf/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>nonFacesResource</servlet-name>
+    <url-pattern>/tck/*</url-pattern>
+  </servlet-mapping>
+
+</web-app>
+
