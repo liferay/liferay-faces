@@ -81,8 +81,6 @@
 		<!-- Default Portal: Liferay -->
 		<bridge.tck.portal>liferay</bridge.tck.portal>
 		<bridge.tck.test.base-url>http://${bridge.tck.test.host}:${bridge.tck.test.port}?p_p_id=58&amp;p_p_lifecycle=0&amp;p_p_state=exclusive&amp;p_p_mode=view&amp;saveLastPath=0&amp;_58_struts_action=%2Flogin%2Flogin</bridge.tck.test.base-url>
-		<!-- Default App Server: Tomcat -->
-		<app.server.type>tomcat</app.server.type>
 		<bridge.tck.test.host>localhost</bridge.tck.test.host>
 		<bridge.tck.test.port>8080</bridge.tck.test.port>
 	</properties>
@@ -91,7 +89,6 @@
 		<profile>
 			<id>websphere</id>
 			<properties>
-				<app.server.type>websphere</app.server.type>
 				<bridge.tck.test.host>192.168.10.110</bridge.tck.test.host>
 				<bridge.tck.test.port>9080</bridge.tck.test.port>
 			</properties>
