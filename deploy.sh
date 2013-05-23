@@ -123,6 +123,12 @@ if [ "$REBUILD" = "true" ] ; then
 		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/bridge-api; mvn clean install; popd
 		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/bridge-impl; mvn clean install; popd
 		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/portal; mvn clean install; popd
+	else
+		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/util; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
+		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/alloy; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
+		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/bridge-api; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
+		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/bridge-impl; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
+		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/portal; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
 	fi
 fi
 $PORTLET_MVN_CMD
