@@ -34,7 +34,7 @@ public class TestPages {
 		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF2", "1_WAR_jsf2portlet_INSTANCE_"));
 		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF2-CDI", "1_WAR_jsf2cdiportlet_INSTANCE_"));
 		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF2-JSP", "1_WAR_jsf2jspportlet_INSTANCE_"));
-		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF2-PDF", "1_WAR_jsf2exportpdfportlet_INSTANCE_"));
+		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF2-PDF", "1_WAR_jsf2exportpdfportlet"));
 		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF2-EVENTS",
 				new String[] {
 					"customers_WAR_jsf2ipceventscustomersportlet", "bookings_WAR_jsf2ipceventsbookingsportlet"
@@ -46,7 +46,7 @@ public class TestPages {
 				}));
 		BRIDGE_DEMO_PAGES.add(new PortalPage("ICE3", "1_WAR_icefaces3portlet_INSTANCE_"));
 		BRIDGE_DEMO_PAGES.add(new PortalPage("ICE3-COMPAT", "1_WAR_icefaces3compatportlet_INSTANCE_"));
-		BRIDGE_DEMO_PAGES.add(new PortalPage("ICE3-CRUD", "1_WAR_icefaces3crudportlet_INSTANCE_"));
+		BRIDGE_DEMO_PAGES.add(new PortalPage("ICE3-CRUD", "1_WAR_icefaces3crudportlet"));
 		BRIDGE_DEMO_PAGES.add(new PortalPage("ICE3-IPC",
 				new String[] { "1_WAR_icefaces3ipcajaxpushportlet", "2_WAR_icefaces3ipcajaxpushportlet" }));
 		BRIDGE_DEMO_PAGES.add(new PortalPage("PRIME3", "1_WAR_primefaces3portlet_INSTANCE_"));
