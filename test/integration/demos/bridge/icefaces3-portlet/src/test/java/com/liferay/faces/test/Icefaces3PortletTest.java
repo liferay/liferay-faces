@@ -45,9 +45,9 @@ public class Icefaces3PortletTest extends TesterBase {
 	private static final String formTagXpath = "//form[@method='post']";
 
 	// portlet topper and menu elements
-	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
-	private static final String menuButtonXpath = "//a[contains(@id,'menuButton')]";
-	private static final String menuPreferencesXpath = "//a[contains(@id,'menu_preferences')]";
+	private static final String portletDisplayNameXpath = "//div[@class='portlet-topper']/span";
+	private static final String menuButtonXpath =  "//*[contains(text(),'Options')]/..";
+	private static final String menuPreferencesXpath = "//a[contains(text(), 'Preferences')]";
 
 	// preferences elements
 	private static final String datePatternFieldXpath = "//input[contains(@id,':datePattern')]";

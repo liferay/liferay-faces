@@ -41,7 +41,7 @@ public class FACES224PortletTest extends TesterBase {
 	private static final Logger logger = Logger.getLogger(FACES224PortletTest.class.getName());
 
 	// portlet topper and menu elements
-	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
+	private static final String portletDisplayNameXpath = "//div[@class='portlet-topper']/span";
 
 	private static final String formTagXpath = "//form[@method='post']";
 
@@ -51,7 +51,7 @@ public class FACES224PortletTest extends TesterBase {
 	// <div class="portlet-body" id="aui_3_4_0_1_500"> <div id="A2535" class="liferay-faces-bridge-body">This is
 	// view2.xhtml <br>viewParam1='' (if the issue is fixed, the value should be equal to 'abc') <br>viewParam2='' (if
 	// the issue is fixed, the value should be equal to 'xyz')</div> </div>
-	private static final String view2DivXpath = "//div[@class='portlet-body']/div[1]";
+	private static final String view2DivXpath = "//div[@class='liferay-faces-bridge-body']";
 
 	static final String url = "http://localhost:8080/web/bridge-issues/faces-224";
 
