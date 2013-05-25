@@ -53,8 +53,6 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 		"//label[@class='aui-field-label' and contains(text(), 'First Name')]/following-sibling::span[@class='aui-field-element']/input[contains(@class, 'iceInpTxt')]";
 	private static final String emailAddressSearchInputXpath =
 		"//label[@class='aui-field-label' and contains(text(), 'Email Address')]/following-sibling::span[@class='aui-field-element']/input[contains(@class, 'iceInpTxt')]";
-	private static final String dropdownSearchStatusXpath =
-		"//select[contains(@id,':s1')]/option[@selected='true' and contains(text(), 'Any Status')]/..";
 	private static final String dropdownSearchOperatoreXpath =
 		"//select[contains(@id,':s1')]/option[@selected='true' and contains(text(), 'Any')]/..";
 	private static final String searchButtonXpath =
@@ -71,12 +69,12 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 	private static final String jobTitleColumnHeaderXpath =
 		"//th[contains(@class, 'iceDatTblColHdr') and @scope='col']/a[1]/span[contains(@id,':users:') and text()='Job Title']";
 
-	// Test user's cells in the list view
-	private static final String testUserLastNameCellXpath =
-		"//tr[contains(@class, 'iceDatTblRow') and contains(@id, ':users:')]/td[contains(@class, 'iceDatTblCol2')]/span[contains(text(), 'Test')]";
-	private static final String testUserFirstNameCellXpath =
-		"//tr[contains(@class, 'iceDatTblRow') and contains(@id, ':users:')]/td[contains(@class, 'iceDatTblCol1')]/span[contains(text(), 'Test')]";
-	private static final String testUserEmailAddressCellXpath = "//a[@href='mailto:test@liferay.com']";
+	// John Adams user's cells in the list view
+	private static final String johnAdamsUserLastNameCellXpath =
+		"//tr[contains(@class, 'iceDatTblRow') and contains(@id, ':users:')]/td[contains(@class, 'iceDatTblCol2')]/span[contains(text(), 'Adams')]";
+	private static final String johnAdamsUserFirstNameCellXpath =
+		"//tr[contains(@class, 'iceDatTblRow') and contains(@id, ':users:')]/td[contains(@class, 'iceDatTblCol1')]/span[contains(text(), 'John')]";
+	private static final String johnAdamsUserEmailAddressCellXpath = "//a[@href='mailto:john.adams@liferay.com']";
 
 	static final String url = "http://localhost:8080/group/portal-demos/ice3-dir";
 
@@ -94,8 +92,6 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 	private WebElement firstNameSearchInput;
 	@FindBy(xpath = emailAddressSearchInputXpath)
 	private WebElement emailAddressSearchInput;
-	@FindBy(xpath = dropdownSearchStatusXpath)
-	private WebElement dropdownSearchStatusField;
 	@FindBy(xpath = dropdownSearchOperatoreXpath)
 	private WebElement dropdownSearchOperatorField;
 	@FindBy(xpath = searchButtonXpath)
@@ -110,12 +106,12 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 	private WebElement emailAddressColumnHeader;
 	@FindBy(xpath = jobTitleColumnHeaderXpath)
 	private WebElement jobTitleColumnHeader;
-	@FindBy(xpath = testUserLastNameCellXpath)
-	private WebElement testUserLastNameCell;
-	@FindBy(xpath = testUserFirstNameCellXpath)
-	private WebElement testUserFirstNameCell;
-	@FindBy(xpath = testUserEmailAddressCellXpath)
-	private WebElement testUserEmailAddressCell;
+	@FindBy(xpath = johnAdamsUserLastNameCellXpath)
+	private WebElement johnAdamsUserLastNameCell;
+	@FindBy(xpath = johnAdamsUserFirstNameCellXpath)
+	private WebElement johnAdamsUserFirstNameCell;
+	@FindBy(xpath = johnAdamsUserEmailAddressCellXpath)
+	private WebElement johnAdamsUserEmailAddressCell;
 
 	@Test
 	@RunAsClient
@@ -142,9 +138,6 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 		logger.log(Level.INFO, "emailAddressSearchInput.isDisplayed() = " + emailAddressSearchInput.isDisplayed());
 		assertTrue("The Email Address Search Box should be displayed on the page at this point but it is not.",
 			emailAddressSearchInput.isDisplayed());
-		logger.log(Level.INFO, "dropdownSearchStatusField.isDisplayed() = " + dropdownSearchStatusField.isDisplayed());
-		assertTrue("The Status Dropdown should be displayed on the page at this point but it is not.",
-			dropdownSearchStatusField.isDisplayed());
 		logger.log(Level.INFO,
 			"dropdownSearchOperatorField.isDisplayed() = " + dropdownSearchOperatorField.isDisplayed());
 		assertTrue("The Search Operator Dropdown should be displayed on the page at this point but it is not.",
@@ -176,24 +169,24 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 	@InSequence(2000)
 	public void search() throws Exception {
 
-		lastNameSearchInput.sendKeys("test");
+		lastNameSearchInput.sendKeys("adams");
 
 		searchButton.click();
 
 		Thread.sleep(1000);
 
-		logger.log(Level.INFO, "testUserLastNameCell.isDisplayed() = " + testUserLastNameCell.isDisplayed());
+		logger.log(Level.INFO, "testUserLastNameCell.isDisplayed() = " + johnAdamsUserLastNameCell.isDisplayed());
 		assertTrue(
 			"The Last Name Cell of the Test user should be displayed on the page as Test at this point but it is not.",
-			testUserLastNameCell.isDisplayed());
-		logger.log(Level.INFO, "testUserLastNameCell.isDisplayed() = " + testUserFirstNameCell.isDisplayed());
+			johnAdamsUserLastNameCell.isDisplayed());
+		logger.log(Level.INFO, "testUserFirstNameCell.isDisplayed() = " + johnAdamsUserFirstNameCell.isDisplayed());
 		assertTrue(
 			"The First Name Cell of the Test user should be displayed on the page as Test at this point but it is not.",
-			testUserFirstNameCell.isDisplayed());
-		logger.log(Level.INFO, "testUserEmailAddressCell.isDisplayed() = " + testUserEmailAddressCell.isDisplayed());
+			johnAdamsUserFirstNameCell.isDisplayed());
+		logger.log(Level.INFO, "testUserEmailAddressCell.isDisplayed() = " + johnAdamsUserEmailAddressCell.isDisplayed());
 		assertTrue(
 			"The Email Address Cell of the Test user should be displayed on the page as test@liferay.com at this point but it is not.",
-			testUserEmailAddressCell.isDisplayed());
+			johnAdamsUserEmailAddressCell.isDisplayed());
 	}
 
 }

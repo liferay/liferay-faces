@@ -32,7 +32,7 @@ public class Jsf2Jsp {
 
 	// portlet topper and menu elements
 	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
-	private static final String menuButtonXpath = "//a[contains(@id,'menuButton')]";
+	private static final String menuButtonXpath = "//*[contains(text(),'Options')]/..";
 	private static final String menuPreferencesXpath = "//a[contains(@id,'menu_preferences')]";
 
 	// preferences elements

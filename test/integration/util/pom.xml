@@ -10,5 +10,5 @@
 	</parent>
 	<artifactId>liferay-faces-test-integration-util</artifactId>
 	<name>Liferay Faces Test Utilities</name>
-
+	
 </project>
