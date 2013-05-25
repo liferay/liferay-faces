@@ -58,7 +58,7 @@ public class TesterBase {
 	public void signIn() throws Exception {
 
 		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
-
+		
 		logger.log(Level.INFO, "browser.navigate().to(" + signInUrl + ")");
 		browser.navigate().to(signInUrl);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " before signing in ...");
