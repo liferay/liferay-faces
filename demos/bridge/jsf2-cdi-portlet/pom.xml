@@ -51,7 +51,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.cdi</groupId>
-			<artifactId>cdi1-portlet-bridge-shared</artifactId>
+			<artifactId>cdi-portlet-bridge-shared</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.faces</groupId>
