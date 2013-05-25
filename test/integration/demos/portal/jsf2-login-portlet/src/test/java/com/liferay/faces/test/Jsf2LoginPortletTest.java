@@ -41,7 +41,7 @@ public class Jsf2LoginPortletTest extends TesterBase {
 
 	private static final Logger logger = Logger.getLogger(Jsf2LoginPortletTest.class.getName());
 
-	@FindBy(xpath = "//section[@id='portlet_1_WAR_jsf2loginportlet']/header/h1/span[2]")
+	@FindBy(xpath = "//div[@class='portlet-topper']/span")
 	private WebElement portletDisplayName;
 
 	@FindBy(xpath = "//form[@method='post']/ul/li")

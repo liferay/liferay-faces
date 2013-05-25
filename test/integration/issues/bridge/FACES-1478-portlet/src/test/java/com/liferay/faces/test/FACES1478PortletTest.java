@@ -38,8 +38,7 @@ import com.liferay.faces.test.util.TesterBase;
 public class FACES1478PortletTest extends TesterBase {
 
 	// portlet topper and menu elements
-	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
-
+	private static final String portletDisplayNameXpath = "//div[@class='portlet-topper']/span";
 	private static final String formTagXpath = "//form[@method='post']";
 
 	private static final String secondLinkXpath = "//form[@method='post']/a[2]";
