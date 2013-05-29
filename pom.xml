@@ -123,6 +123,7 @@
 		<pluto.tomcat.dir>${pluto.home}/tomcat-${pluto.tomcat.version}</pluto.tomcat.dir>
 		<pluto.tomcat.version>7.0.21</pluto.tomcat.version>
 		<pluto.version>2.0.3</pluto.version>
+		<webapp.descriptor>web.xml</webapp.descriptor>
 		<primefaces3.version>3.5</primefaces3.version>
 		<richfaces4.version>4.3.2.Final</richfaces4.version>
 		<selenium.version>2.31.0</selenium.version>
@@ -190,7 +191,10 @@
 								<Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
 							</manifestEntries>
 						</archive>
+						<dependentWarExcludes>WEB-INF/lib/*</dependentWarExcludes>
 						<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+						<packagingExcludes>WEB-INF/web-*.xml</packagingExcludes>
+						<webXml>${basedir}/src/main/webapp/WEB-INF/${webapp.descriptor}</webXml>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -434,6 +438,9 @@
 								<goals>
 									<goal>assemble</goal>
 								</goals>
+								<configuration>
+									<webXml>${basedir}/src/main/webapp/WEB-INF/${webapp.descriptor}</webXml>
+								</configuration>
 							</execution>
 						</executions>
 					</plugin>
@@ -458,6 +465,7 @@
 								</configuration>
 							</execution>
 							<execution>
+								<id>install</id>
 								<phase>install</phase>
 								<goals>
 									<goal>run</goal>
