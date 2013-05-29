@@ -114,7 +114,7 @@
 		<liferay.weblogic.version>10.3.6.0</liferay.weblogic.version>
 		<liferay.websphere.version>8.0.0.3</liferay.websphere.version>
 		<log4j.version>1.2.14</log4j.version>
-		<mojarra.version>2.2.0-SNAPSHOT</mojarra.version>
+		<mojarra.version>2.2.0</mojarra.version>
 		<myfaces.version>2.1.8</myfaces.version>
 		<pluto.deploy.dir>${pluto.tomcat.dir}/webapps</pluto.deploy.dir>
 		<pluto.home>${env.PORTALS_HOME}/liferay.com/${pluto.portal}</pluto.home>
@@ -785,16 +785,4 @@
 		</plugins>
 	</reporting>
 
-	<repositories>
-		<repository>
-			<id>java.net-snapshots</id>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<url>https://maven.java.net/content/repositories/snapshots</url>
-		</repository>
-	</repositories>
 </project>
