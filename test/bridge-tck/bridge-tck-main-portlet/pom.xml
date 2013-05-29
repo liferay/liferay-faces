@@ -83,6 +83,7 @@
 		<bridge.tck.test.base-url>http://${bridge.tck.test.host}:${bridge.tck.test.port}?p_p_id=58&amp;p_p_lifecycle=0&amp;p_p_state=exclusive&amp;p_p_mode=view&amp;saveLastPath=0&amp;_58_struts_action=%2Flogin%2Flogin</bridge.tck.test.base-url>
 		<bridge.tck.test.host>localhost</bridge.tck.test.host>
 		<bridge.tck.test.port>8080</bridge.tck.test.port>
+		<webapp.descriptor>web-${bridge.tck.portal}-${app.server.type}.xml</webapp.descriptor>
 	</properties>
 
 	<profiles>
@@ -258,15 +259,6 @@
 	<!-- but the "unpack" approach found below meets our needs better than the maven-assembly-plugin -->
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<dependentWarExcludes>WEB-INF/lib/*</dependentWarExcludes>
-					<packagingExcludes>WEB-INF/web-*.xml</packagingExcludes>
-					<webXml>src/main/webapp/WEB-INF/web-${bridge.tck.portal}-${app.server.type}.xml</webXml>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.appfuse.plugins</groupId>
 				<artifactId>maven-warpath-plugin</artifactId>
