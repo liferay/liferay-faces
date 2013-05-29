@@ -122,12 +122,12 @@
 		<pluto.tomcat.dir>${pluto.home}/tomcat-${pluto.tomcat.version}</pluto.tomcat.dir>
 		<pluto.tomcat.version>7.0.21</pluto.tomcat.version>
 		<pluto.version>2.0.3</pluto.version>
-		<webapp.descriptor>web.xml</webapp.descriptor>
 		<primefaces3.version>3.5</primefaces3.version>
 		<richfaces4.version>4.3.2.Final</richfaces4.version>
 		<selenium.version>2.31.0</selenium.version>
 		<surefire.version>2.12</surefire.version>
 		<tck.version>jsr329-1.0.1-liferay</tck.version>
+		<webapp.descriptor>web.xml</webapp.descriptor>
 		<weblogic.xerces.version>2.11.0</weblogic.xerces.version>
 		<weld.version>1.1.10.Final</weld.version>
 	</properties>
