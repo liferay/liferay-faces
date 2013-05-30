@@ -102,7 +102,7 @@
 		</dependency>
 		<dependency>
 			<groupId>javax.faces</groupId>
-			<artifactId>jsf-api</artifactId>
+			<artifactId>javax.faces-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
