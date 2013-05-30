@@ -90,7 +90,6 @@
 		<codename>Corinth</codename>
 		<faces.group.id>com.sun.faces</faces.group.id>
 		<faces.api.artifact.id>jsf-api</faces.api.artifact.id>
-		<faces.api.version>2.1</faces.api.version>
 		<faces.impl.artifact.id>jsf-impl</faces.impl.artifact.id>
 		<faces.impl.startup.listener>com.sun.faces.config.ConfigureListener</faces.impl.startup.listener>
 		<faces.version>${mojarra.version}</faces.version>
@@ -578,8 +577,8 @@
 			</dependency>
 			<dependency>
 				<groupId>javax.faces</groupId>
-				<artifactId>jsf-api</artifactId>
-				<version>${faces.api.version}</version>
+				<artifactId>javax.faces-api</artifactId>
+				<version>2.1</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
