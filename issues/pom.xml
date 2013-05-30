@@ -105,11 +105,13 @@
 					<groupId>${faces.group.id}</groupId>
 					<artifactId>${faces.api.artifact.id}</artifactId>
 					<version>${faces.version}</version>
+					<scope>provided</scope>
 				</dependency>
 				<dependency>
 					<groupId>${faces.group.id}</groupId>
 					<artifactId>${faces.impl.artifact.id}</artifactId>
 					<version>${faces.version}</version>
+					<scope>provided</scope>
 				</dependency>
 				<dependency>
 					<groupId>xerces</groupId>
