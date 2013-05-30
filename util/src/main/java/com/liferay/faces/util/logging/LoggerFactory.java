@@ -43,20 +43,18 @@ public class LoggerFactory {
 	 * logging mechanism. NOTE: In the future, support should be added for detection of Apache Commons-Logging and
 	 * SLF4J.
 	 *
-	 * @param   clazz  The class associated with the logger.
+	 * @param   name  The name associated with the logger.
 	 *
-	 * @return  The logger associated with the specified class.
+	 * @return  The logger associated with the specified name.
 	 */
-	public static final Logger getLogger(Class<?> clazz) {
-
-		String className = clazz.getName();
+	public static final Logger getLogger(String name) {
 
 		Logger logger = null;
 
 		try {
 
 			if (LOG4J_AVAILABLE) {
-				logger = new LoggerLog4JImpl(className);
+				logger = new LoggerLog4JImpl(name);
 			}
 		}
 		catch (NoClassDefFoundError e) {
@@ -66,9 +64,22 @@ public class LoggerFactory {
 		}
 
 		if (logger == null) {
-			logger = new LoggerDefaultImpl(className);
+			logger = new LoggerDefaultImpl(name);
 		}
 
 		return logger;
+	}
+
+	/**
+	 * This method gets a logger from the underlying logging implementation. First it tries Log4J, then standard Java SE
+	 * logging mechanism. NOTE: In the future, support should be added for detection of Apache Commons-Logging and
+	 * SLF4J.
+	 *
+	 * @param   clazz  The class associated with the logger.
+	 *
+	 * @return  The logger associated with the specified class.
+	 */
+	public static final Logger getLogger(Class<?> clazz) {
+		return getLogger(clazz.getName());
 	}
 }
