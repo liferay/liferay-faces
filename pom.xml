@@ -357,7 +357,9 @@
 						<artifactId>liferay-maven-plugin</artifactId>
 						<version>${liferay.maven.plugin.version}</version>
 						<configuration>
+							<!-- liferay.auto.deploy.dir is the location where WARs are copied for deployment -->
 							<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
+							<!-- liferay.deploy.dir is the location where extracted WARs are finally deployed -->
 							<deployDir>${liferay.deploy.dir}</deployDir>
 							<liferayVersion>${liferay.maven.plugin.version}</liferayVersion>
 						</configuration>
@@ -375,13 +377,20 @@
 									<target>
 										<delete failonerror="false" includeemptydirs="true" verbose="true">
 											<fileset dir="${liferay.auto.deploy.dir}" includes="${project.artifactId}*.war" />
+											<fileset dir="${liferay.auto.deploy.dir}/${project.artifactId}" />
+											<fileset dir="${liferay.auto.deploy.dir}/${project.artifactId}-${project.version}" />
+											<fileset dir="${liferay.auto.deploy.dir}">
+												<include name="*${project.artifactId}.war.deployed" />
+												<include name="*${project.artifactId}_deployed" />
+											</fileset>
 										</delete>
 										<delete failonerror="false" includeemptydirs="true" verbose="true">
+											<fileset dir="${liferay.deploy.dir}" includes="${project.artifactId}*.war" />
 											<fileset dir="${liferay.deploy.dir}/${project.artifactId}" />
 											<fileset dir="${liferay.deploy.dir}/${project.artifactId}-${project.version}" />
-											<fileset dir="${liferay.deploy.dir}/${project.artifactId}.war" />
 											<fileset dir="${liferay.deploy.dir}">
 												<include name="*${project.artifactId}.war.deployed" />
+												<include name="*${project.artifactId}_deployed" />
 											</fileset>
 										</delete>
 									</target>
@@ -517,6 +526,7 @@
 			<properties>
 				<app.server.type>weblogic</app.server.type>
 				<liferay.app.server.dir>${liferay.home}/weblogic-${liferay.weblogic.version}</liferay.app.server.dir>
+				<liferay.deploy.dir>${liferay.app.server.dir}/autodeploy</liferay.deploy.dir>
 			</properties>
 		</profile>
 		<profile>
@@ -809,3 +819,4 @@
 	</reporting>
 
 </project>
+
