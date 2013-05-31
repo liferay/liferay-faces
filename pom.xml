@@ -91,7 +91,6 @@
 		<codename>Athens</codename>
 		<faces.group.id>javax.faces</faces.group.id>
 		<faces.api.artifact.id>jsf-api</faces.api.artifact.id>
-		<faces.api.version>1.2</faces.api.version>
 		<faces.impl.artifact.id>jsf-impl</faces.impl.artifact.id>
 		<faces.impl.startup.listener>com.sun.faces.config.ConfigureListener</faces.impl.startup.listener>
 		<faces.version>${mojarra.version}</faces.version>
@@ -533,12 +532,6 @@
 				<groupId>com.liferay.portal</groupId>
 				<artifactId>util-taglib</artifactId>
 				<version>${liferay.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.faces</groupId>
-				<artifactId>jsf-api</artifactId>
-				<version>${faces.api.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
