@@ -14,6 +14,7 @@
 package com.liferay.faces.demos.service.mock;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +38,15 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 @ManagedBean(name = "provinceService")
 @ApplicationScoped
-public class ProvinceServiceMockImpl implements ProvinceService {
+public class ProvinceServiceMockImpl implements ProvinceService, Serializable {
 
+	// serialVersionUID
+	private static final long serialVersionUID = 5362686831372660212L;
+
+	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ProvinceServiceMockImpl.class);
 
+	// Private Data Members
 	private List<Province> allProvinces;
 
 	public List<Province> getProvinces() {
