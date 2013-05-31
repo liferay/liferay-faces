@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -22,7 +24,10 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean(name = "customersViewBean")
 @ViewScoped
-public class CustomersViewBean {
+public class CustomersViewBean implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 4275244874669690488L;
 
 	private boolean masterRendered = true;
 
