@@ -51,7 +51,7 @@ public class RegistrantBackingBean implements Serializable {
 	private static final long serialVersionUID = 2947548873495692163L;
 
 	// Logger
-	private static final transient Logger logger = LoggerFactory.getLogger(RegistrantBackingBean.class);
+	private static final Logger logger = LoggerFactory.getLogger(RegistrantBackingBean.class);
 
 	// Injections
 	@ManagedProperty(value = "#{registrantModelBean}")
