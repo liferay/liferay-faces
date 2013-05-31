@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -38,7 +39,10 @@ import com.liferay.portal.theme.ThemeDisplay;
  */
 @ManagedBean
 @ViewScoped
-public class CustomersViewBean {
+public class CustomersViewBean implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 4746246662847669503L;
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(CustomersViewBean.class);

@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
@@ -45,7 +46,10 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 @SessionScoped
 @ManagedBean(name = "bookingsModelBean")
-public class BookingsModelBean {
+public class BookingsModelBean implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 4619707121809290564L;
 
 	// Private Constants
 	private static final Logger logger = LoggerFactory.getLogger(BookingsModelBean.class);
