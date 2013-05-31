@@ -43,7 +43,7 @@ public class ApplicantBackingBean implements Serializable {
 	private static final long serialVersionUID = 3047548873495692163L;
 
 	// Logger
-	private static final transient Logger logger = LoggerFactory.getLogger(ApplicantBackingBean.class);
+	private static final Logger logger = LoggerFactory.getLogger(ApplicantBackingBean.class);
 
 	// Injections
 	private transient ApplicantModelBean applicantModelBean;
