@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -22,7 +24,10 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class LoginModelBean {
+public class LoginModelBean implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 6739667513222866249L;
 
 	// Private Data Memebers
 	private String handle;
