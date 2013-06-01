@@ -105,11 +105,15 @@
 		<liferay.auto.deploy.dir>${liferay.home}/deploy</liferay.auto.deploy.dir>
 		<liferay.deploy.dir>${liferay.app.server.dir}/webapps</liferay.deploy.dir>
 		<liferay.deploy.version>${liferay.version}</liferay.deploy.version>
+		<liferay.geronimo.version>2.2.1</liferay.geronimo.version>
 		<liferay.glassfish.version>3.1.2</liferay.glassfish.version>
 		<liferay.home>${env.PORTALS_HOME}/liferay.com/${liferay.portal}</liferay.home>
 		<liferay.jboss.version>7.1.1</liferay.jboss.version>
+		<liferay.jetty.version>7.6.3</liferay.jetty.version>
+		<liferay.jonas.version>5.2.3</liferay.jonas.version>
 		<liferay.maven.plugin.version>${liferay.version}</liferay.maven.plugin.version>
 		<liferay.portal>liferay-portal-${liferay.deploy.version}</liferay.portal>
+		<liferay.resin.version>4.0.29</liferay.resin.version>
 		<liferay.tomcat.version>7.0.40</liferay.tomcat.version>
 		<liferay.weblogic.version>10.3.6.0</liferay.weblogic.version>
 		<liferay.websphere.version>8.0.0.3</liferay.websphere.version>
@@ -335,6 +339,14 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>geronimo</id>
+			<properties>
+				<app.server.type>geronimo</app.server.type>
+				<liferay.app.server.dir>${liferay.home}/geronimo-${liferay.geronimo.version}</liferay.app.server.dir>
+				<liferay.deploy.dir>${liferay.app.server.dir}/deploy</liferay.deploy.dir>
+			</properties>
+		</profile>
+		<profile>
 			<id>glassfish</id>
 			<properties>
 				<app.server.type>glassfish</app.server.type>
@@ -348,6 +360,21 @@
 				<app.server.type>jboss</app.server.type>
 				<liferay.app.server.dir>${liferay.home}/jboss-${liferay.jboss.version}</liferay.app.server.dir>
 				<liferay.deploy.dir>${liferay.app.server.dir}/standalone/deployments</liferay.deploy.dir>
+			</properties>
+		</profile>
+		<profile>
+			<id>jetty</id>
+			<properties>
+				<app.server.type>jetty</app.server.type>
+				<liferay.app.server.dir>${liferay.home}/jetty-${liferay.jetty.version}</liferay.app.server.dir>
+			</properties>
+		</profile>
+		<profile>
+			<id>jonas</id>
+			<properties>
+				<app.server.type>jonas</app.server.type>
+				<liferay.app.server.dir>${liferay.home}/jonas-${liferay.jonas.version}</liferay.app.server.dir>
+				<liferay.deploy.dir>${liferay.app.server.dir}/deploy</liferay.deploy.dir>
 			</properties>
 		</profile>
 		<profile>
@@ -522,6 +549,13 @@
 					</resource>
 				</resources>
 			</build>
+		</profile>
+		<profile>
+			<id>resin</id>
+			<properties>
+				<app.server.type>resin</app.server.type>
+				<liferay.app.server.dir>${liferay.home}/resin-${liferay.resin.version}</liferay.app.server.dir>
+			</properties>
 		</profile>
 		<profile>
 			<id>weblogic</id>
