@@ -39,7 +39,7 @@
 		<dependency>
 			<groupId>org.apache.myfaces.trinidad</groupId>
 			<artifactId>trinidad-impl</artifactId>
-			<version>1.2.13</version>
+			<version>${tck.trinidad.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.myfaces.portlet-bridge</groupId>
@@ -83,13 +83,6 @@
 	</properties>
 
 	<profiles>
-		<profile>
-			<id>websphere</id>
-			<properties>
-				<bridge.tck.test.host>192.168.10.110</bridge.tck.test.host>
-				<bridge.tck.test.port>9080</bridge.tck.test.port>
-			</properties>
-		</profile>
 		<profile>
 			<id>pluto</id>
 			<properties>
@@ -248,6 +241,28 @@
 					<version>${tck.version}</version>
 				</dependency>
 			</dependencies>
+		</profile>
+		<profile>
+			<id>weblogic</id>
+			<properties>
+				<bridge.tck.test.port>7001</bridge.tck.test.port>
+			</properties>
+			<dependencies>
+				<!-- FACES-1599: Trinidad API must only appear in the global classpath -->
+				<dependency>
+					<groupId>org.apache.myfaces.trinidad</groupId>
+					<artifactId>trinidad-api</artifactId>
+					<version>${tck.trinidad.version}</version>
+					<scope>provided</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>websphere</id>
+			<properties>
+				<bridge.tck.test.host>192.168.10.110</bridge.tck.test.host>
+				<bridge.tck.test.port>9080</bridge.tck.test.port>
+			</properties>
 		</profile>
 	</profiles>
 
