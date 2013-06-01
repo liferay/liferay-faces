@@ -18,6 +18,11 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<repositories>
+				<!-- Required for JSR 329 TCK -->
+				<repository>
+					<id>liferay-thirdparty</id>
+					<url>http://repository.liferay.com/content/repositories/thirdparty/</url>
+				</repository>
 				<!-- Required for JBoss EL -->
 				<repository>
 					<id>public-jboss</id>
@@ -27,11 +32,6 @@
 				<repository>
 					<id>primefaces-releases</id>
 					<url>http://repository.primefaces.org</url>
-				</repository>
-				<!-- Required for JSR 329 TCK -->
-				<repository>
-					<id>portletfaces-thirdparty</id>
-					<url>http://repository.portletfaces.org/content/repositories/thirdparty/</url>
 				</repository>
 			</repositories>
 			<pluginRepositories>
