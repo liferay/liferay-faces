@@ -38,8 +38,12 @@
 #    ee         Deploy to Liferay Portal Enterprise Edition rather than Community
 #               Edition (the default)
 #    pluto      Deploy to Apache Pluto rather than Liferay (the default)
+#    geronimo   Apache Geronimo
 #    glassfish  Deploy to Oracle GlassFish Server
 #    jboss      Deploy to JBoss Application Server (a.k.a WildFly)
+#    jetty      Deploy to Jetty
+#    jonas      Deploy to JOnAS
+#    resin      Deploy to Caucho Resin
 #    tomcat     Deploy to Apache Tomcat (the default)
 #    weblogic   Deploy to Oracle WebLogic Server
 #    websphere  Deploy to IBM WebSphere Application Server 
@@ -79,9 +83,17 @@ until [ -z $1 ] ; do
 		FACES_IMPL=$1
 	elif [ "$1" = "pluto" ] ; then
 		PORTAL_PROFILE_NAME=$1
+	elif [ "$1" = "geronimo" ] ; then
+		SERVER_PROFILE_NAME=$1
 	elif [ "$1" = "glassfish" ] ; then
 		SERVER_PROFILE_NAME=$1
 	elif [ "$1" = "jboss" ] ; then
+		SERVER_PROFILE_NAME=$1
+	elif [ "$1" = "jetty" ] ; then
+		SERVER_PROFILE_NAME=$1
+	elif [ "$1" = "jonas" ] ; then
+		SERVER_PROFILE_NAME=$1
+	elif [ "$1" = "resin" ] ; then
 		SERVER_PROFILE_NAME=$1
 	elif [ "$1" = "weblogic" ] ; then
 		SERVER_PROFILE_NAME=$1
