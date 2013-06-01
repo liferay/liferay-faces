@@ -88,13 +88,6 @@
 
 	<profiles>
 		<profile>
-			<id>websphere</id>
-			<properties>
-				<bridge.tck.test.host>192.168.10.110</bridge.tck.test.host>
-				<bridge.tck.test.port>9080</bridge.tck.test.port>
-			</properties>
-		</profile>
-		<profile>
 			<id>pluto</id>
 			<properties>
 				<bridge.tck.portal>pluto</bridge.tck.portal>
@@ -252,6 +245,19 @@
 					<version>${tck.version}</version>
 				</dependency>
 			</dependencies>
+		</profile>
+		<profile>
+			<id>weblogic</id>
+			<properties>
+				<bridge.tck.test.port>7001</bridge.tck.test.port>
+			</properties>
+		</profile>
+		<profile>
+			<id>websphere</id>
+			<properties>
+				<bridge.tck.test.host>192.168.10.110</bridge.tck.test.host>
+				<bridge.tck.test.port>9080</bridge.tck.test.port>
+			</properties>
 		</profile>
 	</profiles>
 
