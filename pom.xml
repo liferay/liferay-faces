@@ -127,6 +127,7 @@
 		<surefire.version>2.12</surefire.version>
 		<tck.version>jsr329-1.0.1-liferay</tck.version>
 		<webapp.descriptor>web.xml</webapp.descriptor>
+		<weblogic.jaxb.version>2.2.7</weblogic.jaxb.version>
 		<weblogic.xerces.version>2.11.0</weblogic.xerces.version>
 		<weld.version>1.1.10.Final</weld.version>
 	</properties>
@@ -676,7 +677,17 @@
 			</dependency>
 			<dependency>
 				<groupId>org.richfaces.ui</groupId>
+				<artifactId>richfaces-components-api</artifactId>
+				<version>${richfaces4.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.richfaces.ui</groupId>
 				<artifactId>richfaces-components-ui</artifactId>
+				<version>${richfaces4.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.richfaces.core</groupId>
+				<artifactId>richfaces-core-api</artifactId>
 				<version>${richfaces4.version}</version>
 			</dependency>
 			<dependency>
