@@ -76,7 +76,6 @@
 		<module>bridge-impl</module>
 		<module>bridge-ice</module>
 		<module>portal</module>
-		<module>wsrp-producer</module>
 		<module>demos</module>
 		<module>issues</module>
 		<module>test</module>
