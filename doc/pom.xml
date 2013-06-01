@@ -12,36 +12,6 @@
 
 	<build>
 		<plugins>
-			<!--
-			TODO
-			<plugin>
-				<groupId>com.liferay.faces.maven</groupId>
-				<artifactId>liferay-faces-maven-plugin</artifactId>
-				<version>${project.version}</version>
-				<executions>
-					<execution>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>generate-vdldoc</goal>
-						</goals>
-						<configuration>
-							<docTitle>${project.name}</docTitle>
-							<quiet>true</quiet>
-							<taglibs>
-								<param>${project.basedir}/../alloy/src/main/resources/META-INF/aui.taglib.xml</param>
-								<param>${project.basedir}/../alloy/src/main/resources/META-INF/aui-cc.taglib.xml</param>
-								<param>${project.basedir}/../bridge-impl/src/main/resources/META-INF/resources/bridge.taglib.xml</param>
-								<param>${project.basedir}/../portal/src/main/resources/META-INF/liferay-ui.taglib.xml</param>
-								<param>${project.basedir}/../portal/src/main/resources/META-INF/liferay-util.taglib.xml</param>
-								<param>${project.basedir}/../portal/src/main/resources/META-INF/liferay-security.taglib.xml</param>
-								<param>${project.basedir}/../bridge-impl/src/main/resources/META-INF/resources/portlet.taglib.xml</param>
-							</taglibs>
-							<windowTitle>${project.name}</windowTitle>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
