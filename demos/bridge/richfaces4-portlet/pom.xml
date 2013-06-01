@@ -11,6 +11,40 @@
 	<packaging>war</packaging>
 	<name>RichFaces4 Portlet</name>
 
+	<profiles>
+		<profile>
+			<id>weblogic</id>
+			<dependencies>
+				<dependency>
+					<groupId>com.sun.xml.bind</groupId>
+					<artifactId>jaxb-impl</artifactId>
+					<version>${weblogic.jaxb.version}</version>
+				</dependency>
+				<!-- FACES-1594: The following provided/excluded dependencies must only be found in the WebLogic global classpath. -->
+				<dependency>
+					<groupId>org.richfaces.core</groupId>
+					<artifactId>richfaces-core-api</artifactId>
+					<scope>provided</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.richfaces.ui</groupId>
+					<artifactId>richfaces-components-api</artifactId>
+					<scope>provided</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.richfaces.core</groupId>
+					<artifactId>richfaces-core-impl</artifactId>
+					<exclusions>
+						<exclusion>
+							<groupId>com.google.guava</groupId>
+							<artifactId>guava</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
 	<dependencies>
 		<dependency>
 			<groupId>commons-fileupload</groupId>
