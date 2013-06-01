@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.faces.issues</groupId>
 		<artifactId>liferay-faces-issues</artifactId>
-		<version>3.0.2-legacy-ga3</version>
+		<version>3.0.3-legacy-ga4-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>liferay-faces-portal-issues</artifactId>

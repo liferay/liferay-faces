@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.faces.test</groupId>
 		<artifactId>liferay-faces-test</artifactId>
-		<version>3.0.2-legacy-ga3</version>
+		<version>3.0.3-legacy-ga4-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>test-setup-hook</artifactId>
