@@ -55,6 +55,8 @@ import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutFriendlyURLComposite;
+import com.liferay.portal.model.LayoutQueryStringComposite;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.ResourcePermission;
@@ -231,6 +233,13 @@ public class PortalWrapper implements Portal {
 	public WindowState updateWindowState(String portletId, User user, Layout layout, WindowState windowState,
 		HttpServletRequest request) {
 		return _portal.updateWindowState(portletId, user, layout, windowState, request);
+	}
+
+	@Override
+	public LayoutQueryStringComposite getActualLayoutQueryStringComposite(long groupId, boolean privateLayout,
+		String friendlyURL, Map<String, String[]> params, Map<String, Object> requestContext) throws PortalException,
+		SystemException {
+		return _portal.getActualLayoutQueryStringComposite(groupId, privateLayout, friendlyURL, params, requestContext);
 	}
 
 	public String getActualURL(long groupId, boolean privateLayout, String mainPath, String friendlyURL,
@@ -631,10 +640,21 @@ public class PortalWrapper implements Portal {
 	}
 
 	@Override
+	public String getI18nPathLanguageId(Locale locale, String defaultI18nPathLanguageId) {
+		return _portal.getI18nPathLanguageId(locale, defaultI18nPathLanguageId);
+	}
+
+	@Override
 	public String getJournalArticleActualURL(long groupId, boolean privateLayout, String mainPath, String friendlyURL,
 		Map<String, String[]> params, Map<String, Object> requestContext) throws PortalException, SystemException {
 		return _portal.getJournalArticleActualURL(groupId, privateLayout, mainPath, friendlyURL, params,
 				requestContext);
+	}
+
+	@Override
+	public Layout getJournalArticleLayout(long groupId, boolean privateLayout, String friendlyURL)
+		throws PortalException, SystemException {
+		return _portal.getJournalArticleLayout(groupId, privateLayout, friendlyURL);
 	}
 
 	public String getJsSafePortletId(String portletId) {
@@ -680,6 +700,13 @@ public class PortalWrapper implements Portal {
 	public String getLayoutFriendlyURL(Layout layout, ThemeDisplay themeDisplay, Locale locale) throws PortalException,
 		SystemException {
 		return _portal.getLayoutFriendlyURL(layout, themeDisplay, locale);
+	}
+
+	@Override
+	public LayoutFriendlyURLComposite getLayoutFriendlyURLComposite(long groupId, boolean privateLayout,
+		String friendlyURL, Map<String, String[]> params, Map<String, Object> requestContext) throws PortalException,
+		SystemException {
+		return _portal.getLayoutFriendlyURLComposite(groupId, privateLayout, friendlyURL, params, requestContext);
 	}
 
 	public String getLayoutFullURL(ThemeDisplay themeDisplay) throws PortalException, SystemException {
@@ -753,6 +780,11 @@ public class PortalWrapper implements Portal {
 	@Override
 	public Locale getLocale(HttpServletRequest request, HttpServletResponse response, boolean initialize) {
 		return _portal.getLocale(request, response, initialize);
+	}
+
+	@Override
+	public String getLocalizedFriendlyURL(HttpServletRequest request, Layout layout, Locale locale) throws Exception {
+		return _portal.getLocalizedFriendlyURL(request, layout, locale);
 	}
 
 	public String getMailId(String mx, String popPortletPrefix, Object... ids) {
@@ -1297,6 +1329,12 @@ public class PortalWrapper implements Portal {
 	public String getVirtualLayoutActualURL(long groupId, boolean privateLayout, String mainPath, String friendlyURL,
 		Map<String, String[]> params, Map<String, Object> requestContext) throws PortalException, SystemException {
 		return _portal.getVirtualLayoutActualURL(groupId, privateLayout, mainPath, friendlyURL, params, requestContext);
+	}
+
+	@Override
+	public LayoutFriendlyURLComposite getVirtualLayoutFriendlyURLComposite(boolean privateLayout, String friendlyURL,
+		Map<String, String[]> params, Map<String, Object> requestContext) throws PortalException, SystemException {
+		return _portal.getVirtualLayoutFriendlyURLComposite(privateLayout, friendlyURL, params, requestContext);
 	}
 
 	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay) throws PortalException, SystemException {
