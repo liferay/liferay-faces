@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.faces.issues</groupId>
 		<artifactId>liferay-faces-bridge-issues</artifactId>
-		<version>3.1.2-ga3</version>
+		<version>3.1.3-ga4-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>FACES-1470-portlet</artifactId>

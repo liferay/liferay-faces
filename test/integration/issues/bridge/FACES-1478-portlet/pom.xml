@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.liferay.faces.test.integration.issues.bridge</groupId>
 		<artifactId>liferay-faces-test-integration-issues-bridge</artifactId>
-		<version>3.1.2-ga3</version>
+		<version>3.1.3-ga4-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
