@@ -13,55 +13,6 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.jboss.maven.plugins</groupId>
-				<artifactId>maven-jdocbook-plugin</artifactId>
-				<version>2.1.2</version>
-				<extensions>true</extensions>
-				<executions>
-					<execution>
-						<!-- here we are attaching the translate goal so that the translations are processed before compilation so that the 
-							transated XML is also transformed during generation -->
-						<phase>process-resources</phase>
-						<goals>
-							<goal>translate</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<sourceDocumentName>book.xml</sourceDocumentName>
-					<masterTranslation>en-US</masterTranslation>
-					<translations>
-						<!-- <translation>es-ES</translation> -->
-					</translations>
-					<imageResource>
-						<directory>${basedir}/src/main/docbook/en-US</directory>
-						<includes>
-							<include>**/*.svg</include>
-							<include>**/*.png</include>
-							<include>**/*.jpg</include>
-							<include>**/*.gif</include>
-						</includes>
-						<excludes>
-							<exclude>*.xml</exclude>
-							<exclude>**/*.xml</exclude>
-						</excludes>
-					</imageResource>
-					<formats>
-						<format>
-							<formatName>pdf</formatName>
-							<stylesheetResource>file:${basedir}/src/main/docbook/style/xslt/pdf/main-pdf.xsl</stylesheetResource>
-							<finalName>liferay-faces-${pom.version}.pdf</finalName>
-							<profilingTypeName>two_pass</profilingTypeName>
-						</format>
-					</formats>
-					<options>
-						<xincludeSupported>true</xincludeSupported>
-						<localeSeparator>-</localeSeparator>
-						<useRelativeImageUris>true</useRelativeImageUris>
-					</options>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<configuration>
@@ -69,34 +20,5 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.jboss.maven.plugins</groupId>
-										<artifactId>maven-jdocbook-plugin</artifactId>
-										<versionRange>[2.1.2,)</versionRange>
-										<goals>
-											<goal>translate</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 </project>
