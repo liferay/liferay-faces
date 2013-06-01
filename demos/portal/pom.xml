@@ -13,7 +13,6 @@
 
 	<modules>
 		<module>jsf2-login-portlet</module>
-		<module>jsf2-registration-portlet</module>
 	</modules>
 
 </project>
