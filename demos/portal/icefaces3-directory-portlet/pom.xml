@@ -12,6 +12,25 @@
 	<name>ICEfaces3 Directory Portlet</name>
 	<description>This plugin is an alternate portlet for the Liferay Directory that utilizes ICEfaces.</description>
 
+	<profiles>
+		<profile>
+			<id>weblogic</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.icefaces</groupId>
+					<artifactId>icefaces</artifactId>
+					<exclusions>
+						<!-- FACES-1598 / PUSH-247: Exclude icepush.jar in order to avoid NullPointerException -->
+						<exclusion>
+							<groupId>org.icepush</groupId>
+							<artifactId>icepush</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
