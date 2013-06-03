@@ -23,6 +23,19 @@
 		<module>bridge-tck-response-wrapper-portlet</module>
 	</modules>
 
+	<dependencies>
+		<dependency>
+			<groupId>${faces.group.id}</groupId>
+			<artifactId>${faces.api.artifact.id}</artifactId>
+			<version>${faces.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${faces.group.id}</groupId>
+			<artifactId>${faces.impl.artifact.id}</artifactId>
+			<version>${faces.version}</version>
+		</dependency>
+	</dependencies>
+
 	<profiles>
 		<profile>
 			<id>glassfish</id>
@@ -55,21 +68,6 @@
 					<artifactId>${faces.impl.artifact.id}</artifactId>
 					<version>${faces.version}</version>
 					<scope>provided</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>tomcat</id>
-			<dependencies>
-				<dependency>
-					<groupId>${faces.group.id}</groupId>
-					<artifactId>${faces.api.artifact.id}</artifactId>
-					<version>${faces.version}</version>
-				</dependency>
-				<dependency>
-					<groupId>${faces.group.id}</groupId>
-					<artifactId>${faces.impl.artifact.id}</artifactId>
-					<version>${faces.version}</version>
 				</dependency>
 			</dependencies>
 		</profile>
