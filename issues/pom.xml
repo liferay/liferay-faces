@@ -20,8 +20,14 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>javax.faces</groupId>
-			<artifactId>javax.faces-api</artifactId>
+			<groupId>${faces.group.id}</groupId>
+			<artifactId>${faces.api.artifact.id}</artifactId>
+			<version>${faces.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${faces.group.id}</groupId>
+			<artifactId>${faces.impl.artifact.id}</artifactId>
+			<version>${faces.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -80,21 +86,6 @@
 					<artifactId>${faces.impl.artifact.id}</artifactId>
 					<version>${faces.version}</version>
 					<scope>provided</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>tomcat</id>
-			<dependencies>
-				<dependency>
-					<groupId>${faces.group.id}</groupId>
-					<artifactId>${faces.api.artifact.id}</artifactId>
-					<version>${faces.version}</version>
-				</dependency>
-				<dependency>
-					<groupId>${faces.group.id}</groupId>
-					<artifactId>${faces.impl.artifact.id}</artifactId>
-					<version>${faces.version}</version>
 				</dependency>
 			</dependencies>
 		</profile>
