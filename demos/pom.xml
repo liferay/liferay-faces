@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -15,6 +16,19 @@
 	<modules>
 		<module>bridge</module>
 	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>${faces.group.id}</groupId>
+			<artifactId>${faces.api.artifact.id}</artifactId>
+			<version>${faces.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${faces.group.id}</groupId>
+			<artifactId>${faces.impl.artifact.id}</artifactId>
+			<version>${faces.version}</version>
+		</dependency>
+	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
@@ -59,21 +73,6 @@
 					<artifactId>${faces.impl.artifact.id}</artifactId>
 					<version>${faces.version}</version>
 					<scope>provided</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>tomcat</id>
-			<dependencies>
-				<dependency>
-					<groupId>${faces.group.id}</groupId>
-					<artifactId>${faces.api.artifact.id}</artifactId>
-					<version>${faces.version}</version>
-				</dependency>
-				<dependency>
-					<groupId>${faces.group.id}</groupId>
-					<artifactId>${faces.impl.artifact.id}</artifactId>
-					<version>${faces.version}</version>
 				</dependency>
 			</dependencies>
 		</profile>
