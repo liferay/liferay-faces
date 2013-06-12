@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<h:head />
+	<h:body>
+		<h:form>
+			<h:outputText value="http://issues.liferay.com/browse/FACES-1618" />
+			<br />
+			<h:outputText value="This is the view with the command button where no immediate attribute is set" />
+			<br />
+			<h:outputText id="headResourceIds" value="#{headManagedBean.headResourceIds}" />
+			<br />
+			<h:commandButton action="/views/immediateTrueView" value="go to previous view" />
+		</h:form>
+	</h:body>
+	
+</f:view>
