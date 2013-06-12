@@ -9,11 +9,15 @@
 		<h:form>
 			<h:outputText value="http://issues.liferay.com/browse/FACES-1618" />
 			<br />
+			<br />
 			<h:outputText value="This is a view with a command button where immediate=true" />
+			<br />
 			<br />
 			<h:outputText value="If the resources below do not survive navigation to the next view, then you have reproduced FACES-1618" />
 			<br />
+			<br />
 			<h:outputText id="headResourceIds" value="#{headManagedBean.headResourceIds}" />
+			<br />
 			<br />
 			<h:commandButton action="/views/immediateFalseView" immediate="true" value="go to next view" />
 		</h:form>
