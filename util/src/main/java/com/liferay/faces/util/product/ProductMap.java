@@ -37,6 +37,7 @@ public class ProductMap extends HashMap<String, Product> {
 		instance.put(ProductConstants.LIFERAY_FACES_UTIL, new ProductLiferayFacesUtilImpl());
 		instance.put(ProductConstants.LIFERAY_PORTAL, new ProductLiferayPortalImpl());
 		instance.put(ProductConstants.PRIMEFACES, new ProductPrimeFacesImpl());
+		instance.put(ProductConstants.RESIN, new ProductResinImpl());
 		instance.put(ProductConstants.RICHFACES, new ProductRichFacesImpl());
 	}
 

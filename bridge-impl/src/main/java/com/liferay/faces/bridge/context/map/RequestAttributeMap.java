@@ -34,15 +34,17 @@ import com.liferay.faces.util.product.ProductMap;
 public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 
 	// Private Constants
-	private static final boolean FACES_1233_WORKAROUND_ENABLED;
+	private static final boolean NULL_PATH_ATTRIBUTES;
 	private static final String REQUEST_SCOPED_FQCN = "javax.faces.bean.RequestScoped";
 
 	static {
 
 		// Versions of Liferay Portal prior to 6.1 have a bug in PortletRequest.removeAttribute(String) that needs to
 		// be worked-around in this class. See: http://issues.liferay.com/browse/FACES-1233
+		// Additionally, Resin requires a similar workaround. See: http://issues.liferay.com/browse/FACES-1612
 		Product liferay = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
-		FACES_1233_WORKAROUND_ENABLED = (liferay.isDetected() && (liferay.getBuildId() < 6100));
+		Product resin = ProductMap.getInstance().get(ProductConstants.RESIN);
+		NULL_PATH_ATTRIBUTES = (liferay.isDetected() && (resin.isDetected() || (liferay.getBuildId() < 6100)));
 	}
 
 	// Private Data Members
@@ -92,7 +94,7 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 	@Override
 	protected Object getProperty(String name) {
 
-		if ((FACES_1233_WORKAROUND_ENABLED) &&
+		if ((NULL_PATH_ATTRIBUTES) &&
 				(BridgeConstants.REQ_ATTR_PATH_INFO.equals(name) ||
 					BridgeConstants.REQ_ATTR_SERVLET_PATH.equals(name))) {
 			return null;
