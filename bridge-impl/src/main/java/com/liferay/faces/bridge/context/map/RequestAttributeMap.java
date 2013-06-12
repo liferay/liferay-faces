@@ -42,7 +42,8 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 		// Versions of Liferay Portal prior to 6.1 have a bug in PortletRequest.removeAttribute(String) that needs to
 		// be worked-around in this class. See: http://issues.liferay.com/browse/FACES-1233
 		Product liferay = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
-		FACES_1233_WORKAROUND_ENABLED = (liferay.isDetected() && (liferay.getBuildId() < 6100));
+		Product resin = ProductMap.getInstance().get(ProductConstants.RESIN);
+		FACES_1233_WORKAROUND_ENABLED = (liferay.isDetected() && (resin.isDetected() || (liferay.getBuildId() < 6100)));
 	}
 
 	// Private Data Members
