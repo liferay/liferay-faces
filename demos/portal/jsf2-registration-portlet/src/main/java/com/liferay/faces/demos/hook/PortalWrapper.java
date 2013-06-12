@@ -165,10 +165,18 @@ public class PortalWrapper implements Portal {
 		_portal.resetCDNHosts();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 * com.liferay.portal.kernel.portlet.PortletSecurityUtil#resetWhitelist()}
+	 */
 	public Set<String> resetPortletAddDefaultResourceCheckWhitelist() {
 		return _portal.resetPortletAddDefaultResourceCheckWhitelist();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 * com.liferay.portal.kernel.portlet.PortletSecurityUtil#resetWhitelistActions()}
+	 */
 	public Set<String> resetPortletAddDefaultResourceCheckWhitelistActions() {
 		return _portal.resetPortletAddDefaultResourceCheckWhitelistActions();
 	}
@@ -290,7 +298,10 @@ public class PortalWrapper implements Portal {
 		return _portal.getCanonicalURL(completeURL, themeDisplay, layout, forceLayoutFriendlyURL);
 	}
 
-	@SuppressWarnings("deprecation")
+	/**
+	 * @deprecated As of 6.2.0, replaced by the more general {@link
+	 *             #getCDNHost(boolean)}
+	 */
 	public String getCDNHost() {
 		return _portal.getCDNHost();
 	}
@@ -466,6 +477,9 @@ public class PortalWrapper implements Portal {
 		return _portal.getDigestAuthUserId(request);
 	}
 
+	/**
+	 * @deprecated As of 6.2.0 with no direct replacement
+	 */
 	public boolean isAllowAddPortletDefaultResource(HttpServletRequest request, Portlet portlet) throws PortalException,
 		SystemException {
 		return _portal.isAllowAddPortletDefaultResource(request, portlet);
@@ -548,6 +562,11 @@ public class PortalWrapper implements Portal {
 	public String getFacebookURL(Portlet portlet, String facebookCanvasPageURL, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 		return _portal.getFacebookURL(portlet, facebookCanvasPageURL, themeDisplay);
+	}
+
+	@Override
+	public Portlet getFirstMyAccountPortlet(ThemeDisplay themeDisplay) throws SystemException {
+		return _portal.getFirstMyAccountPortlet(themeDisplay);
 	}
 
 	public String getFirstPageLayoutTypes(PageContext pageContext) {
@@ -791,7 +810,9 @@ public class PortalWrapper implements Portal {
 		return _portal.getMailId(mx, popPortletPrefix, ids);
 	}
 
-	@SuppressWarnings("deprecation")
+	/**
+	 * @deprecated As of 6.1.0, renamed to {@link #isGroupAdmin(User, long)}
+	 */
 	public boolean isCommunityAdmin(User user, long groupId) throws Exception {
 		return _portal.isCommunityAdmin(user, groupId);
 	}
@@ -840,7 +861,9 @@ public class PortalWrapper implements Portal {
 		_portal.setPageTitle(title, request);
 	}
 
-	@SuppressWarnings("deprecation")
+	/**
+	 * @deprecated As of 6.2.0 renamed to {@link #getSiteGroupId(long)}
+	 */
 	public long getParentGroupId(long scopeGroupId) throws PortalException, SystemException {
 		return _portal.getParentGroupId(scopeGroupId);
 	}
@@ -895,12 +918,18 @@ public class PortalWrapper implements Portal {
 		return _portal.getPortalLibDir();
 	}
 
-	@SuppressWarnings("deprecation")
+	/**
+	 * @deprecated As of 6.2.0, replaced by the more general {@link
+	 *             #getPortalPort(boolean)}
+	 */
 	public int getPortalPort() {
 		return _portal.getPortalPort();
 	}
 
-	@SuppressWarnings("deprecation")
+	/**
+	 * @deprecated As of 6.2.0, replaced by the more general {@link
+	 *             #getPortalPort(boolean)}
+	 */
 	public int getPortalPort(boolean secure) {
 		return _portal.getPortalPort();
 	}
@@ -945,15 +974,26 @@ public class PortalWrapper implements Portal {
 		return _portal.getPortalWebDir();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 * com.liferay.portal.kernel.portlet.PortletSecurityUtil#getWhitelist()}
+	 */
 	public Set<String> getPortletAddDefaultResourceCheckWhitelist() {
 		return _portal.getPortletAddDefaultResourceCheckWhitelist();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 * com.liferay.portal.kernel.portlet.PortletSecurityUtil#getWhitelistActions()}
+	 */
 	public Set<String> getPortletAddDefaultResourceCheckWhitelistActions() {
 		return _portal.getPortletAddDefaultResourceCheckWhitelistActions();
 	}
 
-	@SuppressWarnings("deprecation")
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #getPortletBreadcrumbs(HttpServletRequest)}
+	 */
 	public List<BreadcrumbEntry> getPortletBreadcrumbList(HttpServletRequest request) {
 		return _portal.getPortletBreadcrumbList(request);
 	}
@@ -1077,7 +1117,9 @@ public class PortalWrapper implements Portal {
 		return _portal.getPreferencesValidator(portlet);
 	}
 
-	@SuppressWarnings("deprecation")
+	/**
+	 * @deprecated As of 6.1.0, renamed to {@link #isGroupOwner(User, long)}
+	 */
 	public boolean isCommunityOwner(User user, long groupId) throws Exception {
 		return _portal.isCommunityOwner(user, groupId);
 	}
