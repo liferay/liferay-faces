@@ -45,9 +45,7 @@
 	<listener>
 		<listener-class>com.liferay.faces.bridge.servlet.BridgeSessionListener</listener-class>
 	</listener>
-	<listener>
-		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
-	</listener>
+	
 	<listener>
 		<listener-class>com.liferay.cdi.portlet.bridge.CDIContextListener</listener-class>
 	</listener>
