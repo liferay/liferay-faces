@@ -66,12 +66,11 @@ public class HeadPhaseListener implements PhaseListener {
 
 		Bridge.PortletPhase portletRequestPhase = BridgeUtil.getPortletRequestPhase();
 
-		if ((portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE) ||
-				(portletRequestPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
+		if ((portletRequestPhase == Bridge.PortletPhase.RESOURCE_PHASE) ||
+				(portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE)) {
 
-			// If about to execute the INVOKE_APPLICATION phase of the JSF lifecycle, then
-			if (phaseEvent.getPhaseId() == PhaseId.INVOKE_APPLICATION) {
-				beforeInvokeApplicationPhase(phaseEvent);
+			if (phaseEvent.getPhaseId() == PhaseId.APPLY_REQUEST_VALUES) {
+				beforeApplyRequestValuesPhase(phaseEvent);
 			}
 			else if (phaseEvent.getPhaseId() == PhaseId.RENDER_RESPONSE) {
 				beforeRenderResponsePhase(phaseEvent);
@@ -81,7 +80,7 @@ public class HeadPhaseListener implements PhaseListener {
 	}
 
 	/**
-	 * <p>This method is called before the {@link PhaseId#INVOKE_APPLICATION} phase of the JSF lifecycle is executed.
+	 * <p>This method is called before the {@link PhaseId#APPLY_REQUEST_VALUES} phase of the JSF lifecycle is executed.
 	 * The purpose of this timing is to handle the case when the user clicks on a {@link UICommand} component (like
 	 * h:commandButton or h:commandLink) that has been either Auto-ajaxified by ICEfaces, or manually Ajaxified by the
 	 * developer using code like the following:</p>
@@ -91,8 +90,8 @@ public class HeadPhaseListener implements PhaseListener {
 	 * <p>When this happens, we need to somehow remember the list of JavaScript and/or CSS resources that are currently
 	 * in the &lt;head&gt; section of the portal page. This is because a navigation-rule might fire which could cause a
 	 * new view to be rendered in the {@link PhaseId#RENDER_RESPONSE} phase that is about to follow this {@link
-	 * PhaseId#INVOKE_APPLICATION} phase. The list of resources would be contained in the {@link HeadManagedBean} {@link
-	 * ViewScoped} instance that is managed by the JSF managed-bean facility. The list would have been populated
+	 * PhaseId#APPLY_REQUEST_VALUES} phase. The list of resources would be contained in the {@link HeadManagedBean}
+	 * {@link ViewScoped} instance that is managed by the JSF managed-bean facility. The list would have been populated
 	 * initially in the {@link HeadManagedBean} by the {@link HeadRender} during the initial HTTP-GET of the portal
 	 * page. The way we "remember" the list is by placing it into the JSF 2 {@link Flash} scope. This scope is used
 	 * because it is very short-lived and survives any navigation-rules that might fire, thereby causing the rendering
@@ -100,7 +99,7 @@ public class HeadPhaseListener implements PhaseListener {
 	 *
 	 * <p>The story is continued in the {@link #beforeRenderResponsePhase(PhaseEvent)} method below...</p>
 	 */
-	protected void beforeInvokeApplicationPhase(PhaseEvent phaseEvent) {
+	protected void beforeApplyRequestValuesPhase(PhaseEvent phaseEvent) {
 
 		// Get the list of resourceIds that might be contained in the Flash scope. Note that they would have been
 		// placed into the Flash scope by this very same method, except during in the case below for the
@@ -132,9 +131,10 @@ public class HeadPhaseListener implements PhaseListener {
 	/**
 	 * <p>This method is called before the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle is executed. The
 	 * purpose of this timing is to pick up where the {@link #beforeInvokeApplicationPhase(PhaseEvent)} method left off.
-	 * It might be the case that a navigation-rule has fired and a NEW JSF view has been loaded up after the
-	 * INVOKE_APPLICATION phase completed. If this is the case, then the list of head resourceIds in the {@link
-	 * HeadManagedBean} needs to be repopulated from the list found in the Flash scope.</p>
+	 * It might be the case that a navigation-rule has fired and a NEW JSF view has been loaded up after the {@link
+	 * PhaseId#APPLY_REQUEST_VALUES} phase (in the case of immediate="true") or the {@link PhaseId#INVOKE_APPLICATION}
+	 * phase (in the case of immediate="false") has completed. If this is the case, then the list of head resourceIds in
+	 * the {@link HeadManagedBean} needs to be repopulated from the list found in the Flash scope.</p>
 	 */
 	protected void beforeRenderResponsePhase(PhaseEvent phaseEvent) {
 		FacesContext facesContext = phaseEvent.getFacesContext();
