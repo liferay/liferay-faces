@@ -112,7 +112,7 @@ public class HeadPhaseListener implements PhaseListener {
 
 		// Log the viewId so that it can be visually compared with the value that is to be logged after the
 		// INVOKE_APPLICATION phase completes.
-		logger.debug("Before INVOKE_APPLICATION: viewId=[{0}]", facesContext.getViewRoot().getViewId());
+		logger.debug("Before APPLY_REQUEST_VALUES: viewId=[{0}]", facesContext.getViewRoot().getViewId());
 
 		// If the Flash scope does not yet contain a list of head resourceIds, then the scope needs to be populated
 		// with a list so that the {@link #beforeRenderResponsePhase(PhaseEvent)} method below can retrieve it.
