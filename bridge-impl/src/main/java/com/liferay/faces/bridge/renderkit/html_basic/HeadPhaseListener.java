@@ -15,8 +15,6 @@ package com.liferay.faces.bridge.renderkit.html_basic;
 
 import java.util.Set;
 
-import javax.faces.bean.ViewScoped;
-import javax.faces.component.UICommand;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.faces.event.PhaseEvent;
@@ -60,74 +58,32 @@ public class HeadPhaseListener implements PhaseListener {
 			String viewId = facesContext.getViewRoot().getViewId();
 			logger.debug("After INVOKE_APPLICATION: viewId=[{0}]", viewId);
 		}
+		
 	}
 
 	public void beforePhase(PhaseEvent phaseEvent) {
-
+		
 		Bridge.PortletPhase portletRequestPhase = BridgeUtil.getPortletRequestPhase();
 
-		if ((portletRequestPhase == Bridge.PortletPhase.RESOURCE_PHASE) ||
-				(portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE)) {
-
-			if (phaseEvent.getPhaseId() == PhaseId.APPLY_REQUEST_VALUES) {
-				beforeApplyRequestValuesPhase(phaseEvent);
+		if ((portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE) ||
+				(portletRequestPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
+			
+			if (portletRequestPhase == Bridge.PortletPhase.RESOURCE_PHASE) {
+				if (phaseEvent.getPhaseId() == PhaseId.APPLY_REQUEST_VALUES) {
+					FacesContext facesContext = phaseEvent.getFacesContext();
+					saveHeadResourcesInFlash(facesContext);
+				}
 			}
-			else if (phaseEvent.getPhaseId() == PhaseId.RENDER_RESPONSE) {
+			
+			// added for FACES-1618
+			if (phaseEvent.getPhaseId() == PhaseId.RENDER_RESPONSE) {
 				beforeRenderResponsePhase(phaseEvent);
 			}
+			
 		}
 
 	}
-
-	/**
-	 * <p>This method is called before the {@link PhaseId#APPLY_REQUEST_VALUES} phase of the JSF lifecycle is executed.
-	 * The purpose of this timing is to handle the case when the user clicks on a {@link UICommand} component (like
-	 * h:commandButton or h:commandLink) that has been either Auto-ajaxified by ICEfaces, or manually Ajaxified by the
-	 * developer using code like the following:</p>
-	 *
-	 * <p><code>&lt;f:ajax execute="@form" render=" @form" /&gt;</code></p>
-	 *
-	 * <p>When this happens, we need to somehow remember the list of JavaScript and/or CSS resources that are currently
-	 * in the &lt;head&gt; section of the portal page. This is because a navigation-rule might fire which could cause a
-	 * new view to be rendered in the {@link PhaseId#RENDER_RESPONSE} phase that is about to follow this {@link
-	 * PhaseId#APPLY_REQUEST_VALUES} phase. The list of resources would be contained in the {@link HeadManagedBean}
-	 * {@link ViewScoped} instance that is managed by the JSF managed-bean facility. The list would have been populated
-	 * initially in the {@link HeadManagedBean} by the {@link HeadRender} during the initial HTTP-GET of the portal
-	 * page. The way we "remember" the list is by placing it into the JSF 2 {@link Flash} scope. This scope is used
-	 * because it is very short-lived and survives any navigation-rules that might fire, thereby causing the rendering
-	 * of a new JSF view.</p>
-	 *
-	 * <p>The story is continued in the {@link #beforeRenderResponsePhase(PhaseEvent)} method below...</p>
-	 */
-	protected void beforeApplyRequestValuesPhase(PhaseEvent phaseEvent) {
-
-		// Get the list of resourceIds that might be contained in the Flash scope. Note that they would have been
-		// placed into the Flash scope by this very same method, except during in the case below for the
-		// RENDER_RESPONSE phase.
-		FacesContext facesContext = phaseEvent.getFacesContext();
-		Flash flash = facesContext.getExternalContext().getFlash();
-
-		@SuppressWarnings("unchecked")
-		Set<String> headResourceIdsFromFlash = (Set<String>) flash.get("HEAD_RESOURCE_IDS");
-
-		// Log the viewId so that it can be visually compared with the value that is to be logged after the
-		// INVOKE_APPLICATION phase completes.
-		logger.debug("Before APPLY_REQUEST_VALUES: viewId=[{0}]", facesContext.getViewRoot().getViewId());
-
-		// If the Flash scope does not yet contain a list of head resourceIds, then the scope needs to be populated
-		// with a list so that the {@link #beforeRenderResponsePhase(PhaseEvent)} method below can retrieve it.
-		if (headResourceIdsFromFlash == null) {
-
-			HeadManagedBean headManagedBean = HeadManagedBean.getInstance(facesContext);
-
-			// Note that in the case where a portlet RESOURCE_PHASE was invoked with a "portlet:resource" type of URL,
-			// there will be no HeadManagedBean available.
-			if (headManagedBean != null) {
-				flash.put("HEAD_RESOURCE_IDS", headManagedBean.getHeadResourceIds());
-			}
-		}
-	}
-
+	
 	/**
 	 * <p>This method is called before the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle is executed. The
 	 * purpose of this timing is to pick up where the {@link #beforeInvokeApplicationPhase(PhaseEvent)} method left off.
@@ -162,6 +118,30 @@ public class HeadPhaseListener implements PhaseListener {
 
 	public PhaseId getPhaseId() {
 		return PhaseId.ANY_PHASE;
+	}
+	
+	protected void saveHeadResourcesInFlash(FacesContext facesContext) {
+		// Get the list of resourceIds that might be contained in the Flash scope. Note that they would have been
+		// placed into the Flash scope by this very same method, except during in the case below for the
+		// RENDER_RESPONSE phase.
+		Flash flash = facesContext.getExternalContext().getFlash();
+
+		@SuppressWarnings("unchecked")
+		Set<String> headResourceIdsFromFlash = (Set<String>) flash.get("HEAD_RESOURCE_IDS");
+
+		// If the Flash scope does not yet contain a list of head resourceIds, then the scope needs to be populated
+		// with a list so that the {@link #beforeRenderResponsePhase(PhaseEvent)} method below can retrieve it.
+		if (headResourceIdsFromFlash == null) {
+
+			HeadManagedBean headManagedBean = HeadManagedBean.getInstance(facesContext);
+
+			// Note that in the case where a portlet RESOURCE_PHASE was invoked with a "portlet:resource" type of URL,
+			// there will be no HeadManagedBean available.
+			if (headManagedBean != null) {
+				logger.debug("saveHeadResourcesInFlash: flash.putting in the head resource ids ...");
+				flash.put("HEAD_RESOURCE_IDS", headManagedBean.getHeadResourceIds());
+			}
+		}
 	}
 
 }
