@@ -30,6 +30,7 @@ public class ProductConstants {
 	public static final String MYFACES = "MyFaces";
 	public static final String OPEN_WEB_BEANS = "OpenWebBeans";
 	public static final String PRIMEFACES = "PrimeFaces";
+	public static final String RESIN = "Resin";
 	public static final String RICHFACES = "RichFaces";
 	public static final String WELD = "Weld";
 
