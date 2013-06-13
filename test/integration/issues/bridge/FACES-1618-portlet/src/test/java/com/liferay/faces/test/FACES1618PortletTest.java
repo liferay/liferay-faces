@@ -117,6 +117,15 @@ public class FACES1618PortletTest extends TesterBase {
 		String[] resourceIds = headResourceIdsString.split(",");
 		logger.log(Level.INFO, "resourceIds.length = " + resourceIds.length);
 		
+		// first check that the lengths are the same
+		assertTrue(
+			"previous number of resources ids and currnet number of resource ids should match, " +
+				"but the current headResourceIdsMap.size() = " + headResourceIdsMap.size() +
+				", while the previous resourceIds.length = " + resourceIds.length,
+			(headResourceIdsMap.size() == resourceIds.length)
+		);
+		
+		// check that none have changed
 		for (int i=0; i < resourceIds.length; i++) {
 			// TODO check them
 			if (headResourceIdsMap.get(resourceIds[i]) == null) {
