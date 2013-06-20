@@ -18,10 +18,12 @@ import java.util.logging.Logger;
 import org.jboss.arquillian.graphene.enricher.findby.FindBy;
 import org.openqa.selenium.WebElement;
 
+import com.liferay.faces.test.util.TesterBase;
+
 /**
  * @author  Liferay Faces Team
  */
-public class Icefaces3Compat {
+public class Icefaces3Compat extends TesterBase {
 
 	protected static final Logger logger = Logger.getLogger(Icefaces3Compat.class.getName());
 
@@ -88,7 +90,7 @@ public class Icefaces3Compat {
 	// xpath for specific tests
 	protected static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()";
 
-	static final String url = "http://localhost:8080/group/bridge-demos/ice3-compat";
+	static final String url = baseUrl + "/group/bridge-demos/ice3-compat";
 	
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;

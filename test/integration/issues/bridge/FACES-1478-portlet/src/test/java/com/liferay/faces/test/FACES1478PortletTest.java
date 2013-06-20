@@ -44,7 +44,7 @@ public class FACES1478PortletTest extends TesterBase {
 
 	private static final String secondLinkXpath = "//form[@method='post']/a[2]";
 
-	static final String url = "http://localhost:8080/web/bridge-issues/faces-1478";
+	static final String url = baseUrl + "/web/bridge-issues/faces-1478";
 
 	@FindBy(xpath = portletDisplayNameXpath)
 	private WebElement portletDisplayName;

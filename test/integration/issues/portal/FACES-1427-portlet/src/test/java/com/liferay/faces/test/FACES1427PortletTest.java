@@ -71,7 +71,7 @@ public class FACES1427PortletTest extends TesterBase {
 	// <span id="A2399:f1:comments2Output">comments2-initial-value</span>
 	private static final String comments2OutputXpath = "//span[contains(@id,':comments2Output')]";
 
-	static final String url = "http://localhost:8080/web/portal-issues/faces-1427";
+	static final String url = baseUrl + "/web/portal-issues/faces-1427";
 
 	@FindBy(xpath = portletDisplayNameXpath)
 	private WebElement portletDisplayName;
