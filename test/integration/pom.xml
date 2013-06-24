@@ -36,7 +36,20 @@
 		</dependency>
 	</dependencies>
 
+	<properties>
+		<integration.portal>liferay</integration.portal>
+		<integration.host>localhost</integration.host>
+		<integration.port>8080</integration.port>
+		<integration.url>http://${integration.host}:${integration.port}</integration.url>
+	</properties>
+
 	<profiles>
+		<profile>
+			<id>pluto</id>
+			<properties>
+				<integration.portal>pluto</integration.portal>
+			</properties>
+		</profile>
 		<profile>
 			<id>integration</id>
 			<build>
@@ -51,6 +64,18 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>weblogic</id>
+			<properties>
+				<integration.port>7001</integration.port>
+			</properties>
+		</profile>
+		<profile>
+			<id>websphere</id>
+			<properties>
+				<integration.port>9080</integration.port>
+			</properties>
+		</profile>
 	</profiles>
 
 	<build>
@@ -63,6 +88,27 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<configuration>
+						<systemProperties>
+							<property>
+								<name>integration.portal</name>
+								<value>${integration.portal}</value>
+							</property>
+							<property>
+								<name>integration.url</name>
+								<value>${integration.url}</value>
+							</property>
+						</systemProperties>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 </project>
+

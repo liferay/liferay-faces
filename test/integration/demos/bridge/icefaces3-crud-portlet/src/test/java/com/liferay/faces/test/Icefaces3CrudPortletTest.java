@@ -90,7 +90,7 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 	// Cancel button
 	private static final String cancelButtonXpath = "//input[@type='submit' and @value='Cancel']";
 
-	static final String url = "http://localhost:8080/group/bridge-demos/ice3-crud";
+	static final String url = baseUrl + "/group/bridge-demos/ice3-crud";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
