@@ -103,7 +103,7 @@ public class Icefaces3CompatPortletTest extends TesterBase {
 	// xpath for specific tests
 	private static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()";
 
-	static final String url = "http://localhost:8080/group/bridge-demos/ice3-compat";
+	static final String url = baseUrl + "/group/bridge-demos/ice3-compat";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;

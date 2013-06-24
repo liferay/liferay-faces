@@ -70,7 +70,7 @@ public class FACES257PortletTest extends TesterBase {
 
 	private static final String requestedUrlXpath = "//span[contains(@id, ':requestedURL')]";
 
-	static final String url = "http://localhost:8080/web/portal-issues/faces-257";
+	static final String url = baseUrl + "/web/portal-issues/faces-257";
 
 	@FindBy(xpath = portletDisplayNameXpath)
 	private WebElement portletDisplayName;
