@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.enricher.findby.FindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,14 +48,15 @@ public class TesterBase {
 	private WebElement signInButton;
 	@FindBy(xpath = signedInTextXpath)
 	private WebElement signedInText;
-
-	static final String signInUrl = "http://localhost:8080/web/guest/jsf2-sign-in";
+	
+	public static final String baseUrl = System.getProperty("integration.url", "http://localhost:8080");
+	protected static final String signInUrl = baseUrl + "/web/guest/jsf2-sign-in";
 
 	@Drone
 	public WebDriver browser;
 
 	public void signIn() throws Exception {
-
+		
 		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
 
 		logger.log(Level.INFO, "browser.navigate().to(" + signInUrl + ")");

@@ -59,7 +59,7 @@ public class Jsf2LoginPortletTest extends TesterBase {
 	@FindBy(xpath = "//div[contains(text(),'You are signed in as')]")
 	private WebElement portletBody;
 	
-	static final String url = "http://localhost:8080/web/guest/jsf2-sign-in";
+	static final String url = baseUrl + "/web/guest/jsf2-sign-in";
 
 	@Before
 	public void getNewSession() {

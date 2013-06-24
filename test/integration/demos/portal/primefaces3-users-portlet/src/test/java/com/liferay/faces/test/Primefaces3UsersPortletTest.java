@@ -173,7 +173,7 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 	private static final String changedUserJobTitleCellXpath = "//span[contains(@id,':jobTitleCell') and text()='Aa']";
 
 	static final String url =
-		"http://localhost:8080/group/control_panel/manage?p_p_id=1_WAR_primefaces3usersportlet&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view";
+			baseUrl + "/group/control_panel/manage?p_p_id=1_WAR_primefaces3usersportlet&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view";
 
 	@FindBy(xpath = controlPanelTestSetupXpath)
 	private WebElement controlPanelTestSetup;
