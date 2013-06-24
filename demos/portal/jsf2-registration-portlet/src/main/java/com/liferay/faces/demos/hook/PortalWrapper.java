@@ -166,16 +166,16 @@ public class PortalWrapper implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link
-	 * com.liferay.portal.kernel.portlet.PortletSecurityUtil#resetWhitelist()}
+	 * @deprecated  As of 6.2.0, replaced by {@link
+	 *              com.liferay.portal.kernel.portlet.PortletSecurityUtil#resetWhitelist()}
 	 */
 	public Set<String> resetPortletAddDefaultResourceCheckWhitelist() {
 		return _portal.resetPortletAddDefaultResourceCheckWhitelist();
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link
-	 * com.liferay.portal.kernel.portlet.PortletSecurityUtil#resetWhitelistActions()}
+	 * @deprecated  As of 6.2.0, replaced by {@link
+	 *              com.liferay.portal.kernel.portlet.PortletSecurityUtil#resetWhitelistActions()}
 	 */
 	public Set<String> resetPortletAddDefaultResourceCheckWhitelistActions() {
 		return _portal.resetPortletAddDefaultResourceCheckWhitelistActions();
@@ -299,8 +299,7 @@ public class PortalWrapper implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by the more general {@link
-	 *             #getCDNHost(boolean)}
+	 * @deprecated  As of 6.2.0, replaced by the more general {@link #getCDNHost(boolean)}
 	 */
 	public String getCDNHost() {
 		return _portal.getCDNHost();
@@ -364,6 +363,11 @@ public class PortalWrapper implements Portal {
 
 	public String getComputerName() {
 		return _portal.getComputerName();
+	}
+
+	@Override
+	public Map<String, List<Portlet>> getControlPanelCategoriesMap(HttpServletRequest request) throws SystemException {
+		return _portal.getControlPanelCategoriesMap(request);
 	}
 
 	public String getControlPanelCategory(String portletId, ThemeDisplay themeDisplay) throws SystemException {
@@ -478,7 +482,7 @@ public class PortalWrapper implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0 with no direct replacement
+	 * @deprecated  As of 6.2.0 with no direct replacement
 	 */
 	public boolean isAllowAddPortletDefaultResource(HttpServletRequest request, Portlet portlet) throws PortalException,
 		SystemException {
@@ -811,7 +815,7 @@ public class PortalWrapper implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 6.1.0, renamed to {@link #isGroupAdmin(User, long)}
+	 * @deprecated  As of 6.1.0, renamed to {@link #isGroupAdmin(User, long)}
 	 */
 	public boolean isCommunityAdmin(User user, long groupId) throws Exception {
 		return _portal.isCommunityAdmin(user, groupId);
@@ -862,7 +866,7 @@ public class PortalWrapper implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0 renamed to {@link #getSiteGroupId(long)}
+	 * @deprecated  As of 6.2.0 renamed to {@link #getSiteGroupId(long)}
 	 */
 	public long getParentGroupId(long scopeGroupId) throws PortalException, SystemException {
 		return _portal.getParentGroupId(scopeGroupId);
@@ -919,16 +923,14 @@ public class PortalWrapper implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by the more general {@link
-	 *             #getPortalPort(boolean)}
+	 * @deprecated  As of 6.2.0, replaced by the more general {@link #getPortalPort(boolean)}
 	 */
 	public int getPortalPort() {
 		return _portal.getPortalPort();
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by the more general {@link
-	 *             #getPortalPort(boolean)}
+	 * @deprecated  As of 6.2.0, replaced by the more general {@link #getPortalPort(boolean)}
 	 */
 	public int getPortalPort(boolean secure) {
 		return _portal.getPortalPort();
@@ -975,24 +977,23 @@ public class PortalWrapper implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link
-	 * com.liferay.portal.kernel.portlet.PortletSecurityUtil#getWhitelist()}
+	 * @deprecated  As of 6.2.0, replaced by {@link
+	 *              com.liferay.portal.kernel.portlet.PortletSecurityUtil#getWhitelist()}
 	 */
 	public Set<String> getPortletAddDefaultResourceCheckWhitelist() {
 		return _portal.getPortletAddDefaultResourceCheckWhitelist();
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link
-	 * com.liferay.portal.kernel.portlet.PortletSecurityUtil#getWhitelistActions()}
+	 * @deprecated  As of 6.2.0, replaced by {@link
+	 *              com.liferay.portal.kernel.portlet.PortletSecurityUtil#getWhitelistActions()}
 	 */
 	public Set<String> getPortletAddDefaultResourceCheckWhitelistActions() {
 		return _portal.getPortletAddDefaultResourceCheckWhitelistActions();
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             #getPortletBreadcrumbs(HttpServletRequest)}
+	 * @deprecated  As of 6.2.0, replaced by {@link #getPortletBreadcrumbs(HttpServletRequest)}
 	 */
 	public List<BreadcrumbEntry> getPortletBreadcrumbList(HttpServletRequest request) {
 		return _portal.getPortletBreadcrumbList(request);
@@ -1118,7 +1119,7 @@ public class PortalWrapper implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 6.1.0, renamed to {@link #isGroupOwner(User, long)}
+	 * @deprecated  As of 6.1.0, renamed to {@link #isGroupOwner(User, long)}
 	 */
 	public boolean isCommunityOwner(User user, long groupId) throws Exception {
 		return _portal.isCommunityOwner(user, groupId);
@@ -1183,9 +1184,27 @@ public class PortalWrapper implements Portal {
 		return _portal.getSelectedUser(portletRequest, checkPermission);
 	}
 
+	@Override
+	public Map<String, List<Portlet>> getSiteAdministrationCategoriesMap(HttpServletRequest request)
+		throws SystemException {
+		return _portal.getSiteAdministrationCategoriesMap(request);
+	}
+
+	@Override
+	public PortletURL getSiteAdministrationURL(HttpServletRequest request, ThemeDisplay themeDisplay)
+		throws SystemException {
+		return _portal.getSiteAdministrationURL(request, themeDisplay);
+	}
+
 	public PortletURL getSiteAdministrationURL(PortletResponse portletResponse, ThemeDisplay themeDisplay)
 		throws SystemException {
 		return _portal.getSiteAdministrationURL(portletResponse, themeDisplay);
+	}
+
+	@Override
+	public PortletURL getSiteAdministrationURL(HttpServletRequest request, ThemeDisplay themeDisplay,
+		String portletName) {
+		return _portal.getSiteAdministrationURL(request, themeDisplay, portletName);
 	}
 
 	public PortletURL getSiteAdministrationURL(PortletResponse response, ThemeDisplay themeDisplay,
