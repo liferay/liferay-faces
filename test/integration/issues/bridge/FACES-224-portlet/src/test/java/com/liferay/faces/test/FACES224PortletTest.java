@@ -53,7 +53,7 @@ public class FACES224PortletTest extends TesterBase {
 	// the issue is fixed, the value should be equal to 'xyz')</div> </div>
 	private static final String view2DivXpath = "//div[@class='liferay-faces-bridge-body']";
 
-	static final String url = "http://localhost:8080/web/bridge-issues/faces-224";
+	static final String url = baseUrl + "/web/bridge-issues/faces-224";
 
 	@FindBy(xpath = portletDisplayNameXpath)
 	private WebElement portletDisplayName;
