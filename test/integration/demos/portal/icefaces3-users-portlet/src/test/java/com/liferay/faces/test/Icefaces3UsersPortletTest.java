@@ -178,7 +178,7 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 	private static final String changedUserJobTitleCellXpath = "//span[contains(@id,':jobTitleCell') and text()='Aa']";
 
 	static final String url =
-		"http://localhost:8080/group/control_panel/manage?p_p_id=1_WAR_icefaces3usersportlet&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&doAsGroupId=10180&refererPlid=10183";
+			baseUrl + "/group/control_panel/manage?p_p_id=1_WAR_icefaces3usersportlet&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&doAsGroupId=10180&refererPlid=10183";
 
 	@FindBy(xpath = portletTitleTextXpath)
 	private WebElement portletTitleText;

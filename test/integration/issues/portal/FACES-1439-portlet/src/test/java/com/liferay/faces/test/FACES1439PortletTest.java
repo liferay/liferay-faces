@@ -64,7 +64,7 @@ public class FACES1439PortletTest extends TesterBase {
 	private static final String inputThreeXpath =
 		"//span[contains(@id,':comments3Output')]/following-sibling::br[1]/following-sibling::input[1]";
 
-	static final String url = "http://localhost:8080/web/portal-issues/faces-1439";
+	static final String url = baseUrl + "/web/portal-issues/faces-1439";
 
 	@FindBy(xpath = portletDisplayNameXpath)
 	private WebElement portletDisplayName;

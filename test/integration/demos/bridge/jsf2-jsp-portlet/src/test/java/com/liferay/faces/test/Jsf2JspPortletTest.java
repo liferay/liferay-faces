@@ -105,7 +105,7 @@ public class Jsf2JspPortletTest extends TesterBase {
 	// xpath for specific tests
 	private static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../child::node()";
 
-	static final String url = "http://localhost:8080/group/bridge-demos/jsf2-jsp";
+	static final String url = baseUrl +"/group/bridge-demos/jsf2-jsp";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
