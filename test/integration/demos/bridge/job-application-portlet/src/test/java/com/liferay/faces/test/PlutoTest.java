@@ -110,7 +110,7 @@ public class PlutoTest extends TesterBase {
 	// xpath for specific tests
 	private static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../child::node()";
 
-	static final String url = "http://localhost:8080/pluto/portal/JSF2";
+	static final String url = baseUrl +"/pluto/portal/JSF2";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;

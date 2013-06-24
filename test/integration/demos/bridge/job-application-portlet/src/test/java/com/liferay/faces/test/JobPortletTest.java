@@ -103,7 +103,7 @@ public class JobPortletTest extends TesterBase {
 	// xpath for specific tests
 	private static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../child::node()";
 
-	static final String url = "http://localhost:8080/group/bridge-demos/jsf2";
+	static final String url = baseUrl +"/group/bridge-demos/jsf2";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
