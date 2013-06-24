@@ -103,7 +103,7 @@ public class Richfaces4PortletTest extends TesterBase {
 	// xpath for specific tests
 	private static final String dateValidationXpath = "//span[contains(@id,':dateOfBirthField')]/span/span/span/span[contains(@id,':dateOfBirth')]/span";
 
-	static final String url = "http://localhost:8080/group/bridge-demos/rich4";
+	static final String url = baseUrl + "/group/bridge-demos/rich4";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;

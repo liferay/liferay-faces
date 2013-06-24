@@ -18,10 +18,12 @@ import java.util.logging.Logger;
 import org.jboss.arquillian.graphene.enricher.findby.FindBy;
 import org.openqa.selenium.WebElement;
 
+import com.liferay.faces.test.util.TesterBase;
+
 /**
  * @author  Liferay Faces Team
  */
-public class Jsf2Cdi {
+public class Jsf2Cdi extends TesterBase {
 
 	protected static final Logger logger = Logger.getLogger(Jsf2Cdi.class.getName());
 
@@ -87,7 +89,7 @@ public class Jsf2Cdi {
 	// xpath for specific tests
 	protected static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../child::node()";
 
-	static final String url = "http://localhost:8080/group/bridge-demos/jsf2-cdi";
+	static final String url = baseUrl + "/group/bridge-demos/jsf2-cdi";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;

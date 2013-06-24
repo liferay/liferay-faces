@@ -18,10 +18,12 @@ import java.util.logging.Logger;
 import org.jboss.arquillian.graphene.enricher.findby.FindBy;
 import org.openqa.selenium.WebElement;
 
+import com.liferay.faces.test.util.TesterBase;
+
 /**
  * @author  Liferay Faces Team
  */
-public class Richfaces4 {
+public class Richfaces4 extends TesterBase {
 
 	protected static final Logger logger = Logger.getLogger(Richfaces4.class.getName());
 
@@ -87,7 +89,7 @@ public class Richfaces4 {
 	// xpath for specific tests
 	protected static final String dateValidationXpath = "//span[contains(@id,':dateOfBirthField')]/span/span/span/span[contains(@id,':dateOfBirth')]/span";
 
-	static final String url = "http://localhost:8080/group/bridge-demos/rich4";
+	static final String url = baseUrl + "/group/bridge-demos/rich4";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
