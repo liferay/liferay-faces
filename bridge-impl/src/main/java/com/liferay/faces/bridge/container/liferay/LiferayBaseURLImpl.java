@@ -65,10 +65,12 @@ public abstract class LiferayBaseURLImpl implements LiferayBaseURL {
 
 	public void setParameter(String name, String value) {
 		parameterMap.put(name, new String[] { value });
+		resetToString();
 	}
 
 	public void setParameter(String name, String[] values) {
 		parameterMap.put(name, values);
+		resetToString();
 	}
 
 	public Map<String, String[]> getParameterMap() {
@@ -77,6 +79,7 @@ public abstract class LiferayBaseURLImpl implements LiferayBaseURL {
 
 	public void setParameters(Map<String, String[]> parameters) {
 		parameterMap.putAll(parameters);
+		resetToString();
 	}
 
 	public void setProperty(String key, String value) {
