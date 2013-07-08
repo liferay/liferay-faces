@@ -106,7 +106,7 @@ public class I18N extends ResourceBundle {
 		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 		Locale locale = liferayFacesContext.getLocale();
 
-		return liferayFacesContext.getMessage(locale, messageId, arg1, arg2, arg4);
+		return liferayFacesContext.getMessage(locale, messageId, arg1, arg2, arg3, arg4);
 	}
 
 	@Override
