@@ -51,7 +51,7 @@ public class ServiceUtil {
 		int type = GroupConstants.TYPE_SITE_OPEN;
 
 		return GroupLocalServiceUtil.addGroup(userId, GroupConstants.DEFAULT_PARENT_GROUP_ID, (String) null, 0L,
-				GroupConstants.DEFAULT_LIVE_GROUP_ID, name, description, type, friendlyURL, siteFlag, active,
+				GroupConstants.DEFAULT_LIVE_GROUP_ID, name, description, type, true, 0,	friendlyURL, siteFlag, active,
 				new ServiceContext());
 	}
 
