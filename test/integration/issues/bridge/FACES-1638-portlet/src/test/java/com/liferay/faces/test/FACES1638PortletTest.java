@@ -75,15 +75,15 @@ public class FACES1638PortletTest extends TesterBase {
 
 		int firstItemIndex = firstItemURL.getAttribute("href").indexOf(ITEM_ID) + ITEM_ID.length();
 		String firstItemID = firstItemURL.getAttribute("href").substring(firstItemIndex);
-		assertTrue("firstItemID should equal 1, but it does not.", Integer.parseInt(firstItemID) == 1);
+		assertTrue("firstItemID should equal 1, but it does not.", firstItemID.equals("1"));
 		logger.log(Level.INFO, "firstItemID = " + firstItemID);
 		int secondItemIndex = secondItemURL.getAttribute("href").indexOf(ITEM_ID) + ITEM_ID.length();
 		String secondItemID = secondItemURL.getAttribute("href").substring(secondItemIndex);
-		assertTrue("secondItemID should equal 2, but it does not", Integer.parseInt(secondItemID) == 2);
+		assertTrue("secondItemID should equal 2, but it does not", secondItemID.equals("2"));
 		logger.log(Level.INFO, "secondItemID = " + secondItemID);
 		int thirdItemIndex = thirdItemURL.getAttribute("href").indexOf(ITEM_ID) + ITEM_ID.length();
 		String thirdItemID = thirdItemURL.getAttribute("href").substring(thirdItemIndex);
-		assertTrue("thirdItemID should equal 3, but it does not", Integer.parseInt(thirdItemID) == 3);
+		assertTrue("thirdItemID should equal 3, but it does not", thirdItemID.equals("3"));
 		logger.log(Level.INFO, "thirdItemID = " + thirdItemID);
 
 	}
