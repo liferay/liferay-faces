@@ -16,8 +16,10 @@ package com.liferay.faces.bridge.context;
 import java.util.Iterator;
 
 import javax.faces.FacesException;
+import javax.faces.application.ProjectStage;
 import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExceptionHandlerWrapper;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
 
@@ -51,6 +53,9 @@ public class ExceptionHandlerAjaxImpl extends ExceptionHandlerWrapper {
 		Iterable<ExceptionQueuedEvent> unhandledExceptionQueuedEvents = getUnhandledExceptionQueuedEvents();
 		Iterator<ExceptionQueuedEvent> itr = unhandledExceptionQueuedEvents.iterator();
 
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		boolean isDevelopment = facesContext.isProjectStage(ProjectStage.Development);
+
 		while (itr.hasNext()) {
 			ExceptionQueuedEvent exceptionQueuedEvent = itr.next();
 			ExceptionQueuedEventContext exceptionQueuedEventContext = exceptionQueuedEvent.getContext();
@@ -59,7 +64,13 @@ public class ExceptionHandlerAjaxImpl extends ExceptionHandlerWrapper {
 				Throwable throwable = exceptionQueuedEventContext.getException();
 
 				if (throwable != null) {
-					logger.error(throwable);
+
+					if (isDevelopment) {
+						logger.error(throwable);
+					}
+					else {
+						logger.error(throwable.getMessage());
+					}
 				}
 				else {
 					logger.error("Unable to get exception from exceptionQueuedEventContext");
