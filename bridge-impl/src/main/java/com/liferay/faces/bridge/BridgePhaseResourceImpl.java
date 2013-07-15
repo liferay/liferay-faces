@@ -102,14 +102,16 @@ public class BridgePhaseResourceImpl extends BridgePhaseCompatImpl {
 				// If there were any "handled" exceptions queued, then throw a BridgeException.
 				Throwable handledException = getJSF2HandledException(facesContext);
 
-				if (handledException != null) {
+				boolean isAjaxRequest = facesContext.getPartialViewContext().isAjaxRequest();
+
+				if ((handledException != null) && isAjaxRequest) {
 					throw new BridgeException(handledException);
 				}
 
 				// Otherwise, if there were any "unhandled" exceptions queued, then throw a BridgeException.
 				Throwable unhandledException = getJSF2UnhandledException(facesContext);
 
-				if (unhandledException != null) {
+				if ((unhandledException != null) && isAjaxRequest) {
 					throw new BridgeException(unhandledException);
 				}
 
