@@ -70,7 +70,7 @@ public abstract class BridgePhaseCompatImpl extends BridgePhaseBaseImpl {
 		return null;
 	}
 
-	public boolean isAjaxRequest(FacesContext facesContext) {
+	public boolean isJSF2AjaxRequest(FacesContext facesContext) {
 
 		// no-op for JSF 1.x
 		return false;
