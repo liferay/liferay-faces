@@ -102,7 +102,7 @@ public class BridgePhaseResourceImpl extends BridgePhaseCompatImpl {
 				// If there were any "handled" exceptions queued, then throw a BridgeException.
 				Throwable handledException = getJSF2HandledException(facesContext);
 
-				boolean isAjaxRequest = facesContext.getPartialViewContext().isAjaxRequest();
+				boolean isAjaxRequest = isAjaxRequest(facesContext);
 
 				if ((handledException != null) && isAjaxRequest) {
 					throw new BridgeException(handledException);
