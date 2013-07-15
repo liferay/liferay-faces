@@ -95,6 +95,10 @@ public abstract class BridgePhaseCompatImpl extends BridgePhaseBaseImpl {
 		return unhandledException;
 	}
 
+	protected boolean isAjaxRequest(FacesContext facesContext) {
+		return facesContext.getPartialViewContext().isAjaxRequest();
+	}
+
 	protected boolean isJSF2ResourceRequest(FacesContext facesContext) {
 		ResourceHandler resourceHandler = facesContext.getApplication().getResourceHandler();
 
