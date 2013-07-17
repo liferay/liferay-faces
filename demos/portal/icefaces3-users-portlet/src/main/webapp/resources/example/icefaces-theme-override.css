@@ -2,6 +2,10 @@
 	display: inline;
 }
 
+.ice-pushbutton .yui-button button {
+	max-width: 8em;
+}
+
 .pfusers .iceDatTbl {
 	margin: 0px;
 	width: 100%;
@@ -51,4 +55,13 @@
 	color: #111552;
 	font-style: italic;
 	padding-left: 20px;
+}
+
+th {
+	max-width: 16%;
+	min-width: 16%;
+}
+
+.yui-button button {
+	width: 8em;
 }
