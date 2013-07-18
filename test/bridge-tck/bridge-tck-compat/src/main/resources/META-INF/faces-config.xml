@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<faces-config xmlns="http://java.sun.com/xml/ns/javaee" xmlns:bridge="http://www.liferay.com/xml/ns/liferay-faces-bridge-2.0-extension"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+	xmlns:bridge="http://www.liferay.com/xml/ns/liferay-faces-bridge-2.0-extension">
 	<name>LiferayFacesBridgeTCKCommon</name>
 	<application>
 		<view-handler>com.liferay.faces.bridge.tck.application.ViewHandlerTCKImpl</view-handler>
@@ -11,7 +11,8 @@
 			<faces-context-factory>com.liferay.faces.bridge.tck.context.FacesContextFactoryTCKImpl</faces-context-factory> -->
 		<view-declaration-language-factory>com.liferay.faces.bridge.tck.application.view.ViewDeclarationLanguageFactoryTCKImpl</view-declaration-language-factory>
 		<factory-extension>
-			<bridge:portlet-container-factory>com.liferay.faces.bridge.tck.container.PortletContainerFactoryTCKImpl</bridge:portlet-container-factory>
+			<bridge:portlet-container-factory>com.liferay.faces.bridge.tck.container.PortletContainerFactoryTCKImpl
+			</bridge:portlet-container-factory>
 		</factory-extension>
 	</factory>
 </faces-config>
