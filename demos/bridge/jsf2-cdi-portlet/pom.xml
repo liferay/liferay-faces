@@ -13,6 +13,15 @@
 
 	<profiles>
 		<profile>
+			<id>jetty</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.weld.servlet</groupId>
+					<artifactId>weld-servlet</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
 			<id>tomcat</id>
 			<dependencies>
 				<dependency>
