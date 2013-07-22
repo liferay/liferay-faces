@@ -53,6 +53,10 @@ public class ImportConstantsTagHandler extends TagHandler {
 	private String classType;
 	private String var;
 
+	public ImportConstantsTagHandler() throws Exception {
+		super(new JspTagConfig());
+	}
+
 	public ImportConstantsTagHandler(TagConfig config) throws Exception {
 		super(config);
 
