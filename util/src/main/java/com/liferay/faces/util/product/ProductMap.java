@@ -39,6 +39,7 @@ public class ProductMap extends HashMap<String, Product> {
 		instance.put(ProductConstants.PRIMEFACES, new ProductPrimeFacesImpl());
 		instance.put(ProductConstants.RESIN, new ProductResinImpl());
 		instance.put(ProductConstants.RICHFACES, new ProductRichFacesImpl());
+		instance.put(ProductConstants.SPRING_FRAMEWORK, new ProductSpringFrameworkImpl());
 	}
 
 	public static ProductMap getInstance() {
