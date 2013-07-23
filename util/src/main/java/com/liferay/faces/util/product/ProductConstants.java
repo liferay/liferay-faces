@@ -32,6 +32,7 @@ public class ProductConstants {
 	public static final String PRIMEFACES = "PrimeFaces";
 	public static final String RESIN = "Resin";
 	public static final String RICHFACES = "RichFaces";
+	public static final String SPRING_FRAMEWORK = "Spring Framework";
 	public static final String WELD = "Weld";
 
 }
