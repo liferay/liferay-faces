@@ -13,9 +13,12 @@
  */
 package com.liferay.faces.bridge.bean;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
+import com.liferay.faces.bridge.application.MojarraApplicationAssociate;
 import com.liferay.faces.bridge.config.ConfiguredBean;
 import com.liferay.faces.bridge.servlet.BridgeSessionListener;
 import com.liferay.faces.util.logging.Logger;
@@ -33,9 +36,6 @@ public class BeanManagerMojarraImpl extends BeanManagerImpl {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BeanManagerMojarraImpl.class);
 
-	// Private Constants
-	private static final String INVOKE_PRE_DESTROY = "invokePreDestroy";
-
 	public BeanManagerMojarraImpl(List<ConfiguredBean> configuredBeans) {
 		super(configuredBeans);
 	}
@@ -44,26 +44,40 @@ public class BeanManagerMojarraImpl extends BeanManagerImpl {
 	public void invokePreDestroyMethods(Object managedBean, boolean preferPreDestroy) {
 
 		if (preferPreDestroy) {
-			Object mojarraInjectionProvider = BridgeSessionListener.getMojarraInjectionProvider();
+
+			// Get the Mojarra InjectionProvider singleton instance that was hopefully discovered at startup.
+			MojarraInjectionProvider mojarraInjectionProvider = BridgeSessionListener.getMojarraInjectionProvider();
+
+			// If the Mojarra InjectionProvider singleton instance was not discovered at startup, then discover it now.
+			if (mojarraInjectionProvider == null) {
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				ExternalContext externalContext = facesContext.getExternalContext();
+				mojarraInjectionProvider = MojarraApplicationAssociate.getInjectionProvider(externalContext);
+			}
 
 			if (mojarraInjectionProvider == null) {
+
+				logger.debug(
+					"Directly invoking managedBean=[{0}] methods annotated with @PreDestroy since Mojarra InjectionProvider was not discovered",
+					managedBean);
+
 				super.invokePreDestroyMethods(managedBean, preferPreDestroy);
 			}
 			else {
 
 				try {
-					Method invokePreDestroyMethod = mojarraInjectionProvider.getClass().getMethod(INVOKE_PRE_DESTROY,
-							new Class[] { Object.class });
 
-					logger.debug("Calling invokePreDestroy for mojarraInjectionProvider=[{0}] managedBean=[{1}]",
-						mojarraInjectionProvider, managedBean);
-					invokePreDestroyMethod.invoke(mojarraInjectionProvider, managedBean);
+					if (logger.isDebugEnabled()) {
+						logger.debug("Calling invokePreDestroy for injectionProvider=[{0}] managedBean=[{1}]",
+							mojarraInjectionProvider, managedBean);
+					}
+
+					mojarraInjectionProvider.invokePreDestroy(managedBean);
 				}
 				catch (Exception e) {
 					logger.error(e);
 				}
 			}
-
 		}
 		else {
 			super.invokePreDestroyMethods(managedBean, preferPreDestroy);
