@@ -33,8 +33,8 @@ public class TesterBase {
 	protected static final Logger logger = Logger.getLogger(TesterBase.class.getName());
 
 	// elements for logging in
-	private static final String emailFieldXpath = "//input[contains(@id,':handle')]";
-	private static final String passwordFieldXpath = "//input[contains(@id,':password')]";
+	private static final String emailFieldXpath = "//input[contains(@id,'_58_login')]";
+	private static final String passwordFieldXpath = "//input[contains(@id,'_58_password')]";
 	private static final String signInButtonXpath = "//input[@type='submit' and @value='Sign In']";
 	private static final String signedInTextXpath = "//div[contains(text(),'You are signed in as')]";
 
@@ -50,7 +50,7 @@ public class TesterBase {
 	private WebElement signedInText;
 	
 	public static final String baseUrl = System.getProperty("integration.url", "http://localhost:8080");
-	protected static final String signInUrl = baseUrl + "/web/guest/jsf2-sign-in";
+	protected static final String signInUrl = baseUrl + "/web/guest/home";
 
 	@Drone
 	public WebDriver browser;
