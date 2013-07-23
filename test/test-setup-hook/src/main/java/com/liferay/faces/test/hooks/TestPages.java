@@ -33,6 +33,7 @@ public class TestPages {
 		BRIDGE_DEMO_PAGES = new ArrayList<PortalPage>();
 		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF2", "1_WAR_jsf2portlet_INSTANCE_"));
 		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF2-CDI", "1_WAR_jsf2cdiportlet_INSTANCE_"));
+		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF2-SPRING", "1_WAR_jsf2springportlet_INSTANCE_"));
 		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF2-JSP", "1_WAR_jsf2jspportlet_INSTANCE_"));
 		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF2-PDF", "1_WAR_jsf2exportpdfportlet"));
 		BRIDGE_DEMO_PAGES.add(new PortalPage("JSF2-EVENTS",
