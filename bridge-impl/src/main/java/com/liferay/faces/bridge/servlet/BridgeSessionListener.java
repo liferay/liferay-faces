@@ -15,6 +15,7 @@ package com.liferay.faces.bridge.servlet;
 
 import java.util.Enumeration;
 
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -24,8 +25,10 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 import com.liferay.faces.bridge.BridgeFactoryFinder;
+import com.liferay.faces.bridge.application.MojarraApplicationAssociate;
 import com.liferay.faces.bridge.bean.BeanManager;
 import com.liferay.faces.bridge.bean.BeanManagerFactory;
+import com.liferay.faces.bridge.bean.MojarraInjectionProvider;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
 import com.liferay.faces.util.logging.Logger;
@@ -40,8 +43,7 @@ import com.liferay.faces.util.product.ProductMap;
  *
  * @author  Neil Griffin
  */
-public class BridgeSessionListener extends BridgeSessionListenerCompat implements HttpSessionListener,
-	ServletContextListener {
+public class BridgeSessionListener implements HttpSessionListener, ServletContextListener {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeSessionListener.class);
@@ -52,7 +54,7 @@ public class BridgeSessionListener extends BridgeSessionListenerCompat implement
 	private static final String MOJARRA_VIEW_SCOPE_MANAGER = "com.sun.faces.application.view.viewScopeManager";
 
 	// Private Static Data Members
-	private static Object mojarraInjectionProvider;
+	private static MojarraInjectionProvider mojarraInjectionProvider;
 
 	// Private Data Members
 	private ServletContext servletContext;
@@ -60,7 +62,7 @@ public class BridgeSessionListener extends BridgeSessionListenerCompat implement
 	/**
 	 * Returns the Mojarra InjectionProvider instance that was discovered during startup.
 	 */
-	public static Object getMojarraInjectionProvider() {
+	public static MojarraInjectionProvider getMojarraInjectionProvider() {
 		return mojarraInjectionProvider;
 	}
 
@@ -75,22 +77,39 @@ public class BridgeSessionListener extends BridgeSessionListenerCompat implement
 
 		this.servletContext = servletContextEvent.getServletContext();
 
-		// If the Mojarra InjectionProvider hasn't been discovered by a prior portlet instance in this context, then
-		// attempt to discover it.
-		if (mojarraInjectionProvider == null) {
+		if (servletContext.getAttribute(BridgeSessionListener.class.getName()) == null) {
 
-			Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
+			logger.info("Context initialized for contextPath=[{0}]", servletContext.getContextPath());
 
-			if (jsf.isDetected() && ProductConstants.MOJARRA.equals(jsf.getTitle())) {
+			// Prevent multiple-instantiation of this listener.
+			servletContext.setAttribute(BridgeSessionListener.class.getName(), Boolean.TRUE);
 
-				// The Mojarra InjectionProvider instance is stored as a FacesContext attribute during startup, via the
-				// InitFacesContext implementation.
-				FacesContext facesContext = FacesContext.getCurrentInstance();
+			// If the Mojarra InjectionProvider hasn't been discovered by a prior portlet instance in this context, then
+			// attempt to discover it.
+			if (mojarraInjectionProvider == null) {
 
-				if (facesContext != null) {
-					mojarraInjectionProvider = getMojarraInjectionProvider(facesContext);
+				Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
+
+				if (jsf.isDetected() && ProductConstants.MOJARRA.equals(jsf.getTitle())) {
+
+					FacesContext facesContext = FacesContext.getCurrentInstance();
+
+					if (facesContext != null) {
+						ExternalContext externalContext = facesContext.getExternalContext();
+						mojarraInjectionProvider = MojarraApplicationAssociate.getInjectionProvider(externalContext);
+
+						if (mojarraInjectionProvider == null) {
+							logger.debug("Unable to discover Mojarra InjectionProvider during startup");
+						}
+						else {
+							logger.debug("Mojarra injectionProvider=[{0}]", mojarraInjectionProvider);
+						}
+					}
 				}
 			}
+		}
+		else {
+			logger.debug("Preventing multiple instantiation for contextPath=[{0}]", servletContext.getContextPath());
 		}
 	}
 
