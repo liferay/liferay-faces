@@ -126,6 +126,7 @@
 		<pluto.tomcat.version>7.0.21</pluto.tomcat.version>
 		<pluto.version>2.0.3</pluto.version>
 		<selenium.version>2.31.0</selenium.version>
+		<spring.version>3.0.7.RELEASE</spring.version>
 		<surefire.version>2.12</surefire.version>
 		<tck.version>jsr329-1.0.1-liferay</tck.version>
 		<tck.trinidad.version>1.2.13</tck.trinidad.version>
