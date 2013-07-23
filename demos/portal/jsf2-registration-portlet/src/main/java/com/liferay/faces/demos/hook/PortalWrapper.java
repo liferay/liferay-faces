@@ -134,12 +134,22 @@ public class PortalWrapper implements Portal {
 		_portal.copyRequestParameters(actionRequest, actionResponse);
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return _portal.equals(obj);
+	}
+
 	public String escapeRedirect(String url) {
 		return _portal.escapeRedirect(url);
 	}
 
 	public String generateRandomKey(HttpServletRequest request, String input) {
 		return _portal.generateRandomKey(request, input);
+	}
+
+	@Override
+	public int hashCode() {
+		return _portal.hashCode();
 	}
 
 	public void initCustomSQL() {
@@ -244,6 +254,11 @@ public class PortalWrapper implements Portal {
 	}
 
 	@Override
+	public String getAbsoluteURL(HttpServletRequest request, String url) {
+		return _portal.getAbsoluteURL(request, url);
+	}
+
+	@Override
 	public LayoutQueryStringComposite getActualLayoutQueryStringComposite(long groupId, boolean privateLayout,
 		String friendlyURL, Map<String, String[]> params, Map<String, Object> requestContext) throws PortalException,
 		SystemException {
@@ -256,27 +271,29 @@ public class PortalWrapper implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             com.liferay.portal.kernel.language.LanguageUtil.getAvailableLocales(
-	 *             )}
+	 * @deprecated  As of 6.2.0, replaced by {@link com.liferay.portal.kernel.language.LanguageUtil.getAvailableLocales(
+	 *              )}
 	 */
 	public Locale[] getAlternateLocales(HttpServletRequest request) throws PortalException, SystemException {
 		return _portal.getAlternateLocales(request);
 	}
 
+	@Override
+	public String getAlternateURL(String canonicalURL, ThemeDisplay themeDisplay, Locale locale, Layout layout) {
+		return _portal.getAlternateURL(canonicalURL, themeDisplay, locale, layout);
+	}
+
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             com.liferay.portal.security.auth.AuthTokenWhitelistUtil#getPortletCSRFWhitelistActions(
-	 *             )}
+	 * @deprecated  As of 6.2.0, replaced by {@link
+	 *              com.liferay.portal.security.auth.AuthTokenWhitelistUtil#getPortletCSRFWhitelistActions( )}
 	 */
 	public Set<String> getAuthTokenIgnoreActions() {
 		return _portal.getAuthTokenIgnoreActions();
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             com.liferay.portal.security.auth.AuthTokenWhitelistUtil#getPortletCSRFWhitelist(
-	 *             )}
+	 * @deprecated  As of 6.2.0, replaced by {@link
+	 *              com.liferay.portal.security.auth.AuthTokenWhitelistUtil#getPortletCSRFWhitelist( )}
 	 */
 	public Set<String> getAuthTokenIgnorePortlets() {
 		return _portal.getAuthTokenIgnorePortlets();
@@ -617,6 +634,11 @@ public class PortalWrapper implements Portal {
 		return _portal.getGroupFriendlyURL(group, privateLayoutSet, themeDisplay, locale);
 	}
 
+	@Override
+	public int[] getGroupFriendlyURLIndex(String requestURI) {
+		return _portal.getGroupFriendlyURLIndex(requestURI);
+	}
+
 	public String[] getGroupPermissions(HttpServletRequest request) {
 		return _portal.getGroupPermissions(request);
 	}
@@ -940,11 +962,8 @@ public class PortalWrapper implements Portal {
 		return _portal.getPortalPort();
 	}
 
-	/**
-	 * @deprecated  As of 6.2.0, replaced by the more general {@link #getPortalPort(boolean)}
-	 */
 	public int getPortalPort(boolean secure) {
-		return _portal.getPortalPort();
+		return _portal.getPortalPort(secure);
 	}
 
 	public void setPortalPort(HttpServletRequest request) {
@@ -1234,6 +1253,11 @@ public class PortalWrapper implements Portal {
 	}
 
 	@Override
+	public Locale getSiteDefaultLocale(long groupId) throws PortalException, SystemException {
+		return _portal.getSiteDefaultLocale(groupId);
+	}
+
+	@Override
 	public long getSiteGroupId(long groupId) throws PortalException, SystemException {
 		return _portal.getSiteGroupId(groupId);
 	}
@@ -1415,16 +1439,5 @@ public class PortalWrapper implements Portal {
 
 	public Portal getWrapped() {
 		return _portal;
-	}
-
-	@Override
-	public String getAlternateURL(String canonicalURL,
-			ThemeDisplay themeDisplay, Locale locale, Layout layout) {
-		return _portal.getAlternateURL(canonicalURL, themeDisplay, locale, layout);
-	}
-
-	@Override
-	public int[] getGroupFriendlyURLIndex(String requestURI) {
-		return _portal.getGroupFriendlyURLIndex(requestURI);
 	}
 }
