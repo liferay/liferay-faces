@@ -44,6 +44,7 @@ use POSIX qw(strftime);
 #
 my($liferayFacesVersion,$major1,$major2,$minor);
 my($portalVersion,$portalVersions,$portalDtdDisplay,$portalDtdUrl,$bookVersion);
+my($mojarraVersion,$facesVersion,$facesVersionURL,$facesMajor1,$facesMajor2,$mojarraMinor);
 my $year= strftime "%Y", localtime;
 
 #
@@ -83,6 +84,23 @@ while(<POM>) {
 
 		$portalDtdUrl = "${major1}_${major2}_0";
 		print "portalDtdUrl = $portalDtdUrl\n";
+
+	}
+    
+    if(/mojarra.version>/) {
+        
+        /version>(.*)</;
+        $mojarraVersion = $1;
+        print "mojarraVersion = $mojarraVersion\n";
+        
+        $_ = $mojarraVersion;
+        
+        ($facesMajor1,$facesMajor2,$mojarraMinor) = split /[._]/;
+        $facesVersion = "${facesMajor1}.${facesMajor2}";
+        print "facesVersion = $facesVersion\n";
+        
+        $facesVersionURL = "${facesMajor1}_${facesMajor2}";
+        print "facesVersionURL = $facesVersionURL\n";
 
 	}
 
@@ -158,6 +176,17 @@ sub do_inplace_edits {
 		print "$File::Find::name\n";
 		`perl -pi -e 's/ENTITY versionNumber "..*"/ENTITY versionNumber "$bookVersion"/' $file`;
 		`perl -pi -e 's/ENTITY copyrightYear "2000-..* "/ENTITY copyrightYear "2000-${year} "/' $file`;
+	}
+    
+    #
+	# Otherwise, if the current file is named "faces-config.xml" then potentially fix the version number that
+	# will appear in the version attribute faces config tag and potentially fix the version number that will appear in
+    # the xsi:schemaLocation attribute URL of the faces config tag.
+	#
+	elsif ($file eq "faces-config.xml" and ($File::Find::name =~ /\/src/)) {
+		print "$File::Find::name\n";
+		`perl -pi -e 's/faces-config version=\"[0-9.]+\"/faces-config version=\"$facesVersion\"/' $file`;
+		`perl -pi -e 's/web-facesconfig[0-9_]+/web-facesconfig_$facesVersionURL/' $file`;
 	}
 
 }
