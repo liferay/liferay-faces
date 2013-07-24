@@ -126,6 +126,11 @@ public class PortalWrapper implements Portal {
 		return _portal.addPreservedParameters(themeDisplay, layout, url, doAsUser);
 	}
 
+	@Override
+	public void addUserLocaleOptionsMessage(HttpServletRequest request) {
+		_portal.addUserLocaleOptionsMessage(request);
+	}
+
 	public void clearRequestParameters(RenderRequest renderRequest) {
 		_portal.clearRequestParameters(renderRequest);
 	}
