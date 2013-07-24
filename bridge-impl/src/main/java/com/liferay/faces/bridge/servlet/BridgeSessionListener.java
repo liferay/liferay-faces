@@ -66,6 +66,10 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 		return mojarraInjectionProvider;
 	}
 
+	public static synchronized void setMojarraInjectionProvider(MojarraInjectionProvider injectionProvider) {
+		mojarraInjectionProvider = injectionProvider;
+	}
+
 	public void contextDestroyed(ServletContextEvent servletContextEvent) {
 		this.servletContext = null;
 	}
