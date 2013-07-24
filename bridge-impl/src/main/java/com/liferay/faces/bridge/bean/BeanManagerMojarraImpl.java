@@ -51,8 +51,17 @@ public class BeanManagerMojarraImpl extends BeanManagerImpl {
 			// If the Mojarra InjectionProvider singleton instance was not discovered at startup, then discover it now.
 			if (mojarraInjectionProvider == null) {
 				FacesContext facesContext = FacesContext.getCurrentInstance();
-				ExternalContext externalContext = facesContext.getExternalContext();
-				mojarraInjectionProvider = MojarraApplicationAssociate.getInjectionProvider(externalContext);
+
+				// Note: The FacesContext ThreadLocal singleton can be null if this method is called from
+				// BridgeSessionListener.
+				if (facesContext != null) {
+					ExternalContext externalContext = facesContext.getExternalContext();
+
+					if (externalContext != null) {
+						mojarraInjectionProvider = MojarraApplicationAssociate.getInjectionProvider(externalContext);
+						BridgeSessionListener.setMojarraInjectionProvider(mojarraInjectionProvider);
+					}
+				}
 			}
 
 			if (mojarraInjectionProvider == null) {
