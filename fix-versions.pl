@@ -42,7 +42,7 @@ use POSIX qw(strftime);
 #
 # Primitives
 #
-my($liferayFacesVersion,$major1,$major2,$minor);
+my($liferayFacesVersion,$liferayFacesVersionShort,$major1,$major2,$minor);
 my($portalVersion,$portalVersions,$portalDtdDisplay,$portalDtdUrl,$bookVersion);
 my($mojarraVersion,$facesVersion,$facesVersionURL,$facesMajor1,$facesMajor2,$mojarraMinor);
 my $year= strftime "%Y", localtime;
@@ -60,6 +60,11 @@ while(<POM>) {
 		$liferayFacesVersion = $1;
 		print "liferayFacesVersion = $liferayFacesVersion\n";
 
+        $_ = $liferayFacesVersion;
+        s/-ga4-SNAPSHOT//;
+        $liferayFacesVersionShort = $_;
+        print "liferayFacesVersionShort = $liferayFacesVersionShort\n";
+        
 		$_ = $liferayFacesVersion;
 		s/-SNAPSHOT//;
 		$bookVersion = $_;
@@ -187,6 +192,15 @@ sub do_inplace_edits {
 		print "$File::Find::name\n";
 		`perl -pi -e 's/faces-config version=\"[0-9.]+\"/faces-config version=\"$facesVersion\"/' $file`;
 		`perl -pi -e 's/web-facesconfig[0-9_]+/web-facesconfig_$facesVersionURL/' $file`;
+	}
+    
+    #
+    # Otherwise, if the current file is named with .tld extension, then potentially fix the version number that will
+    # appear in the tlib-version attribute tag.
+    #
+    elsif (($file =~ m/.*\.tld/) and ($File::Find::name =~ /\/src/)) {
+		print "$File::Find::name\n";
+		`perl -pi -e 's/tlib-version>[0-9.]+/tlib-version>$liferayFacesVersionShort/' $file`;
 	}
 
 }
