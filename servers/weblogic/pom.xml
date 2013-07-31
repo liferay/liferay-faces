@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.liferay.faces.servers</groupId>
+		<artifactId>liferay-faces-servers</artifactId>
+		<version>3.0.3-legacy-ga4-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<groupId>com.liferay.faces.servers.weblogic</groupId>
+	<artifactId>liferay-faces-servers-weblogic</artifactId>
+	<packaging>pom</packaging>
+	<name>Liferay Faces Servers WebLogic</name>
+
+	<modules>
+		<module>jsf-injection-provider</module>
+		<module>jsf-shared-library</module>
+		<module>jstl-shared-library</module>
+		<module>richfaces-shared-library</module>
+	</modules>
+
+</project>
