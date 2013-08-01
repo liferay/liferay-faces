@@ -13,6 +13,11 @@
  */
 package com.liferay.faces.demos.hook;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import javax.faces.FacesWrapper;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
@@ -28,7 +33,7 @@ import com.liferay.portlet.PortletURLFactoryUtil;
 /**
  * @author  Neil Griffin
  */
-public class PortalHookImpl extends PortalWrapper {
+public class PortalHookImpl implements InvocationHandler, FacesWrapper<Portal> {
 
 	// Private Data Members
 	private Portal wrappedPortal;
@@ -37,7 +42,27 @@ public class PortalHookImpl extends PortalWrapper {
 		wrappedPortal = portal;
 	}
 
-	@Override
+	public Object invoke(Object proxy, Method method, Object[] arguments) throws Throwable {
+
+		Object returnValue = null;
+
+		try {
+
+			if (method.getName().equals("getCreateAccountURL")) {
+				returnValue = getCreateAccountURL((HttpServletRequest) arguments[0], (ThemeDisplay) arguments[1]);
+			}
+			else {
+				returnValue = method.invoke(getWrapped(), arguments);
+			}
+
+		}
+		catch (InvocationTargetException ite) {
+			throw ite.getTargetException();
+		}
+
+		return returnValue;
+	}
+
 	public String getCreateAccountURL(HttpServletRequest request, ThemeDisplay themeDisplay) throws Exception {
 
 		String portletName = "1_WAR_jsf2registrationportlet";
@@ -53,7 +78,6 @@ public class PortalHookImpl extends PortalWrapper {
 		return urlCreateAccount.toString();
 	}
 
-	@Override
 	public Portal getWrapped() {
 		return wrappedPortal;
 	}
