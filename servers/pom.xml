@@ -20,6 +20,12 @@
 				<module>weblogic</module>
 			</modules>
 		</profile>
+		<profile>
+			<id>jetty</id>
+			<modules>
+				<module>jetty</module>
+			</modules>
+		</profile>
 	</profiles>
 
 	<build>
