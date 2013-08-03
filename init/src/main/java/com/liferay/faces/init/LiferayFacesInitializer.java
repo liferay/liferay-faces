@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.servers.jetty;
+package com.liferay.faces.init;
 
 import java.util.EventListener;
 import java.util.Set;
@@ -24,38 +24,43 @@ import javax.servlet.ServletException;
 
 
 /**
- * This class helps provide a workaround for <a href="http://issues.liferay.com/browse/FACES-1668">FACES-1668</a> by
- * enabling zero-config registration of the Mojarra {{com.sun.faces.config.ConfigureListener}} or MyFaces
- * {{org.apache.myfaces.webapp.StartupServletContextListener}} servlet context listeners on Jetty.
+ * This class enables zero-config registration of the Mojarra {@link com.sun.faces.config.ConfigureListener} or the
+ * MyFaces {@link org.apache.myfaces.webapp.StartupServletContextListener}. This is necessary when the servlet container
+ * does not have the ability to discover these servlet context listeners via TLD scanning and the developer does not
+ * want to specify them as listeners in the WEB-INF/web.xml descriptor.
  *
  * @author  Neil Griffin
  */
-public class JettyFacesInitializer implements ServletContainerInitializer {
+public class LiferayFacesInitializer implements ServletContainerInitializer {
 
 	// Logger
-	private static final Logger logger = Logger.getLogger(JettyFacesInitializer.class.getName());
+	private static final Logger logger = Logger.getLogger(LiferayFacesInitializer.class.getName());
+
+	// Private Constants
+	private static final String MOJARRA_CONFIGURE_LISTENER = "com.sun.faces.config.ConfigureListener";
+	private static final String MYFACES_STARTUP_LISTENER = "org.apache.myfaces.webapp.StartupServletContextListener";
 
 	@SuppressWarnings("unchecked")
 	public void onStartup(Set<Class<?>> classes, ServletContext servletContext) throws ServletException {
 
 		try {
 			Class<EventListener> mojarraConfigureListener = (Class<EventListener>) Class.forName(
-					"com.sun.faces.config.ConfigureListener");
+					MOJARRA_CONFIGURE_LISTENER);
 			servletContext.addListener(mojarraConfigureListener);
-			logger.log(Level.INFO, "Automatically registered Mojarra ConfigureListener on Jetty");
+			logger.log(Level.INFO, "Registered Mojarra " + MOJARRA_CONFIGURE_LISTENER);
 		}
 		catch (ClassNotFoundException e1) {
 
 			try {
 				Class<EventListener> myFacesStartupListener = (Class<EventListener>) Class.forName(
-						"org.apache.myfaces.webapp.StartupServletContextListener");
+						MYFACES_STARTUP_LISTENER);
 				servletContext.addListener(myFacesStartupListener);
-				logger.log(Level.INFO, "Automatically registered MyFaces ConfigureListener on Jetty");
+				logger.log(Level.INFO, "Registered MyFaces " + MYFACES_STARTUP_LISTENER);
 			}
 			catch (ClassNotFoundException e2) {
 
 				logger.log(Level.SEVERE,
-					"Unable to find Mojarra or MyFaces servlet context listeners for zero-config startup on Jetty");
+					"Unable to find Mojarra or MyFaces servlet context listeners for zero-config startup");
 			}
 		}
 
