@@ -93,7 +93,6 @@
 		<faces.group.id>com.sun.faces</faces.group.id>
 		<faces.api.artifact.id>jsf-api</faces.api.artifact.id>
 		<faces.impl.artifact.id>jsf-impl</faces.impl.artifact.id>
-		<faces.impl.startup.listener>com.sun.faces.config.ConfigureListener</faces.impl.startup.listener>
 		<faces.version>${mojarra.version}</faces.version>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces3.version>3.3.0</icefaces3.version>
@@ -469,7 +468,6 @@
 				<faces.group.id>org.apache.myfaces.core</faces.group.id>
 				<faces.api.artifact.id>myfaces-api</faces.api.artifact.id>
 				<faces.impl.artifact.id>myfaces-impl</faces.impl.artifact.id>
-				<faces.impl.startup.listener>org.apache.myfaces.webapp.StartupServletContextListener</faces.impl.startup.listener>
 				<faces.version>${myfaces.version}</faces.version>
 			</properties>
 		</profile>
