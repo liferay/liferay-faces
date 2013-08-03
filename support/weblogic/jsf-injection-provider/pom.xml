@@ -2,8 +2,8 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.liferay.faces.servers</groupId>
-		<artifactId>liferay-faces-servers-weblogic</artifactId>
+		<groupId>com.liferay.faces.support</groupId>
+		<artifactId>liferay-faces-support-weblogic</artifactId>
 		<version>3.0.3-legacy-ga4-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>

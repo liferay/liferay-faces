@@ -77,7 +77,7 @@
 		<module>portal</module>
 		<module>demos</module>
 		<module>issues</module>
-		<module>servers</module>
+		<module>support</module>
 		<module>test</module>
 		<module>doc</module>
 	</modules>
