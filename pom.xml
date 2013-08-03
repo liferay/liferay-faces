@@ -91,6 +91,7 @@
 		<codename>Rome</codename>
 		<faces.group.id>com.sun.faces</faces.group.id>
 		<faces.api.artifact.id>jsf-api</faces.api.artifact.id>
+		<faces.api.version>2.1</faces.api.version>
 		<faces.impl.artifact.id>jsf-impl</faces.impl.artifact.id>
 		<faces.version>${mojarra.version}</faces.version>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
@@ -659,7 +660,7 @@
 			<dependency>
 				<groupId>javax.faces</groupId>
 				<artifactId>javax.faces-api</artifactId>
-				<version>2.1</version>
+				<version>${faces.api.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
