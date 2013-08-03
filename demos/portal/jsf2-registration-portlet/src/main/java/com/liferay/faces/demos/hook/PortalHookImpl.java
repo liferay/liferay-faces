@@ -32,8 +32,11 @@ import com.liferay.portlet.PortletURLFactoryUtil;
  */
 public class PortalHookImpl extends PortalWrapper {
 
+	// Private Data Members
+	private Portal wrappedPortal;
+
 	public PortalHookImpl(Portal portal) {
-		super(portal);
+		wrappedPortal = portal;
 	}
 
 	@Override
@@ -66,6 +69,11 @@ public class PortalHookImpl extends PortalWrapper {
 		urlCreateAccount.setParameter("struts_action", "/login/create_account");
 
 		return urlCreateAccount.toString();
+	}
+
+	@Override
+	public Portal getWrapped() {
+		return wrappedPortal;
 	}
 
 }
