@@ -95,6 +95,7 @@
 		<faces.version>${mojarra.version}</faces.version>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces1.version>1.8.2</icefaces1.version>
+		<jstl.version>1.2</jstl.version>
 		<liferay.version>6.1.1</liferay.version>
 		<liferay.app.server.deploy.dir>${liferay.app.server.dir}/webapps</liferay.app.server.deploy.dir>
 		<liferay.app.server.dir>${liferay.home}/tomcat-${liferay.tomcat.version}</liferay.app.server.dir>
@@ -655,7 +656,7 @@
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>jstl</artifactId>
-				<version>1.2</version>
+				<version>${jstl.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.servlet</groupId>
