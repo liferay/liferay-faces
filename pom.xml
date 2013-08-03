@@ -70,6 +70,7 @@
 	</scm>
 
 	<modules>
+		<module>init</module>
 		<module>util</module>
 		<!-- TODO: <module>maven</module> -->
 		<module>alloy</module>
