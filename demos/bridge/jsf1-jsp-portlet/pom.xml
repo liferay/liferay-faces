@@ -11,20 +11,6 @@
 	<packaging>war</packaging>
 	<name>JSF1 JSP Portlet</name>
 
-	<profiles>
-		<profile>
-			<id>weblogic</id>
-			<dependencies>
-				<!-- FACES-1595: For JSP, the jsf-impl.jar artifact must appear in both the global classpath and WEB-INF/lib -->
-				<dependency>
-					<groupId>${faces.group.id}</groupId>
-					<artifactId>${faces.impl.artifact.id}</artifactId>
-					<scope>compile</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.liferay.faces</groupId>
