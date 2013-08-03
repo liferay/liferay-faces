@@ -3,14 +3,14 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.liferay.faces.support</groupId>
-		<artifactId>liferay-faces-support-jetty</artifactId>
+		<groupId>com.liferay.faces</groupId>
+		<artifactId>liferay-faces</artifactId>
 		<version>3.0.3-ga4-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>liferay-faces-jetty</artifactId>
-	<name>Liferay Faces Jetty</name>
+	<artifactId>liferay-faces-init</artifactId>
+	<name>Liferay Faces Init</name>
 
 	<dependencies>
 		<!-- ServletContainerInitializer requires the Servlet 3.0 API -->
