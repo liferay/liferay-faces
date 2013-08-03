@@ -63,7 +63,10 @@ public class AS7LeakViewScopeInjectedBeanInnerClass implements Serializable {
 		this.foo = foo;
 	}
 
-	protected class AS7LeakAttribute extends NameValuePair<Object, Object> {
+	protected class AS7LeakAttribute extends NameValuePair<Object, Object> implements Serializable {
+
+		// serialVersionUID
+		private static final long serialVersionUID = 6818500149051763226L;
 
 		public AS7LeakAttribute(Object name, Object value) {
 			super(name, value);
