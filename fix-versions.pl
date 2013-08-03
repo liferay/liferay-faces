@@ -44,7 +44,7 @@ use POSIX qw(strftime);
 #
 my($liferayFacesVersion,$liferayFacesVersionShort,$major1,$major2,$minor);
 my($portalVersion,$portalVersions,$portalDtdDisplay,$portalDtdUrl,$bookVersion);
-my($mojarraVersion,$facesVersion,$facesVersionURL,$facesMajor1,$facesMajor2,$mojarraMinor);
+my($facesVersion,$facesVersionURL,$facesMajor,$facesMinor);
 my $year= strftime "%Y", localtime;
 
 #
@@ -92,19 +92,17 @@ while(<POM>) {
 
 	}
     
-    if(/mojarra.version>/) {
+    if(/faces.api.version>/) {
         
         /version>(.*)</;
-        $mojarraVersion = $1;
-        print "mojarraVersion = $mojarraVersion\n";
-        
-        $_ = $mojarraVersion;
-        
-        ($facesMajor1,$facesMajor2,$mojarraMinor) = split /[._]/;
-        $facesVersion = "${facesMajor1}.${facesMajor2}";
+        $facesVersion = $1;
         print "facesVersion = $facesVersion\n";
         
-        $facesVersionURL = "${facesMajor1}_${facesMajor2}";
+        $_ = $facesVersion;
+        
+        ($facesMajor,$facesMinor) = split /[._]/;
+        
+        $facesVersionURL = "${facesMajor}_${facesMinor}";
         print "facesVersionURL = $facesVersionURL\n";
 
 	}
