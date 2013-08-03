@@ -3,15 +3,15 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.liferay.faces.servers</groupId>
-		<artifactId>liferay-faces-servers</artifactId>
+		<groupId>com.liferay.faces.support</groupId>
+		<artifactId>liferay-faces-support</artifactId>
 		<version>4.1.0-ga1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>liferay-faces-servers-weblogic</artifactId>
+	<artifactId>liferay-faces-support-weblogic</artifactId>
 	<packaging>pom</packaging>
-	<name>Liferay Faces Servers WebLogic</name>
+	<name>Liferay Faces Support WebLogic</name>
 
 	<modules>
 		<module>jsf-injection-provider</module>

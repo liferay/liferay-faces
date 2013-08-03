@@ -8,10 +8,10 @@
 		<version>4.1.0-ga1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<groupId>com.liferay.faces.servers</groupId>
-	<artifactId>liferay-faces-servers</artifactId>
+	<groupId>com.liferay.faces.support</groupId>
+	<artifactId>liferay-faces-support</artifactId>
 	<packaging>pom</packaging>
-	<name>Liferay Faces Servers</name>
+	<name>Liferay Faces Support</name>
 
 	<profiles>
 		<profile>
