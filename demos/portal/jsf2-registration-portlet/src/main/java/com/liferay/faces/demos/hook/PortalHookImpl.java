@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.demos.hook;
 
+import java.lang.reflect.Method;
+
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
@@ -38,7 +40,23 @@ public class PortalHookImpl extends PortalWrapper {
 	}
 
 	@Override
-	public String getCreateAccountURL(HttpServletRequest request, ThemeDisplay themeDisplay) throws Exception {
+	public Object invoke(Object proxy, Method method, Object[] arguments) throws Throwable {
+
+		Object returnValue = null;
+
+		if (method.getName().equals("getCreateAccountURL")) {
+			HttpServletRequest httpServletRequest = (HttpServletRequest) arguments[0];
+			ThemeDisplay themeDisplay = (ThemeDisplay) arguments[1];
+			returnValue = getCreateAccountURL(httpServletRequest, themeDisplay);
+		}
+		else {
+			returnValue = super.invoke(proxy, method, arguments);
+		}
+
+		return returnValue;
+	}
+
+	protected String getCreateAccountURL(HttpServletRequest request, ThemeDisplay themeDisplay) throws Exception {
 
 		String portletName = "1_WAR_jsf2registrationportlet";
 		PortletURL urlCreateAccount = PortletURLFactoryUtil.create(request, portletName, themeDisplay.getPlid(),
