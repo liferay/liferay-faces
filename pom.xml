@@ -70,6 +70,7 @@
 	</scm>
 
 	<modules>
+		<module>init</module>
 		<module>util</module>
 		<module>alloy</module>
 		<module>bridge-api</module>
