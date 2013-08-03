@@ -91,6 +91,7 @@
 		<codename>Athens</codename>
 		<faces.group.id>javax.faces</faces.group.id>
 		<faces.api.artifact.id>jsf-api</faces.api.artifact.id>
+		<faces.api.version>1.2</faces.api.version>
 		<faces.impl.artifact.id>jsf-impl</faces.impl.artifact.id>
 		<faces.version>${mojarra.version}</faces.version>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
@@ -629,7 +630,7 @@
 			<dependency>
 				<groupId>javax.faces</groupId>
 				<artifactId>jsf-api</artifactId>
-				<version>${mojarra.version}</version>
+				<version>${faces.api.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.faces</groupId>
