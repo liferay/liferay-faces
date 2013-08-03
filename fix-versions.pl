@@ -59,16 +59,16 @@ while(<POM>) {
 		/<version>(.*)</;
 		$liferayFacesVersion = $1;
 		print "liferayFacesVersion = $liferayFacesVersion\n";
-
-        $_ = $liferayFacesVersion;
-        s/-ga4-SNAPSHOT//;
-        $liferayFacesVersionShort = $_;
-        print "liferayFacesVersionShort = $liferayFacesVersionShort\n";
         
 		$_ = $liferayFacesVersion;
 		s/-SNAPSHOT//;
 		$bookVersion = $_;
 		print "bookVersion = $bookVersion\n";
+
+        $_ = $bookVersion;
+        s/-(.*)//;
+        $liferayFacesVersionShort = $_;
+        print "liferayFacesVersionShort = $liferayFacesVersionShort\n";
 
 	}
 
