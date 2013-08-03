@@ -84,11 +84,11 @@
 					<version>${faces.version}</version>
 					<scope>provided</scope>
 				</dependency>
-				<!-- FACES-1595: For JSP, the jsf-impl.jar artifact must appear in both the global classpath and WEB-INF/lib -->
 				<dependency>
 					<groupId>${faces.group.id}</groupId>
 					<artifactId>${faces.impl.artifact.id}</artifactId>
-					<scope>compile</scope>
+					<version>${faces.version}</version>
+					<scope>provided</scope>
 				</dependency>
 				<dependency>
 					<groupId>xerces</groupId>
