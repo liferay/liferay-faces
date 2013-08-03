@@ -416,6 +416,7 @@
 										</delete>
 										<delete failonerror="false" includeemptydirs="true" verbose="true">
 											<fileset dir="${liferay.deploy.dir}" includes="${project.artifactId}*.war" />
+											<fileset dir="${liferay.deploy.dir}/${project.artifactId}.war" />
 											<fileset dir="${liferay.deploy.dir}/${project.artifactId}" />
 											<fileset dir="${liferay.deploy.dir}/${project.artifactId}-${project.version}" />
 											<fileset dir="${liferay.deploy.dir}">
@@ -896,4 +897,3 @@
 	</reporting>
 
 </project>
-
