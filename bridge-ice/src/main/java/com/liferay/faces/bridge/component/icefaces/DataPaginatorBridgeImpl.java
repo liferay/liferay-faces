@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.bridge.component.icefaces;
 
-import java.lang.reflect.Method;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -35,7 +35,10 @@ import com.liferay.faces.util.logging.LoggerFactory;
  *
  * @author  Neil Griffin
  */
-public class DataPaginatorBridgeImpl extends DataPaginatorWrapper {
+public class DataPaginatorBridgeImpl extends DataPaginatorWrapper implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 2792168719410424941L;
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(DataPaginatorBridgeImpl.class);
@@ -44,8 +47,6 @@ public class DataPaginatorBridgeImpl extends DataPaginatorWrapper {
 	private static final String ATTR_NAME_FOR = "for";
 	private static final String DATA_PAGINATOR_GROUP_FQCN =
 		"com.icesoft.faces.component.datapaginator.DataPaginatorGroup";
-	private static final String METHOD_NAME_GET_UIDATA = "getUIData";
-	private static final String METHOD_NAME_SET_UIDATA = "setUIData";
 
 	// Private Data Members
 	private Object wrappedDataPaginator;
@@ -165,25 +166,7 @@ public class DataPaginatorBridgeImpl extends DataPaginatorWrapper {
 	}
 
 	@Override
-	public UIData getUIData() throws Exception {
-
-		UIData uiData = null;
-
-		Method method = getWrapped().getClass().getMethod(METHOD_NAME_GET_UIDATA, new Class[] {});
-		uiData = (UIData) method.invoke(getWrapped(), (Object[]) null);
-
-		return uiData;
-	}
-
-	@Override
-	public void setUIData(UIData uiData) throws Exception {
-		Method method = getWrapped().getClass().getMethod(METHOD_NAME_SET_UIDATA, new Class[] { UIData.class });
-		method.invoke(getWrapped(), uiData);
-	}
-
-	@Override
 	public Object getWrapped() {
 		return wrappedDataPaginator;
 	}
-
 }
