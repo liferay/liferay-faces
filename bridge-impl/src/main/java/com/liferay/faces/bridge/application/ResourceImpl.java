@@ -82,7 +82,6 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 
 	// Private Data Members
 	private Long lastModifiedInSeconds;
-	private PortletContainer portletContainer;
 	private Resource wrappedResource;
 
 	/**
@@ -91,14 +90,8 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 	public ResourceImpl() {
 	}
 
-	public ResourceImpl(Resource wrappedResource, BridgeContext bridgeContext) {
+	public ResourceImpl(Resource wrappedResource) {
 		this.wrappedResource = wrappedResource;
-
-		// RichFaces has it's own ResourceServlet that is invoked outside of the portlet lifecycle. When this happens,
-		// the BridgeContext will be null.
-		if (bridgeContext != null) {
-			this.portletContainer = bridgeContext.getPortletContainer();
-		}
 	}
 
 	/**
@@ -210,6 +203,11 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 						}
 					}
 					else {
+
+						// FACES-1496: Need to get the BridgeContext from the ThreadLocal in order to prevent memory
+						// leaks with Mojarra.
+						BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+						PortletContainer portletContainer = bridgeContext.getPortletContainer();
 						long ifModifiedHeaderInMilliSeconds = portletContainer.getHttpServletRequestDateHeader(
 								HEADER_IF_MODIFIED_SINCE);
 						ifModifiedHeaderInSeconds = (long) (ifModifiedHeaderInMilliSeconds / 1000);
