@@ -18,7 +18,7 @@ import javax.faces.application.ResourceWrapper;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.util.application.ResourceHandlerWrapperBase;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -27,6 +27,8 @@ import com.liferay.faces.util.lang.StringPool;
  */
 public class ResourceRichFacesImpl extends ResourceWrapper {
 
+	// Public Constants
+	public static final String ORG_RICHFACES = "org.richfaces";
 	public static final String RICHFACES_PATH_TOKEN = "/rfRes/";
 
 	// Private Data Members
@@ -61,7 +63,7 @@ public class ResourceRichFacesImpl extends ResourceWrapper {
 				ExternalContext externalContext = facesContext.getExternalContext();
 				StringBuilder buf = new StringBuilder();
 				buf.append(StringPool.FORWARD_SLASH);
-				buf.append(BridgeConstants.JAVAX_FACES_RESOURCE);
+				buf.append(ResourceHandlerWrapperBase.JAVAX_FACES_RESOURCE);
 				buf.append(StringPool.FORWARD_SLASH);
 				buf.append(requestPath.substring(pos + RICHFACES_PATH_TOKEN.length()));
 				requestPath = externalContext.encodeResourceURL(buf.toString());
