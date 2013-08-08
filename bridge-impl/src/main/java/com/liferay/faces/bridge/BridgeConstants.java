@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.bridge;
 
-import com.liferay.faces.util.application.ResourceHandlerWrapperBase;
+import com.liferay.faces.util.application.ResourceConstants;
 
 
 /**
@@ -39,15 +39,15 @@ public class BridgeConstants {
 	public static final String SRC = "src";
 
 	/**
-	 * @deprecated  Replaced by {@link ResourceHandlerWrapperBase#JAVAX_FACES_RESOURCE}
+	 * @deprecated  Replaced by {@link ResourceConstants#JAVAX_FACES_RESOURCE}
 	 */
 	@Deprecated
-	public static final String JAVAX_FACES_RESOURCE = ResourceHandlerWrapperBase.JAVAX_FACES_RESOURCE;
+	public static final String JAVAX_FACES_RESOURCE = ResourceConstants.JAVAX_FACES_RESOURCE;
 
 	/**
-	 * @deprecated  Replaced by {@link ResourceHandlerWrapperBase#LN}
+	 * @deprecated  Replaced by {@link ResourceConstants#LN}
 	 */
 	@Deprecated
-	public static final String LN = ResourceHandlerWrapperBase.LN;
+	public static final String LN = ResourceConstants.LN;
 
 }
