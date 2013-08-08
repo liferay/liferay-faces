@@ -21,6 +21,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.bridge.application.ResourceHandlerBridgeImpl;
+import com.liferay.faces.util.application.ResourceConstants;
 
 
 /**
@@ -56,8 +57,8 @@ public class CustomerResourceHandler extends ResourceHandlerBridgeImpl {
 	public void handleResourceRequest(FacesContext facesContext) throws IOException {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
-		String libraryName = externalContext.getRequestParameterMap().get(LN);
-		String resourceName = externalContext.getRequestParameterMap().get(JAVAX_FACES_RESOURCE);
+		String libraryName = externalContext.getRequestParameterMap().get(ResourceConstants.LN);
+		String resourceName = externalContext.getRequestParameterMap().get(ResourceConstants.JAVAX_FACES_RESOURCE);
 
 		if (LIBRARY_NAME.equals(libraryName) && CustomerExportResource.RESOURCE_NAME.equals(resourceName)) {
 
