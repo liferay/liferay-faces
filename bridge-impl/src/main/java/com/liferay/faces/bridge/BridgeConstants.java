@@ -13,6 +13,9 @@
  */
 package com.liferay.faces.bridge;
 
+import com.liferay.faces.util.application.ResourceHandlerWrapperBase;
+
+
 /**
  * @author  Neil Griffin
  */
@@ -32,8 +35,19 @@ public class BridgeConstants {
 	public static final String WSRP_REWRITE = "wsrp_rewrite";
 
 	// Miscellaneous Constants
-	public static final String JAVAX_FACES_RESOURCE = "javax.faces.resource";
-	public static final String LN = "ln";
 	public static final String MULTIPART_CONTENT_TYPE_PREFIX = "multipart/";
 	public static final String SRC = "src";
+
+	/**
+	 * @deprecated  Replaced by {@link ResourceHandlerWrapperBase#JAVAX_FACES_RESOURCE}
+	 */
+	@Deprecated
+	public static final String JAVAX_FACES_RESOURCE = ResourceHandlerWrapperBase.JAVAX_FACES_RESOURCE;
+
+	/**
+	 * @deprecated  Replaced by {@link ResourceHandlerWrapperBase#LN}
+	 */
+	@Deprecated
+	public static final String LN = ResourceHandlerWrapperBase.LN;
+
 }
