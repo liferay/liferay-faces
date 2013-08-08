@@ -31,13 +31,13 @@ import javax.faces.application.ResourceHandler;
 import javax.faces.application.ResourceWrapper;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
 import com.liferay.faces.bridge.config.ServletMapping;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.application.ResourceHandlerWrapperBase;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -299,7 +299,7 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 							// Note: Both Mojarra and MyFaces construct a requestPath that looks something like
 							// "/javax.faces.resource/jsf.js.faces?ln=javax.faces" and so we look for the ".faces?ln" as
 							// an indicator that ".faces" needs to be removed from the requestPath.
-							String token = extension + StringPool.QUESTION + BridgeConstants.LN;
+							String token = extension + StringPool.QUESTION + ResourceHandlerWrapperBase.LN;
 							int pos = wrappedRequestPath.indexOf(token);
 
 							// If the servlet-mapping extension is found, then remove it since this is an implicit
@@ -335,7 +335,7 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 			}
 
 			// If the wrapped request path ends with "org.richfaces" then
-			if (wrappedRequestPath.endsWith(ResourceHandlerInnerImpl.ORG_RICHFACES)) {
+			if (wrappedRequestPath.endsWith(ResourceRichFacesImpl.ORG_RICHFACES)) {
 
 				// Check to see if the resource physically exists in the META-INF/resources/org.richfaces folder of the
 				// RichFaces JAR. If it does, then this qualifies as a special case in which the
