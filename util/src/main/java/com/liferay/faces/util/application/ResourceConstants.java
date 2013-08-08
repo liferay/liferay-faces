@@ -14,15 +14,10 @@
 package com.liferay.faces.util.application;
 
 /**
- * This class is a backport from JSF 2.x related branches. The only relevant code for backporting purposes are
- * constants.
- *
  * @author  Neil Griffin
  */
-public class ResourceHandlerWrapperBase {
+public class ResourceConstants {
 
-	// Public Constants
-	public static final int DEFAULT_BUFFER_SIZE = 1024;
 	public static final String JAVAX_FACES_RESOURCE = "javax.faces.resource";
 	public static final String LN = "ln";
 }

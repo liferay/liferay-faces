@@ -46,7 +46,7 @@ import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.util.RequestParameter;
-import com.liferay.faces.util.application.ResourceHandlerWrapperBase;
+import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -215,7 +215,7 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 				resourceURL = createResourceURL(mimeResponse);
 
 				// If the "javax.faces.resource" token is found in the URL, then
-				int tokenPos = fromURL.indexOf(ResourceHandlerWrapperBase.JAVAX_FACES_RESOURCE);
+				int tokenPos = fromURL.indexOf(ResourceConstants.JAVAX_FACES_RESOURCE);
 
 				if (tokenPos >= 0) {
 
@@ -238,12 +238,12 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 					}
 					else {
 						logger.error("There is no slash after the [{0}] token in resourceURL=[{1}]",
-							ResourceHandlerWrapperBase.JAVAX_FACES_RESOURCE, fromURL);
+							ResourceConstants.JAVAX_FACES_RESOURCE, fromURL);
 					}
 
-					resourceURL.setParameter(ResourceHandlerWrapperBase.JAVAX_FACES_RESOURCE, resourceName);
+					resourceURL.setParameter(ResourceConstants.JAVAX_FACES_RESOURCE, resourceName);
 					logger.debug("Added parameter to portletURL name=[{0}] value=[{1}]",
-						ResourceHandlerWrapperBase.JAVAX_FACES_RESOURCE, resourceName);
+						ResourceConstants.JAVAX_FACES_RESOURCE, resourceName);
 				}
 
 				// Copy the request parameters to the portlet resource URL.
