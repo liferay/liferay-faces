@@ -10,6 +10,11 @@
 
 In addition, there are a variety of portlet [demos](http://www.liferay.com/community/liferay-projects/liferay-faces/demos) available. 
 
+### Documentation
+
+* [Official Documentation](http://www.liferay.com/community/liferay-projects/liferay-faces/documentation)
+* [Liferay Faces Wiki](http://www.liferay.com/community/wiki/-/wiki/Main/Liferay+Faces)
+
 ### Community Participation
 
 If you have questions about JSF portlets or Liferay Faces, please post a question in the [Liferay Faces Forum](http://www.liferay.com/community/forums/-/message_boards/category/13289027). Defects and feature requests can be posted in the [Liferay Faces Issue Tracker](http://issues.liferay.com/browse/FACES).
