@@ -14,4 +14,7 @@
 		<wls:optimistic-serialization>true</wls:optimistic-serialization>
 		<wls:show-archived-real-path-enabled>true</wls:show-archived-real-path-enabled>
 	</wls:container-descriptor>
+	<wls:library-ref>
+		<wls:library-name>jsf</wls:library-name>
+	</wls:library-ref>
 </wls:weblogic-web-app>
