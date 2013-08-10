@@ -428,6 +428,9 @@
 		</profile>
 		<profile>
 			<id>liferay</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<build>
 				<plugins>
 					<plugin>
@@ -616,6 +619,12 @@
 				<app.server.type>resin</app.server.type>
 				<liferay.app.server.dir>${liferay.home}/resin-${liferay.resin.version}</liferay.app.server.dir>
 			</properties>
+		</profile>
+		<profile>
+			<id>tomcat</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 		</profile>
 		<profile>
 			<id>weblogic</id>
