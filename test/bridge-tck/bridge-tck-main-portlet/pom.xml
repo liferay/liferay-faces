@@ -28,13 +28,20 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>${faces.group.id}</groupId>
+			<artifactId>${faces.api.artifact.id}</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>${faces.group.id}</groupId>
+			<artifactId>${faces.impl.artifact.id}</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>javax.portlet</groupId>
 			<artifactId>portlet-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>${log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.myfaces.trinidad</groupId>
