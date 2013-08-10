@@ -215,13 +215,13 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 			// Replace the ResponseWriter in the FacesContext with a HeadResponseWriter that knows how to write to
 			// the <head>...</head> section of the rendered portal page.
 			HeadResponseWriter headResponseWriter = (HeadResponseWriter) portletRequest.getAttribute(
-					"headResponseWriter");
+					HeadResponseWriter.class.getName());
 
 			if (headResponseWriter == null) {
 				headResponseWriter = (HeadResponseWriter) portletContainer.getHeadResponseWriter(responseWriterBackup);
 			}
 
-			portletRequest.setAttribute("headResponseWriter", headResponseWriter);
+			portletRequest.setAttribute(HeadResponseWriter.class.getName(), headResponseWriter);
 			facesContext.setResponseWriter(headResponseWriter);
 
 			// For each resource:
