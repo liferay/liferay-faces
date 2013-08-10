@@ -540,13 +540,6 @@
 		</profile>
 		<profile>
 			<id>myfaces</id>
-			<!-- Activate by adding -Dfaces-impl=myfaces -->
-			<activation>
-				<property>
-					<name>faces-impl</name>
-					<value>myfaces</value>
-				</property>
-			</activation>
 			<properties>
 				<faces.group.id>org.apache.myfaces.core</faces.group.id>
 				<faces.api.artifact.id>myfaces-api</faces.api.artifact.id>
