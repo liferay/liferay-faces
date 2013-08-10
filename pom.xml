@@ -129,6 +129,7 @@
 		<pluto.tomcat.dir>${pluto.home}/tomcat-${pluto.tomcat.version}</pluto.tomcat.dir>
 		<pluto.tomcat.version>7.0.21</pluto.tomcat.version>
 		<pluto.version>2.0.3</pluto.version>
+		<portal.type>liferay</portal.type>
 		<primefaces3.version>3.5</primefaces3.version>
 		<richfaces4.version>4.3.2.Final</richfaces4.version>
 		<selenium.version>2.31.0</selenium.version>
@@ -373,6 +374,7 @@
 								<configuration>
 									<target>
 										<touch file="target/${app.server.type}-portlet-war-activation.tmp" />
+										<touch file="target/${portal.type}-portlet-war-activation.tmp" />
 									</target>
 								</configuration>
 							</execution>
@@ -551,6 +553,7 @@
 		<profile>
 			<id>pluto</id>
 			<properties>
+				<portal.type>pluto</portal.type>
 				<war.packaging.excludes>
 					WEB-INF/glassfish-*.xml,
 					WEB-INF/ibm-*.xml,
@@ -561,6 +564,14 @@
 					WEB-INF/weblogic.xml
 				</war.packaging.excludes>
 			</properties>
+		</profile>
+		<profile>
+			<id>pluto-portlet-war</id>
+			<activation>
+				<file>
+					<exists>target/pluto-portlet-war-activation.tmp</exists>
+				</file>
+			</activation>
 			<build>
 				<plugins>
 					<plugin>
