@@ -134,6 +134,14 @@
 		<surefire.version>2.12</surefire.version>
 		<tck.version>jsr329-1.0.1-liferay</tck.version>
 		<tck.trinidad.version>2.0.1</tck.trinidad.version>
+		<war.packaging.excludes>
+			WEB-INF/glassfish-*.xml,
+			WEB-INF/ibm-*.xml,
+			WEB-INF/jboss-*.xml,
+			WEB-INF/sun-*.xml,
+			WEB-INF/web-*.xml,
+			WEB-INF/weblogic.xml
+		</war.packaging.excludes>
 		<webapp.descriptor>web.xml</webapp.descriptor>
 		<weblogic.jaxb.version>2.2.7</weblogic.jaxb.version>
 		<weblogic.xerces.version>2.11.0</weblogic.xerces.version>
@@ -206,7 +214,7 @@
 						</archive>
 						<dependentWarExcludes>WEB-INF/lib/*</dependentWarExcludes>
 						<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
-						<packagingExcludes>WEB-INF/web-*.xml</packagingExcludes>
+						<packagingExcludes>${war.packaging.excludes}</packagingExcludes>
 						<webXml>${basedir}/src/main/webapp/WEB-INF/${webapp.descriptor}</webXml>
 					</configuration>
 				</plugin>
@@ -364,6 +372,12 @@
 				<app.server.type>glassfish</app.server.type>
 				<liferay.app.server.dir>${liferay.home}/glassfish-${liferay.glassfish.version}</liferay.app.server.dir>
 				<liferay.deploy.dir>${liferay.app.server.dir}/domains/domain1/autodeploy</liferay.deploy.dir>
+				<war.packaging.excludes>
+					WEB-INF/ibm-*.xml,
+					WEB-INF/jboss-*.xml,
+					WEB-INF/web-*.xml,
+					WEB-INF/weblogic.xml
+				</war.packaging.excludes>
 			</properties>
 		</profile>
 		<profile>
@@ -372,6 +386,13 @@
 				<app.server.type>jboss</app.server.type>
 				<liferay.app.server.dir>${liferay.home}/jboss-${liferay.jboss.version}</liferay.app.server.dir>
 				<liferay.deploy.dir>${liferay.app.server.dir}/standalone/deployments</liferay.deploy.dir>
+				<war.packaging.excludes>
+					WEB-INF/glassfish-*.xml,
+					WEB-INF/ibm-*.xml,
+					WEB-INF/sun-*.xml,
+					WEB-INF/web-*.xml,
+					WEB-INF/weblogic.xml
+				</war.packaging.excludes>
 			</properties>
 		</profile>
 		<profile>
@@ -461,6 +482,17 @@
 		</profile>
 		<profile>
 			<id>pluto</id>
+			<properties>
+				<war.packaging.excludes>
+					WEB-INF/glassfish-*.xml,
+					WEB-INF/ibm-*.xml,
+					WEB-INF/jboss-*.xml,
+					WEB-INF/liferay-*.*,
+					WEB-INF/sun-*.xml,
+					WEB-INF/web-*.xml,
+					WEB-INF/weblogic.xml
+				</war.packaging.excludes>
+			</properties>
 			<build>
 				<plugins>
 					<plugin>
@@ -575,6 +607,13 @@
 				<app.server.type>weblogic</app.server.type>
 				<liferay.app.server.dir>${liferay.home}/weblogic-${liferay.weblogic.version}</liferay.app.server.dir>
 				<liferay.deploy.dir>${liferay.app.server.dir}/autodeploy</liferay.deploy.dir>
+				<war.packaging.excludes>
+					WEB-INF/glassfish-*.xml,
+					WEB-INF/ibm-*.xml,
+					WEB-INF/jboss-*.xml,
+					WEB-INF/sun-*.xml,
+					WEB-INF/web-*.xml
+				</war.packaging.excludes>
 			</properties>
 		</profile>
 		<profile>
@@ -582,6 +621,13 @@
 			<properties>
 				<app.server.type>websphere</app.server.type>
 				<liferay.app.server.dir>${liferay.home}/websphere-${liferay.websphere.version}</liferay.app.server.dir>
+				<war.packaging.excludes>
+					WEB-INF/glassfish-*.xml,
+					WEB-INF/jboss-*.xml,
+					WEB-INF/sun-*.xml,
+					WEB-INF/web-*.xml,
+					WEB-INF/weblogic.xml
+				</war.packaging.excludes>
 			</properties>
 		</profile>
 	</profiles>
