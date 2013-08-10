@@ -177,12 +177,10 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 		}
 		else if (isNamespaceMatch(attributeName, EXCLUDED_NAMESPACE_JAVAX_PORTLET_FACES)) {
 
-			if (!Bridge.PORTLET_LIFECYCLE_PHASE.equals(attributeName) &&
-					!BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE.equals(attributeName)) {
+			if (!Bridge.PORTLET_LIFECYCLE_PHASE.equals(attributeName)) {
 
 				// The "javax.portlet.faces.phase" request attribute must never be excluded, as it is required by {@link
-				// BridgeUtil#getPortletRequestPhase()}. And although the "javax.portlet.faces.bridgeContext" is
-				// deprecated, it must not be removed either.
+				// BridgeUtil#getPortletRequestPhase()}.
 				excluded = true;
 			}
 		}
