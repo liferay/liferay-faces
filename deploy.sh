@@ -74,7 +74,7 @@
 
 LIFERAY_FACES_VERSION=`pwd | sed -e 's/^.*liferay-faces-//g' | sed -e 's/\/.*$//g'`
 REBUILD="false"
-FACES_IMPL=""
+FACES_IMPL="mojarra"
 PORTAL_PROFILE_NAME="liferay"
 SERVER_PROFILE_NAME="tomcat"
 EXTRA_PROFILE_NAMES=""
@@ -121,7 +121,7 @@ until [ -z $1 ] ; do
 	fi
 	shift
 done
-PORTLET_MVN_CMD="mvn -Dfaces-impl=$FACES_IMPL -P $PORTAL_PROFILE_NAME,$SERVER_PROFILE_NAME,$EXTRA_PROFILE_NAMES help:active-profiles clean install"
+PORTLET_MVN_CMD="mvn -P $PORTAL_PROFILE_NAME,$FACES_IMPL,$SERVER_PROFILE_NAME,$EXTRA_PROFILE_NAMES help:active-profiles clean install"
 if [ "$PORTAL_PROFILE_NAME" = "liferay" ] ; then
 	if [ "$LIFERAY_FACES_VERSION" = "3.0.x-legacy" ] ; then
 		# liferay-maven-plugin not supported for Liferay 5.2.x
