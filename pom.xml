@@ -91,8 +91,10 @@
 		<codename>Corinth</codename>
 		<faces.group.id>com.sun.faces</faces.group.id>
 		<faces.api.artifact.id>jsf-api</faces.api.artifact.id>
+		<faces.api.scope>compile</faces.api.scope>
 		<faces.api.version>2.1</faces.api.version>
 		<faces.impl.artifact.id>jsf-impl</faces.impl.artifact.id>
+		<faces.impl.scope>compile</faces.impl.scope>
 		<faces.version>${mojarra.version}</faces.version>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces3.version>3.3.0</icefaces3.version>
@@ -352,11 +354,57 @@
 
 	<profiles>
 		<profile>
+			<id>activate-portlet-war</id>
+			<activation>
+				<file>
+					<exists>src/main/webapp/WEB-INF/portlet.xml</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<touch file="target/${app.server.type}-portlet-war-activation.tmp" />
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>ee</id>
 			<properties>
 				<liferay.deploy.version>6.0.12</liferay.deploy.version>
 				<liferay.tomcat.version>6.0.32</liferay.tomcat.version>
 			</properties>
+		</profile>
+		<profile>
+			<id>faces-war</id>
+			<activation>
+				<file>
+					<exists>src/main/webapp/WEB-INF/faces-config.xml</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>${faces.group.id}</groupId>
+					<artifactId>${faces.api.artifact.id}</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>${faces.group.id}</groupId>
+					<artifactId>${faces.impl.artifact.id}</artifactId>
+				</dependency>
+			</dependencies>
 		</profile>
 		<profile>
 			<id>geronimo</id>
@@ -370,6 +418,8 @@
 			<id>glassfish</id>
 			<properties>
 				<app.server.type>glassfish</app.server.type>
+				<faces.api.scope>provided</faces.api.scope>
+				<faces.impl.scope>provided</faces.impl.scope>
 				<liferay.app.server.dir>${liferay.home}/glassfish-${liferay.glassfish.version}</liferay.app.server.dir>
 				<liferay.deploy.dir>${liferay.app.server.dir}/domains/domain1/autodeploy</liferay.deploy.dir>
 				<war.packaging.excludes>
@@ -384,6 +434,8 @@
 			<id>jboss</id>
 			<properties>
 				<app.server.type>jboss</app.server.type>
+				<faces.api.scope>provided</faces.api.scope>
+				<faces.impl.scope>provided</faces.impl.scope>
 				<liferay.app.server.dir>${liferay.home}/jboss-${liferay.jboss.version}</liferay.app.server.dir>
 				<liferay.deploy.dir>${liferay.app.server.dir}/standalone/deployments</liferay.deploy.dir>
 				<war.packaging.excludes>
@@ -394,6 +446,20 @@
 					WEB-INF/weblogic.xml
 				</war.packaging.excludes>
 			</properties>
+		</profile>
+		<profile>
+			<id>jboss-portlet-war</id>
+			<activation>
+				<file>
+					<exists>target/jboss-portlet-war-activation.tmp</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</dependency>
+			</dependencies>
 		</profile>
 		<profile>
 			<id>jetty</id>
@@ -601,6 +667,8 @@
 			<id>resin</id>
 			<properties>
 				<app.server.type>resin</app.server.type>
+				<faces.api.scope>provided</faces.api.scope>
+				<faces.impl.scope>provided</faces.impl.scope>
 				<liferay.app.server.dir>${liferay.home}/resin-${liferay.resin.version}</liferay.app.server.dir>
 			</properties>
 		</profile>
@@ -614,6 +682,8 @@
 			<id>weblogic</id>
 			<properties>
 				<app.server.type>weblogic</app.server.type>
+				<faces.api.scope>provided</faces.api.scope>
+				<faces.impl.scope>provided</faces.impl.scope>
 				<liferay.app.server.dir>${liferay.home}/weblogic-${liferay.weblogic.version}</liferay.app.server.dir>
 				<liferay.deploy.dir>${liferay.app.server.dir}/autodeploy</liferay.deploy.dir>
 				<war.packaging.excludes>
@@ -626,9 +696,26 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>weblogic-portlet-war</id>
+			<activation>
+				<file>
+					<exists>target/weblogic-portlet-war-activation.tmp</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>xerces</groupId>
+					<artifactId>xercesImpl</artifactId>
+					<version>${weblogic.xerces.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
 			<id>websphere</id>
 			<properties>
 				<app.server.type>websphere</app.server.type>
+				<faces.api.scope>provided</faces.api.scope>
+				<faces.impl.scope>provided</faces.impl.scope>
 				<liferay.app.server.dir>${liferay.home}/websphere-${liferay.websphere.version}</liferay.app.server.dir>
 				<war.packaging.excludes>
 					WEB-INF/glassfish-*.xml,
@@ -664,11 +751,13 @@
 				<groupId>com.sun.faces</groupId>
 				<artifactId>jsf-api</artifactId>
 				<version>${mojarra.version}</version>
+				<scope>${faces.api.scope}</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.sun.faces</groupId>
 				<artifactId>jsf-impl</artifactId>
 				<version>${mojarra.version}</version>
+				<scope>${faces.impl.scope}</scope>
 			</dependency>
 			<dependency>
 				<groupId>commons-fileupload</groupId>
@@ -742,6 +831,11 @@
 				<artifactId>junit</artifactId>
 				<version>4.10</version>
 				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.myfaces.core</groupId>
