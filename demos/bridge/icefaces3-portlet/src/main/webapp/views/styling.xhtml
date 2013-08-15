@@ -22,11 +22,11 @@
 			So #1 is always faster, but #2 is more flexible. This demo uses #2 simply for testing purposes.
 		-->
 	</ui:remove>
-	<h:outputStylesheet library="example" name="example.css" />
-	<h:outputStylesheet library="example" name="portlet.css" />
-	<h:outputStylesheet library="example" name="liferay-theme-override.css" />
+	<h:outputStylesheet library="example" name="example.css" target="head" />
+	<h:outputStylesheet library="example" name="portlet.css" target="head" />
+	<h:outputStylesheet library="example" name="liferay-theme-override.css" target="head" />
 	<c:if test="#{!aui.provided}">
-		<h:outputStylesheet library="aui-skin-classic" name="css/aui-skin-classic-all-min.css" />
+		<h:outputStylesheet library="aui-skin-classic" name="css/aui-skin-classic-all-min.css" target="head" />
 	</c:if>
 
 </ui:composition>
