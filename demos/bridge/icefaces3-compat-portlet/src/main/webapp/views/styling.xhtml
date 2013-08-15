@@ -24,12 +24,12 @@
 		-->
 	</ui:remove>
 	<link href="#{request.contextPath}/xmlhttp/css/xp/xp-portlet.css" rel="stylesheet" type="text/css"/>
-	<h:outputStylesheet library="example" name="portlet.css"/>
-	<h:outputStylesheet library="example" name="liferay-theme-override.css"/>
-	<h:outputStylesheet library="example" name="icefaces-theme-override.css"/>
-	<h:outputStylesheet library="example" name="example.css"/>
+	<h:outputStylesheet library="example" name="portlet.css" target="head" />
+	<h:outputStylesheet library="example" name="liferay-theme-override.css" target="head" />
+	<h:outputStylesheet library="example" name="icefaces-theme-override.css" target="head" />
+	<h:outputStylesheet library="example" name="example.css" target="head" />
 	<c:if test="#{!aui.provided}">
-		<h:outputStylesheet library="aui-skin-classic" name="css/aui-skin-classic-all-min.css" />
+		<h:outputStylesheet library="aui-skin-classic" name="css/aui-skin-classic-all-min.css" target="head" />
 	</c:if>
 
 </ui:composition>
