@@ -52,6 +52,7 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 	private static final String RICHFACES_FILE_UPLOAD_FAMILY = "org.richfaces.FileUpload";
 	private static final String RICHFACES_FILE_UPLOAD_RENDERER_TYPE = "org.richfaces.FileUploadRenderer";
 	private static final String SCRIPT_RENDERER_TYPE = "javax.faces.resource.Script";
+	private static final String STYLESHEET_RENDERER_TYPE = "javax.faces.resource.Stylesheet";
 
 	// Private Data Members
 	private RenderKit wrappedRenderKit;
@@ -104,8 +105,9 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 				renderer = new FormRendererPrimeFacesImpl(renderer);
 			}
 		}
-		else if (UIOutput.COMPONENT_FAMILY.equals(family) && SCRIPT_RENDERER_TYPE.equals(rendererType)) {
-			renderer = new ScriptRendererBridgeImpl(renderer);
+		else if (UIOutput.COMPONENT_FAMILY.equals(family) &&
+				(SCRIPT_RENDERER_TYPE.equals(rendererType) || STYLESHEET_RENDERER_TYPE.equals(rendererType))) {
+			renderer = new ResourceRendererBridgeImpl(renderer);
 		}
 		else if (UIPanel.COMPONENT_FAMILY.equals(family) && DataPaginator.RENDERER_TYPE.equals(rendererType)) {
 

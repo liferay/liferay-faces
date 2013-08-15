@@ -22,7 +22,7 @@ import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.ResponseWriter;
 import javax.faces.context.ResponseWriterWrapper;
 
-import com.liferay.faces.bridge.renderkit.html_basic.BodyRenderer;
+import com.liferay.faces.bridge.renderkit.html_basic.BodyRendererBridgeImpl;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -45,10 +45,11 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * <p>2. During "partial" updates in which the javax.faces.ViewRoot is being replaced in the DOM (which is basically a
  * full update of the view -- not really partial), jsf.js attempts to replace everything inside the
  * &lt;body&gt;...&lt;/body&gt; elements, which of course is a servlet environment assumption. Instead, it should be the
- * outermost &lt;div&gt; tag rendered by the bridge's {@link BodyRenderer} that should be replaced in the DOM.</p>
+ * outermost &lt;div&gt; tag rendered by the bridge's {@link BodyRendererBridgeImpl} that should be replaced in the
+ * DOM.</p>
  *
  * <p>The workaround for #2 is to substitute the id value of "javax.faces.ViewRoot" with the id of the outermost
- * &lt;div&gt; tag rendered by the bridge's {@link BodyRenderer}.</p>
+ * &lt;div&gt; tag rendered by the bridge's {@link BodyRendererBridgeImpl}.</p>
  *
  * <p>3. Also in the the case of a "partial" update of javax.faces.ViewRoot, jsf.js attempts to dynamically create the
  * javax.faces.ViewState hidden input field if it is not found in the form. The JavaScript code will successfully do
@@ -262,7 +263,7 @@ public class ResponseWriterBridgeImpl extends ResponseWriterWrapper {
 	 *
 	 * <p>... then this will cause the jsf.js JavaScript library to replace the entire &lt;body&gt; element! In order to
 	 * avoid this, need to change the id attribute from "javax.faces.ViewRoot" to the clientId of the outer-most div of
-	 * the portlet, rendered by the bridge's {@link BodyRenderer}.</p>
+	 * the portlet, rendered by the bridge's {@link BodyRendererBridgeImpl}.</p>
 	 */
 	@Override
 	public void writeAttribute(String attributeName, Object attributeValue, String property) throws IOException {
