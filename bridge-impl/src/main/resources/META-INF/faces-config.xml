@@ -118,7 +118,7 @@
 			<description>Overrides the BodyRenderer that comes with the JSF implementation</description>
 			<component-family>javax.faces.Output</component-family>
 			<renderer-type>javax.faces.Body</renderer-type>
-			<renderer-class>com.liferay.faces.bridge.renderkit.html_basic.BodyRenderer</renderer-class>
+			<renderer-class>com.liferay.faces.bridge.renderkit.html_basic.BodyRendererBridgeImpl</renderer-class>
 		</renderer>
 	</render-kit>
 	<render-kit>

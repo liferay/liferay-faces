@@ -36,13 +36,10 @@ import com.liferay.faces.util.logging.LoggerFactory;
  *
  * @author  Neil Griffin
  */
-public class BodyRenderer extends BridgeRenderer {
+public class BodyRendererBridgeImpl extends BridgeRenderer {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(BodyRenderer.class);
-
-	// Public Constants
-	public static final String ATTR_RENDERING_BODY = "com.liferay.faces.bridge.RenderingBody";
+	private static final Logger logger = LoggerFactory.getLogger(BodyRendererBridgeImpl.class);
 
 	// Private Constants
 	private static final String ATTR_STYLE_CLASS = "styleClass";
@@ -136,9 +133,6 @@ public class BodyRenderer extends BridgeRenderer {
 				String originalTarget = (String) uiComponentResource.getAttributes().get(ORIGINAL_TARGET);
 
 				if (!TARGET_HEAD.equals(originalTarget)) {
-
-					// Set a flag indicating that the bridge is rendering the body (not the head).
-					facesContext.getAttributes().put(ATTR_RENDERING_BODY, Boolean.TRUE);
 
 					// Render the current resource.
 					uiComponentResource.encodeAll(facesContext);

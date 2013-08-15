@@ -51,6 +51,9 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 	private static final String FIRST_FACET = "first";
 	private static final String MIDDLE_FACET = "middle";
 	private static final String LAST_FACET = "last";
+	private static final String RENDERER_TYPE_RICHFACES_RESOURCE_LIBRARY =
+		"org.richfaces.renderkit.ResourceLibraryRenderer";
+	private static final String RICHFACES_RESLIB_SUFFIX = "reslib";
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(HeadRendererBridgeImpl.class);
@@ -230,9 +233,35 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 				// Command the resource to render itself to the HeadResponseWriter
 				uiComponentResource.encodeAll(facesContext);
 
-				// Statefully mark the resource as having been added.
 				ResourceInfo resourceInfo = new ResourceInfo(uiComponentResource);
-				headResourceIdsFromManagedBean.add(resourceInfo.getId());
+				String resourceId = resourceInfo.getId();
+
+				// If the resource has not yet been marked as having been added, then mark it now. Note that unless the
+				// resource is a RichFaces Resource Library (see comments below), the resource has probably already been
+				// marked as being in the head by ResourceRendererBridgeImpl#encodeEnd(FacesContext, UIComponent).
+				if (!headResourceIdsFromManagedBean.contains(resourceId)) {
+
+					headResourceIdsFromManagedBean.add(resourceId);
+
+					if (logger.isDebugEnabled()) {
+
+						if (resourceId.endsWith(RICHFACES_RESLIB_SUFFIX) ||
+								RENDERER_TYPE_RICHFACES_RESOURCE_LIBRARY.equals(
+									uiComponentResource.getRendererType())) {
+
+							// RichFaces has resources like "org.richfaces:base-component.reslib",
+							// "org.richfaces:message.reslib", and "org.richfaces:ajax.reslib" that represent a
+							// collection of resources.
+							logger.debug("Marking RichFaces resource library [{0}] as being present in the head",
+								resourceId);
+						}
+						else {
+							logger.debug("Marking non-RichFaces resourceId=[{0}] as being present in the head",
+								resourceId);
+						}
+					}
+				}
+
 			}
 
 			// Restore the temporary ResponseWriter reference.
