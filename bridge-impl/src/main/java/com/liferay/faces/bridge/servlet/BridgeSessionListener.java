@@ -103,13 +103,13 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 					if (facesContext != null) {
 						ExternalContext externalContext = facesContext.getExternalContext();
 						mojarraInjectionProvider = MojarraApplicationAssociate.getInjectionProvider(externalContext);
+					}
 
-						if (mojarraInjectionProvider == null) {
-							logger.debug("Unable to discover Mojarra InjectionProvider during startup");
-						}
-						else {
-							logger.debug("Mojarra injectionProvider=[{0}]", mojarraInjectionProvider);
-						}
+					if (mojarraInjectionProvider == null) {
+						logger.debug("Unable to discover Mojarra InjectionProvider during startup");
+					}
+					else {
+						logger.debug("Mojarra injectionProvider=[{0}]", mojarraInjectionProvider);
 					}
 				}
 			}
