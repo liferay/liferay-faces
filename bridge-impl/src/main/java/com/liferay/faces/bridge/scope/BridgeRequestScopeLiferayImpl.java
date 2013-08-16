@@ -33,7 +33,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.container.liferay.LiferayConstants;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -163,7 +162,6 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 	 * Spec can be candidates for exclusion.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	protected boolean isExcludedRequestAttributeByNamespace(String attributeName) {
 
 		boolean excluded = false;
