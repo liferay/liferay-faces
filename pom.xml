@@ -797,7 +797,7 @@
 											</sequential>
 										</for>
 										<for param="licenseFile">
-											<fileset dir="${licenses.output.dir}" includes="*common*cddl*.txt" />
+											<fileset dir="${licenses.output.dir}" includes="*common*cddl*.*" />
 											<sequential>
 												<move file="@{licenseFile}" tofile="${licenses.output.dir}/cddl-1.0.txt" />
 											</sequential>
@@ -824,6 +824,18 @@
 											<fileset dir="${licenses.output.dir}" includes="*mpl-1.1*.html" />
 											<sequential>
 												<move file="@{licenseFile}" tofile="${licenses.output.dir}/mpl-1.1.html" />
+											</sequential>
+										</for>
+										<for param="licenseFile">
+											<fileset dir="${licenses.output.dir}" includes="*mozilla*1.1*.txt" />
+											<sequential>
+												<move file="@{licenseFile}" tofile="${licenses.output.dir}/mpl-1.1.txt" />
+											</sequential>
+										</for>
+										<for param="licenseFile">
+											<fileset dir="${licenses.output.dir}" includes="*publicdomain*.txt" />
+											<sequential>
+												<move file="@{licenseFile}" tofile="${licenses.output.dir}/cc-public-domain.txt" />
 											</sequential>
 										</for>
 										<for param="licenseFile">
