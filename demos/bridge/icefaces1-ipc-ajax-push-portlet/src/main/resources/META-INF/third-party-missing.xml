@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<!-- This file is read by the download-licenses goal of the license-maven-plugin -->
+<!DOCTYPE project>
+<licenseSummary>
+	<dependencies>
+		<dependency>
+			<groupId>com.sun.xml.fastinfoset</groupId>
+			<artifactId>FastInfoset</artifactId>
+			<version>1.2.2</version>
+			<licenses>
+				<license>
+					<name>The Apache Software License, Version 2.0</name>
+					<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+					<distribution>repo</distribution>
+				</license>
+			</licenses>
+		</dependency>
+		<dependency>
+			<groupId>org.icefaces</groupId>
+			<artifactId>icefaces</artifactId>
+			<version>1.8.2</version>
+			<licenses>
+				<license>
+					<name>Mozilla Public License 1.1</name>
+					<url>http://www.mozilla.org/MPL/1.1/index.txt</url>
+					<distribution>repo</distribution>
+				</license>
+			</licenses>
+		</dependency>
+		<dependency>
+			<groupId>org.icefaces</groupId>
+			<artifactId>icefaces-comps</artifactId>
+			<version>1.8.2</version>
+			<licenses>
+				<license>
+					<name>Mozilla Public License 1.1</name>
+					<url>http://www.mozilla.org/MPL/1.1/index.txt</url>
+					<distribution>repo</distribution>
+				</license>
+			</licenses>
+		</dependency>
+		<dependency>
+			<groupId>org.icefaces</groupId>
+			<artifactId>icefaces-facelets</artifactId>
+			<version>1.8.2</version>
+			<licenses>
+				<license>
+					<name>Mozilla Public License 1.1</name>
+					<url>http://www.mozilla.org/MPL/1.1/index.txt</url>
+					<distribution>repo</distribution>
+				</license>
+			</licenses>
+		</dependency>
+	</dependencies>
+</licenseSummary>
