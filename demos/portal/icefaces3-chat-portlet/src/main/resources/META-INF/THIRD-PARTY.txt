@@ -1,0 +1,16 @@
+
+Lists of 14 third-party dependencies.
+     (LGPL 2.1) Liferay Faces Alloy (com.liferay.faces:liferay-faces-alloy:3.1.3-ga4-SNAPSHOT - http://www.liferay.com/community/liferay-projects/liferay-faces/liferay-faces-alloy)
+     (LGPL 2.1) Liferay Faces Bridge API (com.liferay.faces:liferay-faces-bridge-api:3.1.3-ga4-SNAPSHOT - http://www.liferay.com/community/liferay-projects/liferay-faces/liferay-faces-bridge-api)
+     (LGPL 2.1) Liferay Faces Bridge (com.liferay.faces:liferay-faces-bridge-impl:3.1.3-ga4-SNAPSHOT - http://www.liferay.com/community/liferay-projects/liferay-faces/liferay-faces-bridge-impl)
+     (LGPL 2.1) Liferay Faces Portal (com.liferay.faces:liferay-faces-portal:3.1.3-ga4-SNAPSHOT - http://www.liferay.com/community/liferay-projects/liferay-faces/liferay-faces-portal)
+     (LGPL 2.1) Liferay Faces Util (com.liferay.faces:liferay-faces-util:3.1.3-ga4-SNAPSHOT - http://www.liferay.com/community/liferay-projects/liferay-faces/liferay-faces-util)
+     (COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) plus GPL) Oracle's implementation of the JSF 2.2 specification API. (com.sun.faces:jsf-api:2.1.21 - http://java.sun.com/javaee/javaserverfaces/)
+     (COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) plus GPL) Oracle's implementation of the JSF 2.2 specification. (com.sun.faces:jsf-impl:2.1.21 - http://java.sun.com/javaee/javaserverfaces/)
+     (Apache License, Version 2.0) fastinfoset (com.sun.xml.fastinfoset:FastInfoset:1.2.12 - http://fi.java.net)
+     (Common Development and Distribution License (CDDL) v1.0) JavaBeans Activation Framework (JAF) (javax.activation:activation:1.1 - http://java.sun.com/products/javabeans/jaf/index.jsp)
+     (Common Development and Distribution License (CDDL) v1.0) JavaMail API (javax.mail:mail:1.4.1 - https://glassfish.dev.java.net/javaee5/mail/)
+     (Apache License Version 2.0) ICEfaces Core (org.icefaces:icefaces:3.3.0 - http://www.icesoft.org)
+     (Apache License Version 2.0) ICEfaces ACE Components (org.icefaces:icefaces-ace:3.3.0 - http://www.icesoft.org)
+     (Apache License Version 2.0) ICEpush Core Library (org.icepush:icepush:3.3.0 - http://www.icesoft.org)
+     (The Apache Software License, Version 2.0) jboss-el (org.jboss.seam:jboss-el:2.0.0.GA - no url defined)
