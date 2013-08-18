@@ -264,7 +264,8 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
 				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
 
-			// Restore the view root that may have been saved during the ACTION_PHASE of the portlet lifecycle.
+			// Restore the view root that may have been saved during the action/event/render phase of the portlet
+			// lifecycle.
 			UIViewRoot uiViewRoot = (UIViewRoot) getAttribute(BRIDGE_REQ_SCOPE_ATTR_FACES_VIEW_ROOT);
 
 			if (uiViewRoot != null) {
@@ -275,7 +276,8 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 				logger.debug("Did not restore uiViewRoot");
 			}
 
-			// Restore the faces messages that may have been saved during the ACTION_PHASE of the portlet lifecycle.
+			// Restore the faces messages that may have been saved during the action/event/render phase of the portlet
+			// lifecycle.
 			List<FacesMessageWrapper> facesMessages = (List<FacesMessageWrapper>) getAttribute(
 					BRIDGE_REQ_SCOPE_ATTR_FACES_MESSAGES);
 
