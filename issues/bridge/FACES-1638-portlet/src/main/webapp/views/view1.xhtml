@@ -30,7 +30,7 @@
 			<ui:repeat value="#{modelManagedBean.items}" var="itemRepeatedSecond">
 				<li>
 				<h:link outcome="/views/view2" value="#{itemRepeatedSecond.name}">
-					<f:param name="#{itemRepeatedSecond.name}1" value="#{itemRepeatedSecond.itemId}" />
+					<f:param name="#{itemRepeatedSecond.name}_0" value="#{itemRepeatedSecond.itemId}" />
 				</h:link>
 				<span>itemId URL parameter should be #{itemRepeatedSecond.itemId}</span>
 				</li>
@@ -43,7 +43,7 @@
 			<ui:repeat value="#{modelManagedBean.items}" var="itemRepeatedThird">
 				<li>
 				<h:link value="#{itemRepeatedThird.name}">
-					<f:param name="#{itemRepeatedThird.name}2" value="#{itemRepeatedThird.itemId}" />
+					<f:param name="#{itemRepeatedThird.name}_1" value="#{itemRepeatedThird.itemId}" />
 				</h:link>
 				<span>itemId URL parameter should be #{itemRepeatedThird.itemId}</span>
 				</li>
