@@ -14,6 +14,7 @@
 package com.liferay.faces.bridge.renderkit.html_basic;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.faces.component.UIComponent;
@@ -42,7 +43,6 @@ public class ResourceRendererBridgeImpl extends RendererWrapper implements Compo
 	private static final Logger logger = LoggerFactory.getLogger(ResourceRendererBridgeImpl.class);
 
 	// Private Data Members
-	private Set<String> headResourceIdsFromManagedBean;
 	private Renderer wrappedRenderer;
 
 	public ResourceRendererBridgeImpl() {
@@ -61,14 +61,22 @@ public class ResourceRendererBridgeImpl extends RendererWrapper implements Compo
 		String resourceId = resourceInfo.getId();
 
 		// Determine whether or not the specified resource is already present in the <head> section of the portal page.
-		if (headResourceIdsFromManagedBean == null) {
-			HeadManagedBean headManagedBean = HeadManagedBean.getInstance(facesContext);
+		HeadManagedBean headManagedBean = HeadManagedBean.getInstance(facesContext);
+
+		Set<String> headResourceIdsFromManagedBean = null;
+
+		if (headManagedBean == null) {
+
+			// Since the HeadManagedBean can't be found, this request is likely executing in a JSP environment.
+			headResourceIdsFromManagedBean = new HashSet<String>();
+		}
+		else {
 			headResourceIdsFromManagedBean = headManagedBean.getHeadResourceIds();
 		}
 
 		boolean alreadyPresentInPortalPageHead = headResourceIdsFromManagedBean.contains(resourceId);
 
-		// If the speicifed resource is NOT already in the <head> section of the portal page, then
+		// If the specified resource is NOT already in the <head> section of the portal page, then
 		if (!alreadyPresentInPortalPageHead) {
 
 			boolean ajaxRequest = facesContext.getPartialViewContext().isAjaxRequest();
