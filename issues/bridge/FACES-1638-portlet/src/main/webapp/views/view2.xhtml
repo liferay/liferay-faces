@@ -29,7 +29,7 @@
 			<ul>
 			<ui:repeat value="#{modelManagedBean.items}" var="itemRepeatedSecond">
 				<li>
-				<h:link outcome="/views/view2" value="#{itemRepeatedSecond.name}">
+				<h:link outcome="/views/view1" value="#{itemRepeatedSecond.name}">
 					<f:param name="#{itemRepeatedSecond.name}1" value="#{itemRepeatedSecond.itemId}" />
 				</h:link>
 				<span>itemId URL parameter should be #{itemRepeatedSecond.itemId}</span>

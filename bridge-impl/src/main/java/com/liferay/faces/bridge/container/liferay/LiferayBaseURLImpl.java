@@ -72,6 +72,10 @@ public abstract class LiferayBaseURLImpl implements LiferayBaseURL {
 		parameterMap.put(name, values);
 		resetToString();
 	}
+	
+	public void resetParameterMap() {
+		this.parameterMap = new LinkedHashMap<String, String[]>();
+	}
 
 	public Map<String, String[]> getParameterMap() {
 		return parameterMap;
