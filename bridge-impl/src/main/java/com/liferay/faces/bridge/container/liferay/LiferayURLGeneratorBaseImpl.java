@@ -32,7 +32,14 @@ import com.liferay.faces.bridge.util.URLParameter;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Portal;
 
 
@@ -57,6 +64,10 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(LiferayURLGeneratorBaseImpl.class);
+
+	// Private Constants
+	private static final int LIFERAY_BUILD_NUMBER = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
+		.getBuildId();
 
 	// Private Data Members
 	private String baseURL;
@@ -142,8 +153,33 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 
 			if (portletAuthToken != null) {
 
-				appendParameterToURL(firstParameter, LiferayConstants.P_P_AUTH, portletAuthToken, url);
-				firstParameter = false;
+				boolean addPortletAuthToken = true;
+
+				if ((LIFERAY_BUILD_NUMBER < 6102) || ((LIFERAY_BUILD_NUMBER > 6102) && (LIFERAY_BUILD_NUMBER < 6130))) {
+
+					// Versions of Liferay Portal prior to 6.1.2-CE/6.1.30-EE suffered from LPS-36481 which caused
+					// PortletURLImpl.addPortletAuthToken(StringBundle, Key) method to add the p_p_auth parameter to
+					// URLs for portlets when add-default-resource=false. It is therefore necessary to check that
+					// add-default-resource=true before adding the p_p_auth parameter to the URL.
+					FacesContext facesContext = FacesContext.getCurrentInstance();
+					PortletRequest portletRequest = (PortletRequest) facesContext.getExternalContext().getRequest();
+					String portletId = (String) portletRequest.getAttribute(WebKeys.PORTLET_ID);
+					ThemeDisplay themeDisplay = (ThemeDisplay) portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+					try {
+						Portlet portlet = PortletLocalServiceUtil.getPortletById(themeDisplay.getCompanyId(),
+								portletId);
+						addPortletAuthToken = portlet.isAddDefaultResource();
+					}
+					catch (SystemException e) {
+						logger.error(e);
+					}
+				}
+
+				if (addPortletAuthToken) {
+					appendParameterToURL(firstParameter, LiferayConstants.P_P_AUTH, portletAuthToken, url);
+					firstParameter = false;
+				}
 			}
 
 			// Always add the p_p_id parameter
@@ -286,7 +322,7 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 
 			// Add request parameters from the request parameter map.
 			boolean namespaced = !responseNamespace.startsWith(BridgeConstants.WSRP);
-		
+
 			Set<Map.Entry<String, String[]>> mapEntries = additionalParameterMap.entrySet();
 
 			if (mapEntries != null) {
@@ -303,7 +339,8 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 							if (curParameterValue != null) {
 
 								String encodedParameterValue = encode(curParameterValue);
-								appendParameterToURL(firstParameter, namespaced, parameterName, encodedParameterValue, url);
+								appendParameterToURL(firstParameter, namespaced, parameterName, encodedParameterValue,
+									url);
 							}
 						}
 					}
