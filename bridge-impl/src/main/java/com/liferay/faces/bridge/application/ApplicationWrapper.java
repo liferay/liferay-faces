@@ -16,7 +16,13 @@ package com.liferay.faces.bridge.application;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
+import javax.el.ELContextListener;
+import javax.el.ELException;
+import javax.el.ELResolver;
+import javax.el.ExpressionFactory;
+import javax.el.ValueExpression;
 import javax.faces.FacesException;
 import javax.faces.application.Application;
 import javax.faces.application.NavigationHandler;
@@ -59,6 +65,16 @@ public abstract class ApplicationWrapper extends Application implements Wrapper<
 	}
 
 	@Override
+	public void addELContextListener(ELContextListener listener) {
+		getWrapped().addELContextListener(listener);
+	}
+
+	@Override
+	public void addELResolver(ELResolver resolver) {
+		getWrapped().addELResolver(resolver);
+	}
+
+	@Override
 	public void addValidator(String validatorId, String validatorClass) {
 		getWrapped().addValidator(validatorId, validatorClass);
 	}
@@ -66,6 +82,12 @@ public abstract class ApplicationWrapper extends Application implements Wrapper<
 	@Override
 	public UIComponent createComponent(String componentType) throws FacesException {
 		return getWrapped().createComponent(componentType);
+	}
+
+	@Override
+	public UIComponent createComponent(ValueExpression componentExpression, FacesContext context, String componentType)
+		throws FacesException {
+		return getWrapped().createComponent(componentExpression, context, componentType);
 	}
 
 	@Override
@@ -99,6 +121,18 @@ public abstract class ApplicationWrapper extends Application implements Wrapper<
 	@Override
 	public ValueBinding createValueBinding(String ref) throws ReferenceSyntaxException {
 		return getWrapped().createValueBinding(ref);
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public Object evaluateExpressionGet(FacesContext context, String expression, Class expectedType)
+		throws ELException {
+		return getWrapped().evaluateExpressionGet(context, expression, expectedType);
+	}
+
+	@Override
+	public void removeELContextListener(ELContextListener listener) {
+		getWrapped().removeELContextListener(listener);
 	}
 
 	@Override
@@ -148,6 +182,21 @@ public abstract class ApplicationWrapper extends Application implements Wrapper<
 	}
 
 	@Override
+	public ELContextListener[] getELContextListeners() {
+		return getWrapped().getELContextListeners();
+	}
+
+	@Override
+	public ELResolver getELResolver() {
+		return getWrapped().getELResolver();
+	}
+
+	@Override
+	public ExpressionFactory getExpressionFactory() {
+		return getWrapped().getExpressionFactory();
+	}
+
+	@Override
 	public String getMessageBundle() {
 		return getWrapped().getMessageBundle();
 	}
@@ -175,6 +224,11 @@ public abstract class ApplicationWrapper extends Application implements Wrapper<
 	@Override
 	public void setPropertyResolver(PropertyResolver resolver) {
 		getWrapped().setPropertyResolver(resolver);
+	}
+
+	@Override
+	public ResourceBundle getResourceBundle(FacesContext ctx, String name) {
+		return getWrapped().getResourceBundle(ctx, name);
 	}
 
 	@Override
