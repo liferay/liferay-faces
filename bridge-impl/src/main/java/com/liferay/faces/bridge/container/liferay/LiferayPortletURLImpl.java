@@ -42,6 +42,7 @@ public abstract class LiferayPortletURLImpl extends LiferayBaseURLImpl implement
 
 		if (toStringValue == null) {
 			toStringValue = getLiferayURLGenerator().generateURL(getParameterMap(), portletMode, windowState);
+			resetParameterMap();
 		}
 
 		return toStringValue;

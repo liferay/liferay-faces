@@ -33,9 +33,9 @@ public class ModelManagedBean {
 
 		if (items == null) {
 			items = new ArrayList<Item>();
-			items.add(new Item(1, "First Item"));
-			items.add(new Item(2, "Second Item"));
-			items.add(new Item(3, "Third Item"));
+			items.add(new Item(1, "FirstItemName"));
+			items.add(new Item(2, "SecondItemName"));
+			items.add(new Item(3, "ThirdItemName"));
 		}
 
 		return items;

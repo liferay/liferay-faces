@@ -62,6 +62,10 @@ public abstract class LiferayBaseURLImpl implements LiferayBaseURL {
 	public LiferayURLGenerator getLiferayURLGenerator() {
 		return liferayURLGenerator;
 	}
+	
+	public void resetParameterMap() {
+		this.parameterMap = new LinkedHashMap<String, String[]>();
+	}
 
 	public void setParameter(String name, String value) {
 		parameterMap.put(name, new String[] { value });
