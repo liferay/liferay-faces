@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html">
-	
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html">
+
 	<h:head />
 	<h:body>
 		<h:form>
 			<h:outputText value="http://issues.liferay.com/browse/FACES-1638" />
 			<br />
 			<br />
-			<span>If the issue is fixed, then the value of the rendered itemId URL parameter should be different for each of the following URLs:</span>
+			<span>If the issue is fixed, then the value of the rendered itemId URL parameter should be different for each
+				of the following URLs:</span>
 			<ul>
-			<ui:repeat value="#{modelManagedBean.items}" var="item">
-				<li>
-				<h:link value="#{item.name}">
-					<f:param name="itemId" value="#{item.itemId}" />
-				</h:link>
-				<span>itemId URL parameter should be #{item.itemId}</span>
-				</li>
-			</ui:repeat>
+				<ui:repeat value="#{modelManagedBean.items}" var="item">
+					<li><h:link value="#{item.name}">
+							<f:param name="itemId" value="#{item.itemId}" />
+						</h:link> <span class="param-name">itemId</span><span> URL parameter should be </span><span class="param-value">#{item.itemId}</span>
+					</li>
+				</ui:repeat>
+			</ul>
+			<br />
+			<span>Also, the the following URLs should all have ONLY ONE item parameter each with a different name:</span>
+			<ul>
+				<ui:repeat value="#{modelManagedBean.items}" var="item">
+					<li><h:link value="#{item.name}">
+							<f:param name="#{item.name}" value="#{item.itemId}" />
+						</h:link> <span class="param-name">#{item.name}</span><span> URL parameter should be </span><span class="param-value">#{item.itemId}</span>
+					</li>
+				</ui:repeat>
 			</ul>
 		</h:form>
 	</h:body>
-	
+
 </f:view>
