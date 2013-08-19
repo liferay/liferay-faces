@@ -18,7 +18,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -72,23 +71,17 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 
 	// Private Data Members
 	private Boolean ableToSetHttpStatusCode;
-	private Map<String, PortletURL> actionURLCache;
 	private BridgeConfig bridgeConfig;
 	private boolean markupHeadElementSupported;
-	private Map<String, PortletURL> renderURLCache;
 	private String requestQueryString;
 	private String requestURL;
 	private String responseNamespace;
-	private Map<String, ResourceURL> resourceURLCache;
 
 	public PortletContainerImpl(PortletRequest portletRequest, BridgeConfig bridgeConfig) {
 		String portalVendorClaim = portletRequest.getPortalContext().getProperty(
 				PortalContext.MARKUP_HEAD_ELEMENT_SUPPORT);
 		this.bridgeConfig = bridgeConfig;
 		this.markupHeadElementSupported = (portalVendorClaim != null);
-		this.actionURLCache = new HashMap<String, PortletURL>();
-		this.renderURLCache = new HashMap<String, PortletURL>();
-		this.resourceURLCache = new HashMap<String, ResourceURL>();
 	}
 
 	public void afterPhase(PhaseEvent phaseEvent) {
@@ -100,25 +93,20 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 	}
 
 	public PortletURL createActionURL(String fromURL) throws MalformedURLException {
-		PortletURL actionURL = actionURLCache.get(fromURL);
 
-		if (actionURL == null) {
+		try {
+			logger.debug("createActionURL fromURL=[" + fromURL + "]");
 
-			try {
-				logger.debug("createActionURL fromURL=[" + fromURL + "]");
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
+			PortletURL actionURL = createActionURL(mimeResponse);
+			copyRequestParameters(fromURL, actionURL);
 
-				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-				MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
-				actionURL = createActionURL(mimeResponse);
-				copyRequestParameters(fromURL, actionURL);
-				actionURLCache.put(fromURL, actionURL);
-			}
-			catch (ClassCastException e) {
-				throw new MalformedURLException(e.getMessage());
-			}
+			return actionURL;
 		}
-
-		return actionURL;
+		catch (ClassCastException e) {
+			throw new MalformedURLException(e.getMessage());
+		}
 	}
 
 	public ResourceURL createPartialActionURL(String fromURL) throws MalformedURLException {
@@ -174,89 +162,81 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 	}
 
 	public PortletURL createRenderURL(String fromURL) throws MalformedURLException {
-		PortletURL renderURL = renderURLCache.get(fromURL);
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+		PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
 
-		if (renderURL == null) {
-
-			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-			PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
-
-			if ((portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE) ||
-					(portletRequestPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
-
-				try {
-					logger.debug("createRenderURL fromURL=[" + fromURL + "]");
-
-					MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
-					renderURL = createRenderURL(mimeResponse);
-					copyRequestParameters(fromURL, renderURL);
-					renderURLCache.put(fromURL, renderURL);
-				}
-				catch (ClassCastException e) {
-					throw new MalformedURLException(e.getMessage());
-				}
-			}
-		}
-
-		return renderURL;
-	}
-
-	public ResourceURL createResourceURL(String fromURL) throws MalformedURLException {
-		ResourceURL resourceURL = resourceURLCache.get(fromURL);
-
-		if (resourceURL == null) {
+		if ((portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE) ||
+				(portletRequestPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
 
 			try {
-				logger.debug("createResourceURL fromURL=[" + fromURL + "]");
+				logger.debug("createRenderURL fromURL=[" + fromURL + "]");
 
-				// Ask the portlet container to create a portlet resource URL.
-				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 				MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
-				resourceURL = createResourceURL(mimeResponse);
+				PortletURL renderURL = createRenderURL(mimeResponse);
+				copyRequestParameters(fromURL, renderURL);
 
-				// If the "javax.faces.resource" token is found in the URL, then
-				int tokenPos = fromURL.indexOf(ResourceConstants.JAVAX_FACES_RESOURCE);
-
-				if (tokenPos >= 0) {
-
-					// Parse-out the resourceId
-					String resourceId = fromURL.substring(tokenPos);
-
-					// Parse-out the resourceName and convert it to a URL parameter on the portlet resource URL.
-					int queryStringPos = resourceId.indexOf('?');
-
-					String resourceName = resourceId;
-
-					if (queryStringPos > 0) {
-						resourceName = resourceName.substring(0, queryStringPos);
-					}
-
-					int slashPos = resourceName.indexOf('/');
-
-					if (slashPos > 0) {
-						resourceName = resourceName.substring(slashPos + 1);
-					}
-					else {
-						logger.error("There is no slash after the [{0}] token in resourceURL=[{1}]",
-							ResourceConstants.JAVAX_FACES_RESOURCE, fromURL);
-					}
-
-					resourceURL.setParameter(ResourceConstants.JAVAX_FACES_RESOURCE, resourceName);
-					logger.debug("Added parameter to portletURL name=[{0}] value=[{1}]",
-						ResourceConstants.JAVAX_FACES_RESOURCE, resourceName);
-				}
-
-				// Copy the request parameters to the portlet resource URL.
-				copyRequestParameters(fromURL, resourceURL);
-
-				resourceURLCache.put(fromURL, resourceURL);
+				return renderURL;
 			}
 			catch (ClassCastException e) {
 				throw new MalformedURLException(e.getMessage());
 			}
 		}
+		else {
+			throw new MalformedURLException("Unable to create a RenderURL during " + portletRequestPhase.toString());
+		}
 
-		return resourceURL;
+	}
+
+	public ResourceURL createResourceURL(String fromURL) throws MalformedURLException {
+
+		try {
+			logger.debug("createResourceURL fromURL=[" + fromURL + "]");
+
+			// Ask the portlet container to create a portlet resource URL.
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
+			ResourceURL resourceURL = createResourceURL(mimeResponse);
+
+			// If the "javax.faces.resource" token is found in the URL, then
+			int tokenPos = fromURL.indexOf(ResourceConstants.JAVAX_FACES_RESOURCE);
+
+			if (tokenPos >= 0) {
+
+				// Parse-out the resourceId
+				String resourceId = fromURL.substring(tokenPos);
+
+				// Parse-out the resourceName and convert it to a URL parameter on the portlet resource URL.
+				int queryStringPos = resourceId.indexOf('?');
+
+				String resourceName = resourceId;
+
+				if (queryStringPos > 0) {
+					resourceName = resourceName.substring(0, queryStringPos);
+				}
+
+				int slashPos = resourceName.indexOf('/');
+
+				if (slashPos > 0) {
+					resourceName = resourceName.substring(slashPos + 1);
+				}
+				else {
+					logger.error("There is no slash after the [{0}] token in resourceURL=[{1}]",
+						ResourceConstants.JAVAX_FACES_RESOURCE, fromURL);
+				}
+
+				resourceURL.setParameter(ResourceConstants.JAVAX_FACES_RESOURCE, resourceName);
+				logger.debug("Added parameter to portletURL name=[{0}] value=[{1}]",
+					ResourceConstants.JAVAX_FACES_RESOURCE, resourceName);
+			}
+
+			// Copy the request parameters to the portlet resource URL.
+			copyRequestParameters(fromURL, resourceURL);
+
+			return resourceURL;
+		}
+		catch (ClassCastException e) {
+			throw new MalformedURLException(e.getMessage());
+		}
 	}
 
 	public String fixRequestParameterValue(String value) {
