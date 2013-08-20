@@ -14,7 +14,7 @@
 				<ui:repeat value="#{modelManagedBean.items}" var="item">
 					<li><h:link value="#{item.name}">
 							<f:param name="itemId" value="#{item.itemId}" />
-						</h:link> <span class="param-name">itemId</span><span> URL parameter should be </span><span class="param-value">#{item.itemId}</span>
+						</h:link> <span class="param-name">itemId</span><span> should only occur once and should be </span><span class="param-value">#{item.itemId}</span>
 					</li>
 				</ui:repeat>
 			</ul>
@@ -24,7 +24,7 @@
 				<ui:repeat value="#{modelManagedBean.items}" var="item">
 					<li><h:link value="#{item.name}">
 							<f:param name="#{item.name}" value="#{item.itemId}" />
-						</h:link> <span class="param-name">#{item.name}</span><span> URL parameter should be </span><span class="param-value">#{item.itemId}</span>
+						</h:link> <span class="param-name">#{item.name}</span><span> should only occur once and should be </span><span class="param-value">#{item.itemId}</span>
 					</li>
 				</ui:repeat>
 			</ul>

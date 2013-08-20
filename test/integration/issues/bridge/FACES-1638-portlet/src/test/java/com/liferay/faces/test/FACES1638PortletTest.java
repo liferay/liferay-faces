@@ -39,29 +39,44 @@ public class FACES1638PortletTest extends TesterBase {
 
 	private static final String formTagXpath = "//form[@method='post']";
 
-	private static final String firstItemURLXpath = "//a[text()='First Item']";
-	private static final String secondItemURLXpath = "//a[text()='Second Item']";
-	private static final String thirdItemURLXpath = "//a[text()='Third Item']";
+	private static final String firstByItemIdXpath = "//a[contains(@href,'portlet_itemId') and text()='First-Item']";
+	private static final String secondByItemIdXpath = "//a[contains(@href,'portlet_itemId') and text()='Second-Item']";
+	private static final String thirdByItemIdXpath = "//a[contains(@href,'portlet_itemId') and text()='Third-Item']";
+	
+	private static final String firstByItemNameXpath = "//a[contains(@href,'portlet_First-Item') and text()='First-Item']";
+	private static final String secondByItemNameXpath = "//a[contains(@href,'portlet_Second-Item') and text()='Second-Item']";
+	private static final String thirdByItemNameXpath = "//a[contains(@href,'portlet_Third-Item') and text()='Third-Item']";
+	
+	// http://localhost:8080/web/bridge-issues/faces-1638?p_p_id=1_WAR_FACES1638portlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_1_WAR_FACES1638portlet__facesViewIdRender=%2Fviews%2Fview1.xhtml&_1_WAR_FACES1638portlet_itemId=3
+	// http://localhost:8080/web/bridge-issues/faces-1638?p_p_id=1_WAR_FACES1638portlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_1_WAR_FACES1638portlet__facesViewIdRender=%2Fviews%2Fview1.xhtml&_1_WAR_FACES1638portlet_First-Item=1	
 
 	static final String url = baseUrl + "/web/bridge-issues/faces-1638";
 	static final String ITEM_ID = "itemId=";
+	static final String ITEM_NAME = "-Item=";
 
 	@FindBy(xpath = portletDisplayNameXpath)
 	private WebElement portletDisplayName;
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
 	
-	@FindBy(xpath = firstItemURLXpath)
-	private WebElement firstItemURL;
-	@FindBy(xpath = secondItemURLXpath)
-	private WebElement secondItemURL;
-	@FindBy(xpath = thirdItemURLXpath)
-	private WebElement thirdItemURL;
+	@FindBy(xpath = firstByItemIdXpath)
+	private WebElement firstByItemId;
+	@FindBy(xpath = secondByItemIdXpath)
+	private WebElement secondByItemId;
+	@FindBy(xpath = thirdByItemIdXpath)
+	private WebElement thirdByItemId;
+	
+	@FindBy(xpath = firstByItemNameXpath)
+	private WebElement firstByItemName;
+	@FindBy(xpath = secondByItemNameXpath)
+	private WebElement secondByItemName;
+	@FindBy(xpath = thirdByItemNameXpath)
+	private WebElement thirdByItemName;
 
 	@Test
 	@RunAsClient
 	@InSequence(1000)
-	public void FACES1638ItemURLIDsTest() throws Exception {
+	public void FACES1638Test() throws Exception {
 
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
@@ -72,19 +87,38 @@ public class FACES1638PortletTest extends TesterBase {
 
 		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
 		assertTrue("formTag.isDisplayed()", formTag.isDisplayed());
-
-		int firstItemIndex = firstItemURL.getAttribute("href").indexOf(ITEM_ID) + ITEM_ID.length();
-		String firstItemID = firstItemURL.getAttribute("href").substring(firstItemIndex);
-		assertTrue("firstItemID should equal 1, but it does not.", Integer.parseInt(firstItemID) == 1);
+		
+		
+		int firstItemIndex = firstByItemId.getAttribute("href").indexOf(ITEM_ID) + ITEM_ID.length();
+		String firstItemID = firstByItemId.getAttribute("href").substring(firstItemIndex);
 		logger.log(Level.INFO, "firstItemID = " + firstItemID);
-		int secondItemIndex = secondItemURL.getAttribute("href").indexOf(ITEM_ID) + ITEM_ID.length();
-		String secondItemID = secondItemURL.getAttribute("href").substring(secondItemIndex);
-		assertTrue("secondItemID should equal 2, but it does not", Integer.parseInt(secondItemID) == 2);
+		assertTrue("firstItemID should equal 1, but it does not.", firstItemID.equals("1"));
+		
+		int secondItemIndex = secondByItemId.getAttribute("href").indexOf(ITEM_ID) + ITEM_ID.length();
+		String secondItemID = secondByItemId.getAttribute("href").substring(secondItemIndex);
 		logger.log(Level.INFO, "secondItemID = " + secondItemID);
-		int thirdItemIndex = thirdItemURL.getAttribute("href").indexOf(ITEM_ID) + ITEM_ID.length();
-		String thirdItemID = thirdItemURL.getAttribute("href").substring(thirdItemIndex);
-		assertTrue("thirdItemID should equal 3, but it does not", Integer.parseInt(thirdItemID) == 3);
+		assertTrue("secondItemID should equal 2, but it does not", secondItemID.equals("2"));
+		
+		int thirdItemIndex = thirdByItemId.getAttribute("href").indexOf(ITEM_ID) + ITEM_ID.length();
+		String thirdItemID = thirdByItemId.getAttribute("href").substring(thirdItemIndex);
 		logger.log(Level.INFO, "thirdItemID = " + thirdItemID);
+		assertTrue("thirdItemID should equal 3, but it does not", thirdItemID.equals("3"));
+		
+		
+		firstItemIndex = firstByItemName.getAttribute("href").indexOf(ITEM_NAME) + ITEM_NAME.length();
+		String firstItemName = firstByItemName.getAttribute("href").substring(firstItemIndex);
+		logger.log(Level.INFO, "firstItemName = " + firstItemName);
+		assertTrue("firstItemName should equal 1, but it does not.", firstItemName.equals("1"));
+		
+		secondItemIndex = secondByItemName.getAttribute("href").indexOf(ITEM_NAME) + ITEM_NAME.length();
+		String secondItemName = secondByItemName.getAttribute("href").substring(secondItemIndex);
+		logger.log(Level.INFO, "secondItemName = " + secondItemName);
+		assertTrue("firstItemName should equal 2, but it does not", secondItemName.equals("2"));
+		
+		thirdItemIndex = thirdByItemName.getAttribute("href").indexOf(ITEM_NAME) + ITEM_NAME.length();
+		String thirdItemName = thirdByItemName.getAttribute("href").substring(thirdItemIndex);
+		logger.log(Level.INFO, "thirdItemName = " + thirdItemName);
+		assertTrue("firstItemName should equal 3, but it does not", thirdItemName.equals("3"));
 
 	}
 
