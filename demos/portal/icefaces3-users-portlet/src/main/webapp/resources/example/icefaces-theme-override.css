@@ -2,6 +2,10 @@
 	display: inline;
 }
 
+.ice-pushbutton .yui-button button.ui-state-hover {
+	font-weight: bold;
+}
+
 .pfusers .iceDatTbl {
 	margin: 0px;
 	width: 100%;
