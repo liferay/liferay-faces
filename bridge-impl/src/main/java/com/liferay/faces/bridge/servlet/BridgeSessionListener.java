@@ -172,82 +172,87 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 			BeanManagerFactory beanManagerFactory = (BeanManagerFactory) BridgeFactoryFinder.getFactory(
 					BeanManagerFactory.class);
 			BeanManager beanManager = beanManagerFactory.getBeanManager();
-			@SuppressWarnings("unchecked")
-			Enumeration<String> attributeNames = (Enumeration<String>) httpSession.getAttributeNames();
 
-			while (attributeNames.hasMoreElements()) {
+			try {
+				@SuppressWarnings("unchecked")
+				Enumeration<String> attributeNames = (Enumeration<String>) httpSession.getAttributeNames();
 
-				String attributeName = attributeNames.nextElement();
+				while (attributeNames.hasMoreElements()) {
 
-				// If the current session attribute name is namespaced with the standard portlet prefix, then it is an
-				// attribute that was set using PortletSession.setAttribute(String, Object).
-				if ((attributeName != null) && attributeName.startsWith("javax.portlet.p.")) {
-					int pos = attributeName.indexOf("?");
+					String attributeName = attributeNames.nextElement();
 
-					if (pos > 0) {
-						Object attributeValue = httpSession.getAttribute(attributeName);
-						httpSession.removeAttribute(attributeName);
+					// If the current session attribute name is namespaced with the standard portlet prefix, then it is
+					// an attribute that was set using PortletSession.setAttribute(String, Object).
+					if ((attributeName != null) && attributeName.startsWith("javax.portlet.p.")) {
+						int pos = attributeName.indexOf("?");
 
-						if (attributeValue != null) {
+						if (pos > 0) {
+							Object attributeValue = httpSession.getAttribute(attributeName);
+							httpSession.removeAttribute(attributeName);
 
-							// If the current session attribute value is a JSF managed-bean, then cleanup the bean by
-							// invoking methods annotated with {@link PreDestroy}. Note that in a webapp/servlet
-							// environment, the cleanup is handled by the Mojarra
-							// WebappLifecycleListener.sessionDestroyed(HttpSessionEvent) method. But in a portlet
-							// environment, Mojarra fails to recognize the session attribute as managed-bean because the
-							// attribute name contains the standard portlet prefix. An alternative approach would be to
-							// have the bridge rename the attribute (by stripping off the standard portlet prefix) so
-							// that Mojarra could find it. But this would not a good solution, because multiple
-							// instances of the same portlet would have the same session attribute names for
-							// managed-beans, and only the last one would get cleaned-up by Mojarra.
-							if (beanManager.isManagedBean(attributeName, attributeValue)) {
-								beanManager.invokePreDestroyMethods(attributeValue, true);
-							}
+							if (attributeValue != null) {
 
-							// Otherwise,
-							else {
+								// If the current session attribute value is a JSF managed-bean, then cleanup the bean
+								// by invoking methods annotated with {@link PreDestroy}. Note that in a webapp/servlet
+								// environment, the cleanup is handled by the Mojarra
+								// WebappLifecycleListener.sessionDestroyed(HttpSessionEvent) method. But in a portlet
+								// environment, Mojarra fails to recognize the session attribute as managed-bean because
+								// the attribute name contains the standard portlet prefix. An alternative approach
+								// would be to have the bridge rename the attribute (by stripping off the standard
+								// portlet prefix) so that Mojarra could find it. But this would not a good solution,
+								// because multiple instances of the same portlet would have the same session attribute
+								// names for managed-beans, and only the last one would get cleaned-up by Mojarra.
+								if (beanManager.isManagedBean(attributeName, attributeValue)) {
+									beanManager.invokePreDestroyMethods(attributeValue, true);
+								}
 
-								// If the current session attribute is Mojarra-vendor-specific, then
-								String fqcn = attributeValue.getClass().getName();
+								// Otherwise,
+								else {
 
-								if ((fqcn != null) && (fqcn.contains(MOJARRA_PACKAGE_PREFIX))) {
+									// If the current session attribute is Mojarra-vendor-specific, then
+									String fqcn = attributeValue.getClass().getName();
 
-									// Rename the namespaced attribute by stripping off the standard portlet prefix.
-									// This will enable Mojarra's session expiration features to find attributes that it
-									// is expecting.
-									String nonPrefixedName = attributeName.substring(pos + 1);
-									logger.debug("Renaming Mojarra session attributeName=[{0}] -> [{1}]", attributeName,
-										nonPrefixedName);
-									httpSession.setAttribute(nonPrefixedName, attributeValue);
+									if ((fqcn != null) && (fqcn.contains(MOJARRA_PACKAGE_PREFIX))) {
 
-									// If this is the attribute that contains all of the active view maps, then
-									if (MOJARRA_ACTIVE_VIEW_MAPS.equals(nonPrefixedName)) {
+										// Rename the namespaced attribute by stripping off the standard portlet prefix.
+										// This will enable Mojarra's session expiration features to find attributes
+										// that it is expecting.
+										String nonPrefixedName = attributeName.substring(pos + 1);
+										logger.debug("Renaming Mojarra session attributeName=[{0}] -> [{1}]",
+											attributeName, nonPrefixedName);
+										httpSession.setAttribute(nonPrefixedName, attributeValue);
 
-										if (mojarraAbleToCleanup) {
+										// If this is the attribute that contains all of the active view maps, then
+										if (MOJARRA_ACTIVE_VIEW_MAPS.equals(nonPrefixedName)) {
 
-											// Invoke the Mojarra ViewScopeManager.sessionDestroyed(HttpSessionEvent)
-											// method in order to cleanup the active view maps. Rather than waiting for
-											// the servlet container to call the method during session expiration, it is
-											// important to call it directly within this while-loop for two reasons: 1)
-											// If the developer did not explicitly specify the order of the Mojarra
-											// ConfigureListener and this BridgeSessionListener in WEB-IN/web.xml
-											// descriptor (FACES-1483) then there is no guarantee that the method would
-											// get called. 2) In the case of multiple portlet instances, each instance
-											// has its own namespaced attribute in the session. Renaming each namespaced
-											// attribute to "com.sun.faces.application.view.activeViewMaps" would only
-											// enable Mojarra to cleanup the last one.
-											HttpSessionListener viewScopeManager = (HttpSessionListener)
-												servletContext.getAttribute(MOJARRA_VIEW_SCOPE_MANAGER);
+											if (mojarraAbleToCleanup) {
 
-											if (viewScopeManager != null) {
+												// Invoke the Mojarra
+												// ViewScopeManager.sessionDestroyed(HttpSessionEvent) method in order
+												// to cleanup the active view maps. Rather than waiting for the servlet
+												// container to call the method during session expiration, it is
+												// important to call it directly within this while-loop for two reasons:
+												// 1) If the developer did not explicitly specify the order of the
+												// Mojarra ConfigureListener and this BridgeSessionListener in
+												// WEB-IN/web.xml descriptor (FACES-1483) then there is no guarantee
+												// that the method would get called. 2) In the case of multiple portlet
+												// instances, each instance has its own namespaced attribute in the
+												// session. Renaming each namespaced attribute to
+												// "com.sun.faces.application.view.activeViewMaps" would only enable
+												// Mojarra to cleanup the last one.
+												HttpSessionListener viewScopeManager = (HttpSessionListener)
+													servletContext.getAttribute(MOJARRA_VIEW_SCOPE_MANAGER);
 
-												try {
-													logger.debug(
-														"Asking Mojarra ViewScopeManager to cleanup @ViewScoped managed-beans");
-													viewScopeManager.sessionDestroyed(httpSessionEvent);
-												}
-												catch (Exception e) {
-													logger.error(e);
+												if (viewScopeManager != null) {
+
+													try {
+														logger.debug(
+															"Asking Mojarra ViewScopeManager to cleanup @ViewScoped managed-beans");
+														viewScopeManager.sessionDestroyed(httpSessionEvent);
+													}
+													catch (Exception e) {
+														logger.error(e);
+													}
 												}
 											}
 										}
@@ -257,6 +262,9 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 						}
 					}
 				}
+			}
+			catch (IllegalStateException e) {
+				logger.warn("Server does not permit cleanup of Mojarra managed-beans during session expiration");
 			}
 		}
 	}
