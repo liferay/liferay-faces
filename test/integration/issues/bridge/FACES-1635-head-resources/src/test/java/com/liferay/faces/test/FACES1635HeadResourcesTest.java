@@ -58,14 +58,6 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 	private HashMap<String, Integer> mapOfStyleSheetsInHead = new HashMap<String, Integer>();
 	private HashMap<String, Integer> mapOfStyleSheetsInBody = new HashMap<String, Integer>();
 
-	@Before
-	public void beforeEachTest() {
-
-//		browser.manage().deleteAllCookies();
-//		logger.log(Level.INFO, "browser.manage().deleteAllCookies() ...");
-
-	}
-
 	@Test
 	@RunAsClient
 	@InSequence(1000)
@@ -81,7 +73,7 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 		
 		List<WebElement> scriptsInHead = browser.findElements(By.xpath("//head/script"));
 		logger.log(Level.INFO, "scriptsInHead.size() = " + scriptsInHead.size());
-		populateMap(scriptsInHead, mapOfScriptsInHead);
+		populateMap(scriptsInHead, mapOfScriptsInHead, "src");
 		
 		for (Map.Entry<String, Integer> entry : mapOfScriptsInHead.entrySet()) {
 		    String key = entry.getKey();
@@ -94,7 +86,7 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 		
 		List<WebElement> scriptsInBody = browser.findElements(By.xpath("//body/script"));
 		logger.log(Level.INFO, "scriptsInBody.size() = " + scriptsInBody.size());
-		populateMap(scriptsInBody, mapOfScriptsInBody);
+		populateMap(scriptsInBody, mapOfScriptsInBody, "src");
 		
 		for (Map.Entry<String, Integer> entry : mapOfScriptsInBody.entrySet()) {
 		    String bodyKey = entry.getKey();
@@ -115,7 +107,7 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 		
 		List<WebElement> styleSheetsInHead = browser.findElements(By.xpath("//head/link"));
 		logger.log(Level.INFO, "styleSheetsInHead.size() = " + styleSheetsInHead.size());
-		populateMap(styleSheetsInHead, mapOfStyleSheetsInHead);
+		populateMap(styleSheetsInHead, mapOfStyleSheetsInHead, "href");
 		
 		for (Map.Entry<String, Integer> entry : mapOfStyleSheetsInHead.entrySet()) {
 		    String key = entry.getKey();
@@ -128,7 +120,7 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 		
 		List<WebElement> styleSheetsInBody = browser.findElements(By.xpath("//body/link"));
 		logger.log(Level.INFO, "styleSheetsInBody.size() = " + styleSheetsInBody.size());
-		populateMap(styleSheetsInHead, mapOfStyleSheetsInBody);
+		populateMap(styleSheetsInHead, mapOfStyleSheetsInBody, "href");
 		
 		for (Map.Entry<String, Integer> entry : mapOfStyleSheetsInBody.entrySet()) {
 		    String bodyKey = entry.getKey();
@@ -149,45 +141,50 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 
 	}
 	
-	public void populateMap(List<WebElement> webElements, Map<String, Integer> map) {
+	public void populateMap(List<WebElement> webElements, Map<String, Integer> map, String attribute) {
 		for (WebElement script: webElements) {
-		    String src = script.getAttribute("src");
-		    if ("".equals(src)) {
-		    	// logger.log(Level.INFO, "ignoring inline script tag");
-		    } else {
-		    	// logger.log(Level.INFO, "src = " + src);
-		    	String[] slashTokens = src.split("/");
-		    	if (slashTokens.length > 0) {
-		    		String token = slashTokens[(slashTokens.length-1)];
-		    		String[] questTokens = token.split("\\?");
-		    		token = questTokens[0];
-		    		
-					if (questTokens.length > 1) {
-						if (questTokens[1].contains("resource=")) {
-							// logger.log(Level.INFO, "questTokens[1] = " + questTokens[1]);
-							String[] resourceTokens = questTokens[1].split("resource=");
-							if (resourceTokens.length > 1) {
-								String[] ampTokens = resourceTokens[1].split("\\&");
-								token = ampTokens[0];
-							} else {
-								token = resourceTokens[0];
+		    String url = script.getAttribute(attribute);
+		    if (url == null) {
+		    	logger.log(Level.INFO, "populateMap: " + attribute + " == null");
+			} else {
+				if ("".equals(url)) {
+					// logger.log(Level.INFO, "populateMap: ignoring inline script tag");
+				} else {
+					// logger.log(Level.INFO, "src = " + src);
+					String[] slashTokens = url.split("/");
+					if (slashTokens.length > 0) {
+						String token = slashTokens[(slashTokens.length - 1)];
+						String[] questTokens = token.split("\\?");
+						token = questTokens[0];
+
+						if (questTokens.length > 1) {
+							if (questTokens[1].contains("resource=")) {
+								// logger.log(Level.INFO, "questTokens[1] = " + questTokens[1]);
+								String[] resourceTokens = questTokens[1]
+										.split("resource=");
+								if (resourceTokens.length > 1) {
+									String[] ampTokens = resourceTokens[1].split("\\&");
+									token = ampTokens[0];
+								} else {
+									token = resourceTokens[0];
+								}
+								logger.log(Level.INFO, "token = " + token);
 							}
-							logger.log(Level.INFO, "token = " + token);
 						}
+
+						int c = 0;
+						Integer count = map.get(token);
+						if (count == null) {
+							count = new Integer(1);
+						} else {
+							c = count.intValue() + 1;
+							count = new Integer(c);
+						}
+						map.put(token, count);
+						// logger.log(Level.INFO, "populateMap: token = " + token);
 					}
-		    		
-		    		int c = 0;
-		    		Integer count = map.get(token);
-		    		if (count == null) {
-		    			count = new Integer(1);
-		    		} else {
-		    			c = count.intValue() + 1; count = new Integer(c);
-		    		}
-		    		map.put(token, count);
-		    		// logger.log(Level.INFO, "populateMap: token = " + token);
-		    	}
-		    }
+				}
+			}
 		}
 	}
-
 }
