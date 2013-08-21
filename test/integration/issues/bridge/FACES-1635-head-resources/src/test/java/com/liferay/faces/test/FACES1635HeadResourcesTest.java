@@ -20,7 +20,6 @@ import java.util.logging.Level;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.graphene.enricher.findby.FindBy;
-import org.jboss.arquillian.graphene.javascript.JSInterfaceFactory;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.junit.Before;
@@ -28,7 +27,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import com.liferay.faces.test.util.TesterBase;
@@ -46,7 +44,7 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 
 	private static final String textarea1Xpath = "//textarea[contains(@id,':comments1:inputText')]";
 
-	static final String url = baseUrl + "";
+	static final String url = baseUrl + "/web/bridge-issues/faces-1635";
 
 	@FindBy(xpath = portletDisplayNameXpath)
 	private WebElement portletDisplayName;
@@ -79,6 +77,8 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
 		
+		waitForElement(portletDisplayNameXpath);
+		
 		List<WebElement> scriptsInHead = browser.findElements(By.xpath("//head/script"));
 		logger.log(Level.INFO, "scriptsInHead.size() = " + scriptsInHead.size());
 		populateMap(scriptsInHead, mapOfScriptsInHead);
@@ -97,19 +97,19 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 		populateMap(scriptsInBody, mapOfScriptsInBody);
 		
 		for (Map.Entry<String, Integer> entry : mapOfScriptsInBody.entrySet()) {
-		    String key = entry.getKey();
+		    String bodyKey = entry.getKey();
 		    int value = (entry.getValue()).intValue();
 		    if (value > 1) {
-		    	logger.log(Level.INFO, "scriptsInBody " + key + " occurs " + value + " times.");
-		    	assertTrue("scriptsInBody should only occur once, but " + key + " occurs " + value + " times.", false);
+		    	logger.log(Level.INFO, "scriptsInBody " + bodyKey + " occurs " + value + " times.");
+		    	assertTrue("scriptsInBody should only occur once, but " + bodyKey + " occurs " + value + " times.", false);
 		    }
 		    
-		    Integer headScriptAlsoInBody = mapOfScriptsInHead.get(key);
+		    Integer headScriptAlsoInBody = mapOfScriptsInHead.get(bodyKey);
 		    if (headScriptAlsoInBody == null) {
 		    	logger.log(Level.INFO, "headScriptInBody == null ... this is good.");
 		    } else {
-		    	logger.log(Level.INFO, "headScriptInBody != null ... this is bad. " + key + " occurs in both the head and the body");
-		    	assertTrue("headScriptInBody != null ... this is bad. " + key + " occurs in both the head and the body", false);
+		    	logger.log(Level.INFO, "headScriptInBody != null ... this is bad. " + bodyKey + " occurs in both the head and the body");
+		    	assertTrue("headScriptInBody != null ... this is bad. " + bodyKey + " occurs in both the head and the body", false);
 		    }
 		}
 		
@@ -131,19 +131,19 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 		populateMap(styleSheetsInHead, mapOfStyleSheetsInBody);
 		
 		for (Map.Entry<String, Integer> entry : mapOfStyleSheetsInBody.entrySet()) {
-		    String key = entry.getKey();
+		    String bodyKey = entry.getKey();
 		    int value = (entry.getValue()).intValue();
 		    if (value > 1) {
-		    	logger.log(Level.INFO, "scriptsInBody " + key + " occurs " + value + " times.");
-		    	assertTrue("scriptsInBody should only occur once, but " + key + " occurs " + value + " times.", false);
+		    	logger.log(Level.INFO, "scriptsInBody " + bodyKey + " occurs " + value + " times.");
+		    	assertTrue("scriptsInBody should only occur once, but " + bodyKey + " occurs " + value + " times.", false);
 		    }
 		    
-		    Integer styleSheetAlsoInBody = mapOfStyleSheetsInHead.get(key);
+		    Integer styleSheetAlsoInBody = mapOfStyleSheetsInHead.get(bodyKey);
 		    if (styleSheetAlsoInBody == null) {
 		    	logger.log(Level.INFO, "styleSheetAlsoInBody == null ... this is good.");
 		    } else {
-		    	logger.log(Level.INFO, "styleSheetAlsoInBody != null ... this is bad. " + key + " occurs in both the head and the body");
-		    	assertTrue("styleSheetAlsoInBody != null ... this is bad. " + key + " occurs in both the head and the body", false);
+		    	logger.log(Level.INFO, "styleSheetAlsoInBody != null ... this is bad. " + bodyKey + " occurs in both the head and the body");
+		    	assertTrue("styleSheetAlsoInBody != null ... this is bad. " + bodyKey + " occurs in both the head and the body", false);
 		    }
 		}
 
@@ -155,12 +155,27 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 		    if ("".equals(src)) {
 		    	// logger.log(Level.INFO, "ignoring inline script tag");
 		    } else {
-		    	// logger.log(Level.INFO, "scriptsInHead src = " + src);
+		    	// logger.log(Level.INFO, "src = " + src);
 		    	String[] slashTokens = src.split("/");
 		    	if (slashTokens.length > 0) {
 		    		String token = slashTokens[(slashTokens.length-1)];
 		    		String[] questTokens = token.split("\\?");
 		    		token = questTokens[0];
+		    		
+					if (questTokens.length > 1) {
+						if (questTokens[1].contains("resource=")) {
+							// logger.log(Level.INFO, "questTokens[1] = " + questTokens[1]);
+							String[] resourceTokens = questTokens[1].split("resource=");
+							if (resourceTokens.length > 1) {
+								String[] ampTokens = resourceTokens[1].split("\\&");
+								token = ampTokens[0];
+							} else {
+								token = resourceTokens[0];
+							}
+							logger.log(Level.INFO, "token = " + token);
+						}
+					}
+		    		
 		    		int c = 0;
 		    		Integer count = map.get(token);
 		    		if (count == null) {
@@ -169,7 +184,7 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 		    			c = count.intValue() + 1; count = new Integer(c);
 		    		}
 		    		map.put(token, count);
-		    		// logger.log(Level.INFO, "populateMap: scriptsInHead token = " + token);
+		    		// logger.log(Level.INFO, "populateMap: token = " + token);
 		    	}
 		    }
 		}
