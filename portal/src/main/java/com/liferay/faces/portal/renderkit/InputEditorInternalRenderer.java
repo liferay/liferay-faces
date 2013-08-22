@@ -35,6 +35,7 @@ import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.portal.servlet.NonNamespacedHttpServletRequest;
 import com.liferay.faces.util.jsp.JspIncludeResponse;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.liferay.portal.ScriptDataUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.CleanupRenderer;
@@ -207,7 +208,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				else {
 
 					ScriptData scriptData = (ScriptData) externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
-					scriptData.append(getPortletId(portletRequest), onBlurScript, null);
+					ScriptDataUtil.append(scriptData, getPortletId(portletRequest), onBlurScript, "aui-base");
 				}
 
 				// FACES-1439: If the component was rendered on the page on the previous JSF lifecycle, then prevent it
