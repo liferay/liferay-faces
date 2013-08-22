@@ -17,79 +17,169 @@ import java.io.IOException;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
-import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.liferay.portal.ScriptDataUtil;
+
+import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.theme.ThemeDisplay;
 
 
 /**
  * @author  Neil Griffin
  */
-public class ScriptRenderer extends Renderer {
+public class ScriptRenderer extends ScriptRendererCompat {
 
 	// Private Constants
 	private static final String AUI_USE = "AUI().use";
+	private static final String BOTTOM = "bottom";
 	private static final String FUNCTION_A = "function(A)";
 	private static final String SCRIPT = "script";
+	private static final String INLINE = "inline";
+	private static final String POSITION = "position";
 	private static final String TEXT_JAVASCRIPT = "text/javascript";
 	private static final String TYPE = "type";
 	private static final String USE = "use";
 
 	// Private Data Members
-	String inlineUse;
+	private boolean inline;
+	private String inlineUse;
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		Map<String, Object> attributes = uiComponent.getAttributes();
 
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(SCRIPT, uiComponent);
-		responseWriter.writeAttribute(TYPE, TEXT_JAVASCRIPT, null);
-		responseWriter.write(StringPool.FORWARD_SLASH);
-		responseWriter.write(StringPool.FORWARD_SLASH);
-		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(StringPool.CDATA_OPEN);
-		responseWriter.write(StringPool.NEW_LINE);
+		// Assume that the script is not going to be rendered inline, but rather it will be rendered at the bottom of
+		// the page.
+		inline = false;
 
-		inlineUse = (String) attributes.get(USE);
+		// If the current URL is a "refresh" type of URL (isolated) or the window state is exclusive, then the script
+		// must be rendered inline.
+		ThemeDisplay themeDisplay = (ThemeDisplay) facesContext.getExternalContext().getRequestMap().get(
+				WebKeys.THEME_DISPLAY);
 
-		if (inlineUse != null) {
-			responseWriter.write(AUI_USE);
-			responseWriter.write(StringPool.OPEN_PARENTHESIS);
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(inlineUse);
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(StringPool.COMMA);
-			responseWriter.write(StringPool.NEW_LINE);
-			responseWriter.write(FUNCTION_A);
+		if (themeDisplay != null) {
+			inline = (themeDisplay.isIsolated() || themeDisplay.isStateExclusive());
+		}
+
+		// Otherwise, if the current request was triggered by Ajax, then the script must be rendered inline.
+		if (!inline) {
+
+			if (isAjaxRequest(facesContext)) {
+				inline = true;
+			}
+		}
+
+		// If the developer specified "inline" as the value of the position attribute, then the script must be
+		// rendered inline.
+		String position = (String) attributes.get(POSITION);
+
+		if (position != null) {
+
+			if (INLINE.equals(position)) {
+				inline = true;
+			}
+			else if (BOTTOM.equals(position)) {
+				inline = false;
+			}
+		}
+
+		if (inline) {
+
+			ResponseWriter responseWriter = facesContext.getResponseWriter();
+			responseWriter.startElement(SCRIPT, uiComponent);
+			responseWriter.writeAttribute(TYPE, TEXT_JAVASCRIPT, null);
+			responseWriter.write(StringPool.FORWARD_SLASH);
+			responseWriter.write(StringPool.FORWARD_SLASH);
 			responseWriter.write(StringPool.SPACE);
-			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+			responseWriter.write(StringPool.CDATA_OPEN);
 			responseWriter.write(StringPool.NEW_LINE);
+
+			inlineUse = (String) attributes.get(USE);
+
+			if (inlineUse != null) {
+				responseWriter.write(AUI_USE);
+				responseWriter.write(StringPool.OPEN_PARENTHESIS);
+				responseWriter.write(StringPool.APOSTROPHE);
+				responseWriter.write(inlineUse);
+				responseWriter.write(StringPool.APOSTROPHE);
+				responseWriter.write(StringPool.COMMA);
+				responseWriter.write(StringPool.NEW_LINE);
+				responseWriter.write(FUNCTION_A);
+				responseWriter.write(StringPool.SPACE);
+				responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+				responseWriter.write(StringPool.NEW_LINE);
+			}
+		}
+	}
+
+	@Override
+	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		if (inline) {
+			super.encodeChildren(facesContext, uiComponent);
+		}
+		else {
+			ResponseWriter backupResponseWriter = facesContext.getResponseWriter();
+			BufferedResponseWriter bufferedResponseWriter = new BufferedResponseWriter();
+			facesContext.setResponseWriter(bufferedResponseWriter);
+			super.encodeChildren(facesContext, uiComponent);
+
+			ExternalContext externalContext = facesContext.getExternalContext();
+			ScriptData scriptData = (ScriptData) externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
+
+			if (scriptData == null) {
+				scriptData = new ScriptData();
+				externalContext.getRequestMap().put(WebKeys.AUI_SCRIPT_DATA, scriptData);
+			}
+
+			Map<String, Object> attributes = uiComponent.getAttributes();
+			String use = (String) attributes.get(USE);
+			String portletId = StringPool.BLANK;
+			Portlet portlet = (Portlet) facesContext.getExternalContext().getRequestMap().get(WebKeys.RENDER_PORTLET);
+
+			if (portlet != null) {
+				portletId = portlet.getPortletId();
+			}
+
+			ScriptDataUtil.append(scriptData, portletId, bufferedResponseWriter.toString(), use);
+
+			facesContext.setResponseWriter(backupResponseWriter);
 		}
 	}
 
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		if (inline) {
+			ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		if (inlineUse != null) {
-			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+			if (inlineUse != null) {
+				responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+				responseWriter.write(StringPool.NEW_LINE);
+				responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+				responseWriter.write(StringPool.SEMICOLON);
+				responseWriter.write(StringPool.NEW_LINE);
+			}
+
+			responseWriter.write(StringPool.FORWARD_SLASH);
+			responseWriter.write(StringPool.FORWARD_SLASH);
+			responseWriter.write(StringPool.SPACE);
+			responseWriter.write(StringPool.CDATA_CLOSE);
 			responseWriter.write(StringPool.NEW_LINE);
-			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-			responseWriter.write(StringPool.SEMICOLON);
-			responseWriter.write(StringPool.NEW_LINE);
+			responseWriter.endElement(SCRIPT);
 		}
+	}
 
-		responseWriter.write(StringPool.FORWARD_SLASH);
-		responseWriter.write(StringPool.FORWARD_SLASH);
-		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(StringPool.CDATA_CLOSE);
-		responseWriter.write(StringPool.NEW_LINE);
-		responseWriter.endElement(SCRIPT);
+	@Override
+	public boolean getRendersChildren() {
+		return true;
 	}
 
 }

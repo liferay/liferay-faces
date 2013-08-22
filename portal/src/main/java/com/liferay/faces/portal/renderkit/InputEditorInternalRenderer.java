@@ -35,11 +35,15 @@ import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.portal.servlet.NonNamespacedHttpServletRequest;
 import com.liferay.faces.util.jsp.JspIncludeResponse;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.liferay.portal.ScriptDataUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.CleanupRenderer;
 
 import com.liferay.portal.kernel.editor.EditorUtil;
+import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.PortalUtil;
 
 
@@ -181,19 +185,31 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				// ability.
 				String onBlurScript = getOnBlurScript(editorName, onBlurMethod, namespace);
 
-				// Include the "onblur" callback script directly in the response.
-				StringBuilder scriptMarkup = new StringBuilder();
-				scriptMarkup.append(StringPool.LESS_THAN);
-				scriptMarkup.append(StringPool.SCRIPT);
-				scriptMarkup.append(StringPool.GREATER_THAN);
-				scriptMarkup.append(StringPool.CDATA_OPEN);
-				scriptMarkup.append(onBlurScript);
-				scriptMarkup.append(COMMENT_CDATA_CLOSE);
-				scriptMarkup.append(StringPool.LESS_THAN);
-				scriptMarkup.append(StringPool.FORWARD_SLASH);
-				scriptMarkup.append(StringPool.SCRIPT);
-				scriptMarkup.append(StringPool.GREATER_THAN);
-				bufferedResponse = bufferedResponse.concat(scriptMarkup.toString());
+				// If running within an Ajax request, include the "onblur" callback script must be included directly
+				// to the response.
+				if (resourcePhase) {
+
+					StringBuilder scriptMarkup = new StringBuilder();
+					scriptMarkup.append(StringPool.LESS_THAN);
+					scriptMarkup.append(StringPool.SCRIPT);
+					scriptMarkup.append(StringPool.GREATER_THAN);
+					scriptMarkup.append(StringPool.CDATA_OPEN);
+					scriptMarkup.append(onBlurScript);
+					scriptMarkup.append(COMMENT_CDATA_CLOSE);
+					scriptMarkup.append(StringPool.LESS_THAN);
+					scriptMarkup.append(StringPool.FORWARD_SLASH);
+					scriptMarkup.append(StringPool.SCRIPT);
+					scriptMarkup.append(StringPool.GREATER_THAN);
+					bufferedResponse = bufferedResponse.concat(scriptMarkup.toString());
+				}
+
+				// Otherwise, append the script to the "LIFERAY_SHARED_AUI_SCRIPT_DATA" request attribute, which will
+				// cause the script to be rendered at the bottom of the portal page.
+				else {
+
+					ScriptData scriptData = (ScriptData) externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
+					ScriptDataUtil.append(scriptData, getPortletId(portletRequest), onBlurScript, "aui-base");
+				}
 
 				// FACES-1439: If the component was rendered on the page on the previous JSF lifecycle, then prevent it
 				// from being re-initialized by removing all <script>...</script> elements.
@@ -295,6 +311,17 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 		}
 
 		return onBlurScript;
+	}
+
+	protected String getPortletId(PortletRequest portletRequest) {
+		String portletId = StringPool.BLANK;
+		Portlet portlet = (Portlet) portletRequest.getAttribute(WebKeys.RENDER_PORTLET);
+
+		if (portlet != null) {
+			portletId = portlet.getPortletId();
+		}
+
+		return portletId;
 	}
 
 	protected class ParsedResponse {
