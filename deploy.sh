@@ -121,7 +121,7 @@ until [ -z $1 ] ; do
 	fi
 	shift
 done
-PORTLET_MVN_CMD="mvn -P $PORTAL_PROFILE_NAME,$FACES_IMPL,$SERVER_PROFILE_NAME,$EXTRA_PROFILE_NAMES help:active-profiles clean install"
+PORTLET_MVN_CMD="mvn -P $PORTAL_PROFILE_NAME,$FACES_IMPL,$SERVER_PROFILE_NAME,redeploy,$EXTRA_PROFILE_NAMES help:active-profiles clean install"
 if [ "$PORTAL_PROFILE_NAME" = "liferay" ] ; then
 	if [ "$LIFERAY_FACES_VERSION" = "3.0.x-legacy" ] ; then
 		# liferay-maven-plugin not supported for Liferay 5.2.x
