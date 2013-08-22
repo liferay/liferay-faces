@@ -111,6 +111,7 @@
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
 			<artifactId>portal-kernel</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
