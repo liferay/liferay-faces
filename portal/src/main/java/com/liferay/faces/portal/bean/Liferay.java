@@ -22,6 +22,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletRequest;
 
+import com.liferay.faces.portal.backport.WebKeys;
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.portal.el.PortraitURLMap;
 import com.liferay.faces.portal.el.ThemeImageURLMap;
