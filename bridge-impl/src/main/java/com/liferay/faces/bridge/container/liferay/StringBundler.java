@@ -37,7 +37,8 @@ public class StringBundler implements FacesWrapper<Object> {
 
 	// Private Constants
 	private static Class<?> stringBundlerClass;
-	private static Method appendMethod;
+	private static Method appendMethod1;
+	private static Method appendMethod2;
 	private static Method lengthMethod;
 
 	static {
@@ -46,7 +47,8 @@ public class StringBundler implements FacesWrapper<Object> {
 
 			try {
 				stringBundlerClass = Class.forName("com.liferay.portal.kernel.util.StringBundler");
-				appendMethod = stringBundlerClass.getMethod("append", new Class[] { String.class });
+				appendMethod1 = stringBundlerClass.getMethod("append", new Class[] { String.class });
+				appendMethod2 = stringBundlerClass.getMethod("append", new Class[] { stringBundlerClass });
 				lengthMethod = stringBundlerClass.getMethod("length", new Class[] {});
 			}
 			catch (Exception e) {
@@ -56,38 +58,44 @@ public class StringBundler implements FacesWrapper<Object> {
 	}
 
 	// Private Data Members
-	private Object wrappedStringBundler;
+	private Object wrapped;
 
 	public StringBundler() {
-		this.wrappedStringBundler = createInstance();
+		this.wrapped = createInstance();
 	}
 
 	public StringBundler(Object stringBundler) {
-		this.wrappedStringBundler = stringBundler;
+		this.wrapped = stringBundler;
 	}
 
 	public void append(String value) {
 
 		try {
 
-			if (stringBundlerClass == null) {
-
-				if (wrappedStringBundler == null) {
-					wrappedStringBundler = new StringBuilder();
-				}
-
-				StringBuilder stringBuilder = (StringBuilder) wrappedStringBundler;
+			if (wrapped instanceof StringBuilder) {
+				StringBuilder stringBuilder = (StringBuilder) wrapped;
 				stringBuilder.append(value);
 			}
 			else {
-
-				if (wrappedStringBundler == null) {
-					wrappedStringBundler = stringBundlerClass.newInstance();
-				}
-
-				appendMethod.invoke(wrappedStringBundler, new Object[] { value });
+				appendMethod1.invoke(wrapped, new Object[] { value });
 			}
+		}
+		catch (Exception e) {
+			logger.error(e);
+		}
+	}
 
+	public void append(StringBundler value) {
+
+		try {
+
+			if (wrapped instanceof StringBuilder) {
+				StringBuilder stringBuilder = (StringBuilder) wrapped;
+				stringBuilder.append(value.toString());
+			}
+			else {
+				appendMethod2.invoke(wrapped, new Object[] { value.getWrapped() });
+			}
 		}
 		catch (Exception e) {
 			logger.error(e);
@@ -100,16 +108,13 @@ public class StringBundler implements FacesWrapper<Object> {
 
 		try {
 
-			if (wrappedStringBundler != null) {
-
-				if (stringBundlerClass == null) {
-					StringBuilder stringBuilder = (StringBuilder) wrappedStringBundler;
-					len = stringBuilder.length();
-				}
-				else {
-					Integer lengthValue = (Integer) lengthMethod.invoke(wrappedStringBundler, (Object[]) null);
-					len = lengthValue.intValue();
-				}
+			if (wrapped instanceof StringBuilder) {
+				StringBuilder stringBuilder = (StringBuilder) wrapped;
+				len = stringBuilder.length();
+			}
+			else {
+				Integer lengthValue = (Integer) lengthMethod.invoke(wrapped, (Object[]) null);
+				len = lengthValue.intValue();
 			}
 		}
 		catch (Exception e) {
@@ -121,13 +126,7 @@ public class StringBundler implements FacesWrapper<Object> {
 
 	@Override
 	public String toString() {
-
-		if (wrappedStringBundler == null) {
-			return null;
-		}
-		else {
-			return wrappedStringBundler.toString();
-		}
+		return wrapped.toString();
 	}
 
 	protected Object createInstance() {
@@ -151,7 +150,7 @@ public class StringBundler implements FacesWrapper<Object> {
 	}
 
 	public Object getWrapped() {
-		return wrappedStringBundler;
+		return wrapped;
 	}
 
 }
