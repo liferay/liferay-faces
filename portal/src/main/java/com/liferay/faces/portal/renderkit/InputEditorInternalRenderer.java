@@ -30,6 +30,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.liferay.faces.portal.backport.EditorUtil;
+import com.liferay.faces.portal.backport.WebKeys;
 import com.liferay.faces.portal.component.InputEditorInternal;
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.portal.servlet.NonNamespacedHttpServletRequest;
@@ -40,9 +42,7 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.CleanupRenderer;
 
-import com.liferay.portal.kernel.editor.EditorUtil;
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.PortalUtil;
 

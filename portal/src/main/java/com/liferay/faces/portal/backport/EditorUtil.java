@@ -11,27 +11,17 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.util;
+package com.liferay.faces.portal.backport;
 
-import javax.faces.context.FacesContext;
-import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
-
-import com.liferay.faces.portal.backport.EditorUtil;
-import com.liferay.portal.util.PortalUtil;
 
 
 /**
  * @author  Neil Griffin
  */
-public class FaceletUtil {
+public class EditorUtil {
 
-	public static String getEditorValue(String editorImpl) {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		PortletRequest portletRequest = (PortletRequest) facesContext.getExternalContext().getRequest();
-		HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
-		String editorValue = EditorUtil.getEditorValue(httpServletRequest, editorImpl);
-
-		return editorValue;
+	public static String getEditorValue(HttpServletRequest request, String editorImpl) {
+		return com.liferay.portal.kernel.editor.EditorUtil.getEditorValue(request, editorImpl);
 	}
 }
