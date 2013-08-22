@@ -131,6 +131,7 @@
 		<pluto.tomcat.version>7.0.21</pluto.tomcat.version>
 		<pluto.version>2.0.3</pluto.version>
 		<portal.type>liferay</portal.type>
+		<portlet.war.deployment.type>deploy</portlet.war.deployment.type>
 		<primefaces3.version>3.5</primefaces3.version>
 		<richfaces4.version>4.3.2.Final</richfaces4.version>
 		<selenium.version>2.31.0</selenium.version>
@@ -155,6 +156,18 @@
 	<build>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>com.liferay.maven.plugins</groupId>
+					<artifactId>liferay-maven-plugin</artifactId>
+					<version>${liferay.maven.plugin.version}</version>
+					<configuration>
+						<!-- liferay.auto.deploy.dir is the location where WARs are copied for deployment -->
+						<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
+						<!-- liferay.deploy.dir is the location where extracted WARs are finally deployed -->
+						<deployDir>${liferay.deploy.dir}</deployDir>
+						<liferayVersion>${liferay.maven.plugin.version}</liferayVersion>
+					</configuration>
+				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-antrun-plugin</artifactId>
@@ -421,6 +434,7 @@
 								<configuration>
 									<target>
 										<touch file="target/${app.server.type}-portlet-war-activation.tmp" />
+										<touch file="target/${portal.type}-portlet-war-${portlet.war.deployment.type}-activation.tmp" />
 										<touch file="target/${portal.type}-portlet-war-activation.tmp" />
 									</target>
 								</configuration>
@@ -569,20 +583,16 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
+		</profile>
+		<profile>
+			<id>liferay-portlet-war-redeploy</id>
+			<activation>
+				<file>
+					<exists>target/liferay-portlet-war-redeploy-activation.tmp</exists>
+				</file>
+			</activation>
 			<build>
 				<plugins>
-					<plugin>
-						<groupId>com.liferay.maven.plugins</groupId>
-						<artifactId>liferay-maven-plugin</artifactId>
-						<version>${liferay.maven.plugin.version}</version>
-						<configuration>
-							<!-- liferay.auto.deploy.dir is the location where WARs are copied for deployment -->
-							<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
-							<!-- liferay.deploy.dir is the location where extracted WARs are finally deployed -->
-							<deployDir>${liferay.deploy.dir}</deployDir>
-							<liferayVersion>${liferay.maven.plugin.version}</liferayVersion>
-						</configuration>
-					</plugin>
 					<plugin>
 						<artifactId>maven-antrun-plugin</artifactId>
 						<executions>
@@ -594,6 +604,7 @@
 								</goals>
 								<configuration>
 									<target>
+										<echo message="Cleaning portlet from ${app.server.type}" />
 										<delete failonerror="false" includeemptydirs="true" verbose="true">
 											<fileset dir="${liferay.auto.deploy.dir}" includes="${project.artifactId}*.war" />
 											<fileset dir="${liferay.auto.deploy.dir}/${project.artifactId}" />
@@ -690,6 +701,18 @@
 							</execution>
 						</executions>
 					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>pluto-portlet-war-redeploy</id>
+			<activation>
+				<file>
+					<exists>target/pluto-portlet-war-redeploy-activation.tmp</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
 					<plugin>
 						<artifactId>maven-antrun-plugin</artifactId>
 						<executions>
@@ -701,6 +724,7 @@
 								</goals>
 								<configuration>
 									<target>
+										<echo message="Cleaning portlet from ${app.server.type}" />
 										<delete failonerror="false" includeemptydirs="true" verbose="true">
 											<fileset dir="${pluto.deploy.dir}">
 												<include name="${project.artifactId}*/" />
@@ -730,6 +754,12 @@
 					</plugin>
 				</plugins>
 			</build>
+		</profile>
+		<profile>
+			<id>redeploy</id>
+			<properties>
+				<portlet.war.deployment.type>redeploy</portlet.war.deployment.type>
+			</properties>
 		</profile>
 		<profile>
 			<id>release</id>
