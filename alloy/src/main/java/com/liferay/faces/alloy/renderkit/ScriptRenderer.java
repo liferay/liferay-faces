@@ -22,9 +22,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.liferay.portal.ScriptDataUtil;
 
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
 
 
@@ -79,6 +81,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 		String position = (String) attributes.get(POSITION);
 
 		if (position != null) {
+
 			if (INLINE.equals(position)) {
 				inline = true;
 			}
@@ -138,7 +141,15 @@ public class ScriptRenderer extends ScriptRendererCompat {
 
 			Map<String, Object> attributes = uiComponent.getAttributes();
 			String use = (String) attributes.get(USE);
-			scriptData.append(bufferedResponseWriter.toString(), use);
+			String portletId = StringPool.BLANK;
+			Portlet portlet = (Portlet) facesContext.getExternalContext().getRequestMap().get(WebKeys.RENDER_PORTLET);
+
+			if (portlet != null) {
+				portletId = portlet.getPortletId();
+			}
+
+			ScriptDataUtil.append(scriptData, portletId, bufferedResponseWriter.toString(), use);
+
 			facesContext.setResponseWriter(backupResponseWriter);
 		}
 	}
