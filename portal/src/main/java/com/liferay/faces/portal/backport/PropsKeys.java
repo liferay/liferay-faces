@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.portal.kernel.util;
+package com.liferay.faces.portal.backport;
 
 /**
  * This interface exists in order to backport constants from the Liferay 6.x codebase.

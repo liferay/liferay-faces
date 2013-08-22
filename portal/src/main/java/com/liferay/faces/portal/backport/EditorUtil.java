@@ -11,13 +11,13 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.portal.kernel.editor;
+package com.liferay.faces.portal.backport;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.liferay.faces.portal.renderkit.InputEditorInternalRenderer;
+
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 

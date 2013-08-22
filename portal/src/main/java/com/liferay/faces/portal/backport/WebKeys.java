@@ -11,14 +11,14 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.portal.util;
+package com.liferay.faces.portal.backport;
 
 /**
- * @author  Brian Wing Shun Chan
- * @author  Brian Myunghun Kim
+ * @author  Neil Griffin
  */
-public class WebKeys {
+public interface WebKeys {
 
+	public static final String AUI_SCRIPT_DATA = "LIFERAY_SHARED_AUI_SCRIPT_DATA";
 	public static final String RENDER_PORTLET = "RENDER_PORTLET";
-
+	public static final String THEME_DISPLAY = "THEME_DISPLAY";
 }
