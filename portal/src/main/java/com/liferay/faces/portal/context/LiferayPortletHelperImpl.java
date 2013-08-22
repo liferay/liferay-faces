@@ -19,6 +19,7 @@ import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletRequest;
 
+import com.liferay.faces.portal.backport.WebKeys;
 import com.liferay.faces.portal.bean.Liferay;
 import com.liferay.faces.portal.security.AuthorizationException;
 import com.liferay.faces.util.logging.Logger;
@@ -38,7 +39,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 
 
 /**
@@ -227,8 +227,7 @@ public class LiferayPortletHelperImpl implements LiferayPortletHelper, Serializa
 	}
 
 	public ThemeDisplay getThemeDisplay() {
-		ThemeDisplay themeDisplay = (ThemeDisplay) getPortletRequest().getAttribute(
-				com.liferay.portal.kernel.util.WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay) getPortletRequest().getAttribute(WebKeys.THEME_DISPLAY);
 
 		return themeDisplay;
 	}
