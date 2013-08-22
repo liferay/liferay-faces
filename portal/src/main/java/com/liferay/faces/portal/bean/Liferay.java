@@ -22,13 +22,13 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletRequest;
 
+import com.liferay.faces.portal.backport.WebKeys;
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.portal.el.PortraitURLMap;
 import com.liferay.faces.portal.el.ThemeImageURLMap;
 import com.liferay.faces.portal.security.UserPermissionMap;
 import com.liferay.faces.util.helper.BooleanHelper;
 
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
