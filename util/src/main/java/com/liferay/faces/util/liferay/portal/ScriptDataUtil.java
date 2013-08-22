@@ -21,8 +21,6 @@ import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
-import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
-
 
 /**
  * This class serves as a facade for instances of the Liferay Portal {@link ScriptData} class. Some of the method
@@ -40,6 +38,7 @@ public class ScriptDataUtil {
 	private static final String APPEND = "append";
 	private static final Method APPEND_METHOD_LEGACY;
 	private static final Method APPEND_METHOD_CURRENT;
+	private static final String SCRIPT_DATA_FQCN = "com.liferay.portal.kernel.servlet.taglib.aui.ScriptData";
 
 	static {
 
@@ -54,7 +53,8 @@ public class ScriptDataUtil {
 				Method appendMethodLegacy = null;
 
 				try {
-					appendMethodLegacy = ScriptData.class.getMethod(APPEND, new Class[] { String.class, String.class });
+					Class<?> scriptDataClass = Class.forName(SCRIPT_DATA_FQCN);
+					appendMethodLegacy = scriptDataClass.getMethod(APPEND, new Class[] { String.class, String.class });
 				}
 				catch (Exception e) {
 					logger.error(e);
@@ -67,7 +67,8 @@ public class ScriptDataUtil {
 				Method appendMethodCurrent = null;
 
 				try {
-					appendMethodCurrent = ScriptData.class.getMethod(APPEND,
+					Class<?> scriptDataClass = Class.forName(SCRIPT_DATA_FQCN);
+					appendMethodCurrent = scriptDataClass.getMethod(APPEND,
 							new Class[] { String.class, String.class, String.class });
 				}
 				catch (Exception e) {
@@ -84,7 +85,7 @@ public class ScriptDataUtil {
 		}
 	}
 
-	public static void append(ScriptData scriptData, String portletId, String content, String use) {
+	public static void append(Object scriptData, String portletId, String content, String use) {
 
 		try {
 
