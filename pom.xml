@@ -132,6 +132,8 @@
 		<pluto.version>2.0.3</pluto.version>
 		<portal.type>liferay</portal.type>
 		<portlet.war.deployment.type>deploy</portlet.war.deployment.type>
+		<primefaces1.version>UNSUPPORTED</primefaces1.version>
+		<richfaces3.version>UNSUPPORTED</richfaces3.version>
 		<selenium.version>2.31.0</selenium.version>
 		<spring.version>3.0.7.RELEASE</spring.version>
 		<surefire.version>2.12</surefire.version>
