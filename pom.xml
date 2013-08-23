@@ -100,7 +100,7 @@
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces1.version>1.8.2</icefaces1.version>
 		<jstl.version>1.2</jstl.version>
-		<liferay.version>6.1.1</liferay.version>
+		<liferay.version>6.1.2</liferay.version>
 		<liferay.app.server.deploy.dir>${liferay.app.server.dir}/webapps</liferay.app.server.deploy.dir>
 		<liferay.app.server.dir>${liferay.home}/tomcat-${liferay.tomcat.version}</liferay.app.server.dir>
 		<liferay.app.server.lib.global.dir>${liferay.app.server.dir}/lib/ext</liferay.app.server.lib.global.dir>
@@ -110,17 +110,17 @@
 		<liferay.deploy.dir>${liferay.app.server.dir}/webapps</liferay.deploy.dir>
 		<liferay.deploy.version>${liferay.version}</liferay.deploy.version>
 		<liferay.geronimo.version>2.2.1</liferay.geronimo.version>
-		<liferay.glassfish.version>3.1.2</liferay.glassfish.version>
+		<liferay.glassfish.version>3.1.2.2</liferay.glassfish.version>
 		<liferay.home>${env.PORTALS_HOME}/liferay.com/${liferay.portal}-jsf-1.2</liferay.home>
 		<liferay.jboss.version>7.1.1</liferay.jboss.version>
-		<liferay.jetty.version>7.6.3</liferay.jetty.version>
+		<liferay.jetty.version>8.1.10</liferay.jetty.version>
 		<liferay.jonas.version>5.2.3</liferay.jonas.version>
 		<liferay.maven.plugin.version>${liferay.version}</liferay.maven.plugin.version>
 		<liferay.portal>liferay-portal-${liferay.deploy.version}</liferay.portal>
-		<liferay.resin.version>4.0.29</liferay.resin.version>
-		<liferay.tomcat.version>7.0.27</liferay.tomcat.version>
+		<liferay.resin.version>4.0.33</liferay.resin.version>
+		<liferay.tomcat.version>7.0.40</liferay.tomcat.version>
 		<liferay.weblogic.version>10.3.6.0</liferay.weblogic.version>
-		<liferay.websphere.version>8.0.0.3</liferay.websphere.version>
+		<liferay.websphere.version>8.0.0.6</liferay.websphere.version>
 		<log4j.version>1.2.14</log4j.version>
 		<mojarra.version>1.2_15</mojarra.version>
 		<myfaces.version>1.2.12</myfaces.version>
@@ -486,7 +486,7 @@
 		<profile>
 			<id>ee</id>
 			<properties>
-				<liferay.deploy.version>6.1.20</liferay.deploy.version>
+				<liferay.deploy.version>6.1.30</liferay.deploy.version>
 			</properties>
 		</profile>
 		<profile>
