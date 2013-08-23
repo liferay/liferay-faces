@@ -16,13 +16,19 @@ package com.liferay.faces.alloy.renderkit;
 import javax.faces.context.FacesContext;
 import javax.faces.render.Renderer;
 
+import com.liferay.portal.theme.ThemeDisplay;
+
 
 /**
- * This class provides a compatibility layer for JSF1/JSF2.
+ * This class provides a compatibility layer for JSF1/JSF2 and different versions of the Liferay Portal API.
  *
  * @author  Neil Griffin
  */
 public abstract class ScriptRendererCompat extends Renderer {
+
+	protected boolean isInline(ThemeDisplay themeDisplay) {
+		return (themeDisplay.isStateExclusive());
+	}
 
 	protected boolean isAjaxRequest(FacesContext facesContext) {
 		return facesContext.getPartialViewContext().isAjaxRequest();
