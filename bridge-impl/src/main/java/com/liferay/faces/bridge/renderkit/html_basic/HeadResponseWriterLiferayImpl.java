@@ -16,7 +16,10 @@ package com.liferay.faces.bridge.renderkit.html_basic;
 import java.io.IOException;
 import java.util.EmptyStackException;
 
+import javax.el.ELContext;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -26,10 +29,10 @@ import javax.servlet.jsp.tagext.BodyContent;
 
 import org.w3c.dom.Element;
 
-import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.taglib.liferay.HtmlTopTag;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringBodyContent;
+import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -47,12 +50,8 @@ public class HeadResponseWriterLiferayImpl extends HeadResponseWriter {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(HeadResponseWriterLiferayImpl.class);
 
-	// Private Data Members
-	private BridgeContext bridgeContext;
-
-	public HeadResponseWriterLiferayImpl(BridgeContext bridgeContext, ResponseWriter wrappedResponseWriter) {
+	public HeadResponseWriterLiferayImpl(ResponseWriter wrappedResponseWriter) {
 		super(wrappedResponseWriter);
-		this.bridgeContext = bridgeContext;
 	}
 
 	@Override
@@ -72,16 +71,21 @@ public class HeadResponseWriterLiferayImpl extends HeadResponseWriter {
 			if (!ELEMENT_HEAD.equals(element.getNodeName())) {
 
 				// Get the underlying HttpServletRequest and HttpServletResponse
-				PortletRequest portletRequest = bridgeContext.getPortletRequest();
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				ExternalContext externalContext = facesContext.getExternalContext();
+				PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
 				HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
-				PortletResponse portletResponse = bridgeContext.getPortletResponse();
+				PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
 				HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(portletResponse);
+				ELContext elContext = facesContext.getELContext();
 
 				// Invoke the Liferay HtmlTopTag class directly (rather than using liferay-util:html-top from a JSP).
-				BodyContent bodyContent = new StringBodyContent();
+				StringJspWriter stringJspWriter = new StringJspWriter();
+				BodyContent bodyContent = new StringBodyContent(stringJspWriter);
 				String elementAsString = element.toString();
 				HtmlTopTag htmlTopTag = new HtmlTopTag();
-				PageContextAdapter pageContextAdapter = new PageContextAdapter(httpServletRequest, httpServletResponse);
+				PageContextAdapter pageContextAdapter = new PageContextAdapter(httpServletRequest, httpServletResponse,
+						elContext, stringJspWriter);
 				htmlTopTag.setPageContext(pageContextAdapter);
 				htmlTopTag.doStartTag();
 				bodyContent.print(elementAsString);
