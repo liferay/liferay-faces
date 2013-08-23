@@ -27,7 +27,10 @@ import com.liferay.portal.theme.ThemeDisplay;
 public abstract class ScriptRendererCompat extends Renderer {
 
 	protected boolean isInline(ThemeDisplay themeDisplay) {
-		return (themeDisplay.isStateExclusive());
+
+		// Since Liferay 5.2 does not have the ability to render AUI ScriptData at the bottom of the portal page, all
+		// scripts must be rendered inline.
+		return true;
 	}
 
 	protected boolean isAjaxRequest(FacesContext facesContext) {
