@@ -17,7 +17,8 @@ import javax.faces.context.FacesContext;
 import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.faces.portal.backport.EditorUtil;
+import com.liferay.faces.util.portal.EditorUtil;
+
 import com.liferay.portal.util.PortalUtil;
 
 
