@@ -20,7 +20,7 @@ import java.io.Writer;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
