@@ -92,10 +92,7 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 
 	@Override
 	public HeadResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter) {
-
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		HeadResponseWriter headResponseWriter = new HeadResponseWriterLiferayImpl(bridgeContext,
-				wrappableResponseWriter);
+		HeadResponseWriter headResponseWriter = new HeadResponseWriterLiferayImpl(wrappableResponseWriter);
 
 		return headResponseWriter;
 	}
