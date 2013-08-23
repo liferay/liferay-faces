@@ -34,7 +34,6 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
 
 
 /**
