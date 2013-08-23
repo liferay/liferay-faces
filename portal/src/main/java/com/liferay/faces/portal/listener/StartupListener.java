@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -42,37 +43,51 @@ public class StartupListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 
-		try {
-			URL jspURL = getClass().getClassLoader().getResource("META-INF/resources/liferay-ui/jsp/input-editor.jsp");
+		ServletContext servletContext = servletContextEvent.getServletContext();
 
-			if (jspURL != null) {
-				String realPath = servletContextEvent.getServletContext().getRealPath("/");
-				File destFolder = new File(realPath, "resources/liferay-ui/jsp");
-				destFolder.mkdirs();
+		if (servletContext.getAttribute(StartupListener.class.getName()) == null) {
 
-				File destFile = new File(destFolder, "input-editor.jsp");
-				InputStream inputStream = jspURL.openStream();
-				OutputStream outputStream = new FileOutputStream(destFile);
-				byte[] bytes = new byte[1024];
-				int bytesRead;
+			logger.info("Context initialized for contextPath=[{0}]", servletContext.getContextPath());
 
-				while ((bytesRead = inputStream.read(bytes)) != -1) {
-					outputStream.write(bytes, 0, bytesRead);
+			// Prevent multiple-instantiation of this listener.
+			servletContext.setAttribute(StartupListener.class.getName(), Boolean.TRUE);
+
+			try {
+				URL jspURL = getClass().getClassLoader().getResource(
+						"META-INF/resources/liferay-ui/jsp/input-editor.jsp");
+
+				if (jspURL != null) {
+					String realPath = servletContext.getRealPath("/");
+					File destFolder = new File(realPath, "resources/liferay-ui/jsp");
+					destFolder.mkdirs();
+
+					File destFile = new File(destFolder, "input-editor.jsp");
+					InputStream inputStream = jspURL.openStream();
+					OutputStream outputStream = new FileOutputStream(destFile);
+					byte[] bytes = new byte[1024];
+					int bytesRead;
+
+					while ((bytesRead = inputStream.read(bytes)) != -1) {
+						outputStream.write(bytes, 0, bytesRead);
+					}
+
+					outputStream.flush();
+					outputStream.close();
+					inputStream.close();
+					logger.info("Copied input-editor.jsp from LiferayFaces JAR to context path file=[{0}]",
+						destFile.getAbsolutePath());
 				}
-
-				outputStream.flush();
-				outputStream.close();
-				inputStream.close();
-				logger.info("Copied input-editor.jsp from LiferayFaces JAR to context path file=[{0}]",
-					destFile.getAbsolutePath());
+				else {
+					logger.warn(
+						"Unable to find input-editor.jsp in LiferayFaces JAR which means liferay-ui:input-editor won't work");
+				}
 			}
-			else {
-				logger.warn(
-					"Unable to find input-editor.jsp in LiferayFaces JAR which means liferay-ui:input-editor won't work");
+			catch (Exception e) {
+				logger.error(e);
 			}
 		}
-		catch (Exception e) {
-			logger.error(e);
+		else {
+			logger.debug("Preventing multiple instantiation for contextPath=[{0}]", servletContext.getContextPath());
 		}
 	}
 
