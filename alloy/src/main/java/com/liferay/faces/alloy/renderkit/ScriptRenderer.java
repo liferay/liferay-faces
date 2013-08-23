@@ -65,7 +65,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 				WebKeys.THEME_DISPLAY);
 
 		if (themeDisplay != null) {
-			inline = (themeDisplay.isIsolated() || themeDisplay.isStateExclusive());
+			inline = isInline(themeDisplay);
 		}
 
 		// Otherwise, if the current request was triggered by Ajax, then the script must be rendered inline.
