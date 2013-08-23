@@ -40,6 +40,8 @@ import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.portal.EditorUtil;
 import com.liferay.faces.util.portal.ScriptDataUtil;
 import com.liferay.faces.util.portal.WebKeys;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 import com.liferay.faces.util.render.CleanupRenderer;
 
 import com.liferay.portal.model.Portlet;
@@ -62,6 +64,10 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 	private static final String ONBLUR_METHOD_NAME_TOKEN = "%ONBLUR_METHOD_NAME%";
 	private static final String COMMENT_CDATA_CLOSE = "// " + StringPool.CDATA_CLOSE;
 	private static final String CKEDITOR = "ckeditor";
+
+	// Liferay Portal 6.0 introduced the ability to consolidate scripts render scripts at the bottom of the portal page.
+	private static final boolean ABLE_TO_DEFER_SCRIPT_RENDERING = (ProductMap.getInstance().get(
+				ProductConstants.LIFERAY_FACES_PORTAL).getMajorVersion() >= 6);
 
 	static {
 		StringBuilder onBlurJS = new StringBuilder();
@@ -184,9 +190,10 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				// ability.
 				String onBlurScript = getOnBlurScript(editorName, onBlurMethod, namespace);
 
-				// If running within an Ajax request, include the "onblur" callback script must be included directly
-				// to the response.
-				if (resourcePhase) {
+				// If running within an Ajax request or the portal does not have the ability to render scripts at the
+				// bottom of the portal page, then the "onblur" callback script must be included directly to the
+				// response.
+				if (resourcePhase || !ABLE_TO_DEFER_SCRIPT_RENDERING) {
 
 					StringBuilder scriptMarkup = new StringBuilder();
 					scriptMarkup.append(StringPool.LESS_THAN);
