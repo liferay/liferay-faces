@@ -37,11 +37,10 @@ import com.liferay.faces.util.jsp.JspIncludeResponse;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.portal.EditorUtil;
 import com.liferay.faces.util.portal.ScriptDataUtil;
 import com.liferay.faces.util.render.CleanupRenderer;
 
-import com.liferay.portal.kernel.editor.EditorUtil;
-import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.PortalUtil;
@@ -207,7 +206,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				// cause the script to be rendered at the bottom of the portal page.
 				else {
 
-					ScriptData scriptData = (ScriptData) externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
+					Object scriptData = externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
 					ScriptDataUtil.append(scriptData, getPortletId(portletRequest), onBlurScript, "aui-base");
 				}
 
