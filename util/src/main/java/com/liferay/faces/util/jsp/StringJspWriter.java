@@ -28,10 +28,22 @@ import com.liferay.faces.util.lang.StringPool;
  */
 public class StringJspWriter extends JspWriter {
 
+	// Public Constants
+	public static final boolean DEFAULT_AUTO_FLUSH = true;
+	public static final int DEFAULT_BUFFER_SIZE = 1024;
+
 	// Private Data Members
 	private StringWriter stringWriter;
 
-	protected StringJspWriter(int bufferSize, boolean autoFlush) {
+	public StringJspWriter() {
+		this(DEFAULT_BUFFER_SIZE, DEFAULT_AUTO_FLUSH);
+	}
+	
+	public StringJspWriter(int bufferSize) {
+		this(bufferSize, DEFAULT_AUTO_FLUSH);
+	}
+	
+	public StringJspWriter(int bufferSize, boolean autoFlush) {
 		super(bufferSize, autoFlush);
 		this.stringWriter = new StringWriter(bufferSize);
 	}
