@@ -23,8 +23,8 @@ import com.liferay.faces.bridge.container.PortletContainerImpl;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriterLiferayImpl;
+import com.liferay.faces.util.portal.StringBundler;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.WebKeys;
 
 
@@ -86,7 +86,7 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 		StringBundler stringBundler = new StringBundler(portletRequest.getAttribute(WebKeys.PAGE_TOP));
 
 		if (stringBundler != null) {
-		liferaySharedPageTopLength = stringBundler.length();
+			liferaySharedPageTopLength = stringBundler.length();
 		}
 	}
 

@@ -114,6 +114,11 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+			<groupId>com.liferay.portal</groupId>
+			<artifactId>portal-service</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>liferay-faces-util</artifactId>
 			<version>${project.version}</version>

@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.backport;
+package com.liferay.faces.util.portal;
 
 /**
  * This interface provides a means of backporting Liferay Portal 6.1.x constants to branches of Liferay Faces that are

@@ -28,6 +28,7 @@ import com.liferay.faces.bridge.renderkit.html_basic.HeadResource;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.portal.StringBundler;
 
 import com.liferay.portal.kernel.util.WebKeys;
 

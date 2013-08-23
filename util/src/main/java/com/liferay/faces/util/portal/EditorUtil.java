@@ -11,11 +11,9 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.backport;
+package com.liferay.faces.util.portal;
 
 import javax.servlet.http.HttpServletRequest;
-
-import com.liferay.faces.portal.renderkit.InputEditorInternalRenderer;
 
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -23,8 +21,8 @@ import com.liferay.portal.kernel.util.Validator;
 
 /**
  * This class is a backport of the EditorUtil class which was introduced in Liferay Portal 6.0.12. It's main purpose is
- * to facilitate keeping the {@link InputEditorInternalRenderer} source the same on all branches of the Liferay Faces
- * source.
+ * to facilitate keeping the {@link com.liferay.faces.portal.renderkit.InputEditorInternalRenderer} source the same on
+ * all branches of the Liferay Faces source.
  *
  * @author  Julio Camarero
  * @author  Neil Griffin
