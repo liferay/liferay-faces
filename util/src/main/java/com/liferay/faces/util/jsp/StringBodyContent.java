@@ -32,26 +32,22 @@ import javax.servlet.jsp.tagext.BodyContent;
  */
 public class StringBodyContent extends BodyContent {
 
-	// Public Constants
-	public static final boolean DEFAULT_AUTO_FLUSH = true;
-	public static final int DEFAULT_BUFFER_SIZE = 1024;
-
 	// Private Data Members
 	private StringJspWriter facesStringWriter;
 
 	public StringBodyContent() {
-		this(DEFAULT_BUFFER_SIZE);
+		this(new StringJspWriter());
 	}
 
 	public StringBodyContent(int bufferSize) {
-		this(new StringJspWriter(bufferSize, DEFAULT_AUTO_FLUSH));
+		this(new StringJspWriter(bufferSize));
 	}
 
 	public StringBodyContent(int bufferSize, boolean autoFlush) {
 		this(new StringJspWriter(bufferSize, autoFlush));
 	}
 
-	protected StringBodyContent(StringJspWriter facesStringWriter) {
+	public StringBodyContent(StringJspWriter facesStringWriter) {
 		super(facesStringWriter);
 		this.facesStringWriter = facesStringWriter;
 	}
