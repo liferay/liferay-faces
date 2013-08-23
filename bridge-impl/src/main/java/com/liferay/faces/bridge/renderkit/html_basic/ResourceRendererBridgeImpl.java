@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.faces.component.StateHolder;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
@@ -34,20 +35,33 @@ import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
+ * This class serves as a wrapper around the renderer provided by the JSF runtime (Mojarra, MyFaces) for either the
+ * h:outputScript or h:outputStylesheet components. The main purpose of wrapping the renderer is to provide a way for
+ * the bridge to keep track of which resources are being added to the &lt;head&gt;...&lt;/head&gt; section of the portal
+ * page.
+ *
  * @author  Neil Griffin
  */
 @ListenerFor(systemEventClass = PostAddToViewEvent.class)
-public class ResourceRendererBridgeImpl extends RendererWrapper implements ComponentSystemEventListener {
+public class ResourceRendererBridgeImpl extends RendererWrapper implements ComponentSystemEventListener, StateHolder {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ResourceRendererBridgeImpl.class);
 
 	// Private Data Members
+	private boolean transientFlag;
 	private Renderer wrappedRenderer;
 
+	/**
+	 * This zero-arg constructor is required by the {@link javax.faces.component.StateHolderSaver} class during the
+	 * RESTORE_VIEW phase of the JSF lifecycle. The reason why this class is involved in restoring state is because the
+	 * {@link javax.faces.component.UIComponent.ComponentSystemEventListenerAdapter} implements {@link
+	 * javax.faces.component.StateHolder} and will attempt to restore the state of any class in the restored view that
+	 * implements {@link ComponentSystemEventListener}. It does this first by instantiating the class with a zero-arg
+	 * constructor, and then calls the {@link #restoreState(FacesContext, Object)} method.
+	 */
 	public ResourceRendererBridgeImpl() {
-		// Zero-arg constructor required by Mojarra StateHolderSaver class to test if this class is an instance of
-		// StateHolder (which it isn't).
+		// Defer initialization of wrappedRenderer until restoreState(FacesContext, Object) is called.
 	}
 
 	public ResourceRendererBridgeImpl(Renderer renderer) {
@@ -121,13 +135,44 @@ public class ResourceRendererBridgeImpl extends RendererWrapper implements Compo
 	 */
 	public void processEvent(ComponentSystemEvent event) throws AbortProcessingException {
 
+		// If the wrapped renderer has the ability to listen to component system events, then invoke the event
+		// processing on the wrapped renderer. This is necessary when wrapping the Mojarra ScriptRenderer or
+		// StylesheetRenderer because they extend ScriptStyleBaseRenderer which attempts to add the component
+		// associated with the specified event as a resource on the view root.
 		if (wrappedRenderer instanceof ComponentSystemEventListener) {
 			ComponentSystemEventListener wrappedListener = (ComponentSystemEventListener) wrappedRenderer;
 			wrappedListener.processEvent(event);
 		}
 		else {
-			logger.warn("Wrapped renderer=[{0]} does not implement ComponentSystemEventListener", wrappedRenderer);
+			logger.debug("Wrapped renderer=[{0}] does not implement ComponentSystemEventListener", wrappedRenderer);
 		}
+	}
+
+	public void restoreState(FacesContext facesContext, Object state) {
+
+		if (wrappedRenderer == null) {
+
+			try {
+				String wrappedRendererClassName = (String) state;
+				Class<?> wrappedRendererClass = Class.forName(wrappedRendererClassName);
+				wrappedRenderer = (Renderer) wrappedRendererClass.newInstance();
+			}
+			catch (Exception e) {
+				logger.error(e);
+			}
+		}
+	}
+
+	public Object saveState(FacesContext facesContext) {
+		return wrappedRenderer.getClass().getName();
+	}
+
+	public boolean isTransient() {
+		return transientFlag;
+	}
+
+	public void setTransient(boolean newTransientValue) {
+		this.transientFlag = newTransientValue;
 	}
 
 	@Override
