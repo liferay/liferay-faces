@@ -19,11 +19,11 @@ import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletRequest;
 
-import com.liferay.faces.portal.backport.WebKeys;
 import com.liferay.faces.portal.bean.Liferay;
 import com.liferay.faces.portal.security.AuthorizationException;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.portal.WebKeys;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;
