@@ -14,7 +14,10 @@
 package com.liferay.faces.util.jsp;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.el.ELContext;
 import javax.servlet.Servlet;
@@ -28,6 +31,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.Tag;
+
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -38,18 +45,70 @@ import javax.servlet.jsp.PageContext;
  */
 public class PageContextAdapter extends PageContext {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(PageContextAdapter.class);
+
 	// Private Data Members
+	private ApplicationScope applicationScope;
+	private ELContext elContext;
 	private HttpServletRequest httpServletRequest;
 	private HttpServletResponse httpServletResponse;
+	private HttpSession httpSession;
+	private Servlet page;
+	private Map<String, Object> pageScope;
+	private Map<String, Object> requestScope;
+	private ServletConfig servletConfig;
+	private ServletContext servletContext;
+	private SessionScope sessionScope;
+	private StringJspWriter stringJspWriter;
 
-	public PageContextAdapter(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+	public PageContextAdapter(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+		ELContext elContext) {
+		this(httpServletRequest, httpServletResponse, elContext, new StringJspWriter());
+	}
+
+	public PageContextAdapter(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+		ELContext elContext, StringJspWriter stringJspWriter) {
+
 		this.httpServletRequest = httpServletRequest;
-		this.httpServletRequest = httpServletRequest;
+		this.httpServletResponse = httpServletResponse;
+		this.elContext = elContext;
+		this.httpSession = httpServletRequest.getSession();
+		this.servletContext = httpSession.getServletContext();
+		this.servletConfig = new ServletConfigAdapter(this.servletContext);
+		this.stringJspWriter = stringJspWriter;
+
+		// Initialize scope maps
+		this.applicationScope = new ApplicationScope(this.servletContext);
+		this.pageScope = new HashMap<String, Object>();
+		this.requestScope = new RequestScope(httpServletRequest);
+		this.sessionScope = new SessionScope(httpSession);
 	}
 
 	@Override
 	public Object findAttribute(String name) {
-		throw new UnsupportedOperationException();
+
+		if (name == null) {
+			throw new NullPointerException();
+		}
+		else {
+			Object value = null;
+
+			if (pageScope.containsKey(name)) {
+				value = pageScope.get(name);
+			}
+			else if (requestScope.containsKey(name)) {
+				value = requestScope.get(name);
+			}
+			else if (sessionScope.containsKey(name)) {
+				value = sessionScope.get(name);
+			}
+			else if (applicationScope.containsKey(name)) {
+				value = applicationScope.get(name);
+			}
+
+			return value;
+		}
 	}
 
 	@Override
@@ -59,12 +118,12 @@ public class PageContextAdapter extends PageContext {
 
 	@Override
 	public void handlePageException(Exception e) throws ServletException, IOException {
-		throw new UnsupportedOperationException();
+		logger.error(e);
 	}
 
 	@Override
 	public void handlePageException(Throwable t) throws ServletException, IOException {
-		throw new UnsupportedOperationException();
+		logger.error(t);
 	}
 
 	@Override
@@ -81,62 +140,251 @@ public class PageContextAdapter extends PageContext {
 	public void initialize(Servlet servlet, ServletRequest request, ServletResponse response,
 		java.lang.String errorPageURL, boolean needsSession, int bufferSize, boolean autoFlush) throws IOException,
 		IllegalStateException, IllegalArgumentException {
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void release() {
-		throw new UnsupportedOperationException();
+		applicationScope = null;
+		elContext = null;
+		httpServletRequest = null;
+		httpServletResponse = null;
+		httpSession = null;
+		page = null;
+		pageScope.clear();
+		pageScope = null;
+		requestScope = null;
+		servletConfig = null;
+		servletContext = null;
+		sessionScope = null;
+		stringJspWriter = null;
 	}
 
 	@Override
 	public void removeAttribute(String name) {
-		throw new UnsupportedOperationException();
+
+		if (pageScope.containsKey(name)) {
+			pageScope.remove(name);
+		}
+
+		if (requestScope.containsKey(name)) {
+			requestScope.remove(name);
+		}
+
+		if (sessionScope.containsKey(name)) {
+			sessionScope.remove(name);
+		}
+
+		if (applicationScope.containsKey(name)) {
+			applicationScope.remove(name);
+		}
 	}
 
 	@Override
 	public void removeAttribute(String name, int scope) {
-		throw new UnsupportedOperationException();
+
+		if (name == null) {
+			throw new NullPointerException();
+		}
+		else {
+
+			if ((scope == PAGE_SCOPE)) {
+
+				if (pageScope.containsKey(name)) {
+					pageScope.remove(name);
+				}
+			}
+			else if (scope == REQUEST_SCOPE) {
+
+				if (requestScope.containsKey(name)) {
+					requestScope.remove(name);
+				}
+			}
+			else if (scope == SESSION_SCOPE) {
+
+				if (sessionScope.containsKey(name)) {
+					sessionScope.remove(name);
+				}
+			}
+			else if (scope == APPLICATION_SCOPE) {
+
+				if (applicationScope.containsKey(name)) {
+					applicationScope.remove(name);
+				}
+			}
+			else {
+				throw new IllegalArgumentException("Invalid scope " + scope);
+			}
+		}
 	}
 
 	@Override
 	public Object getAttribute(String name) {
-		throw new UnsupportedOperationException();
+
+		if (name == null) {
+			throw new NullPointerException();
+		}
+		else {
+			Object value = null;
+
+			if (pageScope.containsKey(name)) {
+				value = pageScope.get(name);
+			}
+
+			return value;
+		}
 	}
 
 	@Override
 	public Object getAttribute(String name, int scope) {
-		throw new UnsupportedOperationException();
+
+		if (name == null) {
+			throw new NullPointerException();
+		}
+		else {
+
+			Object value = null;
+
+			if ((scope == PAGE_SCOPE)) {
+
+				if (pageScope.containsKey(name)) {
+					value = pageScope.get(name);
+				}
+
+				return value;
+			}
+			else if (scope == REQUEST_SCOPE) {
+
+				if (requestScope.containsKey(name)) {
+					value = requestScope.get(name);
+				}
+
+				return value;
+			}
+			else if (scope == SESSION_SCOPE) {
+
+				if (sessionScope.containsKey(name)) {
+					value = sessionScope.get(name);
+				}
+
+				return value;
+			}
+			else if (scope == APPLICATION_SCOPE) {
+
+				if (applicationScope.containsKey(name)) {
+					value = applicationScope.get(name);
+				}
+
+				return value;
+			}
+			else {
+				throw new IllegalArgumentException("Invalid scope " + scope);
+			}
+		}
 	}
 
 	@Override
 	public void setAttribute(String name, Object value) {
-		throw new UnsupportedOperationException();
+
+		if (name == null) {
+			throw new NullPointerException();
+		}
+		else {
+
+			if (value == null) {
+				removeAttribute(name);
+			}
+			else {
+				pageScope.put(name, value);
+			}
+		}
 	}
 
 	@Override
 	public void setAttribute(String name, Object value, int scope) {
-		throw new UnsupportedOperationException();
+
+		if (name == null) {
+			throw new NullPointerException();
+		}
+		else {
+
+			if (value == null) {
+
+			}
+			else {
+
+				if (scope == PAGE_SCOPE) {
+					pageScope.put(name, value);
+				}
+				else if (scope == REQUEST_SCOPE) {
+					requestScope.put(name, value);
+				}
+				else if (scope == SESSION_SCOPE) {
+					sessionScope.put(name, value);
+				}
+				else if (scope == APPLICATION_SCOPE) {
+					applicationScope.put(name, value);
+				}
+				else {
+					throw new IllegalArgumentException("Invalid scope " + scope);
+				}
+			}
+		}
 	}
 
 	@Override
 	public Enumeration<String> getAttributeNamesInScope(int scope) {
-		throw new UnsupportedOperationException();
+
+		if (scope == PAGE_SCOPE) {
+			return Collections.enumeration(pageScope.keySet());
+		}
+		else if (scope == REQUEST_SCOPE) {
+			return Collections.enumeration(requestScope.keySet());
+		}
+		else if (scope == SESSION_SCOPE) {
+			return Collections.enumeration(sessionScope.keySet());
+		}
+		else if (scope == APPLICATION_SCOPE) {
+			return Collections.enumeration(applicationScope.keySet());
+		}
+		else {
+			throw new IllegalArgumentException("Invalid scope " + scope);
+		}
 	}
 
 	@Override
 	public int getAttributesScope(String name) {
-		throw new UnsupportedOperationException();
+
+		if (name == null) {
+			throw new NullPointerException();
+		}
+		else {
+			int scope = 0;
+
+			if (pageScope.containsKey(name)) {
+				scope = PAGE_SCOPE;
+			}
+			else if (requestScope.containsKey(name)) {
+				scope = REQUEST_SCOPE;
+			}
+			else if (sessionScope.containsKey(name)) {
+				scope = SESSION_SCOPE;
+			}
+			else if (applicationScope.containsKey(name)) {
+				scope = APPLICATION_SCOPE;
+			}
+
+			return scope;
+		}
 	}
 
 	@Override
 	public ELContext getELContext() {
-		throw new UnsupportedOperationException();
+		return elContext;
 	}
 
 	@Override
 	public Exception getException() {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	@Override
@@ -147,12 +395,17 @@ public class PageContextAdapter extends PageContext {
 
 	@Override
 	public JspWriter getOut() {
-		throw new UnsupportedOperationException();
+		return stringJspWriter;
 	}
 
 	@Override
 	public Object getPage() {
-		throw new UnsupportedOperationException();
+
+		if (page == null) {
+			page = new PageAdapter(servletConfig);
+		}
+
+		return page;
 	}
 
 	@Override
@@ -167,17 +420,17 @@ public class PageContextAdapter extends PageContext {
 
 	@Override
 	public ServletConfig getServletConfig() {
-		throw new UnsupportedOperationException();
+		return servletConfig;
 	}
 
 	@Override
 	public ServletContext getServletContext() {
-		throw new UnsupportedOperationException();
+		return servletContext;
 	}
 
 	@Override
 	public HttpSession getSession() {
-		return httpServletRequest.getSession();
+		return httpSession;
 	}
 
 	@Override
@@ -185,4 +438,5 @@ public class PageContextAdapter extends PageContext {
 	public javax.servlet.jsp.el.VariableResolver getVariableResolver() {
 		throw new UnsupportedOperationException();
 	}
+
 }
