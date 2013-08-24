@@ -24,23 +24,4 @@
 		<function-class>com.liferay.portal.kernel.util.StringUtil</function-class>
 		<function-signature>java.lang.String replace(java.lang.String, java.lang.String, java.lang.String)</function-signature>
 	</function>
-	<tag>
-		<tag-name>validateCaptcha</tag-name>
-		<validator>
-			<validator-id>com.liferay.faces.portal.CaptchaValidator</validator-id>
-		</validator>
-		<attribute>
-			<name>binding</name>
-			<type>com.liferay.faces.portal.validator.CaptchaValidator</type>
-		</attribute>
-		<attribute>
-			<name>disabled</name>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<name>for</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-	</tag>
 </facelet-taglib>

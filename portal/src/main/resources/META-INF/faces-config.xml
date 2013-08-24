@@ -3,7 +3,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
 	<application>
 		<el-resolver>com.liferay.faces.portal.el.ExtELResolver</el-resolver>
-		<resource-handler>com.liferay.faces.portal.resource.LiferayFacesResourceHandler</resource-handler>
 		<resource-handler>com.liferay.faces.portal.resource.LiferayPortalResourceHandler</resource-handler>
 	</application>
 	<factory>
@@ -23,8 +22,4 @@
 			<renderer-class>com.liferay.faces.portal.renderkit.PermissionsURLRenderer</renderer-class>
 		</renderer>
 	</render-kit>
-	<validator>
-		<validator-id>com.liferay.faces.portal.CaptchaValidator</validator-id>
-		<validator-class>com.liferay.faces.portal.validator.CaptchaValidator</validator-class>
-	</validator>
 </faces-config>
