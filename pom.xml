@@ -461,46 +461,6 @@
 			</build>
 		</profile>
 		<profile>
-			<id>war-license-packaging</id>
-			<activation>
-				<file>
-					<exists>src/main/webapp/WEB-INF/web.xml</exists>
-				</file>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>prepare-package</id>
-								<phase>prepare-package</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-								<configuration>
-									<target>
-										<!-- Delete text files copied by add-third-party goal of license-maven-plugin -->
-										<delete failonerror="false" verbose="true">
-											<fileset dir="${project.build.outputDirectory}" includes="*.txt" />
-										</delete>
-									</target>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-				<resources>
-					<resource>
-						<directory>src/main/resources</directory>
-						<excludes>
-							<exclude>META-INF/third-party-missing.*</exclude>
-						</excludes>
-					</resource>
-				</resources>
-			</build>
-		</profile>
-		<profile>
 			<id>ee</id>
 			<properties>
 				<liferay.deploy.version>6.2.10-SNAPSHOT</liferay.deploy.version>
