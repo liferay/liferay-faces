@@ -4,10 +4,4 @@
    http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 	version="2.0">
 	<namespace>http://liferay.com/faces/ui-internal</namespace>
-	<tag>
-		<tag-name>input-editor</tag-name>
-		<component>
-			<component-type>com.liferay.faces.portal.InputEditorInternal</component-type>
-		</component>
-	</tag>
 </facelet-taglib>
