@@ -43,7 +43,7 @@ public class HeadResource {
 	private String type;
 	private String url;
 	
-	// This constructor is used in issue tester FACES-1635
+	// This constructor is used for the issue tester FACES-1635
 	public HeadResource(String type, String url) {
 		this.type = type;
 		initialize(url);
