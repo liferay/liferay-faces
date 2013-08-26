@@ -42,7 +42,13 @@ public class HeadResource {
 	private String text;
 	private String type;
 	private String url;
-
+	
+	// This constructor is used for the issue tester FACES-1635
+	public HeadResource(String type, String url) {
+		this.type = type;
+		initialize(url);
+	}
+		
 	public HeadResource(String type, Attributes attributes) {
 		this.type = type;
 
@@ -66,10 +72,13 @@ public class HeadResource {
 			url = attributes.getValue(BridgeConstants.SRC);
 		}
 
+		initialize(url);
+	}
+	
+	public void initialize(String url) {
 		if (url != null) {
-
+			this.url = url;
 			int queryPos = url.indexOf(StringPool.QUESTION);
-
 			if (queryPos > 0) {
 				String parameters = url.substring(queryPos + 1);
 				String[] nameValuePairs = parameters.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
