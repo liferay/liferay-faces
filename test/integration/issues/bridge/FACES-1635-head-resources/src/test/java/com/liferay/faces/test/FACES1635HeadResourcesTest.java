@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,8 @@ import org.openqa.selenium.WebElement;
 import com.liferay.faces.test.util.TesterBase;
 
 import static org.junit.Assert.assertTrue;
+
+import com.liferay.faces.bridge.renderkit.html_basic.HeadResource;
 
 /**
  * @author  Liferay Faces Team
@@ -51,11 +54,11 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 	@FindBy(xpath = textarea1Xpath)
 	private WebElement textarea1;
 	
-	private HashMap<String, Integer> mapOfScriptsInHead = new HashMap<String, Integer>();
-	private HashMap<String, Integer> mapOfScriptsInBody = new HashMap<String, Integer>();
+	private HashMap<HeadResource, Integer> mapOfScriptsInHead = new HashMap<HeadResource, Integer>();
+	private HashMap<HeadResource, Integer> mapOfScriptsInBody = new HashMap<HeadResource, Integer>();
 	
-	private HashMap<String, Integer> mapOfStyleSheetsInHead = new HashMap<String, Integer>();
-	private HashMap<String, Integer> mapOfStyleSheetsInBody = new HashMap<String, Integer>();
+	private HashMap<HeadResource, Integer> mapOfStyleSheetsInHead = new HashMap<HeadResource, Integer>();
+	private HashMap<HeadResource, Integer> mapOfStyleSheetsInBody = new HashMap<HeadResource, Integer>();
 
 	@Test
 	@RunAsClient
@@ -72,118 +75,59 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 		
 		// gather information
 		List<WebElement> scriptsInHead = browser.findElements(By.xpath("//head/script"));
-		logger.log(Level.INFO, "scriptsInHead.size() = " + scriptsInHead.size());
-		populateMap(scriptsInHead, mapOfScriptsInHead, "src");
+		ArrayList<HeadResource> scriptResourcesInHead = convertToHeadResources(scriptsInHead);
+		logger.log(Level.INFO, "scriptResourcesInHead.size() = " + scriptResourcesInHead.size());
+		checkResourcesForDuplicates(scriptResourcesInHead, "scriptResourcesInHead");
 		
 		List<WebElement> scriptsInBody = browser.findElements(By.xpath("//body/script"));
-		logger.log(Level.INFO, "scriptsInBody.size() = " + scriptsInBody.size());
-		populateMap(scriptsInBody, mapOfScriptsInBody, "src");
+		ArrayList<HeadResource> scriptResourcesInBody = convertToHeadResources(scriptsInBody);
+		logger.log(Level.INFO, "scriptResourcesInBody.size() = " + scriptResourcesInBody.size());
+		checkResourcesForDuplicates(scriptResourcesInBody, "scriptResourcesInBody");
 		
 		List<WebElement> styleSheetsInHead = browser.findElements(By.xpath("//head/link"));
-		logger.log(Level.INFO, "styleSheetsInHead.size() = " + styleSheetsInHead.size());
-		populateMap(styleSheetsInHead, mapOfStyleSheetsInHead, "href");
+		ArrayList<HeadResource> styleSheetResourcesInHead = convertToHeadResources(styleSheetsInHead);
+		logger.log(Level.INFO, "styleSheetResourcesInHead.size() = " + styleSheetResourcesInHead.size());
+		checkResourcesForDuplicates(styleSheetResourcesInHead, "styleSheetResourcesInHead");
 		
 		List<WebElement> styleSheetsInBody = browser.findElements(By.xpath("//body/link"));
-		logger.log(Level.INFO, "styleSheetsInBody.size() = " + styleSheetsInBody.size());
-		populateMap(styleSheetsInBody, mapOfStyleSheetsInBody, "href");
+		ArrayList<HeadResource> styleSheetResourcesInBody = convertToHeadResources(styleSheetsInBody);
+		logger.log(Level.INFO, "styleSheetResourcesInBody.size() = " + styleSheetResourcesInBody.size());
+		checkResourcesForDuplicates(styleSheetResourcesInBody, "styleSheetResourcesInBody");
 		
-		// check that scripts in the head only occur once in the head
-		for (Map.Entry<String, Integer> entry : mapOfScriptsInHead.entrySet()) {
-		    String key = entry.getKey();
-		    int value = (entry.getValue()).intValue();
-		    if (value > 1) {
-		    	logger.log(Level.INFO, "scriptsInHead key = " + key + " occurs " + value + " times.");
-		    	assertTrue("scriptsInHead should only occur once, but " + key + " occurs " + value + " times.", false);
-		    }
-		}
+		List<WebElement> scripts = browser.findElements(By.xpath("//script"));
+		ArrayList<HeadResource> scriptResources = convertToHeadResources(scripts);
+		logger.log(Level.INFO, "scriptResources.size() = " + scriptResources.size());
+		checkResourcesForDuplicates(scriptResources, "scriptResources");
 		
-		// check that scripts in the body only occur once in the body
-		// then check that script in the body does not also occur in the head
-		for (Map.Entry<String, Integer> entry : mapOfScriptsInBody.entrySet()) {
-		    String bodyKey = entry.getKey();
-		    int value = (entry.getValue()).intValue();
-		    if (value > 1) {
-		    	logger.log(Level.INFO, "scriptsInBody " + bodyKey + " occurs " + value + " times.");
-		    	assertTrue("scriptsInBody should only occur once, but " + bodyKey + " occurs " + value + " times.", false);
-		    }
-		    
-		    Integer headScriptAlsoInBody = mapOfScriptsInHead.get(bodyKey);
-		    if (headScriptAlsoInBody == null) {
-		    	logger.log(Level.INFO, "headScriptInBody == null ... this is good.");
-		    } else {
-		    	logger.log(Level.INFO, "headScriptInBody != null ... this is bad. " + bodyKey + " occurs in both the head and the body");
-		    	assertTrue("headScriptInBody != null ... this is bad. " + bodyKey + " occurs in both the head and the body", false);
-		    }
-		}
-		
-		// check that style sheets in the head only occur once in the head
-		for (Map.Entry<String, Integer> entry : mapOfStyleSheetsInHead.entrySet()) {
-		    String key = entry.getKey();
-		    int value = (entry.getValue()).intValue();
-		    if (value > 1) {
-		    	logger.log(Level.INFO, "StyleSheetsInHead " + key + " occurs " + value + " times.");
-		    	assertTrue("StyleSheetsInHead should only occur once, but " + key + " occurs " + value + " times.", false);
-		    }
-		}
-		
-		// check that style sheets in the body only occur once in the body
-		// then check that style sheets in the body does not also occur in the head
-		for (Map.Entry<String, Integer> entry : mapOfStyleSheetsInBody.entrySet()) {
-		    String bodyKey = entry.getKey();
-		    int value = (entry.getValue()).intValue();
-		    if (value > 1) {
-		    	logger.log(Level.INFO, "scriptsInBody " + bodyKey + " occurs " + value + " times.");
-		    	assertTrue("scriptsInBody should only occur once, but " + bodyKey + " occurs " + value + " times.", false);
-		    }
-		    
-		    Integer styleSheetAlsoInBody = mapOfStyleSheetsInHead.get(bodyKey);
-		    if (styleSheetAlsoInBody == null) {
-		    	logger.log(Level.INFO, "styleSheetAlsoInBody == null ... this is good.");
-		    } else {
-		    	logger.log(Level.INFO, "styleSheetAlsoInBody != null ... this is bad. " + bodyKey + " occurs in both the head and the body");
-		    	assertTrue("styleSheetAlsoInBody != null ... this is bad. " + bodyKey + " occurs in both the head and the body", false);
-		    }
-		}
-
+		List<WebElement> styleSheets = browser.findElements(By.xpath("//link"));
+		ArrayList<HeadResource> styleSheetResources = convertToHeadResources(styleSheets);
+		logger.log(Level.INFO, "styleSheetResources.size() = " + styleSheetResources.size());
+		checkResourcesForDuplicates(styleSheetResources, "styleSheetResources");
 	}
 	
-	public void populateMap(List<WebElement> webElements, Map<String, Integer> map, String attribute) {
-		String token = "";
-		for (WebElement script: webElements) {
-		    String url = script.getAttribute(attribute);
-		    if (url == null) {
-		    	logger.log(Level.INFO, "populateMap: " + attribute + " == null");
+	public ArrayList<HeadResource> convertToHeadResources(List<WebElement> resources) {
+		ArrayList<HeadResource> list = new ArrayList<HeadResource>();
+		for(WebElement webElement : resources) {
+			String url = webElement.getAttribute("src");
+			if (url == null) {
+				logger.log(Level.INFO, "ignoring inline script");
 			} else {
-				if ("".equals(url)) {
-					// logger.log(Level.INFO, "populateMap: ignoring inline script tag");
-				} else {
-					String[] questionMarkTokens = url.split("\\?");
-					token = questionMarkTokens[0];
-
-					if (questionMarkTokens.length > 1) {
-						if (questionMarkTokens[1].contains("resource=")) { // should be a jsf resource
-							// logger.log(Level.INFO, "questionMarkTokens[1] = " + questionMarkTokens[1]);
-							String[] resourceTokens = questionMarkTokens[1].split("resource=");
-							if (resourceTokens.length > 1) {
-								String[] ampersandTokens = resourceTokens[1].split("\\&");
-								token = ampersandTokens[0];
-							} else {
-								token = resourceTokens[0];
-							}
-							logger.log(Level.INFO, "token = " + token);
-						}
-					}
-
-					int c = 0;
-					Integer count = map.get(token);
-					if (count == null) {
-						count = new Integer(1);
-					} else {
-						c = count.intValue() + 1;
-						count = new Integer(c);
-					}
-					map.put(token, count);
-					// logger.log(Level.INFO, "populateMap: token = " + token);
+				list.add(new HeadResource("script", url));
+			}	
+		}
+		return list;
+	}
+	
+	public void checkResourcesForDuplicates(ArrayList<HeadResource> resources, String whichResources) {
+		int totalHeadResources = resources.size();
+		for (int i = 0; i < totalHeadResources; i++) {
+			HeadResource resource1 = resources.get(i);
+			for (int j = i + 1; j < totalHeadResources; j++) {
+				HeadResource resource2 = resources.get(j);
+				if (!resource2.isDuplicate() && resource1.equals(resource2)) {
+					logger.log(Level.INFO, "checkResourcesForDuplicates: " + whichResources + " occur more than once");
+					resource2.setDuplicate(true);
+					break;
 				}
 			}
 		}

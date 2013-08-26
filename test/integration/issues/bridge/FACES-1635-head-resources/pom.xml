@@ -12,5 +12,13 @@
 
 	<artifactId>test-FACES-1635-head-resources</artifactId>
 	<name>FACES-1635 head resources integration tests</name>
-
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.liferay.faces</groupId>
+			<artifactId>liferay-faces-bridge-impl</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+	
 </project>
