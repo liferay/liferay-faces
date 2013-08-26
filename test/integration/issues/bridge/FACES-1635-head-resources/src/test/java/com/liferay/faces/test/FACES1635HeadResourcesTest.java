@@ -65,7 +65,6 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 		
 		waitForElement(portletDisplayNameXpath);
 		
-<<<<<<< HEAD
 		// check that scriptsInHead only occur once
 		List<WebElement> scriptsInHead = browser.findElements(By.xpath("//head/script"));
 		ArrayList<HeadResource> scriptResourcesInHead = convertToHeadResources(scriptsInHead, "src");
