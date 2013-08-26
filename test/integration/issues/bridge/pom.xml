@@ -19,6 +19,7 @@
 		<module>FACES-1470-portlet</module>
 		<module>FACES-1478-portlet</module>
 		<module>FACES-1618-portlet</module>
+		<module>FACES-1635-resources</module>
 		<module>FACES-1638-portlet</module>
 	</modules>
 
