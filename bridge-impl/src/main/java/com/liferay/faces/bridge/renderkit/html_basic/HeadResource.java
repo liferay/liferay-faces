@@ -43,6 +43,12 @@ public class HeadResource {
 	private String type;
 	private String url;
 
+	public HeadResource(String type, String url) {
+		this.type = type;
+		this.url = url;
+		initialize();
+	}
+
 	public HeadResource(String type, Attributes attributes) {
 		this.type = type;
 
@@ -66,31 +72,33 @@ public class HeadResource {
 			url = attributes.getValue(BridgeConstants.SRC);
 		}
 
-		if (url != null) {
+		initialize();
+	}
 
-			int queryPos = url.indexOf(StringPool.QUESTION);
+	protected void initialize() {
 
-			if (queryPos > 0) {
-				String parameters = url.substring(queryPos + 1);
-				String[] nameValuePairs = parameters.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
+		int queryPos = url.indexOf(StringPool.QUESTION);
 
-				for (String nameValuePair : nameValuePairs) {
-					int equalsPos = nameValuePair.indexOf(StringPool.EQUAL);
+		if (queryPos > 0) {
+			String parameters = url.substring(queryPos + 1);
+			String[] nameValuePairs = parameters.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
 
-					if (equalsPos > 0) {
-						String name = nameValuePair.substring(0, equalsPos);
+			for (String nameValuePair : nameValuePairs) {
+				int equalsPos = nameValuePair.indexOf(StringPool.EQUAL);
 
-						if (name.endsWith(ResourceConstants.JAVAX_FACES_RESOURCE)) {
-							facesResource = nameValuePair.substring(equalsPos + 1);
-						}
-						else if (name.endsWith(ResourceConstants.LN)) {
-							facesLibrary = nameValuePair.substring(equalsPos + 1);
-						}
+				if (equalsPos > 0) {
+					String name = nameValuePair.substring(0, equalsPos);
+
+					if (name.endsWith(ResourceConstants.JAVAX_FACES_RESOURCE)) {
+						facesResource = nameValuePair.substring(equalsPos + 1);
 					}
-
-					if ((facesResource != null) && (facesLibrary != null)) {
-						break;
+					else if (name.endsWith(ResourceConstants.LN)) {
+						facesLibrary = nameValuePair.substring(equalsPos + 1);
 					}
+				}
+
+				if ((facesResource != null) && (facesLibrary != null)) {
+					break;
 				}
 			}
 		}
