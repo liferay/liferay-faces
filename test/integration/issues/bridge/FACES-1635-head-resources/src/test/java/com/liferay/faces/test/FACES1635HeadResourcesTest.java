@@ -14,9 +14,7 @@
 package com.liferay.faces.test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -53,12 +51,6 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 	
 	@FindBy(xpath = textarea1Xpath)
 	private WebElement textarea1;
-	
-	private HashMap<HeadResource, Integer> mapOfScriptsInHead = new HashMap<HeadResource, Integer>();
-	private HashMap<HeadResource, Integer> mapOfScriptsInBody = new HashMap<HeadResource, Integer>();
-	
-	private HashMap<HeadResource, Integer> mapOfStyleSheetsInHead = new HashMap<HeadResource, Integer>();
-	private HashMap<HeadResource, Integer> mapOfStyleSheetsInBody = new HashMap<HeadResource, Integer>();
 
 	@Test
 	@RunAsClient
@@ -73,49 +65,57 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 		
 		waitForElement(portletDisplayNameXpath);
 		
-		// gather information
+		// check that scriptsInHead only occur once
 		List<WebElement> scriptsInHead = browser.findElements(By.xpath("//head/script"));
-		ArrayList<HeadResource> scriptResourcesInHead = convertToHeadResources(scriptsInHead);
+		ArrayList<HeadResource> scriptResourcesInHead = convertToHeadResources(scriptsInHead, "src");
 		logger.log(Level.INFO, "scriptResourcesInHead.size() = " + scriptResourcesInHead.size());
 		checkResourcesForDuplicates(scriptResourcesInHead, "scriptResourcesInHead");
 		
+		// check that scriptsInBody only occur once
 		List<WebElement> scriptsInBody = browser.findElements(By.xpath("//body/script"));
-		ArrayList<HeadResource> scriptResourcesInBody = convertToHeadResources(scriptsInBody);
+		ArrayList<HeadResource> scriptResourcesInBody = convertToHeadResources(scriptsInBody, "src");
 		logger.log(Level.INFO, "scriptResourcesInBody.size() = " + scriptResourcesInBody.size());
 		checkResourcesForDuplicates(scriptResourcesInBody, "scriptResourcesInBody");
 		
+		// check that styleSheetsInHead only occur once
 		List<WebElement> styleSheetsInHead = browser.findElements(By.xpath("//head/link"));
-		ArrayList<HeadResource> styleSheetResourcesInHead = convertToHeadResources(styleSheetsInHead);
+		ArrayList<HeadResource> styleSheetResourcesInHead = convertToHeadResources(styleSheetsInHead, "href");
 		logger.log(Level.INFO, "styleSheetResourcesInHead.size() = " + styleSheetResourcesInHead.size());
 		checkResourcesForDuplicates(styleSheetResourcesInHead, "styleSheetResourcesInHead");
 		
+		// check that styleSheetsInBody only occur once
 		List<WebElement> styleSheetsInBody = browser.findElements(By.xpath("//body/link"));
-		ArrayList<HeadResource> styleSheetResourcesInBody = convertToHeadResources(styleSheetsInBody);
+		ArrayList<HeadResource> styleSheetResourcesInBody = convertToHeadResources(styleSheetsInBody, "href");
 		logger.log(Level.INFO, "styleSheetResourcesInBody.size() = " + styleSheetResourcesInBody.size());
 		checkResourcesForDuplicates(styleSheetResourcesInBody, "styleSheetResourcesInBody");
 		
+		// check that scripts only occur once
 		List<WebElement> scripts = browser.findElements(By.xpath("//script"));
-		ArrayList<HeadResource> scriptResources = convertToHeadResources(scripts);
+		ArrayList<HeadResource> scriptResources = convertToHeadResources(scripts, "src");
 		logger.log(Level.INFO, "scriptResources.size() = " + scriptResources.size());
 		checkResourcesForDuplicates(scriptResources, "scriptResources");
 		
+		// check that styleSheets only occur once
 		List<WebElement> styleSheets = browser.findElements(By.xpath("//link"));
-		ArrayList<HeadResource> styleSheetResources = convertToHeadResources(styleSheets);
+		ArrayList<HeadResource> styleSheetResources = convertToHeadResources(styleSheets, "href");
 		logger.log(Level.INFO, "styleSheetResources.size() = " + styleSheetResources.size());
 		checkResourcesForDuplicates(styleSheetResources, "styleSheetResources");
 	}
 	
-	public ArrayList<HeadResource> convertToHeadResources(List<WebElement> resources) {
-		ArrayList<HeadResource> list = new ArrayList<HeadResource>();
-		for(WebElement webElement : resources) {
-			String url = webElement.getAttribute("src");
-			if (url == null) {
-				logger.log(Level.INFO, "ignoring inline script");
-			} else {
-				list.add(new HeadResource("script", url));
+	public ArrayList<HeadResource> convertToHeadResources(List<WebElement> webElements, String attribute) {
+		ArrayList<HeadResource> resources = new ArrayList<HeadResource>();
+		for(WebElement webElement : webElements) {
+			String url = webElement.getAttribute(attribute);
+			String type = ("src".equals(attribute)) ? "script" : "link" ;
+			if (url != null) {
+				if ("".equals(url)) {
+					// logger.log(Level.INFO, "convertToHeadResources: ignoring inline " + type + " ...");
+				} else {
+					resources.add(new HeadResource(type, url));
+				}
 			}	
 		}
-		return list;
+		return resources;
 	}
 	
 	public void checkResourcesForDuplicates(ArrayList<HeadResource> resources, String whichResources) {
@@ -125,8 +125,9 @@ public class FACES1635HeadResourcesTest extends TesterBase {
 			for (int j = i + 1; j < totalHeadResources; j++) {
 				HeadResource resource2 = resources.get(j);
 				if (!resource2.isDuplicate() && resource1.equals(resource2)) {
-					logger.log(Level.INFO, "checkResourcesForDuplicates: " + whichResources + " occur more than once");
+					logger.log(Level.INFO, "checkResourcesForDuplicates: " + whichResources + " occur more than once: type = " + resource1.getType() + " url = " + resource1.getURL());
 					resource2.setDuplicate(true);
+					assertTrue(whichResources + " occur more than once: type = " + resource1.getType() + " url = " + resource1.getURL(), false);
 					break;
 				}
 			}

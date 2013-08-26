@@ -43,59 +43,12 @@ public class HeadResource {
 	private String type;
 	private String url;
 	
+	// This constructor is used in issue tester FACES-1635
 	public HeadResource(String type, String url) {
 		this.type = type;
-
-//		if (attributes != null) {
-//			this.attributeList = new ArrayList<Attribute>();
-//
-//			int totalAttributes = attributes.getLength();
-//
-//			for (int i = 0; i < totalAttributes; i++) {
-//				String name = attributes.getLocalName(i);
-//				String value = attributes.getValue(i);
-//				Attribute attribute = new Attribute(name, value);
-//				this.attributeList.add(attribute);
-//			}
-//		}
-//
-//		if (LINK.equalsIgnoreCase(type)) {
-//			url = attributes.getValue(HREF);
-//		}
-//		else if (SCRIPT.equalsIgnoreCase(type)) {
-//			url = attributes.getValue(BridgeConstants.SRC);
-//		}
-
-		if (url != null) {
-
-			int queryPos = url.indexOf(StringPool.QUESTION);
-
-			if (queryPos > 0) {
-				String parameters = url.substring(queryPos + 1);
-				String[] nameValuePairs = parameters.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
-
-				for (String nameValuePair : nameValuePairs) {
-					int equalsPos = nameValuePair.indexOf(StringPool.EQUAL);
-
-					if (equalsPos > 0) {
-						String name = nameValuePair.substring(0, equalsPos);
-
-						if (name.endsWith(ResourceConstants.JAVAX_FACES_RESOURCE)) {
-							facesResource = nameValuePair.substring(equalsPos + 1);
-						}
-						else if (name.endsWith(ResourceConstants.LN)) {
-							facesLibrary = nameValuePair.substring(equalsPos + 1);
-						}
-					}
-
-					if ((facesResource != null) && (facesLibrary != null)) {
-						break;
-					}
-				}
-			}
-		}
+		initialize(url);
 	}
-	
+		
 	public HeadResource(String type, Attributes attributes) {
 		this.type = type;
 
@@ -119,10 +72,13 @@ public class HeadResource {
 			url = attributes.getValue(BridgeConstants.SRC);
 		}
 
+		initialize(url);
+	}
+	
+	public void initialize(String url) {
 		if (url != null) {
-
+			this.url = url;
 			int queryPos = url.indexOf(StringPool.QUESTION);
-
 			if (queryPos > 0) {
 				String parameters = url.substring(queryPos + 1);
 				String[] nameValuePairs = parameters.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
