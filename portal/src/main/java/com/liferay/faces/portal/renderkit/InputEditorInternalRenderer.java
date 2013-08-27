@@ -180,19 +180,16 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 
 			if (editorType.indexOf(CKEDITOR) >= 0) {
 
-				String namespace = portletResponse.getNamespace();
-
 				// FACES-1441: The liferay-ui:input-editor JSP tag (and associated ckeditor.jsp file) do not provide a
 				// way to hook-in to the "onblur" callback feature of the CKEditor. In order to overcome this
 				// limitation, it is necessary to append a <script>...</script> to the response that provides this
 				// ability.
-				String onBlurScript = getOnBlurScript(editorName, onBlurMethod, namespace);
+				String onBlurScript = getOnBlurScript(editorName, onBlurMethod);
 
 				// If running within an Ajax request, then the "onblur" callback script must be included directly to the
 				// parital-response. Note that it must appear within a <![CDATA[ ... ]]> block since the JSF
 				// partial-response is an XML document.
 				if (resourcePhase) {
-
 					StringBuilder scriptMarkup = new StringBuilder();
 					scriptMarkup.append(StringPool.LESS_THAN);
 					scriptMarkup.append(StringPool.SCRIPT);
@@ -257,20 +254,15 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 
 	public void encodeCleanup(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		PortletResponse portletResponse = (PortletResponse) facesContext.getExternalContext().getResponse();
-		String namespace = portletResponse.getNamespace();
-
 		String editorName = uiComponent.getParent().getParent().getClientId();
 		StringBuilder scriptBuilder = new StringBuilder();
 
 		// Build up a JavaScript fragment that will cleanup the DOM.
 		scriptBuilder.append("var oldEditor = CKEDITOR.instances['");
-		scriptBuilder.append(namespace);
 		scriptBuilder.append(editorName);
 		scriptBuilder.append("']; if (oldEditor) {");
 		scriptBuilder.append("oldEditor.destroy(true);");
 		scriptBuilder.append("delete window['");
-		scriptBuilder.append(namespace);
 		scriptBuilder.append(editorName);
 		scriptBuilder.append("'];");
 		scriptBuilder.append("}");
@@ -295,14 +287,14 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 		return liferayPortletRequest;
 	}
 
-	protected String getOnBlurScript(String editorName, String onBlurMethod, String namespace) {
+	protected String getOnBlurScript(String editorName, String onBlurMethod) {
 		String onBlurScript = ONBLUR_JS;
 
 		// Replace %EDITOR_NAME% token with specified editor name.
 		int editorNameTokenPos = onBlurScript.indexOf(EDITOR_NAME_TOKEN);
 
 		if (editorNameTokenPos > 0) {
-			onBlurScript = onBlurScript.substring(0, editorNameTokenPos) + namespace + editorName +
+			onBlurScript = onBlurScript.substring(0, editorNameTokenPos) + editorName +
 				onBlurScript.substring(editorNameTokenPos + EDITOR_NAME_TOKEN.length());
 		}
 
@@ -310,7 +302,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 		int onBlurTokenPos = onBlurScript.indexOf(ONBLUR_METHOD_NAME_TOKEN);
 
 		if (onBlurTokenPos > 0) {
-			onBlurScript = onBlurScript.substring(0, onBlurTokenPos) + namespace + onBlurMethod +
+			onBlurScript = onBlurScript.substring(0, onBlurTokenPos) + onBlurMethod +
 				onBlurScript.substring(onBlurTokenPos + ONBLUR_METHOD_NAME_TOKEN.length());
 		}
 
