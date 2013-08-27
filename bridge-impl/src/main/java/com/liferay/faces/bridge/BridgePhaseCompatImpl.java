@@ -42,6 +42,10 @@ public abstract class BridgePhaseCompatImpl extends BridgePhaseBaseImpl {
 		// no-op for JSF 1.x
 	}
 
+	protected void clearHeadManagedBeanResources(FacesContext facesContext) {
+		// no-op for JSF 1.x
+	}
+
 	@Override
 	protected void init(PortletRequest portletRequest, PortletResponse portletResponse, PortletPhase portletPhase) {
 
