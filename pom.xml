@@ -75,6 +75,7 @@
 		<module>alloy</module>
 		<module>bridge-api</module>
 		<module>bridge-impl</module>
+		<module>compat</module>
 		<module>portal</module>
 		<module>demos</module>
 		<module>issues</module>
