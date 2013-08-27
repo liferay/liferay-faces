@@ -43,6 +43,20 @@ public class NonNamespacedHttpServletRequest extends HttpServletRequestWrapper {
 	}
 
 	@Override
+	public Object getAttribute(String name) {
+
+		if ("aui:form:useNamespace".equals(name)) {
+
+			// Note: The portal-web/docroot/html/taglib/init.jsp file asks the value of this attribute. Need to return
+			// false in order to ensure that the portlet namespace is not prepended to method names and element ids.
+			return Boolean.FALSE.toString();
+		}
+		else {
+			return super.getAttribute(name);
+		}
+	}
+
+	@Override
 	public void setAttribute(String name, Object value) {
 
 		Object wrappedRequest = getRequest();
