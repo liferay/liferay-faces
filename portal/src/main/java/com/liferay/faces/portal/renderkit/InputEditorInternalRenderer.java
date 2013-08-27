@@ -62,6 +62,10 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 	private static final String ONBLUR_METHOD_NAME_TOKEN = "%ONBLUR_METHOD_NAME%";
 	private static final String COMMENT_CDATA_CLOSE = "// " + StringPool.CDATA_CLOSE;
 	private static final String CKEDITOR = "ckeditor";
+	private static final String BEGIN_SCRIPT_TOKEN = StringPool.LESS_THAN + StringPool.SCRIPT;
+	private static final String END_SCRIPT_TOKEN = StringPool.FORWARD_SLASH + StringPool.SCRIPT +
+		StringPool.GREATER_THAN;
+	private static final int END_SCRIPT_TOKEN_LENGTH = END_SCRIPT_TOKEN.length();
 
 	static {
 		StringBuilder onBlurJS = new StringBuilder();
@@ -195,7 +199,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 					scriptMarkup.append(StringPool.GREATER_THAN);
 					scriptMarkup.append(StringPool.CDATA_OPEN);
 					scriptMarkup.append(onBlurScript);
-					scriptMarkup.append(COMMENT_CDATA_CLOSE);
+					scriptMarkup.append(StringPool.CDATA_CLOSE);
 					scriptMarkup.append(StringPool.LESS_THAN);
 					scriptMarkup.append(StringPool.FORWARD_SLASH);
 					scriptMarkup.append(StringPool.SCRIPT);
@@ -203,8 +207,8 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 					bufferedResponse = bufferedResponse.concat(scriptMarkup.toString());
 				}
 
-				// Otherwise, append the script to the "LIFERAY_SHARED_AUI_SCRIPT_DATA" request attribute, which will
-				// cause the script to be rendered at the bottom of the portal page.
+				// Otherwise, append the script to the "LIFERAY_SHARED_AUI_SCRIPT_DATA" request attribute, which
+				// will cause the script to be rendered at the bottom of the portal page.
 				else {
 
 					Object scriptData = externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
@@ -332,18 +336,15 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 		public ParsedResponse(String response) {
 
 			StringBuilder scriptBuilder = new StringBuilder();
-			String beginScriptToken = StringPool.LESS_THAN + StringPool.SCRIPT;
-			String endScriptToken = StringPool.FORWARD_SLASH + StringPool.SCRIPT + StringPool.GREATER_THAN;
-			int endElementLength = endScriptToken.length();
 
 			boolean done1 = false;
 
 			while (!done1) {
-				int beginPos = response.indexOf(beginScriptToken);
-				int endPos = response.indexOf(endScriptToken, beginPos);
+				int beginPos = response.indexOf(BEGIN_SCRIPT_TOKEN);
+				int endPos = response.indexOf(END_SCRIPT_TOKEN, beginPos);
 
 				if ((beginPos >= 0) && (endPos > beginPos)) {
-					String script = response.substring(beginPos, endPos + endElementLength);
+					String script = response.substring(beginPos, endPos + END_SCRIPT_TOKEN_LENGTH);
 					boolean done2 = false;
 
 					while (!done2) {
@@ -357,6 +358,13 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 							if (cdataClosePos > 0) {
 								script = script.substring(0, cdataClosePos);
 							}
+							else {
+								cdataClosePos = script.indexOf(StringPool.CDATA_CLOSE);
+
+								if (cdataClosePos > 0) {
+									script = script.substring(0, cdataClosePos);
+								}
+							}
 						}
 						else {
 							done2 = true;
@@ -364,7 +372,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 					}
 
 					scriptBuilder.append(script);
-					response = response.substring(0, beginPos) + response.substring(endPos + endElementLength);
+					response = response.substring(0, beginPos) + response.substring(endPos + END_SCRIPT_TOKEN_LENGTH);
 				}
 				else {
 					done1 = true;
