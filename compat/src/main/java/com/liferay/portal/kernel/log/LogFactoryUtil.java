@@ -14,9 +14,8 @@
 package com.liferay.portal.kernel.log;
 
 /**
- * This class has been copied from the Liferay Portal API and refactored so that this CDI demo portlet can be tested in
- * Pluto, since the Liferay CDI Portlet Bridge has a dependency on the Liferay Portal logging API. For more info, see <a
- * href="http://issues.liferay.com/browse/FACES-1589">FACES-1589</a>.
+ * Since the Liferay CDI Portlet Bridge has a dependency on the Liferay Portal logging API, this class is necessary to
+ * provide a compatibility layer with the Liferay Faces logging API.
  *
  * @author  Neil Griffin
  */
