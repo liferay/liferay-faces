@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.bridge;
 
-import java.util.Set;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
@@ -24,7 +22,6 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
-import com.liferay.faces.bridge.renderkit.html_basic.HeadManagedBean;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -101,15 +98,7 @@ public class BridgePhaseActionImpl extends BridgePhaseCompatImpl {
 			// completely re-rendered during the subsequent RENDER_PHASE of the portlet lifecycle. Because of this, the
 			// resources in the HeadManagedBean must be cleared so that the bridge will not recognize any resources as
 			// already being present in the <head>...</head> section.
-			HeadManagedBean headManagedBean = HeadManagedBean.getInstance(facesContext);
-
-			if (headManagedBean != null) {
-				Set<String> headResourceIds = headManagedBean.getHeadResourceIds();
-
-				if (headResourceIds != null) {
-					headResourceIds.clear();
-				}
-			}
+			clearHeadManagedBeanResources(facesContext);
 
 			// Save the faces view root and any messages in the faces context so that they can be restored during
 			// the RENDER_PHASE of the portlet lifecycle.
