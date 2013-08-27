@@ -64,7 +64,6 @@
 				<c:set var="maxLengthMessage" value="#{cc.attrs.maxLengthMessage}" />
 			</c:otherwise>
 		</c:choose>
-		<c:set var="responseNamespace" value="#{facesContext.externalContext.response.namespace}" />
 		<c:set var="clientIdPrefix" value="#{liferayutil:stringReplace(cc.clientId, ':', '_')}" />
 		<c:set var="prefixedInitMethod" value="#{clientIdPrefix}initRichText" />
 		<c:set var="prefixedOnBlurMethod" value="#{clientIdPrefix}richTextBlurred" />
@@ -100,7 +99,7 @@
 					</c:when>
 					<c:otherwise>
 						<script>CKEDITOR_BASEPATH = '/html/js/editor/ckeditor/';
-function #{responseNamespace}#{prefixedCountCharsMethod}(text) {
+function #{prefixedCountCharsMethod}(text) {
 var textLength = 0;
 if (typeof text == "string") {
 var tagMatcherRegExp = /(&lt;([^&gt;]+)&gt;)/ig;
@@ -113,11 +112,11 @@ if (typeof alphaNumChars == "string") {
 }
 return textLength;
 }
-function #{responseNamespace}#{prefixedInitMethod}() {
+function #{prefixedInitMethod}() {
 var hiddenField = document.getElementById('#{cc.clientId}:inputText');
 var maxLength = #{maxLength};
 if (maxLength > 0) {
-var totalAlphaNumChars = #{responseNamespace}#{prefixedCountCharsMethod}(hiddenField.value);
+var totalAlphaNumChars = #{prefixedCountCharsMethod}(hiddenField.value);
 var remaining = (maxLength - totalAlphaNumChars);
 var messageSpan = document.getElementById('#{cc.clientId}:mlm');
 messageSpan.firstChild.nodeValue = '#{maxLengthMessage} ' + remaining;
@@ -131,7 +130,7 @@ return hiddenField.value;
 <!-- field provides a way of avoiding this condition. -->
 </ui:remove>
 <script>
-function #{responseNamespace}#{prefixedOnChangeMethod}(text) {
+function #{prefixedOnChangeMethod}(text) {
 var hiddenField = document.getElementById('#{cc.clientId}:inputText');
 var firstTimeHiddenField = document.getElementById('#{cc.clientId}:firstTime');
 if (firstTimeHiddenField) {
@@ -143,7 +142,7 @@ return;
 hiddenField.value = text;
 var maxLength = #{maxLength};
 if (maxLength > 0) {
-var totalAlphaNumChars = #{responseNamespace}#{prefixedCountCharsMethod}(text);
+var totalAlphaNumChars = #{prefixedCountCharsMethod}(text);
 var remaining = (maxLength - totalAlphaNumChars);
 var messageSpan = document.getElementById('#{cc.clientId}:mlm');
 messageSpan.firstChild.nodeValue = '#{maxLengthMessage} ' + remaining;
@@ -158,7 +157,7 @@ messageDiv.className = 'portlet-msg-error';
 hiddenField.onchange();
 }</script>
 <script>
-function #{responseNamespace}#{prefixedOnBlurMethod}() {
+function #{prefixedOnBlurMethod}() {
 var hiddenField = document.getElementById('#{cc.clientId}:inputText');
 hiddenField.onblur();
 }
@@ -192,7 +191,7 @@ hiddenField.onblur();
 window['#{editorName}'] = new Liferay.Editor.bbCode(
 {textarea: '##{editorName}'}
 );
-window['#{editorName}'].setHTML(#{responseNamespace}#{prefixedInitMethod}());
+window['#{editorName}'].setHTML(#{prefixedInitMethod}());
 								</aui:script>
 							</c:when>
 							<c:otherwise>
@@ -221,7 +220,7 @@ window['#{editorName}'].setHTML(#{responseNamespace}#{prefixedInitMethod}());
 											name="#{cc.clientId}content"
 											height="#{cc.attrs.height}"
 											width="#{cc.attrs.width}"
-											src="/html/js/editor/editor.jsp?p_l_id=#{plid}&amp;p_main_path=%2Fc&amp;doAsUserId=#{doAsUserId}&amp;editorImpl=#{editorImpl}&amp;toolbarSet=#{cc.attrs.toolbarSet}&amp;initMethod=#{responseNamespace}#{prefixedInitMethod}&amp;onChangeMethod=#{responseNamespace}#{prefixedOnChangeMethod}&amp;cssPath=#{pathThemeCss}&amp;cssClasses=#{cssClasses}"
+											src="/html/js/editor/editor.jsp?p_l_id=#{plid}&amp;p_main_path=%2Fc&amp;doAsUserId=#{doAsUserId}&amp;editorImpl=#{editorImpl}&amp;toolbarSet=#{cc.attrs.toolbarSet}&amp;initMethod=#{prefixedInitMethod}&amp;onChangeMethod=#{prefixedOnChangeMethod}&amp;cssPath=#{pathThemeCss}&amp;cssClasses=#{cssClasses}"
 											style="border: none; margin: 0px;" />
 									</c:otherwise>
 								</c:choose>
