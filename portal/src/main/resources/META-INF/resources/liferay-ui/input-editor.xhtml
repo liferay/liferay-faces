@@ -188,10 +188,12 @@ hiddenField.onblur();
 									</h:panelGroup>
 								</h:panelGroup>
 								<aui:script position="bottom" use="liferay-bbcode-editor">
+if (!window['#{editorName}']) {
 window['#{editorName}'] = new Liferay.Editor.bbCode(
 {textarea: '##{editorName}'}
 );
 window['#{editorName}'].setHTML(#{prefixedInitMethod}());
+}
 								</aui:script>
 							</c:when>
 							<c:otherwise>

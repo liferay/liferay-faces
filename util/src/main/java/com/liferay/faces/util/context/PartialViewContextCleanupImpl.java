@@ -35,6 +35,7 @@ import javax.faces.context.PartialViewContextWrapper;
 import javax.faces.event.PhaseId;
 
 import com.liferay.faces.util.component.UICleanup;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.ProductConstants;
@@ -53,6 +54,7 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 	// Private Constants
 	private static final boolean ICEFACES_DETECTED = ProductMap.getInstance().get(ProductConstants.ICEFACES)
 		.isDetected();
+	private static final String SCRIPT_TAG_BEGIN_REGEX = "<script[^>]*>";
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(PartialViewContextCleanupImpl.class);
@@ -208,7 +210,13 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 				super.startEval();
 
 				for (Map.Entry<String, String> mapEntry : entrySet) {
-					super.write(mapEntry.getValue());
+					String mapEntryValue = mapEntry.getValue();
+
+					if (mapEntryValue != null) {
+						mapEntryValue = mapEntryValue.replaceAll(SCRIPT_TAG_BEGIN_REGEX, StringPool.BLANK);
+						mapEntryValue = mapEntryValue.replaceAll(StringPool.SCRIPT_TAG_END, StringPool.BLANK);
+						super.write(mapEntryValue);
+					}
 				}
 
 				super.endEval();

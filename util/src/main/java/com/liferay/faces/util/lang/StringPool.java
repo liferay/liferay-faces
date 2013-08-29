@@ -174,6 +174,11 @@ public class StringPool {
 
 	public static final String UTF8 = "UTF-8";
 
+	// Tags
+	public static final String SCRIPT_TAG_BEGIN = "<script>";
+
+	public static final String SCRIPT_TAG_END = "</script>";
+
 	static {
 
 		for (int i = 0; i < 128; i++) {
