@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
+import com.liferay.taglib.ui.InputEditorTag;
+
 
 /**
  * This class wraps the Liferay {@link NamespaceServletRequest} class, so that calls to {@link #setAttribute(String,
@@ -35,7 +37,8 @@ public class NonNamespacedHttpServletRequest extends HttpServletRequestWrapper {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(NonNamespacedHttpServletRequest.class);
 
-	// Private Data Members
+	// Private Constants
+	private static final String AUI_FORM_USE_NAMESPACE = "aui:form:useNamespace";
 	private static final String NAMESPACE_SERVLET_REQUEST_FQCN = "com.liferay.portal.servlet.NamespaceServletRequest";
 
 	public NonNamespacedHttpServletRequest(HttpServletRequest httpServletRequest) {
@@ -45,7 +48,7 @@ public class NonNamespacedHttpServletRequest extends HttpServletRequestWrapper {
 	@Override
 	public Object getAttribute(String name) {
 
-		if ("aui:form:useNamespace".equals(name)) {
+		if (AUI_FORM_USE_NAMESPACE.equals(name)) {
 
 			// Note: The portal-web/docroot/html/taglib/init.jsp file asks the value of this attribute. Need to return
 			// false in order to ensure that the portlet namespace is not prepended to method names and element ids.
