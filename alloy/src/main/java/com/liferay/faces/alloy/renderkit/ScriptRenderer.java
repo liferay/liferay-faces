@@ -21,6 +21,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.util.context.ExtFacesContext;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.portal.ScriptDataUtil;
 import com.liferay.faces.util.portal.WebKeys;
@@ -122,35 +123,52 @@ public class ScriptRenderer extends ScriptRendererCompat {
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
+		// If the script is to be rendered inline, then simply ask the children to encode themselves to the response.
 		if (inline) {
 			super.encodeChildren(facesContext, uiComponent);
 		}
+
+		// Otherwise,
 		else {
+			
+			// Ask the children to encode themselves and capture the markup in a string.
 			ResponseWriter backupResponseWriter = facesContext.getResponseWriter();
 			BufferedResponseWriter bufferedResponseWriter = new BufferedResponseWriter();
 			facesContext.setResponseWriter(bufferedResponseWriter);
 			super.encodeChildren(facesContext, uiComponent);
-
-			ExternalContext externalContext = facesContext.getExternalContext();
-			ScriptData scriptData = (ScriptData) externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
-
-			if (scriptData == null) {
-				scriptData = new ScriptData();
-				externalContext.getRequestMap().put(WebKeys.AUI_SCRIPT_DATA, scriptData);
-			}
-
-			Map<String, Object> attributes = uiComponent.getAttributes();
-			String use = (String) attributes.get(USE);
-			String portletId = StringPool.BLANK;
-			Portlet portlet = (Portlet) facesContext.getExternalContext().getRequestMap().get(WebKeys.RENDER_PORTLET);
-
-			if (portlet != null) {
-				portletId = portlet.getPortletId();
-			}
-
-			ScriptDataUtil.append(scriptData, portletId, bufferedResponseWriter.toString(), use);
-
 			facesContext.setResponseWriter(backupResponseWriter);
+
+			// If running in an Ajax request, then it is not possible to render the scripts at the bottom of the
+			// portal page. Instead, store the script in the JavaScript map so that PartialViewContextCleanupImpl
+			// knows to include it in the <eval>...</eval> section of the JSF partial-response.
+			if (isAjaxRequest(facesContext)) {
+				Map<String, String> javaScriptMap = ExtFacesContext.getInstance().getJavaScriptMap();
+				javaScriptMap.put(uiComponent.getClientId(), bufferedResponseWriter.toString());
+			}
+
+			// Otherwise, render the script at the bottom of the portal page by setting the WebKeys.AUI_SCRIPT_DATA
+			// request attribute.
+			else {
+				ExternalContext externalContext = facesContext.getExternalContext();
+				ScriptData scriptData = (ScriptData) externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
+
+				if (scriptData == null) {
+					scriptData = new ScriptData();
+					externalContext.getRequestMap().put(WebKeys.AUI_SCRIPT_DATA, scriptData);
+				}
+
+				Map<String, Object> attributes = uiComponent.getAttributes();
+				String use = (String) attributes.get(USE);
+				String portletId = StringPool.BLANK;
+				Portlet portlet = (Portlet) facesContext.getExternalContext().getRequestMap().get(
+						WebKeys.RENDER_PORTLET);
+
+				if (portlet != null) {
+					portletId = portlet.getPortletId();
+				}
+
+				ScriptDataUtil.append(scriptData, portletId, bufferedResponseWriter.toString(), use);
+			}
 		}
 	}
 
