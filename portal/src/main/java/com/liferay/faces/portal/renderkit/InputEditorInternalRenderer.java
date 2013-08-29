@@ -32,13 +32,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.portal.component.InputEditorInternal;
 import com.liferay.faces.portal.context.LiferayFacesContext;
-import com.liferay.faces.portal.servlet.NonNamespacedHttpServletRequest;
+import com.liferay.faces.portal.servlet.ScriptCapturingHttpServletRequest;
 import com.liferay.faces.util.jsp.JspIncludeResponse;
+import com.liferay.faces.util.jsp.PageContextAdapter;
+import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.portal.EditorUtil;
 import com.liferay.faces.util.portal.ScriptDataUtil;
+import com.liferay.faces.util.portal.ScriptTagUtil;
 import com.liferay.faces.util.portal.WebKeys;
 import com.liferay.faces.util.render.CleanupRenderer;
 
@@ -62,10 +65,9 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 	private static final String ONBLUR_METHOD_NAME_TOKEN = "%ONBLUR_METHOD_NAME%";
 	private static final String COMMENT_CDATA_CLOSE = "// " + StringPool.CDATA_CLOSE;
 	private static final String CKEDITOR = "ckeditor";
-	private static final String BEGIN_SCRIPT_TOKEN = StringPool.LESS_THAN + StringPool.SCRIPT;
-	private static final String END_SCRIPT_TOKEN = StringPool.FORWARD_SLASH + StringPool.SCRIPT +
-		StringPool.GREATER_THAN;
-	private static final int END_SCRIPT_TOKEN_LENGTH = END_SCRIPT_TOKEN.length();
+	private static final String CKEDITOR_REPLACE = "CKEDITOR.replace(";
+	private static final String CDPL_INITIALIZE_FALSE = "var customDataProcessorLoaded = false;";
+	private static final String CDPL_INITIALIZE_TRUE = "var customDataProcessorLoaded = true;";
 
 	static {
 		StringBuilder onBlurJS = new StringBuilder();
@@ -92,12 +94,13 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 		ExternalContext externalContext = facesContext.getExternalContext();
 		PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
 		PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
-		HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
-		httpServletRequest = new NonNamespacedHttpServletRequest(httpServletRequest);
-
-		HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(portletResponse);
 		PortletRequest liferayPortletRequest = getLiferayPortletRequest(portletRequest);
 		boolean resourcePhase = (liferayPortletRequest instanceof ResourceRequest);
+		HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
+		HttpServletRequest scriptCapturingHttpServletRequest = new ScriptCapturingHttpServletRequest(
+				httpServletRequest);
+
+		HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(portletResponse);
 		Map<String, Object> attributes = inputEditorInternal.getAttributes();
 		String onBlurMethod = (String) attributes.get("onBlurMethod");
 		String editorImpl = (String) attributes.get("editorImpl");
@@ -157,11 +160,11 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 
 		// Invoke the tag and capture it's output in a String, rather than having the output go directly to the
 		// response.
-		RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher(url);
+		RequestDispatcher requestDispatcher = scriptCapturingHttpServletRequest.getRequestDispatcher(url);
 		JspIncludeResponse jspIncludeResponse = new JspIncludeResponse(httpServletResponse);
 
 		try {
-			requestDispatcher.include(httpServletRequest, jspIncludeResponse);
+			requestDispatcher.include(scriptCapturingHttpServletRequest, jspIncludeResponse);
 		}
 		catch (ServletException e) {
 			logger.error(e.getMessage());
@@ -176,7 +179,8 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 			bufferedResponse = bufferedResponse.trim();
 
 			// If rendering an instance of the CKEditor, then
-			String editorType = EditorUtil.getEditorValue(httpServletRequest, editorImpl);
+			String clientId = inputEditorInternal.getClientId();
+			String editorType = EditorUtil.getEditorValue(scriptCapturingHttpServletRequest, editorImpl);
 
 			if (editorType.indexOf(CKEDITOR) >= 0) {
 
@@ -187,16 +191,13 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				String onBlurScript = getOnBlurScript(editorName, onBlurMethod);
 
 				// If running within an Ajax request, then the "onblur" callback script must be included directly to the
-				// parital-response. Note that it must appear within a <![CDATA[ ... ]]> block since the JSF
-				// partial-response is an XML document.
+				// parital-response.
 				if (resourcePhase) {
 					StringBuilder scriptMarkup = new StringBuilder();
 					scriptMarkup.append(StringPool.LESS_THAN);
 					scriptMarkup.append(StringPool.SCRIPT);
 					scriptMarkup.append(StringPool.GREATER_THAN);
-					scriptMarkup.append(StringPool.CDATA_OPEN);
 					scriptMarkup.append(onBlurScript);
-					scriptMarkup.append(StringPool.CDATA_CLOSE);
 					scriptMarkup.append(StringPool.LESS_THAN);
 					scriptMarkup.append(StringPool.FORWARD_SLASH);
 					scriptMarkup.append(StringPool.SCRIPT);
@@ -204,8 +205,8 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 					bufferedResponse = bufferedResponse.concat(scriptMarkup.toString());
 				}
 
-				// Otherwise, append the script to the "LIFERAY_SHARED_AUI_SCRIPT_DATA" request attribute, which
-				// will cause the script to be rendered at the bottom of the portal page.
+				// Otherwise, append the script to the WebKeys.AUI_SCRIPT_DATA request attribute, which will cause the
+				// script to be rendered at the bottom of the portal page.
 				else {
 
 					Object scriptData = externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
@@ -215,8 +216,6 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				// FACES-1439: If the component was rendered on the page on the previous JSF lifecycle, then prevent it
 				// from being re-initialized by removing all <script>...</script> elements.
 				boolean scriptsRemoved = false;
-
-				String clientId = inputEditorInternal.getClientId();
 
 				if (resourcePhase && inputEditorInternal.isPreviouslyRendered()) {
 
@@ -246,9 +245,108 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				}
 			}
 
-			// Write the captured output from the JSP tag to the Faces responseWriter.
+			// Write the captured HTML markup from the JSP tag to the Faces responseWriter.
 			logger.trace(bufferedResponse);
 			responseWriter.write(bufferedResponse);
+
+			// The JSP (executed by the RequestDispatcher) encounters <aui:script> JSP tags that ultimately save
+			// scripts in the WebKeys.AUI_SCRIPT_DATA request attribute. The intent (in a JSP environment) is to let
+			// the ScriptDataPortletFilter render the script content at the bottom of the portal page on the initial
+			// RenderRequest. However, in a JSF environment we need to render the scripts directly to the response
+			// as part of the component markup, because the JSF environment might be utilizing the DOM-diff feature
+			// of ICEfaces. If the scripts were rendered at the bottom of the page during the RenderRequest, and
+			// then rendered inline during a subsequent ResourceRequest, then ICEfaces would detect a DOM-diff and
+			// unnecessarily replace the DOM with a new editor.
+			try {
+
+				// Capture the scripts into a String.
+				StringJspWriter stringJspWriter = new StringJspWriter();
+				PageContextAdapter pageContextAdapter = new PageContextAdapter(scriptCapturingHttpServletRequest,
+						httpServletResponse, facesContext.getELContext(), stringJspWriter);
+
+				// Note that flushing the ScriptData will only flush and write the scripts that were added by the
+				// request dispatcher. This is because the ScriptCapturingHttpServletRequest protects the
+				// WebKeys.AUI_SCRIPT_DATA in the underlying HttpServletRequest.
+				ScriptTagUtil.flushScriptData(pageContextAdapter);
+
+				String javaScriptFromRequestDispatcher = stringJspWriter.toString();
+
+				// Remove all the "<![CDATA[" and "]]>" tokens since they will interfere with the JSF
+				// partial-response.
+				String[] tokensToRemove = new String[] { StringPool.CDATA_OPEN, StringPool.CDATA_CLOSE };
+
+				for (String token : tokensToRemove) {
+					int pos = javaScriptFromRequestDispatcher.indexOf(token);
+
+					while (pos >= 0) {
+						javaScriptFromRequestDispatcher = javaScriptFromRequestDispatcher.substring(0, pos) +
+							javaScriptFromRequestDispatcher.substring(pos + token.length());
+						pos = javaScriptFromRequestDispatcher.indexOf(token);
+					}
+				}
+
+				// Create a JavaScript fragment that will cleanup the DOM. This is necessary when a
+				// partial-update takes place and replaces an existing CKEditor in the DOM with either a new
+				// CKEditor or different elements.
+				StringBuilder javaScriptFragment = new StringBuilder();
+				javaScriptFragment.append("var oldEditor = CKEDITOR.instances['");
+				javaScriptFragment.append(editorName);
+				javaScriptFragment.append("']; if (oldEditor) {");
+				javaScriptFragment.append("oldEditor.destroy(true);");
+				javaScriptFragment.append("delete window['");
+				javaScriptFragment.append(editorName);
+				javaScriptFragment.append("'];");
+				javaScriptFragment.append("}");
+				javaScriptFragment.append(StringPool.NEW_LINE);
+				javaScriptFragment.append(StringPool.TAB);
+				javaScriptFragment.append(StringPool.TAB);
+
+				// Insert the JavaScript fragment into the JavaScript code at the appropriate location.
+				int pos = javaScriptFromRequestDispatcher.indexOf(CKEDITOR_REPLACE);
+
+				if (pos > 0) {
+					javaScriptFromRequestDispatcher = javaScriptFromRequestDispatcher.substring(0, pos) +
+						javaScriptFragment.toString() + javaScriptFromRequestDispatcher.substring(pos);
+				}
+				else {
+					javaScriptFromRequestDispatcher = javaScriptFromRequestDispatcher + StringPool.NEW_LINE +
+						javaScriptFragment.toString();
+				}
+
+				// Create a JavaScript fragment that will change the way that the customDataProcessorLoaded
+				// variable is initialized. Normally it is initialized to false, but if there is an old CKEditor
+				// that was destroyed, then it should be initialized to true. That will guarantee that the
+				// new CKEditor in the DOM will have its setData() method called with the value from the
+				// hidden field.
+				javaScriptFragment = new StringBuilder();
+				javaScriptFragment.append("if (oldEditor)");
+				javaScriptFragment.append(StringPool.OPEN_CURLY_BRACE);
+				javaScriptFragment.append(CDPL_INITIALIZE_TRUE);
+				javaScriptFragment.append(StringPool.CLOSE_CURLY_BRACE);
+				javaScriptFragment.append("else");
+				javaScriptFragment.append(StringPool.OPEN_CURLY_BRACE);
+				javaScriptFragment.append(CDPL_INITIALIZE_FALSE);
+				javaScriptFragment.append(StringPool.CLOSE_CURLY_BRACE);
+
+				// Insert the JavaScript fragment into the JavaScript code at the appropriate location.
+				pos = javaScriptFromRequestDispatcher.indexOf(CDPL_INITIALIZE_FALSE);
+
+				if (pos > 0) {
+					javaScriptFromRequestDispatcher = javaScriptFromRequestDispatcher.substring(0, pos) +
+						javaScriptFragment.toString() +
+						javaScriptFromRequestDispatcher.substring(pos + CDPL_INITIALIZE_FALSE.length());
+				}
+				else {
+					javaScriptFromRequestDispatcher = javaScriptFromRequestDispatcher + StringPool.NEW_LINE +
+						javaScriptFragment.toString();
+				}
+
+				responseWriter.write(javaScriptFromRequestDispatcher);
+			}
+			catch (Exception e) {
+				logger.error(e);
+				throw new IOException(e.getMessage());
+			}
 		}
 	}
 
@@ -332,11 +430,12 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 			boolean done1 = false;
 
 			while (!done1) {
-				int beginPos = response.indexOf(BEGIN_SCRIPT_TOKEN);
-				int endPos = response.indexOf(END_SCRIPT_TOKEN, beginPos);
+				int beginPos = response.indexOf(StringPool.SCRIPT_TAG_BEGIN);
+				int endPos = response.indexOf(StringPool.SCRIPT_TAG_END, beginPos);
 
 				if ((beginPos >= 0) && (endPos > beginPos)) {
-					String script = response.substring(beginPos, endPos + END_SCRIPT_TOKEN_LENGTH);
+					String script = response.substring(beginPos, endPos + StringPool.SCRIPT_TAG_END.length());
+
 					boolean done2 = false;
 
 					while (!done2) {
@@ -364,7 +463,8 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 					}
 
 					scriptBuilder.append(script);
-					response = response.substring(0, beginPos) + response.substring(endPos + END_SCRIPT_TOKEN_LENGTH);
+					response = response.substring(0, beginPos) +
+						response.substring(endPos + StringPool.SCRIPT_TAG_END.length());
 				}
 				else {
 					done1 = true;
