@@ -147,11 +147,11 @@ echo "[INFO: deploy.sh] PORTLET_MVN_CMD=$PORTLET_MVN_CMD"
 echo "==============================================================================================================="
 echo " "
 
-if [ "$REBUILD_ALLOY" = "true" ] ; then
+if [ "$REBUILD_UTIL" = "true" ] ; then
 	if [ -z $EXTRA_PROFILE_NAMES ] ; then
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/alloy; mvn clean install; popd
+		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/util; mvn clean install; popd
 	else
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/alloy; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
+		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/util; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
 	fi
 fi
 
@@ -164,20 +164,19 @@ if [ "$REBUILD_BRIDGE" = "true" ] ; then
 		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/bridge-impl; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
 	fi
 fi
+if [ "$REBUILD_ALLOY" = "true" ] ; then
+	if [ -z $EXTRA_PROFILE_NAMES ] ; then
+		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/alloy; mvn clean install; popd
+	else
+		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/alloy; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
+	fi
+fi
 
 if [ "$REBUILD_PORTAL" = "true" ] ; then
 	if [ -z $EXTRA_PROFILE_NAMES ] ; then
 		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/portal; mvn clean install; popd
 	else
 		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/portal; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
-	fi
-fi
-
-if [ "$REBUILD_UTIL" = "true" ] ; then
-	if [ -z $EXTRA_PROFILE_NAMES ] ; then
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/util; mvn clean install; popd
-	else
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/util; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
 	fi
 fi
 
