@@ -46,6 +46,7 @@ import com.liferay.faces.util.portal.WebKeys;
 import com.liferay.faces.util.render.CleanupRenderer;
 
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 
 
@@ -163,6 +164,12 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 		RequestDispatcher requestDispatcher = scriptCapturingHttpServletRequest.getRequestDispatcher(url);
 		JspIncludeResponse jspIncludeResponse = new JspIncludeResponse(httpServletResponse);
 
+		// FACES-1713: ThemeDisplay.isLifecycleResource() must return false during execution of the request dispatcher.
+		ThemeDisplay themeDisplay = (ThemeDisplay) scriptCapturingHttpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+		boolean lifecycleResourceBackup = themeDisplay.isLifecycleResource();
+		themeDisplay.setLifecycleResource(false);
+
 		try {
 			requestDispatcher.include(scriptCapturingHttpServletRequest, jspIncludeResponse);
 		}
@@ -170,6 +177,9 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 			logger.error(e.getMessage());
 			throw new IOException(e.getMessage());
 		}
+
+		// FACES-1713: Restore the value of ThemeDisplay.isLifecycleResource().
+		themeDisplay.setLifecycleResource(lifecycleResourceBackup);
 
 		String bufferedResponse = jspIncludeResponse.getBufferedResponse();
 
