@@ -143,7 +143,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 			// knows to include it in the <eval>...</eval> section of the JSF partial-response.
 			if (isAjaxRequest(facesContext)) {
 				Map<String, String> javaScriptMap = ExtFacesContext.getInstance().getJavaScriptMap();
-				javaScriptMap.put(uiComponent.getClientId(), bufferedResponseWriter.toString());
+				javaScriptMap.put(uiComponent.getClientId(facesContext), bufferedResponseWriter.toString());
 			}
 
 			// Otherwise, render the script at the bottom of the portal page by setting the WebKeys.AUI_SCRIPT_DATA
