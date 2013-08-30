@@ -21,7 +21,7 @@
 				<!-- Required for JSR 329 TCK -->
 				<repository>
 					<id>liferay-thirdparty</id>
-					<url>http://repository.portletfaces.org/content/repositories/thirdparty/</url>
+					<url>http://repository.liferay.com/content/repositories/thirdparty/</url>
 				</repository>
 				<!-- Required for JBoss EL -->
 				<repository>
