@@ -42,9 +42,10 @@ use POSIX qw(strftime);
 #
 # Primitives
 #
-my($liferayFacesVersion,$liferayFacesVersionShort,$major1,$major2,$minor);
+my($liferayFacesVersion,$liferayFacesVersionShort,$liferayFacesVersionShortMajor1DotMajor2,$major1,$major2,$minor);
 my($portalVersion,$portalVersions,$portalDtdDisplay,$portalDtdUrl,$bookVersion);
 my($facesVersion,$facesVersionURL,$facesMajor,$facesMinor);
+my($liferayFacesMajor1,$liferayFacesMajor2,$liferayFacesMinor,);
 my $year= strftime "%Y", localtime;
 
 #
@@ -69,6 +70,10 @@ while(<POM>) {
         s/-(.*)//;
         $liferayFacesVersionShort = $_;
         print "liferayFacesVersionShort = $liferayFacesVersionShort\n";
+        
+        ($liferayFacesMajor1,$liferayFacesMajor2,$liferayFacesMinor) = split /\./;
+        $liferayFacesVersionShortMajor1DotMajor2 = "${liferayFacesMajor1}.${liferayFacesMajor2}";
+        print "liferayFacesVersionShortMajor1DotMajor2 = $liferayFacesVersionShortMajor1DotMajor2\n";
 
 	}
 
@@ -200,6 +205,14 @@ sub do_inplace_edits {
 		print "$File::Find::name\n";
 		`perl -pi -e 's/tlib-version>[0-9.]+/tlib-version>$liferayFacesVersionShort/' $file`;
 	}
+    
+    #
+    # Otherwise, if the current file is a chapter or section in the docbook, then potentially fix the version number that will
+    # appear in the URL to the VDLDocs.
+    #
+    elsif ((($file =~ m/chapter\-.+\.xml/) or ($file =~ m/sect1\-.+\-uicomponent-tags\.xml/)) and ($File::Find::name =~ /\/src/)) {
+		print "$File::Find::name\n";
+		`perl -pi -e 's/\\/faces\\/[0-9.]+\\/vdldoc\\//\\/faces\\/$liferayFacesVersionShortMajor1DotMajor2\\/vdldoc\\//g' $file`;
+	}
 
 }
-
