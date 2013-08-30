@@ -4,14 +4,14 @@
 	xmlns:liferay-ui="http://liferay.com/faces/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
 
-	<cc:interface>
+	<cc:interface shortDescription="The &lt;code&gt;liferay-ui:icon&lt;/code&gt; tag encapsulates an HTML &lt;code&gt;img&lt;/code&gt; tag whose &lt;code&gt;src&lt;/code&gt; attribute contains a fully qualified URL to an icon image in the current Liferay theme.">
 		<cc:actionSource name="click" targets="cmdLink" />
-		<cc:attribute name="image" required="true" />
-		<cc:attribute name="href" required="false" />
-		<cc:attribute name="cssClass" required="false" />
-		<cc:attribute name="style" required="false" />
-		<cc:attribute name="styleClass" required="false" />
-		<cc:attribute name="message" required="false" />
+		<cc:attribute name="cssClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute (same as styleClass)." />
+		<cc:attribute name="image" required="true" shortDescription="The name of the theme image icon, which can be the prefix of any image filename in the Liferay theme's &quot;common&quot; image folder. The default value is &lt;code&gt;view&lt;/code&gt;." />
+		<cc:attribute name="href" required="false" shortDescription="The link which is opened when the icon is clicked." />
+		<cc:attribute name="style" required="false" shortDescription="This is an HTML pass-thru type of attribute." />
+		<cc:attribute name="styleClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute." />
+		<cc:attribute name="message" required="false" shortDescription="Text included with the icon." />
 	</cc:interface>
 
 	<cc:implementation>
