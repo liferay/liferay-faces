@@ -6,7 +6,7 @@
 	<title>Liferay Faces Portal Composite Component Tags</title>
 	<para>Liferay Faces Portal provides the following Facelet Composite Component tags as part of its component suite.</para>
 	<para>The project View Description Language (VDL) documentation can be found at: 
-	<link xlink:href="http://docs.liferay.com/faces/3.1/vdldoc/">http://docs.liferay.com/faces/3.1/vdldoc/ </link>
+	<link xlink:href="http://docs.liferay.com/faces/3.0-legacy/vdldoc/">http://docs.liferay.com/faces/3.0-legacy/vdldoc/ </link>
 	</para>
 	<sect1 xml:id="liferay-ui-ice-info-data-paginator">
 		<title>The liferay-ui:ice-info-data-paginator tag</title>
