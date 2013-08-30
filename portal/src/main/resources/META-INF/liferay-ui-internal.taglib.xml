@@ -5,11 +5,13 @@
 	version="2.0">
 	<namespace>http://liferay.com/faces/ui-internal</namespace>
 	<function>
+		<description>Converts a string to Unicode.</description>
 		<function-name>toUnicodeString</function-name>
 		<function-class>com.liferay.portal.kernel.util.UnicodeFormatter</function-class>
 		<function-signature>java.lang.String toString(java.lang.String)</function-signature>
 	</function>
 	<tag>
+		<description>The &lt;code&gt;liferay-ui:input-editor&lt;/code&gt; tag renders a text area that provides the ability to enter rich text such as bold, italic, and underline. The renderer relies on the CKEditor&lt;sup&gt;TM&lt;/sup&gt; to provide the rich text editing area. Since Liferay bundles the CKEditor&lt;sup&gt;TM&lt;/sup&gt; JavaScript and related images with the portal, the portlet developer does not need to include it with the portlet.</description>
 		<tag-name>input-editor</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.InputEditorInternal</component-type>

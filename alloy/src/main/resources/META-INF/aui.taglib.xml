@@ -5,6 +5,7 @@
 	<description>Liferay Faces Alloy Facelet component tags.</description>
 	<namespace>http://liferay.com/faces/aui</namespace>
 	<function>
+		<description>Returns an escaped representation of the specified client ID.</description>
 		<function-name>escapeClientId</function-name>
 		<function-class>com.liferay.faces.alloy.util.AlloyUtil</function-class>
 		<function-signature>java.lang.String escapeClientId(java.lang.String)</function-signature>
@@ -92,41 +93,49 @@
 		</attribute>
 	</tag>
 	<tag>
+		<description>Renders a div element with CSS class name &quot;aui-dialog&quot; that will be positioned by Alloy UI CSS.</description>
 		<tag-name>dialog</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIDialog</component-type>
 		</component>
 		<attribute>
+			<description>The body of the dialog box.</description>
 			<name>bodyContent</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be centered in the view. The default value is false.</description>
 			<name>centered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not the close icon will be displayed on the dialog header. The default value is true.</description>
 			<name>close</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not the dialog will be constrained to the boundaries of the viewport region. The default value is true.</description>
 			<name>constrain2view</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not the dialog will invoke the destroy method when the dialog is closed. The default value is false.</description>
 			<name>destroyOnClose</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not the dialog will be draggable. The default value is true.</description>
 			<name>draggable</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>The height of the dialog.</description>
 			<name>height</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -138,6 +147,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not the dialog will be modal. The default value is false.</description>
 			<name>modal</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
@@ -149,27 +159,32 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not the dialog will be resizable. The default value is true.</description>
 			<name>resizable</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not the dialog will be resizable. The default value is true.</description>
 			<name>stack</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not the dialog will have stacking abilities. The default value is true.</description>
 			<name>title</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The width of the dialog.</description>
 			<name>width</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
+		<description>Converts a comma delimited list of long integers into java.util.List&amp;lt;Long&amp;gt;.</description>
 		<tag-name>convertLongList</tag-name>
 		<converter>
 			<converter-id>convertLongList</converter-id>
@@ -291,11 +306,13 @@
 		<tag-name>importConstants</tag-name>
 		<handler-class>com.liferay.faces.alloy.taglib.ImportConstantsTagHandler</handler-class>
 		<attribute>
+			<description>The fully qualified class name which the constants are being imported from.</description>
 			<name>classType</name>
 			<required>true</required>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
+			<description>The variable name that is to be introduced into the EL.</description>
 			<name>var</name>
 			<required>true</required>
 			<type>java.lang.String</type>
@@ -413,8 +430,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description>Boolean flag indicating whether or not this component is to be rendered during the
-							RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
 			<name>rendered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
@@ -458,22 +474,25 @@
 		</attribute>
 	</tag>
 	<tag>
+		<description>Renders a script element.</description>
 		<tag-name>script</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIScript</component-type>
 		</component>
 		<attribute>
+			<description>The identifier of the component.</description>
 			<name>id</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description>The rendered position of the script within the portal page HTML document. Valid values are &lt;code&gt;auto&lt;/code&gt;, &lt;code&gt;bottom&lt;/code&gt;, and &lt;inline&gt;auto&lt;/code&gt;. The default value is &lt;code&gt;auto&lt;/code&gt;.</description>
+			<description>The rendered position of the script within the portal page HTML document. Valid values are &lt;code&gt;auto&lt;/code&gt;, &lt;code&gt;bottom&lt;/code&gt;, and &lt;code&gt;inline&lt;/code&gt;. The default value is &lt;code&gt;auto&lt;/code&gt;.</description>
 			<name>position</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
 			<name>rendered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
