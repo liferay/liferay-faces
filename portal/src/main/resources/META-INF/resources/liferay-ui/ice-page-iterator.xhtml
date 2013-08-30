@@ -5,14 +5,14 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
 
-	<cc:interface>
-		<cc:attribute name="cssClass" required="false" />
+	<cc:interface shortDescription="The &lt;code&gt;liferay-ui:ice-data-iterator&lt;/code&gt; encapsulates the liferay-ui:ice-info-data-paginator and liferay-ui:ice-nav-data-paginator tags and renders navigation controls for an associated ice:dataTable.">
+		<cc:attribute name="cssClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute (same as styleClass)." />
 		<cc:attribute name="deleteLabel" required="false" />
 		<cc:attribute name="deleteRendered" required="false" />
 		<cc:attribute name="deleteWarning" required="false" />
 		<cc:attribute name="for" required="true" />
 		<cc:attribute name="paginatorMaxPages" required="false" />
-		<cc:attribute name="styleClass" required="false" />
+		<cc:attribute name="styleClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute." />
 	</cc:interface>
 
 	<cc:implementation>

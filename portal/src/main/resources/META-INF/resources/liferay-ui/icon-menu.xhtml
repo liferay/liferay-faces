@@ -4,12 +4,12 @@
 	xmlns:liferay-ui="http://liferay.com/faces/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
 
-	<cc:interface>
+	<cc:interface shortDescription="The &lt;code&gt;liferay-ui:icon-menu&lt;/code&gt; renders a list of child components as a menu.">
 		<cc:attribute name="align" default="right" required="false" />
-		<cc:attribute name="cssClass" required="false" />
+		<cc:attribute name="cssClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute (same as styleClass)." />
 		<cc:attribute name="showExpanded" default="true" required="false" />
 		<cc:attribute name="showArrow" default="false" required="false" />
-		<cc:attribute name="styleClass" required="false" />
+		<cc:attribute name="styleClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute." />
 	</cc:interface>
 
 	<cc:implementation>

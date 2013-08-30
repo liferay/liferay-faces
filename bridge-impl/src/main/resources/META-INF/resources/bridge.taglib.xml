@@ -5,7 +5,7 @@
 	version="2.0">
 	<namespace>http://liferay.com/faces/bridge</namespace>
 	<tag>
-		<description>The bridge:inputFile tag is a UIComponent that provides the ability to upload a file.</description>
+		<description>Renders the HTML tag: &lt;xmp&gt;&lt;input type=&quot;file&quot; /&gt;&lt;/xmp&gt; The tag provides file upload capability provides file upload capability. Usage of this tag requires the Apache &lt;code&gt;commons-fileupload&lt;/code&gt; and &lt;code&gt;commons-io&lt;/code&gt; dependencies.</description>
 		<tag-name>inputFile</tag-name>
 		<component>
 			<component-type>javax.faces.HtmlInputFile</component-type>
@@ -16,23 +16,12 @@
 			<name>accept</name>
 			<type>java.lang.String</type>
 		</attribute>
-		<attribute>
-			<name>fileUploadListener</name>
-			<required>false</required>
-			<type>javax.el.MethodExpression</type>
-		</attribute>
-		<attribute>
-			<name>size</name>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<name>value</name>
-		</attribute>
 		<!-- Standard HTML input attributes -->
 		<attribute>
 			<name>accesskey</name>
 			<type>java.lang.String</type>
 		</attribute>
+		<!-- Standard HTML input attributes cont. -->
 		<attribute>
 			<name>dir</name>
 			<type>java.lang.String</type>
@@ -41,28 +30,15 @@
 			<name>disabled</name>
 			<type>java.lang.String</type>
 		</attribute>
+		<!-- Attributes related to type="file" cont. -->
+		<attribute>
+			<name>fileUploadListener</name>
+			<required>false</required>
+			<type>javax.el.MethodExpression</type>
+		</attribute>
+		<!-- Standard HTML input attributes cont. -->
 		<attribute>
 			<name>lang</name>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<name>style</name>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<name>styleClass</name>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<name>tabIndex</name>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<name>title</name>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<name>xml:lang</name>
 			<type>java.lang.String</type>
 		</attribute>
 		<!-- HTML5 attributes -->
@@ -92,6 +68,18 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<name>onkeydown</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>onkeypress</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>onkeyup</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<name>onmousedown</name>
 			<type>java.lang.String</type>
 		</attribute>
@@ -112,19 +100,39 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<name>onkeydown</name>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<name>onkeypress</name>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<name>onkeyup</name>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<name>onselect</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<!-- Attributes related to type="file" cont. -->
+		<attribute>
+			<name>size</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<!-- Standard HTML input attributes cont.-->
+		<attribute>
+			<name>style</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>styleClass</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<!-- Attributes related to type="file" cont. -->
+		<attribute>
+			<name>tabIndex</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>title</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<!-- Attributes related to type="file" cont. -->
+		<attribute>
+			<name>value</name>
+		</attribute>
+		<!-- Standard HTML input attributes cont. -->
+		<attribute>
+			<name>xml:lang</name>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>

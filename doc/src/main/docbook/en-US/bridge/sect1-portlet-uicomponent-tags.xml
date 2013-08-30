@@ -6,111 +6,19 @@
 	<title>Portlet 2.0 UIComponent Tags</title>
 	<para>Liferay Faces Bridge provides the following portlet UIComponent tags as part of its component
 		suite.</para>
+	<para>The project View Description Language (VDL) documentation can be found at: 
+	<link xlink:href="http://docs.liferay.com/faces/3.1/vdldoc/">http://docs.liferay.com/faces/3.1/vdldoc/ </link>
+	</para>
 	<note>
 		<title>JSF 2 Facelets</title>
 		<para>Although JSP tags are provided by the portlet container implementation, Liferay Faces Bridge
 			provides these tags in order to support their usage within Facelets.</para>
 	</note>
-	<table>
-		<title>UIComponent Tags</title>
-		<tgroup cols="2">
-			<thead>
-				<row>
-					<entry>Tag</entry>
-					<entry>Description</entry>
-				</row>
-			</thead>
-			<tbody>
-				<row>
-					<entry>
-						<literal>
-							<link xlink:href="#portlet-actionURL">portlet:actionURL</link>
-						</literal>
-					</entry>
-					<entry>If the var attribute is present, introduces an EL variable that contains a
-						javax.portlet.ActionURL adequate for postbacks. Otherwise, the URL is written to the
-						response.</entry>
-				</row>
-				<row>
-					<entry>
-						<literal>
-							<link xlink:href="#portlet-namespace">portlet:namespace</link>
-						</literal>
-					</entry>
-					<entry>If the var attribute is present, introduces an EL variable that contains a the portlet
-						namespace. Otherwise, the namespace is written to the response.</entry>
-				</row>
-				<row>
-					<entry>
-						<literal>
-							<link xlink:href="#portlet-param">portlet:param</link>
-						</literal>
-					</entry>
-					<entry>Provides the ability to add a request parameter name=value pair when nested inside
-						portlet:actionURL, portletRenderURL, or portlet:resourceURL tags.</entry>
-				</row>
-				<row>
-					<entry>
-						<literal>
-							<link xlink:href="#portlet-renderURL">portlet:renderURL</link>
-						</literal>
-					</entry>
-					<entry>If the var attribute is present, introduces an EL variable that contains a
-						javax.portlet.PortletURL adequate for rendering. Otherwise, the URL is written to the
-						response.</entry>
-				</row>
-				<row>
-					<entry>
-						<literal>
-							<link xlink:href="#portlet-resourceURL">portlet:resourceURL</link>
-						</literal>
-					</entry>
-					<entry>If the var attribute is present, introduces an EL variable that contains a
-						javax.portlet.ResourceURL adequate for rendering. Otherwise, the URL is written to the
-						response.</entry>
-				</row>
-			</tbody>
-		</tgroup>
-	</table>
 	<sect2 xml:id="portlet-actionURL">
 		<title>The portlet:actionURL tag</title>
 		<para>If the var attribute is present, the <ns:code>portlet:actionURL</ns:code> tag introduces an EL
 			variable that contains a javax.portlet.ActionURL adequate for postbacks. Otherwise, the URL is written
 			to the response.</para>
-		<table>
-			<title>Attributes</title>
-			<tgroup cols="2">
-				<thead>
-					<row>
-						<entry>Attribute</entry>
-						<entry>Type</entry>
-						<entry>Description</entry>
-						<entry>Required</entry>
-					</row>
-				</thead>
-				<tbody>
-					<row>
-						<entry>id</entry>
-						<entry>String</entry>
-						<entry>The identifier of the component</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>rendered</entry>
-						<entry>Boolean</entry>
-						<entry>Boolean flag indicating whether or not this component is to be rendered during the
-							RENDER_RESPONSE phase of the JSF lifecycle. The default value is “true”.</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>var</entry>
-						<entry>String</entry>
-						<entry>Specifies the name of a variable that will be introduced into the EL.</entry>
-						<entry>false</entry>
-					</row>
-				</tbody>
-			</tgroup>
-		</table>
 		<example>
 			<title>Example usage of portlet:actionURL tag</title>
 			<programlisting>
@@ -138,40 +46,6 @@
 		<para>If the var attribute is present, the <ns:code>portlet:namespace</ns:code> tag introduces an EL
 			variable that contains the portlet namespace. Otherwise, the namespace is written to the
 			response.</para>
-		<table>
-			<title>Attributes</title>
-			<tgroup cols="2">
-				<thead>
-					<row>
-						<entry>Attribute</entry>
-						<entry>Type</entry>
-						<entry>Description</entry>
-						<entry>Required</entry>
-					</row>
-				</thead>
-				<tbody>
-					<row>
-						<entry>id</entry>
-						<entry>String</entry>
-						<entry>The identifier of the component</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>rendered</entry>
-						<entry>Boolean</entry>
-						<entry>Boolean flag indicating whether or not this component is to be rendered during the
-							RENDER_RESPONSE phase of the JSF lifecycle. The default value is “true”.</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>var</entry>
-						<entry>String</entry>
-						<entry>Specifies the name of a variable that will be introduced into the EL.</entry>
-						<entry>false</entry>
-					</row>
-				</tbody>
-			</tgroup>
-		</table>
 		<example>
 			<title>Example usage of portlet:actionURL tag</title>
 			<programlisting>
@@ -196,46 +70,6 @@
 		<title>The portlet:param tag</title>
 		<para>The <ns:code>portlet:param</ns:code> tag provides the ability to add a request parameter name=value
 			pair when nested inside portlet:actionURL, portletRenderURL, or portlet:resourceURL tags.</para>
-		<table>
-			<title>Attributes</title>
-			<tgroup cols="2">
-				<thead>
-					<row>
-						<entry>Attribute</entry>
-						<entry>Type</entry>
-						<entry>Description</entry>
-						<entry>Required</entry>
-					</row>
-				</thead>
-				<tbody>
-					<row>
-						<entry>id</entry>
-						<entry>String</entry>
-						<entry>The identifier of the component</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>name</entry>
-						<entry>String</entry>
-						<entry>The name of the parameter.</entry>
-						<entry>true</entry>
-					</row>
-					<row>
-						<entry>rendered</entry>
-						<entry>Boolean</entry>
-						<entry>Boolean flag indicating whether or not this component is to be rendered during the
-							RENDER_RESPONSE phase of the JSF lifecycle. The default value is “true”.</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>value</entry>
-						<entry>String</entry>
-						<entry>The value of the parameter.</entry>
-						<entry>true</entry>
-					</row>
-				</tbody>
-			</tgroup>
-		</table>
 		<example>
 			<title>Example usage of portlet:actionURL tag</title>
 			<programlisting>
@@ -262,40 +96,6 @@
 		<para>If the var attribute is present, the <ns:code>portlet:renderURL</ns:code> tag introduces an EL
 			variable that contains a javax.portlet.PortletURL adequate for rendering. Otherwise, the URL is written
 			to the response.</para>
-		<table>
-			<title>Attributes</title>
-			<tgroup cols="2">
-				<thead>
-					<row>
-						<entry>Attribute</entry>
-						<entry>Type</entry>
-						<entry>Description</entry>
-						<entry>Required</entry>
-					</row>
-				</thead>
-				<tbody>
-					<row>
-						<entry>id</entry>
-						<entry>String</entry>
-						<entry>The identifier of the component</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>rendered</entry>
-						<entry>Boolean</entry>
-						<entry>Boolean flag indicating whether or not this component is to be rendered during the
-							RENDER_RESPONSE phase of the JSF lifecycle. The default value is “true”.</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>var</entry>
-						<entry>String</entry>
-						<entry>Specifies the name of a variable that will be introduced into the EL.</entry>
-						<entry>false</entry>
-					</row>
-				</tbody>
-			</tgroup>
-		</table>
 		<example>
 			<title>Example usage of portlet:renderURL tag</title>
 			<programlisting>
@@ -323,40 +123,6 @@
 		<para>If the var attribute is present, the <ns:code>portlet:resourceURL</ns:code> tag introduces an EL
 			variable that contains a javax.portlet.ActionURL adequate for obtaining resources. Otherwise, the URL is
 			written to the response.</para>
-		<table>
-			<title>Attributes</title>
-			<tgroup cols="2">
-				<thead>
-					<row>
-						<entry>Attribute</entry>
-						<entry>Type</entry>
-						<entry>Description</entry>
-						<entry>Required</entry>
-					</row>
-				</thead>
-				<tbody>
-					<row>
-						<entry>id</entry>
-						<entry>String</entry>
-						<entry>The identifier of the component</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>rendered</entry>
-						<entry>Boolean</entry>
-						<entry>Boolean flag indicating whether or not this component is to be rendered during the
-							RENDER_RESPONSE phase of the JSF lifecycle. The default value is “true”.</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>var</entry>
-						<entry>String</entry>
-						<entry>Specifies the name of a variable that will be introduced into the EL.</entry>
-						<entry>false</entry>
-					</row>
-				</tbody>
-			</tgroup>
-		</table>
 		<example>
 			<title>Example usage of portlet:resourceURL tag</title>
 			<programlisting>
