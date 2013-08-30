@@ -23,13 +23,11 @@ import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
-import com.liferay.taglib.aui.ScriptTag;
-
 
 /**
- * This class serves as a facade for instances of the Liferay Portal {@link ScriptTag} class. Some of the method
- * signatures of the class have undergone changes since Liferay Portal 6.0.11 which requires the use of version
- * detection and reflection in this class.
+ * This class serves as a facade for instances of the Liferay Portal {@link com.liferay.taglib.aui.ScriptTag} class.
+ * Some of the method signatures of the class have undergone changes since Liferay Portal 6.0.11 which requires the use
+ * of version detection and reflection in this class.
  *
  * @author  Neil Griffin
  */
@@ -41,6 +39,7 @@ public class ScriptTagUtil {
 	// Private Constants
 	private static final String FLUSH_SCRIPT_DATA = "flushScriptData";
 	private static final Method FLUSH_SCRIPT_DATA_METHOD;
+	private static final String SCRIPT_TAG_FQCN = "com.liferay.taglib.aui.ScriptTag";
 
 	static {
 
@@ -55,7 +54,8 @@ public class ScriptTagUtil {
 				Method flushScriptDataMethod = null;
 
 				try {
-					flushScriptDataMethod = ScriptTag.class.getMethod(FLUSH_SCRIPT_DATA,
+					Class<?> scriptTagClass = Class.forName(SCRIPT_TAG_FQCN);
+					flushScriptDataMethod = scriptTagClass.getMethod(FLUSH_SCRIPT_DATA,
 							new Class[] { PageContext.class });
 				}
 				catch (Exception e) {
