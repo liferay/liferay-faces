@@ -27,7 +27,7 @@
 			<dependencies>
 				<dependency>
 					<groupId>com.liferay.faces</groupId>
-					<artifactId>liferay-faces-compat</artifactId>
+					<artifactId>liferay-faces-cdi-compat</artifactId>
 					<version>${project.version}</version>
 				</dependency>
 			</dependencies>
