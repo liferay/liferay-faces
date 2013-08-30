@@ -6,7 +6,7 @@
 	version="2.0">
 	<namespace>http://java.sun.com/portlet_2_0</namespace>
 	<tag>
-		<description>Creates a URL that points to the current portlet and triggers a action request with the supplied parameters</description>
+		<description>Creates a URL that points to the current portlet and triggers a action request with the supplied parameters. If the var attribute is present, the &lt;code&gt;portlet:actionURL&lt;/code&gt; tag introduces an EL variable that contains a javax.portlet.ActionURL adequate for postbacks. Otherwise, the URL is written to the response.</description>
 		<tag-name>actionURL</tag-name>
 		<component>
 			<component-type>com.liferay.faces.bridge.component.PortletActionURL</component-type>
@@ -32,6 +32,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Specifies the name of a variable that will be introduced into the EL.</description>
 			<name>var</name>
 			<type>java.lang.String</type>
 		</attribute>
@@ -41,21 +42,21 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>defines objects like RenderRequest,ResourceRequest,ActionRequest,EventRequest etc which are useful for portlet lifecycle.</description>
+		<description>Defines objects like RenderRequest, ResourceRequest, ActionRequest, EventRequest etc. which are useful for the portlet lifecycle.</description>
 		<tag-name>defineObjects</tag-name>
 		<component>
 			<component-type>com.liferay.faces.bridge.component.PortletDefineObjects</component-type>
 		</component>
 	</tag>
 	<tag>
-		<description>Creates a name space that will be unique for the current portlet resources</description>
+		<description>Creates a name space that will be unique for the current portlet resources. If the var attribute is present, the &lt;code&gt;portlet:namespace&lt;/code&gt; tag introduces an EL variable that contains the portlet namespace. Otherwise, the namespace is written to the response.</description>
 		<tag-name>namespace</tag-name>
 		<component>
 			<component-type>com.liferay.faces.bridge.component.PortletNameSpace</component-type>
 		</component>
 	</tag>
 	<tag>
-		<description>Creates a URL parameter that points to the current portlet and triggers a render request with the supplied parameters</description>
+		<description>Creates a URL parameter that points to the current portlet and triggers a render request with the supplied parameters. The &lt;code&gt;portlet:param&lt;/code&gt; tag provides the ability to add a request parameter name=value pair when nested inside portlet:actionURL, portletRenderURL, or portlet:resourceURL tags.</description>
 		<tag-name>param</tag-name>
 		<component>
 			<component-type>com.liferay.faces.bridge.component.PortletParam</component-type>
@@ -70,7 +71,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Equivalent to the call addProperty()and the property can be added to an actionURL, renderURL or resourceURL</description>
+		<description>Equivalent to the call addProperty(), and the property can be added to an actionURL, renderURL, or resourceURL.</description>
 		<tag-name>property</tag-name>
 		<component>
 			<component-type>com.liferay.faces.bridge.component.PortletProperty</component-type>
@@ -85,7 +86,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a URL that points to the current portlet and triggers a render request with the supplied parameters</description>
+		<description>Creates a URL that points to the current portlet and triggers a render request with the supplied parameters. If the var attribute is present, the &lt;code&gt;portlet:renderURL&lt;/code&gt; tag introduces an EL variable that contains a javax.portlet.PortletURL adequate for rendering. Otherwise, the URL is written to the response.</description>
 		<tag-name>renderURL</tag-name>
 		<component>
 			<component-type>com.liferay.faces.bridge.component.PortletRenderURL</component-type>
@@ -107,6 +108,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Specifies the name of a variable that will be introduced into the EL.</description>
 			<name>var</name>
 			<type>java.lang.String</type>
 		</attribute>
@@ -116,7 +118,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a URL that points to the current portlet and triggers a resource request with the supplied parameters</description>
+		<description>Creates a URL that points to the current portlet and triggers a resource request with the supplied parameters. If the var attribute is present, the &lt;code&gt;portlet:resourceURL&lt;/code&gt; tag introduces an EL variable that contains a javax.portlet.ActionURL adequate for obtaining resources. Otherwise, the URL is written to the response.</description>
 		<tag-name>resourceURL</tag-name>
 		<component>
 			<component-type>com.liferay.faces.bridge.component.PortletResourceURL</component-type>
@@ -130,6 +132,7 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>The identifier of the component.</description>
 			<name>id</name>
 			<type>java.lang.String</type>
 		</attribute>
@@ -138,6 +141,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Specifies the name of a variable that will be introduced into the EL.</description>
 			<name>var</name>
 			<type>java.lang.String</type>
 		</attribute>

@@ -5,31 +5,37 @@
 	version="2.0">
 	<namespace>http://liferay.com/faces/util</namespace>
 	<function>
+		<description>If the specified value is a portal property such as &quot;editor.wysiwyg.default&quot; then this function returns the value of the portal property such as &quot;ckeditor&quot;. Otherwise if the specified value is null or empty, then the browser capabilities determine the return value. Browsers that do not have the ability to support rich text will cause this function to return &quot;simple&quot; or &quot;tinymce_simple&quot;.</description>
 		<function-name>getEditorValue</function-name>
 		<function-class>com.liferay.faces.portal.util.FaceletUtil</function-class>
 		<function-signature>java.lang.String getEditorValue(java.lang.String)</function-signature>
 	</function>
 	<function>
+		<description>Returns the &lt;code&gt;dataModel&lt;/code&gt; associated with the specified clientId.</description>
 		<function-name>findDataModel</function-name>
 		<function-class>com.liferay.faces.util.el.FaceletUtil</function-class>
 		<function-signature>javax.faces.model.DataModel findDataModel(java.lang.String)</function-signature>
 	</function>
 	<function>
+		<description>Returns an escaped/encoded representation of the specified URL.</description>
 		<function-name>escapeURL</function-name>
 		<function-class>com.liferay.portal.kernel.util.HttpUtil</function-class>
 		<function-signature>java.lang.String encodeURL(java.lang.String)</function-signature>
 	</function>
 	<function>
+		<description>Returns the value of the specified portal property name.</description>
 		<function-name>portalProperty</function-name>
 		<function-class>com.liferay.portal.kernel.util.PropsUtil</function-class>
 		<function-signature>java.lang.String get(java.lang.String)</function-signature>
 	</function>
 	<function>
+		<description>Returns a modified version of the first argument by substituting all occurrences of the second argument with the third argument.</description>
 		<function-name>stringReplace</function-name>
 		<function-class>com.liferay.portal.kernel.util.StringUtil</function-class>
 		<function-signature>java.lang.String replace(java.lang.String, java.lang.String, java.lang.String)</function-signature>
 	</function>
 	<tag>
+		<description>Validator that is meant to be used in conjunction with the &lt;code&gt;liferay-ui:captcha&lt;/code&gt; component.</description>
 		<tag-name>validateCaptcha</tag-name>
 		<validator>
 			<validator-id>com.liferay.faces.portal.CaptchaValidator</validator-id>
@@ -39,6 +45,7 @@
 			<type>com.liferay.faces.portal.validator.CaptchaValidator</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not the validator is enabled for the surrounding input component.</description>
 			<name>disabled</name>
 			<type>java.lang.Boolean</type>
 		</attribute>
@@ -49,6 +56,7 @@
 		</attribute>
 	</tag>
 	<tag>
+		<description>Validator that is meant to be used in conjunction with the &lt;code&gt;liferay-ui:input-editor&lt;/code&gt; component in order to validate length on the server-side.</description>
 		<tag-name>validateRichTextLength</tag-name>
 		<validator>
 			<validator-id>com.liferay.faces.portal.RichTextLengthValidator</validator-id>
@@ -58,6 +66,7 @@
 			<type>javax.faces.validator.LengthValidator</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not the validator is enabled for the surrounding input component.</description>
 			<name>disabled</name>
 			<type>java.lang.Boolean</type>
 		</attribute>

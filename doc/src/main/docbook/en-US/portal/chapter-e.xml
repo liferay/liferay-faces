@@ -5,55 +5,9 @@
 	xmlns:ns="http://docbook.org/ns/docbook">
 	<title>Liferay Faces Portal Composite Component Tags</title>
 	<para>Liferay Faces Portal provides the following Facelet Composite Component tags as part of its component suite.</para>
-	<table>
-		<title>Facelet Composite Component Tags</title>
-		<tgroup cols="2">
-			<thead>
-				<row>
-					<entry>Tag</entry>
-					<entry>Description</entry>
-				</row>
-			</thead>
-			<tbody>
-				<row>
-					<entry>
-						<literal>
-							<link xlink:href="#liferay-ui-ice-info-data-paginator"
-								>liferay-ui:ice-info-data-paginator</link>
-						</literal>
-					</entry>
-					<entry>Encapsulates an ICEfaces <link
-							xlink:href="http://www.icefaces.org/docs/v1_8_1/tld/ice/dataPaginator.html"
-							>ice:dataPaginator</link> tag that renders pagination information for an associated <link
-							xlink:href="http://www.icefaces.org/docs/v1_8_1/tld/ice/dataTable.html"
-						>ice:dataTable</link>. The navigation information will match the internationalized Liferay
-						"showing-x-x-of-x-results" message.</entry>
-				</row>
-				<row>
-					<entry>
-						<literal>
-							<link xlink:href="#liferay-ui-ice-nav-data-paginator"
-								>liferay-ui:ice-nav-data-paginator</link>
-						</literal>
-					</entry>
-					<entry>Encapsulates an ICEfaces <link
-							xlink:href="http://www.icefaces.org/docs/v1_8_1/tld/ice/dataPaginator.html"
-							>ice:dataPaginator</link> tag that renders navigation controls for an associated <link
-							xlink:href="http://www.icefaces.org/docs/v1_8_1/tld/ice/dataTable.html"
-						>ice:dataTable</link>. The icons will match the current Liferay theme.</entry>
-				</row>
-				<row>
-					<entry>
-						<literal>
-							<link xlink:href="#liferay-ui-icon">liferay-ui:icon</link>
-						</literal>
-					</entry>
-					<entry>Encapsulates an HTML <code>img</code> tag whose <code>src</code> attribute contains a fully
-						qualified URL to an icon in the Liferay theme.</entry>
-				</row>
-			</tbody>
-		</tgroup>
-	</table>
+	<para>The project View Description Language (VDL) documentation can be found at: 
+	<link xlink:href="http://docs.liferay.com/faces/3.1/vdldoc/">http://docs.liferay.com/faces/3.1/vdldoc/ </link>
+	</para>
 	<sect1 xml:id="liferay-ui-ice-info-data-paginator">
 		<title>The liferay-ui:ice-info-data-paginator tag</title>
 		<para>The <ns:code>liferay-ui:ice-info-data-paginator</ns:code> encapsulates an ICEfaces <link
@@ -61,37 +15,6 @@
 			that renders pagination information for an associated <link
 				xlink:href="http://www.icefaces.org/docs/v1_8_1/tld/ice/dataTable.html">ice:dataTable</link>. The
 			navigation information will match the internationalized Liferay "showing-x-x-of-x-results" message.</para>
-		<table>
-			<title>Attributes</title>
-			<tgroup cols="2">
-				<thead>
-					<row>
-						<entry>Attribute</entry>
-						<entry>Type</entry>
-						<entry>Description</entry>
-						<entry>Required</entry>
-					</row>
-				</thead>
-				<tbody>
-					<row>
-						<entry>for</entry>
-						<entry>String</entry>
-						<entry>Corresponds to the value of an <code>id</code> attribute for an <link
-								xlink:href="http://www.icefaces.org/docs/v1_8_1/tld/ice/dataTable.html"
-								>ice:dataTable</link> tag.</entry>
-						<entry>true</entry>
-					</row>
-					<row>
-						<entry>value</entry>
-						<entry>String</entry>
-						<entry>Specifies a string that contains replacement tokens for each piece of pagination
-							information. The default value is the internationalized Liferay "showing-x-x-of-x-results"
-							message.</entry>
-						<entry>true</entry>
-					</row>
-				</tbody>
-			</tgroup>
-		</table>
 		<example>
 			<title>Example usage of liferay-ui:ice-info-data-paginator tag</title>
 			<programlisting>
@@ -117,89 +40,6 @@
 			that renders navigation controls for an associated <link
 				xlink:href="http://www.icefaces.org/docs/v1_8_1/tld/ice/dataTable.html">ice:dataTable</link>. The icons
 			will match the current Liferay theme.</para>
-		<table>
-			<title>Attributes</title>
-			<tgroup cols="2">
-				<thead>
-					<row>
-						<entry>Attribute</entry>
-						<entry>Type</entry>
-						<entry>Description</entry>
-						<entry>Required</entry>
-					</row>
-				</thead>
-				<tbody>
-					<row>
-						<entry>fastForwardIconRendered</entry>
-						<entry>Boolean</entry>
-						<entry>Boolean flag indicating whether or not the "Fast Forward" button/icon is rendered. The
-							default value is "false".</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>fastRewindIconRendered</entry>
-						<entry>Boolean</entry>
-						<entry>Boolean flag indicating whether or not the "Fast Rewind" button/icon is rendered. The
-							default value is "false".</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>firstIconRendered</entry>
-						<entry>Boolean</entry>
-						<entry>Boolean flag indicating whether or not the "First" button/icon is rendered. The default
-							value is "true".</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>for</entry>
-						<entry>String</entry>
-						<entry>Corresponds to the value of an <code>id</code> attribute for an <link
-								xlink:href="http://www.icefaces.org/docs/v1_8_1/tld/ice/dataTable.html"
-								>ice:dataTable</link> tag.</entry>
-						<entry>true</entry>
-					</row>
-					<row>
-						<entry>lastIconRendered</entry>
-						<entry>Boolean</entry>
-						<entry>Boolean flag indicating whether or not the "Last" button/icon is rendered. The default
-							value is "true".</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>nextIconRendered</entry>
-						<entry>Boolean</entry>
-						<entry>Boolean flag indicating whether or not the "Next" button/icon is rendered. The default
-							value is "true".</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>paginator</entry>
-						<entry>Boolean</entry>
-						<entry>Boolean flag indicating whether or not the page number links will be rendered. This is a
-							pass-through attribute for the encapsulated <link
-								xlink:href="http://www.icefaces.org/docs/v1_8_1/tld/ice/dataPaginator.html"
-								>ice:dataPaginator</link>. The default value is "true".</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>paginatorMaxPages</entry>
-						<entry>Integer</entry>
-						<entry>The maximum amount of pages to be displayed in the paginator. This is a pass-through
-							attribute for the encapsulated <link
-								xlink:href="http://www.icefaces.org/docs/v1_8_1/tld/ice/dataPaginator.html"
-								>ice:dataPaginator</link>. The default value is 7.</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>previousIconRendered</entry>
-						<entry>Boolean</entry>
-						<entry>Boolean flag indicating whether or not the "Previous" button/icon is rendered. The
-							default value is "true".</entry>
-						<entry>false</entry>
-					</row>
-				</tbody>
-			</tgroup>
-		</table>
 		<example>
 			<title>Example usage of liferay-ui:ice-nav-data-paginator tag</title>
 			<programlisting>
@@ -223,36 +63,6 @@
 		<para>The <ns:code>liferay-ui:icon</ns:code> tag encapsulates an HTML <code>img</code> tag whose
 				<code>src</code> attribute contains a fully qualified URL to an icon image in the current Liferay
 			theme.</para>
-		<table>
-			<title>Attributes</title>
-			<tgroup cols="2">
-				<thead>
-					<row>
-						<entry>Attribute</entry>
-						<entry>Type</entry>
-						<entry>Description</entry>
-						<entry>Required</entry>
-					</row>
-				</thead>
-				<tbody>
-					<row>
-						<entry>alt</entry>
-						<entry>String</entry>
-						<entry>Corresponds to the value of the <code>alt</code> attribute for the embedded
-								<ns:code>img</ns:code> tag. The default value is Liferay's internationalized message for
-							the key named <code>view</code>.</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>image</entry>
-						<entry>String</entry>
-						<entry>The name of the theme image icon, which can be the prefix of any image filename in the
-							Liferay theme's "common" image folder. The default value is <code>view</code>.</entry>
-						<entry>false</entry>
-					</row>
-				</tbody>
-			</tgroup>
-		</table>
 		<example>
 			<title>Example usage of liferay-ui:icon tag</title>
 			<programlisting>

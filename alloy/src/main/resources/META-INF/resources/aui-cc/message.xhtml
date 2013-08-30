@@ -5,11 +5,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
 
-	<cc:interface>
-		<cc:attribute name="for" required="true" />
-		<cc:attribute name="value" required="false" />
-		<cc:attribute name="style" required="false" />
-		<cc:attribute name="styleClass" required="false" />
+	<cc:interface shortDescription="The &lt;/code&gt;aui-cc:message&lt;/code&gt; encapsulates a standard JSF h:message tag with JSR 286 (Portlet 2.0) CSS class names.">
+		<cc:attribute name="for" required="true" shortDescription="The id of the component for which this message is associated." />
+		<cc:attribute name="style" required="false" shortDescription="This is an HTML pass-thru type of attribute." />
+		<cc:attribute name="styleClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute." />
+		<cc:attribute name="value" required="false" shortDescription="The current value of this component." />
 	</cc:interface>
 
 	<cc:implementation>
