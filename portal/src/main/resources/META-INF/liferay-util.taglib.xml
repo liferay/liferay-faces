@@ -10,16 +10,19 @@
 		<function-signature>javax.faces.model.DataModel findDataModel(java.lang.String)</function-signature>
 	</function>
 	<function>
+		<description>Returns an escaped/encoded representation of the specified URL.</description>
 		<function-name>escapeURL</function-name>
 		<function-class>com.liferay.portal.kernel.util.HttpUtil</function-class>
 		<function-signature>java.lang.String encodeURL(java.lang.String)</function-signature>
 	</function>
 	<function>
+		<description>Returns the value of the specified portal property name.</description>
 		<function-name>portalProperty</function-name>
 		<function-class>com.liferay.portal.kernel.util.PropsUtil</function-class>
 		<function-signature>java.lang.String get(java.lang.String)</function-signature>
 	</function>
 	<function>
+		<description>Returns a modified version of the first argument by substituting all occurrences of the second argument with the third argument.</description>
 		<function-name>stringReplace</function-name>
 		<function-class>com.liferay.portal.kernel.util.StringUtil</function-class>
 		<function-signature>java.lang.String replace(java.lang.String, java.lang.String, java.lang.String)</function-signature>

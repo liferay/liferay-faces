@@ -6,6 +6,7 @@
 	<namespace>http://liferay.com/faces/aui-cc</namespace>
 	<composite-library-name>aui-cc</composite-library-name>
 	<function>
+		<description>Returns a string of CSS classes with the second argument appended to each CSS class in the first argument.</description>
 		<function-name>appendToCssClasses</function-name>
 		<function-class>com.liferay.faces.alloy.util.AlloyUtil</function-class>
 		<function-signature>java.lang.String appendToCssClasses(java.lang.String, java.lang.String)</function-signature>
