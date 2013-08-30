@@ -4,25 +4,25 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
 
-	<cc:interface>
-		<cc:attribute name="cssClass" required="false" />
-		<cc:attribute name="for" required="true" />
-		<cc:attribute name="firstLabel" required="false" />
-		<cc:attribute name="firstIconRendered" default="true" required="false" />
-		<cc:attribute name="lastLabel" required="false" />
-		<cc:attribute name="lastIconRendered" default="true" required="false" />
-		<cc:attribute name="paginator" default="true" required="false" />
-		<cc:attribute name="paginatorMaxPages" default="7" required="false" />
-		<cc:attribute name="previousLabel" required="false" />
-		<cc:attribute name="previousIconRendered" default="true" required="false" />
-		<cc:attribute name="nextLabel" required="false" />
-		<cc:attribute name="nextIconRendered" default="true" required="false" />
-		<cc:attribute name="fastRewindLabel" required="false" />
-		<cc:attribute name="fastRewindIconRendered" default="false" required="false" />
-		<cc:attribute name="fastForwardLabel" required="false" />
-		<cc:attribute name="fastForwardIconRendered" default="false" required="false" />
-		<cc:attribute name="style" required="false" />
-		<cc:attribute name="styleClass" required="false" />
+	<cc:interface shortDescription="The &lt;code&gt;liferay-ui:ice-info-data-paginator&lt;/code&gt; encapsulates an ICEfaces ice:dataPaginator tag that renders navigation controls for an associated ice:dataTable. The icons will match the current Liferay theme.">
+		<cc:attribute name="cssClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute (same as styleClass)." />
+		<cc:attribute name="fastForwardIconRendered" default="false" required="false" shortDescription="Boolean flag indicating whether or not the &quot;Fast Forward&quot; button/icon is rendered. The default value is &quot;false&quot;." />
+		<cc:attribute name="fastForwardLabel" required="false" shortDescription="The label that will appear on the &quot;fast forward&quot; button/icon." />
+		<cc:attribute name="fastRewindIconRendered" default="false" required="false" shortDescription="Boolean flag indicating whether or not the &quot;Fast Rewind&quot; button/icon is rendered. The default value is &quot;false&quot;." />
+		<cc:attribute name="fastRewindLabel" required="false" shortDescription="The label that will appear on the &quot;fast rewind&quot; button/icon." />
+		<cc:attribute name="firstIconRendered" default="true" required="false" shortDescription="Boolean flag indicating whether or not the &quot;First&quot; button/icon is rendered. The default value is &quot;true&quot;." />
+		<cc:attribute name="firstLabel" required="false" shortDescription="The label that will appear on the &quot;first&quot; button/icon." />
+		<cc:attribute name="for" required="true" shortDescription="Corresponds to the value of an &lt;code&gt;id&lt;/code&gt; attribute for an ice:dataTable tag." />
+		<cc:attribute name="lastLabel" required="false" shortDescription="The label that will appear on the &quot;last&quot; button/icon." />
+		<cc:attribute name="lastIconRendered" default="true" required="false" shortDescription="Boolean flag indicating whether or not the &quot;Last&quot; button/icon is rendered. The default value is &quot;true&quot;." />
+		<cc:attribute name="paginator" default="true" required="false" shortDescription="Boolean flag indicating whether or not the page number links will be rendered. This is a pass-through attribute for the encapsulated ice:dataPaginator. The default value is &quot;true&quot;." />
+		<cc:attribute name="paginatorMaxPages" default="7" required="false" shortDescription="The maximum amount of pages to be displayed in the paginator. This is a pass-through attribute for the encapsulated ice:dataPaginator. The default value is 7." />
+		<cc:attribute name="previousIconRendered" default="true" required="false" shortDescription="Boolean flag indicating whether or not the &quot;Previous&quot; button/icon is rendered. The default value is &quot;true&quot;." />
+		<cc:attribute name="previousLabel" required="false" shortDescription="The label that will appear on the &quot;previous&quot; button/icon." />
+		<cc:attribute name="nextIconRendered" default="true" required="false" shortDescription="Boolean flag indicating whether or not the &quot;Next&quot; button/icon is rendered. The default value is &quot;true&quot;." />
+		<cc:attribute name="nextLabel" required="false" shortDescription="The label that will appear on the &quot;next&quot; button/icon." />
+		<cc:attribute name="style" required="false" shortDescription="This is an HTML pass-thru type of attribute." />
+		<cc:attribute name="styleClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute." />
 	</cc:interface>
 
 	<cc:implementation>

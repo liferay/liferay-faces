@@ -6,29 +6,10 @@ xmlns:ns="http://docbook.org/ns/docbook">
 	<title>Bridge UIComponent Tags</title>
 	<para>Liferay Faces Bridge provides the following bridge-specific UIComponent tags as part of its component
 		suite.</para>
-	<table>
-		<title>UIComponent Tags</title>
-		<tgroup cols="2">
-			<thead>
-				<row>
-					<entry>Tag</entry>
-					<entry>Description</entry>
-				</row>
-			</thead>
-			<tbody>
-				<row>
-					<entry>
-						<literal>
-							<link xlink:href="#bridge-inputFile">bridge:inputFile</link>
-						</literal>
-					</entry>
-					<entry>Renders an HTML <ns:code>&lt;input type="file" /></ns:code> tag which provides file
-						upload capability.</entry>
-				</row>
-			</tbody>
-		</tgroup>
-	</table>
-	<sect2 xml:id="bridge-inputFile">
+	<para>The project View Description Language (VDL) documentation can be found at: 
+	<link xlink:href="http://docs.liferay.com/faces/3.1/vdldoc/">http://docs.liferay.com/faces/3.1/vdldoc/ </link>
+	</para>
+    <sect2 xml:id="bridge-inputFile">
 		<title>The bridge:inputFile tag</title>
 		<para>The <ns:code>bridge:inputFile</ns:code> tag renders an HTML <ns:code>&lt;input type="file"
 				/></ns:code> tag which enables file upload capability.</para>
@@ -39,41 +20,6 @@ xmlns:ns="http://docbook.org/ns/docbook">
 						xlink:href="http://www.liferay.com/community/liferay-projects/liferay-faces/demos#jsf2-portlet"
 					>Demo JSF2 Portlet</link> at liferay.com for more details.</para>
 		</note>
-		<table>
-			<title>Attributes</title>
-			<tgroup cols="2">
-				<thead>
-					<row>
-						<entry>Attribute</entry>
-						<entry>Type</entry>
-						<entry>Description</entry>
-						<entry>Required</entry>
-					</row>
-				</thead>
-				<tbody>
-					<row>
-						<entry>id</entry>
-						<entry>String</entry>
-						<entry>The identifier of the component</entry>
-						<entry>false</entry>
-					</row>
-					<row>
-						<entry>binding</entry>
-						<entry>com.liferay.faces.bridge.component.HtmlInputFile</entry>
-						<entry>An EL expression that represents a JavaBean proeprty for the corresponding
-							HtmlInputFile component in the runtime component tree.</entry>
-						<entry>true</entry>
-					</row>
-					<row>
-						<entry>rendered</entry>
-						<entry>Boolean</entry>
-						<entry>Boolean flag indicating whether or not this component is to be rendered during the
-							RENDER_RESPONSE phase of the JSF lifecycle. The default value is “true”.</entry>
-						<entry>false</entry>
-					</row>
-				</tbody>
-			</tgroup>
-		</table>
 		<example>
 			<title>Example usage of bridge:inputFile tag</title>
 			<programlisting>
