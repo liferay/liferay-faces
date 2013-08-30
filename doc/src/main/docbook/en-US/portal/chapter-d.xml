@@ -6,7 +6,7 @@
 	<title>Liferay Faces Portal UIComponent Tags</title>
 	<para>Liferay Faces Portal provides the following UIComponent tags as part of its component suite.</para>
 	<para>The project View Description Language (VDL) documentation can be found at: 
-	<link xlink:href="http://docs.liferay.com/faces/3.1/vdldoc/">http://docs.liferay.com/faces/3.1/vdldoc/ </link>
+	<link xlink:href="http://docs.liferay.com/faces/4.1/vdldoc/">http://docs.liferay.com/faces/4.1/vdldoc/ </link>
 	</para>
 	<sect1 xml:id="liferay-ui-input-editor">
 		<title>The liferay-ui:input-editor tag</title>
