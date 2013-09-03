@@ -24,19 +24,5 @@
 		</aui:layout>
 	</f:view>
 	<p>This text should appear AFTER f:view</p>
-	<hr />
-	<h2>Test URLs</h2>
-	<portlet:renderURL var="facesViewPathTestExtensionMappedURL">
-		<portlet:param name="_jsfBridgeViewPath" value="/views/testBridgeViewPath.faces" />
-	</portlet:renderURL>
-	<ul>
-		<li><a href="${facesViewPathTestExtensionMappedURL}">Test "javax.portlet.faces.viewPath" attribute (extension-mapped)</a></li>
-	</ul>
-	<portlet:renderURL var="facesViewPathTestPathMappedURL">
-		<portlet:param name="_jsfBridgeViewPath" value="/faces/views/testBridgeViewPath.jspx" />
-	</portlet:renderURL>
-	<ul>
-		<li><a href="${facesViewPathTestPathMappedURL}">Test "javax.portlet.faces.viewPath" attribute (path-mapped)</a></li>
-	</ul>
 
 </jsp:root>
