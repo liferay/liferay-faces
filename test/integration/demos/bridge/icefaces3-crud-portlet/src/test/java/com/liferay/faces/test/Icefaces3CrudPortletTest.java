@@ -37,10 +37,6 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 	// form tag found after submitting
 	private static final String formTagXpath = "//form[@method='post']";
 
-	// portlet topper and menu elements
-	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
-	private static final String menuButtonXpath = "//a[contains(@id,'menuButton')]";
-
 	// Delete button
 	private static final String deleteButtonXpath = "//input[@type='submit' and @value='Delete Selected']";
 
@@ -90,14 +86,10 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 	// Cancel button
 	private static final String cancelButtonXpath = "//input[@type='submit' and @value='Cancel']";
 
-	static final String url = baseUrl + "/group/bridge-demos/ice3-crud";
+	static final String url = baseUrl + webContext + "/ice3-crud";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
-	@FindBy(xpath = portletDisplayNameXpath)
-	private WebElement portletDisplayName;
-	@FindBy(xpath = menuButtonXpath)
-	private WebElement menuButton;
 	@FindBy(xpath = deleteButtonXpath)
 	private WebElement deleteButton;
 	@FindBy(xpath = addButtonXpath)
@@ -151,10 +143,11 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
-
-		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
-		assertTrue("menuButton.isDisplayed()", menuButton.isDisplayed());
+		getPortletDisplayName();
+		logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
+		
+		getPortletDisplayName();
+		assertTrue("displayName.isDisplayed()", displayName.isDisplayed());
 
 		logger.log(Level.INFO, "addButton.isDisplayed() = " + addButton.isDisplayed());
 		assertTrue("The \"Add New\" button should be displayed on the page at this point but it is not.",

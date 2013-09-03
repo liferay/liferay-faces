@@ -41,15 +41,9 @@ import com.liferay.faces.test.util.TesterBase;
 @RunWith(Arquillian.class)
 public class FACES1635ResourcesTest extends TesterBase {
 
-	// portlet topper and menu elements
-	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
-
 	private static final String textarea1Xpath = "//textarea[contains(@id,':comments1:inputText')]";
 
 	static final String url = baseUrl + "/web/bridge-issues/faces-1635";
-
-	@FindBy(xpath = portletDisplayNameXpath)
-	private WebElement portletDisplayName;
 
 	@FindBy(xpath = textarea1Xpath)
 	private WebElement textarea1;
@@ -107,44 +101,52 @@ public class FACES1635ResourcesTest extends TesterBase {
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
-
-		waitForElement(portletDisplayNameXpath);
-
-		// check that scriptsInHead only occur once
-		List<WebElement> scriptsInHead = browser.findElements(By.xpath("//head/script"));
-		ArrayList<HeadResource> scriptResourcesInHead = convertToHeadResources(scriptsInHead, "src");
-		logger.log(Level.INFO, "scriptResourcesInHead.size() = " + scriptResourcesInHead.size());
-		checkResourcesForDuplicates(scriptResourcesInHead, "scriptResourcesInHead");
-
-		// check that scriptsInBody only occur once
-		List<WebElement> scriptsInBody = browser.findElements(By.xpath("//body/script"));
-		ArrayList<HeadResource> scriptResourcesInBody = convertToHeadResources(scriptsInBody, "src");
-		logger.log(Level.INFO, "scriptResourcesInBody.size() = " + scriptResourcesInBody.size());
-		checkResourcesForDuplicates(scriptResourcesInBody, "scriptResourcesInBody");
-
-		// check that styleSheetsInHead only occur once
-		List<WebElement> styleSheetsInHead = browser.findElements(By.xpath("//head/link"));
-		ArrayList<HeadResource> styleSheetResourcesInHead = convertToHeadResources(styleSheetsInHead, "href");
-		logger.log(Level.INFO, "styleSheetResourcesInHead.size() = " + styleSheetResourcesInHead.size());
-		checkResourcesForDuplicates(styleSheetResourcesInHead, "styleSheetResourcesInHead");
-
-		// check that styleSheetsInBody only occur once
-		List<WebElement> styleSheetsInBody = browser.findElements(By.xpath("//body/link"));
-		ArrayList<HeadResource> styleSheetResourcesInBody = convertToHeadResources(styleSheetsInBody, "href");
-		logger.log(Level.INFO, "styleSheetResourcesInBody.size() = " + styleSheetResourcesInBody.size());
-		checkResourcesForDuplicates(styleSheetResourcesInBody, "styleSheetResourcesInBody");
-
-		// check that scripts only occur once
-		List<WebElement> scripts = browser.findElements(By.xpath("//script"));
-		ArrayList<HeadResource> scriptResources = convertToHeadResources(scripts, "src");
-		logger.log(Level.INFO, "scriptResources.size() = " + scriptResources.size());
-		checkResourcesForDuplicates(scriptResources, "scriptResources");
-
-		// check that styleSheets only occur once
-		List<WebElement> styleSheets = browser.findElements(By.xpath("//link"));
-		ArrayList<HeadResource> styleSheetResources = convertToHeadResources(styleSheets, "href");
-		logger.log(Level.INFO, "styleSheetResources.size() = " + styleSheetResources.size());
-		checkResourcesForDuplicates(styleSheetResources, "styleSheetResources");
+		
+		getPortletDisplayName();
+		if (isThere(displayNameXpath)) {
+		
+			logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
+			waitForElement(displayNameXpath);
+	
+			// check that scriptsInHead only occur once
+			List<WebElement> scriptsInHead = browser.findElements(By.xpath("//head/script"));
+			ArrayList<HeadResource> scriptResourcesInHead = convertToHeadResources(scriptsInHead, "src");
+			logger.log(Level.INFO, "scriptResourcesInHead.size() = " + scriptResourcesInHead.size());
+			checkResourcesForDuplicates(scriptResourcesInHead, "scriptResourcesInHead");
+	
+			// check that scriptsInBody only occur once
+			List<WebElement> scriptsInBody = browser.findElements(By.xpath("//body/script"));
+			ArrayList<HeadResource> scriptResourcesInBody = convertToHeadResources(scriptsInBody, "src");
+			logger.log(Level.INFO, "scriptResourcesInBody.size() = " + scriptResourcesInBody.size());
+			checkResourcesForDuplicates(scriptResourcesInBody, "scriptResourcesInBody");
+	
+			// check that styleSheetsInHead only occur once
+			List<WebElement> styleSheetsInHead = browser.findElements(By.xpath("//head/link"));
+			ArrayList<HeadResource> styleSheetResourcesInHead = convertToHeadResources(styleSheetsInHead, "href");
+			logger.log(Level.INFO, "styleSheetResourcesInHead.size() = " + styleSheetResourcesInHead.size());
+			checkResourcesForDuplicates(styleSheetResourcesInHead, "styleSheetResourcesInHead");
+	
+			// check that styleSheetsInBody only occur once
+			List<WebElement> styleSheetsInBody = browser.findElements(By.xpath("//body/link"));
+			ArrayList<HeadResource> styleSheetResourcesInBody = convertToHeadResources(styleSheetsInBody, "href");
+			logger.log(Level.INFO, "styleSheetResourcesInBody.size() = " + styleSheetResourcesInBody.size());
+			checkResourcesForDuplicates(styleSheetResourcesInBody, "styleSheetResourcesInBody");
+	
+			// check that scripts only occur once
+			List<WebElement> scripts = browser.findElements(By.xpath("//script"));
+			ArrayList<HeadResource> scriptResources = convertToHeadResources(scripts, "src");
+			logger.log(Level.INFO, "scriptResources.size() = " + scriptResources.size());
+			checkResourcesForDuplicates(scriptResources, "scriptResources");
+	
+			// check that styleSheets only occur once
+			List<WebElement> styleSheets = browser.findElements(By.xpath("//link"));
+			ArrayList<HeadResource> styleSheetResources = convertToHeadResources(styleSheets, "href");
+			logger.log(Level.INFO, "styleSheetResources.size() = " + styleSheetResources.size());
+			checkResourcesForDuplicates(styleSheetResources, "styleSheetResources");
+		
+		} else {
+			logger.log(Level.SEVERE, "ERROR: Perhaps the portlets for this tester were not deployed ...");
+			assertTrue("No portlets found on the page.  Perhaps the portlets for this tester were not deployed.", false);
+		}
 	}
 }
