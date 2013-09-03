@@ -773,6 +773,8 @@
 				<faces.impl.scope>provided</faces.impl.scope>
 				<liferay.app.server.dir>${liferay.home}/weblogic-${liferay.weblogic.version}</liferay.app.server.dir>
 				<liferay.deploy.dir>${liferay.app.server.dir}/autodeploy</liferay.deploy.dir>
+				<!-- FACES-1720: Downgrade to PrimeFaces 3.4.2 for compatibility with WebLogic -->
+				<primefaces3.version>3.4.2</primefaces3.version>
 				<war.packaging.excludes>
 					WEB-INF/glassfish-*.xml,
 					WEB-INF/ibm-*.xml,
