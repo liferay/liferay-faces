@@ -24,6 +24,11 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>${weblogic.xerces.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>com.oracle.weblogic</groupId>
 			<artifactId>wls.jsf.di</artifactId>
 			<version>${liferay.weblogic.version}</version>
