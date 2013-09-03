@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -12,7 +13,6 @@
 	<name>Liferay Faces Portal Demos</name>
 
 	<modules>
-		<module>icefaces3-chat-portlet</module>
 		<module>icefaces3-directory-portlet</module>
 		<module>icefaces3-documents-portlet</module>
 		<module>icefaces3-users-portlet</module>
@@ -21,4 +21,12 @@
 		<module>primefaces3-users-portlet</module>
 	</modules>
 
+	<profiles>
+		<profile>
+			<id>chat</id>
+			<modules>
+				<module>icefaces3-chat-portlet</module>
+			</modules>
+		</profile>
+	</profiles>
 </project>
