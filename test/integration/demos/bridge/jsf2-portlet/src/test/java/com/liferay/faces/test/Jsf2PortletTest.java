@@ -13,20 +13,17 @@
  */
 package com.liferay.faces.test;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.logging.Level;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.graphene.enricher.findby.FindBy;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -43,12 +40,7 @@ public class Jsf2PortletTest extends TesterBase {
 
 	// form tag found after submitting
 	private static final String formTagXpath = "//form[@method='post']";
-
-	// portlet topper and menu elements
-	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
-	private static final String menuButtonXpath = "//*[contains(text(),'Options')]/..";
-	private static final String menuPreferencesXpath = "//img[contains(@src,'/edit.png')]";
-
+	
 	// preferences elements
 	private static final String datePatternFieldXpath = "//input[contains(@id,':datePattern')]";
 	private static final String resetButtonXpath = "//input[@type='submit' and @value='Reset']";
@@ -103,16 +95,11 @@ public class Jsf2PortletTest extends TesterBase {
 	// xpath for specific tests
 	private static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../child::node()";
 
-	static final String url = baseUrl + "/group/bridge-demos/jsf2";
+	static final String url = baseUrl + webContext + "/jsf2";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
-	@FindBy(xpath = portletDisplayNameXpath)
-	private WebElement portletDisplayName;
-	@FindBy(xpath = menuButtonXpath)
-	private WebElement menuButton;
-	@FindBy(xpath = menuPreferencesXpath)
-	private WebElement menuPreferences;
+	
 	@FindBy(xpath = datePatternFieldXpath)
 	private WebElement datePatternField;
 	@FindBy(xpath = resetButtonXpath)
@@ -188,17 +175,24 @@ public class Jsf2PortletTest extends TesterBase {
 	@RunAsClient
 	@InSequence(1000)
 	public void jobApplicantRenderViewMode() throws Exception {
-
+		
+		logger.log(Level.INFO, "portal = " + portal);
+		logger.log(Level.INFO, "baseUrl = " + baseUrl);
+		logger.log(Level.INFO, "signInContext = " + signInContext);
+		logger.log(Level.INFO, "webContext = " + webContext);
+		
 		signIn();
+		
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
+		getPortletDisplayName();
+		logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
 
-		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
-		assertTrue("menuButton.isDisplayed()", menuButton.isDisplayed());
-		assertFalse("menuPreferences is NOT displayed()", menuPreferences.isDisplayed());
+		assertTrue("displayName.isDisplayed()", displayName.isDisplayed());
+		// assertTrue("preferencesMenuButton.isDisplayed()", preferencesMenuButton.isDisplayed());
+		// assertFalse("preferencesMenuItem is NOT displayed()", preferencesMenuItem.isDisplayed());
 
 		if (isThere(logoXpath)) {
 			assertTrue("logo.isDisplayed()", logo.isDisplayed());
@@ -247,10 +241,10 @@ public class Jsf2PortletTest extends TesterBase {
 
 		logger.log(Level.INFO, "clicking into the firstNameField ...");
 		firstNameField.click();
-		Thread.sleep(50);
+//		Thread.sleep(50);
 		logger.log(Level.INFO, "tabbing into the next field ...");
 		firstNameField.sendKeys(Keys.TAB);
-		Thread.sleep(500);
+//		Thread.sleep(500);
 		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
 		logger.log(Level.INFO, "isThere(firstNameFieldErrorXpath) = " + isThere(firstNameFieldErrorXpath));
 
@@ -263,13 +257,13 @@ public class Jsf2PortletTest extends TesterBase {
 
 		logger.log(Level.INFO, "Shift tabbing back into the firstNameField ...");
 		(new Actions(browser)).keyDown(Keys.SHIFT).sendKeys(Keys.TAB).keyDown(Keys.SHIFT).perform();
-		Thread.sleep(50);
+//		Thread.sleep(50);
 		logger.log(Level.INFO, "isThere(firstNameFieldErrorXpath) = " + isThere(firstNameFieldErrorXpath));
 
 		logger.log(Level.INFO, "entering 'asdf' into the firstNameField and then tabbing out of it...");
 		firstNameField.sendKeys("asdf");
 		firstNameField.sendKeys(Keys.TAB);
-		Thread.sleep(50);
+//		Thread.sleep(50);
 		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
 		logger.log(Level.INFO, "isThere(firstNameFieldErrorXpath) = " + isThere(firstNameFieldErrorXpath));
 		assertTrue("The data 'asdf' should be in the firstNameField after tabbing out of it",
@@ -277,19 +271,19 @@ public class Jsf2PortletTest extends TesterBase {
 
 		logger.log(Level.INFO, "Shift tabbing back into the firstNameField ...");
 		(new Actions(browser)).keyDown(Keys.SHIFT).sendKeys(Keys.TAB).keyDown(Keys.SHIFT).perform();
-		Thread.sleep(50);
+		Thread.sleep(250);
 		logger.log(Level.INFO,
 			"clearing the firstNameField using the BACKSPACE key, and then tabbing out of the firstNameField ...");
 		firstNameField.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(50);
+		Thread.sleep(150);
 		firstNameField.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(50);
+		Thread.sleep(150);
 		firstNameField.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(50);
+		Thread.sleep(150);
 		firstNameField.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(50);
+		Thread.sleep(150);
 		firstNameField.sendKeys(Keys.TAB);
-		Thread.sleep(50);
+		Thread.sleep(150);
 		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
 		assertTrue(
 			"The data 'asdf' should no longer be in the firstNameField after clearing it out with BACK_SPACE and then tabbing out.  " +
@@ -333,7 +327,7 @@ public class Jsf2PortletTest extends TesterBase {
 		Thread.sleep(500);
 		emailAddressField.sendKeys("test@liferay.com");
 		phoneNumberField.click();
-		Thread.sleep(500);
+//		Thread.sleep(500);
 		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
 		tags = browser.findElements(By.xpath("//span[contains(text(),'Invalid e-mail address')]")).size();
 		logger.log(Level.INFO, "tags = " + tags);
@@ -349,11 +343,11 @@ public class Jsf2PortletTest extends TesterBase {
 		// test for both
 		int dateLengthAfterChange = 8;
 		int dateLengthAfterReset = 10;
+		
+		logger.log(Level.INFO, "preferencesMenuButton.click() ... ");
 
-		menuButton.click();
-		Thread.sleep(500);
-		menuPreferences.click();
-		Thread.sleep(500);
+		selectEditMode(portal);
+		
 		logger.log(Level.INFO, "datePatternField.getAttribute('value') = " + datePatternField.getAttribute("value"));
 		logger.log(Level.INFO, "resetButton.isDisplayed() = " + resetButton.isDisplayed());
 
@@ -362,14 +356,14 @@ public class Jsf2PortletTest extends TesterBase {
 		datePatternField.sendKeys("MM/dd/yy");
 		preferencesSubmitButton.click();
 
-		// TODO after clicking the preferencesSubmitButton all of the job applicant demos need to end up on the same
-		// page Here is a log statement that should give you a clue between the different tester as to which ones are
+		// TODO after clicking the preferencesSubmitButton, all of the job applicant demos need to end up on the same
+		// page.  Here is a log statement that should give you a clue between the different testers as to which ones are
 		// different from others
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO,
 			"dateOfBirthField.getAttribute('value').length() = " + dateOfBirthField.getAttribute("value").length());
@@ -381,20 +375,17 @@ public class Jsf2PortletTest extends TesterBase {
 
 		if (isThere(editPreferencesButtonXpath)) {
 			editPreferencesButton.click();
-			Thread.sleep(500);
+//			Thread.sleep(500);
 			logger.log(Level.INFO, "editPreferencesButton.click() ...");
 		}
 		else {
-			logger.log(Level.INFO, "NO editPreferencesButton isThere, so menuPreferences.click() ...");
-			menuButton.click();
-			Thread.sleep(500);
-			menuPreferences.click();
-			Thread.sleep(500);
+			logger.log(Level.INFO, "NO editPreferencesButton isThere, so preferencesMenuItem.click() ...");
+			selectEditMode(portal);
 		}
 
 		resetButton.click();
 		logger.log(Level.INFO, "resetButton.click() ...");
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 
 		// TODO after clicking the resetButton all of the job applicant demos need to end up on the same page Here is a
 		// log statement that should give you a clue between the different tester as to which ones are different from
@@ -424,17 +415,26 @@ public class Jsf2PortletTest extends TesterBase {
 		// let's reset preferences and the page we are on
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
-		Thread.sleep(500);
-		menuButton.click();
-		Thread.sleep(500);
-		menuPreferences.click();
-		Thread.sleep(500);
-		resetButton.click();
+		
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+		logger.log(Level.INFO, "isThere(dateOfBirthFieldXpath) = " + isThere(dateOfBirthFieldXpath));
+		
+		waitForElement(dateOfBirthFieldXpath);
+//		Thread.sleep(250);
+
+		selectEditMode(portal);
+		
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+		
 		logger.log(Level.INFO, "resetButton.click() ...");
-		Thread.sleep(500);
+		resetButton.click();
+		
+//		Thread.sleep(500);
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
-		Thread.sleep(500);
+//		Thread.sleep(500);
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 		assertTrue("We are on the correct page, which should be, url = " + url, browser.getCurrentUrl().contains(url));
 
@@ -516,7 +516,7 @@ public class Jsf2PortletTest extends TesterBase {
 
 		postalCodeField.sendKeys("32801");
 		phoneNumberField.click();
-		Thread.sleep(500);
+		Thread.sleep(250);
 		logger.log(Level.INFO, "after cityField.getAttribute('value') = " + cityField.getAttribute("value"));
 		logger.log(Level.INFO,
 			"after provinceIdField.getAttribute('value') = " + provinceIdField.getAttribute("value"));
@@ -584,7 +584,7 @@ public class Jsf2PortletTest extends TesterBase {
 		}
 		catch (Exception e) {
 			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
-			assertTrue("No exceptions occured when clearing the dateOfBirthField", false);
+			assertTrue("No exceptions should occur when clearing the dateOfBirthField, but one did occur with the following message: " + e.getMessage(), false);
 		}
 
 		Thread.sleep(500);

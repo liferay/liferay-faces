@@ -40,6 +40,8 @@
 		<integration.host>localhost</integration.host>
 		<integration.port>8080</integration.port>
 		<integration.url>http://${integration.host}:${integration.port}</integration.url>
+		<integration.context>/group/bridge-demos</integration.context>
+		<integration.signin>/web/guest/home</integration.signin>
 	</properties>
 
 	<profiles>
@@ -47,6 +49,8 @@
 			<id>pluto</id>
 			<properties>
 				<integration.portal>pluto</integration.portal>
+				<integration.context>/pluto/portal</integration.context>
+				<integration.signin>/pluto/portal</integration.signin>
 			</properties>
 		</profile>
 		<profile>
@@ -101,6 +105,14 @@
 							<property>
 								<name>integration.url</name>
 								<value>${integration.url}</value>
+							</property>
+							<property>
+								<name>integration.context</name>
+								<value>${integration.context}</value>
+							</property>
+							<property>
+								<name>integration.signin</name>
+								<value>${integration.signin}</value>
 							</property>
 						</systemProperties>
 					</configuration>

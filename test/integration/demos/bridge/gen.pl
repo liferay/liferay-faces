@@ -84,10 +84,10 @@ if ( -f "$issueFile" ) {
    }
    close ISSUES;
 } else {
-   print "no issuesFile ... \n";
+   print "INFO: no issuesFile ... \n";
 }
 
-print "using template: $template\n\n";
+print "INFO: using template: $template\n\n";
 
 # parse the Xpath variable names in from the template .java file
 open(TEMPLATE, $template) or die "cannot open $template: $!\n";
@@ -127,7 +127,7 @@ close TEMPLATE;
 foreach my $class (@class) {
 
    # get the output file name
-   print "class = $class\n";
+   print "INFO: class = $class\n";
    $javaFile = "${class}.java";
 
    # get the output directory name
@@ -140,7 +140,7 @@ foreach my $class (@class) {
    # print "$dir $javaFile\n";
 
    # parse the Xpaths in that are specific to the component library being tested
-   print "getting xpaths from $in{$class}\n";
+   print "INFO: getting xpaths from $in{$class}\n";
    open(IN, $in{$class}) or die "cannot open $in{$class}: $!\n";
    while (<IN>) {
       chomp;
@@ -180,10 +180,20 @@ foreach my $class (@class) {
          print "	protected final static Logger logger = Logger.getLogger(${class}.class.getName());\n";
          print OUT "	protected final static Logger logger = Logger.getLogger(${class}.class.getName());\n";
       } elsif (/static final String url =/) {
-         print "$url\n";
+         print "INFO: $url\n";
          print OUT "$url\n";
       } elsif (/private..*Xpath/) {
          ($foo,$foo,$foo,$foo,$variable,$foo,@path) = split;
+         if (not defined $variable) {
+            print "WARNING: variable undefined after finding /private..*Xpath/ in $template: line = $_\n";
+         } else {
+            if (not defined $xpaths{$variable}) {
+               print "INFO: not xpaths found for variable = $variable: line = $_\n";
+               $xpath = join " ", @path;
+               $xpaths{$variable} = $xpath;
+               print "INFO: inserting the one found in the template file ... check it :-)\n";
+            }
+         }
          print OUT "	private static final String $variable = $xpaths{$variable}\n";
       } elsif (/protected..*Xpath/ and not /protected..*XpathMod/) {
          ($foo,$foo,$foo,$foo,$variable,$foo,@path) = split;
