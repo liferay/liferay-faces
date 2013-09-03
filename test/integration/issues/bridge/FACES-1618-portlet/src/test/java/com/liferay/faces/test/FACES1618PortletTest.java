@@ -46,7 +46,7 @@ public class FACES1618PortletTest extends TesterBase {
 	// <input id="A3981:j_idt3:_t11" name="A3981:j_idt3:_t11" type="submit" value="go to next view">
 	private static final String submitButtonXpath =	"//input[contains(@value,'go to ')]";
 
-	static final String url = "http://localhost:8080/web/bridge-issues/faces-1618";
+	static final String url =  baseUrl + "/web/bridge-issues/faces-1618";
 
 	@FindBy(xpath = portletDisplayNameXpath)
 	private WebElement portletDisplayName;
