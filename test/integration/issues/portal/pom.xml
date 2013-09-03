@@ -16,6 +16,7 @@
 
 	<modules>
 		<module>FACES-257-portlet</module>
+		<!-- The following portlets utilize liferay-ui:input-editor and cannot be tested on WebLogic due to FACES-1602 -->
 		<module>FACES-1427-portlet</module>
 		<module>FACES-1439-portlet</module>
 	</modules>
