@@ -817,21 +817,6 @@
 			</dependencyManagement>
 		</profile>
 		<profile>
-			<id>weblogic-portlet-war</id>
-			<activation>
-				<file>
-					<exists>target/weblogic-portlet-war-activation.tmp</exists>
-				</file>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>xerces</groupId>
-					<artifactId>xercesImpl</artifactId>
-					<version>${weblogic.xerces.version}</version>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
 			<id>websphere</id>
 			<properties>
 				<app.server.type>websphere</app.server.type>
