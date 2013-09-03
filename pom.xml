@@ -779,6 +779,22 @@
 					WEB-INF/web-*.xml
 				</war.packaging.excludes>
 			</properties>
+			<dependencyManagement>
+				<dependencies>
+					<dependency>
+						<groupId>org.icefaces</groupId>
+						<artifactId>icefaces</artifactId>
+						<version>${icefaces3.version}</version>
+						<exclusions>
+							<!-- FACES-1725/FACES-1598/PUSH-247: Exclude icepush.jar on WebLogic -->
+							<exclusion>
+								<groupId>org.icepush</groupId>
+								<artifactId>icepush</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+				</dependencies>
+			</dependencyManagement>
 		</profile>
 		<profile>
 			<id>weblogic-portlet-war</id>
