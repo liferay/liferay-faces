@@ -38,7 +38,7 @@ import com.liferay.faces.test.util.TesterBase;
 public class Jsf2EventsTest extends TesterBase {
 
 	// portlet topper for customer
-	private static final String customerPortletDisplayNameXpath = "//span[@class='portlet-title' and text()=' JSF2 IPC (Events) - Customers ']";
+//	private static final String customerPortletDisplayNameXpath = "(//header[@class='portlet-topper']/h1/span)[1]";
 	private static final String briansInputXpath =
 		"//input[@type='image']/../following-sibling::td[1][contains(text(),'1')]/../td[1]/input";
 	private static final String briansFirstNameXpath =
@@ -53,8 +53,6 @@ public class Jsf2EventsTest extends TesterBase {
 		"//input[@type='image']/../following-sibling::td[1][contains(text(),'2')]/following-sibling::*[1]/following-sibling::*[1]";
 	
 	// portlet topper for bookings
-	private static final String bookingsPortletDisplayNameXpath = "//span[@class='portlet-title' and text()=' JSF2 IPC (Events) - Bookings ']";
-	// <input id="A8622:f1:firstName" type="text" name="A8622:f1:firstName" value="Brian" class="focus">
 	private static final String firstNameXpath = "//input[contains(@id,':firstName')]";
 	// <input id="A8622:f1:firstName" type="text" name="A8622:f1:firstName" value="Brian" class="focus">
 	private static final String lastNameXpath = "//input[contains(@id,':lastName')]";
@@ -64,10 +62,8 @@ public class Jsf2EventsTest extends TesterBase {
 	// <input type="submit" name="A8622:f1:j_idt28" value="Submit" id="aui_3_4_0_1_2331">
 	private static final String submitXpath = "//input[@type='submit' and @value='Submit']";
 
-	static final String url = baseUrl + "/group/bridge-demos/jsf2-events";
+	static final String url = baseUrl + webContext + "/jsf2-events";
 
-	@FindBy(xpath = customerPortletDisplayNameXpath)
-	private WebElement customerPortletDisplayName;
 	@FindBy(xpath = briansInputXpath)
 	private WebElement briansInput;
 	@FindBy(xpath = briansFirstNameXpath)
@@ -80,8 +76,6 @@ public class Jsf2EventsTest extends TesterBase {
 	private WebElement lizsFirstName;
 	@FindBy(xpath = lizsLastNameXpath)
 	private WebElement lizsLastName;
-	@FindBy(xpath = bookingsPortletDisplayNameXpath)
-	private WebElement bookingsPortletDisplayName;
 	@FindBy(xpath = firstNameXpath)
 	private WebElement firstName;
 	@FindBy(xpath = lastNameXpath)
@@ -105,15 +99,14 @@ public class Jsf2EventsTest extends TesterBase {
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		logger.log(Level.INFO, "customerPortletDisplayName.getText() = " + customerPortletDisplayName.getText());
-		logger.log(Level.INFO, "bookingsPortletDisplayName.getText() = " + bookingsPortletDisplayName.getText());
+		getPortletDisplayName();
+		logger.log(Level.INFO, "customerPortletDisplayName displayName = " + displayName.getText());
 
-		assertTrue("customerPortletDisplayName.isDisplayed()", customerPortletDisplayName.isDisplayed());
-		assertTrue("bookingsPortletDisplayName.isDisplayed()", bookingsPortletDisplayName.isDisplayed());
+		assertTrue("customerPortletDisplayName displayName.isDisplayed()", displayName.isDisplayed());
 
 		logger.log(Level.INFO,
 			"browser.findElements(By.xpath(portletDisplayNameXpath)).size() = " +
-			browser.findElements(By.xpath(customerPortletDisplayNameXpath)).size());
+			browser.findElements(By.xpath(displayNameXpath)).size());
 		logger.log(Level.INFO,
 			"browser.findElements(By.xpath(briansInputXpath)).size() = " +
 			browser.findElements(By.xpath(briansInputXpath)).size());
