@@ -22,6 +22,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -32,14 +33,12 @@ public class TesterBase {
 
 	protected static final Logger logger = Logger.getLogger(TesterBase.class.getName());
 
-	// elements for logging in
+	// elements for logging into liferay
 	private static final String emailFieldXpath = "//input[contains(@id,'_58_login')]";
 	private static final String passwordFieldXpath = "//input[contains(@id,'_58_password')]";
 	private static final String signInButtonXpath = "//input[@type='submit' and @value='Sign In']";
 	private static final String signedInTextXpath = "//div[contains(text(),'You are signed in as')]";
-
-	private static final String JERSEY_FILE = "liferay-jsf-jersey.png";
-
+	
 	@FindBy(xpath = emailFieldXpath)
 	private WebElement emailField;
 	@FindBy(xpath = passwordFieldXpath)
@@ -49,13 +48,69 @@ public class TesterBase {
 	@FindBy(xpath = signedInTextXpath)
 	private WebElement signedInText;
 	
+	// elements for logging into pluto
+	private static final String userNameXpath = "//input[contains(@id,'j_username')]";
+	private static final String passwordXpath = "//input[contains(@id,'j_password')]";
+	private static final String loginButtonXpath = "//input[@type='submit' and @value='Login']";
+	private static final String logoutXpath = "//a[contains(text(),'Logout')]";
+	
+	@FindBy(xpath = userNameXpath)
+	private WebElement userName;
+	@FindBy(xpath = passwordXpath)
+	private WebElement password;
+	@FindBy(xpath = loginButtonXpath)
+	private WebElement loginButton;
+	@FindBy(xpath = logoutXpath)
+	private WebElement logout;
+	
+	// portlet name for liferay
+	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
+	@FindBy(xpath = portletDisplayNameXpath)
+	protected WebElement portletDisplayName;
+	
+	// portlet name element for pluto
+	private static final String plutoPortletDisplayNameXpath = "//td[@class='header']/h2";
+	@FindBy(xpath = plutoPortletDisplayNameXpath)
+	protected WebElement plutoPortletDisplayName;
+	
+	protected String displayNameXpath;
+	protected WebElement displayName;
+		
+	// elements for switching to edit mode in liferay
+	private static final String menuButtonXpath = "//*[contains(text(),'Options')]/..";
+	private static final String menuPreferencesXpath = "//img[contains(@src,'/edit.png')]";
+	
+	@FindBy(xpath = menuButtonXpath)
+	private WebElement menuButton;
+	@FindBy(xpath = menuPreferencesXpath)
+	private WebElement menuPreferences;
+	
+	// xpath for switching to edit mode in pluto
+	private static final String plutoMenuButtonXpath = "//form[@name='modeSelectionForm']/select";	
+	
+	private static final String JERSEY_FILE = "liferay-jsf-jersey.png";
+	
+	public static final String portal = System.getProperty("integration.portal", "liferay");
 	public static final String baseUrl = System.getProperty("integration.url", "http://localhost:8080");
-	protected static final String signInUrl = baseUrl + "/web/guest/home";
+	public static final String signInContext = System.getProperty("integration.signin", "/web/guest/home");
+	public static final String webContext = System.getProperty("integration.context", "/web/bridge-demos/");
+	protected static final String signInUrl = baseUrl + signInContext;
 
 	@Drone
 	public WebDriver browser;
-
+	
 	public void signIn() throws Exception {
+		logger.log(Level.INFO, "portal = " + portal);
+		if ("liferay".equals(portal)) {
+			signIn(emailField, passwordField, signInButton, signedInText, "test@liferay.com", "test");
+		} else if ("pluto".equals(portal)) {
+			signIn(userName, password, loginButton, logout, "pluto", "pluto");
+		} else {
+			logger.log(Level.SEVERE, "not a supported portal for this tester base: portal = " + portal + "");
+		}
+	}
+
+	public void signIn(WebElement user, WebElement pass, WebElement button, WebElement text, String u, String p) throws Exception {
 		
 		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
 
@@ -63,15 +118,55 @@ public class TesterBase {
 		browser.navigate().to(signInUrl);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " before signing in ...");
 
-		emailField.clear();
-		emailField.sendKeys("test@liferay.com");
-		passwordField.clear();
-		passwordField.sendKeys("test");
-		signInButton.click();
-		logger.log(Level.INFO,
-			"browser.getTitle() = " + browser.getTitle() + " after clicking the sign in button and waiting");
-		logger.log(Level.INFO, signedInText.getText());
+		user.clear();
+		user.sendKeys(u);
+		pass.clear();
+		pass.sendKeys(p);
+		button.click();
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " after clicking the sign in button and waiting");
+		logger.log(Level.INFO, text.getText());
 
+	}
+	
+	public void selectEditMode(String portal) {
+		logger.log(Level.INFO, "portal = " + portal);
+		if (portal.equals("liferay")) {
+			selectEditModeInLiferay();
+		} else if ("pluto".equals(portal)) {
+			selectEditModeInPluto();
+		}
+	}
+	
+	public void selectEditModeInPluto() {
+		Select select = new Select(browser.findElement(By.xpath(plutoMenuButtonXpath)));
+		// select.deselectAll();  // You may only deselect all options of a multi-select
+		select.selectByVisibleText("EDIT");
+	}
+	
+	public void selectEditModeInLiferay() {
+		if (menuPreferences.isDisplayed()) {
+			logger.log(Level.INFO, "menuPreferences is already displayed ... why is that? ");
+		} else {
+			menuButton.click();
+		}
+		logger.log(Level.INFO, "menuPreferences.click() ... ");
+		if (menuPreferences.isDisplayed()) {
+			menuPreferences.click();
+		} else {
+			logger.log(Level.INFO, "menuPreferences should be displayed at this point, but it is not ... ");
+		}
+	}
+	
+	// in order for displayName not to be null
+	// this method must be called after the tester is instantiated (and we are on the right page, of course)
+	// if you try to declare and initialize displayName earlier or when this class is instantiated,
+	// it will result in some errors with no messages.
+	// Also if you try to access the displayName before calling this method it will result in messageless errors.
+	// i think it is a NullPointerException, but again, it does not appear in the logs so who knows?
+	public WebElement getPortletDisplayName() {
+		this.displayNameXpath = ("liferay".equals(portal)) ? portletDisplayNameXpath : plutoPortletDisplayNameXpath;
+		this.displayName = ("liferay".equals(portal)) ? portletDisplayName : plutoPortletDisplayName;
+		return displayName;
 	}
 
 	public String getPathToJerseyFile() {
