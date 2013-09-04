@@ -65,8 +65,9 @@ public class CaptchaResource extends Resource {
 	@Override
 	public boolean userAgentNeedsUpdate(FacesContext context) {
 
-		// Since this is a list that can potentially change dynamically, always return true.
-		return false;
+		// Since the captcha image changes for every request, always return true so that the browser does not attempt
+		// to cache it.
+		return true;
 	}
 
 	@Override
