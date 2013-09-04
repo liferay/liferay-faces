@@ -4960,6 +4960,18 @@
         </portlet-info>
     </portlet>    
     
+    <!-- BEGIN: LIFERAY PORTAL -->
+    <filter>
+    	<filter-name>TCKCompatPortletFilter</filter-name>
+    	<filter-class>com.liferay.faces.bridge.tck.filter.PortletFilterTCKImpl</filter-class>
+    	<lifecycle>RENDER_PHASE</lifecycle>
+    </filter>
+    <filter-mapping>
+    	<filter-name>TCKCompatPortletFilter</filter-name>
+    	<portlet-name>chapter6_1_3_1Tests-requestMapCoreTest-portlet</portlet-name>
+    </filter-mapping>
+    <!-- BEGIN: END PORTAL -->
+
     <event-definition>
   	<qname xmlns:bridge="http://myfaces.apache.org/portlet-bridge/event_ns">bridge:myfaces.apache.org.tck.testEvent</qname>
   	<value-type>java.lang.String</value-type>	
