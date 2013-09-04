@@ -529,6 +529,8 @@
 			<id>jetty</id>
 			<properties>
 				<app.server.type>jetty</app.server.type>
+				<faces.api.scope>provided</faces.api.scope>
+				<faces.impl.scope>provided</faces.impl.scope>
 				<liferay.app.server.dir>${liferay.home}/jetty-${liferay.jetty.version}</liferay.app.server.dir>
 			</properties>
 		</profile>
