@@ -93,7 +93,7 @@
 		<faces.group.id>javax.faces</faces.group.id>
 		<faces.api.artifact.id>jsf-api</faces.api.artifact.id>
 		<faces.api.scope>compile</faces.api.scope>
-		<faces.api.version>1.2</faces.api.version>
+		<faces.api.version>${faces.version}</faces.api.version>
 		<faces.impl.artifact.id>jsf-impl</faces.impl.artifact.id>
 		<faces.impl.scope>compile</faces.impl.scope>
 		<faces.version>${mojarra.version}</faces.version>
