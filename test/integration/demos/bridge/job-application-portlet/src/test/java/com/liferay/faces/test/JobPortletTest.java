@@ -331,7 +331,7 @@ public class JobPortletTest extends TesterBase {
 		Thread.sleep(500);
 		emailAddressField.sendKeys("test@liferay.com");
 		phoneNumberField.click();
-//		Thread.sleep(500);
+		Thread.sleep(500);
 		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
 		tags = browser.findElements(By.xpath("//span[contains(text(),'Invalid e-mail address')]")).size();
 		logger.log(Level.INFO, "tags = " + tags);
