@@ -4,7 +4,6 @@
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:portlet="http://java.sun.com/portlet"  version="2.1">
 
 	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
-	<p>This text should appear BEFORE f:view</p>
 	<f:view>
 		<f:subview id="head">
 			<jsp:include page="styling.jspx" />
@@ -23,6 +22,5 @@
 			</aui:column>
 		</aui:layout>
 	</f:view>
-	<p>This text should appear AFTER f:view</p>
 
 </jsp:root>
