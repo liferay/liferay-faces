@@ -207,7 +207,11 @@ public class Icefaces3CompatPortletTest extends TesterBase {
 		assertTrue("cityField.isDisplayed()", cityField.isDisplayed());
 		assertTrue("provinceIdField.isDisplayed()", provinceIdField.isDisplayed());
 		assertTrue("postalCodeField.isDisplayed()", postalCodeField.isDisplayed());
-		assertTrue("postalCodeToolTip.isDisplayed()", postalCodeToolTip.isDisplayed());
+		if (isThere(postalCodeToolTipXpath)) {
+			assertTrue("postalCodeToolTip.isDisplayed()", postalCodeToolTip.isDisplayed());
+		} else {
+			assertTrue("Postal code tool tips should be present, but are not.  No postal code tool tips present", false);
+		}
 
 		assertTrue("showCommentsLink.isDisplayed()", showCommentsLink.isDisplayed());
 
@@ -327,7 +331,7 @@ public class Icefaces3CompatPortletTest extends TesterBase {
 		Thread.sleep(500);
 		emailAddressField.sendKeys("test@liferay.com");
 		phoneNumberField.click();
-//		Thread.sleep(500);
+		Thread.sleep(500);
 		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
 		tags = browser.findElements(By.xpath("//span[contains(text(),'Invalid e-mail address')]")).size();
 		logger.log(Level.INFO, "tags = " + tags);
