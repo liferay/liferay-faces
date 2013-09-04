@@ -213,7 +213,11 @@ public class Icefaces3PortletTest extends TesterBase {
 		assertTrue("cityField.isDisplayed()", cityField.isDisplayed());
 		assertTrue("provinceIdField.isDisplayed()", provinceIdField.isDisplayed());
 		assertTrue("postalCodeField.isDisplayed()", postalCodeField.isDisplayed());
-		assertTrue("postalCodeToolTip.isDisplayed()", postalCodeToolTip.isDisplayed());
+		if (isThere(postalCodeToolTipXpath)) {
+			assertTrue("postalCodeToolTip.isDisplayed()", postalCodeToolTip.isDisplayed());
+		} else {
+			assertTrue("Postal code tool tips should be present, but are not.  No postal code tool tips present", false);
+		}
 
 		assertTrue("showCommentsLink.isDisplayed()", showCommentsLink.isDisplayed());
 
