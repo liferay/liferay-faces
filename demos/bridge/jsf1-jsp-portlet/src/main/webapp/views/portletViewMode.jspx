@@ -4,7 +4,6 @@
 	xmlns:portlet="http://java.sun.com/portlet" version="2.1">
 
 	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
-	<p>This text should appear BEFORE f:view</p>
 	<f:view>
 		<h:panelGroup layout="block" styleClass="jsf1-portlet ltr">
 			<f:subview id="head">
@@ -25,6 +24,5 @@
 			</aui:layout>
 		</h:panelGroup>
 	</f:view>
-	<p>This text should appear AFTER f:view</p>
 
 </jsp:root>
