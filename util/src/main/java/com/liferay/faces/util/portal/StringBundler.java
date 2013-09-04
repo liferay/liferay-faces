@@ -113,7 +113,7 @@ public class StringBundler implements FacesWrapper<Object> {
 				len = stringBuilder.length();
 			}
 			else {
-				Integer lengthValue = (Integer) lengthMethod.invoke(wrapped, (Object[]) null);
+				Integer lengthValue = (Integer) lengthMethod.invoke(wrapped, new Object[] {});
 				len = lengthValue.intValue();
 			}
 		}
