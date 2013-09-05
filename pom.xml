@@ -786,7 +786,7 @@
 					<dependency>
 						<groupId>org.icefaces</groupId>
 						<artifactId>icefaces</artifactId>
-						<version>${icefaces3.version}</version>
+						<version>${icefaces1.version}</version>
 						<exclusions>
 							<!-- FACES-1725/FACES-1598/PUSH-247: Exclude icepush.jar on WebLogic -->
 							<exclusion>
