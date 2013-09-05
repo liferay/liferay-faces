@@ -379,7 +379,7 @@ public class Jsf2PortletTest extends TesterBase {
 
 		if (isThere(editPreferencesButtonXpath)) {
 			editPreferencesButton.click();
-//			Thread.sleep(500);
+			Thread.sleep(1500);
 			logger.log(Level.INFO, "editPreferencesButton.click() ...");
 		}
 		else {
