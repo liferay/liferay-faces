@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.faces.demos</groupId>
 		<artifactId>liferay-faces-bridge-demos</artifactId>
-		<version>3.0.3-legacy-ga4-SNAPSHOT</version>
+		<version>3.0.3-legacy-ga4</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>jsf2-ipc-events-customers-portlet</artifactId>
