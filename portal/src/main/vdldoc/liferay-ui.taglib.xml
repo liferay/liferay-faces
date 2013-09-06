@@ -1,0 +1,251 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
+	version="2.0">
+	<namespace>http://liferay.com/faces/ui</namespace>
+	<tag>
+		<description>The &lt;code&gt;liferay-ui:ice-check-tool-bar&lt;/code&gt; provides command links such as &quot;Check All&quot;, &quot;Uncheck All&quot;, and &quot;Delete&quot; that are designed to be used in conjunction with an ice:dataTable component.</description>
+		<tag-name>ice-check-tool-bar</tag-name>
+		<source>tags/ice-check-tool-bar.xhtml</source>
+		<attribute>
+			<name>actionListenerEnabled</name>
+		</attribute>
+		<attribute>
+			<name>checkAllIconRendered</name>
+		</attribute>
+		<attribute>
+			<name>checkAllLabel</name>
+		</attribute>
+		<attribute>
+			<name>checkAllLabelRendered</name>
+		</attribute>
+		<attribute>
+			<name>checkAllRendered</name>
+		</attribute>
+		<attribute>
+			<name>deleteIconRendered</name>
+		</attribute>
+		<attribute>
+			<name>deleteLabel</name>
+		</attribute>
+		<attribute>
+			<name>deleteLabelRendered</name>
+		</attribute>
+		<attribute>
+			<name>deleteRendered</name>
+		</attribute>
+		<attribute>
+			<name>deleteWarning</name>
+		</attribute>
+		<attribute>
+			<description>Corresponds to the value of an &lt;code&gt;id&lt;/code&gt; attribute for an ice:dataTable tag.</description>
+			<name>for</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>The identifier of the component.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>rowCount</name>
+		</attribute>
+		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>This is an HTML pass-thru type of attribute.</description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute.</description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>uncheckAllIconRendered</name>
+		</attribute>
+		<attribute>
+			<name>uncheckAllLabel</name>
+		</attribute>
+		<attribute>
+			<name>uncheckAllLabelRendered</name>
+		</attribute>
+		<attribute>
+			<name>uncheckAllRendered</name>
+		</attribute>
+	</tag>
+	<tag>
+		<description>The &lt;code&gt;liferay-ui:ice-info-data-paginator&lt;/code&gt; encapsulates an ICEfaces ice:dataPaginator tag that renders pagination information for an associated ice:dataTable. The navigation information will match the internationalized Liferay &quot;showing-x-x-of-x-results&quot; message.</description>
+		<tag-name>ice-info-data-paginator</tag-name>
+		<source>tags/ice-info-data-paginator.xhtml</source>
+		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
+			<display-name></display-name>
+			<icon></icon>
+			<name>cssClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Corresponds to the value of an &lt;code&gt;id&lt;/code&gt; attribute for an ice:dataTable tag.</description>
+			<name>for</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>The identifier of the component.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>This is an HTML pass-thru type of attribute.</description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute.</description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<description>The &lt;code&gt;liferay-ui:ice-info-data-paginator&lt;/code&gt; encapsulates an ICEfaces ice:dataPaginator tag that renders navigation controls for an associated ice:dataTable. The icons will match the current Liferay theme.</description>
+		<tag-name>ice-nav-data-paginator</tag-name>
+		<source>tags/ice-nav-data-paginator.xhtml</source>
+		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
+			<display-name></display-name>
+			<icon></icon>
+			<name>cssClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Boolean flag indicating whether or not the &quot;Fast Forward&quot; button/icon is rendered. The default value is &quot;false&quot;.</description>
+			<name>fastForwardIconRendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>The label that will appear on the &quot;fast forward&quot; button/icon.</description>
+			<name>fastForwardLabel</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<description>Boolean flag indicating whether or not the &quot;Fast Rewind&quot; button/icon is rendered. The default value is &quot;false&quot;.</description>
+			<name>fastRewindIconRendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>The label that will appear on the &quot;fast rewind&quot; button/icon.</description>
+			<name>fastRewindLabel</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<description>Boolean flag indicating whether or not the &quot;First&quot; button/icon is rendered. The default value is &quot;true&quot;.</description>
+			<name>firstIconRendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>The label that will appear on the &quot;first&quot; button/icon.</description>
+			<name>firstLabel</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<description>Corresponds to the value of an &lt;code&gt;id&lt;/code&gt; attribute for an ice:dataTable tag.</description>
+			<name>for</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>The identifier of the component.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Boolean flag indicating whether or not the &quot;Last&quot; button/icon is rendered. The default value is &quot;true&quot;.</description>
+			<name>lastIconRendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>The label that will appear on the &quot;last&quot; button/icon.</description>
+			<name>lastLabel</name>
+			<required>false</required>
+		</attribute>
+			<attribute>
+			<description>Boolean flag indicating whether or not the &quot;Next&quot; button/icon is rendered. The default value is &quot;true&quot;.</description>
+			<name>nextIconRendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>The label that will appear on the &quot;next&quot; button/icon.</description>
+			<name>nextLabel</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<description>Boolean flag indicating whether or not the page number links will be rendered. This is a pass-through attribute for the encapsulated ice:dataPaginator. The default value is &quot;true&quot;.</description>
+			<name>paginator</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>The maximum amount of pages to be displayed in the paginator. This is a pass-through attribute for the encapsulated ice:dataPaginator. The default value is 7.</description>
+			<name>paginatorMaxPages</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<description>Boolean flag indicating whether or not the &quot;Previous&quot; button/icon is rendered. The default value is &quot;true&quot;.</description>
+			<name>previousIconRendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>The label that will appear on the &quot;previous&quot; button/icon.</description>
+			<name>previousLabel</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>This is an HTML pass-thru type of attribute.</description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute.</description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+</facelet-taglib>  
