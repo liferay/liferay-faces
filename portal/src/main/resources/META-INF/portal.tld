@@ -2,7 +2,7 @@
 <taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
 	version="2.1">
-	<tlib-version>3.1.3</tlib-version>
+	<tlib-version>3.1.4</tlib-version>
 	<short-name>portal</short-name>
 	<uri>http://liferay.com/faces/portal</uri>
 	<listener>
