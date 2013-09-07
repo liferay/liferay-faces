@@ -66,7 +66,7 @@
 		<connection>scm:git:https://github.com/liferay/liferay-faces</connection>
 		<developerConnection>scm:git:https://github.com/liferay/liferay-faces</developerConnection>
 		<url>scm:git:https://github.com/liferay/liferay-faces</url>
-	  <tag>HEAD</tag>
+		<tag>HEAD</tag>
   </scm>
 
 	<modules>
@@ -96,6 +96,7 @@
 		<faces.api.version>${faces.version}</faces.api.version>
 		<faces.impl.artifact.id>jsf-impl</faces.impl.artifact.id>
 		<faces.impl.scope>compile</faces.impl.scope>
+		<faces.spec.version>2.1</faces.spec.version>
 		<faces.version>${mojarra.version}</faces.version>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces1.version>1.8.2</icefaces1.version>
