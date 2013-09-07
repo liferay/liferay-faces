@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.faces</groupId>
 		<artifactId>liferay-faces</artifactId>
-		<version>3.2.3-ga4-SNAPSHOT</version>
+		<version>3.2.0-ga1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>com.liferay.faces.test</groupId>
