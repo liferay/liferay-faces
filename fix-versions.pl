@@ -97,7 +97,7 @@ while(<POM>) {
 
 	}
     
-    if(/faces.api.version>/) {
+    if(/faces.spec.version>/) {
         
         /version>(.*)</;
         $facesVersion = $1;
