@@ -51,7 +51,7 @@
 							<Built-By>Release Manager</Built-By>
 							<Extension-Name>jsf</Extension-Name>
 							<Specification-Title>JavaServer Faces</Specification-Title>
-							<Specification-Version>${faces.api.version}</Specification-Version>
+							<Specification-Version>${faces.spec.version}</Specification-Version>
 							<Implementation-Title>Mojarra</Implementation-Title>
 							<Implementation-Vendor>Oracle Corporation</Implementation-Vendor>
 							<Implementation-Vendor-Id>com.oracle</Implementation-Vendor-Id>
