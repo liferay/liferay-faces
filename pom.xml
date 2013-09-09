@@ -112,7 +112,7 @@
 		<liferay.deploy.version>${liferay.version}</liferay.deploy.version>
 		<liferay.geronimo.version>2.2.1</liferay.geronimo.version>
 		<liferay.glassfish.version>3.1.2.2</liferay.glassfish.version>
-		<liferay.home>${env.PORTALS_HOME}/liferay.com/${liferay.portal}-jsf-1.2</liferay.home>
+		<liferay.home>${env.PORTALS_HOME}/liferay.com/${liferay.portal}-jsf-${faces.spec.version}</liferay.home>
 		<liferay.jboss.version>7.1.1</liferay.jboss.version>
 		<liferay.jetty.version>8.1.10</liferay.jetty.version>
 		<liferay.jonas.version>5.2.3</liferay.jonas.version>
@@ -126,7 +126,7 @@
 		<mojarra.version>1.2_15</mojarra.version>
 		<myfaces.version>1.2.12</myfaces.version>
 		<pluto.deploy.dir>${pluto.tomcat.dir}/webapps</pluto.deploy.dir>
-		<pluto.home>${env.PORTALS_HOME}/liferay.com/${pluto.portal}-jsf-1.2</pluto.home>
+		<pluto.home>${env.PORTALS_HOME}/liferay.com/${pluto.portal}-jsf-${faces.spec.version}</pluto.home>
 		<pluto.portal>pluto-${pluto.version}</pluto.portal>
 		<pluto.tomcat.dir>${pluto.home}/tomcat-${pluto.tomcat.version}</pluto.tomcat.dir>
 		<pluto.tomcat.version>7.0.21</pluto.tomcat.version>
