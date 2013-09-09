@@ -112,7 +112,7 @@
 		<liferay.deploy.version>${liferay.version}</liferay.deploy.version>
 		<liferay.geronimo.version>unsupported</liferay.geronimo.version>
 		<liferay.glassfish.version>3.0.1</liferay.glassfish.version>
-		<liferay.home>${env.PORTALS_HOME}/liferay.com/${liferay.portal}-${faces.spec.version}</liferay.home>
+		<liferay.home>${env.PORTALS_HOME}/liferay.com/${liferay.portal}-jsf-${faces.spec.version}</liferay.home>
 		<liferay.jboss.version>5.1.0</liferay.jboss.version>
 		<liferay.jetty.version>unsupported</liferay.jetty.version>
 		<liferay.jonas.version>unsupported</liferay.jonas.version>
