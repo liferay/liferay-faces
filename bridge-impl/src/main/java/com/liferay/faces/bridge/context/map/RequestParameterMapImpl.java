@@ -40,99 +40,19 @@ public class RequestParameterMapImpl extends RequestParameterMap {
 	private static final Logger logger = LoggerFactory.getLogger(RequestParameterMapImpl.class);
 
 	// Private Constants
-	private static final String JAVAX_FACES = "javax.faces";
 	private static final String COM_LIFERAY_FACES_BRIDGE = "com.liferay.faces.bridge";
 	private static final String PRIMEFACES_DYNAMIC_CONTENT_PARAM = "pfdrid";
 
 	// Private Data Members
-	private BridgeContext bridgeContext;
 	private FacesViewParameterMap facesViewParameterMap;
 	private PortletContainer portletContainer;
 	private PortletRequest portletRequest;
 	private Map<String, String> preservedActionParameterMap;
 
 	public RequestParameterMapImpl(BridgeContext bridgeContext) {
-		this.bridgeContext = bridgeContext;
+		super(bridgeContext);
 		this.portletContainer = bridgeContext.getPortletContainer();
 		this.portletRequest = bridgeContext.getPortletRequest();
-	}
-
-	/**
-	 * This method is an optimization override of the superclass.
-	 */
-	@Override
-	public boolean containsKey(Object key) {
-
-		// Assume that they key is not found.
-		boolean found = false;
-
-		// If the specified key has a valid value, then
-		if (key != null) {
-
-			// Determine whether or not the key is present in the parameter-map within the PortletRequest. This should
-			// be a quick lookup (minimal performance impact).
-			Map<String, String[]> parameterMap = portletRequest.getParameterMap();
-			found = parameterMap.containsKey(key);
-
-			if (!found) {
-
-				// NOTE: If the parameterMap.containsKey(String) method call returned true, then trust that fact and let
-				// this method return true as well. Otherwise, don't trust it! This might be a Liferay WSRP producer
-				// portlet in which NamespaceServletRequest.getParameterMap().containsKey(String) erroneously returns
-				// false. Just in case, try again by seeing if the parameter has a value. If it does, then let this
-				// method return true.
-				String value = portletRequest.getParameter((String) key);
-				found = ((value != null) && (value.length() > 0));
-			}
-
-			// If the key was not present in the quick lookup, then
-			if (!found) {
-
-				String keyAsString = (String) key;
-
-				// If the key is "javax.faces.ViewState" then avoid the performance impact of the superclass delegation
-				// by handling this special case here.
-				if (ResponseStateManager.VIEW_STATE_PARAM.equals(keyAsString)) {
-
-					String viewStateParam = portletRequest.getParameter(ResponseStateManager.VIEW_STATE_PARAM);
-
-					if (viewStateParam == null) {
-						BridgeRequestScope bridgeRequestScope = bridgeContext.getBridgeRequestScope();
-
-						if (bridgeRequestScope != null) {
-							viewStateParam = bridgeRequestScope.getPreservedViewStateParam();
-
-							if (viewStateParam != null) {
-								found = true;
-							}
-						}
-					}
-					else {
-						found = true;
-					}
-				}
-
-				// Otherwise,
-				else {
-
-					// If the key starts with "javax.faces" then the previous lookup in the parameter-map within the
-					// PortletRequest is good enough. The JSF implementation (and also the PrimeFaces
-					// PrimePartialViewContext) will sometimes ask for request parameters with the "javax.faces" prefix
-					// in the name. This is especially the case when a ResourceRequest is looking for JSF2 resources.
-					if (keyAsString.startsWith(JAVAX_FACES)) {
-						// nothing to do -- just here for comments readability.
-					}
-
-					// Otherwise, delegate to the superclass. This should only be done if absolutely necessary, since
-					// the superclass iterates through an enumeration of names which has a performance impact.
-					else {
-						found = super.containsKey(key);
-					}
-				}
-			}
-		}
-
-		return found;
 	}
 
 	@Override
@@ -298,5 +218,15 @@ public class RequestParameterMapImpl extends RequestParameterMap {
 		parameterNames = Collections.enumeration(requestParamerNameList);
 
 		return parameterNames;
+	}
+
+	@Override
+	protected String getRequestParameter(String name) {
+		return portletRequest.getParameter(name);
+	}
+
+	@Override
+	protected Map<String, String[]> getRequestParameterMap() {
+		return portletRequest.getParameterMap();
 	}
 }
