@@ -79,11 +79,23 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 	private static final int DEFAULT_FILE_MAX_SIZE = 104857600; // 100MB
 
 	// Private Data Members
-	private Map<String, String> requestParameterMap;
+	private NamespacedParameterMap namespacedParameterMap;
 	private Map<String, List<UploadedFile>> requestParameterFileMap;
+
+	@Override
+	protected String getRequestParameter(String name) {
+		return namespacedParameterMap.getFirst(name);
+	}
+
+	@Override
+	protected Map<String, String[]> getRequestParameterMap() {
+		return namespacedParameterMap;
+	}
 
 	@SuppressWarnings("unchecked")
 	public RequestParameterMapMultiPartImpl(BridgeContext bridgeContext, ClientDataRequest clientDataRequest) {
+
+		super(bridgeContext);
 
 		try {
 
@@ -174,14 +186,14 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 				}
 			}
 
+			// Get the namespace that might be found in request parameter names.
+			String namespace = bridgeContext.getPortletContainer().getResponseNamespace();
+
 			// Parse the request parameters and save all uploaded files in a map.
 			PortletFileUpload portletFileUpload = new PortletFileUpload(diskFileItemFactory);
 			portletFileUpload.setFileSizeMax(fileMaxSize);
-			requestParameterMap = new HashMap<String, String>();
+			namespacedParameterMap = new NamespacedParameterMap(namespace);
 			requestParameterFileMap = new HashMap<String, List<UploadedFile>>();
-
-			// Get the namespace that might be found in request parameter names.
-			String namespace = bridgeContext.getPortletContainer().getResponseNamespace();
 
 			// FACES-271: Include name+value pairs found in the ActionRequest.
 			PortletContainer portletContainer = bridgeContext.getPortletContainer();
@@ -190,17 +202,11 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 			for (Map.Entry<String, String[]> mapEntry : actionRequestParameterSet) {
 
 				String parameterName = mapEntry.getKey();
-				int pos = parameterName.indexOf(namespace);
-
-				if (pos >= 0) {
-					parameterName = parameterName.substring(pos + namespace.length());
-				}
-
 				String[] parameterValues = mapEntry.getValue();
 
 				if (parameterValues.length > 0) {
 					String fixedRequestParameterValue = portletContainer.fixRequestParameterValue(parameterValues[0]);
-					requestParameterMap.put(parameterName, fixedRequestParameterValue);
+					namespacedParameterMap.append(parameterName, fixedRequestParameterValue);
 					logger.debug("Found in ActionRequest: {0}=[{1}]", parameterName, fixedRequestParameterValue);
 				}
 			}
@@ -284,7 +290,7 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 
 								String fixedRequestParameterValue = portletContainer.fixRequestParameterValue(
 										requestParameterValue);
-								requestParameterMap.put(fieldName, fixedRequestParameterValue);
+								namespacedParameterMap.append(fieldName, fixedRequestParameterValue);
 								logger.debug("{0}=[{1}]", fieldName, fixedRequestParameterValue);
 							}
 							else {
@@ -348,7 +354,7 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 											diskFileItem.getContentType(), headersMap, id, message, fileName,
 											diskFileItem.getSize(), UploadedFile.Status.FILE_SAVED);
 
-									requestParameterMap.put(fieldName, copiedFileAbsolutePath);
+									namespacedParameterMap.append(fieldName, copiedFileAbsolutePath);
 									addUploadedFile(fieldName, uploadedFile);
 									logger.debug("Received uploaded file fieldName=[{0}] fileName=[{1}]", fieldName,
 										fileName);
@@ -390,13 +396,13 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 			// If not found in the request, Section 6.9 of the Bridge spec requires that the value of the
 			// ResponseStateManager.RENDER_KIT_ID_PARAM request parameter be set to the value of the
 			// "javax.portlet.faces.<portletName>.defaultRenderKitId" PortletContext attribute.
-			String renderKitIdParam = requestParameterMap.get(ResponseStateManager.RENDER_KIT_ID_PARAM);
+			String renderKitIdParam = namespacedParameterMap.getFirst(ResponseStateManager.RENDER_KIT_ID_PARAM);
 
 			if (renderKitIdParam == null) {
 				renderKitIdParam = bridgeContext.getDefaultRenderKitId();
 
 				if (renderKitIdParam != null) {
-					requestParameterMap.put(ResponseStateManager.RENDER_KIT_ID_PARAM, renderKitIdParam);
+					namespacedParameterMap.append(ResponseStateManager.RENDER_KIT_ID_PARAM, renderKitIdParam);
 				}
 			}
 		}
@@ -418,7 +424,7 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 
 	@Override
 	protected AbstractPropertyMapEntry<String> createPropertyMapEntry(String name) {
-		return new RequestParameterMapEntryMultiPart(name, requestParameterMap);
+		return new RequestParameterMapEntryMultiPart(name, namespacedParameterMap);
 	}
 
 	@Override
@@ -441,7 +447,7 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 
 	@Override
 	protected String getProperty(String name) {
-		return requestParameterMap.get(name);
+		return namespacedParameterMap.getFirst(name);
 	}
 
 	@Override
@@ -458,7 +464,7 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 		// constructor that will contain the ResponseStateManager.RENDER_KIT_ID_PARAM if required.
 
 		// Note#2: This can't be cached because the caller basically wants a new enumeration to iterate over each time.
-		return Collections.enumeration(requestParameterMap.keySet());
+		return Collections.enumeration(namespacedParameterMap.keySet());
 	}
 
 	/**

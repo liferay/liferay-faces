@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.bridge.context.map;
 
-import java.util.Map;
-
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
 
@@ -23,15 +21,15 @@ import com.liferay.faces.util.map.AbstractPropertyMapEntry;
  */
 public class RequestParameterMapEntryMultiPart extends AbstractPropertyMapEntry<String> {
 
-	private Map<String, String> requestParameterMap;
+	private NamespacedParameterMap namespacedParameterMap;
 
-	public RequestParameterMapEntryMultiPart(String key, Map<String, String> requestParameterMap) {
+	public RequestParameterMapEntryMultiPart(String key, NamespacedParameterMap namespacedParameterMap) {
 		super(key);
-		this.requestParameterMap = requestParameterMap;
+		this.namespacedParameterMap = namespacedParameterMap;
 	}
 
 	public String getValue() {
-		return requestParameterMap.get(getKey());
+		return namespacedParameterMap.getFirst(getKey());
 	}
 
 	public String setValue(String value) {
