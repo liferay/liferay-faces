@@ -73,7 +73,6 @@
 ################################################################################
 
 LIFERAY_FACES_VERSION=`pwd | sed -e 's/^.*liferay-faces-//g' | sed -e 's/\/.*$//g'`
-REBUILD="false"
 FACES_IMPL="mojarra"
 PORTAL_PROFILE_NAME="liferay"
 SERVER_PROFILE_NAME="tomcat"
@@ -139,7 +138,10 @@ if [ "$PORTAL_PROFILE_NAME" = "liferay" ] ; then
 fi
 echo "==============================================================================================================="
 echo "[INFO: deploy.sh] FACES_IMPL=$FACES_IMPL"
-echo "[INFO: deploy.sh] REBUILD=$REBUILD"
+echo "[INFO: deploy.sh] REBUILD_ALLOY=$REBUILD_ALLOY"
+echo "[INFO: deploy.sh] REBUILD_BRIDGE=$REBUILD_BRIDGE"
+echo "[INFO: deploy.sh] REBUILD_PORTAL=$REBUILD_PORTAL"
+echo "[INFO: deploy.sh] REBUILD_UTIL=$REBUILD_UTIL"
 echo "[INFO: deploy.sh] PORTAL_PROFILE_NAME=$PORTAL_PROFILE_NAME"
 echo "[INFO: deploy.sh] SERVER_PROFILE_NAME=$SERVER_PROFILE_NAME"
 echo "[INFO: deploy.sh] EXTRA_PROFILE_NAMES=$EXTRA_PROFILE_NAMES"
