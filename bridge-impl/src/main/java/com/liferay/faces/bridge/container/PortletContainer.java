@@ -228,4 +228,11 @@ public interface PortletContainer extends PhaseListener {
 	 * Returns the response namespace.
 	 */
 	public String getResponseNamespace();
+
+	/**
+	 * Determines whether or not the portlet container requires parameters to be namespaced.
+	 *
+	 * @return  True if the portlet container requires parameters to be namespaced. Otherwise, returns false.
+	 */
+	public boolean isNamespacedParameters();
 }
