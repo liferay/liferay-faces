@@ -24,9 +24,15 @@ import com.liferay.faces.bridge.container.PortletContainerImpl;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriterLiferayImpl;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.servlet.taglib.util.OutputData;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 
@@ -40,6 +46,9 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 8713570232856573935L;
+
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(PortletContainerLiferayCompatImpl.class);
 
 	// Private Data Members
 	private int liferaySharedPageTopLength;
@@ -103,16 +112,28 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 
 	protected StringBundler getPageTop(PortletRequest portletRequest) {
 
-		// Versions of Liferay Portal prior to 6.2 simply reference "LIFERAY_SHARED_PAGE_TOP" attribute.
-		return (StringBundler) portletRequest.getAttribute(WebKeys.PAGE_TOP);
+		StringBundler pageTop = null;
+
+		OutputData outputData = (OutputData) portletRequest.getAttribute(WebKeys.OUTPUT_DATA);
+
+		if (outputData != null) {
+
+			pageTop = outputData.getData(null, WebKeys.PAGE_TOP);
+		}
+
+		return pageTop;
 	}
 
 	protected void setPageTop(PortletRequest portletRequest, StringBundler pageTop) {
 
-		// The value of the "LIFERAY_SHARED_PAGE_TOP" attribute must be set on the underlying HttpServletRequest to
-		// ensure that the attribute name does not get prefixed with the portlet namespace.
-		HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
-		httpServletRequest.setAttribute(WebKeys.PAGE_TOP, pageTop);
+		OutputData outputData = (OutputData) portletRequest.getAttribute(WebKeys.OUTPUT_DATA);
+
+		if (outputData != null) {
+			outputData.setData(null, WebKeys.PAGE_TOP, pageTop);
+
+			HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
+			httpServletRequest.setAttribute(WebKeys.PAGE_TOP, pageTop);
+		}
 	}
 
 	@Override
@@ -122,8 +143,19 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 
 	protected boolean isPortletRequiresNamespacedParameters(PortletRequest portletRequest, ThemeDisplay themeDisplay) {
 
-		// Versions of Liferay Portal prior to 6.2 do not support strict namespacing of parameters.
-		return false;
+		boolean portletRequiresNamespacedParameters = false;
+
+		String portletId = (String) portletRequest.getAttribute(WebKeys.PORTLET_ID);
+
+		try {
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(themeDisplay.getCompanyId(), portletId);
+			portletRequiresNamespacedParameters = portlet.isRequiresNamespacedParameters();
+		}
+		catch (SystemException e) {
+			logger.error(e);
+		}
+
+		return portletRequiresNamespacedParameters;
 	}
 
 }
