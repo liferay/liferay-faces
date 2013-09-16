@@ -76,29 +76,30 @@ public class HeadResource {
 	}
 
 	protected void initialize() {
-
-		int queryPos = url.indexOf(StringPool.QUESTION);
-
-		if (queryPos > 0) {
-			String parameters = url.substring(queryPos + 1);
-			String[] nameValuePairs = parameters.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
-
-			for (String nameValuePair : nameValuePairs) {
-				int equalsPos = nameValuePair.indexOf(StringPool.EQUAL);
-
-				if (equalsPos > 0) {
-					String name = nameValuePair.substring(0, equalsPos);
-
-					if (name.endsWith(ResourceConstants.JAVAX_FACES_RESOURCE)) {
-						facesResource = nameValuePair.substring(equalsPos + 1);
+		if (url != null) {
+			int queryPos = url.indexOf(StringPool.QUESTION);
+	
+			if (queryPos > 0) {
+				String parameters = url.substring(queryPos + 1);
+				String[] nameValuePairs = parameters.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
+	
+				for (String nameValuePair : nameValuePairs) {
+					int equalsPos = nameValuePair.indexOf(StringPool.EQUAL);
+	
+					if (equalsPos > 0) {
+						String name = nameValuePair.substring(0, equalsPos);
+	
+						if (name.endsWith(ResourceConstants.JAVAX_FACES_RESOURCE)) {
+							facesResource = nameValuePair.substring(equalsPos + 1);
+						}
+						else if (name.endsWith(ResourceConstants.LN)) {
+							facesLibrary = nameValuePair.substring(equalsPos + 1);
+						}
 					}
-					else if (name.endsWith(ResourceConstants.LN)) {
-						facesLibrary = nameValuePair.substring(equalsPos + 1);
+	
+					if ((facesResource != null) && (facesLibrary != null)) {
+						break;
 					}
-				}
-
-				if ((facesResource != null) && (facesLibrary != null)) {
-					break;
 				}
 			}
 		}
