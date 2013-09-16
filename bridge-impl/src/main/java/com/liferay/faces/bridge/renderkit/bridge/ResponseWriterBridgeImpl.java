@@ -21,11 +21,16 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.ResponseWriter;
 import javax.faces.context.ResponseWriterWrapper;
+import javax.faces.render.ResponseStateManager;
 
+import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.renderkit.html_basic.BodyRendererBridgeImpl;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.Product;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -82,17 +87,48 @@ public class ResponseWriterBridgeImpl extends ResponseWriterWrapper {
 	private static final String VALUE_OFF = "off";
 	private static final String XML_MARKER = "<?xml";
 
+	private static final boolean JSF_RUNTIME_SUPPORTS_NAMESPACING_VIEWSTATE;
+
+	static {
+		boolean jsfRuntimeNamespacesViewState = true;
+		Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
+
+		if (jsf.getTitle().equals(ProductConstants.MOJARRA)) {
+
+			if (jsf.getMajorVersion() == 2) {
+
+				if (jsf.getMinorVersion() == 1) {
+					jsfRuntimeNamespacesViewState = (jsf.getRevisionVersion() >= 27);
+				}
+				else if (jsf.getMinorVersion() == 2) {
+					jsfRuntimeNamespacesViewState = (jsf.getRevisionVersion() >= 4);
+				}
+			}
+		}
+
+		JSF_RUNTIME_SUPPORTS_NAMESPACING_VIEWSTATE = jsfRuntimeNamespacesViewState;
+
+		logger.debug("JSF runtime [{0}] version [{1}].[{2}].[{3}] supports namespacing [{4}]: [{5}]", jsf.getTitle(),
+			jsf.getMajorVersion(), jsf.getMinorVersion(), jsf.getRevisionVersion(),
+			ResponseStateManager.VIEW_STATE_PARAM, JSF_RUNTIME_SUPPORTS_NAMESPACING_VIEWSTATE);
+	}
+
 	// Private Data Members
 	private String currentElementName;
 	private boolean insidePartialResponse;
 	private boolean insideChanges;
 	private boolean insideCData;
+	private boolean insideInput;
 	private boolean insideUpdate;
+	private boolean namespacedParameters;
 	private boolean viewStateWritten;
 	private ResponseWriter wrappedResponseWriter;
 
 	public ResponseWriterBridgeImpl(ResponseWriter wrappedResponseWriter) {
 		this.wrappedResponseWriter = wrappedResponseWriter;
+
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+		this.namespacedParameters = bridgeContext.getPortletContainer().isNamespacedParameters();
 	}
 
 	@Override
@@ -131,6 +167,9 @@ public class ResponseWriterBridgeImpl extends ResponseWriterWrapper {
 		else if (ELEMENT_UPDATE.equals(elementName)) {
 			insideUpdate = false;
 		}
+		else if (ELEMENT_INPUT.equals(elementName)) {
+			insideInput = false;
+		}
 
 		// Otherwise, if the specified element name is "form" then inject the javax.faces.ViewState hidden field if
 		// it's not already written to the response.
@@ -139,8 +178,18 @@ public class ResponseWriterBridgeImpl extends ResponseWriterWrapper {
 			if (insidePartialResponse && insideChanges && insideUpdate && insideCData && !viewStateWritten) {
 				startElement(ELEMENT_INPUT, null);
 				writeAttribute(ATTRIBUTE_TYPE, TYPE_HIDDEN, null);
-				writeAttribute(ATTRIBUTE_NAME, PartialResponseWriter.VIEW_STATE_MARKER, null);
-				writeAttribute(ATTRIBUTE_ID, PartialResponseWriter.VIEW_STATE_MARKER, null);
+
+				String viewStateName = PartialResponseWriter.VIEW_STATE_MARKER;
+
+				if (namespacedParameters && JSF_RUNTIME_SUPPORTS_NAMESPACING_VIEWSTATE) {
+
+					FacesContext facesContext = FacesContext.getCurrentInstance();
+					String namingContainerId = facesContext.getViewRoot().getContainerClientId(facesContext);
+					viewStateName = namingContainerId + viewStateName;
+				}
+
+				writeAttribute(ATTRIBUTE_NAME, viewStateName, null);
+				writeAttribute(ATTRIBUTE_ID, viewStateName, null);
 
 				FacesContext facesContext = FacesContext.getCurrentInstance();
 				String viewState = facesContext.getApplication().getStateManager().getViewState(facesContext);
@@ -186,6 +235,9 @@ public class ResponseWriterBridgeImpl extends ResponseWriterWrapper {
 		}
 		else if (ELEMENT_UPDATE.equals(elementName)) {
 			insideUpdate = true;
+		}
+		else if (ELEMENT_INPUT.equals(elementName)) {
+			insideInput = true;
 		}
 
 		// FACES-1424: Otherwise, if the specified element name is "form" then reset the viewStateWritten flag. This
@@ -270,25 +322,29 @@ public class ResponseWriterBridgeImpl extends ResponseWriterWrapper {
 
 		logger.trace("attributeName=[{0}] attributeValue=[{1}]", attributeName, attributeValue);
 
-		// If the specified attribute name is "id", then
-		if ((attributeName != null) && attributeName.equals(ATTRIBUTE_ID)) {
+		if (attributeName != null) {
 
-			// If the Faces implementation is trying to update the javax.faces.ViewRoot, then substitute the value of
-			// the outermost <div>...</div> (rendered by the bridge's BodyRenderer) for the specified value. This is a
-			// workaround for jsf.js limitation #2 as described in the class header comments.
-			if (insidePartialResponse && insideChanges && insideUpdate && ELEMENT_UPDATE.equals(currentElementName) &&
-					PartialResponseWriter.RENDER_ALL_MARKER.equals(attributeValue)) {
+			// If the specified attribute name is "id", then
+			if (attributeName.equals(ATTRIBUTE_ID)) {
 
-				FacesContext facesContext = FacesContext.getCurrentInstance();
-				attributeValue = facesContext.getViewRoot().getContainerClientId(facesContext);
-			}
+				// If the Faces implementation is trying to update the javax.faces.ViewRoot, then substitute the value
+				// of the outermost <div>...</div> (rendered by the bridge's BodyRenderer) for the specified value. This
+				// is a workaround for jsf.js limitation #2 as described in the class header comments.
+				if (insidePartialResponse && insideChanges && insideUpdate &&
+						ELEMENT_UPDATE.equals(currentElementName) &&
+						PartialResponseWriter.RENDER_ALL_MARKER.equals(attributeValue)) {
 
-			// Otherwise, if the current element is "input" and the specified attribute value is the
-			// "javax.faces.ViewState", then set a flag accordingly.
-			else if (ELEMENT_INPUT.equals(currentElementName)) {
+					FacesContext facesContext = FacesContext.getCurrentInstance();
+					attributeValue = facesContext.getViewRoot().getContainerClientId(facesContext);
+				}
 
-				if (PartialResponseWriter.VIEW_STATE_MARKER.equals(attributeValue)) {
-					viewStateWritten = true;
+				// Otherwise, if the current element is "input" and the specified attribute value is the
+				// "javax.faces.ViewState", then set a flag accordingly.
+				else if (insideInput) {
+
+					if (PartialResponseWriter.VIEW_STATE_MARKER.equals(attributeValue)) {
+						viewStateWritten = true;
+					}
 				}
 			}
 		}
