@@ -5,6 +5,7 @@
 	<portlet>
 		<portlet-name>1</portlet-name>
 		<instanceable>false</instanceable>
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<ajaxable>false</ajaxable>
 		<!-- The following is required in order to utilize the 'bbcode' editor from the message_boards portlet. -->
 		<!-- Note that Liferay 6.1+ expects "main.css" but prior versions expect "main.jsp" -->

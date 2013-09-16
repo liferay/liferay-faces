@@ -1137,7 +1137,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			// Initialize the response namespace.
 			responseNamespace = portletContainer.getResponseNamespace();
 
-			boolean optimizePortletNamespace = BooleanHelper.toBoolean(optimizePortletNamespaceInitParam, true);
+			boolean optimizePortletNamespace = BooleanHelper.toBoolean(optimizePortletNamespaceInitParam, false);
 
 			if (optimizePortletNamespace) {
 

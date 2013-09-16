@@ -16,6 +16,11 @@
 		<param-name>com.sun.faces.expressionFactory</param-name>
 		<param-value>org.jboss.el.ExpressionFactoryImpl</param-value>
 	</context-param>
+	<!-- Instruct Mojarra to namespace parameters according to NamingContainer rules. -->
+	<context-param>
+		<param-name>com.sun.faces.namespaceParameters</param-name>
+		<param-value>true</param-value>
+	</context-param>
 	<filter>
 		<filter-name>CDICrossContextFilter</filter-name>
 		<filter-class>com.liferay.cdi.portlet.bridge.CDICrossContextFilter</filter-class>
