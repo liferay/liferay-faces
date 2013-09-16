@@ -22,6 +22,8 @@ import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainerImpl;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
 
+import com.liferay.portal.theme.ThemeDisplay;
+
 
 /**
  * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
@@ -62,6 +64,12 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 	@Override
 	public PhaseId getPhaseId() {
 		return PhaseId.RENDER_RESPONSE;
+	}
+
+	protected boolean isPortletRequiresNamespacedParameters(PortletRequest portletRequest, ThemeDisplay themeDisplay) {
+
+		// Versions of Liferay Portal prior to 6.2 do not support strict namespacing of parameters.
+		return false;
 	}
 
 }
