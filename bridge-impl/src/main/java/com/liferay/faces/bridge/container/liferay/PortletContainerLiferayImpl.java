@@ -77,6 +77,7 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	private int liferayBuildNumber;
 	private LiferayURLFactory liferayURLFactory;
 	private LiferayPortletRequest liferayPortletRequest;
+	private boolean namespacedParameters;
 	private String portletResponseNamespace;
 	private String requestURL;
 	private String responseNamespace;
@@ -163,8 +164,8 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 			this.ableToSetHttpStatusCode = getContextParamAbleToSetHttpStatusCode(defaultValue);
 			this.friendlyURLMapperEnabled = (liferayPortletRequest.getPortlet().getFriendlyURLMapperInstance() != null);
 			this.liferayURLFactory = (LiferayURLFactory) BridgeFactoryFinder.getFactory(LiferayURLFactory.class);
+			this.namespacedParameters = isPortletRequiresNamespacedParameters(portletRequest, themeDisplay);
 			logger.debug("User-Agent requested URL=[{0}]", getRequestURL());
-
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -411,4 +412,10 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 
 		return responseNamespace;
 	}
+
+	@Override
+	public boolean isNamespacedParameters() {
+		return namespacedParameters;
+	}
+
 }
