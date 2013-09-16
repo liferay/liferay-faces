@@ -17,6 +17,7 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.portlet.PortletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainerImpl;
@@ -26,6 +27,8 @@ import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriterLiferayIm
 import com.liferay.faces.util.portal.StringBundler;
 
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 
 
 /**
@@ -59,14 +62,15 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 
 			PortletRequest portletRequest = bridgeContext.getPortletRequest();
 
-			StringBundler stringBundler = new StringBundler(portletRequest.getAttribute(WebKeys.PAGE_TOP));
+			StringBundler pageTop = getPageTop(portletRequest);
 
-			if (stringBundler != null) {
+			if (pageTop != null) {
 
-				LiferaySharedPageTop liferaySharedPageTop = new LiferaySharedPageTop(stringBundler);
+				LiferaySharedPageTop liferaySharedPageTop = new LiferaySharedPageTop(pageTop);
 				liferaySharedPageTop.removeDuplicates();
-				stringBundler = liferaySharedPageTop.toStringBundler();
-				portletRequest.setAttribute(WebKeys.PAGE_TOP, stringBundler.getWrapped());
+				pageTop = liferaySharedPageTop.toStringBundler();
+
+				setPageTop(portletRequest, pageTop);
 			}
 		}
 	}
@@ -83,10 +87,10 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
-		StringBundler stringBundler = new StringBundler(portletRequest.getAttribute(WebKeys.PAGE_TOP));
+		StringBundler pageTop = getPageTop(portletRequest);
 
-		if (stringBundler != null) {
-			liferaySharedPageTopLength = stringBundler.length();
+		if (pageTop != null) {
+			liferaySharedPageTopLength = pageTop.length();
 		}
 	}
 
@@ -97,9 +101,29 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 		return headResponseWriter;
 	}
 
+	protected StringBundler getPageTop(PortletRequest portletRequest) {
+
+		// Versions of Liferay Portal prior to 6.2 simply reference "LIFERAY_SHARED_PAGE_TOP" attribute.
+		return new StringBundler(portletRequest.getAttribute(WebKeys.PAGE_TOP));
+	}
+
+	protected void setPageTop(PortletRequest portletRequest, StringBundler pageTop) {
+
+		// The value of the "LIFERAY_SHARED_PAGE_TOP" attribute must be set on the underlying HttpServletRequest to
+		// ensure that the attribute name does not get prefixed with the portlet namespace.
+		HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
+		httpServletRequest.setAttribute(WebKeys.PAGE_TOP, pageTop);
+	}
+
 	@Override
 	public PhaseId getPhaseId() {
 		return PhaseId.RENDER_RESPONSE;
+	}
+
+	protected boolean isPortletRequiresNamespacedParameters(PortletRequest portletRequest, ThemeDisplay themeDisplay) {
+
+		// Versions of Liferay Portal prior to 6.2 do not support strict namespacing of parameters.
+		return false;
 	}
 
 }
