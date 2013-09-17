@@ -44,12 +44,22 @@ public class HeadResource {
 	private String url;
 
 	public HeadResource(String type, String url) {
+
+		if (type != null) {
+			type = type.toLowerCase();
+		}
+
 		this.type = type;
 		this.url = url;
 		initialize();
 	}
 
 	public HeadResource(String type, Attributes attributes) {
+
+		if (type != null) {
+			type = type.toLowerCase();
+		}
+
 		this.type = type;
 
 		if (attributes != null) {
@@ -65,43 +75,14 @@ public class HeadResource {
 			}
 		}
 
-		if (LINK.equalsIgnoreCase(type)) {
+		if (LINK.equals(type)) {
 			url = attributes.getValue(HREF);
 		}
-		else if (SCRIPT.equalsIgnoreCase(type)) {
+		else if (SCRIPT.equals(type)) {
 			url = attributes.getValue(BridgeConstants.SRC);
 		}
 
 		initialize();
-	}
-
-	protected void initialize() {
-
-		int queryPos = url.indexOf(StringPool.QUESTION);
-
-		if (queryPos > 0) {
-			String parameters = url.substring(queryPos + 1);
-			String[] nameValuePairs = parameters.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
-
-			for (String nameValuePair : nameValuePairs) {
-				int equalsPos = nameValuePair.indexOf(StringPool.EQUAL);
-
-				if (equalsPos > 0) {
-					String name = nameValuePair.substring(0, equalsPos);
-
-					if (name.endsWith(ResourceConstants.JAVAX_FACES_RESOURCE)) {
-						facesResource = nameValuePair.substring(equalsPos + 1);
-					}
-					else if (name.endsWith(ResourceConstants.LN)) {
-						facesLibrary = nameValuePair.substring(equalsPos + 1);
-					}
-				}
-
-				if ((facesResource != null) && (facesLibrary != null)) {
-					break;
-				}
-			}
-		}
 	}
 
 	@Override
@@ -113,7 +94,7 @@ public class HeadResource {
 		if ((url != null) && url.equals(otherHeadResource.getURL())) {
 			equal = true;
 		}
-		else if (type.equals(otherHeadResource.getType())) {
+		else if ((LINK.equals(type) || SCRIPT.equals(type)) && type.equals(otherHeadResource.getType())) {
 
 			String facesResource2 = otherHeadResource.getFacesResource();
 			String facesLibrary2 = otherHeadResource.getFacesLibrary();
@@ -160,6 +141,38 @@ public class HeadResource {
 		stringBuilder.append(StringPool.GREATER_THAN);
 
 		return stringBuilder.toString();
+	}
+
+	protected void initialize() {
+
+		if (url != null) {
+
+			int queryPos = url.indexOf(StringPool.QUESTION);
+
+			if (queryPos > 0) {
+				String parameters = url.substring(queryPos + 1);
+				String[] nameValuePairs = parameters.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
+
+				for (String nameValuePair : nameValuePairs) {
+					int equalsPos = nameValuePair.indexOf(StringPool.EQUAL);
+
+					if (equalsPos > 0) {
+						String name = nameValuePair.substring(0, equalsPos);
+
+						if (name.endsWith(ResourceConstants.JAVAX_FACES_RESOURCE)) {
+							facesResource = nameValuePair.substring(equalsPos + 1);
+						}
+						else if (name.endsWith(ResourceConstants.LN)) {
+							facesLibrary = nameValuePair.substring(equalsPos + 1);
+						}
+					}
+
+					if ((facesResource != null) && (facesLibrary != null)) {
+						break;
+					}
+				}
+			}
+		}
 	}
 
 	public void setDuplicate(boolean duplicate) {
