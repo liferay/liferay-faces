@@ -4,6 +4,8 @@
 <liferay-portlet-app>
 	<portlet>
 		<portlet-name>bookings</portlet-name>
+		<!-- JAVASERVERFACES-3031 -->
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<ajaxable>false</ajaxable>
 	</portlet>
 </liferay-portlet-app>

@@ -80,10 +80,13 @@
   </context-param>
   <!-- END: LIFERAY FACES BRIDGE -->
   <!-- BEGIN: LIFERAY REQUIREMENTS FOR MOJARRA -->
+  <!-- JAVASERVERFACES-3031 -->
+  <!--
   <context-param>
     <param-name>com.sun.faces.namespaceParameters</param-name>
     <param-value>true</param-value>
   </context-param>
+  -->
   <!-- END: LIFERAY REQUIREMENTS FOR MOJARRA -->
 
   <context-param>

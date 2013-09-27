@@ -5,6 +5,8 @@
 	<portlet>
 		<portlet-name>1</portlet-name>
 		<remoteable>true</remoteable>
+		<!-- JAVASERVERFACES-3031 -->
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<ajaxable>false</ajaxable>
 	</portlet>
 	<role-mapper>

@@ -5,6 +5,8 @@
 	<portlet>
 		<portlet-name>1</portlet-name>
 		<icon>/images/login.png</icon>
+		<!-- JAVASERVERFACES-3031 -->
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<render-weight>1</render-weight>
 		<ajaxable>false</ajaxable>
 		<add-default-resource>true</add-default-resource>

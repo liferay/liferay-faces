@@ -8,6 +8,8 @@
 		<friendly-url-mapping>my-friendly-url-mapping</friendly-url-mapping>
 		<friendly-url-routes>my-friendly-url-routes.xml</friendly-url-routes>
 		<instanceable>false</instanceable>
+		<!-- JAVASERVERFACES-3031 -->
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<ajaxable>false</ajaxable>
 	</portlet>
 	<role-mapper>
