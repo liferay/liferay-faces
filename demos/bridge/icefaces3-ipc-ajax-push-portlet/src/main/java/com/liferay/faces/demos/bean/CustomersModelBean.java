@@ -18,7 +18,7 @@ import java.util.List;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.event.ValueChangeEvent;
 
 import org.icefaces.application.PushRenderer;
@@ -32,7 +32,7 @@ import com.liferay.faces.demos.util.PortletSessionUtil;
  * @author  Neil Griffin
  */
 @ManagedBean(name = "customersModelBean")
-@RequestScoped
+@ViewScoped
 public class CustomersModelBean {
 
 	// Private Constants
