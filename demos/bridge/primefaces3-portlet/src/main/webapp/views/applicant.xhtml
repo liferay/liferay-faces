@@ -102,7 +102,7 @@
 				<!-- Test 5.4.2 Encoding PortletMode changes in Faces navigation -->
 				<p:commandButton
 					action="/views/portletEditMode.xhtml?javax.portlet.faces.PortletMode=edit&amp;javax.portlet.faces.WindowState=maximized"
-					immediate="true" value="#{i18n['edit-preferences']}" />
+					ajax="false" immediate="true" value="#{i18n['edit-preferences']}" />
 			</h:form>
 		</aui:column>
 		<aui:column id="c2">
