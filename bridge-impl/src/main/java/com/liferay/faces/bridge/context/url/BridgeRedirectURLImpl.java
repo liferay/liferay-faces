@@ -16,6 +16,8 @@ package com.liferay.faces.bridge.context.url;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.portlet.BaseURL;
 import javax.portlet.faces.Bridge;
@@ -29,13 +31,21 @@ import com.liferay.faces.bridge.context.BridgeContext;
  */
 public class BridgeRedirectURLImpl extends BridgeResponseURLImpl implements BridgeRedirectURL {
 
-	// Private Data Members
-	Map<String, List<String>> parameters;
-
 	public BridgeRedirectURLImpl(String url, Map<String, List<String>> parameters, String currentFacesViewId,
 		BridgeContext bridgeContext) {
 		super(url, currentFacesViewId, bridgeContext);
-		this.parameters = parameters;
+		Map<String, String[]> parameterMap = getParameterMap();
+		Set<Entry<String, List<String>>> entrySet = parameters.entrySet();
+		for (Entry<String, List<String>> mapEntry: entrySet) {
+
+			String key = mapEntry.getKey();
+			String[] valueArray = null;
+			List<String> valueList = mapEntry.getValue();
+			if (valueList != null) {
+				valueArray = valueList.toArray(new String[valueList.size()]);
+			}
+			parameterMap.put(key, valueArray);
+		}
 	}
 
 	@Override
