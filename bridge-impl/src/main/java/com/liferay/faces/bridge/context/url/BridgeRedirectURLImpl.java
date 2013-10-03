@@ -33,18 +33,26 @@ public class BridgeRedirectURLImpl extends BridgeResponseURLImpl implements Brid
 
 	public BridgeRedirectURLImpl(String url, Map<String, List<String>> parameters, String currentFacesViewId,
 		BridgeContext bridgeContext) {
-		super(url, currentFacesViewId, bridgeContext);
-		Map<String, String[]> parameterMap = getParameterMap();
-		Set<Entry<String, List<String>>> entrySet = parameters.entrySet();
-		for (Entry<String, List<String>> mapEntry: entrySet) {
 
-			String key = mapEntry.getKey();
-			String[] valueArray = null;
-			List<String> valueList = mapEntry.getValue();
-			if (valueList != null) {
-				valueArray = valueList.toArray(new String[valueList.size()]);
+		super(url, currentFacesViewId, bridgeContext);
+
+		if (parameters != null) {
+
+			Map<String, String[]> parameterMap = getParameterMap();
+			Set<Entry<String, List<String>>> entrySet = parameters.entrySet();
+
+			for (Entry<String, List<String>> mapEntry : entrySet) {
+
+				String key = mapEntry.getKey();
+				String[] valueArray = null;
+				List<String> valueList = mapEntry.getValue();
+
+				if (valueList != null) {
+					valueArray = valueList.toArray(new String[valueList.size()]);
+				}
+
+				parameterMap.put(key, valueArray);
 			}
-			parameterMap.put(key, valueArray);
 		}
 	}
 
