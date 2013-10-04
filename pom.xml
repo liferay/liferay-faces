@@ -125,8 +125,8 @@
 		<liferay.weblogic.version>10.3.6.0</liferay.weblogic.version>
 		<liferay.websphere.version>8.0.0.6</liferay.websphere.version>
 		<log4j.version>1.2.14</log4j.version>
-		<mojarra.version>2.2.0</mojarra.version>
-		<myfaces.version>2.1.8</myfaces.version>
+		<mojarra.version>2.2.4</mojarra.version>
+		<myfaces.version>UNSUPPORTED</myfaces.version>
 		<pluto.deploy.dir>${pluto.tomcat.dir}/webapps</pluto.deploy.dir>
 		<pluto.home>${env.PORTALS_HOME}/liferay.com/${pluto.portal}-jsf-${faces.spec.version}</pluto.home>
 		<pluto.portal>pluto-${pluto.version}</pluto.portal>
@@ -135,7 +135,7 @@
 		<pluto.version>2.0.3</pluto.version>
 		<portal.type>liferay</portal.type>
 		<portlet.war.deployment.type>deploy</portlet.war.deployment.type>
-		<primefaces3.version>3.5</primefaces3.version>
+		<primefaces3.version>4.0.RC1</primefaces3.version>
 		<richfaces4.version>4.3.2.Final</richfaces4.version>
 		<selenium.version>2.31.0</selenium.version>
 		<spring.version>3.0.7.RELEASE</spring.version>
