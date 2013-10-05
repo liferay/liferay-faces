@@ -43,7 +43,7 @@ public class FACES1635ResourcesTest extends TesterBase {
 
 	private static final String textarea1Xpath = "//textarea[contains(@id,':comments1:inputText')]";
 
-	static final String url = baseUrl + "/web/bridge-issues/faces-1635";
+	static final String url = baseUrl + "/web/bridge-issues/faces-1635?p_p_parallel=0";
 
 	@FindBy(xpath = textarea1Xpath)
 	private WebElement textarea1;
@@ -53,10 +53,10 @@ public class FACES1635ResourcesTest extends TesterBase {
 
 		for (int i = 0; i < totalHeadResources; i++) {
 			HeadResource resource1 = resources.get(i);
-
+//			logger.log(Level.INFO, "checkResourcesForDuplicates: i = " + i + " resource1.getURL() = " + resource1.getURL());
 			for (int j = i + 1; j < totalHeadResources; j++) {
 				HeadResource resource2 = resources.get(j);
-
+//				logger.log(Level.INFO, "checkResourcesForDuplicates: j = " + j + " resource2.getURL() = " + resource2.getURL());
 				if (!resource2.isDuplicate() && resource1.equals(resource2)) {
 					logger.log(Level.INFO,
 						"checkResourcesForDuplicates: " + whichResources + " occur more than once: type = " +
@@ -64,7 +64,6 @@ public class FACES1635ResourcesTest extends TesterBase {
 					resource2.setDuplicate(true);
 					assertTrue(whichResources + " occur more than once: type = " + resource1.getType() + " url = " +
 						resource1.getURL(), false);
-
 					break;
 				}
 			}
@@ -75,6 +74,7 @@ public class FACES1635ResourcesTest extends TesterBase {
 		ArrayList<HeadResource> resources = new ArrayList<HeadResource>();
 
 		for (WebElement webElement : webElements) {
+			webElement.isDisplayed();
 			String url = webElement.getAttribute(attribute);
 			String type = ("src".equals(attribute)) ? "script" : "link";
 
@@ -82,9 +82,18 @@ public class FACES1635ResourcesTest extends TesterBase {
 
 				if ("".equals(url)) {
 					// logger.log(Level.INFO, "convertToHeadResources: ignoring inline " + type + " ...");
-				}
-				else {
-					resources.add(new HeadResource(type, url));
+				} else {
+					if ("link".equals(type)) {
+						String rel = webElement.getAttribute("rel");
+						if (rel == null) {
+							logger.log(Level.INFO, "rel == null, type = " + type);
+						} else {
+							if ("stylesheet".equals(rel)) {
+//								logger.log(Level.INFO, "convertToHeadResources: url = " + url);
+								resources.add(new HeadResource(type, url));
+							}
+						}
+					}
 				}
 			}
 		}
@@ -107,6 +116,10 @@ public class FACES1635ResourcesTest extends TesterBase {
 		
 			logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
 			waitForElement(displayNameXpath);
+			
+			logger.log(Level.INFO, "FACES1635ResourcesTest1: BEGIN PAGE SOURCE");
+			logger.log(Level.INFO, browser.getPageSource());
+			logger.log(Level.INFO, "FACES1635ResourcesTest1: END PAGE SOURCE");
 	
 			// check that scriptsInHead only occur once
 			List<WebElement> scriptsInHead = browser.findElements(By.xpath("//head/script"));
