@@ -609,7 +609,6 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 		return responseNamespace;
 	}
 
-	@Override
 	public boolean isNamespacedParameters() {
 		return false;
 	}
