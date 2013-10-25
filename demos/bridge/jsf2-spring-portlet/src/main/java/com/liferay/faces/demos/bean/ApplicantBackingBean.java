@@ -169,13 +169,13 @@ public class ApplicantBackingBean implements Serializable {
 
 	public void setApplicantModelBean(ApplicantModelBean applicantModelBean) {
 
-		// Injected via @ManagedProperty annotation
+		// Injected via @Inject annotation
 		this.applicantModelBean = applicantModelBean;
 	}
 
 	public void setListModelBean(ListModelBean listModelBean) {
 
-		// Injected via @ManagedProperty annotation
+		// Injected via @Inject annotation
 		this.listModelBean = listModelBean;
 	}
 }
