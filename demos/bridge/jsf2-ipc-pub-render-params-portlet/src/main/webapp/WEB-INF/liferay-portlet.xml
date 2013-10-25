@@ -12,6 +12,7 @@
 	<portlet>
 		<portlet-name>bookingsPortlet</portlet-name>
 		<remoteable>true</remoteable>
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<ajaxable>false</ajaxable>
 	</portlet>
 </liferay-portlet-app>
