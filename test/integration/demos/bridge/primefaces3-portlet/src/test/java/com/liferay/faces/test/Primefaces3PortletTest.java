@@ -352,6 +352,7 @@ public class Primefaces3PortletTest extends TesterBase {
 
 		selectEditMode(portal);
 		
+		logger.log(Level.INFO, "done with selectEditMode: isThere(datePatternFieldXpath) = " + isThere(datePatternFieldXpath));
 		logger.log(Level.INFO, "datePatternField.getAttribute('value') = " + datePatternField.getAttribute("value"));
 		logger.log(Level.INFO, "resetButton.isDisplayed() = " + resetButton.isDisplayed());
 
@@ -386,6 +387,9 @@ public class Primefaces3PortletTest extends TesterBase {
 			logger.log(Level.INFO, "NO editPreferencesButton isThere, so preferencesMenuItem.click() ...");
 			selectEditMode(portal);
 		}
+		
+		logger.log(Level.INFO, "done with selectEditMode: isThere(resetButtonXpath) = " + isThere(resetButtonXpath));
+		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 
 		resetButton.click();
 		logger.log(Level.INFO, "resetButton.click() ...");
