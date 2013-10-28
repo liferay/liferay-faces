@@ -43,7 +43,7 @@ public class FACES1635ResourcesTest extends TesterBase {
 
 	private static final String textarea1Xpath = "//textarea[contains(@id,':comments1:inputText')]";
 
-	static final String url = baseUrl + "/web/bridge-issues/faces-1635";
+	static final String url = baseUrl + "/web/bridge-issues/faces-1635?p_p_parallel=0";
 
 	@FindBy(xpath = textarea1Xpath)
 	private WebElement textarea1;
@@ -75,6 +75,7 @@ public class FACES1635ResourcesTest extends TesterBase {
 		ArrayList<HeadResource> resources = new ArrayList<HeadResource>();
 
 		for (WebElement webElement : webElements) {
+			webElement.isDisplayed();
 			String url = webElement.getAttribute(attribute);
 			String type = ("src".equals(attribute)) ? "script" : "link";
 
@@ -82,9 +83,18 @@ public class FACES1635ResourcesTest extends TesterBase {
 
 				if ("".equals(url)) {
 					// logger.log(Level.INFO, "convertToHeadResources: ignoring inline " + type + " ...");
-				}
-				else {
-					resources.add(new HeadResource(type, url));
+				} else {
+					if ("link".equals(type)) {
+						String rel = webElement.getAttribute("rel");
+						if (rel == null) {
+							logger.log(Level.INFO, "rel == null, type = " + type);
+						} else {
+							if ("stylesheet".equals(rel)) {
+//								logger.log(Level.INFO, "convertToHeadResources: url = " + url);
+								resources.add(new HeadResource(type, url));
+							}
+						}
+					}
 				}
 			}
 		}
