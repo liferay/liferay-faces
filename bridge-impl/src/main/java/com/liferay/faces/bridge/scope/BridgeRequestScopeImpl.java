@@ -441,11 +441,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 			// because the Faces implementation likely calls the clear() method during the call to its
 			// FacesContextImpl.release() method.
 			saveJSF2FacesContextAttributes(facesContext);
-		}
-
-		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
-				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
-
+			
 			boolean saveNonExcludedAttributes = true;
 
 			// If a redirect occurred, then indicate that the non-excluded request attributes are not to be preserved.
