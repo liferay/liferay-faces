@@ -381,7 +381,10 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
 		PortletResponse portletResponse = (PortletResponse) facesContext.getExternalContext().getResponse();
-
+		
+		// Two sections below:
+		// 1. saving the FacesContext attributes: ViewState, RequestParameterMap, FacesMessageWrappers ...
+		// 2. saving other attributes not excluded by Config, Annotation, Namespace, Instance or PreExisting
 		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
 				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
 
@@ -441,11 +444,8 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 			// because the Faces implementation likely calls the clear() method during the call to its
 			// FacesContextImpl.release() method.
 			saveJSF2FacesContextAttributes(facesContext);
-		}
-
-		if ((beganInPhase == Bridge.PortletPhase.ACTION_PHASE) || (beganInPhase == Bridge.PortletPhase.EVENT_PHASE) ||
-				(beganInPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
-
+			
+			// 2. saving other attributes not excluded by Config, Annotation, Namespace, Instance or PreExisting
 			boolean saveNonExcludedAttributes = true;
 
 			// If a redirect occurred, then indicate that the non-excluded request attributes are not to be preserved.
