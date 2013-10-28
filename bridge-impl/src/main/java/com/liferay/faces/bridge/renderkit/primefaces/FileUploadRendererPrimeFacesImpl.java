@@ -13,14 +13,6 @@
  */
 package com.liferay.faces.bridge.renderkit.primefaces;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.RandomAccessFile;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +29,6 @@ import org.apache.commons.fileupload.FileItem;
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.context.map.RequestParameterMap;
 import com.liferay.faces.bridge.model.UploadedFile;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.RendererWrapper;
@@ -137,145 +128,5 @@ public class FileUploadRendererPrimeFacesImpl extends RendererWrapper {
 	@Override
 	public Renderer getWrapped() {
 		return wrappedRenderer;
-	}
-
-	protected class PrimeFacesFileItem implements FileItem {
-
-		// serialVersionUID
-		private static final long serialVersionUID = 4243775660521293895L;
-
-		// Private Data Members
-		private String clientId;
-		private UploadedFile uploadedFile;
-
-		public PrimeFacesFileItem(String clientId, UploadedFile uploadedFile) {
-			this.clientId = clientId;
-			this.uploadedFile = uploadedFile;
-		}
-
-		public void delete() {
-
-			// Will never be called by the PrimeFaces UploadedFile interface.
-			throw new UnsupportedOperationException();
-		}
-
-		public byte[] get() {
-
-			byte[] bytes = null;
-
-			try {
-				File file = new File(uploadedFile.getAbsolutePath());
-
-				if (file.exists()) {
-					RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
-					bytes = new byte[(int) randomAccessFile.length()];
-					randomAccessFile.readFully(bytes);
-					randomAccessFile.close();
-					file.delete();
-				}
-			}
-			catch (Exception e) {
-				logger.error(e);
-			}
-
-			return bytes;
-		}
-
-		public void write(File file) throws Exception {
-
-			// Will never be called by the PrimeFaces UploadedFile interface.
-			throw new UnsupportedOperationException();
-		}
-
-		public String getContentType() {
-			return uploadedFile.getContentType();
-		}
-
-		public boolean isFormField() {
-			return false;
-		}
-
-		public String getFieldName() {
-			return clientId;
-		}
-
-		public void setFieldName(String name) {
-			clientId = name;
-		}
-
-		public void setFormField(boolean state) {
-
-			// Will never be called by the PrimeFaces UploadedFile interface.
-			throw new UnsupportedOperationException();
-		}
-
-		public InputStream getInputStream() throws IOException {
-			return new UploadedFileInputStream(uploadedFile.getAbsolutePath());
-		}
-
-		public String getName() {
-			return uploadedFile.getName();
-		}
-
-		public OutputStream getOutputStream() throws IOException {
-
-			// Will never be called by the PrimeFaces UploadedFile interface.
-			throw new UnsupportedOperationException();
-		}
-
-		public long getSize() {
-			return uploadedFile.getSize();
-		}
-
-		public String getString() {
-			return getString(StringPool.UTF8);
-		}
-
-		public String getString(String encoding) {
-			String stringValue = null;
-			byte[] bytes = get();
-
-			if (bytes != null) {
-
-				try {
-					stringValue = new String(bytes, encoding);
-				}
-				catch (UnsupportedEncodingException e) {
-					logger.error(e);
-				}
-			}
-
-			return stringValue;
-		}
-
-		public boolean isInMemory() {
-			return false;
-		}
-
-	}
-
-	protected class UploadedFileInputStream extends FileInputStream {
-
-		// Private Data Members
-		private String absolutePath;
-
-		public UploadedFileInputStream(String absolutePath) throws FileNotFoundException {
-			super(absolutePath);
-			this.absolutePath = absolutePath;
-		}
-
-		@Override
-		public void close() throws IOException {
-			super.close();
-
-			try {
-				File file = new File(absolutePath);
-				file.delete();
-			}
-			catch (Exception e) {
-				logger.error(e);
-			}
-		}
-
 	}
 }
