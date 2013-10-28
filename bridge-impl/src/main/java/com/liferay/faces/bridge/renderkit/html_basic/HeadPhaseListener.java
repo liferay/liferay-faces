@@ -45,6 +45,9 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 public class HeadPhaseListener implements PhaseListener {
 
+	// Private Constants
+	private static final String HEAD_RESOURCE_IDS = "HEAD_RESOURCE_IDS";
+
 	// serialVersionUID
 	private static final long serialVersionUID = 8502242430265622811L;
 
@@ -73,7 +76,11 @@ public class HeadPhaseListener implements PhaseListener {
 				beforeApplyRequestValuesPhase(phaseEvent);
 			}
 			else if (phaseEvent.getPhaseId() == PhaseId.RENDER_RESPONSE) {
-				beforeRenderResponsePhase(phaseEvent);
+				FacesContext facesContext = phaseEvent.getFacesContext();
+
+				if (facesContext.getPartialViewContext().isAjaxRequest()) {
+					beforeAjaxifiedRenderResponsePhase(phaseEvent);
+				}
 			}
 		}
 
@@ -108,7 +115,7 @@ public class HeadPhaseListener implements PhaseListener {
 		Flash flash = facesContext.getExternalContext().getFlash();
 
 		@SuppressWarnings("unchecked")
-		Set<String> headResourceIdsFromFlash = (Set<String>) flash.get("HEAD_RESOURCE_IDS");
+		Set<String> headResourceIdsFromFlash = (Set<String>) flash.get(HEAD_RESOURCE_IDS);
 
 		// Log the viewId so that it can be visually compared with the value that is to be logged after the
 		// INVOKE_APPLICATION phase completes.
@@ -123,7 +130,7 @@ public class HeadPhaseListener implements PhaseListener {
 			// Note that in the case where a portlet RESOURCE_PHASE was invoked with a "portlet:resource" type of URL,
 			// there will be no HeadManagedBean available.
 			if (headManagedBean != null) {
-				flash.put("HEAD_RESOURCE_IDS", headManagedBean.getHeadResourceIds());
+				flash.put(HEAD_RESOURCE_IDS, headManagedBean.getHeadResourceIds());
 			}
 		}
 	}
@@ -136,13 +143,13 @@ public class HeadPhaseListener implements PhaseListener {
 	 * phase (in the case of immediate="false") has completed. If this is the case, then the list of head resourceIds in
 	 * the {@link HeadManagedBean} needs to be repopulated from the list found in the Flash scope.</p>
 	 */
-	protected void beforeRenderResponsePhase(PhaseEvent phaseEvent) {
+	protected void beforeAjaxifiedRenderResponsePhase(PhaseEvent phaseEvent) {
 		FacesContext facesContext = phaseEvent.getFacesContext();
 		Flash flash = facesContext.getExternalContext().getFlash();
 		String viewId = facesContext.getViewRoot().getViewId();
 
 		@SuppressWarnings("unchecked")
-		Set<String> headResourceIdsFromFlash = (Set<String>) flash.get("HEAD_RESOURCE_IDS");
+		Set<String> headResourceIdsFromFlash = (Set<String>) flash.get(HEAD_RESOURCE_IDS);
 
 		if (headResourceIdsFromFlash != null) {
 			HeadManagedBean headManagedBean = HeadManagedBean.getInstance(facesContext);
