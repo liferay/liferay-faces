@@ -95,7 +95,7 @@ public class Primefaces3PortletTest extends TesterBase {
 	// xpath for specific tests
 	private static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()";
 
-	static final String url = baseUrl + webContext + "/prime3";
+	static final String url = baseUrl + "/group/bridge-demos/prime3";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
@@ -179,7 +179,6 @@ public class Primefaces3PortletTest extends TesterBase {
 		logger.log(Level.INFO, "portal = " + portal);
 		logger.log(Level.INFO, "baseUrl = " + baseUrl);
 		logger.log(Level.INFO, "signInContext = " + signInContext);
-		logger.log(Level.INFO, "webContext = " + webContext);
 		
 		signIn();
 		

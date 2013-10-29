@@ -93,7 +93,6 @@ public class TesterBase {
 	public static final String portal = System.getProperty("integration.portal", "liferay");
 	public static final String baseUrl = System.getProperty("integration.url", "http://localhost:8080");
 	public static final String signInContext = System.getProperty("integration.signin", "/web/guest/home");
-	public static final String webContext = System.getProperty("integration.context", "/web/bridge-demos/");
 	protected static final String signInUrl = baseUrl + signInContext;
 
 	@Drone

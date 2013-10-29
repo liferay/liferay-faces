@@ -95,7 +95,7 @@ public class Richfaces4PortletTest extends TesterBase {
 	// xpath for specific tests
 	private static final String dateValidationXpath = "//span[contains(@id,':dateOfBirthField')]/span/span/span/span[contains(@id,':dateOfBirth')]/span";
 
-	static final String url = baseUrl + webContext + "/rich4";
+	static final String url = baseUrl + "/group/bridge-demos/rich4";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
@@ -179,7 +179,6 @@ public class Richfaces4PortletTest extends TesterBase {
 		logger.log(Level.INFO, "portal = " + portal);
 		logger.log(Level.INFO, "baseUrl = " + baseUrl);
 		logger.log(Level.INFO, "signInContext = " + signInContext);
-		logger.log(Level.INFO, "webContext = " + webContext);
 		
 		signIn();
 		

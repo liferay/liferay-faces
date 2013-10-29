@@ -95,7 +95,7 @@ public class Jsf2PortletTest extends TesterBase {
 	// xpath for specific tests
 	private static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../child::node()";
 
-	static final String url = baseUrl + webContext + "/jsf2";
+	static final String url = baseUrl + "/group/bridge-demos/jsf2";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
@@ -179,7 +179,6 @@ public class Jsf2PortletTest extends TesterBase {
 		logger.log(Level.INFO, "portal = " + portal);
 		logger.log(Level.INFO, "baseUrl = " + baseUrl);
 		logger.log(Level.INFO, "signInContext = " + signInContext);
-		logger.log(Level.INFO, "webContext = " + webContext);
 		
 		signIn();
 		
