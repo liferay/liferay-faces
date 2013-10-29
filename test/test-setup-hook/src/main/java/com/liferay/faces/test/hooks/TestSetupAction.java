@@ -25,6 +25,8 @@ import org.apache.commons.logging.LogFactory;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.events.ActionException;
+import com.liferay.portal.kernel.portlet.PortletBag;
+import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
@@ -36,11 +38,16 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
+
+import javax.portlet.PortletPreferences;
 
 
 /**
@@ -99,7 +106,7 @@ public class TestSetupAction extends TestSetupCompatAction {
 		addAllUsersToSite(companyId, groupId);
 
 		for (PortalPage portalPage : TestPages.BRIDGE_DEMO_PAGES) {
-			setupPrivatePage(userId, groupId, portalPage);
+			setupPrivatePage(companyId, userId, groupId, portalPage);
 		}
 	}
 
@@ -109,7 +116,7 @@ public class TestSetupAction extends TestSetupCompatAction {
 		addAllUsersToSite(companyId, groupId);
 
 		for (PortalPage portalPage : TestPages.BRIDGE_ISSUE_PAGES) {
-			setupPublicPage(userId, groupId, portalPage);
+			setupPublicPage(companyId, userId, groupId, portalPage);
 		}
 	}
 
@@ -135,24 +142,24 @@ public class TestSetupAction extends TestSetupCompatAction {
 			String liferayPortletName = portletName.replaceAll(StringPool.DASH, StringPool.BLANK);
 			String liferayPortletId = liferayPortletName + "_WAR_bridgetckmainportlet";
 			PortalPage portalPage = new PortalPage(pageName, liferayPortletId);
-			setupPrivatePage(userId, groupId, portalPage);
+			setupPrivatePage(companyId, userId, groupId, portalPage);
 		}
 
-		setupPrivatePage(userId, groupId,
+		setupPrivatePage(companyId, userId, groupId,
 			new PortalPage("Lifecycle Set", "chapter3TestslifecycleTestportlet_WAR_bridgetcklifecyclesetportlet"));
-		setupPrivatePage(userId, groupId,
+		setupPrivatePage(companyId, userId, groupId,
 			new PortalPage("Render Policy Always Delegate",
 				"chapter3TestsrenderPolicyTestportlet_WAR_bridgetckrenderpolicy1portlet"));
-		setupPrivatePage(userId, groupId,
+		setupPrivatePage(companyId, userId, groupId,
 			new PortalPage("Render Policy Default",
 				"chapter3TestsrenderPolicyTestportlet_WAR_bridgetckrenderpolicy2portlet"));
-		setupPrivatePage(userId, groupId,
+		setupPrivatePage(companyId, userId, groupId,
 			new PortalPage("Render Policy Never Delegate",
 				"chapter3TestsrenderPolicyTestportlet_WAR_bridgetckrenderpolicy3portlet"));
-		setupPrivatePage(userId, groupId,
+		setupPrivatePage(companyId, userId, groupId,
 			new PortalPage("Render Response Wrapper",
 				"chapter6_2_1TestsusesConfiguredRenderResponseWrapperTestportlet_WAR_bridgetckresponsewrapperportlet"));
-		setupPrivatePage(userId, groupId,
+		setupPrivatePage(companyId, userId, groupId,
 			new PortalPage("Resource Response Wrapper",
 				"chapter6_2_1TestsusesConfiguredResourceResponseWrapperTestportlet_WAR_bridgetckresponsewrapperportlet"));
 	}
@@ -162,11 +169,11 @@ public class TestSetupAction extends TestSetupCompatAction {
 		long groupId = site.getGroupId();
 
 		for (PortalPage portalPage : TestPages.GUEST_PAGES) {
-			setupPublicPage(userId, groupId, portalPage);
+			setupPublicPage(companyId, userId, groupId, portalPage);
 		}
 	}
 
-	protected void setupPage(long userId, long groupId, PortalPage portalPage, boolean privateLayout) throws Exception {
+	protected void setupPage(long companyId, long userId, long groupId, PortalPage portalPage, boolean privateLayout) throws Exception {
 		String portalPageName = portalPage.getName();
 		String[] portletIds = portalPage.getPortletIds();
 		Layout portalPageLayout = getPortalPageLayout(userId, groupId, portalPageName, privateLayout);
@@ -183,9 +190,18 @@ public class TestSetupAction extends TestSetupCompatAction {
 			}
 
 			addPortlet(layoutTypePortlet, userId, columnNumber, portletId);
+			
+			// Store the preferences for the portlet, if any
+			PortletPreferences portletPreferences = PortletPreferencesFactoryUtil.getLayoutPortletSetup(portalPageLayout, portletId);
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(companyId, portletId);
+			PortletBag portletBag = PortletBagPool.get(portlet.getRootPortletId());
+			if (portletBag != null) {
+				portletPreferences.store();
+			}
+			
 			columnNumber++;
 		}
-
+		
 		LayoutLocalServiceUtil.updateLayout(portalPageLayout);
 
 		logger.info("Setting up page name=[" + portalPageName + "]");
@@ -197,7 +213,7 @@ public class TestSetupAction extends TestSetupCompatAction {
 		addAllUsersToSite(companyId, groupId);
 
 		for (PortalPage portalPage : TestPages.PORTAL_DEMO_PAGES) {
-			setupPrivatePage(userId, groupId, portalPage);
+			setupPrivatePage(companyId, userId, groupId, portalPage);
 		}
 	}
 
@@ -207,16 +223,16 @@ public class TestSetupAction extends TestSetupCompatAction {
 		addAllUsersToSite(companyId, groupId);
 
 		for (PortalPage portalPage : TestPages.PORTAL_ISSUE_PAGES) {
-			setupPublicPage(userId, groupId, portalPage);
+			setupPublicPage(companyId, userId, groupId, portalPage);
 		}
 	}
 
-	protected void setupPrivatePage(long userId, long groupId, PortalPage portalPage) throws Exception {
-		setupPage(userId, groupId, portalPage, true);
+	protected void setupPrivatePage(long companyId, long userId, long groupId, PortalPage portalPage) throws Exception {
+		setupPage(companyId, userId, groupId, portalPage, true);
 	}
 
-	protected void setupPublicPage(long userId, long groupId, PortalPage portalPage) throws Exception {
-		setupPage(userId, groupId, portalPage, false);
+	protected void setupPublicPage(long companyId, long userId, long groupId, PortalPage portalPage) throws Exception {
+		setupPage(companyId, userId, groupId, portalPage, false);
 	}
 
 	protected void setupSites(long companyId, long userId) throws Exception, DocumentException {
