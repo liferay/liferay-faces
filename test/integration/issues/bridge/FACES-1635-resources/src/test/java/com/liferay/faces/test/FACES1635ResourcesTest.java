@@ -43,7 +43,7 @@ public class FACES1635ResourcesTest extends TesterBase {
 
 	private static final String textarea1Xpath = "//textarea[contains(@id,':comments1:inputText')]";
 
-	static final String url = baseUrl + "/web/bridge-issues/faces-1635?p_p_parallel=0";
+	static final String url = baseUrl + "/web/bridge-issues/faces-1635";
 
 	@FindBy(xpath = textarea1Xpath)
 	private WebElement textarea1;
