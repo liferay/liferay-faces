@@ -91,7 +91,7 @@ public class Primefaces3 extends TesterBase {
 	// xpath for specific tests
 	protected static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../following-sibling::*[1]/child::node()";
 
-	static final String url = baseUrl + webContext + "/prime3";
+	static final String url = baseUrl + "/group/bridge-demos/prime3";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;

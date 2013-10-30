@@ -90,7 +90,7 @@ public class Richfaces4 extends TesterBase {
 	// xpath for specific tests
 	protected static final String dateValidationXpath = "//span[contains(@id,':dateOfBirthField')]/span/span/span/span[contains(@id,':dateOfBirth')]/span";
 
-	static final String url = baseUrl + webContext + "/rich4";
+	static final String url = baseUrl + "/group/bridge-demos/rich4";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
