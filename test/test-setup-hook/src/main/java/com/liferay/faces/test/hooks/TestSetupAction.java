@@ -70,8 +70,8 @@ public class TestSetupAction extends TestSetupCompatAction {
 
 				Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 				long userId = company.getDefaultUser().getUserId();
-				setupSites(companyId, userId);
 				setupUsers(companyId, userId);
+				setupSites(companyId, userId);
 				clearPermissionChecker();
 			}
 		}
@@ -168,6 +168,7 @@ public class TestSetupAction extends TestSetupCompatAction {
 	protected void setupGuestSite(long companyId, long userId) throws Exception {
 		Group site = getSiteForSetup(companyId, userId, "Guest");
 		long groupId = site.getGroupId();
+		addAllUsersToSite(companyId, groupId);
 
 		for (PortalPage portalPage : TestPages.GUEST_PAGES) {
 			setupPublicPage(companyId, userId, groupId, portalPage);
@@ -316,3 +317,4 @@ public class TestSetupAction extends TestSetupCompatAction {
 	}
 
 }
+
