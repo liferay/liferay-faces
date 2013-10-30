@@ -13,6 +13,18 @@
 	<name>Liferay Faces Support</name>
 
 	<profiles>
+
+		<!-- The release profile ensures that the version elements in the child pom.xml descriptors -->
+		<!-- will be auto-versioned by the maven-release-plugin. -->
+		<profile>
+			<id>release</id>
+			<modules>
+				<module>weblogic</module>
+			</modules>
+		</profile>
+
+		<!-- The weblogic profile provides a way for developers to manually build the weblogic related -->
+		<!-- modules since they are not deployed during the release process. -->
 		<profile>
 			<id>weblogic</id>
 			<modules>
@@ -20,5 +32,17 @@
 			</modules>
 		</profile>
 	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
