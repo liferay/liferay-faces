@@ -15,7 +15,8 @@ package com.liferay.faces.portal.context;
 
 import java.util.Locale;
 
-import com.liferay.faces.util.context.MessageContextImpl;
+import com.liferay.faces.util.context.MessageContext;
+import com.liferay.faces.util.context.MessageContextWrapper;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 
@@ -23,7 +24,14 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 /**
  * @author  Neil Griffin
  */
-public class MessageContextLiferayImpl extends MessageContextImpl {
+public class MessageContextLiferayImpl extends MessageContextWrapper {
+
+	// Private Data Members
+	private MessageContext wrappedMessageContext;
+
+	public MessageContextLiferayImpl(MessageContext messageContext) {
+		this.wrappedMessageContext = messageContext;
+	}
 
 	@Override
 	public String getMessage(Locale locale, String messageId) {
@@ -45,5 +53,10 @@ public class MessageContextLiferayImpl extends MessageContextImpl {
 		}
 
 		return value;
+	}
+
+	@Override
+	public MessageContext getWrapped() {
+		return wrappedMessageContext;
 	}
 }
