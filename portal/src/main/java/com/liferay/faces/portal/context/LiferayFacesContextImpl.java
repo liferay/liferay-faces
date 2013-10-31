@@ -79,7 +79,9 @@ public class LiferayFacesContextImpl extends LiferayFacesContext implements Seri
 
 	public LiferayFacesContextImpl() {
 		setInstance(this);
-		MessageContext.setInstance(new MessageContextLiferayImpl());
+
+		MessageContext messageContext = MessageContext.getInstance();
+		MessageContext.setInstance(new MessageContextLiferayImpl(messageContext));
 	}
 
 	/**
