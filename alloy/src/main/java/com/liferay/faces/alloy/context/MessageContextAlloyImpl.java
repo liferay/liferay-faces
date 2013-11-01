@@ -14,11 +14,14 @@
 package com.liferay.faces.alloy.context;
 
 import java.util.Locale;
+import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextWrapper;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -34,29 +37,57 @@ public class MessageContextAlloyImpl extends MessageContextWrapper {
 	// Private Data Members
 	private boolean initialized;
 	private MessageContext wrappedMessageContext;
+	private Map<String, String> messageMap;
 
 	public MessageContextAlloyImpl(MessageContext messageContext) {
 		this.wrappedMessageContext = messageContext;
+		this.messageMap = new ConcurrentHashMap<String, String>();
 	}
 
 	@Override
 	public String getMessage(Locale locale, String messageId) {
 
 		String message = null;
-		ResourceBundle resourceBundle = null;
+		String key = messageId;
 
-		try {
-			resourceBundle = ResourceBundle.getBundle("aui-i18n", locale);
-			message = resourceBundle.getString(messageId);
+		if (locale != null) {
+			key = locale.toString() + messageId;
 		}
-		catch (MissingResourceException e) {
 
-			if (!initialized) {
-				logger.error(e);
+		if (messageMap.containsKey(key)) {
+			message = messageMap.get(key);
+
+			if (StringPool.BLANK.equals(message)) {
+				message = null;
 			}
 		}
+		else {
 
-		initialized = true;
+			ResourceBundle resourceBundle = null;
+
+			try {
+				resourceBundle = ResourceBundle.getBundle("aui-i18n", locale);
+			}
+			catch (MissingResourceException e) {
+
+				if (!initialized) {
+					logger.error(e);
+				}
+			}
+
+			initialized = true;
+
+			if (resourceBundle != null) {
+
+				try {
+					message = resourceBundle.getString(messageId);
+					messageMap.put(key, message);
+				}
+				catch (MissingResourceException e) {
+					messageMap.put(key, StringPool.BLANK);
+				}
+			}
+		}
 
 		if (message == null) {
 			message = super.getMessage(locale, messageId);
