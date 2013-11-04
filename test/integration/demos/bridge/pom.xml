@@ -26,6 +26,7 @@
 		<module>jsf2-events</module>
 		<module>jsf2-ipc-pub-render-params-portlet</module>
 		<module>icefaces3-crud-portlet</module>
+		<module>jsf2-export-pdf-portlet</module>
 	</modules>
 
 </project>
