@@ -23,7 +23,11 @@ import javax.faces.context.FacesContext;
  *
  * @author  Neil Griffin
  */
-public abstract class BridgePhaseCompat_2_0_Impl {
+public abstract class BridgePhaseCompat_2_0_Impl extends BridgePhaseCompat_1_2_Impl {
+
+	public BridgePhaseCompat_2_0_Impl(PortletConfig portletConfig) {
+		super(portletConfig);
+	}
 
 	public void handleJSF2ResourceRequest(FacesContext facesContext) throws IOException {
 		// no-op for JSF 1.x
