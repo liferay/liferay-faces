@@ -54,6 +54,7 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 	private static final String MOJARRA_VIEW_SCOPE_MANAGER = "com.sun.faces.application.view.viewScopeManager";
 
 	// Private Static Data Members
+	private static String servletContextPath;
 	private static MojarraInjectionProvider mojarraInjectionProvider;
 
 	// Private Data Members
@@ -69,6 +70,13 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 
 	public static synchronized void setMojarraInjectionProvider(MojarraInjectionProvider injectionProvider) {
 		mojarraInjectionProvider = injectionProvider;
+	}
+
+	/**
+	 * Returns the value of {@link ServletContext#getContextPath()} that was discovered during startup.
+	 */
+	public static String getServletContextPath() {
+		return servletContextPath;
 	}
 
 	public void contextDestroyed(ServletContextEvent servletContextEvent) {
@@ -89,6 +97,10 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 			// Prevent multiple-instantiation of this listener.
 			servletContext.setAttribute(BridgeSessionListener.class.getName(), Boolean.TRUE);
 			firstInstance = true;
+			
+			if (servletContextPath == null) {
+				servletContextPath = servletContext.getContextPath();
+			}
 
 			// If the Mojarra InjectionProvider hasn't been discovered by a prior portlet instance in this context, then
 			// attempt to discover it.
