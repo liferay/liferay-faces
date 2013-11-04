@@ -14,6 +14,7 @@
 package com.liferay.faces.bridge.scope;
 
 import javax.faces.context.ExternalContext;
+import javax.faces.lifecycle.ClientWindow;
 
 
 /**
@@ -21,11 +22,15 @@ import javax.faces.context.ExternalContext;
  */
 public abstract class BridgeRequestScopeCompat_2_2_Impl extends BridgeRequestScopeCompatImpl {
 
+	private static final String BRIDGE_REQ_SCOPE_ATTR_CLIENT_WINDOW = "com.liferay.faces.bridge.clientWindow";
+
 	protected void restoreClientWindow(ExternalContext externalContext) {
-		// no-op for versions of JSF prior to 2.2
+		ClientWindow clientWindow = (ClientWindow) getAttribute(BRIDGE_REQ_SCOPE_ATTR_CLIENT_WINDOW);
+		externalContext.setClientWindow(clientWindow);
 	}
 
 	protected void saveClientWindow(ExternalContext externalContext) {
-		// no-op for versions of JSF prior to 2.2
+		ClientWindow clientWindow = externalContext.getClientWindow();
+		setAttribute(BRIDGE_REQ_SCOPE_ATTR_CLIENT_WINDOW, clientWindow);
 	}
 }

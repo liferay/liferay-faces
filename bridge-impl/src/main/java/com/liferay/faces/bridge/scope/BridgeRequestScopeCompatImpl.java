@@ -48,7 +48,7 @@ public abstract class BridgeRequestScopeCompatImpl extends BridgeRequestScopeBas
 
 	protected void restoreFlashState(FacesContext facesContext) {
 
-		if ((flash != null) && (flash instanceof com.liferay.faces.bridge.context.flash.BridgeFlash)) {
+		if (flash != null) {
 
 			ExternalContext externalContext = facesContext.getExternalContext();
 
@@ -59,7 +59,7 @@ public abstract class BridgeRequestScopeCompatImpl extends BridgeRequestScopeBas
 
 			if (externalContext instanceof ExternalContextImpl) {
 				ExternalContextImpl externalContextImpl = (ExternalContextImpl) externalContext;
-				externalContextImpl.setBridgeFlash((com.liferay.faces.bridge.context.flash.BridgeFlash) flash);
+				externalContextImpl.setFlash(flash);
 			}
 			else {
 				logger.error("Unable to get access to the bridge ExternalContextImpl");
