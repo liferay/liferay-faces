@@ -30,6 +30,6 @@ public abstract class BridgePhaseCompat_2_2_Impl extends BridgePhaseCompat_2_0_I
 	}
 
 	protected void attachClientWindowToLifecycle(FacesContext facesContext, Lifecycle lifecycle) {
-		// no-op for versions of JSF prior to 2.2
+		lifecycle.attachWindow(facesContext);
 	}
 }
