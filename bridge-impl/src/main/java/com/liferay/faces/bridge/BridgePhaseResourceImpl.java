@@ -30,7 +30,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class BridgePhaseResourceImpl extends BridgePhaseCompatImpl {
+public class BridgePhaseResourceImpl extends BridgePhaseBaseImpl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgePhaseResourceImpl.class);
@@ -95,6 +95,9 @@ public class BridgePhaseResourceImpl extends BridgePhaseCompatImpl {
 
 				String viewId = bridgeContext.getFacesViewId();
 				logger.debug("Running Faces lifecycle for viewId=[{0}]", viewId);
+
+				// Attach the JSF 2.2 client window to the JSF lifecycle so that Faces Flows can be utilized.
+				attachClientWindowToLifecycle(facesContext, facesLifecycle);
 
 				// Execute the JSF lifecycle.
 				facesLifecycle.execute(facesContext);

@@ -30,7 +30,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class BridgePhaseActionImpl extends BridgePhaseCompatImpl {
+public class BridgePhaseActionImpl extends BridgePhaseBaseImpl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgePhaseActionImpl.class);
@@ -72,6 +72,9 @@ public class BridgePhaseActionImpl extends BridgePhaseCompatImpl {
 					logger.error("Invalid parameter value {0}=[{1}]}", Bridge.PORTLET_MODE_PARAMETER, portletModeParam);
 				}
 			}
+
+			// Attach the JSF 2.2 client window to the JSF lifecycle so that Faces Flows can be utilized.
+			attachClientWindowToLifecycle(facesContext, facesLifecycle);
 
 			// Execute all the phases of the JSF lifecycle except for RENDER_RESPONSE since that can only be executed
 			// during the RENDER_PHASE of the portlet lifecycle.

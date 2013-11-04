@@ -22,24 +22,16 @@ import javax.faces.context.ExceptionHandler;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
-import javax.portlet.faces.Bridge.PortletPhase;
 
 import com.liferay.faces.bridge.renderkit.html_basic.HeadManagedBean;
 
 
 /**
- * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
+ * This class provides a compatibility layer that isolates differences related to JSF 2.0.
  *
  * @author  Neil Griffin
  */
-public abstract class BridgePhaseCompatImpl extends BridgePhaseBaseImpl {
-
-	public BridgePhaseCompatImpl(PortletConfig portletConfig) {
-		super(portletConfig);
-	}
+public abstract class BridgePhaseCompat_2_0_Impl {
 
 	protected void clearHeadManagedBeanResources(FacesContext facesContext) {
 		HeadManagedBean headManagedBean = HeadManagedBean.getInstance(facesContext);
@@ -56,13 +48,6 @@ public abstract class BridgePhaseCompatImpl extends BridgePhaseBaseImpl {
 	protected void handleJSF2ResourceRequest(FacesContext facesContext) throws IOException {
 		ResourceHandler resourceHandler = facesContext.getApplication().getResourceHandler();
 		resourceHandler.handleResourceRequest(facesContext);
-	}
-
-	@Override
-	protected void init(PortletRequest portletRequest, PortletResponse portletResponse, PortletPhase portletPhase) {
-
-		// This is simply a pass-thru for JSF2.
-		super.init(portletRequest, portletResponse, portletPhase);
 	}
 
 	protected Throwable getJSF2HandledException(FacesContext facesContext) {
