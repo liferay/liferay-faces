@@ -13,7 +13,12 @@
  */
 package com.liferay.faces.bridge;
 
+import java.util.Map;
+
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
+import javax.portlet.faces.Bridge.PortletPhase;
 
 
 /**
@@ -21,7 +26,27 @@ import javax.portlet.PortletConfig;
  */
 public abstract class BridgePhaseCompat_1_2_Impl extends BridgePhaseBaseImpl {
 
+	// Private Constants
+	private static final String MOJARRA_REQUEST_STATE_MANAGER = "com.sun.faces.util.RequestStateManager";
+	private static final String MOJARRA_RENDER_KIT_IMPL_FOR_REQUEST = "com.sun.faces.renderKitImplForRequest";
+
 	public BridgePhaseCompat_1_2_Impl(PortletConfig portletConfig) {
 		super(portletConfig);
+	}
+
+	@Override
+	protected void init(PortletRequest portletRequest, PortletResponse portletResponse, PortletPhase portletPhase) {
+
+		super.init(portletRequest, portletResponse, portletPhase);
+
+		// Remove the render-kit attribute that Mojarra saves in the request map in order to prevent a
+		// ClassCastException during Portlet 2.0 Events IPC.
+		@SuppressWarnings("unchecked")
+		Map<String, Object> mojarraRequestStateManager = (Map<String, Object>) portletRequest.getAttribute(
+				MOJARRA_REQUEST_STATE_MANAGER);
+
+		if (mojarraRequestStateManager != null) {
+			mojarraRequestStateManager.remove(MOJARRA_RENDER_KIT_IMPL_FOR_REQUEST);
+		}
 	}
 }

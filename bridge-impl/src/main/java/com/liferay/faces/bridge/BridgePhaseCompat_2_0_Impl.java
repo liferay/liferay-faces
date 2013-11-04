@@ -16,6 +16,7 @@ package com.liferay.faces.bridge;
 import java.io.IOException;
 
 import javax.faces.context.FacesContext;
+import javax.portlet.PortletConfig;
 
 
 /**
