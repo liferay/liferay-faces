@@ -316,8 +316,14 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 	@RunAsClient
 	@InSequence(0)
 	public void testSetupActivateUser() throws Exception {
+		browser.manage().window().maximize();
 		signIn();
 		(new Actions(browser)).click(dropdownTestSetup);
+		
+		if(!controlPanelTestSetup.isDisplayed()) {
+			dropdownTestSetup.click();
+		}
+		
 		controlPanelTestSetup.click();
 		waitForElement(usersLinkTestSetupXpath);
 		usersLinkTestSetup.click();
@@ -335,9 +341,14 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 			waitForElement(selectStatusTestSetupXpath);
 			selectStatusTestSetup.click();
 			(new Actions(browser)).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.TAB).perform();
-			selectStatusTestSetup.submit();
-
 			Thread.sleep(250);
+			
+			if(isThere(johnAdamsTestSetupXpath)) {
+				//no-op
+			} else {
+				selectStatusTestSetup.submit();
+				Thread.sleep(250);
+			}
 
 			if (isThere(johnAdamsTestSetupXpath)) {
 				johnAdamsMenuTestSetup.click();
@@ -356,6 +367,11 @@ public class Icefaces3UsersPortletTest extends TesterBase {
 		browser.manage().deleteAllCookies();
 		signIn();
 		(new Actions(browser)).click(dropdownTestSetup);
+		
+		if(!controlPanelTestSetup.isDisplayed()) {
+			dropdownTestSetup.click();
+		}
+		
 		controlPanelTestSetup.click();
 		waitForElement(usersLinkTestSetupXpath);
 		usersLinkTestSetup.click();
