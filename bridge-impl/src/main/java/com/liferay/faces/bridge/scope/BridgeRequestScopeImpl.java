@@ -65,7 +65,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl implements Serializable {
+public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl implements Serializable {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 7113251688518329851L;
@@ -344,6 +344,9 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 			// NOTE: PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
 			// Restore the flash scope.
 			restoreFlashState(facesContext);
+
+			// PROPOSE-FOR-BRIDGE3-API
+			restoreClientWindow(facesContext.getExternalContext());
 		}
 
 		// If running in the RENDER_PHASE, then the incongruity context must be restored.
@@ -520,6 +523,9 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 			// PROPOSED-FOR-JSR344-API: http://java.net/jira/browse/JAVASERVERFACES_SPEC_PUBLIC-1070
 			// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
 			saveFlashState(facesContext);
+			
+			// PROPOSE-FOR-BRIDGE3-API
+			saveClientWindow(externalContext);
 		}
 
 		// If running in the ACTION_PHASE or EVENT_PHASE, then the incongruity context must be saved as well so that it
