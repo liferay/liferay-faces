@@ -24,7 +24,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 
 import com.liferay.faces.bridge.context.ExternalContextImpl;
-import com.liferay.faces.bridge.context.flash.BridgeFlash;
 import com.liferay.faces.bridge.util.NameValuePair;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -49,7 +48,7 @@ public abstract class BridgeRequestScopeCompatImpl extends BridgeRequestScopeBas
 
 	protected void restoreFlashState(FacesContext facesContext) {
 
-		if ((flash != null) && (flash instanceof BridgeFlash)) {
+		if ((flash != null) && (flash instanceof com.liferay.faces.bridge.context.flash.BridgeFlash)) {
 
 			ExternalContext externalContext = facesContext.getExternalContext();
 
@@ -60,7 +59,7 @@ public abstract class BridgeRequestScopeCompatImpl extends BridgeRequestScopeBas
 
 			if (externalContext instanceof ExternalContextImpl) {
 				ExternalContextImpl externalContextImpl = (ExternalContextImpl) externalContext;
-				externalContextImpl.setBridgeFlash((BridgeFlash) flash);
+				externalContextImpl.setBridgeFlash((com.liferay.faces.bridge.context.flash.BridgeFlash) flash);
 			}
 			else {
 				logger.error("Unable to get access to the bridge ExternalContextImpl");
