@@ -315,7 +315,8 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 			boolean restoredNonExcludedRequestAttributes = false;
 
 			if (savedRequestAttributes != null) {
-				Map<String, Object> currentRequestAttributes = facesContext.getExternalContext().getRequestMap();
+				ExternalContext externalContext = facesContext.getExternalContext();
+				Map<String, Object> currentRequestAttributes = externalContext.getRequestMap();
 
 				// If a redirect did not occur, then restore the non-excluded request attributes.
 				if (!isRedirectOccurred()) {
@@ -343,7 +344,8 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 
 			// NOTE: PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
 			// Restore the flash scope.
-			restoreFlashState(facesContext);
+			ExternalContext externalContext = facesContext.getExternalContext();
+			restoreFlashState(externalContext);
 		}
 
 		// If running in the RENDER_PHASE, then the incongruity context must be restored.
@@ -519,7 +521,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompatImpl impleme
 
 			// PROPOSED-FOR-JSR344-API: http://java.net/jira/browse/JAVASERVERFACES_SPEC_PUBLIC-1070
 			// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
-			saveFlashState(facesContext);
+			saveFlashState(externalContext);
 		}
 
 		// If running in the ACTION_PHASE or EVENT_PHASE, then the incongruity context must be saved as well so that it

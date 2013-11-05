@@ -47,11 +47,9 @@ public abstract class BridgeRequestScopeCompatImpl extends BridgeRequestScopeBas
 	// Private Data Members
 	private Flash flash;
 
-	protected void restoreFlashState(FacesContext facesContext) {
+	protected void restoreFlashState(ExternalContext externalContext) {
 
 		if ((flash != null) && (flash instanceof BridgeFlash)) {
-
-			ExternalContext externalContext = facesContext.getExternalContext();
 
 			while (externalContext instanceof ExternalContextWrapper) {
 				ExternalContextWrapper externalContextWrapper = (ExternalContextWrapper) externalContext;
@@ -101,8 +99,8 @@ public abstract class BridgeRequestScopeCompatImpl extends BridgeRequestScopeBas
 		}
 	}
 
-	protected void saveFlashState(FacesContext facesContext) {
-		flash = facesContext.getExternalContext().getFlash();
+	protected void saveFlashState(ExternalContext externalContext) {
+		flash = externalContext.getFlash();
 	}
 
 	protected void saveJSF2FacesContextAttributes(FacesContext facesContext) {
