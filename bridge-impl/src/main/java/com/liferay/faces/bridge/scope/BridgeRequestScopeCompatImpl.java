@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.scope;
 
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.bridge.util.NameValuePair;
@@ -25,7 +26,7 @@ import com.liferay.faces.bridge.util.NameValuePair;
  */
 public abstract class BridgeRequestScopeCompatImpl extends BridgeRequestScopeBaseImpl {
 
-	protected void restoreFlashState(FacesContext facesContext) {
+	protected void restoreFlashState(ExternalContext externalContext) {
 		// no-op for JSF 1.x
 	}
 
@@ -33,7 +34,7 @@ public abstract class BridgeRequestScopeCompatImpl extends BridgeRequestScopeBas
 		// no-op for JSF 1.x
 	}
 
-	protected void saveFlashState(FacesContext facesContext) {
+	protected void saveFlashState(ExternalContext externalContext) {
 		// no-op for JSF 1.x
 	}
 
