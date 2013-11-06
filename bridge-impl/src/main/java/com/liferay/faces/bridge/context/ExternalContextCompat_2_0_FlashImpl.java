@@ -13,17 +13,14 @@
  */
 package com.liferay.faces.bridge.context;
 
+import javax.faces.FactoryFinder;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.Flash;
+import javax.faces.context.FlashFactory;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.servlet.http.HttpServletResponse;
-
-import com.liferay.faces.bridge.BridgeFactoryFinder;
-import com.liferay.faces.bridge.context.flash.BridgeFlash;
-import com.liferay.faces.bridge.context.flash.BridgeFlashFactory;
-import com.liferay.faces.bridge.context.flash.FlashHttpServletResponse;
 
 
 /**
@@ -40,19 +37,15 @@ public abstract class ExternalContextCompat_2_0_FlashImpl extends ExternalContex
 	}
 
 	protected HttpServletResponse createFlashHttpServletResponse() {
-		return new FlashHttpServletResponse(portletResponse, getRequestLocale());
+
+		// JSF 2.2 version of the bridge does not have a BridgeFlash.
+		return null;
 	}
 
 	protected boolean isBridgeFlashServletResponseRequired() {
 
-		if ((flash != null) && (flash instanceof BridgeFlash)) {
-			BridgeFlash bridgeFlash = (BridgeFlash) flash;
-
-			return bridgeFlash.isServletResponseRequired();
-		}
-		else {
-			return false;
-		}
+		// JSF 2.2 version of the bridge does not have a BridgeFlash.
+		return false;
 	}
 
 	/**
@@ -63,9 +56,8 @@ public abstract class ExternalContextCompat_2_0_FlashImpl extends ExternalContex
 	public Flash getFlash() {
 
 		if (flash == null) {
-			BridgeFlashFactory bridgeFlashFactory = (BridgeFlashFactory) BridgeFactoryFinder.getFactory(
-					BridgeFlashFactory.class);
-			flash = bridgeFlashFactory.getBridgeFlash();
+			FlashFactory flashFactory = (FlashFactory) FactoryFinder.getFactory(FactoryFinder.FLASH_FACTORY);
+			flash = flashFactory.getFlash(true);
 		}
 
 		return flash;
@@ -78,5 +70,4 @@ public abstract class ExternalContextCompat_2_0_FlashImpl extends ExternalContex
 	public void setFlash(Flash flash) {
 		this.flash = flash;
 	}
-
 }
