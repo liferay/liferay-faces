@@ -13,6 +13,10 @@
  */
 package com.liferay.faces.util.product;
 
+import java.io.InputStream;
+import java.util.Properties;
+
+
 /**
  * @author  Neil Griffin
  */
@@ -21,13 +25,42 @@ public class ProductPrimeFacesImpl extends ProductBaseImpl {
 	public ProductPrimeFacesImpl() {
 
 		try {
+
 			Class<?> constantsClass = Class.forName("org.primefaces.util.Constants");
-			initVersionInfo((String) constantsClass.getDeclaredField("VERSION").get(String.class));
+			String version = (String) constantsClass.getDeclaredField("VERSION").get(String.class);
+			initVersionInfo(version);
 			this.buildId = (this.majorVersion * 100) + (this.minorVersion * 10) + this.revisionVersion;
 			this.title = ProductConstants.PRIMEFACES;
 
 			if (this.majorVersion > 0) {
 				this.detected = true;
+			}
+		}
+		catch (NoSuchFieldException e) {
+
+			try {
+				Properties pomProperties = new Properties();
+				Class<?> constantsClass = Class.forName("org.primefaces.util.Constants");
+				ClassLoader classLoader = constantsClass.getClassLoader();
+				InputStream inputStream = classLoader.getResourceAsStream(
+						"META-INF/maven/org.primefaces/primefaces/pom.properties");
+
+				if (inputStream != null) {
+					pomProperties.load(inputStream);
+					inputStream.close();
+
+					version = pomProperties.getProperty("version");
+					initVersionInfo(version);
+					this.buildId = (this.majorVersion * 100) + (this.minorVersion * 10) + this.revisionVersion;
+					this.title = ProductConstants.PRIMEFACES;
+
+					if (this.majorVersion > 0) {
+						this.detected = true;
+					}
+				}
+			}
+			catch (Exception e2) {
+				// Ignore -- PrimeFaces is likely not present.
 			}
 		}
 		catch (Exception e) {
