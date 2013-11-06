@@ -68,7 +68,7 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 	private static final String COOKIE_PROPERTY_SECURE = "secure";
 
 	// Lazy-Initialized Data Members
-	private BridgeFlash bridgeFlash;
+	private Flash flash;
 	private Boolean iceFacesLegacyMode;
 	private String portletContextName;
 
@@ -351,14 +351,6 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 		return new FlashHttpServletResponse(portletResponse, getRequestLocale());
 	}
 
-	// NOTE: PROPOSED-FOR-JSR344-API
-	// http://java.net/jira/browse/JAVASERVERFACES_SPEC_PUBLIC-1070
-	// NOTE: PROPOSED-FOR-BRIDGE3-API (Called by BridgeRequestScope in order to restore the Flash scope)
-	// https://issues.apache.org/jira/browse/PORTLETBRIDGE-207
-	public void setBridgeFlash(BridgeFlash bridgeFlash) {
-		this.bridgeFlash = bridgeFlash;
-	}
-
 	/**
 	 * @see    {@link ExternalContext#getContextName()}
 	 * @since  JSF 2.0
@@ -402,7 +394,15 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 	}
 
 	protected boolean isBridgeFlashServletResponseRequired() {
-		return ((bridgeFlash != null) && bridgeFlash.isServletResponseRequired());
+
+		if ((flash != null) && (flash instanceof BridgeFlash)) {
+			BridgeFlash bridgeFlash = (BridgeFlash) flash;
+
+			return bridgeFlash.isServletResponseRequired();
+		}
+		else {
+			return false;
+		}
 	}
 
 	protected boolean isICEfacesLegacyMode(ClientDataRequest clientDataRequest) {
@@ -437,13 +437,21 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 	@Override
 	public Flash getFlash() {
 
-		if (bridgeFlash == null) {
+		if (flash == null) {
 			BridgeFlashFactory bridgeFlashFactory = (BridgeFlashFactory) BridgeFactoryFinder.getFactory(
 					BridgeFlashFactory.class);
-			bridgeFlash = bridgeFlashFactory.getBridgeFlash();
+			flash = bridgeFlashFactory.getBridgeFlash();
 		}
 
-		return bridgeFlash;
+		return flash;
+	}
+
+	// NOTE: PROPOSED-FOR-JSR344-API
+	// http://java.net/jira/browse/JAVASERVERFACES_SPEC_PUBLIC-1070
+	// NOTE: PROPOSED-FOR-BRIDGE3-API (Called by BridgeRequestScope in order to restore the Flash scope)
+	// https://issues.apache.org/jira/browse/PORTLETBRIDGE-207
+	public void setFlash(Flash flash) {
+		this.flash = flash;
 	}
 
 	/**
