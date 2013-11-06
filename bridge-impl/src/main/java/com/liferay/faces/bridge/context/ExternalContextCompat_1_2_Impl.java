@@ -69,10 +69,4 @@ public abstract class ExternalContextCompat_1_2_Impl extends ExternalContext {
 	public String encodeActionURL(String url) {
 		return bridgeContext.encodeActionURL(url).toString();
 	}
-
-	protected boolean isEncodingFormWithPrimeFacesAjaxFileUpload() {
-
-		// no-op for JSF 1.2
-		return false;
-	}
 }
