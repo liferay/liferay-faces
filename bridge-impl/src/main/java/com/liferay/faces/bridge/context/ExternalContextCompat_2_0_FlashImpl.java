@@ -13,33 +13,29 @@
  */
 package com.liferay.faces.bridge.context;
 
-import javax.portlet.ClientDataRequest;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
-import javax.portlet.faces.Bridge;
-import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * This class provides a compatibility layer that isolates differences between JSF 1.2 and JSF 2.0.
- *
  * @author  Neil Griffin
  */
-public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextCompat_2_0_FlashImpl {
+public abstract class ExternalContextCompat_2_0_FlashImpl extends ExternalContextCompat_1_2_Impl {
 
-	// Protected Data Members
-	protected ServletResponse facesImplementationServletResponse;
-	protected Bridge.PortletPhase portletPhase;
-	protected String requestContextPath;
-
-	public ExternalContextCompat_2_0_Impl(PortletContext portletContext, PortletRequest portletRequest,
+	public ExternalContextCompat_2_0_FlashImpl(PortletContext portletContext, PortletRequest portletRequest,
 		PortletResponse portletResponse) {
-
 		super(portletContext, portletRequest, portletResponse);
 	}
 
-	protected boolean isICEfacesLegacyMode(ClientDataRequest clientDataRequest) {
+	protected HttpServletResponse createFlashHttpServletResponse() {
+
+		// no-op for JSF 1.2
+		return null;
+	}
+
+	protected boolean isBridgeFlashServletResponseRequired() {
 
 		// no-op for JSF 1.2
 		return false;
