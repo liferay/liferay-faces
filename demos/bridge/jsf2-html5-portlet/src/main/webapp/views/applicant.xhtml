@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:bridge="http://liferay.com/faces/bridge" xmlns:example-cc="http://java.sun.com/jsf/composite/example-cc"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<aui:layout id="l1">
+		<example-cc:html5 label="#{i18n['job-application']}" />
+		<example-cc:sponsorButton />
+		<example-cc:divider />
+		<aui:column id="c1">
+			<form jsf:id="f1">
+				<h:messages globalOnly="true" layout="table" />
+				<fieldset jsf:id="fs1">
+					<aui:column id="c1a">
+						<aui:field id="firstNameField" label="#{i18n['first-name']}">
+							<input jsf:id="firstName" jsf:required="true" jsf:value="#{applicantModelBean.firstName}" type="text">
+							<f:ajax render="firstNameField" />
+							</input>
+							<h:message for="firstName" />
+						</aui:field>
+						<aui:field id="lastNameField" label="#{i18n['last-name']}">
+							<input jsf:id="lastName" jsf:required="true" jsf:value="#{applicantModelBean.lastName}" type="text">
+							<f:ajax render="lastNameField" />
+							</input>
+							<h:message for="lastName" />
+						</aui:field>
+						<aui:field id="emailAddressField" label="#{i18n['email-address']}">
+							<input jsf:id="emailAddress" jsf:required="true" jsf:validatorMessage="#{i18n['invalid-email-address']}"
+								jsf:value="#{applicantModelBean.emailAddress}" type="text">
+							<f:validateRegex pattern=".+[@].+[.].+" />
+							<f:ajax render="emailAddressField" />
+							</input>
+							<h:message for="emailAddress" />
+						</aui:field>
+						<aui:field id="phoneNumberField" label="#{i18n['phone-number']}">
+							<input jsf:id="phoneNumber" jsf:required="true" jsf:value="#{applicantModelBean.phoneNumber}" type="text">
+							<f:ajax render="phoneNumberField" />
+							</input>
+							<h:message for="phoneNumber" />
+						</aui:field>
+					</aui:column>
+					<aui:column id="c1b">
+						<aui:field id="dateOfBirthField" label="#{i18n['birthday']}">
+							<input jsf:id="dateOfBirth" jsf:required="true" jsf:value="#{applicantModelBean.dateOfBirth}" type="date">
+							<f:convertDateTime pattern="yyyy-MM-dd" />
+							<f:ajax render="dateOfBirthField" />
+							</input>
+							<h:message for="dateOfBirth" />
+						</aui:field>
+						<aui:field id="cityField" label="#{i18n['city']}">
+							<input jsf:id="city" jsf:required="true" jsf:value="#{applicantModelBean.city}" type="text">
+							<f:ajax render="cityField" />
+							</input>
+							<h:message id="cityMessage" for="city" />
+						</aui:field>
+						<aui:field id="provinceIdField" label="#{i18n['state-province']}">
+							<select jsf:id="provinceId" jsf:required="true" jsf:value="#{applicantModelBean.provinceId}" size="1">
+								<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
+								<f:selectItems itemValue="#{province.provinceId}" itemLabel="#{province.provinceName}"
+									value="#{listModelBean.provinces}" var="province" />
+								<f:ajax render="provinceIdField" />
+							</select>
+							<h:message id="provinceIdMessage" for="provinceId" />
+						</aui:field>
+						<aui:field id="postalCodeField" label="#{i18n['zip-postal']}">
+							<input jsf:id="postalCode" jsf:required="true" jsf:value="#{applicantModelBean.postalCode}"
+								jsf:valueChangeListener="#{applicantBackingBean.postalCodeListener}" type="text">
+							<f:ajax render="cityField provinceIdField postalCodeField" />
+							</input>
+							<img src="#{resource['example:icon-help.png']}" title="#{i18n['postal-code-hint']}" />
+							<h:message id="postalCodeMessage" for="postalCode" />
+						</aui:field>
+					</aui:column>
+				</fieldset>
+				<fieldset>
+					<aui:column>
+						<aui:field id="commentsField" label="#{i18n['comments']}">
+							<h:panelGroup id="showHide" layout="block">
+								<f:ajax render="commentsField">
+									<a jsf:actionListener="#{applicantViewBean.toggleComments}"
+										jsf:rendered="#{!applicantViewBean.commentsRendered}" jsf:value="#{i18n['show']} #{i18n['comments']}" />
+									<a jsf:actionListener="#{applicantViewBean.toggleComments}"
+										jsf:rendered="#{applicantViewBean.commentsRendered}" jsf:value="#{i18n['hide']} #{i18n['comments']}" />
+								</f:ajax>
+							</h:panelGroup>
+							<textarea jsf:id="comments" jsf:cols="50" jsf:rows="10" jsf:rendered="#{applicantViewBean.commentsRendered}"
+								jsf:value="#{applicantModelBean.comments}">
+								<f:ajax />
+							</textarea>
+						</aui:field>
+					</aui:column>
+				</fieldset>
+				<hr />
+				<input jsf:action="#{applicantBackingBean.submit}" jsf:value="#{i18n['submit']}" type="submit">
+					<f:ajax execute="@form" render="@form" />
+				</input>
+				<!-- Test 5.4.2 Encoding PortletMode changes in Faces navigation -->
+				<input
+					jsf:action="/views/portletEditMode.xhtml?javax.portlet.faces.PortletMode=edit&amp;javax.portlet.faces.WindowState=maximized"
+					jsf:immediate="true" jsf:value="#{i18n['edit-preferences']}" type="submit" />
+			</form>
+		</aui:column>
+		<aui:column id="c2">
+			<aui:column id="c2a" styleClass="uploaded-files">
+				<form jsf:id="f2">
+					<h3>#{i18n['attachments']}</h3>
+					<h:dataTable headerClass="portlet-section-header results-header"
+						rowClasses="portlet-section-body results-row, portlet-section-alternate results-row alt"
+						value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
+						<h:column>
+							<h:commandButton actionListener="#{applicantBackingBean.deleteUploadedFile}"
+								image="#{resource['example:icon-delete.png']}"
+								onclick="if (! confirm('#{i18n['are-you-sure-you-want-to-delete-this']}')) {return false;}"
+								value="#{uploadedFile.id}">
+								<f:ajax render="@form" />
+							</h:commandButton>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<span>#{i18n['file-name']}</span>
+							</f:facet>
+							<span>#{uploadedFile.name}</span>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<span>#{i18n['size']}</span>
+							</f:facet>
+							<span>#{uploadedFile.size}</span>
+						</h:column>
+					</h:dataTable>
+				</form>
+				<hr />
+				<form jsf:id="f3" jsf:enctype="multipart/form-data">
+					<h:panelGrid columns="1">
+						<bridge:inputFile fileUploadListener="#{applicantBackingBean.handleFileUpload}" multiple="multiple" />
+					</h:panelGrid>
+					<input jsf:value="#{i18n['submit']}" type="submit" />
+				</form>
+			</aui:column>
+		</aui:column>
+	</aui:layout>
+
+</ui:composition>

@@ -14,6 +14,7 @@
 	<modules>
 		<module>jsf2-cdi-portlet</module>
 		<module>jsf2-export-pdf-portlet</module>
+		<module>jsf2-html5-portlet</module>
 		<module>jsf2-ipc-events-bookings-portlet</module>
 		<module>jsf2-ipc-events-customers-portlet</module>
 		<module>jsf2-ipc-pub-render-params-portlet</module>
