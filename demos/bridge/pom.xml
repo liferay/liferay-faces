@@ -25,6 +25,7 @@
 		<module>jsf2-jsp-portlet</module>
 		<module>jsf2-spring-portlet</module>
 		<module>primefaces3-portlet</module>
+		<module>primefaces4-portlet</module>
 		<module>richfaces4-portlet</module>
 	</modules>
 
