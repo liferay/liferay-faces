@@ -24,7 +24,6 @@ import java.util.Map;
 import javax.faces.context.FacesContext;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.PortletRequest;
-import javax.portlet.filter.PortletRequestWrapper;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.Cookie;
@@ -39,7 +38,7 @@ import javax.servlet.http.HttpSession;
  * @author  Neil Griffin
  */
 
-public class HttpServletRequestAdapter extends PortletRequestWrapper implements HttpServletRequest {
+public class HttpServletRequestAdapter extends HttpServletRequest_3_0_Adapter {
 
 	// Private Data Members
 	private PortletRequest wrappedPortletRequest;
