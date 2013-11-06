@@ -20,14 +20,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
-import javax.portlet.PortletSession;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceResponse;
 import javax.portlet.faces.Bridge;
@@ -37,7 +35,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
-import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
@@ -54,14 +51,14 @@ import com.liferay.faces.util.product.ProductMap;
 
 
 /**
- * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
+ * This class provides a compatibility layer that isolates differences between JSF 1.2 and JSF 2.0.
  *
  * @author  Neil Griffin
  */
-public abstract class ExternalContextCompatImpl extends ExternalContext {
+public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextCompat_1_2_Impl {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(ExternalContextCompatImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(ExternalContextCompat_2_0_Impl.class);
 
 	// Private Constants
 	private static final String COOKIE_PROPERTY_COMMENT = "comment";
@@ -79,7 +76,6 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 	private BridgeConfig bridgeConfig;
 
 	// Protected Data Members
-	protected BridgeContext bridgeContext;
 	protected ServletResponse facesImplementationServletResponse;
 	protected IncongruityContext incongruityContext;
 	protected boolean manageIncongruities;
@@ -89,8 +85,10 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 	protected Bridge.PortletPhase portletPhase;
 	protected String requestContextPath;
 
-	public ExternalContextCompatImpl(PortletContext portletContext, PortletRequest portletRequest,
+	public ExternalContextCompat_2_0_Impl(PortletContext portletContext, PortletRequest portletRequest,
 		PortletResponse portletResponse) {
+
+		super();
 
 		this.portletContext = portletContext;
 		this.portletRequest = portletRequest;
@@ -100,9 +98,6 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
 				BridgeConfigFactory.class);
 		this.bridgeConfig = bridgeConfigFactory.getBridgeConfig();
-
-		// Get the BridgeContext.
-		this.bridgeContext = BridgeContext.getCurrentInstance();
 
 		this.incongruityContext = bridgeContext.getIncongruityContext();
 
@@ -117,46 +112,8 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 	 */
 	@Override
 	public void addResponseCookie(String name, String value, Map<String, Object> properties) {
-		Cookie cookie = new Cookie(name, value);
 
-		if ((properties != null) && !properties.isEmpty()) {
-
-			try {
-				String comment = (String) properties.get(COOKIE_PROPERTY_COMMENT);
-
-				if (comment != null) {
-					cookie.setComment(comment);
-				}
-
-				String domain = (String) properties.get(COOKIE_PROPERTY_DOMAIN);
-
-				if (domain != null) {
-					cookie.setDomain(domain);
-				}
-
-				Integer maxAge = (Integer) properties.get(COOKIE_PROPERTY_MAX_AGE);
-
-				if (maxAge != null) {
-					cookie.setMaxAge(maxAge);
-				}
-
-				String path = (String) properties.get(COOKIE_PROPERTY_PATH);
-
-				if (path != null) {
-					cookie.setPath(path);
-				}
-
-				Boolean secure = (Boolean) properties.get(COOKIE_PROPERTY_SECURE);
-
-				if (secure != null) {
-					cookie.setSecure(secure);
-				}
-			}
-			catch (ClassCastException e) {
-				logger.error(e.getMessage(), e);
-			}
-		}
-
+		Cookie cookie = createCookie(name, value, properties);
 		portletResponse.addProperty(cookie);
 	}
 
@@ -174,24 +131,6 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 		else {
 			logger.warn("Unable to call {0} for portletResponse=[{1}] because it is not a ResourceResponse.",
 				"portletResponse.addProperty(String, String)", portletResponse.getClass().getName());
-		}
-	}
-
-	/**
-	 * Note: The reason why this method appears here in {@link ExternalContextCompatImpl} is because it needs to be
-	 * overridden by {@link ExternalContextCompat_2_2_Impl} since it has special requirements for JSF 2.2.
-	 *
-	 * @see    {@link ExternalContext#encodeActionURL(String, Map)}
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public String encodeActionURL(String url) {
-
-		if (isEncodingFormWithPrimeFacesAjaxFileUpload()) {
-			return encodePartialActionURL(url);
-		}
-		else {
-			return bridgeContext.encodeActionURL(url).toString();
 		}
 	}
 
@@ -363,6 +302,51 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 		throw new IOException(errorMessage);
 	}
 
+	protected Cookie createCookie(String name, String value, Map<String, Object> properties) {
+
+		Cookie cookie = new Cookie(name, value);
+
+		if ((properties != null) && !properties.isEmpty()) {
+
+			try {
+				String comment = (String) properties.get(COOKIE_PROPERTY_COMMENT);
+
+				if (comment != null) {
+					cookie.setComment(comment);
+				}
+
+				String domain = (String) properties.get(COOKIE_PROPERTY_DOMAIN);
+
+				if (domain != null) {
+					cookie.setDomain(domain);
+				}
+
+				Integer maxAge = (Integer) properties.get(COOKIE_PROPERTY_MAX_AGE);
+
+				if (maxAge != null) {
+					cookie.setMaxAge(maxAge);
+				}
+
+				String path = (String) properties.get(COOKIE_PROPERTY_PATH);
+
+				if (path != null) {
+					cookie.setPath(path);
+				}
+
+				Boolean secure = (Boolean) properties.get(COOKIE_PROPERTY_SECURE);
+
+				if (secure != null) {
+					cookie.setSecure(secure);
+				}
+			}
+			catch (ClassCastException e) {
+				logger.error(e.getMessage(), e);
+			}
+		}
+
+		return cookie;
+	}
+
 	protected HttpServletResponse createFlashHttpServletResponse() {
 		return new FlashHttpServletResponse(portletResponse, getRequestLocale());
 	}
@@ -421,22 +405,6 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 		return ((bridgeFlash != null) && bridgeFlash.isServletResponseRequired());
 	}
 
-	protected boolean isEncodingFormWithPrimeFacesAjaxFileUpload() {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-
-		if (facesContext.getAttributes().get(PrimeFacesFileUpload.AJAX_FILE_UPLOAD) != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	@Override
-	public boolean isSecure() {
-		return portletRequest.isSecure();
-	}
-
 	protected boolean isICEfacesLegacyMode(ClientDataRequest clientDataRequest) {
 
 		if (iceFacesLegacyMode == null) {
@@ -462,6 +430,10 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 		return iceFacesLegacyMode;
 	}
 
+	/**
+	 * @see    {@link ExternalContext#getFlash()}
+	 * @since  JSF 2.0
+	 */
 	@Override
 	public Flash getFlash() {
 
@@ -749,19 +721,5 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 				// must not throw an IllegalStateException.
 			}
 		}
-	}
-
-	@Override
-	public int getSessionMaxInactiveInterval() {
-
-		PortletSession portletSession = (PortletSession) getSession(true);
-
-		return portletSession.getMaxInactiveInterval();
-	}
-
-	@Override
-	public void setSessionMaxInactiveInterval(int sessionMaxInactiveInterval) {
-		PortletSession portletSession = (PortletSession) getSession(true);
-		portletSession.setMaxInactiveInterval(sessionMaxInactiveInterval);
 	}
 }
