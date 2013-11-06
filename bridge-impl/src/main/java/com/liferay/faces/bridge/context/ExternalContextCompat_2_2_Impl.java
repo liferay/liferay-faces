@@ -23,7 +23,7 @@ import javax.portlet.PortletResponse;
  *
  * @author  Neil Griffin
  */
-public abstract class ExternalContextCompat_2_2_Impl extends ExternalContextCompatImpl {
+public abstract class ExternalContextCompat_2_2_Impl extends ExternalContextCompat_2_1_Impl {
 
 	public ExternalContextCompat_2_2_Impl(PortletContext portletContext, PortletRequest portletRequest,
 		PortletResponse portletResponse) {
