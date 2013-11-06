@@ -13,31 +13,26 @@
  */
 package com.liferay.faces.bridge.context;
 
-import javax.faces.context.ExternalContext;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.faces.Bridge;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.util.helper.BooleanHelper;
 
 
 /**
- * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
+ * This class provides a compatibility layer that isolates differences between JSF 1.2 and JSF 2.0.
  *
  * @author  Neil Griffin
  */
-public abstract class ExternalContextCompatImpl extends ExternalContext {
-
-	// Private Constants
-	private static final String TRINIDAD_DISABLE_DIALOG_OUTCOMES =
-		"org.apache.myfaces.trinidad.DISABLE_DIALOG_OUTCOMES";
+public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextCompat_1_2_Impl {
 
 	// Protected Data Members
-	protected BridgeContext bridgeContext;
 	protected ServletResponse facesImplementationServletResponse;
 	protected IncongruityContext incongruityContext;
 	protected boolean manageIncongruities;
@@ -47,59 +42,29 @@ public abstract class ExternalContextCompatImpl extends ExternalContext {
 	protected Bridge.PortletPhase portletPhase;
 	protected String requestContextPath;
 
-	public ExternalContextCompatImpl(PortletContext portletContext, PortletRequest portletRequest,
+	public ExternalContextCompat_2_0_Impl(PortletContext portletContext, PortletRequest portletRequest,
 		PortletResponse portletResponse) {
+
+		super();
 
 		this.portletContext = portletContext;
 		this.portletRequest = portletRequest;
 		this.portletResponse = portletResponse;
-
-		// Get the BridgeContext.
-		this.bridgeContext = BridgeContext.getCurrentInstance();
 
 		this.incongruityContext = bridgeContext.getIncongruityContext();
 
 		// Determine whether or not lifecycle incongruities should be managed.
 		this.manageIncongruities = BooleanHelper.toBoolean(bridgeContext.getInitParameter(
 					BridgeConfigConstants.PARAM_MANAGE_INCONGRUITIES), true);
-
-		// Disable the Apache Trinidad 1.2.x "dialog:" URL feature as it causes navigation-handler failures during the
-		// EVENT_PHASE of the portlet lifecycle. For more information on the feature, see:
-		// http://jsfatwork.irian.at/book_de/trinidad.html
-		portletContext.setAttribute(TRINIDAD_DISABLE_DIALOG_OUTCOMES, Boolean.TRUE);
 	}
 
-	/**
-	 * Note: The reason why this method appears here in {@link ExternalContextCompatImpl} is because it needs to be
-	 * overridden by {@link ExternalContextCompat22Impl} since it has special requirements for JSF 2.2.
-	 *
-	 * @see    {@link ExternalContext#encodeActionURL(String, Map)}
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public String encodeActionURL(String url) {
-		return bridgeContext.encodeActionURL(url).toString();
-	}
-
-	public String encodePartialActionURL(String url) {
-
-		// no-op for JSF 1.2
-		return url;
-	}
-
-	protected ServletResponse createFlashHttpServletResponse() {
+	protected HttpServletResponse createFlashHttpServletResponse() {
 
 		// no-op for JSF 1.2
 		return null;
 	}
 
 	protected boolean isBridgeFlashServletResponseRequired() {
-
-		// no-op for JSF 1.2
-		return false;
-	}
-
-	protected boolean isEncodingFormWithPrimeFacesAjaxFileUpload() {
 
 		// no-op for JSF 1.2
 		return false;
