@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.context.ExternalContext;
-import javax.faces.context.Flash;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletContext;
@@ -31,18 +30,12 @@ import javax.portlet.ResourceResponse;
 import javax.portlet.faces.Bridge;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
-import com.liferay.faces.bridge.context.flash.BridgeFlash;
-import com.liferay.faces.bridge.context.flash.BridgeFlashFactory;
-import com.liferay.faces.bridge.context.flash.FlashHttpServletResponse;
 import com.liferay.faces.bridge.util.FileNameUtil;
-import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.Product;
@@ -55,7 +48,7 @@ import com.liferay.faces.util.product.ProductMap;
  *
  * @author  Neil Griffin
  */
-public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextCompat_1_2_Impl {
+public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextCompat_2_0_FlashImpl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ExternalContextCompat_2_0_Impl.class);
@@ -68,7 +61,6 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 	private static final String COOKIE_PROPERTY_SECURE = "secure";
 
 	// Lazy-Initialized Data Members
-	private Flash flash;
 	private Boolean iceFacesLegacyMode;
 	private String portletContextName;
 
@@ -77,33 +69,18 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 
 	// Protected Data Members
 	protected ServletResponse facesImplementationServletResponse;
-	protected IncongruityContext incongruityContext;
-	protected boolean manageIncongruities;
-	protected PortletContext portletContext;
-	protected PortletRequest portletRequest;
-	protected PortletResponse portletResponse;
 	protected Bridge.PortletPhase portletPhase;
 	protected String requestContextPath;
 
 	public ExternalContextCompat_2_0_Impl(PortletContext portletContext, PortletRequest portletRequest,
 		PortletResponse portletResponse) {
 
-		super();
-
-		this.portletContext = portletContext;
-		this.portletRequest = portletRequest;
-		this.portletResponse = portletResponse;
+		super(portletContext, portletRequest, portletResponse);
 
 		// Get the bridge configuration.
 		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
 				BridgeConfigFactory.class);
 		this.bridgeConfig = bridgeConfigFactory.getBridgeConfig();
-
-		this.incongruityContext = bridgeContext.getIncongruityContext();
-
-		// Determine whether or not lifecycle incongruities should be managed.
-		this.manageIncongruities = BooleanHelper.toBoolean(bridgeContext.getInitParameter(
-					BridgeConfigConstants.PARAM_MANAGE_INCONGRUITIES), true);
 	}
 
 	/**
@@ -347,10 +324,6 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 		return cookie;
 	}
 
-	protected HttpServletResponse createFlashHttpServletResponse() {
-		return new FlashHttpServletResponse(portletResponse, getRequestLocale());
-	}
-
 	/**
 	 * @see    {@link ExternalContext#getContextName()}
 	 * @since  JSF 2.0
@@ -393,18 +366,6 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 		}
 	}
 
-	protected boolean isBridgeFlashServletResponseRequired() {
-
-		if ((flash != null) && (flash instanceof BridgeFlash)) {
-			BridgeFlash bridgeFlash = (BridgeFlash) flash;
-
-			return bridgeFlash.isServletResponseRequired();
-		}
-		else {
-			return false;
-		}
-	}
-
 	protected boolean isICEfacesLegacyMode(ClientDataRequest clientDataRequest) {
 
 		if (iceFacesLegacyMode == null) {
@@ -428,30 +389,6 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 		}
 
 		return iceFacesLegacyMode;
-	}
-
-	/**
-	 * @see    {@link ExternalContext#getFlash()}
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public Flash getFlash() {
-
-		if (flash == null) {
-			BridgeFlashFactory bridgeFlashFactory = (BridgeFlashFactory) BridgeFactoryFinder.getFactory(
-					BridgeFlashFactory.class);
-			flash = bridgeFlashFactory.getBridgeFlash();
-		}
-
-		return flash;
-	}
-
-	// NOTE: PROPOSED-FOR-JSR344-API
-	// http://java.net/jira/browse/JAVASERVERFACES_SPEC_PUBLIC-1070
-	// NOTE: PROPOSED-FOR-BRIDGE3-API (Called by BridgeRequestScope in order to restore the Flash scope)
-	// https://issues.apache.org/jira/browse/PORTLETBRIDGE-207
-	public void setFlash(Flash flash) {
-		this.flash = flash;
 	}
 
 	/**
