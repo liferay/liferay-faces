@@ -1,0 +1,27 @@
+Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+
+This library is free software; you can redistribute it and/or modify it under
+the terms of the GNU Lesser General Public License as published by the Free
+Software Foundation; either version 2.1 of the License, or (at your option)
+any later version.
+
+This library is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+details.
+
+The following images were provided by http://openclipart.org and are in the
+public domain:
+- src/main/webapp/resources/travel/cart.svg
+- src/main/webapp/resources/travel/cruise.svg
+- src/main/webapp/resources/travel/flight.svg
+- src/main/webapp/resources/travel/hotel.svg
+- src/main/webapp/resources/travel/rental-car.svg
+- src/main/webapp/resources/travel/restaurant.svg
+- src/main/webapp/resources/travel/train.svg
+- src/main/webapp/resources/travel/travel-booking.svg
+
+The following image is licensed under the same license as the Mojarra
+implementation of JavaServer Faces: dual licensed under the CDDL and GPL v2
+with the Classpath Exception.
+- src/main/webapp/resources/logos/jsf-logo.png

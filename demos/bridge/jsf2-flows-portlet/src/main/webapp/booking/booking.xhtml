@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head>
+		<h:outputStylesheet library="travel" name="travel.css" />
+	</h:head>
+	<h:body>
+		<h:form>
+			<h:messages globalOnly="true" />
+			<ui:param name="bookingTypeImage" value="travel:#{bookingFlowModelBean.bookingTypeName}.svg" />
+			<h:graphicImage styleClass="booking-type" value="#{resource[bookingTypeImage]}" />
+			<aui:fieldset id="bookingTypeFieldSet">
+				<aui:field id="bookingTypeIdField" label="#{i18n['booking-type']}">
+					<h:selectOneMenu id="bookingTypeId" value="#{bookingFlowModelBean.bookingTypeId}"
+						valueChangeListener="#{bookingFlowBackingBean.bookingTypeIdChanged}">
+						<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
+						<f:selectItems itemValue="#{bookingType.bookingTypeId}" itemLabel="#{i18n[bookingType.bookingTypeName]}"
+							value="#{bookingTypeService.bookingTypes}" var="bookingType" />
+						<f:ajax render="@form" />
+					</h:selectOneMenu>
+					<h:message for="titleId" />
+				</aui:field>
+				<ui:include src="#{bookingFlowModelBean.bookingTypeName}.xhtml" />
+				<h:commandButton action="/views/portletViewMode.xhtml" value="#{i18n['exit-booking-flow']}">
+					<f:ajax execute="@form" />
+				</h:commandButton>
+			</aui:fieldset>
+		</h:form>
+	</h:body>
+</f:view>

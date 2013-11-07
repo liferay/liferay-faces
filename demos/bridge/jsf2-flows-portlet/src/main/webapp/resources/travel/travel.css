@@ -1,0 +1,29 @@
+.booking-type {
+	clear: both;
+	display: inline;
+	float: right;
+	width: 100px;
+}
+
+.demo-search-results .results-header {
+	text-align: center;
+}
+
+.jsf-logo {
+	float: right;
+}
+
+.shopping-cart {
+	clear: both;
+	display: inline;
+	float: right;
+	width: 100px;
+}
+
+.total-price {
+	text-align: center;
+}
+
+.travel-booking {
+	float: left;
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head />
+	<h:body>
+		<h:form>
+			<h:outputText value="#{i18n['thank-you']} " />
+			<h:outputText value="#{surveyFlowModelBean.customer.firstName} " />
+			<h:outputText value="#{i18n['for-participating-in-our-survey']}." />
+			<hr />
+			<h:commandButton action="/views/portletViewMode.xhtml" value="#{i18n['return-from-survey-flow']}">
+				<f:ajax execute="@form" />
+			</h:commandButton>
+		</h:form>
+	</h:body>
+</f:view>

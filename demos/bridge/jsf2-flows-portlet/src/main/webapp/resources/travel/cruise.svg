@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" height="457.485" id="svg2256" inkscape:version="0.46" sodipodi:docbase="/datas/Projs/Cliparts Stocker/tmp/AIGA" sodipodi:docname="aiga_water_transportation_.svg" sodipodi:version="0.32" width="439.344" inkscape:output_extension="org.inkscape.output.svg.inkscape" inkscape:export-filename="/home/joanna/gfx/vector/aiga/aiga_water_transportation_.png" inkscape:export-xdpi="39.331367" inkscape:export-ydpi="39.331367">
+  <sodipodi:namedview bordercolor="#666666" borderopacity="1.0" id="base" inkscape:current-layer="svg2256" inkscape:cx="305.25953" inkscape:cy="417.84947" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:window-height="715" inkscape:window-width="641" inkscape:window-x="0" inkscape:window-y="0" inkscape:zoom="0.43415836" pagecolor="#ffffff" showgrid="false"/>
+  <defs id="defs2258">
+    <inkscape:perspective sodipodi:type="inkscape:persp3d" inkscape:vp_x="0 : 228.74249 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_z="439.34399 : 228.74249 : 1" inkscape:persp3d-origin="219.672 : 152.495 : 1" id="perspective16"/>
+    <marker id="ArrowEnd" markerHeight="3" markerUnits="strokeWidth" markerWidth="4" orient="auto" refX="0" refY="5" viewBox="0 0 10 10">
+      <path d="M 0 0 L 10 5 L 0 10 z" id="path2261"/>
+    </marker>
+    <marker id="ArrowStart" markerHeight="3" markerUnits="strokeWidth" markerWidth="4" orient="auto" refX="10" refY="5" viewBox="0 0 10 10">
+      <path d="M 10 0 L 0 5 L 10 10 z" id="path2264"/>
+    </marker>
+  </defs>
+  <g id="g2266">
+    <g id="g2268">
+      <path d="M 250.512 449.131C 272.995 439.398 283.486 440.715 301.99 450.395C 320.494 460.077 338.997 460.077 360.823 448.944C 382.645 437.811 400.407 444.158 410.262 450.131C 418.512 455.131 426.762 457.131 439.106 457.131L 439.106 412.601C 420.512 412.631 412.536 406.309 412.536 406.309C 393.322 394.448 375.708 396.795 351.512 409.381C 337.71 416.557 315.823 414.669 300.328 406.591C 278.977 395.459 266.889 398.181 244.512 408.131C 227.175 415.839 211.528 415.834 194.262 408.131C 171.899 398.152 160.367 395.459 139.016 406.591C 123.522 414.669 101.314 416.557 87.512 409.381C 63.315 396.795 46.022 394.448 26.807 406.309C 26.807 406.309 18.512 412.601 0.237 412.601L 0.237 457.131C 11.762 457.131 20.762 454.881 28.512 450.131C 38.348 444.103 56.696 437.811 78.522 448.944C 100.347 460.077 118.851 460.077 137.355 450.395C 155.859 440.715 166.114 438.97 188.597 448.703C 210.421 459.836 232.007 458.811 250.512 449.131z" id="path2270" style="stroke:none; fill:#000000"/>
+      <path d="M 250.012 383.131C 267.762 374.131 283.722 374.645 302.226 384.326C 320.73 394.006 339.234 394.006 361.059 382.873C 382.883 371.74 401.204 377.366 411.351 382.831C 420.262 387.631 426.512 390.131 439.344 391.06L 439.344 347.631C 423.012 347.239 412.775 341.338 412.775 341.338C 375.012 320.739 358.584 345.82 338.285 345.82L 338.285 245.408L 369.599 173.285C 374.344 162.153 369.599 151.988 358.212 147.148L 339.234 139.403L 339.234 76.963L 302.675 76.963L 302.675 44.065L 251.458 44.065L 251.458 0L 219.672 0L 187.886 0L 187.886 44.065L 136.67 44.065L 136.67 76.963L 100.111 76.963L 100.111 139.403L 81.133 147.148C 69.745 151.988 65 162.153 69.745 173.285L 101.059 245.408L 101.059 345.82L 101.07 345.82C 80.773 345.82 63.512 321.131 26.581 341.73L 26.569 341.73C 26.569 341.73 16.012 347.631 0 348.022L 0 391.06C 12.512 390.131 18.512 388.131 27.992 382.831C 38.059 377.204 56.461 371.74 78.285 382.873C 100.111 394.006 118.614 394.006 137.118 384.326C 155.623 374.645 171.754 374.16 189.071 382.873C 210.896 394.006 228.012 394.131 250.012 383.131z" id="path2272" style="stroke:none; fill:#000000"/>
+    </g>
+    <path d="M 219.672 70.187L 163.688 70.187L 163.688 102.6L 127.155 102.6L 127.155 127.786L 219.672 89.631L 312.19 127.786L 312.19 102.6L 275.656 102.6L 275.656 70.187L 219.672 70.187z" id="path2274" style="stroke:none; fill:#ffffff"/>
+  </g>
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Open Clip Art Library</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>aiga water transportation</dc:title>
+        <dc:date>2009-04-27T10:20:02</dc:date>
+        <dc:description>Set of international airport symbols.&#13;\n&#13;\nSource: http://www.aiga.org/content.cfm/symbol-signs&#13;\n&#13;\nConverted to SVG by Jean-Victor Balin.</dc:description>
+        <dc:source>http://openclipart.org/detail/25368/aiga-water-transportation-by-anonymous-25368</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Anonymous</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>aiga</rdf:li>
+            <rdf:li>aiga</rdf:li>
+            <rdf:li>aiga no bg</rdf:li>
+            <rdf:li>aiga no bg</rdf:li>
+            <rdf:li>black and white</rdf:li>
+            <rdf:li>black and white</rdf:li>
+            <rdf:li>clip art</rdf:li>
+            <rdf:li>clipart</rdf:li>
+            <rdf:li>externalsource</rdf:li>
+            <rdf:li>ferry</rdf:li>
+            <rdf:li>ferry</rdf:li>
+            <rdf:li>icon</rdf:li>
+            <rdf:li>icon</rdf:li>
+            <rdf:li>image</rdf:li>
+            <rdf:li>map symbol</rdf:li>
+            <rdf:li>map symbol</rdf:li>
+            <rdf:li>media</rdf:li>
+            <rdf:li>png</rdf:li>
+            <rdf:li>port</rdf:li>
+            <rdf:li>port</rdf:li>
+            <rdf:li>public domain</rdf:li>
+            <rdf:li>ship</rdf:li>
+            <rdf:li>ship</rdf:li>
+            <rdf:li>sign</rdf:li>
+            <rdf:li>sign</rdf:li>
+            <rdf:li>silhouette</rdf:li>
+            <rdf:li>silhouette</rdf:li>
+            <rdf:li>svg</rdf:li>
+            <rdf:li>symbol</rdf:li>
+            <rdf:li>symbol</rdf:li>
+            <rdf:li>transportation</rdf:li>
+            <rdf:li>transportation</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

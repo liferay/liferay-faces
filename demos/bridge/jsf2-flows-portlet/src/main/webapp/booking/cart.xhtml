@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head>
+		<h:outputStylesheet library="travel" name="travel.css" />
+	</h:head>
+	<h:body>
+		<h:form>
+			<h:graphicImage styleClass="shopping-cart" value="#{resource['travel:cart.svg']}" />
+			<h:dataTable id="cartTable" headerClass="portlet-section-header results-header"
+				rowClasses="portlet-section-body results-row, portlet-section-alternate results-row alt"
+				styleClass="demo-search-results" value="#{bookingFlowModelBean.cartBookings}" var="cartBooking">
+				<h:column>
+					<h:commandButton actionListener="#{bookingFlowBackingBean.removeBooking(cartBooking.bookingId)}"
+						value="#{i18n['remove']}">
+						<f:ajax render="cartTable" />
+					</h:commandButton>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{i18n['description']}" />
+					</f:facet>
+					<h:outputText value="#{cartBooking.description}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{i18n['price']}" />
+					</f:facet>
+					<h:outputText value="#{cartBooking.price}">
+						<f:convertNumber currencyCode="USD" type="currency" />
+					</h:outputText>
+				</h:column>
+			</h:dataTable>
+			<p class="total-price">
+				<h:outputText value="#{i18n['total-price']}: " />
+				<h:outputText value="#{cartModelBean.totalPrice}">
+					<f:convertNumber currencyCode="USD" type="currency" />
+				</h:outputText>
+			</p>
+			<hr />
+			<h:commandButton action="#{bookingFlowBackingBean.bookAdditionalTravel}" value="#{i18n['book-additional-travel']}">
+				<f:ajax execute="@form" />
+			</h:commandButton>
+			<h:commandButton action="checkout" value="#{i18n['checkout']}">
+				<f:ajax execute="@form" />
+			</h:commandButton>
+			<h:commandButton action="/views/portletViewMode.xhtml" value="#{i18n['exit-booking-flow']}">
+				<f:ajax execute="@form" />
+			</h:commandButton>
+		</h:form>
+	</h:body>
+</f:view>

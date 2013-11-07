@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg version="1.2" baseProfile="tiny" viewBox="0 0 26822 26822" preserveAspectRatio="xMidYMid" fill-rule="evenodd" clip-path="url(#presentation_clip_path)" stroke-width="28.222" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:smil="urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xml:space="preserve">
+ <defs>
+  <clipPath id="presentation_clip_path" clipPathUnits="userSpaceOnUse">
+   <rect x="0" y="0" width="26822" height="26822"/>
+  </clipPath>
+ </defs>
+ <g id="id2" class="Master_Slide" clip-path="url(#presentation_clip_path)">
+  <g id="bg-id2" visibility="visible" class="Background">
+   <rect fill="none" stroke="none" x="0" y="0" width="26822" height="26822"/>
+  </g>
+  <g id="bo-id2" visibility="visible" class="BackgroundObjects"/>
+ </g>
+ <g id="id1" class="Slide" visibility="visible" clip-path="url(#presentation_clip_path)">
+  <g class="com.sun.star.drawing.ClosedBezierShape">
+   <g>
+    <path fill="rgb(0,0,0)" stroke="none" d="M 5723,12487 C 7108,12487 8230,11365 8230,9981 8230,8596 7108,7474 5723,7474 4339,7474 3217,8596 3217,9981 3217,11365 4339,12487 5723,12487 Z"/>
+    <rect fill="none" stroke="none" x="3217" y="7474" width="5014" height="5014"/>
+   </g>
+  </g>
+  <g class="com.sun.star.drawing.PolyLineShape">
+   <g>
+    <rect fill="none" stroke="none" x="5723" y="4281" width="1" height="1"/>
+   </g>
+  </g>
+  <g class="com.sun.star.drawing.ClosedBezierShape">
+   <g>
+    <path fill="rgb(0,0,0)" stroke="none" d="M 11135,9270 L 21153,9270 C 22623,9270 23489,10216 23489,11482 L 23489,15109 11135,15109 11135,9270 Z"/>
+    <rect fill="none" stroke="none" x="11135" y="9270" width="12355" height="5840"/>
+   </g>
+  </g>
+  <g class="com.sun.star.drawing.ClosedBezierShape">
+   <g>
+    <path fill="rgb(0,0,0)" stroke="none" d="M 8408,10567 L 8408,12742 4556,12742 C 2696,12749 2693,15139 4556,15139 L 9605,15139 C 10343,15139 10805,14544 10805,13871 L 10805,10567 C 10805,8758 8408,8758 8408,10567 Z"/>
+    <rect fill="none" stroke="none" x="3160" y="9210" width="7647" height="5930"/>
+   </g>
+  </g>
+  <g class="com.sun.star.drawing.ClosedBezierShape">
+   <g>
+    <path fill="rgb(0,0,0)" stroke="none" d="M 2738,2293 C 2738,-764 0,-764 0,2293 L 0,26822 2799,26822 2799,20487 24095,20487 24095,26775 26833,26775 26833,7830 C 26833,4601 24065,4601 24065,7830 L 24065,15391 2738,15391 2738,2293 Z"/>
+    <rect fill="none" stroke="none" x="0" y="0" width="26834" height="26823"/>
+   </g>
+  </g>
+ </g>
+</svg>

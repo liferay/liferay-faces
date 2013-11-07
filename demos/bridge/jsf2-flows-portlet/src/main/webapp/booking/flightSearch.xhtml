@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head>
+		<h:outputStylesheet library="travel" name="travel.css" />
+	</h:head>
+	<h:body>
+		<h:form>
+			<h:dataTable headerClass="portlet-section-header results-header"
+				rowClasses="portlet-section-body results-row, portlet-section-alternate results-row alt"
+				styleClass="demo-search-results" value="#{bookingFlowModelBean.flights}" var="flight">
+				<h:column>
+					<h:commandButton action="#{bookingFlowBackingBean.addFlightToCart(flight.bookingId)}" value="#{i18n['add-to-cart']}">
+						<f:ajax execute="@form" />
+					</h:commandButton>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{i18n['flight-number']}" />
+					</f:facet>
+					<h:outputText value="#{flight.label}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{i18n['airline']}" />
+					</f:facet>
+					<h:graphicImage value="#{resource['logos:liferay-logo-small.png']}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{i18n['departure-city']}" />
+					</f:facet>
+					<h:outputText value="#{flightSearchModelBean.departureCity}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{i18n['departure-airport']}" />
+					</f:facet>
+					<h:outputText value="#{flightSearchModelBean.departureAirportName}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{i18n['departure-date']}" />
+					</f:facet>
+					<h:outputText value="#{flight.departureDate}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{i18n['arrival-city']}" />
+					</f:facet>
+					<h:outputText value="#{flightSearchModelBean.arrivalCity}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{i18n['arrival-airport']}" />
+					</f:facet>
+					<h:outputText value="#{flightSearchModelBean.arrivalAirportName}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{i18n['arrival-date']}" />
+					</f:facet>
+					<h:outputText value="#{flight.arrivalDate}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{i18n['distance']}" />
+					</f:facet>
+					<h:outputText value="#{flight.distance}">
+						<f:convertNumber maxFractionDigits="2" />
+					</h:outputText>
+					<h:outputText value=" KM" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{i18n['price']}" />
+					</f:facet>
+					<h:outputText value="#{flight.price}">
+						<f:convertNumber currencyCode="USD" type="currency" />
+					</h:outputText>
+				</h:column>
+			</h:dataTable>
+			<h:commandButton action="#{bookingFlowBackingBean.bookAdditionalTravel}" value="#{i18n['book-additional-travel']}">
+				<f:ajax execute="@form" />
+			</h:commandButton>
+			<h:commandButton action="checkout" value="#{i18n['checkout']}">
+				<f:ajax execute="@form" />
+			</h:commandButton>
+			<h:commandButton action="/views/portletViewMode.xhtml" value="#{i18n['exit-booking-flow']}">
+				<f:ajax execute="@form" />
+			</h:commandButton>
+		</h:form>
+	</h:body>
+</f:view>

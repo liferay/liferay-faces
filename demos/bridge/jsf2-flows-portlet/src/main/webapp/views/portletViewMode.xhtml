@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head>
+		<h:outputStylesheet library="travel" name="travel.css" />
+	</h:head>
+	<h:body>
+		<h:form>
+			<h:graphicImage styleClass="travel-booking" value="#{resource['travel:travel-booking.png']}" />
+			<h:graphicImage styleClass="jsf-logo" value="#{resource['logos:faces-flows.png']}" />
+			<br />
+			<h:commandButton action="booking" value="#{i18n['enter-booking-flow']}">
+				<f:ajax execute="@form" />
+			</h:commandButton>
+		</h:form>
+		<br />
+		<aui:layout>
+			<aui:column>
+				<ul>
+					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['JSF']}" /></em></li>
+					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Alloy']}" /></em></li>
+					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Bridge']}" /></em></li>
+				</ul>
+			</aui:column>
+		</aui:layout>
+	</h:body>
+</f:view>
