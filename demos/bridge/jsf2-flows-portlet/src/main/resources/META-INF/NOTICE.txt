@@ -20,8 +20,3 @@ public domain:
 - src/main/webapp/resources/travel/restaurant.svg
 - src/main/webapp/resources/travel/train.svg
 - src/main/webapp/resources/travel/travel-booking.svg
-
-The following image is licensed under the same license as the Mojarra
-implementation of JavaServer Faces: dual licensed under the CDDL and GPL v2
-with the Classpath Exception.
-- src/main/webapp/resources/logos/jsf-logo.png
