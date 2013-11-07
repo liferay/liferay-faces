@@ -81,7 +81,6 @@ public class BookingFlowBackingBean {
 		}
 
 		if (bookingToRemove != null) {
-			System.err.println("!@#$ REMOVING bookingToRemove=" + bookingToRemove.getBookingId());
 			cartBookings.remove(bookingToRemove);
 		}
 	}

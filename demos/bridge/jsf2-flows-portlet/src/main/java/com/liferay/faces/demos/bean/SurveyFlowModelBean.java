@@ -13,11 +13,15 @@
  */
 package com.liferay.faces.demos.bean;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.flow.FlowScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.liferay.faces.demos.dto.Customer;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -27,14 +31,27 @@ import com.liferay.faces.demos.dto.Customer;
 @FlowScoped("survey")
 public class SurveyFlowModelBean {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(SurveyFlowModelBean.class);
+
+	@Inject
+	ScopeTrackingBean scopeTrackingBean;
+
 	// Private Data Members
 	private String answer1;
 	private String answer2;
 	private Customer customer;
 
+	@PostConstruct
+	public void postConstruct() {
+		logger.debug("SurveyFlowModelBean initialized!");
+		scopeTrackingBean.setSurveyFlowModelBeanInScope(true);
+	}
+
 	@PreDestroy
 	public void preDestroy() {
-		System.err.println("!@#$ SurveyFlowModelBean going OUT OF SCOPE!");
+		logger.debug("SurveyFlowModelBean going out of scope!");
+		scopeTrackingBean.setSurveyFlowModelBeanInScope(false);
 	}
 
 	public String getAnswer1() {

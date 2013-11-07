@@ -13,7 +13,10 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -27,13 +30,19 @@ import com.liferay.faces.demos.service.AirportService;
  */
 @Named
 @ViewScoped
-public class FlightSearchModelBean {
+public class FlightSearchModelBean implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 4976012166797843537L;
 
 	@Inject
 	AirportService airportService;
 
 	@Inject
 	BookingFlowModelBean bookingFlowModelBean;
+
+	@Inject
+	ScopeTrackingBean scopeTrackingBean;
 
 	// Private Data Members
 	private String arrivalAirportName;
@@ -53,6 +62,13 @@ public class FlightSearchModelBean {
 		Airport arrivalAirport = airportService.findById(arrivalAirportId);
 		this.setArrivalAirportName(arrivalAirport.getName());
 		this.setArrivalCity(arrivalAirport.getCity());
+
+		scopeTrackingBean.setFlightSearchModelBeanInScope(true);
+	}
+
+	@PreDestroy
+	public void preDestroy() {
+		scopeTrackingBean.setFlightSearchModelBeanInScope(false);
 	}
 
 	public String getArrivalAirportName() {

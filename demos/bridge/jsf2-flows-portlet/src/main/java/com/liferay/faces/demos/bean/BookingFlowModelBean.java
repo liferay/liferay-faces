@@ -28,6 +28,8 @@ import com.liferay.faces.demos.dto.Country;
 import com.liferay.faces.demos.dto.Customer;
 import com.liferay.faces.demos.service.CountryService;
 import com.liferay.faces.demos.service.FlightService;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -37,11 +39,17 @@ import com.liferay.faces.demos.service.FlightService;
 @FlowScoped("booking")
 public class BookingFlowModelBean {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(BookingFlowModelBean.class);
+	
 	@Inject
 	private CountryService countryService;
 
 	@Inject
 	private FlightService flightService;
+	
+	@Inject
+	private ScopeTrackingBean scopeTrackingBean;
 
 	// Private Data Members
 	private long bookingArrivalId;
@@ -72,11 +80,14 @@ public class BookingFlowModelBean {
 	public void postContruct() {
 		Country unitedStates = countryService.findByAbbreviation("US");
 		customer.setCountryId(unitedStates.getCountryId());
+		logger.debug("BookingFlowModelBean initialized!");
+		scopeTrackingBean.setBookingFlowModelBeanInScope(true);
 	}
 
 	@PreDestroy
 	public void preDestroy() {
-		System.err.println("!@#$ BookingFlowModelBean going OUT OF SCOPE!");
+		logger.debug("BookingFlowModelBean going out of scope!");
+		scopeTrackingBean.setBookingFlowModelBeanInScope(false);
 	}
 
 	public long getBookingArrivalId() {

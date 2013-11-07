@@ -13,9 +13,12 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,13 +31,29 @@ import com.liferay.faces.demos.dto.Booking;
  */
 @Named
 @ViewScoped
-public class CartModelBean {
+public class CartModelBean implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 6106226342160723375L;
 
 	@Inject
 	BookingFlowModelBean bookingFlowModelBean;
 
+	@Inject
+	ScopeTrackingBean scopeTrackingBean;
+
 	// Private Data Members
 	private BigDecimal totalPrice;
+
+	@PostConstruct
+	public void postConstruct() {
+		scopeTrackingBean.setCartModelBeanInScope(true);
+	}
+
+	@PreDestroy
+	public void preDestroy() {
+		scopeTrackingBean.setCartModelBeanInScope(false);
+	}
 
 	public BigDecimal getTotalPrice() {
 
