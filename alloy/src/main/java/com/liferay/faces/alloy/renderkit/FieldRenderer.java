@@ -21,6 +21,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
+import com.liferay.faces.util.lang.StringPool;
+
 
 /**
  * @author  Neil Griffin
@@ -42,7 +44,9 @@ public class FieldRenderer extends Renderer {
 		responseWriter.writeAttribute("id", id, "id");
 
 		StringBuilder classNames = new StringBuilder();
-		classNames.append("aui-field");
+
+		// aui_deprecated.css: field
+		classNames.append("field");
 
 		String type = (String) attributes.get("type");
 
@@ -50,27 +54,33 @@ public class FieldRenderer extends Renderer {
 			String lowerCaseType = type.trim().toLowerCase();
 
 			if (lowerCaseType.equals("checkbox") || lowerCaseType.equals("boolean")) {
+
+				// aui-field-choice not found in 6.2 (all field-choice are nested css classes)
 				classNames.append(" aui-field-choice");
 			}
 			else if (lowerCaseType.equals("menu") || lowerCaseType.equals("select")) {
+
+				// aui-field-menu not found in 6.2
 				classNames.append(" aui-field-menu");
 			}
 		}
 		else {
+
+			// aui-field-text not found in 6.2 (all field-text are nested css classes)
 			classNames.append(" aui-field-text");
 		}
 
 		String cssClass = (String) attributes.get("cssClass");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(" ");
+			classNames.append(StringPool.SPACE);
 			classNames.append(cssClass);
 		}
 
 		String styleClass = (String) attributes.get("styleClass");
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(" ");
+			classNames.append(StringPool.SPACE);
 			classNames.append(styleClass);
 		}
 
@@ -78,7 +88,9 @@ public class FieldRenderer extends Renderer {
 
 		// Inner <span>
 		responseWriter.startElement("span", null);
-		responseWriter.writeAttribute("class", "aui-field-content", null);
+
+		// aui_deprecated.css: field-content
+		responseWriter.writeAttribute("class", "field-content", null);
 
 		String lowerCaseInlineLabel = "left";
 		String inlineLabel = (String) attributes.get("inlineLabel");
@@ -90,7 +102,9 @@ public class FieldRenderer extends Renderer {
 		// Left-aligned <label>
 		if (lowerCaseInlineLabel.equals("left")) {
 			responseWriter.startElement("label", null);
-			responseWriter.writeAttribute("class", "aui-field-label", null);
+
+			// aui_deprecated.css: field-label
+			responseWriter.writeAttribute("class", "field-label", null);
 
 			String label = (String) attributes.get("label");
 
@@ -104,6 +118,8 @@ public class FieldRenderer extends Renderer {
 		// Inner-inner <span>
 		responseWriter.startElement("span", null);
 		classNames = new StringBuilder();
+
+		// aui-field-element not found in 6.2 (all field-element are nested css classes)
 		classNames.append("aui-field-element");
 
 		if (lowerCaseInlineLabel.equalsIgnoreCase("right")) {
@@ -134,7 +150,9 @@ public class FieldRenderer extends Renderer {
 		// Right-aligned <label>
 		if (lowerCaseInlineLabel.equals("right")) {
 			responseWriter.startElement("label", null);
-			responseWriter.writeAttribute("class", "aui-field-label", null);
+
+			// aui_deprecated.css: field-label
+			responseWriter.writeAttribute("class", "field-label", null);
 
 			String label = (String) attributes.get("label");
 

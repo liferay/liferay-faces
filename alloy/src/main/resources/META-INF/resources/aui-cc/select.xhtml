@@ -5,7 +5,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
 
-	<cc:interface shortDescription="The &lt;code&gt;aui-cc:select&lt;/code&gt; encapsulates a standard JSF h:selectOneMenu tag with CSS class name &quot;aui-field-input aui-field-input-select aui-field-input-menu&quot;. NOTE that sometimes the JSF implementation performs more reliably if a simple h:selectOneMenu is used instead of this tag.">
+	<cc:interface shortDescription="The &lt;code&gt;aui-cc:select&lt;/code&gt; encapsulates a standard JSF h:selectOneMenu tag with CSS class name &quot;field-input aui-field-input-select aui-field-input-menu&quot;. NOTE that sometimes the JSF implementation performs more reliably if a simple h:selectOneMenu is used instead of this tag.">
 		<cc:attribute name="inlineMessage" default="false" required="false" shortDescription="Boolean flag indicating whether or not there should be an inline h:message tag included. The default value is &quot;false&quot;." />
 		<cc:attribute name="label" required="true" shortDescription="The text value for the rendered label." />
 		<cc:attribute name="required" default="false" required="false" shortDescription="Boolean flag indicating whether or not it is required for the user to supply a value for this component. The default value is &quot;false&quot;." />
@@ -18,7 +18,10 @@
 	<cc:implementation>
 
 		<aui:field inlineMessage="#{cc.attrs.inlineMessage}" label="#{cc.attrs.label}" type="menu">
-			<h:selectOneMenu id="s1" required="#{cc.attrs.required}" styleClass="aui-field-input aui-field-input-select aui-field-input-menu"
+<ui:remove><!-- 		aui_deprecated.css: field-input --></ui:remove>
+<ui:remove><!-- 		aui-field-input-select not found in 6.2 --></ui:remove>
+<ui:remove><!-- 		aui-field-input-menu found in 6.2 javascript TODO --></ui:remove>
+			<h:selectOneMenu id="s1" required="#{cc.attrs.required}" styleClass="field-input aui-field-input-select aui-field-input-menu"
 				value="#{cc.attrs.value}">
 				<cc:insertChildren />
 			</h:selectOneMenu>

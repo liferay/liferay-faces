@@ -35,12 +35,14 @@
 					<c:choose>
 						<c:when test="#{empty cc.attrs.validatorMessage}">
 							<h:inputText id="t1" disabled="#{cc.attrs.disabled}" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}" required="#{cc.attrs.required}" readonly="#{cc.attrs.readonly}"
-								size="#{cc.attrs.size}" style="#{cc.attrs.style}" styleClass="aui-field-input aui-field-input-text" value="#{cc.attrs.value}" />
+								size="#{cc.attrs.size}" style="#{cc.attrs.style}" styleClass="field-input field-input-text" value="#{cc.attrs.value}" />
+<ui:remove><!-- 								aui_deprecated.css: field-input field-input-text--></ui:remove>
 						</c:when>
 						<c:otherwise>
 							<h:inputText id="t1" disabled="#{cc.attrs.disabled}" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}" required="#{cc.attrs.required}" readonly="#{cc.attrs.readonly}"
-								size="#{cc.attrs.size}" style="#{cc.attrs.style}" styleClass="aui-field-input aui-field-input-text"
+								size="#{cc.attrs.size}" style="#{cc.attrs.style}" styleClass="field-input field-input-text"
 								validatorMessage="#{cc.attrs.validatorMessage}" value="#{cc.attrs.value}" />
+<ui:remove><!-- 								aui_deprecated.css: field-input field-input-text--></ui:remove>
 						</c:otherwise>
 					</c:choose>
 				</c:when>
@@ -49,12 +51,14 @@
 						<c:when test="#{empty cc.attrs.validatorMessage}">
 							<h:inputTextarea id="t1" cols="#{cc.attrs.cols}" disabled="#{cc.attrs.disabled}" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}" readonly="#{cc.attrs.readonly}"
 								required="#{cc.attrs.required}" rows="#{cc.attrs.rows}" size="#{cc.attrs.size}" style="#{cc.attrs.style}"
-								styleClass="aui-field-input aui-field-input-text" value="#{cc.attrs.value}" />
+								styleClass="field-input field-input-text" value="#{cc.attrs.value}" />
+<ui:remove><!-- 								aui_deprecated.css: field-input field-input-text--></ui:remove>
 						</c:when>
 						<c:otherwise>
 							<h:inputTextarea id="t1" cols="#{cc.attrs.cols}" disabled="#{cc.attrs.disabled}" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}" readonly="#{cc.attrs.readonly}"
 								required="#{cc.attrs.required}" rows="#{cc.attrs.rows}" style="#{cc.attrs.style}" size="#{cc.attrs.size}"
-								styleClass="aui-field-input aui-field-input-text" validatorMessage="#{cc.attrs.validatorMessage}" value="#{cc.attrs.value}" />
+								styleClass="field-input field-input-text" validatorMessage="#{cc.attrs.validatorMessage}" value="#{cc.attrs.value}" />
+<ui:remove><!-- 								aui_deprecated.css: field-input field-input-text--></ui:remove>								
 						</c:otherwise>
 					</c:choose>
 				</c:when>
@@ -62,12 +66,14 @@
 					<c:choose>
 						<c:when test="#{empty cc.attrs.validatorMessage}">
 							<h:inputSecret id="t1" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}" required="#{cc.attrs.required}" size="#{cc.attrs.size}" style="#{cc.attrs.style}"
-								styleClass="aui-field-input aui-field-input-text" value="#{cc.attrs.value}" disabled="#{cc.attrs.disabled}" readonly="#{cc.attrs.readonly}" />
+								styleClass="field-input field-input-text" value="#{cc.attrs.value}" disabled="#{cc.attrs.disabled}" readonly="#{cc.attrs.readonly}" />
+<ui:remove><!-- 								aui_deprecated.css: field-input field-input-text--></ui:remove>
 						</c:when>
 						<c:otherwise>
 							<h:inputSecret id="t1" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}" required="#{cc.attrs.required}" size="#{cc.attrs.size}" style="#{cc.attrs.style}"
-								styleClass="aui-field-input aui-field-input-text" validatorMessage="#{cc.attrs.validatorMessage}" value="#{cc.attrs.value}" disabled="#{cc.attrs.disabled}"
+								styleClass="field-input field-input-text" validatorMessage="#{cc.attrs.validatorMessage}" value="#{cc.attrs.value}" disabled="#{cc.attrs.disabled}"
 								readonly="#{cc.attrs.readonly}" />
+<ui:remove><!-- 								aui_deprecated.css: field-input field-input-text--></ui:remove>
 						</c:otherwise>
 					</c:choose>
 				</c:when>
@@ -75,12 +81,14 @@
 					<c:choose>
 						<c:when test="#{empty cc.attrs.validatorMessage}">
 							<h:selectBooleanCheckbox id="t1" label="#{cc.attrs.label}" onchange="#{cc.attrs.onchange}" required="#{cc.attrs.required}" style="#{cc.attrs.style}"
-								styleClass="aui-field-input aui-field-input-choice" value="#{cc.attrs.value}" disabled="#{cc.attrs.disabled}" readonly="#{cc.attrs.readonly}" />
+								styleClass="field-input field-input-choice" value="#{cc.attrs.value}" disabled="#{cc.attrs.disabled}" readonly="#{cc.attrs.readonly}" />
+<ui:remove><!-- 								aui_deprecated.css: field-input field-input-choice--></ui:remove>
 						</c:when>
 						<c:otherwise>
 							<h:selectBooleanCheckbox id="t1" label="#{cc.attrs.label}" onchange="#{cc.attrs.onchange}" required="#{cc.attrs.required}" style="#{cc.attrs.style}"
-								styleClass="aui-field-input aui-field-input-choice" validatorMessage="#{cc.attrs.validatorMessage}" value="#{cc.attrs.value}" disabled="#{cc.attrs.disabled}"
+								styleClass="field-input field-input-choice" validatorMessage="#{cc.attrs.validatorMessage}" value="#{cc.attrs.value}" disabled="#{cc.attrs.disabled}"
 								readonly="#{cc.attrs.readonly}" />
+<ui:remove><!-- 								aui_deprecated.css: field-input field-input-choice--></ui:remove>
 						</c:otherwise>
 					</c:choose>
 				</c:when>

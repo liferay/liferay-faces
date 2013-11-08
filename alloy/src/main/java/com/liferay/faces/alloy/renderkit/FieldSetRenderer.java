@@ -21,6 +21,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
+import com.liferay.faces.util.lang.StringPool;
+
 
 /**
  * @author  Neil Griffin
@@ -42,7 +44,9 @@ public class FieldSetRenderer extends Renderer {
 		responseWriter.writeAttribute("id", id, "id");
 
 		StringBuilder classNames = new StringBuilder();
-		classNames.append("aui-fieldset");
+
+		// aui_deprecated.css: fieldset
+		classNames.append("fieldset");
 
 		Boolean columnFlag = Boolean.FALSE;
 		String column = (String) attributes.get("column");
@@ -55,20 +59,23 @@ public class FieldSetRenderer extends Renderer {
 		}
 
 		if (columnFlag) {
-			classNames.append(" aui-column aui-form-column");
+
+			// aui_deprecated.css: column
+			// aui-form-column not found in 6.2 (all form-column are nested css classes)
+			classNames.append(" column aui-form-column");
 		}
 
 		String cssClass = (String) attributes.get("cssClass");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(" ");
+			classNames.append(StringPool.SPACE);
 			classNames.append(cssClass);
 		}
 
 		String styleClass = (String) attributes.get("styleClass");
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(" ");
+			classNames.append(StringPool.SPACE);
 			classNames.append(styleClass);
 		}
 
@@ -79,11 +86,15 @@ public class FieldSetRenderer extends Renderer {
 
 		if ((label != null) && (label.length() > 0)) {
 			responseWriter.startElement("legend", uiComponent);
-			responseWriter.writeAttribute("class", "aui-fieldset-legend", null);
+
+			// aui_deprecated.css: fieldset-legend
+			responseWriter.writeAttribute("class", "fieldset-legend", null);
 
 			// <span> inside the <legend>
 			responseWriter.startElement("span", uiComponent);
-			responseWriter.writeAttribute("class", "aui-legend", null);
+
+			// Used to be aui-legend, but has been replaced by non-deprecated legend
+			responseWriter.writeAttribute("class", "legend", null);
 			responseWriter.writeText(label, uiComponent, "label");
 			responseWriter.endElement("span");
 			responseWriter.endElement("legend");
@@ -92,10 +103,14 @@ public class FieldSetRenderer extends Renderer {
 		// Inner <div>
 		responseWriter.startElement("div", null);
 		classNames = new StringBuilder();
+
+		// aui-fieldset-content not found in 6.2 (all fieldset-content are nested css classes)
 		classNames.append("aui-fieldset-content");
 
 		if (columnFlag) {
-			classNames.append(" aui-column-content");
+
+			// column-content not found in 6.2 (all column-content are nested css classes)
+			classNames.append(" column-content");
 		}
 
 		responseWriter.writeAttribute("class", classNames.toString(), null);

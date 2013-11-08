@@ -22,6 +22,7 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.alloy.util.AlloyUtil;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -43,34 +44,42 @@ public class LayoutRenderer extends Renderer {
 		responseWriter.writeAttribute("id", id, "id");
 
 		StringBuilder classNames = new StringBuilder();
-		classNames.append("aui-layout");
+
+		// aui_deprecated.css: layout
+		classNames.append("layout");
 
 		String cssClass = (String) attributes.get("cssClass");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(" ");
+			classNames.append(StringPool.SPACE);
 			classNames.append(cssClass);
 		}
 
 		String styleClass = (String) attributes.get("styleClass");
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(" ");
+			classNames.append(StringPool.SPACE);
 			classNames.append(styleClass);
 		}
 
 		responseWriter.writeAttribute("class", classNames.toString(), null);
 		responseWriter.startElement("div", null);
 		classNames = new StringBuilder();
-		classNames.append("aui-layout-content");
+
+		// aui_deprecated.css: layout-content
+		classNames.append("layout-content");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(" ");
+			classNames.append(StringPool.SPACE);
+
+			// "-content" tags may be deprecated
 			classNames.append(AlloyUtil.appendToCssClasses(cssClass, "-content"));
 		}
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(" ");
+			classNames.append(StringPool.SPACE);
+
+			// "-content" tags may be deprecated
 			classNames.append(AlloyUtil.appendToCssClasses(styleClass, "-content"));
 		}
 

@@ -16,7 +16,9 @@
 		<ui:remove>
 			<!-- TODO: Perhaps implement actionListener as described here: http://blogs.sun.com/arungupta/entry/totd_147_java_server_faces -->
 		</ui:remove>
+<ui:remove><!-- 		aui-button aui-button-submit not found in 6.2 --></ui:remove>
 		<h:panelGroup styleClass="aui-button aui-button-submit">
+<ui:remove><!-- 		aui-button-content not found in 6.2 --></ui:remove>
 			<h:panelGroup styleClass="aui-button-content">
 				<c:set var="label" value="#{cc.attrs.label}" />
 				<c:choose>
@@ -24,22 +26,29 @@
 						<c:if test="#{empty label}">
 							<c:set var="label" value="Cancel" />
 						</c:if>
-						<c:set var="buttonCssClass" value="aui-button-input aui-button-input-cancel" />
+<ui:remove><!-- 						aui_deprecated.css: button-input --></ui:remove>
+<ui:remove><!-- 						aui-button-input-cancel not found in 6.2 --></ui:remove>
+						<c:set var="buttonCssClass" value="button-input aui-button-input-cancel" />
 					</c:when>
 					<c:when test="#{cc.attrs.type == 'submit'}">
 						<c:if test="#{empty label}">
 							<c:set var="label" value="Submit" />
 						</c:if>
-						<c:set var="buttonCssClass" value="aui-button-input aui-button-input-submit" />
+<ui:remove><!-- 						aui_deprecated.css: button-input --></ui:remove>
+<ui:remove><!-- 						aui-button-input-submit not found in 6.2 --></ui:remove>
+						<c:set var="buttonCssClass" value="button-input aui-button-input-submit" />
 					</c:when>
 					<c:otherwise>
 						<c:if test="#{empty label}">
 							<c:set var="label" value="label" />
 						</c:if>
-						<c:set var="buttonCssClass" value="aui-button-input" />
+<ui:remove><!-- 						aui_deprecated.css: button-input --></ui:remove>
+						<c:set var="buttonCssClass" value="button-input" />
 					</c:otherwise>
 				</c:choose>
-				<h:commandButton id="cmdButton" immediate="#{cc.attrs.immediate}" styleClass="aui-button-input aui-button-input-cancel" value="#{label}" />
+<ui:remove><!-- 						aui_deprecated.css: button-input --></ui:remove>
+<ui:remove><!-- 						aui-button-input-cancel not found in 6.2 --></ui:remove>
+				<h:commandButton id="cmdButton" immediate="#{cc.attrs.immediate}" styleClass="button-input aui-button-input-cancel" value="#{label}" />
 			</h:panelGroup>
 		</h:panelGroup>
 	</cc:implementation>
