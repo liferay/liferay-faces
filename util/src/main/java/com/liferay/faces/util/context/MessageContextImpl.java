@@ -14,11 +14,11 @@
 package com.liferay.faces.util.context;
 
 import java.text.MessageFormat;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
@@ -30,7 +30,7 @@ import javax.faces.context.FacesContext;
  */
 public class MessageContextImpl extends MessageContext {
 
-	private Map<Locale, ResourceBundle> facesResourceBundleMap = new HashMap<Locale, ResourceBundle>();
+	private Map<Locale, ResourceBundle> facesResourceBundleMap = new ConcurrentHashMap<Locale, ResourceBundle>();
 
 	@Override
 	public FacesMessage newFacesMessage(FacesContext facesContext, Severity severity, String key) {
