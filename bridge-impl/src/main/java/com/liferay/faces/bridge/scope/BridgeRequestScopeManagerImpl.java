@@ -79,7 +79,7 @@ public class BridgeRequestScopeManagerImpl implements BridgeRequestScopeManager 
 		// For each ServletContext attribute name:
 		String httpSessionId = httpSession.getId();
 		ServletContext servletContext = httpSession.getServletContext();
-		@SuppressWarnings("unchecked")
+
 		Enumeration<String> attributeNames = servletContext.getAttributeNames();
 
 		if (attributeNames != null) {
