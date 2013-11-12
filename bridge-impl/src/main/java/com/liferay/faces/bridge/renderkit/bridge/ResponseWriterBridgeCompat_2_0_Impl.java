@@ -153,6 +153,8 @@ public abstract class ResponseWriterBridgeCompat_2_0_Impl extends ResponseWriter
 		}
 
 		writeAttribute(ATTRIBUTE_NAME, viewStateName, null);
+
+		// TODO: The following line is a workaround and needs to be fixed in FACES-1797.
 		writeAttribute(ATTRIBUTE_ID, viewStateName, null);
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
