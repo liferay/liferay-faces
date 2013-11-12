@@ -23,9 +23,9 @@ import com.liferay.faces.test.util.TesterBase;
 /**
  * @author  Liferay Faces Team
  */
-public class Jsf2Spring extends TesterBase {
+public class Jsf2Html5 extends TesterBase {
 
-	protected static final Logger logger = Logger.getLogger(Jsf2Spring.class.getName());
+	protected static final Logger logger = Logger.getLogger(Jsf2Html5.class.getName());
 
 	// form tag found after submitting
 	private static final String formTagXpath = "//form[@method='post']";
