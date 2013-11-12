@@ -23,6 +23,9 @@ import javax.faces.context.ResponseWriter;
  */
 public abstract class ResponseWriterBridgeCompat_2_2_Impl extends ResponseWriterBridgeCompat_2_0_Impl {
 
+	// Protected Constants
+	protected static final String CLIENT_WINDOW_PARAM = "javax.faces.ClientWindow";
+
 	public ResponseWriterBridgeCompat_2_2_Impl(ResponseWriter wrappedResponseWriter) {
 		super(wrappedResponseWriter);
 	}
