@@ -20,17 +20,10 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.ResponseWriter;
-import javax.faces.context.ResponseWriterWrapper;
-import javax.faces.render.ResponseStateManager;
 
-import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.renderkit.html_basic.BodyRendererBridgeImpl;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.product.Product;
-import com.liferay.faces.util.product.ProductConstants;
-import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -66,69 +59,31 @@ import com.liferay.faces.util.product.ProductMap;
  *
  * @author  Neil Griffin
  */
-public class ResponseWriterBridgeImpl extends ResponseWriterWrapper {
+public class ResponseWriterBridgeImpl extends ResponseWriterBridgeCompat_2_2_Impl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ResponseWriterBridgeImpl.class);
 
 	// Private Constants
-	private static final String ATTRIBUTE_AUTOCOMPLETE = "autocomplete";
-	private static final String ATTRIBUTE_ID = "id";
-	private static final String ATTRIBUTE_NAME = "name";
-	private static final String ATTRIBUTE_TYPE = "type";
-	private static final String ATTRIBUTE_VALUE = "value";
-	private static final String DOCTYPE_MARKER = "<!DOCTYPE";
 	private static final String ELEMENT_CHANGES = "changes";
 	private static final String ELEMENT_FORM = "form";
-	private static final String ELEMENT_INPUT = "input";
 	private static final String ELEMENT_PARTIAL_RESPONSE = "partial-response";
 	private static final String ELEMENT_UPDATE = "update";
-	private static final String TYPE_HIDDEN = "hidden";
-	private static final String VALUE_OFF = "off";
-	private static final String XML_MARKER = "<?xml";
-
-	private static final boolean JSF_RUNTIME_SUPPORTS_NAMESPACING_VIEWSTATE;
-
-	static {
-		boolean jsfRuntimeNamespacesViewState = true;
-		Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
-
-		if (jsf.getTitle().equals(ProductConstants.MOJARRA)) {
-
-			if (jsf.getMajorVersion() == 2) {
-
-				if (jsf.getMinorVersion() == 1) {
-					jsfRuntimeNamespacesViewState = (jsf.getRevisionVersion() >= 27);
-				}
-				else if (jsf.getMinorVersion() == 2) {
-					jsfRuntimeNamespacesViewState = (jsf.getRevisionVersion() >= 4);
-				}
-			}
-		}
-
-		JSF_RUNTIME_SUPPORTS_NAMESPACING_VIEWSTATE = jsfRuntimeNamespacesViewState;
-
-		logger.debug("JSF runtime [{0}] version [{1}].[{2}].[{3}] supports namespacing [{4}]: [{5}]", jsf.getTitle(),
-			jsf.getMajorVersion(), jsf.getMinorVersion(), jsf.getRevisionVersion(),
-			ResponseStateManager.VIEW_STATE_PARAM, JSF_RUNTIME_SUPPORTS_NAMESPACING_VIEWSTATE);
-	}
 
 	// Private Data Members
+	private boolean clientWindowWritten;
 	private String currentElementName;
 	private boolean insidePartialResponse;
 	private boolean insideChanges;
 	private boolean insideCData;
 	private boolean insideInput;
 	private boolean insideUpdate;
-	private boolean namespacedParameters;
 	private boolean viewStateWritten;
 	private ResponseWriter wrappedResponseWriter;
 
 	public ResponseWriterBridgeImpl(ResponseWriter wrappedResponseWriter) {
+		super(wrappedResponseWriter);
 		this.wrappedResponseWriter = wrappedResponseWriter;
-
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		this.namespacedParameters = bridgeContext.getPortletContainer().isNamespacedParameters();
 	}
 
 	@Override
@@ -175,28 +130,17 @@ public class ResponseWriterBridgeImpl extends ResponseWriterWrapper {
 		// it's not already written to the response.
 		else if (ELEMENT_FORM.equals(elementName)) {
 
-			if (insidePartialResponse && insideChanges && insideUpdate && insideCData && !viewStateWritten) {
-				startElement(ELEMENT_INPUT, null);
-				writeAttribute(ATTRIBUTE_TYPE, TYPE_HIDDEN, null);
+			if (insidePartialResponse && insideChanges && insideUpdate && insideCData) {
 
-				String viewStateName = PartialResponseWriter.VIEW_STATE_MARKER;
-
-				if (namespacedParameters && JSF_RUNTIME_SUPPORTS_NAMESPACING_VIEWSTATE) {
-
-					FacesContext facesContext = FacesContext.getCurrentInstance();
-					String namingContainerId = facesContext.getViewRoot().getContainerClientId(facesContext);
-					viewStateName = namingContainerId + viewStateName;
+				if (!clientWindowWritten) {
+					writeClientWindowHiddenField();
+					clientWindowWritten = true;
 				}
 
-				writeAttribute(ATTRIBUTE_NAME, viewStateName, null);
-				writeAttribute(ATTRIBUTE_ID, viewStateName, null);
-
-				FacesContext facesContext = FacesContext.getCurrentInstance();
-				String viewState = facesContext.getApplication().getStateManager().getViewState(facesContext);
-				writeAttribute(ATTRIBUTE_VALUE, viewState, null);
-				writeAttribute(ATTRIBUTE_AUTOCOMPLETE, VALUE_OFF, null);
-				endElement(ELEMENT_INPUT);
-				viewStateWritten = true;
+				if (!viewStateWritten) {
+					writeViewStateHiddenField();
+					viewStateWritten = true;
+				}
 			}
 		}
 
@@ -243,61 +187,15 @@ public class ResponseWriterBridgeImpl extends ResponseWriterWrapper {
 		// FACES-1424: Otherwise, if the specified element name is "form" then reset the viewStateWritten flag. This
 		// ensures that in the case of multiple forms,  that the "javax.faces.ViewState" hidden field will be present in
 		// each one.
-		else if (ELEMENT_FORM.equals(elementName) && viewStateWritten) {
+		else if (ELEMENT_FORM.equals(elementName)) {
+
+			clientWindowWritten = false;
 			viewStateWritten = false;
 		}
 
 		// Ask the superclass method to perform the startElement writing, which basically delegates to the Faces
 		// implementation writer (or the ICEfaces DOMResponseWriter) in the chain-of-responsibility.
 		super.startElement(elementName, uiComponent);
-	}
-
-	/**
-	 * <p>The main purpose of this method is to solve the jsf.js limitation #1 as described in the class header
-	 * comments.</p>
-	 *
-	 * <p>The Mojarra JSF implementation has a vendor-specific com.sun.faces.facelets.compiler.UIInstructions class that
-	 * will render the following markers:</p>
-	 *
-	 * <ul>
-	 *   <li>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</li>
-	 *   <li>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	 *     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</li>
-	 * </ul>
-	 *
-	 * <p>This method will ensure that such markers are not rendered to the response, as they should not be rendered as
-	 * part of a portlet, since portlets are simply HTML fragment that are aggregated together into a single HTML
-	 * document by the portlet container.</p>
-	 */
-	@Override
-	public void write(char[] cbuf, int off, int len) throws IOException {
-
-		if (len > 0) {
-
-			String data = new String(cbuf, off, len);
-
-			if (data.startsWith(XML_MARKER) || data.startsWith(DOCTYPE_MARKER)) {
-
-				logger.trace("filtering marker");
-
-				int greaterThanPos = data.indexOf(StringPool.GREATER_THAN);
-
-				if (greaterThanPos > 0) {
-					len -= (greaterThanPos + 1);
-					off += (greaterThanPos + 1);
-				}
-			}
-
-			if (len > 0) {
-
-				if (logger.isTraceEnabled()) {
-					String value = new String(cbuf, off, len);
-					logger.trace("writing value=[{0}]", value);
-				}
-
-				wrappedResponseWriter.write(cbuf, off, len);
-			}
-		}
 	}
 
 	/**
