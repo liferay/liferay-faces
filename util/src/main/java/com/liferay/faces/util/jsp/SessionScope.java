@@ -53,7 +53,6 @@ public class SessionScope extends AbstractPropertyMap<Object> {
 		httpSession.setAttribute(name, value);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected Enumeration<String> getPropertyNames() {
 		return (Enumeration<String>) httpSession.getAttributeNames();

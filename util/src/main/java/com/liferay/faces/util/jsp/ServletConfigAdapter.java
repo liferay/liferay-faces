@@ -35,7 +35,6 @@ public class ServletConfigAdapter implements ServletConfig {
 		return servletContext.getInitParameter(name);
 	}
 
-	@SuppressWarnings("unchecked")
 	public Enumeration<String> getInitParameterNames() {
 		return (Enumeration<String>) servletContext.getInitParameterNames();
 	}
