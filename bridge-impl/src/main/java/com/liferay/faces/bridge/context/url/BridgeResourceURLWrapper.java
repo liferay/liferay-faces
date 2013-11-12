@@ -31,14 +31,6 @@ public abstract class BridgeResourceURLWrapper extends BridgeURLWrapper implemen
 		getWrapped().setInProtocol(inProtocol);
 	}
 
-	public boolean isEncodedFaces2ResourceURL() {
-		return getWrapped().isEncodedFaces2ResourceURL();
-	}
-
-	public boolean isFaces2ResourceURL() {
-		return getWrapped().isFaces2ResourceURL();
-	}
-
 	public void setViewLink(boolean viewLink) {
 		getWrapped().setViewLink(viewLink);
 	}

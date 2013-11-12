@@ -46,9 +46,6 @@ public class ResourceHandlerWrapperBase extends ResourceHandlerWrapper {
 	// Public Constants
 	public static final int DEFAULT_BUFFER_SIZE = 1024;
 
-	// Private Constants
-	private static final String ENCODED_RESOURCE_TOKEN = "javax.faces.resource=";
-
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ResourceHandlerWrapperBase.class);
 
@@ -60,36 +57,20 @@ public class ResourceHandlerWrapperBase extends ResourceHandlerWrapper {
 	}
 
 	/**
-	 * Determines whether or not the specified URL has already been encoded.
+	 * Determines whether or not the specified URL targets a JSF2 resource.
 	 *
 	 * @param   url  The URL to check.
 	 *
-	 * @return  True if the specified URL is already encoded.
+	 * @return  True if the specified URL targets a JSF2 resource.
 	 */
-	public static boolean isEncodedFacesResourceURL(String url) {
-
-		if ((url != null) && (url.indexOf(ENCODED_RESOURCE_TOKEN) > 0)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	/**
-	 * Determines whether or not the specified URL is a Faces URL.
-	 *
-	 * @param   url  The URL to check.
-	 *
-	 * @return  True if the specified URL is a Faces URL.
-	 */
-	public static boolean isFacesResourceURL(String url) {
+	@Override
+	public boolean isResourceURL(String url) {
 
 		if ((url != null) && (url.indexOf(ResourceConstants.JAVAX_FACES_RESOURCE) >= 0)) {
 			return true;
 		}
 		else {
-			return false;
+			return wrappedResourceHandler.isResourceURL(url);
 		}
 	}
 

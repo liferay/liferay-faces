@@ -43,16 +43,6 @@ public interface BridgeResourceURL extends BridgeURL {
 	void setInProtocol(boolean inProtocol);
 
 	/**
-	 * Flag indicating whether or not the URL has already been encoded as a JSF2 resource URL.
-	 */
-	boolean isEncodedFaces2ResourceURL();
-
-	/**
-	 * Flag indicating whether or not the URL is a JSF2 resource URL.
-	 */
-	boolean isFaces2ResourceURL();
-
-	/**
 	 * Sets a flag indicating whether or not the URL is a view-link to a Faces view, which is a type of navigation. For
 	 * more information, refer to the documentation at {@link Bridge#VIEW_LINK}.
 	 */

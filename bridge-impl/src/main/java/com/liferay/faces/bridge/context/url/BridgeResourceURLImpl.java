@@ -27,6 +27,7 @@ import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -36,10 +37,13 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class BridgeResourceURLImpl extends BridgeResourceURLCompatImpl {
+public class BridgeResourceURLImpl extends BridgeURLBaseImpl implements BridgeResourceURL {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeResourceURLImpl.class);
+
+	// Private Constants
+	private static final String ENCODED_RESOURCE_TOKEN = "javax.faces.resource=";
 
 	// Private Pseudo-Constants
 	private static Set<String> EXCLUDED_PARAMETER_NAMES = new HashSet<String>();
@@ -76,7 +80,7 @@ public class BridgeResourceURLImpl extends BridgeResourceURLCompatImpl {
 		String newParamName = removeParameter(Bridge.BACK_LINK);
 		setParameter(newParamName, backLinkEncodedActionURL);
 	}
-
+	
 	@Override
 	protected BaseURL toBaseURL() throws MalformedURLException {
 
@@ -151,10 +155,10 @@ public class BridgeResourceURLImpl extends BridgeResourceURLCompatImpl {
 		}
 
 		// Otherwise, if the URL is identified by the ResourceHandler as a JSF2 resource URL, then
-		else if (isFaces2ResourceURL()) {
+		else if ((url != null) && (url.indexOf(ResourceConstants.JAVAX_FACES_RESOURCE) >= 0)) {
 
 			// If the URL has already been encoded, then return the URL string unmodified.
-			if (isEncodedFaces2ResourceURL()) {
+			if (url.indexOf(ENCODED_RESOURCE_TOKEN) > 0) {
 
 				// FACES-63: Prevent double-encoding of resource URLs
 				baseURL = new BaseURLNonEncodedStringImpl(url, getParameterMap());
