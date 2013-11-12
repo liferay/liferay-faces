@@ -186,7 +186,7 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 			BeanManager beanManager = beanManagerFactory.getBeanManager();
 
 			try {
-				@SuppressWarnings("unchecked")
+
 				Enumeration<String> attributeNames = (Enumeration<String>) httpSession.getAttributeNames();
 
 				while (attributeNames.hasMoreElements()) {
