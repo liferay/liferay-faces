@@ -13,7 +13,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>javax.el</groupId>
-			<artifactId>el-api</artifactId>
+			<artifactId>javax.el-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.faces</groupId>
@@ -23,15 +23,15 @@
 			<groupId>javax.portlet</groupId>
 			<artifactId>portlet-api</artifactId>
 		</dependency>
-		<!-- Note that servlet-api is only necessary to make Eclipse happy -->
+		<!-- Note that javax.servlet-api is only necessary to make Eclipse happy -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
+			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
 		<!-- Note that jsp-api is only necessary to make Eclipse happy -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.faces</groupId>

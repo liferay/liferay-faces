@@ -98,7 +98,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>javax.el</groupId>
-			<artifactId>el-api</artifactId>
+			<artifactId>javax.el-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.faces</groupId>
@@ -106,7 +106,7 @@
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.portal</groupId>

@@ -14,7 +14,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
+			<artifactId>jstl-api</artifactId>
 		</dependency>
 	</dependencies>
 
