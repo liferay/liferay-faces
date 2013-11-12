@@ -29,8 +29,9 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * <p>This class acts as a portlet filter (in a sense), in that it decorates/wraps the Faces implementation {@link
  * ResponseWriter} so that it can transform what is written to the response. The response needs to be filtered because
- * of three limitations in the JSF 2.0 and JSF 2.1 jsf.js JavaScript code). The goal is to fix these limitations in JSF
- * 2.2 so that this class will become unnecessary.</p>
+ * of three limitations in the JSF 2.0/2.1/2.2 jsf.js JavaScript code). The goal is to fix these limitations in JSF 2.3
+ * so that this class will become unnecessary. For more information, see: <a
+ * href="http://java.net/jira/browse/JAVASERVERFACES-2579">JAVASERVERFACES-2579</a></p>
  *
  * <p>The three limitations in the jsf.js JavaScript code are:</p>
  *
@@ -198,23 +199,6 @@ public class ResponseWriterBridgeImpl extends ResponseWriterBridgeCompat_2_2_Imp
 		super.startElement(elementName, uiComponent);
 	}
 
-	/**
-	 * <p>If the implementation (Mojarra in particular) is trying to do a DOM replacement using markup like the
-	 * following:</p>
-	 *
-	 * <pre>
-	       &lt;partial-response&gt;
-	         &lt;changes&gt;
-	           &lt;update id="javax.faces.ViewRoot"&gt;&lt;![CDATA[...]]]&gt;&lt;/update&gt;
-	           ...
-	         &lt;/changes&gt;
-	         &lt;/partial-response&gt;
-	 * </pre>
-	 *
-	 * <p>... then this will cause the jsf.js JavaScript library to replace the entire &lt;body&gt; element! In order to
-	 * avoid this, need to change the id attribute from "javax.faces.ViewRoot" to the clientId of the outer-most div of
-	 * the portlet, rendered by the bridge's {@link BodyRendererBridgeImpl}.</p>
-	 */
 	@Override
 	public void writeAttribute(String attributeName, Object attributeValue, String property) throws IOException {
 
@@ -225,9 +209,9 @@ public class ResponseWriterBridgeImpl extends ResponseWriterBridgeCompat_2_2_Imp
 			// If the specified attribute name is "id", then
 			if (attributeName.equals(ATTRIBUTE_ID)) {
 
-				// If the Faces implementation is trying to update the javax.faces.ViewRoot, then substitute the value
-				// of the outermost <div>...</div> (rendered by the bridge's BodyRenderer) for the specified value. This
-				// is a workaround for jsf.js limitation #2 as described in the class header comments.
+				// If a PartialResponseWriter is trying to update the javax.faces.ViewRoot, then substitute the value of
+				// the outermost <div>...</div> (rendered by the bridge's BodyRenderer) for the specified value. This is
+				// a workaround for jsf.js limitation #2 as described in the class header comments.
 				if (insidePartialResponse && insideChanges && insideUpdate &&
 						ELEMENT_UPDATE.equals(currentElementName) &&
 						PartialResponseWriter.RENDER_ALL_MARKER.equals(attributeValue)) {
@@ -240,7 +224,10 @@ public class ResponseWriterBridgeImpl extends ResponseWriterBridgeCompat_2_2_Imp
 				// "javax.faces.ViewState", then set a flag accordingly.
 				else if (insideInput) {
 
-					if (PartialResponseWriter.VIEW_STATE_MARKER.equals(attributeValue)) {
+					if (CLIENT_WINDOW_PARAM.equals(attributeValue)) {
+						clientWindowWritten = true;
+					}
+					else if (VIEW_STATE_MARKER.equals(attributeValue)) {
 						viewStateWritten = true;
 					}
 				}
@@ -250,12 +237,6 @@ public class ResponseWriterBridgeImpl extends ResponseWriterBridgeCompat_2_2_Imp
 		// Ask the superclass method to write the attribute, which basically delegates to the Faces implementation
 		// writer (or the ICEfaces DOMResponseWriter) in the chain-of-responsibility.
 		super.writeAttribute(attributeName, attributeValue, property);
-	}
-
-	@Override
-	public void writeURIAttribute(String name, Object value, String property) throws IOException {
-
-		super.writeURIAttribute(name, value, property);
 	}
 
 	@Override
