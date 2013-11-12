@@ -282,7 +282,7 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			String outerPortletId = parameterMap.get(LiferayConstants.P_O_P_ID);
 
 			if (outerPortletId != null) {
-				appendParameterToURL(LiferayConstants.P_O_P_ID, parameterValue, url);
+				appendParameterToURL(LiferayConstants.P_O_P_ID, outerPortletId, url);
 			}
 
 			// Possibly add the doAsUserId parameter.
