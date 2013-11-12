@@ -42,7 +42,7 @@
 		<integration.port>8080</integration.port>
 		<integration.url>http://${integration.host}:${integration.port}</integration.url>
 		<integration.context>/group/bridge-demos</integration.context>
-		<integration.signin>/web/guest/home</integration.signin>
+		<integration.signin></integration.signin>
 	</properties>
 
 	<profiles>
