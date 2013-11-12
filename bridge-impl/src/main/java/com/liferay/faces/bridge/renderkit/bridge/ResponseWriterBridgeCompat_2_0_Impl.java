@@ -49,6 +49,7 @@ public abstract class ResponseWriterBridgeCompat_2_0_Impl extends ResponseWriter
 	protected static final String ELEMENT_INPUT = "input";
 	protected static final String TYPE_HIDDEN = "hidden";
 	protected static final String VALUE_OFF = "off";
+	protected static final String VIEW_STATE_MARKER = PartialResponseWriter.VIEW_STATE_MARKER;
 	protected static final String XML_MARKER = "<?xml";
 
 	// Private Constants
