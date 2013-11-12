@@ -82,7 +82,7 @@ public class AUIELResolver extends ELResolver {
 	}
 
 	@Override
-	public Iterator<?> getFeatureDescriptors(ELContext elContext, Object base) {
+	public Iterator<FeatureDescriptor> getFeatureDescriptors(ELContext elContext, Object base) {
 		return FEATURE_DESCRIPTORS.iterator();
 	}
 
