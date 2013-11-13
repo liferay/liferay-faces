@@ -145,12 +145,20 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 			// Get the original query-string from the URL.
 			String originalQuery = StringPool.BLANK;
 			boolean firstParam = true;
-			int queryPos = url.indexOf(StringPool.QUESTION);
+			int pos = url.indexOf(StringPool.QUESTION);
 
-			if (queryPos >= 0) {
-				originalQuery = url.substring(queryPos + 1);
+			if (pos >= 0) {
+				originalQuery = url.substring(pos + 1);
 			}
 
+			pos = originalQuery.indexOf(StringPool.POUND);
+			
+			String fragmentId = null;
+			if (pos > 0) {
+				fragmentId = originalQuery.substring(pos);
+				originalQuery = originalQuery.substring(0, pos);
+			}
+			
 			// Keep track of all the parameters that are appended to the return value.
 			Map<String, Integer> parameterOccurrenceMap = new HashMap<String, Integer>(parameterMap.size());
 
@@ -246,6 +254,10 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 				}
 			}
 
+			if (fragmentId != null) {
+				buf.append(fragmentId);
+			}
+			
 			query = buf.toString();
 		}
 

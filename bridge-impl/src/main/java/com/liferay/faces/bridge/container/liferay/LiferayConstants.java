@@ -20,6 +20,7 @@ public class LiferayConstants {
 
 	// Public Constants
 	public static final String CONTROL_PANEL_CATEGORY = "controlPanelCategory";
+	public static final String REFERER_GROUP_ID = "refererGroupId";
 	public static final String DO_AS_GROUP_ID = "doAsGroupId";
 	public static final String DO_AS_USER_ID = "doAsUserId";
 	public static final String DO_AS_USER_LANGUAGE_ID = "doAsUserLanguageId";
@@ -28,6 +29,7 @@ public class LiferayConstants {
 	public static final String LIFECYCLE_RENDER_PHASE_ID = "0";
 	public static final String LIFECYCLE_RESOURCE_PHASE_ID = "2";
 	public static final String P_AUTH = "p_auth";
+	public static final String P_L_ID = "p_l_id";
 	public static final String P_P_AUTH = "p_p_auth";
 	public static final String P_P_CACHEABILITY = "p_p_cacheability";
 	public static final String P_P_COL_ID = "p_p_col_id";
