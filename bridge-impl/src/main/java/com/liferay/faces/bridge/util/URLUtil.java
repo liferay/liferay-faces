@@ -39,13 +39,19 @@ public class URLUtil {
 		Map<String, String[]> parameterMapValuesArray = new LinkedHashMap<String, String[]>();
 
 		if (url != null) {
-			int pos = url.indexOf("?");
+			int pos = url.indexOf(StringPool.QUESTION);
 
 			if (pos > 0) {
 				String queryString = url.substring(pos + 1);
 				queryString = queryString.replaceAll(StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
 
 				if ((queryString != null) && (queryString.length() > 0)) {
+
+					pos = queryString.indexOf(StringPool.POUND);
+
+					if (pos > 0) {
+						queryString = queryString.substring(0, pos);
+					}
 
 					String[] queryParameters = queryString.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
 

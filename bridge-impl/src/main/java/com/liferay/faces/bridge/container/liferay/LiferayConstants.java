@@ -28,6 +28,7 @@ public class LiferayConstants {
 	public static final String LIFECYCLE_RENDER_PHASE_ID = "0";
 	public static final String LIFECYCLE_RESOURCE_PHASE_ID = "2";
 	public static final String P_AUTH = "p_auth";
+	public static final String P_L_ID = "p_l_id";
 	public static final String P_P_AUTH = "p_p_auth";
 	public static final String P_P_CACHEABILITY = "p_p_cacheability";
 	public static final String P_P_COL_ID = "p_p_col_id";
@@ -41,6 +42,7 @@ public class LiferayConstants {
 	public static final String P_P_STATE = "p_p_state";
 	public static final String P_P_STATE_RCV = "p_p_state_rcv";
 	public static final String PACKAGE_NAMESPACE = "com.liferay";
+	public static final String REFERER_GROUP_ID = "refererGroupId";
 	public static final String REFERER_PLID = "refererPlid";
 	public static final String WAR_SEPARATOR = "_WAR_";
 }
