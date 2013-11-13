@@ -13,6 +13,7 @@
 		<phase-listener>com.liferay.faces.util.lifecycle.DebugPhaseListener</phase-listener>
 	</lifecycle>
 	<navigation-rule>
+		<from-view-id>/views/noCustomerSelected.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>ipc.customerSelected</from-outcome>
 			<to-view-id>/views/bookings.xhtml</to-view-id>
