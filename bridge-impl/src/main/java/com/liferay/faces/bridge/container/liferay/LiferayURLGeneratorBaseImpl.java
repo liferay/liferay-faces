@@ -77,6 +77,7 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 	private String responseNamespace;
 	private WindowState initialWindowState;
 	private List<URLParameter> wsrpParameters;
+	private String portletURLAnchor;
 
 	/**
 	 * Constructs a new instance.
@@ -145,6 +146,15 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			if (portalAuthToken != null) {
 
 				appendParameterToURL(firstParameter, LiferayConstants.P_AUTH, portalAuthToken, url);
+				firstParameter = false;
+			}
+
+			// Possibly add the p_l_id parameter.
+			String plid = parameterMap.get(LiferayConstants.P_L_ID);
+
+			if (plid != null) {
+
+				appendParameterToURL(firstParameter, LiferayConstants.P_L_ID, plid, url);
 				firstParameter = false;
 			}
 
@@ -306,6 +316,13 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 				appendParameterToURL(LiferayConstants.DO_AS_GROUP_ID, doAsGroupId, url);
 			}
 
+			// Possibly add the refererGroupId parameter.
+			String refererGroupId = parameterMap.get(LiferayConstants.REFERER_GROUP_ID);
+
+			if (refererGroupId != null) {
+				appendParameterToURL(LiferayConstants.REFERER_GROUP_ID, refererGroupId, url);
+			}
+
 			// Possibly add the refererPlid parameter.
 			String refererPlid = parameterMap.get(LiferayConstants.REFERER_PLID);
 
@@ -368,6 +385,11 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			}
 			else {
 				appendParameterToURL(LiferayConstants.P_P_RESOURCE_ID, urlResourceId, url);
+			}
+
+			// Possibly add a Portlet URL Anchor
+			if (portletURLAnchor != null) {
+				url.append(portletURLAnchor);
 			}
 
 			toStringValue = url.toString();
@@ -463,6 +485,12 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 				}
 			}
 		}
-	}
 
+		int pos = baseURL.indexOf(StringPool.POUND);
+
+		if (pos > 0) {
+			portletURLAnchor = baseURL.substring(pos);
+		}
+
+	}
 }
