@@ -186,33 +186,38 @@ sub do_inplace_edits {
 		`perl -pi -e 's/ENTITY copyrightYear "2000-..* "/ENTITY copyrightYear "2000-${year} "/' $file`;
 	}
     
-    #
+	#
 	# Otherwise, if the current file is named "faces-config.xml" then potentially fix the version number that
 	# will appear in the version attribute faces config tag and potentially fix the version number that will appear in
-    # the xsi:schemaLocation attribute URL of the faces config tag.
+	# the xsi:schemaLocation attribute URL of the faces config tag.
 	#
 	elsif ($file eq "faces-config.xml" and ($File::Find::name =~ /\/src/)) {
 		print "$File::Find::name\n";
 		`perl -pi -e 's/faces-config version=\"[0-9.]+\"/faces-config version=\"$facesVersion\"/' $file`;
 		`perl -pi -e 's/web-facesconfig[0-9_]+/web-facesconfig_$facesVersionURL/' $file`;
+		if ($facesMajor > 2 or ($facesMajor == 2  and $facesMinor > 1)) {
+			`perl -pi -e 's/java.sun.com/xmlns.jcp.org/g' $file`;
+		} else {
+			`perl -pi -e 's/xmlns.jcp.org/xmlns.jcp.org/g' $file`;
+		}
 	}
     
-    #
-    # Otherwise, if the current file is named with .tld extension, then potentially fix the version number that will
-    # appear in the tlib-version attribute tag.
-    #
-    elsif (($file =~ m/.*\.tld/) and ($File::Find::name =~ /\/src/)) {
+	#
+	# Otherwise, if the current file is named with .tld extension, then potentially fix the version number that will
+	# appear in the tlib-version attribute tag.
+	#
+	elsif (($file =~ m/.*\.tld/) and ($File::Find::name =~ /\/src/)) {
 		print "$File::Find::name\n";
 		`perl -pi -e 's/tlib-version>[0-9.]+/tlib-version>$liferayFacesVersionShort/' $file`;
 	}
     
-    #
-    # Otherwise, if the current file is a chapter or section in the docbook, then potentially fix the version number that will
-    # appear in the URL to the VDLDocs.
-    #
-    elsif ((($file =~ m/chapter\-.+\.xml/) or ($file =~ m/sect1\-.+\-uicomponent-tags\.xml/)) and ($File::Find::name =~ /\/src/)) {
+	#
+	# Otherwise, if the current file is a chapter or section in the docbook, then potentially fix the version number that will
+	# appear in the URL to the VDLDocs.
+	#
+	elsif ((($file =~ m/chapter\-.+\.xml/) or ($file =~ m/sect1\-.+\-uicomponent-tags\.xml/)) and ($File::Find::name =~ /\/src/)) {
 		print "$File::Find::name\n";
 		`perl -pi -e 's/\\/faces\\/[0-9.]+\\/vdldoc\\//\\/faces\\/$liferayFacesVersionShortMajor1DotMajor2\\/vdldoc\\//g' $file`;
 	}
-
 }
+
