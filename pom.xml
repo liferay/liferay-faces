@@ -827,7 +827,7 @@
 			<dependency>
 				<groupId>com.liferay.cdi</groupId>
 				<artifactId>cdi-portlet-bridge-shared</artifactId>
-				<version>6.2.0.1</version>
+				<version>6.2.0.2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.liferay.portal</groupId>
