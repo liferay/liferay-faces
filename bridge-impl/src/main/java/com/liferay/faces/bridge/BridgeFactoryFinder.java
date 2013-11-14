@@ -78,7 +78,7 @@ public abstract class BridgeFactoryFinder {
 		if (staticInstance == null) {
 
 			if (staticPortletConfig == null) {
-				throw new BridgeException("Must first call setPortletContext(PortletContext)");
+				throw new BridgeException("Must first call setPortletConfig(PortletConfig)");
 			}
 			else {
 
