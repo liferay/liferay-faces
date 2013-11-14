@@ -43,6 +43,10 @@ public class TextBoxListRenderer extends Renderer {
 		responseWriter.writeAttribute(StringConstants.ATTRIBUTE_ID, id, StringConstants.ATTRIBUTE_ID);
 
 		StringBuilder outerDivClassNames = new StringBuilder();
+
+//       aui-widget not found in 6.2
+//       aui-component found in 6.2 only in javascript TODO
+//       aui-textboxlist not found in 6.2
 		outerDivClassNames.append("aui-widget aui-component aui-textboxlist ");
 
 		String cssClass = (String) attributes.get(StringConstants.ATTRIBUTE_CSS_CLASS);
@@ -72,6 +76,7 @@ public class TextBoxListRenderer extends Renderer {
 
 			if (autoComplete.equals(StringConstants.BOOLEAN_TRUE)) {
 				outerDivClassNames.append(StringConstants.CHAR_SPACE);
+//               aui-autocomplete not found in 6.2
 				outerDivClassNames.append("aui-autocomplete");
 			}
 
@@ -90,7 +95,10 @@ public class TextBoxListRenderer extends Renderer {
 
 			if (tagSelector.equals(StringConstants.BOOLEAN_TRUE)) {
 				outerDivClassNames.append(StringConstants.CHAR_SPACE);
-				outerDivClassNames.append("aui-tagselector aui-tagselector-focused");
+
+				// tagselector tagselector-focused ARE in 6.2 (these classes were aui-tagselector
+				// aui-tagselector-focused) TODO
+				outerDivClassNames.append("tagselector tagselector-focused");
 			}
 		}
 
@@ -98,7 +106,9 @@ public class TextBoxListRenderer extends Renderer {
 		responseWriter.startElement(StringConstants.ELEMENT_DIV, uiComponent);
 
 		StringBuilder innerDivClassNames = new StringBuilder();
-		innerDivClassNames.append("lfr-tags-selector-content  aui-textboxlist-content");
+
+		// aui_deprecated.css: textboxlist-content
+		innerDivClassNames.append("lfr-tags-selector-content textboxlist-content");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
 			innerDivClassNames.append(StringConstants.CHAR_SPACE);
@@ -114,7 +124,9 @@ public class TextBoxListRenderer extends Renderer {
 
 			if (autoComplete.equals(StringConstants.BOOLEAN_TRUE)) {
 				innerDivClassNames.append(StringConstants.CHAR_SPACE);
-				innerDivClassNames.append("aui-autocomplete-content");
+
+				// aui_deprecated.css: autocomplete-content
+				innerDivClassNames.append("autocomplete-content");
 			}
 		}
 
@@ -122,6 +134,8 @@ public class TextBoxListRenderer extends Renderer {
 
 			if (tagSelector.equals(StringConstants.BOOLEAN_TRUE)) {
 				innerDivClassNames.append(StringConstants.CHAR_SPACE);
+
+				// tagselector-content IS in 6.2 (these classes were tagselector-content) TODO
 				innerDivClassNames.append("aui-tagselector-content");
 			}
 		}
@@ -130,7 +144,9 @@ public class TextBoxListRenderer extends Renderer {
 		responseWriter.startElement(StringConstants.ELEMENT_UL, uiComponent);
 
 		responseWriter.writeAttribute(StringConstants.ATTRIBUTE_CLASS,
-			"aui-helper-clearfix aui-textboxlistentry-holder", null);
+
+			// aui_deprecated.css: helper-clearfix textboxlistentry-holder
+			"helper-clearfix textboxlistentry-holder", null);
 
 	}
 
