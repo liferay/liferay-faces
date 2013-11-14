@@ -14,47 +14,51 @@
 package com.liferay.faces.alloy.renderkit;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
+import com.liferay.faces.alloy.component.AUIRow;
 import com.liferay.faces.util.lang.StringPool;
 
 
 /**
  * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public class ListRenderer extends Renderer {
+public class RowRenderer extends Renderer {
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
 		super.encodeBegin(facesContext, uiComponent);
 
-		Map<String, Object> attributes = uiComponent.getAttributes();
+		AUIRow auiRow = (AUIRow) uiComponent;
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-
-		responseWriter.startElement("ul", uiComponent);
+		responseWriter.startElement("div", uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute("id", id, "id");
+		responseWriter.writeAttribute("id", id, null);
 
 		StringBuilder classNames = new StringBuilder();
 
-		// aui-list not found in 6.2
-		classNames.append("aui-list");
+		classNames.append("row");
 
-		String cssClass = (String) attributes.get("cssClass");
+		if (auiRow.isFluid()) {
+			classNames.append("-fluid");
+		}
+
+		String cssClass = auiRow.getCssClass();
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
 			classNames.append(StringPool.SPACE);
 			classNames.append(cssClass);
 		}
 
-		String styleClass = (String) attributes.get("styleClass");
+		String styleClass = auiRow.getStyleClass();
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
 			classNames.append(StringPool.SPACE);
@@ -66,10 +70,10 @@ public class ListRenderer extends Renderer {
 
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement("ul");
+		responseWriter.endElement("div");
 	}
-
 }
