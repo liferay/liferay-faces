@@ -13,24 +13,23 @@
  */
 package com.liferay.faces.test;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.logging.Level;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.graphene.enricher.findby.FindBy;
-import org.jboss.arquillian.graphene.javascript.JSInterfaceFactory;
+import org.jboss.arquillian.drone.api.annotation.Drone;
+import org.jboss.arquillian.graphene.javascript.JavaScript;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 
 import com.liferay.faces.test.util.TesterBase;
 
@@ -100,11 +99,17 @@ public class FACES1427PortletTest extends TesterBase {
 	private WebElement comments1Output;
 	@FindBy(xpath = comments2OutputXpath)
 	private WebElement comments2Output;
+	
+	@JavaScript
+	SelectText selectText;
+	
+	@Drone
+	WebDriver browser;
 
 	@Before
 	public void beforeEachTest() {
 
-		// Aparently this is necessary _sometimes_ for this test to pass ... not sure why.
+		// Apparently this is necessary _sometimes_ for this test to pass ... not sure why.
 		browser.manage().deleteAllCookies();
 		logger.log(Level.INFO, "browser.manage().deleteAllCookies() ...");
 
@@ -122,7 +127,7 @@ public class FACES1427PortletTest extends TesterBase {
 		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
 		Thread.sleep(250);
 		
-		if(isThere(errorMessageXpath) && errorMessage.isDisplayed()) {
+		if(isThere(browser, errorMessageXpath) && errorMessage.isDisplayed()) {
 			return;
 		}
 
@@ -131,10 +136,10 @@ public class FACES1427PortletTest extends TesterBase {
 		logger.log(Level.INFO, "fileEntryComponent.isDisplayed() = " + fileEntryComponent.isDisplayed());
 		logger.log(Level.INFO, "addAttachment.isDisplayed() = " + addAttachment.isDisplayed());
 
-		logger.log(Level.INFO, "isThere(attachmentXpath) = " + isThere(attachmentXpath));
+		logger.log(Level.INFO, "isThere(browser, attachmentXpath) = " + isThere(browser, attachmentXpath));
 
 		logger.log(Level.INFO, "textarea1.isDisplayed() = " + textarea1.isDisplayed());
-		logger.log(Level.INFO, "isThere(bold1Xpath) = " + isThere(bold1Xpath));
+		logger.log(Level.INFO, "isThere(browser, bold1Xpath) = " + isThere(browser, bold1Xpath));
 		logger.log(Level.INFO, "bold1.isDisplayed() = " + bold1.isDisplayed());
 		assertTrue("the first editor should be rendered by now, but it is not displayed", textarea1.isDisplayed());
 
@@ -159,7 +164,7 @@ public class FACES1427PortletTest extends TesterBase {
 	@InSequence(1100)
 	public void steps1and2() throws Exception {
 		
-		if(isThere(errorMessageXpath) && errorMessage.isDisplayed()) {
+		if(isThere(browser, errorMessageXpath) && errorMessage.isDisplayed()) {
 			return;
 		}
 
@@ -172,7 +177,7 @@ public class FACES1427PortletTest extends TesterBase {
 		logger.log(Level.INFO, "attachment.getText() = " + attachment.getText());
 
 		assertTrue("attachment should be listed now after clicking 'Add Attachment', but it is not there",
-			isThere(attachmentXpath));
+			isThere(browser, attachmentXpath));
 
 	}
 
@@ -187,17 +192,17 @@ public class FACES1427PortletTest extends TesterBase {
 	@InSequence(1200)
 	public void steps34567() throws Exception {
 		
-		if(isThere(errorMessageXpath) && errorMessage.isDisplayed()) {
+		if(isThere(browser, errorMessageXpath) && errorMessage.isDisplayed()) {
 			return;
 		}
 
 		logger.log(Level.INFO, "textarea1.getAttribute('value') = " + textarea1.getAttribute("value"));
 
-		logger.log(Level.INFO, "isThere(iframe1Xpath) = " + isThere(iframe1Xpath));
+		logger.log(Level.INFO, "isThere(browser, iframe1Xpath) = " + isThere(browser, iframe1Xpath));
 		Thread.sleep(250);
 		submit.click();
 		Thread.sleep(250);
-		logger.log(Level.INFO, "isThere(iframe1Xpath) = " + isThere(iframe1Xpath));
+		logger.log(Level.INFO, "isThere(browser, iframe1Xpath) = " + isThere(browser, iframe1Xpath));
 
 		logger.log(Level.INFO, "comments1Output.getText() = '" + comments1Output.getText() + "'");
 		logger.log(Level.INFO, "comments2Output.getText() = '" + comments2Output.getText() + "'");
@@ -220,7 +225,7 @@ public class FACES1427PortletTest extends TesterBase {
 	@InSequence(1300)
 	public void steps89012() throws Exception {
 		
-		if(isThere(errorMessageXpath) && errorMessage.isDisplayed()) {
+		if(isThere(browser, errorMessageXpath) && errorMessage.isDisplayed()) {
 			return;
 		}
 
@@ -280,8 +285,6 @@ public class FACES1427PortletTest extends TesterBase {
 		// select the word 'subsequent' ... easier said than done
 		logger.log(Level.INFO, "textarea1.getAttribute('id') = '" + textarea1.getAttribute("id") + "'");
 
-		SelectText selectText = JSInterfaceFactory.create(SelectText.class);
-
 		logger.log(Level.INFO,
 			"before selecting ... selectText.getSelection(id) = " +
 			selectText.getSelection(textarea1.getAttribute("id")));
@@ -296,7 +299,7 @@ public class FACES1427PortletTest extends TesterBase {
 			selectText.getSelection(textarea1.getAttribute("id")));
 		Thread.sleep(500);
 
-		logger.log(Level.INFO, "isThere(bold1Xpath) = " + isThere(bold1Xpath));
+		logger.log(Level.INFO, "isThere(browser, bold1Xpath) = " + isThere(browser, bold1Xpath));
 		logger.log(Level.INFO, "bold1.isDisplayed() = " + bold1.isDisplayed());
 		logger.log(Level.INFO, "bold1.getAttribute('src') = " + bold1.getAttribute("src"));
 		logger.log(Level.INFO, "bold1.getLocation() = " + bold1.getLocation());
@@ -375,7 +378,7 @@ public class FACES1427PortletTest extends TesterBase {
 		Thread.sleep(250);
 
 		// log some elements
-		logger.log(Level.INFO, "isThere(iframe1Xpath) = " + isThere(iframe1Xpath));
+		logger.log(Level.INFO, "isThere(browser, iframe1Xpath) = " + isThere(browser, iframe1Xpath));
 		logger.log(Level.INFO, "comments1Output.getText() = " + comments1Output.getText());
 		logger.log(Level.INFO, "comments2Output.getText() = " + comments2Output.getText());
 

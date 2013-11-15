@@ -16,8 +16,9 @@ package com.liferay.faces.test.util;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.jboss.arquillian.drone.api.annotation.Drone;
-import org.jboss.arquillian.graphene.enricher.findby.FindBy;
+// import org.jboss.arquillian.drone.api.annotation.Drone;
+// import org.jboss.arquillian.graphene.enricher.findby.FindBy;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -92,25 +93,25 @@ public class TesterBase {
 	
 	public static final String portal = System.getProperty("integration.portal", "liferay");
 	public static final String baseUrl = System.getProperty("integration.url", "http://localhost:8080");
-	public static final String signInContext = System.getProperty("integration.signin", "/web/guest/welcome");
+	public static final String signInContext = System.getProperty("integration.signin", "/web/guest/home");
 	public static final String webContext = System.getProperty("integration.context", "/web/bridge-demos/");
 	protected static final String signInUrl = baseUrl + signInContext;
-
-	@Drone
-	public WebDriver browser;
 	
-	public void signIn() throws Exception {
+	// @Drone
+	// public WebDriver browser;
+	
+	public void signIn(WebDriver browser) throws Exception {
 		logger.log(Level.INFO, "portal = " + portal);
 		if ("liferay".equals(portal)) {
-			signIn(emailField, passwordField, signInButton, signedInText, "test@liferay.com", "test");
+			signIn(browser, emailField, passwordField, signInButton, signedInText, "test@liferay.com", "test");
 		} else if ("pluto".equals(portal)) {
-			signIn(userName, password, loginButton, logout, "pluto", "pluto");
+			signIn(browser, userName, password, loginButton, logout, "pluto", "pluto");
 		} else {
 			logger.log(Level.SEVERE, "not a supported portal for this tester base: portal = " + portal + "");
 		}
 	}
 
-	public void signIn(WebElement user, WebElement pass, WebElement button, WebElement text, String u, String p) throws Exception {
+	public void signIn(WebDriver browser, WebElement user, WebElement pass, WebElement button, WebElement text, String u, String p) throws Exception {
 		
 		java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
 
@@ -128,16 +129,16 @@ public class TesterBase {
 
 	}
 	
-	public void selectEditMode(String portal) {
+	public void selectEditMode(WebDriver browser, String portal) {
 		logger.log(Level.INFO, "portal = " + portal);
 		if (portal.equals("liferay")) {
 			selectEditModeInLiferay();
 		} else if ("pluto".equals(portal)) {
-			selectEditModeInPluto();
+			selectEditModeInPluto(browser);
 		}
 	}
 	
-	public void selectEditModeInPluto() {
+	public void selectEditModeInPluto(WebDriver browser) {
 		Select select = new Select(browser.findElement(By.xpath(plutoMenuButtonXpath)));
 		// select.deselectAll();  // You may only deselect all options of a multi-select
 		select.selectByVisibleText("EDIT");
@@ -181,12 +182,12 @@ public class TesterBase {
 		return path + JERSEY_FILE;
 	}
 
-	public void waitForElement(String xpath) {
+	public void waitForElement(WebDriver browser, String xpath) {
 		WebDriverWait wait = new WebDriverWait(browser, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.ByXPath.xpath(xpath)));
 	}
 
-	public boolean isThere(String xpath) {
+	public boolean isThere(WebDriver browser, String xpath) {
 		boolean isThere = false;
 		int count = 0;
 		count = browser.findElements(By.xpath(xpath)).size();
