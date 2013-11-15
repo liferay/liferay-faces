@@ -7,8 +7,8 @@
 	<h:form id="f1" styleClass="aui-form">
 		<aui-cc:messages globalOnly="true" layout="table" />
 		<h:panelGroup layout="block" rendered="#{usersViewBean.formRendered}">
-			<aui:layout>
-				<aui:column first="true" columnWidth="15">
+			<aui:row>
+				<aui:col first="true" width="15">
 					<aui:fieldset label="#{i18n['personal']}">
 						<aui:field id="firstNameField" label="#{i18n['first-name']}">
 							<p:inputText id="firstName" required="true" value="#{usersModelBean.selectedUser.firstName}" />
@@ -34,8 +34,8 @@
 							<h:message for="jobTitle" />
 						</aui:field>
 					</aui:fieldset>
-				</aui:column>
-				<aui:column columnWidth="15">
+				</aui:col>
+				<aui:col width="15">
 					<aui:fieldset label="#{i18n['administration']}">
 						<aui-cc:select inlineMessage="true" label="#{i18n['status']}" required="true"
 							value="#{usersModelBean.selectedUser.status}">
@@ -43,8 +43,8 @@
 							<f:converter for="selectOneMenu" converterId="javax.faces.Integer" />
 						</aui-cc:select>
 					</aui:fieldset>
-				</aui:column>
-				<aui:column>
+				</aui:col>
+				<aui:col width="20">
 					<aui:fieldset label="#{i18n['portrait']}">
 						<aui:field>
 							<h:graphicImage id="portrait" value="#{usersModelBean.selectedUserPortraitURL}" style="width:100px;" />
@@ -52,19 +52,19 @@
 								update="portrait" fileUploadListener="#{usersBackingBean.handleFileUpload}" />
 						</aui:field>
 					</aui:fieldset>
-				</aui:column>
-				<aui:button-row>
-					<p:commandButton id="pushButtonSubmit" actionListener="#{usersBackingBean.save}" value="#{i18n['submit']}"
-						update=":f1" />
-					<p:commandButton id="pushButtonCancel" actionListener="#{usersBackingBean.cancel}" immediate="true" update=":f1"
-						value="#{i18n['cancel']}" />
-				</aui:button-row>
-				<hr />
-			</aui:layout>
+				</aui:col>
+			</aui:row>
+			<aui:button-row>
+				<p:commandButton id="pushButtonSubmit" actionListener="#{usersBackingBean.save}" value="#{i18n['submit']}"
+					update=":f1" />
+				<p:commandButton id="pushButtonCancel" actionListener="#{usersBackingBean.cancel}" immediate="true" update=":f1"
+					value="#{i18n['cancel']}" />
+			</aui:button-row>
+			<hr />
 		</h:panelGroup>
 		<h:panelGroup layout="block" rendered="#{!usersViewBean.formRendered}">
-			<aui:layout>
-				<aui:column styleClass="aui-w100 pfusers">
+			<aui:row>
+				<aui:col styleClass="aui-w100 pfusers">
 					<div class="separator" />
 					<p:dataTable id="users" lazy="true" paginator="true" paginatorPosition="top" rowKey="#{user.userId}"
 						rows="#{usersModelBean.dataModel.pageSize}" selectionMode="single" selection="#{usersModelBean.selectedUser}"
@@ -96,8 +96,8 @@
 						</p:column>
 					</p:dataTable>
 					<liferay-ui:info message="there-are-no-results" rendered="#{usersModelBean.dataModel.rowCount == 0}" />
-				</aui:column>
-			</aui:layout>
+				</aui:col>
+			</aui:row>
 		</h:panelGroup>
 	</h:form>
 

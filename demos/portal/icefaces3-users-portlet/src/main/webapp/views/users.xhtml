@@ -8,8 +8,8 @@
 	<h:form id="f1" styleClass="aui-form">
 		<aui-cc:messages globalOnly="true" layout="table" />
 		<h:panelGroup layout="block" rendered="#{usersViewBean.formRendered}">
-			<aui:layout>
-				<aui:column first="true" columnWidth="15">
+			<aui:row>
+				<aui:col first="true" width="15">
 					<aui:fieldset label="#{i18n['personal']}">
 						<aui:field id="firstNameField" label="#{i18n['first-name']}">
 							<ace:textEntry id="firstName" required="true" requiredIndicator="*"
@@ -38,8 +38,8 @@
 							<h:message for="jobTitle" />
 						</aui:field>
 					</aui:fieldset>
-				</aui:column>
-				<aui:column columnWidth="15">
+				</aui:col>
+				<aui:col width="15">
 					<aui:fieldset label="#{i18n['administration']}">
 						<aui-cc:select inlineMessage="true" label="#{i18n['status']}" required="true"
 							value="#{usersModelBean.selectedUser.status}">
@@ -47,8 +47,8 @@
 							<f:converter for="selectOneMenu" converterId="javax.faces.Integer" />
 						</aui-cc:select>
 					</aui:fieldset>
-				</aui:column>
-				<aui:column>
+				</aui:col>
+				<aui:col width="20">
 					<aui:fieldset label="#{i18n['portrait']}">
 						<aui:field>
 							<h:graphicImage value="#{usersModelBean.selectedUserPortraitURL}" style="width:100px;" />
@@ -57,18 +57,18 @@
 							<h:commandButton immediate="true" value="#{i18n['upload-image']}" />
 						</aui:field>
 					</aui:fieldset>
-				</aui:column>
-				<aui:button-row>
-					<ace:pushButton id="pushButtonSubmit" actionListener="#{usersBackingBean.save}" value="#{i18n['submit']}" />
-					<ace:pushButton id="pushButtonCancel" actionListener="#{usersBackingBean.cancel}" immediate="true"
-						value="#{i18n['cancel']}" />
-				</aui:button-row>
-				<hr />
-			</aui:layout>
+				</aui:col>
+			</aui:row>
+			<aui:button-row>
+				<ace:pushButton id="pushButtonSubmit" actionListener="#{usersBackingBean.save}" value="#{i18n['submit']}" />
+				<ace:pushButton id="pushButtonCancel" actionListener="#{usersBackingBean.cancel}" immediate="true"
+					value="#{i18n['cancel']}" />
+			</aui:button-row>
+			<hr />
 		</h:panelGroup>
 		<h:panelGroup layout="block" rendered="#{!usersViewBean.formRendered}">
-			<aui:layout>
-				<aui:column styleClass="aui-w100 pfusers">
+			<aui:row>
+				<aui:col styleClass="aui-w100 pfusers">
 					<div class="separator" />
 					<ace:dataTable id="users" doubleClickSelect="true" lazy="true" paginator="true" paginatorPosition="top"
 						rows="#{usersModelBean.dataModel.rowsPerPage}" rowSelectListener="#{usersBackingBean.selectUser}"
@@ -99,8 +99,8 @@
 						</ace:column>
 					</ace:dataTable>
 					<liferay-ui:info message="there-are-no-results" rendered="#{usersModelBean.dataModel.rowCount == 0}" />
-				</aui:column>
-			</aui:layout>
+				</aui:col>
+			</aui:row>
 		</h:panelGroup>
 	</h:form>
 

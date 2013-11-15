@@ -6,8 +6,8 @@
 	xmlns:icecore="http://www.icefaces.org/icefaces/core">
 
 	<h:messages globalOnly="true" layout="table" />
-	<aui:layout>
-		<aui:column styleClass="aui-w100">
+	<aui:row>
+		<aui:col styleClass="aui-w100">
 			<ice:panelGroup>
 				<ice:outputConnectionStatus style="float: right;" />
 				<icecompat-cc:iceInfoDataPaginator for="customers" />
@@ -26,8 +26,8 @@
 						<ice:selectBooleanCheckbox value="#{customersModelBean.dataModel.rowMarks[customer]}" />
 					</ice:column>
 					<ice:column>
-						<ice:commandButton actionListener="#{customersBackingBean.select}"
-							image="#{resource['example:button-edit.png']}" value="#{customer}" />
+						<ice:commandButton actionListener="#{customersBackingBean.select}" image="#{resource['example:button-edit.png']}"
+							value="#{customer}" />
 					</ice:column>
 					<ice:column>
 						<f:facet name="header">
@@ -61,7 +61,7 @@
 				</ice:dataTable>
 				<ice:outputText value="there-are-no-results" rendered="#{customersModelBean.dataModel.rowCount == 0}" />
 			</ice:panelGroup>
-		</aui:column>
-	</aui:layout>
+		</aui:col>
+	</aui:row>
 
 </ui:composition>
