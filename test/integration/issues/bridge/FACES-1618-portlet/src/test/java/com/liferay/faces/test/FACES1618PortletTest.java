@@ -19,12 +19,14 @@ import java.util.HashMap;
 import java.util.logging.Level;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.graphene.enricher.findby.FindBy;
+import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import com.liferay.faces.test.util.TesterBase;
 
@@ -60,6 +62,9 @@ public class FACES1618PortletTest extends TesterBase {
 	protected StringBuilder headResourceIds;
 	protected String headResourceIdsString;
 	protected static HashMap<String, String> headResourceIdsMap = new HashMap<String, String>();
+	
+	@Drone
+	WebDriver browser;
 
 	@Test
 	@RunAsClient
