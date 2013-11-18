@@ -104,7 +104,7 @@
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces3.version>3.3.0</icefaces3.version>
 		<jstl.version>1.2</jstl.version>
-		<liferay.version>6.2.0-SNAPSHOT</liferay.version>
+		<liferay.version>6.2.0-ga1</liferay.version>
 		<liferay.app.server.deploy.dir>${liferay.app.server.dir}/webapps</liferay.app.server.deploy.dir>
 		<liferay.app.server.dir>${liferay.home}/tomcat-${liferay.tomcat.version}</liferay.app.server.dir>
 		<liferay.app.server.lib.global.dir>${liferay.app.server.dir}/lib/ext</liferay.app.server.lib.global.dir>
@@ -119,7 +119,7 @@
 		<liferay.jboss.version>7.1.1</liferay.jboss.version>
 		<liferay.jetty.version>8.1.10</liferay.jetty.version>
 		<liferay.jonas.version>5.2.3</liferay.jonas.version>
-		<liferay.maven.plugin.version>6.2.0-B2</liferay.maven.plugin.version>
+		<liferay.maven.plugin.version>${liferay.version}</liferay.maven.plugin.version>
 		<liferay.portal>liferay-portal-${liferay.deploy.version}</liferay.portal>
 		<liferay.resin.version>4.0.33</liferay.resin.version>
 		<liferay.tomcat.version>7.0.42</liferay.tomcat.version>
