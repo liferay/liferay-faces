@@ -23,12 +23,12 @@
 	<render-kit>
 		<renderer>
 			<component-family>com.liferay.faces.portal.PermissionsURL</component-family>
-			<renderer-type>com.liferay.faces.portal.PermissionsURLRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portal.renderkit.PermissionsURLRenderer</renderer-type>
 			<renderer-class>com.liferay.faces.portal.renderkit.PermissionsURLRenderer</renderer-class>
 		</renderer>
 		<renderer>
 			<component-family>com.liferay.faces.portal.InputEditorInternal</component-family>
-			<renderer-type>com.liferay.faces.portal.InputEditorInternalRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portal.renderkit.InputEditorInternalRenderer</renderer-type>
 			<renderer-class>com.liferay.faces.portal.renderkit.InputEditorInternalRenderer</renderer-class>
 		</renderer>
 	</render-kit>

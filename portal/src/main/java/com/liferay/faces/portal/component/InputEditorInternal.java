@@ -32,7 +32,7 @@ public class InputEditorInternal extends UIOutput implements UICleanup {
 	// Private Constants
 	private static final String COMPONENT_TYPE = "com.liferay.faces.portal.InputEditorInternal";
 	private static final String PREVIOUSLY_RENDERED = "previouslyRendered";
-	private static final String RENDERER_TYPE = "com.liferay.faces.portal.InputEditorInternalRenderer";
+	private static final String RENDERER_TYPE = "com.liferay.faces.portal.renderkit.InputEditorInternalRenderer";
 
 	public InputEditorInternal() {
 		super();

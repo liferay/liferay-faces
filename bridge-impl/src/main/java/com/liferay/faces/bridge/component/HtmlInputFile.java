@@ -32,7 +32,7 @@ public class HtmlInputFile extends HtmlInputFileCompat {
 
 	public HtmlInputFile() {
 		super();
-		setRendererType("javax.faces.InputFile");
+		setRendererType("com.liferay.faces.bridge.renderkit.bridge.InputFileRenderer");
 	}
 
 	@Override
