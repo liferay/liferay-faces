@@ -15,6 +15,7 @@
 		<tag-name>button-row</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIButtonRow</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.ButtonRowRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
@@ -48,6 +49,7 @@
 		<tag-name>col</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUICol</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.ColRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description>The width of the column as a percent. This value selects the span number to be rendered in the CSS class via the formula &lt;code&gt;spanNumber = (width/100)*12 (rounded to the nearest whole number)&lt;/code&gt;. If both the width and span attributes are present, the width attribute determines the value of the span number.</description>
@@ -115,6 +117,7 @@
 		<tag-name>column</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIColumn</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.ColumnRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description>The width of the column.</description>
@@ -164,6 +167,7 @@
 		<tag-name>dialog</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIDialog</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.DialogRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description>The body of the dialog box.</description>
@@ -262,6 +266,7 @@
 		<tag-name>field</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIField</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.FieldRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
@@ -311,6 +316,7 @@
 		<tag-name>fieldset</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIFieldSet</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.FieldSetRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description>Boolean flag indicating whether or not this is a column. The default value is &lt;code&gt;false&lt;/code&gt;.</description>
@@ -354,6 +360,7 @@
 		<tag-name>form</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIForm</component-type>
+			<!-- no renderer ? -->
 		</component>
 		<attribute>
 			<description>The identifier of the component.</description>
@@ -390,6 +397,7 @@
 		<tag-name>layout</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUILayout</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.LayoutRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
@@ -421,6 +429,7 @@
 		<tag-name>list</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIList</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.ListRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
@@ -452,6 +461,7 @@
 		<tag-name>list-item</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIListItem</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.ListItemRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
@@ -483,6 +493,7 @@
 		<tag-name>row</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIRow</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.RowRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
@@ -520,6 +531,7 @@
 		<tag-name>text-box-list</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUITextBoxList</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.TextBoxListRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
@@ -551,6 +563,7 @@
 		<tag-name>text-box-list-item</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUITextBoxListItem</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.TextBoxListItemRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description>The name of a CSS class that is to be rendered within the class attribute (same as styleClass).</description>
@@ -582,6 +595,7 @@
 		<tag-name>script</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIScript</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.ScriptRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description>The identifier of the component.</description>
