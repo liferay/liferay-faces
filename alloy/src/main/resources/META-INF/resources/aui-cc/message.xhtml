@@ -2,14 +2,17 @@
 <ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:cc="http://java.sun.com/jsf/composite"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vdldoc="http://vdldoc.org/vdldoc"
+	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd http://vdldoc.org/vdldoc https://vdldoc.googlecode.com/hg/src/org/omnifaces/vdldoc/resources/vdldoc.xsd">
 
 	<cc:interface shortDescription="The &lt;/code&gt;aui-cc:message&lt;/code&gt; encapsulates a standard JSF h:message tag with JSR 286 (Portlet 2.0) CSS class names.">
 		<cc:attribute name="for" required="true" shortDescription="The id of the component for which this message is associated." />
 		<cc:attribute name="style" required="false" shortDescription="This is an HTML pass-thru type of attribute." />
 		<cc:attribute name="styleClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute." />
 		<cc:attribute name="value" required="false" shortDescription="The current value of this component." />
+		<cc:extension>
+			<vdldoc:deprecated value="true" shortDescription="Please use h:message instead." />
+		</cc:extension>
 	</cc:interface>
 
 	<cc:implementation>
