@@ -147,13 +147,6 @@ public class BridgeResourceURLImpl extends BridgeURLBaseImpl implements BridgeRe
 			}
 		}
 
-		// Otherwise, if the URL is external, then return an encoded BaseURL string representation of the URL.
-		else if (isExternal()) {
-
-			// TCK TestPage130: encodeResourceURLForeignExternalURLBackLinkTest
-			baseURL = new BaseURLEncodedExternalStringImpl(url, getParameterMap(), bridgeContext);
-		}
-
 		// Otherwise, if the URL is identified by the ResourceHandler as a JSF2 resource URL, then
 		else if ((url != null) && (url.indexOf(ResourceConstants.JAVAX_FACES_RESOURCE) >= 0)) {
 
@@ -168,6 +161,13 @@ public class BridgeResourceURLImpl extends BridgeURLBaseImpl implements BridgeRe
 			else {
 				baseURL = portletContainer.createResourceURL(url);
 			}
+		}
+
+		// Otherwise, if the URL is external, then return an encoded BaseURL string representation of the URL.
+		else if (isExternal()) {
+
+			// TCK TestPage130: encodeResourceURLForeignExternalURLBackLinkTest
+			baseURL = new BaseURLEncodedExternalStringImpl(url, getParameterMap(), bridgeContext);
 		}
 
 		// Otherwise, if the URL is relative, in that it starts with "../", then return a BaseURL string representation
