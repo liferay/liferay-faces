@@ -15,6 +15,7 @@
 		<tag-name>input-editor</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.InputEditorInternal</component-type>
+			<renderer-type>com.liferay.faces.portal.renderkit.InputEditorInternalRenderer</renderer-type>
 		</component>
 	</tag>
 </facelet-taglib>
