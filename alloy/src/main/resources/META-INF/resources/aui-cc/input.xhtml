@@ -2,7 +2,7 @@
 <ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:cc="http://java.sun.com/jsf/composite"
 	xmlns:aui="http://liferay.com/faces/aui" xmlns:aui-cc="http://liferay.com/faces/aui-cc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vdldoc="http://vdldoc.org/vdldoc"
 	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
 
 	<cc:interface shortDescription="The &lt;code&gt;aui-cc:input&lt;/code&gt; renders either an input (type=text), textarea, input (type=&quot;secret&quot;), input (type=&quot;checkbox&quot;), or input (type=&quot;radio&quot;) with appropriate Alloy UI CSS class names, according to the value of the type attribute.">
@@ -24,6 +24,9 @@
 		<cc:attribute name="validatorMessage" required="false" shortDescription="This attribute is a pass-thru to the underlying JSF component's validatorMessage attribute, which replaces the message which is output by the validator." />
 		<cc:attribute name="value" required="true" shortDescription="The current value of this component." />
 		<cc:editableValueHolder name="inputText" targets="t1"/>
+		<cc:extension>
+			<vdldoc:deprecated value="true" shortDescription="Please use h:inputText, h:inputTextarea, h:inputSecret, or h:selectBooleanCheckbox instead." />
+		</cc:extension>
 	</cc:interface>
 
 	<cc:implementation>
