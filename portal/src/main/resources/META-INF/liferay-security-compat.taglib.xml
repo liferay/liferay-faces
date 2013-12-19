@@ -6,7 +6,7 @@
 		<tag-name>permissionsURL</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.PermissionsURL</component-type>
-			<renderer-type>com.liferay.faces.portal.PermissionsURLRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portal.renderkit.PermissionsURLRenderer</renderer-type>
 		</component>
 	</tag>
 </facelet-taglib>

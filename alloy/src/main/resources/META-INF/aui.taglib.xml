@@ -11,18 +11,21 @@
 		<tag-name>button-row</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIButtonRow</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.ButtonRowRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>column</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIColumn</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.ColumnRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>dialog</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIDialog</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.DialogRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
@@ -35,54 +38,63 @@
 		<tag-name>field</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIField</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.FieldRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>fieldset</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIFieldSet</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.FieldSetRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>form</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIForm</component-type>
+			<renderer-type>javax.faces.Form</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>layout</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUILayout</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.LayoutRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>list</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIList</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.ListRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>list-item</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIListItem</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.ListItemRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>text-box-list</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUITextBoxList</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.TextBoxListRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>text-box-list-item</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUITextBoxListItem</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.TextBoxListItemRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>script</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIScript</component-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.ScriptRenderer</renderer-type>
 		</component>
 	</tag>
 </facelet-taglib>
