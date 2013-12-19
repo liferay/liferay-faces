@@ -124,7 +124,7 @@
 		<renderer>
 			<description>HtmlInputFile Renderer</description>
 			<component-family>javax.faces.Input</component-family>
-			<renderer-type>javax.faces.InputFile</renderer-type>
+			<renderer-type>com.liferay.faces.bridge.renderkit.bridge.InputFileRenderer</renderer-type>
 			<renderer-class>com.liferay.faces.bridge.renderkit.bridge.InputFileRenderer</renderer-class>
 		</renderer>
 	</render-kit>
