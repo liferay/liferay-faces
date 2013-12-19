@@ -51,16 +51,6 @@
 			<organization>Liferay, Inc.</organization>
 			<organizationUrl>http://www.liferay.com</organizationUrl>
 		</developer>
-		<developer>
-			<name>Atul Patel</name>
-			<organization>Triton Services, Inc.</organization>
-			<organizationUrl>http://www.tritonsvc.com</organizationUrl>
-		</developer>
-		<developer>
-			<name>Robin Wyss</name>
-			<organization>Mimacom AG</organization>
-			<organizationUrl>http://www.mimacom.com</organizationUrl>
-		</developer>
 	</developers>
 
 	<scm>
