@@ -15,7 +15,7 @@ package com.liferay.faces.test;
 
 import java.util.logging.Logger;
 
-import org.jboss.arquillian.graphene.enricher.findby.FindBy;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.WebElement;
 
 import com.liferay.faces.test.util.TesterBase;

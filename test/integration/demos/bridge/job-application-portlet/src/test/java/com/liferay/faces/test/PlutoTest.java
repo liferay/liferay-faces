@@ -13,24 +13,23 @@
  */
 package com.liferay.faces.test;
 
-import java.util.logging.Level;
-
-import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.graphene.enricher.findby.FindBy;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.junit.InSequence;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.logging.Level;
+
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.drone.api.annotation.Drone;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit.InSequence;
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 
 import com.liferay.faces.test.util.TesterBase;
 
@@ -190,13 +189,16 @@ public class PlutoTest extends TesterBase {
 	private WebElement bridgeVersion;
 	
 	protected int dateValidationXpathModifier = 1;
+	
+	@Drone
+	WebDriver browser;
 
 	@Test
 	@RunAsClient
 	@InSequence(1000)
 	public void jobApplicantRenderViewMode() throws Exception {
 
-		signIn();
+		signIn(browser);
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
@@ -206,7 +208,7 @@ public class PlutoTest extends TesterBase {
 		assertTrue("portletDisplayName.isDisplayed()", portletDisplayName.isDisplayed());
 		assertTrue("menuButton.isDisplayed()", menuButton.isDisplayed());
 
-		if (isThere(logoXpath)) {
+		if (isThere(browser, logoXpath)) {
 			assertTrue("logo.isDisplayed()", logo.isDisplayed());
 		}
 
@@ -223,7 +225,7 @@ public class PlutoTest extends TesterBase {
 
 		assertTrue("showCommentsLink.isDisplayed()", showCommentsLink.isDisplayed());
 
-		if (isThere(fileUploadChooserXpath)) {
+		if (isThere(browser, fileUploadChooserXpath)) {
 			logger.log(Level.INFO, "fileUploadChooser.isDisplayed() = " + fileUploadChooser.isDisplayed());
 			logger.log(Level.INFO, "submitFile.isDisplayed() = " + submitFile.isDisplayed());
 		}
@@ -234,7 +236,7 @@ public class PlutoTest extends TesterBase {
 		assertTrue("mojarraVersion.isDisplayed()", mojarraVersion.isDisplayed());
 		logger.log(Level.INFO, mojarraVersion.getText());
 
-		if (isThere(componentLibraryVersionXpath)) {
+		if (isThere(browser, componentLibraryVersionXpath)) {
 			assertTrue("componentLibraryVersion.isDisplayed()", componentLibraryVersion.isDisplayed());
 			logger.log(Level.INFO, componentLibraryVersion.getText());
 		}
@@ -258,9 +260,9 @@ public class PlutoTest extends TesterBase {
 		firstNameField.sendKeys(Keys.TAB);
 		Thread.sleep(500);
 		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
-		logger.log(Level.INFO, "isThere(firstNameFieldErrorXpath) = " + isThere(firstNameFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
 
-		if (isThere(firstNameFieldErrorXpath)) { // houston we have a problem
+		if (isThere(browser, firstNameFieldErrorXpath)) { // houston we have a problem
 			logger.log(Level.INFO, "firstNameFieldError.isDisplayed() = " + firstNameFieldError.isDisplayed());
 			assertFalse(
 				"firstNameFieldError should not be displayed after simply tabbing out of the empty field, having never entered any data.  " +
@@ -270,14 +272,14 @@ public class PlutoTest extends TesterBase {
 		logger.log(Level.INFO, "Shift tabbing back into the firstNameField ...");
 		(new Actions(browser)).keyDown(Keys.SHIFT).sendKeys(Keys.TAB).keyDown(Keys.SHIFT).perform();
 		Thread.sleep(50);
-		logger.log(Level.INFO, "isThere(firstNameFieldErrorXpath) = " + isThere(firstNameFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
 
 		logger.log(Level.INFO, "entering 'asdf' into the firstNameField and then tabbing out of it...");
 		firstNameField.sendKeys("asdf");
 		firstNameField.sendKeys(Keys.TAB);
 		Thread.sleep(50);
 		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
-		logger.log(Level.INFO, "isThere(firstNameFieldErrorXpath) = " + isThere(firstNameFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
 		assertTrue("The data 'asdf' should be in the firstNameField after tabbing out of it",
 			"asdf".equals(firstNameField.getAttribute("value")));
 
@@ -301,9 +303,9 @@ public class PlutoTest extends TesterBase {
 			"The data 'asdf' should no longer be in the firstNameField after clearing it out with BACK_SPACE and then tabbing out.  " +
 			"But we see '" + firstNameField.getAttribute("value") + "'",
 			"".equals(firstNameField.getAttribute("value")));
-		logger.log(Level.INFO, "isThere(firstNameFieldErrorXpath) = " + isThere(firstNameFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
 		assertTrue("The firstNameFieldError should at least be in the DOM somewhere by this point, but it is not there",
-			isThere(firstNameFieldErrorXpath));
+			isThere(browser, firstNameFieldErrorXpath));
 		logger.log(Level.INFO, "firstNameFieldError.getText() = " + firstNameFieldError.getText());
 		assertTrue("The firstNameFieldError should say 'Value is required'",
 			firstNameFieldError.getText().contains("Value is required"));
@@ -385,7 +387,7 @@ public class PlutoTest extends TesterBase {
 			dateOfBirthField.getAttribute("value").length() + " != " + dateLengthAfterChange,
 			dateOfBirthField.getAttribute("value").length() == dateLengthAfterChange);
 
-		if (isThere(editPreferencesButtonXpath)) {
+		if (isThere(browser, editPreferencesButtonXpath)) {
 			editPreferencesButton.click();
 			Thread.sleep(500);
 			logger.log(Level.INFO, "editPreferencesButton.click() ...");
@@ -410,7 +412,7 @@ public class PlutoTest extends TesterBase {
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
 
-		waitForElement(dateOfBirthFieldXpath);
+		waitForElement(browser, dateOfBirthFieldXpath);
 
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO,
@@ -663,8 +665,8 @@ public class PlutoTest extends TesterBase {
 
 		boolean uploaded = false;
 
-		if (isThere(fileUploadChooserXpath)) {
-			logger.log(Level.INFO, "isThere(fileUploadChooserXpath) = " + isThere(fileUploadChooserXpath));
+		if (isThere(browser, fileUploadChooserXpath)) {
+			logger.log(Level.INFO, "isThere(browser, fileUploadChooserXpath) = " + isThere(browser, fileUploadChooserXpath));
 		}
 		else {
 
@@ -682,14 +684,14 @@ public class PlutoTest extends TesterBase {
 		logger.log(Level.INFO, "submitting the uploaded file ...");
 		submitFile.click();
 
-		if (isThere(uploadedFileXpath)) {
+		if (isThere(browser, uploadedFileXpath)) {
 			logger.log(Level.INFO, "uploadedFile.getText() = " + uploadedFile.getText() + " was there immediately");
 			uploaded = true;
 		}
 		else {
 			Thread.sleep(1000);
 
-			if (isThere(uploadedFileXpath)) {
+			if (isThere(browser, uploadedFileXpath)) {
 				logger.log(Level.INFO,
 					"uploadedFile.getText() = " + uploadedFile.getText() + " was there after 1 second");
 				uploaded = true;
@@ -697,7 +699,7 @@ public class PlutoTest extends TesterBase {
 			else {
 				Thread.sleep(1000);
 
-				if (isThere(uploadedFileXpath)) {
+				if (isThere(browser, uploadedFileXpath)) {
 					logger.log(Level.INFO,
 						"uploadedFile.getText() = " + uploadedFile.getText() + " was there after 2 seconds");
 					uploaded = true;
@@ -705,7 +707,7 @@ public class PlutoTest extends TesterBase {
 				else {
 					Thread.sleep(1000);
 
-					if (isThere(uploadedFileXpath)) {
+					if (isThere(browser, uploadedFileXpath)) {
 						logger.log(Level.INFO,
 							"uploadedFile.getText() = " + uploadedFile.getText() + " was there after 3 seconds");
 						uploaded = true;
