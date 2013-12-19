@@ -199,7 +199,7 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 
 				try {
 
-					@SuppressWarnings("unchecked")
+
 					Enumeration<String> attributeNames = (Enumeration<String>) httpSession.getAttributeNames();
 
 					while (attributeNames.hasMoreElements()) {
