@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
 
 	<extension qualifier="webdriver">
-		<property name="browserCapabilities">firefox</property>
-		<!-- <property name="browserCapabilities">chrome</property> -->
+		<property name="browser">firefox</property>
+		<!-- <property name="browser">chrome</property> -->
 		<!-- <property name="chromeDriverBinary">/home/vds/downloads/chromedriver</property> -->
 		<!-- <property name="chrome.binary">/usr/bin/chromium</property> -->
-		<!-- <property name="browserCapabilities">htmlUnit</property> -->
+		<!-- <property name="browser">htmlUnit</property> -->
 		<property name="javascriptEnabled">true</property>
 
 		<!-- Possible browser values: android chrome firefox htmlUnit internetExplorer iphone opera null -->

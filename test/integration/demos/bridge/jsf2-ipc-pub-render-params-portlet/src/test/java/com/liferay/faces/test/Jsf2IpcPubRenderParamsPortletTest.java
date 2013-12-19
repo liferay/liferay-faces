@@ -13,21 +13,20 @@
  */
 package com.liferay.faces.test;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.logging.Level;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.graphene.enricher.findby.FindBy;
+import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import com.liferay.faces.test.util.TesterBase;
 
@@ -95,13 +94,16 @@ public class Jsf2IpcPubRenderParamsPortletTest extends TesterBase {
 	private WebElement finishDate;
 	@FindBy(xpath = submitXpath)
 	private WebElement submit;
+	
+	@Drone
+	WebDriver browser;
 
 	@Test
 	@RunAsClient
 	@InSequence(1000)
 	public void renderViewMode() throws Exception {
 
-		signIn();
+		signIn(browser);
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
@@ -169,7 +171,7 @@ public class Jsf2IpcPubRenderParamsPortletTest extends TesterBase {
 		logger.log(Level.INFO, "submit.click() ...");
 		submit.click();
 		
-		waitForElement(briansLastNameXpath);
+		waitForElement(browser, briansLastNameXpath);
 		
 		logger.log(Level.INFO, "briansLastName.getText() = " + briansLastName.getText());
 		logger.log(Level.INFO, "lastName.getAttribute(value) = " + lastName.getAttribute("value"));
@@ -192,7 +194,7 @@ public class Jsf2IpcPubRenderParamsPortletTest extends TesterBase {
 
 		lizsInput.click();
 		
-		waitForElement(lizsFirstNameXpath);
+		waitForElement(browser, lizsFirstNameXpath);
 
 		logger.log(Level.INFO, "firstName.getAttribute(value) = " + firstName.getAttribute("value"));
 		logger.log(Level.INFO, "lastName.getAttribute(value) = " + lastName.getAttribute("value"));
@@ -221,7 +223,7 @@ public class Jsf2IpcPubRenderParamsPortletTest extends TesterBase {
 		finishDate.sendKeys("12/25/2999");
 		submit.click();
 		
-		waitForElement(lizsFirstNameXpath);
+		waitForElement(browser, lizsFirstNameXpath);
 		
 		logger.log(Level.INFO, "lizsFirstName.getText() = " + lizsFirstName.getText());
 		logger.log(Level.INFO, "firstName.getAttribute(value) = " + firstName.getAttribute("value"));
@@ -244,7 +246,7 @@ public class Jsf2IpcPubRenderParamsPortletTest extends TesterBase {
 
 		briansInput.click();
 		
-		waitForElement(firstNameXpath);
+		waitForElement(browser, firstNameXpath);
 
 		logger.log(Level.INFO, "firstName.getAttribute(value) = " + firstName.getAttribute("value"));
 		logger.log(Level.INFO, "lastName.getAttribute(value) = " + lastName.getAttribute("value"));
