@@ -13,23 +13,22 @@
  */
 package com.liferay.faces.test;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.graphene.enricher.findby.FindBy;
+import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResource;
 import com.liferay.faces.test.util.TesterBase;
@@ -47,6 +46,9 @@ public class FACES1635ResourcesTest extends TesterBase {
 
 	@FindBy(xpath = textarea1Xpath)
 	private WebElement textarea1;
+	
+	@Drone
+	WebDriver browser;
 
 	public void checkResourcesForDuplicates(ArrayList<HeadResource> resources, String whichResources) {
 		int totalHeadResources = resources.size();
@@ -113,10 +115,10 @@ public class FACES1635ResourcesTest extends TesterBase {
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 		
 		getPortletDisplayName();
-		if (isThere(displayNameXpath)) {
+		if (isThere(browser, displayNameXpath)) {
 		
 			logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
-			waitForElement(displayNameXpath);
+			waitForElement(browser, displayNameXpath);
 	
 			// check that scriptsInHead only occur once
 			List<WebElement> scriptsInHead = browser.findElements(By.xpath("//head/script"));

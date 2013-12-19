@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
 
 	<extension qualifier="webdriver">
-		<property name="browserCapabilities">firefox</property>
-		<!-- <property name="browserCapabilities">htmlUnit</property> -->
+		<property name="browser">firefox</property>
+		<!-- <property name="browser">htmlUnit</property> -->
 		<property name="javascriptEnabled">true</property>
 	</extension>
 

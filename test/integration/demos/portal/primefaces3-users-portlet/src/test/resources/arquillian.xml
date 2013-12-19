@@ -4,7 +4,7 @@
 
 	<extension qualifier="webdriver">
 
-		<property name="browserCapabilities">firefox</property>
+		<property name="browser">firefox</property>
 		<!-- <property name="capabilityWebdriverFirefoxBin">/Applications/Firefox.app/Contents/MacOS/firefox</property> -->
 		<!-- <property name="capabilityWebdriverFirefoxBin">/Applications/Firefox.app/Contents/MacOS/firefox-bin</property> -->
 		<!-- <property name="capabilityWebdriverFirefoxBin">/Applications/Firefox_18.0b2.app/Contents/MacOS/firefox-bin</property> -->
@@ -12,10 +12,10 @@
 		<!-- <property name="firefox_binary">/Applications/Firefox_18.0b2.app/Contents/MacOS/firefox-bin</property> -->
 		<!-- <property name="firefox_binary">/Applications/Firefox_17.0b2.app/Contents/MacOS/firefox-bin</property> --> <!-- works -->
 
-		<!-- <property name="browserCapabilities">chrome</property> -->
+		<!-- <property name="browser">chrome</property> -->
 		<property name="chromeDriverBinary">/Users/apple/Downloads/chromedriver</property>
 
-		<!-- <property name="browserCapabilities">htmlUnit</property> -->
+		<!-- <property name="browser">htmlUnit</property> -->
 		<property name="javascriptEnabled">true</property>
 	</extension>
 
