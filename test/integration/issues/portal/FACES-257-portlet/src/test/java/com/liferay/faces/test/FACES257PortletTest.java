@@ -13,20 +13,19 @@
  */
 package com.liferay.faces.test;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.logging.Level;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.graphene.enricher.findby.FindBy;
+import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import com.liferay.faces.test.util.TesterBase;
 
@@ -98,6 +97,9 @@ public class FACES257PortletTest extends TesterBase {
 	private WebElement gamma;
 	@FindBy(xpath = requestedUrlXpath)
 	private WebElement requestedUrl;
+	
+	@Drone
+	WebDriver browser;
 
 	@Test
 	@RunAsClient
@@ -125,9 +127,9 @@ public class FACES257PortletTest extends TesterBase {
 		logger.log(Level.INFO, "button2.isDisplayed() = " + button2.isDisplayed());
 		logger.log(Level.INFO, "assert4.getText() = " + assert4.getText());
 
-		logger.log(Level.INFO, "isThere(alphaXpath) = " + isThere(alphaXpath));
-		logger.log(Level.INFO, "isThere(betaXpath) = " + isThere(betaXpath));
-		logger.log(Level.INFO, "isThere(gammaXpath) = " + isThere(gammaXpath));
+		logger.log(Level.INFO, "isThere(alphaXpath) = " + isThere(browser, alphaXpath));
+		logger.log(Level.INFO, "isThere(betaXpath) = " + isThere(browser, betaXpath));
+		logger.log(Level.INFO, "isThere(gammaXpath) = " + isThere(browser, gammaXpath));
 		logger.log(Level.INFO, "requestedUrl.isDisplayed() = " + requestedUrl.isDisplayed());
 
 		assertTrue(

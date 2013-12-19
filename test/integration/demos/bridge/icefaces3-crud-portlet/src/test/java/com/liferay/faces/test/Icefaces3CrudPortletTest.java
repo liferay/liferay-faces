@@ -19,12 +19,14 @@ import static org.junit.Assert.assertTrue;
 import java.util.logging.Level;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.graphene.enricher.findby.FindBy;
+import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import com.liferay.faces.test.util.TesterBase;
 
@@ -132,13 +134,16 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 	private WebElement saveButton;
 	@FindBy(xpath = cancelButtonXpath)
 	private WebElement cancelButton;
+	
+	@Drone
+	WebDriver browser;
 
 	@Test
 	@RunAsClient
 	@InSequence(1000)
 	public void customerMasterViewMode() throws Exception {
 
-		signIn();
+		signIn(browser);
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
@@ -278,36 +283,36 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 
 		Thread.sleep(250);
 
-		logger.log(Level.INFO, "firstNameFieldError.isThere() = " + isThere(firstNameFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
 		assertFalse("There should NOT be a First Name Validation Error on the but there is.",
-			isThere(firstNameFieldErrorXpath));
+			isThere(browser, firstNameFieldErrorXpath));
 
-		logger.log(Level.INFO, "lastNameFieldError.isThere() = " + isThere(lastNameFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, lastNameFieldErrorXpath) = " + isThere(browser, lastNameFieldErrorXpath));
 		assertFalse("There should NOT be a Last Name Validation Error on the but there is.",
-			isThere(lastNameFieldErrorXpath));
+			isThere(browser, lastNameFieldErrorXpath));
 
-		logger.log(Level.INFO, "emailAddressFieldError.isThere() = " + isThere(emailAddressFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, emailAddressFieldErrorXpath) = " + isThere(browser, emailAddressFieldErrorXpath));
 		assertFalse("There should NOT be a Email Validation Error on the but there is.",
-			isThere(emailAddressFieldErrorXpath));
+			isThere(browser, emailAddressFieldErrorXpath));
 
-		logger.log(Level.INFO, "phoneNumberFieldError.isThere() = " + isThere(phoneNumberFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, phoneNumberFieldErrorXpath) = " + isThere(browser, phoneNumberFieldErrorXpath));
 		assertFalse("There should NOT be a Phone Number Validation Error on the but there is.",
-			isThere(phoneNumberFieldErrorXpath));
+			isThere(browser, phoneNumberFieldErrorXpath));
 
-		logger.log(Level.INFO, "dateOfBirthFieldError.isThere() = " + isThere(dateOfBirthFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, dateOfBirthFieldErrorXpath) = " + isThere(browser, dateOfBirthFieldErrorXpath));
 		assertFalse("There should NOT be a Date of Birth Validation Error on the but there is.",
-			isThere(dateOfBirthFieldErrorXpath));
+			isThere(browser, dateOfBirthFieldErrorXpath));
 
-		logger.log(Level.INFO, "cityFieldError.isThere() = " + isThere(cityFieldErrorXpath));
-		assertFalse("There should NOT be a City Validation Error on the but there is.", isThere(cityFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, cityFieldErrorXpath) = " + isThere(browser, cityFieldErrorXpath));
+		assertFalse("There should NOT be a City Validation Error on the but there is.", isThere(browser, cityFieldErrorXpath));
 
-		logger.log(Level.INFO, "provinceIdFieldError.isThere() = " + isThere(provinceIdFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, provinceIdFieldErrorXpath) = " + isThere(browser, provinceIdFieldErrorXpath));
 		assertFalse("There should NOT be a province Validation Error on the but there is.",
-			isThere(provinceIdFieldErrorXpath));
+			isThere(browser, provinceIdFieldErrorXpath));
 
-		logger.log(Level.INFO, "postalCodeFieldError.isThere() = " + isThere(postalCodeFieldErrorXpath));
+		logger.log(Level.INFO, "isThere(browser, postalCodeFieldErrorXpath) = " + isThere(browser, postalCodeFieldErrorXpath));
 		assertFalse("There should NOT be a Postal Code Validation Error on the but there is.",
-			isThere(postalCodeFieldErrorXpath));
+			isThere(browser, postalCodeFieldErrorXpath));
 
 	}
 

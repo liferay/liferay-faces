@@ -87,9 +87,9 @@
 
 	<properties>
 		<app.server.type>tomcat</app.server.type>
-		<arquillian.version>1.0.3.Final</arquillian.version>
-		<arquillian.drone.version>1.1.1.Final</arquillian.drone.version>
-		<arquillian.graphene.version>2.0.0.Alpha3</arquillian.graphene.version>
+		<arquillian.version>1.1.1.Final</arquillian.version>
+		<arquillian.drone.version>1.2.0.Final</arquillian.drone.version>
+		<arquillian.graphene.version>2.0.0.Final</arquillian.graphene.version>
 		<cdi.version>1.0-SP4</cdi.version>
 		<codename>Colossae</codename>
 		<faces.group.id>com.sun.faces</faces.group.id>
@@ -137,7 +137,7 @@
 		<portlet.war.deployment.type>deploy</portlet.war.deployment.type>
 		<primefaces4.version>4.0</primefaces4.version>
 		<richfaces4.version>4.3.2.Final</richfaces4.version>
-		<selenium.version>2.31.0</selenium.version>
+		<selenium.version>2.35.0</selenium.version>
 		<spring.version>3.0.7.RELEASE</spring.version>
 		<surefire.version>2.12</surefire.version>
 		<tck.version>jsr329-1.0.1-liferay</tck.version>
