@@ -27,7 +27,7 @@ public class PermissionsURL extends UIOutput {
 
 	// Private Constants
 	private static final String COMPONENT_TYPE = "com.liferay.faces.portal.PermissionsURL";
-	private static final String RENDERER_TYPE = "com.liferay.faces.portal.PermissionsURLRenderer";
+	private static final String RENDERER_TYPE = "com.liferay.faces.portal.renderkit.PermissionsURLRenderer";
 
 	// Private Data Members
 	private String modelResource;

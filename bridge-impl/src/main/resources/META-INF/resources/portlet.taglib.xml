@@ -10,6 +10,7 @@
 		<tag-name>actionURL</tag-name>
 		<component>
 			<component-type>com.liferay.faces.bridge.component.PortletActionURL</component-type>
+			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.ActionURLRenderer</renderer-type>
 		</component>
 		<attribute>
 			<name>copyCurrentRenderParameters</name>
@@ -53,6 +54,7 @@
 		<tag-name>namespace</tag-name>
 		<component>
 			<component-type>com.liferay.faces.bridge.component.PortletNameSpace</component-type>
+			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.NameSpaceRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
@@ -90,6 +92,7 @@
 		<tag-name>renderURL</tag-name>
 		<component>
 			<component-type>com.liferay.faces.bridge.component.PortletRenderURL</component-type>
+			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.RenderURLRenderer</renderer-type>
 		</component>
 		<attribute>
 			<name>copyCurrentRenderParameters</name>
@@ -122,6 +125,7 @@
 		<tag-name>resourceURL</tag-name>
 		<component>
 			<component-type>com.liferay.faces.bridge.component.PortletResourceURL</component-type>
+			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.ResourceURLRenderer</renderer-type>
 		</component>
 		<attribute>
 			<name>cacheability</name>

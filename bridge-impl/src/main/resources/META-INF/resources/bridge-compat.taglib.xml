@@ -9,6 +9,7 @@
 		<tag-name>inputFile</tag-name>
 		<component>
 			<component-type>javax.faces.HtmlInputFile</component-type>
+			<renderer-type>com.liferay.faces.bridge.renderkit.bridge.InputFileRenderer</renderer-type>
 		</component>
 		<!-- Attributes related to type="file" -->
 		<attribute>
