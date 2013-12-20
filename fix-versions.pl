@@ -219,5 +219,23 @@ sub do_inplace_edits {
 		print "$File::Find::name\n";
 		`perl -pi -e 's/\\/faces\\/[0-9.]+\\/vdldoc\\//\\/faces\\/$liferayFacesVersionShortMajor1DotMajor2\\/vdldoc\\//g' $file`;
 	}
+	
+	#
+	# Otherwise, if the current file is named with .taglib.xml extension, then potentially fix the version number that will
+	# appear in the vdldoc:since element.
+	#
+	elsif (($file =~ m/.*\.taglib\.xml/) and ($File::Find::name =~ /\/src/)) {
+		print "$File::Find::name\n";
+		`perl -pi -e 's/vdldoc:since>[0-9]\\.[0-9]/vdldoc:since>$liferayFacesVersionShortMajor1DotMajor2/' $file`;
+	}
+
+	#
+	# Otherwise, if the current file is named with .xhtml extension, then potentially fix the version number that will
+	# appear in the vdldoc:since element.
+	#
+	elsif (($file =~ m/.*\.xhtml/) and ($File::Find::name =~ /\/src/)) {
+		print "$File::Find::name\n";
+		`perl -pi -e 's/vdldoc:since value=\\"[0-9]\\.[0-9]/vdldoc:since value=\\"$liferayFacesVersionShortMajor1DotMajor2/' $file`;
+	}
 }
 
