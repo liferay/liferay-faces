@@ -3,6 +3,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
    http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 	version="2.0">
+	<description>The Liferay Faces Portal facelet composite component tags with the &lt;code&gt;liferay-ui:&lt;/code&gt; tag name prefix.</description>
 	<namespace>http://liferay.com/faces/ui</namespace>
 	<tag>
 		<description>The &lt;code&gt;liferay-ui:ice-check-tool-bar&lt;/code&gt; provides command links such as &quot;Check All&quot;, &quot;Uncheck All&quot;, and &quot;Delete&quot; that are designed to be used in conjunction with an ice:dataTable component.</description>
@@ -83,6 +84,9 @@
 		<attribute>
 			<name>uncheckAllRendered</name>
 		</attribute>
+		<tag-extension>
+			<since>2.1.0</since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>The &lt;code&gt;liferay-ui:ice-info-data-paginator&lt;/code&gt; encapsulates an ICEfaces ice:dataPaginator tag that renders pagination information for an associated ice:dataTable. The navigation information will match the internationalized Liferay &quot;showing-x-x-of-x-results&quot; message.</description>
@@ -126,6 +130,9 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<since>2.1.0</since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>The &lt;code&gt;liferay-ui:ice-info-data-paginator&lt;/code&gt; encapsulates an ICEfaces ice:dataPaginator tag that renders navigation controls for an associated ice:dataTable. The icons will match the current Liferay theme.</description>
@@ -247,5 +254,8 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<since>2.1.0</since>
+		</tag-extension>
 	</tag>
 </facelet-taglib>  
