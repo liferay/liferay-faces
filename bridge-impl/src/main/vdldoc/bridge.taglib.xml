@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vdldoc="http://vdldoc.org/vdldoc"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
+   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://vdldoc.googlecode.com/hg/src/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
 	version="2.0">
+	<description>The Liferay Faces Bridge facelet component tags with the &lt;code&gt;bridge:&lt;/code&gt; tag name prefix.</description>
 	<namespace>http://liferay.com/faces/bridge</namespace>
 	<tag>
 		<description>Renders the HTML tag: &lt;xmp&gt;&lt;input type=&quot;file&quot; /&gt;&lt;/xmp&gt; The tag provides file upload capability provides file upload capability. Usage of this tag requires the Apache &lt;code&gt;commons-fileupload&lt;/code&gt; and &lt;code&gt;commons-io&lt;/code&gt; dependencies.</description>
@@ -157,5 +158,8 @@
 			<name>xml:lang</name>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>2.1.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 </facelet-taglib>
