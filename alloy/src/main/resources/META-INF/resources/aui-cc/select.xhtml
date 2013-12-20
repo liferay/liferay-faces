@@ -5,7 +5,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vdldoc="http://vdldoc.org/vdldoc"
 	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
 
-	<cc:interface shortDescription="The &lt;code&gt;aui-cc:select&lt;/code&gt; encapsulates a standard JSF h:selectOneMenu tag with CSS class name &quot;aui-field-input aui-field-input-select aui-field-input-menu&quot;. NOTE that sometimes the JSF implementation performs more reliably if a simple h:selectOneMenu is used instead of this tag.">
+	<cc:interface shortDescription="The &lt;code&gt;aui-cc:select&lt;/code&gt; encapsulates a standard JSF &lt;code&gt;h:selectOneMenu&lt;/code&gt; tag with CSS class name &quot;aui-field-input aui-field-input-select aui-field-input-menu&quot;. &lt;br /&gt;&lt;br /&gt;&lt;b&gt;NOTE:&lt;/b&gt; Sometimes the JSF implementation performs more reliably if a simple &lt;code&gt;h:selectOneMenu&lt;/code&gt; is used instead of this tag.">
 		<cc:attribute name="inlineMessage" default="false" required="false" shortDescription="Boolean flag indicating whether or not there should be an inline h:message tag included. The default value is &quot;false&quot;." />
 		<cc:attribute name="label" required="true" shortDescription="The text value for the rendered label." />
 		<cc:attribute name="required" default="false" required="false" shortDescription="Boolean flag indicating whether or not it is required for the user to supply a value for this component. The default value is &quot;false&quot;." />
@@ -15,6 +15,7 @@
 		<cc:editableValueHolder name="selectOneMenu" targets="s1" />
 		<cc:extension>
 			<vdldoc:deprecated value="true" shortDescription="Please use h:selectOneMenu instead." />
+			<vdldoc:since value="3.0.0" />
 		</cc:extension>
 	</cc:interface>
 
