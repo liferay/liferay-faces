@@ -7,6 +7,7 @@
 	xmlns:liferay-ui-internal="http://liferay.com/faces/ui-internal"
 	xmlns:liferayutil="http://liferay.com/faces/util"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:vdldoc="http://vdldoc.org/vdldoc"
 	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
 
 	<cc:interface shortDescription="The &lt;code&gt;liferay-ui:input-editor&lt;/code&gt; tag renders a text area that provides the ability to enter rich text such as bold, italic, and underline. The renderer relies on the CKEditor&lt;sup&gt;TM&lt;/sup&gt; to provide the rich text editing area. Since Liferay bundles the CKEditor&lt;sup&gt;TM&lt;/sup&gt; JavaScript and related images with the portal, the portlet developer does not need to include it with the portlet.">
@@ -30,6 +31,9 @@
 		<cc:clientBehavior name="blur" event="blur" targets="inputText"/>
 		<cc:clientBehavior name="change" event="change" targets="inputText"/>
 		<cc:editableValueHolder name="inputText" targets="inputText" />
+    	<cc:extension>
+    		<vdldoc:since value="3.1.0" />
+    	</cc:extension>
 	</cc:interface>
 
 	<cc:implementation>
