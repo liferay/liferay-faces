@@ -10,109 +10,109 @@
 			<vdldoc:el-variable-name>i18n</vdldoc:el-variable-name>
 			<vdldoc:description> As an abbreviation for the word "internationalization", the `i18n` EL variable enables page authors to declaratively specify message keys that hook into Liferay's LanguageUtility.</vdldoc:description>
 			<vdldoc:type>java.lang.String</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay</vdldoc:el-variable-name>
 			<vdldoc:description>Utility managed-bean that is designed to be kept in JSF request scope. Its purpose is to introduce some Liferay-specific variables into the JSF EL.</vdldoc:description>
 			<vdldoc:type>com.liferay.faces.portal.bean.Liferay</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.companyId</vdldoc:el-variable-name>
 			<vdldoc:description>The Liferay companyId primary key value associated with the community/organization portal page that the current portlet is placed upon.</vdldoc:description>
 			<vdldoc:type>java.lang.Long</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.document</vdldoc:el-variable-name>
 			<vdldoc:description>The absolute URL for the Liferay Document Library Struts action path.</vdldoc:description>
 			<vdldoc:type>java.lang.String</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.imageGalleryURL</vdldoc:el-variable-name>
 			<vdldoc:description>The absolute URL for the Liferay Image Gallery Struts action path.</vdldoc:description>
 			<vdldoc:type>java.lang.String</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.imageURL</vdldoc:el-variable-name>
 			<vdldoc:description>The absolute URL for the Liferay Image Servlet.</vdldoc:description>
 			<vdldoc:type>java.lang.String</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.groupUser</vdldoc:el-variable-name>
 			<vdldoc:description>The Liferay User that owns the Liferay community/organization portal page that the current portlet is placed upon. </vdldoc:description>
 			<vdldoc:type>com.liferay.portal.model.User</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.layout</vdldoc:el-variable-name>
 			<vdldoc:description>The Liferay `Layout` associated with the community/organization portal page that the current portlet is placed upon.</vdldoc:description>
 			<vdldoc:type>com.liferay.portal.model.Layout</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.permissionChecker</vdldoc:el-variable-name>
 			<vdldoc:description>The Liferay `PermissionChecker` associated with the current request and Liferay `User`.</vdldoc:description>
 			<vdldoc:type>com.liferay.portal.security.permission.PermissionChecker</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.portalURL</vdldoc:el-variable-name>
 			<vdldoc:description>The absolute URL for the portal.</vdldoc:description>
 			<vdldoc:type>java.lang.String</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.portlet</vdldoc:el-variable-name>
 			<vdldoc:description>The containing Liferay `Portlet` associated with the `PortletRequest`.</vdldoc:description>
 			<vdldoc:type>com.liferay.portal.model.Portlet</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.portraitURL</vdldoc:el-variable-name>
 			<vdldoc:description>Designed to be called from the EL by passing a Liferay `User` or `userId` as an array index, returns the absolute URL to the user's portrait.</vdldoc:description>
 			<vdldoc:type>java.lang.String</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.theme</vdldoc:el-variable-name>
 			<vdldoc:description>The Liferay `Theme` associated with the Liferay `Layout`.</vdldoc:description>
 			<vdldoc:type>com.liferay.portal.model.Theme</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.themeDisplay</vdldoc:el-variable-name>
 			<vdldoc:description>The Liferay `ThemeDisplay` associated with the `PortletRequest`.</vdldoc:description>
 			<vdldoc:type>com.liferay.portal.theme.ThemeDisplay</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.themeImageURL</vdldoc:el-variable-name>
 			<vdldoc:description>Designed to be called from the EL by passing a relative path to a theme image as an array index, returns the absolute URL to the theme image.</vdldoc:description>
 			<vdldoc:type>java.lang.String</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.themeImagesURL</vdldoc:el-variable-name>
 			<vdldoc:description>The absolute URL for the image path associated with the current Liferay Theme.</vdldoc:description>
 			<vdldoc:type>java.lang.String</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.user</vdldoc:el-variable-name>
 			<vdldoc:description>The Liferay `User` associated with the `PortletRequest`.</vdldoc:description>
 			<vdldoc:type>com.liferay.portal.model.User</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 		<vdldoc:el-variable>
 			<vdldoc:el-variable-name>liferay.userHasPortletPermission</vdldoc:el-variable-name>
 			<vdldoc:description>Designed to be called from the EL by passing an `action-key` as an array index, returns a `Boolean` indicating whether or not the Liferay `User` associated with the `PortletRequest` has permission to execute the specified `action-key` on the current portlet.</vdldoc:description>
 			<vdldoc:type>java.lang.Boolean</vdldoc:type>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</vdldoc:el-variable>
 	</taglib-extension>
 </facelet-taglib>

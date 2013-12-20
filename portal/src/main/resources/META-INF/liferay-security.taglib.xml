@@ -13,7 +13,7 @@
 			<renderer-type>com.liferay.faces.portal.renderkit.PermissionsURLRenderer</renderer-type>
 		</component>
 		<tag-extension>
-			<vdldoc:since>3.1.0</vdldoc:since>
+			<vdldoc:since>4.1.0</vdldoc:since>
 		</tag-extension>
 	</tag>
 </facelet-taglib>
