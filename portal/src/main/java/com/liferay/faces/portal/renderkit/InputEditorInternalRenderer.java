@@ -40,7 +40,6 @@ import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.portal.EditorUtil;
-import com.liferay.faces.util.portal.ScriptDataUtil;
 import com.liferay.faces.util.portal.ScriptTagUtil;
 import com.liferay.faces.util.portal.WebKeys;
 import com.liferay.faces.util.render.CleanupRenderer;
@@ -61,29 +60,10 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 	private static final Logger logger = LoggerFactory.getLogger(InputEditorInternalRenderer.class);
 
 	// Private Constants
-	private static final String EDITOR_NAME_TOKEN = "%EDITOR_NAME%";
-	private static final String ONBLUR_JS;
-	private static final String ONBLUR_METHOD_NAME_TOKEN = "%ONBLUR_METHOD_NAME%";
 	private static final String COMMENT_CDATA_CLOSE = "// " + StringPool.CDATA_CLOSE;
 	private static final String CKEDITOR = "ckeditor";
-	private static final String CKEDITOR_REPLACE = "CKEDITOR.replace(";
 	private static final String CDPL_INITIALIZE_FALSE = "var customDataProcessorLoaded = false;";
 	private static final String CDPL_INITIALIZE_TRUE = "var customDataProcessorLoaded = true;";
-
-	static {
-		StringBuilder onBlurJS = new StringBuilder();
-		onBlurJS.append("(function() {");
-		onBlurJS.append("var ckEditor = CKEDITOR.instances['");
-		onBlurJS.append(EDITOR_NAME_TOKEN);
-		onBlurJS.append("'];");
-		onBlurJS.append("ckEditor.on('blur',");
-		onBlurJS.append("function () {");
-		onBlurJS.append(ONBLUR_METHOD_NAME_TOKEN);
-		onBlurJS.append("();");
-		onBlurJS.append("});");
-		onBlurJS.append("})();");
-		ONBLUR_JS = onBlurJS.toString();
-	}
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -103,7 +83,6 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 
 		HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(portletResponse);
 		Map<String, Object> attributes = inputEditorInternal.getAttributes();
-		String onBlurMethod = (String) attributes.get("onBlurMethod");
 		String editorImpl = (String) attributes.get("editorImpl");
 
 		if (editorImpl == null) {
@@ -132,9 +111,17 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 		String editorName = (String) attributes.get("name");
 		queryString.append(editorName);
 		queryString.append(StringPool.AMPERSAND);
+		queryString.append("onBlurMethod");
+		queryString.append(StringPool.EQUAL);
+		queryString.append(attributes.get("onBlurMethod"));
+		queryString.append(StringPool.AMPERSAND);
 		queryString.append("onChangeMethod");
 		queryString.append(StringPool.EQUAL);
 		queryString.append(attributes.get("onChangeMethod"));
+		queryString.append(StringPool.AMPERSAND);
+		queryString.append("onFocusMethod");
+		queryString.append(StringPool.EQUAL);
+		queryString.append(attributes.get("onFocusMethod"));
 		queryString.append(StringPool.AMPERSAND);
 		queryString.append("skipEditorLoading");
 		queryString.append(StringPool.EQUAL);
@@ -193,35 +180,6 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 			String editorType = EditorUtil.getEditorValue(scriptCapturingHttpServletRequest, editorImpl);
 
 			if (editorType.indexOf(CKEDITOR) >= 0) {
-
-				// FACES-1441: The liferay-ui:input-editor JSP tag (and associated ckeditor.jsp file) do not provide a
-				// way to hook-in to the "onblur" callback feature of the CKEditor. In order to overcome this
-				// limitation, it is necessary to append a <script>...</script> to the response that provides this
-				// ability.
-				String onBlurScript = getOnBlurScript(editorName, onBlurMethod);
-
-				// If running within an Ajax request, then the "onblur" callback script must be included directly to the
-				// parital-response.
-				if (resourcePhase) {
-					StringBuilder scriptMarkup = new StringBuilder();
-					scriptMarkup.append(StringPool.LESS_THAN);
-					scriptMarkup.append(StringPool.SCRIPT);
-					scriptMarkup.append(StringPool.GREATER_THAN);
-					scriptMarkup.append(onBlurScript);
-					scriptMarkup.append(StringPool.LESS_THAN);
-					scriptMarkup.append(StringPool.FORWARD_SLASH);
-					scriptMarkup.append(StringPool.SCRIPT);
-					scriptMarkup.append(StringPool.GREATER_THAN);
-					bufferedResponse = bufferedResponse.concat(scriptMarkup.toString());
-				}
-
-				// Otherwise, append the script to the WebKeys.AUI_SCRIPT_DATA request attribute, which will cause the
-				// script to be rendered at the bottom of the portal page.
-				else {
-
-					Object scriptData = externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
-					ScriptDataUtil.append(scriptData, getPortletId(portletRequest), onBlurScript, "aui-base");
-				}
 
 				// FACES-1439: If the component was rendered on the page on the previous JSF lifecycle, then prevent it
 				// from being re-initialized by removing all <script>...</script> elements.
@@ -295,40 +253,12 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 					}
 				}
 
-				// Create a JavaScript fragment that will cleanup the DOM. This is necessary when a
-				// partial-update takes place and replaces an existing CKEditor in the DOM with either a new
-				// CKEditor or different elements.
-				StringBuilder javaScriptFragment = new StringBuilder();
-				javaScriptFragment.append("var oldEditor = CKEDITOR.instances['");
-				javaScriptFragment.append(editorName);
-				javaScriptFragment.append("']; if (oldEditor) {");
-				javaScriptFragment.append("oldEditor.destroy(true);");
-				javaScriptFragment.append("delete window['");
-				javaScriptFragment.append(editorName);
-				javaScriptFragment.append("'];");
-				javaScriptFragment.append("}");
-				javaScriptFragment.append(StringPool.NEW_LINE);
-				javaScriptFragment.append(StringPool.TAB);
-				javaScriptFragment.append(StringPool.TAB);
-
-				// Insert the JavaScript fragment into the JavaScript code at the appropriate location.
-				int pos = javaScriptFromRequestDispatcher.indexOf(CKEDITOR_REPLACE);
-
-				if (pos > 0) {
-					javaScriptFromRequestDispatcher = javaScriptFromRequestDispatcher.substring(0, pos) +
-						javaScriptFragment.toString() + javaScriptFromRequestDispatcher.substring(pos);
-				}
-				else {
-					javaScriptFromRequestDispatcher = javaScriptFromRequestDispatcher + StringPool.NEW_LINE +
-						javaScriptFragment.toString();
-				}
-
 				// Create a JavaScript fragment that will change the way that the customDataProcessorLoaded
 				// variable is initialized. Normally it is initialized to false, but if there is an old CKEditor
 				// that was destroyed, then it should be initialized to true. That will guarantee that the
 				// new CKEditor in the DOM will have its setData() method called with the value from the
 				// hidden field.
-				javaScriptFragment = new StringBuilder();
+				StringBuilder javaScriptFragment = new StringBuilder();
 				javaScriptFragment.append("if (oldEditor)");
 				javaScriptFragment.append(StringPool.OPEN_CURLY_BRACE);
 				javaScriptFragment.append(CDPL_INITIALIZE_TRUE);
@@ -339,7 +269,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				javaScriptFragment.append(StringPool.CLOSE_CURLY_BRACE);
 
 				// Insert the JavaScript fragment into the JavaScript code at the appropriate location.
-				pos = javaScriptFromRequestDispatcher.indexOf(CDPL_INITIALIZE_FALSE);
+				int pos = javaScriptFromRequestDispatcher.indexOf(CDPL_INITIALIZE_FALSE);
 
 				if (pos > 0) {
 					javaScriptFromRequestDispatcher = javaScriptFromRequestDispatcher.substring(0, pos) +
@@ -393,28 +323,6 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 		}
 
 		return liferayPortletRequest;
-	}
-
-	protected String getOnBlurScript(String editorName, String onBlurMethod) {
-		String onBlurScript = ONBLUR_JS;
-
-		// Replace %EDITOR_NAME% token with specified editor name.
-		int editorNameTokenPos = onBlurScript.indexOf(EDITOR_NAME_TOKEN);
-
-		if (editorNameTokenPos > 0) {
-			onBlurScript = onBlurScript.substring(0, editorNameTokenPos) + editorName +
-				onBlurScript.substring(editorNameTokenPos + EDITOR_NAME_TOKEN.length());
-		}
-
-		// Replace %ONBLUR_METHOD_NAME% token with specified onblur method name.
-		int onBlurTokenPos = onBlurScript.indexOf(ONBLUR_METHOD_NAME_TOKEN);
-
-		if (onBlurTokenPos > 0) {
-			onBlurScript = onBlurScript.substring(0, onBlurTokenPos) + onBlurMethod +
-				onBlurScript.substring(onBlurTokenPos + ONBLUR_METHOD_NAME_TOKEN.length());
-		}
-
-		return onBlurScript;
 	}
 
 	protected String getPortletId(PortletRequest portletRequest) {
