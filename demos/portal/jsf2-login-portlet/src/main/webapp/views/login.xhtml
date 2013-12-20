@@ -12,30 +12,28 @@
 			<c:otherwise>
 				<aui:form>
 					<h:messages globalOnly="true" />
-					<aui:layout>
-						<aui:fieldset>
-							<aui:field id="handleField" label="#{i18n[loginBackingBean.handleLabel]}">
-								<h:inputText id="handle" value="#{loginModelBean.handle}" required="true"
-									validatorMessage="#{i18n['you-have-entered-invalid-data']}">
-									<f:ajax render="handleMessage" />
-									<c:if test="#{loginBackingBean.handleLabel == 'email-address'}">
-										<f:validateRegex pattern=".+[@].+[.].+" />
-									</c:if>
-								</h:inputText>
-								<h:message id="handleMessage" for="handle" style="display: inline;" />
-							</aui:field>
-							<aui:field id="passwordField" label="#{i18n['password']}">
-								<h:inputSecret id="password" value="#{loginModelBean.password}" required="true">
-									<f:ajax render="passwordMessage" />
-								</h:inputSecret>
-								<h:message id="passwordMessage" for="password" style="display: inline;" />
-							</aui:field>
-							<aui:field id="rememberMeField" label="#{i18n['remember-me']}">
-								<h:selectBooleanCheckbox value="#{loginModelBean.rememberMe}" />
-							</aui:field>
-						</aui:fieldset>
-						<h:commandButton action="#{loginBackingBean.authenticate}" value="#{i18n['sign-in']}" />
-					</aui:layout>
+					<aui:fieldset>
+						<aui:field id="handleField" label="#{i18n[loginBackingBean.handleLabel]}">
+							<h:inputText id="handle" value="#{loginModelBean.handle}" required="true"
+								validatorMessage="#{i18n['you-have-entered-invalid-data']}">
+								<f:ajax render="handleMessage" />
+								<c:if test="#{loginBackingBean.handleLabel == 'email-address'}">
+									<f:validateRegex pattern=".+[@].+[.].+" />
+								</c:if>
+							</h:inputText>
+							<h:message id="handleMessage" for="handle" style="display: inline;" />
+						</aui:field>
+						<aui:field id="passwordField" label="#{i18n['password']}">
+							<h:inputSecret id="password" value="#{loginModelBean.password}" required="true">
+								<f:ajax render="passwordMessage" />
+							</h:inputSecret>
+							<h:message id="passwordMessage" for="password" style="display: inline;" />
+						</aui:field>
+						<aui:field id="rememberMeField" label="#{i18n['remember-me']}">
+							<h:selectBooleanCheckbox value="#{loginModelBean.rememberMe}" />
+						</aui:field>
+					</aui:fieldset>
+					<h:commandButton action="#{loginBackingBean.authenticate}" value="#{i18n['sign-in']}" />
 				</aui:form>
 			</c:otherwise>
 		</c:choose>
