@@ -170,6 +170,10 @@
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use aui:row and aui:col instead.</vdldoc:description>
+			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
 	<tag>
