@@ -3,6 +3,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
    http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 	version="2.0">
+	<description>The Liferay Faces Alloy facelet composite component tags with the &lt;code&gt;aui-cc:&lt;/code&gt; tag name prefix.</description>
 	<namespace>http://liferay.com/faces/aui-cc</namespace>
 	<composite-library-name>aui-cc</composite-library-name>
 	<function>
