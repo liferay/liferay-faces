@@ -48,7 +48,19 @@ public class ColRenderer extends Renderer {
 		Integer width = auiCol.getWidth();
 		Integer span = auiCol.getSpan();
 
+		if (span != null) {
+
+			if ((span < 1) || (span > AUICol.COLUMNS)) {
+				throw new IOException("span number must be between 1 and " + AUICol.COLUMNS);
+			}
+		}
+
 		if (width != null) {
+
+			if ((width < 1) || (width > 100)) {
+				throw new IOException("width must be between 1 and 100");
+			}
+
 			span = getColumnUnitSize(width);
 		}
 
@@ -58,7 +70,19 @@ public class ColRenderer extends Renderer {
 		Integer offsetWidth = auiCol.getOffsetWidth();
 		Integer offset = auiCol.getOffset();
 
+		if (offset != null) {
+
+			if ((offset < 1) || (offset > AUICol.COLUMNS)) {
+				throw new IOException("offset must be between 1 and " + AUICol.COLUMNS);
+			}
+		}
+
 		if (offsetWidth != null) {
+
+			if ((offsetWidth < 1) || (offsetWidth > 100)) {
+				throw new IOException("offsetWidth must be between 1 and 100");
+			}
+
 			offset = getColumnUnitSize(offsetWidth);
 		}
 

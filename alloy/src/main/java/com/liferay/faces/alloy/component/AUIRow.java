@@ -24,10 +24,12 @@ import javax.faces.component.NamingContainer;
 @FacesComponent(value = "com.liferay.faces.alloy.component.AUIRow")
 public class AUIRow extends AUIPanel implements NamingContainer {
 
+	// Public Constants
+	public static final String FLUID = "fluid";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.renderkit.RowRenderer";
+
 	// Private Constants
 	private static final String CSS_CLASS = "cssClass";
-	private static final String FLUID = "fluid";
-	private static final String RENDERER_TYPE = "com.liferay.faces.alloy.renderkit.RowRenderer";
 	private static final String STYLE_CLASS = "styleClass";
 
 	public String getCssClass() {

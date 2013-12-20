@@ -5,96 +5,101 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:example-cc="http://java.sun.com/jsf/composite/example-cc"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<aui:layout id="l1">
-		<example-cc:clipboard label="#{i18n['job-application']}" />
-		<example-cc:sponsorButton />
-		<example-cc:divider />
-		<aui:column id="c1">
+	<example-cc:clipboard label="#{i18n['job-application']}" />
+	<example-cc:sponsorButton />
+	<example-cc:divider />
+	<aui:row>
+		<aui:col id="c1" width="66">
 			<h:form id="f1">
 				<p:messages autoUpdate="true" />
 				<aui:fieldset id="fs1">
-					<aui:column id="c1a">
-						<aui:field id="firstNameField" label="#{i18n['first-name']}">
-							<p:inputText id="firstName" label="#{i18n['first-name']}" required="true" value="#{applicantModelBean.firstName}">
-								<f:ajax render="firstNameField" />
-							</p:inputText>
-							<p:message id="firstNameMessage" for="firstName" />
-						</aui:field>
-						<aui:field id="lastNameField" label="#{i18n['last-name']}">
-							<p:inputText id="lastName" label="#{i18n['last-name']}" required="true" value="#{applicantModelBean.lastName}">
-								<f:ajax render="lastNameField" />
-							</p:inputText>
-							<p:message for="lastName" />
-						</aui:field>
-						<aui:field id="emailAddressField" label="#{i18n['email-address']}">
-							<p:inputText id="emailAddress" label="#{i18n['email-address']}" required="true"
-								validatorMessage="#{i18n['invalid-email-address']}" value="#{applicantModelBean.emailAddress}">
-								<f:validateRegex pattern=".+[@].+[.].+" />
-								<f:ajax render="emailAddressField" />
-							</p:inputText>
-							<p:message for="emailAddress" />
-						</aui:field>
-						<aui:field id="phoneNumberField" label="#{i18n['phone-number']}">
-							<p:inputText id="phoneNumber" label="#{i18n['phone-number']}" required="true"
-								value="#{applicantModelBean.phoneNumber}">
-								<f:ajax render="phoneNumberField" />
-							</p:inputText>
-							<p:message for="phoneNumber" />
-						</aui:field>
-					</aui:column>
-					<aui:column id="c1b">
-						<aui:field id="dateOfBirthField" label="#{i18n['birthday']}">
-							<p:calendar id="dateOfBirth" label="#{i18n['birthday']}" required="true"
-								pattern="#{portletPreferencesValues['datePattern'][0]}" showOn="button"
-								value="#{applicantModelBean.dateOfBirth}">
-								<f:convertDateTime pattern="#{portletPreferencesValues['datePattern'][0]}" />
-								<f:ajax render="dateOfBirthField" />
-							</p:calendar>
-							<p:message for="dateOfBirth" />
-						</aui:field>
-						<aui:field id="cityField" label="#{i18n['city']}">
-							<p:inputText id="city" label="#{i18n['city']}" required="true" value="#{applicantModelBean.city}">
-								<f:ajax render="cityField" />
-							</p:inputText>
-							<p:message id="cityMessage" for="city" />
-						</aui:field>
-						<aui:field id="provinceIdField" label="#{i18n['state-province']}">
-							<h:selectOneMenu id="provinceId" label="#{i18n['state-province']}" required="true"
-								value="#{applicantModelBean.provinceId}">
-								<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
-								<f:selectItems itemValue="#{province.provinceId}" itemLabel="#{province.provinceName}"
-									value="#{listModelBean.provinces}" var="province" />
-								<f:ajax render="provinceIdField" />
-							</h:selectOneMenu>
-							<p:message id="provinceIdMessage" for="provinceId" />
-						</aui:field>
-						<aui:field id="postalCodeField" label="#{i18n['zip-postal']}">
-							<p:inputText id="postalCode" label="#{i18n['zip-postal']}" required="true"
-								value="#{applicantModelBean.postalCode}" valueChangeListener="#{applicantBackingBean.postalCodeListener}">
-								<f:ajax render="cityField provinceIdField postalCodeField" />
-							</p:inputText>
-							<img src="#{resource['example:icon-help.png']}" title="#{i18n['postal-code-hint']}" />
-							<p:message id="postalCodeMessage" for="postalCode" />
-						</aui:field>
-					</aui:column>
+					<aui:row>
+						<aui:col id="c1a" width="50">
+							<aui:field id="firstNameField" label="#{i18n['first-name']}">
+								<p:inputText id="firstName" label="#{i18n['first-name']}" required="true"
+									value="#{applicantModelBean.firstName}">
+									<f:ajax render="firstNameField" />
+								</p:inputText>
+								<p:message id="firstNameMessage" for="firstName" />
+							</aui:field>
+							<aui:field id="lastNameField" label="#{i18n['last-name']}">
+								<p:inputText id="lastName" label="#{i18n['last-name']}" required="true" value="#{applicantModelBean.lastName}">
+									<f:ajax render="lastNameField" />
+								</p:inputText>
+								<p:message for="lastName" />
+							</aui:field>
+							<aui:field id="emailAddressField" label="#{i18n['email-address']}">
+								<p:inputText id="emailAddress" label="#{i18n['email-address']}" required="true"
+									validatorMessage="#{i18n['invalid-email-address']}" value="#{applicantModelBean.emailAddress}">
+									<f:validateRegex pattern=".+[@].+[.].+" />
+									<f:ajax render="emailAddressField" />
+								</p:inputText>
+								<p:message for="emailAddress" />
+							</aui:field>
+							<aui:field id="phoneNumberField" label="#{i18n['phone-number']}">
+								<p:inputText id="phoneNumber" label="#{i18n['phone-number']}" required="true"
+									value="#{applicantModelBean.phoneNumber}">
+									<f:ajax render="phoneNumberField" />
+								</p:inputText>
+								<p:message for="phoneNumber" />
+							</aui:field>
+						</aui:col>
+						<aui:col id="c1b" width="50">
+							<aui:field id="dateOfBirthField" label="#{i18n['birthday']}">
+								<p:calendar id="dateOfBirth" label="#{i18n['birthday']}" required="true"
+									pattern="#{portletPreferencesValues['datePattern'][0]}" showOn="button"
+									value="#{applicantModelBean.dateOfBirth}">
+									<f:convertDateTime pattern="#{portletPreferencesValues['datePattern'][0]}" />
+									<f:ajax render="dateOfBirthField" />
+								</p:calendar>
+								<p:message for="dateOfBirth" />
+							</aui:field>
+							<aui:field id="cityField" label="#{i18n['city']}">
+								<p:inputText id="city" label="#{i18n['city']}" required="true" value="#{applicantModelBean.city}">
+									<f:ajax render="cityField" />
+								</p:inputText>
+								<p:message id="cityMessage" for="city" />
+							</aui:field>
+							<aui:field id="provinceIdField" label="#{i18n['state-province']}">
+								<h:selectOneMenu id="provinceId" label="#{i18n['state-province']}" required="true"
+									value="#{applicantModelBean.provinceId}">
+									<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
+									<f:selectItems itemValue="#{province.provinceId}" itemLabel="#{province.provinceName}"
+										value="#{listModelBean.provinces}" var="province" />
+									<f:ajax render="provinceIdField" />
+								</h:selectOneMenu>
+								<p:message id="provinceIdMessage" for="provinceId" />
+							</aui:field>
+							<aui:field id="postalCodeField" label="#{i18n['zip-postal']}">
+								<p:inputText id="postalCode" label="#{i18n['zip-postal']}" required="true" style="width: 100px;"
+									value="#{applicantModelBean.postalCode}" valueChangeListener="#{applicantBackingBean.postalCodeListener}">
+									<f:ajax render="cityField provinceIdField postalCodeField" />
+								</p:inputText>
+								<img src="#{resource['example:icon-help.png']}" title="#{i18n['postal-code-hint']}" />
+								<p:message id="postalCodeMessage" for="postalCode" />
+							</aui:field>
+						</aui:col>
+					</aui:row>
 				</aui:fieldset>
 				<aui:fieldset>
-					<aui:column>
-						<aui:field id="commentsField" label="#{i18n['comments']}">
-							<h:panelGroup id="showHide" layout="block">
-								<f:ajax render="commentsField">
-									<h:commandLink actionListener="#{applicantViewBean.toggleComments}"
-										rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
-									<h:commandLink actionListener="#{applicantViewBean.toggleComments}"
-										rendered="#{applicantViewBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
-								</f:ajax>
-							</h:panelGroup>
-							<p:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantViewBean.commentsRendered}"
-								value="#{applicantModelBean.comments}">
-								<f:ajax />
-							</p:inputTextarea>
-						</aui:field>
-					</aui:column>
+					<aui:row>
+						<aui:col>
+							<aui:field id="commentsField" label="#{i18n['comments']}">
+								<h:panelGroup id="showHide" layout="block">
+									<f:ajax render="commentsField">
+										<h:commandLink actionListener="#{applicantViewBean.toggleComments}"
+											rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
+										<h:commandLink actionListener="#{applicantViewBean.toggleComments}"
+											rendered="#{applicantViewBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
+									</f:ajax>
+								</h:panelGroup>
+								<p:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantViewBean.commentsRendered}"
+									value="#{applicantModelBean.comments}">
+									<f:ajax />
+								</p:inputTextarea>
+							</aui:field>
+						</aui:col>
+					</aui:row>
 				</aui:fieldset>
 				<hr />
 				<p:commandButton action="#{applicantBackingBean.submit}" update="f1" value="#{i18n['submit']}" />
@@ -104,43 +109,45 @@
 					action="/views/portletEditMode.xhtml?javax.portlet.faces.PortletMode=edit&amp;javax.portlet.faces.WindowState=maximized"
 					ajax="false" immediate="true" value="#{i18n['edit-preferences']}" />
 			</h:form>
-		</aui:column>
-		<aui:column id="c2">
-			<h:form id="f1" enctype="multipart/form-data" prependId="false">
-				<aui:column id="c2a" styleClass="uploaded-files">
-					<p:confirmDialog message="#{i18n['are-you-sure-you-want-to-delete-this']}" severity="alert"
-						widgetVar="confirmation">
-						<p:commandButton id="confirm" actionListener="#{applicantBackingBean.deleteUploadedFile}"
-							oncomplete="confirmation.hide()" update="uploadedFilesTable" value="#{i18n['yes']}">
-							<f:param name="uploadedFileId" value="#{uploadedFile.id}" />
-						</p:commandButton>
-						<p:commandButton id="decline" oncomplete="confirmation.hide()" value="#{i18n['no']}" type="button" />
-					</p:confirmDialog>
-					<h3>#{i18n['attachments']}</h3>
-					<p:dataTable id="uploadedFilesTable" value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
-						<p:column>
-							<p:commandButton id="showDialogButton" icon="ui-icon-trash" onclick="confirmation.show()">
-								<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantViewBean.uploadedFileId}" />
+		</aui:col>
+		<aui:col id="c2" width="33">
+			<aui:row>
+				<aui:col id="c2a" styleClass="uploaded-files">
+					<h:form id="f1" enctype="multipart/form-data" prependId="false">
+						<p:confirmDialog message="#{i18n['are-you-sure-you-want-to-delete-this']}" severity="alert"
+							widgetVar="confirmation">
+							<p:commandButton id="confirm" actionListener="#{applicantBackingBean.deleteUploadedFile}"
+								oncomplete="confirmation.hide()" update="uploadedFilesTable" value="#{i18n['yes']}">
+								<f:param name="uploadedFileId" value="#{uploadedFile.id}" />
 							</p:commandButton>
-						</p:column>
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="#{i18n['file-name']}" />
-							</f:facet>
-							<h:outputText value="#{uploadedFile.name}" />
-						</p:column>
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="#{i18n['size']}" />
-							</f:facet>
-							<h:outputText value="#{uploadedFile.size}" />
-						</p:column>
-					</p:dataTable>
-					<p:fileUpload fileUploadListener="#{applicantBackingBean.handleFileUpload}" mode="advanced" multiple="true"
-						update="uploadedFilesTable" />
-				</aui:column>
-			</h:form>
-		</aui:column>
-	</aui:layout>
+							<p:commandButton id="decline" oncomplete="confirmation.hide()" value="#{i18n['no']}" type="button" />
+						</p:confirmDialog>
+						<h3>#{i18n['attachments']}</h3>
+						<p:dataTable id="uploadedFilesTable" value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
+							<p:column>
+								<p:commandButton id="showDialogButton" icon="ui-icon-trash" onclick="confirmation.show()">
+									<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantViewBean.uploadedFileId}" />
+								</p:commandButton>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{i18n['file-name']}" />
+								</f:facet>
+								<h:outputText value="#{uploadedFile.name}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{i18n['size']}" />
+								</f:facet>
+								<h:outputText value="#{uploadedFile.size}" />
+							</p:column>
+						</p:dataTable>
+						<p:fileUpload fileUploadListener="#{applicantBackingBean.handleFileUpload}" mode="advanced" multiple="true"
+							update="uploadedFilesTable" />
+					</h:form>
+				</aui:col>
+			</aui:row>
+		</aui:col>
+	</aui:row>
 
 </ui:composition>

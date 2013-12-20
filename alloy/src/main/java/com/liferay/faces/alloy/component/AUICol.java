@@ -24,17 +24,17 @@ public class AUICol extends AUIPanel implements NamingContainer {
 
 	// Public Constants
 	public static final int COLUMNS = 12;
+	public static final String FIRST = "first";
+	public static final String LAST = "last";
+	public static final String OFFSET = "offset";
+	public static final String OFFSET_WIDTH = "offsetWidth";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.renderkit.ColRenderer";
+	public static final String SPAN = "span";
+	public static final String WIDTH = "width";
 
 	// Private Constants
 	private static final String CSS_CLASS = "cssClass";
-	private static final String FIRST = "first";
-	private static final String LAST = "last";
-	private static final String OFFSET = "offset";
-	private static final String OFFSET_WIDTH = "offsetWidth";
-	private static final String RENDERER_TYPE = "com.liferay.faces.alloy.renderkit.ColRenderer";
-	private static final String SPAN = "span";
 	private static final String STYLE_CLASS = "styleClass";
-	private static final String WIDTH = "width";
 
 	public String getCssClass() {
 		return (String) getStateHelper().eval(CSS_CLASS, null);
@@ -57,16 +57,7 @@ public class AUICol extends AUIPanel implements NamingContainer {
 	}
 
 	public void setOffset(Integer offset) {
-
-		if (offset != null) {
-
-			if ((offset >= 1) && (offset <= COLUMNS)) {
-				getStateHelper().put(OFFSET, offset);
-			}
-			else {
-				throw new IllegalArgumentException("Value must be an integer between 1 and " + COLUMNS);
-			}
-		}
+		getStateHelper().put(OFFSET, offset);
 	}
 
 	public Integer getOffsetWidth() {
@@ -74,16 +65,7 @@ public class AUICol extends AUIPanel implements NamingContainer {
 	}
 
 	public void setOffsetWidth(Integer offsetWidth) {
-
-		if (offsetWidth != null) {
-
-			if ((offsetWidth >= 1) && (offsetWidth <= 100)) {
-				getStateHelper().put(OFFSET_WIDTH, offsetWidth);
-			}
-			else {
-				throw new IllegalArgumentException("Value must be an integer between 1 and 100.");
-			}
-		}
+		getStateHelper().put(OFFSET_WIDTH, offsetWidth);
 	}
 
 	@Override
@@ -96,16 +78,7 @@ public class AUICol extends AUIPanel implements NamingContainer {
 	}
 
 	public void setSpan(Integer span) {
-
-		if (span != null) {
-
-			if ((span >= 1) && (span <= COLUMNS)) {
-				getStateHelper().put(SPAN, span);
-			}
-			else {
-				throw new IllegalArgumentException("Value must be an integer between 1 and " + COLUMNS);
-			}
-		}
+		getStateHelper().put(SPAN, span);
 	}
 
 	public String getStyleClass() {
@@ -129,15 +102,6 @@ public class AUICol extends AUIPanel implements NamingContainer {
 	}
 
 	public void setWidth(Integer width) {
-
-		if (width != null) {
-
-			if ((width >= 1) && (width <= 100)) {
-				getStateHelper().put(WIDTH, width);
-			}
-			else {
-				throw new IllegalArgumentException("Value must be an integer between 1 and 100.");
-			}
-		}
+		getStateHelper().put(WIDTH, width);
 	}
 }

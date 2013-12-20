@@ -35,8 +35,8 @@
 	</h:form>
 	<h:form id="f2">
 		<ice:panelGroup>
-			<aui:layout>
-				<aui:column columnWidth="25" first="true">
+			<aui:row>
+				<aui:col width="25" first="true">
 					<liferay-ui:panel-container>
 						<liferay-ui:panel title="#{i18n['folders']}">
 							<ice:tree id="tree" value="#{docLibModelBean.folderTreeModel}" var="treeNode" hideRootNode="false"
@@ -60,8 +60,8 @@
 							</ice:tree>
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>
-				</aui:column>
-				<aui:column columnWidth="50">
+				</aui:col>
+				<aui:col width="50">
 					<liferay-ui:panel-container>
 						<liferay-ui:panel styleClass="docPanel" title="#{i18n['documents']}">
 							<liferay-ui:ice-page-iterator for="documents" />
@@ -111,9 +111,9 @@
 							<liferay-ui:info message="there-are-no-documents" rendered="#{docLibModelBean.documentDataModel.rowCount == 0}" />
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>
-				</aui:column>
+				</aui:col>
 				<c:set value="#{docLibModelBean.selectedFolderUserObject.text}" var="selectedFolderName" />
-				<aui:column columnWidth="25" last="true" styleClass="lfr-asset-column lfr-asset-column-actions">
+				<aui:col width="25" last="true" styleClass="lfr-asset-column lfr-asset-column-actions">
 					<h:panelGroup layout="block" styleClass="lfr-asset-summary">
 						<h:panelGroup styleClass="lfr-asset-avatar">
 							<h:graphicImage alt="#{selectedFolderName}"
@@ -131,8 +131,8 @@
 						<liferay-ui:icon href="javascript:uploadDialog.show();" image="../document_library/add_document"
 							message="add-document" rendered="#{docLibBackingBean.permittedToAddDocument}" />
 					</liferay-ui:icon-menu>
-				</aui:column>
-			</aui:layout>
+				</aui:col>
+			</aui:row>
 		</ice:panelGroup>
 	</h:form>
 </ui:composition>

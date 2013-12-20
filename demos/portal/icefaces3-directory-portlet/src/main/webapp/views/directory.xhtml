@@ -7,42 +7,44 @@
 
 	<h:form id="f2" styleClass="aui-form dp">
 		<aui-cc:messages globalOnly="true" layout="table" />
-		<aui:layout>
-			<aui:column styleClass="aui-w100">
+		<aui:row>
+			<aui:col styleClass="aui-w100">
 				<ice:outputConnectionStatus style="float: right;" />
 				<icecore:singleSubmit>
 					<aui:fieldset>
-						<aui:column>
-							<aui:field inlineLabel="left" label="#{i18n['last-name']}" type="text">
-								<ice:inputText actionListener="#{directoryBackingBean.searchActionListener.processAction}"
-									styleClass="aui-field-input aui-field-input-text" value="#{directoryModelBean.searchCriteria.lastName}" />
-							</aui:field>
-						</aui:column>
-						<aui:column>
-							<aui:field inlineLabel="left" label="#{i18n['first-name']}" type="text">
-								<ice:inputText actionListener="#{directoryBackingBean.searchActionListener.processAction}"
-									styleClass="aui-field-input aui-field-input-text" value="#{directoryModelBean.searchCriteria.firstName}" />
-							</aui:field>
-						</aui:column>
-						<aui:column>
-							<aui:field inlineLabel="left" label="#{i18n['email-address']}" type="text">
-								<ice:inputText actionListener="#{directoryBackingBean.searchActionListener.processAction}"
-									styleClass="aui-field-input aui-field-input-text" value="#{directoryModelBean.searchCriteria.emailAddress}" />
-							</aui:field>
-						</aui:column>
-						<aui:column>
-							<aui-cc:select inlineMessage="true" label="#{i18n['status']}" required="true"
-								value="#{directoryModelBean.searchCriteria.status}">
-								<f:selectItems value="#{directoryModelBean.statusSelectItems}" />
-							</aui-cc:select>
-						</aui:column>
-						<aui:column>
-							<aui-cc:select inlineMessage="true" label="#{i18n['search-operator']}" required="true"
-								value="#{directoryModelBean.searchCriteria.andSearch}">
-								<f:selectItem itemLabel="#{i18n['all']}" itemValue="true" />
-								<f:selectItem itemLabel="#{i18n['any']}" itemValue="false" />
-							</aui-cc:select>
-						</aui:column>
+						<aui:row>
+							<aui:col width="20">
+								<aui:field inlineLabel="left" label="#{i18n['last-name']}" type="text">
+									<ice:inputText actionListener="#{directoryBackingBean.searchActionListener.processAction}"
+										styleClass="aui-field-input aui-field-input-text" value="#{directoryModelBean.searchCriteria.lastName}" />
+								</aui:field>
+							</aui:col>
+							<aui:col width="20">
+								<aui:field inlineLabel="left" label="#{i18n['first-name']}" type="text">
+									<ice:inputText actionListener="#{directoryBackingBean.searchActionListener.processAction}"
+										styleClass="aui-field-input aui-field-input-text" value="#{directoryModelBean.searchCriteria.firstName}" />
+								</aui:field>
+							</aui:col>
+							<aui:col width="20">
+								<aui:field inlineLabel="left" label="#{i18n['email-address']}" type="text">
+									<ice:inputText actionListener="#{directoryBackingBean.searchActionListener.processAction}"
+										styleClass="aui-field-input aui-field-input-text" value="#{directoryModelBean.searchCriteria.emailAddress}" />
+								</aui:field>
+							</aui:col>
+							<aui:col width="20">
+								<aui-cc:select inlineMessage="true" label="#{i18n['status']}" required="true"
+									value="#{directoryModelBean.searchCriteria.status}">
+									<f:selectItems value="#{directoryModelBean.statusSelectItems}" />
+								</aui-cc:select>
+							</aui:col>
+							<aui:col width="20">
+								<aui-cc:select inlineMessage="true" label="#{i18n['search-operator']}" required="true"
+									value="#{directoryModelBean.searchCriteria.andSearch}">
+									<f:selectItem itemLabel="#{i18n['all']}" itemValue="true" />
+									<f:selectItem itemLabel="#{i18n['any']}" itemValue="false" />
+								</aui-cc:select>
+							</aui:col>
+						</aui:row>
 						<aui:button-row>
 							<aui-cc:button type="submit" label="#{i18n['search']}">
 								<f:actionListener for="click" binding="#{directoryBackingBean.searchActionListener}" />
@@ -97,8 +99,8 @@
 					</ice:column>
 				</ice:dataTable>
 				<liferay-ui:info message="there-are-no-results" rendered="#{directoryModelBean.dataModel.rowCount == 0}" />
-			</aui:column>
-		</aui:layout>
+			</aui:col>
+		</aui:row>
 	</h:form>
 
 </ui:composition>

@@ -6,3 +6,11 @@
     padding-left: 4px;
     padding-right: 4px;
 }
+
+.jsf2-portlet .rf-fu {
+	width: 100%;	
+}
+
+.jsf2-portlet .rf-cal-inp {
+	width: 190px;
+}

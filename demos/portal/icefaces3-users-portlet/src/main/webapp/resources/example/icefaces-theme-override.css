@@ -56,3 +56,7 @@
 	font-style: italic;
 	padding-left: 20px;
 }
+
+.row-fluid .ui-inputfield {
+	width: 190px;
+}
