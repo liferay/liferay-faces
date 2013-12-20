@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vdldoc="http://vdldoc.org/vdldoc"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
+   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://vdldoc.googlecode.com/hg/src/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
 	version="2.0">
+	<description>The Liferay Faces Portal facelet component tags with the &lt;code&gt;liferay-util:&lt;/code&gt; tag name prefix.</description>
 	<namespace>http://liferay.com/faces/util</namespace>
 	<function>
 		<description>If the specified value is a portal property such as &quot;editor.wysiwyg.default&quot; then this function returns the value of the portal property such as &quot;ckeditor&quot;. Otherwise if the specified value is null or empty, then the browser capabilities determine the return value. Browsers that do not have the ability to support rich text will cause this function to return &quot;simple&quot; or &quot;tinymce_simple&quot;.</description>
@@ -54,6 +55,9 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Validator that is meant to be used in conjunction with the &lt;code&gt;liferay-ui:input-editor&lt;/code&gt; component in order to validate length on the server-side.</description>
@@ -83,5 +87,8 @@
 			<name>minimum</name>
 			<type>java.lang.Integer</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 </facelet-taglib>

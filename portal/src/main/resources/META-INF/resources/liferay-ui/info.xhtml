@@ -2,10 +2,14 @@
 <ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:cc="http://java.sun.com/jsf/composite" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:liferay-ui="http://liferay.com/faces/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:vdldoc="http://vdldoc.org/vdldoc"
 	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
 
 	<cc:interface  shortDescription="The &lt;code&gt;liferay-ui:info&lt;/code&gt; tag encapsulates an HTML &lt;code&gt;div&lt;/code&gt; tag with a liferay-ui:message component inside it.">
 		<cc:attribute name="message" required="true" />
+    	<cc:extension>
+    		<vdldoc:since value="3.0.0" />
+    	</cc:extension>
 	</cc:interface>
 
 	<cc:implementation>

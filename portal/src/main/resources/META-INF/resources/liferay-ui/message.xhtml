@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:cc="http://java.sun.com/jsf/composite" xmlns:liferay-ui="http://liferay.com/faces/ui"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vdldoc="http://vdldoc.org/vdldoc"
 	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
 
-	<cc:interface shortDescription="The &lt;code&gt;liferay-ui:message&lt;/code&gt; tag encapsulates an JSF h:outputText tag which outputs the value of the key attribute.">
+	<cc:interface shortDescription="The &lt;code&gt;liferay-ui:message&lt;/code&gt; tag encapsulates an JSF &lt;code&gt;h:outputText&lt;/code&gt; tag which outputs the value of the key attribute.">
 		<cc:attribute name="key" required="true" />
+    	<cc:extension>
+    		<vdldoc:since value="3.0.0" />
+    	</cc:extension>
 	</cc:interface>
 
 	<cc:implementation>
