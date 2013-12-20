@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:cc="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:vdldoc="http://vdldoc.org/vdldoc"
 	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
 
-	<cc:interface shortDescription="The &lt;code&gt;liferay-ui:panel-container&lt;/code&gt; tag encapsulates an JSF h:panelGroup tag with liferay panel container styleClass.">
+	<cc:interface shortDescription="The &lt;code&gt;liferay-ui:panel-container&lt;/code&gt; tag encapsulates an JSF &lt;code&gt;h:panelGroup&lt;/code&gt; tag with liferay panel container styleClass.">
 		<cc:attribute name="cssClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute (same as styleClass)." />
 		<cc:attribute name="styleClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute." />
+    	<cc:extension>
+    		<vdldoc:since value="3.1.0" />
+    	</cc:extension>
 	</cc:interface>
 
 	<cc:implementation>

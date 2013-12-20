@@ -7,7 +7,7 @@
    <short-name>aui</short-name>
    <uri>http://liferay.com/faces/aui</uri>
    <tag>
-      <description>Renders a span element with CSS class name "aui-button-holder" that will be positioned by Alloy UI CSS.&lt;br/&gt;&lt;br/&gt;Since: 3.2.0/3.1.0/3.0.0/2.1.0</description>
+      <description>Renders a span element with CSS class name "aui-button-holder" that will be positioned by Alloy UI CSS.</description>
       <name>button-row</name>
       <tag-class>com.liferay.faces.alloy.taglib.ButtonRowRendererTag</tag-class>
       <body-content>JSP</body-content>
