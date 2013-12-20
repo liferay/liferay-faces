@@ -1,9 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:vdldoc="http://vdldoc.org/vdldoc"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
+   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://vdldoc.googlecode.com/hg/src/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
 	version="2.0">
+	<description>The Liferay Faces Bridge facelet component tags with the &lt;code&gt;portlet:&lt;/code&gt; tag name prefix.</description>
 	<namespace>http://java.sun.com/portlet_2_0</namespace>
 	<tag>
 		<description>Creates a URL that points to the current portlet and triggers a action request with the supplied parameters. If the var attribute is present, the &lt;code&gt;portlet:actionURL&lt;/code&gt; tag introduces an EL variable that contains a javax.portlet.ActionURL adequate for postbacks. Otherwise, the URL is written to the response.</description>
@@ -41,6 +43,9 @@
 			<name>windowState</name>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0-legacy</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Defines objects like RenderRequest, ResourceRequest, ActionRequest, EventRequest etc. which are useful for the portlet lifecycle.</description>
@@ -48,6 +53,9 @@
 		<component>
 			<component-type>com.liferay.faces.bridge.component.PortletDefineObjects</component-type>
 		</component>
+		<tag-extension>
+			<vdldoc:since>3.0.0-legacy</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Creates a name space that will be unique for the current portlet resources. If the var attribute is present, the &lt;code&gt;portlet:namespace&lt;/code&gt; tag introduces an EL variable that contains the portlet namespace. Otherwise, the namespace is written to the response.</description>
@@ -56,6 +64,9 @@
 			<component-type>com.liferay.faces.bridge.component.PortletNameSpace</component-type>
 			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.NameSpaceRenderer</renderer-type>
 		</component>
+		<tag-extension>
+			<vdldoc:since>3.0.0-legacy</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Creates a URL parameter that points to the current portlet and triggers a render request with the supplied parameters. The &lt;code&gt;portlet:param&lt;/code&gt; tag provides the ability to add a request parameter name=value pair when nested inside portlet:actionURL, portletRenderURL, or portlet:resourceURL tags.</description>
@@ -71,6 +82,9 @@
 			<name>value</name>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0-legacy</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Equivalent to the call addProperty(), and the property can be added to an actionURL, renderURL, or resourceURL.</description>
@@ -86,6 +100,9 @@
 			<name>value</name>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0-legacy</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Creates a URL that points to the current portlet and triggers a render request with the supplied parameters. If the var attribute is present, the &lt;code&gt;portlet:renderURL&lt;/code&gt; tag introduces an EL variable that contains a javax.portlet.PortletURL adequate for rendering. Otherwise, the URL is written to the response.</description>
@@ -119,6 +136,9 @@
 			<name>windowState</name>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0-legacy</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Creates a URL that points to the current portlet and triggers a resource request with the supplied parameters. If the var attribute is present, the &lt;code&gt;portlet:resourceURL&lt;/code&gt; tag introduces an EL variable that contains a javax.portlet.ActionURL adequate for obtaining resources. Otherwise, the URL is written to the response.</description>
@@ -149,5 +169,8 @@
 			<name>var</name>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0-legacy</vdldoc:since>
+		</tag-extension>
 	</tag>
 </facelet-taglib>
