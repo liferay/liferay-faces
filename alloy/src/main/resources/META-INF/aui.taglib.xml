@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vdldoc="http://vdldoc.org/vdldoc"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd" version="2.0">
-	<description>Liferay Faces Alloy Facelet component tags.</description>
+   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://vdldoc.googlecode.com/hg/src/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
+	version="2.0">
+	<description>The Liferay Faces Alloy facelet component tags with the &lt;code&gt;aui:&lt;/code&gt; tag name prefix.</description>
 	<namespace>http://liferay.com/faces/aui</namespace>
 	<function>
 		<description>Returns an escaped representation of the specified client ID.</description>
@@ -11,7 +12,7 @@
 		<function-signature>java.lang.String escapeClientId(java.lang.String)</function-signature>
 	</function>
 	<tag>
-		<description>Renders a span element with CSS class name &quot;aui-button-holder&quot; that will be positioned by Alloy UI CSS.&lt;br/&gt;&lt;br/&gt;Since: 3.2.0/3.1.0/3.0.0/2.1.0</description>
+		<description>Renders a span element with CSS class name &quot;aui-button-holder&quot; that will be positioned by Alloy UI CSS.</description>
 		<tag-name>button-row</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIButtonRow</component-type>
@@ -43,6 +44,9 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Renders a div element with CSS class name &quot;aui-column&quot; that will be positioned by Alloy UI CSS.</description>
@@ -93,6 +97,9 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Renders a div element with CSS class name &quot;aui-dialog&quot; that will be positioned by Alloy UI CSS.</description>
@@ -185,6 +192,9 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Converts a comma delimited list of long integers into java.util.List&amp;lt;Long&amp;gt;.</description>
@@ -192,6 +202,9 @@
 		<converter>
 			<converter-id>convertLongList</converter-id>
 		</converter>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Renders a span element with CSS class name &quot;aui-field&quot; that will be positioned by Alloy UI CSS.</description>
@@ -242,6 +255,9 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Renders a fieldset element with CSS class name &quot;aui-fieldset&quot; that will be positioned by Alloy UI CSS.</description>
@@ -286,6 +302,9 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Renders a form element with CSS class name &quot;aui-form&quot; that will be positioned by Alloy UI CSS.</description>
@@ -306,6 +325,9 @@
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Sets the value of the specified var in the EL to a mapping of the public static constants of the specified classType.</description>
@@ -323,6 +345,9 @@
 			<required>true</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Renders a div element with CSS class name &quot;aui-layout&quot; that will be positioned by Alloy UI CSS.</description>
@@ -355,6 +380,9 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Renders a ul element with CSS class name &quot;aui-list&quot; that will be positioned by Alloy UI CSS.</description>
@@ -387,6 +415,9 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Renders an li element with CSS class name &quot;aui-listitem&quot; that will be positioned by Alloy UI CSS.</description>
@@ -419,6 +450,9 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Renders a div element with CSS class name &quot;aui-textboxlist&quot; that will be positioned by Alloy UI CSS.</description>
@@ -451,6 +485,9 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Renders an li element with CSS class name &quot;aui-textboxlistentry&quot; that will be positioned by Alloy UI CSS.</description>
@@ -483,6 +520,9 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 	<tag>
 		<description>Renders a script element.</description>
@@ -509,5 +549,8 @@
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.0.0</vdldoc:since>
+		</tag-extension>
 	</tag>
 </facelet-taglib>
