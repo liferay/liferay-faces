@@ -169,11 +169,11 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.4</vdldoc:since>
 			<vdldoc:deprecation>
 				<vdldoc:deprecated>true</vdldoc:deprecated>
 				<vdldoc:description>Please use aui:row and aui:col instead.</vdldoc:description>
 			</vdldoc:deprecation>
+			<vdldoc:since>3.2.4</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -399,6 +399,12 @@
 			<name>rendered</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>The name of a CSS class that is to be rendered within the class attribute.</description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>

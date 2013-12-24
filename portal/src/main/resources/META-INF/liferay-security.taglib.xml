@@ -12,6 +12,48 @@
 			<component-type>com.liferay.faces.portal.PermissionsURL</component-type>
 			<renderer-type>com.liferay.faces.portal.renderkit.PermissionsURLRenderer</renderer-type>
 		</component>
+		<attribute>
+			<description>The identifier of the component.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>The fully qualified Java class of the model resource. For example: &lt;code&gt;MyModelResource.class.getName()&lt;/code&gt;.</description>
+			<name>modelResource</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>The description of the model resource.</description>
+			<name>modelResourceDescription</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>The redirect URL.</description>
+			<name>redirect</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>The primary key value of the model resource.</description>
+			<name>resourcePrimKey</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>The text of the hyperlink that the user will see and click on.</description>
+			<name>value</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
 		</tag-extension>

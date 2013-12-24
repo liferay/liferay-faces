@@ -7,6 +7,7 @@
 
 	<cc:interface shortDescription="The &lt;code&gt;liferay-ui:icon&lt;/code&gt; tag encapsulates an HTML &lt;code&gt;img&lt;/code&gt; tag whose &lt;code&gt;src&lt;/code&gt; attribute contains a fully qualified URL to an icon image in the current Liferay theme.">
 		<cc:actionSource name="click" targets="cmdLink" />
+		<cc:attribute name="alt" required="false" shortDescription="Corresponds to the value of the &lt;code&gt;alt&lt;/code&gt; attribute for the embedded &lt;code&gt;img&lt;/code&gt; tag. The default value is Liferay's internationalized message for the key named &lt;code&gt;view&lt;/code&gt;." />
 		<cc:attribute name="cssClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute (same as styleClass)." />
 		<cc:attribute name="image" required="true" shortDescription="The name of the theme image icon, which can be the prefix of any image filename in the Liferay theme's &quot;common&quot; image folder. The default value is &lt;code&gt;view&lt;/code&gt;." />
 		<cc:attribute name="href" required="false" shortDescription="The link which is opened when the icon is clicked." />

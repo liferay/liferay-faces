@@ -23,6 +23,13 @@
 			<name>accesskey</name>
 			<type>java.lang.String</type>
 		</attribute>
+		<!-- Standard Faces attributes -->
+		<attribute>
+			<description>An EL expression that represents a JavaBean property for the corresponding HtmlInputFile component in the runtime component tree.</description>
+			<name>binding</name>
+			<required>true</required>
+			<type>com.liferay.faces.bridge.component.HtmlInputFile</type>
+		</attribute>
 		<!-- Standard HTML input attributes cont. -->
 		<attribute>
 			<name>dir</name>
@@ -37,6 +44,13 @@
 			<name>fileUploadListener</name>
 			<required>false</required>
 			<type>javax.el.MethodExpression</type>
+		</attribute>
+		<!-- Standard Faces attributes cont. -->
+		<attribute>
+			<description>The identifier of the component.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<!-- Standard HTML input attributes cont. -->
 		<attribute>
@@ -104,6 +118,13 @@
 		<attribute>
 			<name>onselect</name>
 			<type>java.lang.String</type>
+		</attribute>
+		<!-- Standard Faces attributes cont. -->
+		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<!-- Attributes related to type="file" cont. -->
 		<attribute>

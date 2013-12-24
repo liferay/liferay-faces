@@ -8,14 +8,14 @@
 	<cc:interface shortDescription="The &lt;code&gt;aui-cc:input&lt;/code&gt; renders either an input (type=text), textarea, input (type=&quot;secret&quot;), input (type=&quot;checkbox&quot;), or input (type=&quot;radio&quot;) with appropriate Alloy UI CSS class names, according to the value of the type attribute.">
 		<cc:attribute name="cols" required="false" shortDescription="The number of columns for the rendered textarea." />
 		<cc:attribute name="cssClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute (same as styleClass)." />
-		<cc:attribute name="disabled" default="false" required="false" shortDescription="This is an HTML pass-thru type of attribute. The default value is “false”." />
+		<cc:attribute name="disabled" default="false" required="false" type="java.lang.Boolean" shortDescription="This is an HTML pass-thru type of attribute. The default value is “false”." />
 		<cc:attribute name="inlineLabel" default="left" required="false" shortDescription="The position of the label. Valid values are: left, right." />
-		<cc:attribute name="inlineMessage" default="false" required="false" shortDescription="Boolean flag indicating whether or not there should be an inline h:message tag included. The default value is &quot;false&quot;." />
+		<cc:attribute name="inlineMessage" default="false" required="false" type="java.lang.Boolean" shortDescription="Boolean flag indicating whether or not there should be an inline h:message tag included. The default value is &quot;false&quot;." />
 		<cc:attribute name="label" required="true" shortDescription="The text value for the rendered label of the button." />
 		<cc:attribute name="onblur" required="false" shortDescription="This is an HTML pass-thru type of attribute." />
 		<cc:attribute name="onchange" required="false" shortDescription="This is an HTML pass-thru type of attribute." />
-		<cc:attribute name="readonly" default="false" required="false" shortDescription="This is an HTML pass-thru type of attribute. The default value is &quot;false&quot;." />
-		<cc:attribute name="required" default="false" required="false" shortDescription="Boolean flag indicating whether or not it is required for the user to supply a value for this component. The default value is &quot;false&quot;." />
+		<cc:attribute name="readonly" default="false" required="false" type="java.lang.Boolean" shortDescription="This is an HTML pass-thru type of attribute. The default value is &quot;false&quot;." />
+		<cc:attribute name="required" default="false" required="false" type="java.lang.Boolean" shortDescription="Boolean flag indicating whether or not it is required for the user to supply a value for this component. The default value is &quot;false&quot;." />
 		<cc:attribute name="rows" required="false" shortDescription="The number of rows for the rendered textarea." />
 		<cc:attribute name="size" required="false" shortDescription="The size/width of the rendered input text box." />
 		<cc:attribute name="style" required="false" shortDescription="This is an HTML pass-thru type of attribute." />

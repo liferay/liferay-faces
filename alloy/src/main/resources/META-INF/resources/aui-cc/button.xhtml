@@ -7,7 +7,7 @@
 	<cc:interface shortDescription="Renders a div with CSS class name &quot;aui-button&quot; and a child input element with CSS class name &quot;aui-button-input&quot;. The button's interface also defines an actionSource with name=&quot;click&quot; that can be referenced in the using page.">
 		<cc:actionSource name="click" targets="cmdButton" />
 		<cc:attribute name="cssClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute (same as styleClass)." />
-		<cc:attribute name="immediate" default="false" required="false" shortDescription="Boolean flag indicating whether or not actions and action listeners are to be executed during the APPLY_REQUEST_VALUES phase of the JSF lifecycle. The default value is &lt;code&gt;false&lt;/code&gt;." />
+		<cc:attribute name="immediate" default="false" required="false" type="java.lang.Boolean" shortDescription="Boolean flag indicating whether or not actions and action listeners are to be executed during the APPLY_REQUEST_VALUES phase of the JSF lifecycle. The default value is &lt;code&gt;false&lt;/code&gt;." />
 		<cc:attribute name="label" required="false" shortDescription="The text value for the rendered label of the button." />
 		<cc:attribute name="styleClass" required="false" shortDescription="The name of a CSS class that is to be rendered within the class attribute." />
 		<cc:attribute name="type" required="false" shortDescription="The type of button. Valid values are: cancel and submit." />

@@ -23,6 +23,12 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>The identifier of the component.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<name>name</name>
 			<type>java.lang.String</type>
 		</attribute>
@@ -31,12 +37,19 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
 			<name>secure</name>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description>Specifies the name of a variable that will be introduced into the EL.</description>
 			<name>var</name>
+			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -64,6 +77,28 @@
 			<component-type>com.liferay.faces.bridge.component.PortletNameSpace</component-type>
 			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.NameSpaceRenderer</renderer-type>
 		</component>
+		<attribute>
+			<description>The identifier of the component.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>portletMode</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>Specifies the name of a variable that will be introduced into the EL.</description>
+			<name>var</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
 		</tag-extension>
@@ -75,11 +110,27 @@
 			<component-type>com.liferay.faces.bridge.component.PortletParam</component-type>
 		</component>
 		<attribute>
-			<name>name</name>
+			<description>The identifier of the component.</description>
+			<name>id</name>
+			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>The name of the parameter.</description>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>The value of the parameter.</description>
 			<name>value</name>
+			<required>true</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
@@ -120,8 +171,20 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description>The identifier of the component.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<name>portletMode</name>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<name>secure</name>
@@ -130,6 +193,7 @@
 		<attribute>
 			<description>Specifies the name of a variable that will be introduced into the EL.</description>
 			<name>var</name>
+			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -158,7 +222,14 @@
 		<attribute>
 			<description>The identifier of the component.</description>
 			<name>id</name>
+			<required>false</required>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Boolean flag indicating whether or not this component is to be rendered during the	RENDER_RESPONSE phase of the JSF lifecycle. The default value is &lt;code&gt;true&lt;/code&gt;.</description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<name>secure</name>
@@ -167,6 +238,7 @@
 		<attribute>
 			<description>Specifies the name of a variable that will be introduced into the EL.</description>
 			<name>var</name>
+			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
