@@ -63,6 +63,7 @@
 	<modules>
 		<module>init</module>
 		<module>util</module>
+		<module>maven</module>
 		<module>alloy</module>
 		<module>bridge-api</module>
 		<module>bridge-impl</module>
