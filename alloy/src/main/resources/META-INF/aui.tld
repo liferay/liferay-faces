@@ -9,7 +9,7 @@
    <tag>
       <description>Renders a span element with CSS class name "aui-button-holder" that will be positioned by Alloy UI CSS.</description>
       <name>button-row</name>
-      <tag-class>com.liferay.faces.alloy.taglib.ButtonRowRendererTag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.AUIButtonRowTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>cssClass</name>
@@ -41,7 +41,7 @@
    <tag>
       <description>Renders a div element with CSS class name "span#" (for example: span1 or span5) that will be positioned by Alloy UI CSS.</description>
       <name>col</name>
-      <tag-class>com.liferay.faces.alloy.taglib.ColRendererTag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.AUIColTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>width</name>
@@ -115,7 +115,7 @@
    <tag>
       <description>Renders a div element with CSS class name "aui-column" that will be positioned by Alloy UI CSS.</description>
       <name>column</name>
-      <tag-class>com.liferay.faces.alloy.taglib.ColumnRendererTag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.AUIColumnTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>columnWidth</name>
@@ -168,7 +168,7 @@
    <tag>
       <description>Renders a div element with CSS class name "aui-dialog" that will be positioned by Alloy UI CSS.</description>
       <name>dialog</name>
-      <tag-class>com.liferay.faces.alloy.taglib.DialogRendererTag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.AUIDialogTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>bodyContent</name>
@@ -276,7 +276,7 @@
    <tag>
       <description>Renders a span element with CSS class name "aui-field" that will be positioned by Alloy UI CSS.</description>
       <name>field</name>
-      <tag-class>com.liferay.faces.alloy.taglib.FieldRendererTag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.AUIFieldTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>cssClass</name>
@@ -329,7 +329,7 @@
    <tag>
       <description>Renders a fieldset element with CSS class name "aui-fieldset" that will be positioned by Alloy UI CSS.</description>
       <name>fieldset</name>
-      <tag-class>com.liferay.faces.alloy.taglib.FieldSetRendererTag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.AUIFieldSetTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>column</name>
@@ -375,7 +375,7 @@
    <tag>
       <description>Renders a form element with CSS class name "aui-form" that will be positioned by Alloy UI CSS.</description>
       <name>form</name>
-      <tag-class>com.liferay.faces.alloy.taglib.FormTag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.AUIFormTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>id</name>
@@ -413,7 +413,7 @@
    <tag>
       <description>Renders a div element with CSS class name "aui-layout" that will be positioned by Alloy UI CSS.</description>
       <name>layout</name>
-      <tag-class>com.liferay.faces.alloy.taglib.LayoutRendererTag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.AUILayoutTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>cssClass</name>
@@ -445,7 +445,7 @@
    <tag>
       <description>Renders a ul element with CSS class name "aui-list" that will be positioned by Alloy UI CSS.</description>
       <name>list</name>
-      <tag-class>com.liferay.faces.alloy.taglib.ListRendererTag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.AUIListTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>cssClass</name>
@@ -477,7 +477,7 @@
    <tag>
       <description>Renders an li element with CSS class name "aui-listitem" that will be positioned by Alloy UI CSS.</description>
       <name>list-item</name>
-      <tag-class>com.liferay.faces.alloy.taglib.ListItemRendererTag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.AUIListItemTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>cssClass</name>
@@ -509,7 +509,7 @@
    <tag>
       <description>Renders a div element with CSS class name "row" that will be positioned by Alloy UI CSS.</description>
       <name>row</name>
-      <tag-class>com.liferay.faces.alloy.taglib.RowRendererTag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.AUIRowTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>cssClass</name>
@@ -548,7 +548,7 @@
    <tag>
       <description>Renders a div element with CSS class name "aui-textboxlist" that will be positioned by Alloy UI CSS.</description>
       <name>text-box-list</name>
-      <tag-class>com.liferay.faces.alloy.taglib.TextBoxListRendererTag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.AUITextBoxListTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>cssClass</name>
@@ -580,7 +580,7 @@
    <tag>
       <description>Renders an li element with CSS class name "aui-textboxlistentry" that will be positioned by Alloy UI CSS.</description>
       <name>text-box-list-item</name>
-      <tag-class>com.liferay.faces.alloy.taglib.TextBoxListItemRendererTag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.AUITextBoxListItemTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>cssClass</name>
@@ -612,7 +612,7 @@
    <tag>
       <description>Renders a script element.</description>
       <name>script</name>
-      <tag-class>com.liferay.faces.alloy.taglib.ScriptRendererTag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.AUIScriptTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>id</name>
