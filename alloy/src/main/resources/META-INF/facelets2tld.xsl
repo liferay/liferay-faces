@@ -28,7 +28,7 @@
 					<tag-class><xsl:value-of select="$handlerClass" /></tag-class>		
 				</xsl:when>
 				<xsl:otherwise>
-					<tag-class><xsl:value-of select="replace(normalize-space(component),'.*[.]',concat($taglibPackage,'.'))" />Tag</tag-class>
+					<tag-class><xsl:value-of select="replace(normalize-space(component/component-type),'.*[.]',concat($taglibPackage,'.'))" />Tag</tag-class>
 				</xsl:otherwise>
 			</xsl:choose>
 			<body-content>JSP</body-content>
