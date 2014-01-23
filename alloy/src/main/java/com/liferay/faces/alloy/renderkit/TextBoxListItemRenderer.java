@@ -21,13 +21,17 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.alloy.util.StringConstants;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
  * @author  Neil Griffin
  */
 public class TextBoxListItemRenderer extends Renderer {
+
+	// Private Constants
+	private static final String CSS_CLASS = "cssClass";
+	private static final String STYLE_CLASS = "styleClass";
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -37,10 +41,10 @@ public class TextBoxListItemRenderer extends Renderer {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		responseWriter.startElement(StringConstants.ELEMENT_LI, uiComponent);
+		responseWriter.startElement(StringPool.LI, uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute(StringConstants.ATTRIBUTE_ID, id, StringConstants.ATTRIBUTE_ID);
+		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
 
 		StringBuilder classNames = new StringBuilder();
 
@@ -49,21 +53,21 @@ public class TextBoxListItemRenderer extends Renderer {
 		// aui-component found in 6.2 only in javascript TODO
 		classNames.append("aui-widget aui-component textboxlistentry textboxlistentry-focused");
 
-		String cssClass = (String) attributes.get(StringConstants.ATTRIBUTE_CSS_CLASS);
+		String cssClass = (String) attributes.get(CSS_CLASS);
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(StringConstants.CHAR_SPACE);
+			classNames.append(StringPool.SPACE);
 			classNames.append(cssClass);
 		}
 
-		String styleClass = (String) attributes.get(StringConstants.ATTRIBUTE_STYLE_CLASS);
+		String styleClass = (String) attributes.get(STYLE_CLASS);
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(StringConstants.CHAR_SPACE);
+			classNames.append(StringPool.SPACE);
 			classNames.append(styleClass);
 		}
 
-		responseWriter.writeAttribute(StringConstants.ATTRIBUTE_CLASS, classNames.toString(), null);
+		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
 	}
 
 	@Override
@@ -71,7 +75,7 @@ public class TextBoxListItemRenderer extends Renderer {
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringConstants.ELEMENT_LI);
+		responseWriter.endElement(StringPool.LI);
 	}
 
 }
