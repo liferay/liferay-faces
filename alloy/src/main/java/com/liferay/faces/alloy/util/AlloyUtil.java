@@ -13,60 +13,27 @@
  */
 package com.liferay.faces.alloy.util;
 
-import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Use {@link ComponentUtil} from the Liferay Faces Util project instead.
  */
+@Deprecated
 public class AlloyUtil {
 
-	// Private Constants
-	private static final String REGEX_COLON = "[:]";
-	private static final String DOUBLE_BACKSLASH_COLON = "\\\\\\\\:";
-
+	/**
+	 * @deprecated  Use {@link ComponentUtil#appendToCssClasses(String, String)} instead.
+	 */
 	public static String appendToCssClasses(String cssClass, String suffix) {
-
-		String value = cssClass;
-
-		if (value != null) {
-			value = value.trim();
-
-			if (value.length() > 0) {
-				StringBuilder buf = new StringBuilder();
-				String[] cssClasses = cssClass.trim().split(StringPool.SPACE);
-				boolean firstClass = true;
-
-				for (String curCssClass : cssClasses) {
-
-					if (firstClass) {
-						firstClass = false;
-					}
-					else {
-						buf.append(StringPool.SPACE);
-					}
-
-					buf.append(curCssClass);
-					buf.append(suffix);
-				}
-
-				value = buf.toString();
-			}
-		}
-
-		return value;
+		return ComponentUtil.appendToCssClasses(cssClass, suffix);
 	}
 
+	/**
+	 * @deprecated  Use {@link ComponentUtil#escapeClientId(String)} instead.
+	 */
 	public static String escapeClientId(String clientId) {
-		String escapedClientId = clientId;
-
-		if (escapedClientId != null) {
-
-			// JSF clientId values contain colons, which must be preceeded by double backslashes in order to have them
-			// work with JavaScript functions like AUI.one(String). http://yuilibrary.com/projects/yui3/ticket/2528057
-			escapedClientId = escapedClientId.replaceAll(REGEX_COLON, DOUBLE_BACKSLASH_COLON);
-		}
-
-		return escapedClientId;
+		return ComponentUtil.escapeClientId(clientId);
 	}
 }
