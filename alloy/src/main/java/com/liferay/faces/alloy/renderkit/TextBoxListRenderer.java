@@ -21,14 +21,18 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.alloy.util.AlloyUtil;
-import com.liferay.faces.alloy.util.StringConstants;
+import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
  * @author  Neil Griffin
  */
 public class TextBoxListRenderer extends Renderer {
+
+	// Private Constants
+	private static final String CSS_CLASS = "cssClass";
+	private static final String STYLE_CLASS = "styleClass";
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -37,10 +41,10 @@ public class TextBoxListRenderer extends Renderer {
 		Map<String, Object> attributes = uiComponent.getAttributes();
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringConstants.ELEMENT_DIV, uiComponent);
+		responseWriter.startElement(StringPool.DIV, uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute(StringConstants.ATTRIBUTE_ID, id, StringConstants.ATTRIBUTE_ID);
+		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
 
 		StringBuilder outerDivClassNames = new StringBuilder();
 
@@ -49,24 +53,24 @@ public class TextBoxListRenderer extends Renderer {
 //       aui-textboxlist not found in 6.2
 		outerDivClassNames.append("aui-widget aui-component aui-textboxlist ");
 
-		String cssClass = (String) attributes.get(StringConstants.ATTRIBUTE_CSS_CLASS);
+		String cssClass = (String) attributes.get(CSS_CLASS);
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			outerDivClassNames.append(StringConstants.CHAR_SPACE);
+			outerDivClassNames.append(StringPool.SPACE);
 			outerDivClassNames.append(cssClass);
 		}
 
-		String styleClass = (String) attributes.get(StringConstants.ATTRIBUTE_STYLE_CLASS);
+		String styleClass = (String) attributes.get(STYLE_CLASS);
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			outerDivClassNames.append(StringConstants.CHAR_SPACE);
+			outerDivClassNames.append(StringPool.SPACE);
 			outerDivClassNames.append(styleClass);
 		}
 
 		String autoComplete = (String) attributes.get("autoComplete");
 
 		if (autoComplete == null) {
-			autoComplete = StringConstants.BOOLEAN_FALSE;
+			autoComplete = StringPool.FALSE;
 		}
 		else {
 			autoComplete = autoComplete.trim().toLowerCase();
@@ -74,8 +78,8 @@ public class TextBoxListRenderer extends Renderer {
 
 		if (autoComplete.length() > 0) {
 
-			if (autoComplete.equals(StringConstants.BOOLEAN_TRUE)) {
-				outerDivClassNames.append(StringConstants.CHAR_SPACE);
+			if (autoComplete.equals(StringPool.TRUE)) {
+				outerDivClassNames.append(StringPool.SPACE);
 //               aui-autocomplete not found in 6.2
 				outerDivClassNames.append("aui-autocomplete");
 			}
@@ -85,7 +89,7 @@ public class TextBoxListRenderer extends Renderer {
 		String tagSelector = (String) attributes.get("tagSelector");
 
 		if (tagSelector == null) {
-			tagSelector = StringConstants.BOOLEAN_TRUE;
+			tagSelector = StringPool.TRUE;
 		}
 		else {
 			tagSelector = tagSelector.trim().toLowerCase();
@@ -93,8 +97,8 @@ public class TextBoxListRenderer extends Renderer {
 
 		if (tagSelector.length() > 0) {
 
-			if (tagSelector.equals(StringConstants.BOOLEAN_TRUE)) {
-				outerDivClassNames.append(StringConstants.CHAR_SPACE);
+			if (tagSelector.equals(StringPool.TRUE)) {
+				outerDivClassNames.append(StringPool.SPACE);
 
 				// tagselector tagselector-focused ARE in 6.2 (these classes were aui-tagselector
 				// aui-tagselector-focused) TODO
@@ -102,8 +106,8 @@ public class TextBoxListRenderer extends Renderer {
 			}
 		}
 
-		responseWriter.writeAttribute(StringConstants.ATTRIBUTE_CLASS, outerDivClassNames.toString(), null);
-		responseWriter.startElement(StringConstants.ELEMENT_DIV, uiComponent);
+		responseWriter.writeAttribute(StringPool.CLASS, outerDivClassNames.toString(), null);
+		responseWriter.startElement(StringPool.DIV, uiComponent);
 
 		StringBuilder innerDivClassNames = new StringBuilder();
 
@@ -111,19 +115,19 @@ public class TextBoxListRenderer extends Renderer {
 		innerDivClassNames.append("lfr-tags-selector-content textboxlist-content");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			innerDivClassNames.append(StringConstants.CHAR_SPACE);
-			innerDivClassNames.append(AlloyUtil.appendToCssClasses(cssClass, "-content"));
+			innerDivClassNames.append(StringPool.SPACE);
+			innerDivClassNames.append(ComponentUtil.appendToCssClasses(cssClass, "-content"));
 		}
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			innerDivClassNames.append(StringConstants.CHAR_SPACE);
-			innerDivClassNames.append(AlloyUtil.appendToCssClasses(styleClass, "-content"));
+			innerDivClassNames.append(StringPool.SPACE);
+			innerDivClassNames.append(ComponentUtil.appendToCssClasses(styleClass, "-content"));
 		}
 
 		if (autoComplete.length() > 0) {
 
-			if (autoComplete.equals(StringConstants.BOOLEAN_TRUE)) {
-				innerDivClassNames.append(StringConstants.CHAR_SPACE);
+			if (autoComplete.equals(StringPool.TRUE)) {
+				innerDivClassNames.append(StringPool.SPACE);
 
 				// aui_deprecated.css: autocomplete-content
 				innerDivClassNames.append("autocomplete-content");
@@ -132,18 +136,18 @@ public class TextBoxListRenderer extends Renderer {
 
 		if (tagSelector.length() > 0) {
 
-			if (tagSelector.equals(StringConstants.BOOLEAN_TRUE)) {
-				innerDivClassNames.append(StringConstants.CHAR_SPACE);
+			if (tagSelector.equals(StringPool.TRUE)) {
+				innerDivClassNames.append(StringPool.SPACE);
 
 				// tagselector-content IS in 6.2 (these classes were tagselector-content) TODO
 				innerDivClassNames.append("aui-tagselector-content");
 			}
 		}
 
-		responseWriter.writeAttribute(StringConstants.ATTRIBUTE_CLASS, innerDivClassNames.toString(), null);
-		responseWriter.startElement(StringConstants.ELEMENT_UL, uiComponent);
+		responseWriter.writeAttribute(StringPool.CLASS, innerDivClassNames.toString(), null);
+		responseWriter.startElement(StringPool.UL, uiComponent);
 
-		responseWriter.writeAttribute(StringConstants.ATTRIBUTE_CLASS,
+		responseWriter.writeAttribute(StringPool.CLASS,
 
 			// aui_deprecated.css: helper-clearfix textboxlistentry-holder
 			"helper-clearfix textboxlistentry-holder", null);
@@ -155,9 +159,9 @@ public class TextBoxListRenderer extends Renderer {
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringConstants.ELEMENT_UL);
-		responseWriter.endElement(StringConstants.ELEMENT_DIV);
-		responseWriter.endElement(StringConstants.ELEMENT_DIV);
+		responseWriter.endElement(StringPool.UL);
+		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement(StringPool.DIV);
 	}
 
 }
