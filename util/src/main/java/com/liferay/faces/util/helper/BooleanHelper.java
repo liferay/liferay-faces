@@ -25,6 +25,17 @@ public class BooleanHelper {
 		return toBoolean(value, false);
 	}
 
+	public static boolean toBoolean(Object value, boolean defaultValue) {
+
+		String valueAsString = null;
+		
+		if (value != null) {
+			valueAsString = value.toString();
+		}
+		
+		return toBoolean(valueAsString, defaultValue);
+	}
+
 	public static boolean toBoolean(String value, boolean defaultValue) {
 
 		if (value == null) {
