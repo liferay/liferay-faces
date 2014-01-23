@@ -24,8 +24,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.alloy.util.GetterUtil;
-import com.liferay.faces.alloy.util.StringConstants;
+import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.helper.StringHelper;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -53,7 +53,8 @@ public class DialogRenderer extends Renderer {
 		responseWriter.write("bodyContent : '");
 
 		Map<String, Object> attributes = uiComponent.getAttributes();
-		String bodyContent = GetterUtil.getString(attributes.get("bodyContent"), null);
+
+		String bodyContent = StringHelper.toString(attributes.get("bodyContent"), null);
 
 		if (bodyContent != null) {
 			responseWriter.write(bodyContent);
@@ -115,7 +116,7 @@ public class DialogRenderer extends Renderer {
 
 	protected void writeBooleanAttribute(ResponseWriter responseWriter, Map<String, Object> attributes, String name,
 		boolean defaultValue, boolean lastAttribute) throws IOException {
-		String value = Boolean.toString(GetterUtil.getBoolean(attributes.get(name), defaultValue));
+		String value = Boolean.toString(BooleanHelper.toBoolean(attributes.get(name), defaultValue));
 		writeStringAttribute(responseWriter, name, value, lastAttribute, false);
 	}
 
@@ -137,14 +138,14 @@ public class DialogRenderer extends Renderer {
 			}
 
 			if (!lastAttribute) {
-				responseWriter.write(StringConstants.CHAR_COMMA);
+				responseWriter.write(StringPool.COMMA);
 			}
 		}
 	}
 
 	protected void writeStringAttribute(ResponseWriter responseWriter, Map<String, Object> attributes, String name,
 		String defaultValue, boolean lastAttribute, boolean quote) throws IOException {
-		String value = GetterUtil.getString(attributes.get(name), defaultValue);
+		String value = StringHelper.toString(attributes.get(name), defaultValue);
 		writeStringAttribute(responseWriter, name, value, lastAttribute, quote);
 	}
 
