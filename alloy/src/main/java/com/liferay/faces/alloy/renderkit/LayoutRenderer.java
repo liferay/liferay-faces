@@ -21,7 +21,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.alloy.util.AlloyUtil;
+import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -73,14 +73,14 @@ public class LayoutRenderer extends Renderer {
 			classNames.append(StringPool.SPACE);
 
 			// "-content" tags may be deprecated
-			classNames.append(AlloyUtil.appendToCssClasses(cssClass, "-content"));
+			classNames.append(ComponentUtil.appendToCssClasses(cssClass, "-content"));
 		}
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
 			classNames.append(StringPool.SPACE);
 
 			// "-content" tags may be deprecated
-			classNames.append(AlloyUtil.appendToCssClasses(styleClass, "-content"));
+			classNames.append(ComponentUtil.appendToCssClasses(styleClass, "-content"));
 		}
 
 		responseWriter.writeAttribute("class", classNames.toString(), null);

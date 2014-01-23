@@ -14,7 +14,8 @@
 package com.liferay.faces.alloy.util;
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Use {@link com.liferay.faces.util.lang.StringPool StringPool} instead.
  */
 public class StringConstants {
 

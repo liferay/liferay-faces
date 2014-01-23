@@ -13,41 +13,34 @@
  */
 package com.liferay.faces.alloy.util;
 
+import com.liferay.faces.util.helper.BooleanHelper;
+
+
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Use {@link com.liferay.faces.util.helper.BooleanHelper BooleanHelper} instead.
  */
 public class GetterUtil {
 
+	/**
+	 * @deprecated  Use {@link com.liferay.faces.util.helper.BooleanHelper#toBoolean(String, boolean) BooleanHelper's
+	 *              toBoolean method} instead.
+	 */
 	public static boolean getBoolean(Object value, boolean defaultValue) {
-
-		if (value != null) {
-			return getBoolean(value.toString(), defaultValue);
-		}
-		else {
-			return defaultValue;
-		}
+		return BooleanHelper.toBoolean(value.toString(), defaultValue);
 	}
 
+	/**
+	 * @deprecated  Use {@link com.liferay.faces.util.helper.BooleanHelper#toBoolean(String, boolean) BooleanHelper's
+	 *              toBoolean method} instead.
+	 */
 	public static boolean getBoolean(String value, boolean defaultValue) {
-
-		if (value != null) {
-			value = value.trim().toLowerCase();
-
-			if (value.equals("true")) {
-				return true;
-			}
-			else if (value.equals("false")) {
-				return false;
-			}
-			else {
-				return defaultValue;
-			}
-		}
-		else {
-			return defaultValue;
-		}
+		return BooleanHelper.toBoolean(value, defaultValue);
 	}
 
+	/**
+	 * @deprecated  No replacement.
+	 */
 	public static String getString(Object value, String defaultValue) {
 
 		if (value != null) {
