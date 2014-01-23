@@ -40,6 +40,8 @@ public class StringPool {
 
 	public static final String CDATA_OPEN = "<![CDATA[";
 
+	public static final String CLASS = "class";
+
 	public static final String CLOSE_BRACKET = "]";
 
 	public static final String CLOSE_CURLY_BRACE = "}";
@@ -53,6 +55,8 @@ public class StringPool {
 	public static final String COMMA_AND_SPACE = ", ";
 
 	public static final String DASH = "-";
+
+	public static final String DIV = "div";
 
 	public static final String DOLLAR = "$";
 
@@ -96,6 +100,10 @@ public class StringPool {
 
 	public static final String GREATER_THAN_OR_EQUAL = ">=";
 
+	public static final String HREF = "href";
+
+	public static final String ID = "id";
+
 	public static final String INVERTED_EXCLAMATION = "\u00A1";
 
 	public static final String INVERTED_QUESTION = "\u00BF";
@@ -109,6 +117,8 @@ public class StringPool {
 	public static final String LESS_THAN = "<";
 
 	public static final String LESS_THAN_OR_EQUAL = "<=";
+
+	public static final String LI = "li";
 
 	public static final String LIKE = "LIKE";
 
@@ -167,6 +177,8 @@ public class StringPool {
 	public static final String TILDE = "~";
 
 	public static final String TRUE = "true";
+
+	public static final String UL = "ul";
 
 	public static final String UNDERLINE = "_";
 

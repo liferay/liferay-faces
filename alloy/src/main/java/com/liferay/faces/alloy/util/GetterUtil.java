@@ -13,48 +13,35 @@
  */
 package com.liferay.faces.alloy.util;
 
+import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.helper.StringHelper;
+
+
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Use {@link BooleanHelper} and {@link ShortHelper} from the Liferay Faces Util project instead.
  */
+@Deprecated
 public class GetterUtil {
 
+	/**
+	 * @deprecated  Use {@link BooleanHelper#toBoolean(String, boolean)} instead.
+	 */
 	public static boolean getBoolean(Object value, boolean defaultValue) {
-
-		if (value != null) {
-			return getBoolean(value.toString(), defaultValue);
-		}
-		else {
-			return defaultValue;
-		}
+		return BooleanHelper.toBoolean(value.toString(), defaultValue);
 	}
 
+	/**
+	 * @deprecated  Use {@link BooleanHelper#toBoolean(String, boolean)} instead.
+	 */
 	public static boolean getBoolean(String value, boolean defaultValue) {
-
-		if (value != null) {
-			value = value.trim().toLowerCase();
-
-			if (value.equals("true")) {
-				return true;
-			}
-			else if (value.equals("false")) {
-				return false;
-			}
-			else {
-				return defaultValue;
-			}
-		}
-		else {
-			return defaultValue;
-		}
+		return BooleanHelper.toBoolean(value, defaultValue);
 	}
 
+	/**
+	 * @deprecated  Use {@link StringHelper#toString(Object, String)} instead.
+	 */
 	public static String getString(Object value, String defaultValue) {
-
-		if (value != null) {
-			return value.toString();
-		}
-		else {
-			return defaultValue;
-		}
+		return StringHelper.toString(value, defaultValue);
 	}
 }
