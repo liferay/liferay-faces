@@ -13,6 +13,11 @@
  */
 package com.liferay.faces.util.logging;
 
+import com.liferay.faces.util.product.Product;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
+
+
 /**
  * In order to minimize dependencies, this class provides as a layer of abstraction over different logging mechanisms
  * including Log4J and standard Java SE logging.
@@ -32,6 +37,26 @@ public class LoggerFactory {
 		try {
 			Class.forName(CLASS_NAME_LOG4J_LOGGER);
 			LOG4J_AVAILABLE = true;
+
+			try {
+				new LoggerLog4JImpl(CLASS_NAME_LOG4J_LOGGER);
+			}
+			catch (NoClassDefFoundError e) {
+
+				String className = LoggerFactory.class.getName();
+				Product wildfly = ProductMap.getInstance().get(ProductConstants.WILDFLY);
+
+				if (wildfly.isDetected()) {
+					System.out.println(className + " (INFO): Detected JBoss Server " + wildfly.getVersion());
+					System.out.println(className + " (INFO): Add WEB-INF/log4j.jar to activate Log4J logging");
+				}
+				else {
+					System.err.println(className +
+						" (WARN): Possibly an incompatible version of log4j.jar in the classpath: " + e.getMessage());
+				}
+
+				LOG4J_AVAILABLE = false;
+			}
 		}
 		catch (Exception e) {
 			LOG4J_AVAILABLE = false;
@@ -58,9 +83,7 @@ public class LoggerFactory {
 			}
 		}
 		catch (NoClassDefFoundError e) {
-			System.err.println(
-				"com.liferay.faces.bridge.logging.LoggerFactory (WARN): Possibly an incompatible version of log4j.jar in the classpath: " +
-				e.getMessage());
+			// Ignore
 		}
 
 		if (logger == null) {
