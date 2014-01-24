@@ -40,6 +40,7 @@ public class ProductMap extends HashMap<String, Product> {
 		instance.put(ProductConstants.RESIN, new ProductResinImpl());
 		instance.put(ProductConstants.RICHFACES, new ProductRichFacesImpl());
 		instance.put(ProductConstants.SPRING_FRAMEWORK, new ProductSpringFrameworkImpl());
+		instance.put(ProductConstants.WILDFLY, new ProductWildFlyImpl());
 	}
 
 	public static ProductMap getInstance() {
