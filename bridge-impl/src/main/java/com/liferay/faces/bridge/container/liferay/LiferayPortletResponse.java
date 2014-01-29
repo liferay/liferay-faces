@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
+import javax.portlet.filter.PortletResponseWrapper;
 
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -39,6 +40,15 @@ public class LiferayPortletResponse {
 	private PortletResponse wrappedPortletResponse;
 
 	public LiferayPortletResponse(PortletResponse portletResponse) {
+
+		if (portletResponse != null) {
+
+			while (portletResponse instanceof PortletResponseWrapper) {
+				PortletResponseWrapper portletResponseWrapper = (PortletResponseWrapper) portletResponse;
+				portletResponse = portletResponseWrapper.getResponse();
+			}
+		}
+
 		this.wrappedPortletResponse = portletResponse;
 	}
 
