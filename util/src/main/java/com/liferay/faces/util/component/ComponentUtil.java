@@ -13,6 +13,12 @@
  */
 package com.liferay.faces.util.component;
 
+import java.util.Iterator;
+
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -68,5 +74,57 @@ public class ComponentUtil {
 		}
 
 		return escapedClientId;
+	}
+
+	public static String findClientId(String expression) {
+		String clientId = null;
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		UIViewRoot uiViewRoot = facesContext.getViewRoot();
+		UIComponent uiComponent = uiViewRoot.findComponent(expression);
+
+		if (uiComponent == null) {
+			uiComponent = matchComponentInHierarchy(facesContext, uiViewRoot, expression);
+		}
+
+		if (uiComponent != null) {
+			clientId = uiComponent.getClientId();
+		}
+
+		return clientId;
+	}
+
+	public static UIComponent matchComponentInHierarchy(FacesContext facesContext, UIComponent parent,
+		String partialClientId) {
+		UIComponent uiComponent = null;
+
+		if (parent != null) {
+
+			String parentClientId = parent.getClientId(facesContext);
+
+			if ((parentClientId != null) && (parentClientId.indexOf(partialClientId) >= 0)) {
+				uiComponent = parent;
+			}
+			else {
+				Iterator<UIComponent> itr = parent.getFacetsAndChildren();
+
+				if (itr != null) {
+
+					while (itr.hasNext()) {
+						UIComponent child = itr.next();
+						uiComponent = matchComponentInHierarchy(facesContext, child, partialClientId);
+
+						if (uiComponent != null) {
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		return uiComponent;
+	}
+
+	public static UIComponent matchComponentInViewRoot(FacesContext facesContext, String partialClientId) {
+		return matchComponentInHierarchy(facesContext, facesContext.getViewRoot(), partialClientId);
 	}
 }

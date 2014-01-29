@@ -35,6 +35,7 @@ import javax.faces.lifecycle.LifecycleFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.context.map.JavaScriptMap;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.helper.IntegerHelper;
@@ -150,33 +151,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public UIComponent matchComponentInHierarchy(UIComponent parent, String partialClientId) {
-		UIComponent uiComponent = null;
-
-		if (parent != null) {
-
-			String parentClientId = parent.getClientId(getFacesContext());
-
-			if ((parentClientId != null) && (parentClientId.indexOf(partialClientId) >= 0)) {
-				uiComponent = parent;
-			}
-			else {
-				Iterator<UIComponent> itr = parent.getFacetsAndChildren();
-
-				if (itr != null) {
-
-					while (itr.hasNext()) {
-						UIComponent child = itr.next();
-						uiComponent = matchComponentInHierarchy(child, partialClientId);
-
-						if (uiComponent != null) {
-							break;
-						}
-					}
-				}
-			}
-		}
-
-		return uiComponent;
+		return ComponentUtil.matchComponentInHierarchy(FacesContext.getCurrentInstance(), parent, partialClientId);
 	}
 
 	public UIComponent matchComponentInViewRoot(String partialClientId) {
