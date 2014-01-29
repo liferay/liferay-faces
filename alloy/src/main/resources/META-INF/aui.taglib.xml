@@ -4,7 +4,7 @@
 	<namespace>http://liferay.com/faces/aui</namespace>
 	<function>
 		<function-name>escapeClientId</function-name>
-		<function-class>com.liferay.faces.alloy.util.AlloyUtil</function-class>
+		<function-class>com.liferay.faces.util.component.ComponentUtil</function-class>
 		<function-signature>java.lang.String escapeClientId(java.lang.String)</function-signature>
 	</function>
 	<tag>
