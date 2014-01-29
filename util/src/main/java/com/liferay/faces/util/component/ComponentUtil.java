@@ -77,8 +77,11 @@ public class ComponentUtil {
 	}
 
 	public static String findClientId(String expression) {
+		return findClientId(FacesContext.getCurrentInstance(), expression);
+	}
+
+	public static String findClientId(FacesContext facesContext, String expression) {
 		String clientId = null;
-		FacesContext facesContext = FacesContext.getCurrentInstance();
 		UIViewRoot uiViewRoot = facesContext.getViewRoot();
 		UIComponent uiComponent = uiViewRoot.findComponent(expression);
 
@@ -87,7 +90,7 @@ public class ComponentUtil {
 		}
 
 		if (uiComponent != null) {
-			clientId = uiComponent.getClientId();
+			clientId = uiComponent.getClientId(facesContext);
 		}
 
 		return clientId;
