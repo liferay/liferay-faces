@@ -41,13 +41,13 @@ public class BookingFlowModelBean {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BookingFlowModelBean.class);
-	
+
 	@Inject
 	private CountryService countryService;
 
 	@Inject
 	private FlightService flightService;
-	
+
 	@Inject
 	private ScopeTrackingBean scopeTrackingBean;
 

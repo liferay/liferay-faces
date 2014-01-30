@@ -24,6 +24,6 @@ import com.liferay.faces.demos.dto.BookingType;
 public interface BookingTypeService {
 
 	public List<BookingType> getBookingTypes();
-	
+
 	public String getName(long bookingTypeId);
 }

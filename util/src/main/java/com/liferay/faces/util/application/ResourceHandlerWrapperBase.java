@@ -57,24 +57,6 @@ public class ResourceHandlerWrapperBase extends ResourceHandlerWrapper {
 	}
 
 	/**
-	 * Determines whether or not the specified URL targets a JSF2 resource.
-	 *
-	 * @param   url  The URL to check.
-	 *
-	 * @return  True if the specified URL targets a JSF2 resource.
-	 */
-	@Override
-	public boolean isResourceURL(String url) {
-
-		if ((url != null) && (url.indexOf(ResourceConstants.JAVAX_FACES_RESOURCE) >= 0)) {
-			return true;
-		}
-		else {
-			return wrappedResourceHandler.isResourceURL(url);
-		}
-	}
-
-	/**
 	 * This method handles the current request which is assumed to be a request for a {@link Resource}.
 	 */
 	@Override
@@ -304,6 +286,24 @@ public class ResourceHandlerWrapperBase extends ResourceHandlerWrapper {
 
 	protected boolean isAbleToSetHttpStatusCode(FacesContext facesContext) {
 		return true;
+	}
+
+	/**
+	 * Determines whether or not the specified URL targets a JSF2 resource.
+	 *
+	 * @param   url  The URL to check.
+	 *
+	 * @return  True if the specified URL targets a JSF2 resource.
+	 */
+	@Override
+	public boolean isResourceURL(String url) {
+
+		if ((url != null) && (url.indexOf(ResourceConstants.JAVAX_FACES_RESOURCE) >= 0)) {
+			return true;
+		}
+		else {
+			return wrappedResourceHandler.isResourceURL(url);
+		}
 	}
 
 	/**

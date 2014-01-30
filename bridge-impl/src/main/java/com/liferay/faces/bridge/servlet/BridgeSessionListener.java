@@ -199,7 +199,6 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 
 				try {
 
-
 					Enumeration<String> attributeNames = (Enumeration<String>) httpSession.getAttributeNames();
 
 					while (attributeNames.hasMoreElements()) {

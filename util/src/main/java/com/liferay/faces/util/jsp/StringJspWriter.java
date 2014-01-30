@@ -38,11 +38,11 @@ public class StringJspWriter extends JspWriter {
 	public StringJspWriter() {
 		this(DEFAULT_BUFFER_SIZE, DEFAULT_AUTO_FLUSH);
 	}
-	
+
 	public StringJspWriter(int bufferSize) {
 		this(bufferSize, DEFAULT_AUTO_FLUSH);
 	}
-	
+
 	public StringJspWriter(int bufferSize, boolean autoFlush) {
 		super(bufferSize, autoFlush);
 		this.stringWriter = new StringWriter(bufferSize);

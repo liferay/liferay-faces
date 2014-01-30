@@ -80,7 +80,7 @@ public class BridgeResourceURLImpl extends BridgeURLBaseImpl implements BridgeRe
 		String newParamName = removeParameter(Bridge.BACK_LINK);
 		setParameter(newParamName, backLinkEncodedActionURL);
 	}
-	
+
 	@Override
 	protected BaseURL toBaseURL() throws MalformedURLException {
 

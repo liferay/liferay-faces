@@ -29,6 +29,7 @@ import javax.inject.Inject;
 import com.javadocmd.simplelatlng.LatLng;
 import com.javadocmd.simplelatlng.LatLngTool;
 import com.javadocmd.simplelatlng.util.LengthUnit;
+
 import com.liferay.faces.demos.dto.Airport;
 import com.liferay.faces.demos.dto.Booking;
 import com.liferay.faces.util.lang.StringPool;
@@ -57,7 +58,7 @@ public class FlightServiceMockImpl implements FlightService {
 	@Override
 	public List<Booking> searchDirect(long departureAirportId, Date departureDate, long arrivalAirportId) {
 
-		DateFormat dateFormat = new SimpleDateFormat(); 
+		DateFormat dateFormat = new SimpleDateFormat();
 		List<Booking> searchResults = new ArrayList<Booking>();
 
 		Airport departureAirport = airportService.findById(departureAirportId);
@@ -86,14 +87,16 @@ public class FlightServiceMockImpl implements FlightService {
 			Date flightDepartureDate = departureCalendar.getTime();
 			flight.setDepartureDate(flightDepartureDate);
 			flight.setArrivalId(arrivalAirportId);
+
 			Date flightArrivalDate = arrivalCalendar.getTime();
 			flight.setArrivalDate(flightArrivalDate);
 			flight.setDistance(distanceInKilometers);
 			flight.setDuration(durationInHours);
 			flight.setBookingId(Math.abs(random.nextLong()));
+
 			String flightNumber = Integer.toString(Math.abs(random.nextInt()));
 			flight.setLabel(flightNumber);
-			
+
 			StringBuilder description = new StringBuilder();
 			description.append("Flight#");
 			description.append(flightNumber);

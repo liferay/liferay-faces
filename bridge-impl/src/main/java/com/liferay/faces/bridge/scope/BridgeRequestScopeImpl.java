@@ -446,7 +446,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 			// because the Faces implementation likely calls the clear() method during the call to its
 			// FacesContextImpl.release() method.
 			saveJSF2FacesContextAttributes(facesContext);
-			
+
 			boolean saveNonExcludedAttributes = true;
 
 			// If a redirect occurred, then indicate that the non-excluded request attributes are not to be preserved.
@@ -525,7 +525,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 			// PROPOSED-FOR-JSR344-API: http://java.net/jira/browse/JAVASERVERFACES_SPEC_PUBLIC-1070
 			// PROPOSED-FOR-BRIDGE3-API: https://issues.apache.org/jira/browse/PORTLETBRIDGE-201
 			saveFlashState(externalContext);
-			
+
 			// PROPOSE-FOR-BRIDGE3-API
 			saveClientWindow(externalContext);
 		}
