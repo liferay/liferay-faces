@@ -239,6 +239,14 @@ sub do_inplace_edits {
 	}
 
 	#
+	# Otherwise, if the current file is named NOTICE.txt, then potentially fix the copyright year.
+	#
+	elsif (($file =~ m/NOTICE.txt/) and ($File::Find::name =~ /\/src/)) {
+		print "$File::Find::name\n";
+		`perl -pi -e 's/2000-..* Liferay/2000-${year} Liferay/' $file`;
+	}
+
+	#
 	# Otherwise, if the current file is named with .java extension, then potentially fix the copyright year.
 	#
 	elsif (($file =~ m/.*\.java/) and ($File::Find::name =~ /\/src/)) {
