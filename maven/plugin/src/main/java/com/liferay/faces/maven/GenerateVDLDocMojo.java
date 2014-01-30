@@ -18,6 +18,7 @@ import java.io.File;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+
 import org.omnifaces.vdldoc.VdldocGenerator;
 
 
@@ -25,7 +26,6 @@ import org.omnifaces.vdldoc.VdldocGenerator;
  * Generates VDLDoc according to configuration parameters. For more information, see: http://code.google.com/p/vdldoc
  *
  * @goal    generate-vdldoc
- * 
  * @author  Neil Griffin
  */
 public class GenerateVDLDocMojo extends AbstractMojo {

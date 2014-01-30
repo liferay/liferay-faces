@@ -82,16 +82,6 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 	private NamespacedParameterMap namespacedParameterMap;
 	private Map<String, List<UploadedFile>> requestParameterFileMap;
 
-	@Override
-	protected String getRequestParameter(String name) {
-		return namespacedParameterMap.getFirst(name);
-	}
-
-	@Override
-	protected Map<String, String[]> getRequestParameterMap() {
-		return namespacedParameterMap;
-	}
-
 	@SuppressWarnings("unchecked")
 	public RequestParameterMapMultiPartImpl(BridgeContext bridgeContext, ClientDataRequest clientDataRequest) {
 
@@ -465,6 +455,16 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 
 		// Note#2: This can't be cached because the caller basically wants a new enumeration to iterate over each time.
 		return Collections.enumeration(namespacedParameterMap.keySet());
+	}
+
+	@Override
+	protected String getRequestParameter(String name) {
+		return namespacedParameterMap.getFirst(name);
+	}
+
+	@Override
+	protected Map<String, String[]> getRequestParameterMap() {
+		return namespacedParameterMap;
 	}
 
 	/**
