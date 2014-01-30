@@ -237,5 +237,13 @@ sub do_inplace_edits {
 		print "$File::Find::name\n";
 		`perl -pi -e 's/vdldoc:since value=\\"[0-9]\\.[0-9]/vdldoc:since value=\\"$liferayFacesVersionShortMajor1DotMajor2/' $file`;
 	}
+
+	#
+	# Otherwise, if the current file is named with .java extension, then potentially fix the copyright year.
+	#
+	elsif (($file =~ m/.*\.java/) and ($File::Find::name =~ /\/src/)) {
+		print "$File::Find::name\n";
+		`perl -pi -e 's/2000-..* Liferay/2000-${year} Liferay/' $file`;
+	}
 }
 
