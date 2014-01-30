@@ -79,16 +79,19 @@ public class BackingBean implements Serializable {
 		boolean valid = true;
 
 		Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
+
 		if (liferayPortal.getMajorVersion() < 6) {
 			valid = false;
 		}
-		else if ((liferayPortal.getMajorVersion() == 6) && (liferayPortal.getMinorVersion() == 0) && (liferayPortal.getRevisionVersion() < 12)) {
+		else if ((liferayPortal.getMajorVersion() == 6) && (liferayPortal.getMinorVersion() == 0) &&
+				(liferayPortal.getRevisionVersion() < 12)) {
 			valid = false;
 		}
-		
+
 		if (!valid) {
 			FacesContext facesContext = FacesContext.getCurrentInstance();
-			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "This test is only valid on Liferay 6.0.12+", null));
+			facesContext.addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "This test is only valid on Liferay 6.0.12+", null));
 		}
 	}
 
@@ -124,12 +127,29 @@ public class BackingBean implements Serializable {
 		}
 	}
 
+	public void submit(ActionEvent actionEvent) {
+
+		logger.debug("Submitted form");
+		logger.debug("comments1=" + modelBean.getComments1());
+		logger.debug("comments2=" + modelBean.getComments2());
+
+		List<FileInfo> uploadedFiles = modelBean.getUploadedFiles();
+
+		for (FileInfo fileInfo : uploadedFiles) {
+			logger.debug("Uploaded file=" + fileInfo.getFileName());
+		}
+
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+		liferayFacesContext.addGlobalSuccessInfoMessage();
+	}
+
 	public String getEditor1Impl() {
-		
+
 		if (editor1Impl == null) {
 			Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
+
 			if (liferayPortal.getMajorVersion() == 6) {
-				
+
 				editor1Impl = "com.liferay.faces.support.editor1";
 
 				if ((liferayPortal.getMinorVersion() == 0) && (liferayPortal.getRevisionVersion() < 12)) {
@@ -145,11 +165,12 @@ public class BackingBean implements Serializable {
 	}
 
 	public String getEditor2Impl() {
-		
+
 		if (editor2Impl == null) {
 			Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
+
 			if (liferayPortal.getMajorVersion() == 6) {
-				
+
 				editor2Impl = "com.liferay.faces.support.editor2";
 
 				if ((liferayPortal.getMinorVersion() == 0) && (liferayPortal.getRevisionVersion() < 12)) {
@@ -160,24 +181,8 @@ public class BackingBean implements Serializable {
 				editor2Impl = "unsupported-liferay-version-" + liferayPortal.getVersion();
 			}
 		}
-		
+
 		return editor2Impl;
-	}
-
-	public void submit(ActionEvent actionEvent) {
-
-		logger.debug("Submitted form");
-		logger.debug("comments1=" + modelBean.getComments1());
-		logger.debug("comments2=" + modelBean.getComments2());
-
-		List<FileInfo> uploadedFiles = modelBean.getUploadedFiles();
-
-		for (FileInfo fileInfo : uploadedFiles) {
-			logger.debug("Uploaded file=" + fileInfo.getFileName());
-		}
-
-		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-		liferayFacesContext.addGlobalSuccessInfoMessage();
 	}
 
 	public String getFileUploadAbsolutePath() {

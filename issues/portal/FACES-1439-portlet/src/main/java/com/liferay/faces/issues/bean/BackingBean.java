@@ -71,19 +71,22 @@ public class BackingBean implements Serializable {
 		boolean valid = true;
 
 		Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
+
 		if (liferayPortal.getMajorVersion() < 6) {
 			valid = false;
 		}
-		else if ((liferayPortal.getMajorVersion() == 6) && (liferayPortal.getMinorVersion() == 0) && (liferayPortal.getRevisionVersion() < 12)) {
+		else if ((liferayPortal.getMajorVersion() == 6) && (liferayPortal.getMinorVersion() == 0) &&
+				(liferayPortal.getRevisionVersion() < 12)) {
 			valid = false;
 		}
-		
+
 		if (!valid) {
 			FacesContext facesContext = FacesContext.getCurrentInstance();
-			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "This test is only valid on Liferay 6.0.12+", null));
+			facesContext.addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "This test is only valid on Liferay 6.0.12+", null));
 		}
 	}
-	
+
 	public void submit(ActionEvent actionEvent) {
 
 		logger.debug("Submitted form");
@@ -93,25 +96,6 @@ public class BackingBean implements Serializable {
 
 		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 		liferayFacesContext.addGlobalSuccessInfoMessage();
-	}
-
-	public String getEditorImpl() {
-		
-		if (editorImpl == null) {
-			Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
-			if (liferayPortal.getMajorVersion() == 6) {
-				
-				editorImpl = "editor.wysiwyg.default";
-
-				if ((liferayPortal.getMinorVersion() == 0) && (liferayPortal.getRevisionVersion() < 12)) {
-					editorImpl = "ckeditor";
-				}
-			}
-			else {
-				editorImpl = "unsupported-liferay-version-" + liferayPortal.getVersion();
-			}
-		}
-		return editorImpl;
 	}
 
 	public void toggleEditor1(ActionEvent actionEvent) {
@@ -128,6 +112,27 @@ public class BackingBean implements Serializable {
 
 	public boolean isEditor2Rendered() {
 		return editor2Rendered;
+	}
+
+	public String getEditorImpl() {
+
+		if (editorImpl == null) {
+			Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
+
+			if (liferayPortal.getMajorVersion() == 6) {
+
+				editorImpl = "editor.wysiwyg.default";
+
+				if ((liferayPortal.getMinorVersion() == 0) && (liferayPortal.getRevisionVersion() < 12)) {
+					editorImpl = "ckeditor";
+				}
+			}
+			else {
+				editorImpl = "unsupported-liferay-version-" + liferayPortal.getVersion();
+			}
+		}
+
+		return editorImpl;
 	}
 
 	public void setModelBean(ModelBean modelBean) {

@@ -61,9 +61,11 @@ public class ProductBaseImpl implements Product {
 
 		if ((pkg != null) && (pkg.getImplementationVersion() != null)) {
 			this.title = pkg.getImplementationTitle();
+
 			if (title != null) {
 				title = expectedTitle;
 			}
+
 			initVersionInfo(pkg.getImplementationVersion());
 		}
 		else {
