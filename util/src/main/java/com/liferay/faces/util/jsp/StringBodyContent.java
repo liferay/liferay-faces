@@ -43,13 +43,13 @@ public class StringBodyContent extends BodyContent {
 		this(new StringJspWriter(bufferSize));
 	}
 
-	public StringBodyContent(int bufferSize, boolean autoFlush) {
-		this(new StringJspWriter(bufferSize, autoFlush));
-	}
-
 	public StringBodyContent(StringJspWriter facesStringWriter) {
 		super(facesStringWriter);
 		this.facesStringWriter = facesStringWriter;
+	}
+
+	public StringBodyContent(int bufferSize, boolean autoFlush) {
+		this(new StringJspWriter(bufferSize, autoFlush));
 	}
 
 	@Override

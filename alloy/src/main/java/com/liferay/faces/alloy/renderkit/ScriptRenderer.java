@@ -130,7 +130,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 
 		// Otherwise,
 		else {
-			
+
 			// Ask the children to encode themselves and capture the markup in a string.
 			ResponseWriter backupResponseWriter = facesContext.getResponseWriter();
 			BufferedResponseWriter bufferedResponseWriter = new BufferedResponseWriter();

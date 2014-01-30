@@ -73,7 +73,7 @@ public class ApplicantBackingBean implements Serializable {
 				uploadedFiles.remove(uploadedFileToDelete);
 				logger.debug("Deleted file=[{0}]", uploadedFileToDelete.getName());
 			}
-			
+
 			applicantViewBean.setPopupRendered(false);
 		}
 		catch (Exception e) {

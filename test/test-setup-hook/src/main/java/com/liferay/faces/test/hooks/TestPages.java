@@ -16,6 +16,7 @@ package com.liferay.faces.test.hooks;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * The purpose of this class is to isolate source code differences between different versions of Liferay Portal.
  *
@@ -59,7 +60,7 @@ public class TestPages {
 	static {
 		PORTAL_ISSUE_PAGES = new ArrayList<PortalPage>();
 	}
-	
+
 	static {
 		GUEST_PAGES = new ArrayList<PortalPage>();
 	}
