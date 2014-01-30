@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.alloy.component;
 
-import javax.faces.component.FacesComponent;
 import javax.faces.component.NamingContainer;
 
 
@@ -21,7 +20,6 @@ import javax.faces.component.NamingContainer;
  * @author  Neil Griffin
  * @author  Kyle Stiemann
  */
-@FacesComponent(value = "com.liferay.faces.alloy.component.AUIRow")
 public class AUIRow extends AUIPanel implements NamingContainer {
 
 	// Public Constants
