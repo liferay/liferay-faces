@@ -47,10 +47,6 @@
 			<groupId>org.icefaces</groupId>
 			<artifactId>icefaces-ace</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.icefaces</groupId>
-			<artifactId>icefaces-compat</artifactId>
-		</dependency>
 
 	</dependencies>
 
