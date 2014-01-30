@@ -42,7 +42,6 @@ import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.portal.EditorUtil;
 import com.liferay.faces.util.portal.ScriptTagUtil;
 import com.liferay.faces.util.portal.WebKeys;
-import com.liferay.faces.util.render.CleanupRenderer;
 
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -54,7 +53,7 @@ import com.liferay.portal.util.PortalUtil;
  *
  * @author  Neil Griffin
  */
-public class InputEditorInternalRenderer extends Renderer implements CleanupRenderer {
+public class InputEditorInternalRenderer extends Renderer {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(InputEditorInternalRenderer.class);
@@ -259,6 +258,9 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				// new CKEditor in the DOM will have its setData() method called with the value from the
 				// hidden field.
 				StringBuilder javaScriptFragment = new StringBuilder();
+				javaScriptFragment.append("var oldEditor = CKEDITOR.instances['");
+				javaScriptFragment.append(editorName);
+				javaScriptFragment.append("'];");
 				javaScriptFragment.append("if (oldEditor)");
 				javaScriptFragment.append(StringPool.OPEN_CURLY_BRACE);
 				javaScriptFragment.append(CDPL_INITIALIZE_TRUE);
@@ -288,29 +290,6 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				throw new IOException(e.getMessage());
 			}
 		}
-	}
-
-	public void encodeCleanup(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		String editorName = uiComponent.getParent().getParent().getClientId();
-		StringBuilder scriptBuilder = new StringBuilder();
-
-		// Build up a JavaScript fragment that will cleanup the DOM.
-		scriptBuilder.append("var oldEditor = CKEDITOR.instances['");
-		scriptBuilder.append(editorName);
-		scriptBuilder.append("']; if (oldEditor) {");
-		scriptBuilder.append("oldEditor.destroy(true);");
-		scriptBuilder.append("delete window['");
-		scriptBuilder.append(editorName);
-		scriptBuilder.append("'];");
-		scriptBuilder.append("}");
-
-		String script = scriptBuilder.toString();
-
-		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-		liferayFacesContext.getJavaScriptMap().put(editorName, script);
-
-		logger.trace(script);
 	}
 
 	protected PortletRequest getLiferayPortletRequest(PortletRequest portletRequest) {

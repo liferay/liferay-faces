@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 
 <f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:aui="http://liferay.com/faces/aui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:liferay-ui="http://liferay.com/faces/ui"
@@ -10,9 +11,23 @@
 		<h:panelGroup id="feedback">
 			<h:messages globalOnly="true" layout="table" />
 		</h:panelGroup>
+		<script>
+			function cleanupCKEditor(clientId) {
+				var ckEditor = CKEDITOR.instances[clientId];
+				if (ckEditor) {
+					ckEditor.destroy(true);
+					delete window[clientId];
+					console.log('Cleaned up ckEditor with clientId=' + clientId);
+				}
+				else {
+					console.log('Cannot find ckEditor with clientId=' + clientId);
+				}
+			}
+		</script>
 		<h:form id="f1">
+			<c:set var="inputEditor1ClientId" value="#{aui:findClientId('inputEditor1')}" />
 			<h:commandButton actionListener="#{backingBean.toggleEditor1}"
-				immediate="true" value="Show/Hide Editor 1">
+				immediate="true" onclick="cleanupCKEditor('#{inputEditor1ClientId}'); return true;" value="Show/Hide Editor 1">
 				<f:ajax render="domDiffProtector1" />
 			</h:commandButton>
 			<br />
