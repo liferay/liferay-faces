@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.util.PortalClassInvoker;
 
 /**
  * This class provides a compatibility layer that isolates differences between different versions of Liferay Portal.
- * 
+ *
  * @author  Neil Griffin
  */
 public class LoginUtilCompat {

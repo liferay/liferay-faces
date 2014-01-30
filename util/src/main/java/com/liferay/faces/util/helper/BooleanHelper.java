@@ -28,11 +28,11 @@ public class BooleanHelper {
 	public static boolean toBoolean(Object value, boolean defaultValue) {
 
 		String valueAsString = null;
-		
+
 		if (value != null) {
 			valueAsString = value.toString();
 		}
-		
+
 		return toBoolean(valueAsString, defaultValue);
 	}
 

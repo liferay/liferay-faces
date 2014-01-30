@@ -32,10 +32,10 @@ public abstract class RequestParameterMap extends AbstractPropertyMap<String> {
 
 	// Private Constants
 	private static final String JAVAX_FACES = "javax.faces";
-	
+
 	// Protected Data Members
 	protected BridgeContext bridgeContext;
-	
+
 	public RequestParameterMap(BridgeContext bridgeContext) {
 		this.bridgeContext = bridgeContext;
 	}
