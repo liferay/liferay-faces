@@ -65,7 +65,7 @@ public class StringBundler implements FacesWrapper<Object> {
 	}
 
 	public StringBundler(Object stringBundler) {
-		
+
 		if (stringBundler == null) {
 			this.wrapped = createInstance();
 		}

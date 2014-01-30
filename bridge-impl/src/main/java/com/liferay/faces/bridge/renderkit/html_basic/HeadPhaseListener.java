@@ -87,6 +87,38 @@ public class HeadPhaseListener implements PhaseListener {
 	}
 
 	/**
+	 * <p>This method is called before the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle is executed. The
+	 * purpose of this timing is to pick up where the {@link #beforeInvokeApplicationPhase(PhaseEvent)} method left off.
+	 * It might be the case that a navigation-rule has fired and a NEW JSF view has been loaded up after the {@link
+	 * PhaseId#APPLY_REQUEST_VALUES} phase (in the case of immediate="true") or the {@link PhaseId#INVOKE_APPLICATION}
+	 * phase (in the case of immediate="false") has completed. If this is the case, then the list of head resourceIds in
+	 * the {@link HeadManagedBean} needs to be repopulated from the list found in the Flash scope.</p>
+	 */
+	protected void beforeAjaxifiedRenderResponsePhase(PhaseEvent phaseEvent) {
+		FacesContext facesContext = phaseEvent.getFacesContext();
+		Flash flash = facesContext.getExternalContext().getFlash();
+		String viewId = facesContext.getViewRoot().getViewId();
+
+		@SuppressWarnings("unchecked")
+		Set<String> headResourceIdsFromFlash = (Set<String>) flash.get(HEAD_RESOURCE_IDS);
+
+		if (headResourceIdsFromFlash != null) {
+			HeadManagedBean headManagedBean = HeadManagedBean.getInstance(facesContext);
+			Set<String> managedBeanResourceIds = headManagedBean.getHeadResourceIds();
+
+			for (String resourceIdFromFlash : headResourceIdsFromFlash) {
+
+				if (!managedBeanResourceIds.contains(resourceIdFromFlash)) {
+					managedBeanResourceIds.add(resourceIdFromFlash);
+					logger.debug(
+						"Added resourceId=[{0}] from the Flash scope to the list of resourceIds in the HeadManagedBean for viewId=[{1}]",
+						resourceIdFromFlash, viewId);
+				}
+			}
+		}
+	}
+
+	/**
 	 * <p>This method is called before the {@link PhaseId#APPLY_REQUEST_VALUES} phase of the JSF lifecycle is executed.
 	 * The purpose of this timing is to handle the case when the user clicks on a {@link UICommand} component (like
 	 * h:commandButton or h:commandLink) that has been either Auto-ajaxified by ICEfaces, or manually Ajaxified by the
@@ -131,38 +163,6 @@ public class HeadPhaseListener implements PhaseListener {
 			// there will be no HeadManagedBean available.
 			if (headManagedBean != null) {
 				flash.put(HEAD_RESOURCE_IDS, headManagedBean.getHeadResourceIds());
-			}
-		}
-	}
-
-	/**
-	 * <p>This method is called before the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle is executed. The
-	 * purpose of this timing is to pick up where the {@link #beforeInvokeApplicationPhase(PhaseEvent)} method left off.
-	 * It might be the case that a navigation-rule has fired and a NEW JSF view has been loaded up after the {@link
-	 * PhaseId#APPLY_REQUEST_VALUES} phase (in the case of immediate="true") or the {@link PhaseId#INVOKE_APPLICATION}
-	 * phase (in the case of immediate="false") has completed. If this is the case, then the list of head resourceIds in
-	 * the {@link HeadManagedBean} needs to be repopulated from the list found in the Flash scope.</p>
-	 */
-	protected void beforeAjaxifiedRenderResponsePhase(PhaseEvent phaseEvent) {
-		FacesContext facesContext = phaseEvent.getFacesContext();
-		Flash flash = facesContext.getExternalContext().getFlash();
-		String viewId = facesContext.getViewRoot().getViewId();
-
-		@SuppressWarnings("unchecked")
-		Set<String> headResourceIdsFromFlash = (Set<String>) flash.get(HEAD_RESOURCE_IDS);
-
-		if (headResourceIdsFromFlash != null) {
-			HeadManagedBean headManagedBean = HeadManagedBean.getInstance(facesContext);
-			Set<String> managedBeanResourceIds = headManagedBean.getHeadResourceIds();
-
-			for (String resourceIdFromFlash : headResourceIdsFromFlash) {
-
-				if (!managedBeanResourceIds.contains(resourceIdFromFlash)) {
-					managedBeanResourceIds.add(resourceIdFromFlash);
-					logger.debug(
-						"Added resourceId=[{0}] from the Flash scope to the list of resourceIds in the HeadManagedBean for viewId=[{1}]",
-						resourceIdFromFlash, viewId);
-				}
 			}
 		}
 	}

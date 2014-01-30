@@ -34,7 +34,7 @@ public class HtmlTopTagCompat extends com.liferay.taglib.util.HtmlTopTag impleme
 	public void setBodyContent(BodyContent bodyContent) {
 
 		super.setBodyContent(bodyContent);
-		
+
 		// Required for Liferay 5.2 compatibility
 		super.doAfterBody();
 	}
