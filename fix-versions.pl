@@ -20,14 +20,8 @@
 #
 # This Perl script is a convenience utility that exists in the top-level folder
 # of the liferay-faces project. It parses the project version information from
-# the parent-most pom.xml file and fixes version number mistakes and
-# inconsistencies in the following types of files:
-#
-# (1) pom.xml (child modules)
-# (2) liferay-display.xml
-# (3) liferay-portlet.xml
-# (4) liferay-plugin-package.properties
-# (5) book.xml
+# the parent-most pom.xml file and fixes version numbers in various type of
+# files.
 #
 ################################################################################
 #
@@ -174,16 +168,6 @@ sub do_inplace_edits {
 	elsif ($file eq "liferay-plugin-package.properties" and ($File::Find::name =~ /demos\/portal\/.*\/src/)) {
 		print "$File::Find::name\n";
 		`perl -pi -e 's/liferay-versions=..*/liferay-versions=$portalVersions/' $file`;
-	}
-
-	#
-	# Otherwise, if the current file is named "book.xml" then potentially fix the version number that
-	# will appear in the generated PDF documentation.
-	#
-	elsif ($File::Find::name eq "./doc/src/main/docbook/en-US/book.xml") {
-		print "$File::Find::name\n";
-		`perl -pi -e 's/ENTITY versionNumber "..*"/ENTITY versionNumber "$bookVersion"/' $file`;
-		`perl -pi -e 's/ENTITY copyrightYear "2000-..* "/ENTITY copyrightYear "2000-${year} "/' $file`;
 	}
 
 	#
