@@ -138,7 +138,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.1.0</vdldoc:since>
+			<vdldoc:since>4.2.0</vdldoc:since>
 		</tag-extension>
 	</tag>
 </facelet-taglib>
