@@ -13,7 +13,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>javax.servlet</groupId>
+			<groupId>javax.servlet.jsp.jstl</groupId>
 			<artifactId>jstl-api</artifactId>
 		</dependency>
 	</dependencies>
