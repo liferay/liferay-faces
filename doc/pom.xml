@@ -10,37 +10,46 @@
 	<name>Liferay Faces Documentation</name>
 	<packaging>pom</packaging>
 
+	<profiles>
+		<profile>
+			<id>vdldoc</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.liferay.faces.maven</groupId>
+						<artifactId>liferay-faces-maven-plugin</artifactId>
+						<version>${project.version}</version>
+						<configuration>
+							<docTitle>Liferay Faces View Description Language Documentation (VDLDoc)</docTitle>
+							<quiet>false</quiet>
+							<windowTitle>Liferay Faces View Description Language Documentation (VDLDoc)</windowTitle>
+							<taglibs>
+								<taglib>${project.basedir}/../alloy/src/main/resources/META-INF/aui.taglib.xml</taglib>
+								<taglib>${project.basedir}/../alloy/src/main/resources/META-INF/aui-cc.taglib.xml</taglib>
+								<taglib>${project.basedir}/../bridge-impl/src/main/resources/META-INF/resources/bridge.taglib.xml</taglib>
+								<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay.taglib.xml</taglib>
+								<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay-security.taglib.xml</taglib>
+								<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay-ui.taglib.xml</taglib>
+								<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay-util.taglib.xml</taglib>
+								<taglib>${project.basedir}/../bridge-impl/src/main/resources/META-INF/resources/portlet.taglib.xml</taglib>
+							</taglibs>
+						</configuration>
+						<executions>
+							<execution>
+								<id>generate-vdldoc</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>generate-vdldoc</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>com.liferay.faces.maven</groupId>
-				<artifactId>liferay-faces-maven-plugin</artifactId>
-				<version>${project.version}</version>
-				<configuration>
-					<docTitle>Liferay Faces View Description Language Documentation (VDLDoc)</docTitle>
-					<quiet>false</quiet>
-					<windowTitle>Liferay Faces View Description Language Documentation (VDLDoc)</windowTitle>
-					<taglibs>
-						<taglib>${project.basedir}/../alloy/src/main/resources/META-INF/aui.taglib.xml</taglib>
-						<taglib>${project.basedir}/../alloy/src/main/resources/META-INF/aui-cc.taglib.xml</taglib>
-						<taglib>${project.basedir}/../bridge-impl/src/main/resources/META-INF/resources/bridge.taglib.xml</taglib>
-						<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay.taglib.xml</taglib>
-						<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay-security.taglib.xml</taglib>
-						<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay-ui.taglib.xml</taglib>
-						<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay-util.taglib.xml</taglib>
-						<taglib>${project.basedir}/../bridge-impl/src/main/resources/META-INF/resources/portlet.taglib.xml</taglib>
-					</taglibs>
-				</configuration>
-				<executions>
-					<execution>
-						<id>generate-vdldoc</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>generate-vdldoc</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
