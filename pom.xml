@@ -404,21 +404,6 @@
 										<ignore></ignore>
 									</action>
 								</pluginExecution>
-								<!-- TODO
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>com.liferay.faces.maven</groupId>
-										<artifactId>liferay-faces-maven-plugin</artifactId>
-										<versionRange>[${project.version},)</versionRange>
-										<goals>
-											<goal>generate-vdldoc</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-								-->
 							</pluginExecutions>
 						</lifecycleMappingMetadata>
 					</configuration>
