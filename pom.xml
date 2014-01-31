@@ -83,7 +83,6 @@
 		<module>issues</module>
 		<module>support</module>
 		<module>test</module>
-		<module>doc</module>
 	</modules>
 
 	<properties>
