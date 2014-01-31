@@ -51,6 +51,11 @@
 			<organization>Liferay, Inc.</organization>
 			<organizationUrl>http://www.liferay.com</organizationUrl>
 		</developer>
+		<developer>
+			<name>Bruno Basto</name>
+			<organization>Liferay, Inc.</organization>
+			<organizationUrl>http://www.liferay.com</organizationUrl>
+		</developer>
 	</developers>
 
 	<scm>
