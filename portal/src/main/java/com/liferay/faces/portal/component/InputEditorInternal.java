@@ -13,21 +13,16 @@
  */
 package com.liferay.faces.portal.component;
 
-import java.io.IOException;
-
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIOutput;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.portal.renderkit.InputEditorInternalRenderer;
-import com.liferay.faces.util.component.UICleanup;
-
 
 /**
  * @author  Neil Griffin
  */
-public class InputEditorInternal extends UIOutput implements UICleanup {
+public class InputEditorInternal extends UIOutput {
 
 	// Private Constants
 	private static final String COMPONENT_TYPE = "com.liferay.faces.portal.InputEditorInternal";
@@ -37,12 +32,6 @@ public class InputEditorInternal extends UIOutput implements UICleanup {
 	public InputEditorInternal() {
 		super();
 		setRendererType(RENDERER_TYPE);
-	}
-
-	public void encodeCleanup(FacesContext facesContext) throws IOException {
-		InputEditorInternalRenderer inputEditorInternalRenderer = (InputEditorInternalRenderer) getRenderer(
-				facesContext);
-		inputEditorInternalRenderer.encodeCleanup(facesContext, this);
 	}
 
 	@Override

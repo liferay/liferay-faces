@@ -21,6 +21,7 @@
 		<cc:attribute name="maxLengthMessage" required="false" />
 		<cc:attribute name="onblur" required="false" />
 		<cc:attribute name="onchange" required="false" />
+		<cc:attribute name="onfocus" required="false" />
 		<cc:attribute name="pathThemeCss" required="false" />
 		<cc:attribute name="plid" required="false" />
 		<cc:attribute name="required" default="false" required="false" />
@@ -72,6 +73,7 @@
 		<c:set var="prefixedInitMethod" value="#{clientIdPrefix}initRichText" />
 		<c:set var="prefixedOnBlurMethod" value="#{clientIdPrefix}richTextBlurred" />
 		<c:set var="prefixedOnChangeMethod" value="#{clientIdPrefix}richTextChanged" />
+		<c:set var="prefixedOnFocusMethod" value="#{clientIdPrefix}richTextFocussed" />
 		<c:set var="prefixedCountCharsMethod" value="#{clientIdPrefix}countTotalAlphaNumChars" />
 		<c:choose>
 			<c:when test="#{empty cc.attrs.pathThemeCss}">
@@ -165,6 +167,10 @@ function #{prefixedOnBlurMethod}() {
 var hiddenField = document.getElementById('#{cc.clientId}:inputText');
 hiddenField.onblur();
 }
+function #{prefixedOnFocusMethod}() {
+var hiddenField = document.getElementById('#{cc.clientId}:inputText');
+hiddenField.onfocus();
+}
 </script>
 						<c:if test="#{!empty cc.attrs.maxLength}">
 							<div id="#{cc.clientId}:mld" class="portlet-msg-info">
@@ -203,8 +209,8 @@ window['#{editorName}'].setHTML(#{prefixedInitMethod}());
 							<c:otherwise>
 								<h:inputHidden id="firstTime" type="hidden" />
 								<h:inputTextarea id="inputText" cols="100" label="#{cc.attrs.label}" onblur="#{cc.attrs.onblur}"
-									onchange="#{cc.attrs.onchange}"	required="#{cc.attrs.required}" value="#{cc.attrs.value}"
-									style="display: none;">
+									onchange="#{cc.attrs.onchange}"	onfocus="#{cc.attrs.onfocus}" required="#{cc.attrs.required}"
+									value="#{cc.attrs.value}" style="display: none;">
 									<cc:insertChildren />
 								</h:inputTextarea>
 								<c:choose>
@@ -216,6 +222,7 @@ window['#{editorName}'].setHTML(#{prefixedInitMethod}());
 											name="#{cc.clientId}"
 											onBlurMethod="#{prefixedOnBlurMethod}"
 											onChangeMethod="#{prefixedOnChangeMethod}"
+											onFocusMethod="#{prefixedOnFocusMethod}"
 											toolbarSet="#{cc.attrs.toolbarSet}"
 											width="#{cc.attrs.width}" />
 									</c:when>

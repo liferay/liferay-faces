@@ -21,6 +21,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
+import com.liferay.faces.util.lang.StringPool;
+
 
 /**
  * @author  Neil Griffin
@@ -41,19 +43,21 @@ public class ListRenderer extends Renderer {
 		responseWriter.writeAttribute("id", id, "id");
 
 		StringBuilder classNames = new StringBuilder();
+
+		// aui-list not found in 6.2
 		classNames.append("aui-list");
 
 		String cssClass = (String) attributes.get("cssClass");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(" ");
+			classNames.append(StringPool.SPACE);
 			classNames.append(cssClass);
 		}
 
 		String styleClass = (String) attributes.get("styleClass");
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(" ");
+			classNames.append(StringPool.SPACE);
 			classNames.append(styleClass);
 		}
 

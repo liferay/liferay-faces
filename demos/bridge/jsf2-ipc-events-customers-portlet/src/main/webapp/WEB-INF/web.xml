@@ -16,6 +16,14 @@
 		<param-name>com.sun.faces.expressionFactory</param-name>
 		<param-value>org.jboss.el.ExpressionFactoryImpl</param-value>
 	</context-param>
+	<!-- Instruct Mojarra to namespace parameters according to NamingContainer rules. -->
+	<!-- JAVASERVERFACES-3031 -->
+	<!--
+	<context-param>
+		<param-name>com.sun.faces.namespaceParameters</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	-->
 	<!--  The following listener is required to handle the BridgeRequestScopeAttributeAdded annotation, but really -->
 	<!--  is only necessary for remote WSRP portlets. -->
 	<listener>

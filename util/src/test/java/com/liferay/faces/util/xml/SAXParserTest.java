@@ -58,9 +58,9 @@ public class SAXParserTest {
 						saxParser.parse(url.openStream(), testHandler);
 						Assert.assertEquals(1, testHandler.getTotalComments());
 						Assert.assertEquals(2, testHandler.getTotalCharacters());
-						Assert.assertEquals(86, testHandler.getTotalStartElements());
-						Assert.assertEquals(86, testHandler.getTotalEndElements());
-						Assert.assertEquals(139, testHandler.getTotalAttributes());
+						Assert.assertEquals(89, testHandler.getTotalStartElements());
+						Assert.assertEquals(89, testHandler.getTotalEndElements());
+						Assert.assertEquals(142, testHandler.getTotalAttributes());
 					}
 					else {
 						Assert.fail();

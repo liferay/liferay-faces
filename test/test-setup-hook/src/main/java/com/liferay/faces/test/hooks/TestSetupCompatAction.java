@@ -14,8 +14,17 @@
 package com.liferay.faces.test.hooks;
 
 import com.liferay.portal.kernel.events.SimpleAction;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 
 
 /**
@@ -26,8 +35,21 @@ import com.liferay.portal.security.permission.PermissionChecker;
  */
 public abstract class TestSetupCompatAction extends SimpleAction {
 
-	protected void addPortlet(LayoutTypePortlet layoutTypePortlet, long userId, int columnNumber, String portletId) {
-		layoutTypePortlet.setPortletIds("column-" + columnNumber, portletId);
+	// Private Data Members
+	boolean fixedPermissionChecker = false;
+
+	protected void addPortlet(LayoutTypePortlet layoutTypePortlet, long userId, int columnNumber, String portletId)
+		throws PortalException, SystemException {
+
+		String columnNumberLabel = Integer.toString(columnNumber);
+
+		// Liferay 6.2 changed the expected value for the String-based column number. Previous versions didn't
+		// require the "column-" prefix.
+		columnNumberLabel = "column-" + columnNumber;
+
+		// NOTE: In Liferay 6.1.x the following call was to setPortletIds() but that method was removed in 6.2.x
+		layoutTypePortlet.addPortletId(userId, portletId, columnNumberLabel, 1);
+
 	}
 
 	/**
@@ -35,13 +57,35 @@ public abstract class TestSetupCompatAction extends SimpleAction {
 	 * method.
 	 */
 	protected void clearPermissionChecker() {
-		// This is a no-op for Liferay Portal 6.1
+
+		if (fixedPermissionChecker) {
+			PermissionThreadLocal.setPermissionChecker(null);
+		}
 	}
 
 	/**
 	 * This method sets up the {@link PermissionChecker} {@link ThreadLocal} prior to performing additional test setup.
+	 *
+	 * @throws  SystemException
+	 * @throws  PortalException
 	 */
-	protected void setupPermissionChecker(long companyId) {
-		// This is a no-op for Liferay Portal 6.1
+	protected void setupPermissionChecker(long companyId) throws PortalException, SystemException {
+		PermissionChecker permissionChecker = PermissionThreadLocal.getPermissionChecker();
+
+		if (permissionChecker == null) {
+			Role administratorRole = RoleLocalServiceUtil.getRole(companyId, RoleConstants.ADMINISTRATOR);
+			User administratorUser = UserLocalServiceUtil.getRoleUsers(administratorRole.getRoleId()).get(0);
+
+			try {
+				permissionChecker = PermissionCheckerFactoryUtil.create(administratorUser);
+
+				PermissionThreadLocal.setPermissionChecker(permissionChecker);
+				fixedPermissionChecker = true;
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+		}
+
 	}
 }

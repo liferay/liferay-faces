@@ -22,6 +22,7 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -42,26 +43,30 @@ public class ColumnRenderer extends Renderer {
 		responseWriter.writeAttribute("id", id, "id");
 
 		StringBuilder classNames = new StringBuilder();
-		classNames.append("aui-column");
+
+		// aui_deprecated.css: column
+		classNames.append("column");
 
 		String columnWidth = (String) attributes.get("columnWidth");
 
 		if ((columnWidth != null) && (columnWidth.length() > 0)) {
-			classNames.append(" aui-w");
+
+			// aui_deprecated.css: w
+			classNames.append(" w");
 			classNames.append(columnWidth);
 		}
 
 		String cssClass = (String) attributes.get("cssClass");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(" ");
+			classNames.append(StringPool.SPACE);
 			classNames.append(cssClass);
 		}
 
 		String styleClass = (String) attributes.get("styleClass");
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(" ");
+			classNames.append(StringPool.SPACE);
 			classNames.append(styleClass);
 		}
 
@@ -76,7 +81,9 @@ public class ColumnRenderer extends Renderer {
 		}
 
 		if (firstFlag) {
-			classNames.append(" aui-column-first");
+
+			// aui_deprecated.css: column-first
+			classNames.append(" column-first");
 		}
 
 		Boolean lastFlag = Boolean.FALSE;
@@ -90,21 +97,29 @@ public class ColumnRenderer extends Renderer {
 		}
 
 		if (lastFlag) {
-			classNames.append(" aui-column-last");
+
+			// aui_deprecated.css: column-last
+			classNames.append(" column-last");
 		}
 
 		responseWriter.writeAttribute("class", classNames.toString(), null);
 		responseWriter.startElement("div", null);
 		classNames = new StringBuilder();
-		classNames.append("aui-column-content");
+
+		// Used to be aui-column-content, but has been replaced by non-deprecated column-content
+		classNames.append("column-content");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(" ");
+			classNames.append(StringPool.SPACE);
+
+			// "-content" classes may be deprecated
 			classNames.append(ComponentUtil.appendToCssClasses(cssClass, "-content"));
 		}
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(" ");
+			classNames.append(StringPool.SPACE);
+
+			// "-content" classes may be deprecated
 			classNames.append(ComponentUtil.appendToCssClasses(styleClass, "-content"));
 		}
 

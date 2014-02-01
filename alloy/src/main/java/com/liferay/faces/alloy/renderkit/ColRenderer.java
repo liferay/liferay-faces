@@ -14,48 +14,91 @@
 package com.liferay.faces.alloy.renderkit;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.alloy.component.AUICol;
 import com.liferay.faces.util.lang.StringPool;
 
 
 /**
  * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public class LayoutRenderer extends Renderer {
+public class ColRenderer extends Renderer {
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
 		super.encodeBegin(facesContext, uiComponent);
 
-		Map<String, Object> attributes = uiComponent.getAttributes();
+		AUICol auiCol = (AUICol) uiComponent;
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-
 		responseWriter.startElement("div", uiComponent);
 
-		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute("id", id, "id");
+		String id = auiCol.getClientId(facesContext);
+		responseWriter.writeAttribute("id", id, null);
 
 		StringBuilder classNames = new StringBuilder();
 
-		// aui_deprecated.css: layout
-		classNames.append("layout");
+		Integer width = auiCol.getWidth();
+		Integer span = auiCol.getSpan();
 
-		String cssClass = (String) attributes.get("cssClass");
+		if (span != null) {
+
+			if ((span < 1) || (span > AUICol.COLUMNS)) {
+				throw new IOException("span number must be between 1 and " + AUICol.COLUMNS);
+			}
+		}
+
+		if (width != null) {
+
+			if ((width < 1) || (width > 100)) {
+				throw new IOException("width must be between 1 and 100");
+			}
+
+			span = getColumnUnitSize(width);
+		}
+
+		classNames.append("span");
+		classNames.append(span);
+
+		Integer offsetWidth = auiCol.getOffsetWidth();
+		Integer offset = auiCol.getOffset();
+
+		if (offset != null) {
+
+			if ((offset < 1) || (offset > AUICol.COLUMNS)) {
+				throw new IOException("offset must be between 1 and " + AUICol.COLUMNS);
+			}
+		}
+
+		if (offsetWidth != null) {
+
+			if ((offsetWidth < 1) || (offsetWidth > 100)) {
+				throw new IOException("offsetWidth must be between 1 and 100");
+			}
+
+			offset = getColumnUnitSize(offsetWidth);
+		}
+
+		if (offset != null) {
+			classNames.append(" aui-offset");
+			classNames.append(offset);
+		}
+
+		String cssClass = auiCol.getCssClass();
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
 			classNames.append(StringPool.SPACE);
 			classNames.append(cssClass);
 		}
 
-		String styleClass = (String) attributes.get("styleClass");
+		String styleClass = auiCol.getStyleClass();
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
 			classNames.append(StringPool.SPACE);
@@ -63,36 +106,30 @@ public class LayoutRenderer extends Renderer {
 		}
 
 		responseWriter.writeAttribute("class", classNames.toString(), null);
-		responseWriter.startElement("div", null);
-		classNames = new StringBuilder();
 
-		// aui_deprecated.css: layout-content
-		classNames.append("layout-content");
+		Boolean first = auiCol.isFirst();
 
-		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
-
-			// "-content" tags may be deprecated
-			classNames.append(ComponentUtil.appendToCssClasses(cssClass, "-content"));
+		if (first != null) {
+			responseWriter.writeAttribute("first", first.toString(), null);
 		}
 
-		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+		Boolean last = auiCol.isLast();
 
-			// "-content" tags may be deprecated
-			classNames.append(ComponentUtil.appendToCssClasses(styleClass, "-content"));
+		if (last != null) {
+			responseWriter.writeAttribute("last", last.toString(), null);
 		}
-
-		responseWriter.writeAttribute("class", classNames.toString(), null);
 	}
 
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.endElement("div");
-		responseWriter.endElement("div");
 	}
 
+	protected Integer getColumnUnitSize(Integer width) {
+		return (int) Math.round(AUICol.COLUMNS * ((double) width / 100));
+	}
 }

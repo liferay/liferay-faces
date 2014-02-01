@@ -218,7 +218,7 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 				}
 
 				boolean optimizeNamespace = BooleanHelper.toBoolean(bridgeContext.getInitParameter(
-							BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE1), true);
+							BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE1), false);
 
 				if (fileItemIterator != null) {
 

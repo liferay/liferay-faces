@@ -16,7 +16,9 @@ String editorImpl = requestDispatcherParams.get("editorImpl");
 String height = requestDispatcherParams.get("height");
 String initMethod = requestDispatcherParams.get("initMethod");
 String name = requestDispatcherParams.get("name");
+String onBlurMethod = requestDispatcherParams.get("onBlurMethod");
 String onChangeMethod = requestDispatcherParams.get("onChangeMethod");
+String onFocusMethod = requestDispatcherParams.get("onFocusMethod");
 boolean skipEditorLoading = Boolean.TRUE.toString().equals(requestDispatcherParams.get("skipEditorLoading"));
 String toolbarSet = requestDispatcherParams.get("toolbarSet");
 String width = requestDispatcherParams.get("width");
@@ -26,7 +28,9 @@ String width = requestDispatcherParams.get("width");
 	height="<%= height %>"
 	initMethod="<%= initMethod %>"
 	name="<%= name %>"
+	onBlurMethod="<%= onBlurMethod %>"
 	onChangeMethod="<%= onChangeMethod %>"
+	onFocusMethod="<%= onFocusMethod %>"
 	skipEditorLoading="<%= skipEditorLoading %>"
 	toolbarSet="<%= toolbarSet %>"
 	width="<%= width %>" />
