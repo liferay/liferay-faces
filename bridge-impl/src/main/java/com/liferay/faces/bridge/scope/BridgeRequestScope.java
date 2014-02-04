@@ -14,6 +14,7 @@
 package com.liferay.faces.bridge.scope;
 
 import java.util.Map;
+import java.util.Set;
 
 import javax.faces.context.FacesContext;
 import javax.portlet.ActionRequest;
@@ -174,4 +175,13 @@ public interface BridgeRequestScope {
 	 *                           otherwise <code>false</code>.
 	 */
 	void setRedirectOccurred(boolean redirectOccurred);
+
+	/**
+	 * This method returns a mutable set of attribute names that correspond to those that were removed by the {@link
+	 * #removeExcludedAttributes(RenderRequest)} method. Since the return value is mutable, callers of this method have
+	 * an opportunity to add names to the set when necessary.
+	 *
+	 * @return  The set of removed attribute names.
+	 */
+	Set<String> getRemovedAttributeNames();
 }
