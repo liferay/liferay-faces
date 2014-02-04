@@ -110,6 +110,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 	private boolean portletModeChanged;
 	private Set<String> preExistingAttributeNames;
 	private boolean redirect;
+	private Set<String> removedAttributeNames;
 
 	public BridgeRequestScopeImpl(PortletConfig portletConfig, PortletContext portletContext,
 		PortletRequest portletRequest) {
@@ -149,6 +150,8 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 		this.preExistingAttributeNames = getPreExistingRequestAttributeNames(portletRequest);
 
 		this.beganInPhase = (Bridge.PortletPhase) portletRequest.getAttribute(Bridge.PORTLET_LIFECYCLE_PHASE);
+
+		this.removedAttributeNames = new HashSet<String>();
 	}
 
 	/**
@@ -180,6 +183,8 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 				for (String attributeName : nonExcludedAttributeNames) {
 
 					renderRequest.removeAttribute(attributeName);
+
+					removedAttributeNames.add(attributeName);
 
 					if (logger.isTraceEnabled()) {
 
@@ -756,6 +761,11 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 
 	public void setRedirectOccurred(boolean redirect) {
 		this.redirect = redirect;
+	}
+
+	@Override
+	public Set<String> getRemovedAttributeNames() {
+		return removedAttributeNames;
 	}
 
 	protected class IncongruityAttribute extends NameValuePair<String, Object> {
