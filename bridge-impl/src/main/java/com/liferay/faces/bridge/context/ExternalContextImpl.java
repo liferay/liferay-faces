@@ -662,9 +662,20 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 
 				if (portletResponse instanceof StateAwareResponse) {
 
-					// TCK TestPage169: getResponseCharacterEncodingActionTest
-					// TCK TestPage180: getResponseCharacterEncodingEventTest
-					throw new IllegalStateException();
+					String characterEncoding = (String) bridgeContext.getAttributes().get(
+							ViewHandlerImpl.RESPONSE_CHARACTER_ENCODING);
+
+					if (characterEncoding != null) {
+
+						// Workaround for patch applied to Mojarra in JAVASERVERFACES-3023
+						return characterEncoding;
+					}
+					else {
+
+						// TCK TestPage169: getResponseCharacterEncodingActionTest
+						// TCK TestPage180: getResponseCharacterEncodingEventTest
+						throw new IllegalStateException();
+					}
 				}
 				else {
 					return null;
