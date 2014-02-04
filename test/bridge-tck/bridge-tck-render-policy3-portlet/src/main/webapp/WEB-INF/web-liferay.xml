@@ -16,7 +16,6 @@
   	<param-value>com.liferay.faces.bridge.tck.portlet.PortletConfigWrapper</param-value>
   </context-param>
   <!-- END: LIFERAY PORTAL -->
-
   <!-- BEGIN: LIFERAY FACES BRIDGE -->
   <context-param>
   	<param-name>com.liferay.faces.bridge.bridgeRequestScopeAjaxEnabled</param-name>
@@ -39,6 +38,15 @@
   	<param-value>false</param-value>
   </context-param>
   <!-- END: LIFERAY FACES BRIDGE -->
+  <!-- BEGIN: LIFERAY REQUIREMENTS FOR MOJARRA -->
+  <!-- JAVASERVERFACES-3031 -->
+  <!--
+  <context-param>
+    <param-name>com.sun.faces.namespaceParameters</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  -->
+  <!-- END: LIFERAY REQUIREMENTS FOR MOJARRA -->
 
   <context-param>
     <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
