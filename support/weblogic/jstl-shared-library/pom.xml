@@ -13,8 +13,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>javax.servlet.jsp.jstl</groupId>
-			<artifactId>jstl-api</artifactId>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>jstl-impl</artifactId>
 		</dependency>
 	</dependencies>
 
