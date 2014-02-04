@@ -14,7 +14,11 @@
 package com.liferay.faces.bridge.context.map;
 
 import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
+import java.util.List;
+import java.util.Set;
 
 import javax.faces.context.ExternalContext;
 import javax.portlet.PortletRequest;
@@ -53,14 +57,17 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 	private String namespace;
 	private PortletRequest portletRequest;
 	private boolean preferPreDestroy;
+	private Set<String> removedAttributeNames;
 
 	public RequestAttributeMap(PortletRequest portletRequest, BeanManager beanManager, String namespace,
-		boolean preferPreDestroy, boolean distinctRequestScopedManagedBeans) {
+		boolean preferPreDestroy, boolean distinctRequestScopedManagedBeans,
+		Set<String> removedAttributeNames) {
 		this.portletRequest = portletRequest;
 		this.namespace = namespace;
 		this.preferPreDestroy = preferPreDestroy;
 		this.distinctRequestScopedManagedBeans = distinctRequestScopedManagedBeans;
 		this.beanManager = beanManager;
+		this.removedAttributeNames = removedAttributeNames;
 	}
 
 	/**
@@ -71,10 +78,10 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 	@Override
 	public Object remove(Object key) {
 
-		String potentialManagedBeanName = (String) key;
+		String keyAsString = (String) key;
 		Object potentialManagedBeanValue = super.remove(key);
 
-		if (beanManager.isManagedBean(potentialManagedBeanName, potentialManagedBeanValue)) {
+		if (beanManager.isManagedBean(keyAsString, potentialManagedBeanValue)) {
 			beanManager.invokePreDestroyMethods(potentialManagedBeanValue, preferPreDestroy);
 		}
 
@@ -88,7 +95,13 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 
 	@Override
 	protected void removeProperty(String name) {
+		removedAttributeNames.add(name);
 		portletRequest.removeAttribute(name);
+	}
+
+	@Override
+	public boolean containsKey(Object key) {
+		return super.containsKey(key);
 	}
 
 	@Override
@@ -153,6 +166,22 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 
 	@Override
 	protected Enumeration<String> getPropertyNames() {
-		return portletRequest.getAttributeNames();
+
+		List<String> attributeNames = new ArrayList<String>();
+
+		Enumeration<String> portletRequestAttributeNames = portletRequest.getAttributeNames();
+
+		if (portletRequestAttributeNames != null) {
+
+			while (portletRequestAttributeNames.hasMoreElements()) {
+				String attributeName = portletRequestAttributeNames.nextElement();
+
+				if (!removedAttributeNames.contains(attributeName)) {
+					attributeNames.add(attributeName);
+				}
+			}
+		}
+
+		return Collections.enumeration(attributeNames);
 	}
 }
