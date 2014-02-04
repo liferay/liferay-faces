@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.Principal;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
@@ -39,6 +40,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 import com.liferay.faces.bridge.BridgeFactoryFinder;
+import com.liferay.faces.bridge.application.ViewHandlerImpl;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentRequest;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentResponse;
 import com.liferay.faces.bridge.application.view.BridgeWriteBehindSupportFactory;
@@ -50,6 +52,7 @@ import com.liferay.faces.bridge.context.map.InitParameterMap;
 import com.liferay.faces.bridge.context.map.RequestAttributeMap;
 import com.liferay.faces.bridge.context.map.RequestCookieMap;
 import com.liferay.faces.bridge.context.map.SessionMap;
+import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.bridge.util.LocaleIterator;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
@@ -213,9 +216,19 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 		}
 
 		// Initialize the request attribute map.
+		Set<String> removedAttributeNames = null;
+		BridgeRequestScope bridgeRequestScope = bridgeContext.getBridgeRequestScope();
+
+		if (bridgeRequestScope != null) {
+			removedAttributeNames = bridgeRequestScope.getRemovedAttributeNames();
+		}
+		else {
+			removedAttributeNames = new HashSet<String>();
+		}
+
 		requestAttributeMap = new RequestAttributeMap(portletRequest, beanManager,
 				bridgeContext.getPortletContainer().getResponseNamespace(), preferPreDestroy,
-				distinctRequestScopedManagedBeans);
+				distinctRequestScopedManagedBeans, removedAttributeNames);
 
 		// Initialize the session map.
 		sessionMap = new SessionMap(portletRequest.getPortletSession(), beanManager, PortletSession.PORTLET_SCOPE,
