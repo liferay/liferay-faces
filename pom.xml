@@ -121,7 +121,7 @@
 		<liferay.weblogic.version>10.3.6.0</liferay.weblogic.version>
 		<liferay.websphere.version>8.0.0.6</liferay.websphere.version>
 		<log4j.version>1.2.14</log4j.version>
-		<mojarra.version>2.2.4</mojarra.version>
+		<mojarra.version>2.2.5</mojarra.version>
 		<myfaces.version>UNSUPPORTED</myfaces.version>
 		<pluto.deploy.dir>${pluto.tomcat.dir}/webapps</pluto.deploy.dir>
 		<pluto.home>${env.PORTALS_HOME}/liferay.com/${pluto.portal}-jsf-${faces.spec.version}</pluto.home>
