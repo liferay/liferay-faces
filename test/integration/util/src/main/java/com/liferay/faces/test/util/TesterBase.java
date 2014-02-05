@@ -37,7 +37,7 @@ public class TesterBase {
 	// elements for logging into liferay
 	private static final String emailFieldXpath = "//input[contains(@id,'_58_login')]";
 	private static final String passwordFieldXpath = "//input[contains(@id,'_58_password')]";
-	private static final String signInButtonXpath = "//input[@type='submit' and @value='Sign In']";
+	private static final String signInButtonXpath = "//button[contains(text(),'Sign In')]";
 	private static final String signedInTextXpath = "//div[contains(text(),'You are signed in as')]";
 	
 	@FindBy(xpath = emailFieldXpath)
@@ -119,11 +119,37 @@ public class TesterBase {
 		browser.navigate().to(signInUrl);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " before signing in ...");
 
+		System.err.println("!@#$ 1 user=" + user);
 		user.clear();
+		System.err.println("!@#$ 2 user=" + user);
 		user.sendKeys(u);
+		System.err.println("!@#$ 3 pass=" + pass);
 		pass.clear();
-		pass.sendKeys(p);
+		System.err.println("!@#$ 4 pass=" + pass + " sending keys=" + p);
+		try {
+			System.err.println("!@#$ calling sendkeys");
+			pass.sendKeys(p);
+			System.err.println("!@#$ back from calling sendkeys");
+		}
+		catch (Throwable t) {
+			System.err.println("!@#$ before throwable");
+			t.printStackTrace();
+			System.err.println("!@#$ after throwable");
+		}
+		System.err.println("!@#$ before button");
+		if (button == null) {
+			System.err.println("!@#$ 5 button=NULL!");
+		}
+		else {
+			try {
+			System.err.println("!@#$ 5 button=" + button);
+			}
+			catch (Throwable t) {
+				t.printStackTrace();
+			}
+		}
 		button.click();
+		System.err.println("!@#$ 6");
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " after clicking the sign in button and waiting");
 		logger.log(Level.INFO, text.getText());
 
