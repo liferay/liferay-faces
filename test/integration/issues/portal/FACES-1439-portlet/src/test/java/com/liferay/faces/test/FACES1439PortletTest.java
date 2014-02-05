@@ -114,6 +114,11 @@ public class FACES1439PortletTest extends TesterBase {
 	public void htmlEditor1() throws Exception {
 
 		logger.log(Level.INFO, "Typing into htmlEditor1 ...");
+
+		iframe1.click();
+		// Apparently sending a TAB key brings the iframe into focus, so that you can type into it
+		(new Actions(browser)).sendKeys(Keys.TAB).perform();
+
 		iframe1.sendKeys("Hello world 1");
 
 		if (comments1Output.getText().contains("Hello world 1")) {
@@ -168,12 +173,12 @@ public class FACES1439PortletTest extends TesterBase {
 
 		// hide iframe 1
 		showHideOne.click();
-		Thread.sleep(250);
 
 		logger.log(Level.INFO, "comments1Output.getText() = " + comments1Output.getText() + " ... after hide");
 
 		// show iframe 1
 		showHideOne.click();
+		// Now wait for the comments to actually show
 		Thread.sleep(250);
 
 		browser.switchTo().frame(iframe1);
@@ -196,30 +201,31 @@ public class FACES1439PortletTest extends TesterBase {
 
 		logger.log(Level.INFO, "Typing into htmlEditor2 ...");
 		iframe2.click();
-		Thread.sleep(500);
+
+		// Apparently sending a TAB brings the iframe into focus, so that you can type into it
+		(new Actions(browser)).sendKeys(Keys.TAB).perform();
+
 		iframe2.sendKeys("Hello world 2");
-		Thread.sleep(1000);
-		logger.log(Level.INFO, "comments2Output.getText() = " + comments2Output.getText());
+		logger.log(Level.INFO, "comments2Output.getText() = " + comments2Output.getText() + " ... before tabbing out");
 		assertFalse("Model bean should not be updated yet since we have not tabbed-out of the field",
 			comments2Output.getText().contains("Hello world 2"));
 
-		// iframe2.sendKeys(Keys.TAB); iframe2.sendKeys does not send the keys to the iframe but to the active frame,
-		// use browser.switchTo() to make the iframe active, or do this
-
+		// sending a tab now should tab out of the iframe
 		(new Actions(browser)).sendKeys(Keys.TAB).perform();
-		Thread.sleep(500);
-		logger.log(Level.INFO, "comments2Output.getText() = " + comments2Output.getText());
+
+		// Now wait for the Model bean to be updated
+		Thread.sleep(250);
+
+		logger.log(Level.INFO, "comments2Output.getText() = " + comments2Output.getText() + " ... after tabbing out");
 		assertTrue("Model bean needs to have been updated via ajax after tabbing-out of field",
 			comments2Output.getText().contains("Hello world 2"));
 
 		// hide iframe2
 		showHideTwo.click();
-		Thread.sleep(250);
 		logger.log(Level.INFO, "comments2Output.getText() = " + comments2Output.getText() + " ... after hide");
 
 		// show iframe2
 		showHideTwo.click();
-		Thread.sleep(250);
 
 		browser.switchTo().frame(iframe2);
 
@@ -240,13 +246,11 @@ public class FACES1439PortletTest extends TesterBase {
 	public void inputThree() throws Exception {
 
 		inputThree.sendKeys("Hello world 3");
-		Thread.sleep(50);
 		logger.log(Level.INFO, "comments3Output.getText() = " + comments3Output.getText());
 		assertFalse("Model bean should not be updated yet since we have not tabbed-out of the field",
 			comments3Output.getText().contains("Hello world 3"));
 
 		inputThree.sendKeys(Keys.TAB);
-		Thread.sleep(50);
 		logger.log(Level.INFO, "comments3Output.getText() = " + comments3Output.getText());
 		assertTrue("Model bean needs to have been updated via ajax after tabbing-out of field",
 			comments3Output.getText().contains("Hello world 3"));

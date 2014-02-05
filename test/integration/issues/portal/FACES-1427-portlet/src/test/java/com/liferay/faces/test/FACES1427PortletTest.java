@@ -60,9 +60,9 @@ public class FACES1427PortletTest extends TesterBase {
 	// <img alt="Bold" buttonid="b" src="http://localhost:8080/html/themes/classic/images/message_boards/bold.png">
 	private static final String bold1Xpath = "//img[@alt='Bold' and @buttonid='b' and contains(@src, 'bold.png')]";
 
-	private static final String iframe1Xpath = "//td[contains(@id,':comments2')]/iframe";
+	private static final String iframe1Xpath = "//div[contains(@id,':comments2')]/div/div/iframe";
 
-	private static final String bold2Xpath = "//a[contains(@class, 'cke_button_bold')]";
+	private static final String bold2Xpath = "//a[@title='Bold' and @role='button']";
 
 	// <input id="A2399:f1:_t25" name="A2399:f1:_t25" type="submit" value="Submit">
 	private static final String submitXpath = "//input[@type='submit' and @value='Submit']";
@@ -110,8 +110,8 @@ public class FACES1427PortletTest extends TesterBase {
 	public void beforeEachTest() {
 
 		// Apparently this is necessary _sometimes_ for this test to pass ... not sure why.
-		browser.manage().deleteAllCookies();
-		logger.log(Level.INFO, "browser.manage().deleteAllCookies() ...");
+		// browser.manage().deleteAllCookies();
+		// logger.log(Level.INFO, "browser.manage().deleteAllCookies() ...");
 
 	}
 
@@ -125,7 +125,7 @@ public class FACES1427PortletTest extends TesterBase {
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 		logger.log(Level.INFO, "portletDisplayName.getText() = " + portletDisplayName.getText());
-		Thread.sleep(250);
+		Thread.sleep(50);
 		
 		if(isThere(browser, errorMessageXpath) && errorMessage.isDisplayed()) {
 			return;
@@ -173,8 +173,8 @@ public class FACES1427PortletTest extends TesterBase {
 		addAttachment.click();
 		Thread.sleep(500);
 
-		logger.log(Level.INFO, "attachment.isDisplayed() = " + attachment.isDisplayed());
-		logger.log(Level.INFO, "attachment.getText() = " + attachment.getText());
+		logger.log(Level.INFO, "1: attachment.isDisplayed() = " + attachment.isDisplayed());
+		logger.log(Level.INFO, "2: attachment.getText() = " + attachment.getText());
 
 		assertTrue("attachment should be listed now after clicking 'Add Attachment', but it is not there",
 			isThere(browser, attachmentXpath));
@@ -196,16 +196,28 @@ public class FACES1427PortletTest extends TesterBase {
 			return;
 		}
 
-		logger.log(Level.INFO, "textarea1.getAttribute('value') = " + textarea1.getAttribute("value"));
+		logger.log(Level.INFO, "3: textarea1.getAttribute('value') = " + textarea1.getAttribute("value"));
 
-		logger.log(Level.INFO, "isThere(browser, iframe1Xpath) = " + isThere(browser, iframe1Xpath));
-		Thread.sleep(250);
+		logger.log(Level.INFO, "4: isThere(browser, iframe1Xpath) = " + isThere(browser, iframe1Xpath));
+		Thread.sleep(50);
+
+		browser.switchTo().frame(iframe1);
+		WebElement iframe1active = browser.switchTo().activeElement();
+		logger.log(Level.INFO, "5: iframe1active.getText() = " + iframe1active.getText());
+
+		String textFromIframe1 = iframe1active.getText();
+		browser.switchTo().defaultContent();
+
+		assertTrue("the initial value for the FIRST editor should be 'comments1-initial-value', but " + "it is '" +
+			textarea1.getAttribute("value") + "'", textarea1.getAttribute("value").equals("comments1-initial-value"));
+		assertTrue("the initial value for the SECOND editor should be 'comments2-initial-value', but " + "it is '" +
+			textFromIframe1 + "'", textFromIframe1.equals("comments2-initial-value"));
+
 		submit.click();
-		Thread.sleep(250);
-		logger.log(Level.INFO, "isThere(browser, iframe1Xpath) = " + isThere(browser, iframe1Xpath));
+		Thread.sleep(50);
 
-		logger.log(Level.INFO, "comments1Output.getText() = '" + comments1Output.getText() + "'");
-		logger.log(Level.INFO, "comments2Output.getText() = '" + comments2Output.getText() + "'");
+		logger.log(Level.INFO, "6: comments1Output.getText() = '" + comments1Output.getText() + "'");
+		logger.log(Level.INFO, "7: comments2Output.getText() = '" + comments2Output.getText() + "'");
 
 		assertTrue("the submitted value for the FIRST editor should be 'comments1-initial-value', but " + "it is '" +
 			comments1Output.getText() + "'", comments1Output.getText().equals("comments1-initial-value"));
@@ -229,158 +241,184 @@ public class FACES1427PortletTest extends TesterBase {
 			return;
 		}
 
-		logger.log(Level.INFO, "textarea1.getAttribute('value') = " + textarea1.getAttribute("value"));
+		logger.log(Level.INFO, "8: textarea1.getAttribute('value') = " + textarea1.getAttribute("value"));
 
 		// click into textarea1
 		textarea1.click();
-		Thread.sleep(250);
+		Thread.sleep(50);
 
 		// move to the beginning of textarea1
 		textarea1.sendKeys(Keys.HOME); // firefox cursor is on the left after the last click, in chromium cursor is on
 									   // the right of the text ... grr
-		Thread.sleep(250);
+		Thread.sleep(50);
 
 		// arrow over to the word 'initial'
 		textarea1.sendKeys(Keys.ARROW_RIGHT);
-		Thread.sleep(250);
+		Thread.sleep(50);
 		textarea1.sendKeys(Keys.ARROW_RIGHT);
-		Thread.sleep(250);
+		Thread.sleep(50);
 		textarea1.sendKeys(Keys.ARROW_RIGHT);
-		Thread.sleep(250);
+		Thread.sleep(50);
 		textarea1.sendKeys(Keys.ARROW_RIGHT);
-		Thread.sleep(250);
+		Thread.sleep(50);
 		textarea1.sendKeys(Keys.ARROW_RIGHT);
-		Thread.sleep(250);
+		Thread.sleep(50);
 		textarea1.sendKeys(Keys.ARROW_RIGHT);
-		Thread.sleep(250);
+		Thread.sleep(50);
 		textarea1.sendKeys(Keys.ARROW_RIGHT);
-		Thread.sleep(250);
+		Thread.sleep(50);
 		textarea1.sendKeys(Keys.ARROW_RIGHT);
-		Thread.sleep(250);
+		Thread.sleep(50);
 		textarea1.sendKeys(Keys.ARROW_RIGHT);
-		Thread.sleep(250);
+		Thread.sleep(50);
 		textarea1.sendKeys(Keys.ARROW_RIGHT);
-		Thread.sleep(250);
+		Thread.sleep(50);
 
 		// delete the word 'initial'
 		textarea1.sendKeys(Keys.DELETE);
-		Thread.sleep(250);
+		Thread.sleep(50);
 		textarea1.sendKeys(Keys.DELETE);
-		Thread.sleep(250);
+		Thread.sleep(50);
 		textarea1.sendKeys(Keys.DELETE);
-		Thread.sleep(250);
+		Thread.sleep(50);
 		textarea1.sendKeys(Keys.DELETE);
-		Thread.sleep(250);
+		Thread.sleep(50);
 		textarea1.sendKeys(Keys.DELETE);
-		Thread.sleep(250);
+		Thread.sleep(50);
 		textarea1.sendKeys(Keys.DELETE);
-		Thread.sleep(250);
+		Thread.sleep(50);
 		textarea1.sendKeys(Keys.DELETE);
-		Thread.sleep(250);
+		Thread.sleep(50);
 
 		// type the word 'subsequent'
 		textarea1.sendKeys("subsequent");
-		Thread.sleep(250);
+		Thread.sleep(50);
 
 		// select the word 'subsequent' ... easier said than done
-		logger.log(Level.INFO, "textarea1.getAttribute('id') = '" + textarea1.getAttribute("id") + "'");
+		logger.log(Level.INFO, "8: textarea1.getAttribute('id') = '" + textarea1.getAttribute("id") + "'");
 
 		logger.log(Level.INFO,
-			"before selecting ... selectText.getSelection(id) = " +
+			"8: before selecting ... selectText.getSelection(id) = " +
 			selectText.getSelection(textarea1.getAttribute("id")));
 		Thread.sleep(500);
 
-		logger.log(Level.INFO, "selectText.getSelection('id', 10, 20) ... ");
+		logger.log(Level.INFO, "8: selectText.getSelection('id', 10, 20) ... ");
 		selectText.setSelection(textarea1.getAttribute("id"), 10, 20);
 		Thread.sleep(1000);
 
 		logger.log(Level.INFO,
-			"after selecting ... selectText.getSelection(id) = " +
+			"8: after selecting ... selectText.getSelection(id) = " +
 			selectText.getSelection(textarea1.getAttribute("id")));
 		Thread.sleep(500);
 
-		logger.log(Level.INFO, "isThere(browser, bold1Xpath) = " + isThere(browser, bold1Xpath));
-		logger.log(Level.INFO, "bold1.isDisplayed() = " + bold1.isDisplayed());
-		logger.log(Level.INFO, "bold1.getAttribute('src') = " + bold1.getAttribute("src"));
-		logger.log(Level.INFO, "bold1.getLocation() = " + bold1.getLocation());
-		logger.log(Level.INFO, "clicking the bold1 button ...");
+		logger.log(Level.INFO, "8: isThere(browser, bold1Xpath) = " + isThere(browser, bold1Xpath));
+		logger.log(Level.INFO, "8: bold1.isDisplayed() = " + bold1.isDisplayed());
+		logger.log(Level.INFO, "8: bold1.getAttribute('src') = " + bold1.getAttribute("src"));
+		logger.log(Level.INFO, "8: bold1.getLocation() = " + bold1.getLocation());
+		logger.log(Level.INFO, "8: clicking the bold1 button ...");
 
 		// click the bold1 button to make the word 'subsequent' bold
 		try {
 			bold1.click();
 		}
 		catch (Exception e) { // apparently things are different in chromium
-			logger.log(Level.INFO, "e.getMessage() = " + e.getMessage());
+			logger.log(Level.INFO, "8: e.getMessage() = " + e.getMessage());
 			(new Actions(browser)).moveToElement(bold1, 3, 3).click(bold1).build().perform();
-			Thread.sleep(2500);
+			Thread.sleep(500);
 			(new Actions(browser)).moveToElement(bold1, 3, 3).click().build().perform();
-			Thread.sleep(2500);
+			Thread.sleep(500);
 			(new Actions(browser)).moveToElement(bold1).doubleClick().build().perform();
-			Thread.sleep(2500);
+			Thread.sleep(500);
 		}
 
-		Thread.sleep(250);
+		Thread.sleep(50);
 
 		// move into iframe1
-		logger.log(Level.INFO, "clicking into iframe1 ...");
+		logger.log(Level.INFO, "9: clicking into iframe1 ...");
 		iframe1.click();
-		Thread.sleep(250);
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.TAB).perform();
+		Thread.sleep(50);
 
 		// arrow over to the word 'initial'
-		(new Actions(browser)).sendKeys(Keys.ARROW_LEFT).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).sendKeys(Keys.ARROW_LEFT).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).sendKeys(Keys.ARROW_LEFT).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).sendKeys(Keys.ARROW_LEFT).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).sendKeys(Keys.ARROW_LEFT).perform();
-		Thread.sleep(250);
-		(new Actions(browser)).sendKeys(Keys.ARROW_LEFT).perform();
-		Thread.sleep(250);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
+		(new Actions(browser)).sendKeys(Keys.ARROW_RIGHT).perform();
+		Thread.sleep(50);
 
 		// delete the word 'initial'
 		(new Actions(browser)).sendKeys(Keys.BACK_SPACE).perform();
-		Thread.sleep(250);
+		Thread.sleep(50);
 		(new Actions(browser)).sendKeys(Keys.BACK_SPACE).perform();
-		Thread.sleep(250);
+		Thread.sleep(50);
 		(new Actions(browser)).sendKeys(Keys.BACK_SPACE).perform();
-		Thread.sleep(250);
+		Thread.sleep(50);
 		(new Actions(browser)).sendKeys(Keys.BACK_SPACE).perform();
-		Thread.sleep(250);
+		Thread.sleep(50);
 		(new Actions(browser)).sendKeys(Keys.BACK_SPACE).perform();
-		Thread.sleep(250);
+		Thread.sleep(50);
 		(new Actions(browser)).sendKeys(Keys.BACK_SPACE).perform();
-		Thread.sleep(250);
+		Thread.sleep(50);
 		(new Actions(browser)).sendKeys(Keys.BACK_SPACE).perform();
-		Thread.sleep(250);
+		Thread.sleep(50);
 
 		// type the word 'subsequent'
 		(new Actions(browser)).sendKeys("subsequent").perform();
-		Thread.sleep(250);
+		Thread.sleep(50);
 
 		// select the word 'subsequent' ... easier said than done
 		(new Actions(browser)).keyDown(iframe1, Keys.SHIFT).sendKeys(Keys.LEFT).sendKeys(Keys.LEFT).sendKeys(Keys.LEFT)
 			.sendKeys(Keys.LEFT).sendKeys(Keys.LEFT).sendKeys(Keys.LEFT).sendKeys(Keys.LEFT).sendKeys(Keys.LEFT)
 			.sendKeys(Keys.LEFT).sendKeys(Keys.LEFT).keyUp(iframe1, Keys.SHIFT).build().perform();
-		Thread.sleep(250);
+		Thread.sleep(50);
 
 		// click the bold2 button to make the word 'subsequent' bold
+		logger.log(Level.INFO, "9: clicking on the bold button in the second editor ...");
 		bold2.click();
-		Thread.sleep(250);
+		Thread.sleep(50);
 
+		// Why do we need to click the iframe before clicking the submit button?  Who knows?
 		iframe1.click();
-		Thread.sleep(250);
+		Thread.sleep(50);
 
 		// submit the form
+		logger.log(Level.INFO, "10: clicking the submit button ...");
 		submit.click();
-		Thread.sleep(250);
+		Thread.sleep(50);
 
 		// log some elements
-		logger.log(Level.INFO, "isThere(browser, iframe1Xpath) = " + isThere(browser, iframe1Xpath));
-		logger.log(Level.INFO, "comments1Output.getText() = " + comments1Output.getText());
-		logger.log(Level.INFO, "comments2Output.getText() = " + comments2Output.getText());
+		logger.log(Level.INFO, "11: comments1Output.getText() = " + comments1Output.getText());
+		logger.log(Level.INFO, "12: comments2Output.getText() = " + comments2Output.getText());
 
 		// assert to test
 		assertTrue("the submitted value for the FIRST editor should be 'comments1-[b]subsequent[/b]-value', but " +
@@ -393,3 +431,4 @@ public class FACES1427PortletTest extends TesterBase {
 	}
 
 }
+
