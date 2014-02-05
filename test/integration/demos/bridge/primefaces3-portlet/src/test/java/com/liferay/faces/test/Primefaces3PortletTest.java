@@ -24,6 +24,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -683,6 +684,14 @@ public class Primefaces3PortletTest extends TesterBase {
 		}
 
 		logger.log(Level.INFO, "entering in " + getPathToJerseyFile() + " for fileUploadChooser ...");
+
+		// This was the magic that fixed the primefaces4 fileupload component the transform needed to be set to 'none'
+		((JavascriptExecutor)browser).executeScript("arguments[0].style.transform = 'none';", fileUploadChooser);
+
+		// when transform is NOT set to 'none' then we get:
+		// fileUploadChooser.getCssValue(transform) = matrix(4, 0, 0, 4, -300, 0)
+		logger.log(Level.INFO, "fileUploadChooser.getCssValue(transform) = " + fileUploadChooser.getCssValue("transform"));
+
 		fileUploadChooser.sendKeys(getPathToJerseyFile());
 
 		Thread.sleep(50);
