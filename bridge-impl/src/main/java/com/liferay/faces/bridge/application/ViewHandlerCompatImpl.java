@@ -45,6 +45,9 @@ public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ViewHandlerCompatImpl.class);
 
+	// Public Constants
+	public static final String RESPONSE_CHARACTER_ENCODING = "com.liferay.faces.bridge.responseCharacterEncoding";
+
 	// Private Constants
 	private static final String EL_EXPRESSION_PREFIX = "#{";
 
