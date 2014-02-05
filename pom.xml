@@ -983,6 +983,12 @@
 				<groupId>org.icepush</groupId>
 				<artifactId>icepush</artifactId>
 				<version>${icefaces3.version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>jsp-api</artifactId>
+						<groupId>javax.servlet.jsp</groupId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.richfaces.ui</groupId>
