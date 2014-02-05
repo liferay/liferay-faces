@@ -104,7 +104,7 @@
 		<jstl.version>1.2</jstl.version>
 		<liferay.version>5.2.3</liferay.version>
 		<liferay.app.server.deploy.dir>${liferay.app.server.dir}/webapps</liferay.app.server.deploy.dir>
-		<liferay.app.server.dir>${liferay.home}/tomcat-${liferay.tomcat.version}-jsf-${faces.spec.version}</liferay.app.server.dir>
+		<liferay.app.server.dir>${liferay.home}/tomcat-${liferay.tomcat.version}</liferay.app.server.dir>
 		<liferay.app.server.lib.global.dir>${liferay.app.server.dir}/lib/ext</liferay.app.server.lib.global.dir>
 		<liferay.app.server.portal.dir>${liferay.app.server.dir}/webapps/ROOT</liferay.app.server.portal.dir>
 		<liferay.app.server.tld.portal.dir>${liferay.app.server.dir}/webapps/ROOT/WEB-INF/tld</liferay.app.server.tld.portal.dir>
@@ -113,7 +113,7 @@
 		<liferay.deploy.version>${liferay.version}</liferay.deploy.version>
 		<liferay.geronimo.version>unsupported</liferay.geronimo.version>
 		<liferay.glassfish.version>v3.0-Prelude</liferay.glassfish.version>
-		<liferay.home>${env.PORTALS_HOME}/liferay.com/${liferay.portal}</liferay.home>
+		<liferay.home>${env.PORTALS_HOME}/liferay.com/${liferay.portal}-jsf-${faces.spec.version}</liferay.home>
 		<liferay.jboss.version>5.0.0</liferay.jboss.version>
 		<liferay.jetty.version>unsupported</liferay.jetty.version>
 		<liferay.jonas.version>unsupported</liferay.jonas.version>
