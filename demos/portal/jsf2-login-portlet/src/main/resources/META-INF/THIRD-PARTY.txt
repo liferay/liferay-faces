@@ -1,5 +1,5 @@
 
 Lists of 3 third-party dependencies.
-     (COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) plus GPL) Oracle's implementation of the JSF 2.2 specification API. (com.sun.faces:jsf-api:2.1.21 - http://java.sun.com/javaee/javaserverfaces/)
-     (COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) plus GPL) Oracle's implementation of the JSF 2.2 specification. (com.sun.faces:jsf-impl:2.1.21 - http://java.sun.com/javaee/javaserverfaces/)
+     (COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) plus GPL) Oracle's implementation of the JSF 2.2 specification API. (com.sun.faces:jsf-api:2.2.5 - http://java.sun.com/javaee/javaserverfaces/)
+     (COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) plus GPL) Oracle's implementation of the JSF 2.2 specification. (com.sun.faces:jsf-impl:2.2.5 - http://java.sun.com/javaee/javaserverfaces/)
      (The Apache Software License, Version 2.0) jboss-el (org.jboss.seam:jboss-el:2.0.0.GA - no url defined)
