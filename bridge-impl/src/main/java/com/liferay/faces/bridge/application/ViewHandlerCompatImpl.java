@@ -14,11 +14,21 @@
 package com.liferay.faces.bridge.application;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import javax.faces.FacesException;
 import javax.faces.application.ViewHandlerWrapper;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
+import javax.portlet.faces.Bridge;
+import javax.portlet.faces.Bridge.PortletPhase;
+import javax.portlet.faces.BridgeUtil;
+
+import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -27,6 +37,13 @@ import javax.faces.context.FacesContext;
  * @author  Neil Griffin
  */
 public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
+
+	// Public Constants
+	public static final String RESPONSE_CHARACTER_ENCODING = "com.liferay.faces.bridge.responseCharacterEncoding";
+
+	// Private Constants
+	private static final boolean MOJARRA_DETECTED = ProductMap.getInstance().get(ProductConstants.JSF).getTitle()
+		.equals(ProductConstants.MOJARRA);
 
 	@Override
 	public void renderView(FacesContext context, UIViewRoot viewToRender) throws IOException, FacesException {
@@ -50,5 +67,30 @@ public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
 
 		// This method has overridden behavior for JSF 1 but simply returns the specified viewId for JSF 2
 		return viewId;
+	}
+
+	@Override
+	public String getRedirectURL(FacesContext facesContext, String viewId, Map<String, List<String>> parameters,
+		boolean includeViewParams) {
+
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+		PortletPhase portletRequestPhase = BridgeUtil.getPortletRequestPhase();
+
+		// Determine whether or not it is necessary to work-around the patch applied to Mojarra in JAVASERVERFACES-3023
+		boolean workaroundMojarra = (MOJARRA_DETECTED) &&
+			((portletRequestPhase == Bridge.PortletPhase.ACTION_PHASE) ||
+				(portletRequestPhase == Bridge.PortletPhase.EVENT_PHASE));
+
+		if (workaroundMojarra) {
+			bridgeContext.getAttributes().put(RESPONSE_CHARACTER_ENCODING, StringPool.UTF8);
+		}
+
+		String redirectURL = super.getRedirectURL(facesContext, viewId, parameters, includeViewParams);
+
+		if (workaroundMojarra) {
+			bridgeContext.getAttributes().remove(RESPONSE_CHARACTER_ENCODING);
+		}
+
+		return redirectURL;
 	}
 }
