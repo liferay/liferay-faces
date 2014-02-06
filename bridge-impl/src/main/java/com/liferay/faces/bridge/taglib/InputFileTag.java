@@ -28,7 +28,7 @@ public class InputFileTag extends UIComponentELTag {
 
 	@Override
 	public String getRendererType() {
-		return "javax.faces.InputFile";
+		return "com.liferay.faces.bridge.renderkit.bridge.InputFileRenderer";
 	}
 
 }
