@@ -53,9 +53,9 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 	private static final String emailAddressSearchInputXpath =
 		"//label[@class='aui-field-label' and contains(text(), 'Email Address')]/following-sibling::span[@class='aui-field-element']/input[contains(@class, 'iceInpTxt')]";
 	private static final String dropdownSearchStatusXpath =
-		"//select[contains(@id,':s1')]/option[@selected='true' and contains(text(), 'Any Status')]/..";
-	private static final String dropdownSearchOperatoreXpath =
 		"//select[contains(@id,':s1')]/option[@selected='true' and contains(text(), 'Any')]/..";
+	private static final String dropdownSearchOperatoreXpath =
+		"//select[contains(@id,':s1')]/option[contains(text(), 'All')]/..";
 	private static final String searchButtonXpath =
 		"//input[contains(@id, 'cmdButton') and @type='submit' and contains(@value, 'Search')]";
 
