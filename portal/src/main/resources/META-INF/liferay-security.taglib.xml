@@ -3,7 +3,6 @@
 <facelet-taglib>
 	<namespace>http://liferay.com/faces/security</namespace>
 	<tag>
-		<description>The &lt;code&gt;liferay-security:permissionsURL&lt;/code&gt; tag renders an HTML anchor tag (hyperlink) that the user can click on in order to see the Liferay Permissions screen for the associated resource.</description>
 		<tag-name>permissionsURL</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.PermissionsURL</component-type>
