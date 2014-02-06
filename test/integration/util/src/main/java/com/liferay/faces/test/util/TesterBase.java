@@ -35,7 +35,7 @@ public class TesterBase {
 	protected static final Logger logger = Logger.getLogger(TesterBase.class.getName());
 
 	// elements for logging into liferay
-	private static final String emailFieldXpath = "//input[contains(@id,'_58_login')]";
+	private static final String emailFieldXpath = "//input[contains(@name,'_58_login')]";
 	private static final String passwordFieldXpath = "//input[contains(@id,'_58_password')]";
 	private static final String signInButtonXpath = "//input[@type='submit' and @value='Sign In']";
 	private static final String signedInTextXpath = "//div[contains(text(),'You are signed in as')]";
@@ -65,7 +65,7 @@ public class TesterBase {
 	private WebElement logout;
 	
 	// portlet name for liferay
-	private static final String portletDisplayNameXpath = "//header[@class='portlet-topper']/h1/span";
+	private static final String portletDisplayNameXpath = "//div[@class='portlet-topper']/span";
 	@FindBy(xpath = portletDisplayNameXpath)
 	protected WebElement portletDisplayName;
 	
@@ -78,8 +78,8 @@ public class TesterBase {
 	protected WebElement displayName;
 		
 	// elements for switching to edit mode in liferay
-	private static final String menuButtonXpath = "//*[contains(text(),'Options')]/..";
-	private static final String menuPreferencesXpath = "//img[contains(@src,'/edit.png')]";
+	private static final String menuButtonXpath = "//span[contains(text(),'Options')]/..";
+	private static final String menuPreferencesXpath = "//a[contains(text(),'Preferences')]";
 	
 	@FindBy(xpath = menuButtonXpath)
 	private WebElement menuButton;
