@@ -112,7 +112,7 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 		// The value of the "LIFERAY_SHARED_PAGE_TOP" attribute must be set on the underlying HttpServletRequest to
 		// ensure that the attribute name does not get prefixed with the portlet namespace.
 		HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
-		httpServletRequest.setAttribute(WebKeys.PAGE_TOP, pageTop);
+		httpServletRequest.setAttribute(WebKeys.PAGE_TOP, pageTop.getWrapped());
 	}
 
 	@Override

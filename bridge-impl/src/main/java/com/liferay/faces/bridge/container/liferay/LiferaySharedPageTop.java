@@ -62,7 +62,7 @@ public class LiferaySharedPageTop {
 			headResources = new ArrayList<HeadResource>();
 
 			SharedPageTopHandler sharedPageTopHandler = new SharedPageTopHandler();
-			StringBuilder xmlDocument = new StringBuilder();
+			StringBundler xmlDocument = new StringBundler();
 			xmlDocument.append(XML_DOCUMENT_DECLARATION);
 			xmlDocument.append(StringPool.LESS_THAN);
 			xmlDocument.append(WebKeys.PAGE_TOP);
