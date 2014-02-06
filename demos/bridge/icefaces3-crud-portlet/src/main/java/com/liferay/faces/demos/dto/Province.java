@@ -13,11 +13,18 @@
  */
 package com.liferay.faces.demos.dto;
 
+import java.io.Serializable;
+
+
 /**
  * @author  Neil Griffin
  */
-public class Province {
+public class Province implements Serializable {
 
+	// serialVersionUID
+	private static final long serialVersionUID = 8376892650566650100L;
+
+	// Private Data Members
 	private int provinceId;
 	private String provinceName;
 
