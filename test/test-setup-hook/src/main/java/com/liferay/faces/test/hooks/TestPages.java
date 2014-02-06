@@ -62,7 +62,7 @@ public class TestPages {
 		BRIDGE_ISSUE_PAGES.add(new PortalPage("FACES-1478", "1_WAR_FACES1478portlet"));
 		BRIDGE_ISSUE_PAGES.add(new PortalPage("FACES-1618", "1_WAR_FACES1618portlet"));
 		BRIDGE_ISSUE_PAGES.add(new PortalPage("FACES-1635",
-				new String[] { "1_WAR_jsf2portlet_INSTANCE_", "1_WAR_primefaces3portlet_INSTANCE_" }));
+				new String[] { "1_WAR_jsf2portlet_INSTANCE_", "1_WAR_icefaces3portlet_INSTANCE_" }));
 		BRIDGE_ISSUE_PAGES.add(new PortalPage("FACES-1638", "1_WAR_FACES1638portlet"));
 	}
 
