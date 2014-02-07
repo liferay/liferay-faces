@@ -47,11 +47,11 @@ public class Icefaces3DirectoryPortletTest extends TesterBase {
 
 	// Elements for the directory search
 	private static final String lastNameSearchInputXpath =
-		"//label[@class='aui-field-label' and contains(text(), 'Last Name')]/following-sibling::span[@class='aui-field-element']/input[contains(@class, 'iceInpTxt')]";
+		"//label[@class='field-label' and contains(text(), 'Last Name')]/following-sibling::span[@class='aui-field-element']/input[contains(@class, 'iceInpTxt')]";
 	private static final String firstNameSearchInputXpath =
-		"//label[@class='aui-field-label' and contains(text(), 'First Name')]/following-sibling::span[@class='aui-field-element']/input[contains(@class, 'iceInpTxt')]";
+		"//label[@class='field-label' and contains(text(), 'First Name')]/following-sibling::span[@class='aui-field-element']/input[contains(@class, 'iceInpTxt')]";
 	private static final String emailAddressSearchInputXpath =
-		"//label[@class='aui-field-label' and contains(text(), 'Email Address')]/following-sibling::span[@class='aui-field-element']/input[contains(@class, 'iceInpTxt')]";
+		"//label[@class='field-label' and contains(text(), 'Email Address')]/following-sibling::span[@class='aui-field-element']/input[contains(@class, 'iceInpTxt')]";
 	private static final String dropdownSearchStatusXpath =
 		"//select[contains(@id,':s1')]/option[@selected='true' and contains(text(), 'Any Status')]/..";
 	private static final String dropdownSearchOperatoreXpath =
