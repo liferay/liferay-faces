@@ -77,7 +77,7 @@
 		<module>demos</module>
 		<module>issues</module>
 		<module>support</module>
-		<module>test</module>
+		<!-- <module>test</module> !-->
 		<module>doc</module>
 	</modules>
 
@@ -96,6 +96,7 @@
 		<faces.impl.scope>compile</faces.impl.scope>
 		<faces.spec.version>2.2</faces.spec.version>
 		<faces.version>${mojarra.version}</faces.version>
+		<jboss-el.scope>compile</jboss-el.scope>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces3.version>3.3.0</icefaces3.version>
 		<jstl.version>1.2</jstl.version>
@@ -112,6 +113,7 @@
 		<liferay.glassfish.version>3.1.2.2</liferay.glassfish.version>
 		<liferay.home>${env.PORTALS_HOME}/liferay.com/${liferay.portal}-jsf-${faces.spec.version}</liferay.home>
 		<liferay.jboss.version>7.1.1</liferay.jboss.version>
+		<liferay.wildfly.version>8.0.0-SNAPSHOT</liferay.wildfly.version>
 		<liferay.jetty.version>8.1.10</liferay.jetty.version>
 		<liferay.jonas.version>5.2.3</liferay.jonas.version>
 		<liferay.maven.plugin.version>${liferay.version}</liferay.maven.plugin.version>
@@ -486,6 +488,24 @@
 				<war.packaging.excludes>
 					WEB-INF/ibm-*.xml,
 					WEB-INF/jboss-*.xml,
+					WEB-INF/web-*.xml,
+					WEB-INF/weblogic.xml
+				</war.packaging.excludes>
+			</properties>
+		</profile>
+		<profile>
+			<id>wildfly</id>
+			<properties>
+				<app.server.type>wildfly</app.server.type>
+				<faces.api.scope>provided</faces.api.scope>
+				<faces.impl.scope>provided</faces.impl.scope>
+				<jboss-el.scope>provided</jboss-el.scope>
+				<liferay.app.server.dir>${liferay.home}/jboss-${liferay.jboss.version}</liferay.app.server.dir>
+				<liferay.deploy.dir>${liferay.app.server.dir}/standalone/deployments</liferay.deploy.dir>
+				<war.packaging.excludes>
+					WEB-INF/glassfish-*.xml,
+					WEB-INF/ibm-*.xml,
+					WEB-INF/sun-*.xml,
 					WEB-INF/web-*.xml,
 					WEB-INF/weblogic.xml
 				</war.packaging.excludes>
@@ -1058,6 +1078,7 @@
 				<groupId>org.jboss.seam</groupId>
 				<artifactId>jboss-el</artifactId>
 				<version>2.0.0.GA</version>
+                <scope>${jboss-el.scope}</scope>
 				<exclusions>
 					<exclusion>
 						<groupId>javax.el</groupId>
