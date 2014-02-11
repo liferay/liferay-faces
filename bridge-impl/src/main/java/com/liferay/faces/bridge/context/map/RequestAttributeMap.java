@@ -60,8 +60,7 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 	private Set<String> removedAttributeNames;
 
 	public RequestAttributeMap(PortletRequest portletRequest, BeanManager beanManager, String namespace,
-		boolean preferPreDestroy, boolean distinctRequestScopedManagedBeans,
-		Set<String> removedAttributeNames) {
+		boolean preferPreDestroy, boolean distinctRequestScopedManagedBeans, Set<String> removedAttributeNames) {
 		this.portletRequest = portletRequest;
 		this.namespace = namespace;
 		this.preferPreDestroy = preferPreDestroy;
@@ -97,11 +96,6 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 	protected void removeProperty(String name) {
 		removedAttributeNames.add(name);
 		portletRequest.removeAttribute(name);
-	}
-
-	@Override
-	public boolean containsKey(Object key) {
-		return super.containsKey(key);
 	}
 
 	@Override
@@ -161,6 +155,14 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 
 	@Override
 	protected void setProperty(String name, Object value) {
+
+		// If the specified attribute name is regarded as previously removed, then no longer regard it as removed since
+		// it is being added back now.
+		if (removedAttributeNames.contains(name)) {
+			removedAttributeNames.remove(name);
+		}
+
+		// Set the attribute value on the underlying request.
 		portletRequest.setAttribute(name, value);
 	}
 
