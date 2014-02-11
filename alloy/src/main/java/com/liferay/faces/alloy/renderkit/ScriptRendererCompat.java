@@ -13,8 +13,13 @@
  */
 package com.liferay.faces.alloy.renderkit;
 
+import java.util.Map;
+
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.render.Renderer;
+
+import com.liferay.faces.util.portal.WebKeys;
 
 import com.liferay.portal.theme.ThemeDisplay;
 
@@ -26,8 +31,22 @@ import com.liferay.portal.theme.ThemeDisplay;
  */
 public abstract class ScriptRendererCompat extends Renderer {
 
-	protected boolean isInline(ThemeDisplay themeDisplay) {
-		return (themeDisplay.isIsolated() || themeDisplay.isStateExclusive());
+	protected boolean isInline(FacesContext facesContext) {
+
+		boolean inline = false;
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Map<String, Object> requestMap = externalContext.getRequestMap();
+		Object themeDisplayAsObject = requestMap.get(WebKeys.THEME_DISPLAY);
+
+		if (themeDisplayAsObject != null) {
+
+			if (themeDisplayAsObject instanceof ThemeDisplay) {
+				ThemeDisplay themeDisplay = (ThemeDisplay) themeDisplayAsObject;
+				inline = (themeDisplay.isIsolated() || themeDisplay.isStateExclusive());
+			}
+		}
+
+		return inline;
 	}
 
 	protected boolean isAjaxRequest(FacesContext facesContext) {
