@@ -28,7 +28,6 @@ import com.liferay.faces.util.portal.WebKeys;
 
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.theme.ThemeDisplay;
 
 
 /**
@@ -56,18 +55,9 @@ public class ScriptRenderer extends ScriptRendererCompat {
 
 		Map<String, Object> attributes = uiComponent.getAttributes();
 
-		// Assume that the script is not going to be rendered inline, but rather it will be rendered at the bottom of
-		// the page.
-		inline = false;
-
 		// If the current URL is a "refresh" type of URL (isolated) or the window state is exclusive, then the script
 		// must be rendered inline.
-		ThemeDisplay themeDisplay = (ThemeDisplay) facesContext.getExternalContext().getRequestMap().get(
-				WebKeys.THEME_DISPLAY);
-
-		if (themeDisplay != null) {
-			inline = isInline(themeDisplay);
-		}
+		inline = isInline(facesContext);
 
 		// Otherwise, if the current request was triggered by Ajax, then the script must be rendered inline.
 		if (!inline) {
