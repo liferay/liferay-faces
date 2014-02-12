@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+	version="1.2">
+	<converter>
+		<converter-id>com.liferay.taglib.faces.converter.PhoneNumberConverter</converter-id>
+		<converter-class>com.liferay.taglib.faces.converter.PhoneNumberConverter</converter-class>
+	</converter>
+	<validator>
+		<validator-id>com.liferay.taglib.faces.validator.EmailAddressValidator</validator-id>
+		<validator-class>com.liferay.taglib.faces.validator.EmailAddressValidator</validator-class>
+	</validator>
+</faces-config>
