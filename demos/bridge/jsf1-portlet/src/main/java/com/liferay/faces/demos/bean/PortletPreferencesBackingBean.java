@@ -19,6 +19,7 @@ import java.util.Map;
 import javax.el.ELResolver;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
@@ -38,7 +39,7 @@ public class PortletPreferencesBackingBean {
 	 * Resets/restores the values in the portletPreferences.xhtml Facelet composition with portlet preference default
 	 * values.
 	 */
-	public void reset() {
+	public void reset(ActionEvent actionEvent) {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
@@ -71,7 +72,7 @@ public class PortletPreferencesBackingBean {
 	/**
 	 * Saves the values in the portletPreferences.xhtml Facelet composition as portlet preferences.
 	 */
-	public void submit() {
+	public void submit(ActionEvent actionEvent) {
 
 		// The JSR 329 specification defines an EL variable named mutablePortletPreferencesValues that is being used in
 		// the portletPreferences.xhtml Facelet composition. This object is of type Map<String, Preference> and is
