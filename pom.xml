@@ -10,7 +10,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.liferay.faces</groupId>
 	<artifactId>liferay-faces</artifactId>
-	<version>2.1.4-ga5-SNAPSHOT</version>
+	<version>2.2.4-ga5-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Liferay Faces Parent</name>
 	<description>Parent POM for all Liferay Faces projects</description>
@@ -83,6 +83,7 @@
 		<module>support</module>
 		<module>test</module>
 		<module>doc</module>
+		<module>legacy</module>
 	</modules>
 
 	<properties>
@@ -90,7 +91,7 @@
 		<arquillian.version>1.1.1.Final</arquillian.version>
 		<arquillian.drone.version>1.2.0.Final</arquillian.drone.version>
 		<arquillian.graphene.version>2.0.0.Final</arquillian.graphene.version>
-		<codename>Athens</codename>
+		<codename>Thessalonica</codename>
 		<faces.group.id>javax.faces</faces.group.id>
 		<faces.api.artifact.id>jsf-api</faces.api.artifact.id>
 		<faces.api.scope>compile</faces.api.scope>
@@ -102,7 +103,7 @@
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces1.version>1.8.2</icefaces1.version>
 		<jstl.version>1.2</jstl.version>
-		<liferay.version>6.1.2</liferay.version>
+		<liferay.version>6.2.0-ga1</liferay.version>
 		<liferay.app.server.deploy.dir>${liferay.app.server.dir}/webapps</liferay.app.server.deploy.dir>
 		<liferay.app.server.dir>${liferay.home}/tomcat-${liferay.tomcat.version}</liferay.app.server.dir>
 		<liferay.app.server.lib.global.dir>${liferay.app.server.dir}/lib/ext</liferay.app.server.lib.global.dir>
@@ -120,7 +121,7 @@
 		<liferay.maven.plugin.version>${liferay.version}</liferay.maven.plugin.version>
 		<liferay.portal>liferay-portal-${liferay.deploy.version}</liferay.portal>
 		<liferay.resin.version>4.0.33</liferay.resin.version>
-		<liferay.tomcat.version>7.0.40</liferay.tomcat.version>
+		<liferay.tomcat.version>7.0.42</liferay.tomcat.version>
 		<liferay.weblogic.version>10.3.6.0</liferay.weblogic.version>
 		<liferay.websphere.version>8.0.0.6</liferay.websphere.version>
 		<log4j.version>1.2.14</log4j.version>
@@ -199,8 +200,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.1</version>
 					<configuration>
-						<source>1.5</source>
-						<target>1.5</target>
+						<source>1.6</source>
+						<target>1.6</target>
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
@@ -448,7 +449,7 @@
 		<profile>
 			<id>ee</id>
 			<properties>
-				<liferay.deploy.version>6.1.30</liferay.deploy.version>
+				<liferay.deploy.version>6.2.10.1-ga</liferay.deploy.version>
 			</properties>
 		</profile>
 		<profile>

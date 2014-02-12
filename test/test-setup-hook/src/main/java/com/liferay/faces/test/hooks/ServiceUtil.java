@@ -49,9 +49,12 @@ public class ServiceUtil {
 			name.toLowerCase().replaceAll(StringPool.SPACE, StringPool.DASH);
 		boolean siteFlag = true;
 		int type = GroupConstants.TYPE_SITE_OPEN;
+		boolean manualMembership = false;
+		int membershipRestriction = GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION;
 
-		return GroupLocalServiceUtil.addGroup(userId, (String) null, 0L, name, description, type, friendlyURL, siteFlag,
-				active, new ServiceContext());
+		return GroupLocalServiceUtil.addGroup(userId, GroupConstants.DEFAULT_PARENT_GROUP_ID, (String) null, 0L,
+				GroupConstants.DEFAULT_LIVE_GROUP_ID, name, description, type, manualMembership, membershipRestriction,
+				friendlyURL, siteFlag, active, new ServiceContext());
 	}
 
 	public static Layout addLayout(long userId, long groupId, boolean privateLayout, long parentLayoutId, String name,

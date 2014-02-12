@@ -763,6 +763,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 		this.redirect = redirect;
 	}
 
+	@Override
 	public Set<String> getRemovedAttributeNames() {
 		return removedAttributeNames;
 	}

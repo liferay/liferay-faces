@@ -21,7 +21,13 @@ import javax.portlet.PortletRequest;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainerImpl;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 
 
@@ -34,6 +40,9 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 8713570232856573935L;
+
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(PortletContainerLiferayCompatImpl.class);
 
 	public PortletContainerLiferayCompatImpl(PortletRequest portletRequest, BridgeConfig bridgeConfig) {
 		super(portletRequest, bridgeConfig);
@@ -68,8 +77,19 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 
 	protected boolean isPortletRequiresNamespacedParameters(PortletRequest portletRequest, ThemeDisplay themeDisplay) {
 
-		// Versions of Liferay Portal prior to 6.2 do not support strict namespacing of parameters.
-		return false;
+		boolean portletRequiresNamespacedParameters = false;
+
+		String portletId = (String) portletRequest.getAttribute(WebKeys.PORTLET_ID);
+
+		try {
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(themeDisplay.getCompanyId(), portletId);
+			portletRequiresNamespacedParameters = portlet.isRequiresNamespacedParameters();
+		}
+		catch (SystemException e) {
+			logger.error(e);
+		}
+
+		return portletRequiresNamespacedParameters;
 	}
 
 }

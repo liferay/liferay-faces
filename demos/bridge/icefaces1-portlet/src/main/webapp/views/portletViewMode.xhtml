@@ -6,15 +6,15 @@
 		<ui:include src="styling.xhtml" />
 		<ui:include src="applicant.xhtml" />
 		<br />
-		<aui:layout>
-			<aui:column>
+		<aui:row>
+			<aui:col>
 				<ul>
 					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['JSF']}" /></em></li>
 					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['ICEfaces']}" /></em></li>
 					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Alloy']}" /></em></li>
 					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Bridge']}" /></em></li>
 				</ul>
-			</aui:column>
-		</aui:layout>
+			</aui:col>
+		</<aui:row>>
 	</ice:portlet>
 </f:view>

@@ -1,119 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
-	xmlns:c="http://java.sun.com/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:bridge="http://liferay.com/faces/bridge"
-	xmlns:example-cc="http://liferay.com/faces/composite/example-cc" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:bridge="http://liferay.com/faces/bridge"
+	xmlns:example-cc="http://liferay.com/faces/composite/example-cc"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<aui:layout id="l1">
-		<example-cc:clipboard label="#{i18n['job-application']}" />
-		<example-cc:sponsorButton />
-		<example-cc:divider />
-		<aui:column id="c1">
+	<example-cc:clipboard label="#{i18n['job-application']}" />
+	<example-cc:sponsorButton />
+	<example-cc:divider />
+	<aui:row>
+		<aui:col id="c1" width="66">
 			<h:form id="f1">
 				<h:messages globalOnly="true" layout="table" />
 				<aui:fieldset id="fs1">
-					<aui:column id="c1a">
-						<aui:field id="firstNameField" label="#{i18n['first-name']}">
-							<h:inputText id="firstName" required="true" value="#{applicantModelBean.firstName}" />
-							<h:message for="firstName" />
-						</aui:field>
-						<aui:field id="lastNameField" label="#{i18n['last-name']}">
-							<h:inputText id="lastName" required="true" value="#{applicantModelBean.lastName}" />
-							<h:message for="lastName" />
-						</aui:field>
-						<aui:field id="emailAddressField" label="#{i18n['email-address']}">
-							<h:inputText id="emailAddress" required="true" validatorMessage="#{i18n['invalid-email-address']}"
-								value="#{applicantModelBean.emailAddress}" />
-							<h:message for="emailAddress" />
-						</aui:field>
-						<aui:field id="phoneNumberField" label="#{i18n['phone-number']}">
-							<h:inputText id="phoneNumber" required="true" value="#{applicantModelBean.phoneNumber}" />
-							<h:message for="phoneNumber" />
-						</aui:field>
-					</aui:column>
-					<aui:column id="c1b">
-						<aui:field id="dateOfBirthField" label="#{i18n['birthday']}">
-							<h:inputText id="dateOfBirth" required="true" value="#{applicantModelBean.dateOfBirth}">
-								<f:convertDateTime pattern="#{portletPreferencesValues['datePattern'][0]}" />
-							</h:inputText>
-							<h:message for="dateOfBirth" />
-						</aui:field>
-						<aui:field id="cityField" label="#{i18n['city']}">
-							<h:inputText id="city" required="true" value="#{applicantModelBean.city}" />
-							<h:message id="cityMessage" for="city" />
-						</aui:field>
-						<aui:field id="provinceIdField" label="#{i18n['state-province']}">
-							<h:selectOneMenu id="provinceId" required="true" value="#{applicantModelBean.provinceId}">
-								<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
-								<f:selectItems itemValue="#{province.provinceId}" itemLabel="#{province.provinceName}"
-									value="#{listModelBean.provinceSelectItems}" var="province" />
-							</h:selectOneMenu>
-							<h:message id="provinceIdMessage" for="provinceId" />
-						</aui:field>
-						<aui:field id="postalCodeField" label="#{i18n['zip-postal']}">
-							<h:inputText id="postalCode" immediate="true" onchange="this.form.submit()" required="true"
-								value="#{applicantModelBean.postalCode}" valueChangeListener="#{applicantBackingBean.postalCodeListener}" />
-							<h:graphicImage value="/images/icon-help.png" title="#{i18n['postal-code-hint']}" />
-							<h:message id="postalCodeMessage" for="postalCode" />
-						</aui:field>
-					</aui:column>
+					<aui:row>
+						<aui:col id="c1a" width="50">
+							<aui:field id="firstNameField" label="#{i18n['first-name']}">
+								<h:inputText id="firstName" required="true"
+									value="#{applicantModelBean.firstName}" />
+								<h:message for="firstName" />
+							</aui:field>
+							<aui:field id="lastNameField" label="#{i18n['last-name']}">
+								<h:inputText id="lastName" required="true"
+									value="#{applicantModelBean.lastName}" />
+								<h:message for="lastName" />
+							</aui:field>
+							<aui:field id="emailAddressField"
+								label="#{i18n['email-address']}">
+								<h:inputText id="emailAddress" required="true"
+									validatorMessage="#{i18n['invalid-email-address']}"
+									value="#{applicantModelBean.emailAddress}" />
+								<h:message for="emailAddress" />
+							</aui:field>
+							<aui:field id="phoneNumberField" label="#{i18n['phone-number']}">
+								<h:inputText id="phoneNumber" required="true"
+									value="#{applicantModelBean.phoneNumber}" />
+								<h:message for="phoneNumber" />
+							</aui:field>
+						</aui:col>
+						<aui:col id="c1b" width="50">
+							<aui:field id="dateOfBirthField" label="#{i18n['birthday']}">
+								<h:inputText id="dateOfBirth" required="true"
+									value="#{applicantModelBean.dateOfBirth}">
+									<f:convertDateTime
+										pattern="#{portletPreferencesValues['datePattern'][0]}" />
+								</h:inputText>
+								<h:message for="dateOfBirth" />
+							</aui:field>
+							<aui:field id="cityField" label="#{i18n['city']}">
+								<h:inputText id="city" required="true"
+									value="#{applicantModelBean.city}" />
+								<h:message id="cityMessage" for="city" />
+							</aui:field>
+							<aui:field id="provinceIdField"
+								label="#{i18n['state-province']}">
+								<h:selectOneMenu id="provinceId" required="true"
+									value="#{applicantModelBean.provinceId}">
+									<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
+									<f:selectItems itemValue="#{province.provinceId}"
+										itemLabel="#{province.provinceName}"
+										value="#{listModelBean.provinceSelectItems}" var="province" />
+								</h:selectOneMenu>
+								<h:message id="provinceIdMessage" for="provinceId" />
+							</aui:field>
+							<aui:field id="postalCodeField" label="#{i18n['zip-postal']}">
+								<h:inputText id="postalCode" immediate="true"
+									onchange="this.form.submit()" required="true"
+									value="#{applicantModelBean.postalCode}"
+									valueChangeListener="#{applicantBackingBean.postalCodeListener}" />
+								<h:graphicImage value="/images/icon-help.png"
+									title="#{i18n['postal-code-hint']}" />
+								<h:message id="postalCodeMessage" for="postalCode" />
+							</aui:field>
+						</aui:col>
+					</aui:row>
 				</aui:fieldset>
 				<aui:fieldset>
-					<aui:column>
-						<aui:field id="commentsField" label="#{i18n['comments']}">
-							<h:panelGroup id="showHide" layout="block">
-								<h:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true"
-									rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
-								<h:commandLink actionListener="#{applicantBackingBean.toggleComments}" immediate="true"
-									rendered="#{applicantViewBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
-							</h:panelGroup>
-							<h:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantViewBean.commentsRendered}"
-								value="#{applicantModelBean.comments}" />
-						</aui:field>
-					</aui:column>
+					<aui:row>
+						<aui:col>
+							<aui:field id="commentsField" label="#{i18n['comments']}">
+								<h:panelGroup id="showHide" layout="block">
+									<h:commandLink
+										actionListener="#{applicantBackingBean.toggleComments}"
+										immediate="true"
+										rendered="#{!applicantViewBean.commentsRendered}"
+										value="#{i18n['show']} #{i18n['comments']}" />
+									<h:commandLink
+										actionListener="#{applicantBackingBean.toggleComments}"
+										immediate="true"
+										rendered="#{applicantViewBean.commentsRendered}"
+										value="#{i18n['hide']} #{i18n['comments']}" />
+								</h:panelGroup>
+								<h:inputTextarea id="comments" cols="50" rows="10"
+									rendered="#{applicantViewBean.commentsRendered}"
+									value="#{applicantModelBean.comments}" />
+							</aui:field>
+						</aui:col>
+					</aui:row>
 				</aui:fieldset>
 				<hr />
-				<h:commandButton action="#{applicantBackingBean.submit}" value="#{i18n['submit']}" />
+				<h:commandButton action="#{applicantBackingBean.submit}"
+					value="#{i18n['submit']}" />
 				<!-- Test 5.4.2 Encoding PortletMode changes in Faces navigation -->
-				<h:commandButton action="edit-preferences" immediate="true" value="#{i18n['edit-preferences']}" />
+				<h:commandButton action="edit-preferences" immediate="true"
+					value="#{i18n['edit-preferences']}" />
 			</h:form>
-		</aui:column>
-		<aui:column id="c2">
-			<aui:column id="c2a" styleClass="uploaded-files">
-				<h:form id="f2">
-					<h3>#{i18n['attachments']}</h3>
-					<h:dataTable headerClass="portlet-section-header results-header"
-						rowClasses="portlet-section-body results-row, portlet-section-alternate results-row alt"
-						value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
-						<h:column>
-							<h:commandButton actionListener="#{applicantBackingBean.deleteUploadedFile}"
-								image="/images/icon-delete.png"
-								onclick="if (! confirm('#{i18n['are-you-sure-you-want-to-delete-this']}')) {return false;}"
-								value="#{uploadedFile.id}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="#{i18n['file-name']}" />
-							</f:facet>
-							<h:outputText value="#{uploadedFile.name}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="#{i18n['size']}" />
-							</f:facet>
-							<h:outputText value="#{uploadedFile.size}" />
-						</h:column>
-					</h:dataTable>
-				</h:form>
-				<hr />
-				<h:form id="f3" enctype="multipart/form-data">
-					<h:panelGrid columns="1">
-						<bridge:inputFile fileUploadListener="#{applicantBackingBean.handleFileUpload}" multiple="multiple" />
-					</h:panelGrid>
-					<h:commandButton value="#{i18n['submit']}" />
-				</h:form>
-			</aui:column>
-		</aui:column>
-	</aui:layout>
+		</aui:col>
+		<aui:col id="c2" width="33">
+			<aui:row>
+				<aui:col id="c2a" styleClass="uploaded-files">
+					<h:form id="f2">
+						<h3>#{i18n['attachments']}</h3>
+						<h:dataTable headerClass="portlet-section-header results-header"
+							rowClasses="portlet-section-body results-row, portlet-section-alternate results-row alt"
+							value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
+							<h:column>
+								<h:commandButton
+									actionListener="#{applicantBackingBean.deleteUploadedFile}"
+									image="/images/icon-delete.png"
+									onclick="if (! confirm('#{i18n['are-you-sure-you-want-to-delete-this']}')) {return false;}"
+									value="#{uploadedFile.id}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="#{i18n['file-name']}" />
+								</f:facet>
+								<h:outputText value="#{uploadedFile.name}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="#{i18n['size']}" />
+								</f:facet>
+								<h:outputText value="#{uploadedFile.size}" />
+							</h:column>
+						</h:dataTable>
+					</h:form>
+					<hr />
+					<h:form id="f3" enctype="multipart/form-data">
+						<h:panelGrid columns="1">
+							<bridge:inputFile
+								fileUploadListener="#{applicantBackingBean.handleFileUpload}"
+								multiple="multiple" />
+						</h:panelGrid>
+						<h:commandButton value="#{i18n['submit']}" />
+					</h:form>
+				</aui:col>
+			</aui:row>
+		</aui:col>
+	</aui:row>
 
 </ui:composition>

@@ -120,7 +120,6 @@ public class ManagedBeanUtil {
 	 * @param  preferPreDestroy  Boolean flag indicating that methods annotated with &#064;PreDestroy should be
 	 *                           preferably invoked over those annotated with &#064;BridgePreDestroy.
 	 */
-	@SuppressWarnings("restriction")
 	public static void invokePreDestroyMethods(Object managedBean, boolean preferPreDestroy) {
 
 		if (managedBean != null) {

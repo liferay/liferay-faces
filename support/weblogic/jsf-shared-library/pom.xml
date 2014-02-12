@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.liferay.faces.support</groupId>
 		<artifactId>liferay-faces-support-weblogic</artifactId>
-		<version>2.1.4-ga5-SNAPSHOT</version>
+		<version>2.2.4-ga5-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>jsf-shared-library</artifactId>

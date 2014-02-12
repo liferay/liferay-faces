@@ -14,48 +14,51 @@
 package com.liferay.faces.alloy.renderkit;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.alloy.component.AUIRow;
 import com.liferay.faces.util.lang.StringPool;
 
 
 /**
  * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public class LayoutRenderer extends Renderer {
+public class RowRenderer extends Renderer {
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
 		super.encodeBegin(facesContext, uiComponent);
 
-		Map<String, Object> attributes = uiComponent.getAttributes();
+		AUIRow auiRow = (AUIRow) uiComponent;
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-
 		responseWriter.startElement("div", uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute("id", id, "id");
+		responseWriter.writeAttribute("id", id, null);
 
 		StringBuilder classNames = new StringBuilder();
 
-		// aui_deprecated.css: layout
-		classNames.append("layout");
+		classNames.append("row");
 
-		String cssClass = (String) attributes.get("cssClass");
+		if (auiRow.isFluid()) {
+			classNames.append("-fluid");
+		}
+
+		String cssClass = auiRow.getCssClass();
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
 			classNames.append(StringPool.SPACE);
 			classNames.append(cssClass);
 		}
 
-		String styleClass = (String) attributes.get("styleClass");
+		String styleClass = auiRow.getStyleClass();
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
 			classNames.append(StringPool.SPACE);
@@ -63,36 +66,14 @@ public class LayoutRenderer extends Renderer {
 		}
 
 		responseWriter.writeAttribute("class", classNames.toString(), null);
-		responseWriter.startElement("div", null);
-		classNames = new StringBuilder();
-
-		// aui_deprecated.css: layout-content
-		classNames.append("layout-content");
-
-		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
-
-			// "-content" tags may be deprecated
-			classNames.append(ComponentUtil.appendToCssClasses(cssClass, "-content"));
-		}
-
-		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
-
-			// "-content" tags may be deprecated
-			classNames.append(ComponentUtil.appendToCssClasses(styleClass, "-content"));
-		}
-
-		responseWriter.writeAttribute("class", classNames.toString(), null);
 	}
 
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.endElement("div");
-		responseWriter.endElement("div");
 	}
-
 }

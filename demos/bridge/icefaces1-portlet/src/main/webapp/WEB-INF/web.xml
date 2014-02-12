@@ -36,6 +36,14 @@
 		<param-name>com.sun.faces.expressionFactory</param-name>
 		<param-value>org.jboss.el.ExpressionFactoryImpl</param-value>
 	</context-param>
+	<!-- Instruct Mojarra to namespace parameters according to NamingContainer rules. -->
+	<!-- JAVASERVERFACES-3031 -->
+	<!--
+	<context-param>
+		<param-name>com.sun.faces.namespaceParameters</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	-->
 	<!-- Instruct JBoss AS7 to utilize JSF 1.2 API instead of the default JSF 2.1 API. -->
 	<context-param>
 		<param-name>org.jboss.jbossfaces.JSF_CONFIG_NAME</param-name>
