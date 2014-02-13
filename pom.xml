@@ -452,7 +452,7 @@
 		<profile>
 			<id>ee</id>
 			<properties>
-				<liferay.deploy.version>6.2.10.1-ga</liferay.deploy.version>
+				<liferay.deploy.version>6.2.10.1-ga1</liferay.deploy.version>
 			</properties>
 		</profile>
 		<profile>
