@@ -477,7 +477,7 @@ public class Icefaces3PortletTest extends TesterBase {
 		postalCodeField.clear();
 		logger.log(Level.INFO, "clicking submit ...");
 		submitButton.click();
-		Thread.sleep(500);
+		waitForElement(browser, firstNameFieldErrorXpath);
 
 		logger.log(Level.INFO, "checking for error tags on firstNameField ...");
 
