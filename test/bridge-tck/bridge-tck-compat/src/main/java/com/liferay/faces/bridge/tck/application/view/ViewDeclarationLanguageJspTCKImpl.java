@@ -98,13 +98,4 @@ public class ViewDeclarationLanguageJspTCKImpl extends ViewDeclarationLanguageWr
 		return wrappedViewDeclarationLanguage;
 	}
 
-	protected class EncodedURLHiddenField extends HtmlInputHidden {
-
-		@Override
-		public String getClientId(FacesContext facesContext) {
-			return "javax.faces.encodedURL";
-		}
-
-	}
-
 }
