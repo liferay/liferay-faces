@@ -49,7 +49,11 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 public class BridgeWriteBehindResponseMimeImpl extends MimeResponseWrapper implements BridgeWriteBehindResponse {
 
+	// Public Constants
 	public static final String AFTER_VIEW_CONTENT_RESPONSE = "afterViewContentResponse";
+
+	// Private Constants
+	private static final String WEBLOGIC = "weblogic";
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeWriteBehindResponseMimeImpl.class);
@@ -74,6 +78,32 @@ public class BridgeWriteBehindResponseMimeImpl extends MimeResponseWrapper imple
 	 */
 	public boolean hasFacesWriteBehindMarkup() {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setBufferSize(int size) {
+
+		try {
+			super.setBufferSize(size);
+		}
+		catch (IllegalStateException e) {
+
+			boolean rethrow = true;
+			StackTraceElement[] stackTrace = e.getStackTrace();
+
+			for (StackTraceElement stackTraceElement : stackTrace) {
+
+				if (stackTraceElement.getClassName().contains(WEBLOGIC)) {
+					rethrow = false;
+
+					break;
+				}
+			}
+
+			if (rethrow) {
+				throw e;
+			}
+		}
 	}
 
 	/**
