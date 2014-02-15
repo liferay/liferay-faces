@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.faces.demos</groupId>
 		<artifactId>liferay-faces-bridge-demos</artifactId>
-		<version>3.1.4-ga5-SNAPSHOT</version>
+		<version>3.1.4-ga5</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>jsf2-spring-portlet</artifactId>

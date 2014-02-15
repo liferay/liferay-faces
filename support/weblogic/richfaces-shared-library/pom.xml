@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.faces.support</groupId>
 		<artifactId>liferay-faces-support-weblogic</artifactId>
-		<version>3.1.4-ga5-SNAPSHOT</version>
+		<version>3.1.4-ga5</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>richfaces-shared-library</artifactId>
@@ -57,7 +57,7 @@
 							<name>richfaces.version</name>
 							<value>${richfaces4.version}</value>	
 							<regex>.Final</regex>
-							<replacement></replacement>
+							<replacement />
 						</configuration>
 					</execution>
 				</executions>

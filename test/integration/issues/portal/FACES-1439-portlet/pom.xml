@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.liferay.faces.test</groupId>
 		<artifactId>liferay-faces-test-integration-issues-portal</artifactId>
-		<version>3.1.4-ga5-SNAPSHOT</version>
+		<version>3.1.4-ga5</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
