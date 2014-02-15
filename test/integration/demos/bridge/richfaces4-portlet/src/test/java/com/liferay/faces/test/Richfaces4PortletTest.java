@@ -575,7 +575,7 @@ public class Richfaces4PortletTest extends TesterBase {
 		assertTrue("no textarea is showing", tags == tagsWhileHidden);
 		logger.log(Level.INFO, "showCommentsLink.isDisplayed() = " + showCommentsLink.isDisplayed());
 		showCommentsLink.click();
-		Thread.sleep(500);
+      waitForElement(browser, commentsXpath);
 		logger.log(Level.INFO,
 			"after hide and show comments.getAttribute('value') = " + comments.getAttribute("value"));
 		assertTrue("comments are still there after hide and show", testing123.equals(comments.getAttribute("value")));
