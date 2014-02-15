@@ -13,12 +13,14 @@
 	<packaging>pom</packaging>
 	<name>Liferay Faces Support WebLogic</name>
 
-	<modules>
-		<module>jsf-injection-provider</module>
-		<module>jsf-shared-library</module>
-		<module>jstl-shared-library</module>
-		<module>richfaces-shared-library</module>
-	</modules>
+	<profiles>
+		<profile>
+			<id>weblogic</id>
+			<modules>
+				<module>glassfish-jsf</module>
+			</modules>
+		</profile>
+	</profiles>
 
 	<build>
 		<plugins>

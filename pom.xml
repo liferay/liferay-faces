@@ -123,7 +123,7 @@
 		<liferay.portal>liferay-portal-${liferay.deploy.version}</liferay.portal>
 		<liferay.resin.version>4.0.33</liferay.resin.version>
 		<liferay.tomcat.version>7.0.42</liferay.tomcat.version>
-		<liferay.weblogic.version>10.3.6.0</liferay.weblogic.version>
+		<liferay.weblogic.version>12.1.2.0</liferay.weblogic.version>
 		<liferay.websphere.version>8.0.0.6</liferay.websphere.version>
 		<log4j.version>1.2.14</log4j.version>
 		<mojarra.version>2.1.21</mojarra.version>
@@ -789,6 +789,13 @@
 					WEB-INF/web-*.xml
 				</war.packaging.excludes>
 			</properties>
+			<dependencies>
+			    <dependency>
+			        <groupId>xerces</groupId>
+			        <artifactId>xercesImpl</artifactId>
+			        <version>${weblogic.xerces.version}</version>
+			    </dependency>
+			</dependencies>
 			<dependencyManagement>
 				<dependencies>
 					<dependency>
