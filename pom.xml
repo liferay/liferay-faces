@@ -10,7 +10,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.liferay.faces</groupId>
 	<artifactId>liferay-faces</artifactId>
-	<version>3.0.4-legacy-ga5-SNAPSHOT</version>
+	<version>3.0.4-legacy-ga5</version>
 	<packaging>pom</packaging>
 	<name>Liferay Faces Parent</name>
 	<description>Parent POM for all Liferay Faces projects</description>
@@ -66,7 +66,7 @@
 		<connection>scm:git:https://github.com/liferay/liferay-faces</connection>
 		<developerConnection>scm:git:https://github.com/liferay/liferay-faces</developerConnection>
 		<url>scm:git:https://github.com/liferay/liferay-faces</url>
-		<tag>HEAD</tag>
+		<tag>3.0.4-legacy-ga5</tag>
   </scm>
 
 	<modules>

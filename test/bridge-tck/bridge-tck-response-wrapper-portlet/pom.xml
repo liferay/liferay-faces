@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.liferay.faces.test</groupId>
 		<artifactId>liferay-faces-test-bridge-tck</artifactId>
-		<version>3.0.4-legacy-ga5-SNAPSHOT</version>
+		<version>3.0.4-legacy-ga5</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
