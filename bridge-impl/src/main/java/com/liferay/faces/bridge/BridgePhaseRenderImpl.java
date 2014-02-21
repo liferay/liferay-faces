@@ -182,6 +182,10 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 				throw e;
 			}
 
+			// Attach the JSF 2.2 client window to the JSF lifecycle so that Faces Flows can be utilized.
+			attachClientWindowToLifecycle(facesContext, facesLifecycle);
+
+			// Execute the JSF lifecycle.
 			facesLifecycle.execute(facesContext);
 
 		}
