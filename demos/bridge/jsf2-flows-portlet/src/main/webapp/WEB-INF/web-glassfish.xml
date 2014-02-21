@@ -3,7 +3,7 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
 
-	<!-- Set the JSF 2 PROJECT_STAGE to Development so that the JSF implementation will do the following at runtime: -->
+   	<!-- Set the JSF 2 PROJECT_STAGE to Development so that the JSF implementation will do the following at runtime: -->
 	<!-- 1. Log more verbose messages. -->
 	<!-- 2. Render tips and/or warnings in the view markup. -->
 	<!-- 3. Cause the default ExceptionHandler to display a developer-friendly error page. -->
@@ -11,11 +11,23 @@
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Development</param-value>
 	</context-param>
+	<context-param>
+	    <param-name>javax.faces.CLIENT_WINDOW_MODE</param-name>
+	    <param-value>url</param-value>
+	</context-param>
 	<!-- Instruct Mojarra to utilize JBoss-EL instead of the EL implementation provided by the servlet container. -->
 	<context-param>
 		<param-name>com.sun.faces.expressionFactory</param-name>
 		<param-value>org.jboss.el.ExpressionFactoryImpl</param-value>
 	</context-param>
+	<!-- Instruct Mojarra to namespace parameters according to NamingContainer rules. -->
+	<!-- JAVASERVERFACES-3031 -->
+	<!--
+	<context-param>
+		<param-name>com.sun.faces.namespaceParameters</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	-->
 	<filter>
 		<filter-name>CDICrossContextFilter</filter-name>
 		<filter-class>com.liferay.cdi.portlet.bridge.CDICrossContextFilter</filter-class>
