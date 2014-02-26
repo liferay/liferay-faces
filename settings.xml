@@ -18,34 +18,12 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<repositories>
-				<!-- Required for JBoss EL -->
-				<repository>
-					<id>jboss-public</id>
-					<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
-				</repository>
-				<!-- Required for Liferay Portal Artifacts -->
 				<repository>
 					<id>liferay-public</id>
 					<url>https://repository.liferay.com/nexus/content/groups/public</url>
 				</repository>
-				<!-- Required for JSR 329 TCK -->
-				<repository>
-					<id>portletfaces-thirdparty</id>
-					<url>http://repository.portletfaces.org/content/repositories/thirdparty</url>
-				</repository>
-				<!-- Required for PrimeFaces 3.x Dependencies -->
-				<repository>
-					<id>primefaces-releases</id>
-					<url>http://repository.primefaces.org</url>
-				</repository>
 			</repositories>
 			<pluginRepositories>
-				<!-- Required for the maven-jdocbook-plugin -->
-				<pluginRepository>
-					<id>jboss-public</id>
-					<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
-				</pluginRepository>
-				<!-- Required for the liferay-maven-plugin -->
 				<pluginRepository>
 					<id>liferay-public</id>
 					<url>https://repository.liferay.com/nexus/content/groups/public</url>
