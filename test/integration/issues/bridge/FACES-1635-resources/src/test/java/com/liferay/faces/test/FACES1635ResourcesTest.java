@@ -51,12 +51,12 @@ public class FACES1635ResourcesTest extends TesterBase {
 	WebDriver browser;
 
 	public void checkResourcesForDuplicates(ArrayList<HeadResource> resources, String whichResources) {
-		int totalHeadResources = resources.size();
+		int numberOfResources = resources.size();
 
-		for (int i = 0; i < totalHeadResources; i++) {
+		for (int i = 0; i < numberOfResources; i++) {
 			HeadResource resource1 = resources.get(i);
 
-			for (int j = i + 1; j < totalHeadResources; j++) {
+			for (int j = i + 1; j < numberOfResources; j++) {
 				HeadResource resource2 = resources.get(j);
 
 				if (!resource2.isDuplicate() && resource1.equals(resource2)) {
@@ -77,7 +77,6 @@ public class FACES1635ResourcesTest extends TesterBase {
 		ArrayList<HeadResource> resources = new ArrayList<HeadResource>();
 
 		for (WebElement webElement : webElements) {
-			webElement.isDisplayed();
 			String url = webElement.getAttribute(attribute);
 			String type = ("src".equals(attribute)) ? "script" : "link";
 
@@ -93,6 +92,11 @@ public class FACES1635ResourcesTest extends TesterBase {
 						} else {
 							if ("stylesheet".equals(rel)) {
 //								logger.log(Level.INFO, "convertToHeadResources: url = " + url);
+								resources.add(new HeadResource(type, url));
+							} else {
+								if (url.contains("jsf.js")) {
+									logger.log(Level.INFO, "convertToHeadResources: type = " + type + " url = " + url);
+								}
 								resources.add(new HeadResource(type, url));
 							}
 						}
