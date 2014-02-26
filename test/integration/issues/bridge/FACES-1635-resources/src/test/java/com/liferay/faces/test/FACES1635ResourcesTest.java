@@ -93,13 +93,13 @@ public class FACES1635ResourcesTest extends TesterBase {
 							if ("stylesheet".equals(rel)) {
 //								logger.log(Level.INFO, "convertToHeadResources: url = " + url);
 								resources.add(new HeadResource(type, url));
-							} else {
-								if (url.contains("jsf.js")) {
-									logger.log(Level.INFO, "convertToHeadResources: type = " + type + " url = " + url);
-								}
-								resources.add(new HeadResource(type, url));
 							}
 						}
+					} else { // "script".equals(type)
+						if (url.contains("jsf.js")) {
+							logger.log(Level.INFO, "convertToHeadResources: type = " + type + " url = " + url);
+						}
+						resources.add(new HeadResource(type, url));
 					}
 				}
 			}
