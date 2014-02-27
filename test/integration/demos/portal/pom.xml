@@ -15,6 +15,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
+		<module>primefaces4-users-portlet</module>
 	</modules>
 
 	<profiles>
