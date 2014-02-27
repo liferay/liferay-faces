@@ -15,10 +15,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<!-- icefaces3-users-portlet cannot be tested on WebLogic due to FACES-1721 -->
-		<module>icefaces3-users-portlet</module>
-		<module>primefaces3-users-portlet</module>
-		<module>icefaces3-directory-portlet</module>
 	</modules>
 
 	<profiles>
