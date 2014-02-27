@@ -17,12 +17,4 @@
 		<module>jsf2-registration-portlet</module>
 	</modules>
 
-	<profiles>
-		<profile>
-			<id>chat</id>
-			<modules>
-				<module>icefaces3-chat-portlet</module>
-			</modules>
-		</profile>
-	</profiles>
 </project>
