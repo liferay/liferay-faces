@@ -9,7 +9,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>com.oracle.weblogic</groupId>
-	<artifactId>glassfish.jsf_1.0.0.0_2-1-21</artifactId>
+	<artifactId>glassfish.jsf_1.0.0.0_2-2-5</artifactId>
 	<version>12.1.2-0-0</version>
 	<name>WebLogic GlassFish JSF</name>
 
@@ -17,8 +17,8 @@
 		<weblogic.shipped.mojarra.version>2.1.20</weblogic.shipped.mojarra.version>
 		<weblogic-shipped-mojarra-version>2-1-20</weblogic-shipped-mojarra-version>
 		<weblogic.shipped.jar.version>1.0.0.0_${weblogic-shipped-mojarra-version}</weblogic.shipped.jar.version>
-		<weblogic.upgraded.mojarra.version>2.1.21</weblogic.upgraded.mojarra.version>
-		<weblogic-upgraded-mojarra-version>2-1-21</weblogic-upgraded-mojarra-version>
+		<weblogic.upgraded.mojarra.version>2.2.5</weblogic.upgraded.mojarra.version>
+		<weblogic-upgraded-mojarra-version>2-2-5</weblogic-upgraded-mojarra-version>
 	</properties>
 
 	<build>
