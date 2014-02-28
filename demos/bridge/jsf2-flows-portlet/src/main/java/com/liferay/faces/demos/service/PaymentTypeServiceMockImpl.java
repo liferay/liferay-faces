@@ -16,12 +16,17 @@ package com.liferay.faces.demos.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
+
 import com.liferay.faces.demos.dto.PaymentType;
 
 
 /**
  * @author  Neil Griffin
  */
+@Named("paymentTypeService")
+@ApplicationScoped
 public class PaymentTypeServiceMockImpl implements PaymentTypeService {
 
 	// Private Data Members

@@ -31,17 +31,17 @@ public class Customer implements Serializable {
 	private String addressLine2;
 	private String city;
 	private Long countryId;
-	private long customerId;
+	private Long customerId;
 	private String cvv;
 	private String emailAddress;
 	private Date expirationMonth;
 	private String firstName;
 	private String lastName;
-	private long paymentTypeId;
+	private Long paymentTypeId;
 	private String phoneNumber;
 	private Long provinceId;
 	private String postalCode;
-	private long titleId;
+	private Long titleId;
 
 	public Customer() {
 		// Pluto requires a no-arg default constructor.
@@ -87,11 +87,11 @@ public class Customer implements Serializable {
 		this.countryId = countryId;
 	}
 
-	public long getCustomerId() {
+	public Long getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(long customerId) {
+	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
 
@@ -135,11 +135,11 @@ public class Customer implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public long getPaymentTypeId() {
+	public Long getPaymentTypeId() {
 		return paymentTypeId;
 	}
 
-	public void setPaymentTypeId(long paymentTypeId) {
+	public void setPaymentTypeId(Long paymentTypeId) {
 		this.paymentTypeId = paymentTypeId;
 	}
 
@@ -167,11 +167,11 @@ public class Customer implements Serializable {
 		this.provinceId = provinceId;
 	}
 
-	public long getTitleId() {
+	public Long getTitleId() {
 		return titleId;
 	}
 
-	public void setTitleId(long titleId) {
+	public void setTitleId(Long titleId) {
 		this.titleId = titleId;
 	}
 }
