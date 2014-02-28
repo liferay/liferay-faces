@@ -15,17 +15,12 @@ package com.liferay.faces.demos.service;
 
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
-
 import com.liferay.faces.demos.dto.PaymentType;
 
 
 /**
  * @author  Neil Griffin
  */
-@Named("paymentTypeService")
-@ApplicationScoped
 public interface PaymentTypeService {
 
 	public List<PaymentType> getPaymentTypes();
