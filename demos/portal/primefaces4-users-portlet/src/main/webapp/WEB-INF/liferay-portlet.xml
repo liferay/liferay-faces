@@ -7,7 +7,6 @@
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>1.0</control-panel-entry-weight>
 		<remoteable>true</remoteable>
-		<requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<render-weight>1</render-weight>
 		<ajaxable>false</ajaxable>
 		<add-default-resource>true</add-default-resource>
