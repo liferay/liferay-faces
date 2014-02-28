@@ -1129,6 +1129,11 @@
 	</dependencyManagement>
 
 	<distributionManagement>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
 		<repository>
 			<id>liferay-previews</id>
 			<url>https://repository.liferay.com/nexus/content/repositories/liferay-previews</url>
