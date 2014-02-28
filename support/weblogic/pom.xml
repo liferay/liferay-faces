@@ -14,10 +14,6 @@
 	<name>Liferay Faces Support WebLogic</name>
 
 	<modules>
-		<module>jsf-injection-provider</module>
-		<module>jsf-shared-library</module>
-		<module>jstl-shared-library</module>
-		<module>richfaces-shared-library</module>
 	</modules>
 
 	<build>
