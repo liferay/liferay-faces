@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.faces.demos</groupId>
 		<artifactId>liferay-faces-bridge-demos</artifactId>
-		<version>4.1.0-m1</version>
+		<version>4.1.0-m2-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>jsf2-ipc-pub-render-params-portlet</artifactId>
