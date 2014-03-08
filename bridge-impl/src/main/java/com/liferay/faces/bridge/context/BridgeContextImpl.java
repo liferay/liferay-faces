@@ -43,10 +43,8 @@ import javax.portlet.faces.BridgeInvalidViewPathException;
 import javax.portlet.faces.GenericFacesPortlet;
 
 import com.liferay.faces.bridge.BridgeExt;
-import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
-import com.liferay.faces.bridge.config.ServletMapping;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.map.RequestHeaderMap;
 import com.liferay.faces.bridge.context.map.RequestHeaderValuesMap;
@@ -58,6 +56,8 @@ import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
 import com.liferay.faces.bridge.context.url.BridgeURLFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
+import com.liferay.faces.util.config.ConfiguredServletMapping;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -130,7 +130,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		this.incongruityContext = incongruityContext;
 
 		// Get the BridgeURLFactory instance.
-		this.bridgeURLFactory = (BridgeURLFactory) BridgeFactoryFinder.getFactory(BridgeURLFactory.class);
+		this.bridgeURLFactory = (BridgeURLFactory) FactoryExtensionFinder.getFactory(BridgeURLFactory.class);
 
 		setCurrentInstance(this);
 	}
@@ -205,8 +205,9 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		// Determine the target of the specified URL, which could be a Faces-View or a
 		// Non-Faces-View.
 		String contextRelativeViewPath = bridgeActionURL.getContextRelativePath();
-		List<String> defaultSuffixes = bridgeConfig.getConfiguredExtensions();
-		FacesView targetFacesView = new FacesViewImpl(contextRelativeViewPath, defaultSuffixes);
+		List<String> defaultSuffixes = bridgeConfig.getConfiguredSuffixes();
+		List<ConfiguredServletMapping> facesServletMappings = bridgeConfig.getConfiguredFacesServletMappings();
+		FacesView targetFacesView = new FacesViewImpl(contextRelativeViewPath, defaultSuffixes, facesServletMappings);
 
 		// If the specified URL starts with "portlet:", then
 		if (bridgeActionURL.isPortletScheme()) {
@@ -648,7 +649,11 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 				}
 			}
 
-			facesView = new FacesViewImpl(viewId, navigationQueryString, bridgeConfig.getConfiguredExtensions());
+			List<String> configuredSuffixes = bridgeConfig.getConfiguredSuffixes();
+			List<ConfiguredServletMapping> configuredFacesServletMappings =
+				bridgeConfig.getConfiguredFacesServletMappings();
+			facesView = new FacesViewImpl(viewId, navigationQueryString, configuredSuffixes,
+					configuredFacesServletMappings);
 		}
 
 		return facesView;
@@ -787,23 +792,24 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		String facesViewId = null;
 
 		// Try to determine the viewId by examining the servlet-mapping entries for the Faces Servlet.
-		List<ServletMapping> servletMappings = bridgeConfig.getFacesServletMappings();
+		List<ConfiguredServletMapping> configuredFacesServletMappings =
+			bridgeConfig.getConfiguredFacesServletMappings();
 
 		// For each servlet-mapping:
-		for (ServletMapping servletMapping : servletMappings) {
+		for (ConfiguredServletMapping configuredFacesServletMapping : configuredFacesServletMappings) {
 
 			// If the curent servlet-mapping matches the viewPath, then
 			logger.debug("Attempting to determine the facesViewId from {0}=[{1}]", Bridge.VIEW_PATH, viewPath);
 
-			if (servletMapping.isMatch(viewPath)) {
+			if (configuredFacesServletMapping.isMatch(viewPath)) {
 
 				// If the servlet-mapping is extension mapped (like *.faces or *.jsf), then
-				if (servletMapping.isExtensionMapped()) {
+				if (configuredFacesServletMapping.isExtensionMapped()) {
 
 					// Iterate through each of the valid extensions (.jsp, .jspx, etc.) that the developer
 					// may have specified in the web.xml descriptor. For each extension, see if file exists
 					// within the filesystem of this context.
-					List<String> defaultSuffixes = bridgeConfig.getConfiguredExtensions();
+					List<String> defaultSuffixes = bridgeConfig.getConfiguredSuffixes();
 
 					for (String defaultSuffix : defaultSuffixes) {
 
@@ -840,12 +846,12 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 					if (facesViewId == null) {
 						logger.error(
 							"Matched EXTENSION MAPPING for for urlPattern=[{0}] and viewPath=[{1}] but unable to find a facesViewId with extensions[{3}]",
-							servletMapping.getUrlPattern(), viewPath, defaultSuffixes);
+							configuredFacesServletMapping.getUrlPattern(), viewPath, defaultSuffixes);
 					}
 				}
 
 				// Otherwise, if the servlet-mapping is path-mapped, then
-				else if (servletMapping.isPathMapped()) {
+				else if (configuredFacesServletMapping.isPathMapped()) {
 					facesViewId = viewPath;
 				}
 

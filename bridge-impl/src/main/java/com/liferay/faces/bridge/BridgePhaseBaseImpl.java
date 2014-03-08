@@ -45,6 +45,7 @@ import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeCache;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeCacheFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -84,18 +85,18 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		this.portletContext = portletConfig.getPortletContext();
 		this.portletName = portletConfig.getPortletName();
 
-		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
+		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) FactoryExtensionFinder.getFactory(
 				BridgeConfigFactory.class);
-		this.bridgeConfig = bridgeConfigFactory.getBridgeConfig();
+		this.bridgeConfig = bridgeConfigFactory.getBridgeConfig(portletContext);
 
 		// Initialize the incongruity context implementation.
-		IncongruityContextFactory incongruityContextFactory = (IncongruityContextFactory) BridgeFactoryFinder
+		IncongruityContextFactory incongruityContextFactory = (IncongruityContextFactory) FactoryExtensionFinder
 			.getFactory(IncongruityContextFactory.class);
 		this.incongruityContext = incongruityContextFactory.getIncongruityContext();
 
 		// Get the bridge request scope cache from the factory.
 		BridgeRequestScopeCacheFactory bridgeRequestScopeCacheFactory = (BridgeRequestScopeCacheFactory)
-			BridgeFactoryFinder.getFactory(BridgeRequestScopeCacheFactory.class);
+			FactoryExtensionFinder.getFactory(BridgeRequestScopeCacheFactory.class);
 		this.bridgeRequestScopeCache = bridgeRequestScopeCacheFactory.getBridgeRequestScopeCache(portletContext);
 
 		// Get the default lifecycle instance from the factory.
@@ -167,7 +168,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		portletRequest.setAttribute(Bridge.PORTLET_LIFECYCLE_PHASE, portletPhase);
 
 		// Initialize the portlet container implementation.
-		PortletContainerFactory portletContainerFactory = (PortletContainerFactory) BridgeFactoryFinder.getFactory(
+		PortletContainerFactory portletContainerFactory = (PortletContainerFactory) FactoryExtensionFinder.getFactory(
 				PortletContainerFactory.class);
 		PortletContainer portletContainer = portletContainerFactory.getPortletContainer(portletRequest, portletResponse,
 				portletContext, bridgeConfig);
@@ -176,7 +177,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		initBridgeRequestScope(portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
 
 		// Get the bridge context.
-		BridgeContextFactory bridgeContextFactory = (BridgeContextFactory) BridgeFactoryFinder.getFactory(
+		BridgeContextFactory bridgeContextFactory = (BridgeContextFactory) FactoryExtensionFinder.getFactory(
 				BridgeContextFactory.class);
 		bridgeContext = bridgeContextFactory.getBridgeContext(bridgeConfig, bridgeRequestScope, portletConfig,
 				portletContext, portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
@@ -291,7 +292,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 
 			// Otherwise, return a new factory created instance.
 			if (bridgeRequestScope == null) {
-				BridgeRequestScopeFactory bridgeRequestScopeFactory = (BridgeRequestScopeFactory) BridgeFactoryFinder
+				BridgeRequestScopeFactory bridgeRequestScopeFactory = (BridgeRequestScopeFactory) FactoryExtensionFinder
 					.getFactory(BridgeRequestScopeFactory.class);
 				bridgeRequestScope = bridgeRequestScopeFactory.getBridgeRequestScope(portletConfig, portletContext,
 						portletRequest);

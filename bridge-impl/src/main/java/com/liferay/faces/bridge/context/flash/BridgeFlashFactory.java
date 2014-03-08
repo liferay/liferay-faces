@@ -22,6 +22,7 @@ import com.liferay.faces.bridge.FactoryWrapper;
  *
  * @author  Neil Griffin
  */
+@SuppressWarnings("deprecation")
 public abstract class BridgeFlashFactory implements FactoryWrapper<BridgeFlashFactory> {
 
 	public abstract BridgeFlash getBridgeFlash();

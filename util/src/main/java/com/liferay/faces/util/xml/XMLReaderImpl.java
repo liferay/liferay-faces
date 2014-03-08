@@ -36,8 +36,8 @@ import com.liferay.faces.util.lang.StringPool;
 
 
 /**
- * This class is an implementation of {@link XMLReader}. However, it does not fully implement all of the functionality
- * of the one provided by the JRE.
+ * This class is a thread-safe implementation of {@link XMLReader}. However, it does not fully implement all of the
+ * functionality of the one provided by the JRE.
  *
  * @author  Neil Griffin
  */

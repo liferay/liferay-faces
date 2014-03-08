@@ -14,31 +14,15 @@
 package com.liferay.faces.bridge.util;
 
 /**
- * @author  Neil Griffin
+ * This is a generic class that represents a name+value pair.
+ *
+ * @deprecated  Replaced by {@link com.liferay.faces.util.lang.NameValuePair<N, V>}
+ * @author      Neil Griffin
  */
-public class NameValuePair<N, V> {
-
-	private N name;
-	private V value;
+@Deprecated
+public class NameValuePair<N, V> extends com.liferay.faces.util.lang.NameValuePair<N, V> {
 
 	public NameValuePair(N name, V value) {
-		this.name = name;
-		this.value = value;
-	}
-
-	public N getName() {
-		return name;
-	}
-
-	public void setName(N name) {
-		this.name = name;
-	}
-
-	public V getValue() {
-		return value;
-	}
-
-	public void setValue(V value) {
-		this.value = value;
+		super(name, value);
 	}
 }

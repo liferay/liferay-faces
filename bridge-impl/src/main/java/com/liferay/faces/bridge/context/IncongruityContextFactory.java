@@ -26,6 +26,7 @@ import com.liferay.faces.bridge.FactoryWrapper;
  *
  * @author  Neil Griffin
  */
+@SuppressWarnings("deprecation")
 public abstract class IncongruityContextFactory implements FactoryWrapper<IncongruityContextFactory> {
 
 	public abstract IncongruityContext getIncongruityContext();

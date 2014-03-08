@@ -32,9 +32,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.config.BridgeConfigFactory;
 import com.liferay.faces.bridge.util.FileNameUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -64,9 +62,6 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 	private Boolean iceFacesLegacyMode;
 	private String portletContextName;
 
-	// Private Data Members
-	private BridgeConfig bridgeConfig;
-
 	// Protected Data Members
 	protected ServletResponse facesImplementationServletResponse;
 	protected Bridge.PortletPhase portletPhase;
@@ -76,11 +71,6 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 		PortletResponse portletResponse) {
 
 		super(portletContext, portletRequest, portletResponse);
-
-		// Get the bridge configuration.
-		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
-				BridgeConfigFactory.class);
-		this.bridgeConfig = bridgeConfigFactory.getBridgeConfig();
 	}
 
 	/**
@@ -132,6 +122,8 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 				if ((portletPhase == Bridge.PortletPhase.RENDER_PHASE) ||
 						(portletPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
 					PortletURL portletRenderURL = bridgeContext.getPortletContainer().createRenderURL(baseUrl);
+					BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+					BridgeConfig bridgeConfig = bridgeContext.getBridgeConfig();
 					portletRenderURL.setParameter(bridgeConfig.getViewIdRenderParameterName(), viewId);
 
 					if (parameters != null) {

@@ -23,6 +23,7 @@ import com.liferay.faces.bridge.context.BridgeContext;
 /**
  * @author  Neil Griffin
  */
+@SuppressWarnings("deprecation")
 public abstract class BridgeURLFactory implements FactoryWrapper<BridgeURLFactory> {
 
 	public abstract BridgeActionURL getBridgeActionURL(String url, String currentFacesViewId,
@@ -33,5 +34,4 @@ public abstract class BridgeURLFactory implements FactoryWrapper<BridgeURLFactor
 
 	public abstract BridgeResourceURL getBridgeResourceURL(String url, String currentFacesViewId,
 		BridgeContext bridgeContext);
-
 }

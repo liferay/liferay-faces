@@ -11,21 +11,14 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
-
-import java.net.URL;
-
+package com.liferay.faces.util.config;
 
 /**
  * @author  Neil Griffin
  */
-public interface FacesConfig {
+public interface ApplicationConfig {
 
-	public String getName();
+	public FacesConfig getFacesConfig();
 
-	public void setName(String name);
-
-	public URL getURL();
-
-	public void setURL(URL url);
+	public WebConfig getWebConfig();
 }
