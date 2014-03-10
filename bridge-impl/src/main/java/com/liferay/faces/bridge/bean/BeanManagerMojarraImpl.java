@@ -19,8 +19,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.bridge.application.MojarraApplicationAssociate;
-import com.liferay.faces.bridge.config.ConfiguredBean;
 import com.liferay.faces.bridge.servlet.BridgeSessionListener;
+import com.liferay.faces.util.config.ConfiguredManagedBean;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -36,8 +36,8 @@ public class BeanManagerMojarraImpl extends BeanManagerImpl {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BeanManagerMojarraImpl.class);
 
-	public BeanManagerMojarraImpl(List<ConfiguredBean> configuredBeans) {
-		super(configuredBeans);
+	public BeanManagerMojarraImpl(List<ConfiguredManagedBean> configuredManagedBeans) {
+		super(configuredManagedBeans);
 	}
 
 	@Override

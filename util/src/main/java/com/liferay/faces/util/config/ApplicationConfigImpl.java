@@ -11,41 +11,27 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
-
-import java.net.URL;
-
+package com.liferay.faces.util.config;
 
 /**
  * @author  Neil Griffin
  */
-public class FacesConfigImpl implements FacesConfig {
+public class ApplicationConfigImpl implements ApplicationConfig {
 
 	// Private Data Members
-	private String name;
-	private URL url;
+	private FacesConfig facesConfig;
+	private WebConfig webConfig;
 
-	public FacesConfigImpl() {
+	public ApplicationConfigImpl(FacesConfig facesConfig, WebConfig webConfig) {
+		this.facesConfig = facesConfig;
+		this.webConfig = webConfig;
 	}
 
-	public FacesConfigImpl(String name, URL url) {
-		this.name = name;
-		this.url = url;
+	public FacesConfig getFacesConfig() {
+		return facesConfig;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public URL getURL() {
-		return url;
-	}
-
-	public void setURL(URL url) {
-		this.url = url;
+	public WebConfig getWebConfig() {
+		return webConfig;
 	}
 }

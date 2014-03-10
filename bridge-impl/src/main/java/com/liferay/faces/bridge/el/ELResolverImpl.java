@@ -30,7 +30,6 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeUtil;
 import javax.servlet.jsp.JspContext;
 
-import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.bean.BeanManager;
 import com.liferay.faces.bridge.bean.BeanManagerFactory;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
@@ -39,6 +38,7 @@ import com.liferay.faces.bridge.context.map.SessionMap;
 import com.liferay.faces.bridge.filter.HttpServletRequestAdapter;
 import com.liferay.faces.bridge.filter.HttpServletResponseAdapter;
 import com.liferay.faces.bridge.preference.MutablePreferenceMap;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.BooleanHelper;
 
 
@@ -259,7 +259,7 @@ public class ELResolverImpl extends ELResolverCompatImpl {
 					initParam = externalContext.getInitParameter(BridgeConfigConstants.PARAM_PREFER_PRE_DESTROY2);
 				}
 
-				BeanManagerFactory beanManagerFactory = (BeanManagerFactory) BridgeFactoryFinder.getFactory(
+				BeanManagerFactory beanManagerFactory = (BeanManagerFactory) FactoryExtensionFinder.getFactory(
 						BeanManagerFactory.class);
 				BeanManager beanManager = beanManagerFactory.getBeanManager();
 

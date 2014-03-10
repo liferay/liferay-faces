@@ -16,30 +16,14 @@ package com.liferay.faces.bridge.config;
 /**
  * @author  Neil Griffin
  */
-public class ConfiguredSystemEventListenerImpl implements ConfiguredSystemEventListener {
+@Deprecated
+public class ConfiguredSystemEventListenerImpl extends com.liferay.faces.util.config.ConfiguredSystemEventListenerImpl
+	implements ConfiguredSystemEventListener {
 
-	// Private Data Members
-	private String sourceClass;
-	private String systemEventClass;
-	private String systemEventListenerClass;
-
-	public ConfiguredSystemEventListenerImpl(String sourceClass, String systemEventClass,
-		String systemEventListenerClass) {
-		this.sourceClass = sourceClass;
-		this.systemEventClass = systemEventClass;
-		this.systemEventListenerClass = systemEventListenerClass;
-	}
-
-	public String getSourceClass() {
-		return sourceClass;
-	}
-
-	public String getSystemEventClass() {
-		return systemEventClass;
-	}
-
-	public String getSystemEventListenerClass() {
-		return systemEventListenerClass;
+	public ConfiguredSystemEventListenerImpl(
+		com.liferay.faces.util.config.ConfiguredSystemEventListener configuredSystemEventListener) {
+		super(configuredSystemEventListener.getSourceClass(), configuredSystemEventListener.getSystemEventClass(),
+			configuredSystemEventListener.getSystemEventListenerClass());
 	}
 
 }
