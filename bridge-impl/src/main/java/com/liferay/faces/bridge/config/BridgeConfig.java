@@ -21,6 +21,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.ResourceRequest;
 
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
+import com.liferay.faces.util.config.ConfiguredServletMapping;
 
 
 /**
@@ -36,16 +37,32 @@ public interface BridgeConfig {
 	public Map<String, Object> getAttributes();
 
 	/**
+	 * @deprecated  Call {@link #getConfiguredSuffixes()} instead.
+	 */
+	@Deprecated
+	public List<String> getConfiguredExtensions();
+
+	/**
+	 * Returns a list of servlet-mapping entries from the WEB-INF/web.xml descriptor that are mapped to the Faces
+	 * Servlet.
+	 */
+	public List<ConfiguredServletMapping> getConfiguredFacesServletMappings();
+
+	/**
 	 * Returns a list of filename extensions that the developer may have specified in the WEB-INF/web.xml descriptor
 	 * with the "javax.faces.DEFAULT_SUFFIX" init-param.
 	 */
-	List<String> getConfiguredExtensions();
+	public List<String> getConfiguredSuffixes();
 
 	/**
-	 * Returns a list of configured system-event-listener entries that are found in META-INF/faces-config.xml or
-	 * WEB-INF/faces-config.xml descriptors.
+	 * <p>Returns a list of configured system-event-listener entries that are found in META-INF/faces-config.xml or
+	 * WEB-INF/faces-config.xml descriptors.</p>
+	 *
+	 * @deprecated  The return type in future releases will be {@link
+	 *              com.liferay.faces.util.config.ConfiguredSystemEventListener}.
 	 */
-	List<ConfiguredSystemEventListener> getConfiguredSystemEventListeners();
+	@Deprecated
+	public List<ConfiguredSystemEventListener> getConfiguredSystemEventListeners();
 
 	/**
 	 * Returns the value associated with the specified parameter name from the WEB-INF/web.xml descriptor.
@@ -62,19 +79,19 @@ public interface BridgeConfig {
 	 * Returns a list of attribute names that are to be excluded from the {@link BridgeRequestScope} as defined in the
 	 * bridge:excluded-attributes element within the faces-config.xml descriptor.
 	 */
-	Set<String> getExcludedRequestAttributes();
+	public Set<String> getExcludedRequestAttributes();
 
 	/**
-	 * Returns a list of servlet-mapping entries from the WEB-INF/web.xml descriptor that are mapped to the Faces
-	 * Servlet.
+	 * @deprecated  Call {@link #getConfiguredFacesServletMappings()} instead.
 	 */
-	List<ServletMapping> getFacesServletMappings();
+	@Deprecated
+	public List<ServletMapping> getFacesServletMappings();
 
 	/**
 	 * Returns an immutable {@link Map} of Public Render Parameter mappings as defined in the
 	 * bridge:public-parameter-mappings element of the faces-config.xml descriptor.
 	 */
-	Map<String, String[]> getPublicParameterMappings();
+	public Map<String, String[]> getPublicParameterMappings();
 
 	/**
 	 * Returns the parameter name used for storing the value of the target viewId in a {@link RenderRequest}.

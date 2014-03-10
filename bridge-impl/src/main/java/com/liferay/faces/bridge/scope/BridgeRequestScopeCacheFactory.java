@@ -29,6 +29,7 @@ import com.liferay.faces.bridge.FactoryWrapper;
  *
  * @author  Neil Griffin
  */
+@SuppressWarnings("deprecation")
 public abstract class BridgeRequestScopeCacheFactory implements FactoryWrapper<BridgeRequestScopeCacheFactory> {
 
 	public abstract BridgeRequestScopeCache getBridgeRequestScopeCache(PortletContext portletContext)

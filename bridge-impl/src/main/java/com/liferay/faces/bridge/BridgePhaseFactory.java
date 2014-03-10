@@ -35,6 +35,7 @@ import javax.portlet.ResourceResponse;
  *
  * @author  Neil Griffin
  */
+@SuppressWarnings("deprecation")
 public abstract class BridgePhaseFactory implements FactoryWrapper<BridgePhaseFactory> {
 
 	public abstract BridgePhase getBridgeActionPhase(ActionRequest actionRequest, ActionResponse actionResponse,
@@ -48,5 +49,4 @@ public abstract class BridgePhaseFactory implements FactoryWrapper<BridgePhaseFa
 
 	public abstract BridgePhase getBridgeResourcePhase(ResourceRequest resourceRequest,
 		ResourceResponse resourceResponse, PortletConfig portletConfig) throws FacesException;
-
 }

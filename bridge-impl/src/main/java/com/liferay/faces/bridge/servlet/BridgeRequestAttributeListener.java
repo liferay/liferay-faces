@@ -23,9 +23,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletRequestAttributeEvent;
 import javax.servlet.ServletRequestAttributeListener;
 
-import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.config.BridgeConfigFactory;
+import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.map.RequestAttributeMap;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -69,11 +68,9 @@ public class BridgeRequestAttributeListener implements ServletRequestAttributeLi
 
 			// If the attribute being added is not excluded, then invoke all methods on the attribute value (class
 			// instance) that are annotated with the BridgeRequestScopeAttributeAdded annotation.
-			BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
-					BridgeConfigFactory.class);
-			BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig();
-
 			String attributeName = servletRequestAttributeEvent.getName();
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			BridgeConfig bridgeConfig = bridgeContext.getBridgeConfig();
 			Set<String> excludedRequestScopeAttributes = bridgeConfig.getExcludedRequestAttributes();
 
 			if (!excludedRequestScopeAttributes.contains(attributeName)) {

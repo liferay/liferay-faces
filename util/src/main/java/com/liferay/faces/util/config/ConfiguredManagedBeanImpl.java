@@ -11,19 +11,19 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.config;
 
 /**
  * @author  Neil Griffin
  */
-public class ConfiguredBeanImpl implements ConfiguredBean {
+public class ConfiguredManagedBeanImpl implements ConfiguredManagedBean {
 
 	// Private Data Members
 	private String managedBeanClass;
 	private String managedBeanName;
 	private String managedBeanScope;
 
-	public ConfiguredBeanImpl(String managedBeanClass, String managedBeanName, String managedBeanScope) {
+	public ConfiguredManagedBeanImpl(String managedBeanClass, String managedBeanName, String managedBeanScope) {
 		this.managedBeanClass = managedBeanClass;
 		this.managedBeanName = managedBeanName;
 		this.managedBeanScope = managedBeanScope;

@@ -13,26 +13,18 @@
  */
 package com.liferay.faces.bridge.config;
 
+import com.liferay.faces.util.config.ConfiguredManagedBean;
+
+
 /**
  * This interface defines the properties for a configured managed-bean that is discovered in META-INF/faces-config.xml
  * or WEB-INF/faces-config.xml descriptors.
  *
- * @author  Neil Griffin
+ * @deprecated  Replaced by {@link com.liferay.faces.util.config.ConfiguredManagedBean}
+ * @author      Neil Griffin
  */
-public interface ConfiguredBean {
 
-	/**
-	 * Returns the value of the managed-bean-class element of the configured managed-bean.
-	 */
-	public String getManagedBeanClass();
+@Deprecated
+public interface ConfiguredBean extends ConfiguredManagedBean {
 
-	/**
-	 * Returns the value of the managed-mean-name element of the configured managed-bean.
-	 */
-	public String getManagedBeanName();
-
-	/**
-	 * Returns the value of the managed-bean-scope element of the configured managed-bean.
-	 */
-	public String getManagedBeanScope();
 }

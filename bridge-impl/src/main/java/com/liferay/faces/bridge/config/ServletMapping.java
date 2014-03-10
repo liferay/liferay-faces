@@ -13,44 +13,16 @@
  */
 package com.liferay.faces.bridge.config;
 
+import com.liferay.faces.util.config.ConfiguredServletMapping;
+
+
 /**
- * The ServletMapping interface provides a representation of a servlet-mapping entry from the WEB-INF/web.xml
- * descriptor.
+ * This interface provides a representation of a servlet-mapping entry from a web-app descriptor.
  *
- * @author  Neil Griffin
+ * @deprecated  Replaced by {@link com.liferay.faces.util.config.ConfiguredServletMapping}.
+ * @author      Neil Griffin
  */
-public interface ServletMapping {
-
-	/**
-	 * Flag indicating whether or not the servlet-mapping url-pattern is extension-mapped.
-	 */
-	public abstract boolean isExtensionMapped();
-
-	/**
-	 * Flag indicating whether or not the servlet-mapping url-pattern is path-mapped.
-	 */
-	public abstract boolean isPathMapped();
-
-	/**
-	 * If the servlet-mapping url-pattern is extension-mapped (like *.faces), then this method returns the .faces
-	 * extension. Otherwise returns null.
-	 */
-	public abstract String getExtension();
-
-	/**
-	 * Flag indicating whether or not the specified <code>uri</code> matches the servlet-mapping url-pattern.
-	 */
-	public abstract boolean isMatch(String uri);
-
-	/**
-	 * If the servlet-mapping url-pattern is path-mapped (like /views/foo/bar/*), then this method returns the
-	 * /views/foo/bar path. Otherwise returns null.
-	 */
-	public abstract String getServletPath();
-
-	/**
-	 * Returns the servlet-mapping url-pattern.
-	 */
-	public abstract String getUrlPattern();
+@Deprecated
+public interface ServletMapping extends ConfiguredServletMapping {
 
 }

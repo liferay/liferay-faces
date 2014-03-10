@@ -11,29 +11,17 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.bridge.renderkit.html_basic;
 
-import java.util.HashMap;
-
-import com.liferay.faces.util.product.ProductMap;
+import com.liferay.faces.util.lang.NameValuePair;
 
 
 /**
  * @author  Neil Griffin
  */
-public class BridgeConfigAttributeMapImpl extends HashMap<String, Object> implements BridgeConfigAttributeMap {
+public class HeadResourceAttribute extends NameValuePair<String, String> {
 
-	// serialVersionUID
-	private static final long serialVersionUID = 8763346476317251569L;
-
-	@Override
-	public Object get(Object key) {
-		Object value = super.get(key);
-
-		if (value == null) {
-			value = ProductMap.getInstance().get(key);
-		}
-
-		return value;
+	public HeadResourceAttribute(String name, String value) {
+		super(name, value);
 	}
 }

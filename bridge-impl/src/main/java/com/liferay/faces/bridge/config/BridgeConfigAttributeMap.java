@@ -13,12 +13,27 @@
  */
 package com.liferay.faces.bridge.config;
 
-import java.util.Map;
+import java.util.HashMap;
+
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
  * @author  Neil Griffin
  */
-public interface BridgeConfigAttributeMap extends Map<String, Object> {
+public class BridgeConfigAttributeMap extends HashMap<String, Object> {
 
+	// serialVersionUID
+	private static final long serialVersionUID = 7385067508147506114L;
+
+	@Override
+	public Object get(Object key) {
+		Object value = super.get(key);
+
+		if (value == null) {
+			value = ProductMap.getInstance().get(key);
+		}
+
+		return value;
+	}
 }

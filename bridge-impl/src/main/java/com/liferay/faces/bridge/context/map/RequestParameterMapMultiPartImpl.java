@@ -50,12 +50,12 @@ import org.apache.commons.fileupload.portlet.PortletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
 import org.apache.commons.io.FileUtils;
 
-import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.bridge.model.UploadedFileFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -201,7 +201,7 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 				}
 			}
 
-			UploadedFileFactory uploadedFileFactory = (UploadedFileFactory) BridgeFactoryFinder.getFactory(
+			UploadedFileFactory uploadedFileFactory = (UploadedFileFactory) FactoryExtensionFinder.getFactory(
 					UploadedFileFactory.class);
 
 			// Begin parsing the request for file parts:

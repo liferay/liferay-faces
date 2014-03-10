@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.liferay.faces.util.config.ConfiguredServletMapping;
+
 
 /**
  * @author  Neil Griffin
@@ -31,10 +33,20 @@ public class BridgeConfigMockImpl implements BridgeConfig {
 		throw new UnsupportedOperationException();
 	}
 
+	@Deprecated
 	public List<String> getConfiguredExtensions() {
+		return getConfiguredSuffixes();
+	}
+
+	public List<ConfiguredServletMapping> getConfiguredFacesServletMappings() {
 		throw new UnsupportedOperationException();
 	}
 
+	public List<String> getConfiguredSuffixes() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Deprecated
 	public List<ConfiguredSystemEventListener> getConfiguredSystemEventListeners() {
 		throw new UnsupportedOperationException();
 	}
@@ -47,6 +59,7 @@ public class BridgeConfigMockImpl implements BridgeConfig {
 		throw new UnsupportedOperationException();
 	}
 
+	@Deprecated
 	public List<ServletMapping> getFacesServletMappings() {
 		throw new UnsupportedOperationException();
 	}
