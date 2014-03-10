@@ -22,6 +22,7 @@ import com.liferay.faces.bridge.FactoryWrapper;
 /**
  * @author  Neil Griffin
  */
+@SuppressWarnings("deprecation")
 public abstract class UploadedFileFactory implements FactoryWrapper<UploadedFileFactory> {
 
 	public abstract UploadedFile getUploadedFile(Exception e);

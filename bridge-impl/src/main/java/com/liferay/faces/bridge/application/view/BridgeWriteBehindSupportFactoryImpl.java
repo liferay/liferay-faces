@@ -29,9 +29,8 @@ import javax.portlet.faces.BridgeUtil;
 import javax.portlet.faces.BridgeWriteBehindResponse;
 import javax.servlet.ServletResponse;
 
-import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.config.BridgeConfigFactory;
+import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -113,9 +112,9 @@ public class BridgeWriteBehindSupportFactoryImpl extends BridgeWriteBehindSuppor
 		BridgeWriteBehindResponse bridgeWriteBehindResponse = null;
 
 		if ((bridgeWriteBehindRenderResponseClass == null) || (bridgeWriteBehindResourceResponseClass == null)) {
-			BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
-					BridgeConfigFactory.class);
-			BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig();
+
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			BridgeConfig bridgeConfig = bridgeContext.getBridgeConfig();
 
 			if (bridgeWriteBehindRenderResponseClass == null) {
 				String className = bridgeConfig.getWriteBehindRenderResponseWrapper();

@@ -11,29 +11,34 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.config;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.faces.webapp.FacesServlet;
+import javax.xml.parsers.SAXParser;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.xml.SAXHandlerBase;
 
 
 /**
  * @author  Neil Griffin
  */
-public class SAXHandlerWebConfigImpl extends SAXHandlerBaseImpl {
+public class WebConfigParserImpl extends SAXHandlerBase implements WebConfigParser {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(SAXHandlerWebConfigImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(WebConfigParserImpl.class);
 
 	// Private Constants
-	private static final String FACES_SERVLET_FQCN = FacesServlet.class.getName();
 	private static final String SERVLET = "servlet";
 	private static final String SERVLET_CLASS = "servlet-class";
 	private static final String SERVLET_MAPPING = "servlet-mapping";
@@ -41,18 +46,21 @@ public class SAXHandlerWebConfigImpl extends SAXHandlerBaseImpl {
 	private static final String URL_PATTERN = "url-pattern";
 
 	// Private Data Members
-	private List<ServletMapping> facesServletMappings;
-	private String facesServletName = "Faces Servlet";
-	private boolean parsingServlet = false;
-	private boolean parsingServletClass = false;
-	private boolean parsingServletMapping = false;
-	private boolean parsingServletName = false;
-	private boolean parsingUrlPattern = false;
+	private Map<String, String> configuredContextParams;
+	private List<ConfiguredServlet> configuredServlets;
+	private List<ConfiguredServletMapping> configuredServletMappings;
+	private boolean parsingServlet;
+	private boolean parsingServletClass;
+	private boolean parsingServletMapping;
+	private boolean parsingServletName;
+	private boolean parsingUrlPattern;
+	private SAXParser saxParser;
+	private String servletClass;
 	private String servletName;
 
-	public SAXHandlerWebConfigImpl(boolean resolveEntities, List<ServletMapping> facesServletMappings) {
+	public WebConfigParserImpl(SAXParser saxParser, boolean resolveEntities) {
 		super(resolveEntities);
-		this.facesServletMappings = facesServletMappings;
+		this.saxParser = saxParser;
 	}
 
 	@Override
@@ -61,16 +69,7 @@ public class SAXHandlerWebConfigImpl extends SAXHandlerBaseImpl {
 		if (parsingServlet) {
 
 			if (parsingServletClass) {
-				String servletClass = content.toString().trim();
-
-				if (servletClass.length() > 0) {
-
-					if (FACES_SERVLET_FQCN.equals(servletClass) && (servletName.length() > 0)) {
-						facesServletName = servletName;
-						logger.trace("servlet-class=[{0}] servlet-name=[{1}]", FACES_SERVLET_FQCN, facesServletName);
-					}
-				}
-
+				servletClass = content.toString().trim();
 				parsingServletClass = false;
 			}
 			else if (parsingServletName) {
@@ -79,6 +78,8 @@ public class SAXHandlerWebConfigImpl extends SAXHandlerBaseImpl {
 			}
 
 			if (SERVLET.equals(qName)) {
+				ConfiguredServlet configuredServlet = new ConfiguredServletImpl(servletName, servletClass);
+				configuredServlets.add(configuredServlet);
 				parsingServlet = false;
 			}
 		}
@@ -90,12 +91,12 @@ public class SAXHandlerWebConfigImpl extends SAXHandlerBaseImpl {
 			}
 			else if (parsingUrlPattern) {
 
-				if ((servletName != null) && servletName.equals(facesServletName)) {
-					String urlPattern = content.toString().trim();
-					facesServletMappings.add(new ServletMappingImpl(urlPattern));
-					logger.trace("Added urlPattern=[{0}] to facesServletMappings", urlPattern);
-				}
-
+				String urlPattern = content.toString().trim();
+				ConfiguredServletMapping configuredServletMapping = new ConfiguredServletMappingImpl(servletName,
+						urlPattern);
+				configuredServletMappings.add(configuredServletMapping);
+				logger.trace("Added servletName=[{0}] urlPattern=[{1}] to configuredServletMappings", servletName,
+					urlPattern);
 				parsingUrlPattern = false;
 			}
 
@@ -107,9 +108,35 @@ public class SAXHandlerWebConfigImpl extends SAXHandlerBaseImpl {
 		content = null;
 	}
 
+	public WebConfig parse(InputStream inputStream, WebConfig webConfig) throws IOException {
+
+		Map<String, String> configuredContextParams = webConfig.getConfiguredContextParams();
+		this.configuredContextParams = new HashMap<String, String>(configuredContextParams);
+
+		List<ConfiguredServlet> configuredServlets = webConfig.getConfiguredServlets();
+		this.configuredServlets = new ArrayList<ConfiguredServlet>(configuredServlets);
+
+		List<ConfiguredServletMapping> configuredServletMappings = webConfig.getConfiguredServletMappings();
+		this.configuredServletMappings = new ArrayList<ConfiguredServletMapping>(configuredServletMappings);
+
+		try {
+			saxParser.parse(inputStream, this);
+			webConfig = new WebConfigImpl(this.configuredContextParams, this.configuredServlets,
+					this.configuredServletMappings);
+			saxParser.reset();
+
+			return webConfig;
+		}
+		catch (SAXException e) {
+			logger.error(e);
+			throw new IOException(e.getMessage());
+		}
+	}
+
 	@Override
 	public void startElement(String uri, String localName, String elementName, Attributes attributes)
 		throws SAXException {
+
 		logger.trace("localName=[{0}]", localName);
 
 		content = new StringBuilder();
