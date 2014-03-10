@@ -20,10 +20,10 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.context.flash.BridgeFlash;
 import com.liferay.faces.bridge.context.flash.BridgeFlashFactory;
 import com.liferay.faces.bridge.context.flash.FlashHttpServletResponse;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -63,7 +63,7 @@ public abstract class ExternalContextCompat_2_0_FlashImpl extends ExternalContex
 	public Flash getFlash() {
 
 		if (flash == null) {
-			BridgeFlashFactory bridgeFlashFactory = (BridgeFlashFactory) BridgeFactoryFinder.getFactory(
+			BridgeFlashFactory bridgeFlashFactory = (BridgeFlashFactory) FactoryExtensionFinder.getFactory(
 					BridgeFlashFactory.class);
 			flash = bridgeFlashFactory.getBridgeFlash();
 		}

@@ -11,16 +11,34 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.lang;
 
 /**
  * @author  Neil Griffin
  */
-public abstract class SAXHandlerFacesConfigPre extends SAXHandlerBaseImpl {
+public class NameValuePair<N, V> {
 
-	public SAXHandlerFacesConfigPre(boolean resolveEntities) {
-		super(resolveEntities);
+	private N name;
+	private V value;
+
+	public NameValuePair(N name, V value) {
+		this.name = name;
+		this.value = value;
 	}
 
-	public abstract String getFacesConfigName();
+	public N getName() {
+		return name;
+	}
+
+	public void setName(N name) {
+		this.name = name;
+	}
+
+	public V getValue() {
+		return value;
+	}
+
+	public void setValue(V value) {
+		this.value = value;
+	}
 }

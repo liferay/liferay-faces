@@ -17,22 +17,10 @@ package com.liferay.faces.bridge.config;
  * This interface defines the properties for a configured system-event-listener that is discovered in
  * META-INF/faces-config.xml or WEB-INF/faces-config.xml descriptors.
  *
- * @author  Neil Griffin
+ * @deprecated  Replaced by {@link com.liferay.faces.util.config.ConfiguredSystemEventListener}.
+ * @author      Neil Griffin
  */
-public interface ConfiguredSystemEventListener {
+@Deprecated
+public interface ConfiguredSystemEventListener extends com.liferay.faces.util.config.ConfiguredSystemEventListener {
 
-	/**
-	 * Returns the value of the source-class element of the configured system-event-listener.
-	 */
-	public String getSourceClass();
-
-	/**
-	 * Returns the value of the system-event-class element of the configured system-event-listener.
-	 */
-	public String getSystemEventClass();
-
-	/**
-	 * Returns the value of the system-event-listener-class element of the configured system-event-listener.
-	 */
-	public String getSystemEventListenerClass();
 }

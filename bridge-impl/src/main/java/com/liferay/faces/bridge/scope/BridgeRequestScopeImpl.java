@@ -50,13 +50,12 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.util.FacesMessageWrapper;
-import com.liferay.faces.bridge.util.NameValuePair;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -124,9 +123,9 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 		this.idPrefix = portletName + ":::" + sessionId + ":::";
 		this.idSuffix = Long.toString(Calendar.getInstance().getTimeInMillis());
 
-		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
+		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) FactoryExtensionFinder.getFactory(
 				BridgeConfigFactory.class);
-		BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig();
+		BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig(portletContext);
 		this.excludedAttributeNames = new ArrayList<String>();
 
 		// Get the list of excluded BridgeRequestScope attributes from the faces-config.xml descriptors.
@@ -765,19 +764,5 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 
 	public Set<String> getRemovedAttributeNames() {
 		return removedAttributeNames;
-	}
-
-	protected class IncongruityAttribute extends NameValuePair<String, Object> {
-
-		public IncongruityAttribute(String name, Object value) {
-			super(name, value);
-		}
-	}
-
-	protected class RequestAttribute extends NameValuePair<String, Object> {
-
-		public RequestAttribute(String name, Object value) {
-			super(name, value);
-		}
 	}
 }

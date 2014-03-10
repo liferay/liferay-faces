@@ -33,9 +33,9 @@ import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -163,7 +163,7 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 
 			this.ableToSetHttpStatusCode = getContextParamAbleToSetHttpStatusCode(defaultValue);
 			this.friendlyURLMapperEnabled = (liferayPortletRequest.getPortlet().getFriendlyURLMapperInstance() != null);
-			this.liferayURLFactory = (LiferayURLFactory) BridgeFactoryFinder.getFactory(LiferayURLFactory.class);
+			this.liferayURLFactory = (LiferayURLFactory) FactoryExtensionFinder.getFactory(LiferayURLFactory.class);
 			this.namespacedParameters = isPortletRequiresNamespacedParameters(portletRequest, themeDisplay);
 			logger.debug("User-Agent requested URL=[{0}]", getRequestURL());
 		}

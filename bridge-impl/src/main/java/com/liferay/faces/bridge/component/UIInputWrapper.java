@@ -23,8 +23,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.ConverterException;
-import javax.faces.el.MethodBinding;
-import javax.faces.el.ValueBinding;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.FacesEvent;
 import javax.faces.event.FacesListener;
@@ -36,7 +34,6 @@ import javax.faces.validator.Validator;
 /**
  * @author  Neil Griffin
  */
-@SuppressWarnings("deprecation")
 public abstract class UIInputWrapper extends UIInput implements FacesWrapper<UIInput> {
 
 	// Private Data Members
@@ -402,12 +399,14 @@ public abstract class UIInputWrapper extends UIInput implements FacesWrapper<UII
 	}
 
 	@Override
-	public MethodBinding getValidator() {
+	@SuppressWarnings("deprecation")
+	public javax.faces.el.MethodBinding getValidator() {
 		return getWrapped().getValidator();
 	}
 
 	@Override
-	public void setValidator(MethodBinding validatorBinding) {
+	@SuppressWarnings("deprecation")
+	public void setValidator(javax.faces.el.MethodBinding validatorBinding) {
 		getWrapped().setValidator(validatorBinding);
 	}
 
@@ -433,22 +432,26 @@ public abstract class UIInputWrapper extends UIInput implements FacesWrapper<UII
 	}
 
 	@Override
-	public ValueBinding getValueBinding(String name) {
+	@SuppressWarnings("deprecation")
+	public javax.faces.el.ValueBinding getValueBinding(String name) {
 		return getWrapped().getValueBinding(name);
 	}
 
 	@Override
-	public void setValueBinding(String name, ValueBinding binding) {
+	@SuppressWarnings("deprecation")
+	public void setValueBinding(String name, javax.faces.el.ValueBinding binding) {
 		getWrapped().setValueBinding(name, binding);
 	}
 
 	@Override
-	public MethodBinding getValueChangeListener() {
+	@SuppressWarnings("deprecation")
+	public javax.faces.el.MethodBinding getValueChangeListener() {
 		return getWrapped().getValueChangeListener();
 	}
 
 	@Override
-	public void setValueChangeListener(MethodBinding valueChangeListener) {
+	@SuppressWarnings("deprecation")
+	public void setValueChangeListener(javax.faces.el.MethodBinding valueChangeListener) {
 		getWrapped().setValueChangeListener(valueChangeListener);
 	}
 
