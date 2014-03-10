@@ -30,7 +30,7 @@ import com.liferay.faces.util.helper.BooleanHelper;
  */
 public class ApplicationStartupListener implements SystemEventListener {
 
-	// Private Constants
+	// Public Constants
 	public static final String INIT_PARAM_RESOLVE_XML_ENTITIES = "com.liferay.faces.util.resolveXMLEntities";
 
 	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
