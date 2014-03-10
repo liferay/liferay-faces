@@ -31,6 +31,7 @@ import com.liferay.faces.bridge.config.BridgeConfig;
  *
  * @author  Neil Griffin
  */
+@SuppressWarnings("deprecation")
 public abstract class PortletContainerFactory implements FactoryWrapper<PortletContainerFactory> {
 
 	/**

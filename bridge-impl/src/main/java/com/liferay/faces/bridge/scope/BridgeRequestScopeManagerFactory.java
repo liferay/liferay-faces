@@ -28,6 +28,7 @@ import com.liferay.faces.bridge.FactoryWrapper;
  *
  * @author  Neil Griffin
  */
+@SuppressWarnings("deprecation")
 public abstract class BridgeRequestScopeManagerFactory implements FactoryWrapper<BridgeRequestScopeManagerFactory> {
 
 	public abstract BridgeRequestScopeManager getBridgeRequestScopeManager() throws FacesException;

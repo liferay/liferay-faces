@@ -16,7 +16,7 @@ package com.liferay.faces.bridge.util;
 /**
  * @author  Neil Griffin
  */
-public class RequestParameter extends NameValuePair<String, String> {
+public class RequestParameter extends com.liferay.faces.util.lang.NameValuePair<String, String> {
 
 	public RequestParameter(String name, String value) {
 		super(name, value);

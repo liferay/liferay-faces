@@ -11,19 +11,20 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.config;
 
-import java.net.URL;
-
-import org.xml.sax.helpers.DefaultHandler;
+import java.io.IOException;
+import java.io.InputStream;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class SAXHandler extends DefaultHandler {
+public interface WebConfigParser {
 
-	public abstract void logMissingElementErrors();
-
-	public abstract void setURL(URL url);
+	/**
+	 * Parses the specified InputStream and returns a new WebConfig that contains parsed data that has been appended to
+	 * the specified WebConfig. Closing the specified InputStream is the responsibility of the caller. 
+	 */
+	public WebConfig parse(InputStream inputStream, WebConfig webConfig) throws IOException;
 }

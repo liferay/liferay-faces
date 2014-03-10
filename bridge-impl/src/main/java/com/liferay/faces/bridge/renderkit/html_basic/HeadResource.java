@@ -19,7 +19,6 @@ import java.util.List;
 import org.xml.sax.Attributes;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.util.NameValuePair;
 import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -35,7 +34,7 @@ public class HeadResource {
 	private static final String SCRIPT = "script";
 
 	// Private Data Members
-	private List<Attribute> attributeList;
+	private List<HeadResourceAttribute> attributeList;
 	private boolean duplicate;
 	private String facesResource;
 	private String facesLibrary;
@@ -63,15 +62,15 @@ public class HeadResource {
 		this.type = type;
 
 		if (attributes != null) {
-			this.attributeList = new ArrayList<Attribute>();
+			this.attributeList = new ArrayList<HeadResourceAttribute>();
 
 			int totalAttributes = attributes.getLength();
 
 			for (int i = 0; i < totalAttributes; i++) {
 				String name = attributes.getLocalName(i);
 				String value = attributes.getValue(i);
-				Attribute attribute = new Attribute(name, value);
-				this.attributeList.add(attribute);
+				HeadResourceAttribute headResourceAttribute = new HeadResourceAttribute(name, value);
+				this.attributeList.add(headResourceAttribute);
 			}
 		}
 
@@ -119,12 +118,12 @@ public class HeadResource {
 
 		if (attributeList != null) {
 
-			for (Attribute attribute : attributeList) {
+			for (HeadResourceAttribute headResourceAttribute : attributeList) {
 				stringBuilder.append(StringPool.SPACE);
-				stringBuilder.append(attribute.getName());
+				stringBuilder.append(headResourceAttribute.getName());
 				stringBuilder.append(StringPool.EQUAL);
 				stringBuilder.append(StringPool.QUOTE);
-				stringBuilder.append(attribute.getValue());
+				stringBuilder.append(headResourceAttribute.getValue());
 				stringBuilder.append(StringPool.QUOTE);
 			}
 		}
@@ -205,12 +204,5 @@ public class HeadResource {
 
 	public String getURL() {
 		return url;
-	}
-
-	protected class Attribute extends NameValuePair<String, String> {
-
-		public Attribute(String name, String value) {
-			super(name, value);
-		}
 	}
 }
