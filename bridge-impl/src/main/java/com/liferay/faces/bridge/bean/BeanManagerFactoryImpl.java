@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.liferay.faces.util.config.ApplicationConfig;
+import com.liferay.faces.util.config.ApplicationConfigUtil;
 import com.liferay.faces.util.config.ConfiguredManagedBean;
 import com.liferay.faces.util.config.ConfiguredManagedBeanImpl;
 import com.liferay.faces.util.config.FacesConfig;
-import com.liferay.faces.util.event.ApplicationStartupListener;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
@@ -38,7 +38,7 @@ public class BeanManagerFactoryImpl extends BeanManagerFactory {
 	List<ConfiguredManagedBean> configuredManagedBeans;
 
 	public BeanManagerFactoryImpl() {
-		ApplicationConfig applicationConfig = ApplicationStartupListener.getApplicationConfig();
+		ApplicationConfig applicationConfig = ApplicationConfigUtil.getApplicationConfig();
 		FacesConfig facesConfig = applicationConfig.getFacesConfig();
 		this.configuredManagedBeans = facesConfig.getConfiguredManagedBeans();
 	}

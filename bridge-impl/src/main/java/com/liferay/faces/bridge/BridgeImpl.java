@@ -38,6 +38,7 @@ import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
 import com.liferay.faces.util.config.ApplicationConfig;
+import com.liferay.faces.util.config.ApplicationConfigUtil;
 import com.liferay.faces.util.event.ApplicationStartupListener;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.BooleanHelper;
@@ -157,7 +158,7 @@ public class BridgeImpl implements Bridge {
 		this.initialized = true;
 		this.portletConfig = portletConfig;
 
-		ApplicationConfig applicationConfig = ApplicationStartupListener.getApplicationConfig();
+		ApplicationConfig applicationConfig = ApplicationConfigUtil.getApplicationConfig();
 
 		if (applicationConfig == null) {
 
@@ -182,7 +183,7 @@ public class BridgeImpl implements Bridge {
 
 			boolean resolveEntities = BooleanHelper.toBoolean(initParam, false);
 
-			ApplicationStartupListener.initializeApplicationConfig(resolveEntities);
+			ApplicationConfigUtil.initializeApplicationConfig(resolveEntities);
 		}
 
 		this.bridgePhaseFactory = (BridgePhaseFactory) FactoryExtensionFinder.getFactory(BridgePhaseFactory.class);
