@@ -28,6 +28,7 @@ import com.liferay.faces.bridge.FactoryWrapper;
 /**
  * @author  Neil Griffin
  */
+@SuppressWarnings("deprecation")
 public abstract class BridgeWriteBehindSupportFactory implements FactoryWrapper<BridgeWriteBehindSupportFactory> {
 
 	public abstract BridgeAfterViewContentRequest getBridgeAfterViewContentRequest(PortletRequest portletRequest);

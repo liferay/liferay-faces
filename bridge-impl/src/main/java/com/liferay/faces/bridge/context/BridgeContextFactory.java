@@ -36,6 +36,7 @@ import com.liferay.faces.bridge.scope.BridgeRequestScope;
  *
  * @author  Neil Griffin
  */
+@SuppressWarnings("deprecation")
 public abstract class BridgeContextFactory implements FactoryWrapper<BridgeContextFactory> {
 
 	public abstract BridgeContext getBridgeContext(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,

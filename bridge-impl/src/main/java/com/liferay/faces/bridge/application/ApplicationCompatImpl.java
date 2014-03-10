@@ -24,7 +24,7 @@ import javax.faces.event.SystemEventListener;
 import com.liferay.faces.bridge.component.UIViewRootBridgeImpl;
 import com.liferay.faces.bridge.component.icefaces.DataPaginator;
 import com.liferay.faces.bridge.component.icefaces.DataPaginatorBridgeImpl;
-import com.liferay.faces.bridge.config.ConfiguredSystemEventListener;
+import com.liferay.faces.util.config.ConfiguredSystemEventListener;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 

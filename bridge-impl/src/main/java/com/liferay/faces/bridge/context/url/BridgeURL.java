@@ -32,20 +32,20 @@ public interface BridgeURL {
 	/**
 	 * Removes the value of the underlying {@link BridgeURL#getParameterMap()} with the specified <code>name</code>.
 	 */
-	String removeParameter(String name);
+	public String removeParameter(String name);
 
 	/**
 	 * Returns a string-based representation of the URL. If {@link BridgeURL#isEscaped()} returns true then the value
 	 * returned by this method will contain escaped characters.
 	 */
 	@Override
-	String toString();
+	public String toString();
 
 	/**
 	 * Returns the context-relative path in the URL. If no path is found, then the current Faces viewId (found in the
 	 * current {@link UIViewRoot}) is returned.
 	 */
-	String getContextRelativePath();
+	public String getContextRelativePath();
 
 	/**
 	 * Determines whether or not the URL is escaped.
@@ -53,14 +53,14 @@ public interface BridgeURL {
 	 * @return  <code>true</code> if all occurrences of the ampersand character appear as &amp; otherwise, returns
 	 *          <code>false</code>.
 	 */
-	boolean isEscaped();
+	public boolean isEscaped();
 
 	/**
 	 * Determines whether or not the URL is absolute.
 	 *
 	 * @return  <code>true</code> if absolute, otherwise <code>false</code>
 	 */
-	boolean isAbsolute();
+	public boolean isAbsolute();
 
 	/**
 	 * Determines whether or not the URL is opaque, meaning it is absolute and its scheme component does not begin with
@@ -68,7 +68,7 @@ public interface BridgeURL {
 	 *
 	 * @return  <code>true</code> if the URL is opaque, otherwise <code>false</code>.
 	 */
-	boolean isOpaque();
+	public boolean isOpaque();
 
 	/**
 	 * Determines whether or not the path component of the URL is relative, meaning it does not begin with a
@@ -76,14 +76,14 @@ public interface BridgeURL {
 	 *
 	 * @return  <code>true</code> if the path is relative, otherwise <code>false</code>.
 	 */
-	boolean isPathRelative();
+	public boolean isPathRelative();
 
 	/**
 	 * Determines whether or not the URL begins with the "portlet:" scheme.
 	 *
 	 * @return  <code>true</code> if the URL begins with the "portlet:" scheme, otherwise <code>false</code>.
 	 */
-	boolean isPortletScheme();
+	public boolean isPortletScheme();
 
 	/**
 	 * Flag indicating whether or not the URL is secure. For more information, see {@link
@@ -91,21 +91,21 @@ public interface BridgeURL {
 	 *
 	 * @return  <code>true</code> if the URL is secure, otherwise <code>false</code>.
 	 */
-	boolean isSecure();
+	public boolean isSecure();
 
 	/**
 	 * Determines whether or not the URL is self-referencing, meaning, it targets the current Faces view.
 	 *
 	 * @return  <code>true</code> if self-referencing, otherwise <code>false</code>.
 	 */
-	boolean isSelfReferencing();
+	public boolean isSelfReferencing();
 
 	/**
 	 * Determines whether or not the URL is external.
 	 *
 	 * @return  <code>true</code> if external, otherwise <code>false</code>.
 	 */
-	boolean isExternal();
+	public boolean isExternal();
 
 	/**
 	 * Determines whether or not the URL is hierarchical, meaning it is either 1) absolute and the scheme-specific part
@@ -113,12 +113,12 @@ public interface BridgeURL {
 	 *
 	 * @return  <code>true</code> if the URL is hierarchical, otherwise <code>false</code>.
 	 */
-	boolean isHierarchical();
+	public boolean isHierarchical();
 
 	/**
 	 * Returns the value of the underlying {@link BridgeURL#getParameterMap()} with the specified <code>name</code>.
 	 */
-	String getParameter(String name);
+	public String getParameter(String name);
 
 	/**
 	 * Sets the <code>value</code> of the underlying {@link BridgeURL#getParameterMap()} according to the specified
@@ -135,7 +135,7 @@ public interface BridgeURL {
 	/**
 	 * Returns a mutable {@link Map} representing the URL parameters.
 	 */
-	Map<String, String[]> getParameterMap();
+	public Map<String, String[]> getParameterMap();
 
 	/**
 	 * Returns a list of key names from the underlying {@link BridgeURL#getParameterMap()}.
@@ -146,14 +146,14 @@ public interface BridgeURL {
 	 * Returns the {@link Bridge.PortletPhase} associated with this URL. Note that the value will be null if the URL
 	 * does not begin with the "portlet:" scheme/prefix.
 	 */
-	Bridge.PortletPhase getPortletPhase();
+	public Bridge.PortletPhase getPortletPhase();
 
 	/**
 	 * Sets the flag indicating whether or not the URL is secure.
 	 *
 	 * @param  secure  <code>true</code> if secure, otherwise <code>false</code>.
 	 */
-	void setSecure(boolean secure);
+	public void setSecure(boolean secure);
 
 	/**
 	 * Sets the flag indicating whether or not the URL is self-referencing, meaning, whether or not it targets the
@@ -161,12 +161,12 @@ public interface BridgeURL {
 	 *
 	 * @param  selfReferencing  <code>true</code> if self-referencing, otherwise <code>false</code>.
 	 */
-	void setSelfReferencing(boolean selfReferencing);
+	public void setSelfReferencing(boolean selfReferencing);
 
 	/**
 	 * Determines whether or not the URL targets a Faces View.
 	 *
 	 * @return  <code>true</code> if the URL targets a Faces View, otherwise <code>false</code>
 	 */
-	boolean isFacesViewTarget();
+	public boolean isFacesViewTarget();
 }

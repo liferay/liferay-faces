@@ -11,21 +11,34 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
-
-import java.net.URL;
-
+package com.liferay.faces.util.lang;
 
 /**
  * @author  Neil Griffin
  */
-public interface FacesConfig {
+public class NameValuePair<N, V> {
 
-	public String getName();
+	private N name;
+	private V value;
 
-	public void setName(String name);
+	public NameValuePair(N name, V value) {
+		this.name = name;
+		this.value = value;
+	}
 
-	public URL getURL();
+	public N getName() {
+		return name;
+	}
 
-	public void setURL(URL url);
+	public void setName(N name) {
+		this.name = name;
+	}
+
+	public V getValue() {
+		return value;
+	}
+
+	public void setValue(V value) {
+		this.value = value;
+	}
 }

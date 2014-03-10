@@ -22,6 +22,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
@@ -33,8 +34,13 @@ import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 import javax.portlet.faces.BridgeUninitializedException;
 
+import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
+import com.liferay.faces.util.config.ApplicationConfig;
+import com.liferay.faces.util.event.ApplicationStartupListener;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -60,7 +66,7 @@ public class BridgeImpl implements Bridge {
 		try {
 
 			BridgeRequestScopeManagerFactory bridgeRequestScopeManagerFactory = (BridgeRequestScopeManagerFactory)
-				BridgeFactoryFinder.getFactory(BridgeRequestScopeManagerFactory.class);
+				FactoryExtensionFinder.getFactory(BridgeRequestScopeManagerFactory.class);
 			BridgeRequestScopeManager bridgeRequestScopeManager =
 				bridgeRequestScopeManagerFactory.getBridgeRequestScopeManager();
 			bridgeRequestScopeManager.removeBridgeRequestScopesByPortlet(portletConfig);
@@ -150,8 +156,36 @@ public class BridgeImpl implements Bridge {
 		System.out.println(logMessage.toString());
 		this.initialized = true;
 		this.portletConfig = portletConfig;
-		BridgeFactoryFinder.setPortletConfig(portletConfig);
-		bridgePhaseFactory = (BridgePhaseFactory) BridgeFactoryFinder.getFactory(BridgePhaseFactory.class);
+
+		ApplicationConfig applicationConfig = ApplicationStartupListener.getApplicationConfig();
+
+		if (applicationConfig == null) {
+
+			// Determine whether or not entities should be resolved. Due to slow performance in the
+			// SAXEventHandler.resolveEntity(String, String) method it's best to set the default value of this to false.
+			PortletContext portletContext = portletConfig.getPortletContext();
+
+			String initParam = portletContext.getInitParameter(
+					ApplicationStartupListener.INIT_PARAM_RESOLVE_XML_ENTITIES);
+
+			if (initParam == null) {
+				initParam = portletContext.getInitParameter(
+						BridgeConfigConstants.PARAM_REQUIRED_TO_RESOLVE_XML_ENTITIES1);
+
+				if (initParam == null) {
+
+					// Backward compatibility
+					initParam = portletContext.getInitParameter(
+							BridgeConfigConstants.PARAM_REQUIRED_TO_RESOLVE_XML_ENTITIES2);
+				}
+			}
+
+			boolean resolveEntities = BooleanHelper.toBoolean(initParam, false);
+
+			ApplicationStartupListener.initializeApplicationConfig(resolveEntities);
+		}
+
+		this.bridgePhaseFactory = (BridgePhaseFactory) FactoryExtensionFinder.getFactory(BridgePhaseFactory.class);
 	}
 
 	protected void checkNull(PortletRequest portletRequest, PortletResponse portletResponse) {

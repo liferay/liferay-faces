@@ -31,13 +31,11 @@ import javax.faces.application.ResourceHandler;
 import javax.faces.application.ResourceWrapper;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.config.BridgeConfigFactory;
-import com.liferay.faces.bridge.config.ServletMapping;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.application.ResourceConstants;
+import com.liferay.faces.util.config.ConfiguredServletMapping;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -281,18 +279,19 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 		if (wrappedRequestPath != null) {
 
 			if (wrappedRequestPath.contains(ResourceHandler.RESOURCE_IDENTIFIER)) {
-				BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
-						BridgeConfigFactory.class);
-				BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig();
 
-				List<ServletMapping> servletMappings = bridgeConfig.getFacesServletMappings();
+				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+				BridgeConfig bridgeConfig = bridgeContext.getBridgeConfig();
 
-				if (servletMappings != null) {
+				List<ConfiguredServletMapping> configuredFacesServletMappings =
+					bridgeConfig.getConfiguredFacesServletMappings();
 
-					for (ServletMapping servletMapping : servletMappings) {
+				if (configuredFacesServletMappings != null) {
 
-						if (servletMapping.isExtensionMapped()) {
-							String extension = servletMapping.getExtension();
+					for (ConfiguredServletMapping configuredServletMapping : configuredFacesServletMappings) {
+
+						if (configuredServletMapping.isExtensionMapped()) {
+							String extension = configuredServletMapping.getExtension();
 
 							// Note: Both Mojarra and MyFaces construct a requestPath that looks something like
 							// "/javax.faces.resource/jsf.js.faces?ln=javax.faces" and so we look for the ".faces?ln" as

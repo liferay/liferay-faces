@@ -25,8 +25,8 @@ import org.xml.sax.XMLReader;
 
 
 /**
- * This class is an implementation of {@link SAXParser}. However, it does not fully implement all of the functionality
- * of the one provided by the JRE.
+ * This class is a thread-safe implementation of {@link SAXParser}. However, it does not fully implement all of the
+ * functionality of the one provided by the JRE.
  *
  * @author  Neil Griffin
  */
@@ -42,6 +42,13 @@ public class SAXParserImpl extends SAXParser {
 		this.namespaceAware = namespaceAware;
 		this.validating = validating;
 		this.xmlReader = new XMLReaderImpl(featureMap);
+	}
+
+	@Override
+	public void reset() {
+		// This method needs to be overriden in order to prevent the superclass from throwing a
+		// UnsupportedOperationException. Since this implementation is thread-safe, it inherently
+		// supports the reset functionality.
 	}
 
 	@Override

@@ -21,7 +21,7 @@ import java.util.Map;
 
 import javax.portlet.faces.annotation.BridgePreDestroy;
 
-import com.liferay.faces.bridge.config.ConfiguredBean;
+import com.liferay.faces.util.config.ConfiguredManagedBean;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -41,15 +41,16 @@ public class BeanManagerImpl extends BeanManagerCompatImpl {
 	private static final Logger logger = LoggerFactory.getLogger(BeanManagerImpl.class);
 
 	// Private Data Members
-	private Map<String, ConfiguredBean> configuredBeanSet;
+	private Map<String, ConfiguredManagedBean> configuredManagedBeanSet;
 
-	public BeanManagerImpl(List<ConfiguredBean> configuredBeans) {
-		this.configuredBeanSet = new HashMap<String, ConfiguredBean>();
+	public BeanManagerImpl(List<ConfiguredManagedBean> configuredManagedBeans) {
 
-		if (configuredBeans != null) {
+		this.configuredManagedBeanSet = new HashMap<String, ConfiguredManagedBean>();
 
-			for (ConfiguredBean configuredBean : configuredBeans) {
-				configuredBeanSet.put(configuredBean.getManagedBeanName(), configuredBean);
+		if (configuredManagedBeans != null) {
+
+			for (ConfiguredManagedBean configuredManagedBean : configuredManagedBeans) {
+				this.configuredManagedBeanSet.put(configuredManagedBean.getManagedBeanName(), configuredManagedBean);
 			}
 		}
 	}
@@ -186,11 +187,11 @@ public class BeanManagerImpl extends BeanManagerCompatImpl {
 						}
 					}
 
-					ConfiguredBean configuredBean = configuredBeanSet.get(name);
+					ConfiguredManagedBean configuredManagedBean = configuredManagedBeanSet.get(name);
 
-					if (configuredBean != null) {
+					if (configuredManagedBean != null) {
 						String managedBeanClass = value.getClass().getName();
-						managedBean = managedBeanClass.equals(configuredBean.getManagedBeanClass());
+						managedBean = managedBeanClass.equals(configuredManagedBean.getManagedBeanClass());
 					}
 				}
 			}

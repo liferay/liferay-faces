@@ -13,9 +13,14 @@
  */
 package com.liferay.faces.bridge.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.liferay.faces.bridge.config.ConfiguredBean;
+import com.liferay.faces.util.config.ApplicationConfig;
+import com.liferay.faces.util.config.ConfiguredManagedBean;
+import com.liferay.faces.util.config.ConfiguredManagedBeanImpl;
+import com.liferay.faces.util.config.FacesConfig;
+import com.liferay.faces.util.event.ApplicationStartupListener;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
@@ -30,7 +35,13 @@ public class BeanManagerFactoryImpl extends BeanManagerFactory {
 		.equals(ProductConstants.MOJARRA);
 
 	// Private Data Members
-	List<ConfiguredBean> configuredBeans;
+	List<ConfiguredManagedBean> configuredManagedBeans;
+
+	public BeanManagerFactoryImpl() {
+		ApplicationConfig applicationConfig = ApplicationStartupListener.getApplicationConfig();
+		FacesConfig facesConfig = applicationConfig.getFacesConfig();
+		this.configuredManagedBeans = facesConfig.getConfiguredManagedBeans();
+	}
 
 	@Override
 	public BeanManager getBeanManager() {
@@ -38,18 +49,27 @@ public class BeanManagerFactoryImpl extends BeanManagerFactory {
 		BeanManager beanManager = null;
 
 		if (MOJARRA_DETECTED) {
-			beanManager = new BeanManagerMojarraImpl(configuredBeans);
+			beanManager = new BeanManagerMojarraImpl(configuredManagedBeans);
 		}
 		else {
-			beanManager = new BeanManagerImpl(configuredBeans);
+			beanManager = new BeanManagerImpl(configuredManagedBeans);
 		}
 
 		return beanManager;
 	}
 
 	@Override
-	public void setConfiguredBeans(List<ConfiguredBean> configuredBeans) {
-		this.configuredBeans = configuredBeans;
+	@Deprecated
+	public void setConfiguredBeans(List<com.liferay.faces.bridge.config.ConfiguredBean> configuredBeans) {
+
+		this.configuredManagedBeans = new ArrayList<ConfiguredManagedBean>();
+
+		for (com.liferay.faces.bridge.config.ConfiguredBean configuredBean : configuredBeans) {
+			ConfiguredManagedBean configuredManagedBean = new ConfiguredManagedBeanImpl(
+					configuredBean.getManagedBeanClass(), configuredBean.getManagedBeanName(),
+					configuredBean.getManagedBeanScope());
+			this.configuredManagedBeans.add(configuredManagedBean);
+		}
 	}
 
 	public BeanManagerFactory getWrapped() {

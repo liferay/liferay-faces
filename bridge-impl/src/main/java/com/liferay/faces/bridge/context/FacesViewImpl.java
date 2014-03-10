@@ -15,10 +15,7 @@ package com.liferay.faces.bridge.context;
 
 import java.util.List;
 
-import com.liferay.faces.bridge.BridgeFactoryFinder;
-import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.config.BridgeConfigFactory;
-import com.liferay.faces.bridge.config.ServletMapping;
+import com.liferay.faces.util.config.ConfiguredServletMapping;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -43,95 +40,96 @@ public class FacesViewImpl implements FacesView {
 	private String servletPath;
 	private boolean pathMapped;
 
-	public FacesViewImpl(String viewId, List<String> configuredExtensions) {
-		this(viewId, null, configuredExtensions);
+	public FacesViewImpl(String viewId, List<String> configuredExtensions,
+		List<ConfiguredServletMapping> configuredFacesServletMappings) {
+		this(viewId, null, configuredExtensions, configuredFacesServletMappings);
 	}
 
-	public FacesViewImpl(String viewId, String navigationQueryString, List<String> configuredExtensions) {
+	public FacesViewImpl(String viewId, String navigationQueryString, List<String> configuredSuffixes,
+		List<ConfiguredServletMapping> configuredFacesServletMappings) {
 		this.viewId = viewId;
 		this.navigationQueryString = navigationQueryString;
 
-		ServletMapping extensionMappedServletMapping = null;
+		if (configuredFacesServletMappings != null) {
+			ConfiguredServletMapping extensionMappedServletMapping = null;
 
-		// Determine whether or not the target viewId matches any of the path-mapped servlet-mapping entries.
-		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) BridgeFactoryFinder.getFactory(
-				BridgeConfigFactory.class);
-		BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig();
-		List<ServletMapping> facesServletMappings = bridgeConfig.getFacesServletMappings();
+			// Determine whether or not the target viewId matches any of the path-mapped servlet-mapping entries.
+			for (ConfiguredServletMapping facesServletMapping : configuredFacesServletMappings) {
 
-		for (ServletMapping facesServletMapping : facesServletMappings) {
+				if (facesServletMapping.isPathMapped()) {
 
-			if (facesServletMapping.isPathMapped()) {
-
-				logger.debug("Attempting to determine if viewId=[{0}] is path-mapped to urlPatttern=[{1}]", viewId,
-					facesServletMapping.getUrlPattern());
-
-				if (facesServletMapping.isMatch(viewId)) {
-					this.servletPath = facesServletMapping.getServletPath();
-					this.pathMapped = true;
-
-					break;
-				}
-			}
-		}
-
-		// If not path-mapped, then
-		if (!this.pathMapped) {
-
-			// Determine whether or not the target viewId matches any of the extension-mapped servlet-mapping entries.
-			for (ServletMapping facesServletMapping : facesServletMappings) {
-
-				if (facesServletMapping.isExtensionMapped()) {
-
-					if (extensionMappedServletMapping == null) {
-						extensionMappedServletMapping = facesServletMapping;
-					}
-
-					logger.debug("Attempting to determine if viewId=[{0}] is extension-mapped to urlPattern=[{1}]",
-						viewId, facesServletMapping.getUrlPattern());
+					logger.debug("Attempting to determine if viewId=[{0}] is path-mapped to urlPatttern=[{1}]", viewId,
+						facesServletMapping.getUrlPattern());
 
 					if (facesServletMapping.isMatch(viewId)) {
-						this.extension = facesServletMapping.getExtension();
-						this.extensionMapped = true;
-
-						// See: http://issues.liferay.com/browse/FACES-1224
-						if (EXTENSION_JSP.equals(this.extension)) {
-
-							// TCK TestPage159: getRequestServletPathTest
-							int pos = viewId.lastIndexOf(StringPool.PERIOD);
-
-							if (pos > 0) {
-								this.extension = facesServletMappings.get(0).getExtension();
-								this.viewId = viewId.substring(0, pos) + this.extension;
-							}
-						}
+						this.servletPath = facesServletMapping.getServletPath();
+						this.pathMapped = true;
 
 						break;
 					}
 				}
 			}
 
-			// If the target viewId did not match any of the extension-mapped servlet-mapping entries, then the
-			// developer may have specified an extension like .jsp/.jspx in the WEB-INF/portlet.xml descriptor.
-			if (!this.extensionMapped) {
+			// If not path-mapped, then
+			if (!this.pathMapped) {
 
-				// For each of the valid extensions (.jsp, .jspx, etc.) that the developer may have specified:
-				for (String extension : configuredExtensions) {
+				// Determine whether or not the target viewId matches any of the extension-mapped servlet-mapping
+				// entries.
+				for (ConfiguredServletMapping facesServletMapping : configuredFacesServletMappings) {
 
-					if (viewId.contains(extension)) {
-						this.extension = extension;
-						this.extensionMapped = true;
+					if (facesServletMapping.isExtensionMapped()) {
 
-						logger.debug("Associated viewId=[{0}] as extension-mapped to urlPattern=[*.{1}]", viewId,
-							extension);
+						if (extensionMappedServletMapping == null) {
+							extensionMappedServletMapping = facesServletMapping;
+						}
 
-						/* TODO: At one point in development, the line below was in place to replace ".jsp" with
-						 * ".faces" but was potentially causing navigation-rules to fail because the to-view-id might
-						 * not have been matching. Need to re-enable the line below and then retest with the TCK.
-						 */
-						// viewId = viewId.replace(extension, this.extension);
+						logger.debug("Attempting to determine if viewId=[{0}] is extension-mapped to urlPattern=[{1}]",
+							viewId, facesServletMapping.getUrlPattern());
 
-						break;
+						if (facesServletMapping.isMatch(viewId)) {
+							this.extension = facesServletMapping.getExtension();
+							this.extensionMapped = true;
+
+							// See: http://issues.liferay.com/browse/FACES-1224
+							if (EXTENSION_JSP.equals(this.extension)) {
+
+								// TCK TestPage159: getRequestServletPathTest
+								int pos = viewId.lastIndexOf(StringPool.PERIOD);
+
+								if (pos > 0) {
+									this.extension = configuredFacesServletMappings.get(0).getExtension();
+									this.viewId = viewId.substring(0, pos) + this.extension;
+								}
+							}
+
+							break;
+						}
+					}
+				}
+
+				// If the target viewId did not match any of the extension-mapped servlet-mapping entries, then the
+				// developer may have specified an extension like .jsp/.jspx in the WEB-INF/portlet.xml descriptor.
+				if (!this.extensionMapped) {
+
+					// For each of the valid extensions (.jsp, .jspx, etc.) that the developer may have specified:
+					for (String configuredSuffix : configuredSuffixes) {
+
+						if (viewId.contains(configuredSuffix)) {
+							this.extension = configuredSuffix;
+							this.extensionMapped = true;
+
+							logger.debug("Associated viewId=[{0}] as extension-mapped to urlPattern=[*.{1}]", viewId,
+								configuredSuffix);
+
+							/* TODO: At one point in development, the line below was in place to replace ".jsp" with
+							 * ".faces" but was potentially causing navigation-rules to fail because the to-view-id
+							 * might not have been matching. Need to re-enable the line below and then retest with the
+							 * TCK.
+							 */
+							// viewId = viewId.replace(extension, this.extension);
+
+							break;
+						}
 					}
 				}
 			}

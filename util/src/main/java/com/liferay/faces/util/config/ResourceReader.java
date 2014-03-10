@@ -11,16 +11,15 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.config;
+
+import java.io.InputStream;
+
 
 /**
  * @author  Neil Griffin
  */
-public abstract class SAXHandlerFacesConfigPre extends SAXHandlerBaseImpl {
+public interface ResourceReader {
 
-	public SAXHandlerFacesConfigPre(boolean resolveEntities) {
-		super(resolveEntities);
-	}
-
-	public abstract String getFacesConfigName();
+	public InputStream getResourceAsStream(String path);
 }
