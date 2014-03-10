@@ -11,17 +11,17 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.bridge.renderkit.html_basic;
+
+import com.liferay.faces.util.lang.NameValuePair;
+
 
 /**
- * This class provides a compatibility layer that isolates differences for JSF 2.0.
- *
  * @author  Neil Griffin
  */
-public abstract class SAXHandlerFacesConfigPostImpl_2_0 extends SAXHandlerFacesConfigPostImpl_1_2 {
+public class HeadResourceAttribute extends NameValuePair<String, String> {
 
-	public SAXHandlerFacesConfigPostImpl_2_0(boolean resolveEntities,
-		BridgeConfigAttributeMap bridgeConfigAttributeMap) {
-		super(resolveEntities, bridgeConfigAttributeMap);
+	public HeadResourceAttribute(String name, String value) {
+		super(name, value);
 	}
 }

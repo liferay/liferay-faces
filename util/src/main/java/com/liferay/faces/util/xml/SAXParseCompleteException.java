@@ -11,19 +11,16 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.xml;
 
-import java.net.URL;
-
-import org.xml.sax.helpers.DefaultHandler;
+import org.xml.sax.SAXException;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class SAXHandler extends DefaultHandler {
+public class SAXParseCompleteException extends SAXException {
 
-	public abstract void logMissingElementErrors();
-
-	public abstract void setURL(URL url);
+	// serialVersionUID
+	private static final long serialVersionUID = 1170538769536627765L;
 }

@@ -22,6 +22,7 @@ import com.liferay.faces.bridge.config.ConfiguredBean;
 /**
  * @author  Neil Griffin
  */
+@SuppressWarnings("deprecation")
 public abstract class BeanManagerFactory implements FactoryWrapper<BeanManagerFactory> {
 
 	public abstract BeanManager getBeanManager();
@@ -29,6 +30,9 @@ public abstract class BeanManagerFactory implements FactoryWrapper<BeanManagerFa
 	/**
 	 * This method informs the factory of the managed-bean entries that are discovered in META-INF/faces-config.xml
 	 * WEB-INF/faces-config.xml descriptors. It is designed to be called during startup.
+	 *
+	 * @deprecated  This method has no replacement and will be removed in future versions.
 	 */
+	@Deprecated
 	public abstract void setConfiguredBeans(List<ConfiguredBean> configuredBeans);
 }

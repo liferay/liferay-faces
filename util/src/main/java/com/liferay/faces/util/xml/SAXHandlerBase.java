@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.xml;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -19,6 +19,7 @@ import java.net.URL;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -27,17 +28,19 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class SAXHandlerBaseImpl extends SAXHandler {
+public abstract class SAXHandlerBase extends DefaultHandler {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(SAXHandlerBaseImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(SAXHandlerBase.class);
+
+	// Protected Data Members
+	protected StringBuilder content;
 
 	// Private Data Members
-	protected StringBuilder content;
-	private boolean resolveEntities = false;
+	private boolean resolveEntities;
 	private URL url;
 
-	public SAXHandlerBaseImpl(boolean resolveEntities) {
+	public SAXHandlerBase(boolean resolveEntities) {
 		super();
 		this.resolveEntities = resolveEntities;
 	}
@@ -48,11 +51,6 @@ public class SAXHandlerBaseImpl extends SAXHandler {
 		if ((content != null) && (ch != null) && (length > 0)) {
 			content.append(ch, start, length);
 		}
-	}
-
-	@Override
-	public void logMissingElementErrors() {
-		// no-op for base implementation
 	}
 
 	@Override
@@ -83,10 +81,5 @@ public class SAXHandlerBaseImpl extends SAXHandler {
 		}
 
 		return inputSource;
-	}
-
-	@Override
-	public void setURL(URL url) {
-		this.url = url;
 	}
 }

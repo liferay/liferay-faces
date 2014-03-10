@@ -16,8 +16,6 @@ package com.liferay.faces.bridge.scope;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.bridge.util.NameValuePair;
-
 
 /**
  * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
@@ -40,13 +38,6 @@ public abstract class BridgeRequestScopeCompatImpl extends BridgeRequestScopeBas
 
 	protected void saveJSF2FacesContextAttributes(FacesContext facesContext) {
 		// no-op for JSF 1.x
-	}
-
-	protected class FacesContextAttribute extends NameValuePair<Object, Object> {
-
-		public FacesContextAttribute(Object name, Object value) {
-			super(name, value);
-		}
 	}
 
 }

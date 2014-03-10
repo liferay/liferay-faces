@@ -105,5 +105,4 @@ public abstract class BridgeURLWrapper implements BridgeURL {
 	}
 
 	public abstract BridgeURL getWrapped();
-
 }

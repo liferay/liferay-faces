@@ -11,16 +11,16 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.factory;
 
-import org.xml.sax.SAXException;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
+ * This is a marker interface that allows for decoratable extension factories.
+ *
  * @author  Neil Griffin
  */
-public class SAXParseCompleteException extends SAXException {
+public interface FactoryExtension<T> extends Wrapper<T> {
 
-	// serialVersionUID
-	private static final long serialVersionUID = 1170538769536627765L;
 }

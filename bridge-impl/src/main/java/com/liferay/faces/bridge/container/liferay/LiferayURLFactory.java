@@ -22,6 +22,7 @@ import com.liferay.faces.bridge.context.BridgeContext;
 /**
  * @author  Neil Griffin
  */
+@SuppressWarnings("deprecation")
 public abstract class LiferayURLFactory implements FactoryWrapper<LiferayURLFactory> {
 
 	public abstract LiferayActionURL getLiferayActionURL(BridgeContext bridgeContext, MimeResponse mimeResponse,

@@ -11,29 +11,20 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.config;
+package com.liferay.faces.util.config;
 
-import java.util.HashMap;
-
-import com.liferay.faces.util.product.ProductMap;
+import java.io.IOException;
+import java.io.InputStream;
 
 
 /**
  * @author  Neil Griffin
  */
-public class BridgeConfigAttributeMapImpl extends HashMap<String, Object> implements BridgeConfigAttributeMap {
+public interface WebConfigParser {
 
-	// serialVersionUID
-	private static final long serialVersionUID = 8763346476317251569L;
-
-	@Override
-	public Object get(Object key) {
-		Object value = super.get(key);
-
-		if (value == null) {
-			value = ProductMap.getInstance().get(key);
-		}
-
-		return value;
-	}
+	/**
+	 * Parses the specified InputStream and returns a new WebConfig that contains parsed data that has been appended to
+	 * the specified WebConfig. Closing the specified InputStream is the responsibility of the caller. 
+	 */
+	public WebConfig parse(InputStream inputStream, WebConfig webConfig) throws IOException;
 }

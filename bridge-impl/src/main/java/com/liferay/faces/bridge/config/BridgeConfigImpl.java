@@ -13,31 +13,20 @@
  */
 package com.liferay.faces.bridge.config;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.faces.application.ViewHandler;
-import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
-import org.xml.sax.helpers.DefaultHandler;
-
-import com.liferay.faces.bridge.bean.BeanManagerFactory;
-import com.liferay.faces.util.helper.BooleanHelper;
-import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.config.ApplicationConfig;
+import com.liferay.faces.util.config.ConfiguredElement;
+import com.liferay.faces.util.config.ConfiguredServletMapping;
+import com.liferay.faces.util.config.FacesConfig;
+import com.liferay.faces.util.event.ApplicationStartupListener;
 
 
 /**
@@ -46,314 +35,152 @@ import com.liferay.faces.util.logging.LoggerFactory;
 public class BridgeConfigImpl implements BridgeConfig {
 
 	// Private Constants
+	private static final String EXCLUDED_ATTRIBUTE = "excluded-attribute";
 	private static final String FACES_VIEW_ID_RENDER = "_facesViewIdRender";
 	private static final String FACES_VIEW_ID_RESOURCE = "_facesViewIdResource";
-	private static final String FACES_CONFIG_META_INF_PATH = "META-INF/faces-config.xml";
-	private static final String FACES_CONFIG_WEB_INF_PATH = "/WEB-INF/faces-config.xml";
-	private static final String LIFERAY_FACES_BRIDGE = "LiferayFacesBridge";
-	private static final String MOJARRA_CONFIG_PATH = "com/sun/faces/jsf-ri-runtime.xml";
-	private static final String WEB_XML_PATH = "/WEB-INF/web.xml";
-	private static final String WEB_XML_LIFERAY_PATH = "/WEB-INF/liferay-web.xml";
-	private static final String WEB_FRAGMENT_META_INF_PATH = "META-INF/web-fragment.xml";
-
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(BridgeConfigImpl.class);
+	private static final String MODEL_EL = "model-el";
+	private static final String PARAMETER = "parameter";
+	private static final String RENDER_RESPONSE_WRAPPER_CLASS = "render-response-wrapper-class";
+	private static final String RESOURCE_RESPONSE_WRAPPER_CLASS = "resource-response-wrapper-class";
 
 	// Private Data Members
-	private BridgeConfigAttributeMap bridgeConfigAttributeMap = new BridgeConfigAttributeMapImpl();
-	private List<ConfiguredBean> configuredBeans = new ArrayList<ConfiguredBean>();
-	private List<ConfiguredSystemEventListener> configuredSystemEventListeners =
-		new ArrayList<ConfiguredSystemEventListener>();
+	private Map<String, Object> bridgeConfigAttributeMap;
+	private List<ConfiguredServletMapping> configuredFacesServletMappings;
+	@SuppressWarnings("deprecation")
+	private List<ConfiguredSystemEventListener> configuredSystemEventListeners;
 	private List<String> defaultSuffixes;
-	private Set<String> excludedBridgeRequestAttributes = new HashSet<String>();
+	private Set<String> excludedRequestAttributes;
+	@SuppressWarnings("deprecation")
 	private List<ServletMapping> facesServletMappings;
 	private PortletContext portletContext;
-	private Map<String, String[]> publicParameterMappings = new HashMap<String, String[]>();
+	private Map<String, String[]> publicParameterMappings;
 	private String viewIdRenderParameterName;
 	private String viewIdResourceParameterName;
 	private String writeBehindRenderResponseWrapper;
 	private String writeBehindResourceResponseWrapper;
 
-	public BridgeConfigImpl(PortletConfig portletConfig) {
+	@SuppressWarnings("deprecation")
+	public BridgeConfigImpl(PortletContext portletContext) {
 
-		this.portletContext = portletConfig.getPortletContext();
+		// portletContext
+		this.portletContext = portletContext;
 
-		try {
+		// bridgeConfigAttributeMap
+		this.bridgeConfigAttributeMap = new BridgeConfigAttributeMap();
 
-			// Obtain a SAX Parser Factory.
-			SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
-			boolean validating = false;
-			saxParserFactory.setValidating(validating);
-			saxParserFactory.setNamespaceAware(true);
+		// configuredFacesServletMappings
+		ApplicationConfig applicationConfig = ApplicationStartupListener.getApplicationConfig();
+		FacesConfig facesConfig = applicationConfig.getFacesConfig();
+		this.configuredFacesServletMappings = facesConfig.getConfiguredFacesServletMappings();
 
-			// Obtain a SAX Parser from the factory.
-			SAXParser saxParser = saxParserFactory.newSAXParser();
+		// configuredSystemEventListeners
+		List<com.liferay.faces.util.config.ConfiguredSystemEventListener> listeners =
+			facesConfig.getConfiguredSystemEventListeners();
+		this.configuredSystemEventListeners = new ArrayList<ConfiguredSystemEventListener>();
 
-			// Determine whether or not entities should be resolved. Due to slow performance in the
-			// SAXEventHandler.resolveEntity(String, String) method it's best to set the default value of this to false.
-			boolean defaultValue = false;
-			String initParam = portletContext.getInitParameter(
-					BridgeConfigConstants.PARAM_REQUIRED_TO_RESOLVE_XML_ENTITIES1);
+		for (com.liferay.faces.util.config.ConfiguredSystemEventListener listener : listeners) {
+			ConfiguredSystemEventListener configuredSystemEventListener = new ConfiguredSystemEventListenerImpl(
+					listener);
+			this.configuredSystemEventListeners.add(configuredSystemEventListener);
+		}
 
-			if (initParam == null) {
+		// defaultSuffixes
+		this.defaultSuffixes = facesConfig.getConfiguredSuffixes();
 
-				// Backward compatibility
-				initParam = portletContext.getInitParameter(
-						BridgeConfigConstants.PARAM_REQUIRED_TO_RESOLVE_XML_ENTITIES2);
+		// excludedRequestAttributes
+		this.excludedRequestAttributes = new HashSet<String>();
+
+		List<ConfiguredElement> configuredApplicationExtensions = facesConfig.getConfiguredApplicationExtensions();
+
+		for (ConfiguredElement configuredElement : configuredApplicationExtensions) {
+			String configuredElementName = configuredElement.getName();
+
+			if (EXCLUDED_ATTRIBUTE.equals(configuredElementName)) {
+				String excludedAttributeName = configuredElement.getValue();
+				this.excludedRequestAttributes.add(excludedAttributeName);
 			}
+		}
 
-			boolean resolveEntities = BooleanHelper.toBoolean(initParam, defaultValue);
+		// facesServletMappings
+		this.facesServletMappings = new ArrayList<ServletMapping>();
 
-			SAXHandler mojarraConfigHandler = new SAXHandlerMojarraConfigImpl(resolveEntities,
-					configuredSystemEventListeners);
+		List<ConfiguredServletMapping> configuredFacesServletMappings = getConfiguredFacesServletMappings();
 
-			// First, parse the Mojarra configuration found in the classpath.
-			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-			Enumeration<URL> mojarraConfigURLs = classLoader.getResources(MOJARRA_CONFIG_PATH);
+		for (ConfiguredServletMapping configuredFacesServletMapping : configuredFacesServletMappings) {
+			ServletMapping facesServletMapping = new ServletMappingImpl(configuredFacesServletMapping);
+			this.facesServletMappings.add(facesServletMapping);
+		}
 
-			if (mojarraConfigURLs != null) {
+		// publicParameterMappings
+		this.publicParameterMappings = new HashMap<String, String[]>();
 
-				boolean processedMojarraConfig = false;
+		String parameter = null;
+		String modelEL = null;
 
-				while (mojarraConfigURLs.hasMoreElements()) {
+		for (ConfiguredElement configuredElement : configuredApplicationExtensions) {
+			String configuredElementName = configuredElement.getName();
 
-					URL mojarraConfigURL = mojarraConfigURLs.nextElement();
+			if (PARAMETER.equals(configuredElementName)) {
+				parameter = configuredElement.getValue();
+			}
+			else if (MODEL_EL.equals(configuredElementName)) {
 
-					if (processedMojarraConfig) {
-						logger.debug("Skipping Mojarra config: [{0}]", mojarraConfigURL);
-					}
-					else {
+				modelEL = configuredElement.getValue();
 
-						logger.debug("Processing Mojarra config: [{0}]", mojarraConfigURL);
-						mojarraConfigHandler.setURL(mojarraConfigURL);
+				if ((parameter != null) && (modelEL != null)) {
 
-						InputStream inputStream = mojarraConfigURL.openStream();
+					if (modelEL.length() > 0) {
+						String[] newValue = new String[] { modelEL };
+						String[] existingValue = publicParameterMappings.get(parameter);
 
-						try {
-							saxParser.parse(inputStream, mojarraConfigHandler);
+						if (existingValue != null) {
+							int total = existingValue.length + 1;
+							newValue = new String[total];
+
+							for (int i = 0; i < existingValue.length; i++) {
+								newValue[i] = existingValue[i];
+							}
+
+							newValue[total - 1] = modelEL;
 						}
-						catch (SAXParseCompleteException e) {
-							// ignore
-						}
-						catch (Exception e) {
-							logger.error(e);
-						}
 
-						try {
-							inputStream.close();
-						}
-						catch (IOException e) {
-							logger.error(e);
-						}
-
-						processedMojarraConfig = true;
+						this.publicParameterMappings.put(parameter, newValue);
 					}
-				}
-			}
-
-			mojarraConfigHandler.logMissingElementErrors();
-
-			// Define the SAX 2 callback faces-config event handlers for the SAX Parser.
-			SAXHandlerFacesConfigPre facesConfigPreHandler = new SAXHandlerFacesConfigPreImpl(resolveEntities);
-			SAXHandlerFacesConfigPost facesConfigPostHandler = new SAXHandlerFacesConfigPostImpl(resolveEntities,
-					bridgeConfigAttributeMap, configuredBeans, excludedBridgeRequestAttributes,
-					publicParameterMappings);
-
-			// First, parse all of the META-INF/faces-config.xml files found in the classpath.
-			Enumeration<URL> facesConfigURLs = classLoader.getResources(FACES_CONFIG_META_INF_PATH);
-
-			List<FacesConfig> facesConfigList = new ArrayList<FacesConfig>();
-
-			if (facesConfigURLs != null) {
-
-				// Build up a semi-sorted list of faces-config.xml descriptor files, ensuring that the bridge's
-				// META-INF/faces-config.xml descriptor is ordered first. (Note that the JSF 2.0 <ordering> element is
-				// not yet supported.)
-				while (facesConfigURLs.hasMoreElements()) {
-
-					URL facesConfigURL = facesConfigURLs.nextElement();
-
-					logger.debug("Pre-processing faces-config: [{0}]", facesConfigURL);
-					facesConfigPreHandler.setURL(facesConfigURL);
-
-					InputStream inputStream = facesConfigURL.openStream();
-
-					try {
-						saxParser.parse(inputStream, facesConfigPreHandler);
-					}
-					catch (SAXParseCompleteException e) {
-						// ignore
-					}
-					catch (Exception e) {
-						logger.error(e);
-					}
-
-					// If the name is not set, then the <name> element was omitted. In JSF 2.x the <name> element is
-					// optional, and it JSF 1.x <name> element is not permitted by the XML Schema. Regardless, use the
-					// URL as the name in order to uniquely identify the configuration.
-					String facesConfigName = facesConfigPreHandler.getFacesConfigName();
-
-					if (facesConfigName == null) {
-
-						// Example #1 (JRebel ClassLoader URL):
-						// file:/Projects/liferay-faces/bridge-impl/target/classes/META-INF/faces-config.xml
-						// Example #2 (Typical ClassLoader URL):
-						// jar:file:/Servers/liferay-portal/tomcat/webapps/WEB-INF/lib/liferay-faces-bridge-impl.jar!/META-INF/faces-config.xml
-						facesConfigName = facesConfigURL.toString();
-					}
-
-					FacesConfig curFacesConfig = new FacesConfigImpl(facesConfigName, facesConfigURL);
-
-					if (LIFERAY_FACES_BRIDGE.equals(facesConfigName) ||
-							((facesConfigName.indexOf("liferay-faces") >= 0) &&
-								(facesConfigName.indexOf("bridge-impl") > 0))) {
-						facesConfigList.add(0, curFacesConfig);
-					}
-					else {
-						facesConfigList.add(curFacesConfig);
-					}
-
-					facesConfigName = null;
-
-					try {
-						inputStream.close();
-					}
-					catch (IOException e) {
-						logger.error(e);
-					}
-				}
-
-				for (FacesConfig facesConfig : facesConfigList) {
-
-					URL facesConfigURL = facesConfig.getURL();
-					logger.debug("Post-processing faces-config: [{0}]", facesConfigURL);
-					facesConfigPostHandler.setURL(facesConfigURL);
-
-					InputStream inputStream = facesConfigURL.openStream();
-
-					try {
-						saxParser.parse(inputStream, facesConfigPostHandler);
-					}
-					catch (Exception e) {
-						logger.error(e);
-					}
-
-					try {
-						inputStream.close();
-					}
-					catch (Exception e) {
-						logger.error(e);
-					}
-
-					try {
-						saxParser.reset();
-					}
-					catch (Exception e) {
-						logger.error(e);
-					}
-				}
-			}
-
-			facesConfigPreHandler.logMissingElementErrors();
-			facesConfigPostHandler.logMissingElementErrors();
-			writeBehindRenderResponseWrapper = facesConfigPostHandler.getWriteBehindRenderResponseWrapper();
-			writeBehindResourceResponseWrapper = facesConfigPostHandler.getWriteBehindResourceResponseWrapper();
-
-			// Second, parse the WEB-INF/faces-config.xml descriptor. Any entries made here will take
-			// precedence over those found previously.
-			InputStream inputStream = portletContext.getResourceAsStream(FACES_CONFIG_WEB_INF_PATH);
-
-			if (inputStream != null) {
-				logger.debug("Processing faces-config: [{0}]", FACES_CONFIG_WEB_INF_PATH);
-				saxParser.parse(inputStream, facesConfigPostHandler);
-				inputStream.close();
-			}
-
-			// Initialize the bean-manager-factory with the list of configured beans that wre discovered.
-			BeanManagerFactory beanManagerFactory = (BeanManagerFactory) bridgeConfigAttributeMap.get(
-					BeanManagerFactory.class.getName());
-			beanManagerFactory.setConfiguredBeans(configuredBeans);
-
-			// Parse the Servlet 3.0 META-INF/web-fragment.xml descriptor files found in the classpath.
-			facesServletMappings = new ArrayList<ServletMapping>();
-
-			Enumeration<URL> webFragmentURLs = classLoader.getResources(WEB_FRAGMENT_META_INF_PATH);
-
-			if (webFragmentURLs != null) {
-
-				while (webFragmentURLs.hasMoreElements()) {
-					URL webFragmentURL = webFragmentURLs.nextElement();
-					inputStream = webFragmentURL.openStream();
-
-					DefaultHandler webConfigHandler = new SAXHandlerWebConfigImpl(resolveEntities,
-							facesServletMappings);
-
-					try {
-						saxParser.parse(inputStream, webConfigHandler);
-						inputStream.close();
-						saxParser.reset();
-					}
-					catch (Exception e) {
-						logger.error(e.getMessage());
-					}
-				}
-			}
-
-			// Parse the WEB-INF/web.xml descriptor.
-			inputStream = portletContext.getResourceAsStream(WEB_XML_PATH);
-
-			if (inputStream != null) {
-				logger.debug("Processing web-app: [{0}]", WEB_XML_PATH);
-
-				DefaultHandler webConfigHandler = new SAXHandlerWebConfigImpl(resolveEntities, facesServletMappings);
-				saxParser.parse(inputStream, webConfigHandler);
-			}
-
-			// Parse the WEB-INF/liferay-web.xml descriptor.
-			inputStream = portletContext.getResourceAsStream(WEB_XML_LIFERAY_PATH);
-
-			if (inputStream != null) {
-				logger.debug("Processing web-app: [{0}]", WEB_XML_LIFERAY_PATH);
-
-				DefaultHandler webConfigHandler = new SAXHandlerWebConfigImpl(resolveEntities, facesServletMappings);
-				saxParser.parse(inputStream, webConfigHandler);
-			}
-
-			// Get the default suffixes (configured extensions)
-			String defaultSuffixParam = portletConfig.getInitParameter(ViewHandler.DEFAULT_SUFFIX_PARAM_NAME);
-
-			if (defaultSuffixParam == null) {
-				defaultSuffixParam = ViewHandler.DEFAULT_SUFFIX;
-			}
-
-			defaultSuffixes = Arrays.asList(defaultSuffixParam.split(StringPool.SPACE));
-
-			// If they don't exist explicitly in web.xml, then setup implicit servlet-mapping entries to the default
-			// suffixes.
-			for (String defaultSuffix : defaultSuffixes) {
-
-				boolean found = false;
-
-				for (ServletMapping explicitFacesServletMapping : facesServletMappings) {
-
-					if (explicitFacesServletMapping.isExtensionMapped() &&
-							explicitFacesServletMapping.getExtension().equals(defaultSuffix)) {
-						found = true;
-
-						break;
-					}
-				}
-
-				if (!found) {
-					String urlPattern = StringPool.STAR + defaultSuffix;
-					ServletMapping implicitFacesServletMapping = new ServletMappingImpl(urlPattern);
-					facesServletMappings.add(implicitFacesServletMapping);
-					logger.debug("Added implicit extension-mapped servlet-mapping for urlPattern=[{0}]", urlPattern);
 				}
 			}
 		}
-		catch (Exception e) {
-			logger.error(e.getMessage(), e);
+
+		// writeBehindRenderResponseWrapper
+		for (ConfiguredElement configuredElement : configuredApplicationExtensions) {
+			String configuredElementName = configuredElement.getName();
+
+			if (RENDER_RESPONSE_WRAPPER_CLASS.equals(configuredElementName)) {
+				this.writeBehindRenderResponseWrapper = configuredElement.getValue();
+			}
+		}
+
+		// writeBehindResourceResponseWrapper
+		for (ConfiguredElement configuredElement : configuredApplicationExtensions) {
+			String configuredElementName = configuredElement.getName();
+
+			if (RESOURCE_RESPONSE_WRAPPER_CLASS.equals(configuredElementName)) {
+				this.writeBehindResourceResponseWrapper = configuredElement.getValue();
+			}
+		}
+
+		// viewIdResourceParameterName
+		this.viewIdResourceParameterName = portletContext.getInitParameter(
+				BridgeConfigConstants.PARAM_VIEW_ID_RESOURCE);
+
+		if (this.viewIdResourceParameterName == null) {
+			this.viewIdResourceParameterName = FACES_VIEW_ID_RESOURCE;
+		}
+
+		// viewIdRenderParameterName
+		this.viewIdRenderParameterName = portletContext.getInitParameter(BridgeConfigConstants.PARAM_VIEW_ID_RENDER);
+
+		if (this.viewIdRenderParameterName == null) {
+			this.viewIdRenderParameterName = FACES_VIEW_ID_RENDER;
 		}
 	}
 
@@ -361,10 +188,20 @@ public class BridgeConfigImpl implements BridgeConfig {
 		return bridgeConfigAttributeMap;
 	}
 
+	@Deprecated
 	public List<String> getConfiguredExtensions() {
+		return getConfiguredSuffixes();
+	}
+
+	public List<ConfiguredServletMapping> getConfiguredFacesServletMappings() {
+		return configuredFacesServletMappings;
+	}
+
+	public List<String> getConfiguredSuffixes() {
 		return defaultSuffixes;
 	}
 
+	@Deprecated
 	public List<ConfiguredSystemEventListener> getConfiguredSystemEventListeners() {
 		return configuredSystemEventListeners;
 	}
@@ -374,9 +211,10 @@ public class BridgeConfigImpl implements BridgeConfig {
 	}
 
 	public Set<String> getExcludedRequestAttributes() {
-		return excludedBridgeRequestAttributes;
+		return excludedRequestAttributes;
 	}
 
+	@Deprecated
 	public List<ServletMapping> getFacesServletMappings() {
 		return facesServletMappings;
 	}
@@ -386,30 +224,10 @@ public class BridgeConfigImpl implements BridgeConfig {
 	}
 
 	public String getViewIdRenderParameterName() {
-
-		if (viewIdRenderParameterName == null) {
-
-			viewIdRenderParameterName = portletContext.getInitParameter(BridgeConfigConstants.PARAM_VIEW_ID_RENDER);
-
-			if (viewIdRenderParameterName == null) {
-				viewIdRenderParameterName = FACES_VIEW_ID_RENDER;
-			}
-		}
-
 		return viewIdRenderParameterName;
 	}
 
 	public String getViewIdResourceParameterName() {
-
-		if (viewIdResourceParameterName == null) {
-
-			viewIdResourceParameterName = portletContext.getInitParameter(BridgeConfigConstants.PARAM_VIEW_ID_RESOURCE);
-
-			if (viewIdResourceParameterName == null) {
-				viewIdResourceParameterName = FACES_VIEW_ID_RESOURCE;
-			}
-		}
-
 		return viewIdResourceParameterName;
 	}
 
