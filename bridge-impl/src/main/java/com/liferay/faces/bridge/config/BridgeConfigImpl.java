@@ -23,10 +23,10 @@ import java.util.Set;
 import javax.portlet.PortletContext;
 
 import com.liferay.faces.util.config.ApplicationConfig;
+import com.liferay.faces.util.config.ApplicationConfigUtil;
 import com.liferay.faces.util.config.ConfiguredElement;
 import com.liferay.faces.util.config.ConfiguredServletMapping;
 import com.liferay.faces.util.config.FacesConfig;
-import com.liferay.faces.util.event.ApplicationStartupListener;
 
 
 /**
@@ -69,7 +69,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 		this.bridgeConfigAttributeMap = new BridgeConfigAttributeMap();
 
 		// configuredFacesServletMappings
-		ApplicationConfig applicationConfig = ApplicationStartupListener.getApplicationConfig();
+		ApplicationConfig applicationConfig = ApplicationConfigUtil.getApplicationConfig();
 		FacesConfig facesConfig = applicationConfig.getFacesConfig();
 		this.configuredFacesServletMappings = facesConfig.getConfiguredFacesServletMappings();
 
