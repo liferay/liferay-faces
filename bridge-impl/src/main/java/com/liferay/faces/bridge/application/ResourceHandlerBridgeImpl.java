@@ -17,22 +17,18 @@ import javax.faces.application.Resource;
 import javax.faces.application.ResourceHandler;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.portlet.PortletConfig;
 
-import com.liferay.faces.bridge.config.BridgeConfigConstants;
+import com.liferay.faces.bridge.config.PortletConfigParam;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.application.ResourceHandlerWrapperBase;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
  * @author  Neil Griffin
  */
 public class ResourceHandlerBridgeImpl extends ResourceHandlerWrapperBase {
-
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(ResourceHandlerBridgeImpl.class);
 
 	// Private Data Members
 	private Integer bufferSize;
@@ -86,32 +82,9 @@ public class ResourceHandlerBridgeImpl extends ResourceHandlerWrapperBase {
 
 		if (bufferSize == null) {
 
-			bufferSize = DEFAULT_BUFFER_SIZE;
-
-			String constantName = BridgeConfigConstants.PARAM_RESOURCE_BUFFER_SIZE1;
-			ExternalContext externalContext = facesContext.getExternalContext();
-			String sizeAsString = externalContext.getInitParameter(constantName);
-
-			if (sizeAsString == null) {
-
-				// Backward compatibility
-				constantName = BridgeConfigConstants.PARAM_RESOURCE_BUFFER_SIZE2;
-				sizeAsString = externalContext.getInitParameter(constantName);
-			}
-
-			if (sizeAsString != null) {
-
-				try {
-					bufferSize = Integer.parseInt(sizeAsString);
-					logger.debug("Found portlet.xml init-param name=[{0}] value=[{1}]", constantName, bufferSize);
-				}
-				catch (NumberFormatException e) {
-					logger.error("Invalid value=[{0}] for portlet.xml init-param {1}", sizeAsString, constantName);
-				}
-			}
-			else {
-				logger.debug("Returning default portletbufferSize=[{0}]", bufferSize);
-			}
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			PortletConfig portletConfig = bridgeContext.getPortletConfig();
+			bufferSize = PortletConfigParam.ResourceBufferSize.getIntegerValue(portletConfig);
 		}
 
 		return bufferSize;
