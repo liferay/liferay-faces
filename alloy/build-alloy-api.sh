@@ -24,6 +24,13 @@
 # meant to be used to get alloyUI docs for versions 2.0.0 and beyond. It will
 # not work for versions before 2.0.0.
 #
+# Note: To run this script, you must have npm installed. You can download npm
+# from: http://nodejs.org/download/. Also, before running this script, you will
+# need to run the following command:
+#
+# sudo npm install -g grunt-cli shifter yogi yuidocjs phantomjs grover istanbul
+#
+#
 ################################################################################
 #
 # Author: Kyle Stiemann 
@@ -51,18 +58,6 @@ if [ $# -ne 0 ] ; then
 	ALLOY_UI_VERSION=$1
 fi
 
-# Read Password
-echo -n Password:
-read -s PASSWORD 
-echo
-
-# Check if the Password is correct
-if echo $PASSWORD | sudo -S echo "correct" 2>&1 | grep -q "Sorry" 
-then
-	echo "Incorrect password, exiting."
-	exit 1
-fi
-
 if [ ! -d ".alloyui" ] ; then
 	mkdir .alloyui
 	mkdir .alloyui/alloy-build
@@ -79,14 +74,13 @@ yes | unzip $ALLOY_UI_VERSION.zip -d alloy-build/
 echo "Done unzipping $ALLOY_UI_VERSION.zip."
 echo "Initializing dependencies for alloyUI $ALLOY_UI_VERSION..."
 cd alloy-build/alloy-ui-$ALLOY_UI_VERSION/
-echo $PASSWORD | sudo -S npm install -g grunt-cli shifter yogi yuidocjs phantomjs grover istanbul
 npm install
 grunt init
 echo "Done initializing dependencies for alloyUI $ALLOY_UI_VERSION."
-echo "Building Docs for alloyUI $ALLOY_UI_VERSION..."
+echo "Building docs for alloyUI $ALLOY_UI_VERSION..."
 if [ "$ALLOY_UI_VERSION" = "2.0.0" ] ; then
 	grunt api-build
 else
 	grunt api
 fi
-echo "Done building Docs for alloyUI $ALLOY_UI_VERSION."
+echo "Done building docs for alloyUI $ALLOY_UI_VERSION."
