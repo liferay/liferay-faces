@@ -125,7 +125,7 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 
 		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) FactoryExtensionFinder.getFactory(
 				BridgeConfigFactory.class);
-		BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig(portletContext);
+		BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig(portletConfig);
 		this.excludedAttributeNames = new ArrayList<String>();
 
 		// Get the list of excluded BridgeRequestScope attributes from the faces-config.xml descriptors.

@@ -44,7 +44,7 @@ import javax.portlet.faces.GenericFacesPortlet;
 
 import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.config.BridgeConfigConstants;
+import com.liferay.faces.bridge.config.PortletConfigParam;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.map.RequestHeaderMap;
 import com.liferay.faces.bridge.context.map.RequestHeaderValuesMap;
@@ -576,19 +576,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	public boolean isBridgeRequestScopePreserved() {
 
 		if (bridgeRequestScopePreserved == null) {
-
-			// NOTE: The defaultValue of false deviates from the proposed Spec which has a default of true.
-			// See: http://issues.liferay.com/browse/FACES-219
-			boolean defaultValue = false;
-			String initParam = getInitParameter(BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED1);
-
-			if (initParam == null) {
-
-				// Backwards compatibility
-				initParam = getInitParameter(BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED2);
-			}
-
-			bridgeRequestScopePreserved = BooleanHelper.toBoolean(initParam, defaultValue);
+			bridgeRequestScopePreserved = PortletConfigParam.BridgeRequestScopePreserved.getBooleanValue(portletConfig);
 		}
 
 		return bridgeRequestScopePreserved;
@@ -1129,21 +1117,11 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 		if (responseNamespace == null) {
 
-			// If the namespace should be optimized (minimized), then perform the optimization.
-			String optimizePortletNamespaceInitParam = getInitParameter(
-					BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE1);
-
-			if (optimizePortletNamespaceInitParam == null) {
-
-				// Backward compatibility
-				optimizePortletNamespaceInitParam = getInitParameter(
-						BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE2);
-			}
+			boolean optimizePortletNamespace = PortletConfigParam.OptimizePortletNamespace.getBooleanValue(
+					portletConfig);
 
 			// Initialize the response namespace.
 			responseNamespace = portletContainer.getResponseNamespace();
-
-			boolean optimizePortletNamespace = BooleanHelper.toBoolean(optimizePortletNamespaceInitParam, false);
 
 			if (optimizePortletNamespace) {
 
@@ -1187,8 +1165,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			if (portletPhase == Bridge.PortletPhase.RENDER_PHASE) {
 
 				if (renderRedirectEnabled == null) {
-					renderRedirectEnabled = BooleanHelper.isTrueToken(BridgeContext.getCurrentInstance()
-							.getInitParameter(BridgeConfigConstants.PARAM_RENDER_REDIRECT_ENABLED));
+					renderRedirectEnabled = PortletConfigParam.RenderRedirectEnabled.getBooleanValue(portletConfig);
 				}
 
 				if (renderRedirectEnabled) {
