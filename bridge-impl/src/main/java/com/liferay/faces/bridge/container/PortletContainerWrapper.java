@@ -18,7 +18,6 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.FacesWrapper;
 import javax.faces.context.ResponseWriter;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
@@ -28,11 +27,13 @@ import javax.portlet.MimeResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceURL;
 
+import com.liferay.faces.util.helper.Wrapper;
+
 
 /**
  * @author  Neil Griffin
  */
-public abstract class PortletContainerWrapper implements PortletContainer, FacesWrapper<PortletContainer> {
+public abstract class PortletContainerWrapper implements PortletContainer, Wrapper<PortletContainer> {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 528379462567078842L;

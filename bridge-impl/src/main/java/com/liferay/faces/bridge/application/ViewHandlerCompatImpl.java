@@ -28,8 +28,8 @@ import javax.faces.context.FacesContext;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.BridgeRenderPolicy;
 
-import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -105,7 +105,7 @@ public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
 		// If the specified render policy is NEVER_DELEGATE, then execute the Mojarra/MyFaces render directly,
 		// bypassing the view-handler chain-of-responsibility.
 		if (bridgeRenderPolicy == BridgeRenderPolicy.NEVER_DELEGATE) {
-			ViewHandlerFactory viewHandlerFactory = (ViewHandlerFactory) BridgeFactoryFinder.getFactory(
+			ViewHandlerFactory viewHandlerFactory = (ViewHandlerFactory) FactoryExtensionFinder.getFactory(
 					ViewHandlerFactory.class);
 			ViewHandler viewHandler = viewHandlerFactory.getViewHandler();
 			viewHandler.renderView(facesContext, uiViewRoot);
@@ -122,7 +122,7 @@ public abstract class ViewHandlerCompatImpl extends ViewHandlerWrapper {
 			// If an exception is thrown, then execute the Mojarra/MyFaces render directly, bypassing the view-handler
 			// chain-of-responsibility.
 			catch (FacesException e) {
-				ViewHandlerFactory viewHandlerFactory = (ViewHandlerFactory) BridgeFactoryFinder.getFactory(
+				ViewHandlerFactory viewHandlerFactory = (ViewHandlerFactory) FactoryExtensionFinder.getFactory(
 						ViewHandlerFactory.class);
 				ViewHandler viewHandler = viewHandlerFactory.getViewHandler();
 				viewHandler.renderView(facesContext, uiViewRoot);

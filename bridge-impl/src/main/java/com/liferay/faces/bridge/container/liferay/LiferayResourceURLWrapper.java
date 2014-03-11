@@ -17,14 +17,15 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
-import javax.faces.FacesWrapper;
 import javax.portlet.PortletSecurityException;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class LiferayResourceURLWrapper implements LiferayResourceURL, FacesWrapper<LiferayResourceURL> {
+public abstract class LiferayResourceURLWrapper implements LiferayResourceURL, Wrapper<LiferayResourceURL> {
 
 	public void addProperty(String key, String value) {
 		getWrapped().addProperty(key, value);

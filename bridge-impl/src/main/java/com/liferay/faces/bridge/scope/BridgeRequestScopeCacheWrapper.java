@@ -17,14 +17,14 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
 public abstract class BridgeRequestScopeCacheWrapper implements BridgeRequestScopeCache,
-	FacesWrapper<BridgeRequestScopeCache> {
+	Wrapper<BridgeRequestScopeCache> {
 
 	public void clear() {
 		getWrapped().clear();

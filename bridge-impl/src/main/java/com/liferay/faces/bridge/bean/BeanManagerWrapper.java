@@ -13,13 +13,13 @@
  */
 package com.liferay.faces.bridge.bean;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class BeanManagerWrapper implements BeanManager, FacesWrapper<BeanManager> {
+public abstract class BeanManagerWrapper implements BeanManager, Wrapper<BeanManager> {
 
 	public void invokePreDestroyMethods(Object managedBean, boolean preferPreDestroy) {
 		getWrapped().invokePreDestroyMethods(managedBean, preferPreDestroy);
