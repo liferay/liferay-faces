@@ -16,6 +16,7 @@ package com.liferay.faces.util.component;
 import java.util.Iterator;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UINamingContainer;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
@@ -30,6 +31,7 @@ public class ComponentUtil {
 	// Private Constants
 	private static final String REGEX_COLON = "[:]";
 	private static final String DOUBLE_BACKSLASH_COLON = "\\\\\\\\:";
+	private static final String REGEX_WIDGET_VAR = "-|";
 
 	public static String appendToCssClasses(String cssClass, String suffix) {
 
@@ -61,6 +63,31 @@ public class ComponentUtil {
 		}
 
 		return value;
+	}
+
+	public static String concatAllCssClasses(Styleable styleable, String classNames) {
+
+		StringBuilder allClasses = new StringBuilder();
+
+		if ((classNames != null) && (classNames.length() > 0)) {
+			allClasses.append(classNames);
+		}
+
+		String cssClass = styleable.getCssClass();
+
+		if ((cssClass != null) && (cssClass.length() > 0)) {
+			allClasses.append(StringPool.SPACE);
+			allClasses.append(cssClass);
+		}
+
+		String styleClass = styleable.getStyleClass();
+
+		if ((styleClass != null) && (styleClass.length() > 0)) {
+			allClasses.append(StringPool.SPACE);
+			allClasses.append(styleClass);
+		}
+
+		return allClasses.toString();
 	}
 
 	public static String escapeClientId(String clientId) {
@@ -129,5 +156,26 @@ public class ComponentUtil {
 
 	public static UIComponent matchComponentInViewRoot(FacesContext facesContext, String partialClientId) {
 		return matchComponentInHierarchy(facesContext, facesContext.getViewRoot(), partialClientId);
+	}
+
+	public static String resolveWidgetVar(FacesContext facesContext, Widget widget) {
+
+		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+
+		String widgetVar = widget.getWidgetVar();
+
+		if (widgetVar == null) {
+			widgetVar = widget.getClientId();
+		}
+		else {
+			UIViewRoot uiViewRoot = facesContext.getViewRoot();
+			String namingContainerId = uiViewRoot.getContainerClientId(facesContext);
+			widgetVar = namingContainerId + separatorChar + widgetVar;
+		}
+
+		String regex = REGEX_WIDGET_VAR + separatorChar;
+		widgetVar = widgetVar.replaceAll(regex, StringPool.UNDERLINE);
+
+		return widgetVar;
 	}
 }
