@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.util.factory;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
@@ -21,6 +21,6 @@ import javax.faces.FacesWrapper;
  *
  * @author  Neil Griffin
  */
-public interface FactoryExtension<T> extends FacesWrapper<T> {
+public interface FactoryExtension<T> extends Wrapper<T> {
 
 }
