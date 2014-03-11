@@ -17,15 +17,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.faces.FacesWrapper;
-
 import com.liferay.faces.util.config.ConfiguredServletMapping;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class BridgeConfigWrapper implements BridgeConfig, FacesWrapper<BridgeConfig> {
+public abstract class BridgeConfigWrapper implements BridgeConfig, Wrapper<BridgeConfig> {
 
 	public Map<String, Object> getAttributes() {
 		return getWrapped().getAttributes();

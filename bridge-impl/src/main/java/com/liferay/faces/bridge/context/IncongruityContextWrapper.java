@@ -23,14 +23,15 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import javax.faces.FacesWrapper;
 import javax.faces.context.FacesContext;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class IncongruityContextWrapper extends IncongruityContext implements FacesWrapper<IncongruityContext> {
+public abstract class IncongruityContextWrapper extends IncongruityContext implements Wrapper<IncongruityContext> {
 
 	@Override
 	public void dispatch(String path) throws IOException {

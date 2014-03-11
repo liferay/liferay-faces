@@ -16,17 +16,18 @@ package com.liferay.faces.bridge.scope;
 import java.util.Map;
 import java.util.Set;
 
-import javax.faces.FacesWrapper;
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletMode;
 import javax.portlet.RenderRequest;
 import javax.portlet.faces.Bridge.PortletPhase;
 
+import com.liferay.faces.util.helper.Wrapper;
+
 
 /**
  * @author  Neil Griffin
  */
-public abstract class BridgeRequestScopeWrapper implements BridgeRequestScope, FacesWrapper<BridgeRequestScope> {
+public abstract class BridgeRequestScopeWrapper implements BridgeRequestScope, Wrapper<BridgeRequestScope> {
 
 	public void removeExcludedAttributes(RenderRequest renderRequest) {
 		getWrapped().removeExcludedAttributes(renderRequest);

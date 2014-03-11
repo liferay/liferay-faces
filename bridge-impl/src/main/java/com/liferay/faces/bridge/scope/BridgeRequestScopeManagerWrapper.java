@@ -13,16 +13,17 @@
  */
 package com.liferay.faces.bridge.scope;
 
-import javax.faces.FacesWrapper;
 import javax.portlet.PortletConfig;
 import javax.servlet.http.HttpSession;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
 public abstract class BridgeRequestScopeManagerWrapper implements BridgeRequestScopeManager,
-	FacesWrapper<BridgeRequestScopeManager> {
+	Wrapper<BridgeRequestScopeManager> {
 
 	public void removeBridgeRequestScopesByPortlet(PortletConfig portletConfig) {
 		getWrapped().removeBridgeRequestScopesByPortlet(portletConfig);
