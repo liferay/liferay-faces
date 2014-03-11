@@ -11,29 +11,26 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.context.flash;
+package com.liferay.faces.bridge.scope;
 
-import javax.faces.context.Flash;
+import javax.faces.FacesWrapper;
+import javax.portlet.PortletConfig;
+import javax.servlet.http.HttpSession;
 
 
 /**
  * @author  Neil Griffin
  */
-public class BridgeFlashMyFacesImpl extends BridgeFlashBase {
+public abstract class BridgeRequestScopeManagerWrapper implements BridgeRequestScopeManager,
+	FacesWrapper<BridgeRequestScopeManager> {
 
-	private Flash wrappedFlash;
-
-	public BridgeFlashMyFacesImpl(Flash flash) {
-		this.wrappedFlash = flash;
+	public void removeBridgeRequestScopesByPortlet(PortletConfig portletConfig) {
+		getWrapped().removeBridgeRequestScopesByPortlet(portletConfig);
 	}
 
-	@Override
-	public boolean isServletResponseRequired() {
-		return false;
+	public void removeBridgeRequestScopesBySession(HttpSession httpSession) {
+		getWrapped().removeBridgeRequestScopesBySession(httpSession);
 	}
 
-	@Override
-	public Flash getWrapped() {
-		return wrappedFlash;
-	}
+	public abstract BridgeRequestScopeManager getWrapped();
 }

@@ -11,29 +11,21 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.context.flash;
+package com.liferay.faces.bridge;
 
-import javax.faces.context.Flash;
+import javax.faces.FacesWrapper;
+import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
+import javax.portlet.faces.BridgeException;
 
 
 /**
  * @author  Neil Griffin
  */
-public class BridgeFlashMyFacesImpl extends BridgeFlashBase {
+public abstract class BridgePhaseWrapper implements BridgePhase, FacesWrapper<BridgePhase> {
 
-	private Flash wrappedFlash;
-
-	public BridgeFlashMyFacesImpl(Flash flash) {
-		this.wrappedFlash = flash;
+	public void execute() throws BridgeDefaultViewNotSpecifiedException, BridgeException {
+		getWrapped().execute();
 	}
 
-	@Override
-	public boolean isServletResponseRequired() {
-		return false;
-	}
-
-	@Override
-	public Flash getWrapped() {
-		return wrappedFlash;
-	}
+	public abstract BridgePhase getWrapped();
 }

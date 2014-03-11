@@ -22,7 +22,7 @@ import javax.faces.context.Flash;
  *
  * @author  Neil Griffin
  */
-public class BridgeFlashMojarraImpl extends BridgeFlashWrapper {
+public class BridgeFlashMojarraImpl extends BridgeFlashBase {
 
 	private boolean mojarraServletDependencyActive;
 	private Flash wrappedFlash;
@@ -59,5 +59,4 @@ public class BridgeFlashMojarraImpl extends BridgeFlashWrapper {
 	public Flash getWrapped() {
 		return wrappedFlash;
 	}
-
 }

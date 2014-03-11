@@ -11,29 +11,23 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.context.flash;
+package com.liferay.faces.bridge.bean;
 
-import javax.faces.context.Flash;
+import javax.faces.FacesWrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public class BridgeFlashMyFacesImpl extends BridgeFlashBase {
+public abstract class BeanManagerWrapper implements BeanManager, FacesWrapper<BeanManager> {
 
-	private Flash wrappedFlash;
-
-	public BridgeFlashMyFacesImpl(Flash flash) {
-		this.wrappedFlash = flash;
+	public void invokePreDestroyMethods(Object managedBean, boolean preferPreDestroy) {
+		getWrapped().invokePreDestroyMethods(managedBean, preferPreDestroy);
 	}
 
-	@Override
-	public boolean isServletResponseRequired() {
-		return false;
+	public boolean isManagedBean(String name, Object value) {
+		return getWrapped().isManagedBean(name, value);
 	}
 
-	@Override
-	public Flash getWrapped() {
-		return wrappedFlash;
-	}
+	public abstract BeanManager getWrapped();
 }
