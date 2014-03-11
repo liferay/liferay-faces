@@ -24,7 +24,7 @@ public class LongHelper {
 
 	public static long toLong(String value, long defaultValue) {
 
-		long valueAsLong = 0;
+		long valueAsLong = defaultValue;
 
 		try {
 			valueAsLong = Long.parseLong(value);

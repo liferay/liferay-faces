@@ -24,7 +24,7 @@ public class ShortHelper {
 
 	public static short toShort(String value, short defaultValue) {
 
-		short valueAsShort = 0;
+		short valueAsShort = defaultValue;
 
 		try {
 			valueAsShort = Short.parseShort(value);
