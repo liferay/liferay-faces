@@ -14,6 +14,7 @@
 package com.liferay.faces.bridge.config;
 
 import javax.faces.FacesException;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 
 
@@ -26,12 +27,13 @@ public class BridgeConfigFactoryImpl extends BridgeConfigFactory {
 	private static final String BRIDGE_CONFIG = "com.liferay.faces.bridge.config.bridgeConfig";
 
 	@Override
-	public BridgeConfig getBridgeConfig(PortletContext portletContext) throws FacesException {
+	public BridgeConfig getBridgeConfig(PortletConfig portletConfig) throws FacesException {
 
+		PortletContext portletContext = portletConfig.getPortletContext();
 		BridgeConfig bridgeConfig = (BridgeConfig) portletContext.getAttribute(BRIDGE_CONFIG);
 
 		if (bridgeConfig == null) {
-			bridgeConfig = new BridgeConfigImpl(portletContext);
+			bridgeConfig = new BridgeConfigImpl(portletConfig);
 			portletContext.setAttribute(BRIDGE_CONFIG, bridgeConfig);
 		}
 
