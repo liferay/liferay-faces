@@ -13,13 +13,11 @@
  */
 package com.liferay.faces.bridge.bean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.config.ApplicationConfigUtil;
 import com.liferay.faces.util.config.ConfiguredManagedBean;
-import com.liferay.faces.util.config.ConfiguredManagedBeanImpl;
 import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
@@ -56,20 +54,6 @@ public class BeanManagerFactoryImpl extends BeanManagerFactory {
 		}
 
 		return beanManager;
-	}
-
-	@Override
-	@Deprecated
-	public void setConfiguredBeans(List<com.liferay.faces.bridge.config.ConfiguredBean> configuredBeans) {
-
-		this.configuredManagedBeans = new ArrayList<ConfiguredManagedBean>();
-
-		for (com.liferay.faces.bridge.config.ConfiguredBean configuredBean : configuredBeans) {
-			ConfiguredManagedBean configuredManagedBean = new ConfiguredManagedBeanImpl(
-					configuredBean.getManagedBeanClass(), configuredBean.getManagedBeanName(),
-					configuredBean.getManagedBeanScope());
-			this.configuredManagedBeans.add(configuredManagedBean);
-		}
 	}
 
 	public BeanManagerFactory getWrapped() {

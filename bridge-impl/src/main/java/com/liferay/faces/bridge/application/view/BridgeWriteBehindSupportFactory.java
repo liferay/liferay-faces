@@ -22,14 +22,13 @@ import javax.portlet.PortletResponse;
 import javax.portlet.faces.BridgeWriteBehindResponse;
 import javax.servlet.ServletResponse;
 
-import com.liferay.faces.bridge.FactoryWrapper;
+import com.liferay.faces.util.factory.FactoryExtension;
 
 
 /**
  * @author  Neil Griffin
  */
-@SuppressWarnings("deprecation")
-public abstract class BridgeWriteBehindSupportFactory implements FactoryWrapper<BridgeWriteBehindSupportFactory> {
+public abstract class BridgeWriteBehindSupportFactory implements FactoryExtension<BridgeWriteBehindSupportFactory> {
 
 	public abstract BridgeAfterViewContentRequest getBridgeAfterViewContentRequest(PortletRequest portletRequest);
 

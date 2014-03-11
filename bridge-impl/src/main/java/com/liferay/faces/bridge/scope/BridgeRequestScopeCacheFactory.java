@@ -16,7 +16,7 @@ package com.liferay.faces.bridge.scope;
 import javax.faces.FacesException;
 import javax.portlet.PortletContext;
 
-import com.liferay.faces.bridge.FactoryWrapper;
+import com.liferay.faces.util.factory.FactoryExtension;
 
 
 /**
@@ -29,8 +29,7 @@ import com.liferay.faces.bridge.FactoryWrapper;
  *
  * @author  Neil Griffin
  */
-@SuppressWarnings("deprecation")
-public abstract class BridgeRequestScopeCacheFactory implements FactoryWrapper<BridgeRequestScopeCacheFactory> {
+public abstract class BridgeRequestScopeCacheFactory implements FactoryExtension<BridgeRequestScopeCacheFactory> {
 
 	public abstract BridgeRequestScopeCache getBridgeRequestScopeCache(PortletContext portletContext)
 		throws FacesException;

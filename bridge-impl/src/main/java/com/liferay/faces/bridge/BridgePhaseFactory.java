@@ -24,6 +24,8 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
+import com.liferay.faces.util.factory.FactoryExtension;
+
 
 /**
  * This abstract class provides a contract for defining a factory that knows how to create instances of type {@link
@@ -35,8 +37,7 @@ import javax.portlet.ResourceResponse;
  *
  * @author  Neil Griffin
  */
-@SuppressWarnings("deprecation")
-public abstract class BridgePhaseFactory implements FactoryWrapper<BridgePhaseFactory> {
+public abstract class BridgePhaseFactory implements FactoryExtension<BridgePhaseFactory> {
 
 	public abstract BridgePhase getBridgeActionPhase(ActionRequest actionRequest, ActionResponse actionResponse,
 		PortletConfig portletConfig) throws FacesException;

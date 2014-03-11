@@ -15,15 +15,14 @@ package com.liferay.faces.bridge.container.liferay;
 
 import javax.portlet.MimeResponse;
 
-import com.liferay.faces.bridge.FactoryWrapper;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.factory.FactoryExtension;
 
 
 /**
  * @author  Neil Griffin
  */
-@SuppressWarnings("deprecation")
-public abstract class LiferayURLFactory implements FactoryWrapper<LiferayURLFactory> {
+public abstract class LiferayURLFactory implements FactoryExtension<LiferayURLFactory> {
 
 	public abstract LiferayActionURL getLiferayActionURL(BridgeContext bridgeContext, MimeResponse mimeResponse,
 		String responseNamespace, boolean friendlyURLMapperEnabled);

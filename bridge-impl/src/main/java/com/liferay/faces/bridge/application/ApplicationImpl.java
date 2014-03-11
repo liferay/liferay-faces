@@ -28,6 +28,7 @@ import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 import com.liferay.faces.bridge.component.UIViewRootBridgeImpl;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.config.ConfiguredSystemEventListener;
 
 
 /**
@@ -58,7 +59,6 @@ public class ApplicationImpl extends ApplicationCompatImpl {
 	 * @see  Application#createComponent(String)
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	public UIComponent createComponent(String componentType) throws FacesException {
 
 		if (componentType.equals(UIViewRoot.COMPONENT_TYPE) && BridgeUtil.isPortletRequest()) {
@@ -81,12 +81,12 @@ public class ApplicationImpl extends ApplicationCompatImpl {
 					if (subscribeToEventsAtRuntime) {
 						BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 						BridgeConfig bridgeConfig = bridgeContext.getBridgeConfig();
-						List<com.liferay.faces.bridge.config.ConfiguredSystemEventListener> configuredSystemEventListeners =
+						List<ConfiguredSystemEventListener> configuredSystemEventListeners =
 							bridgeConfig.getConfiguredSystemEventListeners();
 
 						if (configuredSystemEventListeners != null) {
 
-							for (com.liferay.faces.bridge.config.ConfiguredSystemEventListener configuredSystemEventListener :
+							for (ConfiguredSystemEventListener configuredSystemEventListener :
 								configuredSystemEventListeners) {
 
 								if (UIVIEWROOT_FQCN.equals(configuredSystemEventListener.getSourceClass())) {

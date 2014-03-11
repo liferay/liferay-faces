@@ -16,14 +16,13 @@ package com.liferay.faces.bridge.model;
 import java.util.List;
 import java.util.Map;
 
-import com.liferay.faces.bridge.FactoryWrapper;
+import com.liferay.faces.util.factory.FactoryExtension;
 
 
 /**
  * @author  Neil Griffin
  */
-@SuppressWarnings("deprecation")
-public abstract class UploadedFileFactory implements FactoryWrapper<UploadedFileFactory> {
+public abstract class UploadedFileFactory implements FactoryExtension<UploadedFileFactory> {
 
 	public abstract UploadedFile getUploadedFile(Exception e);
 
