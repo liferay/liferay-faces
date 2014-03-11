@@ -24,7 +24,7 @@ public class IntegerHelper {
 
 	public static int toInteger(String value, int defaultValue) {
 
-		int valueAsInt = 0;
+		int valueAsInt = defaultValue;
 
 		try {
 			valueAsInt = Integer.parseInt(value);
