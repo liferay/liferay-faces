@@ -18,8 +18,8 @@ package com.liferay.faces.util.helper;
  */
 public class BooleanHelper {
 
-	public static final String[] TRUE_VALUES = { "1", "t", "true", "y", "yes", "on", "checked" };
-	public static final String[] FALSE_VALUES = { "0", "f", "false", "n", "no", "off", "unchecked" };
+	public static final String[] TRUE_VALUES = { "true", "1", "t", "y", "yes", "on", "checked" };
+	public static final String[] FALSE_VALUES = { "false", "0", "f", "n", "no", "off", "unchecked" };
 
 	public static boolean toBoolean(String value) {
 		return toBoolean(value, false);
