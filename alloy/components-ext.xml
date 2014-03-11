@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components extends="./target/alloy-generator/data.xml" namespace="aui" namespaceURI="http://liferay.com/faces/aui"
+	description="The Liferay Faces Alloy facelet component tags with the &lt;code&gt;aui:&lt;/code&gt; tag name prefix.">
+	<functions>
+		<function>
+			<description>Returns an escaped representation of the specified client ID.</description>
+			<function-name>escapeClientId</function-name>
+			<function-class>com.liferay.faces.util.component.ComponentUtil</function-class>
+			<function-signature>java.lang.String escapeClientId(java.lang.String)</function-signature>
+		</function>
+		<function>
+			<description>Returns the client ID associated with the specified expression.</description>
+			<function-name>findClientId</function-name>
+			<function-class>com.liferay.faces.util.component.ComponentUtil</function-class>
+			<function-signature>java.lang.String findClientId(java.lang.String)</function-signature>
+		</function>
+	</functions>
+</components>

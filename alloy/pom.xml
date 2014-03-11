@@ -120,4 +120,72 @@
 		</dependency>
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>generate-alloy</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.2.1</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>java</goal>
+								</goals>
+								<id>generate-xml</id>
+								<phase>initialize</phase>
+								<configuration>
+									<includeProjectDependencies>false</includeProjectDependencies>
+									<includePluginDependencies>true</includePluginDependencies>
+									<mainClass>com.liferay.alloy.tools.transformer.AlloyDocsTransformer</mainClass>
+									<systemProperties>
+										<systemProperty>
+											<key>build-ext</key>
+											<value>generator.properties</value>
+										</systemProperty>
+									</systemProperties>
+									<executableDependency>
+										<groupId>com.liferay.alloy</groupId>
+										<artifactId>alloy-generator</artifactId>
+									</executableDependency>
+								</configuration>
+							</execution>
+							<execution>
+								<goals>
+									<goal>java</goal>
+								</goals>
+								<phase>generate-sources</phase>
+								<configuration>
+									<includeProjectDependencies>false</includeProjectDependencies>
+									<includePluginDependencies>true</includePluginDependencies>
+									<mainClass>com.liferay.alloy.tools.builder.FacesBuilder</mainClass>
+									<systemProperties>
+										<systemProperty>
+											<key>build-ext</key>
+											<value>generator.properties</value>
+										</systemProperty>
+									</systemProperties>
+									<executableDependency>
+										<groupId>com.liferay.alloy</groupId>
+										<artifactId>alloy-generator</artifactId>
+									</executableDependency>
+								</configuration>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>com.liferay.alloy</groupId>
+								<artifactId>alloy-generator</artifactId>
+								<version>0.1.0</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
+
 </project>
