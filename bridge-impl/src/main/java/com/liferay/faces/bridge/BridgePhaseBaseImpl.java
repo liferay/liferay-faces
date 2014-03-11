@@ -32,8 +32,8 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.annotation.PortletNamingContainer;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.config.BridgeConfigConstants;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
+import com.liferay.faces.bridge.config.PortletConfigParam;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
 import com.liferay.faces.bridge.context.BridgeContext;
@@ -46,7 +46,6 @@ import com.liferay.faces.bridge.scope.BridgeRequestScopeCache;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeCacheFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -87,7 +86,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 
 		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) FactoryExtensionFinder.getFactory(
 				BridgeConfigFactory.class);
-		this.bridgeConfig = bridgeConfigFactory.getBridgeConfig(portletContext);
+		this.bridgeConfig = bridgeConfigFactory.getBridgeConfig(portletConfig);
 
 		// Initialize the incongruity context implementation.
 		IncongruityContextFactory incongruityContextFactory = (IncongruityContextFactory) FactoryExtensionFinder
@@ -221,8 +220,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		boolean bridgeRequestScopeEnabled = true;
 
 		if (portletPhase == Bridge.PortletPhase.RESOURCE_PHASE) {
-			bridgeRequestScopeEnabled = BooleanHelper.toBoolean(getInitParameter(
-						BridgeConfigConstants.PARAM_BRIDGE_REQUEST_SCOPE_AJAX_ENABLED), false);
+			bridgeRequestScopeEnabled = PortletConfigParam.BridgeRequestScopeAjaxEnabled.getBooleanValue(portletConfig);
 		}
 
 		if (bridgeRequestScopeEnabled) {
@@ -371,15 +369,5 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		}
 
 		return facesContextFactory;
-	}
-
-	protected String getInitParameter(String name) {
-		String initParameter = portletConfig.getInitParameter(name);
-
-		if (initParameter == null) {
-			initParameter = portletContext.getInitParameter(name);
-		}
-
-		return initParameter;
 	}
 }

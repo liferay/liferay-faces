@@ -17,13 +17,13 @@ import java.util.Map;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
-import com.liferay.faces.bridge.config.BridgeConfigConstants;
-import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.bridge.config.PortletConfigParam;
 
 
 /**
@@ -55,8 +55,8 @@ public abstract class ExternalContextCompat_1_2_Impl extends ExternalContext {
 		this.incongruityContext = bridgeContext.getIncongruityContext();
 
 		// Determine whether or not lifecycle incongruities should be managed.
-		this.manageIncongruities = BooleanHelper.toBoolean(bridgeContext.getInitParameter(
-					BridgeConfigConstants.PARAM_MANAGE_INCONGRUITIES), true);
+		PortletConfig portletConfig = bridgeContext.getPortletConfig();
+		this.manageIncongruities = PortletConfigParam.ManageIncongruities.getBooleanValue(portletConfig);
 	}
 
 	/**

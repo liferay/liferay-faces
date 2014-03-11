@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 
 import com.liferay.faces.util.config.ApplicationConfig;
@@ -36,8 +37,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 	// Private Constants
 	private static final String EXCLUDED_ATTRIBUTE = "excluded-attribute";
-	private static final String FACES_VIEW_ID_RENDER = "_facesViewIdRender";
-	private static final String FACES_VIEW_ID_RESOURCE = "_facesViewIdResource";
 	private static final String MODEL_EL = "model-el";
 	private static final String PARAMETER = "parameter";
 	private static final String RENDER_RESPONSE_WRAPPER_CLASS = "render-response-wrapper-class";
@@ -52,7 +51,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private Set<String> excludedRequestAttributes;
 	@SuppressWarnings("deprecation")
 	private List<ServletMapping> facesServletMappings;
-	private PortletContext portletContext;
+	private PortletConfig portletConfig;
 	private Map<String, String[]> publicParameterMappings;
 	private String viewIdRenderParameterName;
 	private String viewIdResourceParameterName;
@@ -60,10 +59,10 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private String writeBehindResourceResponseWrapper;
 
 	@SuppressWarnings("deprecation")
-	public BridgeConfigImpl(PortletContext portletContext) {
+	public BridgeConfigImpl(PortletConfig portletConfig) {
 
 		// portletContext
-		this.portletContext = portletContext;
+		this.portletConfig = portletConfig;
 
 		// bridgeConfigAttributeMap
 		this.bridgeConfigAttributeMap = new BridgeConfigAttributeMap();
@@ -169,19 +168,10 @@ public class BridgeConfigImpl implements BridgeConfig {
 		}
 
 		// viewIdResourceParameterName
-		this.viewIdResourceParameterName = portletContext.getInitParameter(
-				BridgeConfigConstants.PARAM_VIEW_ID_RESOURCE);
-
-		if (this.viewIdResourceParameterName == null) {
-			this.viewIdResourceParameterName = FACES_VIEW_ID_RESOURCE;
-		}
+		this.viewIdResourceParameterName = PortletConfigParam.ViewIdResourceParameterName.getStringValue(portletConfig);
 
 		// viewIdRenderParameterName
-		this.viewIdRenderParameterName = portletContext.getInitParameter(BridgeConfigConstants.PARAM_VIEW_ID_RENDER);
-
-		if (this.viewIdRenderParameterName == null) {
-			this.viewIdRenderParameterName = FACES_VIEW_ID_RENDER;
-		}
+		this.viewIdRenderParameterName = PortletConfigParam.ViewIdRenderParameterName.getStringValue(portletConfig);
 	}
 
 	public Map<String, Object> getAttributes() {
@@ -207,6 +197,8 @@ public class BridgeConfigImpl implements BridgeConfig {
 	}
 
 	public String getContextParameter(String name) {
+		PortletContext portletContext = portletConfig.getPortletContext();
+
 		return portletContext.getInitParameter(name);
 	}
 
