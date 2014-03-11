@@ -29,6 +29,7 @@ import java.util.Set;
 import javax.faces.context.ExternalContext;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.MimeResponse;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -45,7 +46,7 @@ import com.liferay.faces.bridge.application.view.BridgeAfterViewContentResponse;
 import com.liferay.faces.bridge.application.view.BridgeWriteBehindSupportFactory;
 import com.liferay.faces.bridge.bean.BeanManager;
 import com.liferay.faces.bridge.bean.BeanManagerFactory;
-import com.liferay.faces.bridge.config.BridgeConfigConstants;
+import com.liferay.faces.bridge.config.PortletConfigParam;
 import com.liferay.faces.bridge.context.map.ApplicationMap;
 import com.liferay.faces.bridge.context.map.InitParameterMap;
 import com.liferay.faces.bridge.context.map.RequestAttributeMap;
@@ -54,7 +55,6 @@ import com.liferay.faces.bridge.context.map.SessionMap;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.bridge.util.LocaleIterator;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.ProductConstants;
@@ -193,15 +193,8 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 
 		// Determines whether or not methods annotated with the &#064;PreDestroy annotation are preferably invoked
 		// over the &#064;BridgePreDestroy annotation.
-		String preferPreDestroyInitParam = getInitParameter(BridgeConfigConstants.PARAM_PREFER_PRE_DESTROY1);
-
-		if (preferPreDestroyInitParam == null) {
-
-			// Backward compatibility
-			preferPreDestroyInitParam = getInitParameter(BridgeConfigConstants.PARAM_PREFER_PRE_DESTROY2);
-		}
-
-		boolean preferPreDestroy = BooleanHelper.toBoolean(preferPreDestroyInitParam, true);
+		PortletConfig portletConfig = bridgeContext.getPortletConfig();
+		boolean preferPreDestroy = PortletConfigParam.PreferPreDestroy.getBooleanValue(portletConfig);
 
 		// Initialize the application map.
 		applicationMap = new ApplicationMap(portletContext, beanManager, preferPreDestroy);
@@ -211,8 +204,8 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 		boolean distinctRequestScopedManagedBeans = false;
 
 		if (LIFERAY_PORTAL_DETECTED) {
-			distinctRequestScopedManagedBeans = BooleanHelper.toBoolean(getInitParameter(
-						BridgeConfigConstants.PARAM_DISTINCT_REQUEST_SCOPED_MANAGED_BEANS), false);
+			distinctRequestScopedManagedBeans = PortletConfigParam.DistinctRequestScopedManagedBeans.getBooleanValue(
+					portletConfig);
 		}
 
 		// Initialize the request attribute map.

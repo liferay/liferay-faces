@@ -42,7 +42,7 @@ import javax.portlet.faces.Bridge.PortletPhase;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.config.BridgeConfigConstants;
+import com.liferay.faces.bridge.config.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.util.RequestParameter;
 import com.liferay.faces.util.application.ResourceConstants;
@@ -430,14 +430,13 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 	}
 
 	protected boolean getContextParamAbleToSetHttpStatusCode(boolean defaultValue) {
-		String contextParamValue = bridgeConfig.getContextParameter(
-				BridgeConfigConstants.PARAM_CONTAINER_ABLE_TO_SET_HTTP_STATUS_CODE1);
+
+		String contextParamValue = bridgeConfig.getContextParameter(PortletConfigParam.ContainerAbleToSetHttpStatusCode
+				.getName());
 
 		if (contextParamValue == null) {
-
-			// Backwards compatibility
-			contextParamValue = bridgeConfig.getContextParameter(
-					BridgeConfigConstants.PARAM_CONTAINER_ABLE_TO_SET_HTTP_STATUS_CODE2);
+			contextParamValue = bridgeConfig.getContextParameter(PortletConfigParam.ContainerAbleToSetHttpStatusCode
+					.getAlternateName());
 		}
 
 		return BooleanHelper.toBoolean(contextParamValue, defaultValue);

@@ -22,6 +22,7 @@ import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
 
 import com.liferay.faces.util.config.ApplicationConfigUtil;
+import com.liferay.faces.util.config.WebConfigParam;
 import com.liferay.faces.util.helper.BooleanHelper;
 
 
@@ -30,9 +31,6 @@ import com.liferay.faces.util.helper.BooleanHelper;
  */
 public class ApplicationStartupListener implements SystemEventListener {
 
-	// Public Constants
-	public static final String INIT_PARAM_RESOLVE_XML_ENTITIES = "com.liferay.faces.util.resolveXMLEntities";
-
 	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
 
 		if (systemEvent instanceof PostConstructApplicationEvent) {
@@ -40,7 +38,7 @@ public class ApplicationStartupListener implements SystemEventListener {
 			if (ApplicationConfigUtil.getApplicationConfig() == null) {
 				FacesContext initFacesContext = FacesContext.getCurrentInstance();
 				ExternalContext externalContext = initFacesContext.getExternalContext();
-				String initParam = externalContext.getInitParameter(INIT_PARAM_RESOLVE_XML_ENTITIES);
+				String initParam = externalContext.getInitParameter(WebConfigParam.ResolveXMLEntities.getName());
 				boolean resolveEntities = BooleanHelper.toBoolean(initParam, false);
 				ApplicationConfigUtil.initializeApplicationConfig(resolveEntities);
 			}
