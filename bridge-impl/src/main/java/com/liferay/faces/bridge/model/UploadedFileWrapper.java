@@ -18,13 +18,13 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class UploadedFileWrapper implements UploadedFile, FacesWrapper<UploadedFile> {
+public abstract class UploadedFileWrapper implements UploadedFile, Wrapper<UploadedFile> {
 
 	public void delete() throws IOException {
 		getWrapped().delete();
