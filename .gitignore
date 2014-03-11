@@ -8,3 +8,4 @@ rebel.xml
 .idea/*
 *.iml
 faces-config.pageflow
+.alloyui
