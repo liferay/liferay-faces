@@ -17,14 +17,19 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-import javax.faces.FacesWrapper;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 
 
 /**
+ * This abstract class decorates/wraps the {@link Flash} implementation provided by the JSF runtime. Specifically, this
+ * wrapper was created to workaround some Servlet-API dependencies in some of the methods in the {@link
+ * com.sun.faces.context.flash.ELFlash} implementation provided by Mojarra. See the {@link
+ * com.liferay.faces.bridge.context.ExternalContextImpl#getResponse()} method for usage of the Mojarra workaround.
+ *
  * @author  Neil Griffin
  */
-public abstract class BridgeFlashWrapper extends BridgeFlash implements FacesWrapper<BridgeFlash> {
+public abstract class BridgeFlashBase extends BridgeFlash {
 
 	public void clear() {
 		getWrapped().clear();
@@ -91,9 +96,6 @@ public abstract class BridgeFlashWrapper extends BridgeFlash implements FacesWra
 	}
 
 	@Override
-	public abstract boolean isServletResponseRequired();
-
-	@Override
 	public void setKeepMessages(boolean newValue) {
 		getWrapped().setKeepMessages(newValue);
 	}
@@ -113,7 +115,7 @@ public abstract class BridgeFlashWrapper extends BridgeFlash implements FacesWra
 		return getWrapped().isRedirect();
 	}
 
-	public abstract BridgeFlash getWrapped();
+	public abstract Flash getWrapped();
 
 	public boolean isEmpty() {
 		return getWrapped().isEmpty();
