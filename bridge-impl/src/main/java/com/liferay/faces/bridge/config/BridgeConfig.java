@@ -22,6 +22,7 @@ import javax.portlet.ResourceRequest;
 
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.config.ConfiguredServletMapping;
+import com.liferay.faces.util.config.ConfiguredSystemEventListener;
 
 
 /**
@@ -35,12 +36,6 @@ public interface BridgeConfig {
 	 * Returns a map of bridge configuration attributes.
 	 */
 	public Map<String, Object> getAttributes();
-
-	/**
-	 * @deprecated  Call {@link #getConfiguredSuffixes()} instead.
-	 */
-	@Deprecated
-	public List<String> getConfiguredExtensions();
 
 	/**
 	 * Returns a list of servlet-mapping entries from the WEB-INF/web.xml descriptor that are mapped to the Faces
@@ -57,11 +52,7 @@ public interface BridgeConfig {
 	/**
 	 * <p>Returns a list of configured system-event-listener entries that are found in META-INF/faces-config.xml or
 	 * WEB-INF/faces-config.xml descriptors.</p>
-	 *
-	 * @deprecated  The return type in future releases will be {@link
-	 *              com.liferay.faces.util.config.ConfiguredSystemEventListener}.
 	 */
-	@Deprecated
 	public List<ConfiguredSystemEventListener> getConfiguredSystemEventListeners();
 
 	/**
@@ -80,12 +71,6 @@ public interface BridgeConfig {
 	 * bridge:excluded-attributes element within the faces-config.xml descriptor.
 	 */
 	public Set<String> getExcludedRequestAttributes();
-
-	/**
-	 * @deprecated  Call {@link #getConfiguredFacesServletMappings()} instead.
-	 */
-	@Deprecated
-	public List<ServletMapping> getFacesServletMappings();
 
 	/**
 	 * Returns an immutable {@link Map} of Public Render Parameter mappings as defined in the

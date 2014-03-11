@@ -20,6 +20,7 @@ import java.util.Set;
 import javax.faces.FacesWrapper;
 
 import com.liferay.faces.util.config.ConfiguredServletMapping;
+import com.liferay.faces.util.config.ConfiguredSystemEventListener;
 
 
 /**
@@ -31,11 +32,6 @@ public abstract class BridgeConfigWrapper implements BridgeConfig, FacesWrapper<
 		return getWrapped().getAttributes();
 	}
 
-	@Deprecated
-	public List<String> getConfiguredExtensions() {
-		return getWrapped().getConfiguredExtensions();
-	}
-
 	public List<ConfiguredServletMapping> getConfiguredFacesServletMappings() {
 		return getWrapped().getConfiguredFacesServletMappings();
 	}
@@ -44,7 +40,6 @@ public abstract class BridgeConfigWrapper implements BridgeConfig, FacesWrapper<
 		return getWrapped().getConfiguredSuffixes();
 	}
 
-	@Deprecated
 	public List<ConfiguredSystemEventListener> getConfiguredSystemEventListeners() {
 		return getWrapped().getConfiguredSystemEventListeners();
 	}
@@ -55,11 +50,6 @@ public abstract class BridgeConfigWrapper implements BridgeConfig, FacesWrapper<
 
 	public Set<String> getExcludedRequestAttributes() {
 		return getWrapped().getExcludedRequestAttributes();
-	}
-
-	@Deprecated
-	public List<ServletMapping> getFacesServletMappings() {
-		return getWrapped().getFacesServletMappings();
 	}
 
 	public Map<String, String[]> getPublicParameterMappings() {

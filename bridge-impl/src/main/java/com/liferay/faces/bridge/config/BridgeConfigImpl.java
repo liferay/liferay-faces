@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.bridge.config;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -27,6 +26,7 @@ import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.config.ApplicationConfigUtil;
 import com.liferay.faces.util.config.ConfiguredElement;
 import com.liferay.faces.util.config.ConfiguredServletMapping;
+import com.liferay.faces.util.config.ConfiguredSystemEventListener;
 import com.liferay.faces.util.config.FacesConfig;
 
 
@@ -45,12 +45,9 @@ public class BridgeConfigImpl implements BridgeConfig {
 	// Private Data Members
 	private Map<String, Object> bridgeConfigAttributeMap;
 	private List<ConfiguredServletMapping> configuredFacesServletMappings;
-	@SuppressWarnings("deprecation")
 	private List<ConfiguredSystemEventListener> configuredSystemEventListeners;
 	private List<String> defaultSuffixes;
 	private Set<String> excludedRequestAttributes;
-	@SuppressWarnings("deprecation")
-	private List<ServletMapping> facesServletMappings;
 	private PortletConfig portletConfig;
 	private Map<String, String[]> publicParameterMappings;
 	private String viewIdRenderParameterName;
@@ -58,7 +55,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private String writeBehindRenderResponseWrapper;
 	private String writeBehindResourceResponseWrapper;
 
-	@SuppressWarnings("deprecation")
 	public BridgeConfigImpl(PortletConfig portletConfig) {
 
 		// portletContext
@@ -73,15 +69,7 @@ public class BridgeConfigImpl implements BridgeConfig {
 		this.configuredFacesServletMappings = facesConfig.getConfiguredFacesServletMappings();
 
 		// configuredSystemEventListeners
-		List<com.liferay.faces.util.config.ConfiguredSystemEventListener> listeners =
-			facesConfig.getConfiguredSystemEventListeners();
-		this.configuredSystemEventListeners = new ArrayList<ConfiguredSystemEventListener>();
-
-		for (com.liferay.faces.util.config.ConfiguredSystemEventListener listener : listeners) {
-			ConfiguredSystemEventListener configuredSystemEventListener = new ConfiguredSystemEventListenerImpl(
-					listener);
-			this.configuredSystemEventListeners.add(configuredSystemEventListener);
-		}
+		this.configuredSystemEventListeners = facesConfig.getConfiguredSystemEventListeners();
 
 		// defaultSuffixes
 		this.defaultSuffixes = facesConfig.getConfiguredSuffixes();
@@ -98,16 +86,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 				String excludedAttributeName = configuredElement.getValue();
 				this.excludedRequestAttributes.add(excludedAttributeName);
 			}
-		}
-
-		// facesServletMappings
-		this.facesServletMappings = new ArrayList<ServletMapping>();
-
-		List<ConfiguredServletMapping> configuredFacesServletMappings = getConfiguredFacesServletMappings();
-
-		for (ConfiguredServletMapping configuredFacesServletMapping : configuredFacesServletMappings) {
-			ServletMapping facesServletMapping = new ServletMappingImpl(configuredFacesServletMapping);
-			this.facesServletMappings.add(facesServletMapping);
 		}
 
 		// publicParameterMappings
@@ -178,11 +156,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 		return bridgeConfigAttributeMap;
 	}
 
-	@Deprecated
-	public List<String> getConfiguredExtensions() {
-		return getConfiguredSuffixes();
-	}
-
 	public List<ConfiguredServletMapping> getConfiguredFacesServletMappings() {
 		return configuredFacesServletMappings;
 	}
@@ -191,7 +164,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 		return defaultSuffixes;
 	}
 
-	@Deprecated
 	public List<ConfiguredSystemEventListener> getConfiguredSystemEventListeners() {
 		return configuredSystemEventListeners;
 	}
@@ -204,11 +176,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 	public Set<String> getExcludedRequestAttributes() {
 		return excludedRequestAttributes;
-	}
-
-	@Deprecated
-	public List<ServletMapping> getFacesServletMappings() {
-		return facesServletMappings;
 	}
 
 	public Map<String, String[]> getPublicParameterMappings() {

@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.liferay.faces.util.config.ConfiguredServletMapping;
+import com.liferay.faces.util.config.ConfiguredSystemEventListener;
 
 
 /**
@@ -33,11 +34,6 @@ public class BridgeConfigMockImpl implements BridgeConfig {
 		throw new UnsupportedOperationException();
 	}
 
-	@Deprecated
-	public List<String> getConfiguredExtensions() {
-		return getConfiguredSuffixes();
-	}
-
 	public List<ConfiguredServletMapping> getConfiguredFacesServletMappings() {
 		throw new UnsupportedOperationException();
 	}
@@ -46,7 +42,6 @@ public class BridgeConfigMockImpl implements BridgeConfig {
 		throw new UnsupportedOperationException();
 	}
 
-	@Deprecated
 	public List<ConfiguredSystemEventListener> getConfiguredSystemEventListeners() {
 		throw new UnsupportedOperationException();
 	}
@@ -56,11 +51,6 @@ public class BridgeConfigMockImpl implements BridgeConfig {
 	}
 
 	public Set<String> getExcludedRequestAttributes() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Deprecated
-	public List<ServletMapping> getFacesServletMappings() {
 		throw new UnsupportedOperationException();
 	}
 

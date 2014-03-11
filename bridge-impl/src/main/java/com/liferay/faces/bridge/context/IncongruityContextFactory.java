@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.bridge.context;
 
-import com.liferay.faces.bridge.FactoryWrapper;
+import com.liferay.faces.util.factory.FactoryExtension;
 
 
 /**
@@ -26,8 +26,7 @@ import com.liferay.faces.bridge.FactoryWrapper;
  *
  * @author  Neil Griffin
  */
-@SuppressWarnings("deprecation")
-public abstract class IncongruityContextFactory implements FactoryWrapper<IncongruityContextFactory> {
+public abstract class IncongruityContextFactory implements FactoryExtension<IncongruityContextFactory> {
 
 	public abstract IncongruityContext getIncongruityContext();
 }
