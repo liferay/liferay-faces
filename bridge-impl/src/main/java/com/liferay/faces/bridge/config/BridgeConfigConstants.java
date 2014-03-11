@@ -13,90 +13,79 @@
  */
 package com.liferay.faces.bridge.config;
 
-import com.liferay.faces.bridge.context.BridgeContext;
-
-
 /**
  * This class contains constant names for various implementation-specific contex-param entries that portlet developers
  * can use in the WEB-INF/web.xml descriptor.
  *
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Use enumeration values in {@link PortletConfigParam} or {@link BridgeConfigLegacyParam} instead.
  */
+@Deprecated
 public class BridgeConfigConstants {
 
-	/**
-	 * Boolean indicating whether or not the bridge should manage BridgeRequestScope during the RESOURCE_PHASE of the
-	 * portlet lifecycle.
-	 */
+	@Deprecated
 	public static final String PARAM_BRIDGE_REQUEST_SCOPE_AJAX_ENABLED =
-		"com.liferay.faces.bridge.bridgeRequestScopeAjaxEnabled";
+		PortletConfigParam.BridgeRequestScopeAjaxEnabled.getName();
 
-	/**
-	 * Boolean indicating whether or not the portlet container has the ability to set the HTTP status code for
-	 * resources. Default value is false.
-	 */
+	@Deprecated
 	public static String PARAM_CONTAINER_ABLE_TO_SET_HTTP_STATUS_CODE1 =
-		"com.liferay.faces.bridge.containerAbleToSetHttpStatusCode";
+		PortletConfigParam.ContainerAbleToSetHttpStatusCode.getName();
+
+	@Deprecated
 	public static String PARAM_CONTAINER_ABLE_TO_SET_HTTP_STATUS_CODE2 =
-		"org.portletfaces.bridge.containerAbleToSetHttpStatusCode";
+		PortletConfigParam.ContainerAbleToSetHttpStatusCode.getAlternateName();
 
-	/**
-	 * Boolean indicating whether or not JSF {@link javax.faces.bean.ManagedBean} classes annotated with {@link
-	 * javax.faces.bean.RequestScoped} should be distinct for each portlet. Default value is false.
-	 */
+	@Deprecated
 	public static String PARAM_DISTINCT_REQUEST_SCOPED_MANAGED_BEANS =
-		"com.liferay.faces.bridge.distinctRequestScopedManagedBeans";
+		PortletConfigParam.DistinctRequestScopedManagedBeans.getName();
 
-	/** Value returned by {@link BridgeContext#isBridgeRequestScopePreserved()}. Default is false. */
-	public static final String PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED1 =
-		"com.liferay.faces.bridge.bridgeRequestScopePreserved";
-	public static final String PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED2 = "org.portletfaces.bridgeRequestScopePreserved";
+	@Deprecated
+	public static final String PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED1 = PortletConfigParam.BridgeRequestScopePreserved
+		.getName();
 
-	/**
-	 * Boolean indicating whether or not the bridge should manage incongruities between the JSF lifecycle and the
-	 * Portlet lifecycle. The default is true.
-	 */
-	public static final String PARAM_MANAGE_INCONGRUITIES = "com.liferay.faces.bridge.manageIncongruities";
+	@Deprecated
+	public static final String PARAM_BRIDGE_REQUEST_SCOPE_PRESERVED2 = PortletConfigParam.BridgeRequestScopePreserved
+		.getAlternateName();
 
-	/**
-	 * Boolean indicating whether or not the portlet namespace should be optimized (minimized) in order to provide the
-	 * shortest possible rendered clientIds. Default value is true.
-	 */
-	public static final String PARAM_OPTIMIZE_PORTLET_NAMESPACE1 = "com.liferay.faces.bridge.optimizePortletNamespace";
-	public static final String PARAM_OPTIMIZE_PORTLET_NAMESPACE2 = "org.portletfaces.bridge.optimizePortletNamespace";
+	@Deprecated
+	public static final String PARAM_MANAGE_INCONGRUITIES = PortletConfigParam.ManageIncongruities.getName();
 
-	/**
-	 * Boolean indicating whether or not methods annotated with the &#064;PreDestroy annotation are preferably invoked
-	 * over the &#064;BridgePreDestroy annotation. Default value is true. The reason why, is because local portals like
-	 * Liferay don't have a problem with PreDestroy. It really only comes into play for remote portals like Oracle
-	 * WebCenter. For more info, see: http://issues.liferay.com/browse/FACES-146
-	 */
-	public static final String PARAM_PREFER_PRE_DESTROY1 = "com.liferay.faces.bridge.preferPreDestroy";
-	public static final String PARAM_PREFER_PRE_DESTROY2 = "org.portletfaces.bridge.preferPreDestroy";
+	@Deprecated
+	public static final String PARAM_OPTIMIZE_PORTLET_NAMESPACE1 = PortletConfigParam.OptimizePortletNamespace
+		.getName();
 
-	/**
-	 * Boolean indicating whether or not the render-redirect standard feature is enabled. Default value is false for
-	 * performance.
-	 */
-	public static final String PARAM_RENDER_REDIRECT_ENABLED = "com.liferay.faces.bridge.renderRedirectEnabled";
+	@Deprecated
+	public static final String PARAM_OPTIMIZE_PORTLET_NAMESPACE2 = PortletConfigParam.OptimizePortletNamespace
+		.getAlternateName();
 
-	/**
-	 * Boolean indicating whether or not XML entities are resolved when parsing faces-config.xml files. Default value is
-	 * false.
-	 */
-	public static String PARAM_REQUIRED_TO_RESOLVE_XML_ENTITIES1 = "com.liferay.faces.bridge.resolveXMLEntities";
-	public static String PARAM_REQUIRED_TO_RESOLVE_XML_ENTITIES2 = "org.portletfaces.bridge.resolveXMLEntities";
+	@Deprecated
+	public static final String PARAM_PREFER_PRE_DESTROY1 = PortletConfigParam.PreferPreDestroy.getName();
 
-	/** Size in bytes for the buffer that is used to deliver resources back to the browser. Default value is 1024. */
-	public static final String PARAM_RESOURCE_BUFFER_SIZE1 = "com.liferay.faces.bridge.resourceBufferSize";
-	public static final String PARAM_RESOURCE_BUFFER_SIZE2 = "org.portletfaces.bridge.resourceBufferSize";
+	@Deprecated
+	public static final String PARAM_PREFER_PRE_DESTROY2 = PortletConfigParam.PreferPreDestroy.getAlternateName();
 
-	/** Name of the render parameter used to encode the viewId */
-	public static final String PARAM_VIEW_ID_RENDER = "com.liferay.faces.bridge.viewIdRenderParameterName";
+	@Deprecated
+	public static final String PARAM_RENDER_REDIRECT_ENABLED = PortletConfigParam.RenderRedirectEnabled.getName();
 
-	/** Name of the resource request parameter used to encode the viewId */
-	public static final String PARAM_VIEW_ID_RESOURCE = "com.liferay.faces.bridge.viewIdResourceParameterName";
+	@Deprecated
+	public static String PARAM_REQUIRED_TO_RESOLVE_XML_ENTITIES1 = PortletConfigParam.ResolveXMLEntities.getName();
 
-	/** Boolean indicating whether or not the JSF 2 "View Parameters" feature is enabled. Default value is true. */
-	public static String PARAM_VIEW_PARAMTERS_ENABLED = "com.liferay.faces.bridge.viewParametersEnabled";
+	@Deprecated
+	public static String PARAM_REQUIRED_TO_RESOLVE_XML_ENTITIES2 = PortletConfigParam.ResolveXMLEntities
+		.getAlternateName();
+
+	@Deprecated
+	public static final String PARAM_RESOURCE_BUFFER_SIZE1 = PortletConfigParam.ResourceBufferSize.getName();
+
+	@Deprecated
+	public static final String PARAM_RESOURCE_BUFFER_SIZE2 = PortletConfigParam.ResourceBufferSize.getAlternateName();
+
+	@Deprecated
+	public static final String PARAM_VIEW_ID_RENDER = PortletConfigParam.ViewIdRenderParameterName.getName();
+
+	@Deprecated
+	public static final String PARAM_VIEW_ID_RESOURCE = PortletConfigParam.ViewIdResourceParameterName.getName();
+
+	@Deprecated
+	public static String PARAM_VIEW_PARAMTERS_ENABLED = PortletConfigParam.ViewParametersEnabled.getName();
 }

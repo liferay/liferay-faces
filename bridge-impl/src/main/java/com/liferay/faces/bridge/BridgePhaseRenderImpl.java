@@ -37,13 +37,12 @@ import javax.portlet.faces.BridgeException;
 
 import com.liferay.faces.bridge.application.BridgeNavigationHandler;
 import com.liferay.faces.bridge.application.BridgeNavigationHandlerImpl;
-import com.liferay.faces.bridge.config.BridgeConfigConstants;
+import com.liferay.faces.bridge.config.PortletConfigParam;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.context.RenderRedirectWriter;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.event.IPCPhaseListener;
-import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -215,8 +214,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 		}
 
 		// Determines whether or not lifecycle incongruities should be managed.
-		boolean manageIncongruities = BooleanHelper.toBoolean(bridgeContext.getInitParameter(
-					BridgeConfigConstants.PARAM_MANAGE_INCONGRUITIES), true);
+		boolean manageIncongruities = PortletConfigParam.ManageIncongruities.getBooleanValue(portletConfig);
 
 		// Now that we're executing the RENDER_PHASE of the Portlet lifecycle, before the JSF
 		// RENDER_RESPONSE phase is executed, we have to fix some incongruities between the Portlet

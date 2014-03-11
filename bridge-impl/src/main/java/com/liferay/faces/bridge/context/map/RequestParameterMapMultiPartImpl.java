@@ -33,6 +33,7 @@ import javax.faces.render.ResponseStateManager;
 import javax.portlet.ActionRequest;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.PortalContext;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletSession;
@@ -50,13 +51,12 @@ import org.apache.commons.fileupload.portlet.PortletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
 import org.apache.commons.io.FileUtils;
 
-import com.liferay.faces.bridge.config.BridgeConfigConstants;
+import com.liferay.faces.bridge.config.PortletConfigParam;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.bridge.model.UploadedFileFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
@@ -217,8 +217,8 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 					fileItemIterator = portletFileUpload.getItemIterator(actionRequest);
 				}
 
-				boolean optimizeNamespace = BooleanHelper.toBoolean(bridgeContext.getInitParameter(
-							BridgeConfigConstants.PARAM_OPTIMIZE_PORTLET_NAMESPACE1), true);
+				PortletConfig portletConfig = bridgeContext.getPortletConfig();
+				boolean optimizeNamespace = PortletConfigParam.OptimizePortletNamespace.getBooleanValue(portletConfig);
 
 				if (fileItemIterator != null) {
 
