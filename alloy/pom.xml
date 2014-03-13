@@ -109,6 +109,13 @@
 			<artifactId>javax.servlet.jsp-api</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>liferay-faces-bridge-impl</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>com.liferay.portal</groupId>
 			<artifactId>portal-service</artifactId>
 			<optional>true</optional>
