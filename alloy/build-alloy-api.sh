@@ -82,8 +82,9 @@ if [ "$ALLOY_UI_VERSION" = "2.0.0" ] ; then
 
 	# Changes in this file from 
 	# https://github.com/liferay/alloy-apidocs-theme/commit/51f0e38aab92f0552e4e640ab31cb8dcb09590d6#diff-b3fb1962982568042e2b262821f8017a
-	# break the grunt api-build task on the 2.0.0 tag, so the file must be
-	# reverted to the state it was in previous to this commit
+	# break the grunt api-build task on the AlloyUI 2.0.0 tag, so the file must
+	# be reverted to the state it was in previous to this commit before running
+	# the task
 	sed -e "s/\"themedir\": \"\.\.\/\.\.\/alloy-apidocs-theme\",/\"themedir\": \"\.\.\/alloy-apidocs-theme\",/g" ../alloy-apidocs-theme/yuidoc.json > ../alloy-apidocs-theme/yuidoc.json.tmp && mv ../alloy-apidocs-theme/yuidoc.json.tmp ../alloy-apidocs-theme/yuidoc.json
 	sed -e "s/\"paths\": \[ \"yui3\/src\", \"alloy-ui\/src\" \]/\"paths\": \[ \"\.\.\/yui3\/src\", \"src\" \]/g" ../alloy-apidocs-theme/yuidoc.json > ../alloy-apidocs-theme/yuidoc.json.tmp && mv ../alloy-apidocs-theme/yuidoc.json.tmp ../alloy-apidocs-theme/yuidoc.json
 
