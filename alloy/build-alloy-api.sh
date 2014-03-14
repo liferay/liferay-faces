@@ -80,18 +80,18 @@ echo "Done initializing dependencies for alloyUI $ALLOY_UI_VERSION."
 echo "Building docs for alloyUI $ALLOY_UI_VERSION..."
 if [ "$ALLOY_UI_VERSION" = "2.0.0" ] ; then
 
-	# Changes in this file due to 
-	# https://github.com/liferay/alloy-apidocs-theme/commit/51f0e38aab92f0552e4e640ab31cb8dcb09590d6
-	# break the grunt api-build task on the AlloyUI 2.0.0 tag, so the file must
-	# be reverted to the state it was in previous to this commit before running
-	# the task.
+	# Commit e4469b81bb5c2831eed4d97e7a91d8e25220423f (link: 
+	# https://github.com/liferay/alloy-apidocs-theme/commit/51f0e38aab92f0552e4e640ab31cb8dcb09590d6)
+	# in the liferay/alloy-apidocs-theme repo breaks the grunt api-build task on
+	# the AlloyUI 2.0.0 tag. To fix this, the yuidoc.json file must be reverted
+	# to the state it was in previous to this commit before running the task.
 	cd ../alloy-apidocs-theme
 	git checkout -q e4469b81bb5c2831eed4d97e7a91d8e25220423f yuidoc.json
 
 	cd ../alloy-ui-$ALLOY_UI_VERSION/
 	grunt api-build
 
-	# Remove the changes just in case
+	# Reset all changes in alloy-apidocs-theme repo.
 	cd ../alloy-apidocs-theme
 	git reset -q
 	git checkout -q .
