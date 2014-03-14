@@ -152,6 +152,10 @@
 											<key>build-ext</key>
 											<value>generator.properties</value>
 										</systemProperty>
+										<systemProperty>
+											<key>HOME</key>
+											<value>${env.HOME}</value>
+										</systemProperty>
 									</systemProperties>
 									<executableDependency>
 										<groupId>com.liferay.alloy</groupId>
