@@ -23,8 +23,11 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 
-import com.liferay.faces.bridge.application.ResourceInfo;
+import com.liferay.faces.bridge.component.ComponentResource;
+import com.liferay.faces.bridge.component.ComponentResourceFactory;
+import com.liferay.faces.bridge.component.ComponentResourceUtil;
 import com.liferay.faces.bridge.renderkit.bridge.BridgeRenderer;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -97,22 +100,38 @@ public class BodyRendererBridgeImpl extends BridgeRenderer {
 
 		if (uiComponentResources != null) {
 
+			ComponentResourceFactory componentResourceFactory = (ComponentResourceFactory) FactoryExtensionFinder
+				.getFactory(ComponentResourceFactory.class);
+
 			for (UIComponent uiComponentResource : uiComponentResources) {
 
 				String originalTarget = (String) uiComponentResource.getAttributes().get(ORIGINAL_TARGET);
 
 				if (TARGET_HEAD.equals(originalTarget)) {
-					uiComponentResource.encodeAll(facesContext);
 
-					if (logger.isDebugEnabled()) {
-						ResourceInfo resourceInfo = new ResourceInfo(uiComponentResource);
+					ComponentResource componentResource = componentResourceFactory.getComponentResource(
+							uiComponentResource);
 
-						logger.debug(
-							"Rendering resource just after opening liferay-faces-bridge-body <div> name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
-							new Object[] {
-								resourceInfo.getName(), resourceInfo.getLibrary(), resourceInfo.getRendererType(),
-								resourceInfo.getValue(), resourceInfo.getClassName(),
-							});
+					if (componentResource.isRenderable()) {
+						uiComponentResource.encodeAll(facesContext);
+
+						if (logger.isDebugEnabled()) {
+
+							if (logger.isDebugEnabled()) {
+
+								logger.debug(
+									"Rendering resource just after opening liferay-faces-bridge-body <div> name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
+									new Object[] {
+										componentResource.getName(), componentResource.getLibrary(),
+										uiComponentResource.getRendererType(),
+										ComponentResourceUtil.getComponentValue(uiComponentResource),
+										uiComponentResource.getClass().getName(),
+									});
+							}
+						}
+					}
+					else {
+						logger.debug("Skipped rendering componentResourceId=[{0}]", componentResource.getId());
 					}
 				}
 			}
@@ -128,24 +147,35 @@ public class BodyRendererBridgeImpl extends BridgeRenderer {
 
 		if (uiComponentResources != null) {
 
+			ComponentResourceFactory componentResourceFactory = (ComponentResourceFactory) FactoryExtensionFinder
+				.getFactory(ComponentResourceFactory.class);
+
 			for (UIComponent uiComponentResource : uiComponentResources) {
 
 				String originalTarget = (String) uiComponentResource.getAttributes().get(ORIGINAL_TARGET);
 
 				if (!TARGET_HEAD.equals(originalTarget)) {
 
-					// Render the current resource.
-					uiComponentResource.encodeAll(facesContext);
+					ComponentResource componentResource = componentResourceFactory.getComponentResource(
+							uiComponentResource);
 
-					if (logger.isDebugEnabled()) {
-						ResourceInfo resourceInfo = new ResourceInfo(uiComponentResource);
+					if (componentResource.isRenderable()) {
+						uiComponentResource.encodeAll(facesContext);
 
-						logger.debug(
-							"Rendering resource just before closing liferay-faces-bridge-body </div> name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
-							new Object[] {
-								resourceInfo.getName(), resourceInfo.getLibrary(), resourceInfo.getRendererType(),
-								resourceInfo.getValue(), resourceInfo.getClassName(),
-							});
+						if (logger.isDebugEnabled()) {
+
+							logger.debug(
+								"Rendering resource just before closing liferay-faces-bridge-body </div> name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
+								new Object[] {
+									componentResource.getName(), componentResource.getLibrary(),
+									uiComponentResource.getRendererType(),
+									ComponentResourceUtil.getComponentValue(uiComponentResource),
+									uiComponentResource.getClass().getName(),
+								});
+						}
+					}
+					else {
+						logger.debug("Skipped rendering componentResourceId=[{0}]", componentResource.getId());
 					}
 				}
 			}
