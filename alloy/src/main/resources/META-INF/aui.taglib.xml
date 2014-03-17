@@ -17,4 +17,1010 @@
 		<function-class>com.liferay.faces.util.component.ComponentUtil</function-class>
 		<function-signature>java.lang.String findClientId(java.lang.String)</function-signature>
 	</function>
+	<tag>
+		<description><![CDATA[A base class for ACE Editor.  Check the [live demo](http://alloyui.com/examples/ace-editor/).]]></description>
+		<tag-name>aceEditor</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.aceeditor.AceEditor</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.aceeditor.AceEditorRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation
+is left to the specific classes extending widget.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>aceEditorDisabled</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>aceEditorId</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this Widget
+has been through the render lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>aceEditorRendered</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Some predefined value on the editor.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>aceEditorValue</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning
+of a Widget as well as a containing element for any decorator elements used
+for skinning.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterBoundingBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that
+houses its content.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterContentBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object
+has been through the destroy lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterDestroyedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation
+is left to the specific classes extending widget.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterDisabledChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants,
+has focus.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterFocusedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The height of ACE Editor.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterHeightChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the active line of code
+will be highlighted or not.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterHighlightActiveLineChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterIdChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object
+has been through the init lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterInitializedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will
+return/set strings for this locale.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterLocaleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Correspond to the language being typed.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterModeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the code will be
+editable or not.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterReadOnlyChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterRenderChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this Widget
+has been through the render lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterRenderedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if print margin will
+be visible or not.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterShowPrintMarginChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterSrcNodeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterStringsChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's
+position in the default tab flow.  The value is used to set the
+"tabIndex" attribute on the widget's bounding box.  Negative values allow
+the widget to receive DOM focus programmatically (by calling the focus
+method), while being removed from the default tab flow.  A value of
+null removes the "tabIndex" attribute from the widget's bounding box.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterTabIndexChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The indentation size of tab key.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterTabSizeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the tab key will act as
+space characters or tab characters.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterUseSoftTabsChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the line will break
+when it reaches the end of the line.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterUseWrapModeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Some predefined value on the editor.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterValueChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterVisibleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The width of ACE Editor.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterWidthChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning
+of a Widget as well as a containing element for any decorator elements used
+for skinning.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>boundingBox</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that
+houses its content.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>contentBox</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object
+has been through the destroy lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>destroyed</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants,
+has focus.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>focused</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The height of ACE Editor.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"400"}-->]]></description>
+			<name>height</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the active line of code
+will be highlighted or not.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
+			<name>highlightActiveLine</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object
+has been through the init lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>initialized</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will
+return/set strings for this locale.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false,"defaultValue":"en"}-->]]></description>
+			<name>locale</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Correspond to the language being typed.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>mode</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning
+of a Widget as well as a containing element for any decorator elements used
+for skinning.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onBoundingBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that
+houses its content.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onContentBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object
+has been through the destroy lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onDestroyedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation
+is left to the specific classes extending widget.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onDisabledChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants,
+has focus.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onFocusedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The height of ACE Editor.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onHeightChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the active line of code
+will be highlighted or not.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onHighlightActiveLineChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onIdChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object
+has been through the init lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onInitializedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will
+return/set strings for this locale.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onLocaleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Correspond to the language being typed.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onModeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the code will be
+editable or not.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onReadOnlyChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onRenderChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this Widget
+has been through the render lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onRenderedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if print margin will
+be visible or not.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onShowPrintMarginChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onSrcNodeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onStringsChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's
+position in the default tab flow.  The value is used to set the
+"tabIndex" attribute on the widget's bounding box.  Negative values allow
+the widget to receive DOM focus programmatically (by calling the focus
+method), while being removed from the default tab flow.  A value of
+null removes the "tabIndex" attribute from the widget's bounding box.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onTabIndexChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The indentation size of tab key.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onTabSizeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the tab key will act as
+space characters or tab characters.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onUseSoftTabsChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the line will break
+when it reaches the end of the line.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onUseWrapModeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Some predefined value on the editor.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onValueChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onVisibleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The width of ACE Editor.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onWidthChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the code will be
+editable or not.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>readOnly</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>render</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if print margin will
+be visible or not.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
+			<name>showPrintMargin</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>srcNode</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.util.HashMap","required":false,"defaultValue":"{}"}-->]]></description>
+			<name>strings</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's
+position in the default tab flow.  The value is used to set the
+"tabIndex" attribute on the widget's bounding box.  Negative values allow
+the widget to receive DOM focus programmatically (by calling the focus
+method), while being removed from the default tab flow.  A value of
+null removes the "tabIndex" attribute from the widget's bounding box.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"null"}-->]]></description>
+			<name>tabIndex</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The indentation size of tab key.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"4"}-->]]></description>
+			<name>tabSize</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the tab key will act as
+space characters or tab characters.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
+			<name>useSoftTabs</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the line will break
+when it reaches the end of the line.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
+			<name>useWrapMode</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
+			<name>visible</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the widget's javascript variable.]]></description>
+			<name>widgetVar</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The width of ACE Editor.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"800"}-->]]></description>
+			<name>width</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m1</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[A base class for TabView.  Check the [live demo](http://alloyui.com/examples/tabview/).]]></description>
+		<tag-name>tabView</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.tabview.TabView</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.tabview.TabViewRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[Returns the Widget's currently focused descendant Widget.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>activeDescendant</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Returns the Widget's currently focused descendant Widget.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterActiveDescendantChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning
+of a Widget as well as a containing element for any decorator elements used
+for skinning.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterBoundingBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that
+houses its content.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterContentBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String representing the default type of the children 
+managed by this Widget.  Can also supply default type as a constructor
+reference.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterDefaultChildTypeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object
+has been through the destroy lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterDestroyedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation
+is left to the specific classes extending widget.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterDisabledChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants,
+has focus.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterFocusedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided,
+the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterHeightChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterIdChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object
+has been through the init lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterInitializedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will
+return/set strings for this locale.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterLocaleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if multiple children can be selected at 
+once.  Whether or not multiple selection is enabled is always delegated
+to the value of the <code>multiple</code> attribute of the root widget
+in the object hierarchy.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterMultipleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterRenderChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this Widget
+has been through the render lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterRenderedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Returns the currently selected child Widget.  If the 
+<code>mulitple</code> attribte is set to <code>true</code> will 
+return an Y.ArrayList instance containing the currently selected 
+children.  If no children are selected, will return null.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterSelectionChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterSrcNodeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine the orientation of tabs.
+Can be stacked (vertical) or not (horizontal).<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterStackedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterStringsChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's
+position in the default tab flow.  The value is used to set the
+"tabIndex" attribute on the widget's bounding box.  Negative values allow
+the widget to receive DOM focus programmatically (by calling the focus
+method), while being removed from the default tab flow.  A value of
+null removes the "tabIndex" attribute from the widget's bounding box.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterTabIndexChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine the type of tabs.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterTypeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterVisibleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided,
+the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterWidthChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning
+of a Widget as well as a containing element for any decorator elements used
+for skinning.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>boundingBox</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that
+houses its content.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>contentBox</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String representing the default type of the children 
+managed by this Widget.  Can also supply default type as a constructor
+reference.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>defaultChildType</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object
+has been through the destroy lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>destroyed</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants,
+has focus.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>focused</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided,
+the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>height</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object
+has been through the init lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>initialized</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will
+return/set strings for this locale.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false,"defaultValue":"en"}-->]]></description>
+			<name>locale</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if multiple children can be selected at 
+once.  Whether or not multiple selection is enabled is always delegated
+to the value of the <code>multiple</code> attribute of the root widget
+in the object hierarchy.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>multiple</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Returns the Widget's currently focused descendant Widget.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onActiveDescendantChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning
+of a Widget as well as a containing element for any decorator elements used
+for skinning.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onBoundingBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that
+houses its content.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onContentBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String representing the default type of the children 
+managed by this Widget.  Can also supply default type as a constructor
+reference.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onDefaultChildTypeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object
+has been through the destroy lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onDestroyedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation
+is left to the specific classes extending widget.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onDisabledChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants,
+has focus.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onFocusedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided,
+the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onHeightChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onIdChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object
+has been through the init lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onInitializedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will
+return/set strings for this locale.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onLocaleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if multiple children can be selected at 
+once.  Whether or not multiple selection is enabled is always delegated
+to the value of the <code>multiple</code> attribute of the root widget
+in the object hierarchy.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onMultipleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onRenderChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this Widget
+has been through the render lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onRenderedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Returns the currently selected child Widget.  If the 
+<code>mulitple</code> attribte is set to <code>true</code> will 
+return an Y.ArrayList instance containing the currently selected 
+children.  If no children are selected, will return null.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onSelectionChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onSrcNodeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine the orientation of tabs.
+Can be stacked (vertical) or not (horizontal).<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onStackedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onStringsChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's
+position in the default tab flow.  The value is used to set the
+"tabIndex" attribute on the widget's bounding box.  Negative values allow
+the widget to receive DOM focus programmatically (by calling the focus
+method), while being removed from the default tab flow.  A value of
+null removes the "tabIndex" attribute from the widget's bounding box.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onTabIndexChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine the type of tabs.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onTypeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onVisibleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided,
+the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onWidthChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>render</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Returns the currently selected child Widget.  If the 
+<code>mulitple</code> attribte is set to <code>true</code> will 
+return an Y.ArrayList instance containing the currently selected 
+children.  If no children are selected, will return null.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>selection</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>srcNode</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine the orientation of tabs.
+Can be stacked (vertical) or not (horizontal).<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false,"defaultValue":"false"}-->]]></description>
+			<name>stacked</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.util.HashMap","required":false,"defaultValue":"{}"}-->]]></description>
+			<name>strings</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's
+position in the default tab flow.  The value is used to set the
+"tabIndex" attribute on the widget's bounding box.  Negative values allow
+the widget to receive DOM focus programmatically (by calling the focus
+method), while being removed from the default tab flow.  A value of
+null removes the "tabIndex" attribute from the widget's bounding box.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"null"}-->]]></description>
+			<name>tabIndex</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation
+is left to the specific classes extending widget.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>tabViewDisabled</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>tabViewId</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this Widget
+has been through the render lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>tabViewRendered</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine the type of tabs.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false,"defaultValue":"tabs"}-->]]></description>
+			<name>type</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
+			<name>visible</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the widget's javascript variable.]]></description>
+			<name>widgetVar</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided,
+the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>width</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m1</vdldoc:since>
+		</tag-extension>
+	</tag>
 </facelet-taglib>
