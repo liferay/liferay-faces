@@ -17,4 +17,17 @@
 		</function>
 	</functions>
 	<component name="AceEditor" parentClass="javax.faces.component.UIInput" />
+	<component name="Tab" parentClass="javax.faces.component.UIColumn" rendererParentClass="com.liferay.faces.util.renderer.RendererBase">
+		<attributes>
+			<attribute>
+				<defaultValue></defaultValue>
+				<description></description>
+				<inputType>java.lang.String</inputType>
+				<javaScriptType>String</javaScriptType>
+				<name>label</name>
+				<outputType>java.lang.String</outputType>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="TabView" parentClass="javax.faces.component.UIData" />
 </components>
