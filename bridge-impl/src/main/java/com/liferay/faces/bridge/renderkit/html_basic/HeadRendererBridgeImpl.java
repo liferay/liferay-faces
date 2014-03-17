@@ -28,10 +28,13 @@ import javax.portlet.PortletRequest;
 import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.application.ResourceInfo;
+import com.liferay.faces.bridge.component.ComponentResource;
+import com.liferay.faces.bridge.component.ComponentResourceFactory;
+import com.liferay.faces.bridge.component.ComponentResourceUtil;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.renderkit.bridge.BridgeRenderer;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -153,6 +156,9 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 			headResourceIdsFromManagedBean = headManagedBean.getHeadResourceIds();
 		}
 
+		ComponentResourceFactory componentResourceFactory = (ComponentResourceFactory) FactoryExtensionFinder
+			.getFactory(ComponentResourceFactory.class);
+
 		// For each resource in the ViewRoot: Determine if it should added to the <head> section of the portal page,
 		// or if it should be relocated to the body (which is actually not a <body> element, but a <div> element
 		// rendered by the bridge's BodyRenderer).
@@ -165,19 +171,24 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 				// Note that this can happen in one of two ways: 1) If this is NON-Liferay-Runtime portlet (currently
 				// doing Ajax) but has already added the resource during initial page HTTP-GET render, or 2) By another
 				// NON-Liferay-Runtime portlet that has already added the same JavaScript resource.
-				ResourceInfo resourceInfo = new ResourceInfo(uiComponentResource);
-				boolean alreadyPresentInPortalPageHead = headResourceIdsFromManagedBean.contains(resourceInfo.getId());
+				ComponentResource componentResource = componentResourceFactory.getComponentResource(
+						uiComponentResource);
+				boolean alreadyPresentInPortalPageHead = headResourceIdsFromManagedBean.contains(
+						componentResource.getId());
 
 				// If the resource is already present in the <head> section of the portal page, then simply output a
 				// logger message to this fact.
 				if (alreadyPresentInPortalPageHead) {
 
 					if (logger.isDebugEnabled()) {
+
 						logger.debug(
 							"Resource already present in head: name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
 							new Object[] {
-								resourceInfo.getName(), resourceInfo.getLibrary(), resourceInfo.getRendererType(),
-								resourceInfo.getValue(), resourceInfo.getClassName(),
+								componentResource.getName(), componentResource.getLibrary(),
+								uiComponentResource.getRendererType(),
+								ComponentResourceUtil.getComponentValue(uiComponentResource),
+								uiComponentResource.getClass().getName(),
 							});
 					}
 				}
@@ -188,8 +199,10 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 					logger.debug(
 						"Relocating resource to body (since it was added via Ajax and is not yet present in head): name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
 						new Object[] {
-							resourceInfo.getName(), resourceInfo.getLibrary(), resourceInfo.getRendererType(),
-							resourceInfo.getValue(), resourceInfo.getClassName(),
+							componentResource.getName(), componentResource.getLibrary(),
+							uiComponentResource.getRendererType(),
+							ComponentResourceUtil.getComponentValue(uiComponentResource),
+							uiComponentResource.getClass().getName(),
 						});
 
 					resourcesForRelocatingToBody.add(uiComponentResource);
@@ -230,11 +243,15 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 			// For each resource:
 			for (UIComponent uiComponentResource : resourcesForAddingToHead) {
 
-				// Command the resource to render itself to the HeadResponseWriter
-				uiComponentResource.encodeAll(facesContext);
+				ComponentResource componentResource = componentResourceFactory.getComponentResource(
+						uiComponentResource);
 
-				ResourceInfo resourceInfo = new ResourceInfo(uiComponentResource);
-				String resourceId = resourceInfo.getId();
+				// Command the resource to render itself to the HeadResponseWriter
+				if (componentResource.isRenderable()) {
+					uiComponentResource.encodeAll(facesContext);
+				}
+
+				String resourceId = componentResource.getId();
 
 				// If the resource has not yet been marked as having been added, then mark it now. Note that unless the
 				// resource is a RichFaces Resource Library (see comments below), the resource has probably already been
@@ -277,13 +294,16 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 			uiViewRoot.addComponentResource(facesContext, uiComponentResource, TARGET_BODY);
 
 			if (logger.isDebugEnabled()) {
-				ResourceInfo resourceInfo = new ResourceInfo(uiComponentResource);
+				ComponentResource componentResource = componentResourceFactory.getComponentResource(
+						uiComponentResource);
 
 				logger.debug(
 					"Relocating resource to body: name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
 					new Object[] {
-						resourceInfo.getName(), resourceInfo.getLibrary(), resourceInfo.getRendererType(),
-						resourceInfo.getValue(), resourceInfo.getClassName(),
+						componentResource.getName(), componentResource.getLibrary(),
+						uiComponentResource.getRendererType(),
+						ComponentResourceUtil.getComponentValue(uiComponentResource),
+						uiComponentResource.getClass().getName(),
 					});
 			}
 		}

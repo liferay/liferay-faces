@@ -61,6 +61,11 @@
 		<converter-id>convertLongList</converter-id>
 		<converter-class>com.liferay.faces.alloy.converter.LongListConverter</converter-class>
 	</converter>
+	<factory>
+		<factory-extension>
+			<bridge:component-resource-factory>com.liferay.faces.alloy.component.ComponentResourceFactoryAlloyImpl</bridge:component-resource-factory>
+		</factory-extension>
+	</factory>
 	<render-kit>
 		<renderer>
 			<component-family>javax.faces.Panel</component-family>
