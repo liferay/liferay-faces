@@ -20,6 +20,10 @@ import com.liferay.faces.util.product.ProductMap;
 
 
 /**
+ * This class provides Liferay Faces Alloy with the opportunity to inform Liferay Faces Bridge that certain JavaScript
+ * resources should not be rendered when running in Liferay Portal, because they are already present by default in the
+ * portal page.
+ *
  * @author  Neil Griffin
  */
 public class ComponentResourceAlloyImpl extends ComponentResourceWrapper {
@@ -45,7 +49,6 @@ public class ComponentResourceAlloyImpl extends ComponentResourceWrapper {
 			String id = super.getId();
 
 			if (LIFERAY_JS_RESOURCE_ID.equals(id)) {
-				System.err.println("!@#$ " + LIFERAY_JS_RESOURCE_ID + " IS NOT RENDERABLE!");
 				renderable = false;
 			}
 		}
