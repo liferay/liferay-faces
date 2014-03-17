@@ -58,14 +58,14 @@ if [ $# -ne 0 ] ; then
 	ALLOY_UI_VERSION=$1
 fi
 
-if [ ! -d ".alloyui" ] ; then
-	mkdir .alloyui
-	mkdir .alloyui/alloy-build
-elif [ ! -d ".alloyui/alloy-build" ] ; then
-	mkdir .alloyui/alloy-build
+if [ ! -d "$HOME/.alloyui" ] ; then
+	mkdir $HOME/.alloyui
+	mkdir $HOME/.alloyui/alloy-build
+elif [ ! -d "$HOME/.alloyui/alloy-build" ] ; then
+	mkdir $HOME/.alloyui/alloy-build
 fi
 
-cd .alloyui/
+cd $HOME/.alloyui/
 echo "Getting $ALLOY_UI_VERSION.zip..."
 curl -L https://github.com/liferay/alloy-ui/archive/$ALLOY_UI_VERSION.zip -o $ALLOY_UI_VERSION.zip
 echo "Done getting $ALLOY_UI_VERSION.zip."
@@ -79,7 +79,21 @@ grunt init
 echo "Done initializing dependencies for alloyUI $ALLOY_UI_VERSION."
 echo "Building docs for alloyUI $ALLOY_UI_VERSION..."
 if [ "$ALLOY_UI_VERSION" = "2.0.0" ] ; then
+
+	# Workaround for https://issues.liferay.com/browse/AUI-1183
+	cd ../alloy-apidocs-theme
+	git checkout -q e4469b81bb5c2831eed4d97e7a91d8e25220423f yuidoc.json
+
+	cd ../alloy-ui-$ALLOY_UI_VERSION/
 	grunt api-build
+
+	# (Workaround for https://issues.liferay.com/browse/AUI-1183 cont.) Reset
+	# all changes in alloy-apidocs-theme directory. 
+	cd ../alloy-apidocs-theme
+	git reset -q
+	git checkout -q .
+	git clean -d -f -q
+	cd ../alloy-ui-$ALLOY_UI_VERSION/
 else
 	grunt api
 fi
