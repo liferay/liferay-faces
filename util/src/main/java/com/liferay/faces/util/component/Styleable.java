@@ -22,12 +22,7 @@ package com.liferay.faces.util.component;
 public interface Styleable {
 
 	// Public Constants
-	public static final String CSS_CLASS = "cssClass";
 	public static final String STYLE_CLASS = "styleClass";
-
-	public String getCssClass();
-
-	public void setCssClass(String cssClass);
 
 	public String getStyleClass();
 

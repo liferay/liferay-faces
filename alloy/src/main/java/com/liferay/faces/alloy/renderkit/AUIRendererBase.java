@@ -216,4 +216,9 @@ public abstract class AUIRendererBase extends RendererBase {
 		responseWriter.write(String.valueOf(attributeValue));
 		responseWriter.write(StringPool.QUOTE);
 	}
+
+	@Override
+	protected boolean hasJavaScript() {
+		return true;
+	}
 }

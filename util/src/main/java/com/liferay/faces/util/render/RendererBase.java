@@ -63,16 +63,19 @@ public abstract class RendererBase extends Renderer {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		if (!isAjax(facesContext) && isForceInline(uiComponent)) {
+		if (hasJavaScript()) {
 
-			responseWriter.startElement(StringPool.SCRIPT, uiComponent);
-			responseWriter.writeAttribute(TYPE, TEXT_JAVASCRIPT, null);
-		}
+			if (!isAjax(facesContext) && isForceInline(uiComponent)) {
 
-		encodeJavaScript(facesContext, uiComponent);
+				responseWriter.startElement(StringPool.SCRIPT, uiComponent);
+				responseWriter.writeAttribute(TYPE, TEXT_JAVASCRIPT, null);
+			}
 
-		if (!isAjax(facesContext) && isForceInline(uiComponent)) {
-			responseWriter.endElement(StringPool.SCRIPT);
+			encodeJavaScript(facesContext, uiComponent);
+
+			if (!isAjax(facesContext) && isForceInline(uiComponent)) {
+				responseWriter.endElement(StringPool.SCRIPT);
+			}
 		}
 	}
 
@@ -162,6 +165,10 @@ public abstract class RendererBase extends Renderer {
 
 			ScriptDataUtil.append(scriptData, portletId, bufferedResponseWriter.toString(), getModule());
 		}
+	}
+
+	protected boolean hasJavaScript() {
+		return false;
 	}
 
 	protected boolean isForceInline(UIComponent uiComponent) {

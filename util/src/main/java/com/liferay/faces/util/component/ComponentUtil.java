@@ -73,13 +73,6 @@ public class ComponentUtil {
 			allClasses.append(classNames);
 		}
 
-		String cssClass = styleable.getCssClass();
-
-		if ((cssClass != null) && (cssClass.length() > 0)) {
-			allClasses.append(StringPool.SPACE);
-			allClasses.append(cssClass);
-		}
-
 		String styleClass = styleable.getStyleClass();
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
