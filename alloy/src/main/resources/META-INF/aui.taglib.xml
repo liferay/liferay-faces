@@ -18,6 +18,29 @@
 		<function-signature>java.lang.String findClientId(java.lang.String)</function-signature>
 	</function>
 	<tag>
+		<description></description>
+		<tag-name>tab</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.tab.Tab</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.tab.TabRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[]]></description>
+			<name>label</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m1</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
 		<description><![CDATA[A base class for ACE Editor.  Check the [live demo](http://alloyui.com/examples/ace-editor/).]]></description>
 		<tag-name>aceEditor</tag-name>
 		<component>
