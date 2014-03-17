@@ -19,5 +19,7 @@ package com.liferay.faces.util.application;
 public class ResourceConstants {
 
 	public static final String JAVAX_FACES_RESOURCE = "javax.faces.resource";
+	public static final String LIBRARY = "library";
 	public static final String LN = "ln";
+	public static final String NAME = "name";
 }
