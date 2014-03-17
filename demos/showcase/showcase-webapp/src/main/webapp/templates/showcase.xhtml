@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:aui-cc="http://liferay.com/faces/aui-cc"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head />
+	<h:body>
+		<aui-nongen:row>
+			<aui-nongen:col width="20">
+				<aui-nongen:list>
+					<ui:repeat value="#{listModelBean.showcaseComponents}" var="showcaseComponent">
+						<aui-nongen:list-item>
+							<h:outputText value="#{showcaseComponent}" />
+							<aui-nongen:list>
+								<ui:repeat value="#{showcaseComponent.useCases}" var="useCase">
+									<aui-nongen:list-item>
+										<h:link value="#{i18n[useCase.name]}">
+											<f:param name="componentPrefix" value="#{showcaseComponent.prefix}" />
+											<f:param name="componentName" value="#{showcaseComponent.lowerCaseName}" />
+											<f:param name="componentUseCase" value="#{useCase.name}" />
+										</h:link>
+									</aui-nongen:list-item>
+								</ui:repeat>
+							</aui-nongen:list>
+						</aui-nongen:list-item>
+					</ui:repeat>
+				</aui-nongen:list>
+			</aui-nongen:col>
+			<aui-nongen:col width="80">
+				<ui:insert name="content" />
+			</aui-nongen:col>
+		</aui-nongen:row>
+	</h:body>
+</f:view>

@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" template="/templates/showcase.xhtml">
+
+	<ui:define name="content">
+		<h:outputStylesheet name="home.css" library="css" />
+		<div class="showcase-home">
+			<h:graphicImage library="images" name="liferay-faces-logo.png" styleClass="logo" />
+			<h2>Liferay Faces Showcase</h2>
+			<p>
+				<a href="https://www.liferay.com/community/liferay-projects/liferay-faces">Liferay Faces</a> is an umbrella project
+				that provides support for the JavaServer<sup>TM</sup> Faces (JSF) standard within Liferay Portal. This showcase
+				application demonstrates usage of Facelet component tags provided by the following sub-projects:
+			</p>
+			<h3>Liferay Faces Alloy</h3>
+			<p>
+				The <a href="https://www.liferay.com/community/liferay-projects/liferay-faces/alloy">Liferay Faces Alloy</a>
+				sub-project provides a suite of JSF UI components that utilize <a href="http://alloyui.com/">Alloy UI</a>.
+			</p>
+			<p>
+				The Facelet component tags provided by Liferay Faces Alloy are prefixed with the <strong>aui:</strong> namespace.
+			</p>
+			<h3>Liferay Faces Bridge</h3>
+			<p>
+				The <a href="https://www.liferay.com/community/liferay-projects/liferay-faces/bridge">Liferay Faces Bridge</a> is a
+				portlet bridge for JSF which provides the ability to deploy JSF web applications as portlets within Liferay Portal.
+			</p>
+			<p>
+				The Facelet component tags provided by Liferay Faces Bridge are prefixed with the <strong>bridge:</strong> and <strong>portlet:</strong>
+				namespaces.
+			</p>
+			<h3>Liferay Faces Portal</h3>
+			<p>
+				The <a href="https://www.liferay.com/community/liferay-projects/liferay-faces/portal">Liferay Faces Portal</a>
+				sub-project provides JSF utilities, EL keywords, and a suite of JSF UI components that are Facelet equivalents of
+				the JSP tag libraries provided by Liferay Portal.
+			</p>
+			<p>
+				The Facelet component tags provided by Liferay Faces Portal are prefixed with the <strong>liferay-ui:</strong>, <strong>liferay-util</strong>,
+				and <strong>liferay-security:</strong> namespaces.
+			</p>
+		</div>
+	</ui:define>
+
+</ui:composition>
