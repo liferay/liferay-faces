@@ -11,15 +11,36 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.application;
+package com.liferay.faces.bridge.component;
+
+import javax.faces.FacesWrapper;
+
 
 /**
  * @author  Neil Griffin
  */
-public class ResourceConstants {
+public abstract class ComponentResourceWrapper implements ComponentResource, FacesWrapper<ComponentResource> {
 
-	public static final String JAVAX_FACES_RESOURCE = "javax.faces.resource";
-	public static final String LIBRARY = "library";
-	public static final String LN = "ln";
-	public static final String NAME = "name";
+	@Override
+	public boolean isRenderable() {
+		return getWrapped().isRenderable();
+	}
+
+	@Override
+	public String getId() {
+		return getWrapped().getId();
+	}
+
+	@Override
+	public String getLibrary() {
+		return getWrapped().getLibrary();
+	}
+
+	@Override
+	public String getName() {
+		return getWrapped().getName();
+	}
+
+	@Override
+	public abstract ComponentResource getWrapped();
 }
