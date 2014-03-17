@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components>
 <components extends="./target/alloy-generator/data.xml" namespace="aui" namespaceURI="http://liferay.com/faces/aui"
 	description="The Liferay Faces Alloy facelet component tags with the &lt;code&gt;aui:&lt;/code&gt; tag name prefix.">
 	<functions>
@@ -15,4 +16,5 @@
 			<function-signature>java.lang.String findClientId(java.lang.String)</function-signature>
 		</function>
 	</functions>
+	<component name="AceEditor" parentClass="javax.faces.component.UIInput" />
 </components>
