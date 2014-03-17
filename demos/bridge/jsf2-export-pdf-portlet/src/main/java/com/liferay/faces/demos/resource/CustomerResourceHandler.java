@@ -60,11 +60,18 @@ public class CustomerResourceHandler extends ResourceHandlerBridgeImpl {
 		String libraryName = externalContext.getRequestParameterMap().get(ResourceConstants.LN);
 		String resourceName = externalContext.getRequestParameterMap().get(ResourceConstants.JAVAX_FACES_RESOURCE);
 
+		// If the resource that is to be rendered is a customer resource, then let this resource handler write the
+		// contents of the resource to the response.
 		if (LIBRARY_NAME.equals(libraryName) && CustomerExportResource.RESOURCE_NAME.equals(resourceName)) {
 
 			Resource resource = createResource(resourceName, libraryName);
 
 			handleResource(facesContext, resource);
+		}
+
+		// Otherwise, pass responsibility for handling the resource to the resource-handler delegation chain.
+		else {
+			getWrapped().handleResourceRequest(facesContext);
 		}
 	}
 
