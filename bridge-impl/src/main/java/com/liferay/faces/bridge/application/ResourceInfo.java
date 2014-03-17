@@ -16,80 +16,42 @@ package com.liferay.faces.bridge.application;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
-import javax.faces.component.ValueHolder;
+
+import com.liferay.faces.bridge.component.ComponentResource;
+import com.liferay.faces.bridge.component.ComponentResourceImpl;
+import com.liferay.faces.bridge.component.ComponentResourceUtil;
+import com.liferay.faces.util.application.ResourceConstants;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Use {@link ComponentResourceImpl} instead.
  */
-public class ResourceInfo {
+@Deprecated
+public class ResourceInfo extends ComponentResourceImpl {
 
+	// Private Data Members
 	private String className;
-	private String id;
-	private String library;
-	private String name;
-	private String rendererType;
-	private String value;
 
 	public ResourceInfo(UIComponent uiComponentResource) {
-
-		if (uiComponentResource != null) {
-
-			className = uiComponentResource.getClass().getName();
-
-			Map<String, Object> attributes = uiComponentResource.getAttributes();
-
-			if (attributes != null) {
-				Object nameAsObject = attributes.get("name");
-
-				if (nameAsObject != null) {
-					name = nameAsObject.toString();
-					id = name;
-				}
-
-				Object libraryAsObject = attributes.get("library");
-
-				if (libraryAsObject != null) {
-					library = libraryAsObject.toString();
-					id = library + ":" + name;
-				}
-			}
-
-			rendererType = uiComponentResource.getRendererType();
-
-			if (uiComponentResource instanceof ValueHolder) {
-				ValueHolder valueHolder = (ValueHolder) uiComponentResource;
-				Object valueAsObject = valueHolder.getValue();
-
-				if (valueAsObject != null) {
-					value = valueAsObject.toString();
-				}
-			}
-		}
+		this(uiComponentResource.getAttributes(), true);
+		this.className = uiComponentResource.getClass().getName();
 	}
 
+	public ResourceInfo(Map<String, Object> componentAttributes, boolean renderable) {
+		this((String) componentAttributes.get(ResourceConstants.LIBRARY),
+			(String) componentAttributes.get(ResourceConstants.NAME), renderable);
+	}
+
+	public ResourceInfo(String library, String name, boolean renderable) {
+		super(ComponentResourceUtil.getId(library, name), library, name, renderable);
+	}
+
+	/**
+	 * @deprecated  Call {@link ComponentResource#getComponentClassName()} instead.
+	 */
+	@Deprecated
 	public String getClassName() {
 		return className;
 	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getLibrary() {
-		return library;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getRendererType() {
-		return rendererType;
-	}
-
-	public String getValue() {
-		return value;
-	}
-
 }

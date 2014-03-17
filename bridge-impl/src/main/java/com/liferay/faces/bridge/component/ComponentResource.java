@@ -11,15 +11,21 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.application;
+package com.liferay.faces.bridge.component;
 
 /**
+ * This interface defines a contract for getting information about a {@link javax.faces.component.UIComponent}} resource
+ * such as its name, library, and whether or not it should be rendered.
+ *
  * @author  Neil Griffin
  */
-public class ResourceConstants {
+public interface ComponentResource {
 
-	public static final String JAVAX_FACES_RESOURCE = "javax.faces.resource";
-	public static final String LIBRARY = "library";
-	public static final String LN = "ln";
-	public static final String NAME = "name";
+	public boolean isRenderable();
+
+	public String getId();
+
+	public String getLibrary();
+
+	public String getName();
 }
