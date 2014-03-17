@@ -7,6 +7,26 @@
    <short-name>aui</short-name>
    <uri>http://liferay.com/faces/aui</uri>
    <tag>
+      <description/>
+      <name>tab</name>
+      <tag-class>com.liferay.faces.alloy.taglib.TabTag</tag-class>
+      <body-content>JSP</body-content>
+      <attribute>
+         <name>label</name>
+         <required>false</required>
+         <deferred-value>
+            <type>String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>styleClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>String</type>
+         </deferred-value>
+      </attribute>
+   </tag>
+   <tag>
       <description>A base class for ACE Editor.  Check the [live demo](http://alloyui.com/examples/ace-editor/).</description>
       <name>aceEditor</name>
       <tag-class>com.liferay.faces.alloy.taglib.AceEditorTag</tag-class>
