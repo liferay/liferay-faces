@@ -1,0 +1,12 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<aui:tabView value="#{tabViewModelBean.liferayBenefits}" var="liferayBenefit">
+		<aui:tab label="#{liferayBenefit.label}">
+			<h:graphicImage name="#{liferayBenefit.imageName}" library="images" />
+			<h4>#{liferayBenefit.title}</h4>
+			<span>#{liferayBenefit.description}</span>
+		</aui:tab>
+	</aui:tabView>
+
+</ui:composition>

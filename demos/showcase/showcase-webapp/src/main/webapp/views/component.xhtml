@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/showcase.xhtml">
+
+	<ui:define name="content">
+		<f:metadata>
+			<f:viewParam name="componentPrefix" value="#{showcaseModelBean.viewParameters.componentPrefix}" />
+			<f:viewParam name="componentName" value="#{showcaseModelBean.viewParameters.componentName}" />
+			<f:viewParam name="componentUseCase" value="#{showcaseModelBean.viewParameters.componentUseCase}" />
+		</f:metadata>
+		<h:outputStylesheet name="component.css" library="css" />
+		<c:set value="#{showcaseModelBean.selectedComponent}" var="selectedComponent" />
+		<h2>#{selectedComponent.prefix}:#{selectedComponent.camelCaseName}</h2>
+		<ui:include
+			src="/component/#{selectedComponent.prefix}/#{selectedComponent.lowerCaseName}/#{selectedComponent.useCaseName}/#{selectedComponent.camelCaseName}.xhtml" />
+		<h2>#{i18n['source-code']}</h2>
+		<aui:tabView value="#{showcaseModelBean.selectedComponent.useCaseSourceFileNames}" var="sourceFileName">
+			<aui:tab label="#{sourceFileName}">
+				<aui:aceEditor value="#{sourceFileName}" readOnly="true" />
+			</aui:tab>
+		</aui:tabView>
+	</ui:define>
+
+</ui:composition>

@@ -106,6 +106,8 @@ until [ -z $1 ] ; do
 		REBUILD_PORTAL="true"
 	elif [ "$1" = "rebuild-util" ] ; then
 		REBUILD_UTIL="true"
+	elif [ "$1" = "rebuild-showcase" ] ; then
+		REBUILD_SHOWCASE="true"
 	elif [ "$1" = "rebuild" ] ; then
 		REBUILD_ALLOY="true"
 		REBUILD_BRIDGE="true"
@@ -179,6 +181,14 @@ if [ "$REBUILD_PORTAL" = "true" ] ; then
 		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/portal; mvn clean install; popd
 	else
 		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/portal; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
+	fi
+fi
+
+if [ "$REBUILD_SHOWCASE" = "true" ] ; then
+	if [ -z $EXTRA_PROFILE_NAMES ] ; then
+		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/demos/showcase/showcase-webapp; mvn clean install; popd
+	else
+		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/demos/showcase/showcase-webapp; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
 	fi
 fi
 
