@@ -15,6 +15,7 @@ package com.liferay.faces.alloy.component.tabview;
 //J-
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -686,8 +687,7 @@ public abstract class TabViewRendererBase extends AUIRendererBase {
 
 	protected List<String> getModules() {
 
-		List<String> modules = super.getModules();
-		modules.remove(0);
+		List<String> modules = new ArrayList<String>();
 		modules.add(AUI_MODULE_NAME);
 
 		return modules;
