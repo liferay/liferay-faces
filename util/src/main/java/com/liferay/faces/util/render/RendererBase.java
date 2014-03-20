@@ -14,6 +14,8 @@
 package com.liferay.faces.util.render;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
@@ -28,7 +30,6 @@ import com.liferay.faces.util.context.ExtFacesContext;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.portal.ScriptDataUtil;
 import com.liferay.faces.util.portal.WebKeys;
-
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.model.Portlet;
 
@@ -163,7 +164,7 @@ public abstract class RendererBase extends Renderer {
 				portletId = portlet.getPortletId();
 			}
 
-			ScriptDataUtil.append(scriptData, portletId, bufferedResponseWriter.toString(), getModule());
+			ScriptDataUtil.append(scriptData, portletId, bufferedResponseWriter.toString(), getModules().get(0));
 		}
 	}
 
@@ -175,8 +176,12 @@ public abstract class RendererBase extends Renderer {
 		return false;
 	}
 
-	protected String getModule() {
-		return null;
+	protected List<String> getModules() {
+
+		List<String> modules = new ArrayList<String>();
+		modules.add(null);
+
+		return modules;
 	}
 
 	protected boolean isAjax(FacesContext facesContext) {

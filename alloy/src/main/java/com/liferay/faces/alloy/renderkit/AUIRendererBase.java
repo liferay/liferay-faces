@@ -14,12 +14,15 @@
 package com.liferay.faces.alloy.renderkit;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.component.Widget;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererBase;
 
@@ -32,6 +35,7 @@ import com.liferay.faces.util.render.RendererBase;
 public abstract class AUIRendererBase extends RendererBase {
 
 	// Private Constants
+	private static final String DESTROY = "destroy";
 	private static final String FUNCTION_EVENT = "function(event)";
 	private static final String FUNCTION_A = "function(A)";
 	private static final String USE = "use";
@@ -101,11 +105,41 @@ public abstract class AUIRendererBase extends RendererBase {
 			responseWriter.write(StringPool.FORWARD_SLASH);
 			responseWriter.write(StringPool.SPACE);
 			responseWriter.write(StringPool.CDATA_OPEN);
-			responseWriter.write(StringPool.NEW_LINE);
 		}
 
 		if (isAjax(facesContext) || isForceInline(uiComponent)) {
 
+			String widgetVar = ComponentUtil.resolveWidgetVar(facesContext, (Widget) uiComponent);
+
+			responseWriter.write(StringPool.NEW_LINE);
+			responseWriter.write(VAR);
+			responseWriter.write(StringPool.SPACE);
+			responseWriter.write(widgetVar);
+			responseWriter.write(StringPool.SPACE);
+			responseWriter.write(StringPool.EQUAL);
+			responseWriter.write(StringPool.SPACE);
+			responseWriter.write(LIFERAY_COMPONENT);
+			responseWriter.write(StringPool.OPEN_PARENTHESIS);
+			responseWriter.write(StringPool.APOSTROPHE);
+			responseWriter.write(widgetVar);
+			responseWriter.write(StringPool.APOSTROPHE);
+			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+			responseWriter.write(StringPool.SEMICOLON);
+			responseWriter.write(StringPool.NEW_LINE);
+			responseWriter.write(IF);
+			responseWriter.write(StringPool.OPEN_PARENTHESIS);
+			responseWriter.write(widgetVar);
+			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+			responseWriter.write(StringPool.SPACE);
+			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+			responseWriter.write(widgetVar);
+			responseWriter.write(StringPool.PERIOD);
+			responseWriter.write(DESTROY);
+			responseWriter.write(StringPool.OPEN_PARENTHESIS);
+			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+			responseWriter.write(StringPool.SEMICOLON);
+			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+			responseWriter.write(StringPool.NEW_LINE);
 			responseWriter.write(YUI);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
 			encodeLang(responseWriter, uiComponent);
@@ -114,10 +148,7 @@ public abstract class AUIRendererBase extends RendererBase {
 			responseWriter.write(USE);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
 			responseWriter.write(StringPool.NEW_LINE);
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(getModule());
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(StringPool.COMMA);
+			encodeModules(responseWriter);
 			responseWriter.write(StringPool.NEW_LINE);
 			responseWriter.write(FUNCTION_A);
 			responseWriter.write(StringPool.SPACE);
@@ -220,5 +251,18 @@ public abstract class AUIRendererBase extends RendererBase {
 	@Override
 	protected boolean hasJavaScript() {
 		return true;
+	}
+
+	protected void encodeModules(ResponseWriter responseWriter) throws IOException {
+
+		List<String> modules = getModules();
+
+		for (String module : modules) {
+
+			responseWriter.write(StringPool.APOSTROPHE);
+			responseWriter.write(module);
+			responseWriter.write(StringPool.APOSTROPHE);
+			responseWriter.write(StringPool.COMMA);
+		}
 	}
 }

@@ -15,6 +15,7 @@ package com.liferay.faces.alloy.component.tabview;
 //J-
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Generated;
 import javax.faces.component.UIComponent;
@@ -683,8 +684,13 @@ public abstract class TabViewRendererBase extends AUIRendererBase {
 		responseWriter.write(StringPool.NEW_LINE);
 	}
 
-	protected String getModule() {
-		return AUI_MODULE_NAME;
+	protected List<String> getModules() {
+
+		List<String> modules = super.getModules();
+		modules.remove(0);
+		modules.add(AUI_MODULE_NAME);
+
+		return modules;
 	}
 
 	protected void encodeActiveDescendant(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object activeDescendant, boolean first) throws IOException {
