@@ -15,8 +15,6 @@ package com.liferay.faces.alloy.component.aceeditor;
 //J-
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.Generated;
 import javax.faces.component.UIComponent;
@@ -62,6 +60,9 @@ public abstract class AceEditorRendererBase extends AUIRendererBase {
 	private static final String VALUE_CHANGE = "valueChange";
 	private static final String VISIBLE_CHANGE = "visibleChange";
 	private static final String WIDTH_CHANGE = "widthChange";
+
+	// Protected Constants
+	protected static final String[] MODULES = new String[] {AUI_MODULE_NAME};
 
 	protected void encodeJavaScriptMain(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
@@ -735,12 +736,8 @@ public abstract class AceEditorRendererBase extends AUIRendererBase {
 		responseWriter.write(StringPool.NEW_LINE);
 	}
 
-	protected List<String> getModules() {
-
-		List<String> modules = new ArrayList<String>();
-		modules.add(AUI_MODULE_NAME);
-
-		return modules;
+	protected String[] getModules() {
+		return MODULES;
 	}
 
 	protected void encodeAceEditorDisabled(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Boolean aceEditorDisabled, boolean first) throws IOException {

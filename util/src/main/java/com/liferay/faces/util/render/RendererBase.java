@@ -14,7 +14,6 @@
 package com.liferay.faces.util.render;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
@@ -164,30 +163,28 @@ public abstract class RendererBase extends Renderer {
 				portletId = portlet.getPortletId();
 			}
 
-			List<String> modulesList = getModules();
-			String modules = null;
+			String[] modules = getModules();
+			String modulesString = null;
 
-			if (modulesList != null) {
+			if (modules != null) {
 
 				StringBuilder stringBuilder = new StringBuilder();
-				boolean firstModule = true;
 
-				for (String module : modulesList) {
+				int totalModules = modules.length;
 
-					if (firstModule) {
-						firstModule = false;
-					}
-					else {
+				for (int i = 0; i < totalModules; i++) {
+
+					stringBuilder.append(modules[i]);
+
+					if (i > 0) {
 						stringBuilder.append(StringPool.COMMA);
 					}
-
-					stringBuilder.append(module);
 				}
 
-				modules = stringBuilder.toString();
+				modulesString = stringBuilder.toString();
 			}
 
-			ScriptDataUtil.append(scriptData, portletId, bufferedResponseWriter.toString(), modules);
+			ScriptDataUtil.append(scriptData, portletId, bufferedResponseWriter.toString(), modulesString);
 		}
 	}
 
@@ -199,7 +196,7 @@ public abstract class RendererBase extends Renderer {
 		return false;
 	}
 
-	protected List<String> getModules() {
+	protected String[] getModules() {
 		return null;
 	}
 

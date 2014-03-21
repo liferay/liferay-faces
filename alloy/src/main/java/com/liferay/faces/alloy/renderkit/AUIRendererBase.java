@@ -14,7 +14,6 @@
 package com.liferay.faces.alloy.renderkit;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
@@ -255,12 +254,13 @@ public abstract class AUIRendererBase extends RendererBase {
 
 	protected void encodeModules(ResponseWriter responseWriter) throws IOException {
 
-		List<String> modules = getModules();
+		String[] modules = getModules();
+		int totalModules = modules.length;
 
-		for (String module : modules) {
+		for (int i = 0; i < totalModules; i++) {
 
 			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(module);
+			responseWriter.write(modules[i]);
 			responseWriter.write(StringPool.APOSTROPHE);
 			responseWriter.write(StringPool.COMMA);
 		}
