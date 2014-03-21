@@ -27,4 +27,33 @@ public class StringHelper {
 			return defaultValue;
 		}
 	}
+
+	public static String[] append(String[]... arrays) {
+		int length = 0;
+
+		for (String[] array : arrays) {
+			length += array.length;
+		}
+
+		String[] newArray = new String[length];
+
+		int previousLength = 0;
+
+		for (String[] array : arrays) {
+			System.arraycopy(array, 0, newArray, previousLength, array.length);
+
+			previousLength += array.length;
+		}
+
+		return newArray;
+	}
+
+	public static String[] append(String[] array, String... value) {
+		String[] newArray = new String[array.length + value.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+		System.arraycopy(value, 0, newArray, array.length, array.length);
+
+		return newArray;
+	}
 }

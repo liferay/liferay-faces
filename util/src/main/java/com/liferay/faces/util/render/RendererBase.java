@@ -28,7 +28,6 @@ import com.liferay.faces.util.context.ExtFacesContext;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.portal.ScriptDataUtil;
 import com.liferay.faces.util.portal.WebKeys;
-
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.model.Portlet;
 
@@ -163,28 +162,27 @@ public abstract class RendererBase extends Renderer {
 				portletId = portlet.getPortletId();
 			}
 
-			String[] modules = getModules();
-			String modulesString = null;
+			String[] moduleArray = getModules();
+			String modules = null;
 
-			if (modules != null) {
+			if (moduleArray != null) {
 
 				StringBuilder stringBuilder = new StringBuilder();
+				int length = moduleArray.length;
 
-				int totalModules = modules.length;
+				for (int i = 0; i < length; i++) {
 
-				for (int i = 0; i < totalModules; i++) {
+					stringBuilder.append(moduleArray[i]);
 
-					stringBuilder.append(modules[i]);
-
-					if (i > 0) {
+					if (i < (length - 1)) {
 						stringBuilder.append(StringPool.COMMA);
 					}
 				}
 
-				modulesString = stringBuilder.toString();
+				modules = stringBuilder.toString();
 			}
 
-			ScriptDataUtil.append(scriptData, portletId, bufferedResponseWriter.toString(), modulesString);
+			ScriptDataUtil.append(scriptData, portletId, bufferedResponseWriter.toString(), modules);
 		}
 	}
 

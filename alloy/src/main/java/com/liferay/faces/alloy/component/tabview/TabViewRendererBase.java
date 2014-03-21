@@ -60,7 +60,7 @@ public abstract class TabViewRendererBase extends AUIRendererBase {
 	private static final String WIDTH_CHANGE = "widthChange";
 
 	// Protected Constants
-	protected static final String[] MODULES = new String[] {AUI_MODULE_NAME};
+	protected static final String[] MODULES = {AUI_MODULE_NAME};
 
 	protected void encodeJavaScriptMain(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
@@ -686,6 +686,7 @@ public abstract class TabViewRendererBase extends AUIRendererBase {
 		responseWriter.write(StringPool.NEW_LINE);
 	}
 
+	@Override
 	protected String[] getModules() {
 		return MODULES;
 	}

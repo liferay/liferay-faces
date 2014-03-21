@@ -255,12 +255,11 @@ public abstract class AUIRendererBase extends RendererBase {
 	protected void encodeModules(ResponseWriter responseWriter) throws IOException {
 
 		String[] modules = getModules();
-		int totalModules = modules.length;
 
-		for (int i = 0; i < totalModules; i++) {
+		for (String module : modules) {
 
 			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(modules[i]);
+			responseWriter.write(module);
 			responseWriter.write(StringPool.APOSTROPHE);
 			responseWriter.write(StringPool.COMMA);
 		}
