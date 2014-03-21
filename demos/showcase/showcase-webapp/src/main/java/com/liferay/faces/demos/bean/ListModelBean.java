@@ -13,10 +13,12 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,9 +28,14 @@ import java.util.Set;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
+import com.liferay.faces.demos.dto.CodeExample;
 import com.liferay.faces.demos.dto.ShowcaseComponent;
+import com.liferay.faces.demos.dto.ShowcaseComponentComparator;
 import com.liferay.faces.demos.dto.UseCase;
+import com.liferay.faces.demos.util.CodeExampleUtil;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -49,7 +56,8 @@ public class ListModelBean {
 	private Map<String, ShowcaseComponent> showcaseComponentMap;
 
 	public ListModelBean() {
-		showcaseComponentMap = new HashMap<String, ShowcaseComponent>();
+		this.showcaseComponents = new ArrayList<ShowcaseComponent>();
+		this.showcaseComponentMap = new HashMap<String, ShowcaseComponent>();
 
 		ClassLoader classLoader = getClass().getClassLoader();
 		String[] namespaces = new String[] { "aui", "liferay-ui" };
@@ -62,9 +70,12 @@ public class ListModelBean {
 			if (resource != null) {
 
 				try {
+					FacesContext startupFacesContext = FacesContext.getCurrentInstance();
+					ExternalContext startupExternalContext = startupFacesContext.getExternalContext();
 
 					InputStream inputStream = resource.openStream();
 					properties.load(inputStream);
+					inputStream.close();
 
 					Set<Entry<Object, Object>> entrySet = properties.entrySet();
 
@@ -77,21 +88,42 @@ public class ListModelBean {
 						String lowerCaseName = camelCaseName.toLowerCase();
 
 						String value = (String) mapEntry.getValue();
-						String[] useCaseArray = value.split(StringPool.OPEN_BRACKET + StringPool.PIPE + StringPool.CLOSE_BRACKET);
+						String[] useCaseArray = value.split(StringPool.OPEN_BRACKET + StringPool.PIPE +
+								StringPool.CLOSE_BRACKET);
 						List<UseCase> useCases = new ArrayList<UseCase>(useCaseArray.length);
 
 						for (String useCaseInfo : useCaseArray) {
 							String[] useCaseParts = useCaseInfo.split(StringPool.COLON);
 							String useCaseName = useCaseParts[0];
 							String[] sourceFileNames = useCaseParts[1].split(StringPool.COMMA);
-							UseCase useCase = new UseCase(useCaseName, sourceFileNames);
+							List<CodeExample> codeExamples = new ArrayList<CodeExample>();
+
+							for (String sourceFileName : sourceFileNames) {
+
+								if (sourceFileName.endsWith(".xhtml")) {
+
+									String sourcePath = File.separator + "component" + File.separator + prefix +
+										File.separator + lowerCaseName + File.separator + useCaseName + File.separator +
+										sourceFileName;
+									
+									URL sourceFileURL = startupExternalContext.getResource(sourcePath);
+									
+									CodeExample codeExample = CodeExampleUtil.load(sourceFileURL, sourceFileName);
+									codeExamples.add(codeExample);
+
+									logger.debug("Loaded source file=[{0}]", sourcePath);
+								}
+							}
+
+							UseCase useCase = new UseCase(useCaseName, codeExamples);
 							useCases.add(useCase);
 						}
 
-						ShowcaseComponent component = new ShowcaseComponent(prefix, camelCaseName, lowerCaseName, useCases);
-						
+						ShowcaseComponent showcaseComponent = new ShowcaseComponent(prefix, camelCaseName,
+								lowerCaseName, useCases);
 						String lookupKey = prefix + StringPool.UNDERLINE + lowerCaseName;
-						showcaseComponentMap.put(lookupKey, component);
+						this.showcaseComponentMap.put(lookupKey, showcaseComponent);
+						this.showcaseComponents.add(showcaseComponent);
 					}
 
 					inputStream.close();
@@ -103,9 +135,9 @@ public class ListModelBean {
 			else {
 				logger.info("Missing file: " + filename);
 			}
-		}
 
-		showcaseComponents = new ArrayList<ShowcaseComponent>(showcaseComponentMap.values());
+			Collections.sort(this.showcaseComponents, new ShowcaseComponentComparator());
+		}
 	}
 
 	public ShowcaseComponent findShowcaseComponent(String prefix, String name) {

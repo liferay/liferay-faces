@@ -12,6 +12,23 @@
 	<name>Showcase Webapp</name>
 	<description>This plugin is the Liferay Faces Showcase demo webapp.</description>
 
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.java</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>javax.annotation</groupId>
