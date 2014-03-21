@@ -13,32 +13,19 @@
  */
 package com.liferay.faces.demos.dto;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.Comparator;
 
 
 /**
  * @author  Neil Griffin
  */
-public class UseCase implements Serializable {
+public class ShowcaseComponentComparator implements Comparator<ShowcaseComponent> {
 
-	// serialVersionUID
-	private static final long serialVersionUID = 5675514126286108464L;
+	@Override
+	public int compare(ShowcaseComponent showcaseComponent1, ShowcaseComponent showcaseComponent2) {
+		String fullName1 = showcaseComponent1.getPrefix() + showcaseComponent1.getLowerCaseName();
+		String fullName2 = showcaseComponent2.getPrefix() + showcaseComponent2.getLowerCaseName();
 
-	// Private Data Members
-	private String name;
-	private List<CodeExample> codeExamples;
-
-	public UseCase(String name, List<CodeExample> codeExamples) {
-		this.name = name;
-		this.codeExamples = codeExamples;
-	}
-
-	public List<CodeExample> getCodeExamples() {
-		return codeExamples;
-	}
-
-	public String getName() {
-		return name;
+		return fullName1.compareTo(fullName2);
 	}
 }

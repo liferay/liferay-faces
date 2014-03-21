@@ -42,7 +42,7 @@ public class AceEditor extends AceEditorBase {
 
 		if (boundingBox == null) {
 			String defaultValue = StringPool.POUND + ComponentUtil.escapeClientId(getClientId());
-			boundingBox = (java.lang.String) getStateHelper().eval(BOUNDING_BOX, defaultValue);
+			boundingBox = (String) getStateHelper().eval(BOUNDING_BOX, defaultValue);
 		}
 
 		return boundingBox;

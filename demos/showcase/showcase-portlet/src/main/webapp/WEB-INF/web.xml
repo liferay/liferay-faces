@@ -3,7 +3,12 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
-	<!-- Instruct Mojarra to utilize JBoss-EL instead of the EL implementation provided by the servlet container. -->
+    <!-- Inform the JSF runtime (Mojarra) that this application is under development. -->
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>    
+    	<!-- Instruct Mojarra to utilize JBoss-EL instead of the EL implementation provided by the servlet container. -->
 	<context-param>
 		<param-name>com.sun.faces.expressionFactory</param-name>
 		<param-value>org.jboss.el.ExpressionFactoryImpl</param-value>

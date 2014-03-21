@@ -18,8 +18,9 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
+import com.liferay.faces.demos.dto.CodeExample;
 import com.liferay.faces.demos.dto.ShowcaseComponent;
 import com.liferay.faces.demos.dto.UseCase;
 
@@ -28,7 +29,7 @@ import com.liferay.faces.demos.dto.UseCase;
  * @author  Neil Griffin
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class ShowcaseModelBean implements Serializable {
 
 	// serialVersionUID
@@ -70,7 +71,7 @@ public class ShowcaseModelBean implements Serializable {
 		private String lowerCaseName;
 		private String prefix;
 		private String useCaseName;
-		private String[] useCaseSourceFileNames;
+		private List<CodeExample> useCaseCodeExamples;
 
 		public SelectedComponent(ViewParameters viewParameters) {
 			ShowcaseComponent showcaseComponent = listModelBean.findShowcaseComponent(
@@ -85,7 +86,7 @@ public class ShowcaseModelBean implements Serializable {
 
 				if (useCase.getName().equals(viewParameters.getComponentUseCase())) {
 					this.useCaseName = useCase.getName();
-					this.useCaseSourceFileNames = useCase.getSourceFilenames();
+					this.useCaseCodeExamples = useCase.getCodeExamples();
 
 					break;
 				}
@@ -104,12 +105,12 @@ public class ShowcaseModelBean implements Serializable {
 			return prefix;
 		}
 
-		public String getUseCaseName() {
-			return useCaseName;
+		public List<CodeExample> getUseCaseCodeExamples() {
+			return useCaseCodeExamples;
 		}
 
-		public String[] getUseCaseSourceFileNames() {
-			return useCaseSourceFileNames;
+		public String getUseCaseName() {
+			return useCaseName;
 		}
 	}
 

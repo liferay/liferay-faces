@@ -64,20 +64,10 @@ public class ShowcaseComponent implements Serializable {
 	public String getLowerCaseName() {
 		return lowerCaseName;
 	}
-//
-//  public void setLowerCaseName(String lowerCaseName) {
-//      this.lowerCaseName = lowerCaseName;
-//      resetToString = true;
-//  }
 
 	public String getPrefix() {
 		return prefix;
 	}
-
-//  public void setPrefix(String prefix) {
-//      this.prefix = prefix;
-//      resetToString = true;
-//  }
 
 	public List<UseCase> getUseCases() {
 		return useCases;

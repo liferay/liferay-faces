@@ -10,13 +10,13 @@
 		</f:metadata>
 		<h:outputStylesheet name="component.css" library="css" />
 		<c:set value="#{showcaseModelBean.selectedComponent}" var="selectedComponent" />
-		<h2>#{selectedComponent.prefix}:#{selectedComponent.camelCaseName}</h2>
+		<h2>#{selectedComponent.prefix}:#{selectedComponent.camelCaseName} (#{i18n[selectedComponent.useCaseName]} #{i18n['usage']})</h2>
 		<ui:include
 			src="/component/#{selectedComponent.prefix}/#{selectedComponent.lowerCaseName}/#{selectedComponent.useCaseName}/#{selectedComponent.camelCaseName}.xhtml" />
 		<h2>#{i18n['source-code']}</h2>
-		<aui:tabView value="#{showcaseModelBean.selectedComponent.useCaseSourceFileNames}" var="sourceFileName">
-			<aui:tab label="#{sourceFileName}">
-				<aui:aceEditor value="#{sourceFileName}" readOnly="true" />
+		<aui:tabView value="#{showcaseModelBean.selectedComponent.useCaseCodeExamples}" var="useCaseCodeExample">
+			<aui:tab label="#{useCaseCodeExample.fileName}">
+				<aui:aceEditor mode="xml" readOnly="true" value="#{useCaseCodeExample.rawText}" />
 			</aui:tab>
 		</aui:tabView>
 	</ui:define>
