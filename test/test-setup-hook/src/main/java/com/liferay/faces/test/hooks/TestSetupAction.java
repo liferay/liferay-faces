@@ -181,7 +181,7 @@ public class TestSetupAction extends TestSetupCompatAction {
 		Layout portalPageLayout = getPortalPageLayout(userId, groupId, portalPageName, privateLayout);
 		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet) portalPageLayout.getLayoutType();
 
-		layoutTypePortlet.setLayoutTemplateId(userId, "2_columns_i", false);
+		layoutTypePortlet.setLayoutTemplateId(userId, portalPage.getLayoutTemplateId(), false);
 
 		int columnNumber = 1;
 
