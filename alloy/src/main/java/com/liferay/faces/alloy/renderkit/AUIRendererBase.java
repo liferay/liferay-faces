@@ -147,7 +147,17 @@ public abstract class AUIRendererBase extends RendererBase {
 			responseWriter.write(USE);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
 			responseWriter.write(StringPool.NEW_LINE);
-			encodeModules(responseWriter);
+
+			String[] modules = getModules();
+
+			for (String module : modules) {
+
+				responseWriter.write(StringPool.APOSTROPHE);
+				responseWriter.write(module);
+				responseWriter.write(StringPool.APOSTROPHE);
+				responseWriter.write(StringPool.COMMA);
+			}
+
 			responseWriter.write(StringPool.NEW_LINE);
 			responseWriter.write(FUNCTION_A);
 			responseWriter.write(StringPool.SPACE);
@@ -250,18 +260,5 @@ public abstract class AUIRendererBase extends RendererBase {
 	@Override
 	protected boolean hasJavaScript() {
 		return true;
-	}
-
-	protected void encodeModules(ResponseWriter responseWriter) throws IOException {
-
-		String[] modules = getModules();
-
-		for (String module : modules) {
-
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(module);
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(StringPool.COMMA);
-		}
 	}
 }
