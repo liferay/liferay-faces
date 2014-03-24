@@ -163,7 +163,26 @@ public abstract class RendererBase extends Renderer {
 				portletId = portlet.getPortletId();
 			}
 
-			ScriptDataUtil.append(scriptData, portletId, bufferedResponseWriter.toString(), getModule());
+			String[] moduleArray = getModules();
+			String modules = null;
+
+			if (moduleArray != null) {
+
+				StringBuilder stringBuilder = new StringBuilder();
+
+				for (int i = 0; i < moduleArray.length; i++) {
+
+					if (i > 0) {
+						stringBuilder.append(StringPool.COMMA);
+					}
+
+					stringBuilder.append(moduleArray[i]);
+				}
+
+				modules = stringBuilder.toString();
+			}
+
+			ScriptDataUtil.append(scriptData, portletId, bufferedResponseWriter.toString(), modules);
 		}
 	}
 
@@ -175,7 +194,7 @@ public abstract class RendererBase extends Renderer {
 		return false;
 	}
 
-	protected String getModule() {
+	protected String[] getModules() {
 		return null;
 	}
 
