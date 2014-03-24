@@ -61,6 +61,9 @@ public abstract class AceEditorRendererBase extends AUIRendererBase {
 	private static final String VISIBLE_CHANGE = "visibleChange";
 	private static final String WIDTH_CHANGE = "widthChange";
 
+	// Protected Constants
+	protected static final String[] MODULES = {AUI_MODULE_NAME};
+
 	protected void encodeJavaScriptMain(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		AceEditorComponent aceEditorComponent = (AceEditorComponent) uiComponent;
@@ -733,8 +736,9 @@ public abstract class AceEditorRendererBase extends AUIRendererBase {
 		responseWriter.write(StringPool.NEW_LINE);
 	}
 
-	protected String getModule() {
-		return AUI_MODULE_NAME;
+	@Override
+	protected String[] getModules() {
+		return MODULES;
 	}
 
 	protected void encodeAceEditorDisabled(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Boolean aceEditorDisabled, boolean first) throws IOException {
