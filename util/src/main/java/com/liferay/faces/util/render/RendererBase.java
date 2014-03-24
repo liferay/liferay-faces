@@ -168,15 +168,14 @@ public abstract class RendererBase extends Renderer {
 			if (moduleArray != null) {
 
 				StringBuilder stringBuilder = new StringBuilder();
-				int length = moduleArray.length;
 
-				for (int i = 0; i < length; i++) {
+				for (int i = 0; i < moduleArray.length; i++) {
 
-					stringBuilder.append(moduleArray[i]);
-
-					if (i < (length - 1)) {
+					if (i > 0) {
 						stringBuilder.append(StringPool.COMMA);
 					}
+
+					stringBuilder.append(moduleArray[i]);
 				}
 
 				modules = stringBuilder.toString();
