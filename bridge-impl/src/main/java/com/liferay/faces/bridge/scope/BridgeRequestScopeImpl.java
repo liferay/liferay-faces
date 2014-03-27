@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -114,14 +115,15 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 	public BridgeRequestScopeImpl(PortletConfig portletConfig, PortletContext portletContext,
 		PortletRequest portletRequest) {
 
-		this.dateCreated = Calendar.getInstance().getTimeInMillis();
+		Calendar calendar = new GregorianCalendar();
+		this.dateCreated = calendar.getTimeInMillis();
 
 		portletName = portletConfig.getPortletName();
 
 		PortletSession portletSession = portletRequest.getPortletSession();
 		String sessionId = portletSession.getId();
 		this.idPrefix = portletName + ":::" + sessionId + ":::";
-		this.idSuffix = Long.toString(Calendar.getInstance().getTimeInMillis());
+		this.idSuffix = Long.toString(this.dateCreated);
 
 		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) FactoryExtensionFinder.getFactory(
 				BridgeConfigFactory.class);

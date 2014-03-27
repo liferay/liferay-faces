@@ -38,7 +38,7 @@ public class Booking implements Serializable {
 	}
 
 	public Booking(long bookingTypeId, long customerId) {
-		Calendar today = GregorianCalendar.getInstance();
+		Calendar today = new GregorianCalendar();
 		Calendar weekFromToday = (Calendar) today.clone();
 		weekFromToday.add(Calendar.DATE, 7);
 		this.bookingTypeId = bookingTypeId;
