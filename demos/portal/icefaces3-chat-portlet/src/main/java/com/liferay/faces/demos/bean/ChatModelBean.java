@@ -15,6 +15,7 @@ package com.liferay.faces.demos.bean;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 
@@ -101,7 +102,8 @@ public class ChatModelBean implements Observer {
 	public void addMessage(String messageText) {
 		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 		User currentUser = liferayFacesContext.getUser();
-		ChatMessage chatMessage = new ChatMessageImpl(Calendar.getInstance().getTime(), currentUser, messageText);
+		Calendar calendar = new GregorianCalendar();
+		ChatMessage chatMessage = new ChatMessageImpl(calendar.getTime(), currentUser, messageText);
 
 		if (currentScopedChatRoom != null) {
 			currentScopedChatRoom.getChatMessageList().add(chatMessage);
