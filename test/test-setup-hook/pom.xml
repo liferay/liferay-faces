@@ -11,6 +11,18 @@
 	<packaging>war</packaging>
 	<name>Test Setup Hook</name>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.liferay.maven.plugins</groupId>
+				<artifactId>liferay-maven-plugin</artifactId>
+				<configuration>
+					<pluginType>hook</pluginType>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
