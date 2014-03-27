@@ -16,6 +16,7 @@ package com.liferay.faces.bridge;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -140,7 +141,8 @@ public class BridgeImpl implements Bridge {
 	public void init(PortletConfig portletConfig) throws BridgeException {
 		StringBuilder logMessage = new StringBuilder();
 		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss,SSS");
-		String timestamp = dateFormat.format(Calendar.getInstance().getTime());
+		Calendar calendar = new GregorianCalendar();
+		String timestamp = dateFormat.format(calendar.getTime());
 		logMessage.append(timestamp);
 		logMessage.append(StringPool.SPACE);
 		logMessage.append("INFO");

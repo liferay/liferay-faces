@@ -14,6 +14,7 @@
 package com.liferay.faces.bridge.container.liferay;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import org.junit.Test;
 
@@ -112,7 +113,8 @@ public class LiferaySharedPageTopTest {
 	@Test
 	public void testMultiThreaded() {
 
-		long start = Calendar.getInstance().getTimeInMillis();
+		Calendar startCalendar = new GregorianCalendar();
+		long start = startCalendar.getTimeInMillis();
 
 		for (int i = 0; i < 10000; i++) {
 
@@ -142,7 +144,8 @@ public class LiferaySharedPageTopTest {
 		Assert.assertEquals(0, totalFailed.intValue());
 		Assert.assertEquals(TOTAL_THREADS, totalPassed.intValue());
 
-		long finish = Calendar.getInstance().getTimeInMillis();
+		Calendar finishCalendar = new GregorianCalendar();
+		long finish = finishCalendar.getTimeInMillis();
 		long duration = finish - start;
 
 		logger.info("Started {0} asynchronous threads, duration=[{1}ms] passed=[{2}] failed=[{3}]", TOTAL_THREADS,
