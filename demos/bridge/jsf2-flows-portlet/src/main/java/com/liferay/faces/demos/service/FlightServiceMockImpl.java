@@ -50,7 +50,7 @@ public class FlightServiceMockImpl implements FlightService {
 
 	public FlightServiceMockImpl() {
 
-		Calendar departureCalendar = GregorianCalendar.getInstance();
+		Calendar departureCalendar = new GregorianCalendar();
 		Calendar arrivalCalendar = (Calendar) departureCalendar.clone();
 		arrivalCalendar.add(Calendar.HOUR, 5);
 	}
