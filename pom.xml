@@ -168,6 +168,7 @@
 						<!-- liferay.deploy.dir is the location where extracted WARs are finally deployed -->
 						<deployDir>${liferay.deploy.dir}</deployDir>
 						<liferayVersion>${liferay.maven.plugin.version}</liferayVersion>
+						<pluginType>portlet</pluginType>
 					</configuration>
 				</plugin>
 				<plugin>
