@@ -14,11 +14,11 @@
 package com.liferay.faces.demos.util;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import java.net.URLConnection;
 
 import com.liferay.faces.demos.dto.CodeExample;
+import com.liferay.faces.util.io.TextResource;
+import com.liferay.faces.util.io.TextResourceUtil;
 
 
 /**
@@ -26,33 +26,20 @@ import com.liferay.faces.demos.dto.CodeExample;
  */
 public class CodeExampleUtil {
 
-	public static CodeExample load(URL sourceFileURL, String sourceFileName) throws IOException {
+	public static CodeExample read(URL sourceFileURL, String sourceFileName) throws IOException {
 
-		URLConnection sourceFileURLConnection = sourceFileURL.openConnection();
-		long lastModified = sourceFileURLConnection.getLastModified();
-		InputStream resourceAsStream = sourceFileURLConnection.getInputStream();
+		TextResource textResource = TextResourceUtil.read(sourceFileURL);
+		String sourceCodeText = textResource.getText();
 
-		if (resourceAsStream != null) {
-			byte[] bytes = new byte[1024];
-			int bytesRead;
-			StringBuilder rawTextBuf = new StringBuilder();
-
-			while ((bytesRead = resourceAsStream.read(bytes)) != -1) {
-				String bytesAsString = new String(bytes, 0, bytesRead);
-				rawTextBuf.append(bytesAsString);
-			}
-
-			resourceAsStream.close();
-
-			String rawText = rawTextBuf.toString().trim();
-			rawText = rawText.replaceAll("\n+$", "");
-			rawText = rawText.replaceAll("\n", "\\\\n");
-			rawText = rawText.replaceAll("[\"]", "\\\\\"");
+		if (sourceCodeText != null) {
+			sourceCodeText = sourceCodeText.trim();
+			sourceCodeText = sourceCodeText.replaceAll("\n+$", "");
+			sourceCodeText = sourceCodeText.replaceAll("\n", "\\\\n");
+			sourceCodeText = sourceCodeText.replaceAll("[\"]", "\\\\\"");
 			System.err.println("!@#$ -------------------------------------------------------------------");
-			System.err.println(rawText);
-			resourceAsStream.close();
+			System.err.println(sourceCodeText);
 
-			return new CodeExample(sourceFileName, sourceFileURL, lastModified, rawText);
+			return new CodeExample(sourceFileName, sourceFileURL, textResource.getLastModified(), sourceCodeText);
 		}
 		else {
 			throw new IOException("Unable to locate " + sourceFileURL);

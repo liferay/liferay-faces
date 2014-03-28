@@ -108,7 +108,7 @@ public class ListModelBean {
 									
 									URL sourceFileURL = startupExternalContext.getResource(sourcePath);
 									
-									CodeExample codeExample = CodeExampleUtil.load(sourceFileURL, sourceFileName);
+									CodeExample codeExample = CodeExampleUtil.read(sourceFileURL, sourceFileName);
 									codeExamples.add(codeExample);
 
 									logger.debug("Loaded source file=[{0}]", sourcePath);

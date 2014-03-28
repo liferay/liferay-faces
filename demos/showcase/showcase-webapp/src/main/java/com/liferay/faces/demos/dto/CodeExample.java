@@ -71,7 +71,7 @@ public class CodeExample {
 
 				if (lastModified > this.lastModified) {
 
-					CodeExample updatedCodeExample = CodeExampleUtil.load(url, fileName);
+					CodeExample updatedCodeExample = CodeExampleUtil.read(url, fileName);
 					this.lastModified = lastModified;
 					this.rawText = updatedCodeExample.getRawText();
 				}
