@@ -35,7 +35,7 @@ import com.liferay.faces.util.lang.StringPool;
 public abstract class AceEditorRendererBase extends AUIRendererBase {
 
 	// Private Constants
-	private static final String A_CLASS_NAME = "A.AceEditor";
+	private static final String ALLOY_CLASS_NAME = "AceEditor";
 	private static final String AUI_MODULE_NAME = "aui-ace-editor";
 	private static final String BOUNDING_BOX_CHANGE = "boundingBoxChange";
 	private static final String CONTENT_BOX_CHANGE = "contentBoxChange";
@@ -104,6 +104,8 @@ public abstract class AceEditorRendererBase extends AUIRendererBase {
 		responseWriter.write(StringPool.SPACE);
 		responseWriter.write(NEW);
 		responseWriter.write(StringPool.SPACE);
+		responseWriter.write(A);
+		responseWriter.write(StringPool.PERIOD);
 		responseWriter.write(getAlloyClassName());
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
@@ -302,6 +304,7 @@ public abstract class AceEditorRendererBase extends AUIRendererBase {
 			encodeWidth(responseWriter, aceEditorComponent, width, first);
 			first = false;
 		}
+
 		if (!first) {
 			responseWriter.write(StringPool.COMMA);
 		}
@@ -506,6 +509,7 @@ public abstract class AceEditorRendererBase extends AUIRendererBase {
 			encodeAfterWidthChange(responseWriter, aceEditorComponent, afterWidthChange, first);
 			first = false;
 		}
+
 		responseWriter.write(StringPool.NEW_LINE);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		responseWriter.write(StringPool.COMMA);
@@ -709,6 +713,7 @@ public abstract class AceEditorRendererBase extends AUIRendererBase {
 			encodeOnWidthChange(responseWriter, aceEditorComponent, onWidthChange, first);
 			first = false;
 		}
+
 		responseWriter.write(StringPool.NEW_LINE);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		responseWriter.write(StringPool.NEW_LINE);
@@ -739,7 +744,7 @@ public abstract class AceEditorRendererBase extends AUIRendererBase {
 
 	@Override
 	protected String getAlloyClassName() {
-		return A_CLASS_NAME;
+		return ALLOY_CLASS_NAME;
 	}
 
 	@Override

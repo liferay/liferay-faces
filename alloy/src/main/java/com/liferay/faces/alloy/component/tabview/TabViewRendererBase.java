@@ -35,7 +35,7 @@ import com.liferay.faces.util.lang.StringPool;
 public abstract class TabViewRendererBase extends AUIRendererBase {
 
 	// Private Constants
-	private static final String A_CLASS_NAME = "A.TabView";
+	private static final String ALLOY_CLASS_NAME = "TabView";
 	private static final String AUI_MODULE_NAME = "aui-tabview";
 	private static final String ACTIVE_DESCENDANT_CHANGE = "activeDescendantChange";
 	private static final String BOUNDING_BOX_CHANGE = "boundingBoxChange";
@@ -102,6 +102,8 @@ public abstract class TabViewRendererBase extends AUIRendererBase {
 		responseWriter.write(StringPool.SPACE);
 		responseWriter.write(NEW);
 		responseWriter.write(StringPool.SPACE);
+		responseWriter.write(A);
+		responseWriter.write(StringPool.PERIOD);
 		responseWriter.write(getAlloyClassName());
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
@@ -284,6 +286,7 @@ public abstract class TabViewRendererBase extends AUIRendererBase {
 			encodeWidth(responseWriter, tabViewComponent, width, first);
 			first = false;
 		}
+
 		if (!first) {
 			responseWriter.write(StringPool.COMMA);
 		}
@@ -472,6 +475,7 @@ public abstract class TabViewRendererBase extends AUIRendererBase {
 			encodeAfterWidthChange(responseWriter, tabViewComponent, afterWidthChange, first);
 			first = false;
 		}
+
 		responseWriter.write(StringPool.NEW_LINE);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		responseWriter.write(StringPool.COMMA);
@@ -659,6 +663,7 @@ public abstract class TabViewRendererBase extends AUIRendererBase {
 			encodeOnWidthChange(responseWriter, tabViewComponent, onWidthChange, first);
 			first = false;
 		}
+
 		responseWriter.write(StringPool.NEW_LINE);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		responseWriter.write(StringPool.NEW_LINE);
@@ -689,7 +694,7 @@ public abstract class TabViewRendererBase extends AUIRendererBase {
 
 	@Override
 	protected String getAlloyClassName() {
-		return A_CLASS_NAME;
+		return ALLOY_CLASS_NAME;
 	}
 
 	@Override

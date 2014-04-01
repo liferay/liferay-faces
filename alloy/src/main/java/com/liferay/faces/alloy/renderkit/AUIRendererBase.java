@@ -35,6 +35,7 @@ import com.liferay.faces.util.render.RendererBase;
 public abstract class AUIRendererBase extends RendererBase {
 
 	// Protected Constants
+	protected static final String A = "A";
 	protected static final String FUNCTION = "function";
 	protected static final String IF = "if";
 	protected static final String LIFERAY_COMPONENT = "Liferay.component";
