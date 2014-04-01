@@ -526,11 +526,11 @@ when it reaches the end of the line.<!--{"event":false,"inputType":"boolean","ou
 			<type>Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m1</vdldoc:since>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
-		<description></description>
+		<description><![CDATA[]]></description>
 		<tag-name>tab</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.tab.Tab</component-type>
@@ -549,7 +549,7 @@ when it reaches the end of the line.<!--{"event":false,"inputType":"boolean","ou
 			<type>String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m1</vdldoc:since>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1043,7 +1043,7 @@ the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event"
 			<type>Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m1</vdldoc:since>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 </facelet-taglib>

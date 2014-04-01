@@ -20,6 +20,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.alloy.util.AlloyConstants;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Widget;
 import com.liferay.faces.util.lang.StringPool;
@@ -33,22 +34,19 @@ import com.liferay.faces.util.render.RendererBase;
  */
 public abstract class AUIRendererBase extends RendererBase {
 
-	// Private Constants
-	private static final String DESTROY = "destroy";
-	private static final String FUNCTION_EVENT = "function(event)";
-	private static final String FUNCTION_A = "function(A)";
-	private static final String USE = "use";
-	private static final String YUI = "YUI";
-
 	// Protected Constants
-	protected static final String AFTER = "after";
 	protected static final String FUNCTION = "function";
 	protected static final String IF = "if";
 	protected static final String LIFERAY_COMPONENT = "Liferay.component";
 	protected static final String NEW = "new";
-	protected static final String ON = "on";
 	protected static final String RETURN = "return";
 	protected static final String VAR = "var";
+
+	// Private Constants
+	private static final String DESTROY = "destroy";
+	private static final String FUNCTION_A = "function(A)";
+	private static final String USE = "use";
+	private static final String YUI = "YUI";
 
 	protected void encodeArray(ResponseWriter responseWriter, String attributeName, Object attributeValue,
 		boolean first) throws IOException {
@@ -86,7 +84,7 @@ public abstract class AUIRendererBase extends RendererBase {
 
 		responseWriter.write(attributeName);
 		responseWriter.write(StringPool.COLON);
-		responseWriter.write(FUNCTION_EVENT);
+		responseWriter.write(AlloyConstants.FUNCTION_EVENT);
 		responseWriter.write(StringPool.SPACE);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 		responseWriter.write(String.valueOf(attributeValue));
@@ -98,7 +96,7 @@ public abstract class AUIRendererBase extends RendererBase {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		if (!isAjax(facesContext) && isForceInline(uiComponent)) {
+		if (!isAjax(facesContext) && isForceInline(facesContext, uiComponent)) {
 
 			responseWriter.write(StringPool.FORWARD_SLASH);
 			responseWriter.write(StringPool.FORWARD_SLASH);
@@ -106,7 +104,7 @@ public abstract class AUIRendererBase extends RendererBase {
 			responseWriter.write(StringPool.CDATA_OPEN);
 		}
 
-		if (isAjax(facesContext) || isForceInline(uiComponent)) {
+		if (isAjax(facesContext) || isForceInline(facesContext, uiComponent)) {
 
 			String widgetVar = ComponentUtil.resolveWidgetVar(facesContext, (Widget) uiComponent);
 
@@ -141,7 +139,7 @@ public abstract class AUIRendererBase extends RendererBase {
 			responseWriter.write(StringPool.NEW_LINE);
 			responseWriter.write(YUI);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
-			encodeLang(responseWriter, uiComponent);
+			encodeLang(facesContext, responseWriter, uiComponent);
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 			responseWriter.write(StringPool.PERIOD);
 			responseWriter.write(USE);
@@ -171,7 +169,7 @@ public abstract class AUIRendererBase extends RendererBase {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		if (isAjax(facesContext) || isForceInline(uiComponent)) {
+		if (isAjax(facesContext) || isForceInline(facesContext, uiComponent)) {
 
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 			responseWriter.write(StringPool.NEW_LINE);
@@ -179,7 +177,7 @@ public abstract class AUIRendererBase extends RendererBase {
 			responseWriter.write(StringPool.SEMICOLON);
 		}
 
-		if (!isAjax(facesContext) && isForceInline(uiComponent)) {
+		if (!isAjax(facesContext) && isForceInline(facesContext, uiComponent)) {
 
 			responseWriter.write(StringPool.NEW_LINE);
 			responseWriter.write(StringPool.FORWARD_SLASH);
@@ -190,7 +188,7 @@ public abstract class AUIRendererBase extends RendererBase {
 		}
 	}
 
-	protected void encodeLang(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
+	protected void encodeLang(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
 		// no-op
 	}
 
@@ -261,4 +259,6 @@ public abstract class AUIRendererBase extends RendererBase {
 	protected boolean hasJavaScript() {
 		return true;
 	}
+
+	protected abstract String getAlloyClassName();
 }

@@ -65,7 +65,7 @@ public abstract class RendererBase extends Renderer {
 
 		if (hasJavaScript()) {
 
-			if (!isAjax(facesContext) && isForceInline(uiComponent)) {
+			if (!isAjax(facesContext) && isForceInline(facesContext, uiComponent)) {
 
 				responseWriter.startElement(StringPool.SCRIPT, uiComponent);
 				responseWriter.writeAttribute(TYPE, TEXT_JAVASCRIPT, null);
@@ -73,7 +73,7 @@ public abstract class RendererBase extends Renderer {
 
 			encodeJavaScript(facesContext, uiComponent);
 
-			if (!isAjax(facesContext) && isForceInline(uiComponent)) {
+			if (!isAjax(facesContext) && isForceInline(facesContext, uiComponent)) {
 				responseWriter.endElement(StringPool.SCRIPT);
 			}
 		}
@@ -98,7 +98,7 @@ public abstract class RendererBase extends Renderer {
 
 		ResponseWriter backupResponseWriter = facesContext.getResponseWriter();
 
-		if (isAjax(facesContext) || !isForceInline(uiComponent)) {
+		if (isAjax(facesContext) || !isForceInline(facesContext, uiComponent)) {
 
 			BufferedResponseWriter bufferedResponseWriter = new BufferedResponseWriter();
 			facesContext.setResponseWriter(bufferedResponseWriter);
@@ -109,7 +109,7 @@ public abstract class RendererBase extends Renderer {
 		encodeJavaScriptCustom(facesContext, uiComponent);
 		encodeJavaScriptEnd(facesContext, uiComponent);
 
-		if (isAjax(facesContext) || !isForceInline(uiComponent)) {
+		if (isAjax(facesContext) || !isForceInline(facesContext, uiComponent)) {
 			handleBuffer(facesContext, uiComponent);
 		}
 
@@ -190,7 +190,7 @@ public abstract class RendererBase extends Renderer {
 		return false;
 	}
 
-	protected boolean isForceInline(UIComponent uiComponent) {
+	protected boolean isForceInline(FacesContext facesContext, UIComponent uiComponent) {
 		return false;
 	}
 
