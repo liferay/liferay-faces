@@ -22,8 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.renderkit.AUIRendererBase;
-import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.component.Widget;
+import com.liferay.faces.alloy.util.AlloyConstants;
 import com.liferay.faces.util.lang.StringPool;
 
 /**
@@ -34,7 +33,7 @@ import com.liferay.faces.util.lang.StringPool;
 public abstract class TabViewRendererBase extends AUIRendererBase {
 
 	// Private Constants
-	private static final String A_CLASS_NAME = "A.TabView";
+	private static final String ALLOY_CLASS_NAME = "TabView";
 	private static final String AUI_MODULE_NAME = "aui-tabview";
 	private static final String ACTIVE_DESCENDANT_CHANGE = "activeDescendantChange";
 	private static final String BOUNDING_BOX_CHANGE = "boundingBoxChange";
@@ -64,48 +63,8 @@ public abstract class TabViewRendererBase extends AUIRendererBase {
 
 	protected void encodeJavaScriptMain(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		TabViewComponent tabViewComponent = (TabViewComponent) uiComponent;
-		String widgetVar = ComponentUtil.resolveWidgetVar(facesContext, (Widget) tabViewComponent);
-
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-
-		responseWriter.write(VAR);
-		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(widgetVar);
-		responseWriter.write(StringPool.SEMICOLON);
-		responseWriter.write(StringPool.NEW_LINE);
-		responseWriter.write(LIFERAY_COMPONENT);
-		responseWriter.write(StringPool.OPEN_PARENTHESIS);
-		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(widgetVar);
-		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(StringPool.COMMA);
-		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(FUNCTION);
-		responseWriter.write(StringPool.OPEN_PARENTHESIS);
-		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		responseWriter.write(StringPool.NEW_LINE);
-		responseWriter.write(IF);
-		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(StringPool.OPEN_PARENTHESIS);
-		responseWriter.write(StringPool.EXCLAMATION);
-		responseWriter.write(widgetVar);
-		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		responseWriter.write(StringPool.NEW_LINE);
-		responseWriter.write(widgetVar);
-		responseWriter.write(StringPool.EQUAL);
-		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(NEW);
-		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(A_CLASS_NAME);
-		responseWriter.write(StringPool.OPEN_PARENTHESIS);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		responseWriter.write(StringPool.NEW_LINE);
-
+		TabViewComponent tabViewComponent = (TabViewComponent) uiComponent;
 		boolean first = true;
 
 		Object activeDescendant = tabViewComponent.getActiveDescendant();
@@ -283,16 +242,10 @@ public abstract class TabViewRendererBase extends AUIRendererBase {
 			encodeWidth(responseWriter, tabViewComponent, width, first);
 			first = false;
 		}
-		if (!first) {
-			responseWriter.write(StringPool.COMMA);
-		}
 
-		responseWriter.write(StringPool.NEW_LINE);
-
-		responseWriter.write(AFTER);
-		responseWriter.write(StringPool.COLON);
+		// Begin encoding "after" object
+		encodeObject(responseWriter, AlloyConstants.AFTER, StringPool.BLANK, first);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		responseWriter.write(StringPool.NEW_LINE);
 
 		first = true;
 
@@ -471,15 +424,14 @@ public abstract class TabViewRendererBase extends AUIRendererBase {
 			encodeAfterWidthChange(responseWriter, tabViewComponent, afterWidthChange, first);
 			first = false;
 		}
-		responseWriter.write(StringPool.NEW_LINE);
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-		responseWriter.write(StringPool.COMMA);
-		responseWriter.write(StringPool.NEW_LINE);
 
-		responseWriter.write(ON);
-		responseWriter.write(StringPool.COLON);
+		// End encoding "after" object
+		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+
+		// Begin encoding "on" object
+		first = false;
+		encodeObject(responseWriter, AlloyConstants.ON, StringPool.BLANK, first);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		responseWriter.write(StringPool.NEW_LINE);
 
 		first = true;
 
@@ -658,32 +610,14 @@ public abstract class TabViewRendererBase extends AUIRendererBase {
 			encodeOnWidthChange(responseWriter, tabViewComponent, onWidthChange, first);
 			first = false;
 		}
-		responseWriter.write(StringPool.NEW_LINE);
+
+		// End encoding "on" object
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-		responseWriter.write(StringPool.NEW_LINE);
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-		responseWriter.write(StringPool.SEMICOLON);
-		responseWriter.write(StringPool.NEW_LINE);
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-		responseWriter.write(StringPool.NEW_LINE);
-		responseWriter.write(RETURN);
-		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(widgetVar);
-		responseWriter.write(StringPool.SEMICOLON);
-		responseWriter.write(StringPool.NEW_LINE);
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-		responseWriter.write(StringPool.SEMICOLON);
-		responseWriter.write(StringPool.NEW_LINE);
-		responseWriter.write(LIFERAY_COMPONENT);
-		responseWriter.write(StringPool.OPEN_PARENTHESIS);
-		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(widgetVar);
-		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-		responseWriter.write(StringPool.SEMICOLON);
-		responseWriter.write(StringPool.NEW_LINE);
+	}
+
+	@Override
+	protected String getAlloyClassName() {
+		return ALLOY_CLASS_NAME;
 	}
 
 	@Override

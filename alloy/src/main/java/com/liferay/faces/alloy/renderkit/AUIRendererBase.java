@@ -20,6 +20,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.alloy.util.AlloyConstants;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Widget;
 import com.liferay.faces.util.lang.StringPool;
@@ -34,46 +35,26 @@ import com.liferay.faces.util.render.RendererBase;
 public abstract class AUIRendererBase extends RendererBase {
 
 	// Private Constants
+	private static final String A = "A";
 	private static final String DESTROY = "destroy";
-	private static final String FUNCTION_EVENT = "function(event)";
+	private static final String FUNCTION = "function";
 	private static final String FUNCTION_A = "function(A)";
+	private static final String IF = "if";
+	private static final String LIFERAY_COMPONENT = "Liferay.component";
+	private static final String NEW = "new";
+	private static final String RETURN = "return";
 	private static final String USE = "use";
+	private static final String VAR = "var";
 	private static final String YUI = "YUI";
-
-	// Protected Constants
-	protected static final String AFTER = "after";
-	protected static final String FUNCTION = "function";
-	protected static final String IF = "if";
-	protected static final String LIFERAY_COMPONENT = "Liferay.component";
-	protected static final String NEW = "new";
-	protected static final String ON = "on";
-	protected static final String RETURN = "return";
-	protected static final String VAR = "var";
 
 	protected void encodeArray(ResponseWriter responseWriter, String attributeName, Object attributeValue,
 		boolean first) throws IOException {
-
-		if (!first) {
-			responseWriter.write(StringPool.COMMA);
-			responseWriter.write(StringPool.NEW_LINE);
-		}
-
-		responseWriter.write(attributeName);
-		responseWriter.write(StringPool.COLON);
-		responseWriter.write(String.valueOf(attributeValue));
+		encodeObject(responseWriter, attributeName, attributeValue, first);
 	}
 
 	protected void encodeBoolean(ResponseWriter responseWriter, String attributeName, Object attributeValue,
 		boolean first) throws IOException {
-
-		if (!first) {
-			responseWriter.write(StringPool.COMMA);
-			responseWriter.write(StringPool.NEW_LINE);
-		}
-
-		responseWriter.write(attributeName);
-		responseWriter.write(StringPool.COLON);
-		responseWriter.write(String.valueOf(attributeValue));
+		encodeObject(responseWriter, attributeName, attributeValue, first);
 	}
 
 	protected void encodeEvent(ResponseWriter responseWriter, String attributeName, Object attributeValue,
@@ -81,13 +62,11 @@ public abstract class AUIRendererBase extends RendererBase {
 
 		if (!first) {
 			responseWriter.write(StringPool.COMMA);
-			responseWriter.write(StringPool.NEW_LINE);
 		}
 
 		responseWriter.write(attributeName);
 		responseWriter.write(StringPool.COLON);
-		responseWriter.write(FUNCTION_EVENT);
-		responseWriter.write(StringPool.SPACE);
+		responseWriter.write(AlloyConstants.FUNCTION_EVENT);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 		responseWriter.write(String.valueOf(attributeValue));
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
@@ -98,38 +77,23 @@ public abstract class AUIRendererBase extends RendererBase {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		if (!isAjax(facesContext) && isForceInline(uiComponent)) {
+		if (!isAjax(facesContext) && isForceInline(facesContext, uiComponent)) {
 
 			responseWriter.write(StringPool.FORWARD_SLASH);
 			responseWriter.write(StringPool.FORWARD_SLASH);
-			responseWriter.write(StringPool.SPACE);
 			responseWriter.write(StringPool.CDATA_OPEN);
+			responseWriter.write(StringPool.NEW_LINE);
 		}
 
-		if (isAjax(facesContext) || isForceInline(uiComponent)) {
+		String widgetVar = ComponentUtil.resolveWidgetVar(facesContext, (Widget) uiComponent);
 
-			String widgetVar = ComponentUtil.resolveWidgetVar(facesContext, (Widget) uiComponent);
+		if (isAjax(facesContext) || isForceInline(facesContext, uiComponent)) {
 
-			responseWriter.write(StringPool.NEW_LINE);
-			responseWriter.write(VAR);
-			responseWriter.write(StringPool.SPACE);
-			responseWriter.write(widgetVar);
-			responseWriter.write(StringPool.SPACE);
-			responseWriter.write(StringPool.EQUAL);
-			responseWriter.write(StringPool.SPACE);
-			responseWriter.write(LIFERAY_COMPONENT);
-			responseWriter.write(StringPool.OPEN_PARENTHESIS);
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(widgetVar);
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-			responseWriter.write(StringPool.SEMICOLON);
-			responseWriter.write(StringPool.NEW_LINE);
+			encodeLiferayComponent(responseWriter, widgetVar);
 			responseWriter.write(IF);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
 			responseWriter.write(widgetVar);
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-			responseWriter.write(StringPool.SPACE);
 			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 			responseWriter.write(widgetVar);
 			responseWriter.write(StringPool.PERIOD);
@@ -138,15 +102,13 @@ public abstract class AUIRendererBase extends RendererBase {
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 			responseWriter.write(StringPool.SEMICOLON);
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-			responseWriter.write(StringPool.NEW_LINE);
 			responseWriter.write(YUI);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
-			encodeLang(responseWriter, uiComponent);
+			encodeLang(facesContext, responseWriter, uiComponent);
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 			responseWriter.write(StringPool.PERIOD);
 			responseWriter.write(USE);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
-			responseWriter.write(StringPool.NEW_LINE);
 
 			String[] modules = getModules();
 
@@ -158,40 +120,99 @@ public abstract class AUIRendererBase extends RendererBase {
 				responseWriter.write(StringPool.COMMA);
 			}
 
-			responseWriter.write(StringPool.NEW_LINE);
 			responseWriter.write(FUNCTION_A);
-			responseWriter.write(StringPool.SPACE);
 			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-			responseWriter.write(StringPool.NEW_LINE);
 		}
+
+		responseWriter.write(VAR);
+		responseWriter.write(StringPool.SPACE);
+		responseWriter.write(widgetVar);
+		responseWriter.write(StringPool.SEMICOLON);
+		responseWriter.write(LIFERAY_COMPONENT);
+		responseWriter.write(StringPool.OPEN_PARENTHESIS);
+		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write(widgetVar);
+		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write(StringPool.COMMA);
+		responseWriter.write(FUNCTION);
+		responseWriter.write(StringPool.OPEN_PARENTHESIS);
+		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+		responseWriter.write(IF);
+		responseWriter.write(StringPool.OPEN_PARENTHESIS);
+		responseWriter.write(StringPool.EXCLAMATION);
+		responseWriter.write(widgetVar);
+		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+		responseWriter.write(widgetVar);
+		responseWriter.write(StringPool.EQUAL);
+		responseWriter.write(NEW);
+		responseWriter.write(StringPool.SPACE);
+		responseWriter.write(A);
+		responseWriter.write(StringPool.PERIOD);
+		responseWriter.write(getAlloyClassName());
+		responseWriter.write(StringPool.OPEN_PARENTHESIS);
+		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 	}
 
 	@Override
 	protected void encodeJavaScriptEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		String widgetVar = ComponentUtil.resolveWidgetVar(facesContext, (Widget) uiComponent);
 
-		if (isAjax(facesContext) || isForceInline(uiComponent)) {
+		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+		responseWriter.write(StringPool.SEMICOLON);
+		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+		responseWriter.write(RETURN);
+		responseWriter.write(StringPool.SPACE);
+		responseWriter.write(widgetVar);
+		responseWriter.write(StringPool.SEMICOLON);
+		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+		responseWriter.write(StringPool.SEMICOLON);
+		responseWriter.write(LIFERAY_COMPONENT);
+		responseWriter.write(StringPool.OPEN_PARENTHESIS);
+		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write(widgetVar);
+		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+		responseWriter.write(StringPool.SEMICOLON);
+
+		if (isAjax(facesContext) || isForceInline(facesContext, uiComponent)) {
 
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-			responseWriter.write(StringPool.NEW_LINE);
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 			responseWriter.write(StringPool.SEMICOLON);
 		}
 
-		if (!isAjax(facesContext) && isForceInline(uiComponent)) {
+		if (!isAjax(facesContext) && isForceInline(facesContext, uiComponent)) {
 
-			responseWriter.write(StringPool.NEW_LINE);
 			responseWriter.write(StringPool.FORWARD_SLASH);
 			responseWriter.write(StringPool.FORWARD_SLASH);
-			responseWriter.write(StringPool.SPACE);
 			responseWriter.write(StringPool.CDATA_CLOSE);
-			responseWriter.write(StringPool.NEW_LINE);
 		}
 	}
 
-	protected void encodeLang(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
+	protected void encodeLang(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
+		throws IOException {
 		// no-op
+	}
+
+	protected void encodeLiferayComponent(ResponseWriter responseWriter, String widgetVar) throws IOException {
+
+		responseWriter.write(VAR);
+		responseWriter.write(StringPool.SPACE);
+		responseWriter.write(widgetVar);
+		responseWriter.write(StringPool.EQUAL);
+		responseWriter.write(LIFERAY_COMPONENT);
+		responseWriter.write(StringPool.OPEN_PARENTHESIS);
+		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write(widgetVar);
+		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+		responseWriter.write(StringPool.SEMICOLON);
 	}
 
 	protected void encodeMap(ResponseWriter responseWriter, String attributeName, Map<String, String> attributeValues,
@@ -199,7 +220,6 @@ public abstract class AUIRendererBase extends RendererBase {
 
 		if (!first) {
 			responseWriter.write(StringPool.COMMA);
-			responseWriter.write(StringPool.NEW_LINE);
 		}
 
 		responseWriter.write(attributeName);
@@ -218,15 +238,7 @@ public abstract class AUIRendererBase extends RendererBase {
 
 	protected void encodeNumber(ResponseWriter responseWriter, String attributeName, Object attributeValue,
 		boolean first) throws IOException {
-
-		if (!first) {
-			responseWriter.write(StringPool.COMMA);
-			responseWriter.write(StringPool.NEW_LINE);
-		}
-
-		responseWriter.write(attributeName);
-		responseWriter.write(StringPool.COLON);
-		responseWriter.write(String.valueOf(attributeValue));
+		encodeObject(responseWriter, attributeName, attributeValue, first);
 	}
 
 	protected void encodeObject(ResponseWriter responseWriter, String attributeName, Object attributeValue,
@@ -234,7 +246,6 @@ public abstract class AUIRendererBase extends RendererBase {
 
 		if (!first) {
 			responseWriter.write(StringPool.COMMA);
-			responseWriter.write(StringPool.NEW_LINE);
 		}
 
 		responseWriter.write(attributeName);
@@ -247,7 +258,6 @@ public abstract class AUIRendererBase extends RendererBase {
 
 		if (!first) {
 			responseWriter.write(StringPool.COMMA);
-			responseWriter.write(StringPool.NEW_LINE);
 		}
 
 		responseWriter.write(attributeName);
@@ -261,4 +271,6 @@ public abstract class AUIRendererBase extends RendererBase {
 	protected boolean hasJavaScript() {
 		return true;
 	}
+
+	protected abstract String getAlloyClassName();
 }
