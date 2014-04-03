@@ -18,10 +18,9 @@ import java.io.IOException;
 
 import javax.annotation.Generated;
 import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.renderkit.AUIRendererBase;
+import com.liferay.faces.alloy.renderkit.AlloyRendererBase;
 import com.liferay.faces.alloy.util.AlloyConstants;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -30,11 +29,11 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class TabViewRendererBase extends AUIRendererBase {
+public abstract class TabViewRendererBase extends AlloyRendererBase {
 
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "TabView";
-	private static final String AUI_MODULE_NAME = "aui-tabview";
+	private static final String ALLOY_MODULE_NAME = "aui-tabview";
 	private static final String ACTIVE_DESCENDANT_CHANGE = "activeDescendantChange";
 	private static final String BOUNDING_BOX_CHANGE = "boundingBoxChange";
 	private static final String CONTENT_BOX_CHANGE = "contentBoxChange";
@@ -59,11 +58,11 @@ public abstract class TabViewRendererBase extends AUIRendererBase {
 	private static final String WIDTH_CHANGE = "widthChange";
 
 	// Protected Constants
-	protected static final String[] MODULES = {AUI_MODULE_NAME};
+	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
-	protected void encodeJavaScriptMain(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	@Override
+	protected void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
 
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		TabViewComponent tabViewComponent = (TabViewComponent) uiComponent;
 		boolean first = true;
 
