@@ -32,7 +32,7 @@ import com.liferay.faces.util.render.RendererBase;
  *
  * @author  Neil Griffin
  */
-public abstract class AUIRendererBase extends RendererBase {
+public abstract class AlloyRendererBase extends RendererBase {
 
 	// Private Constants
 	private static final String A = "A";
@@ -46,6 +46,9 @@ public abstract class AUIRendererBase extends RendererBase {
 	private static final String USE = "use";
 	private static final String VAR = "var";
 	private static final String YUI = "YUI";
+
+	protected abstract void encodeAlloyAttributes(ResponseWriter respoonseWriter, UIComponent uiComponent)
+		throws IOException;
 
 	protected void encodeArray(ResponseWriter responseWriter, String attributeName, Object attributeValue,
 		boolean first) throws IOException {
@@ -123,6 +126,33 @@ public abstract class AUIRendererBase extends RendererBase {
 			responseWriter.write(FUNCTION_A);
 			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 		}
+	}
+
+	@Override
+	protected void encodeJavaScriptEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+
+		if (isAjax(facesContext) || isForceInline(facesContext, uiComponent)) {
+
+			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+			responseWriter.write(StringPool.SEMICOLON);
+		}
+
+		if (!isAjax(facesContext) && isForceInline(facesContext, uiComponent)) {
+
+			responseWriter.write(StringPool.FORWARD_SLASH);
+			responseWriter.write(StringPool.FORWARD_SLASH);
+			responseWriter.write(StringPool.CDATA_CLOSE);
+		}
+	}
+
+	@Override
+	protected void encodeJavaScriptMain(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		String widgetVar = ComponentUtil.resolveWidgetVar(facesContext, (Widget) uiComponent);
 
 		responseWriter.write(VAR);
 		responseWriter.write(StringPool.SPACE);
@@ -153,14 +183,7 @@ public abstract class AUIRendererBase extends RendererBase {
 		responseWriter.write(getAlloyClassName());
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-	}
-
-	@Override
-	protected void encodeJavaScriptEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		String widgetVar = ComponentUtil.resolveWidgetVar(facesContext, (Widget) uiComponent);
-
+		encodeAlloyAttributes(responseWriter, uiComponent);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 		responseWriter.write(StringPool.SEMICOLON);
@@ -179,20 +202,6 @@ public abstract class AUIRendererBase extends RendererBase {
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 		responseWriter.write(StringPool.SEMICOLON);
-
-		if (isAjax(facesContext) || isForceInline(facesContext, uiComponent)) {
-
-			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-			responseWriter.write(StringPool.SEMICOLON);
-		}
-
-		if (!isAjax(facesContext) && isForceInline(facesContext, uiComponent)) {
-
-			responseWriter.write(StringPool.FORWARD_SLASH);
-			responseWriter.write(StringPool.FORWARD_SLASH);
-			responseWriter.write(StringPool.CDATA_CLOSE);
-		}
 	}
 
 	protected void encodeLang(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
