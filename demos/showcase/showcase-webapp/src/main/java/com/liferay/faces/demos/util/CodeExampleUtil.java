@@ -15,10 +15,13 @@ package com.liferay.faces.demos.util;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.liferay.faces.demos.dto.CodeExample;
 import com.liferay.faces.util.io.TextResource;
 import com.liferay.faces.util.io.TextResourceUtil;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -26,20 +29,28 @@ import com.liferay.faces.util.io.TextResourceUtil;
  */
 public class CodeExampleUtil {
 
+	// Private Constants
+	public static final Pattern JAVA_MULTILINE_COMMENTS_PATTERN = Pattern.compile("/[*][*].*[*]/", Pattern.DOTALL);
+
 	public static CodeExample read(URL sourceFileURL, String sourceFileName) throws IOException {
 
 		TextResource textResource = TextResourceUtil.read(sourceFileURL);
 		String sourceCodeText = textResource.getText();
 
 		if (sourceCodeText != null) {
-			sourceCodeText = sourceCodeText.trim();
-			sourceCodeText = sourceCodeText.replaceAll("\n+$", "");
-			sourceCodeText = sourceCodeText.replaceAll("\n", "\\\\n");
-			sourceCodeText = sourceCodeText.replaceAll("[\"]", "\\\\\"");
-			System.err.println("!@#$ -------------------------------------------------------------------");
-			System.err.println(sourceCodeText);
 
-			return new CodeExample(sourceFileName, sourceFileURL, textResource.getLastModified(), sourceCodeText);
+			String fileExtension = "xml";
+
+			if (sourceFileName.endsWith(".java")) {
+				Matcher matcher = JAVA_MULTILINE_COMMENTS_PATTERN.matcher(sourceCodeText);
+				sourceCodeText = matcher.replaceAll(StringPool.BLANK);
+				fileExtension = "java";
+			}
+
+			sourceCodeText = sourceCodeText.trim();
+
+			return new CodeExample(sourceFileName, fileExtension, sourceFileURL, textResource.getLastModified(),
+					sourceCodeText);
 		}
 		else {
 			throw new IOException("Unable to locate " + sourceFileURL);

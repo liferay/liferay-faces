@@ -34,13 +34,15 @@ public class CodeExample {
 	private static final Logger logger = LoggerFactory.getLogger(CodeExample.class);
 
 	// Private Data Members
+	private String fileExtension;
 	private String fileName;
 	private long lastModified;
 	private String rawText;
 	private URL url;
 
-	public CodeExample(String fileName, URL url, long lastModified, String rawText) {
+	public CodeExample(String fileName, String fileExtension, URL url, long lastModified, String rawText) {
 		this.fileName = fileName;
+		this.fileExtension = fileExtension;
 		this.url = url;
 		this.lastModified = lastModified;
 		this.rawText = rawText;
@@ -52,6 +54,10 @@ public class CodeExample {
 
 	public long getLastModified() {
 		return lastModified;
+	}
+
+	public String getFileExtension() {
+		return fileExtension;
 	}
 
 	public String getRawText() {
