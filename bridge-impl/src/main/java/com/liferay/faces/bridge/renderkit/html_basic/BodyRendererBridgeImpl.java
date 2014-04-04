@@ -28,6 +28,7 @@ import com.liferay.faces.bridge.component.ComponentResourceFactory;
 import com.liferay.faces.bridge.component.ComponentResourceUtil;
 import com.liferay.faces.bridge.renderkit.bridge.BridgeRenderer;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -46,7 +47,7 @@ public class BodyRendererBridgeImpl extends BridgeRenderer {
 
 	// Private Constants
 	private static final String ATTR_STYLE_CLASS = "styleClass";
-	private static final String ELEMENT_DIV = "div";
+	private static final String ELEMENT_DIV = StringPool.DIV;
 	private static final String[] BODY_PASS_THRU_ATTRIBUTES = new String[] {
 			"onclick", "ondblclick", "onkeydown", "onkeypress", "onkeyup", "onload", "onmousedown", "onmousemove",
 			"onmouseout", "onmouseover", "onmouseup", "onunload", ATTR_STYLE_CLASS, "title"
@@ -68,7 +69,7 @@ public class BodyRendererBridgeImpl extends BridgeRenderer {
 
 		PortletNamingContainerUIViewRoot viewRoot = (PortletNamingContainerUIViewRoot) facesContext.getViewRoot();
 		String id = viewRoot.getContainerClientId(facesContext);
-		responseWriter.writeAttribute("id", id, null);
+		responseWriter.writeAttribute(StringPool.ID, id, null);
 
 		// Render the HTML "pass-thru" attributes on the <div> tag.
 		for (int i = 0; i < BODY_PASS_THRU_ATTRIBUTES.length; i++) {
@@ -77,7 +78,7 @@ public class BodyRendererBridgeImpl extends BridgeRenderer {
 			Object attributeValue = uiComponent.getAttributes().get(attributeName);
 
 			if (attributeName.equals(ATTR_STYLE_CLASS)) {
-				renderedName = "class";
+				renderedName = StringPool.CLASS;
 
 				// Add a special CSS class name in order to clue-in the developer who might be examining the rendered
 				// markup that a <div> was rendered instead of <body>.
@@ -96,7 +97,7 @@ public class BodyRendererBridgeImpl extends BridgeRenderer {
 
 		// Render all of the stylesheet resources, since they often need to be loaded as close to the top as possible.
 		UIViewRoot uiViewRoot = facesContext.getViewRoot();
-		List<UIComponent> uiComponentResources = uiViewRoot.getComponentResources(facesContext, TARGET_BODY);
+		List<UIComponent> uiComponentResources = uiViewRoot.getComponentResources(facesContext, StringPool.BODY);
 
 		if (uiComponentResources != null) {
 
@@ -107,7 +108,7 @@ public class BodyRendererBridgeImpl extends BridgeRenderer {
 
 				String originalTarget = (String) uiComponentResource.getAttributes().get(ORIGINAL_TARGET);
 
-				if (TARGET_HEAD.equals(originalTarget)) {
+				if (StringPool.HEAD.equals(originalTarget)) {
 
 					ComponentResource componentResource = componentResourceFactory.getComponentResource(
 							uiComponentResource);
@@ -143,7 +144,7 @@ public class BodyRendererBridgeImpl extends BridgeRenderer {
 
 		// Render all of the non-stylesheet resources.
 		UIViewRoot uiViewRoot = facesContext.getViewRoot();
-		List<UIComponent> uiComponentResources = uiViewRoot.getComponentResources(facesContext, TARGET_BODY);
+		List<UIComponent> uiComponentResources = uiViewRoot.getComponentResources(facesContext, StringPool.BODY);
 
 		if (uiComponentResources != null) {
 
@@ -154,7 +155,7 @@ public class BodyRendererBridgeImpl extends BridgeRenderer {
 
 				String originalTarget = (String) uiComponentResource.getAttributes().get(ORIGINAL_TARGET);
 
-				if (!TARGET_HEAD.equals(originalTarget)) {
+				if (!StringPool.HEAD.equals(originalTarget)) {
 
 					ComponentResource componentResource = componentResourceFactory.getComponentResource(
 							uiComponentResource);

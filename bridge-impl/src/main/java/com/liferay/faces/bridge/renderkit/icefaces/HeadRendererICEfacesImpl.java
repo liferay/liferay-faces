@@ -25,7 +25,6 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.bridge.component.ResourceComponent;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadRendererBridgeImpl;
-import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -88,7 +87,7 @@ public class HeadRendererICEfacesImpl extends HeadRendererBridgeImpl {
 			}
 
 			ResourceComponent iceFacesStyleSheet = new ResourceComponent(facesContext, resourceName, resourceLibrary,
-					HeadResponseWriter.ELEMENT_HEAD);
+					StringPool.HEAD);
 			resources.add(iceFacesStyleSheet);
 		}
 

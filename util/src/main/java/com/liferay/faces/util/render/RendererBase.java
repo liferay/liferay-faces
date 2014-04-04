@@ -44,7 +44,6 @@ public abstract class RendererBase extends Renderer {
 
 	// Private Constants
 	private static final String TEXT_JAVASCRIPT = "text/javascript";
-	private static final String TYPE = "type";
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -68,7 +67,7 @@ public abstract class RendererBase extends Renderer {
 			if (!isAjax(facesContext) && isForceInline(facesContext, uiComponent)) {
 
 				responseWriter.startElement(StringPool.SCRIPT, uiComponent);
-				responseWriter.writeAttribute(TYPE, TEXT_JAVASCRIPT, null);
+				responseWriter.writeAttribute(StringPool.TYPE, TEXT_JAVASCRIPT, null);
 			}
 
 			encodeJavaScript(facesContext, uiComponent);
