@@ -160,11 +160,11 @@ public class SAXParserTest {
 
 			if (localName.equals("selectOneMenu")) {
 				Assert.assertEquals(attributes.getLength(), 3);
-				Assert.assertEquals("id", attributes.getLocalName(0));
+				Assert.assertEquals(StringPool.ID, attributes.getLocalName(0));
 				Assert.assertEquals("provinceId", attributes.getValue(0));
 				Assert.assertEquals("required", attributes.getLocalName(1));
 				Assert.assertEquals("true", attributes.getValue(1));
-				Assert.assertEquals("value", attributes.getLocalName(2));
+				Assert.assertEquals(StringPool.VALUE, attributes.getLocalName(2));
 				Assert.assertEquals("#{applicantModelBean.provinceId}", attributes.getValue(2));
 			}
 

@@ -13,13 +13,15 @@
  */
 package com.liferay.faces.util.application;
 
+import com.liferay.faces.util.lang.StringPool;
+
 /**
  * @author  Neil Griffin
  */
 public class ResourceConstants {
 
 	public static final String JAVAX_FACES_RESOURCE = "javax.faces.resource";
-	public static final String LIBRARY = "library";
-	public static final String LN = "ln";
-	public static final String NAME = "name";
+	public static final String LIBRARY = StringPool.LIBRARY;
+	public static final String LN = StringPool.LN;
+	public static final String NAME = StringPool.NAME;
 }

@@ -25,7 +25,7 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.bridge.component.ResourceComponent;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadRendererBridgeImpl;
-import com.liferay.faces.bridge.renderkit.html_basic.HeadResponseWriter;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -72,7 +72,7 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 
 			String resourceLibrary = PRIMEFACES_THEME_PREFIX + primeFacesThemeName;
 			ResourceComponent primeFacesStyleSheet = new ResourceComponent(facesContext, PRIMEFACES_THEME_RESOURCE_NAME,
-					resourceLibrary, HeadResponseWriter.ELEMENT_HEAD);
+					resourceLibrary, StringPool.HEAD);
 			resources.add(primeFacesStyleSheet);
 		}
 

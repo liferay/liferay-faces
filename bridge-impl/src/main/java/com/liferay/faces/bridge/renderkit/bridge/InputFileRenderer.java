@@ -28,6 +28,7 @@ import com.liferay.faces.bridge.component.HtmlInputFile;
 import com.liferay.faces.bridge.context.map.RequestParameterMap;
 import com.liferay.faces.bridge.event.FileUploadEvent;
 import com.liferay.faces.bridge.model.UploadedFile;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -75,17 +76,17 @@ public class InputFileRenderer extends Renderer {
 		String clientId = uiComponent.getClientId(facesContext);
 		Map<String, Object> attributeMap = uiComponent.getAttributes();
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement("input", uiComponent);
-		responseWriter.writeAttribute("id", clientId, null);
-		responseWriter.writeAttribute("name", clientId, null);
+		responseWriter.startElement(StringPool.INPUT, uiComponent);
+		responseWriter.writeAttribute(StringPool.ID, clientId, null);
+		responseWriter.writeAttribute(StringPool.NAME, clientId, null);
 
 		// Write attributes related to <input type="file" />
-		responseWriter.writeAttribute("type", "file", null);
+		responseWriter.writeAttribute(StringPool.TYPE, "file", null);
 		writePropertyAttribute(responseWriter, "accept", attributeMap);
 		writePropertyAttribute(responseWriter, "size", attributeMap);
 
 		// Write standard HTML input attributes
-		writePropertyAttribute(responseWriter, "styleClass", "class", attributeMap);
+		writePropertyAttribute(responseWriter, "styleClass", StringPool.CLASS, attributeMap);
 		writePropertyAttribute(responseWriter, "accesskey", attributeMap);
 		writePropertyAttribute(responseWriter, "dir", attributeMap);
 		writePropertyAttribute(responseWriter, "disabled", attributeMap);
@@ -114,7 +115,7 @@ public class InputFileRenderer extends Renderer {
 		writePropertyAttribute(responseWriter, "onkeyup", attributeMap);
 		writePropertyAttribute(responseWriter, "onselect", attributeMap);
 
-		responseWriter.endElement("input");
+		responseWriter.endElement(StringPool.INPUT);
 	}
 
 	protected void writePropertyAttribute(ResponseWriter responseWriter, String name, Map<String, Object> attributeMap)
