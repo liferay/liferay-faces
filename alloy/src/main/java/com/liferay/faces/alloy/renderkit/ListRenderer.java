@@ -35,10 +35,10 @@ public class ListRenderer extends Renderer {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		responseWriter.startElement("ul", uiComponent);
+		responseWriter.startElement(StringPool.UL, uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute("id", id, "id");
+		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
 
 		StringBuilder classNames = new StringBuilder();
 		classNames.append("aui-list");
@@ -57,7 +57,7 @@ public class ListRenderer extends Renderer {
 			classNames.append(styleClass);
 		}
 
-		responseWriter.writeAttribute("class", classNames.toString(), null);
+		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class ListRenderer extends Renderer {
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement("ul");
+		responseWriter.endElement(StringPool.UL);
 	}
 
 }

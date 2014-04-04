@@ -23,7 +23,4 @@ public abstract class BridgeRenderer extends Renderer {
 
 	// Public Constants
 	public static final String ORIGINAL_TARGET = "originalTarget";
-	public static final String TARGET_BODY = "body";
-	public static final String TARGET_HEAD = "head";
-
 }

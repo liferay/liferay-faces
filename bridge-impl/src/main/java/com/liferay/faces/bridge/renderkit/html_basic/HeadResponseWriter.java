@@ -23,18 +23,13 @@ import javax.faces.context.ResponseWriterWrapper;
 
 import org.w3c.dom.Element;
 
+import com.liferay.faces.util.lang.StringPool;
+
 
 /**
  * @author  Neil Griffin
  */
 public abstract class HeadResponseWriter extends ResponseWriterWrapper {
-
-	// Public Constants
-	public static final String ELEMENT_HEAD = "head";
-
-	// Private Constants
-	private static final String CDATA_BEGIN = "<![CDATA[";
-	private static final String CDATA_END = "]]>";
 
 	// Private Data Members
 	ResponseWriter wrappedResponseWriter;
@@ -101,7 +96,7 @@ public abstract class HeadResponseWriter extends ResponseWriterWrapper {
 	public void endCDATA() throws IOException {
 
 		try {
-			elementWriterStack.safePeek().write(CDATA_END);
+			elementWriterStack.safePeek().write(StringPool.CDATA_CLOSE);
 		}
 		catch (EmptyStackException e) {
 			throw new IOException(EmptyStackException.class.getSimpleName());
@@ -128,7 +123,7 @@ public abstract class HeadResponseWriter extends ResponseWriterWrapper {
 	public void startCDATA() throws IOException {
 
 		try {
-			elementWriterStack.safePeek().write(CDATA_BEGIN);
+			elementWriterStack.safePeek().write(StringPool.CDATA_OPEN);
 		}
 		catch (EmptyStackException e) {
 			throw new IOException(EmptyStackException.class.getSimpleName());

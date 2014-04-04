@@ -22,6 +22,7 @@ import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.bridge.renderkit.html_basic.BodyRendererBridgeImpl;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -123,7 +124,7 @@ public class ResponseWriterBridgeImpl extends ResponseWriterBridgeCompat_2_2_Imp
 		else if (ELEMENT_UPDATE.equals(elementName)) {
 			insideUpdate = false;
 		}
-		else if (ELEMENT_INPUT.equals(elementName)) {
+		else if (StringPool.INPUT.equals(elementName)) {
 			insideInput = false;
 		}
 
@@ -181,7 +182,7 @@ public class ResponseWriterBridgeImpl extends ResponseWriterBridgeCompat_2_2_Imp
 		else if (ELEMENT_UPDATE.equals(elementName)) {
 			insideUpdate = true;
 		}
-		else if (ELEMENT_INPUT.equals(elementName)) {
+		else if (StringPool.INPUT.equals(elementName)) {
 			insideInput = true;
 		}
 
@@ -207,7 +208,7 @@ public class ResponseWriterBridgeImpl extends ResponseWriterBridgeCompat_2_2_Imp
 		if (attributeName != null) {
 
 			// If the specified attribute name is "id", then
-			if (attributeName.equals(ATTRIBUTE_ID)) {
+			if (attributeName.equals(StringPool.ID)) {
 
 				// If a PartialResponseWriter is trying to update the javax.faces.ViewRoot, then substitute the value of
 				// the outermost <div>...</div> (rendered by the bridge's BodyRenderer) for the specified value. This is

@@ -23,6 +23,7 @@ import javax.portlet.PortletResponse;
 
 import org.w3c.dom.Element;
 
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -60,7 +61,7 @@ public class HeadResponseWriterImpl extends HeadResponseWriter {
 			String nodeName = element.getNodeName();
 			logger.trace("POPPED element name=[{0}]", nodeName);
 
-			if (!ELEMENT_HEAD.equals(nodeName)) {
+			if (!StringPool.HEAD.equals(nodeName)) {
 
 				// NOTE: The Portlet 2.0 Javadocs for the addProperty method indicate that if the key already exists,
 				// then the element will be added to any existing elements under that key name. There is a risk that

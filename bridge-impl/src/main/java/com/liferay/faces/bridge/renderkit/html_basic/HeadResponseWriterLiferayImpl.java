@@ -33,9 +33,9 @@ import com.liferay.faces.bridge.taglib.liferay.HtmlTopTag;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringBodyContent;
 import com.liferay.faces.util.jsp.StringJspWriter;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-
 import com.liferay.portal.util.PortalUtil;
 
 
@@ -68,7 +68,7 @@ public class HeadResponseWriterLiferayImpl extends HeadResponseWriter {
 			String nodeName = element.getNodeName();
 			logger.trace("POPPED element name=[{0}]", nodeName);
 
-			if (!ELEMENT_HEAD.equals(element.getNodeName())) {
+			if (!StringPool.HEAD.equals(element.getNodeName())) {
 
 				// Get the underlying HttpServletRequest and HttpServletResponse
 				FacesContext facesContext = FacesContext.getCurrentInstance();

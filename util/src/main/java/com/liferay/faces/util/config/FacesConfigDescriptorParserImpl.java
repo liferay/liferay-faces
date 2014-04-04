@@ -22,6 +22,7 @@ import javax.xml.parsers.SAXParser;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.xml.SAXHandlerBase;
@@ -35,9 +36,6 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(FacesConfigDescriptorParserImpl.class);
-
-	// Private Constants
-	private static final String NAME = "name";
 
 	// Private Data Members
 	private String facesConfigName;
@@ -95,7 +93,7 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 
 		content = new StringBuilder();
 
-		if (localName.equals(NAME)) {
+		if (localName.equals(StringPool.NAME)) {
 			parsingName = true;
 		}
 		else {
