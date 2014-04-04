@@ -327,9 +327,9 @@ public interface TabViewComponent {
 
 	public void setSrcNode(String srcNode);
 
-	public String getStacked();
+	public Boolean isStacked();
 
-	public void setStacked(String stacked);
+	public void setStacked(Boolean stacked);
 
 	public Object getStrings();
 
