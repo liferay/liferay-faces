@@ -968,7 +968,7 @@
          <name>stacked</name>
          <required>false</required>
          <deferred-value>
-            <type>String</type>
+            <type>Boolean</type>
          </deferred-value>
       </attribute>
       <attribute>
