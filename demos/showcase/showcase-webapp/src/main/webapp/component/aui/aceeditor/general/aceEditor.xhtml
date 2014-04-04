@@ -1,6 +1,33 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-this is aceEditor stuff
+	<h:form>
+		<aui-nongen:fieldset>
+			<aui-nongen:field label="#{i18n['mode']}">
+				<h:selectOneMenu value="#{aceEditorModelBean.mode}">
+					<f:selectItem itemLabel="Java" itemValue="java" />
+					<f:selectItem itemLabel="JSON" itemValue="json" />
+					<f:selectItem itemLabel="XML" itemValue="xml" />
+					<f:ajax render="componentField modelValue" />
+				</h:selectOneMenu>
+			</aui-nongen:field>
+			<aui-nongen:field id="componentField" label="#{i18n['component']}" styleClass="editableAceEditor">
+				<showcase:componentRenderedCheckbox />
+				<showcase:componentRequiredCheckbox />
+				<aui:aceEditor id="aceEditor" height="100" mode="#{aceEditorModelBean.mode}"
+					rendered="#{showcaseModelBean.selectedComponent.rendered}"
+					required="#{showcaseModelBean.selectedComponent.required}" value="#{aceEditorModelBean.text}" />
+				<h:message for="aceEditor" />
+			</aui-nongen:field>
+			<h:commandButton action="#{aceEditorBackingBean.submit}" value="#{i18n['submit']}">
+				<f:ajax execute="@form" render="@form" />
+			</h:commandButton>
+			<aui-nongen:field id="modelValue" label="#{i18n['model-value']}">
+				<pre>#{aceEditorModelBean.text}</pre>
+			</aui-nongen:field>
+		</aui-nongen:fieldset>
+	</h:form>
 
 </ui:composition>
