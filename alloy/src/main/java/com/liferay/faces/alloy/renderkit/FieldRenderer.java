@@ -38,17 +38,17 @@ public class FieldRenderer extends Renderer {
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 		// Outer <span>
-		responseWriter.startElement("span", uiComponent);
+		responseWriter.startElement(StringPool.SPAN, uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute("id", id, "id");
+		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
 
 		StringBuilder classNames = new StringBuilder();
 
 		// aui_deprecated.css: field
 		classNames.append("field");
 
-		String type = (String) attributes.get("type");
+		String type = (String) attributes.get(StringPool.TYPE);
 
 		if (type != null) {
 			String lowerCaseType = type.trim().toLowerCase();
@@ -84,13 +84,13 @@ public class FieldRenderer extends Renderer {
 			classNames.append(styleClass);
 		}
 
-		responseWriter.writeAttribute("class", classNames.toString(), null);
+		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
 
 		// Inner <span>
-		responseWriter.startElement("span", null);
+		responseWriter.startElement(StringPool.SPAN, null);
 
 		// aui_deprecated.css: field-content
-		responseWriter.writeAttribute("class", "field-content", null);
+		responseWriter.writeAttribute(StringPool.CLASS, "field-content", null);
 
 		String lowerCaseInlineLabel = "left";
 		String inlineLabel = (String) attributes.get("inlineLabel");
@@ -104,7 +104,7 @@ public class FieldRenderer extends Renderer {
 			responseWriter.startElement("label", null);
 
 			// aui_deprecated.css: field-label
-			responseWriter.writeAttribute("class", "field-label", null);
+			responseWriter.writeAttribute(StringPool.CLASS, "field-label", null);
 
 			String label = (String) attributes.get("label");
 
@@ -116,7 +116,7 @@ public class FieldRenderer extends Renderer {
 		}
 
 		// Inner-inner <span>
-		responseWriter.startElement("span", null);
+		responseWriter.startElement(StringPool.SPAN, null);
 		classNames = new StringBuilder();
 
 		// aui-field-element not found in 6.2 (all field-element are nested css classes)
@@ -126,7 +126,7 @@ public class FieldRenderer extends Renderer {
 			classNames.append(" aui-field-label-right");
 		}
 
-		responseWriter.writeAttribute("class", classNames.toString(), null);
+		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
 
 	}
 
@@ -137,7 +137,7 @@ public class FieldRenderer extends Renderer {
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 		// Inner-inner </span>
-		responseWriter.endElement("span");
+		responseWriter.endElement(StringPool.SPAN);
 
 		String lowerCaseInlineLabel = "";
 		Map<String, Object> attributes = uiComponent.getAttributes();
@@ -152,7 +152,7 @@ public class FieldRenderer extends Renderer {
 			responseWriter.startElement("label", null);
 
 			// aui_deprecated.css: field-label
-			responseWriter.writeAttribute("class", "field-label", null);
+			responseWriter.writeAttribute(StringPool.CLASS, "field-label", null);
 
 			String label = (String) attributes.get("label");
 
@@ -164,10 +164,10 @@ public class FieldRenderer extends Renderer {
 		}
 
 		// Inner </span>
-		responseWriter.endElement("span");
+		responseWriter.endElement(StringPool.SPAN);
 
 		// Outer </span>
-		responseWriter.endElement("span");
+		responseWriter.endElement(StringPool.SPAN);
 	}
 
 }

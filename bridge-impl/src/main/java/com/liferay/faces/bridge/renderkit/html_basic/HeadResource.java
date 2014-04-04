@@ -28,11 +28,6 @@ import com.liferay.faces.util.lang.StringPool;
  */
 public class HeadResource {
 
-	// Private Constants
-	private static final String HREF = "href";
-	private static final String LINK = "link";
-	private static final String SCRIPT = "script";
-
 	// Private Data Members
 	private List<HeadResourceAttribute> attributeList;
 	private boolean duplicate;
@@ -74,10 +69,10 @@ public class HeadResource {
 			}
 		}
 
-		if (LINK.equals(type)) {
-			url = attributes.getValue(HREF);
+		if (StringPool.LINK.equals(type)) {
+			url = attributes.getValue(StringPool.HREF);
 		}
-		else if (SCRIPT.equals(type)) {
+		else if (StringPool.SCRIPT.equals(type)) {
 			url = attributes.getValue(BridgeConstants.SRC);
 		}
 
@@ -93,7 +88,7 @@ public class HeadResource {
 		if ((url != null) && url.equals(otherHeadResource.getURL())) {
 			equal = true;
 		}
-		else if ((LINK.equals(type) || SCRIPT.equals(type)) && type.equals(otherHeadResource.getType())) {
+		else if ((StringPool.LINK.equals(type) || StringPool.SCRIPT.equals(type)) && type.equals(otherHeadResource.getType())) {
 
 			String facesResource2 = otherHeadResource.getFacesResource();
 			String facesLibrary2 = otherHeadResource.getFacesLibrary();

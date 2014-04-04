@@ -41,8 +41,8 @@ public class DialogRenderer extends Renderer {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		responseWriter.startElement("script", uiComponent);
-		responseWriter.writeAttribute("type", "text/javascript", null);
+		responseWriter.startElement(StringPool.SCRIPT, uiComponent);
+		responseWriter.writeAttribute(StringPool.TYPE, "text/javascript", null);
 
 		responseWriter.write("AUI().use('aui-dialog', function(A) {");
 		responseWriter.write("A.on(\"domready\", function() {");
@@ -111,7 +111,7 @@ public class DialogRenderer extends Renderer {
 		responseWriter.write("}).render();");
 		responseWriter.write("});");
 		responseWriter.write("});");
-		responseWriter.endElement("script");
+		responseWriter.endElement(StringPool.SCRIPT);
 	}
 
 	protected void writeBooleanAttribute(ResponseWriter responseWriter, Map<String, Object> attributes, String name,

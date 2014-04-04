@@ -38,10 +38,10 @@ public class ColRenderer extends Renderer {
 		AUICol auiCol = (AUICol) uiComponent;
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement("div", uiComponent);
+		responseWriter.startElement(StringPool.DIV, uiComponent);
 
 		String id = auiCol.getClientId(facesContext);
-		responseWriter.writeAttribute("id", id, null);
+		responseWriter.writeAttribute(StringPool.ID, id, null);
 
 		StringBuilder classNames = new StringBuilder();
 
@@ -64,7 +64,7 @@ public class ColRenderer extends Renderer {
 			span = getColumnUnitSize(width);
 		}
 
-		classNames.append("span");
+		classNames.append(StringPool.SPAN);
 		classNames.append(span);
 
 		Integer offsetWidth = auiCol.getOffsetWidth();
@@ -105,7 +105,7 @@ public class ColRenderer extends Renderer {
 			classNames.append(styleClass);
 		}
 
-		responseWriter.writeAttribute("class", classNames.toString(), null);
+		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
 
 		Boolean first = auiCol.isFirst();
 
@@ -126,7 +126,7 @@ public class ColRenderer extends Renderer {
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement("div");
+		responseWriter.endElement(StringPool.DIV);
 	}
 
 	protected Integer getColumnUnitSize(Integer width) {
