@@ -34,6 +34,8 @@ public class StringPool {
 
 	public static final String BLANK = "";
 
+	public static final String BODY = "body";
+
 	public static final String CARET = "^";
 
 	public static final String CDATA_CLOSE = "]]>";
@@ -100,9 +102,15 @@ public class StringPool {
 
 	public static final String GREATER_THAN_OR_EQUAL = ">=";
 
+	public static final String HEAD = "head";
+
+	public static final String HIDDEN = "hidden";
+
 	public static final String HREF = "href";
 
 	public static final String ID = "id";
+
+	public static final String INPUT = "input";
 
 	public static final String INVERTED_EXCLAMATION = "\u00A1";
 
@@ -120,9 +128,17 @@ public class StringPool {
 
 	public static final String LI = "li";
 
+	public static final String LINK = "link";
+
+	public static final String LIBRARY = "library";
+
 	public static final String LIKE = "LIKE";
 
+	public static final String LN = "ln";
+
 	public static final String MINUS = "-";
+
+	public static final String NAME = "name";
 
 	public static final String NBSP = "&nbsp;";
 
@@ -168,15 +184,21 @@ public class StringPool {
 
 	public static final String SPACE = " ";
 
+	public static final String SPAN = "span";
+
 	public static final String STAR = "*";
 
 	public static final String TAB = "\t";
+
+	public static final String TARGET = "target";
 
 	public static final String THREE_SPACES = "   ";
 
 	public static final String TILDE = "~";
 
 	public static final String TRUE = "true";
+
+	public static final String TYPE = "type";
 
 	public static final String UL = "ul";
 
@@ -185,6 +207,8 @@ public class StringPool {
 	public static final String UTC = "UTC";
 
 	public static final String UTF8 = "UTF-8";
+
+	public static final String VALUE = "value";
 
 	// Tags
 	public static final String SCRIPT_TAG_BEGIN = "<script>";
