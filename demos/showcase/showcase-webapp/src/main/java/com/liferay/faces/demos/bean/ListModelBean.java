@@ -100,18 +100,33 @@ public class ListModelBean {
 
 							for (String sourceFileName : sourceFileNames) {
 
+								URL sourceFileURL = null;
+
 								if (sourceFileName.endsWith(".xhtml")) {
 
 									String sourcePath = File.separator + "component" + File.separator + prefix +
 										File.separator + lowerCaseName + File.separator + useCaseName + File.separator +
 										sourceFileName;
 									
-									URL sourceFileURL = startupExternalContext.getResource(sourcePath);
+									sourceFileURL = startupExternalContext.getResource(sourcePath);
+								}
+								else {
+									int pos = sourceFileName.lastIndexOf(".java");
+									String fqcn = "com.liferay.faces.demos.bean." + sourceFileName.substring(0, pos);
+									try {
+										Class<?> clazz = Class.forName(fqcn);
+										sourceFileURL = clazz.getResource(sourceFileName);
+									} catch (ClassNotFoundException e) {
+										logger.error(e);
+									}
+								}
+								
+								if (sourceFileURL != null) {
 									
 									CodeExample codeExample = CodeExampleUtil.read(sourceFileURL, sourceFileName);
 									codeExamples.add(codeExample);
 
-									logger.debug("Loaded source file=[{0}]", sourcePath);
+									logger.debug("Loaded source file=[{0}]", sourceFileName);
 								}
 							}
 

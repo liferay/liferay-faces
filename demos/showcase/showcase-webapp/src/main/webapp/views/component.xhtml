@@ -10,13 +10,17 @@
 		</f:metadata>
 		<h:outputStylesheet name="component.css" library="css" />
 		<c:set value="#{showcaseModelBean.selectedComponent}" var="selectedComponent" />
+		<c:set value="#{selectedComponent.prefix}-#{selectedComponent.lowerCaseName}-#{selectedComponent.useCaseName}" var="componentDescription" />
+		<button onclick="window.open('http://docs.liferay.com/faces/4.2/vdldoc/#{selectedComponent.prefix}/#{selectedComponent.camelCaseName}.html')" style="float: right;">#{i18n['vdl-documentation']}</button>
 		<h2>#{selectedComponent.prefix}:#{selectedComponent.camelCaseName} (#{i18n[selectedComponent.useCaseName]} #{i18n['usage']})</h2>
+		<p><h:outputText value="#{i18n[componentDescription]}" /></p>
 		<ui:include
 			src="/component/#{selectedComponent.prefix}/#{selectedComponent.lowerCaseName}/#{selectedComponent.useCaseName}/#{selectedComponent.camelCaseName}.xhtml" />
+		<hr />
 		<h2>#{i18n['source-code']}</h2>
 		<aui:tabView value="#{showcaseModelBean.selectedComponent.useCaseCodeExamples}" var="useCaseCodeExample">
 			<aui:tab label="#{useCaseCodeExample.fileName}">
-				<aui:aceEditor mode="xml" readOnly="true" value="#{useCaseCodeExample.rawText}" />
+				<aui:aceEditor mode="#{useCaseCodeExample.fileExtension}" readOnly="true" showPrintMargin="false" useWrapMode="false" width="900" value="#{useCaseCodeExample.rawText}" />
 			</aui:tab>
 		</aui:tabView>
 	</ui:define>
