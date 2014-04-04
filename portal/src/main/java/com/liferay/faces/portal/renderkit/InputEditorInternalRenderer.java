@@ -104,10 +104,10 @@ public class InputEditorInternalRenderer extends Renderer {
 		queryString.append(StringPool.EQUAL);
 		queryString.append(attributes.get("initMethod"));
 		queryString.append(StringPool.AMPERSAND);
-		queryString.append("name");
+		queryString.append(StringPool.NAME);
 		queryString.append(StringPool.EQUAL);
 
-		String editorName = (String) attributes.get("name");
+		String editorName = (String) attributes.get(StringPool.NAME);
 		queryString.append(editorName);
 		queryString.append(StringPool.AMPERSAND);
 		queryString.append("onBlurMethod");

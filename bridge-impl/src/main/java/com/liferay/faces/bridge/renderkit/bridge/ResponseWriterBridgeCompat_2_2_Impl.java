@@ -21,6 +21,8 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.lifecycle.ClientWindow;
 import javax.faces.render.ResponseStateManager;
 
+import com.liferay.faces.util.lang.StringPool;
+
 
 /**
  * @author  Neil Griffin
@@ -49,8 +51,8 @@ public abstract class ResponseWriterBridgeCompat_2_2_Impl extends ResponseWriter
 
 	protected void writeClientWindowHiddenField() throws IOException {
 
-		startElement(ELEMENT_INPUT, null);
-		writeAttribute(ATTRIBUTE_TYPE, TYPE_HIDDEN, null);
+		startElement(StringPool.INPUT, null);
+		writeAttribute(StringPool.TYPE, StringPool.HIDDEN, null);
 
 		String clientWindowName = CLIENT_WINDOW_PARAM;
 
@@ -61,10 +63,10 @@ public abstract class ResponseWriterBridgeCompat_2_2_Impl extends ResponseWriter
 			clientWindowName = namingContainerId + clientWindowName;
 		}
 
-		writeAttribute(ATTRIBUTE_NAME, clientWindowName, null);
+		writeAttribute(StringPool.NAME, clientWindowName, null);
 
 		// TODO: The following line is a workaround and needs to be fixed in FACES-1798.
-		writeAttribute(ATTRIBUTE_ID, clientWindowName, null);
+		writeAttribute(StringPool.ID, clientWindowName, null);
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
@@ -72,10 +74,10 @@ public abstract class ResponseWriterBridgeCompat_2_2_Impl extends ResponseWriter
 
 		if (clientWindow != null) {
 			String clientWindowId = clientWindow.getId();
-			writeAttribute(ATTRIBUTE_VALUE, clientWindowId, null);
+			writeAttribute(StringPool.VALUE, clientWindowId, null);
 		}
 
 		writeAttribute(ATTRIBUTE_AUTOCOMPLETE, VALUE_OFF, null);
-		endElement(ELEMENT_INPUT);
+		endElement(StringPool.INPUT);
 	}
 }

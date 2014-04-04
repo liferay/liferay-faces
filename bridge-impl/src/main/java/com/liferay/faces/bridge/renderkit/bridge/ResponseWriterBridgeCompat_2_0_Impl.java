@@ -41,13 +41,7 @@ public abstract class ResponseWriterBridgeCompat_2_0_Impl extends ResponseWriter
 
 	// Protected Constants
 	protected static final String ATTRIBUTE_AUTOCOMPLETE = "autocomplete";
-	protected static final String ATTRIBUTE_ID = "id";
-	protected static final String ATTRIBUTE_NAME = "name";
-	protected static final String ATTRIBUTE_TYPE = "type";
-	protected static final String ATTRIBUTE_VALUE = "value";
 	protected static final String DOCTYPE_MARKER = "<!DOCTYPE";
-	protected static final String ELEMENT_INPUT = "input";
-	protected static final String TYPE_HIDDEN = "hidden";
 	protected static final String VALUE_OFF = "off";
 	protected static final String VIEW_STATE_MARKER = PartialResponseWriter.VIEW_STATE_MARKER;
 	protected static final String XML_MARKER = "<?xml";
@@ -140,8 +134,8 @@ public abstract class ResponseWriterBridgeCompat_2_0_Impl extends ResponseWriter
 
 	protected void writeViewStateHiddenField() throws IOException {
 
-		startElement(ELEMENT_INPUT, null);
-		writeAttribute(ATTRIBUTE_TYPE, TYPE_HIDDEN, null);
+		startElement(StringPool.INPUT, null);
+		writeAttribute(StringPool.TYPE, StringPool.HIDDEN, null);
 
 		String viewStateName = PartialResponseWriter.VIEW_STATE_MARKER;
 
@@ -152,15 +146,15 @@ public abstract class ResponseWriterBridgeCompat_2_0_Impl extends ResponseWriter
 			viewStateName = namingContainerId + viewStateName;
 		}
 
-		writeAttribute(ATTRIBUTE_NAME, viewStateName, null);
+		writeAttribute(StringPool.NAME, viewStateName, null);
 
 		// TODO: The following line is a workaround and needs to be fixed in FACES-1797.
-		writeAttribute(ATTRIBUTE_ID, viewStateName, null);
+		writeAttribute(StringPool.ID, viewStateName, null);
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		String viewState = facesContext.getApplication().getStateManager().getViewState(facesContext);
-		writeAttribute(ATTRIBUTE_VALUE, viewState, null);
+		writeAttribute(StringPool.VALUE, viewState, null);
 		writeAttribute(ATTRIBUTE_AUTOCOMPLETE, VALUE_OFF, null);
-		endElement(ELEMENT_INPUT);
+		endElement(StringPool.INPUT);
 	}
 }

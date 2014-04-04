@@ -15,6 +15,8 @@ package com.liferay.faces.alloy.component;
 
 import javax.faces.component.NamingContainer;
 
+import com.liferay.faces.util.lang.StringPool;
+
 
 /**
  * @author  Neil Griffin
@@ -29,7 +31,6 @@ public class AUICol extends AUIPanel implements NamingContainer {
 	public static final String OFFSET = "offset";
 	public static final String OFFSET_WIDTH = "offsetWidth";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.renderkit.ColRenderer";
-	public static final String SPAN = "span";
 	public static final String WIDTH = "width";
 
 	// Private Constants
@@ -74,11 +75,11 @@ public class AUICol extends AUIPanel implements NamingContainer {
 	}
 
 	public Integer getSpan() {
-		return (Integer) getStateHelper().eval(SPAN, COLUMNS);
+		return (Integer) getStateHelper().eval(StringPool.SPAN, COLUMNS);
 	}
 
 	public void setSpan(Integer span) {
-		getStateHelper().put(SPAN, span);
+		getStateHelper().put(StringPool.SPAN, span);
 	}
 
 	public String getStyleClass() {
