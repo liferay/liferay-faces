@@ -15,10 +15,15 @@ package com.liferay.faces.util.component;
 
 import java.util.Iterator;
 
+import javax.el.ELContext;
+import javax.el.ValueExpression;
+import javax.faces.application.Application;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UINamingContainer;
 import javax.faces.component.UIViewRoot;
+import javax.faces.component.ValueHolder;
 import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
 
 import com.liferay.faces.util.lang.StringPool;
 
@@ -29,8 +34,8 @@ import com.liferay.faces.util.lang.StringPool;
 public class ComponentUtil {
 
 	// Private Constants
-	private static final String REGEX_COLON = "[:]";
 	private static final String DOUBLE_BACKSLASH_COLON = "\\\\\\\\:";
+	private static final String REGEX_COLON = "[:]";
 	private static final String REGEX_WIDGET_VAR = "-|";
 
 	public static String appendToCssClasses(String cssClass, String suffix) {
@@ -81,6 +86,42 @@ public class ComponentUtil {
 		}
 
 		return allClasses.toString();
+	}
+
+	public static Object convertSubmittedValue(FacesContext facesContext, ValueHolder valueHolder,
+		Object submittedValue) {
+
+		Object convertedValue = submittedValue;
+
+		if ((valueHolder != null) && (submittedValue != null)) {
+
+			UIComponent uiComponent = (UIComponent) valueHolder;
+			Converter converter = valueHolder.getConverter();
+
+			if (converter == null) {
+
+				ValueExpression valueExpression = uiComponent.getValueExpression(StringPool.VALUE);
+
+				if (valueExpression != null) {
+
+					ELContext elContext = facesContext.getELContext();
+					Class<?> converterClassType = valueExpression.getType(elContext);
+
+					if ((converterClassType != null) && !converterClassType.equals(Object.class)) {
+
+						Application application = facesContext.getApplication();
+						converter = application.createConverter(converterClassType);
+					}
+				}
+			}
+
+			if (converter != null) {
+				String submittedValueAsString = submittedValue.toString();
+				convertedValue = converter.getAsObject(facesContext, uiComponent, submittedValueAsString);
+			}
+		}
+
+		return convertedValue;
 	}
 
 	public static String escapeClientId(String clientId) {
