@@ -41,8 +41,8 @@ public class TabView extends TabViewBase {
 	}
 
 	@Override
-	public Object getRender() {
-		return (Object) getStateHelper().eval(RENDER, true);
+	public Boolean isWidgetRender() {
+		return (Boolean) getStateHelper().eval(WIDGET_RENDER, true);
 	}
 
 	@Override

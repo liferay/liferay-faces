@@ -37,12 +37,12 @@ public class TabViewComponentWrapper implements TabViewComponent, FacesWrapper<T
 	}
 
 	@Override
-	public Object getActiveDescendant() {
+	public String getActiveDescendant() {
 		return getWrapped().getActiveDescendant();
 	}
 
 	@Override
-	public void setActiveDescendant(Object activeDescendant) {
+	public void setActiveDescendant(String activeDescendant) {
 		getWrapped().setActiveDescendant(activeDescendant);
 	}
 
@@ -287,12 +287,12 @@ public class TabViewComponentWrapper implements TabViewComponent, FacesWrapper<T
 	}
 
 	@Override
-	public Object getDefaultChildType() {
+	public String getDefaultChildType() {
 		return getWrapped().getDefaultChildType();
 	}
 
 	@Override
-	public void setDefaultChildType(Object defaultChildType) {
+	public void setDefaultChildType(String defaultChildType) {
 		getWrapped().setDefaultChildType(defaultChildType);
 	}
 
@@ -307,6 +307,16 @@ public class TabViewComponentWrapper implements TabViewComponent, FacesWrapper<T
 	}
 
 	@Override
+	public Boolean isDisabled() {
+		return getWrapped().isDisabled();
+	}
+
+	@Override
+	public void setDisabled(Boolean disabled) {
+		getWrapped().setDisabled(disabled);
+	}
+
+	@Override
 	public Boolean isFocused() {
 		return getWrapped().isFocused();
 	}
@@ -317,13 +327,23 @@ public class TabViewComponentWrapper implements TabViewComponent, FacesWrapper<T
 	}
 
 	@Override
-	public Object getHeight() {
+	public String getHeight() {
 		return getWrapped().getHeight();
 	}
 
 	@Override
-	public void setHeight(Object height) {
+	public void setHeight(String height) {
 		getWrapped().setHeight(height);
+	}
+
+	@Override
+	public String getId() {
+		return getWrapped().getId();
+	}
+
+	@Override
+	public void setId(String id) {
+		getWrapped().setId(id);
 	}
 
 	@Override
@@ -577,13 +597,13 @@ public class TabViewComponentWrapper implements TabViewComponent, FacesWrapper<T
 	}
 
 	@Override
-	public Object getRender() {
-		return getWrapped().getRender();
+	public boolean isRendered() {
+		return getWrapped().isRendered();
 	}
 
 	@Override
-	public void setRender(Object render) {
-		getWrapped().setRender(render);
+	public void setRendered(boolean rendered) {
+		getWrapped().setRendered(rendered);
 	}
 
 	@Override
@@ -607,12 +627,12 @@ public class TabViewComponentWrapper implements TabViewComponent, FacesWrapper<T
 	}
 
 	@Override
-	public Object getStacked() {
+	public String getStacked() {
 		return getWrapped().getStacked();
 	}
 
 	@Override
-	public void setStacked(Object stacked) {
+	public void setStacked(String stacked) {
 		getWrapped().setStacked(stacked);
 	}
 
@@ -637,42 +657,12 @@ public class TabViewComponentWrapper implements TabViewComponent, FacesWrapper<T
 	}
 
 	@Override
-	public Boolean isTabViewDisabled() {
-		return getWrapped().isTabViewDisabled();
-	}
-
-	@Override
-	public void setTabViewDisabled(Boolean tabViewDisabled) {
-		getWrapped().setTabViewDisabled(tabViewDisabled);
-	}
-
-	@Override
-	public String getTabViewId() {
-		return getWrapped().getTabViewId();
-	}
-
-	@Override
-	public void setTabViewId(String tabViewId) {
-		getWrapped().setTabViewId(tabViewId);
-	}
-
-	@Override
-	public Boolean isTabViewRendered() {
-		return getWrapped().isTabViewRendered();
-	}
-
-	@Override
-	public void setTabViewRendered(Boolean tabViewRendered) {
-		getWrapped().setTabViewRendered(tabViewRendered);
-	}
-
-	@Override
-	public Object getType() {
+	public String getType() {
 		return getWrapped().getType();
 	}
 
 	@Override
-	public void setType(Object type) {
+	public void setType(String type) {
 		getWrapped().setType(type);
 	}
 
@@ -687,12 +677,22 @@ public class TabViewComponentWrapper implements TabViewComponent, FacesWrapper<T
 	}
 
 	@Override
-	public Object getWidth() {
+	public Boolean isWidgetRender() {
+		return getWrapped().isWidgetRender();
+	}
+
+	@Override
+	public void setWidgetRender(Boolean widgetRender) {
+		getWrapped().setWidgetRender(widgetRender);
+	}
+
+	@Override
+	public String getWidth() {
 		return getWrapped().getWidth();
 	}
 
 	@Override
-	public void setWidth(Object width) {
+	public void setWidth(String width) {
 		getWrapped().setWidth(width);
 	}
 }
