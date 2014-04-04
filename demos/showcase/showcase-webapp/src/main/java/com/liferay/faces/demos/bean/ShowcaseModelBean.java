@@ -70,6 +70,8 @@ public class ShowcaseModelBean implements Serializable {
 		private String camelCaseName;
 		private String lowerCaseName;
 		private String prefix;
+		private boolean rendered;
+		private boolean required;
 		private String useCaseName;
 		private List<CodeExample> useCaseCodeExamples;
 
@@ -79,6 +81,8 @@ public class ShowcaseModelBean implements Serializable {
 			this.camelCaseName = showcaseComponent.getCamelCaseName();
 			this.lowerCaseName = showcaseComponent.getLowerCaseName();
 			this.prefix = showcaseComponent.getPrefix();
+			this.rendered = true;
+			this.required = false;
 
 			List<UseCase> useCases = showcaseComponent.getUseCases();
 
@@ -97,12 +101,28 @@ public class ShowcaseModelBean implements Serializable {
 			return camelCaseName;
 		}
 
+		public boolean isRendered() {
+			return rendered;
+		}
+
+		public boolean isRequired() {
+			return required;
+		}
+
 		public String getLowerCaseName() {
 			return lowerCaseName;
 		}
 
 		public String getPrefix() {
 			return prefix;
+		}
+
+		public void setRendered(boolean rendered) {
+			this.rendered = rendered;
+		}
+
+		public void setRequired(boolean required) {
+			this.required = required;
 		}
 
 		public List<CodeExample> getUseCaseCodeExamples() {
