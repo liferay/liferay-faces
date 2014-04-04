@@ -1,3 +1,27 @@
+.aui hr {
+	border-top: 1px solid #cfcfcf;
+	margin-top: 10px;
+	margin-bottom: 10px;	
+}
+
+.aui label.field-label {
+	font-weight: bold;
+}
+
+.component-rendered-checkbox input, .component-required-checkbox input {
+	vertical-align: 0.1em;
+}
+
+.component-rendered-checkbox label, .component-required-checkbox label {
+	display: inline;
+	margin-right: 10px;
+}
+
+.editableAceEditor .ace_editor {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
 .tab-content img {
 	float: left;
 	margin-right: 10px;
