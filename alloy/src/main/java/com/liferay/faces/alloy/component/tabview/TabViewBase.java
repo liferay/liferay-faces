@@ -28,12 +28,12 @@ import com.liferay.faces.util.component.Widget;
 public abstract class TabViewBase extends UIData implements Styleable, Widget, TabViewComponent {
 
 	@Override
-	public Object getActiveDescendant() {
-		return (Object) getStateHelper().eval(ACTIVE_DESCENDANT, null);
+	public String getActiveDescendant() {
+		return (String) getStateHelper().eval(ACTIVE_DESCENDANT, null);
 	}
 
 	@Override
-	public void setActiveDescendant(Object activeDescendant) {
+	public void setActiveDescendant(String activeDescendant) {
 		getStateHelper().put(ACTIVE_DESCENDANT, activeDescendant);
 	}
 
@@ -278,12 +278,12 @@ public abstract class TabViewBase extends UIData implements Styleable, Widget, T
 	}
 
 	@Override
-	public Object getDefaultChildType() {
-		return (Object) getStateHelper().eval(DEFAULT_CHILD_TYPE, null);
+	public String getDefaultChildType() {
+		return (String) getStateHelper().eval(DEFAULT_CHILD_TYPE, null);
 	}
 
 	@Override
-	public void setDefaultChildType(Object defaultChildType) {
+	public void setDefaultChildType(String defaultChildType) {
 		getStateHelper().put(DEFAULT_CHILD_TYPE, defaultChildType);
 	}
 
@@ -298,6 +298,16 @@ public abstract class TabViewBase extends UIData implements Styleable, Widget, T
 	}
 
 	@Override
+	public Boolean isDisabled() {
+		return (Boolean) getStateHelper().eval(DISABLED, null);
+	}
+
+	@Override
+	public void setDisabled(Boolean disabled) {
+		getStateHelper().put(DISABLED, disabled);
+	}
+
+	@Override
 	public Boolean isFocused() {
 		return (Boolean) getStateHelper().eval(FOCUSED, null);
 	}
@@ -308,12 +318,12 @@ public abstract class TabViewBase extends UIData implements Styleable, Widget, T
 	}
 
 	@Override
-	public Object getHeight() {
-		return (Object) getStateHelper().eval(HEIGHT, null);
+	public String getHeight() {
+		return (String) getStateHelper().eval(HEIGHT, null);
 	}
 
 	@Override
-	public void setHeight(Object height) {
+	public void setHeight(String height) {
 		getStateHelper().put(HEIGHT, height);
 	}
 
@@ -568,16 +578,6 @@ public abstract class TabViewBase extends UIData implements Styleable, Widget, T
 	}
 
 	@Override
-	public Object getRender() {
-		return (Object) getStateHelper().eval(RENDER, null);
-	}
-
-	@Override
-	public void setRender(Object render) {
-		getStateHelper().put(RENDER, render);
-	}
-
-	@Override
 	public Object getSelection() {
 		return (Object) getStateHelper().eval(SELECTION, null);
 	}
@@ -598,12 +598,12 @@ public abstract class TabViewBase extends UIData implements Styleable, Widget, T
 	}
 
 	@Override
-	public Object getStacked() {
-		return (Object) getStateHelper().eval(STACKED, null);
+	public String getStacked() {
+		return (String) getStateHelper().eval(STACKED, null);
 	}
 
 	@Override
-	public void setStacked(Object stacked) {
+	public void setStacked(String stacked) {
 		getStateHelper().put(STACKED, stacked);
 	}
 
@@ -638,42 +638,12 @@ public abstract class TabViewBase extends UIData implements Styleable, Widget, T
 	}
 
 	@Override
-	public Boolean isTabViewDisabled() {
-		return (Boolean) getStateHelper().eval(TAB_VIEW_DISABLED, null);
+	public String getType() {
+		return (String) getStateHelper().eval(TYPE, null);
 	}
 
 	@Override
-	public void setTabViewDisabled(Boolean tabViewDisabled) {
-		getStateHelper().put(TAB_VIEW_DISABLED, tabViewDisabled);
-	}
-
-	@Override
-	public String getTabViewId() {
-		return (String) getStateHelper().eval(TAB_VIEW_ID, null);
-	}
-
-	@Override
-	public void setTabViewId(String tabViewId) {
-		getStateHelper().put(TAB_VIEW_ID, tabViewId);
-	}
-
-	@Override
-	public Boolean isTabViewRendered() {
-		return (Boolean) getStateHelper().eval(TAB_VIEW_RENDERED, null);
-	}
-
-	@Override
-	public void setTabViewRendered(Boolean tabViewRendered) {
-		getStateHelper().put(TAB_VIEW_RENDERED, tabViewRendered);
-	}
-
-	@Override
-	public Object getType() {
-		return (Object) getStateHelper().eval(TYPE, null);
-	}
-
-	@Override
-	public void setType(Object type) {
+	public void setType(String type) {
 		getStateHelper().put(TYPE, type);
 	}
 
@@ -688,6 +658,16 @@ public abstract class TabViewBase extends UIData implements Styleable, Widget, T
 	}
 
 	@Override
+	public Boolean isWidgetRender() {
+		return (Boolean) getStateHelper().eval(WIDGET_RENDER, null);
+	}
+
+	@Override
+	public void setWidgetRender(Boolean widgetRender) {
+		getStateHelper().put(WIDGET_RENDER, widgetRender);
+	}
+
+	@Override
 	public String getWidgetVar() {
 		return (String) getStateHelper().eval(WIDGET_VAR, null);
 	}
@@ -698,12 +678,12 @@ public abstract class TabViewBase extends UIData implements Styleable, Widget, T
 	}
 
 	@Override
-	public Object getWidth() {
-		return (Object) getStateHelper().eval(WIDTH, null);
+	public String getWidth() {
+		return (String) getStateHelper().eval(WIDTH, null);
 	}
 
 	@Override
-	public void setWidth(Object width) {
+	public void setWidth(String width) {
 		getStateHelper().put(WIDTH, width);
 	}
 }
