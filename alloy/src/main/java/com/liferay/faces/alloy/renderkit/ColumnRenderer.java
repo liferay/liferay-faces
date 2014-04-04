@@ -36,10 +36,10 @@ public class ColumnRenderer extends Renderer {
 		Map<String, Object> attributes = uiComponent.getAttributes();
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement("div", uiComponent);
+		responseWriter.startElement(StringPool.DIV, uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute("id", id, "id");
+		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
 
 		StringBuilder classNames = new StringBuilder();
 		classNames.append("aui-column");
@@ -93,8 +93,8 @@ public class ColumnRenderer extends Renderer {
 			classNames.append(" aui-column-last");
 		}
 
-		responseWriter.writeAttribute("class", classNames.toString(), null);
-		responseWriter.startElement("div", null);
+		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
+		responseWriter.startElement(StringPool.DIV, null);
 		classNames = new StringBuilder();
 		classNames.append("aui-column-content");
 
@@ -108,7 +108,7 @@ public class ColumnRenderer extends Renderer {
 			classNames.append(ComponentUtil.appendToCssClasses(styleClass, "-content"));
 		}
 
-		responseWriter.writeAttribute("class", classNames.toString(), null);
+		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
 	}
 
 	@Override
@@ -116,8 +116,8 @@ public class ColumnRenderer extends Renderer {
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement("div");
-		responseWriter.endElement("div");
+		responseWriter.endElement(StringPool.DIV);
+		responseWriter.endElement(StringPool.DIV);
 	}
 
 }
