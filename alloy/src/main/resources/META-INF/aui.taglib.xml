@@ -860,7 +860,7 @@
 			<description><![CDATA[Determine the orientation of tabs. Can be stacked (vertical) or not (horizontal).<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false,"defaultValue":"false"}-->]]></description>
 			<name>stacked</name>
 			<required>false</required>
-			<type>String</type>
+			<type>Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.util.HashMap","required":false,"defaultValue":"{}"}-->]]></description>

@@ -627,12 +627,12 @@ public class TabViewComponentWrapper implements TabViewComponent, FacesWrapper<T
 	}
 
 	@Override
-	public String getStacked() {
-		return getWrapped().getStacked();
+	public Boolean isStacked() {
+		return getWrapped().isStacked();
 	}
 
 	@Override
-	public void setStacked(String stacked) {
+	public void setStacked(Boolean stacked) {
 		getWrapped().setStacked(stacked);
 	}
 

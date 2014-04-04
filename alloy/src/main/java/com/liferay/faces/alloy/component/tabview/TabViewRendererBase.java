@@ -186,7 +186,7 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		String stacked = tabViewComponent.getStacked();
+		Boolean stacked = tabViewComponent.isStacked();
 
 		if (stacked != null) {
 
@@ -860,8 +860,8 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		encodeString(responseWriter, TabViewComponent.SRC_NODE, srcNode, first);
 	}
 
-	protected void encodeStacked(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String stacked, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewComponent.STACKED, stacked, first);
+	protected void encodeStacked(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean stacked, boolean first) throws IOException {
+		encodeBoolean(responseWriter, TabViewComponent.STACKED, stacked, first);
 	}
 
 	protected void encodeStrings(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object strings, boolean first) throws IOException {

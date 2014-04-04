@@ -598,12 +598,12 @@ public abstract class TabViewBase extends UIData implements Styleable, Widget, T
 	}
 
 	@Override
-	public String getStacked() {
-		return (String) getStateHelper().eval(STACKED, null);
+	public Boolean isStacked() {
+		return (Boolean) getStateHelper().eval(STACKED, null);
 	}
 
 	@Override
-	public void setStacked(String stacked) {
+	public void setStacked(Boolean stacked) {
 		getStateHelper().put(STACKED, stacked);
 	}
 
