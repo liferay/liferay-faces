@@ -25,30 +25,6 @@
 			<renderer-type>com.liferay.faces.alloy.component.aceeditor.AceEditorRenderer</renderer-type>
 		</component>
 		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
-			<name>aceEditorDisabled</name>
-			<required>false</required>
-			<type>Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
-			<name>aceEditorId</name>
-			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
-			<name>aceEditorRendered</name>
-			<required>false</required>
-			<type>Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Some predefined value on the editor.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
-			<name>aceEditorValue</name>
-			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
 			<name>afterBoundingBoxChange</name>
 			<required>false</required>
@@ -211,6 +187,12 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>disabled</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
 			<name>focused</name>
 			<required>false</required>
@@ -227,6 +209,12 @@
 			<name>highlightActiveLine</name>
 			<required>false</required>
 			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
@@ -397,10 +385,10 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
-			<name>render</name>
+			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>rendered</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if print margin will be visible or not.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
@@ -451,8 +439,20 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[Some predefined value on the editor.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>value</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
 			<name>visible</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>widgetRender</name>
 			<required>false</required>
 			<type>Boolean</type>
 		</attribute>
@@ -506,7 +506,7 @@
 			<description><![CDATA[Returns the Widget's currently focused descendant Widget.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
 			<name>activeDescendant</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Returns the Widget's currently focused descendant Widget.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
@@ -656,11 +656,17 @@
 			<description><![CDATA[String representing the default type of the children  managed by this Widget.  Can also supply default type as a constructor reference.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
 			<name>defaultChildType</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
 			<name>destroyed</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>disabled</name>
 			<required>false</required>
 			<type>Boolean</type>
 		</attribute>
@@ -674,7 +680,13 @@
 			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
 			<name>height</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
@@ -827,10 +839,10 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
-			<name>render</name>
+			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>rendered</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Returns the currently selected child Widget.  If the  <code>mulitple</code> attribte is set to <code>true</code> will  return an Y.ArrayList instance containing the currently selected  children.  If no children are selected, will return null.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
@@ -848,7 +860,7 @@
 			<description><![CDATA[Determine the orientation of tabs. Can be stacked (vertical) or not (horizontal).<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false,"defaultValue":"false"}-->]]></description>
 			<name>stacked</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.util.HashMap","required":false,"defaultValue":"{}"}-->]]></description>
@@ -869,32 +881,20 @@
 			<type>Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
-			<name>tabViewDisabled</name>
-			<required>false</required>
-			<type>Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
-			<name>tabViewId</name>
+			<description><![CDATA[Determine the type of tabs.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false,"defaultValue":"tabs"}-->]]></description>
+			<name>type</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
-			<name>tabViewRendered</name>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
+			<name>visible</name>
 			<required>false</required>
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Determine the type of tabs.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false,"defaultValue":"tabs"}-->]]></description>
-			<name>type</name>
-			<required>false</required>
-			<type>Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
-			<name>visible</name>
+			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>widgetRender</name>
 			<required>false</required>
 			<type>Boolean</type>
 		</attribute>
@@ -908,7 +908,7 @@
 			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
 			<name>width</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>String</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
