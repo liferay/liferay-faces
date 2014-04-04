@@ -41,8 +41,7 @@ public class AceEditor extends AceEditorBase {
 		String boundingBox = super.getBoundingBox();
 
 		if (boundingBox == null) {
-			String defaultValue = StringPool.POUND + ComponentUtil.escapeClientId(getClientId());
-			boundingBox = (String) getStateHelper().eval(BOUNDING_BOX, defaultValue);
+			boundingBox = StringPool.POUND + ComponentUtil.escapeClientId(getClientId());
 		}
 
 		return boundingBox;

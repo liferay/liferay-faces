@@ -12,34 +12,6 @@
       <tag-class>com.liferay.faces.alloy.taglib.AceEditorTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
-         <name>aceEditorDisabled</name>
-         <required>false</required>
-         <deferred-value>
-            <type>Boolean</type>
-         </deferred-value>
-      </attribute>
-      <attribute>
-         <name>aceEditorId</name>
-         <required>false</required>
-         <deferred-value>
-            <type>String</type>
-         </deferred-value>
-      </attribute>
-      <attribute>
-         <name>aceEditorRendered</name>
-         <required>false</required>
-         <deferred-value>
-            <type>Boolean</type>
-         </deferred-value>
-      </attribute>
-      <attribute>
-         <name>aceEditorValue</name>
-         <required>false</required>
-         <deferred-value>
-            <type>String</type>
-         </deferred-value>
-      </attribute>
-      <attribute>
          <name>afterBoundingBoxChange</name>
          <required>false</required>
          <deferred-value>
@@ -229,6 +201,13 @@
          </deferred-value>
       </attribute>
       <attribute>
+         <name>disabled</name>
+         <required>false</required>
+         <deferred-value>
+            <type>Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
          <name>focused</name>
          <required>false</required>
          <deferred-value>
@@ -248,6 +227,11 @@
          <deferred-value>
             <type>Boolean</type>
          </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
       </attribute>
       <attribute>
          <name>initialized</name>
@@ -446,10 +430,10 @@
          </deferred-value>
       </attribute>
       <attribute>
-         <name>render</name>
+         <name>rendered</name>
          <required>false</required>
          <deferred-value>
-            <type>Object</type>
+            <type>Boolean</type>
          </deferred-value>
       </attribute>
       <attribute>
@@ -509,7 +493,21 @@
          </deferred-value>
       </attribute>
       <attribute>
+         <name>value</name>
+         <required>false</required>
+         <deferred-value>
+            <type>String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
          <name>visible</name>
+         <required>false</required>
+         <deferred-value>
+            <type>Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>widgetRender</name>
          <required>false</required>
          <deferred-value>
             <type>Boolean</type>
@@ -559,7 +557,7 @@
          <name>activeDescendant</name>
          <required>false</required>
          <deferred-value>
-            <type>Object</type>
+            <type>String</type>
          </deferred-value>
       </attribute>
       <attribute>
@@ -734,11 +732,18 @@
          <name>defaultChildType</name>
          <required>false</required>
          <deferred-value>
-            <type>Object</type>
+            <type>String</type>
          </deferred-value>
       </attribute>
       <attribute>
          <name>destroyed</name>
+         <required>false</required>
+         <deferred-value>
+            <type>Boolean</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>disabled</name>
          <required>false</required>
          <deferred-value>
             <type>Boolean</type>
@@ -755,8 +760,13 @@
          <name>height</name>
          <required>false</required>
          <deferred-value>
-            <type>Object</type>
+            <type>String</type>
          </deferred-value>
+      </attribute>
+      <attribute>
+         <name>id</name>
+         <required>false</required>
+         <rtexprvalue>true</rtexprvalue>
       </attribute>
       <attribute>
          <name>initialized</name>
@@ -934,10 +944,10 @@
          </deferred-value>
       </attribute>
       <attribute>
-         <name>render</name>
+         <name>rendered</name>
          <required>false</required>
          <deferred-value>
-            <type>Object</type>
+            <type>Boolean</type>
          </deferred-value>
       </attribute>
       <attribute>
@@ -958,7 +968,7 @@
          <name>stacked</name>
          <required>false</required>
          <deferred-value>
-            <type>Object</type>
+            <type>String</type>
          </deferred-value>
       </attribute>
       <attribute>
@@ -983,35 +993,21 @@
          </deferred-value>
       </attribute>
       <attribute>
-         <name>tabViewDisabled</name>
-         <required>false</required>
-         <deferred-value>
-            <type>Boolean</type>
-         </deferred-value>
-      </attribute>
-      <attribute>
-         <name>tabViewId</name>
+         <name>type</name>
          <required>false</required>
          <deferred-value>
             <type>String</type>
          </deferred-value>
       </attribute>
       <attribute>
-         <name>tabViewRendered</name>
+         <name>visible</name>
          <required>false</required>
          <deferred-value>
             <type>Boolean</type>
          </deferred-value>
       </attribute>
       <attribute>
-         <name>type</name>
-         <required>false</required>
-         <deferred-value>
-            <type>Object</type>
-         </deferred-value>
-      </attribute>
-      <attribute>
-         <name>visible</name>
+         <name>widgetRender</name>
          <required>false</required>
          <deferred-value>
             <type>Boolean</type>
@@ -1028,7 +1024,7 @@
          <name>width</name>
          <required>false</required>
          <deferred-value>
-            <type>Object</type>
+            <type>String</type>
          </deferred-value>
       </attribute>
    </tag>
