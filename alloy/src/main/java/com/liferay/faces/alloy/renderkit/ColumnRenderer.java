@@ -22,6 +22,7 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
