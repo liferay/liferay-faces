@@ -37,7 +37,7 @@ use POSIX qw(strftime);
 # Primitives
 #
 my($liferayFacesVersion,$liferayFacesVersionShort,$liferayFacesVersionShortMajor1DotMajor2,$major1,$major2,$minor);
-my($portalVersion,$portalVersions,$portalDtdDisplay,$portalDtdUrl,$bookVersion);
+my($portalVersion,$portalVersions,$portalDtdDisplay,$portalDtdUrl,$liferayFacesVersionWithoutSnapshot);
 my($facesVersion,$facesVersionURL,$facesMajor,$facesMinor);
 my($liferayFacesMajor1,$liferayFacesMajor2,$liferayFacesMinor,);
 my $year= strftime "%Y", localtime;
@@ -57,10 +57,10 @@ while(<POM>) {
 
 		$_ = $liferayFacesVersion;
 		s/-SNAPSHOT//;
-		$bookVersion = $_;
-		print "bookVersion = $bookVersion\n";
+		$liferayFacesVersionWithoutSnapshot = $_;
+		print "liferayFacesVersionWithoutSnapshot = $liferayFacesVersionWithoutSnapshot\n";
 
-		$_ = $bookVersion;
+		$_ = $liferayFacesVersionWithoutSnapshot;
 		s/-(.*)//;
 		$liferayFacesVersionShort = $_;
 		print "liferayFacesVersionShort = $liferayFacesVersionShort\n";
@@ -236,6 +236,14 @@ sub do_inplace_edits {
 	elsif (($file =~ m/.*\.java/) and ($File::Find::name =~ /\/src/)) {
 		print "$File::Find::name\n";
 		`perl -pi -e 's/2000-..* Liferay/2000-${year} Liferay/' $file`;
+	}
+
+	#
+	# Otherwise, if the current file is named generator.properties, then potentially fix the current version.
+	#
+	elsif ($file eq "generator.properties") {
+		print "$File::Find::name\n";
+		`perl -pi -e 's/builder\\.faces\\.version=.*/builder\\.faces\\.version=$liferayFacesVersionWithoutSnapshot/' $file`;
 	}
 }
 
