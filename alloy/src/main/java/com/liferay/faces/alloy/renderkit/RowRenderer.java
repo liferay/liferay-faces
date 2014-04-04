@@ -38,10 +38,10 @@ public class RowRenderer extends Renderer {
 		AUIRow auiRow = (AUIRow) uiComponent;
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement("div", uiComponent);
+		responseWriter.startElement(StringPool.DIV, uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute("id", id, null);
+		responseWriter.writeAttribute(StringPool.ID, id, null);
 
 		StringBuilder classNames = new StringBuilder();
 
@@ -65,7 +65,7 @@ public class RowRenderer extends Renderer {
 			classNames.append(styleClass);
 		}
 
-		responseWriter.writeAttribute("class", classNames.toString(), null);
+		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
 	}
 
 	@Override
@@ -74,6 +74,6 @@ public class RowRenderer extends Renderer {
 		super.encodeEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement("div");
+		responseWriter.endElement(StringPool.DIV);
 	}
 }

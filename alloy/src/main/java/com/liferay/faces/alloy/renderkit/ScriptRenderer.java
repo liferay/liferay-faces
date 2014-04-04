@@ -25,6 +25,7 @@ import com.liferay.faces.util.context.ExtFacesContext;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.portal.ScriptDataUtil;
 import com.liferay.faces.util.portal.WebKeys;
+import com.liferay.faces.util.render.BufferedResponseWriter;
 
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.model.Portlet;
@@ -39,11 +40,9 @@ public class ScriptRenderer extends ScriptRendererCompat {
 	private static final String AUI_USE = "AUI().use";
 	private static final String BOTTOM = "bottom";
 	private static final String FUNCTION_A = "function(A)";
-	private static final String SCRIPT = "script";
 	private static final String INLINE = "inline";
 	private static final String POSITION = "position";
 	private static final String TEXT_JAVASCRIPT = "text/javascript";
-	private static final String TYPE = "type";
 	private static final String USE = "use";
 
 	// Private Data Members
@@ -84,8 +83,8 @@ public class ScriptRenderer extends ScriptRendererCompat {
 		if (inline) {
 
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
-			responseWriter.startElement(SCRIPT, uiComponent);
-			responseWriter.writeAttribute(TYPE, TEXT_JAVASCRIPT, null);
+			responseWriter.startElement(StringPool.SCRIPT, uiComponent);
+			responseWriter.writeAttribute(StringPool.TYPE, TEXT_JAVASCRIPT, null);
 			responseWriter.write(StringPool.FORWARD_SLASH);
 			responseWriter.write(StringPool.FORWARD_SLASH);
 			responseWriter.write(StringPool.SPACE);
@@ -181,7 +180,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 			responseWriter.write(StringPool.SPACE);
 			responseWriter.write(StringPool.CDATA_CLOSE);
 			responseWriter.write(StringPool.NEW_LINE);
-			responseWriter.endElement(SCRIPT);
+			responseWriter.endElement(StringPool.SCRIPT);
 		}
 	}
 

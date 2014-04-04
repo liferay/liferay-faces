@@ -24,6 +24,7 @@ import javax.portlet.PortletURL;
 import javax.portlet.ResourceURL;
 
 import com.liferay.faces.bridge.component.PortletResourceURL;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -43,7 +44,7 @@ public class ResourceURLRenderer extends BaseURLRenderer {
 		Map<String, Object> attributes = uiComponent.getAttributes();
 		PortletURL portletURL = (PortletURL) mimeResponse.createResourceURL();
 		ResourceURL resourceURL = (ResourceURL) portletURL;
-		String id = (String) attributes.get("id");
+		String id = (String) attributes.get(StringPool.ID);
 		String cacheability = (String) attributes.get("cacheability");
 
 		try {

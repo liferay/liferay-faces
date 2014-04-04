@@ -41,7 +41,7 @@ public class FieldSetRenderer extends Renderer {
 		responseWriter.startElement("fieldset", uiComponent);
 
 		String id = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute("id", id, "id");
+		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
 
 		StringBuilder classNames = new StringBuilder();
 
@@ -79,7 +79,7 @@ public class FieldSetRenderer extends Renderer {
 			classNames.append(styleClass);
 		}
 
-		responseWriter.writeAttribute("class", classNames.toString(), null);
+		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
 
 		// <legend>
 		String label = (String) attributes.get("label");
@@ -88,20 +88,20 @@ public class FieldSetRenderer extends Renderer {
 			responseWriter.startElement("legend", uiComponent);
 
 			// aui_deprecated.css: fieldset-legend
-			responseWriter.writeAttribute("class", "fieldset-legend", null);
+			responseWriter.writeAttribute(StringPool.CLASS, "fieldset-legend", null);
 
 			// <span> inside the <legend>
-			responseWriter.startElement("span", uiComponent);
+			responseWriter.startElement(StringPool.SPAN, uiComponent);
 
 			// Used to be aui-legend, but has been replaced by non-deprecated legend
-			responseWriter.writeAttribute("class", "legend", null);
+			responseWriter.writeAttribute(StringPool.CLASS, "legend", null);
 			responseWriter.writeText(label, uiComponent, "label");
-			responseWriter.endElement("span");
+			responseWriter.endElement(StringPool.SPAN);
 			responseWriter.endElement("legend");
 		}
 
 		// Inner <div>
-		responseWriter.startElement("div", null);
+		responseWriter.startElement(StringPool.DIV, null);
 		classNames = new StringBuilder();
 
 		// aui-fieldset-content not found in 6.2 (all fieldset-content are nested css classes)
@@ -113,7 +113,7 @@ public class FieldSetRenderer extends Renderer {
 			classNames.append(" column-content");
 		}
 
-		responseWriter.writeAttribute("class", classNames.toString(), null);
+		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
 	}
 
 	@Override
@@ -123,7 +123,7 @@ public class FieldSetRenderer extends Renderer {
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 		// Inner </div>
-		responseWriter.endElement("div");
+		responseWriter.endElement(StringPool.DIV);
 
 		// Outer </fieldset>
 		responseWriter.endElement("fieldset");
