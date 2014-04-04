@@ -24,10 +24,6 @@ import javax.annotation.Generated;
 public interface AceEditorComponent {
 
 	// Public Constants
-	public static final String ACE_EDITOR_DISABLED = "disabled";
-	public static final String ACE_EDITOR_ID = "id";
-	public static final String ACE_EDITOR_RENDERED = "rendered";
-	public static final String ACE_EDITOR_VALUE = "value";
 	public static final String AFTER_BOUNDING_BOX_CHANGE = "afterBoundingBoxChange";
 	public static final String AFTER_CONTENT_BOX_CHANGE = "afterContentBoxChange";
 	public static final String AFTER_DESTROYED_CHANGE = "afterDestroyedChange";
@@ -55,9 +51,11 @@ public interface AceEditorComponent {
 	public static final String BOUNDING_BOX = "boundingBox";
 	public static final String CONTENT_BOX = "contentBox";
 	public static final String DESTROYED = "destroyed";
+	public static final String DISABLED = "disabled";
 	public static final String FOCUSED = "focused";
 	public static final String HEIGHT = "height";
 	public static final String HIGHLIGHT_ACTIVE_LINE = "highlightActiveLine";
+	public static final String ID = "id";
 	public static final String INITIALIZED = "initialized";
 	public static final String LOCALE = "locale";
 	public static final String MODE = "mode";
@@ -86,7 +84,7 @@ public interface AceEditorComponent {
 	public static final String ON_VISIBLE_CHANGE = "onVisibleChange";
 	public static final String ON_WIDTH_CHANGE = "onWidthChange";
 	public static final String READ_ONLY = "readOnly";
-	public static final String RENDER = "render";
+	public static final String RENDERED = "rendered";
 	public static final String SHOW_PRINT_MARGIN = "showPrintMargin";
 	public static final String SRC_NODE = "srcNode";
 	public static final String STRINGS = "strings";
@@ -94,24 +92,10 @@ public interface AceEditorComponent {
 	public static final String TAB_SIZE = "tabSize";
 	public static final String USE_SOFT_TABS = "useSoftTabs";
 	public static final String USE_WRAP_MODE = "useWrapMode";
+	public static final String VALUE = "value";
 	public static final String VISIBLE = "visible";
+	public static final String WIDGET_RENDER = "render";
 	public static final String WIDTH = "width";
-
-	public Boolean isAceEditorDisabled();
-
-	public void setAceEditorDisabled(Boolean aceEditorDisabled);
-
-	public String getAceEditorId();
-
-	public void setAceEditorId(String aceEditorId);
-
-	public Boolean isAceEditorRendered();
-
-	public void setAceEditorRendered(Boolean aceEditorRendered);
-
-	public String getAceEditorValue();
-
-	public void setAceEditorValue(String aceEditorValue);
 
 	public String getAfterBoundingBoxChange();
 
@@ -221,6 +205,10 @@ public interface AceEditorComponent {
 
 	public void setDestroyed(Boolean destroyed);
 
+	public Boolean isDisabled();
+
+	public void setDisabled(Boolean disabled);
+
 	public Boolean isFocused();
 
 	public void setFocused(Boolean focused);
@@ -232,6 +220,10 @@ public interface AceEditorComponent {
 	public Boolean isHighlightActiveLine();
 
 	public void setHighlightActiveLine(Boolean highlightActiveLine);
+
+	public String getId();
+
+	public void setId(String id);
 
 	public Boolean isInitialized();
 
@@ -345,9 +337,9 @@ public interface AceEditorComponent {
 
 	public void setReadOnly(Boolean readOnly);
 
-	public Object getRender();
+	public boolean isRendered();
 
-	public void setRender(Object render);
+	public void setRendered(boolean rendered);
 
 	public Boolean isShowPrintMargin();
 
@@ -377,9 +369,17 @@ public interface AceEditorComponent {
 
 	public void setUseWrapMode(Boolean useWrapMode);
 
+	public Object getValue();
+
+	public void setValue(Object value);
+
 	public Boolean isVisible();
 
 	public void setVisible(Boolean visible);
+
+	public Boolean isWidgetRender();
+
+	public void setWidgetRender(Boolean widgetRender);
 
 	public Object getWidth();
 

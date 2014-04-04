@@ -66,7 +66,7 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		TabViewComponent tabViewComponent = (TabViewComponent) uiComponent;
 		boolean first = true;
 
-		Object activeDescendant = tabViewComponent.getActiveDescendant();
+		String activeDescendant = tabViewComponent.getActiveDescendant();
 
 		if (activeDescendant != null) {
 
@@ -90,7 +90,7 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		Object defaultChildType = tabViewComponent.getDefaultChildType();
+		String defaultChildType = tabViewComponent.getDefaultChildType();
 
 		if (defaultChildType != null) {
 
@@ -106,6 +106,14 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
+		Boolean disabled = tabViewComponent.isDisabled();
+
+		if (disabled != null) {
+
+			encodeDisabled(responseWriter, tabViewComponent, disabled, first);
+			first = false;
+		}
+
 		Boolean focused = tabViewComponent.isFocused();
 
 		if (focused != null) {
@@ -114,11 +122,19 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		Object height = tabViewComponent.getHeight();
+		String height = tabViewComponent.getHeight();
 
 		if (height != null) {
 
 			encodeHeight(responseWriter, tabViewComponent, height, first);
+			first = false;
+		}
+
+		String id = tabViewComponent.getId();
+
+		if (id != null) {
+
+			encodeId(responseWriter, tabViewComponent, id, first);
 			first = false;
 		}
 
@@ -146,11 +162,11 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		Object render = tabViewComponent.getRender();
+		Boolean rendered = tabViewComponent.isRendered();
 
-		if (render != null) {
+		if (rendered != null) {
 
-			encodeRender(responseWriter, tabViewComponent, render, first);
+			encodeRendered(responseWriter, tabViewComponent, rendered, first);
 			first = false;
 		}
 
@@ -170,7 +186,7 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		Object stacked = tabViewComponent.getStacked();
+		String stacked = tabViewComponent.getStacked();
 
 		if (stacked != null) {
 
@@ -194,31 +210,7 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		Boolean tabViewDisabled = tabViewComponent.isTabViewDisabled();
-
-		if (tabViewDisabled != null) {
-
-			encodeTabViewDisabled(responseWriter, tabViewComponent, tabViewDisabled, first);
-			first = false;
-		}
-
-		String tabViewId = tabViewComponent.getTabViewId();
-
-		if (tabViewId != null) {
-
-			encodeTabViewId(responseWriter, tabViewComponent, tabViewId, first);
-			first = false;
-		}
-
-		Boolean tabViewRendered = tabViewComponent.isTabViewRendered();
-
-		if (tabViewRendered != null) {
-
-			encodeTabViewRendered(responseWriter, tabViewComponent, tabViewRendered, first);
-			first = false;
-		}
-
-		Object type = tabViewComponent.getType();
+		String type = tabViewComponent.getType();
 
 		if (type != null) {
 
@@ -234,7 +226,15 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		Object width = tabViewComponent.getWidth();
+		Boolean widgetRender = tabViewComponent.isWidgetRender();
+
+		if (widgetRender != null) {
+
+			encodeWidgetRender(responseWriter, tabViewComponent, widgetRender, first);
+			first = false;
+		}
+
+		String width = tabViewComponent.getWidth();
 
 		if (width != null) {
 
@@ -624,7 +624,7 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		return MODULES;
 	}
 
-	protected void encodeActiveDescendant(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object activeDescendant, boolean first) throws IOException {
+	protected void encodeActiveDescendant(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String activeDescendant, boolean first) throws IOException {
 		encodeString(responseWriter, TabViewComponent.ACTIVE_DESCENDANT, activeDescendant, first);
 	}
 
@@ -724,7 +724,7 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		encodeString(responseWriter, TabViewComponent.CONTENT_BOX, contentBox, first);
 	}
 
-	protected void encodeDefaultChildType(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object defaultChildType, boolean first) throws IOException {
+	protected void encodeDefaultChildType(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String defaultChildType, boolean first) throws IOException {
 		encodeString(responseWriter, TabViewComponent.DEFAULT_CHILD_TYPE, defaultChildType, first);
 	}
 
@@ -732,12 +732,20 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		encodeBoolean(responseWriter, TabViewComponent.DESTROYED, destroyed, first);
 	}
 
+	protected void encodeDisabled(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean disabled, boolean first) throws IOException {
+		encodeBoolean(responseWriter, TabViewComponent.DISABLED, disabled, first);
+	}
+
 	protected void encodeFocused(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean focused, boolean first) throws IOException {
 		encodeBoolean(responseWriter, TabViewComponent.FOCUSED, focused, first);
 	}
 
-	protected void encodeHeight(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object height, boolean first) throws IOException {
+	protected void encodeHeight(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String height, boolean first) throws IOException {
 		encodeString(responseWriter, TabViewComponent.HEIGHT, height, first);
+	}
+
+	protected void encodeId(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String id, boolean first) throws IOException {
+		encodeString(responseWriter, TabViewComponent.ID, id, first);
 	}
 
 	protected void encodeInitialized(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean initialized, boolean first) throws IOException {
@@ -840,19 +848,19 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		encodeEvent(responseWriter, WIDTH_CHANGE, onWidthChange, first);
 	}
 
-	protected void encodeRender(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object render, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewComponent.RENDER, render, first);
+	protected void encodeRendered(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean rendered, boolean first) throws IOException {
+		encodeBoolean(responseWriter, TabViewComponent.RENDERED, rendered, first);
 	}
 
 	protected void encodeSelection(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object selection, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewComponent.SELECTION, selection, first);
+		encodeObject(responseWriter, TabViewComponent.SELECTION, selection, first);
 	}
 
 	protected void encodeSrcNode(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String srcNode, boolean first) throws IOException {
 		encodeString(responseWriter, TabViewComponent.SRC_NODE, srcNode, first);
 	}
 
-	protected void encodeStacked(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object stacked, boolean first) throws IOException {
+	protected void encodeStacked(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String stacked, boolean first) throws IOException {
 		encodeString(responseWriter, TabViewComponent.STACKED, stacked, first);
 	}
 
@@ -864,19 +872,7 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		encodeNumber(responseWriter, TabViewComponent.TAB_INDEX, tabIndex, first);
 	}
 
-	protected void encodeTabViewDisabled(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean tabViewDisabled, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabViewComponent.TAB_VIEW_DISABLED, tabViewDisabled, first);
-	}
-
-	protected void encodeTabViewId(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String tabViewId, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewComponent.TAB_VIEW_ID, tabViewId, first);
-	}
-
-	protected void encodeTabViewRendered(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean tabViewRendered, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabViewComponent.TAB_VIEW_RENDERED, tabViewRendered, first);
-	}
-
-	protected void encodeType(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object type, boolean first) throws IOException {
+	protected void encodeType(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String type, boolean first) throws IOException {
 		encodeString(responseWriter, TabViewComponent.TYPE, type, first);
 	}
 
@@ -884,7 +880,11 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		encodeBoolean(responseWriter, TabViewComponent.VISIBLE, visible, first);
 	}
 
-	protected void encodeWidth(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object width, boolean first) throws IOException {
+	protected void encodeWidgetRender(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean widgetRender, boolean first) throws IOException {
+		encodeBoolean(responseWriter, TabViewComponent.WIDGET_RENDER, widgetRender, first);
+	}
+
+	protected void encodeWidth(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String width, boolean first) throws IOException {
 		encodeString(responseWriter, TabViewComponent.WIDTH, width, first);
 	}
 }

@@ -28,46 +28,6 @@ import com.liferay.faces.util.component.Widget;
 public abstract class AceEditorBase extends UIInput implements Styleable, Widget, AceEditorComponent {
 
 	@Override
-	public Boolean isAceEditorDisabled() {
-		return (Boolean) getStateHelper().eval(ACE_EDITOR_DISABLED, null);
-	}
-
-	@Override
-	public void setAceEditorDisabled(Boolean aceEditorDisabled) {
-		getStateHelper().put(ACE_EDITOR_DISABLED, aceEditorDisabled);
-	}
-
-	@Override
-	public String getAceEditorId() {
-		return (String) getStateHelper().eval(ACE_EDITOR_ID, null);
-	}
-
-	@Override
-	public void setAceEditorId(String aceEditorId) {
-		getStateHelper().put(ACE_EDITOR_ID, aceEditorId);
-	}
-
-	@Override
-	public Boolean isAceEditorRendered() {
-		return (Boolean) getStateHelper().eval(ACE_EDITOR_RENDERED, null);
-	}
-
-	@Override
-	public void setAceEditorRendered(Boolean aceEditorRendered) {
-		getStateHelper().put(ACE_EDITOR_RENDERED, aceEditorRendered);
-	}
-
-	@Override
-	public String getAceEditorValue() {
-		return (String) getStateHelper().eval(ACE_EDITOR_VALUE, null);
-	}
-
-	@Override
-	public void setAceEditorValue(String aceEditorValue) {
-		getStateHelper().put(ACE_EDITOR_VALUE, aceEditorValue);
-	}
-
-	@Override
 	public String getAfterBoundingBoxChange() {
 		return (String) getStateHelper().eval(AFTER_BOUNDING_BOX_CHANGE, null);
 	}
@@ -335,6 +295,16 @@ public abstract class AceEditorBase extends UIInput implements Styleable, Widget
 	@Override
 	public void setDestroyed(Boolean destroyed) {
 		getStateHelper().put(DESTROYED, destroyed);
+	}
+
+	@Override
+	public Boolean isDisabled() {
+		return (Boolean) getStateHelper().eval(DISABLED, null);
+	}
+
+	@Override
+	public void setDisabled(Boolean disabled) {
+		getStateHelper().put(DISABLED, disabled);
 	}
 
 	@Override
@@ -648,16 +618,6 @@ public abstract class AceEditorBase extends UIInput implements Styleable, Widget
 	}
 
 	@Override
-	public Object getRender() {
-		return (Object) getStateHelper().eval(RENDER, null);
-	}
-
-	@Override
-	public void setRender(Object render) {
-		getStateHelper().put(RENDER, render);
-	}
-
-	@Override
 	public Boolean isShowPrintMargin() {
 		return (Boolean) getStateHelper().eval(SHOW_PRINT_MARGIN, null);
 	}
@@ -745,6 +705,16 @@ public abstract class AceEditorBase extends UIInput implements Styleable, Widget
 	@Override
 	public void setVisible(Boolean visible) {
 		getStateHelper().put(VISIBLE, visible);
+	}
+
+	@Override
+	public Boolean isWidgetRender() {
+		return (Boolean) getStateHelper().eval(WIDGET_RENDER, null);
+	}
+
+	@Override
+	public void setWidgetRender(Boolean widgetRender) {
+		getStateHelper().put(WIDGET_RENDER, widgetRender);
 	}
 
 	@Override

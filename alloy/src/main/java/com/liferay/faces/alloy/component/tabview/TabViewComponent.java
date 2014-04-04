@@ -51,8 +51,10 @@ public interface TabViewComponent {
 	public static final String CONTENT_BOX = "contentBox";
 	public static final String DEFAULT_CHILD_TYPE = "defaultChildType";
 	public static final String DESTROYED = "destroyed";
+	public static final String DISABLED = "disabled";
 	public static final String FOCUSED = "focused";
 	public static final String HEIGHT = "height";
+	public static final String ID = "id";
 	public static final String INITIALIZED = "initialized";
 	public static final String LOCALE = "locale";
 	public static final String MULTIPLE = "multiple";
@@ -78,22 +80,20 @@ public interface TabViewComponent {
 	public static final String ON_TYPE_CHANGE = "onTypeChange";
 	public static final String ON_VISIBLE_CHANGE = "onVisibleChange";
 	public static final String ON_WIDTH_CHANGE = "onWidthChange";
-	public static final String RENDER = "render";
+	public static final String RENDERED = "rendered";
 	public static final String SELECTION = "selection";
 	public static final String SRC_NODE = "srcNode";
 	public static final String STACKED = "stacked";
 	public static final String STRINGS = "strings";
 	public static final String TAB_INDEX = "tabIndex";
-	public static final String TAB_VIEW_DISABLED = "disabled";
-	public static final String TAB_VIEW_ID = "id";
-	public static final String TAB_VIEW_RENDERED = "rendered";
 	public static final String TYPE = "type";
 	public static final String VISIBLE = "visible";
+	public static final String WIDGET_RENDER = "render";
 	public static final String WIDTH = "width";
 
-	public Object getActiveDescendant();
+	public String getActiveDescendant();
 
-	public void setActiveDescendant(Object activeDescendant);
+	public void setActiveDescendant(String activeDescendant);
 
 	public String getAfterActiveDescendantChange();
 
@@ -191,21 +191,29 @@ public interface TabViewComponent {
 
 	public void setContentBox(String contentBox);
 
-	public Object getDefaultChildType();
+	public String getDefaultChildType();
 
-	public void setDefaultChildType(Object defaultChildType);
+	public void setDefaultChildType(String defaultChildType);
 
 	public Boolean isDestroyed();
 
 	public void setDestroyed(Boolean destroyed);
 
+	public Boolean isDisabled();
+
+	public void setDisabled(Boolean disabled);
+
 	public Boolean isFocused();
 
 	public void setFocused(Boolean focused);
 
-	public Object getHeight();
+	public String getHeight();
 
-	public void setHeight(Object height);
+	public void setHeight(String height);
+
+	public String getId();
+
+	public void setId(String id);
 
 	public Boolean isInitialized();
 
@@ -307,9 +315,9 @@ public interface TabViewComponent {
 
 	public void setOnWidthChange(String onWidthChange);
 
-	public Object getRender();
+	public boolean isRendered();
 
-	public void setRender(Object render);
+	public void setRendered(boolean rendered);
 
 	public Object getSelection();
 
@@ -319,9 +327,9 @@ public interface TabViewComponent {
 
 	public void setSrcNode(String srcNode);
 
-	public Object getStacked();
+	public String getStacked();
 
-	public void setStacked(Object stacked);
+	public void setStacked(String stacked);
 
 	public Object getStrings();
 
@@ -331,28 +339,20 @@ public interface TabViewComponent {
 
 	public void setTabIndex(Object tabIndex);
 
-	public Boolean isTabViewDisabled();
+	public String getType();
 
-	public void setTabViewDisabled(Boolean tabViewDisabled);
-
-	public String getTabViewId();
-
-	public void setTabViewId(String tabViewId);
-
-	public Boolean isTabViewRendered();
-
-	public void setTabViewRendered(Boolean tabViewRendered);
-
-	public Object getType();
-
-	public void setType(Object type);
+	public void setType(String type);
 
 	public Boolean isVisible();
 
 	public void setVisible(Boolean visible);
 
-	public Object getWidth();
+	public Boolean isWidgetRender();
 
-	public void setWidth(Object width);
+	public void setWidgetRender(Boolean widgetRender);
+
+	public String getWidth();
+
+	public void setWidth(String width);
 }
 //J+

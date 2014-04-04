@@ -37,46 +37,6 @@ public class AceEditorComponentWrapper implements AceEditorComponent, FacesWrapp
 	}
 
 	@Override
-	public Boolean isAceEditorDisabled() {
-		return getWrapped().isAceEditorDisabled();
-	}
-
-	@Override
-	public void setAceEditorDisabled(Boolean aceEditorDisabled) {
-		getWrapped().setAceEditorDisabled(aceEditorDisabled);
-	}
-
-	@Override
-	public String getAceEditorId() {
-		return getWrapped().getAceEditorId();
-	}
-
-	@Override
-	public void setAceEditorId(String aceEditorId) {
-		getWrapped().setAceEditorId(aceEditorId);
-	}
-
-	@Override
-	public Boolean isAceEditorRendered() {
-		return getWrapped().isAceEditorRendered();
-	}
-
-	@Override
-	public void setAceEditorRendered(Boolean aceEditorRendered) {
-		getWrapped().setAceEditorRendered(aceEditorRendered);
-	}
-
-	@Override
-	public String getAceEditorValue() {
-		return getWrapped().getAceEditorValue();
-	}
-
-	@Override
-	public void setAceEditorValue(String aceEditorValue) {
-		getWrapped().setAceEditorValue(aceEditorValue);
-	}
-
-	@Override
 	public String getAfterBoundingBoxChange() {
 		return getWrapped().getAfterBoundingBoxChange();
 	}
@@ -347,6 +307,16 @@ public class AceEditorComponentWrapper implements AceEditorComponent, FacesWrapp
 	}
 
 	@Override
+	public Boolean isDisabled() {
+		return getWrapped().isDisabled();
+	}
+
+	@Override
+	public void setDisabled(Boolean disabled) {
+		getWrapped().setDisabled(disabled);
+	}
+
+	@Override
 	public Boolean isFocused() {
 		return getWrapped().isFocused();
 	}
@@ -374,6 +344,16 @@ public class AceEditorComponentWrapper implements AceEditorComponent, FacesWrapp
 	@Override
 	public void setHighlightActiveLine(Boolean highlightActiveLine) {
 		getWrapped().setHighlightActiveLine(highlightActiveLine);
+	}
+
+	@Override
+	public String getId() {
+		return getWrapped().getId();
+	}
+
+	@Override
+	public void setId(String id) {
+		getWrapped().setId(id);
 	}
 
 	@Override
@@ -657,13 +637,13 @@ public class AceEditorComponentWrapper implements AceEditorComponent, FacesWrapp
 	}
 
 	@Override
-	public Object getRender() {
-		return getWrapped().getRender();
+	public boolean isRendered() {
+		return getWrapped().isRendered();
 	}
 
 	@Override
-	public void setRender(Object render) {
-		getWrapped().setRender(render);
+	public void setRendered(boolean rendered) {
+		getWrapped().setRendered(rendered);
 	}
 
 	@Override
@@ -737,6 +717,16 @@ public class AceEditorComponentWrapper implements AceEditorComponent, FacesWrapp
 	}
 
 	@Override
+	public Object getValue() {
+		return getWrapped().getValue();
+	}
+
+	@Override
+	public void setValue(Object value) {
+		getWrapped().setValue(value);
+	}
+
+	@Override
 	public Boolean isVisible() {
 		return getWrapped().isVisible();
 	}
@@ -744,6 +734,16 @@ public class AceEditorComponentWrapper implements AceEditorComponent, FacesWrapp
 	@Override
 	public void setVisible(Boolean visible) {
 		getWrapped().setVisible(visible);
+	}
+
+	@Override
+	public Boolean isWidgetRender() {
+		return getWrapped().isWidgetRender();
+	}
+
+	@Override
+	public void setWidgetRender(Boolean widgetRender) {
+		getWrapped().setWidgetRender(widgetRender);
 	}
 
 	@Override

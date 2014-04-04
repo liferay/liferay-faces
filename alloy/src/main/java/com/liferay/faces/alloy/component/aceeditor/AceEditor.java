@@ -54,7 +54,7 @@ public class AceEditor extends AceEditorBase {
 	}
 
 	@Override
-	public Object getRender() {
-		return (Object) getStateHelper().eval(RENDER, true);
+	public Boolean isWidgetRender() {
+		return (Boolean) getStateHelper().eval(WIDGET_RENDER, true);
 	}
 }
