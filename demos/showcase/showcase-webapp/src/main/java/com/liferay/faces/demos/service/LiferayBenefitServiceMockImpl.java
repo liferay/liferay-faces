@@ -37,7 +37,7 @@ public class LiferayBenefitServiceMockImpl implements LiferayBenefitService {
 				"Liferay lets you reuse the enterprise software and skills you already have in-house.",
 				"compatible.png"));
 		LIFERAY_BENEFITS.add(new LiferayBenefit("Enterprise Ready", "Enterprise Ready",
-				"Liferay is designed for scalability, reliablity, and high performance— both on-premise and in the cloud.",
+				"Liferay is designed for scalability, reliablity, and high performance both on-premise and in the cloud.",
 				"enterprise.png"));
 		LIFERAY_BENEFITS.add(new LiferayBenefit("Powerful Integration", "Powerful Integration",
 				"Liferay is designed for integrating with both enterprise systems and web-based resources.",
@@ -48,9 +48,6 @@ public class LiferayBenefitServiceMockImpl implements LiferayBenefitService {
 		LIFERAY_BENEFITS.add(new LiferayBenefit("Open Source", "Built With Open Source",
 				"Our open source community fosters innovation, increase security, and improves quality of the software.",
 				"open-source.png"));
-		LIFERAY_BENEFITS.add(new LiferayBenefit("Complete Platform", "A Complete Platform",
-				"With content, collaboration and portal features, your solutions require minimal customization.",
-				"platform.png"));
 	}
 
 	@Override
