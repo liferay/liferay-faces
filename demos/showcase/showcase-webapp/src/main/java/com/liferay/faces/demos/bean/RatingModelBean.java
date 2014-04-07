@@ -1,0 +1,57 @@
+package com.liferay.faces.demos.bean;
+
+import java.util.List;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
+
+import com.liferay.faces.demos.dto.LiferayBenefit;
+import com.liferay.faces.demos.service.LiferayBenefitService;
+
+@ManagedBean
+@RequestScoped
+public class RatingModelBean {
+	
+	private Boolean like;
+	
+	public Boolean getLike() {
+		return like;
+	}
+
+	public void setLike(Boolean like) {
+		this.like = like;
+	}
+
+	private Long favoriteId;
+
+	public Long getFavoriteId() {
+		return favoriteId;
+	}
+
+	public void setFavoriteId(Long favoriteId) {
+		System.err.println("setFavoriteId: favoriteId = " + favoriteId);
+		this.favoriteId = favoriteId;
+	}
+
+	private String primitive;
+	
+	public String getPrimitive() {
+		return primitive;
+	}
+
+	public void setPrimitive(String primitiveRating) {
+		this.primitive = primitiveRating;
+	}
+	
+	@ManagedProperty(name = "liferayBenefitService", value = "#{liferayBenefitService}")
+	private LiferayBenefitService liferayBenefitService;
+
+	public List<LiferayBenefit> getLiferayBenefits() {
+		return liferayBenefitService.getLiferayBenefits();
+	}
+
+	public void setLiferayBenefitService(LiferayBenefitService liferayBenefitService) {
+		this.liferayBenefitService = liferayBenefitService;
+	}
+}

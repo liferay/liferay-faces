@@ -25,16 +25,22 @@ public class LiferayBenefit implements Serializable {
 	private static final long serialVersionUID = 6398796698902377951L;
 
 	// Private Data Members
+	private long id;
 	private String description;
 	private String imageName;
 	private String label;
 	private String title;
 
-	public LiferayBenefit(String label, String title, String description, String imageName) {
+	public LiferayBenefit(long id, String label, String title, String description, String imageName) {
+		this.id = id;
 		this.label = label;
 		this.title = title;
 		this.description = description;
 		this.imageName = imageName;
+	}
+	
+	public long getId() {
+		return id;
 	}
 
 	public String getDescription() {

@@ -27,4 +27,29 @@
 		</attributes>
 	</component>
 	<component name="TabView" parentClass="javax.faces.component.UIData" />
+
+	<component name="Rating" preferredName="starRating" parentClass="javax.faces.component.html.HtmlSelectOneRadio">
+		<attributes>
+			<attribute>
+				<description></description>
+				<name>disabled</name>
+				<type>java.lang.Boolean</type> <!-- This is what the RendererBase uses to ensure that the encode for this attribute is called -->
+				<jsfReservedAttribute>true</jsfReservedAttribute>
+				<jsfReservedAttributeType>boolean</jsfReservedAttributeType> <!-- what does the jsf getter return? -->
+			</attribute>
+		</attributes>
+	</component>
+	<component name="ThumbRating" parentClass="javax.faces.component.html.HtmlSelectOneRadio">
+		<attributes>
+			<attribute>
+				<description></description>
+				<name>disabled</name>
+				<type>java.lang.Boolean</type> <!-- This is what the RendererBase uses to ensure that the encode for this attribute is called -->
+				<jsfReservedAttribute>true</jsfReservedAttribute>
+				<jsfReservedAttributeType>boolean</jsfReservedAttributeType> <!-- what does the jsf getter return? -->
+			</attribute>
+		</attributes>
+	</component>
+
 </components>
+
