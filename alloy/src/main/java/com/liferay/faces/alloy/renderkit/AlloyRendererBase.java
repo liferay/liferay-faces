@@ -15,6 +15,8 @@ package com.liferay.faces.alloy.renderkit;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -42,6 +44,8 @@ public abstract class AlloyRendererBase extends RendererBase {
 	private static final String IF = "if";
 	private static final String LIFERAY_COMPONENT = "Liferay.component";
 	private static final String NEW = "new";
+	private static final String NUMBER_REGEX = "([-])?[0-9]+([.])?[0-9]*";
+	private static final Pattern NUMBER_PATTERN = Pattern.compile(NUMBER_REGEX);
 	private static final String RETURN = "return";
 	private static final String USE = "use";
 	private static final String VAR = "var";
@@ -60,6 +64,33 @@ public abstract class AlloyRendererBase extends RendererBase {
 		encodeObject(responseWriter, attributeName, attributeValue, first);
 	}
 
+	protected void encodeComplexBoolean(ResponseWriter responseWriter, String attributeName, Object attributeValue,
+		boolean first) throws IOException {
+
+		String value = attributeValue.toString();
+
+		if (value.equalsIgnoreCase(StringPool.TRUE) || value.equalsIgnoreCase(StringPool.FALSE)) {
+			encodeBoolean(responseWriter, attributeName, value, first);
+		}
+		else {
+			encodeString(responseWriter, attributeName, value, first);
+		}
+	}
+
+	protected void encodeComplexNumber(ResponseWriter responseWriter, String attributeName, Object attributeValue,
+		boolean first) throws IOException {
+
+		String value = attributeValue.toString();
+		Matcher matcher = NUMBER_PATTERN.matcher(value);
+
+		if (matcher.matches()) {
+			encodeNumber(responseWriter, attributeName, value, first);
+		}
+		else {
+			encodeString(responseWriter, attributeName, value, first);
+		}
+	}
+
 	protected void encodeEvent(ResponseWriter responseWriter, String attributeName, Object attributeValue,
 		boolean first) throws IOException {
 
@@ -71,7 +102,7 @@ public abstract class AlloyRendererBase extends RendererBase {
 		responseWriter.write(StringPool.COLON);
 		responseWriter.write(AlloyConstants.FUNCTION_EVENT);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		responseWriter.write(String.valueOf(attributeValue));
+		responseWriter.write(attributeValue.toString());
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 	}
 
@@ -259,7 +290,7 @@ public abstract class AlloyRendererBase extends RendererBase {
 
 		responseWriter.write(attributeName);
 		responseWriter.write(StringPool.COLON);
-		responseWriter.write(String.valueOf(attributeValue));
+		responseWriter.write(attributeValue.toString());
 	}
 
 	protected void encodeString(ResponseWriter responseWriter, String attributeName, Object attributeValue,
@@ -272,7 +303,7 @@ public abstract class AlloyRendererBase extends RendererBase {
 		responseWriter.write(attributeName);
 		responseWriter.write(StringPool.COLON);
 		responseWriter.write(StringPool.QUOTE);
-		responseWriter.write(String.valueOf(attributeValue));
+		responseWriter.write(attributeValue.toString());
 		responseWriter.write(StringPool.QUOTE);
 	}
 
