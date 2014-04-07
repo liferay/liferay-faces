@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		
+		<ui:include src="/component/aui/datepicker/useInputDate.xhtml" />
+
+		<h:form>
+			<aui-nongen:field label="#{i18n['example-1']}">
+				<h:outputText value="#{i18n['aui-datepicker-localization-example-1']}" />
+			</aui-nongen:field>
+			<aui-nongen:field label="#{i18n['component']}">
+				<aui:datePicker for="portugueseDateInput" binding="#{portugueseDatePicker}" locale="pt-BR" />
+				<h:inputText id="portugueseDateInput" value="#{datePickerModelBean.portugueseDate}">
+					<f:convertDateTime pattern="#{portugueseDatePicker.datePattern}" />
+				</h:inputText>
+			</aui-nongen:field>
+			<h:commandButton value="#{i18n['submit']}">
+				<f:ajax execute="@form" render="@form" />
+			</h:commandButton>
+			<aui-nongen:field label="#{i18n['model-value']}">
+				<showcase:outputModel>
+					<h:outputText id="portugueseSelection" value="#{datePickerModelBean.portugueseDate}">
+						<f:convertDateTime pattern="#{portugueseDatePicker.datePattern}" />
+					</h:outputText>
+				</showcase:outputModel>
+			</aui-nongen:field>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<br />
+		<hr />
+
+		<h:form>
+			<aui-nongen:field label="#{i18n['example-2']}">
+				<h:outputText escape="false" value="#{showcase-fn:encodeDescription(i18n['aui-datepicker-localization-example-2'])}" />
+			</aui-nongen:field>
+			<aui-nongen:field label="#{i18n['component']}">
+				<aui:datePicker for="japaneseDateInput" binding="#{japaneseDatePicker}" locale="#{datePickerModelBean.locale}" />
+				<h:inputText id="japaneseDateInput" value="#{datePickerModelBean.japaneseDate}">
+					<f:convertDateTime pattern="#{japaneseDatePicker.datePattern}" />
+				</h:inputText>
+			</aui-nongen:field>
+			<h:commandButton value="#{i18n['submit']}">
+				<f:ajax execute="@form" render="@form" />
+			</h:commandButton>
+			<aui-nongen:field label="#{i18n['model-value']}">
+				<showcase:outputModel>
+					<h:outputText id="japaneseSelection" value="#{datePickerModelBean.japaneseDate}">
+						<f:convertDateTime pattern="#{japaneseDatePicker.datePattern}" />
+					</h:outputText>
+				</showcase:outputModel>
+			</aui-nongen:field>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
