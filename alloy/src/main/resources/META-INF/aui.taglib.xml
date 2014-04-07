@@ -680,7 +680,7 @@
 			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
 			<name>height</name>
 			<required>false</required>
-			<type>String</type>
+			<type>Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
@@ -908,7 +908,7 @@
 			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
 			<name>width</name>
 			<required>false</required>
-			<type>String</type>
+			<type>Object</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>

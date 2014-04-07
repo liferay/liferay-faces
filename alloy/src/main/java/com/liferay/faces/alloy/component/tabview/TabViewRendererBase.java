@@ -122,7 +122,7 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		String height = tabViewComponent.getHeight();
+		Object height = tabViewComponent.getHeight();
 
 		if (height != null) {
 
@@ -234,7 +234,7 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		String width = tabViewComponent.getWidth();
+		Object width = tabViewComponent.getWidth();
 
 		if (width != null) {
 
@@ -740,8 +740,8 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		encodeBoolean(responseWriter, TabViewComponent.FOCUSED, focused, first);
 	}
 
-	protected void encodeHeight(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String height, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewComponent.HEIGHT, height, first);
+	protected void encodeHeight(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object height, boolean first) throws IOException {
+		encodeComplexNumber(responseWriter, TabViewComponent.HEIGHT, height, first);
 	}
 
 	protected void encodeId(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String id, boolean first) throws IOException {
@@ -884,8 +884,8 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		encodeBoolean(responseWriter, TabViewComponent.WIDGET_RENDER, widgetRender, first);
 	}
 
-	protected void encodeWidth(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String width, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewComponent.WIDTH, width, first);
+	protected void encodeWidth(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object width, boolean first) throws IOException {
+		encodeComplexNumber(responseWriter, TabViewComponent.WIDTH, width, first);
 	}
 }
 //J+
