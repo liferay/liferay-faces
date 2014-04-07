@@ -760,7 +760,7 @@
          <name>height</name>
          <required>false</required>
          <deferred-value>
-            <type>String</type>
+            <type>Object</type>
          </deferred-value>
       </attribute>
       <attribute>
@@ -1024,7 +1024,7 @@
          <name>width</name>
          <required>false</required>
          <deferred-value>
-            <type>String</type>
+            <type>Object</type>
          </deferred-value>
       </attribute>
    </tag>
