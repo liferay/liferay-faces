@@ -18,8 +18,7 @@ import javax.faces.application.ResourceDependency;
 import javax.faces.render.FacesRenderer;
 
 /**
- * @author  Bruno Basto
- * @author  Kyle Stiemann
+ * @author  Vernon Singleton
  */
 @FacesRenderer(componentFamily = ThumbRating.COMPONENT_FAMILY, rendererType = ThumbRating.RENDERER_TYPE)
 @ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
