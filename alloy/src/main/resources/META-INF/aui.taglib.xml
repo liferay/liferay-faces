@@ -735,7 +735,7 @@
 			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
 			<name>height</name>
 			<required>false</required>
-			<type>String</type>
+			<type>Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Hidden input to handle the selected value. This hidden input replace the radio elements and keep the same name.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
@@ -1065,7 +1065,7 @@
 			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
 			<name>width</name>
 			<required>false</required>
-			<type>String</type>
+			<type>Object</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
@@ -1279,7 +1279,7 @@
 			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
 			<name>height</name>
 			<required>false</required>
-			<type>String</type>
+			<type>Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
@@ -1507,7 +1507,7 @@
 			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
 			<name>width</name>
 			<required>false</required>
-			<type>String</type>
+			<type>Object</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
@@ -1755,7 +1755,7 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[]]></description>
+			<description><![CDATA[Whether the Rating is disabled or not. Disabled Ratings don't allow hover or click, just display selected stars.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>Boolean</type>
@@ -2095,12 +2095,6 @@
 			<name>widgetRender</name>
 			<required>false</required>
 			<type>Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The name of the widget's javascript variable.]]></description>
-			<name>widgetVar</name>
-			<required>false</required>
-			<type>String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>

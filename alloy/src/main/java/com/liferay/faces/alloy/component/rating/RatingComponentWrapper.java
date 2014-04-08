@@ -457,12 +457,12 @@ public class RatingComponentWrapper implements RatingComponent, FacesWrapper<Rat
 	}
 
 	@Override
-	public String getHeight() {
+	public Object getHeight() {
 		return getWrapped().getHeight();
 	}
 
 	@Override
-	public void setHeight(String height) {
+	public void setHeight(Object height) {
 		getWrapped().setHeight(height);
 	}
 
@@ -987,12 +987,12 @@ public class RatingComponentWrapper implements RatingComponent, FacesWrapper<Rat
 	}
 
 	@Override
-	public String getWidth() {
+	public Object getWidth() {
 		return getWrapped().getWidth();
 	}
 
 	@Override
-	public void setWidth(String width) {
+	public void setWidth(Object width) {
 		getWrapped().setWidth(width);
 	}
 }

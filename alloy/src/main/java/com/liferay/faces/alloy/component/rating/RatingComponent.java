@@ -289,9 +289,9 @@ public interface RatingComponent {
 
 	public void setFocused(Boolean focused);
 
-	public String getHeight();
+	public Object getHeight();
 
-	public void setHeight(String height);
+	public void setHeight(Object height);
 
 	public String getHiddenInput();
 
@@ -501,8 +501,8 @@ public interface RatingComponent {
 
 	public void setWidgetRender(Boolean widgetRender);
 
-	public String getWidth();
+	public Object getWidth();
 
-	public void setWidth(String width);
+	public void setWidth(Object width);
 }
 //J+

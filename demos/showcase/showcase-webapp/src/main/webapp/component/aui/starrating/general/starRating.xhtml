@@ -3,10 +3,16 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
 	xmlns:c="http://java.sun.com/jsp/jstl/core" >
 
 	<h:form>
-		<aui:starRating value="#{ratingModelBean.favoriteId}" label="Liferay Faces Alloy, in general, is: ">
+		<showcase:componentRenderedCheckbox />
+		<showcase:componentRequiredCheckbox />
+		<br />
+		<aui:starRating id="asdf" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+			required="#{showcaseModelBean.selectedComponent.required}" 
+			value="#{ratingModelBean.favoriteId}" label="Liferay Faces Alloy, in general, is: ">
 			<f:converter converterId="javax.faces.Long" />
 			<f:selectItem itemLabel="Compatible" itemValue="10" />
 			<f:selectItem itemLabel="Enterprise Ready" itemValue="20" />
@@ -15,7 +21,8 @@
 			<f:selectItem itemLabel="Open Source" itemValue="50" />
 			<f:selectItem itemLabel="Complete Platform" itemValue="60" />
 		</aui:starRating>
-		<br />
+		<br /><br />
+		<h:message for="asdf" />
 		<h:outputText value="#{i18n['model-value']}: " />
 		<h:outputText value="#{ratingModelBean.favoriteId}" />
 		<br />
@@ -30,7 +37,7 @@
 			<f:selectItem itemLabel="Open Source" itemValue="Open Source" />
 			<f:selectItem itemLabel="Complete Platform" itemValue="Complete Platform" />
 		</aui:starRating>
-		<br />
+		<br /><br />
 		<h:outputText value="#{i18n['model-value']}: " />
 		<h:outputText value="#{ratingModelBean.favorite}" />
 		<br />

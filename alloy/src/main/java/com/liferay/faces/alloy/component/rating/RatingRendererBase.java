@@ -156,7 +156,7 @@ public abstract class RatingRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		String height = ratingComponent.getHeight();
+		Object height = ratingComponent.getHeight();
 
 		if (height != null) {
 
@@ -324,7 +324,7 @@ public abstract class RatingRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		String width = ratingComponent.getWidth();
+		Object width = ratingComponent.getWidth();
 
 		if (width != null) {
 
@@ -1042,8 +1042,8 @@ public abstract class RatingRendererBase extends AlloyRendererBase {
 		encodeBoolean(responseWriter, RatingComponent.FOCUSED, focused, first);
 	}
 
-	protected void encodeHeight(ResponseWriter responseWriter, RatingComponent ratingComponent, String height, boolean first) throws IOException {
-		encodeString(responseWriter, RatingComponent.HEIGHT, height, first);
+	protected void encodeHeight(ResponseWriter responseWriter, RatingComponent ratingComponent, Object height, boolean first) throws IOException {
+		encodeComplexNumber(responseWriter, RatingComponent.HEIGHT, height, first);
 	}
 
 	protected void encodeHiddenInput(ResponseWriter responseWriter, RatingComponent ratingComponent, String hiddenInput, boolean first) throws IOException {
@@ -1254,8 +1254,8 @@ public abstract class RatingRendererBase extends AlloyRendererBase {
 		encodeBoolean(responseWriter, RatingComponent.WIDGET_RENDER, widgetRender, first);
 	}
 
-	protected void encodeWidth(ResponseWriter responseWriter, RatingComponent ratingComponent, String width, boolean first) throws IOException {
-		encodeString(responseWriter, RatingComponent.WIDTH, width, first);
+	protected void encodeWidth(ResponseWriter responseWriter, RatingComponent ratingComponent, Object width, boolean first) throws IOException {
+		encodeComplexNumber(responseWriter, RatingComponent.WIDTH, width, first);
 	}
 }
 //J+

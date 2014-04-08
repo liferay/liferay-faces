@@ -438,12 +438,12 @@ public abstract class RatingBase extends HtmlSelectOneRadio implements Styleable
 	}
 
 	@Override
-	public String getHeight() {
-		return (String) getStateHelper().eval(HEIGHT, null);
+	public Object getHeight() {
+		return (Object) getStateHelper().eval(HEIGHT, null);
 	}
 
 	@Override
-	public void setHeight(String height) {
+	public void setHeight(Object height) {
 		getStateHelper().put(HEIGHT, height);
 	}
 
@@ -958,12 +958,12 @@ public abstract class RatingBase extends HtmlSelectOneRadio implements Styleable
 	}
 
 	@Override
-	public String getWidth() {
-		return (String) getStateHelper().eval(WIDTH, null);
+	public Object getWidth() {
+		return (Object) getStateHelper().eval(WIDTH, null);
 	}
 
 	@Override
-	public void setWidth(String width) {
+	public void setWidth(Object width) {
 		getStateHelper().put(WIDTH, width);
 	}
 }
