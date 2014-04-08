@@ -6,7 +6,8 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core" >
 	
 	<h:form>
-		<aui:starRating value="#{ratingModelBean.favoriteId}" label="Liferay Faces Alloy #{i18n['instant-ajax']} is: ">
+		<aui:starRating value="#{ratingModelBean.favoriteId}"
+			label="Liferay Faces Alloy #{i18n['instant-ajax']} is: ">
 			<f:selectItem itemLabel="Compatible" itemValue="0" />
 			<f:selectItem itemLabel="Enterprise Ready" itemValue="1" />
 			<f:selectItem itemLabel="Powerful Integration" itemValue="2" />
@@ -16,7 +17,7 @@
 			<f:ajax render="@form" />
 		</aui:starRating>
 		<br />
-		<h:outputText value="#{i18n['you-selected']}: " />
+		<h:outputText value="#{i18n['model-value']}: " />
 		<h:outputText id="updatedFavorite" value="#{ratingModelBean.favoriteId}" />
 		
 		<br />

@@ -36,12 +36,6 @@ public class Rating extends RatingBase {
 		super();
 		setRendererType(RENDERER_TYPE);
 	}
-	
-	@Override
-	public Object getValue() {
-		System.err.println("getValue: super.getValue() = " + super.getValue());
-		return super.getValue();
-	}
 
 	@Override
 	protected void validateValue(FacesContext context, Object value) {
@@ -54,6 +48,7 @@ public class Rating extends RatingBase {
 		// JSF will allow null as valid.
 		if (value instanceof String) {
 			String valueString = (String) value;
+
 			if (StringPool.BLANK.equals(valueString)) {
 				value = null;
 			}
@@ -81,13 +76,21 @@ public class Rating extends RatingBase {
 	public String getFamily() {
 		return COMPONENT_FAMILY;
 	}
-	
+
 	@Override
 	public Boolean isWidgetRender() {
+
 		// AlloyUI's example for this component calls .render() on itself
 		// This is required, so we better do that here.
 		return (Boolean) getStateHelper().eval(WIDGET_RENDER, true);
-//		return super.isWidgetRender();
+//      return super.isWidgetRender();
+	}
+
+	@Override
+	public Object getValue() {
+		System.err.println("getValue: super.getValue() = " + super.getValue());
+
+		return super.getValue();
 	}
 
 }

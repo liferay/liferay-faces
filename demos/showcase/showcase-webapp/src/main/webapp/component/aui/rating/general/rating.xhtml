@@ -16,12 +16,13 @@
 			<f:selectItem itemLabel="Complete Platform" itemValue="60" />
 		</aui:starRating>
 		<br />
-		<h:outputText value="#{i18n['you-selected']}: " />
+		<h:outputText value="#{i18n['model-value']}: " />
 		<h:outputText value="#{ratingModelBean.favoriteId}" />
 		<br />
 		<br />
 		
-		<aui:starRating defaultSelected="3" value="#{ratingModelBean.primitive}" label="Liferay Faces Alloy, by default, is: ">
+		<aui:starRating defaultSelected="3" value="#{ratingModelBean.primitive}"
+			label="Liferay Faces Alloy, by default, is: ">
 			<f:selectItem itemLabel="Compatible" itemValue="Compatible" />
 			<f:selectItem itemLabel="Enterprise Ready" itemValue="Enterprise Ready" />
 			<f:selectItem itemLabel="Powerful Integration" itemValue="Powerful Integration" />
@@ -30,7 +31,7 @@
 			<f:selectItem itemLabel="Complete Platform" itemValue="Complete Platform" />
 		</aui:starRating>
 		<br />
-		<h:outputText value="#{i18n['you-selected']}: " />
+		<h:outputText value="#{i18n['model-value']}: " />
 		<h:outputText value="#{ratingModelBean.primitive}" />
 		<br />
 		<br />
