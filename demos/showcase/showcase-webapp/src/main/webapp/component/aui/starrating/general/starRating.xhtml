@@ -21,7 +21,7 @@
 		<br />
 		<br />
 		
-		<aui:starRating defaultSelected="3" value="#{ratingModelBean.primitive}"
+		<aui:starRating defaultSelected="3" value="#{ratingModelBean.favorite}"
 			label="Liferay Faces Alloy, by default, is: ">
 			<f:selectItem itemLabel="Compatible" itemValue="Compatible" />
 			<f:selectItem itemLabel="Enterprise Ready" itemValue="Enterprise Ready" />
@@ -32,7 +32,7 @@
 		</aui:starRating>
 		<br />
 		<h:outputText value="#{i18n['model-value']}: " />
-		<h:outputText value="#{ratingModelBean.primitive}" />
+		<h:outputText value="#{ratingModelBean.favorite}" />
 		<br />
 		<br />
 		

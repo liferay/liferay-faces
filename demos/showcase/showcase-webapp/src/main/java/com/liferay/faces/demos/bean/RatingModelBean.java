@@ -23,6 +23,16 @@ public class RatingModelBean {
 		this.like = like;
 	}
 
+	private String favorite;
+	
+	public String getFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(String favorite) {
+		this.favorite = favorite;
+	}
+	
 	private Long favoriteId;
 
 	public Long getFavoriteId() {
@@ -30,20 +40,9 @@ public class RatingModelBean {
 	}
 
 	public void setFavoriteId(Long favoriteId) {
-		System.err.println("setFavoriteId: favoriteId = " + favoriteId);
 		this.favoriteId = favoriteId;
 	}
 
-	private String primitive;
-	
-	public String getPrimitive() {
-		return primitive;
-	}
-
-	public void setPrimitive(String primitiveRating) {
-		this.primitive = primitiveRating;
-	}
-	
 	@ManagedProperty(name = "liferayBenefitService", value = "#{liferayBenefitService}")
 	private LiferayBenefitService liferayBenefitService;
 

@@ -79,18 +79,9 @@ public class Rating extends RatingBase {
 
 	@Override
 	public Boolean isWidgetRender() {
-
 		// AlloyUI's example for this component calls .render() on itself
 		// This is required, so we better do that here.
 		return (Boolean) getStateHelper().eval(WIDGET_RENDER, true);
-//      return super.isWidgetRender();
-	}
-
-	@Override
-	public Object getValue() {
-		System.err.println("getValue: super.getValue() = " + super.getValue());
-
-		return super.getValue();
 	}
 
 }
