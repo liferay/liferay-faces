@@ -30,7 +30,14 @@ import com.liferay.faces.util.lang.StringPool;
 public class CodeExampleUtil {
 
 	// Private Constants
-	public static final Pattern JAVA_MULTILINE_COMMENTS_PATTERN = Pattern.compile("/[*][*].*[*]/", Pattern.DOTALL);
+	private static final String JAVA = "java";
+	private static final String JAVA_EXTENSION = ".java";
+	private static final Pattern JAVA_MULTILINE_COMMENTS_PATTERN = Pattern.compile("/[*][*].*[*]/", Pattern.DOTALL);
+	private static final Pattern TAB_OPEN_TAG_PATTERN = Pattern.compile("\t<");
+	private static final Pattern TEMPLATE_ATTRIBUTE_PATTERN = Pattern.compile("\\s*template=\".*\"");
+	private static final Pattern UI_DEFINE_OPEN_TAG_PATTERN = Pattern.compile("\n\t*<ui:define name=\".*\">");
+	private static final Pattern UI_DEFINE_CLOSE_TAG_PATTERN = Pattern.compile("\n\t*</ui:define>");
+	private static final String XML = "xml";
 
 	public static CodeExample read(URL sourceFileURL, String sourceFileName) throws IOException {
 
@@ -39,12 +46,19 @@ public class CodeExampleUtil {
 
 		if (sourceCodeText != null) {
 
-			String fileExtension = "xml";
+			String fileExtension;
 
-			if (sourceFileName.endsWith(".java")) {
+			if (sourceFileName.endsWith(JAVA_EXTENSION)) {
 				Matcher matcher = JAVA_MULTILINE_COMMENTS_PATTERN.matcher(sourceCodeText);
 				sourceCodeText = matcher.replaceAll(StringPool.BLANK);
-				fileExtension = "java";
+				fileExtension = JAVA;
+			}
+			else {
+				sourceCodeText = TEMPLATE_ATTRIBUTE_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
+				sourceCodeText = UI_DEFINE_OPEN_TAG_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
+				sourceCodeText = UI_DEFINE_CLOSE_TAG_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
+				sourceCodeText = TAB_OPEN_TAG_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.LESS_THAN);
+				fileExtension = XML;
 			}
 
 			sourceCodeText = sourceCodeText.trim();
