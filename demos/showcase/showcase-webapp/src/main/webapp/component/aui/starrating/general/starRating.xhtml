@@ -23,7 +23,7 @@
 				</aui:starRating>
 				<h:message for="starRating" />
 			</aui-nongen:field>
-			<h:commandButton action="#{starRatingBackingBean.submit}" value="Submit">
+			<h:commandButton action="#{starRatingBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
 			</h:commandButton>
 			<aui-nongen:field label="#{i18n['model-value']}">
@@ -53,7 +53,7 @@
 				</aui:starRating>
 				<h:message for="starRating" />
 			</aui-nongen:field>
-			<h:commandButton action="#{starRatingBackingBean.submit}" value="Submit">
+			<h:commandButton action="#{starRatingBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
 			</h:commandButton>
 			<aui-nongen:field label="#{i18n['model-value']}">

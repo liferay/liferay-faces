@@ -24,13 +24,12 @@ import com.liferay.faces.demos.service.LiferayBenefitService;
 
 
 /**
- * @author  Vernon Singleton
+ * @author Vernon Singleton
  */
 @ManagedBean
 @RequestScoped
 public class StarRatingModelBean {
 
-	private Boolean like;
 	private String favorite;
 	private Long favoriteId;
 	private Long benefitId = 3L;
@@ -70,11 +69,4 @@ public class StarRatingModelBean {
 		this.liferayBenefitService = liferayBenefitService;
 	}
 
-	public Boolean getLike() {
-		return like;
-	}
-
-	public void setLike(Boolean like) {
-		this.like = like;
-	}
 }

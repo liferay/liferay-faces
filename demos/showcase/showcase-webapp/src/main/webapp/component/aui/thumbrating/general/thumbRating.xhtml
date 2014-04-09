@@ -6,12 +6,12 @@
 	<ui:define name="col1">
 		<h:form>
 			<aui-nongen:field label="#{i18n['component']}">
-				<aui:thumbRating value="#{thumbRatingModelBean.like}" label="Liferay Faces Alloy, in general, is: ">
-					<f:selectItem itemLabel="liked" itemValue="true" />
-					<f:selectItem itemLabel="disliked" itemValue="false" />
+				<aui:thumbRating value="#{thumbRatingModelBean.like}" label="#{i18n['like']}:">
+					<f:selectItem itemLabel="#{i18n['like']}" itemValue="true" />
+					<f:selectItem itemLabel="#{i18n['dislike']}" itemValue="false" />
 				</aui:thumbRating>
 			</aui-nongen:field>
-			<h:commandButton value="Submit">
+			<h:commandButton value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
 			</h:commandButton>
 			<aui-nongen:field label="#{i18n['model-value']}">
