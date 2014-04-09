@@ -29,7 +29,17 @@
 	<component name="TabView" parentClass="javax.faces.component.UIData" />
 
 	<component name="Rating" preferredName="starRating" parentClass="javax.faces.component.html.HtmlSelectOneRadio">
-		<description><![CDATA[This component renders a set of stars which a user may select to indicate their "rating".  Therefore, consider this component to be a form type of element, extending UIInput and ultimately implementing the EditableValueHolder interface as follows: aui:starRating -> Rating -> RatingBase -> HtmlSelectOneRadio -> UISelectOne -> UIInput -:-:-> EditableValueHolder.  Since it extends HtmlSelectOneRadio, you can expect it to behave accordingly, like h:selectOneMenu, accepting selectItems as children, standard converters and validators, etc.  It also inherits all of the relevant attributes of such an EditableValueHolder such as: id, label, required, value, etc.  Please defer to the Vdldoc for your implementation of JSF for definitive descriptions of these attributes "closer to the source".  Also defer to the AlloyUI api http://alloyui.com/api for alloy related attributes, such as: defaultSelected.]]></description>
+		<description>
+			<![CDATA[This component renders a set of stars which a user may select to indicate their "rating".  
+			Therefore, consider this component to be a form type of element, extending UIInput and ultimately 
+			implementing the EditableValueHolder interface as follows: aui:starRating -> Rating -> RatingBase -> 
+			HtmlSelectOneRadio -> UISelectOne -> UIInput -:-:-> EditableValueHolder.  Since it extends 
+			HtmlSelectOneRadio, you can expect it to behave accordingly, like h:selectOneMenu, accepting selectItems 
+			as children, standard converters and validators, etc.  It also inherits all of the relevant attributes of 
+			such an EditableValueHolder such as: id, label, required, value, etc.  Please defer to the Vdldoc for 
+			your implementation of JSF for definitive descriptions of these attributes "closer to the source".  Also 
+			defer to the AlloyUI api http://alloyui.com/api for alloy related attributes, such as: defaultSelected.]]>
+		</description>
 		<attributes>
 			<attribute>
 				<description></description>
@@ -112,13 +122,13 @@
 				<componentPropertyRequired>false</componentPropertyRequired>
 	        </attribute>
 	        <attribute>
-	            <description><![CDATA[__DESCRIPTION__]]></description>
+	            <description><![CDATA[ TODO __DESCRIPTION__]]></description>
 	            <name>border</name>
 				<type>int</type>
 				<componentPropertyRequired>false</componentPropertyRequired>
 	        </attribute>
 	        <attribute>
-	            <description><![CDATA[__DESCRIPTION__]]></description>
+	            <description><![CDATA[This is an i18n attribute, which designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
 	            <name>dir</name>
 				<type>java.lang.String</type>
 				<componentPropertyRequired>false</componentPropertyRequired>
@@ -130,13 +140,13 @@
 				<componentPropertyRequired>false</componentPropertyRequired>
 	        </attribute>
 	        <attribute>
-	            <description><![CDATA[__DESCRIPTION__]]></description>
+	            <description><![CDATA[A CSS style to apply to the label of a disabled selectItems.]]></description>
 	            <name>disabledClass</name>
 				<type>java.lang.String</type>
 				<componentPropertyRequired>false</componentPropertyRequired>
 	        </attribute>
 	        <attribute>
-	            <description><![CDATA[__DESCRIPTION__]]></description>
+	            <description><![CDATA[A CSS style to apply to the label of an enabled selectItems.]]></description>
 	            <name>enabledClass</name>
 				<type>java.lang.String</type>
 				<componentPropertyRequired>false</componentPropertyRequired>
@@ -154,7 +164,7 @@
 				<componentPropertyRequired>false</componentPropertyRequired>
 	        </attribute>
 	        <attribute>
-	            <description><![CDATA[__DESCRIPTION__]]></description>
+	            <description><![CDATA[ TODO __DESCRIPTION__]]></description>
 	            <name>lang</name>
 				<type>java.lang.String</type>
 				<componentPropertyRequired>false</componentPropertyRequired>
@@ -238,13 +248,13 @@
 				<componentPropertyRequired>false</componentPropertyRequired>
 	        </attribute>
 	        <attribute>
-	            <description><![CDATA[__DESCRIPTION__]]></description>
+	            <description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
 	            <name>onmouseup</name>
 				<type>java.lang.String</type>
 				<componentPropertyRequired>false</componentPropertyRequired>
 	        </attribute>
 	        <attribute>
-	            <description><![CDATA[__DESCRIPTION__]]></description>
+	            <description><![CDATA[Javascript to execute when the user selects this component.]]></description>
 	            <name>onselect</name>
 				<type>java.lang.String</type>
 				<componentPropertyRequired>false</componentPropertyRequired>
