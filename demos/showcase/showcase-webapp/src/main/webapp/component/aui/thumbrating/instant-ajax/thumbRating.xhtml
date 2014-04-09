@@ -1,22 +1,21 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:aui="http://liferay.com/faces/aui"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-1col.xhtml">
 	
+	<ui:define name="col1">
 	<h:form>
-		<aui:thumbRating value="#{ratingModelBean.like}"
-			label="Liferay Faces Alloy #{i18n['instant-ajax']} is: ">
-			<f:selectItem itemLabel="Like" itemValue="true" />
-			<f:selectItem itemLabel="Dislike" itemValue="false" />
-			<f:ajax render="@form" />
-		</aui:thumbRating>
-		<br />
-		<h:outputText value="#{i18n['model-value']}: " />
-		<h:outputText id="updatedFavorite" value="#{ratingModelBean.like}" />
-		
-		<br />
-		<br />
+		<aui-nongen:field label="#{i18n['component']}">
+			<aui:thumbRating value="#{thumbRatingModelBean.like}"
+				label="Liferay Faces Alloy #{i18n['instant-ajax']} is: ">
+				<f:selectItem itemLabel="Like" itemValue="true" />
+				<f:selectItem itemLabel="Dislike" itemValue="false" />
+				<f:ajax render="@form" />
+			</aui:thumbRating>
+		</aui-nongen:field>
+		<aui-nongen:field label="#{i18n['model-value']}">
+			<pre>#{thumbRatingModelBean.like}</pre>
+		</aui-nongen:field>
 	</h:form>
+	</ui:define>
 </ui:composition>

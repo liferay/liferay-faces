@@ -24,7 +24,7 @@ import com.liferay.faces.demos.service.LiferayBenefitService;
 
 
 /**
- * @author  Neil Griffin
+ * @author  Vernon Singleton
  */
 @ManagedBean
 @RequestScoped
