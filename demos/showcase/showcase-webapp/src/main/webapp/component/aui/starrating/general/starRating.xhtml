@@ -1,16 +1,19 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" >
-
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	template="/templates/component-1col.xhtml" >
+	
+	<ui:define name="col1">
 	<h:form>
 		<showcase:componentRenderedCheckbox />
 		<showcase:componentRequiredCheckbox />
-		<br />
-		<aui:starRating id="asdf" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+		<aui-nongen:field label="#{i18n['component']}">
+		<aui:starRating id="starRating" rendered="#{showcaseModelBean.selectedComponent.rendered}"
 			required="#{showcaseModelBean.selectedComponent.required}" 
 			value="#{ratingModelBean.favoriteId}" label="Liferay Faces Alloy, in general, is: ">
 			<f:converter converterId="javax.faces.Long" />
@@ -21,10 +24,11 @@
 			<f:selectItem itemLabel="Open Source" itemValue="50" />
 			<f:selectItem itemLabel="Complete Platform" itemValue="60" />
 		</aui:starRating>
-		<br /><br />
-		<h:message for="asdf" />
-		<h:outputText value="#{i18n['model-value']}: " />
-		<h:outputText value="#{ratingModelBean.favoriteId}" />
+		<h:message for="starRating" />
+		</aui-nongen:field>
+		<aui-nongen:field label="#{i18n['model-value']}">
+			<pre>#{ratingModelBean.favoriteId}</pre>
+		</aui-nongen:field>
 		<br />
 		<br />
 		
@@ -48,4 +52,5 @@
 		</h:commandButton>
 		
 	</h:form>
+	</ui:define>
 </ui:composition>
