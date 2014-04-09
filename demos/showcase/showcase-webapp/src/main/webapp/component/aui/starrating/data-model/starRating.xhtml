@@ -1,23 +1,23 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:aui="http://liferay.com/faces/aui"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-1col.xhtml">
 
-	<h:form>
-		<aui:starRating value="#{ratingModelBean.favoriteId}" label="Liferay Faces Alloy data models are:" >
-			<f:selectItems value="#{ratingModelBean.liferayBenefits}" var="benefit"
-				itemValue="#{benefit.id}" itemLabel="#{benefit.label}" />
-		</aui:starRating>
-		<br />
-		<h:outputText value="#{i18n['model-value']}: " />
-		<h:outputText id="updatedFavorite" value="#{ratingModelBean.favoriteId}" />
-		<br />
-		<br />
-		<h:commandButton value="Submit">
-			<f:ajax execute="@form" render="@form" />
-		</h:commandButton>
-		
-	</h:form>
+	<ui:define name="col1">
+		<h:form>
+			<aui-nongen:field label="#{i18n['component']}">
+				<aui:starRating value="#{starRatingModelBean.favoriteId}" label="#{i18n['favorite']}:">
+					<f:selectItems value="#{starRatingModelBean.liferayBenefits}" var="benefit" itemValue="#{benefit.id}"
+						itemLabel="#{benefit.label}" />
+				</aui:starRating>
+			</aui-nongen:field>
+			<h:commandButton action="#{starRatingBackingBean.submit}" value="Submit">
+				<f:ajax execute="@form" render="@form" />
+			</h:commandButton>
+			<aui-nongen:field label="#{i18n['model-value']}">
+				<pre>#{starRatingModelBean.favoriteId}</pre>
+			</aui-nongen:field>
+		</h:form>
+	</ui:define>
+
 </ui:composition>

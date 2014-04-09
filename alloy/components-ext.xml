@@ -28,19 +28,22 @@
 	</component>
 	<component name="TabView" parentClass="javax.faces.component.UIData" />
 
-	<component name="Rating" preferredName="starRating" parentClass="javax.faces.component.html.HtmlSelectOneRadio">
-		<description>
-			<![CDATA[This component renders a set of stars which a user may select to indicate their "rating".  
+		<component name="Rating" preferredName="starRating" parentClass="javax.faces.component.html.HtmlSelectOneRadio" description="An input component rendering a set of stars that a user may select to indicate their 'rating'. Since it extends HtmlSelectOneRadio, it accepts f:selectItem(s) as children.">
+		<!-- 
+			An input component rendering a set of stars that a user may select to indicate their 'rating'.
+			Since it extends HtmlSelectOneRadio, it accepts f:selectItem(s) as children.
+			
 			Therefore, consider this component to be a form type of element, extending UIInput and ultimately 
 			implementing the EditableValueHolder interface as follows: aui:starRating -> Rating -> RatingBase -> 
 			HtmlSelectOneRadio -> UISelectOne -> UIInput -:-:-> EditableValueHolder.  Since it extends 
 			HtmlSelectOneRadio, you can expect it to behave accordingly, like h:selectOneMenu, accepting selectItems 
 			as children, standard converters and validators, etc.  It also inherits all of the relevant attributes of 
 			such an EditableValueHolder such as: id, label, required, value, etc.  Please defer to the Vdldoc for 
-			your implementation of JSF for definitive descriptions of these attributes "closer to the source".  Also 
-			defer to the AlloyUI api http://alloyui.com/api for alloy related attributes, such as: defaultSelected.]]>
-		</description>
+			JSF for definitive descriptions of these attributes "closer to the source".  Also defer to the AlloyUI api 
+			http://alloyui.com/api for alloy related attributes, such as: defaultSelected.
+		 -->
 		<attributes>
+			<!-- in both JSF and AlloyUI -->
 			<attribute>
 				<description></description>
 				<name>disabled</name>
@@ -48,7 +51,51 @@
 				<jsfReservedAttribute>true</jsfReservedAttribute>
 				<jsfReservedAttributeType>boolean</jsfReservedAttributeType> <!-- what does the jsf getter return? -->
 			</attribute>
-			<!-- inherited from the JSF implementation -->
+			<attribute>
+				<description><![CDATA[A name for this component to be rendered to the user.  This name should be localized for the user.]]></description>
+				<name>label</name>
+				<type>java.lang.String</type>
+				<jsfReservedAttribute>true</jsfReservedAttribute>
+				<jsfReservedAttributeType>String</jsfReservedAttributeType>
+			</attribute>
+			<attribute>
+				<description><![CDATA[The title of the component, which is simply passed through as the html 'title' attribute of this component.]]></description>
+				<name>title</name>
+				<type>java.lang.String</type>
+				<jsfReservedAttribute>true</jsfReservedAttribute>
+				<jsfReservedAttributeType>String</jsfReservedAttributeType>
+			</attribute>
+			<!-- these default to jsfReservedAttribute=true -->
+			<attribute>
+				<description><![CDATA[A unique identifier for this component.]]></description>
+				<name>id</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+	            	<![CDATA[When false, this component will not be rendered.  The default value of this attribute 
+	            	is true.]]>
+				</description>
+				<name>rendered</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+	            	<![CDATA[The value of this component.  This component does, after all, implement 
+	            	EditableValueHolder.  So value of this attribute represents the value of the component.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<!-- inherited from JSF and part of the the Styleable interface -->
+			<!-- 
+			<attribute>
+				<description><![CDATA[The CSS style(s) to apply to this component as it is rendered.]]></description>
+				<name>styleClass</name>
+				<type>java.lang.String</type>
+			</attribute>
+			 -->
+			<!-- inherited from HtmlSelectOneRadio -->
 			<attribute>
 				<description>
 	            	<![CDATA[The class name of the converter instance to be used by this component.]]>
@@ -69,27 +116,12 @@
 				<componentPropertyRequired>false</componentPropertyRequired>
 			</attribute>
 			<attribute>
-				<description><![CDATA[A unique identifier for this component.]]></description>
-				<name>id</name>
-				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
-			</attribute>
-			<attribute>
 				<description>
 	            	<![CDATA[When this flag is set to true, this component's value must be converted and validated 
 	            	(immediately) during the Apply Request Values phase, instead of (later) during the Process 
 	            	Validations phase.]]>
 				</description>
 				<name>immediate</name>
-				<type>java.lang.Boolean</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
-			</attribute>
-			<attribute>
-				<description>
-	            	<![CDATA[When false, this component will not be rendered.  The default value of this attribute 
-	            	is true.]]>
-				</description>
-				<name>rendered</name>
 				<type>java.lang.Boolean</type>
 				<componentPropertyRequired>false</componentPropertyRequired>
 			</attribute>
@@ -130,15 +162,6 @@
 				<componentPropertyRequired>false</componentPropertyRequired>
 			</attribute>
 			<attribute>
-				<description>
-	            	<![CDATA[The value of this component.  This component does, after all, implement 
-	            	EditableValueHolder.  So value of this attribute represents the value of the component.]]>
-				</description>
-				<name>value</name>
-				<type>java.lang.Object</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
-			</attribute>
-			<attribute>
 				<description><![CDATA[__DESCRIPTION__]]></description>
 				<name>valueChangeListener</name>
 				<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
@@ -163,12 +186,6 @@
 				<componentPropertyRequired>false</componentPropertyRequired>
 			</attribute>
 			<attribute>
-				<description><![CDATA[When false, no attribute is rendered (This is the default). When true, this component will never get focus or get included when this form is submitted.  This attribute is rendered as disabled="disabled".]]></description>
-				<name>disabled</name>
-				<type>java.lang.Boolean</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
-			</attribute>
-			<attribute>
 				<description><![CDATA[A CSS style to apply to the label of a disabled selectItems.]]></description>
 				<name>disabledClass</name>
 				<type>java.lang.String</type>
@@ -184,12 +201,6 @@
 				<description><![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]></description>
 				<name>hideNoSelectionOption</name>
 				<type>java.lang.Boolean</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
-			</attribute>
-			<attribute>
-				<description><![CDATA[A name for this component to be rendered to the user.  This name should be localized for the user.]]></description>
-				<name>label</name>
-				<type>java.lang.String</type>
 				<componentPropertyRequired>false</componentPropertyRequired>
 			</attribute>
 			<attribute>
@@ -295,12 +306,6 @@
 				<componentPropertyRequired>false</componentPropertyRequired>
 			</attribute>
 			<attribute>
-				<description><![CDATA[The CSS style(s) to apply to this component as it is rendered.]]></description>
-				<name>styleClass</name>
-				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
-			</attribute>
-			<attribute>
 				<description><![CDATA[The CSS style or space-separated styles applying to this component as it is rendered. This ends up getting passed through to the html 'class' attribute of the component.]]></description>
 				<name>styleClass</name>
 				<type>java.lang.String</type>
@@ -309,12 +314,6 @@
 			<attribute>
 				<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
 				<name>tabindex</name>
-				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
-			</attribute>
-			<attribute>
-				<description><![CDATA[The title of the component, which is simply passed through as the html 'title' attribute of this component.]]></description>
-				<name>title</name>
 				<type>java.lang.String</type>
 				<componentPropertyRequired>false</componentPropertyRequired>
 			</attribute>

@@ -488,16 +488,6 @@ public abstract class RatingBase extends HtmlSelectOneRadio implements Styleable
 	}
 
 	@Override
-	public String getLabel() {
-		return (String) getStateHelper().eval(LABEL, null);
-	}
-
-	@Override
-	public void setLabel(String label) {
-		getStateHelper().put(LABEL, label);
-	}
-
-	@Override
 	public String getLabelNode() {
 		return (String) getStateHelper().eval(LABEL_NODE, null);
 	}
@@ -905,16 +895,6 @@ public abstract class RatingBase extends HtmlSelectOneRadio implements Styleable
 	@Override
 	public void setTabIndex(Object tabIndex) {
 		getStateHelper().put(TAB_INDEX, tabIndex);
-	}
-
-	@Override
-	public String getTitle() {
-		return (String) getStateHelper().eval(TITLE, null);
-	}
-
-	@Override
-	public void setTitle(String title) {
-		getStateHelper().put(TITLE, title);
 	}
 
 	@Override

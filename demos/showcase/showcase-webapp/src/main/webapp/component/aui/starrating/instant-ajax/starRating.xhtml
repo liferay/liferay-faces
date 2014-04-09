@@ -1,26 +1,24 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:aui="http://liferay.com/faces/aui"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" >
-	
-	<h:form>
-		<aui:starRating value="#{ratingModelBean.favoriteId}"
-			label="Liferay Faces Alloy #{i18n['instant-ajax']} is: ">
-			<f:selectItem itemLabel="Compatible" itemValue="0" />
-			<f:selectItem itemLabel="Enterprise Ready" itemValue="1" />
-			<f:selectItem itemLabel="Powerful Integration" itemValue="2" />
-			<f:selectItem itemLabel="Lightweight" itemValue="3" />
-			<f:selectItem itemLabel="Open Source" itemValue="4" />
-			<f:selectItem itemLabel="Complete Platform" itemValue="5" />
-			<f:ajax render="@form" />
-		</aui:starRating>
-		<br />
-		<h:outputText value="#{i18n['model-value']}: " />
-		<h:outputText id="updatedFavorite" value="#{ratingModelBean.favoriteId}" />
-		
-		<br />
-		<br />
-	</h:form>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-1col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<aui-nongen:field label="#{i18n['component']}">
+				<aui:starRating value="#{starRatingModelBean.favoriteId}" label="#{i18n['favorite']}:">
+					<f:selectItem itemLabel="Compatible" itemValue="1" />
+					<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
+					<f:selectItem itemLabel="Powerful Integration" itemValue="3" />
+					<f:selectItem itemLabel="Lightweight" itemValue="4" />
+					<f:selectItem itemLabel="Open Source" itemValue="5" />
+					<f:ajax render="@form" />
+				</aui:starRating>
+			</aui-nongen:field>
+			<aui-nongen:field label="#{i18n['model-value']}">
+				<pre>#{starRatingModelBean.favoriteId}</pre>
+			</aui-nongen:field>
+		</h:form>
+	</ui:define>
+
 </ui:composition>

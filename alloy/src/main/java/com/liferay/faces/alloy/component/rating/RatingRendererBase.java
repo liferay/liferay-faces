@@ -1243,7 +1243,7 @@ public abstract class RatingRendererBase extends AlloyRendererBase {
 	}
 
 	protected void encodeValue(ResponseWriter responseWriter, RatingComponent ratingComponent, Object value, boolean first) throws IOException {
-		encodeString(responseWriter, RatingComponent.VALUE, value, first);
+		encodeObject(responseWriter, RatingComponent.VALUE, value, first);
 	}
 
 	protected void encodeVisible(ResponseWriter responseWriter, RatingComponent ratingComponent, Boolean visible, boolean first) throws IOException {
