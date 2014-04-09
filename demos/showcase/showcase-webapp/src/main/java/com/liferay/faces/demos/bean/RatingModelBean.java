@@ -38,8 +38,6 @@ public class RatingModelBean {
 	public Long getFavoriteId() {
 		return favoriteId;
 	}
-	
-	// a long line a long line a long line a long line a long line a long line a long line a long line a long line a long line a long line a long line
 
 	public void setFavoriteId(Long favoriteId) {
 		this.favoriteId = favoriteId;
