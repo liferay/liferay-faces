@@ -41,11 +41,9 @@ public class Rating extends RatingBase {
 	protected void validateValue(FacesContext context, Object value) {
 
 		// AlloyUI sets the initial value of its hidden input to -1
-		// -1 is an invalid magical value.
-		// -1 has been modified by this point in the lifecycle to be "" to play nice with JSF.
-		// unfortunately "" would be invalid, if it is not in the list of rating options, so
-		// we will force validateValue to see that the value is null instead of "".
-		// JSF will allow null as valid.
+		// -1 has been modified by this point in the lifecycle to be "" to play nice with JSF.  Unfortunately "" would
+		// be invalid, if it is not in the list of rating options, so we will force validateValue to see that the value
+		// is null instead of "".  JSF will allow null as valid.
 		if (value instanceof String) {
 			String valueString = (String) value;
 
@@ -60,13 +58,10 @@ public class Rating extends RatingBase {
 	@Override
 	public String getBoundingBox() {
 
-		// It appears that boundingBox is a required attribute of the Rating component
-		// so we had better give it a default value here if it is null
 		String boundingBox = super.getBoundingBox();
 
 		if (boundingBox == null) {
-			String defaultValue = StringPool.POUND + ComponentUtil.escapeClientId(getClientId());
-			boundingBox = (String) getStateHelper().eval(BOUNDING_BOX, defaultValue);
+			boundingBox = StringPool.POUND + ComponentUtil.escapeClientId(getClientId());
 		}
 
 		return boundingBox;
@@ -79,8 +74,6 @@ public class Rating extends RatingBase {
 
 	@Override
 	public Boolean isWidgetRender() {
-		// AlloyUI's example for this component calls .render() on itself
-		// This is required, so we better do that here.
 		return (Boolean) getStateHelper().eval(WIDGET_RENDER, true);
 	}
 

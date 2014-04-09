@@ -17,6 +17,7 @@ import java.io.IOException;
 
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
+import javax.faces.component.ValueHolder;
 import javax.faces.component.html.HtmlSelectOneRadio;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
@@ -37,10 +38,11 @@ import com.liferay.faces.util.lang.StringPool;
 @ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
 public class RatingRenderer extends RatingRendererBase {
 
-	protected static final String RADIO_RENDERER_TYPE = "javax.faces.Radio";
-	protected static final String FACES_RUNTIME_ONCLICK = "facesRuntimeOnClick";
-	protected static final String SELECTED_INDEX = "selectedIndex";
-	protected static final String DEFAULT_SELECTED_VALUE = "defaultSelectedValue";
+	// Private Constants
+	private static final String RADIO_RENDERER_TYPE = "javax.faces.Radio";
+	private static final String FACES_RUNTIME_ONCLICK = "facesRuntimeOnClick";
+	private static final String SELECTED_INDEX = "selectedIndex";
+	private static final String DEFAULT_SELECTED_VALUE = "defaultSelectedValue";
 
 	@Override
 	public void decode(FacesContext facesContext, UIComponent uiComponent) {
@@ -55,7 +57,7 @@ public class RatingRenderer extends RatingRendererBase {
 		Rating rating = (Rating) uiComponent;
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		// start the opening tag of the component
+		// Start the opening tag of the component.
 		responseWriter.startElement(StringPool.SPAN, uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(facesContext), StringPool.ID);
 
@@ -67,26 +69,27 @@ public class RatingRenderer extends RatingRendererBase {
 
 		// Use our own ResponseWriter to filter out stuff that the jsf-api wants to write to the DOM, and also
 		// use our ResponseWriter to save interesting things along the way and later ask our ResponseWriter for them,
-		// such as an onclick event that our jsf-impl will need
+		// such as an onclick event that our jsf-impl will need.
 		facesContext.setResponseWriter(ratingResponseWriter);
 
+		// Delegate rendering of the component to the JSF runtime.
 		radioRenderer.encodeBegin(facesContext, uiComponent);
 		radioRenderer.encodeChildren(facesContext, uiComponent);
 		radioRenderer.encodeEnd(facesContext, uiComponent);
 
-		// save the onclick for later use in the JavaScript
+		// Save the onclick for later use in the JavaScript.
 		String onClick = ratingResponseWriter.getOnClick();
 		facesContext.getAttributes().put(FACES_RUNTIME_ONCLICK, onClick);
 
-		// save the selectedIndex for later use in the JavaScript
+		// Save the selectedIndex for later use in the JavaScript.
 		Integer selectedIndex = ratingResponseWriter.getSelectedIndex();
 		facesContext.getAttributes().put(SELECTED_INDEX, selectedIndex);
 
-		// save the selectedIndex for later use in the JavaScript
+		// Save the selectedIndex for later use in the JavaScript.
 		Object defaultSelectedValue = ratingResponseWriter.getDefaultSelectedValue();
 		facesContext.getAttributes().put(DEFAULT_SELECTED_VALUE, defaultSelectedValue);
 
-		// Stop using our own ResponseWwriter
+		// Restore the original ResponseWwriter.
 		facesContext.setResponseWriter(responseWriter);
 
 	}
@@ -95,23 +98,15 @@ public class RatingRenderer extends RatingRendererBase {
 	protected void encodeHTMLEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		// close the opening tag of the component
+		// Close the component tag.
 		responseWriter.endElement(StringPool.SPAN);
 	}
 
 	@Override
 	protected void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		Rating rating = (Rating) uiComponent;
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-
-		String clientId = uiComponent.getClientId(facesContext);
-
-		String defaultSelectedValue = (String) facesContext.getAttributes().remove(DEFAULT_SELECTED_VALUE);
-		Integer selectedIndex = (Integer) facesContext.getAttributes().remove(SELECTED_INDEX);
-		String onClick = (String) facesContext.getAttributes().remove(FACES_RUNTIME_ONCLICK);
-		Object value = rating.getValue();
-
+		
 		// We need to add an onclick event to the JavaScript component using its "on" method, instead of adding an
 		// onclick to some DOM element.
 		String ratingObject = ComponentUtil.resolveWidgetVar(facesContext, (Widget) uiComponent);
@@ -138,15 +133,22 @@ public class RatingRenderer extends RatingRendererBase {
 		String hiddenInputValue = StringPool.BLANK;
 
 		// 3. Developer attribute
+		String defaultSelectedValue = (String) facesContext.getAttributes().remove(DEFAULT_SELECTED_VALUE);
 		if (!facesContext.isPostback()) {
 			hiddenInputValue = (defaultSelectedValue == null) ? hiddenInputValue : defaultSelectedValue;
 		}
 
 		// 4. and 5. Developer EL or User input
 		// make sure that the hiddenValue is set to this rating's value, if any
-		hiddenInputValue = (value == null) ? hiddenInputValue : value.toString();
+		ValueHolder valueHolder = (ValueHolder) uiComponent;
+		Object value = valueHolder.getValue();
+		if (value != null) {
+			hiddenInputValue = value.toString();
+		}
 
 		// initialize the hidden input generated by AlloyUi to the hiddenInputValue, instead of its default of -1
+		String clientId = uiComponent.getClientId(facesContext);
+		
 		responseWriter.write("document.getElementsByName('");
 		responseWriter.write(clientId);
 		responseWriter.write("')[0].value = '");
@@ -156,6 +158,8 @@ public class RatingRenderer extends RatingRendererBase {
 		// Make sure that the rendered rating is correct (i.e. how many stars are filled). The only way that the
 		// JavaScript ratingObject would have a selectedIndex at this point is if the defaultSelected attribute is set.
 		// Carefully decide if we need to clear the selected rating or if we need to select the user's selected rating.
+		Integer selectedIndex = (Integer) facesContext.getAttributes().remove(SELECTED_INDEX);
+		
 		if (selectedIndex.intValue() == -1) {
 
 			if (facesContext.isPostback()) {
@@ -172,11 +176,16 @@ public class RatingRenderer extends RatingRendererBase {
 			// the user has selected their rating, selectedIndex.intValue(), but the rating they selected may have
 			// already been rendered as the defaultSelected rating, so if the user's choice has already been rendered,
 			// we should not select it again, because that would clear the rendered rating that the user wants.
-			responseWriter.write("if (");
-			responseWriter.write(selectedIndex.intValue() + " != defaultSelectedIndex) { ");
+			responseWriter.write("if(");
+			String selectedIndexAsString = selectedIndex.toString();
+			responseWriter.write(selectedIndexAsString);
+			responseWriter.write("!=defaultSelectedIndex){");
 			responseWriter.write(ratingObject);
 			responseWriter.write(".select(");
-			responseWriter.write(selectedIndex.intValue() + "); } ");
+			responseWriter.write(selectedIndexAsString);
+			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+			responseWriter.write(StringPool.SEMICOLON);
+			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		}
 
 		//J-
@@ -190,24 +199,26 @@ public class RatingRenderer extends RatingRendererBase {
 		// 5. User event		  event.target.get('value')			   unless it is the cancel or reset value, use this.
 		//J+
 
-		String hiddenInputNode = "document.getElementsByName('" + clientId + "')[0]";
-
 		// add an onclick event
 		responseWriter.write(ratingObject);
-		responseWriter.write(".on('click', function(event) { ");
+		responseWriter.write(".on('click',function(event){");
 
 		// establish the newValue of the hiddenInput
-		responseWriter.write("var newValue = (event.target.get('value') == '-1') ? '' : event.target.get('value'); ");
+		responseWriter.write("var newValue=(event.target.get('value')=='-1')?'':event.target.get('value');");
 
 		// set the newValue of the hidden input
 		responseWriter.write("document.getElementsByName('");
 		responseWriter.write(clientId);
-		responseWriter.write("')[0].value = newValue; ");
+		responseWriter.write("')[0].value = newValue;");
 
 		// write out the jsf onclick event to call, if any
-		responseWriter.write(((onClick == null) ? "" : onClick.replaceFirst("this", hiddenInputNode)));
+		String onClick = (String) facesContext.getAttributes().remove(FACES_RUNTIME_ONCLICK);
+		String hiddenInputNodeJs = "document.getElementsByName('" + clientId + "')[0]";
+		responseWriter.write(((onClick == null) ? "" : onClick.replaceFirst("this", hiddenInputNodeJs)));
 
-		responseWriter.write(" }); ");
+		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+		responseWriter.write(StringPool.SEMICOLON);
 
 	}
 
