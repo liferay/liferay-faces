@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<aui-nongen:field label="#{i18n['description']}">
+				<h:outputText value="#{i18n['aui-starrating-default-value-col1']}" />
+			</aui-nongen:field>
+			<aui-nongen:field label="#{i18n['component']}">
+				<aui:starRating id="starRating" value="#{starRatingModelBean.benefitId}" label="#{i18n['favorite']}:">
+					<f:converter converterId="javax.faces.Long" />
+					<f:selectItem itemLabel="Compatible" itemValue="1" />
+					<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
+					<f:selectItem itemLabel="Powerful Integration" itemValue="3" />
+					<f:selectItem itemLabel="Lightweight" itemValue="4" />
+					<f:selectItem itemLabel="Open Source" itemValue="5" />
+				</aui:starRating>
+			</aui-nongen:field>
+			<h:commandButton action="#{starRatingBackingBean.submit}" value="#{i18n['submit']}">
+				<f:ajax execute="@form" render="@form" />
+			</h:commandButton>
+			<aui-nongen:field label="#{i18n['model-value']}">
+				<pre>#{starRatingModelBean.benefitId}</pre>
+			</aui-nongen:field>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<h:form>
+			<aui-nongen:field label="#{i18n['description']}">
+				<h:outputText value="#{i18n['aui-starrating-default-value-col2']}" />
+			</aui-nongen:field>
+			<aui-nongen:field label="#{i18n['component']}">
+				<aui:starRating defaultSelected="3" value="#{starRatingModelBean.favoriteId}" label="#{i18n['favorite']}:">
+					<f:converter converterId="javax.faces.Long" />
+					<f:selectItem itemLabel="Compatible" itemValue="1" />
+					<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
+					<f:selectItem itemLabel="Powerful Integration" itemValue="3" />
+					<f:selectItem itemLabel="Lightweight" itemValue="4" />
+					<f:selectItem itemLabel="Open Source" itemValue="5" />
+				</aui:starRating>
+			</aui-nongen:field>
+			<h:commandButton action="#{starRatingBackingBean.submit}" value="#{i18n['submit']}">
+				<f:ajax execute="@form" render="@form" />
+			</h:commandButton>
+			<aui-nongen:field label="#{i18n['model-value']}">
+				<pre>#{starRatingModelBean.favoriteId}</pre>
+			</aui-nongen:field>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
