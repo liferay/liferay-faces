@@ -1194,7 +1194,7 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 	            	The value of this component.  This component does, after all, implement  	            	EditableValueHolder.  So value of this attribute represents the value of the component. 				]]></description>
+			<description><![CDATA[ 	            	The value of this component.  This component does, after all, implement  	            	EditableValueHolder.  So the value of this attribute represents the value of the component. 				]]></description>
 			<name>value</name>
 			<required>false</required>
 			<type>Object</type>

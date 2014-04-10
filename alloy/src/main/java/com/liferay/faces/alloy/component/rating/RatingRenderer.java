@@ -28,6 +28,7 @@ import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Widget;
+import com.liferay.faces.util.helper.StringHelper;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -63,9 +64,9 @@ public class RatingRenderer extends RatingRendererBase {
 		// Use our own ResponseWriter to filter out stuff that the jsf-api wants to write to the DOM, and also use our
 		// ResponseWriter to save interesting things along the way and later ask our ResponseWriter for them, such as an
 		// onclick event that our jsf-impl will need.
-		Rating rating = (Rating) uiComponent;
-		RatingResponseWriter ratingResponseWriter = new RatingResponseWriter(responseWriter,
-				rating.getDefaultSelected());
+		RatingComponent ratingComponent = (RatingComponent) uiComponent;
+		String defaultSelected = StringHelper.toString(ratingComponent.getDefaultSelected(), null);
+		RatingResponseWriter ratingResponseWriter = new RatingResponseWriter(responseWriter, defaultSelected);
 		facesContext.setResponseWriter(ratingResponseWriter);
 
 		// Delegate rendering of the component to the JSF runtime.
@@ -80,7 +81,7 @@ public class RatingRenderer extends RatingRendererBase {
 		facesContext.getAttributes().put(FACES_RUNTIME_ONCLICK, onClick);
 
 		// Save the selectedIndex for later use in the JavaScript.
-		Integer selectedIndex = ratingResponseWriter.getSelectedIndex();
+		Long selectedIndex = ratingResponseWriter.getSelectedIndex();
 		facesContext.getAttributes().put(SELECTED_INDEX, selectedIndex);
 
 		// Save the defaultSelectedValue for later use in the JavaScript.
@@ -157,19 +158,37 @@ public class RatingRenderer extends RatingRendererBase {
 		// Make sure that the rendered rating is correct (i.e. how many stars are filled). The only way that the
 		// JavaScript widgetVar would have a selectedIndex at this point is if the defaultSelected attribute is set.
 		// Carefully decide if we need to clear the selected rating or if we need to select the user's selected rating.
-		Integer selectedIndex = (Integer) facesContext.getAttributes().remove(SELECTED_INDEX);
-		
-		if (selectedIndex.intValue() == -1) {
+		Long selectedIndex = (Long) facesContext.getAttributes().remove(SELECTED_INDEX);
 
+		// If the selectedIndex is -1, then that means one of two things ... 1. the user selected no value (or cleared
+		// the stars), which must have been in a postback. 2. no selected index was found because this is the initial
+		// render of the page, and no valid default value was set.
+		if (selectedIndex.intValue() == RatingResponseWriter.NO_SELECTION_INDEX) {
+
+			// This is case 1.  the user selected to clear the value.
 			if (facesContext.isPostback()) {
-
-				// Otherwise, the user has selected their rating (selectedIndex) but the rating they selected may have
-				// already been rendered as the defaultSelected rating, so if the user's choice has already been rendered,
-				// we should not select it again, because that would clear the rendered rating that the user wants.
 				responseWriter.write(widgetVar);
-				responseWriter.write(".clearSelection(); ");
+				responseWriter.write(".clearSelection();");
+			}
+
+			// Otherwise, this is case 2. Since there has been no user interaction yet, then we do not need to clear
+			// anything, or select anything, since the Alloy component will simply be able to render itself correctly.
+			else {
+				// no operation needed.
 			}
 		}
+
+		// Otherwise, JSF says that this component has a value, because JSF rendered one of the input type="radio" as
+		// "checked" and its selectedIndex is not -1.  There are two possible reasons for this:
+		// 1. The model has a default value coming through on initial render
+		// 2. The user clicked on a star, this is a postback, and we need the component to have that many stars filled.
+		//
+		// This is a special case where a defaultSelectedIndex has been established, and Alloy renders stars already
+		// filled to the defaultSelected input, but the user has selected a different number of stars than the
+		// defaultSelected, so we need to "select" the correct number of stars to be filled. If the defaultSelected is
+		// the same as the chosen selectedIndex, we do not want to select it again, since alloy has already filled the
+		// correct number of stars.  If we did select it again, it would clear the stars ... not showing what the user
+		// selected.
 		else {
 
 			String selectedIndexAsString = selectedIndex.toString();
@@ -200,30 +219,34 @@ public class RatingRenderer extends RatingRendererBase {
 		// 5. User event		  event.target.get('value')			   unless it is the cancel or reset value, use this.
 		//J+
 
-		// add an onclick event
+		// Start encoding the onclick event.
 		responseWriter.write(widgetVar);
 		responseWriter.write(".on('click',function(event){");
 
-		// establish the newValue of the hiddenInput
+		// Within the onclick event, establish the newValue of the hiddenInput.
 		responseWriter.write("var newValue=(event.target.get('value')=='-1')?'':event.target.get('value');");
 
-		// set the newValue of the hidden input
+		// Within the onclick event, set the newValue of the hidden input.
 		responseWriter.write("document.getElementsByName('");
 		responseWriter.write(clientId);
-		responseWriter.write("')[0].value = newValue;");
+		responseWriter.write("')[0].value=newValue;");
 
-		// write out the jsf onclick event to call, if any
+		// Within the onclick event, write out the jsf onclick event to call, that was captured by the ResponseWriter,
+		// if any.
 		String onClick = (String) facesContext.getAttributes().remove(FACES_RUNTIME_ONCLICK);
 		String hiddenInputNodeJs = "document.getElementsByName('" + clientId + "')[0]";
-		responseWriter.write(((onClick == null) ? "" : onClick.replaceFirst("this", hiddenInputNodeJs)));
-
+		if (onClick != null) {
+			responseWriter.write(onClick.replaceFirst("this", hiddenInputNodeJs));
+		}
+		
+		// Finish encoding the onclick event.
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 		responseWriter.write(StringPool.SEMICOLON);
 
 	}
 
-	// This will need to be overridden for all of our input alloy components
+	// This will need to be overridden for all of our input components.
 	@Override
 	public Object getConvertedValue(FacesContext facesContext, UIComponent uiComponent, Object submittedValue)
 		throws ConverterException {

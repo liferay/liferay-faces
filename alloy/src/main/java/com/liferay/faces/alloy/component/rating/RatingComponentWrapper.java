@@ -957,16 +957,6 @@ public class RatingComponentWrapper implements RatingComponent, FacesWrapper<Rat
 	}
 
 	@Override
-	public Object getValue() {
-		return getWrapped().getValue();
-	}
-
-	@Override
-	public void setValue(Object value) {
-		getWrapped().setValue(value);
-	}
-
-	@Override
 	public Boolean isVisible() {
 		return getWrapped().isVisible();
 	}

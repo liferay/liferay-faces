@@ -82,10 +82,11 @@
 			<attribute>
 				<description>
 	            	<![CDATA[The value of this component.  This component does, after all, implement 
-	            	EditableValueHolder.  So value of this attribute represents the value of the component.]]>
+	            	EditableValueHolder.  So the value of this attribute represents the value of the component.]]>
 				</description>
 				<name>value</name>
 				<type>java.lang.Object</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
 			</attribute>
 			<!-- inherited from JSF and part of the the Styleable interface -->
 			<!-- 

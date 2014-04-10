@@ -19,76 +19,95 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 import javax.faces.context.ResponseWriterWrapper;
 
+import com.liferay.faces.util.lang.StringPool;
 
+
+//J-
 /**
- * @author  Neil Griffin
+ * The purpose of this class is to decorate the JSF runtime {@link ResponseWriter} in order to:
+ * 1. Remove DOM elements (table parts) from the html that Alloy JavaScript is not expecting.
+ * 2. Replace those table parts with new elements that Alloy can deal with.
+ * 3. Gather information from the elements as rendered by JSF before the Alloy JavaScript munges it.
+ * 4. Provide getters to retrieve the information gathered after encoding the component.
+ *
+ * JSF's selectOneRadio basically renders what Alloy needs, but it also renders some table elements that are not 
+ * needed, and puts labels where alloy would not look for them, so this ResponseWriter helps the renderer ignore 
+ * the unnecessary table parts and put things like the labels into the title attributes of the radio inputs where 
+ * alloy will get them.  Please refer to JSF vdldocs for more details:
+ * {@link https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/selectOneRadio.html}
+ *
+ * @author	Vernon Singleton
  */
+//J+
 public class RatingResponseWriter extends ResponseWriterWrapper {
 
+	// Public constants.
 	public static final int NO_SELECTION_INDEX = -1;
+
+	// Private data members.
 	private ResponseWriter wrappedResponseWriter;
-	private boolean implWritingInput;
-	private boolean implWritingLabel;
+	private boolean inputElement;
+	private boolean labelElement;
 	private Object title;
 	private String onClick;
-	private int index;
-	private int selectedIndex;
-	private Integer defaultSelected;
+	private long index;
+	private long selectedIndex;
+	private Long defaultSelected;
 	private Object defaultSelectedValue;
 
-	public RatingResponseWriter(ResponseWriter responseWriter, Object defaultSelected) {
+	public RatingResponseWriter(ResponseWriter responseWriter, String defaultSelected) {
 		this.wrappedResponseWriter = responseWriter;
 		this.index = NO_SELECTION_INDEX;
 		this.selectedIndex = NO_SELECTION_INDEX;
-		this.defaultSelected = (defaultSelected == null) ? null : new Integer((String) defaultSelected);
+
+		if (defaultSelected != null) {
+			this.defaultSelected = new Long(defaultSelected);
+		}
 	}
 
 	@Override
 	public void endElement(String name) throws IOException {
 
-		if ("input".equalsIgnoreCase(name)) {
-			implWritingInput = false;
+		if (StringPool.INPUT.equalsIgnoreCase(name)) {
+			inputElement = false;
 		}
 
 		if ("label".equalsIgnoreCase(name)) {
-			implWritingLabel = false;
+			labelElement = false;
 
-			super.writeAttribute("title", this.title, "title");
-			super.endElement("input");
+			super.writeAttribute("title", title, "title");
+			super.endElement(StringPool.INPUT);
 		}
 	}
 
 	@Override
 	public void startElement(String name, UIComponent component) throws IOException {
 
-		if ("input".equalsIgnoreCase(name)) {
-			implWritingInput = true;
-			this.title = "";
-			this.index += 1;
+		if (StringPool.INPUT.equalsIgnoreCase(name)) {
+			inputElement = true;
+			title = null;
+			index += 1;
 			super.startElement(name, component);
 		}
 
 		if ("label".equalsIgnoreCase(name)) {
-			implWritingLabel = true;
+			labelElement = true;
 		}
 	}
 
 	// f:selectItems uses this for writing chars into a label
 	@Override
 	public void write(char[] chars, int off, int len) throws IOException {
-
-		if (implWritingLabel) {
+		if (labelElement) {
 			String newString = new String(chars, off, len);
-			this.title = newString;
-			// avoid writing anything from the label
-			// super.write(chars, off, len);
+			title = newString;
 		}
 	}
 
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if (implWritingInput) {
+		if (inputElement) {
 
 			if ("checked".equals(name)) {
 
@@ -96,7 +115,7 @@ public class RatingResponseWriter extends ResponseWriterWrapper {
 				setSelectedIndex(this.index);
 			}
 
-			if ("value".equals(name)) {
+			if (StringPool.VALUE.equals(name)) {
 
 				if (defaultSelected != null) {
 
@@ -121,11 +140,8 @@ public class RatingResponseWriter extends ResponseWriterWrapper {
 	// f:selectItem uses this for writing text into a label
 	@Override
 	public void writeText(Object text, UIComponent component, String property) throws IOException {
-
-		if (implWritingLabel) {
-			this.title = text;
-			// avoid writing anything from the label
-			// super.writeText(text, component, property);
+		if (labelElement) {
+			title = text;
 		}
 	}
 
@@ -141,11 +157,11 @@ public class RatingResponseWriter extends ResponseWriterWrapper {
 		return onClick;
 	}
 
-	public int getSelectedIndex() {
+	public long getSelectedIndex() {
 		return selectedIndex;
 	}
 
-	public void setSelectedIndex(int selectedIndex) {
+	public void setSelectedIndex(long selectedIndex) {
 		this.selectedIndex = selectedIndex;
 	}
 

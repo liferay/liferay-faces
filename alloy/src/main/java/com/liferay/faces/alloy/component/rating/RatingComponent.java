@@ -524,10 +524,6 @@ public interface RatingComponent {
 
 	public void setUseARIA(Boolean useARIA);
 
-	public Object getValue();
-
-	public void setValue(Object value);
-
 	public Boolean isVisible();
 
 	public void setVisible(Boolean visible);

@@ -300,14 +300,6 @@ public abstract class RatingRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		Object value = ratingComponent.getValue();
-
-		if (value != null) {
-
-			encodeValue(responseWriter, ratingComponent, value, first);
-			first = false;
-		}
-
 		Boolean visible = ratingComponent.isVisible();
 
 		if (visible != null) {
@@ -1240,10 +1232,6 @@ public abstract class RatingRendererBase extends AlloyRendererBase {
 
 	protected void encodeUseARIA(ResponseWriter responseWriter, RatingComponent ratingComponent, Boolean useARIA, boolean first) throws IOException {
 		encodeBoolean(responseWriter, RatingComponent.USE_ARIA, useARIA, first);
-	}
-
-	protected void encodeValue(ResponseWriter responseWriter, RatingComponent ratingComponent, Object value, boolean first) throws IOException {
-		encodeObject(responseWriter, RatingComponent.VALUE, value, first);
 	}
 
 	protected void encodeVisible(ResponseWriter responseWriter, RatingComponent ratingComponent, Boolean visible, boolean first) throws IOException {
