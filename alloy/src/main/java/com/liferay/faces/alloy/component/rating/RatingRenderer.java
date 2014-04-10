@@ -54,25 +54,23 @@ public class RatingRenderer extends RatingRendererBase {
 	@Override
 	protected void encodeHTMLBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		Rating rating = (Rating) uiComponent;
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 		// Start the opening tag of the component.
 		responseWriter.startElement(StringPool.SPAN, uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(facesContext), StringPool.ID);
 
-		RenderKit renderKit = facesContext.getRenderKit();
-		Renderer radioRenderer = renderKit.getRenderer(HtmlSelectOneRadio.COMPONENT_FAMILY, RADIO_RENDERER_TYPE);
-
+		// Use our own ResponseWriter to filter out stuff that the jsf-api wants to write to the DOM, and also use our
+		// ResponseWriter to save interesting things along the way and later ask our ResponseWriter for them, such as an
+		// onclick event that our jsf-impl will need.
+		Rating rating = (Rating) uiComponent;
 		RatingResponseWriter ratingResponseWriter = new RatingResponseWriter(responseWriter,
 				rating.getDefaultSelected());
-
-		// Use our own ResponseWriter to filter out stuff that the jsf-api wants to write to the DOM, and also
-		// use our ResponseWriter to save interesting things along the way and later ask our ResponseWriter for them,
-		// such as an onclick event that our jsf-impl will need.
 		facesContext.setResponseWriter(ratingResponseWriter);
 
 		// Delegate rendering of the component to the JSF runtime.
+		RenderKit renderKit = facesContext.getRenderKit();
+		Renderer radioRenderer = renderKit.getRenderer(HtmlSelectOneRadio.COMPONENT_FAMILY, RADIO_RENDERER_TYPE);
 		radioRenderer.encodeBegin(facesContext, uiComponent);
 		radioRenderer.encodeChildren(facesContext, uiComponent);
 		radioRenderer.encodeEnd(facesContext, uiComponent);
@@ -85,13 +83,12 @@ public class RatingRenderer extends RatingRendererBase {
 		Integer selectedIndex = ratingResponseWriter.getSelectedIndex();
 		facesContext.getAttributes().put(SELECTED_INDEX, selectedIndex);
 
-		// Save the selectedIndex for later use in the JavaScript.
+		// Save the defaultSelectedValue for later use in the JavaScript.
 		Object defaultSelectedValue = ratingResponseWriter.getDefaultSelectedValue();
 		facesContext.getAttributes().put(DEFAULT_SELECTED_VALUE, defaultSelectedValue);
 
 		// Restore the original ResponseWwriter.
 		facesContext.setResponseWriter(responseWriter);
-
 	}
 
 	@Override
@@ -106,16 +103,14 @@ public class RatingRenderer extends RatingRendererBase {
 	protected void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		
-		// We need to add an onclick event to the JavaScript component using its "on" method, instead of adding an
-		// onclick to some DOM element.
-		String ratingObject = ComponentUtil.resolveWidgetVar(facesContext, (Widget) uiComponent);
-		encodeLiferayComponent(responseWriter, ratingObject);
+
+		String widgetVar = ComponentUtil.resolveWidgetVar(facesContext, (Widget) uiComponent);
+		encodeLiferayComponent(responseWriter, widgetVar);
 		// The above should render something like this: var _1_WAR_showcaseportlet__j_idt6_j_idt19_j_idt22_j_idt23 =
 		// Liferay.component('_1_WAR_showcaseportlet__j_idt6_j_idt19_j_idt22_j_idt23');
 
 		responseWriter.write("var defaultSelectedIndex = ");
-		responseWriter.write(ratingObject);
+		responseWriter.write(widgetVar);
 		responseWriter.write(".get('selectedIndex');");
 
 		//J-
@@ -124,7 +119,7 @@ public class RatingRenderer extends RatingRendererBase {
 		// ---------------------- -----------------------------------  ---------------------------------------------
 		// 1. AlloyUI			  -1								   ignore.
 		// 2. JSF				  ''								   use as default.
-		// 3. Developer attribute ratingObject.get('defaultSelected')  if defined, use this, but remember it is the number of stars, not the value.
+		// 3. Developer attribute widgetVar.get('defaultSelected')  if defined, use this, but remember it is the number of stars, not the value.
 		// 4. Developer EL		  rating.getValue()					   if defined, use this.
 		// 5. User event											   no interaction from the user yet, so use the value chosen above.
 		//J+
@@ -156,7 +151,7 @@ public class RatingRenderer extends RatingRendererBase {
 		responseWriter.write("'; ");
 
 		// Make sure that the rendered rating is correct (i.e. how many stars are filled). The only way that the
-		// JavaScript ratingObject would have a selectedIndex at this point is if the defaultSelected attribute is set.
+		// JavaScript widgetVar would have a selectedIndex at this point is if the defaultSelected attribute is set.
 		// Carefully decide if we need to clear the selected rating or if we need to select the user's selected rating.
 		Integer selectedIndex = (Integer) facesContext.getAttributes().remove(SELECTED_INDEX);
 		
@@ -167,7 +162,7 @@ public class RatingRenderer extends RatingRendererBase {
 				// this is not the initial render of the component, and the user's selection was to clear it (hence -1),
 				// so we will clear it now since there may be a defaultSelected rating showing, and that's not what the
 				// user selected
-				responseWriter.write(ratingObject);
+				responseWriter.write(widgetVar);
 				responseWriter.write(".clearSelection(); ");
 			}
 		}
@@ -180,7 +175,7 @@ public class RatingRenderer extends RatingRendererBase {
 			String selectedIndexAsString = selectedIndex.toString();
 			responseWriter.write(selectedIndexAsString);
 			responseWriter.write("!=defaultSelectedIndex){");
-			responseWriter.write(ratingObject);
+			responseWriter.write(widgetVar);
 			responseWriter.write(".select(");
 			responseWriter.write(selectedIndexAsString);
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
@@ -194,13 +189,13 @@ public class RatingRenderer extends RatingRendererBase {
 		// ---------------------- -----------------------------------  ---------------------------------------------
 		// 1. AlloyUI			  event.target.get('value')			   Use this as the value unless it is -1 which is the cancel value.
 		// 2. JSF				  ''								   use this value instead of -1 or the cancel value.
-		// 3. Developer attribute ratingObject.get('defaultSelected')  ignore, because user input is overriding this.
+		// 3. Developer attribute widgetVar.get('defaultSelected')  ignore, because user input is overriding this.
 		// 4. Developer EL		  rating.getValue()					   ignore, because user input is overriding this.
 		// 5. User event		  event.target.get('value')			   unless it is the cancel or reset value, use this.
 		//J+
 
 		// add an onclick event
-		responseWriter.write(ratingObject);
+		responseWriter.write(widgetVar);
 		responseWriter.write(".on('click',function(event){");
 
 		// establish the newValue of the hiddenInput

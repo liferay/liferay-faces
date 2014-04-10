@@ -25,6 +25,7 @@ import javax.faces.context.ResponseWriterWrapper;
  */
 public class RatingResponseWriter extends ResponseWriterWrapper {
 
+	public static final int NO_SELECTION_INDEX = -1;
 	private ResponseWriter wrappedResponseWriter;
 	private boolean implWritingInput;
 	private boolean implWritingLabel;
@@ -37,8 +38,8 @@ public class RatingResponseWriter extends ResponseWriterWrapper {
 
 	public RatingResponseWriter(ResponseWriter responseWriter, Object defaultSelected) {
 		this.wrappedResponseWriter = responseWriter;
-		this.index = -1;
-		this.selectedIndex = -1;
+		this.index = NO_SELECTION_INDEX;
+		this.selectedIndex = NO_SELECTION_INDEX;
 		this.defaultSelected = (defaultSelected == null) ? null : new Integer((String) defaultSelected);
 	}
 
