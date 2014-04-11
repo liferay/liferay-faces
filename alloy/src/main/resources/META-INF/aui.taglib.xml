@@ -473,6 +473,820 @@
 		</tag-extension>
 	</tag>
 	<tag>
+		<description><![CDATA[An input component rendering a set of stars that a user may select to indicate their 'rating'. Since it extends HtmlSelectOneRadio, it accepts f:selectItem(s) as children.]]></description>
+		<tag-name>starRating</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.rating.Rating</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.rating.RatingRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[A hot key character which can help change focus to this component]]></description>
+			<name>accesskey</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterBoundingBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> could be reseted (i.e., have no values selected).<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterCanResetChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterContentBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS class to be automatically added to the <code>boundingBox</code>.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterCssClassChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS classes applied on Rating.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterCssClassesChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The number of selected starts when the Rating render.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterDefaultSelectedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterDestroyedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether the Rating is disabled or not. Disabled Ratings don't allow hover or click, just display selected stars.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterDisabledChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<a href="NodeList.html">NodeList</a> of elements used on the Rating. Each element is one Star.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterElementsChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterFocusedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterHeightChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Hidden input to handle the selected value. This hidden input replace the radio elements and keep the same name.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterHiddenInputChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS class added to hide the <code>boundingBox</code> when <a href="Component.html#config_visible">visible</a> is set to <code>false</code>.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterHideClassChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterIdChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterInitializedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Name of the <a href="Rating.html#config_hiddenInput">hiddenInput</a> element. If not specified will use the name of the replaced radio.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterInputNameChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Label to be displayed with the Rating elements.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterLabelChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[DOM Node to display the text of the StarRating. If not specified try to query using HTML_PARSER an element inside boundingBox which matches <code>aui-rating-label-element</code>.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterLabelNodeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterLocaleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterRenderChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterRenderedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Stores the index of the selected element.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterSelectedIndexChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> will extract the value of the <code>title</code> attribute on the radio, and use it on the generated Rating elements.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterShowTitleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number of Rating elements to be displayed.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterSizeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterSrcNodeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterStringsChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterTabIndexChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If set, will be used when there is no DOM <code>title</code> on the radio elements.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterTitleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if use of the WAI-ARIA Roles and States should be enabled for the Widget.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterUseARIAChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Stores the value of the current selected Rating element.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterValueChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterVisibleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterWidthChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A ValueExpression which links this component to a property in a bean, or a ValueBinding reference to a similar UIComponent]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[ TODO __DESCRIPTION__]]></description>
+			<name>border</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>boundingBox</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> could be reseted (i.e., have no values selected).<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
+			<name>canReset</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>contentBox</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[ 	            	The class name of the converter instance to be used by this component. 				]]></description>
+			<name>converter</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS class to be automatically added to the <code>boundingBox</code>.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>cssClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS classes applied on Rating.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.util.HashMap","required":false}-->]]></description>
+			<name>cssClasses</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The number of selected starts when the Rating render.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"0"}-->]]></description>
+			<name>defaultSelected</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>destroyed</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This is an i18n attribute, which designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
+			<name>dir</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[]]></description>
+			<name>disabled</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A CSS style to apply to the label of a disabled selectItems.]]></description>
+			<name>disabledClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<a href="NodeList.html">NodeList</a> of elements used on the Rating. Each element is one Star.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>elements</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A CSS style to apply to the label of an enabled selectItems.]]></description>
+			<name>enabledClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>focused</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>height</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Hidden input to handle the selected value. This hidden input replace the radio elements and keep the same name.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>hiddenInput</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS class added to hide the <code>boundingBox</code> when <a href="Component.html#config_visible">visible</a> is set to <code>false</code>.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false,"defaultValue":"aui-hide"}-->]]></description>
+			<name>hideClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]></description>
+			<name>hideNoSelectionOption</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>initialized</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Name of the <a href="Rating.html#config_hiddenInput">hiddenInput</a> element. If not specified will use the name of the replaced radio.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>inputName</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A name for this component to be rendered to the user.  This name should be localized for the user.]]></description>
+			<name>label</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[DOM Node to display the text of the StarRating. If not specified try to query using HTML_PARSER an element inside boundingBox which matches <code>aui-rating-label-element</code>.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>labelNode</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[  TODO __DESCRIPTION__ ]]></description>
+			<name>layout</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false,"defaultValue":"en"}-->]]></description>
+			<name>locale</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
+			<name>onblur</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onBoundingBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> could be reseted (i.e., have no values selected).<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onCanResetChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]></description>
+			<name>onchange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
+			<name>onclick</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onContentBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS class to be automatically added to the <code>boundingBox</code>.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onCssClassChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS classes applied on Rating.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onCssClassesChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a double click event occurs.]]></description>
+			<name>ondblclick</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The number of selected starts when the Rating render.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onDefaultSelectedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onDestroyedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether the Rating is disabled or not. Disabled Ratings don't allow hover or click, just display selected stars.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onDisabledChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<a href="NodeList.html">NodeList</a> of elements used on the Rating. Each element is one Star.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onElementsChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when this component gets focus.]]></description>
+			<name>onfocus</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onFocusedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onHeightChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Hidden input to handle the selected value. This hidden input replace the radio elements and keep the same name.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onHiddenInputChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS class added to hide the <code>boundingBox</code> when <a href="Component.html#config_visible">visible</a> is set to <code>false</code>.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onHideClassChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onIdChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onInitializedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Name of the <a href="Rating.html#config_hiddenInput">hiddenInput</a> element. If not specified will use the name of the replaced radio.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onInputNameChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keydown event occurs.]]></description>
+			<name>onkeydown</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keypress event occurs.]]></description>
+			<name>onkeypress</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keyup event occurs.]]></description>
+			<name>onkeyup</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Label to be displayed with the Rating elements.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onLabelChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[DOM Node to display the text of the StarRating. If not specified try to query using HTML_PARSER an element inside boundingBox which matches <code>aui-rating-label-element</code>.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onLabelNodeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onLocaleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mousedown event occurs.]]></description>
+			<name>onmousedown</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mousemove event occurs.]]></description>
+			<name>onmousemove</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseout event occurs.]]></description>
+			<name>onmouseout</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseover event occurs.]]></description>
+			<name>onmouseover</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
+			<name>onmouseup</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onRenderChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onRenderedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when the user selects this component.]]></description>
+			<name>onselect</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Stores the index of the selected element.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onSelectedIndexChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> will extract the value of the <code>title</code> attribute on the radio, and use it on the generated Rating elements.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onShowTitleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number of Rating elements to be displayed.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onSizeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onSrcNodeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onStringsChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onTabIndexChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If set, will be used when there is no DOM <code>title</code> on the radio elements.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onTitleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if use of the WAI-ARIA Roles and States should be enabled for the Widget.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onUseARIAChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Stores the value of the current selected Rating element.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onValueChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onVisibleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onWidthChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
+			<name>readonly</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[ 	            	When false, this component will not be rendered.  The default value of this attribute  	            	is true. 				]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[space-separated tokens delineating the various WAI-ARIA roles that this component is used by]]></description>
+			<name>role</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Stores the index of the selected element.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"-1"}-->]]></description>
+			<name>selectedIndex</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> will extract the value of the <code>title</code> attribute on the radio, and use it on the generated Rating elements.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
+			<name>showTitle</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number of Rating elements to be displayed.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"5"}-->]]></description>
+			<name>size</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>srcNode</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.util.HashMap","required":false,"defaultValue":"{}"}-->]]></description>
+			<name>strings</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
+			<name>tabindex</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"null"}-->]]></description>
+			<name>tabIndex</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The title of the component, which is simply passed through as the html 'title' attribute of this component.]]></description>
+			<name>title</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if use of the WAI-ARIA Roles and States should be enabled for the Widget.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>useARIA</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[ 	            	The value of this component.  This component does, after all, implement  	            	EditableValueHolder.  So the value of this attribute represents the value of the component. 				]]></description>
+			<name>value</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
+			<name>visible</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[ 	            	This message, or the result of the given expression, will be used as the text of the  	            	converter message instead of any message that comes from the registered converter for this  	            	component.  Hopes to provide a straight forward way for those concerned with the view to override  	            	any message established by those concerned with the controller. 				]]></description>
+			<name>widgetConverterMessage</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[ 	            	When this flag is set to true, this component's value must be converted and validated  	            	(immediately) during the Apply Request Values phase, instead of (later) during the Process  	            	Validations phase. 				]]></description>
+			<name>widgetImmediate</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[ TODO __DESCRIPTION__]]></description>
+			<name>widgetLang</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false,"defaultValue":"false"}-->]]></description>
+			<name>widgetRender</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[ 	            	When this is true, a validation error will occur when the user does not specify a value  	            	for this component. 				]]></description>
+			<name>widgetRequired</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[ 	            	This message, or the result of the given expression, will be used as the text of the  	            	validation error message instead of any message that comes from the resulting validation error  	            	for this component when required="true" and no value is selected by the user.  Hopes to provide  	            	a straight forward way for those concerned with the view to override any message established by  	            	those concerned with the controller. 				]]></description>
+			<name>widgetRequiredMessage</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The CSS style or space-separated styles applying to this component as it is rendered. This ends up getting passed through to the html 'class' attribute of the component.]]></description>
+			<name>widgetStyleClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[__DESCRIPTION__]]></description>
+			<name>widgetValidator</name>
+			<required>false</required>
+			<type>Object</type>
+			<method-signature>
+					void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+					java.lang.Object)
+				</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[__DESCRIPTION__]]></description>
+			<name>widgetValidatorMessage</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[__DESCRIPTION__]]></description>
+			<name>widgetValueChangeListener</name>
+			<required>false</required>
+			<type>Object</type>
+			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the widget's javascript variable.]]></description>
+			<name>widgetVar</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>width</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
 		<description><![CDATA[]]></description>
 		<tag-name>tab</tag-name>
 		<component>
@@ -903,6 +1717,599 @@
 			<name>widgetVar</name>
 			<required>false</required>
 			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>width</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[A base class for ThumbRating, providing:  <ul>     <li>A non-obstrusive star rating control using Thumb up and Thumb down icons</li>     <li>Could be based on a set of radio input boxes</li>  </ul> Check the [live demo](http://alloyui.com/examples/rating/).]]></description>
+		<tag-name>thumbRating</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.thumbrating.ThumbRating</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.thumbrating.ThumbRatingRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterBoundingBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> could be reseted (i.e., have no values selected).<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterCanResetChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterContentBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS class to be automatically added to the <code>boundingBox</code>.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterCssClassChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS classes applied on ThumbRating.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterCssClassesChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The number of selected starts when the Rating render.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterDefaultSelectedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterDestroyedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether the Rating is disabled or not. Disabled Ratings don't allow hover or click, just display selected stars.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterDisabledChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<a href="NodeList.html">NodeList</a> of elements used on the Rating. Each element is one Star.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterElementsChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterFocusedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterHeightChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Hidden input to handle the selected value. This hidden input replace the radio elements and keep the same name.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterHiddenInputChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS class added to hide the <code>boundingBox</code> when <a href="Component.html#config_visible">visible</a> is set to <code>false</code>.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterHideClassChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterIdChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterInitializedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Name of the <a href="Rating.html#config_hiddenInput">hiddenInput</a> element. If not specified will use the name of the replaced radio.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterInputNameChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Label to be displayed with the Rating elements.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterLabelChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[DOM Node to display the text of the StarRating. If not specified try to query using HTML_PARSER an element inside boundingBox which matches <code>aui-rating-label-element</code>.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterLabelNodeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterLocaleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterRenderChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterRenderedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Stores the index of the selected element.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterSelectedIndexChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> will extract the value of the <code>title</code> attribute on the radio, and use it on the generated Rating elements.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterShowTitleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The size on ThumbRating is always 2 (i.e., thumb up and thumb down).<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterSizeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterSrcNodeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterStringsChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterTabIndexChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If set, will be used when there is no DOM <code>title</code> on the radio elements.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterTitleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if use of the WAI-ARIA Roles and States should be enabled for the Widget.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterUseARIAChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Stores the value of the current selected Rating element.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterValueChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterVisibleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterWidthChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>boundingBox</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> could be reseted (i.e., have no values selected).<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
+			<name>canReset</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>contentBox</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS class to be automatically added to the <code>boundingBox</code>.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>cssClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS classes applied on ThumbRating.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.util.HashMap","required":false}-->]]></description>
+			<name>cssClasses</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The number of selected starts when the Rating render.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"0"}-->]]></description>
+			<name>defaultSelected</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>destroyed</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether the Rating is disabled or not. Disabled Ratings don't allow hover or click, just display selected stars.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>disabled</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<a href="NodeList.html">NodeList</a> of elements used on the Rating. Each element is one Star.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>elements</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>focused</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>height</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Hidden input to handle the selected value. This hidden input replace the radio elements and keep the same name.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>hiddenInput</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS class added to hide the <code>boundingBox</code> when <a href="Component.html#config_visible">visible</a> is set to <code>false</code>.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false,"defaultValue":"aui-hide"}-->]]></description>
+			<name>hideClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>initialized</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Name of the <a href="Rating.html#config_hiddenInput">hiddenInput</a> element. If not specified will use the name of the replaced radio.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>inputName</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Label to be displayed with the Rating elements.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>label</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[DOM Node to display the text of the StarRating. If not specified try to query using HTML_PARSER an element inside boundingBox which matches <code>aui-rating-label-element</code>.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>labelNode</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false,"defaultValue":"en"}-->]]></description>
+			<name>locale</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onBoundingBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> could be reseted (i.e., have no values selected).<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onCanResetChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onContentBoxChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS class to be automatically added to the <code>boundingBox</code>.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onCssClassChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS classes applied on ThumbRating.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onCssClassesChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The number of selected starts when the Rating render.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onDefaultSelectedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onDestroyedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether the Rating is disabled or not. Disabled Ratings don't allow hover or click, just display selected stars.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onDisabledChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<a href="NodeList.html">NodeList</a> of elements used on the Rating. Each element is one Star.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onElementsChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onFocusedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onHeightChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Hidden input to handle the selected value. This hidden input replace the radio elements and keep the same name.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onHiddenInputChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[CSS class added to hide the <code>boundingBox</code> when <a href="Component.html#config_visible">visible</a> is set to <code>false</code>.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onHideClassChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onIdChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onInitializedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Name of the <a href="Rating.html#config_hiddenInput">hiddenInput</a> element. If not specified will use the name of the replaced radio.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onInputNameChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Label to be displayed with the Rating elements.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onLabelChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[DOM Node to display the text of the StarRating. If not specified try to query using HTML_PARSER an element inside boundingBox which matches <code>aui-rating-label-element</code>.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onLabelNodeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onLocaleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onRenderChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onRenderedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Stores the index of the selected element.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onSelectedIndexChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> will extract the value of the <code>title</code> attribute on the radio, and use it on the generated Rating elements.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onShowTitleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The size on ThumbRating is always 2 (i.e., thumb up and thumb down).<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onSizeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onSrcNodeChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onStringsChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onTabIndexChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If set, will be used when there is no DOM <code>title</code> on the radio elements.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onTitleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if use of the WAI-ARIA Roles and States should be enabled for the Widget.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onUseARIAChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Stores the value of the current selected Rating element.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onValueChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onVisibleChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onWidthChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Stores the index of the selected element.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"-1"}-->]]></description>
+			<name>selectedIndex</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> will extract the value of the <code>title</code> attribute on the radio, and use it on the generated Rating elements.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
+			<name>showTitle</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The size on ThumbRating is always 2 (i.e., thumb up and thumb down).<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"2"}-->]]></description>
+			<name>size</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>srcNode</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.util.HashMap","required":false,"defaultValue":"{}"}-->]]></description>
+			<name>strings</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"null"}-->]]></description>
+			<name>tabIndex</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If set, will be used when there is no DOM <code>title</code> on the radio elements.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false,"defaultValue":"null"}-->]]></description>
+			<name>title</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if use of the WAI-ARIA Roles and States should be enabled for the Widget.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>useARIA</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Stores the value of the current selected Rating element.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false,"defaultValue":"null"}-->]]></description>
+			<name>value</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
+			<name>visible</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false,"defaultValue":"false"}-->]]></description>
+			<name>widgetRender</name>
+			<required>false</required>
+			<type>Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>

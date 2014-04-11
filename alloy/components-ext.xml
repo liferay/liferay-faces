@@ -16,15 +16,355 @@
 			<function-signature>java.lang.String findClientId(java.lang.String)</function-signature>
 		</function>
 	</functions>
-	<component name="AceEditor" parentClass="javax.faces.component.UIInput" />
-	<component name="Tab" parentClass="javax.faces.component.UIColumn" rendererParentClass="com.liferay.faces.util.renderer.RendererBase">
+	<component description="AceEditor is an input component that renders a field for editing source code text."
+		name="AceEditor" parentClass="javax.faces.component.UIInput" />
+	<component description="Tab is a panel component that renders nested/child tags as content within itself."
+		name="Tab" parentClass="javax.faces.component.UIColumn" rendererParentClass="com.liferay.faces.util.renderer.RendererBase">
 		<attributes>
 			<attribute>
-				<description></description>
+				<description>
+					<![CDATA[__DESCRIPTION__]]>
+				</description>
 				<name>label</name>
 				<type>java.lang.String</type>
 			</attribute>
 		</attributes>
 	</component>
-	<component name="TabView" parentClass="javax.faces.component.UIData" />
+	<component description="TabView is an iterator component that renders tabs either statically or dynamically."
+		name="TabView" parentClass="javax.faces.component.UIData" />
+	<component description="StarRating is an input component that renders a set of stars." name="Rating"
+		preferredName="starRating" parentClass="javax.faces.component.html.HtmlSelectOneRadio">
+		<attributes>
+			<!-- Attributes that are found both in JSF and AlloyUI -->
+			<attribute>
+				<description>
+					<![CDATA[__DESCRIPTION__]]>
+				</description>
+				<name>disabled</name>
+				<type>java.lang.Boolean</type>
+				<jsfReservedAttribute>true</jsfReservedAttribute>
+				<jsfReservedAttributeType>boolean</jsfReservedAttributeType>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]>
+				</description>
+				<name>label</name>
+				<type>java.lang.String</type>
+				<jsfReservedAttribute>true</jsfReservedAttribute>
+				<jsfReservedAttributeType>String</jsfReservedAttributeType>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The title of the component, which is simply passed through as the html 'title' attribute of this component.]]>
+				</description>
+				<name>title</name>
+				<type>java.lang.String</type>
+				<jsfReservedAttribute>true</jsfReservedAttribute>
+				<jsfReservedAttributeType>String</jsfReservedAttributeType>
+			</attribute>
+			<!-- Attributes that default to jsfReservedAttribute=true -->
+			<attribute>
+				<description>
+					<![CDATA[A unique identifier for this component.]]>
+				</description>
+				<name>id</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When false, this component will not be rendered. The default value of this attribute is true.]]>
+				</description>
+				<name>rendered</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.Object</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<!-- Attributes that are inherited from HtmlSelectOneRadio -->
+			<attribute>
+				<description>
+					<![CDATA[The class name of the converter instance that is to be used by this component.]]>
+				</description>
+				<name>converter</name>
+				<type>javax.faces.convert.Converter</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[This message, or the result of the given expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]>
+				</description>
+				<name>converterMessage</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the Process Validations phase.]]>
+				</description>
+				<name>immediate</name>
+				<type>java.lang.Boolean</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, and a value has not been specified for this component, then the Process Validations phase will fail and a FacesMessage will be added to the FacesContext for this component.]]>
+				</description>
+				<name>required</name>
+				<type>java.lang.Boolean</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[This message, or the result of the given expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]>
+				</description>
+				<name>requiredMessage</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[__DESCRIPTION__]]>
+				</description>
+				<name>validator</name>
+				<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+					java.lang.Object)
+				</method-signature>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[__DESCRIPTION__]]>
+				</description>
+				<name>validatorMessage</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[__DESCRIPTION__]]>
+				</description>
+				<name>valueChangeListener</name>
+				<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A hot key character that makes it possible for the user to change focus to this component]]>
+				</description>
+				<name>accesskey</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[__DESCRIPTION__]]>
+				</description>
+				<name>border</name>
+				<type>int</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[This is an i18n attribute, which designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]>
+				</description>
+				<name>dir</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]>
+				</description>
+				<name>disabledClass</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]>
+				</description>
+				<name>enabledClass</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]>
+				</description>
+				<name>hideNoSelectionOption</name>
+				<type>java.lang.Boolean</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[__DESCRIPTION__]]>
+				</description>
+				<name>lang</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute after this component loses focus.]]>
+				</description>
+				<name>onblur</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]>
+				</description>
+				<name>onchange</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when this component is clicked.]]>
+				</description>
+				<name>onclick</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a double click event occurs.]]>
+				</description>
+				<name>ondblclick</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when this component gets focus.]]>
+				</description>
+				<name>onfocus</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keydown event occurs.]]>
+				</description>
+				<name>onkeydown</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keypress event occurs.]]>
+				</description>
+				<name>onkeypress</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keyup event occurs.]]>
+				</description>
+				<name>onkeyup</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mousedown event occurs.]]>
+				</description>
+				<name>onmousedown</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mousemove event occurs.]]>
+				</description>
+				<name>onmousemove</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseout event occurs.]]>
+				</description>
+				<name>onmouseout</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseover event occurs.]]>
+				</description>
+				<name>onmouseover</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseup event occurs.]]>
+				</description>
+				<name>onmouseup</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when the user selects this component.]]>
+				</description>
+				<name>onselect</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]>
+				</description>
+				<name>readonly</name>
+				<type>java.lang.Boolean</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The css class names that are rendered as the value of the class attribute of the outermost span of this component.]]>
+				</description>
+				<name>styleClass</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]>
+				</description>
+				<name>tabindex</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]>
+				</description>
+				<name>binding</name>
+				<type>javax.faces.component.UIComponent</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]>
+				</description>
+				<name>role</name>
+				<type>java.lang.String</type>
+				<componentPropertyRequired>false</componentPropertyRequired>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="ThumbRating" generateJava="false" parentClass="com.liferay.faces.alloy.component.rating.Rating"
+		rendererParentClass="com.liferay.faces.alloy.component.rating.RatingRenderer" />
+
 </components>
+
