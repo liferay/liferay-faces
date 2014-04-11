@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/showcase.xhtml">
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase-fn="http://liferay.com/faces/showcase-fn" xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/showcase.xhtml">
 
 	<ui:define name="content">
 		<f:metadata>
@@ -10,12 +10,24 @@
 		</f:metadata>
 		<h:outputStylesheet name="component.css" library="css" />
 		<c:set value="#{showcaseModelBean.selectedComponent}" var="selectedComponent" />
-		<c:set value="#{selectedComponent.prefix}-#{selectedComponent.lowerCaseName}-#{selectedComponent.useCaseName}" var="componentDescription" />
-		<button onclick="window.open('http://docs.liferay.com/faces/4.2/vdldoc/#{selectedComponent.prefix}/#{selectedComponent.camelCaseName}.html')" style="float: right;">#{i18n['vdl-documentation']}</button>
-		<h2>#{selectedComponent.prefix}:#{selectedComponent.camelCaseName} (#{i18n[selectedComponent.useCaseName]} #{i18n['usage']})</h2>
-		<p><h:outputText value="#{i18n[componentDescription]}" /></p>
+		<c:set value="#{selectedComponent.camelCaseName}" var="selectedComponentCamelCaseName" />
+		<c:set value="#{selectedComponent.lowerCaseName}" var="selectedComponentLowerCaseName" />
+		<c:set value="#{selectedComponent.useCaseName}" var="selectedComponentUseCaseName" />
+		<c:set value="#{selectedComponent.prefix}" var="selectedComponentPrefix" />
+		<c:set value="#{selectedComponentPrefix}:#{selectedComponentCamelCaseName}" var="selectedComponentFullName" />
+		<c:set value="#{selectedComponentPrefix}-#{selectedComponentLowerCaseName}" var="selectedComponentKey" />
+		<c:set value="#{selectedComponentPrefix}-#{selectedComponentLowerCaseName}-#{selectedComponentUseCaseName}" var="selectedComponentUseCaseKey" />
+		<c:set value="#{i18n[selectedComponentKey]}" var="selectedComponentDescription" /> 
+		<c:set value="#{i18n[selectedComponentUseCaseKey]}" var="selectedComponentUseCaseDescription" />
+		<c:set value="vdldoc:#{selectedComponentFullName}" var="selectedComponentDocKey" /> 
+		<button onclick="window.open('#{showcase-fn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;">#{i18n['vdl-documentation']}</button>
+		<h2>#{selectedComponentFullName} (#{i18n[selectedComponentUseCaseName]} #{i18n['usage']})</h2>
+		<p><h:outputText escape="false" value="#{showcase-fn:encodeDescription(selectedComponentDescription)}" /></p>
+		<c:if test="#{!empty selectedComponentUseCaseDescription}">
+			<p><h:outputText escape="false" value="#{showcase-fn:encodeDescription(selectedComponentUseCaseDescription)}" /></p>
+		</c:if>
 		<ui:include
-			src="/component/#{selectedComponent.prefix}/#{selectedComponent.lowerCaseName}/#{selectedComponent.useCaseName}/#{selectedComponent.camelCaseName}.xhtml" />
+			src="/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/#{selectedComponentUseCaseName}/#{selectedComponentCamelCaseName}.xhtml" />
 		<hr />
 		<h2>#{i18n['source-code']}</h2>
 		<aui:tabView value="#{showcaseModelBean.selectedComponent.useCaseCodeExamples}" var="useCaseCodeExample">
