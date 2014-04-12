@@ -27,7 +27,7 @@ import javax.faces.render.RenderKit;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.component.Widget;
+import com.liferay.faces.util.component.LiferayComponent;
 import com.liferay.faces.util.helper.StringHelper;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -105,20 +105,27 @@ public class RatingRenderer extends RatingRendererBase {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		String widgetVar = ComponentUtil.resolveWidgetVar(facesContext, (Widget) uiComponent);
-		encodeLiferayComponent(responseWriter, widgetVar);
+		String varName = ComponentUtil.getVarName(facesContext, (LiferayComponent) uiComponent);
+		encodeLiferayComponent(responseWriter, varName);
 		// The above should render something like this: var _1_WAR_showcaseportlet__j_idt6_j_idt19_j_idt22_j_idt23 =
 		// Liferay.component('_1_WAR_showcaseportlet__j_idt6_j_idt19_j_idt22_j_idt23');
 
 		//J-
 		// What should we consider when we initialize the value of this component?
-		// Contributor			  What value do they want?			   What will we do with this value?
-		// ---------------------- -----------------------------------  ---------------------------------------------
-		// 1. AlloyUI			  -1								   ignore.
-		// 2. JSF				  ""								   use as default.
-		// 3. Developer attribute widgetVar.get('defaultSelected')	   if defined, use this, but remember it is the number of stars, not the value.
-		// 4. Developer EL		  rating.getValue()					   if defined, use this.
-		// 5. User event											   no interaction from the user yet, so use the value chosen above.
+		//
+		// Contributor             What value do they want?             What will we do with this value?
+		// ----------------------  -----------------------------------  ---------------------------------------------
+		// 1. AlloyUI              -1                                   Ignore.
+		//
+		// 2. JSF                  ""                                   Use as default.
+		//
+		// 3. Developer Attribute  Liferay.component(liferayKey).       If defined, use this, but remember it is the
+		//                          .get('defaultSelected')             number of stars, not the value.
+		//
+		// 4. Developer EL         rating.getValue()                    If defined, use this.
+		//
+		// 5. User Event                                                Since no interaction from the user yet, use
+		//                                                              the value chosen above.
 		//J+
 
 		// 2. JSF
@@ -156,8 +163,9 @@ public class RatingRenderer extends RatingRendererBase {
 		responseWriter.write(StringPool.SEMICOLON);
 
 		// Make sure that the rendered rating is correct (i.e. how many stars are filled). The only way that the
-		// JavaScript widgetVar would have a selectedIndex at this point is if the defaultSelected attribute is set.
-		// Carefully decide if we need to clear the selected rating or if we need to select the user's selected rating.
+		// client-side LiferayComponent would have a selectedIndex at this point is if the defaultSelected attribute
+		// is set. Carefully decide if we need to clear the selected rating or if we need to select the user's selected
+		// rating.
 		Long selectedIndex = (Long) facesContext.getAttributes().remove(SELECTED_INDEX);
 
 		// If the selectedIndex is -1, then that means one of two things ... 1. the user selected no value (or cleared
@@ -167,7 +175,7 @@ public class RatingRenderer extends RatingRendererBase {
 
 			// This is case 1.  the user selected to clear the value.
 			if (facesContext.isPostback()) {
-				responseWriter.write(widgetVar);
+				responseWriter.write(varName);
 				responseWriter.write(".clearSelection();");
 			}
 
@@ -194,13 +202,13 @@ public class RatingRenderer extends RatingRendererBase {
 			String selectedIndexAsString = selectedIndex.toString();
 
 			responseWriter.write("var defaultSelectedIndex=");
-			responseWriter.write(widgetVar);
+			responseWriter.write(varName);
 			responseWriter.write(".get('selectedIndex');");
 
 			responseWriter.write("if(");
 			responseWriter.write(selectedIndexAsString);
 			responseWriter.write("!=defaultSelectedIndex){");
-			responseWriter.write(widgetVar);
+			responseWriter.write(varName);
 			responseWriter.write(".select(");
 			responseWriter.write(selectedIndexAsString);
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
@@ -210,17 +218,26 @@ public class RatingRenderer extends RatingRendererBase {
 
 		//J-
 		// What should we consider when a user clicks on the component?
-		// Contributor			  What value do they want?			   What will we do with this value?
-		// ---------------------- -----------------------------------  ---------------------------------------------
-		// 1. AlloyUI			  event.target.get('value')			   Use this as the value unless it is -1 which is the cancel value.
-		// 2. JSF				  ''								   use this value instead of -1 or the cancel value.
-		// 3. Developer attribute widgetVar.get('defaultSelected')	   ignore, because user input is overriding this.
-		// 4. Developer EL		  rating.getValue()					   ignore, because user input is overriding this.
-		// 5. User event		  event.target.get('value')			   unless it is the cancel or reset value, use this.
+		//
+		// Contributor             What value do they want?             What will we do with this value?
+		// ----------------------  -----------------------------------  ---------------------------------------------
+		// 1. AlloyUI              event.target.get('value')            Use this as the value unless it is -1 which is
+		//                                                              the cancel value.
+		//
+		// 2. JSF                  ''                                   Use this value instead of -1 or the cancel
+		//                                                              value.
+		//
+		// 3. Developer Attribute  Liferay.component('liferayKey')      Ignore because user input is overriding this.
+		//                           .get('defaultSelected')
+		//
+		// 4. Developer EL         rating.getValue()                    Ignore because user input is overriding this.
+		//
+		// 5. User Event           event.target.get('value')            Use this unless it is the cancel or reset
+		//                                                              value.
 		//J+
 
 		// Start encoding the onclick event.
-		responseWriter.write(widgetVar);
+		responseWriter.write(varName);
 		responseWriter.write(".on('click',function(event){");
 
 		// Within the onclick event, establish the newValue of the hiddenInput.

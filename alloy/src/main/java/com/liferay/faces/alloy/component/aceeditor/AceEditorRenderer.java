@@ -28,7 +28,7 @@ import javax.faces.convert.ConverterException;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.component.Widget;
+import com.liferay.faces.util.component.LiferayComponent;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -108,18 +108,18 @@ public class AceEditorRenderer extends AceEditorRendererBase {
 
 		if ((readOnly == null) || (!readOnly)) {
 
-			String widgetVar = ComponentUtil.resolveWidgetVar(facesContext, (Widget) uiComponent);
-			encodeLiferayComponent(responseWriter, widgetVar);
+			String varName = ComponentUtil.getVarName(facesContext, (LiferayComponent) uiComponent);
+			encodeLiferayComponent(responseWriter, varName);
 
 			char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
 			String hiddenInputClientId = uiComponent.getClientId() + separatorChar + StringPool.HIDDEN;
 			String encodedHiddenInputClientId = StringPool.POUND + ComponentUtil.escapeClientId(hiddenInputClientId);
 
-			responseWriter.write(widgetVar);
+			responseWriter.write(varName);
 			responseWriter.write(".getSession().on('change', function() {A.one('");
 			responseWriter.write(encodedHiddenInputClientId);
 			responseWriter.write("').set('value',");
-			responseWriter.write(widgetVar);
+			responseWriter.write(varName);
 			responseWriter.write(".getSession().getValue())});");
 		}
 	}

@@ -24,7 +24,7 @@ import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.util.AlloyConstants;
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.component.Widget;
+import com.liferay.faces.util.component.LiferayComponent;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererBase;
 
@@ -119,17 +119,17 @@ public abstract class AlloyRendererBase extends RendererBase {
 			responseWriter.write(StringPool.NEW_LINE);
 		}
 
-		String widgetVar = ComponentUtil.resolveWidgetVar(facesContext, (Widget) uiComponent);
+		String varName = ComponentUtil.getVarName(facesContext, (LiferayComponent) uiComponent);
 
 		if (isAjax(facesContext) || isForceInline(facesContext, uiComponent)) {
 
-			encodeLiferayComponent(responseWriter, widgetVar);
+			encodeLiferayComponent(responseWriter, varName);
 			responseWriter.write(IF);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
-			responseWriter.write(widgetVar);
+			responseWriter.write(varName);
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-			responseWriter.write(widgetVar);
+			responseWriter.write(varName);
 			responseWriter.write(StringPool.PERIOD);
 			responseWriter.write(DESTROY);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
@@ -183,16 +183,16 @@ public abstract class AlloyRendererBase extends RendererBase {
 	protected void encodeJavaScriptMain(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		String widgetVar = ComponentUtil.resolveWidgetVar(facesContext, (Widget) uiComponent);
+		String varName = ComponentUtil.getVarName(facesContext, (LiferayComponent) uiComponent);
 
 		responseWriter.write(VAR);
 		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(widgetVar);
+		responseWriter.write(varName);
 		responseWriter.write(StringPool.SEMICOLON);
 		responseWriter.write(LIFERAY_COMPONENT);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(widgetVar);
+		responseWriter.write(varName);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.COMMA);
 		responseWriter.write(FUNCTION);
@@ -202,10 +202,10 @@ public abstract class AlloyRendererBase extends RendererBase {
 		responseWriter.write(IF);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.EXCLAMATION);
-		responseWriter.write(widgetVar);
+		responseWriter.write(varName);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		responseWriter.write(widgetVar);
+		responseWriter.write(varName);
 		responseWriter.write(StringPool.EQUAL);
 		responseWriter.write(NEW);
 		responseWriter.write(StringPool.SPACE);
@@ -221,7 +221,7 @@ public abstract class AlloyRendererBase extends RendererBase {
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		responseWriter.write(RETURN);
 		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(widgetVar);
+		responseWriter.write(varName);
 		responseWriter.write(StringPool.SEMICOLON);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
@@ -229,7 +229,7 @@ public abstract class AlloyRendererBase extends RendererBase {
 		responseWriter.write(LIFERAY_COMPONENT);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(widgetVar);
+		responseWriter.write(varName);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 		responseWriter.write(StringPool.SEMICOLON);
@@ -240,16 +240,16 @@ public abstract class AlloyRendererBase extends RendererBase {
 		// no-op
 	}
 
-	protected void encodeLiferayComponent(ResponseWriter responseWriter, String widgetVar) throws IOException {
+	protected void encodeLiferayComponent(ResponseWriter responseWriter, String varName) throws IOException {
 
 		responseWriter.write(VAR);
 		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(widgetVar);
+		responseWriter.write(varName);
 		responseWriter.write(StringPool.EQUAL);
 		responseWriter.write(LIFERAY_COMPONENT);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(widgetVar);
+		responseWriter.write(varName);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 		responseWriter.write(StringPool.SEMICOLON);

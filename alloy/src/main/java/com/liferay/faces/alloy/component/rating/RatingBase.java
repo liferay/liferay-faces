@@ -18,14 +18,14 @@ import javax.annotation.Generated;
 import javax.faces.component.html.HtmlSelectOneRadio;
 
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.component.Widget;
+import com.liferay.faces.util.component.LiferayComponent;
 
 /**
  * @author  Bruno Basto
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class RatingBase extends HtmlSelectOneRadio implements Styleable, Widget, RatingComponent {
+public abstract class RatingBase extends HtmlSelectOneRadio implements Styleable, LiferayComponent, RatingComponent {
 
 	@Override
 	public String getAfterBoundingBoxChange() {
@@ -928,13 +928,13 @@ public abstract class RatingBase extends HtmlSelectOneRadio implements Styleable
 	}
 
 	@Override
-	public String getWidgetVar() {
-		return (String) getStateHelper().eval(WIDGET_VAR, null);
+	public String getLiferayKey() {
+		return (String) getStateHelper().eval(LIFERAY_KEY, null);
 	}
 
 	@Override
-	public void setWidgetVar(String widgetVar) {
-		getStateHelper().put(WIDGET_VAR, widgetVar);
+	public void setLiferayKey(String liferayKey) {
+		getStateHelper().put(LIFERAY_KEY, liferayKey);
 	}
 
 	@Override
