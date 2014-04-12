@@ -36,7 +36,7 @@ public class ComponentUtil {
 	// Private Constants
 	private static final String DOUBLE_BACKSLASH_COLON = "\\\\\\\\:";
 	private static final String REGEX_COLON = "[:]";
-	private static final String REGEX_WIDGET_VAR = "-|";
+	private static final String REGEX_LIFERAY_KEY = "-|";
 
 	public static String appendToCssClasses(String cssClass, String suffix) {
 
@@ -192,24 +192,24 @@ public class ComponentUtil {
 		return matchComponentInHierarchy(facesContext, facesContext.getViewRoot(), partialClientId);
 	}
 
-	public static String resolveWidgetVar(FacesContext facesContext, Widget widget) {
+	public static String getVarName(FacesContext facesContext, LiferayComponent liferayComponent) {
 
 		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
 
-		String widgetVar = widget.getWidgetVar();
+		String liferayKey = liferayComponent.getLiferayKey();
 
-		if (widgetVar == null) {
-			widgetVar = widget.getClientId();
+		if (liferayKey == null) {
+			liferayKey = liferayComponent.getClientId();
 		}
 		else {
 			UIViewRoot uiViewRoot = facesContext.getViewRoot();
 			String namingContainerId = uiViewRoot.getContainerClientId(facesContext);
-			widgetVar = namingContainerId + separatorChar + widgetVar;
+			liferayKey = namingContainerId + separatorChar + liferayKey;
 		}
 
-		String regex = REGEX_WIDGET_VAR + separatorChar;
-		widgetVar = widgetVar.replaceAll(regex, StringPool.UNDERLINE);
+		String regex = REGEX_LIFERAY_KEY + separatorChar;
+		liferayKey = liferayKey.replaceAll(regex, StringPool.UNDERLINE);
 
-		return widgetVar;
+		return liferayKey;
 	}
 }
