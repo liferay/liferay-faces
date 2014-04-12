@@ -18,14 +18,14 @@ import javax.annotation.Generated;
 import javax.faces.component.UIData;
 
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.component.Widget;
+import com.liferay.faces.util.component.LiferayComponent;
 
 /**
  * @author  Bruno Basto
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class TabViewBase extends UIData implements Styleable, Widget, TabViewComponent {
+public abstract class TabViewBase extends UIData implements Styleable, LiferayComponent, TabViewComponent {
 
 	@Override
 	public String getActiveDescendant() {
@@ -668,13 +668,13 @@ public abstract class TabViewBase extends UIData implements Styleable, Widget, T
 	}
 
 	@Override
-	public String getWidgetVar() {
-		return (String) getStateHelper().eval(WIDGET_VAR, null);
+	public String getLiferayKey() {
+		return (String) getStateHelper().eval(LIFERAY_KEY, null);
 	}
 
 	@Override
-	public void setWidgetVar(String widgetVar) {
-		getStateHelper().put(WIDGET_VAR, widgetVar);
+	public void setLiferayKey(String liferayKey) {
+		getStateHelper().put(LIFERAY_KEY, liferayKey);
 	}
 
 	@Override

@@ -15,17 +15,17 @@ package com.liferay.faces.util.component;
 
 /**
  * This interface should be implemented by classes that extend {@link UIComponent} if they provide the ability to access
- * a "widget" via JavaScript on the client-side.
+ * the value of a client-side UI component instance (Liferay Component) via JavaScript.
  *
  * @author  Neil Griffin
  */
-public interface Widget {
+public interface LiferayComponent {
 
-	public static final String WIDGET_VAR = "widgetVar";
+	public static final String LIFERAY_KEY = "liferayKey";
 
 	public String getClientId();
 
-	public String getWidgetVar();
+	public String getLiferayKey();
 
-	public void setWidgetVar(String widgetVar);
+	public void setLiferayKey(String liferayKey);
 }
