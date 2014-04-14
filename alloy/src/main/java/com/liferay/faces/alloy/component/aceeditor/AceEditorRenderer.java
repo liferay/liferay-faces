@@ -79,8 +79,8 @@ public class AceEditorRenderer extends AceEditorRendererBase {
 		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
 		responseWriter.endElement(StringPool.DIV);
 
-		AceEditorComponent aceEditorComponent = (AceEditorComponent) uiComponent;
-		Boolean readOnly = aceEditorComponent.isReadOnly();
+		AceEditorAlloy aceEditorAlloy = (AceEditorAlloy) uiComponent;
+		Boolean readOnly = aceEditorAlloy.isReadOnly();
 
 		if ((readOnly == null) || (!readOnly)) {
 
@@ -103,8 +103,8 @@ public class AceEditorRenderer extends AceEditorRendererBase {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		AceEditorComponent aceEditorComponent = (AceEditorComponent) uiComponent;
-		Boolean readOnly = aceEditorComponent.isReadOnly();
+		AceEditorAlloy aceEditorAlloy = (AceEditorAlloy) uiComponent;
+		Boolean readOnly = aceEditorAlloy.isReadOnly();
 
 		if ((readOnly == null) || (!readOnly)) {
 
@@ -126,7 +126,7 @@ public class AceEditorRenderer extends AceEditorRendererBase {
 	}
 
 	@Override
-	protected void encodeValue(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Object value,
+	protected void encodeValue(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Object value,
 		boolean first) throws IOException {
 
 		if (value instanceof String) {
@@ -139,7 +139,7 @@ public class AceEditorRenderer extends AceEditorRendererBase {
 			value = valueAsString;
 		}
 
-		super.encodeValue(responseWriter, aceEditorComponent, value, first);
+		super.encodeValue(responseWriter, aceEditorAlloy, value, first);
 	}
 
 	@Override

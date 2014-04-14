@@ -84,7 +84,7 @@
 				</description>
 				<name>value</name>
 				<type>java.lang.Object</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<!-- Attributes that are inherited from HtmlSelectOneRadio -->
 			<attribute>
@@ -93,7 +93,7 @@
 				</description>
 				<name>converter</name>
 				<type>javax.faces.convert.Converter</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -101,7 +101,7 @@
 				</description>
 				<name>converterMessage</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -109,7 +109,7 @@
 				</description>
 				<name>immediate</name>
 				<type>java.lang.Boolean</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -117,7 +117,7 @@
 				</description>
 				<name>required</name>
 				<type>java.lang.Boolean</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -125,7 +125,7 @@
 				</description>
 				<name>requiredMessage</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -135,7 +135,7 @@
 				<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 					java.lang.Object)
 				</method-signature>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -143,7 +143,7 @@
 				</description>
 				<name>validatorMessage</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -151,7 +151,7 @@
 				</description>
 				<name>valueChangeListener</name>
 				<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -159,7 +159,7 @@
 				</description>
 				<name>accesskey</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -167,7 +167,7 @@
 				</description>
 				<name>border</name>
 				<type>int</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -175,7 +175,7 @@
 				</description>
 				<name>dir</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -183,7 +183,7 @@
 				</description>
 				<name>disabledClass</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -191,7 +191,7 @@
 				</description>
 				<name>enabledClass</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -199,7 +199,7 @@
 				</description>
 				<name>hideNoSelectionOption</name>
 				<type>java.lang.Boolean</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -207,7 +207,7 @@
 				</description>
 				<name>lang</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -215,7 +215,7 @@
 				</description>
 				<name>onblur</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -223,7 +223,7 @@
 				</description>
 				<name>onchange</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -231,7 +231,7 @@
 				</description>
 				<name>onclick</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -239,7 +239,7 @@
 				</description>
 				<name>ondblclick</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -247,7 +247,7 @@
 				</description>
 				<name>onfocus</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -255,7 +255,7 @@
 				</description>
 				<name>onkeydown</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -263,7 +263,7 @@
 				</description>
 				<name>onkeypress</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -271,7 +271,7 @@
 				</description>
 				<name>onkeyup</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -279,7 +279,7 @@
 				</description>
 				<name>onmousedown</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -287,7 +287,7 @@
 				</description>
 				<name>onmousemove</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -295,7 +295,7 @@
 				</description>
 				<name>onmouseout</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -303,7 +303,7 @@
 				</description>
 				<name>onmouseover</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -311,7 +311,7 @@
 				</description>
 				<name>onmouseup</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -319,7 +319,7 @@
 				</description>
 				<name>onselect</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -327,7 +327,7 @@
 				</description>
 				<name>readonly</name>
 				<type>java.lang.Boolean</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -335,7 +335,7 @@
 				</description>
 				<name>styleClass</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -343,7 +343,7 @@
 				</description>
 				<name>tabindex</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -351,7 +351,7 @@
 				</description>
 				<name>binding</name>
 				<type>javax.faces.component.UIComponent</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -359,7 +359,7 @@
 				</description>
 				<name>role</name>
 				<type>java.lang.String</type>
-				<componentPropertyRequired>false</componentPropertyRequired>
+				<generateJava>false</generateJava>
 			</attribute>
 		</attributes>
 	</component>

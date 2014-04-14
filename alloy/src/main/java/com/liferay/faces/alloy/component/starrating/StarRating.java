@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.rating;
+package com.liferay.faces.alloy.component.starrating;
 
 import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
@@ -21,17 +21,18 @@ import com.liferay.faces.util.lang.StringPool;
 
 
 /**
- * @author  Vernon Singleton
+ * @author  Bruno Basto
+ * @author  Kyle Stiemann
  */
-@FacesComponent(value = Rating.COMPONENT_TYPE)
-public class Rating extends RatingBase {
+@FacesComponent(value = StarRating.COMPONENT_TYPE)
+public class StarRating extends StarRatingBase {
 
 	// Public Constants
-	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.rating";
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.rating.Rating";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.rating.RatingRenderer";
+	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.starrating";
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.starrating.StarRating";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.starrating.StarRatingRenderer";
 
-	public Rating() {
+	public StarRating() {
 
 		super();
 		setRendererType(RENDERER_TYPE);
@@ -76,5 +77,4 @@ public class Rating extends RatingBase {
 	public Boolean isWidgetRender() {
 		return (Boolean) getStateHelper().eval(WIDGET_RENDER, true);
 	}
-
 }

@@ -17,15 +17,15 @@ package com.liferay.faces.alloy.component.aceeditor;
 import javax.annotation.Generated;
 import javax.faces.component.UIInput;
 
-import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.Styleable;
+import com.liferay.faces.util.component.ClientComponent;
 
 /**
  * @author  Bruno Basto
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class AceEditorBase extends UIInput implements Styleable, ClientComponent, AceEditorComponent {
+public abstract class AceEditorBase extends UIInput implements Styleable, ClientComponent, AceEditorAlloy {
 
 	@Override
 	public String getAfterBoundingBoxChange() {
@@ -275,6 +275,16 @@ public abstract class AceEditorBase extends UIInput implements Styleable, Client
 	@Override
 	public void setBoundingBox(String boundingBox) {
 		getStateHelper().put(BOUNDING_BOX, boundingBox);
+	}
+
+	@Override
+	public String getClientKey() {
+		return (String) getStateHelper().eval(CLIENT_KEY, getClientId());
+	}
+
+	@Override
+	public void setClientKey(String clientKey) {
+		getStateHelper().put(CLIENT_KEY, clientKey);
 	}
 
 	@Override
@@ -715,16 +725,6 @@ public abstract class AceEditorBase extends UIInput implements Styleable, Client
 	@Override
 	public void setWidgetRender(Boolean widgetRender) {
 		getStateHelper().put(WIDGET_RENDER, widgetRender);
-	}
-
-	@Override
-	public String getClientKey() {
-		return (String) getStateHelper().eval(CLIENT_KEY, getClientId());
-	}
-
-	@Override
-	public void setClientKey(String liferayKey) {
-		getStateHelper().put(CLIENT_KEY, liferayKey);
 	}
 
 	@Override

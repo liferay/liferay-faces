@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.rating;
+package com.liferay.faces.alloy.component.starrating;
 //J-
 
 import javax.annotation.Generated;
@@ -25,7 +25,7 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class RatingBase extends HtmlSelectOneRadio implements Styleable, ClientComponent, RatingComponent {
+public abstract class StarRatingBase extends HtmlSelectOneRadio implements Styleable, ClientComponent, StarRatingAlloy {
 
 	@Override
 	public String getAfterBoundingBoxChange() {
@@ -365,6 +365,16 @@ public abstract class RatingBase extends HtmlSelectOneRadio implements Styleable
 	@Override
 	public void setCanReset(Boolean canReset) {
 		getStateHelper().put(CAN_RESET, canReset);
+	}
+
+	@Override
+	public String getClientKey() {
+		return (String) getStateHelper().eval(CLIENT_KEY, getClientId());
+	}
+
+	@Override
+	public void setClientKey(String clientKey) {
+		getStateHelper().put(CLIENT_KEY, clientKey);
 	}
 
 	@Override
@@ -925,16 +935,6 @@ public abstract class RatingBase extends HtmlSelectOneRadio implements Styleable
 	@Override
 	public void setWidgetRender(Boolean widgetRender) {
 		getStateHelper().put(WIDGET_RENDER, widgetRender);
-	}
-
-	@Override
-	public String getClientKey() {
-		return (String) getStateHelper().eval(CLIENT_KEY, getClientId());
-	}
-
-	@Override
-	public void setClientKey(String liferayKey) {
-		getStateHelper().put(CLIENT_KEY, liferayKey);
 	}
 
 	@Override

@@ -65,198 +65,198 @@ public abstract class AceEditorRendererBase extends AlloyRendererBase {
 	@Override
 	protected void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
 
-		AceEditorComponent aceEditorComponent = (AceEditorComponent) uiComponent;
+		AceEditorAlloy aceEditorAlloy = (AceEditorAlloy) uiComponent;
 		boolean first = true;
 
-		String boundingBox = aceEditorComponent.getBoundingBox();
+		String boundingBox = aceEditorAlloy.getBoundingBox();
 
 		if (boundingBox != null) {
 
-			encodeBoundingBox(responseWriter, aceEditorComponent, boundingBox, first);
+			encodeBoundingBox(responseWriter, aceEditorAlloy, boundingBox, first);
 			first = false;
 		}
 
-		String contentBox = aceEditorComponent.getContentBox();
+		String contentBox = aceEditorAlloy.getContentBox();
 
 		if (contentBox != null) {
 
-			encodeContentBox(responseWriter, aceEditorComponent, contentBox, first);
+			encodeContentBox(responseWriter, aceEditorAlloy, contentBox, first);
 			first = false;
 		}
 
-		Boolean destroyed = aceEditorComponent.isDestroyed();
+		Boolean destroyed = aceEditorAlloy.isDestroyed();
 
 		if (destroyed != null) {
 
-			encodeDestroyed(responseWriter, aceEditorComponent, destroyed, first);
+			encodeDestroyed(responseWriter, aceEditorAlloy, destroyed, first);
 			first = false;
 		}
 
-		Boolean disabled = aceEditorComponent.isDisabled();
+		Boolean disabled = aceEditorAlloy.isDisabled();
 
 		if (disabled != null) {
 
-			encodeDisabled(responseWriter, aceEditorComponent, disabled, first);
+			encodeDisabled(responseWriter, aceEditorAlloy, disabled, first);
 			first = false;
 		}
 
-		Boolean focused = aceEditorComponent.isFocused();
+		Boolean focused = aceEditorAlloy.isFocused();
 
 		if (focused != null) {
 
-			encodeFocused(responseWriter, aceEditorComponent, focused, first);
+			encodeFocused(responseWriter, aceEditorAlloy, focused, first);
 			first = false;
 		}
 
-		Object height = aceEditorComponent.getHeight();
+		Object height = aceEditorAlloy.getHeight();
 
 		if (height != null) {
 
-			encodeHeight(responseWriter, aceEditorComponent, height, first);
+			encodeHeight(responseWriter, aceEditorAlloy, height, first);
 			first = false;
 		}
 
-		Boolean highlightActiveLine = aceEditorComponent.isHighlightActiveLine();
+		Boolean highlightActiveLine = aceEditorAlloy.isHighlightActiveLine();
 
 		if (highlightActiveLine != null) {
 
-			encodeHighlightActiveLine(responseWriter, aceEditorComponent, highlightActiveLine, first);
+			encodeHighlightActiveLine(responseWriter, aceEditorAlloy, highlightActiveLine, first);
 			first = false;
 		}
 
-		String id = aceEditorComponent.getId();
+		String id = aceEditorAlloy.getId();
 
 		if (id != null) {
 
-			encodeId(responseWriter, aceEditorComponent, id, first);
+			encodeId(responseWriter, aceEditorAlloy, id, first);
 			first = false;
 		}
 
-		Boolean initialized = aceEditorComponent.isInitialized();
+		Boolean initialized = aceEditorAlloy.isInitialized();
 
 		if (initialized != null) {
 
-			encodeInitialized(responseWriter, aceEditorComponent, initialized, first);
+			encodeInitialized(responseWriter, aceEditorAlloy, initialized, first);
 			first = false;
 		}
 
-		String locale = aceEditorComponent.getLocale();
+		String locale = aceEditorAlloy.getLocale();
 
 		if (locale != null) {
 
-			encodeLocale(responseWriter, aceEditorComponent, locale, first);
+			encodeLocale(responseWriter, aceEditorAlloy, locale, first);
 			first = false;
 		}
 
-		String mode = aceEditorComponent.getMode();
+		String mode = aceEditorAlloy.getMode();
 
 		if (mode != null) {
 
-			encodeMode(responseWriter, aceEditorComponent, mode, first);
+			encodeMode(responseWriter, aceEditorAlloy, mode, first);
 			first = false;
 		}
 
-		Boolean readOnly = aceEditorComponent.isReadOnly();
+		Boolean readOnly = aceEditorAlloy.isReadOnly();
 
 		if (readOnly != null) {
 
-			encodeReadOnly(responseWriter, aceEditorComponent, readOnly, first);
+			encodeReadOnly(responseWriter, aceEditorAlloy, readOnly, first);
 			first = false;
 		}
 
-		Boolean rendered = aceEditorComponent.isRendered();
+		Boolean rendered = aceEditorAlloy.isRendered();
 
 		if (rendered != null) {
 
-			encodeRendered(responseWriter, aceEditorComponent, rendered, first);
+			encodeRendered(responseWriter, aceEditorAlloy, rendered, first);
 			first = false;
 		}
 
-		Boolean showPrintMargin = aceEditorComponent.isShowPrintMargin();
+		Boolean showPrintMargin = aceEditorAlloy.isShowPrintMargin();
 
 		if (showPrintMargin != null) {
 
-			encodeShowPrintMargin(responseWriter, aceEditorComponent, showPrintMargin, first);
+			encodeShowPrintMargin(responseWriter, aceEditorAlloy, showPrintMargin, first);
 			first = false;
 		}
 
-		String srcNode = aceEditorComponent.getSrcNode();
+		String srcNode = aceEditorAlloy.getSrcNode();
 
 		if (srcNode != null) {
 
-			encodeSrcNode(responseWriter, aceEditorComponent, srcNode, first);
+			encodeSrcNode(responseWriter, aceEditorAlloy, srcNode, first);
 			first = false;
 		}
 
-		Object strings = aceEditorComponent.getStrings();
+		Object strings = aceEditorAlloy.getStrings();
 
 		if (strings != null) {
 
-			encodeStrings(responseWriter, aceEditorComponent, strings, first);
+			encodeStrings(responseWriter, aceEditorAlloy, strings, first);
 			first = false;
 		}
 
-		Object tabIndex = aceEditorComponent.getTabIndex();
+		Object tabIndex = aceEditorAlloy.getTabIndex();
 
 		if (tabIndex != null) {
 
-			encodeTabIndex(responseWriter, aceEditorComponent, tabIndex, first);
+			encodeTabIndex(responseWriter, aceEditorAlloy, tabIndex, first);
 			first = false;
 		}
 
-		Object tabSize = aceEditorComponent.getTabSize();
+		Object tabSize = aceEditorAlloy.getTabSize();
 
 		if (tabSize != null) {
 
-			encodeTabSize(responseWriter, aceEditorComponent, tabSize, first);
+			encodeTabSize(responseWriter, aceEditorAlloy, tabSize, first);
 			first = false;
 		}
 
-		Boolean useSoftTabs = aceEditorComponent.isUseSoftTabs();
+		Boolean useSoftTabs = aceEditorAlloy.isUseSoftTabs();
 
 		if (useSoftTabs != null) {
 
-			encodeUseSoftTabs(responseWriter, aceEditorComponent, useSoftTabs, first);
+			encodeUseSoftTabs(responseWriter, aceEditorAlloy, useSoftTabs, first);
 			first = false;
 		}
 
-		Boolean useWrapMode = aceEditorComponent.isUseWrapMode();
+		Boolean useWrapMode = aceEditorAlloy.isUseWrapMode();
 
 		if (useWrapMode != null) {
 
-			encodeUseWrapMode(responseWriter, aceEditorComponent, useWrapMode, first);
+			encodeUseWrapMode(responseWriter, aceEditorAlloy, useWrapMode, first);
 			first = false;
 		}
 
-		Object value = aceEditorComponent.getValue();
+		Object value = aceEditorAlloy.getValue();
 
 		if (value != null) {
 
-			encodeValue(responseWriter, aceEditorComponent, value, first);
+			encodeValue(responseWriter, aceEditorAlloy, value, first);
 			first = false;
 		}
 
-		Boolean visible = aceEditorComponent.isVisible();
+		Boolean visible = aceEditorAlloy.isVisible();
 
 		if (visible != null) {
 
-			encodeVisible(responseWriter, aceEditorComponent, visible, first);
+			encodeVisible(responseWriter, aceEditorAlloy, visible, first);
 			first = false;
 		}
 
-		Boolean widgetRender = aceEditorComponent.isWidgetRender();
+		Boolean widgetRender = aceEditorAlloy.isWidgetRender();
 
 		if (widgetRender != null) {
 
-			encodeWidgetRender(responseWriter, aceEditorComponent, widgetRender, first);
+			encodeWidgetRender(responseWriter, aceEditorAlloy, widgetRender, first);
 			first = false;
 		}
 
-		Object width = aceEditorComponent.getWidth();
+		Object width = aceEditorAlloy.getWidth();
 
 		if (width != null) {
 
-			encodeWidth(responseWriter, aceEditorComponent, width, first);
+			encodeWidth(responseWriter, aceEditorAlloy, width, first);
 			first = false;
 		}
 
@@ -266,195 +266,195 @@ public abstract class AceEditorRendererBase extends AlloyRendererBase {
 
 		first = true;
 
-		String afterBoundingBoxChange = aceEditorComponent.getAfterBoundingBoxChange();
+		String afterBoundingBoxChange = aceEditorAlloy.getAfterBoundingBoxChange();
 
 		if (afterBoundingBoxChange != null) {
 
-			encodeAfterBoundingBoxChange(responseWriter, aceEditorComponent, afterBoundingBoxChange, first);
+			encodeAfterBoundingBoxChange(responseWriter, aceEditorAlloy, afterBoundingBoxChange, first);
 			first = false;
 		}
 
-		String afterContentBoxChange = aceEditorComponent.getAfterContentBoxChange();
+		String afterContentBoxChange = aceEditorAlloy.getAfterContentBoxChange();
 
 		if (afterContentBoxChange != null) {
 
-			encodeAfterContentBoxChange(responseWriter, aceEditorComponent, afterContentBoxChange, first);
+			encodeAfterContentBoxChange(responseWriter, aceEditorAlloy, afterContentBoxChange, first);
 			first = false;
 		}
 
-		String afterDestroyedChange = aceEditorComponent.getAfterDestroyedChange();
+		String afterDestroyedChange = aceEditorAlloy.getAfterDestroyedChange();
 
 		if (afterDestroyedChange != null) {
 
-			encodeAfterDestroyedChange(responseWriter, aceEditorComponent, afterDestroyedChange, first);
+			encodeAfterDestroyedChange(responseWriter, aceEditorAlloy, afterDestroyedChange, first);
 			first = false;
 		}
 
-		String afterDisabledChange = aceEditorComponent.getAfterDisabledChange();
+		String afterDisabledChange = aceEditorAlloy.getAfterDisabledChange();
 
 		if (afterDisabledChange != null) {
 
-			encodeAfterDisabledChange(responseWriter, aceEditorComponent, afterDisabledChange, first);
+			encodeAfterDisabledChange(responseWriter, aceEditorAlloy, afterDisabledChange, first);
 			first = false;
 		}
 
-		String afterFocusedChange = aceEditorComponent.getAfterFocusedChange();
+		String afterFocusedChange = aceEditorAlloy.getAfterFocusedChange();
 
 		if (afterFocusedChange != null) {
 
-			encodeAfterFocusedChange(responseWriter, aceEditorComponent, afterFocusedChange, first);
+			encodeAfterFocusedChange(responseWriter, aceEditorAlloy, afterFocusedChange, first);
 			first = false;
 		}
 
-		String afterHeightChange = aceEditorComponent.getAfterHeightChange();
+		String afterHeightChange = aceEditorAlloy.getAfterHeightChange();
 
 		if (afterHeightChange != null) {
 
-			encodeAfterHeightChange(responseWriter, aceEditorComponent, afterHeightChange, first);
+			encodeAfterHeightChange(responseWriter, aceEditorAlloy, afterHeightChange, first);
 			first = false;
 		}
 
-		String afterHighlightActiveLineChange = aceEditorComponent.getAfterHighlightActiveLineChange();
+		String afterHighlightActiveLineChange = aceEditorAlloy.getAfterHighlightActiveLineChange();
 
 		if (afterHighlightActiveLineChange != null) {
 
-			encodeAfterHighlightActiveLineChange(responseWriter, aceEditorComponent, afterHighlightActiveLineChange, first);
+			encodeAfterHighlightActiveLineChange(responseWriter, aceEditorAlloy, afterHighlightActiveLineChange, first);
 			first = false;
 		}
 
-		String afterIdChange = aceEditorComponent.getAfterIdChange();
+		String afterIdChange = aceEditorAlloy.getAfterIdChange();
 
 		if (afterIdChange != null) {
 
-			encodeAfterIdChange(responseWriter, aceEditorComponent, afterIdChange, first);
+			encodeAfterIdChange(responseWriter, aceEditorAlloy, afterIdChange, first);
 			first = false;
 		}
 
-		String afterInitializedChange = aceEditorComponent.getAfterInitializedChange();
+		String afterInitializedChange = aceEditorAlloy.getAfterInitializedChange();
 
 		if (afterInitializedChange != null) {
 
-			encodeAfterInitializedChange(responseWriter, aceEditorComponent, afterInitializedChange, first);
+			encodeAfterInitializedChange(responseWriter, aceEditorAlloy, afterInitializedChange, first);
 			first = false;
 		}
 
-		String afterLocaleChange = aceEditorComponent.getAfterLocaleChange();
+		String afterLocaleChange = aceEditorAlloy.getAfterLocaleChange();
 
 		if (afterLocaleChange != null) {
 
-			encodeAfterLocaleChange(responseWriter, aceEditorComponent, afterLocaleChange, first);
+			encodeAfterLocaleChange(responseWriter, aceEditorAlloy, afterLocaleChange, first);
 			first = false;
 		}
 
-		String afterModeChange = aceEditorComponent.getAfterModeChange();
+		String afterModeChange = aceEditorAlloy.getAfterModeChange();
 
 		if (afterModeChange != null) {
 
-			encodeAfterModeChange(responseWriter, aceEditorComponent, afterModeChange, first);
+			encodeAfterModeChange(responseWriter, aceEditorAlloy, afterModeChange, first);
 			first = false;
 		}
 
-		String afterReadOnlyChange = aceEditorComponent.getAfterReadOnlyChange();
+		String afterReadOnlyChange = aceEditorAlloy.getAfterReadOnlyChange();
 
 		if (afterReadOnlyChange != null) {
 
-			encodeAfterReadOnlyChange(responseWriter, aceEditorComponent, afterReadOnlyChange, first);
+			encodeAfterReadOnlyChange(responseWriter, aceEditorAlloy, afterReadOnlyChange, first);
 			first = false;
 		}
 
-		String afterRenderChange = aceEditorComponent.getAfterRenderChange();
+		String afterRenderChange = aceEditorAlloy.getAfterRenderChange();
 
 		if (afterRenderChange != null) {
 
-			encodeAfterRenderChange(responseWriter, aceEditorComponent, afterRenderChange, first);
+			encodeAfterRenderChange(responseWriter, aceEditorAlloy, afterRenderChange, first);
 			first = false;
 		}
 
-		String afterRenderedChange = aceEditorComponent.getAfterRenderedChange();
+		String afterRenderedChange = aceEditorAlloy.getAfterRenderedChange();
 
 		if (afterRenderedChange != null) {
 
-			encodeAfterRenderedChange(responseWriter, aceEditorComponent, afterRenderedChange, first);
+			encodeAfterRenderedChange(responseWriter, aceEditorAlloy, afterRenderedChange, first);
 			first = false;
 		}
 
-		String afterShowPrintMarginChange = aceEditorComponent.getAfterShowPrintMarginChange();
+		String afterShowPrintMarginChange = aceEditorAlloy.getAfterShowPrintMarginChange();
 
 		if (afterShowPrintMarginChange != null) {
 
-			encodeAfterShowPrintMarginChange(responseWriter, aceEditorComponent, afterShowPrintMarginChange, first);
+			encodeAfterShowPrintMarginChange(responseWriter, aceEditorAlloy, afterShowPrintMarginChange, first);
 			first = false;
 		}
 
-		String afterSrcNodeChange = aceEditorComponent.getAfterSrcNodeChange();
+		String afterSrcNodeChange = aceEditorAlloy.getAfterSrcNodeChange();
 
 		if (afterSrcNodeChange != null) {
 
-			encodeAfterSrcNodeChange(responseWriter, aceEditorComponent, afterSrcNodeChange, first);
+			encodeAfterSrcNodeChange(responseWriter, aceEditorAlloy, afterSrcNodeChange, first);
 			first = false;
 		}
 
-		String afterStringsChange = aceEditorComponent.getAfterStringsChange();
+		String afterStringsChange = aceEditorAlloy.getAfterStringsChange();
 
 		if (afterStringsChange != null) {
 
-			encodeAfterStringsChange(responseWriter, aceEditorComponent, afterStringsChange, first);
+			encodeAfterStringsChange(responseWriter, aceEditorAlloy, afterStringsChange, first);
 			first = false;
 		}
 
-		String afterTabIndexChange = aceEditorComponent.getAfterTabIndexChange();
+		String afterTabIndexChange = aceEditorAlloy.getAfterTabIndexChange();
 
 		if (afterTabIndexChange != null) {
 
-			encodeAfterTabIndexChange(responseWriter, aceEditorComponent, afterTabIndexChange, first);
+			encodeAfterTabIndexChange(responseWriter, aceEditorAlloy, afterTabIndexChange, first);
 			first = false;
 		}
 
-		String afterTabSizeChange = aceEditorComponent.getAfterTabSizeChange();
+		String afterTabSizeChange = aceEditorAlloy.getAfterTabSizeChange();
 
 		if (afterTabSizeChange != null) {
 
-			encodeAfterTabSizeChange(responseWriter, aceEditorComponent, afterTabSizeChange, first);
+			encodeAfterTabSizeChange(responseWriter, aceEditorAlloy, afterTabSizeChange, first);
 			first = false;
 		}
 
-		String afterUseSoftTabsChange = aceEditorComponent.getAfterUseSoftTabsChange();
+		String afterUseSoftTabsChange = aceEditorAlloy.getAfterUseSoftTabsChange();
 
 		if (afterUseSoftTabsChange != null) {
 
-			encodeAfterUseSoftTabsChange(responseWriter, aceEditorComponent, afterUseSoftTabsChange, first);
+			encodeAfterUseSoftTabsChange(responseWriter, aceEditorAlloy, afterUseSoftTabsChange, first);
 			first = false;
 		}
 
-		String afterUseWrapModeChange = aceEditorComponent.getAfterUseWrapModeChange();
+		String afterUseWrapModeChange = aceEditorAlloy.getAfterUseWrapModeChange();
 
 		if (afterUseWrapModeChange != null) {
 
-			encodeAfterUseWrapModeChange(responseWriter, aceEditorComponent, afterUseWrapModeChange, first);
+			encodeAfterUseWrapModeChange(responseWriter, aceEditorAlloy, afterUseWrapModeChange, first);
 			first = false;
 		}
 
-		String afterValueChange = aceEditorComponent.getAfterValueChange();
+		String afterValueChange = aceEditorAlloy.getAfterValueChange();
 
 		if (afterValueChange != null) {
 
-			encodeAfterValueChange(responseWriter, aceEditorComponent, afterValueChange, first);
+			encodeAfterValueChange(responseWriter, aceEditorAlloy, afterValueChange, first);
 			first = false;
 		}
 
-		String afterVisibleChange = aceEditorComponent.getAfterVisibleChange();
+		String afterVisibleChange = aceEditorAlloy.getAfterVisibleChange();
 
 		if (afterVisibleChange != null) {
 
-			encodeAfterVisibleChange(responseWriter, aceEditorComponent, afterVisibleChange, first);
+			encodeAfterVisibleChange(responseWriter, aceEditorAlloy, afterVisibleChange, first);
 			first = false;
 		}
 
-		String afterWidthChange = aceEditorComponent.getAfterWidthChange();
+		String afterWidthChange = aceEditorAlloy.getAfterWidthChange();
 
 		if (afterWidthChange != null) {
 
-			encodeAfterWidthChange(responseWriter, aceEditorComponent, afterWidthChange, first);
+			encodeAfterWidthChange(responseWriter, aceEditorAlloy, afterWidthChange, first);
 			first = false;
 		}
 
@@ -468,195 +468,195 @@ public abstract class AceEditorRendererBase extends AlloyRendererBase {
 
 		first = true;
 
-		String onBoundingBoxChange = aceEditorComponent.getOnBoundingBoxChange();
+		String onBoundingBoxChange = aceEditorAlloy.getOnBoundingBoxChange();
 
 		if (onBoundingBoxChange != null) {
 
-			encodeOnBoundingBoxChange(responseWriter, aceEditorComponent, onBoundingBoxChange, first);
+			encodeOnBoundingBoxChange(responseWriter, aceEditorAlloy, onBoundingBoxChange, first);
 			first = false;
 		}
 
-		String onContentBoxChange = aceEditorComponent.getOnContentBoxChange();
+		String onContentBoxChange = aceEditorAlloy.getOnContentBoxChange();
 
 		if (onContentBoxChange != null) {
 
-			encodeOnContentBoxChange(responseWriter, aceEditorComponent, onContentBoxChange, first);
+			encodeOnContentBoxChange(responseWriter, aceEditorAlloy, onContentBoxChange, first);
 			first = false;
 		}
 
-		String onDestroyedChange = aceEditorComponent.getOnDestroyedChange();
+		String onDestroyedChange = aceEditorAlloy.getOnDestroyedChange();
 
 		if (onDestroyedChange != null) {
 
-			encodeOnDestroyedChange(responseWriter, aceEditorComponent, onDestroyedChange, first);
+			encodeOnDestroyedChange(responseWriter, aceEditorAlloy, onDestroyedChange, first);
 			first = false;
 		}
 
-		String onDisabledChange = aceEditorComponent.getOnDisabledChange();
+		String onDisabledChange = aceEditorAlloy.getOnDisabledChange();
 
 		if (onDisabledChange != null) {
 
-			encodeOnDisabledChange(responseWriter, aceEditorComponent, onDisabledChange, first);
+			encodeOnDisabledChange(responseWriter, aceEditorAlloy, onDisabledChange, first);
 			first = false;
 		}
 
-		String onFocusedChange = aceEditorComponent.getOnFocusedChange();
+		String onFocusedChange = aceEditorAlloy.getOnFocusedChange();
 
 		if (onFocusedChange != null) {
 
-			encodeOnFocusedChange(responseWriter, aceEditorComponent, onFocusedChange, first);
+			encodeOnFocusedChange(responseWriter, aceEditorAlloy, onFocusedChange, first);
 			first = false;
 		}
 
-		String onHeightChange = aceEditorComponent.getOnHeightChange();
+		String onHeightChange = aceEditorAlloy.getOnHeightChange();
 
 		if (onHeightChange != null) {
 
-			encodeOnHeightChange(responseWriter, aceEditorComponent, onHeightChange, first);
+			encodeOnHeightChange(responseWriter, aceEditorAlloy, onHeightChange, first);
 			first = false;
 		}
 
-		String onHighlightActiveLineChange = aceEditorComponent.getOnHighlightActiveLineChange();
+		String onHighlightActiveLineChange = aceEditorAlloy.getOnHighlightActiveLineChange();
 
 		if (onHighlightActiveLineChange != null) {
 
-			encodeOnHighlightActiveLineChange(responseWriter, aceEditorComponent, onHighlightActiveLineChange, first);
+			encodeOnHighlightActiveLineChange(responseWriter, aceEditorAlloy, onHighlightActiveLineChange, first);
 			first = false;
 		}
 
-		String onIdChange = aceEditorComponent.getOnIdChange();
+		String onIdChange = aceEditorAlloy.getOnIdChange();
 
 		if (onIdChange != null) {
 
-			encodeOnIdChange(responseWriter, aceEditorComponent, onIdChange, first);
+			encodeOnIdChange(responseWriter, aceEditorAlloy, onIdChange, first);
 			first = false;
 		}
 
-		String onInitializedChange = aceEditorComponent.getOnInitializedChange();
+		String onInitializedChange = aceEditorAlloy.getOnInitializedChange();
 
 		if (onInitializedChange != null) {
 
-			encodeOnInitializedChange(responseWriter, aceEditorComponent, onInitializedChange, first);
+			encodeOnInitializedChange(responseWriter, aceEditorAlloy, onInitializedChange, first);
 			first = false;
 		}
 
-		String onLocaleChange = aceEditorComponent.getOnLocaleChange();
+		String onLocaleChange = aceEditorAlloy.getOnLocaleChange();
 
 		if (onLocaleChange != null) {
 
-			encodeOnLocaleChange(responseWriter, aceEditorComponent, onLocaleChange, first);
+			encodeOnLocaleChange(responseWriter, aceEditorAlloy, onLocaleChange, first);
 			first = false;
 		}
 
-		String onModeChange = aceEditorComponent.getOnModeChange();
+		String onModeChange = aceEditorAlloy.getOnModeChange();
 
 		if (onModeChange != null) {
 
-			encodeOnModeChange(responseWriter, aceEditorComponent, onModeChange, first);
+			encodeOnModeChange(responseWriter, aceEditorAlloy, onModeChange, first);
 			first = false;
 		}
 
-		String onReadOnlyChange = aceEditorComponent.getOnReadOnlyChange();
+		String onReadOnlyChange = aceEditorAlloy.getOnReadOnlyChange();
 
 		if (onReadOnlyChange != null) {
 
-			encodeOnReadOnlyChange(responseWriter, aceEditorComponent, onReadOnlyChange, first);
+			encodeOnReadOnlyChange(responseWriter, aceEditorAlloy, onReadOnlyChange, first);
 			first = false;
 		}
 
-		String onRenderChange = aceEditorComponent.getOnRenderChange();
+		String onRenderChange = aceEditorAlloy.getOnRenderChange();
 
 		if (onRenderChange != null) {
 
-			encodeOnRenderChange(responseWriter, aceEditorComponent, onRenderChange, first);
+			encodeOnRenderChange(responseWriter, aceEditorAlloy, onRenderChange, first);
 			first = false;
 		}
 
-		String onRenderedChange = aceEditorComponent.getOnRenderedChange();
+		String onRenderedChange = aceEditorAlloy.getOnRenderedChange();
 
 		if (onRenderedChange != null) {
 
-			encodeOnRenderedChange(responseWriter, aceEditorComponent, onRenderedChange, first);
+			encodeOnRenderedChange(responseWriter, aceEditorAlloy, onRenderedChange, first);
 			first = false;
 		}
 
-		String onShowPrintMarginChange = aceEditorComponent.getOnShowPrintMarginChange();
+		String onShowPrintMarginChange = aceEditorAlloy.getOnShowPrintMarginChange();
 
 		if (onShowPrintMarginChange != null) {
 
-			encodeOnShowPrintMarginChange(responseWriter, aceEditorComponent, onShowPrintMarginChange, first);
+			encodeOnShowPrintMarginChange(responseWriter, aceEditorAlloy, onShowPrintMarginChange, first);
 			first = false;
 		}
 
-		String onSrcNodeChange = aceEditorComponent.getOnSrcNodeChange();
+		String onSrcNodeChange = aceEditorAlloy.getOnSrcNodeChange();
 
 		if (onSrcNodeChange != null) {
 
-			encodeOnSrcNodeChange(responseWriter, aceEditorComponent, onSrcNodeChange, first);
+			encodeOnSrcNodeChange(responseWriter, aceEditorAlloy, onSrcNodeChange, first);
 			first = false;
 		}
 
-		String onStringsChange = aceEditorComponent.getOnStringsChange();
+		String onStringsChange = aceEditorAlloy.getOnStringsChange();
 
 		if (onStringsChange != null) {
 
-			encodeOnStringsChange(responseWriter, aceEditorComponent, onStringsChange, first);
+			encodeOnStringsChange(responseWriter, aceEditorAlloy, onStringsChange, first);
 			first = false;
 		}
 
-		String onTabIndexChange = aceEditorComponent.getOnTabIndexChange();
+		String onTabIndexChange = aceEditorAlloy.getOnTabIndexChange();
 
 		if (onTabIndexChange != null) {
 
-			encodeOnTabIndexChange(responseWriter, aceEditorComponent, onTabIndexChange, first);
+			encodeOnTabIndexChange(responseWriter, aceEditorAlloy, onTabIndexChange, first);
 			first = false;
 		}
 
-		String onTabSizeChange = aceEditorComponent.getOnTabSizeChange();
+		String onTabSizeChange = aceEditorAlloy.getOnTabSizeChange();
 
 		if (onTabSizeChange != null) {
 
-			encodeOnTabSizeChange(responseWriter, aceEditorComponent, onTabSizeChange, first);
+			encodeOnTabSizeChange(responseWriter, aceEditorAlloy, onTabSizeChange, first);
 			first = false;
 		}
 
-		String onUseSoftTabsChange = aceEditorComponent.getOnUseSoftTabsChange();
+		String onUseSoftTabsChange = aceEditorAlloy.getOnUseSoftTabsChange();
 
 		if (onUseSoftTabsChange != null) {
 
-			encodeOnUseSoftTabsChange(responseWriter, aceEditorComponent, onUseSoftTabsChange, first);
+			encodeOnUseSoftTabsChange(responseWriter, aceEditorAlloy, onUseSoftTabsChange, first);
 			first = false;
 		}
 
-		String onUseWrapModeChange = aceEditorComponent.getOnUseWrapModeChange();
+		String onUseWrapModeChange = aceEditorAlloy.getOnUseWrapModeChange();
 
 		if (onUseWrapModeChange != null) {
 
-			encodeOnUseWrapModeChange(responseWriter, aceEditorComponent, onUseWrapModeChange, first);
+			encodeOnUseWrapModeChange(responseWriter, aceEditorAlloy, onUseWrapModeChange, first);
 			first = false;
 		}
 
-		String onValueChange = aceEditorComponent.getOnValueChange();
+		String onValueChange = aceEditorAlloy.getOnValueChange();
 
 		if (onValueChange != null) {
 
-			encodeOnValueChange(responseWriter, aceEditorComponent, onValueChange, first);
+			encodeOnValueChange(responseWriter, aceEditorAlloy, onValueChange, first);
 			first = false;
 		}
 
-		String onVisibleChange = aceEditorComponent.getOnVisibleChange();
+		String onVisibleChange = aceEditorAlloy.getOnVisibleChange();
 
 		if (onVisibleChange != null) {
 
-			encodeOnVisibleChange(responseWriter, aceEditorComponent, onVisibleChange, first);
+			encodeOnVisibleChange(responseWriter, aceEditorAlloy, onVisibleChange, first);
 			first = false;
 		}
 
-		String onWidthChange = aceEditorComponent.getOnWidthChange();
+		String onWidthChange = aceEditorAlloy.getOnWidthChange();
 
 		if (onWidthChange != null) {
 
-			encodeOnWidthChange(responseWriter, aceEditorComponent, onWidthChange, first);
+			encodeOnWidthChange(responseWriter, aceEditorAlloy, onWidthChange, first);
 			first = false;
 		}
 
@@ -674,292 +674,292 @@ public abstract class AceEditorRendererBase extends AlloyRendererBase {
 		return MODULES;
 	}
 
-	protected void encodeAfterBoundingBoxChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterBoundingBoxChange, boolean first) throws IOException {
+	protected void encodeAfterBoundingBoxChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterBoundingBoxChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, BOUNDING_BOX_CHANGE, afterBoundingBoxChange, first);
 	}
 
-	protected void encodeAfterContentBoxChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterContentBoxChange, boolean first) throws IOException {
+	protected void encodeAfterContentBoxChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterContentBoxChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, CONTENT_BOX_CHANGE, afterContentBoxChange, first);
 	}
 
-	protected void encodeAfterDestroyedChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterDestroyedChange, boolean first) throws IOException {
+	protected void encodeAfterDestroyedChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterDestroyedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, DESTROYED_CHANGE, afterDestroyedChange, first);
 	}
 
-	protected void encodeAfterDisabledChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterDisabledChange, boolean first) throws IOException {
+	protected void encodeAfterDisabledChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterDisabledChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, DISABLED_CHANGE, afterDisabledChange, first);
 	}
 
-	protected void encodeAfterFocusedChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterFocusedChange, boolean first) throws IOException {
+	protected void encodeAfterFocusedChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterFocusedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, FOCUSED_CHANGE, afterFocusedChange, first);
 	}
 
-	protected void encodeAfterHeightChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterHeightChange, boolean first) throws IOException {
+	protected void encodeAfterHeightChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterHeightChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, HEIGHT_CHANGE, afterHeightChange, first);
 	}
 
-	protected void encodeAfterHighlightActiveLineChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterHighlightActiveLineChange, boolean first) throws IOException {
+	protected void encodeAfterHighlightActiveLineChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterHighlightActiveLineChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, HIGHLIGHT_ACTIVE_LINE_CHANGE, afterHighlightActiveLineChange, first);
 	}
 
-	protected void encodeAfterIdChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterIdChange, boolean first) throws IOException {
+	protected void encodeAfterIdChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterIdChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, ID_CHANGE, afterIdChange, first);
 	}
 
-	protected void encodeAfterInitializedChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterInitializedChange, boolean first) throws IOException {
+	protected void encodeAfterInitializedChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterInitializedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, INITIALIZED_CHANGE, afterInitializedChange, first);
 	}
 
-	protected void encodeAfterLocaleChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterLocaleChange, boolean first) throws IOException {
+	protected void encodeAfterLocaleChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterLocaleChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, LOCALE_CHANGE, afterLocaleChange, first);
 	}
 
-	protected void encodeAfterModeChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterModeChange, boolean first) throws IOException {
+	protected void encodeAfterModeChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterModeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, MODE_CHANGE, afterModeChange, first);
 	}
 
-	protected void encodeAfterReadOnlyChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterReadOnlyChange, boolean first) throws IOException {
+	protected void encodeAfterReadOnlyChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterReadOnlyChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, READ_ONLY_CHANGE, afterReadOnlyChange, first);
 	}
 
-	protected void encodeAfterRenderChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterRenderChange, boolean first) throws IOException {
+	protected void encodeAfterRenderChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterRenderChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, RENDER_CHANGE, afterRenderChange, first);
 	}
 
-	protected void encodeAfterRenderedChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterRenderedChange, boolean first) throws IOException {
+	protected void encodeAfterRenderedChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterRenderedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, RENDERED_CHANGE, afterRenderedChange, first);
 	}
 
-	protected void encodeAfterShowPrintMarginChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterShowPrintMarginChange, boolean first) throws IOException {
+	protected void encodeAfterShowPrintMarginChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterShowPrintMarginChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, SHOW_PRINT_MARGIN_CHANGE, afterShowPrintMarginChange, first);
 	}
 
-	protected void encodeAfterSrcNodeChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterSrcNodeChange, boolean first) throws IOException {
+	protected void encodeAfterSrcNodeChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterSrcNodeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, SRC_NODE_CHANGE, afterSrcNodeChange, first);
 	}
 
-	protected void encodeAfterStringsChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterStringsChange, boolean first) throws IOException {
+	protected void encodeAfterStringsChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterStringsChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, STRINGS_CHANGE, afterStringsChange, first);
 	}
 
-	protected void encodeAfterTabIndexChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterTabIndexChange, boolean first) throws IOException {
+	protected void encodeAfterTabIndexChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterTabIndexChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, TAB_INDEX_CHANGE, afterTabIndexChange, first);
 	}
 
-	protected void encodeAfterTabSizeChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterTabSizeChange, boolean first) throws IOException {
+	protected void encodeAfterTabSizeChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterTabSizeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, TAB_SIZE_CHANGE, afterTabSizeChange, first);
 	}
 
-	protected void encodeAfterUseSoftTabsChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterUseSoftTabsChange, boolean first) throws IOException {
+	protected void encodeAfterUseSoftTabsChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterUseSoftTabsChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, USE_SOFT_TABS_CHANGE, afterUseSoftTabsChange, first);
 	}
 
-	protected void encodeAfterUseWrapModeChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterUseWrapModeChange, boolean first) throws IOException {
+	protected void encodeAfterUseWrapModeChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterUseWrapModeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, USE_WRAP_MODE_CHANGE, afterUseWrapModeChange, first);
 	}
 
-	protected void encodeAfterValueChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterValueChange, boolean first) throws IOException {
+	protected void encodeAfterValueChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterValueChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, VALUE_CHANGE, afterValueChange, first);
 	}
 
-	protected void encodeAfterVisibleChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterVisibleChange, boolean first) throws IOException {
+	protected void encodeAfterVisibleChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterVisibleChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, VISIBLE_CHANGE, afterVisibleChange, first);
 	}
 
-	protected void encodeAfterWidthChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String afterWidthChange, boolean first) throws IOException {
+	protected void encodeAfterWidthChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String afterWidthChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, WIDTH_CHANGE, afterWidthChange, first);
 	}
 
-	protected void encodeBoundingBox(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String boundingBox, boolean first) throws IOException {
-		encodeString(responseWriter, AceEditorComponent.BOUNDING_BOX, boundingBox, first);
+	protected void encodeBoundingBox(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String boundingBox, boolean first) throws IOException {
+		encodeString(responseWriter, AceEditorAlloy.BOUNDING_BOX, boundingBox, first);
 	}
 
-	protected void encodeContentBox(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String contentBox, boolean first) throws IOException {
-		encodeString(responseWriter, AceEditorComponent.CONTENT_BOX, contentBox, first);
+	protected void encodeContentBox(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String contentBox, boolean first) throws IOException {
+		encodeString(responseWriter, AceEditorAlloy.CONTENT_BOX, contentBox, first);
 	}
 
-	protected void encodeDestroyed(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Boolean destroyed, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorComponent.DESTROYED, destroyed, first);
+	protected void encodeDestroyed(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean destroyed, boolean first) throws IOException {
+		encodeBoolean(responseWriter, AceEditorAlloy.DESTROYED, destroyed, first);
 	}
 
-	protected void encodeDisabled(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Boolean disabled, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorComponent.DISABLED, disabled, first);
+	protected void encodeDisabled(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean disabled, boolean first) throws IOException {
+		encodeBoolean(responseWriter, AceEditorAlloy.DISABLED, disabled, first);
 	}
 
-	protected void encodeFocused(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Boolean focused, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorComponent.FOCUSED, focused, first);
+	protected void encodeFocused(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean focused, boolean first) throws IOException {
+		encodeBoolean(responseWriter, AceEditorAlloy.FOCUSED, focused, first);
 	}
 
-	protected void encodeHeight(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Object height, boolean first) throws IOException {
-		encodeNumber(responseWriter, AceEditorComponent.HEIGHT, height, first);
+	protected void encodeHeight(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Object height, boolean first) throws IOException {
+		encodeNumber(responseWriter, AceEditorAlloy.HEIGHT, height, first);
 	}
 
-	protected void encodeHighlightActiveLine(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Boolean highlightActiveLine, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorComponent.HIGHLIGHT_ACTIVE_LINE, highlightActiveLine, first);
+	protected void encodeHighlightActiveLine(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean highlightActiveLine, boolean first) throws IOException {
+		encodeBoolean(responseWriter, AceEditorAlloy.HIGHLIGHT_ACTIVE_LINE, highlightActiveLine, first);
 	}
 
-	protected void encodeId(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String id, boolean first) throws IOException {
-		encodeString(responseWriter, AceEditorComponent.ID, id, first);
+	protected void encodeId(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String id, boolean first) throws IOException {
+		encodeString(responseWriter, AceEditorAlloy.ID, id, first);
 	}
 
-	protected void encodeInitialized(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Boolean initialized, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorComponent.INITIALIZED, initialized, first);
+	protected void encodeInitialized(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean initialized, boolean first) throws IOException {
+		encodeBoolean(responseWriter, AceEditorAlloy.INITIALIZED, initialized, first);
 	}
 
-	protected void encodeLocale(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String locale, boolean first) throws IOException {
-		encodeString(responseWriter, AceEditorComponent.LOCALE, locale, first);
+	protected void encodeLocale(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String locale, boolean first) throws IOException {
+		encodeString(responseWriter, AceEditorAlloy.LOCALE, locale, first);
 	}
 
-	protected void encodeMode(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String mode, boolean first) throws IOException {
-		encodeString(responseWriter, AceEditorComponent.MODE, mode, first);
+	protected void encodeMode(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String mode, boolean first) throws IOException {
+		encodeString(responseWriter, AceEditorAlloy.MODE, mode, first);
 	}
 
-	protected void encodeOnBoundingBoxChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onBoundingBoxChange, boolean first) throws IOException {
+	protected void encodeOnBoundingBoxChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onBoundingBoxChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, BOUNDING_BOX_CHANGE, onBoundingBoxChange, first);
 	}
 
-	protected void encodeOnContentBoxChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onContentBoxChange, boolean first) throws IOException {
+	protected void encodeOnContentBoxChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onContentBoxChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, CONTENT_BOX_CHANGE, onContentBoxChange, first);
 	}
 
-	protected void encodeOnDestroyedChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onDestroyedChange, boolean first) throws IOException {
+	protected void encodeOnDestroyedChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onDestroyedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, DESTROYED_CHANGE, onDestroyedChange, first);
 	}
 
-	protected void encodeOnDisabledChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onDisabledChange, boolean first) throws IOException {
+	protected void encodeOnDisabledChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onDisabledChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, DISABLED_CHANGE, onDisabledChange, first);
 	}
 
-	protected void encodeOnFocusedChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onFocusedChange, boolean first) throws IOException {
+	protected void encodeOnFocusedChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onFocusedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, FOCUSED_CHANGE, onFocusedChange, first);
 	}
 
-	protected void encodeOnHeightChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onHeightChange, boolean first) throws IOException {
+	protected void encodeOnHeightChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onHeightChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, HEIGHT_CHANGE, onHeightChange, first);
 	}
 
-	protected void encodeOnHighlightActiveLineChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onHighlightActiveLineChange, boolean first) throws IOException {
+	protected void encodeOnHighlightActiveLineChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onHighlightActiveLineChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, HIGHLIGHT_ACTIVE_LINE_CHANGE, onHighlightActiveLineChange, first);
 	}
 
-	protected void encodeOnIdChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onIdChange, boolean first) throws IOException {
+	protected void encodeOnIdChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onIdChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, ID_CHANGE, onIdChange, first);
 	}
 
-	protected void encodeOnInitializedChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onInitializedChange, boolean first) throws IOException {
+	protected void encodeOnInitializedChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onInitializedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, INITIALIZED_CHANGE, onInitializedChange, first);
 	}
 
-	protected void encodeOnLocaleChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onLocaleChange, boolean first) throws IOException {
+	protected void encodeOnLocaleChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onLocaleChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, LOCALE_CHANGE, onLocaleChange, first);
 	}
 
-	protected void encodeOnModeChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onModeChange, boolean first) throws IOException {
+	protected void encodeOnModeChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onModeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, MODE_CHANGE, onModeChange, first);
 	}
 
-	protected void encodeOnReadOnlyChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onReadOnlyChange, boolean first) throws IOException {
+	protected void encodeOnReadOnlyChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onReadOnlyChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, READ_ONLY_CHANGE, onReadOnlyChange, first);
 	}
 
-	protected void encodeOnRenderChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onRenderChange, boolean first) throws IOException {
+	protected void encodeOnRenderChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onRenderChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, RENDER_CHANGE, onRenderChange, first);
 	}
 
-	protected void encodeOnRenderedChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onRenderedChange, boolean first) throws IOException {
+	protected void encodeOnRenderedChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onRenderedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, RENDERED_CHANGE, onRenderedChange, first);
 	}
 
-	protected void encodeOnShowPrintMarginChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onShowPrintMarginChange, boolean first) throws IOException {
+	protected void encodeOnShowPrintMarginChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onShowPrintMarginChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, SHOW_PRINT_MARGIN_CHANGE, onShowPrintMarginChange, first);
 	}
 
-	protected void encodeOnSrcNodeChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onSrcNodeChange, boolean first) throws IOException {
+	protected void encodeOnSrcNodeChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onSrcNodeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, SRC_NODE_CHANGE, onSrcNodeChange, first);
 	}
 
-	protected void encodeOnStringsChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onStringsChange, boolean first) throws IOException {
+	protected void encodeOnStringsChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onStringsChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, STRINGS_CHANGE, onStringsChange, first);
 	}
 
-	protected void encodeOnTabIndexChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onTabIndexChange, boolean first) throws IOException {
+	protected void encodeOnTabIndexChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onTabIndexChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, TAB_INDEX_CHANGE, onTabIndexChange, first);
 	}
 
-	protected void encodeOnTabSizeChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onTabSizeChange, boolean first) throws IOException {
+	protected void encodeOnTabSizeChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onTabSizeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, TAB_SIZE_CHANGE, onTabSizeChange, first);
 	}
 
-	protected void encodeOnUseSoftTabsChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onUseSoftTabsChange, boolean first) throws IOException {
+	protected void encodeOnUseSoftTabsChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onUseSoftTabsChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, USE_SOFT_TABS_CHANGE, onUseSoftTabsChange, first);
 	}
 
-	protected void encodeOnUseWrapModeChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onUseWrapModeChange, boolean first) throws IOException {
+	protected void encodeOnUseWrapModeChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onUseWrapModeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, USE_WRAP_MODE_CHANGE, onUseWrapModeChange, first);
 	}
 
-	protected void encodeOnValueChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onValueChange, boolean first) throws IOException {
+	protected void encodeOnValueChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onValueChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, VALUE_CHANGE, onValueChange, first);
 	}
 
-	protected void encodeOnVisibleChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onVisibleChange, boolean first) throws IOException {
+	protected void encodeOnVisibleChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onVisibleChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, VISIBLE_CHANGE, onVisibleChange, first);
 	}
 
-	protected void encodeOnWidthChange(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String onWidthChange, boolean first) throws IOException {
+	protected void encodeOnWidthChange(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String onWidthChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, WIDTH_CHANGE, onWidthChange, first);
 	}
 
-	protected void encodeReadOnly(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Boolean readOnly, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorComponent.READ_ONLY, readOnly, first);
+	protected void encodeReadOnly(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean readOnly, boolean first) throws IOException {
+		encodeBoolean(responseWriter, AceEditorAlloy.READ_ONLY, readOnly, first);
 	}
 
-	protected void encodeRendered(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Boolean rendered, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorComponent.RENDERED, rendered, first);
+	protected void encodeRendered(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean rendered, boolean first) throws IOException {
+		encodeBoolean(responseWriter, AceEditorAlloy.RENDERED, rendered, first);
 	}
 
-	protected void encodeShowPrintMargin(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Boolean showPrintMargin, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorComponent.SHOW_PRINT_MARGIN, showPrintMargin, first);
+	protected void encodeShowPrintMargin(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean showPrintMargin, boolean first) throws IOException {
+		encodeBoolean(responseWriter, AceEditorAlloy.SHOW_PRINT_MARGIN, showPrintMargin, first);
 	}
 
-	protected void encodeSrcNode(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, String srcNode, boolean first) throws IOException {
-		encodeString(responseWriter, AceEditorComponent.SRC_NODE, srcNode, first);
+	protected void encodeSrcNode(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String srcNode, boolean first) throws IOException {
+		encodeString(responseWriter, AceEditorAlloy.SRC_NODE, srcNode, first);
 	}
 
-	protected void encodeStrings(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Object strings, boolean first) throws IOException {
-		encodeObject(responseWriter, AceEditorComponent.STRINGS, strings, first);
+	protected void encodeStrings(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Object strings, boolean first) throws IOException {
+		encodeObject(responseWriter, AceEditorAlloy.STRINGS, strings, first);
 	}
 
-	protected void encodeTabIndex(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Object tabIndex, boolean first) throws IOException {
-		encodeNumber(responseWriter, AceEditorComponent.TAB_INDEX, tabIndex, first);
+	protected void encodeTabIndex(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Object tabIndex, boolean first) throws IOException {
+		encodeNumber(responseWriter, AceEditorAlloy.TAB_INDEX, tabIndex, first);
 	}
 
-	protected void encodeTabSize(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Object tabSize, boolean first) throws IOException {
-		encodeNumber(responseWriter, AceEditorComponent.TAB_SIZE, tabSize, first);
+	protected void encodeTabSize(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Object tabSize, boolean first) throws IOException {
+		encodeNumber(responseWriter, AceEditorAlloy.TAB_SIZE, tabSize, first);
 	}
 
-	protected void encodeUseSoftTabs(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Boolean useSoftTabs, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorComponent.USE_SOFT_TABS, useSoftTabs, first);
+	protected void encodeUseSoftTabs(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean useSoftTabs, boolean first) throws IOException {
+		encodeBoolean(responseWriter, AceEditorAlloy.USE_SOFT_TABS, useSoftTabs, first);
 	}
 
-	protected void encodeUseWrapMode(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Boolean useWrapMode, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorComponent.USE_WRAP_MODE, useWrapMode, first);
+	protected void encodeUseWrapMode(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean useWrapMode, boolean first) throws IOException {
+		encodeBoolean(responseWriter, AceEditorAlloy.USE_WRAP_MODE, useWrapMode, first);
 	}
 
-	protected void encodeValue(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Object value, boolean first) throws IOException {
-		encodeString(responseWriter, AceEditorComponent.VALUE, value, first);
+	protected void encodeValue(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Object value, boolean first) throws IOException {
+		encodeString(responseWriter, AceEditorAlloy.VALUE, value, first);
 	}
 
-	protected void encodeVisible(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Boolean visible, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorComponent.VISIBLE, visible, first);
+	protected void encodeVisible(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean visible, boolean first) throws IOException {
+		encodeBoolean(responseWriter, AceEditorAlloy.VISIBLE, visible, first);
 	}
 
-	protected void encodeWidgetRender(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Boolean widgetRender, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorComponent.WIDGET_RENDER, widgetRender, first);
+	protected void encodeWidgetRender(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean widgetRender, boolean first) throws IOException {
+		encodeBoolean(responseWriter, AceEditorAlloy.WIDGET_RENDER, widgetRender, first);
 	}
 
-	protected void encodeWidth(ResponseWriter responseWriter, AceEditorComponent aceEditorComponent, Object width, boolean first) throws IOException {
-		encodeNumber(responseWriter, AceEditorComponent.WIDTH, width, first);
+	protected void encodeWidth(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Object width, boolean first) throws IOException {
+		encodeNumber(responseWriter, AceEditorAlloy.WIDTH, width, first);
 	}
 }
 //J+

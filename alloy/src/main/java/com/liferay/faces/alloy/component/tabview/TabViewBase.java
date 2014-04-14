@@ -25,7 +25,7 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class TabViewBase extends UIData implements Styleable, ClientComponent, TabViewComponent {
+public abstract class TabViewBase extends UIData implements Styleable, ClientComponent, TabViewAlloy {
 
 	@Override
 	public String getActiveDescendant() {
@@ -265,6 +265,16 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 	@Override
 	public void setBoundingBox(String boundingBox) {
 		getStateHelper().put(BOUNDING_BOX, boundingBox);
+	}
+
+	@Override
+	public String getClientKey() {
+		return (String) getStateHelper().eval(CLIENT_KEY, getClientId());
+	}
+
+	@Override
+	public void setClientKey(String clientKey) {
+		getStateHelper().put(CLIENT_KEY, clientKey);
 	}
 
 	@Override
@@ -665,16 +675,6 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 	@Override
 	public void setWidgetRender(Boolean widgetRender) {
 		getStateHelper().put(WIDGET_RENDER, widgetRender);
-	}
-
-	@Override
-	public String getClientKey() {
-		return (String) getStateHelper().eval(CLIENT_KEY, getClientId());
-	}
-
-	@Override
-	public void setClientKey(String liferayKey) {
-		getStateHelper().put(CLIENT_KEY, liferayKey);
 	}
 
 	@Override

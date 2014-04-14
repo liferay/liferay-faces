@@ -24,7 +24,6 @@ import javax.faces.render.FacesRenderer;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.alloy.component.tab.Tab;
-import com.liferay.faces.alloy.component.tab.TabComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
@@ -95,9 +94,9 @@ public class TabViewRenderer extends TabViewRendererBase {
 
 			for (UIComponent child : children) {
 
-				if (child instanceof TabComponent) {
-					TabComponent childTabComponent = (TabComponent) child;
-					encodeTabListItem(facesContext, responseWriter, childTabComponent);
+				if (child instanceof Tab) {
+					Tab childTab = (Tab) child;
+					encodeTabListItem(facesContext, responseWriter, childTab);
 				}
 				else {
 					logger.warn("Unable to render child element of p:tabView since it is not p:tab");
@@ -154,17 +153,17 @@ public class TabViewRenderer extends TabViewRendererBase {
 		responseWriter.endElement(StringPool.DIV);
 	}
 
-	protected void encodeTabListItem(FacesContext facesContext, ResponseWriter responseWriter,
-		TabComponent tabComponent) throws IOException {
+	protected void encodeTabListItem(FacesContext facesContext, ResponseWriter responseWriter, Tab tab)
+		throws IOException {
 
-		UIComponent uiComponent = (UIComponent) tabComponent;
+		UIComponent uiComponent = (UIComponent) tab;
 		responseWriter.startElement(StringPool.LI, uiComponent);
 		responseWriter.startElement(StringPool.ASCII_TABLE[97], uiComponent);
 
 		String escapedClientId = ComponentUtil.escapeClientId(uiComponent.getClientId(facesContext));
 		responseWriter.writeAttribute(StringPool.HREF, StringPool.POUND + escapedClientId, null);
 
-		String label = (String) tabComponent.getLabel();
+		String label = (String) tab.getLabel();
 
 		if (label == null) {
 			label = Tab.LABEL;
