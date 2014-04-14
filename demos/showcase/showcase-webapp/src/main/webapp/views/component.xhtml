@@ -21,15 +21,16 @@
 		<c:set value="#{i18n[selectedComponentUseCaseKey]}" var="selectedComponentUseCaseDescription" />
 		<c:set value="vdldoc:#{selectedComponentFullName}" var="selectedComponentDocKey" /> 
 		<button onclick="window.open('#{showcase-fn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;">#{i18n['vdl-documentation']}</button>
-		<h2>#{selectedComponentFullName} (#{i18n[selectedComponentUseCaseName]} #{i18n['usage']})</h2>
+		<h2>#{selectedComponentFullName}</h2>
 		<p><h:outputText escape="false" value="#{showcase-fn:encodeDescription(selectedComponentDescription)}" /></p>
 		<c:if test="#{!empty selectedComponentUseCaseDescription}">
+			<h3>#{i18n[selectedComponentUseCaseName]} #{i18n['usage']}</h3>
 			<p><h:outputText escape="false" value="#{showcase-fn:encodeDescription(selectedComponentUseCaseDescription)}" /></p>
 		</c:if>
 		<ui:include
 			src="/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/#{selectedComponentUseCaseName}/#{selectedComponentCamelCaseName}.xhtml" />
 		<hr />
-		<h2>#{i18n['source-code']}</h2>
+		<h3>#{i18n['source-code']}</h3>
 		<aui:tabView value="#{showcaseModelBean.selectedComponent.useCaseCodeExamples}" var="useCaseCodeExample">
 			<aui:tab label="#{useCaseCodeExample.fileName}">
 				<aui:aceEditor mode="#{useCaseCodeExample.fileExtension}" readOnly="true" showPrintMargin="false" useWrapMode="false" width="900" value="#{useCaseCodeExample.rawText}" />
