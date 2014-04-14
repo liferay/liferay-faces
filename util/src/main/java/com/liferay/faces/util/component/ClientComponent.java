@@ -19,13 +19,13 @@ package com.liferay.faces.util.component;
  *
  * @author  Neil Griffin
  */
-public interface LiferayComponent {
+public interface ClientComponent {
 
-	public static final String LIFERAY_KEY = "liferayKey";
+	public static final String CLIENT_KEY = "clientKey";
 
 	public String getClientId();
 
-	public String getLiferayKey();
+	public String getClientKey();
 
-	public void setLiferayKey(String liferayKey);
+	public void setClientKey(String clientKey);
 }

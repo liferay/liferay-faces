@@ -17,7 +17,7 @@ package com.liferay.faces.alloy.component.aceeditor;
 import javax.annotation.Generated;
 import javax.faces.component.UIInput;
 
-import com.liferay.faces.util.component.LiferayComponent;
+import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.Styleable;
 
 /**
@@ -25,7 +25,7 @@ import com.liferay.faces.util.component.Styleable;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class AceEditorBase extends UIInput implements Styleable, LiferayComponent, AceEditorComponent {
+public abstract class AceEditorBase extends UIInput implements Styleable, ClientComponent, AceEditorComponent {
 
 	@Override
 	public String getAfterBoundingBoxChange() {
@@ -718,13 +718,13 @@ public abstract class AceEditorBase extends UIInput implements Styleable, Lifera
 	}
 
 	@Override
-	public String getLiferayKey() {
-		return (String) getStateHelper().eval(LIFERAY_KEY, null);
+	public String getClientKey() {
+		return (String) getStateHelper().eval(CLIENT_KEY, getClientId());
 	}
 
 	@Override
-	public void setLiferayKey(String liferayKey) {
-		getStateHelper().put(LIFERAY_KEY, liferayKey);
+	public void setClientKey(String liferayKey) {
+		getStateHelper().put(CLIENT_KEY, liferayKey);
 	}
 
 	@Override
