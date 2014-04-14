@@ -27,7 +27,7 @@ import javax.faces.render.RenderKit;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.component.LiferayComponent;
+import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.helper.StringHelper;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -105,8 +105,10 @@ public class RatingRenderer extends RatingRendererBase {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		String varName = ComponentUtil.getVarName(facesContext, (LiferayComponent) uiComponent);
-		encodeLiferayComponent(responseWriter, varName);
+		ClientComponent clientComponent = (ClientComponent) uiComponent;
+		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+		encodeLiferayComponentVar(responseWriter, clientVarName, clientComponent.getClientKey());
+
 		// The above should render something like this: var _1_WAR_showcaseportlet__j_idt6_j_idt19_j_idt22_j_idt23 =
 		// Liferay.component('_1_WAR_showcaseportlet__j_idt6_j_idt19_j_idt22_j_idt23');
 
@@ -175,7 +177,7 @@ public class RatingRenderer extends RatingRendererBase {
 
 			// This is case 1.  the user selected to clear the value.
 			if (facesContext.isPostback()) {
-				responseWriter.write(varName);
+				responseWriter.write(clientVarName);
 				responseWriter.write(".clearSelection();");
 			}
 
@@ -202,13 +204,13 @@ public class RatingRenderer extends RatingRendererBase {
 			String selectedIndexAsString = selectedIndex.toString();
 
 			responseWriter.write("var defaultSelectedIndex=");
-			responseWriter.write(varName);
+			responseWriter.write(clientVarName);
 			responseWriter.write(".get('selectedIndex');");
 
 			responseWriter.write("if(");
 			responseWriter.write(selectedIndexAsString);
 			responseWriter.write("!=defaultSelectedIndex){");
-			responseWriter.write(varName);
+			responseWriter.write(clientVarName);
 			responseWriter.write(".select(");
 			responseWriter.write(selectedIndexAsString);
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
@@ -237,7 +239,7 @@ public class RatingRenderer extends RatingRendererBase {
 		//J+
 
 		// Start encoding the onclick event.
-		responseWriter.write(varName);
+		responseWriter.write(clientVarName);
 		responseWriter.write(".on('click',function(event){");
 
 		// Within the onclick event, establish the newValue of the hiddenInput.

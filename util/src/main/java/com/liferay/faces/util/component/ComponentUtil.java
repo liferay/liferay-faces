@@ -36,7 +36,6 @@ public class ComponentUtil {
 	// Private Constants
 	private static final String DOUBLE_BACKSLASH_COLON = "\\\\\\\\:";
 	private static final String REGEX_COLON = "[:]";
-	private static final String REGEX_LIFERAY_KEY = "-|";
 
 	public static String appendToCssClasses(String cssClass, String suffix) {
 
@@ -192,24 +191,13 @@ public class ComponentUtil {
 		return matchComponentInHierarchy(facesContext, facesContext.getViewRoot(), partialClientId);
 	}
 
-	public static String getVarName(FacesContext facesContext, LiferayComponent liferayComponent) {
+	public static String getClientVarName(FacesContext facesContext, ClientComponent clientComponent) {
 
 		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+		String clientId = clientComponent.getClientId();
+		String regex = StringPool.OPEN_BRACKET + separatorChar + StringPool.CLOSE_BRACKET;
+		String clientVarName = clientId.replaceAll(regex, StringPool.UNDERLINE);
 
-		String liferayKey = liferayComponent.getLiferayKey();
-
-		if (liferayKey == null) {
-			liferayKey = liferayComponent.getClientId();
-		}
-		else {
-			UIViewRoot uiViewRoot = facesContext.getViewRoot();
-			String namingContainerId = uiViewRoot.getContainerClientId(facesContext);
-			liferayKey = namingContainerId + separatorChar + liferayKey;
-		}
-
-		String regex = REGEX_LIFERAY_KEY + separatorChar;
-		liferayKey = liferayKey.replaceAll(regex, StringPool.UNDERLINE);
-
-		return liferayKey;
+		return clientVarName;
 	}
 }
