@@ -23,8 +23,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.util.AlloyConstants;
+import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.component.LiferayComponent;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererBase;
 
@@ -119,17 +119,18 @@ public abstract class AlloyRendererBase extends RendererBase {
 			responseWriter.write(StringPool.NEW_LINE);
 		}
 
-		String varName = ComponentUtil.getVarName(facesContext, (LiferayComponent) uiComponent);
+		ClientComponent clientComponent = (ClientComponent) uiComponent;
+		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
 
 		if (isAjax(facesContext) || isForceInline(facesContext, uiComponent)) {
 
-			encodeLiferayComponent(responseWriter, varName);
+			encodeLiferayComponentVar(responseWriter, clientVarName, clientComponent.getClientKey());
 			responseWriter.write(IF);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
-			responseWriter.write(varName);
+			responseWriter.write(clientVarName);
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-			responseWriter.write(varName);
+			responseWriter.write(clientVarName);
 			responseWriter.write(StringPool.PERIOD);
 			responseWriter.write(DESTROY);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
@@ -183,16 +184,16 @@ public abstract class AlloyRendererBase extends RendererBase {
 	protected void encodeJavaScriptMain(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		String varName = ComponentUtil.getVarName(facesContext, (LiferayComponent) uiComponent);
+		String clientVarName = ComponentUtil.getClientVarName(facesContext, (ClientComponent) uiComponent);
 
 		responseWriter.write(VAR);
 		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(varName);
+		responseWriter.write(clientVarName);
 		responseWriter.write(StringPool.SEMICOLON);
 		responseWriter.write(LIFERAY_COMPONENT);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(varName);
+		responseWriter.write(clientVarName);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.COMMA);
 		responseWriter.write(FUNCTION);
@@ -202,10 +203,10 @@ public abstract class AlloyRendererBase extends RendererBase {
 		responseWriter.write(IF);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.EXCLAMATION);
-		responseWriter.write(varName);
+		responseWriter.write(clientVarName);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		responseWriter.write(varName);
+		responseWriter.write(clientVarName);
 		responseWriter.write(StringPool.EQUAL);
 		responseWriter.write(NEW);
 		responseWriter.write(StringPool.SPACE);
@@ -221,7 +222,7 @@ public abstract class AlloyRendererBase extends RendererBase {
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		responseWriter.write(RETURN);
 		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(varName);
+		responseWriter.write(clientVarName);
 		responseWriter.write(StringPool.SEMICOLON);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
@@ -229,7 +230,7 @@ public abstract class AlloyRendererBase extends RendererBase {
 		responseWriter.write(LIFERAY_COMPONENT);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(varName);
+		responseWriter.write(clientVarName);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 		responseWriter.write(StringPool.SEMICOLON);
@@ -240,18 +241,29 @@ public abstract class AlloyRendererBase extends RendererBase {
 		// no-op
 	}
 
-	protected void encodeLiferayComponent(ResponseWriter responseWriter, String varName) throws IOException {
+	protected void encodeLiferayComponent(ResponseWriter responseWriter, String clientKey) throws IOException {
 
-		responseWriter.write(VAR);
-		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(varName);
-		responseWriter.write(StringPool.EQUAL);
 		responseWriter.write(LIFERAY_COMPONENT);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(varName);
+		responseWriter.write(clientKey);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+	}
+
+	protected void encodeLiferayComponent(ResponseWriter responseWriter, ClientComponent clientComponent)
+		throws IOException {
+		encodeLiferayComponent(responseWriter, clientComponent.getClientKey());
+	}
+
+	protected void encodeLiferayComponentVar(ResponseWriter responseWriter, String clientVarName, String clientKey)
+		throws IOException {
+
+		responseWriter.write(VAR);
+		responseWriter.write(StringPool.SPACE);
+		responseWriter.write(clientVarName);
+		responseWriter.write(StringPool.EQUAL);
+		encodeLiferayComponent(responseWriter, clientKey);
 		responseWriter.write(StringPool.SEMICOLON);
 	}
 
