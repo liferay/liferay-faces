@@ -116,6 +116,7 @@ public interface StarRatingAlloy {
 	public static final String TAB_INDEX = "tabIndex";
 	public static final String TITLE = "title";
 	public static final String USE_ARIA = "useARIA";
+	public static final String VALUE = "value";
 	public static final String VISIBLE = "visible";
 	public static final String WIDGET_RENDER = "render";
 	public static final String WIDTH = "width";
@@ -487,6 +488,10 @@ public interface StarRatingAlloy {
 	public Boolean isUseARIA();
 
 	public void setUseARIA(Boolean useARIA);
+
+	public Object getValue();
+
+	public void setValue(Object value);
 
 	public Boolean isVisible();
 
