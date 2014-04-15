@@ -78,7 +78,7 @@ npm install
 grunt init
 echo "Done initializing dependencies for alloyUI $ALLOY_UI_VERSION."
 echo "Building docs for alloyUI $ALLOY_UI_VERSION..."
-if [ "$ALLOY_UI_VERSION" = "2.0.0" ] ; then
+if [[ "$ALLOY_UI_VERSION" = 2.0* ]] ; then
 
 	# Workaround for https://issues.liferay.com/browse/AUI-1183
 	cd ../alloy-apidocs-theme

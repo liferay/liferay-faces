@@ -16,7 +16,7 @@ package com.liferay.faces.alloy.component.thumbrating;
 import javax.faces.application.ResourceDependency;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.component.rating.RatingRenderer;
+import com.liferay.faces.alloy.component.starrating.StarRatingRenderer;
 
 
 /**
@@ -24,7 +24,7 @@ import com.liferay.faces.alloy.component.rating.RatingRenderer;
  */
 @FacesRenderer(componentFamily = ThumbRating.COMPONENT_FAMILY, rendererType = ThumbRating.RENDERER_TYPE)
 @ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
-public class ThumbRatingRenderer extends RatingRenderer {
+public class ThumbRatingRenderer extends StarRatingRenderer {
 
 	// Private Constants
 	private static final String THUMBRATING_CLASS_NAME = "ThumbRating";

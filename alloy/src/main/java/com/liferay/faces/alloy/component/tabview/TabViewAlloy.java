@@ -21,7 +21,7 @@ import javax.annotation.Generated;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public interface TabViewComponent {
+public interface TabViewAlloy {
 
 	// Public Constants
 	public static final String ACTIVE_DESCENDANT = "activeDescendant";
