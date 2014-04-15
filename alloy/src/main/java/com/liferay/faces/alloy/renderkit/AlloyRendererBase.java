@@ -119,12 +119,17 @@ public abstract class AlloyRendererBase extends RendererBase {
 			responseWriter.write(StringPool.NEW_LINE);
 		}
 
-		ClientComponent clientComponent = (ClientComponent) uiComponent;
-		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
-
 		if (isAjax(facesContext) || isForceInline(facesContext, uiComponent)) {
 
-			encodeLiferayComponentVar(responseWriter, clientVarName, clientComponent.getClientKey());
+			ClientComponent clientComponent = (ClientComponent) uiComponent;
+			String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+			String clientKey = clientComponent.getClientKey();
+
+			if (clientKey == null) {
+				clientKey = clientVarName;
+			}
+
+			encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
 			responseWriter.write(IF);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
 			responseWriter.write(clientVarName);
@@ -184,7 +189,13 @@ public abstract class AlloyRendererBase extends RendererBase {
 	protected void encodeJavaScriptMain(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		String clientVarName = ComponentUtil.getClientVarName(facesContext, (ClientComponent) uiComponent);
+		ClientComponent clientComponent = (ClientComponent) uiComponent;
+		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+		String clientKey = clientComponent.getClientKey();
+		
+		if (clientKey == null) {
+			clientKey = clientVarName;
+		}
 
 		responseWriter.write(VAR);
 		responseWriter.write(StringPool.SPACE);
@@ -193,7 +204,7 @@ public abstract class AlloyRendererBase extends RendererBase {
 		responseWriter.write(LIFERAY_COMPONENT);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(clientVarName);
+		responseWriter.write(clientKey);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.COMMA);
 		responseWriter.write(FUNCTION);
@@ -249,11 +260,6 @@ public abstract class AlloyRendererBase extends RendererBase {
 		responseWriter.write(clientKey);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-	}
-
-	protected void encodeLiferayComponent(ResponseWriter responseWriter, ClientComponent clientComponent)
-		throws IOException {
-		encodeLiferayComponent(responseWriter, clientComponent.getClientKey());
 	}
 
 	protected void encodeLiferayComponentVar(ResponseWriter responseWriter, String clientVarName, String clientKey)

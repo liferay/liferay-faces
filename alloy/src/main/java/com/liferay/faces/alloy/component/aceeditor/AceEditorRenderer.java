@@ -110,7 +110,13 @@ public class AceEditorRenderer extends AceEditorRendererBase {
 
 			ClientComponent clientComponent = (ClientComponent) uiComponent;
 			String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
-			encodeLiferayComponentVar(responseWriter, clientVarName, clientComponent.getClientKey());
+			String clientKey = clientComponent.getClientKey();
+		
+			if (clientKey == null) {
+				clientKey = clientVarName;
+			}
+
+			encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
 
 			char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
 			String hiddenInputClientId = uiComponent.getClientId() + separatorChar + StringPool.HIDDEN;

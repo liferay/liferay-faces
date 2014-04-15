@@ -269,7 +269,7 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 
 	@Override
 	public String getClientKey() {
-		return (String) getStateHelper().eval(CLIENT_KEY, getClientId());
+		return (String) getStateHelper().eval(CLIENT_KEY, null);
 	}
 
 	@Override

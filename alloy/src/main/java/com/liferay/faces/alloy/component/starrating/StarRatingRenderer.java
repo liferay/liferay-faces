@@ -109,7 +109,13 @@ public class StarRatingRenderer extends StarRatingRendererBase {
 
 		ClientComponent clientComponent = (ClientComponent) uiComponent;
 		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
-		encodeLiferayComponentVar(responseWriter, clientVarName, clientComponent.getClientKey());
+		String clientKey = clientComponent.getClientKey();
+		
+		if (clientKey == null) {
+			clientKey = clientVarName;
+		}
+
+		encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
 
 		// The above should render something like this: var _1_WAR_showcaseportlet__j_idt6_j_idt19_j_idt22_j_idt23 =
 		// Liferay.component('_1_WAR_showcaseportlet__j_idt6_j_idt19_j_idt22_j_idt23');
