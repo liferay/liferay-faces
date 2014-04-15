@@ -156,11 +156,10 @@ public class TabViewRenderer extends TabViewRendererBase {
 	protected void encodeTabListItem(FacesContext facesContext, ResponseWriter responseWriter, Tab tab)
 		throws IOException {
 
-		UIComponent uiComponent = (UIComponent) tab;
-		responseWriter.startElement(StringPool.LI, uiComponent);
-		responseWriter.startElement(StringPool.ASCII_TABLE[97], uiComponent);
+		responseWriter.startElement(StringPool.LI, tab);
+		responseWriter.startElement(StringPool.ASCII_TABLE[97], tab);
 
-		String escapedClientId = ComponentUtil.escapeClientId(uiComponent.getClientId(facesContext));
+		String escapedClientId = ComponentUtil.escapeClientId(tab.getClientId(facesContext));
 		responseWriter.writeAttribute(StringPool.HREF, StringPool.POUND + escapedClientId, null);
 
 		String label = (String) tab.getLabel();

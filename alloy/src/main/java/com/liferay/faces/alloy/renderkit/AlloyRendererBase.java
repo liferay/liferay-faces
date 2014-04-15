@@ -185,40 +185,54 @@ public abstract class AlloyRendererBase extends RendererBase {
 		}
 	}
 
+	/**
+	 * This method renders JavaScript which creates the Alloy component and puts it into the Liferay.component map.
+	 * Example output of this function is shown below:
+	 *
+	 * <pre>
+	    {@code
+	        Liferay.component('clientKey',
+	            (function(){
+	                return new A.AlloyComponent({
+	                    attribute1:value1,
+	                    attribute2:value2,
+	                    ...
+	                    attributeN:valueN
+	                });
+	            })()
+	        );
+	    }
+	 * </pre>
+	 *
+	 * @throws  IOException
+	 */
 	@Override
 	protected void encodeJavaScriptMain(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		ClientComponent clientComponent = (ClientComponent) uiComponent;
-		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
 		String clientKey = clientComponent.getClientKey();
-		
+
 		if (clientKey == null) {
-			clientKey = clientVarName;
+			clientKey = ComponentUtil.getClientVarName(facesContext, clientComponent);
 		}
 
-		responseWriter.write(VAR);
-		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(clientVarName);
-		responseWriter.write(StringPool.SEMICOLON);
+		// Begin encoding JavaScript to create the Alloy JavaScript component and put it in the Liferay.component map.
 		responseWriter.write(LIFERAY_COMPONENT);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(clientKey);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.COMMA);
+
+		// Begin an anonymous self-executing function which returns the Alloy JavaScript component.
+		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(FUNCTION);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		responseWriter.write(IF);
-		responseWriter.write(StringPool.OPEN_PARENTHESIS);
-		responseWriter.write(StringPool.EXCLAMATION);
-		responseWriter.write(clientVarName);
-		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		responseWriter.write(clientVarName);
-		responseWriter.write(StringPool.EQUAL);
+		responseWriter.write(RETURN);
+		responseWriter.write(StringPool.SPACE);
 		responseWriter.write(NEW);
 		responseWriter.write(StringPool.SPACE);
 		responseWriter.write(A);
@@ -230,19 +244,14 @@ public abstract class AlloyRendererBase extends RendererBase {
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 		responseWriter.write(StringPool.SEMICOLON);
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-		responseWriter.write(RETURN);
-		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(clientVarName);
-		responseWriter.write(StringPool.SEMICOLON);
+
+		// End anonymous self-executing function.
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-		responseWriter.write(StringPool.SEMICOLON);
-		responseWriter.write(LIFERAY_COMPONENT);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
-		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(clientVarName);
-		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+
+		// Close Liferay.component parenthesis.
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 		responseWriter.write(StringPool.SEMICOLON);
 	}
