@@ -480,7 +480,7 @@
 			<renderer-type>com.liferay.faces.alloy.component.starrating.StarRatingRenderer</renderer-type>
 		</component>
 		<attribute>
-			<description><![CDATA[ 					A hot key character that makes it possible for the user to change focus to this component 				]]></description>
+			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
 			<name>accesskey</name>
 			<required>false</required>
 			<type>String</type>
@@ -678,13 +678,13 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					An EL expression that binds the Java reference to this component in the component tree to a bean property. 				]]></description>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
 			<name>binding</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					__DESCRIPTION__ 				]]></description>
+			<description><![CDATA[__DESCRIPTION__]]></description>
 			<name>border</name>
 			<required>false</required>
 			<type>Object</type>
@@ -714,7 +714,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					The class name of the converter instance that is to be used by this component. 				]]></description>
+			<description><![CDATA[The class name of the converter instance that is to be used by this component.]]></description>
 			<name>converter</name>
 			<required>false</required>
 			<type>String</type>
@@ -744,19 +744,19 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					This is an i18n attribute, which designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR). 				]]></description>
+			<description><![CDATA[This is an i18n attribute, which designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					__DESCRIPTION__ 				]]></description>
+			<description><![CDATA[__DESCRIPTION__]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					A CSS class name to apply to the label of a disabled selectItems. 				]]></description>
+			<description><![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]></description>
 			<name>disabledClass</name>
 			<required>false</required>
 			<type>String</type>
@@ -768,7 +768,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					A CSS class name to apply to the label of an enabled selectItems. 				]]></description>
+			<description><![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]></description>
 			<name>enabledClass</name>
 			<required>false</required>
 			<type>String</type>
@@ -798,13 +798,13 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user. 				]]></description>
+			<description><![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]></description>
 			<name>hideNoSelectionOption</name>
 			<required>false</required>
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					A unique identifier for this component. 				]]></description>
+			<description><![CDATA[A unique identifier for this component.]]></description>
 			<name>id</name>
 			<required>false</required>
 			<type>String</type>
@@ -822,7 +822,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					A name for this component to be rendered to the user. This name should be localized for the user. 				]]></description>
+			<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
 			<name>label</name>
 			<required>false</required>
 			<type>String</type>
@@ -840,7 +840,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					Javascript to execute after this component loses focus. 				]]></description>
+			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
 			<name>onblur</name>
 			<required>false</required>
 			<type>String</type>
@@ -858,13 +858,13 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					Javascript to execute after this component's value has changed, and then it loses focus. 				]]></description>
+			<description><![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]></description>
 			<name>onchange</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					Javascript to execute when this component is clicked. 				]]></description>
+			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
 			<name>onclick</name>
 			<required>false</required>
 			<type>String</type>
@@ -888,7 +888,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					Javascript to execute when a double click event occurs. 				]]></description>
+			<description><![CDATA[Javascript to execute when a double click event occurs.]]></description>
 			<name>ondblclick</name>
 			<required>false</required>
 			<type>String</type>
@@ -918,7 +918,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					Javascript to execute when this component gets focus. 				]]></description>
+			<description><![CDATA[Javascript to execute when this component gets focus.]]></description>
 			<name>onfocus</name>
 			<required>false</required>
 			<type>String</type>
@@ -966,19 +966,19 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					Javascript to execute when a keydown event occurs. 				]]></description>
+			<description><![CDATA[Javascript to execute when a keydown event occurs.]]></description>
 			<name>onkeydown</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					Javascript to execute when a keypress event occurs. 				]]></description>
+			<description><![CDATA[Javascript to execute when a keypress event occurs.]]></description>
 			<name>onkeypress</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					Javascript to execute when a keyup event occurs. 				]]></description>
+			<description><![CDATA[Javascript to execute when a keyup event occurs.]]></description>
 			<name>onkeyup</name>
 			<required>false</required>
 			<type>String</type>
@@ -1002,31 +1002,31 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					Javascript to execute when a mousedown event occurs. 				]]></description>
+			<description><![CDATA[Javascript to execute when a mousedown event occurs.]]></description>
 			<name>onmousedown</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					Javascript to execute when a mousemove event occurs. 				]]></description>
+			<description><![CDATA[Javascript to execute when a mousemove event occurs.]]></description>
 			<name>onmousemove</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					Javascript to execute when a mouseout event occurs. 				]]></description>
+			<description><![CDATA[Javascript to execute when a mouseout event occurs.]]></description>
 			<name>onmouseout</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					Javascript to execute when a mouseover event occurs. 				]]></description>
+			<description><![CDATA[Javascript to execute when a mouseover event occurs.]]></description>
 			<name>onmouseover</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					Javascript to execute when a mouseup event occurs. 				]]></description>
+			<description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
 			<name>onmouseup</name>
 			<required>false</required>
 			<type>String</type>
@@ -1044,7 +1044,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					Javascript to execute when the user selects this component. 				]]></description>
+			<description><![CDATA[Javascript to execute when the user selects this component.]]></description>
 			<name>onselect</name>
 			<required>false</required>
 			<type>String</type>
@@ -1116,19 +1116,19 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component. 				]]></description>
+			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
 			<name>readonly</name>
 			<required>false</required>
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					When false, this component will not be rendered. The default value of this attribute is true. 				]]></description>
+			<description><![CDATA[When false, this component will not be rendered. The default value of this attribute is true.]]></description>
 			<name>rendered</name>
 			<required>false</required>
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by. 				]]></description>
+			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
 			<name>role</name>
 			<required>false</required>
 			<type>String</type>
@@ -1170,7 +1170,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					An integer designating the position in the tabbing order for this component among others, if any. 				]]></description>
+			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
 			<type>String</type>
@@ -1182,7 +1182,7 @@
 			<type>Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					The title of the component, which is simply passed through as the html 'title' attribute of this component. 				]]></description>
+			<description><![CDATA[The title of the component, which is simply passed through as the html 'title' attribute of this component.]]></description>
 			<name>title</name>
 			<required>false</required>
 			<type>String</type>
@@ -1194,10 +1194,10 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					The value of this component, which is typically bound via EL to a model bean property. 				]]></description>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
 			<name>value</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
@@ -1206,19 +1206,19 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					This message, or the result of the given expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component. 				]]></description>
+			<description><![CDATA[This message, or the result of the given expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]></description>
 			<name>widgetConverterMessage</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the Process Validations phase. 				]]></description>
+			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the Process Validations phase.]]></description>
 			<name>widgetImmediate</name>
 			<required>false</required>
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					__DESCRIPTION__ 				]]></description>
+			<description><![CDATA[__DESCRIPTION__]]></description>
 			<name>widgetLang</name>
 			<required>false</required>
 			<type>String</type>
@@ -1230,25 +1230,25 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					When this flag is true, and a value has not been specified for this component, then the Process Validations phase will fail and a FacesMessage will be added to the FacesContext for this component. 				]]></description>
+			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the Process Validations phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
 			<name>widgetRequired</name>
 			<required>false</required>
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					This message, or the result of the given expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user. 				]]></description>
+			<description><![CDATA[This message, or the result of the given expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]></description>
 			<name>widgetRequiredMessage</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					The css class names that are rendered as the value of the class attribute of the outermost span of this component. 				]]></description>
+			<description><![CDATA[The css class names that are rendered as the value of the class attribute of the outermost span of this component.]]></description>
 			<name>widgetStyleClass</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					__DESCRIPTION__ 				]]></description>
+			<description><![CDATA[__DESCRIPTION__]]></description>
 			<name>widgetValidator</name>
 			<required>false</required>
 			<type>Object</type>
@@ -1257,13 +1257,13 @@
 				</method-signature>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					__DESCRIPTION__ 				]]></description>
+			<description><![CDATA[__DESCRIPTION__]]></description>
 			<name>widgetValidatorMessage</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[ 					__DESCRIPTION__ 				]]></description>
+			<description><![CDATA[__DESCRIPTION__]]></description>
 			<name>widgetValueChangeListener</name>
 			<required>false</required>
 			<type>Object</type>
@@ -1287,7 +1287,7 @@
 			<renderer-type>com.liferay.faces.alloy.component.tab.TabRenderer</renderer-type>
 		</component>
 		<attribute>
-			<description><![CDATA[ 					__DESCRIPTION__ 				]]></description>
+			<description><![CDATA[__DESCRIPTION__]]></description>
 			<name>label</name>
 			<required>false</required>
 			<type>String</type>

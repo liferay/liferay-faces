@@ -52,7 +52,7 @@
 				<name>label</name>
 				<type>java.lang.String</type>
 				<jsfReservedAttribute>true</jsfReservedAttribute>
-				<jsfReservedAttributeType>String</jsfReservedAttributeType>
+				<jsfReservedAttributeType>java.lang.String</jsfReservedAttributeType>
 			</attribute>
 			<attribute>
 				<description>
@@ -61,7 +61,16 @@
 				<name>title</name>
 				<type>java.lang.String</type>
 				<jsfReservedAttribute>true</jsfReservedAttribute>
-				<jsfReservedAttributeType>String</jsfReservedAttributeType>
+				<jsfReservedAttributeType>java.lang.String</jsfReservedAttributeType>
+			</attribute>
+                        <attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.String</type>
+				<jsfReservedAttribute>true</jsfReservedAttribute>
+				<jsfReservedAttributeType>java.lang.Object</jsfReservedAttributeType>
 			</attribute>
 			<!-- Attributes that default to jsfReservedAttribute=true -->
 			<attribute>
@@ -77,14 +86,6 @@
 				</description>
 				<name>rendered</name>
 				<type>java.lang.Boolean</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
-				</description>
-				<name>value</name>
-				<type>java.lang.Object</type>
-				<generateJava>false</generateJava>
 			</attribute>
 			<!-- Attributes that are inherited from HtmlSelectOneRadio -->
 			<attribute>
