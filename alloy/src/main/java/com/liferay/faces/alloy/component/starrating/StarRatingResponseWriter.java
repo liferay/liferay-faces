@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.rating;
+package com.liferay.faces.alloy.component.starrating;
 
 import java.io.IOException;
 
@@ -39,7 +39,7 @@ import com.liferay.faces.util.lang.StringPool;
  * @author	Vernon Singleton
  */
 //J+
-public class RatingResponseWriter extends ResponseWriterWrapper {
+public class StarRatingResponseWriter extends ResponseWriterWrapper {
 
 	// Public constants.
 	public static final int NO_SELECTION_INDEX = -1;
@@ -55,7 +55,7 @@ public class RatingResponseWriter extends ResponseWriterWrapper {
 	private Long defaultSelected;
 	private Object defaultSelectedValue;
 
-	public RatingResponseWriter(ResponseWriter responseWriter, String defaultSelected) {
+	public StarRatingResponseWriter(ResponseWriter responseWriter, String defaultSelected) {
 		this.wrappedResponseWriter = responseWriter;
 		this.index = NO_SELECTION_INDEX;
 		this.selectedIndex = NO_SELECTION_INDEX;
@@ -99,6 +99,7 @@ public class RatingResponseWriter extends ResponseWriterWrapper {
 	// f:selectItems uses this for writing chars into a label
 	@Override
 	public void write(char[] chars, int off, int len) throws IOException {
+
 		if (labelElement) {
 			String newString = new String(chars, off, len);
 			title = newString;
@@ -141,6 +142,7 @@ public class RatingResponseWriter extends ResponseWriterWrapper {
 	// f:selectItem uses this for writing text into a label
 	@Override
 	public void writeText(Object text, UIComponent component, String property) throws IOException {
+
 		if (labelElement) {
 			title = text;
 		}

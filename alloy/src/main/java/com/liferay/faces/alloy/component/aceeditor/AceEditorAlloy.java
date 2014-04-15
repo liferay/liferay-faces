@@ -21,7 +21,7 @@ import javax.annotation.Generated;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public interface AceEditorComponent {
+public interface AceEditorAlloy {
 
 	// Public Constants
 	public static final String AFTER_BOUNDING_BOX_CHANGE = "afterBoundingBoxChange";

@@ -15,13 +15,14 @@ package com.liferay.faces.alloy.component.thumbrating;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.alloy.component.rating.Rating;
+import com.liferay.faces.alloy.component.starrating.StarRating;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = ThumbRating.COMPONENT_TYPE)
-public class ThumbRating extends Rating {
+public class ThumbRating extends StarRating {
 
 	// Public Constants
 	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.thumbrating";

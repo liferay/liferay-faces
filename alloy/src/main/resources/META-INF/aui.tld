@@ -7,7 +7,7 @@
    <short-name>aui</short-name>
    <uri>http://liferay.com/faces/aui</uri>
    <tag>
-      <description>A base class for ACE Editor.  Check the [live demo](http://alloyui.com/examples/ace-editor/).</description>
+      <description>AceEditor is an input component that renders a field for editing source code text.</description>
       <name>aceEditor</name>
       <tag-class>com.liferay.faces.alloy.taglib.AceEditorTag</tag-class>
       <body-content>JSP</body-content>
@@ -181,6 +181,13 @@
       </attribute>
       <attribute>
          <name>boundingBox</name>
+         <required>false</required>
+         <deferred-value>
+            <type>String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>clientKey</name>
          <required>false</required>
          <deferred-value>
             <type>String</type>
@@ -514,13 +521,6 @@
          </deferred-value>
       </attribute>
       <attribute>
-         <name>widgetVar</name>
-         <required>false</required>
-         <deferred-value>
-            <type>String</type>
-         </deferred-value>
-      </attribute>
-      <attribute>
          <name>width</name>
          <required>false</required>
          <deferred-value>
@@ -529,9 +529,9 @@
       </attribute>
    </tag>
    <tag>
-      <description>An input component rendering a set of stars that a user may select to indicate their 'rating'. Since it extends HtmlSelectOneRadio, it accepts f:selectItem(s) as children.</description>
+      <description>StarRating is an input component that renders a set of stars.</description>
       <name>starRating</name>
-      <tag-class>com.liferay.faces.alloy.taglib.RatingTag</tag-class>
+      <tag-class>com.liferay.faces.alloy.taglib.StarRatingTag</tag-class>
       <body-content>JSP</body-content>
       <attribute>
          <name>accesskey</name>
@@ -793,6 +793,13 @@
          </deferred-value>
       </attribute>
       <attribute>
+         <name>clientKey</name>
+         <required>false</required>
+         <deferred-value>
+            <type>String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
          <name>contentBox</name>
          <required>false</required>
          <deferred-value>
@@ -932,13 +939,6 @@
       </attribute>
       <attribute>
          <name>labelNode</name>
-         <required>false</required>
-         <deferred-value>
-            <type>String</type>
-         </deferred-value>
-      </attribute>
-      <attribute>
-         <name>layout</name>
          <required>false</required>
          <deferred-value>
             <type>String</type>
@@ -1449,13 +1449,6 @@
          </deferred-value>
       </attribute>
       <attribute>
-         <name>widgetVar</name>
-         <required>false</required>
-         <deferred-value>
-            <type>String</type>
-         </deferred-value>
-      </attribute>
-      <attribute>
          <name>width</name>
          <required>false</required>
          <deferred-value>
@@ -1464,7 +1457,7 @@
       </attribute>
    </tag>
    <tag>
-      <description/>
+      <description>Tab is a panel component that renders nested/child tags as content within itself.</description>
       <name>tab</name>
       <tag-class>com.liferay.faces.alloy.taglib.TabTag</tag-class>
       <body-content>JSP</body-content>
@@ -1484,7 +1477,7 @@
       </attribute>
    </tag>
    <tag>
-      <description>A base class for TabView.  Check the [live demo](http://alloyui.com/examples/tabview/).</description>
+      <description>TabView is an iterator component that renders tabs either statically or dynamically.</description>
       <name>tabView</name>
       <tag-class>com.liferay.faces.alloy.taglib.TabViewTag</tag-class>
       <body-content>JSP</body-content>
@@ -1651,6 +1644,13 @@
       </attribute>
       <attribute>
          <name>boundingBox</name>
+         <required>false</required>
+         <deferred-value>
+            <type>String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>clientKey</name>
          <required>false</required>
          <deferred-value>
             <type>String</type>
@@ -1946,13 +1946,6 @@
          <required>false</required>
          <deferred-value>
             <type>Boolean</type>
-         </deferred-value>
-      </attribute>
-      <attribute>
-         <name>widgetVar</name>
-         <required>false</required>
-         <deferred-value>
-            <type>String</type>
          </deferred-value>
       </attribute>
       <attribute>

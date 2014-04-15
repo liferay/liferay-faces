@@ -63,182 +63,182 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 	@Override
 	protected void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
 
-		TabViewComponent tabViewComponent = (TabViewComponent) uiComponent;
+		TabViewAlloy tabViewAlloy = (TabViewAlloy) uiComponent;
 		boolean first = true;
 
-		String activeDescendant = tabViewComponent.getActiveDescendant();
+		String activeDescendant = tabViewAlloy.getActiveDescendant();
 
 		if (activeDescendant != null) {
 
-			encodeActiveDescendant(responseWriter, tabViewComponent, activeDescendant, first);
+			encodeActiveDescendant(responseWriter, tabViewAlloy, activeDescendant, first);
 			first = false;
 		}
 
-		String boundingBox = tabViewComponent.getBoundingBox();
+		String boundingBox = tabViewAlloy.getBoundingBox();
 
 		if (boundingBox != null) {
 
-			encodeBoundingBox(responseWriter, tabViewComponent, boundingBox, first);
+			encodeBoundingBox(responseWriter, tabViewAlloy, boundingBox, first);
 			first = false;
 		}
 
-		String contentBox = tabViewComponent.getContentBox();
+		String contentBox = tabViewAlloy.getContentBox();
 
 		if (contentBox != null) {
 
-			encodeContentBox(responseWriter, tabViewComponent, contentBox, first);
+			encodeContentBox(responseWriter, tabViewAlloy, contentBox, first);
 			first = false;
 		}
 
-		String defaultChildType = tabViewComponent.getDefaultChildType();
+		String defaultChildType = tabViewAlloy.getDefaultChildType();
 
 		if (defaultChildType != null) {
 
-			encodeDefaultChildType(responseWriter, tabViewComponent, defaultChildType, first);
+			encodeDefaultChildType(responseWriter, tabViewAlloy, defaultChildType, first);
 			first = false;
 		}
 
-		Boolean destroyed = tabViewComponent.isDestroyed();
+		Boolean destroyed = tabViewAlloy.isDestroyed();
 
 		if (destroyed != null) {
 
-			encodeDestroyed(responseWriter, tabViewComponent, destroyed, first);
+			encodeDestroyed(responseWriter, tabViewAlloy, destroyed, first);
 			first = false;
 		}
 
-		Boolean disabled = tabViewComponent.isDisabled();
+		Boolean disabled = tabViewAlloy.isDisabled();
 
 		if (disabled != null) {
 
-			encodeDisabled(responseWriter, tabViewComponent, disabled, first);
+			encodeDisabled(responseWriter, tabViewAlloy, disabled, first);
 			first = false;
 		}
 
-		Boolean focused = tabViewComponent.isFocused();
+		Boolean focused = tabViewAlloy.isFocused();
 
 		if (focused != null) {
 
-			encodeFocused(responseWriter, tabViewComponent, focused, first);
+			encodeFocused(responseWriter, tabViewAlloy, focused, first);
 			first = false;
 		}
 
-		Object height = tabViewComponent.getHeight();
+		Object height = tabViewAlloy.getHeight();
 
 		if (height != null) {
 
-			encodeHeight(responseWriter, tabViewComponent, height, first);
+			encodeHeight(responseWriter, tabViewAlloy, height, first);
 			first = false;
 		}
 
-		String id = tabViewComponent.getId();
+		String id = tabViewAlloy.getId();
 
 		if (id != null) {
 
-			encodeId(responseWriter, tabViewComponent, id, first);
+			encodeId(responseWriter, tabViewAlloy, id, first);
 			first = false;
 		}
 
-		Boolean initialized = tabViewComponent.isInitialized();
+		Boolean initialized = tabViewAlloy.isInitialized();
 
 		if (initialized != null) {
 
-			encodeInitialized(responseWriter, tabViewComponent, initialized, first);
+			encodeInitialized(responseWriter, tabViewAlloy, initialized, first);
 			first = false;
 		}
 
-		String locale = tabViewComponent.getLocale();
+		String locale = tabViewAlloy.getLocale();
 
 		if (locale != null) {
 
-			encodeLocale(responseWriter, tabViewComponent, locale, first);
+			encodeLocale(responseWriter, tabViewAlloy, locale, first);
 			first = false;
 		}
 
-		Boolean multiple = tabViewComponent.isMultiple();
+		Boolean multiple = tabViewAlloy.isMultiple();
 
 		if (multiple != null) {
 
-			encodeMultiple(responseWriter, tabViewComponent, multiple, first);
+			encodeMultiple(responseWriter, tabViewAlloy, multiple, first);
 			first = false;
 		}
 
-		Boolean rendered = tabViewComponent.isRendered();
+		Boolean rendered = tabViewAlloy.isRendered();
 
 		if (rendered != null) {
 
-			encodeRendered(responseWriter, tabViewComponent, rendered, first);
+			encodeRendered(responseWriter, tabViewAlloy, rendered, first);
 			first = false;
 		}
 
-		Object selection = tabViewComponent.getSelection();
+		Object selection = tabViewAlloy.getSelection();
 
 		if (selection != null) {
 
-			encodeSelection(responseWriter, tabViewComponent, selection, first);
+			encodeSelection(responseWriter, tabViewAlloy, selection, first);
 			first = false;
 		}
 
-		String srcNode = tabViewComponent.getSrcNode();
+		String srcNode = tabViewAlloy.getSrcNode();
 
 		if (srcNode != null) {
 
-			encodeSrcNode(responseWriter, tabViewComponent, srcNode, first);
+			encodeSrcNode(responseWriter, tabViewAlloy, srcNode, first);
 			first = false;
 		}
 
-		Boolean stacked = tabViewComponent.isStacked();
+		Boolean stacked = tabViewAlloy.isStacked();
 
 		if (stacked != null) {
 
-			encodeStacked(responseWriter, tabViewComponent, stacked, first);
+			encodeStacked(responseWriter, tabViewAlloy, stacked, first);
 			first = false;
 		}
 
-		Object strings = tabViewComponent.getStrings();
+		Object strings = tabViewAlloy.getStrings();
 
 		if (strings != null) {
 
-			encodeStrings(responseWriter, tabViewComponent, strings, first);
+			encodeStrings(responseWriter, tabViewAlloy, strings, first);
 			first = false;
 		}
 
-		Object tabIndex = tabViewComponent.getTabIndex();
+		Object tabIndex = tabViewAlloy.getTabIndex();
 
 		if (tabIndex != null) {
 
-			encodeTabIndex(responseWriter, tabViewComponent, tabIndex, first);
+			encodeTabIndex(responseWriter, tabViewAlloy, tabIndex, first);
 			first = false;
 		}
 
-		String type = tabViewComponent.getType();
+		String type = tabViewAlloy.getType();
 
 		if (type != null) {
 
-			encodeType(responseWriter, tabViewComponent, type, first);
+			encodeType(responseWriter, tabViewAlloy, type, first);
 			first = false;
 		}
 
-		Boolean visible = tabViewComponent.isVisible();
+		Boolean visible = tabViewAlloy.isVisible();
 
 		if (visible != null) {
 
-			encodeVisible(responseWriter, tabViewComponent, visible, first);
+			encodeVisible(responseWriter, tabViewAlloy, visible, first);
 			first = false;
 		}
 
-		Boolean widgetRender = tabViewComponent.isWidgetRender();
+		Boolean widgetRender = tabViewAlloy.isWidgetRender();
 
 		if (widgetRender != null) {
 
-			encodeWidgetRender(responseWriter, tabViewComponent, widgetRender, first);
+			encodeWidgetRender(responseWriter, tabViewAlloy, widgetRender, first);
 			first = false;
 		}
 
-		Object width = tabViewComponent.getWidth();
+		Object width = tabViewAlloy.getWidth();
 
 		if (width != null) {
 
-			encodeWidth(responseWriter, tabViewComponent, width, first);
+			encodeWidth(responseWriter, tabViewAlloy, width, first);
 			first = false;
 		}
 
@@ -248,179 +248,179 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 
 		first = true;
 
-		String afterActiveDescendantChange = tabViewComponent.getAfterActiveDescendantChange();
+		String afterActiveDescendantChange = tabViewAlloy.getAfterActiveDescendantChange();
 
 		if (afterActiveDescendantChange != null) {
 
-			encodeAfterActiveDescendantChange(responseWriter, tabViewComponent, afterActiveDescendantChange, first);
+			encodeAfterActiveDescendantChange(responseWriter, tabViewAlloy, afterActiveDescendantChange, first);
 			first = false;
 		}
 
-		String afterBoundingBoxChange = tabViewComponent.getAfterBoundingBoxChange();
+		String afterBoundingBoxChange = tabViewAlloy.getAfterBoundingBoxChange();
 
 		if (afterBoundingBoxChange != null) {
 
-			encodeAfterBoundingBoxChange(responseWriter, tabViewComponent, afterBoundingBoxChange, first);
+			encodeAfterBoundingBoxChange(responseWriter, tabViewAlloy, afterBoundingBoxChange, first);
 			first = false;
 		}
 
-		String afterContentBoxChange = tabViewComponent.getAfterContentBoxChange();
+		String afterContentBoxChange = tabViewAlloy.getAfterContentBoxChange();
 
 		if (afterContentBoxChange != null) {
 
-			encodeAfterContentBoxChange(responseWriter, tabViewComponent, afterContentBoxChange, first);
+			encodeAfterContentBoxChange(responseWriter, tabViewAlloy, afterContentBoxChange, first);
 			first = false;
 		}
 
-		String afterDefaultChildTypeChange = tabViewComponent.getAfterDefaultChildTypeChange();
+		String afterDefaultChildTypeChange = tabViewAlloy.getAfterDefaultChildTypeChange();
 
 		if (afterDefaultChildTypeChange != null) {
 
-			encodeAfterDefaultChildTypeChange(responseWriter, tabViewComponent, afterDefaultChildTypeChange, first);
+			encodeAfterDefaultChildTypeChange(responseWriter, tabViewAlloy, afterDefaultChildTypeChange, first);
 			first = false;
 		}
 
-		String afterDestroyedChange = tabViewComponent.getAfterDestroyedChange();
+		String afterDestroyedChange = tabViewAlloy.getAfterDestroyedChange();
 
 		if (afterDestroyedChange != null) {
 
-			encodeAfterDestroyedChange(responseWriter, tabViewComponent, afterDestroyedChange, first);
+			encodeAfterDestroyedChange(responseWriter, tabViewAlloy, afterDestroyedChange, first);
 			first = false;
 		}
 
-		String afterDisabledChange = tabViewComponent.getAfterDisabledChange();
+		String afterDisabledChange = tabViewAlloy.getAfterDisabledChange();
 
 		if (afterDisabledChange != null) {
 
-			encodeAfterDisabledChange(responseWriter, tabViewComponent, afterDisabledChange, first);
+			encodeAfterDisabledChange(responseWriter, tabViewAlloy, afterDisabledChange, first);
 			first = false;
 		}
 
-		String afterFocusedChange = tabViewComponent.getAfterFocusedChange();
+		String afterFocusedChange = tabViewAlloy.getAfterFocusedChange();
 
 		if (afterFocusedChange != null) {
 
-			encodeAfterFocusedChange(responseWriter, tabViewComponent, afterFocusedChange, first);
+			encodeAfterFocusedChange(responseWriter, tabViewAlloy, afterFocusedChange, first);
 			first = false;
 		}
 
-		String afterHeightChange = tabViewComponent.getAfterHeightChange();
+		String afterHeightChange = tabViewAlloy.getAfterHeightChange();
 
 		if (afterHeightChange != null) {
 
-			encodeAfterHeightChange(responseWriter, tabViewComponent, afterHeightChange, first);
+			encodeAfterHeightChange(responseWriter, tabViewAlloy, afterHeightChange, first);
 			first = false;
 		}
 
-		String afterIdChange = tabViewComponent.getAfterIdChange();
+		String afterIdChange = tabViewAlloy.getAfterIdChange();
 
 		if (afterIdChange != null) {
 
-			encodeAfterIdChange(responseWriter, tabViewComponent, afterIdChange, first);
+			encodeAfterIdChange(responseWriter, tabViewAlloy, afterIdChange, first);
 			first = false;
 		}
 
-		String afterInitializedChange = tabViewComponent.getAfterInitializedChange();
+		String afterInitializedChange = tabViewAlloy.getAfterInitializedChange();
 
 		if (afterInitializedChange != null) {
 
-			encodeAfterInitializedChange(responseWriter, tabViewComponent, afterInitializedChange, first);
+			encodeAfterInitializedChange(responseWriter, tabViewAlloy, afterInitializedChange, first);
 			first = false;
 		}
 
-		String afterLocaleChange = tabViewComponent.getAfterLocaleChange();
+		String afterLocaleChange = tabViewAlloy.getAfterLocaleChange();
 
 		if (afterLocaleChange != null) {
 
-			encodeAfterLocaleChange(responseWriter, tabViewComponent, afterLocaleChange, first);
+			encodeAfterLocaleChange(responseWriter, tabViewAlloy, afterLocaleChange, first);
 			first = false;
 		}
 
-		String afterMultipleChange = tabViewComponent.getAfterMultipleChange();
+		String afterMultipleChange = tabViewAlloy.getAfterMultipleChange();
 
 		if (afterMultipleChange != null) {
 
-			encodeAfterMultipleChange(responseWriter, tabViewComponent, afterMultipleChange, first);
+			encodeAfterMultipleChange(responseWriter, tabViewAlloy, afterMultipleChange, first);
 			first = false;
 		}
 
-		String afterRenderChange = tabViewComponent.getAfterRenderChange();
+		String afterRenderChange = tabViewAlloy.getAfterRenderChange();
 
 		if (afterRenderChange != null) {
 
-			encodeAfterRenderChange(responseWriter, tabViewComponent, afterRenderChange, first);
+			encodeAfterRenderChange(responseWriter, tabViewAlloy, afterRenderChange, first);
 			first = false;
 		}
 
-		String afterRenderedChange = tabViewComponent.getAfterRenderedChange();
+		String afterRenderedChange = tabViewAlloy.getAfterRenderedChange();
 
 		if (afterRenderedChange != null) {
 
-			encodeAfterRenderedChange(responseWriter, tabViewComponent, afterRenderedChange, first);
+			encodeAfterRenderedChange(responseWriter, tabViewAlloy, afterRenderedChange, first);
 			first = false;
 		}
 
-		String afterSelectionChange = tabViewComponent.getAfterSelectionChange();
+		String afterSelectionChange = tabViewAlloy.getAfterSelectionChange();
 
 		if (afterSelectionChange != null) {
 
-			encodeAfterSelectionChange(responseWriter, tabViewComponent, afterSelectionChange, first);
+			encodeAfterSelectionChange(responseWriter, tabViewAlloy, afterSelectionChange, first);
 			first = false;
 		}
 
-		String afterSrcNodeChange = tabViewComponent.getAfterSrcNodeChange();
+		String afterSrcNodeChange = tabViewAlloy.getAfterSrcNodeChange();
 
 		if (afterSrcNodeChange != null) {
 
-			encodeAfterSrcNodeChange(responseWriter, tabViewComponent, afterSrcNodeChange, first);
+			encodeAfterSrcNodeChange(responseWriter, tabViewAlloy, afterSrcNodeChange, first);
 			first = false;
 		}
 
-		String afterStackedChange = tabViewComponent.getAfterStackedChange();
+		String afterStackedChange = tabViewAlloy.getAfterStackedChange();
 
 		if (afterStackedChange != null) {
 
-			encodeAfterStackedChange(responseWriter, tabViewComponent, afterStackedChange, first);
+			encodeAfterStackedChange(responseWriter, tabViewAlloy, afterStackedChange, first);
 			first = false;
 		}
 
-		String afterStringsChange = tabViewComponent.getAfterStringsChange();
+		String afterStringsChange = tabViewAlloy.getAfterStringsChange();
 
 		if (afterStringsChange != null) {
 
-			encodeAfterStringsChange(responseWriter, tabViewComponent, afterStringsChange, first);
+			encodeAfterStringsChange(responseWriter, tabViewAlloy, afterStringsChange, first);
 			first = false;
 		}
 
-		String afterTabIndexChange = tabViewComponent.getAfterTabIndexChange();
+		String afterTabIndexChange = tabViewAlloy.getAfterTabIndexChange();
 
 		if (afterTabIndexChange != null) {
 
-			encodeAfterTabIndexChange(responseWriter, tabViewComponent, afterTabIndexChange, first);
+			encodeAfterTabIndexChange(responseWriter, tabViewAlloy, afterTabIndexChange, first);
 			first = false;
 		}
 
-		String afterTypeChange = tabViewComponent.getAfterTypeChange();
+		String afterTypeChange = tabViewAlloy.getAfterTypeChange();
 
 		if (afterTypeChange != null) {
 
-			encodeAfterTypeChange(responseWriter, tabViewComponent, afterTypeChange, first);
+			encodeAfterTypeChange(responseWriter, tabViewAlloy, afterTypeChange, first);
 			first = false;
 		}
 
-		String afterVisibleChange = tabViewComponent.getAfterVisibleChange();
+		String afterVisibleChange = tabViewAlloy.getAfterVisibleChange();
 
 		if (afterVisibleChange != null) {
 
-			encodeAfterVisibleChange(responseWriter, tabViewComponent, afterVisibleChange, first);
+			encodeAfterVisibleChange(responseWriter, tabViewAlloy, afterVisibleChange, first);
 			first = false;
 		}
 
-		String afterWidthChange = tabViewComponent.getAfterWidthChange();
+		String afterWidthChange = tabViewAlloy.getAfterWidthChange();
 
 		if (afterWidthChange != null) {
 
-			encodeAfterWidthChange(responseWriter, tabViewComponent, afterWidthChange, first);
+			encodeAfterWidthChange(responseWriter, tabViewAlloy, afterWidthChange, first);
 			first = false;
 		}
 
@@ -434,179 +434,179 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 
 		first = true;
 
-		String onActiveDescendantChange = tabViewComponent.getOnActiveDescendantChange();
+		String onActiveDescendantChange = tabViewAlloy.getOnActiveDescendantChange();
 
 		if (onActiveDescendantChange != null) {
 
-			encodeOnActiveDescendantChange(responseWriter, tabViewComponent, onActiveDescendantChange, first);
+			encodeOnActiveDescendantChange(responseWriter, tabViewAlloy, onActiveDescendantChange, first);
 			first = false;
 		}
 
-		String onBoundingBoxChange = tabViewComponent.getOnBoundingBoxChange();
+		String onBoundingBoxChange = tabViewAlloy.getOnBoundingBoxChange();
 
 		if (onBoundingBoxChange != null) {
 
-			encodeOnBoundingBoxChange(responseWriter, tabViewComponent, onBoundingBoxChange, first);
+			encodeOnBoundingBoxChange(responseWriter, tabViewAlloy, onBoundingBoxChange, first);
 			first = false;
 		}
 
-		String onContentBoxChange = tabViewComponent.getOnContentBoxChange();
+		String onContentBoxChange = tabViewAlloy.getOnContentBoxChange();
 
 		if (onContentBoxChange != null) {
 
-			encodeOnContentBoxChange(responseWriter, tabViewComponent, onContentBoxChange, first);
+			encodeOnContentBoxChange(responseWriter, tabViewAlloy, onContentBoxChange, first);
 			first = false;
 		}
 
-		String onDefaultChildTypeChange = tabViewComponent.getOnDefaultChildTypeChange();
+		String onDefaultChildTypeChange = tabViewAlloy.getOnDefaultChildTypeChange();
 
 		if (onDefaultChildTypeChange != null) {
 
-			encodeOnDefaultChildTypeChange(responseWriter, tabViewComponent, onDefaultChildTypeChange, first);
+			encodeOnDefaultChildTypeChange(responseWriter, tabViewAlloy, onDefaultChildTypeChange, first);
 			first = false;
 		}
 
-		String onDestroyedChange = tabViewComponent.getOnDestroyedChange();
+		String onDestroyedChange = tabViewAlloy.getOnDestroyedChange();
 
 		if (onDestroyedChange != null) {
 
-			encodeOnDestroyedChange(responseWriter, tabViewComponent, onDestroyedChange, first);
+			encodeOnDestroyedChange(responseWriter, tabViewAlloy, onDestroyedChange, first);
 			first = false;
 		}
 
-		String onDisabledChange = tabViewComponent.getOnDisabledChange();
+		String onDisabledChange = tabViewAlloy.getOnDisabledChange();
 
 		if (onDisabledChange != null) {
 
-			encodeOnDisabledChange(responseWriter, tabViewComponent, onDisabledChange, first);
+			encodeOnDisabledChange(responseWriter, tabViewAlloy, onDisabledChange, first);
 			first = false;
 		}
 
-		String onFocusedChange = tabViewComponent.getOnFocusedChange();
+		String onFocusedChange = tabViewAlloy.getOnFocusedChange();
 
 		if (onFocusedChange != null) {
 
-			encodeOnFocusedChange(responseWriter, tabViewComponent, onFocusedChange, first);
+			encodeOnFocusedChange(responseWriter, tabViewAlloy, onFocusedChange, first);
 			first = false;
 		}
 
-		String onHeightChange = tabViewComponent.getOnHeightChange();
+		String onHeightChange = tabViewAlloy.getOnHeightChange();
 
 		if (onHeightChange != null) {
 
-			encodeOnHeightChange(responseWriter, tabViewComponent, onHeightChange, first);
+			encodeOnHeightChange(responseWriter, tabViewAlloy, onHeightChange, first);
 			first = false;
 		}
 
-		String onIdChange = tabViewComponent.getOnIdChange();
+		String onIdChange = tabViewAlloy.getOnIdChange();
 
 		if (onIdChange != null) {
 
-			encodeOnIdChange(responseWriter, tabViewComponent, onIdChange, first);
+			encodeOnIdChange(responseWriter, tabViewAlloy, onIdChange, first);
 			first = false;
 		}
 
-		String onInitializedChange = tabViewComponent.getOnInitializedChange();
+		String onInitializedChange = tabViewAlloy.getOnInitializedChange();
 
 		if (onInitializedChange != null) {
 
-			encodeOnInitializedChange(responseWriter, tabViewComponent, onInitializedChange, first);
+			encodeOnInitializedChange(responseWriter, tabViewAlloy, onInitializedChange, first);
 			first = false;
 		}
 
-		String onLocaleChange = tabViewComponent.getOnLocaleChange();
+		String onLocaleChange = tabViewAlloy.getOnLocaleChange();
 
 		if (onLocaleChange != null) {
 
-			encodeOnLocaleChange(responseWriter, tabViewComponent, onLocaleChange, first);
+			encodeOnLocaleChange(responseWriter, tabViewAlloy, onLocaleChange, first);
 			first = false;
 		}
 
-		String onMultipleChange = tabViewComponent.getOnMultipleChange();
+		String onMultipleChange = tabViewAlloy.getOnMultipleChange();
 
 		if (onMultipleChange != null) {
 
-			encodeOnMultipleChange(responseWriter, tabViewComponent, onMultipleChange, first);
+			encodeOnMultipleChange(responseWriter, tabViewAlloy, onMultipleChange, first);
 			first = false;
 		}
 
-		String onRenderChange = tabViewComponent.getOnRenderChange();
+		String onRenderChange = tabViewAlloy.getOnRenderChange();
 
 		if (onRenderChange != null) {
 
-			encodeOnRenderChange(responseWriter, tabViewComponent, onRenderChange, first);
+			encodeOnRenderChange(responseWriter, tabViewAlloy, onRenderChange, first);
 			first = false;
 		}
 
-		String onRenderedChange = tabViewComponent.getOnRenderedChange();
+		String onRenderedChange = tabViewAlloy.getOnRenderedChange();
 
 		if (onRenderedChange != null) {
 
-			encodeOnRenderedChange(responseWriter, tabViewComponent, onRenderedChange, first);
+			encodeOnRenderedChange(responseWriter, tabViewAlloy, onRenderedChange, first);
 			first = false;
 		}
 
-		String onSelectionChange = tabViewComponent.getOnSelectionChange();
+		String onSelectionChange = tabViewAlloy.getOnSelectionChange();
 
 		if (onSelectionChange != null) {
 
-			encodeOnSelectionChange(responseWriter, tabViewComponent, onSelectionChange, first);
+			encodeOnSelectionChange(responseWriter, tabViewAlloy, onSelectionChange, first);
 			first = false;
 		}
 
-		String onSrcNodeChange = tabViewComponent.getOnSrcNodeChange();
+		String onSrcNodeChange = tabViewAlloy.getOnSrcNodeChange();
 
 		if (onSrcNodeChange != null) {
 
-			encodeOnSrcNodeChange(responseWriter, tabViewComponent, onSrcNodeChange, first);
+			encodeOnSrcNodeChange(responseWriter, tabViewAlloy, onSrcNodeChange, first);
 			first = false;
 		}
 
-		String onStackedChange = tabViewComponent.getOnStackedChange();
+		String onStackedChange = tabViewAlloy.getOnStackedChange();
 
 		if (onStackedChange != null) {
 
-			encodeOnStackedChange(responseWriter, tabViewComponent, onStackedChange, first);
+			encodeOnStackedChange(responseWriter, tabViewAlloy, onStackedChange, first);
 			first = false;
 		}
 
-		String onStringsChange = tabViewComponent.getOnStringsChange();
+		String onStringsChange = tabViewAlloy.getOnStringsChange();
 
 		if (onStringsChange != null) {
 
-			encodeOnStringsChange(responseWriter, tabViewComponent, onStringsChange, first);
+			encodeOnStringsChange(responseWriter, tabViewAlloy, onStringsChange, first);
 			first = false;
 		}
 
-		String onTabIndexChange = tabViewComponent.getOnTabIndexChange();
+		String onTabIndexChange = tabViewAlloy.getOnTabIndexChange();
 
 		if (onTabIndexChange != null) {
 
-			encodeOnTabIndexChange(responseWriter, tabViewComponent, onTabIndexChange, first);
+			encodeOnTabIndexChange(responseWriter, tabViewAlloy, onTabIndexChange, first);
 			first = false;
 		}
 
-		String onTypeChange = tabViewComponent.getOnTypeChange();
+		String onTypeChange = tabViewAlloy.getOnTypeChange();
 
 		if (onTypeChange != null) {
 
-			encodeOnTypeChange(responseWriter, tabViewComponent, onTypeChange, first);
+			encodeOnTypeChange(responseWriter, tabViewAlloy, onTypeChange, first);
 			first = false;
 		}
 
-		String onVisibleChange = tabViewComponent.getOnVisibleChange();
+		String onVisibleChange = tabViewAlloy.getOnVisibleChange();
 
 		if (onVisibleChange != null) {
 
-			encodeOnVisibleChange(responseWriter, tabViewComponent, onVisibleChange, first);
+			encodeOnVisibleChange(responseWriter, tabViewAlloy, onVisibleChange, first);
 			first = false;
 		}
 
-		String onWidthChange = tabViewComponent.getOnWidthChange();
+		String onWidthChange = tabViewAlloy.getOnWidthChange();
 
 		if (onWidthChange != null) {
 
-			encodeOnWidthChange(responseWriter, tabViewComponent, onWidthChange, first);
+			encodeOnWidthChange(responseWriter, tabViewAlloy, onWidthChange, first);
 			first = false;
 		}
 
@@ -624,268 +624,268 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		return MODULES;
 	}
 
-	protected void encodeActiveDescendant(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String activeDescendant, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewComponent.ACTIVE_DESCENDANT, activeDescendant, first);
+	protected void encodeActiveDescendant(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String activeDescendant, boolean first) throws IOException {
+		encodeString(responseWriter, TabViewAlloy.ACTIVE_DESCENDANT, activeDescendant, first);
 	}
 
-	protected void encodeAfterActiveDescendantChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterActiveDescendantChange, boolean first) throws IOException {
+	protected void encodeAfterActiveDescendantChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterActiveDescendantChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, ACTIVE_DESCENDANT_CHANGE, afterActiveDescendantChange, first);
 	}
 
-	protected void encodeAfterBoundingBoxChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterBoundingBoxChange, boolean first) throws IOException {
+	protected void encodeAfterBoundingBoxChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterBoundingBoxChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, BOUNDING_BOX_CHANGE, afterBoundingBoxChange, first);
 	}
 
-	protected void encodeAfterContentBoxChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterContentBoxChange, boolean first) throws IOException {
+	protected void encodeAfterContentBoxChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterContentBoxChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, CONTENT_BOX_CHANGE, afterContentBoxChange, first);
 	}
 
-	protected void encodeAfterDefaultChildTypeChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterDefaultChildTypeChange, boolean first) throws IOException {
+	protected void encodeAfterDefaultChildTypeChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterDefaultChildTypeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, DEFAULT_CHILD_TYPE_CHANGE, afterDefaultChildTypeChange, first);
 	}
 
-	protected void encodeAfterDestroyedChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterDestroyedChange, boolean first) throws IOException {
+	protected void encodeAfterDestroyedChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterDestroyedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, DESTROYED_CHANGE, afterDestroyedChange, first);
 	}
 
-	protected void encodeAfterDisabledChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterDisabledChange, boolean first) throws IOException {
+	protected void encodeAfterDisabledChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterDisabledChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, DISABLED_CHANGE, afterDisabledChange, first);
 	}
 
-	protected void encodeAfterFocusedChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterFocusedChange, boolean first) throws IOException {
+	protected void encodeAfterFocusedChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterFocusedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, FOCUSED_CHANGE, afterFocusedChange, first);
 	}
 
-	protected void encodeAfterHeightChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterHeightChange, boolean first) throws IOException {
+	protected void encodeAfterHeightChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterHeightChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, HEIGHT_CHANGE, afterHeightChange, first);
 	}
 
-	protected void encodeAfterIdChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterIdChange, boolean first) throws IOException {
+	protected void encodeAfterIdChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterIdChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, ID_CHANGE, afterIdChange, first);
 	}
 
-	protected void encodeAfterInitializedChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterInitializedChange, boolean first) throws IOException {
+	protected void encodeAfterInitializedChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterInitializedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, INITIALIZED_CHANGE, afterInitializedChange, first);
 	}
 
-	protected void encodeAfterLocaleChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterLocaleChange, boolean first) throws IOException {
+	protected void encodeAfterLocaleChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterLocaleChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, LOCALE_CHANGE, afterLocaleChange, first);
 	}
 
-	protected void encodeAfterMultipleChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterMultipleChange, boolean first) throws IOException {
+	protected void encodeAfterMultipleChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterMultipleChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, MULTIPLE_CHANGE, afterMultipleChange, first);
 	}
 
-	protected void encodeAfterRenderChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterRenderChange, boolean first) throws IOException {
+	protected void encodeAfterRenderChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterRenderChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, RENDER_CHANGE, afterRenderChange, first);
 	}
 
-	protected void encodeAfterRenderedChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterRenderedChange, boolean first) throws IOException {
+	protected void encodeAfterRenderedChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterRenderedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, RENDERED_CHANGE, afterRenderedChange, first);
 	}
 
-	protected void encodeAfterSelectionChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterSelectionChange, boolean first) throws IOException {
+	protected void encodeAfterSelectionChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterSelectionChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, SELECTION_CHANGE, afterSelectionChange, first);
 	}
 
-	protected void encodeAfterSrcNodeChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterSrcNodeChange, boolean first) throws IOException {
+	protected void encodeAfterSrcNodeChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterSrcNodeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, SRC_NODE_CHANGE, afterSrcNodeChange, first);
 	}
 
-	protected void encodeAfterStackedChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterStackedChange, boolean first) throws IOException {
+	protected void encodeAfterStackedChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterStackedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, STACKED_CHANGE, afterStackedChange, first);
 	}
 
-	protected void encodeAfterStringsChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterStringsChange, boolean first) throws IOException {
+	protected void encodeAfterStringsChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterStringsChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, STRINGS_CHANGE, afterStringsChange, first);
 	}
 
-	protected void encodeAfterTabIndexChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterTabIndexChange, boolean first) throws IOException {
+	protected void encodeAfterTabIndexChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterTabIndexChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, TAB_INDEX_CHANGE, afterTabIndexChange, first);
 	}
 
-	protected void encodeAfterTypeChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterTypeChange, boolean first) throws IOException {
+	protected void encodeAfterTypeChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterTypeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, TYPE_CHANGE, afterTypeChange, first);
 	}
 
-	protected void encodeAfterVisibleChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterVisibleChange, boolean first) throws IOException {
+	protected void encodeAfterVisibleChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterVisibleChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, VISIBLE_CHANGE, afterVisibleChange, first);
 	}
 
-	protected void encodeAfterWidthChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String afterWidthChange, boolean first) throws IOException {
+	protected void encodeAfterWidthChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterWidthChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, WIDTH_CHANGE, afterWidthChange, first);
 	}
 
-	protected void encodeBoundingBox(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String boundingBox, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewComponent.BOUNDING_BOX, boundingBox, first);
+	protected void encodeBoundingBox(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String boundingBox, boolean first) throws IOException {
+		encodeString(responseWriter, TabViewAlloy.BOUNDING_BOX, boundingBox, first);
 	}
 
-	protected void encodeContentBox(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String contentBox, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewComponent.CONTENT_BOX, contentBox, first);
+	protected void encodeContentBox(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String contentBox, boolean first) throws IOException {
+		encodeString(responseWriter, TabViewAlloy.CONTENT_BOX, contentBox, first);
 	}
 
-	protected void encodeDefaultChildType(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String defaultChildType, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewComponent.DEFAULT_CHILD_TYPE, defaultChildType, first);
+	protected void encodeDefaultChildType(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String defaultChildType, boolean first) throws IOException {
+		encodeString(responseWriter, TabViewAlloy.DEFAULT_CHILD_TYPE, defaultChildType, first);
 	}
 
-	protected void encodeDestroyed(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean destroyed, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabViewComponent.DESTROYED, destroyed, first);
+	protected void encodeDestroyed(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean destroyed, boolean first) throws IOException {
+		encodeBoolean(responseWriter, TabViewAlloy.DESTROYED, destroyed, first);
 	}
 
-	protected void encodeDisabled(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean disabled, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabViewComponent.DISABLED, disabled, first);
+	protected void encodeDisabled(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean disabled, boolean first) throws IOException {
+		encodeBoolean(responseWriter, TabViewAlloy.DISABLED, disabled, first);
 	}
 
-	protected void encodeFocused(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean focused, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabViewComponent.FOCUSED, focused, first);
+	protected void encodeFocused(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean focused, boolean first) throws IOException {
+		encodeBoolean(responseWriter, TabViewAlloy.FOCUSED, focused, first);
 	}
 
-	protected void encodeHeight(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object height, boolean first) throws IOException {
-		encodeComplexNumber(responseWriter, TabViewComponent.HEIGHT, height, first);
+	protected void encodeHeight(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Object height, boolean first) throws IOException {
+		encodeComplexNumber(responseWriter, TabViewAlloy.HEIGHT, height, first);
 	}
 
-	protected void encodeId(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String id, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewComponent.ID, id, first);
+	protected void encodeId(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String id, boolean first) throws IOException {
+		encodeString(responseWriter, TabViewAlloy.ID, id, first);
 	}
 
-	protected void encodeInitialized(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean initialized, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabViewComponent.INITIALIZED, initialized, first);
+	protected void encodeInitialized(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean initialized, boolean first) throws IOException {
+		encodeBoolean(responseWriter, TabViewAlloy.INITIALIZED, initialized, first);
 	}
 
-	protected void encodeLocale(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String locale, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewComponent.LOCALE, locale, first);
+	protected void encodeLocale(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String locale, boolean first) throws IOException {
+		encodeString(responseWriter, TabViewAlloy.LOCALE, locale, first);
 	}
 
-	protected void encodeMultiple(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean multiple, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabViewComponent.MULTIPLE, multiple, first);
+	protected void encodeMultiple(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean multiple, boolean first) throws IOException {
+		encodeBoolean(responseWriter, TabViewAlloy.MULTIPLE, multiple, first);
 	}
 
-	protected void encodeOnActiveDescendantChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onActiveDescendantChange, boolean first) throws IOException {
+	protected void encodeOnActiveDescendantChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onActiveDescendantChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, ACTIVE_DESCENDANT_CHANGE, onActiveDescendantChange, first);
 	}
 
-	protected void encodeOnBoundingBoxChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onBoundingBoxChange, boolean first) throws IOException {
+	protected void encodeOnBoundingBoxChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onBoundingBoxChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, BOUNDING_BOX_CHANGE, onBoundingBoxChange, first);
 	}
 
-	protected void encodeOnContentBoxChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onContentBoxChange, boolean first) throws IOException {
+	protected void encodeOnContentBoxChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onContentBoxChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, CONTENT_BOX_CHANGE, onContentBoxChange, first);
 	}
 
-	protected void encodeOnDefaultChildTypeChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onDefaultChildTypeChange, boolean first) throws IOException {
+	protected void encodeOnDefaultChildTypeChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onDefaultChildTypeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, DEFAULT_CHILD_TYPE_CHANGE, onDefaultChildTypeChange, first);
 	}
 
-	protected void encodeOnDestroyedChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onDestroyedChange, boolean first) throws IOException {
+	protected void encodeOnDestroyedChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onDestroyedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, DESTROYED_CHANGE, onDestroyedChange, first);
 	}
 
-	protected void encodeOnDisabledChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onDisabledChange, boolean first) throws IOException {
+	protected void encodeOnDisabledChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onDisabledChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, DISABLED_CHANGE, onDisabledChange, first);
 	}
 
-	protected void encodeOnFocusedChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onFocusedChange, boolean first) throws IOException {
+	protected void encodeOnFocusedChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onFocusedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, FOCUSED_CHANGE, onFocusedChange, first);
 	}
 
-	protected void encodeOnHeightChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onHeightChange, boolean first) throws IOException {
+	protected void encodeOnHeightChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onHeightChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, HEIGHT_CHANGE, onHeightChange, first);
 	}
 
-	protected void encodeOnIdChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onIdChange, boolean first) throws IOException {
+	protected void encodeOnIdChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onIdChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, ID_CHANGE, onIdChange, first);
 	}
 
-	protected void encodeOnInitializedChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onInitializedChange, boolean first) throws IOException {
+	protected void encodeOnInitializedChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onInitializedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, INITIALIZED_CHANGE, onInitializedChange, first);
 	}
 
-	protected void encodeOnLocaleChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onLocaleChange, boolean first) throws IOException {
+	protected void encodeOnLocaleChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onLocaleChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, LOCALE_CHANGE, onLocaleChange, first);
 	}
 
-	protected void encodeOnMultipleChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onMultipleChange, boolean first) throws IOException {
+	protected void encodeOnMultipleChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onMultipleChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, MULTIPLE_CHANGE, onMultipleChange, first);
 	}
 
-	protected void encodeOnRenderChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onRenderChange, boolean first) throws IOException {
+	protected void encodeOnRenderChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onRenderChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, RENDER_CHANGE, onRenderChange, first);
 	}
 
-	protected void encodeOnRenderedChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onRenderedChange, boolean first) throws IOException {
+	protected void encodeOnRenderedChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onRenderedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, RENDERED_CHANGE, onRenderedChange, first);
 	}
 
-	protected void encodeOnSelectionChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onSelectionChange, boolean first) throws IOException {
+	protected void encodeOnSelectionChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onSelectionChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, SELECTION_CHANGE, onSelectionChange, first);
 	}
 
-	protected void encodeOnSrcNodeChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onSrcNodeChange, boolean first) throws IOException {
+	protected void encodeOnSrcNodeChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onSrcNodeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, SRC_NODE_CHANGE, onSrcNodeChange, first);
 	}
 
-	protected void encodeOnStackedChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onStackedChange, boolean first) throws IOException {
+	protected void encodeOnStackedChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onStackedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, STACKED_CHANGE, onStackedChange, first);
 	}
 
-	protected void encodeOnStringsChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onStringsChange, boolean first) throws IOException {
+	protected void encodeOnStringsChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onStringsChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, STRINGS_CHANGE, onStringsChange, first);
 	}
 
-	protected void encodeOnTabIndexChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onTabIndexChange, boolean first) throws IOException {
+	protected void encodeOnTabIndexChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onTabIndexChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, TAB_INDEX_CHANGE, onTabIndexChange, first);
 	}
 
-	protected void encodeOnTypeChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onTypeChange, boolean first) throws IOException {
+	protected void encodeOnTypeChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onTypeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, TYPE_CHANGE, onTypeChange, first);
 	}
 
-	protected void encodeOnVisibleChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onVisibleChange, boolean first) throws IOException {
+	protected void encodeOnVisibleChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onVisibleChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, VISIBLE_CHANGE, onVisibleChange, first);
 	}
 
-	protected void encodeOnWidthChange(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String onWidthChange, boolean first) throws IOException {
+	protected void encodeOnWidthChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String onWidthChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, WIDTH_CHANGE, onWidthChange, first);
 	}
 
-	protected void encodeRendered(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean rendered, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabViewComponent.RENDERED, rendered, first);
+	protected void encodeRendered(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean rendered, boolean first) throws IOException {
+		encodeBoolean(responseWriter, TabViewAlloy.RENDERED, rendered, first);
 	}
 
-	protected void encodeSelection(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object selection, boolean first) throws IOException {
-		encodeObject(responseWriter, TabViewComponent.SELECTION, selection, first);
+	protected void encodeSelection(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Object selection, boolean first) throws IOException {
+		encodeObject(responseWriter, TabViewAlloy.SELECTION, selection, first);
 	}
 
-	protected void encodeSrcNode(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String srcNode, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewComponent.SRC_NODE, srcNode, first);
+	protected void encodeSrcNode(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String srcNode, boolean first) throws IOException {
+		encodeString(responseWriter, TabViewAlloy.SRC_NODE, srcNode, first);
 	}
 
-	protected void encodeStacked(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean stacked, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabViewComponent.STACKED, stacked, first);
+	protected void encodeStacked(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean stacked, boolean first) throws IOException {
+		encodeBoolean(responseWriter, TabViewAlloy.STACKED, stacked, first);
 	}
 
-	protected void encodeStrings(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object strings, boolean first) throws IOException {
-		encodeObject(responseWriter, TabViewComponent.STRINGS, strings, first);
+	protected void encodeStrings(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Object strings, boolean first) throws IOException {
+		encodeObject(responseWriter, TabViewAlloy.STRINGS, strings, first);
 	}
 
-	protected void encodeTabIndex(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object tabIndex, boolean first) throws IOException {
-		encodeNumber(responseWriter, TabViewComponent.TAB_INDEX, tabIndex, first);
+	protected void encodeTabIndex(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Object tabIndex, boolean first) throws IOException {
+		encodeNumber(responseWriter, TabViewAlloy.TAB_INDEX, tabIndex, first);
 	}
 
-	protected void encodeType(ResponseWriter responseWriter, TabViewComponent tabViewComponent, String type, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewComponent.TYPE, type, first);
+	protected void encodeType(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String type, boolean first) throws IOException {
+		encodeString(responseWriter, TabViewAlloy.TYPE, type, first);
 	}
 
-	protected void encodeVisible(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean visible, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabViewComponent.VISIBLE, visible, first);
+	protected void encodeVisible(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean visible, boolean first) throws IOException {
+		encodeBoolean(responseWriter, TabViewAlloy.VISIBLE, visible, first);
 	}
 
-	protected void encodeWidgetRender(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Boolean widgetRender, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabViewComponent.WIDGET_RENDER, widgetRender, first);
+	protected void encodeWidgetRender(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean widgetRender, boolean first) throws IOException {
+		encodeBoolean(responseWriter, TabViewAlloy.WIDGET_RENDER, widgetRender, first);
 	}
 
-	protected void encodeWidth(ResponseWriter responseWriter, TabViewComponent tabViewComponent, Object width, boolean first) throws IOException {
-		encodeComplexNumber(responseWriter, TabViewComponent.WIDTH, width, first);
+	protected void encodeWidth(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Object width, boolean first) throws IOException {
+		encodeComplexNumber(responseWriter, TabViewAlloy.WIDTH, width, first);
 	}
 }
 //J+

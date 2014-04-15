@@ -24,14 +24,15 @@ import com.liferay.faces.util.component.Styleable;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class TabBase extends UIColumn implements Styleable, TabComponent {
+public abstract class TabBase extends UIColumn implements Styleable {
 
-	@Override
+	// Public Constants
+	public static final String LABEL = "label";
+
 	public String getLabel() {
 		return (String) getStateHelper().eval(LABEL, null);
 	}
 
-	@Override
 	public void setLabel(String label) {
 		getStateHelper().put(LABEL, label);
 	}

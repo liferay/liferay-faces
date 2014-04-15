@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.rating;
+package com.liferay.faces.alloy.component.starrating;
 
 import java.io.IOException;
 
@@ -26,18 +26,19 @@ import javax.faces.render.FacesRenderer;
 import javax.faces.render.RenderKit;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.ClientComponent;
+import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.helper.StringHelper;
 import com.liferay.faces.util.lang.StringPool;
 
 
 /**
- * @author  Vernon Singleton
+ * @author  Bruno Basto
+ * @author  Kyle Stiemann
  */
-@FacesRenderer(componentFamily = Rating.COMPONENT_FAMILY, rendererType = Rating.RENDERER_TYPE)
+@FacesRenderer(componentFamily = StarRating.COMPONENT_FAMILY, rendererType = StarRating.RENDERER_TYPE)
 @ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
-public class RatingRenderer extends RatingRendererBase {
+public class StarRatingRenderer extends StarRatingRendererBase {
 
 	// Private Constants
 	private static final String RADIO_RENDERER_TYPE = "javax.faces.Radio";
@@ -64,10 +65,11 @@ public class RatingRenderer extends RatingRendererBase {
 		// Use our own ResponseWriter to filter out stuff that the jsf-api wants to write to the DOM, and also use our
 		// ResponseWriter to save interesting things along the way and later ask our ResponseWriter for them, such as an
 		// onclick event that our jsf-impl will need.
-		RatingComponent ratingComponent = (RatingComponent) uiComponent;
-		String defaultSelected = StringHelper.toString(ratingComponent.getDefaultSelected(), null);
-		RatingResponseWriter ratingResponseWriter = new RatingResponseWriter(responseWriter, defaultSelected);
-		facesContext.setResponseWriter(ratingResponseWriter);
+		StarRatingAlloy starRatingAlloy = (StarRatingAlloy) uiComponent;
+		String defaultSelected = StringHelper.toString(starRatingAlloy.getDefaultSelected(), null);
+		StarRatingResponseWriter starRatingResponseWriter = new StarRatingResponseWriter(responseWriter,
+				defaultSelected);
+		facesContext.setResponseWriter(starRatingResponseWriter);
 
 		// Delegate rendering of the component to the JSF runtime.
 		RenderKit renderKit = facesContext.getRenderKit();
@@ -77,15 +79,15 @@ public class RatingRenderer extends RatingRendererBase {
 		radioRenderer.encodeEnd(facesContext, uiComponent);
 
 		// Save the onclick for later use in the JavaScript.
-		String onClick = ratingResponseWriter.getOnClick();
+		String onClick = starRatingResponseWriter.getOnClick();
 		facesContext.getAttributes().put(FACES_RUNTIME_ONCLICK, onClick);
 
 		// Save the selectedIndex for later use in the JavaScript.
-		Long selectedIndex = ratingResponseWriter.getSelectedIndex();
+		Long selectedIndex = starRatingResponseWriter.getSelectedIndex();
 		facesContext.getAttributes().put(SELECTED_INDEX, selectedIndex);
 
 		// Save the defaultSelectedValue for later use in the JavaScript.
-		Object defaultSelectedValue = ratingResponseWriter.getDefaultSelectedValue();
+		Object defaultSelectedValue = starRatingResponseWriter.getDefaultSelectedValue();
 		facesContext.getAttributes().put(DEFAULT_SELECTED_VALUE, defaultSelectedValue);
 
 		// Restore the original ResponseWwriter.
@@ -107,7 +109,13 @@ public class RatingRenderer extends RatingRendererBase {
 
 		ClientComponent clientComponent = (ClientComponent) uiComponent;
 		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
-		encodeLiferayComponentVar(responseWriter, clientVarName, clientComponent.getClientKey());
+		String clientKey = clientComponent.getClientKey();
+		
+		if (clientKey == null) {
+			clientKey = clientVarName;
+		}
+
+		encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
 
 		// The above should render something like this: var _1_WAR_showcaseportlet__j_idt6_j_idt19_j_idt22_j_idt23 =
 		// Liferay.component('_1_WAR_showcaseportlet__j_idt6_j_idt19_j_idt22_j_idt23');
@@ -173,7 +181,7 @@ public class RatingRenderer extends RatingRendererBase {
 		// If the selectedIndex is -1, then that means one of two things ... 1. the user selected no value (or cleared
 		// the stars), which must have been in a postback. 2. no selected index was found because this is the initial
 		// render of the page, and no valid default value was set.
-		if (selectedIndex.intValue() == RatingResponseWriter.NO_SELECTION_INDEX) {
+		if (selectedIndex.intValue() == StarRatingResponseWriter.NO_SELECTION_INDEX) {
 
 			// This is case 1.  the user selected to clear the value.
 			if (facesContext.isPostback()) {
@@ -254,10 +262,11 @@ public class RatingRenderer extends RatingRendererBase {
 		// if any.
 		String onClick = (String) facesContext.getAttributes().remove(FACES_RUNTIME_ONCLICK);
 		String hiddenInputNodeJs = "document.getElementsByName('" + clientId + "')[0]";
+
 		if (onClick != null) {
 			responseWriter.write(onClick.replaceFirst("this", hiddenInputNodeJs));
 		}
-		
+
 		// Finish encoding the onclick event.
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
