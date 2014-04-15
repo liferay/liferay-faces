@@ -300,6 +300,14 @@ public abstract class StarRatingRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
+		Object value = starRatingAlloy.getValue();
+
+		if (value != null) {
+
+			encodeValue(responseWriter, starRatingAlloy, value, first);
+			first = false;
+		}
+
 		Boolean visible = starRatingAlloy.isVisible();
 
 		if (visible != null) {
@@ -1232,6 +1240,10 @@ public abstract class StarRatingRendererBase extends AlloyRendererBase {
 
 	protected void encodeUseARIA(ResponseWriter responseWriter, StarRatingAlloy starRatingAlloy, Boolean useARIA, boolean first) throws IOException {
 		encodeBoolean(responseWriter, StarRatingAlloy.USE_ARIA, useARIA, first);
+	}
+
+	protected void encodeValue(ResponseWriter responseWriter, StarRatingAlloy starRatingAlloy, Object value, boolean first) throws IOException {
+		encodeString(responseWriter, StarRatingAlloy.VALUE, value, first);
 	}
 
 	protected void encodeVisible(ResponseWriter responseWriter, StarRatingAlloy starRatingAlloy, Boolean visible, boolean first) throws IOException {
