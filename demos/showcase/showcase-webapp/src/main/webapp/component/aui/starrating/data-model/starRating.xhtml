@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
 	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/templates/component-1col.xhtml">
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-1col.xhtml">
 
 	<ui:define name="col1">
 		<h:form>
@@ -15,7 +15,9 @@
 				<f:ajax execute="@form" render="@form" />
 			</h:commandButton>
 			<aui-nongen:field label="#{i18n['model-value']}">
-				<pre>#{starRatingModelBean.favoriteId} </pre>
+				<showcase:outputModel>
+					<h:outputText value="#{starRatingModelBean.favoriteId}" />
+				</showcase:outputModel>
 			</aui-nongen:field>
 		</h:form>
 	</ui:define>

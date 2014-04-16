@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
 	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
 	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
@@ -11,7 +11,7 @@
 			</aui-nongen:field>
 			<aui-nongen:field label="#{i18n['component']}">
 				<h:inputTextarea id="multiple" value="#{datePickerModelBean.multiple}" />
-				<aui:datePicker for="multiple" selectionMode="multiple" />
+				<aui:datePicker for="multiple" dateSeparator=" | " selectionMode="multiple" />
 			</aui-nongen:field>
 			<h:commandButton value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
@@ -32,7 +32,7 @@
 			</aui-nongen:field>
 			<aui-nongen:field label="#{i18n['component']}">
 				<h:inputTextarea id="multipleSticky" value="#{datePickerModelBean.multipleSticky}" />
-				<aui:datePicker for="multipleSticky" dateSeparator=", " selectionMode="multiple-sticky" />
+				<aui:datePicker for="multipleSticky" selectionMode="multiple-sticky" />
 			</aui-nongen:field>
 			<h:commandButton value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
