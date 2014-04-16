@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
 	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/templates/component-2col.xhtml">
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Example#1: String value (no converter required) -->
@@ -28,7 +28,9 @@
 				<f:ajax execute="@form" render="@form" />
 			</h:commandButton>
 			<aui-nongen:field label="#{i18n['model-value']}">
-				<pre>#{starRatingModelBean.favorite} </pre>
+				<showcase:outputModel>
+					<h:outputText value="#{starRatingModelBean.favorite}" />
+				</showcase:outputModel>
 			</aui-nongen:field>
 		</h:form>
 	</ui:define>
@@ -59,7 +61,9 @@
 				<f:ajax execute="@form" render="@form" />
 			</h:commandButton>
 			<aui-nongen:field label="#{i18n['model-value']}">
-				<pre>#{starRatingModelBean.favoriteId} </pre>
+				<showcase:outputModel>
+					<h:outputText value="#{starRatingModelBean.favoriteId}" />
+				</showcase:outputModel>
 			</aui-nongen:field>
 		</h:form>
 	</ui:define>
