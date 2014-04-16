@@ -33,6 +33,8 @@ public class CodeExampleUtil {
 	private static final String JAVA = "java";
 	private static final String JAVA_EXTENSION = ".java";
 	private static final Pattern JAVA_MULTILINE_COMMENTS_PATTERN = Pattern.compile("/[*][*].*[*]/", Pattern.DOTALL);
+	private static final Pattern SHOWCASE_OUTPUT_MODEL_CLOSE_TAG_PATTERN = Pattern.compile("\n\t*</showcase:outputModel>");
+	private static final Pattern SHOWCASE_OUTPUT_MODEL_OPEN_TAG_PATTERN = Pattern.compile("\n\t*<showcase:outputModel>");
 	private static final Pattern TAB_OPEN_TAG_PATTERN = Pattern.compile("\t<");
 	private static final Pattern TEMPLATE_ATTRIBUTE_PATTERN = Pattern.compile("\\s*template=\".*\"");
 	private static final Pattern UI_DEFINE_OPEN_TAG_PATTERN = Pattern.compile("\n\t*<ui:define name=\".*\">");
@@ -54,6 +56,8 @@ public class CodeExampleUtil {
 				fileExtension = JAVA;
 			}
 			else {
+				sourceCodeText = SHOWCASE_OUTPUT_MODEL_CLOSE_TAG_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
+				sourceCodeText = SHOWCASE_OUTPUT_MODEL_OPEN_TAG_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
 				sourceCodeText = TEMPLATE_ATTRIBUTE_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
 				sourceCodeText = UI_DEFINE_OPEN_TAG_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
 				sourceCodeText = UI_DEFINE_CLOSE_TAG_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);

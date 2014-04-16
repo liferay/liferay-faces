@@ -24,7 +24,9 @@
 			<f:ajax execute="@form" render="@form" />
 		</h:commandButton>
 		<aui-nongen:field id="modelValue" label="#{i18n['model-value']}">
-			<pre>#{aceEditorModelBean.text}</pre>
+			<showcase:outputModel>
+				<h:outputText value="#{aceEditorModelBean.text}" />
+			</showcase:outputModel>
 		</aui-nongen:field>
 	</h:form>
 
