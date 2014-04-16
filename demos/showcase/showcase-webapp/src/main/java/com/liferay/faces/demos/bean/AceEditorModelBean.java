@@ -45,7 +45,12 @@ public class AceEditorModelBean {
 
 		if (text == null) {
 
+			// This model bean is @RequestScoped (rather than @ViewScoped) for the sake of scalability. In order to
+			// provide a default value for a property in a @RequestScoped bean, it is necessary to ensure that the
+			// default value is only assigned during the initial render (GET) of the page and not during subsequent POST
+			// requests.
 			FacesContext facesContext = FacesContext.getCurrentInstance();
+
 			if (!facesContext.isPostback() && getMode().equals("xml")) {
 
 				text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE xmldoc>\n<xmldoc>\n" +

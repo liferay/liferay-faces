@@ -16,6 +16,8 @@ package com.liferay.faces.demos.util;
 import java.util.regex.Pattern;
 
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
@@ -26,10 +28,14 @@ import com.liferay.faces.util.product.ProductMap;
  */
 public class ShowcaseUtil {
 
+	// Logger
+	private static final Logger logger = LoggerFactory
+			.getLogger(ShowcaseUtil.class);
+
 	// Private Constants
 	private static final String ANCHOR_ELEMENT_CLOSE = "</a>";
 	private static final String ANCHOR_ELEMENT_OPEN_START = "<a href=\"";
-	private static final String ANCHOR_ELEMENT_OPEN_FINISH = "\" target=\"blank\">";
+	private static final String ANCHOR_ELEMENT_OPEN_FINISH = "\" target=\"_blank\">";
 	private static final Pattern BRACKET_DELIMITER_PATTERN = Pattern.compile("[\\[\\]]");
 	private static final Pattern COLON_DELIMITER_PATTERN = Pattern.compile(StringPool.COLON);
 	private static final Product JSF_PRODUCT = ProductMap.getInstance().get(ProductConstants.JSF);
@@ -50,6 +56,13 @@ public class ShowcaseUtil {
 		StringPool.PERIOD + LIFERAY_FACES_ALLOY_PRODUCT.getMinorVersion();
 	private static final String LIFERAY_FACES_ALLOY_JAVADOC_BASE_URL = "http://docs.liferay.com/faces/" +
 		LIFERAY_FACES_ALLOY_VERSION + "/javadoc/alloy/";
+	private static final String LIFERAY_FACES_BRIDGE_PACKAGE_PREFIX = "com.liferay.faces.bridge";
+	private static final Product LIFERAY_FACES_BRIDGE_PRODUCT = ProductMap.getInstance().get(
+			ProductConstants.LIFERAY_FACES_BRIDGE);
+	private static final String LIFERAY_FACES_BRIDGE_VERSION = LIFERAY_FACES_BRIDGE_PRODUCT.getMajorVersion() +
+			StringPool.PERIOD + LIFERAY_FACES_BRIDGE_PRODUCT.getMinorVersion();
+	private static final String LIFERAY_FACES_BRIDGE_JAVADOC_BASE_URL = "http://docs.liferay.com/faces/" +
+			LIFERAY_FACES_BRIDGE_VERSION + "/javadoc/bridge-impl/";
 	private static final Product LIFERAY_FACES_PORTAL_PRODUCT = ProductMap.getInstance().get(
 			ProductConstants.LIFERAY_FACES_PORTAL);
 	private static final String LIFERAY_FACES_PORTAL_PACKAGE_PREFIX = "com.liferay.faces.portal";
@@ -59,10 +72,13 @@ public class ShowcaseUtil {
 		LIFERAY_FACES_PORTAL_VERSION + "/javadoc/alloy/";
 	private static final String LIFERAY_FACES_VDLDOC_BASE_URL = "http://docs.liferay.com/faces/" +
 		LIFERAY_FACES_ALLOY_VERSION + "/vdldoc/";
+	private static final String NAMESPACE_PREFIX_AUI = "aui";
 	private static final String NAMESPACE_PREFIX_F = "f";
 	private static final String NAMESPACE_PREFIX_H = "h";
-	private static final String NAMESPACE_PREFIX_AUI = "aui";
 	private static final String NAMESPACE_PREFIX_LIFERAY_UI = "liferay-ui";
+	private static final String NAMESPACE_PREFIX_PORTET = "portlet";
+	private static final String PORTLET_API_PACKAGE_PREFIX = "javax.portlet";
+	private static final String PORTLET_API_JAVADOC_BASE_URL = "http://docs.liferay.com/portlet-api/2.0/javadocs/";
 	private static final String REGEX_DOT = "[.]";
 	private static final String STRONG_OPEN = "<strong>";
 	private static final String STRONG_CLOSE = "</strong>";
@@ -97,7 +113,9 @@ public class ShowcaseUtil {
 					String vdlDocURL = encodeVDLDocURL(vdlDocKey);
 					stringBuilder.append(vdlDocURL);
 					stringBuilder.append(ANCHOR_ELEMENT_OPEN_FINISH);
+
 					String attributeName = vdlDocKey.getAttributeName();
+
 					if (attributeName == null) {
 						stringBuilder.append(vdlDocKey.getTagPrefix());
 						stringBuilder.append(StringPool.COLON);
@@ -106,6 +124,7 @@ public class ShowcaseUtil {
 					else {
 						stringBuilder.append(attributeName);
 					}
+
 					stringBuilder.append(ANCHOR_ELEMENT_CLOSE);
 				}
 				else {
@@ -128,14 +147,23 @@ public class ShowcaseUtil {
 		if (fqcn.startsWith(JAVA_PACKAGE_PREFIX)) {
 			javaDocURL.append(JAVA_SE_6_JAVADOC_BASE_URL);
 		}
+		else if (fqcn.startsWith(PORTLET_API_PACKAGE_PREFIX)) {
+			javaDocURL.append(PORTLET_API_JAVADOC_BASE_URL);
+		}
 		else if (fqcn.startsWith(JAVAX_PACKAGE_PREFIX)) {
 			javaDocURL.append(JAVA_EE_6_JAVADOC_BASE_URL);
 		}
 		else if (fqcn.startsWith(LIFERAY_FACES_ALLOY_PACKAGE_PREFIX)) {
 			javaDocURL.append(LIFERAY_FACES_ALLOY_JAVADOC_BASE_URL);
 		}
+		else if (fqcn.startsWith(LIFERAY_FACES_BRIDGE_PACKAGE_PREFIX)) {
+			javaDocURL.append(LIFERAY_FACES_BRIDGE_JAVADOC_BASE_URL);
+		}
 		else if (fqcn.startsWith(LIFERAY_FACES_PORTAL_PACKAGE_PREFIX)) {
 			javaDocURL.append(LIFERAY_FACES_PORTAL_JAVADOC_BASE_URL);
+		}
+		else {
+			logger.error("Unknown JavaDoc package=[{0}]", fqcn);
 		}
 
 		String javaClassURLPath = fqcn.replaceAll(REGEX_DOT, StringPool.FORWARD_SLASH);
@@ -187,8 +215,12 @@ public class ShowcaseUtil {
 		if (tagPrefix.equals(NAMESPACE_PREFIX_F) || tagPrefix.equals(NAMESPACE_PREFIX_H)) {
 			vdldocURL.append(JSF_VDLDOC_BASE_URL);
 		}
-		else if (tagPrefix.equals(NAMESPACE_PREFIX_AUI) || tagPrefix.equals(NAMESPACE_PREFIX_LIFERAY_UI)) {
+		else if (tagPrefix.equals(NAMESPACE_PREFIX_AUI) || tagPrefix.equals(NAMESPACE_PREFIX_PORTET) ||
+				tagPrefix.equals(NAMESPACE_PREFIX_LIFERAY_UI)) {
 			vdldocURL.append(LIFERAY_FACES_VDLDOC_BASE_URL);
+		}
+		else {
+			logger.error("Unknown VDLDoc tagPrefix=[{0}]", tagPrefix);
 		}
 
 		vdldocURL.append(tagPrefix);
