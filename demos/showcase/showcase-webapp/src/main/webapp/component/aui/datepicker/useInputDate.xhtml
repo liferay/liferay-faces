@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:outputText value="#{i18n['please-consider-using']} " />
+	<c:if test="#{empty useCaseName}">
+		<c:set var="useCaseName" value="#{showcaseModelBean.selectedComponent.useCaseName}" />
+	</c:if>
+	<h:link value="aui:inputDate.">
+		<f:param name="componentPrefix" value="aui" />
+		<f:param name="componentName" value="inputdate" />
+		<f:param name="componentUseCase" value="#{useCaseName}" />
+	</h:link>
+
+	<hr />
+
+</ui:composition>
