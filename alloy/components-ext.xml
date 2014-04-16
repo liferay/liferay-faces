@@ -4,13 +4,13 @@
 	description="The Liferay Faces Alloy facelet component tags with the &lt;code&gt;aui:&lt;/code&gt; tag name prefix.">
 	<functions>
 		<function>
-			<description>Returns an escaped representation of the specified client ID.</description>
+			<description><![CDATA[Returns an escaped representation of the specified client ID.]]></description>
 			<function-name>escapeClientId</function-name>
 			<function-class>com.liferay.faces.util.component.ComponentUtil</function-class>
 			<function-signature>java.lang.String escapeClientId(java.lang.String)</function-signature>
 		</function>
 		<function>
-			<description>Returns the client ID associated with the specified expression.</description>
+			<description><![CDATA[Returns the client ID associated with the specified expression.]]></description>
 			<function-name>findClientId</function-name>
 			<function-class>com.liferay.faces.util.component.ComponentUtil</function-class>
 			<function-signature>java.lang.String findClientId(java.lang.String)</function-signature>
@@ -18,6 +18,83 @@
 	</functions>
 	<component description="AceEditor is an input component that renders a field for editing source code text."
 		name="AceEditor" parentClass="javax.faces.component.UIInput" />
+	<component name="DatePicker" description="Pops up a calendar with selectable dates when its trigger is clicked." >
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]>
+				</description>
+				<name>binding</name>
+				<type>javax.faces.component.UIComponent</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]>
+				</description>
+				<name>datePattern</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The id of the component that the datePicker will be triggered by. If trigger is specified, this value is unused.]]>
+				</description>
+				<name>for</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the datePicker.]]>
+				</description>
+				<name>locale</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<description>
+						<![CDATA[The maximum date that can be selected by the user.]]>
+				</description>
+				<name>maximumDate</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The minimum date that can be selected by the user.]]>
+				</description>
+				<name>minimumDate</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the date selection style. Valid values include "single" (the default), "multiple," or "multiple-sticky."]]>
+				</description>
+				<name>selectionMode</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The fully-qualified id of the element that triggers the calendar popup. Please consider using the "for" attribute instead.]]>
+				</description>
+				<name>trigger</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]>
+				</description>
+				<name>zIndex</name>
+				<type>java.lang.Object</type>
+			</attribute>
+		</attributes>
+		<events>
+			<event>
+				<description>
+					<![CDATA[The event that fires when the user clicks on a date.]]>
+				</description>
+				<name>dateClick</name>
+				<type>java.lang.String</type>
+			</event>
+		</events>
+	</component>
 	<component description="Tab is a panel component that renders nested/child tags as content within itself."
 		name="Tab" parentClass="javax.faces.component.UIColumn" rendererParentClass="com.liferay.faces.util.renderer.RendererBase">
 		<attributes>

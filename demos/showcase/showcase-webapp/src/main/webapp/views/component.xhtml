@@ -21,6 +21,25 @@
 		<c:set value="#{i18n[selectedComponentUseCaseKey]}" var="selectedComponentUseCaseDescription" />
 		<c:set value="vdldoc:#{selectedComponentFullName}" var="selectedComponentDocKey" /> 
 		<button onclick="window.open('#{showcase-fn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;">#{i18n['vdl-documentation']}</button>
+		<c:if test="#{selectedComponentCamelCaseName == 'datePicker'}">
+			<c:set value="#{selectedComponentUseCaseName}" var="correspondingUseCase" />
+			<c:if test="#{selectedComponentUseCaseName == 'multiple-selection'}">
+				<c:set value="general" var="correspondingUseCase" />
+			</c:if>
+			<h:panelGrid columns="2">
+				<h:graphicImage library="images" name="note.png" style="float: left;" />
+				<h:panelGroup>
+					<h2>#{i18n['note']}:</h2>
+					<h:outputText value="#{i18n['please-consider-using']} " />
+					<h:link value="aui:inputDate">
+						<f:param name="componentPrefix" value="aui" />
+						<f:param name="componentName" value="inputdate" />
+						<f:param name="componentUseCase" value="#{correspondingUseCase}" />
+					</h:link>
+					<h:outputText value=" #{i18n['aui-input-date-benefits-description']}" />
+				</h:panelGroup>
+			</h:panelGrid>
+		</c:if>
 		<h2>#{selectedComponentFullName}</h2>
 		<p><h:outputText escape="false" value="#{showcase-fn:encodeDescription(selectedComponentDescription)}" /></p>
 		<c:if test="#{!empty selectedComponentUseCaseDescription}">
