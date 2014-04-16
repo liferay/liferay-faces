@@ -1,0 +1,16 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui-nongen="http://liferay.com/faces/aui-nongen"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:portlet="http://java.sun.com/portlet_2_0"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-1col.xhtml">
+
+	<ui:define name="col1">
+		<aui-nongen:field id="componentField" label="#{i18n['component']}">
+			<portlet:actionURL var="actionURL">
+				<portlet:param name="foo" value="bar" />
+			</portlet:actionURL>
+			<form action="#{actionURL}" method="post">
+				<input type="submit" value="#{i18n['submit-non-faces-postback']}" />
+			</form>
+		</aui-nongen:field>
+	</ui:define>
+
+</ui:composition>
