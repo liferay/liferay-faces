@@ -473,6 +473,347 @@
 		</tag-extension>
 	</tag>
 	<tag>
+		<description><![CDATA[Pops up a calendar with selectable date(s) when its trigger is clicked.]]></description>
+		<tag-name>datePicker</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.datepicker.DatePicker</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.datepicker.DatePickerRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[The active input element that holds the calendar instance.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.util.HashMap","required":false}-->]]></description>
+			<name>activeInput</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The active input element that holds the calendar instance.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterActiveInputChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterAutoHideChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterCalendarChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterContainerChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterContentChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The event that fires when the user clicks on a date.]]></description>
+			<name>afterDateClick</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterDateSeparatorChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterDestroyedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterInitializedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterMaskChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterPanesChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterPopoverChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterPopoverCssClassChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterValueExtractorChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>afterValueFormatterChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
+			<name>autoHide</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.util.HashMap","required":false,"defaultValue":"{}"}-->]]></description>
+			<name>calendar</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the widget's javascript variable.]]></description>
+			<name>clientKey</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.util.HashMap","required":false}-->]]></description>
+			<name>container</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>content</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]></description>
+			<name>datePattern</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false,"defaultValue":" \\u2014 "}-->]]></description>
+			<name>dateSeparator</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>destroyed</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The id of the component that the datePicker will be triggered by. If trigger is specified, this value is unused.]]></description>
+			<name>for</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<name>initialized</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the datePicker.]]></description>
+			<name>locale</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false,"defaultValue":"%m/%d/%Y"}-->]]></description>
+			<name>mask</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The maximum date that can be selected by the user.]]></description>
+			<name>maximumDate</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The minimum date that can be selected by the user.]]></description>
+			<name>minimumDate</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The active input element that holds the calendar instance.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onActiveInputChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onAutoHideChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onCalendarChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onContainerChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onContentChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The event that fires when the user clicks on a date.]]></description>
+			<name>onDateClick</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onDateSeparatorChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onDestroyedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onInitializedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onMaskChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onPanesChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onPopoverChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onPopoverCssClassChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onValueExtractorChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>onValueFormatterChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"1"}-->]]></description>
+			<name>panes</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.util.HashMap","required":false,"defaultValue":"{}"}-->]]></description>
+			<name>popover</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
+			<name>popoverCssClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Specifies the date selection style. Valid values include "single" (the default), "multiple," or "multiple-sticky."]]></description>
+			<name>selectionMode</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The fully-qualified id of the element that triggers the calendar popup. Please consider using the "for" attribute instead.]]></description>
+			<name>trigger</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>valueExtractor</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
+			<name>valueFormatter</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]></description>
+			<name>zIndex</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
 		<description><![CDATA[StarRating is an input component that renders a set of stars.]]></description>
 		<tag-name>starRating</tag-name>
 		<component>
