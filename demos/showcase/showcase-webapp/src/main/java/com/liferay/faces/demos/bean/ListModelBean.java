@@ -51,6 +51,11 @@ public class ListModelBean {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ListModelBean.class);
 
+	// Private Constants
+	private static final String[] PACKAGE_NAMES = new String[] {
+			"com.liferay.faces.demos.bean", "com.liferay.faces.demos.portlet"
+		};
+
 	// Private Data Members
 	private List<ShowcaseComponent> showcaseComponents;
 	private Map<String, ShowcaseComponent> showcaseComponentMap;
@@ -107,26 +112,36 @@ public class ListModelBean {
 									String sourcePath = File.separator + "component" + File.separator + prefix +
 										File.separator + lowerCaseName + File.separator + useCaseName + File.separator +
 										sourceFileName;
-									
+
 									sourceFileURL = startupExternalContext.getResource(sourcePath);
 								}
 								else {
-									int pos = sourceFileName.lastIndexOf(".java");
-									String fqcn = "com.liferay.faces.demos.bean." + sourceFileName.substring(0, pos);
-									try {
-										Class<?> clazz = Class.forName(fqcn);
-										sourceFileURL = clazz.getResource(sourceFileName);
-									} catch (ClassNotFoundException e) {
-										logger.error(e);
+
+									for (int i = 0; (i < PACKAGE_NAMES.length && (sourceFileURL == null)); i++) {
+
+										int pos = sourceFileName.lastIndexOf(".java");
+										String fqcn = PACKAGE_NAMES[i] + StringPool.PERIOD +
+											sourceFileName.substring(0, pos);
+
+										try {
+											Class<?> clazz = Class.forName(fqcn);
+											sourceFileURL = clazz.getResource(sourceFileName);
+										}
+										catch (ClassNotFoundException e) {
+											// ignore
+										}
 									}
 								}
-								
+
 								if (sourceFileURL != null) {
-									
+
 									CodeExample codeExample = CodeExampleUtil.read(sourceFileURL, sourceFileName);
 									codeExamples.add(codeExample);
 
 									logger.debug("Loaded source file=[{0}]", sourceFileName);
+								}
+								else {
+									logger.error("Unable to find source for sourceFileName=[{0}]", sourceFileName);
 								}
 							}
 

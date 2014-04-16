@@ -6,7 +6,7 @@
 	<portlet>
 		<portlet-name>1</portlet-name>
 		<display-name>Showcase</display-name>
-		<portlet-class>com.liferay.faces.demos.ShowcasePortlet</portlet-class>
+		<portlet-class>com.liferay.faces.demos.portlet.ShowcasePortlet</portlet-class>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.view</name>
 			<value>/views/home.xhtml</value>

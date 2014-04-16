@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.demos;
+package com.liferay.faces.demos.portlet;
 
 import java.io.IOException;
 
@@ -19,18 +19,17 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.faces.Bridge;
-import javax.portlet.faces.GenericFacesPortlet;
 
 
 /**
  * @author  Neil Griffin
  */
-public class ShowcasePortlet extends GenericFacesPortlet {
+public class ShowcasePortlet extends ActionURLDemoPortlet {
 
 	@Override
 	protected void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException,
 		IOException {
-		
+
 		String componentPrefix = renderRequest.getParameter("componentPrefix");
 		String componentName = renderRequest.getParameter("componentName");
 
@@ -41,5 +40,4 @@ public class ShowcasePortlet extends GenericFacesPortlet {
 
 		super.doView(renderRequest, renderResponse);
 	}
-
 }
