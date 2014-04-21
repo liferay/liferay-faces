@@ -31,18 +31,23 @@ import javax.portlet.faces.GenericFacesPortlet;
  */
 public class ActionURLDemoPortlet extends GenericFacesPortlet {
 
-	// Private Constants
-	private static final String NON_FACES_POSTBACK = "Non-Faces-Postback";
-
 	@Override
 	public void processAction(ActionRequest actionRequest, ActionResponse actionResponse) throws PortletException,
 		IOException {
 
+		String contentType = actionRequest.getContentType();
+		boolean fileUpload = ((contentType != null) && contentType.toLowerCase().startsWith("multipart/"));
+
 		String viewState = actionRequest.getParameter(ResponseStateManager.VIEW_STATE_PARAM);
 
-		if (viewState == null) {
-			actionResponse.setRenderParameter(NON_FACES_POSTBACK, Boolean.TRUE.toString());
-			actionResponse.setRenderParameter("foo", actionRequest.getParameter("foo"));
+		if ((viewState == null) && (!fileUpload)) {
+			actionResponse.setRenderParameter("Non-Faces-Postback", Boolean.TRUE.toString());
+
+			String foo = actionRequest.getParameter("foo");
+
+			if (foo != null) {
+				actionResponse.setRenderParameter("foo", foo);
+			}
 		}
 		else {
 			super.processAction(actionRequest, actionResponse);
@@ -53,7 +58,7 @@ public class ActionURLDemoPortlet extends GenericFacesPortlet {
 	protected void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException,
 		IOException {
 
-		String nonFacesPostback = renderRequest.getParameter(NON_FACES_POSTBACK);
+		String nonFacesPostback = renderRequest.getParameter("Non-Faces-Postback");
 
 		if (nonFacesPostback == null) {
 			super.doView(renderRequest, renderResponse);

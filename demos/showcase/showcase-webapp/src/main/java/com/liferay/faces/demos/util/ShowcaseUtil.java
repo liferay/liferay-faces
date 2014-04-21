@@ -29,8 +29,7 @@ import com.liferay.faces.util.product.ProductMap;
 public class ShowcaseUtil {
 
 	// Logger
-	private static final Logger logger = LoggerFactory
-			.getLogger(ShowcaseUtil.class);
+	private static final Logger logger = LoggerFactory.getLogger(ShowcaseUtil.class);
 
 	// Private Constants
 	private static final String ANCHOR_ELEMENT_CLOSE = "</a>";
@@ -60,9 +59,9 @@ public class ShowcaseUtil {
 	private static final Product LIFERAY_FACES_BRIDGE_PRODUCT = ProductMap.getInstance().get(
 			ProductConstants.LIFERAY_FACES_BRIDGE);
 	private static final String LIFERAY_FACES_BRIDGE_VERSION = LIFERAY_FACES_BRIDGE_PRODUCT.getMajorVersion() +
-			StringPool.PERIOD + LIFERAY_FACES_BRIDGE_PRODUCT.getMinorVersion();
+		StringPool.PERIOD + LIFERAY_FACES_BRIDGE_PRODUCT.getMinorVersion();
 	private static final String LIFERAY_FACES_BRIDGE_JAVADOC_BASE_URL = "http://docs.liferay.com/faces/" +
-			LIFERAY_FACES_BRIDGE_VERSION + "/javadoc/bridge-impl/";
+		LIFERAY_FACES_BRIDGE_VERSION + "/javadoc/bridge-impl/";
 	private static final Product LIFERAY_FACES_PORTAL_PRODUCT = ProductMap.getInstance().get(
 			ProductConstants.LIFERAY_FACES_PORTAL);
 	private static final String LIFERAY_FACES_PORTAL_PACKAGE_PREFIX = "com.liferay.faces.portal";
@@ -73,6 +72,7 @@ public class ShowcaseUtil {
 	private static final String LIFERAY_FACES_VDLDOC_BASE_URL = "http://docs.liferay.com/faces/" +
 		LIFERAY_FACES_ALLOY_VERSION + "/vdldoc/";
 	private static final String NAMESPACE_PREFIX_AUI = "aui";
+	private static final String NAMESPACE_PREFIX_BRIDGE = "bridge";
 	private static final String NAMESPACE_PREFIX_F = "f";
 	private static final String NAMESPACE_PREFIX_H = "h";
 	private static final String NAMESPACE_PREFIX_LIFERAY_UI = "liferay-ui";
@@ -215,8 +215,8 @@ public class ShowcaseUtil {
 		if (tagPrefix.equals(NAMESPACE_PREFIX_F) || tagPrefix.equals(NAMESPACE_PREFIX_H)) {
 			vdldocURL.append(JSF_VDLDOC_BASE_URL);
 		}
-		else if (tagPrefix.equals(NAMESPACE_PREFIX_AUI) || tagPrefix.equals(NAMESPACE_PREFIX_PORTET) ||
-				tagPrefix.equals(NAMESPACE_PREFIX_LIFERAY_UI)) {
+		else if (tagPrefix.equals(NAMESPACE_PREFIX_AUI) || tagPrefix.equals(NAMESPACE_PREFIX_BRIDGE) ||
+				tagPrefix.equals(NAMESPACE_PREFIX_PORTET) || tagPrefix.equals(NAMESPACE_PREFIX_LIFERAY_UI)) {
 			vdldocURL.append(LIFERAY_FACES_VDLDOC_BASE_URL);
 		}
 		else {
