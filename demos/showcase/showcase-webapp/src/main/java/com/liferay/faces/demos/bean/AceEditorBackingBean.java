@@ -34,7 +34,14 @@ public class AceEditorBackingBean {
 	private AceEditorModelBean aceEditorModelBean;
 
 	public void submit() {
-		logger.info("You entered text: " + aceEditorModelBean.getText());
+
+		String source = aceEditorModelBean.getSourceCode();
+
+		if (source == null) {
+			source = aceEditorModelBean.getSourceText();
+		}
+
+		logger.info("You entered text: " + source);
 	}
 
 	public void setAceEditorModelBean(AceEditorModelBean aceEditorModelBean) {
