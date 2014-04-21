@@ -1,3 +1,11 @@
+.aui .files table {
+	float: right;
+}
+
+.aui .files td, .aui .files th {
+	padding: 6px;
+}
+
 .aui hr {
 	border-top: 1px solid #cfcfcf;
 	margin-top: 10px;

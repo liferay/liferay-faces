@@ -65,7 +65,7 @@ public class ListModelBean {
 		this.showcaseComponentMap = new HashMap<String, ShowcaseComponent>();
 
 		ClassLoader classLoader = getClass().getClassLoader();
-		String[] namespaces = new String[] { "aui", "liferay-ui", "portlet" };
+		String[] namespaces = new String[] { "aui", "bridge", "liferay-ui", "portlet" };
 
 		for (String namespace : namespaces) {
 			Properties properties = new Properties();
