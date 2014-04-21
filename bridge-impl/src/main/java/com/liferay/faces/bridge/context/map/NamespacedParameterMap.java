@@ -41,7 +41,7 @@ public class NamespacedParameterMap extends HashMap<String, String[]> {
 		}
 		else {
 			values = Arrays.copyOf(values, values.length + 1);
-			values[values.length] = value;
+			values[values.length-1] = value;
 		}
 
 		return super.put(key, values);
