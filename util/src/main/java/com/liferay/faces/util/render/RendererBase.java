@@ -78,6 +78,10 @@ public abstract class RendererBase extends Renderer {
 		}
 	}
 
+	protected void encodeClassAttribute(ResponseWriter responseWriter, Styleable styleable) throws IOException {
+		encodeClassAttribute(responseWriter, styleable, null);
+	}
+
 	protected void encodeClassAttribute(ResponseWriter responseWriter, Styleable styleable, String classNames)
 		throws IOException {
 
