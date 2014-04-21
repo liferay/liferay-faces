@@ -28,6 +28,7 @@ import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.helper.StringHelper;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -61,6 +62,7 @@ public class StarRatingRenderer extends StarRatingRendererBase {
 		// Start the opening tag of the component.
 		responseWriter.startElement(StringPool.SPAN, uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(facesContext), StringPool.ID);
+		encodeClassAttribute(responseWriter, (Styleable) uiComponent);
 
 		// Use our own ResponseWriter to filter out stuff that the jsf-api wants to write to the DOM, and also use our
 		// ResponseWriter to save interesting things along the way and later ask our ResponseWriter for them, such as an
