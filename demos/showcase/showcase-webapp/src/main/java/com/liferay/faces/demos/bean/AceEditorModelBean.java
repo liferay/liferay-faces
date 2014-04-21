@@ -26,12 +26,13 @@ import javax.faces.context.FacesContext;
 public class AceEditorModelBean {
 
 	private String mode;
-	private String text;
+	private String sourceCode;
+	private String sourceText;
 
 	public String getMode() {
 
 		if (mode == null) {
-			mode = "xml";
+			mode = "java";
 		}
 
 		return mode;
@@ -41,27 +42,35 @@ public class AceEditorModelBean {
 		this.mode = mode;
 	}
 
-	public String getText() {
+	public String getSourceCode() {
+		return sourceCode;
+	}
 
-		if (text == null) {
+	public void setSourceCode(String sourceCode) {
+		this.sourceCode = sourceCode;
+	}
 
-			// This model bean is @RequestScoped (rather than @ViewScoped) for the sake of scalability. In order to
-			// provide a default value for a property in a @RequestScoped bean, it is necessary to ensure that the
-			// default value is only assigned during the initial render (GET) of the page and not during subsequent POST
-			// requests.
+	public String getSourceText() {
+
+		if (sourceText == null) {
+
+			// This model bean is @RequestScoped (rather than @ViewScoped) for the sake making the Showcase more
+			// scalable. In order to provide a default value for a property in a @RequestScoped bean, it is necessary to
+			// ensure that the default value is only assigned during the initial render (GET) of the page and not during
+			// subsequent POST requests.
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 
-			if (!facesContext.isPostback() && getMode().equals("xml")) {
+			if (!facesContext.isPostback()) {
 
-				text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE xmldoc>\n<xmldoc>\n" +
+				sourceText = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE xmldoc>\n<xmldoc>\n" +
 					"\t<xmlelement>This is an editable XML document.</xmlElement>\n</xmldoc>";
 			}
 		}
 
-		return text;
+		return sourceText;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setSourceText(String sourceText) {
+		this.sourceText = sourceText;
 	}
 }
