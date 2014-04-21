@@ -29,6 +29,7 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -77,6 +78,8 @@ public class AceEditorRenderer extends AceEditorRendererBase {
 
 		String clientId = uiComponent.getClientId(facesContext);
 		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
+		encodeClassAttribute(responseWriter, (Styleable) uiComponent);
+
 		responseWriter.endElement(StringPool.DIV);
 
 		AceEditorAlloy aceEditorAlloy = (AceEditorAlloy) uiComponent;
@@ -111,7 +114,7 @@ public class AceEditorRenderer extends AceEditorRendererBase {
 			ClientComponent clientComponent = (ClientComponent) uiComponent;
 			String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
 			String clientKey = clientComponent.getClientKey();
-		
+
 			if (clientKey == null) {
 				clientKey = clientVarName;
 			}
