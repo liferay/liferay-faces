@@ -1,6 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui-nongen="http://liferay.com/faces/aui-nongen"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:portlet="http://java.sun.com/portlet_2_0"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-2col.xhtml">
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Example#1: Introducing a variable into the EL -->
@@ -8,8 +9,10 @@
 			<h:outputText value="#{i18n['portlet-namespace-general-example-1']}" />
 		</aui-nongen:field>
 		<aui-nongen:field label="#{i18n['component']}">
-			<portlet:namespace var="portletNamespace" />
-			<h:outputText value="portletNamespace=#{portletNamespace}" />
+			<showcase:outputModel>
+				<portlet:namespace var="portletNamespace" />
+				<h:outputText value="portletNamespace=#{portletNamespace}" />
+			</showcase:outputModel>
 		</aui-nongen:field>
 	</ui:define>
 
@@ -19,8 +22,10 @@
 			<h:outputText value="#{i18n['portlet-namespace-general-example-2']}" />
 		</aui-nongen:field>
 		<aui-nongen:field label="#{i18n['component']}">
-			<h:outputText value="portletNamespace=" />
-			<portlet:namespace />
+			<showcase:outputModel>
+				<h:outputText value="portletNamespace=" />
+				<portlet:namespace />
+			</showcase:outputModel>
 		</aui-nongen:field>
 	</ui:define>
 
