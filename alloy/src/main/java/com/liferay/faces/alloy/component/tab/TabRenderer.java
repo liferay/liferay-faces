@@ -26,8 +26,7 @@ import com.liferay.faces.util.render.RendererBase;
 
 
 /**
- * @author  Bruno Basto
- * @author  Kyle Stiemann
+ * @author  Neil Griffin
  */
 @FacesRenderer(componentFamily = Tab.COMPONENT_FAMILY, rendererType = Tab.RENDERER_TYPE)
 public class TabRenderer extends RendererBase {

@@ -142,7 +142,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.startElement(StringPool.DIV, uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(), StringPool.ID);
-		encodeClassAttribute(responseWriter, (Styleable) uiComponent, null);
+		encodeClassAttribute(responseWriter, (Styleable) uiComponent);
 	}
 
 	@Override
