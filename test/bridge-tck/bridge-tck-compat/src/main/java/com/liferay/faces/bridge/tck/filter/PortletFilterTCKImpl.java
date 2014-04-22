@@ -15,9 +15,12 @@ package com.liferay.faces.bridge.tck.filter;
 
 import java.io.IOException;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.filter.ActionFilter;
 import javax.portlet.filter.FilterChain;
 import javax.portlet.filter.FilterConfig;
 import javax.portlet.filter.RenderFilter;
@@ -29,7 +32,7 @@ import com.liferay.faces.util.product.ProductMap;
 /**
  * @author  Neil Griffin
  */
-public class PortletFilterTCKImpl implements RenderFilter {
+public class PortletFilterTCKImpl implements ActionFilter, RenderFilter {
 
 	// Private Constants
 	private static final boolean RESIN_DETECTED = ProductMap.getInstance().get(ProductConstants.RESIN).isDetected();
@@ -49,7 +52,14 @@ public class PortletFilterTCKImpl implements RenderFilter {
 		filterChain.doFilter(renderRequest, renderResponse);
 	}
 
-	public void init(FilterConfig filterConfig) throws PortletException {
+	@Override
+	public void doFilter(ActionRequest actionRequest, ActionResponse actionResponse, FilterChain filterChain)
+		throws IOException, PortletException {
+
+		actionResponse = new ActionResponseTrinidadImpl(actionResponse);
+		filterChain.doFilter(actionRequest, actionResponse);
 	}
 
+	public void init(FilterConfig filterConfig) throws PortletException {
+	}
 }
