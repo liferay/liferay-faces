@@ -35,6 +35,7 @@ import javax.portlet.PortletModeException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.PortletResponse;
+import javax.portlet.PortletURL;
 import javax.portlet.StateAwareResponse;
 import javax.portlet.WindowStateException;
 import javax.portlet.faces.Bridge;
@@ -418,50 +419,66 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 				// Otherwise,
 				else {
 
-					// If currently executing the ACTION_PHASE or EVENT_PHASE of the portlet lifecycle, then
-					if ((portletPhase == Bridge.PortletPhase.ACTION_PHASE) ||
-							(portletPhase == Bridge.PortletPhase.EVENT_PHASE)) {
+					FacesContext facesContext = FacesContext.getCurrentInstance();
+					String newViewId = bridgeRedirectURL.getContextRelativePath();
+
+					// If running in the ACTION_PHASE of the portlet lifecycle, then
+					if (portletPhase == Bridge.PortletPhase.ACTION_PHASE) {
+
+						// Update the PartialViewContext.
+						partialViewContextRenderAll(facesContext);
+
+						// Set the response as "complete" in the FacesContext.
+						facesContext.responseComplete();
+
+						// Set a flag on the {@link BridgeRequestScope} indicating that a <redirect />
+						// occurred which means that the request attributes should not be preserved.
+						getBridgeRequestScope().setRedirectOccurred(true);
+
+						// Redirect to the targeted view.
+						bridgeRedirectURL.setParameter(Bridge.VIEW_ID, newViewId);
+
+						PortletURL redirectURL = portletContainer.createRedirectURL(bridgeRedirectURL.toString(), null);
+						portletContainer.redirect(redirectURL.toString());
+					}
+
+					// Otherwise, if running in the EVENT_PHASE of the portlet lifecycle, then simply navigate to the
+					// target view since it is not possible to redirect during the EVENT_PHASE.
+					else if (portletPhase == Bridge.PortletPhase.EVENT_PHASE) {
 
 						// TCK NOTE: The TCK will invoke this condition during the
 						// TestPage039-requestNoScopeOnRedirectTest and TestPage176-redirectActionTest.
-						FacesContext facesContext = FacesContext.getCurrentInstance();
 						String oldViewId = facesContext.getViewRoot().getViewId();
-						String newViewId = bridgeRedirectURL.getContextRelativePath();
 
-						// NOTE: Since the Portlet API assumes that the portlet container implements the
-						// post-redirect-get pattern, need to treat this as a navigation from one Faces view to another.
-						// In this case the client does not redirect, rather the new Faces View is rendered. Note that
-						// Liferay Portal does not implement the post-redirect-get pattern, rather, the entire portlet
-						// lifecycle occurs within the POST operation. So currently, for Liferay, the <redirect/> is
-						// effectively ignored. :-(
+						// If redirecting to a different view, then create the target view and place it into the
+						// FacesContext.
 						if (!oldViewId.equals(newViewId)) {
 
-							// Create the new view and place it into the FacesContext.
 							ViewHandler viewHandler = facesContext.getApplication().getViewHandler();
 							UIViewRoot newViewRoot = viewHandler.createView(facesContext, newViewId);
 							facesContext.setViewRoot(newViewRoot);
+						}
 
-							// Update the PartialViewContext.
-							partialViewContextRenderAll(facesContext);
+						// Update the PartialViewContext.
+						partialViewContextRenderAll(facesContext);
 
-							// Set the response as "complete" in the FacesContext.
-							facesContext.responseComplete();
+						// Set the response as "complete" in the FacesContext.
+						facesContext.responseComplete();
 
-							// Set a flag on the {@link BridgeRequestScope} indicating that a <redirect />
-							// occurred which means that the request attributes should not be preserved.
-							getBridgeRequestScope().setRedirectOccurred(true);
+						// Set a flag on the {@link BridgeRequestScope} indicating that a <redirect />
+						// occurred which means that the request attributes should not be preserved.
+						getBridgeRequestScope().setRedirectOccurred(true);
 
-							// Apply the PortletMode, WindowState, etc. that may be present in the URL to the response.
-							try {
-								StateAwareResponse stateAwareResponse = (StateAwareResponse) portletResponse;
-								bridgeRedirectURL.applyToResponse(stateAwareResponse);
-							}
-							catch (PortletModeException e) {
-								logger.error(e.getMessage());
-							}
-							catch (WindowStateException e) {
-								logger.error(e.getMessage());
-							}
+						// Apply the PortletMode, WindowState, etc. that may be present in the URL to the response.
+						try {
+							StateAwareResponse stateAwareResponse = (StateAwareResponse) portletResponse;
+							bridgeRedirectURL.applyToResponse(stateAwareResponse);
+						}
+						catch (PortletModeException e) {
+							logger.error(e.getMessage());
+						}
+						catch (WindowStateException e) {
+							logger.error(e.getMessage());
 						}
 					}
 
