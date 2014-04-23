@@ -28,7 +28,6 @@ import com.liferay.faces.util.lang.StringPool;
 public class StarRating extends StarRatingBase {
 
 	// Public Constants
-	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.starrating";
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.starrating.StarRating";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.starrating.StarRatingRenderer";
 
