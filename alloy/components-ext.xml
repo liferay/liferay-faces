@@ -17,7 +17,18 @@
 		</function>
 	</functions>
 	<component description="AceEditor is an input component that renders a field for editing source code text."
-		name="AceEditor" parentClass="javax.faces.component.UIInput" />
+		name="AceEditor" parentClass="javax.faces.component.UIInput">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, and a value has not been specified for this component, then the Process Validations phase will fail and a FacesMessage will be added to the FacesContext for this component.]]>
+				</description>
+				<name>required</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="DatePicker" description="Pops up a calendar with selectable dates when its trigger is clicked." >
 		<attributes>
 			<attribute>
@@ -96,7 +107,7 @@
 		</events>
 	</component>
 	<component description="Tab is a panel component that renders nested/child tags as content within itself."
-		name="Tab" parentClass="javax.faces.component.UIColumn" rendererParentClass="com.liferay.faces.util.renderer.RendererBase">
+		name="Tab" parentClass="javax.faces.component.UIColumn" rendererParentClass="com.liferay.faces.util.render.RendererBase">
 		<attributes>
 			<attribute>
 				<description>
@@ -405,14 +416,6 @@
 				</description>
 				<name>readonly</name>
 				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The css class names that are rendered as the value of the class attribute of the outermost span of this component.]]>
-				</description>
-				<name>styleClass</name>
-				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>

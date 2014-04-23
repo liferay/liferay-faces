@@ -25,7 +25,6 @@ import com.liferay.faces.alloy.component.starrating.StarRating;
 public class ThumbRating extends StarRating {
 
 	// Public Constants
-	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.thumbrating";
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.thumbrating.ThumbRating";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.thumbrating.ThumbRatingRenderer";
 

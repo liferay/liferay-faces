@@ -32,12 +32,12 @@ import com.liferay.faces.util.product.ProductMap;
 /**
  * @author  Kyle Stiemann
  */
-@FacesComponent(value = "com.liferay.faces.alloy.component.datepicker.DatePicker")
+@FacesComponent(value = DatePicker.COMPONENT_TYPE)
 public class DatePicker extends DatePickerBase {
 
 	// Public Constants
-	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.datepicker";
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.datepicker.DatePicker";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.datepicker.DatePickerRenderer";
 
 	// Private Constants
 	private static final String DATE_CLICK = "dateClick";
@@ -45,7 +45,6 @@ public class DatePicker extends DatePickerBase {
 	private static final boolean LIFERAY_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
 		.isDetected();
 	private static final String LIFERAY_Z_INDEX_TOOLTIP = "Liferay.zIndex.TOOLTIP";
-	private static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.datepicker.DatePickerRenderer";
 	private static final String TOKEN = "{0}";
 
 	public DatePicker() {
