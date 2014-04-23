@@ -13,4 +13,5 @@
 		<phase-listener>com.liferay.faces.util.lifecycle.DebugPhaseListener</phase-listener>
 		<phase-listener>com.liferay.faces.util.lifecycle.ViewScopePhaseListener</phase-listener>
 	</lifecycle>
+
 </faces-config>
