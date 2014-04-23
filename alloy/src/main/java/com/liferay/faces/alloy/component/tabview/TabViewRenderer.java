@@ -124,7 +124,6 @@ public class TabViewRenderer extends TabViewRendererBase {
 
 			for (int i = 0; i < children.size(); i++) {
 				UIComponent child = children.get(i);
-				tabView.setRowIndex(i);
 				child.encodeAll(facesContext);
 			}
 		}
