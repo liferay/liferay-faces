@@ -26,7 +26,6 @@ import com.liferay.faces.util.lang.StringPool;
 public class AceEditor extends AceEditorBase {
 
 	// Public Constants
-	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.aceeditor";
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.aceeditor.AceEditor";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.aceeditor.AceEditorRenderer";
 
@@ -45,11 +44,6 @@ public class AceEditor extends AceEditorBase {
 		}
 
 		return boundingBox;
-	}
-
-	@Override
-	public String getFamily() {
-		return COMPONENT_FAMILY;
 	}
 
 	@Override

@@ -32,7 +32,7 @@ import com.liferay.faces.util.lang.StringPool;
  */
 @FacesRenderer(
 	componentFamily = DatePicker.COMPONENT_FAMILY,
-	rendererType = "com.liferay.faces.alloy.component.datepicker.DatePickerRenderer"
+	rendererType = DatePicker.RENDERER_TYPE
 )
 public class DatePickerRenderer extends DatePickerRendererBase {
 

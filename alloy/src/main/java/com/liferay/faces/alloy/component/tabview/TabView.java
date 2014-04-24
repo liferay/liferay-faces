@@ -26,18 +26,12 @@ import com.liferay.faces.util.lang.StringPool;
 public class TabView extends TabViewBase {
 
 	// Public Constants
-	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.tabview";
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.tabview.TabView";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.tabview.TabViewRenderer";
 
 	public TabView() {
 		super();
 		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getFamily() {
-		return COMPONENT_FAMILY;
 	}
 
 	@Override

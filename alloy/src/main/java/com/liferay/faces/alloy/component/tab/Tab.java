@@ -48,17 +48,11 @@ import com.liferay.faces.alloy.component.tabview.TabView;
 public class Tab extends TabBase {
 
 	// Public Constants
-	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.tab";
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.tab.Tab";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.tab.TabRenderer";
 
 	public Tab() {
 		super();
 		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getFamily() {
-		return COMPONENT_FAMILY;
 	}
 }
