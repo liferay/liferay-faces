@@ -119,7 +119,26 @@
 		</attributes>
 	</component>
 	<component description="TabView is an iterator component that renders tabs either statically or dynamically."
-		name="TabView" parentClass="javax.faces.component.UIData" />
+		name="TabView" parentClass="javax.faces.component.UIData">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The name of the variable that is to be intorduced into the el representing the current iteration.]]>
+				</description>
+				<name>var</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<component description="StarRating is an input component that renders a set of stars." name="Rating"
 		preferredName="starRating" parentClass="javax.faces.component.html.HtmlSelectOneRadio">
 		<attributes>
