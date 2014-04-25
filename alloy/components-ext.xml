@@ -18,6 +18,125 @@
 	</functions>
 	<component description="AceEditor is an input component that renders a field for editing source code text."
 		name="AceEditor" parentClass="javax.faces.component.UIInput" />
+	<component name="CharCounter" parentClass="javax.faces.component.html.HtmlOutputText" description="Displays the number of allowed characters remaining for a given text input, and limits the number of characters allowed in the input.  Renders as HtmlOutputText renders, so this tag will optionally render a span when i18n or style attributes used.">
+		<attributes>
+			<!-- Attributes that are inherited from HtmlOutputText -->
+			<attribute>
+				<description>
+					<![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]>
+				</description>
+				<name>binding</name>
+				<type>javax.faces.component.UIComponent</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The class name of the converter instance that is to be used by this component.]]>
+				</description>
+				<name>converter</name>
+				<type>javax.faces.convert.Converter</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[This is an i18n attribute, which designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]>
+				</description>
+				<name>dir</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+            	<description>
+            		<![CDATA[When false, markup will not be escaped. This is true by default.]]>
+            	</description>
+            	<name>escape</name>
+            	<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+        	</attribute>
+        	<attribute>
+				<description>
+					<![CDATA[The id of the text input node which is used to calculate the remaining characters. One of either "for" or "input" are required.]]>
+				</description>
+				<name>for</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[__DESCRIPTION__]]>
+				</description>
+				<name>lang</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The css class names that are rendered as the value of the class attribute of the outermost span of this component.]]>
+				</description>
+				<name>styleClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The title of the component, which is simply passed through as the html 'title' attribute of this component.]]>
+				</description>
+				<name>title</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[This value is used to generate three spans used to render the number of remaining characters allowed in the given text input. e.g.: value="There are {0} character(s) remaining."]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+	      	<!-- Attributes that are inherited from the Alloy component -->
+	      	<attribute>
+				<description>
+					<![CDATA[Node or Selector to display the number of remaining characters calculated by the charCounter.]]>
+				</description>
+				<name>counter</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Input text node which will have it's number of characters limited by the charCounter. One of either "for" or "input" are required.]]>
+				</description>
+				<name>input</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<!-- Attributes thqat are neither inherited from JSF nor inherited from the alloy component -->
+			<attribute>
+				<description>
+					<![CDATA[Node or Selector to display the number of remaining characters calculated by the charCounter.]]>
+				</description>
+				<name>onMaxlengthReached</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Node or Selector to display the number of remaining characters calculated by the charCounter.]]>
+				</description>
+				<name>onceMaxlengthReached</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<!-- Attributes that default to jsfReservedAttribute=true -->
+			<attribute>
+				<description><![CDATA[A unique identifier for this component.]]></description>
+				<name>id</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When false, this component will not be rendered.  The default value of this attribute is true.]]>
+				</description>
+				<name>rendered</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="DatePicker" description="Pops up a calendar with selectable dates when its trigger is clicked." >
 		<attributes>
 			<attribute>
@@ -96,7 +215,7 @@
 		</events>
 	</component>
 	<component description="Tab is a panel component that renders nested/child tags as content within itself."
-		name="Tab" parentClass="javax.faces.component.UIColumn" rendererParentClass="com.liferay.faces.util.renderer.RendererBase">
+		name="Tab" parentClass="javax.faces.component.UIColumn" rendererParentClass="com.liferay.faces.util.render.RendererBase">
 		<attributes>
 			<attribute>
 				<description>
@@ -108,7 +227,26 @@
 		</attributes>
 	</component>
 	<component description="TabView is an iterator component that renders tabs either statically or dynamically."
-		name="TabView" parentClass="javax.faces.component.UIData" />
+		name="TabView" parentClass="javax.faces.component.UIData">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The name of the variable that is to be intorduced into the el representing the current iteration.]]>
+				</description>
+				<name>var</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<component description="StarRating is an input component that renders a set of stars." name="Rating"
 		preferredName="starRating" parentClass="javax.faces.component.html.HtmlSelectOneRadio">
 		<attributes>
@@ -405,14 +543,6 @@
 				</description>
 				<name>readonly</name>
 				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The css class names that are rendered as the value of the class attribute of the outermost span of this component.]]>
-				</description>
-				<name>styleClass</name>
-				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
