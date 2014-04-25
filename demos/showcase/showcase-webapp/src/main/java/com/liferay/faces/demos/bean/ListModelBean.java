@@ -39,6 +39,8 @@ import com.liferay.faces.demos.util.CodeExampleUtil;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -52,6 +54,10 @@ public class ListModelBean {
 	private static final Logger logger = LoggerFactory.getLogger(ListModelBean.class);
 
 	// Private Constants
+	private static final boolean LIFERAY_FACES_BRIDGE_DETECTED = ProductMap.getInstance().get(
+			ProductConstants.LIFERAY_FACES_BRIDGE).isDetected();
+	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
+		.isDetected();
 	private static final String[] PACKAGE_NAMES = new String[] {
 			"com.liferay.faces.demos.bean", "com.liferay.faces.demos.portlet"
 		};
@@ -65,9 +71,24 @@ public class ListModelBean {
 		this.showcaseComponentMap = new HashMap<String, ShowcaseComponent>();
 
 		ClassLoader classLoader = getClass().getClassLoader();
-		String[] namespaces = new String[] { "aui", "bridge", "liferay-ui", "portlet" };
+
+		List<String> namespaces = new ArrayList<String>();
+		namespaces.add("aui");
+
+		if (LIFERAY_FACES_BRIDGE_DETECTED) {
+			namespaces.add("bridge");
+		}
+
+		if (LIFERAY_PORTAL_DETECTED) {
+			namespaces.add("liferay-ui");
+		}
+
+		if (LIFERAY_FACES_BRIDGE_DETECTED) {
+			namespaces.add("portlet");
+		}
 
 		for (String namespace : namespaces) {
+
 			Properties properties = new Properties();
 			String filename = namespace + ".properties";
 			URL resource = classLoader.getResource(filename);
@@ -115,9 +136,13 @@ public class ListModelBean {
 
 									sourceFileURL = startupExternalContext.getResource(sourcePath);
 								}
+								else if (sourceFileName.endsWith(".xml")) {
+									String sourcePath = File.separator + "WEB-INF" + File.separator + sourceFileName;
+									sourceFileURL = startupExternalContext.getResource(sourcePath);
+								}
 								else {
 
-									for (int i = 0; (i < PACKAGE_NAMES.length && (sourceFileURL == null)); i++) {
+									for (int i = 0; ((i < PACKAGE_NAMES.length) && (sourceFileURL == null)); i++) {
 
 										int pos = sourceFileName.lastIndexOf(".java");
 										String fqcn = PACKAGE_NAMES[i] + StringPool.PERIOD +
