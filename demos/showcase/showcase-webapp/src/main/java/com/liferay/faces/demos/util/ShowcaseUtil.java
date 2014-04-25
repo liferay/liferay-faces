@@ -128,7 +128,7 @@ public class ShowcaseUtil {
 					stringBuilder.append(ANCHOR_ELEMENT_CLOSE);
 				}
 				else {
-					stringBuilder.append(encodeStrong(part));
+					stringBuilder.append(encodeSourceCode(encodeStrong(part)));
 				}
 			}
 
@@ -195,6 +195,31 @@ public class ShowcaseUtil {
 				}
 
 				pos = text.indexOf(StringPool.STAR);
+				openTag = !openTag;
+			}
+		}
+
+		return text;
+	}
+
+	public static final String encodeSourceCode(String text) {
+		
+		if (text != null) {
+
+			boolean openTag = true;
+
+			int pos = text.indexOf(StringPool.GRAVE_ACCENT);
+
+			while (pos >= 0) {
+
+				if (openTag) {
+					text = text.substring(0, pos) + "<span class=\"inline-code\">" + text.substring(pos + 1);
+				}
+				else {
+					text = text.substring(0, pos) + "</span>" + text.substring(pos + 1);
+				}
+
+				pos = text.indexOf(StringPool.GRAVE_ACCENT);
 				openTag = !openTag;
 			}
 		}

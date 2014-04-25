@@ -1,3 +1,13 @@
+.aui .aui-field-element .portlet-msg-error {
+	position: relative;
+	top: -10px;
+}
+
+.aui span.inline-code {
+	border:1px solid #cfcfcf;
+	font-family: monospace;
+}
+
 .aui .files table {
 	float: right;
 }
