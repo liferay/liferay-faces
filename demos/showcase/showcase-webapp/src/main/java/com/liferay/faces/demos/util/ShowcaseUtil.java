@@ -46,8 +46,8 @@ public class ShowcaseUtil {
 	private static final String JAVADOC_PREFIX = "javadoc:";
 	private static final String JAVA_PACKAGE_PREFIX = "java.";
 	private static final String JAVAX_PACKAGE_PREFIX = "javax.";
-	private static final String JAVA_EE_6_JAVADOC_BASE_URL = "http://docs.oracle.com/javaee/6/api/";
-	private static final String JAVA_SE_6_JAVADOC_BASE_URL = "http://docs.oracle.com/javase/6/docs/api/";
+	private static final String JAVA_EE_JAVADOC_BASE_URL;
+	private static final String JAVA_SE_JAVADOC_BASE_URL;
 	private static final Product LIFERAY_FACES_ALLOY_PRODUCT = ProductMap.getInstance().get(
 			ProductConstants.LIFERAY_FACES_ALLOY);
 	private static final String LIFERAY_FACES_ALLOY_PACKAGE_PREFIX = "com.liferay.faces.alloy";
@@ -83,6 +83,20 @@ public class ShowcaseUtil {
 	private static final String STRONG_OPEN = "<strong>";
 	private static final String STRONG_CLOSE = "</strong>";
 	private static final String VDLDOC_PREFIX = "vdldoc:";
+
+	static {
+
+		String eeJavaDocBaseURL = "http://docs.oracle.com/javaee/6/api/";
+		String seJavaDocBaseURL = "http://docs.oracle.com/javase/6/docs/api/";
+
+		if (JSF_PRODUCT.getMinorVersion() >= 2) {
+			eeJavaDocBaseURL = "http://docs.oracle.com/javaee/7/api/";
+			seJavaDocBaseURL = "http://docs.oracle.com/javase/7/docs/api/";
+		}
+
+		JAVA_EE_JAVADOC_BASE_URL = eeJavaDocBaseURL;
+		JAVA_SE_JAVADOC_BASE_URL = seJavaDocBaseURL;
+	}
 
 	public static final String encodeDescription(String description) {
 
@@ -145,13 +159,13 @@ public class ShowcaseUtil {
 		String fqcn = javaDocKey.getFQCN();
 
 		if (fqcn.startsWith(JAVA_PACKAGE_PREFIX)) {
-			javaDocURL.append(JAVA_SE_6_JAVADOC_BASE_URL);
+			javaDocURL.append(JAVA_SE_JAVADOC_BASE_URL);
 		}
 		else if (fqcn.startsWith(PORTLET_API_PACKAGE_PREFIX)) {
 			javaDocURL.append(PORTLET_API_JAVADOC_BASE_URL);
 		}
 		else if (fqcn.startsWith(JAVAX_PACKAGE_PREFIX)) {
-			javaDocURL.append(JAVA_EE_6_JAVADOC_BASE_URL);
+			javaDocURL.append(JAVA_EE_JAVADOC_BASE_URL);
 		}
 		else if (fqcn.startsWith(LIFERAY_FACES_ALLOY_PACKAGE_PREFIX)) {
 			javaDocURL.append(LIFERAY_FACES_ALLOY_JAVADOC_BASE_URL);
@@ -177,6 +191,31 @@ public class ShowcaseUtil {
 		return encodeJavaDocURL(new JavaDocKey(javaDocKey));
 	}
 
+	public static final String encodeSourceCode(String text) {
+
+		if (text != null) {
+
+			boolean openTag = true;
+
+			int pos = text.indexOf(StringPool.GRAVE_ACCENT);
+
+			while (pos >= 0) {
+
+				if (openTag) {
+					text = text.substring(0, pos) + "<span class=\"inline-code\">" + text.substring(pos + 1);
+				}
+				else {
+					text = text.substring(0, pos) + "</span>" + text.substring(pos + 1);
+				}
+
+				pos = text.indexOf(StringPool.GRAVE_ACCENT);
+				openTag = !openTag;
+			}
+		}
+
+		return text;
+	}
+
 	public static final String encodeStrong(String text) {
 
 		if (text != null) {
@@ -195,31 +234,6 @@ public class ShowcaseUtil {
 				}
 
 				pos = text.indexOf(StringPool.STAR);
-				openTag = !openTag;
-			}
-		}
-
-		return text;
-	}
-
-	public static final String encodeSourceCode(String text) {
-		
-		if (text != null) {
-
-			boolean openTag = true;
-
-			int pos = text.indexOf(StringPool.GRAVE_ACCENT);
-
-			while (pos >= 0) {
-
-				if (openTag) {
-					text = text.substring(0, pos) + "<span class=\"inline-code\">" + text.substring(pos + 1);
-				}
-				else {
-					text = text.substring(0, pos) + "</span>" + text.substring(pos + 1);
-				}
-
-				pos = text.indexOf(StringPool.GRAVE_ACCENT);
 				openTag = !openTag;
 			}
 		}
