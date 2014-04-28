@@ -397,12 +397,6 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the Process Validations phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
-			<name>required</name>
-			<required>false</required>
-			<type>Boolean</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[Determine if print margin will be visible or not.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
 			<name>showPrintMargin</name>
 			<required>false</required>
@@ -479,8 +473,6 @@
 		</tag-extension>
 	</tag>
 	<tag>
-<<<<<<< HEAD
-=======
 		<description><![CDATA[Displays the number of allowed characters remaining for a given text input, and limits the number of characters allowed in the input.  Renders as HtmlOutputText renders, so this tag will optionally render a span when i18n or style attributes used.]]></description>
 		<tag-name>charCounter</tag-name>
 		<component>
@@ -524,7 +516,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The name of the widget's javascript variable.]]></description>
+			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
 			<name>clientKey</name>
 			<required>false</required>
 			<type>String</type>
@@ -584,6 +576,12 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[__DESCRIPTION__]]></description>
+			<name>lang</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[Max number of characters the <a href="CharCounter.html#config_input">input</a> can have.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"2147483647"}-->]]></description>
 			<name>maxLength</name>
 			<required>false</required>
@@ -638,6 +636,12 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[The css class names that are rendered as the value of the class attribute of the outermost span of this component.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
@@ -655,24 +659,11 @@
 			<required>false</required>
 			<type>String</type>
 		</attribute>
-		<attribute>
-			<description><![CDATA[__DESCRIPTION__]]></description>
-			<name>widgetLang</name>
-			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The css class names that are rendered as the value of the class attribute of the outermost span of this component.]]></description>
-			<name>widgetStyleClass</name>
-			<required>false</required>
-			<type>String</type>
-		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
->>>>>>> FACES-1921 Please consider this aui:charCounter
 		<description><![CDATA[Pops up a calendar with selectable dates when its trigger is clicked.]]></description>
 		<tag-name>datePicker</tag-name>
 		<component>
@@ -1780,15 +1771,12 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-<<<<<<< HEAD
 			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
 			<name>value</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-=======
->>>>>>> FACES-1921 Please consider this aui:charCounter
 			<description><![CDATA[__DESCRIPTION__]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>

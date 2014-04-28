@@ -444,13 +444,6 @@
          </deferred-value>
       </attribute>
       <attribute>
-         <name>required</name>
-         <required>false</required>
-         <deferred-value>
-            <type>Boolean</type>
-         </deferred-value>
-      </attribute>
-      <attribute>
          <name>showPrintMargin</name>
          <required>false</required>
          <deferred-value>
@@ -536,8 +529,6 @@
       </attribute>
    </tag>
    <tag>
-<<<<<<< HEAD
-=======
       <description>Displays the number of allowed characters remaining for a given text input, and limits the number of characters allowed in the input.  Renders as HtmlOutputText renders, so this tag will optionally render a span when i18n or style attributes used.</description>
       <name>charCounter</name>
       <tag-class>com.liferay.faces.alloy.taglib.CharCounterTag</tag-class>
@@ -653,6 +644,13 @@
          </deferred-value>
       </attribute>
       <attribute>
+         <name>lang</name>
+         <required>false</required>
+         <deferred-value>
+            <type>String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
          <name>maxLength</name>
          <required>false</required>
          <deferred-value>
@@ -723,6 +721,13 @@
          </deferred-value>
       </attribute>
       <attribute>
+         <name>styleClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
          <name>title</name>
          <required>false</required>
          <deferred-value>
@@ -736,23 +741,8 @@
             <type>String</type>
          </deferred-value>
       </attribute>
-      <attribute>
-         <name>widgetLang</name>
-         <required>false</required>
-         <deferred-value>
-            <type>String</type>
-         </deferred-value>
-      </attribute>
-      <attribute>
-         <name>widgetStyleClass</name>
-         <required>false</required>
-         <deferred-value>
-            <type>String</type>
-         </deferred-value>
-      </attribute>
    </tag>
    <tag>
->>>>>>> FACES-1921 Please consider this aui:charCounter
       <description>Pops up a calendar with selectable dates when its trigger is clicked.</description>
       <name>datePicker</name>
       <tag-class>com.liferay.faces.alloy.taglib.DatePickerTag</tag-class>
@@ -2029,7 +2019,6 @@
          </deferred-value>
       </attribute>
       <attribute>
-<<<<<<< HEAD
          <name>value</name>
          <required>false</required>
          <deferred-value>
@@ -2038,9 +2027,6 @@
       </attribute>
       <attribute>
          <name>valueChangeListener</name>
-=======
-         <name>widgetValidator</name>
->>>>>>> FACES-1921 Please consider this aui:charCounter
          <required>false</required>
          <deferred-value>
             <type>Object</type>
