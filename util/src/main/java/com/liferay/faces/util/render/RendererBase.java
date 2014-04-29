@@ -86,7 +86,7 @@ public abstract class RendererBase extends Renderer {
 		throws IOException {
 
 		String allCssClasses = ComponentUtil.concatAllCssClasses(styleable, classNames);
-		responseWriter.writeAttribute(StringPool.CLASS, allCssClasses, null);
+		responseWriter.writeAttribute(StringPool.CLASS, allCssClasses, Styleable.STYLE_CLASS);
 	}
 
 	protected void encodeHTMLBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
