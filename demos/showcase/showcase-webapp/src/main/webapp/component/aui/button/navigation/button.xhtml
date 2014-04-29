@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-1col.xhtml">
+
+	<ui:define name="col1">
+		<aui-nongen:field label="#{i18n['component']}">
+			<!-- Navigation based on outcome of navigation-case defined in navigation-rule.xml -->
+			<aui:button outcome="toParam">
+				<h:outputText value="#{i18n['to-param-page']} " />
+				<aui:icon name="arrow-right" />
+			</aui:button>
+		</aui-nongen:field>
+		<aui-nongen:field label="#{i18n['value-of-foo-param']}:">
+			<showcase:outputModel>
+				<h:outputText value="#{facesContext.externalContext.requestParameterMap['foo']}" />
+			</showcase:outputModel>
+		</aui-nongen:field>
+	</ui:define>
+
+</ui:composition>

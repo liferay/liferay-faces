@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-1col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<aui-nongen:field label="#{i18n['component']}">
+				<ui:repeat value="#{commandButtonModelBean.customers}" var="customer">
+					<aui:commandButton actionListener="#{commandButtonBackingBean.selectionListener}"
+						value="#{customer}">
+						<aui:icon name="edit" />
+						<f:ajax execute="@form" render="@form" />
+					</aui:commandButton>
+					<h:outputText value=" #{customer.name}" />
+					<br />
+				</ui:repeat>
+			</aui-nongen:field>
+			<aui-nongen:field label="#{i18n['model-value']}">
+				<showcase:outputModel>
+					<h:outputText value="#{commandButtonModelBean.selectedCustomer.name}" />
+				</showcase:outputModel>
+			</aui-nongen:field>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

@@ -110,6 +110,8 @@ public class StringPool {
 
 	public static final String ID = "id";
 
+	public static final String IMG = "img";
+
 	public static final String INPUT = "input";
 
 	public static final String INVERTED_EXCLAMATION = "\u00A1";
@@ -150,6 +152,8 @@ public class StringPool {
 
 	public static final String NULL = "null";
 
+	public static final String ONCLICK = "onclick";
+
 	public static final String OPEN_BRACKET = "[";
 
 	public static final String OPEN_CURLY_BRACE = "{";
@@ -185,6 +189,8 @@ public class StringPool {
 	public static final String SPACE = " ";
 
 	public static final String SPAN = "span";
+
+	public static final String SRC = "src";
 
 	public static final String STAR = "*";
 
