@@ -3,6 +3,11 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
+	<!-- Inform the JSF runtime of additional faces-config.xml files. -->
+	<context-param>
+		<param-name>javax.faces.CONFIG_FILES</param-name>
+		<param-value>WEB-INF/navigation-rule.xml</param-value>
+	</context-param>
 	<!-- Inform the JSF runtime (Mojarra) that this application has a custom Facelet tag library. -->
 	<context-param>
 		<param-name>javax.faces.FACELETS_LIBRARIES</param-name>

@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase">
+
+	<aui-nongen:field label="#{i18n['component']}">
+		<h:form>
+			<showcase:componentRenderedCheckbox />
+			<aui:icon rendered="#{showcaseModelBean.selectedComponent.rendered}" name="star" />
+		</h:form>
+		<aui:icon name="zoom-out" />
+		<aui:icon name="print" />
+		<aui:icon name="shopping-cart" />
+		<aui:icon name="folder-open" />
+		<aui:icon name="resize-small" />
+		<aui:icon name="plus" />
+		<aui:icon name="music" />
+	</aui-nongen:field>
+
+</ui:composition>
