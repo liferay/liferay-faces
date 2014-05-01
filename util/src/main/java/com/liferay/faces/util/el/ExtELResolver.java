@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.el;
+package com.liferay.faces.util.el;
 
 import javax.el.ELContext;
 import javax.el.ELException;
