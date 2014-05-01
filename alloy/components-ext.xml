@@ -683,6 +683,8 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="InputTextarea" generateJava="false" parentClass="javax.faces.component.html.HtmlInputTextarea"
+		rendererParentClass="javax.faces.render.Renderer" />
 	<component description="Tab is a panel component that renders nested/child tags as content within itself."
 		name="Tab" parentClass="javax.faces.component.UIColumn" rendererParentClass="com.liferay.faces.util.render.RendererBase">
 		<attributes>
@@ -1044,4 +1046,3 @@
 		rendererParentClass="com.liferay.faces.alloy.component.rating.RatingRenderer" />
 
 </components>
-
