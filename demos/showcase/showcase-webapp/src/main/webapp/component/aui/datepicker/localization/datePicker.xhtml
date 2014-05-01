@@ -32,7 +32,7 @@
 		<!-- Example#2: Japanese Locale obtained from a bean via EL -->
 		<h:form>
 			<aui-nongen:field label="#{i18n['example-2']}">
-				<h:outputText escape="false" value="#{showcase-fn:encodeDescription(i18n['aui-datepicker-localization-example-2'])}" />
+				<h:outputText escape="false" value="#{i18n['aui-datepicker-localization-example-2']}" />
 			</aui-nongen:field>
 			<aui-nongen:field label="#{i18n['component']}">
 				<aui:datePicker for="japaneseDateInput" binding="#{japaneseDatePicker}" locale="#{datePickerModelBean.locale}" />

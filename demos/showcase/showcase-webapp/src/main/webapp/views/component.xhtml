@@ -41,10 +41,10 @@
 			</h:panelGrid>
 		</c:if>
 		<h2>#{selectedComponentFullName}</h2>
-		<p><h:outputText escape="false" value="#{showcase-fn:encodeDescription(selectedComponentDescription)}" /></p>
+		<p><h:outputText escape="false" value="#{selectedComponentDescription}" /></p>
 		<c:if test="#{!empty selectedComponentUseCaseDescription}">
 			<h3>#{i18n[selectedComponentUseCaseName]} #{i18n['usage']}</h3>
-			<p><h:outputText escape="false" value="#{showcase-fn:encodeDescription(selectedComponentUseCaseDescription)}" /></p>
+			<p><h:outputText escape="false" value="#{selectedComponentUseCaseDescription}" /></p>
 		</c:if>
 		<ui:include
 			src="/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/#{selectedComponentUseCaseName}/#{selectedComponentCamelCaseName}.xhtml" />
