@@ -18,67 +18,57 @@ import java.io.IOException;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
 import javax.faces.component.ValueHolder;
-import javax.faces.component.html.HtmlSelectOneRadio;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
-import javax.faces.convert.ConverterException;
 import javax.faces.render.FacesRenderer;
-import javax.faces.render.RenderKit;
-import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.helper.StringHelper;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
- * @author  Bruno Basto
- * @author  Kyle Stiemann
+ * @author  Vernon Singleton
  */
 @FacesRenderer(componentFamily = StarRating.COMPONENT_FAMILY, rendererType = StarRating.RENDERER_TYPE)
 @ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
 public class StarRatingRenderer extends StarRatingRendererBase {
 
 	// Private Constants
-	private static final String RADIO_RENDERER_TYPE = "javax.faces.Radio";
 	private static final String FACES_RUNTIME_ONCLICK = "facesRuntimeOnClick";
 	private static final String SELECTED_INDEX = "selectedIndex";
 	private static final String DEFAULT_SELECTED_VALUE = "defaultSelectedValue";
 
 	@Override
-	public void decode(FacesContext facesContext, UIComponent uiComponent) {
-		RenderKit renderKit = facesContext.getRenderKit();
-		Renderer radioRenderer = renderKit.getRenderer(HtmlSelectOneRadio.COMPONENT_FAMILY, RADIO_RENDERER_TYPE);
-		radioRenderer.decode(facesContext, uiComponent);
+	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+		// NO-OP: prevent rendering children since they are rendered in the encodeMarkupBegin() method when
+		// super.encodeAll() is called.
 	}
 
 	@Override
-	protected void encodeHTMLBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		// Start the opening tag of the component.
+		// Start the encoding of the outermost <span> element.
 		responseWriter.startElement(StringPool.SPAN, uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(facesContext), StringPool.ID);
-		encodeClassAttribute(responseWriter, (Styleable) uiComponent);
+		RendererUtil.encodeStylable(responseWriter, (Styleable) uiComponent);
 
-		// Use our own ResponseWriter to filter out stuff that the jsf-api wants to write to the DOM, and also use our
-		// ResponseWriter to save interesting things along the way and later ask our ResponseWriter for them, such as an
-		// onclick event that our jsf-impl will need.
+		// Encode the child radio inputs by delegating to the renderer from the JSF runtime using our own
+		// StarRatingResponseWriter to control the output.
 		StarRatingAlloy starRatingAlloy = (StarRatingAlloy) uiComponent;
 		String defaultSelected = StringHelper.toString(starRatingAlloy.getDefaultSelected(), null);
+
+		// NOTE: The StarRatingResponseWriter is designed such that it needs to be used to survive the delegate
+		// renderer's encodeBegin(), encodeChildren(), and encodeEnd(). Therefore it is necessary to call encodeAll() in
+		// this method rather than simply calling encodeBegin().
 		StarRatingResponseWriter starRatingResponseWriter = new StarRatingResponseWriter(responseWriter,
 				defaultSelected);
-		facesContext.setResponseWriter(starRatingResponseWriter);
-
-		// Delegate rendering of the component to the JSF runtime.
-		RenderKit renderKit = facesContext.getRenderKit();
-		Renderer radioRenderer = renderKit.getRenderer(HtmlSelectOneRadio.COMPONENT_FAMILY, RADIO_RENDERER_TYPE);
-		radioRenderer.encodeBegin(facesContext, uiComponent);
-		radioRenderer.encodeChildren(facesContext, uiComponent);
-		radioRenderer.encodeEnd(facesContext, uiComponent);
+		super.encodeAll(facesContext, uiComponent, starRatingResponseWriter);
 
 		// Save the onclick for later use in the JavaScript.
 		String onClick = starRatingResponseWriter.getOnClick();
@@ -91,21 +81,10 @@ public class StarRatingRenderer extends StarRatingRendererBase {
 		// Save the defaultSelectedValue for later use in the JavaScript.
 		Object defaultSelectedValue = starRatingResponseWriter.getDefaultSelectedValue();
 		facesContext.getAttributes().put(DEFAULT_SELECTED_VALUE, defaultSelectedValue);
-
-		// Restore the original ResponseWwriter.
-		facesContext.setResponseWriter(responseWriter);
 	}
 
 	@Override
-	protected void encodeHTMLEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-
-		// Close the component tag.
-		responseWriter.endElement(StringPool.SPAN);
-	}
-
-	@Override
-	protected void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
@@ -120,7 +99,7 @@ public class StarRatingRenderer extends StarRatingRendererBase {
 		encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
 
 		// The above should render something like this: var _1_WAR_showcaseportlet__j_idt6_j_idt19_j_idt22_j_idt23 =
-		// Liferay.component('_1_WAR_showcaseportlet__j_idt6_j_idt19_j_idt22_j_idt23');
+		// Liferay.component('myClientKey');
 
 		//J-
 		// What should we consider when we initialize the value of this component?
@@ -144,14 +123,14 @@ public class StarRatingRenderer extends StarRatingRendererBase {
 		String hiddenInputValue = StringPool.BLANK;
 
 		// 3. Developer attribute
-		String defaultSelectedValue = (String) facesContext.getAttributes().remove(DEFAULT_SELECTED_VALUE);
+		Object defaultSelectedValue = facesContext.getAttributes().remove(DEFAULT_SELECTED_VALUE);
 
 		// If this is the initial render of the page, then the value of the hidden input should be set to the
 		// defaultSelectedValue
 		if (!facesContext.isPostback()) {
 
 			if (defaultSelectedValue != null) {
-				hiddenInputValue = defaultSelectedValue;
+				hiddenInputValue = defaultSelectedValue.toString();
 			}
 		}
 
@@ -273,16 +252,28 @@ public class StarRatingRenderer extends StarRatingRendererBase {
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 		responseWriter.write(StringPool.SEMICOLON);
-
 	}
 
-	// This will need to be overridden for all of our input components.
 	@Override
-	public Object getConvertedValue(FacesContext facesContext, UIComponent uiComponent, Object submittedValue)
-		throws ConverterException {
-		RenderKit renderKit = facesContext.getRenderKit();
-		Renderer radioRenderer = renderKit.getRenderer(HtmlSelectOneRadio.COMPONENT_FAMILY, RADIO_RENDERER_TYPE);
+	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		return radioRenderer.getConvertedValue(facesContext, uiComponent, submittedValue);
+		// Finish the encoding of the outermost </span> element.
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		responseWriter.endElement(StringPool.SPAN);
+	}
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return StarRating.DELEGATE_COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return StarRating.DELEGATE_RENDERER_TYPE;
+	}
+
+	@Override
+	public boolean getRendersChildren() {
+		return true;
 	}
 }

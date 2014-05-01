@@ -20,7 +20,7 @@ import javax.annotation.Generated;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.renderkit.AlloyRendererBase;
+import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
 import com.liferay.faces.alloy.util.AlloyConstants;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -29,7 +29,7 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class AceEditorRendererBase extends AlloyRendererBase {
+public abstract class AceEditorRendererBase extends DelegatingAlloyRendererBase {
 
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "AceEditor";
@@ -63,7 +63,7 @@ public abstract class AceEditorRendererBase extends AlloyRendererBase {
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
 	@Override
-	protected void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
+	public void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
 
 		AceEditorAlloy aceEditorAlloy = (AceEditorAlloy) uiComponent;
 		boolean first = true;
@@ -665,7 +665,7 @@ public abstract class AceEditorRendererBase extends AlloyRendererBase {
 	}
 
 	@Override
-	protected String getAlloyClassName() {
+	public String getAlloyClassName() {
 		return ALLOY_CLASS_NAME;
 	}
 

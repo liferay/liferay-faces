@@ -54,7 +54,7 @@ public abstract class DatePickerRendererBase extends AlloyRendererBase {
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
 	@Override
-	protected void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
+	public void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
 
 		DatePickerAlloy datePickerAlloy = (DatePickerAlloy) uiComponent;
 		boolean first = true;
@@ -496,7 +496,7 @@ public abstract class DatePickerRendererBase extends AlloyRendererBase {
 	}
 
 	@Override
-	protected String getAlloyClassName() {
+	public String getAlloyClassName() {
 		return ALLOY_CLASS_NAME;
 	}
 

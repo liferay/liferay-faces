@@ -20,25 +20,18 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.render.ClientComponentRendererBase;
+import com.liferay.faces.util.render.DelegatingClientComponentRendererBase;
 
 
 /**
- * This is an abstract class that provides base rendering functionality for AlloyUI JavaScript components.
- *
- * @author  Kyle Stiemann
+ * @author  Neil Griffin
  */
-public abstract class AlloyRendererBase extends ClientComponentRendererBase implements AlloyRenderer {
+public abstract class DelegatingAlloyRendererBase extends DelegatingClientComponentRendererBase
+	implements AlloyRenderer {
 
 	@Override
 	public abstract void encodeAlloyAttributes(ResponseWriter respoonseWriter, UIComponent uiComponent)
 		throws IOException;
-
-	@Override
-	public abstract void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException;
-
-	@Override
-	public abstract void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException;
 
 	@Override
 	public void encodeArray(ResponseWriter responseWriter, String attributeName, Object attributeValue, boolean first)

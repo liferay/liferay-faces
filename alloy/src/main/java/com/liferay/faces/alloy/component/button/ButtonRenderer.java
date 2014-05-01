@@ -24,19 +24,18 @@ import javax.faces.component.html.HtmlOutcomeTargetButton;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
-import javax.faces.render.RenderKit;
-import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.RendererBase;
+import com.liferay.faces.util.render.DelegatingRendererBase;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesRenderer(componentFamily = Button.COMPONENT_FAMILY, rendererType = Button.RENDERER_TYPE)
-public class ButtonRenderer extends RendererBase {
+public class ButtonRenderer extends DelegatingRendererBase {
 
 	// Private Constants
 	private static final String DEFAULT_ONBLUR = "this.className=this.className.replace(' btn-focus','');";
@@ -45,9 +44,6 @@ public class ButtonRenderer extends RendererBase {
 	private static final String DISABLED_BUTTON_CSS_CLASSES = "btn-disabled disabled";
 	private static final String FACES_RUNTIME_SRC = "facesRuntimeSrc";
 	private static final String RETURN_FALSE = "return false;";
-
-	// Protected Constants
-	protected static final String JAVAX_FACES_BUTTON = "javax.faces.Button";
 
 	protected static int getUIChildCount(UIComponent uiComponent) {
 
@@ -66,44 +62,7 @@ public class ButtonRenderer extends RendererBase {
 	}
 
 	@Override
-	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		FacesButton facesButton = (FacesButton) uiComponent;
-
-		// Do not delegate the writing of the image attribute because the image needs to be a child rather than an
-		// attribute of the button.
-		String image = facesButton.getImage();
-
-		if (image != null) {
-
-			String src = (String) facesContext.getAttributes().remove(FACES_RUNTIME_SRC);
-
-			if (src != null) {
-				responseWriter.startElement(StringPool.IMG, uiComponent);
-				responseWriter.writeAttribute(StringPool.SRC, src, FacesButton.IMAGE);
-				responseWriter.endElement(StringPool.IMG);
-			}
-		}
-		else {
-
-			if (getUIChildCount(uiComponent) == 0) {
-
-				// Do not delegate the writing of the value attribute because the value needs to be a child rather than
-				// an attribute of the button.
-				Object value = facesButton.getValue();
-
-				if (value != null) {
-					responseWriter.writeText(value.toString(), StringPool.VALUE);
-				}
-			}
-		}
-
-		super.encodeChildren(facesContext, uiComponent);
-	}
-
-	@Override
-	protected void encodeHTMLBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
@@ -134,7 +93,7 @@ public class ButtonRenderer extends RendererBase {
 			classNames.append(DISABLED_BUTTON_CSS_CLASSES);
 		}
 
-		encodeClassAttribute(responseWriter, (Styleable) facesButton, classNames.toString());
+		RendererUtil.encodeStylable(responseWriter, (Styleable) facesButton, classNames.toString());
 
 		// Do not delegate the writing of the disabled attribute because the JSF runtime may disable the button
 		// programmatically based on navigation case matching.
@@ -144,7 +103,7 @@ public class ButtonRenderer extends RendererBase {
 		responseWriter.writeAttribute(StringPool.TYPE, facesButton.getType(), StringPool.TYPE);
 
 		// Determine if we should delegate the rendering of onclick or render it ourselves.
-		boolean delegateOnclick = true;
+		Boolean delegateOnclick = Boolean.TRUE;
 
 		if (uiComponent instanceof HtmlOutcomeTargetButton) {
 
@@ -152,7 +111,7 @@ public class ButtonRenderer extends RendererBase {
 
 			if (htmlOutcomeTargetButton.getOutcome() == null) {
 
-				delegateOnclick = false;
+				delegateOnclick = Boolean.FALSE;
 
 				String onclick = htmlOutcomeTargetButton.getOnclick();
 
@@ -200,21 +159,62 @@ public class ButtonRenderer extends RendererBase {
 
 		// Delegate to the JSF implementation's renderer while using our own ButtonResponseWriter to control the output.
 		ButtonResponseWriter buttonResponseWriter = new ButtonResponseWriter(responseWriter, delegateOnclick);
-		RenderKit renderKit = facesContext.getRenderKit();
-		Renderer ButtonRenderer = renderKit.getRenderer(uiComponent.getFamily(), JAVAX_FACES_BUTTON);
-
-		facesContext.setResponseWriter(buttonResponseWriter);
-		ButtonRenderer.encodeBegin(facesContext, uiComponent);
-		facesContext.setResponseWriter(responseWriter);
-
+		super.encodeBegin(facesContext, uiComponent, buttonResponseWriter);
 		facesContext.getAttributes().put(FACES_RUNTIME_SRC, buttonResponseWriter.getSrc());
 	}
 
 	@Override
-	protected void encodeHTMLEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		FacesButton facesButton = (FacesButton) uiComponent;
+
+		// Do not delegate the writing of the image attribute because the image needs to be a child rather than an
+		// attribute of the button.
+		String image = facesButton.getImage();
+
+		if (image != null) {
+			String src = (String) facesContext.getAttributes().remove(FACES_RUNTIME_SRC);
+
+			if (src != null) {
+				responseWriter.startElement(StringPool.IMG, uiComponent);
+				responseWriter.writeAttribute(StringPool.SRC, src, FacesButton.IMAGE);
+				responseWriter.endElement(StringPool.IMG);
+			}
+		}
+		else {
+
+			if (getUIChildCount(uiComponent) == 0) {
+
+				// Do not delegate the writing of the value attribute because the value needs to be a child rather than
+				// an attribute of the button.
+				Object value = facesButton.getValue();
+
+				if (value != null) {
+					responseWriter.writeText(value.toString(), StringPool.VALUE);
+				}
+			}
+		}
+
+		super.encodeChildren(facesContext, uiComponent);
+	}
+
+	@Override
+	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.endElement(FacesButton.BUTTON);
+		super.encodeEnd(facesContext, uiComponent);
+	}
+
+	@Override
+	public String getDelegateComponentFamily() {
+		return Button.DELEGATE_COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return Button.DELEGATE_RENDERER_TYPE;
 	}
 
 	@Override

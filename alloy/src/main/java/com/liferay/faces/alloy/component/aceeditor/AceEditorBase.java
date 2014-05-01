@@ -15,7 +15,7 @@ package com.liferay.faces.alloy.component.aceeditor;
 //J-
 
 import javax.annotation.Generated;
-import javax.faces.component.UIInput;
+import javax.faces.component.html.HtmlInputText;
 
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.component.ClientComponent;
@@ -25,7 +25,7 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class AceEditorBase extends UIInput implements Styleable, ClientComponent, AceEditorAlloy {
+public abstract class AceEditorBase extends HtmlInputText implements Styleable, ClientComponent, AceEditorAlloy {
 
 	@Override
 	public String getAfterBoundingBoxChange() {
@@ -305,16 +305,6 @@ public abstract class AceEditorBase extends UIInput implements Styleable, Client
 	@Override
 	public void setDestroyed(Boolean destroyed) {
 		getStateHelper().put(DESTROYED, destroyed);
-	}
-
-	@Override
-	public Boolean isDisabled() {
-		return (Boolean) getStateHelper().eval(DISABLED, null);
-	}
-
-	@Override
-	public void setDisabled(Boolean disabled) {
-		getStateHelper().put(DISABLED, disabled);
 	}
 
 	@Override

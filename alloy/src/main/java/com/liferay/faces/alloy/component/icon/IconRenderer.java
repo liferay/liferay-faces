@@ -19,22 +19,23 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
+import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.RendererBase;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesRenderer(componentFamily = Icon.COMPONENT_FAMILY, rendererType = Icon.RENDERER_TYPE)
-public class IconRenderer extends RendererBase {
+public class IconRenderer extends Renderer {
 
 	// Private Constants
 	private static final String ICON_CLASS_PREFIX = "icon-";
 
 	@Override
-	protected void encodeHTMLBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.startElement(StringPool.SPAN, uiComponent);
@@ -50,11 +51,11 @@ public class IconRenderer extends RendererBase {
 			name = ICON_CLASS_PREFIX + name;
 		}
 
-		encodeClassAttribute(responseWriter, icon, name);
+		RendererUtil.encodeStylable(responseWriter, icon, name);
 	}
 
 	@Override
-	protected void encodeHTMLEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.endElement(StringPool.SPAN);

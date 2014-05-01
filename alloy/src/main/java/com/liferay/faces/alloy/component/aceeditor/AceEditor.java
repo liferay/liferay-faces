@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.aceeditor;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
@@ -27,6 +28,8 @@ public class AceEditor extends AceEditorBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.aceeditor.AceEditor";
+	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
+	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Text";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.aceeditor.AceEditorRenderer";
 
 	public AceEditor() {
@@ -40,7 +43,9 @@ public class AceEditor extends AceEditorBase {
 		String boundingBox = super.getBoundingBox();
 
 		if (boundingBox == null) {
-			boundingBox = StringPool.POUND + ComponentUtil.escapeClientId(getClientId());
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			String defaultBoundingBoxClientId = AceEditorUtil.getDefaultBoundingBoxClientId(facesContext, this);
+			boundingBox = StringPool.POUND + ComponentUtil.escapeClientId(defaultBoundingBoxClientId);
 		}
 
 		return boundingBox;
