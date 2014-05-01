@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.el;
+package com.liferay.faces.util.el;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +21,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import com.liferay.faces.portal.context.LiferayFacesContext;
+import com.liferay.faces.util.context.ExtFacesContext;
 
 
 /**
@@ -46,10 +46,10 @@ public class I18N extends ResourceBundle {
 	 * @return  The internationalized message.
 	 */
 	public String replace(String messageId, String arg1) {
-		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-		Locale locale = liferayFacesContext.getLocale();
+		ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
+		Locale locale = extFacesContext.getLocale();
 
-		return liferayFacesContext.getMessage(locale, messageId, arg1);
+		return extFacesContext.getMessage(locale, messageId, arg1);
 	}
 
 	/**
@@ -64,10 +64,10 @@ public class I18N extends ResourceBundle {
 	 * @return  The internationalized message.
 	 */
 	public String replace(String messageId, String arg1, String arg2) {
-		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-		Locale locale = liferayFacesContext.getLocale();
+		ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
+		Locale locale = extFacesContext.getLocale();
 
-		return liferayFacesContext.getMessage(locale, messageId, arg1, arg2);
+		return extFacesContext.getMessage(locale, messageId, arg1, arg2);
 	}
 
 	/**
@@ -83,10 +83,10 @@ public class I18N extends ResourceBundle {
 	 * @return  The internationalized message.
 	 */
 	public String replace(String messageId, String arg1, String arg2, String arg3) {
-		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-		Locale locale = liferayFacesContext.getLocale();
+		ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
+		Locale locale = extFacesContext.getLocale();
 
-		return liferayFacesContext.getMessage(locale, messageId, arg1, arg2, arg3);
+		return extFacesContext.getMessage(locale, messageId, arg1, arg2, arg3);
 	}
 
 	/**
@@ -103,10 +103,10 @@ public class I18N extends ResourceBundle {
 	 * @return  The internationalized message.
 	 */
 	public String replace(String messageId, String arg1, String arg2, String arg3, String arg4) {
-		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-		Locale locale = liferayFacesContext.getLocale();
+		ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
+		Locale locale = extFacesContext.getLocale();
 
-		return liferayFacesContext.getMessage(locale, messageId, arg1, arg2, arg3, arg4);
+		return extFacesContext.getMessage(locale, messageId, arg1, arg2, arg3, arg4);
 	}
 
 	@Override
@@ -115,8 +115,8 @@ public class I18N extends ResourceBundle {
 
 		if (key != null) {
 
-			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-			Locale locale = liferayFacesContext.getLocale();
+			ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
+			Locale locale = extFacesContext.getLocale();
 			boolean localeChanged = false;
 
 			if ((cacheLocale != null) || (locale != null)) {
@@ -139,7 +139,7 @@ public class I18N extends ResourceBundle {
 			}
 
 			if (message == null) {
-				message = liferayFacesContext.getMessage(locale, key, (Object[]) null);
+				message = extFacesContext.getMessage(locale, key);
 
 				if (message != null) {
 					cacheHashMap.put(key, message);
