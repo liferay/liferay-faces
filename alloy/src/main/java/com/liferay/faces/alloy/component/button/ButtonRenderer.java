@@ -17,9 +17,6 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.faces.component.UIComponent;
-import javax.faces.component.UIParameter;
-import javax.faces.component.UIViewAction;
-import javax.faces.component.UIViewParameter;
 import javax.faces.component.html.HtmlOutcomeTargetButton;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
@@ -27,7 +24,6 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.DelegatingRendererBase;
 import com.liferay.faces.util.render.RendererUtil;
 
 
@@ -35,7 +31,7 @@ import com.liferay.faces.util.render.RendererUtil;
  * @author  Kyle Stiemann
  */
 @FacesRenderer(componentFamily = Button.COMPONENT_FAMILY, rendererType = Button.RENDERER_TYPE)
-public class ButtonRenderer extends DelegatingRendererBase {
+public class ButtonRenderer extends ButtonRendererCompat {
 
 	// Private Constants
 	private static final String DEFAULT_ONBLUR = "this.className=this.className.replace(' btn-focus','');";
@@ -44,22 +40,6 @@ public class ButtonRenderer extends DelegatingRendererBase {
 	private static final String DISABLED_BUTTON_CSS_CLASSES = "btn-disabled disabled";
 	private static final String FACES_RUNTIME_SRC = "facesRuntimeSrc";
 	private static final String RETURN_FALSE = "return false;";
-
-	protected static int getUIChildCount(UIComponent uiComponent) {
-
-		int uiChildCount = 0;
-		List<UIComponent> children = uiComponent.getChildren();
-
-		for (UIComponent child : children) {
-
-			if (!((child instanceof UIParameter) || (child instanceof UIViewAction) ||
-						(child instanceof UIViewParameter))) {
-				uiChildCount++;
-			}
-		}
-
-		return uiChildCount;
-	}
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -184,7 +164,7 @@ public class ButtonRenderer extends DelegatingRendererBase {
 		}
 		else {
 
-			if (getUIChildCount(uiComponent) == 0) {
+			if (getVisualChildCount(uiComponent) == 0) {
 
 				// Do not delegate the writing of the value attribute because the value needs to be a child rather than
 				// an attribute of the button.
@@ -220,5 +200,20 @@ public class ButtonRenderer extends DelegatingRendererBase {
 	@Override
 	public boolean getRendersChildren() {
 		return true;
+	}
+
+	protected int getVisualChildCount(UIComponent uiComponent) {
+
+		int uiChildCount = 0;
+		List<UIComponent> children = uiComponent.getChildren();
+
+		for (UIComponent child : children) {
+
+			if (isVisualComponent(child)) {
+				uiChildCount++;
+			}
+		}
+
+		return uiChildCount;
 	}
 }
