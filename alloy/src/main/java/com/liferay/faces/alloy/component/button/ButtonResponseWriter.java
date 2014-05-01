@@ -17,23 +17,22 @@ import java.io.IOException;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
-import javax.faces.context.ResponseWriterWrapper;
 
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.DelegationResponseWriterBase;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class ButtonResponseWriter extends ResponseWriterWrapper {
+public class ButtonResponseWriter extends DelegationResponseWriterBase {
 
 	// Private data members.
 	private String src;
-	private ResponseWriter wrappedResponseWriter;
 	private boolean writeOnclick;
 
 	public ButtonResponseWriter(ResponseWriter responseWriter, boolean writeOnclick) {
-		this.wrappedResponseWriter = responseWriter;
+		super(responseWriter);
 		this.writeOnclick = writeOnclick;
 	}
 
@@ -90,10 +89,5 @@ public class ButtonResponseWriter extends ResponseWriterWrapper {
 
 	public String getSrc() {
 		return src;
-	}
-
-	@Override
-	public ResponseWriter getWrapped() {
-		return wrappedResponseWriter;
 	}
 }

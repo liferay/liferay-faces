@@ -205,9 +205,9 @@ public interface AceEditorAlloy {
 
 	public void setDestroyed(Boolean destroyed);
 
-	public Boolean isDisabled();
+	public boolean isDisabled();
 
-	public void setDisabled(Boolean disabled);
+	public void setDisabled(boolean disabled);
 
 	public Boolean isFocused();
 

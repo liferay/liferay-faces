@@ -30,16 +30,23 @@ import com.liferay.faces.util.lang.StringPool;
 /**
  * @author  Kyle Stiemann
  */
-@FacesRenderer(
-	componentFamily = DatePicker.COMPONENT_FAMILY,
-	rendererType = DatePicker.RENDERER_TYPE
-)
+@FacesRenderer(componentFamily = DatePicker.COMPONENT_FAMILY, rendererType = DatePicker.RENDERER_TYPE)
 public class DatePickerRenderer extends DatePickerRendererBase {
 
 	// Private Constants
 	private static final String LANG = "lang";
 	private static final String NODE_EVENT_SIMULATE = "node-event-simulate";
 	private static final String[] DATE_PICKER_MODULES = StringHelper.append(MODULES, NODE_EVENT_SIMULATE);
+
+	@Override
+	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+		// This is a no-op since the DataPicker does not manifest any markup.
+	}
+
+	@Override
+	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+		// This is a no-op since the DataPicker does not manifest any markup.
+	}
 
 	@Override
 	protected void encodeAfterDateClick(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy,
@@ -78,7 +85,7 @@ public class DatePickerRenderer extends DatePickerRendererBase {
 	}
 
 	@Override
-	protected void encodeLang(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
+	public void encodeLang(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
 		throws IOException {
 
 		DatePickerAlloy datePickerAlloy = (DatePickerAlloy) uiComponent;

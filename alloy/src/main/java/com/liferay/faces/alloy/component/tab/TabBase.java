@@ -12,12 +12,12 @@
  * details.
  */
 package com.liferay.faces.alloy.component.tab;
-//J-
 
 import javax.annotation.Generated;
 import javax.faces.component.UIColumn;
 
 import com.liferay.faces.util.component.Styleable;
+
 
 /**
  * @author  Bruno Basto
@@ -37,14 +37,11 @@ public abstract class TabBase extends UIColumn implements Styleable {
 		getStateHelper().put(LABEL, label);
 	}
 
-	@Override
 	public String getStyleClass() {
 		return (String) getStateHelper().eval(STYLE_CLASS, null);
 	}
 
-	@Override
 	public void setStyleClass(String styleClass) {
 		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 }
-//J+

@@ -26,6 +26,8 @@ public class Button extends ButtonBase implements FacesButton, HTML5Button {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.button.Button";
+	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
+	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Button";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.button.ButtonRenderer";
 
 	public Button() {

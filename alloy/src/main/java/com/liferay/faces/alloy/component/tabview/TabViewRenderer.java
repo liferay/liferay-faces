@@ -29,6 +29,7 @@ import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -69,7 +70,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 		// Encode the starting <ul> unordered list element that represents the list of clickable tabs.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.startElement(StringPool.UL, tabView);
-		encodeClassAttribute(responseWriter, tabView, NAV_NAV_TABS);
+		RendererUtil.encodeStylable(responseWriter, tabView, NAV_NAV_TABS);
 
 		if (iterateOverDataModel) {
 
@@ -108,7 +109,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 
 		// Encode the starting <div> element that represents the content for the selected tab.
 		responseWriter.startElement(StringPool.DIV, uiComponent);
-		encodeClassAttribute(responseWriter, (Styleable) uiComponent, TAB_CONTENT);
+		RendererUtil.encodeStylable(responseWriter, (Styleable) uiComponent, TAB_CONTENT);
 
 		// Encode the content for each tab.
 		if ((iterateOverDataModel) && (prototypeChildTab != null)) {
@@ -135,17 +136,17 @@ public class TabViewRenderer extends TabViewRendererBase {
 	}
 
 	@Override
-	protected void encodeHTMLBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		// Encode the starting <div> element that represents the component.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.startElement(StringPool.DIV, uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(), StringPool.ID);
-		encodeClassAttribute(responseWriter, (Styleable) uiComponent);
+		RendererUtil.encodeStylable(responseWriter, (Styleable) uiComponent);
 	}
 
 	@Override
-	protected void encodeHTMLEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		// Encode the closing </div> element.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();

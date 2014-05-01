@@ -19,33 +19,34 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
+import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.RendererBase;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
  * @author  Neil Griffin
  */
 @FacesRenderer(componentFamily = Tab.COMPONENT_FAMILY, rendererType = Tab.RENDERER_TYPE)
-public class TabRenderer extends RendererBase {
+public class TabRenderer extends Renderer {
 
 	// Private Constants
 	private static final String TAB_PANE = "tab-pane";
 
 	@Override
-	protected void encodeHTMLBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		// Encode the starting <div> element that represents the component.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.startElement(StringPool.DIV, uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(facesContext), StringPool.ID);
-		encodeClassAttribute(responseWriter, (Styleable) uiComponent, TAB_PANE);
+		RendererUtil.encodeStylable(responseWriter, (Styleable) uiComponent, TAB_PANE);
 	}
 
 	@Override
-	protected void encodeHTMLEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		// Encode the closing </div> element.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();

@@ -14,23 +14,19 @@
 package com.liferay.faces.alloy.component.aceeditor;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
 import javax.faces.component.UINamingContainer;
-import javax.faces.component.ValueHolder;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
-import javax.faces.convert.ConverterException;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.DelegationResponseWriter;
+import com.liferay.faces.util.render.HiddenTextResponseWriter;
 
 
 /**
@@ -55,54 +51,7 @@ public class AceEditorRenderer extends AceEditorRendererBase {
 	private static final String REGEX_NEWLINE = "\n";
 
 	@Override
-	public void decode(FacesContext facesContext, UIComponent uiComponent) {
-
-		ExternalContext externalContext = facesContext.getExternalContext();
-		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
-		String clientId = uiComponent.getClientId();
-		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
-		String hiddenInputClientId = clientId + separatorChar + StringPool.HIDDEN;
-		String submittedValue = requestParameterMap.get(hiddenInputClientId);
-
-		if (submittedValue != null) {
-			UIInput uiInput = (UIInput) uiComponent;
-			uiInput.setSubmittedValue(submittedValue);
-		}
-	}
-
-	@Override
-	protected void encodeHTMLBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.DIV, uiComponent);
-
-		String clientId = uiComponent.getClientId(facesContext);
-		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
-		encodeClassAttribute(responseWriter, (Styleable) uiComponent);
-
-		responseWriter.endElement(StringPool.DIV);
-
-		AceEditorAlloy aceEditorAlloy = (AceEditorAlloy) uiComponent;
-		Boolean readOnly = aceEditorAlloy.isReadOnly();
-
-		if ((readOnly == null) || (!readOnly)) {
-
-			char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
-			String hiddenInputClientId = clientId + separatorChar + StringPool.HIDDEN;
-
-			responseWriter.startElement(StringPool.INPUT, uiComponent);
-			responseWriter.writeAttribute(StringPool.ID, hiddenInputClientId, null);
-			responseWriter.writeAttribute(StringPool.NAME, hiddenInputClientId, null);
-			responseWriter.writeAttribute(StringPool.TYPE, StringPool.HIDDEN, null);
-
-			ValueHolder valueHolder = (ValueHolder) uiComponent;
-			responseWriter.writeAttribute(StringPool.VALUE, valueHolder.getValue(), StringPool.VALUE);
-			responseWriter.endElement(StringPool.INPUT);
-		}
-	}
-
-	@Override
-	protected void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
@@ -121,17 +70,49 @@ public class AceEditorRenderer extends AceEditorRendererBase {
 
 			encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
 
-			char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
-			String hiddenInputClientId = uiComponent.getClientId() + separatorChar + StringPool.HIDDEN;
-			String encodedHiddenInputClientId = StringPool.POUND + ComponentUtil.escapeClientId(hiddenInputClientId);
+			String hiddenInputClientId = getHiddenInputClientId(facesContext, uiComponent);
+			String escapedHiddenInputClientId = ComponentUtil.escapeClientId(hiddenInputClientId);
+			String hiddenInputCssSelector = StringPool.POUND + escapedHiddenInputClientId;
 
 			responseWriter.write(clientVarName);
 			responseWriter.write(".getSession().on('change', function() {A.one('");
-			responseWriter.write(encodedHiddenInputClientId);
+			responseWriter.write(hiddenInputCssSelector);
 			responseWriter.write("').set('value',");
 			responseWriter.write(clientVarName);
 			responseWriter.write(".getSession().getValue())});");
 		}
+	}
+
+	@Override
+	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+
+		// Start the encoding of the outermost <div> element.
+		String clientId = uiComponent.getClientId(facesContext);
+		responseWriter.startElement(StringPool.DIV, uiComponent);
+		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
+
+		// Encode the entire boundingbox <div>...<div> element.
+		String defaultBoundingBoxClientId = AceEditorUtil.getDefaultBoundingBoxClientId(facesContext, uiComponent);
+		responseWriter.startElement(StringPool.DIV, uiComponent);
+		responseWriter.writeAttribute(StringPool.ID, defaultBoundingBoxClientId, StringPool.ID);
+		responseWriter.endElement(StringPool.DIV);
+
+		// Start the encoding of the hidden text input by delegating to the renderer from the JSF runtime.
+		DelegationResponseWriter delegationResponseWriter = getDelegationResponseWriter(facesContext, uiComponent);
+		super.encodeMarkupBegin(facesContext, uiComponent, delegationResponseWriter);
+	}
+
+	@Override
+	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		// Finish the encoding of the hidden text input by delegating to the renderer from the JSF runtime.
+		DelegationResponseWriter delegationResponseWriter = getDelegationResponseWriter(facesContext, uiComponent);
+		super.encodeMarkupEnd(facesContext, uiComponent, delegationResponseWriter);
+
+		// Finish the encoding of the outermost </div> element.
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		responseWriter.endElement(StringPool.DIV);
 	}
 
 	@Override
@@ -152,9 +133,26 @@ public class AceEditorRenderer extends AceEditorRendererBase {
 	}
 
 	@Override
-	public Object getConvertedValue(FacesContext facesContext, UIComponent uiComponent, Object submittedValue)
-		throws ConverterException {
+	public String getDelegateComponentFamily() {
+		return AceEditor.DELEGATE_COMPONENT_FAMILY;
+	}
 
-		return ComponentUtil.convertSubmittedValue(facesContext, (ValueHolder) uiComponent, submittedValue);
+	@Override
+	public String getDelegateRendererType() {
+		return AceEditor.DELEGATE_RENDERER_TYPE;
+	}
+
+	public DelegationResponseWriter getDelegationResponseWriter(FacesContext facesContext, UIComponent uiComponent) {
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		String hiddenInputClientId = getHiddenInputClientId(facesContext, uiComponent);
+
+		return new HiddenTextResponseWriter(responseWriter, hiddenInputClientId);
+	}
+
+	protected String getHiddenInputClientId(FacesContext facesContext, UIComponent uiComponent) {
+		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+
+		return uiComponent.getClientId(facesContext) + separatorChar + StringPool.HIDDEN;
 	}
 }

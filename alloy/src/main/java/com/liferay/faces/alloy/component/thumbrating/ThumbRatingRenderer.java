@@ -30,7 +30,7 @@ public class ThumbRatingRenderer extends StarRatingRenderer {
 	private static final String THUMBRATING_CLASS_NAME = "ThumbRating";
 
 	@Override
-	protected String getAlloyClassName() {
+	public String getAlloyClassName() {
 		return THUMBRATING_CLASS_NAME;
 	}
 }

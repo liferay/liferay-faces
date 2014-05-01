@@ -11,21 +11,22 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.commandbutton;
+package com.liferay.faces.alloy.component.aceeditor;
 
-import javax.faces.render.FacesRenderer;
-
-import com.liferay.faces.alloy.component.button.ButtonRenderer;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UINamingContainer;
+import javax.faces.context.FacesContext;
 
 
 /**
- * @author  Kyle Stiemann
+ * @author  Neil Griffin
  */
-@FacesRenderer(componentFamily = CommandButton.COMPONENT_FAMILY, rendererType = CommandButton.RENDERER_TYPE)
-public class CommandButtonRenderer extends ButtonRenderer {
+public class AceEditorUtil {
 
-	@Override
-	public String getDelegateComponentFamily() {
-		return CommandButton.DELEGATE_COMPONENT_FAMILY;
+	// Private Constants
+	public static String getDefaultBoundingBoxClientId(FacesContext facesContext, UIComponent uiComponent) {
+		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+
+		return uiComponent.getClientId(facesContext) + separatorChar + AceEditorAlloy.BOUNDING_BOX;
 	}
 }

@@ -17,9 +17,10 @@ import java.io.IOException;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
-import javax.faces.context.ResponseWriterWrapper;
 
+import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.DelegationResponseWriterBase;
 
 
 //J-
@@ -30,33 +31,36 @@ import com.liferay.faces.util.lang.StringPool;
  * 3. Gather information from the elements as rendered by JSF before the Alloy JavaScript munges it.
  * 4. Provide getters to retrieve the information gathered after encoding the component.
  *
- * JSF's selectOneRadio basically renders what Alloy needs, but it also renders some table elements that are not 
- * needed, and puts labels where alloy would not look for them, so this ResponseWriter helps the renderer ignore 
- * the unnecessary table parts and put things like the labels into the title attributes of the radio inputs where 
- * alloy will get them.  Please refer to JSF vdldocs for more details:
+ * JSF's selectOneRadio basically renders what Alloy needs, but it also renders some table elements that are not
+ * needed, and puts labels where alloy would not look for them, so this ResponseWriter helps the renderer ignore
+ * the unnecessary table parts and put things like the labels into the title attributes of the radio inputs where
+ * alloy will get them.	 Please refer to JSF vdldocs for more details:
  * {@link https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/selectOneRadio.html}
  *
  * @author	Vernon Singleton
  */
 //J+
-public class StarRatingResponseWriter extends ResponseWriterWrapper {
+
+/**
+ * @author  Neil Griffin
+ */
+public class StarRatingResponseWriter extends DelegationResponseWriterBase {
 
 	// Public constants.
 	public static final int NO_SELECTION_INDEX = -1;
 
 	// Private data members.
-	private ResponseWriter wrappedResponseWriter;
-	private boolean inputElement;
-	private boolean labelElement;
-	private Object title;
-	private String onClick;
-	private long index;
-	private long selectedIndex;
 	private Long defaultSelected;
 	private Object defaultSelectedValue;
+	private long index;
+	private boolean inputElement;
+	private boolean labelElement;
+	private String onClick;
+	private long selectedIndex;
+	private Object title;
 
 	public StarRatingResponseWriter(ResponseWriter responseWriter, String defaultSelected) {
-		this.wrappedResponseWriter = responseWriter;
+		super(responseWriter);
 		this.index = NO_SELECTION_INDEX;
 		this.selectedIndex = NO_SELECTION_INDEX;
 
@@ -76,7 +80,7 @@ public class StarRatingResponseWriter extends ResponseWriterWrapper {
 			labelElement = false;
 
 			super.writeAttribute("title", title, "title");
-			super.writeAttribute("style", "display:none;", null);
+			super.writeAttribute(Styleable.STYLE, "display:none;", null);
 			super.endElement(StringPool.INPUT);
 		}
 	}
@@ -166,10 +170,5 @@ public class StarRatingResponseWriter extends ResponseWriterWrapper {
 
 	public void setSelectedIndex(long selectedIndex) {
 		this.selectedIndex = selectedIndex;
-	}
-
-	@Override
-	public ResponseWriter getWrapped() {
-		return wrappedResponseWriter;
 	}
 }
