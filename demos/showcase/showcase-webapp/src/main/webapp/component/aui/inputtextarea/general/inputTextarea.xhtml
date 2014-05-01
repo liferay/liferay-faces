@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form>
+		<aui-nongen:field id="componentField" label="#{i18n['component']}">
+			<showcase:componentRenderedCheckbox />
+			<showcase:componentRequiredCheckbox />
+			<br />
+			<aui:inputTextarea id="textarea" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+				required="#{showcaseModelBean.selectedComponent.required}" requiredMessage="#{i18n['required-message']}"
+				value="#{inputTextModelBean.text}" />
+			<h:message for="textarea" />
+		</aui-nongen:field>
+		<aui:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
+			<f:ajax execute="@form" render="@form" />
+		</aui:commandButton>
+		<aui-nongen:field id="modelValue" label="#{i18n['model-value']}">
+			<showcase:outputModel>
+				<h:outputText value="#{inputTextModelBean.text}" />
+			</showcase:outputModel>
+		</aui-nongen:field>
+	</h:form>
+
+</ui:composition>
