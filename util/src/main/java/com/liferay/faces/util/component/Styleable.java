@@ -22,6 +22,7 @@ package com.liferay.faces.util.component;
 public interface Styleable {
 
 	// Public Constants
+	public static final String STYLE = "style";
 	public static final String STYLE_CLASS = "styleClass";
 
 	public String getStyleClass();
