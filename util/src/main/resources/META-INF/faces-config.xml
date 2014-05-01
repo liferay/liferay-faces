@@ -10,4 +10,7 @@
 			<name>ICEfacesCore</name>
 		</after>
 	</ordering>
+	<application>
+		<el-resolver>com.liferay.faces.util.el.ExtELResolver</el-resolver>
+	</application>
 </faces-config>
