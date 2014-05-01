@@ -15,7 +15,6 @@ package com.liferay.faces.alloy.component.button;
 
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIParameter;
-import javax.faces.component.UIViewAction;
 import javax.faces.component.UIViewParameter;
 
 import com.liferay.faces.util.render.DelegatingRendererBase;
@@ -29,7 +28,6 @@ import com.liferay.faces.util.render.DelegatingRendererBase;
 public abstract class ButtonRendererCompat extends DelegatingRendererBase {
 
 	protected boolean isVisualComponent(UIComponent uiComponent) {
-		return (!(uiComponent instanceof UIParameter)) || (!(uiComponent instanceof UIViewAction)) ||
-			(!(uiComponent instanceof UIViewParameter));
+		return (!(uiComponent instanceof UIParameter)) || (!(uiComponent instanceof UIViewParameter));
 	}
 }
