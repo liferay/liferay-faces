@@ -5,12 +5,6 @@
 	<description><![CDATA[Liferay Faces Showcase Functions]]></description>
 	<namespace>http://liferay.com/faces/showcase-fn</namespace>
 	<function>
-		<description><![CDATA[Returns the specified String description with documentation hyperlinks.]]></description>
-		<function-name>encodeDescription</function-name>
-		<function-class>com.liferay.faces.demos.util.ShowcaseUtil</function-class>
-		<function-signature>java.lang.String encodeDescription(java.lang.String)</function-signature>
-	</function>
-	<function>
 		<description><![CDATA[Returns a URL representing the specified JavaDoc key.]]></description>
 		<function-name>encodeVDLDocURL</function-name>
 		<function-class>com.liferay.faces.demos.util.ShowcaseUtil</function-class>
