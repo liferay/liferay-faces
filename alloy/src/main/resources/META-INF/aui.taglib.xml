@@ -175,7 +175,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The name of the widget's javascript variable.]]></description>
+			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
 			<name>clientKey</name>
 			<required>false</required>
 			<type>String</type>
@@ -193,7 +193,7 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>Boolean</type>
@@ -479,7 +479,7 @@
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[Button is an output component that renders a styleable button. Button is an extension of <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutcomeTargetButton.html" target="_blank"><code>HtmlOutcomeTargetButton</code></a> (or <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/button.html" target="_blank"><code>h:button</code></a>).]]></description>
+		<description><![CDATA[Button is a UIOutput component that renders a styleable HTML &lt;button&gt; element. The default type is button. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutcomeTargetButton.html" target="_blank"><code>HtmlOutcomeTargetButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/button.html" target="_blank"><code>h:button</code></a>. The component does not need to be a child of h:form since the outcome attribute is designed to navigate via HTTP GET.]]></description>
 		<tag-name>button</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.button.Button</component-type>
@@ -1038,7 +1038,7 @@
 			<type>Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The name of the widget's javascript variable.]]></description>
+			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
 			<name>clientKey</name>
 			<required>false</required>
 			<type>String</type>
@@ -1293,6 +1293,23 @@
 		</tag-extension>
 	</tag>
 	<tag>
+		<description><![CDATA[]]></description>
+		<tag-name>inputTextarea</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.inputtextarea.InputTextarea</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.inputtextarea.InputTextareaRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
 		<description><![CDATA[StarRating is an input component that renders a set of stars.]]></description>
 		<tag-name>starRating</tag-name>
 		<component>
@@ -1522,7 +1539,7 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The name of the widget's javascript variable.]]></description>
+			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
 			<name>clientKey</name>
 			<required>false</required>
 			<type>String</type>
@@ -2268,7 +2285,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The name of the widget's javascript variable.]]></description>
+			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
 			<name>clientKey</name>
 			<required>false</required>
 			<type>String</type>
