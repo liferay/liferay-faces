@@ -129,7 +129,7 @@
 
 	<profiles>
 		<profile>
-			<id>generate-alloy</id>
+			<id>generate-xml</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -141,7 +141,7 @@
 								<goals>
 									<goal>java</goal>
 								</goals>
-								<id>generate-xml</id>
+								<id>generate-sources</id>
 								<phase>initialize</phase>
 								<configuration>
 									<includeProjectDependencies>false</includeProjectDependencies>
@@ -163,6 +163,27 @@
 									</executableDependency>
 								</configuration>
 							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>com.liferay.alloy</groupId>
+								<artifactId>alloy-generator</artifactId>
+								<version>0.1.0</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>					
+		</profile>
+		<profile>
+			<id>generate-alloy</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.2.1</version>
+						<executions>
 							<execution>
 								<goals>
 									<goal>java</goal>
@@ -171,11 +192,15 @@
 								<configuration>
 									<includeProjectDependencies>false</includeProjectDependencies>
 									<includePluginDependencies>true</includePluginDependencies>
-									<mainClass>com.liferay.alloy.tools.builder.FacesBuilder</mainClass>
+									<mainClass>com.liferay.alloy.tools.builder.faces.FacesBuilder</mainClass>
 									<systemProperties>
 										<systemProperty>
 											<key>build-ext</key>
 											<value>generator.properties</value>
+										</systemProperty>
+										<systemProperty>
+											<key>HOME</key>
+											<value>${env.HOME}</value>
 										</systemProperty>
 									</systemProperties>
 									<executableDependency>
@@ -196,7 +221,6 @@
 				</plugins>
 			</build>
 		</profile>
-
 	</profiles>
 
 </project>

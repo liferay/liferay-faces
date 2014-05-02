@@ -42,7 +42,7 @@ public class TabRenderer extends Renderer {
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.startElement(StringPool.DIV, uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(facesContext), StringPool.ID);
-		RendererUtil.encodeStylable(responseWriter, (Styleable) uiComponent, TAB_PANE);
+		RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent, TAB_PANE);
 	}
 
 	@Override

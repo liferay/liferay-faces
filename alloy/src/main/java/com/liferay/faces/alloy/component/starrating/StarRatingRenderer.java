@@ -56,7 +56,7 @@ public class StarRatingRenderer extends StarRatingRendererBase {
 		// Start the encoding of the outermost <span> element.
 		responseWriter.startElement(StringPool.SPAN, uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(facesContext), StringPool.ID);
-		RendererUtil.encodeStylable(responseWriter, (Styleable) uiComponent);
+		RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent);
 
 		// Encode the child radio inputs by delegating to the renderer from the JSF runtime using our own
 		// StarRatingResponseWriter to control the output.

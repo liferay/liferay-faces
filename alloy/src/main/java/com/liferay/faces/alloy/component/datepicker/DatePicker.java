@@ -36,6 +36,7 @@ import com.liferay.faces.util.product.ProductMap;
 public class DatePicker extends DatePickerBase {
 
 	// Public Constants
+	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.datepicker";
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.datepicker.DatePicker";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.datepicker.DatePickerRenderer";
 
@@ -194,6 +195,11 @@ public class DatePicker extends DatePickerBase {
 	}
 
 	@Override
+	public String getFamily() {
+		return COMPONENT_FAMILY;
+	}
+
+	@Override
 	public String getOnDateClick() {
 
 		String onDateClick = super.getOnDateClick();
@@ -237,5 +243,14 @@ public class DatePicker extends DatePickerBase {
 		}
 
 		return popover;
+	}
+
+	@Override
+	public String getPopoverCssClass() {
+
+		String popoverCssClass = super.getPopoverCssClass();
+		popoverCssClass = ComponentUtil.concatAllCssClasses(this, popoverCssClass);
+
+		return popoverCssClass;
 	}
 }

@@ -51,7 +51,7 @@ public class IconRenderer extends Renderer {
 			name = ICON_CLASS_PREFIX + name;
 		}
 
-		RendererUtil.encodeStylable(responseWriter, icon, name);
+		RendererUtil.encodeStyleable(responseWriter, icon, name);
 	}
 
 	@Override

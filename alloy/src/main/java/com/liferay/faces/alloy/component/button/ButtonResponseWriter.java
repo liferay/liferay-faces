@@ -18,6 +18,7 @@ import java.io.IOException;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.DelegationResponseWriterBase;
 
@@ -64,7 +65,8 @@ public class ButtonResponseWriter extends DelegationResponseWriterBase {
 		if (FacesButton.DISABLED.equalsIgnoreCase(name) || StringPool.TYPE.equalsIgnoreCase(name) ||
 				(StringPool.ONCLICK.equalsIgnoreCase(name) && !writeOnclick) ||
 				StringPool.CLASS.equalsIgnoreCase(name) || FacesButton.ONBLUR.equals(name) ||
-				FacesButton.ONFOCUS.equals(name) || StringPool.VALUE.equalsIgnoreCase(name)) {
+				FacesButton.ONFOCUS.equals(name) || StringPool.VALUE.equalsIgnoreCase(name) ||
+				Styleable.STYLE.equals(name)) {
 			// no-op Because writing of these attributes need to be controlled directly by ButtonRender.
 		}
 		else {
