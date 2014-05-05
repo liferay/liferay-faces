@@ -27,7 +27,6 @@ import com.liferay.faces.util.component.Styleable;
 public abstract class IconBase extends UIComponentBase implements Styleable {
 
 	// Public Constants
-	private static final String ID = "id";
 	private static final String NAME = "name";
 	private static final String STYLE = "style";
 	private static final String STYLE_CLASS = "styleClass";
