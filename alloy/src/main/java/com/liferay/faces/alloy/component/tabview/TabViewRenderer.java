@@ -42,6 +42,7 @@ import com.liferay.faces.util.render.RendererUtil;
 public class TabViewRenderer extends TabViewRendererBase {
 
 	// Private Constants
+	private static final String LABEL = "label";
 	private static final String NAV_NAV_TABS = "nav nav-tabs";
 	private static final String TAB_CONTENT = "tab-content";
 
@@ -70,7 +71,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 		// Encode the starting <ul> unordered list element that represents the list of clickable tabs.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.startElement(StringPool.UL, tabView);
-		RendererUtil.encodeStylable(responseWriter, tabView, NAV_NAV_TABS);
+		RendererUtil.encodeStyleable(responseWriter, tabView, NAV_NAV_TABS);
 
 		if (iterateOverDataModel) {
 
@@ -109,7 +110,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 
 		// Encode the starting <div> element that represents the content for the selected tab.
 		responseWriter.startElement(StringPool.DIV, uiComponent);
-		RendererUtil.encodeStylable(responseWriter, (Styleable) uiComponent, TAB_CONTENT);
+		RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent, TAB_CONTENT);
 
 		// Encode the content for each tab.
 		if ((iterateOverDataModel) && (prototypeChildTab != null)) {
@@ -142,7 +143,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.startElement(StringPool.DIV, uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(), StringPool.ID);
-		RendererUtil.encodeStylable(responseWriter, (Styleable) uiComponent);
+		RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent);
 	}
 
 	@Override
@@ -165,7 +166,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 		String label = (String) tab.getLabel();
 
 		if (label == null) {
-			label = Tab.LABEL;
+			label = LABEL;
 		}
 
 		responseWriter.write(label);

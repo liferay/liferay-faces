@@ -61,7 +61,8 @@ public class ButtonRenderer extends ButtonRendererCompat {
 
 		FacesButton facesButton = (FacesButton) uiComponent;
 
-		// Do not delegate the writing of the class attribute because we need to apply certain default classes.
+		// Do not delegate the writing of the class or style attributes because we need to apply certain default
+		// classes.
 		StringBuilder classNames = new StringBuilder();
 		classNames.append(DEFAULT_BUTTON_CSS_CLASSES);
 
@@ -73,7 +74,7 @@ public class ButtonRenderer extends ButtonRendererCompat {
 			classNames.append(DISABLED_BUTTON_CSS_CLASSES);
 		}
 
-		RendererUtil.encodeStylable(responseWriter, (Styleable) facesButton, classNames.toString());
+		RendererUtil.encodeStyleable(responseWriter, (Styleable) facesButton, classNames.toString());
 
 		// Do not delegate the writing of the disabled attribute because the JSF runtime may disable the button
 		// programmatically based on navigation case matching.

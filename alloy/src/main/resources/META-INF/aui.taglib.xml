@@ -196,7 +196,7 @@
 			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
@@ -394,7 +394,7 @@
 			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
 			<name>rendered</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the Process Validations phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
@@ -419,6 +419,12 @@
 			<name>strings</name>
 			<required>false</required>
 			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
@@ -454,7 +460,7 @@
 			<description><![CDATA[Some predefined value on the editor.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
 			<name>value</name>
 			<required>false</required>
-			<type>String</type>
+			<type>Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>
@@ -525,7 +531,7 @@
 			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A fragment to be appended to the navigation URL.]]></description>
@@ -639,7 +645,7 @@
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
 			<name>rendered</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
@@ -688,7 +694,7 @@
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[CommandButton is a UICommand component that renders a styleable HTML &lt;button&gt; element. The default type is submit. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlCommandButton.html" target="_blank"><code>HtmlOutcomeTargetButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/commandButton.html" target="_blank"><code>h:commandButton</code></a>. The component must be a child of h:form in order to trigger the action or actionListener.]]></description>
+		<description><![CDATA[CommandButton is a UICommand component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is submit. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlCommandButton.html" target="_blank"><code>HtmlCommandButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/commandButton.html" target="_blank"><code>h:commandButton</code></a>. The component must be a child of h:form in order to trigger the action or actionListener.]]></description>
 		<tag-name>commandButton</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.commandbutton.CommandButton</component-type>
@@ -742,7 +748,7 @@
 			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A unique identifier for this component.]]></description>
@@ -868,7 +874,7 @@
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
 			<name>rendered</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
@@ -1224,6 +1230,12 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
@@ -1280,8 +1292,54 @@
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
 			<name>rendered</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>boolean</type>
 		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[]]></description>
+		<tag-name>inputTextarea</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.inputtextarea.InputTextarea</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.inputtextarea.InputTextareaRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[]]></description>
+		<tag-name>inputTextarea</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.inputtextarea.InputTextarea</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.inputtextarea.InputTextareaRenderer</renderer-type>
+		</component>
 		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
@@ -1596,7 +1654,7 @@
 			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]></description>
@@ -1980,7 +2038,7 @@
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
 			<name>rendered</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the Process Validations phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
@@ -2031,6 +2089,12 @@
 			<type>Object</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
@@ -2065,7 +2129,8 @@
 			<name>validator</name>
 			<required>false</required>
 			<type>Object</type>
-			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+			<method-signature>
+					void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 					java.lang.Object)
 				</method-signature>
 		</attribute>
@@ -2079,7 +2144,7 @@
 			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
 			<name>value</name>
 			<required>false</required>
-			<type>String</type>
+			<type>Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[__DESCRIPTION__]]></description>
@@ -2120,6 +2185,12 @@
 		<attribute>
 			<description><![CDATA[__DESCRIPTION__]]></description>
 			<name>label</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
@@ -2486,7 +2557,7 @@
 			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
 			<name>rendered</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Returns the currently selected child Widget.  If the  <code>mulitple</code> attribte is set to <code>true</code> will  return an Y.ArrayList instance containing the currently selected  children.  If no children are selected, will return null.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
@@ -2513,6 +2584,12 @@
 			<type>Object</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
@@ -2534,7 +2611,7 @@
 			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
 			<name>value</name>
 			<required>false</required>
-			<type>String</type>
+			<type>Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of the variable that is to be intorduced into the el representing the current iteration.]]></description>
@@ -2571,6 +2648,12 @@
 			<component-type>com.liferay.faces.alloy.component.thumbrating.ThumbRating</component-type>
 			<renderer-type>com.liferay.faces.alloy.component.thumbrating.ThumbRatingRenderer</renderer-type>
 		</component>
+		<attribute>
+			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
+			<name>accesskey</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
 		<attribute>
 			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
 			<name>afterBoundingBoxChange</name>
@@ -2764,6 +2847,18 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[__DESCRIPTION__]]></description>
+			<name>border</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
 			<name>boundingBox</name>
 			<required>false</required>
@@ -2776,8 +2871,26 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
+			<name>clientKey</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
 			<name>contentBox</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The class name of the converter instance that is to be used by this component.]]></description>
+			<name>converter</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message, or the result of the given expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]></description>
+			<name>converterMessage</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
@@ -2806,14 +2919,32 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
+			<name>dir</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[Whether the Rating is disabled or not. Disabled Ratings don't allow hover or click, just display selected stars.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]></description>
+			<name>disabledClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[<a href="NodeList.html">NodeList</a> of elements used on the Rating. Each element is one Star.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Object","required":false}-->]]></description>
 			<name>elements</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]></description>
+			<name>enabledClass</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
@@ -2842,10 +2973,22 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]></description>
+			<name>hideNoSelectionOption</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
 			<name>id</name>
 			<required>false</required>
 			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the Process Validations phase.]]></description>
+			<name>immediate</name>
+			<required>false</required>
+			<type>Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
@@ -2872,8 +3015,20 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
+			<name>lang</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false,"defaultValue":"en"}-->]]></description>
 			<name>locale</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
+			<name>onblur</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
@@ -2886,6 +3041,18 @@
 		<attribute>
 			<description><![CDATA[If <code>true</code> could be reseted (i.e., have no values selected).<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
 			<name>onCanResetChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]></description>
+			<name>onchange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
+			<name>onclick</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
@@ -2904,6 +3071,12 @@
 		<attribute>
 			<description><![CDATA[CSS classes applied on ThumbRating.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
 			<name>onCssClassesChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a double click event occurs.]]></description>
+			<name>ondblclick</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
@@ -2928,6 +3101,12 @@
 		<attribute>
 			<description><![CDATA[<a href="NodeList.html">NodeList</a> of elements used on the Rating. Each element is one Star.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
 			<name>onElementsChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when this component gets focus.]]></description>
+			<name>onfocus</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
@@ -2974,6 +3153,24 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[Javascript to execute when a keydown event occurs.]]></description>
+			<name>onkeydown</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keypress event occurs.]]></description>
+			<name>onkeypress</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keyup event occurs.]]></description>
+			<name>onkeyup</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[Label to be displayed with the Rating elements.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
 			<name>onLabelChange</name>
 			<required>false</required>
@@ -2992,6 +3189,36 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[Javascript to execute when a mousedown event occurs.]]></description>
+			<name>onmousedown</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mousemove event occurs.]]></description>
+			<name>onmousemove</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseout event occurs.]]></description>
+			<name>onmouseout</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseover event occurs.]]></description>
+			<name>onmouseover</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
+			<name>onmouseup</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
 			<name>onRenderChange</name>
 			<required>false</required>
@@ -3000,6 +3227,12 @@
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.<!--{"event":true,"inputType":"java.lang.String","outputType":"java.lang.String","required":false}-->]]></description>
 			<name>onRenderedChange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when the user selects this component.]]></description>
+			<name>onselect</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
@@ -3070,10 +3303,34 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
+			<name>readonly</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"false"}-->]]></description>
 			<name>rendered</name>
 			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the Process Validations phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
+			<name>required</name>
+			<required>false</required>
 			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message, or the result of the given expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]></description>
+			<name>requiredMessage</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
+			<name>role</name>
+			<required>false</required>
+			<type>String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Stores the index of the selected element.<!--{"event":false,"inputType":"java.lang.Object","outputType":"java.lang.Number","required":false,"defaultValue":"-1"}-->]]></description>
@@ -3106,8 +3363,20 @@
 			<type>Object</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
+			<name>tabindex</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
@@ -3130,10 +3399,33 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[__DESCRIPTION__]]></description>
+			<name>validator</name>
+			<required>false</required>
+			<type>Object</type>
+			<method-signature>
+					void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+					java.lang.Object)
+				</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[__DESCRIPTION__]]></description>
+			<name>validatorMessage</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[Stores the value of the current selected Rating element.<!--{"event":false,"inputType":"java.lang.String","outputType":"java.lang.String","required":false,"defaultValue":"null"}-->]]></description>
 			<name>value</name>
 			<required>false</required>
-			<type>String</type>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[__DESCRIPTION__]]></description>
+			<name>valueChangeListener</name>
+			<required>false</required>
+			<type>Object</type>
+			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.<!--{"event":false,"inputType":"boolean","outputType":"boolean","required":false,"defaultValue":"true"}-->]]></description>

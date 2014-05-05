@@ -13,7 +13,9 @@
  */
 package com.liferay.faces.util.component;
 
+import java.io.IOException;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.el.ELContext;
 import javax.el.ValueExpression;
@@ -23,6 +25,7 @@ import javax.faces.component.UINamingContainer;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.ValueHolder;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 import javax.faces.convert.Converter;
 
 import com.liferay.faces.util.lang.StringPool;
@@ -69,22 +72,32 @@ public class ComponentUtil {
 		return value;
 	}
 
+	public static String concatAllCssClasses(Styleable styleable) {
+		return concatAllCssClasses(styleable, null);
+	}
+
 	public static String concatAllCssClasses(Styleable styleable, String classNames) {
 
-		StringBuilder allClasses = new StringBuilder();
+		StringBuilder cssClassBuilder = new StringBuilder();
 
 		if ((classNames != null) && (classNames.length() > 0)) {
-			allClasses.append(classNames);
+			cssClassBuilder.append(classNames);
 		}
 
 		String styleClass = styleable.getStyleClass();
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			allClasses.append(StringPool.SPACE);
-			allClasses.append(styleClass);
+			cssClassBuilder.append(StringPool.SPACE);
+			cssClassBuilder.append(styleClass);
 		}
 
-		return allClasses.toString();
+		String allClasses = cssClassBuilder.toString();
+
+		if (allClasses.length() == 0) {
+			allClasses = null;
+		}
+
+		return allClasses;
 	}
 
 	public static Object convertSubmittedValue(FacesContext facesContext, ValueHolder valueHolder,

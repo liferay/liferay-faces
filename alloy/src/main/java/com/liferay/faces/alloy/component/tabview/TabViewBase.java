@@ -628,6 +628,16 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 	}
 
 	@Override
+	public String getStyle() {
+		return (String) getStateHelper().eval(STYLE, null);
+	}
+
+	@Override
+	public void setStyle(String style) {
+		getStateHelper().put(STYLE, style);
+	}
+
+	@Override
 	public String getStyleClass() {
 		return (String) getStateHelper().eval(STYLE_CLASS, null);
 	}
