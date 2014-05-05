@@ -714,6 +714,7 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="InputText" generateJava="false" />
 	<component name="InputTextarea" generateJava="false" parentClass="javax.faces.component.html.HtmlInputTextarea" />
 	<component name="Tab" parentClass="javax.faces.component.UIColumn">
 		<description>
