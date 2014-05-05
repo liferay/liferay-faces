@@ -28,7 +28,6 @@ public abstract class ButtonBase extends HtmlOutcomeTargetButton implements Styl
 
 	// Public Constants
 	private static final String AUTOFOCUS = "autofocus";
-	private static final String DISABLED = "disabled";
 	private static final String STYLE = "style";
 	private static final String STYLE_CLASS = "styleClass";
 	private static final String TYPE = "type";
