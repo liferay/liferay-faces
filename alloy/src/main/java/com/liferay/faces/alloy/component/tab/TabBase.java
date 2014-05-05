@@ -12,12 +12,12 @@
  * details.
  */
 package com.liferay.faces.alloy.component.tab;
+//J-
 
 import javax.annotation.Generated;
 import javax.faces.component.UIColumn;
 
 import com.liferay.faces.util.component.Styleable;
-
 
 /**
  * @author  Bruno Basto
@@ -27,7 +27,9 @@ import com.liferay.faces.util.component.Styleable;
 public abstract class TabBase extends UIColumn implements Styleable {
 
 	// Public Constants
-	public static final String LABEL = "label";
+	private static final String LABEL = "label";
+	private static final String STYLE = "style";
+	private static final String STYLE_CLASS = "styleClass";
 
 	public String getLabel() {
 		return (String) getStateHelper().eval(LABEL, null);
@@ -35,6 +37,14 @@ public abstract class TabBase extends UIColumn implements Styleable {
 
 	public void setLabel(String label) {
 		getStateHelper().put(LABEL, label);
+	}
+
+	public String getStyle() {
+		return (String) getStateHelper().eval(STYLE, null);
+	}
+
+	public void setStyle(String style) {
+		getStateHelper().put(STYLE, style);
 	}
 
 	public String getStyleClass() {
@@ -45,3 +55,4 @@ public abstract class TabBase extends UIColumn implements Styleable {
 		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 }
+//J+

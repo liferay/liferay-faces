@@ -648,6 +648,16 @@ public abstract class AceEditorBase extends HtmlInputText implements Styleable, 
 	}
 
 	@Override
+	public String getStyle() {
+		return (String) getStateHelper().eval(STYLE, null);
+	}
+
+	@Override
+	public void setStyle(String style) {
+		getStateHelper().put(STYLE, style);
+	}
+
+	@Override
 	public String getStyleClass() {
 		return (String) getStateHelper().eval(STYLE_CLASS, null);
 	}

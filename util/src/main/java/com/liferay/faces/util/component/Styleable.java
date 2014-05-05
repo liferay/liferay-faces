@@ -25,6 +25,10 @@ public interface Styleable {
 	public static final String STYLE = "style";
 	public static final String STYLE_CLASS = "styleClass";
 
+	public String getStyle();
+
+	public void setStyle(String style);
+
 	public String getStyleClass();
 
 	public void setStyleClass(String styleClass);

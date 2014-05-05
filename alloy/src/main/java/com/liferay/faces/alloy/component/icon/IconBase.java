@@ -27,8 +27,10 @@ import com.liferay.faces.util.component.Styleable;
 public abstract class IconBase extends UIComponentBase implements Styleable {
 
 	// Public Constants
-	public static final String ID = "id";
-	public static final String NAME = "name";
+	private static final String ID = "id";
+	private static final String NAME = "name";
+	private static final String STYLE = "style";
+	private static final String STYLE_CLASS = "styleClass";
 
 	public String getName() {
 		return (String) getStateHelper().eval(NAME, null);
@@ -38,12 +40,18 @@ public abstract class IconBase extends UIComponentBase implements Styleable {
 		getStateHelper().put(NAME, name);
 	}
 
-	@Override
+	public String getStyle() {
+		return (String) getStateHelper().eval(STYLE, null);
+	}
+
+	public void setStyle(String style) {
+		getStateHelper().put(STYLE, style);
+	}
+
 	public String getStyleClass() {
 		return (String) getStateHelper().eval(STYLE_CLASS, null);
 	}
 
-	@Override
 	public void setStyleClass(String styleClass) {
 		getStateHelper().put(STYLE_CLASS, styleClass);
 	}

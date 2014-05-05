@@ -30,14 +30,23 @@ public class RendererUtil {
 	// Public Constants
 	public static final String TEXT_JAVASCRIPT = "text/javascript";
 
-	public static void encodeStylable(ResponseWriter responseWriter, Styleable styleable) throws IOException {
-		encodeStylable(responseWriter, styleable, null);
+	public static void encodeStyleable(ResponseWriter responseWriter, Styleable styleable) throws IOException {
+		encodeStyleable(responseWriter, styleable, null);
 	}
 
-	public static void encodeStylable(ResponseWriter responseWriter, Styleable styleable, String classNames)
+	public static void encodeStyleable(ResponseWriter responseWriter, Styleable styleable, String classNames)
 		throws IOException {
 
 		String allCssClasses = ComponentUtil.concatAllCssClasses(styleable, classNames);
-		responseWriter.writeAttribute(StringPool.CLASS, allCssClasses, Styleable.STYLE_CLASS);
+
+		if (allCssClasses != null) {
+			responseWriter.writeAttribute(StringPool.CLASS, allCssClasses, Styleable.STYLE_CLASS);
+		}
+
+		String style = styleable.getStyle();
+
+		if (style != null) {
+			responseWriter.writeAttribute(Styleable.STYLE, style, Styleable.STYLE);
+		}
 	}
 }

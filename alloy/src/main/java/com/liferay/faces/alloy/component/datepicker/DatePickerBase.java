@@ -15,7 +15,7 @@ package com.liferay.faces.alloy.component.datepicker;
 //J-
 
 import javax.annotation.Generated;
-import javax.faces.component.UIPanel;
+import javax.faces.component.UIComponentBase;
 
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.component.ClientComponent;
@@ -25,7 +25,7 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class DatePickerBase extends UIPanel implements Styleable, ClientComponent, DatePickerAlloy {
+public abstract class DatePickerBase extends UIComponentBase implements Styleable, ClientComponent, DatePickerAlloy {
 
 	@Override
 	public Object getActiveInput() {
@@ -515,6 +515,16 @@ public abstract class DatePickerBase extends UIPanel implements Styleable, Clien
 	@Override
 	public void setSelectionMode(String selectionMode) {
 		getStateHelper().put(SELECTION_MODE, selectionMode);
+	}
+
+	@Override
+	public String getStyle() {
+		return (String) getStateHelper().eval(STYLE, null);
+	}
+
+	@Override
+	public void setStyle(String style) {
+		getStateHelper().put(STYLE, style);
 	}
 
 	@Override
