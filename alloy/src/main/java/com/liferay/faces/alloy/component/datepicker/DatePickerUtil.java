@@ -13,8 +13,7 @@
  */
 package com.liferay.faces.alloy.component.datepicker;
 
-import java.io.IOException;
-import java.net.URL;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -26,20 +25,13 @@ import javax.faces.FacesException;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.io.TextResource;
-import com.liferay.faces.util.io.TextResourceUtil;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
  * @author  Kyle Stiemann
  */
 public class DatePickerUtil {
-
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(DatePickerUtil.class);
 
 	// Private Constants
 	private static final String D = "d";
@@ -106,6 +98,18 @@ public class DatePickerUtil {
 		return stringBuilder.toString();
 	}
 
+	public static Date getDateAtMidnight(Date date) {
+
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+
+		return calendar.getTime();
+	}
+
 	public static String getDatePatternFromMask(String mask) {
 
 		String datePattern = mask;
@@ -131,6 +135,18 @@ public class DatePickerUtil {
 		datePattern = datePattern.replaceAll(PERCENT_PERCENT, StringPool.PERCENT);
 
 		return datePattern;
+	}
+
+	public static String getDefaultDatePattern(FacesContext facesContext, Object componentLocale) {
+
+		Locale locale = DatePickerUtil.determineLocale(facesContext, componentLocale);
+
+		// Note: The following usage of SimpleDateFormat is thread-safe, since only the result of the toPattern()
+		// method is utilized.
+		SimpleDateFormat simpleDateFormat = (SimpleDateFormat) SimpleDateFormat.getDateInstance(DateFormat.MEDIUM,
+				locale);
+
+		return simpleDateFormat.toPattern();
 	}
 
 	public static String getMaskFromDatePattern(String datePattern) {
@@ -159,6 +175,10 @@ public class DatePickerUtil {
 		mask = mask.replaceAll(EEE, PERCENT_A_LOWER);
 
 		return mask;
+	}
+
+	public static Date getObjectAsDate(Object dateAsObject, String datePattern) {
+		return getObjectAsDate(dateAsObject, datePattern, null);
 	}
 
 	public static Date getObjectAsDate(Object dateAsObject, String datePattern, String mask) throws FacesException {
@@ -239,20 +259,5 @@ public class DatePickerUtil {
 		}
 
 		return locale;
-	}
-
-	public static String getResourceText(String resourceName) {
-
-		URL resourceURL = DatePickerUtil.class.getResource(resourceName);
-		TextResource textResource = null;
-
-		try {
-			textResource = TextResourceUtil.read(resourceURL);
-		}
-		catch (IOException e) {
-			logger.error(e);
-		}
-
-		return textResource.getText();
 	}
 }

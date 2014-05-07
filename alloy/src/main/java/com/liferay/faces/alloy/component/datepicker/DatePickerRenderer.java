@@ -16,6 +16,8 @@ package com.liferay.faces.alloy.component.datepicker;
 import java.io.IOException;
 import java.util.Locale;
 
+import javax.faces.application.ResourceDependencies;
+import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
@@ -31,6 +33,14 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Kyle Stiemann
  */
 @FacesRenderer(componentFamily = DatePicker.COMPONENT_FAMILY, rendererType = DatePicker.RENDERER_TYPE)
+@ResourceDependencies(
+	{
+		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
+		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
+		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js"),
+		@ResourceDependency(library = "liferay-faces-alloy", name = "datepicker/datePicker.js")
+	}
+)
 public class DatePickerRenderer extends DatePickerRendererBase {
 
 	// Private Constants
@@ -46,15 +56,6 @@ public class DatePickerRenderer extends DatePickerRendererBase {
 	@Override
 	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 		// This is a no-op since the DataPicker does not manifest any markup.
-	}
-
-	@Override
-	protected void encodeAfterDateClick(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy,
-		String afterDateClick, boolean first) throws IOException {
-
-		// This is a no-op because the dateClick event belongs to the internal calendar rather than the datePicker
-		// itself, so it should not be rendered like a normal attribute. Instead, afterDateClick is handled by
-		// DatePicker.getCalendar().
 	}
 
 	@Override
@@ -124,15 +125,6 @@ public class DatePickerRenderer extends DatePickerRendererBase {
 
 		// This is a no-op because the "minimumDate" attribute belongs to the internal calendar rather than the
 		// DatePicker itself, so it should not be rendered like a normal attribute. Instead, "minimumDate" is handled by
-		// DatePicker.getCalendar().
-	}
-
-	@Override
-	protected void encodeOnDateClick(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String onDateClick,
-		boolean first) throws IOException {
-
-		// This is a no-op because the "dateClick" event belongs to the internal calendar rather than the DatePicker
-		// itself, so it should not be rendered like a normal attribute. Instead, "onDateClick" is handled by
 		// DatePicker.getCalendar().
 	}
 

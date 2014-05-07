@@ -30,13 +30,10 @@ import javax.faces.bean.RequestScoped;
 public class DatePickerModelBean {
 
 	private Date birthday;
-	private Date japaneseDate;
 	private Locale locale;
 	private Date maxDate;
 	private Date minDate;
 	private String multiple;
-	private String multipleSticky;
-	private Date portugueseDate;
 
 	private Calendar newCalendar() {
 
@@ -56,14 +53,6 @@ public class DatePickerModelBean {
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
-	}
-
-	public Date getJapaneseDate() {
-		return japaneseDate;
-	}
-
-	public void setJapaneseDate(Date japaneseDate) {
-		this.japaneseDate = japaneseDate;
 	}
 
 	public Locale getLocale() {
@@ -105,21 +94,5 @@ public class DatePickerModelBean {
 
 	public void setMultiple(String multiple) {
 		this.multiple = multiple;
-	}
-
-	public String getMultipleSticky() {
-		return multipleSticky;
-	}
-
-	public void setMultipleSticky(String multipleSticky) {
-		this.multipleSticky = multipleSticky;
-	}
-
-	public Date getPortugueseDate() {
-		return portugueseDate;
-	}
-
-	public void setPortugueseDate(Date portugueseDate) {
-		this.portugueseDate = portugueseDate;
 	}
 }
