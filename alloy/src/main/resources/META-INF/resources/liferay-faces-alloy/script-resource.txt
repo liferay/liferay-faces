@@ -1,0 +1,1 @@
+This is a placeholder file that is used by ScriptResource.java in order to determine the resource path.
