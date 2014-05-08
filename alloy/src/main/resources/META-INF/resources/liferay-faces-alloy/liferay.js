@@ -1,3 +1,13 @@
+;(function() {
+	window.YUI_config = {
+		base: "#{resource['liferay-faces-alloy:script']}&",
+		combine: true,
+		comboBase: "#{resource['liferay-faces-alloy:combo']}&",
+		root: 'build/',
+	};
+})();
+
+var AUI = YUI;
 Liferay = window.Liferay || {};
 
 (function(A, Liferay) {
