@@ -28,7 +28,9 @@ import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.bridge.application.ResourceInfo;
+import com.liferay.faces.util.component.ComponentResource;
+import com.liferay.faces.util.component.ComponentResourceFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.RendererWrapper;
@@ -71,8 +73,10 @@ public class ResourceRendererBridgeImpl extends RendererWrapper implements Compo
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		ResourceInfo resourceInfo = new ResourceInfo(uiComponent);
-		String resourceId = resourceInfo.getId();
+		ComponentResourceFactory componentResourceFactory = (ComponentResourceFactory) FactoryExtensionFinder
+			.getFactory(ComponentResourceFactory.class);
+		ComponentResource componentResource = componentResourceFactory.getComponentResource(uiComponent);
+		String resourceId = componentResource.getId();
 
 		// Determine whether or not the specified resource is already present in the <head> section of the portal page.
 		HeadManagedBean headManagedBean = HeadManagedBean.getInstance(facesContext);

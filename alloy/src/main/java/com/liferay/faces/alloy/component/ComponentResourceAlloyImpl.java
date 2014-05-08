@@ -13,8 +13,11 @@
  */
 package com.liferay.faces.alloy.component;
 
-import com.liferay.faces.bridge.component.ComponentResource;
-import com.liferay.faces.bridge.component.ComponentResourceWrapper;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.liferay.faces.util.component.ComponentResource;
+import com.liferay.faces.util.component.ComponentResourceWrapper;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
@@ -29,9 +32,17 @@ import com.liferay.faces.util.product.ProductMap;
 public class ComponentResourceAlloyImpl extends ComponentResourceWrapper {
 
 	// Private Constants
-	private static final String LIFERAY_JS_RESOURCE_ID = "liferay-faces-alloy:liferay.js";
 	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
 		.isDetected();
+	private static final Set<String> PORTAL_RESOURCES = new HashSet<String>();
+
+	static {
+		PORTAL_RESOURCES.add("liferay-faces-alloy:aui.js");
+		PORTAL_RESOURCES.add("liferay-faces-alloy:build/aui/aui-min.js");
+		PORTAL_RESOURCES.add("liferay-faces-alloy:bootstrap.css");
+		PORTAL_RESOURCES.add("liferay-faces-alloy:build/aui-css/css/bootstrap.min.css");
+		PORTAL_RESOURCES.add("liferay-faces-alloy:liferay.js");
+	}
 
 	// Private Data Members
 	private ComponentResource wrappedComponentResource;
@@ -48,7 +59,7 @@ public class ComponentResourceAlloyImpl extends ComponentResourceWrapper {
 		if (LIFERAY_PORTAL_DETECTED) {
 			String id = super.getId();
 
-			if (LIFERAY_JS_RESOURCE_ID.equals(id)) {
+			if (PORTAL_RESOURCES.contains(id)) {
 				renderable = false;
 			}
 		}
