@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<aui-nongen:field id="componentField1" label="#{i18n['component']}">
+		<aui:outputText id="ouputTextId1" dir="RTL" lang="he" value="בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָֽרֶץ" /><br />
+		<aui:outputText id="ouputTextId2" dir="LTR" lang="he" value="בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָֽרֶץ" /><br />
+		<aui:outputText id="ouputTextId3" dir="auto" lang="he" value="בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָֽרֶץ" /><br />
+		<aui:outputText id="ouputTextId4" lang="he" value="בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָֽרֶץ" />
+	</aui-nongen:field>
+	<aui-nongen:field id="componentField2" label="#{i18n['component']}">
+		<aui:outputText id="ouputTextId11" dir="rtl" value="right to left!" /><br />
+		<aui:outputText id="ouputTextId22" dir="LTR" value="left to right" /><br />
+		<aui:outputText id="ouputTextId33" value="default" /><br />
+		<p dir="rtl">Write this text right-to-left!</p>
+	</aui-nongen:field>
+
+</ui:composition>
