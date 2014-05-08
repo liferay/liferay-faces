@@ -15,8 +15,8 @@ package com.liferay.faces.alloy.component;
 
 import javax.faces.component.UIComponent;
 
-import com.liferay.faces.bridge.component.ComponentResource;
-import com.liferay.faces.bridge.component.ComponentResourceFactory;
+import com.liferay.faces.util.component.ComponentResource;
+import com.liferay.faces.util.component.ComponentResourceFactory;
 
 
 /**
