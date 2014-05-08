@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.component;
+package com.liferay.faces.util.component;
 
 import java.util.Map;
 
