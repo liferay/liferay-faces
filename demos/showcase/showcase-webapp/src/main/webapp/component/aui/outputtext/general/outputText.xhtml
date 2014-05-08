@@ -1,0 +1,15 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form>
+		<aui-nongen:field id="componentField" label="#{i18n['component']}">
+			<showcase:componentRenderedCheckbox />
+			<br />
+			<aui:outputText id="outputTextId" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+				value="#{outputTextModelBean.property}" />
+			<h:message for="outputTextId" />
+		</aui-nongen:field>
+	</h:form>
+</ui:composition>

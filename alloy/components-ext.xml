@@ -337,6 +337,65 @@
 			<!-- /h:button attributes -->
 		</attributes>
 	</component>
+	<component name="CharCounter" preferredName="outputRemainingChars" parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" 
+		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase" >
+		<description>
+			<![CDATA[CharCounter is an OutputText component that displays the number of allowed characters remaining for a given text input, and limits the number of characters allowed in the input.  Renders as HtmlOutputText renders, so this tag will optionally render a span when i18n or style attributes used.]]>
+		</description>
+		<attributes>
+			<!-- Attributes used to help the component follow normal JSF usage patterns -->
+			<attribute>
+				<description>
+					<![CDATA[The id of the text input node which is used to calculate the remaining characters. One of either "for" or "input" are required.]]>
+				</description>
+				<name>for</name>
+				<type>java.lang.String</type>
+			</attribute>
+	      	<!-- Attributes that are generated for the Alloy component -->
+	      	<attribute>
+				<description>
+					<![CDATA[Node or Selector to display the number of remaining characters calculated by the charCounter.]]>
+				</description>
+				<name>counter</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Input text node which will have it's number of characters limited by the charCounter. One of either "for" or "input" are required.]]>
+				</description>
+				<name>input</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<!-- Attributes that were invented here to implement Alloy methods -->
+			<attribute>
+				<description>
+					<![CDATA[Node or Selector to display the number of remaining characters calculated by the charCounter.]]>
+				</description>
+				<name>onMaxlengthReached</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Node or Selector to display the number of remaining characters calculated by the charCounter.]]>
+				</description>
+				<name>onceMaxlengthReached</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<!-- Attributes that default to jsfReservedAttribute=true -->
+			<attribute>
+				<description><![CDATA[A unique identifier for this component.]]></description>
+				<name>id</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When false, this component will not be rendered.  The default value of this attribute is true.]]>
+				</description>
+				<name>rendered</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="CommandButton" generateJava="false" rendererParentClass="com.liferay.faces.alloy.component.button.ButtonRenderer">
 		<description>
 			<![CDATA[CommandButton is a UICommand component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is submit. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlCommandButton.html" target="_blank"><code>HtmlCommandButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/commandButton.html" target="_blank"><code>h:commandButton</code></a>. The component must be a child of h:form in order to trigger the action or actionListener.]]>
@@ -1098,6 +1157,131 @@
 		</attributes>
 	</component>
 	<component name="InputTextarea" generateJava="false" parentClass="javax.faces.component.html.HtmlInputTextarea" />
+	<component name="OutputText" generateJava="false" parentClass="javax.faces.component.html.HtmlOutputText" >
+		<description>
+			<![CDATA[OuputText is an <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutputText.html" target="_blank"><code>HtmlOutputText</code></a> component that delegates rendering to its JSF renderer.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]>
+				</description>
+				<name>binding</name>
+				<type>javax.faces.component.UIComponent</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The class name of the converter instance that is to be used by this component.]]>
+				</description>
+				<name>converter</name>
+				<type>javax.faces.convert.Converter</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[This is an i18n attribute, which designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]>
+				</description>
+				<name>dir</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+            	<description>
+            		<![CDATA[When false, markup will not be escaped. This is true by default.]]>
+            	</description>
+            	<name>escape</name>
+            	<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+        	</attribute>
+			<attribute>
+				<description>
+					<![CDATA[__DESCRIPTION__]]>
+				</description>
+				<name>lang</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The css class names that are rendered as the value of the class attribute of the outermost span of this component.]]>
+				</description>
+				<name>styleClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The title of the component, which is simply passed through as the html 'title' attribute of this component.]]>
+				</description>
+				<name>title</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[This value is used to generate markup used to render the number of remaining characters allowed in the given text input. e.g.: value="There are {0} character(s) remaining."]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="Popover" parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" >
+		<description>
+			<![CDATA[Popover is an OutputText component that displays a header and a footer for a given target.  Renders as HtmlOutputText renders, so this tag will optionally render a span when i18n or style attributes used.]]>
+		</description>
+		<attributes>
+			<!-- Attributes used to help the component follow normal JSF usage patterns -->
+			<attribute>
+				<description>
+					<![CDATA[The id of the text input node which is the target of the Popover.]]>
+				</description>
+				<name>for</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<!-- Attributes that are generated for the Alloy component -->
+			<!-- Attributes that should have been generated for the Alloy component, but were not :-/ -->
+			<attribute>
+				<description>
+					<![CDATA[The side of the Popover that the caret needs to point to.]]>
+				</description>
+				<name>position</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<!-- Attributes that should be in the Alloy documentation, but are not :-/ -->
+			<attribute>
+				<description>
+					<![CDATA[A list of plugins to use with this component.  Used by the animate attribute.]]>
+				</description>
+				<name>plugins</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<!-- Attributes that were invented here to implement Alloy methods -->
+			<!-- Attributes that were invented here to implement Alloy modules -->
+			<attribute>
+				<description>
+					<![CDATA[When true, will add a fadeIn and fadeOut animation.  The default is false.]]>
+				</description>
+				<name>animate</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+			<!-- Attributes that default to jsfReservedAttribute=true -->
+			<attribute>
+				<description><![CDATA[A unique identifier for this component.]]></description>
+				<name>id</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When false, this component will not be rendered.  The default value of this attribute is true.]]>
+				</description>
+				<name>rendered</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="Tab" parentClass="javax.faces.component.UIColumn">
 		<description>
 			<![CDATA[Tab is a panel component that renders nested/child tags as content within itself.]]>
