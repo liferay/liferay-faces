@@ -28,12 +28,12 @@ import javax.portlet.PortletRequest;
 import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.component.ComponentResource;
-import com.liferay.faces.bridge.component.ComponentResourceFactory;
-import com.liferay.faces.bridge.component.ComponentResourceUtil;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.renderkit.bridge.BridgeRenderer;
+import com.liferay.faces.util.component.ComponentResource;
+import com.liferay.faces.util.component.ComponentResourceFactory;
+import com.liferay.faces.util.component.ComponentResourceUtil;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
