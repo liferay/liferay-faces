@@ -71,6 +71,7 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="Body" generateJava="false" />
 	<component name="Button" parentClass="javax.faces.component.html.HtmlOutcomeTargetButton">
 		<description>
 			<![CDATA[Button is a UIOutput component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is button. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutcomeTargetButton.html" target="_blank"><code>HtmlOutcomeTargetButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/button.html" target="_blank"><code>h:button</code></a>. The component does not need to be a child of h:form since the outcome attribute is designed to navigate via HTTP GET.]]>
