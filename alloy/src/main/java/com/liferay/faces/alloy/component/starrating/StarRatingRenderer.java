@@ -15,6 +15,7 @@ package com.liferay.faces.alloy.component.starrating;
 
 import java.io.IOException;
 
+import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
 import javax.faces.component.ValueHolder;
@@ -34,7 +35,13 @@ import com.liferay.faces.util.render.RendererUtil;
  * @author  Vernon Singleton
  */
 @FacesRenderer(componentFamily = StarRating.COMPONENT_FAMILY, rendererType = StarRating.RENDERER_TYPE)
-@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
+@ResourceDependencies(
+		{
+			@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
+			@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
+			@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
+		}
+	)
 public class StarRatingRenderer extends StarRatingRendererBase {
 
 	// Private Constants
