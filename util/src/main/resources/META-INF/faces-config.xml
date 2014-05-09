@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 	<name>LiferayFacesUtil</name>
 	<!-- Ordering must be "after" ICEfacesCore because the com.liferay.faces.util.context.PartialViewContexCleanupImpl -->
 	<!-- instance needs to be able to wrap the ICEfaces org.icefaces.impl.context.DOMPartialViewContext instance. -->
@@ -16,4 +17,9 @@
 			<system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
 		</system-event-listener>
 	</application>
+	<factory>
+		<factory-extension>
+			<util:client-script-factory>com.liferay.faces.util.client.ClientScriptFactoryImpl</util:client-script-factory>
+		</factory-extension>
+	</factory>
 </faces-config>
