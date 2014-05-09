@@ -42,6 +42,11 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+	<!-- Support deployment as a plain webapp -->
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.faces</url-pattern>
+	</servlet-mapping>
 	<!-- Prevent direct access to Facelet view XHTML by the userAgent (browser). --> 
 	<security-constraint>
 		<web-resource-collection>
