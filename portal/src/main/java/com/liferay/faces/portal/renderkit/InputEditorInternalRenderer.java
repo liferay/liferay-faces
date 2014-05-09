@@ -43,7 +43,6 @@ import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.portal.EditorUtil;
-import com.liferay.faces.util.portal.ScriptDataUtil;
 import com.liferay.faces.util.portal.ScriptTagUtil;
 import com.liferay.faces.util.portal.WebKeys;
 import com.liferay.faces.util.render.CleanupRenderer;
