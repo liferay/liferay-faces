@@ -37,9 +37,7 @@ public class ComponentResourceAlloyImpl extends ComponentResourceWrapper {
 	private static final Set<String> PORTAL_RESOURCES = new HashSet<String>();
 
 	static {
-		PORTAL_RESOURCES.add("liferay-faces-alloy:aui.js");
 		PORTAL_RESOURCES.add("liferay-faces-alloy:build/aui/aui-min.js");
-		PORTAL_RESOURCES.add("liferay-faces-alloy:bootstrap.css");
 		PORTAL_RESOURCES.add("liferay-faces-alloy:build/aui-css/css/bootstrap.min.css");
 		PORTAL_RESOURCES.add("liferay-faces-alloy:liferay.js");
 	}
