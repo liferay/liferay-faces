@@ -24,6 +24,8 @@ import javax.faces.event.SystemEventListener;
 import com.liferay.faces.util.config.ApplicationConfigUtil;
 import com.liferay.faces.util.config.WebConfigParam;
 import com.liferay.faces.util.helper.BooleanHelper;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -31,16 +33,26 @@ import com.liferay.faces.util.helper.BooleanHelper;
  */
 public class ApplicationStartupListener implements SystemEventListener {
 
+	// Private Constants
+	private static final boolean LIFERAY_FACES_BRIDGE_DETECTED = ProductMap.getInstance().get(
+			ProductConstants.LIFERAY_FACES_BRIDGE).isDetected();
+
 	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
 
-		if (systemEvent instanceof PostConstructApplicationEvent) {
+		// If Liferay Faces Bridge is not present in the classpath, then proceed with processing the configuration
+		// files. The reason is because Liferay Faces Bridge has its own configuration file processing that takes place
+		// during portlet initialization, rather than at JSF application startup.
+		if (!LIFERAY_FACES_BRIDGE_DETECTED) {
 
-			if (ApplicationConfigUtil.getApplicationConfig() == null) {
-				FacesContext initFacesContext = FacesContext.getCurrentInstance();
-				ExternalContext externalContext = initFacesContext.getExternalContext();
-				String initParam = externalContext.getInitParameter(WebConfigParam.ResolveXMLEntities.getName());
-				boolean resolveEntities = BooleanHelper.toBoolean(initParam, false);
-				ApplicationConfigUtil.initializeApplicationConfig(resolveEntities);
+			if (systemEvent instanceof PostConstructApplicationEvent) {
+
+				if (ApplicationConfigUtil.getApplicationConfig() == null) {
+					FacesContext initFacesContext = FacesContext.getCurrentInstance();
+					ExternalContext externalContext = initFacesContext.getExternalContext();
+					String initParam = WebConfigParam.ResolveXMLEntities.getStringValue(externalContext);
+					boolean resolveEntities = BooleanHelper.toBoolean(initParam, false);
+					ApplicationConfigUtil.initializeApplicationConfig(resolveEntities);
+				}
 			}
 		}
 	}
