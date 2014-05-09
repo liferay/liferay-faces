@@ -162,9 +162,6 @@ public class CustomerExportResource extends Resource {
 
 	@Override
 	public URL getURL() {
-
-		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
