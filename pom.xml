@@ -85,6 +85,7 @@
 	</modules>
 
 	<properties>
+		<alloyui.version>N/A</alloyui.version>
 		<app.server.type>tomcat</app.server.type>
 		<arquillian.version>1.1.1.Final</arquillian.version>
 		<arquillian.drone.version>1.2.0.Final</arquillian.drone.version>
