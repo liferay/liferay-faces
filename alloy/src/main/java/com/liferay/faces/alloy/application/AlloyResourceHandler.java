@@ -97,46 +97,54 @@ public class AlloyResourceHandler extends ResourceHandlerWrapperBase {
 	@Override
 	public void handleResourceRequest(FacesContext facesContext) throws IOException {
 
-		ExternalContext externalContext = facesContext.getExternalContext();
-		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
-		String libraryName = requestParameterMap.get(ResourceConstants.LN);
+		if (LIFERAY_PORTAL_DETECTED) {
+			getWrapped().handleResourceRequest(facesContext);
+		}
+		else {
+			ExternalContext externalContext = facesContext.getExternalContext();
+			Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
+			String libraryName = requestParameterMap.get(ResourceConstants.LN);
 
-		if (!LIFERAY_PORTAL_DETECTED && LIBRARY_NAME.equals(libraryName)) {
+			if (LIBRARY_NAME.equals(libraryName)) {
+				
+				String resourceName = getResourceName(externalContext);
 
-			String resourceName = getResourceName(externalContext);
+				// If the resource that is to be rendered is "liferay.js" then let this resource handler have an
+				// opportunity to expand EL expressions before writing the contents of the resource to the response.
+				if (LIFERAY_JS.equals(resourceName)) {
+					Resource resource = createResource(resourceName, libraryName);
+					handleResource(facesContext, resource);
+				}
 
-			// If the resource that is to be rendered is "liferay.js" then let this resource handler have an
-			// opportunity to expand EL expressions before writing the contents of the resource to the response.
-			if (LIFERAY_JS.equals(resourceName)) {
-				Resource resource = createResource(resourceName, libraryName);
-				handleResource(facesContext, resource);
-			}
+				// Otherwise, if the resource that is to be rendered is a combo or script module resource, then let this
+				// resource handler write the contents of the resource to the response.
+				else if (ComboResource.RESOURCE_NAME.equals(resourceName) ||
+						ScriptResource.RESOURCE_NAME.equals(resourceName)) {
 
-			// Otherwise, if the resource that is to be rendered is a combo or script module resource, then let this
-			// resource handler write the contents of the resource to the response.
-			else if (ComboResource.RESOURCE_NAME.equals(resourceName) ||
-					ScriptResource.RESOURCE_NAME.equals(resourceName)) {
+					List<String> modulePaths = getModulePaths(externalContext);
+					boolean modulePathExtensionsValid = validateModulePathExtensions(externalContext, modulePaths);
 
-				List<String> modulePaths = getModulePaths(externalContext);
-				boolean modulePathExtensionsValid = validateModulePathExtensions(externalContext, modulePaths);
+					if ((modulePaths.size() > 0) && (modulePathExtensionsValid)) {
 
-				if ((modulePaths.size() > 0) && (modulePathExtensionsValid)) {
-
-					if (ComboResource.RESOURCE_NAME.equals(resourceName)) {
-						ComboResource comboResource = (ComboResource) createResource(resourceName, libraryName);
-						comboResource.setModulePaths(modulePaths);
-						handleResource(facesContext, comboResource);
+						if (ComboResource.RESOURCE_NAME.equals(resourceName)) {
+							ComboResource comboResource = (ComboResource) createResource(resourceName, libraryName);
+							comboResource.setModulePaths(modulePaths);
+							handleResource(facesContext, comboResource);
+						}
+						else {
+							ScriptResource scriptResource = (ScriptResource) createResource(resourceName, libraryName);
+							scriptResource.setModulePath(modulePaths.get(0));
+							handleResource(facesContext, scriptResource);
+						}
 					}
 					else {
-						ScriptResource scriptResource = (ScriptResource) createResource(resourceName, libraryName);
-						scriptResource.setModulePath(modulePaths.get(0));
-						handleResource(facesContext, scriptResource);
+						externalContext.setResponseHeader(HttpHeaders.CACHE_CONTROL,
+							HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
+						externalContext.setResponseStatus(HttpServletResponse.SC_NOT_FOUND);
 					}
 				}
 				else {
-					externalContext.setResponseHeader(HttpHeaders.CACHE_CONTROL,
-						HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
-					externalContext.setResponseStatus(HttpServletResponse.SC_NOT_FOUND);
+					getWrapped().handleResourceRequest(facesContext);
 				}
 			}
 
@@ -144,9 +152,6 @@ public class AlloyResourceHandler extends ResourceHandlerWrapperBase {
 			else {
 				getWrapped().handleResourceRequest(facesContext);
 			}
-		}
-		else {
-			super.handleResourceRequest(facesContext);
 		}
 	}
 
