@@ -13,13 +13,13 @@
  */
 package com.liferay.faces.util.config;
 
-import javax.servlet.ServletContext;
+import javax.faces.context.ExternalContext;
 
 
 /**
  * @author  Neil Griffin
  */
-public enum WebConfigParam implements ConfigParam<ServletContext> {
+public enum WebConfigParam implements ConfigParam<ExternalContext> {
 
 	ResolveXMLEntities("com.liferay.faces.util.resolveXMLEntities", false);
 
@@ -51,18 +51,18 @@ public enum WebConfigParam implements ConfigParam<ServletContext> {
 	}
 
 	@Override
-	public boolean getBooleanValue(ServletContext servletContext) {
-		return WebConfigParamUtil.getBooleanValue(servletContext, name, alternateName, defaultBooleanValue);
+	public boolean getBooleanValue(ExternalContext externalContext) {
+		return WebConfigParamUtil.getBooleanValue(externalContext, name, alternateName, defaultBooleanValue);
 	}
 
 	@Override
-	public String getConfiguredValue(ServletContext servletContext) {
-		return WebConfigParamUtil.getConfiguredValue(servletContext, name, alternateName);
+	public String getConfiguredValue(ExternalContext externalContext) {
+		return WebConfigParamUtil.getConfiguredValue(externalContext, name, alternateName);
 	}
 
 	@Override
-	public boolean isConfigured(ServletContext servletContext) {
-		return WebConfigParamUtil.isSpecified(servletContext, name, alternateName);
+	public boolean isConfigured(ExternalContext externalContext) {
+		return WebConfigParamUtil.isSpecified(externalContext, name, alternateName);
 	}
 
 	public boolean getDefaultBooleanValue() {
@@ -78,8 +78,8 @@ public enum WebConfigParam implements ConfigParam<ServletContext> {
 	}
 
 	@Override
-	public int getIntegerValue(ServletContext servletContext) {
-		return WebConfigParamUtil.getIntegerValue(servletContext, name, alternateName, defaultIntegerValue);
+	public int getIntegerValue(ExternalContext externalContext) {
+		return WebConfigParamUtil.getIntegerValue(externalContext, name, alternateName, defaultIntegerValue);
 	}
 
 	public String getName() {
@@ -87,7 +87,7 @@ public enum WebConfigParam implements ConfigParam<ServletContext> {
 	}
 
 	@Override
-	public String getStringValue(ServletContext servletContext) {
-		return WebConfigParamUtil.getStringValue(servletContext, name, alternateName, defaultStringValue);
+	public String getStringValue(ExternalContext externalContext) {
+		return WebConfigParamUtil.getStringValue(externalContext, name, alternateName, defaultStringValue);
 	}
 }
