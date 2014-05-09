@@ -543,6 +543,26 @@
       </attribute>
    </tag>
    <tag>
+      <description/>
+      <name>body</name>
+      <tag-class>com.liferay.faces.alloy.taglib.BodyTag</tag-class>
+      <body-content>JSP</body-content>
+      <attribute>
+         <name>style</name>
+         <required>false</required>
+         <deferred-value>
+            <type>String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>styleClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>String</type>
+         </deferred-value>
+      </attribute>
+   </tag>
+   <tag>
       <description>Button is a UIOutput component that renders a styleable HTML &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt; element. The default type is button. Since it extends &lt;a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutcomeTargetButton.html" target="_blank"&gt;&lt;code&gt;HtmlOutcomeTargetButton&lt;/code&gt;&lt;/a&gt; it supports all the features of &lt;a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/button.html" target="_blank"&gt;&lt;code&gt;h:button&lt;/code&gt;&lt;/a&gt;. The component does not need to be a child of h:form since the outcome attribute is designed to navigate via HTTP GET.</description>
       <name>button</name>
       <tag-class>com.liferay.faces.alloy.taglib.ButtonTag</tag-class>
@@ -778,7 +798,7 @@
       </attribute>
    </tag>
    <tag>
-      <description>CommandButton is a UICommand component that renders a styleable HTML &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt; element. The default type is submit. Since it extends &lt;a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlCommandButton.html" target="_blank"&gt;&lt;code&gt;HtmlOutcomeTargetButton&lt;/code&gt;&lt;/a&gt; it supports all the features of &lt;a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/commandButton.html" target="_blank"&gt;&lt;code&gt;h:commandButton&lt;/code&gt;&lt;/a&gt;. The component must be a child of h:form in order to trigger the action or actionListener.</description>
+      <description>CommandButton is a UICommand component that renders a styleable HTML &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt; element. The default type is submit. Since it extends &lt;a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlCommandButton.html" target="_blank"&gt;&lt;code&gt;HtmlCommandButton&lt;/code&gt;&lt;/a&gt; it supports all the features of &lt;a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/commandButton.html" target="_blank"&gt;&lt;code&gt;h:commandButton&lt;/code&gt;&lt;/a&gt;. The component must be a child of h:form in order to trigger the action or actionListener.</description>
       <name>commandButton</name>
       <tag-class>com.liferay.faces.alloy.taglib.CommandButtonTag</tag-class>
       <body-content>JSP</body-content>
@@ -1455,6 +1475,26 @@
             <type>boolean</type>
          </deferred-value>
       </attribute>
+      <attribute>
+         <name>style</name>
+         <required>false</required>
+         <deferred-value>
+            <type>String</type>
+         </deferred-value>
+      </attribute>
+      <attribute>
+         <name>styleClass</name>
+         <required>false</required>
+         <deferred-value>
+            <type>String</type>
+         </deferred-value>
+      </attribute>
+   </tag>
+   <tag>
+      <description/>
+      <name>inputText</name>
+      <tag-class>com.liferay.faces.alloy.taglib.InputTextTag</tag-class>
+      <body-content>JSP</body-content>
       <attribute>
          <name>style</name>
          <required>false</required>
