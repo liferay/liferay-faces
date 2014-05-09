@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.portal;
+package com.liferay.faces.util.client;
 
 import java.lang.reflect.Method;
 
@@ -25,27 +25,26 @@ import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 
 
 /**
- * This class serves as a facade for instances of the Liferay Portal {@link ScriptData} class. Some of the method
- * signatures of the class have undergone changes from Liferay Portal 6.1.1 -> 6.1.2 which requires the use of version
- * detection and reflection in this class.
- *
  * @author  Neil Griffin
  */
-public class ScriptDataUtil {
+public class ClientScriptLiferayImpl implements ClientScript {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(ScriptDataUtil.class);
+	private static final Logger logger = LoggerFactory.getLogger(ClientScriptLiferayImpl.class);
 
 	// Private Constants
 	private static final String APPEND = "append";
 	private static final Method APPEND_METHOD_LEGACY;
 	private static final Method APPEND_METHOD_CURRENT;
+	private static final boolean LIFERAY_PORTAL_DETECTED;
 
 	static {
 
 		Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
 
-		if (liferayPortal.isDetected()) {
+		LIFERAY_PORTAL_DETECTED = liferayPortal.isDetected();
+
+		if (LIFERAY_PORTAL_DETECTED) {
 
 			int buildNumber = liferayPortal.getBuildId();
 
@@ -84,7 +83,15 @@ public class ScriptDataUtil {
 		}
 	}
 
-	public static void append(ScriptData scriptData, String portletId, String content, String use) {
+	// Private Data Members
+	private Object scriptData;
+
+	public ClientScriptLiferayImpl(Object scriptData) {
+		this.scriptData = scriptData;
+	}
+
+	@Override
+	public void append(String portletId, String content, String use) {
 
 		try {
 
