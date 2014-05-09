@@ -13,9 +13,7 @@
  */
 package com.liferay.faces.util.component;
 
-import java.io.IOException;
 import java.util.Iterator;
-import java.util.Map;
 
 import javax.el.ELContext;
 import javax.el.ValueExpression;
@@ -25,7 +23,6 @@ import javax.faces.component.UINamingContainer;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.ValueHolder;
 import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
 import javax.faces.convert.Converter;
 
 import com.liferay.faces.util.lang.StringPool;
