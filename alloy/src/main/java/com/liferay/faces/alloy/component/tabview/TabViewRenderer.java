@@ -16,6 +16,7 @@ package com.liferay.faces.alloy.component.tabview;
 import java.io.IOException;
 import java.util.List;
 
+import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -38,7 +39,13 @@ import com.liferay.faces.util.render.RendererUtil;
  * @author  Neil Griffin
  */
 @FacesRenderer(componentFamily = TabView.COMPONENT_FAMILY, rendererType = TabView.RENDERER_TYPE)
-@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
+@ResourceDependencies(
+		{
+			@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
+			@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
+			@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
+		}
+	)
 public class TabViewRenderer extends TabViewRendererBase {
 
 	// Private Constants

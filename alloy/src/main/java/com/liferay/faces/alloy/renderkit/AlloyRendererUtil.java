@@ -42,7 +42,7 @@ public class AlloyRendererUtil {
 	private static final String LIFERAY_COMPONENT = "Liferay.component";
 	private static final String NEW = "new";
 	private static final String NUMBER_REGEX = "([-])?[0-9]+([.])?[0-9]*";
-	public static final Pattern NUMBER_PATTERN = Pattern.compile(NUMBER_REGEX);
+	private static final Pattern NUMBER_PATTERN = Pattern.compile(NUMBER_REGEX);
 	private static final String RETURN = "return";
 	private static final String USE = "use";
 	private static final String VAR = "var";

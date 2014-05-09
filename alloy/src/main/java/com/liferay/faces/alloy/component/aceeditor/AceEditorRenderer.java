@@ -15,6 +15,7 @@ package com.liferay.faces.alloy.component.aceeditor;
 
 import java.io.IOException;
 
+import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UINamingContainer;
@@ -33,7 +34,13 @@ import com.liferay.faces.util.render.HiddenTextResponseWriter;
  * @author  Neil Griffin
  */
 @FacesRenderer(componentFamily = AceEditor.COMPONENT_FAMILY, rendererType = AceEditor.RENDERER_TYPE)
-@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
+@ResourceDependencies(
+	{
+		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
+		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
+		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
+	}
+)
 public class AceEditorRenderer extends AceEditorRendererBase {
 
 	// Private Constants

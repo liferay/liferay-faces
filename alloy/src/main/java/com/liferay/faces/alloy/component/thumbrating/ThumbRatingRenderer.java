@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.alloy.component.thumbrating;
 
+import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.render.FacesRenderer;
 
@@ -23,7 +24,13 @@ import com.liferay.faces.alloy.component.starrating.StarRatingRenderer;
  * @author  Vernon Singleton
  */
 @FacesRenderer(componentFamily = ThumbRating.COMPONENT_FAMILY, rendererType = ThumbRating.RENDERER_TYPE)
-@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
+@ResourceDependencies(
+		{
+			@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
+			@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
+			@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
+		}
+	)
 public class ThumbRatingRenderer extends StarRatingRenderer {
 
 	// Private Constants
