@@ -22,12 +22,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
+import com.liferay.faces.util.client.ClientScript;
+import com.liferay.faces.util.client.ClientScriptFactory;
 import com.liferay.faces.util.context.ExtFacesContext;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.portal.ScriptDataUtil;
 import com.liferay.faces.util.portal.WebKeys;
-
-import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.model.Portlet;
 
 
@@ -78,7 +78,7 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 		if (!isAjax(facesContext) && isForceInline(facesContext, uiComponent)) {
 
 			responseWriter.startElement(StringPool.SCRIPT, uiComponent);
-			responseWriter.writeAttribute(StringPool.TYPE, RendererUtil.TEXT_JAVASCRIPT, null);
+			responseWriter.writeAttribute(StringPool.TYPE, ContentTypes.TEXT_JAVASCRIPT, null);
 		}
 
 		encodeJavaScript(facesContext, uiComponent);
@@ -90,10 +90,11 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 
 	protected void encodeJavaScript(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		ResponseWriter backupResponseWriter = facesContext.getResponseWriter();
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		if (isAjax(facesContext) || !isForceInline(facesContext, uiComponent)) {
+		boolean bufferResponse = (isAjax(facesContext) || !isForceInline(facesContext, uiComponent));
 
+		if (bufferResponse) {
 			BufferedResponseWriter bufferedResponseWriter = new BufferedResponseWriter();
 			facesContext.setResponseWriter(bufferedResponseWriter);
 		}
@@ -103,11 +104,10 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 		encodeJavaScriptCustom(facesContext, uiComponent);
 		encodeJavaScriptEnd(facesContext, uiComponent);
 
-		if (isAjax(facesContext) || !isForceInline(facesContext, uiComponent)) {
+		if (bufferResponse) {
 			handleBuffer(facesContext, uiComponent);
+			facesContext.setResponseWriter(responseWriter);
 		}
-
-		facesContext.setResponseWriter(backupResponseWriter);
 	}
 
 	protected void handleBuffer(FacesContext facesContext, UIComponent uiComponent) {
@@ -127,15 +127,12 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 		else { // TODO This may be different depending on if component is aui or not. come back to this
 
 			ExternalContext externalContext = facesContext.getExternalContext();
-			ScriptData scriptData = (ScriptData) externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
-
-			if (scriptData == null) {
-				scriptData = new ScriptData();
-				externalContext.getRequestMap().put(WebKeys.AUI_SCRIPT_DATA, scriptData);
-			}
+			ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
+					ClientScriptFactory.class);
+			ClientScript clientScript = clientScriptFactory.getClientScript(externalContext);
 
 			String portletId = StringPool.BLANK;
-			Portlet portlet = (Portlet) facesContext.getExternalContext().getRequestMap().get(WebKeys.RENDER_PORTLET);
+			Portlet portlet = (Portlet) externalContext.getRequestMap().get(WebKeys.RENDER_PORTLET);
 
 			if (portlet != null) {
 				portletId = portlet.getPortletId();
@@ -160,7 +157,7 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 				modules = stringBuilder.toString();
 			}
 
-			ScriptDataUtil.append(scriptData, portletId, bufferedResponseWriter.toString(), modules);
+			clientScript.append(portletId, bufferedResponseWriter.toString(), modules);
 		}
 	}
 
