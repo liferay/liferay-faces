@@ -21,26 +21,26 @@ import javax.faces.FacesWrapper;
  */
 public abstract class ComponentResourceWrapper implements ComponentResource, FacesWrapper<ComponentResource> {
 
-	@Override
+	
 	public boolean isRenderable() {
 		return getWrapped().isRenderable();
 	}
 
-	@Override
+	
 	public String getId() {
 		return getWrapped().getId();
 	}
 
-	@Override
+	
 	public String getLibrary() {
 		return getWrapped().getLibrary();
 	}
 
-	@Override
+	
 	public String getName() {
 		return getWrapped().getName();
 	}
 
-	@Override
+	
 	public abstract ComponentResource getWrapped();
 }

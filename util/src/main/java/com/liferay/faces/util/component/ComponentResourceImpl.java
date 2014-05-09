@@ -31,7 +31,7 @@ public class ComponentResourceImpl implements ComponentResource {
 		this.renderable = renderable;
 	}
 
-	@Override
+	
 	public boolean isRenderable() {
 		return renderable;
 	}
