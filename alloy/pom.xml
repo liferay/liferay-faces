@@ -64,6 +64,30 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<copy todir="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/build">
+									<fileset dir="${env.HOME}/.alloyui/alloy-build/alloy-ui-${alloyui.version}/build" />
+								</copy>
+								<replace token="../img/" value="#{resource['liferay-faces-alloy:build/aui-css/img/" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/build/aui-css/css">
+									<include name="bootstrap.min.css" />
+								</replace>
+								<replace token=".png);" value=".png']});" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/build/aui-css/css">
+									<include name="bootstrap.min.css" />
+								</replace>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
