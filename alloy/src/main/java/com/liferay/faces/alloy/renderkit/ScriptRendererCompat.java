@@ -19,9 +19,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.render.Renderer;
 
+import com.liferay.faces.alloy.util.LiferayThemeDisplayUtil;
 import com.liferay.faces.util.portal.WebKeys;
-
-import com.liferay.portal.theme.ThemeDisplay;
 
 
 /**
@@ -36,14 +35,11 @@ public abstract class ScriptRendererCompat extends Renderer {
 		boolean inline = false;
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, Object> requestMap = externalContext.getRequestMap();
-		Object themeDisplayAsObject = requestMap.get(WebKeys.THEME_DISPLAY);
+		Object themeDisplay = requestMap.get(WebKeys.THEME_DISPLAY);
 
-		if (themeDisplayAsObject != null) {
-
-			if (themeDisplayAsObject instanceof ThemeDisplay) {
-				ThemeDisplay themeDisplay = (ThemeDisplay) themeDisplayAsObject;
-				inline = (themeDisplay.isIsolated() || themeDisplay.isStateExclusive());
-			}
+		if (themeDisplay != null) {
+			inline = LiferayThemeDisplayUtil.isIsolated(themeDisplay) ||
+				LiferayThemeDisplayUtil.isStateExclusive(themeDisplay);
 		}
 
 		return inline;
