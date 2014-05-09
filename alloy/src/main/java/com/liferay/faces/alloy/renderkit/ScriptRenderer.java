@@ -151,8 +151,6 @@ public class ScriptRenderer extends ScriptRendererCompat {
 
 				if (portlet != null) {
 					portletId = LiferayPortletUtil.getPortletId(portlet);
-					// Remove only after trying this in Liferay Portal
-					System.err.println("!@#$ ScriptRenderer portletId=" + portletId);
 				}
 
 				clientScript.append(portletId, bufferedResponseWriter.toString(), use);
