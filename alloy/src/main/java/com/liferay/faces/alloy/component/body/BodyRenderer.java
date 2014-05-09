@@ -38,6 +38,10 @@ import com.liferay.faces.util.render.DelegatingRendererBase;
 @FacesRenderer(componentFamily = Body.COMPONENT_FAMILY, rendererType = Body.RENDERER_TYPE)
 public class BodyRenderer extends DelegatingRendererBase {
 
+	// Private Constants
+	private static final boolean LIFERAY_FACES_BRIDGE_DETECTED = ProductMap.getInstance().get(
+			ProductConstants.LIFERAY_FACES_BRIDGE).isDetected();
+
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BodyRenderer.class);
 
@@ -46,10 +50,16 @@ public class BodyRenderer extends DelegatingRendererBase {
 
 	public BodyRenderer() {
 		String delegateBodyRendererFQCN = "com.sun.faces.renderkit.html_basic.BodyRenderer";
-		Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
 
-		if ((jsf != null) && ProductConstants.MYFACES.equals(jsf.getTitle())) {
-			delegateBodyRendererFQCN = "org.apache.myfaces.renderkit.html.HtmlBodyRenderer";
+		if (LIFERAY_FACES_BRIDGE_DETECTED) {
+			delegateBodyRendererFQCN = "com.liferay.faces.bridge.renderkit.html_basic.BodyRendererBridgeImpl";
+		}
+		else {
+			Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
+
+			if ((jsf != null) && ProductConstants.MYFACES.equals(jsf.getTitle())) {
+				delegateBodyRendererFQCN = "org.apache.myfaces.renderkit.html.HtmlBodyRenderer";
+			}
 		}
 
 		try {
@@ -63,14 +73,20 @@ public class BodyRenderer extends DelegatingRendererBase {
 
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		ExternalContext externalContext = facesContext.getExternalContext();
-		HttpServletRequest httpServletRequest = (HttpServletRequest) externalContext.getRequest();
-		boolean browserIE = BrowserSnifferUtil.isIe(httpServletRequest);
-		float browserMajorVersion = BrowserSnifferUtil.getMajorVersion(httpServletRequest);
-		BodyResponseWriter delegationResponseWriter = new BodyResponseWriter(responseWriter, browserIE,
-				browserMajorVersion);
-		super.encodeEnd(facesContext, uiComponent, delegationResponseWriter);
+
+		if (LIFERAY_FACES_BRIDGE_DETECTED) {
+			super.encodeEnd(facesContext, uiComponent);
+		}
+		else {
+			ResponseWriter responseWriter = facesContext.getResponseWriter();
+			ExternalContext externalContext = facesContext.getExternalContext();
+			HttpServletRequest httpServletRequest = (HttpServletRequest) externalContext.getRequest();
+			boolean browserIE = BrowserSnifferUtil.isIe(httpServletRequest);
+			float browserMajorVersion = BrowserSnifferUtil.getMajorVersion(httpServletRequest);
+			BodyResponseWriter delegationResponseWriter = new BodyResponseWriter(responseWriter, browserIE,
+					browserMajorVersion);
+			super.encodeEnd(facesContext, uiComponent, delegationResponseWriter);
+		}
 	}
 
 	@Override
