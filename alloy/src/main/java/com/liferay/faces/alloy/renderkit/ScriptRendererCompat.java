@@ -16,8 +16,6 @@ package com.liferay.faces.alloy.renderkit;
 import javax.faces.context.FacesContext;
 import javax.faces.render.Renderer;
 
-import com.liferay.portal.theme.ThemeDisplay;
-
 
 /**
  * This class provides a compatibility layer for JSF1/JSF2 and different versions of the Liferay Portal API.

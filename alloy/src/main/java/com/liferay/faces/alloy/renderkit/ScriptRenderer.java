@@ -21,14 +21,14 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.alloy.util.LiferayPortletUtil;
+import com.liferay.faces.util.client.ClientScript;
+import com.liferay.faces.util.client.ClientScriptFactory;
 import com.liferay.faces.util.context.ExtFacesContext;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.portal.ScriptData;
-import com.liferay.faces.util.portal.ScriptDataUtil;
 import com.liferay.faces.util.portal.WebKeys;
 import com.liferay.faces.util.render.BufferedResponseWriter;
-
-import com.liferay.portal.model.Portlet;
 
 
 /**
@@ -139,24 +139,23 @@ public class ScriptRenderer extends ScriptRendererCompat {
 			// request attribute.
 			else {
 				ExternalContext externalContext = facesContext.getExternalContext();
-				ScriptData scriptData = (ScriptData) externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
-
-				if (scriptData == null) {
-					scriptData = new ScriptData();
-					externalContext.getRequestMap().put(WebKeys.AUI_SCRIPT_DATA, scriptData);
-				}
+				ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
+						ClientScriptFactory.class);
+				ClientScript clientScript = clientScriptFactory.getClientScript(externalContext);
 
 				Map<String, Object> attributes = uiComponent.getAttributes();
 				String use = (String) attributes.get(USE);
 				String portletId = StringPool.BLANK;
-				Portlet portlet = (Portlet) facesContext.getExternalContext().getRequestMap().get(
-						WebKeys.RENDER_PORTLET);
+				
+				Object portlet = externalContext.getRequestMap().get(WebKeys.RENDER_PORTLET);
 
 				if (portlet != null) {
-					portletId = portlet.getPortletId();
+					portletId = LiferayPortletUtil.getPortletId(portlet);
+					// Remove only after trying this in Liferay Portal
+					System.err.println("!@#$ ScriptRenderer portletId=" + portletId);
 				}
 
-				ScriptDataUtil.append(scriptData, portletId, bufferedResponseWriter.toString(), use);
+				clientScript.append(portletId, bufferedResponseWriter.toString(), use);
 			}
 		}
 	}
