@@ -33,6 +33,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.liferay.faces.portal.component.InputEditorInternal;
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.portal.servlet.ScriptCapturingHttpServletRequest;
+import com.liferay.faces.util.client.ClientScript;
+import com.liferay.faces.util.client.ClientScriptFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.jsp.JspIncludeResponse;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringJspWriter;
@@ -44,7 +47,6 @@ import com.liferay.faces.util.portal.ScriptDataUtil;
 import com.liferay.faces.util.portal.ScriptTagUtil;
 import com.liferay.faces.util.portal.WebKeys;
 import com.liferay.faces.util.render.CleanupRenderer;
-
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -218,9 +220,10 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				// Otherwise, append the script to the WebKeys.AUI_SCRIPT_DATA request attribute, which will cause the
 				// script to be rendered at the bottom of the portal page.
 				else {
-
-					Object scriptData = externalContext.getRequestMap().get(WebKeys.AUI_SCRIPT_DATA);
-					ScriptDataUtil.append(scriptData, getPortletId(portletRequest), onBlurScript, "aui-base");
+					ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
+							ClientScriptFactory.class);
+					ClientScript clientScript = clientScriptFactory.getClientScript(externalContext);
+					clientScript.append(getPortletId(portletRequest), onBlurScript, "aui-base");
 				}
 
 				// FACES-1439: If the component was rendered on the page on the previous JSF lifecycle, then prevent it
