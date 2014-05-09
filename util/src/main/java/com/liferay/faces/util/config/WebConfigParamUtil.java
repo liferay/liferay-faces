@@ -16,6 +16,7 @@ package com.liferay.faces.util.config;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.faces.context.ExternalContext;
 import javax.servlet.ServletContext;
 
 import com.liferay.faces.util.helper.BooleanHelper;
@@ -34,7 +35,7 @@ public class WebConfigParamUtil {
 	// ConcurrentHashMap.
 	private static final Map<String, Object> configParamCache = new HashMap<String, Object>();
 
-	public static boolean getBooleanValue(ServletContext servletContext, String name, String alternateName,
+	public static boolean getBooleanValue(ExternalContext externalContext, String name, String alternateName,
 		boolean defaultBooleanValue) {
 
 		boolean booleanValue = defaultBooleanValue;
@@ -45,7 +46,7 @@ public class WebConfigParamUtil {
 			booleanValue = (Boolean) cachedValue;
 		}
 		else {
-			String configuredValue = getConfiguredValue(servletContext, name, alternateName);
+			String configuredValue = getConfiguredValue(externalContext, name, alternateName);
 
 			if (configuredValue != null) {
 				booleanValue = BooleanHelper.isTrueToken(configuredValue);
@@ -59,22 +60,22 @@ public class WebConfigParamUtil {
 		return booleanValue;
 	}
 
-	public static String getConfiguredValue(ServletContext servletContext, String name, String alternateName) {
+	public static String getConfiguredValue(ExternalContext externalContext, String name, String alternateName) {
 
-		String configuredValue = servletContext.getInitParameter(name);
+		String configuredValue = externalContext.getInitParameter(name);
 
 		if ((configuredValue == null) && (alternateName != null)) {
-			configuredValue = servletContext.getInitParameter(alternateName);
+			configuredValue = externalContext.getInitParameter(alternateName);
 		}
 
 		return configuredValue;
 	}
 
-	public static boolean isSpecified(ServletContext servletContext, String name, String alternateName) {
-		return (getConfiguredValue(servletContext, name, alternateName) != null);
+	public static boolean isSpecified(ExternalContext externalContext, String name, String alternateName) {
+		return (getConfiguredValue(externalContext, name, alternateName) != null);
 	}
 
-	public static int getIntegerValue(ServletContext servletContext, String name, String alternateName,
+	public static int getIntegerValue(ExternalContext externalContext, String name, String alternateName,
 		int defaultIntegerValue) {
 
 		int integerValue = defaultIntegerValue;
@@ -85,7 +86,7 @@ public class WebConfigParamUtil {
 			integerValue = (Integer) cachedValue;
 		}
 		else {
-			String configuredValue = getConfiguredValue(servletContext, name, alternateName);
+			String configuredValue = getConfiguredValue(externalContext, name, alternateName);
 
 			if (configuredValue != null) {
 				integerValue = IntegerHelper.toInteger(configuredValue);
@@ -99,7 +100,7 @@ public class WebConfigParamUtil {
 		return integerValue;
 	}
 
-	public static String getStringValue(ServletContext servletContext, String name, String alternateName,
+	public static String getStringValue(ExternalContext externalContext, String name, String alternateName,
 		String defaultStringValue) {
 
 		String stringValue = defaultStringValue;
@@ -110,7 +111,7 @@ public class WebConfigParamUtil {
 			stringValue = (String) cachedValue;
 		}
 		else {
-			String configuredValue = getConfiguredValue(servletContext, name, alternateName);
+			String configuredValue = getConfiguredValue(externalContext, name, alternateName);
 
 			if (configuredValue != null) {
 				stringValue = configuredValue;
