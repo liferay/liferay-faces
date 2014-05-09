@@ -44,6 +44,7 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 	private static final String FACES_SERVLET = "Faces Servlet";
 	private static final String FACES_SERVLET_FQCN = FacesServlet.class.getName();
 	private static final String LIFERAY_FACES_BRIDGE = "LiferayFacesBridge";
+	private static final String LIFERAY_FACES_UTIL = "LiferayFacesUtil";
 	private static final String MOJARRA_CONFIG_PATH = "com/sun/faces/jsf-ri-runtime.xml";
 
 	// Private Data Members
@@ -187,9 +188,10 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 
 			if (facesConfigURLs != null) {
 
-				// Build up a semi-sorted list of faces-config.xml descriptor files, ensuring that the bridge's
-				// META-INF/faces-config.xml descriptor is ordered first. (Note that the JSF 2.0 <ordering> element is
-				// not yet supported.)
+				// Build up a semi-sorted list of faces-config.xml descriptor files, ensuring that
+				// liferay-faces-bridge-impl.jar!META-INF/faces-config.xml is ordered first and that
+				// liferay-faces-util.jar!META-INF/faces-config.xml is ordered second.
+				// (Note that the JSF 2.0 <ordering> element is not yet supported.)
 				while (facesConfigURLs.hasMoreElements()) {
 
 					URL facesConfigURL = facesConfigURLs.nextElement();
@@ -219,6 +221,9 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 							((facesConfigName.indexOf("liferay-faces") >= 0) &&
 								(facesConfigName.indexOf("bridge-impl") > 0))) {
 						facesConfigDescriptors.add(0, facesConfigDescriptor);
+					}
+					else if (LIFERAY_FACES_UTIL.equals(facesConfigName)){
+						facesConfigDescriptors.add(1, facesConfigDescriptor);
 					}
 					else {
 						facesConfigDescriptors.add(facesConfigDescriptor);
