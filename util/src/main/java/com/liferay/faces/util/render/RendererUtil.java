@@ -27,9 +27,6 @@ import com.liferay.faces.util.lang.StringPool;
  */
 public class RendererUtil {
 
-	// Public Constants
-	public static final String TEXT_JAVASCRIPT = "text/javascript";
-
 	public static void encodeStyleable(ResponseWriter responseWriter, Styleable styleable) throws IOException {
 		encodeStyleable(responseWriter, styleable, null);
 	}
