@@ -65,8 +65,12 @@ public class ShowcaseModelBean implements Serializable {
 		return viewParameters;
 	}
 
-	public class SelectedComponent {
+	public class SelectedComponent implements Serializable {
 
+		// serialVersionUID
+		private static final long serialVersionUID = 8102061900904379413L;
+
+		// Private Data Members
 		private String camelCaseName;
 		private String lowerCaseName;
 		private String prefix;
@@ -134,8 +138,12 @@ public class ShowcaseModelBean implements Serializable {
 		}
 	}
 
-	public class ViewParameters {
+	public class ViewParameters implements Serializable {
 
+		// serialVersionUID
+		private static final long serialVersionUID = 1629675419430845173L;
+
+		// Private Data Members
 		private String componentPrefix;
 		private String componentName;
 		private String componentUseCase;

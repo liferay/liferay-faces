@@ -14,6 +14,7 @@
 package com.liferay.faces.demos.dto;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -28,7 +29,10 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class CodeExample {
+public class CodeExample implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 7008163411783803745L;
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(CodeExample.class);
@@ -48,16 +52,16 @@ public class CodeExample {
 		this.rawText = rawText;
 	}
 
+	public String getFileExtension() {
+		return fileExtension;
+	}
+
 	public String getFileName() {
 		return fileName;
 	}
 
 	public long getLastModified() {
 		return lastModified;
-	}
-
-	public String getFileExtension() {
-		return fileExtension;
 	}
 
 	public String getRawText() {
