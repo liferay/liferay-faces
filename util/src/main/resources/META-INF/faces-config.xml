@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 	<application>
 		<el-resolver>com.liferay.faces.util.el.ExtELResolver</el-resolver>
 	</application>
+	<factory>
+		<factory-extension>
+			<util:client-script-factory>com.liferay.faces.util.client.ClientScriptFactoryImpl</util:client-script-factory>
+		</factory-extension>
+	</factory>
 </faces-config>
