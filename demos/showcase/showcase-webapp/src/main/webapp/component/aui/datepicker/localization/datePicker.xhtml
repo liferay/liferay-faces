@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
 	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-2col.xhtml">
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Example#1: Hard coded Brazilian Portuguese locale -->
@@ -11,7 +11,7 @@
 			</aui-nongen:field>
 			<aui-nongen:field label="#{i18n['component']}">
 				<aui:datePicker for="portugueseDateInput" binding="#{portugueseDatePicker}" locale="pt-BR" />
-				<h:inputText id="portugueseDateInput" value="#{datePickerModelBean.portugueseDate}">
+				<h:inputText id="portugueseDateInput" value="#{datePickerModelBean.birthday}">
 					<f:convertDateTime pattern="#{portugueseDatePicker.datePattern}" />
 				</h:inputText>
 			</aui-nongen:field>
@@ -20,7 +20,7 @@
 			</h:commandButton>
 			<aui-nongen:field label="#{i18n['model-value']}">
 				<showcase:outputModel>
-					<h:outputText id="portugueseSelection" value="#{datePickerModelBean.portugueseDate}">
+					<h:outputText id="portugueseSelection" value="#{datePickerModelBean.birthday}">
 						<f:convertDateTime pattern="#{portugueseDatePicker.datePattern}" />
 					</h:outputText>
 				</showcase:outputModel>
@@ -36,7 +36,7 @@
 			</aui-nongen:field>
 			<aui-nongen:field label="#{i18n['component']}">
 				<aui:datePicker for="japaneseDateInput" binding="#{japaneseDatePicker}" locale="#{datePickerModelBean.locale}" />
-				<h:inputText id="japaneseDateInput" value="#{datePickerModelBean.japaneseDate}">
+				<h:inputText id="japaneseDateInput" value="#{datePickerModelBean.birthday}">
 					<f:convertDateTime pattern="#{japaneseDatePicker.datePattern}" />
 				</h:inputText>
 			</aui-nongen:field>
@@ -45,7 +45,7 @@
 			</h:commandButton>
 			<aui-nongen:field label="#{i18n['model-value']}">
 				<showcase:outputModel>
-					<h:outputText id="japaneseSelection" value="#{datePickerModelBean.japaneseDate}">
+					<h:outputText id="japaneseSelection" value="#{datePickerModelBean.birthday}">
 						<f:convertDateTime pattern="#{japaneseDatePicker.datePattern}" />
 					</h:outputText>
 				</showcase:outputModel>

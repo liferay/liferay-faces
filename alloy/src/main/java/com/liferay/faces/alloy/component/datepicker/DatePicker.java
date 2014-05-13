@@ -13,10 +13,7 @@
  */
 package com.liferay.faces.alloy.component.datepicker;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
@@ -42,11 +39,15 @@ public class DatePicker extends DatePickerBase {
 
 	// Private Constants
 	private static final String DATE_CLICK = "dateClick";
-	private static final String DEFAULT_ON_DATE_CLICK = DatePickerUtil.getResourceText("DefaultOnDateClick.js");
+	private static final String DEFAULT_ON_DATE_CLICK_TEMPLATE =
+		"datePickerDefaultOnDateClick(event.date, A.one('{0}'), this);";
 	private static final boolean LIFERAY_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
 		.isDetected();
 	private static final String LIFERAY_Z_INDEX_TOOLTIP = "Liferay.zIndex.TOOLTIP";
 	private static final String TOKEN = "{0}";
+
+	// Private Members
+	private String onDateClick;
 
 	public DatePicker() {
 
@@ -149,19 +150,11 @@ public class DatePicker extends DatePickerBase {
 				first = false;
 			}
 
-			String afterDateClick = getAfterDateClick();
+			String onDateClickString = getOnDateClick();
 
-			if (afterDateClick != null) {
+			if (onDateClickString != null) {
 
-				appendJSONEvent(stringBuilder, AlloyConstants.AFTER, DATE_CLICK, afterDateClick, first);
-				first = false;
-			}
-
-			String onDateClick = getOnDateClick();
-
-			if (onDateClick != null) {
-
-				appendJSONEvent(stringBuilder, AlloyConstants.ON, DATE_CLICK, onDateClick, first);
+				appendJSONEvent(stringBuilder, AlloyConstants.ON, DATE_CLICK, onDateClickString, first);
 				first = false;
 			}
 
@@ -181,14 +174,8 @@ public class DatePicker extends DatePickerBase {
 
 			// Provide a default datePattern based on the locale.
 			FacesContext facesContext = FacesContext.getCurrentInstance();
-			Object componentLocale = getLocale();
-			Locale locale = DatePickerUtil.determineLocale(facesContext, componentLocale);
-
-			// Note: The following usage of SimpleDateFormat is thread-safe, since only the result of the toPattern()
-			// method is utilized.
-			SimpleDateFormat simpleDateFormat = (SimpleDateFormat) SimpleDateFormat.getDateInstance(DateFormat.MEDIUM,
-					locale);
-			datePattern = simpleDateFormat.toPattern();
+			Object locale = getLocale();
+			datePattern = DatePickerUtil.getDefaultDatePattern(facesContext, locale);
 		}
 
 		return datePattern;
@@ -199,26 +186,51 @@ public class DatePicker extends DatePickerBase {
 		return COMPONENT_FAMILY;
 	}
 
-	@Override
 	public String getOnDateClick() {
 
-		String onDateClick = super.getOnDateClick();
+		String onDateClickString = null;
+		UIComponent parent = getParent();
 
-		if (onDateClick == null) {
+		// If the parent is not null, then the component is in the component tree. So if the component is in the
+		// component tree OR if onDateClick has no value, use the default value for onDateClick.
+		if ((parent != null) || (onDateClick == null)) {
+			String trigger = getTrigger();
 
-			UIComponent uiComponent = (UIComponent) findComponent(getFor());
+			// If trigger is null, use for to determine the trigger.
+			if (trigger == null) {
 
-			if (uiComponent != null) {
+				String forId = getFor();
+				UIComponent forComponent = (UIComponent) findComponent(forId);
+				trigger = forId;
 
-				// The default value of the onDateClick attribute is a script that that is read from the
-				// DefaultOnDateClick.js classpath resource. The script contains a "{0}" token that needs
-				// to be substituted with the escaped clientId of this DataPicker component.
-				String escapedClientId = ComponentUtil.escapeClientId(uiComponent.getClientId());
-				onDateClick = DEFAULT_ON_DATE_CLICK.replace(TOKEN, escapedClientId);
+				// If there is a forComponent, the trigger is the "#" symbol followed by the forComponent's
+				// escapedClientId.
+				if (forComponent != null) {
+					String forClientId = forComponent.getClientId();
+					String escapedForClientId = ComponentUtil.escapeClientId(forClientId);
+					trigger = StringPool.POUND + escapedForClientId;
+				}
 			}
+
+			// The default value of the onDateClick attribute is a script that that is read from the
+			// DefaultOnDateClick.js classpath resource. The script contains a "{0}" token that needs
+			// to be substituted with the trigger, which is the "#" sign followed by escaped clientId of the trigger.
+			String defaultOnDateClick = DEFAULT_ON_DATE_CLICK_TEMPLATE;
+			defaultOnDateClick = defaultOnDateClick.replace(TOKEN, trigger);
+			onDateClickString = defaultOnDateClick;
 		}
 
-		return onDateClick;
+		// Otherwise, if the parent is null, the component is not in the component tree. So it is threadsafe to access
+		// private members.
+		else if ((parent == null) && (onDateClick != null)) {
+			onDateClickString = onDateClick;
+		}
+
+		return onDateClickString;
+	}
+
+	public void setOnDateClick(String onDateClick) {
+		this.onDateClick = onDateClick;
 	}
 
 	@Override
