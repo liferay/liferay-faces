@@ -701,12 +701,12 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		if (viewIdAndQueryString == null) {
 
 			// Try#1: Get the viewId the "javax.portlet.faces.viewId" request attribute.
-			viewIdAndQueryString = (String) portletRequest.getAttribute(Bridge.VIEW_ID);
+			viewIdAndQueryString = (String) getFacesViewIdRequestAttribute(Bridge.VIEW_ID);
 
 			if (viewIdAndQueryString == null) {
 
 				// Try#2: Get the viewId from the "javax.portlet.faces.viewPath" request attribute.
-				String viewPath = (String) portletRequest.getAttribute(Bridge.VIEW_PATH);
+				String viewPath = (String) getFacesViewIdRequestAttribute(Bridge.VIEW_PATH);
 
 				if (viewPath != null) {
 
@@ -754,7 +754,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 							requestParameterName = bridgeConfig.getViewIdRenderParameterName();
 						}
 
-						viewIdAndQueryString = portletRequest.getParameter(requestParameterName);
+						viewIdAndQueryString = getFacesViewIdRequestParameter(requestParameterName);
 
 						if (viewIdAndQueryString == null) {
 
@@ -867,6 +867,32 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		}
 
 		return facesViewId;
+	}
+
+	protected String getFacesViewIdRequestAttribute(String name) {
+
+		String value = (String) getPortletRequest().getAttribute(name);
+
+		if ((value != null) && (value.indexOf(StringPool.COLON) >= 0)) {
+
+			logger.warn("Invalid character in request attribute {0}=[{1}]", name, value);
+			value = null;
+		}
+
+		return value;
+	}
+
+	protected String getFacesViewIdRequestParameter(String name) {
+
+		String value = getPortletRequest().getParameter(name);
+
+		if ((value != null) && (value.indexOf(StringPool.COLON) >= 0)) {
+
+			logger.warn("Invalid character in request parameter {0}=[{1}]", name, value);
+			value = null;
+		}
+
+		return value;
 	}
 
 	@Override
