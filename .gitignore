@@ -8,4 +8,5 @@ rebel.xml
 .idea/*
 *.iml
 faces-config.pageflow
-.alloyui
+nb-configuration.xml
+navigation-rule.NavData

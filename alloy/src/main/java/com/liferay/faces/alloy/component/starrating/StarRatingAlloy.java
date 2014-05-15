@@ -62,15 +62,10 @@ public interface StarRatingAlloy {
 	public static final String CSS_CLASS = "cssClass";
 	public static final String CSS_CLASSES = "cssClasses";
 	public static final String DEFAULT_SELECTED = "defaultSelected";
-	public static final String DESTROYED = "destroyed";
 	public static final String DISABLED = "disabled";
-	public static final String ELEMENTS = "elements";
-	public static final String FOCUSED = "focused";
 	public static final String HEIGHT = "height";
 	public static final String HIDDEN_INPUT = "hiddenInput";
 	public static final String HIDE_CLASS = "hideClass";
-	public static final String ID = "id";
-	public static final String INITIALIZED = "initialized";
 	public static final String INPUT_NAME = "inputName";
 	public static final String LABEL = "label";
 	public static final String LABEL_NODE = "labelNode";
@@ -107,7 +102,6 @@ public interface StarRatingAlloy {
 	public static final String ON_VALUE_CHANGE = "onValueChange";
 	public static final String ON_VISIBLE_CHANGE = "onVisibleChange";
 	public static final String ON_WIDTH_CHANGE = "onWidthChange";
-	public static final String RENDERED = "rendered";
 	public static final String SELECTED_INDEX = "selectedIndex";
 	public static final String SHOW_TITLE = "showTitle";
 	public static final String SIZE = "size";
@@ -273,21 +267,9 @@ public interface StarRatingAlloy {
 
 	public void setDefaultSelected(Object defaultSelected);
 
-	public Boolean isDestroyed();
-
-	public void setDestroyed(Boolean destroyed);
-
 	public boolean isDisabled();
 
 	public void setDisabled(boolean disabled);
-
-	public String getElements();
-
-	public void setElements(String elements);
-
-	public Boolean isFocused();
-
-	public void setFocused(Boolean focused);
 
 	public Object getHeight();
 
@@ -300,14 +282,6 @@ public interface StarRatingAlloy {
 	public String getHideClass();
 
 	public void setHideClass(String hideClass);
-
-	public String getId();
-
-	public void setId(String id);
-
-	public Boolean isInitialized();
-
-	public void setInitialized(Boolean initialized);
 
 	public String getInputName();
 
@@ -452,10 +426,6 @@ public interface StarRatingAlloy {
 	public String getOnWidthChange();
 
 	public void setOnWidthChange(String onWidthChange);
-
-	public boolean isRendered();
-
-	public void setRendered(boolean rendered);
 
 	public Object getSelectedIndex();
 
