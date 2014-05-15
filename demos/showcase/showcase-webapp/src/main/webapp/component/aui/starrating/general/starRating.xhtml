@@ -43,11 +43,10 @@
 			</aui-nongen:field>
 			<aui-nongen:field label="#{i18n['component']}">
 				<showcase:componentRenderedCheckbox />
-				<showcase:componentRequiredCheckbox />
 				<br />
 				<aui:starRating id="starRating" label="#{i18n['favorite']}:"
 					rendered="#{showcaseModelBean.selectedComponent.rendered}"
-					required="#{showcaseModelBean.selectedComponent.required}" value="#{starRatingModelBean.favoriteId}">
+					value="#{starRatingModelBean.favoriteId}">
 					<f:converter converterId="javax.faces.Long" />
 					<f:selectItem itemLabel="Compatible" itemValue="1" />
 					<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />

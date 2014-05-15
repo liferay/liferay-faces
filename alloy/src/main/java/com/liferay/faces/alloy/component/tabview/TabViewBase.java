@@ -28,16 +28,6 @@ import com.liferay.faces.util.component.ClientComponent;
 public abstract class TabViewBase extends UIData implements Styleable, ClientComponent, TabViewAlloy {
 
 	@Override
-	public String getActiveDescendant() {
-		return (String) getStateHelper().eval(ACTIVE_DESCENDANT, null);
-	}
-
-	@Override
-	public void setActiveDescendant(String activeDescendant) {
-		getStateHelper().put(ACTIVE_DESCENDANT, activeDescendant);
-	}
-
-	@Override
 	public String getAfterActiveDescendantChange() {
 		return (String) getStateHelper().eval(AFTER_ACTIVE_DESCENDANT_CHANGE, null);
 	}
@@ -298,16 +288,6 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 	}
 
 	@Override
-	public Boolean isDestroyed() {
-		return (Boolean) getStateHelper().eval(DESTROYED, null);
-	}
-
-	@Override
-	public void setDestroyed(Boolean destroyed) {
-		getStateHelper().put(DESTROYED, destroyed);
-	}
-
-	@Override
 	public Boolean isDisabled() {
 		return (Boolean) getStateHelper().eval(DISABLED, null);
 	}
@@ -318,16 +298,6 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 	}
 
 	@Override
-	public Boolean isFocused() {
-		return (Boolean) getStateHelper().eval(FOCUSED, null);
-	}
-
-	@Override
-	public void setFocused(Boolean focused) {
-		getStateHelper().put(FOCUSED, focused);
-	}
-
-	@Override
 	public Object getHeight() {
 		return (Object) getStateHelper().eval(HEIGHT, null);
 	}
@@ -335,16 +305,6 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 	@Override
 	public void setHeight(Object height) {
 		getStateHelper().put(HEIGHT, height);
-	}
-
-	@Override
-	public Boolean isInitialized() {
-		return (Boolean) getStateHelper().eval(INITIALIZED, null);
-	}
-
-	@Override
-	public void setInitialized(Boolean initialized) {
-		getStateHelper().put(INITIALIZED, initialized);
 	}
 
 	@Override
@@ -588,16 +548,6 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 	}
 
 	@Override
-	public Object getSelection() {
-		return (Object) getStateHelper().eval(SELECTION, null);
-	}
-
-	@Override
-	public void setSelection(Object selection) {
-		getStateHelper().put(SELECTION, selection);
-	}
-
-	@Override
 	public String getSrcNode() {
 		return (String) getStateHelper().eval(SRC_NODE, null);
 	}
@@ -675,6 +625,16 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 	@Override
 	public void setVisible(Boolean visible) {
 		getStateHelper().put(VISIBLE, visible);
+	}
+
+	@Override
+	public String getWidgetId() {
+		return (String) getStateHelper().eval(WIDGET_ID, null);
+	}
+
+	@Override
+	public void setWidgetId(String widgetId) {
+		getStateHelper().put(WIDGET_ID, widgetId);
 	}
 
 	@Override

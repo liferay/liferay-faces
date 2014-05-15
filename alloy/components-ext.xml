@@ -69,6 +69,15 @@
 				<type>java.lang.Boolean</type>
 				<generateJava>false</generateJava>
 			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.String</type>
+				<jsfReservedAttribute>true</jsfReservedAttribute>
+				<jsfReservedAttributeType>java.lang.Object</jsfReservedAttributeType>
+			</attribute>
 		</attributes>
 	</component>
 	<component name="Body" generateJava="false" />
@@ -282,7 +291,7 @@
 					<![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]>
 				</description>
 				<name>rendered</name>
-				<type>java.lang.Boolean</type>
+				<type>boolean</type>
 				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
@@ -400,7 +409,7 @@
 					<![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]>
 				</description>
 				<name>rendered</name>
-				<type>java.lang.Boolean</type>
+				<type>boolean</type>
 				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
@@ -688,6 +697,7 @@
 				</description>
 				<name>id</name>
 				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -701,7 +711,7 @@
 					<![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]>
 				</description>
 				<name>rendered</name>
-				<type>java.lang.Boolean</type>
+				<type>boolean</type>
 				<generateJava>false</generateJava>
 			</attribute>
 		</attributes>
@@ -1168,21 +1178,6 @@
 				<jsfReservedAttribute>true</jsfReservedAttribute>
 				<jsfReservedAttributeType>java.lang.Object</jsfReservedAttributeType>
 			</attribute>
-			<!-- Attributes that default to jsfReservedAttribute=true -->
-			<attribute>
-				<description>
-					<![CDATA[A unique identifier for this component.]]>
-				</description>
-				<name>id</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]>
-				</description>
-				<name>rendered</name>
-				<type>java.lang.Boolean</type>
-			</attribute>
 			<!-- Attributes that are inherited from HtmlSelectOneRadio -->
 			<attribute>
 				<description>
@@ -1202,7 +1197,15 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]>
+					<![CDATA[A unique identifier for this component.]]>
+				</description>
+				<name>id</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the Process Validations phase.]]>
 				</description>
 				<name>immediate</name>
 				<type>java.lang.Boolean</type>
@@ -1445,6 +1448,14 @@
 			</attribute>
 			<attribute>
 				<description>
+					<![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]>
+				</description>
+				<name>rendered</name>
+				<type>boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
 					<![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]>
 				</description>
 				<name>role</name>
@@ -1455,6 +1466,18 @@
 	</component>
 	<component name="ThumbRating" extends="StarRating" generateJava="false"
 		parentClass="com.liferay.faces.alloy.component.rating.Rating"
-		rendererParentClass="com.liferay.faces.alloy.component.rating.RatingRenderer" />
+		rendererParentClass="com.liferay.faces.alloy.component.rating.RatingRenderer">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.String</type>
+				<jsfReservedAttribute>true</jsfReservedAttribute>
+				<jsfReservedAttributeType>java.lang.Object</jsfReservedAttributeType>
+			</attribute>
+		</attributes>
+	</component>
 
 </components>

@@ -298,26 +298,6 @@ public abstract class AceEditorBase extends HtmlInputText implements Styleable, 
 	}
 
 	@Override
-	public Boolean isDestroyed() {
-		return (Boolean) getStateHelper().eval(DESTROYED, null);
-	}
-
-	@Override
-	public void setDestroyed(Boolean destroyed) {
-		getStateHelper().put(DESTROYED, destroyed);
-	}
-
-	@Override
-	public Boolean isFocused() {
-		return (Boolean) getStateHelper().eval(FOCUSED, null);
-	}
-
-	@Override
-	public void setFocused(Boolean focused) {
-		getStateHelper().put(FOCUSED, focused);
-	}
-
-	@Override
 	public Object getHeight() {
 		return (Object) getStateHelper().eval(HEIGHT, null);
 	}
@@ -335,16 +315,6 @@ public abstract class AceEditorBase extends HtmlInputText implements Styleable, 
 	@Override
 	public void setHighlightActiveLine(Boolean highlightActiveLine) {
 		getStateHelper().put(HIGHLIGHT_ACTIVE_LINE, highlightActiveLine);
-	}
-
-	@Override
-	public Boolean isInitialized() {
-		return (Boolean) getStateHelper().eval(INITIALIZED, null);
-	}
-
-	@Override
-	public void setInitialized(Boolean initialized) {
-		getStateHelper().put(INITIALIZED, initialized);
 	}
 
 	@Override
@@ -715,6 +685,16 @@ public abstract class AceEditorBase extends HtmlInputText implements Styleable, 
 	@Override
 	public void setVisible(Boolean visible) {
 		getStateHelper().put(VISIBLE, visible);
+	}
+
+	@Override
+	public String getWidgetId() {
+		return (String) getStateHelper().eval(WIDGET_ID, null);
+	}
+
+	@Override
+	public void setWidgetId(String widgetId) {
+		getStateHelper().put(WIDGET_ID, widgetId);
 	}
 
 	@Override
