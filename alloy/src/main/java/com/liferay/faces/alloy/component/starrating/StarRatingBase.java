@@ -418,36 +418,6 @@ public abstract class StarRatingBase extends HtmlSelectOneRadio implements Style
 	}
 
 	@Override
-	public Boolean isDestroyed() {
-		return (Boolean) getStateHelper().eval(DESTROYED, null);
-	}
-
-	@Override
-	public void setDestroyed(Boolean destroyed) {
-		getStateHelper().put(DESTROYED, destroyed);
-	}
-
-	@Override
-	public String getElements() {
-		return (String) getStateHelper().eval(ELEMENTS, null);
-	}
-
-	@Override
-	public void setElements(String elements) {
-		getStateHelper().put(ELEMENTS, elements);
-	}
-
-	@Override
-	public Boolean isFocused() {
-		return (Boolean) getStateHelper().eval(FOCUSED, null);
-	}
-
-	@Override
-	public void setFocused(Boolean focused) {
-		getStateHelper().put(FOCUSED, focused);
-	}
-
-	@Override
 	public Object getHeight() {
 		return (Object) getStateHelper().eval(HEIGHT, null);
 	}
@@ -475,16 +445,6 @@ public abstract class StarRatingBase extends HtmlSelectOneRadio implements Style
 	@Override
 	public void setHideClass(String hideClass) {
 		getStateHelper().put(HIDE_CLASS, hideClass);
-	}
-
-	@Override
-	public Boolean isInitialized() {
-		return (Boolean) getStateHelper().eval(INITIALIZED, null);
-	}
-
-	@Override
-	public void setInitialized(Boolean initialized) {
-		getStateHelper().put(INITIALIZED, initialized);
 	}
 
 	@Override

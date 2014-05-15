@@ -28,169 +28,163 @@
 			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
 			<name>afterBoundingBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
 			<name>afterContentBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
 			<name>afterDestroyedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
 			<name>afterDisabledChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
 			<name>afterFocusedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The height of ACE Editor.]]></description>
 			<name>afterHeightChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if the active line of code will be highlighted or not.]]></description>
 			<name>afterHighlightActiveLineChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[]]></description>
 			<name>afterIdChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
 			<name>afterInitializedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
 			<name>afterLocaleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Correspond to the language being typed.]]></description>
 			<name>afterModeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if the code will be editable or not.]]></description>
 			<name>afterReadOnlyChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
 			<name>afterRenderChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
 			<name>afterRenderedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if print margin will be visible or not.]]></description>
 			<name>afterShowPrintMarginChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
 			<name>afterSrcNodeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
 			<name>afterStringsChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
 			<name>afterTabIndexChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The indentation size of tab key.]]></description>
 			<name>afterTabSizeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if the tab key will act as space characters or tab characters.]]></description>
 			<name>afterUseSoftTabsChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if the line will break when it reaches the end of the line.]]></description>
 			<name>afterUseWrapModeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Some predefined value on the editor.]]></description>
 			<name>afterValueChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
 			<name>afterVisibleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The width of ACE Editor.]]></description>
 			<name>afterWidthChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
 			<name>boundingBox</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
 			<name>clientKey</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
 			<name>contentBox</name>
 			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
-			<name>destroyed</name>
-			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
@@ -199,286 +193,268 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
-			<name>focused</name>
-			<required>false</required>
-			<type>Boolean</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[The height of ACE Editor.]]></description>
 			<name>height</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if the active line of code will be highlighted or not.]]></description>
 			<name>highlightActiveLine</name>
 			<required>false</required>
-			<type>Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>id</name>
-			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
-			<name>initialized</name>
-			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
 			<name>locale</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Correspond to the language being typed.]]></description>
 			<name>mode</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
 			<name>onBoundingBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
 			<name>onContentBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
 			<name>onDestroyedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
 			<name>onDisabledChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
 			<name>onFocusedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The height of ACE Editor.]]></description>
 			<name>onHeightChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if the active line of code will be highlighted or not.]]></description>
 			<name>onHighlightActiveLineChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[]]></description>
 			<name>onIdChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
 			<name>onInitializedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
 			<name>onLocaleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Correspond to the language being typed.]]></description>
 			<name>onModeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if the code will be editable or not.]]></description>
 			<name>onReadOnlyChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
 			<name>onRenderChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
 			<name>onRenderedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if print margin will be visible or not.]]></description>
 			<name>onShowPrintMarginChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
 			<name>onSrcNodeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
 			<name>onStringsChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
 			<name>onTabIndexChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The indentation size of tab key.]]></description>
 			<name>onTabSizeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if the tab key will act as space characters or tab characters.]]></description>
 			<name>onUseSoftTabsChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if the line will break when it reaches the end of the line.]]></description>
 			<name>onUseWrapModeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Some predefined value on the editor.]]></description>
 			<name>onValueChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
 			<name>onVisibleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The width of ACE Editor.]]></description>
 			<name>onWidthChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if the code will be editable or not.]]></description>
 			<name>readOnly</name>
 			<required>false</required>
-			<type>Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
-			<name>rendered</name>
-			<required>false</required>
-			<type>boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
 			<name>required</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if print margin will be visible or not.]]></description>
 			<name>showPrintMargin</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
 			<name>srcNode</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
 			<name>strings</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
 			<name>tabIndex</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The indentation size of tab key.]]></description>
 			<name>tabSize</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if the tab key will act as space characters or tab characters.]]></description>
 			<name>useSoftTabs</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine if the line will break when it reaches the end of the line.]]></description>
 			<name>useWrapMode</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Some predefined value on the editor.]]></description>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
 			<name>value</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
 			<name>visible</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[]]></description>
+			<name>widgetId</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
 			<name>widgetRender</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The width of ACE Editor.]]></description>
 			<name>width</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.0-m2</vdldoc:since>
@@ -495,13 +471,13 @@
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
@@ -518,37 +494,37 @@
 			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
 			<name>accesskey</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]></description>
 			<name>alt</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying whether or not the component should automatically recieve focus on the initial page load.]]></description>
 			<name>autofocus</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
 			<name>binding</name>
 			<required>false</required>
-			<type>String</type>
+			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, the client window param will not be inlcuded on the navigation URL. <b>Note:</b> the <code>ClientWindow</code> feature is disabled by default, so this attribute will have no effect unless <code>ClientWindow</code> is enabled.]]></description>
 			<name>disableClientWindow</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
@@ -560,109 +536,109 @@
 			<description><![CDATA[A fragment to be appended to the navigation URL.]]></description>
 			<name>fragment</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A unique identifier for this component.]]></description>
 			<name>id</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Specifies the URL of an image.]]></description>
 			<name>image</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, view parameters (specified via <code>f:viewParam</code> tags) will be included on the navigation URL]]></description>
 			<name>includeViewParams</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
 			<name>lang</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
 			<name>onblur</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
 			<name>onclick</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a double click event occurs.]]></description>
 			<name>ondblclick</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when this component gets focus.]]></description>
 			<name>onfocus</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keydown event occurs.]]></description>
 			<name>onkeydown</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keypress event occurs.]]></description>
 			<name>onkeypress</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keyup event occurs.]]></description>
 			<name>onkeyup</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mousedown event occurs.]]></description>
 			<name>onmousedown</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mousemove event occurs.]]></description>
 			<name>onmousemove</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseout event occurs.]]></description>
 			<name>onmouseout</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseover event occurs.]]></description>
 			<name>onmouseover</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
 			<name>onmouseup</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A string which potentially matches the value of <code>from-outcome</code> key in a navigation-case.]]></description>
 			<name>outcome</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
@@ -674,43 +650,43 @@
 			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
 			<name>role</name>
 			<required>false</required>
-			<type>String</type>
+			<type>javal.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
 			<name>title</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The type of the button: button (default), submit, or reset.]]></description>
 			<name>type</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The value of this component.]]></description>
 			<name>value</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
@@ -727,45 +703,45 @@
 			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
 			<name>accesskey</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return an <code>Object</code>, and take no arguments. The <code>toString()</code> method of the returned object is used to determine where to navigate (if at all) after the action has been performed.]]></description>
 			<name>action</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 			<method-signature>java.lang.Object action()</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return <code>void</code>, and take either no arguments or one <code>ActionEvent</code> argument.]]></description>
 			<name>actionListener</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 			<method-signature>void actionListener(javax.faces.event.ActionEvent)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]></description>
 			<name>alt</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying whether or not the component should automatically recieve focus on the initial page load.]]></description>
 			<name>autofocus</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
 			<name>binding</name>
 			<required>false</required>
-			<type>String</type>
+			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
@@ -777,121 +753,121 @@
 			<description><![CDATA[A unique identifier for this component.]]></description>
 			<name>id</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Specifies the URL of an image.]]></description>
 			<name>image</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]></description>
 			<name>immediate</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
 			<name>label</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
 			<name>lang</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
 			<name>onblur</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]></description>
 			<name>onchange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
 			<name>onclick</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a double click event occurs.]]></description>
 			<name>ondblclick</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when this component gets focus.]]></description>
 			<name>onfocus</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keydown event occurs.]]></description>
 			<name>onkeydown</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keypress event occurs.]]></description>
 			<name>onkeypress</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keyup event occurs.]]></description>
 			<name>onkeyup</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mousedown event occurs.]]></description>
 			<name>onmousedown</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mousemove event occurs.]]></description>
 			<name>onmousemove</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseout event occurs.]]></description>
 			<name>onmouseout</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseover event occurs.]]></description>
 			<name>onmouseover</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
 			<name>onmouseup</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when the user selects this component.]]></description>
 			<name>onselect</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
 			<name>readonly</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
@@ -903,43 +879,43 @@
 			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
 			<name>role</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
 			<name>title</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The type of the button: button, submit (default), or reset.]]></description>
 			<name>type</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The value of this component]]></description>
 			<name>value</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
@@ -956,325 +932,313 @@
 			<description><![CDATA[The active input element that holds the calendar instance.]]></description>
 			<name>activeInput</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The active input element that holds the calendar instance.]]></description>
 			<name>afterActiveInputChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>afterAutoHideChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>afterCalendarChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>afterContainerChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>afterContentChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>afterDateSeparatorChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
 			<name>afterDestroyedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
 			<name>afterInitializedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>afterMaskChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>afterPanesChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>afterPopoverChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>afterPopoverCssClassChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>afterValueExtractorChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>afterValueFormatterChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>autoHide</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
 			<name>binding</name>
 			<required>false</required>
-			<type>String</type>
+			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>calendar</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
 			<name>clientKey</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>container</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>content</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]></description>
 			<name>datePattern</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>dateSeparator</name>
 			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
-			<name>destroyed</name>
-			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The id of the component that the datePicker will be triggered by. If trigger is specified, this value is unused.]]></description>
 			<name>for</name>
 			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
-			<name>initialized</name>
-			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the datePicker.]]></description>
 			<name>locale</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>mask</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The maximum date that can be selected by the user.]]></description>
 			<name>maximumDate</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The minimum date that can be selected by the user.]]></description>
 			<name>minimumDate</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The active input element that holds the calendar instance.]]></description>
 			<name>onActiveInputChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>onAutoHideChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>onCalendarChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>onContainerChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>onContentChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>onDateSeparatorChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
 			<name>onDestroyedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
 			<name>onInitializedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>onMaskChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>onPanesChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>onPopoverChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>onPopoverCssClassChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>onValueExtractorChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>onValueFormatterChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>panes</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>popover</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>popoverCssClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Specifies the date selection style. Valid values include <code>single</code> (the default), <code>multiple,</code> or <code>multiple-sticky.</code>]]></description>
 			<name>selectionMode</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The fully-qualified id of the element that triggers the calendar popup. Please consider using the <code>for</code> attribute instead.]]></description>
 			<name>trigger</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>valueExtractor</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
+			<description><![CDATA[]]></description>
 			<name>valueFormatter</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]></description>
 			<name>zIndex</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
@@ -1291,13 +1255,13 @@
 			<description><![CDATA[A unique identifier for this component.]]></description>
 			<name>id</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The icon which this component will render. A list of valid icons can be found at <a href="http://liferay.github.io/alloy-bootstrap/base-css.html#icons" target="_blank">Bootstrap Base CSS</a>. <b>Note:</b> icon names must be specified without the <code>icon-</code> prefix.]]></description>
 			<name>name</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
@@ -1309,13 +1273,13 @@
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
@@ -1332,265 +1296,265 @@
 			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
 			<name>accesskey</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]></description>
 			<name>alt</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying whether autocomplete is turned on or off for the rendered HTML element. Valid values include <code>on</code> (default) and <code>off</code>.]]></description>
 			<name>autocomplete</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
 			<name>binding</name>
 			<required>false</required>
-			<type>String</type>
+			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The class name of the converter instance that is to be used by this component.]]></description>
 			<name>converter</name>
 			<required>false</required>
-			<type>String</type>
+			<type>javax.faces.convert.Converter</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]></description>
 			<name>converterMessage</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]></description>
 			<name>datePattern</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A unique identifier for this component.]]></description>
 			<name>id</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]></description>
 			<name>immediate</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
 			<name>label</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
 			<name>lang</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the datePicker.]]></description>
 			<name>locale</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The maximum date that can be selected by the user.]]></description>
 			<name>maximumDate</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the maximum length of characters allowd in this element.]]></description>
 			<name>maxlength</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>int</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The minimum date that can be selected by the user.]]></description>
 			<name>minimumDate</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
 			<name>onblur</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]></description>
 			<name>onchange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
 			<name>onclick</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a double click event occurs.]]></description>
 			<name>ondblclick</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when this component gets focus.]]></description>
 			<name>onfocus</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keydown event occurs.]]></description>
 			<name>onkeydown</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keypress event occurs.]]></description>
 			<name>onkeypress</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keyup event occurs.]]></description>
 			<name>onkeyup</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mousedown event occurs.]]></description>
 			<name>onmousedown</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mousemove event occurs.]]></description>
 			<name>onmousemove</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseout event occurs.]]></description>
 			<name>onmouseout</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseover event occurs.]]></description>
 			<name>onmouseover</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
 			<name>onmouseup</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when the user selects this component.]]></description>
 			<name>onselect</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The number of month panes shown in the popup calendar. Valid values are 1 (the default), 2, and 3.]]></description>
 			<name>panes</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
 			<name>readonly</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
 			<name>rendered</name>
 			<required>false</required>
-			<type>boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
 			<name>required</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]></description>
 			<name>requiredMessage</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
 			<name>role</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Specifies which event will pop up the calendar. Valid values are <code>focus</code> (the default), <code>button</code>, and <code>both</code>.]]></description>
 			<name>showOn</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the visual length of this element.]]></description>
 			<name>size</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>int</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
 			<name>title</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 			<method-signature>
 					void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 					java.lang.Object)
@@ -1600,19 +1564,19 @@
 			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component.]]></description>
 			<name>validatorMessage</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
 			<name>value</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 			<method-signature>
 					void valueChange(javax.faces.event.ValueChangeEvent)
 				</method-signature>
@@ -1621,7 +1585,7 @@
 			<description><![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]></description>
 			<name>zIndex</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
@@ -1638,229 +1602,229 @@
 			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
 			<name>accesskey</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]></description>
 			<name>alt</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying whether autocomplete is turned on or off for the rendered HTML element. Valid values include <code>on</code> (default) and <code>off</code>.]]></description>
 			<name>autocomplete</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
 			<name>binding</name>
 			<required>false</required>
-			<type>String</type>
+			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The class name of the converter instance that is to be used by this component.]]></description>
 			<name>converter</name>
 			<required>false</required>
-			<type>String</type>
+			<type>javax.faces.convert.Converter</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]></description>
 			<name>converterMessage</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A unique identifier for this component.]]></description>
 			<name>id</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]></description>
 			<name>immediate</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
 			<name>label</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
 			<name>lang</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the maximum length of characters allowd in this element.]]></description>
 			<name>maxlength</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>int</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
 			<name>onblur</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]></description>
 			<name>onchange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
 			<name>onclick</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a double click event occurs.]]></description>
 			<name>ondblclick</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when this component gets focus.]]></description>
 			<name>onfocus</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keydown event occurs.]]></description>
 			<name>onkeydown</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keypress event occurs.]]></description>
 			<name>onkeypress</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keyup event occurs.]]></description>
 			<name>onkeyup</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mousedown event occurs.]]></description>
 			<name>onmousedown</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mousemove event occurs.]]></description>
 			<name>onmousemove</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseout event occurs.]]></description>
 			<name>onmouseout</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseover event occurs.]]></description>
 			<name>onmouseover</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
 			<name>onmouseup</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when the user selects this component.]]></description>
 			<name>onselect</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
 			<name>readonly</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
 			<name>rendered</name>
 			<required>false</required>
-			<type>boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
 			<name>required</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]></description>
 			<name>requiredMessage</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
 			<name>role</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the visual length of this element.]]></description>
 			<name>size</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>int</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
 			<name>title</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 			<method-signature>
 					void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 					java.lang.Object)
@@ -1870,19 +1834,19 @@
 			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component.]]></description>
 			<name>validatorMessage</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
 			<name>value</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 			<method-signature>
 					void valueChange(javax.faces.event.ValueChangeEvent)
 				</method-signature>
@@ -1902,13 +1866,13 @@
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
@@ -1925,277 +1889,271 @@
 			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
 			<name>accesskey</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
 			<name>afterBoundingBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> could be reseted (i.e., have no values selected).]]></description>
 			<name>afterCanResetChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
 			<name>afterContentBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS class to be automatically added to the <code>boundingBox</code>.]]></description>
 			<name>afterCssClassChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS classes applied on Rating.]]></description>
 			<name>afterCssClassesChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The number of selected starts when the Rating render.]]></description>
 			<name>afterDefaultSelectedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
 			<name>afterDestroyedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Whether the Rating is disabled or not. Disabled Ratings don't allow hover or click, just display selected stars.]]></description>
 			<name>afterDisabledChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[<a href="NodeList.html">NodeList</a> of elements used on the Rating. Each element is one Star.]]></description>
 			<name>afterElementsChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
 			<name>afterFocusedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>afterHeightChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Hidden input to handle the selected value. This hidden input replace the radio elements and keep the same name.]]></description>
 			<name>afterHiddenInputChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS class added to hide the <code>boundingBox</code> when <a href="Component.html#config_visible">visible</a> is set to <code>false</code>.]]></description>
 			<name>afterHideClassChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[]]></description>
 			<name>afterIdChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
 			<name>afterInitializedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Name of the <a href="Rating.html#config_hiddenInput">hiddenInput</a> element. If not specified will use the name of the replaced radio.]]></description>
 			<name>afterInputNameChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Label to be displayed with the Rating elements.]]></description>
 			<name>afterLabelChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[DOM Node to display the text of the StarRating. If not specified try to query using HTML_PARSER an element inside boundingBox which matches <code>aui-rating-label-element</code>.]]></description>
 			<name>afterLabelNodeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
 			<name>afterLocaleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.]]></description>
 			<name>afterRenderChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
 			<name>afterRenderedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Stores the index of the selected element.]]></description>
 			<name>afterSelectedIndexChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> will extract the value of the <code>title</code> attribute on the radio, and use it on the generated Rating elements.]]></description>
 			<name>afterShowTitleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Number of Rating elements to be displayed.]]></description>
 			<name>afterSizeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
 			<name>afterSrcNodeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
 			<name>afterStringsChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
 			<name>afterTabIndexChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If set, will be used when there is no DOM <code>title</code> on the radio elements.]]></description>
 			<name>afterTitleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if use of the WAI-ARIA Roles and States should be enabled for the Widget.]]></description>
 			<name>afterUseARIAChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Stores the value of the current selected Rating element.]]></description>
 			<name>afterValueChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
 			<name>afterVisibleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>afterWidthChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
 			<name>binding</name>
 			<required>false</required>
-			<type>String</type>
+			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[__DESCRIPTION__]]></description>
 			<name>border</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>int</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
 			<name>boundingBox</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> could be reseted (i.e., have no values selected).]]></description>
 			<name>canReset</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
 			<name>clientKey</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
 			<name>contentBox</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The class name of the converter instance that is to be used by this component.]]></description>
 			<name>converter</name>
 			<required>false</required>
-			<type>String</type>
+			<type>javax.faces.convert.Converter</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]></description>
 			<name>converterMessage</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS class to be automatically added to the <code>boundingBox</code>.]]></description>
 			<name>cssClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS classes applied on Rating.]]></description>
 			<name>cssClasses</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The number of selected starts when the Rating render.]]></description>
 			<name>defaultSelected</name>
 			<required>false</required>
-			<type>Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
-			<name>destroyed</name>
-			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
@@ -2207,379 +2165,361 @@
 			<description><![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]></description>
 			<name>disabledClass</name>
 			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[<a href="NodeList.html">NodeList</a> of elements used on the Rating. Each element is one Star.]]></description>
-			<name>elements</name>
-			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]></description>
 			<name>enabledClass</name>
 			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
-			<name>focused</name>
-			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>height</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Hidden input to handle the selected value. This hidden input replace the radio elements and keep the same name.]]></description>
 			<name>hiddenInput</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS class added to hide the <code>boundingBox</code> when <a href="Component.html#config_visible">visible</a> is set to <code>false</code>.]]></description>
 			<name>hideClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]></description>
 			<name>hideNoSelectionOption</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A unique identifier for this component.]]></description>
 			<name>id</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]></description>
+			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the Process Validations phase.]]></description>
 			<name>immediate</name>
 			<required>false</required>
-			<type>Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
-			<name>initialized</name>
-			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Name of the <a href="Rating.html#config_hiddenInput">hiddenInput</a> element. If not specified will use the name of the replaced radio.]]></description>
 			<name>inputName</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
 			<name>label</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[DOM Node to display the text of the StarRating. If not specified try to query using HTML_PARSER an element inside boundingBox which matches <code>aui-rating-label-element</code>.]]></description>
 			<name>labelNode</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
 			<name>lang</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
 			<name>locale</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
 			<name>onblur</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
 			<name>onBoundingBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> could be reseted (i.e., have no values selected).]]></description>
 			<name>onCanResetChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]></description>
 			<name>onchange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
 			<name>onclick</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
 			<name>onContentBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS class to be automatically added to the <code>boundingBox</code>.]]></description>
 			<name>onCssClassChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS classes applied on Rating.]]></description>
 			<name>onCssClassesChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a double click event occurs.]]></description>
 			<name>ondblclick</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The number of selected starts when the Rating render.]]></description>
 			<name>onDefaultSelectedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
 			<name>onDestroyedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Whether the Rating is disabled or not. Disabled Ratings don't allow hover or click, just display selected stars.]]></description>
 			<name>onDisabledChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[<a href="NodeList.html">NodeList</a> of elements used on the Rating. Each element is one Star.]]></description>
 			<name>onElementsChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when this component gets focus.]]></description>
 			<name>onfocus</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
 			<name>onFocusedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>onHeightChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Hidden input to handle the selected value. This hidden input replace the radio elements and keep the same name.]]></description>
 			<name>onHiddenInputChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS class added to hide the <code>boundingBox</code> when <a href="Component.html#config_visible">visible</a> is set to <code>false</code>.]]></description>
 			<name>onHideClassChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[]]></description>
 			<name>onIdChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
 			<name>onInitializedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Name of the <a href="Rating.html#config_hiddenInput">hiddenInput</a> element. If not specified will use the name of the replaced radio.]]></description>
 			<name>onInputNameChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keydown event occurs.]]></description>
 			<name>onkeydown</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keypress event occurs.]]></description>
 			<name>onkeypress</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keyup event occurs.]]></description>
 			<name>onkeyup</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Label to be displayed with the Rating elements.]]></description>
 			<name>onLabelChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[DOM Node to display the text of the StarRating. If not specified try to query using HTML_PARSER an element inside boundingBox which matches <code>aui-rating-label-element</code>.]]></description>
 			<name>onLabelNodeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
 			<name>onLocaleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mousedown event occurs.]]></description>
 			<name>onmousedown</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mousemove event occurs.]]></description>
 			<name>onmousemove</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseout event occurs.]]></description>
 			<name>onmouseout</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseover event occurs.]]></description>
 			<name>onmouseover</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
 			<name>onmouseup</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.]]></description>
 			<name>onRenderChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
 			<name>onRenderedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when the user selects this component.]]></description>
 			<name>onselect</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Stores the index of the selected element.]]></description>
 			<name>onSelectedIndexChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> will extract the value of the <code>title</code> attribute on the radio, and use it on the generated Rating elements.]]></description>
 			<name>onShowTitleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Number of Rating elements to be displayed.]]></description>
 			<name>onSizeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
 			<name>onSrcNodeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
 			<name>onStringsChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
 			<name>onTabIndexChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If set, will be used when there is no DOM <code>title</code> on the radio elements.]]></description>
 			<name>onTitleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if use of the WAI-ARIA Roles and States should be enabled for the Widget.]]></description>
 			<name>onUseARIAChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Stores the value of the current selected Rating element.]]></description>
 			<name>onValueChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
 			<name>onVisibleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>onWidthChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
 			<name>readonly</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
@@ -2591,91 +2531,91 @@
 			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
 			<name>required</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]></description>
 			<name>requiredMessage</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
 			<name>role</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Stores the index of the selected element.]]></description>
 			<name>selectedIndex</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> will extract the value of the <code>title</code> attribute on the radio, and use it on the generated Rating elements.]]></description>
 			<name>showTitle</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Number of Rating elements to be displayed.]]></description>
 			<name>size</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
 			<name>srcNode</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
 			<name>strings</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
 			<name>tabIndex</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
 			<name>title</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if use of the WAI-ARIA Roles and States should be enabled for the Widget.]]></description>
 			<name>useARIA</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 			<method-signature>
 					void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 					java.lang.Object)
@@ -2685,38 +2625,38 @@
 			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component.]]></description>
 			<name>validatorMessage</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
 			<name>value</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
 			<name>visible</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.]]></description>
 			<name>widgetRender</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>width</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.0-m2</vdldoc:since>
@@ -2733,19 +2673,19 @@
 			<description><![CDATA[__DESCRIPTION__]]></description>
 			<name>label</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.0-m2</vdldoc:since>
@@ -2760,429 +2700,393 @@
 		</component>
 		<attribute>
 			<description><![CDATA[Returns the Widget's currently focused descendant Widget.]]></description>
-			<name>activeDescendant</name>
-			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Returns the Widget's currently focused descendant Widget.]]></description>
 			<name>afterActiveDescendantChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
 			<name>afterBoundingBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
 			<name>afterContentBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String representing the default type of the children  managed by this Widget.  Can also supply default type as a constructor reference.]]></description>
 			<name>afterDefaultChildTypeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
 			<name>afterDestroyedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
 			<name>afterDisabledChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
 			<name>afterFocusedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>afterHeightChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[]]></description>
 			<name>afterIdChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
 			<name>afterInitializedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
 			<name>afterLocaleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if multiple children can be selected at  once.  Whether or not multiple selection is enabled is always delegated to the value of the <code>multiple</code> attribute of the root widget in the object hierarchy.]]></description>
 			<name>afterMultipleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
 			<name>afterRenderChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
 			<name>afterRenderedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Returns the currently selected child Widget.  If the  <code>mulitple</code> attribte is set to <code>true</code> will  return an Y.ArrayList instance containing the currently selected  children.  If no children are selected, will return null.]]></description>
 			<name>afterSelectionChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
 			<name>afterSrcNodeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine the orientation of tabs. Can be stacked (vertical) or not (horizontal).]]></description>
 			<name>afterStackedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
 			<name>afterStringsChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
 			<name>afterTabIndexChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine the type of tabs.]]></description>
 			<name>afterTypeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
 			<name>afterVisibleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>afterWidthChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
 			<name>boundingBox</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
 			<name>clientKey</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
 			<name>contentBox</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String representing the default type of the children  managed by this Widget.  Can also supply default type as a constructor reference.]]></description>
 			<name>defaultChildType</name>
 			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
-			<name>destroyed</name>
-			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
 			<name>disabled</name>
 			<required>false</required>
-			<type>Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
-			<name>focused</name>
-			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>height</name>
 			<required>false</required>
-			<type>Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>id</name>
-			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
-			<name>initialized</name>
-			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
 			<name>locale</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if multiple children can be selected at  once.  Whether or not multiple selection is enabled is always delegated to the value of the <code>multiple</code> attribute of the root widget in the object hierarchy.]]></description>
 			<name>multiple</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Returns the Widget's currently focused descendant Widget.]]></description>
 			<name>onActiveDescendantChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
 			<name>onBoundingBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
 			<name>onContentBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String representing the default type of the children  managed by this Widget.  Can also supply default type as a constructor reference.]]></description>
 			<name>onDefaultChildTypeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
 			<name>onDestroyedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
 			<name>onDisabledChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
 			<name>onFocusedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>onHeightChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[]]></description>
 			<name>onIdChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
 			<name>onInitializedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
 			<name>onLocaleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if multiple children can be selected at  once.  Whether or not multiple selection is enabled is always delegated to the value of the <code>multiple</code> attribute of the root widget in the object hierarchy.]]></description>
 			<name>onMultipleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
 			<name>onRenderChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
 			<name>onRenderedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Returns the currently selected child Widget.  If the  <code>mulitple</code> attribte is set to <code>true</code> will  return an Y.ArrayList instance containing the currently selected  children.  If no children are selected, will return null.]]></description>
 			<name>onSelectionChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
 			<name>onSrcNodeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine the orientation of tabs. Can be stacked (vertical) or not (horizontal).]]></description>
 			<name>onStackedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
 			<name>onStringsChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
 			<name>onTabIndexChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine the type of tabs.]]></description>
 			<name>onTypeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
 			<name>onVisibleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>onWidthChange</name>
 			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
-			<name>rendered</name>
-			<required>false</required>
-			<type>boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Returns the currently selected child Widget.  If the  <code>mulitple</code> attribte is set to <code>true</code> will  return an Y.ArrayList instance containing the currently selected  children.  If no children are selected, will return null.]]></description>
-			<name>selection</name>
-			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
 			<name>srcNode</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine the orientation of tabs. Can be stacked (vertical) or not (horizontal).]]></description>
 			<name>stacked</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
 			<name>strings</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
 			<name>tabIndex</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Determine the type of tabs.]]></description>
 			<name>type</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
 			<name>value</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of the variable that is to be intorduced into the el representing the current iteration.]]></description>
 			<name>var</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
 			<name>visible</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[]]></description>
+			<name>widgetId</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
 			<name>widgetRender</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>width</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.0-m2</vdldoc:since>
@@ -3199,664 +3103,634 @@
 			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
 			<name>accesskey</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
 			<name>afterBoundingBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> could be reseted (i.e., have no values selected).]]></description>
 			<name>afterCanResetChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
 			<name>afterContentBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS class to be automatically added to the <code>boundingBox</code>.]]></description>
 			<name>afterCssClassChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS classes applied on ThumbRating.]]></description>
 			<name>afterCssClassesChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The number of selected starts when the Rating render.]]></description>
 			<name>afterDefaultSelectedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
 			<name>afterDestroyedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Whether the Rating is disabled or not. Disabled Ratings don't allow hover or click, just display selected stars.]]></description>
 			<name>afterDisabledChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[<a href="NodeList.html">NodeList</a> of elements used on the Rating. Each element is one Star.]]></description>
 			<name>afterElementsChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
 			<name>afterFocusedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>afterHeightChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Hidden input to handle the selected value. This hidden input replace the radio elements and keep the same name.]]></description>
 			<name>afterHiddenInputChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS class added to hide the <code>boundingBox</code> when <a href="Component.html#config_visible">visible</a> is set to <code>false</code>.]]></description>
 			<name>afterHideClassChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[]]></description>
 			<name>afterIdChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
 			<name>afterInitializedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Name of the <a href="Rating.html#config_hiddenInput">hiddenInput</a> element. If not specified will use the name of the replaced radio.]]></description>
 			<name>afterInputNameChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Label to be displayed with the Rating elements.]]></description>
 			<name>afterLabelChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[DOM Node to display the text of the StarRating. If not specified try to query using HTML_PARSER an element inside boundingBox which matches <code>aui-rating-label-element</code>.]]></description>
 			<name>afterLabelNodeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
 			<name>afterLocaleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.]]></description>
 			<name>afterRenderChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
 			<name>afterRenderedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Stores the index of the selected element.]]></description>
 			<name>afterSelectedIndexChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> will extract the value of the <code>title</code> attribute on the radio, and use it on the generated Rating elements.]]></description>
 			<name>afterShowTitleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The size on ThumbRating is always 2 (i.e., thumb up and thumb down).]]></description>
 			<name>afterSizeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
 			<name>afterSrcNodeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
 			<name>afterStringsChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
 			<name>afterTabIndexChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If set, will be used when there is no DOM <code>title</code> on the radio elements.]]></description>
 			<name>afterTitleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if use of the WAI-ARIA Roles and States should be enabled for the Widget.]]></description>
 			<name>afterUseARIAChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Stores the value of the current selected Rating element.]]></description>
 			<name>afterValueChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
 			<name>afterVisibleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>afterWidthChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
 			<name>binding</name>
 			<required>false</required>
-			<type>String</type>
+			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[__DESCRIPTION__]]></description>
 			<name>border</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>int</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
 			<name>boundingBox</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> could be reseted (i.e., have no values selected).]]></description>
 			<name>canReset</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
 			<name>clientKey</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
 			<name>contentBox</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The class name of the converter instance that is to be used by this component.]]></description>
 			<name>converter</name>
 			<required>false</required>
-			<type>String</type>
+			<type>javax.faces.convert.Converter</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]></description>
 			<name>converterMessage</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS class to be automatically added to the <code>boundingBox</code>.]]></description>
 			<name>cssClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS classes applied on ThumbRating.]]></description>
 			<name>cssClasses</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The number of selected starts when the Rating render.]]></description>
 			<name>defaultSelected</name>
 			<required>false</required>
-			<type>Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
-			<name>destroyed</name>
-			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Whether the Rating is disabled or not. Disabled Ratings don't allow hover or click, just display selected stars.]]></description>
 			<name>disabled</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]></description>
 			<name>disabledClass</name>
 			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[<a href="NodeList.html">NodeList</a> of elements used on the Rating. Each element is one Star.]]></description>
-			<name>elements</name>
-			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]></description>
 			<name>enabledClass</name>
 			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
-			<name>focused</name>
-			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>height</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Hidden input to handle the selected value. This hidden input replace the radio elements and keep the same name.]]></description>
 			<name>hiddenInput</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS class added to hide the <code>boundingBox</code> when <a href="Component.html#config_visible">visible</a> is set to <code>false</code>.]]></description>
 			<name>hideClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]></description>
 			<name>hideNoSelectionOption</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[]]></description>
-			<name>id</name>
-			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]></description>
+			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the Process Validations phase.]]></description>
 			<name>immediate</name>
 			<required>false</required>
-			<type>Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
-			<name>initialized</name>
-			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Name of the <a href="Rating.html#config_hiddenInput">hiddenInput</a> element. If not specified will use the name of the replaced radio.]]></description>
 			<name>inputName</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Label to be displayed with the Rating elements.]]></description>
 			<name>label</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[DOM Node to display the text of the StarRating. If not specified try to query using HTML_PARSER an element inside boundingBox which matches <code>aui-rating-label-element</code>.]]></description>
 			<name>labelNode</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
 			<name>lang</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
 			<name>locale</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
 			<name>onblur</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
 			<name>onBoundingBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> could be reseted (i.e., have no values selected).]]></description>
 			<name>onCanResetChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]></description>
 			<name>onchange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
 			<name>onclick</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
 			<name>onContentBoxChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS class to be automatically added to the <code>boundingBox</code>.]]></description>
 			<name>onCssClassChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS classes applied on ThumbRating.]]></description>
 			<name>onCssClassesChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a double click event occurs.]]></description>
 			<name>ondblclick</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The number of selected starts when the Rating render.]]></description>
 			<name>onDefaultSelectedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
 			<name>onDestroyedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Whether the Rating is disabled or not. Disabled Ratings don't allow hover or click, just display selected stars.]]></description>
 			<name>onDisabledChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[<a href="NodeList.html">NodeList</a> of elements used on the Rating. Each element is one Star.]]></description>
 			<name>onElementsChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when this component gets focus.]]></description>
 			<name>onfocus</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
 			<name>onFocusedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>onHeightChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Hidden input to handle the selected value. This hidden input replace the radio elements and keep the same name.]]></description>
 			<name>onHiddenInputChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[CSS class added to hide the <code>boundingBox</code> when <a href="Component.html#config_visible">visible</a> is set to <code>false</code>.]]></description>
 			<name>onHideClassChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[]]></description>
 			<name>onIdChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
 			<name>onInitializedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Name of the <a href="Rating.html#config_hiddenInput">hiddenInput</a> element. If not specified will use the name of the replaced radio.]]></description>
 			<name>onInputNameChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keydown event occurs.]]></description>
 			<name>onkeydown</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keypress event occurs.]]></description>
 			<name>onkeypress</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a keyup event occurs.]]></description>
 			<name>onkeyup</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Label to be displayed with the Rating elements.]]></description>
 			<name>onLabelChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[DOM Node to display the text of the StarRating. If not specified try to query using HTML_PARSER an element inside boundingBox which matches <code>aui-rating-label-element</code>.]]></description>
 			<name>onLabelNodeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
 			<name>onLocaleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mousedown event occurs.]]></description>
 			<name>onmousedown</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mousemove event occurs.]]></description>
 			<name>onmousemove</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseout event occurs.]]></description>
 			<name>onmouseout</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseover event occurs.]]></description>
 			<name>onmouseover</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
 			<name>onmouseup</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.]]></description>
 			<name>onRenderChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
 			<name>onRenderedChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when the user selects this component.]]></description>
 			<name>onselect</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Stores the index of the selected element.]]></description>
 			<name>onSelectedIndexChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> will extract the value of the <code>title</code> attribute on the radio, and use it on the generated Rating elements.]]></description>
 			<name>onShowTitleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The size on ThumbRating is always 2 (i.e., thumb up and thumb down).]]></description>
 			<name>onSizeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
 			<name>onSrcNodeChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
 			<name>onStringsChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
 			<name>onTabIndexChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If set, will be used when there is no DOM <code>title</code> on the radio elements.]]></description>
 			<name>onTitleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if use of the WAI-ARIA Roles and States should be enabled for the Widget.]]></description>
 			<name>onUseARIAChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Stores the value of the current selected Rating element.]]></description>
 			<name>onValueChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
 			<name>onVisibleChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>onWidthChange</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
 			<name>readonly</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
 			<name>rendered</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -3865,91 +3739,91 @@
 			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
 			<name>required</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]></description>
 			<name>requiredMessage</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
 			<name>role</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Stores the index of the selected element.]]></description>
 			<name>selectedIndex</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> will extract the value of the <code>title</code> attribute on the radio, and use it on the generated Rating elements.]]></description>
 			<name>showTitle</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The size on ThumbRating is always 2 (i.e., thumb up and thumb down).]]></description>
+			<description><![CDATA[Number of Rating elements to be displayed.]]></description>
 			<name>size</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
 			<name>srcNode</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
 			<name>strings</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
 			<name>tabIndex</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If set, will be used when there is no DOM <code>title</code> on the radio elements.]]></description>
 			<name>title</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating if use of the WAI-ARIA Roles and States should be enabled for the Widget.]]></description>
 			<name>useARIA</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 			<method-signature>
 					void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 					java.lang.Object)
@@ -3959,38 +3833,44 @@
 			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component.]]></description>
 			<name>validatorMessage</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Stores the value of the current selected Rating element.]]></description>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
 			<name>value</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
 			<name>visible</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[]]></description>
+			<name>widgetId</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.]]></description>
 			<name>widgetRender</name>
 			<required>false</required>
-			<type>Boolean</type>
+			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
 			<name>width</name>
 			<required>false</required>
-			<type>Object</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.0-m2</vdldoc:since>

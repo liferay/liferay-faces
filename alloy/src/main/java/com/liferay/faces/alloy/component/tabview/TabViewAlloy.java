@@ -24,7 +24,6 @@ import javax.annotation.Generated;
 public interface TabViewAlloy {
 
 	// Public Constants
-	public static final String ACTIVE_DESCENDANT = "activeDescendant";
 	public static final String AFTER_ACTIVE_DESCENDANT_CHANGE = "afterActiveDescendantChange";
 	public static final String AFTER_BOUNDING_BOX_CHANGE = "afterBoundingBoxChange";
 	public static final String AFTER_CONTENT_BOX_CHANGE = "afterContentBoxChange";
@@ -50,12 +49,8 @@ public interface TabViewAlloy {
 	public static final String BOUNDING_BOX = "boundingBox";
 	public static final String CONTENT_BOX = "contentBox";
 	public static final String DEFAULT_CHILD_TYPE = "defaultChildType";
-	public static final String DESTROYED = "destroyed";
 	public static final String DISABLED = "disabled";
-	public static final String FOCUSED = "focused";
 	public static final String HEIGHT = "height";
-	public static final String ID = "id";
-	public static final String INITIALIZED = "initialized";
 	public static final String LOCALE = "locale";
 	public static final String MULTIPLE = "multiple";
 	public static final String ON_ACTIVE_DESCENDANT_CHANGE = "onActiveDescendantChange";
@@ -80,20 +75,15 @@ public interface TabViewAlloy {
 	public static final String ON_TYPE_CHANGE = "onTypeChange";
 	public static final String ON_VISIBLE_CHANGE = "onVisibleChange";
 	public static final String ON_WIDTH_CHANGE = "onWidthChange";
-	public static final String RENDERED = "rendered";
-	public static final String SELECTION = "selection";
 	public static final String SRC_NODE = "srcNode";
 	public static final String STACKED = "stacked";
 	public static final String STRINGS = "strings";
 	public static final String TAB_INDEX = "tabIndex";
 	public static final String TYPE = "type";
 	public static final String VISIBLE = "visible";
+	public static final String WIDGET_ID = "id";
 	public static final String WIDGET_RENDER = "render";
 	public static final String WIDTH = "width";
-
-	public String getActiveDescendant();
-
-	public void setActiveDescendant(String activeDescendant);
 
 	public String getAfterActiveDescendantChange();
 
@@ -195,29 +185,13 @@ public interface TabViewAlloy {
 
 	public void setDefaultChildType(String defaultChildType);
 
-	public Boolean isDestroyed();
-
-	public void setDestroyed(Boolean destroyed);
-
 	public Boolean isDisabled();
 
 	public void setDisabled(Boolean disabled);
 
-	public Boolean isFocused();
-
-	public void setFocused(Boolean focused);
-
 	public Object getHeight();
 
 	public void setHeight(Object height);
-
-	public String getId();
-
-	public void setId(String id);
-
-	public Boolean isInitialized();
-
-	public void setInitialized(Boolean initialized);
 
 	public String getLocale();
 
@@ -315,14 +289,6 @@ public interface TabViewAlloy {
 
 	public void setOnWidthChange(String onWidthChange);
 
-	public boolean isRendered();
-
-	public void setRendered(boolean rendered);
-
-	public Object getSelection();
-
-	public void setSelection(Object selection);
-
 	public String getSrcNode();
 
 	public void setSrcNode(String srcNode);
@@ -346,6 +312,10 @@ public interface TabViewAlloy {
 	public Boolean isVisible();
 
 	public void setVisible(Boolean visible);
+
+	public String getWidgetId();
+
+	public void setWidgetId(String widgetId);
 
 	public Boolean isWidgetRender();
 

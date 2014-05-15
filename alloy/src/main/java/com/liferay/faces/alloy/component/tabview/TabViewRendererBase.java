@@ -66,14 +66,6 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		TabViewAlloy tabViewAlloy = (TabViewAlloy) uiComponent;
 		boolean first = true;
 
-		String activeDescendant = tabViewAlloy.getActiveDescendant();
-
-		if (activeDescendant != null) {
-
-			encodeActiveDescendant(responseWriter, tabViewAlloy, activeDescendant, first);
-			first = false;
-		}
-
 		String boundingBox = tabViewAlloy.getBoundingBox();
 
 		if (boundingBox != null) {
@@ -98,14 +90,6 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		Boolean destroyed = tabViewAlloy.isDestroyed();
-
-		if (destroyed != null) {
-
-			encodeDestroyed(responseWriter, tabViewAlloy, destroyed, first);
-			first = false;
-		}
-
 		Boolean disabled = tabViewAlloy.isDisabled();
 
 		if (disabled != null) {
@@ -114,35 +98,11 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		Boolean focused = tabViewAlloy.isFocused();
-
-		if (focused != null) {
-
-			encodeFocused(responseWriter, tabViewAlloy, focused, first);
-			first = false;
-		}
-
 		Object height = tabViewAlloy.getHeight();
 
 		if (height != null) {
 
 			encodeHeight(responseWriter, tabViewAlloy, height, first);
-			first = false;
-		}
-
-		String id = tabViewAlloy.getId();
-
-		if (id != null) {
-
-			encodeId(responseWriter, tabViewAlloy, id, first);
-			first = false;
-		}
-
-		Boolean initialized = tabViewAlloy.isInitialized();
-
-		if (initialized != null) {
-
-			encodeInitialized(responseWriter, tabViewAlloy, initialized, first);
 			first = false;
 		}
 
@@ -159,22 +119,6 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		if (multiple != null) {
 
 			encodeMultiple(responseWriter, tabViewAlloy, multiple, first);
-			first = false;
-		}
-
-		Boolean rendered = tabViewAlloy.isRendered();
-
-		if (rendered != null) {
-
-			encodeRendered(responseWriter, tabViewAlloy, rendered, first);
-			first = false;
-		}
-
-		Object selection = tabViewAlloy.getSelection();
-
-		if (selection != null) {
-
-			encodeSelection(responseWriter, tabViewAlloy, selection, first);
 			first = false;
 		}
 
@@ -223,6 +167,14 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		if (visible != null) {
 
 			encodeVisible(responseWriter, tabViewAlloy, visible, first);
+			first = false;
+		}
+
+		String widgetId = tabViewAlloy.getWidgetId();
+
+		if (widgetId != null) {
+
+			encodeWidgetId(responseWriter, tabViewAlloy, widgetId, first);
 			first = false;
 		}
 
@@ -624,10 +576,6 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		return MODULES;
 	}
 
-	protected void encodeActiveDescendant(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String activeDescendant, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewAlloy.ACTIVE_DESCENDANT, activeDescendant, first);
-	}
-
 	protected void encodeAfterActiveDescendantChange(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String afterActiveDescendantChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, ACTIVE_DESCENDANT_CHANGE, afterActiveDescendantChange, first);
 	}
@@ -728,28 +676,12 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		encodeString(responseWriter, TabViewAlloy.DEFAULT_CHILD_TYPE, defaultChildType, first);
 	}
 
-	protected void encodeDestroyed(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean destroyed, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabViewAlloy.DESTROYED, destroyed, first);
-	}
-
 	protected void encodeDisabled(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean disabled, boolean first) throws IOException {
 		encodeBoolean(responseWriter, TabViewAlloy.DISABLED, disabled, first);
 	}
 
-	protected void encodeFocused(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean focused, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabViewAlloy.FOCUSED, focused, first);
-	}
-
 	protected void encodeHeight(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Object height, boolean first) throws IOException {
 		encodeComplexNumber(responseWriter, TabViewAlloy.HEIGHT, height, first);
-	}
-
-	protected void encodeId(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String id, boolean first) throws IOException {
-		encodeString(responseWriter, TabViewAlloy.ID, id, first);
-	}
-
-	protected void encodeInitialized(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean initialized, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabViewAlloy.INITIALIZED, initialized, first);
 	}
 
 	protected void encodeLocale(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String locale, boolean first) throws IOException {
@@ -848,14 +780,6 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		encodeEvent(responseWriter, WIDTH_CHANGE, onWidthChange, first);
 	}
 
-	protected void encodeRendered(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean rendered, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabViewAlloy.RENDERED, rendered, first);
-	}
-
-	protected void encodeSelection(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Object selection, boolean first) throws IOException {
-		encodeObject(responseWriter, TabViewAlloy.SELECTION, selection, first);
-	}
-
 	protected void encodeSrcNode(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String srcNode, boolean first) throws IOException {
 		encodeString(responseWriter, TabViewAlloy.SRC_NODE, srcNode, first);
 	}
@@ -878,6 +802,10 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 
 	protected void encodeVisible(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean visible, boolean first) throws IOException {
 		encodeBoolean(responseWriter, TabViewAlloy.VISIBLE, visible, first);
+	}
+
+	protected void encodeWidgetId(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, String widgetId, boolean first) throws IOException {
+		encodeString(responseWriter, TabViewAlloy.WIDGET_ID, widgetId, first);
 	}
 
 	protected void encodeWidgetRender(ResponseWriter responseWriter, TabViewAlloy tabViewAlloy, Boolean widgetRender, boolean first) throws IOException {

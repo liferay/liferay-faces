@@ -124,35 +124,11 @@ public abstract class StarRatingRendererBase extends DelegatingAlloyRendererBase
 			first = false;
 		}
 
-		Boolean destroyed = starRatingAlloy.isDestroyed();
-
-		if (destroyed != null) {
-
-			encodeDestroyed(responseWriter, starRatingAlloy, destroyed, first);
-			first = false;
-		}
-
 		Boolean disabled = starRatingAlloy.isDisabled();
 
 		if (disabled != null) {
 
 			encodeDisabled(responseWriter, starRatingAlloy, disabled, first);
-			first = false;
-		}
-
-		String elements = starRatingAlloy.getElements();
-
-		if (elements != null) {
-
-			encodeElements(responseWriter, starRatingAlloy, elements, first);
-			first = false;
-		}
-
-		Boolean focused = starRatingAlloy.isFocused();
-
-		if (focused != null) {
-
-			encodeFocused(responseWriter, starRatingAlloy, focused, first);
 			first = false;
 		}
 
@@ -177,22 +153,6 @@ public abstract class StarRatingRendererBase extends DelegatingAlloyRendererBase
 		if (hideClass != null) {
 
 			encodeHideClass(responseWriter, starRatingAlloy, hideClass, first);
-			first = false;
-		}
-
-		String id = starRatingAlloy.getId();
-
-		if (id != null) {
-
-			encodeId(responseWriter, starRatingAlloy, id, first);
-			first = false;
-		}
-
-		Boolean initialized = starRatingAlloy.isInitialized();
-
-		if (initialized != null) {
-
-			encodeInitialized(responseWriter, starRatingAlloy, initialized, first);
 			first = false;
 		}
 
@@ -225,14 +185,6 @@ public abstract class StarRatingRendererBase extends DelegatingAlloyRendererBase
 		if (locale != null) {
 
 			encodeLocale(responseWriter, starRatingAlloy, locale, first);
-			first = false;
-		}
-
-		Boolean rendered = starRatingAlloy.isRendered();
-
-		if (rendered != null) {
-
-			encodeRendered(responseWriter, starRatingAlloy, rendered, first);
 			first = false;
 		}
 
@@ -1026,20 +978,8 @@ public abstract class StarRatingRendererBase extends DelegatingAlloyRendererBase
 		encodeNumber(responseWriter, StarRatingAlloy.DEFAULT_SELECTED, defaultSelected, first);
 	}
 
-	protected void encodeDestroyed(ResponseWriter responseWriter, StarRatingAlloy starRatingAlloy, Boolean destroyed, boolean first) throws IOException {
-		encodeBoolean(responseWriter, StarRatingAlloy.DESTROYED, destroyed, first);
-	}
-
 	protected void encodeDisabled(ResponseWriter responseWriter, StarRatingAlloy starRatingAlloy, Boolean disabled, boolean first) throws IOException {
 		encodeBoolean(responseWriter, StarRatingAlloy.DISABLED, disabled, first);
-	}
-
-	protected void encodeElements(ResponseWriter responseWriter, StarRatingAlloy starRatingAlloy, String elements, boolean first) throws IOException {
-		encodeString(responseWriter, StarRatingAlloy.ELEMENTS, elements, first);
-	}
-
-	protected void encodeFocused(ResponseWriter responseWriter, StarRatingAlloy starRatingAlloy, Boolean focused, boolean first) throws IOException {
-		encodeBoolean(responseWriter, StarRatingAlloy.FOCUSED, focused, first);
 	}
 
 	protected void encodeHeight(ResponseWriter responseWriter, StarRatingAlloy starRatingAlloy, Object height, boolean first) throws IOException {
@@ -1052,14 +992,6 @@ public abstract class StarRatingRendererBase extends DelegatingAlloyRendererBase
 
 	protected void encodeHideClass(ResponseWriter responseWriter, StarRatingAlloy starRatingAlloy, String hideClass, boolean first) throws IOException {
 		encodeString(responseWriter, StarRatingAlloy.HIDE_CLASS, hideClass, first);
-	}
-
-	protected void encodeId(ResponseWriter responseWriter, StarRatingAlloy starRatingAlloy, String id, boolean first) throws IOException {
-		encodeString(responseWriter, StarRatingAlloy.ID, id, first);
-	}
-
-	protected void encodeInitialized(ResponseWriter responseWriter, StarRatingAlloy starRatingAlloy, Boolean initialized, boolean first) throws IOException {
-		encodeBoolean(responseWriter, StarRatingAlloy.INITIALIZED, initialized, first);
 	}
 
 	protected void encodeInputName(ResponseWriter responseWriter, StarRatingAlloy starRatingAlloy, String inputName, boolean first) throws IOException {
@@ -1204,10 +1136,6 @@ public abstract class StarRatingRendererBase extends DelegatingAlloyRendererBase
 
 	protected void encodeOnWidthChange(ResponseWriter responseWriter, StarRatingAlloy starRatingAlloy, String onWidthChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, WIDTH_CHANGE, onWidthChange, first);
-	}
-
-	protected void encodeRendered(ResponseWriter responseWriter, StarRatingAlloy starRatingAlloy, Boolean rendered, boolean first) throws IOException {
-		encodeBoolean(responseWriter, StarRatingAlloy.RENDERED, rendered, first);
 	}
 
 	protected void encodeSelectedIndex(ResponseWriter responseWriter, StarRatingAlloy starRatingAlloy, Object selectedIndex, boolean first) throws IOException {

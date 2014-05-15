@@ -50,13 +50,9 @@ public interface AceEditorAlloy {
 	public static final String AFTER_WIDTH_CHANGE = "afterWidthChange";
 	public static final String BOUNDING_BOX = "boundingBox";
 	public static final String CONTENT_BOX = "contentBox";
-	public static final String DESTROYED = "destroyed";
 	public static final String DISABLED = "disabled";
-	public static final String FOCUSED = "focused";
 	public static final String HEIGHT = "height";
 	public static final String HIGHLIGHT_ACTIVE_LINE = "highlightActiveLine";
-	public static final String ID = "id";
-	public static final String INITIALIZED = "initialized";
 	public static final String LOCALE = "locale";
 	public static final String MODE = "mode";
 	public static final String ON_BOUNDING_BOX_CHANGE = "onBoundingBoxChange";
@@ -84,7 +80,6 @@ public interface AceEditorAlloy {
 	public static final String ON_VISIBLE_CHANGE = "onVisibleChange";
 	public static final String ON_WIDTH_CHANGE = "onWidthChange";
 	public static final String READ_ONLY = "readOnly";
-	public static final String RENDERED = "rendered";
 	public static final String SHOW_PRINT_MARGIN = "showPrintMargin";
 	public static final String SRC_NODE = "srcNode";
 	public static final String STRINGS = "strings";
@@ -94,6 +89,7 @@ public interface AceEditorAlloy {
 	public static final String USE_WRAP_MODE = "useWrapMode";
 	public static final String VALUE = "value";
 	public static final String VISIBLE = "visible";
+	public static final String WIDGET_ID = "id";
 	public static final String WIDGET_RENDER = "render";
 	public static final String WIDTH = "width";
 
@@ -201,17 +197,9 @@ public interface AceEditorAlloy {
 
 	public void setContentBox(String contentBox);
 
-	public Boolean isDestroyed();
-
-	public void setDestroyed(Boolean destroyed);
-
 	public boolean isDisabled();
 
 	public void setDisabled(boolean disabled);
-
-	public Boolean isFocused();
-
-	public void setFocused(Boolean focused);
 
 	public Object getHeight();
 
@@ -220,14 +208,6 @@ public interface AceEditorAlloy {
 	public Boolean isHighlightActiveLine();
 
 	public void setHighlightActiveLine(Boolean highlightActiveLine);
-
-	public String getId();
-
-	public void setId(String id);
-
-	public Boolean isInitialized();
-
-	public void setInitialized(Boolean initialized);
 
 	public String getLocale();
 
@@ -337,10 +317,6 @@ public interface AceEditorAlloy {
 
 	public void setReadOnly(Boolean readOnly);
 
-	public boolean isRendered();
-
-	public void setRendered(boolean rendered);
-
 	public Boolean isShowPrintMargin();
 
 	public void setShowPrintMargin(Boolean showPrintMargin);
@@ -376,6 +352,10 @@ public interface AceEditorAlloy {
 	public Boolean isVisible();
 
 	public void setVisible(Boolean visible);
+
+	public String getWidgetId();
+
+	public void setWidgetId(String widgetId);
 
 	public Boolean isWidgetRender();
 
