@@ -397,7 +397,7 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the Process Validations phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
+			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
 			<name>required</name>
 			<required>false</required>
 			<type>Boolean</type>
@@ -730,14 +730,14 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, without parameters, and return an <code>Object</code>. The <code>toString()</code> method of the returned object is used to determine where to navigate (if at all) after the action has been performed.]]></description>
+			<description><![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return an <code>Object</code>, and take no arguments. The <code>toString()</code> method of the returned object is used to determine where to navigate (if at all) after the action has been performed.]]></description>
 			<name>action</name>
 			<required>false</required>
 			<type>Object</type>
 			<method-signature>java.lang.Object action()</method-signature>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, with either no parameters or one <code>ActionEvent</code> parameter, and return <code>void</code>.]]></description>
+			<description><![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return <code>void</code>, and take either no arguments or one <code>ActionEvent</code> argument.]]></description>
 			<name>actionListener</name>
 			<required>false</required>
 			<type>Object</type>
@@ -786,7 +786,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the Process Validations phase.]]></description>
+			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]></description>
 			<name>immediate</name>
 			<required>false</required>
 			<type>Boolean</type>
@@ -989,12 +989,6 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The event that fires when the user clicks on a date.]]></description>
-			<name>afterDateClick</name>
-			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
 			<name>afterDateSeparatorChange</name>
 			<required>false</required>
@@ -1169,12 +1163,6 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The event that fires when the user clicks on a date.]]></description>
-			<name>onDateClick</name>
-			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[TODO. Wanna help? Please send a Pull Request.]]></description>
 			<name>onDateSeparatorChange</name>
 			<required>false</required>
@@ -1247,7 +1235,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Specifies the date selection style. Valid values include "single" (the default), "multiple," or "multiple-sticky."]]></description>
+			<description><![CDATA[Specifies the date selection style. Valid values include <code>single</code> (the default), <code>multiple,</code> or <code>multiple-sticky.</code>]]></description>
 			<name>selectionMode</name>
 			<required>false</required>
 			<type>String</type>
@@ -1265,7 +1253,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The fully-qualified id of the element that triggers the calendar popup. Please consider using the "for" attribute instead.]]></description>
+			<description><![CDATA[The fully-qualified id of the element that triggers the calendar popup. Please consider using the <code>for</code> attribute instead.]]></description>
 			<name>trigger</name>
 			<required>false</required>
 			<type>String</type>
@@ -1289,7 +1277,7 @@
 			<type>Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1306,7 +1294,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The icon which this component will render. A list of valid icons can be found at <a href="http://liferay.github.io/alloy-bootstrap/base-css.html#icons" target="_blank">Bootstrap Base CSS</a>. <b>Note:</b> icon names must be specified without the "icon-" prefix.]]></description>
+			<description><![CDATA[The icon which this component will render. A list of valid icons can be found at <a href="http://liferay.github.io/alloy-bootstrap/base-css.html#icons" target="_blank">Bootstrap Base CSS</a>. <b>Note:</b> icon names must be specified without the <code>icon-</code> prefix.]]></description>
 			<name>name</name>
 			<required>false</required>
 			<type>String</type>
@@ -1334,12 +1322,246 @@
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[]]></description>
-		<tag-name>inputText</tag-name>
+		<description><![CDATA[InputDate is a UIInput component that renders a textbox and a popup a calendar with selectable dates. The component attepts to automatically convert the submitted value to a Date via a built in DateTimeConverter.]]></description>
+		<tag-name>inputDate</tag-name>
 		<component>
-			<component-type>com.liferay.faces.alloy.component.inputtext.InputText</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.inputtext.InputTextRenderer</renderer-type>
+			<component-type>com.liferay.faces.alloy.component.inputdate.InputDate</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.inputdate.InputDateRenderer</renderer-type>
 		</component>
+		<attribute>
+			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
+			<name>accesskey</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]></description>
+			<name>alt</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying whether autocomplete is turned on or off for the rendered HTML element. Valid values include <code>on</code> (default) and <code>off</code>.]]></description>
+			<name>autocomplete</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The class name of the converter instance that is to be used by this component.]]></description>
+			<name>converter</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]></description>
+			<name>converterMessage</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]></description>
+			<name>datePattern</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
+			<name>dir</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<name>disabled</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]></description>
+			<name>immediate</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
+			<name>label</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
+			<name>lang</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the datePicker.]]></description>
+			<name>locale</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The maximum date that can be selected by the user.]]></description>
+			<name>maximumDate</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the maximum length of characters allowd in this element.]]></description>
+			<name>maxlength</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The minimum date that can be selected by the user.]]></description>
+			<name>minimumDate</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
+			<name>onblur</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]></description>
+			<name>onchange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
+			<name>onclick</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a double click event occurs.]]></description>
+			<name>ondblclick</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when this component gets focus.]]></description>
+			<name>onfocus</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keydown event occurs.]]></description>
+			<name>onkeydown</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keypress event occurs.]]></description>
+			<name>onkeypress</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keyup event occurs.]]></description>
+			<name>onkeyup</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mousedown event occurs.]]></description>
+			<name>onmousedown</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mousemove event occurs.]]></description>
+			<name>onmousemove</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseout event occurs.]]></description>
+			<name>onmouseout</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseover event occurs.]]></description>
+			<name>onmouseover</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
+			<name>onmouseup</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when the user selects this component.]]></description>
+			<name>onselect</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The number of month panes shown in the popup calendar. Valid values are 1 (the default), 2, and 3.]]></description>
+			<name>panes</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
+			<name>readonly</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
+			<name>required</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]></description>
+			<name>requiredMessage</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
+			<name>role</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Specifies which event will pop up the calendar. Valid values are <code>focus</code> (the default), <code>button</code>, and <code>both</code>.]]></description>
+			<name>showOn</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the visual length of this element.]]></description>
+			<name>size</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
@@ -1351,6 +1573,319 @@
 			<name>styleClass</name>
 			<required>false</required>
 			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
+			<name>tabindex</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
+			<name>title</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
+			<name>validator</name>
+			<required>false</required>
+			<type>Object</type>
+			<method-signature>
+					void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+					java.lang.Object)
+				</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component.]]></description>
+			<name>validatorMessage</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
+			<name>value</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
+			<name>valueChangeListener</name>
+			<required>false</required>
+			<type>Object</type>
+			<method-signature>
+					void valueChange(javax.faces.event.ValueChangeEvent)
+				</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]></description>
+			<name>zIndex</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[]]></description>
+		<tag-name>inputText</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.inputtext.InputText</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.inputtext.InputTextRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
+			<name>accesskey</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]></description>
+			<name>alt</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying whether autocomplete is turned on or off for the rendered HTML element. Valid values include <code>on</code> (default) and <code>off</code>.]]></description>
+			<name>autocomplete</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The class name of the converter instance that is to be used by this component.]]></description>
+			<name>converter</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]></description>
+			<name>converterMessage</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
+			<name>dir</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<name>disabled</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]></description>
+			<name>immediate</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
+			<name>label</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
+			<name>lang</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the maximum length of characters allowd in this element.]]></description>
+			<name>maxlength</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
+			<name>onblur</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]></description>
+			<name>onchange</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
+			<name>onclick</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a double click event occurs.]]></description>
+			<name>ondblclick</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when this component gets focus.]]></description>
+			<name>onfocus</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keydown event occurs.]]></description>
+			<name>onkeydown</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keypress event occurs.]]></description>
+			<name>onkeypress</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keyup event occurs.]]></description>
+			<name>onkeyup</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mousedown event occurs.]]></description>
+			<name>onmousedown</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mousemove event occurs.]]></description>
+			<name>onmousemove</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseout event occurs.]]></description>
+			<name>onmouseout</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseover event occurs.]]></description>
+			<name>onmouseover</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
+			<name>onmouseup</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when the user selects this component.]]></description>
+			<name>onselect</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
+			<name>readonly</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
+			<name>required</name>
+			<required>false</required>
+			<type>Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]></description>
+			<name>requiredMessage</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
+			<name>role</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the visual length of this element.]]></description>
+			<name>size</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
+			<name>tabindex</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
+			<name>title</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
+			<name>validator</name>
+			<required>false</required>
+			<type>Object</type>
+			<method-signature>
+					void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+					java.lang.Object)
+				</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component.]]></description>
+			<name>validatorMessage</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
+			<name>value</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
+			<name>valueChangeListener</name>
+			<required>false</required>
+			<type>Object</type>
+			<method-signature>
+					void valueChange(javax.faces.event.ValueChangeEvent)
+				</method-signature>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
@@ -1627,7 +2162,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[This message, or the result of the given expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]></description>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]></description>
 			<name>converterMessage</name>
 			<required>false</required>
 			<type>String</type>
@@ -1723,7 +2258,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the Process Validations phase.]]></description>
+			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]></description>
 			<name>immediate</name>
 			<required>false</required>
 			<type>Boolean</type>
@@ -2053,13 +2588,13 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the Process Validations phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
+			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
 			<name>required</name>
 			<required>false</required>
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[This message, or the result of the given expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]></description>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]></description>
 			<name>requiredMessage</name>
 			<required>false</required>
 			<type>String</type>
@@ -2137,7 +2672,7 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[__DESCRIPTION__]]></description>
+			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
 			<type>Object</type>
@@ -2147,7 +2682,7 @@
 				</method-signature>
 		</attribute>
 		<attribute>
-			<description><![CDATA[__DESCRIPTION__]]></description>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component.]]></description>
 			<name>validatorMessage</name>
 			<required>false</required>
 			<type>String</type>
@@ -2159,7 +2694,7 @@
 			<type>Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[__DESCRIPTION__]]></description>
+			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
 			<type>Object</type>
@@ -2901,7 +3436,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[This message, or the result of the given expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]></description>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]></description>
 			<name>converterMessage</name>
 			<required>false</required>
 			<type>String</type>
@@ -2997,7 +3532,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the Process Validations phase.]]></description>
+			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]></description>
 			<name>immediate</name>
 			<required>false</required>
 			<type>Boolean</type>
@@ -3327,13 +3862,13 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the Process Validations phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
+			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
 			<name>required</name>
 			<required>false</required>
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[This message, or the result of the given expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]></description>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]></description>
 			<name>requiredMessage</name>
 			<required>false</required>
 			<type>String</type>
@@ -3411,7 +3946,7 @@
 			<type>Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[__DESCRIPTION__]]></description>
+			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
 			<type>Object</type>
@@ -3421,7 +3956,7 @@
 				</method-signature>
 		</attribute>
 		<attribute>
-			<description><![CDATA[__DESCRIPTION__]]></description>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component.]]></description>
 			<name>validatorMessage</name>
 			<required>false</required>
 			<type>String</type>
@@ -3433,7 +3968,7 @@
 			<type>Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[__DESCRIPTION__]]></description>
+			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
 			<type>Object</type>

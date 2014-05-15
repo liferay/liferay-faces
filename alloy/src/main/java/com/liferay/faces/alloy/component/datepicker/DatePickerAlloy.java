@@ -30,7 +30,6 @@ public interface DatePickerAlloy {
 	public static final String AFTER_CALENDAR_CHANGE = "afterCalendarChange";
 	public static final String AFTER_CONTAINER_CHANGE = "afterContainerChange";
 	public static final String AFTER_CONTENT_CHANGE = "afterContentChange";
-	public static final String AFTER_DATE_CLICK = "afterDateClick";
 	public static final String AFTER_DATE_SEPARATOR_CHANGE = "afterDateSeparatorChange";
 	public static final String AFTER_DESTROYED_CHANGE = "afterDestroyedChange";
 	public static final String AFTER_INITIALIZED_CHANGE = "afterInitializedChange";
@@ -58,7 +57,6 @@ public interface DatePickerAlloy {
 	public static final String ON_CALENDAR_CHANGE = "onCalendarChange";
 	public static final String ON_CONTAINER_CHANGE = "onContainerChange";
 	public static final String ON_CONTENT_CHANGE = "onContentChange";
-	public static final String ON_DATE_CLICK = "onDateClick";
 	public static final String ON_DATE_SEPARATOR_CHANGE = "onDateSeparatorChange";
 	public static final String ON_DESTROYED_CHANGE = "onDestroyedChange";
 	public static final String ON_INITIALIZED_CHANGE = "onInitializedChange";
@@ -100,10 +98,6 @@ public interface DatePickerAlloy {
 	public String getAfterContentChange();
 
 	public void setAfterContentChange(String afterContentChange);
-
-	public String getAfterDateClick();
-
-	public void setAfterDateClick(String afterDateClick);
 
 	public String getAfterDateSeparatorChange();
 
@@ -212,10 +206,6 @@ public interface DatePickerAlloy {
 	public String getOnContentChange();
 
 	public void setOnContentChange(String onContentChange);
-
-	public String getOnDateClick();
-
-	public void setOnDateClick(String onDateClick);
 
 	public String getOnDateSeparatorChange();
 
