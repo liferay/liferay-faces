@@ -41,9 +41,6 @@ import com.liferay.faces.util.render.DelegationResponseWriterBase;
  */
 //J+
 
-/**
- * @author  Neil Griffin
- */
 public class StarRatingResponseWriter extends DelegationResponseWriterBase {
 
 	// Public constants.

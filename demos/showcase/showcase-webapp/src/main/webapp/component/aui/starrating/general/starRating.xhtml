@@ -15,7 +15,8 @@
 				<br />
 				<aui:starRating id="starRating" label="#{i18n['favorite']}:"
 					rendered="#{showcaseModelBean.selectedComponent.rendered}"
-					required="#{showcaseModelBean.selectedComponent.required}" value="#{starRatingModelBean.favorite}">
+					required="#{showcaseModelBean.selectedComponent.required}" 
+					value="#{starRatingModelBean.favorite}">
 					<f:selectItem itemLabel="Compatible" itemValue="Compatible" />
 					<f:selectItem itemLabel="Enterprise Ready" itemValue="Enterprise Ready" />
 					<f:selectItem itemLabel="Powerful Integration" itemValue="Powerful Integration" />
@@ -47,7 +48,8 @@
 				<br />
 				<aui:starRating id="starRating" label="#{i18n['favorite']}:"
 					rendered="#{showcaseModelBean.selectedComponent.rendered}"
-					required="#{showcaseModelBean.selectedComponent.required}" value="#{starRatingModelBean.favoriteId}">
+					required="#{showcaseModelBean.selectedComponent.required}" 
+					value="#{starRatingModelBean.favoriteId}">
 					<f:converter converterId="javax.faces.Long" />
 					<f:selectItem itemLabel="Compatible" itemValue="1" />
 					<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
