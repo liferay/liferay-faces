@@ -39,7 +39,6 @@ public abstract class DatePickerRendererBase extends AlloyRendererBase {
 	private static final String CALENDAR_CHANGE = "calendarChange";
 	private static final String CONTAINER_CHANGE = "containerChange";
 	private static final String CONTENT_CHANGE = "contentChange";
-	private static final String DATE_CLICK = "dateClick";
 	private static final String DATE_SEPARATOR_CHANGE = "dateSeparatorChange";
 	private static final String DESTROYED_CHANGE = "destroyedChange";
 	private static final String INITIALIZED_CHANGE = "initializedChange";
@@ -281,14 +280,6 @@ public abstract class DatePickerRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		String afterDateClick = datePickerAlloy.getAfterDateClick();
-
-		if (afterDateClick != null) {
-
-			encodeAfterDateClick(responseWriter, datePickerAlloy, afterDateClick, first);
-			first = false;
-		}
-
 		String afterDateSeparatorChange = datePickerAlloy.getAfterDateSeparatorChange();
 
 		if (afterDateSeparatorChange != null) {
@@ -411,14 +402,6 @@ public abstract class DatePickerRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		String onDateClick = datePickerAlloy.getOnDateClick();
-
-		if (onDateClick != null) {
-
-			encodeOnDateClick(responseWriter, datePickerAlloy, onDateClick, first);
-			first = false;
-		}
-
 		String onDateSeparatorChange = datePickerAlloy.getOnDateSeparatorChange();
 
 		if (onDateSeparatorChange != null) {
@@ -529,10 +512,6 @@ public abstract class DatePickerRendererBase extends AlloyRendererBase {
 		encodeEvent(responseWriter, CONTENT_CHANGE, afterContentChange, first);
 	}
 
-	protected void encodeAfterDateClick(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String afterDateClick, boolean first) throws IOException {
-		encodeEvent(responseWriter, DATE_CLICK, afterDateClick, first);
-	}
-
 	protected void encodeAfterDateSeparatorChange(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String afterDateSeparatorChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, DATE_SEPARATOR_CHANGE, afterDateSeparatorChange, first);
 	}
@@ -639,10 +618,6 @@ public abstract class DatePickerRendererBase extends AlloyRendererBase {
 
 	protected void encodeOnContentChange(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String onContentChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, CONTENT_CHANGE, onContentChange, first);
-	}
-
-	protected void encodeOnDateClick(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String onDateClick, boolean first) throws IOException {
-		encodeEvent(responseWriter, DATE_CLICK, onDateClick, first);
 	}
 
 	protected void encodeOnDateSeparatorChange(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String onDateSeparatorChange, boolean first) throws IOException {

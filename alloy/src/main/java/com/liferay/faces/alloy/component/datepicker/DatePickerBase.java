@@ -88,16 +88,6 @@ public abstract class DatePickerBase extends UIComponentBase implements Styleabl
 	}
 
 	@Override
-	public String getAfterDateClick() {
-		return (String) getStateHelper().eval(AFTER_DATE_CLICK, null);
-	}
-
-	@Override
-	public void setAfterDateClick(String afterDateClick) {
-		getStateHelper().put(AFTER_DATE_CLICK, afterDateClick);
-	}
-
-	@Override
 	public String getAfterDateSeparatorChange() {
 		return (String) getStateHelper().eval(AFTER_DATE_SEPARATOR_CHANGE, null);
 	}
@@ -375,16 +365,6 @@ public abstract class DatePickerBase extends UIComponentBase implements Styleabl
 	@Override
 	public void setOnContentChange(String onContentChange) {
 		getStateHelper().put(ON_CONTENT_CHANGE, onContentChange);
-	}
-
-	@Override
-	public String getOnDateClick() {
-		return (String) getStateHelper().eval(ON_DATE_CLICK, null);
-	}
-
-	@Override
-	public void setOnDateClick(String onDateClick) {
-		getStateHelper().put(ON_DATE_CLICK, onDateClick);
 	}
 
 	@Override

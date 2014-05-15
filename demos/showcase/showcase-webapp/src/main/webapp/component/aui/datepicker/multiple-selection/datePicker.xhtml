@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
 	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-2col.xhtml">
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Example#1: Hold down shift or control to select multiple dates -->
@@ -31,7 +31,7 @@
 				<h:outputText value="#{i18n['aui-datepicker-multiple-selection-example-2']}" />
 			</aui-nongen:field>
 			<aui-nongen:field label="#{i18n['component']}">
-				<h:inputTextarea id="multipleSticky" value="#{datePickerModelBean.multipleSticky}" />
+				<h:inputTextarea id="multipleSticky" value="#{datePickerModelBean.multiple}" />
 				<aui:datePicker for="multipleSticky" selectionMode="multiple-sticky" />
 			</aui-nongen:field>
 			<h:commandButton value="#{i18n['submit']}">
@@ -39,7 +39,7 @@
 			</h:commandButton>
 			<aui-nongen:field label="#{i18n['model-value']}">
 				<showcase:outputModel>
-					<h:outputText value="#{datePickerModelBean.multipleSticky}" />
+					<h:outputText value="#{datePickerModelBean.multiple}" />
 				</showcase:outputModel>
 			</aui-nongen:field>
 		</h:form>

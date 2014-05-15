@@ -85,8 +85,8 @@ public class AlloyRendererUtil {
 		}
 	}
 
-	public static void encodeJavaScriptBegin(FacesContext facesContext, UIComponent uiComponent, String[] modules,
-		boolean ajax, boolean forceInline) throws IOException {
+	public static void encodeJavaScriptBegin(FacesContext facesContext, UIComponent uiComponent,
+		AlloyRenderer alloyRenderer, String[] modules, boolean ajax, boolean forceInline) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
@@ -123,7 +123,7 @@ public class AlloyRendererUtil {
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 			responseWriter.write(YUI);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
-			encodeLang(facesContext, responseWriter, uiComponent);
+			alloyRenderer.encodeLang(facesContext, responseWriter, uiComponent);
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 			responseWriter.write(StringPool.PERIOD);
 			responseWriter.write(USE);
@@ -231,11 +231,6 @@ public class AlloyRendererUtil {
 		// Close Liferay.component parenthesis.
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 		responseWriter.write(StringPool.SEMICOLON);
-	}
-
-	public static void encodeLang(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
-		throws IOException {
-		// no-op
 	}
 
 	public static void encodeLiferayComponent(ResponseWriter responseWriter, String clientKey) throws IOException {
