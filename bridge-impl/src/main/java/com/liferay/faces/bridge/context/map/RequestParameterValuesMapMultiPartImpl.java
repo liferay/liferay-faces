@@ -42,10 +42,7 @@ public class RequestParameterValuesMapMultiPartImpl extends RequestParameterValu
 
 	@Override
 	protected String[] getProperty(String name) {
-		String propertySingleValue = requestParameterMapMultiPartImpl.getProperty(name);
-		String[] propertyValueArray = new String[] { propertySingleValue };
-
-		return propertyValueArray;
+		return requestParameterMapMultiPartImpl.getRequestParameterValues(name);
 	}
 
 	@Override

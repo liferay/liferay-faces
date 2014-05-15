@@ -121,4 +121,6 @@ public abstract class RequestParameterMap extends AbstractPropertyMap<String> {
 	protected abstract String getRequestParameter(String name);
 
 	protected abstract Map<String, String[]> getRequestParameterMap();
+
+	protected abstract String[] getRequestParameterValues(String name);
 }

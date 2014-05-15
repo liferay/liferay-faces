@@ -467,6 +467,11 @@ public class RequestParameterMapMultiPartImpl extends RequestParameterMap {
 		return namespacedParameterMap;
 	}
 
+	@Override
+	protected String[] getRequestParameterValues(String name) {
+		return namespacedParameterMap.get(name);
+	}
+
 	/**
 	 * Since {@link PortletFileUpload#parseRequest(ActionRequest)} only works with {@link ActionRequest}, this adapter
 	 * class is necessary to force commons-fileupload to work with ResourceRequest (Ajax file upload).

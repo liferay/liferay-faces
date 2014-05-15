@@ -229,4 +229,9 @@ public class RequestParameterMapImpl extends RequestParameterMap {
 	protected Map<String, String[]> getRequestParameterMap() {
 		return portletRequest.getParameterMap();
 	}
+
+	@Override
+	protected String[] getRequestParameterValues(String name) {
+		return portletRequest.getParameterValues(name);
+	}
 }
