@@ -45,9 +45,7 @@ public interface DatePickerAlloy {
 	public static final String CONTENT = "content";
 	public static final String DATE_PATTERN = "datePattern";
 	public static final String DATE_SEPARATOR = "dateSeparator";
-	public static final String DESTROYED = "destroyed";
 	public static final String FOR = "for";
-	public static final String INITIALIZED = "initialized";
 	public static final String LOCALE = "locale";
 	public static final String MASK = "mask";
 	public static final String MAXIMUM_DATE = "maximumDate";
@@ -159,17 +157,9 @@ public interface DatePickerAlloy {
 
 	public void setDateSeparator(String dateSeparator);
 
-	public Boolean isDestroyed();
-
-	public void setDestroyed(Boolean destroyed);
-
 	public String getFor();
 
 	public void setFor(String for_);
-
-	public Boolean isInitialized();
-
-	public void setInitialized(Boolean initialized);
 
 	public Object getLocale();
 

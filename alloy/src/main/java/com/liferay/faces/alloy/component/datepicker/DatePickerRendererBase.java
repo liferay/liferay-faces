@@ -114,27 +114,11 @@ public abstract class DatePickerRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		Boolean destroyed = datePickerAlloy.isDestroyed();
-
-		if (destroyed != null) {
-
-			encodeDestroyed(responseWriter, datePickerAlloy, destroyed, first);
-			first = false;
-		}
-
 		String for_ = datePickerAlloy.getFor();
 
 		if (for_ != null) {
 
 			encodeFor(responseWriter, datePickerAlloy, for_, first);
-			first = false;
-		}
-
-		Boolean initialized = datePickerAlloy.isInitialized();
-
-		if (initialized != null) {
-
-			encodeInitialized(responseWriter, datePickerAlloy, initialized, first);
 			first = false;
 		}
 
@@ -572,16 +556,8 @@ public abstract class DatePickerRendererBase extends AlloyRendererBase {
 		encodeString(responseWriter, DatePickerAlloy.DATE_SEPARATOR, dateSeparator, first);
 	}
 
-	protected void encodeDestroyed(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Boolean destroyed, boolean first) throws IOException {
-		encodeBoolean(responseWriter, DatePickerAlloy.DESTROYED, destroyed, first);
-	}
-
 	protected void encodeFor(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String for_, boolean first) throws IOException {
 		encodeString(responseWriter, DatePickerAlloy.FOR, for_, first);
-	}
-
-	protected void encodeInitialized(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Boolean initialized, boolean first) throws IOException {
-		encodeBoolean(responseWriter, DatePickerAlloy.INITIALIZED, initialized, first);
 	}
 
 	protected void encodeLocale(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Object locale, boolean first) throws IOException {

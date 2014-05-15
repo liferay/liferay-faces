@@ -84,27 +84,11 @@ public abstract class AceEditorRendererBase extends DelegatingAlloyRendererBase 
 			first = false;
 		}
 
-		Boolean destroyed = aceEditorAlloy.isDestroyed();
-
-		if (destroyed != null) {
-
-			encodeDestroyed(responseWriter, aceEditorAlloy, destroyed, first);
-			first = false;
-		}
-
 		Boolean disabled = aceEditorAlloy.isDisabled();
 
 		if (disabled != null) {
 
 			encodeDisabled(responseWriter, aceEditorAlloy, disabled, first);
-			first = false;
-		}
-
-		Boolean focused = aceEditorAlloy.isFocused();
-
-		if (focused != null) {
-
-			encodeFocused(responseWriter, aceEditorAlloy, focused, first);
 			first = false;
 		}
 
@@ -121,22 +105,6 @@ public abstract class AceEditorRendererBase extends DelegatingAlloyRendererBase 
 		if (highlightActiveLine != null) {
 
 			encodeHighlightActiveLine(responseWriter, aceEditorAlloy, highlightActiveLine, first);
-			first = false;
-		}
-
-		String id = aceEditorAlloy.getId();
-
-		if (id != null) {
-
-			encodeId(responseWriter, aceEditorAlloy, id, first);
-			first = false;
-		}
-
-		Boolean initialized = aceEditorAlloy.isInitialized();
-
-		if (initialized != null) {
-
-			encodeInitialized(responseWriter, aceEditorAlloy, initialized, first);
 			first = false;
 		}
 
@@ -161,14 +129,6 @@ public abstract class AceEditorRendererBase extends DelegatingAlloyRendererBase 
 		if (readOnly != null) {
 
 			encodeReadOnly(responseWriter, aceEditorAlloy, readOnly, first);
-			first = false;
-		}
-
-		Boolean rendered = aceEditorAlloy.isRendered();
-
-		if (rendered != null) {
-
-			encodeRendered(responseWriter, aceEditorAlloy, rendered, first);
 			first = false;
 		}
 
@@ -241,6 +201,14 @@ public abstract class AceEditorRendererBase extends DelegatingAlloyRendererBase 
 		if (visible != null) {
 
 			encodeVisible(responseWriter, aceEditorAlloy, visible, first);
+			first = false;
+		}
+
+		String widgetId = aceEditorAlloy.getWidgetId();
+
+		if (widgetId != null) {
+
+			encodeWidgetId(responseWriter, aceEditorAlloy, widgetId, first);
 			first = false;
 		}
 
@@ -778,16 +746,8 @@ public abstract class AceEditorRendererBase extends DelegatingAlloyRendererBase 
 		encodeString(responseWriter, AceEditorAlloy.CONTENT_BOX, contentBox, first);
 	}
 
-	protected void encodeDestroyed(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean destroyed, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorAlloy.DESTROYED, destroyed, first);
-	}
-
 	protected void encodeDisabled(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean disabled, boolean first) throws IOException {
 		encodeBoolean(responseWriter, AceEditorAlloy.DISABLED, disabled, first);
-	}
-
-	protected void encodeFocused(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean focused, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorAlloy.FOCUSED, focused, first);
 	}
 
 	protected void encodeHeight(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Object height, boolean first) throws IOException {
@@ -796,14 +756,6 @@ public abstract class AceEditorRendererBase extends DelegatingAlloyRendererBase 
 
 	protected void encodeHighlightActiveLine(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean highlightActiveLine, boolean first) throws IOException {
 		encodeBoolean(responseWriter, AceEditorAlloy.HIGHLIGHT_ACTIVE_LINE, highlightActiveLine, first);
-	}
-
-	protected void encodeId(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String id, boolean first) throws IOException {
-		encodeString(responseWriter, AceEditorAlloy.ID, id, first);
-	}
-
-	protected void encodeInitialized(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean initialized, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorAlloy.INITIALIZED, initialized, first);
 	}
 
 	protected void encodeLocale(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String locale, boolean first) throws IOException {
@@ -914,10 +866,6 @@ public abstract class AceEditorRendererBase extends DelegatingAlloyRendererBase 
 		encodeBoolean(responseWriter, AceEditorAlloy.READ_ONLY, readOnly, first);
 	}
 
-	protected void encodeRendered(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean rendered, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AceEditorAlloy.RENDERED, rendered, first);
-	}
-
 	protected void encodeShowPrintMargin(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean showPrintMargin, boolean first) throws IOException {
 		encodeBoolean(responseWriter, AceEditorAlloy.SHOW_PRINT_MARGIN, showPrintMargin, first);
 	}
@@ -952,6 +900,10 @@ public abstract class AceEditorRendererBase extends DelegatingAlloyRendererBase 
 
 	protected void encodeVisible(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean visible, boolean first) throws IOException {
 		encodeBoolean(responseWriter, AceEditorAlloy.VISIBLE, visible, first);
+	}
+
+	protected void encodeWidgetId(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, String widgetId, boolean first) throws IOException {
+		encodeString(responseWriter, AceEditorAlloy.WIDGET_ID, widgetId, first);
 	}
 
 	protected void encodeWidgetRender(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Boolean widgetRender, boolean first) throws IOException {
