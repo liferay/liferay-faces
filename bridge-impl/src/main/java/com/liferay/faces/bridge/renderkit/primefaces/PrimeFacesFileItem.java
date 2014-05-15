@@ -21,6 +21,7 @@ import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemHeaders;
 
 import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.util.lang.StringPool;
@@ -41,6 +42,7 @@ public class PrimeFacesFileItem implements FileItem {
 
 	// Private Data Members
 	private String clientId;
+	private FileItemHeaders fileItemHeaders;
 	private UploadedFile uploadedFile;
 
 	public PrimeFacesFileItem(String clientId, UploadedFile uploadedFile) {
@@ -145,6 +147,16 @@ public class PrimeFacesFileItem implements FileItem {
 
 	public boolean isInMemory() {
 		return false;
+	}
+
+	@Override
+	public FileItemHeaders getHeaders() {
+		return fileItemHeaders;
+	}
+
+	@Override
+	public void setHeaders(FileItemHeaders fileItemHeaders) {
+		this.fileItemHeaders = fileItemHeaders;
 	}
 
 }
