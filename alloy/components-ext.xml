@@ -337,8 +337,8 @@
 			<!-- /h:button attributes -->
 		</attributes>
 	</component>
-	<component name="CharCounter" preferredName="outputRemainingChars" parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" 
-		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase" >
+	<component name="CharCounter" preferredName="OutputRemainingChars" parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" 
+		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase" extends="OutputText" >
 		<description>
 			<![CDATA[CharCounter is an OutputText component that displays the number of allowed characters remaining for a given text input, and limits the number of characters allowed in the input.  Renders as HtmlOutputText renders, so this tag will optionally render a span when i18n or style attributes used.]]>
 		</description>
@@ -380,19 +380,6 @@
 				</description>
 				<name>onceMaxlengthReached</name>
 				<type>java.lang.String</type>
-			</attribute>
-			<!-- Attributes that default to jsfReservedAttribute=true -->
-			<attribute>
-				<description><![CDATA[A unique identifier for this component.]]></description>
-				<name>id</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When false, this component will not be rendered.  The default value of this attribute is true.]]>
-				</description>
-				<name>rendered</name>
-				<type>java.lang.Boolean</type>
 			</attribute>
 		</attributes>
 	</component>
@@ -1194,12 +1181,28 @@
             	<type>java.lang.String</type>
 				<generateJava>false</generateJava>
         	</attribute>
+        	<attribute>
+				<description>
+					<![CDATA[A unique identifier for this component.]]>
+				</description>
+				<name>id</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[__DESCRIPTION__]]>
 				</description>
 				<name>lang</name>
 				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]>
+				</description>
+				<name>rendered</name>
+				<type>boolean</type>
 				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
@@ -1223,12 +1226,12 @@
 					<![CDATA[This value is used to generate markup used to render the number of remaining characters allowed in the given text input. e.g.: value="There are {0} character(s) remaining."]]>
 				</description>
 				<name>value</name>
-				<type>java.lang.String</type>
+				<type>java.lang.Object</type>
 				<generateJava>false</generateJava>
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Popover" parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" >
+	<component name="Popover" parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" extends="OutputText" >
 		<description>
 			<![CDATA[Popover is an OutputText component that displays a header and a footer for a given target.  Renders as HtmlOutputText renders, so this tag will optionally render a span when i18n or style attributes used.]]>
 		</description>
@@ -1260,26 +1263,6 @@
 			</attribute>
 			<!-- Attributes that were invented here to implement Alloy methods -->
 			<!-- Attributes that were invented here to implement Alloy modules -->
-			<attribute>
-				<description>
-					<![CDATA[When true, will add a fadeIn and fadeOut animation.  The default is false.]]>
-				</description>
-				<name>animate</name>
-				<type>java.lang.Boolean</type>
-			</attribute>
-			<!-- Attributes that default to jsfReservedAttribute=true -->
-			<attribute>
-				<description><![CDATA[A unique identifier for this component.]]></description>
-				<name>id</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When false, this component will not be rendered.  The default value of this attribute is true.]]>
-				</description>
-				<name>rendered</name>
-				<type>java.lang.Boolean</type>
-			</attribute>
 		</attributes>
 	</component>
 	<component name="Tab" parentClass="javax.faces.component.UIColumn">

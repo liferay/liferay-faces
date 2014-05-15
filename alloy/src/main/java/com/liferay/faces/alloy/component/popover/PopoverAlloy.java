@@ -63,24 +63,19 @@ public interface PopoverAlloy {
 	public static final String AFTER_ZINDEX_CHANGE = "afterZIndexChange";
 	public static final String ALIGN = "align";
 	public static final String ALIGN_ON = "alignOn";
-	public static final String ANIMATE = "animate";
 	public static final String BODY_CONTENT = "bodyContent";
 	public static final String BOUNDING_BOX = "boundingBox";
 	public static final String CENTERED = "centered";
 	public static final String CONSTRAIN = "constrain";
 	public static final String CONTENT_BOX = "contentBox";
-	public static final String DESTROYED = "destroyed";
 	public static final String DISABLED = "disabled";
 	public static final String FILL_HEIGHT = "fillHeight";
 	public static final String FOCUS_ON = "focusOn";
-	public static final String FOCUSED = "focused";
 	public static final String FOOTER_CONTENT = "footerContent";
 	public static final String FOR = "for";
 	public static final String HEADER_CONTENT = "headerContent";
 	public static final String HEIGHT = "height";
 	public static final String HIDE_ON = "hideOn";
-	public static final String ID = "id";
-	public static final String INITIALIZED = "initialized";
 	public static final String LOCALE = "locale";
 	public static final String MASK_NODE = "maskNode";
 	public static final String MODAL = "modal";
@@ -124,7 +119,6 @@ public interface PopoverAlloy {
 	public static final String PLUGINS = "plugins";
 	public static final String POSITION = "position";
 	public static final String PREVENT_OVERLAP = "preventOverlap";
-	public static final String RENDERED = "rendered";
 	public static final String SHIM = "shim";
 	public static final String SRC_NODE = "srcNode";
 	public static final String STRINGS = "strings";
@@ -133,6 +127,7 @@ public interface PopoverAlloy {
 	public static final String TOOLBARS = "toolbars";
 	public static final String TRIGGER_TOGGLE_EVENT = "triggerToggleEvent";
 	public static final String VISIBLE = "visible";
+	public static final String WIDGET_ID = "id";
 	public static final String WIDGET_RENDER = "render";
 	public static final String WIDTH = "width";
 	public static final String X = "x";
@@ -296,10 +291,6 @@ public interface PopoverAlloy {
 
 	public void setAlignOn(Object alignOn);
 
-	public Boolean isAnimate();
-
-	public void setAnimate(Boolean animate);
-
 	public String getBodyContent();
 
 	public void setBodyContent(String bodyContent);
@@ -320,10 +311,6 @@ public interface PopoverAlloy {
 
 	public void setContentBox(String contentBox);
 
-	public Boolean isDestroyed();
-
-	public void setDestroyed(Boolean destroyed);
-
 	public Boolean isDisabled();
 
 	public void setDisabled(Boolean disabled);
@@ -331,10 +318,6 @@ public interface PopoverAlloy {
 	public String getFillHeight();
 
 	public void setFillHeight(String fillHeight);
-
-	public Boolean isFocused();
-
-	public void setFocused(Boolean focused);
 
 	public Object getFocusOn();
 
@@ -359,14 +342,6 @@ public interface PopoverAlloy {
 	public Object getHideOn();
 
 	public void setHideOn(Object hideOn);
-
-	public String getId();
-
-	public void setId(String id);
-
-	public Boolean isInitialized();
-
-	public void setInitialized(Boolean initialized);
 
 	public String getLocale();
 
@@ -540,10 +515,6 @@ public interface PopoverAlloy {
 
 	public void setPreventOverlap(Boolean preventOverlap);
 
-	public boolean isRendered();
-
-	public void setRendered(boolean rendered);
-
 	public Boolean isShim();
 
 	public void setShim(Boolean shim);
@@ -575,6 +546,10 @@ public interface PopoverAlloy {
 	public Boolean isVisible();
 
 	public void setVisible(Boolean visible);
+
+	public String getWidgetId();
+
+	public void setWidgetId(String widgetId);
 
 	public Boolean isWidgetRender();
 

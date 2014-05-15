@@ -418,16 +418,6 @@ public abstract class PopoverBase extends OutputText implements Styleable, Clien
 	}
 
 	@Override
-	public Boolean isAnimate() {
-		return (Boolean) getStateHelper().eval(ANIMATE, null);
-	}
-
-	@Override
-	public void setAnimate(Boolean animate) {
-		getStateHelper().put(ANIMATE, animate);
-	}
-
-	@Override
 	public String getBodyContent() {
 		return (String) getStateHelper().eval(BODY_CONTENT, null);
 	}
@@ -488,16 +478,6 @@ public abstract class PopoverBase extends OutputText implements Styleable, Clien
 	}
 
 	@Override
-	public Boolean isDestroyed() {
-		return (Boolean) getStateHelper().eval(DESTROYED, null);
-	}
-
-	@Override
-	public void setDestroyed(Boolean destroyed) {
-		getStateHelper().put(DESTROYED, destroyed);
-	}
-
-	@Override
 	public Boolean isDisabled() {
 		return (Boolean) getStateHelper().eval(DISABLED, null);
 	}
@@ -515,16 +495,6 @@ public abstract class PopoverBase extends OutputText implements Styleable, Clien
 	@Override
 	public void setFillHeight(String fillHeight) {
 		getStateHelper().put(FILL_HEIGHT, fillHeight);
-	}
-
-	@Override
-	public Boolean isFocused() {
-		return (Boolean) getStateHelper().eval(FOCUSED, null);
-	}
-
-	@Override
-	public void setFocused(Boolean focused) {
-		getStateHelper().put(FOCUSED, focused);
 	}
 
 	@Override
@@ -585,16 +555,6 @@ public abstract class PopoverBase extends OutputText implements Styleable, Clien
 	@Override
 	public void setHideOn(Object hideOn) {
 		getStateHelper().put(HIDE_ON, hideOn);
-	}
-
-	@Override
-	public Boolean isInitialized() {
-		return (Boolean) getStateHelper().eval(INITIALIZED, null);
-	}
-
-	@Override
-	public void setInitialized(Boolean initialized) {
-		getStateHelper().put(INITIALIZED, initialized);
 	}
 
 	@Override
@@ -1125,6 +1085,16 @@ public abstract class PopoverBase extends OutputText implements Styleable, Clien
 	@Override
 	public void setVisible(Boolean visible) {
 		getStateHelper().put(VISIBLE, visible);
+	}
+
+	@Override
+	public String getWidgetId() {
+		return (String) getStateHelper().eval(WIDGET_ID, null);
+	}
+
+	@Override
+	public void setWidgetId(String widgetId) {
+		getStateHelper().put(WIDGET_ID, widgetId);
 	}
 
 	@Override

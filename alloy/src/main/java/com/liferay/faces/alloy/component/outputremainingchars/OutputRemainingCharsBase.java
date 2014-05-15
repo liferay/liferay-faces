@@ -98,16 +98,6 @@ public abstract class OutputRemainingCharsBase extends OutputText implements Sty
 	}
 
 	@Override
-	public Boolean isDestroyed() {
-		return (Boolean) getStateHelper().eval(DESTROYED, null);
-	}
-
-	@Override
-	public void setDestroyed(Boolean destroyed) {
-		getStateHelper().put(DESTROYED, destroyed);
-	}
-
-	@Override
 	public String getFor() {
 		return (String) getStateHelper().eval(FOR, null);
 	}
@@ -115,16 +105,6 @@ public abstract class OutputRemainingCharsBase extends OutputText implements Sty
 	@Override
 	public void setFor(String for_) {
 		getStateHelper().put(FOR, for_);
-	}
-
-	@Override
-	public Boolean isInitialized() {
-		return (Boolean) getStateHelper().eval(INITIALIZED, null);
-	}
-
-	@Override
-	public void setInitialized(Boolean initialized) {
-		getStateHelper().put(INITIALIZED, initialized);
 	}
 
 	@Override

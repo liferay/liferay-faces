@@ -40,13 +40,6 @@ import com.liferay.faces.util.lang.StringPool;
 public class PopoverRenderer extends PopoverRendererBase {
 	
 	@Override
-	protected void encodeAnimate(ResponseWriter responseWriter,
-			PopoverAlloy popoverAlloy, Boolean animate, boolean first)
-			throws IOException {
-		// no-op
-	}
-	
-	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 		// no-op
 	}

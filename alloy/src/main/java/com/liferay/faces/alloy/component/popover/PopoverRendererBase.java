@@ -97,14 +97,6 @@ public abstract class PopoverRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		Boolean animate = popoverAlloy.isAnimate();
-
-		if (animate != null) {
-
-			encodeAnimate(responseWriter, popoverAlloy, animate, first);
-			first = false;
-		}
-
 		String bodyContent = popoverAlloy.getBodyContent();
 
 		if (bodyContent != null) {
@@ -145,14 +137,6 @@ public abstract class PopoverRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		Boolean destroyed = popoverAlloy.isDestroyed();
-
-		if (destroyed != null) {
-
-			encodeDestroyed(responseWriter, popoverAlloy, destroyed, first);
-			first = false;
-		}
-
 		Boolean disabled = popoverAlloy.isDisabled();
 
 		if (disabled != null) {
@@ -166,14 +150,6 @@ public abstract class PopoverRendererBase extends AlloyRendererBase {
 		if (fillHeight != null) {
 
 			encodeFillHeight(responseWriter, popoverAlloy, fillHeight, first);
-			first = false;
-		}
-
-		Boolean focused = popoverAlloy.isFocused();
-
-		if (focused != null) {
-
-			encodeFocused(responseWriter, popoverAlloy, focused, first);
 			first = false;
 		}
 
@@ -225,22 +201,6 @@ public abstract class PopoverRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		String id = popoverAlloy.getId();
-
-		if (id != null) {
-
-			encodeId(responseWriter, popoverAlloy, id, first);
-			first = false;
-		}
-
-		Boolean initialized = popoverAlloy.isInitialized();
-
-		if (initialized != null) {
-
-			encodeInitialized(responseWriter, popoverAlloy, initialized, first);
-			first = false;
-		}
-
 		String locale = popoverAlloy.getLocale();
 
 		if (locale != null) {
@@ -286,14 +246,6 @@ public abstract class PopoverRendererBase extends AlloyRendererBase {
 		if (preventOverlap != null) {
 
 			encodePreventOverlap(responseWriter, popoverAlloy, preventOverlap, first);
-			first = false;
-		}
-
-		Boolean rendered = popoverAlloy.isRendered();
-
-		if (rendered != null) {
-
-			encodeRendered(responseWriter, popoverAlloy, rendered, first);
 			first = false;
 		}
 
@@ -358,6 +310,14 @@ public abstract class PopoverRendererBase extends AlloyRendererBase {
 		if (visible != null) {
 
 			encodeVisible(responseWriter, popoverAlloy, visible, first);
+			first = false;
+		}
+
+		String widgetId = popoverAlloy.getWidgetId();
+
+		if (widgetId != null) {
+
+			encodeWidgetId(responseWriter, popoverAlloy, widgetId, first);
 			first = false;
 		}
 
@@ -1187,10 +1147,6 @@ public abstract class PopoverRendererBase extends AlloyRendererBase {
 		encodeArray(responseWriter, PopoverAlloy.ALIGN_ON, alignOn, first);
 	}
 
-	protected void encodeAnimate(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, Boolean animate, boolean first) throws IOException {
-		encodeBoolean(responseWriter, PopoverAlloy.ANIMATE, animate, first);
-	}
-
 	protected void encodeBodyContent(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, String bodyContent, boolean first) throws IOException {
 		encodeString(responseWriter, PopoverAlloy.BODY_CONTENT, bodyContent, first);
 	}
@@ -1211,20 +1167,12 @@ public abstract class PopoverRendererBase extends AlloyRendererBase {
 		encodeString(responseWriter, PopoverAlloy.CONTENT_BOX, contentBox, first);
 	}
 
-	protected void encodeDestroyed(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, Boolean destroyed, boolean first) throws IOException {
-		encodeBoolean(responseWriter, PopoverAlloy.DESTROYED, destroyed, first);
-	}
-
 	protected void encodeDisabled(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, Boolean disabled, boolean first) throws IOException {
 		encodeBoolean(responseWriter, PopoverAlloy.DISABLED, disabled, first);
 	}
 
 	protected void encodeFillHeight(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, String fillHeight, boolean first) throws IOException {
 		encodeString(responseWriter, PopoverAlloy.FILL_HEIGHT, fillHeight, first);
-	}
-
-	protected void encodeFocused(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, Boolean focused, boolean first) throws IOException {
-		encodeBoolean(responseWriter, PopoverAlloy.FOCUSED, focused, first);
 	}
 
 	protected void encodeFocusOn(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, Object focusOn, boolean first) throws IOException {
@@ -1249,14 +1197,6 @@ public abstract class PopoverRendererBase extends AlloyRendererBase {
 
 	protected void encodeHideOn(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, Object hideOn, boolean first) throws IOException {
 		encodeArray(responseWriter, PopoverAlloy.HIDE_ON, hideOn, first);
-	}
-
-	protected void encodeId(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, String id, boolean first) throws IOException {
-		encodeString(responseWriter, PopoverAlloy.ID, id, first);
-	}
-
-	protected void encodeInitialized(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, Boolean initialized, boolean first) throws IOException {
-		encodeBoolean(responseWriter, PopoverAlloy.INITIALIZED, initialized, first);
 	}
 
 	protected void encodeLocale(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, String locale, boolean first) throws IOException {
@@ -1431,10 +1371,6 @@ public abstract class PopoverRendererBase extends AlloyRendererBase {
 		encodeBoolean(responseWriter, PopoverAlloy.PREVENT_OVERLAP, preventOverlap, first);
 	}
 
-	protected void encodeRendered(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, Boolean rendered, boolean first) throws IOException {
-		encodeBoolean(responseWriter, PopoverAlloy.RENDERED, rendered, first);
-	}
-
 	protected void encodeShim(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, Boolean shim, boolean first) throws IOException {
 		encodeBoolean(responseWriter, PopoverAlloy.SHIM, shim, first);
 	}
@@ -1465,6 +1401,10 @@ public abstract class PopoverRendererBase extends AlloyRendererBase {
 
 	protected void encodeVisible(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, Boolean visible, boolean first) throws IOException {
 		encodeBoolean(responseWriter, PopoverAlloy.VISIBLE, visible, first);
+	}
+
+	protected void encodeWidgetId(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, String widgetId, boolean first) throws IOException {
+		encodeString(responseWriter, PopoverAlloy.WIDGET_ID, widgetId, first);
 	}
 
 	protected void encodeWidgetRender(ResponseWriter responseWriter, PopoverAlloy popoverAlloy, Boolean widgetRender, boolean first) throws IOException {

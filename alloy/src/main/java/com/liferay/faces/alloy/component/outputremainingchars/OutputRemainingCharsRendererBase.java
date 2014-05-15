@@ -57,35 +57,11 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 			first = false;
 		}
 
-		Boolean destroyed = outputRemainingCharsAlloy.isDestroyed();
-
-		if (destroyed != null) {
-
-			encodeDestroyed(responseWriter, outputRemainingCharsAlloy, destroyed, first);
-			first = false;
-		}
-
 		String for_ = outputRemainingCharsAlloy.getFor();
 
 		if (for_ != null) {
 
 			encodeFor(responseWriter, outputRemainingCharsAlloy, for_, first);
-			first = false;
-		}
-
-		String id = outputRemainingCharsAlloy.getId();
-
-		if (id != null) {
-
-			encodeId(responseWriter, outputRemainingCharsAlloy, id, first);
-			first = false;
-		}
-
-		Boolean initialized = outputRemainingCharsAlloy.isInitialized();
-
-		if (initialized != null) {
-
-			encodeInitialized(responseWriter, outputRemainingCharsAlloy, initialized, first);
 			first = false;
 		}
 
@@ -118,14 +94,6 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 		if (onMaxlengthReached != null) {
 
 			encodeOnMaxlengthReached(responseWriter, outputRemainingCharsAlloy, onMaxlengthReached, first);
-			first = false;
-		}
-
-		Boolean rendered = outputRemainingCharsAlloy.isRendered();
-
-		if (rendered != null) {
-
-			encodeRendered(responseWriter, outputRemainingCharsAlloy, rendered, first);
 			first = false;
 		}
 
@@ -263,20 +231,8 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 		encodeString(responseWriter, OutputRemainingCharsAlloy.COUNTER, counter, first);
 	}
 
-	protected void encodeDestroyed(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, Boolean destroyed, boolean first) throws IOException {
-		encodeBoolean(responseWriter, OutputRemainingCharsAlloy.DESTROYED, destroyed, first);
-	}
-
 	protected void encodeFor(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String for_, boolean first) throws IOException {
 		encodeString(responseWriter, OutputRemainingCharsAlloy.FOR, for_, first);
-	}
-
-	protected void encodeId(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String id, boolean first) throws IOException {
-		encodeString(responseWriter, OutputRemainingCharsAlloy.ID, id, first);
-	}
-
-	protected void encodeInitialized(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, Boolean initialized, boolean first) throws IOException {
-		encodeBoolean(responseWriter, OutputRemainingCharsAlloy.INITIALIZED, initialized, first);
 	}
 
 	protected void encodeInput(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String input, boolean first) throws IOException {
@@ -313,10 +269,6 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 
 	protected void encodeOnMaxlengthReached(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String onMaxlengthReached, boolean first) throws IOException {
 		encodeString(responseWriter, OutputRemainingCharsAlloy.ON_MAXLENGTH_REACHED, onMaxlengthReached, first);
-	}
-
-	protected void encodeRendered(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, Boolean rendered, boolean first) throws IOException {
-		encodeBoolean(responseWriter, OutputRemainingCharsAlloy.RENDERED, rendered, first);
 	}
 }
 //J+

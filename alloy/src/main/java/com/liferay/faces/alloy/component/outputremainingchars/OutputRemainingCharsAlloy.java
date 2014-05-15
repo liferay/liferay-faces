@@ -30,10 +30,7 @@ public interface OutputRemainingCharsAlloy {
 	public static final String AFTER_INPUT_CHANGE = "afterInputChange";
 	public static final String AFTER_MAX_LENGTH_CHANGE = "afterMaxLengthChange";
 	public static final String COUNTER = "counter";
-	public static final String DESTROYED = "destroyed";
 	public static final String FOR = "for";
-	public static final String ID = "id";
-	public static final String INITIALIZED = "initialized";
 	public static final String INPUT = "input";
 	public static final String MAX_LENGTH = "maxLength";
 	public static final String ON_COUNTER_CHANGE = "onCounterChange";
@@ -43,7 +40,6 @@ public interface OutputRemainingCharsAlloy {
 	public static final String ON_MAX_LENGTH_CHANGE = "onMaxLengthChange";
 	public static final String ON_MAXLENGTH_REACHED = "onMaxlengthReached";
 	public static final String ONCE_MAXLENGTH_REACHED = "onceMaxlengthReached";
-	public static final String RENDERED = "rendered";
 
 	public String getAfterCounterChange();
 
@@ -69,21 +65,9 @@ public interface OutputRemainingCharsAlloy {
 
 	public void setCounter(String counter);
 
-	public Boolean isDestroyed();
-
-	public void setDestroyed(Boolean destroyed);
-
 	public String getFor();
 
 	public void setFor(String for_);
-
-	public String getId();
-
-	public void setId(String id);
-
-	public Boolean isInitialized();
-
-	public void setInitialized(Boolean initialized);
 
 	public String getInput();
 
@@ -120,9 +104,5 @@ public interface OutputRemainingCharsAlloy {
 	public String getOnMaxlengthReached();
 
 	public void setOnMaxlengthReached(String onMaxlengthReached);
-
-	public boolean isRendered();
-
-	public void setRendered(boolean rendered);
 }
 //J+
