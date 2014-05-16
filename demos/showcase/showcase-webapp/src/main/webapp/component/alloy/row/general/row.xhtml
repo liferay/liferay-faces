@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form>
+		<showcase:example renderedCheckbox="true">
+			<alloy:row rendered="#{showcaseModelBean.selectedComponent.rendered}">
+				<alloy:column width="33">
+					<h:outputText value="#{i18n['this-is-column-1']}" />
+				</alloy:column>
+				<alloy:column width="33">
+					<h:outputText value="#{i18n['this-is-column-2']}" />
+				</alloy:column>
+				<alloy:column width="33">
+					<h:outputText value="#{i18n['this-is-column-3']}" />
+				</alloy:column>
+			</alloy:row>
+		</showcase:example>
+	</h:form>
+
+</ui:composition>
