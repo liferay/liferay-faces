@@ -21,7 +21,6 @@ import java.util.Set;
 import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.BridgeConstants;
-import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -31,7 +30,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
  *
  * @author  Neil Griffin
  */
-public class FacesViewParameterMap extends HashMap<String, String> {
+public class FacesViewParameterMap extends HashMap<String, String> implements Map<String, String> {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 3213871316191406286L;
@@ -49,9 +48,7 @@ public class FacesViewParameterMap extends HashMap<String, String> {
 		excludedParameterNames.add(Bridge.PORTLET_WINDOWSTATE_PARAMETER);
 	}
 
-	public FacesViewParameterMap(BridgeContext bridgeContext) {
-
-		String facesViewQueryString = bridgeContext.getFacesViewQueryString();
+	public FacesViewParameterMap(String facesViewQueryString) {
 
 		if ((facesViewQueryString != null) && (facesViewQueryString.length() > 0)) {
 
