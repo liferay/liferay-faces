@@ -99,6 +99,16 @@ public enum PortletConfigParam implements ConfigParam<PortletConfig> {
 	ResourceBufferSize("com.liferay.faces.bridge.resourceBufferSize", "org.portletfaces.bridge.resourceBufferSize",
 		1024),
 
+	/**
+	 * Absolute path to a directory (folder) in which the uploaded file data should be written to. Default value is the
+	 * value of the system property "java.io.tmpdir".
+	 */
+	UploadedFilesDir("com.liferay.faces.bridge.uploadedFilesDir", "javax.faces.UPLOADED_FILES_DIR",
+		System.getProperty("java.io.tmpdir")),
+
+	/** Maximum file size for an uploaded file. Default is 104857600 bytes (100MB) */
+	UploadedFileMaxSize("com.liferay.faces.bridge.uploadedFileMaxSize", "javax.faces.UPLOADED_FILE_MAX_SIZE", 104857600),
+
 	/** Name of the render parameter used to encode the viewId. Default value is "_facesViewIdRender". */
 	ViewIdRenderParameterName("com.liferay.faces.bridge.viewIdRenderParameterName", "_facesViewIdRender"),
 
