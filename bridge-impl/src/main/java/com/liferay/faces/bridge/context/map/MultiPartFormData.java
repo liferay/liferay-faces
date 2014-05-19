@@ -13,27 +13,21 @@
  */
 package com.liferay.faces.bridge.context.map;
 
-import com.liferay.faces.util.map.AbstractPropertyMapEntry;
+import java.util.Collection;
+import java.util.Map;
+
+import com.liferay.faces.bridge.model.UploadedFile;
 
 
 /**
+ * This interface represents a composition of request parameters and uploaded files submitted by an HTML form with
+ * enctype="multipart/form-data".
+ *
  * @author  Neil Griffin
  */
-public class RequestParameterMapEntryMultiPart extends AbstractPropertyMapEntry<String> {
+public interface MultiPartFormData {
 
-	private NamespacedParameterMap namespacedParameterMap;
+	public FacesRequestParameterMap getFacesRequestParameterMap();
 
-	public RequestParameterMapEntryMultiPart(String key, NamespacedParameterMap namespacedParameterMap) {
-		super(key);
-		this.namespacedParameterMap = namespacedParameterMap;
-	}
-
-	public String getValue() {
-		return namespacedParameterMap.getFirst(getKey());
-	}
-
-	public String setValue(String value) {
-		throw new UnsupportedOperationException();
-	}
-
+	public Map<String, Collection<UploadedFile>> getUploadedFileMap();
 }

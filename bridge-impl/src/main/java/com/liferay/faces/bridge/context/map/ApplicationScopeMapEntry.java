@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.bridge.context.map;
 
-import javax.portlet.PortletRequest;
+import javax.portlet.PortletContext;
 
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
@@ -21,27 +21,22 @@ import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 /**
  * @author  Neil Griffin
  */
-public class RequestAttributeMapEntry extends AbstractPropertyMapEntry<Object> {
+public class ApplicationScopeMapEntry extends AbstractPropertyMapEntry<Object> {
 
-	private PortletRequest portletRequest;
+	private PortletContext portletContext;
 
-	public RequestAttributeMapEntry(PortletRequest portletRequest, String key) {
+	public ApplicationScopeMapEntry(PortletContext portletContext, String key) {
 		super(key);
-		this.portletRequest = portletRequest;
-	}
-
-	@Override
-	public void remove() {
-		portletRequest.removeAttribute(getKey());
+		this.portletContext = portletContext;
 	}
 
 	public Object getValue() {
-		return portletRequest.getAttribute(getKey());
+		return portletContext.getAttribute(getKey());
 	}
 
 	public Object setValue(Object value) {
 		Object oldValue = getValue();
-		portletRequest.setAttribute(getKey(), value);
+		portletContext.setAttribute(getKey(), value);
 
 		return oldValue;
 	}

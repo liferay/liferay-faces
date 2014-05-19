@@ -21,18 +21,19 @@ import java.io.RandomAccessFile;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.FacesEvent;
 import javax.faces.render.Renderer;
 import javax.faces.render.RendererWrapper;
 
-import com.liferay.faces.bridge.context.map.RequestParameterMap;
+import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.context.map.ContextMapFactory;
 import com.liferay.faces.bridge.model.UploadedFile;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -69,23 +70,21 @@ public class FileUploadRendererRichFacesImpl extends RendererWrapper {
 
 		try {
 
-			String clientId = uiComponent.getClientId(facesContext);
-			ExternalContext externalContext = facesContext.getExternalContext();
-
 			// Get the UploadedFile from the request attribute map.
-			Map<String, Object> requestAttributeMap = externalContext.getRequestMap();
-			@SuppressWarnings("unchecked")
-			Map<String, List<UploadedFile>> uploadedFilesMap = (Map<String, List<UploadedFile>>)
-				requestAttributeMap.get(RequestParameterMap.PARAM_UPLOADED_FILES);
+			ContextMapFactory contextMapFactory = (ContextMapFactory) FactoryExtensionFinder.getFactory(
+					ContextMapFactory.class);
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			Map<String, Collection<UploadedFile>> uploadedFileMap = contextMapFactory.getUploadedFileMap(bridgeContext);
 
-			if (uploadedFilesMap != null) {
+			if (uploadedFileMap != null) {
 
 				// Use reflection to create a dynamic proxy class that implements the RichFaces UploadedFile interface.
 				Class<?> uploadedFileInterface = Class.forName(RICHFACES_UPLOADED_FILE_FQCN);
 				Class<?> fileUploadEventClass = Class.forName(RICHFACES_FILE_UPLOAD_EVENT_FQCN);
 				ClassLoader classLoader = uploadedFileInterface.getClassLoader();
 
-				List<UploadedFile> uploadedFiles = uploadedFilesMap.get(clientId);
+				String clientId = uiComponent.getClientId(facesContext);
+				Collection<UploadedFile> uploadedFiles = uploadedFileMap.get(clientId);
 
 				if (uploadedFiles != null) {
 

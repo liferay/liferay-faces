@@ -14,7 +14,7 @@
 package com.liferay.faces.bridge.renderkit.primefaces;
 
 import java.lang.reflect.Constructor;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
@@ -28,8 +28,10 @@ import javax.faces.render.RendererWrapper;
 import org.apache.commons.fileupload.FileItem;
 
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
-import com.liferay.faces.bridge.context.map.RequestParameterMap;
+import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.context.map.ContextMapFactory;
 import com.liferay.faces.bridge.model.UploadedFile;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -74,11 +76,13 @@ public class FileUploadRendererPrimeFacesImpl extends RendererWrapper {
 			if (submittedValue != null) {
 
 				// Get the UploadedFile from the request attribute map.
-				Map<String, Object> requestAttributeMap = externalContext.getRequestMap();
-				@SuppressWarnings("unchecked")
-				Map<String, List<UploadedFile>> facesFileMap = (Map<String, List<UploadedFile>>)
-					requestAttributeMap.get(RequestParameterMap.PARAM_UPLOADED_FILES);
-				List<UploadedFile> uploadedFiles = facesFileMap.get(clientId);
+				ContextMapFactory contextMapFactory = (ContextMapFactory) FactoryExtensionFinder.getFactory(
+						ContextMapFactory.class);
+				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+				Map<String, Collection<UploadedFile>> uploadedFileMap = contextMapFactory.getUploadedFileMap(
+						bridgeContext);
+
+				Collection<UploadedFile> uploadedFiles = uploadedFileMap.get(clientId);
 
 				if (uploadedFiles != null) {
 

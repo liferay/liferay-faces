@@ -14,20 +14,21 @@
 package com.liferay.faces.bridge.renderkit.bridge;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.convert.ConverterException;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.bridge.component.HtmlInputFile;
-import com.liferay.faces.bridge.context.map.RequestParameterMap;
+import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.context.map.ContextMapFactory;
 import com.liferay.faces.bridge.event.FileUploadEvent;
 import com.liferay.faces.bridge.model.UploadedFile;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -38,33 +39,40 @@ public class InputFileRenderer extends Renderer {
 
 	@Override
 	public void decode(FacesContext facesContext, UIComponent uiComponent) {
+
 		super.decode(facesContext, uiComponent);
 
-		String clientId = uiComponent.getClientId(facesContext);
-		ExternalContext externalContext = facesContext.getExternalContext();
-		Map<String, Object> requestAttributeMap = externalContext.getRequestMap();
-		@SuppressWarnings("unchecked")
-		Map<String, List<UploadedFile>> uploadedFilesMap = (Map<String, List<UploadedFile>>) requestAttributeMap.get(
-				RequestParameterMap.PARAM_UPLOADED_FILES);
+		ContextMapFactory contextMapFactory = (ContextMapFactory) FactoryExtensionFinder.getFactory(
+				ContextMapFactory.class);
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+		Map<String, Collection<UploadedFile>> uploadedFileMap = contextMapFactory.getUploadedFileMap(bridgeContext);
 
-		if (uploadedFilesMap != null) {
+		if (uploadedFileMap != null) {
 
-			List<UploadedFile> uploadedFiles = uploadedFilesMap.get(clientId);
+			String clientId = uiComponent.getClientId(facesContext);
+			Collection<UploadedFile> uploadedFiles = uploadedFileMap.get(clientId);
 
 			if ((uploadedFiles != null) && (uploadedFiles.size() > 0)) {
 
 				HtmlInputFile htmlInputFile = (HtmlInputFile) uiComponent;
 
-				// Support legacy feature that is used in conjunction with the binding attribute.
-				htmlInputFile.setUploadedFile(uploadedFiles.get(0));
-
 				htmlInputFile.setSubmittedValue(uploadedFiles);
 
-				// Queue the FileUploadEventso that each uploaded file can be handled individually with an
+				// Queue the FileUploadEvent so that each uploaded file can be handled individually with an
 				// ActionListener.
+				int i = 0;
+
 				for (UploadedFile uploadedFile : uploadedFiles) {
+
+					if (i == 0) {
+
+						// Support legacy feature that is used in conjunction with the binding attribute.
+						htmlInputFile.setUploadedFile(uploadedFile);
+					}
+
 					FileUploadEvent fileUploadEvent = new FileUploadEvent(uiComponent, uploadedFile);
 					uiComponent.queueEvent(fileUploadEvent);
+					i++;
 				}
 			}
 		}

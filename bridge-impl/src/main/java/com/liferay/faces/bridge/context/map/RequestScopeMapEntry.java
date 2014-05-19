@@ -13,30 +13,36 @@
  */
 package com.liferay.faces.bridge.context.map;
 
+import javax.portlet.PortletRequest;
+
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
 
 /**
  * @author  Neil Griffin
  */
-public class RequestParameterValuesMapEntryMultiPart extends AbstractPropertyMapEntry<String[]> {
+public class RequestScopeMapEntry extends AbstractPropertyMapEntry<Object> {
 
-	private RequestParameterMapMultiPartImpl requestParameterMapMultiPartImpl;
+	private PortletRequest portletRequest;
 
-	public RequestParameterValuesMapEntryMultiPart(RequestParameterMapMultiPartImpl requestParameterMapMultiPartImpl,
-		String key) {
+	public RequestScopeMapEntry(PortletRequest portletRequest, String key) {
 		super(key);
-		this.requestParameterMapMultiPartImpl = requestParameterMapMultiPartImpl;
+		this.portletRequest = portletRequest;
 	}
 
-	public String[] getValue() {
-		String singleValue = requestParameterMapMultiPartImpl.getProperty(getKey());
-		String[] valueArray = new String[] { singleValue };
-
-		return valueArray;
+	@Override
+	public void remove() {
+		portletRequest.removeAttribute(getKey());
 	}
 
-	public String[] setValue(String[] value) {
-		throw new UnsupportedOperationException();
+	public Object getValue() {
+		return portletRequest.getAttribute(getKey());
+	}
+
+	public Object setValue(Object value) {
+		Object oldValue = getValue();
+		portletRequest.setAttribute(getKey(), value);
+
+		return oldValue;
 	}
 }

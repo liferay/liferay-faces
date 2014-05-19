@@ -13,12 +13,56 @@
  */
 package com.liferay.faces.bridge.context.map;
 
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Map;
+
 import com.liferay.faces.util.map.AbstractPropertyMap;
+import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
 
 /**
- * This is simply a marker abstract class that represents a map of request parameter values.
+ * @author  Neil Griffin
  */
-public abstract class RequestParameterValuesMap extends AbstractPropertyMap<String[]> {
+public class RequestParameterValuesMap extends AbstractPropertyMap<String[]> implements Map<String, String[]> {
 
+	// Private Data Members
+	private FacesRequestParameterMap facesRequestParameterMap;
+
+	public RequestParameterValuesMap(FacesRequestParameterMap facesRequestParameterMap) {
+		this.facesRequestParameterMap = facesRequestParameterMap;
+	}
+
+	@Override
+	public boolean containsKey(Object key) {
+		return facesRequestParameterMap.containsKey(key);
+	}
+
+	@Override
+	protected AbstractPropertyMapEntry<String[]> createPropertyMapEntry(String name) {
+		return new RequestParameterValuesMapEntry(name, this);
+	}
+
+	@Override
+	protected void removeProperty(String name) {
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * This method returns the value of the specified parameter name according to the current portlet request.
+	 */
+	@Override
+	protected String[] getProperty(String name) {
+		return facesRequestParameterMap.get(name);
+	}
+
+	@Override
+	protected void setProperty(String name, String[] value) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	protected Enumeration<String> getPropertyNames() {
+		return Collections.enumeration(facesRequestParameterMap.keySet());
+	}
 }
