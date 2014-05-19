@@ -47,9 +47,9 @@ import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.PortletConfigParam;
 import com.liferay.faces.bridge.container.PortletContainer;
+import com.liferay.faces.bridge.context.map.ContextMapFactory;
 import com.liferay.faces.bridge.context.map.RequestHeaderMap;
 import com.liferay.faces.bridge.context.map.RequestHeaderValuesMap;
-import com.liferay.faces.bridge.context.map.RequestParameterMapFactory;
 import com.liferay.faces.bridge.context.url.BridgeActionURL;
 import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
 import com.liferay.faces.bridge.context.url.BridgePartialActionURLImpl;
@@ -85,6 +85,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	private Boolean bridgeRequestScopePreserved;
 	private BridgeRequestScope bridgeRequestScope;
 	private BridgeURLFactory bridgeURLFactory;
+	private ContextMapFactory contextMapFactory;
 	private String defaultRenderKitId;
 	private Map<String, String> defaultViewIdMap;
 	private FacesView facesView;
@@ -106,7 +107,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	private Map<String, String> requestHeaderMap;
 	private Map<String, String[]> requestHeaderValuesMap;
 	private Map<String, String> requestParameterMap;
-	private RequestParameterMapFactory requestParameterMapFactory;
 	private Map<String, String[]> requestParameterValuesMap;
 	private StringWrapper requestPathInfo;
 	private String requestServletPath;
@@ -132,6 +132,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 		// Get the BridgeURLFactory instance.
 		this.bridgeURLFactory = (BridgeURLFactory) FactoryExtensionFinder.getFactory(BridgeURLFactory.class);
+		this.contextMapFactory = (ContextMapFactory) FactoryExtensionFinder.getFactory(ContextMapFactory.class);
 
 		setCurrentInstance(this);
 	}
@@ -540,6 +541,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		this.bridgeRequestScopePreserved = null;
 		this.bridgeRequestScope = null;
 		this.bridgeURLFactory = null;
+		this.contextMapFactory = null;
 		this.defaultRenderKitId = null;
 		this.defaultViewIdMap = null;
 		this.facesView = null;
@@ -559,7 +561,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		this.requestHeaderMap = null;
 		this.requestHeaderValuesMap = null;
 		this.requestParameterMap = null;
-		this.requestParameterMapFactory = null;
 		this.requestParameterValuesMap = null;
 		this.requestPathInfo = null;
 		this.requestServletPath = null;
@@ -946,7 +947,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	public void setPortletRequest(PortletRequest portletRequest) {
 		this.portletRequest = portletRequest;
 		this.requestParameterMap = null;
-		this.requestParameterMapFactory = null;
 		this.requestParameterValuesMap = null;
 		this.requestHeaderMap = null;
 		this.requestHeaderValuesMap = null;
@@ -1026,8 +1026,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	public Map<String, String[]> getRequestHeaderValuesMap() {
 
 		if (requestHeaderValuesMap == null) {
-			requestHeaderValuesMap = Collections.unmodifiableMap(new RequestHeaderValuesMap(this,
-						getRequestParameterMap()));
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			requestHeaderValuesMap = Collections.unmodifiableMap(new RequestHeaderValuesMap(bridgeContext));
 		}
 
 		return requestHeaderValuesMap;
@@ -1037,26 +1037,19 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	public Map<String, String> getRequestParameterMap() {
 
 		if (requestParameterMap == null) {
-			requestParameterMap = getRequestParameterMapFactory().getRequestParameterMap();
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			requestParameterMap = contextMapFactory.getRequestParameterMap(bridgeContext);
 		}
 
 		return requestParameterMap;
-	}
-
-	protected RequestParameterMapFactory getRequestParameterMapFactory() {
-
-		if (requestParameterMapFactory == null) {
-			requestParameterMapFactory = new RequestParameterMapFactory(this);
-		}
-
-		return requestParameterMapFactory;
 	}
 
 	@Override
 	public Map<String, String[]> getRequestParameterValuesMap() {
 
 		if (requestParameterValuesMap == null) {
-			requestParameterValuesMap = getRequestParameterMapFactory().getRequestParameterValuesMap();
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			requestParameterValuesMap = contextMapFactory.getRequestParameterValuesMap(bridgeContext);
 		}
 
 		return requestParameterValuesMap;

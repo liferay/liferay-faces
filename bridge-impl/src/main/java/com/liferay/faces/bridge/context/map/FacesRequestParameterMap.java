@@ -13,31 +13,19 @@
  */
 package com.liferay.faces.bridge.context.map;
 
-import javax.portlet.PortletContext;
-
-import com.liferay.faces.util.map.AbstractPropertyMapEntry;
+import java.util.Map;
 
 
 /**
+ * This interface defines a mutable {@link Map} of request parameters for a Faces request.
+ *
  * @author  Neil Griffin
  */
-public class ApplicationMapEntry extends AbstractPropertyMapEntry<Object> {
+public interface FacesRequestParameterMap extends Map<String, String[]> {
 
-	private PortletContext portletContext;
+	public void addValue(String key, String value);
 
-	public ApplicationMapEntry(PortletContext portletContext, String key) {
-		super(key);
-		this.portletContext = portletContext;
-	}
+	public String getFirst(Object key);
 
-	public Object getValue() {
-		return portletContext.getAttribute(getKey());
-	}
-
-	public Object setValue(Object value) {
-		Object oldValue = getValue();
-		portletContext.setAttribute(getKey(), value);
-
-		return oldValue;
-	}
+	public String getNamespace();
 }
