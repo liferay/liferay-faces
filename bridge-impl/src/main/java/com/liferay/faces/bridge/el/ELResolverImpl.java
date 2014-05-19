@@ -21,9 +21,7 @@ import java.util.Iterator;
 import javax.el.ELContext;
 import javax.el.ELException;
 import javax.el.ELResolver;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
@@ -31,11 +29,8 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeUtil;
 import javax.servlet.jsp.JspContext;
 
-import com.liferay.faces.bridge.bean.BeanManager;
-import com.liferay.faces.bridge.bean.BeanManagerFactory;
-import com.liferay.faces.bridge.config.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.context.map.SessionMap;
+import com.liferay.faces.bridge.context.map.ContextMapFactory;
 import com.liferay.faces.bridge.filter.HttpServletRequestAdapter;
 import com.liferay.faces.bridge.filter.HttpServletResponseAdapter;
 import com.liferay.faces.bridge.preference.MutablePreferenceMap;
@@ -249,17 +244,9 @@ public class ELResolverImpl extends ELResolverCompatImpl {
 				// Determines whether or not methods annotated with the &#064;PreDestroy annotation are preferably
 				// invoked over the &#064;BridgePreDestroy annotation.
 				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-				PortletConfig portletConfig = bridgeContext.getPortletConfig();
-				boolean preferPreDestroy = PortletConfigParam.PreferPreDestroy.getBooleanValue(portletConfig);
-
-				BeanManagerFactory beanManagerFactory = (BeanManagerFactory) FactoryExtensionFinder.getFactory(
-						BeanManagerFactory.class);
-				BeanManager beanManager = beanManagerFactory.getBeanManager();
-
-				FacesContext facesContext = FacesContext.getCurrentInstance();
-				ExternalContext externalContext = facesContext.getExternalContext();
-				PortletSession portletSession = (PortletSession) externalContext.getSession(true);
-				value = new SessionMap(portletSession, beanManager, PortletSession.APPLICATION_SCOPE, preferPreDestroy);
+				ContextMapFactory contextMapFactory = (ContextMapFactory) FactoryExtensionFinder.getFactory(
+						ContextMapFactory.class);
+				value = contextMapFactory.getSessionScopeMap(bridgeContext, PortletSession.APPLICATION_SCOPE);
 			}
 			else if (varName.equals(MUTABLE_PORTLET_PREFERENCES_VALUES)) {
 				FacesContext facesContext = FacesContext.getCurrentInstance();
