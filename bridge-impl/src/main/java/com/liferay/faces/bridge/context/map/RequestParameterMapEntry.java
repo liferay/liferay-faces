@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.bridge.context.map;
 
-import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
 
@@ -22,15 +21,16 @@ import com.liferay.faces.util.map.AbstractPropertyMapEntry;
  */
 public class RequestParameterMapEntry extends AbstractPropertyMapEntry<String> {
 
-	private PortletContainer portletContainer;
+	// Private Data Members
+	private RequestParameterMap requestParameterMap;
 
-	public RequestParameterMapEntry(PortletContainer portletContainer, String key) {
+	public RequestParameterMapEntry(String key, RequestParameterMap requestParameterMap) {
 		super(key);
-		this.portletContainer = portletContainer;
+		this.requestParameterMap = requestParameterMap;
 	}
 
 	public String getValue() {
-		return portletContainer.getRequestParameter(getKey());
+		return requestParameterMap.getProperty(getKey());
 	}
 
 	public String setValue(String value) {
