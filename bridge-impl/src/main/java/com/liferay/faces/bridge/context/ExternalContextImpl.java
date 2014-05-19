@@ -19,8 +19,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.Principal;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
@@ -29,7 +27,6 @@ import java.util.Set;
 import javax.faces.context.ExternalContext;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.MimeResponse;
-import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -44,15 +41,7 @@ import com.liferay.faces.bridge.application.ViewHandlerImpl;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentRequest;
 import com.liferay.faces.bridge.application.view.BridgeAfterViewContentResponse;
 import com.liferay.faces.bridge.application.view.BridgeWriteBehindSupportFactory;
-import com.liferay.faces.bridge.bean.BeanManager;
-import com.liferay.faces.bridge.bean.BeanManagerFactory;
-import com.liferay.faces.bridge.config.PortletConfigParam;
-import com.liferay.faces.bridge.context.map.ApplicationMap;
-import com.liferay.faces.bridge.context.map.InitParameterMap;
-import com.liferay.faces.bridge.context.map.RequestAttributeMap;
-import com.liferay.faces.bridge.context.map.RequestCookieMap;
-import com.liferay.faces.bridge.context.map.SessionMap;
-import com.liferay.faces.bridge.scope.BridgeRequestScope;
+import com.liferay.faces.bridge.context.map.ContextMapFactory;
 import com.liferay.faces.bridge.util.LocaleIterator;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
@@ -70,15 +59,13 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 	private static final Logger logger = LoggerFactory.getLogger(ExternalContextImpl.class);
 
 	// Private Constants
-	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
-		.isDetected();
 	private static final boolean RICHFACES_DETECTED = ProductMap.getInstance().get(ProductConstants.RICHFACES)
 		.isDetected();
 	private static final String ORG_RICHFACES_EXTENSION = "org.richfaces.extension";
 
 	// Pre-initialized Data Members
-	private ApplicationMap applicationMap;
-	private BeanManager beanManager;
+	private Map<String, Object> applicationMap;
+	private ContextMapFactory contextMapFactory;
 	private Map<String, Object> requestAttributeMap;
 	private Iterator<Locale> requestLocales;
 	private Map<String, Object> sessionMap;
@@ -98,9 +85,7 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 
 		super(portletContext, portletRequest, portletResponse);
 
-		BeanManagerFactory beanManagerFactory = (BeanManagerFactory) FactoryExtensionFinder.getFactory(
-				BeanManagerFactory.class);
-		this.beanManager = beanManagerFactory.getBeanManager();
+		this.contextMapFactory = (ContextMapFactory) FactoryExtensionFinder.getFactory(ContextMapFactory.class);
 
 		try {
 			boolean requestChanged = false;
@@ -191,44 +176,17 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 		// Retrieve the portlet lifecycle phase.
 		portletPhase = bridgeContext.getPortletRequestPhase();
 
-		// Determines whether or not methods annotated with the &#064;PreDestroy annotation are preferably invoked
-		// over the &#064;BridgePreDestroy annotation.
-		PortletConfig portletConfig = bridgeContext.getPortletConfig();
-		boolean preferPreDestroy = PortletConfigParam.PreferPreDestroy.getBooleanValue(portletConfig);
-
 		// Initialize the application map.
-		applicationMap = new ApplicationMap(portletContext, beanManager, preferPreDestroy);
-
-		// Determines whether or not JSF @ManagedBean classes annotated with @RequestScoped should be distinct for
-		// each portlet when running under Liferay Portal.
-		boolean distinctRequestScopedManagedBeans = false;
-
-		if (LIFERAY_PORTAL_DETECTED) {
-			distinctRequestScopedManagedBeans = PortletConfigParam.DistinctRequestScopedManagedBeans.getBooleanValue(
-					portletConfig);
-		}
+		applicationMap = contextMapFactory.getApplicationScopeMap(bridgeContext);
 
 		// Initialize the request attribute map.
-		Set<String> removedAttributeNames = null;
-		BridgeRequestScope bridgeRequestScope = bridgeContext.getBridgeRequestScope();
-
-		if (bridgeRequestScope != null) {
-			removedAttributeNames = bridgeRequestScope.getRemovedAttributeNames();
-		}
-		else {
-			removedAttributeNames = new HashSet<String>();
-		}
-
-		requestAttributeMap = new RequestAttributeMap(portletRequest, beanManager,
-				bridgeContext.getPortletContainer().getResponseNamespace(), preferPreDestroy,
-				distinctRequestScopedManagedBeans, removedAttributeNames);
+		requestAttributeMap = contextMapFactory.getRequestScopeMap(bridgeContext);
 
 		// Initialize the session map.
-		sessionMap = new SessionMap(portletRequest.getPortletSession(), beanManager, PortletSession.PORTLET_SCOPE,
-				preferPreDestroy);
+		sessionMap = contextMapFactory.getSessionScopeMap(bridgeContext, PortletSession.PORTLET_SCOPE);
 
 		// Initialize the init parameter map.
-		initParameterMap = Collections.unmodifiableMap(new InitParameterMap(portletContext));
+		initParameterMap = contextMapFactory.getInitParameterMap(portletContext);
 
 		// Initialize the request context path.
 		requestContextPath = portletRequest.getContextPath();
@@ -431,7 +389,7 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 	public Map<String, Object> getRequestCookieMap() {
 
 		if (requestCookieMap == null) {
-			requestCookieMap = new RequestCookieMap(portletRequest.getCookies());
+			requestCookieMap = contextMapFactory.getRequestCookieMap(bridgeContext);
 		}
 
 		return requestCookieMap;
