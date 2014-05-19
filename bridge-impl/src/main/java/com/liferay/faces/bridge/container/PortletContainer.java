@@ -190,7 +190,7 @@ public interface PortletContainer extends PhaseListener {
 	 * This is a convenience method that gets the specified request parameter value. While this could normally be done
 	 * by simply calling PortletRequest.getParameter(String), this method provides the portlet container abstraction
 	 * layer with an opportunity to fix/correct/massage the parameter value as required. Therefore, any implementing
-	 * class of this method must call the {@link getRequestParameter(String)} method before returning a value.
+	 * class of this method must call the {@link #fixRequestParameterValue(String)} method before returning a value.
 	 *
 	 * @param   name  The request parameter name.
 	 *
