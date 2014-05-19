@@ -48,6 +48,7 @@
 			<bridge:bridge-request-scope-manager-factory>com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactoryImpl</bridge:bridge-request-scope-manager-factory>
 			<bridge:bridge-write-behind-support-factory>com.liferay.faces.bridge.application.view.BridgeWriteBehindSupportFactoryImpl</bridge:bridge-write-behind-support-factory>
 			<bridge:bridge-url-factory>com.liferay.faces.bridge.context.url.BridgeURLFactoryImpl</bridge:bridge-url-factory>
+			<bridge:context-map-factory>com.liferay.faces.bridge.context.map.ContextMapFactoryImpl</bridge:context-map-factory>
 			<bridge:incongruity-context-factory>com.liferay.faces.bridge.context.IncongruityContextFactoryImpl</bridge:incongruity-context-factory>
 			<bridge:liferay-url-factory>com.liferay.faces.bridge.container.liferay.LiferayURLFactoryImpl</bridge:liferay-url-factory>
 			<bridge:portlet-container-factory>com.liferay.faces.bridge.container.PortletContainerFactoryImpl</bridge:portlet-container-factory>

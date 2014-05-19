@@ -18,9 +18,14 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.faces.context.ExternalContext;
-import javax.portlet.PortletSession;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
 
 import com.liferay.faces.bridge.bean.BeanManager;
+import com.liferay.faces.bridge.bean.BeanManagerFactory;
+import com.liferay.faces.bridge.config.PortletConfigParam;
+import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.map.AbstractPropertyMap;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
@@ -28,30 +33,29 @@ import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 /**
  * @author  Neil Griffin
  */
-public class SessionMap extends AbstractPropertyMap<Object> {
+public class ApplicationScopeMap extends AbstractPropertyMap<Object> {
 
 	// Private Data Members
 	private BeanManager beanManager;
-	private PortletSession portletSession;
+	private PortletContext portletContext;
 	private boolean preferPreDestroy;
-	private int scope;
 
-	/**
-	 * Constructs a new SessionMap object instance.
-	 *
-	 * @param  portletSession  The portlet session.
-	 * @param  scope           The scope of the session map, which can be PortletSession.PORTLET_SCOPE or
-	 *                         PortletSession.APPLICATION_SCOPE
-	 */
-	public SessionMap(PortletSession portletSession, BeanManager beanManager, int scope, boolean preferPreDestroy) {
-		this.portletSession = portletSession;
-		this.scope = scope;
-		this.preferPreDestroy = preferPreDestroy;
-		this.beanManager = beanManager;
+	public ApplicationScopeMap(BridgeContext bridgeContext) {
+
+		BeanManagerFactory beanManagerFactory = (BeanManagerFactory) FactoryExtensionFinder.getFactory(
+				BeanManagerFactory.class);
+		this.beanManager = beanManagerFactory.getBeanManager();
+
+		this.portletContext = bridgeContext.getPortletContext();
+
+		// Determines whether or not methods annotated with the @PreDestroy annotation are preferably invoked
+		// over the @BridgePreDestroy annotation.
+		PortletConfig portletConfig = bridgeContext.getPortletConfig();
+		this.preferPreDestroy = PortletConfigParam.PreferPreDestroy.getBooleanValue(portletConfig);
 	}
 
 	/**
-	 * According to the JSF 2.0 JavaDocs for {@link ExternalContext.getSessionMap}, before a managed-bean is removed
+	 * According to the JSF 2.0 JavaDocs for {@link ExternalContext.getApplicationMap}, before a managed-bean is removed
 	 * from the map, any public no-argument void return methods annotated with javax.annotation.PreDestroy must be
 	 * called first.
 	 */
@@ -62,9 +66,7 @@ public class SessionMap extends AbstractPropertyMap<Object> {
 		if (mapEntries != null) {
 
 			for (Map.Entry<String, Object> mapEntry : mapEntries) {
-
 				String potentialManagedBeanName = mapEntry.getKey();
-
 				Object potentialManagedBeanValue = mapEntry.getValue();
 
 				if (beanManager.isManagedBean(potentialManagedBeanName, potentialManagedBeanValue)) {
@@ -77,13 +79,12 @@ public class SessionMap extends AbstractPropertyMap<Object> {
 	}
 
 	/**
-	 * According to the JSF 2.0 JavaDocs for {@link ExternalContext.getSessionMap}, before a managed-bean is removed
+	 * According to the JSF 2.0 JavaDocs for {@link ExternalContext.getApplicationMap}, before a managed-bean is removed
 	 * from the map, any public no-argument void return methods annotated with javax.annotation.PreDestroy must be
 	 * called first.
 	 */
 	@Override
 	public Object remove(Object key) {
-
 		String potentialManagedBeanName = (String) key;
 		Object potentialManagedBeanValue = super.remove(key);
 
@@ -96,26 +97,26 @@ public class SessionMap extends AbstractPropertyMap<Object> {
 
 	@Override
 	protected AbstractPropertyMapEntry<Object> createPropertyMapEntry(String name) {
-		return new SessionMapEntry(portletSession, name, scope);
+		return new ApplicationScopeMapEntry(portletContext, name);
 	}
 
 	@Override
 	protected void removeProperty(String name) {
-		portletSession.removeAttribute(name, scope);
+		portletContext.removeAttribute(name);
 	}
 
 	@Override
 	protected Object getProperty(String name) {
-		return portletSession.getAttribute(name, scope);
+		return portletContext.getAttribute(name);
 	}
 
 	@Override
 	protected void setProperty(String name, Object value) {
-		portletSession.setAttribute(name, value, scope);
+		portletContext.setAttribute(name, value);
 	}
 
 	@Override
 	protected Enumeration<String> getPropertyNames() {
-		return portletSession.getAttributeNames(scope);
+		return portletContext.getAttributeNames();
 	}
 }

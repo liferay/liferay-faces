@@ -17,14 +17,21 @@ import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.faces.context.ExternalContext;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.bean.BeanManager;
+import com.liferay.faces.bridge.bean.BeanManagerFactory;
+import com.liferay.faces.bridge.config.PortletConfigParam;
+import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.scope.BridgeRequestScope;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.map.AbstractPropertyMap;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 import com.liferay.faces.util.product.Product;
@@ -35,9 +42,11 @@ import com.liferay.faces.util.product.ProductMap;
 /**
  * @author  Neil Griffin
  */
-public class RequestAttributeMap extends AbstractPropertyMap<Object> {
+public class RequestScopeMap extends AbstractPropertyMap<Object> {
 
 	// Private Constants
+	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
+		.isDetected();
 	private static final boolean NULL_PATH_ATTRIBUTES;
 	private static final String REQUEST_SCOPED_FQCN = "javax.faces.bean.RequestScoped";
 
@@ -59,14 +68,41 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 	private boolean preferPreDestroy;
 	private Set<String> removedAttributeNames;
 
-	public RequestAttributeMap(PortletRequest portletRequest, BeanManager beanManager, String namespace,
-		boolean preferPreDestroy, boolean distinctRequestScopedManagedBeans, Set<String> removedAttributeNames) {
-		this.portletRequest = portletRequest;
-		this.namespace = namespace;
-		this.preferPreDestroy = preferPreDestroy;
+	public RequestScopeMap(BridgeContext bridgeContext) {
+
+		BeanManagerFactory beanManagerFactory = (BeanManagerFactory) FactoryExtensionFinder.getFactory(
+				BeanManagerFactory.class);
+		this.beanManager = beanManagerFactory.getBeanManager();
+
+		// Determines whether or not JSF @ManagedBean classes annotated with @RequestScoped should be distinct for
+		// each portlet when running under Liferay Portal.
+		boolean distinctRequestScopedManagedBeans = false;
+
+		PortletConfig portletConfig = bridgeContext.getPortletConfig();
+
+		if (LIFERAY_PORTAL_DETECTED) {
+			distinctRequestScopedManagedBeans = PortletConfigParam.DistinctRequestScopedManagedBeans.getBooleanValue(
+					portletConfig);
+		}
+
 		this.distinctRequestScopedManagedBeans = distinctRequestScopedManagedBeans;
-		this.beanManager = beanManager;
-		this.removedAttributeNames = removedAttributeNames;
+
+		this.namespace = bridgeContext.getResponseNamespace();
+
+		this.portletRequest = bridgeContext.getPortletRequest();
+
+		// Determines whether or not methods annotated with the @PreDestroy annotation are preferably invoked
+		// over the @BridgePreDestroy annotation.
+		this.preferPreDestroy = PortletConfigParam.PreferPreDestroy.getBooleanValue(portletConfig);
+
+		BridgeRequestScope bridgeRequestScope = bridgeContext.getBridgeRequestScope();
+
+		if (bridgeRequestScope != null) {
+			this.removedAttributeNames = bridgeRequestScope.getRemovedAttributeNames();
+		}
+		else {
+			this.removedAttributeNames = new HashSet<String>();
+		}
 	}
 
 	/**
@@ -89,7 +125,7 @@ public class RequestAttributeMap extends AbstractPropertyMap<Object> {
 
 	@Override
 	protected AbstractPropertyMapEntry<Object> createPropertyMapEntry(String name) {
-		return new RequestAttributeMapEntry(portletRequest, name);
+		return new RequestScopeMapEntry(portletRequest, name);
 	}
 
 	@Override
