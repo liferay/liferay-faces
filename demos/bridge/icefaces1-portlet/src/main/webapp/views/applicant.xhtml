@@ -165,9 +165,8 @@
 						</ice:column>
 					</ice:dataTable>
 					<ice:inputFile id="fileEntryComp"
-						actionListener="#{applicantBackingBean.fileUploadActionListener}"
 						progressListener="#{applicantViewBean.fileUploadProgressListener}"
-						uniqueFolder="true" />
+						actionListener="#{applicantBackingBean.fileUploadActionListener}" />
 					<ice:outputProgress value="#{applicantViewBean.percentComplete}"
 						labelComplete="0%" />
 				</aui:col>
