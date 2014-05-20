@@ -17,9 +17,6 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.faces.FactoryFinder;
 import javax.faces.component.UIComponent;
@@ -29,17 +26,13 @@ import javax.faces.component.visit.VisitContextFactory;
 import javax.faces.component.visit.VisitHint;
 import javax.faces.component.visit.VisitResult;
 import javax.faces.context.FacesContext;
-import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.PartialViewContext;
 import javax.faces.context.PartialViewContextWrapper;
 import javax.faces.event.PhaseId;
 
 import com.liferay.faces.util.component.UICleanup;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.product.ProductConstants;
-import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -51,18 +44,12 @@ import com.liferay.faces.util.product.ProductMap;
  */
 public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 
-	// Private Constants
-	private static final boolean ICEFACES_DETECTED = ProductMap.getInstance().get(ProductConstants.ICEFACES)
-		.isDetected();
-	private static final String SCRIPT_TAG_BEGIN_REGEX = "<script[^>]*>";
-
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(PartialViewContextCleanupImpl.class);
 
 	// Private Data Members
 	private FacesContext facesContext;
 	private PartialViewContext wrappedPartialViewContext;
-	private PartialResponseWriter partialResponseWriter;
 
 	public PartialViewContextCleanupImpl(PartialViewContext partialViewContext, FacesContext facesContext) {
 		this.wrappedPartialViewContext = partialViewContext;
@@ -166,65 +153,8 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 	}
 
 	@Override
-	public PartialResponseWriter getPartialResponseWriter() {
-
-		if (ICEFACES_DETECTED) {
-			return super.getPartialResponseWriter();
-		}
-		else {
-
-			if (partialResponseWriter == null) {
-				partialResponseWriter = new PartialResponseWriterCleanupImpl(super.getPartialResponseWriter());
-			}
-
-			return partialResponseWriter;
-		}
-	}
-
-	@Override
 	public PartialViewContext getWrapped() {
 		return wrappedPartialViewContext;
-	}
-
-	/**
-	 * This class serves as a wrapper around the {@link PartialResponseWriter} that will encode the JavaScript cleanup
-	 * fragments within an <eval>...</eval> section just before the end of the partial-response document.
-	 *
-	 * @author  Neil Griffin
-	 */
-	protected class PartialResponseWriterCleanupImpl extends PartialResponseWriterWrapper {
-
-		public PartialResponseWriterCleanupImpl(PartialResponseWriter partialResponseWriter) {
-			super(partialResponseWriter);
-		}
-
-		@Override
-		public void endDocument() throws IOException {
-
-			ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
-			Map<String, String> javaScriptMap = extFacesContext.getJavaScriptMap();
-
-			if (javaScriptMap.size() > 0) {
-				Set<Entry<String, String>> entrySet = javaScriptMap.entrySet();
-
-				super.startEval();
-
-				for (Map.Entry<String, String> mapEntry : entrySet) {
-					String mapEntryValue = mapEntry.getValue();
-
-					if (mapEntryValue != null) {
-						mapEntryValue = mapEntryValue.replaceAll(SCRIPT_TAG_BEGIN_REGEX, StringPool.BLANK);
-						mapEntryValue = mapEntryValue.replaceAll(StringPool.SCRIPT_TAG_END, StringPool.BLANK);
-						super.write(mapEntryValue);
-					}
-				}
-
-				super.endEval();
-			}
-
-			super.endDocument();
-		}
-
 	}
 
 	protected class VisitCallbackCleanupImpl implements VisitCallback {
