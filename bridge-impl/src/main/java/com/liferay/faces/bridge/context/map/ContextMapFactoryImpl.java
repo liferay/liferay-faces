@@ -20,6 +20,7 @@ import java.util.Map;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.servlet.http.Cookie;
 
 import com.liferay.faces.bridge.BridgeConstants;
@@ -50,7 +51,8 @@ public class ContextMapFactoryImpl extends ContextMapFactory {
 
 		FacesRequestParameterMap facesRequestParameterMap = null;
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
-		String namespace = bridgeContext.getResponseNamespace();
+		PortletResponse portletResponse = bridgeContext.getPortletResponse();
+		String namespace = portletResponse.getNamespace();
 		PortletContainer portletContainer = bridgeContext.getPortletContainer();
 		BridgeRequestScope bridgeRequestScope = bridgeContext.getBridgeRequestScope();
 		String defaultRenderKitId = bridgeContext.getDefaultRenderKitId();
