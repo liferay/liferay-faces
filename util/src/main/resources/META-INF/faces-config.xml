@@ -18,6 +18,7 @@
 		</system-event-listener>
 	</application>
 	<factory>
+		<partial-view-context-factory>com.liferay.faces.util.context.PartialViewContextFactoryScriptImpl</partial-view-context-factory>
 		<factory-extension>
 			<util:component-resource-factory>com.liferay.faces.util.component.ComponentResourceFactoryImpl</util:component-resource-factory>
 			<util:client-script-factory>com.liferay.faces.util.client.ClientScriptFactoryImpl</util:client-script-factory>
