@@ -11,29 +11,26 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.helper;
+package com.liferay.faces.alloy.component.outputtext;
+
+import javax.faces.render.FacesRenderer;
+
+import com.liferay.faces.util.render.DelegatingRendererBase;
+
 
 /**
- * @author  Neil Griffin
+ * @author  Vernon Singleton
  */
-public class StringHelper {
+@FacesRenderer(componentFamily = OutputText.COMPONENT_FAMILY, rendererType = OutputText.RENDERER_TYPE)
+public class OutputTextRenderer extends DelegatingRendererBase {
 
-	public static String[] append(String[] array, String... value) {
-		String[] newArray = new String[array.length + value.length];
-
-		System.arraycopy(array, 0, newArray, 0, array.length);
-		System.arraycopy(value, 0, newArray, array.length, value.length);
-
-		return newArray;
+	@Override
+	public String getDelegateComponentFamily() {
+		return OutputText.DELEGATE_COMPONENT_FAMILY;
 	}
 
-	public static String toString(Object value, String defaultValue) {
-
-		if (value != null) {
-			return value.toString();
-		}
-		else {
-			return defaultValue;
-		}
+	@Override
+	public String getDelegateRendererType() {
+		return OutputText.DELEGATE_RENDERER_TYPE;
 	}
 }

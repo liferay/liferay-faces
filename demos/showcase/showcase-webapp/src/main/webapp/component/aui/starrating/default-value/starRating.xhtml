@@ -34,11 +34,11 @@
 		<!-- Example#2: Setting the defaultSelected attribute -->
 		<h:form>
 			<aui-nongen:field label="#{i18n['example-2']}">
-				<h:outputText escape="false"
-					value="#{i18n['aui-starrating-default-value-example-2']}" />
+				<h:outputText escape="false" value="#{i18n['aui-starrating-default-value-example-2']}" />
 			</aui-nongen:field>
 			<aui-nongen:field label="#{i18n['component']}">
-				<aui:starRating defaultSelected="3" value="#{starRatingModelBean.favoriteId}" label="#{i18n['favorite']}:">
+				<aui:starRating defaultSelected="3" value="#{starRatingModelBean.favoriteId}" 
+					label="#{i18n['favorite']}:">
 					<f:converter converterId="javax.faces.Long" />
 					<f:selectItem itemLabel="Compatible" itemValue="1" />
 					<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />

@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<aui-nongen:field label="#{i18n['component']}">
+				<aui:button id="myButton">
+					<aui:outputText value=" #{i18n['Button']} " />
+				</aui:button>
+				<br />
+				<aui:popover for="myButton" headerContent="#{popoverModelBean.header}" 
+					bodyContent="#{popoverModelBean.body}" position="right" />
+			</aui-nongen:field>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

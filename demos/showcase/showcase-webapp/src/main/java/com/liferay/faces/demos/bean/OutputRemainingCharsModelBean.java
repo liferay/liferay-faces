@@ -11,29 +11,27 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.helper;
+package com.liferay.faces.demos.bean;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
 
 /**
- * @author  Neil Griffin
+ * @author  Vernon Singleton
  */
-public class StringHelper {
+@ManagedBean
+@RequestScoped
+public class OutputRemainingCharsModelBean {
 
-	public static String[] append(String[] array, String... value) {
-		String[] newArray = new String[array.length + value.length];
+	private String text;
 
-		System.arraycopy(array, 0, newArray, 0, array.length);
-		System.arraycopy(value, 0, newArray, array.length, value.length);
-
-		return newArray;
+	public String getText() {
+		return text;
 	}
 
-	public static String toString(Object value, String defaultValue) {
-
-		if (value != null) {
-			return value.toString();
-		}
-		else {
-			return defaultValue;
-		}
+	public void setText(String text) {
+		this.text = text;
 	}
+
 }

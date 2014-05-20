@@ -1,0 +1,16 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<aui-nongen:field label="#{i18n['component']}">
+				<h:inputTextarea id="inputTextareaInit" maxlength="140" value="Default text" />
+				<br />
+				<aui:outputRemainingChars for="inputTextareaInit" value="There are {0} character(s) remaining." />
+			</aui-nongen:field>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

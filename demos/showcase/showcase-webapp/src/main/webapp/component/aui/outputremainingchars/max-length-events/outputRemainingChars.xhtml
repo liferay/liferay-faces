@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example #1: Use the for attribute to indicate an h:inputText and the value attribute to render output. -->
+		<h:form>
+			<aui-nongen:field label="#{i18n['example-1']}">
+				<h:outputText escape="false" value="#{i18n['aui-outputremainingchars-max-length-reached-1']}" />
+			</aui-nongen:field>
+			<aui-nongen:field label="#{i18n['component']}">
+				<h:inputTextarea id="inputTextarea" maxlength="10" /><br />
+				<aui:outputRemainingChars for="inputTextarea" 
+					onMaxlengthReached="alert('Too many');" value="There are {0} character(s) remaining." />
+			</aui-nongen:field>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example #2: Use the for attribute to indicate an h:inputTextarea and the value attribute to render output. -->
+		<h:form>
+			<aui-nongen:field label="#{i18n['example-2']}">
+				<h:outputText escape="false" value="#{i18n['aui-outputremainingchars-max-length-reached-2']}" />
+			</aui-nongen:field>
+			<aui-nongen:field label="#{i18n['component']}">
+				<h:inputTextarea id="inputTextarea" maxlength="10" /><br />
+				<aui:outputRemainingChars for="inputTextarea" 
+					onceMaxlengthReached="alert('Once too many');" value="There are {0} character(s) remaining." />
+			</aui-nongen:field>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
