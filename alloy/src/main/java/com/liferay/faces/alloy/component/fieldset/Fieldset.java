@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.button;
+package com.liferay.faces.alloy.component.fieldset;
 
 import javax.faces.component.FacesComponent;
 
@@ -22,22 +22,20 @@ import com.liferay.faces.util.lang.StringPool;
 /**
  * @author  Kyle Stiemann
  */
-@FacesComponent(value = Button.COMPONENT_TYPE)
-public class Button extends ButtonBase implements FacesButton, HTML5Button {
+@FacesComponent(value = Fieldset.COMPONENT_TYPE)
+public class Fieldset extends FieldsetBase {
 
 	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.button.Button";
-	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Button";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.button.ButtonRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-button";
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.fieldset.Fieldset";
+	public static final String FIELDSET = "fieldset";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.fieldset.FieldsetRenderer";
+	public static final String STYLE_CLASS_NAME = "alloy-fieldset";
 
-	public Button() {
+	public Fieldset() {
 		super();
 		setRendererType(RENDERER_TYPE);
 	}
 
-	@Override
 	public boolean isDisabled() {
 		return (Boolean) getStateHelper().eval(StringPool.DISABLED, false);
 	}
@@ -51,11 +49,6 @@ public class Button extends ButtonBase implements FacesButton, HTML5Button {
 
 		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
-
-	@Override
-	public String getType() {
-		return (String) getStateHelper().eval(StringPool.TYPE, BUTTON);
+		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME, FIELDSET);
 	}
 }

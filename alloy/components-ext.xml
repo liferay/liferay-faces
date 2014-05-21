@@ -847,6 +847,99 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="Fieldset" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIPanel">
+		<description>
+			<![CDATA[Fieldset is a UIPanel component that renders a &lt;fieldset&gt; element in order to group form elements.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]>
+				</description>
+				<name>disabled</name>
+				<type>java.lang.Boolean</type>
+				<jsfReservedAttribute>true</jsfReservedAttribute>
+				<jsfReservedAttributeType>boolean</jsfReservedAttributeType>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The text value for the rendered &lt;legend&gt; element.]]>
+				</description>
+				<name>legend</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when this component is clicked.]]>
+				</description>
+				<name>onclick</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a double click event occurs.]]>
+				</description>
+				<name>ondblclick</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keydown event occurs.]]>
+				</description>
+				<name>onkeydown</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keypress event occurs.]]>
+				</description>
+				<name>onkeypress</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keyup event occurs.]]>
+				</description>
+				<name>onkeyup</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mousedown event occurs.]]>
+				</description>
+				<name>onmousedown</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mousemove event occurs.]]>
+				</description>
+				<name>onmousemove</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseout event occurs.]]>
+				</description>
+				<name>onmouseout</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseover event occurs.]]>
+				</description>
+				<name>onmouseover</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseup event occurs.]]>
+				</description>
+				<name>onmouseup</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="Icon" extendsTags="Styleable UIComponentBase">
 		<description>
 			<![CDATA[Icon is a component that renders a span which contains an icon specified by the name attribute.]]>

@@ -62,7 +62,7 @@ public class ButtonResponseWriter extends DelegationResponseWriterBase {
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if (FacesButton.DISABLED.equalsIgnoreCase(name) || StringPool.TYPE.equalsIgnoreCase(name) ||
+		if (StringPool.DISABLED.equalsIgnoreCase(name) || StringPool.TYPE.equalsIgnoreCase(name) ||
 				(StringPool.ONCLICK.equalsIgnoreCase(name) && !writeOnclick) ||
 				StringPool.CLASS.equalsIgnoreCase(name) || FacesButton.ONBLUR.equals(name) ||
 				FacesButton.ONFOCUS.equals(name) || StringPool.VALUE.equalsIgnoreCase(name) ||

@@ -25,7 +25,6 @@ public interface FacesButton {
 
 	// Public Constants
 	public static final String BUTTON = "button";
-	public static final String DISABLED = "disabled";
 	public static final String IMAGE = "image";
 	public static final String ONBLUR = "onblur";
 	public static final String ONFOCUS = "onfocus";
