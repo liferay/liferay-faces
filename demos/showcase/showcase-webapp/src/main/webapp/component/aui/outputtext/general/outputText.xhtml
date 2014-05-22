@@ -1,0 +1,14 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<showcase:example renderedCheckbox="true">
+				<aui:outputText rendered="#{showcaseModelBean.selectedComponent.rendered}" value="#{outputTextModelBean.text}" />
+			</showcase:example>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

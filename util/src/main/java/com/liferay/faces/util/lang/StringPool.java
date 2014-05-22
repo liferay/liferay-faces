@@ -151,6 +151,10 @@ public class StringPool {
 	public static final String NOT_LIKE = "NOT LIKE";
 
 	public static final String NULL = "null";
+	
+	public static final String ON = "on";
+	
+	public static final String ONCE = "once";
 
 	public static final String ONCLICK = "onclick";
 

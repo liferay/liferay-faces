@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: The onMaxlengthReached event occurs every time maxlength is reached. -->
+		<h:form>
+			<showcase:example description="#{i18n['aui-outputremainingchars-max-length-reached-1']}" longDescription="true"
+				number="1">
+				<h:inputTextarea id="inputTextarea" maxlength="10" />
+				<br />
+				<aui:outputRemainingChars for="inputTextarea" onMaxlengthReached="alert('Max length reached');"
+					value="There are {0} character(s) remaining." />
+			</showcase:example>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: The onceMaxlengthReached event occurs the first time maxlength is reached. -->
+		<h:form>
+			<showcase:example description="#{i18n['aui-outputremainingchars-max-length-reached-2']}" longDescription="true"
+				number="2">
+				<h:inputTextarea id="inputTextarea" maxlength="10" />
+				<br />
+				<aui:outputRemainingChars for="inputTextarea" onceMaxlengthReached="alert('Max length reached once');"
+					value="There are {0} character(s) remaining." />
+			</showcase:example>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
