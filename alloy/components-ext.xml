@@ -1231,40 +1231,6 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Popover" parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" extends="OutputText" >
-		<description>
-			<![CDATA[Popover is an OutputText component that displays a header and a footer for a given target.  Renders as HtmlOutputText renders, so this tag will optionally render a span when i18n or style attributes used.]]>
-		</description>
-		<attributes>
-			<!-- Attributes used to help the component follow normal JSF usage patterns -->
-			<attribute>
-				<description>
-					<![CDATA[The id of the text input node which is the target of the Popover.]]>
-				</description>
-				<name>for</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<!-- Attributes that are generated for the Alloy component -->
-			<!-- Attributes that should have been generated for the Alloy component, but were not :-/ -->
-			<attribute>
-				<description>
-					<![CDATA[The side of the Popover that the caret needs to point to.]]>
-				</description>
-				<name>position</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<!-- Attributes that should be in the Alloy documentation, but are not :-/ -->
-			<attribute>
-				<description>
-					<![CDATA[A list of plugins to use with this component.  Used by the animate attribute.]]>
-				</description>
-				<name>plugins</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<!-- Attributes that were invented here to implement Alloy methods -->
-			<!-- Attributes that were invented here to implement Alloy modules -->
-		</attributes>
-	</component>
 	<component name="Tab" parentClass="javax.faces.component.UIColumn">
 		<description>
 			<![CDATA[Tab is a panel component that renders nested/child tags as content within itself.]]>
