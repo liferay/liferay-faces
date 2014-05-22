@@ -65,166 +65,166 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 	@Override
 	public void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
 
-		InputSourceCodeAlloy InputSourceCodeAlloy = (InputSourceCodeAlloy) uiComponent;
+		InputSourceCodeAlloy inputSourceCodeAlloy = (InputSourceCodeAlloy) uiComponent;
 		boolean first = true;
 
-		String boundingBox = InputSourceCodeAlloy.getBoundingBox();
+		String boundingBox = inputSourceCodeAlloy.getBoundingBox();
 
 		if (boundingBox != null) {
 
-			encodeBoundingBox(responseWriter, InputSourceCodeAlloy, boundingBox, first);
+			encodeBoundingBox(responseWriter, inputSourceCodeAlloy, boundingBox, first);
 			first = false;
 		}
 
-		String contentBox = InputSourceCodeAlloy.getContentBox();
+		String contentBox = inputSourceCodeAlloy.getContentBox();
 
 		if (contentBox != null) {
 
-			encodeContentBox(responseWriter, InputSourceCodeAlloy, contentBox, first);
+			encodeContentBox(responseWriter, inputSourceCodeAlloy, contentBox, first);
 			first = false;
 		}
 
-		Boolean disabled = InputSourceCodeAlloy.isDisabled();
+		Boolean disabled = inputSourceCodeAlloy.isDisabled();
 
 		if (disabled != null) {
 
-			encodeDisabled(responseWriter, InputSourceCodeAlloy, disabled, first);
+			encodeDisabled(responseWriter, inputSourceCodeAlloy, disabled, first);
 			first = false;
 		}
 
-		Object height = InputSourceCodeAlloy.getHeight();
+		Object height = inputSourceCodeAlloy.getHeight();
 
 		if (height != null) {
 
-			encodeHeight(responseWriter, InputSourceCodeAlloy, height, first);
+			encodeHeight(responseWriter, inputSourceCodeAlloy, height, first);
 			first = false;
 		}
 
-		Boolean highlightActiveLine = InputSourceCodeAlloy.isHighlightActiveLine();
+		Boolean highlightActiveLine = inputSourceCodeAlloy.isHighlightActiveLine();
 
 		if (highlightActiveLine != null) {
 
-			encodeHighlightActiveLine(responseWriter, InputSourceCodeAlloy, highlightActiveLine, first);
+			encodeHighlightActiveLine(responseWriter, inputSourceCodeAlloy, highlightActiveLine, first);
 			first = false;
 		}
 
-		String locale = InputSourceCodeAlloy.getLocale();
+		String locale = inputSourceCodeAlloy.getLocale();
 
 		if (locale != null) {
 
-			encodeLocale(responseWriter, InputSourceCodeAlloy, locale, first);
+			encodeLocale(responseWriter, inputSourceCodeAlloy, locale, first);
 			first = false;
 		}
 
-		String mode = InputSourceCodeAlloy.getMode();
+		String mode = inputSourceCodeAlloy.getMode();
 
 		if (mode != null) {
 
-			encodeMode(responseWriter, InputSourceCodeAlloy, mode, first);
+			encodeMode(responseWriter, inputSourceCodeAlloy, mode, first);
 			first = false;
 		}
 
-		Boolean readOnly = InputSourceCodeAlloy.isReadOnly();
+		Boolean readOnly = inputSourceCodeAlloy.isReadOnly();
 
 		if (readOnly != null) {
 
-			encodeReadOnly(responseWriter, InputSourceCodeAlloy, readOnly, first);
+			encodeReadOnly(responseWriter, inputSourceCodeAlloy, readOnly, first);
 			first = false;
 		}
 
-		Boolean showPrintMargin = InputSourceCodeAlloy.isShowPrintMargin();
+		Boolean showPrintMargin = inputSourceCodeAlloy.isShowPrintMargin();
 
 		if (showPrintMargin != null) {
 
-			encodeShowPrintMargin(responseWriter, InputSourceCodeAlloy, showPrintMargin, first);
+			encodeShowPrintMargin(responseWriter, inputSourceCodeAlloy, showPrintMargin, first);
 			first = false;
 		}
 
-		String srcNode = InputSourceCodeAlloy.getSrcNode();
+		String srcNode = inputSourceCodeAlloy.getSrcNode();
 
 		if (srcNode != null) {
 
-			encodeSrcNode(responseWriter, InputSourceCodeAlloy, srcNode, first);
+			encodeSrcNode(responseWriter, inputSourceCodeAlloy, srcNode, first);
 			first = false;
 		}
 
-		Object strings = InputSourceCodeAlloy.getStrings();
+		Object strings = inputSourceCodeAlloy.getStrings();
 
 		if (strings != null) {
 
-			encodeStrings(responseWriter, InputSourceCodeAlloy, strings, first);
+			encodeStrings(responseWriter, inputSourceCodeAlloy, strings, first);
 			first = false;
 		}
 
-		Object tabIndex = InputSourceCodeAlloy.getTabIndex();
+		Object tabIndex = inputSourceCodeAlloy.getTabIndex();
 
 		if (tabIndex != null) {
 
-			encodeTabIndex(responseWriter, InputSourceCodeAlloy, tabIndex, first);
+			encodeTabIndex(responseWriter, inputSourceCodeAlloy, tabIndex, first);
 			first = false;
 		}
 
-		Object tabSize = InputSourceCodeAlloy.getTabSize();
+		Object tabSize = inputSourceCodeAlloy.getTabSize();
 
 		if (tabSize != null) {
 
-			encodeTabSize(responseWriter, InputSourceCodeAlloy, tabSize, first);
+			encodeTabSize(responseWriter, inputSourceCodeAlloy, tabSize, first);
 			first = false;
 		}
 
-		Boolean useSoftTabs = InputSourceCodeAlloy.isUseSoftTabs();
+		Boolean useSoftTabs = inputSourceCodeAlloy.isUseSoftTabs();
 
 		if (useSoftTabs != null) {
 
-			encodeUseSoftTabs(responseWriter, InputSourceCodeAlloy, useSoftTabs, first);
+			encodeUseSoftTabs(responseWriter, inputSourceCodeAlloy, useSoftTabs, first);
 			first = false;
 		}
 
-		Boolean useWrapMode = InputSourceCodeAlloy.isUseWrapMode();
+		Boolean useWrapMode = inputSourceCodeAlloy.isUseWrapMode();
 
 		if (useWrapMode != null) {
 
-			encodeUseWrapMode(responseWriter, InputSourceCodeAlloy, useWrapMode, first);
+			encodeUseWrapMode(responseWriter, inputSourceCodeAlloy, useWrapMode, first);
 			first = false;
 		}
 
-		Object value = InputSourceCodeAlloy.getValue();
+		Object value = inputSourceCodeAlloy.getValue();
 
 		if (value != null) {
 
-			encodeValue(responseWriter, InputSourceCodeAlloy, value, first);
+			encodeValue(responseWriter, inputSourceCodeAlloy, value, first);
 			first = false;
 		}
 
-		Boolean visible = InputSourceCodeAlloy.isVisible();
+		Boolean visible = inputSourceCodeAlloy.isVisible();
 
 		if (visible != null) {
 
-			encodeVisible(responseWriter, InputSourceCodeAlloy, visible, first);
+			encodeVisible(responseWriter, inputSourceCodeAlloy, visible, first);
 			first = false;
 		}
 
-		String widgetId = InputSourceCodeAlloy.getWidgetId();
+		String widgetId = inputSourceCodeAlloy.getWidgetId();
 
 		if (widgetId != null) {
 
-			encodeWidgetId(responseWriter, InputSourceCodeAlloy, widgetId, first);
+			encodeWidgetId(responseWriter, inputSourceCodeAlloy, widgetId, first);
 			first = false;
 		}
 
-		Boolean widgetRender = InputSourceCodeAlloy.isWidgetRender();
+		Boolean widgetRender = inputSourceCodeAlloy.isWidgetRender();
 
 		if (widgetRender != null) {
 
-			encodeWidgetRender(responseWriter, InputSourceCodeAlloy, widgetRender, first);
+			encodeWidgetRender(responseWriter, inputSourceCodeAlloy, widgetRender, first);
 			first = false;
 		}
 
-		Object width = InputSourceCodeAlloy.getWidth();
+		Object width = inputSourceCodeAlloy.getWidth();
 
 		if (width != null) {
 
-			encodeWidth(responseWriter, InputSourceCodeAlloy, width, first);
+			encodeWidth(responseWriter, inputSourceCodeAlloy, width, first);
 			first = false;
 		}
 
@@ -234,195 +234,195 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 
 		first = true;
 
-		String afterBoundingBoxChange = InputSourceCodeAlloy.getAfterBoundingBoxChange();
+		String afterBoundingBoxChange = inputSourceCodeAlloy.getAfterBoundingBoxChange();
 
 		if (afterBoundingBoxChange != null) {
 
-			encodeAfterBoundingBoxChange(responseWriter, InputSourceCodeAlloy, afterBoundingBoxChange, first);
+			encodeAfterBoundingBoxChange(responseWriter, inputSourceCodeAlloy, afterBoundingBoxChange, first);
 			first = false;
 		}
 
-		String afterContentBoxChange = InputSourceCodeAlloy.getAfterContentBoxChange();
+		String afterContentBoxChange = inputSourceCodeAlloy.getAfterContentBoxChange();
 
 		if (afterContentBoxChange != null) {
 
-			encodeAfterContentBoxChange(responseWriter, InputSourceCodeAlloy, afterContentBoxChange, first);
+			encodeAfterContentBoxChange(responseWriter, inputSourceCodeAlloy, afterContentBoxChange, first);
 			first = false;
 		}
 
-		String afterDestroyedChange = InputSourceCodeAlloy.getAfterDestroyedChange();
+		String afterDestroyedChange = inputSourceCodeAlloy.getAfterDestroyedChange();
 
 		if (afterDestroyedChange != null) {
 
-			encodeAfterDestroyedChange(responseWriter, InputSourceCodeAlloy, afterDestroyedChange, first);
+			encodeAfterDestroyedChange(responseWriter, inputSourceCodeAlloy, afterDestroyedChange, first);
 			first = false;
 		}
 
-		String afterDisabledChange = InputSourceCodeAlloy.getAfterDisabledChange();
+		String afterDisabledChange = inputSourceCodeAlloy.getAfterDisabledChange();
 
 		if (afterDisabledChange != null) {
 
-			encodeAfterDisabledChange(responseWriter, InputSourceCodeAlloy, afterDisabledChange, first);
+			encodeAfterDisabledChange(responseWriter, inputSourceCodeAlloy, afterDisabledChange, first);
 			first = false;
 		}
 
-		String afterFocusedChange = InputSourceCodeAlloy.getAfterFocusedChange();
+		String afterFocusedChange = inputSourceCodeAlloy.getAfterFocusedChange();
 
 		if (afterFocusedChange != null) {
 
-			encodeAfterFocusedChange(responseWriter, InputSourceCodeAlloy, afterFocusedChange, first);
+			encodeAfterFocusedChange(responseWriter, inputSourceCodeAlloy, afterFocusedChange, first);
 			first = false;
 		}
 
-		String afterHeightChange = InputSourceCodeAlloy.getAfterHeightChange();
+		String afterHeightChange = inputSourceCodeAlloy.getAfterHeightChange();
 
 		if (afterHeightChange != null) {
 
-			encodeAfterHeightChange(responseWriter, InputSourceCodeAlloy, afterHeightChange, first);
+			encodeAfterHeightChange(responseWriter, inputSourceCodeAlloy, afterHeightChange, first);
 			first = false;
 		}
 
-		String afterHighlightActiveLineChange = InputSourceCodeAlloy.getAfterHighlightActiveLineChange();
+		String afterHighlightActiveLineChange = inputSourceCodeAlloy.getAfterHighlightActiveLineChange();
 
 		if (afterHighlightActiveLineChange != null) {
 
-			encodeAfterHighlightActiveLineChange(responseWriter, InputSourceCodeAlloy, afterHighlightActiveLineChange, first);
+			encodeAfterHighlightActiveLineChange(responseWriter, inputSourceCodeAlloy, afterHighlightActiveLineChange, first);
 			first = false;
 		}
 
-		String afterIdChange = InputSourceCodeAlloy.getAfterIdChange();
+		String afterIdChange = inputSourceCodeAlloy.getAfterIdChange();
 
 		if (afterIdChange != null) {
 
-			encodeAfterIdChange(responseWriter, InputSourceCodeAlloy, afterIdChange, first);
+			encodeAfterIdChange(responseWriter, inputSourceCodeAlloy, afterIdChange, first);
 			first = false;
 		}
 
-		String afterInitializedChange = InputSourceCodeAlloy.getAfterInitializedChange();
+		String afterInitializedChange = inputSourceCodeAlloy.getAfterInitializedChange();
 
 		if (afterInitializedChange != null) {
 
-			encodeAfterInitializedChange(responseWriter, InputSourceCodeAlloy, afterInitializedChange, first);
+			encodeAfterInitializedChange(responseWriter, inputSourceCodeAlloy, afterInitializedChange, first);
 			first = false;
 		}
 
-		String afterLocaleChange = InputSourceCodeAlloy.getAfterLocaleChange();
+		String afterLocaleChange = inputSourceCodeAlloy.getAfterLocaleChange();
 
 		if (afterLocaleChange != null) {
 
-			encodeAfterLocaleChange(responseWriter, InputSourceCodeAlloy, afterLocaleChange, first);
+			encodeAfterLocaleChange(responseWriter, inputSourceCodeAlloy, afterLocaleChange, first);
 			first = false;
 		}
 
-		String afterModeChange = InputSourceCodeAlloy.getAfterModeChange();
+		String afterModeChange = inputSourceCodeAlloy.getAfterModeChange();
 
 		if (afterModeChange != null) {
 
-			encodeAfterModeChange(responseWriter, InputSourceCodeAlloy, afterModeChange, first);
+			encodeAfterModeChange(responseWriter, inputSourceCodeAlloy, afterModeChange, first);
 			first = false;
 		}
 
-		String afterReadOnlyChange = InputSourceCodeAlloy.getAfterReadOnlyChange();
+		String afterReadOnlyChange = inputSourceCodeAlloy.getAfterReadOnlyChange();
 
 		if (afterReadOnlyChange != null) {
 
-			encodeAfterReadOnlyChange(responseWriter, InputSourceCodeAlloy, afterReadOnlyChange, first);
+			encodeAfterReadOnlyChange(responseWriter, inputSourceCodeAlloy, afterReadOnlyChange, first);
 			first = false;
 		}
 
-		String afterRenderChange = InputSourceCodeAlloy.getAfterRenderChange();
+		String afterRenderChange = inputSourceCodeAlloy.getAfterRenderChange();
 
 		if (afterRenderChange != null) {
 
-			encodeAfterRenderChange(responseWriter, InputSourceCodeAlloy, afterRenderChange, first);
+			encodeAfterRenderChange(responseWriter, inputSourceCodeAlloy, afterRenderChange, first);
 			first = false;
 		}
 
-		String afterRenderedChange = InputSourceCodeAlloy.getAfterRenderedChange();
+		String afterRenderedChange = inputSourceCodeAlloy.getAfterRenderedChange();
 
 		if (afterRenderedChange != null) {
 
-			encodeAfterRenderedChange(responseWriter, InputSourceCodeAlloy, afterRenderedChange, first);
+			encodeAfterRenderedChange(responseWriter, inputSourceCodeAlloy, afterRenderedChange, first);
 			first = false;
 		}
 
-		String afterShowPrintMarginChange = InputSourceCodeAlloy.getAfterShowPrintMarginChange();
+		String afterShowPrintMarginChange = inputSourceCodeAlloy.getAfterShowPrintMarginChange();
 
 		if (afterShowPrintMarginChange != null) {
 
-			encodeAfterShowPrintMarginChange(responseWriter, InputSourceCodeAlloy, afterShowPrintMarginChange, first);
+			encodeAfterShowPrintMarginChange(responseWriter, inputSourceCodeAlloy, afterShowPrintMarginChange, first);
 			first = false;
 		}
 
-		String afterSrcNodeChange = InputSourceCodeAlloy.getAfterSrcNodeChange();
+		String afterSrcNodeChange = inputSourceCodeAlloy.getAfterSrcNodeChange();
 
 		if (afterSrcNodeChange != null) {
 
-			encodeAfterSrcNodeChange(responseWriter, InputSourceCodeAlloy, afterSrcNodeChange, first);
+			encodeAfterSrcNodeChange(responseWriter, inputSourceCodeAlloy, afterSrcNodeChange, first);
 			first = false;
 		}
 
-		String afterStringsChange = InputSourceCodeAlloy.getAfterStringsChange();
+		String afterStringsChange = inputSourceCodeAlloy.getAfterStringsChange();
 
 		if (afterStringsChange != null) {
 
-			encodeAfterStringsChange(responseWriter, InputSourceCodeAlloy, afterStringsChange, first);
+			encodeAfterStringsChange(responseWriter, inputSourceCodeAlloy, afterStringsChange, first);
 			first = false;
 		}
 
-		String afterTabIndexChange = InputSourceCodeAlloy.getAfterTabIndexChange();
+		String afterTabIndexChange = inputSourceCodeAlloy.getAfterTabIndexChange();
 
 		if (afterTabIndexChange != null) {
 
-			encodeAfterTabIndexChange(responseWriter, InputSourceCodeAlloy, afterTabIndexChange, first);
+			encodeAfterTabIndexChange(responseWriter, inputSourceCodeAlloy, afterTabIndexChange, first);
 			first = false;
 		}
 
-		String afterTabSizeChange = InputSourceCodeAlloy.getAfterTabSizeChange();
+		String afterTabSizeChange = inputSourceCodeAlloy.getAfterTabSizeChange();
 
 		if (afterTabSizeChange != null) {
 
-			encodeAfterTabSizeChange(responseWriter, InputSourceCodeAlloy, afterTabSizeChange, first);
+			encodeAfterTabSizeChange(responseWriter, inputSourceCodeAlloy, afterTabSizeChange, first);
 			first = false;
 		}
 
-		String afterUseSoftTabsChange = InputSourceCodeAlloy.getAfterUseSoftTabsChange();
+		String afterUseSoftTabsChange = inputSourceCodeAlloy.getAfterUseSoftTabsChange();
 
 		if (afterUseSoftTabsChange != null) {
 
-			encodeAfterUseSoftTabsChange(responseWriter, InputSourceCodeAlloy, afterUseSoftTabsChange, first);
+			encodeAfterUseSoftTabsChange(responseWriter, inputSourceCodeAlloy, afterUseSoftTabsChange, first);
 			first = false;
 		}
 
-		String afterUseWrapModeChange = InputSourceCodeAlloy.getAfterUseWrapModeChange();
+		String afterUseWrapModeChange = inputSourceCodeAlloy.getAfterUseWrapModeChange();
 
 		if (afterUseWrapModeChange != null) {
 
-			encodeAfterUseWrapModeChange(responseWriter, InputSourceCodeAlloy, afterUseWrapModeChange, first);
+			encodeAfterUseWrapModeChange(responseWriter, inputSourceCodeAlloy, afterUseWrapModeChange, first);
 			first = false;
 		}
 
-		String afterValueChange = InputSourceCodeAlloy.getAfterValueChange();
+		String afterValueChange = inputSourceCodeAlloy.getAfterValueChange();
 
 		if (afterValueChange != null) {
 
-			encodeAfterValueChange(responseWriter, InputSourceCodeAlloy, afterValueChange, first);
+			encodeAfterValueChange(responseWriter, inputSourceCodeAlloy, afterValueChange, first);
 			first = false;
 		}
 
-		String afterVisibleChange = InputSourceCodeAlloy.getAfterVisibleChange();
+		String afterVisibleChange = inputSourceCodeAlloy.getAfterVisibleChange();
 
 		if (afterVisibleChange != null) {
 
-			encodeAfterVisibleChange(responseWriter, InputSourceCodeAlloy, afterVisibleChange, first);
+			encodeAfterVisibleChange(responseWriter, inputSourceCodeAlloy, afterVisibleChange, first);
 			first = false;
 		}
 
-		String afterWidthChange = InputSourceCodeAlloy.getAfterWidthChange();
+		String afterWidthChange = inputSourceCodeAlloy.getAfterWidthChange();
 
 		if (afterWidthChange != null) {
 
-			encodeAfterWidthChange(responseWriter, InputSourceCodeAlloy, afterWidthChange, first);
+			encodeAfterWidthChange(responseWriter, inputSourceCodeAlloy, afterWidthChange, first);
 			first = false;
 		}
 
@@ -436,195 +436,195 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 
 		first = true;
 
-		String onBoundingBoxChange = InputSourceCodeAlloy.getOnBoundingBoxChange();
+		String onBoundingBoxChange = inputSourceCodeAlloy.getOnBoundingBoxChange();
 
 		if (onBoundingBoxChange != null) {
 
-			encodeOnBoundingBoxChange(responseWriter, InputSourceCodeAlloy, onBoundingBoxChange, first);
+			encodeOnBoundingBoxChange(responseWriter, inputSourceCodeAlloy, onBoundingBoxChange, first);
 			first = false;
 		}
 
-		String onContentBoxChange = InputSourceCodeAlloy.getOnContentBoxChange();
+		String onContentBoxChange = inputSourceCodeAlloy.getOnContentBoxChange();
 
 		if (onContentBoxChange != null) {
 
-			encodeOnContentBoxChange(responseWriter, InputSourceCodeAlloy, onContentBoxChange, first);
+			encodeOnContentBoxChange(responseWriter, inputSourceCodeAlloy, onContentBoxChange, first);
 			first = false;
 		}
 
-		String onDestroyedChange = InputSourceCodeAlloy.getOnDestroyedChange();
+		String onDestroyedChange = inputSourceCodeAlloy.getOnDestroyedChange();
 
 		if (onDestroyedChange != null) {
 
-			encodeOnDestroyedChange(responseWriter, InputSourceCodeAlloy, onDestroyedChange, first);
+			encodeOnDestroyedChange(responseWriter, inputSourceCodeAlloy, onDestroyedChange, first);
 			first = false;
 		}
 
-		String onDisabledChange = InputSourceCodeAlloy.getOnDisabledChange();
+		String onDisabledChange = inputSourceCodeAlloy.getOnDisabledChange();
 
 		if (onDisabledChange != null) {
 
-			encodeOnDisabledChange(responseWriter, InputSourceCodeAlloy, onDisabledChange, first);
+			encodeOnDisabledChange(responseWriter, inputSourceCodeAlloy, onDisabledChange, first);
 			first = false;
 		}
 
-		String onFocusedChange = InputSourceCodeAlloy.getOnFocusedChange();
+		String onFocusedChange = inputSourceCodeAlloy.getOnFocusedChange();
 
 		if (onFocusedChange != null) {
 
-			encodeOnFocusedChange(responseWriter, InputSourceCodeAlloy, onFocusedChange, first);
+			encodeOnFocusedChange(responseWriter, inputSourceCodeAlloy, onFocusedChange, first);
 			first = false;
 		}
 
-		String onHeightChange = InputSourceCodeAlloy.getOnHeightChange();
+		String onHeightChange = inputSourceCodeAlloy.getOnHeightChange();
 
 		if (onHeightChange != null) {
 
-			encodeOnHeightChange(responseWriter, InputSourceCodeAlloy, onHeightChange, first);
+			encodeOnHeightChange(responseWriter, inputSourceCodeAlloy, onHeightChange, first);
 			first = false;
 		}
 
-		String onHighlightActiveLineChange = InputSourceCodeAlloy.getOnHighlightActiveLineChange();
+		String onHighlightActiveLineChange = inputSourceCodeAlloy.getOnHighlightActiveLineChange();
 
 		if (onHighlightActiveLineChange != null) {
 
-			encodeOnHighlightActiveLineChange(responseWriter, InputSourceCodeAlloy, onHighlightActiveLineChange, first);
+			encodeOnHighlightActiveLineChange(responseWriter, inputSourceCodeAlloy, onHighlightActiveLineChange, first);
 			first = false;
 		}
 
-		String onIdChange = InputSourceCodeAlloy.getOnIdChange();
+		String onIdChange = inputSourceCodeAlloy.getOnIdChange();
 
 		if (onIdChange != null) {
 
-			encodeOnIdChange(responseWriter, InputSourceCodeAlloy, onIdChange, first);
+			encodeOnIdChange(responseWriter, inputSourceCodeAlloy, onIdChange, first);
 			first = false;
 		}
 
-		String onInitializedChange = InputSourceCodeAlloy.getOnInitializedChange();
+		String onInitializedChange = inputSourceCodeAlloy.getOnInitializedChange();
 
 		if (onInitializedChange != null) {
 
-			encodeOnInitializedChange(responseWriter, InputSourceCodeAlloy, onInitializedChange, first);
+			encodeOnInitializedChange(responseWriter, inputSourceCodeAlloy, onInitializedChange, first);
 			first = false;
 		}
 
-		String onLocaleChange = InputSourceCodeAlloy.getOnLocaleChange();
+		String onLocaleChange = inputSourceCodeAlloy.getOnLocaleChange();
 
 		if (onLocaleChange != null) {
 
-			encodeOnLocaleChange(responseWriter, InputSourceCodeAlloy, onLocaleChange, first);
+			encodeOnLocaleChange(responseWriter, inputSourceCodeAlloy, onLocaleChange, first);
 			first = false;
 		}
 
-		String onModeChange = InputSourceCodeAlloy.getOnModeChange();
+		String onModeChange = inputSourceCodeAlloy.getOnModeChange();
 
 		if (onModeChange != null) {
 
-			encodeOnModeChange(responseWriter, InputSourceCodeAlloy, onModeChange, first);
+			encodeOnModeChange(responseWriter, inputSourceCodeAlloy, onModeChange, first);
 			first = false;
 		}
 
-		String onReadOnlyChange = InputSourceCodeAlloy.getOnReadOnlyChange();
+		String onReadOnlyChange = inputSourceCodeAlloy.getOnReadOnlyChange();
 
 		if (onReadOnlyChange != null) {
 
-			encodeOnReadOnlyChange(responseWriter, InputSourceCodeAlloy, onReadOnlyChange, first);
+			encodeOnReadOnlyChange(responseWriter, inputSourceCodeAlloy, onReadOnlyChange, first);
 			first = false;
 		}
 
-		String onRenderChange = InputSourceCodeAlloy.getOnRenderChange();
+		String onRenderChange = inputSourceCodeAlloy.getOnRenderChange();
 
 		if (onRenderChange != null) {
 
-			encodeOnRenderChange(responseWriter, InputSourceCodeAlloy, onRenderChange, first);
+			encodeOnRenderChange(responseWriter, inputSourceCodeAlloy, onRenderChange, first);
 			first = false;
 		}
 
-		String onRenderedChange = InputSourceCodeAlloy.getOnRenderedChange();
+		String onRenderedChange = inputSourceCodeAlloy.getOnRenderedChange();
 
 		if (onRenderedChange != null) {
 
-			encodeOnRenderedChange(responseWriter, InputSourceCodeAlloy, onRenderedChange, first);
+			encodeOnRenderedChange(responseWriter, inputSourceCodeAlloy, onRenderedChange, first);
 			first = false;
 		}
 
-		String onShowPrintMarginChange = InputSourceCodeAlloy.getOnShowPrintMarginChange();
+		String onShowPrintMarginChange = inputSourceCodeAlloy.getOnShowPrintMarginChange();
 
 		if (onShowPrintMarginChange != null) {
 
-			encodeOnShowPrintMarginChange(responseWriter, InputSourceCodeAlloy, onShowPrintMarginChange, first);
+			encodeOnShowPrintMarginChange(responseWriter, inputSourceCodeAlloy, onShowPrintMarginChange, first);
 			first = false;
 		}
 
-		String onSrcNodeChange = InputSourceCodeAlloy.getOnSrcNodeChange();
+		String onSrcNodeChange = inputSourceCodeAlloy.getOnSrcNodeChange();
 
 		if (onSrcNodeChange != null) {
 
-			encodeOnSrcNodeChange(responseWriter, InputSourceCodeAlloy, onSrcNodeChange, first);
+			encodeOnSrcNodeChange(responseWriter, inputSourceCodeAlloy, onSrcNodeChange, first);
 			first = false;
 		}
 
-		String onStringsChange = InputSourceCodeAlloy.getOnStringsChange();
+		String onStringsChange = inputSourceCodeAlloy.getOnStringsChange();
 
 		if (onStringsChange != null) {
 
-			encodeOnStringsChange(responseWriter, InputSourceCodeAlloy, onStringsChange, first);
+			encodeOnStringsChange(responseWriter, inputSourceCodeAlloy, onStringsChange, first);
 			first = false;
 		}
 
-		String onTabIndexChange = InputSourceCodeAlloy.getOnTabIndexChange();
+		String onTabIndexChange = inputSourceCodeAlloy.getOnTabIndexChange();
 
 		if (onTabIndexChange != null) {
 
-			encodeOnTabIndexChange(responseWriter, InputSourceCodeAlloy, onTabIndexChange, first);
+			encodeOnTabIndexChange(responseWriter, inputSourceCodeAlloy, onTabIndexChange, first);
 			first = false;
 		}
 
-		String onTabSizeChange = InputSourceCodeAlloy.getOnTabSizeChange();
+		String onTabSizeChange = inputSourceCodeAlloy.getOnTabSizeChange();
 
 		if (onTabSizeChange != null) {
 
-			encodeOnTabSizeChange(responseWriter, InputSourceCodeAlloy, onTabSizeChange, first);
+			encodeOnTabSizeChange(responseWriter, inputSourceCodeAlloy, onTabSizeChange, first);
 			first = false;
 		}
 
-		String onUseSoftTabsChange = InputSourceCodeAlloy.getOnUseSoftTabsChange();
+		String onUseSoftTabsChange = inputSourceCodeAlloy.getOnUseSoftTabsChange();
 
 		if (onUseSoftTabsChange != null) {
 
-			encodeOnUseSoftTabsChange(responseWriter, InputSourceCodeAlloy, onUseSoftTabsChange, first);
+			encodeOnUseSoftTabsChange(responseWriter, inputSourceCodeAlloy, onUseSoftTabsChange, first);
 			first = false;
 		}
 
-		String onUseWrapModeChange = InputSourceCodeAlloy.getOnUseWrapModeChange();
+		String onUseWrapModeChange = inputSourceCodeAlloy.getOnUseWrapModeChange();
 
 		if (onUseWrapModeChange != null) {
 
-			encodeOnUseWrapModeChange(responseWriter, InputSourceCodeAlloy, onUseWrapModeChange, first);
+			encodeOnUseWrapModeChange(responseWriter, inputSourceCodeAlloy, onUseWrapModeChange, first);
 			first = false;
 		}
 
-		String onValueChange = InputSourceCodeAlloy.getOnValueChange();
+		String onValueChange = inputSourceCodeAlloy.getOnValueChange();
 
 		if (onValueChange != null) {
 
-			encodeOnValueChange(responseWriter, InputSourceCodeAlloy, onValueChange, first);
+			encodeOnValueChange(responseWriter, inputSourceCodeAlloy, onValueChange, first);
 			first = false;
 		}
 
-		String onVisibleChange = InputSourceCodeAlloy.getOnVisibleChange();
+		String onVisibleChange = inputSourceCodeAlloy.getOnVisibleChange();
 
 		if (onVisibleChange != null) {
 
-			encodeOnVisibleChange(responseWriter, InputSourceCodeAlloy, onVisibleChange, first);
+			encodeOnVisibleChange(responseWriter, inputSourceCodeAlloy, onVisibleChange, first);
 			first = false;
 		}
 
-		String onWidthChange = InputSourceCodeAlloy.getOnWidthChange();
+		String onWidthChange = inputSourceCodeAlloy.getOnWidthChange();
 
 		if (onWidthChange != null) {
 
-			encodeOnWidthChange(responseWriter, InputSourceCodeAlloy, onWidthChange, first);
+			encodeOnWidthChange(responseWriter, inputSourceCodeAlloy, onWidthChange, first);
 			first = false;
 		}
 
@@ -642,275 +642,275 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 		return MODULES;
 	}
 
-	protected void encodeAfterBoundingBoxChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterBoundingBoxChange, boolean first) throws IOException {
+	protected void encodeAfterBoundingBoxChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterBoundingBoxChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, BOUNDING_BOX_CHANGE, afterBoundingBoxChange, first);
 	}
 
-	protected void encodeAfterContentBoxChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterContentBoxChange, boolean first) throws IOException {
+	protected void encodeAfterContentBoxChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterContentBoxChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, CONTENT_BOX_CHANGE, afterContentBoxChange, first);
 	}
 
-	protected void encodeAfterDestroyedChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterDestroyedChange, boolean first) throws IOException {
+	protected void encodeAfterDestroyedChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterDestroyedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, DESTROYED_CHANGE, afterDestroyedChange, first);
 	}
 
-	protected void encodeAfterDisabledChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterDisabledChange, boolean first) throws IOException {
+	protected void encodeAfterDisabledChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterDisabledChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, DISABLED_CHANGE, afterDisabledChange, first);
 	}
 
-	protected void encodeAfterFocusedChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterFocusedChange, boolean first) throws IOException {
+	protected void encodeAfterFocusedChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterFocusedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, FOCUSED_CHANGE, afterFocusedChange, first);
 	}
 
-	protected void encodeAfterHeightChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterHeightChange, boolean first) throws IOException {
+	protected void encodeAfterHeightChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterHeightChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, HEIGHT_CHANGE, afterHeightChange, first);
 	}
 
-	protected void encodeAfterHighlightActiveLineChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterHighlightActiveLineChange, boolean first) throws IOException {
+	protected void encodeAfterHighlightActiveLineChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterHighlightActiveLineChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, HIGHLIGHT_ACTIVE_LINE_CHANGE, afterHighlightActiveLineChange, first);
 	}
 
-	protected void encodeAfterIdChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterIdChange, boolean first) throws IOException {
+	protected void encodeAfterIdChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterIdChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, ID_CHANGE, afterIdChange, first);
 	}
 
-	protected void encodeAfterInitializedChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterInitializedChange, boolean first) throws IOException {
+	protected void encodeAfterInitializedChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterInitializedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, INITIALIZED_CHANGE, afterInitializedChange, first);
 	}
 
-	protected void encodeAfterLocaleChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterLocaleChange, boolean first) throws IOException {
+	protected void encodeAfterLocaleChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterLocaleChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, LOCALE_CHANGE, afterLocaleChange, first);
 	}
 
-	protected void encodeAfterModeChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterModeChange, boolean first) throws IOException {
+	protected void encodeAfterModeChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterModeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, MODE_CHANGE, afterModeChange, first);
 	}
 
-	protected void encodeAfterReadOnlyChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterReadOnlyChange, boolean first) throws IOException {
+	protected void encodeAfterReadOnlyChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterReadOnlyChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, READ_ONLY_CHANGE, afterReadOnlyChange, first);
 	}
 
-	protected void encodeAfterRenderChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterRenderChange, boolean first) throws IOException {
+	protected void encodeAfterRenderChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterRenderChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, RENDER_CHANGE, afterRenderChange, first);
 	}
 
-	protected void encodeAfterRenderedChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterRenderedChange, boolean first) throws IOException {
+	protected void encodeAfterRenderedChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterRenderedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, RENDERED_CHANGE, afterRenderedChange, first);
 	}
 
-	protected void encodeAfterShowPrintMarginChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterShowPrintMarginChange, boolean first) throws IOException {
+	protected void encodeAfterShowPrintMarginChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterShowPrintMarginChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, SHOW_PRINT_MARGIN_CHANGE, afterShowPrintMarginChange, first);
 	}
 
-	protected void encodeAfterSrcNodeChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterSrcNodeChange, boolean first) throws IOException {
+	protected void encodeAfterSrcNodeChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterSrcNodeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, SRC_NODE_CHANGE, afterSrcNodeChange, first);
 	}
 
-	protected void encodeAfterStringsChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterStringsChange, boolean first) throws IOException {
+	protected void encodeAfterStringsChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterStringsChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, STRINGS_CHANGE, afterStringsChange, first);
 	}
 
-	protected void encodeAfterTabIndexChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterTabIndexChange, boolean first) throws IOException {
+	protected void encodeAfterTabIndexChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterTabIndexChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, TAB_INDEX_CHANGE, afterTabIndexChange, first);
 	}
 
-	protected void encodeAfterTabSizeChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterTabSizeChange, boolean first) throws IOException {
+	protected void encodeAfterTabSizeChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterTabSizeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, TAB_SIZE_CHANGE, afterTabSizeChange, first);
 	}
 
-	protected void encodeAfterUseSoftTabsChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterUseSoftTabsChange, boolean first) throws IOException {
+	protected void encodeAfterUseSoftTabsChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterUseSoftTabsChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, USE_SOFT_TABS_CHANGE, afterUseSoftTabsChange, first);
 	}
 
-	protected void encodeAfterUseWrapModeChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterUseWrapModeChange, boolean first) throws IOException {
+	protected void encodeAfterUseWrapModeChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterUseWrapModeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, USE_WRAP_MODE_CHANGE, afterUseWrapModeChange, first);
 	}
 
-	protected void encodeAfterValueChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterValueChange, boolean first) throws IOException {
+	protected void encodeAfterValueChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterValueChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, VALUE_CHANGE, afterValueChange, first);
 	}
 
-	protected void encodeAfterVisibleChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterVisibleChange, boolean first) throws IOException {
+	protected void encodeAfterVisibleChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterVisibleChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, VISIBLE_CHANGE, afterVisibleChange, first);
 	}
 
-	protected void encodeAfterWidthChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String afterWidthChange, boolean first) throws IOException {
+	protected void encodeAfterWidthChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String afterWidthChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, WIDTH_CHANGE, afterWidthChange, first);
 	}
 
-	protected void encodeBoundingBox(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String boundingBox, boolean first) throws IOException {
+	protected void encodeBoundingBox(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String boundingBox, boolean first) throws IOException {
 		encodeString(responseWriter, InputSourceCodeAlloy.BOUNDING_BOX, boundingBox, first);
 	}
 
-	protected void encodeContentBox(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String contentBox, boolean first) throws IOException {
+	protected void encodeContentBox(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String contentBox, boolean first) throws IOException {
 		encodeString(responseWriter, InputSourceCodeAlloy.CONTENT_BOX, contentBox, first);
 	}
 
-	protected void encodeDisabled(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Boolean disabled, boolean first) throws IOException {
+	protected void encodeDisabled(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean disabled, boolean first) throws IOException {
 		encodeBoolean(responseWriter, InputSourceCodeAlloy.DISABLED, disabled, first);
 	}
 
-	protected void encodeHeight(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Object height, boolean first) throws IOException {
+	protected void encodeHeight(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Object height, boolean first) throws IOException {
 		encodeNumber(responseWriter, InputSourceCodeAlloy.HEIGHT, height, first);
 	}
 
-	protected void encodeHighlightActiveLine(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Boolean highlightActiveLine, boolean first) throws IOException {
+	protected void encodeHighlightActiveLine(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean highlightActiveLine, boolean first) throws IOException {
 		encodeBoolean(responseWriter, InputSourceCodeAlloy.HIGHLIGHT_ACTIVE_LINE, highlightActiveLine, first);
 	}
 
-	protected void encodeLocale(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String locale, boolean first) throws IOException {
+	protected void encodeLocale(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String locale, boolean first) throws IOException {
 		encodeString(responseWriter, InputSourceCodeAlloy.LOCALE, locale, first);
 	}
 
-	protected void encodeMode(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String mode, boolean first) throws IOException {
+	protected void encodeMode(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String mode, boolean first) throws IOException {
 		encodeString(responseWriter, InputSourceCodeAlloy.MODE, mode, first);
 	}
 
-	protected void encodeOnBoundingBoxChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onBoundingBoxChange, boolean first) throws IOException {
+	protected void encodeOnBoundingBoxChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onBoundingBoxChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, BOUNDING_BOX_CHANGE, onBoundingBoxChange, first);
 	}
 
-	protected void encodeOnContentBoxChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onContentBoxChange, boolean first) throws IOException {
+	protected void encodeOnContentBoxChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onContentBoxChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, CONTENT_BOX_CHANGE, onContentBoxChange, first);
 	}
 
-	protected void encodeOnDestroyedChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onDestroyedChange, boolean first) throws IOException {
+	protected void encodeOnDestroyedChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onDestroyedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, DESTROYED_CHANGE, onDestroyedChange, first);
 	}
 
-	protected void encodeOnDisabledChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onDisabledChange, boolean first) throws IOException {
+	protected void encodeOnDisabledChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onDisabledChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, DISABLED_CHANGE, onDisabledChange, first);
 	}
 
-	protected void encodeOnFocusedChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onFocusedChange, boolean first) throws IOException {
+	protected void encodeOnFocusedChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onFocusedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, FOCUSED_CHANGE, onFocusedChange, first);
 	}
 
-	protected void encodeOnHeightChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onHeightChange, boolean first) throws IOException {
+	protected void encodeOnHeightChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onHeightChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, HEIGHT_CHANGE, onHeightChange, first);
 	}
 
-	protected void encodeOnHighlightActiveLineChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onHighlightActiveLineChange, boolean first) throws IOException {
+	protected void encodeOnHighlightActiveLineChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onHighlightActiveLineChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, HIGHLIGHT_ACTIVE_LINE_CHANGE, onHighlightActiveLineChange, first);
 	}
 
-	protected void encodeOnIdChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onIdChange, boolean first) throws IOException {
+	protected void encodeOnIdChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onIdChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, ID_CHANGE, onIdChange, first);
 	}
 
-	protected void encodeOnInitializedChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onInitializedChange, boolean first) throws IOException {
+	protected void encodeOnInitializedChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onInitializedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, INITIALIZED_CHANGE, onInitializedChange, first);
 	}
 
-	protected void encodeOnLocaleChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onLocaleChange, boolean first) throws IOException {
+	protected void encodeOnLocaleChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onLocaleChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, LOCALE_CHANGE, onLocaleChange, first);
 	}
 
-	protected void encodeOnModeChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onModeChange, boolean first) throws IOException {
+	protected void encodeOnModeChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onModeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, MODE_CHANGE, onModeChange, first);
 	}
 
-	protected void encodeOnReadOnlyChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onReadOnlyChange, boolean first) throws IOException {
+	protected void encodeOnReadOnlyChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onReadOnlyChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, READ_ONLY_CHANGE, onReadOnlyChange, first);
 	}
 
-	protected void encodeOnRenderChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onRenderChange, boolean first) throws IOException {
+	protected void encodeOnRenderChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onRenderChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, RENDER_CHANGE, onRenderChange, first);
 	}
 
-	protected void encodeOnRenderedChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onRenderedChange, boolean first) throws IOException {
+	protected void encodeOnRenderedChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onRenderedChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, RENDERED_CHANGE, onRenderedChange, first);
 	}
 
-	protected void encodeOnShowPrintMarginChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onShowPrintMarginChange, boolean first) throws IOException {
+	protected void encodeOnShowPrintMarginChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onShowPrintMarginChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, SHOW_PRINT_MARGIN_CHANGE, onShowPrintMarginChange, first);
 	}
 
-	protected void encodeOnSrcNodeChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onSrcNodeChange, boolean first) throws IOException {
+	protected void encodeOnSrcNodeChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onSrcNodeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, SRC_NODE_CHANGE, onSrcNodeChange, first);
 	}
 
-	protected void encodeOnStringsChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onStringsChange, boolean first) throws IOException {
+	protected void encodeOnStringsChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onStringsChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, STRINGS_CHANGE, onStringsChange, first);
 	}
 
-	protected void encodeOnTabIndexChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onTabIndexChange, boolean first) throws IOException {
+	protected void encodeOnTabIndexChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onTabIndexChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, TAB_INDEX_CHANGE, onTabIndexChange, first);
 	}
 
-	protected void encodeOnTabSizeChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onTabSizeChange, boolean first) throws IOException {
+	protected void encodeOnTabSizeChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onTabSizeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, TAB_SIZE_CHANGE, onTabSizeChange, first);
 	}
 
-	protected void encodeOnUseSoftTabsChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onUseSoftTabsChange, boolean first) throws IOException {
+	protected void encodeOnUseSoftTabsChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onUseSoftTabsChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, USE_SOFT_TABS_CHANGE, onUseSoftTabsChange, first);
 	}
 
-	protected void encodeOnUseWrapModeChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onUseWrapModeChange, boolean first) throws IOException {
+	protected void encodeOnUseWrapModeChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onUseWrapModeChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, USE_WRAP_MODE_CHANGE, onUseWrapModeChange, first);
 	}
 
-	protected void encodeOnValueChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onValueChange, boolean first) throws IOException {
+	protected void encodeOnValueChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onValueChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, VALUE_CHANGE, onValueChange, first);
 	}
 
-	protected void encodeOnVisibleChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onVisibleChange, boolean first) throws IOException {
+	protected void encodeOnVisibleChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onVisibleChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, VISIBLE_CHANGE, onVisibleChange, first);
 	}
 
-	protected void encodeOnWidthChange(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String onWidthChange, boolean first) throws IOException {
+	protected void encodeOnWidthChange(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String onWidthChange, boolean first) throws IOException {
 		encodeEvent(responseWriter, WIDTH_CHANGE, onWidthChange, first);
 	}
 
-	protected void encodeReadOnly(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Boolean readOnly, boolean first) throws IOException {
+	protected void encodeReadOnly(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean readOnly, boolean first) throws IOException {
 		encodeBoolean(responseWriter, InputSourceCodeAlloy.READ_ONLY, readOnly, first);
 	}
 
-	protected void encodeShowPrintMargin(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Boolean showPrintMargin, boolean first) throws IOException {
+	protected void encodeShowPrintMargin(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean showPrintMargin, boolean first) throws IOException {
 		encodeBoolean(responseWriter, InputSourceCodeAlloy.SHOW_PRINT_MARGIN, showPrintMargin, first);
 	}
 
-	protected void encodeSrcNode(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String srcNode, boolean first) throws IOException {
+	protected void encodeSrcNode(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String srcNode, boolean first) throws IOException {
 		encodeString(responseWriter, InputSourceCodeAlloy.SRC_NODE, srcNode, first);
 	}
 
-	protected void encodeStrings(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Object strings, boolean first) throws IOException {
+	protected void encodeStrings(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Object strings, boolean first) throws IOException {
 		encodeObject(responseWriter, InputSourceCodeAlloy.STRINGS, strings, first);
 	}
 
-	protected void encodeTabIndex(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Object tabIndex, boolean first) throws IOException {
+	protected void encodeTabIndex(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Object tabIndex, boolean first) throws IOException {
 		encodeNumber(responseWriter, InputSourceCodeAlloy.TAB_INDEX, tabIndex, first);
 	}
 
-	protected void encodeTabSize(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Object tabSize, boolean first) throws IOException {
+	protected void encodeTabSize(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Object tabSize, boolean first) throws IOException {
 		encodeNumber(responseWriter, InputSourceCodeAlloy.TAB_SIZE, tabSize, first);
 	}
 
-	protected void encodeUseSoftTabs(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Boolean useSoftTabs, boolean first) throws IOException {
+	protected void encodeUseSoftTabs(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean useSoftTabs, boolean first) throws IOException {
 		encodeBoolean(responseWriter, InputSourceCodeAlloy.USE_SOFT_TABS, useSoftTabs, first);
 	}
 
-	protected void encodeUseWrapMode(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Boolean useWrapMode, boolean first) throws IOException {
+	protected void encodeUseWrapMode(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean useWrapMode, boolean first) throws IOException {
 		encodeBoolean(responseWriter, InputSourceCodeAlloy.USE_WRAP_MODE, useWrapMode, first);
 	}
 
-	protected void encodeValue(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Object value, boolean first) throws IOException {
+	protected void encodeValue(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Object value, boolean first) throws IOException {
 		encodeString(responseWriter, InputSourceCodeAlloy.VALUE, value, first);
 	}
 
-	protected void encodeVisible(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Boolean visible, boolean first) throws IOException {
+	protected void encodeVisible(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean visible, boolean first) throws IOException {
 		encodeBoolean(responseWriter, InputSourceCodeAlloy.VISIBLE, visible, first);
 	}
 
-	protected void encodeWidgetId(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, String widgetId, boolean first) throws IOException {
+	protected void encodeWidgetId(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String widgetId, boolean first) throws IOException {
 		encodeString(responseWriter, InputSourceCodeAlloy.WIDGET_ID, widgetId, first);
 	}
 
-	protected void encodeWidgetRender(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Boolean widgetRender, boolean first) throws IOException {
+	protected void encodeWidgetRender(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean widgetRender, boolean first) throws IOException {
 		encodeBoolean(responseWriter, InputSourceCodeAlloy.WIDGET_RENDER, widgetRender, first);
 	}
 
-	protected void encodeWidth(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Object width, boolean first) throws IOException {
+	protected void encodeWidth(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Object width, boolean first) throws IOException {
 		encodeNumber(responseWriter, InputSourceCodeAlloy.WIDTH, width, first);
 	}
 }
