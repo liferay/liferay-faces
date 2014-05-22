@@ -22,7 +22,7 @@ public class StringHelper {
 		String[] newArray = new String[array.length + value.length];
 
 		System.arraycopy(array, 0, newArray, 0, array.length);
-		System.arraycopy(value, 0, newArray, array.length, array.length);
+		System.arraycopy(value, 0, newArray, array.length, value.length);
 
 		return newArray;
 	}
