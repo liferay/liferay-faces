@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/templates/component-2col.xhtml">
@@ -6,8 +6,8 @@
 	<ui:define name="col1">
 		<!-- Example 1: Hard coded Brazilian Portuguese locale -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-inputdate-localization-example-1']}" number="1">
-				<aui:inputDate id="portugueseInputDate" binding="#{portugueseInputDate}" locale="pt-BR"
+			<showcase:example description="#{i18n['alloy-inputdate-localization-example-1']}" number="1">
+				<alloy:inputDate id="portugueseInputDate" binding="#{portugueseInputDate}" locale="pt-BR"
 					value="#{inputDateModelBean.birthday}" />
 				<hr />
 				<h:commandButton value="#{i18n['submit']}">
@@ -25,8 +25,8 @@
 	<ui:define name="col2">
 		<!-- Example 2: Japanese Locale obtained from a bean via EL -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-inputdate-localization-example-2']}" number="2">
-				<aui:inputDate id="japaneseInputDate" binding="#{japaneseInputDate}" locale="#{inputDateModelBean.locale}"
+			<showcase:example description="#{i18n['alloy-inputdate-localization-example-2']}" number="2">
+				<alloy:inputDate id="japaneseInputDate" binding="#{japaneseInputDate}" locale="#{inputDateModelBean.locale}"
 					value="#{inputDateModelBean.birthday}" />
 				<hr />
 				<h:commandButton value="#{i18n['submit']}">

@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/templates/component-3col.xhtml">
@@ -6,7 +6,7 @@
 	<ui:define name="col1">
 		<h:form>
 			<showcase:example>
-				<aui:inputDate id="birthday" datePattern="MM/dd/yyyy" panes="3" value="#{inputDateModelBean.birthday}" />
+				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" panes="3" value="#{inputDateModelBean.birthday}" />
 				<hr />
 				<h:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />

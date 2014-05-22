@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE components>
-<components namespace="aui" extends="transformer.output.xml" namespaceURI="http://liferay.com/faces/aui">
+<components namespace="alloy" extends="transformer.output.xml" namespaceURI="http://liferay.com/faces/alloy">
 	<description>
-		<![CDATA[The Liferay Faces Alloy facelet component tags with the <code>aui:</code> tag name prefix.]]>
+		<![CDATA[The Liferay Faces Alloy facelet component tags with the <code>alloy:</code> tag name prefix.]]>
 	</description>
 	<extension>
 		<function>

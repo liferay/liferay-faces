@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets">
 
@@ -10,7 +10,7 @@
 				<f:selectItem itemLabel="XML" itemValue="xml" />
 				<f:ajax render="componentField modelValue" />
 			</h:selectOneMenu>
-			<aui:aceEditor id="aceEditor" height="100" mode="#{aceEditorModelBean.mode}"
+			<alloy:aceEditor id="aceEditor" height="100" mode="#{aceEditorModelBean.mode}"
 				rendered="#{showcaseModelBean.selectedComponent.rendered}"
 				required="#{showcaseModelBean.selectedComponent.required}" value="#{aceEditorModelBean.sourceCode}" />
 			<h:message for="aceEditor" />

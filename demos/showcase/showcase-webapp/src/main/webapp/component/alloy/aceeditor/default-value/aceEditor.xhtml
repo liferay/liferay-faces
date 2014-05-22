@@ -1,10 +1,10 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<h:form>
 		<showcase:example styleClass="editableAceEditor">
-			<aui:aceEditor id="aceEditor" height="100" mode="xml" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+			<alloy:aceEditor id="aceEditor" height="100" mode="xml" rendered="#{showcaseModelBean.selectedComponent.rendered}"
 				required="#{showcaseModelBean.selectedComponent.required}" value="#{aceEditorModelBean.sourceText}" />
 			<h:message for="aceEditor" />
 			<hr />

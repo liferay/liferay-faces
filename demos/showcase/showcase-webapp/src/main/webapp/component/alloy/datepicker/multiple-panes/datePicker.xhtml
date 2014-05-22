@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/templates/component-3col.xhtml">
@@ -9,7 +9,7 @@
 				<h:inputText id="birthday" value="#{datePickerModelBean.birthday}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</h:inputText>
-				<aui:datePicker datePattern="MM/dd/yyyy" for="birthday" panes="3" />
+				<alloy:datePicker datePattern="MM/dd/yyyy" for="birthday" panes="3" />
 				<hr />
 				<h:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />

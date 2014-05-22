@@ -73,7 +73,7 @@ public class ListModelBean {
 		ClassLoader classLoader = getClass().getClassLoader();
 
 		List<String> namespaces = new ArrayList<String>();
-		namespaces.add("aui");
+		namespaces.add("alloy");
 
 		if (LIFERAY_FACES_BRIDGE_DETECTED) {
 			namespaces.add("bridge");

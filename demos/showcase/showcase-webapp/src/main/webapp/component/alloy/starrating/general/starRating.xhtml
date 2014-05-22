@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/templates/component-2col.xhtml">
@@ -6,9 +6,9 @@
 	<ui:define name="col1">
 		<!-- Example 1: String value (no converter required) -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-starrating-general-example-1']}" number="1" renderedCheckbox="true"
+			<showcase:example description="#{i18n['alloy-starrating-general-example-1']}" number="1" renderedCheckbox="true"
 				requiredCheckbox="true">
-				<aui:starRating id="starRating" label="#{i18n['favorite']}:"
+				<alloy:starRating id="starRating" label="#{i18n['favorite']}:"
 					rendered="#{showcaseModelBean.selectedComponent.rendered}"
 					required="#{showcaseModelBean.selectedComponent.required}" value="#{starRatingModelBean.favorite}">
 					<f:selectItem itemLabel="Compatible" itemValue="Compatible" />
@@ -16,7 +16,7 @@
 					<f:selectItem itemLabel="Powerful Integration" itemValue="Powerful Integration" />
 					<f:selectItem itemLabel="Lightweight" itemValue="Lightweight" />
 					<f:selectItem itemLabel="Open Source" itemValue="Open Source" />
-				</aui:starRating>
+				</alloy:starRating>
 				<h:message for="starRating" />
 				<hr />
 				<h:commandButton action="#{starRatingBackingBean.submit}" value="#{i18n['submit']}">
@@ -32,8 +32,8 @@
 	<ui:define name="col2">
 		<!-- Example 2: Object value (requires a converter) -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-starrating-general-example-2']}" number="2" renderedCheckbox="true">
-				<aui:starRating id="starRating" label="#{i18n['favorite']}:"
+			<showcase:example description="#{i18n['alloy-starrating-general-example-2']}" number="2" renderedCheckbox="true">
+				<alloy:starRating id="starRating" label="#{i18n['favorite']}:"
 					rendered="#{showcaseModelBean.selectedComponent.rendered}" value="#{starRatingModelBean.favoriteId}">
 					<f:converter converterId="javax.faces.Long" />
 					<f:selectItem itemLabel="Compatible" itemValue="1" />
@@ -41,7 +41,7 @@
 					<f:selectItem itemLabel="Powerful Integration" itemValue="3" />
 					<f:selectItem itemLabel="Lightweight" itemValue="4" />
 					<f:selectItem itemLabel="Open Source" itemValue="5" />
-				</aui:starRating>
+				</alloy:starRating>
 				<h:message for="starRating" />
 				<hr />
 				<h:commandButton action="#{starRatingBackingBean.submit}" value="#{i18n['submit']}">

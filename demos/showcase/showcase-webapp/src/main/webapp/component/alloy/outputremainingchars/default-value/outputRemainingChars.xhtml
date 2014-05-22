@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
 	template="/templates/component-3col.xhtml">
@@ -8,7 +8,7 @@
 			<showcase:example>
 				<h:inputTextarea id="inputTextareaInit" maxlength="140" value="Default text" />
 				<br />
-				<aui:outputRemainingChars for="inputTextareaInit" value="There are {0} character(s) remaining." />
+				<alloy:outputRemainingChars for="inputTextareaInit" value="There are {0} character(s) remaining." />
 			</showcase:example>
 		</h:form>
 	</ui:define>

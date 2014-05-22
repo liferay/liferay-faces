@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/templates/component-3col.xhtml">
@@ -6,12 +6,12 @@
 	<ui:define name="col1">
 		<!-- Example 1: Styling via children -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-button-general-example-1']}" number="1" renderedCheckbox="true">
-				<aui:button rendered="#{showcaseModelBean.selectedComponent.rendered}" value="1234">
-					<aui:icon name="star" />
+			<showcase:example description="#{i18n['alloy-button-general-example-1']}" number="1" renderedCheckbox="true">
+				<alloy:button rendered="#{showcaseModelBean.selectedComponent.rendered}" value="1234">
+					<alloy:icon name="star" />
 					<h:outputText value=" #{i18n['Button']} " />
 					<h:graphicImage value="/resources/images/liferay-faces-logo-small.png" />
-				</aui:button>
+				</alloy:button>
 			</showcase:example>
 		</h:form>
 	</ui:define>
@@ -19,8 +19,8 @@
 	<ui:define name="col2">
 		<!-- Example 2: Styling via image attribute -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-button-general-example-2']}" number="2" renderedCheckbox="true">
-				<aui:button image="/resources/images/liferay-faces-logo-small.png"
+			<showcase:example description="#{i18n['alloy-button-general-example-2']}" number="2" renderedCheckbox="true">
+				<alloy:button image="/resources/images/liferay-faces-logo-small.png"
 					rendered="#{showcaseModelBean.selectedComponent.rendered}" value="1234" />
 			</showcase:example>
 		</h:form>
@@ -30,8 +30,8 @@
 		<!-- Example#3: Styling via value attribute (Note: This can only be used if the component does not have any -->
 		<!-- children and the component does not specify an image) -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-button-general-example-3']}" number="3" renderedCheckbox="true">
-				<aui:button rendered="#{showcaseModelBean.selectedComponent.rendered}" value="1234" />
+			<showcase:example description="#{i18n['alloy-button-general-example-3']}" number="3" renderedCheckbox="true">
+				<alloy:button rendered="#{showcaseModelBean.selectedComponent.rendered}" value="1234" />
 			</showcase:example>
 		</h:form>
 	</ui:define>
