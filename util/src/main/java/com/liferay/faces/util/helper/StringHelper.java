@@ -18,6 +18,15 @@ package com.liferay.faces.util.helper;
  */
 public class StringHelper {
 
+	public static String[] append(String[] array, String... value) {
+		String[] newArray = new String[array.length + value.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+		System.arraycopy(value, 0, newArray, array.length, value.length);
+
+		return newArray;
+	}
+
 	public static String toString(Object value, String defaultValue) {
 
 		if (value != null) {
