@@ -1,15 +1,13 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
-	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-2col.xhtml">
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
 		<h:form>
-			<aui-nongen:field label="#{i18n['component']}">
+			<showcase:example>
 				<aui:inputDate id="birthday" datePattern="MM/dd/yyyy" maximumDate="#{inputDateModelBean.maxDate}"
-					minimumDate="#{inputDateModelBean.minDate}" showOn="button"
-					value="#{inputDateModelBean.birthday}">
-				</aui:inputDate>
+					minimumDate="#{inputDateModelBean.minDate}" showOn="button" value="#{inputDateModelBean.birthday}" />
 				<h:message for="birthday" />
 				<br />
 				<h:outputText value="#{i18n['valid-date-range']}: " />
@@ -20,17 +18,16 @@
 				<h:outputText value="#{inputDateModelBean.maxDate}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</h:outputText>
-			</aui-nongen:field>
-			<h:commandButton value="#{i18n['submit']}">
-				<f:ajax execute="@form" render="@form" />
-			</h:commandButton>
-			<aui-nongen:field label="#{i18n['model-value']}">
-				<showcase:outputModel>
-					<h:outputText value="#{inputDateModelBean.birthday}">
-						<f:convertDateTime pattern="MM/dd/yyyy" />
-					</h:outputText>
-				</showcase:outputModel>
-			</aui-nongen:field>
+				<hr />
+				<h:commandButton value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{inputDateModelBean.birthday}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:outputText>
+			</showcase:outputModel>
 		</h:form>
 	</ui:define>
 

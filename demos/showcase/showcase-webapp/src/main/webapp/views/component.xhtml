@@ -1,6 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase-fn="http://liferay.com/faces/showcase-fn" xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/showcase.xhtml">
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:showcase-fn="http://liferay.com/faces/showcase-fn"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/showcase-#{showcaseModelBean.deploymentType}.xhtml">
 
 	<ui:define name="content">
 		<f:metadata>
@@ -16,10 +17,11 @@
 		<c:set value="#{selectedComponent.prefix}" var="selectedComponentPrefix" />
 		<c:set value="#{selectedComponentPrefix}:#{selectedComponentCamelCaseName}" var="selectedComponentFullName" />
 		<c:set value="#{selectedComponentPrefix}-#{selectedComponentLowerCaseName}" var="selectedComponentKey" />
-		<c:set value="#{selectedComponentPrefix}-#{selectedComponentLowerCaseName}-#{selectedComponentUseCaseName}" var="selectedComponentUseCaseKey" />
-		<c:set value="#{i18n[selectedComponentKey]}" var="selectedComponentDescription" /> 
+		<c:set value="#{selectedComponentPrefix}-#{selectedComponentLowerCaseName}-#{selectedComponentUseCaseName}"
+			var="selectedComponentUseCaseKey" />
+		<c:set value="#{i18n[selectedComponentKey]}" var="selectedComponentDescription" />
 		<c:set value="#{i18n[selectedComponentUseCaseKey]}" var="selectedComponentUseCaseDescription" />
-		<c:set value="vdldoc:#{selectedComponentFullName}" var="selectedComponentDocKey" /> 
+		<c:set value="vdldoc:#{selectedComponentFullName}" var="selectedComponentDocKey" />
 		<button onclick="window.open('#{showcase-fn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;">#{i18n['vdl-documentation']}</button>
 		<c:if test="#{selectedComponentCamelCaseName == 'datePicker'}">
 			<c:set value="#{selectedComponentUseCaseName}" var="correspondingUseCase" />
@@ -41,18 +43,22 @@
 			</h:panelGrid>
 		</c:if>
 		<h2>#{selectedComponentFullName}</h2>
-		<p><h:outputText escape="false" value="#{selectedComponentDescription}" /></p>
+		<p>
+			<h:outputText escape="false" value="#{selectedComponentDescription}" />
+		</p>
 		<c:if test="#{!empty selectedComponentUseCaseDescription}">
 			<h3>#{i18n[selectedComponentUseCaseName]} #{i18n['usage']}</h3>
-			<p><h:outputText escape="false" value="#{selectedComponentUseCaseDescription}" /></p>
+			<p>
+				<h:outputText escape="false" value="#{selectedComponentUseCaseDescription}" />
+			</p>
 		</c:if>
 		<ui:include
 			src="/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/#{selectedComponentUseCaseName}/#{selectedComponentCamelCaseName}.xhtml" />
-		<hr />
 		<h3>#{i18n['source-code']}</h3>
 		<aui:tabView value="#{showcaseModelBean.selectedComponent.useCaseCodeExamples}" var="useCaseCodeExample">
 			<aui:tab label="#{useCaseCodeExample.fileName}">
-				<aui:aceEditor mode="#{useCaseCodeExample.fileExtension}" readOnly="true" showPrintMargin="false" useWrapMode="false" width="900" value="#{useCaseCodeExample.rawText}" />
+				<aui:aceEditor mode="#{useCaseCodeExample.fileExtension}" readOnly="true" showPrintMargin="false"
+					useWrapMode="false" width="900" value="#{useCaseCodeExample.rawText}" />
 			</aui:tab>
 		</aui:tabView>
 	</ui:define>

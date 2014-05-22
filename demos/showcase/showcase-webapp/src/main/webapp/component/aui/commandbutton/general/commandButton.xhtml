@@ -1,38 +1,28 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
-	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-3col.xhtml">
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
-		<!-- Example#1: Styling via children -->
+		<!-- Example 1: Styling via children -->
 		<h:form>
-			<aui-nongen:field label="#{i18n['example-1']}">
-				<h:outputText value="#{i18n['aui-commandbutton-general-example-1']}" />
-			</aui-nongen:field>
-			<aui-nongen:field label="#{i18n['component']}">
-				<showcase:componentRenderedCheckbox />
-				<br />
+			<showcase:example description="#{i18n['aui-commandbutton-general-example-1']}" number="1" renderedCheckbox="true">
 				<aui:commandButton rendered="#{showcaseModelBean.selectedComponent.rendered}" value="1234">
 					<aui:icon name="star" />
 					<h:outputText value=" #{i18n['Button']} " />
 					<h:graphicImage value="/resources/images/liferay-faces-logo-small.png" />
 				</aui:commandButton>
-			</aui-nongen:field>
+			</showcase:example>
 		</h:form>
 	</ui:define>
 
 	<ui:define name="col2">
-		<!-- Example#2: Styling via image attribute -->
+		<!-- Example 2: Styling via image attribute -->
 		<h:form>
-			<aui-nongen:field label="#{i18n['example-2']}">
-				<h:outputText escape="false" value="#{i18n['aui-commandbutton-general-example-2']}" />
-			</aui-nongen:field>
-			<aui-nongen:field label="#{i18n['component']}">
-				<showcase:componentRenderedCheckbox />
-				<br />
+			<showcase:example description="#{i18n['aui-commandbutton-general-example-2']}" number="2" renderedCheckbox="true">
 				<aui:commandButton image="/resources/images/liferay-faces-logo-small.png"
 					rendered="#{showcaseModelBean.selectedComponent.rendered}" value="1234" />
-			</aui-nongen:field>
+			</showcase:example>
 		</h:form>
 	</ui:define>
 
@@ -40,14 +30,9 @@
 		<!-- Example#3: Styling via value attribute (Note: This can only be used if the component does not have any -->
 		<!-- children and the component does not specify an image) -->
 		<h:form>
-			<aui-nongen:field label="#{i18n['example-3']}">
-				<h:outputText escape="false" value="#{i18n['aui-commandbutton-general-example-3']}" />
-			</aui-nongen:field>
-			<aui-nongen:field label="#{i18n['component']}">
-				<showcase:componentRenderedCheckbox />
-				<br />
+			<showcase:example description="#{i18n['aui-commandbutton-general-example-3']}" number="3" renderedCheckbox="true">
 				<aui:commandButton rendered="#{showcaseModelBean.selectedComponent.rendered}" value="1234" />
-			</aui-nongen:field>
+			</showcase:example>
 		</h:form>
 	</ui:define>
 

@@ -23,6 +23,8 @@ import javax.faces.bean.ViewScoped;
 import com.liferay.faces.demos.dto.CodeExample;
 import com.liferay.faces.demos.dto.ShowcaseComponent;
 import com.liferay.faces.demos.dto.UseCase;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -39,9 +41,25 @@ public class ShowcaseModelBean implements Serializable {
 	@ManagedProperty(name = "listModelBean", value = "#{listModelBean}")
 	private transient ListModelBean listModelBean;
 
-	// Private Data Members;
+	// Private Constants
+	private static final boolean LIFERAY_FACES_BRIDGE_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_FACES_BRIDGE).isDetected();
+
+	// Private Data Members
+	private String deploymentType;
 	private SelectedComponent selectedComponent;
 	private ViewParameters viewParameters;
+
+	public String getDeploymentType() {
+		if (deploymentType == null) {
+			if (LIFERAY_FACES_BRIDGE_DETECTED) {
+				deploymentType = "portlet";
+			}
+			else {
+				deploymentType = "webapp";
+			}
+		}
+		return deploymentType;
+	}
 
 	public void setListModelBean(ListModelBean listModelBean) {
 		this.listModelBean = listModelBean;

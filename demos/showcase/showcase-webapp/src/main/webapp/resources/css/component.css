@@ -1,10 +1,39 @@
+.showcase-example, .showcase-parameter-value, .showcase-model-value {
+	border: 1px solid #ddd;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	margin: 15px 0;
+	padding: 39px 19px 14px;
+	*padding-top: 19px;
+	position: relative;
+}
+
+.showcase-example label.example-label, .showcase-parameter-value label.parameter-label, .showcase-model-value label.model-label {
+	background-color: #f5f5f5;
+	border: 1px solid #ddd;
+	-webkit-border-radius: 4px 0 4px 0;
+	-moz-border-radius: 4px 0 4px 0;
+	border-radius: 4px 0 4px 0;
+	color: #9da0a4;
+	font-size: 12px;
+	left: -1px;
+	padding: 3px 7px;
+	position: absolute;
+	top: -1px;
+}
+
+.showcase-example label.example-label span.example-number, .showcase-parameter-value label.parameter-label, .showcase-model-value label.model-label {
+	font-weight: bold;
+}
+
 .aui .aui-field-element .portlet-msg-error {
 	position: relative;
 	top: -10px;
 }
 
 .aui span.inline-code {
-	border:1px solid #cfcfcf;
+	border: 1px solid #cfcfcf;
 	font-family: monospace;
 }
 
@@ -12,25 +41,25 @@
 	float: right;
 }
 
-.aui .files td, .aui .files th {
+.aui .files td,.aui .files th {
 	padding: 6px;
 }
 
 .aui hr {
 	border-top: 1px solid #cfcfcf;
 	margin-top: 10px;
-	margin-bottom: 10px;	
+	margin-bottom: 10px;
 }
 
 .aui label.field-label {
 	font-weight: bold;
 }
 
-.component-rendered-checkbox input, .component-required-checkbox input {
+.component-rendered-checkbox input,.component-required-checkbox input {
 	vertical-align: 0.1em;
 }
 
-.component-rendered-checkbox label, .component-required-checkbox label {
+.component-rendered-checkbox label,.component-required-checkbox label {
 	display: inline;
 	margin-right: 10px;
 }
