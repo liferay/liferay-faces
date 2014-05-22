@@ -34,12 +34,12 @@ public class ComponentResourceAlloyImpl extends ComponentResourceWrapper {
 	// Private Constants
 	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
 		.isDetected();
-	private static final Set<String> PORTAL_RESOURCES = new HashSet<String>();
+	private static final Set<String> PORTAL_RESOURCE_IDS = new HashSet<String>();
 
 	static {
-		PORTAL_RESOURCES.add("liferay-faces-alloy:build/aui/aui-min.js");
-		PORTAL_RESOURCES.add("liferay-faces-alloy:build/aui-css/css/bootstrap.min.css");
-		PORTAL_RESOURCES.add("liferay-faces-alloy:liferay.js");
+		PORTAL_RESOURCE_IDS.add("liferay-faces-alloy:build/aui/aui-min.js");
+		PORTAL_RESOURCE_IDS.add("liferay-faces-alloy:build/aui-css/css/bootstrap.min.css");
+		PORTAL_RESOURCE_IDS.add("liferay-faces-alloy:liferay.js");
 	}
 
 	// Private Data Members
@@ -57,7 +57,7 @@ public class ComponentResourceAlloyImpl extends ComponentResourceWrapper {
 		if (LIFERAY_PORTAL_DETECTED) {
 			String id = super.getId();
 
-			if (PORTAL_RESOURCES.contains(id)) {
+			if (PORTAL_RESOURCE_IDS.contains(id)) {
 				renderable = false;
 			}
 		}
