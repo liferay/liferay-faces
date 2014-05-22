@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.aceeditor;
+package com.liferay.faces.alloy.component.inputsourcecode;
 //J-
 
 import javax.annotation.Generated;
@@ -25,7 +25,7 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class AceEditorBase extends HtmlInputText implements Styleable, ClientComponent, AceEditorAlloy {
+public abstract class InputSourceCodeBase extends HtmlInputText implements Styleable, ClientComponent, InputSourceCodeAlloy {
 
 	@Override
 	public String getAfterBoundingBoxChange() {

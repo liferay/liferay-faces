@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.aceeditor;
+package com.liferay.faces.alloy.component.inputsourcecode;
 
 import java.io.IOException;
 
@@ -33,7 +33,7 @@ import com.liferay.faces.util.render.HiddenTextResponseWriter;
 /**
  * @author  Neil Griffin
  */
-@FacesRenderer(componentFamily = AceEditor.COMPONENT_FAMILY, rendererType = AceEditor.RENDERER_TYPE)
+@FacesRenderer(componentFamily = InputSourceCode.COMPONENT_FAMILY, rendererType = InputSourceCode.RENDERER_TYPE)
 @ResourceDependencies(
 	{
 		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
@@ -41,7 +41,7 @@ import com.liferay.faces.util.render.HiddenTextResponseWriter;
 		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
 	}
 )
-public class AceEditorRenderer extends AceEditorRendererBase {
+public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 
 	// Private Constants
 	private static final String ESCAPED_BACKSLASH = "\\\\";
@@ -62,8 +62,8 @@ public class AceEditorRenderer extends AceEditorRendererBase {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		AceEditorAlloy aceEditorAlloy = (AceEditorAlloy) uiComponent;
-		Boolean readOnly = aceEditorAlloy.isReadOnly();
+		InputSourceCodeAlloy InputSourceCodeAlloy = (InputSourceCodeAlloy) uiComponent;
+		Boolean readOnly = InputSourceCodeAlloy.isReadOnly();
 
 		if ((readOnly == null) || (!readOnly)) {
 
@@ -100,7 +100,7 @@ public class AceEditorRenderer extends AceEditorRendererBase {
 		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
 
 		// Encode the entire boundingbox <div>...<div> element.
-		String defaultBoundingBoxClientId = AceEditorUtil.getDefaultBoundingBoxClientId(facesContext, uiComponent);
+		String defaultBoundingBoxClientId = InputSourceCodeUtil.getDefaultBoundingBoxClientId(facesContext, uiComponent);
 		responseWriter.startElement(StringPool.DIV, uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, defaultBoundingBoxClientId, StringPool.ID);
 		responseWriter.endElement(StringPool.DIV);
@@ -123,7 +123,7 @@ public class AceEditorRenderer extends AceEditorRendererBase {
 	}
 
 	@Override
-	protected void encodeValue(ResponseWriter responseWriter, AceEditorAlloy aceEditorAlloy, Object value,
+	protected void encodeValue(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Object value,
 		boolean first) throws IOException {
 
 		if (value instanceof String) {
@@ -136,17 +136,17 @@ public class AceEditorRenderer extends AceEditorRendererBase {
 			value = valueAsString;
 		}
 
-		super.encodeValue(responseWriter, aceEditorAlloy, value, first);
+		super.encodeValue(responseWriter, InputSourceCodeAlloy, value, first);
 	}
 
 	@Override
 	public String getDelegateComponentFamily() {
-		return AceEditor.DELEGATE_COMPONENT_FAMILY;
+		return InputSourceCode.DELEGATE_COMPONENT_FAMILY;
 	}
 
 	@Override
 	public String getDelegateRendererType() {
-		return AceEditor.DELEGATE_RENDERER_TYPE;
+		return InputSourceCode.DELEGATE_RENDERER_TYPE;
 	}
 
 	public DelegationResponseWriter getDelegationResponseWriter(FacesContext facesContext, UIComponent uiComponent) {
