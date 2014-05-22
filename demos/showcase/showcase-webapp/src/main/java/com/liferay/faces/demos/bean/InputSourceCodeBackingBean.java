@@ -26,25 +26,25 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 @ManagedBean
 @RequestScoped
-public class AceEditorBackingBean {
+public class InputSourceCodeBackingBean {
 
-	private static final Logger logger = LoggerFactory.getLogger(AceEditorBackingBean.class);
+	private static final Logger logger = LoggerFactory.getLogger(InputSourceCodeBackingBean.class);
 
-	@ManagedProperty(name = "aceEditorModelBean", value = "#{aceEditorModelBean}")
-	private AceEditorModelBean aceEditorModelBean;
+	@ManagedProperty(name = "inputSourceCodeModelBean", value = "#{inputSourceCodeModelBean}")
+	private InputSourceCodeModelBean inputSourceCodeModelBean;
 
 	public void submit() {
 
-		String source = aceEditorModelBean.getSourceCode();
+		String source = inputSourceCodeModelBean.getSourceCode();
 
 		if (source == null) {
-			source = aceEditorModelBean.getSourceText();
+			source = inputSourceCodeModelBean.getSourceText();
 		}
 
 		logger.info("You entered text: " + source);
 	}
 
-	public void setAceEditorModelBean(AceEditorModelBean aceEditorModelBean) {
-		this.aceEditorModelBean = aceEditorModelBean;
+	public void setAceEditorModelBean(InputSourceCodeModelBean inputSourceCodeModelBean) {
+		this.inputSourceCodeModelBean = inputSourceCodeModelBean;
 	}
 }
