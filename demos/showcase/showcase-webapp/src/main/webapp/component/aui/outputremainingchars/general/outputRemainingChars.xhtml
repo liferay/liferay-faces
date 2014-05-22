@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Associate with an h:inputText and specify a {0} token within the value attribute. -->
+		<h:form>
+			<showcase:example description="#{i18n['aui-outputremainingchars-general-example-1']}" longDescription="true"
+				number="1" renderedCheckbox="true">
+				<h:inputText id="inputText" maxlength="10" value="#{outputRemainingCharsModelBean.text}" />
+				<br />
+				<aui:outputRemainingChars for="inputText" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+					value="There are {0} character(s) remaining." />
+				<hr />
+				<h:commandButton value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{outputRemainingCharsModelBean.text}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: Associate with an h:inputTextarea and simply render the number of remaining characters. -->
+		<h:form>
+			<showcase:example description="#{i18n['aui-outputremainingchars-general-example-2']}" longDescription="true"
+				number="2" renderedCheckbox="true">
+				<h:inputTextarea id="inputTextarea" maxlength="20" value="#{outputRemainingCharsModelBean.text}" />
+				<br />
+				<aui:outputRemainingChars for="inputTextarea" rendered="#{showcaseModelBean.selectedComponent.rendered}" />
+				<hr />
+				<h:commandButton value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{outputRemainingCharsModelBean.text}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
