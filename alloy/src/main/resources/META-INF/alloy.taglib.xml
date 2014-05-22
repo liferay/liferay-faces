@@ -18,449 +18,6 @@
 		<function-signature>java.lang.String findClientId(java.lang.String)</function-signature>
 	</function>
 	<tag>
-		<description><![CDATA[AceEditor is an input component that renders a field for editing source code text.]]></description>
-		<tag-name>aceEditor</tag-name>
-		<component>
-			<component-type>com.liferay.faces.alloy.component.aceeditor.AceEditor</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.aceeditor.AceEditorRenderer</renderer-type>
-		</component>
-		<attribute>
-			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
-			<name>afterBoundingBoxChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
-			<name>afterContentBoxChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
-			<name>afterDestroyedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
-			<name>afterDisabledChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
-			<name>afterFocusedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The height of ACE Editor.]]></description>
-			<name>afterHeightChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine if the active line of code will be highlighted or not.]]></description>
-			<name>afterHighlightActiveLineChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>afterIdChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
-			<name>afterInitializedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
-			<name>afterLocaleChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Correspond to the language being typed.]]></description>
-			<name>afterModeChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine if the code will be editable or not.]]></description>
-			<name>afterReadOnlyChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
-			<name>afterRenderChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
-			<name>afterRenderedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine if print margin will be visible or not.]]></description>
-			<name>afterShowPrintMarginChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
-			<name>afterSrcNodeChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
-			<name>afterStringsChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
-			<name>afterTabIndexChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The indentation size of tab key.]]></description>
-			<name>afterTabSizeChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine if the tab key will act as space characters or tab characters.]]></description>
-			<name>afterUseSoftTabsChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine if the line will break when it reaches the end of the line.]]></description>
-			<name>afterUseWrapModeChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Some predefined value on the editor.]]></description>
-			<name>afterValueChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
-			<name>afterVisibleChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The width of ACE Editor.]]></description>
-			<name>afterWidthChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
-			<name>boundingBox</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
-			<name>clientKey</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
-			<name>contentBox</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
-			<name>disabled</name>
-			<required>false</required>
-			<type>boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The height of ACE Editor.]]></description>
-			<name>height</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine if the active line of code will be highlighted or not.]]></description>
-			<name>highlightActiveLine</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
-			<name>locale</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Correspond to the language being typed.]]></description>
-			<name>mode</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
-			<name>onBoundingBoxChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
-			<name>onContentBoxChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
-			<name>onDestroyedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
-			<name>onDisabledChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
-			<name>onFocusedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The height of ACE Editor.]]></description>
-			<name>onHeightChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine if the active line of code will be highlighted or not.]]></description>
-			<name>onHighlightActiveLineChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>onIdChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
-			<name>onInitializedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
-			<name>onLocaleChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Correspond to the language being typed.]]></description>
-			<name>onModeChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine if the code will be editable or not.]]></description>
-			<name>onReadOnlyChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
-			<name>onRenderChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
-			<name>onRenderedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine if print margin will be visible or not.]]></description>
-			<name>onShowPrintMarginChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
-			<name>onSrcNodeChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
-			<name>onStringsChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
-			<name>onTabIndexChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The indentation size of tab key.]]></description>
-			<name>onTabSizeChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine if the tab key will act as space characters or tab characters.]]></description>
-			<name>onUseSoftTabsChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine if the line will break when it reaches the end of the line.]]></description>
-			<name>onUseWrapModeChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Some predefined value on the editor.]]></description>
-			<name>onValueChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
-			<name>onVisibleChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The width of ACE Editor.]]></description>
-			<name>onWidthChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine if the code will be editable or not.]]></description>
-			<name>readOnly</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
-			<name>required</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine if print margin will be visible or not.]]></description>
-			<name>showPrintMargin</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
-			<name>srcNode</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
-			<name>strings</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
-			<name>style</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
-			<name>styleClass</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
-			<name>tabIndex</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The indentation size of tab key.]]></description>
-			<name>tabSize</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine if the tab key will act as space characters or tab characters.]]></description>
-			<name>useSoftTabs</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine if the line will break when it reaches the end of the line.]]></description>
-			<name>useWrapMode</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
-			<name>value</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
-			<name>visible</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>widgetId</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
-			<name>widgetRender</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The width of ACE Editor.]]></description>
-			<name>width</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<tag-extension>
-			<vdldoc:since>3.2.0-m2</vdldoc:since>
-		</tag-extension>
-	</tag>
-	<tag>
 		<description><![CDATA[]]></description>
 		<tag-name>body</tag-name>
 		<component>
@@ -918,7 +475,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1584,6 +1141,449 @@
 		<attribute>
 			<description><![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]></description>
 			<name>zIndex</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[InputSourceCode is an input component that renders a field for editing source code text.]]></description>
+		<tag-name>inputSourceCode</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.inputsourcecode.InputSourceCode</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.inputsourcecode.InputSourceCodeRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
+			<name>afterBoundingBoxChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
+			<name>afterContentBoxChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
+			<name>afterDestroyedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
+			<name>afterDisabledChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
+			<name>afterFocusedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The height of ACE Editor.]]></description>
+			<name>afterHeightChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the active line of code will be highlighted or not.]]></description>
+			<name>afterHighlightActiveLineChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[]]></description>
+			<name>afterIdChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
+			<name>afterInitializedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
+			<name>afterLocaleChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Correspond to the language being typed.]]></description>
+			<name>afterModeChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the code will be editable or not.]]></description>
+			<name>afterReadOnlyChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
+			<name>afterRenderChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
+			<name>afterRenderedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if print margin will be visible or not.]]></description>
+			<name>afterShowPrintMarginChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
+			<name>afterSrcNodeChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
+			<name>afterStringsChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
+			<name>afterTabIndexChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The indentation size of tab key.]]></description>
+			<name>afterTabSizeChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the tab key will act as space characters or tab characters.]]></description>
+			<name>afterUseSoftTabsChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the line will break when it reaches the end of the line.]]></description>
+			<name>afterUseWrapModeChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Some predefined value on the editor.]]></description>
+			<name>afterValueChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
+			<name>afterVisibleChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The width of ACE Editor.]]></description>
+			<name>afterWidthChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
+			<name>boundingBox</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
+			<name>clientKey</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
+			<name>contentBox</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<name>disabled</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The height of ACE Editor.]]></description>
+			<name>height</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the active line of code will be highlighted or not.]]></description>
+			<name>highlightActiveLine</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
+			<name>locale</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Correspond to the language being typed.]]></description>
+			<name>mode</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
+			<name>onBoundingBoxChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
+			<name>onContentBoxChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
+			<name>onDestroyedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
+			<name>onDisabledChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
+			<name>onFocusedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The height of ACE Editor.]]></description>
+			<name>onHeightChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the active line of code will be highlighted or not.]]></description>
+			<name>onHighlightActiveLineChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[]]></description>
+			<name>onIdChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
+			<name>onInitializedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
+			<name>onLocaleChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Correspond to the language being typed.]]></description>
+			<name>onModeChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the code will be editable or not.]]></description>
+			<name>onReadOnlyChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
+			<name>onRenderChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
+			<name>onRenderedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if print margin will be visible or not.]]></description>
+			<name>onShowPrintMarginChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
+			<name>onSrcNodeChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
+			<name>onStringsChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
+			<name>onTabIndexChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The indentation size of tab key.]]></description>
+			<name>onTabSizeChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the tab key will act as space characters or tab characters.]]></description>
+			<name>onUseSoftTabsChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the line will break when it reaches the end of the line.]]></description>
+			<name>onUseWrapModeChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Some predefined value on the editor.]]></description>
+			<name>onValueChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
+			<name>onVisibleChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The width of ACE Editor.]]></description>
+			<name>onWidthChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the code will be editable or not.]]></description>
+			<name>readOnly</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
+			<name>required</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if print margin will be visible or not.]]></description>
+			<name>showPrintMargin</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
+			<name>srcNode</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
+			<name>strings</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
+			<name>tabIndex</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The indentation size of tab key.]]></description>
+			<name>tabSize</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the tab key will act as space characters or tab characters.]]></description>
+			<name>useSoftTabs</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine if the line will break when it reaches the end of the line.]]></description>
+			<name>useWrapMode</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
+			<name>visible</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[]]></description>
+			<name>widgetId</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
+			<name>widgetRender</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The width of ACE Editor.]]></description>
+			<name>width</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
 		</attribute>
