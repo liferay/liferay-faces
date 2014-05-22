@@ -23,7 +23,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @RequestScoped
-public class AceEditorModelBean {
+public class InputSourceCodeModelBean {
 
 	private String mode;
 	private String sourceCode;
