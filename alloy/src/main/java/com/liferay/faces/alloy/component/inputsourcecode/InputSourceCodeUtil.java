@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.aceeditor;
+package com.liferay.faces.alloy.component.inputsourcecode;
 
 import javax.faces.component.UIComponent;
 import javax.faces.component.UINamingContainer;
@@ -21,12 +21,12 @@ import javax.faces.context.FacesContext;
 /**
  * @author  Neil Griffin
  */
-public class AceEditorUtil {
+public class InputSourceCodeUtil {
 
 	// Private Constants
 	public static String getDefaultBoundingBoxClientId(FacesContext facesContext, UIComponent uiComponent) {
 		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
 
-		return uiComponent.getClientId(facesContext) + separatorChar + AceEditorAlloy.BOUNDING_BOX;
+		return uiComponent.getClientId(facesContext) + separatorChar + InputSourceCodeAlloy.BOUNDING_BOX;
 	}
 }

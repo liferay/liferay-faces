@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.aceeditor;
+package com.liferay.faces.alloy.component.inputsourcecode;
 //J-
 
 import javax.annotation.Generated;
@@ -21,7 +21,7 @@ import javax.annotation.Generated;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public interface AceEditorAlloy {
+public interface InputSourceCodeAlloy {
 
 	// Public Constants
 	public static final String AFTER_BOUNDING_BOX_CHANGE = "afterBoundingBoxChange";

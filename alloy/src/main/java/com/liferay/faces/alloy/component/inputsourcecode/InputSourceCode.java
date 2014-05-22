@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.aceeditor;
+package com.liferay.faces.alloy.component.inputsourcecode;
 
 import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
@@ -23,16 +23,16 @@ import com.liferay.faces.util.lang.StringPool;
 /**
  * @author  Neil Griffin
  */
-@FacesComponent(value = AceEditor.COMPONENT_TYPE)
-public class AceEditor extends AceEditorBase {
+@FacesComponent(value = InputSourceCode.COMPONENT_TYPE)
+public class InputSourceCode extends InputSourceCodeBase {
 
 	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.aceeditor.AceEditor";
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputsourcecode.InputSourceCode";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Text";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.aceeditor.AceEditorRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputsourcecode.InputSourceCodeRenderer";
 
-	public AceEditor() {
+	public InputSourceCode() {
 		super();
 		setRendererType(RENDERER_TYPE);
 	}
@@ -44,7 +44,7 @@ public class AceEditor extends AceEditorBase {
 
 		if (boundingBox == null) {
 			FacesContext facesContext = FacesContext.getCurrentInstance();
-			String defaultBoundingBoxClientId = AceEditorUtil.getDefaultBoundingBoxClientId(facesContext, this);
+			String defaultBoundingBoxClientId = InputSourceCodeUtil.getDefaultBoundingBoxClientId(facesContext, this);
 			boundingBox = StringPool.POUND + ComponentUtil.escapeClientId(defaultBoundingBoxClientId);
 		}
 
