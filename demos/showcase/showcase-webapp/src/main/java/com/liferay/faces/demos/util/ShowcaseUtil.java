@@ -71,7 +71,7 @@ public class ShowcaseUtil {
 		LIFERAY_FACES_PORTAL_VERSION + "/javadoc/alloy/";
 	private static final String LIFERAY_FACES_VDLDOC_BASE_URL = "http://docs.liferay.com/faces/" +
 		LIFERAY_FACES_ALLOY_VERSION + "/vdldoc/";
-	private static final String NAMESPACE_PREFIX_AUI = "aui";
+	private static final String NAMESPACE_PREFIX_AUI = "alloy";
 	private static final String NAMESPACE_PREFIX_BRIDGE = "bridge";
 	private static final String NAMESPACE_PREFIX_F = "f";
 	private static final String NAMESPACE_PREFIX_H = "h";
