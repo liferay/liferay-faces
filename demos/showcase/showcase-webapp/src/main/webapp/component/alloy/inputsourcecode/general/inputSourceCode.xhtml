@@ -4,23 +4,23 @@
 
 	<h:form>
 		<showcase:example renderedCheckbox="true" requiredCheckbox="true" styleClass="editableAceEditor">
-			<h:selectOneMenu value="#{aceEditorModelBean.mode}">
+			<h:selectOneMenu value="#{inputSourceCodeModelBean.mode}">
 				<f:selectItem itemLabel="Java" itemValue="java" />
 				<f:selectItem itemLabel="JSON" itemValue="json" />
 				<f:selectItem itemLabel="XML" itemValue="xml" />
 				<f:ajax render="componentField modelValue" />
 			</h:selectOneMenu>
-			<alloy:aceEditor id="aceEditor" height="100" mode="#{aceEditorModelBean.mode}"
+			<alloy:inputSourceCode id="inputSourceCode" height="100" mode="#{inputSourceCodeModelBean.mode}"
 				rendered="#{showcaseModelBean.selectedComponent.rendered}"
-				required="#{showcaseModelBean.selectedComponent.required}" value="#{aceEditorModelBean.sourceCode}" />
-			<h:message for="aceEditor" />
+				required="#{showcaseModelBean.selectedComponent.required}" value="#{inputSourceCodeModelBean.sourceCode}" />
+			<h:message for="inputSourceCode" />
 			<hr />
-			<h:commandButton action="#{aceEditorBackingBean.submit}" value="#{i18n['submit']}">
+			<h:commandButton action="#{inputSourceCodeBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
 			</h:commandButton>
 		</showcase:example>
 		<showcase:outputModel>
-			<h:outputText id="modelValue" value="#{aceEditorModelBean.sourceCode}" />
+			<h:outputText id="modelValue" value="#{inputSourceCodeModelBean.sourceCode}" />
 		</showcase:outputModel>
 	</h:form>
 

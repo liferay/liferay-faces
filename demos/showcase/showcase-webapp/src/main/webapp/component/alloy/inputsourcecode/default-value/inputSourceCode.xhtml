@@ -4,16 +4,16 @@
 
 	<h:form>
 		<showcase:example styleClass="editableAceEditor">
-			<alloy:aceEditor id="aceEditor" height="100" mode="xml" rendered="#{showcaseModelBean.selectedComponent.rendered}"
-				required="#{showcaseModelBean.selectedComponent.required}" value="#{aceEditorModelBean.sourceText}" />
-			<h:message for="aceEditor" />
+			<alloy:inputSourceCode id="inputSourceCode" height="100" mode="xml" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+				required="#{showcaseModelBean.selectedComponent.required}" value="#{inputSourceCodeModelBean.sourceText}" />
+			<h:message for="inputSourceCode" />
 			<hr />
-			<h:commandButton action="#{aceEditorBackingBean.submit}" value="#{i18n['submit']}">
+			<h:commandButton action="#{inputSourceCodeBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
 			</h:commandButton>
 		</showcase:example>
 		<showcase:outputModel>
-			<h:outputText id="modelValue" value="#{aceEditorModelBean.sourceText}" />
+			<h:outputText id="modelValue" value="#{inputSourceCodeModelBean.sourceText}" />
 		</showcase:outputModel>
 	</h:form>
 
