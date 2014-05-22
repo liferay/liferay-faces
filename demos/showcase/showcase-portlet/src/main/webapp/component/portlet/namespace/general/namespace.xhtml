@@ -1,32 +1,25 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui-nongen="http://liferay.com/faces/aui-nongen"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:portlet="http://java.sun.com/portlet_2_0"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/templates/component-2col.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:portlet="http://java.sun.com/portlet_2_0" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
-		<!-- Example#1: Introducing a variable into the EL -->
-		<aui-nongen:field label="#{i18n['example-1']}">
-			<h:outputText value="#{i18n['portlet-namespace-general-example-1']}" />
-		</aui-nongen:field>
-		<aui-nongen:field label="#{i18n['component']}">
-			<showcase:outputModel>
-				<portlet:namespace var="portletNamespace" />
+		<!-- Example 1: Introducing a variable into the EL -->
+		<showcase:example description="#{i18n['portlet-namespace-general-example-1']}" number="1">
+			<portlet:namespace var="portletNamespace" />
+			<pre>
 				<h:outputText value="portletNamespace=#{portletNamespace}" />
-			</showcase:outputModel>
-		</aui-nongen:field>
+			</pre>
+		</showcase:example>
 	</ui:define>
 
 	<ui:define name="col2">
-		<!-- Example#2: Output directly to the response -->
-		<aui-nongen:field label="#{i18n['example-2']}">
-			<h:outputText value="#{i18n['portlet-namespace-general-example-2']}" />
-		</aui-nongen:field>
-		<aui-nongen:field label="#{i18n['component']}">
-			<showcase:outputModel>
+		<!-- Example 2: Output directly to the response -->
+		<showcase:example description="#{i18n['portlet-namespace-general-example-2']}" number="2">
+			<pre>
 				<h:outputText value="portletNamespace=" />
 				<portlet:namespace />
-			</showcase:outputModel>
-		</aui-nongen:field>
+			</pre>
+		</showcase:example>
 	</ui:define>
 
 </ui:composition>

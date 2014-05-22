@@ -1,60 +1,48 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
-	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-3col.xhtml">
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
-		<!-- Example#1: Specifying focus (the default) for the showOn attribute pops up the calendar when the -->
+		<!-- Example 1: Specifying focus (the default) for the showOn attribute pops up the calendar when the -->
 		<!-- textbox receives focus. -->
 		<h:form>
-			<aui-nongen:field label="#{i18n['example-1']}">
-				<h:outputText value="#{i18n['aui-inputdate-general-example-1']}" escape="false" />
-			</aui-nongen:field>
-			<aui-nongen:field label="#{i18n['component']}">
-				<showcase:componentRenderedCheckbox />
-				<showcase:componentRequiredCheckbox />
-				<aui:inputDate id="birthday" datePattern="MM/dd/yyyy"
-					rendered="#{showcaseModelBean.selectedComponent.rendered}"
-					required="#{showcaseModelBean.selectedComponent.required}"
-					value="#{inputDateModelBean.birthday}" />
+			<showcase:example description="#{i18n['aui-inputdate-general-example-1']}" longDescription="true" number="1"
+				renderedCheckbox="true" requiredCheckbox="true">
+				<aui:inputDate id="birthday" datePattern="MM/dd/yyyy" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+					required="#{showcaseModelBean.selectedComponent.required}" value="#{inputDateModelBean.birthday}" />
 				<h:message for="birthday" />
-			</aui-nongen:field>
-			<h:commandButton value="#{i18n['submit']}">
-				<f:ajax execute="@form" render="@form" />
-			</h:commandButton>
-			<aui-nongen:field label="#{i18n['model-value']}">
-				<showcase:outputModel>
-					<h:outputText value="#{inputDateModelBean.birthday}">
-						<f:convertDateTime pattern="MM/dd/yyyy" />
-					</h:outputText>
-				</showcase:outputModel>
-			</aui-nongen:field>
+				<hr />
+				<h:commandButton value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{inputDateModelBean.birthday}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:outputText>
+			</showcase:outputModel>
 		</h:form>
 	</ui:define>
 
 	<ui:define name="col2">
-		<!-- Example#2: Specifying button for the showOn attribute pops up the calendar when the button is clicked. -->
+		<!-- Example 2: Specifying button for the showOn attribute pops up the calendar when the button is clicked. -->
 		<h:form>
-			<aui-nongen:field label="#{i18n['example-2']}">
-				<h:outputText value="#{i18n['aui-inputdate-general-example-2']}" escape="false" />
-			</aui-nongen:field>
-			<aui-nongen:field label="#{i18n['component']}">
-				<showcase:componentRenderedCheckbox />
+			<showcase:example description="#{i18n['aui-inputdate-general-example-2']}" longDescription="true" number="2"
+				renderedCheckbox="true">
 				<aui:inputDate id="birthday" datePattern="MM/dd/yyyy" showOn="button"
-					rendered="#{showcaseModelBean.selectedComponent.rendered}"
-					value="#{inputDateModelBean.birthday}" />
+					rendered="#{showcaseModelBean.selectedComponent.rendered}" value="#{inputDateModelBean.birthday}" />
 				<h:message for="birthday" />
-			</aui-nongen:field>
-			<h:commandButton value="#{i18n['submit']}">
-				<f:ajax execute="@form" render="@form" />
-			</h:commandButton>
-			<aui-nongen:field label="#{i18n['model-value']}">
-				<showcase:outputModel>
-					<h:outputText value="#{inputDateModelBean.birthday}">
-						<f:convertDateTime pattern="MM/dd/yyyy" />
-					</h:outputText>
-				</showcase:outputModel>
-			</aui-nongen:field>
+				<hr />
+				<h:commandButton value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{inputDateModelBean.birthday}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:outputText>
+			</showcase:outputModel>
 		</h:form>
 	</ui:define>
 
@@ -62,26 +50,21 @@
 		<!-- Example#3: Specifying both for the showOn attribute pops up the calendar when the textbox receives -->
 		<!-- focus and when the button is clicked. -->
 		<h:form>
-			<aui-nongen:field label="#{i18n['example-3']}">
-				<h:outputText value="#{i18n['aui-inputdate-general-example-3']}" escape="false" />
-			</aui-nongen:field>
-			<aui-nongen:field label="#{i18n['component']}">
-				<showcase:componentRenderedCheckbox />
+			<showcase:example description="#{i18n['aui-inputdate-general-example-3']}" longDescription="true" number="3"
+				renderedCheckbox="true">
 				<aui:inputDate id="birthday" datePattern="MM/dd/yyyy" showOn="both"
-					rendered="#{showcaseModelBean.selectedComponent.rendered}"
-					value="#{inputDateModelBean.birthday}" />
+					rendered="#{showcaseModelBean.selectedComponent.rendered}" value="#{inputDateModelBean.birthday}" />
 				<h:message for="birthday" />
-			</aui-nongen:field>
-			<h:commandButton value="#{i18n['submit']}">
-				<f:ajax execute="@form" render="@form" />
-			</h:commandButton>
-			<aui-nongen:field label="#{i18n['model-value']}">
-				<showcase:outputModel>
-					<h:outputText value="#{inputDateModelBean.birthday}">
-						<f:convertDateTime pattern="MM/dd/yyyy" />
-					</h:outputText>
-				</showcase:outputModel>
-			</aui-nongen:field>
+				<hr />
+				<h:commandButton value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{inputDateModelBean.birthday}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:outputText>
+			</showcase:outputModel>
 		</h:form>
 	</ui:define>
 </ui:composition>

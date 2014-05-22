@@ -1,87 +1,90 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
-	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-2col.xhtml">
 
-	<aui-nongen:field label="#{i18n['component']}">
-		<p>
-			<aui:button styleClass="btn-primary">
-				<h:outputText value="#{i18n['primary']}" />
-			</aui:button>
-			<aui:button styleClass="btn-info">
-				<h:outputText value="#{i18n['info']}" />
-			</aui:button>
-			<aui:button styleClass="btn-success">
-				<h:outputText value="#{i18n['success']} " />
-				<aui:icon name="ok" />
-			</aui:button>
-			<aui:button styleClass="btn-warning">
-				<h:outputText value="#{i18n['warning']}" />
-			</aui:button>
-			<aui:button styleClass="btn-danger">
-				<aui:icon name="remove" />
-				<h:outputText value=" #{i18n['danger']}" />
-			</aui:button>
-			<aui:button styleClass="btn-inverse">
-				<h:outputText value="#{i18n['inverse']}" />
-			</aui:button>
-			<aui:button styleClass="btn-link">
-				<h:outputText value="#{i18n['link']}" />
-			</aui:button>
-		</p>
+	<ui:define name="col1">
+		<showcase:example>
+			<p>
+				<aui:button styleClass="btn-primary">
+					<h:outputText value="#{i18n['primary']}" />
+				</aui:button>
+				<aui:button styleClass="btn-info">
+					<h:outputText value="#{i18n['info']}" />
+				</aui:button>
+				<aui:button styleClass="btn-success">
+					<h:outputText value="#{i18n['success']} " />
+					<aui:icon name="ok" />
+				</aui:button>
+				<aui:button styleClass="btn-warning">
+					<h:outputText value="#{i18n['warning']}" />
+				</aui:button>
+				<aui:button styleClass="btn-danger">
+					<aui:icon name="remove" />
+					<h:outputText value=" #{i18n['danger']}" />
+				</aui:button>
+				<aui:button styleClass="btn-inverse">
+					<h:outputText value="#{i18n['inverse']}" />
+				</aui:button>
+				<aui:button styleClass="btn-link">
+					<h:outputText value="#{i18n['link']}" />
+				</aui:button>
+			</p>
 
-		<p>
-			<aui:button styleClass="btn-primary btn-large">
-				<h:outputText value="#{i18n['large']}" />
-			</aui:button>
-			<aui:button styleClass="btn-large">
-				<h:outputText value="#{i18n['large']}" />
-			</aui:button>
-		</p>
+			<p>
+				<aui:button styleClass="btn-primary btn-large">
+					<h:outputText value="#{i18n['large']}" />
+				</aui:button>
+				<aui:button styleClass="btn-large">
+					<h:outputText value="#{i18n['large']}" />
+				</aui:button>
+			</p>
 
-		<p>
-			<aui:button styleClass="btn-primary">
-				<h:outputText value="#{i18n['default']}" />
-			</aui:button>
-			<aui:button>
-				<h:outputText value="#{i18n['default']}" />
-			</aui:button>
-		</p>
+			<p>
+				<aui:button styleClass="btn-primary">
+					<h:outputText value="#{i18n['default']}" />
+				</aui:button>
+				<aui:button>
+					<h:outputText value="#{i18n['default']}" />
+				</aui:button>
+			</p>
 
-		<p>
-			<aui:button styleClass="btn-primary btn-small">
-				<h:outputText value="#{i18n['small']}" />
-			</aui:button>
-			<aui:button styleClass="btn-small">
-				<h:outputText value="#{i18n['small']}" />
-			</aui:button>
-		</p>
+			<p>
+				<aui:button styleClass="btn-primary btn-small">
+					<h:outputText value="#{i18n['small']}" />
+				</aui:button>
+				<aui:button styleClass="btn-small">
+					<h:outputText value="#{i18n['small']}" />
+				</aui:button>
+			</p>
 
-		<p>
-			<aui:button styleClass="btn-primary btn-mini">
-				<h:outputText value="#{i18n['mini']}" />
-			</aui:button>
-			<aui:button styleClass="btn-mini">
-				<h:outputText value="#{i18n['mini']}" />
-			</aui:button>
-		</p>
+			<p>
+				<aui:button styleClass="btn-primary btn-mini">
+					<h:outputText value="#{i18n['mini']}" />
+				</aui:button>
+				<aui:button styleClass="btn-mini">
+					<h:outputText value="#{i18n['mini']}" />
+				</aui:button>
+			</p>
 
-		<p>
-			<aui:button disabled="true" styleClass="btn-primary">
-				<h:outputText value="#{i18n['disabled']}" />
-			</aui:button>
-			<aui:button disabled="true">
-				<h:outputText value="#{i18n['disabled']}" />
-			</aui:button>
-		</p>
+			<p>
+				<aui:button disabled="true" styleClass="btn-primary">
+					<h:outputText value="#{i18n['disabled']}" />
+				</aui:button>
+				<aui:button disabled="true">
+					<h:outputText value="#{i18n['disabled']}" />
+				</aui:button>
+			</p>
 
-		<p>
-			<aui:button styleClass="btn-primary btn-block">
-				<h:outputText value="#{i18n['block']}" />
-			</aui:button>
-			<aui:button styleClass="btn-block">
-				<h:outputText value="#{i18n['block']}" />
-			</aui:button>
-		</p>
-	</aui-nongen:field>
+			<p>
+				<aui:button styleClass="btn-primary btn-block">
+					<h:outputText value="#{i18n['block']}" />
+				</aui:button>
+				<aui:button styleClass="btn-block">
+					<h:outputText value="#{i18n['block']}" />
+				</aui:button>
+			</p>
+		</showcase:example>
+	</ui:define>
 
 </ui:composition>

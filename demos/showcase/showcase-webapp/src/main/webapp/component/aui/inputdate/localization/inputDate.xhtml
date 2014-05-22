@@ -1,51 +1,43 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
-	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-3col.xhtml">
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
-		<!-- Example#1: Hard coded Brazilian Portuguese locale -->
+		<!-- Example 1: Hard coded Brazilian Portuguese locale -->
 		<h:form>
-			<aui-nongen:field label="#{i18n['example-1']}">
-				<h:outputText value="#{i18n['aui-inputdate-localization-example-1']}" />
-			</aui-nongen:field>
-			<aui-nongen:field label="#{i18n['component']}">
+			<showcase:example description="#{i18n['aui-inputdate-localization-example-1']}" number="1">
 				<aui:inputDate id="portugueseInputDate" binding="#{portugueseInputDate}" locale="pt-BR"
 					value="#{inputDateModelBean.birthday}" />
-			</aui-nongen:field>
-			<h:commandButton value="#{i18n['submit']}">
-				<f:ajax execute="@form" render="@form" />
-			</h:commandButton>
-			<aui-nongen:field label="#{i18n['model-value']}">
-				<showcase:outputModel>
-					<h:outputText id="portugueseSelection" value="#{inputDateModelBean.birthday}">
-						<f:convertDateTime pattern="#{portugueseInputDate.datePattern}" />
-					</h:outputText>
-				</showcase:outputModel>
-			</aui-nongen:field>
+				<hr />
+				<h:commandButton value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<h:outputText id="portugueseSelection" value="#{inputDateModelBean.birthday}">
+					<f:convertDateTime pattern="#{portugueseInputDate.datePattern}" />
+				</h:outputText>
+			</showcase:outputModel>
 		</h:form>
 	</ui:define>
 
 	<ui:define name="col2">
-		<!-- Example#2: Japanese Locale obtained from a bean via EL -->
+		<!-- Example 2: Japanese Locale obtained from a bean via EL -->
 		<h:form>
-			<aui-nongen:field label="#{i18n['example-2']}">
-				<h:outputText escape="false" value="#{i18n['aui-inputdate-localization-example-2']}" />
-			</aui-nongen:field>
-			<aui-nongen:field label="#{i18n['component']}">
-				<aui:inputDate id="japaneseInputDate" binding="#{japaneseInputDate}"
-					locale="#{inputDateModelBean.locale}" value="#{inputDateModelBean.birthday}" />
-			</aui-nongen:field>
-			<h:commandButton value="#{i18n['submit']}">
-				<f:ajax execute="@form" render="@form" />
-			</h:commandButton>
-			<aui-nongen:field label="#{i18n['model-value']}">
-				<showcase:outputModel>
-					<h:outputText id="japaneseSelection" value="#{inputDateModelBean.birthday}">
-						<f:convertDateTime pattern="#{japaneseInputDate.datePattern}" />
-					</h:outputText>
-				</showcase:outputModel>
-			</aui-nongen:field>
+			<showcase:example description="#{i18n['aui-inputdate-localization-example-2']}" number="2">
+				<aui:inputDate id="japaneseInputDate" binding="#{japaneseInputDate}" locale="#{inputDateModelBean.locale}"
+					value="#{inputDateModelBean.birthday}" />
+				<hr />
+				<h:commandButton value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<h:outputText id="japaneseSelection" value="#{inputDateModelBean.birthday}">
+					<f:convertDateTime pattern="#{japaneseInputDate.datePattern}" />
+				</h:outputText>
+			</showcase:outputModel>
 		</h:form>
 	</ui:define>
 

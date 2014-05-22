@@ -1,11 +1,11 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
-	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-3col.xhtml">
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
 		<h:form>
-			<aui-nongen:field label="#{i18n['component']}">
+			<showcase:example>
 				<h:inputText id="birthday" value="#{datePickerModelBean.birthday}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</h:inputText>
@@ -20,17 +20,16 @@
 				<h:outputText value="#{datePickerModelBean.maxDate}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</h:outputText>
-			</aui-nongen:field>
-			<h:commandButton value="#{i18n['submit']}">
-				<f:ajax execute="@form" render="@form" />
-			</h:commandButton>
-			<aui-nongen:field label="#{i18n['model-value']}">
-				<showcase:outputModel>
-					<h:outputText value="#{datePickerModelBean.birthday}">
-						<f:convertDateTime pattern="MM/dd/yyyy" />
-					</h:outputText>
-				</showcase:outputModel>
-			</aui-nongen:field>
+				<hr />
+				<h:commandButton value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{datePickerModelBean.birthday}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:outputText>
+			</showcase:outputModel>
 		</h:form>
 	</ui:define>
 

@@ -1,52 +1,40 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
-	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-3col.xhtml">
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
 		<h:form>
-			<!-- Example#1: Validating an email address via the validator attribute. -->
-			<aui-nongen:field label="#{i18n['example-1']}">
-				<h:outputText escape="false" value="#{i18n['aui-inputtextarea-validation-example-1']}" />
-			</aui-nongen:field>
-			<aui-nongen:field id="componentField" label="#{i18n['component']}">
+			<!-- Example 1: Validating an email address via the validator attribute. -->
+			<showcase:example description="#{i18n['aui-inputtextarea-validation-example-1']}" longDescription="true" number="1">
 				<aui:inputTextarea id="textarea" validator="#{inputTextBackingBean.emailAddressValidator}"
 					validatorMessage="#{i18n['validator-message']}" value="#{inputTextModelBean.text}" />
-				<br />
 				<h:message for="textarea" />
-			</aui-nongen:field>
+			</showcase:example>
 			<aui:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
 			</aui:commandButton>
-			<aui-nongen:field id="modelValue" label="#{i18n['model-value']}">
-				<showcase:outputModel>
-					<h:outputText value="#{inputTextModelBean.text}" />
-				</showcase:outputModel>
-			</aui-nongen:field>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{inputTextModelBean.text}" />
+			</showcase:outputModel>
 		</h:form>
 	</ui:define>
 
 	<ui:define name="col2">
-		<!-- Example#2: Validating an email address via specifying an f:validateRegex child tag. -->
+		<!-- Example 2: Validating an email address via specifying an f:validateRegex child tag. -->
 		<h:form>
-			<aui-nongen:field label="#{i18n['example-2']}">
-				<h:outputText escape="false" value="#{i18n['aui-inputtextarea-validation-example-2']}" />
-			</aui-nongen:field>
-			<aui-nongen:field id="componentField" label="#{i18n['component']}">
+			<showcase:example description="#{i18n['aui-inputtextarea-validation-example-2']}" longDescription="true" number="2">
 				<aui:inputTextarea id="textarea" validatorMessage="#{i18n['validator-message']}" value="#{inputTextModelBean.text}">
 					<f:validateRegex pattern=".+[@].+[.].+" />
 				</aui:inputTextarea>
-				<br />
 				<h:message for="textarea" />
-			</aui-nongen:field>
+			</showcase:example>
 			<aui:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
 			</aui:commandButton>
-			<aui-nongen:field id="modelValue" label="#{i18n['model-value']}">
-				<showcase:outputModel>
-					<h:outputText value="#{inputTextModelBean.text}" />
-				</showcase:outputModel>
-			</aui-nongen:field>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{inputTextModelBean.text}" />
+			</showcase:outputModel>
 		</h:form>
 	</ui:define>
 
