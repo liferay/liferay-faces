@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/templates/component-2col.xhtml">
@@ -6,14 +6,14 @@
 	<ui:define name="col1">
 		<h:form>
 			<!-- Example 1: Validating an email address via the validator attribute. -->
-			<showcase:example description="#{i18n['aui-inputtextarea-validation-example-1']}" longDescription="true" number="1">
-				<aui:inputTextarea id="textarea" validator="#{inputTextBackingBean.emailAddressValidator}"
+			<showcase:example description="#{i18n['alloy-inputtextarea-validation-example-1']}" longDescription="true" number="1">
+				<alloy:inputTextarea id="textarea" validator="#{inputTextBackingBean.emailAddressValidator}"
 					validatorMessage="#{i18n['validator-message']}" value="#{inputTextModelBean.text}" />
 				<h:message for="textarea" />
 			</showcase:example>
-			<aui:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
+			<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
-			</aui:commandButton>
+			</alloy:commandButton>
 			<showcase:outputModel>
 				<h:outputText id="modelValue" value="#{inputTextModelBean.text}" />
 			</showcase:outputModel>
@@ -23,15 +23,15 @@
 	<ui:define name="col2">
 		<!-- Example 2: Validating an email address via specifying an f:validateRegex child tag. -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-inputtextarea-validation-example-2']}" longDescription="true" number="2">
-				<aui:inputTextarea id="textarea" validatorMessage="#{i18n['validator-message']}" value="#{inputTextModelBean.text}">
+			<showcase:example description="#{i18n['alloy-inputtextarea-validation-example-2']}" longDescription="true" number="2">
+				<alloy:inputTextarea id="textarea" validatorMessage="#{i18n['validator-message']}" value="#{inputTextModelBean.text}">
 					<f:validateRegex pattern=".+[@].+[.].+" />
-				</aui:inputTextarea>
+				</alloy:inputTextarea>
 				<h:message for="textarea" />
 			</showcase:example>
-			<aui:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
+			<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
-			</aui:commandButton>
+			</alloy:commandButton>
 			<showcase:outputModel>
 				<h:outputText id="modelValue" value="#{inputTextModelBean.text}" />
 			</showcase:outputModel>

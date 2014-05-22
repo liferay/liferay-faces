@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/templates/component-3col.xhtml">
@@ -7,10 +7,10 @@
 		<h:form>
 			<showcase:example>
 				<ui:repeat value="#{commandButtonModelBean.customers}" var="customer">
-					<aui:commandButton actionListener="#{commandButtonBackingBean.selectionListener}" value="#{customer}">
-						<aui:icon name="edit" />
+					<alloy:commandButton actionListener="#{commandButtonBackingBean.selectionListener}" value="#{customer}">
+						<alloy:icon name="edit" />
 						<f:ajax execute="@form" render="@form" />
-					</aui:commandButton>
+					</alloy:commandButton>
 					<h:outputText value=" #{customer.name}" />
 					<br />
 				</ui:repeat>

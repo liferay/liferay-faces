@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/templates/component-2col.xhtml">
@@ -6,9 +6,9 @@
 	<ui:define name="col1">
 		<!-- Example 1: Hold down shift or control to select multiple dates -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-datepicker-multiple-selection-example-1']}" number="1">
+			<showcase:example description="#{i18n['alloy-datepicker-multiple-selection-example-1']}" number="1">
 				<h:inputTextarea id="multiple" value="#{datePickerModelBean.multiple}" />
-				<aui:datePicker for="multiple" dateSeparator=" | " selectionMode="multiple" />
+				<alloy:datePicker for="multiple" dateSeparator=" | " selectionMode="multiple" />
 				<hr />
 				<h:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
@@ -23,9 +23,9 @@
 	<ui:define name="col2">
 		<!-- Example 2: Pop up the datePicker multiple times to select multiple dates -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-datepicker-multiple-selection-example-2']}" number="2">
+			<showcase:example description="#{i18n['alloy-datepicker-multiple-selection-example-2']}" number="2">
 				<h:inputTextarea id="multipleSticky" value="#{datePickerModelBean.multiple}" />
-				<aui:datePicker for="multipleSticky" selectionMode="multiple-sticky" />
+				<alloy:datePicker for="multipleSticky" selectionMode="multiple-sticky" />
 				<hr />
 				<h:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />

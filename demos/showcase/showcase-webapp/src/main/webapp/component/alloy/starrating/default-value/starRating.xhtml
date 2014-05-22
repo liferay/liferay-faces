@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/templates/component-2col.xhtml">
@@ -6,15 +6,15 @@
 	<ui:define name="col1">
 		<!-- Example 1: Initializing the default value in the model bean -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-starrating-default-value-example-1']}" number="1">
-				<aui:starRating id="starRating" value="#{starRatingModelBean.benefitId}" label="#{i18n['favorite']}:">
+			<showcase:example description="#{i18n['alloy-starrating-default-value-example-1']}" number="1">
+				<alloy:starRating id="starRating" value="#{starRatingModelBean.benefitId}" label="#{i18n['favorite']}:">
 					<f:converter converterId="javax.faces.Long" />
 					<f:selectItem itemLabel="Compatible" itemValue="1" />
 					<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
 					<f:selectItem itemLabel="Powerful Integration" itemValue="3" />
 					<f:selectItem itemLabel="Lightweight" itemValue="4" />
 					<f:selectItem itemLabel="Open Source" itemValue="5" />
-				</aui:starRating>
+				</alloy:starRating>
 				<hr />
 				<h:commandButton action="#{starRatingBackingBean.submit}" value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
@@ -29,15 +29,15 @@
 	<ui:define name="col2">
 		<!-- Example 2: Setting the defaultSelected attribute -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-starrating-default-value-example-2']}" number="2">
-				<aui:starRating defaultSelected="3" value="#{starRatingModelBean.favoriteId}" label="#{i18n['favorite']}:">
+			<showcase:example description="#{i18n['alloy-starrating-default-value-example-2']}" number="2">
+				<alloy:starRating defaultSelected="3" value="#{starRatingModelBean.favoriteId}" label="#{i18n['favorite']}:">
 					<f:converter converterId="javax.faces.Long" />
 					<f:selectItem itemLabel="Compatible" itemValue="1" />
 					<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
 					<f:selectItem itemLabel="Powerful Integration" itemValue="3" />
 					<f:selectItem itemLabel="Lightweight" itemValue="4" />
 					<f:selectItem itemLabel="Open Source" itemValue="5" />
-				</aui:starRating>
+				</alloy:starRating>
 				<hr />
 				<h:commandButton action="#{starRatingBackingBean.submit}" value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />

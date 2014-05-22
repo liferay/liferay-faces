@@ -1,14 +1,14 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
 	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
 		<showcase:example>
 			<!-- Navigation based on outcome of navigation-case defined in navigation-rule.xml -->
-			<aui:button outcome="toParam">
+			<alloy:button outcome="toParam">
 				<h:outputText value="#{i18n['to-param-page']} " />
-				<aui:icon name="arrow-right" />
-			</aui:button>
+				<alloy:icon name="arrow-right" />
+			</alloy:button>
 		</showcase:example>
 		<showcase:outputParameter>
 			<h:outputText id="parameterValue" value="foo=#{facesContext.externalContext.requestParameterMap['foo']}" />

@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/templates/component-2col.xhtml">
@@ -6,15 +6,15 @@
 	<ui:define name="col1">
 		<!-- Example 1: Conversion to an Integer via the converter attribute. -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-inputtextarea-conversion-example-1']}" number="1">
-				<aui:inputTextarea id="textarea" converter="javax.faces.Integer" converterMessage="#{i18n['converter-message']}"
+			<showcase:example description="#{i18n['alloy-inputtextarea-conversion-example-1']}" number="1">
+				<alloy:inputTextarea id="textarea" converter="javax.faces.Integer" converterMessage="#{i18n['converter-message']}"
 					value="#{inputTextModelBean.integer}" />
 				<br />
 				<h:message for="textarea" />
 			</showcase:example>
-			<aui:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
+			<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
-			</aui:commandButton>
+			</alloy:commandButton>
 			<showcase:outputModel>
 				<h:outputText id="modelValue" value="#{inputTextModelBean.integer}" />
 			</showcase:outputModel>
@@ -24,17 +24,17 @@
 	<ui:define name="col2">
 		<!-- Example 2: Conversion to an Integer by specifying an f:converter child tag. -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-inputtextarea-conversion-example-2']}" number="2">
-				<aui:inputTextarea id="textarea" converterMessage="#{i18n['converter-message']}"
+			<showcase:example description="#{i18n['alloy-inputtextarea-conversion-example-2']}" number="2">
+				<alloy:inputTextarea id="textarea" converterMessage="#{i18n['converter-message']}"
 					value="#{inputTextModelBean.integer}">
 					<f:converter converterId="javax.faces.Integer" />
-				</aui:inputTextarea>
+				</alloy:inputTextarea>
 				<br />
 				<h:message for="textarea" />
 			</showcase:example>
-			<aui:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
+			<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
-			</aui:commandButton>
+			</alloy:commandButton>
 			<showcase:outputModel>
 				<h:outputText id="modelValue" value="#{inputTextModelBean.integer}" />
 			</showcase:outputModel>

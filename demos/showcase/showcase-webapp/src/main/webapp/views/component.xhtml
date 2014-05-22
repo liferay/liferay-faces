@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:showcase-fn="http://liferay.com/faces/showcase-fn"
 	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/showcase-#{showcaseModelBean.deploymentType}.xhtml">
@@ -33,12 +33,12 @@
 				<h:panelGroup>
 					<h2>#{i18n['note']}:</h2>
 					<h:outputText value="#{i18n['please-consider-using']} " />
-					<h:link value="aui:inputDate">
-						<f:param name="componentPrefix" value="aui" />
+					<h:link value="alloy:inputDate">
+						<f:param name="componentPrefix" value="alloy" />
 						<f:param name="componentName" value="inputdate" />
 						<f:param name="componentUseCase" value="#{correspondingUseCase}" />
 					</h:link>
-					<h:outputText value=" #{i18n['aui-input-date-benefits-description']}" />
+					<h:outputText value=" #{i18n['alloy-input-date-benefits-description']}" />
 				</h:panelGroup>
 			</h:panelGrid>
 		</c:if>
@@ -55,12 +55,12 @@
 		<ui:include
 			src="/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/#{selectedComponentUseCaseName}/#{selectedComponentCamelCaseName}.xhtml" />
 		<h3>#{i18n['source-code']}</h3>
-		<aui:tabView value="#{showcaseModelBean.selectedComponent.useCaseCodeExamples}" var="useCaseCodeExample">
-			<aui:tab label="#{useCaseCodeExample.fileName}">
-				<aui:aceEditor mode="#{useCaseCodeExample.fileExtension}" readOnly="true" showPrintMargin="false"
+		<alloy:tabView value="#{showcaseModelBean.selectedComponent.useCaseCodeExamples}" var="useCaseCodeExample">
+			<alloy:tab label="#{useCaseCodeExample.fileName}">
+				<alloy:aceEditor mode="#{useCaseCodeExample.fileExtension}" readOnly="true" showPrintMargin="false"
 					useWrapMode="false" width="900" value="#{useCaseCodeExample.rawText}" />
-			</aui:tab>
-		</aui:tabView>
+			</alloy:tab>
+		</alloy:tabView>
 	</ui:define>
 
 </ui:composition>

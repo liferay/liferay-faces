@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/templates/component-2col.xhtml">
@@ -6,8 +6,8 @@
 	<ui:define name="col1">
 		<!-- Example 1: Hard coded Brazilian Portuguese locale -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-datepicker-localization-example-1']}" number="1">
-				<aui:datePicker for="portugueseDateInput" binding="#{portugueseDatePicker}" locale="pt-BR" />
+			<showcase:example description="#{i18n['alloy-datepicker-localization-example-1']}" number="1">
+				<alloy:datePicker for="portugueseDateInput" binding="#{portugueseDatePicker}" locale="pt-BR" />
 				<h:inputText id="portugueseDateInput" value="#{datePickerModelBean.birthday}">
 					<f:convertDateTime pattern="#{portugueseDatePicker.datePattern}" />
 				</h:inputText>
@@ -27,8 +27,8 @@
 	<ui:define name="col2">
 		<!-- Example 2: Japanese Locale obtained from a bean via EL -->
 		<h:form>
-			<showcase:example description="#{i18n['aui-datepicker-localization-example-2']}" number="2">
-				<aui:datePicker for="japaneseDateInput" binding="#{japaneseDatePicker}" locale="#{datePickerModelBean.locale}" />
+			<showcase:example description="#{i18n['alloy-datepicker-localization-example-2']}" number="2">
+				<alloy:datePicker for="japaneseDateInput" binding="#{japaneseDatePicker}" locale="#{datePickerModelBean.locale}" />
 				<h:inputText id="japaneseDateInput" value="#{datePickerModelBean.birthday}">
 					<f:convertDateTime pattern="#{japaneseDatePicker.datePattern}" />
 				</h:inputText>
