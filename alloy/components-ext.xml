@@ -46,40 +46,6 @@
 			</attribute>
 		</clientComponentAttributes>
 	</extension>
-	<component name="AceEditor" parentClass="javax.faces.component.html.HtmlInputText"
-		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase">
-		<description>
-			<![CDATA[AceEditor is an input component that renders a field for editing source code text.]]>
-		</description>
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]>
-				</description>
-				<name>disabled</name>
-				<type>java.lang.Boolean</type>
-				<jsfReservedAttribute>true</jsfReservedAttribute>
-				<jsfReservedAttributeType>boolean</jsfReservedAttributeType>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]>
-				</description>
-				<name>required</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
-				</description>
-				<name>value</name>
-				<type>java.lang.String</type>
-				<jsfReservedAttribute>true</jsfReservedAttribute>
-				<jsfReservedAttributeType>java.lang.Object</jsfReservedAttributeType>
-			</attribute>
-		</attributes>
-	</component>
 	<component name="Body" generateJava="false" />
 	<component name="Button" parentClass="javax.faces.component.html.HtmlOutcomeTargetButton">
 		<description>
@@ -762,6 +728,100 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="InputDate" extends="InputText" parentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeBase"
+		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRendererBase">
+		<description>
+			<![CDATA[InputDate is a UIInput component that renders a textbox and a popup a calendar with selectable dates. The component attepts to automatically convert the submitted value to a Date via a built in DateTimeConverter.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]>
+				</description>
+				<name>datePattern</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the datePicker.]]>
+				</description>
+				<name>locale</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The maximum date that can be selected by the user.]]>
+				</description>
+				<name>maximumDate</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The minimum date that can be selected by the user.]]>
+				</description>
+				<name>minimumDate</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<defaultValue>1</defaultValue>
+				<description>
+					<![CDATA[The number of month panes shown in the popup calendar. Valid values are 1 (the default), 2, and 3.]]>
+				</description>
+				<name>panes</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<defaultValue>focus</defaultValue>
+				<description>
+					<![CDATA[Specifies which event will pop up the calendar. Valid values are <code>focus</code> (the default), <code>button</code>, and <code>both</code>.]]>
+				</description>
+				<type>java.lang.String</type>
+				<name>showOn</name>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]>
+				</description>
+				<name>zIndex</name>
+				<type>java.lang.Object</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component preferredName="InputSourceCode" name="AceEditor" parentClass="javax.faces.component.html.HtmlInputText"
+		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase">
+		<description>
+			<![CDATA[InputSourceCode is an input component that renders a field for editing source code text.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]>
+				</description>
+				<name>disabled</name>
+				<type>java.lang.Boolean</type>
+				<jsfReservedAttribute>true</jsfReservedAttribute>
+				<jsfReservedAttributeType>boolean</jsfReservedAttributeType>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]>
+				</description>
+				<name>required</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.String</type>
+				<jsfReservedAttribute>true</jsfReservedAttribute>
+				<jsfReservedAttributeType>java.lang.Object</jsfReservedAttributeType>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="InputText" generateJava="false">
 		<attributes>
 			<attribute>
@@ -1080,66 +1140,6 @@
 					void valueChange(javax.faces.event.ValueChangeEvent)
 				</method-signature>
 				<generateJava>false</generateJava>
-			</attribute>
-		</attributes>
-	</component>
-	<component name="InputDate" extends="InputText" parentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeBase"
-		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRendererBase">
-		<description>
-			<![CDATA[InputDate is a UIInput component that renders a textbox and a popup a calendar with selectable dates. The component attepts to automatically convert the submitted value to a Date via a built in DateTimeConverter.]]>
-		</description>
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]>
-				</description>
-				<name>datePattern</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the datePicker.]]>
-				</description>
-				<name>locale</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The maximum date that can be selected by the user.]]>
-				</description>
-				<name>maximumDate</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The minimum date that can be selected by the user.]]>
-				</description>
-				<name>minimumDate</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<defaultValue>1</defaultValue>
-				<description>
-					<![CDATA[The number of month panes shown in the popup calendar. Valid values are 1 (the default), 2, and 3.]]>
-				</description>
-				<name>panes</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<defaultValue>focus</defaultValue>
-				<description>
-					<![CDATA[Specifies which event will pop up the calendar. Valid values are <code>focus</code> (the default), <code>button</code>, and <code>both</code>.]]>
-				</description>
-				<type>java.lang.String</type>
-				<name>showOn</name>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]>
-				</description>
-				<name>zIndex</name>
-				<type>java.lang.Object</type>
 			</attribute>
 		</attributes>
 	</component>
