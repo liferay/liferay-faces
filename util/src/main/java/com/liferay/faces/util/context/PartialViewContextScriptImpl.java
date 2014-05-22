@@ -49,6 +49,14 @@ public class PartialViewContextScriptImpl extends PartialViewContextWrapper {
 		this.wrappedPartialViewContext = partialViewContext;
 	}
 
+	/**
+	 * This method is missing from the {@link PartialViewContextWrapper} class so it must be implemented here.
+	 */
+	@Override
+	public void setPartialRequest(boolean isPartialRequest) {
+		wrappedPartialViewContext.setPartialRequest(isPartialRequest);
+	}
+
 	@Override
 	public PartialResponseWriter getPartialResponseWriter() {
 
