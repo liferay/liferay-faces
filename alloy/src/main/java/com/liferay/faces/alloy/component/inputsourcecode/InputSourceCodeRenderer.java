@@ -44,6 +44,7 @@ import com.liferay.faces.util.render.HiddenTextResponseWriter;
 public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 
 	// Private Constants
+	private static final String ALLOY_CLASS_NAME = "AceEditor";
 	private static final String ESCAPED_BACKSLASH = "\\\\";
 	private static final String ESCAPED_DOUBLE_QUOTE = "\\\\\"";
 	private static final String ESCAPED_BACKSLASH_DOUBLE_QUOTE = ESCAPED_BACKSLASH + ESCAPED_DOUBLE_QUOTE;
@@ -100,7 +101,8 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
 
 		// Encode the entire boundingbox <div>...<div> element.
-		String defaultBoundingBoxClientId = InputSourceCodeUtil.getDefaultBoundingBoxClientId(facesContext, uiComponent);
+		String defaultBoundingBoxClientId = InputSourceCodeUtil.getDefaultBoundingBoxClientId(facesContext,
+				uiComponent);
 		responseWriter.startElement(StringPool.DIV, uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, defaultBoundingBoxClientId, StringPool.ID);
 		responseWriter.endElement(StringPool.DIV);
@@ -137,6 +139,11 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 		}
 
 		super.encodeValue(responseWriter, InputSourceCodeAlloy, value, first);
+	}
+
+	@Override
+	public String getAlloyClassName() {
+		return ALLOY_CLASS_NAME;
 	}
 
 	@Override
