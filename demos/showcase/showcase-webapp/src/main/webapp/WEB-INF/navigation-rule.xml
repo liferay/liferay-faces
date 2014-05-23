@@ -10,7 +10,7 @@
 			<redirect>
 				<view-param>
 					<name>componentPrefix</name>
-					<value>aui</value>
+					<value>alloy</value>
 				</view-param>
 				<view-param>
 					<name>componentName</name>
