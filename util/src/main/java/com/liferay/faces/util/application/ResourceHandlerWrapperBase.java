@@ -46,9 +46,6 @@ public class ResourceHandlerWrapperBase extends ResourceHandlerWrapper {
 	// Public Constants
 	public static final int DEFAULT_BUFFER_SIZE = 1024;
 
-	// Private Constants
-	private static final String ENCODED_RESOURCE_TOKEN = "javax.faces.resource=";
-
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ResourceHandlerWrapperBase.class);
 
@@ -57,87 +54,6 @@ public class ResourceHandlerWrapperBase extends ResourceHandlerWrapper {
 
 	public ResourceHandlerWrapperBase(ResourceHandler resourceHandler) {
 		this.wrappedResourceHandler = resourceHandler;
-	}
-
-	/**
-	 * Determines whether or not the specified URL has already been encoded.
-	 *
-	 * @param   url  The URL to check.
-	 *
-	 * @return  True if the specified URL is already encoded.
-	 */
-	public static boolean isEncodedFacesResourceURL(String url) {
-
-		if ((url != null) && (url.indexOf(ENCODED_RESOURCE_TOKEN) > 0)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	/**
-	 * Determines whether or not the specified URL is a Faces URL.
-	 *
-	 * @param   url  The URL to check.
-	 *
-	 * @return  True if the specified URL is a Faces URL.
-	 */
-	public static boolean isFacesResourceURL(String url) {
-
-		if ((url != null) && (url.indexOf(ResourceConstants.JAVAX_FACES_RESOURCE) >= 0)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	/**
-	 * This method handles the current request which is assumed to be a request for a {@link Resource}.
-	 */
-	@Override
-	public void handleResourceRequest(FacesContext facesContext) throws IOException {
-
-		ExternalContext externalContext = facesContext.getExternalContext();
-		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
-		String resourceName = requestParameterMap.get(ResourceConstants.JAVAX_FACES_RESOURCE);
-
-		// Assume that the resource  ExternalContext.encodeResourceURL(String) was properly called, and that
-		// which adds the "javax.faces.resource" request parameter.
-		// If the "javax.faces.resource" request parameter was found, then ask Faces to create the resource and
-		// assume that calling resource.getInputStream() will provide the ability to send the contents of the
-		// resource to the response.
-		if (resourceName != null) {
-			String libraryName = requestParameterMap.get(ResourceConstants.LN);
-
-			if (logger.isTraceEnabled()) {
-
-				// Surround with isTraceEnabled check in order to avoid unnecessary creation of object array.
-				logger.trace("Handling - resourceName=[{0}], libraryName[{1}]",
-					new Object[] { resourceName, libraryName });
-			}
-
-			// FACES-57: Provide the opportunity for applications to decorate the createResource methods of this
-			// class by delegating creation of the resource to the chain-of-responsibility found in the application's
-			// ResourceHandler.
-			ResourceHandler resourceHandlerChain = facesContext.getApplication().getResourceHandler();
-			Resource resource = null;
-
-			if (libraryName == null) {
-				resource = resourceHandlerChain.createResource(resourceName);
-			}
-			else {
-				resource = resourceHandlerChain.createResource(resourceName, libraryName);
-			}
-
-			handleResource(facesContext, resource);
-		}
-		else {
-			logger.debug("NOT HANDLED - Missing request parameter {0} so delegating handleResourceRequest to chain",
-				ResourceConstants.JAVAX_FACES_RESOURCE);
-			getWrapped().handleResourceRequest(facesContext);
-		}
 	}
 
 	protected void handleResource(FacesContext facesContext, Resource resource) throws IOException {
@@ -340,31 +256,7 @@ public class ResourceHandlerWrapperBase extends ResourceHandlerWrapper {
 	}
 
 	@Override
-	public boolean isResourceRequest(FacesContext facesContext) {
-
-		// If the "javax.faces.resource" request parameter is present, then that means the resource's URL was
-		// properly created with the ExternalContext.encodeResourceURL(String) method.
-		ExternalContext externalContext = facesContext.getExternalContext();
-		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
-		String resourceId = requestParameterMap.get(ResourceConstants.JAVAX_FACES_RESOURCE);
-
-		if (resourceId != null) {
-			logger.debug("Found {0} request parameter and recognized resourceId=[{1}] as a resource",
-				new Object[] { ResourceConstants.JAVAX_FACES_RESOURCE, resourceId });
-
-			return true;
-		}
-		else {
-			logger.debug("Did not find the {0} request parameter so delegating isResourceRequest to chain",
-				ResourceConstants.JAVAX_FACES_RESOURCE);
-
-			return getWrapped().isResourceRequest(facesContext);
-		}
-	}
-
-	@Override
 	public ResourceHandler getWrapped() {
 		return wrappedResourceHandler;
 	}
-
 }
