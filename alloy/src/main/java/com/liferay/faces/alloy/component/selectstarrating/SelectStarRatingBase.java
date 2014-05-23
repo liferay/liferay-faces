@@ -15,10 +15,10 @@ package com.liferay.faces.alloy.component.selectstarrating;
 //J-
 
 import javax.annotation.Generated;
-
 import com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio;
-import com.liferay.faces.util.component.ClientComponent;
+
 import com.liferay.faces.util.component.Styleable;
+import com.liferay.faces.util.component.ClientComponent;
 
 /**
  * @author  Bruno Basto
