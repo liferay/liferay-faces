@@ -5,7 +5,7 @@
 
 	<ui:define name="col1">
 		<h:form>
-			<aui-nongen:field label="#{i18n['component']}">
+			<showcase:example>
 				<alloy:selectOneRadio id="starRating" label="#{i18n['favorite']}:" 
 					value="#{selectOneRadioModelBean.favoriteId}">
 					<f:converter converterId="javax.faces.Long" />
@@ -16,15 +16,13 @@
 					<f:selectItem itemLabel="Open Source" itemValue="5" />
 				</alloy:selectOneRadio>
 				<h:message for="starRating" />
-			</aui-nongen:field>
+			</showcase:example>
 			<h:commandButton action="#{selectOneRadioBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
 			</h:commandButton>
-			<aui-nongen:field label="#{i18n['model-value']}">
-				<showcase:outputModel>
-					<h:outputText value="#{selectOneRadioModelBean.favoriteId}" />
-				</showcase:outputModel>
-			</aui-nongen:field>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{selectOneRadioModelBean.favoriteId}" />
+			</showcase:outputModel>
 		</h:form>
 	</ui:define>
 

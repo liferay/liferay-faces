@@ -1,15 +1,12 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-3col.xhtml">
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
-		<!-- Example#1: String value (no converter required) -->
+		<!-- Example 1: String value (no converter required) -->
 		<h:form>
-			<aui-nongen:field label="#{i18n['example-1']}">
-				<h:outputText escape="false" value="#{i18n['aui-selectoneradio-immediate-example-1']}" /> 
-			</aui-nongen:field>
-			<aui-nongen:field label="#{i18n['component']}">
+			<showcase:example description="#{i18n['alloy-selectoneradio-immediate-example-1']}" number="1" >
 				<alloy:selectOneRadio id="select1" immediate="false" layout="pageDirection"
 					value="#{selectOneRadioModelBean.favorite}" valueChangeListener="#{selectOneRadioBackingBean.valueChange}">
 					<f:selectItem itemLabel="RESTORE_VIEW 1" itemValue="RESTORE_VIEW 1" />
@@ -20,25 +17,20 @@
 					<f:selectItem itemLabel="RENDER_RESPONSE 6" itemValue="RENDER_RESPONSE 6" />
 				</alloy:selectOneRadio>
 				<h:message for="select1" />
-			</aui-nongen:field>
+			</showcase:example>
 			<h:commandButton value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
 			</h:commandButton>
-			<aui-nongen:field label="#{i18n['model-value']}">
-				<showcase:outputModel>
-					<h:outputText value="#{selectOneRadioModelBean.phase}" />
-				</showcase:outputModel>
-			</aui-nongen:field>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{selectOneRadioModelBean.phase}" />
+			</showcase:outputModel>
 		</h:form>
 	</ui:define>
 
 	<ui:define name="col2">
-		<!-- Example#2: Object value (requires a converter) -->
+		<!-- Example 2: Object value (requires a converter) -->
 		<h:form>
-			<aui-nongen:field label="#{i18n['example-2']}">
-				<h:outputText escape="false" value="#{i18n['aui-selectoneradio-immediate-example-2']}" /> 
-			</aui-nongen:field>
-			<aui-nongen:field label="#{i18n['component']}">
+			<showcase:example description="#{i18n['alloy-selectoneradio-immediate-example-2']}" number="2" >
 				<alloy:selectOneRadio id="select2" immediate="true" layout="pageDirection" value="#{selectOneRadioModelBean.favorite}"
 					valueChangeListener="#{selectOneRadioBackingBean.valueChange}">
 					<f:selectItem itemLabel="RESTORE_VIEW 1" itemValue="RESTORE_VIEW 1" />
@@ -49,15 +41,13 @@
 					<f:selectItem itemLabel="RENDER_RESPONSE 6" itemValue="RENDER_RESPONSE 6" />
 				</alloy:selectOneRadio>
 				<h:message for="select2" />
-			</aui-nongen:field>
+			</showcase:example>
 			<h:commandButton value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
 			</h:commandButton>
-			<aui-nongen:field label="#{i18n['model-value']}">
-				<showcase:outputModel>
-					<h:outputText value="#{selectOneRadioModelBean.phase}" />
-				</showcase:outputModel>
-			</aui-nongen:field>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{selectOneRadioModelBean.phase}" />
+			</showcase:outputModel>
 		</h:form>
 	</ui:define>
 
