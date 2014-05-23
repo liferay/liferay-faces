@@ -13,28 +13,25 @@
  */
 package com.liferay.faces.portal.resource;
 
-import java.io.IOException;
-
 import javax.faces.application.Resource;
 import javax.faces.application.ResourceHandler;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-
-import com.liferay.faces.bridge.application.ResourceHandlerBridgeImpl;
-import com.liferay.faces.util.application.ResourceConstants;
+import javax.faces.application.ResourceHandlerWrapper;
 
 
 /**
  * @author  Neil Griffin
  * @author  Joe Ssemwogerere
  */
-public class LiferayFacesResourceHandler extends ResourceHandlerBridgeImpl {
+public class LiferayFacesResourceHandler extends ResourceHandlerWrapper {
 
-	// public constants
+	// Public Constants
 	public static final String LIBRARY_NAME = "liferayfaces";
 
+	// Private Data Members
+	private ResourceHandler wrappedResourceHandler;
+
 	public LiferayFacesResourceHandler(ResourceHandler resourceHandler) {
-		super(resourceHandler);
+		this.wrappedResourceHandler = resourceHandler;
 	}
 
 	@Override
@@ -55,24 +52,6 @@ public class LiferayFacesResourceHandler extends ResourceHandlerBridgeImpl {
 	}
 
 	@Override
-	public void handleResourceRequest(FacesContext facesContext) throws IOException {
-
-		ExternalContext externalContext = facesContext.getExternalContext();
-		String libraryName = externalContext.getRequestParameterMap().get(ResourceConstants.LN);
-		String resourceName = externalContext.getRequestParameterMap().get(ResourceConstants.JAVAX_FACES_RESOURCE);
-
-		if (LIBRARY_NAME.equals(libraryName) && CaptchaResource.RESOURCE_NAME.equals(resourceName)) {
-
-			Resource resource = createResource(resourceName, libraryName);
-
-			handleResource(facesContext, resource);
-		}
-		else {
-			super.handleResourceRequest(facesContext);
-		}
-	}
-
-	@Override
 	public boolean libraryExists(String libraryName) {
 
 		if (LIBRARY_NAME.equals(libraryName)) {
@@ -81,5 +60,10 @@ public class LiferayFacesResourceHandler extends ResourceHandlerBridgeImpl {
 		else {
 			return super.libraryExists(libraryName);
 		}
+	}
+
+	@Override
+	public ResourceHandler getWrapped() {
+		return wrappedResourceHandler;
 	}
 }
