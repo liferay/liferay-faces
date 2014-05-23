@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<showcase:example>
+				<alloy:selectOneRadio layout="lineDirection" label="#{i18n['favorite']}:"
+					value="#{selectOneRadioModelBean.favoriteId}">
+					<f:selectItems value="#{selectOneRadioModelBean.liferayBenefits}" var="benefit" itemValue="#{benefit.id}"
+						itemLabel="#{benefit.label}" />
+				</alloy:selectOneRadio>
+			</showcase:example>
+			<h:commandButton action="#{selectOneRadioBackingBean.submit}" value="#{i18n['submit']}">
+				<f:ajax execute="@form" render="@form" />
+			</h:commandButton>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{selectOneRadioModelBean.favoriteId}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

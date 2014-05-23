@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<showcase:example renderedCheckbox="true" requiredCheckbox="true">
+				<alloy:selectOneRadio id="starRating" label="#{i18n['favorite']}:" 
+					rendered="#{showcaseModelBean.selectedComponent.rendered}"
+					required="#{showcaseModelBean.selectedComponent.required}" value="#{selectOneRadioModelBean.favorite}">
+					<f:selectItem itemLabel="Compatible" itemValue="Compatible" />
+					<f:selectItem itemLabel="Enterprise Ready" itemValue="Enterprise Ready" />
+					<f:selectItem itemLabel="Powerful Integration" itemValue="Powerful Integration" />
+					<f:selectItem itemLabel="Lightweight" itemValue="Lightweight" />
+					<f:selectItem itemLabel="Open Source" itemValue="Open Source" />
+				</alloy:selectOneRadio>
+				<h:message for="starRating" />
+			</showcase:example>
+			<h:commandButton action="#{selectOneRadioBackingBean.submit}" value="#{i18n['submit']}">
+				<f:ajax execute="@form" render="@form" />
+			</h:commandButton>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{selectOneRadioModelBean.favorite}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

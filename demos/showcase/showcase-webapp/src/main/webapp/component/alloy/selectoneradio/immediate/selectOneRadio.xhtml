@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: immediate="false" -->
+		<h:form>
+			<showcase:example description="#{i18n['alloy-selectoneradio-immediate-example-1']}" longDescription="true" number="1" >
+				<alloy:selectOneRadio id="select1" immediate="false" layout="pageDirection"
+					value="#{selectOneRadioModelBean.favorite}" valueChangeListener="#{selectOneRadioBackingBean.valueChange}">
+					<f:selectItem itemLabel="RESTORE_VIEW 1" itemValue="RESTORE_VIEW 1" />
+					<f:selectItem itemLabel="APPLY_REQUEST_VALUES 2" itemValue="APPLY_REQUEST_VALUES 2" />
+					<f:selectItem itemLabel="PROCESS_VALIDATIONS 3" itemValue="PROCESS_VALIDATIONS 3" />
+					<f:selectItem itemLabel="UPDATE_MODEL_VALUES 4" itemValue="UPDATE_MODEL_VALUES 4" />
+					<f:selectItem itemLabel="INVOKE_APPLICATION 5" itemValue="INVOKE_APPLICATION 5" />
+					<f:selectItem itemLabel="RENDER_RESPONSE 6" itemValue="RENDER_RESPONSE 6" />
+				</alloy:selectOneRadio>
+				<h:message for="select1" />
+			</showcase:example>
+			<h:commandButton value="#{i18n['submit']}">
+				<f:ajax execute="@form" render="@form" />
+			</h:commandButton>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{selectOneRadioModelBean.phase}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: immediate="true" -->
+		<h:form>
+			<showcase:example description="#{i18n['alloy-selectoneradio-immediate-example-2']}" longDescription="true" number="2" >
+				<alloy:selectOneRadio id="select2" immediate="true" layout="pageDirection" value="#{selectOneRadioModelBean.favorite}"
+					valueChangeListener="#{selectOneRadioBackingBean.valueChange}">
+					<f:selectItem itemLabel="RESTORE_VIEW 1" itemValue="RESTORE_VIEW 1" />
+					<f:selectItem itemLabel="APPLY_REQUEST_VALUES 2" itemValue="APPLY_REQUEST_VALUES 2" />
+					<f:selectItem itemLabel="PROCESS_VALIDATIONS 3" itemValue="PROCESS_VALIDATIONS 3" />
+					<f:selectItem itemLabel="UPDATE_MODEL_VALUES 4" itemValue="UPDATE_MODEL_VALUES 4" />
+					<f:selectItem itemLabel="INVOKE_APPLICATION 5" itemValue="INVOKE_APPLICATION 5" />
+					<f:selectItem itemLabel="RENDER_RESPONSE 6" itemValue="RENDER_RESPONSE 6" />
+				</alloy:selectOneRadio>
+				<h:message for="select2" />
+			</showcase:example>
+			<h:commandButton value="#{i18n['submit']}">
+				<f:ajax execute="@form" render="@form" />
+			</h:commandButton>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{selectOneRadioModelBean.phase}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
