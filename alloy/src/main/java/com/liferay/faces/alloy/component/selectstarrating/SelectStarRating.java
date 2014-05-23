@@ -23,7 +23,7 @@ import com.liferay.faces.util.lang.StringPool;
  * @author Vernon Singleton
  */
 @FacesComponent(value = SelectStarRating.COMPONENT_TYPE)
-public final class SelectStarRating extends SelectStarRatingBase {
+public class SelectStarRating extends SelectStarRatingBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectstarrating.SelectStarRating";

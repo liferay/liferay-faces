@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<aui-nongen:field label="#{i18n['component']}">
+				<alloy:selectOneRadio label="#{i18n['favorite']}:" 
+					value="#{selectOneRadioModelBean.favoriteId}">
+					<f:selectItem itemLabel="Compatible" itemValue="1" />
+					<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
+					<f:selectItem itemLabel="Powerful Integration" itemValue="3" />
+					<f:selectItem itemLabel="Lightweight" itemValue="4" />
+					<f:selectItem itemLabel="Open Source" itemValue="5" />
+					<f:ajax render="@form" />
+				</alloy:selectOneRadio>
+			</aui-nongen:field>
+			<aui-nongen:field label="#{i18n['model-value']}">
+				<showcase:outputModel>
+					<h:outputText value="#{selectOneRadioModelBean.favoriteId}" />
+				</showcase:outputModel>
+			</aui-nongen:field>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
