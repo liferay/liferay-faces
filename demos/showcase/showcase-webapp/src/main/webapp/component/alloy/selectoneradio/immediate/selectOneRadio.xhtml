@@ -4,9 +4,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
-		<!-- Example 1: String value (no converter required) -->
+		<!-- Example 1: immediate="false" -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-selectoneradio-immediate-example-1']}" number="1" >
+			<showcase:example description="#{i18n['alloy-selectoneradio-immediate-example-1']}" longDescription="true" number="1" >
 				<alloy:selectOneRadio id="select1" immediate="false" layout="pageDirection"
 					value="#{selectOneRadioModelBean.favorite}" valueChangeListener="#{selectOneRadioBackingBean.valueChange}">
 					<f:selectItem itemLabel="RESTORE_VIEW 1" itemValue="RESTORE_VIEW 1" />
@@ -28,9 +28,9 @@
 	</ui:define>
 
 	<ui:define name="col2">
-		<!-- Example 2: Object value (requires a converter) -->
+		<!-- Example 2: immediate="true" -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-selectoneradio-immediate-example-2']}" number="2" >
+			<showcase:example description="#{i18n['alloy-selectoneradio-immediate-example-2']}" longDescription="true" number="2" >
 				<alloy:selectOneRadio id="select2" immediate="true" layout="pageDirection" value="#{selectOneRadioModelBean.favorite}"
 					valueChangeListener="#{selectOneRadioBackingBean.valueChange}">
 					<f:selectItem itemLabel="RESTORE_VIEW 1" itemValue="RESTORE_VIEW 1" />
