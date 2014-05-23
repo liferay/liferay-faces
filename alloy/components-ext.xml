@@ -629,7 +629,7 @@
 	</component>
 	<component name="DatePicker">
 		<description>
-			<![CDATA[Pops up a calendar with selectable dates when its trigger is clicked.]]>
+			<![CDATA[DatePicker is a UIComponent that renders a popup a calendar with selectable dates.]]>
 		</description>
 		<attributes>
 			<attribute>

@@ -169,14 +169,12 @@ public class AlloyRendererUtil {
 	 * <pre>
 	    {@code
 	        Liferay.component('clientKey',
-	            (function(){
-	                return new A.AlloyComponent({
+	                new A.AlloyComponent({
 	                    attribute1:value1,
 	                    attribute2:value2,
 	                    ...
 	                    attributeN:valueN
-	                });
-	            })()
+	                })
 	        );
 	    }
 	 * </pre>
@@ -202,14 +200,7 @@ public class AlloyRendererUtil {
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.COMMA);
 
-		// Begin an anonymous self-executing function which returns the Alloy JavaScript component.
-		responseWriter.write(StringPool.OPEN_PARENTHESIS);
-		responseWriter.write(FUNCTION);
-		responseWriter.write(StringPool.OPEN_PARENTHESIS);
-		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		responseWriter.write(RETURN);
-		responseWriter.write(StringPool.SPACE);
+		// Write Alloy JavaScript component.
 		responseWriter.write(NEW);
 		responseWriter.write(StringPool.SPACE);
 		responseWriter.write(A);
@@ -219,13 +210,6 @@ public class AlloyRendererUtil {
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 		alloyRenderer.encodeAlloyAttributes(responseWriter, uiComponent);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-		responseWriter.write(StringPool.SEMICOLON);
-
-		// End anonymous self-executing function.
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 
 		// Close Liferay.component parenthesis.
