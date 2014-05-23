@@ -2113,14 +2113,6 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-<<<<<<< HEAD
-=======
-			<description><![CDATA[The css class names that are rendered as the value of the class attribute of the outermost span of this component.]]></description>
-			<name>styleClass</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
@@ -2935,16 +2927,12 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
->>>>>>> SelectOneRadio and SelectStarRating compiling after rebase
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-<<<<<<< HEAD
-			<description><![CDATA[The title of the component, which is simply passed through as the html 'title' attribute of this component.]]></description>
-=======
 			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
@@ -2958,15 +2946,11 @@
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
->>>>>>> SelectOneRadio and SelectStarRating compiling after rebase
 			<name>title</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-<<<<<<< HEAD
-			<description><![CDATA[This value is used to generate markup used to render the number of remaining characters allowed in the given text input. e.g.: value="There are {0} character(s) remaining."]]></description>
-=======
 			<description><![CDATA[Boolean indicating if use of the WAI-ARIA Roles and States should be enabled for the Widget.]]></description>
 			<name>useARIA</name>
 			<required>false</required>
@@ -2990,13 +2974,10 @@
 		</attribute>
 		<attribute>
 			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
->>>>>>> SelectOneRadio and SelectStarRating compiling after rebase
 			<name>value</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
 		</attribute>
-<<<<<<< HEAD
-=======
 		<attribute>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
@@ -3022,7 +3003,6 @@
 			<required>false</required>
 			<type>java.lang.Object</type>
 		</attribute>
->>>>>>> SelectOneRadio and SelectStarRating compiling after rebase
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
 		</tag-extension>
