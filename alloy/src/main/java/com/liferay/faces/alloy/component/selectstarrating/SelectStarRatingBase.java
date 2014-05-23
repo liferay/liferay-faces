@@ -898,6 +898,16 @@ public abstract class SelectStarRatingBase extends SelectOneRadio implements Sty
 	}
 
 	@Override
+	public String getWidgetId() {
+		return (String) getStateHelper().eval(WIDGET_ID, null);
+	}
+
+	@Override
+	public void setWidgetId(String widgetId) {
+		getStateHelper().put(WIDGET_ID, widgetId);
+	}
+
+	@Override
 	public Boolean isWidgetRender() {
 		return (Boolean) getStateHelper().eval(WIDGET_RENDER, null);
 	}

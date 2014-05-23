@@ -112,6 +112,7 @@ public interface SelectStarRatingAlloy {
 	public static final String USE_ARIA = "useARIA";
 	public static final String VALUE = "value";
 	public static final String VISIBLE = "visible";
+	public static final String WIDGET_ID = "id";
 	public static final String WIDGET_RENDER = "render";
 	public static final String WIDTH = "width";
 
@@ -466,6 +467,10 @@ public interface SelectStarRatingAlloy {
 	public Boolean isVisible();
 
 	public void setVisible(Boolean visible);
+
+	public String getWidgetId();
+
+	public void setWidgetId(String widgetId);
 
 	public Boolean isWidgetRender();
 

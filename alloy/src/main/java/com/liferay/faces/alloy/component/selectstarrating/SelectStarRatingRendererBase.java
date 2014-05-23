@@ -268,6 +268,14 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 			first = false;
 		}
 
+		String widgetId = selectStarRatingAlloy.getWidgetId();
+
+		if (widgetId != null) {
+
+			encodeWidgetId(responseWriter, selectStarRatingAlloy, widgetId, first);
+			first = false;
+		}
+
 		Boolean widgetRender = selectStarRatingAlloy.isWidgetRender();
 
 		if (widgetRender != null) {
@@ -1176,6 +1184,10 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 
 	protected void encodeVisible(ResponseWriter responseWriter, SelectStarRatingAlloy selectStarRatingAlloy, Boolean visible, boolean first) throws IOException {
 		encodeBoolean(responseWriter, SelectStarRatingAlloy.VISIBLE, visible, first);
+	}
+
+	protected void encodeWidgetId(ResponseWriter responseWriter, SelectStarRatingAlloy selectStarRatingAlloy, String widgetId, boolean first) throws IOException {
+		encodeString(responseWriter, SelectStarRatingAlloy.WIDGET_ID, widgetId, first);
 	}
 
 	protected void encodeWidgetRender(ResponseWriter responseWriter, SelectStarRatingAlloy selectStarRatingAlloy, Boolean widgetRender, boolean first) throws IOException {
