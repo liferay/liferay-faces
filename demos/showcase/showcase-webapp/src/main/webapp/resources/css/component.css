@@ -84,6 +84,18 @@
 	margin-top: 10px;
 }
 
+.showcase-panel {
+	border-style: dotted;
+	line-height: 40px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	min-height: 40px;
+	text-align: center;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
 .tab-content img {
 	float: left;
 	margin-right: 10px;

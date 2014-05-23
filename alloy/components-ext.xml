@@ -255,7 +255,7 @@
 	</component>
 	<!-- /JSF Custom Component Heirarchy -->
 	<!-- 3. HTML Component Heirarchy -->
-	<component name="HTMLAccessibility" extendsTags="HTMLCommonEvents" generateJava="false" generateTaglibXML="false">
+	<component name="HTMLAccessibility" extendsTags="HTMLCommonEvents HTMLPassthrough" generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
 				<description>
@@ -296,7 +296,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="HTMLCommonEvents" extendsTags="HTMLPassthrough" generateJava="false" generateTaglibXML="false">
+	<component name="HTMLCommonEvents" extendsTags="UIComponentBase Styleable" generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
 				<description>
@@ -826,6 +826,23 @@
             	<type>java.lang.String</type>
 				<generateJava>false</generateJava>
         	</attribute>
+		</attributes>
+	</component>
+	<component name="PanelGroup" generateJava="false" extendsTags="HTMLCommonEvents"
+		parentClass="javax.faces.component.html.HtmlPanelGroup"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[PanelGroup is a UIPanel component that renders a <code>&lt;span&gt;</code> or a <code>&lt;div&gt;</code> element for grouping purposes. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Specifies whether the HTML element rendered by this component will be a <code>span</code> (default) or a <code>div</code>. If the value of this attribute is <code>block</code>, the rendered element will be a <code>div</code>.]]>
+				</description>
+				<name>layout</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
 		</attributes>
 	</component>
 	<component preferredName="PickDate" name="DatePicker" extendsTags="ClientComponent UIComponentBase Styleable">
