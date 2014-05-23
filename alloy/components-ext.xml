@@ -629,7 +629,7 @@
 	</component>
 	<component name="DatePicker">
 		<description>
-			<![CDATA[Pops up a calendar with selectable dates when its trigger is clicked.]]>
+			<![CDATA[DatePicker is a UIComponent that renders a popup a calendar with selectable dates.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -1203,14 +1203,6 @@
 				</description>
 				<name>rendered</name>
 				<type>boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The css class names that are rendered as the value of the class attribute of the outermost span of this component.]]>
-				</description>
-				<name>styleClass</name>
-				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
