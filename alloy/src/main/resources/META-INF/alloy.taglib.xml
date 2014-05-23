@@ -2113,12 +2113,6 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The css class names that are rendered as the value of the class attribute of the outermost span of this component.]]></description>
-			<name>styleClass</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
