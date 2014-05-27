@@ -126,6 +126,7 @@
 		<portal.type>liferay</portal.type>
 		<portlet.war.deployment.type>deploy</portlet.war.deployment.type>
 		<primefaces4.version>4.0</primefaces4.version>
+		<prettyfaces.version>3.3.3</prettyfaces.version>
 		<richfaces4.version>4.3.2.Final</richfaces4.version>
 		<selenium.version>2.35.0</selenium.version>
 		<spring.version>3.0.7.RELEASE</spring.version>
