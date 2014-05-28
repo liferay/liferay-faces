@@ -55,6 +55,21 @@
 	font-weight: bold;
 }
 
+.aui .select-one-radio input[type='radio'] {
+	vertical-align: baseline;
+}
+
+.aui .select-one-radio label {
+	display: inline;
+	font-size: 0.9em;
+	padding-right: 8px;
+	vertical-align: baseline;
+}
+
+.aui ul.feedback {
+	list-style-type: none;
+}
+
 .component-rendered-checkbox input,.component-required-checkbox input {
 	vertical-align: 0.1em;
 }
