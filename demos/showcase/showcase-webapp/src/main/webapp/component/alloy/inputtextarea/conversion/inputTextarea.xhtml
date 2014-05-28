@@ -4,11 +4,11 @@
 	template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
-		<!-- Example 1: Conversion to an Integer via the converter attribute. -->
+		<!-- Example 1: Conversion to a Date using the converter attribute. -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-inputtextarea-conversion-example-1']}" number="1">
-				<alloy:inputTextarea id="textarea" converter="javax.faces.Integer" converterMessage="#{i18n['converter-message']}"
-					value="#{inputTextModelBean.integer}" />
+			<showcase:example description="#{i18n['conversion-to-a-date-using-converter-attribute']}" number="1">
+				<alloy:inputTextarea id="textarea" converter="javax.faces.DateTime" converterMessage="#{i18n['converter-message']}"
+					value="#{inputTextModelBean.date}" />
 				<br />
 				<h:message for="textarea" />
 			</showcase:example>
@@ -16,18 +16,18 @@
 				<f:ajax execute="@form" render="@form" />
 			</alloy:commandButton>
 			<showcase:outputModel>
-				<h:outputText id="modelValue" value="#{inputTextModelBean.integer}" />
+				<h:outputText id="modelValue" converter="javax.faces.DateTime" value="#{inputTextModelBean.date}" />
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>
 
 	<ui:define name="col2">
-		<!-- Example 2: Conversion to an Integer by specifying an f:converter child tag. -->
+		<!-- Example 2: Conversion to a Date using an f:converter child tag. -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-inputtextarea-conversion-example-2']}" number="2">
+			<showcase:example description="#{i18n['conversion-to-a-date-using-f-convertdatetime']}" number="2">
 				<alloy:inputTextarea id="textarea" converterMessage="#{i18n['converter-message']}"
-					value="#{inputTextModelBean.integer}">
-					<f:converter converterId="javax.faces.Integer" />
+					value="#{inputTextModelBean.date}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</alloy:inputTextarea>
 				<br />
 				<h:message for="textarea" />
@@ -36,7 +36,9 @@
 				<f:ajax execute="@form" render="@form" />
 			</alloy:commandButton>
 			<showcase:outputModel>
-				<h:outputText id="modelValue" value="#{inputTextModelBean.integer}" />
+				<h:outputText id="modelValue" value="#{inputTextModelBean.date}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:outputText>
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>
