@@ -13,6 +13,9 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -24,15 +27,15 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class InputTextModelBean {
 
-	private Integer integer;
+	private Date date = new GregorianCalendar().getTime();
 	private String text;
 
-	public Integer getInteger() {
-		return integer;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setInteger(Integer integer) {
-		this.integer = integer;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public String getText() {

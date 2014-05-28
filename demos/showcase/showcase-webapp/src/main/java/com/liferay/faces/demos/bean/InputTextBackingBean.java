@@ -55,7 +55,7 @@ public class InputTextBackingBean {
 		Object value = inputTextModelBean.getText();
 
 		if (value == null) {
-			value = inputTextModelBean.getInteger();
+			value = inputTextModelBean.getDate();
 		}
 
 		logger.info("You entered: " + value);
