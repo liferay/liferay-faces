@@ -16,7 +16,7 @@
 				<f:ajax execute="@form" render="@form" />
 			</alloy:commandButton>
 			<showcase:outputModel>
-				<h:outputText id="modelValue" converter="javax.faces.DateTime" value="#{inputTextModelBean.date}" />
+				<alloy:outputText id="modelValue" converter="javax.faces.DateTime" value="#{inputTextModelBean.date}" />
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>
@@ -36,9 +36,9 @@
 				<f:ajax execute="@form" render="@form" />
 			</alloy:commandButton>
 			<showcase:outputModel>
-				<h:outputText id="modelValue" value="#{inputTextModelBean.date}">
+				<alloy:outputText id="modelValue" value="#{inputTextModelBean.date}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
-				</h:outputText>
+				</alloy:outputText>
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>
