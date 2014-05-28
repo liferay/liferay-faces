@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<showcase:example description="#{i18n['alloy-inputtextarea-size-example-1']}" number="1">
+				<alloy:inputTextarea id="textarea" cols="50" rows="6" value="#{inputTextModelBean.text}" />
+				<hr />
+				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{inputTextModelBean.text}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<h:form>
+			<showcase:example description="#{i18n['alloy-inputtextarea-size-example-2']}" number="2">
+				<alloy:inputTextarea id="textarea" value="#{inputTextModelBean.text}" style="width: 200px; height: 150px;" />
+				<hr />
+				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<h:outputText id="modelValue" value="#{inputTextModelBean.text}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
