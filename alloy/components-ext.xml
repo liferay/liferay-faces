@@ -803,11 +803,26 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputTextarea" extendsTags="Styleable" generateJava="false"
-		parentClass="javax.faces.component.html.HtmlInputTextarea">
-		<!-- TODO extendsTags="UIInput" -->
-		<!-- TODO cols -->
-		<!-- TODO rows -->
+	<component name="InputTextarea" extendsTags="HTMLAccessibilityEvents HTMLInputEvents Styleable"
+		generateJava="false" parentClass="javax.faces.component.html.HtmlInputTextarea">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[__DESCRIPTION__]]>
+				</description>
+				<name>cols</name>
+				<type>int</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[__DESCRIPTION__]]>
+				</description>
+				<name>rows</name>
+				<type>int</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
 	</component>
 	<component preferredName="OutputRemainingChars" name="CharCounter" extendsTags="ClientComponent OutputText"
 		parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" 
