@@ -3,14 +3,14 @@
   xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
                       http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
 
-	<url-mapping id="component-all">
-		<pattern value="/component/{componentPrefix}/{componentName}/{componentUseCase}" />
-		<view-id value="/views/component.xhtml" />
+	<url-mapping id="welcome">
+		<pattern value="/" />
+		<view-id value="/views/component.faces?componentPrefix=alloy&amp;componentName=button&amp;componentUseCase=general" />
 	</url-mapping>
 
-	<url-mapping id="component">
-		<pattern value="/component" />
-		<view-id value="/views/component.xhtml" />
+	<url-mapping id="liferay-friendly-url">
+		<pattern value="/web/guest/showcase/-/component/#{componentPrefix}/#{componentName}/#{componentUseCase}" />
+		<view-id value="/views/component.faces" />
 	</url-mapping>
 
 </pretty-config>
