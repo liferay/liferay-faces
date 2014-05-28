@@ -49,35 +49,51 @@ public class CodeExampleUtil {
 
 			if (sourceFileName.endsWith(JAVA_EXTENSION)) {
 				fileExtension = JAVA;
+
 				Matcher matcher = JAVA_MULTILINE_COMMENTS_PATTERN.matcher(sourceCodeText);
 				sourceCodeText = matcher.replaceAll(StringPool.BLANK);
 			}
 			else {
 				fileExtension = XML;
 				sourceCodeText = TEMPLATE_ATTRIBUTE_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
+
 				StringReader stringReader = new StringReader(sourceCodeText);
 				StringBuffer buf = new StringBuffer();
 				BufferedReader bufferedReader = new BufferedReader(stringReader);
 				int trimTab = 0;
 				String line;
+				boolean ignoreNextLine = false;
+
 				while ((line = bufferedReader.readLine()) != null) {
 					String trimmedLine = line.trim();
-					if (trimmedLine.startsWith("<showcase") || trimmedLine.startsWith("<ui:define")) {
-						trimTab++;
-					}
-					else if (trimmedLine.startsWith("</showcase") || trimmedLine.startsWith("</ui:define")) {
-						trimTab--;
+
+					if (ignoreNextLine) {
+						ignoreNextLine = !trimmedLine.endsWith(StringPool.GREATER_THAN);
 					}
 					else {
-						for (int i = 0; i < trimTab; i++) {
-							if (line.startsWith(StringPool.TAB)) {
-								line = line.substring(1);
-							}
+
+						if (trimmedLine.startsWith("<showcase") || trimmedLine.startsWith("<ui:define")) {
+							trimTab++;
+							ignoreNextLine = !trimmedLine.endsWith(StringPool.GREATER_THAN);
 						}
-						buf.append(line);
-						buf.append(StringPool.NEW_LINE);
+						else if (trimmedLine.startsWith("</showcase") || trimmedLine.startsWith("</ui:define")) {
+							trimTab--;
+						}
+						else {
+
+							for (int i = 0; i < trimTab; i++) {
+
+								if (line.startsWith(StringPool.TAB)) {
+									line = line.substring(1);
+								}
+							}
+
+							buf.append(line);
+							buf.append(StringPool.NEW_LINE);
+						}
 					}
 				}
+
 				sourceCodeText = buf.toString();
 			}
 
