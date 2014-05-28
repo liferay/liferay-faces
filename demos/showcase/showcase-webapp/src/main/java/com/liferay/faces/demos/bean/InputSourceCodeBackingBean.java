@@ -44,7 +44,7 @@ public class InputSourceCodeBackingBean {
 		logger.info("You entered text: " + source);
 	}
 
-	public void setAceEditorModelBean(InputSourceCodeModelBean inputSourceCodeModelBean) {
+	public void setInputSourceCodeModelBean(InputSourceCodeModelBean inputSourceCodeModelBean) {
 		this.inputSourceCodeModelBean = inputSourceCodeModelBean;
 	}
 }
