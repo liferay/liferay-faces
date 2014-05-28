@@ -16,6 +16,7 @@ package com.liferay.faces.demos.bean;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -41,17 +42,6 @@ public class SelectOneRadioBackingBean {
 	@ManagedProperty(name = "selectOneRadioModelBean", value = "#{selectOneRadioModelBean}")
 	private SelectOneRadioModelBean selectOneRadioModelBean;
 
-	public void valueChangeListener(ValueChangeEvent valueChangeEvent) {
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		PhaseId phaseId = facesContext.getCurrentPhaseId();
-		logger.debug("phaseChangeListener: phaseId=[{0}]", phaseId.toString());
-
-		String phaseName = phaseId.getName();
-		FacesMessage facesMessage = new FacesMessage("The valueChangeListener method was called during the " + phaseName + " phase of the JSF lifecycle.");
-		facesContext.addMessage(null, facesMessage);
-	}
-
 	public void submit() {
 		PhaseId phaseId = FacesContext.getCurrentInstance().getCurrentPhaseId();
 		logger.info("submit: phaseId=[{0}] favoriteId=[{1}]", phaseId.toString(),
@@ -60,7 +50,8 @@ public class SelectOneRadioBackingBean {
 
 	public void submitAnswer() {
 		Date selectedDate = selectOneRadioModelBean.getDate();
-		Calendar calendar = new GregorianCalendar();
+		TimeZone gmtTimeZone = TimeZone.getTimeZone("GMT");
+		Calendar calendar = new GregorianCalendar(gmtTimeZone);
 		calendar.setTime(selectedDate);
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -83,6 +74,18 @@ public class SelectOneRadioBackingBean {
 		PhaseId phaseId = FacesContext.getCurrentInstance().getCurrentPhaseId();
 		logger.info("submit: phaseId=[{0}] favoriteId=[{1}]", phaseId.toString(),
 			selectOneRadioModelBean.getFavoriteId());
+	}
+
+	public void valueChangeListener(ValueChangeEvent valueChangeEvent) {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		PhaseId phaseId = facesContext.getCurrentPhaseId();
+		logger.debug("valueChangeListener: phaseId=[{0}]", phaseId.toString());
+
+		String phaseName = phaseId.getName();
+		FacesMessage facesMessage = new FacesMessage("The valueChangeListener method was called during the " +
+				phaseName + " phase of the JSF lifecycle.");
+		facesContext.addMessage(null, facesMessage);
 	}
 
 	public void setSelectOneRadioModelBean(SelectOneRadioModelBean selectOneRadioModelBean) {
