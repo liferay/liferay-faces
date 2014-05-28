@@ -15,9 +15,9 @@
 					<f:selectItem itemLabel="July 14, 1789 AD" itemValue="07/14/1789 AD" />
 				</alloy:selectOneRadio>
 				<hr />
-				<h:commandButton action="#{selectOneRadioBackingBean.submitAnswer}" value="#{i18n['submit']}">
+				<alloy:commandButton action="#{selectOneRadioBackingBean.submitAnswer}" value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
-				</h:commandButton>
+				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{selectOneRadioModelBean.date}">

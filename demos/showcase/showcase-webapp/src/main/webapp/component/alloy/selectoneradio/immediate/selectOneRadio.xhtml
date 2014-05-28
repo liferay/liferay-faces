@@ -19,9 +19,9 @@
 					<f:selectItem itemLabel="Open Source" itemValue="5" />
 				</alloy:selectOneRadio>
 			</showcase:example>
-			<h:commandButton value="#{i18n['submit']}">
+			<alloy:commandButton value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
-			</h:commandButton>
+			</alloy:commandButton>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{selectOneRadioModelBean.favoriteId}" />
 			</showcase:outputModel>
@@ -44,9 +44,9 @@
 					<f:selectItem itemLabel="Open Source" itemValue="5" />
 				</alloy:selectOneRadio>
 				<hr />
-				<h:commandButton value="#{i18n['submit']}">
+				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
-				</h:commandButton>
+				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{selectOneRadioModelBean.favoriteId}" />

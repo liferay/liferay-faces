@@ -19,9 +19,9 @@
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</alloy:outputText>
 				<hr />
-				<h:commandButton value="#{i18n['submit']}">
+				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
-				</h:commandButton>
+				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{inputDateModelBean.birthday}">

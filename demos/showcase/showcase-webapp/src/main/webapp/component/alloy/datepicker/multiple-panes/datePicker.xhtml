@@ -11,9 +11,9 @@
 				</h:inputText>
 				<alloy:datePicker datePattern="MM/dd/yyyy" for="birthday" panes="3" />
 				<hr />
-				<h:commandButton value="#{i18n['submit']}">
+				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
-				</h:commandButton>
+				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{datePickerModelBean.birthday}">

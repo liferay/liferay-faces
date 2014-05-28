@@ -17,9 +17,9 @@
 				</alloy:selectStarRating>
 				<h:message for="starRating" />
 				<hr />
-				<h:commandButton action="#{selectStarRatingBackingBean.submit}" value="#{i18n['submit']}">
+				<alloy:commandButton action="#{selectStarRatingBackingBean.submit}" value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
-				</h:commandButton>
+				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{selectStarRatingModelBean.favoriteId}" />
