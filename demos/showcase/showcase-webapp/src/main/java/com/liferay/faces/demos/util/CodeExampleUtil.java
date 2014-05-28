@@ -13,7 +13,9 @@
  */
 package com.liferay.faces.demos.util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,12 +35,7 @@ public class CodeExampleUtil {
 	private static final String JAVA = "java";
 	private static final String JAVA_EXTENSION = ".java";
 	private static final Pattern JAVA_MULTILINE_COMMENTS_PATTERN = Pattern.compile("/[*][*].*[*]/", Pattern.DOTALL);
-	private static final Pattern SHOWCASE_OUTPUT_MODEL_CLOSE_TAG_PATTERN = Pattern.compile("\n\t*</showcase:.+>");
-	private static final Pattern SHOWCASE_OUTPUT_MODEL_OPEN_TAG_PATTERN = Pattern.compile("\n\t*<showcase:.+>");
-	private static final Pattern TAB_OPEN_TAG_PATTERN = Pattern.compile("\t<");
 	private static final Pattern TEMPLATE_ATTRIBUTE_PATTERN = Pattern.compile("\\s*template=\".*\"");
-	private static final Pattern UI_DEFINE_OPEN_TAG_PATTERN = Pattern.compile("\n\t*<ui:define name=\".*\">");
-	private static final Pattern UI_DEFINE_CLOSE_TAG_PATTERN = Pattern.compile("\n\t*</ui:define>");
 	private static final String XML = "xml";
 
 	public static CodeExample read(URL sourceFileURL, String sourceFileName) throws IOException {
@@ -51,18 +48,37 @@ public class CodeExampleUtil {
 			String fileExtension;
 
 			if (sourceFileName.endsWith(JAVA_EXTENSION)) {
+				fileExtension = JAVA;
 				Matcher matcher = JAVA_MULTILINE_COMMENTS_PATTERN.matcher(sourceCodeText);
 				sourceCodeText = matcher.replaceAll(StringPool.BLANK);
-				fileExtension = JAVA;
 			}
 			else {
-				sourceCodeText = SHOWCASE_OUTPUT_MODEL_CLOSE_TAG_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
-				sourceCodeText = SHOWCASE_OUTPUT_MODEL_OPEN_TAG_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
-				sourceCodeText = TEMPLATE_ATTRIBUTE_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
-				sourceCodeText = UI_DEFINE_OPEN_TAG_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
-				sourceCodeText = UI_DEFINE_CLOSE_TAG_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
-				sourceCodeText = TAB_OPEN_TAG_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.LESS_THAN);
 				fileExtension = XML;
+				sourceCodeText = TEMPLATE_ATTRIBUTE_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
+				StringReader stringReader = new StringReader(sourceCodeText);
+				StringBuffer buf = new StringBuffer();
+				BufferedReader bufferedReader = new BufferedReader(stringReader);
+				int trimTab = 0;
+				String line;
+				while ((line = bufferedReader.readLine()) != null) {
+					String trimmedLine = line.trim();
+					if (trimmedLine.startsWith("<showcase") || trimmedLine.startsWith("<ui:define")) {
+						trimTab++;
+					}
+					else if (trimmedLine.startsWith("</showcase") || trimmedLine.startsWith("</ui:define")) {
+						trimTab--;
+					}
+					else {
+						for (int i = 0; i < trimTab; i++) {
+							if (line.startsWith(StringPool.TAB)) {
+								line = line.substring(1);
+							}
+						}
+						buf.append(line);
+						buf.append(StringPool.NEW_LINE);
+					}
+				}
+				sourceCodeText = buf.toString();
 			}
 
 			sourceCodeText = sourceCodeText.trim();
