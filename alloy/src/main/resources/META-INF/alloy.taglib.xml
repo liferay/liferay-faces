@@ -475,7 +475,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -2135,11 +2135,273 @@
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[StarRating is an input component that renders a set of stars.]]></description>
-		<tag-name>starRating</tag-name>
+		<description><![CDATA[SelectOneRadio is an <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a> component that delegates rendering to its JSF renderer.]]></description>
+		<tag-name>selectOneRadio</tag-name>
 		<component>
-			<component-type>com.liferay.faces.alloy.component.starrating.StarRating</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.starrating.StarRatingRenderer</renderer-type>
+			<component-type>com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.selectoneradio.SelectOneRadioRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
+			<name>accesskey</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[__DESCRIPTION__]]></description>
+			<name>border</name>
+			<required>false</required>
+			<type>int</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The class name of the converter instance that is to be used by this component.]]></description>
+			<name>converter</name>
+			<required>false</required>
+			<type>javax.faces.convert.Converter</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]></description>
+			<name>converterMessage</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
+			<name>dir</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]></description>
+			<name>disabledClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]></description>
+			<name>enabledClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]></description>
+			<name>hideNoSelectionOption</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the Process Validations phase.]]></description>
+			<name>immediate</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
+			<name>label</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
+			<name>lang</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The direction in which the layout of the component should go.  The default value is 'lineDirection'.]]></description>
+			<name>layout</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
+			<name>onblur</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]></description>
+			<name>onchange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
+			<name>onclick</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a double click event occurs.]]></description>
+			<name>ondblclick</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when this component gets focus.]]></description>
+			<name>onfocus</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keydown event occurs.]]></description>
+			<name>onkeydown</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keypress event occurs.]]></description>
+			<name>onkeypress</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keyup event occurs.]]></description>
+			<name>onkeyup</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mousedown event occurs.]]></description>
+			<name>onmousedown</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mousemove event occurs.]]></description>
+			<name>onmousemove</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseout event occurs.]]></description>
+			<name>onmouseout</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseover event occurs.]]></description>
+			<name>onmouseover</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
+			<name>onmouseup</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when the user selects this component.]]></description>
+			<name>onselect</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
+			<name>readonly</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
+			<name>required</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]></description>
+			<name>requiredMessage</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
+			<name>role</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
+			<name>tabindex</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
+			<name>title</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
+			<name>validator</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+			<method-signature>
+					void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+					java.lang.Object)
+				</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component.]]></description>
+			<name>validatorMessage</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This value is used to generate markup used to render the number of remaining characters allowed in the given text input. e.g.: value="There are {0} character(s) remaining."]]></description>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
+			<name>valueChangeListener</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[SelectStarRating is an input component that renders a set of stars.]]></description>
+		<tag-name>selectStarRating</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.selectstarrating.SelectStarRating</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.selectstarrating.SelectStarRatingRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
@@ -2454,12 +2716,6 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A unique identifier for this component.]]></description>
-			<name>id</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the Process Validations phase.]]></description>
 			<name>immediate</name>
 			<required>false</required>
@@ -2486,6 +2742,12 @@
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
 			<name>lang</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The direction in which the layout of the component should go.  The default value is 'lineDirection'.]]></description>
+			<name>layout</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -2903,6 +3165,12 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[]]></description>
+			<name>widgetId</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.]]></description>
 			<name>widgetRender</name>
 			<required>false</required>
@@ -2915,445 +3183,15 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0-m2</vdldoc:since>
-		</tag-extension>
-	</tag>
-	<tag>
-		<description><![CDATA[Tab is a panel component that renders nested/child tags as content within itself.]]></description>
-		<tag-name>tab</tag-name>
-		<component>
-			<component-type>com.liferay.faces.alloy.component.tab.Tab</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.tab.TabRenderer</renderer-type>
-		</component>
-		<attribute>
-			<description><![CDATA[__DESCRIPTION__]]></description>
-			<name>label</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
-			<name>style</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
-			<name>styleClass</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<tag-extension>
-			<vdldoc:since>3.2.0-m2</vdldoc:since>
-		</tag-extension>
-	</tag>
-	<tag>
-		<description><![CDATA[TabView is an iterator component that renders tabs either statically or dynamically.]]></description>
-		<tag-name>tabView</tag-name>
-		<component>
-			<component-type>com.liferay.faces.alloy.component.tabview.TabView</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.tabview.TabViewRenderer</renderer-type>
-		</component>
-		<attribute>
-			<description><![CDATA[Returns the Widget's currently focused descendant Widget.]]></description>
-			<name>afterActiveDescendantChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
-			<name>afterBoundingBoxChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
-			<name>afterContentBoxChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[String representing the default type of the children  managed by this Widget.  Can also supply default type as a constructor reference.]]></description>
-			<name>afterDefaultChildTypeChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
-			<name>afterDestroyedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
-			<name>afterDisabledChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
-			<name>afterFocusedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
-			<name>afterHeightChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>afterIdChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
-			<name>afterInitializedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
-			<name>afterLocaleChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if multiple children can be selected at  once.  Whether or not multiple selection is enabled is always delegated to the value of the <code>multiple</code> attribute of the root widget in the object hierarchy.]]></description>
-			<name>afterMultipleChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
-			<name>afterRenderChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
-			<name>afterRenderedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Returns the currently selected child Widget.  If the  <code>mulitple</code> attribte is set to <code>true</code> will  return an Y.ArrayList instance containing the currently selected  children.  If no children are selected, will return null.]]></description>
-			<name>afterSelectionChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
-			<name>afterSrcNodeChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine the orientation of tabs. Can be stacked (vertical) or not (horizontal).]]></description>
-			<name>afterStackedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
-			<name>afterStringsChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
-			<name>afterTabIndexChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine the type of tabs.]]></description>
-			<name>afterTypeChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
-			<name>afterVisibleChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
-			<name>afterWidthChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
-			<name>boundingBox</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
-			<name>clientKey</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
-			<name>contentBox</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[String representing the default type of the children  managed by this Widget.  Can also supply default type as a constructor reference.]]></description>
-			<name>defaultChildType</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
-			<name>disabled</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
-			<name>height</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
-			<name>locale</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if multiple children can be selected at  once.  Whether or not multiple selection is enabled is always delegated to the value of the <code>multiple</code> attribute of the root widget in the object hierarchy.]]></description>
-			<name>multiple</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Returns the Widget's currently focused descendant Widget.]]></description>
-			<name>onActiveDescendantChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
-			<name>onBoundingBoxChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
-			<name>onContentBoxChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[String representing the default type of the children  managed by this Widget.  Can also supply default type as a constructor reference.]]></description>
-			<name>onDefaultChildTypeChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
-			<name>onDestroyedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
-			<name>onDisabledChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
-			<name>onFocusedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
-			<name>onHeightChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>onIdChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
-			<name>onInitializedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
-			<name>onLocaleChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if multiple children can be selected at  once.  Whether or not multiple selection is enabled is always delegated to the value of the <code>multiple</code> attribute of the root widget in the object hierarchy.]]></description>
-			<name>onMultipleChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
-			<name>onRenderChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
-			<name>onRenderedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Returns the currently selected child Widget.  If the  <code>mulitple</code> attribte is set to <code>true</code> will  return an Y.ArrayList instance containing the currently selected  children.  If no children are selected, will return null.]]></description>
-			<name>onSelectionChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
-			<name>onSrcNodeChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine the orientation of tabs. Can be stacked (vertical) or not (horizontal).]]></description>
-			<name>onStackedChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
-			<name>onStringsChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
-			<name>onTabIndexChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine the type of tabs.]]></description>
-			<name>onTypeChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
-			<name>onVisibleChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
-			<name>onWidthChange</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
-			<name>srcNode</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine the orientation of tabs. Can be stacked (vertical) or not (horizontal).]]></description>
-			<name>stacked</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
-			<name>strings</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
-			<name>style</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
-			<name>styleClass</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
-			<name>tabIndex</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine the type of tabs.]]></description>
-			<name>type</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
-			<name>value</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The name of the variable that is to be intorduced into the el representing the current iteration.]]></description>
-			<name>var</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
-			<name>visible</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>widgetId</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
-			<name>widgetRender</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
-			<name>width</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<tag-extension>
-			<vdldoc:since>3.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
 		<description><![CDATA[A base class for ThumbRating, providing:  <ul>     <li>A non-obstrusive star rating control using Thumb up and Thumb down icons</li>     <li>Could be based on a set of radio input boxes</li>  </ul> Check the [live demo](http://alloyui.com/examples/rating/).]]></description>
-		<tag-name>thumbRating</tag-name>
+		<tag-name>selectThumbRating</tag-name>
 		<component>
-			<component-type>com.liferay.faces.alloy.component.thumbrating.ThumbRating</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.thumbrating.ThumbRatingRenderer</renderer-type>
+			<component-type>com.liferay.faces.alloy.component.selectthumbrating.SelectThumbRating</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.selectthumbrating.SelectThumbRatingRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
@@ -3694,6 +3532,12 @@
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
 			<name>lang</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The direction in which the layout of the component should go.  The default value is 'lineDirection'.]]></description>
+			<name>layout</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -4129,7 +3973,437 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[Tab is a panel component that renders nested/child tags as content within itself.]]></description>
+		<tag-name>tab</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.tab.Tab</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.tab.TabRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[__DESCRIPTION__]]></description>
+			<name>label</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[TabView is an iterator component that renders tabs either statically or dynamically.]]></description>
+		<tag-name>tabView</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.tabview.TabView</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.tabview.TabViewRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[Returns the Widget's currently focused descendant Widget.]]></description>
+			<name>afterActiveDescendantChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
+			<name>afterBoundingBoxChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
+			<name>afterContentBoxChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String representing the default type of the children  managed by this Widget.  Can also supply default type as a constructor reference.]]></description>
+			<name>afterDefaultChildTypeChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
+			<name>afterDestroyedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
+			<name>afterDisabledChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
+			<name>afterFocusedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
+			<name>afterHeightChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[]]></description>
+			<name>afterIdChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
+			<name>afterInitializedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
+			<name>afterLocaleChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if multiple children can be selected at  once.  Whether or not multiple selection is enabled is always delegated to the value of the <code>multiple</code> attribute of the root widget in the object hierarchy.]]></description>
+			<name>afterMultipleChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
+			<name>afterRenderChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
+			<name>afterRenderedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Returns the currently selected child Widget.  If the  <code>mulitple</code> attribte is set to <code>true</code> will  return an Y.ArrayList instance containing the currently selected  children.  If no children are selected, will return null.]]></description>
+			<name>afterSelectionChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
+			<name>afterSrcNodeChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine the orientation of tabs. Can be stacked (vertical) or not (horizontal).]]></description>
+			<name>afterStackedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
+			<name>afterStringsChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
+			<name>afterTabIndexChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine the type of tabs.]]></description>
+			<name>afterTypeChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
+			<name>afterVisibleChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
+			<name>afterWidthChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
+			<name>boundingBox</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
+			<name>clientKey</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
+			<name>contentBox</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String representing the default type of the children  managed by this Widget.  Can also supply default type as a constructor reference.]]></description>
+			<name>defaultChildType</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
+			<name>disabled</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
+			<name>height</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
+			<name>locale</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if multiple children can be selected at  once.  Whether or not multiple selection is enabled is always delegated to the value of the <code>multiple</code> attribute of the root widget in the object hierarchy.]]></description>
+			<name>multiple</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Returns the Widget's currently focused descendant Widget.]]></description>
+			<name>onActiveDescendantChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
+			<name>onBoundingBoxChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
+			<name>onContentBoxChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String representing the default type of the children  managed by this Widget.  Can also supply default type as a constructor reference.]]></description>
+			<name>onDefaultChildTypeChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the destroy lifecycle phase.]]></description>
+			<name>onDestroyedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
+			<name>onDisabledChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if the Widget, or one of its descendants, has focus.]]></description>
+			<name>onFocusedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
+			<name>onHeightChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[]]></description>
+			<name>onIdChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this object has been through the init lifecycle phase.]]></description>
+			<name>onInitializedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
+			<name>onLocaleChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating if multiple children can be selected at  once.  Whether or not multiple selection is enabled is always delegated to the value of the <code>multiple</code> attribute of the root widget in the object hierarchy.]]></description>
+			<name>onMultipleChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
+			<name>onRenderChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Flag indicating whether or not this Widget has been through the render lifecycle phase.]]></description>
+			<name>onRenderedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Returns the currently selected child Widget.  If the  <code>mulitple</code> attribte is set to <code>true</code> will  return an Y.ArrayList instance containing the currently selected  children.  If no children are selected, will return null.]]></description>
+			<name>onSelectionChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
+			<name>onSrcNodeChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine the orientation of tabs. Can be stacked (vertical) or not (horizontal).]]></description>
+			<name>onStackedChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
+			<name>onStringsChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
+			<name>onTabIndexChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine the type of tabs.]]></description>
+			<name>onTypeChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
+			<name>onVisibleChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
+			<name>onWidthChange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
+			<name>srcNode</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine the orientation of tabs. Can be stacked (vertical) or not (horizontal).]]></description>
+			<name>stacked</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
+			<name>strings</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
+			<name>tabIndex</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Determine the type of tabs.]]></description>
+			<name>type</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the variable that is to be intorduced into the el representing the current iteration.]]></description>
+			<name>var</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
+			<name>visible</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[]]></description>
+			<name>widgetId</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
+			<name>widgetRender</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
+			<name>width</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 </facelet-taglib>
