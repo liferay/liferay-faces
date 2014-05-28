@@ -8,9 +8,9 @@
 		<h:form>
 			<showcase:example description="#{i18n['alloy-datepicker-localization-example-1']}" number="1">
 				<alloy:datePicker for="portugueseDateInput" binding="#{portugueseDatePicker}" locale="pt-BR" />
-				<h:inputText id="portugueseDateInput" value="#{datePickerModelBean.birthday}">
+				<alloy:inputText id="portugueseDateInput" value="#{datePickerModelBean.birthday}">
 					<f:convertDateTime pattern="#{portugueseDatePicker.datePattern}" />
-				</h:inputText>
+				</alloy:inputText>
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
@@ -29,9 +29,9 @@
 		<h:form>
 			<showcase:example description="#{i18n['alloy-datepicker-localization-example-2']}" number="2">
 				<alloy:datePicker for="japaneseDateInput" binding="#{japaneseDatePicker}" locale="#{datePickerModelBean.locale}" />
-				<h:inputText id="japaneseDateInput" value="#{datePickerModelBean.birthday}">
+				<alloy:inputText id="japaneseDateInput" value="#{datePickerModelBean.birthday}">
 					<f:convertDateTime pattern="#{japaneseDatePicker.datePattern}" />
-				</h:inputText>
+				</alloy:inputText>
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />

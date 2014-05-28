@@ -8,7 +8,7 @@
 		<h:form>
 			<showcase:example description="#{i18n['alloy-outputremainingchars-max-length-reached-1']}" longDescription="true"
 				number="1">
-				<h:inputTextarea id="inputTextarea" maxlength="10" />
+				<alloy:inputTextarea id="inputTextarea" maxlength="10" />
 				<br />
 				<alloy:outputRemainingChars for="inputTextarea" onMaxlengthReached="alert('Max length reached');"
 					value="There are {0} character(s) remaining." />
@@ -21,7 +21,7 @@
 		<h:form>
 			<showcase:example description="#{i18n['alloy-outputremainingchars-max-length-reached-2']}" longDescription="true"
 				number="2">
-				<h:inputTextarea id="inputTextarea" maxlength="10" />
+				<alloy:inputTextarea id="inputTextarea" maxlength="10" />
 				<br />
 				<alloy:outputRemainingChars for="inputTextarea" onceMaxlengthReached="alert('Max length reached once');"
 					value="There are {0} character(s) remaining." />

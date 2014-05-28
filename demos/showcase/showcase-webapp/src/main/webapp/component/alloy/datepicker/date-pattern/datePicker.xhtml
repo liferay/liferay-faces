@@ -6,9 +6,9 @@
 	<ui:define name="col1">
 		<h:form>
 			<showcase:example>
-				<h:inputText id="birthday" value="#{datePickerModelBean.birthday}">
+				<alloy:inputText id="birthday" value="#{datePickerModelBean.birthday}">
 					<f:convertDateTime pattern="EEEE, MMM dd, yyyy" />
-				</h:inputText>
+				</alloy:inputText>
 				<alloy:datePicker for="birthday" datePattern="EEEE, MMM dd, yyyy" />
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">

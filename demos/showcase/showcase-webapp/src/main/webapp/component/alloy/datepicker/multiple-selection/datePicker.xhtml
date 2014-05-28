@@ -7,7 +7,7 @@
 		<!-- Example 1: Hold down shift or control to select multiple dates -->
 		<h:form>
 			<showcase:example description="#{i18n['alloy-datepicker-multiple-selection-example-1']}" number="1">
-				<h:inputTextarea id="multiple" value="#{datePickerModelBean.multiple}" />
+				<alloy:inputTextarea id="multiple" value="#{datePickerModelBean.multiple}" />
 				<alloy:datePicker for="multiple" dateSeparator=" | " selectionMode="multiple" />
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
@@ -24,7 +24,7 @@
 		<!-- Example 2: Pop up the datePicker multiple times to select multiple dates -->
 		<h:form>
 			<showcase:example description="#{i18n['alloy-datepicker-multiple-selection-example-2']}" number="2">
-				<h:inputTextarea id="multipleSticky" value="#{datePickerModelBean.multiple}" />
+				<alloy:inputTextarea id="multipleSticky" value="#{datePickerModelBean.multiple}" />
 				<alloy:datePicker for="multipleSticky" selectionMode="multiple-sticky" />
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
