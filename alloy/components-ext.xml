@@ -17,13 +17,31 @@
 			<function-class>com.liferay.faces.util.component.ComponentUtil</function-class>
 			<function-signature>java.lang.String findClientId(java.lang.String)</function-signature>
 		</function>
-		<styleableAttributes>
+	</extension>
+	<!-- generateTaglibXML="false" tags for common attributes -->
+	<!-- 1. Interfaces -->
+	<component name="ClientComponent" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The key name that can be used to reference the component on the client.]]>
+				</description>
+				<name>clientKey</name>
+				<type>java.lang.String</type>
+				<outputUnsafe>true</outputUnsafe>
+				<javaScript>false</javaScript>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="Styleable" generateJava="false" generateTaglibXML="false">
+		<attributes>
 			<attribute>
 				<description>
 					<![CDATA[HTML passthrough attribute specifying the css style of the element.]]>
 				</description>
 				<name>style</name>
 				<type>java.lang.String</type>
+				<javaScript>false</javaScript>
 				<outputUnsafe>true</outputUnsafe>
 			</attribute>
 			<attribute>
@@ -32,21 +50,53 @@
 				</description>
 				<name>styleClass</name>
 				<type>java.lang.String</type>
+				<javaScript>false</javaScript>
 				<outputUnsafe>true</outputUnsafe>
 			</attribute>
-		</styleableAttributes>
-		<clientComponentAttributes>
+		</attributes>
+	</component>
+	<!-- /Interfaces -->
+	<!-- 2. JSF Custom Component Heirarchy -->
+	<component name="UICommand" extendsTags="UIComponentBase HTMLAccessibilityEvents" generateJava="false"
+		generateTaglibXML="false">
+		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[The key name that can be used to reference the component on the client.]]>
+					<![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return an <code>Object</code>, and take no arguments. The <code>toString()</code> method of the returned object is used to determine where to navigate (if at all) after the action has been performed.]]>
 				</description>
-				<name>clientKey</name>
-				<type>java.lang.String</type>
-				<outputUnsafe>true</outputUnsafe>
+				<name>action</name>
+				<method-signature>java.lang.Object action()</method-signature>
+				<generateJava>false</generateJava>
 			</attribute>
-		</clientComponentAttributes>
-	</extension>
-	<component name="AbstractDelegatingComponent" generateJava="false" generateTaglibXML="false">
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return <code>void</code>, and take either no arguments or one <code>ActionEvent</code> argument.]]>
+				</description>
+				<name>actionListener</name>
+				<method-signature>
+					void actionListener(javax.faces.event.ActionEvent)
+				</method-signature>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]>
+				</description>
+				<name>immediate</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.Object</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="UIComponentBase" generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
 				<description>
@@ -54,14 +104,6 @@
 				</description>
 				<name>binding</name>
 				<type>javax.faces.component.UIComponent</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]>
-				</description>
-				<name>dir</name>
-				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
@@ -74,32 +116,146 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[HTML passthrough attribute specifying the language code used in this element.]]>
-				</description>
-				<name>lang</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
 					<![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]>
 				</description>
 				<name>rendered</name>
 				<type>boolean</type>
 				<generateJava>false</generateJava>
 			</attribute>
+		</attributes>
+	</component>
+	<component name="UIInput" extendsTags="UIOutput" generateJava="false" generateTaglibXML="false">
+		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[HTML passthrough attribute specifying the title of the element.]]>
+					<![CDATA[This message or the result of the specified expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]>
 				</description>
-				<name>title</name>
+				<name>converterMessage</name>
 				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]>
+				</description>
+				<name>disabled</name>
+				<type>boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]>
+				</description>
+				<name>immediate</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]>
+				</description>
+				<name>required</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]>
+				</description>
+				<name>requiredMessage</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]>
+				</description>
+				<name>validator</name>
+				<method-signature>
+					void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.Object)
+				</method-signature>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component.]]>
+				</description>
+				<name>validatorMessage</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]>
+				</description>
+				<name>valueChangeListener</name>
+				<method-signature>
+					void valueChange(javax.faces.event.ValueChangeEvent)
+				</method-signature>
 				<generateJava>false</generateJava>
 			</attribute>
 		</attributes>
 	</component>
-	<component name="AbstractDelegatingButtonInput" extendsTag="AbstractDelegatingComponent" generateJava="false"
+	<component name="UIOutcomeTarget" extendsTags="HTMLAccessibilityEvents" generateJava="false"
 		generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, view parameters (specified via <code>f:viewParam</code> tags) will be included on the navigation URL]]>
+				</description>
+				<name>includeViewParams</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A string which potentially matches the value of <code>from-outcome</code> key in a navigation-case.]]>
+				</description>
+				<name>outcome</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A fragment to be appended to the navigation URL.]]>
+				</description>
+				<name>fragment</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, the client window param will not be inlcuded on the navigation URL. <b>Note:</b> the <code>ClientWindow</code> feature is disabled by default, so this attribute will have no effect unless <code>ClientWindow</code> is enabled.]]>
+				</description>
+				<name>disableClientWindow</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="UIOutput" extendsTags="UIComponentBase" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The class name of the converter instance that is to be used by this component.]]>
+				</description>
+				<name>converter</name>
+				<type>javax.faces.convert.Converter</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.Object</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<!-- /JSF Custom Component Heirarchy -->
+	<!-- 3. HTML Component Heirarchy -->
+	<component name="HTMLAccessibility" extendsTags="HTMLCommonEvents" generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
 				<description>
@@ -109,6 +265,39 @@
 				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
 			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]>
+				</description>
+				<name>tabindex</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="HTMLAccessibilityEvents" extendsTags="HTMLAccessibility" generateJava="false"
+		generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute after this component loses focus.]]>
+				</description>
+				<name>onblur</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when this component gets focus.]]>
+				</description>
+				<name>onfocus</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="HTMLCommonEvents" extendsTags="HTMLPassthrough" generateJava="false" generateTaglibXML="false">
+		<attributes>
 			<attribute>
 				<description>
 					<![CDATA[Javascript to execute when this component is clicked.]]>
@@ -189,18 +378,86 @@
 				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
 			</attribute>
+		</attributes>
+	</component>
+		<component name="HTMLInput" extendsTags="UIInput" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
+				<name>label</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]>
+					<![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]>
 				</description>
-				<name>tabindex</name>
+				<name>readonly</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="HTMLInputEvents" extendsTags="HTMLInput" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]>
+				</description>
+				<name>onchange</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when the user selects this component.]]>
+				</description>
+				<name>onselect</name>
 				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
 			</attribute>
 		</attributes>
 	</component>
-	<component name="AbstractDelegatingButton" extendsTag="AbstractDelegatingButtonInput" generateJava="false"
+	<component name="HTMLPassthrough" extendsTags="UIComponentBase Styleable" generateJava="false"
 		generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]>
+				</description>
+				<name>dir</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the language code used in this element.]]>
+				</description>
+				<name>lang</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]>
+				</description>
+				<name>role</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the title of the element.]]>
+				</description>
+				<name>title</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<!-- /HTML Component Heirarchy -->
+	<!-- 4. Common -->
+	<component name="ButtonCommon" extendsTags="UIComponentBase" generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
 				<description>
@@ -217,15 +474,6 @@
 				<type>java.lang.Boolean</type>
 				<jsfReservedAttribute>true</jsfReservedAttribute>
 				<jsfReservedAttributeType>boolean</jsfReservedAttributeType>
-			</attribute>
-			<!-- h:button and h:commandButton common attributes -->
-			<attribute>
-				<description>
-					<![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]>
-				</description>
-				<name>role</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -245,179 +493,18 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[Javascript to execute after this component loses focus.]]>
-				</description>
-				<name>onblur</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute when this component gets focus.]]>
-				</description>
-				<name>onfocus</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
 					<![CDATA[The value of this component.]]>
 				</description>
 				<name>value</name>
 				<type>java.lang.Object</type>
 				<generateJava>false</generateJava>
 			</attribute>
-			<!-- /h:button and h:commandButton common attributes -->
 		</attributes>
 	</component>
-	<component name="AbstractDelegatingInput" extendsTag="AbstractDelegatingButtonInput" generateJava="false"
-		generateTaglibXML="false">
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[The class name of the converter instance that is to be used by this component.]]>
-				</description>
-				<name>converter</name>
-				<type>javax.faces.convert.Converter</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[This message or the result of the specified expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]>
-				</description>
-				<name>converterMessage</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]>
-				</description>
-				<name>disabled</name>
-				<type>boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]>
-				</description>
-				<name>immediate</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]>
-				</description>
-				<name>label</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute after this component loses focus.]]>
-				</description>
-				<name>onblur</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]>
-				</description>
-				<name>onchange</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute when this component gets focus.]]>
-				</description>
-				<name>onfocus</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute when the user selects this component.]]>
-				</description>
-				<name>onselect</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]>
-				</description>
-				<name>readonly</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]>
-				</description>
-				<name>required</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]>
-				</description>
-				<name>requiredMessage</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]>
-				</description>
-				<name>role</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]>
-				</description>
-				<name>validator</name>
-				<method-signature>
-					void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
-					java.lang.Object)
-				</method-signature>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component.]]>
-				</description>
-				<name>validatorMessage</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
-				</description>
-				<name>value</name>
-				<type>java.lang.Object</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]>
-				</description>
-				<name>valueChangeListener</name>
-				<method-signature>
-					void valueChange(javax.faces.event.ValueChangeEvent)
-				</method-signature>
-				<generateJava>false</generateJava>
-			</attribute>
-		</attributes>
-	</component>
-	<component name="Body" generateJava="false" />
-	<component name="Button" extendsTag="AbstractDelegatingButton"
+	<!-- /Common -->
+	<!-- generateTaglibXML="false" tags for common attributes -->
+	<component name="Body" extendsTags="Styleable" generateJava="false" />
+	<component name="Button" extendsTags="ButtonCommon UIOutcomeTarget Styleable"
 		parentClass="javax.faces.component.html.HtmlOutcomeTargetButton">
 		<description>
 			<![CDATA[Button is a UIOutput component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is button. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutcomeTargetButton.html" target="_blank"><code>HtmlOutcomeTargetButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/button.html" target="_blank"><code>h:button</code></a>. The component does not need to be a child of h:form since the outcome attribute is designed to navigate via HTTP GET.]]>
@@ -466,7 +553,7 @@
 			<!-- /h:button attributes -->
 		</attributes>
 	</component>
-	<component name="CommandButton" generateJava="false" extendsTag="AbstractDelegatingButton"
+	<component name="CommandButton" extendsTags="ButtonCommon UICommand Styleable" generateJava="false"
 		rendererParentClass="com.liferay.faces.alloy.component.button.ButtonRenderer">
 		<description>
 			<![CDATA[CommandButton is a UICommand component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is submit. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlCommandButton.html" target="_blank"><code>HtmlCommandButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/commandButton.html" target="_blank"><code>h:commandButton</code></a>. The component must be a child of h:form in order to trigger the action or actionListener.]]>
@@ -480,28 +567,6 @@
 				<type>java.lang.String</type>
 			</attribute>
 			<!-- h:commandButton attributes -->
-			<attribute>
-				<description>
-					<![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return an <code>Object</code>, and take no arguments. The <code>toString()</code> method of the returned object is used to determine where to navigate (if at all) after the action has been performed.]]>
-				</description>
-				<name>action</name>
-				<method-signature>java.lang.Object action()</method-signature>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return <code>void</code>, and take either no arguments or one <code>ActionEvent</code> argument.]]>
-				</description>
-				<name>actionListener</name>
-				<method-signature>void actionListener(javax.faces.event.ActionEvent)</method-signature>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]>
-				</description>
-				<name>immediate</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]>
@@ -537,19 +602,11 @@
 			<!-- /h:commandButton attributes -->
 		</attributes>
 	</component>
-	<component name="DatePicker">
+	<component name="DatePicker" extendsTags="ClientComponent UIComponentBase Styleable">
 		<description>
 			<![CDATA[DatePicker is a UIComponent that renders a popup a calendar with selectable dates.]]>
 		</description>
 		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]>
-				</description>
-				<name>binding</name>
-				<type>javax.faces.component.UIComponent</type>
-				<generateJava>false</generateJava>
-			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]>
@@ -608,19 +665,11 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Icon">
+	<component name="Icon" extendsTags="UIComponentBase Styleable">
 		<description>
 			<![CDATA[Icon is a component that renders a span which contains an icon specified by the name attribute.]]>
 		</description>
 		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[A unique identifier for this component.]]>
-				</description>
-				<name>id</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[The icon which this component will render. A list of valid icons can be found at <a href="http://liferay.github.io/alloy-bootstrap/base-css.html#icons" target="_blank">Bootstrap Base CSS</a>. <b>Note:</b> icon names must be specified without the <code>icon-</code> prefix.]]>
@@ -628,17 +677,9 @@
 				<name>name</name>
 				<type>java.lang.String</type>
 			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]>
-				</description>
-				<name>rendered</name>
-				<type>boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
 		</attributes>
 	</component>
-	<component name="InputDate" extendsTag="InputText"
+	<component name="InputDate" extendsTags="InputText"
 		parentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeBase"
 		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRendererBase">
 		<description>
@@ -699,7 +740,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component preferredName="InputSourceCode" name="AceEditor" parentClass="javax.faces.component.html.HtmlInputText"
+	<component preferredName="InputSourceCode" name="AceEditor" extendsTags="ClientComponent UIInput Styleable"
+		parentClass="javax.faces.component.html.HtmlInputText"
 		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase">
 		<description>
 			<![CDATA[InputSourceCode is an input component that renders a field for editing source code text.]]>
@@ -716,14 +758,6 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]>
-				</description>
-				<name>required</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
 					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
 				</description>
 				<name>value</name>
@@ -733,7 +767,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputText" generateJava="false" extendsTag="AbstractDelegatingInput">
+	<component name="InputText" generateJava="false" extendsTags="HTMLAccessibilityEvents HTMLInputEvents Styleable">
 		<attributes>
 			<attribute>
 				<description>
@@ -769,12 +803,13 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputTextarea" generateJava="false" parentClass="javax.faces.component.html.HtmlInputTextarea">
-		<!-- TODO extendsTag="AbstractDelegatingInput" -->
+	<component name="InputTextarea" extendsTags="Styleable" generateJava="false"
+		parentClass="javax.faces.component.html.HtmlInputTextarea">
+		<!-- TODO extendsTags="UIInput" -->
 		<!-- TODO cols -->
 		<!-- TODO rows -->
 	</component>
-		<component preferredName="OutputRemainingChars" name="CharCounter" extendsTag="OutputText"
+	<component preferredName="OutputRemainingChars" name="CharCounter" extendsTags="ClientComponent OutputText"
 		parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" 
 		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase">
 		<description>
@@ -821,19 +856,11 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="OutputText" extendsTag="AbstractDelegatingComponent" generateJava="false">
+	<component name="OutputText" extendsTags="HTMLPassthrough UIOutput Styleable" generateJava="false">
 		<description>
 			<![CDATA[OuputText is an <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutputText.html" target="_blank"><code>HtmlOutputText</code></a> component that delegates rendering to its JSF renderer.]]>
 		</description>
 		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[The class name of the converter instance that is to be used by this component.]]>
-				</description>
-				<name>converter</name>
-				<type>javax.faces.convert.Converter</type>
-				<generateJava>false</generateJava>
-			</attribute>
 			<attribute>
             	<description>
             		<![CDATA[When false, markup will not be escaped. This is true by default.]]>
@@ -842,96 +869,14 @@
             	<type>java.lang.String</type>
 				<generateJava>false</generateJava>
         	</attribute>
-			<attribute>
-				<description>
-					<![CDATA[This value is used to generate markup used to render the number of remaining characters allowed in the given text input. e.g.: value="There are {0} character(s) remaining."]]>
-				</description>
-				<name>value</name>
-				<type>java.lang.Object</type>
-				<generateJava>false</generateJava>
-			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectOneRadio" extendsTag="AbstractDelegatingButtonInput" generateJava="false" parentClass="javax.faces.component.html.HtmlSelectOneRadio" >
+	<component name="SelectOneRadio" extendsTags="HTMLAccessibilityEvents HTMLInputEvents Styleable"
+		generateJava="false" parentClass="javax.faces.component.html.HtmlSelectOneRadio">
 		<description>
 		   <![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 		<attributes>
-			<attribute>
-				<description>
-				   <![CDATA[This value is used to generate markup used to render the number of remaining characters allowed in the given text input. e.g.: value="There are {0} character(s) remaining."]]>
-				</description>
-				<name>value</name>
-				<type>java.lang.Object</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The class name of the converter instance that is to be used by this component.]]>
-				</description>
-				<name>converter</name>
-				<type>javax.faces.convert.Converter</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[This message or the result of the specified expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]>
-				</description>
-				<name>converterMessage</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the Process Validations phase.]]>
-				</description>
-				<name>immediate</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]>
-				</description>
-				<name>required</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]>
-				</description>
-				<name>requiredMessage</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]>
-				</description>
-				<name>validator</name>
-				<method-signature>
-					void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
-					java.lang.Object)
-				</method-signature>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component.]]>
-				</description>
-				<name>validatorMessage</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]>
-				</description>
-				<name>valueChangeListener</name>
-				<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
-				<generateJava>false</generateJava>
-			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[__DESCRIPTION__]]>
@@ -966,72 +911,17 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]>
-				</description>
-				<name>label</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
 					<![CDATA[The direction in which the layout of the component should go.  The default value is 'lineDirection'.]]>
 				</description>
 				<name>layout</name>
 				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
 			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute after this component loses focus.]]>
-				</description>
-				<name>onblur</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]>
-				</description>
-				<name>onchange</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute when this component gets focus.]]>
-				</description>
-				<name>onfocus</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute when the user selects this component.]]>
-				</description>
-				<name>onselect</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]>
-				</description>
-				<name>readonly</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]>
-				</description>
-				<name>role</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
 		</attributes>
 	</component>
-	<component preferredName="SelectStarRating" name="Rating" extendsTag="SelectOneRadio" parentClass="com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio"
-		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase" >
+	<component preferredName="SelectStarRating" name="Rating" extendsTags="ClientComponent SelectOneRadio"
+		parentClass="com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio"
+		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase">
 		<description>
 			<![CDATA[StarRating is a UISelectOne component that renders a set of stars. The user can click on a star to select a rating and click on the same star a second time to de-select a rating. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it accepts f:selectItem or f:selectItems as child tags.]]>
 		</description>
@@ -1076,7 +966,8 @@
 			<!-- Attributes that are inherited from HtmlSelectOneRadio -->
 		</attributes>
 	</component>
-	<component preferredName="SelectThumbRating" name="ThumbRating" extendsTag="SelectStarRating" generateJava="false" parentClass="com.liferay.faces.alloy.component.selectstarrating.SelectStarRating"
+	<component preferredName="SelectThumbRating" name="ThumbRating" extendsTags="SelectStarRating" generateJava="false"
+		parentClass="com.liferay.faces.alloy.component.selectstarrating.SelectStarRating"
 		rendererParentClass="com.liferay.faces.alloy.component.selectstarrating.SelectStarRatingRenderer">
 		<description>
 			<![CDATA[SelectThumbRating is a UISelectOne component that renders a pair of thumb icons that a user can select to indicate their favor. The user can click on a thumb to select their favor and click on the same thumb a second time to de-select their favor. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it accepts f:selectItem or f:selectItems as children.]]>
@@ -1093,7 +984,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Tab" parentClass="javax.faces.component.UIColumn">
+	<component name="Tab" extendsTags="UIComponentBase Styleable" parentClass="javax.faces.component.UIColumn">
 		<description>
 			<![CDATA[Tab is a panel component that renders nested/child tags as content within itself.]]>
 		</description>
@@ -1107,7 +998,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="TabView" parentClass="javax.faces.component.UIData">
+	<component name="TabView" extendsTags="ClientComponent UIComponentBase Styleable"
+		parentClass="javax.faces.component.UIData">
 		<description>
 			<![CDATA[TabView is an iterator component that renders tabs either statically or dynamically.]]>
 		</description>
