@@ -10,9 +10,9 @@
 				<h:inputTextarea id="multiple" value="#{datePickerModelBean.multiple}" />
 				<alloy:datePicker for="multiple" dateSeparator=" | " selectionMode="multiple" />
 				<hr />
-				<h:commandButton value="#{i18n['submit']}">
+				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
-				</h:commandButton>
+				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{datePickerModelBean.multiple}" />
@@ -27,9 +27,9 @@
 				<h:inputTextarea id="multipleSticky" value="#{datePickerModelBean.multiple}" />
 				<alloy:datePicker for="multipleSticky" selectionMode="multiple-sticky" />
 				<hr />
-				<h:commandButton value="#{i18n['submit']}">
+				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
-				</h:commandButton>
+				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{datePickerModelBean.multiple}" />

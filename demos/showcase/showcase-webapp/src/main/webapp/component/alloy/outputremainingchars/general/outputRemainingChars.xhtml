@@ -13,9 +13,9 @@
 				<alloy:outputRemainingChars for="inputText" rendered="#{showcaseModelBean.selectedComponent.rendered}"
 					value="There are {0} character(s) remaining." />
 				<hr />
-				<h:commandButton value="#{i18n['submit']}">
+				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
-				</h:commandButton>
+				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{outputRemainingCharsModelBean.text}" />
@@ -32,9 +32,9 @@
 				<br />
 				<alloy:outputRemainingChars for="inputTextarea" rendered="#{showcaseModelBean.selectedComponent.rendered}" />
 				<hr />
-				<h:commandButton value="#{i18n['submit']}">
+				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
-				</h:commandButton>
+				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{outputRemainingCharsModelBean.text}" />

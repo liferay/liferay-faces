@@ -8,9 +8,9 @@
 				required="#{showcaseModelBean.selectedComponent.required}" value="#{inputSourceCodeModelBean.sourceText}" />
 			<h:message for="inputSourceCode" />
 			<hr />
-			<h:commandButton action="#{inputSourceCodeBackingBean.submit}" value="#{i18n['submit']}">
+			<alloy:commandButton action="#{inputSourceCodeBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
-			</h:commandButton>
+			</alloy:commandButton>
 		</showcase:example>
 		<showcase:outputModel>
 			<alloy:outputText id="modelValue" value="#{inputSourceCodeModelBean.sourceText}" />

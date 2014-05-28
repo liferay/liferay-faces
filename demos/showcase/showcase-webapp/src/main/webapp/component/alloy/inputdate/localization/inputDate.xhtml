@@ -10,9 +10,9 @@
 				<alloy:inputDate id="portugueseInputDate" binding="#{portugueseInputDate}" locale="pt-BR"
 					value="#{inputDateModelBean.birthday}" />
 				<hr />
-				<h:commandButton value="#{i18n['submit']}">
+				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
-				</h:commandButton>
+				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="portugueseSelection" value="#{inputDateModelBean.birthday}">
@@ -29,9 +29,9 @@
 				<alloy:inputDate id="japaneseInputDate" binding="#{japaneseInputDate}" locale="#{inputDateModelBean.locale}"
 					value="#{inputDateModelBean.birthday}" />
 				<hr />
-				<h:commandButton value="#{i18n['submit']}">
+				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
-				</h:commandButton>
+				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="japaneseSelection" value="#{inputDateModelBean.birthday}">
