@@ -96,105 +96,6 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 			encodeOnMaxlengthReached(responseWriter, outputRemainingCharsAlloy, onMaxlengthReached, first);
 			first = false;
 		}
-
-		// Begin encoding "after" object
-		encodeObject(responseWriter, AlloyConstants.AFTER, StringPool.BLANK, first);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-
-		first = true;
-
-		String afterCounterChange = outputRemainingCharsAlloy.getAfterCounterChange();
-
-		if (afterCounterChange != null) {
-
-			encodeAfterCounterChange(responseWriter, outputRemainingCharsAlloy, afterCounterChange, first);
-			first = false;
-		}
-
-		String afterDestroyedChange = outputRemainingCharsAlloy.getAfterDestroyedChange();
-
-		if (afterDestroyedChange != null) {
-
-			encodeAfterDestroyedChange(responseWriter, outputRemainingCharsAlloy, afterDestroyedChange, first);
-			first = false;
-		}
-
-		String afterInitializedChange = outputRemainingCharsAlloy.getAfterInitializedChange();
-
-		if (afterInitializedChange != null) {
-
-			encodeAfterInitializedChange(responseWriter, outputRemainingCharsAlloy, afterInitializedChange, first);
-			first = false;
-		}
-
-		String afterInputChange = outputRemainingCharsAlloy.getAfterInputChange();
-
-		if (afterInputChange != null) {
-
-			encodeAfterInputChange(responseWriter, outputRemainingCharsAlloy, afterInputChange, first);
-			first = false;
-		}
-
-		String afterMaxLengthChange = outputRemainingCharsAlloy.getAfterMaxLengthChange();
-
-		if (afterMaxLengthChange != null) {
-
-			encodeAfterMaxLengthChange(responseWriter, outputRemainingCharsAlloy, afterMaxLengthChange, first);
-			first = false;
-		}
-
-		// End encoding "after" object
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-
-		// Begin encoding "on" object
-		first = false;
-		encodeObject(responseWriter, AlloyConstants.ON, StringPool.BLANK, first);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-
-		first = true;
-
-		String onCounterChange = outputRemainingCharsAlloy.getOnCounterChange();
-
-		if (onCounterChange != null) {
-
-			encodeOnCounterChange(responseWriter, outputRemainingCharsAlloy, onCounterChange, first);
-			first = false;
-		}
-
-		String onDestroyedChange = outputRemainingCharsAlloy.getOnDestroyedChange();
-
-		if (onDestroyedChange != null) {
-
-			encodeOnDestroyedChange(responseWriter, outputRemainingCharsAlloy, onDestroyedChange, first);
-			first = false;
-		}
-
-		String onInitializedChange = outputRemainingCharsAlloy.getOnInitializedChange();
-
-		if (onInitializedChange != null) {
-
-			encodeOnInitializedChange(responseWriter, outputRemainingCharsAlloy, onInitializedChange, first);
-			first = false;
-		}
-
-		String onInputChange = outputRemainingCharsAlloy.getOnInputChange();
-
-		if (onInputChange != null) {
-
-			encodeOnInputChange(responseWriter, outputRemainingCharsAlloy, onInputChange, first);
-			first = false;
-		}
-
-		String onMaxLengthChange = outputRemainingCharsAlloy.getOnMaxLengthChange();
-
-		if (onMaxLengthChange != null) {
-
-			encodeOnMaxLengthChange(responseWriter, outputRemainingCharsAlloy, onMaxLengthChange, first);
-			first = false;
-		}
-
-		// End encoding "on" object
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 	}
 
 	@Override
@@ -205,26 +106,6 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 	@Override
 	protected String[] getModules() {
 		return MODULES;
-	}
-
-	protected void encodeAfterCounterChange(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String afterCounterChange, boolean first) throws IOException {
-		encodeEvent(responseWriter, COUNTER_CHANGE, afterCounterChange, first);
-	}
-
-	protected void encodeAfterDestroyedChange(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String afterDestroyedChange, boolean first) throws IOException {
-		encodeEvent(responseWriter, DESTROYED_CHANGE, afterDestroyedChange, first);
-	}
-
-	protected void encodeAfterInitializedChange(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String afterInitializedChange, boolean first) throws IOException {
-		encodeEvent(responseWriter, INITIALIZED_CHANGE, afterInitializedChange, first);
-	}
-
-	protected void encodeAfterInputChange(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String afterInputChange, boolean first) throws IOException {
-		encodeEvent(responseWriter, INPUT_CHANGE, afterInputChange, first);
-	}
-
-	protected void encodeAfterMaxLengthChange(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String afterMaxLengthChange, boolean first) throws IOException {
-		encodeEvent(responseWriter, MAX_LENGTH_CHANGE, afterMaxLengthChange, first);
 	}
 
 	protected void encodeCounter(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String counter, boolean first) throws IOException {
@@ -245,26 +126,6 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 
 	protected void encodeOnceMaxlengthReached(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String onceMaxlengthReached, boolean first) throws IOException {
 		encodeString(responseWriter, OutputRemainingCharsAlloy.ONCE_MAXLENGTH_REACHED, onceMaxlengthReached, first);
-	}
-
-	protected void encodeOnCounterChange(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String onCounterChange, boolean first) throws IOException {
-		encodeEvent(responseWriter, COUNTER_CHANGE, onCounterChange, first);
-	}
-
-	protected void encodeOnDestroyedChange(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String onDestroyedChange, boolean first) throws IOException {
-		encodeEvent(responseWriter, DESTROYED_CHANGE, onDestroyedChange, first);
-	}
-
-	protected void encodeOnInitializedChange(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String onInitializedChange, boolean first) throws IOException {
-		encodeEvent(responseWriter, INITIALIZED_CHANGE, onInitializedChange, first);
-	}
-
-	protected void encodeOnInputChange(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String onInputChange, boolean first) throws IOException {
-		encodeEvent(responseWriter, INPUT_CHANGE, onInputChange, first);
-	}
-
-	protected void encodeOnMaxLengthChange(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String onMaxLengthChange, boolean first) throws IOException {
-		encodeEvent(responseWriter, MAX_LENGTH_CHANGE, onMaxLengthChange, first);
 	}
 
 	protected void encodeOnMaxlengthReached(ResponseWriter responseWriter, OutputRemainingCharsAlloy outputRemainingCharsAlloy, String onMaxlengthReached, boolean first) throws IOException {

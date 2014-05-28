@@ -28,56 +28,6 @@ import com.liferay.faces.util.component.ClientComponent;
 public abstract class OutputRemainingCharsBase extends OutputText implements Styleable, ClientComponent, OutputRemainingCharsAlloy {
 
 	@Override
-	public String getAfterCounterChange() {
-		return (String) getStateHelper().eval(AFTER_COUNTER_CHANGE, null);
-	}
-
-	@Override
-	public void setAfterCounterChange(String afterCounterChange) {
-		getStateHelper().put(AFTER_COUNTER_CHANGE, afterCounterChange);
-	}
-
-	@Override
-	public String getAfterDestroyedChange() {
-		return (String) getStateHelper().eval(AFTER_DESTROYED_CHANGE, null);
-	}
-
-	@Override
-	public void setAfterDestroyedChange(String afterDestroyedChange) {
-		getStateHelper().put(AFTER_DESTROYED_CHANGE, afterDestroyedChange);
-	}
-
-	@Override
-	public String getAfterInitializedChange() {
-		return (String) getStateHelper().eval(AFTER_INITIALIZED_CHANGE, null);
-	}
-
-	@Override
-	public void setAfterInitializedChange(String afterInitializedChange) {
-		getStateHelper().put(AFTER_INITIALIZED_CHANGE, afterInitializedChange);
-	}
-
-	@Override
-	public String getAfterInputChange() {
-		return (String) getStateHelper().eval(AFTER_INPUT_CHANGE, null);
-	}
-
-	@Override
-	public void setAfterInputChange(String afterInputChange) {
-		getStateHelper().put(AFTER_INPUT_CHANGE, afterInputChange);
-	}
-
-	@Override
-	public String getAfterMaxLengthChange() {
-		return (String) getStateHelper().eval(AFTER_MAX_LENGTH_CHANGE, null);
-	}
-
-	@Override
-	public void setAfterMaxLengthChange(String afterMaxLengthChange) {
-		getStateHelper().put(AFTER_MAX_LENGTH_CHANGE, afterMaxLengthChange);
-	}
-
-	@Override
 	public String getClientKey() {
 		return (String) getStateHelper().eval(CLIENT_KEY, null);
 	}
@@ -135,56 +85,6 @@ public abstract class OutputRemainingCharsBase extends OutputText implements Sty
 	@Override
 	public void setOnceMaxlengthReached(String onceMaxlengthReached) {
 		getStateHelper().put(ONCE_MAXLENGTH_REACHED, onceMaxlengthReached);
-	}
-
-	@Override
-	public String getOnCounterChange() {
-		return (String) getStateHelper().eval(ON_COUNTER_CHANGE, null);
-	}
-
-	@Override
-	public void setOnCounterChange(String onCounterChange) {
-		getStateHelper().put(ON_COUNTER_CHANGE, onCounterChange);
-	}
-
-	@Override
-	public String getOnDestroyedChange() {
-		return (String) getStateHelper().eval(ON_DESTROYED_CHANGE, null);
-	}
-
-	@Override
-	public void setOnDestroyedChange(String onDestroyedChange) {
-		getStateHelper().put(ON_DESTROYED_CHANGE, onDestroyedChange);
-	}
-
-	@Override
-	public String getOnInitializedChange() {
-		return (String) getStateHelper().eval(ON_INITIALIZED_CHANGE, null);
-	}
-
-	@Override
-	public void setOnInitializedChange(String onInitializedChange) {
-		getStateHelper().put(ON_INITIALIZED_CHANGE, onInitializedChange);
-	}
-
-	@Override
-	public String getOnInputChange() {
-		return (String) getStateHelper().eval(ON_INPUT_CHANGE, null);
-	}
-
-	@Override
-	public void setOnInputChange(String onInputChange) {
-		getStateHelper().put(ON_INPUT_CHANGE, onInputChange);
-	}
-
-	@Override
-	public String getOnMaxLengthChange() {
-		return (String) getStateHelper().eval(ON_MAX_LENGTH_CHANGE, null);
-	}
-
-	@Override
-	public void setOnMaxLengthChange(String onMaxLengthChange) {
-		getStateHelper().put(ON_MAX_LENGTH_CHANGE, onMaxLengthChange);
 	}
 
 	@Override

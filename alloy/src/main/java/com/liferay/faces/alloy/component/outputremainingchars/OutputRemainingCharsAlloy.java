@@ -24,42 +24,12 @@ import javax.annotation.Generated;
 public interface OutputRemainingCharsAlloy {
 
 	// Public Constants
-	public static final String AFTER_COUNTER_CHANGE = "afterCounterChange";
-	public static final String AFTER_DESTROYED_CHANGE = "afterDestroyedChange";
-	public static final String AFTER_INITIALIZED_CHANGE = "afterInitializedChange";
-	public static final String AFTER_INPUT_CHANGE = "afterInputChange";
-	public static final String AFTER_MAX_LENGTH_CHANGE = "afterMaxLengthChange";
 	public static final String COUNTER = "counter";
 	public static final String FOR = "for";
 	public static final String INPUT = "input";
 	public static final String MAX_LENGTH = "maxLength";
-	public static final String ON_COUNTER_CHANGE = "onCounterChange";
-	public static final String ON_DESTROYED_CHANGE = "onDestroyedChange";
-	public static final String ON_INITIALIZED_CHANGE = "onInitializedChange";
-	public static final String ON_INPUT_CHANGE = "onInputChange";
-	public static final String ON_MAX_LENGTH_CHANGE = "onMaxLengthChange";
 	public static final String ON_MAXLENGTH_REACHED = "onMaxlengthReached";
 	public static final String ONCE_MAXLENGTH_REACHED = "onceMaxlengthReached";
-
-	public String getAfterCounterChange();
-
-	public void setAfterCounterChange(String afterCounterChange);
-
-	public String getAfterDestroyedChange();
-
-	public void setAfterDestroyedChange(String afterDestroyedChange);
-
-	public String getAfterInitializedChange();
-
-	public void setAfterInitializedChange(String afterInitializedChange);
-
-	public String getAfterInputChange();
-
-	public void setAfterInputChange(String afterInputChange);
-
-	public String getAfterMaxLengthChange();
-
-	public void setAfterMaxLengthChange(String afterMaxLengthChange);
 
 	public String getCounter();
 
@@ -80,26 +50,6 @@ public interface OutputRemainingCharsAlloy {
 	public String getOnceMaxlengthReached();
 
 	public void setOnceMaxlengthReached(String onceMaxlengthReached);
-
-	public String getOnCounterChange();
-
-	public void setOnCounterChange(String onCounterChange);
-
-	public String getOnDestroyedChange();
-
-	public void setOnDestroyedChange(String onDestroyedChange);
-
-	public String getOnInitializedChange();
-
-	public void setOnInitializedChange(String onInitializedChange);
-
-	public String getOnInputChange();
-
-	public void setOnInputChange(String onInputChange);
-
-	public String getOnMaxLengthChange();
-
-	public void setOnMaxLengthChange(String onMaxLengthChange);
 
 	public String getOnMaxlengthReached();
 
