@@ -15,9 +15,9 @@
 				</h:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
-				<h:outputText id="portugueseSelection" value="#{inputDateModelBean.birthday}">
+				<alloy:outputText id="portugueseSelection" value="#{inputDateModelBean.birthday}">
 					<f:convertDateTime pattern="#{portugueseInputDate.datePattern}" />
-				</h:outputText>
+				</alloy:outputText>
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>
@@ -34,9 +34,9 @@
 				</h:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
-				<h:outputText id="japaneseSelection" value="#{inputDateModelBean.birthday}">
+				<alloy:outputText id="japaneseSelection" value="#{inputDateModelBean.birthday}">
 					<f:convertDateTime pattern="#{japaneseInputDate.datePattern}" />
-				</h:outputText>
+				</alloy:outputText>
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>

@@ -12,23 +12,23 @@
 				<alloy:datePicker datePattern="MM/dd/yyyy" for="birthday" maximumDate="#{datePickerModelBean.maxDate}"
 					minimumDate="#{datePickerModelBean.minDate}" />
 				<br />
-				<h:outputText value="#{i18n['valid-date-range']}: " />
-				<h:outputText value="#{datePickerModelBean.minDate}">
+				<alloy:outputText value="#{i18n['valid-date-range']}: " />
+				<alloy:outputText value="#{datePickerModelBean.minDate}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
-				</h:outputText>
-				<h:outputText value=" - " />
-				<h:outputText value="#{datePickerModelBean.maxDate}">
+				</alloy:outputText>
+				<alloy:outputText value=" - " />
+				<alloy:outputText value="#{datePickerModelBean.maxDate}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
-				</h:outputText>
+				</alloy:outputText>
 				<hr />
 				<h:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
 				</h:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
-				<h:outputText id="modelValue" value="#{datePickerModelBean.birthday}">
+				<alloy:outputText id="modelValue" value="#{datePickerModelBean.birthday}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
-				</h:outputText>
+				</alloy:outputText>
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>

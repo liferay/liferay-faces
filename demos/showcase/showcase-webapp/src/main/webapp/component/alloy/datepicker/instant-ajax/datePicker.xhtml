@@ -13,9 +13,9 @@
 				<alloy:datePicker datePattern="MM/dd/yyyy" for="birthday" />
 			</showcase:example>
 			<showcase:outputModel>
-				<h:outputText id="modelValue" value="#{datePickerModelBean.birthday}">
+				<alloy:outputText id="modelValue" value="#{datePickerModelBean.birthday}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
-				</h:outputText>
+				</alloy:outputText>
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>

@@ -10,23 +10,23 @@
 					minimumDate="#{inputDateModelBean.minDate}" showOn="button" value="#{inputDateModelBean.birthday}" />
 				<h:message for="birthday" />
 				<br />
-				<h:outputText value="#{i18n['valid-date-range']}: " />
-				<h:outputText value="#{inputDateModelBean.minDate}">
+				<alloy:outputText value="#{i18n['valid-date-range']}: " />
+				<alloy:outputText value="#{inputDateModelBean.minDate}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
-				</h:outputText>
-				<h:outputText value=" - " />
-				<h:outputText value="#{inputDateModelBean.maxDate}">
+				</alloy:outputText>
+				<alloy:outputText value=" - " />
+				<alloy:outputText value="#{inputDateModelBean.maxDate}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
-				</h:outputText>
+				</alloy:outputText>
 				<hr />
 				<h:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
 				</h:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
-				<h:outputText id="modelValue" value="#{inputDateModelBean.birthday}">
+				<alloy:outputText id="modelValue" value="#{inputDateModelBean.birthday}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
-				</h:outputText>
+				</alloy:outputText>
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>
