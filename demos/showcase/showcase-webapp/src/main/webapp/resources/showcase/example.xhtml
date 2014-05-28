@@ -22,10 +22,10 @@
 					<h:outputText escape="false" styleClass="example-number" value="#{i18n['example']}" />
 				</c:if>
 				<c:if test="#{cc.attrs.number != null}">
-					<h:outputText escape="false" styleClass="example-number" value="#{i18n['example']}&amp;nbsp;#{cc.attrs.number}:&amp;nbsp;" />
+					<h:outputText escape="false" styleClass="example-number" value="#{i18n['example']}&amp;nbsp;#{cc.attrs.number}" />
 				</c:if>
 				<c:if test="#{cc.attrs.description != null}">
-					<h:outputText escape="false" value="#{cc.attrs.description}" style="font-weight: normal;"/>
+					<h:outputText escape="false" value=":&amp;nbsp;#{cc.attrs.description}" style="font-weight: normal;"/>
 				</c:if>
 			</h:outputLabel>
 			<c:if test="#{cc.attrs.longDescription}">
