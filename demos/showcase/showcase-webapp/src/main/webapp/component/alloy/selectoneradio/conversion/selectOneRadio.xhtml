@@ -1,11 +1,11 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-1col-80.xhtml">
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-1col-80.xhtml">
 
 	<ui:define name="col1">
 		<h:form>
-			<showcase:example description="#{i18n['conversion-to-a-date-value']}">
+			<showcase:example description="#{i18n['conversion-to-a-date-using-f-convertdatetime']}">
 				<h4>#{i18n['when-was-the-us-declaration-of-independence-signed']}</h4>
 				<h:messages globalOnly="true" styleClass="feedback" />
 				<alloy:selectOneRadio value="#{selectOneRadioModelBean.date}">

@@ -1,12 +1,13 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:aui-nongen="http://liferay.com/faces/aui-nongen" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/templates/component-2col.xhtml">
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Example 1: ValueChangeListener execution when immediate is false (the default) -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-selectoneradio-immediate-example-1']}" longDescription="true" number="1">
+			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-false']}"
+				longDescription="true" number="1">
 				<h4>#{i18n['favorite-liferay-benefit']}</h4>
 				<h:messages globalOnly="true" styleClass="feedback" />
 				<alloy:selectOneRadio layout="pageDirection" value="#{selectOneRadioModelBean.favoriteId}"
@@ -30,7 +31,8 @@
 	<ui:define name="col2">
 		<!-- Example 1: ValueChangeListener execution when immediate is true -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-selectoneradio-immediate-example-2']}" longDescription="true" number="2">
+			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-true']}"
+				longDescription="true" number="2">
 				<h4>#{i18n['favorite-liferay-benefit']}</h4>
 				<h:messages globalOnly="true" styleClass="feedback" />
 				<alloy:selectOneRadio immediate="true" layout="pageDirection" value="#{selectOneRadioModelBean.favoriteId}"
