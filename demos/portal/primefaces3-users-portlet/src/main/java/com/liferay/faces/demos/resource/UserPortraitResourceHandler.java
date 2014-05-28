@@ -13,18 +13,16 @@
  */
 package com.liferay.faces.demos.resource;
 
-import java.io.IOException;
 import java.util.Map;
 
 import javax.faces.application.Resource;
 import javax.faces.application.ResourceHandler;
+import javax.faces.application.ResourceHandlerWrapper;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletSession;
 import javax.portlet.ResourceResponse;
 
-import com.liferay.faces.bridge.application.ResourceHandlerBridgeImpl;
-import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -39,7 +37,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
  * @author  Neil Griffin
  * @author  Kyle Stiemann
  */
-public class UserPortraitResourceHandler extends ResourceHandlerBridgeImpl {
+public class UserPortraitResourceHandler extends ResourceHandlerWrapper {
 
 	// Public Constants
 	public static final String LIBRARY_NAME = "userPortraitResources";
@@ -49,8 +47,11 @@ public class UserPortraitResourceHandler extends ResourceHandlerBridgeImpl {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(UserPortraitResourceHandler.class);
 
+	// Private Data Members
+	private ResourceHandler wrappedResourceHandler;
+
 	public UserPortraitResourceHandler(ResourceHandler resourceHandler) {
-		super(resourceHandler);
+		this.wrappedResourceHandler = resourceHandler;
 	}
 
 	@Override
@@ -105,24 +106,6 @@ public class UserPortraitResourceHandler extends ResourceHandlerBridgeImpl {
 	}
 
 	@Override
-	public void handleResourceRequest(FacesContext facesContext) throws IOException {
-
-		ExternalContext externalContext = facesContext.getExternalContext();
-		String libraryName = externalContext.getRequestParameterMap().get(ResourceConstants.LN);
-		String resourceName = externalContext.getRequestParameterMap().get(ResourceConstants.JAVAX_FACES_RESOURCE);
-
-		if (LIBRARY_NAME.equals(libraryName) && UserPortraitResource.RESOURCE_NAME.equals(resourceName)) {
-
-			Resource resource = createResource(resourceName, libraryName);
-
-			handleResource(facesContext, resource);
-		}
-		else {
-			super.handleResourceRequest(facesContext);
-		}
-	}
-
-	@Override
 	public boolean libraryExists(String libraryName) {
 
 		if (LIBRARY_NAME.equals(libraryName)) {
@@ -133,4 +116,8 @@ public class UserPortraitResourceHandler extends ResourceHandlerBridgeImpl {
 		}
 	}
 
+	@Override
+	public ResourceHandler getWrapped() {
+		return wrappedResourceHandler;
+	}
 }
