@@ -4,7 +4,7 @@
    http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://vdldoc.googlecode.com/hg/src/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
 	version="2.0">
 	<description>The Liferay Faces Alloy facelet component tags with the &lt;code&gt;aui:&lt;/code&gt; tag name prefix.</description>
-	<namespace>http://liferay.com/faces/aui-nongen</namespace>
+	<namespace>http://liferay.com/faces/aui</namespace>
 	<function>
 		<description>Returns an escaped representation of the specified client ID.</description>
 		<function-name>escapeClientId</function-name>
