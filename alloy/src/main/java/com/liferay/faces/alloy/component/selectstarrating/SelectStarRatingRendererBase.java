@@ -34,38 +34,6 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "SelectStarRating";
 	private static final String ALLOY_MODULE_NAME = "aui-rating";
-	private static final String BOUNDING_BOX_CHANGE = "boundingBoxChange";
-	private static final String CAN_RESET_CHANGE = "canResetChange";
-	private static final String CONTENT_BOX_CHANGE = "contentBoxChange";
-	private static final String CSS_CLASS_CHANGE = "cssClassChange";
-	private static final String CSS_CLASSES_CHANGE = "cssClassesChange";
-	private static final String DEFAULT_SELECTED_CHANGE = "defaultSelectedChange";
-	private static final String DESTROYED_CHANGE = "destroyedChange";
-	private static final String DISABLED_CHANGE = "disabledChange";
-	private static final String ELEMENTS_CHANGE = "elementsChange";
-	private static final String FOCUSED_CHANGE = "focusedChange";
-	private static final String HEIGHT_CHANGE = "heightChange";
-	private static final String HIDDEN_INPUT_CHANGE = "hiddenInputChange";
-	private static final String HIDE_CLASS_CHANGE = "hideClassChange";
-	private static final String ID_CHANGE = "idChange";
-	private static final String INITIALIZED_CHANGE = "initializedChange";
-	private static final String INPUT_NAME_CHANGE = "inputNameChange";
-	private static final String LABEL_CHANGE = "labelChange";
-	private static final String LABEL_NODE_CHANGE = "labelNodeChange";
-	private static final String LOCALE_CHANGE = "localeChange";
-	private static final String RENDER_CHANGE = "renderChange";
-	private static final String RENDERED_CHANGE = "renderedChange";
-	private static final String SELECTED_INDEX_CHANGE = "selectedIndexChange";
-	private static final String SHOW_TITLE_CHANGE = "showTitleChange";
-	private static final String SIZE_CHANGE = "sizeChange";
-	private static final String SRC_NODE_CHANGE = "srcNodeChange";
-	private static final String STRINGS_CHANGE = "stringsChange";
-	private static final String TAB_INDEX_CHANGE = "tabIndexChange";
-	private static final String TITLE_CHANGE = "titleChange";
-	private static final String USE_ARIACHANGE = "useARIAChange";
-	private static final String VALUE_CHANGE = "valueChange";
-	private static final String VISIBLE_CHANGE = "visibleChange";
-	private static final String WIDTH_CHANGE = "widthChange";
 
 	// Protected Constants
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};

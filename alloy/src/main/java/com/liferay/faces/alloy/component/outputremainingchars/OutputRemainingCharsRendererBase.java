@@ -34,11 +34,6 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "OutputRemainingChars";
 	private static final String ALLOY_MODULE_NAME = "aui-char-counter";
-	private static final String COUNTER_CHANGE = "counterChange";
-	private static final String DESTROYED_CHANGE = "destroyedChange";
-	private static final String INITIALIZED_CHANGE = "initializedChange";
-	private static final String INPUT_CHANGE = "inputChange";
-	private static final String MAX_LENGTH_CHANGE = "maxLengthChange";
 
 	// Protected Constants
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};

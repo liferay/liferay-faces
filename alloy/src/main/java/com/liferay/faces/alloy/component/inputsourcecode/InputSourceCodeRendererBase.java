@@ -34,30 +34,6 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "InputSourceCode";
 	private static final String ALLOY_MODULE_NAME = "aui-ace-editor";
-	private static final String BOUNDING_BOX_CHANGE = "boundingBoxChange";
-	private static final String CONTENT_BOX_CHANGE = "contentBoxChange";
-	private static final String DESTROYED_CHANGE = "destroyedChange";
-	private static final String DISABLED_CHANGE = "disabledChange";
-	private static final String FOCUSED_CHANGE = "focusedChange";
-	private static final String HEIGHT_CHANGE = "heightChange";
-	private static final String HIGHLIGHT_ACTIVE_LINE_CHANGE = "highlightActiveLineChange";
-	private static final String ID_CHANGE = "idChange";
-	private static final String INITIALIZED_CHANGE = "initializedChange";
-	private static final String LOCALE_CHANGE = "localeChange";
-	private static final String MODE_CHANGE = "modeChange";
-	private static final String READ_ONLY_CHANGE = "readOnlyChange";
-	private static final String RENDER_CHANGE = "renderChange";
-	private static final String RENDERED_CHANGE = "renderedChange";
-	private static final String SHOW_PRINT_MARGIN_CHANGE = "showPrintMarginChange";
-	private static final String SRC_NODE_CHANGE = "srcNodeChange";
-	private static final String STRINGS_CHANGE = "stringsChange";
-	private static final String TAB_INDEX_CHANGE = "tabIndexChange";
-	private static final String TAB_SIZE_CHANGE = "tabSizeChange";
-	private static final String USE_SOFT_TABS_CHANGE = "useSoftTabsChange";
-	private static final String USE_WRAP_MODE_CHANGE = "useWrapModeChange";
-	private static final String VALUE_CHANGE = "valueChange";
-	private static final String VISIBLE_CHANGE = "visibleChange";
-	private static final String WIDTH_CHANGE = "widthChange";
 
 	// Protected Constants
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
