@@ -31,6 +31,7 @@ public class InputSourceCode extends InputSourceCodeBase {
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Text";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputsourcecode.InputSourceCodeRenderer";
+	public static final String STYLE_CLASS_NAME = "input-source-code";
 
 	public InputSourceCode() {
 		super();
@@ -54,5 +55,20 @@ public class InputSourceCode extends InputSourceCodeBase {
 	@Override
 	public Boolean isWidgetRender() {
 		return (Boolean) getStateHelper().eval(WIDGET_RENDER, true);
+	}
+
+	@Override
+	public String getStyleClass() {
+
+		String styleClass = super.getStyleClass();
+
+		if (styleClass == null) {
+			styleClass = STYLE_CLASS_NAME;
+		}
+		else {
+			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
+		}
+
+		return styleClass;
 	}
 }
