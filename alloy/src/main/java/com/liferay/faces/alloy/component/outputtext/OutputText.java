@@ -16,6 +16,8 @@ package com.liferay.faces.alloy.component.outputtext;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.html.HtmlOutputText;
 
+import com.liferay.faces.util.lang.StringPool;
+
 
 /**
  * @author  Vernon Singleton
@@ -28,9 +30,25 @@ public class OutputText extends HtmlOutputText {
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Text";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputtext.OutputTextRenderer";
+	public static final String STYLE_CLASS_NAME = "output-text";
 
 	public OutputText() {
 		super();
 		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getStyleClass() {
+
+		String styleClass = super.getStyleClass();
+
+		if (styleClass == null) {
+			styleClass = STYLE_CLASS_NAME;
+		}
+		else {
+			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
+		}
+
+		return styleClass;
 	}
 }

@@ -28,6 +28,7 @@ public class TabView extends TabViewBase {
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.tabview.TabView";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.tabview.TabViewRenderer";
+	public static final String STYLE_CLASS_NAME = "tab-view";
 
 	public TabView() {
 		super();
@@ -50,5 +51,20 @@ public class TabView extends TabViewBase {
 		}
 
 		return srcNode;
+	}
+
+	@Override
+	public String getStyleClass() {
+
+		String styleClass = super.getStyleClass();
+
+		if (styleClass == null) {
+			styleClass = STYLE_CLASS_NAME;
+		}
+		else {
+			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
+		}
+
+		return styleClass;
 	}
 }

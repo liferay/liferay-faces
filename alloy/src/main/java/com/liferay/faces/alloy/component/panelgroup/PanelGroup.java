@@ -16,6 +16,8 @@ package com.liferay.faces.alloy.component.panelgroup;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.html.HtmlPanelGroup;
 
+import com.liferay.faces.util.lang.StringPool;
+
 
 /**
  * @author  Kyle Stiemann
@@ -28,9 +30,25 @@ public class PanelGroup extends HtmlPanelGroup {
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Group";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.panelgroup.PanelGroupRenderer";
+	public static final String STYLE_CLASS_NAME = "panel-group";
 
 	public PanelGroup() {
 		super();
 		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getStyleClass() {
+
+		String styleClass = super.getStyleClass();
+
+		if (styleClass == null) {
+			styleClass = STYLE_CLASS_NAME;
+		}
+		else {
+			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
+		}
+
+		return styleClass;
 	}
 }

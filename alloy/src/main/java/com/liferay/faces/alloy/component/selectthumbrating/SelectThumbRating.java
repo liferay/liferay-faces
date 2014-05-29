@@ -16,6 +16,7 @@ package com.liferay.faces.alloy.component.selectthumbrating;
 import javax.faces.component.FacesComponent;
 
 import com.liferay.faces.alloy.component.selectstarrating.SelectStarRating;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -27,9 +28,25 @@ public final class SelectThumbRating extends SelectStarRating {
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectthumbrating.SelectThumbRating";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectthumbrating.SelectThumbRatingRenderer";
+	public static final String STYLE_CLASS_NAME = "select-thumb-rating";
 
 	public SelectThumbRating() {
 		super();
 		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getStyleClass() {
+
+		String styleClass = super.getStyleClass();
+
+		if (styleClass == null) {
+			styleClass = STYLE_CLASS_NAME;
+		}
+		else {
+			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
+		}
+
+		return styleClass;
 	}
 }

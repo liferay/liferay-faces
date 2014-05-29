@@ -21,6 +21,7 @@ import javax.faces.model.DataModel;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.alloy.component.tabview.TabView;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -50,9 +51,25 @@ public class Tab extends TabBase {
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.tab.Tab";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.tab.TabRenderer";
+	public static final String STYLE_CLASS_NAME = "tab";
 
 	public Tab() {
 		super();
 		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getStyleClass() {
+
+		String styleClass = super.getStyleClass();
+
+		if (styleClass == null) {
+			styleClass = STYLE_CLASS_NAME;
+		}
+		else {
+			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
+		}
+
+		return styleClass;
 	}
 }

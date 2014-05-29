@@ -26,6 +26,7 @@ import javax.faces.convert.DateTimeConverter;
 
 import com.liferay.faces.alloy.component.pickdate.PickDateUtil;
 import com.liferay.faces.util.context.MessageContext;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -37,6 +38,7 @@ public class InputDate extends InputDateBase {
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputdate.InputDate";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputdate.InputDateRenderer";
+	public static final String STYLE_CLASS_NAME = "input-date";
 
 	// Private Constants
 	private static final String CALENDAR = "calendar";
@@ -164,5 +166,20 @@ public class InputDate extends InputDateBase {
 		}
 
 		return datePattern;
+	}
+
+	@Override
+	public String getStyleClass() {
+
+		String styleClass = super.getStyleClass();
+
+		if (styleClass == null) {
+			styleClass = STYLE_CLASS_NAME;
+		}
+		else {
+			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
+		}
+
+		return styleClass;
 	}
 }
