@@ -6,18 +6,18 @@
 	<ui:define name="col1">
 		<h:form>
 			<showcase:example>
-				<alloy:inputText id="birthday" value="#{datePickerModelBean.birthday}">
+				<alloy:inputText id="birthday" value="#{pickDateModelBean.birthday}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</alloy:inputText>
-				<alloy:datePicker datePattern="MM/dd/yyyy" for="birthday" maximumDate="#{datePickerModelBean.maxDate}"
-					minimumDate="#{datePickerModelBean.minDate}" />
+				<alloy:pickDate datePattern="MM/dd/yyyy" for="birthday" maximumDate="#{pickDateModelBean.maxDate}"
+					minimumDate="#{pickDateModelBean.minDate}" />
 				<br />
 				<alloy:outputText value="#{i18n['valid-date-range']}: " />
-				<alloy:outputText value="#{datePickerModelBean.minDate}">
+				<alloy:outputText value="#{pickDateModelBean.minDate}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</alloy:outputText>
 				<alloy:outputText value=" - " />
-				<alloy:outputText value="#{datePickerModelBean.maxDate}">
+				<alloy:outputText value="#{pickDateModelBean.maxDate}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</alloy:outputText>
 				<hr />
@@ -26,7 +26,7 @@
 				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
-				<alloy:outputText id="modelValue" value="#{datePickerModelBean.birthday}">
+				<alloy:outputText id="modelValue" value="#{pickDateModelBean.birthday}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</alloy:outputText>
 			</showcase:outputModel>

@@ -6,14 +6,14 @@
 	<ui:define name="col1">
 		<h:form>
 			<showcase:example>
-				<alloy:inputText id="birthday" value="#{datePickerModelBean.birthday}">
+				<alloy:inputText id="birthday" value="#{pickDateModelBean.birthday}">
 					<f:ajax render="@form" />
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</alloy:inputText>
-				<alloy:datePicker datePattern="MM/dd/yyyy" for="birthday" />
+				<alloy:pickDate datePattern="MM/dd/yyyy" for="birthday" />
 			</showcase:example>
 			<showcase:outputModel>
-				<alloy:outputText id="modelValue" value="#{datePickerModelBean.birthday}">
+				<alloy:outputText id="modelValue" value="#{pickDateModelBean.birthday}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</alloy:outputText>
 			</showcase:outputModel>
