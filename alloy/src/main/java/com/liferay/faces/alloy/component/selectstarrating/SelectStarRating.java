@@ -28,6 +28,7 @@ public class SelectStarRating extends SelectStarRatingBase {
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectstarrating.SelectStarRating";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectstarrating.SelectStarRatingRenderer";
+	public static final String STYLE_CLASS_NAME = "select-star-rating";
 
 	public SelectStarRating() {
 		super();
@@ -70,5 +71,20 @@ public class SelectStarRating extends SelectStarRatingBase {
 	@Override
 	public Boolean isWidgetRender() {
 		return (Boolean) getStateHelper().eval(WIDGET_RENDER, true);
+	}
+
+	@Override
+	public String getStyleClass() {
+
+		String styleClass = super.getStyleClass();
+
+		if (styleClass == null) {
+			styleClass = STYLE_CLASS_NAME;
+		}
+		else {
+			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
+		}
+
+		return styleClass;
 	}
 }

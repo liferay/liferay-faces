@@ -15,6 +15,8 @@ package com.liferay.faces.alloy.component.icon;
 
 import javax.faces.component.FacesComponent;
 
+import com.liferay.faces.util.lang.StringPool;
+
 
 /**
  * @author  Kyle Stiemann
@@ -26,6 +28,7 @@ public class Icon extends IconBase {
 	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.icon";
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.icon.Icon";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.icon.IconRenderer";
+	public static final String STYLE_CLASS_NAME = "icon";
 
 	public Icon() {
 		super();
@@ -35,5 +38,20 @@ public class Icon extends IconBase {
 	@Override
 	public String getFamily() {
 		return COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getStyleClass() {
+
+		String styleClass = super.getStyleClass();
+
+		if (styleClass == null) {
+			styleClass = STYLE_CLASS_NAME;
+		}
+		else {
+			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
+		}
+
+		return styleClass;
 	}
 }

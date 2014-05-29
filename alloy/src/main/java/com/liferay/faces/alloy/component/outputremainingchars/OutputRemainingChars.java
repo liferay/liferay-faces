@@ -34,6 +34,7 @@ public class OutputRemainingChars extends OutputRemainingCharsBase {
 		"com.liferay.faces.alloy.component.outputremainingchars.OutputRemainingChars";
 	public static final String RENDERER_TYPE =
 		"com.liferay.faces.alloy.component.outputremainingchars.OutputRemainingCharsRenderer";
+	public static final String STYLE_CLASS_NAME = "output-remaining-chars";
 
 	public OutputRemainingChars() {
 		super();
@@ -117,6 +118,21 @@ public class OutputRemainingChars extends OutputRemainingCharsBase {
 		}
 
 		return maxLength;
+	}
+
+	@Override
+	public String getStyleClass() {
+
+		String styleClass = super.getStyleClass();
+
+		if (styleClass == null) {
+			styleClass = STYLE_CLASS_NAME;
+		}
+		else {
+			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
+		}
+
+		return styleClass;
 	}
 
 	@Override

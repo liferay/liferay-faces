@@ -29,6 +29,7 @@ public class Button extends ButtonBase implements FacesButton, HTML5Button {
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Button";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.button.ButtonRenderer";
+	public static final String STYLE_CLASS_NAME = "button";
 
 	public Button() {
 		super();
@@ -42,6 +43,21 @@ public class Button extends ButtonBase implements FacesButton, HTML5Button {
 
 	public void setDisabled(boolean disabled) {
 		getStateHelper().put(FacesButton.DISABLED, disabled);
+	}
+
+	@Override
+	public String getStyleClass() {
+
+		String styleClass = super.getStyleClass();
+
+		if (styleClass == null) {
+			styleClass = STYLE_CLASS_NAME;
+		}
+		else {
+			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
+		}
+
+		return styleClass;
 	}
 
 	@Override
