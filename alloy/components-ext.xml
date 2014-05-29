@@ -501,6 +501,19 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="InputTextCommon" extendsTags="HTMLAccessibilityEvents HTMLInputEvents Styleable"
+		generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the maximum length of characters allowd in this element.]]>
+				</description>
+				<name>maxlength</name>
+				<type>int</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<!-- /Common -->
 	<!-- generateTaglibXML="false" tags for common attributes -->
 	<component name="Body" extendsTags="Styleable" generateJava="false" />
@@ -600,69 +613,6 @@
 				<generateJava>false</generateJava>
 			</attribute>
 			<!-- /h:commandButton attributes -->
-		</attributes>
-	</component>
-	<component preferredName="PickDate" name="DatePicker" extendsTags="ClientComponent UIComponentBase Styleable">
-		<description>
-			<![CDATA[PickDate is a UIComponent that renders a popup a calendar with selectable dates.]]>
-		</description>
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]>
-				</description>
-				<name>datePattern</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The id of the component that the pickDate will be triggered by. If trigger is specified, this value is unused.]]>
-				</description>
-				<name>for</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the pickDate.]]>
-				</description>
-				<name>locale</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<description>
-						<![CDATA[The maximum date that can be selected by the user.]]>
-				</description>
-				<name>maximumDate</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The minimum date that can be selected by the user.]]>
-				</description>
-				<name>minimumDate</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Specifies the date selection style. Valid values include <code>single</code> (the default), <code>multiple,</code> or <code>multiple-sticky.</code>]]>
-				</description>
-				<name>selectionMode</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The fully-qualified id of the element that triggers the calendar popup. Please consider using the <code>for</code> attribute instead.]]>
-				</description>
-				<name>trigger</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]>
-				</description>
-				<name>zIndex</name>
-				<type>java.lang.Object</type>
-			</attribute>
 		</attributes>
 	</component>
 	<component name="Icon" extendsTags="UIComponentBase Styleable">
@@ -767,7 +717,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputText" generateJava="false" extendsTags="HTMLAccessibilityEvents HTMLInputEvents Styleable">
+	<component name="InputText" extendsTags="InputTextCommon" generateJava="false">
 		<attributes>
 			<attribute>
 				<description>
@@ -787,14 +737,6 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[HTML passthrough attribute specifying the maximum length of characters allowd in this element.]]>
-				</description>
-				<name>maxlength</name>
-				<type>int</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
 					<![CDATA[HTML passthrough attribute specifying the visual length of this element.]]>
 				</description>
 				<name>size</name>
@@ -803,8 +745,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputTextarea" extendsTags="HTMLAccessibilityEvents HTMLInputEvents Styleable"
-		generateJava="false" parentClass="javax.faces.component.html.HtmlInputTextarea">
+	<component name="InputTextarea" extendsTags="InputTextCommon" generateJava="false"
+		parentClass="javax.faces.component.html.HtmlInputTextarea">
 		<attributes>
 			<attribute>
 				<description>
@@ -884,6 +826,69 @@
             	<type>java.lang.String</type>
 				<generateJava>false</generateJava>
         	</attribute>
+		</attributes>
+	</component>
+	<component preferredName="PickDate" name="DatePicker" extendsTags="ClientComponent UIComponentBase Styleable">
+		<description>
+			<![CDATA[PickDate is a UIComponent that renders a popup a calendar with selectable dates.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]>
+				</description>
+				<name>datePattern</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The id of the component that the pickDate will be triggered by. If trigger is specified, this value is unused.]]>
+				</description>
+				<name>for</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the pickDate.]]>
+				</description>
+				<name>locale</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<description>
+						<![CDATA[The maximum date that can be selected by the user.]]>
+				</description>
+				<name>maximumDate</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The minimum date that can be selected by the user.]]>
+				</description>
+				<name>minimumDate</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the date selection style. Valid values include <code>single</code> (the default), <code>multiple,</code> or <code>multiple-sticky.</code>]]>
+				</description>
+				<name>selectionMode</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The fully-qualified id of the element that triggers the calendar popup. Please consider using the <code>for</code> attribute instead.]]>
+				</description>
+				<name>trigger</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]>
+				</description>
+				<name>zIndex</name>
+				<type>java.lang.Object</type>
+			</attribute>
 		</attributes>
 	</component>
 	<component name="SelectOneRadio" extendsTags="HTMLAccessibilityEvents HTMLInputEvents Styleable"
