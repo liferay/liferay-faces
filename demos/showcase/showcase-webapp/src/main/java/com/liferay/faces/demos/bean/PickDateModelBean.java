@@ -27,7 +27,7 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class DatePickerModelBean {
+public class PickDateModelBean {
 
 	private Date birthday;
 	private Locale locale;

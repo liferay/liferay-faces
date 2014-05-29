@@ -7,32 +7,32 @@
 		<!-- Example 1: Hold down shift or control to select multiple dates -->
 		<h:form>
 			<showcase:example description="#{i18n['alloy-datepicker-multiple-selection-example-1']}" number="1">
-				<alloy:inputTextarea id="multiple" value="#{datePickerModelBean.multiple}" />
-				<alloy:datePicker for="multiple" dateSeparator=" | " selectionMode="multiple" />
+				<alloy:inputTextarea id="multiple" value="#{pickDateModelBean.multiple}" />
+				<alloy:pickDate for="multiple" dateSeparator=" | " selectionMode="multiple" />
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
 				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
-				<alloy:outputText id="modelValue" value="#{datePickerModelBean.multiple}" />
+				<alloy:outputText id="modelValue" value="#{pickDateModelBean.multiple}" />
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>
 
 	<ui:define name="col2">
-		<!-- Example 2: Pop up the datePicker multiple times to select multiple dates -->
+		<!-- Example 2: Pop up the pickDate multiple times to select multiple dates -->
 		<h:form>
 			<showcase:example description="#{i18n['alloy-datepicker-multiple-selection-example-2']}" number="2">
-				<alloy:inputTextarea id="multipleSticky" value="#{datePickerModelBean.multiple}" />
-				<alloy:datePicker for="multipleSticky" selectionMode="multiple-sticky" />
+				<alloy:inputTextarea id="multipleSticky" value="#{pickDateModelBean.multiple}" />
+				<alloy:pickDate for="multipleSticky" selectionMode="multiple-sticky" />
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
 				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
-				<alloy:outputText id="modelValue" value="#{datePickerModelBean.multiple}" />
+				<alloy:outputText id="modelValue" value="#{pickDateModelBean.multiple}" />
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>
