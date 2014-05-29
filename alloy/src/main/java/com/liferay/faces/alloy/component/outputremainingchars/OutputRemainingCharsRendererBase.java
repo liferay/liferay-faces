@@ -21,8 +21,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
-import com.liferay.faces.alloy.util.AlloyConstants;
-import com.liferay.faces.util.lang.StringPool;
 
 /**
  * @author  Bruno Basto
