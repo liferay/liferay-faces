@@ -84,6 +84,12 @@
 	margin-top: 10px;
 }
 
+.showcase-panel {
+	border-style: dotted;
+	border-width: 1px;
+	text-align: center;
+}
+
 .tab-content img {
 	float: left;
 	margin-right: 10px;
