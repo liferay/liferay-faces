@@ -1370,6 +1370,12 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the maximum length of characters allowd in this element.]]></description>
+			<name>maxlength</name>
+			<required>false</required>
+			<type>int</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
 			<name>onblur</name>
 			<required>false</required>
