@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.datepicker;
+package com.liferay.faces.alloy.component.pickdate;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -31,7 +31,7 @@ import com.liferay.faces.util.lang.StringPool;
 /**
  * @author  Kyle Stiemann
  */
-public class DatePickerUtil {
+public class PickDateUtil {
 
 	// Private Constants
 	private static final String D = "d";
@@ -139,7 +139,7 @@ public class DatePickerUtil {
 
 	public static String getDefaultDatePattern(FacesContext facesContext, Object componentLocale) {
 
-		Locale locale = DatePickerUtil.determineLocale(facesContext, componentLocale);
+		Locale locale = PickDateUtil.determineLocale(facesContext, componentLocale);
 
 		// Note: The following usage of SimpleDateFormat is thread-safe, since only the result of the toPattern()
 		// method is utilized.

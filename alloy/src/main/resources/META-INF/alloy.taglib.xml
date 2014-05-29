@@ -479,11 +479,11 @@
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[DatePicker is a UIComponent that renders a popup a calendar with selectable dates.]]></description>
-		<tag-name>datePicker</tag-name>
+		<description><![CDATA[PickDate is a UIComponent that renders a popup a calendar with selectable dates.]]></description>
+		<tag-name></tag-name>
 		<component>
-			<component-type>com.liferay.faces.alloy.component.datepicker.DatePicker</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.datepicker.DatePickerRenderer</renderer-type>
+			<component-type>com.liferay.faces.alloy.component.pickdate.PickDate</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.pickdate.PickDateRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[The active input element that holds the calendar instance.]]></description>
@@ -540,7 +540,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The id of the component that the datePicker will be triggered by. If trigger is specified, this value is unused.]]></description>
+			<description><![CDATA[The id of the component that the  will be triggered by. If trigger is specified, this value is unused.]]></description>
 			<name>for</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -552,7 +552,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the datePicker.]]></description>
+			<description><![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the .]]></description>
 			<name>locale</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
@@ -778,7 +778,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the datePicker.]]></description>
+			<description><![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the .]]></description>
 			<name>locale</name>
 			<required>false</required>
 			<type>java.lang.Object</type>

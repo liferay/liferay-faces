@@ -602,7 +602,7 @@
 			<!-- /h:commandButton attributes -->
 		</attributes>
 	</component>
-	<component name="PickDate" extendsTags="ClientComponent UIComponentBase Styleable">
+	<component preferredName="PickDate" name="DatePicker" extendsTags="ClientComponent UIComponentBase Styleable">
 		<description>
 			<![CDATA[PickDate is a UIComponent that renders a popup a calendar with selectable dates.]]>
 		</description>

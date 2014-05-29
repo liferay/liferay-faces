@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.datepicker;
+package com.liferay.faces.alloy.component.pickdate;
 //J-
 
 import javax.annotation.Generated;
@@ -25,7 +25,7 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class DatePickerBase extends UIComponentBase implements Styleable, ClientComponent, DatePickerAlloy {
+public abstract class PickDateBase extends UIComponentBase implements Styleable, ClientComponent, PickDateAlloy {
 
 	@Override
 	public Object getActiveInput() {
