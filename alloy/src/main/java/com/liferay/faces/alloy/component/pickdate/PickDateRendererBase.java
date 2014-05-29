@@ -32,7 +32,7 @@ import com.liferay.faces.util.lang.StringPool;
 public abstract class PickDateRendererBase extends AlloyRendererBase {
 
 	// Private Constants
-	private static final String ALLOY_CLASS_NAME = "PickDate";
+	private static final String ALLOY_CLASS_NAME = "DatePicker";
 	private static final String ALLOY_MODULE_NAME = "aui-datepicker";
 
 	// Protected Constants
