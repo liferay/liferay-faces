@@ -24,7 +24,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.DateTimeConverter;
 
-import com.liferay.faces.alloy.component.datepicker.DatePickerUtil;
+import com.liferay.faces.alloy.component.pickdate.PickDateUtil;
 import com.liferay.faces.util.context.MessageContext;
 
 
@@ -58,10 +58,10 @@ public class InputDate extends InputDateBase {
 				// Get all necessary dates.
 				String datePattern = getDatePattern();
 				Object minimumDate = getMinimumDate();
-				Date minDate = DatePickerUtil.getObjectAsDate(minimumDate, datePattern);
+				Date minDate = PickDateUtil.getObjectAsDate(minimumDate, datePattern);
 				Object maximumDate = getMaximumDate();
-				Date maxDate = DatePickerUtil.getObjectAsDate(maximumDate, datePattern);
-				Date submittedDate = DatePickerUtil.getObjectAsDate(newValue, datePattern);
+				Date maxDate = PickDateUtil.getObjectAsDate(maximumDate, datePattern);
+				Date submittedDate = PickDateUtil.getObjectAsDate(newValue, datePattern);
 
 				if ((minDate == null) && (maxDate == null)) {
 					setValid(true);
@@ -76,9 +76,9 @@ public class InputDate extends InputDateBase {
 					}
 
 					// Set the times to midnight for comparison purposes.
-					minDate = DatePickerUtil.getDateAtMidnight(minDate);
-					maxDate = DatePickerUtil.getDateAtMidnight(maxDate);
-					submittedDate = DatePickerUtil.getDateAtMidnight(submittedDate);
+					minDate = PickDateUtil.getDateAtMidnight(minDate);
+					maxDate = PickDateUtil.getDateAtMidnight(maxDate);
+					submittedDate = PickDateUtil.getDateAtMidnight(submittedDate);
 
 					// To determine if the submitted value is valid, check if it falls between the minimum date and
 					// the maximum date.
@@ -99,7 +99,7 @@ public class InputDate extends InputDateBase {
 							String minDateString = simpleDateFormat.format(minDate);
 							String maxDateString = simpleDateFormat.format(maxDate);
 							Object objectLocale = getLocale();
-							Locale locale = DatePickerUtil.determineLocale(facesContext, objectLocale);
+							Locale locale = PickDateUtil.determineLocale(facesContext, objectLocale);
 							String message = messageContext.getMessage(locale, "please-enter-a-value-between-x-and-x",
 									minDateString, maxDateString);
 							facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
@@ -160,7 +160,7 @@ public class InputDate extends InputDateBase {
 			// Provide a default datePattern based on the locale.
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Object locale = getLocale();
-			datePattern = DatePickerUtil.getDefaultDatePattern(facesContext, locale);
+			datePattern = PickDateUtil.getDefaultDatePattern(facesContext, locale);
 		}
 
 		return datePattern;

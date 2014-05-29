@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.datepicker;
+package com.liferay.faces.alloy.component.pickdate;
 //J-
 
 import java.io.IOException;
@@ -29,10 +29,10 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class DatePickerRendererBase extends AlloyRendererBase {
+public abstract class PickDateRendererBase extends AlloyRendererBase {
 
 	// Private Constants
-	private static final String ALLOY_CLASS_NAME = "DatePicker";
+	private static final String ALLOY_CLASS_NAME = "PickDate";
 	private static final String ALLOY_MODULE_NAME = "aui-datepicker";
 	private static final String ACTIVE_INPUT_CHANGE = "activeInputChange";
 	private static final String AUTO_HIDE_CHANGE = "autoHideChange";
@@ -55,166 +55,166 @@ public abstract class DatePickerRendererBase extends AlloyRendererBase {
 	@Override
 	public void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
 
-		DatePickerAlloy datePickerAlloy = (DatePickerAlloy) uiComponent;
+		PickDateAlloy pickDateAlloy = (PickDateAlloy) uiComponent;
 		boolean first = true;
 
-		Object activeInput = datePickerAlloy.getActiveInput();
+		Object activeInput = pickDateAlloy.getActiveInput();
 
 		if (activeInput != null) {
 
-			encodeActiveInput(responseWriter, datePickerAlloy, activeInput, first);
+			encodeActiveInput(responseWriter, pickDateAlloy, activeInput, first);
 			first = false;
 		}
 
-		Boolean autoHide = datePickerAlloy.isAutoHide();
+		Boolean autoHide = pickDateAlloy.isAutoHide();
 
 		if (autoHide != null) {
 
-			encodeAutoHide(responseWriter, datePickerAlloy, autoHide, first);
+			encodeAutoHide(responseWriter, pickDateAlloy, autoHide, first);
 			first = false;
 		}
 
-		Object calendar = datePickerAlloy.getCalendar();
+		Object calendar = pickDateAlloy.getCalendar();
 
 		if (calendar != null) {
 
-			encodeCalendar(responseWriter, datePickerAlloy, calendar, first);
+			encodeCalendar(responseWriter, pickDateAlloy, calendar, first);
 			first = false;
 		}
 
-		Object container = datePickerAlloy.getContainer();
+		Object container = pickDateAlloy.getContainer();
 
 		if (container != null) {
 
-			encodeContainer(responseWriter, datePickerAlloy, container, first);
+			encodeContainer(responseWriter, pickDateAlloy, container, first);
 			first = false;
 		}
 
-		String content = datePickerAlloy.getContent();
+		String content = pickDateAlloy.getContent();
 
 		if (content != null) {
 
-			encodeContent(responseWriter, datePickerAlloy, content, first);
+			encodeContent(responseWriter, pickDateAlloy, content, first);
 			first = false;
 		}
 
-		String datePattern = datePickerAlloy.getDatePattern();
+		String datePattern = pickDateAlloy.getDatePattern();
 
 		if (datePattern != null) {
 
-			encodeDatePattern(responseWriter, datePickerAlloy, datePattern, first);
+			encodeDatePattern(responseWriter, pickDateAlloy, datePattern, first);
 			first = false;
 		}
 
-		String dateSeparator = datePickerAlloy.getDateSeparator();
+		String dateSeparator = pickDateAlloy.getDateSeparator();
 
 		if (dateSeparator != null) {
 
-			encodeDateSeparator(responseWriter, datePickerAlloy, dateSeparator, first);
+			encodeDateSeparator(responseWriter, pickDateAlloy, dateSeparator, first);
 			first = false;
 		}
 
-		String for_ = datePickerAlloy.getFor();
+		String for_ = pickDateAlloy.getFor();
 
 		if (for_ != null) {
 
-			encodeFor(responseWriter, datePickerAlloy, for_, first);
+			encodeFor(responseWriter, pickDateAlloy, for_, first);
 			first = false;
 		}
 
-		Object locale = datePickerAlloy.getLocale();
+		Object locale = pickDateAlloy.getLocale();
 
 		if (locale != null) {
 
-			encodeLocale(responseWriter, datePickerAlloy, locale, first);
+			encodeLocale(responseWriter, pickDateAlloy, locale, first);
 			first = false;
 		}
 
-		String mask = datePickerAlloy.getMask();
+		String mask = pickDateAlloy.getMask();
 
 		if (mask != null) {
 
-			encodeMask(responseWriter, datePickerAlloy, mask, first);
+			encodeMask(responseWriter, pickDateAlloy, mask, first);
 			first = false;
 		}
 
-		Object maximumDate = datePickerAlloy.getMaximumDate();
+		Object maximumDate = pickDateAlloy.getMaximumDate();
 
 		if (maximumDate != null) {
 
-			encodeMaximumDate(responseWriter, datePickerAlloy, maximumDate, first);
+			encodeMaximumDate(responseWriter, pickDateAlloy, maximumDate, first);
 			first = false;
 		}
 
-		Object minimumDate = datePickerAlloy.getMinimumDate();
+		Object minimumDate = pickDateAlloy.getMinimumDate();
 
 		if (minimumDate != null) {
 
-			encodeMinimumDate(responseWriter, datePickerAlloy, minimumDate, first);
+			encodeMinimumDate(responseWriter, pickDateAlloy, minimumDate, first);
 			first = false;
 		}
 
-		Object panes = datePickerAlloy.getPanes();
+		Object panes = pickDateAlloy.getPanes();
 
 		if (panes != null) {
 
-			encodePanes(responseWriter, datePickerAlloy, panes, first);
+			encodePanes(responseWriter, pickDateAlloy, panes, first);
 			first = false;
 		}
 
-		Object popover = datePickerAlloy.getPopover();
+		Object popover = pickDateAlloy.getPopover();
 
 		if (popover != null) {
 
-			encodePopover(responseWriter, datePickerAlloy, popover, first);
+			encodePopover(responseWriter, pickDateAlloy, popover, first);
 			first = false;
 		}
 
-		String popoverCssClass = datePickerAlloy.getPopoverCssClass();
+		String popoverCssClass = pickDateAlloy.getPopoverCssClass();
 
 		if (popoverCssClass != null) {
 
-			encodePopoverCssClass(responseWriter, datePickerAlloy, popoverCssClass, first);
+			encodePopoverCssClass(responseWriter, pickDateAlloy, popoverCssClass, first);
 			first = false;
 		}
 
-		String selectionMode = datePickerAlloy.getSelectionMode();
+		String selectionMode = pickDateAlloy.getSelectionMode();
 
 		if (selectionMode != null) {
 
-			encodeSelectionMode(responseWriter, datePickerAlloy, selectionMode, first);
+			encodeSelectionMode(responseWriter, pickDateAlloy, selectionMode, first);
 			first = false;
 		}
 
-		String trigger = datePickerAlloy.getTrigger();
+		String trigger = pickDateAlloy.getTrigger();
 
 		if (trigger != null) {
 
-			encodeTrigger(responseWriter, datePickerAlloy, trigger, first);
+			encodeTrigger(responseWriter, pickDateAlloy, trigger, first);
 			first = false;
 		}
 
-		String valueExtractor = datePickerAlloy.getValueExtractor();
+		String valueExtractor = pickDateAlloy.getValueExtractor();
 
 		if (valueExtractor != null) {
 
-			encodeValueExtractor(responseWriter, datePickerAlloy, valueExtractor, first);
+			encodeValueExtractor(responseWriter, pickDateAlloy, valueExtractor, first);
 			first = false;
 		}
 
-		String valueFormatter = datePickerAlloy.getValueFormatter();
+		String valueFormatter = pickDateAlloy.getValueFormatter();
 
 		if (valueFormatter != null) {
 
-			encodeValueFormatter(responseWriter, datePickerAlloy, valueFormatter, first);
+			encodeValueFormatter(responseWriter, pickDateAlloy, valueFormatter, first);
 			first = false;
 		}
 
-		Object zIndex = datePickerAlloy.getzIndex();
+		Object zIndex = pickDateAlloy.getzIndex();
 
 		if (zIndex != null) {
 
-			encodeZIndex(responseWriter, datePickerAlloy, zIndex, first);
+			encodeZIndex(responseWriter, pickDateAlloy, zIndex, first);
 			first = false;
 		}
 	}
@@ -229,84 +229,84 @@ public abstract class DatePickerRendererBase extends AlloyRendererBase {
 		return MODULES;
 	}
 
-	protected void encodeActiveInput(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Object activeInput, boolean first) throws IOException {
-		encodeObject(responseWriter, DatePickerAlloy.ACTIVE_INPUT, activeInput, first);
+	protected void encodeActiveInput(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object activeInput, boolean first) throws IOException {
+		encodeObject(responseWriter, PickDateAlloy.ACTIVE_INPUT, activeInput, first);
 	}
 
-	protected void encodeAutoHide(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Boolean autoHide, boolean first) throws IOException {
-		encodeBoolean(responseWriter, DatePickerAlloy.AUTO_HIDE, autoHide, first);
+	protected void encodeAutoHide(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Boolean autoHide, boolean first) throws IOException {
+		encodeBoolean(responseWriter, PickDateAlloy.AUTO_HIDE, autoHide, first);
 	}
 
-	protected void encodeCalendar(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Object calendar, boolean first) throws IOException {
-		encodeObject(responseWriter, DatePickerAlloy.CALENDAR, calendar, first);
+	protected void encodeCalendar(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object calendar, boolean first) throws IOException {
+		encodeObject(responseWriter, PickDateAlloy.CALENDAR, calendar, first);
 	}
 
-	protected void encodeContainer(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Object container, boolean first) throws IOException {
-		encodeObject(responseWriter, DatePickerAlloy.CONTAINER, container, first);
+	protected void encodeContainer(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object container, boolean first) throws IOException {
+		encodeObject(responseWriter, PickDateAlloy.CONTAINER, container, first);
 	}
 
-	protected void encodeContent(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String content, boolean first) throws IOException {
-		encodeString(responseWriter, DatePickerAlloy.CONTENT, content, first);
+	protected void encodeContent(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String content, boolean first) throws IOException {
+		encodeString(responseWriter, PickDateAlloy.CONTENT, content, first);
 	}
 
-	protected void encodeDatePattern(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String datePattern, boolean first) throws IOException {
-		encodeString(responseWriter, DatePickerAlloy.DATE_PATTERN, datePattern, first);
+	protected void encodeDatePattern(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String datePattern, boolean first) throws IOException {
+		encodeString(responseWriter, PickDateAlloy.DATE_PATTERN, datePattern, first);
 	}
 
-	protected void encodeDateSeparator(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String dateSeparator, boolean first) throws IOException {
-		encodeString(responseWriter, DatePickerAlloy.DATE_SEPARATOR, dateSeparator, first);
+	protected void encodeDateSeparator(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String dateSeparator, boolean first) throws IOException {
+		encodeString(responseWriter, PickDateAlloy.DATE_SEPARATOR, dateSeparator, first);
 	}
 
-	protected void encodeFor(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String for_, boolean first) throws IOException {
-		encodeString(responseWriter, DatePickerAlloy.FOR, for_, first);
+	protected void encodeFor(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String for_, boolean first) throws IOException {
+		encodeString(responseWriter, PickDateAlloy.FOR, for_, first);
 	}
 
-	protected void encodeLocale(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Object locale, boolean first) throws IOException {
-		encodeObject(responseWriter, DatePickerAlloy.LOCALE, locale, first);
+	protected void encodeLocale(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object locale, boolean first) throws IOException {
+		encodeObject(responseWriter, PickDateAlloy.LOCALE, locale, first);
 	}
 
-	protected void encodeMask(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String mask, boolean first) throws IOException {
-		encodeString(responseWriter, DatePickerAlloy.MASK, mask, first);
+	protected void encodeMask(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String mask, boolean first) throws IOException {
+		encodeString(responseWriter, PickDateAlloy.MASK, mask, first);
 	}
 
-	protected void encodeMaximumDate(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Object maximumDate, boolean first) throws IOException {
-		encodeObject(responseWriter, DatePickerAlloy.MAXIMUM_DATE, maximumDate, first);
+	protected void encodeMaximumDate(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object maximumDate, boolean first) throws IOException {
+		encodeObject(responseWriter, PickDateAlloy.MAXIMUM_DATE, maximumDate, first);
 	}
 
-	protected void encodeMinimumDate(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Object minimumDate, boolean first) throws IOException {
-		encodeObject(responseWriter, DatePickerAlloy.MINIMUM_DATE, minimumDate, first);
+	protected void encodeMinimumDate(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object minimumDate, boolean first) throws IOException {
+		encodeObject(responseWriter, PickDateAlloy.MINIMUM_DATE, minimumDate, first);
 	}
 
-	protected void encodePanes(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Object panes, boolean first) throws IOException {
-		encodeNumber(responseWriter, DatePickerAlloy.PANES, panes, first);
+	protected void encodePanes(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object panes, boolean first) throws IOException {
+		encodeNumber(responseWriter, PickDateAlloy.PANES, panes, first);
 	}
 
-	protected void encodePopover(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Object popover, boolean first) throws IOException {
-		encodeObject(responseWriter, DatePickerAlloy.POPOVER, popover, first);
+	protected void encodePopover(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object popover, boolean first) throws IOException {
+		encodeObject(responseWriter, PickDateAlloy.POPOVER, popover, first);
 	}
 
-	protected void encodePopoverCssClass(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String popoverCssClass, boolean first) throws IOException {
-		encodeString(responseWriter, DatePickerAlloy.POPOVER_CSS_CLASS, popoverCssClass, first);
+	protected void encodePopoverCssClass(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String popoverCssClass, boolean first) throws IOException {
+		encodeString(responseWriter, PickDateAlloy.POPOVER_CSS_CLASS, popoverCssClass, first);
 	}
 
-	protected void encodeSelectionMode(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String selectionMode, boolean first) throws IOException {
-		encodeString(responseWriter, DatePickerAlloy.SELECTION_MODE, selectionMode, first);
+	protected void encodeSelectionMode(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String selectionMode, boolean first) throws IOException {
+		encodeString(responseWriter, PickDateAlloy.SELECTION_MODE, selectionMode, first);
 	}
 
-	protected void encodeTrigger(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String trigger, boolean first) throws IOException {
-		encodeString(responseWriter, DatePickerAlloy.TRIGGER, trigger, first);
+	protected void encodeTrigger(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String trigger, boolean first) throws IOException {
+		encodeString(responseWriter, PickDateAlloy.TRIGGER, trigger, first);
 	}
 
-	protected void encodeValueExtractor(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String valueExtractor, boolean first) throws IOException {
-		encodeString(responseWriter, DatePickerAlloy.VALUE_EXTRACTOR, valueExtractor, first);
+	protected void encodeValueExtractor(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String valueExtractor, boolean first) throws IOException {
+		encodeString(responseWriter, PickDateAlloy.VALUE_EXTRACTOR, valueExtractor, first);
 	}
 
-	protected void encodeValueFormatter(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String valueFormatter, boolean first) throws IOException {
-		encodeString(responseWriter, DatePickerAlloy.VALUE_FORMATTER, valueFormatter, first);
+	protected void encodeValueFormatter(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String valueFormatter, boolean first) throws IOException {
+		encodeString(responseWriter, PickDateAlloy.VALUE_FORMATTER, valueFormatter, first);
 	}
 
-	protected void encodeZIndex(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Object zIndex, boolean first) throws IOException {
-		encodeObject(responseWriter, DatePickerAlloy.Z_INDEX, zIndex, first);
+	protected void encodeZIndex(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object zIndex, boolean first) throws IOException {
+		encodeObject(responseWriter, PickDateAlloy.Z_INDEX, zIndex, first);
 	}
 }
 //J+

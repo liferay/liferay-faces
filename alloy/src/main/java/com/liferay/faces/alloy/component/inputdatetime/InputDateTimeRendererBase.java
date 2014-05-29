@@ -128,7 +128,7 @@ public abstract class InputDateTimeRendererBase extends InputTextRenderer {
 					String buttonId = buttonIdStringBuilder.toString();
 					button.setId(buttonId);
 
-					// Since the datePicker's trigger needs to be set directly, prefix the escaped clientId of the
+					// Since the pickDate's trigger needs to be set directly, prefix the escaped clientId of the
 					// button with the "#" symbol.
 					String buttonClientId = button.getClientId(facesContext);
 					String escapedButtonClientId = ComponentUtil.escapeClientId(buttonClientId);
@@ -137,7 +137,7 @@ public abstract class InputDateTimeRendererBase extends InputTextRenderer {
 				}
 				else {
 
-					// If the both the button and the input are supposed to trigger the datePicker, set the button's
+					// If the both the button and the input are supposed to trigger the pickDate, set the button's
 					// onclick to focus and click the input.
 					String onClick = BUTTON_ON_CLICK_EVENT.replace(TOKEN_0, inputClientId);
 					button.setOnclick(onClick);
@@ -151,7 +151,7 @@ public abstract class InputDateTimeRendererBase extends InputTextRenderer {
 		// Finish the encoding of the outermost </span> element.
 		responseWriter.endElement(StringPool.SPAN);
 
-		// Since the datePicker's trigger needs to be set directly, prefix the escaped clientId of the trigger with the
+		// Since the pickDate's trigger needs to be set directly, prefix the escaped clientId of the trigger with the
 		// "#" symbol.
 		trigger = StringPool.POUND + trigger;
 

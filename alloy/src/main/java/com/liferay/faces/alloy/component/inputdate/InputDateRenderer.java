@@ -22,9 +22,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.component.datepicker.DatePicker;
-import com.liferay.faces.alloy.component.datepicker.DatePickerUtil;
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRendererBase;
+import com.liferay.faces.alloy.component.pickdate.PickDate;
+import com.liferay.faces.alloy.component.pickdate.PickDateUtil;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -37,7 +37,7 @@ import com.liferay.faces.util.lang.StringPool;
 		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
 		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
 		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js"),
-		@ResourceDependency(library = "liferay-faces-alloy", name = "datepicker/datePicker.js")
+		@ResourceDependency(library = "liferay-faces-alloy", name = "pickdate.js")
 	}
 )
 public class InputDateRenderer extends InputDateTimeRendererBase {
@@ -54,36 +54,36 @@ public class InputDateRenderer extends InputDateTimeRendererBase {
 
 		InputDate inputDate = (InputDate) uiComponent;
 
-		// Create a datePicker and pass attributes through to it.
-		DatePicker datePicker = (DatePicker) application.createComponent(DatePicker.COMPONENT_TYPE);
+		// Create a pickDate and pass attributes through to it.
+		PickDate pickDate = (PickDate) application.createComponent(PickDate.COMPONENT_TYPE);
 
-		// Because the datePicker is not in the component tree, utilizing DatePicker.setFor() with the component id
+		// Because the pickDate is not in the component tree, utilizing PickDate.setFor() with the component id
 		// will not work since it uses UIComponent.findComopnent() which only works for compnents that appear in the
-		// component tree. To workaround this, the datePicker's trigger must be set directly.
+		// component tree. To workaround this, the pickDate's trigger must be set directly.
 		String datePattern = inputDate.getDatePattern();
-		datePicker.setDatePattern(datePattern);
-		datePicker.setLocale(inputDate.getLocale());
-		datePicker.setMaximumDate(inputDate.getMaximumDate());
-		datePicker.setMinimumDate(inputDate.getMinimumDate());
-		datePicker.setPanes(inputDate.getPanes());
-		datePicker.setStyleClass(inputDate.getStyleClass());
-		datePicker.setTrigger(trigger);
-		datePicker.setzIndex(inputDate.getzIndex());
+		pickDate.setDatePattern(datePattern);
+		pickDate.setLocale(inputDate.getLocale());
+		pickDate.setMaximumDate(inputDate.getMaximumDate());
+		pickDate.setMinimumDate(inputDate.getMinimumDate());
+		pickDate.setPanes(inputDate.getPanes());
+		pickDate.setStyleClass(inputDate.getStyleClass());
+		pickDate.setTrigger(trigger);
+		pickDate.setzIndex(inputDate.getzIndex());
 
 		String showOn = inputDate.getShowOn();
 
 		if (showOn.equals(BUTTON)) {
 
-			// Each time a date is clicked, the input must be updated via javascript because the datePicker is not
+			// Each time a date is clicked, the input must be updated via javascript because the pickDate is not
 			// attached to the input.
 			String node = StringPool.POUND + escapedClientId;
 			String buttonOnDateClick = BUTTON_ON_DATE_CLICK_TEMPLATE.replace(TOKEN_0, node);
-			String mask = DatePickerUtil.getMaskFromDatePattern(datePattern);
+			String mask = PickDateUtil.getMaskFromDatePattern(datePattern);
 			buttonOnDateClick = buttonOnDateClick.replace(TOKEN_1, mask);
-			datePicker.setOnDateClick(buttonOnDateClick);
+			pickDate.setOnDateClick(buttonOnDateClick);
 		}
 
 		// Invoke the date picker's renderer so that it renders itself.
-		datePicker.encodeAll(facesContext);
+		pickDate.encodeAll(facesContext);
 	}
 }

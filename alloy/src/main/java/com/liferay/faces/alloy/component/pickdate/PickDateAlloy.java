@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.datepicker;
+package com.liferay.faces.alloy.component.pickdate;
 //J-
 
 import javax.annotation.Generated;
@@ -21,7 +21,7 @@ import javax.annotation.Generated;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public interface DatePickerAlloy {
+public interface PickDateAlloy {
 
 	// Public Constants
 	public static final String ACTIVE_INPUT = "activeInput";

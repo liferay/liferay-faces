@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.datepicker;
+package com.liferay.faces.alloy.component.pickdate;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -32,16 +32,16 @@ import com.liferay.faces.util.lang.StringPool;
 /**
  * @author  Kyle Stiemann
  */
-@FacesRenderer(componentFamily = DatePicker.COMPONENT_FAMILY, rendererType = DatePicker.RENDERER_TYPE)
+@FacesRenderer(componentFamily = PickDate.COMPONENT_FAMILY, rendererType = PickDate.RENDERER_TYPE)
 @ResourceDependencies(
 	{
 		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
 		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
 		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js"),
-		@ResourceDependency(library = "liferay-faces-alloy", name = "datepicker/datePicker.js")
+		@ResourceDependency(library = "liferay-faces-alloy", name = "pickdate.js")
 	}
 )
-public class DatePickerRenderer extends DatePickerRendererBase {
+public class PickDateRenderer extends PickDateRendererBase {
 
 	// Private Constants
 	private static final String LANG = "lang";
@@ -59,7 +59,7 @@ public class DatePickerRenderer extends DatePickerRendererBase {
 	}
 
 	@Override
-	protected void encodeDatePattern(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String datePattern,
+	protected void encodeDatePattern(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String datePattern,
 		boolean first) throws IOException {
 
 		// The "mask" attribute takes precedence for encoding. If "mask" has not been specified, then the "datePattern"
@@ -67,21 +67,21 @@ public class DatePickerRenderer extends DatePickerRendererBase {
 		// attribute added for the sake of familiarity to the JSF developer. Since there is no "datePattern" Alloy
 		// attribute, the datePattern must be converted to Alloy mask syntax before it is encoded as the "mask"
 		// attribute value.
-		if (datePickerAlloy.getMask() == null) {
+		if (pickDateAlloy.getMask() == null) {
 
-			String datePatternMask = DatePickerUtil.getMaskFromDatePattern(datePattern);
-			encodeMask(responseWriter, datePickerAlloy, datePatternMask, first);
+			String datePatternMask = PickDateUtil.getMaskFromDatePattern(datePattern);
+			encodeMask(responseWriter, pickDateAlloy, datePatternMask, first);
 		}
 	}
 
 	@Override
-	protected void encodeFor(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String for_, boolean first)
+	protected void encodeFor(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String for_, boolean first)
 		throws IOException {
 
 		// The "trigger" attribute takes precedence. If "trigger" has not been specified, then the "for" attribute is
 		// to be utilized for encoding the "trigger" attribute.
-		if (datePickerAlloy.getTrigger() == null) {
-			encodeTrigger(responseWriter, datePickerAlloy, for_, first);
+		if (pickDateAlloy.getTrigger() == null) {
+			encodeTrigger(responseWriter, pickDateAlloy, for_, first);
 		}
 	}
 
@@ -89,8 +89,8 @@ public class DatePickerRenderer extends DatePickerRendererBase {
 	public void encodeLang(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
 		throws IOException {
 
-		DatePickerAlloy datePickerAlloy = (DatePickerAlloy) uiComponent;
-		Locale locale = DatePickerUtil.determineLocale(facesContext, datePickerAlloy.getLocale());
+		PickDateAlloy pickDateAlloy = (PickDateAlloy) uiComponent;
+		Locale locale = PickDateUtil.determineLocale(facesContext, pickDateAlloy.getLocale());
 
 		// RFC 1766 requires the subtags of locales to be delimited by hyphens rather than underscores.
 		// http://www.faqs.org/rfcs/rfc1766.html
@@ -101,70 +101,70 @@ public class DatePickerRenderer extends DatePickerRendererBase {
 	}
 
 	@Override
-	protected void encodeLocale(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Object locale,
+	protected void encodeLocale(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object locale,
 		boolean first) throws IOException {
 
-		// This is a no-op because "locale" is not an attribute of DatePicker. Rather, it is a custom attribute added
+		// This is a no-op because "locale" is not an attribute of PickDate. Rather, it is a custom attribute added
 		// for the sake of familiarity to the JSF developer. The value of the "locale" attribute is utilized by the
-		// DatePicker.getDatePattern() method in order to determine locale-specific date patterns. It is also used below
+		// PickDate.getDatePattern() method in order to determine locale-specific date patterns. It is also used below
 		// in the isForceInline(FacesContext, UIComponent) method in order to handle a special inline-rendering case.
 	}
 
 	@Override
-	protected void encodeMaximumDate(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Object maximumDate,
+	protected void encodeMaximumDate(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object maximumDate,
 		boolean first) throws IOException {
 
 		// This is a no-op because the "maximumDate" attribute belongs to the internal calendar rather than the
-		// DatePicker itself, so it should not be rendered like a normal attribute. Instead, "maximumDate" is handled by
-		// DatePicker.getCalendar().
+		// PickDate itself, so it should not be rendered like a normal attribute. Instead, "maximumDate" is handled by
+		// PickDate.getCalendar().
 	}
 
 	@Override
-	protected void encodeMinimumDate(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Object minimumDate,
+	protected void encodeMinimumDate(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object minimumDate,
 		boolean first) throws IOException {
 
 		// This is a no-op because the "minimumDate" attribute belongs to the internal calendar rather than the
-		// DatePicker itself, so it should not be rendered like a normal attribute. Instead, "minimumDate" is handled by
-		// DatePicker.getCalendar().
+		// PickDate itself, so it should not be rendered like a normal attribute. Instead, "minimumDate" is handled by
+		// PickDate.getCalendar().
 	}
 
 	@Override
-	protected void encodeSelectionMode(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy,
+	protected void encodeSelectionMode(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy,
 		String selectionMode, boolean first) throws IOException {
 
 		// This is a no-op because the "selectionMode" attribute belongs to the internal calendar rather than the
-		// datePicker itself, so it should not be rendered like a normal attribute. Instead, "selectionMode" is handled
-		// by DatePicker.getCalendar().
+		// pickDate itself, so it should not be rendered like a normal attribute. Instead, "selectionMode" is handled
+		// by PickDate.getCalendar().
 	}
 
 	@Override
-	protected void encodeTrigger(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, String trigger,
+	protected void encodeTrigger(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String trigger,
 		boolean first) throws IOException {
 
 		// If the specified trigger can be found in the JSF component tree, then encode the escaped clientId of that
 		// component as the trigger.
-		UIComponent datePicker = (UIComponent) datePickerAlloy;
-		UIComponent triggerComponent = datePicker.findComponent(trigger);
+		UIComponent pickDate = (UIComponent) pickDateAlloy;
+		UIComponent triggerComponent = pickDate.findComponent(trigger);
 
 		if (triggerComponent != null) {
 			String triggerComponentClientId = ComponentUtil.escapeClientId(triggerComponent.getClientId());
 			String triggerNode = StringPool.POUND + triggerComponentClientId;
-			super.encodeTrigger(responseWriter, datePickerAlloy, triggerNode, first);
+			super.encodeTrigger(responseWriter, pickDateAlloy, triggerNode, first);
 		}
 
 		// Otherwise, simply encode the specified trigger since it is likely the "id" of an element in the DOM.
 		else {
-			super.encodeTrigger(responseWriter, datePickerAlloy, trigger, first);
+			super.encodeTrigger(responseWriter, pickDateAlloy, trigger, first);
 		}
 	}
 
 	@Override
-	protected void encodeZIndex(ResponseWriter responseWriter, DatePickerAlloy datePickerAlloy, Object zIndex,
+	protected void encodeZIndex(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object zIndex,
 		boolean first) throws IOException {
 
-		// This is a no-op because "zIndex" attribute belongs to the internal popover rather than the DatePicker itself,
+		// This is a no-op because "zIndex" attribute belongs to the internal popover rather than the PickDate itself,
 		// so it should not be rendered like a normal attribute. Instead, "zIndex" is handled by
-		// DatePicker.getPopover().
+		// PickDate.getPopover().
 	}
 
 	@Override
@@ -173,9 +173,9 @@ public class DatePickerRenderer extends DatePickerRendererBase {
 		// In order to support the "lang" attribute of the YUI object, it is necessary to determine if the user has
 		// specified a locale other than that of the server or view root. If so, then the javascript must be rendered
 		// inline.
-		DatePickerAlloy datePickerAlloy = (DatePickerAlloy) uiComponent;
-		Object componentLocale = datePickerAlloy.getLocale();
-		Locale locale = DatePickerUtil.determineLocale(facesContext, componentLocale);
+		PickDateAlloy pickDateAlloy = (PickDateAlloy) uiComponent;
+		Object componentLocale = pickDateAlloy.getLocale();
+		Locale locale = PickDateUtil.determineLocale(facesContext, componentLocale);
 		UIViewRoot viewRoot = facesContext.getViewRoot();
 		Locale viewRootLocale = viewRoot.getLocale();
 

@@ -1,6 +1,6 @@
-// This is a javascript function that is used by DatePicker.java to conditionally fire a change event on the input which
-// triggers the datePicker.
-function datePickerDefaultOnDateClick(newDate, input, calendar) {
+// This is a javascript function that is used by PickDate.java to conditionally fire a change event on the input which
+// triggers the pickDate.
+function pickDateDefaultOnDateClick(newDate, input, calendar) {
 	var fireChange = true;
 	if (calendar.get('selectionMode') === 'single') {
 		var oldDate = calendar.get('oldDate');
@@ -14,7 +14,7 @@ function datePickerDefaultOnDateClick(newDate, input, calendar) {
 	}
 
 	// If there is not an old date or it is different than the new date, then simulate an onchange event. This is
-	// necessary when there is an f:ajax child on the datePicker's input textbox.
+	// necessary when there is an f:ajax child on the pickDate's input textbox.
 	if (fireChange) {
 		input.simulate('change');
 	}

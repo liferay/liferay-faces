@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.datepicker;
+package com.liferay.faces.alloy.component.pickdate;
 
 import java.util.Date;
 
@@ -29,18 +29,18 @@ import com.liferay.faces.util.product.ProductMap;
 /**
  * @author  Kyle Stiemann
  */
-@FacesComponent(value = DatePicker.COMPONENT_TYPE)
-public class DatePicker extends DatePickerBase {
+@FacesComponent(value = PickDate.COMPONENT_TYPE)
+public class PickDate extends PickDateBase {
 
 	// Public Constants
-	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.datepicker";
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.datepicker.DatePicker";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.datepicker.DatePickerRenderer";
+	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.pickdate";
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.pickdate.PickDate";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.pickdate.PickDateRenderer";
 
 	// Private Constants
 	private static final String DATE_CLICK = "dateClick";
 	private static final String DEFAULT_ON_DATE_CLICK_TEMPLATE =
-		"datePickerDefaultOnDateClick(event.date, A.one('{0}'), this);";
+		"pickDateDefaultOnDateClick(event.date, A.one('{0}'), this);";
 	private static final boolean LIFERAY_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
 		.isDetected();
 	private static final String LIFERAY_Z_INDEX_TOOLTIP = "Liferay.zIndex.TOOLTIP";
@@ -49,8 +49,7 @@ public class DatePicker extends DatePickerBase {
 	// Private Members
 	private String onDateClick;
 
-	public DatePicker() {
-
+	public PickDate() {
 		super();
 		setRendererType(RENDERER_TYPE);
 	}
@@ -125,8 +124,8 @@ public class DatePicker extends DatePickerBase {
 
 			if (maximumDate != null) {
 
-				Date maxDate = DatePickerUtil.getObjectAsDate(maximumDate, componentDatePattern, componetMask);
-				String maxDateString = DatePickerUtil.toJavascriptDateString(maxDate);
+				Date maxDate = PickDateUtil.getObjectAsDate(maximumDate, componentDatePattern, componetMask);
+				String maxDateString = PickDateUtil.toJavascriptDateString(maxDate);
 				appendJSONAttribute(stringBuilder, MAXIMUM_DATE, maxDateString, first);
 				first = false;
 			}
@@ -135,8 +134,8 @@ public class DatePicker extends DatePickerBase {
 
 			if (minimumDate != null) {
 
-				Date minDate = DatePickerUtil.getObjectAsDate(minimumDate, componentDatePattern, componetMask);
-				String minDateString = DatePickerUtil.toJavascriptDateString(minDate);
+				Date minDate = PickDateUtil.getObjectAsDate(minimumDate, componentDatePattern, componetMask);
+				String minDateString = PickDateUtil.toJavascriptDateString(minDate);
 				appendJSONAttribute(stringBuilder, MINIMUM_DATE, minDateString, first);
 				first = false;
 			}
@@ -175,7 +174,7 @@ public class DatePicker extends DatePickerBase {
 			// Provide a default datePattern based on the locale.
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Object locale = getLocale();
-			datePattern = DatePickerUtil.getDefaultDatePattern(facesContext, locale);
+			datePattern = PickDateUtil.getDefaultDatePattern(facesContext, locale);
 		}
 
 		return datePattern;
