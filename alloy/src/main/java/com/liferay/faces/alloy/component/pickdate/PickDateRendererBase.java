@@ -34,20 +34,6 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "PickDate";
 	private static final String ALLOY_MODULE_NAME = "aui-datepicker";
-	private static final String ACTIVE_INPUT_CHANGE = "activeInputChange";
-	private static final String AUTO_HIDE_CHANGE = "autoHideChange";
-	private static final String CALENDAR_CHANGE = "calendarChange";
-	private static final String CONTAINER_CHANGE = "containerChange";
-	private static final String CONTENT_CHANGE = "contentChange";
-	private static final String DATE_SEPARATOR_CHANGE = "dateSeparatorChange";
-	private static final String DESTROYED_CHANGE = "destroyedChange";
-	private static final String INITIALIZED_CHANGE = "initializedChange";
-	private static final String MASK_CHANGE = "maskChange";
-	private static final String PANES_CHANGE = "panesChange";
-	private static final String POPOVER_CHANGE = "popoverChange";
-	private static final String POPOVER_CSS_CLASS_CHANGE = "popoverCssClassChange";
-	private static final String VALUE_EXTRACTOR_CHANGE = "valueExtractorChange";
-	private static final String VALUE_FORMATTER_CHANGE = "valueFormatterChange";
 
 	// Protected Constants
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
