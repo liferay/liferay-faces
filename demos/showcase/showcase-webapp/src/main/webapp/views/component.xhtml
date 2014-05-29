@@ -23,7 +23,7 @@
 		<c:set value="#{i18n[selectedComponentUseCaseKey]}" var="selectedComponentUseCaseDescription" />
 		<c:set value="vdldoc:#{selectedComponentFullName}" var="selectedComponentDocKey" />
 		<button onclick="window.open('#{showcase-fn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;">#{i18n['vdl-documentation']}</button>
-		<c:if test="#{selectedComponentCamelCaseName == 'datePicker'}">
+		<c:if test="#{selectedComponentCamelCaseName == 'pickDate'}">
 			<c:set value="#{selectedComponentUseCaseName}" var="correspondingUseCase" />
 			<c:if test="#{selectedComponentUseCaseName == 'multiple-selection'}">
 				<c:set value="general" var="correspondingUseCase" />
