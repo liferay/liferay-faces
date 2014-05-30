@@ -37,7 +37,7 @@ public class Column extends ColumnBase {
 
 	@Override
 	public Integer getSpan() {
-		return (Integer) getStateHelper().eval(StringPool.SPAN, COLUMNS);
+		return (Integer) getStateHelper().eval(SPAN, COLUMNS);
 	}
 
 	@Override

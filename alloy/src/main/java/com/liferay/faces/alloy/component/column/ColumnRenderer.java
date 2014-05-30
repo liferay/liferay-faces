@@ -35,9 +35,6 @@ import com.liferay.faces.util.render.RendererUtil;
 @ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css")
 public class ColumnRenderer extends Renderer {
 
-	// Private Constants
-	private static final String OFFSET = "offset";
-
 	protected static Integer getColumnUnitSize(Integer width) {
 		return (int) Math.round(Column.COLUMNS * ((double) width / 100));
 	}
@@ -110,7 +107,7 @@ public class ColumnRenderer extends Renderer {
 
 			if (offset != null) {
 				classNames.append(StringPool.SPACE);
-				classNames.append(OFFSET);
+				classNames.append(Column.OFFSET);
 				classNames.append(offset);
 			}
 

@@ -27,10 +27,10 @@ import com.liferay.faces.util.component.Styleable;
 public abstract class ButtonBase extends HtmlOutcomeTargetButton implements Styleable {
 
 	// Public Constants
-	private static final String AUTOFOCUS = "autofocus";
-	private static final String STYLE = "style";
-	private static final String STYLE_CLASS = "styleClass";
-	private static final String TYPE = "type";
+	public static final String AUTOFOCUS = "autofocus";
+	public static final String STYLE = "style";
+	public static final String STYLE_CLASS = "styleClass";
+	public static final String TYPE = "type";
 
 	public Boolean isAutofocus() {
 		return (Boolean) getStateHelper().eval(AUTOFOCUS, null);

@@ -27,9 +27,9 @@ import com.liferay.faces.util.component.Styleable;
 public abstract class TabBase extends UIColumn implements Styleable {
 
 	// Public Constants
-	private static final String LABEL = "label";
-	private static final String STYLE = "style";
-	private static final String STYLE_CLASS = "styleClass";
+	public static final String LABEL = "label";
+	public static final String STYLE = "style";
+	public static final String STYLE_CLASS = "styleClass";
 
 	public String getLabel() {
 		return (String) getStateHelper().eval(LABEL, null);

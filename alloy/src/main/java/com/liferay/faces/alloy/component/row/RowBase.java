@@ -27,9 +27,9 @@ import com.liferay.faces.util.component.Styleable;
 public abstract class RowBase extends UIPanel implements Styleable {
 
 	// Public Constants
-	private static final String FLUID = "fluid";
-	private static final String STYLE = "style";
-	private static final String STYLE_CLASS = "styleClass";
+	public static final String FLUID = "fluid";
+	public static final String STYLE = "style";
+	public static final String STYLE_CLASS = "styleClass";
 
 	public Boolean isFluid() {
 		return (Boolean) getStateHelper().eval(FLUID, null);
