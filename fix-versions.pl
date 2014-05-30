@@ -220,6 +220,11 @@ sub do_inplace_edits {
 	elsif (($file =~ m/.*\.xhtml/) and ($File::Find::name =~ /\/src/)) {
 		print "$File::Find::name\n";
 		`perl -pi -e 's/vdldoc:since value=\\"[0-9]\\.[0-9]/vdldoc:since value=\\"$liferayFacesVersionShortMajor1DotMajor2/' $file`;
+		if ($facesMajor > 2 or ($facesMajor == 2 and $facesMinor > 1)) {
+			`perl -pi -e 's/java.sun.com/xmlns.jcp.org/g' $file`;
+		} else {
+			`perl -pi -e 's/xmlns.jcp.org/java.sun.com/g' $file`;
+		}
 	}
 
 	#
