@@ -44,7 +44,6 @@ import com.liferay.faces.util.render.HiddenTextResponseWriter;
 public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 
 	// Private Constants
-	private static final String ALLOY_CLASS_NAME = "AceEditor";
 	private static final String ESCAPED_BACKSLASH = "\\\\";
 	private static final String ESCAPED_DOUBLE_QUOTE = "\\\\\"";
 	private static final String ESCAPED_BACKSLASH_DOUBLE_QUOTE = ESCAPED_BACKSLASH + ESCAPED_DOUBLE_QUOTE;
@@ -139,11 +138,6 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 		}
 
 		super.encodeValue(responseWriter, InputSourceCodeAlloy, value, first);
-	}
-
-	@Override
-	public String getAlloyClassName() {
-		return ALLOY_CLASS_NAME;
 	}
 
 	@Override

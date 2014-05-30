@@ -30,7 +30,7 @@ import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
 public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendererBase {
 
 	// Private Constants
-	private static final String ALLOY_CLASS_NAME = "InputSourceCode";
+	private static final String ALLOY_CLASS_NAME = "AceEditor";
 	private static final String ALLOY_MODULE_NAME = "aui-ace-editor";
 
 	// Protected Constants
