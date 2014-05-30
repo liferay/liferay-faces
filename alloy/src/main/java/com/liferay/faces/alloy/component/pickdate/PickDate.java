@@ -22,8 +22,6 @@ import javax.faces.context.FacesContext;
 import com.liferay.faces.alloy.util.AlloyConstants;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.product.ProductConstants;
-import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -42,8 +40,6 @@ public class PickDate extends PickDateBase {
 	private static final String DATE_CLICK = "dateClick";
 	private static final String DEFAULT_ON_DATE_CLICK_TEMPLATE =
 		"pickDateDefaultOnDateClick(event.date, A.one('{0}'), this);";
-	private static final boolean LIFERAY_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
-		.isDetected();
 	private static final String LIFERAY_Z_INDEX_TOOLTIP = "Liferay.zIndex.TOOLTIP";
 	private static final String TOKEN = "{0}";
 
@@ -60,7 +56,7 @@ public class PickDate extends PickDateBase {
 
 		Object zIndex = super.getzIndex();
 
-		if ((zIndex == null) && LIFERAY_DETECTED) {
+		if (zIndex == null) {
 			zIndex = LIFERAY_Z_INDEX_TOOLTIP;
 		}
 

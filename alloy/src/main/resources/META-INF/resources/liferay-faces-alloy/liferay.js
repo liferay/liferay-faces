@@ -9,6 +9,20 @@
 
 var AUI = YUI;
 Liferay = window.Liferay || {};
+if (!Liferay.zIndex) {
+	Liferay.zIndex = {
+			DOCK: 10,
+			DOCK_PARENT: 20,
+			ALERT: 430,
+			DROP_AREA: 440,
+			DROP_POSITION: 450,
+			DRAG_ITEM: 460,
+			OVERLAY: 1000,
+			WINDOW: 1200,
+			MENU: 5000,
+			TOOLTIP: 10000
+	};
+}
 
 (function(A, Liferay) {
 	var Lang = A.Lang;
