@@ -48,7 +48,7 @@
 			<renderer-type>com.liferay.faces.alloy.component.button.ButtonRenderer</renderer-type>
 		</component>
 		<attribute>
-			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
 			<name>accesskey</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -72,7 +72,7 @@
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -114,7 +114,7 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
 			<name>lang</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -204,7 +204,7 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
 			<name>role</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -222,7 +222,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying where the element is located in the tabbing progression.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -257,7 +257,7 @@
 			<renderer-type>com.liferay.faces.alloy.component.commandbutton.CommandButtonRenderer</renderer-type>
 		</component>
 		<attribute>
-			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
 			<name>accesskey</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -295,7 +295,7 @@
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -331,7 +331,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
 			<name>lang</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -433,7 +433,7 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
 			<name>role</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -451,7 +451,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying where the element is located in the tabbing progression.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -533,7 +533,7 @@
 			<renderer-type>com.liferay.faces.alloy.component.inputdate.InputDateRenderer</renderer-type>
 		</component>
 		<attribute>
-			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
 			<name>accesskey</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -575,7 +575,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -605,7 +605,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
 			<name>lang</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -623,7 +623,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the maximum length of characters allowd in this element.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the maximum length of characters allowed in the element.]]></description>
 			<name>maxlength</name>
 			<required>false</required>
 			<type>int</type>
@@ -749,7 +749,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
 			<name>role</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -761,7 +761,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the visual length of this element.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the visual length of the element.]]></description>
 			<name>size</name>
 			<required>false</required>
 			<type>int</type>
@@ -779,7 +779,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying where the element is located in the tabbing progression.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1045,7 +1045,7 @@
 			<renderer-type>com.liferay.faces.alloy.component.inputtext.InputTextRenderer</renderer-type>
 		</component>
 		<attribute>
-			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
 			<name>accesskey</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1081,7 +1081,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1111,13 +1111,13 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
 			<name>lang</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the maximum length of characters allowd in this element.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the maximum length of characters allowed in the element.]]></description>
 			<name>maxlength</name>
 			<required>false</required>
 			<type>int</type>
@@ -1231,13 +1231,13 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
 			<name>role</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the visual length of this element.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the visual length of the element.]]></description>
 			<name>size</name>
 			<required>false</required>
 			<type>int</type>
@@ -1255,7 +1255,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying where the element is located in the tabbing progression.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1304,7 +1304,7 @@
 			<renderer-type>com.liferay.faces.alloy.component.inputtextarea.InputTextareaRenderer</renderer-type>
 		</component>
 		<attribute>
-			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
 			<name>accesskey</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1334,7 +1334,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1364,13 +1364,13 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
 			<name>lang</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the maximum length of characters allowd in this element.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the maximum length of characters allowed in the element.]]></description>
 			<name>maxlength</name>
 			<required>false</required>
 			<type>int</type>
@@ -1484,7 +1484,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
 			<name>role</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1508,7 +1508,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying where the element is located in the tabbing progression.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1581,7 +1581,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1611,7 +1611,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
 			<name>lang</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1641,7 +1641,7 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
 			<name>role</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1694,7 +1694,7 @@
 			<type>javax.faces.convert.Converter</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1712,7 +1712,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
 			<name>lang</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1724,7 +1724,7 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
 			<name>role</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2039,7 +2039,7 @@
 			<renderer-type>com.liferay.faces.alloy.component.selectoneradio.SelectOneRadioRenderer</renderer-type>
 		</component>
 		<attribute>
-			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
 			<name>accesskey</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2069,7 +2069,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2117,7 +2117,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
 			<name>lang</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2237,7 +2237,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
 			<name>role</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2255,7 +2255,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying where the element is located in the tabbing progression.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2304,7 +2304,7 @@
 			<renderer-type>com.liferay.faces.alloy.component.selectstarrating.SelectStarRatingRenderer</renderer-type>
 		</component>
 		<attribute>
-			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
 			<name>accesskey</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2376,7 +2376,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2448,7 +2448,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
 			<name>lang</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2574,7 +2574,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
 			<name>role</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2622,7 +2622,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying where the element is located in the tabbing progression.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2707,7 +2707,7 @@
 			<renderer-type>com.liferay.faces.alloy.component.selectthumbrating.SelectThumbRatingRenderer</renderer-type>
 		</component>
 		<attribute>
-			<description><![CDATA[A hot key character that makes it possible for the user to change focus to this component]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
 			<name>accesskey</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2779,7 +2779,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2851,7 +2851,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the language code used in this element.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
 			<name>lang</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2977,7 +2977,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
 			<name>role</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -3025,7 +3025,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying where the element is located in the tabbing progression.]]></description>
 			<name>tabindex</name>
 			<required>false</required>
 			<type>java.lang.String</type>
