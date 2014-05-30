@@ -27,12 +27,12 @@ import com.liferay.faces.util.component.Styleable;
 public abstract class ColumnBase extends UIColumn implements Styleable {
 
 	// Public Constants
-	private static final String OFFSET = "offset";
-	private static final String OFFSET_WIDTH = "offsetWidth";
-	private static final String SPAN = "span";
-	private static final String STYLE = "style";
-	private static final String STYLE_CLASS = "styleClass";
-	private static final String WIDTH = "width";
+	public static final String OFFSET = "offset";
+	public static final String OFFSET_WIDTH = "offsetWidth";
+	public static final String SPAN = "span";
+	public static final String STYLE = "style";
+	public static final String STYLE_CLASS = "styleClass";
+	public static final String WIDTH = "width";
 
 	public Integer getOffset() {
 		return (Integer) getStateHelper().eval(OFFSET, null);

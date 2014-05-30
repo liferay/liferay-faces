@@ -27,14 +27,14 @@ import com.liferay.faces.util.component.Styleable;
 public abstract class InputDateBase extends InputDateTimeBase implements Styleable {
 
 	// Public Constants
-	private static final String DATE_PATTERN = "datePattern";
-	private static final String LOCALE = "locale";
-	private static final String MAXIMUM_DATE = "maximumDate";
-	private static final String MINIMUM_DATE = "minimumDate";
-	private static final String PANES = "panes";
-	private static final String STYLE = "style";
-	private static final String STYLE_CLASS = "styleClass";
-	private static final String Z_INDEX = "zIndex";
+	public static final String DATE_PATTERN = "datePattern";
+	public static final String LOCALE = "locale";
+	public static final String MAXIMUM_DATE = "maximumDate";
+	public static final String MINIMUM_DATE = "minimumDate";
+	public static final String PANES = "panes";
+	public static final String STYLE = "style";
+	public static final String STYLE_CLASS = "styleClass";
+	public static final String Z_INDEX = "zIndex";
 
 	public String getDatePattern() {
 		return (String) getStateHelper().eval(DATE_PATTERN, null);
