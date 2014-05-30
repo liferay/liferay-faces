@@ -6,7 +6,7 @@
 	<ui:define name="col1">
 		<!-- Example 1: ActionListener execution when immediate is true -->
 		<h:form>
-			<showcase:example description="#{i18n['actionlistener-execution-when-immediate-is-true']}" number="2">
+			<showcase:example description="#{i18n['actionlistener-execution-when-immediate-is-true']}" number="1">
 				<h:messages globalOnly="true" styleClass="feedback" />
 				<alloy:commandButton actionListener="#{commandButtonBackingBean.actionListener}" immediate="true"
 					value="#{i18n['submit']}">
@@ -19,7 +19,7 @@
 	<ui:define name="col2">
 		<!-- Example 2: ActionListener execution when immediate is false (the default) -->
 		<h:form>
-			<showcase:example description="#{i18n['actionlistener-execution-when-immediate-is-false']}" number="1">
+			<showcase:example description="#{i18n['actionlistener-execution-when-immediate-is-false']}" number="2">
 				<h:messages globalOnly="true" styleClass="feedback" />
 				<alloy:commandButton actionListener="#{commandButtonBackingBean.actionListener}" value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
