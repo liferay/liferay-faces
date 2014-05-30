@@ -4,8 +4,8 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
         version="2.1">
    <tlib-version>3.2.5</tlib-version>
-   <short-name>aui-nongen</short-name>
-   <uri>http://liferay.com/faces/aui-nongen</uri>
+   <short-name>aui</short-name>
+   <uri>http://liferay.com/faces/aui</uri>
    <tag>
       <description>Renders a span element with CSS class name "aui-button-holder" that will be positioned by Alloy UI CSS.</description>
       <name>button-row</name>
