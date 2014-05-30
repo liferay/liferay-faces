@@ -4,12 +4,12 @@
 	template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
-		<!-- Example 1: ValueChangeListener execution when immediate is false (the default) -->
+		<!-- Example 1: ValueChangeListener execution when immediate is true -->
 		<h:form>
-			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-false']}"
+			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-true']}"
 				longDescription="true" number="1">
 				<h:messages globalOnly="true" styleClass="feedback" />
-				<alloy:inputText id="text" value="#{inputTextModelBean.text}"
+				<alloy:inputText id="text" immediate="true" value="#{inputTextModelBean.text}"
 					valueChangeListener="#{inputTextBackingBean.valueChangeListener}" />
 				<hr />
 				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
@@ -23,12 +23,12 @@
 	</ui:define>
 
 	<ui:define name="col2">
-		<!-- Example 1: ValueChangeListener execution when immediate is true -->
+		<!-- Example 2: ValueChangeListener execution when immediate is false (the default) -->
 		<h:form>
-			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-true']}"
-				longDescription="true" number="1">
+			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-false']}"
+				longDescription="true" number="2">
 				<h:messages globalOnly="true" styleClass="feedback" />
-				<alloy:inputText id="text" immediate="true" value="#{inputTextModelBean.text}"
+				<alloy:inputText id="text" value="#{inputTextModelBean.text}"
 					valueChangeListener="#{inputTextBackingBean.valueChangeListener}" />
 				<hr />
 				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
