@@ -30,7 +30,7 @@ import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
 public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRendererBase {
 
 	// Private Constants
-	private static final String ALLOY_CLASS_NAME = "SelectStarRating";
+	private static final String ALLOY_CLASS_NAME = "Rating";
 	private static final String ALLOY_MODULE_NAME = "aui-rating";
 
 	// Protected Constants

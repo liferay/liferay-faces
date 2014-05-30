@@ -45,9 +45,6 @@ import com.liferay.faces.util.render.RendererUtil;
 public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 
 	// Private Constants
-	private static final String ALLOY_CLASS_NAME = "StarRating";
-
-	// Private Constants
 	private static final String FACES_RUNTIME_ONCLICK = "facesRuntimeOnClick";
 	private static final String SELECTED_INDEX = "selectedIndex";
 	private static final String DEFAULT_SELECTED_VALUE = "defaultSelectedValue";
@@ -270,11 +267,6 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 		// Finish the encoding of the outermost </span> element.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.endElement(StringPool.SPAN);
-	}
-
-	@Override
-	public String getAlloyClassName() {
-		return ALLOY_CLASS_NAME;
 	}
 
 	@Override
