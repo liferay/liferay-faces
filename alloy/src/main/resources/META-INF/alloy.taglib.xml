@@ -250,6 +250,71 @@
 		</tag-extension>
 	</tag>
 	<tag>
+		<description><![CDATA[Column is a UIColumn component that renders a div with CSS class name <code>span#</code> (for example: <code>span1</code> or <code>span5</code>).]]></description>
+		<tag-name>column</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.column.Column</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.column.ColumnRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The width that the column will be offset by as a unit from 1 to 12. This value is rendered as a CSS class as <code>offset#</code> (for example if offset="4", the CSS class rendered will be <code>offset4</code>). If both the offsetWidth and offset attributes are present, the offsetWidth attribute determines the value of the offset. Please consider using offsetWidth.]]></description>
+			<name>offset</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The width that the column will be offset by as a percent. This value selects the offset via the formula <code>offset = (offsetWidth/100)*12 (rounded to the nearest whole number)</code>. If both the offsetWidth and offset attributes are present, the offsetWidth attribute determines the value of the offset.]]></description>
+			<name>offsetWidth</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The width of this column as a unit from 1 to 12. This value is rendered as a CSS class as <code>span#</code> (for example if span="4", the CSS class rendered will be <code>span4</code>). If both the width and span attributes are present, the width attribute determines the value of the span number. Please consider using width.]]></description>
+			<name>span</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The width of the column as a percent. This value selects the span number via the formula <code>span = (width/100)*12 (rounded to the nearest whole number)</code>. If both the width and span attributes are present, the width attribute determines the value of the span number.]]></description>
+			<name>width</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
 		<description><![CDATA[CommandButton is a UICommand component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is submit. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlCommandButton.html" target="_blank"><code>HtmlCommandButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/commandButton.html" target="_blank"><code>h:commandButton</code></a>. The component must be a child of h:form in order to trigger the action or actionListener.]]></description>
 		<tag-name>commandButton</tag-name>
 		<component>
@@ -2026,6 +2091,53 @@
 			<name>zIndex</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[Row is a UIPanel component that renders a div with CSS class name <code>row-fluid</code>. <code>aui:row</code> takes <code><a href="http://docs.liferay.com/faces/4.2/vdldoc/aui/column.html" target="_blank">aui:column</a></code> tags as children in order to visually organize a page.]]></description>
+		<tag-name>row</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.row.Row</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.row.RowRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, the element will have the CSS class <code>row-fluid</code>. Otherwise, the element will have the CSS class <code>row</code>. The default value is true.]]></description>
+			<name>fluid</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
