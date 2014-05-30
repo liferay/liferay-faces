@@ -37,7 +37,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -246,7 +246,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -475,7 +475,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -522,7 +522,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -823,7 +823,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1034,7 +1034,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1293,7 +1293,7 @@
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1546,7 +1546,7 @@
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1671,7 +1671,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1754,7 +1754,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1861,7 +1861,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -2028,7 +2028,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -2293,7 +2293,7 @@
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -2696,7 +2696,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -3099,7 +3099,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -3146,7 +3146,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -3295,7 +3295,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
 		</tag-extension>
 	</tag>
 </facelet-taglib>
