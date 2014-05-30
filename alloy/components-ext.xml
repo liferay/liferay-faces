@@ -259,7 +259,7 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[A hot key character that makes it possible for the user to change focus to this component]]>
+					<![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]>
 				</description>
 				<name>accesskey</name>
 				<type>java.lang.String</type>
@@ -267,7 +267,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[An integer designating the position in the tabbing order for this component among others, if any.]]>
+					<![CDATA[HTML passthrough attribute specifying where the element is located in the tabbing progression.]]>
 				</description>
 				<name>tabindex</name>
 				<type>java.lang.String</type>
@@ -423,7 +423,7 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[Designates the reading direction for the attribute. For example, right to left (RTL), or left to right (LTR).]]>
+					<![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]>
 				</description>
 				<name>dir</name>
 				<type>java.lang.String</type>
@@ -431,7 +431,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[HTML passthrough attribute specifying the language code used in this element.]]>
+					<![CDATA[HTML passthrough attribute specifying the language code used in the element.]]>
 				</description>
 				<name>lang</name>
 				<type>java.lang.String</type>
@@ -439,7 +439,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[A list of tokens separated by spaces that specify the various WAI-ARIA roles that this component is used by.]]>
+					<![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]>
 				</description>
 				<name>role</name>
 				<type>java.lang.String</type>
@@ -506,7 +506,7 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[HTML passthrough attribute specifying the maximum length of characters allowd in this element.]]>
+					<![CDATA[HTML passthrough attribute specifying the maximum length of characters allowed in the element.]]>
 				</description>
 				<name>maxlength</name>
 				<type>int</type>
@@ -737,7 +737,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[HTML passthrough attribute specifying the visual length of this element.]]>
+					<![CDATA[HTML passthrough attribute specifying the visual length of the element.]]>
 				</description>
 				<name>size</name>
 				<type>int</type>
