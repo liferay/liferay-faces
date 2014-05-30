@@ -57,7 +57,7 @@
 	</component>
 	<!-- /Interfaces -->
 	<!-- 2. JSF Custom Component Heirarchy -->
-	<component name="UICommand" extendsTags="UIComponentBase HTMLAccessibilityEvents" generateJava="false"
+	<component name="UICommand" extendsTags="HTMLAccessibilityEvents UIComponentBase" generateJava="false"
 		generateTaglibXML="false">
 		<attributes>
 			<attribute>
@@ -255,7 +255,8 @@
 	</component>
 	<!-- /JSF Custom Component Heirarchy -->
 	<!-- 3. HTML Component Heirarchy -->
-	<component name="HTMLAccessibility" extendsTags="HTMLCommonEvents HTMLPassthrough" generateJava="false" generateTaglibXML="false">
+	<component name="HTMLAccessibility" extendsTags="HTMLCommonEvents HTMLPassthrough" generateJava="false"
+		generateTaglibXML="false">
 		<attributes>
 			<attribute>
 				<description>
@@ -296,7 +297,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="HTMLCommonEvents" extendsTags="UIComponentBase Styleable" generateJava="false" generateTaglibXML="false">
+	<component name="HTMLCommonEvents" extendsTags="Styleable UIComponentBase" generateJava="false"
+		generateTaglibXML="false">
 		<attributes>
 			<attribute>
 				<description>
@@ -418,7 +420,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="HTMLPassthrough" extendsTags="UIComponentBase Styleable" generateJava="false"
+	<component name="HTMLPassthrough" extendsTags="Styleable UIComponentBase" generateJava="false"
 		generateTaglibXML="false">
 		<attributes>
 			<attribute>
@@ -457,7 +459,8 @@
 	</component>
 	<!-- /HTML Component Heirarchy -->
 	<!-- 4. Common -->
-	<component name="ButtonCommon" extendsTags="UIComponentBase" generateJava="false" generateTaglibXML="false">
+	<component name="ButtonCommon" extendsTags="Styleable UIComponentBase" generateJava="false"
+		generateTaglibXML="false">
 		<attributes>
 			<attribute>
 				<description>
@@ -517,7 +520,7 @@
 	<!-- /Common -->
 	<!-- generateTaglibXML="false" tags for common attributes -->
 	<component name="Body" extendsTags="Styleable" generateJava="false" />
-	<component name="Button" extendsTags="ButtonCommon UIOutcomeTarget Styleable"
+	<component name="Button" extendsTags="ButtonCommon UIOutcomeTarget"
 		parentClass="javax.faces.component.html.HtmlOutcomeTargetButton">
 		<description>
 			<![CDATA[Button is a UIOutput component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is button. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutcomeTargetButton.html" target="_blank"><code>HtmlOutcomeTargetButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/button.html" target="_blank"><code>h:button</code></a>. The component does not need to be a child of h:form since the outcome attribute is designed to navigate via HTTP GET.]]>
@@ -566,7 +569,7 @@
 			<!-- /h:button attributes -->
 		</attributes>
 	</component>
-	<component name="CommandButton" extendsTags="ButtonCommon UICommand Styleable" generateJava="false"
+	<component name="CommandButton" extendsTags="ButtonCommon UICommand" generateJava="false"
 		rendererParentClass="com.liferay.faces.alloy.component.button.ButtonRenderer">
 		<description>
 			<![CDATA[CommandButton is a UICommand component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is submit. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlCommandButton.html" target="_blank"><code>HtmlCommandButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/commandButton.html" target="_blank"><code>h:commandButton</code></a>. The component must be a child of h:form in order to trigger the action or actionListener.]]>
@@ -615,7 +618,7 @@
 			<!-- /h:commandButton attributes -->
 		</attributes>
 	</component>
-	<component name="Icon" extendsTags="UIComponentBase Styleable">
+	<component name="Icon" extendsTags="Styleable UIComponentBase">
 		<description>
 			<![CDATA[Icon is a component that renders a span which contains an icon specified by the name attribute.]]>
 		</description>
@@ -690,7 +693,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component preferredName="InputSourceCode" name="AceEditor" extendsTags="ClientComponent UIInput Styleable"
+	<component preferredName="InputSourceCode" name="AceEditor" extendsTags="ClientComponent Styleable UIInput"
 		parentClass="javax.faces.component.html.HtmlInputText"
 		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase">
 		<description>
@@ -813,7 +816,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="OutputText" extendsTags="HTMLPassthrough UIOutput Styleable" generateJava="false">
+	<component name="OutputText" extendsTags="HTMLPassthrough UIOutput" generateJava="false">
 		<description>
 			<![CDATA[OuputText is an <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutputText.html" target="_blank"><code>HtmlOutputText</code></a> component that delegates rendering to its JSF renderer.]]>
 		</description>
@@ -845,7 +848,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component preferredName="PickDate" name="DatePicker" extendsTags="ClientComponent UIComponentBase Styleable">
+	<component preferredName="PickDate" name="DatePicker" extendsTags="ClientComponent Styleable UIComponentBase">
 		<description>
 			<![CDATA[PickDate is a UIComponent that renders a popup a calendar with selectable dates.]]>
 		</description>
@@ -908,7 +911,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectOneRadio" extendsTags="HTMLAccessibilityEvents HTMLInputEvents Styleable"
+	<component name="SelectOneRadio" extendsTags="HTMLAccessibilityEvents HTMLInputEvents"
 		generateJava="false" parentClass="javax.faces.component.html.HtmlSelectOneRadio">
 		<description>
 		   <![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags.]]>
@@ -1021,7 +1024,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Tab" extendsTags="UIComponentBase Styleable" parentClass="javax.faces.component.UIColumn">
+	<component name="Tab" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIColumn">
 		<description>
 			<![CDATA[Tab is a panel component that renders nested/child tags as content within itself.]]>
 		</description>
@@ -1035,7 +1038,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="TabView" extendsTags="ClientComponent UIComponentBase Styleable"
+	<component name="TabView" extendsTags="ClientComponent Styleable UIComponentBase"
 		parentClass="javax.faces.component.UIData">
 		<description>
 			<![CDATA[TabView is an iterator component that renders tabs either statically or dynamically.]]>
