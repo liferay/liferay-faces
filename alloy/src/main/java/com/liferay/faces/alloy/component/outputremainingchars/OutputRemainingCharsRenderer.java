@@ -44,7 +44,6 @@ import com.liferay.faces.util.lang.StringPool;
 public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBase {
 
 	// Private Constants
-	private static final String ALLOY_CLASS_NAME = "CharCounter";
 	private static final String ALLOY_MAX_LENGTH_EVENT_NAME = "maxLength";
 
 	@Override
@@ -185,11 +184,6 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 				}
 			}
 		}
-	}
-
-	@Override
-	public String getAlloyClassName() {
-		return ALLOY_CLASS_NAME;
 	}
 
 	@Override

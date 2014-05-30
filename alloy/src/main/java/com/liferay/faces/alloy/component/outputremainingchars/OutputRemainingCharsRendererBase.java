@@ -30,7 +30,7 @@ import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
 public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRendererBase {
 
 	// Private Constants
-	private static final String ALLOY_CLASS_NAME = "OutputRemainingChars";
+	private static final String ALLOY_CLASS_NAME = "CharCounter";
 	private static final String ALLOY_MODULE_NAME = "aui-char-counter";
 
 	// Protected Constants
