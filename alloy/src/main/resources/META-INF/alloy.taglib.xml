@@ -2097,7 +2097,7 @@
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[Row is a UIPanel component that renders a div with CSS class name <code>row-fluid</code>. <code>aui:row</code> takes <code><a href="http://docs.liferay.com/faces/4.2/vdldoc/aui/column.html" target="_blank">aui:column</a></code> tags as children in order to visually organize a page.]]></description>
+		<description><![CDATA[Row is a UIPanel component that renders a <div> and is designed to be used in conjunction with alloy:column child component tags.]]></description>
 		<tag-name>row</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.row.Row</component-type>
