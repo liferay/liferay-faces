@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:aui="http://liferay.com/faces/aui"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	<aui:row>
-		<aui:col width="20">
+	<alloy:row>
+		<alloy:column width="20">
 			<aui:list>
 				<ui:repeat value="#{listModelBean.showcaseComponents}" var="showcaseComponent">
 					<aui:list-item>
@@ -22,9 +23,9 @@
 					</aui:list-item>
 				</ui:repeat>
 			</aui:list>
-		</aui:col>
-		<aui:col width="80">
+		</alloy:column>
+		<alloy:column width="80">
 			<ui:insert name="content" />
-		</aui:col>
-	</aui:row>
+		</alloy:column>
+	</alloy:row>
 </ui:composition>
