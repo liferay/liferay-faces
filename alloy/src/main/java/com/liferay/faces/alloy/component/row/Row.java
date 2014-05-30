@@ -26,7 +26,6 @@ public class Row extends RowBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.row.Row";
-	public static final String FLUID = "fluid";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.row.RowRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-row";
 
