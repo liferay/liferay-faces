@@ -185,7 +185,6 @@ public class ButtonRenderer extends ButtonRendererCompat {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.endElement(FacesButton.BUTTON);
-		super.encodeEnd(facesContext, uiComponent);
 	}
 
 	@Override
