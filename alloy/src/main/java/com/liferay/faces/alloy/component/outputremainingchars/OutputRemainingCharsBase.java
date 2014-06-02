@@ -96,5 +96,25 @@ public abstract class OutputRemainingCharsBase extends OutputText implements Sty
 	public void setOnMaxlengthReached(String onMaxlengthReached) {
 		getStateHelper().put(ON_MAXLENGTH_REACHED, onMaxlengthReached);
 	}
+
+	@Override
+	public String getStyle() {
+		return (String) getStateHelper().eval(STYLE, null);
+	}
+
+	@Override
+	public void setStyle(String style) {
+		getStateHelper().put(STYLE, style);
+	}
+
+	@Override
+	public String getStyleClass() {
+		return (String) getStateHelper().eval(STYLE_CLASS, null);
+	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(STYLE_CLASS, styleClass);
+	}
 }
 //J+

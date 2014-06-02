@@ -45,4 +45,9 @@ public class InputTextarea extends HtmlInputTextarea implements Styleable {
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(STYLE_CLASS, styleClass);
+	}
 }

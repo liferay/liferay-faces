@@ -158,6 +158,11 @@
 		</attributes>
 	</component>
 	<component name="Styleable" generateJava="false" generateTaglibXML="false">
+		<!-- This component does not have <generateJava>false</generateJava> on its attributes for 2 reasons -->
+		<!-- 1. style and styleClass are not inherited for all components. -->
+		<!-- 2. If either getStyleClass() or setStyleClass() are overridden, the other method must be overridden as -->
+		<!-- as well, so that they will have the same key in the stateHelper. Since getStyleClass() is currently -->
+		<!-- overridden in all components, setStyleClass() must also be overridden. -->
 		<attributes>
 			<attribute>
 				<description>
@@ -175,28 +180,6 @@
 				<name>styleClass</name>
 				<type>java.lang.String</type>
 				<javaScript>false</javaScript>
-				<outputUnsafe>true</outputUnsafe>
-			</attribute>
-		</attributes>
-	</component>
-	<component name="StyleableInherited" generateJava="false" generateTaglibXML="false">
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[HTML passthrough attribute specifying the css style of the element.]]>
-				</description>
-				<name>style</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-				<outputUnsafe>true</outputUnsafe>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]>
-				</description>
-				<name>styleClass</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
 				<outputUnsafe>true</outputUnsafe>
 			</attribute>
 		</attributes>
@@ -443,7 +426,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="HTMLCommonEvents" extendsTags="StyleableInherited UIComponentBase" generateJava="false"
+	<component name="HTMLCommonEvents" extendsTags="Styleable UIComponentBase" generateJava="false"
 		generateTaglibXML="false">
 		<attributes>
 			<attribute>
@@ -566,7 +549,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="HTMLPassthrough" extendsTags="StyleableInherited UIComponentBase" generateJava="false"
+	<component name="HTMLPassthrough" extendsTags="Styleable UIComponentBase" generateJava="false"
 		generateTaglibXML="false">
 		<attributes>
 			<attribute>
@@ -605,7 +588,7 @@
 	</component>
 	<!-- /HTML Component Heirarchy -->
 	<!-- 4. Common -->
-	<component name="ButtonCommon" extendsTags="StyleableInherited UIComponentBase" generateJava="false"
+	<component name="ButtonCommon" extendsTags="Styleable UIComponentBase" generateJava="false"
 		generateTaglibXML="false">
 		<attributes>
 			<attribute>
@@ -650,7 +633,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputTextCommon" extendsTags="HTMLAccessibilityEvents HTMLInputEvents StyleableInherited"
+	<component name="InputTextCommon" extendsTags="HTMLAccessibilityEvents HTMLInputEvents Styleable"
 		generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
@@ -665,7 +648,7 @@
 	</component>
 	<!-- /Common -->
 	<!-- generateTaglibXML="false" tags for common attributes -->
-	<component name="Body" extendsTags="StyleableInherited" generateJava="false" />
+	<component name="Body" extendsTags="Styleable" generateJava="false" />
 	<component name="Button" extendsTags="ButtonCommon UIOutcomeTarget"
 		parentClass="javax.faces.component.html.HtmlOutcomeTargetButton">
 		<description>
