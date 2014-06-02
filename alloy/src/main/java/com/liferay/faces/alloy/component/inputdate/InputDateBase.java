@@ -32,6 +32,8 @@ public abstract class InputDateBase extends InputDateTimeBase implements Styleab
 	public static final String MAXIMUM_DATE = "maximumDate";
 	public static final String MINIMUM_DATE = "minimumDate";
 	public static final String PANES = "panes";
+	public static final String STYLE = "style";
+	public static final String STYLE_CLASS = "styleClass";
 	public static final String Z_INDEX = "zIndex";
 
 	public String getDatePattern() {
@@ -72,6 +74,22 @@ public abstract class InputDateBase extends InputDateTimeBase implements Styleab
 
 	public void setPanes(Object panes) {
 		getStateHelper().put(PANES, panes);
+	}
+
+	public String getStyle() {
+		return (String) getStateHelper().eval(STYLE, null);
+	}
+
+	public void setStyle(String style) {
+		getStateHelper().put(STYLE, style);
+	}
+
+	public String getStyleClass() {
+		return (String) getStateHelper().eval(STYLE_CLASS, null);
+	}
+
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 
 	public Object getzIndex() {

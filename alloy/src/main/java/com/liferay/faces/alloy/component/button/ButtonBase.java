@@ -28,6 +28,8 @@ public abstract class ButtonBase extends HtmlOutcomeTargetButton implements Styl
 
 	// Public Constants
 	public static final String AUTOFOCUS = "autofocus";
+	public static final String STYLE = "style";
+	public static final String STYLE_CLASS = "styleClass";
 	public static final String TYPE = "type";
 
 	public Boolean isAutofocus() {
@@ -36,6 +38,22 @@ public abstract class ButtonBase extends HtmlOutcomeTargetButton implements Styl
 
 	public void setAutofocus(Boolean autofocus) {
 		getStateHelper().put(AUTOFOCUS, autofocus);
+	}
+
+	public String getStyle() {
+		return (String) getStateHelper().eval(STYLE, null);
+	}
+
+	public void setStyle(String style) {
+		getStateHelper().put(STYLE, style);
+	}
+
+	public String getStyleClass() {
+		return (String) getStateHelper().eval(STYLE_CLASS, null);
+	}
+
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 
 	public String getType() {
