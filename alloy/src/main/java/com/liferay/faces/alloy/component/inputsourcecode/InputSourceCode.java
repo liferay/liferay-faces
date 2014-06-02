@@ -30,8 +30,9 @@ public class InputSourceCode extends InputSourceCodeBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputsourcecode.InputSourceCode";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Text";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputsourcecode.InputSourceCodeRenderer";
-	public static final String STYLE_CLASS_NAME = "input-source-code";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.alloy.component.inputsourcecode.InputSourceCodeRenderer";
+	public static final String STYLE_CLASS_NAME = "alloy-input-source-code";
 
 	public InputSourceCode() {
 		super();
@@ -60,15 +61,8 @@ public class InputSourceCode extends InputSourceCodeBase {
 	@Override
 	public String getStyleClass() {
 
-		String styleClass = super.getStyleClass();
+		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
-		if (styleClass == null) {
-			styleClass = STYLE_CLASS_NAME;
-		}
-		else {
-			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
-		}
-
-		return styleClass;
+		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }
