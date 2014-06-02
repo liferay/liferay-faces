@@ -45,4 +45,9 @@ public class PanelGroup extends HtmlPanelGroup implements Styleable {
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
+
+	@Override
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put(STYLE_CLASS, styleClass);
+	}
 }
