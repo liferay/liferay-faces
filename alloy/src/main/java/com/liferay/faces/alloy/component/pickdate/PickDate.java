@@ -34,7 +34,7 @@ public class PickDate extends PickDateBase {
 	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.pickdate";
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.pickdate.PickDate";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.pickdate.PickDateRenderer";
-	public static final String STYLE_CLASS_NAME = "pick-date";
+	public static final String STYLE_CLASS_NAME = "alloy-pick-date";
 
 	// Private Constants
 	private static final String DATE_CLICK = "dateClick";
@@ -257,7 +257,8 @@ public class PickDate extends PickDateBase {
 	public String getPopoverCssClass() {
 
 		String popoverCssClass = super.getPopoverCssClass();
-		popoverCssClass = ComponentUtil.concatAllCssClasses(this, popoverCssClass);
+		String styleClass = getStyleClass();
+		popoverCssClass = ComponentUtil.concatCssClasses(styleClass, popoverCssClass);
 
 		return popoverCssClass;
 	}
@@ -265,15 +266,8 @@ public class PickDate extends PickDateBase {
 	@Override
 	public String getStyleClass() {
 
-		String styleClass = super.getStyleClass();
+		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
-		if (styleClass == null) {
-			styleClass = STYLE_CLASS_NAME;
-		}
-		else {
-			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
-		}
-
-		return styleClass;
+		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }

@@ -16,21 +16,22 @@ package com.liferay.faces.alloy.component.outputtext;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.html.HtmlOutputText;
 
-import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.component.Styleable;
 
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = OutputText.COMPONENT_TYPE)
-public class OutputText extends HtmlOutputText {
+public class OutputText extends HtmlOutputText implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputtext.OutputText";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Text";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputtext.OutputTextRenderer";
-	public static final String STYLE_CLASS_NAME = "output-text";
+	public static final String STYLE_CLASS_NAME = "alloy-output-text";
 
 	public OutputText() {
 		super();
@@ -40,15 +41,8 @@ public class OutputText extends HtmlOutputText {
 	@Override
 	public String getStyleClass() {
 
-		String styleClass = super.getStyleClass();
+		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
-		if (styleClass == null) {
-			styleClass = STYLE_CLASS_NAME;
-		}
-		else {
-			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
-		}
-
-		return styleClass;
+		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }

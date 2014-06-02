@@ -18,8 +18,8 @@ import javax.faces.component.html.HtmlCommandButton;
 
 import com.liferay.faces.alloy.component.button.FacesButton;
 import com.liferay.faces.alloy.component.button.HTML5Button;
+import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -32,7 +32,7 @@ public class CommandButton extends HtmlCommandButton implements FacesButton, HTM
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.commandbutton.CommandButton";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.commandbutton.CommandButtonRenderer";
-	public static final String STYLE_CLASS_NAME = "command-button";
+	public static final String STYLE_CLASS_NAME = "alloy-command-button";
 
 	public CommandButton() {
 		super();
@@ -52,15 +52,8 @@ public class CommandButton extends HtmlCommandButton implements FacesButton, HTM
 	@Override
 	public String getStyleClass() {
 
-		String styleClass = super.getStyleClass();
+		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
-		if (styleClass == null) {
-			styleClass = STYLE_CLASS_NAME;
-		}
-		else {
-			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
-		}
-
-		return styleClass;
+		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }

@@ -208,26 +208,6 @@ public abstract class SelectStarRatingBase extends SelectOneRadio implements Sty
 	}
 
 	@Override
-	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
-	}
-
-	@Override
-	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
-	}
-
-	@Override
-	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
-	}
-
-	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
-	}
-
-	@Override
 	public Object getTabIndex() {
 		return (Object) getStateHelper().eval(TAB_INDEX, null);
 	}
