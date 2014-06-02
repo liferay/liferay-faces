@@ -19,16 +19,18 @@ import javax.faces.context.FacesContext;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
+
 /**
- * @author Vernon Singleton
+ * @author  Vernon Singleton
  */
 @FacesComponent(value = SelectStarRating.COMPONENT_TYPE)
 public class SelectStarRating extends SelectStarRatingBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectstarrating.SelectStarRating";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectstarrating.SelectStarRatingRenderer";
-	public static final String STYLE_CLASS_NAME = "select-star-rating";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.alloy.component.selectstarrating.SelectStarRatingRenderer";
+	public static final String STYLE_CLASS_NAME = "alloy-select-star-rating";
 
 	public SelectStarRating() {
 		super();
@@ -61,8 +63,7 @@ public class SelectStarRating extends SelectStarRatingBase {
 		String boundingBox = super.getBoundingBox();
 
 		if (boundingBox == null) {
-			boundingBox = StringPool.POUND
-					+ ComponentUtil.escapeClientId(getClientId());
+			boundingBox = StringPool.POUND + ComponentUtil.escapeClientId(getClientId());
 		}
 
 		return boundingBox;
@@ -76,15 +77,8 @@ public class SelectStarRating extends SelectStarRatingBase {
 	@Override
 	public String getStyleClass() {
 
-		String styleClass = super.getStyleClass();
+		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
-		if (styleClass == null) {
-			styleClass = STYLE_CLASS_NAME;
-		}
-		else {
-			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
-		}
-
-		return styleClass;
+		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }

@@ -69,23 +69,22 @@ public class ComponentUtil {
 		return value;
 	}
 
-	public static String concatAllCssClasses(Styleable styleable) {
-		return concatAllCssClasses(styleable, null);
-	}
-
-	public static String concatAllCssClasses(Styleable styleable, String classNames) {
+	public static String concatCssClasses(String... classNames) {
 
 		StringBuilder cssClassBuilder = new StringBuilder();
+		boolean first = true;
 
-		if ((classNames != null) && (classNames.length() > 0)) {
-			cssClassBuilder.append(classNames);
-		}
+		for (String className : classNames) {
 
-		String styleClass = styleable.getStyleClass();
+			if (className != null) {
 
-		if ((styleClass != null) && (styleClass.length() > 0)) {
-			cssClassBuilder.append(StringPool.SPACE);
-			cssClassBuilder.append(styleClass);
+				if (!first) {
+					cssClassBuilder.append(StringPool.SPACE);
+				}
+
+				cssClassBuilder.append(className);
+				first = false;
+			}
 		}
 
 		String allClasses = cssClassBuilder.toString();

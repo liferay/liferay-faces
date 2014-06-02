@@ -16,14 +16,15 @@ package com.liferay.faces.alloy.component.selectoneradio;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.html.HtmlSelectOneRadio;
 
-import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.component.Styleable;
 
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = SelectOneRadio.COMPONENT_TYPE)
-public class SelectOneRadio extends HtmlSelectOneRadio {
+public class SelectOneRadio extends HtmlSelectOneRadio implements Styleable {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio";
@@ -31,7 +32,7 @@ public class SelectOneRadio extends HtmlSelectOneRadio {
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Radio";
 	public static final String RENDERER_TYPE =
 		"com.liferay.faces.alloy.component.selectoneradio.SelectOneRadioRenderer";
-	public static final String STYLE_CLASS_NAME = "select-one-radio";
+	public static final String STYLE_CLASS_NAME = "alloy-select-one-radio";
 
 	public SelectOneRadio() {
 		super();
@@ -41,15 +42,8 @@ public class SelectOneRadio extends HtmlSelectOneRadio {
 	@Override
 	public String getStyleClass() {
 
-		String styleClass = super.getStyleClass();
+		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
-		if (styleClass == null) {
-			styleClass = STYLE_CLASS_NAME;
-		}
-		else {
-			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
-		}
-
-		return styleClass;
+		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }

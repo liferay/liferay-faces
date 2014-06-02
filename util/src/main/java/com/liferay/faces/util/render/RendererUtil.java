@@ -27,17 +27,25 @@ import com.liferay.faces.util.lang.StringPool;
  */
 public class RendererUtil {
 
-	public static void encodeStyleable(ResponseWriter responseWriter, Styleable styleable) throws IOException {
-		encodeStyleable(responseWriter, styleable, null);
-	}
-
-	public static void encodeStyleable(ResponseWriter responseWriter, Styleable styleable, String classNames)
+	public static void encodeStyleable(ResponseWriter responseWriter, Styleable styleable, String... classNames)
 		throws IOException {
 
-		String allCssClasses = ComponentUtil.concatAllCssClasses(styleable, classNames);
+		StringBuilder allCssClasses = new StringBuilder();
+		String cssClasses = ComponentUtil.concatCssClasses(classNames);
 
-		if (allCssClasses != null) {
-			responseWriter.writeAttribute(StringPool.CLASS, allCssClasses, Styleable.STYLE_CLASS);
+		if (cssClasses != null) {
+			allCssClasses.append(cssClasses);
+			allCssClasses.append(StringPool.SPACE);
+		}
+
+		String styleClass = styleable.getStyleClass();
+
+		if (styleClass != null) {
+			allCssClasses.append(styleClass);
+		}
+
+		if (allCssClasses.length() > 0) {
+			responseWriter.writeAttribute(StringPool.CLASS, allCssClasses.toString(), Styleable.STYLE_CLASS);
 		}
 
 		String style = styleable.getStyle();
