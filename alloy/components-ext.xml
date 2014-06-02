@@ -46,7 +46,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]>
+					<![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]>
 				</description>
 				<name>styleClass</name>
 				<type>java.lang.String</type>
@@ -988,7 +988,7 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[__DESCRIPTION__]]>
+					<![CDATA[The width of the table border (measured in pixels).]]>
 				</description>
 				<name>border</name>
 				<type>int</type>

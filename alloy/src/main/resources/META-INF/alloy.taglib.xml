@@ -299,7 +299,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -581,7 +581,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1019,7 +1019,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2063,7 +2063,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2134,7 +2134,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2163,7 +2163,7 @@
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[__DESCRIPTION__]]></description>
+			<description><![CDATA[The width of the table border (measured in pixels).]]></description>
 			<name>border</name>
 			<required>false</required>
 			<type>int</type>
@@ -2428,7 +2428,7 @@
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[__DESCRIPTION__]]></description>
+			<description><![CDATA[The width of the table border (measured in pixels).]]></description>
 			<name>border</name>
 			<required>false</required>
 			<type>int</type>
@@ -2831,7 +2831,7 @@
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[__DESCRIPTION__]]></description>
+			<description><![CDATA[The width of the table border (measured in pixels).]]></description>
 			<name>border</name>
 			<required>false</required>
 			<type>int</type>
@@ -3252,7 +3252,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -3353,7 +3353,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The name of a CSS class that is to be rendered within the class attribute.]]></description>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
