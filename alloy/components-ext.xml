@@ -823,6 +823,30 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="Field" extendsTags="PanelGroup"
+		parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroup"
+		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupRenderer">
+		<description>
+			<![CDATA[Field is a UIPanel component that renders a <div> element and a <label> element in order to wrap a field. Since it extends PanelGroup, it supports all the features of aui:panelGroup.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The text value for the rendered &lt;label&gt; element.]]>
+				</description>
+				<name>label</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies whether the HTML element rendered by this component will be a <code>div</code> (default) or a <code>span</code>. If the value of this attribute is <code>block</code>, the rendered element will be a <code>div</code>.]]>
+				</description>
+				<name>layout</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="Icon" extendsTags="Styleable UIComponentBase">
 		<description>
 			<![CDATA[Icon is a component that renders a span which contains an icon specified by the name attribute.]]>
