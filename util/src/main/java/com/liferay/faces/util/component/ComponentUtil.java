@@ -69,22 +69,31 @@ public class ComponentUtil {
 		return value;
 	}
 
-	public static String concatAllCssClasses(Styleable styleable, String classNames) {
+	public static String concatCssClasses(String... classNames) {
 
-		StringBuilder allClasses = new StringBuilder();
+		StringBuilder cssClassBuilder = new StringBuilder();
+		boolean first = true;
 
-		if ((classNames != null) && (classNames.length() > 0)) {
-			allClasses.append(classNames);
+		for (String className : classNames) {
+
+			if (className != null) {
+
+				if (!first) {
+					cssClassBuilder.append(StringPool.SPACE);
+				}
+
+				cssClassBuilder.append(className);
+				first = false;
+			}
 		}
 
-		String styleClass = styleable.getStyleClass();
+		String allClasses = cssClassBuilder.toString();
 
-		if ((styleClass != null) && (styleClass.length() > 0)) {
-			allClasses.append(StringPool.SPACE);
-			allClasses.append(styleClass);
+		if (allClasses.length() == 0) {
+			allClasses = null;
 		}
 
-		return allClasses.toString();
+		return allClasses;
 	}
 
 	public static Object convertSubmittedValue(FacesContext facesContext, ValueHolder valueHolder,
