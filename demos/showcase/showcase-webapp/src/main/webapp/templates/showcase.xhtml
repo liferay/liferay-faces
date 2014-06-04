@@ -1,31 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:aui="http://liferay.com/faces/aui"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:aui="http://liferay.com/faces/aui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<c:set value="#{showcaseModelBean.selectedComponent}" var="selectedComponent" />
+	<c:set value="#{selectedComponent.key}" var="selectedComponentKey" />
+	<c:set value="#{selectedComponent.useCaseName}" var="selectedComponentUseCaseName" />
+	<c:set value="#{selectedComponent.useCases.size()}" var="totalUseCases" />
 	<alloy:row>
 		<alloy:column width="20">
-			<aui:list>
-				<ui:repeat value="#{listModelBean.showcaseComponents}" var="showcaseComponent">
-					<aui:list-item>
-						<h:outputText value="#{showcaseComponent}" />
-						<aui:list>
-							<ui:repeat value="#{showcaseComponent.useCases}" var="useCase">
-								<aui:list-item>
-									<h:link value="#{i18n[useCase.name]}">
-										<f:param name="componentPrefix" value="#{showcaseComponent.prefix}" />
-										<f:param name="componentName" value="#{showcaseComponent.lowerCaseName}" />
-										<f:param name="componentUseCase" value="#{useCase.name}" />
-									</h:link>
-								</aui:list-item>
-							</ui:repeat>
-						</aui:list>
-					</aui:list-item>
-				</ui:repeat>
-			</aui:list>
+			<alloy:panelGroup layout="block" styleClass="showcase-container">
+				<aui:list styleClass="nav nav-list">
+					<ui:repeat value="#{listModelBean.showcaseComponents}" var="showcaseComponent">
+						<aui:list-item class="#{(selectedComponentKey == showcaseComponent.key) ? 'active' : ''}">
+							<h:link value="#{showcaseComponent}">
+								<f:param name="componentPrefix" value="#{showcaseComponent.prefix}" />
+								<f:param name="componentName" value="#{showcaseComponent.lowerCaseName}" />
+								<f:param name="componentUseCase" value="general" />
+								<i class="icon-chevron-right" />
+							</h:link>
+							<ui:fragment rendered="#{selectedComponentKey == showcaseComponent.key and (totalUseCases > 1)}">
+								<aui:list class="nav nav-list">
+									<ui:repeat value="#{selectedComponent.useCases}" var="useCase">
+										<aui:list-item class="#{(selectedComponentUseCaseName == useCase.name) ? 'active' : ''}"
+											style="white-space: nowrap;">
+											<h:link value="#{i18n[useCase.name]}">
+												<f:param name="componentPrefix" value="#{selectedComponent.prefix}" />
+												<f:param name="componentName" value="#{selectedComponent.lowerCaseName}" />
+												<f:param name="componentUseCase" value="#{useCase.name}" />
+												<i class="icon-chevron-right" />
+											</h:link>
+										</aui:list-item>
+									</ui:repeat>
+								</aui:list>
+							</ui:fragment>
+						</aui:list-item>
+					</ui:repeat>
+				</aui:list>
+			</alloy:panelGroup>
 		</alloy:column>
 		<alloy:column width="80">
-			<ui:insert name="content" />
+			<alloy:panelGroup layout="block" styleClass="showcase-container">
+				<ui:insert name="content" />
+			</alloy:panelGroup>
 		</alloy:column>
 	</alloy:row>
 </ui:composition>

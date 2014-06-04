@@ -34,6 +34,7 @@ import javax.faces.context.FacesContext;
 import com.liferay.faces.demos.dto.CodeExample;
 import com.liferay.faces.demos.dto.ShowcaseComponent;
 import com.liferay.faces.demos.dto.ShowcaseComponentComparator;
+import com.liferay.faces.demos.dto.ShowcaseComponentImpl;
 import com.liferay.faces.demos.dto.UseCase;
 import com.liferay.faces.demos.util.CodeExampleUtil;
 import com.liferay.faces.util.lang.StringPool;
@@ -174,7 +175,7 @@ public class ListModelBean {
 							useCases.add(useCase);
 						}
 
-						ShowcaseComponent showcaseComponent = new ShowcaseComponent(prefix, camelCaseName,
+						ShowcaseComponent showcaseComponent = new ShowcaseComponentImpl(prefix, camelCaseName,
 								lowerCaseName, useCases);
 						String lookupKey = prefix + StringPool.UNDERLINE + lowerCaseName;
 						this.showcaseComponentMap.put(lookupKey, showcaseComponent);
