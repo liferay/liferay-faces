@@ -646,6 +646,98 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="MessageCommon" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[CSS class name that is to be appended to the value of the rendered class attribute when the severity of a FacesMessage is FacesMessage.Severity.ERROR.]]>
+				</description>
+				<name>errorClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[CSS style that is to be appended to the value of the rendered style attribute when the severity of a FacesMessage is FacesMessage.Severity.ERROR.]]>
+				</description>
+				<name>errorStyle</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[CSS class name that is to be appended to the value of the rendered class attribute when the severity of a FacesMessage is FacesMessage.Severity.FATAL.]]>
+				</description>
+				<name>fatalClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[CSS style that is to be appended to the value of the rendered style attribute when the severity of a FacesMessage is FacesMessage.Severity.FATAL.]]>
+				</description>
+				<name>fatalStyle</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[CSS class name that is to be appended to the value of the rendered class attribute when the severity of a FacesMessage is FacesMessage.Severity.INFO.]]>
+				</description>
+				<name>infoClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[CSS style that is to be appended to the value of the rendered style attribute when the severity of a FacesMessage is FacesMessage.Severity.INFO.]]>
+				</description>
+				<name>infoStyle</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+            		<![CDATA[When true, the value of FacesMessage.getDetail() is rendered. This is true by default.]]>
+				</description>
+				<name>showDetail</name>
+				<type>boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+            		<![CDATA[When true, the value of FacesMessage.getSummary() is rendered. This is true by default.]]>
+				</description>
+				<name>showSummary</name>
+				<type>boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+            		<![CDATA[When true, the value of FacesMessage.getDetail() rendered as a tooltip. This is false by default.]]>
+				</description>
+				<name>tooltip</name>
+				<type>boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[CSS class name that is to be appended to the value of the rendered class attribute when the severity of a FacesMessage is FacesMessage.Severity.WARN.]]>
+				</description>
+				<name>warnClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[CSS style that is to be appended to the value of the rendered style attribute when the severity of a FacesMessage is FacesMessage.Severity.WARN.]]>
+				</description>
+				<name>warnStyle</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<!-- /Common -->
 	<!-- generateTaglibXML="false" tags for common attributes -->
 	<component name="Body" extendsTags="Styleable" generateJava="false" />
@@ -1087,6 +1179,56 @@
 				</description>
 				<name>rows</name>
 				<type>int</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="Message" extendsTags="HTMLPassthrough Styleable UIComponentBase MessageCommon"
+		generateJava="true"	parentClass="javax.faces.component.html.HtmlMessage"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[Message is an UIMessage component that renders a renders a <code>&lt;span&gt;</code> element containing the text of a single FacesMessage for an associated component. Since it extends HtmlMessage, it supports all the features of h:message.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The id of the component for which to render an associated message.]]>
+				</description>
+				<name>for</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="Messages" extendsTags="HTMLPassthrough Styleable UIComponentBase MessageCommon"
+		generateJava="true"	parentClass="javax.faces.component.html.HtmlMessages"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[Messages is an UIMessage component that renders a renders the text of one or more FacesMessages. Since it extends HtmlMessages, it supports all the features of h:messages.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The id of the component for which to render associated message(s). This attribute takes precedence over the globalOnly attribute.]]>
+				</description>
+				<name>for</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+            		<![CDATA[When true, only the global FacesMessages (those that are not associated with a specific component) are displayed. This is false by default.]]>
+				</description>
+				<name>globalOnly</name>
+				<type>boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When 'table', an HTML table is rendered and each message appears in a separate table row. When 'list', an HTML unordered list is rendered and each message appears in a separate list item. The default value is 'list'.]]>
+				</description>
+				<name>layout</name>
+				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
 			</attribute>
 		</attributes>
