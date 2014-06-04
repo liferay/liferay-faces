@@ -58,6 +58,8 @@ public class StringPool {
 
 	public static final String DASH = "-";
 
+	public static final String DISABLED = "disabled";
+
 	public static final String DIV = "div";
 
 	public static final String DOLLAR = "$";
