@@ -21,6 +21,7 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.panelgroup.PanelGroupRenderer;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -28,6 +29,9 @@ import com.liferay.faces.alloy.component.panelgroup.PanelGroupRenderer;
  */
 @FacesRenderer(componentFamily = Field.COMPONENT_FAMILY, rendererType = Field.RENDERER_TYPE)
 public class FieldRenderer extends PanelGroupRenderer {
+
+	// Private Constants
+	private static final String CONTROL_LABEL = "control-label";
 
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -37,7 +41,9 @@ public class FieldRenderer extends PanelGroupRenderer {
 		String label = field.getLabel();
 
 		if (label != null) {
+
 			responseWriter.startElement(Field.LABEL, uiComponent);
+			responseWriter.writeAttribute(StringPool.CLASS, CONTROL_LABEL, null);
 			responseWriter.writeText(label, Field.LABEL);
 			responseWriter.endElement(Field.LABEL);
 		}

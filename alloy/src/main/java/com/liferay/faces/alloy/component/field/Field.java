@@ -13,9 +13,17 @@
  */
 package com.liferay.faces.alloy.component.field;
 
+import java.util.Iterator;
+import java.util.List;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.component.EditableValueHolder;
 import javax.faces.component.FacesComponent;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -32,11 +40,69 @@ public class Field extends FieldBase {
 	// Private Constants
 	private static final String BLOCK = "block";
 	private static final String CONTROL_GROUP = "control-group";
+	private static final String ERROR = "error";
+	private static final String INFO = "info";
 	private static final String LAYOUT = "layout";
+	private static final String WARNING = "warning";
 
 	public Field() {
 		super();
 		setRendererType(RENDERER_TYPE);
+	}
+
+	protected FacesMessage.Severity getHighestSeverityRecurse(UIComponent uiComponent) {
+		return getHighestSeverityRecurse(uiComponent, null);
+	}
+
+	protected FacesMessage.Severity getHighestSeverityRecurse(UIComponent uiComponent, FacesMessage.Severity severity) {
+
+		if (uiComponent.getChildCount() > 0) {
+
+			List<UIComponent> children = uiComponent.getChildren();
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+
+			for (UIComponent child : children) {
+
+				if (child instanceof EditableValueHolder) {
+
+					EditableValueHolder editableValueHolder = (EditableValueHolder) child;
+
+					if (!editableValueHolder.isValid()) {
+						severity = FacesMessage.SEVERITY_FATAL;
+
+						break;
+					}
+				}
+
+				Iterator<FacesMessage> messages = facesContext.getMessages(child.getClientId());
+
+				while (messages.hasNext()) {
+
+					FacesMessage facesMessage = messages.next();
+					FacesMessage.Severity currentSeverity = facesMessage.getSeverity();
+
+					if ((currentSeverity == FacesMessage.SEVERITY_ERROR) ||
+							(currentSeverity == FacesMessage.SEVERITY_FATAL)) {
+
+						severity = FacesMessage.SEVERITY_FATAL;
+
+						break;
+					}
+					else if ((severity == null) || (severity.getOrdinal() < currentSeverity.getOrdinal())) {
+						severity = currentSeverity;
+					}
+				}
+
+				if ((severity != null) && (severity == FacesMessage.SEVERITY_FATAL)) {
+					break;
+				}
+				else {
+					severity = getHighestSeverityRecurse(child, severity);
+				}
+			}
+		}
+
+		return severity;
 	}
 
 	@Override
@@ -54,6 +120,23 @@ public class Field extends FieldBase {
 
 		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME, CONTROL_GROUP);
+		String controlGroupCssClass = CONTROL_GROUP;
+
+		FacesMessage.Severity severity = getHighestSeverityRecurse(this);
+
+		if (severity != null) {
+
+			if ((severity == FacesMessage.SEVERITY_FATAL) || (severity == FacesMessage.SEVERITY_ERROR)) {
+				controlGroupCssClass = controlGroupCssClass + StringPool.SPACE + ERROR;
+			}
+			else if (severity == FacesMessage.SEVERITY_WARN) {
+				controlGroupCssClass = controlGroupCssClass + StringPool.SPACE + WARNING;
+			}
+			else if (severity == FacesMessage.SEVERITY_INFO) {
+				controlGroupCssClass = controlGroupCssClass + StringPool.SPACE + INFO;
+			}
+		}
+
+		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME, controlGroupCssClass);
 	}
 }
