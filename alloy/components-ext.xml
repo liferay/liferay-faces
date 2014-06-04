@@ -827,7 +827,7 @@
 		parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroup"
 		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupRenderer">
 		<description>
-			<![CDATA[Field is a UIPanel component that renders a <div> element and a <label> element in order to wrap a field. Since it extends PanelGroup, it supports all the features of aui:panelGroup.]]>
+			<![CDATA[Field is a UIPanel component that renders a <div> element and a <label> element in order to wrap a field. Since it extends PanelGroup, it supports all the features of alloy:panelGroup.]]>
 		</description>
 		<attributes>
 			<attribute>
