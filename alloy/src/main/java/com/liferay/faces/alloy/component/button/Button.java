@@ -39,11 +39,11 @@ public class Button extends ButtonBase implements FacesButton, HTML5Button {
 
 	@Override
 	public boolean isDisabled() {
-		return (Boolean) getStateHelper().eval(FacesButton.DISABLED, false);
+		return (Boolean) getStateHelper().eval(StringPool.DISABLED, false);
 	}
 
 	public void setDisabled(boolean disabled) {
-		getStateHelper().put(FacesButton.DISABLED, disabled);
+		getStateHelper().put(StringPool.DISABLED, disabled);
 	}
 
 	@Override
