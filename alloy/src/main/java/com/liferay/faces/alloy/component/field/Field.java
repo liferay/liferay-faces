@@ -50,19 +50,18 @@ public class Field extends FieldBase {
 		setRendererType(RENDERER_TYPE);
 	}
 
-	protected FacesMessage.Severity getHighestSeverityRecurse(UIComponent uiComponent) {
-		return getHighestSeverityRecurse(uiComponent, null);
-	}
+	protected FacesMessage.Severity getHighestSeverityRecurse(FacesContext facesContext, UIComponent uiComponent,
+		FacesMessage.Severity severity) {
 
-	protected FacesMessage.Severity getHighestSeverityRecurse(UIComponent uiComponent, FacesMessage.Severity severity) {
+		List<UIComponent> children = uiComponent.getChildren();
 
-		if (uiComponent.getChildCount() > 0) {
+		if (children != null) {
 
-			List<UIComponent> children = uiComponent.getChildren();
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-
+			// For each child component:
 			for (UIComponent child : children) {
 
+				// If the current child component is an invalid input, then that means the highest severity has been
+				// found.
 				if (child instanceof EditableValueHolder) {
 
 					EditableValueHolder editableValueHolder = (EditableValueHolder) child;
@@ -74,6 +73,8 @@ public class Field extends FieldBase {
 					}
 				}
 
+				// Otherwise, determine the highest severity of the FacesMessages associated with the current child
+				// component.
 				Iterator<FacesMessage> messages = facesContext.getMessages(child.getClientId());
 
 				while (messages.hasNext()) {
@@ -97,7 +98,7 @@ public class Field extends FieldBase {
 					break;
 				}
 				else {
-					severity = getHighestSeverityRecurse(child, severity);
+					severity = getHighestSeverityRecurse(facesContext, child, severity);
 				}
 			}
 		}
@@ -118,11 +119,10 @@ public class Field extends FieldBase {
 	@Override
 	public String getStyleClass() {
 
-		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
-
 		String controlGroupCssClass = CONTROL_GROUP;
 
-		FacesMessage.Severity severity = getHighestSeverityRecurse(this);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesMessage.Severity severity = getHighestSeverityRecurse(facesContext, this, null);
 
 		if (severity != null) {
 
@@ -136,6 +136,8 @@ public class Field extends FieldBase {
 				controlGroupCssClass = controlGroupCssClass + StringPool.SPACE + INFO;
 			}
 		}
+
+		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME, controlGroupCssClass);
 	}
