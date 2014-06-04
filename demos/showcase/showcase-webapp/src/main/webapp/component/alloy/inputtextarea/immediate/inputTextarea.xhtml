@@ -8,7 +8,7 @@
 		<h:form>
 			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-true']}"
 				longDescription="true" number="1">
-				<h:messages globalOnly="true" styleClass="feedback" />
+				<alloy:messages globalOnly="true" styleClass="feedback" />
 				<alloy:inputTextarea id="textarea" immediate="true" value="#{inputTextModelBean.text}"
 					valueChangeListener="#{inputTextBackingBean.valueChangeListener}" />
 				<hr />
@@ -27,7 +27,7 @@
 		<h:form>
 			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-false']}"
 				longDescription="true" number="2">
-				<h:messages globalOnly="true" styleClass="feedback" />
+				<alloy:messages globalOnly="true" styleClass="feedback" />
 				<alloy:inputTextarea id="textarea" value="#{inputTextModelBean.text}"
 					valueChangeListener="#{inputTextBackingBean.valueChangeListener}" />
 				<hr />

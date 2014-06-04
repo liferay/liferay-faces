@@ -13,7 +13,7 @@
 			<alloy:inputSourceCode id="inputSourceCode" height="100" mode="#{inputSourceCodeModelBean.mode}"
 				rendered="#{showcaseModelBean.selectedComponent.rendered}"
 				required="#{showcaseModelBean.selectedComponent.required}" value="#{inputSourceCodeModelBean.sourceCode}" />
-			<h:message for="inputSourceCode" />
+			<alloy:message for="inputSourceCode" />
 			<hr />
 			<alloy:commandButton action="#{inputSourceCodeBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />

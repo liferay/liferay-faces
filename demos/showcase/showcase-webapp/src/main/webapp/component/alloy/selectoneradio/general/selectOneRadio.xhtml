@@ -15,7 +15,7 @@
 					<f:selectItem itemLabel="Lightweight" itemValue="4" />
 					<f:selectItem itemLabel="Open Source" itemValue="5" />
 				</alloy:selectOneRadio>
-				<h:message for="selectOneRadio" />
+				<alloy:message for="selectOneRadio" />
 				<hr />
 				<alloy:commandButton action="#{selectOneRadioBackingBean.submit}" value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />

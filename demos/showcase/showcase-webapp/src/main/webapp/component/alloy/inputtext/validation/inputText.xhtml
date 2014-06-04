@@ -9,7 +9,7 @@
 			<showcase:example description="#{i18n['validating-an-email-address-using-validator-attribute']}" number="1">
 				<alloy:inputText id="text" validator="#{inputTextBackingBean.emailAddressValidator}"
 					validatorMessage="#{i18n['validator-message']}" value="#{inputTextModelBean.text}" />
-				<h:message for="text" />
+				<alloy:message for="text" />
 			</showcase:example>
 			<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
@@ -28,7 +28,7 @@
 					value="#{inputTextModelBean.text}">
 					<f:validateRegex pattern=".+[@].+[.].+" />
 				</alloy:inputText>
-				<h:message for="text" />
+				<alloy:message for="text" />
 			</showcase:example>
 			<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />

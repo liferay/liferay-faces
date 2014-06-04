@@ -9,7 +9,7 @@
 			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-true']}"
 				longDescription="true" number="2">
 				<h4>#{i18n['favorite-liferay-benefit']}</h4>
-				<h:messages globalOnly="true" styleClass="feedback" />
+				<alloy:messages globalOnly="true" styleClass="feedback" />
 				<alloy:selectOneRadio immediate="true" layout="pageDirection" value="#{selectOneRadioModelBean.favoriteId}"
 					valueChangeListener="#{selectOneRadioBackingBean.valueChangeListener}">
 					<f:selectItem itemLabel="Compatible" itemValue="1" />
@@ -35,7 +35,7 @@
 			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-false']}"
 				longDescription="true" number="2">
 				<h4>#{i18n['favorite-liferay-benefit']}</h4>
-				<h:messages globalOnly="true" styleClass="feedback" />
+				<alloy:messages globalOnly="true" styleClass="feedback" />
 				<alloy:selectOneRadio layout="pageDirection" value="#{selectOneRadioModelBean.favoriteId}"
 					valueChangeListener="#{selectOneRadioBackingBean.valueChangeListener}">
 					<f:selectItem itemLabel="Compatible" itemValue="1" />

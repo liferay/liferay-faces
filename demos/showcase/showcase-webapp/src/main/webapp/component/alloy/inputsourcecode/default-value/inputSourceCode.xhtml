@@ -6,7 +6,7 @@
 		<showcase:example styleClass="editableAceEditor">
 			<alloy:inputSourceCode id="inputSourceCode" height="100" mode="xml" rendered="#{showcaseModelBean.selectedComponent.rendered}"
 				required="#{showcaseModelBean.selectedComponent.required}" value="#{inputSourceCodeModelBean.sourceText}" />
-			<h:message for="inputSourceCode" />
+			<alloy:message for="inputSourceCode" />
 			<hr />
 			<alloy:commandButton action="#{inputSourceCodeBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />

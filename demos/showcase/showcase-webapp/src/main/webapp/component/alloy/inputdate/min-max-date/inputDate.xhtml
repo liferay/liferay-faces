@@ -8,7 +8,7 @@
 			<showcase:example>
 				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" maximumDate="#{inputDateModelBean.maxDate}"
 					minimumDate="#{inputDateModelBean.minDate}" showOn="button" value="#{inputDateModelBean.birthday}" />
-				<h:message for="birthday" />
+				<alloy:message for="birthday" />
 				<br />
 				<alloy:outputText value="#{i18n['valid-date-range']}: " />
 				<alloy:outputText value="#{inputDateModelBean.minDate}">

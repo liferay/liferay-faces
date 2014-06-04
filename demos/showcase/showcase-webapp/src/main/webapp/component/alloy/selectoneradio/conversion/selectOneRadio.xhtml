@@ -7,7 +7,7 @@
 		<h:form>
 			<showcase:example description="#{i18n['conversion-to-a-date-using-f-convertdatetime']}">
 				<h4>#{i18n['when-was-the-us-declaration-of-independence-signed']}</h4>
-				<h:messages globalOnly="true" styleClass="feedback" />
+				<alloy:messages globalOnly="true" styleClass="feedback" />
 				<alloy:selectOneRadio value="#{selectOneRadioModelBean.date}">
 					<f:convertDateTime pattern="MM/dd/yyyy G" />
 					<f:selectItem itemLabel="October 31, 1517 AD" itemValue="10/31/1517 AD" />
