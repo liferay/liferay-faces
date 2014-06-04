@@ -10,7 +10,7 @@
 				<alloy:inputTextarea id="textarea" converter="javax.faces.DateTime" converterMessage="#{i18n['converter-message']}"
 					value="#{inputTextModelBean.date}" />
 				<br />
-				<h:message for="textarea" />
+				<alloy:message for="textarea" />
 			</showcase:example>
 			<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
@@ -30,7 +30,7 @@
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</alloy:inputTextarea>
 				<br />
-				<h:message for="textarea" />
+				<alloy:message for="textarea" />
 			</showcase:example>
 			<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />

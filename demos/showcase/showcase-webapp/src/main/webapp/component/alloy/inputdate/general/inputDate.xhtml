@@ -11,7 +11,7 @@
 				renderedCheckbox="true" requiredCheckbox="true">
 				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" rendered="#{showcaseModelBean.selectedComponent.rendered}"
 					required="#{showcaseModelBean.selectedComponent.required}" value="#{inputDateModelBean.birthday}" />
-				<h:message for="birthday" />
+				<alloy:message for="birthday" />
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
@@ -32,7 +32,7 @@
 				renderedCheckbox="true">
 				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" showOn="button"
 					rendered="#{showcaseModelBean.selectedComponent.rendered}" value="#{inputDateModelBean.birthday}" />
-				<h:message for="birthday" />
+				<alloy:message for="birthday" />
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
@@ -54,7 +54,7 @@
 				renderedCheckbox="true">
 				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" showOn="both"
 					rendered="#{showcaseModelBean.selectedComponent.rendered}" value="#{inputDateModelBean.birthday}" />
-				<h:message for="birthday" />
+				<alloy:message for="birthday" />
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />

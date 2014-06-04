@@ -9,7 +9,7 @@
 				<alloy:inputText id="text" rendered="#{showcaseModelBean.selectedComponent.rendered}"
 					required="#{showcaseModelBean.selectedComponent.required}" requiredMessage="#{i18n['required-message']}"
 					value="#{inputTextModelBean.text}" />
-				<h:message for="text" />
+				<alloy:message for="text" />
 				<hr />
 				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
