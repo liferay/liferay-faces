@@ -71,7 +71,7 @@ public class ShowcaseUtil {
 		LIFERAY_FACES_PORTAL_VERSION + "/javadoc/alloy/";
 	private static final String LIFERAY_FACES_VDLDOC_BASE_URL = "http://docs.liferay.com/faces/" +
 		LIFERAY_FACES_ALLOY_VERSION + "/vdldoc/";
-	private static final String NAMESPACE_PREFIX_AUI = "alloy";
+	private static final String NAMESPACE_PREFIX_ALLOY = "alloy";
 	private static final String NAMESPACE_PREFIX_BRIDGE = "bridge";
 	private static final String NAMESPACE_PREFIX_F = "f";
 	private static final String NAMESPACE_PREFIX_H = "h";
@@ -254,7 +254,7 @@ public class ShowcaseUtil {
 		if (tagPrefix.equals(NAMESPACE_PREFIX_F) || tagPrefix.equals(NAMESPACE_PREFIX_H)) {
 			vdldocURL.append(JSF_VDLDOC_BASE_URL);
 		}
-		else if (tagPrefix.equals(NAMESPACE_PREFIX_AUI) || tagPrefix.equals(NAMESPACE_PREFIX_BRIDGE) ||
+		else if (tagPrefix.equals(NAMESPACE_PREFIX_ALLOY) || tagPrefix.equals(NAMESPACE_PREFIX_BRIDGE) ||
 				tagPrefix.equals(NAMESPACE_PREFIX_PORTET) || tagPrefix.equals(NAMESPACE_PREFIX_LIFERAY_UI)) {
 			vdldocURL.append(LIFERAY_FACES_VDLDOC_BASE_URL);
 		}
