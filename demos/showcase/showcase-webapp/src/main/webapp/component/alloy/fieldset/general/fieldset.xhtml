@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<showcase:example renderedCheckbox="true">
+				<alloy:fieldset legend="#{i18n['fieldset-legend']}"
+					rendered="#{showcaseModelBean.selectedComponent.rendered}">
+					<alloy:field label="#{i18n['text-box-1']}">
+						<alloy:inputText />
+					</alloy:field>
+					<alloy:field label="#{i18n['text-box-2']}">
+						<alloy:inputText />
+					</alloy:field>
+					<alloy:commandButton value="#{i18n['submit']}">
+						<f:ajax execute="@form" render="@form" />
+					</alloy:commandButton>
+				</alloy:fieldset>
+			</showcase:example>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
