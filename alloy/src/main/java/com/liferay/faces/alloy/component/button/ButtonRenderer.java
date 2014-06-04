@@ -78,7 +78,7 @@ public class ButtonRenderer extends ButtonRendererCompat {
 
 		// Do not delegate the writing of the disabled attribute because the JSF runtime may disable the button
 		// programmatically based on navigation case matching.
-		responseWriter.writeAttribute(FacesButton.DISABLED, disabled, FacesButton.DISABLED);
+		responseWriter.writeAttribute(StringPool.DISABLED, disabled, StringPool.DISABLED);
 
 		// Do not delegate the writing of the type attribute because the JSF runtime hard codes the type for button.
 		responseWriter.writeAttribute(StringPool.TYPE, facesButton.getType(), StringPool.TYPE);
