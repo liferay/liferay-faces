@@ -14,15 +14,14 @@
 package com.liferay.faces.demos.bean;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import com.liferay.faces.demos.dto.CodeExample;
+import com.liferay.faces.demos.dto.SelectedComponent;
+import com.liferay.faces.demos.dto.SelectedComponentImpl;
 import com.liferay.faces.demos.dto.ShowcaseComponent;
-import com.liferay.faces.demos.dto.UseCase;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
@@ -37,12 +36,13 @@ public class ShowcaseModelBean implements Serializable {
 	// serialVersionUID
 	private static final long serialVersionUID = 3339667513222866249L;
 
+	// Private Constants
+	private static final boolean LIFERAY_FACES_BRIDGE_DETECTED = ProductMap.getInstance().get(
+			ProductConstants.LIFERAY_FACES_BRIDGE).isDetected();
+
 	// Injections
 	@ManagedProperty(name = "listModelBean", value = "#{listModelBean}")
 	private transient ListModelBean listModelBean;
-
-	// Private Constants
-	private static final boolean LIFERAY_FACES_BRIDGE_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_FACES_BRIDGE).isDetected();
 
 	// Private Data Members
 	private String deploymentType;
@@ -50,7 +50,9 @@ public class ShowcaseModelBean implements Serializable {
 	private ViewParameters viewParameters;
 
 	public String getDeploymentType() {
+
 		if (deploymentType == null) {
+
 			if (LIFERAY_FACES_BRIDGE_DETECTED) {
 				deploymentType = "portlet";
 			}
@@ -58,6 +60,7 @@ public class ShowcaseModelBean implements Serializable {
 				deploymentType = "webapp";
 			}
 		}
+
 		return deploymentType;
 	}
 
@@ -68,7 +71,11 @@ public class ShowcaseModelBean implements Serializable {
 	public SelectedComponent getSelectedComponent() {
 
 		if (selectedComponent == null) {
-			selectedComponent = new SelectedComponent(getViewParameters());
+
+			ShowcaseComponent showcaseComponent = listModelBean.findShowcaseComponent(
+					viewParameters.getComponentPrefix(), viewParameters.getComponentName());
+
+			selectedComponent = new SelectedComponentImpl(showcaseComponent, viewParameters.getComponentUseCase());
 		}
 
 		return selectedComponent;
@@ -81,79 +88,6 @@ public class ShowcaseModelBean implements Serializable {
 		}
 
 		return viewParameters;
-	}
-
-	public class SelectedComponent implements Serializable {
-
-		// serialVersionUID
-		private static final long serialVersionUID = 8102061900904379413L;
-
-		// Private Data Members
-		private String camelCaseName;
-		private String lowerCaseName;
-		private String prefix;
-		private boolean rendered;
-		private boolean required;
-		private String useCaseName;
-		private List<CodeExample> useCaseCodeExamples;
-
-		public SelectedComponent(ViewParameters viewParameters) {
-			ShowcaseComponent showcaseComponent = listModelBean.findShowcaseComponent(
-					viewParameters.getComponentPrefix(), viewParameters.getComponentName());
-			this.camelCaseName = showcaseComponent.getCamelCaseName();
-			this.lowerCaseName = showcaseComponent.getLowerCaseName();
-			this.prefix = showcaseComponent.getPrefix();
-			this.rendered = true;
-			this.required = false;
-
-			List<UseCase> useCases = showcaseComponent.getUseCases();
-
-			for (UseCase useCase : useCases) {
-
-				if (useCase.getName().equals(viewParameters.getComponentUseCase())) {
-					this.useCaseName = useCase.getName();
-					this.useCaseCodeExamples = useCase.getCodeExamples();
-
-					break;
-				}
-			}
-		}
-
-		public String getCamelCaseName() {
-			return camelCaseName;
-		}
-
-		public boolean isRendered() {
-			return rendered;
-		}
-
-		public boolean isRequired() {
-			return required;
-		}
-
-		public String getLowerCaseName() {
-			return lowerCaseName;
-		}
-
-		public String getPrefix() {
-			return prefix;
-		}
-
-		public void setRendered(boolean rendered) {
-			this.rendered = rendered;
-		}
-
-		public void setRequired(boolean required) {
-			this.required = required;
-		}
-
-		public List<CodeExample> getUseCaseCodeExamples() {
-			return useCaseCodeExamples;
-		}
-
-		public String getUseCaseName() {
-			return useCaseName;
-		}
 	}
 
 	public class ViewParameters implements Serializable {

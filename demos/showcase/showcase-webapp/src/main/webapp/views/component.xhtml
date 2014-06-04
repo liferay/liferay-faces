@@ -15,10 +15,9 @@
 		<c:set value="#{selectedComponent.lowerCaseName}" var="selectedComponentLowerCaseName" />
 		<c:set value="#{selectedComponent.useCaseName}" var="selectedComponentUseCaseName" />
 		<c:set value="#{selectedComponent.prefix}" var="selectedComponentPrefix" />
-		<c:set value="#{selectedComponentPrefix}:#{selectedComponentCamelCaseName}" var="selectedComponentFullName" />
-		<c:set value="#{selectedComponentPrefix}-#{selectedComponentLowerCaseName}" var="selectedComponentKey" />
-		<c:set value="#{selectedComponentPrefix}-#{selectedComponentLowerCaseName}-#{selectedComponentUseCaseName}"
-			var="selectedComponentUseCaseKey" />
+		<c:set value="#{selectedComponent.fullName}" var="selectedComponentFullName" />
+		<c:set value="#{selectedComponent.key}" var="selectedComponentKey" />
+		<c:set value="#{selectedComponent.useCaseKey}" var="selectedComponentUseCaseKey" />
 		<c:set value="#{i18n[selectedComponentKey]}" var="selectedComponentDescription" />
 		<c:set value="#{i18n[selectedComponentUseCaseKey]}" var="selectedComponentUseCaseDescription" />
 		<c:set value="vdldoc:#{selectedComponentFullName}" var="selectedComponentDocKey" />
@@ -43,15 +42,9 @@
 			</h:panelGrid>
 		</c:if>
 		<h2>#{selectedComponentFullName}</h2>
-		<p>
-			<h:outputText escape="false" value="#{selectedComponentDescription}" />
-		</p>
-		<c:if test="#{!empty selectedComponentUseCaseDescription}">
-			<h3>#{i18n[selectedComponentUseCaseName]} #{i18n['usage']}</h3>
-			<p>
-				<h:outputText escape="false" value="#{selectedComponentUseCaseDescription}" />
-			</p>
-		</c:if>
+		<h:outputText escape="false" value="#{selectedComponentDescription}" />
+		<h3>#{i18n[selectedComponentUseCaseName]} #{i18n['usage']}</h3>
+		<h:outputText escape="false" value="#{selectedComponentUseCaseDescription}" />
 		<ui:include
 			src="/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/#{selectedComponentUseCaseName}/#{selectedComponentCamelCaseName}.xhtml" />
 		<h3>#{i18n['source-code']}</h3>

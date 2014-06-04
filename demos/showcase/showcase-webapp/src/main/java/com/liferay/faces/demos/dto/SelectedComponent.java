@@ -19,17 +19,19 @@ import java.util.List;
 /**
  * @author  Neil Griffin
  */
-public interface ShowcaseComponent {
+public interface SelectedComponent extends ShowcaseComponent {
 
-	public String getCamelCaseName();
+	public boolean isRendered();
 
-	public String getFullName();
+	public boolean isRequired();
 
-	public String getKey();
+	public void setRendered(boolean rendered);
 
-	public String getLowerCaseName();
+	public void setRequired(boolean required);
 
-	public String getPrefix();
+	List<CodeExample> getUseCaseCodeExamples();
 
-	public List<UseCase> getUseCases();
+	public String getUseCaseKey();
+
+	public String getUseCaseName();
 }

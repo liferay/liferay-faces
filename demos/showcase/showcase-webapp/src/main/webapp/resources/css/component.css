@@ -1,15 +1,41 @@
-.showcase-example, .showcase-parameter-value, .showcase-model-value {
+.nav-list .nav-list > li > a {
+	background-color: transparent;
+}
+
+.nav-list .nav-list > li.active {
+	color: black;
+	font-weight: bold;
+}
+
+.nav-list .nav-list > li.active > a {
+	color: black;
+	text-shadow: none;
+}
+
+.nav-list .nav-list > li.active > a:hover {
+	background-color: transparent;
+}
+
+.showcase-example, .showcase-parameter-value, .showcase-model-value, .showcase-container {
 	border: 1px solid #ddd;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 	margin: 15px 0;
-	padding: 39px 19px 14px;
-	*padding-top: 19px;
 	position: relative;
 }
 
-.showcase-example label.example-label, .showcase-parameter-value label.parameter-label, .showcase-model-value label.model-label {
+.showcase-container {
+	padding: 10px 10px 10px;
+	*padding-top: 10px;
+}
+
+.showcase-example, .showcase-parameter-value, .showcase-model-value {
+	padding: 39px 19px 14px;
+	*padding-top: 19px;
+}
+
+.showcase-example label.example-label, .showcase-parameter-value label.parameter-label, .showcase-model-value label.model-label, .showcase-container label.container-label {
 	background-color: #f5f5f5;
 	border: 1px solid #ddd;
 	-webkit-border-radius: 4px 0 4px 0;
@@ -23,7 +49,7 @@
 	top: -1px;
 }
 
-.showcase-example label.example-label span.example-number, .showcase-parameter-value label.parameter-label, .showcase-model-value label.model-label {
+.showcase-example label.example-label span.example-number, .showcase-parameter-value label.parameter-label, .showcase-model-value label.model-label, .showcase-container label.container-label {
 	font-weight: bold;
 }
 
