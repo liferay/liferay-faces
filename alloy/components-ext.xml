@@ -1187,7 +1187,7 @@
 		generateJava="true"	parentClass="javax.faces.component.html.HtmlMessage"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
-			<![CDATA[Message is an UIMessage component that renders a renders a <code>&lt;span&gt;</code> element containing the text of a single FacesMessage for an associated component. Since it extends HtmlMessage, it supports all the features of h:message.]]>
+			<![CDATA[Message is a UIMessage component that renders a <code>&lt;span&gt;</code> element containing the text of a single FacesMessage for an associated component. Since it extends HtmlMessage, it supports all the features of h:message.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -1204,7 +1204,7 @@
 		generateJava="true"	parentClass="javax.faces.component.html.HtmlMessages"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
-			<![CDATA[Messages is an UIMessage component that renders a renders the text of one or more FacesMessages. Since it extends HtmlMessages, it supports all the features of h:messages.]]>
+			<![CDATA[Messages is a UIMessages component that the text of one or more FacesMessage instances inside a <code>&lt;ul&gt;</code> element or <code>&lt;table&gt;</code> element for an associated component, according to the layout attribute. Since it extends HtmlMessages, it supports all the features of h:messages.]]>
 		</description>
 		<attributes>
 			<attribute>
