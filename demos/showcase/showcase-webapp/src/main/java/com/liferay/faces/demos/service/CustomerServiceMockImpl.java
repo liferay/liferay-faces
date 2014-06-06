@@ -67,7 +67,7 @@ public class CustomerServiceMockImpl implements CustomerService, Serializable {
 		allCustomers.add(new Customer(userId++, unitedStatesCountryId, "Carter", "Braxton", getDate(9, 16, 1736)));
 		allCustomers.add(new Customer(userId++, unitedStatesCountryId, "Charles", "Carroll", getDate(9, 19, 1737)));
 		allCustomers.add(new Customer(userId++, unitedStatesCountryId, "Benjamin", "Franklin", getDate(1, 17, 1706)));
-		allCustomers.add(new Customer(userId++, unitedStatesCountryId, "Elbridge", "Gerry", getDate(0, 0, 0)));
+		allCustomers.add(new Customer(userId++, unitedStatesCountryId, "Elbridge", "Gerry", getDate(2, 3, 1701)));
 		allCustomers.add(new Customer(userId++, unitedStatesCountryId, "John", "Hancock", getDate(1, 23, 1737)));
 		allCustomers.add(new Customer(userId++, unitedStatesCountryId, "Thomas", "Jefferson", getDate(4, 13, 1743)));
 		allCustomers.add(new Customer(userId++, unitedStatesCountryId, "Francis", "Lewis", getDate(3, 21, 1713)));
