@@ -81,11 +81,11 @@
 	font-weight: bold;
 }
 
-.aui .select-one-radio input[type='radio'] {
+.aui .alloy-select-one-radio input[type='radio'] {
 	vertical-align: baseline;
 }
 
-.aui .select-one-radio label {
+.aui .alloy-select-one-radio label {
 	display: inline;
 	font-size: 0.9em;
 	padding-right: 8px;
