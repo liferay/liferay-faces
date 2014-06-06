@@ -15,7 +15,7 @@ package com.liferay.faces.alloy.component.column;
 //J-
 
 import javax.annotation.Generated;
-import javax.faces.component.UIColumn;
+import javax.faces.component.html.HtmlColumn;
 
 import com.liferay.faces.util.component.Styleable;
 
@@ -24,15 +24,34 @@ import com.liferay.faces.util.component.Styleable;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class ColumnBase extends UIColumn implements Styleable {
+public abstract class ColumnBase extends HtmlColumn implements Styleable {
 
 	// Public Constants
+	public static final String FILTER_BY = "filterBy";
+	public static final String HEADER_TEXT = "headerText";
 	public static final String OFFSET = "offset";
 	public static final String OFFSET_WIDTH = "offsetWidth";
+	public static final String SORT_BY = "sortBy";
 	public static final String SPAN = "span";
 	public static final String STYLE = "style";
 	public static final String STYLE_CLASS = "styleClass";
 	public static final String WIDTH = "width";
+
+	public Object getFilterBy() {
+		return (Object) getStateHelper().eval(FILTER_BY, null);
+	}
+
+	public void setFilterBy(Object filterBy) {
+		getStateHelper().put(FILTER_BY, filterBy);
+	}
+
+	public String getHeaderText() {
+		return (String) getStateHelper().eval(HEADER_TEXT, null);
+	}
+
+	public void setHeaderText(String headerText) {
+		getStateHelper().put(HEADER_TEXT, headerText);
+	}
 
 	public Integer getOffset() {
 		return (Integer) getStateHelper().eval(OFFSET, null);
@@ -48,6 +67,14 @@ public abstract class ColumnBase extends UIColumn implements Styleable {
 
 	public void setOffsetWidth(Integer offsetWidth) {
 		getStateHelper().put(OFFSET_WIDTH, offsetWidth);
+	}
+
+	public Object getSortBy() {
+		return (Object) getStateHelper().eval(SORT_BY, null);
+	}
+
+	public void setSortBy(Object sortBy) {
+		getStateHelper().put(SORT_BY, sortBy);
 	}
 
 	public Integer getSpan() {

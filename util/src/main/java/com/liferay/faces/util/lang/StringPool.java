@@ -106,6 +106,8 @@ public class StringPool {
 
 	public static final String HEAD = "head";
 
+	public static final String HEADER = "header";
+
 	public static final String HIDDEN = "hidden";
 
 	public static final String HREF = "href";
