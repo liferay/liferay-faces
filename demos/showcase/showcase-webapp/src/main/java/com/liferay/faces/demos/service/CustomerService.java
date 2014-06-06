@@ -22,5 +22,8 @@ import com.liferay.faces.demos.dto.Customer;
  * @author  Neil Griffin
  */
 public interface CustomerService {
+
 	public List<Customer> getAllCustomers();
+
+	public List<Customer> getCustomers(int start, int finish);
 }
