@@ -1,0 +1,18 @@
+.alloy-messages {
+	border: 1px solid #ddd;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+ul.alloy-messages {
+	list-style-position: inside;
+	margin: 0px;
+	padding: 4px;
+}
+
+table.alloy-messages {
+	border-collapse: separate;
+	border-spacing: 4px;
+	width: 100%;
+}
