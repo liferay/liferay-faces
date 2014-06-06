@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<showcase:example renderedCheckbox="true">
+				<alloy:panelGrid border="1" columns="3" rendered="#{showcaseModelBean.selectedComponent.rendered}">
+					<alloy:outputText value="Row 1 Col 1" />
+					<alloy:outputText value="Row 1 Col 2" />
+					<alloy:outputText value="Row 1 Col 3" />
+					<alloy:outputText value="Row 2 Col 1" />
+					<alloy:outputText value="Row 2 Col 2" />
+					<alloy:outputText value="Row 2 Col 3" />
+					<alloy:outputText value="Row 3 Col 1" />
+				</alloy:panelGrid>
+			</showcase:example>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
