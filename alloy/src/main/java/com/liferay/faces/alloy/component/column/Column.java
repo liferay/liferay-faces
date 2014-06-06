@@ -13,9 +13,14 @@
  */
 package com.liferay.faces.alloy.component.column;
 
+import java.util.Map;
+
 import javax.faces.component.FacesComponent;
+import javax.faces.component.UIComponent;
+import javax.faces.component.html.HtmlDataTable;
 
 import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -33,6 +38,24 @@ public class Column extends ColumnBase {
 	public Column() {
 		super();
 		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public void setParent(UIComponent parent) {
+		super.setParent(parent);
+
+		if ((parent != null) && (parent instanceof HtmlDataTable)) {
+
+			Map<String, UIComponent> facetMap = getFacets();
+
+			if (facetMap != null) {
+				UIComponent headerFacet = facetMap.get(StringPool.HEADER);
+
+				if (headerFacet == null) {
+					facetMap.put(StringPool.HEADER, new ColumnHeaderFacet());
+				}
+			}
+		}
 	}
 
 	@Override
