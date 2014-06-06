@@ -10,7 +10,7 @@
 					<alloy:inputText id="inputText" validator="#{fieldBackingBean.infoValidator}" value="default text" />
 					<alloy:message for="inputText" />
 				</alloy:field>
-				<alloy:commandButton value="#{i18n['submit']}">
+				<alloy:commandButton value="#{i18n['submit-and-re-render-field']}">
 					<f:ajax execute="@form" render="field" />
 				</alloy:commandButton>
 			</showcase:example>
@@ -24,7 +24,7 @@
 					<alloy:inputText id="inputText" validator="#{fieldBackingBean.warningValidator}" value="default text" />
 					<alloy:message for="inputText" />
 				</alloy:field>
-				<alloy:commandButton value="#{i18n['submit']}">
+				<alloy:commandButton value="#{i18n['submit-and-re-render-field']}">
 					<f:ajax execute="@form" render="field" />
 				</alloy:commandButton>
 			</showcase:example>
@@ -38,7 +38,7 @@
 					<alloy:inputText id="inputText" validator="#{fieldBackingBean.errorValidator}" value="default text" />
 					<alloy:message for="inputText" />
 				</alloy:field>
-				<alloy:commandButton value="#{i18n['submit']}">
+				<alloy:commandButton value="#{i18n['submit-and-re-render-field']}">
 					<f:ajax execute="@form" render="field" />
 				</alloy:commandButton>
 			</showcase:example>
