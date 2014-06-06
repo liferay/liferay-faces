@@ -35,6 +35,11 @@
 	*padding-top: 19px;
 }
 
+.alloy-datatable th.header-facet {
+	font-weight: bold;
+	text-align: center;
+}
+
 .showcase-example label.example-label, .showcase-parameter-value label.parameter-label, .showcase-model-value label.model-label, .showcase-container label.container-label {
 	background-color: #f5f5f5;
 	border: 1px solid #ddd;
