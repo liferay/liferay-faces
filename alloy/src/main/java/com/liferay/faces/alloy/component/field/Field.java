@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.alloy.component.field;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import javax.faces.component.EditableValueHolder;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.context.PartialViewContext;
 
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
@@ -44,13 +46,44 @@ public class Field extends FieldBase {
 	private static final String INFO = "info";
 	private static final String LAYOUT = "layout";
 	private static final String WARNING = "warning";
+	private static final String SUCCESS = "success";
 
 	public Field() {
 		super();
 		setRendererType(RENDERER_TYPE);
 	}
 
-	protected FacesMessage.Severity getHighestSeverityRecurse(FacesContext facesContext, UIComponent uiComponent,
+	protected List<EditableValueHolder> getEditableValueHoldersRecurse(UIComponent uiComponent) {
+
+		List<EditableValueHolder> editableValueHolders = null;
+
+		if (uiComponent instanceof EditableValueHolder) {
+			editableValueHolders = new ArrayList<EditableValueHolder>();
+			editableValueHolders.add((EditableValueHolder) uiComponent);
+		}
+		else {
+			List<UIComponent> children = uiComponent.getChildren();
+
+			for (UIComponent child : children) {
+
+				List<EditableValueHolder> childEditableValueHolders = getEditableValueHoldersRecurse(child);
+
+				if (childEditableValueHolders != null) {
+
+					if (editableValueHolders == null) {
+						editableValueHolders = childEditableValueHolders;
+					}
+					else {
+						editableValueHolders.addAll(childEditableValueHolders);
+					}
+				}
+			}
+		}
+
+		return editableValueHolders;
+	}
+
+	protected FacesMessage.Severity getHighestMessageSeverityRecurse(FacesContext facesContext, UIComponent uiComponent,
 		FacesMessage.Severity severity) {
 
 		List<UIComponent> children = uiComponent.getChildren();
@@ -59,19 +92,6 @@ public class Field extends FieldBase {
 
 			// For each child component:
 			for (UIComponent child : children) {
-
-				// If the current child component is an invalid input, then that means the highest severity has been
-				// found.
-				if (child instanceof EditableValueHolder) {
-
-					EditableValueHolder editableValueHolder = (EditableValueHolder) child;
-
-					if (!editableValueHolder.isValid()) {
-						severity = FacesMessage.SEVERITY_FATAL;
-
-						break;
-					}
-				}
 
 				// Otherwise, determine the highest severity of the FacesMessages associated with the current child
 				// component.
@@ -98,7 +118,7 @@ public class Field extends FieldBase {
 					break;
 				}
 				else {
-					severity = getHighestSeverityRecurse(facesContext, child, severity);
+					severity = getHighestMessageSeverityRecurse(facesContext, child, severity);
 				}
 			}
 		}
@@ -121,10 +141,49 @@ public class Field extends FieldBase {
 
 		String controlGroupCssClass = CONTROL_GROUP;
 
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		FacesMessage.Severity severity = getHighestSeverityRecurse(facesContext, this, null);
+		boolean editableValueHoldersExist = false;
+		boolean editableValueHoldersValid = false;
 
-		if (severity != null) {
+		FacesMessage.Severity severity = null;
+
+		List<EditableValueHolder> editableValueHolders = getEditableValueHoldersRecurse(this);
+
+		if (editableValueHolders != null) {
+
+			editableValueHoldersExist = true;
+
+			for (EditableValueHolder editableValueHolder : editableValueHolders) {
+
+				if (editableValueHolder.isValid()) {
+					
+					if (editableValueHolder.isRequired() && editableValueHolder.isLocalValueSet()) {
+						editableValueHoldersValid = true;
+					}
+				}
+				else {
+					editableValueHoldersValid = false;
+					severity = FacesMessage.SEVERITY_FATAL;
+
+					break;
+				}
+			}
+		}
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+
+		if (severity == null) {
+			severity = getHighestMessageSeverityRecurse(facesContext, this, null);
+		}
+
+		if (severity == null) {
+
+			PartialViewContext partialViewContext = facesContext.getPartialViewContext();
+
+			if (editableValueHoldersExist && editableValueHoldersValid && partialViewContext.isAjaxRequest()) {
+				controlGroupCssClass = controlGroupCssClass + StringPool.SPACE + SUCCESS;
+			}
+		}
+		else {
 
 			if ((severity == FacesMessage.SEVERITY_FATAL) || (severity == FacesMessage.SEVERITY_ERROR)) {
 				controlGroupCssClass = controlGroupCssClass + StringPool.SPACE + ERROR;
