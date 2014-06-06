@@ -6,12 +6,15 @@
 	<ui:define name="col1">
 		<h:form>
 			<showcase:example description="#{i18n['alloy-field-general-example-1']}" renderedCheckbox="true">
-				<alloy:field id="field" label="#{i18n['field-label']}" rendered="#{showcaseModelBean.selectedComponent.rendered}">
-					<alloy:inputText id="inputText" required="true" />
+				<alloy:messages layout="table" />
+				<alloy:field id="field" label="#{i18n['text-field']}" rendered="#{showcaseModelBean.selectedComponent.rendered}">
+					<alloy:inputText id="inputText" required="true">
+						<f:ajax render="field" />
+					</alloy:inputText>
 					<alloy:message for="inputText" />
 				</alloy:field>
-				<alloy:commandButton value="#{i18n['submit-and-re-render-field']}">
-					<f:ajax execute="@form" render="field" />
+				<alloy:commandButton action="#{fieldBackingBean.submit}" value="#{i18n['submit-and-re-render-form']}">
+					<f:ajax execute="@form" render="@form" />
 				</alloy:commandButton>
 			</showcase:example>
 		</h:form>
