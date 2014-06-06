@@ -11,12 +11,12 @@
 						<alloy:icon name="edit" />
 						<f:ajax execute="@form" render="@form" />
 					</alloy:commandButton>
-					<alloy:outputText value=" #{customer.name}" />
+					<alloy:outputText value=" #{customer.fullName}" />
 					<br />
 				</ui:repeat>
 			</showcase:example>
 			<showcase:outputModel>
-				<alloy:outputText id="modelValue" value="#{commandButtonModelBean.selectedCustomer.name}" />
+				<alloy:outputText id="modelValue" value="#{commandButtonModelBean.selectedCustomer.fullName}" />
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>

@@ -40,7 +40,7 @@ public class CommandButtonModelBean {
 
 	@PostConstruct
 	public void postConstruct() {
-		customers = customerService.getAllCustomers();
+		customers = customerService.getCustomers(0, 5);
 	}
 
 	public List<Customer> getCustomers() {
