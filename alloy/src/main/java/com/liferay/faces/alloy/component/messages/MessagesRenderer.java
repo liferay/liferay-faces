@@ -13,6 +13,14 @@
  */
 package com.liferay.faces.alloy.component.messages;
 
+import java.io.IOException;
+import java.util.Iterator;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.application.ProjectStage;
+import javax.faces.application.ResourceDependency;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.util.render.DelegatingRendererBase;
@@ -22,7 +30,31 @@ import com.liferay.faces.util.render.DelegatingRendererBase;
  * @author  Neil Griffin
  */
 @FacesRenderer(componentFamily = Messages.COMPONENT_FAMILY, rendererType = Messages.RENDERER_TYPE)
+@ResourceDependency(library = "liferay-faces-alloy", name = "alloy.css")
 public class MessagesRenderer extends DelegatingRendererBase {
+
+	// Private Constants
+	private static final String MOJARRA_BOGUS_WARNING = "needs to have a UIForm in its ancestry";
+
+	@Override
+	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		if (!facesContext.isProjectStage(ProjectStage.Production)) {
+
+			Iterator<FacesMessage> messages = facesContext.getMessages();
+
+			while (messages.hasNext()) {
+				FacesMessage facesMessage = messages.next();
+
+				if ((facesMessage.getSeverity() == FacesMessage.SEVERITY_WARN) &&
+						facesMessage.getSummary().contains(MOJARRA_BOGUS_WARNING)) {
+					messages.remove();
+				}
+			}
+		}
+
+		super.encodeBegin(facesContext, uiComponent);
+	}
 
 	@Override
 	public String getDelegateComponentFamily() {
