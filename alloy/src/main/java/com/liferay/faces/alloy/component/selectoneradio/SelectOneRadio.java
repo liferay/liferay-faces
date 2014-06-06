@@ -16,8 +16,10 @@ package com.liferay.faces.alloy.component.selectoneradio;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.html.HtmlSelectOneRadio;
 
+import com.liferay.faces.alloy.component.AlloyComponentUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -37,6 +39,23 @@ public class SelectOneRadio extends HtmlSelectOneRadio implements Styleable {
 	public SelectOneRadio() {
 		super();
 		setRendererType(RENDERER_TYPE);
+	}
+
+	@Override
+	public String getLabel() {
+
+		String label = (String) getStateHelper().get(StringPool.LABEL);
+
+		if (label == null) {
+			label = AlloyComponentUtil.getComponentLabel(this);
+		}
+
+		return label;
+	}
+
+	@Override
+	public void setLabel(String label) {
+		getStateHelper().put(StringPool.LABEL, label);
 	}
 
 	@Override

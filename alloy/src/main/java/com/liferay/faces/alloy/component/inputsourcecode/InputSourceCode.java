@@ -16,6 +16,7 @@ package com.liferay.faces.alloy.component.inputsourcecode;
 import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.alloy.component.AlloyComponentUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -30,8 +31,7 @@ public class InputSourceCode extends InputSourceCodeBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputsourcecode.InputSourceCode";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Text";
-	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.inputsourcecode.InputSourceCodeRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputsourcecode.InputSourceCodeRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-input-source-code";
 
 	public InputSourceCode() {
@@ -51,6 +51,23 @@ public class InputSourceCode extends InputSourceCodeBase {
 		}
 
 		return boundingBox;
+	}
+
+	@Override
+	public String getLabel() {
+
+		String label = (String) getStateHelper().get(StringPool.LABEL);
+
+		if (label == null) {
+			label = AlloyComponentUtil.getComponentLabel(this);
+		}
+
+		return label;
+	}
+
+	@Override
+	public void setLabel(String label) {
+		getStateHelper().put(StringPool.LABEL, label);
 	}
 
 	@Override
