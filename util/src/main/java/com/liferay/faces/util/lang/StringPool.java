@@ -126,6 +126,8 @@ public class StringPool {
 
 	public static final String ISO_8859_1 = "ISO-8859-1";
 
+	public static final String LABEL = "label";
+
 	public static final String LESS_THAN = "<";
 
 	public static final String LESS_THAN_OR_EQUAL = "<=";
@@ -153,9 +155,9 @@ public class StringPool {
 	public static final String NOT_LIKE = "NOT LIKE";
 
 	public static final String NULL = "null";
-	
+
 	public static final String ON = "on";
-	
+
 	public static final String ONCE = "once";
 
 	public static final String ONCLICK = "onclick";
