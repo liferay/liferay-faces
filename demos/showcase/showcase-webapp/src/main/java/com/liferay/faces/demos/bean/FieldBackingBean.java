@@ -46,12 +46,19 @@ public class FieldBackingBean {
 		facesContext.addMessage(uiComponent.getClientId(), facesMessage);
 	}
 
+	public void submit() {
+
+		FacesMessage globalFacesMessage = new FacesMessage("Your request processed successfully.");
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.addMessage(null, globalFacesMessage);
+	}
+
 	public void warningValidator(FacesContext facesContext, UIComponent uiComponent, Object value)
 		throws ValidatorException {
 
 		FacesMessage facesMessage = new FacesMessage();
 		facesMessage.setSeverity(FacesMessage.SEVERITY_WARN);
-		facesMessage.setDetail("This is an warning message.");
+		facesMessage.setDetail("This is a warning message.");
 		facesContext.addMessage(uiComponent.getClientId(), facesMessage);
 	}
 }
