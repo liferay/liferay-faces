@@ -1340,11 +1340,11 @@
         	</attribute>
 		</attributes>
 	</component>
-	<component name="PanelGrid" generateJava="false" extendsTags="HTMLCommonEvents HTMLPassthrough HTMLTable"
-		parentClass="javax.faces.component.html.HtmlPanelGroup"
+	<component name="PanelGrid" generateJava="true" extendsTags="HTMLCommonEvents HTMLPassthrough HTMLTable"
+		parentClass="javax.faces.component.html.HtmlPanelGrid"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
-			<![CDATA[PanelGrid is a UIPanel component that renders a <code>&lt;table&gt;</code> element for laying out components in a tabular grid. Since it extends HtmlPanelGrid, it supports all the features of h:panelGrid.]]>
+			<![CDATA[PanelGrid is a UIPanel component that renders a <code>&lt;table&gt;</code> element to layout its children in a tabular grid. Since it extends HtmlPanelGrid, it supports all the features of h:panelGrid.]]>
 		</description>
 		<attributes>
 			<attribute>
