@@ -6,10 +6,10 @@
 	<ui:define name="col1">
 		<!-- Example 1: Hard coded Brazilian Portuguese locale -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-datepicker-localization-example-1']}" number="1">
-				<alloy:pickDate for="portugueseDateInput" binding="#{portugueseDatePicker}" locale="pt-BR" />
+			<showcase:example description="#{i18n['alloy-pickdate-localization-example-1']}" number="1">
+				<alloy:pickDate for="portugueseDateInput" binding="#{portuguesePickDate}" locale="pt-BR" />
 				<alloy:inputText id="portugueseDateInput" value="#{pickDateModelBean.birthday}">
-					<f:convertDateTime pattern="#{portugueseDatePicker.datePattern}" />
+					<f:convertDateTime pattern="#{portuguesePickDate.datePattern}" />
 				</alloy:inputText>
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
@@ -18,7 +18,7 @@
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="portugueseSelection" value="#{pickDateModelBean.birthday}">
-					<f:convertDateTime pattern="#{portugueseDatePicker.datePattern}" />
+					<f:convertDateTime pattern="#{portuguesePickDate.datePattern}" />
 				</alloy:outputText>
 			</showcase:outputModel>
 		</h:form>
@@ -27,10 +27,10 @@
 	<ui:define name="col2">
 		<!-- Example 2: Japanese Locale obtained from a bean via EL -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-datepicker-localization-example-2']}" number="2">
-				<alloy:pickDate for="japaneseDateInput" binding="#{japaneseDatePicker}" locale="#{pickDateModelBean.locale}" />
+			<showcase:example description="#{i18n['alloy-pickdate-localization-example-2']}" number="2">
+				<alloy:pickDate for="japaneseDateInput" binding="#{japanesePickDate}" locale="#{pickDateModelBean.locale}" />
 				<alloy:inputText id="japaneseDateInput" value="#{pickDateModelBean.birthday}">
-					<f:convertDateTime pattern="#{japaneseDatePicker.datePattern}" />
+					<f:convertDateTime pattern="#{japanesePickDate.datePattern}" />
 				</alloy:inputText>
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
@@ -39,7 +39,7 @@
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="japaneseSelection" value="#{pickDateModelBean.birthday}">
-					<f:convertDateTime pattern="#{japaneseDatePicker.datePattern}" />
+					<f:convertDateTime pattern="#{japanesePickDate.datePattern}" />
 				</alloy:outputText>
 			</showcase:outputModel>
 		</h:form>

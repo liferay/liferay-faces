@@ -6,7 +6,7 @@
 	<ui:define name="col1">
 		<!-- Example 1: Hold down shift or control to select multiple dates -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-datepicker-multiple-selection-example-1']}" number="1">
+			<showcase:example description="#{i18n['alloy-pickdate-multiple-selection-example-1']}" number="1">
 				<alloy:inputTextarea id="multiple" value="#{pickDateModelBean.multiple}" />
 				<alloy:pickDate for="multiple" dateSeparator=" | " selectionMode="multiple" />
 				<hr />
@@ -23,7 +23,7 @@
 	<ui:define name="col2">
 		<!-- Example 2: Pop up the pickDate multiple times to select multiple dates -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-datepicker-multiple-selection-example-2']}" number="2">
+			<showcase:example description="#{i18n['alloy-pickdate-multiple-selection-example-2']}" number="2">
 				<alloy:inputTextarea id="multipleSticky" value="#{pickDateModelBean.multiple}" />
 				<alloy:pickDate for="multipleSticky" selectionMode="multiple-sticky" />
 				<hr />
