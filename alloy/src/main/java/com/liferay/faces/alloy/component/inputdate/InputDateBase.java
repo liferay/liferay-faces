@@ -68,26 +68,30 @@ public abstract class InputDateBase extends InputDateTimeBase implements Styleab
 		getStateHelper().put(MINIMUM_DATE, minimumDate);
 	}
 
-	public Object getPanes() {
-		return (Object) getStateHelper().eval(PANES, null);
+	public Integer getPanes() {
+		return (Integer) getStateHelper().eval(PANES, null);
 	}
 
-	public void setPanes(Object panes) {
+	public void setPanes(Integer panes) {
 		getStateHelper().put(PANES, panes);
 	}
 
+	@Override
 	public String getStyle() {
 		return (String) getStateHelper().eval(STYLE, null);
 	}
 
+	@Override
 	public void setStyle(String style) {
 		getStateHelper().put(STYLE, style);
 	}
 
+	@Override
 	public String getStyleClass() {
 		return (String) getStateHelper().eval(STYLE_CLASS, null);
 	}
 
+	@Override
 	public void setStyleClass(String styleClass) {
 		getStateHelper().put(STYLE_CLASS, styleClass);
 	}

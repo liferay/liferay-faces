@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.pickdate;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.faces.application.ResourceDependencies;
@@ -44,9 +45,31 @@ import com.liferay.faces.util.lang.StringPool;
 public class PickDateRenderer extends PickDateRendererBase {
 
 	// Private Constants
+	private static final String CALENDAR = "calendar";
+	private static final String DATE_CLICK = "dateClick";
+	private static final String DEFAULT_ON_DATE_CLICK_TEMPLATE =
+		"pickDateDefaultOnDateClick(event.date, A.one('{0}'), this);";
 	private static final String LANG = "lang";
+	private static final String TOKEN = "{0}";
 	private static final String NODE_EVENT_SIMULATE = "node-event-simulate";
+	private static final String ON = "on";
+	private static final String POPOVER_CSS_CLASS = "popoverCssClass";
 	private static final String[] DATE_PICKER_MODULES = StringHelper.append(MODULES, NODE_EVENT_SIMULATE);
+
+	@Override
+	public void encodeLang(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
+		throws IOException {
+
+		PickDate pickDate = (PickDate) uiComponent;
+		Locale locale = PickDateUtil.determineLocale(facesContext, pickDate.getLocale());
+
+		// RFC 1766 requires the subtags of locales to be delimited by hyphens rather than underscores.
+		// http://www.faqs.org/rfcs/rfc1766.html
+		String localeString = locale.toString().replaceAll(StringPool.UNDERLINE, StringPool.DASH);
+		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+		encodeString(responseWriter, LANG, localeString, true);
+		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+	}
 
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -59,112 +82,138 @@ public class PickDateRenderer extends PickDateRendererBase {
 	}
 
 	@Override
-	protected void encodeDatePattern(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String datePattern,
-		boolean first) throws IOException {
-
-		// The "mask" attribute takes precedence for encoding. If "mask" has not been specified, then the "datePattern"
-		// attribute is to be utilized for encoding the "mask" attribute. The "datePattern" attribute is a custom
-		// attribute added for the sake of familiarity to the JSF developer. Since there is no "datePattern" Alloy
-		// attribute, the datePattern must be converted to Alloy mask syntax before it is encoded as the "mask"
-		// attribute value.
-		if (pickDateAlloy.getMask() == null) {
-
-			String datePatternMask = PickDateUtil.getMaskFromDatePattern(datePattern);
-			encodeMask(responseWriter, pickDateAlloy, datePatternMask, first);
-		}
+	protected void encodeAutoHide(ResponseWriter responseWriter, PickDate pickDate, Boolean autoShow, boolean first)
+		throws IOException {
+		super.encodeAutoHide(responseWriter, pickDate, !autoShow, first);
 	}
 
-	@Override
-	protected void encodeFor(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String for_, boolean first)
-		throws IOException {
+	protected void encodeCalendar(ResponseWriter responseWriter, PickDate pickDate, boolean first) throws IOException {
 
-		// The "trigger" attribute takes precedence. If "trigger" has not been specified, then the "for" attribute is
-		// to be utilized for encoding the "trigger" attribute.
-		if (pickDateAlloy.getTrigger() == null) {
-			encodeTrigger(responseWriter, pickDateAlloy, for_, first);
-		}
-	}
+		// The calendar attribute value provides the opportunity to specify dateClick events, selectionMode,
+		// minimumDate, maximumDate as key:value pairs via JSON syntax.
+		// For example: "calendar: {selectionMode: 'multiple'}"
+		boolean calendarFirst = true;
 
-	@Override
-	public void encodeLang(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
-		throws IOException {
-
-		PickDateAlloy pickDateAlloy = (PickDateAlloy) uiComponent;
-		Locale locale = PickDateUtil.determineLocale(facesContext, pickDateAlloy.getLocale());
-
-		// RFC 1766 requires the subtags of locales to be delimited by hyphens rather than underscores.
-		// http://www.faqs.org/rfcs/rfc1766.html
-		String localeString = locale.toString().replaceAll(StringPool.UNDERLINE, StringPool.DASH);
+		encodeObject(responseWriter, CALENDAR, StringPool.BLANK, first);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		encodeString(responseWriter, LANG, localeString, true);
+
+		String componentDatePattern = pickDate.getDatePattern();
+		Object maximumDate = pickDate.getMaximumDate();
+
+		if (maximumDate != null) {
+
+			Date maxDate = PickDateUtil.getObjectAsDate(maximumDate, componentDatePattern);
+			String maxDateString = PickDateUtil.toJavascriptDateString(maxDate);
+			encodeObject(responseWriter, PickDate.MAXIMUM_DATE, maxDateString, calendarFirst);
+			calendarFirst = false;
+		}
+
+		Object minimumDate = pickDate.getMinimumDate();
+
+		if (minimumDate != null) {
+
+			Date minDate = PickDateUtil.getObjectAsDate(minimumDate, componentDatePattern);
+			String minDateString = PickDateUtil.toJavascriptDateString(minDate);
+			encodeObject(responseWriter, PickDate.MINIMUM_DATE, minDateString, calendarFirst);
+			calendarFirst = false;
+		}
+
+		String selectionMode = pickDate.getSelectionMode();
+
+		if (selectionMode != null) {
+
+			encodeString(responseWriter, PickDate.SELECTION_MODE, selectionMode, calendarFirst);
+			calendarFirst = false;
+		}
+
+		encodeObject(responseWriter, ON, StringPool.BLANK, calendarFirst);
+		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+
+		String onDateClick = pickDate.getOnDateClick();
+
+		if (onDateClick == null) {
+
+			String for_ = pickDate.getFor();
+			UIComponent forComponent = pickDate.findComponent(for_);
+
+			if (forComponent != null) {
+
+				String forComponentClientId = forComponent.getClientId();
+				for_ = ComponentUtil.escapeClientId(forComponentClientId);
+			}
+
+			// The trigger is the "#" symbol followed by the forComponent's clientId.
+			String trigger = StringPool.POUND + for_;
+
+			// The default value of the onDateClick attribute is a script that that is read from the
+			// DefaultOnDateClick.js classpath resource. The script contains a "{0}" token that needs
+			// to be substituted with the trigger, which is the "#" sign followed by escaped clientId of the trigger.
+			onDateClick = DEFAULT_ON_DATE_CLICK_TEMPLATE;
+			onDateClick = onDateClick.replace(TOKEN, trigger);
+		}
+
+		encodeEvent(responseWriter, DATE_CLICK, onDateClick, true);
+		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+		calendarFirst = false;
+
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 	}
 
 	@Override
-	protected void encodeLocale(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object locale,
-		boolean first) throws IOException {
+	protected void encodeHiddenAttributes(ResponseWriter responseWriter, PickDate pickDate, boolean first)
+		throws IOException {
 
-		// This is a no-op because "locale" is not an attribute of PickDate. Rather, it is a custom attribute added
-		// for the sake of familiarity to the JSF developer. The value of the "locale" attribute is utilized by the
-		// PickDate.getDatePattern() method in order to determine locale-specific date patterns. It is also used below
-		// in the isForceInline(FacesContext, UIComponent) method in order to handle a special inline-rendering case.
-	}
+		encodeCalendar(responseWriter, pickDate, first);
+		first = false;
 
-	@Override
-	protected void encodeMaximumDate(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object maximumDate,
-		boolean first) throws IOException {
+		String styleClass = pickDate.getStyleClass();
 
-		// This is a no-op because the "maximumDate" attribute belongs to the internal calendar rather than the
-		// PickDate itself, so it should not be rendered like a normal attribute. Instead, "maximumDate" is handled by
-		// PickDate.getCalendar().
-	}
-
-	@Override
-	protected void encodeMinimumDate(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object minimumDate,
-		boolean first) throws IOException {
-
-		// This is a no-op because the "minimumDate" attribute belongs to the internal calendar rather than the
-		// PickDate itself, so it should not be rendered like a normal attribute. Instead, "minimumDate" is handled by
-		// PickDate.getCalendar().
-	}
-
-	@Override
-	protected void encodeSelectionMode(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy,
-		String selectionMode, boolean first) throws IOException {
-
-		// This is a no-op because the "selectionMode" attribute belongs to the internal calendar rather than the
-		// pickDate itself, so it should not be rendered like a normal attribute. Instead, "selectionMode" is handled
-		// by PickDate.getCalendar().
-	}
-
-	@Override
-	protected void encodeTrigger(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, String trigger,
-		boolean first) throws IOException {
-
-		// If the specified trigger can be found in the JSF component tree, then encode the escaped clientId of that
-		// component as the trigger.
-		UIComponent pickDate = (UIComponent) pickDateAlloy;
-		UIComponent triggerComponent = pickDate.findComponent(trigger);
-
-		if (triggerComponent != null) {
-			String triggerComponentClientId = ComponentUtil.escapeClientId(triggerComponent.getClientId());
-			String triggerNode = StringPool.POUND + triggerComponentClientId;
-			super.encodeTrigger(responseWriter, pickDateAlloy, triggerNode, first);
-		}
-
-		// Otherwise, simply encode the specified trigger since it is likely the "id" of an element in the DOM.
-		else {
-			super.encodeTrigger(responseWriter, pickDateAlloy, trigger, first);
+		if (styleClass != null) {
+			encodeString(responseWriter, POPOVER_CSS_CLASS, styleClass, first);
+			first = false;
 		}
 	}
 
 	@Override
-	protected void encodeZIndex(ResponseWriter responseWriter, PickDateAlloy pickDateAlloy, Object zIndex,
-		boolean first) throws IOException {
+	protected void encodeMask(ResponseWriter responseWriter, PickDate pickDate, String datePattern, boolean first)
+		throws IOException {
 
-		// This is a no-op because "zIndex" attribute belongs to the internal popover rather than the PickDate itself,
-		// so it should not be rendered like a normal attribute. Instead, "zIndex" is handled by
-		// PickDate.getPopover().
+		String datePatternMask = PickDateUtil.getMaskFromDatePattern(datePattern);
+
+		super.encodeMask(responseWriter, pickDate, datePatternMask, first);
+	}
+
+	@Override
+	protected void encodePopover(ResponseWriter responseWriter, PickDate pickDate, Object zIndex, boolean first)
+		throws IOException {
+
+		// The popover attribute value provides the opportunity to specify a zIndex key:value pair via JSON
+		// syntax. For example: "popover: {zIndex: 1}"
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(StringPool.OPEN_CURLY_BRACE);
+		stringBuilder.append(PickDate.Z_INDEX);
+		stringBuilder.append(StringPool.COLON);
+		stringBuilder.append(zIndex);
+		stringBuilder.append(StringPool.CLOSE_CURLY_BRACE);
+
+		super.encodePopover(responseWriter, pickDate, stringBuilder.toString(), first);
+	}
+
+	@Override
+	protected void encodeTrigger(ResponseWriter responseWriter, PickDate pickDate, String for_, boolean first)
+		throws IOException {
+
+		UIComponent forComponent = pickDate.findComponent(for_);
+
+		if (forComponent != null) {
+
+			String forComponentClientId = forComponent.getClientId();
+			for_ = ComponentUtil.escapeClientId(forComponentClientId);
+		}
+
+		String trigger = StringPool.POUND + for_;
+
+		super.encodeTrigger(responseWriter, pickDate, trigger, first);
 	}
 
 	@Override
@@ -173,8 +222,8 @@ public class PickDateRenderer extends PickDateRendererBase {
 		// In order to support the "lang" attribute of the YUI object, it is necessary to determine if the user has
 		// specified a locale other than that of the server or view root. If so, then the javascript must be rendered
 		// inline.
-		PickDateAlloy pickDateAlloy = (PickDateAlloy) uiComponent;
-		Object componentLocale = pickDateAlloy.getLocale();
+		PickDate pickDate = (PickDate) uiComponent;
+		Object componentLocale = pickDate.getLocale();
 		Locale locale = PickDateUtil.determineLocale(facesContext, componentLocale);
 		UIViewRoot viewRoot = facesContext.getViewRoot();
 		Locale viewRootLocale = viewRoot.getLocale();

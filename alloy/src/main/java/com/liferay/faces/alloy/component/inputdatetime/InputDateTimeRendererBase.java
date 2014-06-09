@@ -151,10 +151,6 @@ public abstract class InputDateTimeRendererBase extends InputTextRenderer {
 		// Finish the encoding of the outermost </span> element.
 		responseWriter.endElement(StringPool.SPAN);
 
-		// Since the pickDate's trigger needs to be set directly, prefix the escaped clientId of the trigger with the
-		// "#" symbol.
-		trigger = StringPool.POUND + trigger;
-
 		// If the component is enabled, then create either a date or time picker (that is to remain detached from the
 		// component tree) and invoke its corresponding renderer.
 		if (!disabled) {

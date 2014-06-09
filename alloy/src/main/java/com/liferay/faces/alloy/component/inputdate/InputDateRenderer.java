@@ -56,18 +56,14 @@ public class InputDateRenderer extends InputDateTimeRendererBase {
 
 		// Create a pickDate and pass attributes through to it.
 		PickDate pickDate = (PickDate) application.createComponent(PickDate.COMPONENT_TYPE);
-
-		// Because the pickDate is not in the component tree, utilizing PickDate.setFor() with the component id
-		// will not work since it uses UIComponent.findComopnent() which only works for compnents that appear in the
-		// component tree. To workaround this, the pickDate's trigger must be set directly.
 		String datePattern = inputDate.getDatePattern();
 		pickDate.setDatePattern(datePattern);
+		pickDate.setFor(trigger);
 		pickDate.setLocale(inputDate.getLocale());
 		pickDate.setMaximumDate(inputDate.getMaximumDate());
 		pickDate.setMinimumDate(inputDate.getMinimumDate());
 		pickDate.setPanes(inputDate.getPanes());
 		pickDate.setStyleClass(inputDate.getStyleClass());
-		pickDate.setTrigger(trigger);
 		pickDate.setzIndex(inputDate.getzIndex());
 
 		String showOn = inputDate.getShowOn();
