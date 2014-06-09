@@ -25,36 +25,29 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class PickDateBase extends UIComponentBase implements Styleable, ClientComponent, PickDateAlloy {
+public abstract class PickDateBase extends UIComponentBase implements Styleable, ClientComponent {
 
-	@Override
-	public Object getActiveInput() {
-		return (Object) getStateHelper().eval(ACTIVE_INPUT, null);
+	// Public Constants
+	public static final String AUTO_SHOW = "autoShow";
+	public static final String CLIENT_KEY = "clientKey";
+	public static final String DATE_PATTERN = "datePattern";
+	public static final String DATE_SEPARATOR = "dateSeparator";
+	public static final String FOR = "for";
+	public static final String LOCALE = "locale";
+	public static final String MAXIMUM_DATE = "maximumDate";
+	public static final String MINIMUM_DATE = "minimumDate";
+	public static final String PANES = "panes";
+	public static final String SELECTION_MODE = "selectionMode";
+	public static final String STYLE = "style";
+	public static final String STYLE_CLASS = "styleClass";
+	public static final String Z_INDEX = "zIndex";
+
+	public Boolean isAutoShow() {
+		return (Boolean) getStateHelper().eval(AUTO_SHOW, null);
 	}
 
-	@Override
-	public void setActiveInput(Object activeInput) {
-		getStateHelper().put(ACTIVE_INPUT, activeInput);
-	}
-
-	@Override
-	public Boolean isAutoHide() {
-		return (Boolean) getStateHelper().eval(AUTO_HIDE, null);
-	}
-
-	@Override
-	public void setAutoHide(Boolean autoHide) {
-		getStateHelper().put(AUTO_HIDE, autoHide);
-	}
-
-	@Override
-	public Object getCalendar() {
-		return (Object) getStateHelper().eval(CALENDAR, null);
-	}
-
-	@Override
-	public void setCalendar(Object calendar) {
-		getStateHelper().put(CALENDAR, calendar);
+	public void setAutoShow(Boolean autoShow) {
+		getStateHelper().put(AUTO_SHOW, autoShow);
 	}
 
 	@Override
@@ -67,132 +60,66 @@ public abstract class PickDateBase extends UIComponentBase implements Styleable,
 		getStateHelper().put(CLIENT_KEY, clientKey);
 	}
 
-	@Override
-	public Object getContainer() {
-		return (Object) getStateHelper().eval(CONTAINER, null);
-	}
-
-	@Override
-	public void setContainer(Object container) {
-		getStateHelper().put(CONTAINER, container);
-	}
-
-	@Override
-	public String getContent() {
-		return (String) getStateHelper().eval(CONTENT, null);
-	}
-
-	@Override
-	public void setContent(String content) {
-		getStateHelper().put(CONTENT, content);
-	}
-
-	@Override
 	public String getDatePattern() {
 		return (String) getStateHelper().eval(DATE_PATTERN, null);
 	}
 
-	@Override
 	public void setDatePattern(String datePattern) {
 		getStateHelper().put(DATE_PATTERN, datePattern);
 	}
 
-	@Override
 	public String getDateSeparator() {
 		return (String) getStateHelper().eval(DATE_SEPARATOR, null);
 	}
 
-	@Override
 	public void setDateSeparator(String dateSeparator) {
 		getStateHelper().put(DATE_SEPARATOR, dateSeparator);
 	}
 
-	@Override
 	public String getFor() {
 		return (String) getStateHelper().eval(FOR, null);
 	}
 
-	@Override
 	public void setFor(String for_) {
 		getStateHelper().put(FOR, for_);
 	}
 
-	@Override
 	public Object getLocale() {
 		return (Object) getStateHelper().eval(LOCALE, null);
 	}
 
-	@Override
 	public void setLocale(Object locale) {
 		getStateHelper().put(LOCALE, locale);
 	}
 
-	@Override
-	public String getMask() {
-		return (String) getStateHelper().eval(MASK, null);
-	}
-
-	@Override
-	public void setMask(String mask) {
-		getStateHelper().put(MASK, mask);
-	}
-
-	@Override
 	public Object getMaximumDate() {
 		return (Object) getStateHelper().eval(MAXIMUM_DATE, null);
 	}
 
-	@Override
 	public void setMaximumDate(Object maximumDate) {
 		getStateHelper().put(MAXIMUM_DATE, maximumDate);
 	}
 
-	@Override
 	public Object getMinimumDate() {
 		return (Object) getStateHelper().eval(MINIMUM_DATE, null);
 	}
 
-	@Override
 	public void setMinimumDate(Object minimumDate) {
 		getStateHelper().put(MINIMUM_DATE, minimumDate);
 	}
 
-	@Override
-	public Object getPanes() {
-		return (Object) getStateHelper().eval(PANES, null);
+	public Integer getPanes() {
+		return (Integer) getStateHelper().eval(PANES, null);
 	}
 
-	@Override
-	public void setPanes(Object panes) {
+	public void setPanes(Integer panes) {
 		getStateHelper().put(PANES, panes);
 	}
 
-	@Override
-	public Object getPopover() {
-		return (Object) getStateHelper().eval(POPOVER, null);
-	}
-
-	@Override
-	public void setPopover(Object popover) {
-		getStateHelper().put(POPOVER, popover);
-	}
-
-	@Override
-	public String getPopoverCssClass() {
-		return (String) getStateHelper().eval(POPOVER_CSS_CLASS, null);
-	}
-
-	@Override
-	public void setPopoverCssClass(String popoverCssClass) {
-		getStateHelper().put(POPOVER_CSS_CLASS, popoverCssClass);
-	}
-
-	@Override
 	public String getSelectionMode() {
 		return (String) getStateHelper().eval(SELECTION_MODE, null);
 	}
 
-	@Override
 	public void setSelectionMode(String selectionMode) {
 		getStateHelper().put(SELECTION_MODE, selectionMode);
 	}
@@ -217,42 +144,10 @@ public abstract class PickDateBase extends UIComponentBase implements Styleable,
 		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 
-	@Override
-	public String getTrigger() {
-		return (String) getStateHelper().eval(TRIGGER, null);
-	}
-
-	@Override
-	public void setTrigger(String trigger) {
-		getStateHelper().put(TRIGGER, trigger);
-	}
-
-	@Override
-	public String getValueExtractor() {
-		return (String) getStateHelper().eval(VALUE_EXTRACTOR, null);
-	}
-
-	@Override
-	public void setValueExtractor(String valueExtractor) {
-		getStateHelper().put(VALUE_EXTRACTOR, valueExtractor);
-	}
-
-	@Override
-	public String getValueFormatter() {
-		return (String) getStateHelper().eval(VALUE_FORMATTER, null);
-	}
-
-	@Override
-	public void setValueFormatter(String valueFormatter) {
-		getStateHelper().put(VALUE_FORMATTER, valueFormatter);
-	}
-
-	@Override
 	public Object getzIndex() {
 		return (Object) getStateHelper().eval(Z_INDEX, null);
 	}
 
-	@Override
 	public void setzIndex(Object zIndex) {
 		getStateHelper().put(Z_INDEX, zIndex);
 	}

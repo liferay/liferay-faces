@@ -13,15 +13,10 @@
  */
 package com.liferay.faces.alloy.component.pickdate;
 
-import java.util.Date;
-
 import javax.faces.component.FacesComponent;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.alloy.util.AlloyConstants;
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -37,14 +32,8 @@ public class PickDate extends PickDateBase {
 	public static final String STYLE_CLASS_NAME = "alloy-pick-date";
 
 	// Private Constants
-	private static final String DATE_CLICK = "dateClick";
-	private static final String DEFAULT_ON_DATE_CLICK_TEMPLATE =
-		"pickDateDefaultOnDateClick(event.date, A.one('{0}'), this);";
 	private static final String LIFERAY_Z_INDEX_TOOLTIP = "Liferay.zIndex.TOOLTIP";
-	private static final String TOKEN = "{0}";
-
-	// Private Members
-	private String onDateClick;
+	private static final String ON_DATE_CLICK = "onDateClick";
 
 	public PickDate() {
 		super();
@@ -61,104 +50,6 @@ public class PickDate extends PickDateBase {
 		}
 
 		return zIndex;
-	}
-
-	protected void appendJSONAttribute(StringBuilder stringBuilder, String attributeName, String attributeValue,
-		boolean first) {
-
-		if (!first) {
-			stringBuilder.append(StringPool.COMMA);
-			stringBuilder.append(StringPool.NEW_LINE);
-		}
-
-		stringBuilder.append(attributeName);
-		stringBuilder.append(StringPool.COLON);
-		stringBuilder.append(attributeValue);
-	}
-
-	protected void appendJSONEvent(StringBuilder stringBuilder, String eventType, String eventName,
-		String eventFunction, boolean first) {
-
-		if (!first) {
-			stringBuilder.append(StringPool.COMMA);
-			stringBuilder.append(StringPool.NEW_LINE);
-		}
-
-		stringBuilder.append(eventType);
-		stringBuilder.append(StringPool.COLON);
-		stringBuilder.append(StringPool.OPEN_CURLY_BRACE);
-		stringBuilder.append(StringPool.NEW_LINE);
-		stringBuilder.append(eventName);
-		stringBuilder.append(StringPool.COLON);
-		stringBuilder.append(AlloyConstants.FUNCTION_EVENT);
-		stringBuilder.append(StringPool.SPACE);
-		stringBuilder.append(StringPool.OPEN_CURLY_BRACE);
-		stringBuilder.append(eventFunction);
-		stringBuilder.append(StringPool.CLOSE_CURLY_BRACE);
-		stringBuilder.append(StringPool.NEW_LINE);
-		stringBuilder.append(StringPool.CLOSE_CURLY_BRACE);
-		stringBuilder.append(StringPool.COMMA);
-		stringBuilder.append(StringPool.NEW_LINE);
-	}
-
-	@Override
-	public Object getCalendar() {
-
-		Object calendar = super.getCalendar();
-
-		if (calendar == null) {
-
-			// The calendar attribute value provides the opportunity to specify dateClick events, selectionMode,
-			// minimumDate, maximumDate as key:value pairs via JSON syntax.
-			// For example: "calendar: {selectionMode: 'multiple'}"
-			boolean first = true;
-			StringBuilder stringBuilder = new StringBuilder();
-			stringBuilder.append(StringPool.OPEN_CURLY_BRACE);
-
-			String componentDatePattern = getDatePattern();
-			String componetMask = getMask();
-			Object maximumDate = getMaximumDate();
-
-			if (maximumDate != null) {
-
-				Date maxDate = PickDateUtil.getObjectAsDate(maximumDate, componentDatePattern, componetMask);
-				String maxDateString = PickDateUtil.toJavascriptDateString(maxDate);
-				appendJSONAttribute(stringBuilder, MAXIMUM_DATE, maxDateString, first);
-				first = false;
-			}
-
-			Object minimumDate = getMinimumDate();
-
-			if (minimumDate != null) {
-
-				Date minDate = PickDateUtil.getObjectAsDate(minimumDate, componentDatePattern, componetMask);
-				String minDateString = PickDateUtil.toJavascriptDateString(minDate);
-				appendJSONAttribute(stringBuilder, MINIMUM_DATE, minDateString, first);
-				first = false;
-			}
-
-			String selectionMode = getSelectionMode();
-
-			if (selectionMode != null) {
-
-				selectionMode = StringPool.QUOTE + selectionMode + StringPool.QUOTE;
-				appendJSONAttribute(stringBuilder, SELECTION_MODE, selectionMode, first);
-				first = false;
-			}
-
-			String onDateClickString = getOnDateClick();
-
-			if (onDateClickString != null) {
-
-				appendJSONEvent(stringBuilder, AlloyConstants.ON, DATE_CLICK, onDateClickString, first);
-				first = false;
-			}
-
-			stringBuilder.append(StringPool.CLOSE_CURLY_BRACE);
-			calendar = stringBuilder.toString();
-		}
-
-		return calendar;
 	}
 
 	@Override
@@ -183,84 +74,11 @@ public class PickDate extends PickDateBase {
 	}
 
 	public String getOnDateClick() {
-
-		String onDateClickString = null;
-		UIComponent parent = getParent();
-
-		// If the parent is not null, then the component is in the component tree. So if the component is in the
-		// component tree OR if onDateClick has no value, use the default value for onDateClick.
-		if ((parent != null) || (onDateClick == null)) {
-			String trigger = getTrigger();
-
-			// If trigger is null, use for to determine the trigger.
-			if (trigger == null) {
-
-				String forId = getFor();
-				UIComponent forComponent = (UIComponent) findComponent(forId);
-				trigger = forId;
-
-				// If there is a forComponent, the trigger is the "#" symbol followed by the forComponent's
-				// escapedClientId.
-				if (forComponent != null) {
-					String forClientId = forComponent.getClientId();
-					String escapedForClientId = ComponentUtil.escapeClientId(forClientId);
-					trigger = StringPool.POUND + escapedForClientId;
-				}
-			}
-
-			// The default value of the onDateClick attribute is a script that that is read from the
-			// DefaultOnDateClick.js classpath resource. The script contains a "{0}" token that needs
-			// to be substituted with the trigger, which is the "#" sign followed by escaped clientId of the trigger.
-			String defaultOnDateClick = DEFAULT_ON_DATE_CLICK_TEMPLATE;
-			defaultOnDateClick = defaultOnDateClick.replace(TOKEN, trigger);
-			onDateClickString = defaultOnDateClick;
-		}
-
-		// Otherwise, if the parent is null, the component is not in the component tree. So it is threadsafe to access
-		// private members.
-		else if ((parent == null) && (onDateClick != null)) {
-			onDateClickString = onDateClick;
-		}
-
-		return onDateClickString;
+		return (String) getStateHelper().eval(ON_DATE_CLICK, null);
 	}
 
 	public void setOnDateClick(String onDateClick) {
-		this.onDateClick = onDateClick;
-	}
-
-	@Override
-	public Object getPopover() {
-
-		Object popover = super.getPopover();
-
-		if (popover == null) {
-
-			Object zIndex = getzIndex();
-
-			if (zIndex != null) {
-
-				// The popover attribute value provides the opportunity to specify a zIndex key:value pair via JSON
-				// syntax. For example: "popover: {zIndex: 1}"
-				StringBuilder stringBuilder = new StringBuilder();
-				stringBuilder.append(StringPool.OPEN_CURLY_BRACE);
-				appendJSONAttribute(stringBuilder, Z_INDEX, zIndex.toString(), true);
-				stringBuilder.append(StringPool.CLOSE_CURLY_BRACE);
-				popover = stringBuilder.toString();
-			}
-		}
-
-		return popover;
-	}
-
-	@Override
-	public String getPopoverCssClass() {
-
-		String popoverCssClass = super.getPopoverCssClass();
-		String styleClass = getStyleClass();
-		popoverCssClass = ComponentUtil.concatCssClasses(styleClass, popoverCssClass);
-
-		return popoverCssClass;
+		getStateHelper().put(ON_DATE_CLICK, onDateClick);
 	}
 
 	@Override
