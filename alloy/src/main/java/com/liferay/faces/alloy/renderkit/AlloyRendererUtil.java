@@ -42,6 +42,7 @@ public class AlloyRendererUtil {
 	private static final String NEW = "new";
 	private static final String NUMBER_REGEX = "([-])?[0-9]+([.])?[0-9]*";
 	private static final Pattern NUMBER_PATTERN = Pattern.compile(NUMBER_REGEX);
+	private static final String RENDER = "render";
 	private static final String USE = "use";
 	private static final String VAR = "var";
 	private static final String YUI = "YUI";
@@ -286,6 +287,10 @@ public class AlloyRendererUtil {
 		responseWriter.write(StringPool.QUOTE);
 		responseWriter.write(attributeValue.toString());
 		responseWriter.write(StringPool.QUOTE);
+	}
+
+	public static void encodeWidgetRender(ResponseWriter responseWriter, boolean first) throws IOException {
+		encodeBoolean(responseWriter, RENDER, true, first);
 	}
 
 	protected static void encodeEvent(ResponseWriter responseWriter, String attributeName, Object attributeValue,

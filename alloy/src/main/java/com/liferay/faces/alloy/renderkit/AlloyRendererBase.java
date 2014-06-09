@@ -134,5 +134,10 @@ public abstract class AlloyRendererBase extends ClientComponentRendererBase impl
 	}
 
 	@Override
+	public void encodeWidgetRender(ResponseWriter responseWriter, boolean first) throws IOException {
+		AlloyRendererUtil.encodeWidgetRender(responseWriter, first);
+	}
+
+	@Override
 	public abstract String getAlloyClassName();
 }

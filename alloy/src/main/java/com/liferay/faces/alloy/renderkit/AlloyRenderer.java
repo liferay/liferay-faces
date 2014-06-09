@@ -63,5 +63,7 @@ public interface AlloyRenderer {
 	public void encodeString(ResponseWriter responseWriter, String attributeName, Object attributeValue, boolean first)
 		throws IOException;
 
+	public void encodeWidgetRender(ResponseWriter responseWriter, boolean first) throws IOException;
+
 	public String getAlloyClassName();
 }
