@@ -16,7 +16,6 @@ package com.liferay.faces.alloy.component.fieldset;
 import javax.faces.component.FacesComponent;
 
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -34,14 +33,6 @@ public class Fieldset extends FieldsetBase {
 	public Fieldset() {
 		super();
 		setRendererType(RENDERER_TYPE);
-	}
-
-	public boolean isDisabled() {
-		return (Boolean) getStateHelper().eval(StringPool.DISABLED, false);
-	}
-
-	public void setDisabled(boolean disabled) {
-		getStateHelper().put(StringPool.DISABLED, disabled);
 	}
 
 	@Override
