@@ -27,6 +27,7 @@ import com.liferay.faces.util.component.Styleable;
 public abstract class InputDateBase extends InputDateTimeBase implements Styleable {
 
 	// Public Constants
+	public static final String AUTO_HIDE = "autoHide";
 	public static final String DATE_PATTERN = "datePattern";
 	public static final String LOCALE = "locale";
 	public static final String MAXIMUM_DATE = "maximumDate";
@@ -35,6 +36,14 @@ public abstract class InputDateBase extends InputDateTimeBase implements Styleab
 	public static final String STYLE = "style";
 	public static final String STYLE_CLASS = "styleClass";
 	public static final String Z_INDEX = "zIndex";
+
+	public Boolean isAutoHide() {
+		return (Boolean) getStateHelper().eval(AUTO_HIDE, null);
+	}
+
+	public void setAutoHide(Boolean autoHide) {
+		getStateHelper().put(AUTO_HIDE, autoHide);
+	}
 
 	public String getDatePattern() {
 		return (String) getStateHelper().eval(DATE_PATTERN, null);

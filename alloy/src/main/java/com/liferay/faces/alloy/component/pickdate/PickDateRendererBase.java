@@ -32,7 +32,6 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "DatePicker";
 	private static final String ALLOY_MODULE_NAME = "aui-datepicker";
-	private static final String AUTO_HIDE = "autoHide";
 	private static final String MASK = "mask";
 	private static final String TRIGGER = "trigger";
 	private static final String POPOVER = "popover";
@@ -46,11 +45,11 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 		PickDate pickDate = (PickDate) uiComponent;
 		boolean first = true;
 
-		Boolean autoShow = pickDate.isAutoShow();
+		Boolean autoHide = pickDate.isAutoHide();
 
-		if (autoShow != null) {
+		if (autoHide != null) {
 
-			encodeAutoHide(responseWriter, pickDate, autoShow, first);
+			encodeAutoHide(responseWriter, pickDate, autoHide, first);
 			first = false;
 		}
 
@@ -107,8 +106,8 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 		return MODULES;
 	}
 
-	protected void encodeAutoHide(ResponseWriter responseWriter, PickDate pickDate, Boolean autoShow, boolean first) throws IOException {
-		encodeObject(responseWriter, AUTO_HIDE, autoShow, first);
+	protected void encodeAutoHide(ResponseWriter responseWriter, PickDate pickDate, Boolean autoHide, boolean first) throws IOException {
+		encodeObject(responseWriter, PickDate.AUTO_HIDE, autoHide, first);
 	}
 
 	protected void encodeMask(ResponseWriter responseWriter, PickDate pickDate, String datePattern, boolean first) throws IOException {

@@ -28,7 +28,7 @@ import com.liferay.faces.util.component.ClientComponent;
 public abstract class PickDateBase extends UIComponentBase implements Styleable, ClientComponent {
 
 	// Public Constants
-	public static final String AUTO_SHOW = "autoShow";
+	public static final String AUTO_HIDE = "autoHide";
 	public static final String CLIENT_KEY = "clientKey";
 	public static final String DATE_PATTERN = "datePattern";
 	public static final String DATE_SEPARATOR = "dateSeparator";
@@ -42,12 +42,12 @@ public abstract class PickDateBase extends UIComponentBase implements Styleable,
 	public static final String STYLE_CLASS = "styleClass";
 	public static final String Z_INDEX = "zIndex";
 
-	public Boolean isAutoShow() {
-		return (Boolean) getStateHelper().eval(AUTO_SHOW, null);
+	public Boolean isAutoHide() {
+		return (Boolean) getStateHelper().eval(AUTO_HIDE, null);
 	}
 
-	public void setAutoShow(Boolean autoShow) {
-		getStateHelper().put(AUTO_SHOW, autoShow);
+	public void setAutoHide(Boolean autoHide) {
+		getStateHelper().put(AUTO_HIDE, autoHide);
 	}
 
 	@Override
