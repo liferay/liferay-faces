@@ -30,18 +30,22 @@ public abstract class MessagesBase extends HtmlMessages implements Styleable {
 	public static final String STYLE = "style";
 	public static final String STYLE_CLASS = "styleClass";
 
+	@Override
 	public String getStyle() {
 		return (String) getStateHelper().eval(STYLE, null);
 	}
 
+	@Override
 	public void setStyle(String style) {
 		getStateHelper().put(STYLE, style);
 	}
 
+	@Override
 	public String getStyleClass() {
 		return (String) getStateHelper().eval(STYLE_CLASS, null);
 	}
 
+	@Override
 	public void setStyleClass(String styleClass) {
 		getStateHelper().put(STYLE_CLASS, styleClass);
 	}

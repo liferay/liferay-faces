@@ -39,18 +39,22 @@ public abstract class IconBase extends UIComponentBase implements Styleable {
 		getStateHelper().put(NAME, name);
 	}
 
+	@Override
 	public String getStyle() {
 		return (String) getStateHelper().eval(STYLE, null);
 	}
 
+	@Override
 	public void setStyle(String style) {
 		getStateHelper().put(STYLE, style);
 	}
 
+	@Override
 	public String getStyleClass() {
 		return (String) getStateHelper().eval(STYLE_CLASS, null);
 	}
 
+	@Override
 	public void setStyleClass(String styleClass) {
 		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
