@@ -25,17 +25,23 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class InputSourceCodeBase extends HtmlInputText implements Styleable, ClientComponent, InputSourceCodeAlloy {
+public abstract class InputSourceCodeBase extends HtmlInputText implements Styleable, ClientComponent {
 
-	@Override
-	public String getBoundingBox() {
-		return (String) getStateHelper().eval(BOUNDING_BOX, null);
-	}
-
-	@Override
-	public void setBoundingBox(String boundingBox) {
-		getStateHelper().put(BOUNDING_BOX, boundingBox);
-	}
+	// Public Constants
+	public static final String CLIENT_KEY = "clientKey";
+	public static final String HEIGHT = "height";
+	public static final String HIGHLIGHT_ACTIVE_LINE = "highlightActiveLine";
+	public static final String LOCALE = "locale";
+	public static final String MODE = "mode";
+	public static final String READ_ONLY = "readOnly";
+	public static final String SHOW_PRINT_MARGIN = "showPrintMargin";
+	public static final String STYLE = "style";
+	public static final String STYLE_CLASS = "styleClass";
+	public static final String TAB_SIZE = "tabSize";
+	public static final String USE_SOFT_TABS = "useSoftTabs";
+	public static final String USE_WRAP_MODE = "useWrapMode";
+	public static final String VALUE = "value";
+	public static final String WIDTH = "width";
 
 	@Override
 	public String getClientKey() {
@@ -47,94 +53,52 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 		getStateHelper().put(CLIENT_KEY, clientKey);
 	}
 
-	@Override
-	public String getContentBox() {
-		return (String) getStateHelper().eval(CONTENT_BOX, null);
+	public String getHeight() {
+		return (String) getStateHelper().eval(HEIGHT, null);
 	}
 
-	@Override
-	public void setContentBox(String contentBox) {
-		getStateHelper().put(CONTENT_BOX, contentBox);
-	}
-
-	@Override
-	public Object getHeight() {
-		return (Object) getStateHelper().eval(HEIGHT, null);
-	}
-
-	@Override
-	public void setHeight(Object height) {
+	public void setHeight(String height) {
 		getStateHelper().put(HEIGHT, height);
 	}
 
-	@Override
 	public Boolean isHighlightActiveLine() {
 		return (Boolean) getStateHelper().eval(HIGHLIGHT_ACTIVE_LINE, null);
 	}
 
-	@Override
 	public void setHighlightActiveLine(Boolean highlightActiveLine) {
 		getStateHelper().put(HIGHLIGHT_ACTIVE_LINE, highlightActiveLine);
 	}
 
-	@Override
 	public String getLocale() {
 		return (String) getStateHelper().eval(LOCALE, null);
 	}
 
-	@Override
 	public void setLocale(String locale) {
 		getStateHelper().put(LOCALE, locale);
 	}
 
-	@Override
 	public String getMode() {
 		return (String) getStateHelper().eval(MODE, null);
 	}
 
-	@Override
 	public void setMode(String mode) {
 		getStateHelper().put(MODE, mode);
 	}
 
-	@Override
 	public Boolean isReadOnly() {
 		return (Boolean) getStateHelper().eval(READ_ONLY, null);
 	}
 
-	@Override
 	public void setReadOnly(Boolean readOnly) {
 		getStateHelper().put(READ_ONLY, readOnly);
 	}
 
-	@Override
 	public Boolean isShowPrintMargin() {
 		return (Boolean) getStateHelper().eval(SHOW_PRINT_MARGIN, null);
 	}
 
-	@Override
 	public void setShowPrintMargin(Boolean showPrintMargin) {
 		getStateHelper().put(SHOW_PRINT_MARGIN, showPrintMargin);
-	}
-
-	@Override
-	public String getSrcNode() {
-		return (String) getStateHelper().eval(SRC_NODE, null);
-	}
-
-	@Override
-	public void setSrcNode(String srcNode) {
-		getStateHelper().put(SRC_NODE, srcNode);
-	}
-
-	@Override
-	public Object getStrings() {
-		return (Object) getStateHelper().eval(STRINGS, null);
-	}
-
-	@Override
-	public void setStrings(Object strings) {
-		getStateHelper().put(STRINGS, strings);
 	}
 
 	@Override
@@ -157,83 +121,35 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 
-	@Override
-	public Object getTabIndex() {
-		return (Object) getStateHelper().eval(TAB_INDEX, null);
+	public String getTabSize() {
+		return (String) getStateHelper().eval(TAB_SIZE, null);
 	}
 
-	@Override
-	public void setTabIndex(Object tabIndex) {
-		getStateHelper().put(TAB_INDEX, tabIndex);
-	}
-
-	@Override
-	public Object getTabSize() {
-		return (Object) getStateHelper().eval(TAB_SIZE, null);
-	}
-
-	@Override
-	public void setTabSize(Object tabSize) {
+	public void setTabSize(String tabSize) {
 		getStateHelper().put(TAB_SIZE, tabSize);
 	}
 
-	@Override
 	public Boolean isUseSoftTabs() {
 		return (Boolean) getStateHelper().eval(USE_SOFT_TABS, null);
 	}
 
-	@Override
 	public void setUseSoftTabs(Boolean useSoftTabs) {
 		getStateHelper().put(USE_SOFT_TABS, useSoftTabs);
 	}
 
-	@Override
 	public Boolean isUseWrapMode() {
 		return (Boolean) getStateHelper().eval(USE_WRAP_MODE, null);
 	}
 
-	@Override
 	public void setUseWrapMode(Boolean useWrapMode) {
 		getStateHelper().put(USE_WRAP_MODE, useWrapMode);
 	}
 
-	@Override
-	public Boolean isVisible() {
-		return (Boolean) getStateHelper().eval(VISIBLE, null);
+	public String getWidth() {
+		return (String) getStateHelper().eval(WIDTH, null);
 	}
 
-	@Override
-	public void setVisible(Boolean visible) {
-		getStateHelper().put(VISIBLE, visible);
-	}
-
-	@Override
-	public String getWidgetId() {
-		return (String) getStateHelper().eval(WIDGET_ID, null);
-	}
-
-	@Override
-	public void setWidgetId(String widgetId) {
-		getStateHelper().put(WIDGET_ID, widgetId);
-	}
-
-	@Override
-	public Boolean isWidgetRender() {
-		return (Boolean) getStateHelper().eval(WIDGET_RENDER, null);
-	}
-
-	@Override
-	public void setWidgetRender(Boolean widgetRender) {
-		getStateHelper().put(WIDGET_RENDER, widgetRender);
-	}
-
-	@Override
-	public Object getWidth() {
-		return (Object) getStateHelper().eval(WIDTH, null);
-	}
-
-	@Override
-	public void setWidth(Object width) {
+	public void setWidth(String width) {
 		getStateHelper().put(WIDTH, width);
 	}
 }

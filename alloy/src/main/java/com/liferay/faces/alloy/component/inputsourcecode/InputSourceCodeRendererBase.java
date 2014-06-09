@@ -39,168 +39,98 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 	@Override
 	public void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
 
-		InputSourceCodeAlloy inputSourceCodeAlloy = (InputSourceCodeAlloy) uiComponent;
+		InputSourceCode inputSourceCode = (InputSourceCode) uiComponent;
 		boolean first = true;
 
-		String boundingBox = inputSourceCodeAlloy.getBoundingBox();
-
-		if (boundingBox != null) {
-
-			encodeBoundingBox(responseWriter, inputSourceCodeAlloy, boundingBox, first);
-			first = false;
-		}
-
-		String contentBox = inputSourceCodeAlloy.getContentBox();
-
-		if (contentBox != null) {
-
-			encodeContentBox(responseWriter, inputSourceCodeAlloy, contentBox, first);
-			first = false;
-		}
-
-		Boolean disabled = inputSourceCodeAlloy.isDisabled();
-
-		if (disabled != null) {
-
-			encodeDisabled(responseWriter, inputSourceCodeAlloy, disabled, first);
-			first = false;
-		}
-
-		Object height = inputSourceCodeAlloy.getHeight();
+		String height = inputSourceCode.getHeight();
 
 		if (height != null) {
 
-			encodeHeight(responseWriter, inputSourceCodeAlloy, height, first);
+			encodeHeight(responseWriter, inputSourceCode, height, first);
 			first = false;
 		}
 
-		Boolean highlightActiveLine = inputSourceCodeAlloy.isHighlightActiveLine();
+		Boolean highlightActiveLine = inputSourceCode.isHighlightActiveLine();
 
 		if (highlightActiveLine != null) {
 
-			encodeHighlightActiveLine(responseWriter, inputSourceCodeAlloy, highlightActiveLine, first);
+			encodeHighlightActiveLine(responseWriter, inputSourceCode, highlightActiveLine, first);
 			first = false;
 		}
 
-		String locale = inputSourceCodeAlloy.getLocale();
+		String locale = inputSourceCode.getLocale();
 
 		if (locale != null) {
 
-			encodeLocale(responseWriter, inputSourceCodeAlloy, locale, first);
+			encodeLocale(responseWriter, inputSourceCode, locale, first);
 			first = false;
 		}
 
-		String mode = inputSourceCodeAlloy.getMode();
+		String mode = inputSourceCode.getMode();
 
 		if (mode != null) {
 
-			encodeMode(responseWriter, inputSourceCodeAlloy, mode, first);
+			encodeMode(responseWriter, inputSourceCode, mode, first);
 			first = false;
 		}
 
-		Boolean readOnly = inputSourceCodeAlloy.isReadOnly();
+		Boolean readOnly = inputSourceCode.isReadOnly();
 
 		if (readOnly != null) {
 
-			encodeReadOnly(responseWriter, inputSourceCodeAlloy, readOnly, first);
+			encodeReadOnly(responseWriter, inputSourceCode, readOnly, first);
 			first = false;
 		}
 
-		Boolean showPrintMargin = inputSourceCodeAlloy.isShowPrintMargin();
+		Boolean showPrintMargin = inputSourceCode.isShowPrintMargin();
 
 		if (showPrintMargin != null) {
 
-			encodeShowPrintMargin(responseWriter, inputSourceCodeAlloy, showPrintMargin, first);
+			encodeShowPrintMargin(responseWriter, inputSourceCode, showPrintMargin, first);
 			first = false;
 		}
 
-		String srcNode = inputSourceCodeAlloy.getSrcNode();
-
-		if (srcNode != null) {
-
-			encodeSrcNode(responseWriter, inputSourceCodeAlloy, srcNode, first);
-			first = false;
-		}
-
-		Object strings = inputSourceCodeAlloy.getStrings();
-
-		if (strings != null) {
-
-			encodeStrings(responseWriter, inputSourceCodeAlloy, strings, first);
-			first = false;
-		}
-
-		Object tabIndex = inputSourceCodeAlloy.getTabIndex();
-
-		if (tabIndex != null) {
-
-			encodeTabIndex(responseWriter, inputSourceCodeAlloy, tabIndex, first);
-			first = false;
-		}
-
-		Object tabSize = inputSourceCodeAlloy.getTabSize();
+		String tabSize = inputSourceCode.getTabSize();
 
 		if (tabSize != null) {
 
-			encodeTabSize(responseWriter, inputSourceCodeAlloy, tabSize, first);
+			encodeTabSize(responseWriter, inputSourceCode, tabSize, first);
 			first = false;
 		}
 
-		Boolean useSoftTabs = inputSourceCodeAlloy.isUseSoftTabs();
+		Boolean useSoftTabs = inputSourceCode.isUseSoftTabs();
 
 		if (useSoftTabs != null) {
 
-			encodeUseSoftTabs(responseWriter, inputSourceCodeAlloy, useSoftTabs, first);
+			encodeUseSoftTabs(responseWriter, inputSourceCode, useSoftTabs, first);
 			first = false;
 		}
 
-		Boolean useWrapMode = inputSourceCodeAlloy.isUseWrapMode();
+		Boolean useWrapMode = inputSourceCode.isUseWrapMode();
 
 		if (useWrapMode != null) {
 
-			encodeUseWrapMode(responseWriter, inputSourceCodeAlloy, useWrapMode, first);
+			encodeUseWrapMode(responseWriter, inputSourceCode, useWrapMode, first);
 			first = false;
 		}
 
-		Object value = inputSourceCodeAlloy.getValue();
+		Object value = inputSourceCode.getValue();
 
 		if (value != null) {
 
-			encodeValue(responseWriter, inputSourceCodeAlloy, value, first);
+			encodeValue(responseWriter, inputSourceCode, value, first);
 			first = false;
 		}
 
-		Boolean visible = inputSourceCodeAlloy.isVisible();
-
-		if (visible != null) {
-
-			encodeVisible(responseWriter, inputSourceCodeAlloy, visible, first);
-			first = false;
-		}
-
-		String widgetId = inputSourceCodeAlloy.getWidgetId();
-
-		if (widgetId != null) {
-
-			encodeWidgetId(responseWriter, inputSourceCodeAlloy, widgetId, first);
-			first = false;
-		}
-
-		Boolean widgetRender = inputSourceCodeAlloy.isWidgetRender();
-
-		if (widgetRender != null) {
-
-			encodeWidgetRender(responseWriter, inputSourceCodeAlloy, widgetRender, first);
-			first = false;
-		}
-
-		Object width = inputSourceCodeAlloy.getWidth();
+		String width = inputSourceCode.getWidth();
 
 		if (width != null) {
 
-			encodeWidth(responseWriter, inputSourceCodeAlloy, width, first);
+			encodeWidth(responseWriter, inputSourceCode, width, first);
 			first = false;
 		}
+
+		encodeHiddenAttributes(responseWriter, inputSourceCode, first);
 	}
 
 	@Override
@@ -213,84 +143,52 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 		return MODULES;
 	}
 
-	protected void encodeBoundingBox(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String boundingBox, boolean first) throws IOException {
-		encodeString(responseWriter, InputSourceCodeAlloy.BOUNDING_BOX, boundingBox, first);
+	protected void encodeHeight(ResponseWriter responseWriter, InputSourceCode inputSourceCode, String height, boolean first) throws IOException {
+		encodeString(responseWriter, InputSourceCode.HEIGHT, height, first);
 	}
 
-	protected void encodeContentBox(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String contentBox, boolean first) throws IOException {
-		encodeString(responseWriter, InputSourceCodeAlloy.CONTENT_BOX, contentBox, first);
+	protected void encodeHighlightActiveLine(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Boolean highlightActiveLine, boolean first) throws IOException {
+		encodeObject(responseWriter, InputSourceCode.HIGHLIGHT_ACTIVE_LINE, highlightActiveLine, first);
 	}
 
-	protected void encodeDisabled(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean disabled, boolean first) throws IOException {
-		encodeBoolean(responseWriter, InputSourceCodeAlloy.DISABLED, disabled, first);
+	protected void encodeLocale(ResponseWriter responseWriter, InputSourceCode inputSourceCode, String locale, boolean first) throws IOException {
+		encodeString(responseWriter, InputSourceCode.LOCALE, locale, first);
 	}
 
-	protected void encodeHeight(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Object height, boolean first) throws IOException {
-		encodeNumber(responseWriter, InputSourceCodeAlloy.HEIGHT, height, first);
+	protected void encodeMode(ResponseWriter responseWriter, InputSourceCode inputSourceCode, String mode, boolean first) throws IOException {
+		encodeString(responseWriter, InputSourceCode.MODE, mode, first);
 	}
 
-	protected void encodeHighlightActiveLine(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean highlightActiveLine, boolean first) throws IOException {
-		encodeBoolean(responseWriter, InputSourceCodeAlloy.HIGHLIGHT_ACTIVE_LINE, highlightActiveLine, first);
+	protected void encodeReadOnly(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Boolean readOnly, boolean first) throws IOException {
+		encodeObject(responseWriter, InputSourceCode.READ_ONLY, readOnly, first);
 	}
 
-	protected void encodeLocale(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String locale, boolean first) throws IOException {
-		encodeString(responseWriter, InputSourceCodeAlloy.LOCALE, locale, first);
+	protected void encodeShowPrintMargin(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Boolean showPrintMargin, boolean first) throws IOException {
+		encodeObject(responseWriter, InputSourceCode.SHOW_PRINT_MARGIN, showPrintMargin, first);
 	}
 
-	protected void encodeMode(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String mode, boolean first) throws IOException {
-		encodeString(responseWriter, InputSourceCodeAlloy.MODE, mode, first);
+	protected void encodeTabSize(ResponseWriter responseWriter, InputSourceCode inputSourceCode, String tabSize, boolean first) throws IOException {
+		encodeString(responseWriter, InputSourceCode.TAB_SIZE, tabSize, first);
 	}
 
-	protected void encodeReadOnly(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean readOnly, boolean first) throws IOException {
-		encodeBoolean(responseWriter, InputSourceCodeAlloy.READ_ONLY, readOnly, first);
+	protected void encodeUseSoftTabs(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Boolean useSoftTabs, boolean first) throws IOException {
+		encodeObject(responseWriter, InputSourceCode.USE_SOFT_TABS, useSoftTabs, first);
 	}
 
-	protected void encodeShowPrintMargin(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean showPrintMargin, boolean first) throws IOException {
-		encodeBoolean(responseWriter, InputSourceCodeAlloy.SHOW_PRINT_MARGIN, showPrintMargin, first);
+	protected void encodeUseWrapMode(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Boolean useWrapMode, boolean first) throws IOException {
+		encodeObject(responseWriter, InputSourceCode.USE_WRAP_MODE, useWrapMode, first);
 	}
 
-	protected void encodeSrcNode(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String srcNode, boolean first) throws IOException {
-		encodeString(responseWriter, InputSourceCodeAlloy.SRC_NODE, srcNode, first);
+	protected void encodeValue(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Object value, boolean first) throws IOException {
+		encodeString(responseWriter, InputSourceCode.VALUE, value, first);
 	}
 
-	protected void encodeStrings(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Object strings, boolean first) throws IOException {
-		encodeObject(responseWriter, InputSourceCodeAlloy.STRINGS, strings, first);
+	protected void encodeWidth(ResponseWriter responseWriter, InputSourceCode inputSourceCode, String width, boolean first) throws IOException {
+		encodeString(responseWriter, InputSourceCode.WIDTH, width, first);
 	}
 
-	protected void encodeTabIndex(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Object tabIndex, boolean first) throws IOException {
-		encodeNumber(responseWriter, InputSourceCodeAlloy.TAB_INDEX, tabIndex, first);
-	}
-
-	protected void encodeTabSize(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Object tabSize, boolean first) throws IOException {
-		encodeNumber(responseWriter, InputSourceCodeAlloy.TAB_SIZE, tabSize, first);
-	}
-
-	protected void encodeUseSoftTabs(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean useSoftTabs, boolean first) throws IOException {
-		encodeBoolean(responseWriter, InputSourceCodeAlloy.USE_SOFT_TABS, useSoftTabs, first);
-	}
-
-	protected void encodeUseWrapMode(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean useWrapMode, boolean first) throws IOException {
-		encodeBoolean(responseWriter, InputSourceCodeAlloy.USE_WRAP_MODE, useWrapMode, first);
-	}
-
-	protected void encodeValue(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Object value, boolean first) throws IOException {
-		encodeString(responseWriter, InputSourceCodeAlloy.VALUE, value, first);
-	}
-
-	protected void encodeVisible(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean visible, boolean first) throws IOException {
-		encodeBoolean(responseWriter, InputSourceCodeAlloy.VISIBLE, visible, first);
-	}
-
-	protected void encodeWidgetId(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, String widgetId, boolean first) throws IOException {
-		encodeString(responseWriter, InputSourceCodeAlloy.WIDGET_ID, widgetId, first);
-	}
-
-	protected void encodeWidgetRender(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Boolean widgetRender, boolean first) throws IOException {
-		encodeBoolean(responseWriter, InputSourceCodeAlloy.WIDGET_RENDER, widgetRender, first);
-	}
-
-	protected void encodeWidth(ResponseWriter responseWriter, InputSourceCodeAlloy inputSourceCodeAlloy, Object width, boolean first) throws IOException {
-		encodeNumber(responseWriter, InputSourceCodeAlloy.WIDTH, width, first);
+	protected void encodeHiddenAttributes(ResponseWriter responseWriter, InputSourceCode inputSourceCode, boolean first) throws IOException {
+		// no-op
 	}
 }
 //J+
