@@ -16,7 +16,6 @@ package com.liferay.faces.alloy.component.tabview;
 import javax.faces.component.FacesComponent;
 
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -33,24 +32,6 @@ public class TabView extends TabViewBase {
 	public TabView() {
 		super();
 		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public Boolean isWidgetRender() {
-		return (Boolean) getStateHelper().eval(WIDGET_RENDER, true);
-	}
-
-	@Override
-	public String getSrcNode() {
-
-		String srcNode = super.getSrcNode();
-
-		if (srcNode == null) {
-			String defaultValue = StringPool.POUND + ComponentUtil.escapeClientId(getClientId());
-			srcNode = (java.lang.String) getStateHelper().eval(SRC_NODE, defaultValue);
-		}
-
-		return srcNode;
 	}
 
 	@Override
