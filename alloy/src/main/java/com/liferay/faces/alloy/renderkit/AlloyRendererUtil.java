@@ -22,7 +22,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.util.AlloyConstants;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
@@ -34,9 +33,13 @@ import com.liferay.faces.util.lang.StringPool;
 public class AlloyRendererUtil {
 
 	// Public Constants
+	public static final String BOUNDING_BOX = "boundingBox";
+
+	// Private Constants
 	private static final String A = "A";
 	private static final String DESTROY = "destroy";
 	private static final String FUNCTION_A = "function(A)";
+	private static final String FUNCTION_EVENT = "function(event)";
 	private static final String IF = "if";
 	private static final String LIFERAY_COMPONENT = "Liferay.component";
 	private static final String NEW = "new";
@@ -302,7 +305,7 @@ public class AlloyRendererUtil {
 
 		responseWriter.write(attributeName);
 		responseWriter.write(StringPool.COLON);
-		responseWriter.write(AlloyConstants.FUNCTION_EVENT);
+		responseWriter.write(FUNCTION_EVENT);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 		responseWriter.write(attributeValue.toString());
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
