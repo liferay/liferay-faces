@@ -166,9 +166,11 @@ public class TabViewRenderer extends TabViewRendererBase {
 		throws IOException {
 
 		encodeWidgetRender(responseWriter, first);
+		
+		first = false;
 
 		String srcNode = StringPool.POUND + ComponentUtil.escapeClientId(tabView.getClientId());
-		encodeObject(responseWriter, SRC_NODE, srcNode, first);
+		encodeString(responseWriter, SRC_NODE, srcNode, first);
 	}
 
 	protected void encodeTabListItem(FacesContext facesContext, ResponseWriter responseWriter, Tab tab)
