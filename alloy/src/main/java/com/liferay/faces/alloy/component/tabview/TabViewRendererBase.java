@@ -42,6 +42,30 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 		TabView tabView = (TabView) uiComponent;
 		boolean first = true;
 
+		String height = tabView.getHeight();
+
+		if (height != null) {
+
+			encodeHeight(responseWriter, tabView, height, first);
+			first = false;
+		}
+
+		Boolean stacked = tabView.isStacked();
+
+		if (stacked != null) {
+
+			encodeStacked(responseWriter, tabView, stacked, first);
+			first = false;
+		}
+
+		String width = tabView.getWidth();
+
+		if (width != null) {
+
+			encodeWidth(responseWriter, tabView, width, first);
+			first = false;
+		}
+
 		encodeHiddenAttributes(responseWriter, tabView, first);
 	}
 
@@ -53,6 +77,18 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 	@Override
 	protected String[] getModules() {
 		return MODULES;
+	}
+
+	protected void encodeHeight(ResponseWriter responseWriter, TabView tabView, String height, boolean first) throws IOException {
+		encodeString(responseWriter, TabView.HEIGHT, height, first);
+	}
+
+	protected void encodeStacked(ResponseWriter responseWriter, TabView tabView, Boolean stacked, boolean first) throws IOException {
+		encodeObject(responseWriter, TabView.STACKED, stacked, first);
+	}
+
+	protected void encodeWidth(ResponseWriter responseWriter, TabView tabView, String width, boolean first) throws IOException {
+		encodeString(responseWriter, TabView.WIDTH, width, first);
 	}
 
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, TabView tabView, boolean first) throws IOException {

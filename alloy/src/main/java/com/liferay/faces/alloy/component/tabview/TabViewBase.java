@@ -29,8 +29,11 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 
 	// Public Constants
 	public static final String CLIENT_KEY = "clientKey";
+	public static final String HEIGHT = "height";
+	public static final String STACKED = "stacked";
 	public static final String STYLE = "style";
 	public static final String STYLE_CLASS = "styleClass";
+	public static final String WIDTH = "width";
 
 	@Override
 	public String getClientKey() {
@@ -40,6 +43,22 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 	@Override
 	public void setClientKey(String clientKey) {
 		getStateHelper().put(CLIENT_KEY, clientKey);
+	}
+
+	public String getHeight() {
+		return (String) getStateHelper().eval(HEIGHT, null);
+	}
+
+	public void setHeight(String height) {
+		getStateHelper().put(HEIGHT, height);
+	}
+
+	public Boolean isStacked() {
+		return (Boolean) getStateHelper().eval(STACKED, null);
+	}
+
+	public void setStacked(Boolean stacked) {
+		getStateHelper().put(STACKED, stacked);
 	}
 
 	@Override
@@ -60,6 +79,14 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 	@Override
 	public void setStyleClass(String styleClass) {
 		getStateHelper().put(STYLE_CLASS, styleClass);
+	}
+
+	public String getWidth() {
+		return (String) getStateHelper().eval(WIDTH, null);
+	}
+
+	public void setWidth(String width) {
+		getStateHelper().put(WIDTH, width);
 	}
 }
 //J+
