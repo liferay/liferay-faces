@@ -23,6 +23,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
@@ -62,8 +63,8 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		InputSourceCodeAlloy InputSourceCodeAlloy = (InputSourceCodeAlloy) uiComponent;
-		Boolean readOnly = InputSourceCodeAlloy.isReadOnly();
+		InputSourceCode inputSourceCode = (InputSourceCode) uiComponent;
+		Boolean readOnly = inputSourceCode.isReadOnly();
 
 		if ((readOnly == null) || (!readOnly)) {
 
@@ -100,8 +101,7 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
 
 		// Encode the entire boundingbox <div>...<div> element.
-		String defaultBoundingBoxClientId = InputSourceCodeUtil.getDefaultBoundingBoxClientId(facesContext,
-				uiComponent);
+		String defaultBoundingBoxClientId = getDefaultBoundingBoxClientId(facesContext, uiComponent);
 		responseWriter.startElement(StringPool.DIV, uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, defaultBoundingBoxClientId, StringPool.ID);
 		responseWriter.endElement(StringPool.DIV);
@@ -124,7 +124,22 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 	}
 
 	@Override
-	protected void encodeValue(ResponseWriter responseWriter, InputSourceCodeAlloy InputSourceCodeAlloy, Object value,
+	protected void encodeHiddenAttributes(ResponseWriter responseWriter, InputSourceCode inputSourceCode, boolean first)
+		throws IOException {
+
+		encodeWidgetRender(responseWriter, first);
+
+		first = false;
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String defaultBoundingBoxClientId = getDefaultBoundingBoxClientId(facesContext, inputSourceCode);
+		String boundingBox = StringPool.POUND + ComponentUtil.escapeClientId(defaultBoundingBoxClientId);
+
+		encodeString(responseWriter, AlloyRendererUtil.BOUNDING_BOX, boundingBox, first);
+	}
+
+	@Override
+	protected void encodeValue(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Object value,
 		boolean first) throws IOException {
 
 		if (value instanceof String) {
@@ -137,7 +152,13 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 			value = valueAsString;
 		}
 
-		super.encodeValue(responseWriter, InputSourceCodeAlloy, value, first);
+		super.encodeValue(responseWriter, inputSourceCode, value, first);
+	}
+
+	protected String getDefaultBoundingBoxClientId(FacesContext facesContext, UIComponent uiComponent) {
+		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+
+		return uiComponent.getClientId(facesContext) + separatorChar + AlloyRendererUtil.BOUNDING_BOX;
 	}
 
 	@Override

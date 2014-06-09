@@ -1162,21 +1162,93 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]>
+					<![CDATA[The the height (in pixels) of the rendered <div>.]]>
 				</description>
-				<name>disabled</name>
+				<name>height</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true, the background-color of the line that is being edited by the user (the active line) will change to indicate a highlight.]]>
+				</description>
+				<name>highlightActiveLine</name>
 				<type>java.lang.Boolean</type>
-				<jsfReservedAttribute>true</jsfReservedAttribute>
-				<jsfReservedAttributeType>boolean</jsfReservedAttributeType>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The locale of the text that the editor is editing or displaying.]]>
+				</description>
+				<name>locale</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The name of the programming language that the editor is editing or displaying.]]>
+				</description>
+				<name>mode</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, the component will be read-only, meaning that the user will be unable to edit the source code text. The default value is false.]]>
+				</description>
+				<name>readOnly</name>
+				<type>java.lang.Boolean</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, a vertical line will appear that indicates the print margin. The default value is true.]]>
+				</description>
+				<name>showPrintMargin</name>
+				<type>java.lang.Boolean</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The number of spaces that are to be displayed in place of each tab character.]]>
+				</description>
+				<name>tabSize</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, the tab key will produce space characters rather than tab characters. The default value is false.]]>
+				</description>
+				<name>useSoftTabs</name>
+				<type>java.lang.Boolean</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, the line will break when it reaches the end of the line. The default value is true.]]>
+				</description>
+				<name>useWrapMode</name>
+				<type>java.lang.Boolean</type>
+				<yui>true</yui>
 			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
 				</description>
+				<javaScriptType>String</javaScriptType>
 				<name>value</name>
+				<type>java.lang.Object</type>
+				<inherited>true</inherited>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The the width (in pixels) of the rendered <div>.]]>
+				</description>
+				<name>width</name>
 				<type>java.lang.String</type>
-				<jsfReservedAttribute>true</jsfReservedAttribute>
-				<jsfReservedAttributeType>java.lang.Object</jsfReservedAttributeType>
+				<yui>true</yui>
 			</attribute>
 		</attributes>
 	</component>

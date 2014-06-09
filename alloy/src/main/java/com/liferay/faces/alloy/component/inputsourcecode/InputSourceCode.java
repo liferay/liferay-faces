@@ -14,7 +14,6 @@
 package com.liferay.faces.alloy.component.inputsourcecode;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.context.FacesContext;
 
 import com.liferay.faces.alloy.component.AlloyComponentUtil;
 import com.liferay.faces.util.component.ComponentUtil;
@@ -40,20 +39,6 @@ public class InputSourceCode extends InputSourceCodeBase {
 	}
 
 	@Override
-	public String getBoundingBox() {
-
-		String boundingBox = super.getBoundingBox();
-
-		if (boundingBox == null) {
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			String defaultBoundingBoxClientId = InputSourceCodeUtil.getDefaultBoundingBoxClientId(facesContext, this);
-			boundingBox = StringPool.POUND + ComponentUtil.escapeClientId(defaultBoundingBoxClientId);
-		}
-
-		return boundingBox;
-	}
-
-	@Override
 	public String getLabel() {
 
 		String label = (String) getStateHelper().get(StringPool.LABEL);
@@ -68,11 +53,6 @@ public class InputSourceCode extends InputSourceCodeBase {
 	@Override
 	public void setLabel(String label) {
 		getStateHelper().put(StringPool.LABEL, label);
-	}
-
-	@Override
-	public Boolean isWidgetRender() {
-		return (Boolean) getStateHelper().eval(WIDGET_RENDER, true);
 	}
 
 	@Override
