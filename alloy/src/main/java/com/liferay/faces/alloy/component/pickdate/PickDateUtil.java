@@ -110,33 +110,6 @@ public class PickDateUtil {
 		return calendar.getTime();
 	}
 
-	public static String getDatePatternFromMask(String mask) {
-
-		String datePattern = mask;
-
-		datePattern = datePattern.replaceAll(PERCENT_Y_UPPER, YYYY);
-		datePattern = datePattern.replaceAll(PERCENT_Y_LOWER, YY);
-		datePattern = datePattern.replaceAll(PERCENT_B_UPPER, MMMMM);
-		datePattern = datePattern.replaceAll(PERCENT_B_LOWER, MMM);
-		datePattern = datePattern.replaceAll(PERCENT_M_LOWER, MM);
-
-		// Replace "%e" with a token (which doesn't contain "d"), so any "d"'s which happen to appear in front of
-		// "%"'s won't be replaced when we call replaceAll("%d", "dd").
-		datePattern = datePattern.replaceAll(PERCENT_E_LOWER, TOKEN_REGEX);
-		datePattern = datePattern.replaceAll(PERCENT_D_LOWER, DD);
-		datePattern = datePattern.replaceAll(TOKEN_REGEX, D);
-		datePattern = datePattern.replaceAll(PERCENT_J_LOWER, DDD);
-		datePattern = datePattern.replaceAll(PERCENT_U_LOWER, FF);
-		datePattern = datePattern.replaceAll(PERCENT_A_UPPER, EEEE);
-		datePattern = datePattern.replaceAll(PERCENT_A_LOWER, EEE);
-
-		datePattern = datePattern.replaceAll(PERCENT_N_LOWER, StringPool.NEW_LINE);
-		datePattern = datePattern.replaceAll(PERCENT_T_LOWER, StringPool.TAB);
-		datePattern = datePattern.replaceAll(PERCENT_PERCENT, StringPool.PERCENT);
-
-		return datePattern;
-	}
-
 	public static String getDefaultDatePattern(FacesContext facesContext, Object componentLocale) {
 
 		Locale locale = PickDateUtil.determineLocale(facesContext, componentLocale);
@@ -177,11 +150,7 @@ public class PickDateUtil {
 		return mask;
 	}
 
-	public static Date getObjectAsDate(Object dateAsObject, String datePattern) {
-		return getObjectAsDate(dateAsObject, datePattern, null);
-	}
-
-	public static Date getObjectAsDate(Object dateAsObject, String datePattern, String mask) throws FacesException {
+	public static Date getObjectAsDate(Object dateAsObject, String datePattern) throws FacesException {
 
 		Date date = null;
 
@@ -199,12 +168,6 @@ public class PickDateUtil {
 					try {
 
 						SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
-
-						if (mask != null) {
-
-							String maskDatePattern = getDatePatternFromMask(mask);
-							simpleDateFormat.applyPattern(maskDatePattern);
-						}
 
 						date = simpleDateFormat.parse(dateAsString);
 					}

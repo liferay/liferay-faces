@@ -1124,12 +1124,11 @@
 				<type>java.lang.Object</type>
 			</attribute>
 			<attribute>
-				<defaultValue>1</defaultValue>
 				<description>
 					<![CDATA[The number of month panes shown in the popup calendar. Valid values are 1 (the default), 2, and 3.]]>
 				</description>
 				<name>panes</name>
-				<type>java.lang.Object</type>
+				<type>java.lang.Integer</type>
 			</attribute>
 			<attribute>
 				<defaultValue>focus</defaultValue>
@@ -1380,17 +1379,36 @@
 		<attributes>
 			<attribute>
 				<description>
+					<![CDATA[When this flag is true, the component will be shown initially. The default value is false.]]>
+				</description>
+				<name>autoShow</name>
+				<type>java.lang.Boolean</type>
+				<yuiName>autoHide</yuiName>
+			</attribute>
+			<attribute>
+				<description>
 					<![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]>
 				</description>
 				<name>datePattern</name>
 				<type>java.lang.String</type>
+				<yuiName>mask</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the character or string which seperates the dates when multiple selection is used.]]>
+				</description>
+				<name>dateSeparator</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
 			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[The id of the component that the pickDate will be triggered by. If trigger is specified, this value is unused.]]>
 				</description>
 				<name>for</name>
+				<required>true</required>
 				<type>java.lang.String</type>
+				<yuiName>trigger</yuiName>
 			</attribute>
 			<attribute>
 				<description>
@@ -1401,7 +1419,7 @@
 			</attribute>
 			<attribute>
 				<description>
-						<![CDATA[The maximum date that can be selected by the user.]]>
+					<![CDATA[The maximum date that can be selected by the user.]]>
 				</description>
 				<name>maximumDate</name>
 				<type>java.lang.Object</type>
@@ -1415,16 +1433,17 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[Specifies the date selection style. Valid values include <code>single</code> (the default), <code>multiple,</code> or <code>multiple-sticky.</code>]]>
+					<![CDATA[The number of month panes shown in the popup calendar. Valid values are 1 (the default), 2, and 3.]]>
 				</description>
-				<name>selectionMode</name>
-				<type>java.lang.String</type>
+				<name>panes</name>
+				<type>java.lang.Integer</type>
+				<yui>true</yui>
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The fully-qualified id of the element that triggers the calendar popup. Please consider using the <code>for</code> attribute instead.]]>
+					<![CDATA[Specifies the date selection style. Valid values include <code>single</code> (the default), <code>multiple,</code> or <code>multiple-sticky.</code>]]>
 				</description>
-				<name>trigger</name>
+				<name>selectionMode</name>
 				<type>java.lang.String</type>
 			</attribute>
 			<attribute>
@@ -1433,6 +1452,7 @@
 				</description>
 				<name>zIndex</name>
 				<type>java.lang.Object</type>
+				<yuiName>popover</yuiName>
 			</attribute>
 		</attributes>
 	</component>
