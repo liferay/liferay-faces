@@ -25,17 +25,12 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class TabViewBase extends UIData implements Styleable, ClientComponent, TabViewAlloy {
+public abstract class TabViewBase extends UIData implements Styleable, ClientComponent {
 
-	@Override
-	public String getBoundingBox() {
-		return (String) getStateHelper().eval(BOUNDING_BOX, null);
-	}
-
-	@Override
-	public void setBoundingBox(String boundingBox) {
-		getStateHelper().put(BOUNDING_BOX, boundingBox);
-	}
+	// Public Constants
+	public static final String CLIENT_KEY = "clientKey";
+	public static final String STYLE = "style";
+	public static final String STYLE_CLASS = "styleClass";
 
 	@Override
 	public String getClientKey() {
@@ -45,96 +40,6 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 	@Override
 	public void setClientKey(String clientKey) {
 		getStateHelper().put(CLIENT_KEY, clientKey);
-	}
-
-	@Override
-	public String getContentBox() {
-		return (String) getStateHelper().eval(CONTENT_BOX, null);
-	}
-
-	@Override
-	public void setContentBox(String contentBox) {
-		getStateHelper().put(CONTENT_BOX, contentBox);
-	}
-
-	@Override
-	public String getDefaultChildType() {
-		return (String) getStateHelper().eval(DEFAULT_CHILD_TYPE, null);
-	}
-
-	@Override
-	public void setDefaultChildType(String defaultChildType) {
-		getStateHelper().put(DEFAULT_CHILD_TYPE, defaultChildType);
-	}
-
-	@Override
-	public Boolean isDisabled() {
-		return (Boolean) getStateHelper().eval(DISABLED, null);
-	}
-
-	@Override
-	public void setDisabled(Boolean disabled) {
-		getStateHelper().put(DISABLED, disabled);
-	}
-
-	@Override
-	public Object getHeight() {
-		return (Object) getStateHelper().eval(HEIGHT, null);
-	}
-
-	@Override
-	public void setHeight(Object height) {
-		getStateHelper().put(HEIGHT, height);
-	}
-
-	@Override
-	public String getLocale() {
-		return (String) getStateHelper().eval(LOCALE, null);
-	}
-
-	@Override
-	public void setLocale(String locale) {
-		getStateHelper().put(LOCALE, locale);
-	}
-
-	@Override
-	public Boolean isMultiple() {
-		return (Boolean) getStateHelper().eval(MULTIPLE, null);
-	}
-
-	@Override
-	public void setMultiple(Boolean multiple) {
-		getStateHelper().put(MULTIPLE, multiple);
-	}
-
-	@Override
-	public String getSrcNode() {
-		return (String) getStateHelper().eval(SRC_NODE, null);
-	}
-
-	@Override
-	public void setSrcNode(String srcNode) {
-		getStateHelper().put(SRC_NODE, srcNode);
-	}
-
-	@Override
-	public Boolean isStacked() {
-		return (Boolean) getStateHelper().eval(STACKED, null);
-	}
-
-	@Override
-	public void setStacked(Boolean stacked) {
-		getStateHelper().put(STACKED, stacked);
-	}
-
-	@Override
-	public Object getStrings() {
-		return (Object) getStateHelper().eval(STRINGS, null);
-	}
-
-	@Override
-	public void setStrings(Object strings) {
-		getStateHelper().put(STRINGS, strings);
 	}
 
 	@Override
@@ -155,66 +60,6 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 	@Override
 	public void setStyleClass(String styleClass) {
 		getStateHelper().put(STYLE_CLASS, styleClass);
-	}
-
-	@Override
-	public Object getTabIndex() {
-		return (Object) getStateHelper().eval(TAB_INDEX, null);
-	}
-
-	@Override
-	public void setTabIndex(Object tabIndex) {
-		getStateHelper().put(TAB_INDEX, tabIndex);
-	}
-
-	@Override
-	public String getType() {
-		return (String) getStateHelper().eval(TYPE, null);
-	}
-
-	@Override
-	public void setType(String type) {
-		getStateHelper().put(TYPE, type);
-	}
-
-	@Override
-	public Boolean isVisible() {
-		return (Boolean) getStateHelper().eval(VISIBLE, null);
-	}
-
-	@Override
-	public void setVisible(Boolean visible) {
-		getStateHelper().put(VISIBLE, visible);
-	}
-
-	@Override
-	public String getWidgetId() {
-		return (String) getStateHelper().eval(WIDGET_ID, null);
-	}
-
-	@Override
-	public void setWidgetId(String widgetId) {
-		getStateHelper().put(WIDGET_ID, widgetId);
-	}
-
-	@Override
-	public Boolean isWidgetRender() {
-		return (Boolean) getStateHelper().eval(WIDGET_RENDER, null);
-	}
-
-	@Override
-	public void setWidgetRender(Boolean widgetRender) {
-		getStateHelper().put(WIDGET_RENDER, widgetRender);
-	}
-
-	@Override
-	public Object getWidth() {
-		return (Object) getStateHelper().eval(WIDTH, null);
-	}
-
-	@Override
-	public void setWidth(Object width) {
-		getStateHelper().put(WIDTH, width);
 	}
 }
 //J+

@@ -49,8 +49,8 @@ import com.liferay.faces.util.render.RendererUtil;
 public class TabViewRenderer extends TabViewRendererBase {
 
 	// Private Constants
-	private static final String LABEL = "label";
 	private static final String NAV_NAV_TABS = "nav nav-tabs";
+	private static final String SRC_NODE = "srcNode";
 	private static final String TAB_CONTENT = "tab-content";
 
 	// Logger
@@ -161,6 +161,16 @@ public class TabViewRenderer extends TabViewRendererBase {
 		responseWriter.endElement(StringPool.DIV);
 	}
 
+	@Override
+	protected void encodeHiddenAttributes(ResponseWriter responseWriter, TabView tabView, boolean first)
+		throws IOException {
+
+		encodeWidgetRender(responseWriter, first);
+
+		String srcNode = StringPool.POUND + ComponentUtil.escapeClientId(tabView.getClientId());
+		encodeObject(responseWriter, SRC_NODE, srcNode, first);
+	}
+
 	protected void encodeTabListItem(FacesContext facesContext, ResponseWriter responseWriter, Tab tab)
 		throws IOException {
 
@@ -173,7 +183,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 		String label = (String) tab.getLabel();
 
 		if (label == null) {
-			label = LABEL;
+			label = StringPool.LABEL;
 		}
 
 		responseWriter.write(label);
