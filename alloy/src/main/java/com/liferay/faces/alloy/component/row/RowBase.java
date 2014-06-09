@@ -39,18 +39,22 @@ public abstract class RowBase extends UIPanel implements Styleable {
 		getStateHelper().put(FLUID, fluid);
 	}
 
+	@Override
 	public String getStyle() {
 		return (String) getStateHelper().eval(STYLE, null);
 	}
 
+	@Override
 	public void setStyle(String style) {
 		getStateHelper().put(STYLE, style);
 	}
 
+	@Override
 	public String getStyleClass() {
 		return (String) getStateHelper().eval(STYLE_CLASS, null);
 	}
 
+	@Override
 	public void setStyleClass(String styleClass) {
 		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
