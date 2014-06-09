@@ -81,12 +81,6 @@ public class PickDateRenderer extends PickDateRendererBase {
 		// This is a no-op since the DataPicker does not manifest any markup.
 	}
 
-	@Override
-	protected void encodeAutoHide(ResponseWriter responseWriter, PickDate pickDate, Boolean autoShow, boolean first)
-		throws IOException {
-		super.encodeAutoHide(responseWriter, pickDate, !autoShow, first);
-	}
-
 	protected void encodeCalendar(ResponseWriter responseWriter, PickDate pickDate, boolean first) throws IOException {
 
 		// The calendar attribute value provides the opportunity to specify dateClick events, selectionMode,

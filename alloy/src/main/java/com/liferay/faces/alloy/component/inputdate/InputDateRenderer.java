@@ -57,6 +57,7 @@ public class InputDateRenderer extends InputDateTimeRendererBase {
 		// Create a pickDate and pass attributes through to it.
 		PickDate pickDate = (PickDate) application.createComponent(PickDate.COMPONENT_TYPE);
 		String datePattern = inputDate.getDatePattern();
+		pickDate.setAutoHide(inputDate.isAutoHide());
 		pickDate.setDatePattern(datePattern);
 		pickDate.setFor(trigger);
 		pickDate.setLocale(inputDate.getLocale());

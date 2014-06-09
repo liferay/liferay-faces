@@ -1097,6 +1097,13 @@
 		<attributes>
 			<attribute>
 				<description>
+					<![CDATA[When this flag is true, the component will hide when a date is selected. The default value is true.]]>
+				</description>
+				<name>autoHide</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+			<attribute>
+				<description>
 					<![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]>
 				</description>
 				<name>datePattern</name>
@@ -1131,7 +1138,6 @@
 				<type>java.lang.Integer</type>
 			</attribute>
 			<attribute>
-				<defaultValue>focus</defaultValue>
 				<description>
 					<![CDATA[Specifies which event will pop up the calendar. Valid values are <code>focus</code> (the default), <code>button</code>, and <code>both</code>.]]>
 				</description>
@@ -1379,11 +1385,11 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[When this flag is true, the component will be shown initially. The default value is false.]]>
+					<![CDATA[When this flag is true, the component will hide when a date is selected. The default value is true.]]>
 				</description>
-				<name>autoShow</name>
+				<name>autoHide</name>
 				<type>java.lang.Boolean</type>
-				<yuiName>autoHide</yuiName>
+				<yui>true</yui>
 			</attribute>
 			<attribute>
 				<description>
