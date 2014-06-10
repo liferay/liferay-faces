@@ -72,10 +72,15 @@ public class ShowcaseModelBean implements Serializable {
 
 		if (selectedComponent == null) {
 
-			ShowcaseComponent showcaseComponent = listModelBean.findShowcaseComponent(
-					viewParameters.getComponentPrefix(), viewParameters.getComponentName());
+			ViewParameters viewParameters = getViewParameters();
 
-			selectedComponent = new SelectedComponentImpl(showcaseComponent, viewParameters.getComponentUseCase());
+			if (viewParameters.isValid()) {
+
+				ShowcaseComponent showcaseComponent = listModelBean.findShowcaseComponent(
+						viewParameters.getComponentPrefix(), viewParameters.getComponentName());
+
+				selectedComponent = new SelectedComponentImpl(showcaseComponent, viewParameters.getComponentUseCase());
+			}
 		}
 
 		return selectedComponent;
@@ -122,6 +127,10 @@ public class ShowcaseModelBean implements Serializable {
 
 		public void setComponentUseCase(String componentUseCase) {
 			this.componentUseCase = componentUseCase;
+		}
+
+		public boolean isValid() {
+			return ((componentPrefix != null) && (componentName != null));
 		}
 	}
 }
