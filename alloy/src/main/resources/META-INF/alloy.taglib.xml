@@ -1117,6 +1117,12 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[When this flag is true, the component will hide when a date is selected. The default value is true.]]></description>
+			<name>autoHide</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
 			<name>binding</name>
 			<required>false</required>
@@ -1288,7 +1294,7 @@
 			<description><![CDATA[The number of month panes shown in the popup calendar. Valid values are 1 (the default), 2, and 3.]]></description>
 			<name>panes</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
+			<type>java.lang.Integer</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
@@ -1406,20 +1412,8 @@
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
-			<name>boundingBox</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
 			<name>clientKey</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
-			<name>contentBox</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -1442,16 +1436,22 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The height of ACE Editor.]]></description>
+			<description><![CDATA[The the height (in pixels) of the rendered <div>.]]></description>
 			<name>height</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Determine if the active line of code will be highlighted or not.]]></description>
+			<description><![CDATA[When true, the background-color of the line that is being edited by the user (the active line) will change to indicate a highlight.]]></description>
 			<name>highlightActiveLine</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]></description>
@@ -1460,19 +1460,19 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
+			<description><![CDATA[The locale of the text that the editor is editing or displaying.]]></description>
 			<name>locale</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Correspond to the language being typed.]]></description>
+			<description><![CDATA[The name of the programming language that the editor is editing or displaying.]]></description>
 			<name>mode</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Determine if the code will be editable or not.]]></description>
+			<description><![CDATA[When this flag is true, the component will be read-only, meaning that the user will be unable to edit the source code text. The default value is false.]]></description>
 			<name>readOnly</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
@@ -1496,22 +1496,10 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Determine if print margin will be visible or not.]]></description>
+			<description><![CDATA[When this flag is true, a vertical line will appear that indicates the print margin. The default value is true.]]></description>
 			<name>showPrintMargin</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
-			<name>srcNode</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
-			<name>strings</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
@@ -1526,25 +1514,19 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
-			<name>tabIndex</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The indentation size of tab key.]]></description>
+			<description><![CDATA[The number of spaces that are to be displayed in place of each tab character.]]></description>
 			<name>tabSize</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Determine if the tab key will act as space characters or tab characters.]]></description>
+			<description><![CDATA[When this flag is true, the tab key will produce space characters rather than tab characters. The default value is false.]]></description>
 			<name>useSoftTabs</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Determine if the line will break when it reaches the end of the line.]]></description>
+			<description><![CDATA[When this flag is true, the line will break when it reaches the end of the line. The default value is true.]]></description>
 			<name>useWrapMode</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
@@ -1576,28 +1558,10 @@
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
-			<name>visible</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>widgetId</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
-			<name>widgetRender</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The width of ACE Editor.]]></description>
+			<description><![CDATA[The the width (in pixels) of the rendered <div>.]]></description>
 			<name>width</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.0-m2</vdldoc:since>
@@ -2427,12 +2391,6 @@
 			<type>javax.faces.convert.Converter</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Node or Selector to display the number of remaining characters calculated by the charCounter.]]></description>
-			<name>counter</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
@@ -2447,18 +2405,12 @@
 		<attribute>
 			<description><![CDATA[The id of the text input node which is used to calculate the remaining characters. One of either "for" or "input" are required.]]></description>
 			<name>for</name>
-			<required>false</required>
+			<required>true</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A unique identifier for this component.]]></description>
 			<name>id</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Input text node which will have it's number of characters limited by the charCounter. One of either "for" or "input" are required.]]></description>
-			<name>input</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -2469,7 +2421,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Max number of characters the <a href="CharCounter.html#config_input">input</a> can have.]]></description>
+			<description><![CDATA[The maximum number of charachters to allow in the input.]]></description>
 			<name>maxLength</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
@@ -2610,7 +2562,7 @@
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[PanelGrid is a UIPanel component that renders a <code>&lt;table&gt;</code> element for laying out components in a tabular grid. Since it extends HtmlPanelGrid, it supports all the features of h:panelGrid.]]></description>
+		<description><![CDATA[PanelGrid is a UIPanel component that renders a <code>&lt;table&gt;</code> element to layout its children in a tabular grid. Since it extends HtmlPanelGrid, it supports all the features of h:panelGrid.]]></description>
 		<tag-name>panelGrid</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.panelgrid.PanelGrid</component-type>
@@ -2945,13 +2897,7 @@
 			<renderer-type>com.liferay.faces.alloy.component.pickdate.PickDateRenderer</renderer-type>
 		</component>
 		<attribute>
-			<description><![CDATA[The active input element that holds the calendar instance.]]></description>
-			<name>activeInput</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
+			<description><![CDATA[When this flag is true, the component will hide when a date is selected. The default value is true.]]></description>
 			<name>autoHide</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
@@ -2963,26 +2909,8 @@
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[]]></description>
-			<name>calendar</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
 			<name>clientKey</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>container</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>content</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -2993,7 +2921,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[]]></description>
+			<description><![CDATA[Specifies the character or string which seperates the dates when multiple selection is used.]]></description>
 			<name>dateSeparator</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -3001,7 +2929,7 @@
 		<attribute>
 			<description><![CDATA[The id of the component that the pickDate will be triggered by. If trigger is specified, this value is unused.]]></description>
 			<name>for</name>
-			<required>false</required>
+			<required>true</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -3017,12 +2945,6 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[]]></description>
-			<name>mask</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[The maximum date that can be selected by the user.]]></description>
 			<name>maximumDate</name>
 			<required>false</required>
@@ -3035,22 +2957,10 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[]]></description>
+			<description><![CDATA[The number of month panes shown in the popup calendar. Valid values are 1 (the default), 2, and 3.]]></description>
 			<name>panes</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>popover</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>popoverCssClass</name>
-			<required>false</required>
-			<type>java.lang.String</type>
+			<type>java.lang.Integer</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
@@ -3073,24 +2983,6 @@
 		<attribute>
 			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The fully-qualified id of the element that triggers the calendar popup. Please consider using the <code>for</code> attribute instead.]]></description>
-			<name>trigger</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>valueExtractor</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>valueFormatter</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -3442,26 +3334,8 @@
 			<type>int</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
-			<name>boundingBox</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[If <code>true</code> could be reseted (i.e., have no values selected).]]></description>
-			<name>canReset</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
 			<name>clientKey</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
-			<name>contentBox</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -3476,24 +3350,6 @@
 			<name>converterMessage</name>
 			<required>false</required>
 			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[CSS class to be automatically added to the <code>boundingBox</code>.]]></description>
-			<name>cssClass</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[CSS classes applied on Rating.]]></description>
-			<name>cssClasses</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The number of selected starts when the Rating render.]]></description>
-			<name>defaultSelected</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
@@ -3520,28 +3376,16 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
-			<name>height</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Hidden input to handle the selected value. This hidden input replace the radio elements and keep the same name.]]></description>
-			<name>hiddenInput</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[CSS class added to hide the <code>boundingBox</code> when <a href="Component.html#config_visible">visible</a> is set to <code>false</code>.]]></description>
-			<name>hideClass</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]></description>
 			<name>hideNoSelectionOption</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]></description>
@@ -3550,20 +3394,8 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Name of the <a href="Rating.html#config_hiddenInput">hiddenInput</a> element. If not specified will use the name of the replaced radio.]]></description>
-			<name>inputName</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
 			<name>label</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[DOM Node to display the text of the StarRating. If not specified try to query using HTML_PARSER an element inside boundingBox which matches <code>aui-rating-label-element</code>.]]></description>
-			<name>labelNode</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -3576,12 +3408,6 @@
 		<attribute>
 			<description><![CDATA[The direction in which the layout of the component should go.  The default value is 'lineDirection'.]]></description>
 			<name>layout</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
-			<name>locale</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -3700,36 +3526,6 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Stores the index of the selected element.]]></description>
-			<name>selectedIndex</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[If <code>true</code> will extract the value of the <code>title</code> attribute on the radio, and use it on the generated Rating elements.]]></description>
-			<name>showTitle</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Number of Rating elements to be displayed.]]></description>
-			<name>size</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
-			<name>srcNode</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
-			<name>strings</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
 			<required>false</required>
@@ -3748,22 +3544,10 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
-			<name>tabIndex</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
 			<name>title</name>
 			<required>false</required>
 			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if use of the WAI-ARIA Roles and States should be enabled for the Widget.]]></description>
-			<name>useARIA</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
@@ -3790,30 +3574,6 @@
 			<required>false</required>
 			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
-			<name>visible</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>widgetId</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.]]></description>
-			<name>widgetRender</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
-			<name>width</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.0-m2</vdldoc:since>
@@ -3845,26 +3605,8 @@
 			<type>int</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
-			<name>boundingBox</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[If <code>true</code> could be reseted (i.e., have no values selected).]]></description>
-			<name>canReset</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
 			<name>clientKey</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
-			<name>contentBox</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -3881,34 +3623,16 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[CSS class to be automatically added to the <code>boundingBox</code>.]]></description>
-			<name>cssClass</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[CSS classes applied on ThumbRating.]]></description>
-			<name>cssClasses</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The number of selected starts when the Rating render.]]></description>
-			<name>defaultSelected</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Whether the Rating is disabled or not. Disabled Ratings don't allow hover or click, just display selected stars.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
-			<type>java.lang.Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]></description>
@@ -3923,28 +3647,16 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
-			<name>height</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Hidden input to handle the selected value. This hidden input replace the radio elements and keep the same name.]]></description>
-			<name>hiddenInput</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[CSS class added to hide the <code>boundingBox</code> when <a href="Component.html#config_visible">visible</a> is set to <code>false</code>.]]></description>
-			<name>hideClass</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]></description>
 			<name>hideNoSelectionOption</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]></description>
@@ -3953,20 +3665,8 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Name of the <a href="Rating.html#config_hiddenInput">hiddenInput</a> element. If not specified will use the name of the replaced radio.]]></description>
-			<name>inputName</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Label to be displayed with the Rating elements.]]></description>
+			<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
 			<name>label</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[DOM Node to display the text of the StarRating. If not specified try to query using HTML_PARSER an element inside boundingBox which matches <code>aui-rating-label-element</code>.]]></description>
-			<name>labelNode</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -3979,12 +3679,6 @@
 		<attribute>
 			<description><![CDATA[The direction in which the layout of the component should go.  The default value is 'lineDirection'.]]></description>
 			<name>layout</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
-			<name>locale</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -4103,36 +3797,6 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Stores the index of the selected element.]]></description>
-			<name>selectedIndex</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[If <code>true</code> will extract the value of the <code>title</code> attribute on the radio, and use it on the generated Rating elements.]]></description>
-			<name>showTitle</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Number of Rating elements to be displayed.]]></description>
-			<name>size</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
-			<name>srcNode</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
-			<name>strings</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
 			<required>false</required>
@@ -4151,22 +3815,10 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
-			<name>tabIndex</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[If set, will be used when there is no DOM <code>title</code> on the radio elements.]]></description>
+			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
 			<name>title</name>
 			<required>false</required>
 			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if use of the WAI-ARIA Roles and States should be enabled for the Widget.]]></description>
-			<name>useARIA</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
@@ -4193,30 +3845,6 @@
 			<required>false</required>
 			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
-			<name>visible</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>widgetId</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[If <code>true</code> the render phase will be autimatically invoked preventing the <code>.render()</code> manual call.]]></description>
-			<name>widgetRender</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
-			<name>width</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.0-m2</vdldoc:since>
@@ -4283,52 +3911,22 @@
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The outermost DOM node for the Widget, used for sizing and positioning of a Widget as well as a containing element for any decorator elements used for skinning.]]></description>
-			<name>boundingBox</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
 			<name>clientKey</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A DOM node that is a direct descendant of a Widget's bounding box that houses its content.]]></description>
-			<name>contentBox</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[String representing the default type of the children  managed by this Widget.  Can also supply default type as a constructor reference.]]></description>
-			<name>defaultChildType</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Boolean indicating if the Widget should be disabled. The disabled implementation is left to the specific classes extending widget.]]></description>
-			<name>disabled</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[String with units, or number, representing the height of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
+			<description><![CDATA[The the height (in pixels) of the rendered <div>.]]></description>
 			<name>height</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The default locale for the widget. NOTE: Using get/set on the "strings" attribute will return/set strings for this locale.]]></description>
-			<name>locale</name>
-			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Boolean indicating if multiple children can be selected at  once.  Whether or not multiple selection is enabled is always delegated to the value of the <code>multiple</code> attribute of the root widget in the object hierarchy.]]></description>
-			<name>multiple</name>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
 			<required>false</required>
-			<type>java.lang.Boolean</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
@@ -4337,22 +3935,10 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The DOM node to parse for configuration values, passed to the Widget's HTML_PARSER definition]]></description>
-			<name>srcNode</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine the orientation of tabs. Can be stacked (vertical) or not (horizontal).]]></description>
+			<description><![CDATA[When true, this indicates whether or not the tabs will appear vertically. The default value is false.]]></description>
 			<name>stacked</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Collection of strings used to label elements of the Widget's UI.]]></description>
-			<name>strings</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
@@ -4363,18 +3949,6 @@
 		<attribute>
 			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Number (between -32767 to 32767) indicating the widget's position in the default tab flow.  The value is used to set the "tabIndex" attribute on the widget's bounding box.  Negative values allow the widget to receive DOM focus programmatically (by calling the focus method), while being removed from the default tab flow.  A value of null removes the "tabIndex" attribute from the widget's bounding box.]]></description>
-			<name>tabIndex</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Determine the type of tabs.]]></description>
-			<name>type</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -4391,28 +3965,10 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Boolean indicating whether or not the Widget is visible.]]></description>
-			<name>visible</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[]]></description>
-			<name>widgetId</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Whether or not to render the widget automatically after init, and optionally, to which parent node.]]></description>
-			<name>widgetRender</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[String with units, or number, representing the width of the Widget. If a number is provided, the default unit, defined by the Widgets DEF_UNIT, property is used.]]></description>
+			<description><![CDATA[The the height (in pixels) of the rendered <div>.]]></description>
 			<name>width</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.0-m2</vdldoc:since>
