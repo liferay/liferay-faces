@@ -1604,12 +1604,20 @@
 			<!-- Attributes that are found both in JSF and AlloyUI -->
 			<attribute>
 				<description>
+					<![CDATA[The number of stars to initially render.]]>
+				</description>
+				<name>defaultSelected</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
 					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]>
 				</description>
 				<name>disabled</name>
-				<type>java.lang.Boolean</type>
-				<jsfReservedAttribute>true</jsfReservedAttribute>
-				<jsfReservedAttributeType>boolean</jsfReservedAttributeType>
+				<type>boolean</type>
+				<yui>true</yui>
+				<defaultValue>false</defaultValue>
 			</attribute>
 			<attribute>
 				<description>
@@ -1617,26 +1625,17 @@
 				</description>
 				<name>label</name>
 				<type>java.lang.String</type>
-				<jsfReservedAttribute>true</jsfReservedAttribute>
-				<jsfReservedAttributeType>java.lang.String</jsfReservedAttributeType>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[HTML passthrough attribute specifying the title of the element.]]>
-				</description>
-				<name>title</name>
-				<type>java.lang.String</type>
-				<jsfReservedAttribute>true</jsfReservedAttribute>
-				<jsfReservedAttributeType>java.lang.String</jsfReservedAttributeType>
+				<yui>true</yui>
 			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
 				</description>
 				<name>value</name>
-				<type>java.lang.String</type>
-				<jsfReservedAttribute>true</jsfReservedAttribute>
-				<jsfReservedAttributeType>java.lang.Object</jsfReservedAttributeType>
+				<type>java.lang.Object</type>
+				<yui>true</yui>
+				<inherited>true</inherited> <!-- do not generate getters/setters -->
+				<javaScriptType>String</javaScriptType>
 			</attribute>
 			<!-- Attributes that are inherited from HtmlSelectOneRadio -->
 		</attributes>
@@ -1655,8 +1654,6 @@
 				</description>
 				<name>value</name>
 				<type>java.lang.String</type>
-				<jsfReservedAttribute>true</jsfReservedAttribute>
-				<jsfReservedAttributeType>java.lang.Object</jsfReservedAttributeType>
 			</attribute>
 		</attributes>
 	</component>

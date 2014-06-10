@@ -50,8 +50,8 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 	public static final int NO_SELECTION_INDEX = -1;
 
 	// Private data members.
-	private Long defaultSelected;
-	private Object defaultSelectedValue;
+//	private Long defaultSelected;
+//	private Object defaultSelectedValue;
 	private long index;
 	private boolean inputElement;
 	private boolean labelElement;
@@ -59,14 +59,14 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 	private long selectedIndex;
 	private Object title;
 
-	public SelectStarRatingResponseWriter(ResponseWriter responseWriter, String defaultSelected) {
+	public SelectStarRatingResponseWriter(ResponseWriter responseWriter) {
 		super(responseWriter);
 		this.index = NO_SELECTION_INDEX;
 		this.selectedIndex = NO_SELECTION_INDEX;
 
-		if (defaultSelected != null) {
-			this.defaultSelected = new Long(defaultSelected);
-		}
+//		if (defaultSelected != null) {
+//			this.defaultSelected = new Long(defaultSelected);
+//		}
 	}
 
 	@Override
@@ -121,17 +121,17 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 				setSelectedIndex(this.index);
 			}
 
-			if (StringPool.VALUE.equals(name)) {
-
-				if (defaultSelected != null) {
-
-					if (index == (defaultSelected - 1)) {
-
-						// We have found the input containing the value of the defaultSelected rating
-						setDefaultSelectedValue(value);
-					}
-				}
-			}
+//			if (StringPool.VALUE.equals(name)) {
+//
+//				if (defaultSelected != null) {
+//
+//					if (index == (defaultSelected - 1)) {
+//
+//						// We have found the input containing the value of the defaultSelected rating
+//						setDefaultSelectedValue(value);
+//					}
+//				}
+//			}
 
 			super.writeAttribute(name, value, property);
 		}
@@ -152,13 +152,13 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 		}
 	}
 
-	public Object getDefaultSelectedValue() {
-		return defaultSelectedValue;
-	}
-
-	public void setDefaultSelectedValue(Object defaultSelectedValue) {
-		this.defaultSelectedValue = defaultSelectedValue;
-	}
+//	public Object getDefaultSelectedValue() {
+//		return defaultSelectedValue;
+//	}
+//
+//	public void setDefaultSelectedValue(Object defaultSelectedValue) {
+//		this.defaultSelectedValue = defaultSelectedValue;
+//	}
 
 	public String getOnClick() {
 		return onClick;

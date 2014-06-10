@@ -25,27 +25,16 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class SelectStarRatingBase extends SelectOneRadio implements Styleable, ClientComponent, SelectStarRatingAlloy {
+public abstract class SelectStarRatingBase extends SelectOneRadio implements Styleable, ClientComponent {
 
-	@Override
-	public String getBoundingBox() {
-		return (String) getStateHelper().eval(BOUNDING_BOX, null);
-	}
-
-	@Override
-	public void setBoundingBox(String boundingBox) {
-		getStateHelper().put(BOUNDING_BOX, boundingBox);
-	}
-
-	@Override
-	public Boolean isCanReset() {
-		return (Boolean) getStateHelper().eval(CAN_RESET, null);
-	}
-
-	@Override
-	public void setCanReset(Boolean canReset) {
-		getStateHelper().put(CAN_RESET, canReset);
-	}
+	// Public Constants
+	public static final String CLIENT_KEY = "clientKey";
+	public static final String DEFAULT_SELECTED = "defaultSelected";
+	public static final String DISABLED = "disabled";
+	public static final String LABEL = "label";
+	public static final String STYLE = "style";
+	public static final String STYLE_CLASS = "styleClass";
+	public static final String VALUE = "value";
 
 	@Override
 	public String getClientKey() {
@@ -57,154 +46,28 @@ public abstract class SelectStarRatingBase extends SelectOneRadio implements Sty
 		getStateHelper().put(CLIENT_KEY, clientKey);
 	}
 
-	@Override
-	public String getContentBox() {
-		return (String) getStateHelper().eval(CONTENT_BOX, null);
+	public String getDefaultSelected() {
+		return (String) getStateHelper().eval(DEFAULT_SELECTED, null);
 	}
 
-	@Override
-	public void setContentBox(String contentBox) {
-		getStateHelper().put(CONTENT_BOX, contentBox);
-	}
-
-	@Override
-	public String getCssClass() {
-		return (String) getStateHelper().eval(CSS_CLASS, null);
-	}
-
-	@Override
-	public void setCssClass(String cssClass) {
-		getStateHelper().put(CSS_CLASS, cssClass);
-	}
-
-	@Override
-	public Object getCssClasses() {
-		return (Object) getStateHelper().eval(CSS_CLASSES, null);
-	}
-
-	@Override
-	public void setCssClasses(Object cssClasses) {
-		getStateHelper().put(CSS_CLASSES, cssClasses);
-	}
-
-	@Override
-	public Object getDefaultSelected() {
-		return (Object) getStateHelper().eval(DEFAULT_SELECTED, null);
-	}
-
-	@Override
-	public void setDefaultSelected(Object defaultSelected) {
+	public void setDefaultSelected(String defaultSelected) {
 		getStateHelper().put(DEFAULT_SELECTED, defaultSelected);
 	}
 
-	@Override
-	public Object getHeight() {
-		return (Object) getStateHelper().eval(HEIGHT, null);
+	public boolean isDisabled() {
+		return (Boolean) getStateHelper().eval(DISABLED, false);
 	}
 
-	@Override
-	public void setHeight(Object height) {
-		getStateHelper().put(HEIGHT, height);
+	public void setDisabled(boolean disabled) {
+		getStateHelper().put(DISABLED, disabled);
 	}
 
-	@Override
-	public String getHiddenInput() {
-		return (String) getStateHelper().eval(HIDDEN_INPUT, null);
+	public String getLabel() {
+		return (String) getStateHelper().eval(LABEL, null);
 	}
 
-	@Override
-	public void setHiddenInput(String hiddenInput) {
-		getStateHelper().put(HIDDEN_INPUT, hiddenInput);
-	}
-
-	@Override
-	public String getHideClass() {
-		return (String) getStateHelper().eval(HIDE_CLASS, null);
-	}
-
-	@Override
-	public void setHideClass(String hideClass) {
-		getStateHelper().put(HIDE_CLASS, hideClass);
-	}
-
-	@Override
-	public String getInputName() {
-		return (String) getStateHelper().eval(INPUT_NAME, null);
-	}
-
-	@Override
-	public void setInputName(String inputName) {
-		getStateHelper().put(INPUT_NAME, inputName);
-	}
-
-	@Override
-	public String getLabelNode() {
-		return (String) getStateHelper().eval(LABEL_NODE, null);
-	}
-
-	@Override
-	public void setLabelNode(String labelNode) {
-		getStateHelper().put(LABEL_NODE, labelNode);
-	}
-
-	@Override
-	public String getLocale() {
-		return (String) getStateHelper().eval(LOCALE, null);
-	}
-
-	@Override
-	public void setLocale(String locale) {
-		getStateHelper().put(LOCALE, locale);
-	}
-
-	@Override
-	public Object getSelectedIndex() {
-		return (Object) getStateHelper().eval(SELECTED_INDEX, null);
-	}
-
-	@Override
-	public void setSelectedIndex(Object selectedIndex) {
-		getStateHelper().put(SELECTED_INDEX, selectedIndex);
-	}
-
-	@Override
-	public Boolean isShowTitle() {
-		return (Boolean) getStateHelper().eval(SHOW_TITLE, null);
-	}
-
-	@Override
-	public void setShowTitle(Boolean showTitle) {
-		getStateHelper().put(SHOW_TITLE, showTitle);
-	}
-
-	@Override
-	public Object getSize() {
-		return (Object) getStateHelper().eval(SIZE, null);
-	}
-
-	@Override
-	public void setSize(Object size) {
-		getStateHelper().put(SIZE, size);
-	}
-
-	@Override
-	public String getSrcNode() {
-		return (String) getStateHelper().eval(SRC_NODE, null);
-	}
-
-	@Override
-	public void setSrcNode(String srcNode) {
-		getStateHelper().put(SRC_NODE, srcNode);
-	}
-
-	@Override
-	public Object getStrings() {
-		return (Object) getStateHelper().eval(STRINGS, null);
-	}
-
-	@Override
-	public void setStrings(Object strings) {
-		getStateHelper().put(STRINGS, strings);
+	public void setLabel(String label) {
+		getStateHelper().put(LABEL, label);
 	}
 
 	@Override
@@ -225,66 +88,6 @@ public abstract class SelectStarRatingBase extends SelectOneRadio implements Sty
 	@Override
 	public void setStyleClass(String styleClass) {
 		getStateHelper().put(STYLE_CLASS, styleClass);
-	}
-
-	@Override
-	public Object getTabIndex() {
-		return (Object) getStateHelper().eval(TAB_INDEX, null);
-	}
-
-	@Override
-	public void setTabIndex(Object tabIndex) {
-		getStateHelper().put(TAB_INDEX, tabIndex);
-	}
-
-	@Override
-	public Boolean isUseARIA() {
-		return (Boolean) getStateHelper().eval(USE_ARIA, null);
-	}
-
-	@Override
-	public void setUseARIA(Boolean useARIA) {
-		getStateHelper().put(USE_ARIA, useARIA);
-	}
-
-	@Override
-	public Boolean isVisible() {
-		return (Boolean) getStateHelper().eval(VISIBLE, null);
-	}
-
-	@Override
-	public void setVisible(Boolean visible) {
-		getStateHelper().put(VISIBLE, visible);
-	}
-
-	@Override
-	public String getWidgetId() {
-		return (String) getStateHelper().eval(WIDGET_ID, null);
-	}
-
-	@Override
-	public void setWidgetId(String widgetId) {
-		getStateHelper().put(WIDGET_ID, widgetId);
-	}
-
-	@Override
-	public Boolean isWidgetRender() {
-		return (Boolean) getStateHelper().eval(WIDGET_RENDER, null);
-	}
-
-	@Override
-	public void setWidgetRender(Boolean widgetRender) {
-		getStateHelper().put(WIDGET_RENDER, widgetRender);
-	}
-
-	@Override
-	public Object getWidth() {
-		return (Object) getStateHelper().eval(WIDTH, null);
-	}
-
-	@Override
-	public void setWidth(Object width) {
-		getStateHelper().put(WIDTH, width);
 	}
 }
 //J+
