@@ -18,11 +18,13 @@ import java.io.IOException;
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UINamingContainer;
 import javax.faces.component.ValueHolder;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
@@ -44,6 +46,7 @@ import com.liferay.faces.util.lang.StringPool;
 public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBase {
 
 	// Private Constants
+	private static final String COUNTER = "counter";
 	private static final String ALLOY_MAX_LENGTH_EVENT_NAME = "maxLength";
 
 	@Override
@@ -60,30 +63,47 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+		ResponseWriter responseWriter = facesContext.getResponseWriter();		
+		OutputRemainingChars outputRemainingChars = (OutputRemainingChars) uiComponent;
+		String forComponent = outputRemainingChars.getFor();
 
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		ValueHolder valueHolder = (ValueHolder) uiComponent;
-		Object value = valueHolder.getValue();
+		if (forComponent != null) {
 
-		OutputRemainingCharsAlloy outputRemainingCharsAlloy = (OutputRemainingCharsAlloy) uiComponent;
+			UIComponent inputUIComponent = uiComponent.findComponent(forComponent);
 
-		// If a value was not submitted, then
-		if (value == null) {
+			// If there is no input found, they may be using an html tag as an input. In that case, they will need to
+			// specify maxLength on the outputRemainingChars component instead of their own html input. If there is an
+			// input found, use its value for the calculation, if any.
+			if ((inputUIComponent != null) && (inputUIComponent instanceof ValueHolder)) {
 
-			// They may have specified their own counter (or they did not specify a value attribute)
-			if (OutputRemainingCharsUtil.isCounterSpecified(facesContext, outputRemainingCharsAlloy)) {
-				// Let them use their own counter
+				Object maxLength = outputRemainingChars.getMaxLength();
+
+				if (maxLength != null) {
+					Long max = new Long(maxLength.toString());
+					Long givenCharacters = 0L;
+
+					ValueHolder inputValueHolder = (ValueHolder) inputUIComponent;
+					String inputValue = (String) inputValueHolder.getValue();
+
+					if (inputValue != null) {
+						givenCharacters = new Long(inputValue.length());
+					}
+
+					Long remainingCharacters = max - givenCharacters;
+
+					if (remainingCharacters < 0) {
+						remainingCharacters = 0L;
+					}
+
+					char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+					String defaultCounterSpanId = uiComponent.getClientId(facesContext) + separatorChar + COUNTER;
+					OutputRemainingCharsResponseWriter outputRemainingCharsResponseWriter =
+						new OutputRemainingCharsResponseWriter(responseWriter, uiComponent, defaultCounterSpanId,
+							remainingCharacters.toString());
+
+					super.encodeAll(facesContext, uiComponent, outputRemainingCharsResponseWriter);
+				}
 			}
-
-			// Otherwise, since they did not specify a counter one must be written out.
-			else {
-				encodeRemainingValue(facesContext, responseWriter, uiComponent);
-			}
-		}
-
-		// Otherwise, there is a value submitted, so we need to encode a counter.
-		else {
-			encodeRemainingValue(facesContext, responseWriter, uiComponent);
 		}
 	}
 
@@ -114,76 +134,38 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 			responseWriter.write(eventName);
 			responseWriter.write(StringPool.APOSTROPHE);
 			responseWriter.write(StringPool.COMMA);
-			responseWriter.write("function(event) {");
+			responseWriter.write(AlloyRendererUtil.FUNCTION_EVENT);
+			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 			responseWriter.write(callback);
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 			responseWriter.write(StringPool.SEMICOLON);
 		}
 	}
-
+	
 	@Override
-	protected void encodeOnceMaxlengthReached(ResponseWriter responseWriter,
-		OutputRemainingCharsAlloy outputRemainingCharsAlloy, String onceMaxlengthReached, boolean first)
-		throws IOException {
+	protected void encodeHiddenAttributes(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, boolean first)
+			throws IOException {
 
-		// no-op since the "onceMaxlengthReached" attribute is not a simple attribute value. Rather it is an event that
-		// must be encoded in encodeJavaScriptCustom(FacesContext, UIComponent).
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+		String counter = StringPool.POUND + ComponentUtil.escapeClientId(outputRemainingChars.getClientId() + separatorChar + COUNTER);
+		encodeString(responseWriter, COUNTER, counter, first);
+		first = false;
 	}
-
+	
 	@Override
-	protected void encodeOnMaxlengthReached(ResponseWriter responseWriter,
-		OutputRemainingCharsAlloy outputRemainingCharsAlloy, String onMaxlengthReached, boolean first)
-		throws IOException {
+	protected void encodeInput(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, String for_, boolean first)
+			throws IOException {
 
-		// no-op since the "onMaxlengthReached" attribute is not a simple attribute value. Rather it is an event that
-		// must be encoded in encodeJavaScriptCustom(FacesContext, UIComponent).
-	}
+		UIComponent uiComponent = outputRemainingChars.findComponent(for_);
 
-	protected void encodeRemainingValue(FacesContext facesContext, ResponseWriter responseWriter,
-		UIComponent uiComponent) throws IOException {
-
-		OutputRemainingCharsAlloy outputRemainingCharsAlloy = (OutputRemainingCharsAlloy) uiComponent;
-		String forComponent = outputRemainingCharsAlloy.getFor();
-
-		if (forComponent != null) {
-
-			UIComponent inputUIComponent = uiComponent.findComponent(forComponent);
-
-			// If there is no input found, they may be using an html tag as an input. In that case, they will need to
-			// specify maxLength on the outputRemainingChars component instead of their own html input. If there is an
-			// input found, use its value for the calculation, if any.
-			if ((inputUIComponent != null) && (inputUIComponent instanceof ValueHolder)) {
-
-				Object maxLength = outputRemainingCharsAlloy.getMaxLength();
-
-				if (maxLength != null) {
-					Long max = new Long(maxLength.toString());
-					Long givenCharacters = 0L;
-
-					ValueHolder inputValueHolder = (ValueHolder) inputUIComponent;
-					String inputValue = (String) inputValueHolder.getValue();
-
-					if (inputValue != null) {
-						givenCharacters = new Long(inputValue.length());
-					}
-
-					Long remainingCharacters = max - givenCharacters;
-
-					if (remainingCharacters < 0) {
-						remainingCharacters = 0L;
-					}
-
-					String defaultCounterSpanId = OutputRemainingCharsUtil.getDefaultCounterSpanId(facesContext,
-							uiComponent);
-					OutputRemainingCharsResponseWriter outputRemainingCharsResponseWriter =
-						new OutputRemainingCharsResponseWriter(responseWriter, uiComponent, defaultCounterSpanId,
-							remainingCharacters.toString());
-
-					super.encodeAll(facesContext, uiComponent, outputRemainingCharsResponseWriter);
-				}
-			}
+		if (uiComponent != null) {
+			String forClientId = uiComponent.getClientId();
+			for_ = StringPool.POUND + ComponentUtil.escapeClientId(forClientId);
 		}
+		
+		super.encodeInput(responseWriter, outputRemainingChars, for_, first);
 	}
 
 	@Override

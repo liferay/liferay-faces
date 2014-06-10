@@ -36,13 +36,11 @@ import com.liferay.faces.util.render.DelegationResponseWriterBase;
  * the unnecessary table parts and put things like the labels into the title attributes of the radio inputs where
  * alloy will get them.	 Please refer to JSF vdldocs for more details:
  * {@link https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/selectOneRadio.html}
- *
- * @author	Vernon Singleton
  */
 //J+
 
 /**
- * @author  Neil Griffin
+ * @author  Vernon Singleton
  */
 public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase {
 
@@ -50,8 +48,6 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 	public static final int NO_SELECTION_INDEX = -1;
 
 	// Private data members.
-	private Long defaultSelected;
-	private Object defaultSelectedValue;
 	private long index;
 	private boolean inputElement;
 	private boolean labelElement;
@@ -59,14 +55,10 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 	private long selectedIndex;
 	private Object title;
 
-	public SelectStarRatingResponseWriter(ResponseWriter responseWriter, String defaultSelected) {
+	public SelectStarRatingResponseWriter(ResponseWriter responseWriter) {
 		super(responseWriter);
 		this.index = NO_SELECTION_INDEX;
 		this.selectedIndex = NO_SELECTION_INDEX;
-
-		if (defaultSelected != null) {
-			this.defaultSelected = new Long(defaultSelected);
-		}
 	}
 
 	@Override
@@ -95,9 +87,13 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 			super.startElement(name, component);
 		}
 
-		if ("label".equalsIgnoreCase(name)) {
+		else if ("label".equalsIgnoreCase(name)) {
 			labelElement = true;
 		}
+		else {
+			System.err.println("!@#$ startElement name=" + name);
+		}
+		
 	}
 
 	// f:selectItems uses this for writing chars into a label
@@ -107,6 +103,9 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 		if (labelElement) {
 			String newString = new String(chars, off, len);
 			title = newString;
+		}
+		else {
+			System.err.println("!@#$ write chars=" + new String(chars, off, len));
 		}
 	}
 
@@ -119,18 +118,6 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 
 				// We have found the input that is "checked"
 				setSelectedIndex(this.index);
-			}
-
-			if (StringPool.VALUE.equals(name)) {
-
-				if (defaultSelected != null) {
-
-					if (index == (defaultSelected - 1)) {
-
-						// We have found the input containing the value of the defaultSelected rating
-						setDefaultSelectedValue(value);
-					}
-				}
 			}
 
 			super.writeAttribute(name, value, property);
@@ -150,14 +137,9 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 		if (labelElement) {
 			title = text;
 		}
-	}
-
-	public Object getDefaultSelectedValue() {
-		return defaultSelectedValue;
-	}
-
-	public void setDefaultSelectedValue(Object defaultSelectedValue) {
-		this.defaultSelectedValue = defaultSelectedValue;
+		else {
+			System.err.println("!@#$ writeText text=" + text);
+		}
 	}
 
 	public String getOnClick() {

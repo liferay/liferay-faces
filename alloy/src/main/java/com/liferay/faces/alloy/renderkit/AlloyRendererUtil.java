@@ -34,12 +34,12 @@ public class AlloyRendererUtil {
 
 	// Public Constants
 	public static final String BOUNDING_BOX = "boundingBox";
+	public static final String FUNCTION_EVENT = "function(event)";
 
 	// Private Constants
 	private static final String A = "A";
 	private static final String DESTROY = "destroy";
 	private static final String FUNCTION_A = "function(A)";
-	private static final String FUNCTION_EVENT = "function(event)";
 	private static final String IF = "if";
 	private static final String LIFERAY_COMPONENT = "Liferay.component";
 	private static final String NEW = "new";

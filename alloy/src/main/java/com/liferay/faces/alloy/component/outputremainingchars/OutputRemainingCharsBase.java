@@ -25,7 +25,17 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class OutputRemainingCharsBase extends OutputText implements Styleable, ClientComponent, OutputRemainingCharsAlloy {
+public abstract class OutputRemainingCharsBase extends OutputText implements Styleable, ClientComponent {
+
+	// Public Constants
+	public static final String CLIENT_KEY = "clientKey";
+	public static final String FOR = "for";
+	public static final String MAX_LENGTH = "maxLength";
+	public static final String ON_MAXLENGTH_REACHED = "onMaxlengthReached";
+	public static final String ONCE_MAXLENGTH_REACHED = "onceMaxlengthReached";
+	public static final String STYLE = "style";
+	public static final String STYLE_CLASS = "styleClass";
+	public static final String VALUE = "value";
 
 	@Override
 	public String getClientKey() {
@@ -37,62 +47,34 @@ public abstract class OutputRemainingCharsBase extends OutputText implements Sty
 		getStateHelper().put(CLIENT_KEY, clientKey);
 	}
 
-	@Override
-	public String getCounter() {
-		return (String) getStateHelper().eval(COUNTER, null);
-	}
-
-	@Override
-	public void setCounter(String counter) {
-		getStateHelper().put(COUNTER, counter);
-	}
-
-	@Override
 	public String getFor() {
 		return (String) getStateHelper().eval(FOR, null);
 	}
 
-	@Override
 	public void setFor(String for_) {
 		getStateHelper().put(FOR, for_);
 	}
 
-	@Override
-	public String getInput() {
-		return (String) getStateHelper().eval(INPUT, null);
-	}
-
-	@Override
-	public void setInput(String input) {
-		getStateHelper().put(INPUT, input);
-	}
-
-	@Override
 	public Object getMaxLength() {
 		return (Object) getStateHelper().eval(MAX_LENGTH, null);
 	}
 
-	@Override
 	public void setMaxLength(Object maxLength) {
 		getStateHelper().put(MAX_LENGTH, maxLength);
 	}
 
-	@Override
 	public String getOnceMaxlengthReached() {
 		return (String) getStateHelper().eval(ONCE_MAXLENGTH_REACHED, null);
 	}
 
-	@Override
 	public void setOnceMaxlengthReached(String onceMaxlengthReached) {
 		getStateHelper().put(ONCE_MAXLENGTH_REACHED, onceMaxlengthReached);
 	}
 
-	@Override
 	public String getOnMaxlengthReached() {
 		return (String) getStateHelper().eval(ON_MAXLENGTH_REACHED, null);
 	}
 
-	@Override
 	public void setOnMaxlengthReached(String onMaxlengthReached) {
 		getStateHelper().put(ON_MAXLENGTH_REACHED, onMaxlengthReached);
 	}
