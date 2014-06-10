@@ -6,6 +6,7 @@
 	<ui:define name="col1">
 		<h:form>
 			<showcase:example>
+				<h:outputLabel styleClass="alloy-output-label" for="starRating" value="#{i18n['rating']}" />
 				<alloy:selectThumbRating value="#{selectThumbRatingModelBean.like}" label="#{i18n['like']}:">
 					<f:selectItem itemLabel="#{i18n['like']}" itemValue="true" />
 					<f:selectItem itemLabel="#{i18n['dislike']}" itemValue="false" />

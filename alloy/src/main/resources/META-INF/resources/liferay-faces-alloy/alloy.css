@@ -4,15 +4,25 @@
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 }
-
+table.alloy-messages {
+	border-collapse: separate;
+	border-spacing: 4px;
+	width: 100%;
+}
 ul.alloy-messages {
 	list-style-position: inside;
 	margin: 0px;
 	padding: 4px;
 }
 
-table.alloy-messages {
+table.alloy-select-one-radio {
 	border-collapse: separate;
-	border-spacing: 4px;
-	width: 100%;
+}
+table.alloy-select-one-radio td {
+	padding-right: 30px;
+}
+table.alloy-select-one-radio td input[type='radio'] {
+}
+table.alloy-select-one-radio td label {
+	white-space: nowrap;
 }
