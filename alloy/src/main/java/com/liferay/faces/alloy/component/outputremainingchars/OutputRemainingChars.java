@@ -21,6 +21,8 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -29,6 +31,9 @@ import com.liferay.faces.util.lang.StringPool;
 @FacesComponent(value = OutputRemainingChars.COMPONENT_TYPE)
 public class OutputRemainingChars extends OutputRemainingCharsBase {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(OutputRemainingChars.class);
+	
 	// Public Constants
 	public static final String COMPONENT_TYPE =
 		"com.liferay.faces.alloy.component.outputremainingchars.OutputRemainingChars";
@@ -44,17 +49,17 @@ public class OutputRemainingChars extends OutputRemainingCharsBase {
 	/**
 	 * Returns the escaped counter, using the id assigned by the developer or the id assigned by JSF.
 	 */
-	@Override
-	public String getCounter() {
-		String counter = super.getCounter();
-
-		// If no counter attribute is given, establish a default for the renderer to use.
-		if (counter == null) {
-			counter = OutputRemainingCharsUtil.getDefaultCounterEscaped(getFacesContext(), this);
-		}
-
-		return counter;
-	}
+//	@Override
+//	public String getCounter() {
+//		String counter = super.getCounter();
+//
+//		// If no counter attribute is given, establish a default for the renderer to use.
+//		if (counter == null) {
+//			counter = OutputRemainingCharsUtil.getDefaultCounterEscaped(getFacesContext(), this);
+//		}
+//
+//		return counter;
+//	}
 
 	/**
 	 * Returns the clientId of the component that the "for" attribute points to.
@@ -80,17 +85,17 @@ public class OutputRemainingChars extends OutputRemainingCharsBase {
 		return StringPool.POUND + ComponentUtil.escapeClientId(getForClientId(facesContext));
 	}
 
-	@Override
-	public String getInput() {
-		String input = super.getInput();
-
-		// If no input attribute is given, then use the for attribute, if any.
-		if (input == null) {
-			input = getForClientIdEscaped(getFacesContext());
-		}
-
-		return input;
-	}
+//	@Override
+//	public String getInput() {
+//		String input = super.getInput();
+//
+//		// If no input attribute is given, then use the for attribute, if any.
+//		if (input == null) {
+//			input = getForClientIdEscaped(getFacesContext());
+//		}
+//
+//		return input;
+//	}
 
 	@Override
 	public Object getMaxLength() {
@@ -102,17 +107,21 @@ public class OutputRemainingChars extends OutputRemainingCharsBase {
 
 			String forComponent = getFor();
 
-			UIComponent inputComponent = findComponent(forComponent);
-
-			if (inputComponent != null) {
-
-				if (inputComponent instanceof HtmlInputText) {
-					HtmlInputText htmlInputText = (HtmlInputText) inputComponent;
-					maxLength = htmlInputText.getMaxlength();
-				}
-				else if (inputComponent instanceof HtmlInputTextarea) {
-					HtmlInputTextarea htmlInputTextarea = (HtmlInputTextarea) inputComponent;
-					maxLength = htmlInputTextarea.getAttributes().get("maxlength");
+			if (forComponent == null) {
+				logger.error("getMaxLength: Please specify a 'for' attribute for the outputRemainingChars component.");
+			} else {
+				UIComponent inputComponent = findComponent(forComponent);
+			
+				if (inputComponent != null) {
+	
+					if (inputComponent instanceof HtmlInputText) {
+						HtmlInputText htmlInputText = (HtmlInputText) inputComponent;
+						maxLength = htmlInputText.getMaxlength();
+					}
+					else if (inputComponent instanceof HtmlInputTextarea) {
+						HtmlInputTextarea htmlInputTextarea = (HtmlInputTextarea) inputComponent;
+						maxLength = htmlInputTextarea.getAttributes().get("maxlength");
+					}
 				}
 			}
 		}
@@ -130,12 +139,10 @@ public class OutputRemainingChars extends OutputRemainingCharsBase {
 
 	@Override
 	public Object getValue() {
-
-		boolean counterSpecified = OutputRemainingCharsUtil.isCounterSpecified(getFacesContext(), this);
 		Object value = super.getValue();
 
 		// Specify a default value
-		if ((!counterSpecified) && (value == null)) {
+		if (value == null) {
 			value = "{0}";
 		}
 

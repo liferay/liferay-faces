@@ -1366,14 +1366,18 @@
 				</description>
 				<name>for</name>
 				<type>java.lang.String</type>
+				<yuiName>input</yuiName>
+				<required>true</required>
 			</attribute>
 	      	<!-- Attributes that are generated for the Alloy component -->
+	      	<!-- 
 	      	<attribute>
 				<description>
 					<![CDATA[Node or Selector to display the number of remaining characters calculated by the charCounter.]]>
 				</description>
 				<name>counter</name>
 				<type>java.lang.String</type>
+				<yui>true</yui> 
 			</attribute>
 			<attribute>
 				<description>
@@ -1381,6 +1385,16 @@
 				</description>
 				<name>input</name>
 				<type>java.lang.String</type>
+				<yui>true</yui>
+			</attribute>
+			-->
+			<attribute>
+				<description>
+					<![CDATA[The maximum number of charachters to allow in the input.]]>
+				</description>
+				<name>maxLength</name>
+				<type>java.lang.Object</type>
+				<yui>true</yui> <!-- call the encode for this attribute to be passed to the alloy component -->
 			</attribute>
 			<!-- Attributes that were invented here to implement Alloy methods -->
 			<attribute>
@@ -1396,6 +1410,14 @@
 				</description>
 				<name>onceMaxlengthReached</name>
 				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.Object</type>
+				<inherited>true</inherited> <!-- do not generate getters/setters -->
 			</attribute>
 		</attributes>
 	</component>

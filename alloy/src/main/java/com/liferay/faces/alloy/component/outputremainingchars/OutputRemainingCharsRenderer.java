@@ -65,20 +65,20 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 		ValueHolder valueHolder = (ValueHolder) uiComponent;
 		Object value = valueHolder.getValue();
 
-		OutputRemainingCharsAlloy outputRemainingCharsAlloy = (OutputRemainingCharsAlloy) uiComponent;
+//		OutputRemainingChars outputRemainingChars = (OutputRemainingChars) uiComponent;
 
 		// If a value was not submitted, then
 		if (value == null) {
 
-			// They may have specified their own counter (or they did not specify a value attribute)
-			if (OutputRemainingCharsUtil.isCounterSpecified(facesContext, outputRemainingCharsAlloy)) {
-				// Let them use their own counter
-			}
-
-			// Otherwise, since they did not specify a counter one must be written out.
-			else {
+//			// They may have specified their own counter (or they did not specify a value attribute)
+//			if (OutputRemainingCharsUtil.isCounterSpecified(facesContext, outputRemainingChars)) {
+//				// Let them use their own counter
+//			}
+//
+//			// Otherwise, since they did not specify a counter one must be written out.
+//			else {
 				encodeRemainingValue(facesContext, responseWriter, uiComponent);
-			}
+//			}
 		}
 
 		// Otherwise, there is a value submitted, so we need to encode a counter.
@@ -121,30 +121,35 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 			responseWriter.write(StringPool.SEMICOLON);
 		}
 	}
-
+	
 	@Override
-	protected void encodeOnceMaxlengthReached(ResponseWriter responseWriter,
-		OutputRemainingCharsAlloy outputRemainingCharsAlloy, String onceMaxlengthReached, boolean first)
-		throws IOException {
-
-		// no-op since the "onceMaxlengthReached" attribute is not a simple attribute value. Rather it is an event that
-		// must be encoded in encodeJavaScriptCustom(FacesContext, UIComponent).
+	protected void encodeHiddenAttributes(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, boolean first)
+			throws IOException {
+		
+		String counter = StringPool.POUND + ComponentUtil.escapeClientId(outputRemainingChars.getClientId() + ":counter");
+		encodeString(responseWriter, "counter", counter, first);
+		first = false;
 	}
-
+	
 	@Override
-	protected void encodeOnMaxlengthReached(ResponseWriter responseWriter,
-		OutputRemainingCharsAlloy outputRemainingCharsAlloy, String onMaxlengthReached, boolean first)
-		throws IOException {
+	protected void encodeInput(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, String for_, boolean first)
+			throws IOException {
 
-		// no-op since the "onMaxlengthReached" attribute is not a simple attribute value. Rather it is an event that
-		// must be encoded in encodeJavaScriptCustom(FacesContext, UIComponent).
+		UIComponent uiComponent = outputRemainingChars.findComponent(for_);
+
+		if (uiComponent != null) {
+			String forClientId = uiComponent.getClientId();
+			for_ = StringPool.POUND + ComponentUtil.escapeClientId(forClientId);
+		}
+		
+		super.encodeInput(responseWriter, outputRemainingChars, for_, first);
 	}
 
 	protected void encodeRemainingValue(FacesContext facesContext, ResponseWriter responseWriter,
 		UIComponent uiComponent) throws IOException {
 
-		OutputRemainingCharsAlloy outputRemainingCharsAlloy = (OutputRemainingCharsAlloy) uiComponent;
-		String forComponent = outputRemainingCharsAlloy.getFor();
+		OutputRemainingChars outputRemainingChars = (OutputRemainingChars) uiComponent;
+		String forComponent = outputRemainingChars.getFor();
 
 		if (forComponent != null) {
 
@@ -155,7 +160,7 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 			// input found, use its value for the calculation, if any.
 			if ((inputUIComponent != null) && (inputUIComponent instanceof ValueHolder)) {
 
-				Object maxLength = outputRemainingCharsAlloy.getMaxLength();
+				Object maxLength = outputRemainingChars.getMaxLength();
 
 				if (maxLength != null) {
 					Long max = new Long(maxLength.toString());
@@ -174,8 +179,8 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 						remainingCharacters = 0L;
 					}
 
-					String defaultCounterSpanId = OutputRemainingCharsUtil.getDefaultCounterSpanId(facesContext,
-							uiComponent);
+//					String defaultCounterSpanId = OutputRemainingCharsUtil.getDefaultCounterSpanId(facesContext,uiComponent);
+					String defaultCounterSpanId = uiComponent.getClientId(facesContext) + ":counter";
 					OutputRemainingCharsResponseWriter outputRemainingCharsResponseWriter =
 						new OutputRemainingCharsResponseWriter(responseWriter, uiComponent, defaultCounterSpanId,
 							remainingCharacters.toString());

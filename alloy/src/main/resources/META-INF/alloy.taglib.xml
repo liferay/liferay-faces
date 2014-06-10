@@ -2391,12 +2391,6 @@
 			<type>javax.faces.convert.Converter</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Node or Selector to display the number of remaining characters calculated by the charCounter.]]></description>
-			<name>counter</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
@@ -2411,7 +2405,7 @@
 		<attribute>
 			<description><![CDATA[The id of the text input node which is used to calculate the remaining characters. One of either "for" or "input" are required.]]></description>
 			<name>for</name>
-			<required>false</required>
+			<required>true</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -2421,16 +2415,16 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Input text node which will have it's number of characters limited by the charCounter. One of either "for" or "input" are required.]]></description>
-			<name>input</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
 			<name>lang</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The maximum number of charachters to allow in the input.]]></description>
+			<name>maxLength</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Node or Selector to display the number of remaining characters calculated by the charCounter.]]></description>

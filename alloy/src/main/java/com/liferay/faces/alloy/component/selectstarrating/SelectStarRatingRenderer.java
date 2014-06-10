@@ -63,6 +63,8 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 		String boundingBox = StringPool.POUND + ComponentUtil.escapeClientId(clientId);
 		encodeString(responseWriter, "boundingBox", boundingBox, first);
 		
+		first = false;
+		
 		// render : true
 		encodeWidgetRender(responseWriter, first);
 		
