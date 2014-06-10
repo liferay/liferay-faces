@@ -46,7 +46,6 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 	// Private Constants
 	private static final String FACES_RUNTIME_ONCLICK = "facesRuntimeOnClick";
 	private static final String SELECTED_INDEX = "selectedIndex";
-//	private static final String DEFAULT_SELECTED_VALUE = "defaultSelectedValue";
 
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -110,16 +109,9 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 		String hiddenInputValue = StringPool.BLANK;
 
 		// 3. Developer attribute
-//		Object defaultSelectedValue = facesContext.getAttributes().remove(DEFAULT_SELECTED_VALUE);
-
-		// If this is the initial render of the page, then the value of the hidden input should be set to the
-		// defaultSelectedValue
-//		if (!facesContext.isPostback()) {
-//
-//			if (defaultSelectedValue != null) {
-//				hiddenInputValue = defaultSelectedValue.toString();
-//			}
-//		}
+		// no developer attribute is allowed for this component, even though alloyui allows for an attribute called defaultSelected
+		// that attribute has not been exposed here in favor of using normal JSF application techniques for establishing defaults
+		// in the model.
 
 		// 4. and 5. If the developer EL or user input is specified, then the value of the hidden input field should be
 		// set to this value of the rating component
@@ -169,26 +161,26 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 		// 1. The model has a default value coming through on initial render
 		// 2. The user clicked on a star, this is a postback, and we need the component to have that many stars filled.
 		//
-		// This is a special case where a defaultSelectedIndex has been established, and Alloy renders stars already
-		// filled to the defaultSelected input, but the user has selected a different number of stars than the
-		// defaultSelected, so we need to "select" the correct number of stars to be filled. If the defaultSelected is
-		// the same as the chosen selectedIndex, we do not want to select it again, since alloy has already filled the
+		// This is the case where an alloySelectedIndex has been established (or Alloy renders stars already
+		// filled to the defaultSelected input), but the user has selected a different number of stars than the
+		// alloySelectedIndex, so we need to "select" the correct number of stars to be filled. If the alloySelectedIndex is
+		// the same as the indexSelectedByJSF, we do not want to select it again, since alloy has already filled the
 		// correct number of stars.  If we did select it again, it would clear the stars ... not showing what the user
 		// selected.
 		else {
 
-			String selectedIndexAsString = selectedIndex.toString();
+			String indexSelectedByJSF = selectedIndex.toString();
 
-			responseWriter.write("var defaultSelectedIndex=");
+			responseWriter.write("var alloySelectedIndex=");
 			responseWriter.write(clientVarName);
 			responseWriter.write(".get('selectedIndex');");
 
 			responseWriter.write("if(");
-			responseWriter.write(selectedIndexAsString);
-			responseWriter.write("!=defaultSelectedIndex){");
+			responseWriter.write(indexSelectedByJSF);
+			responseWriter.write("!=alloySelectedIndex){");
 			responseWriter.write(clientVarName);
 			responseWriter.write(".select(");
-			responseWriter.write(selectedIndexAsString);
+			responseWriter.write(indexSelectedByJSF);
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 			responseWriter.write(StringPool.SEMICOLON);
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
@@ -253,13 +245,6 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 
 		// Encode the child radio inputs by delegating to the renderer from the JSF runtime using our own
 		// SelectStarRatingResponseWriter to control the output.
-//		SelectStarRating selectStarRating = (SelectStarRating) uiComponent;
-//		String defaultSelected = StringHelper.toString(selectStarRating.getDefaultSelected(), null);
-
-		// NOTE: The SelectStarRatingResponseWriter is designed such that it needs to be used to survive the delegate
-		// renderer's encodeBegin(), encodeChildren(), and encodeEnd(). Therefore it is necessary to call encodeAll() in
-		// this method rather than simply calling encodeBegin().
-//		SelectStarRatingResponseWriter selectStarRatingResponseWriter = new SelectStarRatingResponseWriter(responseWriter,defaultSelected);
 		SelectStarRatingResponseWriter selectStarRatingResponseWriter = new SelectStarRatingResponseWriter(responseWriter);
 		super.encodeAll(facesContext, uiComponent, selectStarRatingResponseWriter);
 
@@ -270,10 +255,7 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 		// Save the selectedIndex for later use in the JavaScript.
 		Long selectedIndex = selectStarRatingResponseWriter.getSelectedIndex();
 		facesContext.getAttributes().put(SELECTED_INDEX, selectedIndex);
-
-		// Save the defaultSelectedValue for later use in the JavaScript.
-//		Object defaultSelectedValue = selectStarRatingResponseWriter.getDefaultSelectedValue();
-//		facesContext.getAttributes().put(DEFAULT_SELECTED_VALUE, defaultSelectedValue);
+		
 	}
 
 	@Override

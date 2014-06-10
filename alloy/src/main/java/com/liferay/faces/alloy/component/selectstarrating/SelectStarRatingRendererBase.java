@@ -42,22 +42,6 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 		SelectStarRating selectStarRating = (SelectStarRating) uiComponent;
 		boolean first = true;
 
-		String defaultSelected = selectStarRating.getDefaultSelected();
-
-		if (defaultSelected != null) {
-
-			encodeDefaultSelected(responseWriter, selectStarRating, defaultSelected, first);
-			first = false;
-		}
-
-		Boolean disabled = selectStarRating.isDisabled();
-
-		if (disabled != null) {
-
-			encodeDisabled(responseWriter, selectStarRating, disabled, first);
-			first = false;
-		}
-
 		String label = selectStarRating.getLabel();
 
 		if (label != null) {
@@ -85,14 +69,6 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 	@Override
 	protected String[] getModules() {
 		return MODULES;
-	}
-
-	protected void encodeDefaultSelected(ResponseWriter responseWriter, SelectStarRating selectStarRating, String defaultSelected, boolean first) throws IOException {
-		encodeString(responseWriter, SelectStarRating.DEFAULT_SELECTED, defaultSelected, first);
-	}
-
-	protected void encodeDisabled(ResponseWriter responseWriter, SelectStarRating selectStarRating, Boolean disabled, boolean first) throws IOException {
-		encodeObject(responseWriter, SelectStarRating.DISABLED, disabled, first);
 	}
 
 	protected void encodeLabel(ResponseWriter responseWriter, SelectStarRating selectStarRating, String label, boolean first) throws IOException {

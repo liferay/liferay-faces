@@ -29,8 +29,6 @@ public abstract class SelectStarRatingBase extends SelectOneRadio implements Sty
 
 	// Public Constants
 	public static final String CLIENT_KEY = "clientKey";
-	public static final String DEFAULT_SELECTED = "defaultSelected";
-	public static final String DISABLED = "disabled";
 	public static final String LABEL = "label";
 	public static final String STYLE = "style";
 	public static final String STYLE_CLASS = "styleClass";
@@ -44,22 +42,6 @@ public abstract class SelectStarRatingBase extends SelectOneRadio implements Sty
 	@Override
 	public void setClientKey(String clientKey) {
 		getStateHelper().put(CLIENT_KEY, clientKey);
-	}
-
-	public String getDefaultSelected() {
-		return (String) getStateHelper().eval(DEFAULT_SELECTED, null);
-	}
-
-	public void setDefaultSelected(String defaultSelected) {
-		getStateHelper().put(DEFAULT_SELECTED, defaultSelected);
-	}
-
-	public boolean isDisabled() {
-		return (Boolean) getStateHelper().eval(DISABLED, false);
-	}
-
-	public void setDisabled(boolean disabled) {
-		getStateHelper().put(DISABLED, disabled);
 	}
 
 	public String getLabel() {

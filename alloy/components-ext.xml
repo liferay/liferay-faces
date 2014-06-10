@@ -1369,25 +1369,7 @@
 				<yuiName>input</yuiName>
 				<required>true</required>
 			</attribute>
-	      	<!-- Attributes that are generated for the Alloy component -->
-	      	<!-- 
-	      	<attribute>
-				<description>
-					<![CDATA[Node or Selector to display the number of remaining characters calculated by the charCounter.]]>
-				</description>
-				<name>counter</name>
-				<type>java.lang.String</type>
-				<yui>true</yui> 
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Input text node which will have it's number of characters limited by the charCounter. One of either "for" or "input" are required.]]>
-				</description>
-				<name>input</name>
-				<type>java.lang.String</type>
-				<yui>true</yui>
-			</attribute>
-			-->
+	      	<!-- Attributes that need to be generated for the Alloy component -->
 			<attribute>
 				<description>
 					<![CDATA[The maximum number of charachters to allow in the input.]]>
@@ -1411,6 +1393,7 @@
 				<name>onceMaxlengthReached</name>
 				<type>java.lang.String</type>
 			</attribute>
+			<!-- Attributes used to help the component follow normal JSF usage patterns -->
 			<attribute>
 				<description>
 					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
@@ -1623,24 +1606,6 @@
 			<![CDATA[StarRating is a UISelectOne component that renders a set of stars. The user can click on a star to select a rating and click on the same star a second time to de-select a rating. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it accepts f:selectItem or f:selectItems as child tags.]]>
 		</description>
 		<attributes>
-			<!-- Attributes that are found both in JSF and AlloyUI -->
-			<attribute>
-				<description>
-					<![CDATA[The number of stars to initially render.]]>
-				</description>
-				<name>defaultSelected</name>
-				<type>java.lang.String</type>
-				<yui>true</yui>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]>
-				</description>
-				<name>disabled</name>
-				<type>boolean</type>
-				<yui>true</yui>
-				<defaultValue>false</defaultValue>
-			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]>
@@ -1659,7 +1624,6 @@
 				<inherited>true</inherited> <!-- do not generate getters/setters -->
 				<javaScriptType>String</javaScriptType>
 			</attribute>
-			<!-- Attributes that are inherited from HtmlSelectOneRadio -->
 		</attributes>
 	</component>
 	<component name="SelectThumbRating" extendsTags="SelectStarRating" generateJava="false" module="aui-rating"
@@ -1669,15 +1633,6 @@
 		<description>
 			<![CDATA[SelectThumbRating is a UISelectOne component that renders a pair of thumb icons that a user can select to indicate their favor. The user can click on a thumb to select their favor and click on the same thumb a second time to de-select their favor. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it accepts f:selectItem or f:selectItems as children.]]>
 		</description>
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
-				</description>
-				<name>value</name>
-				<type>java.lang.String</type>
-			</attribute>
-		</attributes>
 	</component>
 	<component name="Tab" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIColumn">
 		<description>

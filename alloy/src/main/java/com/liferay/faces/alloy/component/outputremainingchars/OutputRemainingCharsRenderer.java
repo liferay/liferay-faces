@@ -60,30 +60,46 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+		ResponseWriter responseWriter = facesContext.getResponseWriter();		
+		OutputRemainingChars outputRemainingChars = (OutputRemainingChars) uiComponent;
+		String forComponent = outputRemainingChars.getFor();
 
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		ValueHolder valueHolder = (ValueHolder) uiComponent;
-		Object value = valueHolder.getValue();
+		if (forComponent != null) {
 
-//		OutputRemainingChars outputRemainingChars = (OutputRemainingChars) uiComponent;
+			UIComponent inputUIComponent = uiComponent.findComponent(forComponent);
 
-		// If a value was not submitted, then
-		if (value == null) {
+			// If there is no input found, they may be using an html tag as an input. In that case, they will need to
+			// specify maxLength on the outputRemainingChars component instead of their own html input. If there is an
+			// input found, use its value for the calculation, if any.
+			if ((inputUIComponent != null) && (inputUIComponent instanceof ValueHolder)) {
 
-//			// They may have specified their own counter (or they did not specify a value attribute)
-//			if (OutputRemainingCharsUtil.isCounterSpecified(facesContext, outputRemainingChars)) {
-//				// Let them use their own counter
-//			}
-//
-//			// Otherwise, since they did not specify a counter one must be written out.
-//			else {
-				encodeRemainingValue(facesContext, responseWriter, uiComponent);
-//			}
-		}
+				Object maxLength = outputRemainingChars.getMaxLength();
 
-		// Otherwise, there is a value submitted, so we need to encode a counter.
-		else {
-			encodeRemainingValue(facesContext, responseWriter, uiComponent);
+				if (maxLength != null) {
+					Long max = new Long(maxLength.toString());
+					Long givenCharacters = 0L;
+
+					ValueHolder inputValueHolder = (ValueHolder) inputUIComponent;
+					String inputValue = (String) inputValueHolder.getValue();
+
+					if (inputValue != null) {
+						givenCharacters = new Long(inputValue.length());
+					}
+
+					Long remainingCharacters = max - givenCharacters;
+
+					if (remainingCharacters < 0) {
+						remainingCharacters = 0L;
+					}
+
+					String defaultCounterSpanId = uiComponent.getClientId(facesContext) + ":counter";
+					OutputRemainingCharsResponseWriter outputRemainingCharsResponseWriter =
+						new OutputRemainingCharsResponseWriter(responseWriter, uiComponent, defaultCounterSpanId,
+							remainingCharacters.toString());
+
+					super.encodeAll(facesContext, uiComponent, outputRemainingCharsResponseWriter);
+				}
+			}
 		}
 	}
 
@@ -143,52 +159,6 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 		}
 		
 		super.encodeInput(responseWriter, outputRemainingChars, for_, first);
-	}
-
-	protected void encodeRemainingValue(FacesContext facesContext, ResponseWriter responseWriter,
-		UIComponent uiComponent) throws IOException {
-
-		OutputRemainingChars outputRemainingChars = (OutputRemainingChars) uiComponent;
-		String forComponent = outputRemainingChars.getFor();
-
-		if (forComponent != null) {
-
-			UIComponent inputUIComponent = uiComponent.findComponent(forComponent);
-
-			// If there is no input found, they may be using an html tag as an input. In that case, they will need to
-			// specify maxLength on the outputRemainingChars component instead of their own html input. If there is an
-			// input found, use its value for the calculation, if any.
-			if ((inputUIComponent != null) && (inputUIComponent instanceof ValueHolder)) {
-
-				Object maxLength = outputRemainingChars.getMaxLength();
-
-				if (maxLength != null) {
-					Long max = new Long(maxLength.toString());
-					Long givenCharacters = 0L;
-
-					ValueHolder inputValueHolder = (ValueHolder) inputUIComponent;
-					String inputValue = (String) inputValueHolder.getValue();
-
-					if (inputValue != null) {
-						givenCharacters = new Long(inputValue.length());
-					}
-
-					Long remainingCharacters = max - givenCharacters;
-
-					if (remainingCharacters < 0) {
-						remainingCharacters = 0L;
-					}
-
-//					String defaultCounterSpanId = OutputRemainingCharsUtil.getDefaultCounterSpanId(facesContext,uiComponent);
-					String defaultCounterSpanId = uiComponent.getClientId(facesContext) + ":counter";
-					OutputRemainingCharsResponseWriter outputRemainingCharsResponseWriter =
-						new OutputRemainingCharsResponseWriter(responseWriter, uiComponent, defaultCounterSpanId,
-							remainingCharacters.toString());
-
-					super.encodeAll(facesContext, uiComponent, outputRemainingCharsResponseWriter);
-				}
-			}
-		}
 	}
 
 	@Override

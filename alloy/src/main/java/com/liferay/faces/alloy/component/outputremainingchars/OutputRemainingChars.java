@@ -46,24 +46,7 @@ public class OutputRemainingChars extends OutputRemainingCharsBase {
 		setRendererType(RENDERER_TYPE);
 	}
 
-	/**
-	 * Returns the escaped counter, using the id assigned by the developer or the id assigned by JSF.
-	 */
-//	@Override
-//	public String getCounter() {
-//		String counter = super.getCounter();
-//
-//		// If no counter attribute is given, establish a default for the renderer to use.
-//		if (counter == null) {
-//			counter = OutputRemainingCharsUtil.getDefaultCounterEscaped(getFacesContext(), this);
-//		}
-//
-//		return counter;
-//	}
-
-	/**
-	 * Returns the clientId of the component that the "for" attribute points to.
-	 */
+	// Returns the clientId of the component that the "for" attribute points to.
 	protected String getForClientId(FacesContext facesContext) {
 
 		String forClientId = null;
@@ -84,18 +67,6 @@ public class OutputRemainingChars extends OutputRemainingCharsBase {
 	public String getForClientIdEscaped(FacesContext facesContext) {
 		return StringPool.POUND + ComponentUtil.escapeClientId(getForClientId(facesContext));
 	}
-
-//	@Override
-//	public String getInput() {
-//		String input = super.getInput();
-//
-//		// If no input attribute is given, then use the for attribute, if any.
-//		if (input == null) {
-//			input = getForClientIdEscaped(getFacesContext());
-//		}
-//
-//		return input;
-//	}
 
 	@Override
 	public Object getMaxLength() {

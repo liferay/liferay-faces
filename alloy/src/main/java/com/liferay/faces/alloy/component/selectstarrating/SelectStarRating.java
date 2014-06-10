@@ -57,21 +57,9 @@ public class SelectStarRating extends SelectStarRatingBase {
 		super.validateValue(context, value);
 	}
 
-//	@Override
-//	public String getBoundingBox() {
-//
-//		String boundingBox = super.getBoundingBox();
-//
-//		if (boundingBox == null) {
-//			boundingBox = StringPool.POUND + ComponentUtil.escapeClientId(getClientId());
-//		}
-//
-//		return boundingBox;
-//	}
-
 	@Override
 	public String getStyleClass() {
-
+		
 		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);

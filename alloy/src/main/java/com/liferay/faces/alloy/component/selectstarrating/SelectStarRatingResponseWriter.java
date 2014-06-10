@@ -36,13 +36,11 @@ import com.liferay.faces.util.render.DelegationResponseWriterBase;
  * the unnecessary table parts and put things like the labels into the title attributes of the radio inputs where
  * alloy will get them.	 Please refer to JSF vdldocs for more details:
  * {@link https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/selectOneRadio.html}
- *
- * @author	Vernon Singleton
  */
 //J+
 
 /**
- * @author  Neil Griffin
+ * @author  Vernon Singleton
  */
 public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase {
 
@@ -50,8 +48,6 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 	public static final int NO_SELECTION_INDEX = -1;
 
 	// Private data members.
-//	private Long defaultSelected;
-//	private Object defaultSelectedValue;
 	private long index;
 	private boolean inputElement;
 	private boolean labelElement;
@@ -63,10 +59,6 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 		super(responseWriter);
 		this.index = NO_SELECTION_INDEX;
 		this.selectedIndex = NO_SELECTION_INDEX;
-
-//		if (defaultSelected != null) {
-//			this.defaultSelected = new Long(defaultSelected);
-//		}
 	}
 
 	@Override
@@ -121,18 +113,6 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 				setSelectedIndex(this.index);
 			}
 
-//			if (StringPool.VALUE.equals(name)) {
-//
-//				if (defaultSelected != null) {
-//
-//					if (index == (defaultSelected - 1)) {
-//
-//						// We have found the input containing the value of the defaultSelected rating
-//						setDefaultSelectedValue(value);
-//					}
-//				}
-//			}
-
 			super.writeAttribute(name, value, property);
 		}
 
@@ -151,14 +131,6 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 			title = text;
 		}
 	}
-
-//	public Object getDefaultSelectedValue() {
-//		return defaultSelectedValue;
-//	}
-//
-//	public void setDefaultSelectedValue(Object defaultSelectedValue) {
-//		this.defaultSelectedValue = defaultSelectedValue;
-//	}
 
 	public String getOnClick() {
 		return onClick;
