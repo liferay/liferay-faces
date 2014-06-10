@@ -38,6 +38,8 @@
 						<f:param name="componentUseCase" value="#{correspondingUseCase}" />
 					</h:link>
 					<h:outputText value=" #{i18n['alloy-input-date-benefits-description']}" />
+					<alloy:outputText escape="false" rendered="#{selectedComponentUseCaseName == 'multiple-selection'}"
+						value=" #{i18n['note-multiple-selection-not-available-in-inputdate']}" />
 				</h:panelGroup>
 			</h:panelGrid>
 		</c:if>
