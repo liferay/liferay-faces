@@ -222,6 +222,7 @@ sub do_inplace_edits {
 		`perl -pi -e 's/vdldoc:since value=\\"[0-9]\\.[0-9]/vdldoc:since value=\\"$liferayFacesVersionShortMajor1DotMajor2/' $file`;
 		if ($facesMajor > 2 or ($facesMajor == 2 and $facesMinor > 1)) {
 			`perl -pi -e 's/java.sun.com/xmlns.jcp.org/g' $file`;
+			`perl -pi -e 's/xmlns.jcp.org\\/portlet_2_0/java.sun.com\\/portlet_2_0/g' $file`;
 		} else {
 			`perl -pi -e 's/xmlns.jcp.org/java.sun.com/g' $file`;
 		}
