@@ -86,15 +86,18 @@
 	font-weight: bold;
 }
 
-.aui .alloy-select-one-radio input[type='radio'] {
-	vertical-align: baseline;
+.aui .alloy-select-one-radio label {
+	font-size: 0.9em;
 }
 
-.aui .alloy-select-one-radio label {
-	display: inline;
-	font-size: 0.9em;
-	padding-right: 8px;
-	vertical-align: baseline;
+.aui .showcase-example .alloy-field label.control-label {
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+.aui .showcase-example .alloy-output-label {
+	font-size: 1.1em;
+	font-weight: bold;
 }
 
 .aui ul.feedback {

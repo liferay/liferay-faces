@@ -6,7 +6,8 @@
 	<ui:define name="col1">
 		<h:form>
 			<showcase:example renderedCheckbox="true" requiredCheckbox="true">
-				<alloy:selectStarRating id="starRating" label="#{i18n['rating']}:"
+				<h:outputLabel styleClass="alloy-output-label" for="starRating" value="#{i18n['rating']}" />
+				<alloy:selectStarRating id="starRating"
 					rendered="#{showcaseModelBean.selectedComponent.rendered}"
 					required="#{showcaseModelBean.selectedComponent.required}" value="#{selectStarRatingModelBean.favoriteId}">
 					<f:selectItem itemLabel="Compatible" itemValue="1" />
