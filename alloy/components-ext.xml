@@ -1611,7 +1611,6 @@
 				</description>
 				<name>label</name>
 				<type>java.lang.String</type>
-				<yui>true</yui>
 				<inherited>true</inherited>
 			</attribute>
 			<attribute>

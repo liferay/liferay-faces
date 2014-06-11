@@ -42,14 +42,6 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 		SelectStarRating selectStarRating = (SelectStarRating) uiComponent;
 		boolean first = true;
 
-		String label = selectStarRating.getLabel();
-
-		if (label != null) {
-
-			encodeLabel(responseWriter, selectStarRating, label, first);
-			first = false;
-		}
-
 		Object value = selectStarRating.getValue();
 
 		if (value != null) {
@@ -69,10 +61,6 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 	@Override
 	protected String[] getModules() {
 		return MODULES;
-	}
-
-	protected void encodeLabel(ResponseWriter responseWriter, SelectStarRating selectStarRating, String label, boolean first) throws IOException {
-		encodeString(responseWriter, SelectStarRating.LABEL, label, first);
 	}
 
 	protected void encodeValue(ResponseWriter responseWriter, SelectStarRating selectStarRating, Object value, boolean first) throws IOException {
