@@ -1171,7 +1171,7 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
+			<description><![CDATA[A localized label for this component that is typically only rendered in a FacesMessage when validation fails.]]></description>
 			<name>label</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1635,7 +1635,7 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
+			<description><![CDATA[A localized label for this component that is typically only rendered in a FacesMessage when validation fails.]]></description>
 			<name>label</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1888,7 +1888,7 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
+			<description><![CDATA[A localized label for this component that is typically only rendered in a FacesMessage when validation fails.]]></description>
 			<name>label</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -3123,7 +3123,7 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
+			<description><![CDATA[A localized label for this component that is typically only rendered in a FacesMessage when validation fails.]]></description>
 			<name>label</name>
 			<required>false</required>
 			<type>java.lang.String</type>
