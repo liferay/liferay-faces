@@ -1550,7 +1550,7 @@
 		</attributes>
 	</component>
 	<component name="SelectOneRadio" extendsTags="HTMLAccessibilityEvents HTMLInputEvents"
-		generateJava="false" parentClass="javax.faces.component.html.HtmlSelectOneRadio">
+		parentClass="javax.faces.component.html.HtmlSelectOneRadio">
 		<description>
 		   <![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>

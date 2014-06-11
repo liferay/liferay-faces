@@ -14,13 +14,11 @@
 package com.liferay.faces.alloy.component.selectoneradio;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.component.html.HtmlSelectOneRadio;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
 import com.liferay.faces.alloy.component.AlloyComponentUtil;
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -28,7 +26,7 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = SelectOneRadio.COMPONENT_TYPE)
-public class SelectOneRadio extends HtmlSelectOneRadio implements Styleable {
+public class SelectOneRadio extends SelectOneRadioBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio";
@@ -51,6 +49,7 @@ public class SelectOneRadio extends HtmlSelectOneRadio implements Styleable {
 		if (label == null) {
 
 			FacesContext facesContext = FacesContext.getCurrentInstance();
+
 			if (facesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
 				label = AlloyComponentUtil.getComponentLabel(this);
 			}
@@ -70,10 +69,5 @@ public class SelectOneRadio extends HtmlSelectOneRadio implements Styleable {
 		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
-
-	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 }
