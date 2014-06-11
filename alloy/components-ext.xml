@@ -1252,7 +1252,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputText" extendsTags="InputTextCommon" generateJava="false">
+	<component name="InputText" extendsTags="InputTextCommon" parentClass="javax.faces.component.html.HtmlInputText">
 		<attributes>
 			<attribute>
 				<description>

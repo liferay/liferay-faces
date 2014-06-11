@@ -14,11 +14,9 @@
 package com.liferay.faces.alloy.component.inputtext;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.component.html.HtmlInputText;
 
 import com.liferay.faces.alloy.component.AlloyComponentUtil;
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -26,7 +24,7 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Neil Griffin
  */
 @FacesComponent(value = InputText.COMPONENT_TYPE)
-public class InputText extends HtmlInputText implements Styleable {
+public class InputText extends InputTextBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputtext.InputText";
@@ -63,10 +61,5 @@ public class InputText extends HtmlInputText implements Styleable {
 		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
-
-	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 }
