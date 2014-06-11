@@ -14,17 +14,15 @@
 package com.liferay.faces.alloy.component.body;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.component.html.HtmlBody;
 
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.component.Styleable;
 
 
 /**
  * @author  Neil Griffin
  */
 @FacesComponent(value = Body.COMPONENT_TYPE)
-public class Body extends HtmlBody implements Styleable {
+public class Body extends BodyBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.body.Body";
@@ -44,10 +42,5 @@ public class Body extends HtmlBody implements Styleable {
 		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
-
-	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 }
