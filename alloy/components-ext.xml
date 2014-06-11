@@ -388,6 +388,7 @@
 				<name>label</name>
 				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
+				<inherited>true</inherited>
 			</attribute>
 		</attributes>
 	</component>
