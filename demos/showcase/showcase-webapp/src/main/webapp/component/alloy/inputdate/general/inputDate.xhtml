@@ -9,9 +9,11 @@
 		<h:form>
 			<showcase:example description="#{i18n['alloy-inputdate-general-example-1']}" longDescription="true" number="1"
 				renderedCheckbox="true" requiredCheckbox="true">
-				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" rendered="#{showcaseModelBean.selectedComponent.rendered}"
-					required="#{showcaseModelBean.selectedComponent.required}" value="#{inputDateModelBean.birthday}" />
-				<alloy:message for="birthday" />
+				<alloy:field label="#{i18n['birthday']}">
+					<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+						required="#{showcaseModelBean.selectedComponent.required}" value="#{inputDateModelBean.birthday}" />
+					<alloy:message for="birthday" />
+				</alloy:field>
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
@@ -30,9 +32,11 @@
 		<h:form>
 			<showcase:example description="#{i18n['alloy-inputdate-general-example-2']}" longDescription="true" number="2"
 				renderedCheckbox="true">
-				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" showOn="button"
-					rendered="#{showcaseModelBean.selectedComponent.rendered}" value="#{inputDateModelBean.birthday}" />
-				<alloy:message for="birthday" />
+				<alloy:field label="#{i18n['birthday']}">
+					<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" showOn="button"
+						rendered="#{showcaseModelBean.selectedComponent.rendered}" value="#{inputDateModelBean.birthday}" />
+					<alloy:message for="birthday" />
+				</alloy:field>
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
@@ -52,9 +56,11 @@
 		<h:form>
 			<showcase:example description="#{i18n['alloy-inputdate-general-example-3']}" longDescription="true" number="3"
 				renderedCheckbox="true">
-				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" showOn="both"
-					rendered="#{showcaseModelBean.selectedComponent.rendered}" value="#{inputDateModelBean.birthday}" />
-				<alloy:message for="birthday" />
+				<alloy:field label="#{i18n['birthday']}">
+					<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" showOn="both"
+						rendered="#{showcaseModelBean.selectedComponent.rendered}" value="#{inputDateModelBean.birthday}" />
+					<alloy:message for="birthday" />
+				</alloy:field>
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
