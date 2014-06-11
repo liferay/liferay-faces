@@ -14,19 +14,17 @@
 package com.liferay.faces.alloy.component.commandbutton;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.component.html.HtmlCommandButton;
 
 import com.liferay.faces.alloy.component.button.FacesButton;
 import com.liferay.faces.alloy.component.button.HTML5Button;
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.component.Styleable;
 
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = CommandButton.COMPONENT_TYPE)
-public class CommandButton extends HtmlCommandButton implements FacesButton, HTML5Button, Styleable {
+public class CommandButton extends CommandButtonBase implements FacesButton, HTML5Button {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.commandbutton.CommandButton";
@@ -40,25 +38,10 @@ public class CommandButton extends HtmlCommandButton implements FacesButton, HTM
 	}
 
 	@Override
-	public void setAutofocus(Boolean autofocus) {
-		getStateHelper().put(AUTOFOCUS, autofocus);
-	}
-
-	@Override
-	public Boolean isAutofocus() {
-		return (Boolean) getStateHelper().eval(AUTOFOCUS, null);
-	}
-
-	@Override
 	public String getStyleClass() {
 
 		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
-
-	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 }
