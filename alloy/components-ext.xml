@@ -1404,7 +1404,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="OutputText" extendsTags="HTMLPassthrough UIOutput" generateJava="false">
+	<component name="OutputText" extendsTags="HTMLPassthrough UIOutput" parentClass="javax.faces.component.html.HtmlOutputText">
 		<description>
 			<![CDATA[OuputText is an <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutputText.html" target="_blank"><code>HtmlOutputText</code></a> component that delegates rendering to its JSF renderer.]]>
 		</description>

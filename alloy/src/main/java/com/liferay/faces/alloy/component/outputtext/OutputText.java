@@ -14,17 +14,15 @@
 package com.liferay.faces.alloy.component.outputtext;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.component.html.HtmlOutputText;
 
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.component.Styleable;
 
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = OutputText.COMPONENT_TYPE)
-public class OutputText extends HtmlOutputText implements Styleable {
+public class OutputText extends OutputTextBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputtext.OutputText";
@@ -44,10 +42,5 @@ public class OutputText extends HtmlOutputText implements Styleable {
 		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
-
-	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 }
