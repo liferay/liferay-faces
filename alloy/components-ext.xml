@@ -1280,7 +1280,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputTextarea" extendsTags="InputTextCommon" generateJava="false"
+	<component name="InputTextarea" extendsTags="InputTextCommon"
 		parentClass="javax.faces.component.html.HtmlInputTextarea">
 		<attributes>
 			<attribute>
