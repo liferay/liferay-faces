@@ -14,17 +14,15 @@
 package com.liferay.faces.alloy.component.panelgroup;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.component.html.HtmlPanelGroup;
 
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.component.Styleable;
 
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = PanelGroup.COMPONENT_TYPE)
-public class PanelGroup extends HtmlPanelGroup implements Styleable {
+public class PanelGroup extends PanelGroupBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.panelgroup.PanelGroup";
@@ -44,10 +42,5 @@ public class PanelGroup extends HtmlPanelGroup implements Styleable {
 		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
-
-	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 }
