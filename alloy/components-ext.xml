@@ -1436,8 +1436,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="PanelGroup" generateJava="false" extendsTags="HTMLCommonEvents"
-		parentClass="javax.faces.component.html.HtmlPanelGroup"
+	<component name="PanelGroup" extendsTags="HTMLCommonEvents"	parentClass="javax.faces.component.html.HtmlPanelGroup"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[PanelGroup is a UIPanel component that renders a <code>&lt;span&gt;</code> or a <code>&lt;div&gt;</code> element for grouping purposes. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
