@@ -14,9 +14,6 @@
 package com.liferay.faces.alloy.renderkit;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -25,6 +22,7 @@ import javax.faces.context.ResponseWriter;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -51,48 +49,33 @@ public class AlloyRendererUtil {
 	private static final String FUNCTION_A = "function(A)";
 	private static final String IF = "if";
 	private static final String NEW = "new";
-	private static final String NUMBER_REGEX = "([-])?[0-9]+([.])?[0-9]*";
-	private static final Pattern NUMBER_PATTERN = Pattern.compile(NUMBER_REGEX);
 	private static final String RENDER = "render";
 	private static final String USE = "use";
 	private static final String VAR = "var";
 	private static final String YUI = "YUI";
 
-	public static void encodeArray(ResponseWriter responseWriter, String attributeName, Object attributeValue,
+	public static void encodeBoolean(ResponseWriter responseWriter, String attributeName, Boolean attributeValue,
 		boolean first) throws IOException {
-		encodeObject(responseWriter, attributeName, attributeValue, first);
+
+		if (!first) {
+			responseWriter.write(StringPool.COMMA);
+		}
+
+		responseWriter.write(attributeName);
+		responseWriter.write(StringPool.COLON);
+		responseWriter.write(attributeValue.toString());
 	}
 
-	public static void encodeBoolean(ResponseWriter responseWriter, String attributeName, Object attributeValue,
-		boolean first) throws IOException {
-		encodeObject(responseWriter, attributeName, attributeValue, first);
-	}
-
-	public static void encodeComplexBoolean(ResponseWriter responseWriter, String attributeName, Object attributeValue,
+	public static void encodeInteger(ResponseWriter responseWriter, String attributeName, Integer attributeValue,
 		boolean first) throws IOException {
 
-		String value = attributeValue.toString();
-
-		if (value.equalsIgnoreCase(StringPool.TRUE) || value.equalsIgnoreCase(StringPool.FALSE)) {
-			encodeBoolean(responseWriter, attributeName, value, first);
+		if (!first) {
+			responseWriter.write(StringPool.COMMA);
 		}
-		else {
-			encodeString(responseWriter, attributeName, value, first);
-		}
-	}
 
-	public static void encodeComplexNumber(ResponseWriter responseWriter, String attributeName, Object attributeValue,
-		boolean first) throws IOException {
-
-		String value = attributeValue.toString();
-		Matcher matcher = NUMBER_PATTERN.matcher(value);
-
-		if (matcher.matches()) {
-			encodeNumber(responseWriter, attributeName, value, first);
-		}
-		else {
-			encodeString(responseWriter, attributeName, value, first);
-		}
+		responseWriter.write(attributeName);
+		responseWriter.write(StringPool.COLON);
+		responseWriter.write(attributeValue.toString());
 	}
 
 	public static void encodeJavaScriptBegin(FacesContext facesContext, UIComponent uiComponent,
@@ -247,34 +230,8 @@ public class AlloyRendererUtil {
 		responseWriter.write(StringPool.SEMICOLON);
 	}
 
-	public static void encodeMap(ResponseWriter responseWriter, String attributeName,
-		Map<String, String> attributeValues, boolean first) throws IOException {
-
-		if (!first) {
-			responseWriter.write(StringPool.COMMA);
-		}
-
-		responseWriter.write(attributeName);
-		responseWriter.write(StringPool.COLON);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-
-		boolean firstMapAttribute = true;
-
-		for (Map.Entry<String, String> attributeValue : attributeValues.entrySet()) {
-			encodeString(responseWriter, attributeValue.getKey(), attributeValue.getValue(), firstMapAttribute);
-			firstMapAttribute = false;
-		}
-
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-	}
-
-	public static void encodeNumber(ResponseWriter responseWriter, String attributeName, Object attributeValue,
-		boolean first) throws IOException {
-		encodeObject(responseWriter, attributeName, attributeValue, first);
-	}
-
-	public static void encodeObject(ResponseWriter responseWriter, String attributeName, Object attributeValue,
-		boolean first) throws IOException {
+	public static void encodeNonEscapedObject(ResponseWriter responseWriter, String attributeName,
+		Object attributeValue, boolean first) throws IOException {
 
 		if (!first) {
 			responseWriter.write(StringPool.COMMA);
@@ -283,38 +240,39 @@ public class AlloyRendererUtil {
 		responseWriter.write(attributeName);
 		responseWriter.write(StringPool.COLON);
 		responseWriter.write(attributeValue.toString());
+	}
+
+	public static void encodeNonEscapedString(ResponseWriter responseWriter, String attributeName,
+		Object attributeValue, boolean first) throws IOException {
+
+		if (!first) {
+			responseWriter.write(StringPool.COMMA);
+		}
+
+		responseWriter.write(attributeName);
+		responseWriter.write(StringPool.COLON);
+		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write(attributeValue.toString());
+		responseWriter.write(StringPool.APOSTROPHE);
 	}
 
 	public static void encodeString(ResponseWriter responseWriter, String attributeName, Object attributeValue,
 		boolean first) throws IOException {
 
+		String escapedAttributeValue = RendererUtil.escapeJavaScript(attributeValue.toString());
+
 		if (!first) {
 			responseWriter.write(StringPool.COMMA);
 		}
 
 		responseWriter.write(attributeName);
 		responseWriter.write(StringPool.COLON);
-		responseWriter.write(StringPool.QUOTE);
-		responseWriter.write(attributeValue.toString());
-		responseWriter.write(StringPool.QUOTE);
+		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write(escapedAttributeValue);
+		responseWriter.write(StringPool.APOSTROPHE);
 	}
 
 	public static void encodeWidgetRender(ResponseWriter responseWriter, boolean first) throws IOException {
-		encodeBoolean(responseWriter, RENDER, true, first);
-	}
-
-	protected static void encodeEvent(ResponseWriter responseWriter, String attributeName, Object attributeValue,
-		boolean first) throws IOException {
-
-		if (!first) {
-			responseWriter.write(StringPool.COMMA);
-		}
-
-		responseWriter.write(attributeName);
-		responseWriter.write(StringPool.COLON);
-		responseWriter.write(FUNCTION_EVENT);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		responseWriter.write(attributeValue.toString());
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+		encodeNonEscapedObject(responseWriter, RENDER, true, first);
 	}
 }

@@ -14,7 +14,6 @@
 package com.liferay.faces.alloy.renderkit;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -34,33 +33,15 @@ public abstract class DelegatingAlloyRendererBase extends DelegatingClientCompon
 		throws IOException;
 
 	@Override
-	public void encodeArray(ResponseWriter responseWriter, String attributeName, Object attributeValue, boolean first)
-		throws IOException {
-		AlloyRendererUtil.encodeArray(responseWriter, attributeName, attributeValue, first);
-	}
-
-	@Override
-	public void encodeBoolean(ResponseWriter responseWriter, String attributeName, Object attributeValue, boolean first)
-		throws IOException {
+	public void encodeBoolean(ResponseWriter responseWriter, String attributeName, Boolean attributeValue,
+		boolean first) throws IOException {
 		AlloyRendererUtil.encodeBoolean(responseWriter, attributeName, attributeValue, first);
 	}
 
 	@Override
-	public void encodeComplexBoolean(ResponseWriter responseWriter, String attributeName, Object attributeValue,
+	public void encodeInteger(ResponseWriter responseWriter, String attributeName, Integer attributeValue,
 		boolean first) throws IOException {
-		AlloyRendererUtil.encodeComplexBoolean(responseWriter, attributeName, attributeValue, first);
-	}
-
-	@Override
-	public void encodeComplexNumber(ResponseWriter responseWriter, String attributeName, Object attributeValue,
-		boolean first) throws IOException {
-		AlloyRendererUtil.encodeComplexNumber(responseWriter, attributeName, attributeValue, first);
-	}
-
-	@Override
-	public void encodeEvent(ResponseWriter responseWriter, String attributeName, Object attributeValue, boolean first)
-		throws IOException {
-		AlloyRendererUtil.encodeEvent(responseWriter, attributeName, attributeValue, first);
+		AlloyRendererUtil.encodeInteger(responseWriter, attributeName, attributeValue, first);
 	}
 
 	@Override
@@ -103,21 +84,15 @@ public abstract class DelegatingAlloyRendererBase extends DelegatingClientCompon
 	}
 
 	@Override
-	public void encodeMap(ResponseWriter responseWriter, String attributeName, Map<String, String> attributeValues,
+	public void encodeNonEscapedObject(ResponseWriter responseWriter, String attributeName, Object attributeValue,
 		boolean first) throws IOException {
-		AlloyRendererUtil.encodeMap(responseWriter, attributeName, attributeValues, first);
+		AlloyRendererUtil.encodeNonEscapedObject(responseWriter, attributeName, attributeValue, first);
 	}
 
 	@Override
-	public void encodeNumber(ResponseWriter responseWriter, String attributeName, Object attributeValue, boolean first)
-		throws IOException {
-		AlloyRendererUtil.encodeNumber(responseWriter, attributeName, attributeValue, first);
-	}
-
-	@Override
-	public void encodeObject(ResponseWriter responseWriter, String attributeName, Object attributeValue, boolean first)
-		throws IOException {
-		AlloyRendererUtil.encodeObject(responseWriter, attributeName, attributeValue, first);
+	public void encodeNonEscapedString(ResponseWriter responseWriter, String attributeName, Object attributeValue,
+		boolean first) throws IOException {
+		AlloyRendererUtil.encodeNonEscapedString(responseWriter, attributeName, attributeValue, first);
 	}
 
 	@Override

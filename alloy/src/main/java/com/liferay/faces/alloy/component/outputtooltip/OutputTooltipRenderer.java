@@ -68,7 +68,7 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 		throws IOException {
 
 		if (zIndex == Integer.MIN_VALUE) {
-			encodeObject(responseWriter, OutputTooltip.Z_INDEX, LIFERAY_Z_INDEX_TOOLTIP, first);
+			encodeNonEscapedObject(responseWriter, OutputTooltip.Z_INDEX, LIFERAY_Z_INDEX_TOOLTIP, first);
 		}
 		else {
 			super.encodeZIndex(responseWriter, outputTooltip, zIndex, first);
@@ -127,7 +127,7 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 		// contentBox
 		String clientId = tooltip.getClientId(facesContext);
 		String contentBox = StringPool.POUND + ComponentUtil.escapeClientId(clientId);
-		encodeString(responseWriter, AlloyRendererUtil.CONTENT_BOX, contentBox, first);
+		encodeNonEscapedString(responseWriter, AlloyRendererUtil.CONTENT_BOX, contentBox, first);
 
 		first = false;
 
@@ -160,7 +160,7 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 			for_ = StringPool.POUND + ComponentUtil.escapeClientId(forClientId);
 		}
 
-		super.encodeTrigger(responseWriter, outputTooltip, for_, first);
+		encodeNonEscapedString(responseWriter, TRIGGER, for_, first);
 	}
 
 	@Override

@@ -72,7 +72,7 @@ public class DialogRenderer extends DialogRendererBase {
 		throws IOException {
 
 		if (zIndex == Integer.MIN_VALUE) {
-			encodeObject(responseWriter, Dialog.Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY, first);
+			encodeNonEscapedObject(responseWriter, Dialog.Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY, first);
 		}
 		else {
 			super.encodeZIndex(responseWriter, dialog, zIndex, first);

@@ -49,10 +49,13 @@ public class PickDateRenderer extends PickDateRendererBase {
 	private static final String DATE_CLICK = "dateClick";
 	private static final String DEFAULT_ON_DATE_CLICK_TEMPLATE =
 		"pickDateDefaultOnDateClick(event.date, A.one('{0}'), this);";
+	private static final String FUNCTION_EVENT = "function(event)";
 	private static final String LANG = "lang";
+	private static final String LIFERAY_Z_INDEX_TOOLTIP = "Liferay.zIndex.TOOLTIP";
 	private static final String TOKEN = "{0}";
 	private static final String NODE_EVENT_SIMULATE = "node-event-simulate";
 	private static final String ON = "on";
+	private static final String POPOVER = "popover";
 	private static final String POPOVER_CSS_CLASS = "popoverCssClass";
 	private static final String[] DATE_PICKER_MODULES = StringHelper.append(MODULES, NODE_EVENT_SIMULATE);
 
@@ -67,7 +70,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 		// http://www.faqs.org/rfcs/rfc1766.html
 		String localeString = locale.toString().replaceAll(StringPool.UNDERLINE, StringPool.DASH);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		encodeString(responseWriter, LANG, localeString, true);
+		encodeNonEscapedString(responseWriter, LANG, localeString, true);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 	}
 
@@ -88,7 +91,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 		// For example: "calendar: {selectionMode: 'multiple'}"
 		boolean calendarFirst = true;
 
-		encodeObject(responseWriter, CALENDAR, StringPool.BLANK, first);
+		encodeNonEscapedObject(responseWriter, CALENDAR, StringPool.BLANK, first);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
 		String componentDatePattern = pickDate.getDatePattern();
@@ -98,7 +101,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 
 			Date maxDate = PickDateUtil.getObjectAsDate(maximumDate, componentDatePattern);
 			String maxDateString = PickDateUtil.toJavascriptDateString(maxDate);
-			encodeObject(responseWriter, PickDate.MAXIMUM_DATE, maxDateString, calendarFirst);
+			encodeNonEscapedObject(responseWriter, PickDate.MAXIMUM_DATE, maxDateString, calendarFirst);
 			calendarFirst = false;
 		}
 
@@ -108,7 +111,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 
 			Date minDate = PickDateUtil.getObjectAsDate(minimumDate, componentDatePattern);
 			String minDateString = PickDateUtil.toJavascriptDateString(minDate);
-			encodeObject(responseWriter, PickDate.MINIMUM_DATE, minDateString, calendarFirst);
+			encodeNonEscapedObject(responseWriter, PickDate.MINIMUM_DATE, minDateString, calendarFirst);
 			calendarFirst = false;
 		}
 
@@ -120,7 +123,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 			calendarFirst = false;
 		}
 
-		encodeObject(responseWriter, ON, StringPool.BLANK, calendarFirst);
+		encodeNonEscapedObject(responseWriter, ON, StringPool.BLANK, calendarFirst);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
 		String onDateClick = pickDate.getOnDateClick();
@@ -146,7 +149,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 			onDateClick = onDateClick.replace(TOKEN, trigger);
 		}
 
-		encodeEvent(responseWriter, DATE_CLICK, onDateClick, true);
+		encodeOnDateClick(responseWriter, onDateClick, true);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		calendarFirst = false;
 
@@ -160,10 +163,13 @@ public class PickDateRenderer extends PickDateRendererBase {
 		encodeCalendar(responseWriter, pickDate, first);
 		first = false;
 
+		encodePopover(responseWriter, pickDate, first);
+		first = false;
+
 		String styleClass = pickDate.getStyleClass();
 
 		if (styleClass != null) {
-			encodeString(responseWriter, POPOVER_CSS_CLASS, styleClass, first);
+			encodeNonEscapedString(responseWriter, POPOVER_CSS_CLASS, styleClass, first);
 			first = false;
 		}
 	}
@@ -177,20 +183,36 @@ public class PickDateRenderer extends PickDateRendererBase {
 		super.encodeMask(responseWriter, pickDate, datePatternMask, first);
 	}
 
-	@Override
-	protected void encodePopover(ResponseWriter responseWriter, PickDate pickDate, Object zIndex, boolean first)
+	protected void encodeOnDateClick(ResponseWriter responseWriter, String onDateClick, boolean first)
 		throws IOException {
+
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(FUNCTION_EVENT);
+		stringBuilder.append(StringPool.OPEN_CURLY_BRACE);
+		stringBuilder.append(onDateClick);
+		stringBuilder.append(StringPool.CLOSE_CURLY_BRACE);
+		encodeNonEscapedObject(responseWriter, DATE_CLICK, stringBuilder.toString(), first);
+	}
+
+	protected void encodePopover(ResponseWriter responseWriter, PickDate pickDate, boolean first) throws IOException {
 
 		// The popover attribute value provides the opportunity to specify a zIndex key:value pair via JSON
 		// syntax. For example: "popover: {zIndex: 1}"
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(StringPool.OPEN_CURLY_BRACE);
-		stringBuilder.append(PickDate.Z_INDEX);
-		stringBuilder.append(StringPool.COLON);
-		stringBuilder.append(zIndex);
-		stringBuilder.append(StringPool.CLOSE_CURLY_BRACE);
+		encodeNonEscapedObject(responseWriter, POPOVER, StringPool.BLANK, first);
+		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
-		super.encodePopover(responseWriter, pickDate, stringBuilder.toString(), first);
+		Integer zIndex = pickDate.getzIndex();
+		String zIndexString = null;
+
+		if (zIndex != null) {
+			zIndexString = zIndex.toString();
+		}
+		else {
+			zIndexString = LIFERAY_Z_INDEX_TOOLTIP;
+		}
+
+		encodeNonEscapedObject(responseWriter, PickDate.Z_INDEX, zIndexString, true);
+		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 	}
 
 	@Override
@@ -207,7 +229,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 
 		String trigger = StringPool.POUND + for_;
 
-		super.encodeTrigger(responseWriter, pickDate, trigger, first);
+		encodeNonEscapedString(responseWriter, TRIGGER, trigger, first);
 	}
 
 	@Override

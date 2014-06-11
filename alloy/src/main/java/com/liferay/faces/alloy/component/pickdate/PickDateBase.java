@@ -144,11 +144,11 @@ public abstract class PickDateBase extends UIComponentBase implements Styleable,
 		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 
-	public Object getzIndex() {
-		return (Object) getStateHelper().eval(Z_INDEX, null);
+	public Integer getzIndex() {
+		return (Integer) getStateHelper().eval(Z_INDEX, null);
 	}
 
-	public void setzIndex(Object zIndex) {
+	public void setzIndex(Integer zIndex) {
 		getStateHelper().put(Z_INDEX, zIndex);
 	}
 }

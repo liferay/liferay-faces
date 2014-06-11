@@ -63,7 +63,7 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-		ResponseWriter responseWriter = facesContext.getResponseWriter();		
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		OutputRemainingChars outputRemainingChars = (OutputRemainingChars) uiComponent;
 		String forComponent = outputRemainingChars.getFor();
 
@@ -142,21 +142,22 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 			responseWriter.write(StringPool.SEMICOLON);
 		}
 	}
-	
+
 	@Override
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, boolean first)
-			throws IOException {
+	protected void encodeHiddenAttributes(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars,
+		boolean first) throws IOException {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
-		String counter = StringPool.POUND + ComponentUtil.escapeClientId(outputRemainingChars.getClientId() + separatorChar + COUNTER);
-		encodeString(responseWriter, COUNTER, counter, first);
+		String counter = StringPool.POUND +
+			ComponentUtil.escapeClientId(outputRemainingChars.getClientId() + separatorChar + COUNTER);
+		encodeNonEscapedString(responseWriter, COUNTER, counter, first);
 		first = false;
 	}
-	
+
 	@Override
-	protected void encodeInput(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, String for_, boolean first)
-			throws IOException {
+	protected void encodeInput(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, String for_,
+		boolean first) throws IOException {
 
 		UIComponent uiComponent = outputRemainingChars.findComponent(for_);
 
@@ -164,8 +165,8 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 			String forClientId = uiComponent.getClientId();
 			for_ = StringPool.POUND + ComponentUtil.escapeClientId(forClientId);
 		}
-		
-		super.encodeInput(responseWriter, outputRemainingChars, for_, first);
+
+		encodeNonEscapedString(responseWriter, INPUT, for_, first);
 	}
 
 	@Override

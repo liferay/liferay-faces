@@ -33,7 +33,7 @@ public class OutputRemainingChars extends OutputRemainingCharsBase {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(OutputRemainingChars.class);
-	
+
 	// Public Constants
 	public static final String COMPONENT_TYPE =
 		"com.liferay.faces.alloy.component.outputremainingchars.OutputRemainingChars";
@@ -69,8 +69,8 @@ public class OutputRemainingChars extends OutputRemainingCharsBase {
 	}
 
 	@Override
-	public Object getMaxLength() {
-		Object maxLength = super.getMaxLength();
+	public Integer getMaxLength() {
+		Integer maxLength = super.getMaxLength();
 
 		// If the developer has not specified a maxLength on the outputRemainingChars, then
 		// try to get the maxlength from the associated input component.
@@ -80,18 +80,23 @@ public class OutputRemainingChars extends OutputRemainingCharsBase {
 
 			if (forComponent == null) {
 				logger.error("getMaxLength: Please specify a 'for' attribute for the outputRemainingChars component.");
-			} else {
+			}
+			else {
 				UIComponent inputComponent = findComponent(forComponent);
-			
+
 				if (inputComponent != null) {
-	
+
 					if (inputComponent instanceof HtmlInputText) {
 						HtmlInputText htmlInputText = (HtmlInputText) inputComponent;
 						maxLength = htmlInputText.getMaxlength();
 					}
 					else if (inputComponent instanceof HtmlInputTextarea) {
 						HtmlInputTextarea htmlInputTextarea = (HtmlInputTextarea) inputComponent;
-						maxLength = htmlInputTextarea.getAttributes().get("maxlength");
+						Object maxLengthObject = htmlInputTextarea.getAttributes().get("maxlength");
+
+						if (maxLengthObject != null) {
+							maxLength = Integer.parseInt(maxLengthObject.toString());
+						}
 					}
 				}
 			}

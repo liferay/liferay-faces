@@ -1202,7 +1202,7 @@
 					<![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]>
 				</description>
 				<name>zIndex</name>
-				<type>java.lang.Object</type>
+				<type>java.lang.Integer</type>
 			</attribute>
 		</attributes>
 	</component>
@@ -1290,11 +1290,11 @@
 				<description>
 					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
 				</description>
-				<javaScriptType>String</javaScriptType>
 				<name>value</name>
 				<type>java.lang.Object</type>
 				<inherited>true</inherited>
 				<yui>true</yui>
+				<yuiType>String</yuiType>
 			</attribute>
 			<attribute>
 				<description>
@@ -1429,7 +1429,7 @@
 					<![CDATA[The maximum number of charachters to allow in the input.]]>
 				</description>
 				<name>maxLength</name>
-				<type>java.lang.Object</type>
+				<type>java.lang.Integer</type>
 				<yui>true</yui>
 			</attribute>
 			<!-- Attributes that were invented here to implement Alloy methods -->
@@ -1536,7 +1536,7 @@
 				<type>java.lang.Object</type>
 				<yui>true</yui>
 				<inherited>true</inherited>
-				<javaScriptType>String</javaScriptType>
+				<yuiType>String</yuiType>
 			</attribute>
 			<attribute>
 				<description>
@@ -1661,8 +1661,7 @@
 					<![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]>
 				</description>
 				<name>zIndex</name>
-				<type>java.lang.Object</type>
-				<yuiName>popover</yuiName>
+				<type>java.lang.Integer</type>
 			</attribute>
 		</attributes>
 	</component>
@@ -1800,7 +1799,7 @@
 				<type>java.lang.Object</type>
 				<yui>true</yui>
 				<inherited>true</inherited>
-				<javaScriptType>String</javaScriptType>
+				<yuiType>String</yuiType>
 			</attribute>
 		</attributes>
 	</component>
