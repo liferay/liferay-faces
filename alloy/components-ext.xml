@@ -381,6 +381,16 @@
 	</component>
 	<!-- /JSF Custom Component Heirarchy -->
 	<!-- 3. HTML Component Heirarchy -->
+	<component name="FacesMessageLabel" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description><![CDATA[A localized label for this component that is typically only rendered in a FacesMessage when validation fails.]]></description>
+				<name>label</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="HTMLAccessibility" extendsTags="HTMLCommonEvents HTMLPassthrough" generateJava="false"
 		generateTaglibXML="false">
 		<attributes>
@@ -508,14 +518,8 @@
 			</attribute>
 		</attributes>
 	</component>
-		<component name="HTMLInput" extendsTags="UIInput" generateJava="false" generateTaglibXML="false">
+	<component name="HTMLInput" extendsTags="UIInput" generateJava="false" generateTaglibXML="false">
 		<attributes>
-			<attribute>
-				<description><![CDATA[A name for this component to be rendered to the user. This name should be localized for the user.]]></description>
-				<name>label</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]>
@@ -866,7 +870,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="CommandButton" extendsTags="ButtonCommon UICommand" parentClass="javax.faces.component.html.HtmlCommandButton"
+	<component name="CommandButton" extendsTags="ButtonCommon FacesMessageLabel UICommand" parentClass="javax.faces.component.html.HtmlCommandButton"
 		rendererParentClass="com.liferay.faces.alloy.component.button.ButtonRenderer">
 		<description>
 			<![CDATA[CommandButton is a UICommand component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is submit. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlCommandButton.html" target="_blank"><code>HtmlCommandButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/commandButton.html" target="_blank"><code>h:commandButton</code></a>. The component must be a child of h:form in order to trigger the action or actionListener.]]>
@@ -1252,7 +1256,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputText" extendsTags="InputTextCommon" parentClass="javax.faces.component.html.HtmlInputText">
+	<component name="InputText" extendsTags="FacesMessageLabel InputTextCommon" parentClass="javax.faces.component.html.HtmlInputText">
 		<attributes>
 			<attribute>
 				<description>
@@ -1280,7 +1284,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputTextarea" extendsTags="InputTextCommon"
+	<component name="InputTextarea" extendsTags="FacesMessageLabel InputTextCommon"
 		parentClass="javax.faces.component.html.HtmlInputTextarea">
 		<attributes>
 			<attribute>
@@ -1549,7 +1553,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectOneRadio" extendsTags="HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectOneRadio" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneRadio">
 		<description>
 		   <![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags.]]>
