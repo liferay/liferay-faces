@@ -1302,7 +1302,7 @@
 		</attributes>
 	</component>
 	<component name="Message" extendsTags="HTMLPassthrough Styleable UIComponentBase MessageCommon"
-		generateJava="true"	parentClass="javax.faces.component.html.HtmlMessage"
+		parentClass="javax.faces.component.html.HtmlMessage"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[Message is a UIMessage component that renders a <code>&lt;span&gt;</code> element containing the text of a single FacesMessage for an associated component. Since it extends HtmlMessage, it supports all the features of h:message.]]>
@@ -1319,7 +1319,7 @@
 		</attributes>
 	</component>
 	<component name="Messages" extendsTags="HTMLPassthrough Styleable UIComponentBase MessageCommon"
-		generateJava="true"	parentClass="javax.faces.component.html.HtmlMessages"
+		parentClass="javax.faces.component.html.HtmlMessages"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[Messages is a UIMessages component that the text of one or more FacesMessage instances inside a <code>&lt;ul&gt;</code> element or <code>&lt;table&gt;</code> element for an associated component, according to the layout attribute. Since it extends HtmlMessages, it supports all the features of h:messages.]]>
