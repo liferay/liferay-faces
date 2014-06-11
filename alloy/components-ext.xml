@@ -736,7 +736,7 @@
 	</component>
 	<!-- /Common -->
 	<!-- generateTaglibXML="false" tags for common attributes -->
-	<component name="Body" extendsTags="Styleable" generateJava="true" parentClass="javax.faces.component.html.HtmlBody" />
+	<component name="Body" extendsTags="Styleable" parentClass="javax.faces.component.html.HtmlBody" />
 	<component name="Button" extendsTags="ButtonCommon UIOutcomeTarget"
 		parentClass="javax.faces.component.html.HtmlOutcomeTargetButton">
 		<description>
