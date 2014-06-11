@@ -10,10 +10,12 @@
 				<f:selectItem itemLabel="XML" itemValue="xml" />
 				<f:ajax render="componentField modelValue" />
 			</h:selectOneMenu>
-			<alloy:inputSourceCode id="inputSourceCode" height="100" mode="#{inputSourceCodeModelBean.mode}"
-				rendered="#{showcaseModelBean.selectedComponent.rendered}"
-				required="#{showcaseModelBean.selectedComponent.required}" value="#{inputSourceCodeModelBean.sourceCode}" />
-			<alloy:message for="inputSourceCode" />
+			<alloy:field label="#{i18n['source-code']}">
+				<alloy:inputSourceCode id="inputSourceCode" height="100" mode="#{inputSourceCodeModelBean.mode}"
+					rendered="#{showcaseModelBean.selectedComponent.rendered}"
+					required="#{showcaseModelBean.selectedComponent.required}" value="#{inputSourceCodeModelBean.sourceCode}" />
+				<alloy:message for="inputSourceCode" />
+			</alloy:field>
 			<hr />
 			<alloy:commandButton action="#{inputSourceCodeBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />

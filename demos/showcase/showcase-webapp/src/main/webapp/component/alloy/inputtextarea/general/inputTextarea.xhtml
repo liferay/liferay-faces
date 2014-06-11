@@ -6,10 +6,11 @@
 	<ui:define name="col1">
 		<h:form>
 			<showcase:example renderedCheckbox="true" requiredCheckbox="true">
-				<alloy:inputTextarea id="textarea" rendered="#{showcaseModelBean.selectedComponent.rendered}"
-					required="#{showcaseModelBean.selectedComponent.required}" requiredMessage="#{i18n['required-message']}"
-					value="#{inputTextModelBean.text}" />
-				<alloy:message for="textarea" />
+				<alloy:field label="#{i18n['text-field']}">
+					<alloy:inputTextarea id="textarea" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+						required="#{showcaseModelBean.selectedComponent.required}" value="#{inputTextModelBean.text}" />
+					<alloy:message for="textarea" />
+				</alloy:field>
 				<hr />
 				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
