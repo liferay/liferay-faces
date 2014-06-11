@@ -915,7 +915,7 @@
 			<!-- /h:commandButton attributes -->
 		</attributes>
 	</component>
-	<component name="DataTable" generateJava="false" extendsTags="HTMLCommonEvents HTMLPassthrough HTMLTable"
+	<component name="DataTable" extendsTags="HTMLCommonEvents HTMLPassthrough HTMLTable"
 		parentClass="javax.faces.component.html.HtmlDataTable"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -1419,7 +1419,7 @@
         	</attribute>
 		</attributes>
 	</component>
-	<component name="PanelGrid" generateJava="true" extendsTags="HTMLCommonEvents HTMLPassthrough HTMLTable"
+	<component name="PanelGrid" extendsTags="HTMLCommonEvents HTMLPassthrough HTMLTable"
 		parentClass="javax.faces.component.html.HtmlPanelGrid"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
