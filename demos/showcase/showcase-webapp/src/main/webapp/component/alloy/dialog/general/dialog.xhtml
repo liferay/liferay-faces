@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" 
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Using the "for" attribute -->
+		<h:form>
+			<showcase:example description="#{i18n['alloy-dialog-general-example-1']}" number="1">
+				<span class="modal-checkbox">
+					<h:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.modal1}">
+						<f:ajax render="@form" />
+					</h:selectBooleanCheckbox>
+					<h:outputLabel value="#{i18n['modal']}" />
+				</span>
+				<alloy:button id="buttonId" title="#{i18n['button-title']}" value="#{i18n['show-hide']}" />
+				<alloy:dialog clientKey="dialogKey1" for="buttonId" headerText="#{i18n['header-text']}" modal="#{showcaseModelBean.modal1}" >
+					<alloy:field label="#{i18n['text-field']}" >
+						<alloy:inputText value="#{dialogModelBean.text}" />
+					</alloy:field>
+					<alloy:commandButton action="#{dialogBackingBean.submit}" value="#{i18n['submit']}">
+						<f:ajax execute="@form" render="@form" />
+					</alloy:commandButton>
+					<alloy:button onclick="Liferay.component('dialogKey1').hide(); return false;" value="#{i18n['cancel']}" />
+				</alloy:dialog>
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText value="#{dialogModelBean.text}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="col2">
+		<!-- Example 2: Using a clientKey and Javascript -->
+		<h:form>
+			<showcase:example description="#{i18n['alloy-dialog-general-example-2']}" number="2">
+				<span class="modal-checkbox">
+					<h:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.modal2}">
+						<f:ajax render="@form" />
+					</h:selectBooleanCheckbox>
+					<h:outputLabel value="#{i18n['modal']}" />
+				</span>
+				<alloy:button onclick="Liferay.component('dialogKey2').show(); return false;" 
+					title="#{i18n['button-title']}" value="#{i18n['show-hide']}" />
+				<alloy:dialog clientKey="dialogKey2" headerText="#{i18n['header-text']}" modal="#{showcaseModelBean.modal2}" >
+					<alloy:field label="#{i18n['text-field']}" >
+						<alloy:inputText value="#{dialogModelBean.text}" />
+					</alloy:field>
+					<alloy:commandButton action="#{dialogBackingBean.submit}" value="#{i18n['submit']}">
+						<f:ajax execute="@form" render="@form" />
+					</alloy:commandButton>
+					<alloy:button onclick="Liferay.component('dialogKey2').hide(); return false;" value="#{i18n['cancel']}" />
+				</alloy:dialog>
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText value="#{dialogModelBean.text}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

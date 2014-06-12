@@ -34,7 +34,10 @@ public class AlloyRendererUtil {
 
 	// Public Constants
 	public static final String BOUNDING_BOX = "boundingBox";
+	public static final String CONTENT_BOX = "contentBox";
 	public static final String FUNCTION_EVENT = "function(event)";
+	public static final String HEADER_CONTENT = "headerContent";
+	public static final String VISIBLE = "visible";
 
 	// Private Constants
 	private static final String A = "A";

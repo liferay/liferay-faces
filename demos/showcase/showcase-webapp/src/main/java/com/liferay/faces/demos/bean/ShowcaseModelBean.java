@@ -45,6 +45,9 @@ public class ShowcaseModelBean implements Serializable {
 	private transient ListModelBean listModelBean;
 
 	// Private Data Members
+	
+	private boolean modal1 = true;
+	private boolean modal2 = true;
 	private String deploymentType;
 	private SelectedComponent selectedComponent;
 	private ViewParameters viewParameters;
@@ -62,6 +65,22 @@ public class ShowcaseModelBean implements Serializable {
 		}
 
 		return deploymentType;
+	}
+	
+	public boolean isModal1() {
+		return modal1;
+	}
+
+	public boolean isModal2() {
+		return modal2;
+	}
+
+	public void setModal1(boolean modal1) {
+		this.modal1 = modal1;
+	}
+
+	public void setModal2(boolean modal2) {
+		this.modal2 = modal2;
 	}
 
 	public void setListModelBean(ListModelBean listModelBean) {
