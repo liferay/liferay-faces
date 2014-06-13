@@ -40,7 +40,6 @@ public class Field extends FieldBase {
 	public static final String STYLE_CLASS_NAME = "alloy-field";
 
 	// Private Constants
-	private static final String BLOCK = "block";
 	private static final String CONTROL_GROUP = "control-group";
 	private static final String ERROR = "error";
 	private static final String INFO = "info";
@@ -128,7 +127,7 @@ public class Field extends FieldBase {
 
 	@Override
 	public String getLayout() {
-		return (String) getStateHelper().eval(LAYOUT, BLOCK);
+		return (String) getStateHelper().eval(LAYOUT, StringPool.BLOCK);
 	}
 
 	@Override

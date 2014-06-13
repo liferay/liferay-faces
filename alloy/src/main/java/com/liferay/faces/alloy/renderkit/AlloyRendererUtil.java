@@ -52,7 +52,6 @@ public class AlloyRendererUtil {
 	private static final String NEW = "new";
 	private static final String RENDER = "render";
 	private static final String USE = "use";
-	private static final String VAR = "var";
 	private static final String YUI = "YUI";
 
 	public static void encodeBoolean(ResponseWriter responseWriter, String attributeName, Boolean attributeValue,
@@ -223,7 +222,7 @@ public class AlloyRendererUtil {
 	public static void encodeLiferayComponentVar(ResponseWriter responseWriter, String clientVarName, String clientKey)
 		throws IOException {
 
-		responseWriter.write(VAR);
+		responseWriter.write(StringPool.VAR);
 		responseWriter.write(StringPool.SPACE);
 		responseWriter.write(clientVarName);
 		responseWriter.write(StringPool.EQUAL);

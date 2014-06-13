@@ -18,6 +18,7 @@ import java.io.IOException;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.DelegationResponseWriterBase;
@@ -68,11 +69,11 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 			inputElement = false;
 		}
 
-		if ("label".equalsIgnoreCase(name)) {
+		if (StringPool.LABEL.equalsIgnoreCase(name)) {
 			labelElement = false;
 
-			super.writeAttribute("title", title, "title");
-			super.writeAttribute(Styleable.STYLE, "display:none;", null);
+			super.writeAttribute(StringPool.TITLE, title, StringPool.TITLE);
+			super.writeAttribute(Styleable.STYLE, AlloyRendererUtil.DISPLAY_NONE, null);
 			super.endElement(StringPool.INPUT);
 		}
 	}
@@ -87,13 +88,9 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 			super.startElement(name, component);
 		}
 
-		else if ("label".equalsIgnoreCase(name)) {
+		else if (StringPool.LABEL.equalsIgnoreCase(name)) {
 			labelElement = true;
 		}
-		else {
-			System.err.println("!@#$ startElement name=" + name);
-		}
-		
 	}
 
 	// f:selectItems uses this for writing chars into a label
@@ -104,9 +101,6 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 			String newString = new String(chars, off, len);
 			title = newString;
 		}
-		else {
-			System.err.println("!@#$ write chars=" + new String(chars, off, len));
-		}
 	}
 
 	@Override
@@ -114,7 +108,7 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 
 		if (inputElement) {
 
-			if ("checked".equals(name)) {
+			if (StringPool.CHECKED.equals(name)) {
 
 				// We have found the input that is "checked"
 				setSelectedIndex(this.index);
@@ -136,9 +130,6 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 
 		if (labelElement) {
 			title = text;
-		}
-		else {
-			System.err.println("!@#$ writeText text=" + text);
 		}
 	}
 
