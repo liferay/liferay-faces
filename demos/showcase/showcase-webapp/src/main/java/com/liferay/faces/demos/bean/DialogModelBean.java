@@ -11,35 +11,26 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.demos.dto;
+package com.liferay.faces.demos.bean;
 
-import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 
 /**
- * @author  Neil Griffin
+ * @author  Vernon Singleton
  */
-public interface SelectedComponent extends ShowcaseComponent {
+@RequestScoped
+@ManagedBean
+public class DialogModelBean {
 
-	public boolean isModal1();
+	private String text;
 
-	public boolean isModal2();
+	public String getText() {
+		return text;
+	}
 
-	public boolean isRendered();
-
-	public boolean isRequired();
-
-	public void setModal1(boolean modal1);
-
-	public void setModal2(boolean modal2);
-
-	public void setRendered(boolean rendered);
-
-	public void setRequired(boolean required);
-
-	List<CodeExample> getUseCaseCodeExamples();
-
-	public String getUseCaseKey();
-
-	public String getUseCaseName();
+	public void setText(String text) {
+		this.text = text;
+	}
 }

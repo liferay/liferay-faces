@@ -961,6 +961,55 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="Dialog" extendsTags="HTMLCommonEvents" module="aui-modal" 
+		parentClass="javax.faces.component.html.HtmlPanelGroup"
+		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase"
+		yui="true" yuiName="Modal">
+		<description>
+			<![CDATA[Dialog is a UIPanel that renders a div for use by the user. It is used in conjunction with a trigger, such as a button. The user may use the trigger to show the dialog. Since it extends HtmlPanelGroup, it supports all the features of an h:panelGroup that does not render a span.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[When true, the component is visible initially. The default is false.]]>
+				</description>
+				<name>autoShow</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The id of the target which triggers the dialog.]]>
+				</description>
+				<name>for</name>
+				<type>java.lang.String</type>
+				<required>true</required>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The text to place in the header of the dialog box.]]>
+				</description>
+				<name>headerText</name>
+				<type>java.lang.String</type>
+				<yuiName>headerContent</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true the user must interact with the child dialog window before continuing to interact with the parent. The default is true.]]>
+				</description>
+				<name>modal</name>
+				<type>java.lang.Boolean</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the stack order of the dialog. When running in Liferay Portal, the value of Liferay.zIndex.OVERLAY is the default.]]>
+				</description>
+				<name>zIndex</name>
+				<type>java.lang.Integer</type>
+				<yui>true</yui>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="Field" extendsTags="PanelGroup"
 		parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroup"
 		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupRenderer">
@@ -1424,6 +1473,81 @@
         	</attribute>
 		</attributes>
 	</component>
+	<component name="OutputTooltip"	extendsTags="ClientComponent OutputText" module="aui-tooltip" 
+		parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" 
+		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase"
+		yui="true" yuiName="Tooltip">
+		<description>
+			<![CDATA[Tooltip is an OutputText component that displays a hint to the user.  It is used in conjunction with a cursor, usually a pointer. The user hovers the pointer over an item, without clicking it, and a tooltip appears as a "hover box" with information about the item. Since it extends HtmlOutputText, it supports all the features of an h:outputText that does not render a span.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[When true, the component is visible initially. The default is false.]]>
+				</description>
+				<name>autoShow</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The text to place in the header of the tooltip.]]>
+				</description>
+				<name>cssClass</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The id of the target element that triggers tooltip.]]>
+				</description>
+				<name>for</name>
+				<required>true</required>
+				<type>java.lang.String</type>
+				<yuiName>trigger</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The text to place in the header of the tooltip box.]]>
+				</description>
+				<name>headerText</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A number between 0 and 1 describing how much the tooltip will obscure its background when visible.]]>
+				</description>
+				<name>opacity</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Where the tooltip should popup.]]>
+				</description>
+				<name>position</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.Object</type>
+				<yui>true</yui>
+				<inherited>true</inherited>
+				<javaScriptType>String</javaScriptType>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the stack order of the tooltip. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]>
+				</description>
+				<name>zIndex</name>
+				<type>java.lang.Integer</type>
+				<yui>true</yui>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="PanelGrid" extendsTags="HTMLCommonEvents HTMLPassthrough HTMLTable"
 		parentClass="javax.faces.component.html.HtmlPanelGrid"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
@@ -1539,6 +1663,56 @@
 				<name>zIndex</name>
 				<type>java.lang.Object</type>
 				<yuiName>popover</yuiName>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="Popover" extendsTags="HTMLCommonEvents" module="aui-popover" 
+		parentClass="javax.faces.component.html.HtmlPanelGroup"
+		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase"
+		yui="true">
+		<description>
+			<![CDATA[Popover is a UIPanel that renders a div for use by the user. It is used in conjunction with a trigger, such as a button. The user may toggle the trigger to control whether the popover is visible. Since it extends HtmlPanelGroup, it supports all the features of an h:panelGroup that does not render a span.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[When true, the popover is visible initially. The default is true.]]>
+				</description>
+				<name>autoShow</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The id of the target which is used by the popover.]]>
+				</description>
+				<name>for</name>
+				<type>java.lang.String</type>
+				<required>true</required>
+				<yuiName>align</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The text to place in the header of the popover box.]]>
+				</description>
+				<name>headerText</name>
+				<type>java.lang.String</type>
+				<yuiName>headerContent</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Where the popover should popup.]]>
+				</description>
+				<name>position</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the stack order of the popover. When running in Liferay Portal, the value of Liferay.zIndex.OVERLAY is the default.]]>
+				</description>
+				<name>zIndex</name>
+				<type>java.lang.Integer</type>
+				<yui>true</yui>
 			</attribute>
 		</attributes>
 	</component>

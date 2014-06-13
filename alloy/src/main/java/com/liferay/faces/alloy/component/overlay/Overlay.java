@@ -11,35 +11,28 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.demos.dto;
+package com.liferay.faces.alloy.component.overlay;
 
-import java.util.List;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+
+import com.liferay.faces.util.component.ClientComponent;
 
 
 /**
  * @author  Neil Griffin
  */
-public interface SelectedComponent extends ShowcaseComponent {
+public interface Overlay extends ClientComponent {
 
-	public boolean isModal1();
+	public UIComponent findComponent(String id);
 
-	public boolean isModal2();
+	public String getClientId(FacesContext facesContext);
 
-	public boolean isRendered();
+	public String getFor();
 
-	public boolean isRequired();
+	public String getHeaderText();
 
-	public void setModal1(boolean modal1);
+	public Boolean isModal();
 
-	public void setModal2(boolean modal2);
-
-	public void setRendered(boolean rendered);
-
-	public void setRequired(boolean required);
-
-	List<CodeExample> getUseCaseCodeExamples();
-
-	public String getUseCaseKey();
-
-	public String getUseCaseName();
+	public Boolean isAutoShow();
 }

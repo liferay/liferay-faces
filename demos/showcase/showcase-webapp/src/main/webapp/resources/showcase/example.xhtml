@@ -31,6 +31,22 @@
 			<c:if test="#{cc.attrs.longDescription}">
 				<br />
 			</c:if>
+			<c:if test="#{cc.attrs.modal1Checkbox}">
+				<span class="component-modal-checkbox">
+					<h:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.selectedComponent.modal1}">
+						<f:ajax render="@form" />
+					</h:selectBooleanCheckbox>
+					<h:outputLabel value="#{i18n['modal']}" />
+				</span>
+			</c:if>
+			<c:if test="#{cc.attrs.modal2Checkbox}">
+				<span class="component-modal-checkbox">
+					<h:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.selectedComponent.modal2}">
+						<f:ajax render="@form" />
+					</h:selectBooleanCheckbox>
+					<h:outputLabel value="#{i18n['modal']}" />
+				</span>
+			</c:if>
 			<c:if test="#{cc.attrs.renderedCheckbox}">
 				<span class="component-rendered-checkbox">
 					<h:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.selectedComponent.rendered}">

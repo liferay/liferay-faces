@@ -33,15 +33,23 @@ import com.liferay.faces.util.lang.StringPool;
 public class AlloyRendererUtil {
 
 	// Public Constants
+	public static final String A_DOT_ONE = "A.one";
 	public static final String BOUNDING_BOX = "boundingBox";
+	public static final String CONTENT_BOX = "contentBox";
+	public static final String DISPLAY_NONE = "display:none;";
+	public static final String DOT_HIDE = ".hide()";
+	public static final String DOT_SHOW = ".show()";
 	public static final String FUNCTION_EVENT = "function(event)";
+	public static final String HEADER_CONTENT = "headerContent";
+	public static final String LIFERAY_COMPONENT = "Liferay.component";
+	public static final String LIFERAY_Z_INDEX_OVERLAY = "Liferay.zIndex.OVERLAY";
+	public static final String VISIBLE = "visible";
 
 	// Private Constants
-	private static final String A = "A";
+	private static final String A_DOT = "A.";
 	private static final String DESTROY = "destroy";
 	private static final String FUNCTION_A = "function(A)";
 	private static final String IF = "if";
-	private static final String LIFERAY_COMPONENT = "Liferay.component";
 	private static final String NEW = "new";
 	private static final String NUMBER_REGEX = "([-])?[0-9]+([.])?[0-9]*";
 	private static final Pattern NUMBER_PATTERN = Pattern.compile(NUMBER_REGEX);
@@ -205,8 +213,7 @@ public class AlloyRendererUtil {
 		// Write Alloy JavaScript component.
 		responseWriter.write(NEW);
 		responseWriter.write(StringPool.SPACE);
-		responseWriter.write(A);
-		responseWriter.write(StringPool.PERIOD);
+		responseWriter.write(A_DOT);
 		responseWriter.write(alloyClassName);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
