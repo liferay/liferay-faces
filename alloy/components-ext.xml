@@ -634,6 +634,38 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="DateCommon" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the pickDate.]]>
+				</description>
+				<name>locale</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The maximum date that can be selected by the user.]]>
+				</description>
+				<name>maximumDate</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The minimum date that can be selected by the user.]]>
+				</description>
+				<name>minimumDate</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the stack order of the component. The default value is a constant from the Liferay.zIndex JavaScript object.]]>
+				</description>
+				<name>zIndex</name>
+				<type>java.lang.Integer</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="InputTextCommon" extendsTags="HTMLAccessibilityEvents HTMLInputEvents Styleable"
 		generateJava="false" generateTaglibXML="false">
 		<attributes>
@@ -738,7 +770,7 @@
 				<generateJava>false</generateJava>
 			</attribute>
 		</attributes>
-	</component>	
+	</component>
 	<component name="OverlayCommon" extendsTags="ClientComponent" generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
@@ -759,6 +791,14 @@
 				<yui>true</yui>
 				<yuiName>headerContent</yuiName>
 			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the stack order of the component. The default value is a constant from the Liferay.zIndex JavaScript object.]]>
+				</description>
+				<name>zIndex</name>
+				<type>java.lang.Integer</type>
+				<yui>true</yui>
+			</attribute>
 		</attributes>
 	</component>
 	<component name="OutputTooltipPopoverCommon" extendsTags="OverlayCommon" generateJava="false"
@@ -770,14 +810,6 @@
 				</description>
 				<name>position</name>
 				<type>java.lang.String</type>
-				<yui>true</yui>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Specifies the stack order of the component. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]>
-				</description>
-				<name>zIndex</name>
-				<type>java.lang.Integer</type>
 				<yui>true</yui>
 			</attribute>
 		</attributes>
@@ -1028,14 +1060,6 @@
 				<type>java.lang.Boolean</type>
 				<yui>true</yui>
 			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Specifies the stack order of the component. When running in Liferay Portal, the value of Liferay.zIndex.OVERLAY is the default.]]>
-				</description>
-				<name>zIndex</name>
-				<type>java.lang.Integer</type>
-				<yui>true</yui>
-			</attribute>
 		</attributes>
 	</component>
 	<component name="Field" extendsTags="PanelGroup"
@@ -1168,7 +1192,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputDate" extendsTags="InputText"
+	<component name="InputDate" extendsTags="DateCommon InputText"
 		parentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeBase"
 		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRendererBase">
 		<description>
@@ -1191,27 +1215,6 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the pickDate.]]>
-				</description>
-				<name>locale</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The maximum date that can be selected by the user.]]>
-				</description>
-				<name>maximumDate</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The minimum date that can be selected by the user.]]>
-				</description>
-				<name>minimumDate</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<description>
 					<![CDATA[The number of month panes shown in the popup calendar. Valid values are 1 (the default), 2, and 3.]]>
 				</description>
 				<name>panes</name>
@@ -1224,13 +1227,6 @@
 				<type>java.lang.String</type>
 				<name>showOn</name>
 				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]>
-				</description>
-				<name>zIndex</name>
-				<type>java.lang.Integer</type>
 			</attribute>
 		</attributes>
 	</component>
@@ -1583,8 +1579,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="PickDate" extendsTags="ClientComponent Styleable UIComponentBase" module="aui-datepicker"
-		yui="true" yuiName="DatePicker">
+	<component name="PickDate" extendsTags="ClientComponent DateCommon Styleable UIComponentBase"
+		module="aui-datepicker" yui="true" yuiName="DatePicker">
 		<description>
 			<![CDATA[PickDate is a UIComponent that renders a popup a calendar with selectable dates.]]>
 		</description>
@@ -1626,27 +1622,6 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the pickDate.]]>
-				</description>
-				<name>locale</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The maximum date that can be selected by the user.]]>
-				</description>
-				<name>maximumDate</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The minimum date that can be selected by the user.]]>
-				</description>
-				<name>minimumDate</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<description>
 					<![CDATA[The number of month panes shown in the popup calendar. Valid values are 1 (the default), 2, and 3.]]>
 				</description>
 				<name>panes</name>
@@ -1659,13 +1634,6 @@
 				</description>
 				<name>selectionMode</name>
 				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]>
-				</description>
-				<name>zIndex</name>
-				<type>java.lang.Integer</type>
 			</attribute>
 		</attributes>
 	</component>
