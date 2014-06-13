@@ -32,10 +32,10 @@ public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererB
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "Tooltip";
 	private static final String ALLOY_MODULE_NAME = "aui-tooltip";
-	protected static final String TRIGGER = "trigger";
 	protected static final String CSS_CLASS = "cssClass";
-	protected static final String VISIBLE = "visible";
 	protected static final String HEADER_CONTENT = "headerContent";
+	protected static final String TRIGGER = "trigger";
+	protected static final String VISIBLE = "visible";
 
 	// Protected Constants
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
