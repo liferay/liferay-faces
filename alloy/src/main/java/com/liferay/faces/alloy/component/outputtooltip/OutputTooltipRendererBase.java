@@ -33,6 +33,9 @@ public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererB
 	private static final String ALLOY_CLASS_NAME = "Tooltip";
 	private static final String ALLOY_MODULE_NAME = "aui-tooltip";
 	protected static final String TRIGGER = "trigger";
+	protected static final String CSS_CLASS = "cssClass";
+	protected static final String VISIBLE = "visible";
+	protected static final String HEADER_CONTENT = "headerContent";
 
 	// Protected Constants
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
@@ -43,11 +46,11 @@ public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererB
 		OutputTooltip outputTooltip = (OutputTooltip) uiComponent;
 		boolean first = true;
 
-		String cssClass = outputTooltip.getCssClass();
+		Boolean autoShow = outputTooltip.isAutoShow();
 
-		if (cssClass != null) {
+		if (autoShow != null) {
 
-			encodeCssClass(responseWriter, outputTooltip, cssClass, first);
+			encodeVisible(responseWriter, outputTooltip, autoShow, first);
 			first = false;
 		}
 
@@ -56,6 +59,14 @@ public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererB
 		if (for_ != null) {
 
 			encodeTrigger(responseWriter, outputTooltip, for_, first);
+			first = false;
+		}
+
+		String headerText = outputTooltip.getHeaderText();
+
+		if (headerText != null) {
+
+			encodeHeaderContent(responseWriter, outputTooltip, headerText, first);
 			first = false;
 		}
 
@@ -72,6 +83,14 @@ public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererB
 		if (position != null) {
 
 			encodePosition(responseWriter, outputTooltip, position, first);
+			first = false;
+		}
+
+		String styleClass = outputTooltip.getStyleClass();
+
+		if (styleClass != null) {
+
+			encodeCssClass(responseWriter, outputTooltip, styleClass, first);
 			first = false;
 		}
 
@@ -104,12 +123,16 @@ public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererB
 		return MODULES;
 	}
 
-	protected void encodeCssClass(ResponseWriter responseWriter, OutputTooltip outputTooltip, String cssClass, boolean first) throws IOException {
-		encodeString(responseWriter, OutputTooltip.CSS_CLASS, cssClass, first);
+	protected void encodeVisible(ResponseWriter responseWriter, OutputTooltip outputTooltip, Boolean autoShow, boolean first) throws IOException {
+		encodeBoolean(responseWriter, VISIBLE, autoShow, first);
 	}
 
 	protected void encodeTrigger(ResponseWriter responseWriter, OutputTooltip outputTooltip, String for_, boolean first) throws IOException {
 		encodeString(responseWriter, TRIGGER, for_, first);
+	}
+
+	protected void encodeHeaderContent(ResponseWriter responseWriter, OutputTooltip outputTooltip, String headerText, boolean first) throws IOException {
+		encodeString(responseWriter, HEADER_CONTENT, headerText, first);
 	}
 
 	protected void encodeOpacity(ResponseWriter responseWriter, OutputTooltip outputTooltip, String opacity, boolean first) throws IOException {
@@ -118,6 +141,10 @@ public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererB
 
 	protected void encodePosition(ResponseWriter responseWriter, OutputTooltip outputTooltip, String position, boolean first) throws IOException {
 		encodeString(responseWriter, OutputTooltip.POSITION, position, first);
+	}
+
+	protected void encodeCssClass(ResponseWriter responseWriter, OutputTooltip outputTooltip, String styleClass, boolean first) throws IOException {
+		encodeString(responseWriter, CSS_CLASS, styleClass, first);
 	}
 
 	protected void encodeValue(ResponseWriter responseWriter, OutputTooltip outputTooltip, Object value, boolean first) throws IOException {
