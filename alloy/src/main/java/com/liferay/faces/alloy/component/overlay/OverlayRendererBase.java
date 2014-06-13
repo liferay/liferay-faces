@@ -20,13 +20,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.renderkit.AlloyRenderer;
+import com.liferay.faces.alloy.component.dialog.Dialog;
 import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
+import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.render.DelegatingClientComponentRenderer;
 import com.liferay.faces.util.render.DelegationResponseWriter;
 import com.liferay.faces.util.render.IdDelegationResponseWriter;
 
@@ -34,35 +34,27 @@ import com.liferay.faces.util.render.IdDelegationResponseWriter;
 /**
  * @author  Neil Griffin
  */
-public class OverlayRendererUtil {
+public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(OverlayRendererUtil.class);
+	private static final Logger logger = LoggerFactory.getLogger(OverlayRendererBase.class);
 
-	public static void encodeHiddenAttributes(ResponseWriter responseWriter, Overlay overlay, boolean first,
-		AlloyRenderer alloyRenderer) throws IOException {
+	@Override
+	public abstract void encodeAlloyAttributes(ResponseWriter respoonseWriter, UIComponent uiComponent)
+		throws IOException;
 
-		// Encode the "contentBox" Alloy attribute.
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		String clientId = overlay.getClientId(facesContext);
-		String escapedContentBoxId = StringPool.POUND + ComponentUtil.escapeClientId(clientId);
-		alloyRenderer.encodeNonEscapedString(responseWriter, AlloyRendererUtil.CONTENT_BOX, escapedContentBoxId, first);
-
-		// Encode the "render: true" Alloy attribute.
-		alloyRenderer.encodeWidgetRender(responseWriter, first);
-	}
-
-	public static void encodeJavaScriptCustom(FacesContext facesContext, Overlay overlay, boolean forRequired)
-		throws IOException {
+	@Override
+	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 		// If the developer associated the dialog with a trigger component via the "for" attribute, then
+		Overlay overlay = (Overlay) uiComponent;
 		String forClientId = getForClientId(facesContext, overlay);
 
 		if (forClientId == null) {
 
-			if ((forRequired) && facesContext.isProjectStage(ProjectStage.Development)) {
+			if ((isForRequired()) && facesContext.isProjectStage(ProjectStage.Development)) {
 				logger.error("The 'for' attribute is required for " + overlay.getClass().getSimpleName());
 			}
 		}
@@ -96,7 +88,8 @@ public class OverlayRendererUtil {
 				responseWriter.write("var scrollx=window.scrollX;var scrolly=window.scrollY;");
 			}
 
-			// If autoShow=false, then out some JavaScript that will cause the dialog to popup when the trigger is clicked.
+			// If autoShow=false, then out some JavaScript that will cause the dialog to popup when the trigger is
+			// clicked.
 			if (!overlay.isAutoShow()) {
 				String clientVarName = ComponentUtil.getClientVarName(facesContext, overlay);
 				String clientKey = overlay.getClientKey();
@@ -140,8 +133,8 @@ public class OverlayRendererUtil {
 		responseWriter.write("')._node['style'].display='block';");
 	}
 
-	public static void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent,
-		DelegatingClientComponentRenderer delegatingClientComponentRenderer) throws IOException {
+	@Override
+	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		// Ensure that the "id" attribute is always written on the outermost <div> (which is the contentBox) so that
 		// Alloy's JavaScript will be able to locate the contentBox in the DOM.
@@ -149,10 +142,45 @@ public class OverlayRendererUtil {
 		DelegationResponseWriter idDelegationResponseWriter = new IdDelegationResponseWriter(responseWriter,
 				StringPool.DIV, uiComponent.getClientId());
 
-		delegatingClientComponentRenderer.encodeMarkupBegin(facesContext, uiComponent, idDelegationResponseWriter);
+		super.encodeMarkupBegin(facesContext, uiComponent, idDelegationResponseWriter);
 	}
 
-	public static String getForClientId(FacesContext facesContext, Overlay overlay) {
+	protected void encodeOverlayHiddenAttributes(ResponseWriter responseWriter, Overlay overlay, boolean first)
+		throws IOException {
+
+		// Encode the "contentBox" Alloy attribute.
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String clientId = overlay.getClientId(facesContext);
+		String escapedContentBoxId = StringPool.POUND + ComponentUtil.escapeClientId(clientId);
+		encodeNonEscapedString(responseWriter, AlloyRendererUtil.CONTENT_BOX, escapedContentBoxId, first);
+
+		// Encode the "render: true" Alloy attribute.
+		encodeWidgetRender(responseWriter, first);
+	}
+
+	protected void encodeOverlayZIndex(ResponseWriter responseWriter, Overlay overlay, Integer zIndex, boolean first)
+		throws IOException {
+
+		if (zIndex == Integer.MIN_VALUE) {
+			encodeNonEscapedObject(responseWriter, Dialog.Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY, first);
+		}
+		else {
+			encodeInteger(responseWriter, Dialog.Z_INDEX, zIndex, first);
+		}
+	}
+
+	@Override
+	public abstract String getAlloyClassName();
+
+	protected abstract boolean isForRequired();
+
+	@Override
+	public abstract String getDelegateComponentFamily();
+
+	@Override
+	public abstract String getDelegateRendererType();
+
+	protected String getForClientId(FacesContext facesContext, Overlay overlay) {
 
 		String forClientId = null;
 		String forComponentId = overlay.getFor();

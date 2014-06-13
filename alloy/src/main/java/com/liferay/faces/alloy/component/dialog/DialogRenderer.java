@@ -17,14 +17,9 @@ import java.io.IOException;
 
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.component.overlay.Overlay;
-import com.liferay.faces.alloy.component.overlay.OverlayRendererUtil;
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -44,18 +39,6 @@ import com.liferay.faces.util.lang.StringPool;
 public class DialogRenderer extends DialogRendererBase {
 
 	@Override
-	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		OverlayRendererUtil.encodeJavaScriptCustom(facesContext, (Overlay) uiComponent, false);
-	}
-
-	@Override
-	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		OverlayRendererUtil.encodeMarkupBegin(facesContext, uiComponent, this);
-	}
-
-	@Override
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, Dialog dialog, boolean first)
 		throws IOException {
 
@@ -64,19 +47,18 @@ public class DialogRenderer extends DialogRendererBase {
 
 		first = false;
 
-		OverlayRendererUtil.encodeHiddenAttributes(responseWriter, dialog, first, this);
+		encodeOverlayHiddenAttributes(responseWriter, dialog, first);
 	}
 
 	@Override
 	protected void encodeZIndex(ResponseWriter responseWriter, Dialog dialog, Integer zIndex, boolean first)
 		throws IOException {
+		encodeOverlayZIndex(responseWriter, dialog, zIndex, first);
+	}
 
-		if (zIndex == Integer.MIN_VALUE) {
-			encodeNonEscapedObject(responseWriter, Dialog.Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY, first);
-		}
-		else {
-			super.encodeZIndex(responseWriter, dialog, zIndex, first);
-		}
+	@Override
+	protected boolean isForRequired() {
+		return false;
 	}
 
 	@Override

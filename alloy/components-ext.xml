@@ -1038,7 +1038,7 @@
 	</component>
 	<component name="Dialog" extendsTags="HTMLCommonEvents OverlayCommon" module="aui-modal" 
 		parentClass="javax.faces.component.html.HtmlPanelGroup"
-		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase"
+		rendererParentClass="com.liferay.faces.alloy.component.overlay.OverlayRendererBase"
 		yui="true" yuiName="Modal">
 		<description>
 			<![CDATA[Dialog is a UIPanel that renders a div for use by the user. It is used in conjunction with a trigger, such as a button. The user may use the trigger to show the dialog. Since it extends HtmlPanelGroup, it supports all the features of an h:panelGroup that does not render a span.]]>
@@ -1639,7 +1639,7 @@
 	</component>
 	<component name="Popover" extendsTags="HTMLCommonEvents OutputTooltipPopoverCommon" module="aui-popover" 
 		parentClass="javax.faces.component.html.HtmlPanelGroup"
-		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase" yui="true">
+		rendererParentClass="com.liferay.faces.alloy.component.overlay.OverlayRendererBase" yui="true">
 		<description>
 			<![CDATA[Popover is a UIPanel that renders a div for use by the user. It is used in conjunction with a trigger, such as a button. The user may toggle the trigger to control whether the popover is visible. Since it extends HtmlPanelGroup, it supports all the features of an h:panelGroup that does not render a span.]]>
 		</description>
