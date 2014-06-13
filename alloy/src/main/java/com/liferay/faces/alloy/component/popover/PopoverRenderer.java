@@ -17,15 +17,10 @@ import java.io.IOException;
 
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.component.dialog.Dialog;
-import com.liferay.faces.alloy.component.overlay.Overlay;
-import com.liferay.faces.alloy.component.overlay.OverlayRendererUtil;
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -46,22 +41,11 @@ import com.liferay.faces.util.lang.StringPool;
 public class PopoverRenderer extends PopoverRendererBase {
 
 	@Override
-	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-		OverlayRendererUtil.encodeJavaScriptCustom(facesContext, (Overlay) uiComponent, true);
-	}
-
-	@Override
-	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		OverlayRendererUtil.encodeMarkupBegin(facesContext, uiComponent, this);
-	}
-
-	@Override
 	protected void encodeAlign(ResponseWriter responseWriter, Popover popover, String for_, boolean first)
 		throws IOException {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		String forClientId = OverlayRendererUtil.getForClientId(facesContext, popover);
+		String forClientId = getForClientId(facesContext, popover);
 		String escapedForClientId = StringPool.POUND + ComponentUtil.escapeClientId(forClientId);
 
 		for_ = "{node:'" + escapedForClientId + "'}";
@@ -72,20 +56,18 @@ public class PopoverRenderer extends PopoverRendererBase {
 	@Override
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, Popover popover, boolean first)
 		throws IOException {
-
-		OverlayRendererUtil.encodeHiddenAttributes(responseWriter, popover, first, this);
+		encodeOverlayHiddenAttributes(responseWriter, popover, first);
 	}
 
 	@Override
 	protected void encodeZIndex(ResponseWriter responseWriter, Popover popover, Integer zIndex, boolean first)
 		throws IOException {
+		encodeOverlayZIndex(responseWriter, popover, zIndex, first);
+	}
 
-		if (zIndex == Integer.MIN_VALUE) {
-			encodeNonEscapedObject(responseWriter, Dialog.Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY, first);
-		}
-		else {
-			super.encodeZIndex(responseWriter, popover, zIndex, first);
-		}
+	@Override
+	protected boolean isForRequired() {
+		return true;
 	}
 
 	@Override

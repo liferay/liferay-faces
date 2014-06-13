@@ -20,14 +20,14 @@ import javax.annotation.Generated;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
+import com.liferay.faces.alloy.component.overlay.OverlayRendererBase;
 
 /**
  * @author  Bruno Basto
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class DialogRendererBase extends DelegatingAlloyRendererBase {
+public abstract class DialogRendererBase extends OverlayRendererBase {
 
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "Modal";
