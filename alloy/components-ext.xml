@@ -990,6 +990,7 @@
 				</description>
 				<name>headerText</name>
 				<type>java.lang.String</type>
+				<yui>true</yui>
 				<yuiName>headerContent</yuiName>
 			</attribute>
 			<attribute>
@@ -1419,9 +1420,10 @@
 					<![CDATA[The id of the text input node which is used to calculate the remaining characters. One of either "for" or "input" are required.]]>
 				</description>
 				<name>for</name>
-				<type>java.lang.String</type>
-				<yuiName>input</yuiName>
 				<required>true</required>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+				<yuiName>input</yuiName>
 			</attribute>
 			<!-- Attributes that need to be generated for the Alloy component -->
 			<attribute>
@@ -1503,6 +1505,7 @@
 				<name>for</name>
 				<required>true</required>
 				<type>java.lang.String</type>
+				<yui>true</yui>
 				<yuiName>trigger</yuiName>
 			</attribute>
 			<attribute>
@@ -1601,6 +1604,7 @@
 				</description>
 				<name>datePattern</name>
 				<type>java.lang.String</type>
+				<yui>true</yui>
 				<yuiName>mask</yuiName>
 			</attribute>
 			<attribute>
@@ -1618,6 +1622,7 @@
 				<name>for</name>
 				<required>true</required>
 				<type>java.lang.String</type>
+				<yui>true</yui>
 				<yuiName>trigger</yuiName>
 			</attribute>
 			<attribute>
@@ -1685,8 +1690,9 @@
 					<![CDATA[The id of the target which is used by the popover.]]>
 				</description>
 				<name>for</name>
-				<type>java.lang.String</type>
 				<required>true</required>
+				<type>java.lang.String</type>
+				<yui>true</yui>
 				<yuiName>align</yuiName>
 			</attribute>
 			<attribute>
@@ -1695,6 +1701,7 @@
 				</description>
 				<name>headerText</name>
 				<type>java.lang.String</type>
+				<yui>true</yui>
 				<yuiName>headerContent</yuiName>
 			</attribute>
 			<attribute>
