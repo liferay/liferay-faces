@@ -148,7 +148,7 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 	}
 
 	protected void encodeHighlightActiveLine(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Boolean highlightActiveLine, boolean first) throws IOException {
-		encodeObject(responseWriter, InputSourceCode.HIGHLIGHT_ACTIVE_LINE, highlightActiveLine, first);
+		encodeBoolean(responseWriter, InputSourceCode.HIGHLIGHT_ACTIVE_LINE, highlightActiveLine, first);
 	}
 
 	protected void encodeLocale(ResponseWriter responseWriter, InputSourceCode inputSourceCode, String locale, boolean first) throws IOException {
@@ -160,11 +160,11 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 	}
 
 	protected void encodeReadOnly(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Boolean readOnly, boolean first) throws IOException {
-		encodeObject(responseWriter, InputSourceCode.READ_ONLY, readOnly, first);
+		encodeBoolean(responseWriter, InputSourceCode.READ_ONLY, readOnly, first);
 	}
 
 	protected void encodeShowPrintMargin(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Boolean showPrintMargin, boolean first) throws IOException {
-		encodeObject(responseWriter, InputSourceCode.SHOW_PRINT_MARGIN, showPrintMargin, first);
+		encodeBoolean(responseWriter, InputSourceCode.SHOW_PRINT_MARGIN, showPrintMargin, first);
 	}
 
 	protected void encodeTabSize(ResponseWriter responseWriter, InputSourceCode inputSourceCode, String tabSize, boolean first) throws IOException {
@@ -172,11 +172,11 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 	}
 
 	protected void encodeUseSoftTabs(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Boolean useSoftTabs, boolean first) throws IOException {
-		encodeObject(responseWriter, InputSourceCode.USE_SOFT_TABS, useSoftTabs, first);
+		encodeBoolean(responseWriter, InputSourceCode.USE_SOFT_TABS, useSoftTabs, first);
 	}
 
 	protected void encodeUseWrapMode(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Boolean useWrapMode, boolean first) throws IOException {
-		encodeObject(responseWriter, InputSourceCode.USE_WRAP_MODE, useWrapMode, first);
+		encodeBoolean(responseWriter, InputSourceCode.USE_WRAP_MODE, useWrapMode, first);
 	}
 
 	protected void encodeValue(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Object value, boolean first) throws IOException {

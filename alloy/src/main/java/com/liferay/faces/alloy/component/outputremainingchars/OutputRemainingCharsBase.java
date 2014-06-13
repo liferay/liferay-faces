@@ -55,11 +55,11 @@ public abstract class OutputRemainingCharsBase extends OutputText implements Sty
 		getStateHelper().put(FOR, for_);
 	}
 
-	public Object getMaxLength() {
-		return (Object) getStateHelper().eval(MAX_LENGTH, null);
+	public Integer getMaxLength() {
+		return (Integer) getStateHelper().eval(MAX_LENGTH, null);
 	}
 
-	public void setMaxLength(Object maxLength) {
+	public void setMaxLength(Integer maxLength) {
 		getStateHelper().put(MAX_LENGTH, maxLength);
 	}
 

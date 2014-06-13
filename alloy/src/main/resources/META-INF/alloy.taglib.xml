@@ -1523,7 +1523,7 @@
 			<description><![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]></description>
 			<name>zIndex</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
+			<type>java.lang.Integer</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.0-m2</vdldoc:since>
@@ -2555,7 +2555,7 @@
 			<description><![CDATA[The maximum number of charachters to allow in the input.]]></description>
 			<name>maxLength</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
+			<type>java.lang.Integer</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Node or Selector to display the number of remaining characters calculated by the charCounter.]]></description>
@@ -3252,7 +3252,7 @@
 			<description><![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]></description>
 			<name>zIndex</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
+			<type>java.lang.Integer</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.0-m2</vdldoc:since>

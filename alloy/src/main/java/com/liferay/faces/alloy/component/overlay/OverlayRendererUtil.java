@@ -46,7 +46,7 @@ public class OverlayRendererUtil {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		String clientId = overlay.getClientId(facesContext);
 		String escapedContentBoxId = StringPool.POUND + ComponentUtil.escapeClientId(clientId);
-		alloyRenderer.encodeString(responseWriter, AlloyRendererUtil.CONTENT_BOX, escapedContentBoxId, first);
+		alloyRenderer.encodeNonEscapedString(responseWriter, AlloyRendererUtil.CONTENT_BOX, escapedContentBoxId, first);
 
 		// Encode the "headerContent" Alloy attribute.
 		String headerText = overlay.getHeaderText();

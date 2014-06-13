@@ -32,8 +32,8 @@ public abstract class PopoverRendererBase extends DelegatingAlloyRendererBase {
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "Popover";
 	private static final String ALLOY_MODULE_NAME = "aui-popover";
-	private static final String ALIGN = "align";
-	private static final String HEADER_CONTENT = "headerContent";
+	protected static final String ALIGN = "align";
+	protected static final String HEADER_CONTENT = "headerContent";
 
 	// Protected Constants
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
@@ -102,7 +102,7 @@ public abstract class PopoverRendererBase extends DelegatingAlloyRendererBase {
 	}
 
 	protected void encodeZIndex(ResponseWriter responseWriter, Popover popover, Integer zIndex, boolean first) throws IOException {
-		encodeObject(responseWriter, Popover.Z_INDEX, zIndex, first);
+		encodeInteger(responseWriter, Popover.Z_INDEX, zIndex, first);
 	}
 
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, Popover popover, boolean first) throws IOException {

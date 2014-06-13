@@ -84,7 +84,7 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 	}
 
 	protected void encodeStacked(ResponseWriter responseWriter, TabView tabView, Boolean stacked, boolean first) throws IOException {
-		encodeObject(responseWriter, TabView.STACKED, stacked, first);
+		encodeBoolean(responseWriter, TabView.STACKED, stacked, first);
 	}
 
 	protected void encodeWidth(ResponseWriter responseWriter, TabView tabView, String width, boolean first) throws IOException {

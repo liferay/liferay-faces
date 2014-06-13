@@ -32,7 +32,7 @@ public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererB
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "Tooltip";
 	private static final String ALLOY_MODULE_NAME = "aui-tooltip";
-	private static final String TRIGGER = "trigger";
+	protected static final String TRIGGER = "trigger";
 
 	// Protected Constants
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
@@ -125,7 +125,7 @@ public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererB
 	}
 
 	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, Integer zIndex, boolean first) throws IOException {
-		encodeObject(responseWriter, OutputTooltip.Z_INDEX, zIndex, first);
+		encodeInteger(responseWriter, OutputTooltip.Z_INDEX, zIndex, first);
 	}
 
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, OutputTooltip outputTooltip, boolean first) throws IOException {

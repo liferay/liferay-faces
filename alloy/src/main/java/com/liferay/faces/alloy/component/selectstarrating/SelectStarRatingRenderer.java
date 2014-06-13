@@ -53,22 +53,6 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 		// NO-OP: prevent rendering children since they are rendered in the encodeMarkupBegin() method when
 		// super.encodeAll() is called.
 	}
-	
-	@Override
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, SelectStarRating selectStarRating, boolean first)
-			throws IOException {
-		
-		// boundingBox
-		String clientId = selectStarRating.getClientId();
-		String boundingBox = StringPool.POUND + ComponentUtil.escapeClientId(clientId);
-		encodeString(responseWriter, AlloyRendererUtil.BOUNDING_BOX, boundingBox, first);
-		
-		first = false;
-		
-		// render : true
-		encodeWidgetRender(responseWriter, first);
-		
-	}
 
 	@Override
 	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -246,7 +230,8 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 
 		// Encode the child radio inputs by delegating to the renderer from the JSF runtime using our own
 		// SelectStarRatingResponseWriter to control the output.
-		SelectStarRatingResponseWriter selectStarRatingResponseWriter = new SelectStarRatingResponseWriter(responseWriter);
+		SelectStarRatingResponseWriter selectStarRatingResponseWriter = new SelectStarRatingResponseWriter(
+				responseWriter);
 		super.encodeAll(facesContext, uiComponent, selectStarRatingResponseWriter);
 
 		// Save the onclick for later use in the JavaScript.
@@ -256,7 +241,7 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 		// Save the selectedIndex for later use in the JavaScript.
 		Long selectedIndex = selectStarRatingResponseWriter.getSelectedIndex();
 		facesContext.getAttributes().put(SELECTED_INDEX, selectedIndex);
-		
+
 	}
 
 	@Override
@@ -265,6 +250,22 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 		// Finish the encoding of the outermost </span> element.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.endElement(StringPool.SPAN);
+	}
+
+	@Override
+	protected void encodeHiddenAttributes(ResponseWriter responseWriter, SelectStarRating selectStarRating,
+		boolean first) throws IOException {
+
+		// boundingBox
+		String clientId = selectStarRating.getClientId();
+		String boundingBox = StringPool.POUND + ComponentUtil.escapeClientId(clientId);
+		encodeNonEscapedString(responseWriter, AlloyRendererUtil.BOUNDING_BOX, boundingBox, first);
+
+		first = false;
+
+		// render : true
+		encodeWidgetRender(responseWriter, first);
+
 	}
 
 	@Override
