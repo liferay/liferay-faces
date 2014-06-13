@@ -29,6 +29,7 @@ import com.liferay.faces.bridge.component.PortletParam;
 import com.liferay.faces.bridge.component.PortletProperty;
 import com.liferay.faces.bridge.component.PortletRenderURL;
 import com.liferay.faces.bridge.component.PortletResourceURL;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -50,7 +51,7 @@ public abstract class BaseURLRenderer extends Renderer {
 		Map<String, Object> attributes = uiComponent.getAttributes();
 		Boolean escapeXML = (Boolean) attributes.get("escapeXML");
 		Boolean secure = (Boolean) attributes.get("secure");
-		String varName = (String) attributes.get("var");
+		String varName = (String) attributes.get(StringPool.VAR);
 
 		try {
 

@@ -101,18 +101,18 @@ public class FieldRenderer extends Renderer {
 
 		// Left-aligned <label>
 		if (lowerCaseInlineLabel.equals("left")) {
-			responseWriter.startElement("label", null);
+			responseWriter.startElement(StringPool.LABEL, null);
 
 			// aui_deprecated.css: field-label
 			responseWriter.writeAttribute(StringPool.CLASS, "field-label", null);
 
-			String label = (String) attributes.get("label");
+			String label = (String) attributes.get(StringPool.LABEL);
 
 			if (label != null) {
-				responseWriter.writeText(label, uiComponent, "label");
+				responseWriter.writeText(label, uiComponent, StringPool.LABEL);
 			}
 
-			responseWriter.endElement("label");
+			responseWriter.endElement(StringPool.LABEL);
 		}
 
 		// Inner-inner <span>
@@ -149,18 +149,18 @@ public class FieldRenderer extends Renderer {
 
 		// Right-aligned <label>
 		if (lowerCaseInlineLabel.equals("right")) {
-			responseWriter.startElement("label", null);
+			responseWriter.startElement(StringPool.LABEL, null);
 
 			// aui_deprecated.css: field-label
 			responseWriter.writeAttribute(StringPool.CLASS, "field-label", null);
 
-			String label = (String) attributes.get("label");
+			String label = (String) attributes.get(StringPool.LABEL);
 
 			if (label != null) {
-				responseWriter.writeText(label, uiComponent, "label");
+				responseWriter.writeText(label, uiComponent, StringPool.LABEL);
 			}
 
-			responseWriter.endElement("label");
+			responseWriter.endElement(StringPool.LABEL);
 		}
 
 		// Inner </span>
