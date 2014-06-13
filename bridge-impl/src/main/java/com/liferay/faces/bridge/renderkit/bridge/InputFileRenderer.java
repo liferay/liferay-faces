@@ -97,11 +97,11 @@ public class InputFileRenderer extends Renderer {
 		writePropertyAttribute(responseWriter, "styleClass", StringPool.CLASS, attributeMap);
 		writePropertyAttribute(responseWriter, "accesskey", attributeMap);
 		writePropertyAttribute(responseWriter, "dir", attributeMap);
-		writePropertyAttribute(responseWriter, "disabled", attributeMap);
+		writePropertyAttribute(responseWriter, StringPool.DISABLED, attributeMap);
 		writePropertyAttribute(responseWriter, "lang", attributeMap);
 		writePropertyAttribute(responseWriter, "style", attributeMap);
 		writePropertyAttribute(responseWriter, "tabIndex", attributeMap);
-		writePropertyAttribute(responseWriter, "title", attributeMap);
+		writePropertyAttribute(responseWriter, StringPool.TITLE, attributeMap);
 		writePropertyAttribute(responseWriter, "xml:lang", attributeMap);
 
 		// Write attributes related to HTML5
