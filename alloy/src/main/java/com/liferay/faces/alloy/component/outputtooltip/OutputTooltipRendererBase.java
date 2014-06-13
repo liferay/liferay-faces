@@ -83,7 +83,7 @@ public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererB
 			first = false;
 		}
 
-		Object zIndex = outputTooltip.getzIndex();
+		Integer zIndex = outputTooltip.getzIndex();
 
 		if (zIndex != null) {
 
@@ -124,7 +124,7 @@ public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererB
 		encodeString(responseWriter, OutputTooltip.VALUE, value, first);
 	}
 
-	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, Object zIndex, boolean first) throws IOException {
+	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, Integer zIndex, boolean first) throws IOException {
 		encodeObject(responseWriter, OutputTooltip.Z_INDEX, zIndex, first);
 	}
 

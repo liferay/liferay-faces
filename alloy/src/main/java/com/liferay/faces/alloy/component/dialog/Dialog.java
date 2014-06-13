@@ -14,9 +14,9 @@
 package com.liferay.faces.alloy.component.dialog;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
 
+import com.liferay.faces.alloy.component.overlay.Overlay;
+import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -25,18 +25,14 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = Dialog.COMPONENT_TYPE)
-public class Dialog extends DialogBase {
+public class Dialog extends DialogBase implements Overlay {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.dialog.Dialog";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.dialog.DialogRenderer";
-
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Group";
-
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.dialog.DialogRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-dialog";
-	public static final String DEFAULT_LAYOUT = "block";
-	private static final String LIFERAY_Z_INDEX_OVERLAY = "Liferay.zIndex.OVERLAY";
 
 	public Dialog() {
 		super();
@@ -44,15 +40,8 @@ public class Dialog extends DialogBase {
 	}
 
 	@Override
-	public Object getzIndex() {
-
-		Object zIndex = super.getzIndex();
-
-		if (zIndex == null) {
-			zIndex = LIFERAY_Z_INDEX_OVERLAY;
-		}
-
-		return zIndex;
+	public Integer getzIndex() {
+		return (Integer) getStateHelper().eval(Z_INDEX, Integer.MIN_VALUE);
 	}
 
 	@Override
@@ -66,72 +55,22 @@ public class Dialog extends DialogBase {
 	}
 
 	@Override
-	public boolean isDisabled() {
-		return false;
-	}
-
-	@Override
-	public void setDisabled(boolean disabled) {
-		getStateHelper().put(DISABLED, disabled);
-	}
-
-	// Returns the clientId of the component that the "for" attribute points to.
-	protected String getForClientId(FacesContext facesContext) {
-
-		String forClientId = null;
-
-		String forComponent = getFor();
-
-		if (forComponent != null) {
-			UIComponent uiComponent = findComponent(forComponent);
-
-			if (uiComponent == null) {
-				forClientId = forComponent;
-			}
-			else {
-				forClientId = uiComponent.getClientId(facesContext);
-			}
-		}
-
-		return forClientId;
-	}
-
-	public String getForClientIdEscaped(FacesContext facesContext) {
-		return StringPool.POUND + ComponentUtil.escapeClientId(getForClientId(facesContext));
-	}
-
-	@Override
-	public Boolean isModal() {
-		Boolean modal = super.isModal();
-
-		if (modal == null) {
-			modal = true;
-		}
-
-		return modal;
-	}
-
-	@Override
 	public String getLayout() {
-		String layout = super.getLayout();
-
-		if (layout == null) {
-			layout = DEFAULT_LAYOUT;
-		}
-
-		return layout;
+		return (String) getStateHelper().eval(PropertyKeys.layout, StringPool.BLOCK);
 	}
 
 	@Override
 	public String getStyle() {
-		String style = super.getStyle();
 
-		// do not blink
+		String style = (String) getStateHelper().eval(PropertyKeys.style, null);
+
+		// Initially style the outermost <div> (which is the contentBox) with "display:none;" in order to prevent
+		// blinking when Alloy's JavaScript attempts to hide the contentBox.
 		if (style == null) {
-			style = "display: none;";
+			style = AlloyRendererUtil.DISPLAY_NONE;
 		}
 		else {
-			style = style + "; display: none;";
+			style = style + StringPool.SEMICOLON + AlloyRendererUtil.DISPLAY_NONE;
 		}
 
 		return style;
@@ -140,20 +79,13 @@ public class Dialog extends DialogBase {
 	@Override
 	public String getStyleClass() {
 
-		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
+		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 
 	@Override
 	public Boolean isAutoShow() {
-		Boolean autoShow = super.isAutoShow();
-
-		if (autoShow == null) {
-			autoShow = false;
-		}
-
-		return autoShow;
+		return (Boolean) getStateHelper().eval(AUTO_SHOW, false);
 	}
-
 }

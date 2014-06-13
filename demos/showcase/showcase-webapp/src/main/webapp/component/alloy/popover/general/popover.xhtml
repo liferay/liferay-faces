@@ -6,8 +6,8 @@
 	<ui:define name="col1">
 		<h:form id="myForm" >
 			<showcase:example>
-				<alloy:button id="buttonId" title="#{i18n['button-title']}" value="#{i18n['show-hide']}" />
-				<alloy:popover clientKey="popoverKey1" for="buttonId" headerText="#{i18n['header-text']}" position="right" >
+				<alloy:button id="myButton" title="#{i18n['button-title']}" value="#{i18n['show-hide']}" />
+				<alloy:popover clientKey="popoverKey1" for="myButton" headerText="#{i18n['header-text']}" position="right" >
 					<alloy:field label="#{i18n['text-field']}" >
 						<alloy:inputText value="#{popoverModelBean.text}" />
 					</alloy:field>

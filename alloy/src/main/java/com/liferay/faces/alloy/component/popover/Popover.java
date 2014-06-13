@@ -14,9 +14,9 @@
 package com.liferay.faces.alloy.component.popover;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
 
+import com.liferay.faces.alloy.component.overlay.Overlay;
+import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -25,18 +25,14 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = Popover.COMPONENT_TYPE)
-public class Popover extends PopoverBase {
+public class Popover extends PopoverBase implements Overlay {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.popover.Popover";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.popover.PopoverRenderer";
-
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Group";
-
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.popover.PopoverRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-popover";
-	public static final String DEFAULT_LAYOUT = "block";
-	private static final String LIFERAY_Z_INDEX_OVERLAY = "Liferay.zIndex.OVERLAY";
 
 	public Popover() {
 		super();
@@ -44,15 +40,8 @@ public class Popover extends PopoverBase {
 	}
 
 	@Override
-	public Object getzIndex() {
-
-		Object zIndex = super.getzIndex();
-
-		if (zIndex == null) {
-			zIndex = LIFERAY_Z_INDEX_OVERLAY;
-		}
-
-		return zIndex;
+	public Integer getzIndex() {
+		return (Integer) getStateHelper().eval(Z_INDEX, Integer.MIN_VALUE);
 	}
 
 	@Override
@@ -65,66 +54,27 @@ public class Popover extends PopoverBase {
 		getStateHelper().put(CLIENT_KEY, clientKey);
 	}
 
-	@Override
-	public boolean isDisabled() {
+	public Boolean isModal() {
 		return false;
 	}
 
 	@Override
-	public void setDisabled(boolean disabled) {
-		getStateHelper().put(DISABLED, disabled);
-	}
-
-	// Returns the clientId of the component that the "for" attribute points to.
-	protected String getForClientId(FacesContext facesContext) {
-
-		String forClientId = null;
-
-		Object forComponent = getFor();
-
-		if (forComponent == null) {
-			forClientId = getParent().getClientId();
-			System.err.println("getForClientId: forClientId = " + forClientId);
-		}
-		else {
-			UIComponent uiComponent = findComponent(forComponent.toString());
-
-			if (uiComponent == null) {
-				forClientId = forComponent.toString();
-			}
-			else {
-				forClientId = uiComponent.getClientId(facesContext);
-			}
-		}
-
-		return forClientId;
-	}
-
-	public String getForClientIdEscaped(FacesContext facesContext) {
-		return StringPool.POUND + ComponentUtil.escapeClientId(getForClientId(facesContext));
-	}
-
-	@Override
 	public String getLayout() {
-		String layout = super.getLayout();
-
-		if (layout == null) {
-			layout = DEFAULT_LAYOUT;
-		}
-
-		return layout;
+		return (String) getStateHelper().eval(PropertyKeys.layout, StringPool.BLOCK);
 	}
 
 	@Override
 	public String getStyle() {
-		String style = super.getStyle();
 
-		// do not blink
+		String style = (String) getStateHelper().eval(PropertyKeys.style, null);
+
+		// Initially style the outermost <div> (which is the contentBox) with "display:none;" in order to prevent
+		// blinking when Alloy's JavaScript attempts to hide the contentBox.
 		if (style == null) {
-			style = "display: none;";
+			style = AlloyRendererUtil.DISPLAY_NONE;
 		}
 		else {
-			style = style + "; display: none;";
+			style = style + StringPool.SEMICOLON + AlloyRendererUtil.DISPLAY_NONE;
 		}
 
 		return style;
@@ -133,19 +83,13 @@ public class Popover extends PopoverBase {
 	@Override
 	public String getStyleClass() {
 
-		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
+		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 
 	@Override
 	public Boolean isAutoShow() {
-		Boolean autoShow = super.isAutoShow();
-
-		if (autoShow == null) {
-			autoShow = true;
-		}
-
-		return autoShow;
+		return (Boolean) getStateHelper().eval(AUTO_SHOW, false);
 	}
 }

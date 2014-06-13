@@ -17,6 +17,7 @@ import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -31,7 +32,6 @@ public class OutputTooltip extends OutputTooltipBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputtooltip.OutputTooltip";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputtooltip.OutputTooltipRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-output-tooltip";
-	private static final String LIFERAY_Z_INDEX_TOOLTIP = "Liferay.zIndex.TOOLTIP";
 
 	public OutputTooltip() {
 		super();
@@ -39,15 +39,8 @@ public class OutputTooltip extends OutputTooltipBase {
 	}
 
 	@Override
-	public Object getzIndex() {
-
-		Object zIndex = super.getzIndex();
-
-		if (zIndex == null) {
-			zIndex = LIFERAY_Z_INDEX_TOOLTIP;
-		}
-
-		return zIndex;
+	public Integer getzIndex() {
+		return (Integer) getStateHelper().eval(Z_INDEX, Integer.MIN_VALUE);
 	}
 
 	@Override
@@ -124,13 +117,11 @@ public class OutputTooltip extends OutputTooltipBase {
 
 		// do not blink
 		if (style == null) {
-			style = "display: none;";
+			style = AlloyRendererUtil.DISPLAY_NONE;
 		}
 		else {
-			style = style + "; display: none;";
+			style = style + StringPool.SEMICOLON + AlloyRendererUtil.DISPLAY_NONE;
 		}
-
-		System.err.println("getStyle: style = " + style);
 
 		return style;
 	}

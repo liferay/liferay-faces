@@ -15,7 +15,6 @@ package com.liferay.faces.alloy.component.popover;
 
 import java.io.IOException;
 
-import javax.faces.application.ProjectStage;
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
@@ -23,105 +22,49 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.alloy.component.dialog.Dialog;
+import com.liferay.faces.alloy.component.overlay.Overlay;
+import com.liferay.faces.alloy.component.overlay.OverlayRendererUtil;
 import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
  * @author  Vernon Singleton
  */
+//J-
 @FacesRenderer(componentFamily = Popover.COMPONENT_FAMILY, rendererType = Popover.RENDERER_TYPE)
 @ResourceDependencies(
 	{
 		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
-		@ResourceDependency(
-			library = "liferay-faces-alloy", name = "build/aui/aui-min.js"
-		), @ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
+		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
+		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
 	}
 )
+//J+
 public class PopoverRenderer extends PopoverRendererBase {
-
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(PopoverRenderer.class);
 
 	@Override
 	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-
-		Popover popover = (Popover) uiComponent;
-		String clientVarName = ComponentUtil.getClientVarName(facesContext, popover);
-
-		if (popover.getFor() == null) {
-
-			if (facesContext.isProjectStage(ProjectStage.Development)) {
-				logger.error(
-					"Popover needs to point to something. Try using its 'for' attribute to point to an 'id' in the component tree.");
-			}
-		}
-		else {
-			responseWriter.write("A.one('" + popover.getForClientIdEscaped(facesContext) + "')");
-			responseWriter.write(StringPool.PERIOD);
-			responseWriter.write("on");
-			responseWriter.write(StringPool.OPEN_PARENTHESIS);
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write("click");
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(StringPool.COMMA);
-			responseWriter.write("function(event) {");
-			responseWriter.write(clientVarName);
-			responseWriter.write(".set('visible', !");
-			responseWriter.write(clientVarName);
-			responseWriter.write(".get('visible'));");
-			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-			responseWriter.write(StringPool.SEMICOLON);
-		}
-
-		// alloy's divs should be in place and hidden by now.
-		// so we need to unhide the div we have hidden until now.
-		// any chance for blinking should be over by now.
-		responseWriter.write("A.one('" + StringPool.POUND +
-			ComponentUtil.escapeClientId(popover.getClientId(facesContext)) + "')._node['style'].display = 'block';");
-
-	}
-
-	@Override
-	public void encodeJavaScriptMain(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-
-		Popover popover = (Popover) uiComponent;
-		String clientVarName = ComponentUtil.getClientVarName(facesContext, popover);
-		String clientKey = popover.getClientKey();
-
-		if (clientKey == null) {
-			clientKey = clientVarName;
-		}
-
-		responseWriter.write("var " + clientVarName + " = ");
-		super.encodeJavaScriptMain(facesContext, uiComponent);
+		OverlayRendererUtil.encodeJavaScriptCustom(facesContext, (Overlay) uiComponent, true);
 	}
 
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-		Popover popover = (Popover) uiComponent;
 
-		// Ensure that an id is written out
-		popover.setId(StringPool.UNDERLINE + popover.getId());
-
-		super.encodeMarkupBegin(facesContext, uiComponent);
+		OverlayRendererUtil.encodeMarkupBegin(facesContext, uiComponent, this);
 	}
 
 	@Override
-	protected void encodeAlign(ResponseWriter responseWriter, Popover popover, Object for_, boolean first)
+	protected void encodeAlign(ResponseWriter responseWriter, Popover popover, String for_, boolean first)
 		throws IOException {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		for_ = "{ node: '" + popover.getForClientIdEscaped(facesContext) + "' }";
+		String forClientId = OverlayRendererUtil.getForClientId(facesContext, popover);
+		String escapedForClientId = StringPool.POUND + ComponentUtil.escapeClientId(forClientId);
+
+		for_ = "{node:'" + escapedForClientId + "'}";
 
 		super.encodeAlign(responseWriter, popover, for_, first);
 	}
@@ -130,30 +73,18 @@ public class PopoverRenderer extends PopoverRendererBase {
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, Popover popover, boolean first)
 		throws IOException {
 
-		FacesContext facesContext = FacesContext.getCurrentInstance();
+		OverlayRendererUtil.encodeHiddenAttributes(responseWriter, popover, first, this);
+	}
 
-		// contentBox
-		String clientId = popover.getClientId(facesContext);
-		String contentBox = StringPool.POUND + ComponentUtil.escapeClientId(clientId);
-		encodeString(responseWriter, AlloyRendererUtil.CONTENT_BOX, contentBox, first);
+	@Override
+	protected void encodeZIndex(ResponseWriter responseWriter, Popover popover, Integer zIndex, boolean first)
+		throws IOException {
 
-		first = false;
-
-		// headerContent
-		String headerText = popover.getHeaderText();
-
-		if (headerText != null) {
-			encodeString(responseWriter, AlloyRendererUtil.HEADER_CONTENT, headerText, first);
+		if (zIndex == Integer.MIN_VALUE) {
+			encodeObject(responseWriter, Dialog.Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY, first);
 		}
-
-		// render : true
-		encodeWidgetRender(responseWriter, first);
-
-		// visible
-		Boolean autoShow = popover.isAutoShow();
-
-		if (autoShow != null) {
-			encodeBoolean(responseWriter, AlloyRendererUtil.VISIBLE, autoShow, first);
+		else {
+			super.encodeZIndex(responseWriter, popover, zIndex, first);
 		}
 	}
 
@@ -166,10 +97,4 @@ public class PopoverRenderer extends PopoverRendererBase {
 	public String getDelegateRendererType() {
 		return Popover.DELEGATE_RENDERER_TYPE;
 	}
-
-	@Override
-	public boolean getRendersChildren() {
-		return true;
-	}
-
 }

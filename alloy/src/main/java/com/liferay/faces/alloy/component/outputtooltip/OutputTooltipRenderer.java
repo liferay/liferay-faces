@@ -47,6 +47,9 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(OutputTooltipRenderer.class);
+	
+	// Private Constants
+	private static final String LIFERAY_Z_INDEX_TOOLTIP = "Liferay.zIndex.TOOLTIP";
 
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -57,6 +60,18 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 			for (UIComponent child : children) {
 				child.encodeAll(facesContext);
 			}
+		}
+	}
+
+	@Override
+	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, Integer zIndex, boolean first)
+		throws IOException {
+
+		if (zIndex == Integer.MIN_VALUE) {
+			encodeObject(responseWriter, OutputTooltip.Z_INDEX, LIFERAY_Z_INDEX_TOOLTIP, first);
+		}
+		else {
+			super.encodeZIndex(responseWriter, outputTooltip, zIndex, first);
 		}
 	}
 

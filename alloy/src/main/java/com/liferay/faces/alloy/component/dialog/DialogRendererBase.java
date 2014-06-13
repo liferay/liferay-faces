@@ -59,7 +59,7 @@ public abstract class DialogRendererBase extends DelegatingAlloyRendererBase {
 			first = false;
 		}
 
-		Object zIndex = dialog.getzIndex();
+		Integer zIndex = dialog.getzIndex();
 
 		if (zIndex != null) {
 
@@ -88,7 +88,7 @@ public abstract class DialogRendererBase extends DelegatingAlloyRendererBase {
 		encodeObject(responseWriter, Dialog.MODAL, modal, first);
 	}
 
-	protected void encodeZIndex(ResponseWriter responseWriter, Dialog dialog, Object zIndex, boolean first) throws IOException {
+	protected void encodeZIndex(ResponseWriter responseWriter, Dialog dialog, Integer zIndex, boolean first) throws IOException {
 		encodeObject(responseWriter, Dialog.Z_INDEX, zIndex, first);
 	}
 
