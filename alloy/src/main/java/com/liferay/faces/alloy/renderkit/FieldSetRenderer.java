@@ -82,7 +82,7 @@ public class FieldSetRenderer extends Renderer {
 		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
 
 		// <legend>
-		String label = (String) attributes.get("label");
+		String label = (String) attributes.get(StringPool.LABEL);
 
 		if ((label != null) && (label.length() > 0)) {
 			responseWriter.startElement("legend", uiComponent);
@@ -95,7 +95,7 @@ public class FieldSetRenderer extends Renderer {
 
 			// Used to be aui-legend, but has been replaced by non-deprecated legend
 			responseWriter.writeAttribute(StringPool.CLASS, "legend", null);
-			responseWriter.writeText(label, uiComponent, "label");
+			responseWriter.writeText(label, uiComponent, StringPool.LABEL);
 			responseWriter.endElement(StringPool.SPAN);
 			responseWriter.endElement("legend");
 		}
