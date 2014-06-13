@@ -96,22 +96,24 @@ public class OverlayRendererUtil {
 				responseWriter.write("var scrollx=window.scrollX;var scrolly=window.scrollY;");
 			}
 
-			// Write out some JavaScript that will cause the dialog to popup when the trigger is clicked.
-			String clientVarName = ComponentUtil.getClientVarName(facesContext, overlay);
-			String clientKey = overlay.getClientKey();
+			// If autoShow=false, then out some JavaScript that will cause the dialog to popup when the trigger is clicked.
+			if (!overlay.isAutoShow()) {
+				String clientVarName = ComponentUtil.getClientVarName(facesContext, overlay);
+				String clientKey = overlay.getClientKey();
 
-			if (clientKey == null) {
-				clientKey = clientVarName;
+				if (clientKey == null) {
+					clientKey = clientVarName;
+				}
+
+				responseWriter.write(AlloyRendererUtil.LIFERAY_COMPONENT);
+				responseWriter.write(StringPool.OPEN_PARENTHESIS);
+				responseWriter.write(StringPool.APOSTROPHE);
+				responseWriter.write(clientKey);
+				responseWriter.write(StringPool.APOSTROPHE);
+				responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+				responseWriter.write(AlloyRendererUtil.DOT_SHOW);
+				responseWriter.write(StringPool.SEMICOLON);
 			}
-
-			responseWriter.write(AlloyRendererUtil.LIFERAY_COMPONENT);
-			responseWriter.write(StringPool.OPEN_PARENTHESIS);
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(clientKey);
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-			responseWriter.write(AlloyRendererUtil.DOT_SHOW);
-			responseWriter.write(StringPool.SEMICOLON);
 
 			if (modal) {
 
