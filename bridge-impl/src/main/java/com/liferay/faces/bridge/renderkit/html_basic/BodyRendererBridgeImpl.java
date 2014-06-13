@@ -50,7 +50,7 @@ public class BodyRendererBridgeImpl extends BridgeRenderer {
 	private static final String ELEMENT_DIV = StringPool.DIV;
 	private static final String[] BODY_PASS_THRU_ATTRIBUTES = new String[] {
 			"onclick", "ondblclick", "onkeydown", "onkeypress", "onkeyup", "onload", "onmousedown", "onmousemove",
-			"onmouseout", "onmouseover", "onmouseup", "onunload", ATTR_STYLE_CLASS, "title"
+			"onmouseout", "onmouseover", "onmouseup", "onunload", ATTR_STYLE_CLASS, StringPool.TITLE
 		};
 	private static final String STYLE_CLASS_PORTLET_BODY = "liferay-faces-bridge-body";
 
