@@ -946,7 +946,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Specifies the stack order of the component. When running in Liferay Portal, the value of Liferay.zIndex.OVERLAY is the default.]]></description>
+			<description><![CDATA[Specifies the stack order of the component. The default value is a constant from the Liferay.zIndex JavaScript object.]]></description>
 			<name>zIndex</name>
 			<required>false</required>
 			<type>java.lang.Integer</type>
@@ -1526,7 +1526,7 @@
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]></description>
+			<description><![CDATA[Specifies the stack order of the component. The default value is a constant from the Liferay.zIndex JavaScript object.]]></description>
 			<name>zIndex</name>
 			<required>false</required>
 			<type>java.lang.Integer</type>
@@ -2814,7 +2814,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Specifies the stack order of the component. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]></description>
+			<description><![CDATA[Specifies the stack order of the component. The default value is a constant from the Liferay.zIndex JavaScript object.]]></description>
 			<name>zIndex</name>
 			<required>false</required>
 			<type>java.lang.Integer</type>
@@ -3249,7 +3249,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Specifies the stack order of the calendar popup. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]></description>
+			<description><![CDATA[Specifies the stack order of the component. The default value is a constant from the Liferay.zIndex JavaScript object.]]></description>
 			<name>zIndex</name>
 			<required>false</required>
 			<type>java.lang.Integer</type>
@@ -3386,7 +3386,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Specifies the stack order of the component. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]></description>
+			<description><![CDATA[Specifies the stack order of the component. The default value is a constant from the Liferay.zIndex JavaScript object.]]></description>
 			<name>zIndex</name>
 			<required>false</required>
 			<type>java.lang.Integer</type>
