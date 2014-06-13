@@ -3281,7 +3281,7 @@
 			<description><![CDATA[The id of the target which is used by the popover.]]></description>
 			<name>for</name>
 			<required>true</required>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The text to place in the header of the popover box.]]></description>
