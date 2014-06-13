@@ -45,16 +45,6 @@ public class Dialog extends DialogBase implements Overlay {
 	}
 
 	@Override
-	public String getClientKey() {
-		return (String) getStateHelper().eval(CLIENT_KEY, null);
-	}
-
-	@Override
-	public void setClientKey(String clientKey) {
-		getStateHelper().put(CLIENT_KEY, clientKey);
-	}
-
-	@Override
 	public String getLayout() {
 		return (String) getStateHelper().eval(PropertyKeys.layout, StringPool.BLOCK);
 	}

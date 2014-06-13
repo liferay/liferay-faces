@@ -33,6 +33,7 @@ public abstract class PopoverRendererBase extends DelegatingAlloyRendererBase {
 	private static final String ALLOY_CLASS_NAME = "Popover";
 	private static final String ALLOY_MODULE_NAME = "aui-popover";
 	protected static final String ALIGN = "align";
+	protected static final String VISIBLE = "visible";
 	protected static final String HEADER_CONTENT = "headerContent";
 
 	// Protected Constants
@@ -43,6 +44,14 @@ public abstract class PopoverRendererBase extends DelegatingAlloyRendererBase {
 
 		Popover popover = (Popover) uiComponent;
 		boolean first = true;
+
+		Boolean autoShow = popover.isAutoShow();
+
+		if (autoShow != null) {
+
+			encodeVisible(responseWriter, popover, autoShow, first);
+			first = false;
+		}
 
 		String for_ = popover.getFor();
 
@@ -87,6 +96,10 @@ public abstract class PopoverRendererBase extends DelegatingAlloyRendererBase {
 	@Override
 	protected String[] getModules() {
 		return MODULES;
+	}
+
+	protected void encodeVisible(ResponseWriter responseWriter, Popover popover, Boolean autoShow, boolean first) throws IOException {
+		encodeBoolean(responseWriter, VISIBLE, autoShow, first);
 	}
 
 	protected void encodeAlign(ResponseWriter responseWriter, Popover popover, String for_, boolean first) throws IOException {
