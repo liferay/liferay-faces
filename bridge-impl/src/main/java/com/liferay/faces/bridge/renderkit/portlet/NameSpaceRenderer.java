@@ -22,6 +22,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
+import com.liferay.faces.util.lang.StringPool;
+
 
 /**
  * This is the name space generated for a portlet for the {@link PortletNameSpace} component. It conforms as closely as
@@ -39,7 +41,7 @@ public class NameSpaceRenderer extends Renderer {
 			String namespace = facesContext.getExternalContext().encodeNamespace("");
 
 			// If the user didn't specify a value for the "var" attribute, then write the URL to the response.
-			String varName = (String) attributes.get("var");
+			String varName = (String) attributes.get(StringPool.VAR);
 
 			if (varName == null) {
 				ResponseWriter responseWriter = facesContext.getResponseWriter();
