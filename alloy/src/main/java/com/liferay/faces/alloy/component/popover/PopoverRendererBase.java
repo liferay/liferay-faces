@@ -90,7 +90,7 @@ public abstract class PopoverRendererBase extends DelegatingAlloyRendererBase {
 	}
 
 	protected void encodeAlign(ResponseWriter responseWriter, Popover popover, String for_, boolean first) throws IOException {
-		encodeObject(responseWriter, ALIGN, for_, first);
+		encodeString(responseWriter, ALIGN, for_, first);
 	}
 
 	protected void encodeHeaderContent(ResponseWriter responseWriter, Popover popover, String headerText, boolean first) throws IOException {
