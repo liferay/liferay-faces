@@ -95,7 +95,6 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 
 		// Mojarra's HTML Basic calls encodeEnd for fun
 		super.encodeMarkupEnd(facesContext, uiComponent, outputTooltipResponseWriter);
-
 	}
 
 	@Override
@@ -117,22 +116,8 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 
 		first = false;
 
-		// headerContent
-		String headerText = tooltip.getHeaderText();
-
-		if (headerText != null) {
-			encodeString(responseWriter, AlloyRendererUtil.HEADER_CONTENT, headerText, first);
-		}
-
 		// render : true
 		encodeWidgetRender(responseWriter, first);
-
-		// visible
-		Boolean autoShow = tooltip.isAutoShow();
-
-		if (autoShow != null) {
-			encodeBoolean(responseWriter, AlloyRendererUtil.VISIBLE, autoShow, first);
-		}
 	}
 
 	@Override
@@ -160,6 +145,11 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 		else {
 			super.encodeZIndex(responseWriter, outputTooltip, zIndex, first);
 		}
+	}
+
+	@Override
+	protected void encodeCssClass(ResponseWriter responseWriter, OutputTooltip outputTooltip, String styleClass, boolean first) throws IOException {
+		encodeNonEscapedString(responseWriter, CSS_CLASS, styleClass, first);
 	}
 
 	@Override

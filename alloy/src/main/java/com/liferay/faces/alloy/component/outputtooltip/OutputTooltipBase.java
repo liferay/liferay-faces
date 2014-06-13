@@ -30,7 +30,6 @@ public abstract class OutputTooltipBase extends OutputText implements Styleable,
 	// Public Constants
 	public static final String AUTO_SHOW = "autoShow";
 	public static final String CLIENT_KEY = "clientKey";
-	public static final String CSS_CLASS = "cssClass";
 	public static final String FOR = "for";
 	public static final String HEADER_TEXT = "headerText";
 	public static final String OPACITY = "opacity";
@@ -56,14 +55,6 @@ public abstract class OutputTooltipBase extends OutputText implements Styleable,
 	@Override
 	public void setClientKey(String clientKey) {
 		getStateHelper().put(CLIENT_KEY, clientKey);
-	}
-
-	public String getCssClass() {
-		return (String) getStateHelper().eval(CSS_CLASS, null);
-	}
-
-	public void setCssClass(String cssClass) {
-		getStateHelper().put(CSS_CLASS, cssClass);
 	}
 
 	public String getFor() {

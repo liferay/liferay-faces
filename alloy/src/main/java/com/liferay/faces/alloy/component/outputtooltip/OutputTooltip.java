@@ -44,27 +44,6 @@ public class OutputTooltip extends OutputTooltipBase {
 	}
 
 	@Override
-	public String getClientKey() {
-		return (String) getStateHelper().eval(CLIENT_KEY, null);
-	}
-
-	@Override
-	public void setClientKey(String clientKey) {
-		getStateHelper().put(CLIENT_KEY, clientKey);
-	}
-
-	@Override
-	public String getCssClass() {
-		String cssClass = super.getCssClass();
-
-		if (cssClass == null) {
-			cssClass = getStyleClass();
-		}
-
-		return cssClass;
-	}
-
-	@Override
 	public boolean isEscape() {
 		Boolean escape = super.isEscape();
 

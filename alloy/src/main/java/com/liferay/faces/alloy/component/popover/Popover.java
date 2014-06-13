@@ -45,15 +45,6 @@ public class Popover extends PopoverBase implements Overlay {
 	}
 
 	@Override
-	public String getClientKey() {
-		return (String) getStateHelper().eval(CLIENT_KEY, null);
-	}
-
-	@Override
-	public void setClientKey(String clientKey) {
-		getStateHelper().put(CLIENT_KEY, clientKey);
-	}
-
 	public Boolean isModal() {
 		return false;
 	}

@@ -48,22 +48,8 @@ public class OverlayRendererUtil {
 		String escapedContentBoxId = StringPool.POUND + ComponentUtil.escapeClientId(clientId);
 		alloyRenderer.encodeNonEscapedString(responseWriter, AlloyRendererUtil.CONTENT_BOX, escapedContentBoxId, first);
 
-		// Encode the "headerContent" Alloy attribute.
-		String headerText = overlay.getHeaderText();
-
-		if (headerText != null) {
-			alloyRenderer.encodeString(responseWriter, AlloyRendererUtil.HEADER_CONTENT, headerText, first);
-		}
-
 		// Encode the "render: true" Alloy attribute.
 		alloyRenderer.encodeWidgetRender(responseWriter, first);
-
-		// Encode the "visible" Alloy attribute.
-		Boolean autoShow = overlay.isAutoShow();
-
-		if (autoShow != null) {
-			alloyRenderer.encodeBoolean(responseWriter, AlloyRendererUtil.VISIBLE, autoShow, first);
-		}
 	}
 
 	public static void encodeJavaScriptCustom(FacesContext facesContext, Overlay overlay, boolean forRequired)

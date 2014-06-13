@@ -29,6 +29,7 @@ public abstract class DialogBase extends HtmlPanelGroup implements Styleable, Cl
 
 	// Public Constants
 	public static final String AUTO_SHOW = "autoShow";
+	public static final String CLIENT_KEY = "clientKey";
 	public static final String FOR = "for";
 	public static final String HEADER_TEXT = "headerText";
 	public static final String MODAL = "modal";
@@ -42,6 +43,16 @@ public abstract class DialogBase extends HtmlPanelGroup implements Styleable, Cl
 
 	public void setAutoShow(Boolean autoShow) {
 		getStateHelper().put(AUTO_SHOW, autoShow);
+	}
+
+	@Override
+	public String getClientKey() {
+		return (String) getStateHelper().eval(CLIENT_KEY, null);
+	}
+
+	@Override
+	public void setClientKey(String clientKey) {
+		getStateHelper().put(CLIENT_KEY, clientKey);
 	}
 
 	public String getFor() {

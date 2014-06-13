@@ -838,13 +838,19 @@
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
+			<name>clientKey</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The id of the target which triggers the dialog.]]></description>
 			<name>for</name>
 			<required>true</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The text to place in the header of the dialog box.]]></description>
+			<description><![CDATA[The text to place in the header of the component.]]></description>
 			<name>headerText</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -940,7 +946,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Specifies the stack order of the dialog. When running in Liferay Portal, the value of Liferay.zIndex.OVERLAY is the default.]]></description>
+			<description><![CDATA[Specifies the stack order of the component. When running in Liferay Portal, the value of Liferay.zIndex.OVERLAY is the default.]]></description>
 			<name>zIndex</name>
 			<required>false</required>
 			<type>java.lang.Integer</type>
@@ -2724,12 +2730,6 @@
 			<type>javax.faces.convert.Converter</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The text to place in the header of the tooltip.]]></description>
-			<name>cssClass</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
@@ -2748,7 +2748,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The text to place in the header of the tooltip box.]]></description>
+			<description><![CDATA[The text to place in the header of the component.]]></description>
 			<name>headerText</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2772,7 +2772,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Where the tooltip should popup.]]></description>
+			<description><![CDATA[Where the component should popup.]]></description>
 			<name>position</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2814,7 +2814,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Specifies the stack order of the tooltip. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]></description>
+			<description><![CDATA[Specifies the stack order of the component. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]></description>
 			<name>zIndex</name>
 			<required>false</required>
 			<type>java.lang.Integer</type>
@@ -3266,7 +3266,7 @@
 			<renderer-type>com.liferay.faces.alloy.component.popover.PopoverRenderer</renderer-type>
 		</component>
 		<attribute>
-			<description><![CDATA[When true, the popover is visible initially. The default is true.]]></description>
+			<description><![CDATA[When true, the component is visible initially. The default is false.]]></description>
 			<name>autoShow</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
@@ -3278,13 +3278,19 @@
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
+			<name>clientKey</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The id of the target which is used by the popover.]]></description>
 			<name>for</name>
 			<required>true</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The text to place in the header of the popover box.]]></description>
+			<description><![CDATA[The text to place in the header of the component.]]></description>
 			<name>headerText</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -3356,7 +3362,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Where the popover should popup.]]></description>
+			<description><![CDATA[Where the component should popup.]]></description>
 			<name>position</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -3380,7 +3386,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Specifies the stack order of the popover. When running in Liferay Portal, the value of Liferay.zIndex.OVERLAY is the default.]]></description>
+			<description><![CDATA[Specifies the stack order of the component. When running in Liferay Portal, the value of Liferay.zIndex.TOOLTIP is the default.]]></description>
 			<name>zIndex</name>
 			<required>false</required>
 			<type>java.lang.Integer</type>

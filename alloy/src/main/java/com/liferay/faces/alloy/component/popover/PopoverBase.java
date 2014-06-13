@@ -29,6 +29,7 @@ public abstract class PopoverBase extends HtmlPanelGroup implements Styleable, C
 
 	// Public Constants
 	public static final String AUTO_SHOW = "autoShow";
+	public static final String CLIENT_KEY = "clientKey";
 	public static final String FOR = "for";
 	public static final String HEADER_TEXT = "headerText";
 	public static final String POSITION = "position";
@@ -42,6 +43,16 @@ public abstract class PopoverBase extends HtmlPanelGroup implements Styleable, C
 
 	public void setAutoShow(Boolean autoShow) {
 		getStateHelper().put(AUTO_SHOW, autoShow);
+	}
+
+	@Override
+	public String getClientKey() {
+		return (String) getStateHelper().eval(CLIENT_KEY, null);
+	}
+
+	@Override
+	public void setClientKey(String clientKey) {
+		getStateHelper().put(CLIENT_KEY, clientKey);
 	}
 
 	public String getFor() {
