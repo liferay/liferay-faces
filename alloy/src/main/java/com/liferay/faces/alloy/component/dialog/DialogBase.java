@@ -29,7 +29,6 @@ public abstract class DialogBase extends HtmlPanelGroup implements Styleable, Cl
 
 	// Public Constants
 	public static final String AUTO_SHOW = "autoShow";
-	public static final String DISABLED = "disabled";
 	public static final String FOR = "for";
 	public static final String HEADER_TEXT = "headerText";
 	public static final String MODAL = "modal";
@@ -43,14 +42,6 @@ public abstract class DialogBase extends HtmlPanelGroup implements Styleable, Cl
 
 	public void setAutoShow(Boolean autoShow) {
 		getStateHelper().put(AUTO_SHOW, autoShow);
-	}
-
-	public boolean isDisabled() {
-		return (Boolean) getStateHelper().eval(DISABLED, null);
-	}
-
-	public void setDisabled(boolean disabled) {
-		getStateHelper().put(DISABLED, disabled);
 	}
 
 	public String getFor() {
@@ -97,11 +88,11 @@ public abstract class DialogBase extends HtmlPanelGroup implements Styleable, Cl
 		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 
-	public Object getzIndex() {
-		return (Object) getStateHelper().eval(Z_INDEX, null);
+	public Integer getzIndex() {
+		return (Integer) getStateHelper().eval(Z_INDEX, null);
 	}
 
-	public void setzIndex(Object zIndex) {
+	public void setzIndex(Integer zIndex) {
 		getStateHelper().put(Z_INDEX, zIndex);
 	}
 }

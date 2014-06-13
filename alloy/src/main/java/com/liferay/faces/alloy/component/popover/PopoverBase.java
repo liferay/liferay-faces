@@ -29,7 +29,6 @@ public abstract class PopoverBase extends HtmlPanelGroup implements Styleable, C
 
 	// Public Constants
 	public static final String AUTO_SHOW = "autoShow";
-	public static final String DISABLED = "disabled";
 	public static final String FOR = "for";
 	public static final String HEADER_TEXT = "headerText";
 	public static final String POSITION = "position";
@@ -45,19 +44,11 @@ public abstract class PopoverBase extends HtmlPanelGroup implements Styleable, C
 		getStateHelper().put(AUTO_SHOW, autoShow);
 	}
 
-	public boolean isDisabled() {
-		return (Boolean) getStateHelper().eval(DISABLED, null);
+	public String getFor() {
+		return (String) getStateHelper().eval(FOR, null);
 	}
 
-	public void setDisabled(boolean disabled) {
-		getStateHelper().put(DISABLED, disabled);
-	}
-
-	public Object getFor() {
-		return (Object) getStateHelper().eval(FOR, null);
-	}
-
-	public void setFor(Object for_) {
+	public void setFor(String for_) {
 		getStateHelper().put(FOR, for_);
 	}
 
@@ -97,11 +88,11 @@ public abstract class PopoverBase extends HtmlPanelGroup implements Styleable, C
 		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 
-	public Object getzIndex() {
-		return (Object) getStateHelper().eval(Z_INDEX, null);
+	public Integer getzIndex() {
+		return (Integer) getStateHelper().eval(Z_INDEX, null);
 	}
 
-	public void setzIndex(Object zIndex) {
+	public void setzIndex(Integer zIndex) {
 		getStateHelper().put(Z_INDEX, zIndex);
 	}
 }

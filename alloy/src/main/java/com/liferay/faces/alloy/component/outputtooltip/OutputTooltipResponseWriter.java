@@ -23,6 +23,10 @@ import com.liferay.faces.util.render.DelegationResponseWriterBase;
 
 
 /**
+ * The purpose of this class is to transform the output written by the JSF implementation's renderer so that
+ * &lt;span&gt; elements will become &lt;div&gt; elements and so that the "id" attribute is always rendered. This is
+ * necessary so that the AlloyUI JavaScript will be able to find the contextBox.
+ *
  * @author  Vernon Singleton
  */
 public class OutputTooltipResponseWriter extends DelegationResponseWriterBase {
@@ -30,63 +34,32 @@ public class OutputTooltipResponseWriter extends DelegationResponseWriterBase {
 	public OutputTooltipResponseWriter(ResponseWriter responseWriter, UIComponent uiComponent) {
 		super(responseWriter);
 	}
-	
+
 	@Override
 	public void endElement(String name) throws IOException {
-		if (name != null) {
-			if (StringPool.SPAN.equals(name)) {
-				name = StringPool.DIV;
-			}
+
+		if (StringPool.SPAN.equals(name)) {
+			name = StringPool.DIV;
 		}
-//		super.endElement(name);
 	}
 
 	@Override
 	public void startElement(String name, UIComponent component) throws IOException {
-		System.err.println("startElement: name = " + name);
-		if (name != null) {
-			if (StringPool.SPAN.equals(name)) {
-				System.err.println("startElement: rendered a div earlier ...");
-				super.startElement(StringPool.DIV, component);
-				super.writeAttribute(StringPool.ID, component.getClientId(), StringPool.ID);
-			} else {
-				super.startElement(name, component);
-			}
+
+		if (StringPool.SPAN.equals(name)) {
+			super.startElement(StringPool.DIV, component);
+			super.writeAttribute(StringPool.ID, component.getClientId(), StringPool.ID);
+		}
+		else {
+			super.startElement(name, component);
 		}
 	}
-	
+
 	@Override
-	public void writeAttribute(String name, Object value, String property)
-			throws IOException {
-		if (StringPool.ID.equals(name)) {
-			// no-op
-		} else {
-			System.err.println("writeAttribute: " + name + " = " + value);
+	public void writeAttribute(String name, Object value, String property) throws IOException {
+
+		if (!StringPool.ID.equals(name)) {
 			super.writeAttribute(name, value, property);
 		}
 	}
-
-	// Mojarra will call this method to write the value when escape="false"
-	@Override
-	public void write(String text) throws IOException {
-		if (text == null) {
-			System.err.println("writeText: text == null");
-		} else {
-			System.err.println("writeText: text.toString() = " + text.toString());
-		}
-		super.write(text);
-	}
-
-	// Mojarra will call this method to write the value when escape="true"
-	@Override
-	public void writeText(Object text, UIComponent uiComponent, String property) throws IOException {
-
-		if (text == null) {
-			System.err.println("writeText: text == null");
-		} else {
-			System.err.println("writeText: text.toString() = " + text.toString());
-		}
-		super.writeText(text, uiComponent, property);
-	}
-
 }

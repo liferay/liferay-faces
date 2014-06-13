@@ -44,7 +44,7 @@ public abstract class PopoverRendererBase extends DelegatingAlloyRendererBase {
 		Popover popover = (Popover) uiComponent;
 		boolean first = true;
 
-		Object for_ = popover.getFor();
+		String for_ = popover.getFor();
 
 		if (for_ != null) {
 
@@ -68,7 +68,7 @@ public abstract class PopoverRendererBase extends DelegatingAlloyRendererBase {
 			first = false;
 		}
 
-		Object zIndex = popover.getzIndex();
+		Integer zIndex = popover.getzIndex();
 
 		if (zIndex != null) {
 
@@ -89,7 +89,7 @@ public abstract class PopoverRendererBase extends DelegatingAlloyRendererBase {
 		return MODULES;
 	}
 
-	protected void encodeAlign(ResponseWriter responseWriter, Popover popover, Object for_, boolean first) throws IOException {
+	protected void encodeAlign(ResponseWriter responseWriter, Popover popover, String for_, boolean first) throws IOException {
 		encodeObject(responseWriter, ALIGN, for_, first);
 	}
 
@@ -101,7 +101,7 @@ public abstract class PopoverRendererBase extends DelegatingAlloyRendererBase {
 		encodeString(responseWriter, Popover.POSITION, position, first);
 	}
 
-	protected void encodeZIndex(ResponseWriter responseWriter, Popover popover, Object zIndex, boolean first) throws IOException {
+	protected void encodeZIndex(ResponseWriter responseWriter, Popover popover, Integer zIndex, boolean first) throws IOException {
 		encodeObject(responseWriter, Popover.Z_INDEX, zIndex, first);
 	}
 
