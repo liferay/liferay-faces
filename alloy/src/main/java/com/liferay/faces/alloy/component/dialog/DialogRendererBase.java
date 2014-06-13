@@ -32,7 +32,7 @@ public abstract class DialogRendererBase extends DelegatingAlloyRendererBase {
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "Modal";
 	private static final String ALLOY_MODULE_NAME = "aui-modal";
-	private static final String HEADER_CONTENT = "headerContent";
+	protected static final String HEADER_CONTENT = "headerContent";
 
 	// Protected Constants
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
@@ -85,11 +85,11 @@ public abstract class DialogRendererBase extends DelegatingAlloyRendererBase {
 	}
 
 	protected void encodeModal(ResponseWriter responseWriter, Dialog dialog, Boolean modal, boolean first) throws IOException {
-		encodeObject(responseWriter, Dialog.MODAL, modal, first);
+		encodeBoolean(responseWriter, Dialog.MODAL, modal, first);
 	}
 
 	protected void encodeZIndex(ResponseWriter responseWriter, Dialog dialog, Integer zIndex, boolean first) throws IOException {
-		encodeObject(responseWriter, Dialog.Z_INDEX, zIndex, first);
+		encodeInteger(responseWriter, Dialog.Z_INDEX, zIndex, first);
 	}
 
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, Dialog dialog, boolean first) throws IOException {

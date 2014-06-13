@@ -32,24 +32,11 @@ public class PickDate extends PickDateBase {
 	public static final String STYLE_CLASS_NAME = "alloy-pick-date";
 
 	// Private Constants
-	private static final String LIFERAY_Z_INDEX_TOOLTIP = "Liferay.zIndex.TOOLTIP";
 	private static final String ON_DATE_CLICK = "onDateClick";
 
 	public PickDate() {
 		super();
 		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public Object getzIndex() {
-
-		Object zIndex = super.getzIndex();
-
-		if (zIndex == null) {
-			zIndex = LIFERAY_Z_INDEX_TOOLTIP;
-		}
-
-		return zIndex;
 	}
 
 	@Override

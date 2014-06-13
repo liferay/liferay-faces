@@ -44,20 +44,6 @@ import com.liferay.faces.util.render.HiddenTextResponseWriter;
 )
 public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 
-	// Private Constants
-	private static final String ESCAPED_BACKSLASH = "\\\\";
-	private static final String ESCAPED_DOUBLE_QUOTE = "\\\\\"";
-	private static final String ESCAPED_BACKSLASH_DOUBLE_QUOTE = ESCAPED_BACKSLASH + ESCAPED_DOUBLE_QUOTE;
-	private static final String ESCAPED_NEWLINE = "\\\\n";
-	private static final String ESCAPED_BACKSLASH_NEWLINE = ESCAPED_BACKSLASH + ESCAPED_NEWLINE;
-	private static final String ESCAPED_TAB = "\\\\t";
-	private static final String ESCAPED_BACKSLASH_TAB = ESCAPED_BACKSLASH + ESCAPED_TAB;
-	private static final String REGEX_DOUBLE_QUOTE = "[\"]";
-	private static final String REGEX_ESCAPED_DOUBLE_QUOTE = "[\\\\][\"]";
-	private static final String REGEX_ESCAPED_NEWLINE = "[\\\\]n";
-	private static final String REGEX_ESCAPED_TAB = "[\\\\]t";
-	private static final String REGEX_NEWLINE = "\n";
-
 	@Override
 	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
@@ -135,24 +121,7 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 		String defaultBoundingBoxClientId = getDefaultBoundingBoxClientId(facesContext, inputSourceCode);
 		String boundingBox = StringPool.POUND + ComponentUtil.escapeClientId(defaultBoundingBoxClientId);
 
-		encodeString(responseWriter, AlloyRendererUtil.BOUNDING_BOX, boundingBox, first);
-	}
-
-	@Override
-	protected void encodeValue(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Object value,
-		boolean first) throws IOException {
-
-		if (value instanceof String) {
-			String valueAsString = (String) value;
-			valueAsString = valueAsString.replaceAll(REGEX_ESCAPED_TAB, ESCAPED_BACKSLASH_TAB);
-			valueAsString = valueAsString.replaceAll(REGEX_ESCAPED_NEWLINE, ESCAPED_BACKSLASH_NEWLINE);
-			valueAsString = valueAsString.replaceAll(REGEX_NEWLINE, ESCAPED_NEWLINE);
-			valueAsString = valueAsString.replaceAll(REGEX_ESCAPED_DOUBLE_QUOTE, ESCAPED_BACKSLASH_DOUBLE_QUOTE);
-			valueAsString = valueAsString.replaceAll(REGEX_DOUBLE_QUOTE, ESCAPED_DOUBLE_QUOTE);
-			value = valueAsString;
-		}
-
-		super.encodeValue(responseWriter, inputSourceCode, value, first);
+		encodeNonEscapedString(responseWriter, AlloyRendererUtil.BOUNDING_BOX, boundingBox, first);
 	}
 
 	protected String getDefaultBoundingBoxClientId(FacesContext facesContext, UIComponent uiComponent) {

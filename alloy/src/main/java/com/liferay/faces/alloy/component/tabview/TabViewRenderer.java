@@ -170,7 +170,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 		first = false;
 
 		String srcNode = StringPool.POUND + ComponentUtil.escapeClientId(tabView.getClientId());
-		encodeString(responseWriter, SRC_NODE, srcNode, first);
+		encodeNonEscapedString(responseWriter, SRC_NODE, srcNode, first);
 	}
 
 	protected void encodeTabListItem(FacesContext facesContext, ResponseWriter responseWriter, Tab tab)

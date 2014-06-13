@@ -66,7 +66,7 @@ public class PopoverRenderer extends PopoverRendererBase {
 
 		for_ = "{node:'" + escapedForClientId + "'}";
 
-		super.encodeAlign(responseWriter, popover, for_, first);
+		encodeNonEscapedObject(responseWriter, ALIGN, for_, first);
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class PopoverRenderer extends PopoverRendererBase {
 		throws IOException {
 
 		if (zIndex == Integer.MIN_VALUE) {
-			encodeObject(responseWriter, Dialog.Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY, first);
+			encodeNonEscapedObject(responseWriter, Dialog.Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY, first);
 		}
 		else {
 			super.encodeZIndex(responseWriter, popover, zIndex, first);

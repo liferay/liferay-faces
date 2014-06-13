@@ -34,22 +34,20 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Vernon Singleton
  */
+//J-
 @FacesRenderer(componentFamily = OutputTooltip.COMPONENT_FAMILY, rendererType = OutputTooltip.RENDERER_TYPE)
 @ResourceDependencies(
 	{
 		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
-		@ResourceDependency(
-			library = "liferay-faces-alloy", name = "build/aui/aui-min.js"
-		), @ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
+		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
+		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
 	}
 )
+//J+
 public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(OutputTooltipRenderer.class);
-	
-	// Private Constants
-	private static final String LIFERAY_Z_INDEX_TOOLTIP = "Liferay.zIndex.TOOLTIP";
 
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -60,18 +58,6 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 			for (UIComponent child : children) {
 				child.encodeAll(facesContext);
 			}
-		}
-	}
-
-	@Override
-	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, Integer zIndex, boolean first)
-		throws IOException {
-
-		if (zIndex == Integer.MIN_VALUE) {
-			encodeObject(responseWriter, OutputTooltip.Z_INDEX, LIFERAY_Z_INDEX_TOOLTIP, first);
-		}
-		else {
-			super.encodeZIndex(responseWriter, outputTooltip, zIndex, first);
 		}
 	}
 
@@ -127,7 +113,7 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 		// contentBox
 		String clientId = tooltip.getClientId(facesContext);
 		String contentBox = StringPool.POUND + ComponentUtil.escapeClientId(clientId);
-		encodeString(responseWriter, AlloyRendererUtil.CONTENT_BOX, contentBox, first);
+		encodeNonEscapedString(responseWriter, AlloyRendererUtil.CONTENT_BOX, contentBox, first);
 
 		first = false;
 
@@ -160,7 +146,20 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 			for_ = StringPool.POUND + ComponentUtil.escapeClientId(forClientId);
 		}
 
-		super.encodeTrigger(responseWriter, outputTooltip, for_, first);
+		encodeNonEscapedString(responseWriter, TRIGGER, for_, first);
+	}
+
+	@Override
+	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, Integer zIndex,
+		boolean first) throws IOException {
+
+		if (zIndex == Integer.MIN_VALUE) {
+			encodeNonEscapedObject(responseWriter, OutputTooltip.Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_TOOLTIP,
+				first);
+		}
+		else {
+			super.encodeZIndex(responseWriter, outputTooltip, zIndex, first);
+		}
 	}
 
 	@Override

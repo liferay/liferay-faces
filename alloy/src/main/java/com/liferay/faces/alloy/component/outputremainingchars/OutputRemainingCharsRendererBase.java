@@ -32,7 +32,7 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "CharCounter";
 	private static final String ALLOY_MODULE_NAME = "aui-char-counter";
-	private static final String INPUT = "input";
+	protected static final String INPUT = "input";
 
 	// Protected Constants
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
@@ -51,7 +51,7 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 			first = false;
 		}
 
-		Object maxLength = outputRemainingChars.getMaxLength();
+		Integer maxLength = outputRemainingChars.getMaxLength();
 
 		if (maxLength != null) {
 
@@ -76,8 +76,8 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 		encodeString(responseWriter, INPUT, for_, first);
 	}
 
-	protected void encodeMaxLength(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, Object maxLength, boolean first) throws IOException {
-		encodeObject(responseWriter, OutputRemainingChars.MAX_LENGTH, maxLength, first);
+	protected void encodeMaxLength(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, Integer maxLength, boolean first) throws IOException {
+		encodeInteger(responseWriter, OutputRemainingChars.MAX_LENGTH, maxLength, first);
 	}
 
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, boolean first) throws IOException {

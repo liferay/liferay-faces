@@ -32,9 +32,8 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "DatePicker";
 	private static final String ALLOY_MODULE_NAME = "aui-datepicker";
-	private static final String MASK = "mask";
-	private static final String TRIGGER = "trigger";
-	private static final String POPOVER = "popover";
+	protected static final String MASK = "mask";
+	protected static final String TRIGGER = "trigger";
 
 	// Protected Constants
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
@@ -85,14 +84,6 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		Object zIndex = pickDate.getzIndex();
-
-		if (zIndex != null) {
-
-			encodePopover(responseWriter, pickDate, zIndex, first);
-			first = false;
-		}
-
 		encodeHiddenAttributes(responseWriter, pickDate, first);
 	}
 
@@ -107,7 +98,7 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 	}
 
 	protected void encodeAutoHide(ResponseWriter responseWriter, PickDate pickDate, Boolean autoHide, boolean first) throws IOException {
-		encodeObject(responseWriter, PickDate.AUTO_HIDE, autoHide, first);
+		encodeBoolean(responseWriter, PickDate.AUTO_HIDE, autoHide, first);
 	}
 
 	protected void encodeMask(ResponseWriter responseWriter, PickDate pickDate, String datePattern, boolean first) throws IOException {
@@ -123,11 +114,7 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 	}
 
 	protected void encodePanes(ResponseWriter responseWriter, PickDate pickDate, Integer panes, boolean first) throws IOException {
-		encodeObject(responseWriter, PickDate.PANES, panes, first);
-	}
-
-	protected void encodePopover(ResponseWriter responseWriter, PickDate pickDate, Object zIndex, boolean first) throws IOException {
-		encodeObject(responseWriter, POPOVER, zIndex, first);
+		encodeInteger(responseWriter, PickDate.PANES, panes, first);
 	}
 
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, PickDate pickDate, boolean first) throws IOException {

@@ -27,6 +27,13 @@ import com.liferay.faces.util.lang.StringPool;
  */
 public class RendererUtil {
 
+	// Private Constants
+	private static final String JAVA_SCRIPT_HEX_PREFIX = "\\x";
+
+	private static final char[] _HEX_DIGITS = {
+			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
+		};
+
 	public static void encodeStyleable(ResponseWriter responseWriter, Styleable styleable, String... classNames)
 		throws IOException {
 
@@ -53,5 +60,51 @@ public class RendererUtil {
 		if (style != null) {
 			responseWriter.writeAttribute(Styleable.STYLE, style, Styleable.STYLE);
 		}
+	}
+
+	public static String escapeJavaScript(String javaScript) {
+
+		StringBuilder stringBuilder = new StringBuilder();
+		char[] javaScriptCharArray = javaScript.toCharArray();
+
+		for (char character : javaScriptCharArray) {
+
+			if ((character > 255) || Character.isLetterOrDigit(character)) {
+
+				stringBuilder.append(character);
+			}
+			else {
+				stringBuilder.append(JAVA_SCRIPT_HEX_PREFIX);
+
+				String hexString = toHexString(character);
+
+				if (hexString.length() == 1) {
+					stringBuilder.append(StringPool.ASCII_TABLE[48]);
+				}
+
+				stringBuilder.append(hexString);
+			}
+		}
+
+		if (stringBuilder.length() != javaScript.length()) {
+			javaScript = stringBuilder.toString();
+		}
+
+		return javaScript;
+	}
+
+	private static String toHexString(int i) {
+		char[] buffer = new char[8];
+
+		int index = 8;
+
+		do {
+			buffer[--index] = _HEX_DIGITS[i & 15];
+
+			i >>>= 4;
+		}
+		while (i != 0);
+
+		return new String(buffer, index, 8 - index);
 	}
 }
