@@ -34,6 +34,8 @@ public class StringPool {
 
 	public static final String BLANK = "";
 
+	public static final String BLOCK = "block";
+
 	public static final String BODY = "body";
 
 	public static final String CARET = "^";
@@ -42,7 +44,13 @@ public class StringPool {
 
 	public static final String CDATA_OPEN = "<![CDATA[";
 
+	public static final String CENTERED = "centered";
+
+	public static final String CHECKED = "checked";
+
 	public static final String CLASS = "class";
+
+	public static final String CLICK = "click";
 
 	public static final String CLOSE_BRACKET = "]";
 
@@ -212,6 +220,8 @@ public class StringPool {
 
 	public static final String TILDE = "~";
 
+	public static final String TITLE = "title";
+
 	public static final String TRUE = "true";
 
 	public static final String TYPE = "type";
@@ -225,6 +235,8 @@ public class StringPool {
 	public static final String UTF8 = "UTF-8";
 
 	public static final String VALUE = "value";
+
+	public static final String VAR = "var";
 
 	// Tags
 	public static final String SCRIPT_TAG_BEGIN = "<script>";

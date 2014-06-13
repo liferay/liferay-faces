@@ -1,5 +1,12 @@
+.nav-list > li > a {
+	font-size: 0.9em;
+	white-space: nowrap;
+}
+
 .nav-list .nav-list > li > a {
 	background-color: transparent;
+	font-size: 0.9em;
+	white-space: nowrap;
 }
 
 .nav-list .nav-list > li.active {
@@ -86,6 +93,19 @@
 	font-weight: bold;
 }
 
+.aui .alloy-dialog {
+	text-align: center;
+}
+
+.aui .alloy-popover {
+	text-align: center;
+	padding: 6px;
+}
+
+.aui .alloy-output-tooltip {
+	text-align: center;
+}
+
 .aui .alloy-select-one-radio label {
 	font-size: 0.9em;
 }
@@ -104,11 +124,11 @@
 	list-style-type: none;
 }
 
-.component-rendered-checkbox input,.component-required-checkbox input {
+.component-modal-checkbox input, .component-rendered-checkbox input, .component-required-checkbox input {
 	vertical-align: 0.1em;
 }
 
-.component-rendered-checkbox label,.component-required-checkbox label {
+.component-modal-checkbox label, .component-rendered-checkbox label,.component-required-checkbox label {
 	display: inline;
 	margin-right: 10px;
 }

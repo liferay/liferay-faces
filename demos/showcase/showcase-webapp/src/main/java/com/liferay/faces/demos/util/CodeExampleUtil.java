@@ -35,6 +35,7 @@ public class CodeExampleUtil {
 	private static final String JAVA = "java";
 	private static final String JAVA_EXTENSION = ".java";
 	private static final Pattern JAVA_MULTILINE_COMMENTS_PATTERN = Pattern.compile("/[*][*].*[*]/", Pattern.DOTALL);
+	private static final String MYFORM_OUTPUTMODEL_MODELVALUE = "myForm:outputModel:modelValue";
 	private static final Pattern TEMPLATE_ATTRIBUTE_PATTERN = Pattern.compile("\\s*template=\".*\"");
 	private static final String XML = "xml";
 
@@ -86,6 +87,13 @@ public class CodeExampleUtil {
 								if (line.startsWith(StringPool.TAB)) {
 									line = line.substring(1);
 								}
+							}
+
+							int pos = line.indexOf(MYFORM_OUTPUTMODEL_MODELVALUE);
+
+							if (pos > 0) {
+								line = line.substring(0, pos) + "myForm:modelValue" +
+									line.substring(pos + MYFORM_OUTPUTMODEL_MODELVALUE.length());
 							}
 
 							buf.append(line);

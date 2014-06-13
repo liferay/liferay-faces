@@ -28,6 +28,8 @@ public class SelectedComponentImpl extends ShowcaseComponentWrapper implements S
 	private static final long serialVersionUID = 3286285311354181810L;
 
 	// Private Data Members
+	private boolean modal1;
+	private boolean modal2;
 	private boolean rendered;
 	private boolean required;
 	private String useCaseKey;
@@ -56,6 +58,14 @@ public class SelectedComponentImpl extends ShowcaseComponentWrapper implements S
 		this.useCaseKey = showcaseComponent.getKey() + StringPool.DASH + useCaseName;
 	}
 
+	public boolean isModal1() {
+		return modal1;
+	}
+
+	public boolean isModal2() {
+		return modal2;
+	}
+
 	@Override
 	public boolean isRendered() {
 		return rendered;
@@ -64,6 +74,14 @@ public class SelectedComponentImpl extends ShowcaseComponentWrapper implements S
 	@Override
 	public boolean isRequired() {
 		return required;
+	}
+
+	public void setModal1(boolean modal1) {
+		this.modal1 = modal1;
+	}
+
+	public void setModal2(boolean modal2) {
+		this.modal2 = modal2;
 	}
 
 	@Override
