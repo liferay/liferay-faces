@@ -32,8 +32,8 @@ public abstract class DialogRendererBase extends DelegatingAlloyRendererBase {
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "Modal";
 	private static final String ALLOY_MODULE_NAME = "aui-modal";
-	protected static final String VISIBLE = "visible";
 	protected static final String HEADER_CONTENT = "headerContent";
+	protected static final String VISIBLE = "visible";
 
 	// Protected Constants
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};

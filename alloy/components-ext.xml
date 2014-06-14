@@ -1691,7 +1691,7 @@
 	<component name="Row" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIPanel">
 		<description>
 			<![CDATA[Row is a UIPanel component that renders a <div> and is designed to be used in conjunction with alloy:column child component tags.]]>
-		</description>	
+		</description>
 		<attributes>
 			<attribute>
 				<description><![CDATA[When this flag is true, the element will have the CSS class <code>row-fluid</code>. Otherwise, the element will have the CSS class <code>row</code>. The default value is true.]]></description>
@@ -1700,10 +1700,9 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectOneRadio" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
-		parentClass="javax.faces.component.html.HtmlSelectOneRadio">
+	<component name="SelectManyCheckbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents" parentClass="javax.faces.component.html.HtmlSelectManyCheckbox">
 		<description>
-		   <![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags.]]>
+			<![CDATA[SelectManyCheckbox is a UISelectOne component that renders check boxes, and allows the user to select several check boxes. Since it extends HtmlSelectManyCheckbox, it supports all the features of h:selectManyCheckbox such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -1725,6 +1724,140 @@
 			<attribute>
 				<description>
 					<![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]>
+				</description>
+				<name>enabledClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]>
+				</description>
+				<name>hideNoSelectionOption</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The direction in which the layout of the component should go.  The default value is 'lineDirection'.]]>
+				</description>
+				<name>layout</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of each selected item.]]>
+				</description>
+				<name>selectedClass</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of each unselected item.]]>
+				</description>
+				<name>unselectedClass</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="SelectManyListbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents" parentClass="javax.faces.component.html.HtmlSelectManyListbox">
+		<description>
+			<![CDATA[SelectManyListbox is a UISelectOne component that renders a static, multiple line text box and allows the user to select multiple items from a list. Since it extends HtmlSelectManyListbox, it supports all the features of h:selectManyListbox such as accepting f:selectItem or f:selectItems as child tags.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]>
+				</description>
+				<name>disabledClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]>
+				</description>
+				<name>enabledClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]>
+				</description>
+				<name>hideNoSelectionOption</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The number of items to show in the box.  The default is to show all of the items.]]>
+				</description>
+				<name>size</name>
+				<type>int</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="SelectManyMenu" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents" parentClass="javax.faces.component.html.HtmlSelectManyMenu">
+		<description>
+			<![CDATA[SelectManyMenu is a UISelectOne component that renders a drop down list, and allows the user to select multiple items. Since it extends HtmlSelectManyMenu, it supports all the features of h:selectManyMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]>
+				</description>
+				<name>disabledClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]>
+				</description>
+				<name>enabledClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]>
+				</description>
+				<name>hideNoSelectionOption</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="SelectOneRadio" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+		parentClass="javax.faces.component.html.HtmlSelectOneRadio">
+		<description>
+		   <![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The width of the table border (measured in pixels).]]>
+				</description>
+				<name>border</name>
+				<type>int</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of a disabled selectItem.]]>
+				</description>
+				<name>disabledClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of an enabled selectItem.]]>
 				</description>
 				<name>enabledClass</name>
 				<type>java.lang.String</type>
