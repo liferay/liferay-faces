@@ -1700,6 +1700,76 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="SelectOneListbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents" parentClass="javax.faces.component.html.HtmlSelectOneListbox">
+		<description>
+			<![CDATA[SelectOneListbox is a UISelectOne component that renders a static, multiple line text box and allows the user to select one item from a list. Since it extends HtmlSelectOneListbox, it supports all the features of h:selectOneListbox such as accepting f:selectItem or f:selectItems as child tags.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]>
+				</description>
+				<name>disabledClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]>
+				</description>
+				<name>enabledClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]>
+				</description>
+				<name>hideNoSelectionOption</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The number of items to show in the box.  The default is to show all of the items.]]>
+				</description>
+				<name>size</name>
+				<type>int</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="SelectOneMenu" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents" parentClass="javax.faces.component.html.HtmlSelectOneMenu">
+		<description>
+			<![CDATA[SelectOneMenu is a UISelectOne component that renders a drop down list, and allows the user to select one item. Since it extends HtmlSelectOneMenu, it supports all the features of h:selectOneMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]>
+				</description>
+				<name>disabledClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]>
+				</description>
+				<name>enabledClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]>
+				</description>
+				<name>hideNoSelectionOption</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="SelectOneRadio" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneRadio">
 		<description>
