@@ -1668,6 +1668,11 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="SelectBooleanCheckbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents" parentClass="javax.faces.component.html.HtmlSelectBooleanCheckbox">
+		<description>
+		   <![CDATA[SelectBooleanCheckbox is a UISelectOne component that renders a check box. Since it extends HtmlSelectBooleanCheckbox, it supports all the features of h:selectBooleanCheckbox such as accepting f:selectItem or f:selectItems as child tags.]]>
+		</description>
+	</component>
 	<component name="SelectOneRadio" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneRadio">
 		<description>

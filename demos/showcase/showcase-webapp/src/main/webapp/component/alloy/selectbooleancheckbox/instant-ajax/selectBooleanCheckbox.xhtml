@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/component-1col-80.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<showcase:example>
+				<h:outputLabel styleClass="alloy-output-label" value="#{i18n['instant-ajax']}" />
+				<alloy:selectBooleanCheckbox value="#{selectBooleanCheckboxModelBean.like}"  label="#{i18n['like']}:">
+					<f:selectItem itemLabel="#{i18n['like']}" itemValue="true" />
+					<f:selectItem itemLabel="#{i18n['dislike']}" itemValue="false" />
+					<f:ajax render="@form" />
+				</alloy:selectBooleanCheckbox>
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText value="#{selectBooleanCheckboxModelBean.like}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
