@@ -17,10 +17,13 @@ import java.io.IOException;
 
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
+import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -39,6 +42,34 @@ import com.liferay.faces.util.lang.StringPool;
 )
 //J+
 public class PopoverRenderer extends PopoverRendererBase {
+
+	@Override
+	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+
+		ClientComponent clientComponent = (ClientComponent) uiComponent;
+		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+		String clientKey = clientComponent.getClientKey();
+
+		if (clientKey == null) {
+			clientKey = clientVarName;
+		}
+
+		// FACES-1949 - Add an "x" for closing the popover to the header area like alloy:dialog
+		responseWriter.write(AlloyRendererUtil.LIFERAY_COMPONENT);
+		responseWriter.write(StringPool.OPEN_PARENTHESIS);
+		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write(clientKey);
+		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+		responseWriter.write(
+			".addToolbar( [ { cssClass: 'close', label: '\u00D7', on: { click: function(event) { Liferay.component('" +
+			clientKey + "').hide(); } }, render: true } ], 'header' )");
+		responseWriter.write(StringPool.SEMICOLON);
+
+		super.encodeJavaScriptCustom(facesContext, uiComponent);
+	}
 
 	@Override
 	protected void encodeAlign(ResponseWriter responseWriter, Popover popover, String for_, boolean first)
