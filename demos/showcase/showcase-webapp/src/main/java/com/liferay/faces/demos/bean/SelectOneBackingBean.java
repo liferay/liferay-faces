@@ -35,21 +35,21 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 @ManagedBean
 @RequestScoped
-public class SelectOneRadioBackingBean {
+public class SelectOneBackingBean {
 
-	private static final Logger logger = LoggerFactory.getLogger(SelectOneRadioBackingBean.class);
+	private static final Logger logger = LoggerFactory.getLogger(SelectOneBackingBean.class);
 
-	@ManagedProperty(name = "selectOneRadioModelBean", value = "#{selectOneRadioModelBean}")
-	private SelectOneRadioModelBean selectOneRadioModelBean;
+	@ManagedProperty(name = "selectOneModelBean", value = "#{selectOneModelBean}")
+	private SelectOneModelBean selectOneModelBean;
 
 	public void submit() {
 		PhaseId phaseId = FacesContext.getCurrentInstance().getCurrentPhaseId();
 		logger.info("submit: phaseId=[{0}] favoriteId=[{1}]", phaseId.toString(),
-			selectOneRadioModelBean.getFavoriteId());
+			selectOneModelBean.getFavoriteId());
 	}
 
 	public void submitAnswer() {
-		Date selectedDate = selectOneRadioModelBean.getDate();
+		Date selectedDate = selectOneModelBean.getDate();
 		TimeZone gmtTimeZone = TimeZone.getTimeZone("GMT");
 		Calendar calendar = new GregorianCalendar(gmtTimeZone);
 		calendar.setTime(selectedDate);
@@ -73,7 +73,7 @@ public class SelectOneRadioBackingBean {
 	public void submitPhase() {
 		PhaseId phaseId = FacesContext.getCurrentInstance().getCurrentPhaseId();
 		logger.info("submit: phaseId=[{0}] favoriteId=[{1}]", phaseId.toString(),
-			selectOneRadioModelBean.getFavoriteId());
+			selectOneModelBean.getFavoriteId());
 	}
 
 	public void valueChangeListener(ValueChangeEvent valueChangeEvent) {
@@ -88,7 +88,7 @@ public class SelectOneRadioBackingBean {
 		facesContext.addMessage(null, facesMessage);
 	}
 
-	public void setSelectOneRadioModelBean(SelectOneRadioModelBean selectOneRadioModelBean) {
-		this.selectOneRadioModelBean = selectOneRadioModelBean;
+	public void setSelectOneModelBean(SelectOneModelBean selectOneModelBean) {
+		this.selectOneModelBean = selectOneModelBean;
 	}
 }
