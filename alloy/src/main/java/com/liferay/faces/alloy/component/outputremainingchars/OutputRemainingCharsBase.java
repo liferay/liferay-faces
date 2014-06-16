@@ -33,8 +33,6 @@ public abstract class OutputRemainingCharsBase extends OutputText implements Sty
 	public static final String MAX_LENGTH = "maxLength";
 	public static final String ON_MAXLENGTH_REACHED = "onMaxlengthReached";
 	public static final String ONCE_MAXLENGTH_REACHED = "onceMaxlengthReached";
-	public static final String STYLE = "style";
-	public static final String STYLE_CLASS = "styleClass";
 	public static final String VALUE = "value";
 
 	@Override
@@ -77,26 +75,6 @@ public abstract class OutputRemainingCharsBase extends OutputText implements Sty
 
 	public void setOnMaxlengthReached(String onMaxlengthReached) {
 		getStateHelper().put(ON_MAXLENGTH_REACHED, onMaxlengthReached);
-	}
-
-	@Override
-	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
-	}
-
-	@Override
-	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
-	}
-
-	@Override
-	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
-	}
-
-	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 }
 //J+

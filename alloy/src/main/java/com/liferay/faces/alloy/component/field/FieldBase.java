@@ -28,8 +28,6 @@ public abstract class FieldBase extends PanelGroup implements Styleable {
 
 	// Public Constants
 	public static final String LABEL = "label";
-	public static final String STYLE = "style";
-	public static final String STYLE_CLASS = "styleClass";
 
 	public String getLabel() {
 		return (String) getStateHelper().eval(LABEL, null);
@@ -37,26 +35,6 @@ public abstract class FieldBase extends PanelGroup implements Styleable {
 
 	public void setLabel(String label) {
 		getStateHelper().put(LABEL, label);
-	}
-
-	@Override
-	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
-	}
-
-	@Override
-	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
-	}
-
-	@Override
-	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
-	}
-
-	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 }
 //J+

@@ -33,8 +33,6 @@ public abstract class PopoverBase extends HtmlPanelGroup implements Styleable, C
 	public static final String FOR = "for";
 	public static final String HEADER_TEXT = "headerText";
 	public static final String POSITION = "position";
-	public static final String STYLE = "style";
-	public static final String STYLE_CLASS = "styleClass";
 	public static final String Z_INDEX = "zIndex";
 
 	public Boolean isAutoShow() {
@@ -77,26 +75,6 @@ public abstract class PopoverBase extends HtmlPanelGroup implements Styleable, C
 
 	public void setPosition(String position) {
 		getStateHelper().put(POSITION, position);
-	}
-
-	@Override
-	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
-	}
-
-	@Override
-	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
-	}
-
-	@Override
-	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
-	}
-
-	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 
 	public Integer getzIndex() {
