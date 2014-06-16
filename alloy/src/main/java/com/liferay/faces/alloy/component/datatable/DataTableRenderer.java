@@ -22,7 +22,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.DelegationResponseWriter;
 
@@ -39,19 +38,7 @@ import com.liferay.faces.util.render.DelegationResponseWriter;
 		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
 	}
 )
-public class DataTableRenderer extends DelegatingAlloyRendererBase {
-
-	// Private Constants
-	private static final String ALLOY_CLASS_NAME = "DataTable";
-	private static final String ALLOY_MODULE_NAME = "aui-datatable";
-
-	// Protected Constants
-	protected static final String[] MODULES = { ALLOY_MODULE_NAME };
-
-	@Override
-	public void encodeAlloyAttributes(ResponseWriter respoonseWriter, UIComponent uiComponent) throws IOException {
-		// No-op since AlloyUI attributes are not exposed to JSF
-	}
+public class DataTableRenderer extends DataTableRendererBase {
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -63,16 +50,6 @@ public class DataTableRenderer extends DelegatingAlloyRendererBase {
 	}
 
 	@Override
-	public void encodeJavaScriptBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-		super.encodeJavaScriptBegin(facesContext, uiComponent);
-	}
-
-	@Override
-	public String getAlloyClassName() {
-		return ALLOY_CLASS_NAME;
-	}
-
-	@Override
 	public String getDelegateComponentFamily() {
 		return DataTable.DELEGATE_COMPONENT_FAMILY;
 	}
@@ -80,10 +57,5 @@ public class DataTableRenderer extends DelegatingAlloyRendererBase {
 	@Override
 	public String getDelegateRendererType() {
 		return DataTable.DELEGATE_RENDERER_TYPE;
-	}
-
-	@Override
-	protected String[] getModules() {
-		return MODULES;
 	}
 }

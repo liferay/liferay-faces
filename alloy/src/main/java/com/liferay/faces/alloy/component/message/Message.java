@@ -39,7 +39,7 @@ public class Message extends MessageBase {
 	@Override
 	public String getStyleClass() {
 
-		// getStateHelper().eval(STYLE_CLASS, null) is called because super.getStyleClass() may return the
+		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 

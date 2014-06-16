@@ -103,7 +103,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 
 			Date maxDate = PickDateUtil.getObjectAsDate(maximumDate, componentDatePattern);
 			String maxDateString = PickDateUtil.toJavascriptDateString(maxDate);
-			encodeNonEscapedObject(responseWriter, PickDate.MAXIMUM_DATE, maxDateString, calendarFirst);
+			encodeNonEscapedObject(responseWriter, MAXIMUM_DATE, maxDateString, calendarFirst);
 			calendarFirst = false;
 		}
 
@@ -113,7 +113,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 
 			Date minDate = PickDateUtil.getObjectAsDate(minimumDate, componentDatePattern);
 			String minDateString = PickDateUtil.toJavascriptDateString(minDate);
-			encodeNonEscapedObject(responseWriter, PickDate.MINIMUM_DATE, minDateString, calendarFirst);
+			encodeNonEscapedObject(responseWriter, MINIMUM_DATE, minDateString, calendarFirst);
 			calendarFirst = false;
 		}
 
@@ -121,7 +121,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 
 		if (selectionMode != null) {
 
-			encodeString(responseWriter, PickDate.SELECTION_MODE, selectionMode, calendarFirst);
+			encodeString(responseWriter, SELECTION_MODE, selectionMode, calendarFirst);
 			calendarFirst = false;
 		}
 
@@ -213,7 +213,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 			zIndexString = AlloyRendererUtil.LIFERAY_Z_INDEX_TOOLTIP;
 		}
 
-		encodeNonEscapedObject(responseWriter, PickDate.Z_INDEX, zIndexString, true);
+		encodeNonEscapedObject(responseWriter, Z_INDEX, zIndexString, true);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 	}
 

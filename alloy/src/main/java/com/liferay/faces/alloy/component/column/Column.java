@@ -60,13 +60,13 @@ public class Column extends ColumnBase {
 
 	@Override
 	public Integer getSpan() {
-		return (Integer) getStateHelper().eval(SPAN, COLUMNS);
+		return (Integer) getStateHelper().eval(ColumnPropertyKeys.span, COLUMNS);
 	}
 
 	@Override
 	public String getStyleClass() {
 
-		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
+		String styleClass = (String) getStateHelper().eval(ColumnPropertyKeys.styleClass, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}

@@ -27,54 +27,55 @@ import com.liferay.faces.util.component.ClientComponent;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class OutputRemainingCharsBase extends OutputText implements Styleable, ClientComponent {
 
-	// Public Constants
-	public static final String CLIENT_KEY = "clientKey";
-	public static final String FOR = "for";
-	public static final String MAX_LENGTH = "maxLength";
-	public static final String ON_MAXLENGTH_REACHED = "onMaxlengthReached";
-	public static final String ONCE_MAXLENGTH_REACHED = "onceMaxlengthReached";
-	public static final String VALUE = "value";
+	// Protected Enumerations
+	protected enum OutputRemainingCharsPropertyKeys {
+		clientKey,
+		for_,
+		maxLength,
+		onMaxlengthReached,
+		onceMaxlengthReached
+	}
 
 	@Override
 	public String getClientKey() {
-		return (String) getStateHelper().eval(CLIENT_KEY, null);
+		return (String) getStateHelper().eval(OutputRemainingCharsPropertyKeys.clientKey, null);
 	}
 
 	@Override
 	public void setClientKey(String clientKey) {
-		getStateHelper().put(CLIENT_KEY, clientKey);
+		getStateHelper().put(OutputRemainingCharsPropertyKeys.clientKey, clientKey);
 	}
 
 	public String getFor() {
-		return (String) getStateHelper().eval(FOR, null);
+		return (String) getStateHelper().eval(OutputRemainingCharsPropertyKeys.for_, null);
 	}
 
 	public void setFor(String for_) {
-		getStateHelper().put(FOR, for_);
+		getStateHelper().put(OutputRemainingCharsPropertyKeys.for_, for_);
 	}
 
 	public Integer getMaxLength() {
-		return (Integer) getStateHelper().eval(MAX_LENGTH, null);
+		return (Integer) getStateHelper().eval(OutputRemainingCharsPropertyKeys.maxLength, null);
 	}
 
 	public void setMaxLength(Integer maxLength) {
-		getStateHelper().put(MAX_LENGTH, maxLength);
+		getStateHelper().put(OutputRemainingCharsPropertyKeys.maxLength, maxLength);
 	}
 
 	public String getOnceMaxlengthReached() {
-		return (String) getStateHelper().eval(ONCE_MAXLENGTH_REACHED, null);
+		return (String) getStateHelper().eval(OutputRemainingCharsPropertyKeys.onceMaxlengthReached, null);
 	}
 
 	public void setOnceMaxlengthReached(String onceMaxlengthReached) {
-		getStateHelper().put(ONCE_MAXLENGTH_REACHED, onceMaxlengthReached);
+		getStateHelper().put(OutputRemainingCharsPropertyKeys.onceMaxlengthReached, onceMaxlengthReached);
 	}
 
 	public String getOnMaxlengthReached() {
-		return (String) getStateHelper().eval(ON_MAXLENGTH_REACHED, null);
+		return (String) getStateHelper().eval(OutputRemainingCharsPropertyKeys.onMaxlengthReached, null);
 	}
 
 	public void setOnMaxlengthReached(String onMaxlengthReached) {
-		getStateHelper().put(ON_MAXLENGTH_REACHED, onMaxlengthReached);
+		getStateHelper().put(OutputRemainingCharsPropertyKeys.onMaxlengthReached, onMaxlengthReached);
 	}
 }
 //J+

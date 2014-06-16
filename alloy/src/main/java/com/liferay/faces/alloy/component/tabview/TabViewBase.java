@@ -27,66 +27,68 @@ import com.liferay.faces.util.component.ClientComponent;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class TabViewBase extends UIData implements Styleable, ClientComponent {
 
-	// Public Constants
-	public static final String CLIENT_KEY = "clientKey";
-	public static final String HEIGHT = "height";
-	public static final String STACKED = "stacked";
-	public static final String STYLE = "style";
-	public static final String STYLE_CLASS = "styleClass";
-	public static final String WIDTH = "width";
+	// Protected Enumerations
+	protected enum TabViewPropertyKeys {
+		clientKey,
+		height,
+		stacked,
+		style,
+		styleClass,
+		width
+	}
 
 	@Override
 	public String getClientKey() {
-		return (String) getStateHelper().eval(CLIENT_KEY, null);
+		return (String) getStateHelper().eval(TabViewPropertyKeys.clientKey, null);
 	}
 
 	@Override
 	public void setClientKey(String clientKey) {
-		getStateHelper().put(CLIENT_KEY, clientKey);
+		getStateHelper().put(TabViewPropertyKeys.clientKey, clientKey);
 	}
 
 	public String getHeight() {
-		return (String) getStateHelper().eval(HEIGHT, null);
+		return (String) getStateHelper().eval(TabViewPropertyKeys.height, null);
 	}
 
 	public void setHeight(String height) {
-		getStateHelper().put(HEIGHT, height);
+		getStateHelper().put(TabViewPropertyKeys.height, height);
 	}
 
 	public Boolean isStacked() {
-		return (Boolean) getStateHelper().eval(STACKED, null);
+		return (Boolean) getStateHelper().eval(TabViewPropertyKeys.stacked, null);
 	}
 
 	public void setStacked(Boolean stacked) {
-		getStateHelper().put(STACKED, stacked);
+		getStateHelper().put(TabViewPropertyKeys.stacked, stacked);
 	}
 
 	@Override
 	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
+		return (String) getStateHelper().eval(TabViewPropertyKeys.style, null);
 	}
 
 	@Override
 	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
+		getStateHelper().put(TabViewPropertyKeys.style, style);
 	}
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
+		return (String) getStateHelper().eval(TabViewPropertyKeys.styleClass, null);
 	}
 
 	@Override
 	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
+		getStateHelper().put(TabViewPropertyKeys.styleClass, styleClass);
 	}
 
 	public String getWidth() {
-		return (String) getStateHelper().eval(WIDTH, null);
+		return (String) getStateHelper().eval(TabViewPropertyKeys.width, null);
 	}
 
 	public void setWidth(String width) {
-		getStateHelper().put(WIDTH, width);
+		getStateHelper().put(TabViewPropertyKeys.width, width);
 	}
 }
 //J+

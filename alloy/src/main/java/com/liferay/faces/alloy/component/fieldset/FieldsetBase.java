@@ -26,136 +26,138 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class FieldsetBase extends UIPanel implements Styleable {
 
-	// Public Constants
-	public static final String DISABLED = "disabled";
-	public static final String LEGEND = "legend";
-	public static final String ONCLICK = "onclick";
-	public static final String ONDBLCLICK = "ondblclick";
-	public static final String ONKEYDOWN = "onkeydown";
-	public static final String ONKEYPRESS = "onkeypress";
-	public static final String ONKEYUP = "onkeyup";
-	public static final String ONMOUSEDOWN = "onmousedown";
-	public static final String ONMOUSEMOVE = "onmousemove";
-	public static final String ONMOUSEOUT = "onmouseout";
-	public static final String ONMOUSEOVER = "onmouseover";
-	public static final String ONMOUSEUP = "onmouseup";
-	public static final String STYLE = "style";
-	public static final String STYLE_CLASS = "styleClass";
+	// Protected Enumerations
+	protected enum FieldsetPropertyKeys {
+		disabled,
+		legend,
+		onclick,
+		ondblclick,
+		onkeydown,
+		onkeypress,
+		onkeyup,
+		onmousedown,
+		onmousemove,
+		onmouseout,
+		onmouseover,
+		onmouseup,
+		style,
+		styleClass
+	}
 
 	public boolean isDisabled() {
-		return (Boolean) getStateHelper().eval(DISABLED, false);
+		return (Boolean) getStateHelper().eval(FieldsetPropertyKeys.disabled, false);
 	}
 
 	public void setDisabled(boolean disabled) {
-		getStateHelper().put(DISABLED, disabled);
+		getStateHelper().put(FieldsetPropertyKeys.disabled, disabled);
 	}
 
 	public String getLegend() {
-		return (String) getStateHelper().eval(LEGEND, null);
+		return (String) getStateHelper().eval(FieldsetPropertyKeys.legend, null);
 	}
 
 	public void setLegend(String legend) {
-		getStateHelper().put(LEGEND, legend);
+		getStateHelper().put(FieldsetPropertyKeys.legend, legend);
 	}
 
 	public String getOnclick() {
-		return (String) getStateHelper().eval(ONCLICK, null);
+		return (String) getStateHelper().eval(FieldsetPropertyKeys.onclick, null);
 	}
 
 	public void setOnclick(String onclick) {
-		getStateHelper().put(ONCLICK, onclick);
+		getStateHelper().put(FieldsetPropertyKeys.onclick, onclick);
 	}
 
 	public String getOndblclick() {
-		return (String) getStateHelper().eval(ONDBLCLICK, null);
+		return (String) getStateHelper().eval(FieldsetPropertyKeys.ondblclick, null);
 	}
 
 	public void setOndblclick(String ondblclick) {
-		getStateHelper().put(ONDBLCLICK, ondblclick);
+		getStateHelper().put(FieldsetPropertyKeys.ondblclick, ondblclick);
 	}
 
 	public String getOnkeydown() {
-		return (String) getStateHelper().eval(ONKEYDOWN, null);
+		return (String) getStateHelper().eval(FieldsetPropertyKeys.onkeydown, null);
 	}
 
 	public void setOnkeydown(String onkeydown) {
-		getStateHelper().put(ONKEYDOWN, onkeydown);
+		getStateHelper().put(FieldsetPropertyKeys.onkeydown, onkeydown);
 	}
 
 	public String getOnkeypress() {
-		return (String) getStateHelper().eval(ONKEYPRESS, null);
+		return (String) getStateHelper().eval(FieldsetPropertyKeys.onkeypress, null);
 	}
 
 	public void setOnkeypress(String onkeypress) {
-		getStateHelper().put(ONKEYPRESS, onkeypress);
+		getStateHelper().put(FieldsetPropertyKeys.onkeypress, onkeypress);
 	}
 
 	public String getOnkeyup() {
-		return (String) getStateHelper().eval(ONKEYUP, null);
+		return (String) getStateHelper().eval(FieldsetPropertyKeys.onkeyup, null);
 	}
 
 	public void setOnkeyup(String onkeyup) {
-		getStateHelper().put(ONKEYUP, onkeyup);
+		getStateHelper().put(FieldsetPropertyKeys.onkeyup, onkeyup);
 	}
 
 	public String getOnmousedown() {
-		return (String) getStateHelper().eval(ONMOUSEDOWN, null);
+		return (String) getStateHelper().eval(FieldsetPropertyKeys.onmousedown, null);
 	}
 
 	public void setOnmousedown(String onmousedown) {
-		getStateHelper().put(ONMOUSEDOWN, onmousedown);
+		getStateHelper().put(FieldsetPropertyKeys.onmousedown, onmousedown);
 	}
 
 	public String getOnmousemove() {
-		return (String) getStateHelper().eval(ONMOUSEMOVE, null);
+		return (String) getStateHelper().eval(FieldsetPropertyKeys.onmousemove, null);
 	}
 
 	public void setOnmousemove(String onmousemove) {
-		getStateHelper().put(ONMOUSEMOVE, onmousemove);
+		getStateHelper().put(FieldsetPropertyKeys.onmousemove, onmousemove);
 	}
 
 	public String getOnmouseout() {
-		return (String) getStateHelper().eval(ONMOUSEOUT, null);
+		return (String) getStateHelper().eval(FieldsetPropertyKeys.onmouseout, null);
 	}
 
 	public void setOnmouseout(String onmouseout) {
-		getStateHelper().put(ONMOUSEOUT, onmouseout);
+		getStateHelper().put(FieldsetPropertyKeys.onmouseout, onmouseout);
 	}
 
 	public String getOnmouseover() {
-		return (String) getStateHelper().eval(ONMOUSEOVER, null);
+		return (String) getStateHelper().eval(FieldsetPropertyKeys.onmouseover, null);
 	}
 
 	public void setOnmouseover(String onmouseover) {
-		getStateHelper().put(ONMOUSEOVER, onmouseover);
+		getStateHelper().put(FieldsetPropertyKeys.onmouseover, onmouseover);
 	}
 
 	public String getOnmouseup() {
-		return (String) getStateHelper().eval(ONMOUSEUP, null);
+		return (String) getStateHelper().eval(FieldsetPropertyKeys.onmouseup, null);
 	}
 
 	public void setOnmouseup(String onmouseup) {
-		getStateHelper().put(ONMOUSEUP, onmouseup);
+		getStateHelper().put(FieldsetPropertyKeys.onmouseup, onmouseup);
 	}
 
 	@Override
 	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
+		return (String) getStateHelper().eval(FieldsetPropertyKeys.style, null);
 	}
 
 	@Override
 	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
+		getStateHelper().put(FieldsetPropertyKeys.style, style);
 	}
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
+		return (String) getStateHelper().eval(FieldsetPropertyKeys.styleClass, null);
 	}
 
 	@Override
 	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
+		getStateHelper().put(FieldsetPropertyKeys.styleClass, styleClass);
 	}
 }
 //J+

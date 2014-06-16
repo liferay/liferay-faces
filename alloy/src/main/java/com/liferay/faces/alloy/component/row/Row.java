@@ -36,13 +36,13 @@ public class Row extends RowBase {
 
 	@Override
 	public Boolean isFluid() {
-		return (Boolean) getStateHelper().eval(FLUID, true);
+		return (Boolean) getStateHelper().eval(RowPropertyKeys.fluid, true);
 	}
 
 	@Override
 	public String getStyleClass() {
 
-		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
+		String styleClass = (String) getStateHelper().eval(RowPropertyKeys.styleClass, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}

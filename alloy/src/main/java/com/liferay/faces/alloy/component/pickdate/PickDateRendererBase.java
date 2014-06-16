@@ -29,13 +29,26 @@ import com.liferay.faces.alloy.renderkit.AlloyRendererBase;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class PickDateRendererBase extends AlloyRendererBase {
 
+	// Protected Constants
+	protected static final String AUTO_HIDE = "autoHide";
+	protected static final String CLIENT_KEY = "clientKey";
+	protected static final String DATE_SEPARATOR = "dateSeparator";
+	protected static final String LOCALE = "locale";
+	protected static final String MASK = "mask";
+	protected static final String MAXIMUM_DATE = "maximumDate";
+	protected static final String MINIMUM_DATE = "minimumDate";
+	protected static final String PANES = "panes";
+	protected static final String SELECTION_MODE = "selectionMode";
+	protected static final String STYLE = "style";
+	protected static final String STYLE_CLASS = "styleClass";
+	protected static final String TRIGGER = "trigger";
+	protected static final String Z_INDEX = "zIndex";
+
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "DatePicker";
 	private static final String ALLOY_MODULE_NAME = "aui-datepicker";
-	protected static final String MASK = "mask";
-	protected static final String TRIGGER = "trigger";
 
-	// Protected Constants
+	// Modules
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
 	@Override
@@ -98,7 +111,7 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 	}
 
 	protected void encodeAutoHide(ResponseWriter responseWriter, PickDate pickDate, Boolean autoHide, boolean first) throws IOException {
-		encodeBoolean(responseWriter, PickDate.AUTO_HIDE, autoHide, first);
+		encodeBoolean(responseWriter, AUTO_HIDE, autoHide, first);
 	}
 
 	protected void encodeMask(ResponseWriter responseWriter, PickDate pickDate, String datePattern, boolean first) throws IOException {
@@ -106,7 +119,7 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 	}
 
 	protected void encodeDateSeparator(ResponseWriter responseWriter, PickDate pickDate, String dateSeparator, boolean first) throws IOException {
-		encodeString(responseWriter, PickDate.DATE_SEPARATOR, dateSeparator, first);
+		encodeString(responseWriter, DATE_SEPARATOR, dateSeparator, first);
 	}
 
 	protected void encodeTrigger(ResponseWriter responseWriter, PickDate pickDate, String for_, boolean first) throws IOException {
@@ -114,7 +127,7 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 	}
 
 	protected void encodePanes(ResponseWriter responseWriter, PickDate pickDate, Integer panes, boolean first) throws IOException {
-		encodeInteger(responseWriter, PickDate.PANES, panes, first);
+		encodeInteger(responseWriter, PANES, panes, first);
 	}
 
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, PickDate pickDate, boolean first) throws IOException {

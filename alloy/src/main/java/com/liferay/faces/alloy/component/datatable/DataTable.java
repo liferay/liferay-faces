@@ -19,7 +19,6 @@ import javax.faces.component.FacesComponent;
 import javax.faces.component.UIColumn;
 import javax.faces.component.UIComponent;
 
-import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -29,7 +28,7 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = DataTable.COMPONENT_TYPE)
-public class DataTable extends DataTableBase implements ClientComponent {
+public class DataTable extends DataTableBase {
 
 	// Public Constants
 	public static final String COLUMN_CLASSES = "columnClasses";
@@ -49,16 +48,6 @@ public class DataTable extends DataTableBase implements ClientComponent {
 	public DataTable() {
 		super();
 		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public String getClientKey() {
-		return (String) getStateHelper().eval(CLIENT_KEY, null);
-	}
-
-	@Override
-	public void setClientKey(String clientKey) {
-		getStateHelper().put(CLIENT_KEY, clientKey);
 	}
 
 	protected int getTotalChildColumns() {
@@ -127,21 +116,11 @@ public class DataTable extends DataTableBase implements ClientComponent {
 	}
 
 	@Override
-	public void setColumnClasses(String columnClasses) {
-		getStateHelper().put(COLUMN_CLASSES, columnClasses);
-	}
-
-	@Override
 	public String getHeaderClass() {
 
-		String headerClass = (String) getStateHelper().eval(HEADER_CLASS, null);
+		String headerClass = super.getHeaderClass();
 
 		return ComponentUtil.concatCssClasses(headerClass, YUI3_DATATABLE_HEADER);
-	}
-
-	@Override
-	public void setHeaderClass(String headerClass) {
-		getStateHelper().put(HEADER_CLASS, headerClass);
 	}
 
 	@Override
@@ -182,11 +161,6 @@ public class DataTable extends DataTableBase implements ClientComponent {
 		}
 
 		return rowClasses;
-	}
-
-	@Override
-	public void setRowClasses(String rowClasses) {
-		getStateHelper().put(ROW_CLASSES, rowClasses);
 	}
 
 	@Override

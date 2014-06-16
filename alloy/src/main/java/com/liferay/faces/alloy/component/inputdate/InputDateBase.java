@@ -26,69 +26,71 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class InputDateBase extends InputDateTimeBase implements Styleable {
 
-	// Public Constants
-	public static final String AUTO_HIDE = "autoHide";
-	public static final String DATE_PATTERN = "datePattern";
-	public static final String LOCALE = "locale";
-	public static final String MAXIMUM_DATE = "maximumDate";
-	public static final String MINIMUM_DATE = "minimumDate";
-	public static final String PANES = "panes";
-	public static final String Z_INDEX = "zIndex";
+	// Protected Enumerations
+	protected enum InputDatePropertyKeys {
+		autoHide,
+		datePattern,
+		locale,
+		maximumDate,
+		minimumDate,
+		panes,
+		zIndex
+	}
 
 	public Boolean isAutoHide() {
-		return (Boolean) getStateHelper().eval(AUTO_HIDE, null);
+		return (Boolean) getStateHelper().eval(InputDatePropertyKeys.autoHide, null);
 	}
 
 	public void setAutoHide(Boolean autoHide) {
-		getStateHelper().put(AUTO_HIDE, autoHide);
+		getStateHelper().put(InputDatePropertyKeys.autoHide, autoHide);
 	}
 
 	public String getDatePattern() {
-		return (String) getStateHelper().eval(DATE_PATTERN, null);
+		return (String) getStateHelper().eval(InputDatePropertyKeys.datePattern, null);
 	}
 
 	public void setDatePattern(String datePattern) {
-		getStateHelper().put(DATE_PATTERN, datePattern);
+		getStateHelper().put(InputDatePropertyKeys.datePattern, datePattern);
 	}
 
 	public Object getLocale() {
-		return (Object) getStateHelper().eval(LOCALE, null);
+		return (Object) getStateHelper().eval(InputDatePropertyKeys.locale, null);
 	}
 
 	public void setLocale(Object locale) {
-		getStateHelper().put(LOCALE, locale);
+		getStateHelper().put(InputDatePropertyKeys.locale, locale);
 	}
 
 	public Object getMaximumDate() {
-		return (Object) getStateHelper().eval(MAXIMUM_DATE, null);
+		return (Object) getStateHelper().eval(InputDatePropertyKeys.maximumDate, null);
 	}
 
 	public void setMaximumDate(Object maximumDate) {
-		getStateHelper().put(MAXIMUM_DATE, maximumDate);
+		getStateHelper().put(InputDatePropertyKeys.maximumDate, maximumDate);
 	}
 
 	public Object getMinimumDate() {
-		return (Object) getStateHelper().eval(MINIMUM_DATE, null);
+		return (Object) getStateHelper().eval(InputDatePropertyKeys.minimumDate, null);
 	}
 
 	public void setMinimumDate(Object minimumDate) {
-		getStateHelper().put(MINIMUM_DATE, minimumDate);
+		getStateHelper().put(InputDatePropertyKeys.minimumDate, minimumDate);
 	}
 
 	public Integer getPanes() {
-		return (Integer) getStateHelper().eval(PANES, null);
+		return (Integer) getStateHelper().eval(InputDatePropertyKeys.panes, null);
 	}
 
 	public void setPanes(Integer panes) {
-		getStateHelper().put(PANES, panes);
+		getStateHelper().put(InputDatePropertyKeys.panes, panes);
 	}
 
 	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(Z_INDEX, null);
+		return (Integer) getStateHelper().eval(InputDatePropertyKeys.zIndex, null);
 	}
 
 	public void setzIndex(Integer zIndex) {
-		getStateHelper().put(Z_INDEX, zIndex);
+		getStateHelper().put(InputDatePropertyKeys.zIndex, zIndex);
 	}
 }
 //J+

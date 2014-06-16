@@ -27,19 +27,19 @@ import com.liferay.faces.util.component.ClientComponent;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class SelectStarRatingBase extends SelectOneRadio implements Styleable, ClientComponent {
 
-	// Public Constants
-	public static final String CLIENT_KEY = "clientKey";
-	public static final String LABEL = "label";
-	public static final String VALUE = "value";
+	// Protected Enumerations
+	protected enum SelectStarRatingPropertyKeys {
+		clientKey
+	}
 
 	@Override
 	public String getClientKey() {
-		return (String) getStateHelper().eval(CLIENT_KEY, null);
+		return (String) getStateHelper().eval(SelectStarRatingPropertyKeys.clientKey, null);
 	}
 
 	@Override
 	public void setClientKey(String clientKey) {
-		getStateHelper().put(CLIENT_KEY, clientKey);
+		getStateHelper().put(SelectStarRatingPropertyKeys.clientKey, clientKey);
 	}
 }
 //J+

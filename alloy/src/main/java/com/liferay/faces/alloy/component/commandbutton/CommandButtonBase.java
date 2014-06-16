@@ -26,33 +26,35 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class CommandButtonBase extends HtmlCommandButton implements Styleable {
 
-	// Public Constants
-	public static final String AUTOFOCUS = "autofocus";
-	public static final String DISABLED = "disabled";
-	public static final String TYPE = "type";
+	// Protected Enumerations
+	protected enum CommandButtonPropertyKeys {
+		autofocus,
+		disabled,
+		type
+	}
 
 	public Boolean isAutofocus() {
-		return (Boolean) getStateHelper().eval(AUTOFOCUS, null);
+		return (Boolean) getStateHelper().eval(CommandButtonPropertyKeys.autofocus, null);
 	}
 
 	public void setAutofocus(Boolean autofocus) {
-		getStateHelper().put(AUTOFOCUS, autofocus);
+		getStateHelper().put(CommandButtonPropertyKeys.autofocus, autofocus);
 	}
 
 	public boolean isDisabled() {
-		return (Boolean) getStateHelper().eval(DISABLED, false);
+		return (Boolean) getStateHelper().eval(CommandButtonPropertyKeys.disabled, false);
 	}
 
 	public void setDisabled(boolean disabled) {
-		getStateHelper().put(DISABLED, disabled);
+		getStateHelper().put(CommandButtonPropertyKeys.disabled, disabled);
 	}
 
 	public String getType() {
-		return (String) getStateHelper().eval(TYPE, null);
+		return (String) getStateHelper().eval(CommandButtonPropertyKeys.type, null);
 	}
 
 	public void setType(String type) {
-		getStateHelper().put(TYPE, type);
+		getStateHelper().put(CommandButtonPropertyKeys.type, type);
 	}
 }
 //J+

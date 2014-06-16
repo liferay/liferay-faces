@@ -26,15 +26,17 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class FieldBase extends PanelGroup implements Styleable {
 
-	// Public Constants
-	public static final String LABEL = "label";
+	// Protected Enumerations
+	protected enum FieldPropertyKeys {
+		label
+	}
 
 	public String getLabel() {
-		return (String) getStateHelper().eval(LABEL, null);
+		return (String) getStateHelper().eval(FieldPropertyKeys.label, null);
 	}
 
 	public void setLabel(String label) {
-		getStateHelper().put(LABEL, label);
+		getStateHelper().put(FieldPropertyKeys.label, label);
 	}
 }
 //J+

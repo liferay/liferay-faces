@@ -26,6 +26,9 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class SelectManyListboxBase extends HtmlSelectManyListbox implements Styleable {
 
-	// Public Constants
+	// Protected Enumerations
+	protected enum SelectManyListboxPropertyKeys {
+
+	}
 }
 //J+

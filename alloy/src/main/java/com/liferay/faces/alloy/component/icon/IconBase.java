@@ -26,37 +26,39 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class IconBase extends UIComponentBase implements Styleable {
 
-	// Public Constants
-	public static final String NAME = "name";
-	public static final String STYLE = "style";
-	public static final String STYLE_CLASS = "styleClass";
+	// Protected Enumerations
+	protected enum IconPropertyKeys {
+		name,
+		style,
+		styleClass
+	}
 
 	public String getName() {
-		return (String) getStateHelper().eval(NAME, null);
+		return (String) getStateHelper().eval(IconPropertyKeys.name, null);
 	}
 
 	public void setName(String name) {
-		getStateHelper().put(NAME, name);
+		getStateHelper().put(IconPropertyKeys.name, name);
 	}
 
 	@Override
 	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
+		return (String) getStateHelper().eval(IconPropertyKeys.style, null);
 	}
 
 	@Override
 	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
+		getStateHelper().put(IconPropertyKeys.style, style);
 	}
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
+		return (String) getStateHelper().eval(IconPropertyKeys.styleClass, null);
 	}
 
 	@Override
 	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
+		getStateHelper().put(IconPropertyKeys.styleClass, styleClass);
 	}
 }
 //J+

@@ -15,14 +15,12 @@ package com.liferay.faces.alloy.component.selectonemenu;
 
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.util.render.DelegatingRendererBase;
-
 
 /**
  * @author  Vernon Singleton
  */
 @FacesRenderer(componentFamily = SelectOneMenu.COMPONENT_FAMILY, rendererType = SelectOneMenu.RENDERER_TYPE)
-public class SelectOneMenuRenderer extends DelegatingRendererBase {
+public class SelectOneMenuRenderer extends SelectOneMenuRendererBase {
 
 	@Override
 	public String getDelegateComponentFamily() {

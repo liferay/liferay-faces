@@ -27,73 +27,73 @@ import com.liferay.faces.util.component.ClientComponent;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class OutputTooltipBase extends OutputText implements Styleable, ClientComponent {
 
-	// Public Constants
-	public static final String AUTO_SHOW = "autoShow";
-	public static final String CLIENT_KEY = "clientKey";
-	public static final String FOR = "for";
-	public static final String HEADER_TEXT = "headerText";
-	public static final String OPACITY = "opacity";
-	public static final String POSITION = "position";
-	public static final String STYLE_CLASS = "styleClass";
-	public static final String VALUE = "value";
-	public static final String Z_INDEX = "zIndex";
+	// Protected Enumerations
+	protected enum OutputTooltipPropertyKeys {
+		autoShow,
+		clientKey,
+		for_,
+		headerText,
+		opacity,
+		position,
+		zIndex
+	}
 
 	public Boolean isAutoShow() {
-		return (Boolean) getStateHelper().eval(AUTO_SHOW, null);
+		return (Boolean) getStateHelper().eval(OutputTooltipPropertyKeys.autoShow, null);
 	}
 
 	public void setAutoShow(Boolean autoShow) {
-		getStateHelper().put(AUTO_SHOW, autoShow);
+		getStateHelper().put(OutputTooltipPropertyKeys.autoShow, autoShow);
 	}
 
 	@Override
 	public String getClientKey() {
-		return (String) getStateHelper().eval(CLIENT_KEY, null);
+		return (String) getStateHelper().eval(OutputTooltipPropertyKeys.clientKey, null);
 	}
 
 	@Override
 	public void setClientKey(String clientKey) {
-		getStateHelper().put(CLIENT_KEY, clientKey);
+		getStateHelper().put(OutputTooltipPropertyKeys.clientKey, clientKey);
 	}
 
 	public String getFor() {
-		return (String) getStateHelper().eval(FOR, null);
+		return (String) getStateHelper().eval(OutputTooltipPropertyKeys.for_, null);
 	}
 
 	public void setFor(String for_) {
-		getStateHelper().put(FOR, for_);
+		getStateHelper().put(OutputTooltipPropertyKeys.for_, for_);
 	}
 
 	public String getHeaderText() {
-		return (String) getStateHelper().eval(HEADER_TEXT, null);
+		return (String) getStateHelper().eval(OutputTooltipPropertyKeys.headerText, null);
 	}
 
 	public void setHeaderText(String headerText) {
-		getStateHelper().put(HEADER_TEXT, headerText);
+		getStateHelper().put(OutputTooltipPropertyKeys.headerText, headerText);
 	}
 
 	public String getOpacity() {
-		return (String) getStateHelper().eval(OPACITY, null);
+		return (String) getStateHelper().eval(OutputTooltipPropertyKeys.opacity, null);
 	}
 
 	public void setOpacity(String opacity) {
-		getStateHelper().put(OPACITY, opacity);
+		getStateHelper().put(OutputTooltipPropertyKeys.opacity, opacity);
 	}
 
 	public String getPosition() {
-		return (String) getStateHelper().eval(POSITION, null);
+		return (String) getStateHelper().eval(OutputTooltipPropertyKeys.position, null);
 	}
 
 	public void setPosition(String position) {
-		getStateHelper().put(POSITION, position);
+		getStateHelper().put(OutputTooltipPropertyKeys.position, position);
 	}
 
 	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(Z_INDEX, null);
+		return (Integer) getStateHelper().eval(OutputTooltipPropertyKeys.zIndex, null);
 	}
 
 	public void setzIndex(Integer zIndex) {
-		getStateHelper().put(Z_INDEX, zIndex);
+		getStateHelper().put(OutputTooltipPropertyKeys.zIndex, zIndex);
 	}
 }
 //J+
