@@ -90,7 +90,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
 
 			// If autoShow=false, then out some JavaScript that will cause the dialog to popup when the trigger is
 			// clicked.
-			if (!overlay.isAutoShow()) {
+			if (overlay instanceof Dialog) {
 				String clientVarName = ComponentUtil.getClientVarName(facesContext, overlay);
 				String clientKey = overlay.getClientKey();
 

@@ -81,6 +81,6 @@ public class Popover extends PopoverBase implements Overlay {
 
 	@Override
 	public Boolean isAutoShow() {
-		return (Boolean) getStateHelper().eval(AUTO_SHOW, false);
+		return (Boolean) getStateHelper().eval(AUTO_SHOW, true);
 	}
 }
