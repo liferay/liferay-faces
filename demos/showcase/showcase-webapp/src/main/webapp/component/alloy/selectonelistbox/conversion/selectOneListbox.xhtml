@@ -8,12 +8,12 @@
 			<showcase:example description="#{i18n['conversion-to-a-date-using-f-convertdatetime']}">
 				<h:outputLabel styleClass="alloy-output-label" value="#{i18n['when-was-the-us-declaration-of-independence-signed']}" />
 				<alloy:messages globalOnly="true" styleClass="feedback" />
-				<alloy:selectOneRadio value="#{selectOneModelBean.date}">
+				<alloy:selectOneListbox value="#{selectOneModelBean.date}">
 					<f:convertDateTime pattern="MM/dd/yyyy G" />
 					<f:selectItem itemLabel="October 31, 1517 AD" itemValue="10/31/1517 AD" />
 					<f:selectItem itemLabel="July 4, 1776 AD" itemValue="07/04/1776 AD" />
 					<f:selectItem itemLabel="July 14, 1789 AD" itemValue="07/14/1789 AD" />
-				</alloy:selectOneRadio>
+				</alloy:selectOneListbox>
 				<hr />
 				<alloy:commandButton action="#{selectOneBackingBean.submitAnswer}" value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />

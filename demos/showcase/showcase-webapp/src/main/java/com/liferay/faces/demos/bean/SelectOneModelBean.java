@@ -29,7 +29,7 @@ import com.liferay.faces.demos.service.LiferayBenefitService;
  */
 @ManagedBean
 @RequestScoped
-public class SelectOneRadioModelBean {
+public class SelectOneModelBean {
 
 	private Long favoriteId;
 	private Long benefitId = 3L;

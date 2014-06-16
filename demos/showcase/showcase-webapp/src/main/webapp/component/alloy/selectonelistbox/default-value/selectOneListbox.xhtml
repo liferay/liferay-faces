@@ -7,14 +7,14 @@
 		<h:form>
 			<showcase:example>
 				<h:outputLabel styleClass="alloy-output-label" value="#{i18n['favorite-liferay-benefit']}" />
-				<alloy:selectOneRadio value="#{selectOneModelBean.benefitId}">
+				<alloy:selectOneListbox value="#{selectOneModelBean.benefitId}">
 					<f:converter converterId="javax.faces.Long" />
 					<f:selectItem itemLabel="Compatible" itemValue="1" />
 					<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
 					<f:selectItem itemLabel="Powerful Integration" itemValue="3" />
 					<f:selectItem itemLabel="Lightweight" itemValue="4" />
 					<f:selectItem itemLabel="Open Source" itemValue="5" />
-				</alloy:selectOneRadio>
+				</alloy:selectOneListbox>
 				<hr />
 				<alloy:commandButton action="#{selectOneBackingBean.submit}" value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />

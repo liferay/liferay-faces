@@ -7,7 +7,7 @@
 		<h:form>
 			<showcase:example>
 				<h:outputLabel styleClass="alloy-output-label" value="#{i18n['favorite-liferay-benefit']}" />
-				<alloy:selectOneRadio value="#{selectOneRadioModelBean.favoriteId}">
+				<alloy:selectOneRadio value="#{selectOneModelBean.favoriteId}">
 					<f:selectItem itemLabel="Compatible" itemValue="1" />
 					<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
 					<f:selectItem itemLabel="Powerful Integration" itemValue="3" />
@@ -17,7 +17,7 @@
 				</alloy:selectOneRadio>
 			</showcase:example>
 			<showcase:outputModel>
-				<alloy:outputText value="#{selectOneRadioModelBean.favoriteId}" />
+				<alloy:outputText value="#{selectOneModelBean.favoriteId}" />
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>

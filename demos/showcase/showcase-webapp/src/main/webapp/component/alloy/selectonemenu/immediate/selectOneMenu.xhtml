@@ -10,14 +10,14 @@
 				longDescription="true" number="1">
 				<h:outputLabel styleClass="alloy-output-label" value="#{i18n['favorite-liferay-benefit']}" />
 				<alloy:messages globalOnly="true" styleClass="feedback" />
-				<alloy:selectOneRadio immediate="true" layout="pageDirection" value="#{selectOneModelBean.favoriteId}"
+				<alloy:selectOneMenu immediate="true" layout="pageDirection" value="#{selectOneModelBean.favoriteId}"
 					valueChangeListener="#{selectOneBackingBean.valueChangeListener}">
 					<f:selectItem itemLabel="Compatible" itemValue="1" />
 					<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
 					<f:selectItem itemLabel="Powerful Integration" itemValue="3" />
 					<f:selectItem itemLabel="Lightweight" itemValue="4" />
 					<f:selectItem itemLabel="Open Source" itemValue="5" />
-				</alloy:selectOneRadio>
+				</alloy:selectOneMenu>
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
@@ -36,14 +36,14 @@
 				longDescription="true" number="2">
 				<h:outputLabel styleClass="alloy-output-label" value="#{i18n['favorite-liferay-benefit']}" />
 				<alloy:messages globalOnly="true" styleClass="feedback" />
-				<alloy:selectOneRadio layout="pageDirection" value="#{selectOneModelBean.favoriteId}"
+				<alloy:selectOneMenu layout="pageDirection" value="#{selectOneModelBean.favoriteId}"
 					valueChangeListener="#{selectOneBackingBean.valueChangeListener}">
 					<f:selectItem itemLabel="Compatible" itemValue="1" />
 					<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
 					<f:selectItem itemLabel="Powerful Integration" itemValue="3" />
 					<f:selectItem itemLabel="Lightweight" itemValue="4" />
 					<f:selectItem itemLabel="Open Source" itemValue="5" />
-				</alloy:selectOneRadio>
+				</alloy:selectOneMenu>
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />

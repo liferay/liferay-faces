@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.selectoneradio;
+package com.liferay.faces.alloy.component.selectonelistbox;
 
 import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
@@ -24,18 +24,18 @@ import com.liferay.faces.util.component.ComponentUtil;
 /**
  * @author  Vernon Singleton
  */
-@FacesComponent(value = SelectOneRadio.COMPONENT_TYPE)
-public class SelectOneRadio extends SelectOneRadioBase {
+@FacesComponent(value = SelectOneListbox.COMPONENT_TYPE)
+public class SelectOneListbox extends SelectOneListboxBase {
 
 	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio";
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectonelistbox.SelectOneListbox";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Radio";
+	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Listbox";
 	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.selectoneradio.SelectOneRadioRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-select-one-radio radio";
+		"com.liferay.faces.alloy.component.selectonelistbox.SelectOneListboxRenderer";
+	public static final String STYLE_CLASS_NAME = "alloy-select-one-listbox";
 
-	public SelectOneRadio() {
+	public SelectOneListbox() {
 		super();
 		setRendererType(RENDERER_TYPE);
 	}

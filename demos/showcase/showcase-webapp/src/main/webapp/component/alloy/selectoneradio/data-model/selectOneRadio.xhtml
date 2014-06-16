@@ -7,17 +7,17 @@
 		<h:form>
 			<showcase:example>
 				<h:outputLabel styleClass="alloy-output-label" value="#{i18n['favorite-liferay-benefit']}" />
-				<alloy:selectOneRadio layout="lineDirection" value="#{selectOneRadioModelBean.favoriteId}">
-					<f:selectItems value="#{selectOneRadioModelBean.liferayBenefits}" var="benefit" itemValue="#{benefit.id}"
+				<alloy:selectOneRadio layout="lineDirection" value="#{selectOneModelBean.favoriteId}">
+					<f:selectItems value="#{selectOneModelBean.liferayBenefits}" var="benefit" itemValue="#{benefit.id}"
 						itemLabel="#{benefit.label}" />
 				</alloy:selectOneRadio>
 				<hr />
-				<alloy:commandButton action="#{selectOneRadioBackingBean.submit}" value="#{i18n['submit']}">
+				<alloy:commandButton action="#{selectOneBackingBean.submit}" value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
 				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
-				<alloy:outputText id="modelValue" value="#{selectOneRadioModelBean.favoriteId}" />
+				<alloy:outputText id="modelValue" value="#{selectOneModelBean.favoriteId}" />
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>
