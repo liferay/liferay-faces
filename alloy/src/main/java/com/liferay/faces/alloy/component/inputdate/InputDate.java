@@ -171,6 +171,8 @@ public class InputDate extends InputDateBase {
 	@Override
 	public String getStyleClass() {
 
+		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
