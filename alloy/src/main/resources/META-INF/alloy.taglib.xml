@@ -635,6 +635,12 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
+			<name>clientKey</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[List of CSS class names (separated by commas) that are to be rendered within the class attribute of the table's <code>&lt;td&gt;</code> elements.]]></description>
 			<name>columnClasses</name>
 			<required>false</required>

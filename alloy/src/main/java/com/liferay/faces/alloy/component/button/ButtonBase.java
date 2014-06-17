@@ -26,33 +26,35 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class ButtonBase extends HtmlOutcomeTargetButton implements Styleable {
 
-	// Public Constants
-	public static final String AUTOFOCUS = "autofocus";
-	public static final String DISABLED = "disabled";
-	public static final String TYPE = "type";
+	// Protected Enumerations
+	protected enum ButtonPropertyKeys {
+		autofocus,
+		disabled,
+		type
+	}
 
 	public Boolean isAutofocus() {
-		return (Boolean) getStateHelper().eval(AUTOFOCUS, null);
+		return (Boolean) getStateHelper().eval(ButtonPropertyKeys.autofocus, null);
 	}
 
 	public void setAutofocus(Boolean autofocus) {
-		getStateHelper().put(AUTOFOCUS, autofocus);
+		getStateHelper().put(ButtonPropertyKeys.autofocus, autofocus);
 	}
 
 	public boolean isDisabled() {
-		return (Boolean) getStateHelper().eval(DISABLED, false);
+		return (Boolean) getStateHelper().eval(ButtonPropertyKeys.disabled, false);
 	}
 
 	public void setDisabled(boolean disabled) {
-		getStateHelper().put(DISABLED, disabled);
+		getStateHelper().put(ButtonPropertyKeys.disabled, disabled);
 	}
 
 	public String getType() {
-		return (String) getStateHelper().eval(TYPE, null);
+		return (String) getStateHelper().eval(ButtonPropertyKeys.type, null);
 	}
 
 	public void setType(String type) {
-		getStateHelper().put(TYPE, type);
+		getStateHelper().put(ButtonPropertyKeys.type, type);
 	}
 }
 //J+

@@ -29,15 +29,22 @@ import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererBase {
 
+	// Protected Constants
+	protected static final String CLIENT_KEY = "clientKey";
+	protected static final String CSS_CLASS = "cssClass";
+	protected static final String HEADER_CONTENT = "headerContent";
+	protected static final String OPACITY = "opacity";
+	protected static final String POSITION = "position";
+	protected static final String TRIGGER = "trigger";
+	protected static final String VALUE = "value";
+	protected static final String VISIBLE = "visible";
+	protected static final String Z_INDEX = "zIndex";
+
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "Tooltip";
 	private static final String ALLOY_MODULE_NAME = "aui-tooltip";
-	protected static final String CSS_CLASS = "cssClass";
-	protected static final String HEADER_CONTENT = "headerContent";
-	protected static final String TRIGGER = "trigger";
-	protected static final String VISIBLE = "visible";
 
-	// Protected Constants
+	// Modules
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
 	@Override
@@ -136,11 +143,11 @@ public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererB
 	}
 
 	protected void encodeOpacity(ResponseWriter responseWriter, OutputTooltip outputTooltip, String opacity, boolean first) throws IOException {
-		encodeString(responseWriter, OutputTooltip.OPACITY, opacity, first);
+		encodeString(responseWriter, OPACITY, opacity, first);
 	}
 
 	protected void encodePosition(ResponseWriter responseWriter, OutputTooltip outputTooltip, String position, boolean first) throws IOException {
-		encodeString(responseWriter, OutputTooltip.POSITION, position, first);
+		encodeString(responseWriter, POSITION, position, first);
 	}
 
 	protected void encodeCssClass(ResponseWriter responseWriter, OutputTooltip outputTooltip, String styleClass, boolean first) throws IOException {
@@ -148,11 +155,11 @@ public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererB
 	}
 
 	protected void encodeValue(ResponseWriter responseWriter, OutputTooltip outputTooltip, Object value, boolean first) throws IOException {
-		encodeString(responseWriter, OutputTooltip.VALUE, value, first);
+		encodeString(responseWriter, VALUE, value, first);
 	}
 
 	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, Integer zIndex, boolean first) throws IOException {
-		encodeInteger(responseWriter, OutputTooltip.Z_INDEX, zIndex, first);
+		encodeInteger(responseWriter, Z_INDEX, zIndex, first);
 	}
 
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, OutputTooltip outputTooltip, boolean first) throws IOException {

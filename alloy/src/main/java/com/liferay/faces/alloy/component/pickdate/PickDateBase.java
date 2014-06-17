@@ -27,129 +27,131 @@ import com.liferay.faces.util.component.ClientComponent;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class PickDateBase extends UIComponentBase implements Styleable, ClientComponent {
 
-	// Public Constants
-	public static final String AUTO_HIDE = "autoHide";
-	public static final String CLIENT_KEY = "clientKey";
-	public static final String DATE_PATTERN = "datePattern";
-	public static final String DATE_SEPARATOR = "dateSeparator";
-	public static final String FOR = "for";
-	public static final String LOCALE = "locale";
-	public static final String MAXIMUM_DATE = "maximumDate";
-	public static final String MINIMUM_DATE = "minimumDate";
-	public static final String PANES = "panes";
-	public static final String SELECTION_MODE = "selectionMode";
-	public static final String STYLE = "style";
-	public static final String STYLE_CLASS = "styleClass";
-	public static final String Z_INDEX = "zIndex";
+	// Protected Enumerations
+	protected enum PickDatePropertyKeys {
+		autoHide,
+		clientKey,
+		datePattern,
+		dateSeparator,
+		for_,
+		locale,
+		maximumDate,
+		minimumDate,
+		panes,
+		selectionMode,
+		style,
+		styleClass,
+		zIndex
+	}
 
 	public Boolean isAutoHide() {
-		return (Boolean) getStateHelper().eval(AUTO_HIDE, null);
+		return (Boolean) getStateHelper().eval(PickDatePropertyKeys.autoHide, null);
 	}
 
 	public void setAutoHide(Boolean autoHide) {
-		getStateHelper().put(AUTO_HIDE, autoHide);
+		getStateHelper().put(PickDatePropertyKeys.autoHide, autoHide);
 	}
 
 	@Override
 	public String getClientKey() {
-		return (String) getStateHelper().eval(CLIENT_KEY, null);
+		return (String) getStateHelper().eval(PickDatePropertyKeys.clientKey, null);
 	}
 
 	@Override
 	public void setClientKey(String clientKey) {
-		getStateHelper().put(CLIENT_KEY, clientKey);
+		getStateHelper().put(PickDatePropertyKeys.clientKey, clientKey);
 	}
 
 	public String getDatePattern() {
-		return (String) getStateHelper().eval(DATE_PATTERN, null);
+		return (String) getStateHelper().eval(PickDatePropertyKeys.datePattern, null);
 	}
 
 	public void setDatePattern(String datePattern) {
-		getStateHelper().put(DATE_PATTERN, datePattern);
+		getStateHelper().put(PickDatePropertyKeys.datePattern, datePattern);
 	}
 
 	public String getDateSeparator() {
-		return (String) getStateHelper().eval(DATE_SEPARATOR, null);
+		return (String) getStateHelper().eval(PickDatePropertyKeys.dateSeparator, null);
 	}
 
 	public void setDateSeparator(String dateSeparator) {
-		getStateHelper().put(DATE_SEPARATOR, dateSeparator);
+		getStateHelper().put(PickDatePropertyKeys.dateSeparator, dateSeparator);
 	}
 
 	public String getFor() {
-		return (String) getStateHelper().eval(FOR, null);
+		return (String) getStateHelper().eval(PickDatePropertyKeys.for_, null);
 	}
 
 	public void setFor(String for_) {
-		getStateHelper().put(FOR, for_);
+		getStateHelper().put(PickDatePropertyKeys.for_, for_);
 	}
 
 	public Object getLocale() {
-		return (Object) getStateHelper().eval(LOCALE, null);
+		return (Object) getStateHelper().eval(PickDatePropertyKeys.locale, null);
 	}
 
 	public void setLocale(Object locale) {
-		getStateHelper().put(LOCALE, locale);
+		getStateHelper().put(PickDatePropertyKeys.locale, locale);
 	}
 
 	public Object getMaximumDate() {
-		return (Object) getStateHelper().eval(MAXIMUM_DATE, null);
+		return (Object) getStateHelper().eval(PickDatePropertyKeys.maximumDate, null);
 	}
 
 	public void setMaximumDate(Object maximumDate) {
-		getStateHelper().put(MAXIMUM_DATE, maximumDate);
+		getStateHelper().put(PickDatePropertyKeys.maximumDate, maximumDate);
 	}
 
 	public Object getMinimumDate() {
-		return (Object) getStateHelper().eval(MINIMUM_DATE, null);
+		return (Object) getStateHelper().eval(PickDatePropertyKeys.minimumDate, null);
 	}
 
 	public void setMinimumDate(Object minimumDate) {
-		getStateHelper().put(MINIMUM_DATE, minimumDate);
+		getStateHelper().put(PickDatePropertyKeys.minimumDate, minimumDate);
 	}
 
 	public Integer getPanes() {
-		return (Integer) getStateHelper().eval(PANES, null);
+		return (Integer) getStateHelper().eval(PickDatePropertyKeys.panes, null);
 	}
 
 	public void setPanes(Integer panes) {
-		getStateHelper().put(PANES, panes);
+		getStateHelper().put(PickDatePropertyKeys.panes, panes);
 	}
 
 	public String getSelectionMode() {
-		return (String) getStateHelper().eval(SELECTION_MODE, null);
+		return (String) getStateHelper().eval(PickDatePropertyKeys.selectionMode, null);
 	}
 
 	public void setSelectionMode(String selectionMode) {
-		getStateHelper().put(SELECTION_MODE, selectionMode);
+		getStateHelper().put(PickDatePropertyKeys.selectionMode, selectionMode);
 	}
 
 	@Override
 	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
+		return (String) getStateHelper().eval(PickDatePropertyKeys.style, null);
 	}
 
 	@Override
 	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
+		getStateHelper().put(PickDatePropertyKeys.style, style);
 	}
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
+		return (String) getStateHelper().eval(PickDatePropertyKeys.styleClass, null);
 	}
 
 	@Override
 	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
+		getStateHelper().put(PickDatePropertyKeys.styleClass, styleClass);
 	}
 
 	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(Z_INDEX, null);
+		return (Integer) getStateHelper().eval(PickDatePropertyKeys.zIndex, null);
 	}
 
 	public void setzIndex(Integer zIndex) {
-		getStateHelper().put(Z_INDEX, zIndex);
+		getStateHelper().put(PickDatePropertyKeys.zIndex, zIndex);
 	}
 }
 //J+

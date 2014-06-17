@@ -27,62 +27,64 @@ import com.liferay.faces.util.component.ClientComponent;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class PopoverBase extends HtmlPanelGroup implements Styleable, ClientComponent {
 
-	// Public Constants
-	public static final String AUTO_SHOW = "autoShow";
-	public static final String CLIENT_KEY = "clientKey";
-	public static final String FOR = "for";
-	public static final String HEADER_TEXT = "headerText";
-	public static final String POSITION = "position";
-	public static final String Z_INDEX = "zIndex";
+	// Protected Enumerations
+	protected enum PopoverPropertyKeys {
+		autoShow,
+		clientKey,
+		for_,
+		headerText,
+		position,
+		zIndex
+	}
 
 	public Boolean isAutoShow() {
-		return (Boolean) getStateHelper().eval(AUTO_SHOW, null);
+		return (Boolean) getStateHelper().eval(PopoverPropertyKeys.autoShow, null);
 	}
 
 	public void setAutoShow(Boolean autoShow) {
-		getStateHelper().put(AUTO_SHOW, autoShow);
+		getStateHelper().put(PopoverPropertyKeys.autoShow, autoShow);
 	}
 
 	@Override
 	public String getClientKey() {
-		return (String) getStateHelper().eval(CLIENT_KEY, null);
+		return (String) getStateHelper().eval(PopoverPropertyKeys.clientKey, null);
 	}
 
 	@Override
 	public void setClientKey(String clientKey) {
-		getStateHelper().put(CLIENT_KEY, clientKey);
+		getStateHelper().put(PopoverPropertyKeys.clientKey, clientKey);
 	}
 
 	public String getFor() {
-		return (String) getStateHelper().eval(FOR, null);
+		return (String) getStateHelper().eval(PopoverPropertyKeys.for_, null);
 	}
 
 	public void setFor(String for_) {
-		getStateHelper().put(FOR, for_);
+		getStateHelper().put(PopoverPropertyKeys.for_, for_);
 	}
 
 	public String getHeaderText() {
-		return (String) getStateHelper().eval(HEADER_TEXT, null);
+		return (String) getStateHelper().eval(PopoverPropertyKeys.headerText, null);
 	}
 
 	public void setHeaderText(String headerText) {
-		getStateHelper().put(HEADER_TEXT, headerText);
+		getStateHelper().put(PopoverPropertyKeys.headerText, headerText);
 	}
 
 	public String getPosition() {
-		return (String) getStateHelper().eval(POSITION, null);
+		return (String) getStateHelper().eval(PopoverPropertyKeys.position, null);
 	}
 
 	public void setPosition(String position) {
-		getStateHelper().put(POSITION, position);
+		getStateHelper().put(PopoverPropertyKeys.position, position);
 	}
 
 	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(Z_INDEX, null);
+		return (Integer) getStateHelper().eval(PopoverPropertyKeys.zIndex, null);
 	}
 
 	public void setzIndex(Integer zIndex) {
-		getStateHelper().put(Z_INDEX, zIndex);
+		getStateHelper().put(PopoverPropertyKeys.zIndex, zIndex);
 	}
 }
 //J+

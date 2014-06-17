@@ -15,14 +15,13 @@ package com.liferay.faces.alloy.component.inputtext;
 
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.util.render.DelegatingRendererBase;
 
 
 /**
  * @author  Neil Griffin
  */
 @FacesRenderer(componentFamily = InputText.COMPONENT_FAMILY, rendererType = InputText.RENDERER_TYPE)
-public class InputTextRenderer extends DelegatingRendererBase {
+public class InputTextRenderer extends InputTextRendererBase {
 
 	@Override
 	public String getDelegateComponentFamily() {

@@ -16,15 +16,13 @@ package com.liferay.faces.alloy.component.selectmanycheckbox;
 import javax.faces.application.ResourceDependency;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.util.render.DelegatingRendererBase;
-
 
 /**
  * @author  Vernon Singleton
  */
 @FacesRenderer(componentFamily = SelectManyCheckbox.COMPONENT_FAMILY, rendererType = SelectManyCheckbox.RENDERER_TYPE)
 @ResourceDependency(library = "liferay-faces-alloy", name = "alloy.css")
-public class SelectManyCheckboxRenderer extends DelegatingRendererBase {
+public class SelectManyCheckboxRenderer extends SelectManyCheckboxRendererBase {
 
 	@Override
 	public String getDelegateComponentFamily() {

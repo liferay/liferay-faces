@@ -26,37 +26,39 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class RowBase extends UIPanel implements Styleable {
 
-	// Public Constants
-	public static final String FLUID = "fluid";
-	public static final String STYLE = "style";
-	public static final String STYLE_CLASS = "styleClass";
+	// Protected Enumerations
+	protected enum RowPropertyKeys {
+		fluid,
+		style,
+		styleClass
+	}
 
 	public Boolean isFluid() {
-		return (Boolean) getStateHelper().eval(FLUID, null);
+		return (Boolean) getStateHelper().eval(RowPropertyKeys.fluid, null);
 	}
 
 	public void setFluid(Boolean fluid) {
-		getStateHelper().put(FLUID, fluid);
+		getStateHelper().put(RowPropertyKeys.fluid, fluid);
 	}
 
 	@Override
 	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
+		return (String) getStateHelper().eval(RowPropertyKeys.style, null);
 	}
 
 	@Override
 	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
+		getStateHelper().put(RowPropertyKeys.style, style);
 	}
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
+		return (String) getStateHelper().eval(RowPropertyKeys.styleClass, null);
 	}
 
 	@Override
 	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
+		getStateHelper().put(RowPropertyKeys.styleClass, styleClass);
 	}
 }
 //J+

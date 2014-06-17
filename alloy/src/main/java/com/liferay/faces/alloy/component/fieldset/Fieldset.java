@@ -26,7 +26,6 @@ public class Fieldset extends FieldsetBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.fieldset.Fieldset";
-	public static final String FIELDSET = "fieldset";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.fieldset.FieldsetRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-fieldset";
 
@@ -38,8 +37,8 @@ public class Fieldset extends FieldsetBase {
 	@Override
 	public String getStyleClass() {
 
-		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
+		String styleClass = (String) getStateHelper().eval(FieldsetPropertyKeys.styleClass, null);
 
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME, FIELDSET);
+		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME, STYLE_CLASS_NAME);
 	}
 }

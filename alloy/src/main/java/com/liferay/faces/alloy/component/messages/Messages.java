@@ -29,13 +29,9 @@ public class Messages extends MessagesBase {
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Messages";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.messages.MessagesRenderer";
-	public static final String ERROR_CLASS = "errorClass";
 	public static final String ERROR_CLASS_NAME = "text-error";
-	public static final String FATAL_CLASS = "fatalClass";
 	public static final String FATAL_CLASS_NAME = ERROR_CLASS_NAME;
-	public static final String INFO_CLASS = "infoClass";
 	public static final String INFO_CLASS_NAME = "text-info";
-	public static final String WARN_CLASS = "warnClass";
 	public static final String WARN_CLASS_NAME = "text-warning";
 	public static final String STYLE_CLASS_NAME = "alloy-messages";
 
@@ -47,46 +43,31 @@ public class Messages extends MessagesBase {
 	@Override
 	public String getErrorClass() {
 
-		String errorClass = (String) getStateHelper().eval(ERROR_CLASS, null);
+		String errorClass = super.getErrorClass();
 
 		return ComponentUtil.concatCssClasses(errorClass, ERROR_CLASS_NAME);
 	}
 
 	@Override
-	public void setErrorClass(String errorClass) {
-		getStateHelper().put(ERROR_CLASS, errorClass);
-	}
-
-	@Override
 	public String getFatalClass() {
 
-		String fatalClass = (String) getStateHelper().eval(FATAL_CLASS, null);
+		String fatalClass = super.getFatalClass();
 
 		return ComponentUtil.concatCssClasses(fatalClass, FATAL_CLASS_NAME);
 	}
 
 	@Override
-	public void setFatalClass(String fatalClass) {
-		getStateHelper().put(FATAL_CLASS, fatalClass);
-	}
-
-	@Override
 	public String getInfoClass() {
 
-		String infoClass = (String) getStateHelper().eval(INFO_CLASS, null);
+		String infoClass = super.getInfoClass();
 
 		return ComponentUtil.concatCssClasses(infoClass, INFO_CLASS_NAME);
 	}
 
 	@Override
-	public void setInfoClass(String infoClass) {
-		getStateHelper().put(INFO_CLASS, infoClass);
-	}
-
-	@Override
 	public String getStyleClass() {
 
-		// getStateHelper().eval(STYLE_CLASS, null) is called because super.getStyleClass() may return the
+		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
@@ -94,20 +75,10 @@ public class Messages extends MessagesBase {
 	}
 
 	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
-	}
-
-	@Override
 	public String getWarnClass() {
 
-		String warnClass = (String) getStateHelper().eval(WARN_CLASS, null);
+		String warnClass = super.getWarnClass();
 
 		return ComponentUtil.concatCssClasses(warnClass, WARN_CLASS_NAME);
-	}
-
-	@Override
-	public void setWarnClass(String warnClass) {
-		getStateHelper().put(WARN_CLASS, warnClass);
 	}
 }

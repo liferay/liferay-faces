@@ -18,14 +18,28 @@ import javax.annotation.Generated;
 import javax.faces.component.html.HtmlDataTable;
 
 import com.liferay.faces.util.component.Styleable;
+import com.liferay.faces.util.component.ClientComponent;
 
 /**
  * @author  Bruno Basto
  * @author  Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class DataTableBase extends HtmlDataTable implements Styleable {
+public abstract class DataTableBase extends HtmlDataTable implements Styleable, ClientComponent {
 
-	// Public Constants
+	// Protected Enumerations
+	protected enum DataTablePropertyKeys {
+		clientKey
+	}
+
+	@Override
+	public String getClientKey() {
+		return (String) getStateHelper().eval(DataTablePropertyKeys.clientKey, null);
+	}
+
+	@Override
+	public void setClientKey(String clientKey) {
+		getStateHelper().put(DataTablePropertyKeys.clientKey, clientKey);
+	}
 }
 //J+

@@ -26,37 +26,39 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class TabBase extends UIColumn implements Styleable {
 
-	// Public Constants
-	public static final String LABEL = "label";
-	public static final String STYLE = "style";
-	public static final String STYLE_CLASS = "styleClass";
+	// Protected Enumerations
+	protected enum TabPropertyKeys {
+		label,
+		style,
+		styleClass
+	}
 
 	public String getLabel() {
-		return (String) getStateHelper().eval(LABEL, null);
+		return (String) getStateHelper().eval(TabPropertyKeys.label, null);
 	}
 
 	public void setLabel(String label) {
-		getStateHelper().put(LABEL, label);
+		getStateHelper().put(TabPropertyKeys.label, label);
 	}
 
 	@Override
 	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
+		return (String) getStateHelper().eval(TabPropertyKeys.style, null);
 	}
 
 	@Override
 	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
+		getStateHelper().put(TabPropertyKeys.style, style);
 	}
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
+		return (String) getStateHelper().eval(TabPropertyKeys.styleClass, null);
 	}
 
 	@Override
 	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
+		getStateHelper().put(TabPropertyKeys.styleClass, styleClass);
 	}
 }
 //J+

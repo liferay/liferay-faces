@@ -139,7 +139,7 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 		boolean first) throws IOException {
 
 		if (zIndex == Integer.MIN_VALUE) {
-			encodeNonEscapedObject(responseWriter, OutputTooltip.Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_TOOLTIP,
+			encodeNonEscapedObject(responseWriter, Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_TOOLTIP,
 				first);
 		}
 		else {

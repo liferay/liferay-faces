@@ -15,14 +15,12 @@ package com.liferay.faces.alloy.component.selectonelistbox;
 
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.util.render.DelegatingRendererBase;
-
 
 /**
  * @author  Vernon Singleton
  */
 @FacesRenderer(componentFamily = SelectOneListbox.COMPONENT_FAMILY, rendererType = SelectOneListbox.RENDERER_TYPE)
-public class SelectOneListboxRenderer extends DelegatingRendererBase {
+public class SelectOneListboxRenderer extends SelectOneListboxRendererBase {
 
 	@Override
 	public String getDelegateComponentFamily() {

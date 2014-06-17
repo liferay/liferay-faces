@@ -15,14 +15,12 @@ package com.liferay.faces.alloy.component.commandbutton;
 
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.component.button.ButtonRenderer;
-
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesRenderer(componentFamily = CommandButton.COMPONENT_FAMILY, rendererType = CommandButton.RENDERER_TYPE)
-public class CommandButtonRenderer extends ButtonRenderer {
+public class CommandButtonRenderer extends CommandButtonRendererBase {
 
 	@Override
 	public String getDelegateComponentFamily() {

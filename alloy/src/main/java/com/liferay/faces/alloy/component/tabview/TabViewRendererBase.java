@@ -29,11 +29,19 @@ import com.liferay.faces.alloy.renderkit.AlloyRendererBase;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class TabViewRendererBase extends AlloyRendererBase {
 
+	// Protected Constants
+	protected static final String CLIENT_KEY = "clientKey";
+	protected static final String HEIGHT = "height";
+	protected static final String STACKED = "stacked";
+	protected static final String STYLE = "style";
+	protected static final String STYLE_CLASS = "styleClass";
+	protected static final String WIDTH = "width";
+
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "TabView";
 	private static final String ALLOY_MODULE_NAME = "aui-tabview";
 
-	// Protected Constants
+	// Modules
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
 	@Override
@@ -80,15 +88,15 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 	}
 
 	protected void encodeHeight(ResponseWriter responseWriter, TabView tabView, String height, boolean first) throws IOException {
-		encodeString(responseWriter, TabView.HEIGHT, height, first);
+		encodeString(responseWriter, HEIGHT, height, first);
 	}
 
 	protected void encodeStacked(ResponseWriter responseWriter, TabView tabView, Boolean stacked, boolean first) throws IOException {
-		encodeBoolean(responseWriter, TabView.STACKED, stacked, first);
+		encodeBoolean(responseWriter, STACKED, stacked, first);
 	}
 
 	protected void encodeWidth(ResponseWriter responseWriter, TabView tabView, String width, boolean first) throws IOException {
-		encodeString(responseWriter, TabView.WIDTH, width, first);
+		encodeString(responseWriter, WIDTH, width, first);
 	}
 
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, TabView tabView, boolean first) throws IOException {

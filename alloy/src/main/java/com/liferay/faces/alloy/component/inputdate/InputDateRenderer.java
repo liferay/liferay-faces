@@ -22,7 +22,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRendererBase;
 import com.liferay.faces.alloy.component.pickdate.PickDate;
 import com.liferay.faces.alloy.component.pickdate.PickDateUtil;
 import com.liferay.faces.util.lang.StringPool;
@@ -40,7 +39,7 @@ import com.liferay.faces.util.lang.StringPool;
 		@ResourceDependency(library = "liferay-faces-alloy", name = "pickdate.js")
 	}
 )
-public class InputDateRenderer extends InputDateTimeRendererBase {
+public class InputDateRenderer extends InputDateRendererBase {
 
 	// Private Constants
 	private static final String BUTTON_ON_DATE_CLICK_TEMPLATE = "if(this._canBeSelected(event.date)){" +

@@ -41,7 +41,7 @@ public class Popover extends PopoverBase implements Overlay {
 
 	@Override
 	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(Z_INDEX, Integer.MIN_VALUE);
+		return (Integer) getStateHelper().eval(PopoverPropertyKeys.zIndex, Integer.MIN_VALUE);
 	}
 
 	@Override
@@ -81,6 +81,6 @@ public class Popover extends PopoverBase implements Overlay {
 
 	@Override
 	public Boolean isAutoShow() {
-		return (Boolean) getStateHelper().eval(AUTO_SHOW, true);
+		return (Boolean) getStateHelper().eval(PopoverPropertyKeys.autoShow, true);
 	}
 }

@@ -40,7 +40,7 @@ public class OutputTooltip extends OutputTooltipBase {
 
 	@Override
 	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(Z_INDEX, Integer.MIN_VALUE);
+		return (Integer) getStateHelper().eval(OutputTooltipPropertyKeys.zIndex, Integer.MIN_VALUE);
 	}
 
 	@Override

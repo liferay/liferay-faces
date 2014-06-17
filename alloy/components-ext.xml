@@ -833,9 +833,11 @@
 	</component>
 	<!-- /Common -->
 	<!-- generateTaglibXML="false" tags for common attributes -->
-	<component name="Body" extendsTags="StyleableInherited" parentClass="javax.faces.component.html.HtmlBody" />
+	<component name="Body" extendsTags="StyleableInherited" parentClass="javax.faces.component.html.HtmlBody"
+	rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase"/>
 	<component name="Button" extendsTags="ButtonCommon UIOutcomeTarget"
-		parentClass="javax.faces.component.html.HtmlOutcomeTargetButton">
+		parentClass="javax.faces.component.html.HtmlOutcomeTargetButton"
+		rendererParentClass="com.liferay.faces.alloy.component.button.ButtonRendererCompat">
 		<description>
 			<![CDATA[Button is a UIOutput component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is button. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutcomeTargetButton.html" target="_blank"><code>HtmlOutcomeTargetButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/button.html" target="_blank"><code>h:button</code></a>. The component does not need to be a child of h:form since the outcome attribute is designed to navigate via HTTP GET.]]>
 		</description>
@@ -963,7 +965,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="CommandButton" extendsTags="ButtonCommon FacesMessageLabel UICommand" parentClass="javax.faces.component.html.HtmlCommandButton"
+	<component name="CommandButton" extendsTags="ButtonCommon FacesMessageLabel UICommand"
+		parentClass="javax.faces.component.html.HtmlCommandButton"
 		rendererParentClass="com.liferay.faces.alloy.component.button.ButtonRenderer">
 		<description>
 			<![CDATA[CommandButton is a UICommand component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is submit. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlCommandButton.html" target="_blank"><code>HtmlCommandButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/commandButton.html" target="_blank"><code>h:commandButton</code></a>. The component must be a child of h:form in order to trigger the action or actionListener.]]>
@@ -1012,9 +1015,9 @@
 			<!-- /h:commandButton attributes -->
 		</attributes>
 	</component>
-	<component name="DataTable" extendsTags="HTMLTable"
-		parentClass="javax.faces.component.html.HtmlDataTable"
-		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+	<component name="DataTable" extendsTags="ClientComponent HTMLCommonEvents HTMLPassthrough HTMLTable"
+		module="aui-datatable" parentClass="javax.faces.component.html.HtmlDataTable"
+		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase" yui="true">
 		<description>
 			<![CDATA[DataTable is a UIData (iterator) component that renders a <code>&lt;table&gt;</code> element representing tabular data. Since it extends HtmlDataTable, it supports all the features of h:dataTable.]]>
 		</description>
@@ -1347,7 +1350,9 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputText" extendsTags="FacesMessageLabel InputTextCommon" parentClass="javax.faces.component.html.HtmlInputText">
+	<component name="InputText" extendsTags="FacesMessageLabel InputTextCommon"
+		parentClass="javax.faces.component.html.HtmlInputText"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<attributes>
 			<attribute>
 				<description>
@@ -1376,7 +1381,8 @@
 		</attributes>
 	</component>
 	<component name="InputTextarea" extendsTags="FacesMessageLabel InputTextCommon"
-		parentClass="javax.faces.component.html.HtmlInputTextarea">
+		parentClass="javax.faces.component.html.HtmlInputTextarea"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<attributes>
 			<attribute>
 				<description>
@@ -1500,7 +1506,9 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="OutputText" extendsTags="HTMLPassthrough UIOutput" parentClass="javax.faces.component.html.HtmlOutputText">
+	<component name="OutputText" extendsTags="HTMLPassthrough UIOutput"
+		parentClass="javax.faces.component.html.HtmlOutputText"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[OuputText is an <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutputText.html" target="_blank"><code>HtmlOutputText</code></a> component that delegates rendering to its JSF renderer.]]>
 		</description>
@@ -1686,12 +1694,16 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectBooleanCheckbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents" parentClass="javax.faces.component.html.HtmlSelectBooleanCheckbox">
+	<component name="SelectBooleanCheckbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+		parentClass="javax.faces.component.html.HtmlSelectBooleanCheckbox"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 		   <![CDATA[SelectBooleanCheckbox is a UISelectOne component that renders a check box. Since it extends HtmlSelectBooleanCheckbox, it supports all the features of h:selectBooleanCheckbox such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
-	<component name="SelectManyCheckbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents" parentClass="javax.faces.component.html.HtmlSelectManyCheckbox">
+	<component name="SelectManyCheckbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+		parentClass="javax.faces.component.html.HtmlSelectManyCheckbox"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyCheckbox is a UISelectMany component that renders checkboxes and enables the user to select multiple values. Since it extends HtmlSelectManyCheckbox, it supports all the features of h:selectManyCheckbox such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
@@ -1754,7 +1766,9 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectManyListbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents" parentClass="javax.faces.component.html.HtmlSelectManyListbox">
+	<component name="SelectManyListbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+		parentClass="javax.faces.component.html.HtmlSelectManyListbox"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyListbox is a UISelectMany component that renders a select element and enables the user to select multiple values. Since it extends HtmlSelectManyListbox, it supports all the features of h:selectManyListbox such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
@@ -1793,7 +1807,9 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectManyMenu" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents" parentClass="javax.faces.component.html.HtmlSelectManyMenu">
+	<component name="SelectManyMenu" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+		parentClass="javax.faces.component.html.HtmlSelectManyMenu"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyMenu is a UISelectMany component that renders a select element and enables the user to select multiple values. It has the same basic features of alloy:selectManyListbox except that there is no size attribute because JSF "select*menu" components always render size=1. Since it extends HtmlSelectManyMenu, it supports all the features of h:selectManyMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
@@ -1824,7 +1840,9 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectOneListbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents" parentClass="javax.faces.component.html.HtmlSelectOneListbox">
+	<component name="SelectOneListbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+		parentClass="javax.faces.component.html.HtmlSelectOneListbox"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectOneListbox is a UISelectOne component that renders a `select` element (multi-item list) and enables the user to select one value. Since it extends HtmlSelectOneListbox, it supports all the features of h:selectOneListbox such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
@@ -1863,7 +1881,9 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectOneMenu" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents" parentClass="javax.faces.component.html.HtmlSelectOneMenu">
+	<component name="SelectOneMenu" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+		parentClass="javax.faces.component.html.HtmlSelectOneMenu"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectOneMenu is a UISelectOne component that renders a select element (drop down list) and enables the user to select one value. Since it extends HtmlSelectOneMenu, it supports all the features of h:selectOneMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
@@ -1895,7 +1915,8 @@
 		</attributes>
 	</component>
 	<component name="SelectOneRadio" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
-		parentClass="javax.faces.component.html.HtmlSelectOneRadio">
+		parentClass="javax.faces.component.html.HtmlSelectOneRadio"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 		   <![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>

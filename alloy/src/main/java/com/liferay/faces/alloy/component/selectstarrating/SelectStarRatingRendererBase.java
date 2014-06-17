@@ -29,11 +29,16 @@ import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRendererBase {
 
+	// Protected Constants
+	protected static final String CLIENT_KEY = "clientKey";
+	protected static final String LABEL = "label";
+	protected static final String VALUE = "value";
+
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "Rating";
 	private static final String ALLOY_MODULE_NAME = "aui-rating";
 
-	// Protected Constants
+	// Modules
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
 	@Override
@@ -64,7 +69,7 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 	}
 
 	protected void encodeValue(ResponseWriter responseWriter, SelectStarRating selectStarRating, Object value, boolean first) throws IOException {
-		encodeString(responseWriter, SelectStarRating.VALUE, value, first);
+		encodeString(responseWriter, VALUE, value, first);
 	}
 
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, SelectStarRating selectStarRating, boolean first) throws IOException {

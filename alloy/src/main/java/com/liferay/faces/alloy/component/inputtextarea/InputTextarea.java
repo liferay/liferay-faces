@@ -41,18 +41,13 @@ public class InputTextarea extends InputTextareaBase {
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().get(StringPool.LABEL);
+		String label = super.getLabel();
 
 		if (label == null) {
 			label = AlloyComponentUtil.getComponentLabel(this);
 		}
 
 		return label;
-	}
-
-	@Override
-	public void setLabel(String label) {
-		getStateHelper().put(StringPool.LABEL, label);
 	}
 
 	@Override

@@ -29,11 +29,25 @@ import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendererBase {
 
+	// Protected Constants
+	protected static final String CLIENT_KEY = "clientKey";
+	protected static final String HEIGHT = "height";
+	protected static final String HIGHLIGHT_ACTIVE_LINE = "highlightActiveLine";
+	protected static final String LOCALE = "locale";
+	protected static final String MODE = "mode";
+	protected static final String READ_ONLY = "readOnly";
+	protected static final String SHOW_PRINT_MARGIN = "showPrintMargin";
+	protected static final String TAB_SIZE = "tabSize";
+	protected static final String USE_SOFT_TABS = "useSoftTabs";
+	protected static final String USE_WRAP_MODE = "useWrapMode";
+	protected static final String VALUE = "value";
+	protected static final String WIDTH = "width";
+
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "AceEditor";
 	private static final String ALLOY_MODULE_NAME = "aui-ace-editor";
 
-	// Protected Constants
+	// Modules
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
 	@Override
@@ -144,47 +158,47 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 	}
 
 	protected void encodeHeight(ResponseWriter responseWriter, InputSourceCode inputSourceCode, String height, boolean first) throws IOException {
-		encodeString(responseWriter, InputSourceCode.HEIGHT, height, first);
+		encodeString(responseWriter, HEIGHT, height, first);
 	}
 
 	protected void encodeHighlightActiveLine(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Boolean highlightActiveLine, boolean first) throws IOException {
-		encodeBoolean(responseWriter, InputSourceCode.HIGHLIGHT_ACTIVE_LINE, highlightActiveLine, first);
+		encodeBoolean(responseWriter, HIGHLIGHT_ACTIVE_LINE, highlightActiveLine, first);
 	}
 
 	protected void encodeLocale(ResponseWriter responseWriter, InputSourceCode inputSourceCode, String locale, boolean first) throws IOException {
-		encodeString(responseWriter, InputSourceCode.LOCALE, locale, first);
+		encodeString(responseWriter, LOCALE, locale, first);
 	}
 
 	protected void encodeMode(ResponseWriter responseWriter, InputSourceCode inputSourceCode, String mode, boolean first) throws IOException {
-		encodeString(responseWriter, InputSourceCode.MODE, mode, first);
+		encodeString(responseWriter, MODE, mode, first);
 	}
 
 	protected void encodeReadOnly(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Boolean readOnly, boolean first) throws IOException {
-		encodeBoolean(responseWriter, InputSourceCode.READ_ONLY, readOnly, first);
+		encodeBoolean(responseWriter, READ_ONLY, readOnly, first);
 	}
 
 	protected void encodeShowPrintMargin(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Boolean showPrintMargin, boolean first) throws IOException {
-		encodeBoolean(responseWriter, InputSourceCode.SHOW_PRINT_MARGIN, showPrintMargin, first);
+		encodeBoolean(responseWriter, SHOW_PRINT_MARGIN, showPrintMargin, first);
 	}
 
 	protected void encodeTabSize(ResponseWriter responseWriter, InputSourceCode inputSourceCode, String tabSize, boolean first) throws IOException {
-		encodeString(responseWriter, InputSourceCode.TAB_SIZE, tabSize, first);
+		encodeString(responseWriter, TAB_SIZE, tabSize, first);
 	}
 
 	protected void encodeUseSoftTabs(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Boolean useSoftTabs, boolean first) throws IOException {
-		encodeBoolean(responseWriter, InputSourceCode.USE_SOFT_TABS, useSoftTabs, first);
+		encodeBoolean(responseWriter, USE_SOFT_TABS, useSoftTabs, first);
 	}
 
 	protected void encodeUseWrapMode(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Boolean useWrapMode, boolean first) throws IOException {
-		encodeBoolean(responseWriter, InputSourceCode.USE_WRAP_MODE, useWrapMode, first);
+		encodeBoolean(responseWriter, USE_WRAP_MODE, useWrapMode, first);
 	}
 
 	protected void encodeValue(ResponseWriter responseWriter, InputSourceCode inputSourceCode, Object value, boolean first) throws IOException {
-		encodeString(responseWriter, InputSourceCode.VALUE, value, first);
+		encodeString(responseWriter, VALUE, value, first);
 	}
 
 	protected void encodeWidth(ResponseWriter responseWriter, InputSourceCode inputSourceCode, String width, boolean first) throws IOException {
-		encodeString(responseWriter, InputSourceCode.WIDTH, width, first);
+		encodeString(responseWriter, WIDTH, width, first);
 	}
 
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, InputSourceCode inputSourceCode, boolean first) throws IOException {

@@ -43,7 +43,7 @@ public class SelectManyMenu extends SelectManyMenuBase {
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().get(PropertyKeys.label);
+		String label = super.getLabel();
 
 		if (label == null) {
 

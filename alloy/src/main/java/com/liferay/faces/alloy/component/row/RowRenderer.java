@@ -21,7 +21,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
-import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
@@ -37,7 +36,7 @@ import com.liferay.faces.util.render.RendererUtil;
 		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap-responsive.min.css")
 	}
 )
-public class RowRenderer extends Renderer {
+public class RowRenderer extends RowRendererBase {
 
 	// Private Constants
 	private static final String ROW_FLUID = "row-fluid";
