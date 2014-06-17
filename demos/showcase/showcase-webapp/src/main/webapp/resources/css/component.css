@@ -106,7 +106,7 @@
 	text-align: center;
 }
 
-.aui .alloy-select-one-radio label {
+.aui .alloy-select-many-checkbox label,.aui .alloy-select-one-radio label {
 	font-size: 0.9em;
 }
 
