@@ -25,10 +25,5 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class OutputTextBase extends HtmlOutputText implements Styleable {
-
-	// Protected Enumerations
-	protected enum OutputTextPropertyKeys {
-
-	}
 }
 //J+

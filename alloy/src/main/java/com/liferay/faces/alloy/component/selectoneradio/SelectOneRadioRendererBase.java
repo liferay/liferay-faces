@@ -25,7 +25,5 @@ import com.liferay.faces.util.render.DelegatingRendererBase;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class SelectOneRadioRendererBase extends DelegatingRendererBase {
-
-	// Protected Constants
 }
 //J+
