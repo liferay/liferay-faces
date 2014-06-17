@@ -270,6 +270,46 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="UISelect" extendsTags="UIInput" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]>
+				</description>
+				<name>disabledClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]>
+				</description>
+				<name>enabledClass</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]>
+				</description>
+				<name>hideNoSelectionOption</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="UISelectMany" extendsTags="UISelect" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[An optional attribute that can contain a value like <code>java.util.ArrayList</code> or <code>java.util.HashSet</code> that indicates the type of <code>java.util.Collection</code> for the component's value.]]>
+				</description>
+				<name>collectionType</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<!-- /JSF Custom Component Heirarchy -->
 	<!-- 3. HTML Component Heirarchy -->
 	<component name="FacesMessageLabel" generateJava="false" generateTaglibXML="false">
@@ -1457,7 +1497,7 @@
 		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase" yui="true"
 		yuiName="CharCounter">
 		<description>
-			<![CDATA[CharCounter is an OutputText component that displays the number of allowed characters remaining for a given text input, and limits the number of characters allowed in the input.  Renders as HtmlOutputText renders, so this tag will optionally render a span when i18n or style attributes used.]]>
+			<![CDATA[CharCounter is an OutputText component that displays the number of allowed characters remaining for a given text input, and limits the number of characters allowed in the input. Renders as HtmlOutputText renders, so this tag will optionally render a span when i18n or style attributes used.]]>
 		</description>
 		<attributes>
 			<!-- Attributes used to help the component follow normal JSF usage patterns -->
@@ -1528,7 +1568,7 @@
 		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase"
 		yui="true" yuiName="Tooltip">
 		<description>
-			<![CDATA[Tooltip is an OutputText component that displays a hint to the user.  It is used in conjunction with a cursor, usually a pointer. The user hovers the pointer over an item, without clicking it, and a tooltip appears as a "hover box" with information about the item. Since it extends HtmlOutputText, it supports all the features of an h:outputText that does not render a span.]]>
+			<![CDATA[Tooltip is an OutputText component that displays a hint to the user. It is used in conjunction with a cursor, usually a pointer. The user hovers the pointer over an item, without clicking it, and a tooltip appears as a "hover box" with information about the item. Since it extends HtmlOutputText, it supports all the features of an h:outputText that does not render a span.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -1701,7 +1741,7 @@
 		   <![CDATA[SelectBooleanCheckbox is a UISelectOne component that renders a check box. Since it extends HtmlSelectBooleanCheckbox, it supports all the features of h:selectBooleanCheckbox such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
-	<component name="SelectManyCheckbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectManyCheckbox" extendsTags="UISelectMany FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyCheckbox"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -1718,31 +1758,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]>
-				</description>
-				<name>disabledClass</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]>
-				</description>
-				<name>enabledClass</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]>
-				</description>
-				<name>hideNoSelectionOption</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The direction in which the layout of the component should go.  The default value is 'lineDirection'.]]>
+					<![CDATA[The direction in which the layout of the component should go. The default value is 'lineDirection'.]]>
 				</description>
 				<name>layout</name>
 				<type>java.lang.String</type>
@@ -1766,7 +1782,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectManyListbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectManyListbox" extendsTags="UISelectMany FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyListbox"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -1775,31 +1791,7 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]>
-				</description>
-				<name>disabledClass</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]>
-				</description>
-				<name>enabledClass</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]>
-				</description>
-				<name>hideNoSelectionOption</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The number of items to show in the box.  The default is to show all of the items.]]>
+					<![CDATA[The number of items to show in the box. The default is to show all of the items.]]>
 				</description>
 				<name>size</name>
 				<type>int</type>
@@ -1807,40 +1799,14 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectManyMenu" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectManyMenu" extendsTags="UISelectMany FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyMenu"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyMenu is a UISelectMany component that renders a select element and enables the user to select multiple values. It has the same basic features of alloy:selectManyListbox except that there is no size attribute because JSF "select*menu" components always render size=1. Since it extends HtmlSelectManyMenu, it supports all the features of h:selectManyMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]>
-				</description>
-				<name>disabledClass</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]>
-				</description>
-				<name>enabledClass</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]>
-				</description>
-				<name>hideNoSelectionOption</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-		</attributes>
 	</component>
-	<component name="SelectOneListbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectOneListbox" extendsTags="UISelect FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneListbox"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -1849,31 +1815,7 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]>
-				</description>
-				<name>disabledClass</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]>
-				</description>
-				<name>enabledClass</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]>
-				</description>
-				<name>hideNoSelectionOption</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The number of items to show in the box.  The default is to show all of the items.]]>
+					<![CDATA[The number of items to show in the box. The default is to show all of the items.]]>
 				</description>
 				<name>size</name>
 				<type>int</type>
@@ -1881,40 +1823,14 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectOneMenu" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectOneMenu" extendsTags="UISelect FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneMenu"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectOneMenu is a UISelectOne component that renders a select element (drop down list) and enables the user to select one value. Since it extends HtmlSelectOneMenu, it supports all the features of h:selectOneMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]>
-				</description>
-				<name>disabledClass</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]>
-				</description>
-				<name>enabledClass</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]>
-				</description>
-				<name>hideNoSelectionOption</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-		</attributes>
 	</component>
-	<component name="SelectOneRadio" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectOneRadio" extendsTags="UISelect FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneRadio"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -1931,31 +1847,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[A CSS class name to apply to the label of a disabled selectItems.]]>
-				</description>
-				<name>disabledClass</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A CSS class name to apply to the label of an enabled selectItems.]]>
-				</description>
-				<name>enabledClass</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When true, any child selectItem with a noSelectOption attribute (which is set to true) will be hidden from the user.]]>
-				</description>
-				<name>hideNoSelectionOption</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The direction in which the layout of the component should go.  The default value is 'lineDirection'.]]>
+					<![CDATA[The direction in which the layout of the component should be displayed. The default value is 'lineDirection'.]]>
 				</description>
 				<name>layout</name>
 				<type>java.lang.String</type>
@@ -1963,7 +1855,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectStarRating" extendsTags="ClientComponent SelectOneRadio" module="aui-rating"
+	<component name="SelectStarRating" extendsTags="SelectOneRadio ClientComponent" module="aui-rating"
 		parentClass="com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio"
 		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase" yui="true"
 		yuiName="Rating">
