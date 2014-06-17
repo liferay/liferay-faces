@@ -87,7 +87,6 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 			index += 1;
 			super.startElement(name, component);
 		}
-
 		else if (StringPool.LABEL.equalsIgnoreCase(name)) {
 			labelElement = true;
 		}

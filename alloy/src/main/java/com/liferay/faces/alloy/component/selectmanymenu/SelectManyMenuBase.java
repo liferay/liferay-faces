@@ -20,8 +20,8 @@ import javax.faces.component.html.HtmlSelectManyMenu;
 import com.liferay.faces.util.component.Styleable;
 
 /**
- * @author  Bruno Basto
- * @author  Kyle Stiemann
+ * @author	Bruno Basto
+ * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class SelectManyMenuBase extends HtmlSelectManyMenu implements Styleable {

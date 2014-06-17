@@ -23,8 +23,8 @@ import javax.faces.context.ResponseWriter;
 import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
 
 /**
- * @author  Bruno Basto
- * @author  Kyle Stiemann
+ * @author	Bruno Basto
+ * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRendererBase {

@@ -16,7 +16,6 @@ package com.liferay.faces.alloy.component.outputtext;
 import javax.faces.render.FacesRenderer;
 
 
-
 /**
  * @author  Vernon Singleton
  */

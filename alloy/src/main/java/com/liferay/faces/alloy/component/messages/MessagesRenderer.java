@@ -24,7 +24,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.render.FacesRenderer;
 
 
-
 /**
  * @author  Neil Griffin
  */

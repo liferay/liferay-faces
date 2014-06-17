@@ -15,6 +15,7 @@ package com.liferay.faces.alloy.component.fieldset;
 
 import java.io.IOException;
 
+import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
@@ -22,7 +23,6 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
-import javax.faces.application.ResourceDependency;
 
 
 /**
@@ -55,61 +55,61 @@ public class FieldsetRenderer extends FieldsetRendererBase {
 
 		RendererUtil.encodeStyleable(responseWriter, fieldset);
 
-		// Encode passthrough attributes.			
+		// Encode passthrough attributes.
 		String onclick = fieldset.getOnclick();
 
 		if (onclick != null) {
 			responseWriter.writeAttribute(ONCLICK, onclick, ONCLICK);
 		}
-			
+
 		String ondblclick = fieldset.getOndblclick();
 
 		if (ondblclick != null) {
 			responseWriter.writeAttribute(ONDBLCLICK, ondblclick, ONDBLCLICK);
 		}
-			
+
 		String onkeydown = fieldset.getOnkeydown();
 
 		if (onkeydown != null) {
 			responseWriter.writeAttribute(ONKEYDOWN, onkeydown, ONKEYDOWN);
 		}
-			
+
 		String onkeypress = fieldset.getOnkeypress();
 
 		if (onkeypress != null) {
 			responseWriter.writeAttribute(ONKEYPRESS, onkeypress, ONKEYPRESS);
 		}
-			
+
 		String onkeyup = fieldset.getOnkeyup();
 
 		if (onkeyup != null) {
 			responseWriter.writeAttribute(ONKEYUP, onkeyup, ONKEYUP);
 		}
-			
+
 		String onmousedown = fieldset.getOnmousedown();
 
 		if (onmousedown != null) {
 			responseWriter.writeAttribute(ONMOUSEDOWN, onmousedown, ONMOUSEDOWN);
 		}
-			
+
 		String onmousemove = fieldset.getOnmousemove();
 
 		if (onmousemove != null) {
 			responseWriter.writeAttribute(ONMOUSEMOVE, onmousemove, ONMOUSEMOVE);
 		}
-			
+
 		String onmouseout = fieldset.getOnmouseout();
 
 		if (onmouseout != null) {
 			responseWriter.writeAttribute(ONMOUSEOUT, onmouseout, ONMOUSEOUT);
 		}
-			
+
 		String onmouseover = fieldset.getOnmouseover();
 
 		if (onmouseover != null) {
 			responseWriter.writeAttribute(ONMOUSEOVER, onmouseover, ONMOUSEOVER);
 		}
-			
+
 		String onmouseup = fieldset.getOnmouseup();
 
 		if (onmouseup != null) {

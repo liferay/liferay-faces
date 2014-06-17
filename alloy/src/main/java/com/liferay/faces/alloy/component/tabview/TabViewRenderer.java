@@ -38,14 +38,16 @@ import com.liferay.faces.util.render.RendererUtil;
  *
  * @author  Neil Griffin
  */
+//J-
 @FacesRenderer(componentFamily = TabView.COMPONENT_FAMILY, rendererType = TabView.RENDERER_TYPE)
 @ResourceDependencies(
-		{
-			@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
-			@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
-			@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
-		}
-	)
+	{
+		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
+		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
+		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
+	}
+)
+//J+
 public class TabViewRenderer extends TabViewRendererBase {
 
 	// Private Constants
@@ -166,7 +168,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 		throws IOException {
 
 		encodeWidgetRender(responseWriter, first);
-		
+
 		first = false;
 
 		String srcNode = StringPool.POUND + ComponentUtil.escapeClientId(tabView.getClientId());

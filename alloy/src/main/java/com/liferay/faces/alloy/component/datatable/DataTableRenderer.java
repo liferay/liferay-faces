@@ -30,6 +30,7 @@ import com.liferay.faces.util.render.DelegationResponseWriter;
  * @author  Bruno Basto
  * @author  Kyle Stiemann
  */
+//J-
 @FacesRenderer(componentFamily = DataTable.COMPONENT_FAMILY, rendererType = DataTable.RENDERER_TYPE)
 @ResourceDependencies(
 	{
@@ -38,6 +39,7 @@ import com.liferay.faces.util.render.DelegationResponseWriter;
 		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
 	}
 )
+//J+
 public class DataTableRenderer extends DataTableRendererBase {
 
 	@Override
@@ -45,7 +47,8 @@ public class DataTableRenderer extends DataTableRendererBase {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		boolean hasTableHeaderFacet = (uiComponent.getFacet(StringPool.HEADER) != null);
-		DelegationResponseWriter dataTableResponseWriter = new DataTableResponseWriter(responseWriter, hasTableHeaderFacet);
+		DelegationResponseWriter dataTableResponseWriter = new DataTableResponseWriter(responseWriter,
+				hasTableHeaderFacet);
 		super.encodeBegin(facesContext, uiComponent, dataTableResponseWriter);
 	}
 
