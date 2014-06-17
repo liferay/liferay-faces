@@ -29,8 +29,6 @@ public abstract class CommandButtonBase extends HtmlCommandButton implements Sty
 	// Public Constants
 	public static final String AUTOFOCUS = "autofocus";
 	public static final String DISABLED = "disabled";
-	public static final String STYLE = "style";
-	public static final String STYLE_CLASS = "styleClass";
 	public static final String TYPE = "type";
 
 	public Boolean isAutofocus() {
@@ -47,26 +45,6 @@ public abstract class CommandButtonBase extends HtmlCommandButton implements Sty
 
 	public void setDisabled(boolean disabled) {
 		getStateHelper().put(DISABLED, disabled);
-	}
-
-	@Override
-	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
-	}
-
-	@Override
-	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
-	}
-
-	@Override
-	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
-	}
-
-	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 
 	public String getType() {

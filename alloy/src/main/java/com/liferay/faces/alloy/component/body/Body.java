@@ -39,7 +39,7 @@ public class Body extends BodyBase {
 	@Override
 	public String getStyleClass() {
 
-		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
+		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}

@@ -33,8 +33,6 @@ public abstract class InputDateBase extends InputDateTimeBase implements Styleab
 	public static final String MAXIMUM_DATE = "maximumDate";
 	public static final String MINIMUM_DATE = "minimumDate";
 	public static final String PANES = "panes";
-	public static final String STYLE = "style";
-	public static final String STYLE_CLASS = "styleClass";
 	public static final String Z_INDEX = "zIndex";
 
 	public Boolean isAutoHide() {
@@ -83,26 +81,6 @@ public abstract class InputDateBase extends InputDateTimeBase implements Styleab
 
 	public void setPanes(Integer panes) {
 		getStateHelper().put(PANES, panes);
-	}
-
-	@Override
-	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
-	}
-
-	@Override
-	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
-	}
-
-	@Override
-	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
-	}
-
-	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 
 	public Integer getzIndex() {
