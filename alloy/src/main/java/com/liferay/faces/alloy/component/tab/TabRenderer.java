@@ -19,7 +19,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
-import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
@@ -30,7 +29,7 @@ import com.liferay.faces.util.render.RendererUtil;
  * @author  Neil Griffin
  */
 @FacesRenderer(componentFamily = Tab.COMPONENT_FAMILY, rendererType = Tab.RENDERER_TYPE)
-public class TabRenderer extends Renderer {
+public class TabRenderer extends TabRendererBase {
 
 	// Private Constants
 	private static final String TAB_PANE = "tab-pane";

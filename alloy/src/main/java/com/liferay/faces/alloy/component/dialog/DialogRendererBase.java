@@ -29,13 +29,19 @@ import com.liferay.faces.alloy.component.overlay.OverlayRendererBase;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class DialogRendererBase extends OverlayRendererBase {
 
+	// Protected Constants
+	protected static final String CLIENT_KEY = "clientKey";
+	protected static final String FOR = "for";
+	protected static final String HEADER_CONTENT = "headerContent";
+	protected static final String MODAL = "modal";
+	protected static final String VISIBLE = "visible";
+	protected static final String Z_INDEX = "zIndex";
+
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "Modal";
 	private static final String ALLOY_MODULE_NAME = "aui-modal";
-	protected static final String HEADER_CONTENT = "headerContent";
-	protected static final String VISIBLE = "visible";
 
-	// Protected Constants
+	// Modules
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
 	@Override
@@ -98,11 +104,11 @@ public abstract class DialogRendererBase extends OverlayRendererBase {
 	}
 
 	protected void encodeModal(ResponseWriter responseWriter, Dialog dialog, Boolean modal, boolean first) throws IOException {
-		encodeBoolean(responseWriter, Dialog.MODAL, modal, first);
+		encodeBoolean(responseWriter, MODAL, modal, first);
 	}
 
 	protected void encodeZIndex(ResponseWriter responseWriter, Dialog dialog, Integer zIndex, boolean first) throws IOException {
-		encodeInteger(responseWriter, Dialog.Z_INDEX, zIndex, first);
+		encodeInteger(responseWriter, Z_INDEX, zIndex, first);
 	}
 
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, Dialog dialog, boolean first) throws IOException {

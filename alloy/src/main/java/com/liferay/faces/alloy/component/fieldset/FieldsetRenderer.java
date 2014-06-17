@@ -19,7 +19,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
-import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
@@ -31,13 +30,16 @@ import javax.faces.application.ResourceDependency;
  */
 @FacesRenderer(componentFamily = Fieldset.COMPONENT_FAMILY, rendererType = Fieldset.RENDERER_TYPE)
 @ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css")
-public class FieldsetRenderer extends Renderer {
+public class FieldsetRenderer extends FieldsetRendererBase {
+
+	// Protected Constants
+	protected static final String FIELDSET = "fieldset";
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(Fieldset.FIELDSET, uiComponent);
+		responseWriter.startElement(FIELDSET, uiComponent);
 
 		String clientId = uiComponent.getClientId(facesContext);
 		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
@@ -57,61 +59,61 @@ public class FieldsetRenderer extends Renderer {
 		String onclick = fieldset.getOnclick();
 
 		if (onclick != null) {
-			responseWriter.writeAttribute(Fieldset.ONCLICK, onclick, Fieldset.ONCLICK);
+			responseWriter.writeAttribute(ONCLICK, onclick, ONCLICK);
 		}
 			
 		String ondblclick = fieldset.getOndblclick();
 
 		if (ondblclick != null) {
-			responseWriter.writeAttribute(Fieldset.ONDBLCLICK, ondblclick, Fieldset.ONDBLCLICK);
+			responseWriter.writeAttribute(ONDBLCLICK, ondblclick, ONDBLCLICK);
 		}
 			
 		String onkeydown = fieldset.getOnkeydown();
 
 		if (onkeydown != null) {
-			responseWriter.writeAttribute(Fieldset.ONKEYDOWN, onkeydown, Fieldset.ONKEYDOWN);
+			responseWriter.writeAttribute(ONKEYDOWN, onkeydown, ONKEYDOWN);
 		}
 			
 		String onkeypress = fieldset.getOnkeypress();
 
 		if (onkeypress != null) {
-			responseWriter.writeAttribute(Fieldset.ONKEYPRESS, onkeypress, Fieldset.ONKEYPRESS);
+			responseWriter.writeAttribute(ONKEYPRESS, onkeypress, ONKEYPRESS);
 		}
 			
 		String onkeyup = fieldset.getOnkeyup();
 
 		if (onkeyup != null) {
-			responseWriter.writeAttribute(Fieldset.ONKEYUP, onkeyup, Fieldset.ONKEYUP);
+			responseWriter.writeAttribute(ONKEYUP, onkeyup, ONKEYUP);
 		}
 			
 		String onmousedown = fieldset.getOnmousedown();
 
 		if (onmousedown != null) {
-			responseWriter.writeAttribute(Fieldset.ONMOUSEDOWN, onmousedown, Fieldset.ONMOUSEDOWN);
+			responseWriter.writeAttribute(ONMOUSEDOWN, onmousedown, ONMOUSEDOWN);
 		}
 			
 		String onmousemove = fieldset.getOnmousemove();
 
 		if (onmousemove != null) {
-			responseWriter.writeAttribute(Fieldset.ONMOUSEMOVE, onmousemove, Fieldset.ONMOUSEMOVE);
+			responseWriter.writeAttribute(ONMOUSEMOVE, onmousemove, ONMOUSEMOVE);
 		}
 			
 		String onmouseout = fieldset.getOnmouseout();
 
 		if (onmouseout != null) {
-			responseWriter.writeAttribute(Fieldset.ONMOUSEOUT, onmouseout, Fieldset.ONMOUSEOUT);
+			responseWriter.writeAttribute(ONMOUSEOUT, onmouseout, ONMOUSEOUT);
 		}
 			
 		String onmouseover = fieldset.getOnmouseover();
 
 		if (onmouseover != null) {
-			responseWriter.writeAttribute(Fieldset.ONMOUSEOVER, onmouseover, Fieldset.ONMOUSEOVER);
+			responseWriter.writeAttribute(ONMOUSEOVER, onmouseover, ONMOUSEOVER);
 		}
 			
 		String onmouseup = fieldset.getOnmouseup();
 
 		if (onmouseup != null) {
-			responseWriter.writeAttribute(Fieldset.ONMOUSEUP, onmouseup, Fieldset.ONMOUSEUP);
+			responseWriter.writeAttribute(ONMOUSEUP, onmouseup, ONMOUSEUP);
 		}
 	}
 
@@ -124,10 +126,10 @@ public class FieldsetRenderer extends Renderer {
 
 		if (legend != null) {
 
-			responseWriter.startElement(Fieldset.LEGEND, uiComponent);
-			responseWriter.writeAttribute(StringPool.CLASS, Fieldset.LEGEND, null);
-			responseWriter.writeText(legend, Fieldset.LEGEND);
-			responseWriter.endElement(Fieldset.LEGEND);
+			responseWriter.startElement(LEGEND, uiComponent);
+			responseWriter.writeAttribute(StringPool.CLASS, LEGEND, null);
+			responseWriter.writeText(legend, LEGEND);
+			responseWriter.endElement(LEGEND);
 		}
 
 		super.encodeChildren(facesContext, uiComponent);
@@ -136,7 +138,7 @@ public class FieldsetRenderer extends Renderer {
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(Fieldset.FIELDSET);
+		responseWriter.endElement(FIELDSET);
 	}
 
 	@Override

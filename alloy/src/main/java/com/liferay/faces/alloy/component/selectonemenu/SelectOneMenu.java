@@ -43,7 +43,7 @@ public class SelectOneMenu extends SelectOneMenuBase {
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().get(PropertyKeys.label);
+		String label = super.getLabel();
 
 		if (label == null) {
 

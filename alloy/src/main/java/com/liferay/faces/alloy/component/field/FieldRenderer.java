@@ -20,7 +20,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.component.panelgroup.PanelGroupRenderer;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -28,7 +27,7 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Kyle Stiemann
  */
 @FacesRenderer(componentFamily = Field.COMPONENT_FAMILY, rendererType = Field.RENDERER_TYPE)
-public class FieldRenderer extends PanelGroupRenderer {
+public class FieldRenderer extends FieldRendererBase {
 
 	// Private Constants
 	private static final String CONTROL_LABEL = "control-label";
@@ -42,10 +41,10 @@ public class FieldRenderer extends PanelGroupRenderer {
 
 		if (label != null) {
 
-			responseWriter.startElement(Field.LABEL, uiComponent);
+			responseWriter.startElement(LABEL, uiComponent);
 			responseWriter.writeAttribute(StringPool.CLASS, CONTROL_LABEL, null);
-			responseWriter.writeText(label, Field.LABEL);
-			responseWriter.endElement(Field.LABEL);
+			responseWriter.writeText(label, LABEL);
+			responseWriter.endElement(LABEL);
 		}
 
 		super.encodeChildren(facesContext, uiComponent);

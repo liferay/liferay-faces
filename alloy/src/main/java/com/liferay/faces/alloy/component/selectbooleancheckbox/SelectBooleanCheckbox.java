@@ -44,7 +44,7 @@ public class SelectBooleanCheckbox extends SelectBooleanCheckboxBase {
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().get(PropertyKeys.label);
+		String label = super.getLabel();
 
 		if (label == null) {
 

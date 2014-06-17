@@ -43,7 +43,7 @@ public class SelectManyListbox extends SelectManyListboxBase {
 	@Override
 	public String getLabel() {
 
-		String label = (String) getStateHelper().get(PropertyKeys.label);
+		String label = super.getLabel();
 
 		if (label == null) {
 

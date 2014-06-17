@@ -29,12 +29,19 @@ import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRendererBase {
 
+	// Protected Constants
+	protected static final String CLIENT_KEY = "clientKey";
+	protected static final String INPUT = "input";
+	protected static final String MAX_LENGTH = "maxLength";
+	protected static final String ONCE_MAXLENGTH_REACHED = "onceMaxlengthReached";
+	protected static final String ON_MAXLENGTH_REACHED = "onMaxlengthReached";
+	protected static final String VALUE = "value";
+
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "CharCounter";
 	private static final String ALLOY_MODULE_NAME = "aui-char-counter";
-	protected static final String INPUT = "input";
 
-	// Protected Constants
+	// Modules
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
 	@Override
@@ -77,7 +84,7 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 	}
 
 	protected void encodeMaxLength(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, Integer maxLength, boolean first) throws IOException {
-		encodeInteger(responseWriter, OutputRemainingChars.MAX_LENGTH, maxLength, first);
+		encodeInteger(responseWriter, MAX_LENGTH, maxLength, first);
 	}
 
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, boolean first) throws IOException {

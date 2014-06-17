@@ -31,7 +31,7 @@ import com.liferay.faces.util.render.RendererUtil;
  * @author  Kyle Stiemann
  */
 @FacesRenderer(componentFamily = Button.COMPONENT_FAMILY, rendererType = Button.RENDERER_TYPE)
-public class ButtonRenderer extends ButtonRendererCompat {
+public class ButtonRenderer extends ButtonRendererBase {
 
 	// Private Constants
 	private static final String DEFAULT_ONBLUR = "this.className=this.className.replace(' btn-focus','');";

@@ -27,62 +27,64 @@ import com.liferay.faces.util.component.ClientComponent;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class DialogBase extends HtmlPanelGroup implements Styleable, ClientComponent {
 
-	// Public Constants
-	public static final String AUTO_SHOW = "autoShow";
-	public static final String CLIENT_KEY = "clientKey";
-	public static final String FOR = "for";
-	public static final String HEADER_TEXT = "headerText";
-	public static final String MODAL = "modal";
-	public static final String Z_INDEX = "zIndex";
+	// Protected Enumerations
+	protected enum DialogPropertyKeys {
+		autoShow,
+		clientKey,
+		for_,
+		headerText,
+		modal,
+		zIndex
+	}
 
 	public Boolean isAutoShow() {
-		return (Boolean) getStateHelper().eval(AUTO_SHOW, null);
+		return (Boolean) getStateHelper().eval(DialogPropertyKeys.autoShow, null);
 	}
 
 	public void setAutoShow(Boolean autoShow) {
-		getStateHelper().put(AUTO_SHOW, autoShow);
+		getStateHelper().put(DialogPropertyKeys.autoShow, autoShow);
 	}
 
 	@Override
 	public String getClientKey() {
-		return (String) getStateHelper().eval(CLIENT_KEY, null);
+		return (String) getStateHelper().eval(DialogPropertyKeys.clientKey, null);
 	}
 
 	@Override
 	public void setClientKey(String clientKey) {
-		getStateHelper().put(CLIENT_KEY, clientKey);
+		getStateHelper().put(DialogPropertyKeys.clientKey, clientKey);
 	}
 
 	public String getFor() {
-		return (String) getStateHelper().eval(FOR, null);
+		return (String) getStateHelper().eval(DialogPropertyKeys.for_, null);
 	}
 
 	public void setFor(String for_) {
-		getStateHelper().put(FOR, for_);
+		getStateHelper().put(DialogPropertyKeys.for_, for_);
 	}
 
 	public String getHeaderText() {
-		return (String) getStateHelper().eval(HEADER_TEXT, null);
+		return (String) getStateHelper().eval(DialogPropertyKeys.headerText, null);
 	}
 
 	public void setHeaderText(String headerText) {
-		getStateHelper().put(HEADER_TEXT, headerText);
+		getStateHelper().put(DialogPropertyKeys.headerText, headerText);
 	}
 
 	public Boolean isModal() {
-		return (Boolean) getStateHelper().eval(MODAL, null);
+		return (Boolean) getStateHelper().eval(DialogPropertyKeys.modal, null);
 	}
 
 	public void setModal(Boolean modal) {
-		getStateHelper().put(MODAL, modal);
+		getStateHelper().put(DialogPropertyKeys.modal, modal);
 	}
 
 	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(Z_INDEX, null);
+		return (Integer) getStateHelper().eval(DialogPropertyKeys.zIndex, null);
 	}
 
 	public void setzIndex(Integer zIndex) {
-		getStateHelper().put(Z_INDEX, zIndex);
+		getStateHelper().put(DialogPropertyKeys.zIndex, zIndex);
 	}
 }
 //J+

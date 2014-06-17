@@ -39,6 +39,9 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(OverlayRendererBase.class);
 
+	// Protected Constants
+	protected static final String Z_INDEX = "zIndex";
+
 	@Override
 	public abstract void encodeAlloyAttributes(ResponseWriter respoonseWriter, UIComponent uiComponent)
 		throws IOException;
@@ -162,10 +165,10 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
 		throws IOException {
 
 		if (zIndex == Integer.MIN_VALUE) {
-			encodeNonEscapedObject(responseWriter, Dialog.Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY, first);
+			encodeNonEscapedObject(responseWriter, Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY, first);
 		}
 		else {
-			encodeInteger(responseWriter, Dialog.Z_INDEX, zIndex, first);
+			encodeInteger(responseWriter, Z_INDEX, zIndex, first);
 		}
 	}
 

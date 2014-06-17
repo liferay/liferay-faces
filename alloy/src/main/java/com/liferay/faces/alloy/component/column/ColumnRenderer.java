@@ -22,7 +22,6 @@ import javax.faces.component.html.HtmlPanelGrid;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
-import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
@@ -33,7 +32,7 @@ import com.liferay.faces.util.render.RendererUtil;
  */
 @FacesRenderer(componentFamily = Column.COMPONENT_FAMILY, rendererType = Column.RENDERER_TYPE)
 @ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css")
-public class ColumnRenderer extends Renderer {
+public class ColumnRenderer extends ColumnRendererBase {
 
 	protected static Integer getColumnUnitSize(Integer width) {
 		return (int) Math.round(Column.COLUMNS * ((double) width / 100));
@@ -107,7 +106,7 @@ public class ColumnRenderer extends Renderer {
 
 			if (offset != null) {
 				classNames.append(StringPool.SPACE);
-				classNames.append(Column.OFFSET);
+				classNames.append(OFFSET);
 				classNames.append(offset);
 			}
 

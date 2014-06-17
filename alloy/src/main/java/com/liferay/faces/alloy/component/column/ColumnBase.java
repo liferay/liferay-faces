@@ -26,91 +26,93 @@ import com.liferay.faces.util.component.Styleable;
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class ColumnBase extends HtmlColumn implements Styleable {
 
-	// Public Constants
-	public static final String FILTER_BY = "filterBy";
-	public static final String HEADER_TEXT = "headerText";
-	public static final String OFFSET = "offset";
-	public static final String OFFSET_WIDTH = "offsetWidth";
-	public static final String SORT_BY = "sortBy";
-	public static final String SPAN = "span";
-	public static final String STYLE = "style";
-	public static final String STYLE_CLASS = "styleClass";
-	public static final String WIDTH = "width";
+	// Protected Enumerations
+	protected enum ColumnPropertyKeys {
+		filterBy,
+		headerText,
+		offset,
+		offsetWidth,
+		sortBy,
+		span,
+		style,
+		styleClass,
+		width
+	}
 
 	public Object getFilterBy() {
-		return (Object) getStateHelper().eval(FILTER_BY, null);
+		return (Object) getStateHelper().eval(ColumnPropertyKeys.filterBy, null);
 	}
 
 	public void setFilterBy(Object filterBy) {
-		getStateHelper().put(FILTER_BY, filterBy);
+		getStateHelper().put(ColumnPropertyKeys.filterBy, filterBy);
 	}
 
 	public String getHeaderText() {
-		return (String) getStateHelper().eval(HEADER_TEXT, null);
+		return (String) getStateHelper().eval(ColumnPropertyKeys.headerText, null);
 	}
 
 	public void setHeaderText(String headerText) {
-		getStateHelper().put(HEADER_TEXT, headerText);
+		getStateHelper().put(ColumnPropertyKeys.headerText, headerText);
 	}
 
 	public Integer getOffset() {
-		return (Integer) getStateHelper().eval(OFFSET, null);
+		return (Integer) getStateHelper().eval(ColumnPropertyKeys.offset, null);
 	}
 
 	public void setOffset(Integer offset) {
-		getStateHelper().put(OFFSET, offset);
+		getStateHelper().put(ColumnPropertyKeys.offset, offset);
 	}
 
 	public Integer getOffsetWidth() {
-		return (Integer) getStateHelper().eval(OFFSET_WIDTH, null);
+		return (Integer) getStateHelper().eval(ColumnPropertyKeys.offsetWidth, null);
 	}
 
 	public void setOffsetWidth(Integer offsetWidth) {
-		getStateHelper().put(OFFSET_WIDTH, offsetWidth);
+		getStateHelper().put(ColumnPropertyKeys.offsetWidth, offsetWidth);
 	}
 
 	public Object getSortBy() {
-		return (Object) getStateHelper().eval(SORT_BY, null);
+		return (Object) getStateHelper().eval(ColumnPropertyKeys.sortBy, null);
 	}
 
 	public void setSortBy(Object sortBy) {
-		getStateHelper().put(SORT_BY, sortBy);
+		getStateHelper().put(ColumnPropertyKeys.sortBy, sortBy);
 	}
 
 	public Integer getSpan() {
-		return (Integer) getStateHelper().eval(SPAN, null);
+		return (Integer) getStateHelper().eval(ColumnPropertyKeys.span, null);
 	}
 
 	public void setSpan(Integer span) {
-		getStateHelper().put(SPAN, span);
+		getStateHelper().put(ColumnPropertyKeys.span, span);
 	}
 
 	@Override
 	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
+		return (String) getStateHelper().eval(ColumnPropertyKeys.style, null);
 	}
 
 	@Override
 	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
+		getStateHelper().put(ColumnPropertyKeys.style, style);
 	}
 
 	@Override
 	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
+		return (String) getStateHelper().eval(ColumnPropertyKeys.styleClass, null);
 	}
 
 	@Override
 	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
+		getStateHelper().put(ColumnPropertyKeys.styleClass, styleClass);
 	}
 
 	public Integer getWidth() {
-		return (Integer) getStateHelper().eval(WIDTH, null);
+		return (Integer) getStateHelper().eval(ColumnPropertyKeys.width, null);
 	}
 
 	public void setWidth(Integer width) {
-		getStateHelper().put(WIDTH, width);
+		getStateHelper().put(ColumnPropertyKeys.width, width);
 	}
 }
 //J+

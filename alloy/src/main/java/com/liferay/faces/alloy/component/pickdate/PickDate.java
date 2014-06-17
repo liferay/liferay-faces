@@ -71,7 +71,7 @@ public class PickDate extends PickDateBase {
 	@Override
 	public String getStyleClass() {
 
-		String styleClass = (String) getStateHelper().eval(STYLE_CLASS, null);
+		String styleClass = (String) getStateHelper().eval(PickDatePropertyKeys.styleClass, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}

@@ -15,14 +15,12 @@ package com.liferay.faces.alloy.component.inputtextarea;
 
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.util.render.DelegatingRendererBase;
-
 
 /**
  * @author  Neil Griffin
  */
 @FacesRenderer(componentFamily = InputTextarea.COMPONENT_FAMILY, rendererType = InputTextarea.RENDERER_TYPE)
-public class InputTextareaRenderer extends DelegatingRendererBase {
+public class InputTextareaRenderer extends InputTextareaRendererBase {
 
 	@Override
 	public String getDelegateComponentFamily() {

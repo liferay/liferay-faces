@@ -13,9 +13,9 @@
  */
 package com.liferay.faces.alloy.component.panelgrid;
 
+import com.liferay.faces.util.component.ComponentUtil;
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.util.lang.StringPool;
 
 /**
  * @author  Neil Griffin
@@ -38,15 +38,10 @@ public class PanelGrid extends PanelGridBase {
 	@Override
 	public String getStyleClass() {
 
-		String styleClass = super.getStyleClass();
+		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
-		if (styleClass == null) {
-			styleClass = STYLE_CLASS_NAME;
-		}
-		else {
-			styleClass = styleClass + StringPool.SPACE + STYLE_CLASS_NAME;
-		}
-
-		return styleClass;
+		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 }
