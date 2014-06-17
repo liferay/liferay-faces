@@ -8,8 +8,7 @@
 			<showcase:example requiredCheckbox="true" renderedCheckbox="true">
 				<alloy:field label="#{i18n['rating']}">
 					<alloy:selectThumbRating id="thumbRating" rendered="#{showcaseModelBean.selectedComponent.rendered}"
-						required="#{showcaseModelBean.selectedComponent.required}" value="#{selectThumbRatingModelBean.like}"
-						label="#{i18n['like']}:">
+						required="#{showcaseModelBean.selectedComponent.required}" value="#{selectThumbRatingModelBean.like}">
 						<f:selectItem itemLabel="#{i18n['like']}" itemValue="true" />
 						<f:selectItem itemLabel="#{i18n['dislike']}" itemValue="false" />
 					</alloy:selectThumbRating>

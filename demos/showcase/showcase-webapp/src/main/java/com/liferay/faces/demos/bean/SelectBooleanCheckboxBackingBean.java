@@ -13,11 +13,6 @@
  */
 package com.liferay.faces.demos.bean;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -35,43 +30,16 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 @ManagedBean
 @RequestScoped
-public class SelectOneBackingBean {
+public class SelectBooleanCheckboxBackingBean {
 
-	private static final Logger logger = LoggerFactory.getLogger(SelectOneBackingBean.class);
+	private static final Logger logger = LoggerFactory.getLogger(SelectBooleanCheckboxBackingBean.class);
 
-	@ManagedProperty(name = "selectOneModelBean", value = "#{selectOneModelBean}")
-	private SelectOneModelBean selectOneModelBean;
+	@ManagedProperty(name = "selectBooleanCheckboxModelBean", value = "#{selectBooleanCheckboxModelBean}")
+	private SelectBooleanCheckboxModelBean selectBooleanCheckboxModelBean;
 
 	public void submit() {
 		PhaseId phaseId = FacesContext.getCurrentInstance().getCurrentPhaseId();
-		logger.info("submit: phaseId=[{0}] favoriteId=[{1}]", phaseId.toString(), selectOneModelBean.getFavoriteId());
-	}
-
-	public void submitAnswer() {
-
-		Date selectedDate = selectOneModelBean.getDate();
-
-		TimeZone gmtTimeZone = TimeZone.getTimeZone("GMT");
-		Calendar calendar = new GregorianCalendar(gmtTimeZone);
-
-		if (selectedDate != null) {
-			calendar.setTime(selectedDate);
-		}
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		FacesMessage facesMessage;
-
-		if ((selectedDate != null) && (calendar.get(Calendar.MONTH) == 6) && (calendar.get(Calendar.DATE) == 4) &&
-				(calendar.get(Calendar.YEAR) == 1776)) {
-			facesMessage = new FacesMessage("Correct!");
-			facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
-		}
-		else {
-			facesMessage = new FacesMessage("Incorrect!");
-			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
-		}
-
-		facesContext.addMessage(null, facesMessage);
+		logger.info("submit: phaseId=[{0}] agree=[{1}]", phaseId.toString(), selectBooleanCheckboxModelBean.getAgree());
 	}
 
 	public void valueChangeListener(ValueChangeEvent valueChangeEvent) {
@@ -86,7 +54,7 @@ public class SelectOneBackingBean {
 		facesContext.addMessage(null, facesMessage);
 	}
 
-	public void setSelectOneModelBean(SelectOneModelBean selectOneModelBean) {
-		this.selectOneModelBean = selectOneModelBean;
+	public void setSelectBooleanCheckboxModelBean(SelectBooleanCheckboxModelBean selectBooleanCheckboxModelBean) {
+		this.selectBooleanCheckboxModelBean = selectBooleanCheckboxModelBean;
 	}
 }

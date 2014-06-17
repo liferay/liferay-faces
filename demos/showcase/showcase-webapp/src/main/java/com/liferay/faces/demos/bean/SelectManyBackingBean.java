@@ -82,11 +82,6 @@ public class SelectManyBackingBean {
 		facesContext.addMessage(null, facesMessage);
 	}
 
-	public void submitPhase() {
-		PhaseId phaseId = FacesContext.getCurrentInstance().getCurrentPhaseId();
-		logger.info("submit: phaseId=[{0}] favoriteId=[{1}]", phaseId.toString(), selectManyModelBean.getFavoriteIds());
-	}
-
 	public void valueChangeListener(ValueChangeEvent valueChangeEvent) {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
