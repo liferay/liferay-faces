@@ -16,7 +16,6 @@ package com.liferay.faces.alloy.component.message;
 import javax.faces.render.FacesRenderer;
 
 
-
 /**
  * @author  Neil Griffin
  */

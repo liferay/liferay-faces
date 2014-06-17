@@ -20,8 +20,8 @@ import javax.annotation.Generated;
 import com.liferay.faces.alloy.component.button.ButtonRenderer;
 
 /**
- * @author  Bruno Basto
- * @author  Kyle Stiemann
+ * @author	Bruno Basto
+ * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class CommandButtonRendererBase extends ButtonRenderer {

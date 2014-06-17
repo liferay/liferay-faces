@@ -50,23 +50,6 @@ public class DataTable extends DataTableBase {
 		setRendererType(RENDERER_TYPE);
 	}
 
-	protected int getTotalChildColumns() {
-		
-		int totalChildColumns = 0;
-		
-		List<UIComponent> children = getChildren();
-		
-		if (children != null) {
-			
-			for (UIComponent child: children) {
-				if (child instanceof UIColumn) {
-					totalChildColumns++;
-				}
-			}
-		}
-		
-		return totalChildColumns;
-	}
 	@Override
 	public String getColumnClasses() {
 
@@ -76,11 +59,13 @@ public class DataTable extends DataTableBase {
 		int totalChildColumns = getTotalChildColumns();
 
 		if (columnClasses == null) {
-			
+
 			for (int i = 0; i < totalChildColumns; i++) {
+
 				if (i > 0) {
 					stringBuilder.append(StringPool.COMMA);
 				}
+
 				stringBuilder.append(YUI3_DATATABLE_CELL);
 			}
 		}
@@ -88,6 +73,7 @@ public class DataTable extends DataTableBase {
 			String[] columnClassArray = columnClasses.split(StringPool.COMMA);
 
 			int i;
+
 			for (i = 0; i < columnClassArray.length; i++) {
 
 				if (i > 0) {
@@ -105,10 +91,11 @@ public class DataTable extends DataTableBase {
 			}
 
 			for (int j = i; j < totalChildColumns; j++) {
-				
+
 				stringBuilder.append(StringPool.COMMA);
 				stringBuilder.append(YUI3_DATATABLE_CELL);
 			}
+
 			columnClasses = stringBuilder.toString();
 		}
 
@@ -145,12 +132,14 @@ public class DataTable extends DataTableBase {
 				if (rowClass.length() > 0) {
 					stringBuilder.append(rowClass);
 					stringBuilder.append(StringPool.SPACE);
-					if (i % 2 == 1) {
+
+					if ((i % 2) == 1) {
 						stringBuilder.append(YUI3_DATATABLE_ODD);
 					}
 					else {
 						stringBuilder.append(YUI3_DATATABLE_EVEN);
 					}
+
 					stringBuilder.append(StringPool.SPACE);
 				}
 
@@ -171,5 +160,24 @@ public class DataTable extends DataTableBase {
 		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
+	}
+
+	protected int getTotalChildColumns() {
+
+		int totalChildColumns = 0;
+
+		List<UIComponent> children = getChildren();
+
+		if (children != null) {
+
+			for (UIComponent child : children) {
+
+				if (child instanceof UIColumn) {
+					totalChildColumns++;
+				}
+			}
+		}
+
+		return totalChildColumns;
 	}
 }

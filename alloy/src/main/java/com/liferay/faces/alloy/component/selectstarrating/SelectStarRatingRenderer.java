@@ -34,14 +34,16 @@ import com.liferay.faces.util.render.RendererUtil;
 /**
  * @author  Vernon Singleton
  */
+//J-
 @FacesRenderer(componentFamily = SelectStarRating.COMPONENT_FAMILY, rendererType = SelectStarRating.RENDERER_TYPE)
 @ResourceDependencies(
 	{
 		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
-		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"), 
+		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
 		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
 	}
 )
+//J+
 public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 
 	// Private Constants
@@ -93,10 +95,12 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 		// 2. JSF
 		String hiddenInputValue = StringPool.BLANK;
 
+		//J-
 		// 3. Developer attribute
 		// no developer attribute is allowed for this component, even though alloyui allows for an attribute called defaultSelected
 		// that attribute has not been exposed here in favor of using normal JSF application techniques for establishing defaults
 		// in the model.
+		//J+
 
 		// 4. and 5. If the developer EL or user input is specified, then the value of the hidden input field should be
 		// set to this value of the rating component
@@ -141,6 +145,7 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 			}
 		}
 
+		//J-
 		// Otherwise, JSF says that this component has a value, because JSF rendered one of the input type="radio" as
 		// "checked" and its selectedIndex is not -1.  There are two possible reasons for this:
 		// 1. The model has a default value coming through on initial render
@@ -150,8 +155,9 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 		// filled to the defaultSelected input), but the user has selected a different number of stars than the
 		// alloySelectedIndex, so we need to "select" the correct number of stars to be filled. If the alloySelectedIndex is
 		// the same as the indexSelectedByJSF, we do not want to select it again, since alloy has already filled the
-		// correct number of stars.  If we did select it again, it would clear the stars ... not showing what the user
+		// correct number of stars. If we did select it again, it would clear the stars ... not showing what the user
 		// selected.
+		//J+
 		else {
 
 			String indexSelectedByJSF = selectedIndex.toString();

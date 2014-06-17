@@ -23,6 +23,7 @@ import com.liferay.faces.alloy.component.selectstarrating.SelectStarRatingRender
 /**
  * @author  Vernon Singleton
  */
+//J-
 @FacesRenderer(componentFamily = SelectThumbRating.COMPONENT_FAMILY, rendererType = SelectThumbRating.RENDERER_TYPE)
 @ResourceDependencies(
 	{
@@ -31,6 +32,7 @@ import com.liferay.faces.alloy.component.selectstarrating.SelectStarRatingRender
 		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
 	}
 )
+//J+
 public class SelectThumbRatingRenderer extends SelectStarRatingRenderer {
 
 	// Private Constants

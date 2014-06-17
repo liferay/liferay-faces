@@ -51,15 +51,17 @@ public class DataTableResponseWriter extends DelegationResponseWriterBase {
 	public void endElement(String name) throws IOException {
 
 		super.endElement(name);
-		
+
 		if (TH.equals(name)) {
 			writingTH = false;
 		}
 		else if (TR.equals(name)) {
+
 			if (hasTableHeaderFacet) {
 				writingTableHeaderFacet = false;
 			}
 		}
+
 		elementName = null;
 	}
 
@@ -78,6 +80,7 @@ public class DataTableResponseWriter extends DelegationResponseWriterBase {
 			writingTableHeaderFacet = true;
 			writeAttribute(StringPool.CLASS, YUI3_DATATABLE_COLUMNS, null);
 		}
+
 		elementName = name;
 	}
 
@@ -87,17 +90,20 @@ public class DataTableResponseWriter extends DelegationResponseWriterBase {
 		if (StringPool.CLASS.equals(name)) {
 
 			if (writingTH) {
-				
+
 				if (writingTableHeaderFacet) {
+
 					if (TH.equals(elementName)) {
 						value = value + StringPool.SPACE + HEADER_FACET;
 					}
 				}
 				else {
+
 					if (firstColumnHeader) {
 						value = value + StringPool.SPACE + YUI3_DATATABLE_FIRST_HEADER;
 					}
 				}
+
 				firstColumnHeader = false;
 			}
 		}

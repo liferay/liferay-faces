@@ -104,6 +104,12 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 	}
 
 	@Override
+	protected void encodeCssClass(ResponseWriter responseWriter, OutputTooltip outputTooltip, String styleClass,
+		boolean first) throws IOException {
+		encodeNonEscapedString(responseWriter, CSS_CLASS, styleClass, first);
+	}
+
+	@Override
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, OutputTooltip tooltip, boolean first)
 		throws IOException {
 
@@ -139,17 +145,11 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 		boolean first) throws IOException {
 
 		if (zIndex == Integer.MIN_VALUE) {
-			encodeNonEscapedObject(responseWriter, Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_TOOLTIP,
-				first);
+			encodeNonEscapedObject(responseWriter, Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_TOOLTIP, first);
 		}
 		else {
 			super.encodeZIndex(responseWriter, outputTooltip, zIndex, first);
 		}
-	}
-
-	@Override
-	protected void encodeCssClass(ResponseWriter responseWriter, OutputTooltip outputTooltip, String styleClass, boolean first) throws IOException {
-		encodeNonEscapedString(responseWriter, CSS_CLASS, styleClass, first);
 	}
 
 	@Override

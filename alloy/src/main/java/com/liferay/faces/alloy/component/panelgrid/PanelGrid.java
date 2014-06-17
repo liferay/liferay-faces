@@ -13,8 +13,9 @@
  */
 package com.liferay.faces.alloy.component.panelgrid;
 
-import com.liferay.faces.util.component.ComponentUtil;
 import javax.faces.component.FacesComponent;
+
+import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
