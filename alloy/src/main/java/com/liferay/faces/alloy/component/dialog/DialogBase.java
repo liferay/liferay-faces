@@ -33,8 +33,6 @@ public abstract class DialogBase extends HtmlPanelGroup implements Styleable, Cl
 	public static final String FOR = "for";
 	public static final String HEADER_TEXT = "headerText";
 	public static final String MODAL = "modal";
-	public static final String STYLE = "style";
-	public static final String STYLE_CLASS = "styleClass";
 	public static final String Z_INDEX = "zIndex";
 
 	public Boolean isAutoShow() {
@@ -77,26 +75,6 @@ public abstract class DialogBase extends HtmlPanelGroup implements Styleable, Cl
 
 	public void setModal(Boolean modal) {
 		getStateHelper().put(MODAL, modal);
-	}
-
-	@Override
-	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
-	}
-
-	@Override
-	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
-	}
-
-	@Override
-	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
-	}
-
-	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 
 	public Integer getzIndex() {

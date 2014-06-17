@@ -35,8 +35,6 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 	public static final String MODE = "mode";
 	public static final String READ_ONLY = "readOnly";
 	public static final String SHOW_PRINT_MARGIN = "showPrintMargin";
-	public static final String STYLE = "style";
-	public static final String STYLE_CLASS = "styleClass";
 	public static final String TAB_SIZE = "tabSize";
 	public static final String USE_SOFT_TABS = "useSoftTabs";
 	public static final String USE_WRAP_MODE = "useWrapMode";
@@ -99,26 +97,6 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 
 	public void setShowPrintMargin(Boolean showPrintMargin) {
 		getStateHelper().put(SHOW_PRINT_MARGIN, showPrintMargin);
-	}
-
-	@Override
-	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
-	}
-
-	@Override
-	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
-	}
-
-	@Override
-	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
-	}
-
-	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 
 	public String getTabSize() {

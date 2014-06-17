@@ -34,7 +34,6 @@ public abstract class OutputTooltipBase extends OutputText implements Styleable,
 	public static final String HEADER_TEXT = "headerText";
 	public static final String OPACITY = "opacity";
 	public static final String POSITION = "position";
-	public static final String STYLE = "style";
 	public static final String STYLE_CLASS = "styleClass";
 	public static final String VALUE = "value";
 	public static final String Z_INDEX = "zIndex";
@@ -87,26 +86,6 @@ public abstract class OutputTooltipBase extends OutputText implements Styleable,
 
 	public void setPosition(String position) {
 		getStateHelper().put(POSITION, position);
-	}
-
-	@Override
-	public String getStyle() {
-		return (String) getStateHelper().eval(STYLE, null);
-	}
-
-	@Override
-	public void setStyle(String style) {
-		getStateHelper().put(STYLE, style);
-	}
-
-	@Override
-	public String getStyleClass() {
-		return (String) getStateHelper().eval(STYLE_CLASS, null);
-	}
-
-	@Override
-	public void setStyleClass(String styleClass) {
-		getStateHelper().put(STYLE_CLASS, styleClass);
 	}
 
 	public Integer getzIndex() {
