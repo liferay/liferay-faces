@@ -14,10 +14,11 @@
 package com.liferay.faces.alloy.component.inputsourcecode;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 
 import com.liferay.faces.alloy.component.AlloyComponentUtil;
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -45,7 +46,12 @@ public class InputSourceCode extends InputSourceCodeBase {
 		String label = super.getLabel();
 
 		if (label == null) {
-			label = AlloyComponentUtil.getComponentLabel(this);
+
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+
+			if (facesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
+				label = AlloyComponentUtil.getComponentLabel(this);
+			}
 		}
 
 		return label;
