@@ -154,7 +154,7 @@ public class Field extends FieldBase {
 			for (EditableValueHolder editableValueHolder : editableValueHolders) {
 
 				if (editableValueHolder.isValid()) {
-					
+
 					if (editableValueHolder.isRequired() && editableValueHolder.isLocalValueSet()) {
 						editableValueHoldersValid = true;
 					}

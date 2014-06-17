@@ -16,7 +16,6 @@ package com.liferay.faces.alloy.component.panelgroup;
 import javax.faces.render.FacesRenderer;
 
 
-
 /**
  * @author  Kyle Stiemann
  */

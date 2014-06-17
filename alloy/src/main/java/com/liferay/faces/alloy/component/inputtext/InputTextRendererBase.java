@@ -20,8 +20,8 @@ import javax.annotation.Generated;
 import com.liferay.faces.util.render.DelegatingRendererBase;
 
 /**
- * @author  Bruno Basto
- * @author  Kyle Stiemann
+ * @author	Bruno Basto
+ * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class InputTextRendererBase extends DelegatingRendererBase {

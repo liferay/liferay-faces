@@ -34,6 +34,7 @@ import com.liferay.faces.util.render.HiddenTextResponseWriter;
 /**
  * @author  Neil Griffin
  */
+//J-
 @FacesRenderer(componentFamily = InputSourceCode.COMPONENT_FAMILY, rendererType = InputSourceCode.RENDERER_TYPE)
 @ResourceDependencies(
 	{
@@ -42,6 +43,7 @@ import com.liferay.faces.util.render.HiddenTextResponseWriter;
 		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
 	}
 )
+//J+
 public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 
 	@Override

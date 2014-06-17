@@ -23,8 +23,8 @@ import javax.faces.context.ResponseWriter;
 import com.liferay.faces.alloy.component.overlay.OverlayRendererBase;
 
 /**
- * @author  Bruno Basto
- * @author  Kyle Stiemann
+ * @author	Bruno Basto
+ * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class PopoverRendererBase extends OverlayRendererBase {

@@ -33,6 +33,7 @@ import com.liferay.faces.util.lang.StringPool;
 /**
  * @author  Vernon Singleton
  */
+//J-
 @FacesRenderer(
 	componentFamily = OutputRemainingChars.COMPONENT_FAMILY, rendererType = OutputRemainingChars.RENDERER_TYPE
 )
@@ -43,6 +44,7 @@ import com.liferay.faces.util.lang.StringPool;
 		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
 	}
 )
+//J+
 public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBase {
 
 	// Private Constants

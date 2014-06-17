@@ -20,8 +20,8 @@ import javax.faces.component.UIComponentBase;
 import com.liferay.faces.util.component.Styleable;
 
 /**
- * @author  Bruno Basto
- * @author  Kyle Stiemann
+ * @author	Bruno Basto
+ * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class IconBase extends UIComponentBase implements Styleable {

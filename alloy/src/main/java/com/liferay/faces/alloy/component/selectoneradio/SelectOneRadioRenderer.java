@@ -17,7 +17,6 @@ import javax.faces.application.ResourceDependency;
 import javax.faces.render.FacesRenderer;
 
 
-
 /**
  * @author  Vernon Singleton
  */

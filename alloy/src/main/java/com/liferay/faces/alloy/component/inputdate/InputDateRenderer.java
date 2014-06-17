@@ -30,6 +30,7 @@ import com.liferay.faces.util.lang.StringPool;
 /**
  * @author  Kyle Stiemann
  */
+//J-
 @FacesRenderer(componentFamily = InputDate.COMPONENT_FAMILY, rendererType = InputDate.RENDERER_TYPE)
 @ResourceDependencies(
 	{
@@ -39,6 +40,7 @@ import com.liferay.faces.util.lang.StringPool;
 		@ResourceDependency(library = "liferay-faces-alloy", name = "pickdate.js")
 	}
 )
+//J+
 public class InputDateRenderer extends InputDateRendererBase {
 
 	// Private Constants
