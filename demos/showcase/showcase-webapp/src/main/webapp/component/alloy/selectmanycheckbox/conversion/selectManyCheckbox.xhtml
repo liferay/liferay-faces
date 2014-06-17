@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-1col-80.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<showcase:example description="#{i18n['conversion-to-a-date-using-f-convertdatetime']}">
+				<h:outputLabel styleClass="alloy-output-label" value="#{i18n['which-of-the-following-dates-are-in-the-18th-century']}" />
+				<alloy:messages globalOnly="true" styleClass="feedback" />
+				<alloy:selectManyCheckbox value="#{selectManyModelBean.dates}">
+					<f:convertDateTime pattern="MM/dd/yyyy G" />
+					<f:selectItem itemLabel="April 5, 33 AD" itemValue="04/05/0033 AD" />
+					<f:selectItem itemLabel="October 31, 1517 AD" itemValue="10/31/1517 AD" />
+					<f:selectItem itemLabel="July 4, 1776 AD" itemValue="07/04/1776 AD" />
+					<f:selectItem itemLabel="July 14, 1789 AD" itemValue="07/14/1789 AD" />
+				</alloy:selectManyCheckbox>
+				<hr />
+				<alloy:commandButton action="#{selectManyBackingBean.submitAnswer}" value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<ui:repeat id="modelValue" value="#{selectManyModelBean.dates}" var="date">
+					<alloy:outputText value="#{date}">
+						<f:convertDateTime pattern="MMM d, yyyy G" />
+					</alloy:outputText><br />
+				</ui:repeat>
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

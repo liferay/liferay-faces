@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<showcase:example>
+				<h:outputLabel styleClass="alloy-output-label" value="#{i18n['favorite-liferay-benefit']}" />
+				<alloy:selectManyListbox value="#{selectManyModelBean.benefitIds}">
+					<f:converter converterId="javax.faces.Long" />
+					<f:selectItem itemLabel="Compatible" itemValue="1" />
+					<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
+					<f:selectItem itemLabel="Powerful Integration" itemValue="3" />
+					<f:selectItem itemLabel="Lightweight" itemValue="4" />
+					<f:selectItem itemLabel="Open Source" itemValue="5" />
+				</alloy:selectManyListbox>
+				<hr />
+				<alloy:commandButton action="#{selectManyBackingBean.submit}" value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<ui:repeat id="modelValue" value="#{selectManyModelBean.benefitIds}" var="benefitId">
+					<alloy:outputText value="#{benefitId}" /><br />
+				</ui:repeat>
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

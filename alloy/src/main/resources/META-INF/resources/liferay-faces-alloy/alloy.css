@@ -1,28 +1,32 @@
 .alloy-messages {
-	border: 1px solid #ddd;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
+	border:1px solid #ddd;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
 }
 table.alloy-messages {
-	border-collapse: separate;
-	border-spacing: 4px;
-	width: 100%;
+	border-collapse:separate;
+	border-spacing:4px;
+	width:100%;
 }
 ul.alloy-messages {
-	list-style-position: inside;
-	margin: 0px;
-	padding: 4px;
+	list-style-position:inside;
+	margin:0px;
+	padding:4px;
 }
 
 table.alloy-select-one-radio {
-	border-collapse: separate;
+	border-collapse:separate;
 }
-table.alloy-select-one-radio td {
-	padding-right: 30px;
+table.alloy-select-many-checkbox td,table.alloy-select-one-radio td {
+	padding-right:30px;
 }
-table.alloy-select-one-radio td input[type='radio'] {
+table.alloy-select-many-checkbox td input[type='checkbox'] {
+	vertical-align:baseline;
 }
-table.alloy-select-one-radio td label {
-	white-space: nowrap;
+table.alloy-select-many-checkbox td label {
+	display:inline;
+}
+table.alloy-select-many-checkbox td label,table.alloy-select-one-radio td label {
+	white-space:nowrap;
 }
