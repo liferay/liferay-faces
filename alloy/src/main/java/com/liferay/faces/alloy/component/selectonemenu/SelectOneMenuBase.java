@@ -25,10 +25,5 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class SelectOneMenuBase extends HtmlSelectOneMenu implements Styleable {
-
-	// Protected Enumerations
-	protected enum SelectOneMenuPropertyKeys {
-
-	}
 }
 //J+
