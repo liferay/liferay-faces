@@ -6,16 +6,15 @@
 	<ui:define name="col1">
 		<h:form>
 			<showcase:example>
-				<h:outputLabel styleClass="alloy-output-label" for="thumbRating" value="#{i18n['rating']}" />
-				<alloy:selectThumbRating id="thumbRating" value="#{selectThumbRatingModelBean.like}">
-					<f:selectItem itemLabel="#{i18n['like']}" itemValue="true" />
-					<f:selectItem itemLabel="#{i18n['dislike']}" itemValue="false" />
+				<alloy:selectBooleanCheckbox value="#{selectBooleanCheckboxModelBean.agree}">
 					<f:ajax render="@form" />
-				</alloy:selectThumbRating>
+				</alloy:selectBooleanCheckbox>
+				<h:outputText styleClass="radio" value="#{i18n['i-agree-to-the-terms-of-the-license-agreement']}" />
 			</showcase:example>
 			<showcase:outputModel>
-				<alloy:outputText id="modelValue" value="#{selectThumbRatingModelBean.like}" />
+				<alloy:outputText value="#{selectBooleanCheckboxModelBean.agree}" />
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>
+
 </ui:composition>

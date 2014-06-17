@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: ValueChangeListener execution when immediate is true -->
+		<h:form>
+			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-true']}"
+				longDescription="true" number="1">
+				<h:outputLabel styleClass="alloy-output-label" value="#{i18n['agree']}" />
+				<alloy:messages globalOnly="true" styleClass="feedback" />
+				<alloy:selectBooleanCheckbox immediate="true" value="#{selectBooleanCheckboxModelBean.agree}"
+					valueChangeListener="#{selectBooleanCheckboxBackingBean.valueChangeListener}">
+				</alloy:selectBooleanCheckbox>
+				<hr />
+				<alloy:commandButton value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{selectBooleanCheckboxModelBean.agree}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: ValueChangeListener execution when immediate is false (the default) -->
+		<h:form>
+			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-false']}"
+				longDescription="true" number="2">
+				<h:outputLabel styleClass="alloy-output-label" value="#{i18n['agree']}" />
+				<alloy:messages globalOnly="true" styleClass="feedback" />
+				<alloy:selectBooleanCheckbox value="#{selectBooleanCheckboxModelBean.agree}"
+					valueChangeListener="#{selectBooleanCheckboxBackingBean.valueChangeListener}">
+				</alloy:selectBooleanCheckbox>
+				<hr />
+				<alloy:commandButton value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{selectBooleanCheckboxModelBean.agree}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
