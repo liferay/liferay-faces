@@ -21,7 +21,7 @@
 		<c:set value="#{i18n[selectedComponentKey]}" var="selectedComponentDescription" />
 		<c:set value="#{i18n[selectedComponentUseCaseKey]}" var="selectedComponentUseCaseDescription" />
 		<c:set value="vdldoc:#{selectedComponentFullName}" var="selectedComponentDocKey" />
-		<button onclick="window.open('#{showcase-fn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;">#{i18n['vdl-documentation']}</button>
+		<alloy:button onclick="window.open('#{showcase-fn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;" value="#{i18n['vdl-documentation']}" />
 		<c:if test="#{selectedComponentCamelCaseName == 'pickDate'}">
 			<c:set value="#{selectedComponentUseCaseName}" var="correspondingUseCase" />
 			<c:if test="#{selectedComponentUseCaseName == 'multiple-selection'}">
