@@ -25,7 +25,8 @@ import javax.faces.context.ResponseWriter;
  */
 public interface AlloyRenderer {
 
-	public void encodeAlloyAttributes(ResponseWriter respoonseWriter, UIComponent uiComponent) throws IOException;
+	public void encodeAlloyAttributes(FacesContext facesContext, ResponseWriter respoonseWriter,
+		UIComponent uiComponent) throws IOException;
 
 	public void encodeBoolean(ResponseWriter responseWriter, String attributeName, Boolean attributeValue,
 		boolean first) throws IOException;

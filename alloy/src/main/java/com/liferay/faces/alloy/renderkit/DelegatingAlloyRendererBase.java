@@ -29,8 +29,8 @@ public abstract class DelegatingAlloyRendererBase extends DelegatingClientCompon
 	implements AlloyRenderer {
 
 	@Override
-	public abstract void encodeAlloyAttributes(ResponseWriter respoonseWriter, UIComponent uiComponent)
-		throws IOException;
+	public abstract void encodeAlloyAttributes(FacesContext facesContext, ResponseWriter respoonseWriter,
+		UIComponent uiComponent) throws IOException;
 
 	@Override
 	public void encodeBoolean(ResponseWriter responseWriter, String attributeName, Boolean attributeValue,

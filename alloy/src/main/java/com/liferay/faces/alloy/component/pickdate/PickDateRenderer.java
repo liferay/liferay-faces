@@ -86,7 +86,8 @@ public class PickDateRenderer extends PickDateRendererBase {
 		// This is a no-op since the DataPicker does not manifest any markup.
 	}
 
-	protected void encodeCalendar(ResponseWriter responseWriter, PickDate pickDate, boolean first) throws IOException {
+	protected void encodeCalendar(FacesContext facesContext, ResponseWriter responseWriter, PickDate pickDate,
+		boolean first) throws IOException {
 
 		// The calendar attribute value provides the opportunity to specify dateClick events, selectionMode,
 		// minimumDate, maximumDate as key:value pairs via JSON syntax.
@@ -136,7 +137,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 			UIComponent forComponent = pickDate.findComponent(for_);
 
 			if (forComponent != null) {
-				for_ = forComponent.getClientId();
+				for_ = forComponent.getClientId(facesContext);
 			}
 
 			// The trigger is the "#" symbol followed by the forComponent's clientId.
@@ -157,10 +158,10 @@ public class PickDateRenderer extends PickDateRendererBase {
 	}
 
 	@Override
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, PickDate pickDate, boolean first)
-		throws IOException {
+	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, PickDate pickDate,
+		boolean first) throws IOException {
 
-		encodeCalendar(responseWriter, pickDate, first);
+		encodeCalendar(facesContext, responseWriter, pickDate, first);
 		first = false;
 
 		encodePopover(responseWriter, pickDate, first);

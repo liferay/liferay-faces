@@ -146,12 +146,11 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 	}
 
 	@Override
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars,
-		boolean first) throws IOException {
+	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter,
+		OutputRemainingChars outputRemainingChars, boolean first) throws IOException {
 
-		FacesContext facesContext = FacesContext.getCurrentInstance();
 		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
-		String counter = outputRemainingChars.getClientId() + separatorChar + COUNTER;
+		String counter = outputRemainingChars.getClientId(facesContext) + separatorChar + COUNTER;
 		encodeClientId(responseWriter, COUNTER, counter, first);
 		first = false;
 	}

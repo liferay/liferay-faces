@@ -44,8 +44,8 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
 	protected static final String Z_INDEX = "zIndex";
 
 	@Override
-	public abstract void encodeAlloyAttributes(ResponseWriter respoonseWriter, UIComponent uiComponent)
-		throws IOException;
+	public abstract void encodeAlloyAttributes(FacesContext facesContext, ResponseWriter respoonseWriter,
+		UIComponent uiComponent) throws IOException;
 
 	@Override
 	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -144,16 +144,15 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
 		// Alloy's JavaScript will be able to locate the contentBox in the DOM.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		DelegationResponseWriter idDelegationResponseWriter = new IdDelegationResponseWriter(responseWriter,
-				StringPool.DIV, uiComponent.getClientId());
+				StringPool.DIV, uiComponent.getClientId(facesContext));
 
 		super.encodeMarkupBegin(facesContext, uiComponent, idDelegationResponseWriter);
 	}
 
-	protected void encodeOverlayHiddenAttributes(ResponseWriter responseWriter, Overlay overlay, boolean first)
-		throws IOException {
+	protected void encodeOverlayHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter,
+		Overlay overlay, boolean first) throws IOException {
 
 		// Encode the "contentBox" Alloy attribute.
-		FacesContext facesContext = FacesContext.getCurrentInstance();
 		String clientId = overlay.getClientId(facesContext);
 		encodeClientId(responseWriter, AlloyRendererUtil.CONTENT_BOX, clientId, first);
 

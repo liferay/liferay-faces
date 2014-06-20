@@ -224,7 +224,7 @@ public class AlloyRendererUtil {
 		responseWriter.write(alloyClassName);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		alloyRenderer.encodeAlloyAttributes(responseWriter, uiComponent);
+		alloyRenderer.encodeAlloyAttributes(facesContext, responseWriter, uiComponent);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 

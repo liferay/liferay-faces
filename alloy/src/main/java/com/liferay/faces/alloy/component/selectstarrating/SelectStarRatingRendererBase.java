@@ -18,6 +18,7 @@ import java.io.IOException;
 
 import javax.annotation.Generated;
 import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
@@ -42,7 +43,7 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
 	@Override
-	public void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
+	public void encodeAlloyAttributes(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
 
 		SelectStarRating selectStarRating = (SelectStarRating) uiComponent;
 		boolean first = true;
@@ -55,7 +56,7 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 			first = false;
 		}
 
-		encodeHiddenAttributes(responseWriter, selectStarRating, first);
+		encodeHiddenAttributes(facesContext, responseWriter, selectStarRating, first);
 	}
 
 	@Override
@@ -72,7 +73,7 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 		encodeString(responseWriter, VALUE, value, first);
 	}
 
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, SelectStarRating selectStarRating, boolean first) throws IOException {
+	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, SelectStarRating selectStarRating, boolean first) throws IOException {
 		// no-op
 	}
 }

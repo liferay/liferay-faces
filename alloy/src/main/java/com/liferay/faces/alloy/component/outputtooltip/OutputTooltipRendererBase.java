@@ -18,6 +18,7 @@ import java.io.IOException;
 
 import javax.annotation.Generated;
 import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.component.overlay.OverlayRendererBase;
@@ -46,7 +47,7 @@ public abstract class OutputTooltipRendererBase extends OverlayRendererBase {
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
 	@Override
-	public void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
+	public void encodeAlloyAttributes(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
 
 		OutputTooltip outputTooltip = (OutputTooltip) uiComponent;
 		boolean first = true;
@@ -99,7 +100,7 @@ public abstract class OutputTooltipRendererBase extends OverlayRendererBase {
 			first = false;
 		}
 
-		encodeHiddenAttributes(responseWriter, outputTooltip, first);
+		encodeHiddenAttributes(facesContext, responseWriter, outputTooltip, first);
 	}
 
 	@Override
@@ -136,7 +137,7 @@ public abstract class OutputTooltipRendererBase extends OverlayRendererBase {
 		encodeInteger(responseWriter, Z_INDEX, zIndex, first);
 	}
 
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, OutputTooltip outputTooltip, boolean first) throws IOException {
+	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, OutputTooltip outputTooltip, boolean first) throws IOException {
 		// no-op
 	}
 }
