@@ -1497,13 +1497,13 @@
 		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase" yui="true"
 		yuiName="CharCounter">
 		<description>
-			<![CDATA[CharCounter is an OutputText component that displays the number of allowed characters remaining for a given text input, and limits the number of characters allowed in the input. Renders as HtmlOutputText renders, so this tag will optionally render a span when i18n or style attributes used.]]>
+			<![CDATA[OutputRemainingChars is a UIOutput component that displays the number of characters remaining for an associated alloy:inputText or alloy:inputTextarea.]]>
 		</description>
 		<attributes>
 			<!-- Attributes used to help the component follow normal JSF usage patterns -->
 			<attribute>
 				<description>
-					<![CDATA[The id of the text input node which is used to calculate the remaining characters. One of either "for" or "input" are required.]]>
+					<![CDATA[The id of the component for which the remaining characters are to be calculated.]]>
 				</description>
 				<name>for</name>
 				<required>true</required>
