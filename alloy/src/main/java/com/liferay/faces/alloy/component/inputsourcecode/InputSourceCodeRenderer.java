@@ -112,14 +112,13 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 	}
 
 	@Override
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, InputSourceCode inputSourceCode, boolean first)
-		throws IOException {
+	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter,
+		InputSourceCode inputSourceCode, boolean first) throws IOException {
 
 		encodeWidgetRender(responseWriter, first);
 
 		first = false;
 
-		FacesContext facesContext = FacesContext.getCurrentInstance();
 		String boundingBox = getDefaultBoundingBoxClientId(facesContext, inputSourceCode);
 
 		encodeClientId(responseWriter, AlloyRendererUtil.BOUNDING_BOX, boundingBox, first);

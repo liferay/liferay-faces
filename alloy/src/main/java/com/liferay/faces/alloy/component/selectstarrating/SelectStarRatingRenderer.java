@@ -267,11 +267,11 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 	}
 
 	@Override
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, SelectStarRating selectStarRating,
-		boolean first) throws IOException {
+	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter,
+		SelectStarRating selectStarRating, boolean first) throws IOException {
 
 		// boundingBox
-		String clientId = selectStarRating.getClientId();
+		String clientId = selectStarRating.getClientId(facesContext);
 		encodeClientId(responseWriter, AlloyRendererUtil.BOUNDING_BOX, clientId, first);
 
 		first = false;

@@ -17,6 +17,7 @@ import java.io.IOException;
 
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
+import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
@@ -39,15 +40,15 @@ import com.liferay.faces.util.lang.StringPool;
 public class DialogRenderer extends DialogRendererBase {
 
 	@Override
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, Dialog dialog, boolean first)
-		throws IOException {
+	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, Dialog dialog,
+		boolean first) throws IOException {
 
 		// Encode the "centered: true" Alloy attribute.
 		encodeBoolean(responseWriter, StringPool.CENTERED, true, first);
 
 		first = false;
 
-		encodeOverlayHiddenAttributes(responseWriter, dialog, first);
+		encodeOverlayHiddenAttributes(facesContext, responseWriter, dialog, first);
 	}
 
 	@Override

@@ -18,6 +18,7 @@ import java.io.IOException;
 
 import javax.annotation.Generated;
 import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
@@ -40,12 +41,12 @@ public abstract class DataTableRendererBase extends DelegatingAlloyRendererBase 
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
 	@Override
-	public void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
+	public void encodeAlloyAttributes(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
 
 		DataTable dataTable = (DataTable) uiComponent;
 		boolean first = true;
 
-		encodeHiddenAttributes(responseWriter, dataTable, first);
+		encodeHiddenAttributes(facesContext, responseWriter, dataTable, first);
 	}
 
 	@Override
@@ -58,7 +59,7 @@ public abstract class DataTableRendererBase extends DelegatingAlloyRendererBase 
 		return MODULES;
 	}
 
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, DataTable dataTable, boolean first) throws IOException {
+	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, DataTable dataTable, boolean first) throws IOException {
 		// no-op
 	}
 }
