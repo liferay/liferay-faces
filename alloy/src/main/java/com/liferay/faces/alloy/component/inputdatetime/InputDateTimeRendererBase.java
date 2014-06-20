@@ -26,7 +26,6 @@ import javax.faces.context.ResponseWriter;
 import com.liferay.faces.alloy.component.button.Button;
 import com.liferay.faces.alloy.component.icon.Icon;
 import com.liferay.faces.alloy.component.inputtext.InputTextRenderer;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
@@ -80,8 +79,8 @@ public abstract class InputDateTimeRendererBase extends InputTextRenderer {
 		Application application = applicationFactory.getApplication();
 		String clientId = uiComponent.getClientId(facesContext);
 		String inputClientId = clientId + InputDateTimeUtil.getInputIdSuffix(facesContext);
-		String escapedInputClientId = ComponentUtil.escapeClientId(inputClientId);
-		String trigger = escapedInputClientId;
+		String escapedInputClientId = RendererUtil.escapeClientId(inputClientId);
+		String trigger = inputClientId;
 
 		// Determine whether or not the text input is enabled.
 		InputDateTimeBase inputDateTimeBase = (InputDateTimeBase) uiComponent;
@@ -131,9 +130,7 @@ public abstract class InputDateTimeRendererBase extends InputTextRenderer {
 					// Since the pickDate's trigger needs to be set directly, prefix the escaped clientId of the
 					// button with the "#" symbol.
 					String buttonClientId = button.getClientId(facesContext);
-					String escapedButtonClientId = ComponentUtil.escapeClientId(buttonClientId);
-					String buttonTrigger = escapedButtonClientId;
-					trigger = buttonTrigger;
+					trigger = buttonClientId;
 				}
 				else {
 

@@ -1510,6 +1510,7 @@
 				<type>java.lang.String</type>
 				<yui>true</yui>
 				<yuiName>input</yuiName>
+				<yuiType>ClientId</yuiType>
 			</attribute>
 			<!-- Attributes that need to be generated for the Alloy component -->
 			<attribute>
@@ -1580,6 +1581,7 @@
 				<type>java.lang.String</type>
 				<yui>true</yui>
 				<yuiName>trigger</yuiName>
+				<yuiType>ClientId</yuiType>
 			</attribute>
 			<attribute>
 				<description>
@@ -1664,6 +1666,7 @@
 				<type>java.lang.String</type>
 				<yui>true</yui>
 				<yuiName>trigger</yuiName>
+				<yuiType>ClientId</yuiType>
 			</attribute>
 			<attribute>
 				<description>
@@ -1696,8 +1699,6 @@
 				<name>for</name>
 				<required>true</required>
 				<type>java.lang.String</type>
-				<yui>true</yui>
-				<yuiName>align</yuiName>
 			</attribute>
 		</attributes>
 	</component>

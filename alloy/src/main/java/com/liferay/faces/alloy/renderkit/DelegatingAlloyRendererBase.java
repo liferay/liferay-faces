@@ -39,6 +39,18 @@ public abstract class DelegatingAlloyRendererBase extends DelegatingClientCompon
 	}
 
 	@Override
+	public void encodeClientId(ResponseWriter responseWriter, String attributeName, String clientId, boolean first)
+		throws IOException {
+		AlloyRendererUtil.encodeClientId(responseWriter, attributeName, clientId, first);
+	}
+
+	@Override
+	public void encodeClientId(ResponseWriter responseWriter, String attributeName, String clientId,
+		UIComponent uiComponent, boolean first) throws IOException {
+		AlloyRendererUtil.encodeClientId(responseWriter, attributeName, clientId, uiComponent, first);
+	}
+
+	@Override
 	public void encodeInteger(ResponseWriter responseWriter, String attributeName, Integer attributeValue,
 		boolean first) throws IOException {
 		AlloyRendererUtil.encodeInteger(responseWriter, attributeName, attributeValue, first);
@@ -87,12 +99,6 @@ public abstract class DelegatingAlloyRendererBase extends DelegatingClientCompon
 	public void encodeNonEscapedObject(ResponseWriter responseWriter, String attributeName, Object attributeValue,
 		boolean first) throws IOException {
 		AlloyRendererUtil.encodeNonEscapedObject(responseWriter, attributeName, attributeValue, first);
-	}
-
-	@Override
-	public void encodeNonEscapedString(ResponseWriter responseWriter, String attributeName, Object attributeValue,
-		boolean first) throws IOException {
-		AlloyRendererUtil.encodeNonEscapedString(responseWriter, attributeName, attributeValue, first);
 	}
 
 	@Override

@@ -27,6 +27,10 @@ import com.liferay.faces.util.lang.StringPool;
  */
 public class RendererUtil {
 
+	// Public Constants
+	public static final String BACKSLASH_COLON = "\\\\:";
+	public static final String REGEX_COLON = "[:]";
+
 	// Private Constants
 	private static final String JAVA_SCRIPT_HEX_PREFIX = "\\x";
 
@@ -106,5 +110,18 @@ public class RendererUtil {
 		while (i != 0);
 
 		return new String(buffer, index, 8 - index);
+	}
+
+	public static String escapeClientId(String clientId) {
+
+		String escapedClientId = clientId;
+
+		if (escapedClientId != null) {
+
+			escapedClientId = escapedClientId.replaceAll(REGEX_COLON, BACKSLASH_COLON);
+			escapedClientId = escapeJavaScript(escapedClientId);
+		}
+
+		return escapedClientId;
 	}
 }

@@ -67,6 +67,28 @@ public class AlloyRendererUtil {
 		responseWriter.write(attributeValue.toString());
 	}
 
+	public static void encodeClientId(ResponseWriter responseWriter, String attributeName, String clientId,
+		boolean first) throws IOException {
+
+		String escapedClientId = clientId;
+		escapedClientId = escapedClientId.replaceAll(RendererUtil.REGEX_COLON, RendererUtil.BACKSLASH_COLON);
+		escapedClientId = StringPool.POUND + escapedClientId;
+		encodeString(responseWriter, attributeName, escapedClientId, first);
+	}
+
+	public static void encodeClientId(ResponseWriter responseWriter, String attributeName, String clientId,
+		UIComponent uiComponent, boolean first) throws IOException {
+
+		UIComponent forComponent = uiComponent.findComponent(clientId);
+		String escapedClientId = clientId;
+
+		if (forComponent != null) {
+			escapedClientId = forComponent.getClientId();
+		}
+
+		encodeClientId(responseWriter, attributeName, escapedClientId, first);
+	}
+
 	public static void encodeInteger(ResponseWriter responseWriter, String attributeName, Integer attributeValue,
 		boolean first) throws IOException {
 
@@ -190,7 +212,9 @@ public class AlloyRendererUtil {
 		responseWriter.write(LIFERAY_COMPONENT);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(clientKey);
+
+		String escapedClientKey = RendererUtil.escapeJavaScript(clientKey);
+		responseWriter.write(escapedClientKey);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.COMMA);
 
@@ -215,7 +239,9 @@ public class AlloyRendererUtil {
 		responseWriter.write(LIFERAY_COMPONENT);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(clientKey);
+
+		String escapedClientKey = RendererUtil.escapeJavaScript(clientKey);
+		responseWriter.write(escapedClientKey);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 	}
@@ -243,20 +269,6 @@ public class AlloyRendererUtil {
 		responseWriter.write(attributeValue.toString());
 	}
 
-	public static void encodeNonEscapedString(ResponseWriter responseWriter, String attributeName,
-		Object attributeValue, boolean first) throws IOException {
-
-		if (!first) {
-			responseWriter.write(StringPool.COMMA);
-		}
-
-		responseWriter.write(attributeName);
-		responseWriter.write(StringPool.COLON);
-		responseWriter.write(StringPool.APOSTROPHE);
-		responseWriter.write(attributeValue.toString());
-		responseWriter.write(StringPool.APOSTROPHE);
-	}
-
 	public static void encodeString(ResponseWriter responseWriter, String attributeName, Object attributeValue,
 		boolean first) throws IOException {
 
@@ -274,6 +286,6 @@ public class AlloyRendererUtil {
 	}
 
 	public static void encodeWidgetRender(ResponseWriter responseWriter, boolean first) throws IOException {
-		encodeNonEscapedObject(responseWriter, RENDER, true, first);
+		encodeBoolean(responseWriter, RENDER, true, first);
 	}
 }

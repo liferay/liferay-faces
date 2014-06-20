@@ -104,20 +104,6 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 	}
 
 	@Override
-	protected void encodeTrigger(ResponseWriter responseWriter, OutputTooltip outputTooltip, String for_, boolean first)
-		throws IOException {
-
-		UIComponent uiComponent = outputTooltip.findComponent(for_);
-
-		if (uiComponent != null) {
-			String forClientId = uiComponent.getClientId();
-			for_ = StringPool.POUND + ComponentUtil.escapeClientId(forClientId);
-		}
-
-		encodeNonEscapedString(responseWriter, TRIGGER, for_, first);
-	}
-
-	@Override
 	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, Integer zIndex,
 		boolean first) throws IOException {
 		encodeOverlayZIndex(responseWriter, outputTooltip, zIndex, first);
