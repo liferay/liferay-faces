@@ -3290,7 +3290,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The id of the target which is used by the popover.]]></description>
+			<description><![CDATA[The id of the component that is associated with the popover.]]></description>
 			<name>for</name>
 			<required>true</required>
 			<type>java.lang.String</type>
