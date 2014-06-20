@@ -1565,7 +1565,7 @@
 	</component>
 	<component name="OutputTooltip"	extendsTags="OutputText OutputTooltipPopoverCommon" module="aui-tooltip" 
 		parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" 
-		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase"
+		rendererParentClass="com.liferay.faces.alloy.component.overlay.OverlayRendererBase"
 		yui="true" yuiName="Tooltip">
 		<description>
 			<![CDATA[Tooltip is an OutputText component that displays a hint to the user. It is used in conjunction with a cursor, usually a pointer. The user hovers the pointer over an item, without clicking it, and a tooltip appears as a "hover box" with information about the item. Since it extends HtmlOutputText, it supports all the features of an h:outputText that does not render a span.]]>
@@ -1573,7 +1573,7 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[The id of the target element that triggers tooltip.]]>
+					<![CDATA[The id of the component that is associated with the tooltip.]]>
 				</description>
 				<name>for</name>
 				<required>true</required>
@@ -1588,27 +1588,6 @@
 				<name>opacity</name>
 				<type>java.lang.String</type>
 				<yui>true</yui>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]>
-				</description>
-				<name>styleClass</name>
-				<type>java.lang.String</type>
-				<override>true</override>
-				<inherited>true</inherited>
-				<yui>true</yui>
-				<yuiName>cssClass</yuiName>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
-				</description>
-				<name>value</name>
-				<type>java.lang.Object</type>
-				<yui>true</yui>
-				<inherited>true</inherited>
-				<yuiType>String</yuiType>
 			</attribute>
 		</attributes>
 	</component>

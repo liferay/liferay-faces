@@ -20,23 +20,21 @@ import javax.annotation.Generated;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
+import com.liferay.faces.alloy.component.overlay.OverlayRendererBase;
 
 /**
  * @author	Bruno Basto
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererBase {
+public abstract class OutputTooltipRendererBase extends OverlayRendererBase {
 
 	// Protected Constants
 	protected static final String CLIENT_KEY = "clientKey";
-	protected static final String CSS_CLASS = "cssClass";
 	protected static final String HEADER_CONTENT = "headerContent";
 	protected static final String OPACITY = "opacity";
 	protected static final String POSITION = "position";
 	protected static final String TRIGGER = "trigger";
-	protected static final String VALUE = "value";
 	protected static final String VISIBLE = "visible";
 	protected static final String Z_INDEX = "zIndex";
 
@@ -93,22 +91,6 @@ public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererB
 			first = false;
 		}
 
-		String styleClass = outputTooltip.getStyleClass();
-
-		if (styleClass != null) {
-
-			encodeCssClass(responseWriter, outputTooltip, styleClass, first);
-			first = false;
-		}
-
-		Object value = outputTooltip.getValue();
-
-		if (value != null) {
-
-			encodeValue(responseWriter, outputTooltip, value, first);
-			first = false;
-		}
-
 		Integer zIndex = outputTooltip.getzIndex();
 
 		if (zIndex != null) {
@@ -148,14 +130,6 @@ public abstract class OutputTooltipRendererBase extends DelegatingAlloyRendererB
 
 	protected void encodePosition(ResponseWriter responseWriter, OutputTooltip outputTooltip, String position, boolean first) throws IOException {
 		encodeString(responseWriter, POSITION, position, first);
-	}
-
-	protected void encodeCssClass(ResponseWriter responseWriter, OutputTooltip outputTooltip, String styleClass, boolean first) throws IOException {
-		encodeString(responseWriter, CSS_CLASS, styleClass, first);
-	}
-
-	protected void encodeValue(ResponseWriter responseWriter, OutputTooltip outputTooltip, Object value, boolean first) throws IOException {
-		encodeString(responseWriter, VALUE, value, first);
 	}
 
 	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, Integer zIndex, boolean first) throws IOException {

@@ -16,7 +16,6 @@ package com.liferay.faces.alloy.component.outputtooltip;
 import java.io.IOException;
 import java.util.List;
 
-import javax.faces.application.ProjectStage;
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
@@ -27,8 +26,6 @@ import javax.faces.render.FacesRenderer;
 import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -46,11 +43,12 @@ import com.liferay.faces.util.logging.LoggerFactory;
 //J+
 public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(OutputTooltipRenderer.class);
-
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		// It is necessary to override this method since the JSF runtime does not provide the ability for {@link
+		// javax.faces.component.html.HtmlOutputText} (the delegation component) to encode any of its children without
+		// enabling a special vendor-specific configuration option.
 		List<UIComponent> children = uiComponent.getChildren();
 
 		if (children != null) {
@@ -62,68 +60,47 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 	}
 
 	@Override
-	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-
-		OutputTooltip tooltip = (OutputTooltip) uiComponent;
-
-		// alloy's divs should be in place and hidden by now.
-		// so we need to unhide the div we have hidden until now.
-		// any chance for blinking should be over by now.
-		responseWriter.write("A.one('" + StringPool.POUND +
-			ComponentUtil.escapeClientId(tooltip.getClientId(facesContext)) + "')._node['style'].display = 'block';");
-
-	}
-
-	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
+		// Create a ResponseWriter that will transform the opening <span> tag to a <div> tag that always has an "id"
+		// attribute. In addition, the ResponseWriter does not transform the closing </span> tag, but instead avoids
+		// writing a closing tag. This is necessary so that encodeChildren(FacesContext, UIComponent) can take place
+		// normally, and so that encodeMarkupEnd(FacesContext, UIComponent) will have an opportunity to write the
+		// closing </div> tag.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		OutputTooltipResponseWriter outputTooltipResponseWriter = new OutputTooltipResponseWriter(responseWriter,
-				uiComponent);
+				uiComponent.getClientId());
 
-		OutputTooltip outputTooltip = (OutputTooltip) uiComponent;
-
-		if (outputTooltip.getFor() == null) {
-
-			if (facesContext.isProjectStage(ProjectStage.Development)) {
-				logger.error(
-					"The outputTooltip needs to point to something. Try using its 'for' attribute to point to an 'id' in the component tree.");
-			}
-		}
-
-		// Mojarra's HTML Basic calls encodeEnd for fun
+		// The delegation renderer provided by the JSF runtime does not attempt to encode the opening <span> tag during
+		// of encodeBegin(FacesContext, UIComponent). Instead, the entire <span>...</span> element is encoded during
+		// encodeEnd(FacesContext, UIComponent).
 		super.encodeMarkupEnd(facesContext, uiComponent, outputTooltipResponseWriter);
 	}
 
 	@Override
 	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		// Encode the closing </div> tag that was started by the OutputTooltipResponseWriter.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.endElement(StringPool.DIV);
 	}
 
 	@Override
-	protected void encodeCssClass(ResponseWriter responseWriter, OutputTooltip outputTooltip, String styleClass,
-		boolean first) throws IOException {
-		encodeNonEscapedString(responseWriter, CSS_CLASS, styleClass, first);
-	}
-
-	@Override
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, OutputTooltip tooltip, boolean first)
+	protected void encodeHiddenAttributes(ResponseWriter responseWriter, OutputTooltip outputTooltip, boolean first)
 		throws IOException {
 
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-
-		// contentBox
-		String clientId = tooltip.getClientId(facesContext);
-		String contentBox = StringPool.POUND + ComponentUtil.escapeClientId(clientId);
-		encodeNonEscapedString(responseWriter, AlloyRendererUtil.CONTENT_BOX, contentBox, first);
-
+		// cssClass
+		encodeString(responseWriter, AlloyRendererUtil.CSS_CLASS, outputTooltip.getStyleClass(), first);
 		first = false;
 
-		// render : true
-		encodeWidgetRender(responseWriter, first);
+		// value
+		Object value = outputTooltip.getValue();
+
+		if (value != null) {
+			encodeString(responseWriter, StringPool.VALUE, value, first);
+		}
+
+		encodeOverlayHiddenAttributes(responseWriter, outputTooltip, first);
 	}
 
 	@Override
@@ -143,13 +120,12 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 	@Override
 	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, Integer zIndex,
 		boolean first) throws IOException {
+		encodeOverlayZIndex(responseWriter, outputTooltip, zIndex, first);
+	}
 
-		if (zIndex == Integer.MIN_VALUE) {
-			encodeNonEscapedObject(responseWriter, Z_INDEX, AlloyRendererUtil.LIFERAY_Z_INDEX_TOOLTIP, first);
-		}
-		else {
-			super.encodeZIndex(responseWriter, outputTooltip, zIndex, first);
-		}
+	@Override
+	protected boolean isForRequired() {
+		return true;
 	}
 
 	@Override
@@ -161,5 +137,4 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 	public String getDelegateRendererType() {
 		return OutputTooltip.DELEGATE_RENDERER_TYPE;
 	}
-
 }

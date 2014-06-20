@@ -19,7 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.DelegationResponseWriterBase;
+import com.liferay.faces.util.render.IdDelegationResponseWriter;
 
 
 /**
@@ -29,37 +29,31 @@ import com.liferay.faces.util.render.DelegationResponseWriterBase;
  *
  * @author  Vernon Singleton
  */
-public class OutputTooltipResponseWriter extends DelegationResponseWriterBase {
+public class OutputTooltipResponseWriter extends IdDelegationResponseWriter {
 
-	public OutputTooltipResponseWriter(ResponseWriter responseWriter, UIComponent uiComponent) {
-		super(responseWriter);
+	public OutputTooltipResponseWriter(ResponseWriter responseWriter, String idValue) {
+		super(responseWriter, StringPool.DIV, idValue);
 	}
 
 	@Override
 	public void endElement(String name) throws IOException {
 
-		if (StringPool.SPAN.equals(name)) {
-			name = StringPool.DIV;
+		// Prevent the JSF runtime from closing the </span> tag since children need to be encoded by the
+		// OutputToolTipRenderer.encodeChildren(FacesContext, UIComponent) method.
+		if (!StringPool.SPAN.equals(name)) {
+			super.endElement(name);
 		}
 	}
 
 	@Override
 	public void startElement(String name, UIComponent component) throws IOException {
 
+		// When the JSF runtime's renderer attempts to render an opening <span> tag, render an opening <div> tag
+		// instead.
 		if (StringPool.SPAN.equals(name)) {
-			super.startElement(StringPool.DIV, component);
-			super.writeAttribute(StringPool.ID, component.getClientId(), StringPool.ID);
+			name = StringPool.DIV;
 		}
-		else {
-			super.startElement(name, component);
-		}
-	}
 
-	@Override
-	public void writeAttribute(String name, Object value, String property) throws IOException {
-
-		if (!StringPool.ID.equals(name)) {
-			super.writeAttribute(name, value, property);
-		}
+		super.startElement(name, component);
 	}
 }
