@@ -122,7 +122,7 @@ public class FieldRenderer extends Renderer {
 		// aui-field-element not found in 6.2 (all field-element are nested css classes)
 		classNames.append("aui-field-element");
 
-		if (lowerCaseInlineLabel.equalsIgnoreCase("right")) {
+		if (lowerCaseInlineLabel.equalsIgnoreCase(StringPool.RIGHT)) {
 			classNames.append(" aui-field-label-right");
 		}
 
@@ -148,7 +148,7 @@ public class FieldRenderer extends Renderer {
 		}
 
 		// Right-aligned <label>
-		if (lowerCaseInlineLabel.equals("right")) {
+		if (lowerCaseInlineLabel.equals(StringPool.RIGHT)) {
 			responseWriter.startElement(StringPool.LABEL, null);
 
 			// aui_deprecated.css: field-label
