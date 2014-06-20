@@ -18,6 +18,7 @@ import java.io.IOException;
 
 import javax.annotation.Generated;
 import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.renderkit.AlloyRendererBase;
@@ -52,7 +53,7 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
 	@Override
-	public void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
+	public void encodeAlloyAttributes(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
 
 		PickDate pickDate = (PickDate) uiComponent;
 		boolean first = true;
@@ -97,7 +98,7 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		encodeHiddenAttributes(responseWriter, pickDate, first);
+		encodeHiddenAttributes(facesContext, responseWriter, pickDate, first);
 	}
 
 	@Override
@@ -130,7 +131,7 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 		encodeInteger(responseWriter, PANES, panes, first);
 	}
 
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, PickDate pickDate, boolean first) throws IOException {
+	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, PickDate pickDate, boolean first) throws IOException {
 		// no-op
 	}
 }

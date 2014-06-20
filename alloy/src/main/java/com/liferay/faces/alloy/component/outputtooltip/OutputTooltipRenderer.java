@@ -68,7 +68,7 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 		// closing </div> tag.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		OutputTooltipResponseWriter outputTooltipResponseWriter = new OutputTooltipResponseWriter(responseWriter,
-				uiComponent.getClientId());
+				uiComponent.getClientId(facesContext));
 
 		// The delegation renderer provided by the JSF runtime does not attempt to encode the opening <span> tag during
 		// of encodeBegin(FacesContext, UIComponent). Instead, the entire <span>...</span> element is encoded during
@@ -85,8 +85,8 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 	}
 
 	@Override
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, OutputTooltip outputTooltip, boolean first)
-		throws IOException {
+	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter,
+		OutputTooltip outputTooltip, boolean first) throws IOException {
 
 		// cssClass
 		encodeString(responseWriter, AlloyRendererUtil.CSS_CLASS, outputTooltip.getStyleClass(), first);
@@ -99,7 +99,7 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 			encodeString(responseWriter, StringPool.VALUE, value, first);
 		}
 
-		encodeOverlayHiddenAttributes(responseWriter, outputTooltip, first);
+		encodeOverlayHiddenAttributes(facesContext, responseWriter, outputTooltip, first);
 	}
 
 	@Override

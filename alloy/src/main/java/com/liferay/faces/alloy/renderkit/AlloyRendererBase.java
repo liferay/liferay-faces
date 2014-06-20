@@ -30,8 +30,8 @@ import com.liferay.faces.util.render.ClientComponentRendererBase;
 public abstract class AlloyRendererBase extends ClientComponentRendererBase implements AlloyRenderer {
 
 	@Override
-	public abstract void encodeAlloyAttributes(ResponseWriter respoonseWriter, UIComponent uiComponent)
-		throws IOException;
+	public abstract void encodeAlloyAttributes(FacesContext facesContext, ResponseWriter respoonseWriter,
+		UIComponent uiComponent) throws IOException;
 
 	@Override
 	public abstract void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException;

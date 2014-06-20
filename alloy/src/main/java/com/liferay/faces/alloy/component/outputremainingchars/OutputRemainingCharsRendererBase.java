@@ -18,6 +18,7 @@ import java.io.IOException;
 
 import javax.annotation.Generated;
 import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
@@ -45,7 +46,7 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
 	@Override
-	public void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
+	public void encodeAlloyAttributes(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
 
 		OutputRemainingChars outputRemainingChars = (OutputRemainingChars) uiComponent;
 		boolean first = true;
@@ -66,7 +67,7 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 			first = false;
 		}
 
-		encodeHiddenAttributes(responseWriter, outputRemainingChars, first);
+		encodeHiddenAttributes(facesContext, responseWriter, outputRemainingChars, first);
 	}
 
 	@Override
@@ -87,7 +88,7 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 		encodeInteger(responseWriter, MAX_LENGTH, maxLength, first);
 	}
 
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, boolean first) throws IOException {
+	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, boolean first) throws IOException {
 		// no-op
 	}
 }

@@ -150,7 +150,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 		// Encode the starting <div> element that represents the component.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.startElement(StringPool.DIV, uiComponent);
-		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(), StringPool.ID);
+		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(facesContext), StringPool.ID);
 		RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent);
 	}
 
@@ -163,14 +163,14 @@ public class TabViewRenderer extends TabViewRendererBase {
 	}
 
 	@Override
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, TabView tabView, boolean first)
-		throws IOException {
+	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, TabView tabView,
+		boolean first) throws IOException {
 
 		encodeWidgetRender(responseWriter, first);
 
 		first = false;
 
-		encodeClientId(responseWriter, SRC_NODE, tabView.getClientId(), first);
+		encodeClientId(responseWriter, SRC_NODE, tabView.getClientId(facesContext), first);
 	}
 
 	protected void encodeTabListItem(FacesContext facesContext, ResponseWriter responseWriter, Tab tab)

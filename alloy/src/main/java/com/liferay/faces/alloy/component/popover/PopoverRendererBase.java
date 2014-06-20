@@ -18,6 +18,7 @@ import java.io.IOException;
 
 import javax.annotation.Generated;
 import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.component.overlay.OverlayRendererBase;
@@ -45,7 +46,7 @@ public abstract class PopoverRendererBase extends OverlayRendererBase {
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
 
 	@Override
-	public void encodeAlloyAttributes(ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
+	public void encodeAlloyAttributes(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent) throws IOException {
 
 		Popover popover = (Popover) uiComponent;
 		boolean first = true;
@@ -82,7 +83,7 @@ public abstract class PopoverRendererBase extends OverlayRendererBase {
 			first = false;
 		}
 
-		encodeHiddenAttributes(responseWriter, popover, first);
+		encodeHiddenAttributes(facesContext, responseWriter, popover, first);
 	}
 
 	@Override
@@ -111,7 +112,7 @@ public abstract class PopoverRendererBase extends OverlayRendererBase {
 		encodeInteger(responseWriter, Z_INDEX, zIndex, first);
 	}
 
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, Popover popover, boolean first) throws IOException {
+	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, Popover popover, boolean first) throws IOException {
 		// no-op
 	}
 }

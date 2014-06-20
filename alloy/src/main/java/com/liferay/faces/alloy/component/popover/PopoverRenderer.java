@@ -17,6 +17,7 @@ import java.io.IOException;
 
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
+import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
@@ -54,12 +55,12 @@ public class PopoverRenderer extends PopoverRendererBase {
 	}
 
 	@Override
-	protected void encodeHiddenAttributes(ResponseWriter responseWriter, Popover popover, boolean first)
-		throws IOException {
+	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, Popover popover,
+		boolean first) throws IOException {
 		encodeAlign(responseWriter, popover, first);
 		first = false;
 
-		encodeOverlayHiddenAttributes(responseWriter, popover, first);
+		encodeOverlayHiddenAttributes(facesContext, responseWriter, popover, first);
 	}
 
 	@Override
