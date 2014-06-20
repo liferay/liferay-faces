@@ -108,7 +108,7 @@ public class FieldRenderer extends Renderer {
 		classNames = new StringBuilder();
 		classNames.append("aui-field-element");
 
-		if (lowerCaseInlineLabel.equalsIgnoreCase("right")) {
+		if (lowerCaseInlineLabel.equalsIgnoreCase(StringPool.RIGHT)) {
 			classNames.append(" aui-field-label-right");
 		}
 
@@ -134,7 +134,7 @@ public class FieldRenderer extends Renderer {
 		}
 
 		// Right-aligned <label>
-		if (lowerCaseInlineLabel.equals("right")) {
+		if (lowerCaseInlineLabel.equals(StringPool.RIGHT)) {
 			responseWriter.startElement(StringPool.LABEL, null);
 			responseWriter.writeAttribute(StringPool.CLASS, "field-label", null);
 
