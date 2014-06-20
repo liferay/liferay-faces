@@ -14,9 +14,8 @@
 package com.liferay.faces.alloy.component.outputtooltip;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
 
+import com.liferay.faces.alloy.component.overlay.Overlay;
 import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
@@ -26,7 +25,7 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = OutputTooltip.COMPONENT_TYPE)
-public class OutputTooltip extends OutputTooltipBase {
+public class OutputTooltip extends OutputTooltipBase implements Overlay {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputtooltip.OutputTooltip";
@@ -44,47 +43,12 @@ public class OutputTooltip extends OutputTooltipBase {
 	}
 
 	@Override
-	public boolean isEscape() {
-		Boolean escape = super.isEscape();
-
-		if (escape == null) {
-			escape = true;
-		}
-
-		return escape;
-	}
-
-	// Returns the clientId of the component that the "for" attribute points to.
-	protected String getForClientId(FacesContext facesContext) {
-
-		String forClientId = null;
-
-		String forComponent = getFor();
-
-		if (forComponent != null) {
-			UIComponent uiComponent = findComponent(forComponent);
-
-			if (uiComponent == null) {
-				forClientId = forComponent;
-			}
-			else {
-				forClientId = uiComponent.getClientId(facesContext);
-			}
-		}
-
-		return forClientId;
-	}
-
-	public String getForClientIdEscaped(FacesContext facesContext) {
-		return StringPool.POUND + ComponentUtil.escapeClientId(getForClientId(facesContext));
-	}
-
-	@Override
 	public String getPosition() {
+
 		String position = super.getPosition();
 
 		if (position == null) {
-			position = "right";
+			position = StringPool.RIGHT;
 		}
 
 		return position;
@@ -94,7 +58,8 @@ public class OutputTooltip extends OutputTooltipBase {
 	public String getStyle() {
 		String style = super.getStyle();
 
-		// do not blink
+		// Initially style the outermost <div> (which is the contentBox) with "display:none;" in order to prevent
+		// blinking when Alloy's JavaScript attempts to hide the contentBox.
 		if (style == null) {
 			style = AlloyRendererUtil.DISPLAY_NONE;
 		}
@@ -117,6 +82,7 @@ public class OutputTooltip extends OutputTooltipBase {
 
 	@Override
 	public Boolean isAutoShow() {
+
 		Boolean autoShow = super.isAutoShow();
 
 		if (autoShow == null) {
@@ -126,4 +92,8 @@ public class OutputTooltip extends OutputTooltipBase {
 		return autoShow;
 	}
 
+	@Override
+	public Boolean isModal() {
+		return false;
+	}
 }

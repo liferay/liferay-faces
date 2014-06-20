@@ -34,6 +34,7 @@ public class AlloyRendererUtil {
 	public static final String A_DOT_ONE = "A.one";
 	public static final String BOUNDING_BOX = "boundingBox";
 	public static final String CONTENT_BOX = "contentBox";
+	public static final String CSS_CLASS = "cssClass";
 	public static final String DISPLAY_NONE = "display:none;";
 	public static final String DOT_HIDE = ".hide()";
 	public static final String DOT_SHOW = ".show()";

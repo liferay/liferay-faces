@@ -2748,7 +2748,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The id of the target element that triggers tooltip.]]></description>
+			<description><![CDATA[The id of the component that is associated with the tooltip.]]></description>
 			<name>for</name>
 			<required>true</required>
 			<type>java.lang.String</type>
