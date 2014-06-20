@@ -123,7 +123,7 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 	}
 
 	protected void encodeTrigger(ResponseWriter responseWriter, PickDate pickDate, String for_, boolean first) throws IOException {
-		encodeString(responseWriter, TRIGGER, for_, first);
+		encodeClientId(responseWriter, TRIGGER, for_, pickDate, first);
 	}
 
 	protected void encodePanes(ResponseWriter responseWriter, PickDate pickDate, Integer panes, boolean first) throws IOException {

@@ -17,11 +17,9 @@ import java.io.IOException;
 
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
-import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -40,22 +38,27 @@ import com.liferay.faces.util.lang.StringPool;
 //J+
 public class PopoverRenderer extends PopoverRendererBase {
 
-	@Override
-	protected void encodeAlign(ResponseWriter responseWriter, Popover popover, String for_, boolean first)
-		throws IOException {
+	// Private Constants
+	private static final String ALIGN = "align";
+	private static final String NODE = "node";
 
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		String forClientId = getForClientId(facesContext, popover);
-		String escapedForClientId = StringPool.POUND + ComponentUtil.escapeClientId(forClientId);
+	protected void encodeAlign(ResponseWriter responseWriter, Popover popover, boolean first) throws IOException {
 
-		for_ = "{node:'" + escapedForClientId + "'}";
+		encodeNonEscapedObject(responseWriter, ALIGN, StringPool.BLANK, first);
+		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
-		encodeNonEscapedObject(responseWriter, ALIGN, for_, first);
+		String for_ = popover.getFor();
+		encodeClientId(responseWriter, NODE, for_, popover, true);
+
+		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 	}
 
 	@Override
 	protected void encodeHiddenAttributes(ResponseWriter responseWriter, Popover popover, boolean first)
 		throws IOException {
+		encodeAlign(responseWriter, popover, first);
+		first = false;
+
 		encodeOverlayHiddenAttributes(responseWriter, popover, first);
 	}
 

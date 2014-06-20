@@ -29,6 +29,7 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.DelegationResponseWriter;
 import com.liferay.faces.util.render.IdDelegationResponseWriter;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -68,7 +69,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
 			responseWriter.write(StringPool.APOSTROPHE);
 
-			String escapedForClientId = StringPool.POUND + ComponentUtil.escapeClientId(forClientId);
+			String escapedForClientId = StringPool.POUND + RendererUtil.escapeClientId(forClientId);
 			responseWriter.write(escapedForClientId);
 			responseWriter.write(StringPool.APOSTROPHE);
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
@@ -131,7 +132,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
 		responseWriter.write(StringPool.APOSTROPHE);
 
 		String clientId = overlay.getClientId(facesContext);
-		String escapedContentBoxId = StringPool.POUND + ComponentUtil.escapeClientId(clientId);
+		String escapedContentBoxId = StringPool.POUND + RendererUtil.escapeClientId(clientId);
 		responseWriter.write(escapedContentBoxId);
 		responseWriter.write("')._node['style'].display='block';");
 	}
@@ -154,8 +155,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
 		// Encode the "contentBox" Alloy attribute.
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		String clientId = overlay.getClientId(facesContext);
-		String escapedContentBoxId = StringPool.POUND + ComponentUtil.escapeClientId(clientId);
-		encodeNonEscapedString(responseWriter, AlloyRendererUtil.CONTENT_BOX, escapedContentBoxId, first);
+		encodeClientId(responseWriter, AlloyRendererUtil.CONTENT_BOX, clientId, first);
 
 		// Encode the "render: true" Alloy attribute.
 		encodeWidgetRender(responseWriter, first);

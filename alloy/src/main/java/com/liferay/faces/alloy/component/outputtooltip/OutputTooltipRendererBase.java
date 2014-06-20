@@ -117,7 +117,7 @@ public abstract class OutputTooltipRendererBase extends OverlayRendererBase {
 	}
 
 	protected void encodeTrigger(ResponseWriter responseWriter, OutputTooltip outputTooltip, String for_, boolean first) throws IOException {
-		encodeString(responseWriter, TRIGGER, for_, first);
+		encodeClientId(responseWriter, TRIGGER, for_, outputTooltip, first);
 	}
 
 	protected void encodeHeaderContent(ResponseWriter responseWriter, OutputTooltip outputTooltip, String headerText, boolean first) throws IOException {
