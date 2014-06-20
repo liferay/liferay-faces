@@ -1691,7 +1691,7 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[The id of the target which is used by the popover.]]>
+					<![CDATA[The id of the component that is associated with the popover.]]>
 				</description>
 				<name>for</name>
 				<required>true</required>
