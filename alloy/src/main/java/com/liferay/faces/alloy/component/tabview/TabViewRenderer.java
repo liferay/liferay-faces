@@ -25,7 +25,6 @@ import javax.faces.render.FacesRenderer;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.alloy.component.tab.Tab;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -171,8 +170,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 
 		first = false;
 
-		String srcNode = StringPool.POUND + ComponentUtil.escapeClientId(tabView.getClientId());
-		encodeNonEscapedString(responseWriter, SRC_NODE, srcNode, first);
+		encodeClientId(responseWriter, SRC_NODE, tabView.getClientId(), first);
 	}
 
 	protected void encodeTabListItem(FacesContext facesContext, ResponseWriter responseWriter, Tab tab)
@@ -180,9 +178,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 
 		responseWriter.startElement(StringPool.LI, tab);
 		responseWriter.startElement(StringPool.ASCII_TABLE[97], tab);
-
-		String escapedClientId = ComponentUtil.escapeClientId(tab.getClientId(facesContext));
-		responseWriter.writeAttribute(StringPool.HREF, StringPool.POUND + escapedClientId, null);
+		responseWriter.writeAttribute(StringPool.HREF, StringPool.POUND + tab.getClientId(facesContext), null);
 
 		String label = (String) tab.getLabel();
 

@@ -80,7 +80,7 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 	}
 
 	protected void encodeInput(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, String for_, boolean first) throws IOException {
-		encodeString(responseWriter, INPUT, for_, first);
+		encodeClientId(responseWriter, INPUT, for_, outputRemainingChars, first);
 	}
 
 	protected void encodeMaxLength(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, Integer maxLength, boolean first) throws IOException {

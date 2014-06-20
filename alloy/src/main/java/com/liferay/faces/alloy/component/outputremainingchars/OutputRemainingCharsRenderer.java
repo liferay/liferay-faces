@@ -151,24 +151,9 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
-		String counter = StringPool.POUND +
-			ComponentUtil.escapeClientId(outputRemainingChars.getClientId() + separatorChar + COUNTER);
-		encodeNonEscapedString(responseWriter, COUNTER, counter, first);
+		String counter = outputRemainingChars.getClientId() + separatorChar + COUNTER;
+		encodeClientId(responseWriter, COUNTER, counter, first);
 		first = false;
-	}
-
-	@Override
-	protected void encodeInput(ResponseWriter responseWriter, OutputRemainingChars outputRemainingChars, String for_,
-		boolean first) throws IOException {
-
-		UIComponent uiComponent = outputRemainingChars.findComponent(for_);
-
-		if (uiComponent != null) {
-			String forClientId = uiComponent.getClientId();
-			for_ = StringPool.POUND + ComponentUtil.escapeClientId(forClientId);
-		}
-
-		encodeNonEscapedString(responseWriter, INPUT, for_, first);
 	}
 
 	@Override

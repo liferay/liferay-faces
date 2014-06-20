@@ -43,6 +43,11 @@ public class OutputTooltip extends OutputTooltipBase implements Overlay {
 	}
 
 	@Override
+	public Boolean isModal() {
+		return false;
+	}
+
+	@Override
 	public String getPosition() {
 
 		String position = super.getPosition();
@@ -90,10 +95,5 @@ public class OutputTooltip extends OutputTooltipBase implements Overlay {
 		}
 
 		return autoShow;
-	}
-
-	@Override
-	public Boolean isModal() {
-		return false;
 	}
 }

@@ -30,6 +30,12 @@ public interface AlloyRenderer {
 	public void encodeBoolean(ResponseWriter responseWriter, String attributeName, Boolean attributeValue,
 		boolean first) throws IOException;
 
+	public void encodeClientId(ResponseWriter responseWriter, String attributeName, String clientId, boolean first)
+		throws IOException;
+
+	public void encodeClientId(ResponseWriter responseWriter, String attributeName, String clientId,
+		UIComponent uiComponent, boolean first) throws IOException;
+
 	public void encodeInteger(ResponseWriter responseWriter, String attributeName, Integer attributeValue,
 		boolean first) throws IOException;
 
@@ -42,9 +48,6 @@ public interface AlloyRenderer {
 		throws IOException;
 
 	public void encodeNonEscapedObject(ResponseWriter responseWriter, String attributeName, Object attributeValue,
-		boolean first) throws IOException;
-
-	public void encodeNonEscapedString(ResponseWriter responseWriter, String attributeName, Object attributeValue,
 		boolean first) throws IOException;
 
 	public void encodeString(ResponseWriter responseWriter, String attributeName, Object attributeValue, boolean first)

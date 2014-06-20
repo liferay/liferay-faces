@@ -17,10 +17,8 @@ import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
 import javax.faces.component.html.HtmlInputText;
 import javax.faces.component.html.HtmlInputTextarea;
-import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -44,28 +42,6 @@ public class OutputRemainingChars extends OutputRemainingCharsBase {
 	public OutputRemainingChars() {
 		super();
 		setRendererType(RENDERER_TYPE);
-	}
-
-	// Returns the clientId of the component that the "for" attribute points to.
-	protected String getForClientId(FacesContext facesContext) {
-
-		String forClientId = null;
-
-		String forComponent = getFor();
-
-		if (forComponent != null) {
-			UIComponent uiComponent = findComponent(forComponent);
-
-			if (uiComponent != null) {
-				forClientId = uiComponent.getClientId(facesContext);
-			}
-		}
-
-		return forClientId;
-	}
-
-	public String getForClientIdEscaped(FacesContext facesContext) {
-		return StringPool.POUND + ComponentUtil.escapeClientId(getForClientId(facesContext));
 	}
 
 	@Override

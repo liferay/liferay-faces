@@ -30,8 +30,8 @@ import com.liferay.faces.alloy.component.overlay.OverlayRendererBase;
 public abstract class PopoverRendererBase extends OverlayRendererBase {
 
 	// Protected Constants
-	protected static final String ALIGN = "align";
 	protected static final String CLIENT_KEY = "clientKey";
+	protected static final String FOR = "for";
 	protected static final String HEADER_CONTENT = "headerContent";
 	protected static final String POSITION = "position";
 	protected static final String VISIBLE = "visible";
@@ -55,14 +55,6 @@ public abstract class PopoverRendererBase extends OverlayRendererBase {
 		if (autoShow != null) {
 
 			encodeVisible(responseWriter, popover, autoShow, first);
-			first = false;
-		}
-
-		String for_ = popover.getFor();
-
-		if (for_ != null) {
-
-			encodeAlign(responseWriter, popover, for_, first);
 			first = false;
 		}
 
@@ -105,10 +97,6 @@ public abstract class PopoverRendererBase extends OverlayRendererBase {
 
 	protected void encodeVisible(ResponseWriter responseWriter, Popover popover, Boolean autoShow, boolean first) throws IOException {
 		encodeBoolean(responseWriter, VISIBLE, autoShow, first);
-	}
-
-	protected void encodeAlign(ResponseWriter responseWriter, Popover popover, String for_, boolean first) throws IOException {
-		encodeString(responseWriter, ALIGN, for_, first);
 	}
 
 	protected void encodeHeaderContent(ResponseWriter responseWriter, Popover popover, String headerText, boolean first) throws IOException {

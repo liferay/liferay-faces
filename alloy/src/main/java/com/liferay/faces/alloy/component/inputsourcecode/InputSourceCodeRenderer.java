@@ -29,6 +29,7 @@ import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.DelegationResponseWriter;
 import com.liferay.faces.util.render.HiddenTextResponseWriter;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -67,12 +68,11 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 			encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
 
 			String hiddenInputClientId = getHiddenInputClientId(facesContext, uiComponent);
-			String escapedHiddenInputClientId = ComponentUtil.escapeClientId(hiddenInputClientId);
-			String hiddenInputCssSelector = StringPool.POUND + escapedHiddenInputClientId;
+			String escapedHiddenInputClientId = StringPool.POUND + RendererUtil.escapeClientId(hiddenInputClientId);
 
 			responseWriter.write(clientVarName);
 			responseWriter.write(".getSession().on('change', function() {A.one('");
-			responseWriter.write(hiddenInputCssSelector);
+			responseWriter.write(escapedHiddenInputClientId);
 			responseWriter.write("').set('value',");
 			responseWriter.write(clientVarName);
 			responseWriter.write(".getSession().getValue())});");
@@ -120,10 +120,9 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 		first = false;
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		String defaultBoundingBoxClientId = getDefaultBoundingBoxClientId(facesContext, inputSourceCode);
-		String boundingBox = StringPool.POUND + ComponentUtil.escapeClientId(defaultBoundingBoxClientId);
+		String boundingBox = getDefaultBoundingBoxClientId(facesContext, inputSourceCode);
 
-		encodeNonEscapedString(responseWriter, AlloyRendererUtil.BOUNDING_BOX, boundingBox, first);
+		encodeClientId(responseWriter, AlloyRendererUtil.BOUNDING_BOX, boundingBox, first);
 	}
 
 	protected String getDefaultBoundingBoxClientId(FacesContext facesContext, UIComponent uiComponent) {

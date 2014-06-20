@@ -26,9 +26,9 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
-import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.helper.StringHelper;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -72,7 +72,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 		// http://www.faqs.org/rfcs/rfc1766.html
 		String localeString = locale.toString().replaceAll(StringPool.UNDERLINE, StringPool.DASH);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		encodeNonEscapedString(responseWriter, LANG, localeString, true);
+		encodeString(responseWriter, LANG, localeString, true);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 	}
 
@@ -136,13 +136,11 @@ public class PickDateRenderer extends PickDateRendererBase {
 			UIComponent forComponent = pickDate.findComponent(for_);
 
 			if (forComponent != null) {
-
-				String forComponentClientId = forComponent.getClientId();
-				for_ = ComponentUtil.escapeClientId(forComponentClientId);
+				for_ = forComponent.getClientId();
 			}
 
 			// The trigger is the "#" symbol followed by the forComponent's clientId.
-			String trigger = StringPool.POUND + for_;
+			String trigger = StringPool.POUND + RendererUtil.escapeClientId(for_);
 
 			// The default value of the onDateClick attribute is a script that that is read from the
 			// DefaultOnDateClick.js classpath resource. The script contains a "{0}" token that needs
@@ -171,7 +169,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 		String styleClass = pickDate.getStyleClass();
 
 		if (styleClass != null) {
-			encodeNonEscapedString(responseWriter, POPOVER_CSS_CLASS, styleClass, first);
+			encodeString(responseWriter, POPOVER_CSS_CLASS, styleClass, first);
 			first = false;
 		}
 	}
@@ -215,23 +213,6 @@ public class PickDateRenderer extends PickDateRendererBase {
 
 		encodeNonEscapedObject(responseWriter, Z_INDEX, zIndexString, true);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-	}
-
-	@Override
-	protected void encodeTrigger(ResponseWriter responseWriter, PickDate pickDate, String for_, boolean first)
-		throws IOException {
-
-		UIComponent forComponent = pickDate.findComponent(for_);
-
-		if (forComponent != null) {
-
-			String forComponentClientId = forComponent.getClientId();
-			for_ = ComponentUtil.escapeClientId(forComponentClientId);
-		}
-
-		String trigger = StringPool.POUND + for_;
-
-		encodeNonEscapedString(responseWriter, TRIGGER, trigger, first);
 	}
 
 	@Override
