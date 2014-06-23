@@ -29,9 +29,9 @@ public class Popover extends PopoverBase implements Overlay {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.popover.Popover";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.popover.PopoverRenderer";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Group";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.popover.PopoverRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-popover";
 
 	public Popover() {
@@ -40,8 +40,38 @@ public class Popover extends PopoverBase implements Overlay {
 	}
 
 	@Override
-	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(PopoverPropertyKeys.zIndex, Integer.MIN_VALUE);
+	public String getzIndex() {
+
+		String zIndex = super.getzIndex();
+
+		if (zIndex == null) {
+			zIndex = AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY;
+		}
+
+		return zIndex;
+	}
+
+	@Override
+	public Boolean isDismissable() {
+		Boolean dismissable = super.isDismissable();
+
+		if (dismissable == null) {
+			dismissable = true;
+		}
+
+		return dismissable;
+	}
+
+	@Override
+	public String getHeaderText() {
+
+		String headerText = super.getHeaderText();
+
+		if (headerText == null) {
+			headerText = NON_BREAKING_SPACE;
+		}
+
+		return headerText;
 	}
 
 	@Override
@@ -55,9 +85,19 @@ public class Popover extends PopoverBase implements Overlay {
 	}
 
 	@Override
-	public String getStyle() {
+	public Boolean isShowCloseIcon() {
+		Boolean showCloseIcon = super.isShowCloseIcon();
 
-		String style = (String) getStateHelper().eval(PropertyKeys.style, null);
+		if (showCloseIcon == null) {
+			showCloseIcon = true;
+		}
+
+		return showCloseIcon;
+	}
+
+	@Override
+	public String getStyle() {
+		String style = super.getStyle();
 
 		// Initially style the outermost <div> (which is the contentBox) with "display:none;" in order to prevent
 		// blinking when Alloy's JavaScript attempts to hide the contentBox.

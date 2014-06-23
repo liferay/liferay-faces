@@ -59,6 +59,14 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 	}
 
 	@Override
+	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		OutputTooltip tooltip = (OutputTooltip) uiComponent;
+		encodeOverlayJavaScriptCustom(responseWriter, facesContext, tooltip);
+	}
+
+	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		// Create a ResponseWriter that will transform the opening <span> tag to a <div> tag that always has an "id"
@@ -90,27 +98,23 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 
 		// cssClass
 		encodeString(responseWriter, AlloyRendererUtil.CSS_CLASS, outputTooltip.getStyleClass(), first);
+
 		first = false;
 
-		// value
-		Object value = outputTooltip.getValue();
-
-		if (value != null) {
-			encodeString(responseWriter, StringPool.VALUE, value, first);
-		}
-
+		// contentBox, headerText, render : true, visible
 		encodeOverlayHiddenAttributes(facesContext, responseWriter, outputTooltip, first);
 	}
 
 	@Override
-	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, Integer zIndex,
+	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, String zIndex,
 		boolean first) throws IOException {
-		encodeOverlayZIndex(responseWriter, outputTooltip, zIndex, first);
-	}
 
-	@Override
-	protected boolean isForRequired() {
-		return true;
+		if (zIndex.equals(AlloyRendererUtil.LIFERAY_Z_INDEX_TOOLTIP)) {
+			encodeNonEscapedObject(responseWriter, OutputTooltipRendererBase.Z_INDEX, zIndex, first);
+		}
+		else {
+			encodeString(responseWriter, OutputTooltipRendererBase.Z_INDEX, zIndex, first);
+		}
 	}
 
 	@Override
@@ -122,4 +126,5 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 	public String getDelegateRendererType() {
 		return OutputTooltip.DELEGATE_RENDERER_TYPE;
 	}
+
 }

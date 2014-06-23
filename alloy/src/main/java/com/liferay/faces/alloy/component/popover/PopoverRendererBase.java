@@ -32,9 +32,11 @@ public abstract class PopoverRendererBase extends OverlayRendererBase {
 
 	// Protected Constants
 	protected static final String CLIENT_KEY = "clientKey";
+	protected static final String DISMISSABLE = "dismissable";
 	protected static final String FOR = "for";
 	protected static final String HEADER_CONTENT = "headerContent";
 	protected static final String POSITION = "position";
+	protected static final String SHOW_CLOSE_ICON = "showCloseIcon";
 	protected static final String VISIBLE = "visible";
 	protected static final String Z_INDEX = "zIndex";
 
@@ -75,7 +77,7 @@ public abstract class PopoverRendererBase extends OverlayRendererBase {
 			first = false;
 		}
 
-		Integer zIndex = popover.getzIndex();
+		String zIndex = popover.getzIndex();
 
 		if (zIndex != null) {
 
@@ -108,8 +110,8 @@ public abstract class PopoverRendererBase extends OverlayRendererBase {
 		encodeString(responseWriter, POSITION, position, first);
 	}
 
-	protected void encodeZIndex(ResponseWriter responseWriter, Popover popover, Integer zIndex, boolean first) throws IOException {
-		encodeInteger(responseWriter, Z_INDEX, zIndex, first);
+	protected void encodeZIndex(ResponseWriter responseWriter, Popover popover, String zIndex, boolean first) throws IOException {
+		encodeString(responseWriter, Z_INDEX, zIndex, first);
 	}
 
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, Popover popover, boolean first) throws IOException {

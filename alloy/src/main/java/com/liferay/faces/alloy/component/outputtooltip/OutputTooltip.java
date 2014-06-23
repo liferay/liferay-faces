@@ -38,8 +38,20 @@ public class OutputTooltip extends OutputTooltipBase implements Overlay {
 	}
 
 	@Override
-	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(OutputTooltipPropertyKeys.zIndex, Integer.MIN_VALUE);
+	public String getzIndex() {
+
+		String zIndex = super.getzIndex();
+
+		if (zIndex == null) {
+			zIndex = AlloyRendererUtil.LIFERAY_Z_INDEX_TOOLTIP;
+		}
+
+		return zIndex;
+	}
+
+	@Override
+	public Boolean isDismissable() {
+		return false;
 	}
 
 	@Override
@@ -85,15 +97,9 @@ public class OutputTooltip extends OutputTooltipBase implements Overlay {
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 
+	// the default for the visible attribute in AlloyUI is true ... we did not want that for alloy:outputTooltip
 	@Override
 	public Boolean isAutoShow() {
-
-		Boolean autoShow = super.isAutoShow();
-
-		if (autoShow == null) {
-			autoShow = false;
-		}
-
-		return autoShow;
+		return (Boolean) getStateHelper().eval(OutputTooltipPropertyKeys.autoShow, false);
 	}
 }

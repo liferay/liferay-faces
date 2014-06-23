@@ -92,7 +92,7 @@ public abstract class OutputTooltipRendererBase extends OverlayRendererBase {
 			first = false;
 		}
 
-		Integer zIndex = outputTooltip.getzIndex();
+		String zIndex = outputTooltip.getzIndex();
 
 		if (zIndex != null) {
 
@@ -133,8 +133,8 @@ public abstract class OutputTooltipRendererBase extends OverlayRendererBase {
 		encodeString(responseWriter, POSITION, position, first);
 	}
 
-	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, Integer zIndex, boolean first) throws IOException {
-		encodeInteger(responseWriter, Z_INDEX, zIndex, first);
+	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, String zIndex, boolean first) throws IOException {
+		encodeString(responseWriter, Z_INDEX, zIndex, first);
 	}
 
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, OutputTooltip outputTooltip, boolean first) throws IOException {

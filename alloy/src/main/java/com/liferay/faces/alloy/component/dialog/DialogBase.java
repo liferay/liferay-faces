@@ -15,7 +15,7 @@ package com.liferay.faces.alloy.component.dialog;
 //J-
 
 import javax.annotation.Generated;
-import javax.faces.component.html.HtmlPanelGroup;
+import com.liferay.faces.alloy.component.panelgroup.PanelGroup;
 
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.component.ClientComponent;
@@ -25,15 +25,16 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class DialogBase extends HtmlPanelGroup implements Styleable, ClientComponent {
+public abstract class DialogBase extends PanelGroup implements Styleable, ClientComponent {
 
 	// Protected Enumerations
 	protected enum DialogPropertyKeys {
 		autoShow,
 		clientKey,
-		for_,
+		dismissable,
 		headerText,
 		modal,
+		showCloseIcon,
 		zIndex
 	}
 
@@ -55,12 +56,12 @@ public abstract class DialogBase extends HtmlPanelGroup implements Styleable, Cl
 		getStateHelper().put(DialogPropertyKeys.clientKey, clientKey);
 	}
 
-	public String getFor() {
-		return (String) getStateHelper().eval(DialogPropertyKeys.for_, null);
+	public Boolean isDismissable() {
+		return (Boolean) getStateHelper().eval(DialogPropertyKeys.dismissable, null);
 	}
 
-	public void setFor(String for_) {
-		getStateHelper().put(DialogPropertyKeys.for_, for_);
+	public void setDismissable(Boolean dismissable) {
+		getStateHelper().put(DialogPropertyKeys.dismissable, dismissable);
 	}
 
 	public String getHeaderText() {
@@ -79,11 +80,19 @@ public abstract class DialogBase extends HtmlPanelGroup implements Styleable, Cl
 		getStateHelper().put(DialogPropertyKeys.modal, modal);
 	}
 
-	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(DialogPropertyKeys.zIndex, null);
+	public Boolean isShowCloseIcon() {
+		return (Boolean) getStateHelper().eval(DialogPropertyKeys.showCloseIcon, null);
 	}
 
-	public void setzIndex(Integer zIndex) {
+	public void setShowCloseIcon(Boolean showCloseIcon) {
+		getStateHelper().put(DialogPropertyKeys.showCloseIcon, showCloseIcon);
+	}
+
+	public String getzIndex() {
+		return (String) getStateHelper().eval(DialogPropertyKeys.zIndex, null);
+	}
+
+	public void setzIndex(String zIndex) {
 		getStateHelper().put(DialogPropertyKeys.zIndex, zIndex);
 	}
 }

@@ -15,13 +15,20 @@ package com.liferay.faces.alloy.component.popover;
 
 import java.io.IOException;
 
+import javax.faces.application.ProjectStage;
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
+import com.liferay.faces.util.component.ClientComponent;
+import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -39,9 +46,56 @@ import com.liferay.faces.util.lang.StringPool;
 //J+
 public class PopoverRenderer extends PopoverRendererBase {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(PopoverRenderer.class);
+
 	// Private Constants
 	private static final String ALIGN = "align";
 	private static final String NODE = "node";
+
+	@Override
+	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+
+		Popover popover = (Popover) uiComponent;
+		ClientComponent clientComponent = (ClientComponent) uiComponent;
+		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+		String clientKey = clientComponent.getClientKey();
+
+		if (clientKey == null) {
+			clientKey = clientVarName;
+		}
+
+		if (popover.isShowCloseIcon()) {
+
+			// FACES-1949 - Add an "x" for closing the popover to the header area like alloy:dialog
+			responseWriter.write(AlloyRendererUtil.LIFERAY_COMPONENT);
+			responseWriter.write(StringPool.OPEN_PARENTHESIS);
+			responseWriter.write(StringPool.APOSTROPHE);
+			responseWriter.write(clientKey);
+			responseWriter.write(StringPool.APOSTROPHE);
+			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+			responseWriter.write(
+				".addToolbar( [ { cssClass: 'close', label: '\u00D7', on: { click: function(event) { Liferay.component('" +
+				clientKey + "').hide(); } }, render: true } ], 'header' )");
+			responseWriter.write(StringPool.SEMICOLON);
+		}
+
+		if (popover.getFor() == null) {
+
+			if (facesContext.isProjectStage(ProjectStage.Development)) {
+				logger.error(
+					"Popover needs to point to something. Try using its 'for' attribute to point to an 'id' in the component tree.");
+			}
+		}
+
+		// make the dialog dismissable
+		encodeOverlayDismissable(responseWriter, popover, clientKey);
+
+		encodeOverlayJavaScriptCustom(responseWriter, facesContext, popover);
+
+	}
 
 	protected void encodeAlign(ResponseWriter responseWriter, Popover popover, boolean first) throws IOException {
 
@@ -57,21 +111,20 @@ public class PopoverRenderer extends PopoverRendererBase {
 	@Override
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, Popover popover,
 		boolean first) throws IOException {
+
+		// align
 		encodeAlign(responseWriter, popover, first);
+
 		first = false;
 
+		// contentBox, headerText, render : true, visible
 		encodeOverlayHiddenAttributes(facesContext, responseWriter, popover, first);
 	}
 
 	@Override
-	protected void encodeZIndex(ResponseWriter responseWriter, Popover popover, Integer zIndex, boolean first)
+	protected void encodeZIndex(ResponseWriter responseWriter, Popover popover, String zIndex, boolean first)
 		throws IOException {
 		encodeOverlayZIndex(responseWriter, popover, zIndex, first);
-	}
-
-	@Override
-	protected boolean isForRequired() {
-		return true;
 	}
 
 	@Override
@@ -83,4 +136,12 @@ public class PopoverRenderer extends PopoverRendererBase {
 	public String getDelegateRendererType() {
 		return Popover.DELEGATE_RENDERER_TYPE;
 	}
+
+	@Override
+	protected String[] getModules() {
+		String[] modules = { "aui-popover", "event-outside" };
+
+		return modules;
+	}
+
 }

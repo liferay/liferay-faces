@@ -34,7 +34,8 @@ public class PopoverBackingBean {
 	private PopoverModelBean popoverModelBean;
 
 	public void submit() {
-		logger.info("submit: text = " + popoverModelBean.getText());
+		logger.info("submit: text1 = " + popoverModelBean.getText1());
+		logger.info("submit: text2 = " + popoverModelBean.getText2());
 	}
 
 	public void setPopoverModelBean(PopoverModelBean popoverModelBean) {

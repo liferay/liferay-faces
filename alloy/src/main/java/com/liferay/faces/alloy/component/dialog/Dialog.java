@@ -29,9 +29,9 @@ public class Dialog extends DialogBase implements Overlay {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.dialog.Dialog";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.dialog.DialogRenderer";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Group";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.dialog.DialogRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-dialog";
 
 	public Dialog() {
@@ -40,8 +40,38 @@ public class Dialog extends DialogBase implements Overlay {
 	}
 
 	@Override
-	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(DialogPropertyKeys.zIndex, Integer.MIN_VALUE);
+	public String getzIndex() {
+
+		String zIndex = super.getzIndex();
+
+		if (zIndex == null) {
+			zIndex = AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY;
+		}
+
+		return zIndex;
+	}
+
+	@Override
+	public Boolean isDismissable() {
+		Boolean dismissable = super.isDismissable();
+
+		if (dismissable == null) {
+			dismissable = true;
+		}
+
+		return dismissable;
+	}
+
+	@Override
+	public String getHeaderText() {
+
+		String headerText = super.getHeaderText();
+
+		if (headerText == null) {
+			headerText = NON_BREAKING_SPACE;
+		}
+
+		return headerText;
 	}
 
 	@Override
@@ -50,9 +80,19 @@ public class Dialog extends DialogBase implements Overlay {
 	}
 
 	@Override
-	public String getStyle() {
+	public Boolean isShowCloseIcon() {
+		Boolean showCloseIcon = super.isShowCloseIcon();
 
-		String style = (String) getStateHelper().eval(PropertyKeys.style, null);
+		if (showCloseIcon == null) {
+			showCloseIcon = true;
+		}
+
+		return showCloseIcon;
+	}
+
+	@Override
+	public String getStyle() {
+		String style = super.getStyle();
 
 		// Initially style the outermost <div> (which is the contentBox) with "display:none;" in order to prevent
 		// blinking when Alloy's JavaScript attempts to hide the contentBox.
@@ -76,8 +116,10 @@ public class Dialog extends DialogBase implements Overlay {
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 
+	// the default for the visible attribute in AlloyUI is true ... we did not want that for alloy:dialog
 	@Override
 	public Boolean isAutoShow() {
 		return (Boolean) getStateHelper().eval(DialogPropertyKeys.autoShow, false);
 	}
+
 }

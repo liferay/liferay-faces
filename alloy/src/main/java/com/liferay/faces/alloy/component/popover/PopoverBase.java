@@ -15,7 +15,7 @@ package com.liferay.faces.alloy.component.popover;
 //J-
 
 import javax.annotation.Generated;
-import javax.faces.component.html.HtmlPanelGroup;
+import com.liferay.faces.alloy.component.panelgroup.PanelGroup;
 
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.component.ClientComponent;
@@ -25,15 +25,17 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class PopoverBase extends HtmlPanelGroup implements Styleable, ClientComponent {
+public abstract class PopoverBase extends PanelGroup implements Styleable, ClientComponent {
 
 	// Protected Enumerations
 	protected enum PopoverPropertyKeys {
 		autoShow,
 		clientKey,
+		dismissable,
 		for_,
 		headerText,
 		position,
+		showCloseIcon,
 		zIndex
 	}
 
@@ -53,6 +55,14 @@ public abstract class PopoverBase extends HtmlPanelGroup implements Styleable, C
 	@Override
 	public void setClientKey(String clientKey) {
 		getStateHelper().put(PopoverPropertyKeys.clientKey, clientKey);
+	}
+
+	public Boolean isDismissable() {
+		return (Boolean) getStateHelper().eval(PopoverPropertyKeys.dismissable, null);
+	}
+
+	public void setDismissable(Boolean dismissable) {
+		getStateHelper().put(PopoverPropertyKeys.dismissable, dismissable);
 	}
 
 	public String getFor() {
@@ -79,11 +89,19 @@ public abstract class PopoverBase extends HtmlPanelGroup implements Styleable, C
 		getStateHelper().put(PopoverPropertyKeys.position, position);
 	}
 
-	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(PopoverPropertyKeys.zIndex, null);
+	public Boolean isShowCloseIcon() {
+		return (Boolean) getStateHelper().eval(PopoverPropertyKeys.showCloseIcon, null);
 	}
 
-	public void setzIndex(Integer zIndex) {
+	public void setShowCloseIcon(Boolean showCloseIcon) {
+		getStateHelper().put(PopoverPropertyKeys.showCloseIcon, showCloseIcon);
+	}
+
+	public String getzIndex() {
+		return (String) getStateHelper().eval(PopoverPropertyKeys.zIndex, null);
+	}
+
+	public void setzIndex(String zIndex) {
 		getStateHelper().put(PopoverPropertyKeys.zIndex, zIndex);
 	}
 }

@@ -88,11 +88,11 @@ public abstract class OutputTooltipBase extends OutputText implements Styleable,
 		getStateHelper().put(OutputTooltipPropertyKeys.position, position);
 	}
 
-	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(OutputTooltipPropertyKeys.zIndex, null);
+	public String getzIndex() {
+		return (String) getStateHelper().eval(OutputTooltipPropertyKeys.zIndex, null);
 	}
 
-	public void setzIndex(Integer zIndex) {
+	public void setzIndex(String zIndex) {
 		getStateHelper().put(OutputTooltipPropertyKeys.zIndex, zIndex);
 	}
 }

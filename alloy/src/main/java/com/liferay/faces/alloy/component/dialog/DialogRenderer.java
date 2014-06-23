@@ -17,10 +17,14 @@ import java.io.IOException;
 
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
+import com.liferay.faces.util.component.ClientComponent;
+import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -40,6 +44,46 @@ import com.liferay.faces.util.lang.StringPool;
 public class DialogRenderer extends DialogRendererBase {
 
 	@Override
+	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+
+		Dialog dialog = (Dialog) uiComponent;
+		ClientComponent clientComponent = (ClientComponent) uiComponent;
+		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+		String clientKey = clientComponent.getClientKey();
+
+		if (clientKey == null) {
+			clientKey = clientVarName;
+		}
+
+		// prevent scrolling on show
+		responseWriter.write("var " + clientKey + "_scrollx = window.scrollX;");
+		responseWriter.write("var " + clientKey + "_scrolly = window.scrollY;");
+		responseWriter.write("A.Do.before(function(stuff) { " + clientKey + "_scrollx = window.scrollX; " + clientKey +
+			"_scrolly = window.scrollY; }, Liferay.component('" + clientKey + "'), 'show');");
+		responseWriter.write("A.Do.after(function(stuff) { window.scrollTo(" + clientKey + "_scrollx," + clientKey +
+			"_scrolly); }, Liferay.component('" + clientKey + "'), 'show');");
+
+		if (!dialog.isShowCloseIcon()) {
+			responseWriter.write(AlloyRendererUtil.LIFERAY_COMPONENT);
+			responseWriter.write(StringPool.OPEN_PARENTHESIS);
+			responseWriter.write(StringPool.APOSTROPHE);
+			responseWriter.write(clientKey);
+			responseWriter.write(StringPool.APOSTROPHE);
+			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+			responseWriter.write(".removeToolbar('header')");
+			responseWriter.write(StringPool.SEMICOLON);
+		}
+
+		// make the dialog dismissable
+		encodeOverlayDismissable(responseWriter, dialog, clientKey);
+
+		encodeOverlayJavaScriptCustom(responseWriter, facesContext, dialog);
+
+	}
+
+	@Override
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, Dialog dialog,
 		boolean first) throws IOException {
 
@@ -48,18 +92,14 @@ public class DialogRenderer extends DialogRendererBase {
 
 		first = false;
 
+		// contentBox, headerText, render : true, visible
 		encodeOverlayHiddenAttributes(facesContext, responseWriter, dialog, first);
 	}
 
 	@Override
-	protected void encodeZIndex(ResponseWriter responseWriter, Dialog dialog, Integer zIndex, boolean first)
+	protected void encodeZIndex(ResponseWriter responseWriter, Dialog dialog, String zIndex, boolean first)
 		throws IOException {
 		encodeOverlayZIndex(responseWriter, dialog, zIndex, first);
-	}
-
-	@Override
-	protected boolean isForRequired() {
-		return false;
 	}
 
 	@Override
@@ -71,4 +111,5 @@ public class DialogRenderer extends DialogRendererBase {
 	public String getDelegateRendererType() {
 		return Dialog.DELEGATE_RENDERER_TYPE;
 	}
+
 }
