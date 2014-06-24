@@ -32,6 +32,7 @@ public class PickDate extends PickDateBase {
 	public static final String STYLE_CLASS_NAME = "alloy-pick-date";
 
 	// Private Constants
+	private static final String DATEPICKER_POPOVER = "datepicker-popover";
 	private static final String ON_DATE_CLICK = "onDateClick";
 
 	public PickDate() {
@@ -75,6 +76,6 @@ public class PickDate extends PickDateBase {
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(PickDatePropertyKeys.styleClass, null);
 
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
+		return ComponentUtil.concatCssClasses(styleClass, DATEPICKER_POPOVER, STYLE_CLASS_NAME);
 	}
 }
