@@ -50,9 +50,8 @@ public class PickDateRenderer extends PickDateRendererBase {
 	// Private Constants
 	private static final String CALENDAR = "calendar";
 	private static final String DATE_CLICK = "dateClick";
-	private static final String DEFAULT_ON_DATE_CLICK_TEMPLATE =
-		"pickDateDefaultOnDateClick(event.date, A.one('{0}'), this);";
-	private static final String FUNCTION_EVENT = "function(event)";
+	private static final String DEFAULT_ON_DATE_CLICK_TEMPLATE = "function(event){" +
+		"pickDateDefaultOnDateClick(event, A.one('{0}'));}";
 	private static final String LANG = "lang";
 	private static final String TOKEN = "{0}";
 	private static final String NODE_EVENT_SIMULATE = "node-event-simulate";
@@ -146,11 +145,10 @@ public class PickDateRenderer extends PickDateRendererBase {
 			// The default value of the onDateClick attribute is a script that that is read from the
 			// DefaultOnDateClick.js classpath resource. The script contains a "{0}" token that needs
 			// to be substituted with the trigger, which is the "#" sign followed by escaped clientId of the trigger.
-			onDateClick = DEFAULT_ON_DATE_CLICK_TEMPLATE;
-			onDateClick = onDateClick.replace(TOKEN, trigger);
+			onDateClick = DEFAULT_ON_DATE_CLICK_TEMPLATE.replace(TOKEN, trigger);
 		}
 
-		encodeOnDateClick(responseWriter, onDateClick, true);
+		encodeNonEscapedObject(responseWriter, DATE_CLICK, onDateClick, true);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		calendarFirst = false;
 
@@ -182,17 +180,6 @@ public class PickDateRenderer extends PickDateRendererBase {
 		String datePatternMask = PickDateUtil.getMaskFromDatePattern(datePattern);
 
 		super.encodeMask(responseWriter, pickDate, datePatternMask, first);
-	}
-
-	protected void encodeOnDateClick(ResponseWriter responseWriter, String onDateClick, boolean first)
-		throws IOException {
-
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(FUNCTION_EVENT);
-		stringBuilder.append(StringPool.OPEN_CURLY_BRACE);
-		stringBuilder.append(onDateClick);
-		stringBuilder.append(StringPool.CLOSE_CURLY_BRACE);
-		encodeNonEscapedObject(responseWriter, DATE_CLICK, stringBuilder.toString(), first);
 	}
 
 	protected void encodePopover(ResponseWriter responseWriter, PickDate pickDate, boolean first) throws IOException {
