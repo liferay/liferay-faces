@@ -44,8 +44,11 @@ import com.liferay.faces.util.lang.StringPool;
 public class InputDateRenderer extends InputDateRendererBase {
 
 	// Private Constants
-	private static final String BUTTON_ON_DATE_CLICK_TEMPLATE = "if(this._canBeSelected(event.date)){" +
-		"inputDateButtonOnDateClick(A.one('{0}'), A.Date.format(event.date,{format:'{1}'}));}";
+	// This is a javascript function that sets the value of the input to the new date and fires a change event
+	// on the input. It is used when showOn="button".
+	private static final String BUTTON_ON_DATE_CLICK_TEMPLATE = "function(event){if(this._canBeSelected(event.date)){" +
+		"var input=A.one('{0}');input.set('value',A.Date.format(event.date,{format:'{1}'}));" +
+		"input.simulate('change');}}";
 	private static final String TOKEN_0 = "{0}";
 	private static final String TOKEN_1 = "{1}";
 
