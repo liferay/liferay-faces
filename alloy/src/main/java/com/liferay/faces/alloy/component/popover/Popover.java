@@ -29,9 +29,9 @@ public class Popover extends PopoverBase implements Overlay {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.popover.Popover";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.popover.PopoverRenderer";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Group";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.popover.PopoverRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-popover";
 
 	public Popover() {
@@ -40,24 +40,18 @@ public class Popover extends PopoverBase implements Overlay {
 	}
 
 	@Override
-	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(PopoverPropertyKeys.zIndex, Integer.MIN_VALUE);
+	public String getHeaderText() {
+		return (String) getStateHelper().eval(PopoverPropertyKeys.headerText, StringPool.NBSP);
 	}
 
 	@Override
-	public Boolean isModal() {
+	public boolean isModal() {
 		return false;
 	}
 
 	@Override
-	public String getLayout() {
-		return (String) getStateHelper().eval(PropertyKeys.layout, StringPool.BLOCK);
-	}
-
-	@Override
 	public String getStyle() {
-
-		String style = (String) getStateHelper().eval(PropertyKeys.style, null);
+		String style = super.getStyle();
 
 		// Initially style the outermost <div> (which is the contentBox) with "display:none;" in order to prevent
 		// blinking when Alloy's JavaScript attempts to hide the contentBox.
@@ -79,10 +73,5 @@ public class Popover extends PopoverBase implements Overlay {
 		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
-
-	@Override
-	public Boolean isAutoShow() {
-		return (Boolean) getStateHelper().eval(PopoverPropertyKeys.autoShow, true);
 	}
 }

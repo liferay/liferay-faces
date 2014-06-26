@@ -831,11 +831,12 @@
 	<component name="OverlayCommon" extendsTags="ClientComponent" generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
+				<defaultValue>false</defaultValue>
 				<description>
 					<![CDATA[When true, the component is visible initially. The default is false.]]>
 				</description>
 				<name>autoShow</name>
-				<type>java.lang.Boolean</type>
+				<type>boolean</type>
 				<yui>true</yui>
 				<yuiName>visible</yuiName>
 			</attribute>
@@ -849,6 +850,7 @@
 				<yuiName>headerContent</yuiName>
 			</attribute>
 			<attribute>
+				<defaultValue>Integer.MIN_VALUE</defaultValue>
 				<description>
 					<![CDATA[Specifies the stack order of the component. The default value is a constant from the Liferay.zIndex JavaScript object.]]>
 				</description>
@@ -858,12 +860,25 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="DialogPopoverCommon" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When true, an "x" is placed in the upper right corner that the user can click on to hide/dismiss the overlay window. The default is true.]]>
+				</description>
+				<name>hideIconRendered</name>
+				<type>boolean</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="OutputTooltipPopoverCommon" extendsTags="OverlayCommon" generateJava="false"
 		generateTaglibXML="false">
 		<attributes>
 			<attribute>
+				<defaultValue>com.liferay.faces.util.lang.StringPool.RIGHT</defaultValue>
 				<description>
-					<![CDATA[Where the component should popup.]]>
+					<![CDATA[Indicates the side of the associated component where the tooltip should appear ("right", "left", "top", "bottom"). Default is "right".]]>
 				</description>
 				<name>position</name>
 				<type>java.lang.String</type>
@@ -1096,34 +1111,35 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Dialog" extendsTags="HTMLCommonEvents OverlayCommon" module="aui-modal" 
-		parentClass="javax.faces.component.html.HtmlPanelGroup"
+	<component name="Dialog" extendsTags="HTMLCommonEvents DialogPopoverCommon OverlayCommon" module="aui-modal" 
+		parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
 		rendererParentClass="com.liferay.faces.alloy.component.overlay.OverlayRendererBase"
 		yui="true" yuiName="Modal">
 		<description>
-			<![CDATA[Dialog is a UIPanel that renders a div for use by the user. It is used in conjunction with a trigger, such as a button. The user may use the trigger to show the dialog. Since it extends HtmlPanelGroup, it supports all the features of an h:panelGroup that does not render a span.]]>
+			<![CDATA[Dialog is a UIPanel component that that renders a <div> element that is initially styled with display:none so that it can be popped-up as an overlay by calling the JavaScript API. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
 		</description>
 		<attributes>
 			<attribute>
+				<defaultValue>false</defaultValue>
 				<description>
-					<![CDATA[The id of the target which triggers the dialog.]]>
+					<![CDATA[When true, the overlay window is automatically hidden when the user clicks outside of it. The default is false.]]>
 				</description>
-				<name>for</name>
-				<type>java.lang.String</type>
-				<required>true</required>
+				<name>hideOnBlur</name>
+				<type>boolean</type>
 			</attribute>
 			<attribute>
+				<defaultValue>false</defaultValue>
 				<description>
 					<![CDATA[When true the user must interact with the child dialog window before continuing to interact with the parent. The default is true.]]>
 				</description>
 				<name>modal</name>
-				<type>java.lang.Boolean</type>
+				<type>boolean</type>
 				<yui>true</yui>
 			</attribute>
 		</attributes>
 	</component>
 	<component name="Field" extendsTags="PanelGroup"
-		parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroup"
+		parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
 		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupRenderer">
 		<description>
 			<![CDATA[Field is a UIPanel component that renders a <div> element and a <label> element in order to wrap a field. Since it extends PanelGroup, it supports all the features of alloy:panelGroup.]]>
@@ -1569,7 +1585,7 @@
 		rendererParentClass="com.liferay.faces.alloy.component.overlay.OverlayRendererBase"
 		yui="true" yuiName="Tooltip">
 		<description>
-			<![CDATA[Tooltip is an OutputText component that displays a hint to the user. It is used in conjunction with a cursor, usually a pointer. The user hovers the pointer over an item, without clicking it, and a tooltip appears as a "hover box" with information about the item. Since it extends HtmlOutputText, it supports all the features of an h:outputText that does not render a span.]]>
+			<![CDATA[OutputTooltip is a UIOutput component that renders a <div> element which is displayed as an overlay that is initially styled with display:none so that it can be popped-up as an overlay. Since it extends HtmlOutputText, it supports all the features of h:outputText.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -1685,13 +1701,22 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Popover" extendsTags="HTMLCommonEvents OutputTooltipPopoverCommon" module="aui-popover" 
-		parentClass="javax.faces.component.html.HtmlPanelGroup"
-		rendererParentClass="com.liferay.faces.alloy.component.overlay.OverlayRendererBase" yui="true">
+	<component name="Popover" extendsTags="HTMLCommonEvents DialogPopoverCommon OutputTooltipPopoverCommon" module="aui-popover" 
+		parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
+		rendererParentClass="com.liferay.faces.alloy.component.overlay.OverlayRendererBase"
+		yui="true">
 		<description>
-			<![CDATA[Popover is a UIPanel that renders a div for use by the user. It is used in conjunction with a trigger, such as a button. The user may toggle the trigger to control whether the popover is visible. Since it extends HtmlPanelGroup, it supports all the features of an h:panelGroup that does not render a span.]]>
+			<![CDATA[Popover is a UIPanel component that that renders a <div> element that is initially styled with display:none so that it can be popped-up as an overlay by calling the JavaScript API. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
 		</description>
 		<attributes>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When true, the overlay window is automatically hidden when the user clicks outside of it. The default is true.]]>
+				</description>
+				<name>hideOnBlur</name>
+				<type>boolean</type>
+			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[The id of the component that is associated with the popover.]]>

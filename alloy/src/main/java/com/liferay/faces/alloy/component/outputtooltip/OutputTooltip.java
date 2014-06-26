@@ -38,25 +38,13 @@ public class OutputTooltip extends OutputTooltipBase implements Overlay {
 	}
 
 	@Override
-	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(OutputTooltipPropertyKeys.zIndex, Integer.MIN_VALUE);
-	}
-
-	@Override
-	public Boolean isModal() {
+	public boolean isModal() {
 		return false;
 	}
 
 	@Override
-	public String getPosition() {
-
-		String position = super.getPosition();
-
-		if (position == null) {
-			position = StringPool.RIGHT;
-		}
-
-		return position;
+	public boolean isHideOnBlur() {
+		return false;
 	}
 
 	@Override
@@ -83,17 +71,5 @@ public class OutputTooltip extends OutputTooltipBase implements Overlay {
 		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
-
-	@Override
-	public Boolean isAutoShow() {
-
-		Boolean autoShow = super.isAutoShow();
-
-		if (autoShow == null) {
-			autoShow = false;
-		}
-
-		return autoShow;
 	}
 }

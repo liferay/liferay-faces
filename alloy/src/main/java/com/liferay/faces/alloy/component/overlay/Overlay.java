@@ -13,26 +13,25 @@
  */
 package com.liferay.faces.alloy.component.overlay;
 
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.component.ClientComponent;
 
 
 /**
- * @author  Neil Griffin
+ * @author  Vernon Singleton
  */
 public interface Overlay extends ClientComponent {
 
-	public UIComponent findComponent(String id);
+	public Integer getzIndex();
 
 	public String getClientId(FacesContext facesContext);
 
-	public String getFor();
-
 	public String getHeaderText();
 
-	public Boolean isModal();
+	public boolean isModal();
 
-	public Boolean isAutoShow();
+	public boolean isHideOnBlur();
+
+	public boolean isAutoShow();
 }

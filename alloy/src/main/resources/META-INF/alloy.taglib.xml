@@ -825,7 +825,7 @@
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[Dialog is a UIPanel that renders a div for use by the user. It is used in conjunction with a trigger, such as a button. The user may use the trigger to show the dialog. Since it extends HtmlPanelGroup, it supports all the features of an h:panelGroup that does not render a span.]]></description>
+		<description><![CDATA[Dialog is a UIPanel component that that renders a <div> element that is initially styled with display:none so that it can be popped-up as an overlay by calling the JavaScript API. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]></description>
 		<tag-name>dialog</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.dialog.Dialog</component-type>
@@ -835,7 +835,7 @@
 			<description><![CDATA[When true, the component is visible initially. The default is false.]]></description>
 			<name>autoShow</name>
 			<required>false</required>
-			<type>java.lang.Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -850,16 +850,22 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The id of the target which triggers the dialog.]]></description>
-			<name>for</name>
-			<required>true</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[The text to place in the header of the component.]]></description>
 			<name>headerText</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, an "x" is placed in the upper right corner that the user can click on to hide/dismiss the overlay window. The default is true.]]></description>
+			<name>hideIconRendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the overlay window is automatically hidden when the user clicks outside of it. The default is false.]]></description>
+			<name>hideOnBlur</name>
+			<required>false</required>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A unique identifier for this component.]]></description>
@@ -871,7 +877,7 @@
 			<description><![CDATA[When true the user must interact with the child dialog window before continuing to interact with the parent. The default is true.]]></description>
 			<name>modal</name>
 			<required>false</required>
-			<type>java.lang.Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
@@ -2705,7 +2711,7 @@
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[Tooltip is an OutputText component that displays a hint to the user. It is used in conjunction with a cursor, usually a pointer. The user hovers the pointer over an item, without clicking it, and a tooltip appears as a "hover box" with information about the item. Since it extends HtmlOutputText, it supports all the features of an h:outputText that does not render a span.]]></description>
+		<description><![CDATA[OutputTooltip is a UIOutput component that renders a <div> element which is displayed as an overlay that is initially styled with display:none so that it can be popped-up as an overlay. Since it extends HtmlOutputText, it supports all the features of h:outputText.]]></description>
 		<tag-name>outputTooltip</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.outputtooltip.OutputTooltip</component-type>
@@ -2715,7 +2721,7 @@
 			<description><![CDATA[When true, the component is visible initially. The default is false.]]></description>
 			<name>autoShow</name>
 			<required>false</required>
-			<type>java.lang.Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -2778,7 +2784,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Where the component should popup.]]></description>
+			<description><![CDATA[Indicates the side of the associated component where the tooltip should appear ("right", "left", "top", "bottom"). Default is "right".]]></description>
 			<name>position</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -3265,7 +3271,7 @@
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[Popover is a UIPanel that renders a div for use by the user. It is used in conjunction with a trigger, such as a button. The user may toggle the trigger to control whether the popover is visible. Since it extends HtmlPanelGroup, it supports all the features of an h:panelGroup that does not render a span.]]></description>
+		<description><![CDATA[Popover is a UIPanel component that that renders a <div> element that is initially styled with display:none so that it can be popped-up as an overlay by calling the JavaScript API. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]></description>
 		<tag-name>popover</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.popover.Popover</component-type>
@@ -3275,7 +3281,7 @@
 			<description><![CDATA[When true, the component is visible initially. The default is false.]]></description>
 			<name>autoShow</name>
 			<required>false</required>
-			<type>java.lang.Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
@@ -3300,6 +3306,18 @@
 			<name>headerText</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, an "x" is placed in the upper right corner that the user can click on to hide/dismiss the overlay window. The default is true.]]></description>
+			<name>hideIconRendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the overlay window is automatically hidden when the user clicks outside of it. The default is true.]]></description>
+			<name>hideOnBlur</name>
+			<required>false</required>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A unique identifier for this component.]]></description>
@@ -3368,7 +3386,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Where the component should popup.]]></description>
+			<description><![CDATA[Indicates the side of the associated component where the tooltip should appear ("right", "left", "top", "bottom"). Default is "right".]]></description>
 			<name>position</name>
 			<required>false</required>
 			<type>java.lang.String</type>

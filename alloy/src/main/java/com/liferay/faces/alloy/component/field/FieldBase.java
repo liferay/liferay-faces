@@ -15,7 +15,7 @@ package com.liferay.faces.alloy.component.field;
 //J-
 
 import javax.annotation.Generated;
-import com.liferay.faces.alloy.component.panelgroup.PanelGroup;
+import com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout;
 
 import com.liferay.faces.util.component.Styleable;
 
@@ -24,7 +24,7 @@ import com.liferay.faces.util.component.Styleable;
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class FieldBase extends PanelGroup implements Styleable {
+public abstract class FieldBase extends PanelGroupBlockLayout implements Styleable {
 
 	// Protected Enumerations
 	protected enum FieldPropertyKeys {

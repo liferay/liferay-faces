@@ -38,11 +38,11 @@ public abstract class OutputTooltipBase extends OutputText implements Styleable,
 		zIndex
 	}
 
-	public Boolean isAutoShow() {
-		return (Boolean) getStateHelper().eval(OutputTooltipPropertyKeys.autoShow, null);
+	public boolean isAutoShow() {
+		return (Boolean) getStateHelper().eval(OutputTooltipPropertyKeys.autoShow, false);
 	}
 
-	public void setAutoShow(Boolean autoShow) {
+	public void setAutoShow(boolean autoShow) {
 		getStateHelper().put(OutputTooltipPropertyKeys.autoShow, autoShow);
 	}
 
@@ -81,7 +81,7 @@ public abstract class OutputTooltipBase extends OutputText implements Styleable,
 	}
 
 	public String getPosition() {
-		return (String) getStateHelper().eval(OutputTooltipPropertyKeys.position, null);
+		return (String) getStateHelper().eval(OutputTooltipPropertyKeys.position, com.liferay.faces.util.lang.StringPool.RIGHT);
 	}
 
 	public void setPosition(String position) {
@@ -89,7 +89,7 @@ public abstract class OutputTooltipBase extends OutputText implements Styleable,
 	}
 
 	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(OutputTooltipPropertyKeys.zIndex, null);
+		return (Integer) getStateHelper().eval(OutputTooltipPropertyKeys.zIndex, Integer.MIN_VALUE);
 	}
 
 	public void setzIndex(Integer zIndex) {
