@@ -31,10 +31,10 @@ public abstract class PopoverBase extends PanelGroupBlockLayout implements Style
 	protected enum PopoverPropertyKeys {
 		autoShow,
 		clientKey,
+		dismissible,
 		for_,
 		headerText,
 		hideIconRendered,
-		hideOnBlur,
 		position,
 		zIndex
 	}
@@ -55,6 +55,14 @@ public abstract class PopoverBase extends PanelGroupBlockLayout implements Style
 	@Override
 	public void setClientKey(String clientKey) {
 		getStateHelper().put(PopoverPropertyKeys.clientKey, clientKey);
+	}
+
+	public boolean isDismissible() {
+		return (Boolean) getStateHelper().eval(PopoverPropertyKeys.dismissible, true);
+	}
+
+	public void setDismissible(boolean dismissible) {
+		getStateHelper().put(PopoverPropertyKeys.dismissible, dismissible);
 	}
 
 	public String getFor() {
@@ -79,14 +87,6 @@ public abstract class PopoverBase extends PanelGroupBlockLayout implements Style
 
 	public void setHideIconRendered(boolean hideIconRendered) {
 		getStateHelper().put(PopoverPropertyKeys.hideIconRendered, hideIconRendered);
-	}
-
-	public boolean isHideOnBlur() {
-		return (Boolean) getStateHelper().eval(PopoverPropertyKeys.hideOnBlur, true);
-	}
-
-	public void setHideOnBlur(boolean hideOnBlur) {
-		getStateHelper().put(PopoverPropertyKeys.hideOnBlur, hideOnBlur);
 	}
 
 	public String getPosition() {

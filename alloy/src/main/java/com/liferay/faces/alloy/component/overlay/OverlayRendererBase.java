@@ -67,7 +67,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
 	protected void encodeOverlayDismissible(ResponseWriter responseWriter, Overlay overlay, String clientKey)
 		throws IOException {
 
-		if (!overlay.isModal() && overlay.isHideOnBlur()) {
+		if (!overlay.isModal() && overlay.isDismissible()) {
 			responseWriter.write("var ");
 			responseWriter.write(clientKey);
 			responseWriter.write("_switched=false;");

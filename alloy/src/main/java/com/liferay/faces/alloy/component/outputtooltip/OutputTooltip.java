@@ -43,7 +43,7 @@ public class OutputTooltip extends OutputTooltipBase implements Overlay {
 	}
 
 	@Override
-	public boolean isHideOnBlur() {
+	public boolean isDismissible() {
 		return false;
 	}
 

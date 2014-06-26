@@ -27,11 +27,11 @@ public interface Overlay extends ClientComponent {
 
 	public String getClientId(FacesContext facesContext);
 
+	public boolean isDismissible();
+
 	public String getHeaderText();
 
 	public boolean isModal();
-
-	public boolean isHideOnBlur();
 
 	public boolean isAutoShow();
 }

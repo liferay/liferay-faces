@@ -1124,7 +1124,7 @@
 				<description>
 					<![CDATA[When true, the overlay window is automatically hidden when the user clicks outside of it. The default is false.]]>
 				</description>
-				<name>hideOnBlur</name>
+				<name>dismissible</name>
 				<type>boolean</type>
 			</attribute>
 			<attribute>
@@ -1714,7 +1714,7 @@
 				<description>
 					<![CDATA[When true, the overlay window is automatically hidden when the user clicks outside of it. The default is true.]]>
 				</description>
-				<name>hideOnBlur</name>
+				<name>dismissible</name>
 				<type>boolean</type>
 			</attribute>
 			<attribute>
