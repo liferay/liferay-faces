@@ -1,13 +1,15 @@
 // This is a javascript function that is used by PickDate.java to conditionally fire a change event on the input which
 // triggers the pickDate.
-function pickDateDefaultOnDateClick(newDate, input, calendar) {
+function pickDateDefaultOnDateClick(event, input) {
 	var fireChange = true;
+	var calendar = event.currentTarget;
 	if (calendar.get('selectionMode') === 'single') {
 		var oldDate = calendar.get('oldDate');
 		if (oldDate) {
 			// Reset the time to midnight because we want to compare dates below and not times.
-			oldDate.setHours(0, 0, 0, 0);
+			var newDate = event.date;
 			newDate.setHours(0, 0, 0, 0);
+			oldDate.setHours(0, 0, 0, 0);
 			fireChange = (oldDate.getTime() !== newDate.getTime());
 		}
 		calendar.set('oldDate', newDate);
@@ -18,11 +20,4 @@ function pickDateDefaultOnDateClick(newDate, input, calendar) {
 	if (fireChange) {
 		input.simulate('change');
 	}
-}
-
-// This is a javascript function that is used by InputDateRenderer.java to set the value of the input to the new date,
-// and fire a change event on the input.
-function inputDateButtonOnDateClick(input, formattedDate) {
-	input.set('value', formattedDate);
-	input.simulate('change');
 }
