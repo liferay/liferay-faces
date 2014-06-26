@@ -32,10 +32,10 @@ public abstract class PopoverRendererBase extends OverlayRendererBase {
 
 	// Protected Constants
 	protected static final String CLIENT_KEY = "clientKey";
+	protected static final String DISMISSIBLE = "dismissible";
 	protected static final String FOR = "for";
 	protected static final String HEADER_CONTENT = "headerContent";
 	protected static final String HIDE_ICON_RENDERED = "hideIconRendered";
-	protected static final String HIDE_ON_BLUR = "hideOnBlur";
 	protected static final String POSITION = "position";
 	protected static final String VISIBLE = "visible";
 	protected static final String Z_INDEX = "zIndex";

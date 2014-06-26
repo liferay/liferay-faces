@@ -850,6 +850,12 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[When true, the overlay window is automatically hidden when the user clicks outside of it. The default is false.]]></description>
+			<name>dismissible</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The text to place in the header of the component.]]></description>
 			<name>headerText</name>
 			<required>false</required>
@@ -858,12 +864,6 @@
 		<attribute>
 			<description><![CDATA[When true, an "x" is placed in the upper right corner that the user can click on to hide/dismiss the overlay window. The default is true.]]></description>
 			<name>hideIconRendered</name>
-			<required>false</required>
-			<type>boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[When true, the overlay window is automatically hidden when the user clicks outside of it. The default is false.]]></description>
-			<name>hideOnBlur</name>
 			<required>false</required>
 			<type>boolean</type>
 		</attribute>
@@ -3296,6 +3296,12 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[When true, the overlay window is automatically hidden when the user clicks outside of it. The default is true.]]></description>
+			<name>dismissible</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The id of the component that is associated with the popover.]]></description>
 			<name>for</name>
 			<required>true</required>
@@ -3310,12 +3316,6 @@
 		<attribute>
 			<description><![CDATA[When true, an "x" is placed in the upper right corner that the user can click on to hide/dismiss the overlay window. The default is true.]]></description>
 			<name>hideIconRendered</name>
-			<required>false</required>
-			<type>boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[When true, the overlay window is automatically hidden when the user clicks outside of it. The default is true.]]></description>
-			<name>hideOnBlur</name>
 			<required>false</required>
 			<type>boolean</type>
 		</attribute>

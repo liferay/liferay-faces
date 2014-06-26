@@ -31,9 +31,9 @@ public abstract class DialogBase extends PanelGroupBlockLayout implements Stylea
 	protected enum DialogPropertyKeys {
 		autoShow,
 		clientKey,
+		dismissible,
 		headerText,
 		hideIconRendered,
-		hideOnBlur,
 		modal,
 		zIndex
 	}
@@ -56,6 +56,14 @@ public abstract class DialogBase extends PanelGroupBlockLayout implements Stylea
 		getStateHelper().put(DialogPropertyKeys.clientKey, clientKey);
 	}
 
+	public boolean isDismissible() {
+		return (Boolean) getStateHelper().eval(DialogPropertyKeys.dismissible, false);
+	}
+
+	public void setDismissible(boolean dismissible) {
+		getStateHelper().put(DialogPropertyKeys.dismissible, dismissible);
+	}
+
 	public String getHeaderText() {
 		return (String) getStateHelper().eval(DialogPropertyKeys.headerText, null);
 	}
@@ -70,14 +78,6 @@ public abstract class DialogBase extends PanelGroupBlockLayout implements Stylea
 
 	public void setHideIconRendered(boolean hideIconRendered) {
 		getStateHelper().put(DialogPropertyKeys.hideIconRendered, hideIconRendered);
-	}
-
-	public boolean isHideOnBlur() {
-		return (Boolean) getStateHelper().eval(DialogPropertyKeys.hideOnBlur, false);
-	}
-
-	public void setHideOnBlur(boolean hideOnBlur) {
-		getStateHelper().put(DialogPropertyKeys.hideOnBlur, hideOnBlur);
 	}
 
 	public boolean isModal() {
