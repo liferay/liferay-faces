@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Conversion to a Date using the converter attribute. -->
+		<h:form>
+			<showcase:example description="#{i18n['conversion-to-a-date-using-converter-attribute']}" number="1">
+				<input id="inputId1" type="text" value="April 5, 33 AD" />
+				<alloy:inputHidden id="text" converter="javax.faces.DateTime" converterMessage="#{i18n['converter-message']}"
+					value="#{inputHiddenModelBean.date}" />
+				<alloy:message for="text" />
+				<br />
+				<alloy:button
+					onclick="AUI().use('node', function(A) { A.one('#inputId1').get('nextSibling').set('value', A.one('#inputId1').get('value')); A.one('#spanId1').setHTML('Copied.'); } );"
+					value="#{i18n['copy-into-the-hidden-input']}" />
+				<span id="spanId1"></span>
+				<hr />
+				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" converter="javax.faces.DateTime" value="#{inputHiddenModelBean.date}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: Conversion to a Date using an f:convertDateTime child tag. -->
+		<h:form>
+			<showcase:example description="#{i18n['conversion-to-a-date-using-f-convertdatetime']}" number="2">
+				<input id="inputId2" type="text" value="4/5/33" />
+				<alloy:inputHidden id="text" converterMessage="#{i18n['converter-message']}"
+					value="#{inputHiddenModelBean.date}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</alloy:inputHidden>
+				<alloy:message for="text" />
+				<br />
+				<alloy:button 
+					onclick="AUI().use('node', function(A) { A.one('#inputId2').get('nextSibling').set('value', A.one('#inputId2').get('value')); A.one('#spanId2').setHTML('Copied.'); } );"
+					value="#{i18n['copy-into-the-hidden-input']}" />
+				<span id="spanId2"></span>
+				<hr />
+				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{inputHiddenModelBean.date}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</alloy:outputText>
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

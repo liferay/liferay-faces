@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<!-- Example 1: Validating an email address using the validator attribute. -->
+			<showcase:example description="#{i18n['validating-an-email-address-using-validator-attribute']}" number="1">
+				<input id="inputId1" type="text" value="test@liferay.com" />
+				<alloy:inputHidden id="text" validator="#{inputHiddenBackingBean.emailAddressValidator}"
+					validatorMessage="#{i18n['validator-message']}" value="#{inputHiddenModelBean.text}" />
+				<alloy:message for="text" />
+				<br />
+				<alloy:button
+					onclick="AUI().use('node', function(A) { A.one('#inputId1').get('nextSibling').set('value', A.one('#inputId1').get('value')); A.one('#spanId1').setHTML('Copied.'); } );" 
+					value="#{i18n['copy-into-the-hidden-input']}" />
+				<span id="spanId1"></span>
+				<hr />
+				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{inputHiddenModelBean.text}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: Validating an email address using an f:validateRegex child tag. -->
+		<h:form>
+			<showcase:example description="#{i18n['validating-an-email-address-using-f-validateregex']}" number="2">
+				<input id="inputId2" type="text" value="test@liferay.com" />
+				<alloy:inputHidden id="text" validatorMessage="#{i18n['validator-message']}"
+					value="#{inputHiddenModelBean.text}">
+					<f:validateRegex pattern=".+[@].+[.].+" />
+				</alloy:inputHidden>
+				<alloy:message for="text" />
+				<br />
+				<alloy:button 
+					onclick="AUI().use('node', function(A) { A.one('#inputId2').get('nextSibling').set('value', A.one('#inputId2').get('value')); A.one('#spanId2').setHTML('Copied.'); } );" 
+					value="#{i18n['copy-into-the-hidden-input']}" />
+				<span id="spanId2"></span>
+				<hr />
+				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{inputHiddenModelBean.text}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
