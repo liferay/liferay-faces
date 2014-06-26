@@ -44,11 +44,17 @@ public class CountryServiceMockImpl implements CountryService, Serializable {
 	public void postConstruct() {
 		countryMap = new HashMap<Long, Country>();
 
-		Country country = new Country(1, "US", "United States");
+		Country country = new Country(0, "IL", "Israel");
+		countryMap.put(country.getCountryId(), country);
+		country = new Country(1, "US", "United States");
 		countryMap.put(country.getCountryId(), country);
 		country = new Country(2, "UK", "United Kingdom");
 		countryMap.put(country.getCountryId(), country);
 		country = new Country(3, "CH", "Switzerland");
+		countryMap.put(country.getCountryId(), country);
+		country = new Country(4, "CN", "China");
+		countryMap.put(country.getCountryId(), country);
+		country = new Country(5, "VN", "Vietnam");
 		countryMap.put(country.getCountryId(), country);
 		countryList = new ArrayList<Country>(countryMap.values());
 	}

@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Using text children -->
+		<h:form>
+			<showcase:example description="#{i18n['alloy-outputlink-general-example-1']}" number="1" renderedCheckbox="true">
+				<alloy:outputLink rendered="#{showcaseModelBean.selectedComponent.rendered}" target="_blank" 
+					value="http://liferay.com" >
+					<alloy:outputText value="#{i18n['text-for-a-link']}" />
+				</alloy:outputLink>
+			</showcase:example>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="col2">
+		<!-- Example 2: Using images -->
+		<h:form>
+			<showcase:example description="#{i18n['alloy-outputlink-general-example-2']}" number="2" >
+				<alloy:outputLink target="_blank" value="http://liferay.com" >
+					<h:graphicImage value="/resources/images/liferay-faces-logo-small.png" />
+				</alloy:outputLink>
+			</showcase:example>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="col3">
+		<!-- Example 3: Add name=value pairs to the url with f:param -->
+		<h:form>
+			<showcase:example description="#{i18n['alloy-outputlink-general-example-3']}" number="3" >
+				<alloy:outputLink target="_blank" value="https://www.google.com/search" >
+					<alloy:icon name="star" />
+					<alloy:outputText value=" #{i18n['text-for-a-link']} " />
+					<h:graphicImage value="/resources/images/liferay-faces-logo-small.png" />
+					<f:param name="q" value="liferay faces" />
+				</alloy:outputLink>
+			</showcase:example>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
