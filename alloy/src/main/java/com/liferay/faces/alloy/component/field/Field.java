@@ -43,7 +43,6 @@ public class Field extends FieldBase {
 	private static final String CONTROL_GROUP = "control-group";
 	private static final String ERROR = "error";
 	private static final String INFO = "info";
-	private static final String LAYOUT = "layout";
 	private static final String WARNING = "warning";
 	private static final String SUCCESS = "success";
 
@@ -123,16 +122,6 @@ public class Field extends FieldBase {
 		}
 
 		return severity;
-	}
-
-	@Override
-	public String getLayout() {
-		return (String) getStateHelper().eval(LAYOUT, StringPool.BLOCK);
-	}
-
-	@Override
-	public void setLayout(String layout) {
-		getStateHelper().put(LAYOUT, layout);
 	}
 
 	@Override

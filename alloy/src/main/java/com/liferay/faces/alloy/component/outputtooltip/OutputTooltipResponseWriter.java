@@ -19,27 +19,25 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.IdDelegationResponseWriter;
+import com.liferay.faces.util.render.DelegationResponseWriterBase;
 
 
 /**
- * The purpose of this class is to transform the output written by the JSF implementation's renderer so that
- * &lt;span&gt; elements will become &lt;div&gt; elements and so that the "id" attribute is always rendered. This is
- * necessary so that the AlloyUI JavaScript will be able to find the contextBox.
+ * The purpose of this class is ignore the "span" element written by the JSF runtime's renderer.
  *
  * @author  Vernon Singleton
  */
-public class OutputTooltipResponseWriter extends IdDelegationResponseWriter {
+public class OutputTooltipResponseWriter extends DelegationResponseWriterBase {
 
 	public OutputTooltipResponseWriter(ResponseWriter responseWriter, String idValue) {
-		super(responseWriter, StringPool.DIV, idValue);
+		super(responseWriter);
 	}
 
 	@Override
 	public void endElement(String name) throws IOException {
 
-		// Prevent the JSF runtime from closing the </span> tag since children need to be encoded by the
-		// OutputToolTipRenderer.encodeChildren(FacesContext, UIComponent) method.
+		// Prevent the JSF runtime from closing the </span> tag since the
+		// OutputToolTipRenderer.encodeMarkupEnd(FacesContext, UIComponent) method will write a closing </div> tag.
 		if (!StringPool.SPAN.equals(name)) {
 			super.endElement(name);
 		}
@@ -48,12 +46,21 @@ public class OutputTooltipResponseWriter extends IdDelegationResponseWriter {
 	@Override
 	public void startElement(String name, UIComponent component) throws IOException {
 
-		// When the JSF runtime's renderer attempts to render an opening <span> tag, render an opening <div> tag
-		// instead.
-		if (StringPool.SPAN.equals(name)) {
-			name = StringPool.DIV;
+		// Prevent the JSF runtime from opening the <span> tag since the
+		// OutputToolTipRenderer.encodeMarkupBegin(FacesContext, UIComponent) method has already written an opening
+		// <div> tag.
+		if (!StringPool.SPAN.equals(name)) {
+			super.startElement(name, component);
 		}
+	}
 
-		super.startElement(name, component);
+	@Override
+	public void writeAttribute(String name, Object value, String property) throws IOException {
+
+		// Prevent the JSF runtime writing the "id" attribute since the
+		// OutputToolTipRenderer.encodeMarkupBegin(FacesContext, UIComponent) method has already written it.
+		if (!StringPool.ID.equals(name)) {
+			super.writeAttribute(name, value, property);
+		}
 	}
 }

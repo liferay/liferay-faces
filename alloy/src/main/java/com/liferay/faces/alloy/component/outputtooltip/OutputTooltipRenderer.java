@@ -16,6 +16,7 @@ package com.liferay.faces.alloy.component.outputtooltip;
 import java.io.IOException;
 import java.util.List;
 
+import javax.faces.application.ProjectStage;
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
@@ -25,6 +26,9 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.render.DelegationResponseWriter;
 
 
 /**
@@ -41,6 +45,9 @@ import com.liferay.faces.util.lang.StringPool;
 )
 //J+
 public class OutputTooltipRenderer extends OutputTooltipRendererBase {
+
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(OutputTooltipRenderer.class);
 
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -59,27 +66,39 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 	}
 
 	@Override
+	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		OutputTooltip tooltip = (OutputTooltip) uiComponent;
+		encodeOverlayJavaScriptCustom(responseWriter, facesContext, tooltip);
+
+		if ((tooltip.getFor() == null) && facesContext.isProjectStage(ProjectStage.Development)) {
+			logger.error("The 'for' attribute is required for alloy:outputTooltip");
+		}
+	}
+
+	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		// Create a ResponseWriter that will transform the opening <span> tag to a <div> tag that always has an "id"
-		// attribute. In addition, the ResponseWriter does not transform the closing </span> tag, but instead avoids
-		// writing a closing tag. This is necessary so that encodeChildren(FacesContext, UIComponent) can take place
-		// normally, and so that encodeMarkupEnd(FacesContext, UIComponent) will have an opportunity to write the
-		// closing </div> tag.
+		// Encode the opening <div> tag with an "id" attribute so that AlloyUI will be able to find the contentBox.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		OutputTooltipResponseWriter outputTooltipResponseWriter = new OutputTooltipResponseWriter(responseWriter,
+		responseWriter.startElement(StringPool.DIV, uiComponent);
+		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(), StringPool.ID);
+
+		// Create a response writer that will ignore the opening and closing "span" element tags.
+		DelegationResponseWriter delegationResponseWriter = new OutputTooltipResponseWriter(responseWriter,
 				uiComponent.getClientId(facesContext));
 
 		// The delegation renderer provided by the JSF runtime does not attempt to encode the opening <span> tag during
 		// of encodeBegin(FacesContext, UIComponent). Instead, the entire <span>...</span> element is encoded during
 		// encodeEnd(FacesContext, UIComponent).
-		super.encodeMarkupEnd(facesContext, uiComponent, outputTooltipResponseWriter);
+		super.encodeMarkupEnd(facesContext, uiComponent, delegationResponseWriter);
 	}
 
 	@Override
 	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		// Encode the closing </div> tag that was started by the OutputTooltipResponseWriter.
+		// Encode the closing </div> tag.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.endElement(StringPool.DIV);
 	}
@@ -88,16 +107,10 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter,
 		OutputTooltip outputTooltip, boolean first) throws IOException {
 
-		// cssClass
+		// Encode the "cssClass" Alloy hidden attribute.
 		encodeString(responseWriter, AlloyRendererUtil.CSS_CLASS, outputTooltip.getStyleClass(), first);
+
 		first = false;
-
-		// value
-		Object value = outputTooltip.getValue();
-
-		if (value != null) {
-			encodeString(responseWriter, StringPool.VALUE, value, first);
-		}
 
 		encodeOverlayHiddenAttributes(facesContext, responseWriter, outputTooltip, first);
 	}
@@ -105,12 +118,8 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 	@Override
 	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, Integer zIndex,
 		boolean first) throws IOException {
-		encodeOverlayZIndex(responseWriter, outputTooltip, zIndex, first);
-	}
 
-	@Override
-	protected boolean isForRequired() {
-		return true;
+		encodeOverlayZIndex(responseWriter, outputTooltip, zIndex, AlloyRendererUtil.LIFERAY_Z_INDEX_TOOLTIP, first);
 	}
 
 	@Override

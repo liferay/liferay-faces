@@ -15,7 +15,7 @@ package com.liferay.faces.alloy.component.dialog;
 //J-
 
 import javax.annotation.Generated;
-import javax.faces.component.html.HtmlPanelGroup;
+import com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout;
 
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.component.ClientComponent;
@@ -25,23 +25,24 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class DialogBase extends HtmlPanelGroup implements Styleable, ClientComponent {
+public abstract class DialogBase extends PanelGroupBlockLayout implements Styleable, ClientComponent {
 
 	// Protected Enumerations
 	protected enum DialogPropertyKeys {
 		autoShow,
 		clientKey,
-		for_,
 		headerText,
+		hideIconRendered,
+		hideOnBlur,
 		modal,
 		zIndex
 	}
 
-	public Boolean isAutoShow() {
-		return (Boolean) getStateHelper().eval(DialogPropertyKeys.autoShow, null);
+	public boolean isAutoShow() {
+		return (Boolean) getStateHelper().eval(DialogPropertyKeys.autoShow, false);
 	}
 
-	public void setAutoShow(Boolean autoShow) {
+	public void setAutoShow(boolean autoShow) {
 		getStateHelper().put(DialogPropertyKeys.autoShow, autoShow);
 	}
 
@@ -55,14 +56,6 @@ public abstract class DialogBase extends HtmlPanelGroup implements Styleable, Cl
 		getStateHelper().put(DialogPropertyKeys.clientKey, clientKey);
 	}
 
-	public String getFor() {
-		return (String) getStateHelper().eval(DialogPropertyKeys.for_, null);
-	}
-
-	public void setFor(String for_) {
-		getStateHelper().put(DialogPropertyKeys.for_, for_);
-	}
-
 	public String getHeaderText() {
 		return (String) getStateHelper().eval(DialogPropertyKeys.headerText, null);
 	}
@@ -71,16 +64,32 @@ public abstract class DialogBase extends HtmlPanelGroup implements Styleable, Cl
 		getStateHelper().put(DialogPropertyKeys.headerText, headerText);
 	}
 
-	public Boolean isModal() {
-		return (Boolean) getStateHelper().eval(DialogPropertyKeys.modal, null);
+	public boolean isHideIconRendered() {
+		return (Boolean) getStateHelper().eval(DialogPropertyKeys.hideIconRendered, true);
 	}
 
-	public void setModal(Boolean modal) {
+	public void setHideIconRendered(boolean hideIconRendered) {
+		getStateHelper().put(DialogPropertyKeys.hideIconRendered, hideIconRendered);
+	}
+
+	public boolean isHideOnBlur() {
+		return (Boolean) getStateHelper().eval(DialogPropertyKeys.hideOnBlur, false);
+	}
+
+	public void setHideOnBlur(boolean hideOnBlur) {
+		getStateHelper().put(DialogPropertyKeys.hideOnBlur, hideOnBlur);
+	}
+
+	public boolean isModal() {
+		return (Boolean) getStateHelper().eval(DialogPropertyKeys.modal, false);
+	}
+
+	public void setModal(boolean modal) {
 		getStateHelper().put(DialogPropertyKeys.modal, modal);
 	}
 
 	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(DialogPropertyKeys.zIndex, null);
+		return (Integer) getStateHelper().eval(DialogPropertyKeys.zIndex, Integer.MIN_VALUE);
 	}
 
 	public void setzIndex(Integer zIndex) {

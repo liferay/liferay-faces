@@ -11,27 +11,18 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.demos.dto;
+package com.liferay.faces.alloy.component.panelgroup;
 
-import java.util.List;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
  * @author  Neil Griffin
  */
-public interface SelectedComponent extends ShowcaseComponent {
+public class PanelGroupBlockLayout extends PanelGroup {
 
-	public boolean isRendered();
-
-	public boolean isRequired();
-
-	public void setRendered(boolean rendered);
-
-	public void setRequired(boolean required);
-
-	List<CodeExample> getUseCaseCodeExamples();
-
-	public String getUseCaseKey();
-
-	public String getUseCaseName();
+	@Override
+	public String getLayout() {
+		return (String) getStateHelper().eval(PropertyKeys.layout, StringPool.BLOCK);
+	}
 }

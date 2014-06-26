@@ -15,7 +15,7 @@ package com.liferay.faces.alloy.component.popover;
 //J-
 
 import javax.annotation.Generated;
-import javax.faces.component.html.HtmlPanelGroup;
+import com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout;
 
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.component.ClientComponent;
@@ -25,7 +25,7 @@ import com.liferay.faces.util.component.ClientComponent;
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class PopoverBase extends HtmlPanelGroup implements Styleable, ClientComponent {
+public abstract class PopoverBase extends PanelGroupBlockLayout implements Styleable, ClientComponent {
 
 	// Protected Enumerations
 	protected enum PopoverPropertyKeys {
@@ -33,15 +33,17 @@ public abstract class PopoverBase extends HtmlPanelGroup implements Styleable, C
 		clientKey,
 		for_,
 		headerText,
+		hideIconRendered,
+		hideOnBlur,
 		position,
 		zIndex
 	}
 
-	public Boolean isAutoShow() {
-		return (Boolean) getStateHelper().eval(PopoverPropertyKeys.autoShow, null);
+	public boolean isAutoShow() {
+		return (Boolean) getStateHelper().eval(PopoverPropertyKeys.autoShow, false);
 	}
 
-	public void setAutoShow(Boolean autoShow) {
+	public void setAutoShow(boolean autoShow) {
 		getStateHelper().put(PopoverPropertyKeys.autoShow, autoShow);
 	}
 
@@ -71,8 +73,24 @@ public abstract class PopoverBase extends HtmlPanelGroup implements Styleable, C
 		getStateHelper().put(PopoverPropertyKeys.headerText, headerText);
 	}
 
+	public boolean isHideIconRendered() {
+		return (Boolean) getStateHelper().eval(PopoverPropertyKeys.hideIconRendered, true);
+	}
+
+	public void setHideIconRendered(boolean hideIconRendered) {
+		getStateHelper().put(PopoverPropertyKeys.hideIconRendered, hideIconRendered);
+	}
+
+	public boolean isHideOnBlur() {
+		return (Boolean) getStateHelper().eval(PopoverPropertyKeys.hideOnBlur, true);
+	}
+
+	public void setHideOnBlur(boolean hideOnBlur) {
+		getStateHelper().put(PopoverPropertyKeys.hideOnBlur, hideOnBlur);
+	}
+
 	public String getPosition() {
-		return (String) getStateHelper().eval(PopoverPropertyKeys.position, null);
+		return (String) getStateHelper().eval(PopoverPropertyKeys.position, com.liferay.faces.util.lang.StringPool.RIGHT);
 	}
 
 	public void setPosition(String position) {
@@ -80,7 +98,7 @@ public abstract class PopoverBase extends HtmlPanelGroup implements Styleable, C
 	}
 
 	public Integer getzIndex() {
-		return (Integer) getStateHelper().eval(PopoverPropertyKeys.zIndex, null);
+		return (Integer) getStateHelper().eval(PopoverPropertyKeys.zIndex, Integer.MIN_VALUE);
 	}
 
 	public void setzIndex(Integer zIndex) {
