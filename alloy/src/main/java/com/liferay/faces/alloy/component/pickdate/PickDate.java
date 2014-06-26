@@ -29,7 +29,7 @@ public class PickDate extends PickDateBase {
 	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.pickdate";
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.pickdate.PickDate";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.pickdate.PickDateRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-pick-date";
+	public static final String STYLE_CLASS_NAME = "datepicker-popover alloy-pick-date";
 
 	// Private Constants
 	private static final String ON_DATE_CLICK = "onDateClick";
