@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Conversion to a Date using the converter attribute. -->
+		<h:form>
+			<showcase:example description="#{i18n['conversion-to-a-date-using-converter-attribute']}" number="1">
+				<div class="showcase-container">
+					<alloy:outputText value="#{i18n['this-is-a-div-that-contains-a-hidden-input']}" />
+					<alloy:inputHidden id="hidden1" binding="#{inputHidden1}" converter="javax.faces.DateTime"
+						converterMessage="#{i18n['converter-message']}" value="#{inputHiddenModelBean.date}" />
+					<alloy:message for="hidden1" />
+				</div>
+				<alloy:button onclick="document.getElementById('#{inputHidden1.clientId}').value=this.value;"
+					value="#{inputHiddenModelBean.testDate1}">
+					<alloy:outputText value="#{i18n['copy-a-date-to-the-value-of-the-hidden-input']}" />
+				</alloy:button>
+				<alloy:button onclick="document.getElementById('#{inputHidden1.clientId}').value='';"
+					value="#{i18n['clear-the-value-of-the-hidden-input']}" />
+				<hr />
+				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" converter="javax.faces.DateTime" value="#{inputHiddenModelBean.date}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: Conversion to a Date using an f:convertDateTime child tag. -->
+		<h:form>
+			<showcase:example description="#{i18n['conversion-to-a-date-using-f-convertdatetime']}" number="2">
+				<div class="showcase-container">
+					<alloy:outputText value="#{i18n['this-is-a-div-that-contains-a-hidden-input']}" />
+					<alloy:inputHidden id="hidden2" binding="#{inputHidden2}" converterMessage="#{i18n['converter-message']}"
+						value="#{inputHiddenModelBean.date}">
+						<f:convertDateTime pattern="MM/dd/yyyy" />
+					</alloy:inputHidden>
+					<alloy:message for="hidden2" />
+				</div>
+				<alloy:button onclick="document.getElementById('#{inputHidden2.clientId}').value=this.value;"
+					value="#{inputHiddenModelBean.testDate2}">
+					<alloy:outputText value="#{i18n['copy-a-date-to-the-value-of-the-hidden-input']}" />
+				</alloy:button>
+				<alloy:button onclick="document.getElementById('#{inputHidden2.clientId}').value='';"
+					value="#{i18n['clear-the-value-of-the-hidden-input']}" />
+				<hr />
+				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{inputHiddenModelBean.date}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</alloy:outputText>
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

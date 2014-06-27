@@ -141,7 +141,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="UIInput" extendsTags="UIOutput" generateJava="false" generateTaglibXML="false">
+	<component name="UIInputNoDisabled" extendsTags="UIOutput" generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
 				<description>
@@ -149,14 +149,6 @@
 				</description>
 				<name>converterMessage</name>
 				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]>
-				</description>
-				<name>disabled</name>
-				<type>boolean</type>
 				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
@@ -209,6 +201,18 @@
 				<method-signature>
 					void valueChange(javax.faces.event.ValueChangeEvent)
 				</method-signature>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="UIInput" extendsTags="UIInputNoDisabled UIOutput" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]>
+				</description>
+				<name>disabled</name>
+				<type>boolean</type>
 				<generateJava>false</generateJava>
 			</attribute>
 		</attributes>
@@ -644,6 +648,34 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="AltAutocompleteSize" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]>
+				</description>
+				<name>alt</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying whether autocomplete is turned on or off for the rendered HTML element. Valid values include <code>on</code> (default) and <code>off</code>.]]>
+				</description>
+				<name>autocomplete</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the visual length of the element.]]>
+				</description>
+				<name>size</name>
+				<type>int</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<!-- /HTML Component Heirarchy -->
 	<!-- 4. Common -->
 	<component name="ButtonCommon" extendsTags="StyleableInherited UIComponentBase" generateJava="false"
@@ -722,7 +754,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputTextCommon" extendsTags="HTMLAccessibilityEvents HTMLInputEvents StyleableInherited"
+	<component name="InputCommon" extendsTags="HTMLAccessibilityEvents HTMLInputEvents StyleableInherited"
 		generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
@@ -1306,6 +1338,30 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="InputHidden" extendsTags="UIInputNoDisabled" parentClass="javax.faces.component.html.HtmlInputHidden" 
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase" styleable="false">
+		<description>
+			<![CDATA[InputHidden is a UIInput component that renders an input element with type="hidden". Since it extends HtmlInputHidden, it supports all the features of h:inputHidden.]]>
+		</description>
+	</component>
+	<component name="InputSecret" extendsTags="AltAutocompleteSize FacesMessageLabel InputCommon" parentClass="javax.faces.component.html.HtmlInputSecret"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[InputSecret is a UIInput component that renders an <input> element with type="password". Since it extends HtmlInputSecret, it supports all the features of h:inputSecret.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[When true, the value attribute is rendered to the response. The default is false for security purposes.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+				<name>redisplay</name>
+				<type>boolean</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="InputSourceCode" extendsTags="ClientComponent StyleableInherited UIInput" module="aui-ace-editor"
 		parentClass="javax.faces.component.html.HtmlInputText"
 		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase" yui="true"
@@ -1406,39 +1462,19 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputText" extendsTags="FacesMessageLabel InputTextCommon"
+	<component name="InputText" extendsTags="AltAutocompleteSize FacesMessageLabel InputCommon"
 		parentClass="javax.faces.component.html.HtmlInputText"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]>
-				</description>
-				<name>alt</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[HTML passthrough attribute specifying whether autocomplete is turned on or off for the rendered HTML element. Valid values include <code>on</code> (default) and <code>off</code>.]]>
-				</description>
-				<name>autocomplete</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[HTML passthrough attribute specifying the visual length of the element.]]>
-				</description>
-				<name>size</name>
-				<type>int</type>
-				<generateJava>false</generateJava>
-			</attribute>
-		</attributes>
+		<description>
+			<![CDATA[InputText is a UIInput component that renders a field for editing single-line text. Since it extends HtmlInputText, it supports all the features of h:inputText.]]>
+		</description>
 	</component>
-	<component name="InputTextarea" extendsTags="FacesMessageLabel InputTextCommon"
+	<component name="InputTextarea" extendsTags="FacesMessageLabel InputCommon"
 		parentClass="javax.faces.component.html.HtmlInputTextarea"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[InputTextarea is a UIInput component that renders a field for editing multi-line text. Since it extends HtmlInputTextarea, it supports all the features of h:inputTextarea.]]>
+		</description>
 		<attributes>
 			<attribute>
 				<description>

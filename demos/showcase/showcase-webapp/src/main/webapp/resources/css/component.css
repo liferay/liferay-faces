@@ -1,3 +1,7 @@
+code {
+	color: rgb(0, 22, 142);
+}
+
 .nav-list > li > a {
 	font-size: 0.9em;
 	white-space: nowrap;
@@ -73,6 +77,10 @@
 .aui span.inline-code {
 	border: 1px solid #cfcfcf;
 	font-family: monospace;
+}
+
+.aui span.inline-warning {
+	color: #ff0000;
 }
 
 .aui .files table {
