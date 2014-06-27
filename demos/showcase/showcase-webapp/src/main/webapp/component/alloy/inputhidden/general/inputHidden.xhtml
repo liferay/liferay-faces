@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<showcase:example renderedCheckbox="true" requiredCheckbox="true">
+				<alloy:field label="#{i18n['hidden-field']}">
+					<div class="showcase-container">
+						<alloy:outputText rendered="#{showcaseModelBean.selectedComponent.rendered}"
+							value="#{i18n['this-is-a-div-that-contains-a-hidden-input']}" />
+						<alloy:outputText rendered="#{!showcaseModelBean.selectedComponent.rendered}"
+							value="#{i18n['the-hidden-input-is-not-rendered']}" />
+						<alloy:inputHidden id="hidden" binding="#{inputHidden}" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+							required="#{showcaseModelBean.selectedComponent.required}" value="#{inputHiddenModelBean.text}" />
+						<alloy:message for="hidden" />
+					</div>
+					<alloy:button onclick="document.getElementById('#{inputHidden.clientId}').value='1234';"
+						value="#{i18n['copy-1234-to-the-value-of-the-hidden-input']}" />
+					<alloy:button onclick="document.getElementById('#{inputHidden.clientId}').value='';"
+						value="#{i18n['clear-the-value-of-the-hidden-input']}" />
+				</alloy:field>
+				<hr />
+				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{inputHiddenModelBean.text}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
