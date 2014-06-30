@@ -6,8 +6,8 @@
 	<ui:define name="col1">
 		<h:form>
 			<showcase:example>
-				<ui:repeat value="#{commandButtonModelBean.customers}" var="customer">
-					<alloy:commandButton actionListener="#{commandButtonBackingBean.selectionListener}" value="#{customer}">
+				<ui:repeat value="#{commandModelBean.customers}" var="customer">
+					<alloy:commandButton actionListener="#{commandBackingBean.selectionListener}" value="#{customer}">
 						<alloy:icon name="edit" />
 						<f:ajax execute="@form" render="@form" />
 					</alloy:commandButton>
@@ -16,7 +16,7 @@
 				</ui:repeat>
 			</showcase:example>
 			<showcase:outputModel>
-				<alloy:outputText id="modelValue" value="#{commandButtonModelBean.selectedCustomer.fullName}" />
+				<alloy:outputText id="modelValue" value="#{commandModelBean.selectedCustomer.fullName}" />
 			</showcase:outputModel>
 		</h:form>
 	</ui:define>

@@ -21,26 +21,9 @@
 		<c:set value="#{i18n[selectedComponentKey]}" var="selectedComponentDescription" />
 		<c:set value="#{i18n[selectedComponentUseCaseKey]}" var="selectedComponentUseCaseDescription" />
 		<c:set value="vdldoc:#{selectedComponentFullName}" var="selectedComponentDocKey" />
-		<alloy:button onclick="window.open('#{showcase-fn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;" value="#{i18n['vdl-documentation']}" />
-		<c:if test="#{selectedComponentCamelCaseName == 'pickDate'}">
-			<c:set value="#{selectedComponentUseCaseName}" var="correspondingUseCase" />
-			<c:if test="#{selectedComponentUseCaseName == 'multiple-selection'}">
-				<c:set value="general" var="correspondingUseCase" />
-			</c:if>
-			<h:panelGrid columns="2">
-				<h:graphicImage library="images" name="note.png" style="float: left;" />
-				<h:panelGroup>
-					<h2>#{i18n['note']}:</h2>
-					<h:outputText value="#{i18n['please-consider-using']} " />
-					<h:link value="alloy:inputDate">
-						<f:param name="componentPrefix" value="alloy" />
-						<f:param name="componentName" value="inputdate" />
-						<f:param name="componentUseCase" value="#{correspondingUseCase}" />
-					</h:link>
-					<h:outputText escape="false" value=" #{i18n['alloy-input-date-benefits-description']}" />
-				</h:panelGroup>
-			</h:panelGrid>
-		</c:if>
+		<alloy:button onclick="window.open('#{showcase-fn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;"
+			value="#{i18n['vdl-documentation']}" />
+		<ui:include src="/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/header.xhtml" />
 		<h2>#{selectedComponentFullName}</h2>
 		<h:outputText escape="false" value="#{selectedComponentDescription}" />
 		<h3>#{i18n[selectedComponentUseCaseName]} #{i18n['usage']}</h3>

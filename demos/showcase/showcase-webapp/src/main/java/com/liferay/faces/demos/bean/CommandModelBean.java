@@ -25,11 +25,12 @@ import com.liferay.faces.demos.service.CustomerService;
 
 
 /**
+ * @author  Vernon Singleton
  * @author  Kyle Stiemann
  */
 @ManagedBean
 @RequestScoped
-public class CommandButtonModelBean {
+public class CommandModelBean {
 
 	// Injections
 	@ManagedProperty(value = "#{customerService}")

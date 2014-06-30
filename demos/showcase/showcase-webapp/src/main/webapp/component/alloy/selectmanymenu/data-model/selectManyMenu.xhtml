@@ -11,7 +11,7 @@
 					<f:selectItems value="#{selectManyModelBean.liferayBenefits}" var="benefit" itemValue="#{benefit.id}"
 						itemLabel="#{benefit.label}" />
 				</alloy:selectManyMenu>
-				<showcase:note value="#{i18n['note-chromium-issue-4579']}" />
+				<showcase:note iconSize="small" value="#{i18n['note-chromium-issue-4579']}" />
 				<hr />
 				<alloy:commandButton action="#{selectManyBackingBean.submit}" value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />

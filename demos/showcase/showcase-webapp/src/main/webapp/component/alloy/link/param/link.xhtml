@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<showcase:example>
+			<!-- Implicit navigation back to /views/component.xhtml -->
+			<alloy:link includeViewParams="true" outcome="component">
+				<!-- Override the value of the componentUseCase view parameter in order to navigate to a -->
+				<!-- different view. -->
+				<f:param name="componentUseCase" value="navigation" />
+				<f:param name="foo" value="1234" />
+				<alloy:icon name="arrow-left" />
+				<alloy:outputText value=" #{i18n['back-to-navigation-with']} foo=1234" />
+			</alloy:link>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

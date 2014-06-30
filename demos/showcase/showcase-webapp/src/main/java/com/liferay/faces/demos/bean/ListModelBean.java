@@ -60,7 +60,8 @@ public class ListModelBean {
 	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
 		.isDetected();
 	private static final String[] PACKAGE_NAMES = new String[] {
-			"com.liferay.faces.demos.bean", "com.liferay.faces.demos.dto", "com.liferay.faces.demos.portlet"
+			"com.liferay.faces.demos.bean", "com.liferay.faces.demos.dto", "com.liferay.faces.demos.converter",
+			"com.liferay.faces.demos.portlet"
 		};
 
 	// Private Data Members

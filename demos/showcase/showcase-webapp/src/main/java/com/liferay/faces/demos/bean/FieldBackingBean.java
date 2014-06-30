@@ -15,10 +15,14 @@ package com.liferay.faces.demos.bean;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -27,6 +31,11 @@ import javax.faces.validator.ValidatorException;
 @ManagedBean
 @RequestScoped
 public class FieldBackingBean {
+
+	private static final Logger logger = LoggerFactory.getLogger(FieldBackingBean.class);
+
+	@ManagedProperty(value = "#{fieldModelBean}")
+	private FieldModelBean fieldModelBean;
 
 	public void errorValidator(FacesContext facesContext, UIComponent uiComponent, Object value)
 		throws ValidatorException {
@@ -51,6 +60,8 @@ public class FieldBackingBean {
 		FacesMessage globalFacesMessage = new FacesMessage("Your request processed successfully.");
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		facesContext.addMessage(null, globalFacesMessage);
+
+		logger.info("submit: firstName = " + fieldModelBean.getFirstName());
 	}
 
 	public void warningValidator(FacesContext facesContext, UIComponent uiComponent, Object value)
@@ -60,5 +71,9 @@ public class FieldBackingBean {
 		facesMessage.setSeverity(FacesMessage.SEVERITY_WARN);
 		facesMessage.setDetail("This is a warning message.");
 		facesContext.addMessage(uiComponent.getClientId(), facesMessage);
+	}
+
+	public void setFieldModelBean(FieldModelBean fieldModelBean) {
+		this.fieldModelBean = fieldModelBean;
 	}
 }

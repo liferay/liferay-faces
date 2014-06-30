@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: ActionListener execution when immediate is true -->
+		<h:form>
+			<showcase:example description="#{i18n['actionlistener-execution-when-immediate-is-true']}" longDescription="true" number="1">
+				<alloy:messages globalOnly="true" styleClass="feedback" />
+				<alloy:commandLink actionListener="#{commandBackingBean.actionListener}" immediate="true"
+					value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandLink>
+			</showcase:example>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: ActionListener execution when immediate is false (the default) -->
+		<h:form>
+			<showcase:example description="#{i18n['actionlistener-execution-when-immediate-is-false']}" longDescription="true" number="2">
+				<alloy:messages globalOnly="true" styleClass="feedback" />
+				<alloy:commandLink actionListener="#{commandBackingBean.actionListener}" value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandLink>
+			</showcase:example>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
