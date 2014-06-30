@@ -64,7 +64,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 		pickDate.setAutoHide(inputDate.isAutoHide());
 		pickDate.setDatePattern(datePattern);
 		pickDate.setFor(trigger);
-		pickDate.setLocale(inputDate.getLocale());
+		pickDate.setLocale(inputDate.getLocale(facesContext));
 		pickDate.setMaximumDate(inputDate.getMaximumDate());
 		pickDate.setMinimumDate(inputDate.getMinimumDate());
 		pickDate.setPanes(inputDate.getPanes());
