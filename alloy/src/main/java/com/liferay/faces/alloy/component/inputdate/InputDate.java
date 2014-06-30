@@ -100,8 +100,7 @@ public class InputDate extends InputDateBase {
 							SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
 							String minDateString = simpleDateFormat.format(minDate);
 							String maxDateString = simpleDateFormat.format(maxDate);
-							Object objectLocale = getLocale();
-							Locale locale = PickDateUtil.determineLocale(facesContext, objectLocale);
+							Locale locale = PickDateUtil.getObjectAsLocale(getLocale(facesContext));
 							String message = messageContext.getMessage(locale, "please-enter-a-value-between-x-and-x",
 									minDateString, maxDateString);
 							facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
@@ -160,12 +159,20 @@ public class InputDate extends InputDateBase {
 		if (datePattern == null) {
 
 			// Provide a default datePattern based on the locale.
-			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Object locale = getLocale();
-			datePattern = PickDateUtil.getDefaultDatePattern(facesContext, locale);
+			datePattern = PickDateUtil.getDefaultDatePattern(locale);
 		}
 
 		return datePattern;
+	}
+
+	@Override
+	public Object getLocale() {
+		return getLocale(null);
+	}
+
+	public Object getLocale(FacesContext facesContext) {
+		return PickDateUtil.determineLocale(facesContext, super.getLocale());
 	}
 
 	@Override
