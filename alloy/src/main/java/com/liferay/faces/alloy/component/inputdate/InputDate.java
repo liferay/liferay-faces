@@ -141,6 +141,9 @@ public class InputDate extends InputDateBase {
 			DateTimeConverter dateTimeConverter = new DateTimeConverter();
 			String datePattern = getDatePattern();
 			dateTimeConverter.setPattern(datePattern);
+			Object objectLocale = getLocale();
+			Locale locale = PickDateUtil.getObjectAsLocale(objectLocale);
+			dateTimeConverter.setLocale(locale);
 
 			// DateTimeConverter has a default time zone of GMT. Set the time zone to null to ensure that the time
 			// zone is not involved in Date conversion.
