@@ -1413,6 +1413,13 @@
 				<name>showOn</name>
 				<generateJava>false</generateJava>
 			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The time zone for the built-in DateTimeConverter.]]>
+				</description>
+				<type>java.lang.Object</type>
+				<name>timeZone</name>
+			</attribute>
 		</attributes>
 	</component>
 	<component name="InputHidden" extendsTags="UIInput" parentClass="javax.faces.component.html.HtmlInputHidden" 

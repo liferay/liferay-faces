@@ -33,6 +33,7 @@ public abstract class InputDateRendererBase extends InputDateTimeRendererBase {
 	protected static final String MAXIMUM_DATE = "maximumDate";
 	protected static final String MINIMUM_DATE = "minimumDate";
 	protected static final String PANES = "panes";
+	protected static final String TIME_ZONE = "timeZone";
 	protected static final String Z_INDEX = "zIndex";
 }
 //J+

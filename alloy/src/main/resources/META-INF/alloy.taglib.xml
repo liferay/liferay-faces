@@ -1735,6 +1735,12 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[The time zone for the built-in DateTimeConverter.]]></description>
+			<name>timeZone</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
 			<name>title</name>
 			<required>false</required>

@@ -13,6 +13,9 @@
  */
 package com.liferay.faces.alloy.component.inputdatetime;
 
+import java.util.TimeZone;
+
+import javax.faces.FacesException;
 import javax.faces.component.UINamingContainer;
 import javax.faces.context.FacesContext;
 
@@ -29,4 +32,36 @@ public class InputDateTimeUtil {
 
 		return separatorChar + StringPool.INPUT;
 	}
+
+	public static TimeZone getObjectAsTimeZone(Object timeZoneAsObject) throws FacesException {
+
+		TimeZone timeZone = null;
+
+		if (timeZoneAsObject != null) {
+
+			if (timeZoneAsObject instanceof TimeZone) {
+				timeZone = (TimeZone) timeZoneAsObject;
+			}
+			else if (timeZoneAsObject instanceof String) {
+
+				String timeZoneAsString = (String) timeZoneAsObject;
+
+				if (timeZoneAsString.length() > 0) {
+
+					// Note: The following usage of TimeZone is thread-safe, since only the result of the getTimeZone()
+					// method is utilized.
+					timeZone = TimeZone.getTimeZone(timeZoneAsString);
+				}
+			}
+			else {
+
+				String message = "Unable to convert value to TimeZone.";
+				FacesException facesException = new FacesException(message);
+				throw facesException;
+			}
+		}
+
+		return timeZone;
+	}
+
 }
