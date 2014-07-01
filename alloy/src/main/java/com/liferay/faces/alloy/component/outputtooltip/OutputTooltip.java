@@ -38,12 +38,12 @@ public class OutputTooltip extends OutputTooltipBase implements Overlay {
 	}
 
 	@Override
-	public boolean isModal() {
+	public boolean isDismissible() {
 		return false;
 	}
 
 	@Override
-	public boolean isDismissible() {
+	public boolean isModal() {
 		return false;
 	}
 
