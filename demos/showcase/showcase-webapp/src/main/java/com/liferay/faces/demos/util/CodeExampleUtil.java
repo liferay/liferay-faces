@@ -35,8 +35,9 @@ public class CodeExampleUtil {
 	private static final String JAVA = "java";
 	private static final String JAVA_EXTENSION = ".java";
 	private static final Pattern JAVA_MULTILINE_COMMENTS_PATTERN = Pattern.compile("/[*][*].*[*]/", Pattern.DOTALL);
-	private static final String MYFORM_OUTPUTMODEL_MODELVALUE = "myForm:outputModel:modelValue";
+	private static final String OUTPUTMODEL_MODELVALUE = ":outputModel:modelValue";
 	private static final Pattern TEMPLATE_ATTRIBUTE_PATTERN = Pattern.compile("\\s*template=\".*\"");
+	private static final Pattern SHOWCASE_NAMESPACE_PATTERN = Pattern.compile("\\s*xmlns:showcase=\".*\"");
 	private static final String XML = "xml";
 
 	public static CodeExample read(URL sourceFileURL, String sourceFileName) throws IOException {
@@ -57,6 +58,7 @@ public class CodeExampleUtil {
 			else {
 				fileExtension = XML;
 				sourceCodeText = TEMPLATE_ATTRIBUTE_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
+				sourceCodeText = SHOWCASE_NAMESPACE_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
 
 				StringReader stringReader = new StringReader(sourceCodeText);
 				StringBuffer buf = new StringBuffer();
@@ -89,11 +91,11 @@ public class CodeExampleUtil {
 								}
 							}
 
-							int pos = line.indexOf(MYFORM_OUTPUTMODEL_MODELVALUE);
+							int pos = line.indexOf(OUTPUTMODEL_MODELVALUE);
 
 							if (pos > 0) {
-								line = line.substring(0, pos) + "myForm:modelValue" +
-									line.substring(pos + MYFORM_OUTPUTMODEL_MODELVALUE.length());
+								line = line.substring(0, pos) + ":modelValue" +
+									line.substring(pos + OUTPUTMODEL_MODELVALUE.length());
 							}
 
 							buf.append(line);
