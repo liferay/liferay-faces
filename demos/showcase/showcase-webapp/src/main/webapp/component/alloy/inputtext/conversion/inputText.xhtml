@@ -11,10 +11,11 @@
 					value="#{inputTextModelBean.date}" />
 				<br />
 				<alloy:message for="text" />
-			</showcase:example>
-			<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
+				<hr />
+				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
 				<f:ajax execute="@form" render="@form" />
 			</alloy:commandButton>
+			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" converter="javax.faces.DateTime" value="#{inputTextModelBean.date}" />
 			</showcase:outputModel>
@@ -31,10 +32,11 @@
 				</alloy:inputText>
 				<br />
 				<alloy:message for="text" />
+				<hr />
+				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandButton>
 			</showcase:example>
-			<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
-				<f:ajax execute="@form" render="@form" />
-			</alloy:commandButton>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{inputTextModelBean.date}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
