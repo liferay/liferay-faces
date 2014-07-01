@@ -63,9 +63,7 @@ public class PickDateUtil {
 	private static final String YY = "yy";
 	private static final String YYYY = "yyyy";
 
-	public static Locale determineLocale(FacesContext facesContext, Object objectLocale) {
-
-		Locale locale = getObjectAsLocale(objectLocale);
+	public static Object determineLocale(FacesContext facesContext, Object locale) {
 
 		if (locale == null) {
 
@@ -110,9 +108,9 @@ public class PickDateUtil {
 		return calendar.getTime();
 	}
 
-	public static String getDefaultDatePattern(FacesContext facesContext, Object componentLocale) {
+	public static String getDefaultDatePattern(Object componentLocale) {
 
-		Locale locale = PickDateUtil.determineLocale(facesContext, componentLocale);
+		Locale locale = getObjectAsLocale(componentLocale);
 
 		// Note: The following usage of SimpleDateFormat is thread-safe, since only the result of the toPattern()
 		// method is utilized.

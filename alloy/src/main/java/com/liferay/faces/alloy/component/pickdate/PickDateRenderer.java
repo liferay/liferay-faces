@@ -65,7 +65,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 		throws IOException {
 
 		PickDate pickDate = (PickDate) uiComponent;
-		Locale locale = PickDateUtil.determineLocale(facesContext, pickDate.getLocale());
+		Locale locale = PickDateUtil.getObjectAsLocale(pickDate.getLocale(facesContext));
 
 		// RFC 1766 requires the subtags of locales to be delimited by hyphens rather than underscores.
 		// http://www.faqs.org/rfcs/rfc1766.html
@@ -210,8 +210,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 		// specified a locale other than that of the server or view root. If so, then the javascript must be rendered
 		// inline.
 		PickDate pickDate = (PickDate) uiComponent;
-		Object componentLocale = pickDate.getLocale();
-		Locale locale = PickDateUtil.determineLocale(facesContext, componentLocale);
+		Locale locale = PickDateUtil.getObjectAsLocale(pickDate.getLocale(facesContext));
 		UIViewRoot viewRoot = facesContext.getViewRoot();
 		Locale viewRootLocale = viewRoot.getLocale();
 
