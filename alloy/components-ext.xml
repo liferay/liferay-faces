@@ -1024,6 +1024,40 @@
 	</component>
 	<!-- /Common -->
 	<!-- generateTaglibXML="false" tags for common attributes -->
+	<component name="Accordion" extendsTags="ClientComponent Styleable UIComponentBase" module="aui-toggler"
+		parentClass="javax.faces.component.UIData" yui="true" yuiName="TogglerDelegate" >
+		<description>
+			<![CDATA[Accordion is a UIData (iterator) component that renders child tabs either statically or dynamically.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[When true, expanding an item will not collapse the others, allowing multiple items to be visible at the same time. The default value is false.]]>
+				</description>
+				<name>multiple</name>
+				<type>java.lang.Boolean</type>
+				<yui>false</yui>
+				<yuiName>closeAllOnExpand</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.Object</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The name of the variable that is to be introduced into the expression language representing the current iteration.]]>
+				</description>
+				<name>var</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="Body" extendsTags="StyleableInherited" parentClass="javax.faces.component.html.HtmlBody"
 	rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase"/>
 	<component name="Button" extendsTags="ButtonCommon UIOutcomeTarget"

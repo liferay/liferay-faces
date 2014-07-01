@@ -74,6 +74,14 @@ code {
 	top: -10px;
 }
 
+.aui .alloy-accordion > div > div.toggler-content-expanded {
+	background-color: #F0F0F0;
+	border-radius: 6px;
+	box-shadow: 7px 7px 5px #888888;
+	margin: 11px;
+	padding: 10px;
+}
+
 .aui span.inline-code {
 	border: 1px solid #cfcfcf;
 	font-family: monospace;
@@ -126,6 +134,16 @@ code {
 .aui .showcase-example .alloy-output-label {
 	font-size: 1.1em;
 	font-weight: bold;
+}
+
+.aui .toggler-header-expanded:before {
+	content : "\25BE";		/* BLACK DOWN-POINTING SMALL TRIANGLE */
+	margin: 0 2.5px;
+}
+
+.aui .toggler-header-collapsed:before {
+	content : "\25B8";		/* BLACK RIGHT-POINTING SMALL TRIANGLE */
+	margin: 0 2.5px;
 }
 
 .aui ul.feedback {
