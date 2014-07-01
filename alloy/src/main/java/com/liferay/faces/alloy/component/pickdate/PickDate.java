@@ -47,9 +47,8 @@ public class PickDate extends PickDateBase {
 		if (datePattern == null) {
 
 			// Provide a default datePattern based on the locale.
-			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Object locale = getLocale();
-			datePattern = PickDateUtil.getDefaultDatePattern(facesContext, locale);
+			datePattern = PickDateUtil.getDefaultDatePattern(locale);
 		}
 
 		return datePattern;
@@ -58,6 +57,15 @@ public class PickDate extends PickDateBase {
 	@Override
 	public String getFamily() {
 		return COMPONENT_FAMILY;
+	}
+
+	@Override
+	public Object getLocale() {
+		return getLocale(FacesContext.getCurrentInstance());
+	}
+
+	public Object getLocale(FacesContext facesContext) {
+		return PickDateUtil.determineLocale(facesContext, super.getLocale());
 	}
 
 	public String getOnDateClick() {
