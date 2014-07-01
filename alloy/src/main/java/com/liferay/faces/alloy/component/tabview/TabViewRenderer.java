@@ -109,7 +109,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 					encodeTabListItem(facesContext, responseWriter, childTab);
 				}
 				else {
-					logger.warn("Unable to render child element of p:tabView since it is not p:tab");
+					logger.warn("Unable to render child element of alloy:tabView since it is not alloy:tab");
 				}
 			}
 		}
