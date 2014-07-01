@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<showcase:example>
+				<alloy:outputLabel value="#{i18n['country']}" />
+				<alloy:selectOneMenu id="selectOneMenuId" value="#{outputLinkModelBean.countryId}">
+					<f:selectItems value="#{countryService.allCountries}" var="country" itemValue="#{country.countryId}"
+						itemLabel="#{country.countryName}" />
+					<f:ajax render="outputLinkId" />
+				</alloy:selectOneMenu>
+				<br />
+				<alloy:outputLink id="outputLinkId" converter="convertGmapCountry" converterMessage="#{i18n['converter-message']}"
+					target="_blank" value="#{outputLinkModelBean.countryId}">
+					<alloy:outputText value="#{i18n['link-to-a-map-of']} " />
+					<alloy:outputText converter="convertCountry" value="#{outputLinkModelBean.countryId}" />
+				</alloy:outputLink>
+			</showcase:example>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

@@ -21,6 +21,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.EditableValueHolder;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.context.PartialViewContext;
 
@@ -144,8 +145,19 @@ public class Field extends FieldBase {
 
 				if (editableValueHolder.isValid()) {
 
-					if (editableValueHolder.isRequired() && editableValueHolder.isLocalValueSet()) {
-						editableValueHoldersValid = true;
+					if (editableValueHolder.isRequired()) {
+						
+						if (editableValueHolder.isLocalValueSet()) {
+							editableValueHoldersValid = true;
+						}
+						else {
+							if (editableValueHolder instanceof UIInput) {
+								UIInput uiInput = (UIInput) editableValueHolder;
+								if (!UIInput.isEmpty(uiInput.getValue())) {
+									editableValueHoldersValid = true;
+								}
+							}
+						}
 					}
 				}
 				else {

@@ -28,17 +28,18 @@ import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
+ * @author  Vernon Singleton
  * @author  Kyle Stiemann
  */
 @ManagedBean
 @RequestScoped
-public class CommandButtonBackingBean {
+public class CommandBackingBean {
 
-	private static final Logger logger = LoggerFactory.getLogger(CommandButtonBackingBean.class);
+	private static final Logger logger = LoggerFactory.getLogger(CommandBackingBean.class);
 
 	// Injections
-	@ManagedProperty(value = "#{commandButtonModelBean}")
-	private CommandButtonModelBean commandButtonModelBean;
+	@ManagedProperty(value = "#{commandModelBean}")
+	private CommandModelBean commandModelBean;
 
 	public void actionListener(ActionEvent actionEvent) {
 
@@ -56,10 +57,10 @@ public class CommandButtonBackingBean {
 
 		UICommand uiCommand = (UICommand) actionEvent.getComponent();
 		Customer customer = (Customer) uiCommand.getValue();
-		commandButtonModelBean.setSelectedCustomer(customer);
+		commandModelBean.setSelectedCustomer(customer);
 	}
 
-	public void setCommandButtonModelBean(CommandButtonModelBean commandButtonModelBean) {
-		this.commandButtonModelBean = commandButtonModelBean;
+	public void setCommandModelBean(CommandModelBean commandModelBean) {
+		this.commandModelBean = commandModelBean;
 	}
 }

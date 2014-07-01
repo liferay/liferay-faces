@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<showcase:example renderedCheckbox="true">
+				<alloy:outputFormat rendered="#{showcaseModelBean.selectedComponent.rendered}" value="First: {1}, Last: {0}">
+					<f:param value="Omega" />
+					<f:param value="Alpha" />
+				</alloy:outputFormat>
+			</showcase:example>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

@@ -32,6 +32,33 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="DisabledInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]>
+				</description>
+				<defaultValue>false</defaultValue>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+				<name>disabled</name>
+				<type>boolean</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="EscapeInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+            	<description>
+            		<![CDATA[When false, markup will not be escaped. This is true by default.]]>
+            	</description>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+            	<name>escape</name>
+            	<type>java.lang.String</type>
+        	</attribute>
+        </attributes>
+    </component>
 	<component name="Styleable" generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
@@ -69,6 +96,19 @@
 				<name>styleClass</name>
 				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="ValueInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+				<name>value</name>
+				<type>java.lang.Object</type>
 			</attribute>
 		</attributes>
 	</component>
@@ -141,7 +181,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="UIInputNoDisabled" extendsTags="UIOutput" generateJava="false" generateTaglibXML="false">
+ 	<component name="UIInput" extendsTags="UIOutput" generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
 				<description>
@@ -205,21 +245,25 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="UIInput" extendsTags="UIInputNoDisabled UIOutput" generateJava="false" generateTaglibXML="false">
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]>
-				</description>
-				<name>disabled</name>
-				<type>boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-		</attributes>
-	</component>
 	<component name="UIOutcomeTarget" extendsTags="HTMLAccessibilityEvents" generateJava="false"
 		generateTaglibXML="false">
 		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, the client window param will not be inlcuded on the navigation URL. <b>Note:</b> the <code>ClientWindow</code> feature is disabled by default, so this attribute will have no effect unless <code>ClientWindow</code> is enabled.]]>
+				</description>
+				<name>disableClientWindow</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A fragment to be appended to the navigation URL.]]>
+				</description>
+				<name>fragment</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[When this flag is true, view parameters (specified via <code>f:viewParam</code> tags) will be included on the navigation URL]]>
@@ -234,22 +278,6 @@
 				</description>
 				<name>outcome</name>
 				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A fragment to be appended to the navigation URL.]]>
-				</description>
-				<name>fragment</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, the client window param will not be inlcuded on the navigation URL. <b>Note:</b> the <code>ClientWindow</code> feature is disabled by default, so this attribute will have no effect unless <code>ClientWindow</code> is enabled.]]>
-				</description>
-				<name>disableClientWindow</name>
-				<type>java.lang.Boolean</type>
 				<generateJava>false</generateJava>
 			</attribute>
 		</attributes>
@@ -678,6 +706,82 @@
 	</component>
 	<!-- /HTML Component Heirarchy -->
 	<!-- 4. Common -->
+	<component name="AnchorLinkCommon" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The character encoding of the resource linked to by this component.]]>
+				</description>
+				<name>charset</name>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The position and shape of the component's area on the page.  Used in image maps.]]>
+				</description>
+				<name>coords</name>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The language code of the resource linked to by this component.]]>
+				</description>
+				<name>hreflang</name>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The relationship between the current document and the one linked to by this component. This is a space-separated list of link types. Used by bots, not browsers.]]>
+				</description>
+				<name>rel</name>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The reverse of the rel attribute. The relationship between the document linked to by this component and the current document. ]]>
+				</description>
+				<name>rev</name>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Used by some browsers with the coords to specify the size, shape, and placement of the link.]]>
+				</description>
+				<name>shape</name>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies which window, tab, or frame to open the link in.]]>
+				</description>
+				<name>target</name>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the content type of resource located by the URL in the rendered href attribute.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+				<name>type</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="ButtonCommon" extendsTags="StyleableInherited UIComponentBase" generateJava="false"
 		generateTaglibXML="false">
 		<attributes>
@@ -936,40 +1040,6 @@
 				<name>type</name>
 				<type>java.lang.String</type>
 			</attribute>
-			<!-- h:button attributes -->
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, view parameters (specified via <code>f:viewParam</code> tags) will be included on the navigation URL]]>
-				</description>
-				<name>includeViewParams</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A string which potentially matches the value of <code>from-outcome</code> key in a navigation-case.]]>
-				</description>
-				<name>outcome</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[A fragment to be appended to the navigation URL.]]>
-				</description>
-				<name>fragment</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, the client window param will not be inlcuded on the navigation URL. <b>Note:</b> the <code>ClientWindow</code> feature is disabled by default, so this attribute will have no effect unless <code>ClientWindow</code> is enabled.]]>
-				</description>
-				<name>disableClientWindow</name>
-				<type>java.lang.Boolean</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<!-- /h:button attributes -->
 		</attributes>
 	</component>
 	<component name="Column" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.html.HtmlColumn">
@@ -1101,6 +1171,13 @@
 			</attribute>
 			<!-- /h:commandButton attributes -->
 		</attributes>
+	</component>
+	<component name="CommandLink" extendsTags="AnchorLinkCommon DisabledInherited UICommand ValueInherited"
+			parentClass="javax.faces.component.html.HtmlCommandLink"
+			rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[CommandLink is a UICommand component that renders an HTML <a> element. Since it extends HtmlCommandLink, it supports all the features of h:commandLink. The component must be a child of h:form in order to trigger the action or actionListener.]]>
+		</description>
 	</component>
 	<component name="DataTable" extendsTags="ClientComponent HTMLCommonEvents HTMLPassthrough HTMLTable"
 		module="aui-datatable" parentClass="javax.faces.component.html.HtmlDataTable"
@@ -1338,13 +1415,13 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputHidden" extendsTags="UIInputNoDisabled" parentClass="javax.faces.component.html.HtmlInputHidden" 
+	<component name="InputHidden" extendsTags="UIInput" parentClass="javax.faces.component.html.HtmlInputHidden" 
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase" styleable="false">
 		<description>
 			<![CDATA[InputHidden is a UIInput component that renders an input element with type="hidden". Since it extends HtmlInputHidden, it supports all the features of h:inputHidden.]]>
 		</description>
 	</component>
-	<component name="InputSecret" extendsTags="AltAutocompleteSize FacesMessageLabel InputCommon" parentClass="javax.faces.component.html.HtmlInputSecret"
+	<component name="InputSecret" extendsTags="AltAutocompleteSize DisabledInherited FacesMessageLabel InputCommon" parentClass="javax.faces.component.html.HtmlInputSecret"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[InputSecret is a UIInput component that renders an <input> element with type="password". Since it extends HtmlInputSecret, it supports all the features of h:inputSecret.]]>
@@ -1462,14 +1539,14 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputText" extendsTags="AltAutocompleteSize FacesMessageLabel InputCommon"
+	<component name="InputText" extendsTags="AltAutocompleteSize DisabledInherited FacesMessageLabel InputCommon"
 		parentClass="javax.faces.component.html.HtmlInputText"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[InputText is a UIInput component that renders a field for editing single-line text. Since it extends HtmlInputText, it supports all the features of h:inputText.]]>
 		</description>
 	</component>
-	<component name="InputTextarea" extendsTags="FacesMessageLabel InputCommon"
+	<component name="InputTextarea" extendsTags="FacesMessageLabel DisabledInherited InputCommon"
 		parentClass="javax.faces.component.html.HtmlInputTextarea"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -1478,7 +1555,7 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[__DESCRIPTION__]]>
+					<![CDATA[The visible width of the text area.]]>
 				</description>
 				<name>cols</name>
 				<type>int</type>
@@ -1486,13 +1563,18 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[__DESCRIPTION__]]>
+					<![CDATA[The number of lines in the text area.]]>
 				</description>
 				<name>rows</name>
 				<type>int</type>
 				<generateJava>false</generateJava>
 			</attribute>
 		</attributes>
+	</component>
+	<component name="Link" extendsTags="AnchorLinkCommon DisabledInherited ValueInherited StyleableInherited UIComponentBase UIOutcomeTarget" parentClass="javax.faces.component.html.HtmlOutcomeTargetLink" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[Link is a UIOutcomeTarget component that renders an <a> element (hyperlink). Since it extends HtmlLink, it supports all the features of h:link.]]>
+		</description>
 	</component>
 	<component name="Message" extendsTags="MessageCommon"
 		parentClass="javax.faces.component.html.HtmlMessage"
@@ -1543,6 +1625,32 @@
 				<generateJava>false</generateJava>
 			</attribute>
 		</attributes>
+	</component>
+	<component name="OutputFormat" extendsTags="HTMLPassthrough UIOutput EscapeInherited" parentClass="javax.faces.component.html.HtmlOutputFormat" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[OutputFormat is a UIOutput component that renders parameterized text. Since it extends HtmlOutputFormat, it supports all the features of h:outputFormat.]]>
+		</description>
+	</component>
+	<component name="OutputLabel" extendsTags="HTMLAccessibilityEvents HTMLPassthrough UIOutput EscapeInherited" parentClass="javax.faces.component.html.HtmlOutputLabel" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[OutputLabel is a UIOutput component that renders its value attribute within a <label> element. Since it extends HtmlOutputLabel, it supports all the features of h:outputLabel.]]>
+		</description>
+		<attributes>
+        	<attribute>
+				<description>
+					<![CDATA[The id of the target associated with this component.]]>
+				</description>
+				<name>for</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+				<inherited>true</inherited>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="OutputLink" extendsTags="AnchorLinkCommon DisabledInherited HTMLAccessibilityEvents HTMLPassthrough UIOutput" parentClass="javax.faces.component.html.HtmlOutputLink" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[OutputLink is a UIOutput component that renders an <a> element (hyperlink). Since it extends HtmlOutputLink, it supports all the features of h:outputLink.]]>
+		</description>
 	</component>
 	<component name="OutputRemainingChars" extendsTags="ClientComponent OutputText" module="aui-char-counter"
 		parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" 
@@ -1603,7 +1711,7 @@
 		parentClass="javax.faces.component.html.HtmlOutputText"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
-			<![CDATA[OuputText is an <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutputText.html" target="_blank"><code>HtmlOutputText</code></a> component that delegates rendering to its JSF renderer.]]>
+			<![CDATA[OutputText is an <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlOutputText.html" target="_blank"><code>HtmlOutputText</code></a> component that delegates rendering to its JSF renderer.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -1775,14 +1883,14 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectBooleanCheckbox" extendsTags="FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectBooleanCheckbox" extendsTags="DisabledInherited FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectBooleanCheckbox"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 		   <![CDATA[SelectBooleanCheckbox is a UISelectOne component that renders a check box. Since it extends HtmlSelectBooleanCheckbox, it supports all the features of h:selectBooleanCheckbox such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
-	<component name="SelectManyCheckbox" extendsTags="UISelectMany FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectManyCheckbox" extendsTags="UISelectMany DisabledInherited FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyCheckbox"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -1823,7 +1931,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectManyListbox" extendsTags="UISelectMany FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectManyListbox" extendsTags="UISelectMany DisabledInherited FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyListbox"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -1840,14 +1948,14 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectManyMenu" extendsTags="UISelectMany FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectManyMenu" extendsTags="UISelectMany DisabledInherited FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyMenu"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyMenu is a UISelectMany component that renders a select element and enables the user to select multiple values. It has the same basic features of alloy:selectManyListbox except that there is no size attribute because JSF "select*menu" components always render size=1. Since it extends HtmlSelectManyMenu, it supports all the features of h:selectManyMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
-	<component name="SelectOneListbox" extendsTags="UISelect FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectOneListbox" extendsTags="UISelect DisabledInherited FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneListbox"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -1864,14 +1972,14 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectOneMenu" extendsTags="UISelect FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectOneMenu" extendsTags="UISelect DisabledInherited FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneMenu"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectOneMenu is a UISelectOne component that renders a select element (drop down list) and enables the user to select one value. Since it extends HtmlSelectOneMenu, it supports all the features of h:selectOneMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
-	<component name="SelectOneRadio" extendsTags="UISelect FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectOneRadio" extendsTags="UISelect DisabledInherited FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneRadio"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
@@ -1939,7 +2047,7 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[__DESCRIPTION__]]>
+					<![CDATA[The visible label for the tab.]]>
 				</description>
 				<name>label</name>
 				<type>java.lang.String</type>
