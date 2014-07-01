@@ -397,6 +397,98 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="ImageCommon" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]>
+				</description>
+				<name>alt</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]>
+				</description>
+				<name>binding</name>
+				<type>javax.faces.component.UIComponent</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The height (in pixels) of the rendered component.]]>
+				</description>
+				<name>height</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true, the image is part of a server-side image with clickable areas.]]>
+				</description>
+				<name>ismap</name>
+				<type>boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The library name for this image.]]>
+				</description>
+				<name>library</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A URL linking to a page that contains a description of the image.]]>
+				</description>
+				<name>longdesc</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The resource name for this image.]]>
+				</description>
+				<name>name</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[An alias for the 'value' attribute.]]>
+				</description>
+				<name>url</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the name or id of the map for this image which has clickable areas.]]>
+				</description>
+				<name>usemap</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A relative URL that can be used to retrieve the image.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.Object</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The width (in pixels) of the rendered component.]]>
+				</description>
+				<name>width</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="HTMLCommonEvents" extendsTags="StyleableInherited UIComponentBase" generateJava="false"
 		generateTaglibXML="false">
 		<attributes>
@@ -1376,6 +1468,11 @@
 				<type>java.lang.String</type>
 			</attribute>
 		</attributes>
+	</component>
+	<component name="Image" extendsTags="ImageCommon HTMLPassthrough HTMLCommonEvents" parentClass="javax.faces.component.html.HtmlGraphicImage" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[Image is a UIGraphic component that renders an img element. Since it extends HtmlGraphicImage, it supports all the features of h:graphicImage.]]>
+		</description>
 	</component>
 	<component name="InputDate" extendsTags="DateCommon InputText"
 		parentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeBase"

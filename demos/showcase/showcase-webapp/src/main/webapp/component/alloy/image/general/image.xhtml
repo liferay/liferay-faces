@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Simply point the value attribute to an image. -->
+		<h:form>
+			<showcase:example description="#{i18n['alloy-image-general-example-1']}" number="1"
+				renderedCheckbox="true">
+				<alloy:image rendered="#{showcaseModelBean.selectedComponent.rendered}"
+					value="/resources/images/liferay-faces-logo.png" />
+			</showcase:example>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="col2">
+		<!-- Example 2: Use the library and name attributes to specify the resource. -->
+		<h:form>
+			<showcase:example description="#{i18n['alloy-image-general-example-2']}" longDescription="true" number="2">
+				<alloy:image library="images" name="liferay-faces-logo.png" />
+			</showcase:example>
+		</h:form>
+		
+		<!-- Example 3: Let an expression language give you even more power. -->
+		<h:form>
+			<showcase:example description="#{i18n['alloy-image-general-example-3']}" number="3">
+				<alloy:image value="#{resource['images:liferay-faces-logo.png']}" />
+			</showcase:example>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="col3">
+		<!-- Example 4: Configure usemap and other attributes, and have fun with your resources. -->
+		<h:form>
+			<showcase:example description="#{i18n['alloy-image-general-example-4']}" longDescription="true" number="4">
+				<alloy:image usemap="#logoMapName" value="/resources/images/liferay-faces-logo.png" width="242" />
+				<map name="logoMapName">
+					<area alt="JSR 362" coords="1,1,120,272" href="https://jcp.org/en/jsr/detail?id=362" shape="rect"
+						target="_blank" title="JSR 362"  />
+					<area alt="JSR 329" coords="120,1,240,272" href="https://www.jcp.org/en/jsr/detail?id=329" shape="rect"
+						target="_blank" title="JSR 329"  />
+				</map>
+			</showcase:example>
+		</h:form>
+	</ui:define>
+	
+</ui:composition>
