@@ -77,6 +77,7 @@ code {
 .aui span.inline-code {
 	border: 1px solid #cfcfcf;
 	font-family: monospace;
+	white-space:nowrap;
 }
 
 .aui span.inline-warning {
