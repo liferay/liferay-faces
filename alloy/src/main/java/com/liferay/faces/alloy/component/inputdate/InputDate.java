@@ -16,6 +16,7 @@ package com.liferay.faces.alloy.component.inputdate;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
@@ -24,6 +25,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.DateTimeConverter;
 
+import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
 import com.liferay.faces.alloy.component.pickdate.PickDateUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.context.MessageContext;
@@ -141,13 +143,14 @@ public class InputDate extends InputDateBase {
 			DateTimeConverter dateTimeConverter = new DateTimeConverter();
 			String datePattern = getDatePattern();
 			dateTimeConverter.setPattern(datePattern);
+
 			Object objectLocale = getLocale();
 			Locale locale = PickDateUtil.getObjectAsLocale(objectLocale);
 			dateTimeConverter.setLocale(locale);
 
-			// DateTimeConverter has a default time zone of GMT. Set the time zone to null to ensure that the time
-			// zone is not involved in Date conversion.
-			dateTimeConverter.setTimeZone(null);
+			Object objectTimeZone = getTimeZone();
+			TimeZone timeZone = InputDateTimeUtil.getObjectAsTimeZone(objectTimeZone);
+			dateTimeConverter.setTimeZone(timeZone);
 			converter = dateTimeConverter;
 		}
 

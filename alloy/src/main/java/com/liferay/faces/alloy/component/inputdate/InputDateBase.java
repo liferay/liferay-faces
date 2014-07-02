@@ -34,6 +34,7 @@ public abstract class InputDateBase extends InputDateTimeBase implements Styleab
 		maximumDate,
 		minimumDate,
 		panes,
+		timeZone,
 		zIndex
 	}
 
@@ -83,6 +84,14 @@ public abstract class InputDateBase extends InputDateTimeBase implements Styleab
 
 	public void setPanes(Integer panes) {
 		getStateHelper().put(InputDatePropertyKeys.panes, panes);
+	}
+
+	public Object getTimeZone() {
+		return (Object) getStateHelper().eval(InputDatePropertyKeys.timeZone, null);
+	}
+
+	public void setTimeZone(Object timeZone) {
+		getStateHelper().put(InputDatePropertyKeys.timeZone, timeZone);
 	}
 
 	public Integer getzIndex() {
