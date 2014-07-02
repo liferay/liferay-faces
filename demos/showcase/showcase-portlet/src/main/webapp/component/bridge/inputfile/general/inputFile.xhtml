@@ -1,7 +1,8 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:bridge="http://liferay.com/faces/bridge"
-	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="/templates/component-2col.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:bridge="http://liferay.com/faces/bridge" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
 		<h:form enctype="multipart/form-data">
@@ -24,15 +25,15 @@
 					</h:column>
 					<h:column>
 						<f:facet name="header">
-							<h:outputText rendered="#{totalFiles > 0}" value="#{i18n['file-name']}" />
+							<alloy:outputText rendered="#{totalFiles > 0}" value="#{i18n['file-name']}" />
 						</f:facet>
-						<h:outputText value="#{uploadedFile.name}" />
+						<alloy:outputText value="#{uploadedFile.name}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
-							<h:outputText rendered="#{totalFiles > 0}" value="#{i18n['size']}" />
+							<alloy:outputText rendered="#{totalFiles > 0}" value="#{i18n['size']}" />
 						</f:facet>
-						<h:outputText value="#{uploadedFile.size}" />
+						<alloy:outputText value="#{uploadedFile.size}" />
 					</h:column>
 				</h:dataTable>
 			</showcase:outputModel>

@@ -13,23 +13,23 @@
 				<aui:list styleClass="nav nav-list">
 					<ui:repeat value="#{listModelBean.showcaseComponents}" var="showcaseComponent">
 						<aui:list-item class="#{(selectedComponentKey == showcaseComponent.key) ? 'active' : ''}">
-							<h:link value="#{showcaseComponent}">
+							<alloy:link value="#{showcaseComponent}">
 								<f:param name="componentPrefix" value="#{showcaseComponent.prefix}" />
 								<f:param name="componentName" value="#{showcaseComponent.lowerCaseName}" />
 								<f:param name="componentUseCase" value="general" />
 								<i class="icon-chevron-right" />
-							</h:link>
+							</alloy:link>
 							<ui:fragment rendered="#{selectedComponentKey == showcaseComponent.key and (totalUseCases > 1)}">
 								<aui:list class="nav nav-list">
 									<ui:repeat value="#{selectedComponent.useCases}" var="useCase">
 										<aui:list-item class="#{(selectedComponentUseCaseName == useCase.name) ? 'active' : ''}"
 											style="white-space: nowrap;">
-											<h:link value="#{i18n[useCase.name]}">
+											<alloy:link value="#{i18n[useCase.name]}">
 												<f:param name="componentPrefix" value="#{selectedComponent.prefix}" />
 												<f:param name="componentName" value="#{selectedComponent.lowerCaseName}" />
 												<f:param name="componentUseCase" value="#{useCase.name}" />
 												<i class="icon-chevron-right" />
-											</h:link>
+											</alloy:link>
 										</aui:list-item>
 									</ui:repeat>
 								</aui:list>

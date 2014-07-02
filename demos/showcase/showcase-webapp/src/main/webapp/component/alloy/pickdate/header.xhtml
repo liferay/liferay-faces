@@ -10,13 +10,13 @@
 
 	<showcase:note>
 		<h2>#{i18n['note']}</h2>
-		<h:outputText value="#{i18n['please-consider-using']} " />
-		<h:link value="alloy:inputDate">
+		<alloy:outputText value="#{i18n['please-consider-using']} " />
+		<alloy:link value="alloy:inputDate">
 			<f:param name="componentPrefix" value="alloy" />
 			<f:param name="componentName" value="inputdate" />
 			<f:param name="componentUseCase" value="#{correspondingUseCase}" />
-		</h:link>
-		<h:outputText escape="false" value=" #{i18n['alloy-input-date-benefits-description']}" />
+		</alloy:link>
+		<alloy:outputText escape="false" value=" #{i18n['alloy-input-date-benefits-description']}" />
 	</showcase:note>
 
 </ui:composition>

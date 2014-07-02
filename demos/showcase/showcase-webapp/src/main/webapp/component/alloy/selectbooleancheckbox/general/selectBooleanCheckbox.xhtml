@@ -9,7 +9,7 @@
 				<alloy:field label="#{i18n['agree']}">
 					<alloy:selectBooleanCheckbox id="checkbox" rendered="#{showcaseModelBean.selectedComponent.rendered}"
 						required="#{showcaseModelBean.selectedComponent.required}" value="#{selectBooleanCheckboxModelBean.agree}" />
-					<h:outputText styleClass="radio" value="#{i18n['i-agree-to-the-terms-of-the-license-agreement']}" />
+					<alloy:outputText styleClass="radio" value="#{i18n['i-agree-to-the-terms-of-the-license-agreement']}" />
 					<br />
 					<alloy:message for="checkbox" />
 				</alloy:field>
