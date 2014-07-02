@@ -20,6 +20,32 @@
 	</extension>
 	<!-- generateTaglibXML="false" tags for common attributes -->
 	<!-- 1. Interfaces -->
+	<component name="AltInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]>
+				</description>
+				<inherited>true</inherited>
+				<name>alt</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="AutocompleteInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying whether autocomplete is turned on or off for the rendered HTML element. Valid values include <code>on</code> (default) and <code>off</code>.]]>
+				</description>
+				<inherited>true</inherited>
+				<name>autocomplete</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="ClientComponent" generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
@@ -59,6 +85,19 @@
         	</attribute>
         </attributes>
     </component>
+	<component name="SizeInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the visual length of the element.]]>
+				</description>
+				<inherited>true</inherited>
+				<name>size</name>
+				<type>int</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="Styleable" generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
@@ -672,34 +711,6 @@
 				</description>
 				<name>width</name>
 				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-		</attributes>
-	</component>
-	<component name="AltAutocompleteSize" generateJava="false" generateTaglibXML="false">
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]>
-				</description>
-				<name>alt</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[HTML passthrough attribute specifying whether autocomplete is turned on or off for the rendered HTML element. Valid values include <code>on</code> (default) and <code>off</code>.]]>
-				</description>
-				<name>autocomplete</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[HTML passthrough attribute specifying the visual length of the element.]]>
-				</description>
-				<name>size</name>
-				<type>int</type>
 				<generateJava>false</generateJava>
 			</attribute>
 		</attributes>
@@ -1377,6 +1388,93 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="Image" extendsTags="HTMLPassthrough HTMLCommonEvents" parentClass="javax.faces.component.html.HtmlGraphicImage" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[Image is a UIGraphic component that renders an img element. Since it extends HtmlGraphicImage, it supports all the features of h:graphicImage.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]>
+				</description>
+				<name>alt</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The height (in pixels) of the image.]]>
+				</description>
+				<name>height</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true, the image is part of a server-side image with clickable areas.]]>
+				</description>
+				<name>ismap</name>
+				<type>boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The JSF library name for the image.]]>
+				</description>
+				<name>library</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A URL linking to a page that contains a description of the image.]]>
+				</description>
+				<name>longdesc</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The JSF resource name for the image.]]>
+				</description>
+				<name>name</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[An alias for the 'value' attribute.]]>
+				</description>
+				<name>url</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the name or id of the map associated with the clickable areas of the image.]]>
+				</description>
+				<name>usemap</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A context-relative path that can be used to retrieve the image.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.Object</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The width (in pixels) of the image.]]>
+				</description>
+				<name>width</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="InputDate" extendsTags="DateCommon InputText"
 		parentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeBase"
 		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRendererBase">
@@ -1428,7 +1526,7 @@
 			<![CDATA[InputHidden is a UIInput component that renders an input element with type="hidden". Since it extends HtmlInputHidden, it supports all the features of h:inputHidden.]]>
 		</description>
 	</component>
-	<component name="InputSecret" extendsTags="AltAutocompleteSize DisabledInherited FacesMessageLabel InputCommon" parentClass="javax.faces.component.html.HtmlInputSecret"
+	<component name="InputSecret" extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabel InputCommon SizeInherited" parentClass="javax.faces.component.html.HtmlInputSecret"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[InputSecret is a UIInput component that renders an <input> element with type="password". Since it extends HtmlInputSecret, it supports all the features of h:inputSecret.]]>
@@ -1546,7 +1644,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputText" extendsTags="AltAutocompleteSize DisabledInherited FacesMessageLabel InputCommon"
+	<component name="InputText" extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabel InputCommon SizeInherited"
 		parentClass="javax.faces.component.html.HtmlInputText"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>

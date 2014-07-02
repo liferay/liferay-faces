@@ -1470,6 +1470,191 @@
 		</tag-extension>
 	</tag>
 	<tag>
+		<description><![CDATA[Image is a UIGraphic component that renders an img element. Since it extends HtmlGraphicImage, it supports all the features of h:graphicImage.]]></description>
+		<tag-name>image</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.image.Image</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.image.ImageRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]></description>
+			<name>alt</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
+			<name>dir</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The height (in pixels) of the image.]]></description>
+			<name>height</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the image is part of a server-side image with clickable areas.]]></description>
+			<name>ismap</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
+			<name>lang</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The JSF library name for the image.]]></description>
+			<name>library</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A URL linking to a page that contains a description of the image.]]></description>
+			<name>longdesc</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The JSF resource name for the image.]]></description>
+			<name>name</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
+			<name>onclick</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a double click event occurs.]]></description>
+			<name>ondblclick</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keydown event occurs.]]></description>
+			<name>onkeydown</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keypress event occurs.]]></description>
+			<name>onkeypress</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keyup event occurs.]]></description>
+			<name>onkeyup</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mousedown event occurs.]]></description>
+			<name>onmousedown</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mousemove event occurs.]]></description>
+			<name>onmousemove</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseout event occurs.]]></description>
+			<name>onmouseout</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseover event occurs.]]></description>
+			<name>onmouseover</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
+			<name>onmouseup</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
+			<name>role</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
+			<name>title</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An alias for the 'value' attribute.]]></description>
+			<name>url</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Specifies the name or id of the map associated with the clickable areas of the image.]]></description>
+			<name>usemap</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A context-relative path that can be used to retrieve the image.]]></description>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The width (in pixels) of the image.]]></description>
+			<name>width</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
 		<description><![CDATA[InputDate is a UIInput component that renders a textbox and a popup a calendar with selectable dates. The component attepts to automatically convert the submitted value to a Date via a built in DateTimeConverter.]]></description>
 		<tag-name>inputDate</tag-name>
 		<component>
