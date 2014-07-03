@@ -793,7 +793,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="ButtonCommon" extendsTags="StyleableInherited UIComponentBase" generateJava="false"
+	<component name="ButtonCommon" extendsTags="AltInherited StyleableInherited UIComponentBase" generateJava="false"
 		generateTaglibXML="false">
 		<attributes>
 			<attribute>
@@ -810,14 +810,6 @@
 				</description>
 				<name>disabled</name>
 				<type>boolean</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]>
-				</description>
-				<name>alt</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>
@@ -1388,19 +1380,11 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Image" extendsTags="HTMLPassthrough HTMLCommonEvents" parentClass="javax.faces.component.html.HtmlGraphicImage" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+	<component name="Image" extendsTags="AltInherited HTMLPassthrough HTMLCommonEvents" parentClass="javax.faces.component.html.HtmlGraphicImage" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[Image is a UIGraphic component that renders an img element. Since it extends HtmlGraphicImage, it supports all the features of h:graphicImage.]]>
 		</description>
 		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]>
-				</description>
-				<name>alt</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[The height (in pixels) of the image.]]>
