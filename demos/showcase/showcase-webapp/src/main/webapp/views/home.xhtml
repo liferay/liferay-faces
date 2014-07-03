@@ -1,11 +1,11 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	template="/templates/showcase-#{showcaseModelBean.deploymentType}.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" template="/templates/showcase-#{showcaseModelBean.deploymentType}.xhtml">
 
 	<ui:define name="content">
 		<h:outputStylesheet name="home.css" library="css" />
 		<div class="showcase-home">
-			<h:graphicImage library="images" name="liferay-faces-logo.png" styleClass="logo" />
+			<alloy:image library="images" name="liferay-faces-logo.png" styleClass="logo" />
 			<h2>Liferay Faces Showcase</h2>
 			<p>
 				<a href="https://www.liferay.com/community/liferay-projects/liferay-faces">Liferay Faces</a> is an umbrella project
