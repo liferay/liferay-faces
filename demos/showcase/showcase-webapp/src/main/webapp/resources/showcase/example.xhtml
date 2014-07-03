@@ -17,17 +17,17 @@
 
 	<cc:implementation>
 		<div class="showcase-example #{cc.attrs.styleClass}">
-			<h:outputLabel styleClass="example-label">
+			<alloy:outputLabel styleClass="example-label">
 				<c:if test="#{cc.attrs.number == null}">
-					<h:outputText escape="false" styleClass="example-number" value="#{i18n['example']}" />
+					<alloy:outputText escape="false" styleClass="example-number" value="#{i18n['example']}" />
 				</c:if>
 				<c:if test="#{cc.attrs.number != null}">
-					<h:outputText escape="false" styleClass="example-number" value="#{i18n['example']}&amp;nbsp;#{cc.attrs.number}" />
+					<alloy:outputText escape="false" styleClass="example-number" value="#{i18n['example']}&amp;nbsp;#{cc.attrs.number}" />
 				</c:if>
 				<c:if test="#{cc.attrs.description != null}">
-					<h:outputText escape="false" value=":&amp;nbsp;#{cc.attrs.description}" style="font-weight: normal;"/>
+					<alloy:outputText escape="false" value=":&amp;nbsp;#{cc.attrs.description}" style="font-weight: normal;"/>
 				</c:if>
-			</h:outputLabel>
+			</alloy:outputLabel>
 			<c:if test="#{cc.attrs.longDescription}">
 				<br />
 			</c:if>
@@ -36,7 +36,7 @@
 					<alloy:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.selectedComponent.rendered}">
 						<f:ajax render="@form" />
 					</alloy:selectBooleanCheckbox>
-					<h:outputLabel value="#{i18n['rendered']}" />
+					<alloy:outputLabel value="#{i18n['rendered']}" />
 				</span>
 			</c:if>
 			<c:if test="#{cc.attrs.requiredCheckbox}">
@@ -44,7 +44,7 @@
 					<alloy:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.selectedComponent.required}">
 						<f:ajax render="@form" />
 					</alloy:selectBooleanCheckbox>
-					<h:outputLabel value="#{i18n['required']}" />
+					<alloy:outputLabel value="#{i18n['required']}" />
 				</span>
 			</c:if>
 			<div class="example-usage">
