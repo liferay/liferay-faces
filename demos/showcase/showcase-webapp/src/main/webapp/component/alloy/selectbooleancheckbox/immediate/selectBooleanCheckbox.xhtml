@@ -8,7 +8,7 @@
 		<h:form>
 			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-true']}"
 				longDescription="true" number="1">
-				<h:outputLabel styleClass="alloy-output-label" value="#{i18n['agree']}" />
+				<alloy:outputLabel styleClass="alloy-output-label" value="#{i18n['agree']}" />
 				<alloy:messages globalOnly="true" styleClass="feedback" />
 				<alloy:selectBooleanCheckbox immediate="true" value="#{selectBooleanCheckboxModelBean.agree}"
 					valueChangeListener="#{selectBooleanCheckboxBackingBean.valueChangeListener}">
@@ -29,7 +29,7 @@
 		<h:form>
 			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-false']}"
 				longDescription="true" number="2">
-				<h:outputLabel styleClass="alloy-output-label" value="#{i18n['agree']}" />
+				<alloy:outputLabel styleClass="alloy-output-label" value="#{i18n['agree']}" />
 				<alloy:messages globalOnly="true" styleClass="feedback" />
 				<alloy:selectBooleanCheckbox value="#{selectBooleanCheckboxModelBean.agree}"
 					valueChangeListener="#{selectBooleanCheckboxBackingBean.valueChangeListener}">

@@ -5,13 +5,13 @@
 
 	<showcase:note>
 		<h2>#{i18n['note']}</h2>
-		<h:outputText value="#{i18n['please-consider-using']} " />
-		<h:link value="alloy:field">
+		<alloy:outputText value="#{i18n['please-consider-using']} " />
+		<alloy:link value="alloy:field">
 			<f:param name="componentPrefix" value="alloy" />
 			<f:param name="componentName" value="field" />
 			<f:param name="componentUseCase" value="general" />
-		</h:link>
-		<h:outputText escape="false" value=" #{i18n['alloy-field-benefits-description']}" />
+		</alloy:link>
+		<alloy:outputText escape="false" value=" #{i18n['alloy-field-benefits-description']}" />
 	</showcase:note>
 
 </ui:composition>

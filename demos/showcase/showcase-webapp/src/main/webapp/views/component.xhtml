@@ -25,9 +25,9 @@
 			value="#{i18n['vdl-documentation']}" />
 		<ui:include src="/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/header.xhtml" />
 		<h2>#{selectedComponentFullName}</h2>
-		<h:outputText escape="false" value="#{selectedComponentDescription}" />
+		<alloy:outputText escape="false" value="#{selectedComponentDescription}" />
 		<h3>#{i18n[selectedComponentUseCaseName]} #{i18n['usage']}</h3>
-		<h:outputText escape="false" value="#{selectedComponentUseCaseDescription}" />
+		<alloy:outputText escape="false" value="#{selectedComponentUseCaseDescription}" />
 		<ui:include
 			src="/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/#{selectedComponentUseCaseName}/#{selectedComponentCamelCaseName}.xhtml" />
 		<h3>#{i18n['source-code']}</h3>

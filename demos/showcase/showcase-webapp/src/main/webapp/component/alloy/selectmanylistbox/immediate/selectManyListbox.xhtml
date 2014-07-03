@@ -8,7 +8,7 @@
 		<h:form>
 			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-true']}"
 				longDescription="true" number="1">
-				<h:outputLabel styleClass="alloy-output-label" value="#{i18n['favorite-liferay-benefit']}" />
+				<alloy:outputLabel styleClass="alloy-output-label" value="#{i18n['favorite-liferay-benefit']}" />
 				<alloy:messages globalOnly="true" styleClass="feedback" />
 				<alloy:selectManyListbox immediate="true" layout="pageDirection" value="#{selectManyModelBean.favoriteIds}"
 					valueChangeListener="#{selectManyBackingBean.valueChangeListener}">
@@ -36,7 +36,7 @@
 		<h:form>
 			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-false']}"
 				longDescription="true" number="2">
-				<h:outputLabel styleClass="alloy-output-label" value="#{i18n['favorite-liferay-benefit']}" />
+				<alloy:outputLabel styleClass="alloy-output-label" value="#{i18n['favorite-liferay-benefit']}" />
 				<alloy:messages globalOnly="true" styleClass="feedback" />
 				<alloy:selectManyListbox layout="pageDirection" value="#{selectManyModelBean.favoriteIds}"
 					valueChangeListener="#{selectManyBackingBean.valueChangeListener}">
