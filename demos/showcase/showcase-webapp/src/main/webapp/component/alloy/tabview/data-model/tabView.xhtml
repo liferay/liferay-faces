@@ -5,7 +5,7 @@
 	<showcase:example>
 		<alloy:tabView value="#{tabViewModelBean.liferayBenefits}" var="liferayBenefit">
 			<alloy:tab label="#{liferayBenefit.label}">
-				<h:graphicImage name="#{liferayBenefit.imageName}" library="images" />
+				<alloy:image name="#{liferayBenefit.imageName}" library="images" />
 				<h4>#{liferayBenefit.title}</h4>
 				<span>#{liferayBenefit.description}</span>
 			</alloy:tab>
