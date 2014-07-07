@@ -1843,7 +1843,7 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The maximum date that can be selected by the user.]]></description>
+			<description><![CDATA[The maximum date that can be selected by the user. This attribute can be of type <code>java.lang.String</code> or <code>java.util.Date</code>.]]></description>
 			<name>maximumDate</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
@@ -1855,7 +1855,7 @@
 			<type>int</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The minimum date that can be selected by the user.]]></description>
+			<description><![CDATA[The minimum date that can be selected by the user. This attribute can be of type <code>java.lang.String</code> or <code>java.util.Date</code>.]]></description>
 			<name>minimumDate</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
@@ -4778,13 +4778,13 @@
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The maximum date that can be selected by the user.]]></description>
+			<description><![CDATA[The maximum date that can be selected by the user. This attribute can be of type <code>java.lang.String</code> or <code>java.util.Date</code>.]]></description>
 			<name>maximumDate</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The minimum date that can be selected by the user.]]></description>
+			<description><![CDATA[The minimum date that can be selected by the user. This attribute can be of type <code>java.lang.String</code> or <code>java.util.Date</code>.]]></description>
 			<name>minimumDate</name>
 			<required>false</required>
 			<type>java.lang.Object</type>

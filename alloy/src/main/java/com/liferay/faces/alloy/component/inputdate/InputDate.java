@@ -14,7 +14,9 @@
 package com.liferay.faces.alloy.component.inputdate;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -50,6 +52,18 @@ public class InputDate extends InputDateBase {
 		setRendererType(RENDERER_TYPE);
 	}
 
+	protected static Date getDateAtMidnight(Date date) {
+
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+
+		return calendar.getTime();
+	}
+
 	@Override
 	protected void validateValue(FacesContext facesContext, Object newValue) {
 
@@ -82,8 +96,8 @@ public class InputDate extends InputDateBase {
 					}
 
 					// Set the times to midnight for comparison purposes.
-					minDate = PickDateUtil.getDateAtMidnight(minDate);
-					maxDate = PickDateUtil.getDateAtMidnight(maxDate);
+					minDate = getDateAtMidnight(minDate);
+					maxDate = getDateAtMidnight(maxDate);
 
 					// To determine if the submitted value is valid, check if it falls between the minimum date and
 					// the maximum date.
