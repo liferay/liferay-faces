@@ -69,6 +69,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 		pickDate.setMinimumDate(inputDate.getMinimumDate());
 		pickDate.setPanes(inputDate.getPanes());
 		pickDate.setStyleClass(inputDate.getStyleClass());
+		pickDate.setTimeZone(inputDate.getTimeZone());
 		pickDate.setzIndex(inputDate.getzIndex());
 
 		String showOn = inputDate.getShowOn();
