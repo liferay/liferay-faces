@@ -1436,6 +1436,12 @@
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[The color of the icon which this component will render. The default is black. Another option is white.]]></description>
+			<name>color</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[A unique identifier for this component.]]></description>
 			<name>id</name>
 			<required>false</required>

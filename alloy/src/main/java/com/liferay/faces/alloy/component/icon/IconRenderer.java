@@ -49,8 +49,14 @@ public class IconRenderer extends IconRendererBase {
 		if (name != null) {
 			name = ICON_CLASS_PREFIX + name;
 		}
+		
+		String color = icon.getColor();
+		
+		if (color != null) {
+			color = ICON_CLASS_PREFIX + color;
+		}
 
-		RendererUtil.encodeStyleable(responseWriter, icon, name);
+		RendererUtil.encodeStyleable(responseWriter, icon, name, color);
 	}
 
 	@Override

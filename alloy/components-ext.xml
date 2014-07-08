@@ -1378,6 +1378,13 @@
 				<name>name</name>
 				<type>java.lang.String</type>
 			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The color of the icon which this component will render. The default is black. Another option is white.]]>
+				</description>
+				<name>color</name>
+				<type>java.lang.String</type>
+			</attribute>
 		</attributes>
 	</component>
 	<component name="Image" extendsTags="AltInherited HTMLPassthrough HTMLCommonEvents" parentClass="javax.faces.component.html.HtmlGraphicImage" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
