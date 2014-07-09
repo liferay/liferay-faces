@@ -16,7 +16,7 @@ package com.liferay.faces.alloy.component.dialog;
 import javax.faces.component.FacesComponent;
 
 import com.liferay.faces.alloy.component.overlay.Overlay;
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
+import com.liferay.faces.alloy.renderkit.AlloyRenderer;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -46,10 +46,10 @@ public class Dialog extends DialogBase implements Overlay {
 		// Initially style the outermost <div> (which is the contentBox) with "display:none;" in order to prevent
 		// blinking when Alloy's JavaScript attempts to hide the contentBox.
 		if (style == null) {
-			style = AlloyRendererUtil.DISPLAY_NONE;
+			style = AlloyRenderer.DISPLAY_NONE;
 		}
 		else {
-			style = style + StringPool.SEMICOLON + AlloyRendererUtil.DISPLAY_NONE;
+			style = style + StringPool.SEMICOLON + AlloyRenderer.DISPLAY_NONE;
 		}
 
 		return style;
