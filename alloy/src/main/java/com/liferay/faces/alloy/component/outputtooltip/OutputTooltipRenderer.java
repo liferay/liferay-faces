@@ -24,7 +24,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -108,7 +107,7 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 		OutputTooltip outputTooltip, boolean first) throws IOException {
 
 		// Encode the "cssClass" Alloy hidden attribute.
-		encodeString(responseWriter, AlloyRendererUtil.CSS_CLASS, outputTooltip.getStyleClass(), first);
+		encodeString(responseWriter, CSS_CLASS, outputTooltip.getStyleClass(), first);
 
 		first = false;
 
@@ -119,7 +118,7 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 	protected void encodeZIndex(ResponseWriter responseWriter, OutputTooltip outputTooltip, Integer zIndex,
 		boolean first) throws IOException {
 
-		encodeOverlayZIndex(responseWriter, outputTooltip, zIndex, AlloyRendererUtil.LIFERAY_Z_INDEX_TOOLTIP, first);
+		encodeOverlayZIndex(responseWriter, outputTooltip, zIndex, LIFERAY_Z_INDEX_TOOLTIP, first);
 	}
 
 	@Override

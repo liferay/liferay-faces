@@ -24,7 +24,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
@@ -136,7 +135,7 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 			responseWriter.write(eventName);
 			responseWriter.write(StringPool.APOSTROPHE);
 			responseWriter.write(StringPool.COMMA);
-			responseWriter.write(AlloyRendererUtil.FUNCTION_EVENT);
+			responseWriter.write(FUNCTION_EVENT);
 			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 			responseWriter.write(callback);
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);

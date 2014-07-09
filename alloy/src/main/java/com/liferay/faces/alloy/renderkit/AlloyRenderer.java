@@ -25,6 +25,20 @@ import javax.faces.context.ResponseWriter;
  */
 public interface AlloyRenderer {
 
+	public static final String A_DOT_ONE = "A.one";
+	public static final String BOUNDING_BOX = "boundingBox";
+	public static final String CONTENT_BOX = "contentBox";
+	public static final String CSS_CLASS = "cssClass";
+	public static final String DISPLAY_NONE = "display:none;";
+	public static final String DOT_HIDE = ".hide()";
+	public static final String DOT_SHOW = ".show()";
+	public static final String FUNCTION_EVENT = "function(event)";
+	public static final String HEADER_CONTENT = "headerContent";
+	public static final String LIFERAY_COMPONENT = "Liferay.component";
+	public static final String LIFERAY_Z_INDEX_OVERLAY = "Liferay.zIndex.OVERLAY";
+	public static final String LIFERAY_Z_INDEX_TOOLTIP = "Liferay.zIndex.TOOLTIP";
+	public static final String VISIBLE = "visible";
+
 	public void encodeAlloyAttributes(FacesContext facesContext, ResponseWriter respoonseWriter,
 		UIComponent uiComponent) throws IOException;
 
