@@ -15,7 +15,6 @@ package com.liferay.faces.alloy.component.inputdatetime;
 
 import java.io.IOException;
 
-import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.component.Styleable;
@@ -28,8 +27,12 @@ import com.liferay.faces.util.render.DelegationResponseWriterBase;
  */
 public class InputDateTimeResponseWriter extends DelegationResponseWriterBase {
 
-	public InputDateTimeResponseWriter(ResponseWriter responseWriter) {
+	// Private Members
+	private String inputSuffix;
+
+	public InputDateTimeResponseWriter(ResponseWriter responseWriter, String inputSuffix) {
 		super(responseWriter);
+		this.inputSuffix = inputSuffix;
 	}
 
 	@Override
@@ -44,8 +47,7 @@ public class InputDateTimeResponseWriter extends DelegationResponseWriterBase {
 			// If writing the id attribute, then append the input id suffix, because the input must have an id which
 			// is different than its parent span.
 			if (StringPool.ID.equalsIgnoreCase(name)) {
-				FacesContext facesContext = FacesContext.getCurrentInstance();
-				value = value + InputDateTimeUtil.getInputIdSuffix(facesContext);
+				value = value + inputSuffix;
 			}
 
 			super.writeAttribute(name, value, property);
