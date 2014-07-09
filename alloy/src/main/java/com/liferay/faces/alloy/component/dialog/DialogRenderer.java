@@ -22,7 +22,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
@@ -66,7 +65,7 @@ public class DialogRenderer extends DialogRendererBase {
 			"_scrolly);},Liferay.component('" + clientKey + "'),'show');");
 
 		if (!dialog.isHideIconRendered()) {
-			responseWriter.write(AlloyRendererUtil.LIFERAY_COMPONENT);
+			responseWriter.write(LIFERAY_COMPONENT);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
 			responseWriter.write(StringPool.APOSTROPHE);
 			responseWriter.write(clientKey);
@@ -97,7 +96,7 @@ public class DialogRenderer extends DialogRendererBase {
 	@Override
 	protected void encodeZIndex(ResponseWriter responseWriter, Dialog dialog, Integer zIndex, boolean first)
 		throws IOException {
-		encodeOverlayZIndex(responseWriter, dialog, zIndex, AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY, first);
+		encodeOverlayZIndex(responseWriter, dialog, zIndex, LIFERAY_Z_INDEX_OVERLAY, first);
 	}
 
 	@Override

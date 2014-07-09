@@ -23,7 +23,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
@@ -272,7 +271,7 @@ public class SelectStarRatingRenderer extends SelectStarRatingRendererBase {
 
 		// boundingBox
 		String clientId = selectStarRating.getClientId(facesContext);
-		encodeClientId(responseWriter, AlloyRendererUtil.BOUNDING_BOX, clientId, first);
+		encodeClientId(responseWriter, BOUNDING_BOX, clientId, first);
 
 		first = false;
 

@@ -19,7 +19,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.DelegationResponseWriter;
@@ -54,7 +53,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
 		// blinking when Alloy's JavaScript attempts to hide the contentBox. At this point in JavaScript execution,
 		// Alloy is done manipulating the DOM and it is necessary to set the style back to "display:block;" so that the
 		// dialog will popup correctly.
-		responseWriter.write(AlloyRendererUtil.A_DOT_ONE);
+		responseWriter.write(A_DOT_ONE);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
 
@@ -104,7 +103,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
 
 		// Encode the "contentBox" Alloy hidden attribute.
 		String clientId = overlay.getClientId(facesContext);
-		encodeClientId(responseWriter, AlloyRendererUtil.CONTENT_BOX, clientId, first);
+		encodeClientId(responseWriter, CONTENT_BOX, clientId, first);
 
 		first = false;
 
@@ -112,7 +111,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
 		String headerText = overlay.getHeaderText();
 
 		if (headerText != null) {
-			encodeString(responseWriter, AlloyRendererUtil.HEADER_CONTENT, headerText, first);
+			encodeString(responseWriter, HEADER_CONTENT, headerText, first);
 		}
 
 		// Encode the "render: true" Alloy hidden attribute.
@@ -122,7 +121,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
 		Boolean autoShow = overlay.isAutoShow();
 
 		if (autoShow != null) {
-			encodeBoolean(responseWriter, AlloyRendererUtil.VISIBLE, autoShow, first);
+			encodeBoolean(responseWriter, VISIBLE, autoShow, first);
 		}
 	}
 

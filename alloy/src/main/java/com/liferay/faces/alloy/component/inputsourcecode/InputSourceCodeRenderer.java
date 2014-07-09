@@ -23,7 +23,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
@@ -121,13 +120,13 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 
 		String boundingBox = getDefaultBoundingBoxClientId(facesContext, inputSourceCode);
 
-		encodeClientId(responseWriter, AlloyRendererUtil.BOUNDING_BOX, boundingBox, first);
+		encodeClientId(responseWriter, BOUNDING_BOX, boundingBox, first);
 	}
 
 	protected String getDefaultBoundingBoxClientId(FacesContext facesContext, UIComponent uiComponent) {
 		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
 
-		return uiComponent.getClientId(facesContext) + separatorChar + AlloyRendererUtil.BOUNDING_BOX;
+		return uiComponent.getClientId(facesContext) + separatorChar + BOUNDING_BOX;
 	}
 
 	@Override

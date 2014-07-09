@@ -23,7 +23,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
@@ -71,7 +70,7 @@ public class PopoverRenderer extends PopoverRendererBase {
 		if (popover.isHideIconRendered()) {
 
 			// Add an "x" toolbar icon so that the popover can be hidden just like alloy:dialog can.
-			responseWriter.write(AlloyRendererUtil.LIFERAY_COMPONENT);
+			responseWriter.write(LIFERAY_COMPONENT);
 			responseWriter.write(StringPool.OPEN_PARENTHESIS);
 			responseWriter.write(StringPool.APOSTROPHE);
 			responseWriter.write(clientKey);
@@ -117,7 +116,7 @@ public class PopoverRenderer extends PopoverRendererBase {
 	@Override
 	protected void encodeZIndex(ResponseWriter responseWriter, Popover popover, Integer zIndex, boolean first)
 		throws IOException {
-		encodeOverlayZIndex(responseWriter, popover, zIndex, AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY, first);
+		encodeOverlayZIndex(responseWriter, popover, zIndex, LIFERAY_Z_INDEX_OVERLAY, first);
 	}
 
 	@Override

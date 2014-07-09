@@ -31,24 +31,13 @@ import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
+ * This class contains the common code between AlloyRendererBase and DelegatingAlloyRendererBase. This class is
+ * package-private and final in order to avoid adding methods and classes to the API while avoiding duplication of code
+ * between AlloyRendererBase and DelegatingAlloyRendererBase.
+ *
  * @author  Kyle Stiemann
  */
-public class AlloyRendererUtil {
-
-	// Public Constants
-	public static final String A_DOT_ONE = "A.one";
-	public static final String BOUNDING_BOX = "boundingBox";
-	public static final String CONTENT_BOX = "contentBox";
-	public static final String CSS_CLASS = "cssClass";
-	public static final String DISPLAY_NONE = "display:none;";
-	public static final String DOT_HIDE = ".hide()";
-	public static final String DOT_SHOW = ".show()";
-	public static final String FUNCTION_EVENT = "function(event)";
-	public static final String HEADER_CONTENT = "headerContent";
-	public static final String LIFERAY_COMPONENT = "Liferay.component";
-	public static final String LIFERAY_Z_INDEX_OVERLAY = "Liferay.zIndex.OVERLAY";
-	public static final String LIFERAY_Z_INDEX_TOOLTIP = "Liferay.zIndex.TOOLTIP";
-	public static final String VISIBLE = "visible";
+/* package-private */ final class AlloyRendererBaseCommon {
 
 	// Private Constants
 	private static final String A_DOT = "A.";
@@ -60,7 +49,7 @@ public class AlloyRendererUtil {
 	private static final String USE = "use";
 	private static final String YUI = "YUI";
 
-	public static void decodeClientBehaviors(FacesContext facesContext, UIComponent uiComponent) {
+	/* package-private */ static final void decodeClientBehaviors(FacesContext facesContext, UIComponent uiComponent) {
 
 		if (uiComponent instanceof ClientBehaviorHolder) {
 
@@ -92,7 +81,7 @@ public class AlloyRendererUtil {
 		}
 	}
 
-	public static void encodeBoolean(ResponseWriter responseWriter, String attributeName, Boolean attributeValue,
+	/* package-private */ static final void encodeBoolean(ResponseWriter responseWriter, String attributeName, Boolean attributeValue,
 		boolean first) throws IOException {
 
 		if (!first) {
@@ -104,7 +93,7 @@ public class AlloyRendererUtil {
 		responseWriter.write(attributeValue.toString());
 	}
 
-	public static void encodeClientId(ResponseWriter responseWriter, String attributeName, String clientId,
+	/* package-private */ static final void encodeClientId(ResponseWriter responseWriter, String attributeName, String clientId,
 		boolean first) throws IOException {
 
 		String escapedClientId = StringPool.POUND +
@@ -112,7 +101,7 @@ public class AlloyRendererUtil {
 		encodeString(responseWriter, attributeName, escapedClientId, first);
 	}
 
-	public static void encodeClientId(ResponseWriter responseWriter, String attributeName, String clientId,
+	/* package-private */ static final void encodeClientId(ResponseWriter responseWriter, String attributeName, String clientId,
 		UIComponent uiComponent, boolean first) throws IOException {
 
 		UIComponent forComponent = uiComponent.findComponent(clientId);
@@ -125,7 +114,7 @@ public class AlloyRendererUtil {
 		encodeClientId(responseWriter, attributeName, escapedClientId, first);
 	}
 
-	public static void encodeEventCallback(ResponseWriter responseWriter, String varName, String methodName,
+	/* package-private */ static final void encodeEventCallback(ResponseWriter responseWriter, String varName, String methodName,
 		String eventName, String callback) throws IOException {
 		responseWriter.write(varName);
 		responseWriter.write(StringPool.PERIOD);
@@ -135,7 +124,7 @@ public class AlloyRendererUtil {
 		responseWriter.write(eventName);
 		responseWriter.write(StringPool.APOSTROPHE);
 		responseWriter.write(StringPool.COMMA);
-		responseWriter.write(AlloyRendererUtil.FUNCTION_EVENT);
+		responseWriter.write(AlloyRenderer.FUNCTION_EVENT);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 		responseWriter.write(callback);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
@@ -143,7 +132,7 @@ public class AlloyRendererUtil {
 		responseWriter.write(StringPool.SEMICOLON);
 	}
 
-	public static void encodeInteger(ResponseWriter responseWriter, String attributeName, Integer attributeValue,
+	/* package-private */ static final void encodeInteger(ResponseWriter responseWriter, String attributeName, Integer attributeValue,
 		boolean first) throws IOException {
 
 		if (!first) {
@@ -155,7 +144,7 @@ public class AlloyRendererUtil {
 		responseWriter.write(attributeValue.toString());
 	}
 
-	public static void encodeJavaScriptBegin(FacesContext facesContext, UIComponent uiComponent,
+	/* package-private */ static final void encodeJavaScriptBegin(FacesContext facesContext, UIComponent uiComponent,
 		AlloyRenderer alloyRenderer, String[] modules, boolean ajax, boolean forceInline) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
@@ -212,7 +201,7 @@ public class AlloyRendererUtil {
 		}
 	}
 
-	public static void encodeJavaScriptEnd(FacesContext facesContext, UIComponent uiComponent, boolean ajax,
+	/* package-private */ static final void encodeJavaScriptEnd(FacesContext facesContext, UIComponent uiComponent, boolean ajax,
 		boolean forceInline) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
@@ -251,7 +240,7 @@ public class AlloyRendererUtil {
 	 *
 	 * @throws  IOException
 	 */
-	public static void encodeJavaScriptMain(FacesContext facesContext, UIComponent uiComponent, String alloyClassName,
+	/* package-private */ static final void encodeJavaScriptMain(FacesContext facesContext, UIComponent uiComponent, String alloyClassName,
 		AlloyRenderer alloyRenderer) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
@@ -263,7 +252,7 @@ public class AlloyRendererUtil {
 		}
 
 		// Begin encoding JavaScript to create the Alloy JavaScript component and put it in the Liferay.component map.
-		responseWriter.write(LIFERAY_COMPONENT);
+		responseWriter.write(AlloyRenderer.LIFERAY_COMPONENT);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
 
@@ -288,9 +277,9 @@ public class AlloyRendererUtil {
 		responseWriter.write(StringPool.SEMICOLON);
 	}
 
-	public static void encodeLiferayComponent(ResponseWriter responseWriter, String clientKey) throws IOException {
+	/* package-private */ static final void encodeLiferayComponent(ResponseWriter responseWriter, String clientKey) throws IOException {
 
-		responseWriter.write(LIFERAY_COMPONENT);
+		responseWriter.write(AlloyRenderer.LIFERAY_COMPONENT);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
 
@@ -300,7 +289,7 @@ public class AlloyRendererUtil {
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 	}
 
-	public static void encodeLiferayComponentVar(ResponseWriter responseWriter, String clientVarName, String clientKey)
+	/* package-private */ static final void encodeLiferayComponentVar(ResponseWriter responseWriter, String clientVarName, String clientKey)
 		throws IOException {
 
 		responseWriter.write(StringPool.VAR);
@@ -311,7 +300,7 @@ public class AlloyRendererUtil {
 		responseWriter.write(StringPool.SEMICOLON);
 	}
 
-	public static void encodeNonEscapedObject(ResponseWriter responseWriter, String attributeName,
+	/* package-private */ static final void encodeNonEscapedObject(ResponseWriter responseWriter, String attributeName,
 		Object attributeValue, boolean first) throws IOException {
 
 		if (!first) {
@@ -323,7 +312,7 @@ public class AlloyRendererUtil {
 		responseWriter.write(attributeValue.toString());
 	}
 
-	public static void encodeString(ResponseWriter responseWriter, String attributeName, Object attributeValue,
+	/* package-private */ static final void encodeString(ResponseWriter responseWriter, String attributeName, Object attributeValue,
 		boolean first) throws IOException {
 
 		String escapedAttributeValue = RendererUtil.escapeJavaScript(attributeValue.toString());
@@ -339,7 +328,7 @@ public class AlloyRendererUtil {
 		responseWriter.write(StringPool.APOSTROPHE);
 	}
 
-	public static void encodeWidgetRender(ResponseWriter responseWriter, boolean first) throws IOException {
+	/* package-private */ static final void encodeWidgetRender(ResponseWriter responseWriter, boolean first) throws IOException {
 		encodeBoolean(responseWriter, RENDER, true, first);
 	}
 }
