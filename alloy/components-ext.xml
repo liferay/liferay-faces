@@ -1772,6 +1772,34 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="OutputScript" extendsTags="UIOutput" parentClass="javax.faces.component.UIOutput"
+		styleable="false" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[OutputScript is a UIOutput component that renders an <code>&lt;script&gt;</code> element with <code>type="text/javascript"</code>.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description><![CDATA[The name of the library which contains the JavaScript resource.]]></description>
+				<name>library</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[The name of the JavaScript file to be included on the page]]></description>
+				<name>name</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[The position on the page where the JavaScript should be rendered. Valid values include <code>body</code>, <code>form</code>, and <code>head</code>. Specifying <code>body</code> for this attribute will cause the <code>&lt;script&gt;</code> to be rendered as close to closing body tag as possible. The default value of this attribute, which is <code>null</code>, will cause the <code>&lt;script&gt;</code> to be rendered at its current position.]]></description>
+				<name>target</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[A comma-delimited list of YUI or AlloyUI modules to load for this script. <strong>Note:</strong> if this attribute is specified, a YUI sandbox will be created automatically for the <code>&lt;script&gt;</code>.]]></description>
+				<name>use</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="OutputFormat" extendsTags="HTMLPassthrough UIOutput EscapeInherited" parentClass="javax.faces.component.html.HtmlOutputFormat" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[OutputFormat is a UIOutput component that renders parameterized text. Since it extends HtmlOutputFormat, it supports all the features of h:outputFormat.]]>

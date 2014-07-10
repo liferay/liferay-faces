@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/templates/component-3col.xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+	<ui:define name="col1">
+		<!-- This <script> is rendered inline, so it blocks the rendering of the rest of page while loading. -->
+		<h:form>
+			<showcase:example number="1" renderedCheckbox="true">
+				<h:panelGroup rendered="#{showcaseModelBean.selectedComponent.rendered}">
+					<span id="example1:text"></span>
+				</h:panelGroup>
+				<alloy:outputScript rendered="#{showcaseModelBean.selectedComponent.rendered}">
+					document.getElementById('example1:text').innerHTML = '#{i18n['alloy-outputscript-general-exampe-1']}';
+				</alloy:outputScript>
+			</showcase:example>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- This <script> is rendered at the bottom of the page, so it does not block the rendering of the rest of -->
+		<!-- page while loading. -->
+		<showcase:example number="2">
+			<span id="example2:text"></span>
+			<alloy:outputScript target="body">
+				document.getElementById('example2:text').innerHTML = '#{i18n['alloy-outputscript-general-exampe-2']}';
+			</alloy:outputScript>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

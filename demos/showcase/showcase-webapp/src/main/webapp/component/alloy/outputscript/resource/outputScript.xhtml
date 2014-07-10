@@ -1,0 +1,16 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<!-- This script utilizes a JavaScript function from the external JavaScript Library example.js. -->
+		<showcase:example>
+			<span id="text"></span>
+			<alloy:outputScript>
+				exampleJavaScriptFunction('text');
+			</alloy:outputScript>
+			<alloy:outputScript library="js" name="example.js" target="head" />
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

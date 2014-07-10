@@ -17,19 +17,12 @@ import java.io.IOException;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.util.client.ClientScript;
-import com.liferay.faces.util.client.ClientScriptFactory;
 import com.liferay.faces.util.context.ExtFacesContext;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.portal.WebKeys;
-
-import com.liferay.portal.model.Portlet;
 
 
 /**
@@ -115,9 +108,11 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 
 		boolean bufferResponse = (isAjax(facesContext) || !isForceInline(facesContext, uiComponent));
 
+		BufferedScriptResponseWriter bufferedScriptResponseWriter = null;
+
 		if (bufferResponse) {
-			BufferedResponseWriter bufferedResponseWriter = new BufferedResponseWriter();
-			facesContext.setResponseWriter(bufferedResponseWriter);
+			bufferedScriptResponseWriter = new BufferedScriptResponseWriter();
+			facesContext.setResponseWriter(bufferedScriptResponseWriter);
 		}
 
 		encodeJavaScriptBegin(facesContext, uiComponent);
@@ -126,59 +121,39 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 		encodeJavaScriptEnd(facesContext, uiComponent);
 
 		if (bufferResponse) {
-			handleBuffer(facesContext, uiComponent);
-			facesContext.setResponseWriter(responseWriter);
-		}
-	}
 
-	protected void handleBuffer(FacesContext facesContext, UIComponent uiComponent) {
-
-		BufferedResponseWriter bufferedResponseWriter = (BufferedResponseWriter) facesContext.getResponseWriter();
-
-		// If running in an Ajax request, then it is not possible to render the scripts at the bottom of the
-		// portal page. Instead, store the script in the JavaScript map so that PartialViewContextCleanupImpl
-		// knows to include it in the <eval>...</eval> section of the JSF partial-response.
-		if (isAjax(facesContext)) {
-			Map<String, String> javaScriptMap = ExtFacesContext.getInstance().getJavaScriptMap();
-			javaScriptMap.put(uiComponent.getClientId(facesContext), bufferedResponseWriter.toString());
-		}
-
-		// Otherwise, render the script at the bottom of the portal page by setting the WebKeys.AUI_SCRIPT_DATA
-		// request attribute.
-		else { // TODO This may be different depending on if component is aui or not. come back to this
-
-			ExternalContext externalContext = facesContext.getExternalContext();
-			ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-					ClientScriptFactory.class);
-			ClientScript clientScript = clientScriptFactory.getClientScript(externalContext);
-
-			String portletId = StringPool.BLANK;
-			Portlet portlet = (Portlet) externalContext.getRequestMap().get(WebKeys.RENDER_PORTLET);
-
-			if (portlet != null) {
-				portletId = portlet.getPortletId();
+			// If running in an Ajax request, then it is not possible to render the scripts at the bottom of the
+			// portal page. Instead, store the script in the JavaScript map so that PartialViewContextCleanupImpl
+			// knows to include it in the <eval>...</eval> section of the JSF partial-response.
+			if (isAjax(facesContext)) {
+				Map<String, String> javaScriptMap = ExtFacesContext.getInstance().getJavaScriptMap();
+				javaScriptMap.put(uiComponent.getClientId(facesContext), bufferedScriptResponseWriter.toString());
 			}
+			else {
 
-			String[] moduleArray = getModules();
-			String modules = null;
+				String use = null;
+				String[] modules = getModules();
 
-			if (moduleArray != null) {
+				if (modules != null) {
 
-				StringBuilder stringBuilder = new StringBuilder();
+					StringBuilder stringBuilder = new StringBuilder();
 
-				for (int i = 0; i < moduleArray.length; i++) {
+					for (int i = 0; i < modules.length; i++) {
 
-					if (i > 0) {
-						stringBuilder.append(StringPool.COMMA);
+						if (i > 0) {
+							stringBuilder.append(StringPool.COMMA);
+						}
+
+						stringBuilder.append(modules[i]);
 					}
 
-					stringBuilder.append(moduleArray[i]);
+					use = stringBuilder.toString();
 				}
 
-				modules = stringBuilder.toString();
+				RendererUtil.handleBufferedScript(facesContext, uiComponent, bufferedScriptResponseWriter, use);
 			}
 
-			clientScript.append(portletId, bufferedResponseWriter.toString(), modules);
+			facesContext.setResponseWriter(responseWriter);
 		}
 	}
 

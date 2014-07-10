@@ -53,12 +53,9 @@ public class AlloyRendererUtil {
 	// Private Constants
 	private static final String A_DOT = "A.";
 	private static final String DESTROY = "destroy";
-	private static final String FUNCTION_A = "function(A)";
 	private static final String IF = "if";
 	private static final String NEW = "new";
 	private static final String RENDER = "render";
-	private static final String USE = "use";
-	private static final String YUI = "YUI";
 
 	public static void decodeClientBehaviors(FacesContext facesContext, UIComponent uiComponent) {
 
@@ -191,24 +188,10 @@ public class AlloyRendererUtil {
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 			responseWriter.write(StringPool.SEMICOLON);
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-			responseWriter.write(YUI);
-			responseWriter.write(StringPool.OPEN_PARENTHESIS);
-			alloyRenderer.encodeLang(facesContext, responseWriter, uiComponent);
-			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-			responseWriter.write(StringPool.PERIOD);
-			responseWriter.write(USE);
-			responseWriter.write(StringPool.OPEN_PARENTHESIS);
 
-			for (String module : modules) {
-
-				responseWriter.write(StringPool.APOSTROPHE);
-				responseWriter.write(module);
-				responseWriter.write(StringPool.APOSTROPHE);
-				responseWriter.write(StringPool.COMMA);
-			}
-
-			responseWriter.write(FUNCTION_A);
-			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+			String yuiConfig = alloyRenderer.getYUIConfig(facesContext, responseWriter, uiComponent);
+			String auiBeginScript = RendererUtil.getAUIBeginScript(facesContext, modules, yuiConfig);
+			responseWriter.write(auiBeginScript);
 		}
 	}
 

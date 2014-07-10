@@ -18,6 +18,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -73,29 +74,13 @@ public class ClientScriptImpl implements ClientScript, Serializable {
 		value.append(rawSB.toString());
 
 		if (callbackSB.length() > 0) {
-			String loadMethod = "use";
 
-			if (browserIE && (browserMajorVersion < 8)) {
-
-				loadMethod = "ready";
-			}
-
-			value.append("AUI().");
-			value.append(loadMethod);
-			value.append(StringPool.OPEN_PARENTHESIS);
-
-			for (String use : useSet) {
-				value.append(StringPool.APOSTROPHE);
-				value.append(use);
-				value.append(StringPool.APOSTROPHE);
-				value.append(StringPool.COMMA_AND_SPACE);
-			}
-
-			value.append("function(A) {");
+			String[] useArray = new String[useSet.size()];
+			String auiBeginScript = RendererUtil.getAUIBeginScript(useSet.toArray(useArray), browserMajorVersion,
+					browserIE);
+			value.append(auiBeginScript);
 			value.append(callbackSB.toString());
-			value.append(StringPool.CLOSE_CURLY_BRACE);
-			value.append(StringPool.CLOSE_PARENTHESIS);
-			value.append(StringPool.SEMICOLON);
+			value.append(RendererUtil.AUI_END_SCRIPT);
 		}
 
 		return value.toString();
