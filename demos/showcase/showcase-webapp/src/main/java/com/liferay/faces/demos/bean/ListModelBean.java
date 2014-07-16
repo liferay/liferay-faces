@@ -84,12 +84,15 @@ public class ListModelBean {
 		showcaseCategoryList.add("multimedia");
 		showcaseCategoryList.add("output");
 		showcaseCategoryList.add("panel");
+
 		if ((developmentMode) || (systemTestMode)) {
 			showcaseCategoryList.add("pick");
 		}
+
 		if (LIFERAY_FACES_BRIDGE_DETECTED) {
 			showcaseCategoryList.add("portlet");
 		}
+
 		showcaseCategoryList.add("select");
 
 		this.showcaseComponents = new ArrayList<ShowcaseComponent>();
@@ -159,7 +162,14 @@ public class ListModelBean {
 
 								URL sourceFileURL = null;
 
-								if (sourceFileName.endsWith(".js")) {
+								if (sourceFileName.endsWith(".css")) {
+
+									String sourcePath = File.separator + "resources" + File.separator + "css" +
+										File.separator + sourceFileName;
+
+									sourceFileURL = startupExternalContext.getResource(sourcePath);
+								}
+								else if (sourceFileName.endsWith(".js")) {
 
 									String sourcePath = File.separator + "resources" + File.separator + "js" +
 										File.separator + sourceFileName;
@@ -170,11 +180,11 @@ public class ListModelBean {
 
 									String sourcePath = File.separator + "component" + File.separator + prefix +
 										File.separator + lowerCaseName + File.separator;
-									
+
 									if (!sourceFileName.toLowerCase().contains("common")) {
 										sourcePath = sourcePath + useCaseName + File.separator;
 									}
-									
+
 									sourcePath = sourcePath + sourceFileName;
 
 									sourceFileURL = startupExternalContext.getResource(sourcePath);

@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.outputscript;
+package com.liferay.faces.alloy.component.outputstylesheet;
 //J-
 
 
@@ -24,12 +24,11 @@ import com.liferay.faces.alloy.component.outputscriptstylesheet.internal.OutputS
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class OutputScriptRendererBase extends OutputScriptStylesheetRendererBase {
+public abstract class OutputStylesheetRendererBase extends OutputScriptStylesheetRendererBase {
 
 	// Protected Constants
 	protected static final String LIBRARY = "library";
+	protected static final String MEDIA = "media";
 	protected static final String NAME = "name";
-	protected static final String TARGET = "target";
-	protected static final String USE = "use";
 }
 //J+
