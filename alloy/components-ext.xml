@@ -270,6 +270,21 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="OutputScriptStylesheetCommon" extendsTags="UIOutput" generateJava="false"
+		generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description><![CDATA[The name of the library which contains the resource.]]></description>
+				<name>library</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[The name of the resource file to be included on the page.]]></description>
+				<name>name</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="OverlayCommon" extendsTags="ClientComponent" generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
@@ -1213,22 +1228,13 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="OutputScript" extendsTags="UIOutput" parentClass="javax.faces.component.UIOutput" styleable="false"
-		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+	<component name="OutputScript" extendsTags="OutputScriptStylesheetCommon"
+		parentClass="javax.faces.component.UIOutput" styleable="false"
+		rendererParentClass="com.liferay.faces.alloy.component.outputscriptstylesheet.internal.OutputScriptStylesheetRendererBase">
 		<description>
 			<![CDATA[OutputScript is a UIOutput component that renders an <code>&lt;script&gt;</code> element with <code>type="text/javascript"</code>.]]>
 		</description>
 		<attributes>
-			<attribute>
-				<description><![CDATA[The library that contains the JSF script resource.]]></description>
-				<name>library</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description><![CDATA[The name of the JSF script resource.]]></description>
-				<name>name</name>
-				<type>java.lang.String</type>
-			</attribute>
 			<attribute>
 				<description><![CDATA[The position on the page where the JavaScript should be rendered. Valid values include <code>body</code>, <code>form</code>, and <code>head</code>. The default value of this attribute is an empty (null) value which causes the <code>&lt;script&gt;</code> to be rendered inline (corresponding to its position in the view). Specifying <code>body</code> for the target attribute will cause the <code>&lt;script&gt;</code> to be rendered as close to the closing body tag as possible.]]></description>
 				<name>target</name>
@@ -1237,6 +1243,20 @@
 			<attribute>
 				<description><![CDATA[A comma-delimited list of YUI or AlloyUI modules to load for this script. <strong>Note:</strong> if this attribute is specified, a YUI sandbox will be created automatically for the <code>&lt;script&gt;</code>.]]></description>
 				<name>use</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="OutputStylesheet" extendsTags="OutputScriptStylesheetCommon"
+		parentClass="javax.faces.component.UIOutput" styleable="false"
+		rendererParentClass="com.liferay.faces.alloy.component.outputscriptstylesheet.internal.OutputScriptStylesheetRendererBase">
+		<description>
+			<![CDATA[OutputStylesheet is a UIOutput component that renders an <code>&lt;style&gt;</code> element.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description><![CDATA[HTML passthrough attribute specifying the media type of the element.]]></description>
+				<name>media</name>
 				<type>java.lang.String</type>
 			</attribute>
 		</attributes>

@@ -18,13 +18,7 @@ import java.io.IOException;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
-import javax.faces.event.AbortProcessingException;
-import javax.faces.event.ComponentSystemEvent;
-import javax.faces.event.ComponentSystemEventListener;
-import javax.faces.event.ListenerFor;
-import javax.faces.event.PostAddToViewEvent;
 import javax.faces.render.FacesRenderer;
-import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.BufferedScriptResponseWriter;
@@ -36,9 +30,8 @@ import com.liferay.faces.util.render.RendererUtil;
  */
 //J-
 @FacesRenderer(componentFamily = OutputScript.COMPONENT_FAMILY, rendererType = OutputScript.RENDERER_TYPE)
-@ListenerFor(systemEventClass = PostAddToViewEvent.class)
 //J+
-public class OutputScriptRenderer extends OutputScriptRendererBase implements ComponentSystemEventListener {
+public class OutputScriptRenderer extends OutputScriptRendererBase {
 
 	// Private Constants
 	private static final String FUNCTION_BEGIN_SCRIPT = "(function(){";
@@ -109,19 +102,6 @@ public class OutputScriptRenderer extends OutputScriptRendererBase implements Co
 			else {
 				super.encodeChildren(facesContext, uiComponent);
 			}
-		}
-	}
-
-	@Override
-	public void processEvent(ComponentSystemEvent componentSystemEvent) throws AbortProcessingException {
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		Renderer delegateRenderer = getDelegateRenderer(facesContext);
-
-		if (delegateRenderer instanceof ComponentSystemEventListener) {
-			ComponentSystemEventListener delegateComponentSystemEventListener = (ComponentSystemEventListener)
-				delegateRenderer;
-			delegateComponentSystemEventListener.processEvent(componentSystemEvent);
 		}
 	}
 

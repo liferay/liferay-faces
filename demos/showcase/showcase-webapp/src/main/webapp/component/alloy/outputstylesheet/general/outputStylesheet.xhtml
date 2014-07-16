@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Specifying a CSS class inline. -->
+		<showcase:example description="#{i18n['alloy-outputstylesheet-general-example-1']}" number="1">
+			<alloy:outputStylesheet>
+				.example-inline-css {
+					opacity: .65;
+					box-shadow: none;
+				}
+			</alloy:outputStylesheet>
+			<alloy:button styleClass="example-inline-css" value="#{i18n['button']}" />
+		</showcase:example>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: Specifying a CSS resource to be included on the page. -->
+		<showcase:example description="#{i18n['alloy-outputstylesheet-general-example-2']}" longDescription="true"
+			number="2">
+			<alloy:outputStylesheet library="css" name="example.css" />
+			<alloy:button styleClass="example-resource-css" value="#{i18n['button']}" />
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>
