@@ -70,7 +70,7 @@ public abstract class InputFileRendererBase extends DelegatingAlloyRendererBase 
 	}
 
 	@Override
-	protected String[] getModules() {
+	protected String[] getModules(UIComponent uiComponent) {
 		return MODULES;
 	}
 

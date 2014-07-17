@@ -61,7 +61,7 @@ public abstract class AccordionRendererBase extends AlloyRendererBase {
 	}
 
 	@Override
-	protected String[] getModules() {
+	protected String[] getModules(UIComponent uiComponent) {
 		return MODULES;
 	}
 

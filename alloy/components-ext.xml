@@ -429,6 +429,216 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="AutoComplete"
+		extendsTags="ClientComponent InputText"
+		handlerClass="com.liferay.faces.alloy.component.autocomplete.AutoCompleteHandler"
+		parentClass="com.liferay.faces.alloy.component.inputtext.InputText"
+		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase" yui="true"
+		module="autocomplete">
+		<attributes>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When true, the first item in the list will be activated so that users can press TAB or ENTER to select it. Default is <code>true</code>.]]>
+				</description>
+				<name>activateFirstItem</name>
+				<type>java.lang.Boolean</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true, if the active option of the autoComplete is not in view, the view will be scrolled to ensure that the active option is displayed to the user.]]>
+				</description>
+				<name>autoScroll</name>
+				<type>java.lang.Boolean</type>
+				<yui>true</yui>
+				<yuiName>scrollIntoView</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying whether autocomplete is turned on or off for the rendered HTML element. Valid values include <code>off</code> (default) and <code>on</code>.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>autocomplete</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When true, the autoComplete list will wrap around allowing users to use keyboard navigation to move from the top of the list to the bottom and vice versa. Defaults to <code>true</code>.]]>
+				</description>
+				<name>circular</name>
+				<type>java.lang.Boolean</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A callback which filters the client-side results. The callback must be a function which takes <code>query</code> and <code>source</code> arguments and returns an array of <code>String</code>s as a result. The <code>source</code> argument recieved by this callback is an <code>Array</code> of <code>Object</code>s which contain three properties: <code>display</code>, <code>raw</code>, and <code>text</code>. <strong>Note:</strong> This attribute will be ignored if the <code>serverCustomFilter</code> or <code>serverFilterType</code> attributes are used.]]>
+				</description>
+				<name>clientCustomFilter</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+				<yuiName>resultFilters</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the type of filter that will be used for the autoComplete results. Valid values include:
+						<ul>
+							<li>charMatch</li>
+							<li>charMatchCase</li>
+							<li>phraseMatch</li>
+							<li>phraseMatchCase</li>
+							<li>startsWith</li>
+							<li>startsWithCase</li>
+							<li>subWordMatch</li>
+							<li>subWordMatchCase</li>
+							<li>wordMatch</li>
+							<li>wordMatchCase</li>
+						</ul>
+					<strong>Note:</strong> This attribute will be ignored if the <code>serverCustomFilter</code>, <code>serverFilterType</code>, or <code>clientCustomFilter</code> attributes are used.]]>
+				</description>
+				<name>clientFilterType</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+				<!-- <yuiName>resultFilters</yuiName> -->
+				<!-- This attribute actually maps to the resultFilters attribute. However, since -->
+				<!-- clientCustomFilter also maps to resultFilters, we cannot specify resultFilters here. -->
+				<!-- Two attributes cannot map to the same yui attribute (unless their java types are different -->
+				<!-- because the generator will create the same exact method twice and cause a compile failure. -->
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The delay in milliseconds before a request for filtering occurs. After the <code>autoComplete</code> receives input, it waits the specified number of milliseconds before sending a request for filtering it's source. If input occurs before the specified number of milliseconds has elapsed, the timer is reset.]]>
+				</description>
+				<name>delay</name>
+				<type>java.lang.Integer</type>
+				<yui>true</yui>
+				<yuiName>queryDelay</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The string which delimits the part of the text that will have completion. For example, if <code>delimiter=" "</code>, then only the text after the final space will have completion. <strong>Note:<strong> if <code>listItemRequired="true"</code>, this attribute is ignored.]]>
+				</description>
+				<name>delimiter</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+				<yuiName>queryDelimiter</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The the height (in pixels) of the rendered autoComplete list.]]>
+				</description>
+				<name>height</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the type of highlighter that will be used for the autoComplete results. Valid values include:
+						<ul>
+							<li>charMatch</li>
+							<li>charMatchCase</li>
+							<li>phraseMatch</li>
+							<li>phraseMatchCase</li>
+							<li>startsWith</li>
+							<li>startsWithCase</li>
+							<li>subWordMatch</li>
+							<li>subWordMatchCase</li>
+							<li>wordMatch</li>
+							<li>wordMatchCase</li>
+						</ul>
+					]]>
+				</description>
+				<name>highlighterType</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+				<yuiName>resultHighlighter</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when an autoComplete item is selected. The method must be <code>public</code>, return <code>void</code>, and take an <code>com.liferay.faces.alloy.component.autocomplete.ItemSelectEvent</code> argument.]]>
+				</description>
+				<name>itemSelectListener</name>
+				<method-signature>
+					void itemSelectListener(com.liferay.faces.alloy.component.autocomplete.ItemSelectEvent)
+				</method-signature>
+				<type>javax.el.MethodExpression</type>
+			</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[When true, the component will perform server-side validation to ensure that the value entered is on the list of completion items. Default is <code>false</code>.]]>
+				</description>
+				<name>listItemRequired</name>
+				<type>java.lang.Boolean</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The maximum amount of autoComplete results.]]>
+				</description>
+				<name>maxItems</name>
+				<type>java.lang.Integer</type>
+				<yui>true</yui>
+				<yuiName>maxResults</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The minimum length of input required to trigger a query.]]>
+				</description>
+				<name>minChars</name>
+				<type>java.lang.Integer</type>
+				<yui>true</yui>
+				<yuiName>minQueryLength</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when a query occurs. The method must be <code>public</code>, return a <code>java.util.List&lt;java.lang.String&gt;</code>, and takes a <code>java.lang.String</code> and a <code>java.util.List&lt;java.lang.String&gt;</code> as a arguments. The <code>String</code> passed to the method is the current query. The <code>List&lt;String&gt;</code> is an immutable list of unfiltered results. The method must return a <code>List&lt;String&gt;</code> which contains the filtered results.]]>
+				</description>
+				<method-signature>
+					java.util.List filterResults(java.lang.String, java.util.List)
+				</method-signature>
+				<name>serverCustomFilter</name>
+				<type>javax.el.MethodExpression</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the type of filter that will be used for the autoComplete results. Valid values include:
+						<ul>
+							<li>charMatch</li>
+							<li>charMatchCase</li>
+							<li>phraseMatch</li>
+							<li>phraseMatchCase</li>
+							<li>startsWith</li>
+							<li>startsWithCase</li>
+							<li>subWordMatch</li>
+							<li>subWordMatchCase</li>
+							<li>wordMatch</li>
+							<li>wordMatchCase</li>
+						</ul>
+					<strong>Note:</strong> This attribute will be ignored if the <code>serverCustomFilter</code> attribute is used.]]>
+				</description>
+				<name>serverFilterType</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When <code>true</code>, pressing TAB selects the active autoComplete option. Defaults to <code>true</code>.]]>
+				</description>
+				<name>tabSelect</name>
+				<type>java.lang.Boolean</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The the width (in pixels) of the rendered autoComplete list.]]>
+				</description>
+				<name>width</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="Body" extendsTags="StyleableInherited" parentClass="javax.faces.component.html.HtmlBody"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>

@@ -86,7 +86,7 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 	}
 
 	@Override
-	protected String[] getModules() {
+	protected String[] getModules(UIComponent uiComponent) {
 		return MODULES;
 	}
 

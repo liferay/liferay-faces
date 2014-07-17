@@ -83,8 +83,8 @@ public abstract class AlloyRendererBase extends ClientComponentRendererBase impl
 
 	@Override
 	public void encodeJavaScriptBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-		AlloyRendererUtil.encodeJavaScriptBegin(facesContext, uiComponent, this, getModules(), isAjax(facesContext),
-			isForceInline(facesContext, uiComponent));
+		AlloyRendererUtil.encodeJavaScriptBegin(facesContext, uiComponent, this, getModules(uiComponent),
+			isAjax(facesContext), isForceInline(facesContext, uiComponent));
 	}
 
 	@Override

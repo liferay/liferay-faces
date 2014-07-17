@@ -132,7 +132,7 @@ public class PopoverRenderer extends PopoverRendererBase {
 	}
 
 	@Override
-	protected String[] getModules() {
+	protected String[] getModules(UIComponent uiComponent) {
 		return MODULES;
 	}
 }

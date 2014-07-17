@@ -76,7 +76,7 @@ public abstract class OutputRemainingCharsRendererBase extends DelegatingAlloyRe
 	}
 
 	@Override
-	protected String[] getModules() {
+	protected String[] getModules(UIComponent uiComponent) {
 		return MODULES;
 	}
 

@@ -65,7 +65,7 @@ public abstract class SelectStarRatingRendererBase extends DelegatingAlloyRender
 	}
 
 	@Override
-	protected String[] getModules() {
+	protected String[] getModules(UIComponent uiComponent) {
 		return MODULES;
 	}
 

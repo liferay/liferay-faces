@@ -132,5 +132,40 @@ var LFAI = {
 								}
 							});
 		}
+	},
+
+	initAutoCompleteServerMode : function(autoComplete, hiddenClientId, clientId) {
+
+		// When the autoComplete is cleared, set querying to false in order to cancel any queries that have been sent.
+		autoComplete.on('clear', function(event) {
+			autoComplete.set('source', []);
+			autoComplete.set('querying', false);
+		});
+
+		// On query set querying to true, put the query in the hidden input, and send an ajax request to re-render the
+		// component.
+		autoComplete.on('query', function(event) {
+			autoComplete.set('querying', true);
+			document.getElementById(hiddenClientId).value = event.query;
+
+			// jsf.ajax is a global javascript object in JSF.
+			jsf.ajax.request(clientId, null, { render: clientId });
+		});
+	},
+
+	setAutoCompleteServerResults : function(autoComplete, results, hiddenClientId) {
+
+		// Make sure that a 'clear' event hasn't occured since the query was sent.
+		if (autoComplete.get('querying')) {
+			autoComplete.set('source', results);
+
+			// This function causes the autoComplete to repopulate its list with the current results, and since the
+			// source is in the client, a request is not sent to the server.
+			// http://yuilibrary.com/yui/docs/api/classes/AutoCompleteList.html#method_sendRequest
+			autoComplete.sendRequest();
+		}
+
+		// Set the value of the hidden input to null so that there is no query value if the component is re-rendered.
+		document.getElementById(hiddenClientId).value = '';
 	}
-};
+}
