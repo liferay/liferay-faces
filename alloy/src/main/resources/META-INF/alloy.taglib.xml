@@ -18,6 +18,85 @@
 		<function-signature>java.lang.String findClientId(java.lang.String)</function-signature>
 	</function>
 	<tag>
+		<description><![CDATA[Accordion is a UIData (iterator) component that renders child tabs either statically or dynamically.]]></description>
+		<tag-name>accordion</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.accordion.Accordion</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.accordion.AccordionRenderer</renderer-type>
+			<handler-class>com.liferay.faces.alloy.component.accordion.AccordionHandler</handler-class>
+		</component>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
+			<name>clientKey</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, expanding an item will not collapse the others, allowing multiple items to be visible at the same time. The default value is false.]]></description>
+			<name>multiple</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Integer representing the zero-based index representing the selected tab.]]></description>
+			<name>selectedIndex</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>AccordionTabEvent</code> argument.]]></description>
+			<name>tabEventListener</name>
+			<required>false</required>
+			<type>javax.el.MethodExpression</type>
+			<method-signature>void tabEventListener(com.liferay.faces.alloy.component.accordion.AccordionTabEvent)</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property. The value can be any of the following types:<ul><li>Any concrete subclass of <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/DataModel.html" target="_blank"><code>DataModel</code></a></li><li>Array (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ArrayDataModel.html" target="_blank"><code>ArrayDataModel</code></a>)</li><li>java.util.Collection (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/CollectionDataModel.html" target="_blank"><code>CollectionDataModel</code></a>)</li><li>java.util.List (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ListDataModel.html" target="_blank"><code>ListDataModel</code></a>)</li><li>java.sql.ResultSet (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ResultSetDataModel.html" target="_blank"><code>ResultSetDataModel</code></a>)</li></ul>]]></description>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the variable that is to be introduced into the EL representing the current iteration.]]></description>
+			<name>var</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
 		<description><![CDATA[]]></description>
 		<tag-name>body</tag-name>
 		<component>
@@ -263,25 +342,25 @@
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When aui:column is a child of alloy:dataTabe, this is the JavaBean property that is to be used for filtering.]]></description>
+			<description><![CDATA[When alloy:column is a child of alloy:dataTabe, this is the JavaBean property that is to be used for filtering.]]></description>
 			<name>filterBy</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When aui:column is a child of alloy:dataTable, this is the name of the CSS class that is to be rendered within the class attribute of the table's <code>&lt;td&gt;</code> element inside the <code>&lt;tfoot&gt;</code> element.]]></description>
+			<description><![CDATA[When alloy:column is a child of alloy:dataTable, this is the name of the CSS class that is to be rendered within the class attribute of the table's <code>&lt;td&gt;</code> element inside the <code>&lt;tfoot&gt;</code> element.]]></description>
 			<name>footerClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When aui:column is a child of alloy:dataTable, this is the name of the CSS class that is to be rendered within the class attribute of the table's <code>&lt;th&gt;</code> element inside the <code>&lt;thead&gt;</code> element.]]></description>
+			<description><![CDATA[When alloy:column is a child of alloy:dataTable, this is the name of the CSS class that is to be rendered within the class attribute of the table's <code>&lt;th&gt;</code> element inside the <code>&lt;thead&gt;</code> element.]]></description>
 			<name>headerClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When aui:column is a child of alloy:dataTable, this is the text for the column header. This attribute can be used as a convenience instead of specifying a child <code>&lt;f:facet name="header" /&gt;</code> tag.]]></description>
+			<description><![CDATA[When alloy:column is a child of alloy:dataTable, this is the text for the column header. This attribute can be used as a convenience instead of specifying a child <code>&lt;f:facet name="header" /&gt;</code> tag.]]></description>
 			<name>headerText</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -293,13 +372,13 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When aui:column is a child of alloy:row, this is the width that the column will be offset by as a unit from 1 to 12. This value is rendered as a CSS class as <code>offset#</code> (for example if offset="4", the CSS class rendered will be <code>offset4</code>). If both the offsetWidth and offset attributes are present, the offsetWidth attribute determines the value of the offset. Please consider using offsetWidth.]]></description>
+			<description><![CDATA[When alloy:column is a child of alloy:row, this is the width that the column will be offset by as a unit from 1 to 12. This value is rendered as a CSS class as <code>offset#</code> (for example if offset="4", the CSS class rendered will be <code>offset4</code>). If both the offsetWidth and offset attributes are present, the offsetWidth attribute determines the value of the offset. Please consider using offsetWidth.]]></description>
 			<name>offset</name>
 			<required>false</required>
 			<type>java.lang.Integer</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When aui:column is a child of alloy:row, this is the width that the column will be offset by as a percent. This value selects the offset via the formula <code>offset = (offsetWidth/100)*12 (rounded to the nearest whole number)</code>. If both the offsetWidth and offset attributes are present, the offsetWidth attribute determines the value of the offset.]]></description>
+			<description><![CDATA[When alloy:column is a child of alloy:row, this is the width that the column will be offset by as a percent. This value selects the offset via the formula <code>offset = (offsetWidth/100)*12 (rounded to the nearest whole number)</code>. If both the offsetWidth and offset attributes are present, the offsetWidth attribute determines the value of the offset.]]></description>
 			<name>offsetWidth</name>
 			<required>false</required>
 			<type>java.lang.Integer</type>
@@ -311,19 +390,19 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When aui:column is a child of alloy:row and this flag is true, then the column is to be rendered as a <code>&lt;th&gt;</code> element with <code>scope=row</code>.]]></description>
+			<description><![CDATA[When alloy:column is a child of alloy:row and this flag is true, then the column is to be rendered as a <code>&lt;th&gt;</code> element with <code>scope=row</code>.]]></description>
 			<name>rowHeader</name>
 			<required>false</required>
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When aui:column is a child of alloy:dataTabe, this is the JavaBean property that is to be used for sorting.]]></description>
+			<description><![CDATA[When alloy:column is a child of alloy:dataTabe, this is the JavaBean property that is to be used for sorting.]]></description>
 			<name>sortBy</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When aui:column is a child of alloy:row, this is the width of this column as a unit from 1 to 12. This value is rendered as a CSS class as <code>span#</code> (for example if span="4", the CSS class rendered will be <code>span4</code>). If both the width and span attributes are present, the width attribute determines the value of the span number. Please consider using width.]]></description>
+			<description><![CDATA[When alloy:column is a child of alloy:row, this is the width of this column as a unit from 1 to 12. This value is rendered as a CSS class as <code>span#</code> (for example if span="4", the CSS class rendered will be <code>span4</code>). If both the width and span attributes are present, the width attribute determines the value of the span number. Please consider using width.]]></description>
 			<name>span</name>
 			<required>false</required>
 			<type>java.lang.Integer</type>
@@ -341,7 +420,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When aui:column is a child of alloy:row, this is the width of the column as a percent. This value selects the span number via the formula <code>span = (width/100)*12 (rounded to the nearest whole number)</code>. If both the width and span attributes are present, the width attribute determines the value of the span number.]]></description>
+			<description><![CDATA[When alloy:column is a child of alloy:row, this is the width of the column as a percent. This value selects the span number via the formula <code>span = (width/100)*12 (rounded to the nearest whole number)</code>. If both the width and span attributes are present, the width attribute determines the value of the span number.]]></description>
 			<name>width</name>
 			<required>false</required>
 			<type>java.lang.Integer</type>
@@ -1032,13 +1111,13 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property. The value can be any of the following types:<ul><li>Any concrete subclass of <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/DataModel.html" target="_blank"><code>DataModel</code></a></li><li>Array (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ArrayDataModel.html" target="_blank"><code>ArrayDataModel</code></a>)</li><li>java.util.Collection (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/CollectionDataModel.html" target="_blank"><code>CollectionDataModel</code></a>)</li><li>java.util.List (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ListDataModel.html" target="_blank"><code>ListDataModel</code></a>)</li><li>java.sql.ResultSet (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ResultSetDataModel.html" target="_blank"><code>ResultSetDataModel</code></a>)</li></ul>]]></description>
 			<name>value</name>
 			<required>false</required>
-			<type>java.lang.String</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The name of the variable that is to be intorduced into the el representing the current iteration.]]></description>
+			<description><![CDATA[The name of the variable that is to be introduced into the EL representing the current iteration.]]></description>
 			<name>var</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -3216,7 +3295,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The value of this component.]]></description>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
 			<name>value</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
@@ -7309,6 +7388,18 @@
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[When alloy:tab is a child of alloy:accordion, this is the name of the CSS class that is to be rendered within the class attribute of the content &lt;div&gt;]]></description>
+			<name>contentClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When alloy:tab is a child of alloy:accordion, this is the name of the CSS class that is to be rendered within the class attribute of the header &lt;div&gt;]]></description>
+			<name>headerClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[A unique identifier for this component.]]></description>
 			<name>id</name>
 			<required>false</required>
@@ -7398,13 +7489,13 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property. The value can be any of the following types:<ul><li>Any concrete subclass of <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/DataModel.html" target="_blank"><code>DataModel</code></a></li><li>Array (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ArrayDataModel.html" target="_blank"><code>ArrayDataModel</code></a>)</li><li>java.util.Collection (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/CollectionDataModel.html" target="_blank"><code>CollectionDataModel</code></a>)</li><li>java.util.List (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ListDataModel.html" target="_blank"><code>ListDataModel</code></a>)</li><li>java.sql.ResultSet (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ResultSetDataModel.html" target="_blank"><code>ResultSetDataModel</code></a>)</li></ul>]]></description>
 			<name>value</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The name of the variable that is to be intorduced into the el representing the current iteration.]]></description>
+			<description><![CDATA[The name of the variable that is to be introduced into the EL representing the current iteration.]]></description>
 			<name>var</name>
 			<required>false</required>
 			<type>java.lang.String</type>

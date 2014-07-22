@@ -26,6 +26,7 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
+import javax.faces.application.ProjectStage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
@@ -65,11 +66,28 @@ public class ListModelBean {
 		};
 
 	// Private Data Members
+	private List<String> showcaseCategoryList;
 	private List<ShowcaseComponent> showcaseComponents;
+	private Map<String, List<ShowcaseComponent>> showcaseCategoryMap;
 	private Map<String, ShowcaseComponent> showcaseComponentMap;
 
 	public ListModelBean() {
+		FacesContext startupFacesContext = FacesContext.getCurrentInstance();
+		boolean developmentMode = startupFacesContext.isProjectStage(ProjectStage.Development);
+		showcaseCategoryList = new ArrayList<String>();
+		showcaseCategoryList.add("buttonlink");
+		showcaseCategoryList.add("data");
+		showcaseCategoryList.add("input");
+		showcaseCategoryList.add("multimedia");
+		showcaseCategoryList.add("output");
+		showcaseCategoryList.add("panel");
+		if (developmentMode) {
+			showcaseCategoryList.add("pick");
+		}
+		showcaseCategoryList.add("select");
+
 		this.showcaseComponents = new ArrayList<ShowcaseComponent>();
+		this.showcaseCategoryMap = new HashMap<String, List<ShowcaseComponent>>();
 		this.showcaseComponentMap = new HashMap<String, ShowcaseComponent>();
 
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -98,7 +116,6 @@ public class ListModelBean {
 			if (resource != null) {
 
 				try {
-					FacesContext startupFacesContext = FacesContext.getCurrentInstance();
 					ExternalContext startupExternalContext = startupFacesContext.getExternalContext();
 
 					InputStream inputStream = resource.openStream();
@@ -111,8 +128,10 @@ public class ListModelBean {
 						String key = (String) mapEntry.getKey();
 
 						String[] keyParts = key.split(StringPool.UNDERLINE);
-						String prefix = keyParts[0];
-						String camelCaseName = keyParts[1];
+						String category = keyParts[0];
+
+						String prefix = keyParts[1];
+						String camelCaseName = keyParts[2];
 						String lowerCaseName = camelCaseName.toLowerCase();
 
 						String value = (String) mapEntry.getValue();
@@ -176,8 +195,9 @@ public class ListModelBean {
 							useCases.add(useCase);
 						}
 
-						ShowcaseComponent showcaseComponent = new ShowcaseComponentImpl(prefix, camelCaseName,
-								lowerCaseName, useCases);
+						int categoryIndex = showcaseCategoryList.indexOf(category);
+						ShowcaseComponent showcaseComponent = new ShowcaseComponentImpl(categoryIndex, prefix,
+								camelCaseName, lowerCaseName, useCases);
 						String lookupKey = prefix + StringPool.UNDERLINE + lowerCaseName;
 						this.showcaseComponentMap.put(lookupKey, showcaseComponent);
 						this.showcaseComponents.add(showcaseComponent);
@@ -194,6 +214,20 @@ public class ListModelBean {
 			}
 
 			Collections.sort(this.showcaseComponents, new ShowcaseComponentComparator());
+
+			for (int i = 0; i < showcaseCategoryList.size(); i++) {
+
+				List<ShowcaseComponent> categoryShowcaseComponents = new ArrayList<ShowcaseComponent>();
+
+				for (ShowcaseComponent showcaseComponent : this.showcaseComponents) {
+
+					if (i == showcaseComponent.getCategoryIndex()) {
+						categoryShowcaseComponents.add(showcaseComponent);
+					}
+				}
+
+				this.showcaseCategoryMap.put(showcaseCategoryList.get(i), categoryShowcaseComponents);
+			}
 		}
 	}
 
@@ -203,7 +237,11 @@ public class ListModelBean {
 		return showcaseComponentMap.get(key);
 	}
 
-	public List<ShowcaseComponent> getShowcaseComponents() {
-		return showcaseComponents;
+	public List<String> getShowcaseCategories() {
+		return showcaseCategoryList;
+	}
+
+	public Map<String, List<ShowcaseComponent>> getShowcaseCategoryMap() {
+		return showcaseCategoryMap;
 	}
 }

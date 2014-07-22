@@ -17,6 +17,7 @@ import java.io.IOException;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
 
@@ -27,6 +28,11 @@ import javax.faces.render.Renderer;
  * @author  Neil Griffin
  */
 public interface ClientComponentRenderer {
+
+	public void decodeClientState(FacesContext facesContext, UIComponent uiComponent);
+
+	public void encodeClientState(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
+		throws IOException;
 
 	public void encodeJavaScriptBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException;
 

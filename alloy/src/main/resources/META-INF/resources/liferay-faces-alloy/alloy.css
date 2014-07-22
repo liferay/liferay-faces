@@ -1,3 +1,11 @@
+.alloy-accordion .toggler-content{
+padding:0px 4px;
+}
+.alloy-accordion .toggler-header{
+cursor:pointer;
+font-weight:bold;
+padding:4px;
+}
 .alloy-messages {
 border:1px solid #ddd;
 -webkit-border-radius:4px;

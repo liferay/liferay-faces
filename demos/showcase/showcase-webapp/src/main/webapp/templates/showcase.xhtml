@@ -6,43 +6,51 @@
 	<c:set value="#{showcaseModelBean.selectedComponent}" var="selectedComponent" />
 	<c:set value="#{selectedComponent.key}" var="selectedComponentKey" />
 	<c:set value="#{selectedComponent.useCaseName}" var="selectedComponentUseCaseName" />
-	<c:set value="#{selectedComponent.useCases.size()}" var="totalUseCases" />
-	<alloy:row>
-		<alloy:column width="20">
-			<alloy:panelGroup layout="block" styleClass="showcase-container">
-				<aui:list styleClass="nav nav-list">
-					<ui:repeat value="#{listModelBean.showcaseComponents}" var="showcaseComponent">
-						<aui:list-item class="#{(selectedComponentKey == showcaseComponent.key) ? 'active' : ''}">
-							<alloy:link value="#{showcaseComponent}">
-								<f:param name="componentPrefix" value="#{showcaseComponent.prefix}" />
-								<f:param name="componentName" value="#{showcaseComponent.lowerCaseName}" />
-								<f:param name="componentUseCase" value="general" />
-								<i class="icon-chevron-right" />
-							</alloy:link>
-							<ui:fragment rendered="#{selectedComponentKey == showcaseComponent.key and (totalUseCases > 1)}">
-								<aui:list class="nav nav-list">
-									<ui:repeat value="#{selectedComponent.useCases}" var="useCase">
-										<aui:list-item class="#{(selectedComponentUseCaseName == useCase.name) ? 'active' : ''}"
-											style="white-space: nowrap;">
-											<alloy:link value="#{i18n[useCase.name]}">
-												<f:param name="componentPrefix" value="#{selectedComponent.prefix}" />
-												<f:param name="componentName" value="#{selectedComponent.lowerCaseName}" />
-												<f:param name="componentUseCase" value="#{useCase.name}" />
-												<i class="icon-chevron-right" />
-											</alloy:link>
-										</aui:list-item>
-									</ui:repeat>
-								</aui:list>
-							</ui:fragment>
-						</aui:list-item>
-					</ui:repeat>
-				</aui:list>
-			</alloy:panelGroup>
-		</alloy:column>
-		<alloy:column width="80">
-			<alloy:panelGroup layout="block" styleClass="showcase-container">
-				<ui:insert name="content" />
-			</alloy:panelGroup>
-		</alloy:column>
-	</alloy:row>
+	<h:outputStylesheet name="showcase.css" library="css" />
+	<alloy:panelGrid columns="2" columnClasses="showcase-nav-column,showcase-content-column" styleClass="showcase-grid">
+		<alloy:panelGroup>
+			<alloy:image library="images" name="liferay-faces-logo-nav.png" styleClass="logo" />
+			<alloy:accordion selectedIndex="#{selectedComponent.categoryIndex}" value="#{listModelBean.showcaseCategories}"
+				var="showcaseCategory">
+				<alloy:tab>
+					<f:facet name="header">
+						<alloy:image library="images" name="icon-#{showcaseCategory}.png" />
+						<h3>
+							<alloy:outputText styleClass="category-name" value="#{i18n[showcaseCategory]}" />
+						</h3>
+					</f:facet>
+					<aui:list styleClass="nav nav-list">
+						<ui:repeat value="#{listModelBean.showcaseCategoryMap[showcaseCategory]}" var="showcaseComponent">
+							<aui:list-item class="#{(selectedComponentKey == showcaseComponent.key) ? 'active' : ''}">
+								<alloy:link outcome="component" value="#{showcaseComponent}">
+									<f:param name="componentPrefix" value="#{showcaseComponent.prefix}" />
+									<f:param name="componentName" value="#{showcaseComponent.lowerCaseName}" />
+									<f:param name="componentUseCase" value="general" />
+									<alloy:icon name="chevron-right" />
+								</alloy:link>
+								<ui:fragment rendered="#{selectedComponentKey == showcaseComponent.key}">
+									<aui:list class="nav nav-list">
+										<ui:repeat value="#{selectedComponent.useCases}" var="useCase">
+											<aui:list-item class="#{(selectedComponentUseCaseName == useCase.name) ? 'active' : ''}"
+												style="white-space: nowrap;">
+												<alloy:link value="#{i18n[useCase.name]}">
+													<f:param name="componentPrefix" value="#{selectedComponent.prefix}" />
+													<f:param name="componentName" value="#{selectedComponent.lowerCaseName}" />
+													<f:param name="componentUseCase" value="#{useCase.name}" />
+													<alloy:icon name="chevron-right" />
+												</alloy:link>
+											</aui:list-item>
+										</ui:repeat>
+									</aui:list>
+								</ui:fragment>
+							</aui:list-item>
+						</ui:repeat>
+					</aui:list>
+				</alloy:tab>
+			</alloy:accordion>
+		</alloy:panelGroup>
+		<alloy:panelGroup layout="block" styleClass="showcase-container">
+			<ui:insert name="content" />
+		</alloy:panelGroup>
+	</alloy:panelGrid>
 </ui:composition>

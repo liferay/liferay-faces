@@ -28,6 +28,7 @@ import com.liferay.faces.util.context.ExtFacesContext;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.portal.WebKeys;
+
 import com.liferay.portal.model.Portlet;
 
 
@@ -59,6 +60,18 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 	public abstract void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException;
 
 	@Override
+	public void decode(FacesContext facesContext, UIComponent uiComponent) {
+
+		decodeClientState(facesContext, uiComponent);
+		super.decode(facesContext, uiComponent);
+	}
+
+	@Override
+	public void decodeClientState(FacesContext facesContext, UIComponent uiComponent) {
+		// no-op
+	}
+
+	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		super.encodeBegin(facesContext, uiComponent);
@@ -67,13 +80,21 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 	}
 
 	@Override
+	public void encodeClientState(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
+		throws IOException {
+		// no-op
+	}
+
+	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		super.encodeEnd(facesContext, uiComponent);
 
-		encodeMarkupEnd(facesContext, uiComponent);
-
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
+
+		encodeClientState(facesContext, responseWriter, uiComponent);
+
+		encodeMarkupEnd(facesContext, uiComponent);
 
 		if (!isAjax(facesContext) && isForceInline(facesContext, uiComponent)) {
 

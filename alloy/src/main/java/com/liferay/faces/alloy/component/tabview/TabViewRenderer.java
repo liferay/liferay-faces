@@ -25,6 +25,7 @@ import javax.faces.render.FacesRenderer;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.alloy.component.tab.Tab;
+import com.liferay.faces.alloy.component.tab.TabUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -73,7 +74,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 			value = tabView.getValue();
 			var = tabView.getVar();
 			iterateOverDataModel = ((value != null) && (var != null));
-			prototypeChildTab = getPrototypeChildTab(tabView);
+			prototypeChildTab = TabUtil.getFirstChildTab(tabView);
 		}
 
 		// Encode the starting <ul> unordered list element that represents the list of clickable tabs.
@@ -189,23 +190,6 @@ public class TabViewRenderer extends TabViewRendererBase {
 		responseWriter.write(label);
 		responseWriter.endElement(StringPool.ASCII_TABLE[97]);
 		responseWriter.endElement(StringPool.LI);
-	}
-
-	protected Tab getPrototypeChildTab(TabView tabView) {
-
-		Tab prototypeChildType = null;
-		List<UIComponent> children = tabView.getChildren();
-
-		for (UIComponent child : children) {
-
-			if (child instanceof Tab) {
-				prototypeChildType = (Tab) child;
-
-				break;
-			}
-		}
-
-		return prototypeChildType;
 	}
 
 	@Override

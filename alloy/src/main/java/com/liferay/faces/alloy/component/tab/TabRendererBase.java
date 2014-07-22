@@ -27,6 +27,8 @@ import javax.faces.render.Renderer;
 public abstract class TabRendererBase extends Renderer {
 
 	// Protected Constants
+	protected static final String CONTENT_CLASS = "contentClass";
+	protected static final String HEADER_CLASS = "headerClass";
 	protected static final String LABEL = "label";
 	protected static final String STYLE = "style";
 	protected static final String STYLE_CLASS = "styleClass";

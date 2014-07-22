@@ -142,7 +142,7 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[The value of this component.]]>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
 				</description>
 				<generateJava>false</generateJava>
 				<inherited>true</inherited>
@@ -188,6 +188,28 @@
 				</description>
 				<name>value</name>
 				<type>java.lang.Object</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="UIData" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property. The value can be any of the following types:<ul><li>Any concrete subclass of <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/DataModel.html" target="_blank"><code>DataModel</code></a></li><li>Array (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ArrayDataModel.html" target="_blank"><code>ArrayDataModel</code></a>)</li><li>java.util.Collection (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/CollectionDataModel.html" target="_blank"><code>CollectionDataModel</code></a>)</li><li>java.util.List (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ListDataModel.html" target="_blank"><code>ListDataModel</code></a>)</li><li>java.sql.ResultSet (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ResultSetDataModel.html" target="_blank"><code>ResultSetDataModel</code></a>)</li></ul>]]>
+				</description>
+				<inherited>true</inherited>
+				<name>value</name>
+				<type>java.lang.Object</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The name of the variable that is to be introduced into the EL representing the current iteration.]]>
+				</description>
+				<inherited>true</inherited>
+				<name>var</name>
+				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
 			</attribute>
 		</attributes>
@@ -1027,6 +1049,44 @@
 	</component>
 	<!-- /Common -->
 	<!-- generateTaglibXML="false" tags for common attributes -->
+	<component name="Accordion" extendsTags="ClientComponent UIData Styleable UIComponentBase"
+		handlerClass="com.liferay.faces.alloy.component.accordion.AccordionHandler"	module="aui-toggler"
+		parentClass="javax.faces.component.UIData" yui="true" yuiName="TogglerDelegate" >
+		<description>
+			<![CDATA[Accordion is a UIData (iterator) component that renders child tabs either statically or dynamically.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>AccordionTabEvent</code> argument.]]>
+				</description>
+				<name>tabEventListener</name>
+				<method-signature>
+					void tabEventListener(com.liferay.faces.alloy.component.accordion.AccordionTabEvent)
+				</method-signature>
+				<tagHandlerClass>com.liferay.faces.alloy.component.accordion.AccordionHandler</tagHandlerClass>
+				<type>javax.el.MethodExpression</type>
+			</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[When true, expanding an item will not collapse the others, allowing multiple items to be visible at the same time. The default value is false.]]>
+				</description>
+				<name>multiple</name>
+				<type>boolean</type>
+				<yui>false</yui>
+				<yuiName>closeAllOnExpand</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Integer representing the zero-based index representing the selected tab.]]>
+				</description>
+				<name>selectedIndex</name>
+				<type>java.lang.Integer</type>
+				<yui>false</yui>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="Body" extendsTags="StyleableInherited" parentClass="javax.faces.component.html.HtmlBody"
 	rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase"/>
 	<component name="Button" extendsTags="ButtonCommon UIOutcomeTarget"
@@ -1052,14 +1112,14 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[When aui:column is a child of alloy:dataTabe, this is the JavaBean property that is to be used for filtering.]]>
+					<![CDATA[When alloy:column is a child of alloy:dataTabe, this is the JavaBean property that is to be used for filtering.]]>
 				</description>
 				<name>filterBy</name>
 				<type>java.lang.Object</type>
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[When aui:column is a child of alloy:dataTable, this is the name of the CSS class that is to be rendered within the class attribute of the table's <code>&lt;td&gt;</code> element inside the <code>&lt;tfoot&gt;</code> element.]]>
+					<![CDATA[When alloy:column is a child of alloy:dataTable, this is the name of the CSS class that is to be rendered within the class attribute of the table's <code>&lt;td&gt;</code> element inside the <code>&lt;tfoot&gt;</code> element.]]>
 				</description>
 				<name>footerClass</name>
 				<type>java.lang.String</type>
@@ -1067,7 +1127,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[When aui:column is a child of alloy:dataTable, this is the name of the CSS class that is to be rendered within the class attribute of the table's <code>&lt;th&gt;</code> element inside the <code>&lt;thead&gt;</code> element.]]>
+					<![CDATA[When alloy:column is a child of alloy:dataTable, this is the name of the CSS class that is to be rendered within the class attribute of the table's <code>&lt;th&gt;</code> element inside the <code>&lt;thead&gt;</code> element.]]>
 				</description>
 				<name>headerClass</name>
 				<type>java.lang.String</type>
@@ -1075,28 +1135,28 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[When aui:column is a child of alloy:dataTable, this is the text for the column header. This attribute can be used as a convenience instead of specifying a child <code>&lt;f:facet name="header" /&gt;</code> tag.]]>
+					<![CDATA[When alloy:column is a child of alloy:dataTable, this is the text for the column header. This attribute can be used as a convenience instead of specifying a child <code>&lt;f:facet name="header" /&gt;</code> tag.]]>
 				</description>
 				<name>headerText</name>
 				<type>java.lang.String</type>
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[When aui:column is a child of alloy:row, this is the width that the column will be offset by as a unit from 1 to 12. This value is rendered as a CSS class as <code>offset#</code> (for example if offset="4", the CSS class rendered will be <code>offset4</code>). If both the offsetWidth and offset attributes are present, the offsetWidth attribute determines the value of the offset. Please consider using offsetWidth.]]>
+					<![CDATA[When alloy:column is a child of alloy:row, this is the width that the column will be offset by as a unit from 1 to 12. This value is rendered as a CSS class as <code>offset#</code> (for example if offset="4", the CSS class rendered will be <code>offset4</code>). If both the offsetWidth and offset attributes are present, the offsetWidth attribute determines the value of the offset. Please consider using offsetWidth.]]>
 				</description>
 				<name>offset</name>
 				<type>java.lang.Integer</type>
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[When aui:column is a child of alloy:row, this is the width that the column will be offset by as a percent. This value selects the offset via the formula <code>offset = (offsetWidth/100)*12 (rounded to the nearest whole number)</code>. If both the offsetWidth and offset attributes are present, the offsetWidth attribute determines the value of the offset.]]>
+					<![CDATA[When alloy:column is a child of alloy:row, this is the width that the column will be offset by as a percent. This value selects the offset via the formula <code>offset = (offsetWidth/100)*12 (rounded to the nearest whole number)</code>. If both the offsetWidth and offset attributes are present, the offsetWidth attribute determines the value of the offset.]]>
 				</description>
 				<name>offsetWidth</name>
 				<type>java.lang.Integer</type>
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[When aui:column is a child of alloy:row and this flag is true, then the column is to be rendered as a <code>&lt;th&gt;</code> element with <code>scope=row</code>.]]>
+					<![CDATA[When alloy:column is a child of alloy:row and this flag is true, then the column is to be rendered as a <code>&lt;th&gt;</code> element with <code>scope=row</code>.]]>
 				</description>
 				<name>rowHeader</name>
 				<type>boolean</type>
@@ -1104,21 +1164,21 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[When aui:column is a child of alloy:dataTabe, this is the JavaBean property that is to be used for sorting.]]>
+					<![CDATA[When alloy:column is a child of alloy:dataTabe, this is the JavaBean property that is to be used for sorting.]]>
 				</description>
 				<name>sortBy</name>
 				<type>java.lang.Object</type>
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[When aui:column is a child of alloy:row, this is the width of this column as a unit from 1 to 12. This value is rendered as a CSS class as <code>span#</code> (for example if span="4", the CSS class rendered will be <code>span4</code>). If both the width and span attributes are present, the width attribute determines the value of the span number. Please consider using width.]]>
+					<![CDATA[When alloy:column is a child of alloy:row, this is the width of this column as a unit from 1 to 12. This value is rendered as a CSS class as <code>span#</code> (for example if span="4", the CSS class rendered will be <code>span4</code>). If both the width and span attributes are present, the width attribute determines the value of the span number. Please consider using width.]]>
 				</description>
 				<name>span</name>
 				<type>java.lang.Integer</type>
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[When aui:column is a child of alloy:row, this is the width of the column as a percent. This value selects the span number via the formula <code>span = (width/100)*12 (rounded to the nearest whole number)</code>. If both the width and span attributes are present, the width attribute determines the value of the span number.]]>
+					<![CDATA[When alloy:column is a child of alloy:row, this is the width of the column as a percent. This value selects the span number via the formula <code>span = (width/100)*12 (rounded to the nearest whole number)</code>. If both the width and span attributes are present, the width attribute determines the value of the span number.]]>
 				</description>
 				<name>width</name>
 				<type>java.lang.Integer</type>
@@ -1182,7 +1242,7 @@
 			<![CDATA[CommandLink is a UICommand component that renders an HTML <a> element. Since it extends HtmlCommandLink, it supports all the features of h:commandLink. The component must be a child of h:form in order to trigger the action or actionListener.]]>
 		</description>
 	</component>
-	<component name="DataTable" extendsTags="ClientComponent HTMLCommonEvents HTMLPassthrough HTMLTable"
+	<component name="DataTable" extendsTags="ClientComponent UIData HTMLCommonEvents HTMLPassthrough HTMLTable"
 		module="aui-datatable" parentClass="javax.faces.component.html.HtmlDataTable"
 		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase" yui="true">
 		<description>
@@ -1203,22 +1263,6 @@
 				</description>
 				<name>rows</name>
 				<type>int</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
-				</description>
-				<name>value</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The name of the variable that is to be intorduced into the el representing the current iteration.]]>
-				</description>
-				<name>var</name>
-				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
 			</attribute>
 		</attributes>
@@ -2136,6 +2180,20 @@
 		<attributes>
 			<attribute>
 				<description>
+					<![CDATA[When alloy:tab is a child of alloy:accordion, this is the name of the CSS class that is to be rendered within the class attribute of the content &lt;div&gt;]]>
+				</description>
+				<name>contentClass</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[When alloy:tab is a child of alloy:accordion, this is the name of the CSS class that is to be rendered within the class attribute of the header &lt;div&gt;]]>
+				</description>
+				<name>headerClass</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
 					<![CDATA[The visible label for the tab.]]>
 				</description>
 				<name>label</name>
@@ -2143,7 +2201,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="TabView" extendsTags="ClientComponent Styleable UIComponentBase" module="aui-tabview"
+	<component name="TabView" extendsTags="ClientComponent UIData Styleable UIComponentBase" module="aui-tabview"
 		parentClass="javax.faces.component.UIData" yui="true">
 		<description>
 			<![CDATA[TabView is an iterator component that renders tabs either statically or dynamically.]]>
@@ -2164,22 +2222,6 @@
 				<name>stacked</name>
 				<type>java.lang.Boolean</type>
 				<yui>true</yui>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]>
-				</description>
-				<name>value</name>
-				<type>java.lang.Object</type>
-				<generateJava>false</generateJava>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The name of the variable that is to be intorduced into the el representing the current iteration.]]>
-				</description>
-				<name>var</name>
-				<type>java.lang.String</type>
-				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
 				<description>

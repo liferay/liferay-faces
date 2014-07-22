@@ -29,6 +29,11 @@ public abstract class ShowcaseComponentWrapper implements ShowcaseComponent, Fac
 	}
 
 	@Override
+	public int getCategoryIndex() {
+		return getWrapped().getCategoryIndex();
+	}
+
+	@Override
 	public String getFullName() {
 		return getWrapped().getFullName();
 	}
