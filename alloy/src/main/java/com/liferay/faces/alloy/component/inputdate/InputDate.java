@@ -25,7 +25,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.DateTimeConverter;
 
-import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
 import com.liferay.faces.alloy.component.pickdate.PickDateUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.context.MessageContext;
@@ -44,6 +43,7 @@ public class InputDate extends InputDateBase {
 
 	// Private Constants
 	private static final String CALENDAR = "calendar";
+	private static final String GREENWICH = "Greenwich";
 
 	public InputDate() {
 		super();
@@ -62,10 +62,12 @@ public class InputDate extends InputDateBase {
 				// Get all necessary dates.
 				String datePattern = getDatePattern();
 				Object minimumDate = getMinimumDate();
-				Date minDate = PickDateUtil.getObjectAsDate(minimumDate, datePattern);
+				Object timeZoneObject = getTimeZone();
+				TimeZone timeZone = PickDateUtil.getObjectAsTimeZone(timeZoneObject);
+				Date minDate = PickDateUtil.getObjectAsDate(minimumDate, datePattern, timeZone);
 				Object maximumDate = getMaximumDate();
-				Date maxDate = PickDateUtil.getObjectAsDate(maximumDate, datePattern);
-				Date submittedDate = PickDateUtil.getObjectAsDate(newValue, datePattern);
+				Date maxDate = PickDateUtil.getObjectAsDate(maximumDate, datePattern, timeZone);
+				Date submittedDate = PickDateUtil.getObjectAsDate(newValue, datePattern, timeZone);
 
 				if ((minDate == null) && (maxDate == null)) {
 					setValid(true);
@@ -82,7 +84,6 @@ public class InputDate extends InputDateBase {
 					// Set the times to midnight for comparison purposes.
 					minDate = PickDateUtil.getDateAtMidnight(minDate);
 					maxDate = PickDateUtil.getDateAtMidnight(maxDate);
-					submittedDate = PickDateUtil.getDateAtMidnight(submittedDate);
 
 					// To determine if the submitted value is valid, check if it falls between the minimum date and
 					// the maximum date.
@@ -149,7 +150,7 @@ public class InputDate extends InputDateBase {
 			dateTimeConverter.setLocale(locale);
 
 			Object objectTimeZone = getTimeZone();
-			TimeZone timeZone = InputDateTimeUtil.getObjectAsTimeZone(objectTimeZone);
+			TimeZone timeZone = PickDateUtil.getObjectAsTimeZone(objectTimeZone);
 			dateTimeConverter.setTimeZone(timeZone);
 			converter = dateTimeConverter;
 		}
@@ -189,5 +190,16 @@ public class InputDate extends InputDateBase {
 		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
+	}
+
+	@Override
+	public Object getTimeZone() {
+		Object timeZone = super.getTimeZone();
+
+		if (timeZone == null) {
+			timeZone = TimeZone.getTimeZone(GREENWICH);
+		}
+
+		return timeZone;
 	}
 }

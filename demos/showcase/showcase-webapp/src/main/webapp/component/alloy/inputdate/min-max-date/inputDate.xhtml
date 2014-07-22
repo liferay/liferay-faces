@@ -7,16 +7,17 @@
 		<h:form>
 			<showcase:example>
 				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" maximumDate="#{inputDateModelBean.maxDate}"
-					minimumDate="#{inputDateModelBean.minDate}" showOn="button" value="#{inputDateModelBean.birthday}" />
+					minimumDate="#{inputDateModelBean.minDate}" showOn="button" value="#{inputDateModelBean.birthday}"
+					timeZone="America/New_York" />
 				<alloy:message for="birthday" />
 				<br />
 				<alloy:outputText value="#{i18n['valid-date-range']}: " />
 				<alloy:outputText value="#{inputDateModelBean.minDate}">
-					<f:convertDateTime pattern="MM/dd/yyyy" />
+					<f:convertDateTime pattern="MM/dd/yyyy" timeZone="America/New_York" />
 				</alloy:outputText>
 				<alloy:outputText value=" - " />
 				<alloy:outputText value="#{inputDateModelBean.maxDate}">
-					<f:convertDateTime pattern="MM/dd/yyyy" />
+					<f:convertDateTime pattern="MM/dd/yyyy" timeZone="America/New_York" />
 				</alloy:outputText>
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
@@ -25,7 +26,7 @@
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{inputDateModelBean.birthday}">
-					<f:convertDateTime pattern="MM/dd/yyyy" />
+					<f:convertDateTime pattern="MM/dd/yyyy" timeZone="America/New_York" />
 				</alloy:outputText>
 			</showcase:outputModel>
 		</h:form>

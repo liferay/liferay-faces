@@ -16,6 +16,7 @@ package com.liferay.faces.alloy.component.pickdate;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
@@ -101,8 +102,10 @@ public class PickDateRenderer extends PickDateRendererBase {
 
 		if (maximumDate != null) {
 
-			Date maxDate = PickDateUtil.getObjectAsDate(maximumDate, componentDatePattern);
-			String maxDateString = PickDateUtil.toJavascriptDateString(maxDate);
+			Object timeZoneObject = pickDate.getTimeZone();
+			TimeZone timeZone = PickDateUtil.getObjectAsTimeZone(timeZoneObject);
+			Date maxDate = PickDateUtil.getObjectAsDate(maximumDate, componentDatePattern, timeZone);
+			String maxDateString = PickDateUtil.toJavascriptDateString(maxDate, timeZone);
 			encodeNonEscapedObject(responseWriter, MAXIMUM_DATE, maxDateString, calendarFirst);
 			calendarFirst = false;
 		}
@@ -111,8 +114,10 @@ public class PickDateRenderer extends PickDateRendererBase {
 
 		if (minimumDate != null) {
 
-			Date minDate = PickDateUtil.getObjectAsDate(minimumDate, componentDatePattern);
-			String minDateString = PickDateUtil.toJavascriptDateString(minDate);
+			Object timeZoneObject = pickDate.getTimeZone();
+			TimeZone timeZone = PickDateUtil.getObjectAsTimeZone(timeZoneObject);
+			Date minDate = PickDateUtil.getObjectAsDate(minimumDate, componentDatePattern, timeZone);
+			String minDateString = PickDateUtil.toJavascriptDateString(minDate, timeZone);
 			encodeNonEscapedObject(responseWriter, MINIMUM_DATE, minDateString, calendarFirst);
 			calendarFirst = false;
 		}
