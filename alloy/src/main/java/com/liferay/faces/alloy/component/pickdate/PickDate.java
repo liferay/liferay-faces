@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.alloy.component.pickdate;
 
+import java.util.TimeZone;
+
 import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 
@@ -33,6 +35,7 @@ public class PickDate extends PickDateBase {
 
 	// Private Constants
 	private static final String ON_DATE_CLICK = "onDateClick";
+	private static final String GREENWICH = "Greenwich";
 
 	public PickDate() {
 		super();
@@ -84,5 +87,16 @@ public class PickDate extends PickDateBase {
 		String styleClass = (String) getStateHelper().eval(PickDatePropertyKeys.styleClass, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
+	}
+
+	@Override
+	public Object getTimeZone() {
+		Object timeZone = super.getTimeZone();
+
+		if (timeZone == null) {
+			timeZone = TimeZone.getTimeZone(GREENWICH);
+		}
+
+		return timeZone;
 	}
 }

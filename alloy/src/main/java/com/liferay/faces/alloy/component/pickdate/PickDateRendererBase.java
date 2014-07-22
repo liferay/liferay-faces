@@ -42,6 +42,7 @@ public abstract class PickDateRendererBase extends AlloyRendererBase {
 	protected static final String SELECTION_MODE = "selectionMode";
 	protected static final String STYLE = "style";
 	protected static final String STYLE_CLASS = "styleClass";
+	protected static final String TIME_ZONE = "timeZone";
 	protected static final String TRIGGER = "trigger";
 	protected static final String Z_INDEX = "zIndex";
 

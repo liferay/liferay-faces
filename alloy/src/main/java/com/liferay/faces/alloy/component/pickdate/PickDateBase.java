@@ -41,6 +41,7 @@ public abstract class PickDateBase extends UIComponentBase implements Styleable,
 		selectionMode,
 		style,
 		styleClass,
+		timeZone,
 		zIndex
 	}
 
@@ -144,6 +145,14 @@ public abstract class PickDateBase extends UIComponentBase implements Styleable,
 	@Override
 	public void setStyleClass(String styleClass) {
 		getStateHelper().put(PickDatePropertyKeys.styleClass, styleClass);
+	}
+
+	public Object getTimeZone() {
+		return (Object) getStateHelper().eval(PickDatePropertyKeys.timeZone, null);
+	}
+
+	public void setTimeZone(Object timeZone) {
+		getStateHelper().put(PickDatePropertyKeys.timeZone, timeZone);
 	}
 
 	public Integer getzIndex() {

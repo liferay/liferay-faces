@@ -35,18 +35,6 @@ public class PickDateModelBean {
 	private Date minDate;
 	private String multiple;
 
-	private Calendar newCalendar() {
-
-		Calendar calendar = new GregorianCalendar();
-
-		// https://issues.liferay.com/browse/AUI-1177
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-
-		return calendar;
-	}
-
 	public Date getBirthday() {
 		return birthday;
 	}
@@ -68,7 +56,7 @@ public class PickDateModelBean {
 
 		if (maxDate == null) {
 
-			Calendar calendar = newCalendar();
+			Calendar calendar = new GregorianCalendar();
 			calendar.add(Calendar.MONTH, 2);
 			maxDate = calendar.getTime();
 		}
@@ -80,7 +68,7 @@ public class PickDateModelBean {
 
 		if (minDate == null) {
 
-			Calendar calendar = newCalendar();
+			Calendar calendar = new GregorianCalendar();
 			calendar.add(Calendar.MONTH, -2);
 			minDate = calendar.getTime();
 		}

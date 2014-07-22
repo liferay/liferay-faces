@@ -17,6 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -33,18 +34,6 @@ public class InputDateModelBean {
 	private Locale locale;
 	private Date maxDate;
 	private Date minDate;
-
-	private Calendar newCalendar() {
-
-		Calendar calendar = new GregorianCalendar();
-
-		// https://issues.liferay.com/browse/AUI-1177
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-
-		return calendar;
-	}
 
 	public Date getBirthday() {
 		return birthday;
@@ -67,7 +56,7 @@ public class InputDateModelBean {
 
 		if (maxDate == null) {
 
-			Calendar calendar = newCalendar();
+			Calendar calendar = new GregorianCalendar();
 			calendar.add(Calendar.MONTH, 2);
 			maxDate = calendar.getTime();
 		}
@@ -79,7 +68,7 @@ public class InputDateModelBean {
 
 		if (minDate == null) {
 
-			Calendar calendar = newCalendar();
+			Calendar calendar = new GregorianCalendar();
 			calendar.add(Calendar.MONTH, -2);
 			minDate = calendar.getTime();
 		}

@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.faces.FacesException;
 import javax.faces.component.UIViewRoot;
@@ -40,11 +41,14 @@ public class PickDateUtil {
 	private static final String EEE = "EEE";
 	private static final String EEEE = "EEEE";
 	private static final String FF = "FF";
+
+	// NOTE: The JavaScript date object expects zero-based month numbers, so it is necessary to offset the month by 1.
+	private static final String JAVASCRIPT_NEW_DATE_PATTERN = "'new Date'(yyyy,MM-1,dd,0,0,0,0)";
+
 	private static final String M = "M";
 	private static final String MM = "MM";
 	private static final String MMM = "MMM";
 	private static final String MMMMM = "MMMMM";
-	private static final String NEW_DATE = "new Date";
 	private static final String PERCENT_A_LOWER = "%a";
 	private static final String PERCENT_A_UPPER = "%A";
 	private static final String PERCENT_B_LOWER = "%b";
@@ -74,26 +78,12 @@ public class PickDateUtil {
 		return locale;
 	}
 
-	public static String toJavascriptDateString(Date date) {
+	public static String toJavascriptDateString(Date date, TimeZone timeZone) {
 
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(date);
+		SimpleDateFormat javaScriptDateFormat = new SimpleDateFormat(JAVASCRIPT_NEW_DATE_PATTERN);
+		javaScriptDateFormat.setTimeZone(timeZone);
 
-		int minYear = calendar.get(Calendar.YEAR);
-		int minMonth = calendar.get(Calendar.MONTH);
-		int minDay = calendar.get(Calendar.DAY_OF_MONTH);
-
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(NEW_DATE);
-		stringBuilder.append(StringPool.OPEN_PARENTHESIS);
-		stringBuilder.append(minYear);
-		stringBuilder.append(StringPool.COMMA);
-		stringBuilder.append(minMonth);
-		stringBuilder.append(StringPool.COMMA);
-		stringBuilder.append(minDay);
-		stringBuilder.append(StringPool.CLOSE_PARENTHESIS);
-
-		return stringBuilder.toString();
+		return javaScriptDateFormat.format(date);
 	}
 
 	public static Date getDateAtMidnight(Date date) {
@@ -148,7 +138,8 @@ public class PickDateUtil {
 		return mask;
 	}
 
-	public static Date getObjectAsDate(Object dateAsObject, String datePattern) throws FacesException {
+	public static Date getObjectAsDate(Object dateAsObject, String datePattern, TimeZone timeZone)
+		throws FacesException {
 
 		Date date = null;
 
@@ -166,7 +157,7 @@ public class PickDateUtil {
 					try {
 
 						SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
-
+						simpleDateFormat.setTimeZone(timeZone);
 						date = simpleDateFormat.parse(dateAsString);
 					}
 					catch (ParseException e) {
@@ -220,5 +211,35 @@ public class PickDateUtil {
 		}
 
 		return locale;
+	}
+
+	public static TimeZone getObjectAsTimeZone(Object timeZoneAsObject) throws FacesException {
+
+		TimeZone timeZone = null;
+
+		if (timeZoneAsObject != null) {
+
+			if (timeZoneAsObject instanceof TimeZone) {
+				timeZone = (TimeZone) timeZoneAsObject;
+			}
+			else if (timeZoneAsObject instanceof String) {
+
+				String timeZoneAsString = (String) timeZoneAsObject;
+
+				if (timeZoneAsString.length() > 0) {
+
+					// Note: The following usage of TimeZone is thread-safe, since only the result of the getTimeZone()
+					// method is utilized.
+					timeZone = TimeZone.getTimeZone(timeZoneAsString);
+				}
+			}
+			else {
+
+				String message = "Unable to convert value to TimeZone.";
+				throw new FacesException(message);
+			}
+		}
+
+		return timeZone;
 	}
 }
