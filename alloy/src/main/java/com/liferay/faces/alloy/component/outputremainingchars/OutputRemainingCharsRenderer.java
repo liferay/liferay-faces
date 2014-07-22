@@ -24,8 +24,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
-import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -56,11 +54,18 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		OutputRemainingChars outputRemainingChars = (OutputRemainingChars) uiComponent;
+		String clientVarName = ComponentUtil.getClientVarName(facesContext, outputRemainingChars);
+		String clientKey = outputRemainingChars.getClientKey();
 
-		encodeEventCallback(facesContext, responseWriter, StringPool.ON, ALLOY_MAX_LENGTH_EVENT_NAME,
-			outputRemainingChars.getOnMaxlengthReached(), uiComponent);
-		encodeEventCallback(facesContext, responseWriter, StringPool.ONCE, ALLOY_MAX_LENGTH_EVENT_NAME,
-			outputRemainingChars.getOnceMaxlengthReached(), uiComponent);
+		if (clientKey == null) {
+			clientKey = clientVarName;
+		}
+
+		encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
+		encodeEventCallback(responseWriter, clientVarName, StringPool.ON, ALLOY_MAX_LENGTH_EVENT_NAME,
+			outputRemainingChars.getOnMaxlengthReached());
+		encodeEventCallback(responseWriter, clientVarName, StringPool.ONCE, ALLOY_MAX_LENGTH_EVENT_NAME,
+			outputRemainingChars.getOnceMaxlengthReached());
 	}
 
 	@Override
@@ -112,37 +117,6 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 	@Override
 	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 		// no-op since the delegate renderer's encodeEnd() method must not be invoked.
-	}
-
-	protected void encodeEventCallback(FacesContext facesContext, ResponseWriter responseWriter, String methodName,
-		String eventName, String callback, UIComponent uiComponent) throws IOException {
-
-		if (callback != null) {
-
-			ClientComponent clientComponent = (ClientComponent) uiComponent;
-			String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
-			String clientKey = clientComponent.getClientKey();
-
-			if (clientKey == null) {
-				clientKey = clientVarName;
-			}
-
-			encodeLiferayComponent(responseWriter, clientKey);
-
-			responseWriter.write(StringPool.PERIOD);
-			responseWriter.write(methodName);
-			responseWriter.write(StringPool.OPEN_PARENTHESIS);
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(eventName);
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(StringPool.COMMA);
-			responseWriter.write(AlloyRendererUtil.FUNCTION_EVENT);
-			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-			responseWriter.write(callback);
-			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-			responseWriter.write(StringPool.SEMICOLON);
-		}
 	}
 
 	@Override
