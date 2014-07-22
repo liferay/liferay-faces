@@ -28,9 +28,18 @@ public abstract class IconBase extends UIComponentBase implements Styleable {
 
 	// Protected Enumerations
 	protected enum IconPropertyKeys {
+		color,
 		name,
 		style,
 		styleClass
+	}
+
+	public String getColor() {
+		return (String) getStateHelper().eval(IconPropertyKeys.color, null);
+	}
+
+	public void setColor(String color) {
+		getStateHelper().put(IconPropertyKeys.color, color);
 	}
 
 	public String getName() {

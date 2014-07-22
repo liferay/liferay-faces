@@ -27,6 +27,7 @@ import javax.faces.render.Renderer;
 public abstract class IconRendererBase extends Renderer {
 
 	// Protected Constants
+	protected static final String COLOR = "color";
 	protected static final String NAME = "name";
 	protected static final String STYLE = "style";
 	protected static final String STYLE_CLASS = "styleClass";
