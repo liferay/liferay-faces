@@ -27,7 +27,9 @@ public class ShowcaseComponentImpl implements Serializable, ShowcaseComponent {
 	// serialVersionUID
 	private static final long serialVersionUID = 1206732371727535048L;
 
+	// Private Data Members
 	private String camelCaseName;
+	private int categoryIndex;
 	private String fullName;
 	private String key;
 	private String lowerCaseName;
@@ -36,7 +38,9 @@ public class ShowcaseComponentImpl implements Serializable, ShowcaseComponent {
 	private String toString;
 	private List<UseCase> useCases;
 
-	public ShowcaseComponentImpl(String prefix, String camelCaseName, String lowerCaseName, List<UseCase> useCases) {
+	public ShowcaseComponentImpl(int categoryIndex, String prefix, String camelCaseName, String lowerCaseName,
+		List<UseCase> useCases) {
+		this.categoryIndex = categoryIndex;
 		this.prefix = prefix;
 		this.camelCaseName = camelCaseName;
 		this.lowerCaseName = lowerCaseName;
@@ -66,6 +70,20 @@ public class ShowcaseComponentImpl implements Serializable, ShowcaseComponent {
 		return camelCaseName;
 	}
 
+	public int getCategoryIndex() {
+		return categoryIndex;
+	}
+
+	@Override
+	public String getFullName() {
+		return fullName;
+	}
+
+	@Override
+	public String getKey() {
+		return key;
+	}
+
 	@Override
 	public String getLowerCaseName() {
 		return lowerCaseName;
@@ -79,15 +97,5 @@ public class ShowcaseComponentImpl implements Serializable, ShowcaseComponent {
 	@Override
 	public List<UseCase> getUseCases() {
 		return useCases;
-	}
-
-	@Override
-	public String getFullName() {
-		return fullName;
-	}
-
-	@Override
-	public String getKey() {
-		return key;
 	}
 }

@@ -23,6 +23,8 @@ public interface ShowcaseComponent {
 
 	public String getCamelCaseName();
 
+	public int getCategoryIndex();
+
 	public String getFullName();
 
 	public String getKey();

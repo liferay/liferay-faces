@@ -18,6 +18,8 @@ package com.liferay.faces.util.lang;
  */
 public class StringPool {
 
+	public static final String AFTER = "after";
+
 	public static final String AMPERSAND = "&";
 
 	public static final String AMPERSAND_ENCODED = "&amp;";
@@ -29,6 +31,8 @@ public class StringPool {
 	public static final String AT = "@";
 
 	public static final String BACK_SLASH = "\\";
+
+	public static final String BEFORE = "before";
 
 	public static final String BETWEEN = "BETWEEN";
 
@@ -63,6 +67,8 @@ public class StringPool {
 	public static final String COMMA = ",";
 
 	public static final String COMMA_AND_SPACE = ", ";
+
+	public static final String CONTENT = "content";
 
 	public static final String DASH = "-";
 
@@ -197,7 +203,7 @@ public class StringPool {
 	public static final String RETURN = "\r";
 
 	public static final String RETURN_NEW_LINE = "\r\n";
-	
+
 	public static final String RIGHT = "right";
 
 	public static final String SEMICOLON = ";";

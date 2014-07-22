@@ -14,13 +14,18 @@
 package com.liferay.faces.alloy.renderkit;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.behavior.ClientBehavior;
+import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.lang.FacesConstants;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 
@@ -55,6 +60,38 @@ public class AlloyRendererUtil {
 	private static final String USE = "use";
 	private static final String YUI = "YUI";
 
+	public static void decodeClientBehaviors(FacesContext facesContext, UIComponent uiComponent) {
+
+		if (uiComponent instanceof ClientBehaviorHolder) {
+
+			ClientBehaviorHolder clientBehaviorHolder = (ClientBehaviorHolder) uiComponent;
+			Map<String, List<ClientBehavior>> clientBehaviorMap = clientBehaviorHolder.getClientBehaviors();
+
+			Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
+			String behaviorEvent = requestParameterMap.get(FacesConstants.JAVAX_FACES_BEHAVIOR_EVENT);
+
+			if (behaviorEvent != null) {
+
+				List<ClientBehavior> clientBehaviors = clientBehaviorMap.get(behaviorEvent);
+
+				if (clientBehaviors != null) {
+					String source = requestParameterMap.get(FacesConstants.JAVAX_FACES_SOURCE);
+
+					if (source != null) {
+						String clientId = uiComponent.getClientId(facesContext);
+
+						if (clientId.startsWith(source)) {
+
+							for (ClientBehavior behavior : clientBehaviors) {
+								behavior.decode(facesContext, uiComponent);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 	public static void encodeBoolean(ResponseWriter responseWriter, String attributeName, Boolean attributeValue,
 		boolean first) throws IOException {
 
@@ -86,6 +123,24 @@ public class AlloyRendererUtil {
 		}
 
 		encodeClientId(responseWriter, attributeName, escapedClientId, first);
+	}
+
+	public static void encodeEventCallback(ResponseWriter responseWriter, String varName, String methodName,
+		String eventName, String callback) throws IOException {
+		responseWriter.write(varName);
+		responseWriter.write(StringPool.PERIOD);
+		responseWriter.write(methodName);
+		responseWriter.write(StringPool.OPEN_PARENTHESIS);
+		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write(eventName);
+		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write(StringPool.COMMA);
+		responseWriter.write(AlloyRendererUtil.FUNCTION_EVENT);
+		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
+		responseWriter.write(callback);
+		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+		responseWriter.write(StringPool.CLOSE_PARENTHESIS);
+		responseWriter.write(StringPool.SEMICOLON);
 	}
 
 	public static void encodeInteger(ResponseWriter responseWriter, String attributeName, Integer attributeValue,

@@ -1,0 +1,146 @@
+.aui .showcase-grid {
+	width: 100%;
+}
+
+.aui .showcase-grid .logo {
+	display: table-caption;
+	margin: 0 auto;
+}
+
+.aui .showcase-container {
+	margin: 0px 4px 0px 4px;
+	padding: 10px 10px 10px;
+	*padding-top: 10px;
+}
+
+.aui .showcase-content-column,.aui .showcase-nav-column {
+	vertical-align: top;
+}
+
+.aui .showcase-nav-column {
+	background-color: #f5f5f5;
+	width: 250px;
+}
+
+.aui .showcase-content-column,.aui .showcase-nav-column {
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+.aui .showcase-nav-column .alloy-accordion {
+	margin: 4px 4px 4px 4px;
+}
+
+.aui .showcase-nav-column .alloy-accordion .toggler-header {
+	border-top: 1px solid #ffffff;
+	font-weight: bold;
+	padding: 6px;
+}
+
+.aui .showcase-nav-column .alloy-accordion .toggler-header h3 {
+	display: inline;
+	margin: 0px;
+	vertical-align: middle;
+}
+
+.aui .showcase-nav-column .alloy-accordion .toggler-header img {
+	vertical-align: middle;
+}
+	
+.aui .showcase-nav-column .alloy-accordion .toggler-content {
+	padding: 0px 0px 10px 0px;
+}
+
+.aui .showcase-nav-column .alloy-accordion .category-name {
+	margin-left: 4px;
+}
+
+.showcase-example,.showcase-parameter-value,.showcase-model-value,.showcase-container {
+	border: 1px solid #ddd;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	margin: 15px 0;
+	position: relative;
+}
+
+.showcase-example,.showcase-parameter-value,.showcase-model-value {
+	padding: 39px 19px 14px;
+	*padding-top: 19px;
+}
+
+.showcase-example label.example-label,.showcase-parameter-value label.parameter-label,.showcase-model-value label.model-label,.showcase-container label.container-label {
+	background-color: #f5f5f5;
+	border: 1px solid #ddd;
+	-webkit-border-radius: 4px 0 4px 0;
+	-moz-border-radius: 4px 0 4px 0;
+	border-radius: 4px 0 4px 0;
+	color: #9da0a4;
+	font-size: 12px;
+	left: -1px;
+	padding: 3px 7px;
+	position: absolute;
+	top: -1px;
+}
+
+.showcase-example label.example-label span.example-number,.showcase-parameter-value label.parameter-label,.showcase-model-value label.model-label,.showcase-container label.container-label {
+	font-weight: bold;
+}
+
+.showcase-example .alloy-column {
+	background-color: #eee;
+	line-height: 40px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	min-height: 40px;
+	text-align: center;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.showcase-panel {
+	border-style: dotted;
+	border-width: 1px;
+	text-align: center;
+}
+
+.aui .nav-list>li>a {
+	padding: 0px 0px 0px 30px;
+	white-space: nowrap;
+}
+
+.aui .nav-list>li>a>.alloy-icon {
+	margin-left: 4px;
+	text-decoration: none;
+}
+
+.aui .nav-list>.active>a,.aui .nav-list>.active>a:hover {
+	text-shadow: none;
+}
+
+.aui .nav-list>li>a:hover {
+	text-decoration: underline;
+}
+
+.aui .nav-list .nav-list>li>a {
+	background-color: transparent;
+	font-size: 0.9em;
+	white-space: nowrap;
+}
+
+.aui .nav-list .nav-list>.active>a {
+	color: #000000;
+	font-weight: bold;
+	text-shadow: none;
+}
+
+.aui a {
+	color: #0058ba;
+}
+
+.aui .nav-list>li a,.aui .nav-list>li a:hover,.aui .nav-list>li.active a,.aui .nav-list>li.active a:hover,.aui .nav-list .nav-list>li>a:hover {
+	background-color: transparent;
+	color: #0058ba;
+}

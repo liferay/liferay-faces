@@ -25,6 +25,8 @@ import javax.faces.context.ResponseWriter;
  */
 public interface AlloyRenderer {
 
+	public void decodeClientBehaviors(FacesContext facesContext, UIComponent uiComponent);
+
 	public void encodeAlloyAttributes(FacesContext facesContext, ResponseWriter respoonseWriter,
 		UIComponent uiComponent) throws IOException;
 
@@ -36,6 +38,9 @@ public interface AlloyRenderer {
 
 	public void encodeClientId(ResponseWriter responseWriter, String attributeName, String clientId,
 		UIComponent uiComponent, boolean first) throws IOException;
+
+	public void encodeEventCallback(ResponseWriter responseWriter, String varName, String methodName, String eventName,
+		String callback) throws IOException;
 
 	public void encodeInteger(ResponseWriter responseWriter, String attributeName, Integer attributeValue,
 		boolean first) throws IOException;

@@ -28,9 +28,27 @@ public abstract class TabBase extends UIColumn implements Styleable {
 
 	// Protected Enumerations
 	protected enum TabPropertyKeys {
+		contentClass,
+		headerClass,
 		label,
 		style,
 		styleClass
+	}
+
+	public String getContentClass() {
+		return (String) getStateHelper().eval(TabPropertyKeys.contentClass, null);
+	}
+
+	public void setContentClass(String contentClass) {
+		getStateHelper().put(TabPropertyKeys.contentClass, contentClass);
+	}
+
+	public String getHeaderClass() {
+		return (String) getStateHelper().eval(TabPropertyKeys.headerClass, null);
+	}
+
+	public void setHeaderClass(String headerClass) {
+		getStateHelper().put(TabPropertyKeys.headerClass, headerClass);
 	}
 
 	public String getLabel() {

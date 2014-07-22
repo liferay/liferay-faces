@@ -53,6 +53,7 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	public void decode(FacesContext facesContext, UIComponent uiComponent) {
 
 		Renderer delegateRenderer = getDelegateRenderer(facesContext);
+		decodeClientState(facesContext, uiComponent);
 		delegateRenderer.decode(facesContext, uiComponent);
 	}
 

@@ -2,71 +2,9 @@ code {
 	color: rgb(0, 22, 142);
 }
 
-.nav-list > li > a {
-	font-size: 0.9em;
-	white-space: nowrap;
-}
-
-.nav-list .nav-list > li > a {
-	background-color: transparent;
-	font-size: 0.9em;
-	white-space: nowrap;
-}
-
-.nav-list .nav-list > li.active {
-	color: black;
-	font-weight: bold;
-}
-
-.nav-list .nav-list > li.active > a {
-	color: black;
-	text-shadow: none;
-}
-
-.nav-list .nav-list > li.active > a:hover {
-	background-color: transparent;
-}
-
-.showcase-example, .showcase-parameter-value, .showcase-model-value, .showcase-container {
-	border: 1px solid #ddd;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	margin: 15px 0;
-	position: relative;
-}
-
-.showcase-container {
-	padding: 10px 10px 10px;
-	*padding-top: 10px;
-}
-
-.showcase-example, .showcase-parameter-value, .showcase-model-value {
-	padding: 39px 19px 14px;
-	*padding-top: 19px;
-}
-
 .alloy-datatable th.header-facet {
 	font-weight: bold;
 	text-align: center;
-}
-
-.showcase-example label.example-label, .showcase-parameter-value label.parameter-label, .showcase-model-value label.model-label, .showcase-container label.container-label {
-	background-color: #f5f5f5;
-	border: 1px solid #ddd;
-	-webkit-border-radius: 4px 0 4px 0;
-	-moz-border-radius: 4px 0 4px 0;
-	border-radius: 4px 0 4px 0;
-	color: #9da0a4;
-	font-size: 12px;
-	left: -1px;
-	padding: 3px 7px;
-	position: absolute;
-	top: -1px;
-}
-
-.showcase-example label.example-label span.example-number, .showcase-parameter-value label.parameter-label, .showcase-model-value label.model-label, .showcase-container label.container-label {
-	font-weight: bold;
 }
 
 .aui .aui-field-element .portlet-msg-error {
@@ -133,11 +71,7 @@ code {
 	list-style-type: none;
 }
 
-.component-modal-checkbox input, .component-rendered-checkbox input, .component-required-checkbox input {
-	vertical-align: 0.1em;
-}
-
-.component-modal-checkbox label, .component-rendered-checkbox label,.component-required-checkbox label {
+.component-rendered-checkbox label,.component-required-checkbox label {
 	display: inline;
 	margin-right: 10px;
 }
@@ -145,24 +79,6 @@ code {
 .editableAceEditor .ace_editor {
 	margin-bottom: 10px;
 	margin-top: 10px;
-}
-
-.showcase-example .alloy-column {
-  background-color: #eee;
-  line-height: 40px;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  min-height: 40px;
-  text-align: center;
-  -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-          border-radius: 3px;
-}
-
-.showcase-panel {
-	border-style: dotted;
-	border-width: 1px;
-	text-align: center;
 }
 
 .tab-content img {

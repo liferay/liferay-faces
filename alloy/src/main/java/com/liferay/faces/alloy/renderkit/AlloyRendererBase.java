@@ -40,6 +40,17 @@ public abstract class AlloyRendererBase extends ClientComponentRendererBase impl
 	public abstract void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException;
 
 	@Override
+	public void decode(FacesContext facesContext, UIComponent uiComponent) {
+		super.decode(facesContext, uiComponent);
+		decodeClientBehaviors(facesContext, uiComponent);
+	}
+
+	@Override
+	public void decodeClientBehaviors(FacesContext facesContext, UIComponent uiComponent) {
+		AlloyRendererUtil.decodeClientBehaviors(facesContext, uiComponent);
+	}
+
+	@Override
 	public void encodeBoolean(ResponseWriter responseWriter, String attributeName, Boolean attributeValue,
 		boolean first) throws IOException {
 		AlloyRendererUtil.encodeBoolean(responseWriter, attributeName, attributeValue, first);
@@ -55,6 +66,12 @@ public abstract class AlloyRendererBase extends ClientComponentRendererBase impl
 	public void encodeClientId(ResponseWriter responseWriter, String attributeName, String clientId,
 		UIComponent uiComponent, boolean first) throws IOException {
 		AlloyRendererUtil.encodeClientId(responseWriter, attributeName, clientId, uiComponent, first);
+	}
+
+	@Override
+	public void encodeEventCallback(ResponseWriter responseWriter, String varName, String methodName, String eventName,
+		String callback) throws IOException {
+		AlloyRendererUtil.encodeEventCallback(responseWriter, varName, methodName, eventName, callback);
 	}
 
 	@Override
