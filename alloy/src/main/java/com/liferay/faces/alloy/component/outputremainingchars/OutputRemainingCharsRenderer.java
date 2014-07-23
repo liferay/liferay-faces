@@ -61,11 +61,22 @@ public class OutputRemainingCharsRenderer extends OutputRemainingCharsRendererBa
 			clientKey = clientVarName;
 		}
 
-		encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
-		encodeEventCallback(responseWriter, clientVarName, StringPool.ON, ALLOY_MAX_LENGTH_EVENT_NAME,
-			outputRemainingChars.getOnMaxlengthReached());
-		encodeEventCallback(responseWriter, clientVarName, StringPool.ONCE, ALLOY_MAX_LENGTH_EVENT_NAME,
-			outputRemainingChars.getOnceMaxlengthReached());
+		String onMaxlengthReached = outputRemainingChars.getOnMaxlengthReached();
+		String onceMaxlengthReached = outputRemainingChars.getOnceMaxlengthReached();
+
+		if ((onMaxlengthReached != null) || (onceMaxlengthReached != null)) {
+			encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
+
+			if (onMaxlengthReached != null) {
+				encodeEventCallback(responseWriter, clientVarName, StringPool.ON, ALLOY_MAX_LENGTH_EVENT_NAME,
+					onMaxlengthReached);
+			}
+
+			if (onceMaxlengthReached != null) {
+				encodeEventCallback(responseWriter, clientVarName, StringPool.ONCE, ALLOY_MAX_LENGTH_EVENT_NAME,
+					onceMaxlengthReached);
+			}
+		}
 	}
 
 	@Override
