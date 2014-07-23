@@ -59,12 +59,12 @@ public class AccordionRenderer extends AccordionRendererBase {
 	// Private Constants
 	private static final String ANIMATED = "animated";
 	private static final String CONTAINER = "container";
-	private static final String CONTENT_COLLAPSED_CLASSES = "content toggler-content-collapsed";
-	private static final String CONTENT_EXPANDED_CLASSES = "content toggler-content-expanded";
+	private static final String CONTENT_COLLAPSED_CLASSES = "content toggler-content toggler-content-collapsed";
+	private static final String CONTENT_EXPANDED_CLASSES = "content toggler-content toggler-content-expanded";
 	private static final String DOT_CONTENT = ".content";
 	private static final String DOT_HEADER = ".header";
-	private static final String HEADER_COLLAPSED_CLASSES = "header toggler-header-collapsed";
-	private static final String HEADER_EXPANDED_CLASSES = "header toggler-header-expanded";
+	private static final String HEADER_COLLAPSED_CLASSES = "header toggler-header toggler-header-collapsed";
+	private static final String HEADER_EXPANDED_CLASSES = "header toggler-header toggler-header-expanded";
 	private static final String EXPANDED = "expanded";
 	private static final String EXPANDED_CHANGE = "expandedChange";
 
