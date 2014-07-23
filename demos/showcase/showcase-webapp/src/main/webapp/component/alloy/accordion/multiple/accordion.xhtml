@@ -5,7 +5,7 @@
 	<showcase:example>
 		<alloy:button onclick="Liferay.component('accordianKey').expandAll()" value="#{i18n['expand-all']}" />
 		<alloy:button onclick="Liferay.component('accordianKey').collapseAll()" value="#{i18n['collapse-all']}" />
-		<alloy:accordion clientKey="accordianKey">
+		<alloy:accordion clientKey="accordianKey" multiple="true">
 			<alloy:tab label="Compatible">
 				<h:graphicImage library="images" name="icon-compatible.png" />
 				<span>Liferay lets you reuse the enterprise software and skills you already have in-house.</span>
