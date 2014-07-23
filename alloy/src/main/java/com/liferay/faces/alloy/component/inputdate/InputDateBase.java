@@ -29,6 +29,7 @@ public abstract class InputDateBase extends InputDateTimeBase implements Styleab
 	// Protected Enumerations
 	protected enum InputDatePropertyKeys {
 		autoHide,
+		clientKey,
 		datePattern,
 		locale,
 		maximumDate,
@@ -44,6 +45,14 @@ public abstract class InputDateBase extends InputDateTimeBase implements Styleab
 
 	public void setAutoHide(Boolean autoHide) {
 		getStateHelper().put(InputDatePropertyKeys.autoHide, autoHide);
+	}
+
+	public String getClientKey() {
+		return (String) getStateHelper().eval(InputDatePropertyKeys.clientKey, null);
+	}
+
+	public void setClientKey(String clientKey) {
+		getStateHelper().put(InputDatePropertyKeys.clientKey, clientKey);
 	}
 
 	public String getDatePattern() {

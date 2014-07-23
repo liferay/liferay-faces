@@ -24,6 +24,7 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.pickdate.PickDate;
 import com.liferay.faces.alloy.component.pickdate.PickDateUtil;
+import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -49,6 +50,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 	private static final String BUTTON_ON_DATE_CLICK_TEMPLATE = "function(event){if(this._canBeSelected(event.date)){" +
 		"var input=A.one('{0}');input.set('value',A.Date.format(event.date,{format:'{1}'}));" +
 		"input.simulate('change');}}";
+	private static final String PICK_DATE = "pickDate";
 	private static final String TOKEN_0 = "{0}";
 	private static final String TOKEN_1 = "{1}";
 
@@ -60,8 +62,18 @@ public class InputDateRenderer extends InputDateRendererBase {
 
 		// Create a pickDate and pass attributes through to it.
 		PickDate pickDate = (PickDate) application.createComponent(PickDate.COMPONENT_TYPE);
-		String datePattern = inputDate.getDatePattern();
+
+		// Because the pickDate is not in the component tree, its clientId is not known in advance. Therefore the
+		// component's generated clientId with a "button" suffix must be used to create the button's clientId and ensure
+		// that it is unique. However, UIComponent.setId() throws an IllegalArgumentException if the id contains colons.
+		// To workaround this, the colons must be replaced by underscores using ComponentUtil.getClientVarName().
+		String inputDateClientVarName = ComponentUtil.getClientVarName(facesContext, inputDate);
+		String pickDateId = inputDateClientVarName + StringPool.UNDERLINE + PICK_DATE;
+		pickDate.setId(pickDateId);
 		pickDate.setAutoHide(inputDate.isAutoHide());
+		pickDate.setClientKey(inputDate.getClientKey());
+
+		String datePattern = inputDate.getDatePattern();
 		pickDate.setDatePattern(datePattern);
 		pickDate.setFor(trigger);
 		pickDate.setLocale(inputDate.getLocale(facesContext));

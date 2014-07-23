@@ -14,12 +14,13 @@
 package com.liferay.faces.alloy.component.inputdatetime;
 
 import com.liferay.faces.alloy.component.inputtext.InputText;
+import com.liferay.faces.util.component.ClientComponent;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class InputDateTimeBase extends InputText {
+public abstract class InputDateTimeBase extends InputText implements ClientComponent {
 
 	// Public Constants
 	public static final String SHOW_ON = "showOn";

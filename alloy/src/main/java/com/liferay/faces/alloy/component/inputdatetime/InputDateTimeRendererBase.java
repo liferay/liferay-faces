@@ -26,6 +26,7 @@ import javax.faces.context.ResponseWriter;
 import com.liferay.faces.alloy.component.button.Button;
 import com.liferay.faces.alloy.component.icon.Icon;
 import com.liferay.faces.alloy.component.inputtext.InputTextRenderer;
+import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
@@ -109,21 +110,17 @@ public abstract class InputDateTimeRendererBase extends InputTextRenderer {
 
 				if (showOn.equals(BUTTON)) {
 
-					// Because the button is not in the component tree, its clientId is not generated. Therefore the
-					// component's generated clientId must be used to create the button's clientId and ensure that it is
-					// unique. However, UIComponent.setId() throws an IllegalArgumentException if the id contains
-					// colons. To workaround this, the colons must be replaced by underscores.
-					String underlineClientId = clientId.replace(StringPool.COLON, StringPool.UNDERLINE);
+					// Because the button is not in the component tree, its clientId is not known in advance.
+					// Therefore the component's generated clientId with a "button" suffix must be used to create the
+					// button's clientId and ensure that it is unique. However, UIComponent.setId() throws an
+					// IllegalArgumentException if the id contains colons. To workaround this, the colons must be
+					// replaced by underscores using ComponentUtil.getClientVarName().
+					String inputDateClientVarName = ComponentUtil.getClientVarName(facesContext, inputDateTimeBase);
 
-					// Prefix the id with an underscore in order to ensure that the id always gets written, and append
-					// "button" to the id to ensure that it is unique.
-					StringBuilder buttonIdStringBuilder = new StringBuilder();
-					buttonIdStringBuilder.append(StringPool.UNDERLINE);
-					buttonIdStringBuilder.append(underlineClientId);
-					buttonIdStringBuilder.append(StringPool.UNDERLINE);
-					buttonIdStringBuilder.append(BUTTON);
-
-					String buttonId = buttonIdStringBuilder.toString();
+					// The JSF runtime's renderer does not write ids which are prefixed with
+					// UIViewRoot.UNIQUE_ID_PREFIX ("j_id"). Therefore, prefix the id with an underscore in order to
+					// force the the JSF runtime's renderer to write the id.
+					String buttonId = StringPool.UNDERLINE + inputDateClientVarName + StringPool.UNDERLINE + BUTTON;
 					button.setId(buttonId);
 
 					// Since the pickDate's trigger needs to be set directly, prefix the escaped clientId of the
