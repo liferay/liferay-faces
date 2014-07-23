@@ -5,7 +5,7 @@
 
 	<url-mapping id="welcome">
 		<pattern value="/" />
-		<view-id value="/views/component.faces?componentPrefix=alloy&amp;componentName=button&amp;componentUseCase=general" />
+		<view-id value="/views/home.faces" />
 	</url-mapping>
 
 	<url-mapping id="liferay-friendly-url">
