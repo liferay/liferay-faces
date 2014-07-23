@@ -29,7 +29,6 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.tab.Tab;
 import com.liferay.faces.alloy.component.tab.TabUtil;
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.helper.IntegerHelper;
@@ -166,7 +165,7 @@ public class AccordionRenderer extends AccordionRendererBase {
 		// JavaScript attempts to hide the div. At this point in JavaScript execution, Alloy is done manipulating the
 		// DOM and it is necessary to set the style back to "display:block;" so that the component will be visible.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.write(AlloyRendererUtil.A_DOT_ONE);
+		responseWriter.write(A_DOT_ONE);
 		responseWriter.write(StringPool.OPEN_PARENTHESIS);
 		responseWriter.write(StringPool.APOSTROPHE);
 

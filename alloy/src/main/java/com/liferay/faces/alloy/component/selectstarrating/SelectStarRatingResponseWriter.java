@@ -18,7 +18,7 @@ import java.io.IOException;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
+import com.liferay.faces.alloy.renderkit.AlloyRenderer;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.DelegationResponseWriterBase;
@@ -73,7 +73,7 @@ public class SelectStarRatingResponseWriter extends DelegationResponseWriterBase
 			labelElement = false;
 
 			super.writeAttribute(StringPool.TITLE, title, StringPool.TITLE);
-			super.writeAttribute(Styleable.STYLE, AlloyRendererUtil.DISPLAY_NONE, null);
+			super.writeAttribute(Styleable.STYLE, AlloyRenderer.DISPLAY_NONE, null);
 			super.endElement(StringPool.INPUT);
 		}
 	}

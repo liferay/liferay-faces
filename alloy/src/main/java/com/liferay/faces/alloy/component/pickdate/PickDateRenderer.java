@@ -26,7 +26,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.helper.StringHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
@@ -201,7 +200,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 			zIndexString = zIndex.toString();
 		}
 		else {
-			zIndexString = AlloyRendererUtil.LIFERAY_Z_INDEX_TOOLTIP;
+			zIndexString = LIFERAY_Z_INDEX_TOOLTIP;
 		}
 
 		encodeNonEscapedObject(responseWriter, Z_INDEX, zIndexString, true);

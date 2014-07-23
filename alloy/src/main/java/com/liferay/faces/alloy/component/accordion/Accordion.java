@@ -30,7 +30,7 @@ import javax.faces.event.FacesEvent;
 
 import com.liferay.faces.alloy.component.tab.Tab;
 import com.liferay.faces.alloy.component.tab.TabUtil;
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
+import com.liferay.faces.alloy.renderkit.AlloyRenderer;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.helper.IntegerHelper;
 import com.liferay.faces.util.lang.FacesConstants;
@@ -140,10 +140,10 @@ public class Accordion extends AccordionBase implements ClientBehaviorHolder {
 		// Initially style the outermost <div> with "display:none;" in order to prevent blinking when Alloy's
 		// JavaScript attempts to hide the contentBox.
 		if (style == null) {
-			style = AlloyRendererUtil.DISPLAY_NONE;
+			style = AlloyRenderer.DISPLAY_NONE;
 		}
 		else {
-			style = style + StringPool.SEMICOLON + AlloyRendererUtil.DISPLAY_NONE;
+			style = style + StringPool.SEMICOLON + AlloyRenderer.DISPLAY_NONE;
 		}
 
 		return style;
