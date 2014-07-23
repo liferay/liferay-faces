@@ -49,6 +49,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 	private static final String BUTTON_ON_DATE_CLICK_TEMPLATE = "function(event){if(this._canBeSelected(event.date)){" +
 		"var input=A.one('{0}');input.set('value',A.Date.format(event.date,{format:'{1}'}));" +
 		"input.simulate('change');}}";
+	private static final String PICK_DATE = "pickDate";
 	private static final String TOKEN_0 = "{0}";
 	private static final String TOKEN_1 = "{1}";
 
@@ -60,6 +61,13 @@ public class InputDateRenderer extends InputDateRendererBase {
 
 		// Create a pickDate and pass attributes through to it.
 		PickDate pickDate = (PickDate) application.createComponent(PickDate.COMPONENT_TYPE);
+		
+		// Give the pickDate a unique id.
+		String clientId = inputDate.getClientId();
+		String pickDateId = getUnderlineId(clientId, PICK_DATE);
+		pickDate.setId(pickDateId);
+		pickDate.setAutoHide(inputDate.isAutoHide());
+
 		String datePattern = inputDate.getDatePattern();
 		pickDate.setAutoHide(inputDate.isAutoHide());
 		pickDate.setDatePattern(datePattern);

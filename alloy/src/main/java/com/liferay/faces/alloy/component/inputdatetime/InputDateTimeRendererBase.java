@@ -109,21 +109,14 @@ public abstract class InputDateTimeRendererBase extends InputTextRenderer {
 
 				if (showOn.equals(BUTTON)) {
 
+
 					// Because the button is not in the component tree, its clientId is not generated. Therefore the
-					// component's generated clientId must be used to create the button's clientId and ensure that it is
-					// unique. However, UIComponent.setId() throws an IllegalArgumentException if the id contains
-					// colons. To workaround this, the colons must be replaced by underscores.
-					String underlineClientId = clientId.replace(StringPool.COLON, StringPool.UNDERLINE);
-
-					// Prefix the id with an underscore in order to ensure that the id always gets written, and append
-					// "button" to the id to ensure that it is unique.
-					StringBuilder buttonIdStringBuilder = new StringBuilder();
-					buttonIdStringBuilder.append(StringPool.UNDERLINE);
-					buttonIdStringBuilder.append(underlineClientId);
-					buttonIdStringBuilder.append(StringPool.UNDERLINE);
-					buttonIdStringBuilder.append(BUTTON);
-
-					String buttonId = buttonIdStringBuilder.toString();
+					// component's generated clientId with a "button" suffix must be used to create the button's
+					// clientId and ensure that it is unique. However, UIComponent.setId() throws an
+					// IllegalArgumentException if the id contains colons. To workaround this, the colons must be
+					// replaced by underscores. Also, to ensure that the id always gets written, the id must be prefixed
+					// with an underscore.
+					String buttonId = StringPool.UNDERLINE + getUnderlineId(clientId, BUTTON);
 					button.setId(buttonId);
 
 					// Since the pickDate's trigger needs to be set directly, prefix the escaped clientId of the
@@ -157,4 +150,17 @@ public abstract class InputDateTimeRendererBase extends InputTextRenderer {
 
 	protected abstract void encodePicker(FacesContext facesContext, UIComponent uiComponent, Application application,
 		String trigger, String escapedClientId) throws IOException;
+
+	protected static String getUnderlineId(String id, String suffix) {
+
+		String underlineId = id.replace(StringPool.COLON, StringPool.UNDERLINE);
+
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(StringPool.UNDERLINE);
+		stringBuilder.append(underlineId);
+		stringBuilder.append(StringPool.UNDERLINE);
+		stringBuilder.append(suffix);
+
+		return stringBuilder.toString();
+	}
 }
