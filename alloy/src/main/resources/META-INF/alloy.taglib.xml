@@ -1777,6 +1777,12 @@
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
+			<name>clientKey</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The class name of the converter instance that is to be used by this component.]]></description>
 			<name>converter</name>
 			<required>false</required>
