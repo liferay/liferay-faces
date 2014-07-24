@@ -84,8 +84,8 @@ public class InputDate extends InputDateBase {
 					}
 
 					// Set the times to midnight for comparison purposes.
-					minDate = getDateAtMidnight(minDate);
-					maxDate = getDateAtMidnight(maxDate);
+					minDate = getDateAtMidnight(minDate, timeZone);
+					maxDate = getDateAtMidnight(maxDate, timeZone);
 
 					// To determine if the submitted value is valid, check if it falls between the minimum date and
 					// the maximum date.
@@ -160,14 +160,15 @@ public class InputDate extends InputDateBase {
 		return converter;
 	}
 
-	protected Date getDateAtMidnight(Date date) {
+	protected Date getDateAtMidnight(Date date, TimeZone timeZone) {
 
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(date);
-		calendar.set(Calendar.MILLISECOND, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MINUTE, 0);
+		calendar.setTimeZone(timeZone);
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 
 		return calendar.getTime();
 	}
