@@ -20,6 +20,7 @@ import javax.faces.FactoryFinder;
 import javax.faces.application.Application;
 import javax.faces.application.ApplicationFactory;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UINamingContainer;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
@@ -62,7 +63,9 @@ public abstract class InputDateTimeRendererBase extends InputTextRenderer {
 		RendererUtil.encodeStyleable(responseWriter, styleable);
 
 		// Start the encoding of the text input by delegating to the renderer from the JSF runtime.
-		InputDateTimeResponseWriter inputDateTimeResponseWriter = new InputDateTimeResponseWriter(responseWriter);
+		String inputIdSuffix = getInputIdSuffix(facesContext);
+		InputDateTimeResponseWriter inputDateTimeResponseWriter = new InputDateTimeResponseWriter(responseWriter,
+				inputIdSuffix);
 		super.encodeBegin(facesContext, uiComponent, inputDateTimeResponseWriter);
 	}
 
@@ -71,7 +74,9 @@ public abstract class InputDateTimeRendererBase extends InputTextRenderer {
 
 		// Finish the encoding of the text input by delegating to the renderer from the JSF runtime.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		InputDateTimeResponseWriter inputDateTimeResponseWriter = new InputDateTimeResponseWriter(responseWriter);
+		String inputIdSuffix = getInputIdSuffix(facesContext);
+		InputDateTimeResponseWriter inputDateTimeResponseWriter = new InputDateTimeResponseWriter(responseWriter,
+				inputIdSuffix);
 		super.encodeEnd(facesContext, uiComponent, inputDateTimeResponseWriter);
 
 		// Determine the escaped "id" of the text input.
@@ -79,7 +84,7 @@ public abstract class InputDateTimeRendererBase extends InputTextRenderer {
 				FactoryFinder.APPLICATION_FACTORY);
 		Application application = applicationFactory.getApplication();
 		String clientId = uiComponent.getClientId(facesContext);
-		String inputClientId = clientId + InputDateTimeUtil.getInputIdSuffix(facesContext);
+		String inputClientId = clientId + inputIdSuffix;
 		String trigger = inputClientId;
 
 		// Determine whether or not the text input is enabled.
@@ -154,4 +159,10 @@ public abstract class InputDateTimeRendererBase extends InputTextRenderer {
 
 	protected abstract void encodePicker(FacesContext facesContext, UIComponent uiComponent, Application application,
 		String trigger, String escapedClientId) throws IOException;
+
+	protected String getInputIdSuffix(FacesContext facesContext) {
+		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+
+		return separatorChar + StringPool.INPUT;
+	}
 }
