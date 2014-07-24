@@ -1064,7 +1064,6 @@
 				<method-signature>
 					void tabEventListener(com.liferay.faces.alloy.component.accordion.AccordionTabEvent)
 				</method-signature>
-				<tagHandlerClass>com.liferay.faces.alloy.component.accordion.AccordionHandler</tagHandlerClass>
 				<type>javax.el.MethodExpression</type>
 			</attribute>
 			<attribute>
