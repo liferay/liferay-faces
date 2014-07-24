@@ -20,6 +20,7 @@ import java.util.Iterator;
 
 import javax.faces.FactoryFinder;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIData;
 import javax.faces.component.visit.VisitCallback;
 import javax.faces.component.visit.VisitContext;
 import javax.faces.component.visit.VisitContextFactory;
@@ -132,11 +133,17 @@ public class PartialViewContextCleanupImpl extends PartialViewContextWrapper {
 
 		// Otherwise, recurse through all of the children.
 		else {
-			Iterator<UIComponent> itr = uiComponent.getFacetsAndChildren();
 
-			while (itr.hasNext()) {
-				UIComponent childUIComponet = itr.next();
-				encodeCleanup(facesContext, childUIComponet, rendered);
+			// FACES-1956: If the parent component is data-iterator type of component then its children cannot undergo
+			// cleanup since they may have EL-expressions that depend on the current iteration variable.
+			if (!(uiComponent instanceof UIData)) {
+
+				Iterator<UIComponent> itr = uiComponent.getFacetsAndChildren();
+
+				while (itr.hasNext()) {
+					UIComponent childUIComponent = itr.next();
+					encodeCleanup(facesContext, childUIComponent, rendered);
+				}
 			}
 		}
 
