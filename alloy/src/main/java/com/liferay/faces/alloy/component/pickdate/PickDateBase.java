@@ -147,11 +147,11 @@ public abstract class PickDateBase extends UIComponentBase implements Styleable,
 		getStateHelper().put(PickDatePropertyKeys.styleClass, styleClass);
 	}
 
-	public Object getTimeZone() {
-		return (Object) getStateHelper().eval(PickDatePropertyKeys.timeZone, null);
+	public String getTimeZone() {
+		return (String) getStateHelper().eval(PickDatePropertyKeys.timeZone, null);
 	}
 
-	public void setTimeZone(Object timeZone) {
+	public void setTimeZone(String timeZone) {
 		getStateHelper().put(PickDatePropertyKeys.timeZone, timeZone);
 	}
 

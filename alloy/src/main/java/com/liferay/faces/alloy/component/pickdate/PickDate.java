@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.alloy.component.pickdate;
 
-import java.util.TimeZone;
-
 import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 
@@ -90,13 +88,7 @@ public class PickDate extends PickDateBase {
 	}
 
 	@Override
-	public Object getTimeZone() {
-		Object timeZone = super.getTimeZone();
-
-		if (timeZone == null) {
-			timeZone = TimeZone.getTimeZone(GREENWICH);
-		}
-
-		return timeZone;
+	public String getTimeZone() {
+		return (String) getStateHelper().eval(PickDatePropertyKeys.timeZone, GREENWICH);
 	}
 }

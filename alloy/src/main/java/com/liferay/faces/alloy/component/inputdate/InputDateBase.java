@@ -95,11 +95,11 @@ public abstract class InputDateBase extends InputDateTimeBase implements Styleab
 		getStateHelper().put(InputDatePropertyKeys.panes, panes);
 	}
 
-	public Object getTimeZone() {
-		return (Object) getStateHelper().eval(InputDatePropertyKeys.timeZone, null);
+	public String getTimeZone() {
+		return (String) getStateHelper().eval(InputDatePropertyKeys.timeZone, null);
 	}
 
-	public void setTimeZone(Object timeZone) {
+	public void setTimeZone(String timeZone) {
 		getStateHelper().put(InputDatePropertyKeys.timeZone, timeZone);
 	}
 
