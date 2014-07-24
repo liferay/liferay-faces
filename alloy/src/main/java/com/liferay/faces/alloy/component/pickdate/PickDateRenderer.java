@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.pickdate;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -53,6 +54,9 @@ public class PickDateRenderer extends PickDateRendererBase {
 	private static final String DATE_CLICK = "dateClick";
 	private static final String DEFAULT_ON_DATE_CLICK_TEMPLATE = "function(event){" +
 		"pickDateDefaultOnDateClick(event, A.one('{0}'));}";
+
+	// NOTE: The JavaScript date object expects zero-based month numbers, so it is necessary to offset the month by 1.
+	private static final String JAVASCRIPT_NEW_DATE_PATTERN = "'new Date'(yyyy,MM-1,dd,0,0,0,0)";
 	private static final String LANG = "lang";
 	private static final String TOKEN = "{0}";
 	private static final String NODE_EVENT_SIMULATE = "node-event-simulate";
@@ -97,16 +101,11 @@ public class PickDateRenderer extends PickDateRendererBase {
 		encodeNonEscapedObject(responseWriter, CALENDAR, StringPool.BLANK, first);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
-		String componentDatePattern = pickDate.getDatePattern();
 		Object maximumDate = pickDate.getMaximumDate();
 
 		if (maximumDate != null) {
 
-			Object timeZoneObject = pickDate.getTimeZone();
-			TimeZone timeZone = PickDateUtil.getObjectAsTimeZone(timeZoneObject);
-			Date maxDate = PickDateUtil.getObjectAsDate(maximumDate, componentDatePattern, timeZone);
-			String maxDateString = PickDateUtil.toJavascriptDateString(maxDate, timeZone);
-			encodeNonEscapedObject(responseWriter, MAXIMUM_DATE, maxDateString, calendarFirst);
+			encodeDate(responseWriter, pickDate, MAXIMUM_DATE, maximumDate, calendarFirst);
 			calendarFirst = false;
 		}
 
@@ -114,11 +113,7 @@ public class PickDateRenderer extends PickDateRendererBase {
 
 		if (minimumDate != null) {
 
-			Object timeZoneObject = pickDate.getTimeZone();
-			TimeZone timeZone = PickDateUtil.getObjectAsTimeZone(timeZoneObject);
-			Date minDate = PickDateUtil.getObjectAsDate(minimumDate, componentDatePattern, timeZone);
-			String minDateString = PickDateUtil.toJavascriptDateString(minDate, timeZone);
-			encodeNonEscapedObject(responseWriter, MINIMUM_DATE, minDateString, calendarFirst);
+			encodeDate(responseWriter, pickDate, MINIMUM_DATE, minimumDate, calendarFirst);
 			calendarFirst = false;
 		}
 
@@ -158,6 +153,20 @@ public class PickDateRenderer extends PickDateRendererBase {
 		calendarFirst = false;
 
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+	}
+
+	protected void encodeDate(ResponseWriter responseWriter, PickDate pickDate, String attributeName, Object dateObject,
+		boolean first) throws IOException {
+
+		String datePattern = pickDate.getDatePattern();
+		Object timeZoneObject = pickDate.getTimeZone();
+		TimeZone timeZone = PickDateUtil.getObjectAsTimeZone(timeZoneObject);
+		Date date = PickDateUtil.getObjectAsDate(dateObject, datePattern, timeZone);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(JAVASCRIPT_NEW_DATE_PATTERN);
+		simpleDateFormat.setTimeZone(timeZone);
+
+		String dateString = simpleDateFormat.format(date);
+		encodeNonEscapedObject(responseWriter, attributeName, dateString, first);
 	}
 
 	@Override

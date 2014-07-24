@@ -41,10 +41,6 @@ public class PickDateUtil {
 	private static final String EEE = "EEE";
 	private static final String EEEE = "EEEE";
 	private static final String FF = "FF";
-
-	// NOTE: The JavaScript date object expects zero-based month numbers, so it is necessary to offset the month by 1.
-	private static final String JAVASCRIPT_NEW_DATE_PATTERN = "'new Date'(yyyy,MM-1,dd,0,0,0,0)";
-
 	private static final String M = "M";
 	private static final String MM = "MM";
 	private static final String MMM = "MMM";
@@ -76,26 +72,6 @@ public class PickDateUtil {
 		}
 
 		return locale;
-	}
-
-	public static String toJavascriptDateString(Date date, TimeZone timeZone) {
-
-		SimpleDateFormat javaScriptDateFormat = new SimpleDateFormat(JAVASCRIPT_NEW_DATE_PATTERN);
-		javaScriptDateFormat.setTimeZone(timeZone);
-
-		return javaScriptDateFormat.format(date);
-	}
-
-	public static Date getDateAtMidnight(Date date) {
-
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(date);
-		calendar.set(Calendar.MILLISECOND, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-
-		return calendar.getTime();
 	}
 
 	public static String getDefaultDatePattern(Object componentLocale) {
