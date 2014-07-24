@@ -80,7 +80,7 @@ public class SelectOneBackingBean {
 		PhaseId phaseId = facesContext.getCurrentPhaseId();
 		logger.debug("valueChangeListener: phaseId=[{0}]", phaseId.toString());
 
-		String phaseName = phaseId.getName();
+		String phaseName = phaseId.toString();
 		FacesMessage facesMessage = new FacesMessage("The valueChangeListener method was called during the " +
 				phaseName + " phase of the JSF lifecycle.");
 		facesContext.addMessage(null, facesMessage);
