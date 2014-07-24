@@ -16,9 +16,7 @@ package com.liferay.faces.alloy.component.pickdate;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -187,35 +185,5 @@ public class PickDateUtil {
 		}
 
 		return locale;
-	}
-
-	public static TimeZone getObjectAsTimeZone(Object timeZoneAsObject) throws FacesException {
-
-		TimeZone timeZone = null;
-
-		if (timeZoneAsObject != null) {
-
-			if (timeZoneAsObject instanceof TimeZone) {
-				timeZone = (TimeZone) timeZoneAsObject;
-			}
-			else if (timeZoneAsObject instanceof String) {
-
-				String timeZoneAsString = (String) timeZoneAsObject;
-
-				if (timeZoneAsString.length() > 0) {
-
-					// Note: The following usage of TimeZone is thread-safe, since only the result of the getTimeZone()
-					// method is utilized.
-					timeZone = TimeZone.getTimeZone(timeZoneAsString);
-				}
-			}
-			else {
-
-				String message = "Unable to convert value to TimeZone.";
-				throw new FacesException(message);
-			}
-		}
-
-		return timeZone;
 	}
 }

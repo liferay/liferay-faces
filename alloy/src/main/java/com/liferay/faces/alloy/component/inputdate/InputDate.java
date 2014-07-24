@@ -64,8 +64,9 @@ public class InputDate extends InputDateBase {
 				// Get all necessary dates.
 				String datePattern = getDatePattern();
 				Object minimumDate = getMinimumDate();
-				Object timeZoneObject = getTimeZone();
-				TimeZone timeZone = PickDateUtil.getObjectAsTimeZone(timeZoneObject);
+				String timeZoneString = getTimeZone();
+				TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
+
 				Date minDate = PickDateUtil.getObjectAsDate(minimumDate, datePattern, timeZone);
 				Object maximumDate = getMaximumDate();
 				Date maxDate = PickDateUtil.getObjectAsDate(maximumDate, datePattern, timeZone);
@@ -103,6 +104,8 @@ public class InputDate extends InputDateBase {
 						else {
 							MessageContext messageContext = MessageContext.getInstance();
 							SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
+							simpleDateFormat.setTimeZone(timeZone);
+
 							String minDateString = simpleDateFormat.format(minDate);
 							String maxDateString = simpleDateFormat.format(maxDate);
 							Locale locale = PickDateUtil.getObjectAsLocale(getLocale(facesContext));
@@ -151,8 +154,8 @@ public class InputDate extends InputDateBase {
 			Locale locale = PickDateUtil.getObjectAsLocale(objectLocale);
 			dateTimeConverter.setLocale(locale);
 
-			Object objectTimeZone = getTimeZone();
-			TimeZone timeZone = PickDateUtil.getObjectAsTimeZone(objectTimeZone);
+			String timeZoneString = getTimeZone();
+			TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
 			dateTimeConverter.setTimeZone(timeZone);
 			converter = dateTimeConverter;
 		}
@@ -208,13 +211,7 @@ public class InputDate extends InputDateBase {
 	}
 
 	@Override
-	public Object getTimeZone() {
-		Object timeZone = super.getTimeZone();
-
-		if (timeZone == null) {
-			timeZone = TimeZone.getTimeZone(GREENWICH);
-		}
-
-		return timeZone;
+	public String getTimeZone() {
+		return (String) getStateHelper().eval(InputDatePropertyKeys.timeZone, GREENWICH);
 	}
 }

@@ -159,8 +159,8 @@ public class PickDateRenderer extends PickDateRendererBase {
 		boolean first) throws IOException {
 
 		String datePattern = pickDate.getDatePattern();
-		Object timeZoneObject = pickDate.getTimeZone();
-		TimeZone timeZone = PickDateUtil.getObjectAsTimeZone(timeZoneObject);
+		String timeZoneString = pickDate.getTimeZone();
+		TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
 		Date date = PickDateUtil.getObjectAsDate(dateObject, datePattern, timeZone);
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(JAVASCRIPT_NEW_DATE_PATTERN);
 		simpleDateFormat.setTimeZone(timeZone);
