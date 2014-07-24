@@ -1554,10 +1554,10 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The time zone of the component (defaults to "Greenwich"). This attribute can be of type <code>java.lang.String</code> or <code>java.util.TimeZone</code>.]]>
+					<![CDATA[The time zone of the component (defaults to "Greenwich").]]>
 				</description>
 				<name>timeZone</name>
-				<type>java.lang.Object</type>
+				<type>java.lang.String</type>
 			</attribute>
 		</attributes>
 	</component>
@@ -1991,10 +1991,10 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The time zone of the component (defaults to "Greenwich"). This attribute can be of type <code>java.lang.String</code> or <code>java.util.TimeZone</code>. This attribute is used to determine the time zone of <code>java.text.SimpleDateFormat</code> which is used to parse the <code>minimumDate</code> and <code>maximumDate</code> attributes. If <code>minimumDate</code> and maximumDate</code> are not Strings or are unused, it is not necessary to set this attribute.]]>
+					<![CDATA[The time zone of the component (defaults to "Greenwich"). This attribute is used to determine the time zone of <code>java.text.SimpleDateFormat</code> which is used to parse the <code>minimumDate</code> and <code>maximumDate</code> attributes. If <code>minimumDate</code> and maximumDate</code> are not Strings or are unused, it is not necessary to set this attribute.]]>
 				</description>
 				<name>timeZone</name>
-				<type>java.lang.Object</type>
+				<type>java.lang.String</type>
 			</attribute>
 		</attributes>
 	</component>
