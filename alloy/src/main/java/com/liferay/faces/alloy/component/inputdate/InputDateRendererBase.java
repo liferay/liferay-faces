@@ -28,6 +28,7 @@ public abstract class InputDateRendererBase extends InputDateTimeRendererBase {
 
 	// Protected Constants
 	protected static final String AUTO_HIDE = "autoHide";
+	protected static final String CLIENT_KEY = "clientKey";
 	protected static final String DATE_PATTERN = "datePattern";
 	protected static final String LOCALE = "locale";
 	protected static final String MAXIMUM_DATE = "maximumDate";

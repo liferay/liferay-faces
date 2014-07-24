@@ -1525,6 +1525,13 @@
 			</attribute>
 			<attribute>
 				<description>
+					<![CDATA[The key name that can be used to reference the component on the client.]]>
+				</description>
+				<name>clientKey</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
 					<![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]>
 				</description>
 				<name>datePattern</name>
