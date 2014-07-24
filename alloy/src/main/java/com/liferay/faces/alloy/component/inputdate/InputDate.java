@@ -52,18 +52,6 @@ public class InputDate extends InputDateBase {
 		setRendererType(RENDERER_TYPE);
 	}
 
-	protected Date getDateAtMidnight(Date date) {
-
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(date);
-		calendar.set(Calendar.MILLISECOND, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-
-		return calendar.getTime();
-	}
-
 	@Override
 	protected void validateValue(FacesContext facesContext, Object newValue) {
 
@@ -170,6 +158,18 @@ public class InputDate extends InputDateBase {
 		}
 
 		return converter;
+	}
+
+	protected Date getDateAtMidnight(Date date) {
+
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+
+		return calendar.getTime();
 	}
 
 	@Override
