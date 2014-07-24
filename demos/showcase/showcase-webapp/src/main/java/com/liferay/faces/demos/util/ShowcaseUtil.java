@@ -202,10 +202,10 @@ public class ShowcaseUtil {
 			while (pos >= 0) {
 
 				if (openTag) {
-					text = text.substring(0, pos) + "<span class=\"inline-code\">" + text.substring(pos + 1);
+					text = text.substring(0, pos) + "<code>" + text.substring(pos + 1);
 				}
 				else {
-					text = text.substring(0, pos) + "</span>" + text.substring(pos + 1);
+					text = text.substring(0, pos) + "</code>" + text.substring(pos + 1);
 				}
 
 				pos = text.indexOf(StringPool.GRAVE_ACCENT);
