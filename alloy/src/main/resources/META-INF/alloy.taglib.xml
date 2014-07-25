@@ -1604,7 +1604,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The JSF library name for the image.]]></description>
+			<description><![CDATA[The library that contains the JSF image resource.]]></description>
 			<name>library</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1616,7 +1616,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The JSF resource name for the image.]]></description>
+			<description><![CDATA[The name of the JSF image resource.]]></description>
 			<name>name</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -4173,6 +4173,71 @@
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
 			<name>title</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[OutputScript is a UIOutput component that renders an <code>&lt;script&gt;</code> element with <code>type="text/javascript"</code>.]]></description>
+		<tag-name>outputScript</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.outputscript.OutputScript</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.outputscript.OutputScriptRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The class name of the converter instance that is to be used by this component.]]></description>
+			<name>converter</name>
+			<required>false</required>
+			<type>javax.faces.convert.Converter</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The library that contains the JSF script resource.]]></description>
+			<name>library</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the JSF script resource.]]></description>
+			<name>name</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The position on the page where the JavaScript should be rendered. Valid values include <code>body</code>, <code>form</code>, and <code>head</code>. The default value of this attribute is an empty (null) value which causes the <code>&lt;script&gt;</code> to be rendered inline (corresponding to its position in the view). Specifying <code>body</code> for the target attribute will cause the <code>&lt;script&gt;</code> to be rendered as close to the closing body tag as possible.]]></description>
+			<name>target</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A comma-delimited list of YUI or AlloyUI modules to load for this script. <strong>Note:</strong> if this attribute is specified, a YUI sandbox will be created automatically for the <code>&lt;script&gt;</code>.]]></description>
+			<name>use</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>

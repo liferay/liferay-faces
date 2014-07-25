@@ -17,18 +17,14 @@ import java.io.IOException;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.util.LiferayPortletUtil;
-import com.liferay.faces.util.client.ClientScript;
-import com.liferay.faces.util.client.ClientScriptFactory;
 import com.liferay.faces.util.context.ExtFacesContext;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.portal.WebKeys;
-import com.liferay.faces.util.render.BufferedResponseWriter;
+import com.liferay.faces.util.render.BufferedScriptResponseWriter;
+import com.liferay.faces.util.render.ContentTypes;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -37,12 +33,9 @@ import com.liferay.faces.util.render.BufferedResponseWriter;
 public class ScriptRenderer extends ScriptRendererCompat {
 
 	// Private Constants
-	private static final String AUI_USE = "AUI().use";
 	private static final String BOTTOM = "bottom";
-	private static final String FUNCTION_A = "function(A)";
 	private static final String INLINE = "inline";
 	private static final String POSITION = "position";
-	private static final String TEXT_JAVASCRIPT = "text/javascript";
 	private static final String USE = "use";
 
 	// Private Data Members
@@ -84,7 +77,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
 			responseWriter.startElement(StringPool.SCRIPT, uiComponent);
-			responseWriter.writeAttribute(StringPool.TYPE, TEXT_JAVASCRIPT, null);
+			responseWriter.writeAttribute(StringPool.TYPE, ContentTypes.TEXT_JAVASCRIPT, null);
 			responseWriter.write(StringPool.FORWARD_SLASH);
 			responseWriter.write(StringPool.FORWARD_SLASH);
 			responseWriter.write(StringPool.SPACE);
@@ -94,17 +87,9 @@ public class ScriptRenderer extends ScriptRendererCompat {
 			inlineUse = (String) attributes.get(USE);
 
 			if (inlineUse != null) {
-				responseWriter.write(AUI_USE);
-				responseWriter.write(StringPool.OPEN_PARENTHESIS);
-				responseWriter.write(StringPool.APOSTROPHE);
-				responseWriter.write(inlineUse);
-				responseWriter.write(StringPool.APOSTROPHE);
-				responseWriter.write(StringPool.COMMA);
-				responseWriter.write(StringPool.NEW_LINE);
-				responseWriter.write(FUNCTION_A);
-				responseWriter.write(StringPool.SPACE);
-				responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-				responseWriter.write(StringPool.NEW_LINE);
+				String[] useArray = new String[] { inlineUse };
+				String alloyBeginScript = RendererUtil.getAlloyBeginScript(facesContext, useArray);
+				responseWriter.write(alloyBeginScript);
 			}
 		}
 	}
@@ -122,8 +107,8 @@ public class ScriptRenderer extends ScriptRendererCompat {
 
 			// Ask the children to encode themselves and capture the markup in a string.
 			ResponseWriter backupResponseWriter = facesContext.getResponseWriter();
-			BufferedResponseWriter bufferedResponseWriter = new BufferedResponseWriter();
-			facesContext.setResponseWriter(bufferedResponseWriter);
+			BufferedScriptResponseWriter bufferedScriptResponseWriter = new BufferedScriptResponseWriter();
+			facesContext.setResponseWriter(bufferedScriptResponseWriter);
 			super.encodeChildren(facesContext, uiComponent);
 			facesContext.setResponseWriter(backupResponseWriter);
 
@@ -132,28 +117,16 @@ public class ScriptRenderer extends ScriptRendererCompat {
 			// knows to include it in the <eval>...</eval> section of the JSF partial-response.
 			if (isAjaxRequest(facesContext)) {
 				Map<String, String> javaScriptMap = ExtFacesContext.getInstance().getJavaScriptMap();
-				javaScriptMap.put(uiComponent.getClientId(facesContext), bufferedResponseWriter.toString());
+				javaScriptMap.put(uiComponent.getClientId(facesContext), bufferedScriptResponseWriter.toString());
 			}
 
 			// Otherwise, render the script at the bottom of the portal page by setting the WebKeys.AUI_SCRIPT_DATA
 			// request attribute.
 			else {
-				ExternalContext externalContext = facesContext.getExternalContext();
-				ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-						ClientScriptFactory.class);
-				ClientScript clientScript = clientScriptFactory.getClientScript(externalContext);
-
 				Map<String, Object> attributes = uiComponent.getAttributes();
 				String use = (String) attributes.get(USE);
-				String portletId = StringPool.BLANK;
-				
-				Object portlet = externalContext.getRequestMap().get(WebKeys.RENDER_PORTLET);
-
-				if (portlet != null) {
-					portletId = LiferayPortletUtil.getPortletId(portlet);
-				}
-
-				clientScript.append(portletId, bufferedResponseWriter.toString(), use);
+				String bufferedScript = bufferedScriptResponseWriter.toString();
+				RendererUtil.renderScript(facesContext, uiComponent, bufferedScript, use);
 			}
 		}
 	}
@@ -165,11 +138,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 			if (inlineUse != null) {
-				responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-				responseWriter.write(StringPool.NEW_LINE);
-				responseWriter.write(StringPool.CLOSE_PARENTHESIS);
-				responseWriter.write(StringPool.SEMICOLON);
-				responseWriter.write(StringPool.NEW_LINE);
+				responseWriter.write(RendererUtil.ALLOY_END_SCRIPT);
 			}
 
 			responseWriter.write(StringPool.FORWARD_SLASH);

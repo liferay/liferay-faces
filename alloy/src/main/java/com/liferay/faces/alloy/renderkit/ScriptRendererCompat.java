@@ -19,7 +19,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.alloy.util.LiferayThemeDisplayUtil;
+import com.liferay.faces.util.portal.LiferayThemeDisplayUtil;
 import com.liferay.faces.util.portal.WebKeys;
 
 

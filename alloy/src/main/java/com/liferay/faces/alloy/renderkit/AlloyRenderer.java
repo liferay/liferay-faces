@@ -45,9 +45,6 @@ public interface AlloyRenderer {
 	public void encodeInteger(ResponseWriter responseWriter, String attributeName, Integer attributeValue,
 		boolean first) throws IOException;
 
-	public void encodeLang(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
-		throws IOException;
-
 	public void encodeLiferayComponent(ResponseWriter responseWriter, String clientKey) throws IOException;
 
 	public void encodeLiferayComponentVar(ResponseWriter responseWriter, String clientVarName, String clientKey)
@@ -62,4 +59,7 @@ public interface AlloyRenderer {
 	public void encodeWidgetRender(ResponseWriter responseWriter, boolean first) throws IOException;
 
 	public String getAlloyClassName();
+
+	public String getYUIConfig(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
+		throws IOException;
 }

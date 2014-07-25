@@ -1453,7 +1453,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The JSF library name for the image.]]>
+					<![CDATA[The library that contains the JSF image resource.]]>
 				</description>
 				<name>library</name>
 				<type>java.lang.String</type>
@@ -1469,7 +1469,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The JSF resource name for the image.]]>
+					<![CDATA[The name of the JSF image resource.]]>
 				</description>
 				<name>name</name>
 				<type>java.lang.String</type>
@@ -1769,6 +1769,34 @@
 				<name>layout</name>
 				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="OutputScript" extendsTags="UIOutput" parentClass="javax.faces.component.UIOutput"
+		styleable="false" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[OutputScript is a UIOutput component that renders an <code>&lt;script&gt;</code> element with <code>type="text/javascript"</code>.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description><![CDATA[The library that contains the JSF script resource.]]></description>
+				<name>library</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[The name of the JSF script resource.]]></description>
+				<name>name</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[The position on the page where the JavaScript should be rendered. Valid values include <code>body</code>, <code>form</code>, and <code>head</code>. The default value of this attribute is an empty (null) value which causes the <code>&lt;script&gt;</code> to be rendered inline (corresponding to its position in the view). Specifying <code>body</code> for the target attribute will cause the <code>&lt;script&gt;</code> to be rendered as close to the closing body tag as possible.]]></description>
+				<name>target</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[A comma-delimited list of YUI or AlloyUI modules to load for this script. <strong>Note:</strong> if this attribute is specified, a YUI sandbox will be created automatically for the <code>&lt;script&gt;</code>.]]></description>
+				<name>use</name>
+				<type>java.lang.String</type>
 			</attribute>
 		</attributes>
 	</component>
