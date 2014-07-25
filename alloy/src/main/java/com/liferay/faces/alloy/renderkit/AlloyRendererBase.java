@@ -103,12 +103,6 @@ public abstract class AlloyRendererBase extends ClientComponentRendererBase impl
 	}
 
 	@Override
-	public void encodeLang(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
-		throws IOException {
-		// no-op
-	}
-
-	@Override
 	public void encodeLiferayComponent(ResponseWriter responseWriter, String clientKey) throws IOException {
 		AlloyRendererUtil.encodeLiferayComponent(responseWriter, clientKey);
 	}
@@ -138,4 +132,10 @@ public abstract class AlloyRendererBase extends ClientComponentRendererBase impl
 
 	@Override
 	public abstract String getAlloyClassName();
+
+	@Override
+	public String getYUIConfig(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
+		throws IOException {
+		return null;
+	}
 }

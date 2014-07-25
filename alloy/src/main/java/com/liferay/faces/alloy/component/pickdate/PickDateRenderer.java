@@ -66,21 +66,6 @@ public class PickDateRenderer extends PickDateRendererBase {
 	private static final String[] DATE_PICKER_MODULES = StringHelper.append(MODULES, NODE_EVENT_SIMULATE);
 
 	@Override
-	public void encodeLang(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
-		throws IOException {
-
-		PickDate pickDate = (PickDate) uiComponent;
-		Locale locale = PickDateUtil.getObjectAsLocale(pickDate.getLocale(facesContext));
-
-		// RFC 1766 requires the subtags of locales to be delimited by hyphens rather than underscores.
-		// http://www.faqs.org/rfcs/rfc1766.html
-		String localeString = locale.toString().replaceAll(StringPool.UNDERLINE, StringPool.DASH);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-		encodeString(responseWriter, LANG, localeString, true);
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-	}
-
-	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 		// This is a no-op since the DataPicker does not manifest any markup.
 	}
@@ -234,5 +219,29 @@ public class PickDateRenderer extends PickDateRendererBase {
 	@Override
 	protected String[] getModules() {
 		return DATE_PICKER_MODULES;
+	}
+
+	@Override
+	public String getYUIConfig(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
+		throws IOException {
+
+		PickDate pickDate = (PickDate) uiComponent;
+		Locale locale = PickDateUtil.getObjectAsLocale(pickDate.getLocale(facesContext));
+
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(StringPool.OPEN_CURLY_BRACE);
+		stringBuilder.append(LANG);
+		stringBuilder.append(StringPool.COLON);
+
+		// RFC 1766 requires the subtags of locales to be delimited by hyphens rather than underscores.
+		// http://www.faqs.org/rfcs/rfc1766.html
+		stringBuilder.append(StringPool.APOSTROPHE);
+
+		String localeString = locale.toString().replaceAll(StringPool.UNDERLINE, StringPool.DASH);
+		stringBuilder.append(localeString);
+		stringBuilder.append(StringPool.APOSTROPHE);
+		stringBuilder.append(StringPool.CLOSE_CURLY_BRACE);
+
+		return stringBuilder.toString();
 	}
 }

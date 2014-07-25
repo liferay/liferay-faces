@@ -20,17 +20,15 @@ import java.io.Writer;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.lang.StringPool;
-
 
 /**
  * @author  Neil Griffin
  */
-public class BufferedResponseWriter extends ResponseWriter {
+public class BufferedScriptResponseWriter extends ResponseWriter {
 
 	StringWriter stringWriter = null;
 
-	public BufferedResponseWriter() {
+	public BufferedScriptResponseWriter() {
 		this.stringWriter = new StringWriter();
 	}
 
@@ -77,18 +75,6 @@ public class BufferedResponseWriter extends ResponseWriter {
 
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
-
-		if (name != null) {
-			stringWriter.write(name);
-			stringWriter.write(StringPool.EQUAL);
-			stringWriter.write(StringPool.QUOTE);
-
-			if (value != null) {
-				stringWriter.write(value.toString());
-			}
-
-			stringWriter.write(StringPool.QUOTE);
-		}
 	}
 
 	@Override
