@@ -1,29 +1,27 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
-	template="/templates/component-3col.xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
-		<!-- This <script> is rendered inline, so it blocks the rendering of the rest of page while loading. -->
+		<!-- Example 1: Script rendered inline -->
 		<h:form>
-			<showcase:example number="1" renderedCheckbox="true">
-				<h:panelGroup rendered="#{showcaseModelBean.selectedComponent.rendered}">
+			<showcase:example description="#{i18n['alloy-outputscript-general-example-1']}" number="1" renderedCheckbox="true">
+				<alloy:panelGroup rendered="#{showcaseModelBean.selectedComponent.rendered}">
 					<span id="example1:text"></span>
-				</h:panelGroup>
+				</alloy:panelGroup>
 				<alloy:outputScript rendered="#{showcaseModelBean.selectedComponent.rendered}">
-					document.getElementById('example1:text').innerHTML = '#{i18n['alloy-outputscript-general-exampe-1']}';
+					document.getElementById('example1:text').innerHTML = '#{i18n['alloy-outputscript-general-script-1']}';
 				</alloy:outputScript>
 			</showcase:example>
 		</h:form>
 	</ui:define>
 
 	<ui:define name="col2">
-		<!-- This <script> is rendered at the bottom of the page, so it does not block the rendering of the rest of -->
-		<!-- page while loading. -->
-		<showcase:example number="2">
+		<!-- Example 2: Script rendered at the bottom of the page -->
+		<showcase:example description="#{i18n['alloy-outputscript-general-example-2']}" number="2">
 			<span id="example2:text"></span>
 			<alloy:outputScript target="body">
-				document.getElementById('example2:text').innerHTML = '#{i18n['alloy-outputscript-general-exampe-2']}';
+				document.getElementById('example2:text').innerHTML = '#{i18n['alloy-outputscript-general-script-2']}';
 			</alloy:outputScript>
 		</showcase:example>
 	</ui:define>
