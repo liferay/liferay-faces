@@ -163,7 +163,7 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -481,7 +481,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -710,7 +710,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -1402,7 +1402,7 @@
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -1807,7 +1807,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -2193,7 +2193,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -2621,7 +2621,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -2874,7 +2874,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -3127,7 +3127,7 @@
 			<type>java.lang.Boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -3311,6 +3311,53 @@
 			<name>value</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[A menu is a panel component that renders nested/child tags as content within itself.]]></description>
+		<tag-name>menu</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.menu.Menu</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.menu.MenuRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The visible label for the menu.  This is only used if a facet with name="label" is not present.]]></description>
+			<name>label</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
@@ -3902,7 +3949,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -5134,7 +5181,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -5381,7 +5428,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -5658,7 +5705,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -5923,7 +5970,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -6176,7 +6223,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -6435,7 +6482,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -6694,7 +6741,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -6965,7 +7012,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -7236,7 +7283,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]></description>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>

@@ -62,7 +62,7 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]>
+					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]>
 				</description>
 				<defaultValue>false</defaultValue>
 				<generateJava>false</generateJava>
@@ -828,7 +828,7 @@
 			<attribute>
 				<defaultValue>false</defaultValue>
 				<description>
-					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]>
+					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]>
 				</description>
 				<name>disabled</name>
 				<type>boolean</type>
@@ -1325,7 +1325,7 @@
 			<attribute>
 				<defaultValue>false</defaultValue>
 				<description>
-					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to intercat with the component.]]>
+					<![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]>
 				</description>
 				<name>disabled</name>
 				<type>boolean</type>
@@ -1736,6 +1736,20 @@
 				<name>for</name>
 				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="Menu" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIColumn">
+		<description>
+			<![CDATA[A menu is a panel component that renders nested/child tags as content within itself.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The visible label for the menu.  This is only used if a facet with name="label" is not present.]]>
+				</description>
+				<name>label</name>
+				<type>java.lang.String</type>
 			</attribute>
 		</attributes>
 	</component>

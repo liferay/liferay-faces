@@ -1,0 +1,158 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Styling via label attribute -->
+		<h:form>
+			<showcase:example description="#{i18n['alloy-button-menu-example-1']}" number="1">
+				<alloy:button includeViewParams="true">
+					<alloy:icon name="user" />
+					<alloy:outputText value=" #{i18n['user']} " />
+					<alloy:menu>
+						<alloy:link includeViewParams="true">
+							<alloy:icon name="pencil" />
+							<alloy:outputText value=" Edit" />
+						</alloy:link>
+						<alloy:menu label=" #{i18n['delete-options']}">
+							<alloy:commandLink>
+								<alloy:icon name="minus-sign" />
+								<alloy:outputText value=" Soft Delete" />
+							</alloy:commandLink>
+							<alloy:commandLink>
+								<alloy:icon name="fire" />
+								<alloy:outputText value=" Hard Delete" />
+							</alloy:commandLink>
+							<alloy:menu label=" #{i18n['professional']}">
+								<alloy:commandLink>
+									<alloy:icon name="star" />
+									<alloy:outputText value=" services " />
+								</alloy:commandLink>
+							</alloy:menu>
+							<h:outputLink target="_blank" value="http://www.wikipedia.org/">
+								<alloy:outputText value="Wiki entry" />
+							</h:outputLink>
+						</alloy:menu>
+						<alloy:outputLink target="_blank"
+							value="https://www.liferay.com/community/liferay-projects/liferay-faces">
+							<alloy:icon name="ban-circle" />
+							<alloy:outputText value=" Ban" />
+						</alloy:outputLink>
+						<hr />
+						<alloy:outputLink target="_blank" value="https://www.google.com/search">
+							<f:param name="q" value="liferay faces" />
+							<alloy:icon name="star" />
+							<alloy:outputText value=" Make admin" />
+						</alloy:outputLink>
+					</alloy:menu>
+				</alloy:button>
+				<div style="clear:both;" />
+			</showcase:example>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="col2">
+		<!-- Example 2: Styling via f:facet tag -->
+		<h:form>
+			<showcase:example description="#{i18n['alloy-button-menu-example-2']}" number="2">
+				<alloy:button includeViewParams="true">
+					<alloy:icon name="user" />
+					<alloy:outputText value=" #{i18n['user']} " />
+					<alloy:menu>
+						<alloy:link includeViewParams="true">
+							<alloy:icon name="pencil" />
+							<alloy:outputText value=" Edit" />
+						</alloy:link>
+						<alloy:menu>
+							<f:facet name="label">
+								<alloy:icon name="arrow-right" />
+								<alloy:outputText value=" #{i18n['delete-options']}" />
+							</f:facet>
+							<alloy:commandLink>
+								<alloy:icon name="minus-sign" />
+								<alloy:outputText value=" Soft Delete" />
+							</alloy:commandLink>
+							<alloy:commandLink>
+								<alloy:icon name="fire" />
+								<alloy:outputText value=" Hard Delete" />
+							</alloy:commandLink>
+							<alloy:menu>
+								<f:facet name="label">
+									<alloy:icon name="arrow-right" />
+									<alloy:outputText value=" #{i18n['professional']}" />
+								</f:facet>
+								<alloy:commandLink>
+									<alloy:icon name="star" />
+									<alloy:outputText value=" services " />
+								</alloy:commandLink>
+							</alloy:menu>
+							<a href="http://www.wikipedia.org/">Wiki entry</a>
+						</alloy:menu>
+						<alloy:outputLink target="_blank"
+							value="https://www.liferay.com/community/liferay-projects/liferay-faces">
+							<alloy:icon name="ban-circle" />
+							<alloy:outputText value=" Ban" />
+						</alloy:outputLink>
+						<hr />
+						<alloy:outputLink target="_blank" value="https://www.google.com/search">
+							<f:param name="q" value="liferay faces" />
+							<alloy:icon name="star" />
+							<alloy:outputText value=" Make admin" />
+						</alloy:outputLink>
+					</alloy:menu>
+				</alloy:button>
+				<div style="clear:both;" />
+			</showcase:example>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="col3">
+		<!-- Example 3: Use a label or a f:facet to style the button -->
+		<h:form>
+			<showcase:example description="#{i18n['alloy-button-menu-example-3']}" number="3">
+				<alloy:button includeViewParams="true">
+					<alloy:icon name="user" />
+					<alloy:outputText value=" #{i18n['user']} " />
+					<alloy:menu>
+						<f:facet name="label">
+							<alloy:icon name="chevron-down" />
+							<alloy:outputText value=" #{i18n['drop-down']}" />
+						</f:facet>
+						<alloy:link includeViewParams="true">
+							<alloy:icon name="pencil" />
+							<alloy:outputText value=" Edit" />
+						</alloy:link>
+						<alloy:menu>
+							<f:facet name="label">
+								<alloy:icon name="arrow-right" />
+								<alloy:outputText value=" #{i18n['delete-options']}" />
+							</f:facet>
+							<alloy:commandLink>
+								<alloy:icon name="minus-sign" />
+								<alloy:outputText value=" Soft Delete" />
+							</alloy:commandLink>
+							<alloy:commandLink>
+								<alloy:icon name="fire" />
+								<alloy:outputText value=" Hard Delete" />
+							</alloy:commandLink>
+						</alloy:menu>
+						<alloy:outputLink target="_blank"
+							value="https://www.liferay.com/community/liferay-projects/liferay-faces">
+							<alloy:icon name="ban-circle" />
+							<alloy:outputText value=" Ban" />
+						</alloy:outputLink>
+						<hr />
+						<alloy:outputLink target="_blank" value="https://www.google.com/search">
+							<f:param name="q" value="liferay faces" />
+							<alloy:icon name="star" />
+							<alloy:outputText value=" Make admin" />
+						</alloy:outputLink>
+					</alloy:menu>
+				</alloy:button>
+				<div style="clear:both;" />
+			</showcase:example>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

@@ -40,3 +40,165 @@ display:inline;
 table.alloy-select-many-checkbox td label,table.alloy-select-one-radio td label {
 white-space:nowrap;
 }
+
+/* Start splitButton css */
+
+/* remove content placed :after ul(s) to display inline like normal buttons */
+.yui3-menu-horizontal>div.yui3-menu-content>ul:after {
+	display: none;
+}
+
+/* adjust padding to make splitButtons look like other bootstrap buttons */
+
+.yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn {
+	padding: 4px 12px;
+}
+
+.yui3-skin-sam div.yui3-splitbuttonnav {
+	margin-top: 2px;
+}
+
+/* adjust splitButton menus to look more like other overlays such as popovers and dialogs */
+
+/* .yui3-skin-sam .yui3-menu div.yui3-menu-content, remove this to prevent staggering of "button" divs */
+.yui3-skin-sam .yui3-menu .yui3-menu div.yui3-menu-content {
+	padding: 3px;
+}
+
+.yui3-menu-content div.yui3-menu-content {
+	border-radius: 6px;
+	margin-top: 4px;
+}
+
+.yui3-menu-content li.yui3-menuitem {
+	padding: 3px;
+}
+
+/* remove borders */
+
+.yui3-menu-horizontal div.yui3-menu-content {
+	border: 0;
+}
+
+.yui3-skin-sam div.yui3-splitbuttonnav li {
+	border: 0;
+}
+
+.yui3-skin-sam a.yui3-menu-content, 
+.yui3-skin-sam .yui3-menu .yui3-menu a.yui3-menu-content {
+	border: 0;
+}
+
+.yui3-skin-sam .yui3-menu-horizontal a.yui3-menu-label, 
+.yui3-skin-sam .yui3-menu-horizontal span.yui3-menu-label, 
+.yui3-skin-sam .yui3-menu-horizontal a.yui3-menuitem-content {
+	border: 0;
+}
+
+/* remove negative margin-left values */
+
+.yui3-skin-sam .yui3-splitbuttonnav span.yui3-menu-label-active {
+	margin-left: 0;
+}
+
+.yui3-skin-sam .yui3-splitbuttonnav span.yui3-menu-label-menuvisible {
+	margin-left: 0;
+}
+
+.yui3-skin-sam .yui3-menu-horizontal span.yui3-menu-label {
+	margin-left: 0;
+}
+
+/* btn-default have black font all other btn-* have white font */
+
+.yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn-default {
+	color: #000000;
+}
+
+.yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn-primary {
+	color: #ffffff;
+}
+
+.yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn-info {
+	color: #ffffff;
+}
+
+.yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn-success {
+	color: #ffffff;
+}
+
+.yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn-warning {
+	color: #ffffff;
+}
+
+.yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn-danger {
+	color: #ffffff;
+}
+
+.yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn-inverse {
+	color: #ffffff;
+}
+
+/* font */
+.yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn {
+	font-weight: normal;
+}
+
+/* button radii ... watch out for script tags! */
+
+.yui3-skin-sam .yui3-splitbuttonnav .btn-group>script:first-child+a.btn {
+	-webkit-border-top-left-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	border-top-left-radius: 3px;
+	-webkit-border-bottom-left-radius: 3px;
+	-moz-border-radius-bottomleft: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+.yui3-skin-sam .yui3-splitbuttonnav .btn-group>a.btn:first-child {
+	-webkit-border-top-left-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	border-top-left-radius: 3px;
+	-webkit-border-bottom-left-radius: 3px;
+	-moz-border-radius-bottomleft: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+.yui3-skin-sam .yui3-splitbuttonnav .btn-group>a.btn:last-child {
+	-webkit-border-top-right-radius: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-right-radius: 3px;
+	-webkit-border-bottom-right-radius: 3px;
+	-moz-border-radius-bottomright: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+/* sizes */
+
+.yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn-large {
+	padding: 11px 19px;
+	font-size: 17.5px;
+}
+
+.yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn-small {
+	padding: 2px 10px;
+	font-size: 11.9px;
+}
+
+.yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn-mini {
+	padding: 0 6px;
+	font-size: 10.5px;
+}
+
+/* disabled */
+
+.yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn-disabled {
+	opacity: .65;
+}
+
+.yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label span.btn-disabled {
+	float: left;
+	opacity: .65;
+}
+
+/* End splitButton css */
