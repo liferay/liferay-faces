@@ -75,7 +75,7 @@ public class Jsf2ExportPdfPortletTest extends TesterBase {
 		if (isThere(browser, brianExportXpath)) {
 			logger.log(Level.INFO, "isThere(brianExportXpath) = " + isThere(browser, brianExportXpath));
 			richExport.click();
-			Thread.sleep(1000);
+			Thread.sleep(500);
 			
 			Set<String> handles = browser.getWindowHandles();
 			for (String window : handles) {
@@ -86,6 +86,49 @@ public class Jsf2ExportPdfPortletTest extends TesterBase {
     			logger.log(Level.INFO, "browser.getPageSource() = " + browser.getPageSource());
     			logger.log(Level.INFO, " -------------------------------------------------- ");
             }
+			
+			if (browser.getPageSource().contains("Shearer")) {
+				logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+				logger.log(Level.INFO, "browser.getPageSource().contains(Shearer) after 0.5 second");
+			} else {
+				Thread.sleep(50);
+				if (browser.getPageSource().contains("Shearer")) {
+					logger.log(Level.INFO, "browser.getCurrentUrl() = "	+ browser.getCurrentUrl());
+					logger.log(Level.INFO, "browser.getPageSource().contains(Shearer) after 0.5 second + 50 milliseconds");
+				} else {
+					Thread.sleep(50);
+					if (browser.getPageSource().contains("Shearer")) {
+						logger.log(Level.INFO, "browser.getCurrentUrl() = "	+ browser.getCurrentUrl());
+						logger.log(Level.INFO, "browser.getPageSource().contains(Shearer) after 0.5 second + 100 milliseconds");
+					} else {
+						Thread.sleep(50);
+						if (browser.getPageSource().contains("Shearer")) {
+							logger.log(Level.INFO, "browser.getCurrentUrl() = "	+ browser.getCurrentUrl());
+							logger.log(Level.INFO, "browser.getPageSource().contains(Shearer) after 0.5 second + 150 milliseconds");
+						} else {
+							Thread.sleep(50);
+							if (browser.getPageSource().contains("Shearer")) {
+								logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+								logger.log(Level.INFO, "browser.getPageSource().contains(Shearer) after 0.5 second + 200 milliseconds");
+							} else {
+								Thread.sleep(50);
+								if (browser.getPageSource().contains("Shearer")) {
+									logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+									logger.log(Level.INFO, "browser.getPageSource().contains(Shearer) after 0.5 second + 250 milliseconds");
+								} else {
+									Thread.sleep(50);
+									if (browser.getPageSource().contains("Shearer")) {
+										logger.log(Level.INFO, "browser.getCurrentUrl() = "	+ browser.getCurrentUrl());
+										logger.log(Level.INFO, "browser.getPageSource().contains(Shearer) after 0.5 second + 300 milliseconds");
+									} else {
+										logger.log(Level.INFO, "browser.getPageSource() did NOT contain (Shearer) after 0.5 second + 300 milliseconds");
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 			
 			logger.log(Level.INFO, "browser.getPageSource().contains('Shearer') = " + browser.getPageSource().contains("Shearer"));
 			logger.log(Level.INFO, " -------------------------------------------------- ");
