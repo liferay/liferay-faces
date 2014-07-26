@@ -3,11 +3,12 @@
 	template="/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
-		<!-- This script utilizes a JavaScript function from the external JavaScript Library example.js. -->
+		<!-- This script calls a JavaScript function that is defined in the external JavaScript -->
+		<!-- resource named example.js -->
 		<showcase:example>
-			<span id="text"></span>
+			<span id="example:text"></span>
 			<alloy:outputScript>
-				exampleJavaScriptFunction('text');
+				exampleNamespace.exampleFunction('example:text');
 			</alloy:outputScript>
 			<alloy:outputScript library="js" name="example.js" target="head" />
 		</showcase:example>
