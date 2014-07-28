@@ -1,5 +1,6 @@
-function exampleJavaScriptFunction(id) {
-	document.getElementById(id).innerHTML =
-		'A script has called <span class="inline-code">exampleJavaScriptFunction(id)</span>' +
-		' which resides in the JavaScript resouce file <span class="inline-code">example.js</span>.';
-}
+var exampleNamespace = {
+	exampleFunction : function(id) {
+		document.getElementById(id).innerHTML = 'A script has called <code>exampleNamespace.exampleFunction(id)</code> '
+				+ 'which resides in the JavaScript resouce file named <code>example.js</code>.';
+	}
+};
