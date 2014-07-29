@@ -33,9 +33,11 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 	// Protected Constants
 	protected static final String CLIENT_KEY = "clientKey";
 	protected static final String HEIGHT = "height";
+	protected static final String SELECTED_INDEX = "selectedIndex";
 	protected static final String STACKED = "stacked";
 	protected static final String STYLE = "style";
 	protected static final String STYLE_CLASS = "styleClass";
+	protected static final String TAB_EVENT_LISTENER = "tabEventListener";
 	protected static final String WIDTH = "width";
 
 	// Private Constants
