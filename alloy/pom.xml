@@ -65,23 +65,68 @@
 				</dependencies>
 			</plugin>
 			<plugin>
+			    <groupId>com.googlecode.maven-download-plugin</groupId>
+			    <artifactId>download-maven-plugin</artifactId>
+			    <version>1.2.0</version>
+			    <executions>
+			        <execution>
+			            <id>unpack-alloy</id>
+			            <phase>generate-resources</phase>
+			            <goals>
+			                <goal>wget</goal>
+			            </goals>
+			            <configuration>
+			            	<!-- https://github.com/liferay/liferay-portal/tree/6.2.x/portal-web/third-party -->
+			            	<url>https://raw.githubusercontent.com/liferay/liferay-portal/6.2.x/portal-web/third-party/alloy-2.0.0.zip</url>
+			                <unpack>true</unpack>
+			                <outputDirectory>${project.build.directory}</outputDirectory>
+			                <md5>904c2f0b876b6d3f732da5eed46ec977</md5>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin>
+			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
 					<execution>
-						<phase>generate-resources</phase>
+						<phase>process-resources</phase>
 						<goals>
 							<goal>run</goal>
 						</goals>
 						<configuration>
 							<target>
 								<copy todir="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/build">
-									<fileset dir="${env.HOME}/.alloyui/alloy-build/alloy-ui-${alloyui.version}/build" />
+									<fileset dir="${project.build.directory}/alloy-${alloyui.version}/build" />
 								</copy>
-								<replace token="../img/" value="#{resource['liferay-faces-alloy:build/aui-css/img/" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/build/aui-css/css">
+								<replace token="../img/" value="#{resource['liferay-faces-alloy:build/aui-css/img/" 
+									dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/build/aui-css/css">
 									<include name="bootstrap.min.css" />
 								</replace>
-								<replace token=".png)" value=".png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/build/aui-css/css">
+								<replace token=".png)" value=".png']})" 
+									dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/build/aui-css/css">
 									<include name="bootstrap.min.css" />
+								</replace>
+								<!-- for dialog -->
+								<replace token="url(arrows.png)" value="url(#{resource['liferay-faces-alloy:build/resize-base/assets/skins/sam/arrows.png']})" 
+									dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/build/resize-base/assets/skins/sam">
+									<include name="resize-base.css" />
+								</replace>
+								<!-- menus -->
+								<replace token="url(vertical-menu-submenu-indicator.png)" value="url(#{resource['liferay-faces-alloy:build/node-menunav/assets/skins/sam/vertical-menu-submenu-indicator.png']})" 
+									dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/build/node-menunav/assets/skins/sam">
+									<include name="node-menunav-skin.css" />
+								</replace>
+								<replace token="url(vertical-menu-submenu-indicator.png)" value="url(#{resource['liferay-faces-alloy:build/node-menunav/assets/skins/sam/vertical-menu-submenu-indicator.png']})" 
+									dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/build/node-menunav/assets/skins/sam">
+									<include name="node-menunav.css" />
+								</replace>
+								<replace token="url(../../../../assets/skins/sam/sprite.png)" value="url(#{resource['liferay-faces-alloy:build/aui-color-palette/assets/skins/sam/sprite.png']})" 
+									dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/build/node-menunav/assets/skins/sam">
+									<include name="node-menunav-skin.css" />
+								</replace>
+								<replace token="url(../../../../assets/skins/sam/sprite.png)" value="url(#{resource['liferay-faces-alloy:build/aui-color-palette/assets/skins/sam/sprite.png']})" 
+									dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/build/node-menunav/assets/skins/sam">
+									<include name="node-menunav.css" />
 								</replace>
 							</target>
 						</configuration>
