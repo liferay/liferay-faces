@@ -18,6 +18,7 @@ import java.io.IOException;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.DelegationResponseWriterBase;
 
@@ -57,9 +58,9 @@ public class OutputTooltipResponseWriter extends DelegationResponseWriterBase {
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		// Prevent the JSF runtime writing the "id" attribute since the
-		// OutputToolTipRenderer.encodeMarkupBegin(FacesContext, UIComponent) method has already written it.
-		if (!StringPool.ID.equals(name)) {
+		// Prevent the JSF runtime writing the "id", "style", and "class" attributes since the
+		// OutputToolTipRenderer.encodeMarkupBegin(FacesContext, UIComponent) method has already written them.
+		if (!StringPool.ID.equals(name) && !Styleable.STYLE.equals(name) && !Styleable.STYLE_CLASS.equals(name)) {
 			super.writeAttribute(name, value, property);
 		}
 	}

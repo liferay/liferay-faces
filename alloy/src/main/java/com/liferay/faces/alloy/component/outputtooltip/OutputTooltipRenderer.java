@@ -25,10 +25,14 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
+import com.liferay.faces.util.component.ClientComponent;
+import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.DelegationResponseWriter;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -75,19 +79,45 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 		if ((tooltip.getFor() == null) && facesContext.isProjectStage(ProjectStage.Development)) {
 			logger.error("The 'for' attribute is required for alloy:outputTooltip");
 		}
+
+		ClientComponent clientComponent = (ClientComponent) uiComponent;
+		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+		String clientKey = clientComponent.getClientKey();
+
+		if (clientKey == null) {
+			clientKey = clientVarName;
+		}
+
+		// In order to workaround a bug where the tooltip appears in the incorrect place, set the trigger again after
+		// the tooltip has been initialized
+		encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
+		responseWriter.write(clientVarName);
+		responseWriter.write(".set('trigger',");
+		responseWriter.write(clientVarName);
+		responseWriter.write(".get('trigger'));");
 	}
 
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		// Encode the opening <div> tag with an "id" attribute so that AlloyUI will be able to find the contentBox.
+		// Encode the opening <div> tag with an "id" attribute so that AlloyUI will be able to find the boundingBox.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.startElement(StringPool.DIV, uiComponent);
-		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(), StringPool.ID);
 
-		// Create a response writer that will ignore the opening and closing "span" element tags.
-		DelegationResponseWriter delegationResponseWriter = new OutputTooltipResponseWriter(responseWriter,
-				uiComponent.getClientId(facesContext));
+		String clientId = uiComponent.getClientId(facesContext);
+		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
+
+		// Render "style" and "class" attributes on the boundingBox <div> tag.
+		Styleable styleable = (Styleable) uiComponent;
+		RendererUtil.encodeStyleable(responseWriter, styleable);
+		responseWriter.startElement(StringPool.DIV, null);
+
+		String contentBoxClientId = clientId.concat(CONTENT_BOX_SUFFIX);
+		responseWriter.writeAttribute(StringPool.ID, contentBoxClientId, null);
+
+		// Create a response writer that will ignore the opening and closing "span" element tags along with the "id",
+		// "style", and "class" attributes.
+		DelegationResponseWriter delegationResponseWriter = new OutputTooltipResponseWriter(responseWriter, clientId);
 
 		// The delegation renderer provided by the JSF runtime does not attempt to encode the opening <span> tag during
 		// of encodeBegin(FacesContext, UIComponent). Instead, the entire <span>...</span> element is encoded during
@@ -100,6 +130,7 @@ public class OutputTooltipRenderer extends OutputTooltipRendererBase {
 
 		// Encode the closing </div> tag.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		responseWriter.endElement(StringPool.DIV);
 		responseWriter.endElement(StringPool.DIV);
 	}
 

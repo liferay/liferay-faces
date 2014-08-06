@@ -31,12 +31,12 @@ import com.liferay.faces.alloy.component.overlay.OverlayRendererBase;
 public abstract class OutputTooltipRendererBase extends OverlayRendererBase {
 
 	// Protected Constants
+	protected static final String AUTO_SHOW = "autoShow";
 	protected static final String CLIENT_KEY = "clientKey";
-	protected static final String HEADER_CONTENT = "headerContent";
+	protected static final String HEADER_TEXT = "headerText";
 	protected static final String OPACITY = "opacity";
 	protected static final String POSITION = "position";
 	protected static final String TRIGGER = "trigger";
-	protected static final String VISIBLE = "visible";
 	protected static final String Z_INDEX = "zIndex";
 
 	// Private Constants
@@ -52,27 +52,11 @@ public abstract class OutputTooltipRendererBase extends OverlayRendererBase {
 		OutputTooltip outputTooltip = (OutputTooltip) uiComponent;
 		boolean first = true;
 
-		Boolean autoShow = outputTooltip.isAutoShow();
-
-		if (autoShow != null) {
-
-			encodeVisible(responseWriter, outputTooltip, autoShow, first);
-			first = false;
-		}
-
 		String for_ = outputTooltip.getFor();
 
 		if (for_ != null) {
 
 			encodeTrigger(responseWriter, outputTooltip, for_, first);
-			first = false;
-		}
-
-		String headerText = outputTooltip.getHeaderText();
-
-		if (headerText != null) {
-
-			encodeHeaderContent(responseWriter, outputTooltip, headerText, first);
 			first = false;
 		}
 
@@ -113,16 +97,8 @@ public abstract class OutputTooltipRendererBase extends OverlayRendererBase {
 		return MODULES;
 	}
 
-	protected void encodeVisible(ResponseWriter responseWriter, OutputTooltip outputTooltip, Boolean autoShow, boolean first) throws IOException {
-		encodeBoolean(responseWriter, VISIBLE, autoShow, first);
-	}
-
 	protected void encodeTrigger(ResponseWriter responseWriter, OutputTooltip outputTooltip, String for_, boolean first) throws IOException {
 		encodeClientId(responseWriter, TRIGGER, for_, outputTooltip, first);
-	}
-
-	protected void encodeHeaderContent(ResponseWriter responseWriter, OutputTooltip outputTooltip, String headerText, boolean first) throws IOException {
-		encodeString(responseWriter, HEADER_CONTENT, headerText, first);
 	}
 
 	protected void encodeOpacity(ResponseWriter responseWriter, OutputTooltip outputTooltip, String opacity, boolean first) throws IOException {
