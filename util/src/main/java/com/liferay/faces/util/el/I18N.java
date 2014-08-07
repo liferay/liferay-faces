@@ -35,6 +35,7 @@ public class I18N extends I18NCompat {
 	private Map<String, String> cache;
 
 	public I18N() {
+		super();
 		this.cache = new ConcurrentHashMap<String, String>();
 	}
 
