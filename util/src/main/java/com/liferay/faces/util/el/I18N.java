@@ -16,10 +16,9 @@ package com.liferay.faces.util.el;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.liferay.faces.util.context.ExtFacesContext;
 
@@ -27,13 +26,17 @@ import com.liferay.faces.util.context.ExtFacesContext;
 /**
  * @author  Neil Griffin
  */
-public class I18N extends ResourceBundle {
+public class I18N extends I18NCompat {
 
-	private Enumeration<String> EMPTY_KEYS = Collections.enumeration(new ArrayList<String>());
+	// Private Constants
+	private static final Enumeration<String> EMPTY_KEYS = Collections.enumeration(new ArrayList<String>());
 
-	private Locale cacheLocale;
+	// Private Data Members
+	private Map<String, String> cache;
 
-	private Map<String, String> cacheHashMap;
+	public I18N() {
+		this.cache = new ConcurrentHashMap<String, String>();
+	}
 
 	/**
 	 * Gets the message associated with the specified messageId according to the locale in the current FacesContext.
@@ -111,39 +114,34 @@ public class I18N extends ResourceBundle {
 
 	@Override
 	protected Object handleGetObject(String key) {
+
 		String message = null;
 
 		if (key != null) {
 
 			ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
 			Locale locale = extFacesContext.getLocale();
-			boolean localeChanged = false;
 
-			if ((cacheLocale != null) || (locale != null)) {
+			if (cacheEnabled) {
 
-				if (cacheLocale != null) {
-					localeChanged = !cacheLocale.equals(locale);
+				String messageKey = key;
+
+				if (locale != null) {
+					messageKey = locale.toString().concat(key);
 				}
-				else {
-					localeChanged = !locale.equals(cacheLocale);
+
+				message = cache.get(messageKey);
+
+				if (message == null) {
+					message = extFacesContext.getMessage(locale, key);
+
+					if (message != null) {
+						cache.put(messageKey, message);
+					}
 				}
-			}
-
-			cacheLocale = locale;
-
-			if ((cacheHashMap == null) || localeChanged) {
-				cacheHashMap = new HashMap<String, String>();
 			}
 			else {
-				message = cacheHashMap.get(key);
-			}
-
-			if (message == null) {
 				message = extFacesContext.getMessage(locale, key);
-
-				if (message != null) {
-					cacheHashMap.put(key, message);
-				}
 			}
 		}
 
