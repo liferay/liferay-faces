@@ -13,9 +13,7 @@
  */
 package com.liferay.faces.demos.context;
 
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 import com.liferay.faces.demos.util.ShowcaseUtil;
 import com.liferay.faces.util.context.MessageContext;
@@ -29,7 +27,6 @@ public class ShowcaseMessageContext extends MessageContextWrapper {
 
 	// Private Data Members
 	private MessageContext wrappedMessageContext;
-	private Map<String, String> messageCache = new HashMap<String, String>();
 
 	public ShowcaseMessageContext(MessageContext messageContext) {
 		this.wrappedMessageContext = messageContext;
@@ -38,35 +35,13 @@ public class ShowcaseMessageContext extends MessageContextWrapper {
 	@Override
 	public String getMessage(Locale locale, String messageId) {
 
-		String messageKey = getMessageKey(locale, messageId);
+		String message = super.getMessage(locale, messageId);
 
-		String message = messageCache.get(messageKey);
-
-		if (message == null) {
-			message = super.getMessage(locale, messageId);
-
-			if (message != null) {
-				message = ShowcaseUtil.encodeDescription(message);
-				messageCache.put(messageKey, message);
-			}
+		if (message != null) {
+			message = ShowcaseUtil.encodeDescription(message);
 		}
 
 		return message;
-	}
-
-	protected String getMessageKey(Locale locale, String messageId) {
-
-		StringBuilder messageKey = new StringBuilder();
-
-		if (locale != null) {
-			messageKey.append(locale.toString());
-		}
-
-		if (messageId != null) {
-			messageKey.append(messageId);
-		}
-
-		return messageKey.toString();
 	}
 
 	@Override
