@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:example-cc="http://xmlns.jcp.org/jsf/composite/example-cc"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<h:form>
+
+		<h:messages globalOnly="true" />
+
+		<table>
+			<tr>
+				<td><h:outputLabel for="datePattern" value="#{i18n['date-format']}" /></td>
+				<td><h:inputText id="datePattern" value="#{mutablePortletPreferencesValues['datePattern'].value}" /></td>
+				<td><h:message for="datePattern" /></td>
+			</tr>
+		</table>
+
+		<hr />
+
+		<h:commandButton actionListener="#{portletPreferencesBackingBean.submit}" value="#{i18n['submit']}" />
+		<h:commandButton actionListener="#{portletPreferencesBackingBean.reset}" value="#{i18n['reset']}" />
+
+	</h:form>
+
+</ui:composition>

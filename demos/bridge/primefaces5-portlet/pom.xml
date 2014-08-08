@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>com.liferay.faces.demos</groupId>
 		<artifactId>liferay-faces-bridge-demos</artifactId>
-		<version>3.2.5-ga6-SNAPSHOT</version>
+		<version>4.2.0-m2-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>primefaces3-portlet</artifactId>
+	<artifactId>primefaces5-portlet</artifactId>
 	<packaging>war</packaging>
-	<name>PrimeFaces3 Portlet</name>
+	<name>PrimeFaces5 Portlet</name>
 
 	<dependencies>
 		<dependency>
@@ -22,7 +22,7 @@
 		</dependency>
 		<dependency>
 			<groupId>javax.el</groupId>
-			<artifactId>el-api</artifactId>
+			<artifactId>javax.el-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.portlet</groupId>
@@ -31,7 +31,7 @@
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>${primefaces3.version}</version>
+			<version>${primefaces5.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.seam</groupId>
