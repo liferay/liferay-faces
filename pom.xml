@@ -138,6 +138,7 @@
 		<portlet.war.deployment.type>deploy</portlet.war.deployment.type>
 		<primefaces3.version>3.5</primefaces3.version>
 		<primefaces4.version>4.0</primefaces4.version>
+		<primefaces5.version>5.0</primefaces5.version>
 		<richfaces4.version>4.3.2.Final</richfaces4.version>
 		<selenium.version>2.35.0</selenium.version>
 		<spring.version>3.0.7.RELEASE</spring.version>
@@ -1063,11 +1064,6 @@
 				<groupId>org.jboss.weld.servlet</groupId>
 				<artifactId>weld-servlet</artifactId>
 				<version>${weld.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.primefaces</groupId>
-				<artifactId>primefaces</artifactId>
-				<version>${primefaces3.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>

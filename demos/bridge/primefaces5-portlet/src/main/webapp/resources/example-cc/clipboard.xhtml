@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
+
+	<cc:interface>
+		<cc:attribute name="label" required="false" />
+	</cc:interface>
+
+	<cc:implementation>
+		<h:panelGroup layout="block" styleClass="clipboard">
+			<span>#{cc.attrs.label}</span>
+		</h:panelGroup>
+	</cc:implementation>
+
+</ui:component>
