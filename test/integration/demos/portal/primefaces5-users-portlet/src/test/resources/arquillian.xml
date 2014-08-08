@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arquillian xmlns="http://jboss.org/schema/arquillian" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+
+	<extension qualifier="webdriver">
+
+		<property name="browser">firefox</property>
+		<!-- <property name="capabilityWebdriverFirefoxBin">/Applications/Firefox.app/Contents/MacOS/firefox</property> -->
+		<!-- <property name="capabilityWebdriverFirefoxBin">/Applications/Firefox.app/Contents/MacOS/firefox-bin</property> -->
+		<!-- <property name="capabilityWebdriverFirefoxBin">/Applications/Firefox_18.0b2.app/Contents/MacOS/firefox-bin</property> -->
+		<!-- <property name="firefoxBinary">/Applications/Firefox_18.0b2.app/Contents/MacOS/firefox-bin</property> -->
+		<!-- <property name="firefox_binary">/Applications/Firefox_18.0b2.app/Contents/MacOS/firefox-bin</property> -->
+		<!-- <property name="firefox_binary">/Applications/Firefox_17.0b2.app/Contents/MacOS/firefox-bin</property> --> <!-- works -->
+
+		<!-- <property name="browser">chrome</property> -->
+		<property name="chromeDriverBinary">/Users/apple/Downloads/chromedriver</property>
+
+		<!-- <property name="browser">htmlUnit</property> -->
+		<property name="javascriptEnabled">true</property>
+	</extension>
+
+	<!-- Possible browser values: android chrome firefox htmlUnit internetExplorer iphone opera null -->
+
+	<extension qualifier="graphene">
+		<property name="waitGuiInterval">5</property>
+		<property name="waitAjaxInterval">10</property>
+		<property name="waitModelInterval">25</property>
+	</extension>
+
+</arquillian>
