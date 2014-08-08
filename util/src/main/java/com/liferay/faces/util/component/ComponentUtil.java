@@ -202,7 +202,7 @@ public class ComponentUtil {
 
 	public static String getClientVarName(FacesContext facesContext, ClientComponent clientComponent) {
 
-		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+		char separatorChar = UINamingContainer.SEPARATOR_CHAR;
 		String clientId = clientComponent.getClientId();
 		String regex = StringPool.OPEN_BRACKET + separatorChar + StringPool.CLOSE_BRACKET;
 		String clientVarName = clientId.replaceAll(regex, StringPool.UNDERLINE);
