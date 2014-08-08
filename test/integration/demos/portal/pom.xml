@@ -15,6 +15,7 @@
 
 	<modules>
 		<module>primefaces4-users-portlet</module>
+		<module>primefaces5-users-portlet</module>
 	</modules>
 
 	<profiles>
