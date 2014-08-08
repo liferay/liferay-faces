@@ -22,7 +22,7 @@
 		</dependency>
 		<dependency>
 			<groupId>javax.el</groupId>
-			<artifactId>javax.el-api</artifactId>
+			<artifactId>el-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.portlet</groupId>
