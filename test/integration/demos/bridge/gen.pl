@@ -58,6 +58,7 @@ my %in = (
    Icefaces3PortletTest => "./icefaces3-portlet/src/test/java/com/liferay/faces/test/Icefaces3.java",
    Richfaces4PortletTest => "./richfaces4-portlet/src/test/java/com/liferay/faces/test/Richfaces4.java",
    Primefaces4PortletTest => "./primefaces4-portlet/src/test/java/com/liferay/faces/test/Primefaces4.java",
+   Primefaces5PortletTest => "./primefaces5-portlet/src/test/java/com/liferay/faces/test/Primefaces5.java",
    Icefaces3CompatPortletTest => "./icefaces3-compat-portlet/src/test/java/com/liferay/faces/test/Icefaces3Compat.java",
 );
 my %variables = ();

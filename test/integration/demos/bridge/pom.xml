@@ -20,6 +20,7 @@
 		<!-- <module>jsf2-html5-portlet</module> -->
 		<module>jsf2-spring-portlet</module>
 		<module>primefaces4-portlet</module>
+		<module>primefaces5-portlet</module>
 		<!-- richfaces4-portlet cannot be tested on WebLogic due to FACES-1677 -->
 		<module>jsf2-events</module>
 		<module>jsf2-ipc-pub-render-params-portlet</module>
