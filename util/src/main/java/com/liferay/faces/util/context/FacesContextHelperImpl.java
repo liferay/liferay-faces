@@ -57,62 +57,62 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	// Private Data Members
 	private transient Map<String, String> javaScriptMap;
 
-	public void addComponentErrorMessage(String clientId, String key) {
+	public void addComponentErrorMessage(String clientId, String messageId) {
 
-		addMessage(clientId, FacesMessage.SEVERITY_ERROR, key);
+		addMessage(clientId, FacesMessage.SEVERITY_ERROR, messageId);
 	}
 
-	public void addComponentErrorMessage(String clientId, String key, Object argument) {
+	public void addComponentErrorMessage(String clientId, String messageId, Object argument) {
 
-		addMessage(clientId, FacesMessage.SEVERITY_ERROR, key, argument);
+		addMessage(clientId, FacesMessage.SEVERITY_ERROR, messageId, argument);
 	}
 
-	public void addComponentErrorMessage(String clientId, String key, Object... arguments) {
+	public void addComponentErrorMessage(String clientId, String messageId, Object... arguments) {
 
-		addMessage(clientId, FacesMessage.SEVERITY_ERROR, key, arguments);
+		addMessage(clientId, FacesMessage.SEVERITY_ERROR, messageId, arguments);
 	}
 
-	public void addComponentInfoMessage(String clientId, String key) {
+	public void addComponentInfoMessage(String clientId, String messageId) {
 
-		addMessage(clientId, FacesMessage.SEVERITY_INFO, key);
+		addMessage(clientId, FacesMessage.SEVERITY_INFO, messageId);
 	}
 
-	public void addComponentInfoMessage(String clientId, String key, Object argument) {
+	public void addComponentInfoMessage(String clientId, String messageId, Object argument) {
 
-		addMessage(clientId, FacesMessage.SEVERITY_INFO, key, argument);
+		addMessage(clientId, FacesMessage.SEVERITY_INFO, messageId, argument);
 	}
 
-	public void addComponentInfoMessage(String clientId, String key, Object... arguments) {
+	public void addComponentInfoMessage(String clientId, String messageId, Object... arguments) {
 
-		addMessage(clientId, FacesMessage.SEVERITY_INFO, key, arguments);
+		addMessage(clientId, FacesMessage.SEVERITY_INFO, messageId, arguments);
 	}
 
-	public void addGlobalErrorMessage(String key) {
-		addComponentErrorMessage(null, key);
+	public void addGlobalErrorMessage(String messageId) {
+		addComponentErrorMessage(null, messageId);
 	}
 
-	public void addGlobalErrorMessage(String key, Object argument) {
+	public void addGlobalErrorMessage(String messageId, Object argument) {
 
-		addComponentErrorMessage(null, key, argument);
+		addComponentErrorMessage(null, messageId, argument);
 	}
 
-	public void addGlobalErrorMessage(String key, Object... arguments) {
+	public void addGlobalErrorMessage(String messageId, Object... arguments) {
 
-		addComponentErrorMessage(null, key, arguments);
+		addComponentErrorMessage(null, messageId, arguments);
 	}
 
-	public void addGlobalInfoMessage(String key) {
-		addComponentInfoMessage(null, key);
+	public void addGlobalInfoMessage(String messageId) {
+		addComponentInfoMessage(null, messageId);
 	}
 
-	public void addGlobalInfoMessage(String key, Object argument) {
+	public void addGlobalInfoMessage(String messageId, Object argument) {
 
-		addComponentInfoMessage(null, key, argument);
+		addComponentInfoMessage(null, messageId, argument);
 	}
 
-	public void addGlobalInfoMessage(String key, Object... arguments) {
+	public void addGlobalInfoMessage(String messageId, Object... arguments) {
 
-		addComponentInfoMessage(null, key, arguments);
+		addComponentInfoMessage(null, messageId, arguments);
 	}
 
 	/**
@@ -129,24 +129,24 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		addGlobalErrorMessage(UNEXPECTED_ERROR_MSG_ID);
 	}
 
-	public void addMessage(String clientId, Severity severity, String key) {
+	public void addMessage(String clientId, Severity severity, String messageId) {
 
 		Locale locale = getLocale();
-		FacesMessage facesMessage = MessageContextImpl.getInstance().newFacesMessage(locale, severity, key);
+		FacesMessage facesMessage = MessageContext.getInstance().newFacesMessage(locale, severity, messageId);
 		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
 	}
 
-	public void addMessage(String clientId, Severity severity, String key, Object argument) {
+	public void addMessage(String clientId, Severity severity, String messageId, Object argument) {
 
 		Locale locale = getLocale();
-		FacesMessage facesMessage = MessageContextImpl.getInstance().newFacesMessage(locale, severity, key, argument);
+		FacesMessage facesMessage = MessageContext.getInstance().newFacesMessage(locale, severity, messageId, argument);
 		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
 	}
 
-	public void addMessage(String clientId, Severity severity, String key, Object... arguments) {
+	public void addMessage(String clientId, Severity severity, String messageId, Object... arguments) {
 
 		Locale locale = getLocale();
-		FacesMessage facesMessage = MessageContextImpl.getInstance().newFacesMessage(locale, severity, key, arguments);
+		FacesMessage facesMessage = MessageContext.getInstance().newFacesMessage(locale, severity, messageId, arguments);
 		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
 	}
 
