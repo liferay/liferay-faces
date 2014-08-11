@@ -48,7 +48,7 @@ public class MessageContextImpl extends MessageContext {
 		facesMessage.setSummary(messageId);
 		facesMessage.setDetail(null);
 
-		String summary = getMessage(locale, messageId);
+		String summary = getInstance().getMessage(locale, messageId);
 
 		if (summary != null) {
 			facesMessage.setSummary(summary);
