@@ -1241,7 +1241,7 @@
 	<component name="CommandLink" extendsTags="AnchorLinkCommon DisabledInherited UICommand ValueInherited"
 		parentClass="javax.faces.component.html.HtmlCommandLink" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
-			<![CDATA[CommandLink is a UICommand component that renders an HTML <a> element. Since it extends HtmlCommandLink, it supports all the features of h:commandLink. The component must be a child of h:form in order to trigger the action or actionListener.]]>
+			<![CDATA[CommandLink is a UICommand component that renders an HTML <code>&lt;a&gt;</code> element. Since it extends HtmlCommandLink, it supports all the features of h:commandLink. The component must be a child of h:form in order to trigger the action or actionListener.]]>
 		</description>
 	</component>
 	<component name="DataTable" extendsTags="ClientComponent UIData HTMLCommonEvents HTMLPassthrough HTMLTable"
@@ -1273,7 +1273,7 @@
 		parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout" rendererParentClass="com.liferay.faces.alloy.component.overlay.OverlayRendererBase"
 		yui="true" yuiName="Modal">
 		<description>
-			<![CDATA[Dialog is a UIPanel component that that renders a <div> element that is initially styled with display:none so that it can be popped-up as an overlay by calling the JavaScript API. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
+			<![CDATA[Dialog is a UIPanel component that that renders a <code>&lt;div&gt;</code> element that is initially styled with display:none so that it can be popped-up as an overlay by calling the JavaScript API. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -1298,7 +1298,7 @@
 	<component name="Field" extendsTags="PanelGroup" parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
 		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupRenderer">
 		<description>
-			<![CDATA[Field is a UIPanel component that renders a <div> element and a <label> element in order to wrap a field. Since it extends PanelGroup, it supports all the features of alloy:panelGroup.]]>
+			<![CDATA[Field is a UIPanel component that renders a <code>&lt;div&gt;</code> element and a <label> element in order to wrap a field. Since it extends PanelGroup, it supports all the features of alloy:panelGroup.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -1653,7 +1653,7 @@
 		parentClass="javax.faces.component.html.HtmlInputFile" rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase"
 		yui="true" yuiName="Uploader">
 		<description>
-			<![CDATA[InputFile is a UIInput component that renders an <input> element with type=file. Since it extends HtmlInputFile, it supports all the features of h:inputFile and also supports multi-file uploads, instant-Ajax, preview, upload progress, and validation.]]>
+			<![CDATA[InputFile is a UIInput component that renders an <code>&lt;input&gt;</code> element with type=file. Since it extends HtmlInputFile, it supports all the features of h:inputFile and also supports multi-file uploads, instant-Ajax, preview, upload progress, and validation.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -1725,7 +1725,7 @@
 		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabel InputCommon SizeInherited"
 		parentClass="javax.faces.component.html.HtmlInputSecret" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
-			<![CDATA[InputSecret is a UIInput component that renders an <input> element with type="password". Since it extends HtmlInputSecret, it supports all the features of h:inputSecret.]]>
+			<![CDATA[InputSecret is a UIInput component that renders an <code>&lt;input&gt;</code> element with type="password". Since it extends HtmlInputSecret, it supports all the features of h:inputSecret.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -1749,7 +1749,7 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[The the height (in pixels) of the rendered <div>.]]>
+					<![CDATA[The the height (in pixels) of the rendered <code>&lt;div&gt;</code>.]]>
 				</description>
 				<name>height</name>
 				<type>java.lang.String</type>
@@ -1831,7 +1831,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The the width (in pixels) of the rendered <div>.]]>
+					<![CDATA[The the width (in pixels) of the rendered <code>&lt;div&gt;</code>.]]>
 				</description>
 				<name>width</name>
 				<type>java.lang.String</type>
@@ -1874,7 +1874,7 @@
 		extendsTags="AnchorLinkCommon DisabledInherited ValueInherited StyleableInherited UIComponentBase UIOutcomeTarget"
 		parentClass="javax.faces.component.html.HtmlOutcomeTargetLink" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
-			<![CDATA[Link is a UIOutcomeTarget component that renders an <a> element (hyperlink). Since it extends HtmlLink, it supports all the features of h:link.]]>
+			<![CDATA[Link is a UIOutcomeTarget component that renders an <code>&lt;a&gt;</code> element (hyperlink). Since it extends HtmlLink, it supports all the features of h:link.]]>
 		</description>
 	</component>
 	<component name="Message" extendsTags="MessageCommon" parentClass="javax.faces.component.html.HtmlMessage"
@@ -1993,7 +1993,7 @@
 	<component name="OutputLink" extendsTags="AnchorLinkCommon DisabledInherited HTMLAccessibilityEvents HTMLPassthrough UIOutput"
 		parentClass="javax.faces.component.html.HtmlOutputLink" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
-			<![CDATA[OutputLink is a UIOutput component that renders an <a> element (hyperlink). Since it extends HtmlOutputLink, it supports all the features of h:outputLink.]]>
+			<![CDATA[OutputLink is a UIOutput component that renders an <code>&lt;a&gt;</code> element (hyperlink). Since it extends HtmlOutputLink, it supports all the features of h:outputLink.]]>
 		</description>
 	</component>
 	<component name="OutputRemainingChars" extendsTags="ClientComponent OutputText" module="aui-char-counter"
@@ -2068,7 +2068,7 @@
 		parentClass="com.liferay.faces.alloy.component.outputtext.OutputText" rendererParentClass="com.liferay.faces.alloy.component.overlay.OverlayRendererBase"
 		yui="true" yuiName="Tooltip">
 		<description>
-			<![CDATA[OutputTooltip is a UIOutput component that renders a <div> element which is displayed as an overlay that is initially styled with display:none so that it can be popped-up as an overlay. Since it extends HtmlOutputText, it supports all the features of h:outputText.]]>
+			<![CDATA[OutputTooltip is a UIOutput component that renders a <code>&lt;div&gt;</code> element which is displayed as an overlay that is initially styled with display:none so that it can be popped-up as an overlay. Since it extends HtmlOutputText, it supports all the features of h:outputText.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -2194,7 +2194,7 @@
 		module="aui-popover" parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
 		rendererParentClass="com.liferay.faces.alloy.component.overlay.OverlayRendererBase" yui="true">
 		<description>
-			<![CDATA[Popover is a UIPanel component that that renders a <div> element that is initially styled with display:none so that it can be popped-up as an overlay by calling the JavaScript API. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
+			<![CDATA[Popover is a UIPanel component that that renders a <code>&lt;div&gt;</code> element that is initially styled with display:none so that it can be popped-up as an overlay by calling the JavaScript API. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -2217,7 +2217,7 @@
 	</component>
 	<component name="Row" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIPanel">
 		<description>
-			<![CDATA[Row is a UIPanel component that renders a <div> and is designed to be used in conjunction with alloy:column child component tags.]]>
+			<![CDATA[Row is a UIPanel component that renders a <code>&lt;div&gt;</code> and is designed to be used in conjunction with alloy:column child component tags.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -2420,7 +2420,7 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[The the height (in pixels) of the rendered <div>.]]>
+					<![CDATA[The the height (in pixels) of the rendered <code>&lt;div&gt;</code>.]]>
 				</description>
 				<name>height</name>
 				<type>java.lang.String</type>
@@ -2454,7 +2454,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The the height (in pixels) of the rendered <div>.]]>
+					<![CDATA[The the height (in pixels) of the rendered <code>&lt;div&gt;</code>.]]>
 				</description>
 				<name>width</name>
 				<type>java.lang.String</type>
