@@ -28,6 +28,8 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
+import com.liferay.faces.util.component.ClientComponent;
+import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.helper.StringHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
@@ -50,6 +52,8 @@ import com.liferay.faces.util.render.RendererUtil;
 public class PickDateRenderer extends PickDateRendererBase {
 
 	// Private Constants
+	private static final String BEFORE_DESTROY_REMOVE_HTML_TEMPLATE =
+		"{0}.before(function(){A.one('#'+{0}.getPopover().get('id')).remove(true);},{0},'destroy');";
 	private static final String CALENDAR = "calendar";
 	private static final String DATE_CLICK = "dateClick";
 	private static final String DEFAULT_ON_DATE_CLICK_TEMPLATE = "function(event){" +
@@ -64,6 +68,26 @@ public class PickDateRenderer extends PickDateRendererBase {
 	private static final String POPOVER = "popover";
 	private static final String POPOVER_CSS_CLASS = "popoverCssClass";
 	private static final String[] DATE_PICKER_MODULES = StringHelper.append(MODULES, NODE_EVENT_SIMULATE);
+
+	@Override
+	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+
+		ClientComponent clientComponent = (ClientComponent) uiComponent;
+		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+		String clientKey = clientComponent.getClientKey();
+
+		if (clientKey == null) {
+			clientKey = clientVarName;
+		}
+
+		encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
+
+		String beforeDestroyRemoveHTML = BEFORE_DESTROY_REMOVE_HTML_TEMPLATE.replace(TOKEN, clientVarName);
+		responseWriter.write(beforeDestroyRemoveHTML);
+
+	}
 
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
