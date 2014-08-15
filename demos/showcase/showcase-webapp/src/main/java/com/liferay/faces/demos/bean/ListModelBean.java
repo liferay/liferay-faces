@@ -89,10 +89,6 @@ public class ListModelBean {
 		showcaseCategoryList.add("output");
 		showcaseCategoryList.add("panel");
 
-		if ((developmentMode) || (systemTestMode)) {
-			showcaseCategoryList.add("pick");
-		}
-
 		if (LIFERAY_FACES_BRIDGE_DETECTED) {
 			showcaseCategoryList.add("portlet");
 		}

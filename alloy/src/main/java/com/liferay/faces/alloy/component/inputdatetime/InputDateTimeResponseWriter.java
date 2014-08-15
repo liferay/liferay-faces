@@ -19,20 +19,16 @@ import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.DelegationResponseWriterBase;
+import com.liferay.faces.util.render.IdDelegationResponseWriter;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class InputDateTimeResponseWriter extends DelegationResponseWriterBase {
+public class InputDateTimeResponseWriter extends IdDelegationResponseWriter {
 
-	// Private Members
-	private String inputSuffix;
-
-	public InputDateTimeResponseWriter(ResponseWriter responseWriter, String inputSuffix) {
-		super(responseWriter);
-		this.inputSuffix = inputSuffix;
+	public InputDateTimeResponseWriter(ResponseWriter responseWriter, String idElement, String idValue) {
+		super(responseWriter, idElement, idValue);
 	}
 
 	@Override
@@ -43,13 +39,6 @@ public class InputDateTimeResponseWriter extends DelegationResponseWriterBase {
 			// InputDateTimeRendererBase.
 		}
 		else {
-
-			// If writing the id attribute, then append the input id suffix, because the input must have an id which
-			// is different than its parent span.
-			if (StringPool.ID.equalsIgnoreCase(name)) {
-				value = value + inputSuffix;
-			}
-
 			super.writeAttribute(name, value, property);
 		}
 	}

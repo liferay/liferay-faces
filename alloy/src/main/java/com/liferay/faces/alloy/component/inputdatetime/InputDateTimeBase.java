@@ -31,9 +31,7 @@ public abstract class InputDateTimeBase extends InputText implements ClientCompo
 	// Private Constants
 	private static final String FOCUS = "focus";
 
-	public String getButtonIconName() {
-		return (String) getStateHelper().eval(BUTTON_ICON, null);
-	}
+	public abstract String getButtonIconName();
 
 	public String getShowOn() {
 		return (String) getStateHelper().eval(SHOW_ON, FOCUS);

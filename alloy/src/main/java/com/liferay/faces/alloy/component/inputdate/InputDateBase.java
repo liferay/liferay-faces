@@ -18,19 +18,21 @@ import javax.annotation.Generated;
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeBase;
 
 import com.liferay.faces.util.component.Styleable;
+import com.liferay.faces.util.component.ClientComponent;
 
 /**
  * @author	Bruno Basto
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class InputDateBase extends InputDateTimeBase implements Styleable {
+public abstract class InputDateBase extends InputDateTimeBase implements Styleable, ClientComponent {
 
 	// Protected Enumerations
 	protected enum InputDatePropertyKeys {
 		autoHide,
 		clientKey,
 		datePattern,
+		inputDateEventListener,
 		locale,
 		maximumDate,
 		minimumDate,
@@ -61,6 +63,14 @@ public abstract class InputDateBase extends InputDateTimeBase implements Styleab
 
 	public void setDatePattern(String datePattern) {
 		getStateHelper().put(InputDatePropertyKeys.datePattern, datePattern);
+	}
+
+	public javax.el.MethodExpression getInputDateEventListener() {
+		return (javax.el.MethodExpression) getStateHelper().eval(InputDatePropertyKeys.inputDateEventListener, null);
+	}
+
+	public void setInputDateEventListener(javax.el.MethodExpression inputDateEventListener) {
+		getStateHelper().put(InputDatePropertyKeys.inputDateEventListener, inputDateEventListener);
 	}
 
 	public Object getLocale() {

@@ -123,12 +123,13 @@ public class AlloyRendererUtil {
 		if (!ajax && forceInline) {
 
 			responseWriter.write(StringPool.FORWARD_SLASH);
-			responseWriter.write(StringPool.FORWARD_SLASH);
+			responseWriter.write(StringPool.STAR);
 			responseWriter.write(StringPool.CDATA_OPEN);
-			responseWriter.write(StringPool.NEW_LINE);
+			responseWriter.write(StringPool.STAR);
+			responseWriter.write(StringPool.FORWARD_SLASH);
 		}
 
-		if (ajax || forceInline) {
+		if (ajax) {
 
 			ClientComponent clientComponent = (ClientComponent) uiComponent;
 			String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
@@ -151,11 +152,15 @@ public class AlloyRendererUtil {
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 			responseWriter.write(StringPool.SEMICOLON);
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+		}
+
+		if (ajax || forceInline) {
 
 			String yuiConfig = alloyRenderer.getYUIConfig(facesContext, responseWriter, uiComponent);
 			String alloyBeginScript = RendererUtil.getAlloyBeginScript(facesContext, modules, yuiConfig);
 			responseWriter.write(alloyBeginScript);
 		}
+
 	}
 
 	public static void encodeJavaScriptEnd(FacesContext facesContext, UIComponent uiComponent, boolean ajax,

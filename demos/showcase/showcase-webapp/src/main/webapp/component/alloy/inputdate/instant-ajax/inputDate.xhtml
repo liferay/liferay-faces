@@ -6,7 +6,11 @@
 	<ui:define name="col1">
 		<h:form>
 			<showcase:example>
-				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" value="#{inputDateModelBean.birthday}">
+				<alloy:messages globalOnly="true" layout="table" />
+				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" 
+					inputDateEventListener="#{inputDateBackingBean.inputDateEventListener}"
+					value="#{inputDateModelBean.birthday}">
+					<f:ajax event="dateSelect" render="@form" />
 					<f:ajax render="@form" />
 				</alloy:inputDate>
 			</showcase:example>
