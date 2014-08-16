@@ -11,13 +11,21 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.component.inputfile;
+package com.liferay.faces.bridge.component.inputfile.internal;
+
+import javax.faces.context.ResponseWriter;
+
+import com.liferay.faces.util.render.DelegationResponseWriterBase;
+
 
 /**
- * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
+ * This class provides a compatibility layer that isolates differences between 2.2 and older versions of JSF.
  *
  * @author  Neil Griffin
  */
-public class InputFileCompat extends InputFileBase {
+public abstract class InputFileDelegationResponseWriterCompat extends DelegationResponseWriterBase {
 
+	public InputFileDelegationResponseWriterCompat(ResponseWriter responseWriter) {
+		super(responseWriter);
+	}
 }

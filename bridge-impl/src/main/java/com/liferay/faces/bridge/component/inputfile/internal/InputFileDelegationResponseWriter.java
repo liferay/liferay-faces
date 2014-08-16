@@ -21,7 +21,6 @@ import javax.faces.context.ResponseWriter;
 import com.liferay.faces.bridge.component.inputfile.InputFile;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.DelegationResponseWriter;
-import com.liferay.faces.util.render.DelegationResponseWriterBase;
 
 
 /**
@@ -29,7 +28,7 @@ import com.liferay.faces.util.render.DelegationResponseWriterBase;
  *
  * @author  Neil Griffin
  */
-public class InputFileDelegationResponseWriter extends DelegationResponseWriterBase {
+public class InputFileDelegationResponseWriter extends InputFileDelegationResponseWriterCompat {
 
 	public InputFileDelegationResponseWriter(ResponseWriter responseWriter) {
 		super(responseWriter);
