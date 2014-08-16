@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.model;
+package com.liferay.faces.util.model.internal;
 
 import java.util.List;
 import java.util.Map;
@@ -20,6 +20,9 @@ import org.apache.commons.fileupload.FileUploadBase.FileSizeLimitExceededExcepti
 import org.apache.commons.fileupload.FileUploadBase.FileUploadIOException;
 import org.apache.commons.fileupload.FileUploadBase.SizeLimitExceededException;
 import org.apache.commons.fileupload.FileUploadException;
+
+import com.liferay.faces.util.model.UploadedFile;
+import com.liferay.faces.util.model.UploadedFileFactory;
 
 
 /**
@@ -86,5 +89,4 @@ public class UploadedFileFactoryImpl extends UploadedFileFactory {
 		// Since this is the factory instance provided by the bridge, it will never wrap another factory.
 		return null;
 	}
-
 }

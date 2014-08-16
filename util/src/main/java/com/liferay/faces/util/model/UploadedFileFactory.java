@@ -11,22 +11,22 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.model;
+package com.liferay.faces.util.model;
+
+import java.util.List;
+import java.util.Map;
+
+import com.liferay.faces.util.factory.FactoryExtension;
+
 
 /**
  * @author  Neil Griffin
  */
-public class UploadedFileErrorImpl extends UploadedFileImpl {
+public abstract class UploadedFileFactory implements FactoryExtension<UploadedFileFactory> {
 
-	// serialVersionUID
-	private static final long serialVersionUID = 183471910437060222L;
+	public abstract UploadedFile getUploadedFile(Exception e);
 
-	public UploadedFileErrorImpl(String message) {
-		this(message, Status.ERROR);
-	}
-
-	public UploadedFileErrorImpl(String message, Status status) {
-		super(null, null, null, null, null, null, message, null, 0L, status);
-	}
-
+	public abstract UploadedFile getUploadedFile(String absolutePath, Map<String, Object> attributes, String charSet,
+		String contentType, Map<String, List<String>> headers, String id, String message, String name, long size,
+		UploadedFile.Status status);
 }

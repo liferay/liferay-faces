@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Map;
 
+import com.liferay.faces.util.context.map.FacesRequestParameterMap;
 import com.liferay.faces.util.map.AbstractPropertyMap;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
