@@ -11,22 +11,21 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.model;
+package com.liferay.faces.util.context.map;
+
+import java.util.Map;
+
 
 /**
+ * This interface defines a mutable {@link Map} of request parameters for a Faces request.
+ *
  * @author  Neil Griffin
  */
-public class UploadedFileErrorImpl extends UploadedFileImpl {
+public interface FacesRequestParameterMap extends Map<String, String[]> {
 
-	// serialVersionUID
-	private static final long serialVersionUID = 183471910437060222L;
+	public void addValue(String key, String value);
 
-	public UploadedFileErrorImpl(String message) {
-		this(message, Status.ERROR);
-	}
+	public String getFirst(Object key);
 
-	public UploadedFileErrorImpl(String message, Status status) {
-		super(null, null, null, null, null, null, message, null, 0L, status);
-	}
-
+	public String getNamespace();
 }

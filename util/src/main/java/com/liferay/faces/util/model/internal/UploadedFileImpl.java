@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.model;
+package com.liferay.faces.util.model.internal;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,14 +25,18 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import com.liferay.faces.util.model.UploadedFile;
+
 
 /**
  * @author  Neil Griffin
  */
 public class UploadedFileImpl implements Serializable, UploadedFile {
 
-	private static final long serialVersionUID = 5511555773653537284L;
+	// serialVersionUID
+	private static final long serialVersionUID = 3983489321274295576L;
 
+	// Private Data Members
 	private String absolutePath;
 	private Map<String, Object> attributeMap;
 	private String charSet;
@@ -152,5 +156,4 @@ public class UploadedFileImpl implements Serializable, UploadedFile {
 	public Status getStatus() {
 		return status;
 	}
-
 }

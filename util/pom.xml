@@ -12,6 +12,18 @@
 	<description>Liferay Faces Common Utilities</description>
 
 	<dependencies>
+		<!-- BEGIN: Only required for file upload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- END: Only required for file upload -->
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
 			<artifactId>portal-kernel</artifactId>
