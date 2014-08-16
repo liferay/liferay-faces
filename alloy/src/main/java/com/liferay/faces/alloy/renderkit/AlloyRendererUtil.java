@@ -48,6 +48,8 @@ public class AlloyRendererUtil {
 
 	// Private Constants
 	private static final String A_DOT = "A.";
+	private static final String DESTROY = "destroy";
+	private static final String IF = "if";
 	private static final String NEW = "new";
 
 	public static void encodeBoolean(ResponseWriter responseWriter, String attributeName, Boolean attributeValue,
