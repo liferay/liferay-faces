@@ -11,23 +11,23 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.context.map;
+package com.liferay.faces.util.model;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
-import com.liferay.faces.bridge.model.UploadedFile;
+import com.liferay.faces.bridge.FactoryWrapper;
 
 
 /**
- * This interface represents a composition of request parameters and uploaded files submitted by an HTML form with
- * enctype="multipart/form-data".
- *
  * @author  Neil Griffin
  */
-public interface MultiPartFormData {
+@SuppressWarnings("deprecation")
+public abstract class UploadedFileFactory implements FactoryWrapper<UploadedFileFactory> {
 
-	public FacesRequestParameterMap getFacesRequestParameterMap();
+	public abstract UploadedFile getUploadedFile(Exception e);
 
-	public Map<String, Collection<UploadedFile>> getUploadedFileMap();
+	public abstract UploadedFile getUploadedFile(String absolutePath, Map<String, Object> attributes, String charSet,
+		String contentType, Map<String, List<String>> headers, String id, String message, String name, long size,
+		UploadedFile.Status status);
 }

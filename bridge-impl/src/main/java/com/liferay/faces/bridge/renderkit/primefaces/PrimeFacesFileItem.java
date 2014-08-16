@@ -23,10 +23,10 @@ import java.io.UnsupportedEncodingException;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemHeaders;
 
-import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.model.UploadedFile;
 
 
 /**
@@ -106,6 +106,16 @@ public class PrimeFacesFileItem implements FileItem {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public FileItemHeaders getHeaders() {
+		return fileItemHeaders;
+	}
+
+	@Override
+	public void setHeaders(FileItemHeaders fileItemHeaders) {
+		this.fileItemHeaders = fileItemHeaders;
+	}
+
 	public InputStream getInputStream() throws IOException {
 		return new UploadedFileInputStream(uploadedFile.getAbsolutePath());
 	}
@@ -147,16 +157,6 @@ public class PrimeFacesFileItem implements FileItem {
 
 	public boolean isInMemory() {
 		return false;
-	}
-
-	@Override
-	public FileItemHeaders getHeaders() {
-		return fileItemHeaders;
-	}
-
-	@Override
-	public void setHeaders(FileItemHeaders fileItemHeaders) {
-		this.fileItemHeaders = fileItemHeaders;
 	}
 
 }

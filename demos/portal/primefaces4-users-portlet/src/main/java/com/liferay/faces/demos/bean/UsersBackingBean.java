@@ -24,12 +24,12 @@ import javax.portlet.PortletSession;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
 
-import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.demos.dto.UploadedFileWrapper;
 import com.liferay.faces.demos.util.UploadedFileUtil;
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.model.UploadedFile;
 
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;

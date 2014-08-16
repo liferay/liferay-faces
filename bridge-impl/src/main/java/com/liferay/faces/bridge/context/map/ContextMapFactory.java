@@ -13,14 +13,14 @@
  */
 package com.liferay.faces.bridge.context.map;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletContext;
 
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.util.factory.FactoryExtension;
+import com.liferay.faces.util.model.UploadedFile;
 
 
 /**
@@ -89,5 +89,5 @@ public abstract class ContextMapFactory implements FactoryExtension<ContextMapFa
 	/**
 	 * Returns a {@link Map} of uploaded files.
 	 */
-	public abstract Map<String, Collection<UploadedFile>> getUploadedFileMap(BridgeContext bridgeContext);
+	public abstract Map<String, List<UploadedFile>> getUploadedFileMap(BridgeContext bridgeContext);
 }

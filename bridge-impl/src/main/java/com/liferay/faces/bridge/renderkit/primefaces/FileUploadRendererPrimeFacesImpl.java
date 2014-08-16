@@ -14,7 +14,7 @@
 package com.liferay.faces.bridge.renderkit.primefaces;
 
 import java.lang.reflect.Constructor;
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
@@ -23,17 +23,17 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.FacesEvent;
 import javax.faces.render.Renderer;
+import javax.faces.render.RendererWrapper;
 
 import org.apache.commons.fileupload.FileItem;
 
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.map.ContextMapFactory;
-import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.render.RendererWrapper;
+import com.liferay.faces.util.model.UploadedFile;
 
 
 /**
@@ -79,10 +79,9 @@ public class FileUploadRendererPrimeFacesImpl extends RendererWrapper {
 				ContextMapFactory contextMapFactory = (ContextMapFactory) FactoryExtensionFinder.getFactory(
 						ContextMapFactory.class);
 				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-				Map<String, Collection<UploadedFile>> uploadedFileMap = contextMapFactory.getUploadedFileMap(
-						bridgeContext);
+				Map<String, List<UploadedFile>> uploadedFileMap = contextMapFactory.getUploadedFileMap(bridgeContext);
 
-				Collection<UploadedFile> uploadedFiles = uploadedFileMap.get(clientId);
+				List<UploadedFile> uploadedFiles = uploadedFileMap.get(clientId);
 
 				if (uploadedFiles != null) {
 
