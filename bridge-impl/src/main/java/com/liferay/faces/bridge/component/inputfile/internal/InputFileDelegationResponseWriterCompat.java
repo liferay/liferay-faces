@@ -15,39 +15,30 @@ package com.liferay.faces.bridge.component.inputfile.internal;
 
 import java.io.IOException;
 
-import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.bridge.component.inputfile.InputFile;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.DelegationResponseWriter;
+import com.liferay.faces.util.render.DelegationResponseWriterBase;
 
 
 /**
- * This class is a {@link DelegationResponseWriter} that encodes HTML5 attributes for file upload components.
+ * This class provides a compatibility layer that isolates differences between 2.2 and older versions of JSF.
  *
  * @author  Neil Griffin
  */
-public class InputFileDelegationResponseWriter extends InputFileDelegationResponseWriterCompat {
+public abstract class InputFileDelegationResponseWriterCompat extends DelegationResponseWriterBase {
 
-	public InputFileDelegationResponseWriter(ResponseWriter responseWriter) {
+	public InputFileDelegationResponseWriterCompat(ResponseWriter responseWriter) {
 		super(responseWriter);
 	}
 
 	@Override
-	public void startElement(String name, UIComponent uiComponent) throws IOException {
+	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		super.startElement(name, uiComponent);
-
-		if (StringPool.INPUT.equals(name)) {
-
-			InputFile inputFile = (InputFile) uiComponent;
-
-			String multiple = inputFile.getMultiple();
-
-			if ("multiple".equalsIgnoreCase(multiple)) {
-				super.writeAttribute("multiple", multiple, "multiple");
-			}
+		if (StringPool.TYPE.equals(name)) {
+			value = "file";
 		}
+
+		super.writeAttribute(name, value, property);
 	}
 }
