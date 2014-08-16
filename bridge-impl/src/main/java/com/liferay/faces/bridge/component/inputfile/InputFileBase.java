@@ -15,7 +15,7 @@ package com.liferay.faces.bridge.component.inputfile;
 //J-
 
 import javax.annotation.Generated;
-import javax.faces.component.html.HtmlInputFile;
+import javax.faces.component.html.HtmlInputText;
 
 import com.liferay.faces.util.component.Styleable;
 
@@ -23,7 +23,7 @@ import com.liferay.faces.util.component.Styleable;
  * @author	Neil Griffin
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class InputFileBase extends HtmlInputFile implements Styleable {
+public abstract class InputFileBase extends HtmlInputText implements Styleable {
 
 	// Protected Enumerations
 	protected enum InputFilePropertyKeys {
