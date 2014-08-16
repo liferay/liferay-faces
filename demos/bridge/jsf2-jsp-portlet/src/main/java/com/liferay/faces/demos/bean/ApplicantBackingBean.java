@@ -24,7 +24,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
-import com.liferay.faces.bridge.component.HtmlInputFile;
+import com.liferay.faces.bridge.component.inputfile.InputFile;
 import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.demos.dto.City;
 import com.liferay.faces.demos.util.FacesMessageUtil;
@@ -56,9 +56,9 @@ public class ApplicantBackingBean implements Serializable {
 	private transient ListModelBean listModelBean;
 
 	// Private Data Members
-	private transient HtmlInputFile attachment1;
-	private transient HtmlInputFile attachment2;
-	private transient HtmlInputFile attachment3;
+	private transient InputFile attachment1;
+	private transient InputFile attachment2;
+	private transient InputFile attachment3;
 
 	public void deleteUploadedFile(ActionEvent actionEvent) {
 
@@ -156,29 +156,27 @@ public class ApplicantBackingBean implements Serializable {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("unchecked")
 	public void uploadAttachments(ActionEvent actionEvent) {
 
-		List<UploadedFile> uploadedFileList = applicantModelBean.getUploadedFiles();
+		List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
 
-		UploadedFile[] uploadedFiles = new UploadedFile[] {
-				attachment1.getUploadedFile(), attachment2.getUploadedFile(), attachment3.getUploadedFile()
-			};
+		List<UploadedFile> uploadedFiles1 = (List<UploadedFile>) attachment1.getValue();
 
-		for (UploadedFile uploadedFile : uploadedFiles) {
+		if (uploadedFiles1 != null) {
+			uploadedFiles.addAll(uploadedFiles1);
+		}
 
-			if (uploadedFile != null) {
+		List<UploadedFile> uploadedFiles2 = (List<UploadedFile>) attachment2.getValue();
 
-				if (uploadedFile.getStatus() == UploadedFile.Status.FILE_SAVED) {
-					uploadedFileList.add(uploadedFile);
-					logger.debug("uploadedFile=[{0}]", uploadedFile.getName());
-				}
-				else {
-					logger.error("Uploaded file status=[" + uploadedFile.getStatus().toString() + "] " +
-						uploadedFile.getMessage());
-					FacesMessageUtil.addGlobalUnexpectedErrorMessage(FacesContext.getCurrentInstance());
-				}
-			}
+		if (uploadedFiles2 != null) {
+			uploadedFiles.addAll(uploadedFiles2);
+		}
+
+		List<UploadedFile> uploadedFiles3 = (List<UploadedFile>) attachment3.getValue();
+
+		if (uploadedFiles3 != null) {
+			uploadedFiles.addAll(uploadedFiles3);
 		}
 
 		applicantViewBean.setFileUploaderRendered(false);
@@ -196,27 +194,27 @@ public class ApplicantBackingBean implements Serializable {
 		this.applicantViewBean = applicantViewBean;
 	}
 
-	public HtmlInputFile getAttachment1() {
+	public InputFile getAttachment1() {
 		return attachment1;
 	}
 
-	public void setAttachment1(HtmlInputFile attachment1) {
+	public void setAttachment1(InputFile attachment1) {
 		this.attachment1 = attachment1;
 	}
 
-	public HtmlInputFile getAttachment2() {
+	public InputFile getAttachment2() {
 		return attachment2;
 	}
 
-	public void setAttachment2(HtmlInputFile attachment2) {
+	public void setAttachment2(InputFile attachment2) {
 		this.attachment2 = attachment2;
 	}
 
-	public HtmlInputFile getAttachment3() {
+	public InputFile getAttachment3() {
 		return attachment3;
 	}
 
-	public void setAttachment3(HtmlInputFile attachment3) {
+	public void setAttachment3(InputFile attachment3) {
 		this.attachment3 = attachment3;
 	}
 
