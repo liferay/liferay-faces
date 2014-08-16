@@ -13,13 +13,14 @@
  */
 package com.liferay.faces.bridge.context.map;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.portlet.ClientDataRequest;
 import javax.portlet.PortletConfig;
 
-import com.liferay.faces.bridge.model.UploadedFile;
+import com.liferay.faces.util.context.map.FacesRequestParameterMap;
+import com.liferay.faces.util.model.UploadedFile;
 
 
 /**
@@ -38,6 +39,6 @@ public interface MultiPartFormDataProcessor {
 	 *
 	 * @return  The map of uploaded files.
 	 */
-	public Map<String, Collection<UploadedFile>> process(ClientDataRequest clientDataRequest,
-		PortletConfig portletConfig, FacesRequestParameterMap facesRequestParameterMap);
+	public Map<String, List<UploadedFile>> process(ClientDataRequest clientDataRequest, PortletConfig portletConfig,
+		FacesRequestParameterMap facesRequestParameterMap);
 }

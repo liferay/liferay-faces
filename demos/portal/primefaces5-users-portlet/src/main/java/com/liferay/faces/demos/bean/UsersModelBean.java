@@ -26,10 +26,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.portlet.PortletRequest;
 
-import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.demos.list.UserLazyDataModel;
 import com.liferay.faces.demos.resource.UserPortraitResource;
 import com.liferay.faces.portal.context.LiferayFacesContext;
+import com.liferay.faces.util.model.UploadedFile;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.WebKeys;
