@@ -11,18 +11,19 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.render;
+package com.liferay.faces.util.template;
+
+import java.io.IOException;
+
+import com.liferay.faces.util.factory.FactoryExtension;
+
 
 /**
- * @author  Brian Wing Shun Chan
+ * @author  Neil Griffin
  */
-public interface ContentTypes {
+public abstract class TemplateFactory implements FactoryExtension<TemplateFactory> {
 
-	public static final String TEXT_CSS = "text/css";
+	public abstract Template getTemplate(String text, String contentType);
 
-	public static final String TEXT_HTML = "text/html";
-
-	public static final String TEXT_JAVASCRIPT = "text/javascript";
-
-	public static final String TEXT_PLAIN = "text/plain";
+	public abstract Template getTemplate(Class<?> relativeClass, String path, boolean minified) throws IOException;
 }
