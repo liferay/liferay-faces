@@ -18,6 +18,8 @@ package com.liferay.faces.util.lang;
  */
 public class StringPool {
 
+	public static final String ACTION = "action";
+
 	public static final String AFTER = "after";
 
 	public static final String AMPERSAND = "&";
