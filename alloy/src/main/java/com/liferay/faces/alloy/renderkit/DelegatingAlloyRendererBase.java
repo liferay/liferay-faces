@@ -20,6 +20,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.render.DelegatingClientComponentRendererBase;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -40,7 +41,7 @@ public abstract class DelegatingAlloyRendererBase extends DelegatingClientCompon
 
 	@Override
 	public void decodeClientBehaviors(FacesContext facesContext, UIComponent uiComponent) {
-		AlloyRendererUtil.decodeClientBehaviors(facesContext, uiComponent);
+		RendererUtil.decodeClientBehaviors(facesContext, uiComponent);
 	}
 
 	@Override
