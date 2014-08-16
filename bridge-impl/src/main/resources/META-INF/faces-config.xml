@@ -39,10 +39,6 @@
 		</component-extension>
 	</component>
 	<component>
-		<component-type>javax.faces.HtmlInputFile</component-type>
-		<component-class>com.liferay.faces.bridge.component.HtmlInputFile</component-class>
-	</component>
-	<component>
 		<component-type>com.liferay.faces.bridge.component.PortletRenderURL</component-type>
 		<component-class>com.liferay.faces.bridge.component.PortletRenderURL</component-class>
 	</component>
