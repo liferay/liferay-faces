@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.model;
+package com.liferay.faces.util.model;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -90,6 +90,5 @@ public abstract class UploadedFileWrapper implements UploadedFile, FacesWrapper<
 		return getWrapped().getStatus();
 	}
 
-	@Override
 	public abstract UploadedFile getWrapped();
 }
