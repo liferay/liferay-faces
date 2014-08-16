@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -51,11 +50,12 @@ import org.apache.commons.fileupload.util.Streams;
 import org.apache.commons.io.FileUtils;
 
 import com.liferay.faces.bridge.config.PortletConfigParam;
-import com.liferay.faces.bridge.model.UploadedFile;
-import com.liferay.faces.bridge.model.UploadedFileFactory;
+import com.liferay.faces.util.context.map.FacesRequestParameterMap;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.model.UploadedFile;
+import com.liferay.faces.util.model.UploadedFileFactory;
 
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -69,10 +69,10 @@ public class MultiPartFormDataProcessorImpl implements MultiPartFormDataProcesso
 	private static final Logger logger = LoggerFactory.getLogger(MultiPartFormDataProcessorImpl.class);
 
 	@Override
-	public Map<String, Collection<UploadedFile>> process(ClientDataRequest clientDataRequest,
-		PortletConfig portletConfig, FacesRequestParameterMap facesRequestParameterMap) {
+	public Map<String, List<UploadedFile>> process(ClientDataRequest clientDataRequest, PortletConfig portletConfig,
+		FacesRequestParameterMap facesRequestParameterMap) {
 
-		Map<String, Collection<UploadedFile>> uploadedFileMap = null;
+		Map<String, List<UploadedFile>> uploadedFileMap = null;
 
 		PortletSession portletSession = clientDataRequest.getPortletSession();
 
@@ -108,7 +108,7 @@ public class MultiPartFormDataProcessorImpl implements MultiPartFormDataProcesso
 		// Parse the request parameters and save all uploaded files in a map.
 		PortletFileUpload portletFileUpload = new PortletFileUpload(diskFileItemFactory);
 		portletFileUpload.setFileSizeMax(uploadedFileMaxSize);
-		uploadedFileMap = new HashMap<String, Collection<UploadedFile>>();
+		uploadedFileMap = new HashMap<String, List<UploadedFile>>();
 
 		// FACES-271: Include name+value pairs found in the ActionRequest.
 		Set<Map.Entry<String, String[]>> actionRequestParameterSet = clientDataRequest.getParameterMap().entrySet();
@@ -304,9 +304,9 @@ public class MultiPartFormDataProcessorImpl implements MultiPartFormDataProcesso
 		return uploadedFileMap;
 	}
 
-	protected void addUploadedFile(Map<String, Collection<UploadedFile>> uploadedFileMap, String fieldName,
+	protected void addUploadedFile(Map<String, List<UploadedFile>> uploadedFileMap, String fieldName,
 		UploadedFile uploadedFile) {
-		Collection<UploadedFile> uploadedFiles = uploadedFileMap.get(fieldName);
+		List<UploadedFile> uploadedFiles = uploadedFileMap.get(fieldName);
 
 		if (uploadedFiles == null) {
 			uploadedFiles = new ArrayList<UploadedFile>();
@@ -323,7 +323,14 @@ public class MultiPartFormDataProcessorImpl implements MultiPartFormDataProcesso
 		String strippedFileName = fileName;
 
 		if (fileName != null) {
-			strippedFileName = fileName.replaceAll("[\\\\/\\[\\]:|<>+;=.?\"]", "-");
+
+			int pos = fileName.lastIndexOf(StringPool.PERIOD);
+			strippedFileName = fileName.replaceAll("[\\\\/\\[\\]:|<>+;=.?\"]", StringPool.DASH);
+
+			if (pos > 0) {
+				strippedFileName = strippedFileName.substring(0, pos) + StringPool.PERIOD +
+					strippedFileName.substring(pos + 1);
+			}
 		}
 
 		return strippedFileName;

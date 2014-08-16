@@ -11,20 +11,20 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.model;
+package com.liferay.faces.util.model;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 
-import com.liferay.faces.util.helper.Wrapper;
+import javax.faces.FacesWrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class UploadedFileWrapper implements UploadedFile, Wrapper<UploadedFile> {
+public abstract class UploadedFileWrapper implements UploadedFile, FacesWrapper<UploadedFile> {
 
 	public void delete() throws IOException {
 		getWrapped().delete();
@@ -90,6 +90,5 @@ public abstract class UploadedFileWrapper implements UploadedFile, Wrapper<Uploa
 		return getWrapped().getStatus();
 	}
 
-	@Override
 	public abstract UploadedFile getWrapped();
 }

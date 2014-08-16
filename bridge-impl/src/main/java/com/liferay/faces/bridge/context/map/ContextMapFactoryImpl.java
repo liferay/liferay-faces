@@ -13,8 +13,8 @@
  */
 package com.liferay.faces.bridge.context.map;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import javax.portlet.ClientDataRequest;
@@ -26,8 +26,10 @@ import javax.servlet.http.Cookie;
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
+import com.liferay.faces.util.context.map.FacesRequestParameterMap;
+import com.liferay.faces.util.context.map.MultiPartFormData;
+import com.liferay.faces.util.model.UploadedFile;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
@@ -40,7 +42,7 @@ public class ContextMapFactoryImpl extends ContextMapFactory {
 	// Private Constants
 	private static final boolean ICEFACES_DETECTED = ProductMap.getInstance().get(ProductConstants.ICEFACES)
 		.isDetected();
-	private static final String ATTR_MULTIPART_FORM_DATA = MultiPartFormData.class.getName();
+	private static final String MULTIPART_FORM_DATA_FQCN = MultiPartFormData.class.getName();
 
 	@Override
 	public Map<String, Object> getApplicationScopeMap(BridgeContext bridgeContext) {
@@ -68,21 +70,21 @@ public class ContextMapFactoryImpl extends ContextMapFactory {
 					contentType.toLowerCase().startsWith(BridgeConstants.MULTIPART_CONTENT_TYPE_PREFIX)) {
 
 				MultiPartFormData multiPartFormData = (MultiPartFormData) portletRequest.getAttribute(
-						ATTR_MULTIPART_FORM_DATA);
+						MULTIPART_FORM_DATA_FQCN);
 
 				if (multiPartFormData == null) {
 					facesRequestParameterMap = new FacesRequestParameterMapImpl(namespace, portletContainer,
 							bridgeRequestScope, facesViewParameterMap, defaultRenderKitId);
 
 					MultiPartFormDataProcessor multiPartFormDataProcessor = new MultiPartFormDataProcessorImpl();
-					Map<String, Collection<UploadedFile>> uploadedFileMap = multiPartFormDataProcessor.process(
+					Map<String, List<UploadedFile>> uploadedFileMap = multiPartFormDataProcessor.process(
 							clientDataRequest, bridgeContext.getPortletConfig(), facesRequestParameterMap);
 
 					multiPartFormData = new MultiPartFormDataImpl(facesRequestParameterMap, uploadedFileMap);
 
 					// Save the multipart/form-data in a request attribute so that it can be referenced later-on in the
 					// JSF lifecycle by file upload component renderers.
-					portletRequest.setAttribute(ATTR_MULTIPART_FORM_DATA, multiPartFormData);
+					portletRequest.setAttribute(MULTIPART_FORM_DATA_FQCN, multiPartFormData);
 				}
 				else {
 					facesRequestParameterMap = multiPartFormData.getFacesRequestParameterMap();
@@ -157,10 +159,10 @@ public class ContextMapFactoryImpl extends ContextMapFactory {
 	}
 
 	@Override
-	public Map<String, Collection<UploadedFile>> getUploadedFileMap(BridgeContext bridgeContext) {
+	public Map<String, List<UploadedFile>> getUploadedFileMap(BridgeContext bridgeContext) {
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
-		MultiPartFormData multiPartFormData = (MultiPartFormData) portletRequest.getAttribute(ATTR_MULTIPART_FORM_DATA);
-		Map<String, Collection<UploadedFile>> uploadedFileMap = multiPartFormData.getUploadedFileMap();
+		MultiPartFormData multiPartFormData = (MultiPartFormData) portletRequest.getAttribute(MULTIPART_FORM_DATA_FQCN);
+		Map<String, List<UploadedFile>> uploadedFileMap = multiPartFormData.getUploadedFileMap();
 
 		return uploadedFileMap;
 	}
