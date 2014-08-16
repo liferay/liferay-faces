@@ -11,18 +11,12 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.render;
+package com.liferay.faces.util.template;
 
 /**
- * @author  Brian Wing Shun Chan
+ * @author  Neil Griffin
  */
-public interface ContentTypes {
+public interface Template {
 
-	public static final String TEXT_CSS = "text/css";
-
-	public static final String TEXT_HTML = "text/html";
-
-	public static final String TEXT_JAVASCRIPT = "text/javascript";
-
-	public static final String TEXT_PLAIN = "text/plain";
+	public String formatTokens(String[] tokens, Object[] replacements);
 }

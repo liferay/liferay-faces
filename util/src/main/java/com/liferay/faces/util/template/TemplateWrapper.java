@@ -11,18 +11,20 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.render;
+package com.liferay.faces.util.template;
+
+import javax.faces.FacesWrapper;
+
 
 /**
- * @author  Brian Wing Shun Chan
+ * @author  Neil Griffin
  */
-public interface ContentTypes {
+public abstract class TemplateWrapper implements Template, FacesWrapper<Template> {
 
-	public static final String TEXT_CSS = "text/css";
+	@Override
+	public String formatTokens(String[] expressions, Object[] replacements) {
+		return getWrapped().formatTokens(expressions, replacements);
+	}
 
-	public static final String TEXT_HTML = "text/html";
-
-	public static final String TEXT_JAVASCRIPT = "text/javascript";
-
-	public static final String TEXT_PLAIN = "text/plain";
+	public abstract Template getWrapped();
 }
