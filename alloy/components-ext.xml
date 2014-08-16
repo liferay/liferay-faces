@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE components>
-<components namespace="alloy" namespaceURI="http://liferay.com/faces/alloy">
+<components>
 	<description>
 		<![CDATA[The Liferay Faces Alloy facelet component tags with the <code>alloy:</code> tag name prefix.]]>
 	</description>
@@ -330,7 +330,7 @@
 					<![CDATA[When this flag is true, view parameters (specified via <code>f:viewParam</code> tags) will be included on the navigation URL]]>
 				</description>
 				<name>includeViewParams</name>
-				<type>java.lang.Boolean</type>
+				<type>boolean</type>
 				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
@@ -1407,6 +1407,63 @@
 				<name>onmouseup</name>
 				<type>java.lang.String</type>
 			</attribute>
+		</attributes>
+	</component>
+	<component name="Form" extendsTags="HTMLCommonEvents HTMLPassthrough"
+		parentClass="javax.faces.component.html.HtmlForm"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[Form is an <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlForm.html" target="_blank"><code>HtmlForm</code></a> component that delegates rendering to its JSF renderer.]]>
+		</description>
+		<attributes>
+			<attribute>
+            	<description>
+            		<![CDATA[HTML4 legacy passthrough attribute that has been made obsolete in HTML5 and is not supported by most browsers. The value can be a comma-delimited list of mime-types that the server accepts during file upload.]]>
+            	</description>
+            	<name>accept</name>
+            	<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+        	</attribute>
+			<attribute>
+            	<description>
+            		<![CDATA[HTML passthrough attribute (accept-charset) is a space-separated list of character encodings associated with form submission.]]>
+            	</description>
+            	<name>acceptcharset</name>
+            	<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+        	</attribute>
+			<attribute>
+            	<description>
+            		<![CDATA[HTML passthrough attribute that specifies how form-data should be encoded with form submission. Default is "application/x-www-form-urlencoded"]]>
+            	</description>
+            	<name>enctype</name>
+            	<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+        	</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[When this flag is true, view parameters (specified via <code>f:viewParam</code> tags) will be included in the URL rendered in the action attribute.]]>
+				</description>
+				<name>includeViewParams</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+            	<description>
+            		<![CDATA[When true, the form will prepend its id to child components. This is true by default.]]>
+            	</description>
+            	<name>prependId</name>
+            	<type>boolean</type>
+				<generateJava>false</generateJava>
+        	</attribute>
+			<attribute>
+            	<description>
+            		<![CDATA[HTML passthrough attribute that specifies the name of a tab/window/iframe that displays the results of the form submission.]]>
+            	</description>
+            	<name>target</name>
+            	<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+        	</attribute>
 		</attributes>
 	</component>
 	<component name="Icon" extendsTags="Styleable UIComponentBase">
