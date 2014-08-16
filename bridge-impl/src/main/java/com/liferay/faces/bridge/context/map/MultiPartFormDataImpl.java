@@ -14,10 +14,12 @@
 package com.liferay.faces.bridge.context.map;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
-import com.liferay.faces.bridge.model.UploadedFile;
+import com.liferay.faces.util.context.map.FacesRequestParameterMap;
+import com.liferay.faces.util.context.map.MultiPartFormData;
+import com.liferay.faces.util.model.UploadedFile;
 
 
 /**
@@ -30,10 +32,10 @@ public class MultiPartFormDataImpl implements MultiPartFormData, Serializable {
 
 	// Private Data Members
 	private FacesRequestParameterMap facesRequestParameterMap;
-	private Map<String, Collection<UploadedFile>> uploadedFileMap;
+	private Map<String, List<UploadedFile>> uploadedFileMap;
 
 	public MultiPartFormDataImpl(FacesRequestParameterMap facesRequestParameterMap,
-		Map<String, Collection<UploadedFile>> uploadedFileMap) {
+		Map<String, List<UploadedFile>> uploadedFileMap) {
 		this.facesRequestParameterMap = facesRequestParameterMap;
 		this.uploadedFileMap = uploadedFileMap;
 	}
@@ -44,7 +46,7 @@ public class MultiPartFormDataImpl implements MultiPartFormData, Serializable {
 	}
 
 	@Override
-	public Map<String, Collection<UploadedFile>> getUploadedFileMap() {
+	public Map<String, List<UploadedFile>> getUploadedFileMap() {
 		return uploadedFileMap;
 	}
 }
