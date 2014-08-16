@@ -5,8 +5,9 @@
 	<tag>
 		<tag-name>inputFile</tag-name>
 		<component>
-			<component-type>javax.faces.HtmlInputFile</component-type>
-			<handler-class>com.liferay.faces.bridge.component.HtmlInputFileHandler</handler-class>
+			<component-type>com.liferay.faces.bridge.component.inputfile.InputFile</component-type>
+			<renderer-type>com.liferay.faces.bridge.component.inputfile.InputFileRenderer</renderer-type>
+			<handler-class>com.liferay.faces.bridge.component.inputfile.internal.InputFileHandler</handler-class>
 		</component>
 	</tag>
 </facelet-taglib>

@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:bridge="http://liferay.com/faces/bridge" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<h:form enctype="multipart/form-data">
+			<showcase:example>
+				<bridge:inputFile fileUploadListener="#{bridgeInputFileBackingBean.handleFileUpload}" multiple="multiple" />
+				<hr />
+				<h:commandButton value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<ui:include src="../bridgeInputFileCommon.xhtml" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
