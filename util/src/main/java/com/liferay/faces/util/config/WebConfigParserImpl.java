@@ -25,6 +25,7 @@ import javax.xml.parsers.SAXParser;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import com.liferay.faces.util.helper.LongHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.xml.SAXHandlerBase;
@@ -39,6 +40,9 @@ public class WebConfigParserImpl extends SAXHandlerBase implements WebConfigPars
 	private static final Logger logger = LoggerFactory.getLogger(WebConfigParserImpl.class);
 
 	// Private Constants
+	private static final String LOCATION = "location";
+	private static final String MAX_FILE_SIZE = "max-file-size";
+	private static final String MULTIPART_CONFIG = "multipart-config";
 	private static final String SERVLET = "servlet";
 	private static final String SERVLET_CLASS = "servlet-class";
 	private static final String SERVLET_MAPPING = "servlet-mapping";
@@ -49,6 +53,12 @@ public class WebConfigParserImpl extends SAXHandlerBase implements WebConfigPars
 	private Map<String, String> configuredContextParams;
 	private List<ConfiguredServlet> configuredServlets;
 	private List<ConfiguredServletMapping> configuredServletMappings;
+	private String location;
+	private long maxFileSize;
+	private MultiPartConfig multiPartConfig;
+	private boolean parsingLocation;
+	private boolean parsingMaxFileSize;
+	private boolean parsingMultiPartConfig;
 	private boolean parsingServlet;
 	private boolean parsingServletClass;
 	private boolean parsingServletMapping;
@@ -76,9 +86,26 @@ public class WebConfigParserImpl extends SAXHandlerBase implements WebConfigPars
 				servletName = content.toString().trim();
 				parsingServletName = false;
 			}
+			else if (parsingMultiPartConfig) {
+
+				if (parsingLocation) {
+					location = content.toString().trim();
+					parsingLocation = false;
+				}
+				else if (parsingMaxFileSize) {
+					maxFileSize = LongHelper.toLong(content.toString().trim(), -1L);
+					parsingMaxFileSize = false;
+				}
+
+				if (MULTIPART_CONFIG.equals(qName)) {
+					multiPartConfig = new MultiPartConfigImpl(location, maxFileSize);
+					parsingMultiPartConfig = false;
+				}
+			}
 
 			if (SERVLET.equals(qName)) {
-				ConfiguredServlet configuredServlet = new ConfiguredServletImpl(servletName, servletClass);
+				ConfiguredServlet configuredServlet = new ConfiguredServletImpl(servletName, servletClass,
+						multiPartConfig);
 				configuredServlets.add(configuredServlet);
 				parsingServlet = false;
 			}
@@ -155,6 +182,15 @@ public class WebConfigParserImpl extends SAXHandlerBase implements WebConfigPars
 		}
 		else if (localName.equals(URL_PATTERN)) {
 			parsingUrlPattern = true;
+		}
+		else if (localName.equals(MULTIPART_CONFIG)) {
+			parsingMultiPartConfig = true;
+		}
+		else if (localName.equals(LOCATION)) {
+			parsingLocation = true;
+		}
+		else if (localName.equals(MAX_FILE_SIZE)) {
+			parsingMaxFileSize = true;
 		}
 	}
 }
