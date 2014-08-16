@@ -17,11 +17,14 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
-import com.liferay.faces.bridge.component.HtmlInputFile;
+import com.liferay.faces.bridge.component.inputfile.InputFile;
 import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.demos.dto.City;
 import com.liferay.faces.demos.util.FacesMessageUtil;
@@ -34,6 +37,8 @@ import com.liferay.faces.util.logging.LoggerFactory;
  *
  * @author  "Neil Griffin"
  */
+@ManagedBean(name = "applicantBackingBean")
+@RequestScoped
 public class ApplicantBackingBean implements Serializable {
 
 	// serialVersionUID
@@ -43,18 +48,17 @@ public class ApplicantBackingBean implements Serializable {
 	private static final Logger logger = LoggerFactory.getLogger(ApplicantBackingBean.class);
 
 	// Injections
+	@ManagedProperty(value = "#{applicantModelBean}")
 	private transient ApplicantModelBean applicantModelBean;
+	@ManagedProperty(value = "#{applicantViewBean}")
 	private transient ApplicantViewBean applicantViewBean;
+	@ManagedProperty(value = "#{listModelBean}")
 	private transient ListModelBean listModelBean;
 
-	// JavaBeans Properties for UI
-	private transient HtmlInputFile attachment1;
-	private transient HtmlInputFile attachment2;
-	private transient HtmlInputFile attachment3;
-
-	public void addAttachment(ActionEvent actionEvent) {
-		applicantViewBean.setFileUploaderRendered(true);
-	}
+	// Private Data Members
+	private transient InputFile attachment1;
+	private transient InputFile attachment2;
+	private transient InputFile attachment3;
 
 	public void deleteUploadedFile(ActionEvent actionEvent) {
 
@@ -134,6 +138,11 @@ public class ApplicantBackingBean implements Serializable {
 				logger.debug("Deleted file=[{0}]", file);
 			}
 
+			// Store the applicant's first name in JSF 2 Flash Scope so that it can be picked up
+			// for use inside of confirmation.xhtml
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.getExternalContext().getFlash().put("firstName", applicantModelBean.getFirstName());
+
 			applicantModelBean.clearProperties();
 
 			return "success";
@@ -147,34 +156,27 @@ public class ApplicantBackingBean implements Serializable {
 		}
 	}
 
-	public void toggleComments(ActionEvent actionEvent) {
-		applicantViewBean.setCommentsRendered(!applicantViewBean.isCommentsRendered());
-	}
-
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("unchecked")
 	public void uploadAttachments(ActionEvent actionEvent) {
 
 		List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
 
-		UploadedFile uploadedFile1 = attachment1.getUploadedFile();
+		List<UploadedFile> uploadedFiles1 = (List<UploadedFile>) attachment1.getValue();
 
-		if (uploadedFile1 != null) {
-			uploadedFiles.add(uploadedFile1);
-			logger.debug("uploadedFile1=[{0}]", uploadedFile1.getName());
+		if (uploadedFiles1 != null) {
+			uploadedFiles.addAll(uploadedFiles1);
 		}
 
-		UploadedFile uploadedFile2 = attachment2.getUploadedFile();
+		List<UploadedFile> uploadedFiles2 = (List<UploadedFile>) attachment2.getValue();
 
-		if (uploadedFile2 != null) {
-			uploadedFiles.add(uploadedFile2);
-			logger.debug("uploadedFile2=[{0}]", uploadedFile2.getName());
+		if (uploadedFiles2 != null) {
+			uploadedFiles.addAll(uploadedFiles2);
 		}
 
-		UploadedFile uploadedFile3 = attachment3.getUploadedFile();
+		List<UploadedFile> uploadedFiles3 = (List<UploadedFile>) attachment3.getValue();
 
-		if (uploadedFile3 != null) {
-			uploadedFiles.add(uploadedFile3);
-			logger.debug("uploadedFile3=[{0}]", uploadedFile3.getName());
+		if (uploadedFiles3 != null) {
+			uploadedFiles.addAll(uploadedFiles3);
 		}
 
 		applicantViewBean.setFileUploaderRendered(false);
@@ -182,43 +184,43 @@ public class ApplicantBackingBean implements Serializable {
 
 	public void setApplicantModelBean(ApplicantModelBean applicantModelBean) {
 
-		// Injected via WEB-INF/faces-config.xml managed-property
+		// Injected via @ManagedProperty annotation
 		this.applicantModelBean = applicantModelBean;
 	}
 
 	public void setApplicantViewBean(ApplicantViewBean applicantViewBean) {
 
-		// Injected via WEB-INF/faces-config.xml managed-property
+		// Injected via @ManagedProperty annotation
 		this.applicantViewBean = applicantViewBean;
 	}
 
-	public HtmlInputFile getAttachment1() {
+	public InputFile getAttachment1() {
 		return attachment1;
 	}
 
-	public void setAttachment1(HtmlInputFile attachment1) {
+	public void setAttachment1(InputFile attachment1) {
 		this.attachment1 = attachment1;
 	}
 
-	public HtmlInputFile getAttachment2() {
+	public InputFile getAttachment2() {
 		return attachment2;
 	}
 
-	public void setAttachment2(HtmlInputFile attachment2) {
+	public void setAttachment2(InputFile attachment2) {
 		this.attachment2 = attachment2;
 	}
 
-	public HtmlInputFile getAttachment3() {
+	public InputFile getAttachment3() {
 		return attachment3;
 	}
 
-	public void setAttachment3(HtmlInputFile attachment3) {
+	public void setAttachment3(InputFile attachment3) {
 		this.attachment3 = attachment3;
 	}
 
 	public void setListModelBean(ListModelBean listModelBean) {
 
-		// Injected via WEB-INF/faces-config.xml managed-property
+		// Injected via @ManagedProperty annotation
 		this.listModelBean = listModelBean;
 	}
 }

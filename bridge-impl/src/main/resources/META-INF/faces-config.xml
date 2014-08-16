@@ -32,10 +32,6 @@
 			<renderer-type>javax.faces.Messages</renderer-type>
 		</component-extension>
 	</component>
-	<component>
-		<component-type>javax.faces.HtmlInputFile</component-type>
-		<component-class>com.liferay.faces.bridge.component.HtmlInputFile</component-class>
-	</component>
 	<factory>
 		<application-factory>com.liferay.faces.bridge.application.ApplicationFactoryImpl</application-factory>
 		<factory-extension>
