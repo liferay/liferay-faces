@@ -21,6 +21,11 @@ package com.liferay.faces.util.config;
 public interface ConfiguredServlet {
 
 	/**
+	 * Returns the information contained in the multipart-config element of the configured servlet.
+	 */
+	public MultiPartConfig getMultiPartConfig();
+
+	/**
 	 * Returns the value of the servlet-class element of the configured servlet.
 	 */
 	public String getServletClass();
