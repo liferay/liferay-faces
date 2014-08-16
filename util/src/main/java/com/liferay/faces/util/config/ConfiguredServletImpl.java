@@ -19,12 +19,19 @@ package com.liferay.faces.util.config;
 public class ConfiguredServletImpl implements ConfiguredServlet {
 
 	// Private Data Members
+	private MultiPartConfig multiPartConfig;
 	private String servletClass;
 	private String servletName;
 
-	public ConfiguredServletImpl(String servletName, String servletClass) {
+	public ConfiguredServletImpl(String servletName, String servletClass, MultiPartConfig multiPartConfig) {
 		this.servletName = servletName;
 		this.servletClass = servletClass;
+		this.multiPartConfig = multiPartConfig;
+	}
+
+	@Override
+	public MultiPartConfig getMultiPartConfig() {
+		return multiPartConfig;
 	}
 
 	public String getServletClass() {
