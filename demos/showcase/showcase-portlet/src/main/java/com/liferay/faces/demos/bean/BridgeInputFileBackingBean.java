@@ -22,9 +22,9 @@ import javax.faces.component.UICommand;
 import javax.faces.event.ActionEvent;
 
 import com.liferay.faces.bridge.event.FileUploadEvent;
-import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.model.UploadedFile;
 
 
 /**
@@ -32,13 +32,13 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 @RequestScoped
 @ManagedBean
-public class InputFileBackingBean {
+public class BridgeInputFileBackingBean {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(InputFileBackingBean.class);
+	private static final Logger logger = LoggerFactory.getLogger(BridgeInputFileBackingBean.class);
 
-	@ManagedProperty(value = "#{inputFileModelBean}")
-	private InputFileModelBean inputFileModelBean;
+	@ManagedProperty(value = "#{bridgeInputFileModelBean}")
+	private BridgeInputFileModelBean bridgeInputFileModelBean;
 
 	public void deleteUploadedFile(ActionEvent actionEvent) {
 
@@ -46,7 +46,7 @@ public class InputFileBackingBean {
 		String fileId = (String) uiCommand.getValue();
 
 		try {
-			List<UploadedFile> uploadedFiles = inputFileModelBean.getUploadedFiles();
+			List<UploadedFile> uploadedFiles = bridgeInputFileModelBean.getUploadedFiles();
 
 			UploadedFile uploadedFileToDelete = null;
 
@@ -70,17 +70,17 @@ public class InputFileBackingBean {
 		}
 	}
 
-	public void handleFileUpload(FileUploadEvent fileUploadEvent) throws Exception {
-		List<UploadedFile> uploadedFiles = inputFileModelBean.getUploadedFiles();
+	public void handleFileUpload(FileUploadEvent fileUploadEvent) {
+		List<UploadedFile> uploadedFiles = bridgeInputFileModelBean.getUploadedFiles();
 		UploadedFile uploadedFile = fileUploadEvent.getUploadedFile();
 		uploadedFiles.add(uploadedFile);
 		logger.debug("Received fileName=[{0}] absolutePath=[{1}]", uploadedFile.getName(),
 			uploadedFile.getAbsolutePath());
 	}
 
-	public void setInputFileModelBean(InputFileModelBean inputFileModelBean) {
+	public void setBridgeInputFileModelBean(BridgeInputFileModelBean bridgeInputFileModelBean) {
 
 		// Injected via @ManagedProperty annotation
-		this.inputFileModelBean = inputFileModelBean;
+		this.bridgeInputFileModelBean = bridgeInputFileModelBean;
 	}
 }

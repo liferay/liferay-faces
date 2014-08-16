@@ -11,28 +11,33 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.component;
+package com.liferay.faces.bridge.component.inputfile;
 
 import javax.el.MethodExpression;
+import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.FacesEvent;
 
 import com.liferay.faces.bridge.event.FileUploadEvent;
-import com.liferay.faces.bridge.model.UploadedFile;
-
+import com.liferay.faces.util.component.ComponentUtil;
 
 /**
- * @author  Neil Griffin
+ * @author	Neil Griffin
  */
-public class HtmlInputFile extends HtmlInputFileCompat {
+@FacesComponent(value = InputFile.COMPONENT_TYPE)
+public class InputFile extends InputFileCompat {
 
-	// Private Data Members
-	private UploadedFile uploadedFile;
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.bridge.component.inputfile.InputFile";
+	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
+	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.File";
+	public static final String RENDERER_TYPE = "com.liferay.faces.bridge.component.inputfile.InputFileRenderer";
+	public static final String STYLE_CLASS_NAME = "bridge-input-file";
 
-	public HtmlInputFile() {
+	public InputFile() {
 		super();
-		setRendererType("com.liferay.faces.bridge.renderkit.bridge.InputFileRenderer");
+		setRendererType(RENDERER_TYPE);
 	}
 
 	@Override
@@ -53,20 +58,13 @@ public class HtmlInputFile extends HtmlInputFileCompat {
 		}
 	}
 
-	/**
-	 * @deprecated  Instead of calling this method which only returns the first uploaded file, create a value-expression
-	 *              to a model bean like &lt;bridge:inputFile value="#{modelBean.uploadedFiles} /&gt; or use the
-	 *              event-based approach: &lt;bridge:inputFile fileUploadListener="#{backingBean.handleFileUpload} /&gt;
-	 *
-	 * @return      The first uploaded file.
-	 */
-	@Deprecated
-	public UploadedFile getUploadedFile() {
-		return uploadedFile;
-	}
+	@Override
+	public String getStyleClass() {
 
-	public void setUploadedFile(UploadedFile uploadedFile) {
-		this.uploadedFile = uploadedFile;
-	}
+		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
+		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
+	}
 }
