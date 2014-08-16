@@ -21,7 +21,7 @@ import java.io.RandomAccessFile;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
@@ -32,10 +32,10 @@ import javax.faces.render.RendererWrapper;
 
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.map.ContextMapFactory;
-import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.model.UploadedFile;
 
 
 /**
@@ -74,7 +74,7 @@ public class FileUploadRendererRichFacesImpl extends RendererWrapper {
 			ContextMapFactory contextMapFactory = (ContextMapFactory) FactoryExtensionFinder.getFactory(
 					ContextMapFactory.class);
 			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-			Map<String, Collection<UploadedFile>> uploadedFileMap = contextMapFactory.getUploadedFileMap(bridgeContext);
+			Map<String, List<UploadedFile>> uploadedFileMap = contextMapFactory.getUploadedFileMap(bridgeContext);
 
 			if (uploadedFileMap != null) {
 
@@ -84,7 +84,7 @@ public class FileUploadRendererRichFacesImpl extends RendererWrapper {
 				ClassLoader classLoader = uploadedFileInterface.getClassLoader();
 
 				String clientId = uiComponent.getClientId(facesContext);
-				Collection<UploadedFile> uploadedFiles = uploadedFileMap.get(clientId);
+				List<UploadedFile> uploadedFiles = uploadedFileMap.get(clientId);
 
 				if (uploadedFiles != null) {
 

@@ -27,12 +27,12 @@ import javax.portlet.PortletSession;
 
 import org.primefaces.event.FileUploadEvent;
 
-import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.demos.dto.City;
 import com.liferay.faces.demos.dto.UploadedFileWrapper;
 import com.liferay.faces.demos.util.FacesMessageUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.model.UploadedFile;
 
 
 /**

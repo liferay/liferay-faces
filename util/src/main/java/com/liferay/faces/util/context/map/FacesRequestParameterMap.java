@@ -11,23 +11,21 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.context.map;
+package com.liferay.faces.util.context.map;
 
-import java.util.Collection;
 import java.util.Map;
-
-import com.liferay.faces.bridge.model.UploadedFile;
 
 
 /**
- * This interface represents a composition of request parameters and uploaded files submitted by an HTML form with
- * enctype="multipart/form-data".
+ * This interface defines a mutable {@link Map} of request parameters for a Faces request.
  *
  * @author  Neil Griffin
  */
-public interface MultiPartFormData {
+public interface FacesRequestParameterMap extends Map<String, String[]> {
 
-	public FacesRequestParameterMap getFacesRequestParameterMap();
+	public void addValue(String key, String value);
 
-	public Map<String, Collection<UploadedFile>> getUploadedFileMap();
+	public String getFirst(Object key);
+
+	public String getNamespace();
 }
