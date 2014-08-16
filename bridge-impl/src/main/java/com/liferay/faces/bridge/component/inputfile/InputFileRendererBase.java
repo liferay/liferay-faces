@@ -11,25 +11,23 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.component;
+package com.liferay.faces.bridge.component.inputfile;
+//J-
 
-import javax.el.MethodExpression;
-import javax.faces.component.UIInput;
 
+import javax.annotation.Generated;
+
+import com.liferay.faces.util.render.DelegatingRendererBase;
 
 /**
- * @author  Neil Griffin
+ * @author	Neil Griffin
  */
-public class HtmlInputFileCompat extends UIInput {
+@Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
+public abstract class InputFileRendererBase extends DelegatingRendererBase {
 
-	// Public Constants
-	public static final String FILE_UPLOAD_LISTENER = "fileUploadListener";
-
-	public MethodExpression getFileUploadListener() {
-		return (MethodExpression) getStateHelper().eval(FILE_UPLOAD_LISTENER, null);
-	}
-
-	public void setFileUploadListener(MethodExpression fileUploadListener) {
-		getStateHelper().put(FILE_UPLOAD_LISTENER, fileUploadListener);
-	}
+	// Protected Constants
+	protected static final String AUTO = "auto";
+	protected static final String FILE_UPLOAD_LISTENER = "fileUploadListener";
+	protected static final String MULTIPLE = "multiple";
 }
+//J+

@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.component;
+package com.liferay.faces.bridge.component.inputfile.internal;
 
 import java.lang.reflect.Method;
 
@@ -23,6 +23,7 @@ import javax.faces.view.facelets.Metadata;
 import javax.faces.view.facelets.MetadataTarget;
 import javax.faces.view.facelets.TagAttribute;
 
+import com.liferay.faces.bridge.component.inputfile.InputFile;
 import com.liferay.faces.bridge.event.FileUploadEvent;
 import com.liferay.faces.util.view.facelets.MethodMetadata;
 
@@ -30,9 +31,12 @@ import com.liferay.faces.util.view.facelets.MethodMetadata;
 /**
  * @author  Neil Griffin
  */
-public class HtmlInputFileHandler extends ComponentHandler {
+public class InputFileHandler extends ComponentHandler {
 
-	public HtmlInputFileHandler(ComponentConfig componentConfig) {
+	// Private Constants
+	private static final String FILE_UPLOAD_LISTENER = "fileUploadListener";
+
+	public InputFileHandler(ComponentConfig componentConfig) {
 		super(componentConfig);
 	}
 
@@ -52,9 +56,9 @@ public class HtmlInputFileHandler extends ComponentHandler {
 
 			Metadata metadata = null;
 
-			if ((metadataTarget != null) && (metadataTarget.isTargetInstanceOf(HtmlInputFile.class))) {
+			if ((metadataTarget != null) && (metadataTarget.isTargetInstanceOf(InputFile.class))) {
 
-				if (HtmlInputFile.FILE_UPLOAD_LISTENER.equals(name)) {
+				if (FILE_UPLOAD_LISTENER.equals(name)) {
 					Method writeMethod = metadataTarget.getWriteMethod(name);
 					Class<?>[] args = new Class[] { FileUploadEvent.class };
 					metadata = new MethodMetadata(tagAttribute, writeMethod, args);
@@ -63,6 +67,5 @@ public class HtmlInputFileHandler extends ComponentHandler {
 
 			return metadata;
 		}
-
 	}
 }

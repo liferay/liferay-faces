@@ -14,6 +14,7 @@
 package com.liferay.faces.demos.bean;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +23,9 @@ import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.model.UploadedFile;
 
 
 /**
@@ -32,10 +33,13 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 @ViewScoped
 @ManagedBean
-public class InputFileModelBean {
+public class BridgeInputFileModelBean implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 211172404377673109L;
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(InputFileModelBean.class);
+	private static final Logger logger = LoggerFactory.getLogger(BridgeInputFileModelBean.class);
 
 	// Private Data Members
 	private List<UploadedFile> uploadedFiles;

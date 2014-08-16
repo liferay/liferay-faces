@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<c:set value="#{bridgeInputFileModelBean.uploadedFiles.size()}" var="totalFiles" />
+	<alloy:dataTable id="modelValue" rendered="#{totalFiles > 0}" styleClass="files"
+		value="#{bridgeInputFileModelBean.uploadedFiles}" var="uploadedFile">
+		<alloy:column>
+			<alloy:commandButton actionListener="#{bridgeInputFileBackingBean.deleteUploadedFile}"
+				onclick="if (! confirm('#{i18n['are-you-sure-you-want-to-delete-this']}')) {return false;}"
+				value="#{uploadedFile.id}">
+				<f:ajax render="@form" />
+				<alloy:icon name="trash" />
+			</alloy:commandButton>
+		</alloy:column>
+		<alloy:column>
+			<f:facet name="header">
+				<alloy:outputText rendered="#{totalFiles > 0}" value="#{i18n['file-name']}" />
+			</f:facet>
+			<alloy:outputText value="#{uploadedFile.name}" />
+		</alloy:column>
+		<alloy:column>
+			<f:facet name="header">
+				<alloy:outputText rendered="#{totalFiles > 0}" value="#{i18n['size']}" />
+			</f:facet>
+			<alloy:outputText value="#{uploadedFile.size}" />
+		</alloy:column>
+	</alloy:dataTable>
+</ui:composition>
