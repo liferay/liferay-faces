@@ -22,8 +22,10 @@ import javax.faces.FacesWrapper;
 
 
 /**
- * @author  Neil Griffin
+ * @deprecated  Replaced by {@link com.liferay.faces.model.UploadedFileWrapper}.
+ * @author      Neil Griffin
  */
+@Deprecated
 public abstract class UploadedFileWrapper implements UploadedFile, FacesWrapper<UploadedFile> {
 
 	public void delete() throws IOException {
