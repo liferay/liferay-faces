@@ -15,13 +15,24 @@ package com.liferay.faces.util.config;
 
 import javax.faces.context.ExternalContext;
 
+import com.liferay.faces.util.helper.BooleanHelper;
+
 
 /**
  * @author  Neil Griffin
  */
 public enum WebConfigParam implements ConfigParam<ExternalContext> {
 
-	ResolveXMLEntities("com.liferay.faces.util.resolveXMLEntities", false);
+	ResolveXMLEntities("com.liferay.faces.util.resolveXMLEntities", false),
+
+	/**
+	 * Absolute path to a directory (folder) in which the uploaded file data should be written to. Default value is the
+	 * value of the system property "java.io.tmpdir".
+	 */
+	UploadedFilesDir("com.liferay.faces.util.uploadedFilesDir", System.getProperty("java.io.tmpdir")),
+
+	/** Maximum file size for an uploaded file. Default is 104857600 bytes (100MB) */
+	UploadedFileMaxSize("com.liferay.faces.util.uploadedFileMaxSize", 104857600);
 
 	// Private Data Members
 	private String alternateName;
@@ -29,6 +40,28 @@ public enum WebConfigParam implements ConfigParam<ExternalContext> {
 	private String defaultStringValue;
 	private int defaultIntegerValue;
 	private String name;
+
+	private WebConfigParam(String name, String defaultStringValue) {
+		this.name = name;
+
+		if (BooleanHelper.isTrueToken(defaultStringValue)) {
+			this.defaultBooleanValue = true;
+			this.defaultIntegerValue = 1;
+		}
+		else {
+			this.defaultBooleanValue = false;
+			this.defaultIntegerValue = 0;
+		}
+
+		this.defaultStringValue = defaultStringValue;
+	}
+
+	private WebConfigParam(String name, int defaultIntegerValue) {
+		this.name = name;
+		this.defaultBooleanValue = (defaultIntegerValue != 0);
+		this.defaultIntegerValue = defaultIntegerValue;
+		this.defaultStringValue = Integer.toString(defaultIntegerValue);
+	}
 
 	private WebConfigParam(String name, boolean defaultBooleanValue) {
 		this.name = name;

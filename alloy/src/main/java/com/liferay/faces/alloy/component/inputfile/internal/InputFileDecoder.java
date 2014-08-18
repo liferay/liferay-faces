@@ -11,16 +11,20 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.render;
+package com.liferay.faces.alloy.component.inputfile.internal;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
+
+import com.liferay.faces.util.model.UploadedFile;
+
 
 /**
- * @author  Brian Wing Shun Chan
+ * @author  Neil Griffin
  */
-public interface HttpHeaders {
+public interface InputFileDecoder {
 
-	public static final String CACHE_CONTROL = "Cache-Control";
-
-	public static final String CACHE_CONTROL_NO_CACHE_VALUE = "private, no-cache, no-store, must-revalidate";
-
-	public static final String CONTENT_DISPOSITION = "Content-Disposition";
+	public Map<String, List<UploadedFile>> decode(FacesContext facesContext, String location);
 }

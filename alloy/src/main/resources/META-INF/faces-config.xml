@@ -15,6 +15,10 @@
 			<system-event-listener-class>com.liferay.faces.alloy.event.ApplicationStartupListener</system-event-listener-class>
 			<system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
 		</system-event-listener>
+		<system-event-listener>
+			<system-event-listener-class>com.liferay.faces.alloy.component.inputfile.InputFileRenderer</system-event-listener-class>
+			<system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
+		</system-event-listener>
 	</application>
 	<component>
 		<component-type>com.liferay.faces.alloy.AUIButtonRow</component-type>
