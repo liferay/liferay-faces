@@ -122,8 +122,8 @@
 		<renderer>
 			<description>HtmlInputFile Renderer</description>
 			<component-family>javax.faces.Input</component-family>
-			<renderer-type>com.liferay.faces.bridge.renderkit.bridge.InputFileRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.bridge.renderkit.bridge.InputFileRenderer</renderer-class>
+			<renderer-type>javax.faces.File</renderer-type>
+			<renderer-class>com.liferay.faces.bridge.component.inputfile.internal.HtmlInputFileRenderer</renderer-class>
 		</renderer>
 	</render-kit>
 	<render-kit>
