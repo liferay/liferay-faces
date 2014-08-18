@@ -38,8 +38,6 @@ import javax.faces.validator.Validator;
 
 import com.liferay.faces.alloy.component.inputfile.internal.AjaxParameters;
 import com.liferay.faces.alloy.component.inputfile.internal.InputFileDecoder;
-import com.liferay.faces.alloy.component.inputfile.internal.InputFileDecoderCommonsImpl;
-import com.liferay.faces.alloy.component.inputfile.internal.InputFileDecoderPartImpl;
 import com.liferay.faces.alloy.component.inputfile.internal.InputFileDelegationResponseWriter;
 import com.liferay.faces.alloy.component.inputfile.internal.PreviewTableTemplate;
 import com.liferay.faces.alloy.component.inputfile.internal.PreviewUploaderTemplate;
@@ -53,7 +51,6 @@ import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.model.UploadedFile;
-import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 import com.liferay.faces.util.render.DelegationResponseWriter;
@@ -74,7 +71,7 @@ import com.liferay.faces.util.render.RendererUtil;
 		}
 	)
 //J+
-public class InputFileRenderer extends InputFileRendererBase implements SystemEventListener {
+public class InputFileRenderer extends InputFileRendererCompat implements SystemEventListener {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(InputFileRenderer.class);
@@ -375,25 +372,7 @@ public class InputFileRenderer extends InputFileRendererBase implements SystemEv
 			uploadedFileMap = multiPartFormData.getUploadedFileMap();
 		}
 		else {
-			Product product = ProductMap.getInstance().get(ProductConstants.JSF);
-			int facesMajorVersion = product.getMajorVersion();
-			int facesMinorVersion = product.getMinorVersion();
-			boolean jsf22OrHigher = (((facesMajorVersion == 2) && (facesMinorVersion >= 2)) || (facesMinorVersion > 2));
-
-			InputFileDecoder inputFileDecoder = null;
-
-			// If running with JSF 2.2 (or higher) then use the javax.servlet.http.Part (Servlet 3.0) method of decoding
-			// uploaded files. This is because the the @MultipartConfig annotation on the FacesServlet will cause
-			// commons-fileupload to throw exceptions.
-			if (jsf22OrHigher) {
-				inputFileDecoder = new InputFileDecoderPartImpl();
-			}
-
-			// Otherwise, use commons-fileupload to decode the uploaded files.
-			else {
-				inputFileDecoder = new InputFileDecoderCommonsImpl();
-			}
-
+			InputFileDecoder inputFileDecoder = getInputFileDecoder();
 			uploadedFileMap = inputFileDecoder.decode(facesContext, location);
 		}
 

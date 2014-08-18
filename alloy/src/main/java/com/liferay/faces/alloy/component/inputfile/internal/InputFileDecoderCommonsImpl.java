@@ -15,6 +15,7 @@ package com.liferay.faces.alloy.component.inputfile.internal;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -60,7 +61,7 @@ public class InputFileDecoderCommonsImpl extends InputFileDecoderBase {
 		String uploadedFilesFolder = getUploadedFilesFolder(externalContext, location);
 
 		// Using the sessionId, determine a unique folder path and create the path if it does not exist.
-		String sessionId = externalContext.getSessionId(true);
+		String sessionId = getSessionId(externalContext);
 
 		// FACES-1452: Non-alpha-numeric characters must be removed order to ensure that the folder will be
 		// created properly.
@@ -235,5 +236,22 @@ public class InputFileDecoderCommonsImpl extends InputFileDecoderBase {
 		}
 
 		return uploadedFileMap;
+	}
+
+	protected String getSessionId(ExternalContext externalContext) {
+
+		String sessionId = null;
+
+		try {
+			Object session = externalContext.getSession(true);
+
+			Method getIdMethod = session.getClass().getMethod("getId", new Class[] {});
+			sessionId = (String) getIdMethod.invoke(session, new Object[] {});
+		}
+		catch (Exception e) {
+			logger.error(e);
+		}
+
+		return sessionId;
 	}
 }
