@@ -22,11 +22,12 @@ import javax.faces.event.FacesEvent;
 import com.liferay.faces.bridge.event.FileUploadEvent;
 import com.liferay.faces.util.component.ComponentUtil;
 
+
 /**
- * @author	Neil Griffin
+ * @author  Neil Griffin
  */
 @FacesComponent(value = InputFile.COMPONENT_TYPE)
-public class InputFile extends InputFileCompat {
+public class InputFile extends InputFileBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.bridge.component.inputfile.InputFile";
