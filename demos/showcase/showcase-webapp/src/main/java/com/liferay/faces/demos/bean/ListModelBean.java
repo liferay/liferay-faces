@@ -72,8 +72,10 @@ public class ListModelBean {
 	private Map<String, ShowcaseComponent> showcaseComponentMap;
 
 	public ListModelBean() {
+
 		FacesContext startupFacesContext = FacesContext.getCurrentInstance();
 		boolean developmentMode = startupFacesContext.isProjectStage(ProjectStage.Development);
+		boolean systemTestMode = startupFacesContext.isProjectStage(ProjectStage.SystemTest);
 		showcaseCategoryList = new ArrayList<String>();
 		showcaseCategoryList.add("buttonlink");
 		showcaseCategoryList.add("data");
@@ -81,8 +83,11 @@ public class ListModelBean {
 		showcaseCategoryList.add("multimedia");
 		showcaseCategoryList.add("output");
 		showcaseCategoryList.add("panel");
-		if (developmentMode) {
+		if ((developmentMode) || (systemTestMode)) {
 			showcaseCategoryList.add("pick");
+		}
+		if (LIFERAY_FACES_BRIDGE_DETECTED) {
+			showcaseCategoryList.add("portlet");
 		}
 		showcaseCategoryList.add("select");
 
@@ -97,6 +102,10 @@ public class ListModelBean {
 
 		if (LIFERAY_FACES_BRIDGE_DETECTED) {
 			namespaces.add("bridge");
+		}
+
+		if ((developmentMode) || (systemTestMode)) {
+			namespaces.add("h");
 		}
 
 		if (LIFERAY_PORTAL_DETECTED) {
@@ -159,8 +168,13 @@ public class ListModelBean {
 								else if (sourceFileName.endsWith(".xhtml")) {
 
 									String sourcePath = File.separator + "component" + File.separator + prefix +
-										File.separator + lowerCaseName + File.separator + useCaseName + File.separator +
-										sourceFileName;
+										File.separator + lowerCaseName + File.separator;
+									
+									if (!sourceFileName.toLowerCase().contains("common")) {
+										sourcePath = sourcePath + useCaseName + File.separator;
+									}
+									
+									sourcePath = sourcePath + sourceFileName;
 
 									sourceFileURL = startupExternalContext.getResource(sourcePath);
 								}

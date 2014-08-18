@@ -56,7 +56,7 @@
 	margin-left: 4px;
 }
 
-.showcase-example,.showcase-parameter-value,.showcase-model-value,.showcase-container {
+.showcase-example,.showcase-attribute-value,.showcase-parameter-value,.showcase-model-value,.showcase-container {
 	border: 1px solid #ddd;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -65,12 +65,12 @@
 	position: relative;
 }
 
-.showcase-example,.showcase-parameter-value,.showcase-model-value {
+.showcase-example,.showcase-attribute-value,.showcase-parameter-value,.showcase-model-value {
 	padding: 39px 19px 14px;
 	*padding-top: 19px;
 }
 
-.showcase-example label.example-label,.showcase-parameter-value label.parameter-label,.showcase-model-value label.model-label,.showcase-container label.container-label {
+.showcase-example label.example-label,.showcase-attribute-value label.attribute-label,.showcase-parameter-value label.parameter-label,.showcase-model-value label.model-label,.showcase-container label.container-label {
 	background-color: #f5f5f5;
 	border: 1px solid #ddd;
 	-webkit-border-radius: 4px 0 4px 0;
@@ -84,7 +84,7 @@
 	top: -1px;
 }
 
-.showcase-example label.example-label span.example-number,.showcase-parameter-value label.parameter-label,.showcase-model-value label.model-label,.showcase-container label.container-label {
+.showcase-example label.example-label span.example-number,.showcase-attribute-value label.attribute-label,.showcase-parameter-value label.parameter-label,.showcase-model-value label.model-label,.showcase-container label.container-label {
 	font-weight: bold;
 }
 
@@ -136,7 +136,7 @@
 	text-shadow: none;
 }
 
-.aui a {
+.aui a, .aui .alloy-output-text a, .aui .tab a, .aui .tab a:hover {
 	color: #0058ba;
 }
 
