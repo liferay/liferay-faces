@@ -15,7 +15,9 @@ package com.liferay.faces.bridge.component.inputfile;
 //J-
 
 import javax.annotation.Generated;
+import javax.el.MethodExpression;
 import javax.faces.component.html.HtmlInputText;
+import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.component.Styleable;
 
@@ -32,28 +34,76 @@ public abstract class InputFileBase extends HtmlInputText implements Styleable {
 		multiple
 	}
 
+	protected enum PropertyKeys {
+		styleClass
+	}
+
+	// Public Constants
+	public static final String FILE_UPLOAD_LISTENER = "fileUploadListener";
+
+	// Private Data Members
+	private boolean auto;
+	private MethodExpression fileUploadListener;
+	private String multiple;
+
+	@Override
+	public void restoreState(FacesContext context, Object state) {
+		Object[] values = (Object[]) state;
+		super.restoreState(context, values[0]);
+		auto = (java.lang.Boolean)values[1];
+		fileUploadListener = (javax.el.MethodExpression) values[2];
+		multiple = (java.lang.String) values[3];
+	}
+
+	@Override
+	public Object saveState(FacesContext context) {
+		Object[] values = new Object[4];
+		values[0] = super.saveState(context);
+		values[1] = auto;
+		values[2] = fileUploadListener;
+		values[3] = multiple;
+
+		return ((Object) values);
+	}
+
 	public boolean isAuto() {
-		return (Boolean) getStateHelper().eval(InputFilePropertyKeys.auto, false);
+		return auto;
 	}
 
 	public void setAuto(boolean auto) {
-		getStateHelper().put(InputFilePropertyKeys.auto, auto);
+		this.auto = auto;
 	}
 
-	public javax.el.MethodExpression getFileUploadListener() {
-		return (javax.el.MethodExpression) getStateHelper().eval(InputFilePropertyKeys.fileUploadListener, null);
+	public MethodExpression getFileUploadListener() {
+		return fileUploadListener;
 	}
 
-	public void setFileUploadListener(javax.el.MethodExpression fileUploadListener) {
-		getStateHelper().put(InputFilePropertyKeys.fileUploadListener, fileUploadListener);
+	public void setFileUploadListener(MethodExpression fileUploadListener) {
+		this.fileUploadListener = fileUploadListener;
 	}
 
 	public String getMultiple() {
-		return (String) getStateHelper().eval(InputFilePropertyKeys.multiple, null);
+		return multiple;
 	}
 
 	public void setMultiple(String multiple) {
-		getStateHelper().put(InputFilePropertyKeys.multiple, multiple);
+		this.multiple = multiple;
+	}
+
+	public StateHelperCompat getStateHelper() {
+		return new StateHelperCompat();
+	}
+
+	protected class StateHelperCompat {
+
+		public Object eval(PropertyKeys propertyKey, String defaultValue) {
+			if (propertyKey == PropertyKeys.styleClass) {
+				return getStyleClass();
+			}
+			else {
+				return null;
+			}
+		}
 	}
 }
 //J+
