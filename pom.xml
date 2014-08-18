@@ -164,6 +164,23 @@
 					</configuration>
 				</plugin>
 				<plugin>
+					<groupId>com.tunyk.mvn.plugins.htmlcompressor</groupId>
+					<artifactId>htmlcompressor-maven-plugin</artifactId>
+					<version>1.3</version>
+					<configuration>
+						<goalPrefix>htmlcompressor</goalPrefix>
+						<javascriptHtmlSprite>false</javascriptHtmlSprite>
+						<removeIntertagSpaces>true</removeIntertagSpaces>
+						<srcFolder>${basedir}/src/main/resources</srcFolder>
+						<targetFolder>${project.build.directory}/classes</targetFolder>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>net.alchim31.maven</groupId>
+					<artifactId>yuicompressor-maven-plugin</artifactId>
+					<version>1.4.0</version>
+				</plugin>
+				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-antrun-plugin</artifactId>
 					<version>1.7</version>
