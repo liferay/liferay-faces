@@ -1,0 +1,16 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form>
+			<showcase:example>
+				<alloy:messages globalOnly="true" layout="table" />
+				<alloy:commandButton action="#{formBackingBean.submit}" value="#{i18n['submit-and-re-render-form']}">
+					<f:ajax render="@form" />
+				</alloy:commandButton>
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

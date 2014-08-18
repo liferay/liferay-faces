@@ -36,7 +36,7 @@
 					<alloy:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.selectedComponent.rendered}">
 						<f:ajax render="@form" />
 					</alloy:selectBooleanCheckbox>
-					<alloy:outputLabel value="#{i18n['rendered']}" />
+					<alloy:outputLabel styleClass="inline-label" value="#{i18n['rendered']}" />
 				</span>
 			</c:if>
 			<c:if test="#{cc.attrs.requiredCheckbox}">
@@ -44,7 +44,7 @@
 					<alloy:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.selectedComponent.required}">
 						<f:ajax render="@form" />
 					</alloy:selectBooleanCheckbox>
-					<alloy:outputLabel value="#{i18n['required']}" />
+					<alloy:outputLabel styleClass="inline-label" value="#{i18n['required']}" />
 				</span>
 			</c:if>
 			<div class="example-usage">

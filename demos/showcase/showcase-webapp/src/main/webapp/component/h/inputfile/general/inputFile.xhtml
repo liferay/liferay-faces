@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<h:form enctype="multipart/form-data" includeViewParams="false">
+			<showcase:example>
+				<h:inputFile value="#{htmlInputFileBackingBean.uploadedPart}" />
+				<hr />
+				<alloy:commandButton value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<ui:include src="../htmlInputFileCommon.xhtml" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

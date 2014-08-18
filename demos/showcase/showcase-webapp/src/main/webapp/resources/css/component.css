@@ -1,4 +1,4 @@
-code {
+.aui code {
 	color: rgb(0, 22, 142);
 }
 
@@ -65,8 +65,9 @@ code {
 	list-style-type: none;
 }
 
-.component-rendered-checkbox label,.component-required-checkbox label {
+.aui .inline-label, .inline-label {
 	display: inline;
+	margin-left: 4px;
 	margin-right: 10px;
 }
 

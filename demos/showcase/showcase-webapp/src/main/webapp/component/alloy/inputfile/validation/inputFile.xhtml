@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form enctype="multipart/form-data">
+			<showcase:example description="#{i18n['alloy-inputfile-validation-example']}">
+				<alloy:messages layout="table" />
+				<alloy:inputFile fileUploadListener="#{inputFileBackingBean.handleFileUpload}" multiple="multiple"
+					showPreview="true">
+					<alloy:validateFile contentTypes="application/pdf,image/png" maxFileSize="600000" />
+				</alloy:inputFile>
+				<hr />
+				<h:commandButton value="#{i18n['submit']}">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
+			</showcase:example>
+			<showcase:outputModel>
+				<ui:include src="../inputFileCommon.xhtml" />
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>
