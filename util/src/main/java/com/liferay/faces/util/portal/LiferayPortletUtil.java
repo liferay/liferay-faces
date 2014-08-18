@@ -11,25 +11,22 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.component;
+package com.liferay.faces.util.portal;
 
 /**
- * This interface should be implemented by classes that extend {@link UIComponent} if they render HTML that is styleable
- * with CSS class names.
- *
- * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public interface Styleable {
+public class LiferayPortletUtil {
 
-	// Public Constants
-	public static final String STYLE = "style";
-	public static final String STYLE_CLASS = "styleClass";
+	public static String getPortletId(Object portletObject) {
 
-	public String getStyle();
+		String portletId = null;
 
-	public void setStyle(String style);
+		if (portletObject instanceof com.liferay.portal.model.Portlet) {
+			com.liferay.portal.model.Portlet portlet = (com.liferay.portal.model.Portlet) portletObject;
+			portletId = portlet.getPortletId();
+		}
 
-	public String getStyleClass();
-
-	public void setStyleClass(String styleClass);
+		return portletId;
+	}
 }
