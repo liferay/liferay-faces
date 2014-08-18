@@ -24,6 +24,7 @@
 							<quiet>false</quiet>
 							<windowTitle>Liferay Faces View Description Language Documentation (VDLDoc)</windowTitle>
 							<taglibs>
+								<taglib>${project.basedir}/../alloy/src/main/resources/META-INF/alloy.taglib.xml</taglib>
 								<taglib>${project.basedir}/../alloy/src/main/resources/META-INF/aui.taglib.xml</taglib>
 								<taglib>${project.basedir}/../alloy/src/main/resources/META-INF/aui-cc.taglib.xml</taglib>
 								<taglib>${project.basedir}/../bridge-impl/src/main/resources/META-INF/resources/bridge.taglib.xml</taglib>
