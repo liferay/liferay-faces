@@ -13,13 +13,13 @@
  */
 package com.liferay.faces.util.template;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class TemplateWrapper implements Template, FacesWrapper<Template> {
+public abstract class TemplateWrapper implements Template, Wrapper<Template> {
 
 	@Override
 	public String formatTokens(String[] expressions, Object[] replacements) {
