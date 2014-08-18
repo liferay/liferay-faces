@@ -17,9 +17,6 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
@@ -37,8 +34,6 @@ import com.liferay.faces.util.logging.LoggerFactory;
  *
  * @author  "Neil Griffin"
  */
-@ManagedBean(name = "applicantBackingBean")
-@RequestScoped
 public class ApplicantBackingBean implements Serializable {
 
 	// serialVersionUID
@@ -48,17 +43,18 @@ public class ApplicantBackingBean implements Serializable {
 	private static final Logger logger = LoggerFactory.getLogger(ApplicantBackingBean.class);
 
 	// Injections
-	@ManagedProperty(value = "#{applicantModelBean}")
 	private transient ApplicantModelBean applicantModelBean;
-	@ManagedProperty(value = "#{applicantViewBean}")
 	private transient ApplicantViewBean applicantViewBean;
-	@ManagedProperty(value = "#{listModelBean}")
 	private transient ListModelBean listModelBean;
 
 	// Private Data Members
 	private transient InputFile attachment1;
 	private transient InputFile attachment2;
 	private transient InputFile attachment3;
+
+	public void addAttachment(ActionEvent actionEvent) {
+		applicantViewBean.setFileUploaderRendered(true);
+	}
 
 	public void deleteUploadedFile(ActionEvent actionEvent) {
 
@@ -138,11 +134,6 @@ public class ApplicantBackingBean implements Serializable {
 				logger.debug("Deleted file=[{0}]", file);
 			}
 
-			// Store the applicant's first name in JSF 2 Flash Scope so that it can be picked up
-			// for use inside of confirmation.xhtml
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			facesContext.getExternalContext().getFlash().put("firstName", applicantModelBean.getFirstName());
-
 			applicantModelBean.clearProperties();
 
 			return "success";
@@ -154,6 +145,10 @@ public class ApplicantBackingBean implements Serializable {
 
 			return "failure";
 		}
+	}
+
+	public void toggleComments(ActionEvent actionEvent) {
+		applicantViewBean.setCommentsRendered(!applicantViewBean.isCommentsRendered());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -184,13 +179,13 @@ public class ApplicantBackingBean implements Serializable {
 
 	public void setApplicantModelBean(ApplicantModelBean applicantModelBean) {
 
-		// Injected via @ManagedProperty annotation
+		// Injected via WEB-INF/faces-config.xml managed-property
 		this.applicantModelBean = applicantModelBean;
 	}
 
 	public void setApplicantViewBean(ApplicantViewBean applicantViewBean) {
 
-		// Injected via @ManagedProperty annotation
+		// Injected via WEB-INF/faces-config.xml managed-property
 		this.applicantViewBean = applicantViewBean;
 	}
 
@@ -220,7 +215,7 @@ public class ApplicantBackingBean implements Serializable {
 
 	public void setListModelBean(ListModelBean listModelBean) {
 
-		// Injected via @ManagedProperty annotation
+		// Injected via WEB-INF/faces-config.xml managed-property
 		this.listModelBean = listModelBean;
 	}
 }
