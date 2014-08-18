@@ -25,15 +25,16 @@ if (!Liferay.zIndex) {
 }
 
 (function(A, Liferay) {
-	var Lang = A.Lang;
-	var components = {};
-	var componentsFn = {};
+	var Lang = A.Lang,
+		components = {},
+		componentsFn = {};
 
 	Liferay.component = function(id, value) {
-		var retVal;
+		var retVal,
+			component;
 
 		if (arguments.length === 1) {
-			var component = components[id];
+			component = components[id];
 
 			if (component && Lang.isFunction(component)) {
 				componentsFn[id] = component;
