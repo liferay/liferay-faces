@@ -6,6 +6,12 @@ cursor:pointer;
 font-weight:bold;
 padding:4px;
 }
+.alloy-input-file .select-files-box,.alloy-input-file .upload-files-box {
+display:inline-block;
+}
+.aui .alloy-input-file-button-hidden, .alloy-input-file-button-hidden {
+display:none;
+}
 .alloy-messages {
 border:1px solid #ddd;
 -webkit-border-radius:4px;

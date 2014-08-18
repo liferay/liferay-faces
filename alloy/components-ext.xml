@@ -1618,6 +1618,72 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="InputFile" extendsTags="ClientComponent InputText" handlerClass="com.liferay.faces.alloy.component.inputfile.internal.InputFileHandler"
+		module="uploader" parentClass="javax.faces.component.html.HtmlInputFile"
+		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase" yui="true" yuiName="Uploader">
+		<description>
+			<![CDATA[InputFile is a UIInput component that renders an <input> element with type=file. Since it extends HtmlInputFile, it supports all the features of h:inputFile and also supports multi-file uploads, instant-Ajax, preview, upload progress, and validation.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[When this flag is true, selected files are appended to the preview table. Otherwise, the preview table is cleared when new files are selected. The default value is false. NOTE: This feature is only available when showProgress=true.]]>
+				</description>
+				<name>appendNewFiles</name>
+				<type>boolean</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[When this flag is true, files are uploaded automatically as soon as they are selected. The default value is false.]]>
+				</description>
+				<name>auto</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when a file is uploaded. The method must be <code>public</code>, return <code>void</code>, and take a <code>FileUploadEvent</code> argument.]]>
+				</description>
+				<name>fileUploadListener</name>
+				<method-signature>
+					void fileUploadListener(com.liferay.faces.util.component.inputfile.FileUploadEvent)
+				</method-signature>
+				<type>javax.el.MethodExpression</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The absolute path that uploaded file should be copied to. If not specified, then the value of the &lt;location&gt; element specified in the Servlet 3.0 web.xml &lt;multipart-config&gt; of the FacesServlet &lt;servlet&gt; will be utilized. Otherwise, the value of the "com.liferay.faces.util.uploadedFilesDir" context-param is utilizied.]]>
+				</description>
+				<type>java.lang.String</type>
+				<name>location</name>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying whether or not multiple files can be uploaded. Valid values are blank (to upload a single file) or "multiple" (to upload multiple files).]]>
+				</description>
+				<type>java.lang.String</type>
+				<name>multiple</name>
+			</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[When this flag is true, a table showing a preview will be rendered when the user selects one or more files. The default value is false.]]>
+				</description>
+				<name>showPreview</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[When this flag is true, a table showing file upload progress will be rendered when the user selects one of more files. The default value is false.]]>
+				</description>
+				<name>showProgress</name>
+				<type>boolean</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="InputHidden" extendsTags="UIInput" parentClass="javax.faces.component.html.HtmlInputHidden" 
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase" styleable="false">
 		<description>
@@ -2338,4 +2404,26 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="ValidateFile" generateJava="false" validatorId="com.liferay.faces.alloy.component.inputfile.InputFileValidator">
+		<description>
+			<![CDATA[Validator that is meant to be used in conjunction with the <code>alloy:inputFile</code> component.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Maximum length (in bytes) permitted for each individual uploaded file. If not specified, then files of any length are assumed to be valid.]]>
+				</description>
+				<name>maxFileSize</name>
+				<type>java.lang.Long</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Comma-delimited list of uploaded file MIME types that are valid. If not specified, then all MIME types are assumed to be valid.]]>
+				</description>
+				<name>mimeTypes</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+		</attributes>
+	</component>
+	
 </components>

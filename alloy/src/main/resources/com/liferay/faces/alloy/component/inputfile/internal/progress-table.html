@@ -1,0 +1,24 @@
+<div id="${clientId}_selectFilesBox" class="select-files-box"></div>
+<div id="${clientId}_uploadFilesBox" class="upload-files-box">
+	<button id="${clientId}_uploadFilesButton" class="${uploadFilesButtonClass} yui3-widget btn btn-content">${i18n['upload-files']}</button>
+</div>
+<div>
+	<table id="${clientId}_table" class="yui3-datatable-table">
+		<thead>
+			<tr>
+				<th class="yui3-datatable-header">${i18n['file-name']}</th>
+				<th class="yui3-datatable-header">${i18n['file-type']}</th>
+				<th class="yui3-datatable-header">${i18n['file-size']}</th>
+				<th class="yui3-datatable-header">${i18n['progress']}</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<td class="yui3-datatable-cell" colspan="3">${i18n['no-files-selected']}</td>
+			</tr>
+		</tfoot>
+		<tbody>
+			<tr></tr>
+		</tbody>
+	</table>
+</div>
