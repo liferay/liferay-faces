@@ -1,13 +1,15 @@
 // This is a javascript function that is used by PickDate.java to conditionally fire a change event on the input which
 // triggers the pickDate.
 function pickDateDefaultOnDateClick(event, input) {
-	var fireChange = true;
-	var calendar = event.currentTarget;
+	var fireChange = true,
+		calendar = event.currentTarget,
+		oldDate,
+		newDate;
 	if (calendar.get('selectionMode') === 'single') {
-		var oldDate = calendar.get('oldDate');
+		oldDate = calendar.get('oldDate');
 		if (oldDate) {
 			// Reset the time to midnight because we want to compare dates below and not times.
-			var newDate = event.date;
+			newDate = event.date;
 			newDate.setHours(0, 0, 0, 0);
 			oldDate.setHours(0, 0, 0, 0);
 			fireChange = (oldDate.getTime() !== newDate.getTime());
