@@ -40,13 +40,13 @@ import com.liferay.faces.alloy.component.inputfile.internal.AjaxParameters;
 import com.liferay.faces.alloy.component.inputfile.internal.InputFileDecoder;
 import com.liferay.faces.alloy.component.inputfile.internal.InputFileDelegationResponseWriter;
 import com.liferay.faces.alloy.component.inputfile.internal.PreviewTableTemplate;
-import com.liferay.faces.alloy.component.inputfile.internal.PreviewUploaderTemplate;
 import com.liferay.faces.alloy.component.inputfile.internal.ProgressTableTemplate;
-import com.liferay.faces.alloy.component.inputfile.internal.ProgressUploaderTemplate;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.map.MultiPartFormData;
+import com.liferay.faces.util.js.JavaScriptArray;
+import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -65,6 +65,7 @@ import com.liferay.faces.util.render.RendererUtil;
 @ResourceDependencies(
 		{
 			@ResourceDependency(library = "liferay-faces-alloy", name = "alloy.css"),
+			@ResourceDependency(library = "liferay-faces-alloy", name = "alloy.js"),
 			@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
 			@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
 			@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
@@ -83,9 +84,7 @@ public class InputFileRenderer extends InputFileRendererCompat implements System
 
 	// Templates
 	private static PreviewTableTemplate previewTableTemplate;
-	private static PreviewUploaderTemplate previewUploaderTemplate;
 	private static ProgressTableTemplate progressTableTemplate;
-	private static ProgressUploaderTemplate progressUploaderTemplate;
 
 	// Protected Constants
 	protected static final String[] MODULES = { "uploader", "aui-datatable", "datatype-xml" };
@@ -125,17 +124,22 @@ public class InputFileRenderer extends InputFileRendererCompat implements System
 		String clientId = inputFile.getClientId(facesContext);
 
 		// Determine the valid content-types and maximum file size from the validator (if specified).
-		String contentTypes = null;
+		JavaScriptArray contentTypes = new JavaScriptArray();
+		JavaScriptFragment alloyNamespace = new JavaScriptFragment("A");
 		long maxFileSize = Long.MAX_VALUE;
 		InputFileValidator inputFileValidator = getInputFileValidator(inputFile);
 
 		if (inputFileValidator != null) {
-			contentTypes = inputFileValidator.getContentTypes();
+			String validContentTypes = inputFileValidator.getContentTypes();
+
+			if (validContentTypes != null) {
+				contentTypes = new JavaScriptArray(validContentTypes.split(","));
+			}
+
 			maxFileSize = inputFileValidator.getMaxFileSize();
 		}
 
-		// If the component should render the upload progress table, then format the progress-uploader.js template and
-		// write it to the response.
+		// If the component should render the upload progress table, then initialize the YUI progress uploader widget.
 		if (inputFile.isShowProgress()) {
 
 			String clientVarName = ComponentUtil.getClientVarName(facesContext, inputFile);
@@ -162,17 +166,20 @@ public class InputFileRenderer extends InputFileRendererCompat implements System
 			String execute = ajaxParameters.getExecute();
 			String render = ajaxParameters.getRender();
 
-			String progressUploaderScript = progressUploaderTemplate.format(locale, clientVarName, clientKey, clientId,
-					formClientId, execute, render, partialActionURL, namingContainerId, inputFile.isAuto(),
-					contentTypes, maxFileSize);
-			responseWriter.write(progressUploaderScript);
+			MessageContext messageContext = MessageContext.getInstance();
+			String notStartedMessage = messageContext.getMessage(locale, "not-started");
+			JavaScriptFragment clientComponent = new JavaScriptFragment("Liferay.component('" + clientKey + "')");
+			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initProgressUploader", alloyNamespace,
+				clientComponent, contentTypes, clientId, formClientId, namingContainerId, inputFile.isAuto(), execute,
+				render, partialActionURL, maxFileSize, notStartedMessage);
 		}
 
 		// Otherwise, if the component should render the upload preview table, then format the preview-uploader.js
 		// template and write it to the response.
 		else if (inputFile.isShowPreview()) {
-			String previewUploaderScript = previewUploaderTemplate.format(clientId, contentTypes, maxFileSize);
-			responseWriter.write(previewUploaderScript);
+
+			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initPreviewUploader", alloyNamespace, contentTypes,
+				clientId, maxFileSize);
 		}
 	}
 
@@ -266,9 +273,7 @@ public class InputFileRenderer extends InputFileRendererCompat implements System
 			FacesContext startupFacesContext = FacesContext.getCurrentInstance();
 			boolean minified = startupFacesContext.isProjectStage(ProjectStage.Production);
 			previewTableTemplate = new PreviewTableTemplate(minified);
-			previewUploaderTemplate = new PreviewUploaderTemplate(minified);
 			progressTableTemplate = new ProgressTableTemplate(minified);
-			progressUploaderTemplate = new ProgressUploaderTemplate(minified);
 		}
 		catch (Exception e) {
 			logger.error(e);

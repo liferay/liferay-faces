@@ -11,36 +11,50 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.inputfile.internal;
+package com.liferay.faces.util.js;
 
 import com.liferay.faces.util.lang.StringPool;
 
 
 /**
+ * This is a simple marker class that wraps a String. It marks the fact that the wrapped string is a JavaScript array.
+ *
  * @author  Neil Griffin
  */
-public class InputFileTemplateUtil {
+public final class JavaScriptArray {
 
-	public static String toJavaScriptArray(String[] items) {
+	// Private Data Members
+	private String value;
 
-		StringBuilder javaScriptArray = new StringBuilder(StringPool.OPEN_BRACKET);
+	public JavaScriptArray() {
+		this(null);
+	}
+
+	public JavaScriptArray(String[] items) {
+
+		StringBuilder buf = new StringBuilder(StringPool.OPEN_BRACKET);
 
 		if (items != null) {
 
 			for (int i = 0; i < items.length; i++) {
 
 				if (i > 0) {
-					javaScriptArray.append(StringPool.COMMA);
+					buf.append(StringPool.COMMA);
 				}
 
-				javaScriptArray.append(StringPool.APOSTROPHE);
-				javaScriptArray.append(items[i]);
-				javaScriptArray.append(StringPool.APOSTROPHE);
+				buf.append(StringPool.APOSTROPHE);
+				buf.append(items[i]);
+				buf.append(StringPool.APOSTROPHE);
 			}
 		}
 
-		javaScriptArray.append(StringPool.CLOSE_BRACKET);
+		buf.append(StringPool.CLOSE_BRACKET);
 
-		return javaScriptArray.toString();
+		value = buf.toString();
+	}
+
+	@Override
+	public String toString() {
+		return value;
 	}
 }
