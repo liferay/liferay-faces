@@ -97,6 +97,71 @@ public class RendererUtil {
 		}
 	}
 
+	public static void encodeFunctionCall(ResponseWriter responseWriter, String functionName, Object... parameters)
+		throws IOException {
+
+		responseWriter.write(functionName);
+		responseWriter.write("(");
+
+		boolean first = true;
+
+		for (Object parameter : parameters) {
+
+			if (first) {
+				first = false;
+			}
+			else {
+				responseWriter.write(",");
+			}
+
+			encodeFunctionParameter(responseWriter, parameter);
+		}
+
+		responseWriter.write(");");
+	}
+
+	public static void encodeFunctionParameter(ResponseWriter responseWriter, Object parameter) throws IOException {
+
+		if (parameter == null) {
+			responseWriter.write("null");
+		}
+		else {
+
+			if (parameter instanceof Object[]) {
+				Object[] parameterItems = (Object[]) parameter;
+
+				if (parameterItems.length == 0) {
+					responseWriter.write("[]");
+				}
+				else {
+					responseWriter.write("[");
+
+					boolean firstIndex = true;
+
+					for (Object parameterItem : parameterItems) {
+
+						if (firstIndex) {
+							firstIndex = false;
+						}
+						else {
+							responseWriter.write(",");
+						}
+
+						encodeFunctionParameter(responseWriter, parameterItem);
+					}
+
+					responseWriter.write("]");
+				}
+			}
+			else if (parameter instanceof String) {
+				responseWriter.write("'" + parameter.toString() + "'");
+			}
+			else {
+				responseWriter.write(parameter.toString());
+			}
+		}
+	}
+
 	public static void encodeStyleable(ResponseWriter responseWriter, Styleable styleable, String... classNames)
 		throws IOException {
 
