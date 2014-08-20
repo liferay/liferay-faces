@@ -3,7 +3,7 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
-	<!-- Set the JSF 2 PROJECT_STAGE to Development so that the JSF implementation will do the following at runtime: -->
+	<!-- Seting the JSF 2 PROJECT_STAGE to Development will cause the JSF implementation will do the following at runtime: -->
 	<!-- 1. Log more verbose messages. -->
 	<!-- 2. Render tips and/or warnings in the view markup. -->
 	<!-- 3. Cause the default ExceptionHandler to display a developer-friendly error page. -->
