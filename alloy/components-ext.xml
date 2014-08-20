@@ -1466,6 +1466,36 @@
         	</attribute>
 		</attributes>
 	</component>
+	<component name="Head" extendsTags="Styleable UIOutput" parentClass="javax.faces.component.html.HtmlHead"
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description><![CDATA[Head is a UIOutput that renders a <head> element for webapps, but not for portlets. In the case of portlets, the presence of alloy:head informs the JSF portlet bridge that JSF resources with target="head" should be included in the <head> element rendered by the portal. Since it extends HtmlHead, it supports all the features of h:head.]]></description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]>
+				</description>
+				<name>dir</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the language code used in the element.]]>
+				</description>
+				<name>lang</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML passthrough attribute specifying the XML namespace used in the element.]]>
+				</description>
+				<name>xmlns</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="Icon" extendsTags="Styleable UIComponentBase">
 		<description>
 			<![CDATA[Icon is a component that renders a span which contains an icon specified by the name attribute.]]>

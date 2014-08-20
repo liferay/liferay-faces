@@ -80,6 +80,7 @@ public class ListModelBean {
 		showcaseCategoryList.add("buttonlink");
 		showcaseCategoryList.add("data");
 		showcaseCategoryList.add("input");
+		showcaseCategoryList.add("misc");
 		showcaseCategoryList.add("multimedia");
 		showcaseCategoryList.add("output");
 		showcaseCategoryList.add("panel");
