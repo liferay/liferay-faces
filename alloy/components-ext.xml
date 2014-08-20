@@ -1087,7 +1087,11 @@
 		</attributes>
 	</component>
 	<component name="Body" extendsTags="StyleableInherited" parentClass="javax.faces.component.html.HtmlBody"
-	rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase"/>
+	rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
+		<description>
+			<![CDATA[Body is a UIOutput that renders a <body> element for webapps and a <div> for portlets. Since it extends HtmlBody, it supports all the features of h:body.]]>
+		</description>
+	</component>
 	<component name="Button" extendsTags="ButtonCommon UIOutcomeTarget"
 		parentClass="javax.faces.component.html.HtmlOutcomeTargetButton"
 		rendererParentClass="com.liferay.faces.alloy.component.button.ButtonRendererCompat">

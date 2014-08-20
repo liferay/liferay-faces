@@ -97,7 +97,7 @@
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[]]></description>
+		<description><![CDATA[Body is a UIOutput that renders a <body> element for webapps and a <div> for portlets. Since it extends HtmlBody, it supports all the features of h:body.]]></description>
 		<tag-name>body</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.body.Body</component-type>
