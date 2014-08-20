@@ -140,6 +140,7 @@
 		<primefaces3.version>3.5</primefaces3.version>
 		<primefaces4.version>4.0</primefaces4.version>
 		<primefaces5.version>5.0</primefaces5.version>
+		<project.stage>Production</project.stage>
 		<richfaces4.version>4.3.2.Final</richfaces4.version>
 		<selenium.version>2.35.0</selenium.version>
 		<spring.version>3.0.7.RELEASE</spring.version>
@@ -468,6 +469,12 @@
 					</plugin>
 				</plugins>
 			</build>
+		</profile>
+		<profile>
+			<id>development</id>
+			<properties>
+				<project.stage>Development</project.stage>
+			</properties>
 		</profile>
 		<profile>
 			<id>ee</id>
