@@ -16,7 +16,7 @@
     <!-- Inform the JSF runtime (Mojarra) that this application is under development. -->
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
-		<param-value>Development</param-value>
+		<param-value>${project.stage}</param-value>
 	</context-param>    
 	<!-- Instruct Mojarra to utilize JBoss-EL instead of the EL implementation provided by the servlet container. -->
 	<context-param>
