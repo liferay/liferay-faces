@@ -1,9 +1,15 @@
-Portions of the AlloyUI CSS Framwork (base.css, icons.css)
-based on the jQuery UI CSS Framework
-Copyright (c) 2008 jQuery UI Team (http://jqueryui.com/about)
-Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
-----------------------------------
-Fugue Icons (icon_sprite.png)
-Copyright (C) 2009 Yusuke Kamiyamane. All rights reserved.
-The icons are licensed under a Creative Commons Attribution 3.0 license.
-<http://creativecommons.org/licenses/by/3.0/>
+The source code found in the com.liferay.faces.alloy package is unique to the
+Liferay Faces Alloy project and is subject to the license terms found in
+the lgpl-2.1.txt file.
+------------------------------------------------------------------------------
+The AlloyUI project is packaged with the liferay-faces-alloy.jar dependency
+and is subject to the license terms found in the alloyui-bsd-license.md file.
+------------------------------------------------------------------------------
+The AlloyUI project packages YUI3 which is subject to the license terms found
+in the yui3-bsd-license.txt file.
+------------------------------------------------------------------------------
+The AlloyUI project packages Bootstrap 2.3.2 which is subject to the license
+terms found in the bootstrap-apache-2.0.txt file.
+------------------------------------------------------------------------------
+The AlloyUI project packages the Ace editor which is subject to the license
+terms found in the ace-editor-bsd.txt file.
