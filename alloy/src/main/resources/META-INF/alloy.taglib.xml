@@ -8004,6 +8004,7 @@
 		<component>
 			<component-type>com.liferay.faces.alloy.component.tab.Tab</component-type>
 			<renderer-type>com.liferay.faces.alloy.component.tab.TabRenderer</renderer-type>
+			<handler-class>com.liferay.faces.alloy.component.tab.TabHandler</handler-class>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>

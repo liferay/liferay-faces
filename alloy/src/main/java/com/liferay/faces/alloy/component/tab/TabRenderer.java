@@ -45,10 +45,24 @@ public class TabRenderer extends TabRendererBase {
 	}
 
 	@Override
+	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		UIComponent implicitPanelGroup = uiComponent.getFacet(TabHandler.IMPLICIT_FACET_NAME);
+		implicitPanelGroup.encodeAll(facesContext);
+
+		super.encodeChildren(facesContext, uiComponent);
+	}
+
+	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		// Encode the closing </div> element.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.endElement(StringPool.DIV);
+	}
+
+	@Override
+	public boolean getRendersChildren() {
+		return true;
 	}
 }
