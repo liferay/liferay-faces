@@ -31,9 +31,11 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 	protected enum TabViewPropertyKeys {
 		clientKey,
 		height,
+		selectedIndex,
 		stacked,
 		style,
 		styleClass,
+		tabEventListener,
 		width
 	}
 
@@ -53,6 +55,14 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 
 	public void setHeight(String height) {
 		getStateHelper().put(TabViewPropertyKeys.height, height);
+	}
+
+	public Integer getSelectedIndex() {
+		return (Integer) getStateHelper().eval(TabViewPropertyKeys.selectedIndex, null);
+	}
+
+	public void setSelectedIndex(Integer selectedIndex) {
+		getStateHelper().put(TabViewPropertyKeys.selectedIndex, selectedIndex);
 	}
 
 	public Boolean isStacked() {
@@ -81,6 +91,14 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 	@Override
 	public void setStyleClass(String styleClass) {
 		getStateHelper().put(TabViewPropertyKeys.styleClass, styleClass);
+	}
+
+	public javax.el.MethodExpression getTabEventListener() {
+		return (javax.el.MethodExpression) getStateHelper().eval(TabViewPropertyKeys.tabEventListener, null);
+	}
+
+	public void setTabEventListener(javax.el.MethodExpression tabEventListener) {
+		getStateHelper().put(TabViewPropertyKeys.tabEventListener, tabEventListener);
 	}
 
 	public String getWidth() {

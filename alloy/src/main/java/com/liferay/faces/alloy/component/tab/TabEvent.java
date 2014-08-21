@@ -22,7 +22,12 @@ import com.liferay.faces.util.event.NamedAjaxBehaviorEvent;
 /**
  * @author  Neil Griffin
  */
-public abstract class TabEvent extends NamedAjaxBehaviorEvent {
+public class TabEvent extends NamedAjaxBehaviorEvent {
+	
+	// Public Constants
+	public static final String TAB_COLLAPSED = "tabCollapsed";
+	public static final String TAB_EXPANDED = "tabExpanded";
+	public static final String TAB_SELECTED = "tabSelected";
 
 	// serialVersionUID
 	private static final long serialVersionUID = 8882538970972516549L;

@@ -20,20 +20,20 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.alloy.component.accordion.Accordion;
 import com.liferay.faces.alloy.component.tab.TabEvent;
+import com.liferay.faces.alloy.component.tabview.TabView;
 
 
 /**
- * @author  Neil Griffin
+ * @author  Vernon Singleton
  */
 @RequestScoped
 @ManagedBean
-public class AccordionBackingBean {
+public class TabViewBackingBean {
 
-	private Accordion accordion;
+	private TabView tabView;
 
-	public AccordionBackingBean() {
+	public TabViewBackingBean() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
 		String componentUseCase = requestParameterMap.get("componentUseCase");
@@ -49,7 +49,7 @@ public class AccordionBackingBean {
 
 		try {
 			FacesContext facesContext = FacesContext.getCurrentInstance();
-			Integer selectedIndex = accordion.getSelectedIndex();
+			Integer selectedIndex = tabView.getSelectedIndex();
 			FacesMessage facesMessage = new FacesMessage("The client-side state of selectedIndex=" + selectedIndex);
 			facesContext.addMessage(null, facesMessage);
 		}
@@ -58,24 +58,24 @@ public class AccordionBackingBean {
 		}
 	}
 
-	public void tabEventListener(TabEvent accordionTabEvent) {
+	public void tabEventListener(TabEvent tabViewTabEvent) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		FacesMessage facesMessage = new FacesMessage(accordionTabEvent.getName() + ": " +
-				accordionTabEvent.getTab().getLabel());
+		FacesMessage facesMessage = new FacesMessage(tabViewTabEvent.getName() + ": " +
+				tabViewTabEvent.getTab().getLabel());
 		facesContext.addMessage(null, facesMessage);
-	}
-
-	public Accordion getAccordion() {
-		return accordion;
-	}
-
-	public void setAccordion(Accordion accordion) {
-
-		// Injected via alloy:accordion binding attribute
-		this.accordion = accordion;
 	}
 
 	public int getDefaultSelectedIndex() {
 		return 2; // The "Powerful Integration" tab is selected by default.
+	}
+
+	public TabView getTabView() {
+		return tabView;
+	}
+
+	public void setTabView(TabView tabView) {
+
+		// Injected via alloy:tabView binding attribute
+		this.tabView = tabView;
 	}
 }

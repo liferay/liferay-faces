@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.accordion;
+package com.liferay.faces.alloy.component.tabview;
 
 import javax.el.MethodExpression;
 import javax.faces.context.FacesContext;
@@ -23,18 +23,18 @@ import com.liferay.faces.alloy.component.tab.TabEvent;
 
 
 /**
- * @author  Neil Griffin
+ * @author  Vernon Singleton
  */
-public class AccordionBehaviorListener implements AjaxBehaviorListener {
+public class TabViewBehaviorListener implements AjaxBehaviorListener {
 
 	@Override
 	public void processAjaxBehavior(AjaxBehaviorEvent ajaxBehaviorEvent) throws AbortProcessingException {
 
 		TabEvent tabEvent = (TabEvent) ajaxBehaviorEvent;
-		Accordion accordion = (Accordion) tabEvent.getComponent();
+		TabView tabView = (TabView) tabEvent.getComponent();
 
 		try {
-			MethodExpression methodExpression = accordion.getTabEventListener();
+			MethodExpression methodExpression = tabView.getTabEventListener();
 
 			if (methodExpression != null) {
 				FacesContext facesContext = FacesContext.getCurrentInstance();

@@ -29,6 +29,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
 
 import com.liferay.faces.alloy.component.tab.Tab;
+import com.liferay.faces.alloy.component.tab.TabEvent;
 import com.liferay.faces.alloy.component.tab.TabUtil;
 import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ComponentUtil;
@@ -50,7 +51,7 @@ public class Accordion extends AccordionBase implements ClientBehaviorHolder {
 
 	// Private Constants
 	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList(
-				AccordionTabEvent.TAB_COLLAPSED, AccordionTabEvent.TAB_EXPANDED));
+				TabEvent.TAB_COLLAPSED, TabEvent.TAB_EXPANDED));
 
 	public Accordion() {
 		super();
@@ -111,7 +112,7 @@ public class Accordion extends AccordionBase implements ClientBehaviorHolder {
 			AjaxBehaviorEvent behaviorEvent = (AjaxBehaviorEvent) facesEvent;
 			Behavior behavior = behaviorEvent.getBehavior();
 			String eventName = requestParameterMap.get(FacesConstants.JAVAX_FACES_BEHAVIOR_EVENT);
-			AccordionTabEvent tabEvent = new AccordionTabEvent(this, behavior, eventName, tab, rowData);
+			TabEvent tabEvent = new TabEvent(this, behavior, eventName, tab, rowData);
 			tabEvent.setPhaseId(facesEvent.getPhaseId());
 			super.queueEvent(tabEvent);
 		}
@@ -124,7 +125,7 @@ public class Accordion extends AccordionBase implements ClientBehaviorHolder {
 
 	@Override
 	public String getDefaultEventName() {
-		return AccordionTabEvent.TAB_EXPANDED;
+		return TabEvent.TAB_EXPANDED;
 	}
 
 	@Override

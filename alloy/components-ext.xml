@@ -1058,11 +1058,11 @@
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>AccordionTabEvent</code> argument.]]>
+					<![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take a <code>TabEvent</code> argument.]]>
 				</description>
 				<name>tabEventListener</name>
 				<method-signature>
-					void tabEventListener(com.liferay.faces.alloy.component.accordion.AccordionTabEvent)
+					void tabEventListener(com.liferay.faces.alloy.component.tab.TabEvent)
 				</method-signature>
 				<type>javax.el.MethodExpression</type>
 			</attribute>
@@ -2406,7 +2406,8 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="TabView" extendsTags="ClientComponent UIData Styleable UIComponentBase" module="aui-tabview"
+	<component name="TabView" extendsTags="ClientComponent UIData Styleable UIComponentBase"
+		handlerClass="com.liferay.faces.alloy.component.tabview.TabViewHandler"	module="aui-tabview"
 		parentClass="javax.faces.component.UIData" yui="true">
 		<description>
 			<![CDATA[TabView is an iterator component that renders tabs either statically or dynamically.]]>
@@ -2422,11 +2423,29 @@
 			</attribute>
 			<attribute>
 				<description>
+					<![CDATA[Integer representing the zero-based index representing the selected tab.]]>
+				</description>
+				<name>selectedIndex</name>
+				<type>java.lang.Integer</type>
+				<yui>false</yui>
+			</attribute>
+			<attribute>
+				<description>
 					<![CDATA[When true, this indicates whether or not the tabs will appear vertically. The default value is false.]]>
 				</description>
 				<name>stacked</name>
 				<type>java.lang.Boolean</type>
 				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>TabEvent</code> argument.]]>
+				</description>
+				<name>tabEventListener</name>
+				<method-signature>
+					void tabEventListener(com.liferay.faces.alloy.component.tabview.TabEvent)
+				</method-signature>
+				<type>javax.el.MethodExpression</type>
 			</attribute>
 			<attribute>
 				<description>
