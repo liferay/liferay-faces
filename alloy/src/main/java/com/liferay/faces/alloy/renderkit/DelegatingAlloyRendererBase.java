@@ -36,7 +36,6 @@ public abstract class DelegatingAlloyRendererBase extends DelegatingClientCompon
 	@Override
 	public void decode(FacesContext facesContext, UIComponent uiComponent) {
 		super.decode(facesContext, uiComponent);
-		decodeClientBehaviors(facesContext, uiComponent);
 	}
 
 	@Override
