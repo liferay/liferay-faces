@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.accordion;
+package com.liferay.faces.alloy.component.tabview;
 
 import java.lang.reflect.Method;
 
@@ -28,11 +28,11 @@ import com.liferay.faces.util.view.facelets.MethodMetadata;
 
 
 /**
- * @author  Neil Griffin
+ * @author  Vernon Singleton
  */
-public class AccordionHandler extends ComponentHandler {
+public class TabViewHandler extends ComponentHandler {
 
-	public AccordionHandler(ComponentConfig config) {
+	public TabViewHandler(ComponentConfig config) {
 		super(config);
 	}
 
@@ -40,21 +40,21 @@ public class AccordionHandler extends ComponentHandler {
 	@SuppressWarnings("rawtypes")
 	protected MetaRuleset createMetaRuleset(Class type) {
 		MetaRuleset metaRuleset = super.createMetaRuleset(type);
-		metaRuleset.addRule(new AccordionMethodRule());
+		metaRuleset.addRule(new TabViewMethodRule());
 
 		return metaRuleset;
 	}
 
-	protected class AccordionMethodRule extends MetaRule {
+	protected class TabViewMethodRule extends MetaRule {
 
 		@Override
 		public Metadata applyRule(String name, TagAttribute tagAttribute, MetadataTarget metadataTarget) {
 
 			Metadata metadata = null;
 
-			if ((metadataTarget != null) && (metadataTarget.isTargetInstanceOf(Accordion.class))) {
+			if ((metadataTarget != null) && (metadataTarget.isTargetInstanceOf(TabView.class))) {
 
-				if (AccordionRenderer.TAB_EVENT_LISTENER.equals(name)) {
+				if (TabViewRenderer.TAB_EVENT_LISTENER.equals(name)) {
 					Method writeMethod = metadataTarget.getWriteMethod(name);
 					Class<?>[] args = new Class[] { TabEvent.class };
 					metadata = new MethodMetadata(tagAttribute, writeMethod, args);

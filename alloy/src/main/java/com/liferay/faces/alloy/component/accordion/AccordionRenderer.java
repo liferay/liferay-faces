@@ -28,6 +28,7 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.tab.Tab;
+import com.liferay.faces.alloy.component.tab.TabEvent;
 import com.liferay.faces.alloy.component.tab.TabUtil;
 import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ComponentUtil;
@@ -80,7 +81,9 @@ public class AccordionRenderer extends AccordionRendererBase {
 		Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
 		String selectedIndex = requestParameterMap.get(hiddenFieldName);
 
-		accordion.setSelectedIndex(IntegerHelper.toInteger(selectedIndex, -1));
+		if (selectedIndex != null) {
+			accordion.setSelectedIndex(IntegerHelper.toInteger(selectedIndex, -1));
+		}
 	}
 
 	@Override
@@ -211,9 +214,9 @@ public class AccordionRenderer extends AccordionRendererBase {
 		responseWriter.write("for(var i=0;i<totalTogglers;i++)");
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
-		// var eventTabIndex = LFA.getAccordionEventTabIndex(event,'clientKey');
+		// var eventTabIndex = LFAI.getAccordionEventTabIndex(event,'clientKey');
 		StringBuffer behaviorCallback = new StringBuffer();
-		behaviorCallback.append("var eventTabIndex=LFA.getAccordionEventTabIndex(event,'");
+		behaviorCallback.append("var eventTabIndex=LFAI.getAccordionEventTabIndex(event,'");
 		behaviorCallback.append(clientKey);
 		behaviorCallback.append(StringPool.APOSTROPHE);
 		behaviorCallback.append(StringPool.CLOSE_PARENTHESIS);
@@ -258,7 +261,7 @@ public class AccordionRenderer extends AccordionRendererBase {
 
 					// If <f:ajax event="tabExpanded" /> is specified in the view, then render a script that submits
 					// an Ajax request.
-					if (AccordionTabEvent.TAB_EXPANDED.equals(eventName)) {
+					if (TabEvent.TAB_EXPANDED.equals(eventName)) {
 
 						//J-
 						// if (event.newVal) {
@@ -273,7 +276,7 @@ public class AccordionRenderer extends AccordionRendererBase {
 
 					// Similarly, if <f:ajax event="tabCollapsed" /> is specified in the view, then render a script
 					// that submits an Ajax request.
-					else if (AccordionTabEvent.TAB_COLLAPSED.equals(eventName)) {
+					else if (TabEvent.TAB_COLLAPSED.equals(eventName)) {
 
 						//J-
 						// if ((!event.newVal) && (prevTabIndex == eventTabIndex)) {

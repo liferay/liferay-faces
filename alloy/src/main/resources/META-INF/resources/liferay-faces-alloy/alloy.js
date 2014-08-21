@@ -1,4 +1,8 @@
-var LFA = {
+var LFA = { escapeClientId : function(clientId) {
+	return clientId.replace(/:/g, '\\:');
+} };
+
+var LFAI = {
 	getAccordionEventTabIndex : function(event, clientKey) {
 		var togglerDelegate = Liferay.component(clientKey), togglers = togglerDelegate.items, total = togglers.length, i = 0;
 		for (i = 0; i < total; i++) {
@@ -8,12 +12,6 @@ var LFA = {
 		}
 		return -1;
 	},
-	escapeClientId : function(clientId) {
-		return clientId.replace(/:/g, '\\:');
-	} };
-
-var LFAI = {
-
 	initPreviewUploader : function(A, contentTypes, clientId, maxFileSize) {
 
 		var contentTypeArray = A.Array(contentTypes), escapedClientId = LFA.escapeClientId(clientId), uploadComplete = false;
