@@ -51,16 +51,17 @@ public class SAXParserTest {
 
 					if (saxParser instanceof SAXParserImpl) {
 
-						Assert.assertTrue(true);
-
 						URL url = getClass().getClassLoader().getResource("applicant.xhtml");
 						TestHandler testHandler = new TestHandler();
 						saxParser.parse(url.openStream(), testHandler);
 						Assert.assertEquals(1, testHandler.getTotalComments());
-						Assert.assertEquals(2, testHandler.getTotalCharacters());
-						Assert.assertEquals(86, testHandler.getTotalStartElements());
-						Assert.assertEquals(86, testHandler.getTotalEndElements());
-						Assert.assertEquals(139, testHandler.getTotalAttributes());
+						Assert.assertEquals(4, testHandler.getTotalPlainText());
+						Assert.assertEquals(91, testHandler.getTotalStartElements());
+						Assert.assertEquals(91, testHandler.getTotalEndElements());
+						Assert.assertEquals(144, testHandler.getTotalAttributes());
+						Assert.assertEquals(2, testHandler.getTotalInlineScripts());
+						Assert.assertEquals(1, testHandler.getTotalSpanText());
+						Assert.assertEquals(1, testHandler.getTotalHeadingText());
 					}
 					else {
 						Assert.fail();
@@ -78,30 +79,39 @@ public class SAXParserTest {
 			e.printStackTrace();
 			Assert.fail();
 		}
-
 	}
 
 	protected class TestHandler extends DefaultHandler implements LexicalHandler {
 
 		// Private Data Members
 		private int totalAttributes;
-		private int totalCharacters;
 		private int totalComments;
-		private int totalStartElements;
 		private int totalEndElements;
+
+		private int totalHeadingText;
+		private int totalInlineScripts;
+		private int totalPlainText;
+		private int totalSpanText;
+		private int totalStartElements;
 
 		@Override
 		public void characters(char[] chars, int start, int length) throws SAXException {
 			String text = new String(chars, start, length);
 
-			if (text.equals("text inside span") || text.equals("#{i18n['attachments']}")) {
-				Assert.assertTrue(true);
+			if (text.equals("text inside span")) {
+				totalSpanText++;
+			}
+			else if (text.equals("#{i18n['attachments']}")) {
+				totalHeadingText++;
+			}
+			else if (text.equals("alert('hello world');") || (text.equals("console.log('hello world');"))) {
+				totalInlineScripts++;
 			}
 			else {
 				Assert.fail();
 			}
 
-			totalCharacters++;
+			totalPlainText++;
 
 			logger.debug("text->" + text + "<-");
 		}
@@ -119,7 +129,6 @@ public class SAXParserTest {
 
 		@Override
 		public void endDocument() throws SAXException {
-			Assert.assertTrue(true);
 			logger.debug("endDocument");
 		}
 
@@ -145,7 +154,6 @@ public class SAXParserTest {
 		@Override
 		public void startDocument() throws SAXException {
 			logger.debug("startDocument");
-			Assert.assertTrue(true);
 		}
 
 		public void startDTD(String name, String publicId, String systemId) throws SAXException {
@@ -214,10 +222,6 @@ public class SAXParserTest {
 			return totalAttributes;
 		}
 
-		public int getTotalCharacters() {
-			return totalCharacters;
-		}
-
 		public int getTotalComments() {
 			return totalComments;
 		}
@@ -226,9 +230,24 @@ public class SAXParserTest {
 			return totalEndElements;
 		}
 
+		public int getTotalHeadingText() {
+			return totalHeadingText;
+		}
+
+		public int getTotalInlineScripts() {
+			return totalInlineScripts;
+		}
+
+		public int getTotalPlainText() {
+			return totalPlainText;
+		}
+
+		public int getTotalSpanText() {
+			return totalSpanText;
+		}
+
 		public int getTotalStartElements() {
 			return totalStartElements;
 		}
-
 	}
 }
