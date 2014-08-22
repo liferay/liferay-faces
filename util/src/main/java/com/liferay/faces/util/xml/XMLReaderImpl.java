@@ -223,6 +223,8 @@ public class XMLReaderImpl implements XMLReader {
 						contentHandler.startElement(uri, localName, qName, attributes);
 						parsingElementName = false;
 						parsingText = true;
+						parsingAttributeName = false;
+						parsingAttributeValue = false;
 						text = new StringBuilder();
 					}
 
