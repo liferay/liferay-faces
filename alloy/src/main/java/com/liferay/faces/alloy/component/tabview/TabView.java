@@ -25,6 +25,7 @@ import javax.faces.component.behavior.Behavior;
 import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AbortProcessingException;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
 
@@ -71,6 +72,11 @@ public class TabView extends TabViewBase implements ClientBehaviorHolder {
 	}
 
 	@Override
+	public void broadcast(FacesEvent event) throws AbortProcessingException {
+		super.broadcast(event);
+	}
+
+	@Override
 	public void queueEvent(FacesEvent facesEvent) {
 
 		// This method is called by the AjaxBehavior renderer's decode() method. If the specified event is an ajax
@@ -111,7 +117,6 @@ public class TabView extends TabViewBase implements ClientBehaviorHolder {
 			Behavior behavior = behaviorEvent.getBehavior();
 			String eventName = requestParameterMap.get(FacesConstants.JAVAX_FACES_BEHAVIOR_EVENT);
 			TabEvent tabEvent = new TabEvent(this, behavior, eventName, tab, rowData);
-			tabEvent.setPhaseId(facesEvent.getPhaseId());
 			super.queueEvent(tabEvent);
 		}
 

@@ -4,9 +4,10 @@
 
 	<showcase:example id="tabViewExample">
 		<h:form id="tabViewForm">
-			<alloy:messages id="feedback" globalOnly="true" layout="table" /><br />
-			<alloy:tabView tabEventListener="#{tabViewBackingBean.tabEventListener}"
-				selectedIndex="#{tabViewBackingBean.defaultSelectedIndex}">
+			<alloy:messages id="feedback" globalOnly="true" layout="table" />
+			<br />
+			<alloy:tabView selectedIndex="#{tabViewBackingBean.defaultSelectedIndex}"
+				tabEventListener="#{tabViewBackingBean.tabEventListener}">
 				<f:ajax event="tabSelected" render=":tabViewExample:tabViewForm:feedback" />
 				<alloy:tab label="Compatible">
 					<alloy:image library="images" name="icon-compatible.png" />

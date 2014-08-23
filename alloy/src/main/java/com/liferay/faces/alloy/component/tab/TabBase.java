@@ -29,6 +29,7 @@ public abstract class TabBase extends UIColumn implements Styleable {
 	// Protected Enumerations
 	protected enum TabPropertyKeys {
 		contentClass,
+		disabled,
 		headerClass,
 		label,
 		style,
@@ -41,6 +42,14 @@ public abstract class TabBase extends UIColumn implements Styleable {
 
 	public void setContentClass(String contentClass) {
 		getStateHelper().put(TabPropertyKeys.contentClass, contentClass);
+	}
+
+	public boolean isDisabled() {
+		return (Boolean) getStateHelper().eval(TabPropertyKeys.disabled, false);
+	}
+
+	public void setDisabled(boolean disabled) {
+		getStateHelper().put(TabPropertyKeys.disabled, disabled);
 	}
 
 	public String getHeaderClass() {

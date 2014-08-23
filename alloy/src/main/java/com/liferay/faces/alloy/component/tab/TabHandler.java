@@ -56,14 +56,16 @@ public class TabHandler extends ComponentHandler {
 
 		super.onComponentPopulated(faceletContext, uiComponent, parent);
 
+		// If an implicit panel group doesn't yet exist, then create one.
 		FacesContext facesContext = faceletContext.getFacesContext();
-		UIPanel implicitPanelGroup = (UIPanel) uiComponent.getFacet(IMPLICIT_FACET_NAME);
+		UIComponent implicitPanelGroup = (UIComponent) uiComponent.getFacet(IMPLICIT_FACET_NAME);
 
 		if (implicitPanelGroup == null) {
 			implicitPanelGroup = createImplicitPanelGroup(facesContext, uiComponent.getId());
 			uiComponent.getFacets().put(IMPLICIT_FACET_NAME, implicitPanelGroup);
 		}
 
+		// Re-parent each child of the tab by adding it as a child of the implicit panel group.
 		List<UIComponent> implicitPanelGroupChildren = implicitPanelGroup.getChildren();
 		Iterator<UIComponent> childIterator = uiComponent.getChildren().iterator();
 
