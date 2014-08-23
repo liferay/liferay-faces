@@ -115,7 +115,7 @@ public class LiferaySharedPageTopTest {
 		Calendar startCalendar = new GregorianCalendar();
 		long start = startCalendar.getTimeInMillis();
 
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < TOTAL_THREADS; i++) {
 
 			Thread testThread = new TestThread(this);
 			testThread.start();
