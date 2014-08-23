@@ -75,7 +75,8 @@ public class Jsf2ExportPdfPortletTest extends TesterBase {
 		if (isThere(browser, brianExportXpath)) {
 			logger.log(Level.INFO, "isThere(brianExportXpath) = " + isThere(browser, brianExportXpath));
 			richExport.click();
-			Thread.sleep(1000);
+			long sleepDuration = 500;
+			Thread.sleep(sleepDuration);
 			
 			Set<String> handles = browser.getWindowHandles();
 			for (String window : handles) {
@@ -86,6 +87,24 @@ public class Jsf2ExportPdfPortletTest extends TesterBase {
     			logger.log(Level.INFO, "browser.getPageSource() = " + browser.getPageSource());
     			logger.log(Level.INFO, " -------------------------------------------------- ");
             }
+			
+			boolean done = false;
+			while (!done) {
+				if (browser.getPageSource().contains("Shearer")) {
+					logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
+					logger.log(Level.INFO, "browser.getPageSource().contains(Shearer) after " + sleepDuration + " milliseconds");
+					done = true;
+				}
+				else {
+					if (sleepDuration < 3000) {
+						sleepDuration += 50;
+						Thread.sleep(50);
+					}
+					else {
+						done = true;
+					}
+				}
+			}
 			
 			logger.log(Level.INFO, "browser.getPageSource().contains('Shearer') = " + browser.getPageSource().contains("Shearer"));
 			logger.log(Level.INFO, " -------------------------------------------------- ");
