@@ -58,10 +58,11 @@ public class AccordionBackingBean {
 		}
 	}
 
-	public void tabEventListener(TabEvent accordionTabEvent) {
+	public void tabEventListener(TabEvent tabEvent) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		FacesMessage facesMessage = new FacesMessage(accordionTabEvent.getName() + ": " +
-				accordionTabEvent.getTab().getLabel());
+		FacesMessage facesMessage = new FacesMessage("Received event '" + tabEvent.getName() +
+				"' for tab with label '" + tabEvent.getTab().getLabel() + "' in the " +
+				tabEvent.getPhaseId().getName() + " phase.");
 		facesContext.addMessage(null, facesMessage);
 	}
 

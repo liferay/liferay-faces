@@ -5,8 +5,8 @@
 	<showcase:example id="accordionExample">
 		<h:form id="accordionForm">
 			<alloy:messages id="feedback" globalOnly="true" layout="table" />
-			<alloy:accordion tabEventListener="#{accordionBackingBean.tabEventListener}"
-				selectedIndex="#{accordionBackingBean.defaultSelectedIndex}">
+			<alloy:accordion selectedIndex="#{accordionBackingBean.defaultSelectedIndex}"
+				tabEventListener="#{accordionBackingBean.tabEventListener}">
 				<f:ajax event="tabCollapsed" render=":accordionExample:accordionForm:feedback" />
 				<f:ajax event="tabExpanded" render=":accordionExample:accordionForm:feedback" />
 				<alloy:tab label="Compatible">

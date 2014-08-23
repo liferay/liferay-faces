@@ -113,7 +113,6 @@ public class Accordion extends AccordionBase implements ClientBehaviorHolder {
 			Behavior behavior = behaviorEvent.getBehavior();
 			String eventName = requestParameterMap.get(FacesConstants.JAVAX_FACES_BEHAVIOR_EVENT);
 			TabEvent tabEvent = new TabEvent(this, behavior, eventName, tab, rowData);
-			tabEvent.setPhaseId(facesEvent.getPhaseId());
 			super.queueEvent(tabEvent);
 		}
 
