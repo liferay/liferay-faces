@@ -68,7 +68,7 @@ public class MultiPartFormDataProcessorImpl implements MultiPartFormDataProcesso
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(MultiPartFormDataProcessorImpl.class);
 
-	@Override
+	// Java 1.6+ @Override
 	public Map<String, List<UploadedFile>> process(ClientDataRequest clientDataRequest, PortletConfig portletConfig,
 		FacesRequestParameterMap facesRequestParameterMap) {
 

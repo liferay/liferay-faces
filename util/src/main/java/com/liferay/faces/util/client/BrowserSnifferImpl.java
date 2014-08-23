@@ -119,7 +119,7 @@ version:
 		return StringPool.BLANK;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean acceptsGzip(HttpServletRequest request) {
 		String acceptEncoding = request.getHeader(ACCEPT_ENCODING);
 
@@ -131,7 +131,7 @@ version:
 		}
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isIeOnWin32(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
@@ -143,7 +143,7 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isIeOnWin64(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
@@ -155,7 +155,7 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isMozilla(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
@@ -167,7 +167,7 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isOpera(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
@@ -205,7 +205,7 @@ version:
 		return accept;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String getBrowserId(HttpServletRequest request) {
 
 		if (isIe(request)) {
@@ -219,7 +219,7 @@ version:
 		}
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isMac(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
@@ -230,7 +230,7 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isAndroid(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
@@ -241,7 +241,7 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isChrome(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
@@ -252,12 +252,12 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isIe(HttpServletRequest request) {
 		return isIe(getUserAgent(request));
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isIphone(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
@@ -268,7 +268,7 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isMobile(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
@@ -289,7 +289,7 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isRtf(HttpServletRequest request) {
 
 		if (isAndroid(request)) {
@@ -333,7 +333,7 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isSafari(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
@@ -344,7 +344,7 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isWapXhtml(HttpServletRequest request) {
 		String accept = getAccept(request);
 
@@ -355,7 +355,7 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isWml(HttpServletRequest request) {
 		String accept = getAccept(request);
 
@@ -366,12 +366,12 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public float getMajorVersion(HttpServletRequest request) {
 		return GetterUtil.getFloat(getVersion(request));
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isSun(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
@@ -382,7 +382,7 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isGecko(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
@@ -393,12 +393,12 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isWap(HttpServletRequest request) {
 		return isWapXhtml(request);
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isAir(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
@@ -409,7 +409,7 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String getRevision(HttpServletRequest request) {
 		String revision = (String) request.getAttribute(BROWSER_SNIFFER_REVISION);
 
@@ -424,7 +424,7 @@ version:
 		return revision;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isWindows(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
@@ -438,7 +438,7 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isWebKit(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
@@ -479,7 +479,7 @@ version:
 		return userAgent;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String getVersion(HttpServletRequest request) {
 		String version = (String) request.getAttribute(BROWSER_SNIFFER_VERSION);
 
@@ -500,7 +500,7 @@ version:
 		return version;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isFirefox(HttpServletRequest request) {
 
 		if (!isMozilla(request)) {
@@ -519,7 +519,7 @@ version:
 		return false;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isLinux(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 

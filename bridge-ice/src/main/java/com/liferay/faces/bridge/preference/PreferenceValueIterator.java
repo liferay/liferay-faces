@@ -11,32 +11,36 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.preference;
+package com.liferay.faces.util.component;
 
-import java.util.Enumeration;
-import java.util.Iterator;
+import javax.faces.FacesWrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public class PreferenceValueIterator implements Iterator<String> {
+public abstract class ComponentResourceWrapper implements ComponentResource, FacesWrapper<ComponentResource> {
 
-	private Enumeration<String> preferenceValues;
-
-	public PreferenceValueIterator(Enumeration<String> preferenceValues) {
-		this.preferenceValues = preferenceValues;
+	// Java 1.6+ @Override
+	public boolean isRenderable() {
+		return getWrapped().isRenderable();
 	}
 
-	public boolean hasNext() {
-		return preferenceValues.hasMoreElements();
+	// Java 1.6+ @Override
+	public String getId() {
+		return getWrapped().getId();
 	}
 
-	public String next() {
-		return preferenceValues.nextElement();
+	// Java 1.6+ @Override
+	public String getLibrary() {
+		return getWrapped().getLibrary();
 	}
 
-	public void remove() {
-		throw new UnsupportedOperationException();
+	// Java 1.6+ @Override
+	public String getName() {
+		return getWrapped().getName();
 	}
+
+	// Java 1.6+ @Override
+	public abstract ComponentResource getWrapped();
 }

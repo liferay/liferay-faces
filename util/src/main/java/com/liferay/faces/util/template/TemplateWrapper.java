@@ -21,7 +21,7 @@ import com.liferay.faces.util.helper.Wrapper;
  */
 public abstract class TemplateWrapper implements Template, Wrapper<Template> {
 
-	@Override
+	// Java 1.6+ @Override
 	public String formatTokens(String[] expressions, Object[] replacements) {
 		return getWrapped().formatTokens(expressions, replacements);
 	}

@@ -92,6 +92,6 @@ public abstract class UploadedFileWrapper implements UploadedFile, Wrapper<Uploa
 		return getWrapped().getStatus();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public abstract UploadedFile getWrapped();
 }
