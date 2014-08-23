@@ -70,7 +70,7 @@ public class TemplateFactoryImpl extends TemplateFactory {
 		}
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public TemplateFactory getWrapped() {
 
 		// Since this is the default factory instance, it will never wrap another factory.

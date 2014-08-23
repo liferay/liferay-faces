@@ -85,7 +85,7 @@ public class ClientScriptFactoryImpl extends ClientScriptFactory {
 		return clientScript;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public ClientScriptFactory getWrapped() {
 
 		// Since this is the default factory instance, it will never wrap another factory.

@@ -39,7 +39,7 @@ public class ComponentResourceFactoryAlloyImpl extends ComponentResourceFactory 
 		return new ComponentResourceAlloyImpl(wrappedComponentResource);
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public ComponentResourceFactory getWrapped() {
 		return wrapppedComponentResourceFactory;
 	}

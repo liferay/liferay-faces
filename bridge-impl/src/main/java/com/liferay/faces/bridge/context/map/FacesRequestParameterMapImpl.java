@@ -96,7 +96,7 @@ public class FacesRequestParameterMapImpl implements FacesRequestParameterMap {
 		}
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public void clear() {
 		wrappedParameterMap.clear();
 	}
@@ -200,17 +200,17 @@ public class FacesRequestParameterMapImpl implements FacesRequestParameterMap {
 		return found;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean containsValue(Object value) {
 		return wrappedParameterMap.containsValue(value);
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public Set<java.util.Map.Entry<String, String[]>> entrySet() {
 		return wrappedParameterMap.entrySet();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String[] get(Object key) {
 
 		String[] values = wrappedParameterMap.get(key);
@@ -238,7 +238,7 @@ public class FacesRequestParameterMapImpl implements FacesRequestParameterMap {
 		return values;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public Set<String> keySet() {
 
 		// Note: This can't be cached because the caller basically wants a new enumeration to iterate over each time.
@@ -294,32 +294,32 @@ public class FacesRequestParameterMapImpl implements FacesRequestParameterMap {
 		return keyNames;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String[] put(String key, String[] value) {
 		return wrappedParameterMap.put(key, value);
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public void putAll(Map<? extends String, ? extends String[]> m) {
 		wrappedParameterMap.putAll(m);
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String[] remove(Object key) {
 		return wrappedParameterMap.remove(key);
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public int size() {
 		return wrappedParameterMap.size();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public Collection<String[]> values() {
 		return wrappedParameterMap.values();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String getFirst(Object key) {
 
 		String firstValue = null;
@@ -350,7 +350,7 @@ public class FacesRequestParameterMapImpl implements FacesRequestParameterMap {
 		return firstValue;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String getNamespace() {
 		return namespace;
 	}
@@ -397,7 +397,7 @@ public class FacesRequestParameterMapImpl implements FacesRequestParameterMap {
 		return specialParameterValue;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public boolean isEmpty() {
 		return wrappedParameterMap.isEmpty();
 	}

@@ -21,7 +21,7 @@ import javax.faces.FacesWrapper;
  */
 public abstract class TemplateWrapper implements Template, FacesWrapper<Template> {
 
-	@Override
+	// Java 1.6+ @Override
 	public String formatTokens(String[] expressions, Object[] replacements) {
 		return getWrapped().formatTokens(expressions, replacements);
 	}
