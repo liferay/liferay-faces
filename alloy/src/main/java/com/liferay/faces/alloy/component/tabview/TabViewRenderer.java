@@ -134,7 +134,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 			for (int i = 0; i < childCount; i++) {
 				UIComponent child = children.get(i);
 
-				if (child instanceof Tab) {
+				if ((child instanceof Tab) && child.isRendered()) {
 					Tab childTab = (Tab) child;
 					boolean selected = ((selectedIndex != null) && (i == selectedIndex));
 					encodeTabListItem(facesContext, responseWriter, childTab, selected);
@@ -165,7 +165,9 @@ public class TabViewRenderer extends TabViewRendererBase {
 
 			for (int i = 0; i < children.size(); i++) {
 				UIComponent child = children.get(i);
-				child.encodeAll(facesContext);
+				if (child.isRendered()) {
+					child.encodeAll(facesContext);
+				}
 			}
 		}
 
@@ -250,7 +252,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 		responseWriter.write("var prevTabIndex=hidden.value;");
 
 		responseWriter.write(
-			"if(event.newVal){hidden.value=event.newVal.get('index');}else if (prevTabIndex==event.newVal.get('index')){hidden.value=''};");
+			"if(event.newVal){hidden.value=event.newVal.get('index');}else if (prevTabIndex==event.newVal.get('index')){hidden.value='';};");
 
 		Map<String, List<ClientBehavior>> clientBehaviorMap = tabView.getClientBehaviors();
 		Collection<String> eventNames = tabView.getEventNames();
@@ -284,8 +286,34 @@ public class TabViewRenderer extends TabViewRendererBase {
 			}
 		}
 
-		responseWriter.write("} "); // end function to call after selectionChange
+		responseWriter.write(StringPool.CLOSE_CURLY_BRACE); // end function to call after selectionChange
 		responseWriter.write(StringPool.CLOSE_PARENTHESIS); // end call to "after" method
+		responseWriter.write(StringPool.SEMICOLON);
+
+		int tabIndex = 0;
+		List<UIComponent> children = tabView.getChildren();
+
+		for (UIComponent child : children) {
+
+			if ((child instanceof Tab) && child.isRendered()) {
+				Tab childTab = (Tab) child;
+
+				if (childTab.isDisabled()) {
+					responseWriter.write(clientVarName);
+					responseWriter.write(".disableTab(");
+					responseWriter.write(Integer.toString(tabIndex));
+					responseWriter.write(");");
+				}
+				else {
+					responseWriter.write(clientVarName);
+					responseWriter.write(".enableTab(");
+					responseWriter.write(Integer.toString(tabIndex));
+					responseWriter.write(");");
+				}
+
+				tabIndex++;
+			}
+		}
 	}
 
 	@Override
@@ -337,8 +365,12 @@ public class TabViewRenderer extends TabViewRendererBase {
 		}
 
 		responseWriter.writeAttribute(StringPool.CLASS, tabClasses, Styleable.STYLE_CLASS);
+		responseWriter.startElement("a", tab);
 
-		responseWriter.startElement(StringPool.ASCII_TABLE[97], tab);
+		if (tab.isDisabled()) {
+			responseWriter.writeAttribute(StringPool.DISABLED, StringPool.DISABLED, null);
+		}
+
 		responseWriter.writeAttribute(StringPool.HREF, StringPool.POUND + tab.getClientId(facesContext), null);
 
 		// If the header facet exists for the specified tab, then encode the header facet.
@@ -359,7 +391,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 			responseWriter.write(label);
 		}
 
-		responseWriter.endElement(StringPool.ASCII_TABLE[97]);
+		responseWriter.endElement("a");
 		responseWriter.endElement(StringPool.LI);
 	}
 

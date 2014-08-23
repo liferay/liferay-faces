@@ -136,8 +136,16 @@
 	text-shadow: none;
 }
 
-.aui a, .aui .alloy-output-text a, .aui .tab a, .aui .tab a:hover {
+.aui a, .aui .alloy-output-text a {
 	color: #0058ba;
+}
+
+.aui li.tab a, .aui li.tab a:hover {
+	color: #0058ba;
+}
+
+.aui li.tab a[disabled='disabled'] {
+	color: #999999;
 }
 
 .aui .nav-list>li a,.aui .nav-list>li a:hover,.aui .nav-list>li.active a,.aui .nav-list>li.active a:hover,.aui .nav-list .nav-list>li>a:hover {
