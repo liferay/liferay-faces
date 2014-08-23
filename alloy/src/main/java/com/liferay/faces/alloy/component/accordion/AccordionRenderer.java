@@ -131,7 +131,7 @@ public class AccordionRenderer extends AccordionRendererBase {
 
 				UIComponent child = children.get(i);
 
-				if (child instanceof Tab) {
+				if ((child instanceof Tab) && child.isRendered()) {
 					Tab childTab = (Tab) child;
 					boolean selected = ((selectedIndex != null) && (i == selectedIndex));
 					encodeHeader(facesContext, responseWriter, uiComponent, childTab, selected);
@@ -243,7 +243,7 @@ public class AccordionRenderer extends AccordionRendererBase {
 		// }
 		//J+
 		behaviorCallback.append(
-			"if(event.newVal){hidden.value=eventTabIndex;}else if (prevTabIndex==eventTabIndex){hidden.value=''};");
+			"if(event.newVal){hidden.value=eventTabIndex;}else if (prevTabIndex==eventTabIndex){hidden.value='';};");
 
 		Map<String, List<ClientBehavior>> clientBehaviorMap = accordion.getClientBehaviors();
 		Collection<String> eventNames = accordion.getEventNames();

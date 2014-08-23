@@ -15,6 +15,7 @@ package com.liferay.faces.alloy.component.tab;
 
 import javax.faces.component.UIComponent;
 import javax.faces.component.behavior.Behavior;
+import javax.faces.event.PhaseId;
 
 import com.liferay.faces.util.event.NamedAjaxBehaviorEvent;
 
@@ -23,7 +24,7 @@ import com.liferay.faces.util.event.NamedAjaxBehaviorEvent;
  * @author  Neil Griffin
  */
 public class TabEvent extends NamedAjaxBehaviorEvent {
-	
+
 	// Public Constants
 	public static final String TAB_COLLAPSED = "tabCollapsed";
 	public static final String TAB_EXPANDED = "tabExpanded";
@@ -40,6 +41,7 @@ public class TabEvent extends NamedAjaxBehaviorEvent {
 		super(component, behavior, name);
 		this.tab = tab;
 		this.rowData = rowData;
+		setPhaseId(PhaseId.APPLY_REQUEST_VALUES);
 	}
 
 	public Object getRowData() {
