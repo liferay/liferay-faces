@@ -33,82 +33,82 @@ public class UploadedFileBridgeImpl implements UploadedFile {
 		this.wrappedUploadedFile = uploadedFile;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public void delete() throws IOException {
 		wrappedUploadedFile.delete();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public void write(String fileName) throws IOException {
 		wrappedUploadedFile.write(fileName);
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String getAbsolutePath() {
 		return wrappedUploadedFile.getAbsolutePath();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public Map<String, Object> getAttributes() {
 		return wrappedUploadedFile.getAttributes();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public byte[] getBytes() throws IOException {
 		return wrappedUploadedFile.getBytes();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String getCharSet() {
 		return wrappedUploadedFile.getCharSet();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String getContentType() {
 		return wrappedUploadedFile.getContentType();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String getHeader(String name) {
 		return wrappedUploadedFile.getHeader(name);
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public Collection<String> getHeaderNames() {
 		return wrappedUploadedFile.getHeaderNames();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public Collection<String> getHeaders(String name) {
 		return wrappedUploadedFile.getHeaders(name);
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String getId() {
 		return wrappedUploadedFile.getId();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public InputStream getInputStream() throws IOException {
 		return wrappedUploadedFile.getInputStream();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String getMessage() {
 		return wrappedUploadedFile.getMessage();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String getName() {
 		return wrappedUploadedFile.getName();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public long getSize() {
 		return wrappedUploadedFile.getSize();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public Status getStatus() {
 		return wrappedUploadedFile.getStatus();
 	}

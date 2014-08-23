@@ -106,12 +106,12 @@ public class PrimeFacesFileItem implements FileItem {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public FileItemHeaders getHeaders() {
 		return fileItemHeaders;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public void setHeaders(FileItemHeaders fileItemHeaders) {
 		this.fileItemHeaders = fileItemHeaders;
 	}

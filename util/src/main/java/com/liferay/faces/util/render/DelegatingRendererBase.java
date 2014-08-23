@@ -46,7 +46,7 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 		delegateRenderer.decode(facesContext, uiComponent);
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public void encodeAll(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		Renderer delegateRenderer = getDelegateRenderer(facesContext);
@@ -55,7 +55,7 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 		delegateRenderer.encodeEnd(facesContext, uiComponent);
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public void encodeAll(FacesContext facesContext, UIComponent uiComponent,
 		DelegationResponseWriter delegationResponseWriter) throws IOException {
 
@@ -75,7 +75,7 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 		delegateRenderer.encodeBegin(facesContext, uiComponent);
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent,
 		DelegationResponseWriter delegationResponseWriter) throws IOException {
 
@@ -94,7 +94,7 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 		delegateRenderer.encodeChildren(facesContext, uiComponent);
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent,
 		DelegationResponseWriter delegationResponseWriter) throws IOException {
 
@@ -113,7 +113,7 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 		delegateRenderer.encodeEnd(facesContext, uiComponent);
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent,
 		DelegationResponseWriter delegationResponseWriter) throws IOException {
 

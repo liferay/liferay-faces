@@ -36,17 +36,17 @@ public class TextResourceImpl implements TextResource, Serializable {
 		this.lastModified = lastModified;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public long getLastModified() {
 		return lastModified;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public String getText() {
 		return text;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public URL getURL() {
 		return url;
 	}
