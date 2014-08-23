@@ -42,7 +42,7 @@ public class LiferaySharedPageTopTest {
 	private static final String RESOURCES_PORTLET1;
 	private static final String RESOURCES_PORTLET2;
 	private static final StringBundler RESOURCES_BOTH_PORTLETS;
-	private static final int TOTAL_THREADS = 10000;
+	private static final int TOTAL_THREADS = Runtime.getRuntime().availableProcessors() * 10;
 
 	static {
 		RESOURCES_BOTH_PORTLETS = new StringBundler();
