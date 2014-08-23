@@ -40,12 +40,12 @@ public class MultiPartFormDataImpl implements MultiPartFormData, Serializable {
 		this.uploadedFileMap = uploadedFileMap;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public FacesRequestParameterMap getFacesRequestParameterMap() {
 		return facesRequestParameterMap;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public Map<String, List<UploadedFile>> getUploadedFileMap() {
 		return uploadedFileMap;
 	}

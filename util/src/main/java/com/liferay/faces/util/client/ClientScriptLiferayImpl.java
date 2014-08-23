@@ -90,7 +90,7 @@ public class ClientScriptLiferayImpl implements ClientScript {
 		this.scriptData = scriptData;
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public void append(String portletId, String content, String use) {
 
 		try {
