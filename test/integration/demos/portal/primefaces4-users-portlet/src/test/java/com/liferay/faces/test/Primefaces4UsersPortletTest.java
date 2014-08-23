@@ -156,7 +156,7 @@ public class Primefaces4UsersPortletTest extends TesterBase {
 	private static final String portraitXpath =
 		"//img[contains(@id, ':portrait') and contains(@src, 'user_male_portrait')]";
 	private static final String fileUploadButtonXpath =
-		"//label[@role='button']/span[text()='Choose' and contains(@class, 'ui-button-text')]/following-sibling::input[@type='file' and contains(@id, ':fileEntryComp_input')]/..";
+		"//input[@type='file' and contains(@id, ':fileEntryComp_input')]/..";
 	private static final String changedPortraitXpath =
 		"//input[@type='file' and contains(@id, ':fileEntryComp_input')]/../../../../img[contains(@id, ':portrait') and not(contains(@src, 'user_male_portrait'))]";
 	private static final String fileEntryXpath = "//input[@type='file' and contains(@id, ':fileEntryComp_input')]";
