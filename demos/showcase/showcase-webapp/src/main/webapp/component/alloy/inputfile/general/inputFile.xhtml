@@ -5,6 +5,7 @@
 	<ui:define name="col1">
 		<alloy:form enctype="multipart/form-data" includeViewParams="false">
 			<showcase:example>
+				<alloy:messages globalOnly="true" layout="table" />
 				<alloy:inputFile fileUploadListener="#{inputFileBackingBean.handleFileUpload}" />
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}" />
