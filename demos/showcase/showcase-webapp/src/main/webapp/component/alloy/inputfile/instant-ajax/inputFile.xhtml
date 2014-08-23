@@ -6,6 +6,7 @@
 	<ui:define name="col1">
 		<alloy:form enctype="multipart/form-data">
 			<showcase:example>
+				<alloy:messages globalOnly="true" layout="table" />
 				<alloy:inputFile auto="true" fileUploadListener="#{inputFileBackingBean.handleFileUpload}">
 					<f:ajax render="@form" />
 				</alloy:inputFile>

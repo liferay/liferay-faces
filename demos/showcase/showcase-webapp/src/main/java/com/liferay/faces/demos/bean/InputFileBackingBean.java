@@ -15,10 +15,12 @@ package com.liferay.faces.demos.bean;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UICommand;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import com.liferay.faces.alloy.component.inputfile.FileUploadEvent;
@@ -74,6 +76,10 @@ public class InputFileBackingBean {
 		List<UploadedFile> uploadedFiles = inputFileModelBean.getUploadedFiles();
 		UploadedFile uploadedFile = fileUploadEvent.getUploadedFile();
 		uploadedFiles.add(uploadedFile);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesMessage facesMessage = new FacesMessage("Received fileUploadEvent for file named '" +  uploadedFile.getName() + "' in the " +
+				fileUploadEvent.getPhaseId().getName() + " phase.");
+		facesContext.addMessage(null, facesMessage);
 		logger.debug("Received fileName=[{0}] absolutePath=[{1}]", uploadedFile.getName(),
 			uploadedFile.getAbsolutePath());
 	}
