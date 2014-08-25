@@ -28,7 +28,9 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * via EL.
  *
  * @author  Neil Griffin
+ * @deprecated No replacement available.
  */
+@Deprecated
 public class FaceletUtil {
 
 	// Logger

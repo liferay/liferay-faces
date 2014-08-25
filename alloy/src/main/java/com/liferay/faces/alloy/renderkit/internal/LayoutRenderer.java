@@ -26,8 +26,10 @@ import com.liferay.faces.util.lang.StringPool;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  No replacement available since the tag is no longer provided by Liferay Portal since version 6.2.
  */
+@Deprecated
 public class LayoutRenderer extends Renderer {
 
 	@Override

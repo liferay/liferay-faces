@@ -1,9 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:vdldoc="http://vdldoc.org/vdldoc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
+   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://raw.githubusercontent.com/omnifaces/vdldoc/master/src/main/resources/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
 	version="2.0">
 	<namespace>http://portletfaces.org/bridge</namespace>
+	<description><![CDATA[<strong>Deprecated:</strong> Please use http://liferay.com/faces/bridge instead.]]></description>
 	<tag>
 		<description>The bridge:inputFile tag is a UIComponent that provides the ability to upload a file.</description>
 		<tag-name>inputFile</tag-name>
@@ -117,5 +119,11 @@
 			<name>onselect</name>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use bridge:inputFile instead.</vdldoc:description>
+			</vdldoc:deprecation>
+		</tag-extension>
 	</tag>
 </facelet-taglib>

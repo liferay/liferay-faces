@@ -3,7 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:cc="http://java.sun.com/jsf/composite"
 	xmlns:aui="http://liferay.com/faces/aui" xmlns:aui-cc="http://liferay.com/faces/aui-cc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vdldoc="http://vdldoc.org/vdldoc"
-	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd">
+	xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd http://vdldoc.org/vdldoc https://raw.githubusercontent.com/omnifaces/vdldoc/master/src/main/resources/org/omnifaces/vdldoc/resources/vdldoc-cc.xhtml.xsd">
 
 	<cc:interface shortDescription="The &lt;code&gt;aui-cc:input&lt;/code&gt; renders either an input (type=text), textarea, input (type=&quot;secret&quot;), input (type=&quot;checkbox&quot;), or input (type=&quot;radio&quot;) with appropriate Alloy UI CSS class names, according to the value of the type attribute.">
 		<cc:attribute name="cols" required="false" shortDescription="The number of columns for the rendered textarea." />
@@ -25,7 +25,7 @@
 		<cc:attribute name="value" required="true" shortDescription="The current value of this component." />
 		<cc:editableValueHolder name="inputText" targets="t1"/>
 		<cc:extension>
-			<vdldoc:deprecated value="true" shortDescription="Please use h:inputText, h:inputTextarea, h:inputSecret, or h:selectBooleanCheckbox instead." />
+			<vdldoc:deprecated value="true" shortDescription="Please use alloy:inputText, alloy:inputTextarea, alloy:inputSecret, or alloy:selectBooleanCheckbox instead." />
 			<vdldoc:since value="3.2.4" />
 		</cc:extension>
 	</cc:interface>

@@ -1,18 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vdldoc="http://vdldoc.org/vdldoc"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://vdldoc.googlecode.com/hg/src/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
+   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://raw.githubusercontent.com/omnifaces/vdldoc/master/src/main/resources/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
 	version="2.0">
-	<description>The Liferay Faces Alloy facelet component tags with the &lt;code&gt;aui:&lt;/code&gt; tag name prefix.</description>
+	<description><![CDATA[<strong>Deprecated.</strong> Please use <code>alloy</code> tags instead. The Liferay Faces Alloy facelet component tags with the <code>aui:</code> tag name prefix.]]></description>
 	<namespace>http://liferay.com/faces/aui</namespace>
 	<function>
-		<description>Returns an escaped representation of the specified client ID.</description>
+		<description><![CDATA[<strong>Deprecated.</strong> Please use <code>alloy:escapeClientId</code> instead. Returns an escaped representation of the specified client ID.]]></description>
 		<function-name>escapeClientId</function-name>
 		<function-class>com.liferay.faces.alloy.util.AlloyUtil</function-class>
 		<function-signature>java.lang.String escapeClientId(java.lang.String)</function-signature>
 	</function>
 	<function>
-		<description>Returns the client ID associated with the specified expression.</description>
+		<description><![CDATA[<strong>Deprecated.</strong> Please use <code>alloy:findClientId</code> instead. Returns the client ID associated with the specified expression.]]></description>
 		<function-name>findClientId</function-name>
 		<function-class>com.liferay.faces.util.component.ComponentUtil</function-class>
 		<function-signature>java.lang.String findClientId(java.lang.String)</function-signature>
@@ -52,6 +52,10 @@
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use portal:buttonRow instead.</vdldoc:description>
+			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -123,6 +127,10 @@
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:col instead.</vdldoc:description>
+			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>	
 	<tag>
@@ -178,7 +186,7 @@
 			<vdldoc:since>3.2.4</vdldoc:since>
 			<vdldoc:deprecation>
 				<vdldoc:deprecated>true</vdldoc:deprecated>
-				<vdldoc:description>Please use aui:row and aui:col instead.</vdldoc:description>
+				<vdldoc:description>Please use alloy:row and alloy:col instead.</vdldoc:description>
 			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
@@ -190,6 +198,10 @@
 		</converter>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>No replacement available.</vdldoc:description>
+			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -243,6 +255,10 @@
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:field instead.</vdldoc:description>
+			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -290,6 +306,10 @@
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:fieldset instead.</vdldoc:description>
+			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -313,6 +333,10 @@
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:form instead.</vdldoc:description>
+			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -333,6 +357,10 @@
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:loadConstants instead.</vdldoc:description>
+			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -367,11 +395,11 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
+			<vdldoc:since>3.2.4</vdldoc:since>
 			<vdldoc:deprecation>
 				<vdldoc:deprecated>true</vdldoc:deprecated>
-				<vdldoc:description>This tag has no equivalent in Liferay Portal 6.2+ but will continue to function for Liferay Portal 6.0 and 6.1.</vdldoc:description>
+				<vdldoc:description>Please use alloy:panelGroup instead.</vdldoc:description>
 			</vdldoc:deprecation>
-			<vdldoc:since>3.2.4</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -407,6 +435,10 @@
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:dataList instead.</vdldoc:description>
+			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -442,6 +474,10 @@
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:dataItem instead.</vdldoc:description>
+			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -483,6 +519,10 @@
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:row instead.</vdldoc:description>
+			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -518,6 +558,10 @@
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>No replacement available.</vdldoc:description>
+			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -553,6 +597,10 @@
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>No replacement available.</vdldoc:description>
+			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -582,6 +630,10 @@
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:outputScript instead.</vdldoc:description>
+			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
 </facelet-taglib>

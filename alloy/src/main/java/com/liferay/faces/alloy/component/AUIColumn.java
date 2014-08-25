@@ -17,8 +17,11 @@ import javax.faces.component.NamingContainer;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Replaced by {@link com.liferay.faces.alloy.component.row.Row} and {@link
+ *              com.liferay.faces.alloy.component.column.Column}.
  */
+@Deprecated
 public class AUIColumn extends AUIPanel implements NamingContainer {
 
 	@Override

@@ -24,7 +24,9 @@ import javax.faces.context.ResponseWriterWrapper;
 
 /**
  * @author  Neil Griffin
+ * @deprecation No replacement available.
  */
+@Deprecated
 public class SanitizingResponseWriter extends ResponseWriterWrapper {
 
 	private ResponseWriter wrappedResponseWriter;

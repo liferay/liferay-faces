@@ -26,8 +26,10 @@ import com.liferay.faces.util.portal.WebKeys;
 /**
  * This class provides a compatibility layer for JSF1/JSF2 and different versions of the Liferay Portal API.
  *
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  See {@link com.liferay.faces.alloy.renderkit.ScriptRenderer}.
  */
+@Deprecated
 public abstract class ScriptRendererCompat extends Renderer {
 
 	protected boolean isInline(FacesContext facesContext) {

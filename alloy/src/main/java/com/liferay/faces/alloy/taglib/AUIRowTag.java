@@ -20,9 +20,11 @@ import com.liferay.faces.alloy.component.AUIRow;
 
 
 /**
- * @author  Neil Griffin
- * @author  Kyle Stiemann
+ * @author      Neil Griffin
+ * @author      Kyle Stiemann
+ * @deprecated  No replacement available.
  */
+@Deprecated
 public class AUIRowTag extends AUIComponentELTag {
 
 	// Private Data Members

@@ -27,8 +27,10 @@ import com.liferay.faces.util.render.internal.RendererUtil;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Replaced by {@link com.liferay.faces.alloy.component.outputscript.OutputScript}.
  */
+@Deprecated
 public class ScriptRenderer extends ScriptRendererCompat {
 
 	// Private Constants
