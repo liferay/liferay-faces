@@ -21,8 +21,10 @@ import com.liferay.faces.alloy.converter.LongListConverter;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  No replacement available.
  */
+@Deprecated
 public class ConvertLongListTag extends ConverterELTag {
 
 	// serialVersionUID

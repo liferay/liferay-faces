@@ -14,8 +14,10 @@
 package com.liferay.faces.alloy.component;
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Replaced by {@link com.liferay.faces.alloy.component.field.Field}.
  */
+@Deprecated
 public class AUIField extends AUIPanel {
 
 	@Override

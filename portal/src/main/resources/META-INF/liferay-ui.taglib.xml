@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
    http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 	version="2.0">
-	<description>The Liferay Faces Portal facelet composite component tags with the &lt;code&gt;liferay-ui:&lt;/code&gt; tag name prefix.</description>
+	<description><![CDATA[<strong>Deprecated.</strong> Please use <code>portal</code> tags instead. The Liferay Faces Portal facelet composite component tags with the <code>liferay-ui:</code> tag name prefix.]]></description>
 	<namespace>http://liferay.com/faces/ui</namespace>
 	<composite-library-name>liferay-ui</composite-library-name>
 </facelet-taglib>

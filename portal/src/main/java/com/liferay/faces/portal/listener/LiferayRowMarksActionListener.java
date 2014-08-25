@@ -19,7 +19,9 @@ import com.liferay.faces.util.listener.RowMarksActionListener;
 
 /**
  * @author  Neil Griffin
+ * @deprecated No replacement available.
  */
+@Deprecated
 public class LiferayRowMarksActionListener extends RowMarksActionListener {
 
 	// Self-Injections

@@ -19,7 +19,9 @@ import javax.faces.webapp.UIComponentELTag;
 
 /**
  * @author  Neil Griffin
+ * @deprecated  No replacement available.
  */
+@Deprecated
 public abstract class AUIComponentELTag extends UIComponentELTag {
 
 	// Private Data Members

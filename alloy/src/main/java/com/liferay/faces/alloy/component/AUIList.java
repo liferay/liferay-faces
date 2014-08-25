@@ -17,8 +17,10 @@ import javax.faces.component.NamingContainer;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Replaced by {@link com.liferay.faces.alloy.component.datalist.DataList}.
  */
+@Deprecated
 public class AUIList extends AUIPanel implements NamingContainer {
 
 	@Override

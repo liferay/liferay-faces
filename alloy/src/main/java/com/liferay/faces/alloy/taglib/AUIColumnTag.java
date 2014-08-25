@@ -14,8 +14,10 @@
 package com.liferay.faces.alloy.taglib;
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  No replacement available.
  */
+@Deprecated
 public class AUIColumnTag extends AUIComponentELTag {
 
 	@Override

@@ -1,9 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:vdldoc="http://vdldoc.org/vdldoc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
+   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://raw.githubusercontent.com/omnifaces/vdldoc/master/src/main/resources/org/omnifaces/vdldoc/resources/vdldoc.xhtml.xsd"
 	version="2.0">
 	<namespace>http://portletfaces.org/alloyfaces/aui</namespace>
+	<description><![CDATA[<strong>Deprecated:</strong> Please use <code>alloy</code> tags instead.]]></description>
 	<tag>
 		<tag-name>button-row</tag-name>
 		<component>
@@ -20,6 +22,12 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use portal:buttonRow instead.</vdldoc:description>
+			</vdldoc:deprecation>
+		</tag-extension>
 	</tag>
 	<tag>
 		<tag-name>column</tag-name>
@@ -52,79 +60,24 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
-	</tag>
-	<tag>
-		<tag-name>dialog</tag-name>
-		<component>
-			<component-type>com.liferay.faces.alloy.AUIDialog</component-type>
-			<renderer-type>com.liferay.faces.alloy.renderkit.internal.DialogRenderer</renderer-type>
-		</component>
-		<attribute>
-			<name>bodyContent</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<name>centered</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<name>close</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<name>constrain2view</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<name>destroyOnClose</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<name>draggable</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<name>height</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<name>modal</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<name>resizable</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<name>stack</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<name>title</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<name>width</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
+		<tag-extension>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:row and alloy:col instead.</vdldoc:description>
+			</vdldoc:deprecation>
+		</tag-extension>
 	</tag>
 	<tag>
 		<tag-name>convertLongList</tag-name>
 		<converter>
 			<converter-id>convertLongList</converter-id>
 		</converter>
+		<tag-extension>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>No replacement available.</vdldoc:description>
+			</vdldoc:deprecation>
+		</tag-extension>
 	</tag>
 	<tag>
 		<tag-name>field</tag-name>
@@ -157,6 +110,12 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:field instead.</vdldoc:description>
+			</vdldoc:deprecation>
+		</tag-extension>
 	</tag>
 	<tag>
 		<tag-name>fieldset</tag-name>
@@ -184,12 +143,24 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:fieldset instead.</vdldoc:description>
+			</vdldoc:deprecation>
+		</tag-extension>
 	</tag>
 	<tag>
 		<tag-name>form</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIForm</component-type>
 		</component>
+		<tag-extension>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:form instead.</vdldoc:description>
+			</vdldoc:deprecation>
+		</tag-extension>
 	</tag>
 	<tag>
 		<tag-name>layout</tag-name>
@@ -207,6 +178,12 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:panelGroup instead.</vdldoc:description>
+			</vdldoc:deprecation>
+		</tag-extension>
 	</tag>
 	<tag>
 		<tag-name>list</tag-name>
@@ -224,6 +201,12 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:dataList instead.</vdldoc:description>
+			</vdldoc:deprecation>
+		</tag-extension>
 	</tag>
 	<tag>
 		<tag-name>list-item</tag-name>
@@ -241,6 +224,12 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use alloy:dataItem instead.</vdldoc:description>
+			</vdldoc:deprecation>
+		</tag-extension>
 	</tag>
 	<tag>
 		<tag-name>text-box-list</tag-name>
@@ -258,6 +247,12 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>No replacement available.</vdldoc:description>
+			</vdldoc:deprecation>
+		</tag-extension>
 	</tag>
 	<tag>
 		<tag-name>text-box-list-item</tag-name>
@@ -275,5 +270,11 @@
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<tag-extension>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>No replacement available.</vdldoc:description>
+			</vdldoc:deprecation>
+		</tag-extension>
 	</tag>
 </facelet-taglib>

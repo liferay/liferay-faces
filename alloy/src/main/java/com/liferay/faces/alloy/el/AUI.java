@@ -17,8 +17,10 @@ import java.lang.reflect.Method;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Please use {@link javax.faces.application.ResourceDependency} instead.
  */
+@Deprecated
 public class AUI {
 
 	// Private Constants

@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vdldoc="http://vdldoc.org/vdldoc"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://vdldoc.googlecode.com/hg/src/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
+   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://raw.githubusercontent.com/omnifaces/vdldoc/master/src/main/resources/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
 	version="2.0">
-	<description>The Liferay Faces Portal facelet component tags with the &lt;code&gt;liferay-securtiy:&lt;/code&gt; tag name prefix.</description>
+	<description><![CDATA[<strong>Deprecated.</strong> Please use <code>portal</code> tags instead. The Liferay Faces Portal facelet component tags with the <code>liferay-securtiy:</code> tag name prefix.]]></description>
 	<namespace>http://liferay.com/faces/security</namespace>
 	<tag>
 		<description>The &lt;code&gt;liferay-security:permissionsURL&lt;/code&gt; tag renders an HTML anchor tag (hyperlink) that the user can click on in order to see the Liferay Permissions screen for the associated resource.</description>
@@ -14,6 +14,10 @@
 		</component>
 		<tag-extension>
 			<vdldoc:since>3.2.4</vdldoc:since>
+			<vdldoc:deprecation>
+				<vdldoc:deprecated>true</vdldoc:deprecated>
+				<vdldoc:description>Please use portal:permissionsURL instead.</vdldoc:description>
+			</vdldoc:deprecation>
 		</tag-extension>
 	</tag>
 </facelet-taglib>

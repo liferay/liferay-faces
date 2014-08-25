@@ -19,8 +19,10 @@ import com.liferay.faces.util.lang.StringPool;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  No replacement available.
  */
+@Deprecated
 public class AUIFieldTag extends AUIComponentELTag {
 
 	private javax.el.ValueExpression label;

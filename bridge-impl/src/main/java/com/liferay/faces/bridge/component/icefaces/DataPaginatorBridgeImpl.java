@@ -34,7 +34,9 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * ICEfaces will not bother to call it's internal CoreComponentUtils.findComponent(String, UIComponent) method.</p>
  *
  * @author  Neil Griffin
+ * @deprecated No replacement available.
  */
+@Deprecated
 public class DataPaginatorBridgeImpl extends DataPaginatorWrapper implements Serializable {
 
 	// serialVersionUID

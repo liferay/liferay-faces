@@ -22,7 +22,8 @@ import javax.faces.convert.Converter;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  No replacement available.
  */
 public class LongListConverter implements Converter {
 

@@ -39,7 +39,9 @@ import com.liferay.portal.kernel.util.StringPool;
  *
  * @author  Neil Griffin
  * @author  Joe Ssemwogerere
+ * @deprecated No replacement available.
  */
+@Deprecated
 public class RichTextLengthValidator extends LengthValidator {
 
 	// Logger

@@ -39,7 +39,9 @@ import com.liferay.faces.util.model.RowMarks;
  * check-all, uncheck-all, and delete-checked.
  *
  * @author  Neil Griffin
+ * @deprecated No replacement available.
  */
+@Deprecated
 public class RowMarksActionListener implements ActionListener {
 
 	// Private Constants

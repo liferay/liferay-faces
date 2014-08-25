@@ -17,8 +17,10 @@ import javax.faces.component.NamingContainer;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  No replacement available since the tag is no longer provided by Liferay Portal since version 6.2.
  */
+@Deprecated
 public class AUILayout extends AUIPanel implements NamingContainer {
 
 	@Override

@@ -25,8 +25,10 @@ import javax.faces.component.UIForm;
  * code when done as a Facelet composite component, but it's implemented here in Java for speed, since it's a top-level
  * component in most JSF views.
  *
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Replaced by {@link com.liferay.faces.alloy.component.form.Form}.
  */
+@Deprecated
 public class AUIForm extends UIForm {
 
 	// Private Constants
