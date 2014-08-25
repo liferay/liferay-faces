@@ -11,25 +11,14 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.taglib;
-
-import javax.faces.view.facelets.TagConfig;
-
-import com.liferay.faces.alloy.taghandler.ImportConstants;
-
+package com.liferay.faces.demos.constants;
 
 /**
- * @author      Neil Griffin
- * @deprecated  Replaced by {@link ImportConstants}.
+ * @author  Kyle Stiemann
  */
-@Deprecated
-public class ImportConstantsTagHandler extends ImportConstants {
+public class InterfaceConstants {
 
-	public ImportConstantsTagHandler() throws Exception {
-		super(new JspTagConfig());
-	}
-
-	public ImportConstantsTagHandler(TagConfig config) throws Exception {
-		super(config);
-	}
+	public static final String BLUE = "blue";
+	public static final String GREEN = "green";
+	public static final String RED = "red";
 }
