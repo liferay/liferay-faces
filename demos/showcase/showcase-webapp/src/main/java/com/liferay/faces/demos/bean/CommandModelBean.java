@@ -36,7 +36,7 @@ public class CommandModelBean {
 	@ManagedProperty(value = "#{customerService}")
 	private CustomerService customerService;
 
-	private Customer selectedCustomers;
+	private Customer selectedCustomer;
 	private List<Customer> customers;
 
 	@PostConstruct
@@ -53,10 +53,10 @@ public class CommandModelBean {
 	}
 
 	public Customer getSelectedCustomer() {
-		return selectedCustomers;
+		return selectedCustomer;
 	}
 
-	public void setSelectedCustomer(Customer selectedCustomers) {
-		this.selectedCustomers = selectedCustomers;
+	public void setSelectedCustomer(Customer selectedCustomer) {
+		this.selectedCustomer = selectedCustomer;
 	}
 }
