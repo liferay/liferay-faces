@@ -34,19 +34,6 @@
 	font-weight: bold;
 }
 
-.aui .alloy-dialog {
-	text-align: center;
-}
-
-.aui .alloy-popover {
-	text-align: center;
-	padding: 6px;
-}
-
-.aui .alloy-output-tooltip {
-	text-align: center;
-}
-
 .aui .alloy-select-many-checkbox label,.aui .alloy-select-one-radio label {
 	font-size: 0.9em;
 }

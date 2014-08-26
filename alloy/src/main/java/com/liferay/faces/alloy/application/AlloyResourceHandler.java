@@ -256,7 +256,7 @@ public class AlloyResourceHandler extends ResourceHandlerWrapperBase {
 
 		// If the specified resource is "liferay.js" then filter the output stream so that #{resource['...']}
 		// expressions will be expanded.
-		if (LIFERAY_JS.equals(resourceName)) {
+		if (LIFERAY_JS.equals(resourceName) || ComboResource.RESOURCE_NAME.equals(resourceName)) {
 			return new ExpressionResourceOutputStream(resource, size);
 		}
 
