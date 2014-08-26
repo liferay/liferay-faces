@@ -8225,16 +8225,16 @@ java.lang.Object)</method-signature>
 			<validator-id>com.liferay.faces.alloy.component.inputfile.InputFileValidator</validator-id>
 		</validator>
 		<attribute>
+			<description><![CDATA[Comma-delimited list of uploaded file MIME types that are valid. If not specified, then all MIME types are assumed to be valid.]]></description>
+			<name>contentTypes</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[Maximum length (in bytes) permitted for each individual uploaded file. If not specified, then files of any length are assumed to be valid.]]></description>
 			<name>maxFileSize</name>
 			<required>false</required>
 			<type>java.lang.Long</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Comma-delimited list of uploaded file MIME types that are valid. If not specified, then all MIME types are assumed to be valid.]]></description>
-			<name>mimeTypes</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>3.2.0-m2</vdldoc:since>

@@ -13,8 +13,8 @@
 					<f:ajax render="outputLinkId" />
 				</alloy:selectOneMenu>
 				<br />
-				<alloy:outputLink id="outputLinkId" converter="convertGmapCountry" converterMessage="#{i18n['converter-message']}"
-					target="_blank" value="#{outputLinkModelBean.countryId}">
+				<alloy:outputLink id="outputLinkId" converter="convertGmapCountry" target="_blank"
+					value="#{outputLinkModelBean.countryId}">
 					<alloy:outputText value="#{i18n['link-to-a-map-of']} " />
 					<alloy:outputText converter="convertCountry" value="#{outputLinkModelBean.countryId}" />
 				</alloy:outputLink>

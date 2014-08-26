@@ -7,7 +7,7 @@
 		<h:form>
 			<showcase:example>
 				<alloy:outputLabel styleClass="alloy-output-label" value="#{i18n['favorite-liferay-benefit']}" />
-				<alloy:selectManyMenu layout="lineDirection" value="#{selectManyModelBean.favoriteIds}">
+				<alloy:selectManyMenu value="#{selectManyModelBean.favoriteIds}">
 					<f:selectItems value="#{selectManyModelBean.liferayBenefits}" var="benefit" itemValue="#{benefit.id}"
 						itemLabel="#{benefit.label}" />
 				</alloy:selectManyMenu>
