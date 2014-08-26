@@ -8225,6 +8225,12 @@ java.lang.Object)</method-signature>
 			<validator-id>com.liferay.faces.alloy.component.inputfile.InputFileValidator</validator-id>
 		</validator>
 		<attribute>
+			<description><![CDATA[TODO]]></description>
+			<name>contentTypes</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[Maximum length (in bytes) permitted for each individual uploaded file. If not specified, then files of any length are assumed to be valid.]]></description>
 			<name>maxFileSize</name>
 			<required>false</required>

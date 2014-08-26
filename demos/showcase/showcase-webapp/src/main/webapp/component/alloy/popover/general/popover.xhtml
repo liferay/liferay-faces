@@ -38,7 +38,7 @@
 						<alloy:inputText value="#{popoverModelBean.text2}" />
 					</alloy:field>
 					<alloy:commandButton action="#{popoverBackingBean.submit}" onclick="Liferay.component('popover2').hide();"
-						showCloseIcon="false" value="#{i18n['submit']}">
+						value="#{i18n['submit']}">
 						<f:ajax execute="@form" render="myForm2:outputModel:modelValue" />
 					</alloy:commandButton>
 					<alloy:button onclick="Liferay.component('popover2').hide();" value="#{i18n['cancel']}" />
