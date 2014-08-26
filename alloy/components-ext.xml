@@ -1001,8 +1001,6 @@
 				</description>
 				<name>autoShow</name>
 				<type>boolean</type>
-				<yui>true</yui>
-				<yuiName>visible</yuiName>
 			</attribute>
 			<attribute>
 				<description>
@@ -1010,8 +1008,6 @@
 				</description>
 				<name>headerText</name>
 				<type>java.lang.String</type>
-				<yui>true</yui>
-				<yuiName>headerContent</yuiName>
 			</attribute>
 			<attribute>
 				<defaultValue>Integer.MIN_VALUE</defaultValue>

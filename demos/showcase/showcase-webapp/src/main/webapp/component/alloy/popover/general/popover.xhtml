@@ -15,7 +15,7 @@
 					</alloy:field>
 					<alloy:commandButton action="#{popoverBackingBean.submit}" onclick="Liferay.component('popover1').hide();"
 						value="#{i18n['submit']}">
-						<f:ajax execute="@form" render="myForm1:outputModel:modelValue" />
+						<f:ajax execute="@form" render="@form" />
 					</alloy:commandButton>
 					<alloy:button onclick="Liferay.component('popover1').hide();" value="#{i18n['cancel']}" />
 				</alloy:popover>
@@ -39,7 +39,7 @@
 					</alloy:field>
 					<alloy:commandButton action="#{popoverBackingBean.submit}" onclick="Liferay.component('popover2').hide();"
 						showCloseIcon="false" value="#{i18n['submit']}">
-						<f:ajax execute="@form" render="myForm2:outputModel:modelValue" />
+						<f:ajax execute="@form" render="@form" />
 					</alloy:commandButton>
 					<alloy:button onclick="Liferay.component('popover2').hide();" value="#{i18n['cancel']}" />
 				</alloy:popover>
