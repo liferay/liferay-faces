@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -22,7 +24,9 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class TabViewDynamicBean {
+public class TabViewDynamicBean implements Serializable {
+
+	private static final long serialVersionUID = 9059601641277438559L;
 
 	private boolean compatible = true;
 	private boolean enterpriseReady = true;
