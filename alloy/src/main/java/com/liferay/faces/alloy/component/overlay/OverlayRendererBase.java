@@ -15,6 +15,7 @@ package com.liferay.faces.alloy.component.overlay;
 
 import java.io.IOException;
 
+import javax.faces.component.NamingContainer;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
@@ -30,38 +31,53 @@ import com.liferay.faces.util.render.RendererUtil;
 /**
  * @author  Vernon Singleton
  */
-public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
+public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase implements NamingContainer {
 
 	// Protected Constants
 	protected static final String Z_INDEX = "zIndex";
+	protected static final String CONTENT_BOX_SUFFIX = "_contentBox";
 
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		// Ensure that the "id" attribute is always written on the outermost <div> (which is the contentBox) so that
-		// Alloy's JavaScript will be able to locate the contentBox in the DOM.
+		// Encode the opening boundingBox <div> tag via delegation. Ensure that the "id" attribute is always written so
+		// that Alloy's JavaScript will be able to locate the boundingBox in the DOM.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		String clientId = uiComponent.getClientId(facesContext);
 		DelegationResponseWriter idDelegationResponseWriter = new IdDelegationResponseWriter(responseWriter,
-				StringPool.DIV, uiComponent.getClientId(facesContext));
-
+				StringPool.DIV, clientId);
 		super.encodeMarkupBegin(facesContext, uiComponent, idDelegationResponseWriter);
+
+		// Encode the opening contentBox <div> tag with a unique id.
+		String contentBoxClientId = clientId.concat(CONTENT_BOX_SUFFIX);
+		responseWriter.startElement(StringPool.DIV, null);
+		responseWriter.writeAttribute(StringPool.ID, contentBoxClientId, null);
+	}
+
+	@Override
+	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		// Encode the closing contentBox </div> tag.
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		responseWriter.endElement(StringPool.DIV);
+
+		// Encode the closing boundingBox </div> tag via delegation.
+		super.encodeMarkupEnd(facesContext, uiComponent);
 	}
 
 	public void encodeOverlayJavaScriptCustom(ResponseWriter responseWriter, FacesContext facesContext, Overlay overlay)
 		throws IOException {
 
-		// The outermost <div> (which is the contentBox) was initially styled with "display:none;" in order to prevent
-		// blinking when Alloy's JavaScript attempts to hide the contentBox. At this point in JavaScript execution,
-		// Alloy is done manipulating the DOM and it is necessary to set the style back to "display:block;" so that the
+		// The outermost <div> (which is the boundingBox) was initially styled with "display:none;" in order to prevent
+		// blinking when Alloy's JavaScript attempts to hide the boundingBox. At this point in JavaScript execution,
+		// Alloy is done manipulating the DOM and it is necessary to remove the "display:none;" so that the
 		// dialog will popup correctly.
-		responseWriter.write(AlloyRendererUtil.A_DOT_ONE);
-		responseWriter.write(StringPool.OPEN_PARENTHESIS);
-		responseWriter.write(StringPool.APOSTROPHE);
+		responseWriter.write("A.one('#");
 
 		String clientId = overlay.getClientId(facesContext);
-		String escapedContentBoxId = StringPool.POUND + RendererUtil.escapeClientId(clientId);
-		responseWriter.write(escapedContentBoxId);
-		responseWriter.write("')._node['style'].display='block';");
+		String escapedBoundingBoxClientId = RendererUtil.escapeClientId(clientId);
+		responseWriter.write(escapedBoundingBoxClientId);
+		responseWriter.write("').setStyle('display',null);");
 	}
 
 	protected void encodeOverlayDismissible(ResponseWriter responseWriter, Overlay overlay, String clientKey)
@@ -104,7 +120,10 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase {
 
 		// Encode the "contentBox" Alloy hidden attribute.
 		String clientId = overlay.getClientId(facesContext);
-		encodeClientId(responseWriter, AlloyRendererUtil.CONTENT_BOX, clientId, first);
+		encodeClientId(responseWriter, AlloyRendererUtil.BOUNDING_BOX, clientId, first);
+
+		String contentBoxClientId = clientId.concat(CONTENT_BOX_SUFFIX);
+		encodeClientId(responseWriter, AlloyRendererUtil.CONTENT_BOX, contentBoxClientId, first);
 
 		first = false;
 
