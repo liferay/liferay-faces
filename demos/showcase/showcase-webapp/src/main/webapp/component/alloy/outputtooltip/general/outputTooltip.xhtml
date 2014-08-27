@@ -5,7 +5,7 @@
 	<ui:define name="col1">
 		<!-- Example 1: Specifying tooltip text via the value attribute -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-outputtooltip-general-example-1']}" number="1"
+			<showcase:example description="#{i18n['alloy-outputtooltip-general-example-1']}" longDescription="true" number="1"
 				renderedCheckbox="true">
 				<alloy:button id="myButton" value="#{i18n['position-mouse-cursor-here']}" />
 				<alloy:outputTooltip for="myButton" rendered="#{showcaseModelBean.selectedComponent.rendered}"
