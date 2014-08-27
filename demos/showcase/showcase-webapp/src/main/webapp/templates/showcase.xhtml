@@ -8,7 +8,7 @@
 	<c:set value="#{selectedComponent.useCaseName}" var="selectedComponentUseCaseName" />
 	<h:outputStylesheet name="showcase.css" library="css" />
 	<alloy:panelGrid columns="2" columnClasses="showcase-nav-column,showcase-content-column" styleClass="showcase-grid">
-		<alloy:panelGroup>
+		<alloy:panelGroup layout="block">
 			<alloy:image library="images" name="liferay-faces-logo-nav.png" styleClass="logo" />
 			<alloy:accordion selectedIndex="#{selectedComponent.categoryIndex}" value="#{listModelBean.showcaseCategories}"
 				var="showcaseCategory">
@@ -49,8 +49,15 @@
 				</alloy:tab>
 			</alloy:accordion>
 		</alloy:panelGroup>
-		<alloy:panelGroup layout="block" styleClass="showcase-container">
-			<ui:insert name="content" />
+		<alloy:panelGroup layout="block">
+			<alloy:panelGroup layout="block" styleClass="showcase-container">
+				<ui:insert name="content" />
+			</alloy:panelGroup>
+			<alloy:panelGroup layout="block" styleClass="showcase-container showcase-info">
+				<alloy:outputText escape="false" value="#{listModelBean.copyrightInfo}" /> <alloy:outputText
+						escape="false" style="float:right;" value="#{listModelBean.dependencyInfo}" />
+			</alloy:panelGroup>
 		</alloy:panelGroup>
 	</alloy:panelGrid>
+
 </ui:composition>

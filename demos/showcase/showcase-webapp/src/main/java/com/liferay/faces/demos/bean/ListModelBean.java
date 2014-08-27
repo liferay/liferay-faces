@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +42,7 @@ import com.liferay.faces.demos.util.CodeExampleUtil;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
@@ -70,6 +72,8 @@ public class ListModelBean {
 	private List<ShowcaseComponent> showcaseComponents;
 	private Map<String, List<ShowcaseComponent>> showcaseCategoryMap;
 	private Map<String, ShowcaseComponent> showcaseComponentMap;
+	private String copyrightInfo;
+	private String dependencyInfo;
 
 	public ListModelBean() {
 
@@ -84,12 +88,15 @@ public class ListModelBean {
 		showcaseCategoryList.add("multimedia");
 		showcaseCategoryList.add("output");
 		showcaseCategoryList.add("panel");
+
 		if ((developmentMode) || (systemTestMode)) {
 			showcaseCategoryList.add("pick");
 		}
+
 		if (LIFERAY_FACES_BRIDGE_DETECTED) {
 			showcaseCategoryList.add("portlet");
 		}
+
 		showcaseCategoryList.add("select");
 
 		this.showcaseComponents = new ArrayList<ShowcaseComponent>();
@@ -170,11 +177,11 @@ public class ListModelBean {
 
 									String sourcePath = File.separator + "component" + File.separator + prefix +
 										File.separator + lowerCaseName + File.separator;
-									
+
 									if (!sourceFileName.toLowerCase().contains("common")) {
 										sourcePath = sourcePath + useCaseName + File.separator;
 									}
-									
+
 									sourcePath = sourcePath + sourceFileName;
 
 									sourceFileURL = startupExternalContext.getResource(sourcePath);
@@ -257,6 +264,40 @@ public class ListModelBean {
 		String key = prefix + StringPool.UNDERLINE + name;
 
 		return showcaseComponentMap.get(key);
+	}
+
+	public String getCopyrightInfo() {
+
+		if (copyrightInfo == null) {
+			copyrightInfo = "Copyright (c) 2000-" + Calendar.getInstance().get(Calendar.YEAR) +
+				" Liferay, Inc. All rights reserved.";
+		}
+
+		return copyrightInfo;
+	}
+
+	public String getDependencyInfo() {
+
+		if (dependencyInfo == null) {
+			StringBuilder buf = new StringBuilder();
+			ProductMap productMap = ProductMap.getInstance();
+			buf.append("Liferay Faces ");
+
+			Product liferayFacesAlloy = productMap.get(ProductConstants.LIFERAY_FACES_ALLOY);
+			String version = liferayFacesAlloy.getVersion();
+			int pos = version.indexOf(StringPool.SPACE);
+
+			if (pos > 0) {
+				version = version.substring(0, pos);
+			}
+
+			buf.append(version);
+			buf.append(" + ");
+			buf.append(productMap.get(ProductConstants.JSF));
+			dependencyInfo = buf.toString();
+		}
+
+		return dependencyInfo;
 	}
 
 	public List<String> getShowcaseCategories() {
