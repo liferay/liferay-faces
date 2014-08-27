@@ -1972,6 +1972,32 @@
 		</tag-extension>
 	</tag>
 	<tag>
+		<description><![CDATA[ImportConstants is a TagHandler which can obtain constants from java for use in EL.]]></description>
+		<tag-name>importConstants</tag-name>
+		<handler-class>com.liferay.faces.alloy.taghandler.ImportConstants</handler-class>
+		<attribute>
+			<description><![CDATA[When true, the imported constants will be cached. Defaults to true.]]></description>
+			<name>cacheable</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The fully qualified name of the class, enum, or interface which the constants are being imported from.]]></description>
+			<name>classType</name>
+			<required>true</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the variable that is to be introduced into the EL representing the map of imported constants.]]></description>
+			<name>var</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
 		<description><![CDATA[InputDate is a UIInput component that renders a textbox and a popup a calendar with selectable dates. The component attepts to automatically convert the submitted value to a Date via a built in DateTimeConverter.]]></description>
 		<tag-name>inputDate</tag-name>
 		<component>
