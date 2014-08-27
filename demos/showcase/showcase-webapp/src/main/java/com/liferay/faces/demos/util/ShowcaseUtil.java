@@ -53,23 +53,23 @@ public class ShowcaseUtil {
 	private static final String LIFERAY_FACES_ALLOY_PACKAGE_PREFIX = "com.liferay.faces.alloy";
 	private static final String LIFERAY_FACES_ALLOY_VERSION = LIFERAY_FACES_ALLOY_PRODUCT.getMajorVersion() +
 		StringPool.PERIOD + LIFERAY_FACES_ALLOY_PRODUCT.getMinorVersion();
-	private static final String LIFERAY_FACES_ALLOY_JAVADOC_BASE_URL = "http://docs.liferay.com/faces/" +
+	private static final String LIFERAY_FACES_ALLOY_JAVADOC_BASE_URL = "http://www.liferayfaces.org/doc/faces/" +
 		LIFERAY_FACES_ALLOY_VERSION + "/javadoc/alloy/";
 	private static final String LIFERAY_FACES_BRIDGE_PACKAGE_PREFIX = "com.liferay.faces.bridge";
 	private static final Product LIFERAY_FACES_BRIDGE_PRODUCT = ProductMap.getInstance().get(
 			ProductConstants.LIFERAY_FACES_BRIDGE);
 	private static final String LIFERAY_FACES_BRIDGE_VERSION = LIFERAY_FACES_BRIDGE_PRODUCT.getMajorVersion() +
 		StringPool.PERIOD + LIFERAY_FACES_BRIDGE_PRODUCT.getMinorVersion();
-	private static final String LIFERAY_FACES_BRIDGE_JAVADOC_BASE_URL = "http://docs.liferay.com/faces/" +
+	private static final String LIFERAY_FACES_BRIDGE_JAVADOC_BASE_URL = "http://www.liferayfaces.org/doc/faces/" +
 		LIFERAY_FACES_BRIDGE_VERSION + "/javadoc/bridge-impl/";
 	private static final Product LIFERAY_FACES_PORTAL_PRODUCT = ProductMap.getInstance().get(
 			ProductConstants.LIFERAY_FACES_PORTAL);
 	private static final String LIFERAY_FACES_PORTAL_PACKAGE_PREFIX = "com.liferay.faces.portal";
 	private static final String LIFERAY_FACES_PORTAL_VERSION = LIFERAY_FACES_PORTAL_PRODUCT.getMajorVersion() +
 		StringPool.PERIOD + LIFERAY_FACES_PORTAL_PRODUCT.getMinorVersion();
-	private static final String LIFERAY_FACES_PORTAL_JAVADOC_BASE_URL = "http://docs.liferay.com/faces/" +
+	private static final String LIFERAY_FACES_PORTAL_JAVADOC_BASE_URL = "http://www.liferayfaces.org/doc/faces/" +
 		LIFERAY_FACES_PORTAL_VERSION + "/javadoc/alloy/";
-	private static final String LIFERAY_FACES_VDLDOC_BASE_URL = "http://docs.liferay.com/faces/" +
+	private static final String LIFERAY_FACES_VDLDOC_BASE_URL = "http://www.liferayfaces.org/doc/faces/" +
 		LIFERAY_FACES_ALLOY_VERSION + "/vdldoc/";
 	private static final String NAMESPACE_PREFIX_ALLOY = "alloy";
 	private static final String NAMESPACE_PREFIX_BRIDGE = "bridge";
