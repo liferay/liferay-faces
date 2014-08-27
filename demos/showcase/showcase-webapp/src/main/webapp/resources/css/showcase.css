@@ -72,7 +72,6 @@
 }
 
 .showcase-example,.showcase-attribute-value,.showcase-parameter-value,.showcase-model-value {
-	padding: 39px 19px 14px;
 	*padding-top: 19px;
 }
 
@@ -84,10 +83,13 @@
 	border-radius: 4px 0 4px 0;
 	color: #9da0a4;
 	font-size: 12px;
-	left: -1px;
 	padding: 3px 7px;
-	position: absolute;
-	top: -1px;
+	float: left;
+}
+
+.example-not-label {
+	clear: both;
+	padding: 7px 19px 14px;
 }
 
 .showcase-example label.example-label span.example-number,.showcase-attribute-value label.attribute-label,.showcase-parameter-value label.parameter-label,.showcase-model-value label.model-label,.showcase-container label.container-label {

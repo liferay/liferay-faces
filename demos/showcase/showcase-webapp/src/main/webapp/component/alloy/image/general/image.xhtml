@@ -6,7 +6,7 @@
 	<ui:define name="col1">
 		<!-- Example 1: Specifying a context-relative path to an image resource via the value attribute -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-image-general-example-1']}" longDescription="true" number="1"
+			<showcase:example description="#{i18n['alloy-image-general-example-1']}" number="1"
 				renderedCheckbox="true">
 				<alloy:image rendered="#{showcaseModelBean.selectedComponent.rendered}"
 					value="/resources/images/liferay-faces-logo.png" />
@@ -17,7 +17,7 @@
 	<ui:define name="col2">
 		<!-- Example 2: Specifying a JSF resource via the #{resource} EL keyword -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-image-general-example-2']}" longDescription="true" number="2">
+			<showcase:example description="#{i18n['alloy-image-general-example-2']}" number="2">
 				<alloy:image value="#{resource['images:liferay-faces-logo.png']}" />
 			</showcase:example>
 		</h:form>
@@ -26,7 +26,7 @@
 	<ui:define name="col3">
 		<!-- Example 3: Specifying a JSF resource via the library and name attributes -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-image-general-example-3']}" longDescription="true" number="3">
+			<showcase:example description="#{i18n['alloy-image-general-example-3']}" number="3">
 				<alloy:image library="images" name="liferay-faces-logo.png" />
 			</showcase:example>
 		</h:form>
@@ -35,7 +35,7 @@
 	<ui:define name="col4">
 		<!-- Example 4: Specifying clickable areas via the usemap attribute -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-image-general-example-4']}" longDescription="true" number="4">
+			<showcase:example description="#{i18n['alloy-image-general-example-4']}" number="4">
 				<alloy:image usemap="#logoMapName" value="/resources/images/liferay-faces-logo.png" />
 				<map name="logoMapName">
 					<area alt="JSR 362" coords="1,1,60,136" href="https://jcp.org/en/jsr/detail?id=362" shape="rect" target="_blank"

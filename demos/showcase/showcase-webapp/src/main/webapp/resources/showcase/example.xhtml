@@ -28,28 +28,26 @@
 					<alloy:outputText escape="false" value=":&amp;nbsp;#{cc.attrs.description}" style="font-weight: normal;"/>
 				</c:if>
 			</alloy:outputLabel>
-			<div style="clear: both;" />
-			<c:if test="#{cc.attrs.longDescription}">
-				<br />
-			</c:if>
-			<c:if test="#{(cc.attrs.renderedCheckbox and (facesContext.application.projectStage != 'Production'))}">
-				<span class="component-rendered-checkbox">
-					<alloy:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.selectedComponent.rendered}">
-						<f:ajax render="@form" />
-					</alloy:selectBooleanCheckbox>
-					<alloy:outputLabel styleClass="inline-label" value="#{i18n['rendered']}" />
-				</span>
-			</c:if>
-			<c:if test="#{cc.attrs.requiredCheckbox}">
-				<span class="component-required-checkbox">
-					<alloy:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.selectedComponent.required}">
-						<f:ajax render="@form" />
-					</alloy:selectBooleanCheckbox>
-					<alloy:outputLabel styleClass="inline-label" value="#{i18n['required']}" />
-				</span>
-			</c:if>
-			<div class="example-usage">
-				<cc:insertChildren />
+			<div class="example-not-label">
+				<c:if test="#{(cc.attrs.renderedCheckbox and (facesContext.application.projectStage != 'Production'))}">
+					<span class="component-rendered-checkbox">
+						<alloy:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.selectedComponent.rendered}">
+							<f:ajax render="@form" />
+						</alloy:selectBooleanCheckbox>
+						<alloy:outputLabel styleClass="inline-label" value="#{i18n['rendered']}" />
+					</span>
+				</c:if>
+				<c:if test="#{cc.attrs.requiredCheckbox}">
+					<span class="component-required-checkbox">
+						<alloy:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.selectedComponent.required}">
+							<f:ajax render="@form" />
+						</alloy:selectBooleanCheckbox>
+						<alloy:outputLabel styleClass="inline-label" value="#{i18n['required']}" />
+					</span>
+				</c:if>
+				<div class="example-usage">
+					<cc:insertChildren />
+				</div>
 			</div>
 		</div>
 	</cc:implementation>
