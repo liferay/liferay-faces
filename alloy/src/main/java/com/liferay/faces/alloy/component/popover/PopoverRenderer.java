@@ -38,6 +38,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 @FacesRenderer(componentFamily = Popover.COMPONENT_FAMILY, rendererType = Popover.RENDERER_TYPE)
 @ResourceDependencies(
 	{
+		@ResourceDependency(library = "liferay-faces-alloy", name = "alloy.css"),
 		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
 		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
 		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")

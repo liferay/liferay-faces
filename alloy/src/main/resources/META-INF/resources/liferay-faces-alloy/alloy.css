@@ -224,3 +224,18 @@ div.yui3-menu > div.yui3-menu-content > ul div.yui3-menu > div.yui3-menu-content
 }
 
 /* End splitButton css */
+
+/* */
+
+div.alloy-dialog {
+	text-align: center;
+}
+
+div.alloy-popover {
+	text-align: center;
+	padding: 6px;
+}
+
+div.alloy-output-tooltip {
+	text-align: center;
+}
