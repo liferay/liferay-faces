@@ -1,69 +1,101 @@
-.alloy-accordion .toggler-content{
-padding:0px 4px;
+/* alloy-accordion */
+.alloy-accordion .toggler-content {
+	padding: 0px 4px;
 }
-.alloy-accordion .toggler-header{
-cursor:pointer;
-font-weight:bold;
-padding:4px;
+
+.alloy-accordion .toggler-header {
+	cursor: pointer;
+	font-weight: bold;
+	padding: 4px;
 }
+
+/* alloy-dialog */
+div.alloy-dialog {
+	text-align: center;
+}
+
+/* alloy-input-file */
 .alloy-input-file .select-files-box,.alloy-input-file .upload-files-box {
-display:inline-block;
+	display: inline-block;
 }
-.aui .alloy-input-file-button-hidden, .alloy-input-file-button-hidden {
-display:none;
+
+.aui .alloy-input-file-button-hidden,.alloy-input-file-button-hidden {
+	display: none;
 }
+
+/* alloy-output-tooltip */
+div.alloy-output-tooltip {
+	text-align: center;
+}
+
+/* alloy-messages */
 .alloy-messages {
-border:1px solid #ddd;
--webkit-border-radius:4px;
--moz-border-radius:4px;
-border-radius:4px;
+	border: 1px solid #ddd;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
+
 table.alloy-messages {
-border-collapse:separate;
-border-spacing:4px;
-width:100%;
+	border-collapse: separate;
+	border-spacing: 4px;
+	width: 100%;
 }
+
 ul.alloy-messages {
-list-style-position:inside;
-margin:0px;
-padding:4px;
+	list-style-position: inside;
+	margin: 0px;
+	padding: 4px;
 }
+
+/* alloy-popover */
+div.alloy-popover {
+	text-align: center;
+	padding: 6px;
+}
+
+/* alloy-select-boolean-checkbox */
 .alloy-select-boolean-checkbox {
-vertical-align:baseline;
+	vertical-align: baseline;
 }
+
+/* alloy-select-one-radio */
 table.alloy-select-one-radio {
-border-collapse:separate;
+	border-collapse: separate;
 }
+
+/* alloy-select-many-checkbox */
 table.alloy-select-many-checkbox td,table.alloy-select-one-radio td {
-padding-right:30px;
+	padding-right: 30px;
 }
+
 table.alloy-select-many-checkbox td input[type='checkbox'] {
-vertical-align:baseline;
+	vertical-align: baseline;
 }
+
 table.alloy-select-many-checkbox td label {
-display:inline;
+	display: inline;
 }
+
 table.alloy-select-many-checkbox td label,table.alloy-select-one-radio td label {
-white-space:nowrap;
+	white-space: nowrap;
 }
 
-/* Start splitButton css */
-
+/* yui3-splitbuttonnav */
 li.yui3-menuitem hr {
 	margin: 2px 0px;
 }
 
-a.yui3-menu-label .alloy-icon, li.yui3-menuitem .alloy-icon {
+a.yui3-menu-label .alloy-icon,li.yui3-menuitem .alloy-icon {
 	margin-right: 4px;
 }
 
-/* remove content placed :after ul(s) to display inline like normal buttons */
+/* yui3-splitbuttonnav: remove content placed :after ul(s) to display inline like normal buttons */
 .yui3-menu-horizontal>div.yui3-menu-content>ul:after {
 	display: none;
 }
 
-/* adjust padding to make splitButtons look like other bootstrap buttons */
-
+/* yui3-splitbuttonnav: adjust padding to make splitButtons look like other bootstrap buttons */
 .yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn {
 	padding: 4px 12px;
 }
@@ -72,18 +104,18 @@ a.yui3-menu-label .alloy-icon, li.yui3-menuitem .alloy-icon {
 	margin-top: 2px;
 }
 
-/* adjust splitButton menus to look more like other overlays such as popovers and dialogs */
+/* yui3-splitbuttonnav: adjust splitButton menus to look more like other overlays such as popovers and dialogs */
 
-/* .yui3-skin-sam .yui3-menu div.yui3-menu-content, remove this to prevent staggering of "button" divs */
+/* yui3-splitbuttonnav: remove this to prevent staggering of "button" divs */
 .yui3-skin-sam .yui3-menu .yui3-menu div.yui3-menu-content {
 	padding: 3px;
 }
 
-div.yui3-menu > div.yui3-menu-content div.yui3-menu > div.yui3-menu-content {
+div.yui3-menu>div.yui3-menu-content div.yui3-menu>div.yui3-menu-content {
 	border: solid 1px #b3b3b3;
 }
 
-div.yui3-menu > div.yui3-menu-content > ul div.yui3-menu > div.yui3-menu-content > ul {
+div.yui3-menu>div.yui3-menu-content>ul div.yui3-menu>div.yui3-menu-content>ul {
 	min-width: 11em;
 }
 
@@ -96,8 +128,7 @@ div.yui3-menu > div.yui3-menu-content > ul div.yui3-menu > div.yui3-menu-content
 	padding: 3px;
 }
 
-/* remove borders */
-
+/* yui3-splitbuttonnav: remove borders */
 .yui3-menu-horizontal div.yui3-menu-content {
 	border: 0;
 }
@@ -106,19 +137,15 @@ div.yui3-menu > div.yui3-menu-content > ul div.yui3-menu > div.yui3-menu-content
 	border: 0;
 }
 
-.yui3-skin-sam a.yui3-menu-content, 
-.yui3-skin-sam .yui3-menu .yui3-menu a.yui3-menu-content {
+.yui3-skin-sam a.yui3-menu-content,.yui3-skin-sam .yui3-menu .yui3-menu a.yui3-menu-content {
 	border: 0;
 }
 
-.yui3-skin-sam .yui3-menu-horizontal a.yui3-menu-label, 
-.yui3-skin-sam .yui3-menu-horizontal span.yui3-menu-label, 
-.yui3-skin-sam .yui3-menu-horizontal a.yui3-menuitem-content {
+.yui3-skin-sam .yui3-menu-horizontal a.yui3-menu-label,.yui3-skin-sam .yui3-menu-horizontal span.yui3-menu-label,.yui3-skin-sam .yui3-menu-horizontal a.yui3-menuitem-content {
 	border: 0;
 }
 
-/* remove negative margin-left values */
-
+/* yui3-splitbuttonnav: remove negative margin-left values */
 .yui3-skin-sam .yui3-splitbuttonnav span.yui3-menu-label-active {
 	margin-left: 0;
 }
@@ -131,8 +158,7 @@ div.yui3-menu > div.yui3-menu-content > ul div.yui3-menu > div.yui3-menu-content
 	margin-left: 0;
 }
 
-/* btn-default have black font all other btn-* have white font */
-
+/* yui3-splitbuttonnav: btn-default have black font all other btn-* have white font */
 .yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn-default {
 	color: #000000;
 }
@@ -161,13 +187,11 @@ div.yui3-menu > div.yui3-menu-content > ul div.yui3-menu > div.yui3-menu-content
 	color: #ffffff;
 }
 
-/* font */
 .yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn {
 	font-weight: normal;
 }
 
-/* button radii ... watch out for script tags! */
-
+/* yui3-splitbuttonnav: button radii ... watch out for script tags! */
 .yui3-skin-sam .yui3-splitbuttonnav .btn-group>script:first-child+a.btn {
 	-webkit-border-top-left-radius: 3px;
 	-moz-border-radius-topleft: 3px;
@@ -195,8 +219,7 @@ div.yui3-menu > div.yui3-menu-content > ul div.yui3-menu > div.yui3-menu-content
 	border-bottom-right-radius: 3px;
 }
 
-/* sizes */
-
+/* yui3-splitbuttonnav: sizes */
 .yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn-large {
 	padding: 11px 19px;
 	font-size: 17.5px;
@@ -212,8 +235,7 @@ div.yui3-menu > div.yui3-menu-content > ul div.yui3-menu > div.yui3-menu-content
 	font-size: 10.5px;
 }
 
-/* disabled */
-
+/* yui3-splitbuttonnav: disabled */
 .yui3-skin-sam .yui3-splitbuttonnav .yui3-menu-label a.btn-disabled {
 	opacity: .65;
 }
@@ -222,5 +244,3 @@ div.yui3-menu > div.yui3-menu-content > ul div.yui3-menu > div.yui3-menu-content
 	float: left;
 	opacity: .65;
 }
-
-/* End splitButton css */
