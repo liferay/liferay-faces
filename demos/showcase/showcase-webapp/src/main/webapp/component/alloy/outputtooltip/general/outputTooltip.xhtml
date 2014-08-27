@@ -23,10 +23,11 @@
 	</ui:define>
 
 	<ui:define name="col3">
-		<!-- Example 3: Specifying children, headerText, opacity="0.5", and styleClass="tooltip-help" -->
+		<!-- Example 3: Specifying children, headerText, opacity="0.5", position="bottom", and styleClass="tooltip-help" -->
 		<showcase:example description="#{i18n['alloy-outputtooltip-general-example-3']}" longDescription="true" number="3">
 			<alloy:outputText id="myText" value="#{i18n['position-mouse-cursor-here']}" />
-			<alloy:outputTooltip for="myText" headerText="#{i18n['header-text']}" opacity="0.5" styleClass="tooltip-help" zIndex="0" >
+			<alloy:outputTooltip for="myText" headerText="#{i18n['header-text']}" opacity="0.5" position="bottom" 
+				styleClass="tooltip-help" zIndex="0" >
 				<alloy:image value="/resources/images/liferay-faces-logo-small.png" />
 			</alloy:outputTooltip>
 		</showcase:example>
