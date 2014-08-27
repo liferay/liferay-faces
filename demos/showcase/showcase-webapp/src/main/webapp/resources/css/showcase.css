@@ -13,6 +13,12 @@
 	*padding-top: 10px;
 }
 
+.aui .showcase-info {
+	margin-top: 2px;
+	font-style: italic;
+	font-size: 0.8em;
+}
+
 .aui .showcase-content-column,.aui .showcase-nav-column {
 	vertical-align: top;
 }
