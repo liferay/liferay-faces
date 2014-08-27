@@ -1232,7 +1232,7 @@
 		parentClass="javax.faces.component.UIOutput" styleable="false"
 		rendererParentClass="com.liferay.faces.alloy.component.outputscriptstylesheet.internal.OutputScriptStylesheetRendererBase">
 		<description>
-			<![CDATA[OutputScript is a UIOutput component that renders an <code>&lt;script&gt;</code> element with <code>type="text/javascript"</code>.]]>
+			<![CDATA[OutputScript is a UIOutput component that renders a <code>&lt;script&gt;</code> element with <code>type="text/javascript"</code>.]]>
 		</description>
 		<attributes>
 			<attribute>

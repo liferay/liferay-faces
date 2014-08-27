@@ -4782,7 +4782,7 @@ java.lang.Object)</method-signature>
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[OutputScript is a UIOutput component that renders an <code>&lt;script&gt;</code> element with <code>type="text/javascript"</code>.]]></description>
+		<description><![CDATA[OutputScript is a UIOutput component that renders a <code>&lt;script&gt;</code> element with <code>type="text/javascript"</code>.]]></description>
 		<tag-name>outputScript</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.outputscript.OutputScript</component-type>
