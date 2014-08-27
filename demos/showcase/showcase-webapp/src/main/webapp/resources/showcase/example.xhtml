@@ -32,7 +32,7 @@
 			<c:if test="#{cc.attrs.longDescription}">
 				<br />
 			</c:if>
-			<c:if test="#{cc.attrs.renderedCheckbox}">
+			<c:if test="#{(cc.attrs.renderedCheckbox and (facesContext.application.projectStage != 'Production'))}">
 				<span class="component-rendered-checkbox">
 					<alloy:selectBooleanCheckbox immediate="true" value="#{showcaseModelBean.selectedComponent.rendered}">
 						<f:ajax render="@form" />
