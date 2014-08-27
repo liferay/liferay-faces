@@ -166,7 +166,14 @@ public class ListModelBean {
 
 								URL sourceFileURL = null;
 
-								if (sourceFileName.endsWith(".js")) {
+								if (sourceFileName.endsWith(".css")) {
+
+									String sourcePath = File.separator + "resources" + File.separator + "css" +
+										File.separator + sourceFileName;
+
+									sourceFileURL = startupExternalContext.getResource(sourcePath);
+								}
+								else if (sourceFileName.endsWith(".js")) {
 
 									String sourcePath = File.separator + "resources" + File.separator + "js" +
 										File.separator + sourceFileName;
