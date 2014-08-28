@@ -1981,6 +1981,108 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="ProgressBar" extendsTags="ClientComponent Styleable UIComponentBase"
+		handlerClass="com.liferay.faces.alloy.component.progressbar.internal.ProgressBarHandler" module="aui-progressbar"
+		parentClass="javax.faces.component.UIComponentBase"
+		rendererParentClass="com.liferay.faces.alloy.render.internal.AlloyRendererBase" yui="true">
+		<description>
+			<![CDATA[ProgressBar is a UIComponent that displays a progress bar.
+				<br />
+				This component includes a client-side JavaScript API which can be accessed using the <code>clientKey</code> attribute and the <code>Liferay.component()</code> method:
+				<ul>
+					<li><code>set()</code> - The <code>set()</code> method can be used to set the client-side value of the component e.g. <code>Liferay.component('progressBar').set('value', value);</code>.</li>
+					<li><code>start()</code> - The <code>start()</code> method begins polling the server for the value of the component.</li>
+					<li><code>stop()</code> - The <code>stop()</code> method ends the component's polling of the server.</li>
+				</ul>]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when an progress has completed. The method must be <code>public</code>, return <code>void</code>, and take an <code>com.liferay.faces.alloy.component.progressbar.ProgressCompleteEvent</code> argument.]]>
+				</description>
+				<name>progressCompleteListener</name>
+				<method-signature>
+					void progressCompleteListener(com.liferay.faces.alloy.component.progressbar.ProgressCompleteEvent)
+				</method-signature>
+				<type>javax.el.MethodExpression</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The the height (in pixels) of the progress bar.]]>
+				</description>
+				<name>height</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The label which appears on the progress bar. The <code>{0}</code> token can be used to include the value in the label.]]>
+				</description>
+				<name>label</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The direction in which the layout of the component should be displayed. Valid values include <code>lineDirection</code> (the default) and <code>pageDirection</code>.]]>
+				</description>
+				<name>layout</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+				<yuiName>orientation</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The maximum value that the progress bar can have. Defaults to 100.]]>
+				</description>
+				<name>maxProgress</name>
+				<type>java.lang.Integer</type>
+				<yui>true</yui>
+				<yuiName>max</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The minimum value that the progress bar can have. Defaults to 0.]]>
+				</description>
+				<name>minProgress</name>
+				<type>java.lang.Integer</type>
+				<yui>true</yui>
+				<yuiName>min</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Client-side javascript to be executed when progress has completed.]]>
+				</description>
+				<name>oncomplete</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>3000</defaultValue>
+				<description>
+					<![CDATA[The delay (in milliseconds) before dispatching a polling Ajax request after recieving the response of a previous request. Defaults to 3000.]]>
+				</description>
+				<name>pollingDelay</name>
+				<type>java.lang.Integer</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The the width (in pixels) of the progress bar.]]>
+				</description>
+				<name>width</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<defaultValue>0</defaultValue>
+				<description>
+					<![CDATA[The value of this component, which is typically bound via EL to a model bean property. Defaults to 0.]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.Integer</type>
+				<yui>true</yui>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="Row" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIPanel">
 		<description>
 			<![CDATA[Row is a UIPanel component that renders a <code>&lt;div&gt;</code> and is designed to be used in conjunction with alloy:column child component tags.]]>
@@ -2015,7 +2117,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The direction in which the layout of the component should go. The default value is 'lineDirection'.]]>
+					<![CDATA[The direction in which the layout of the component should be displayed. Valid values include <code>lineDirection</code> (the default) and <code>pageDirection</code>.]]>
 				</description>
 				<name>layout</name>
 				<type>java.lang.String</type>
@@ -2099,7 +2201,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The direction in which the layout of the component should be displayed. The default value is 'lineDirection'.]]>
+					<![CDATA[The direction in which the layout of the component should be displayed. Valid values include <code>lineDirection</code> (the default) and <code>pageDirection</code>.]]>
 				</description>
 				<name>layout</name>
 				<type>java.lang.String</type>

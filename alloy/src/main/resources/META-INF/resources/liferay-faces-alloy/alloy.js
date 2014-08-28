@@ -6,6 +6,8 @@ var LFA = {
 
 var LFAI = {
 
+	TOKEN_REGEX: new RegExp('\\{0\\}'),
+
 	// This is a replacement function for the timePicker's built-in private _setValues() method. Since the values have been
 	// processed and formatted server-side, this function simply passes values through to the autocomplete without
 	// processing them.
@@ -247,5 +249,78 @@ var LFAI = {
 		if (selectable && valueChangeClientBehaviors) {
 			inputNode.simulate('change');
 		}
+	},
+
+	initProgressBarServerMode: function(progressBar, clientId, pollingDelay, clientBehaviorsForPolling) {
+
+		var hiddenClientId = clientId + '_hidden';
+
+		// Define the start() method for progressBar which starts polling the server for progress.
+		progressBar.startPolling = function() {
+
+			var hiddenInput = document.getElementById(hiddenClientId),
+			value = progressBar.get('value'),
+			max = progressBar.get('max');
+
+			// If the component is rendered and the component is not already polling and the component has not reached
+			// the maximum value, then begin polling.
+			if (hiddenInput && (hiddenInput.value !== 'true') && (value < max)) {
+
+				hiddenInput.value = 'true';
+
+				setTimeout(function poll() {
+
+					setTimeout(function () {
+
+						// Redefine hiddenInput and value because each time this function is run, current data
+						// needs to be used.
+						var hiddenInput = document.getElementById(hiddenClientId);
+
+						// If the component is still rendered and hasn't completed polling, poll the server for
+						// the current progress.
+						if (hiddenInput && hiddenInput.value === 'true') {
+							clientBehaviorsForPolling(poll);
+						}
+					}, pollingDelay);
+				}, pollingDelay);
+			}
+		};
+
+		// Define the stop() method for progressBar which stops polling the server for progress.
+		progressBar.stopPolling = function() {
+
+			var hiddenInput = document.getElementById(hiddenClientId);
+
+			if (hiddenInput) {
+				hiddenInput.value = '';
+			}
+		};
+
+		// Stop polling if the progressBar is being destroyed.
+		progressBar.on('destroy', progressBar.stopPolling);
+
+		// Stop polling if the progress has completed.
+		progressBar.on('complete', progressBar.stopPolling);
+	},
+
+	setProgressBarServerValue: function(hiddenClientId, progressBar, value) {
+
+		var hiddenInput = document.getElementById(hiddenClientId);
+
+		if (hiddenInput && hiddenInput.value === 'true') {
+			progressBar.set('value', value);
+		}
+	},
+
+	// Initilize a consistent API for progressBar when ajax is not enabled.
+	initProgressBarClientMode: function(progressBar) {
+
+		progressBar.startPolling = function() {
+			// no-op
+		};
+
+		progressBar.stopPolling = function() {
+			// no-op
+		};
 	}
 };
