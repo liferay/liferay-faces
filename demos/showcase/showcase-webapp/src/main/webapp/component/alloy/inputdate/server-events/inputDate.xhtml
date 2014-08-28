@@ -6,17 +6,14 @@
 	<ui:define name="col1">
 		<h:form>
 			<showcase:example>
-				<alloy:inputText id="birthday" value="#{pickDateModelBean.birthday}">
-					<f:convertDateTime pattern="MM/dd/yyyy" />
-				</alloy:inputText>
-				<alloy:pickDate datePattern="MM/dd/yyyy" for="birthday" />
-				<hr />
-				<alloy:commandButton value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:messages globalOnly="true" layout="table" />
+				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy"
+					dateSelectListener="#{inputDateBackingBean.dateSelectListener}" value="#{inputDateModelBean.birthday}">
+					<f:ajax event="dateSelect" render="@form" />
+				</alloy:inputDate>
 			</showcase:example>
 			<showcase:outputModel>
-				<alloy:outputText id="modelValue" value="#{pickDateModelBean.birthday}">
+				<alloy:outputText value="#{inputDateModelBean.birthday}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</alloy:outputText>
 			</showcase:outputModel>

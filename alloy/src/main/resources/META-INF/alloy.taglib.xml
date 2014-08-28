@@ -2003,6 +2003,7 @@
 		<component>
 			<component-type>com.liferay.faces.alloy.component.inputdate.InputDate</component-type>
 			<renderer-type>com.liferay.faces.alloy.component.inputdate.InputDateRenderer</renderer-type>
+			<handler-class>com.liferay.faces.alloy.component.inputdate.InputDateHandler</handler-class>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -2059,6 +2060,13 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[A method that is executed when an date is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>com.liferay.faces.alloy.component.inputdate.InputDateEvent</code> argument.]]></description>
+			<name>dateSelectListener</name>
+			<required>false</required>
+			<type>javax.el.MethodExpression</type>
+			<method-signature>void dateSelectListener(com.liferay.faces.alloy.component.inputdate.DateSelectEvent)</method-signature>
+		</attribute>
+		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
 			<name>dir</name>
 			<required>false</required>
@@ -2095,7 +2103,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the pickDate.]]></description>
+			<description><![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the popup calendar.]]></description>
 			<name>locale</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
@@ -2269,7 +2277,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The time zone of the component (defaults to "Greenwich").]]></description>
+			<description><![CDATA[The time zone of the component (defaults to "Greenwich"). This attribute is used to determine the time zone of <code>java.text.SimpleDateFormat</code> which is used to parse the <code>minimumDate</code> and <code>maximumDate</code> attributes. If <code>minimumDate</code> and maximumDate</code> are not Strings or are unused, it is not necessary to set this attribute.]]></description>
 			<name>timeZone</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -5462,119 +5470,6 @@ java.lang.Object)</method-signature>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
-		</attribute>
-		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
-		</tag-extension>
-	</tag>
-	<tag>
-		<description><![CDATA[PickDate is a UIComponent that renders a popup a calendar with selectable dates.]]></description>
-		<tag-name>pickDate</tag-name>
-		<component>
-			<component-type>com.liferay.faces.alloy.component.pickdate.PickDate</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.pickdate.PickDateRenderer</renderer-type>
-		</component>
-		<attribute>
-			<description><![CDATA[When this flag is true, the component will hide when a date is selected. The default value is true.]]></description>
-			<name>autoHide</name>
-			<required>false</required>
-			<type>java.lang.Boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
-			<name>binding</name>
-			<required>false</required>
-			<type>javax.faces.component.UIComponent</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
-			<name>clientKey</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]></description>
-			<name>datePattern</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Specifies the character or string which seperates the dates when multiple selection is used.]]></description>
-			<name>dateSeparator</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The id of the component that the pickDate will be triggered by. If trigger is specified, this value is unused.]]></description>
-			<name>for</name>
-			<required>true</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[A unique identifier for this component.]]></description>
-			<name>id</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the pickDate.]]></description>
-			<name>locale</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The maximum date that can be selected by the user. This attribute can be of type <code>java.lang.String</code> or <code>java.util.Date</code>.]]></description>
-			<name>maximumDate</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The minimum date that can be selected by the user. This attribute can be of type <code>java.lang.String</code> or <code>java.util.Date</code>.]]></description>
-			<name>minimumDate</name>
-			<required>false</required>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The number of month panes shown in the popup calendar. Valid values are 1 (the default), 2, and 3.]]></description>
-			<name>panes</name>
-			<required>false</required>
-			<type>java.lang.Integer</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
-			<name>rendered</name>
-			<required>false</required>
-			<type>boolean</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Specifies the date selection style. Valid values include <code>single</code> (the default), <code>multiple,</code> or <code>multiple-sticky.</code>]]></description>
-			<name>selectionMode</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
-			<name>style</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
-			<name>styleClass</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The time zone of the component (defaults to "Greenwich"). This attribute is used to determine the time zone of <code>java.text.SimpleDateFormat</code> which is used to parse the <code>minimumDate</code> and <code>maximumDate</code> attributes. If <code>minimumDate</code> and maximumDate</code> are not Strings or are unused, it is not necessary to set this attribute.]]></description>
-			<name>timeZone</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[Specifies the stack order of the component. The default value is a constant from the Liferay.zIndex JavaScript object.]]></description>
-			<name>zIndex</name>
-			<required>false</required>
-			<type>java.lang.Integer</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
