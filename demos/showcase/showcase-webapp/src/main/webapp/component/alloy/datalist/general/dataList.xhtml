@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" 
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<h:form id="dataListForm">
+			<showcase:example id="dataListExample" description="#{i18n['alloy-datalist-general-example-1']}" number="1"
+				renderedCheckbox="true">
+				<alloy:dataList rendered="#{showcaseModelBean.selectedComponent.rendered}">
+					<alloy:dataItem>
+						<span>Liferay lets you reuse the enterprise software and skills you already have in-house.</span>
+					</alloy:dataItem>
+					<alloy:dataItem>
+						<span>Liferay is designed for scalability, reliablity, and high performance both on-premise and in the cloud.</span>
+					</alloy:dataItem>
+					<alloy:dataItem>
+						<span>Liferay is designed for integrating with both enterprise systems and web-based resources.</span>
+					</alloy:dataItem>
+					<alloy:dataItem>
+						<span>With Liferay, projects are completed faster and with smaller budgets so you can see immediate results.</span>
+					</alloy:dataItem>
+					<alloy:dataItem>
+						<span>Our open source community fosters innovation, increase security, and improves quality of the software.</span>
+					</alloy:dataItem>
+				</alloy:dataList>
+			</showcase:example>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="col2">
+		<showcase:example id="dataListExample2" description="#{i18n['alloy-datalist-general-example-2']}" number="2">
+			<h:form id="dataListForm2">	
+				<alloy:dataList type="ordered">
+			        <f:facet name="header">#{i18n['ordered-list']}</f:facet>
+			        <alloy:dataItem>
+						<span>Liferay lets you reuse the enterprise software and skills you already have in-house.</span>
+					</alloy:dataItem>
+					<alloy:dataItem>
+						<span>Liferay is designed for scalability, reliablity, and high performance both on-premise and in the cloud.</span>
+					</alloy:dataItem>
+					<alloy:dataItem>
+						<span>Liferay is designed for integrating with both enterprise systems and web-based resources.</span>
+					</alloy:dataItem>
+					<alloy:dataItem>
+						<span>With Liferay, projects are completed faster and with smaller budgets so you can see immediate results.</span>
+					</alloy:dataItem>
+					<alloy:dataItem>
+						<span>Our open source community fosters innovation, increase security, and improves quality of the software.</span>
+					</alloy:dataItem>
+			    </alloy:dataList>
+			</h:form>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

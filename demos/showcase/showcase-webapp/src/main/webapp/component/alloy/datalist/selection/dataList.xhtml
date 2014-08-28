@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" 
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<showcase:example id="dataListExample">
+			<h:form id="dataListForm">
+				<alloy:dataList value="#{dataListModelBean.liferayBenefits}" var="liferayBenefit">
+			        <f:facet name="header">#{i18n['unordered-list']}</f:facet>
+			        <alloy:dataItem>
+			        	<alloy:commandLink onclick="Liferay.component('dialogKey').show()" value="#{liferayBenefit}">
+			        		<f:setPropertyActionListener value="#{liferayBenefit}" 
+			        			target="#{dataListModelBean.selectedLiferayBenefit}" />
+							<alloy:icon name="search" />
+							<alloy:outputText value=" #{liferayBenefit.label}" />
+							<!-- :dataListExample:dataListForm:dialogId -->
+							<f:ajax execute="@form" render=":dataListExample:dataListForm:panelGroupId" />
+						</alloy:commandLink>
+			        </alloy:dataItem>
+			    </alloy:dataList>
+			    <alloy:dialog headerText="#{i18n['more-info']}" clientKey="dialogKey" dismissible="true">
+			    	<alloy:panelGroup id="panelGroupId" >
+						<br />
+						<alloy:outputText value="#{dataListModelBean.selectedLiferayBenefit.label}: #{dataListModelBean.selectedLiferayBenefit.description}" />
+					</alloy:panelGroup>
+				</alloy:dialog>
+			</h:form>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

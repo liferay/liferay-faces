@@ -533,6 +533,27 @@
 			<![CDATA[CommandLink is a UICommand component that renders an HTML <code>&lt;a&gt;</code> element. Since it extends HtmlCommandLink, it supports all the features of h:commandLink. The component must be a child of h:form in order to trigger the action or actionListener.]]>
 		</description>
 	</component>
+	<component name="DataItem" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIColumn">
+		<description>
+			<![CDATA[A dataItem is a panel component that renders content within itself.]]>
+		</description>
+	</component>
+	<component name="DataList" extendsTags="Styleable UIData UIComponentBase"
+		parentClass="javax.faces.component.UIData" >
+		<description>
+			<![CDATA[DataList is a UIData (iterator) component that renders data in a list layout.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<defaultValue>"unordered"</defaultValue>
+				<description>
+					<![CDATA[The type of the list to render.  Valid values are "unordered", "ordered" and "description".  The default is "unordered".]]>
+				</description>
+				<name>type</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="DataTable" extendsTags="ClientComponent UIData HTMLCommonEvents HTMLPassthrough HTMLTable"
 		module="aui-datatable" parentClass="javax.faces.component.html.HtmlDataTable" rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase"
 		yui="true">
