@@ -3,15 +3,7 @@ var LFA = { escapeClientId : function(clientId) {
 } };
 
 var LFAI = {
-	getAccordionEventTabIndex : function(event, clientKey) {
-		var togglerDelegate = Liferay.component(clientKey), togglers = togglerDelegate.items, total = togglers.length, i = 0;
-		for (i = 0; i < total; i++) {
-			if (togglers[i] == event.target) {
-				return i;
-			}
-		}
-		return -1;
-	},
+
 	initPreviewUploader : function(A, contentTypes, clientId, maxFileSize) {
 
 		var contentTypeArray = A.Array(contentTypes), escapedClientId = LFA.escapeClientId(clientId), uploadComplete = false;
@@ -133,4 +125,5 @@ var LFAI = {
 								}
 							});
 		}
-	} }
+	}
+};
