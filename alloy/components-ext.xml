@@ -132,38 +132,6 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="DateCommon" generateJava="false" generateTaglibXML="false">
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the pickDate.]]>
-				</description>
-				<name>locale</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The maximum date that can be selected by the user. This attribute can be of type <code>java.lang.String</code> or <code>java.util.Date</code>.]]>
-				</description>
-				<name>maximumDate</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The minimum date that can be selected by the user. This attribute can be of type <code>java.lang.String</code> or <code>java.util.Date</code>.]]>
-				</description>
-				<name>minimumDate</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Specifies the stack order of the component. The default value is a constant from the Liferay.zIndex JavaScript object.]]>
-				</description>
-				<name>zIndex</name>
-				<type>java.lang.Integer</type>
-			</attribute>
-		</attributes>
-	</component>
 	<component name="InputCommon" extendsTags="HTMLAccessibilityEvents HTMLInputEvents StyleableInherited"
 		generateJava="false" generateTaglibXML="false">
 		<attributes>
@@ -917,8 +885,11 @@
 			</attribute>
 		</attributes>
 	</component>
-<component name="InputDate" extendsTags="DateCommon InputText" parentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeBase"
-		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRendererBase">
+	<component name="InputDate" extendsTags="InputText"
+		handlerClass="com.liferay.faces.alloy.component.inputdate.InputDateHandler"
+		parentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeBase"
+		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRendererBase"
+		module="aui-datepicker" yui="true" yuiName="DatePicker">
 		<description>
 			<![CDATA[InputDate is a UIInput component that renders a textbox and a popup a calendar with selectable dates. The component attepts to automatically convert the submitted value to a Date via a built in DateTimeConverter.]]>
 		</description>
@@ -929,6 +900,7 @@
 				</description>
 				<name>autoHide</name>
 				<type>java.lang.Boolean</type>
+				<yui>true</yui>
 			</attribute>
 			<attribute>
 				<description>
@@ -943,6 +915,39 @@
 				</description>
 				<name>datePattern</name>
 				<type>java.lang.String</type>
+				<yui>true</yui>
+				<yuiName>mask</yuiName>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when an date is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>com.liferay.faces.alloy.component.inputdate.InputDateEvent</code> argument.]]>
+				</description>
+				<name>dateSelectListener</name>
+				<method-signature>
+					void dateSelectListener(com.liferay.faces.alloy.component.inputdate.DateSelectEvent)
+				</method-signature>
+				<type>javax.el.MethodExpression</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the popup calendar.]]>
+				</description>
+				<name>locale</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The maximum date that can be selected by the user. This attribute can be of type <code>java.lang.String</code> or <code>java.util.Date</code>.]]>
+				</description>
+				<name>maximumDate</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The minimum date that can be selected by the user. This attribute can be of type <code>java.lang.String</code> or <code>java.util.Date</code>.]]>
+				</description>
+				<name>minimumDate</name>
+				<type>java.lang.Object</type>
 			</attribute>
 			<attribute>
 				<description>
@@ -950,6 +955,7 @@
 				</description>
 				<name>panes</name>
 				<type>java.lang.Integer</type>
+				<yui>true</yui>
 			</attribute>
 			<attribute>
 				<description>
@@ -961,10 +967,17 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The time zone of the component (defaults to "Greenwich").]]>
+					<![CDATA[The time zone of the component (defaults to "Greenwich"). This attribute is used to determine the time zone of <code>java.text.SimpleDateFormat</code> which is used to parse the <code>minimumDate</code> and <code>maximumDate</code> attributes. If <code>minimumDate</code> and maximumDate</code> are not Strings or are unused, it is not necessary to set this attribute.]]>
 				</description>
 				<name>timeZone</name>
 				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the stack order of the component. The default value is a constant from the Liferay.zIndex JavaScript object.]]>
+				</description>
+				<name>zIndex</name>
+				<type>java.lang.Integer</type>
 			</attribute>
 		</attributes>
 	</component>
@@ -1446,72 +1459,6 @@
 				<name>layout</name>
 				<type>java.lang.String</type>
 				<generateJava>false</generateJava>
-			</attribute>
-		</attributes>
-	</component>
-	<component name="PickDate" extendsTags="ClientComponent DateCommon Styleable UIComponentBase" module="aui-datepicker"
-		yui="true" yuiName="DatePicker">
-		<description>
-			<![CDATA[PickDate is a UIComponent that renders a popup a calendar with selectable dates.]]>
-		</description>
-		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, the component will hide when a date is selected. The default value is true.]]>
-				</description>
-				<name>autoHide</name>
-				<type>java.lang.Boolean</type>
-				<yui>true</yui>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]>
-				</description>
-				<name>datePattern</name>
-				<type>java.lang.String</type>
-				<yui>true</yui>
-				<yuiName>mask</yuiName>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Specifies the character or string which seperates the dates when multiple selection is used.]]>
-				</description>
-				<name>dateSeparator</name>
-				<type>java.lang.String</type>
-				<yui>true</yui>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The id of the component that the pickDate will be triggered by. If trigger is specified, this value is unused.]]>
-				</description>
-				<name>for</name>
-				<required>true</required>
-				<type>java.lang.String</type>
-				<yui>true</yui>
-				<yuiName>trigger</yuiName>
-				<yuiType>ClientId</yuiType>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The number of month panes shown in the popup calendar. Valid values are 1 (the default), 2, and 3.]]>
-				</description>
-				<name>panes</name>
-				<type>java.lang.Integer</type>
-				<yui>true</yui>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Specifies the date selection style. Valid values include <code>single</code> (the default), <code>multiple,</code> or <code>multiple-sticky.</code>]]>
-				</description>
-				<name>selectionMode</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The time zone of the component (defaults to "Greenwich"). This attribute is used to determine the time zone of <code>java.text.SimpleDateFormat</code> which is used to parse the <code>minimumDate</code> and <code>maximumDate</code> attributes. If <code>minimumDate</code> and maximumDate</code> are not Strings or are unused, it is not necessary to set this attribute.]]>
-				</description>
-				<name>timeZone</name>
-				<type>java.lang.String</type>
 			</attribute>
 		</attributes>
 	</component>
