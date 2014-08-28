@@ -214,13 +214,15 @@ public class AccordionRenderer extends AccordionRendererBase {
 		responseWriter.write("for(var i=0;i<totalTogglers;i++)");
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
-		// var eventTabIndex = LFAI.getAccordionEventTabIndex(event,'clientKey');
 		StringBuffer behaviorCallback = new StringBuffer();
-		behaviorCallback.append("var eventTabIndex=LFAI.getAccordionEventTabIndex(event,'");
-		behaviorCallback.append(clientKey);
-		behaviorCallback.append(StringPool.APOSTROPHE);
-		behaviorCallback.append(StringPool.CLOSE_PARENTHESIS);
-		behaviorCallback.append(StringPool.SEMICOLON);
+//		var eventTabIndex = 0, togglers = j_idt23.items, total = togglers.length, i = 0;
+//		for (i = 0; i < total; i++) {
+//			if (togglers[i] == event.target) {
+//				eventTabIndex = i;
+//			}
+//		};
+		behaviorCallback.append("var eventTabIndex=0, togglers=" + clientVarName + ".items, total=togglers.length, i=0;");
+		behaviorCallback.append("for (i = 0; i < total; i++) { if (togglers[i] == event.target) { eventTabIndex=i; } };");
 
 		// var hidden = document.getElementById('clientId:selectedIndex');
 		String hiddenFieldId = clientId + SELECTED_INDEX;
