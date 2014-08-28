@@ -5,7 +5,8 @@
 	<h:form>
 		<showcase:example styleClass="editableAceEditor">
 			<alloy:outputLabel styleClass="alloy-output-label" for="inputSourceCode" value="#{i18n['source-code']}" />
-			<alloy:inputSourceCode id="inputSourceCode" height="100" mode="xml" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+			<alloy:inputSourceCode id="inputSourceCode" height="100" mode="xml"
+				rendered="#{showcaseModelBean.selectedComponent.rendered}"
 				required="#{showcaseModelBean.selectedComponent.required}" value="#{inputSourceCodeModelBean.sourceText}" />
 			<alloy:message for="inputSourceCode" />
 			<hr />

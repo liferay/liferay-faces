@@ -8,8 +8,7 @@
 			<showcase:example renderedCheckbox="true" requiredCheckbox="true">
 				<alloy:field label="#{i18n['favorite-liferay-benefit']}">
 					<alloy:selectManyListbox id="selectManyListbox" rendered="#{showcaseModelBean.selectedComponent.rendered}"
-						required="#{showcaseModelBean.selectedComponent.required}"
-						value="#{selectManyModelBean.favoriteIds}">
+						required="#{showcaseModelBean.selectedComponent.required}" value="#{selectManyModelBean.favoriteIds}">
 						<f:selectItem itemLabel="-- Select --" noSelectionOption="true" />
 						<f:selectItem itemLabel="Compatible" itemValue="1" />
 						<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
@@ -26,7 +25,8 @@
 			</showcase:example>
 			<showcase:outputModel>
 				<ui:repeat id="modelValue" value="#{selectManyModelBean.favoriteIds}" var="favoriteId">
-					<alloy:outputText value="#{favoriteId}" /><br />
+					<alloy:outputText value="#{favoriteId}" />
+					<br />
 				</ui:repeat>
 			</showcase:outputModel>
 		</h:form>

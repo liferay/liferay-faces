@@ -6,8 +6,7 @@
 	<ui:define name="col1">
 		<alloy:form enctype="multipart/form-data">
 			<showcase:example>
-				<alloy:inputFile fileUploadListener="#{inputFileBackingBean.handleFileUpload}"
-					multiple="multiple" />
+				<alloy:inputFile fileUploadListener="#{inputFileBackingBean.handleFileUpload}" multiple="multiple" />
 				<hr />
 				<h:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
