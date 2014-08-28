@@ -6,8 +6,7 @@
 	<ui:define name="col1">
 		<!-- Example 1: Styling via children -->
 		<h:form>
-			<showcase:example description="#{i18n['alloy-commandlink-general-example-1']}" number="1" 
-				renderedCheckbox="true">
+			<showcase:example description="#{i18n['alloy-commandlink-general-example-1']}" number="1" renderedCheckbox="true">
 				<alloy:commandLink rendered="#{showcaseModelBean.selectedComponent.rendered}">
 					<alloy:icon name="star" />
 					<alloy:outputText value=" #{i18n['text-for-a-link']} " />

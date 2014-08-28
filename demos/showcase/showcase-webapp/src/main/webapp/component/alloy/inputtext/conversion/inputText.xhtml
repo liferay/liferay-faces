@@ -13,8 +13,8 @@
 				<alloy:message for="text" />
 				<hr />
 				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
-				<f:ajax execute="@form" render="@form" />
-			</alloy:commandButton>
+					<f:ajax execute="@form" render="@form" />
+				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" converter="javax.faces.DateTime" value="#{inputTextModelBean.date}" />
@@ -26,8 +26,7 @@
 		<!-- Example 2: Conversion to a Date using an f:converter child tag. -->
 		<h:form>
 			<showcase:example description="#{i18n['conversion-to-a-date-using-f-convertdatetime']}" number="2">
-				<alloy:inputText id="text" converterMessage="#{i18n['converter-message']}"
-					value="#{inputTextModelBean.date}">
+				<alloy:inputText id="text" converterMessage="#{i18n['converter-message']}" value="#{inputTextModelBean.date}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</alloy:inputText>
 				<br />

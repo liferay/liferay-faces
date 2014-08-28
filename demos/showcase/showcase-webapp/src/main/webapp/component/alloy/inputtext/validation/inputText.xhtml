@@ -25,8 +25,7 @@
 		<!-- Example 2: Validating an email address using an f:validateRegex child tag. -->
 		<h:form>
 			<showcase:example description="#{i18n['validating-an-email-address-using-f-validateregex']}" number="2">
-				<alloy:inputText id="text" validatorMessage="#{i18n['validator-message']}"
-					value="#{inputTextModelBean.text}">
+				<alloy:inputText id="text" validatorMessage="#{i18n['validator-message']}" value="#{inputTextModelBean.text}">
 					<f:validateRegex pattern=".+[@].+[.].+" />
 				</alloy:inputText>
 				<alloy:message for="text" />
