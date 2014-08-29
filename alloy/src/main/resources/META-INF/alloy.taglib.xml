@@ -888,6 +888,106 @@
 		</tag-extension>
 	</tag>
 	<tag>
+		<description><![CDATA[DataItem is a UIColumn component component that is designed to be used as a child of DataList and renders its children inside a <code>&lt;li&gt;</code> or <code>&lt;dt&gt;</code> element.]]></description>
+		<tag-name>dataItem</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.dataitem.DataItem</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.dataitem.DataItemRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[DataList is a UIData (iterator) component that renders <code>&lt;ul&gt;</code> (unordered), <code>&lt;ol&gt;</code> (ordered), or <code>&lt;dl&gt;</code> (description) lists.]]></description>
+		<tag-name>dataList</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.datalist.DataList</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.datalist.DataListRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The type of the list to render. Valid values are "unordered", "ordered" and "description". The default is "unordered".]]></description>
+			<name>type</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property. The value can be any of the following types:<ul><li>Any concrete subclass of <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/DataModel.html" target="_blank"><code>DataModel</code></a></li><li>Array (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ArrayDataModel.html" target="_blank"><code>ArrayDataModel</code></a>)</li><li>java.util.Collection (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/CollectionDataModel.html" target="_blank"><code>CollectionDataModel</code></a>)</li><li>java.util.List (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ListDataModel.html" target="_blank"><code>ListDataModel</code></a>)</li><li>java.sql.ResultSet (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ResultSetDataModel.html" target="_blank"><code>ResultSetDataModel</code></a>)</li></ul>]]></description>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the variable that is to be introduced into the EL representing the current iteration.]]></description>
+			<name>var</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
 		<description><![CDATA[DataTable is a UIData (iterator) component that renders a <code>&lt;table&gt;</code> element representing tabular data. Since it extends HtmlDataTable, it supports all the features of h:dataTable.]]></description>
 		<tag-name>dataTable</tag-name>
 		<component>
