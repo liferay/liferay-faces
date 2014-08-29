@@ -4,8 +4,7 @@
 	template="/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
-		<!-- Example 1: Specifying focus (the default) for the showOn attribute pops up the calendar when the -->
-		<!-- textbox receives focus. -->
+		<!--  Example 2: Specifying showOn="focus" (the default) -->
 		<h:form>
 			<showcase:example description="#{i18n['alloy-inputdate-general-example-1']}" number="1" renderedCheckbox="true"
 				requiredCheckbox="true">
@@ -28,7 +27,7 @@
 	</ui:define>
 
 	<ui:define name="col2">
-		<!-- Example 2: Specifying button for the showOn attribute pops up the calendar when the button is clicked. -->
+		<!-- Example 2: Specifying showOn="button" -->
 		<h:form>
 			<showcase:example description="#{i18n['alloy-inputdate-general-example-2']}" number="2" renderedCheckbox="true">
 				<alloy:field label="#{i18n['birthday']}">
@@ -50,8 +49,7 @@
 	</ui:define>
 
 	<ui:define name="col3">
-		<!-- Example#3: Specifying both for the showOn attribute pops up the calendar when the textbox receives -->
-		<!-- focus and when the button is clicked. -->
+		<!-- Example 2: Specifying showOn="both" -->
 		<h:form>
 			<showcase:example description="#{i18n['alloy-inputdate-general-example-3']}" number="3" renderedCheckbox="true">
 				<alloy:field label="#{i18n['birthday']}">
