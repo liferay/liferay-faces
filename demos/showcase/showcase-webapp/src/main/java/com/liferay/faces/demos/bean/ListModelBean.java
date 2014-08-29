@@ -83,6 +83,9 @@ public class ListModelBean {
 		showcaseCategoryList = new ArrayList<String>();
 		showcaseCategoryList.add("buttonlink");
 		showcaseCategoryList.add("data");
+		showcaseCategoryList.add("jstl");
+		showcaseCategoryList.add("facescore");
+		showcaseCategoryList.add("facelets");
 		showcaseCategoryList.add("input");
 		showcaseCategoryList.add("misc");
 		showcaseCategoryList.add("multimedia");
@@ -108,6 +111,9 @@ public class ListModelBean {
 			namespaces.add("bridge");
 		}
 
+		namespaces.add("c");
+		namespaces.add("f");
+
 		if ((developmentMode) || (systemTestMode)) {
 			namespaces.add("h");
 		}
@@ -119,6 +125,8 @@ public class ListModelBean {
 		if (LIFERAY_FACES_BRIDGE_DETECTED) {
 			namespaces.add("portlet");
 		}
+
+		namespaces.add("ui");
 
 		for (String namespace : namespaces) {
 
