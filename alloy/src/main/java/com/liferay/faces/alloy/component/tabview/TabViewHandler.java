@@ -23,7 +23,7 @@ import javax.faces.view.facelets.Metadata;
 import javax.faces.view.facelets.MetadataTarget;
 import javax.faces.view.facelets.TagAttribute;
 
-import com.liferay.faces.alloy.component.tab.TabEvent;
+import com.liferay.faces.alloy.component.tab.TabSelectEvent;
 import com.liferay.faces.util.view.facelets.MethodMetadata;
 
 
@@ -54,9 +54,9 @@ public class TabViewHandler extends ComponentHandler {
 
 			if ((metadataTarget != null) && (metadataTarget.isTargetInstanceOf(TabView.class))) {
 
-				if (TabViewRenderer.TAB_EVENT_LISTENER.equals(name)) {
+				if (TabViewRenderer.TAB_SELECT_LISTENER.equals(name)) {
 					Method writeMethod = metadataTarget.getWriteMethod(name);
-					Class<?>[] args = new Class[] { TabEvent.class };
+					Class<?>[] args = new Class[] { TabSelectEvent.class };
 					metadata = new MethodMetadata(tagAttribute, writeMethod, args);
 				}
 			}

@@ -15,30 +15,27 @@ package com.liferay.faces.alloy.component.tab;
 
 import javax.faces.component.UIComponent;
 import javax.faces.component.behavior.Behavior;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.PhaseId;
-
-import com.liferay.faces.util.event.NamedAjaxBehaviorEvent;
 
 
 /**
  * @author  Neil Griffin
  */
-public class TabEvent extends NamedAjaxBehaviorEvent {
+public class TabExpandEvent extends AjaxBehaviorEvent {
 
 	// Public Constants
-	public static final String TAB_COLLAPSED = "tabCollapsed";
-	public static final String TAB_EXPANDED = "tabExpanded";
-	public static final String TAB_SELECTED = "tabSelected";
+	public static final String TAB_EXPAND = "tabExpand";
 
 	// serialVersionUID
-	private static final long serialVersionUID = 8882538970972516549L;
+	private static final long serialVersionUID = 7530214208373071187L;
 
 	// Private Data Members
 	private Object rowData;
 	private Tab tab;
 
-	public TabEvent(UIComponent component, Behavior behavior, String name, Tab tab, Object rowData) {
-		super(component, behavior, name);
+	public TabExpandEvent(UIComponent component, Behavior behavior, Tab tab, Object rowData) {
+		super(component, behavior);
 		this.tab = tab;
 		this.rowData = rowData;
 		setPhaseId(PhaseId.APPLY_REQUEST_VALUES);

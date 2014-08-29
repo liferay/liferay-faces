@@ -11,30 +11,41 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.event;
+package com.liferay.faces.alloy.component.tab;
 
 import javax.faces.component.UIComponent;
 import javax.faces.component.behavior.Behavior;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.PhaseId;
 
 
 /**
  * @author  Neil Griffin
  */
-public class NamedAjaxBehaviorEvent extends AjaxBehaviorEvent {
+public class TabSelectEvent extends AjaxBehaviorEvent {
+
+	// Public Constants
+	public static final String TAB_SELECT = "tabSelect";
 
 	// serialVersionUID
-	private static final long serialVersionUID = 1239441047347747550L;
+	private static final long serialVersionUID = 6411532762300123239L;
 
 	// Private Data Members
-	private String name;
+	private Object rowData;
+	private Tab tab;
 
-	public NamedAjaxBehaviorEvent(UIComponent component, Behavior behavior, String name) {
+	public TabSelectEvent(UIComponent component, Behavior behavior, Tab tab, Object rowData) {
 		super(component, behavior);
-		this.name = name;
+		this.tab = tab;
+		this.rowData = rowData;
+		setPhaseId(PhaseId.APPLY_REQUEST_VALUES);
 	}
 
-	public String getName() {
-		return name;
+	public Object getRowData() {
+		return rowData;
+	}
+
+	public Tab getTab() {
+		return tab;
 	}
 }

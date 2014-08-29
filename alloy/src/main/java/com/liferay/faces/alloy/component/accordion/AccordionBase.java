@@ -34,7 +34,8 @@ public abstract class AccordionBase extends UIData implements Styleable, ClientC
 		selectedIndex,
 		style,
 		styleClass,
-		tabEventListener
+		tabCollapseListener,
+		tabExpandListener
 	}
 
 	@Override
@@ -83,12 +84,20 @@ public abstract class AccordionBase extends UIData implements Styleable, ClientC
 		getStateHelper().put(AccordionPropertyKeys.styleClass, styleClass);
 	}
 
-	public javax.el.MethodExpression getTabEventListener() {
-		return (javax.el.MethodExpression) getStateHelper().eval(AccordionPropertyKeys.tabEventListener, null);
+	public javax.el.MethodExpression getTabCollapseListener() {
+		return (javax.el.MethodExpression) getStateHelper().eval(AccordionPropertyKeys.tabCollapseListener, null);
 	}
 
-	public void setTabEventListener(javax.el.MethodExpression tabEventListener) {
-		getStateHelper().put(AccordionPropertyKeys.tabEventListener, tabEventListener);
+	public void setTabCollapseListener(javax.el.MethodExpression tabCollapseListener) {
+		getStateHelper().put(AccordionPropertyKeys.tabCollapseListener, tabCollapseListener);
+	}
+
+	public javax.el.MethodExpression getTabExpandListener() {
+		return (javax.el.MethodExpression) getStateHelper().eval(AccordionPropertyKeys.tabExpandListener, null);
+	}
+
+	public void setTabExpandListener(javax.el.MethodExpression tabExpandListener) {
+		getStateHelper().put(AccordionPropertyKeys.tabExpandListener, tabExpandListener);
 	}
 }
 //J+

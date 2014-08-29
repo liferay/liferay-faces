@@ -29,7 +29,8 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
 
 import com.liferay.faces.alloy.component.tab.Tab;
-import com.liferay.faces.alloy.component.tab.TabEvent;
+import com.liferay.faces.alloy.component.tab.TabCollapseEvent;
+import com.liferay.faces.alloy.component.tab.TabExpandEvent;
 import com.liferay.faces.alloy.component.tab.TabUtil;
 import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ComponentUtil;
@@ -51,7 +52,7 @@ public class Accordion extends AccordionBase implements ClientBehaviorHolder {
 
 	// Private Constants
 	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList(
-				TabEvent.TAB_COLLAPSED, TabEvent.TAB_EXPANDED));
+				TabCollapseEvent.TAB_COLLAPSE, TabExpandEvent.TAB_EXPAND));
 
 	public Accordion() {
 		super();
@@ -112,8 +113,15 @@ public class Accordion extends AccordionBase implements ClientBehaviorHolder {
 			AjaxBehaviorEvent behaviorEvent = (AjaxBehaviorEvent) facesEvent;
 			Behavior behavior = behaviorEvent.getBehavior();
 			String eventName = requestParameterMap.get(FacesConstants.JAVAX_FACES_BEHAVIOR_EVENT);
-			TabEvent tabEvent = new TabEvent(this, behavior, eventName, tab, rowData);
-			super.queueEvent(tabEvent);
+
+			if (TabCollapseEvent.TAB_COLLAPSE.equals(eventName)) {
+				TabCollapseEvent tabCollapseEvent = new TabCollapseEvent(this, behavior, tab, rowData);
+				super.queueEvent(tabCollapseEvent);
+			}
+			else if (TabExpandEvent.TAB_EXPAND.equals(eventName)) {
+				TabExpandEvent tabExpandEvent = new TabExpandEvent(this, behavior, tab, rowData);
+				super.queueEvent(tabExpandEvent);
+			}
 		}
 
 		// Otherwise, queue the specified faces event.
@@ -124,7 +132,7 @@ public class Accordion extends AccordionBase implements ClientBehaviorHolder {
 
 	@Override
 	public String getDefaultEventName() {
-		return TabEvent.TAB_EXPANDED;
+		return TabExpandEvent.TAB_EXPAND;
 	}
 
 	@Override

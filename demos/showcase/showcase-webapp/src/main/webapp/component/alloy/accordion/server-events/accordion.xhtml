@@ -6,9 +6,10 @@
 		<h:form id="exampleForm">
 			<alloy:messages id="feedback" globalOnly="true" layout="table" />
 			<alloy:accordion selectedIndex="#{accordionBackingBean.defaultSelectedIndex}"
-				tabEventListener="#{accordionBackingBean.tabEventListener}">
-				<f:ajax event="tabCollapsed" render=":example:exampleForm:feedback" />
-				<f:ajax event="tabExpanded" render=":example:exampleForm:feedback" />
+				tabExpandListener="#{accordionBackingBean.tabExpandListener}"
+				tabCollapseListener="#{accordionBackingBean.tabCollapseListener}">
+				<f:ajax event="tabCollapse" render=":example:exampleForm:feedback" />
+				<f:ajax event="tabExpand" render=":example:exampleForm:feedback" />
 				<alloy:tab label="Compatible">
 					<alloy:image library="images" name="icon-compatible.png" />
 					<span>Liferay lets you reuse the enterprise software and skills you already have in-house.</span>

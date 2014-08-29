@@ -20,7 +20,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.alloy.component.tab.TabEvent;
+import com.liferay.faces.alloy.component.tab.TabSelectEvent;
 import com.liferay.faces.alloy.component.tabview.TabView;
 
 
@@ -58,11 +58,11 @@ public class TabViewBackingBean {
 		}
 	}
 
-	public void tabEventListener(TabEvent tabEvent) {
+	public void tabSelectListener(TabSelectEvent tabSelectEvent) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		FacesMessage facesMessage = new FacesMessage("Received event '" + tabEvent.getName() +
-				"' for tab with label '" + tabEvent.getTab().getLabel() + "' in the " +
-				tabEvent.getPhaseId().getName() + " phase.");
+		FacesMessage facesMessage = new FacesMessage("Received '" + tabSelectEvent.getClass().getSimpleName() +
+				"' for tab with label '" + tabSelectEvent.getTab().getLabel() + "' in the " +
+				tabSelectEvent.getPhaseId().getName() + " phase.");
 		facesContext.addMessage(null, facesMessage);
 	}
 

@@ -28,7 +28,8 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.tab.Tab;
-import com.liferay.faces.alloy.component.tab.TabEvent;
+import com.liferay.faces.alloy.component.tab.TabCollapseEvent;
+import com.liferay.faces.alloy.component.tab.TabExpandEvent;
 import com.liferay.faces.alloy.component.tab.TabUtil;
 import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ComponentUtil;
@@ -269,11 +270,11 @@ public class AccordionRenderer extends AccordionRendererBase {
 
 					// If <f:ajax event="tabExpanded" /> is specified in the view, then render a script that submits
 					// an Ajax request.
-					if (TabEvent.TAB_EXPANDED.equals(eventName)) {
+					if (TabExpandEvent.TAB_EXPAND.equals(eventName)) {
 
 						//J-
 						// if (event.newVal) {
-						//	   jsf.ajax.request(this, event, {'javax.faces.behavior.event': 'tabExpanded'});
+						//	   jsf.ajax.request(this, event, {'javax.faces.behavior.event': 'tabExpand'});
 						// }
 						//J+
 						behaviorCallback.append("if(event.newVal)");
@@ -284,11 +285,11 @@ public class AccordionRenderer extends AccordionRendererBase {
 
 					// Similarly, if <f:ajax event="tabCollapsed" /> is specified in the view, then render a script
 					// that submits an Ajax request.
-					else if (TabEvent.TAB_COLLAPSED.equals(eventName)) {
+					else if (TabCollapseEvent.TAB_COLLAPSE.equals(eventName)) {
 
 						//J-
 						// if ((!event.newVal) && (prevTabIndex == eventTabIndex)) {
-						//	   jsf.ajax.request(this, event, {'javax.faces.behavior.event': 'tabCollapsed'});
+						//	   jsf.ajax.request(this, event, {'javax.faces.behavior.event': 'tabCollapse'});
 						// }
 						//J+
 						behaviorCallback.append("if((!event.newVal)&&(prevTabIndex==eventTabIndex))");

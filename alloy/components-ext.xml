@@ -316,16 +316,6 @@
 		</description>
 		<attributes>
 			<attribute>
-				<description>
-					<![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take a <code>TabEvent</code> argument.]]>
-				</description>
-				<name>tabEventListener</name>
-				<method-signature>
-					void tabEventListener(com.liferay.faces.alloy.component.tab.TabEvent)
-				</method-signature>
-				<type>javax.el.MethodExpression</type>
-			</attribute>
-			<attribute>
 				<defaultValue>false</defaultValue>
 				<description>
 					<![CDATA[When true, expanding an item will not collapse the others, allowing multiple items to be visible at the same time. The default value is false.]]>
@@ -342,6 +332,26 @@
 				<name>selectedIndex</name>
 				<type>java.lang.Integer</type>
 				<yui>false</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take a <code>TabCollapseEvent</code> argument.]]>
+				</description>
+				<name>tabCollapseListener</name>
+				<method-signature>
+					void tabCollapseListener(com.liferay.faces.alloy.component.tab.TabCollapseEvent)
+				</method-signature>
+				<type>javax.el.MethodExpression</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take a <code>TabExpandEvent</code> argument.]]>
+				</description>
+				<name>tabExpandListener</name>
+				<method-signature>
+					void tabExpandListener(com.liferay.faces.alloy.component.tab.TabExpandEvent)
+				</method-signature>
+				<type>javax.el.MethodExpression</type>
 			</attribute>
 		</attributes>
 	</component>
@@ -1737,11 +1747,11 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>TabEvent</code> argument.]]>
+					<![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>TabSelectEvent</code> argument.]]>
 				</description>
-				<name>tabEventListener</name>
+				<name>tabSelectListener</name>
 				<method-signature>
-					void tabEventListener(com.liferay.faces.alloy.component.tabview.TabEvent)
+					void tabSelectListener(com.liferay.faces.alloy.component.tab.TabSelectEvent)
 				</method-signature>
 				<type>javax.el.MethodExpression</type>
 			</attribute>

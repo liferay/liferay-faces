@@ -30,11 +30,10 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
 
 import com.liferay.faces.alloy.component.tab.Tab;
-import com.liferay.faces.alloy.component.tab.TabEvent;
+import com.liferay.faces.alloy.component.tab.TabSelectEvent;
 import com.liferay.faces.alloy.component.tab.TabUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.helper.IntegerHelper;
-import com.liferay.faces.util.lang.FacesConstants;
 
 
 /**
@@ -50,7 +49,7 @@ public class TabView extends TabViewBase implements ClientBehaviorHolder {
 
 	// Private Constants
 	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList(
-				TabEvent.TAB_SELECTED));
+				TabSelectEvent.TAB_SELECT));
 
 	public TabView() {
 		super();
@@ -115,8 +114,7 @@ public class TabView extends TabViewBase implements ClientBehaviorHolder {
 			// Queue an tabView tab event rather than the specified faces event.
 			AjaxBehaviorEvent behaviorEvent = (AjaxBehaviorEvent) facesEvent;
 			Behavior behavior = behaviorEvent.getBehavior();
-			String eventName = requestParameterMap.get(FacesConstants.JAVAX_FACES_BEHAVIOR_EVENT);
-			TabEvent tabEvent = new TabEvent(this, behavior, eventName, tab, rowData);
+			TabSelectEvent tabEvent = new TabSelectEvent(this, behavior, tab, rowData);
 			super.queueEvent(tabEvent);
 		}
 
@@ -128,7 +126,7 @@ public class TabView extends TabViewBase implements ClientBehaviorHolder {
 
 	@Override
 	public String getDefaultEventName() {
-		return TabEvent.TAB_SELECTED;
+		return TabSelectEvent.TAB_SELECT;
 	}
 
 	@Override

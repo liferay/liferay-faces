@@ -19,7 +19,8 @@ import javax.faces.event.AbortProcessingException;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.AjaxBehaviorListener;
 
-import com.liferay.faces.alloy.component.tab.TabEvent;
+import com.liferay.faces.alloy.component.tab.TabCollapseEvent;
+import com.liferay.faces.alloy.component.tab.TabExpandEvent;
 
 
 /**
@@ -30,19 +31,28 @@ public class AccordionBehaviorListener implements AjaxBehaviorListener {
 	@Override
 	public void processAjaxBehavior(AjaxBehaviorEvent ajaxBehaviorEvent) throws AbortProcessingException {
 
-		TabEvent tabEvent = (TabEvent) ajaxBehaviorEvent;
-		Accordion accordion = (Accordion) tabEvent.getComponent();
+		MethodExpression methodExpression = null;
 
-		try {
-			MethodExpression methodExpression = accordion.getTabEventListener();
-
-			if (methodExpression != null) {
-				FacesContext facesContext = FacesContext.getCurrentInstance();
-				methodExpression.invoke(facesContext.getELContext(), new Object[] { tabEvent });
-			}
+		if (ajaxBehaviorEvent instanceof TabCollapseEvent) {
+			TabCollapseEvent tabCollapseEvent = (TabCollapseEvent) ajaxBehaviorEvent;
+			Accordion accordion = (Accordion) tabCollapseEvent.getComponent();
+			methodExpression = accordion.getTabCollapseListener();
 		}
-		catch (Exception e) {
-			throw new AbortProcessingException(e);
+		else if (ajaxBehaviorEvent instanceof TabExpandEvent) {
+			TabExpandEvent tabExpandEvent = (TabExpandEvent) ajaxBehaviorEvent;
+			Accordion accordion = (Accordion) tabExpandEvent.getComponent();
+			methodExpression = accordion.getTabExpandListener();
+		}
+
+		if (methodExpression != null) {
+
+			try {
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				methodExpression.invoke(facesContext.getELContext(), new Object[] { ajaxBehaviorEvent });
+			}
+			catch (Exception e) {
+				throw new AbortProcessingException(e);
+			}
 		}
 	}
 }
