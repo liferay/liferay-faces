@@ -83,9 +83,6 @@ public class ListModelBean {
 		showcaseCategoryList = new ArrayList<String>();
 		showcaseCategoryList.add("buttonlink");
 		showcaseCategoryList.add("data");
-		showcaseCategoryList.add("jstl");
-		showcaseCategoryList.add("facescore");
-		showcaseCategoryList.add("facelets");
 		showcaseCategoryList.add("input");
 		showcaseCategoryList.add("misc");
 		showcaseCategoryList.add("multimedia");
@@ -97,6 +94,9 @@ public class ListModelBean {
 		}
 
 		showcaseCategoryList.add("select");
+		showcaseCategoryList.add("jstl");
+		showcaseCategoryList.add("facescore");
+		showcaseCategoryList.add("facelets");
 
 		this.showcaseComponents = new ArrayList<ShowcaseComponent>();
 		this.showcaseCategoryMap = new HashMap<String, List<ShowcaseComponent>>();
