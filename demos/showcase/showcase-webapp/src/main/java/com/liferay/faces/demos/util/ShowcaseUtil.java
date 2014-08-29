@@ -73,10 +73,12 @@ public class ShowcaseUtil {
 		LIFERAY_FACES_ALLOY_VERSION + "/vdldoc/";
 	private static final String NAMESPACE_PREFIX_ALLOY = "alloy";
 	private static final String NAMESPACE_PREFIX_BRIDGE = "bridge";
+	private static final String NAMESPACE_PREFIX_C = "c";
 	private static final String NAMESPACE_PREFIX_F = "f";
 	private static final String NAMESPACE_PREFIX_H = "h";
 	private static final String NAMESPACE_PREFIX_LIFERAY_UI = "liferay-ui";
 	private static final String NAMESPACE_PREFIX_PORTET = "portlet";
+	private static final String NAMESPACE_PREFIX_UI = "ui";
 	private static final String PORTLET_API_PACKAGE_PREFIX = "javax.portlet";
 	private static final String PORTLET_API_JAVADOC_BASE_URL = "http://docs.liferay.com/portlet-api/2.0/javadocs/";
 	private static final String REGEX_DOT = "[.]";
@@ -216,31 +218,6 @@ public class ShowcaseUtil {
 		return text;
 	}
 
-	public static final String encodeWarning(String text) {
-
-		if (text != null) {
-
-			boolean openTag = true;
-
-			int pos = text.indexOf(StringPool.EXCLAMATION);
-
-			while (pos >= 0) {
-
-				if (openTag) {
-					text = text.substring(0, pos) + "<span class=\"inline-warning\">" + text.substring(pos + 1);
-				}
-				else {
-					text = text.substring(0, pos) + "</span>" + text.substring(pos + 1);
-				}
-
-				pos = text.indexOf(StringPool.EXCLAMATION);
-				openTag = !openTag;
-			}
-		}
-
-		return text;
-	}
-
 	public static final String encodeStrong(String text) {
 
 		if (text != null) {
@@ -276,7 +253,8 @@ public class ShowcaseUtil {
 
 		String tagPrefix = vdlDocKey.getTagPrefix();
 
-		if (tagPrefix.equals(NAMESPACE_PREFIX_F) || tagPrefix.equals(NAMESPACE_PREFIX_H)) {
+		if (tagPrefix.equals(NAMESPACE_PREFIX_C) || tagPrefix.equals(NAMESPACE_PREFIX_F) ||
+				tagPrefix.equals(NAMESPACE_PREFIX_H) || tagPrefix.equals(NAMESPACE_PREFIX_UI)) {
 			vdldocURL.append(JSF_VDLDOC_BASE_URL);
 		}
 		else if (tagPrefix.equals(NAMESPACE_PREFIX_ALLOY) || tagPrefix.equals(NAMESPACE_PREFIX_BRIDGE) ||
@@ -302,6 +280,31 @@ public class ShowcaseUtil {
 		}
 
 		return vdldocURL.toString();
+	}
+
+	public static final String encodeWarning(String text) {
+
+		if (text != null) {
+
+			boolean openTag = true;
+
+			int pos = text.indexOf(StringPool.EXCLAMATION);
+
+			while (pos >= 0) {
+
+				if (openTag) {
+					text = text.substring(0, pos) + "<span class=\"inline-warning\">" + text.substring(pos + 1);
+				}
+				else {
+					text = text.substring(0, pos) + "</span>" + text.substring(pos + 1);
+				}
+
+				pos = text.indexOf(StringPool.EXCLAMATION);
+				openTag = !openTag;
+			}
+		}
+
+		return text;
 	}
 
 	protected static class JavaDocKey {
