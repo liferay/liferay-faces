@@ -35,7 +35,7 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 		stacked,
 		style,
 		styleClass,
-		tabEventListener,
+		tabSelectListener,
 		width
 	}
 
@@ -93,12 +93,12 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 		getStateHelper().put(TabViewPropertyKeys.styleClass, styleClass);
 	}
 
-	public javax.el.MethodExpression getTabEventListener() {
-		return (javax.el.MethodExpression) getStateHelper().eval(TabViewPropertyKeys.tabEventListener, null);
+	public javax.el.MethodExpression getTabSelectListener() {
+		return (javax.el.MethodExpression) getStateHelper().eval(TabViewPropertyKeys.tabSelectListener, null);
 	}
 
-	public void setTabEventListener(javax.el.MethodExpression tabEventListener) {
-		getStateHelper().put(TabViewPropertyKeys.tabEventListener, tabEventListener);
+	public void setTabSelectListener(javax.el.MethodExpression tabSelectListener) {
+		getStateHelper().put(TabViewPropertyKeys.tabSelectListener, tabSelectListener);
 	}
 
 	public String getWidth() {

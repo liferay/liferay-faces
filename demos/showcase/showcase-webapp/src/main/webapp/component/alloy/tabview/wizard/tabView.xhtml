@@ -6,8 +6,8 @@
 		<showcase:example>
 			<alloy:form>
 				<alloy:tabView id="wizard" selectedIndex="#{tabViewWizardBean.selectedTabIndex}"
-					tabEventListener="#{tabViewWizardBean.tabEventListener}">
-					<f:ajax event="tabSelected" />
+					tabSelectListener="#{tabViewWizardBean.tabSelectListener}">
+					<f:ajax event="tabSelect" />
 					<alloy:tab label="#{i18n['step-1']}">
 						<alloy:fieldset id="step1">
 							<alloy:field label="#{i18n['first-name']}">

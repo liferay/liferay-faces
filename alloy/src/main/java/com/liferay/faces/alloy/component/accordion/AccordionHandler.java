@@ -23,7 +23,8 @@ import javax.faces.view.facelets.Metadata;
 import javax.faces.view.facelets.MetadataTarget;
 import javax.faces.view.facelets.TagAttribute;
 
-import com.liferay.faces.alloy.component.tab.TabEvent;
+import com.liferay.faces.alloy.component.tab.TabCollapseEvent;
+import com.liferay.faces.alloy.component.tab.TabExpandEvent;
 import com.liferay.faces.util.view.facelets.MethodMetadata;
 
 
@@ -54,9 +55,14 @@ public class AccordionHandler extends ComponentHandler {
 
 			if ((metadataTarget != null) && (metadataTarget.isTargetInstanceOf(Accordion.class))) {
 
-				if (AccordionRenderer.TAB_EVENT_LISTENER.equals(name)) {
+				if (AccordionRenderer.TAB_COLLAPSE_LISTENER.equals(name)) {
 					Method writeMethod = metadataTarget.getWriteMethod(name);
-					Class<?>[] args = new Class[] { TabEvent.class };
+					Class<?>[] args = new Class[] { TabCollapseEvent.class };
+					metadata = new MethodMetadata(tagAttribute, writeMethod, args);
+				}
+				else if (AccordionRenderer.TAB_EXPAND_LISTENER.equals(name)) {
+					Method writeMethod = metadataTarget.getWriteMethod(name);
+					Class<?>[] args = new Class[] { TabExpandEvent.class };
 					metadata = new MethodMetadata(tagAttribute, writeMethod, args);
 				}
 			}

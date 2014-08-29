@@ -29,7 +29,7 @@ import javax.faces.render.FacesRenderer;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.alloy.component.tab.Tab;
-import com.liferay.faces.alloy.component.tab.TabEvent;
+import com.liferay.faces.alloy.component.tab.TabSelectEvent;
 import com.liferay.faces.alloy.component.tab.TabUtil;
 import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ComponentUtil;
@@ -165,6 +165,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 
 			for (int i = 0; i < children.size(); i++) {
 				UIComponent child = children.get(i);
+
 				if (child.isRendered()) {
 					child.encodeAll(facesContext);
 				}
@@ -270,7 +271,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 
 					// If <f:ajax event="tabSelected" /> is specified in the view, then render a script that submits
 					// an Ajax request.
-					if (TabEvent.TAB_SELECTED.equals(eventName)) {
+					if (TabSelectEvent.TAB_SELECT.equals(eventName)) {
 
 						//J-
 						// if (event.newVal) {

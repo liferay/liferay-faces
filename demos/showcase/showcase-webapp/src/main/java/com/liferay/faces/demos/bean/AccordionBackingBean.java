@@ -21,7 +21,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.alloy.component.accordion.Accordion;
-import com.liferay.faces.alloy.component.tab.TabEvent;
+import com.liferay.faces.alloy.component.tab.TabCollapseEvent;
+import com.liferay.faces.alloy.component.tab.TabExpandEvent;
 
 
 /**
@@ -58,11 +59,19 @@ public class AccordionBackingBean {
 		}
 	}
 
-	public void tabEventListener(TabEvent tabEvent) {
+	public void tabCollapseListener(TabCollapseEvent tabCollapseEvent) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		FacesMessage facesMessage = new FacesMessage("Received event '" + tabEvent.getName() +
-				"' for tab with label '" + tabEvent.getTab().getLabel() + "' in the " +
-				tabEvent.getPhaseId().getName() + " phase.");
+		FacesMessage facesMessage = new FacesMessage("Received '" + tabCollapseEvent.getClass().getSimpleName() +
+				"' for tab with label '" + tabCollapseEvent.getTab().getLabel() + "' in the " +
+				tabCollapseEvent.getPhaseId().getName() + " phase.");
+		facesContext.addMessage(null, facesMessage);
+	}
+
+	public void tabExpandListener(TabExpandEvent tabExpandEvent) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesMessage facesMessage = new FacesMessage("Received '" + tabExpandEvent.getClass().getSimpleName() +
+				"' for tab with label '" + tabExpandEvent.getTab().getLabel() + "' in the " +
+				tabExpandEvent.getPhaseId().getName() + " phase.");
 		facesContext.addMessage(null, facesMessage);
 	}
 

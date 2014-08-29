@@ -19,7 +19,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.alloy.component.tab.TabEvent;
+import com.liferay.faces.alloy.component.tab.TabSelectEvent;
 
 
 /**
@@ -35,7 +35,7 @@ public class TabViewWizardBean implements Serializable {
 	private String firstName;
 	private String lastName;
 
-	public void tabEventListener(TabEvent tabEvent) {
+	public void tabSelectListener(TabSelectEvent tabSelectEvent) {
 
 		// When the user clicks on a tab, skip the PROCESS_VALIDATIONS, UPDATE_MODEL_VAUES, and INVOKE_APPLICATION
 		// phases of the JSF lifecycle and jump immediately to RENDER_RESPONSE.

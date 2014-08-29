@@ -74,11 +74,18 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take a <code>TabEvent</code> argument.]]></description>
-			<name>tabEventListener</name>
+			<description><![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take a <code>TabCollapseEvent</code> argument.]]></description>
+			<name>tabCollapseListener</name>
 			<required>false</required>
 			<type>javax.el.MethodExpression</type>
-			<method-signature>void tabEventListener(com.liferay.faces.alloy.component.tab.TabEvent)</method-signature>
+			<method-signature>void tabCollapseListener(com.liferay.faces.alloy.component.tab.TabCollapseEvent)</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take a <code>TabExpandEvent</code> argument.]]></description>
+			<name>tabExpandListener</name>
+			<required>false</required>
+			<type>javax.el.MethodExpression</type>
+			<method-signature>void tabExpandListener(com.liferay.faces.alloy.component.tab.TabExpandEvent)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property. The value can be any of the following types:<ul><li>Any concrete subclass of <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/DataModel.html" target="_blank"><code>DataModel</code></a></li><li>Array (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ArrayDataModel.html" target="_blank"><code>ArrayDataModel</code></a>)</li><li>java.util.Collection (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/CollectionDataModel.html" target="_blank"><code>CollectionDataModel</code></a>)</li><li>java.util.List (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ListDataModel.html" target="_blank"><code>ListDataModel</code></a>)</li><li>java.sql.ResultSet (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ResultSetDataModel.html" target="_blank"><code>ResultSetDataModel</code></a>)</li></ul>]]></description>
@@ -8270,11 +8277,11 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>TabEvent</code> argument.]]></description>
-			<name>tabEventListener</name>
+			<description><![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>TabSelectEvent</code> argument.]]></description>
+			<name>tabSelectListener</name>
 			<required>false</required>
 			<type>javax.el.MethodExpression</type>
-			<method-signature>void tabEventListener(com.liferay.faces.alloy.component.tabview.TabEvent)</method-signature>
+			<method-signature>void tabSelectListener(com.liferay.faces.alloy.component.tab.TabSelectEvent)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property. The value can be any of the following types:<ul><li>Any concrete subclass of <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/DataModel.html" target="_blank"><code>DataModel</code></a></li><li>Array (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ArrayDataModel.html" target="_blank"><code>ArrayDataModel</code></a>)</li><li>java.util.Collection (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/CollectionDataModel.html" target="_blank"><code>CollectionDataModel</code></a>)</li><li>java.util.List (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ListDataModel.html" target="_blank"><code>ListDataModel</code></a>)</li><li>java.sql.ResultSet (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ResultSetDataModel.html" target="_blank"><code>ResultSetDataModel</code></a>)</li></ul>]]></description>

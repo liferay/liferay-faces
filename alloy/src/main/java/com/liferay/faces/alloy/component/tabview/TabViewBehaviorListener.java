@@ -19,7 +19,7 @@ import javax.faces.event.AbortProcessingException;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.AjaxBehaviorListener;
 
-import com.liferay.faces.alloy.component.tab.TabEvent;
+import com.liferay.faces.alloy.component.tab.TabSelectEvent;
 
 
 /**
@@ -30,15 +30,15 @@ public class TabViewBehaviorListener implements AjaxBehaviorListener {
 	@Override
 	public void processAjaxBehavior(AjaxBehaviorEvent ajaxBehaviorEvent) throws AbortProcessingException {
 
-		TabEvent tabEvent = (TabEvent) ajaxBehaviorEvent;
-		TabView tabView = (TabView) tabEvent.getComponent();
+		TabSelectEvent tabSelectEvent = (TabSelectEvent) ajaxBehaviorEvent;
+		TabView tabView = (TabView) tabSelectEvent.getComponent();
 
 		try {
-			MethodExpression methodExpression = tabView.getTabEventListener();
+			MethodExpression methodExpression = tabView.getTabSelectListener();
 
 			if (methodExpression != null) {
 				FacesContext facesContext = FacesContext.getCurrentInstance();
-				methodExpression.invoke(facesContext.getELContext(), new Object[] { tabEvent });
+				methodExpression.invoke(facesContext.getELContext(), new Object[] { ajaxBehaviorEvent });
 			}
 		}
 		catch (Exception e) {
