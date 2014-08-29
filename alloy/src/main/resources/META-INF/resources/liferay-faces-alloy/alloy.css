@@ -11,6 +11,7 @@
 
 /* alloy-dialog */
 div.alloy-dialog {
+	padding: 6px;
 	text-align: center;
 }
 
@@ -50,8 +51,8 @@ ul.alloy-messages {
 
 /* alloy-popover */
 div.alloy-popover {
-	text-align: center;
 	padding: 6px;
+	text-align: center;
 }
 
 /* alloy-select-boolean-checkbox */
