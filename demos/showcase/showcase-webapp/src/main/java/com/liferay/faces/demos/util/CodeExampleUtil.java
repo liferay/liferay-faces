@@ -37,6 +37,7 @@ public class CodeExampleUtil {
 	private static final Pattern JAVA_MULTILINE_COMMENTS_PATTERN = Pattern.compile("/[*][*].*[*]/", Pattern.DOTALL);
 	private static final String OUTPUTMODEL_MODELVALUE = ":outputModel:modelValue";
 	private static final Pattern TEMPLATE_ATTRIBUTE_PATTERN = Pattern.compile("\\s*template=\".*\"");
+	private static final String RENDER_EXAMPLE_FORM = "render=\":example:exampleForm:";
 	private static final Pattern SHOWCASE_NAMESPACE_PATTERN = Pattern.compile("\\s*xmlns:showcase=\".*\"");
 	private static final String XML = "xml";
 
@@ -98,6 +99,11 @@ public class CodeExampleUtil {
 									line.substring(pos + OUTPUTMODEL_MODELVALUE.length());
 							}
 
+							pos = line.indexOf(RENDER_EXAMPLE_FORM);
+							if (pos > 0) {
+								line = line.substring(0, pos) + "render=\"" +
+										line.substring(pos + RENDER_EXAMPLE_FORM.length());
+							}
 							buf.append(line);
 							buf.append(StringPool.NEW_LINE);
 						}

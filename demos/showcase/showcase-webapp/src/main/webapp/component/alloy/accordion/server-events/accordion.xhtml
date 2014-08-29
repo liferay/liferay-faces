@@ -2,13 +2,13 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-	<showcase:example id="accordionExample">
-		<h:form id="accordionForm">
+	<showcase:example id="example">
+		<h:form id="exampleForm">
 			<alloy:messages id="feedback" globalOnly="true" layout="table" />
 			<alloy:accordion selectedIndex="#{accordionBackingBean.defaultSelectedIndex}"
 				tabEventListener="#{accordionBackingBean.tabEventListener}">
-				<f:ajax event="tabCollapsed" render=":accordionExample:accordionForm:feedback" />
-				<f:ajax event="tabExpanded" render=":accordionExample:accordionForm:feedback" />
+				<f:ajax event="tabCollapsed" render=":example:exampleForm:feedback" />
+				<f:ajax event="tabExpanded" render=":example:exampleForm:feedback" />
 				<alloy:tab label="Compatible">
 					<alloy:image library="images" name="icon-compatible.png" />
 					<span>Liferay lets you reuse the enterprise software and skills you already have in-house.</span>
