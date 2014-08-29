@@ -11,21 +11,19 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.inputdate;
+package com.liferay.faces.alloy.component.inputtime;
 
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.TimeZone;
 
+import javax.faces.FacesException;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
 import javax.faces.component.behavior.AjaxBehavior;
@@ -34,40 +32,32 @@ import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
-import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
+ * @author  Bruno Basto
  * @author  Kyle Stiemann
  */
-@FacesComponent(value = InputDate.COMPONENT_TYPE)
-public class InputDate extends InputDateBase {
+@FacesComponent(value = InputTime.COMPONENT_TYPE)
+public class InputTime extends InputTimeBase {
 
 	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputdate.InputDate";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputdate.InputDateRenderer";
-	public static final String STYLE_CLASS_NAME = "alloy-input-date";
+	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputtime.InputTime";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputtime.InputTimeRenderer";
+	public static final String STYLE_CLASS_NAME = "alloy-input-time";
 
 	// Private Constants
+	private static final String DEFAULT_TIME_PATTERN = "hh:mm a";
 	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList(
-				DateSelectEvent.DATE_SELECT));
+				TimeSelectEvent.TIME_SELECT));
+	private static final String MIN_TIME = "00:00:00";
+	private static final String MIN_MAX_TIME_PATTERN = "HH:mm:ss";
+	private static final String MAX_TIME = "23:59:59";
 
-	public InputDate() {
+	public InputTime() {
 		super();
 		setRendererType(RENDERER_TYPE);
-	}
-
-	protected static String getDefaultDatePattern(Object componentLocale) {
-
-		Locale locale = InputDateTimeUtil.getObjectAsLocale(componentLocale);
-
-		// Note: The following usage of SimpleDateFormat is thread-safe, since only the result of the toPattern()
-		// method is utilized.
-		SimpleDateFormat simpleDateFormat = (SimpleDateFormat) SimpleDateFormat.getDateInstance(DateFormat.MEDIUM,
-				locale);
-
-		return simpleDateFormat.toPattern();
 	}
 
 	@Override
@@ -75,7 +65,7 @@ public class InputDate extends InputDateBase {
 
 		if (clientBehavior instanceof AjaxBehavior) {
 			AjaxBehavior ajaxBehavior = (AjaxBehavior) clientBehavior;
-			ajaxBehavior.addAjaxBehaviorListener(new InputDateBehaviorListener());
+			ajaxBehavior.addAjaxBehaviorListener(new InputTimeBehaviorListener());
 		}
 
 		super.addClientBehavior(eventName, clientBehavior);
@@ -83,7 +73,7 @@ public class InputDate extends InputDateBase {
 
 	@Override
 	protected AjaxBehaviorEvent createInputDateTimeEvent(UIComponent uiComponent, Behavior behavior, Date selected) {
-		return new DateSelectEvent(uiComponent, behavior, selected);
+		return new TimeSelectEvent(uiComponent, behavior, selected);
 	}
 
 	@Override
@@ -94,66 +84,33 @@ public class InputDate extends InputDateBase {
 		if (isValid() && (newValue != null)) {
 
 			// Get all necessary dates.
-			String datePattern = getDatePattern();
-			Object minDateObject = getMinDate();
 			String timeZoneString = getTimeZone();
 			TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(MIN_MAX_TIME_PATTERN);
+			simpleDateFormat.setTimeZone(timeZone);
 
-			Date minDate = InputDateTimeUtil.getObjectAsDate(minDateObject, datePattern, timeZone);
-			Object maxDateObject = getMaxDate();
-			Date maxDate = InputDateTimeUtil.getObjectAsDate(maxDateObject, datePattern, timeZone);
+			String minTimeString = getMinTime();
+			String maxTimeString = getMaxTime();
+			Date minTime = null;
+			Date maxTime = null;
 
-			if ((minDate == null) && (maxDate == null)) {
-				setValid(true);
+			try {
+				minTime = simpleDateFormat.parse(minTimeString);
+				maxTime = simpleDateFormat.parse(maxTimeString);
 			}
-			else {
+			catch (ParseException e) {
 
-				if (minDate == null) {
-					minDate = new Date(Long.MIN_VALUE);
-				}
-				else if (maxDate == null) {
-					maxDate = new Date(Long.MAX_VALUE);
-				}
-
-				// Set the times to midnight for comparison purposes.
-				minDate = getDateAtMidnight(minDate, timeZone);
-				maxDate = getDateAtMidnight(maxDate, timeZone);
-
-				super.validateValue(facesContext, newValue, minDate, maxDate, timeZone);
+				FacesException facesException = new FacesException(e);
+				throw facesException;
 			}
+
+			super.validateValue(facesContext, newValue, minTime, maxTime, timeZone);
 		}
-	}
-
-	protected Date getDateAtMidnight(Date date, TimeZone timeZone) {
-
-		Calendar calendar = new GregorianCalendar(timeZone);
-		calendar.setTime(date);
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
-
-		return calendar.getTime();
-	}
-
-	@Override
-	public String getDatePattern() {
-
-		String datePattern = super.getDatePattern();
-
-		if (datePattern == null) {
-
-			// Provide a default datePattern based on the locale.
-			Object locale = getLocale();
-			datePattern = getDefaultDatePattern(locale);
-		}
-
-		return datePattern;
 	}
 
 	@Override
 	public String getDefaultEventName() {
-		return DateSelectEvent.DATE_SELECT;
+		return TimeSelectEvent.TIME_SELECT;
 	}
 
 	@Override
@@ -167,8 +124,18 @@ public class InputDate extends InputDateBase {
 	}
 
 	@Override
+	public String getMaxTime() {
+		return (String) getStateHelper().eval(InputTimePropertyKeys.maxTime, MAX_TIME);
+	}
+
+	@Override
+	public String getMinTime() {
+		return (String) getStateHelper().eval(InputTimePropertyKeys.minTime, MIN_TIME);
+	}
+
+	@Override
 	protected String getPattern() {
-		return getDatePattern();
+		return getTimePattern();
 	}
 
 	@Override
@@ -179,5 +146,10 @@ public class InputDate extends InputDateBase {
 		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
+	}
+
+	@Override
+	public String getTimePattern() {
+		return (String) getStateHelper().eval(InputTimePropertyKeys.timePattern, DEFAULT_TIME_PATTERN);
 	}
 }

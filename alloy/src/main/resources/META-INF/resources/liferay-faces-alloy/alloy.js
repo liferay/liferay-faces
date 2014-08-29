@@ -4,6 +4,13 @@ var LFA = { escapeClientId : function(clientId) {
 
 var LFAI = {
 
+	// This is a replacement function for the timePicker's built-in private _setValues() method. Since the values have been
+	// processed and formatted server-side, this function simply passes values through to the autocomplete without
+	// processing them.
+	setValues : function(values) {
+		return values;
+	},
+
 	initPreviewUploader : function(A, contentTypes, clientId, maxFileSize) {
 
 		var contentTypeArray = A.Array(contentTypes), escapedClientId = LFA.escapeClientId(clientId), uploadComplete = false;
