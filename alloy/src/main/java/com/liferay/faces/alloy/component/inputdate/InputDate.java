@@ -24,25 +24,18 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.TimeZone;
 
-import javax.faces.FacesException;
-import javax.faces.application.FacesMessage;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
 import javax.faces.component.behavior.AjaxBehavior;
 import javax.faces.component.behavior.Behavior;
 import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;
-import javax.faces.convert.DateTimeConverter;
 import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.event.FacesEvent;
 
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.context.MessageContext;
 
 
 /**
@@ -57,8 +50,6 @@ public class InputDate extends InputDateBase {
 	public static final String STYLE_CLASS_NAME = "alloy-input-date";
 
 	// Private Constants
-	private static final String CALENDAR = "calendar";
-	private static final String GREENWICH = "Greenwich";
 	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList(
 				DateSelectEvent.DATE_SELECT));
 
@@ -82,6 +73,9 @@ public class InputDate extends InputDateBase {
 	@Override
 	public void addClientBehavior(String eventName, ClientBehavior clientBehavior) {
 
+		// If the specified client behavior is an Ajax behavior, then the alloy:inputDate component tag has an f:ajax
+		// child tag. Register a behavior listener that can respond to the Ajax behavior by invoking the
+		// dateSelectListener that may have been specified.
 		if (clientBehavior instanceof AjaxBehavior) {
 			AjaxBehavior ajaxBehavior = (AjaxBehavior) clientBehavior;
 			ajaxBehavior.addAjaxBehaviorListener(new InputDateBehaviorListener());
@@ -91,32 +85,8 @@ public class InputDate extends InputDateBase {
 	}
 
 	@Override
-	public void queueEvent(FacesEvent facesEvent) {
-
-		if (facesEvent instanceof AjaxBehaviorEvent) {
-
-			AjaxBehaviorEvent ajaxBehaviorEvent = (AjaxBehaviorEvent) facesEvent;
-
-			UIComponent component = ajaxBehaviorEvent.getComponent();
-			Behavior behavior = ajaxBehaviorEvent.getBehavior();
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
-			String clientId = getClientId(facesContext);
-			String selectedDateString = requestParameterMap.get(clientId);
-
-			Date selectedDate = null;
-
-			if ((selectedDateString != null) && (selectedDateString.length() > 0)) {
-
-				Converter dateTimeConverter = getConverter();
-				selectedDate = (Date) dateTimeConverter.getAsObject(facesContext, component, selectedDateString);
-			}
-
-			facesEvent = new DateSelectEvent(component, behavior, selectedDate);
-		}
-
-		super.queueEvent(facesEvent);
+	protected AjaxBehaviorEvent newSelectEvent(UIComponent uiComponent, Behavior behavior, Date selected) {
+		return new DateSelectEvent(uiComponent, behavior, selected);
 	}
 
 	@Override
@@ -126,108 +96,35 @@ public class InputDate extends InputDateBase {
 
 		if (isValid() && (newValue != null)) {
 
-			try {
-
-				// Get all necessary dates.
-				String datePattern = getDatePattern();
-				Object minimumDate = getMinimumDate();
-				String timeZoneString = getTimeZone();
-				TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
-
-				Date minDate = InputDateTimeUtil.getObjectAsDate(minimumDate, datePattern, timeZone);
-				Object maximumDate = getMaximumDate();
-				Date maxDate = InputDateTimeUtil.getObjectAsDate(maximumDate, datePattern, timeZone);
-				Date submittedDate = InputDateTimeUtil.getObjectAsDate(newValue, datePattern, timeZone);
-
-				if ((minDate == null) && (maxDate == null)) {
-					setValid(true);
-				}
-				else {
-
-					if (minDate == null) {
-						minDate = new Date(Long.MIN_VALUE);
-					}
-					else if (maxDate == null) {
-						maxDate = new Date(Long.MAX_VALUE);
-					}
-
-					// Set the times to midnight for comparison purposes.
-					minDate = getDateAtMidnight(minDate, timeZone);
-					maxDate = getDateAtMidnight(maxDate, timeZone);
-
-					// To determine if the submitted value is valid, check if it falls between the minimum date and
-					// the maximum date.
-					if (submittedDate.before(minDate) || submittedDate.after(maxDate)) {
-
-						setValid(false);
-
-						String validatorMessage = getValidatorMessage();
-						FacesMessage facesMessage;
-
-						if (validatorMessage != null) {
-							facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, validatorMessage,
-									validatorMessage);
-						}
-						else {
-							MessageContext messageContext = MessageContext.getInstance();
-							SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
-							simpleDateFormat.setTimeZone(timeZone);
-
-							String minDateString = simpleDateFormat.format(minDate);
-							String maxDateString = simpleDateFormat.format(maxDate);
-							Locale locale = InputDateTimeUtil.getObjectAsLocale(getLocale(facesContext));
-							String message = messageContext.getMessage(locale, "please-enter-a-value-between-x-and-x",
-									minDateString, maxDateString);
-							facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-						}
-
-						String clientId = getClientId(facesContext);
-						facesContext.addMessage(clientId, facesMessage);
-					}
-					else {
-						setValid(true);
-					}
-				}
-			}
-			catch (FacesException e) {
-
-				setValid(false);
-
-				String message = e.getMessage();
-				FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-				String clientId = getClientId(facesContext);
-				facesContext.addMessage(clientId, facesMessage);
-			}
-		}
-	}
-
-	@Override
-	public String getButtonIconName() {
-		return CALENDAR;
-	}
-
-	@Override
-	public Converter getConverter() {
-		Converter converter = super.getConverter();
-
-		if (converter == null) {
-
-			// Provide a default converter of DateTimeConverter if no converter is specified.
-			DateTimeConverter dateTimeConverter = new DateTimeConverter();
+			// Get all necessary dates.
 			String datePattern = getDatePattern();
-			dateTimeConverter.setPattern(datePattern);
-
-			Object objectLocale = getLocale();
-			Locale locale = InputDateTimeUtil.getObjectAsLocale(objectLocale);
-			dateTimeConverter.setLocale(locale);
-
+			Object minDateObject = getMinDate();
 			String timeZoneString = getTimeZone();
 			TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
-			dateTimeConverter.setTimeZone(timeZone);
-			converter = dateTimeConverter;
-		}
 
-		return converter;
+			Date minDate = InputDateTimeUtil.getObjectAsDate(minDateObject, datePattern, timeZone);
+			Object maxDateObject = getMaxDate();
+			Date maxDate = InputDateTimeUtil.getObjectAsDate(maxDateObject, datePattern, timeZone);
+
+			if ((minDate == null) && (maxDate == null)) {
+				setValid(true);
+			}
+			else {
+
+				if (minDate == null) {
+					minDate = new Date(Long.MIN_VALUE);
+				}
+				else if (maxDate == null) {
+					maxDate = new Date(Long.MAX_VALUE);
+				}
+
+				// Set the times to midnight for comparison purposes.
+				minDate = getDateAtMidnight(minDate, timeZone);
+				maxDate = getDateAtMidnight(maxDate, timeZone);
+
+				super.validateValue(facesContext, newValue, minDate, maxDate, timeZone);
+			}
+		}
 	}
 
 	protected Date getDateAtMidnight(Date date, TimeZone timeZone) {
@@ -273,12 +170,8 @@ public class InputDate extends InputDateBase {
 	}
 
 	@Override
-	public Object getLocale() {
-		return getLocale(FacesContext.getCurrentInstance());
-	}
-
-	public Object getLocale(FacesContext facesContext) {
-		return InputDateTimeUtil.determineLocale(facesContext, super.getLocale());
+	protected String getPattern() {
+		return getDatePattern();
 	}
 
 	@Override
@@ -289,10 +182,5 @@ public class InputDate extends InputDateBase {
 		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
 		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
-	}
-
-	@Override
-	public String getTimeZone() {
-		return (String) getStateHelper().eval(InputDatePropertyKeys.timeZone, GREENWICH);
 	}
 }

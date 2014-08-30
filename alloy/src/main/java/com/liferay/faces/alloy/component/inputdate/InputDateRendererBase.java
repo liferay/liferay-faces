@@ -21,26 +21,21 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRendererBase;
+import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRenderer;
 
 /**
  * @author	Bruno Basto
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class InputDateRendererBase extends InputDateTimeRendererBase {
+public abstract class InputDateRendererBase extends InputDateTimeRenderer {
 
 	// Protected Constants
-	protected static final String AUTO_HIDE = "autoHide";
-	protected static final String CLIENT_KEY = "clientKey";
 	protected static final String DATE_SELECT_LISTENER = "dateSelectListener";
-	protected static final String LOCALE = "locale";
 	protected static final String MASK = "mask";
-	protected static final String MAXIMUM_DATE = "maximumDate";
-	protected static final String MINIMUM_DATE = "minimumDate";
+	protected static final String MAX_DATE = "maxDate";
+	protected static final String MIN_DATE = "minDate";
 	protected static final String PANES = "panes";
-	protected static final String TIME_ZONE = "timeZone";
-	protected static final String Z_INDEX = "zIndex";
 
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "DatePicker";
@@ -54,14 +49,6 @@ public abstract class InputDateRendererBase extends InputDateTimeRendererBase {
 
 		InputDate inputDate = (InputDate) uiComponent;
 		boolean first = true;
-
-		Boolean autoHide = inputDate.isAutoHide();
-
-		if (autoHide != null) {
-
-			encodeAutoHide(responseWriter, inputDate, autoHide, first);
-			first = false;
-		}
 
 		String datePattern = inputDate.getDatePattern();
 
@@ -90,10 +77,6 @@ public abstract class InputDateRendererBase extends InputDateTimeRendererBase {
 	@Override
 	protected String[] getModules() {
 		return MODULES;
-	}
-
-	protected void encodeAutoHide(ResponseWriter responseWriter, InputDate inputDate, Boolean autoHide, boolean first) throws IOException {
-		encodeBoolean(responseWriter, AUTO_HIDE, autoHide, first);
 	}
 
 	protected void encodeMask(ResponseWriter responseWriter, InputDate inputDate, String datePattern, boolean first) throws IOException {

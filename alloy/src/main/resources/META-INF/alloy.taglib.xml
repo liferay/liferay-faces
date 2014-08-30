@@ -2105,7 +2105,7 @@
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[InputDate is a UIInput component that renders a textbox and a popup a calendar with selectable dates. The component attepts to automatically convert the submitted value to a Date via a built in DateTimeConverter.]]></description>
+		<description><![CDATA[InputDate is a UIInput component that renders an <input type="text"> element and a calendar-popover with selectable dates. The component attempts to automatically convert the submitted value to a Date via a built-in DateTimeConverter.]]></description>
 		<tag-name>inputDate</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.inputdate.InputDate</component-type>
@@ -2125,13 +2125,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[HTML passthrough attribute specifying whether autocomplete is turned on or off for the rendered HTML element. Valid values include <code>on</code> (default) and <code>off</code>.]]></description>
-			<name>autocomplete</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[When this flag is true, the component will hide when a date is selected. The default value is true.]]></description>
+			<description><![CDATA[When this flag is true, the component will hide when an item is selected. The default value is true.]]></description>
 			<name>autoHide</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
@@ -2210,14 +2204,14 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the popup calendar.]]></description>
+			<description><![CDATA[The locale of the component which can be of type <code>java.lang.String</code> or <code>java.util.Locale</code>.]]></description>
 			<name>locale</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The maximum date that can be selected by the user. This attribute can be of type <code>java.lang.String</code> or <code>java.util.Date</code>.]]></description>
-			<name>maximumDate</name>
+			<name>maxDate</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
 		</attribute>
@@ -2229,7 +2223,7 @@
 		</attribute>
 		<attribute>
 			<description><![CDATA[The minimum date that can be selected by the user. This attribute can be of type <code>java.lang.String</code> or <code>java.util.Date</code>.]]></description>
-			<name>minimumDate</name>
+			<name>minDate</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
 		</attribute>
@@ -2354,7 +2348,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Specifies which event will pop up the calendar. Valid values are <code>focus</code> (the default), <code>button</code>, and <code>both</code>.]]></description>
+			<description><![CDATA[Specifies which event will pop up the picker. Valid values are <code>focus</code> (the default), <code>button</code>, and <code>both</code>.]]></description>
 			<name>showOn</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -2384,10 +2378,10 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The time zone of the component (defaults to "Greenwich"). This attribute is used to determine the time zone of <code>java.text.SimpleDateFormat</code> which is used to parse the <code>minimumDate</code> and <code>maximumDate</code> attributes. If <code>minimumDate</code> and maximumDate</code> are not Strings or are unused, it is not necessary to set this attribute.]]></description>
+			<description><![CDATA[The time zone for the built-in DateTimeConverter.]]></description>
 			<name>timeZone</name>
 			<required>false</required>
-			<type>java.lang.String</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
@@ -3767,6 +3761,376 @@ java.lang.Object)</method-signature>
 			<required>false</required>
 			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[InputTime is a UIInput component that renders an <input type="text"> element and a list-popover with selectable times. The component attempts to automatically convert the submitted value to a Date via a built-in DateTimeConverter.]]></description>
+		<tag-name>inputTime</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.inputtime.InputTime</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.inputtime.InputTimeRenderer</renderer-type>
+			<handler-class>com.liferay.faces.alloy.component.inputtime.InputTimeHandler</handler-class>
+		</component>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
+			<name>accesskey</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the first item in the list will be activated so that users can press TAB or ENTER to select it. Default is <code>true</code>.]]></description>
+			<name>activateFirstItem</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]></description>
+			<name>alt</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, the component will hide when an item is selected. The default value is true.]]></description>
+			<name>autoHide</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the autoComplete list will wrap around allowing users to use keyboard navigation to move from the top of the list to the bottom and vice versa. Defaults to <code>true</code>.]]></description>
+			<name>circular</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
+			<name>clientKey</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The class name of the converter instance that is to be used by this component.]]></description>
+			<name>converter</name>
+			<required>false</required>
+			<type>javax.faces.convert.Converter</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]></description>
+			<name>converterMessage</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
+			<name>dir</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
+			<name>disabled</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Specifies the type of filter that will be used for the pickTime's autocompletion. Valid values include:       <ul>        <li>charMatch</li>        <li>charMatchCase</li>        <li>phraseMatch</li>        <li>phraseMatchCase</li>        <li>startsWith</li>        <li>startsWithCase</li>        <li>subWordMatch</li>        <li>subWordMatchCase</li>        <li>wordMatch</li>        <li>wordMatchCase</li>       </ul>]]></description>
+			<name>filterType</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The the height (in pixels) of the rendered autoComplete list.]]></description>
+			<name>height</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Specifies the type of filter that will be used for the pickTime's autocomplete highlighter. Valid values include:       <ul>        <li>charMatch</li>        <li>charMatchCase</li>        <li>phraseMatch</li>        <li>phraseMatchCase</li>        <li>startsWith</li>        <li>startsWithCase</li>        <li>subWordMatch</li>        <li>subWordMatchCase</li>        <li>wordMatch</li>        <li>wordMatchCase</li>       </ul>]]></description>
+			<name>highlighterType</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]></description>
+			<name>immediate</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A localized label for this component that is typically only rendered in a FacesMessage when validation fails.]]></description>
+			<name>label</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
+			<name>lang</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The locale of the component which can be of type <code>java.lang.String</code> or <code>java.util.Locale</code>.]]></description>
+			<name>locale</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the maximum length of characters allowed in the element.]]></description>
+			<name>maxlength</name>
+			<required>false</required>
+			<type>int</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The maximum amount of autoComplete results.]]></description>
+			<name>maxResults</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The maximum time that can be selected by the user. <code>maxTime</code> can be of type <code>java.lang.String</code> (of the pattern "HH:mm:ss") or <code>java.util.Date</code>.]]></description>
+			<name>maxTime</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The minimum time that can be selected by the user. <code>minTime</code> can be of type <code>java.lang.String</code> (of the pattern "HH:mm:ss") or <code>java.util.Date</code>.]]></description>
+			<name>minTime</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
+			<name>onblur</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]></description>
+			<name>onchange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
+			<name>onclick</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a double click event occurs.]]></description>
+			<name>ondblclick</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when this component gets focus.]]></description>
+			<name>onfocus</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keydown event occurs.]]></description>
+			<name>onkeydown</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keypress event occurs.]]></description>
+			<name>onkeypress</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keyup event occurs.]]></description>
+			<name>onkeyup</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mousedown event occurs.]]></description>
+			<name>onmousedown</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mousemove event occurs.]]></description>
+			<name>onmousemove</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseout event occurs.]]></description>
+			<name>onmouseout</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseover event occurs.]]></description>
+			<name>onmouseover</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
+			<name>onmouseup</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when the user selects this component.]]></description>
+			<name>onselect</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The delay in milliseconds before a query occurs. After the <code>autoComplete</code> receives input, it waits the specified number of milliseconds before querying it's source. If input occurs before the specified number of milliseconds has elapsed, the timer is reset.]]></description>
+			<name>queryDelay</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
+			<name>readonly</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
+			<name>required</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]></description>
+			<name>requiredMessage</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
+			<name>role</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, if the active option of the autoComplete is not in view, the view will be scrolled to make the active option is displayed to the user.]]></description>
+			<name>scrollIntoView</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Specifies which event will pop up the picker. Valid values are <code>focus</code> (the default), <code>button</code>, and <code>both</code>.]]></description>
+			<name>showOn</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the visual length of the element.]]></description>
+			<name>size</name>
+			<required>false</required>
+			<type>int</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The step in seconds between each selectable timestamp. The default is 3,600 seconds (or 1 hour).]]></description>
+			<name>step</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying where the element is located in the tabbing progression.]]></description>
+			<name>tabindex</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The format of the time that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>. The default is <code>hh:mm a</code>.]]></description>
+			<name>timePattern</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A method that is executed when an date is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>com.liferay.faces.alloy.component.inputtime.TimeSelectEvent</code> argument.]]></description>
+			<name>timeSelectListener</name>
+			<required>false</required>
+			<type>javax.el.MethodExpression</type>
+			<method-signature>void timeSelectListener(com.liferay.faces.alloy.component.inputtime.TimeSelectEvent)</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The time zone for the built-in DateTimeConverter.]]></description>
+			<name>timeZone</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
+			<name>title</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
+			<name>validator</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+java.lang.Object)</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component.]]></description>
+			<name>validatorMessage</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
+			<name>valueChangeListener</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Specifies the stack order of the component. The default value is a constant from the Liferay.zIndex JavaScript object.]]></description>
+			<name>zIndex</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>

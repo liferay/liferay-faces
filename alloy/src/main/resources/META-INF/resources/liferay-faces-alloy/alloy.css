@@ -15,6 +15,11 @@ div.alloy-dialog {
 	text-align: center;
 }
 
+/* alloy-input-date / alloy-input-time */
+.alloy-input-date .alloy-button, .alloy-input-time .alloy-button {
+	margin-bottom: 10px;
+}
+
 /* alloy-input-file */
 .alloy-input-file .select-files-box,.alloy-input-file .upload-files-box {
 	display: inline-block;

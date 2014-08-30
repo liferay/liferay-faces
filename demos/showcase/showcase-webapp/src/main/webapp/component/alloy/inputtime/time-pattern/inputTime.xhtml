@@ -5,16 +5,16 @@
 
 	<ui:define name="col1">
 		<h:form>
-			<showcase:example description="#{i18n['alloy-inputdate-date-pattern-example']}">
-				<alloy:inputDate id="birthday" datePattern="EEEE, MMM dd, yyyy" value="#{inputDateModelBean.birthday}" />
+			<showcase:example description="#{i18n['alloy-inputtime-time-pattern-example']}">
+				<alloy:inputTime id="time" value="#{inputTimeModelBean.time}" timePattern="hh:mm:ss a" />
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
 				</alloy:commandButton>
 			</showcase:example>
 			<showcase:outputModel>
-				<alloy:outputText id="modelValue" value="#{inputDateModelBean.birthday}">
-					<f:convertDateTime pattern="EEEE, MMM dd, yyyy" />
+				<alloy:outputText id="modelValue" value="#{inputTimeModelBean.time}">
+					<f:convertDateTime pattern="hh:mm:ss a" />
 				</alloy:outputText>
 			</showcase:outputModel>
 		</h:form>
