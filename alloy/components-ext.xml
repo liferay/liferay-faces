@@ -293,6 +293,64 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="InputDateTimeCommon"
+		extendsTags="AltInherited DisabledInherited FacesMessageLabel InputCommon SizeInherited"
+		generateJava="false" generateTaglibXML="false">
+		<!-- This component exists so that InputDate and InputTime can extend it. It includes all the attributes of -->
+		<!-- InputDateTime with <generateJava>false</generateJava>. If InputDate and InputTime extended -->
+		<!-- InputDateTime directly, <generateJava> would be true, so getters and setters would be generated -->
+		<!-- incorrectly. -->
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[When this flag is true, the component will hide when an item is selected. The default value is true.]]>
+				</description>
+				<name>autoHide</name>
+				<type>java.lang.Boolean</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The key name that can be used to reference the component on the client.]]>
+				</description>
+				<name>clientKey</name>
+				<type>java.lang.String</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The locale of the component which can be of type <code>java.lang.String</code> or <code>java.util.Locale</code>.]]>
+				</description>
+				<name>locale</name>
+				<type>java.lang.Object</type>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies which event will pop up the picker. Valid values are <code>focus</code> (the default), <code>button</code>, and <code>both</code>.]]>
+				</description>
+				<type>java.lang.String</type>
+				<name>showOn</name>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The time zone for the built-in DateTimeConverter.]]>
+				</description>
+				<type>java.lang.Object</type>
+				<name>timeZone</name>
+				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the stack order of the component. The default value is a constant from the Liferay.zIndex JavaScript object.]]>
+				</description>
+				<name>zIndex</name>
+				<type>java.lang.Integer</type>
+				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="OutputTooltipPopoverCommon" extendsTags="OverlayCommon" generateJava="false"
 		generateTaglibXML="false">
 		<attributes>
@@ -916,30 +974,15 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputDate" extendsTags="InputText"
+	<component name="InputDate" extendsTags="InputDateTimeCommon"
 		handlerClass="com.liferay.faces.alloy.component.inputdate.InputDateHandler"
-		parentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeBase"
-		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRendererBase"
+		parentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTime"
+		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRenderer"
 		module="aui-datepicker" yui="true" yuiName="DatePicker">
 		<description>
-			<![CDATA[InputDate is a UIInput component that renders a textbox and a popup a calendar with selectable dates. The component attepts to automatically convert the submitted value to a Date via a built in DateTimeConverter.]]>
+			<![CDATA[InputDate is a UIInput component that renders an <input type="text"> element and a calendar-popover with selectable dates. The component attempts to automatically convert the submitted value to a Date via a built-in DateTimeConverter.]]>
 		</description>
 		<attributes>
-			<attribute>
-				<description>
-					<![CDATA[When this flag is true, the component will hide when a date is selected. The default value is true.]]>
-				</description>
-				<name>autoHide</name>
-				<type>java.lang.Boolean</type>
-				<yui>true</yui>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[The key name that can be used to reference the component on the client.]]>
-				</description>
-				<name>clientKey</name>
-				<type>java.lang.String</type>
-			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]>
@@ -961,23 +1004,16 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[Used to determine the format fo the date unless the datePattern is specified. The locale of the popup calendar.]]>
-				</description>
-				<name>locale</name>
-				<type>java.lang.Object</type>
-			</attribute>
-			<attribute>
-				<description>
 					<![CDATA[The maximum date that can be selected by the user. This attribute can be of type <code>java.lang.String</code> or <code>java.util.Date</code>.]]>
 				</description>
-				<name>maximumDate</name>
+				<name>maxDate</name>
 				<type>java.lang.Object</type>
 			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[The minimum date that can be selected by the user. This attribute can be of type <code>java.lang.String</code> or <code>java.util.Date</code>.]]>
 				</description>
-				<name>minimumDate</name>
+				<name>minDate</name>
 				<type>java.lang.Object</type>
 			</attribute>
 			<attribute>
@@ -988,17 +1024,43 @@
 				<type>java.lang.Integer</type>
 				<yui>true</yui>
 			</attribute>
+		</attributes>
+	</component>
+	<component name="InputDateTime" extendsTags="InputDateTimeCommon"
+		generateTaglibXML="false" parentClass="com.liferay.faces.alloy.component.inputtext.InputText"
+		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase">
+		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[Specifies which event will pop up the calendar. Valid values are <code>focus</code> (the default), <code>button</code>, and <code>both</code>.]]>
+					<![CDATA[When this flag is true, the component will hide when an item is selected. The default value is true.]]>
 				</description>
-				<type>java.lang.String</type>
-				<name>showOn</name>
-				<generateJava>false</generateJava>
+				<name>autoHide</name>
+				<type>java.lang.Boolean</type>
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The time zone of the component (defaults to "Greenwich"). This attribute is used to determine the time zone of <code>java.text.SimpleDateFormat</code> which is used to parse the <code>minimumDate</code> and <code>maximumDate</code> attributes. If <code>minimumDate</code> and maximumDate</code> are not Strings or are unused, it is not necessary to set this attribute.]]>
+					<![CDATA[The key name that can be used to reference the component on the client.]]>
+				</description>
+				<name>clientKey</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The locale of the component which can be of type <code>java.lang.String</code> or <code>java.util.Locale</code>.]]>
+				</description>
+				<name>locale</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies which event will pop up the picker. Valid values are <code>focus</code> (the default), <code>button</code>, and <code>both</code>.]]>
+				</description>
+				<name>showOn</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The time zone of the component (defaults to "Greenwich").]]>
 				</description>
 				<name>timeZone</name>
 				<type>java.lang.String</type>
@@ -1231,6 +1293,134 @@
 				<name>rows</name>
 				<type>int</type>
 				<generateJava>false</generateJava>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="InputTime" extendsTags="InputDateTimeCommon"
+		handlerClass="com.liferay.faces.alloy.component.inputtime.InputTimeHandler"
+		parentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTime"
+		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRenderer"
+		module="aui-timepicker" yui="true" yuiName="TimePicker">
+		<description>
+			<![CDATA[InputTime is a UIInput component that renders an <input type="text"> element and a list-popover with selectable times. The component attempts to automatically convert the submitted value to a Date via a built-in DateTimeConverter.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description><![CDATA[When true, the first item in the list will be activated so that users can press TAB or ENTER to select it. Default is <code>true</code>.]]></description>
+				<name>activateFirstItem</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[When true, the autoComplete list will wrap around allowing users to use keyboard navigation to move from the top of the list to the bottom and vice versa. Defaults to <code>true</code>.]]></description>
+				<name>circular</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the type of filter that will be used for the pickTime's autocompletion. Valid values include:
+						<ul>
+							<li>charMatch</li>
+							<li>charMatchCase</li>
+							<li>phraseMatch</li>
+							<li>phraseMatchCase</li>
+							<li>startsWith</li>
+							<li>startsWithCase</li>
+							<li>subWordMatch</li>
+							<li>subWordMatchCase</li>
+							<li>wordMatch</li>
+							<li>wordMatchCase</li>
+						</ul>
+					]]>
+				</description>
+				<name>filterType</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The the height (in pixels) of the rendered autoComplete list.]]>
+				</description>
+				<name>height</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Specifies the type of filter that will be used for the pickTime's autocomplete highlighter. Valid values include:
+						<ul>
+							<li>charMatch</li>
+							<li>charMatchCase</li>
+							<li>phraseMatch</li>
+							<li>phraseMatchCase</li>
+							<li>startsWith</li>
+							<li>startsWithCase</li>
+							<li>subWordMatch</li>
+							<li>subWordMatchCase</li>
+							<li>wordMatch</li>
+							<li>wordMatchCase</li>
+						</ul>
+					]]>
+				</description>
+				<name>highlighterType</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when an date is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>com.liferay.faces.alloy.component.inputtime.TimeSelectEvent</code> argument.]]>
+				</description>
+				<name>timeSelectListener</name>
+				<method-signature>
+					void timeSelectListener(com.liferay.faces.alloy.component.inputtime.TimeSelectEvent)
+				</method-signature>
+				<type>javax.el.MethodExpression</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[The maximum amount of autoComplete results.]]></description>
+				<name>maxResults</name>
+				<type>java.lang.Integer</type>
+			</attribute>
+			<attribute>
+				<defaultValue>"23:59:59"</defaultValue>
+				<description>
+					<![CDATA[The maximum time that can be selected by the user. <code>maxTime</code> can be of type <code>java.lang.String</code> (of the pattern "HH:mm:ss") or <code>java.util.Date</code>.]]>
+				</description>
+				<name>maxTime</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>"00:00:00"</defaultValue>
+				<description>
+					<![CDATA[The minimum time that can be selected by the user. <code>minTime</code> can be of type <code>java.lang.String</code> (of the pattern "HH:mm:ss") or <code>java.util.Date</code>.]]>
+				</description>
+				<name>minTime</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[The delay in milliseconds before a query occurs. After the <code>autoComplete</code> receives input, it waits the specified number of milliseconds before querying it's source. If input occurs before the specified number of milliseconds has elapsed, the timer is reset.]]></description>
+				<name>queryDelay</name>
+				<type>java.lang.Integer</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[When true, if the active option of the autoComplete is not in view, the view will be scrolled to make the active option is displayed to the user.]]></description>
+				<name>scrollIntoView</name>
+				<type>java.lang.Boolean</type>
+			</attribute>
+			<attribute>
+				<defaultValue>3600</defaultValue>
+				<description>
+					<![CDATA[The step in seconds between each selectable timestamp. The default is 3,600 seconds (or 1 hour).]]>
+				</description>
+				<name>step</name>
+				<type>java.lang.Integer</type>
+			</attribute>
+			<attribute>
+				<defaultValue>"hh:mm a"</defaultValue>
+				<description>
+					<![CDATA[The format of the time that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>. The default is <code>hh:mm a</code>.]]>
+				</description>
+				<name>timePattern</name>
+				<type>java.lang.String</type>
+				<yui>true</yui>
+				<yuiName>mask</yuiName>
 			</attribute>
 		</attributes>
 	</component>

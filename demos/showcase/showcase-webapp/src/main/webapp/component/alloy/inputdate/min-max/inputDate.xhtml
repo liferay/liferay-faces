@@ -5,19 +5,11 @@
 
 	<ui:define name="col1">
 		<h:form>
-			<showcase:example>
-				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" maximumDate="#{inputDateModelBean.maxDate}"
-					minimumDate="#{inputDateModelBean.minDate}" showOn="button" value="#{inputDateModelBean.birthday}" />
+			<showcase:example
+				description="#{i18n['valid-date-range']}: #{inputDateModelBean.formattedMinDate} - #{inputDateModelBean.formattedMaxDate}">
+				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" maxDate="#{inputDateModelBean.maxDate}"
+					minDate="#{inputDateModelBean.minDate}" showOn="button" value="#{inputDateModelBean.birthday}" />
 				<alloy:message for="birthday" />
-				<br />
-				<alloy:outputText value="#{i18n['valid-date-range']}: " />
-				<alloy:outputText value="#{inputDateModelBean.minDate}">
-					<f:convertDateTime pattern="MM/dd/yyyy" />
-				</alloy:outputText>
-				<alloy:outputText value=" - " />
-				<alloy:outputText value="#{inputDateModelBean.maxDate}">
-					<f:convertDateTime pattern="MM/dd/yyyy" />
-				</alloy:outputText>
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />

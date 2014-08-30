@@ -18,14 +18,11 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIViewRoot;
 import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.component.behavior.ClientBehaviorContext;
 import javax.faces.context.FacesContext;
@@ -34,7 +31,6 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
 import com.liferay.faces.alloy.component.inputtext.InputText;
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 
@@ -55,77 +51,38 @@ import com.liferay.faces.util.render.RendererUtil;
 //J+
 public class InputDateRenderer extends InputDateRendererBase {
 
-	// Private Constants
-	private static final String CALENDAR = "calendar";
-
-	// This is a javascript function that sets the value of the input to the new date and fires a change event
-	// on the input. It is used when showOn="button".
+	// This is a javascript function that sets the value of the input to the new date. It is used when
+	// showOn="button".
 	private static final String BUTTON_ON_DATE_CLICK_TEMPLATE = "var input=A.one('#{0}');" +
 		"input.set('value',A.Date.format(event.date,{format:'{1}'}));";
-	private static final String DATE_CLICK = "dateClick";
 
-	// NOTE: The JavaScript date object expects zero-based month numbers, so it is necessary to offset the month by 1.
-	private static final String JAVASCRIPT_NEW_DATE_PATTERN = "'new Date'(yyyy,MM-1,dd,0,0,0,0)";
-	private static final String LANG = "lang";
-	private static final String TOKEN_0 = "{0}";
-	private static final String TOKEN_1 = "{1}";
-	private static final String TRIGGER = "trigger";
-	private static final String ON = "on";
-	private static final String POPOVER = "popover";
-
-	// getMaskFromDatePattern() Constants
-	private static final String D = "d";
-	private static final String DD = "dd";
-	private static final String DDD = "DDD";
-	private static final String EEE = "EEE";
-	private static final String EEEE = "EEEE";
-	private static final String FF = "FF";
-	private static final String M = "M";
-	private static final String MM = "MM";
-	private static final String MMM = "MMM";
-	private static final String MMMMM = "MMMMM";
-	private static final String PERCENT_A_LOWER = "%a";
-	private static final String PERCENT_A_UPPER = "%A";
-	private static final String PERCENT_B_LOWER = "%b";
-	private static final String PERCENT_B_UPPER = "%B";
-	private static final String PERCENT_D_LOWER = "%d";
-	private static final String PERCENT_E_LOWER = "%e";
-	private static final String PERCENT_J_LOWER = "%j";
-	private static final String PERCENT_M_LOWER = "%m";
-	private static final String PERCENT_N_LOWER = "%n";
-	private static final String PERCENT_PERCENT = "%%";
-	private static final String PERCENT_T_LOWER = "%t";
-	private static final String PERCENT_U_LOWER = "%u";
-	private static final String PERCENT_Y_LOWER = "%y";
-	private static final String PERCENT_Y_UPPER = "%Y";
+	// Private Constants used in getMaskFromDatePattern()
 	private static final String REGEX_TOKEN = "\\{0\\}";
-	private static final String YY = "yy";
-	private static final String YYYY = "yyyy";
 
 	protected static String getMaskFromDatePattern(String datePattern) {
 
 		String mask = datePattern;
 
-		mask = mask.replaceAll(StringPool.PERCENT, PERCENT_PERCENT);
-		mask = mask.replaceAll(StringPool.NEW_LINE, PERCENT_N_LOWER);
-		mask = mask.replaceAll(StringPool.TAB, PERCENT_T_LOWER);
+		mask = mask.replaceAll("%", "%%");
+		mask = mask.replaceAll(StringPool.NEW_LINE, "%n");
+		mask = mask.replaceAll(StringPool.TAB, "%t");
 
-		mask = mask.replaceAll(YYYY, PERCENT_Y_UPPER);
-		mask = mask.replaceAll(YY, PERCENT_Y_LOWER);
-		mask = mask.replaceAll(MMMMM, PERCENT_B_UPPER);
-		mask = mask.replaceAll(MMM, PERCENT_B_LOWER);
-		mask = mask.replaceAll(MM, PERCENT_M_LOWER);
-		mask = mask.replaceAll(M, PERCENT_M_LOWER);
+		mask = mask.replaceAll("yyyy", "%Y");
+		mask = mask.replaceAll("yy", "%y");
+		mask = mask.replaceAll("MMMMM", "%B");
+		mask = mask.replaceAll("MMM", "%b");
+		mask = mask.replaceAll("MM", "%m");
+		mask = mask.replaceAll("M", "%m");
 
 		// Replace "dd" with a token (which doesn't contain "d"), so "%d" won't be replaced when we call
 		// replaceAll("d", "%e").
-		mask = mask.replaceAll(DD, REGEX_TOKEN);
-		mask = mask.replaceAll(D, PERCENT_E_LOWER);
-		mask = mask.replaceAll(REGEX_TOKEN, PERCENT_D_LOWER);
-		mask = mask.replaceAll(DDD, PERCENT_J_LOWER);
-		mask = mask.replaceAll(FF, PERCENT_U_LOWER);
-		mask = mask.replaceAll(EEEE, PERCENT_A_UPPER);
-		mask = mask.replaceAll(EEE, PERCENT_A_LOWER);
+		mask = mask.replaceAll("dd", REGEX_TOKEN);
+		mask = mask.replaceAll("d", "%e");
+		mask = mask.replaceAll(REGEX_TOKEN, "%d");
+		mask = mask.replaceAll("DDD", "%j");
+		mask = mask.replaceAll("FF", "%u");
+		mask = mask.replaceAll("EEEE", "%A");
+		mask = mask.replaceAll("EEE", "%a");
 
 		return mask;
 	}
@@ -134,26 +91,26 @@ public class InputDateRenderer extends InputDateRendererBase {
 		boolean first) throws IOException {
 
 		// The calendar attribute value provides the opportunity to specify dateClick events, selectionMode,
-		// minimumDate, maximumDate as key:value pairs via JSON syntax.
+		// minDate, maxDate as key:value pairs via JSON syntax.
 		// For example: "calendar: {selectionMode: 'multiple'}"
 		boolean calendarFirst = true;
 
-		encodeNonEscapedObject(responseWriter, CALENDAR, StringPool.BLANK, first);
+		encodeNonEscapedObject(responseWriter, "calendar", StringPool.BLANK, first);
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
-		Object maximumDate = inputDate.getMaximumDate();
+		Object maxDateObject = inputDate.getMaxDate();
 
-		if (maximumDate != null) {
+		if (maxDateObject != null) {
 
-			encodeDate(responseWriter, inputDate, MAXIMUM_DATE, maximumDate, calendarFirst);
+			encodeDate(responseWriter, inputDate, "maximumDate", maxDateObject, calendarFirst);
 			calendarFirst = false;
 		}
 
-		Object minimumDate = inputDate.getMinimumDate();
+		Object minDateObject = inputDate.getMinDate();
 
-		if (minimumDate != null) {
+		if (minDateObject != null) {
 
-			encodeDate(responseWriter, inputDate, MINIMUM_DATE, minimumDate, calendarFirst);
+			encodeDate(responseWriter, inputDate, "minimumDate", minDateObject, calendarFirst);
 			calendarFirst = false;
 		}
 
@@ -184,24 +141,24 @@ public class InputDateRenderer extends InputDateRendererBase {
 
 		String showOn = inputDate.getShowOn();
 
-		if (BUTTON.equals(showOn) || (dateSelectClientBehaviorScript != null)) {
+		if ("button".equals(showOn) || (dateSelectClientBehaviorScript != null)) {
 
-			encodeNonEscapedObject(responseWriter, ON, StringPool.BLANK, calendarFirst);
+			encodeNonEscapedObject(responseWriter, "on", StringPool.BLANK, calendarFirst);
 			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
 			StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.append("function(event){if(this._canBeSelected(event.date)){");
 
-			if (BUTTON.equals(showOn)) {
+			if ("button".equals(showOn)) {
 
 				// Each time a date is clicked, the input must be updated via javascript because the datePicker is not
 				// attached to the input.
 				String clientId = inputDate.getClientId(facesContext);
 				String escapedInputClientId = RendererUtil.escapeClientId(clientId.concat(INPUT_SUFFIX));
-				String buttonOnDateClick = BUTTON_ON_DATE_CLICK_TEMPLATE.replace(TOKEN_0, escapedInputClientId);
+				String buttonOnDateClick = BUTTON_ON_DATE_CLICK_TEMPLATE.replace("{0}", escapedInputClientId);
 				String datePattern = inputDate.getDatePattern();
 				String mask = getMaskFromDatePattern(datePattern);
-				String onDateClick = buttonOnDateClick.replace(TOKEN_1, mask);
+				String onDateClick = buttonOnDateClick.replace("{1}", mask);
 				stringBuilder.append(onDateClick);
 			}
 
@@ -210,7 +167,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 			}
 
 			stringBuilder.append("}}");
-			encodeNonEscapedObject(responseWriter, DATE_CLICK, stringBuilder.toString(), true);
+			encodeNonEscapedObject(responseWriter, "dateClick", stringBuilder.toString(), true);
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 			calendarFirst = false;
 		}
@@ -225,7 +182,10 @@ public class InputDateRenderer extends InputDateRendererBase {
 		String timeZoneString = inputDate.getTimeZone();
 		TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
 		Date date = InputDateTimeUtil.getObjectAsDate(dateObject, datePattern, timeZone);
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(JAVASCRIPT_NEW_DATE_PATTERN);
+
+		// Note: The JavaScript date object expects zero-based month numbers, so it is necessary to offset the month
+		// by 1.
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("'new Date'(yyyy,MM-1,dd,0,0,0,0)");
 		simpleDateFormat.setTimeZone(timeZone);
 
 		String dateString = simpleDateFormat.format(date);
@@ -236,24 +196,10 @@ public class InputDateRenderer extends InputDateRendererBase {
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, InputDate inputDate,
 		boolean first) throws IOException {
 
+		encodeInputDateTimeHiddenAttributes(facesContext, responseWriter, inputDate, first);
+		first = false;
+
 		encodeCalendar(facesContext, responseWriter, inputDate, first);
-		first = false;
-
-		encodePopover(facesContext, responseWriter, inputDate, first);
-		first = false;
-
-		String triggerClientId;
-		String showOn = inputDate.getShowOn();
-
-		if (BUTTON.equals(showOn)) {
-			triggerClientId = getButtonClientId(facesContext, inputDate);
-		}
-		else {
-			String clientId = inputDate.getClientId(facesContext);
-			triggerClientId = clientId.concat(INPUT_SUFFIX);
-		}
-
-		encodeClientId(responseWriter, TRIGGER, triggerClientId, first);
 		first = false;
 	}
 
@@ -266,37 +212,9 @@ public class InputDateRenderer extends InputDateRendererBase {
 		super.encodeMask(responseWriter, inputDate, datePatternMask, first);
 	}
 
-	protected void encodePopover(FacesContext facesContext, ResponseWriter responseWriter, InputDate inputDate,
-		boolean first) throws IOException {
-
-		// The popover attribute value provides the opportunity to specify a zIndex key:value pair via JSON
-		// syntax. For example: "popover: {zIndex: 1}"
-		encodeNonEscapedObject(responseWriter, POPOVER, StringPool.BLANK, first);
-		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
-
-		Integer zIndex = inputDate.getzIndex();
-		String zIndexString;
-
-		if (zIndex != null) {
-			zIndexString = zIndex.toString();
-		}
-		else {
-			zIndexString = AlloyRendererUtil.LIFERAY_Z_INDEX_TOOLTIP;
-		}
-
-		boolean popoverFirst = true;
-		encodeNonEscapedObject(responseWriter, Z_INDEX, zIndexString, popoverFirst);
-		popoverFirst = false;
-
-		String clientId = inputDate.getClientId(facesContext);
-		String boundingBoxClientId = clientId.concat(BOUNDING_BOX_SUFFIX);
-		encodeClientId(responseWriter, AlloyRendererUtil.BOUNDING_BOX, boundingBoxClientId, popoverFirst);
-		popoverFirst = false;
-
-		String contentBoxClientId = clientId.concat(CONTENT_BOX_SUFFIX);
-		encodeClientId(responseWriter, AlloyRendererUtil.CONTENT_BOX, contentBoxClientId, popoverFirst);
-		popoverFirst = false;
-		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+	@Override
+	public String getButtonIconName() {
+		return "calendar";
 	}
 
 	@Override
@@ -307,43 +225,5 @@ public class InputDateRenderer extends InputDateRendererBase {
 	@Override
 	public String getDelegateRendererType() {
 		return InputText.DELEGATE_RENDERER_TYPE;
-	}
-
-	@Override
-	protected boolean isForceInline(FacesContext facesContext, UIComponent uiComponent) {
-
-		// In order to support the "lang" attribute of the YUI object, it is necessary to determine if the user has
-		// specified a locale other than that of the server or view root. If so, then the javascript must be rendered
-		// inline.
-		InputDate inputDate = (InputDate) uiComponent;
-		Locale locale = InputDateTimeUtil.getObjectAsLocale(inputDate.getLocale(facesContext));
-		UIViewRoot viewRoot = facesContext.getViewRoot();
-		Locale viewRootLocale = viewRoot.getLocale();
-
-		return !locale.equals(viewRootLocale);
-	}
-
-	@Override
-	public String getYUIConfig(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
-		throws IOException {
-
-		InputDate inputDate = (InputDate) uiComponent;
-		Locale locale = InputDateTimeUtil.getObjectAsLocale(inputDate.getLocale(facesContext));
-
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(StringPool.OPEN_CURLY_BRACE);
-		stringBuilder.append(LANG);
-		stringBuilder.append(StringPool.COLON);
-
-		// RFC 1766 requires the subtags of locales to be delimited by hyphens rather than underscores.
-		// http://www.faqs.org/rfcs/rfc1766.html
-		stringBuilder.append(StringPool.APOSTROPHE);
-
-		String localeString = locale.toString().replaceAll(StringPool.UNDERLINE, StringPool.DASH);
-		stringBuilder.append(localeString);
-		stringBuilder.append(StringPool.APOSTROPHE);
-		stringBuilder.append(StringPool.CLOSE_CURLY_BRACE);
-
-		return stringBuilder.toString();
 	}
 }

@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -40,6 +42,18 @@ public class InputDateModelBean {
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
+	}
+
+	public String getFormattedMaxDate() {
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+
+		return dateFormat.format(getMaxDate());
+	}
+
+	public String getFormattedMinDate() {
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+
+		return dateFormat.format(getMinDate());
 	}
 
 	public Locale getLocale() {

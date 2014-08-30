@@ -12,32 +12,76 @@
  * details.
  */
 package com.liferay.faces.alloy.component.inputdatetime;
+//J-
 
+import javax.annotation.Generated;
 import com.liferay.faces.alloy.component.inputtext.InputText;
-import com.liferay.faces.util.component.ClientComponent;
 
+import com.liferay.faces.util.component.Styleable;
 
 /**
- * @author  Kyle Stiemann
+ * @author	Bruno Basto
+ * @author	Kyle Stiemann
  */
-public abstract class InputDateTimeBase extends InputText implements ClientComponent {
+@Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
+public abstract class InputDateTimeBase extends InputText implements Styleable {
 
-	// Public Constants
-	public static final String SHOW_ON = "showOn";
+	// Protected Enumerations
+	protected enum InputDateTimePropertyKeys {
+		autoHide,
+		clientKey,
+		locale,
+		showOn,
+		timeZone,
+		zIndex
+	}
 
-	// Protected Constants
-	protected static final String BUTTON_ICON = "buttonIcon";
+	public Boolean isAutoHide() {
+		return (Boolean) getStateHelper().eval(InputDateTimePropertyKeys.autoHide, null);
+	}
 
-	// Private Constants
-	private static final String FOCUS = "focus";
+	public void setAutoHide(Boolean autoHide) {
+		getStateHelper().put(InputDateTimePropertyKeys.autoHide, autoHide);
+	}
 
-	public abstract String getButtonIconName();
+	public String getClientKey() {
+		return (String) getStateHelper().eval(InputDateTimePropertyKeys.clientKey, null);
+	}
+
+	public void setClientKey(String clientKey) {
+		getStateHelper().put(InputDateTimePropertyKeys.clientKey, clientKey);
+	}
+
+	public Object getLocale() {
+		return (Object) getStateHelper().eval(InputDateTimePropertyKeys.locale, null);
+	}
+
+	public void setLocale(Object locale) {
+		getStateHelper().put(InputDateTimePropertyKeys.locale, locale);
+	}
 
 	public String getShowOn() {
-		return (String) getStateHelper().eval(SHOW_ON, FOCUS);
+		return (String) getStateHelper().eval(InputDateTimePropertyKeys.showOn, null);
 	}
 
 	public void setShowOn(String showOn) {
-		getStateHelper().put(SHOW_ON, showOn);
+		getStateHelper().put(InputDateTimePropertyKeys.showOn, showOn);
+	}
+
+	public String getTimeZone() {
+		return (String) getStateHelper().eval(InputDateTimePropertyKeys.timeZone, null);
+	}
+
+	public void setTimeZone(String timeZone) {
+		getStateHelper().put(InputDateTimePropertyKeys.timeZone, timeZone);
+	}
+
+	public Integer getzIndex() {
+		return (Integer) getStateHelper().eval(InputDateTimePropertyKeys.zIndex, null);
+	}
+
+	public void setzIndex(Integer zIndex) {
+		getStateHelper().put(InputDateTimePropertyKeys.zIndex, zIndex);
 	}
 }
+//J+
