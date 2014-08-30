@@ -38,7 +38,7 @@ import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
 
 import com.liferay.faces.alloy.component.commandlink.CommandLink;
-import com.liferay.faces.alloy.component.nodemenunav.internal.NodeMenuNav;
+import com.liferay.faces.alloy.component.nodemenunav.NodeMenuNav;
 import com.liferay.faces.alloy.component.nodemenunav.internal.NodeMenuNavRendererBase;
 import com.liferay.faces.util.component.ComponentUtil;
 

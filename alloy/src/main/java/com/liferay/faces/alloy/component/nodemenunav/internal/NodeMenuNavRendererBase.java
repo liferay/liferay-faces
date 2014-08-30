@@ -21,6 +21,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.component.menu.Menu;
+import com.liferay.faces.alloy.component.nodemenunav.NodeMenuNav;
 import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
 import com.liferay.faces.util.lang.StringPool;

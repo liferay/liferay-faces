@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.nodemenunav.internal;
+package com.liferay.faces.alloy.component.nodemenunav;
 
 import com.liferay.faces.util.component.ClientComponent;
 
