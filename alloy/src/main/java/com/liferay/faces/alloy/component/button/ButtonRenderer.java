@@ -30,7 +30,7 @@ import javax.faces.render.Renderer;
 import com.liferay.faces.alloy.component.commandbutton.CommandButton;
 import com.liferay.faces.alloy.component.commandbutton.SplitCommandButton;
 import com.liferay.faces.alloy.component.menu.Menu;
-import com.liferay.faces.alloy.component.nodemenunav.internal.NodeMenuNav;
+import com.liferay.faces.alloy.component.nodemenunav.NodeMenuNav;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
