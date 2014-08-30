@@ -63,8 +63,8 @@ public class Accordion extends AccordionBase implements ClientBehaviorHolder {
 	public void addClientBehavior(String eventName, ClientBehavior clientBehavior) {
 
 		// If the specified client behavior is an Ajax behavior, then the alloy:accordion component tag has an f:ajax
-		// child tag. Register an AccordionBehaviorListener that can respond to the Ajax behavior by invoking the
-		// tabEventListener that may have been specified.
+		// child tag. Register a listener that can respond to the Ajax behavior by invoking the tabCollapseListener or
+		// tabExpandListener that may have been specified.
 		if (clientBehavior instanceof AjaxBehavior) {
 			AjaxBehavior ajaxBehavior = (AjaxBehavior) clientBehavior;
 			ajaxBehavior.addAjaxBehaviorListener(new AccordionBehaviorListener());
