@@ -1,39 +1,38 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	template="/templates/component-4col.xhtml">
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/templates/component-4col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Example 1: Context-relative path to a resource via the value attribute -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['alloy-image-general-example-1']}" number="1" renderedCheckbox="true">
 				<alloy:image rendered="#{showcaseModelBean.selectedComponent.rendered}"
 					value="/resources/images/liferay-faces-logo.png" />
 			</showcase:example>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 	<ui:define name="col2">
 		<!-- Example 2: JSF resource via the #{resource} EL keyword -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['alloy-image-general-example-2']}" number="2">
 				<alloy:image value="#{resource['images:liferay-faces-logo.png']}" />
 			</showcase:example>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 	<ui:define name="col3">
 		<!-- Example 3: JSF resource via the library and name attributes -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['alloy-image-general-example-3']}" number="3">
 				<alloy:image library="images" name="liferay-faces-logo.png" />
 			</showcase:example>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 	<ui:define name="col4">
 		<!-- Example 4: Clickable areas via the usemap attribute -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['alloy-image-general-example-4']}" number="4">
 				<alloy:image usemap="#logoMapName" value="/resources/images/liferay-faces-logo.png" />
 				<map name="logoMapName">
@@ -43,7 +42,7 @@
 						target="_blank" title="JSR 329" />
 				</map>
 			</showcase:example>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 </ui:composition>

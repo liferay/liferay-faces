@@ -1,10 +1,10 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/templates/component-2col.xhtml">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Example 1: Script rendered inline -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['alloy-outputscript-general-example-1']}" number="1" renderedCheckbox="true">
 				<alloy:panelGroup rendered="#{showcaseModelBean.selectedComponent.rendered}">
 					<span id="example1:text"></span>
@@ -13,7 +13,7 @@
 					document.getElementById('example1:text').innerHTML = '#{i18n['alloy-outputscript-general-script-1']}';
 				</alloy:outputScript>
 			</showcase:example>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 	<ui:define name="col2">
