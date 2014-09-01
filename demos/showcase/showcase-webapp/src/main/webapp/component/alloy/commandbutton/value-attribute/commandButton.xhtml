@@ -1,10 +1,9 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/templates/component-3col.xhtml">
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
-		<h:form>
+		<alloy:form>
 			<showcase:example>
 				<ui:repeat value="#{commandModelBean.customers}" var="customer">
 					<alloy:commandButton actionListener="#{commandBackingBean.selectionListener}" value="#{customer}">
@@ -18,7 +17,7 @@
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{commandModelBean.selectedCustomer.fullName}" />
 			</showcase:outputModel>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 </ui:composition>

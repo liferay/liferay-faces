@@ -1,11 +1,10 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/templates/component-3col.xhtml">
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Example 1: Styling via children -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['alloy-commandbutton-general-example-1']}" number="1" renderedCheckbox="true">
 				<alloy:commandButton rendered="#{showcaseModelBean.selectedComponent.rendered}" value="1234">
 					<alloy:icon name="star" />
@@ -13,27 +12,27 @@
 					<alloy:image value="/resources/images/liferay-faces-logo-small.png" />
 				</alloy:commandButton>
 			</showcase:example>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 	<ui:define name="col2">
 		<!-- Example 2: Styling via image attribute -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['alloy-commandbutton-general-example-2']}" number="2" renderedCheckbox="true">
 				<alloy:commandButton image="/resources/images/liferay-faces-logo-small.png"
 					rendered="#{showcaseModelBean.selectedComponent.rendered}" value="1234" />
 			</showcase:example>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 	<ui:define name="col3">
 		<!-- Example#3: Styling via value attribute (Note: This can only be used if the component does not have any -->
 		<!-- children and the component does not specify an image) -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['alloy-commandbutton-general-example-3']}" number="3" renderedCheckbox="true">
 				<alloy:commandButton rendered="#{showcaseModelBean.selectedComponent.rendered}" value="1234" />
 			</showcase:example>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 </ui:composition>

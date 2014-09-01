@@ -1,9 +1,9 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase">
 
 	<showcase:example>
-		<h:form>
+		<alloy:form>
 			<alloy:messages globalOnly="true" layout="table" />
 			<alloy:accordion binding="#{accordionBackingBean.accordion}"
 				selectedIndex="#{accordionBackingBean.defaultSelectedIndex}">
@@ -33,7 +33,7 @@
 			<alloy:commandButton actionListener="#{accordionBackingBean.submit}" value="#{i18n['submit-and-re-render-form']}">
 				<f:ajax execute="@form" render="@form" />
 			</alloy:commandButton>
-		</h:form>
+		</alloy:form>
 	</showcase:example>
 
 </ui:composition>

@@ -1,11 +1,10 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/templates/component-2col.xhtml">
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Example 1: Conversion to a Date using the converter attribute. -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['conversion-to-a-date-using-converter-attribute']}" number="1">
 				<alloy:inputText id="text" converter="javax.faces.DateTime" converterMessage="#{i18n['converter-message']}"
 					value="#{inputTextModelBean.date}" />
@@ -19,12 +18,12 @@
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" converter="javax.faces.DateTime" value="#{inputTextModelBean.date}" />
 			</showcase:outputModel>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 	<ui:define name="col2">
 		<!-- Example 2: Conversion to a Date using an f:converter child tag. -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['conversion-to-a-date-using-f-convertdatetime']}" number="2">
 				<alloy:inputText id="text" converterMessage="#{i18n['converter-message']}" value="#{inputTextModelBean.date}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
@@ -41,7 +40,7 @@
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</alloy:outputText>
 			</showcase:outputModel>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 </ui:composition>

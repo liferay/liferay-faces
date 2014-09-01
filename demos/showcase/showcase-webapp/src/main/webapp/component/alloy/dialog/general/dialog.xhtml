@@ -1,11 +1,10 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/templates/component-3col.xhtml">
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Default usage with dismissible="false" -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['alloy-dialog-general-example-1']}" number="1">
 				<alloy:button onclick="Liferay.component('dialogKey1').toggle();" title="#{i18n['button-title']}"
 					value="#{i18n['click-here-to-toggle-the-dialog']}" />
@@ -22,12 +21,12 @@
 			<showcase:outputModel>
 				<alloy:outputText value="#{dialogModelBean.text}" />
 			</showcase:outputModel>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 	<ui:define name="col2">
 		<!-- Alternate usage with dismissible="true" -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['alloy-dialog-general-example-2']}" number="2">
 				<alloy:button onclick="Liferay.component('dialogKey2').show();" title="#{i18n['button-title']}"
 					value="#{i18n['click-here-to-show-the-dialog-and-cilck-outside-the-dialog-to-hide']}" />
@@ -44,12 +43,12 @@
 			<showcase:outputModel>
 				<alloy:outputText value="#{dialogModelBean.text}" />
 			</showcase:outputModel>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 	<ui:define name="col3">
 		<!-- Blocking usage with modal="true" -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['alloy-dialog-general-example-3']}" number="1">
 				<alloy:button onclick="Liferay.component('dialogKey3').show();" title="#{i18n['button-title']}"
 					value="#{i18n['click-here-to-show-the-modal-dialog']}" />
@@ -66,7 +65,7 @@
 			<showcase:outputModel>
 				<alloy:outputText value="#{dialogModelBean.text}" />
 			</showcase:outputModel>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 </ui:composition>

@@ -1,11 +1,11 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:jsf="http://java.sun.com/jsf"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
 	template="/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Example 1: Styling sub-menus via the label attribute -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['alloy-commandbutton-menu-example-1']}" number="1">
 				<alloy:commandButton>
 					<alloy:icon name="user" />
@@ -49,12 +49,12 @@
 				</alloy:commandButton>
 				<div style="clear: both;" />
 			</showcase:example>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 	<ui:define name="col2">
 		<!-- Example 2: Styling sub-menus via the f:facet tag -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['alloy-commandbutton-menu-example-2']}" number="2">
 				<alloy:commandButton>
 					<alloy:icon name="user" />
@@ -107,12 +107,12 @@
 				</alloy:commandButton>
 				<div style="clear: both;" />
 			</showcase:example>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 	<ui:define name="col3">
 		<!-- Example 3: Styling the button with f:facet -->
-		<h:form>
+		<alloy:form>
 			<showcase:example description="#{i18n['alloy-commandbutton-menu-example-3']}" number="3">
 				<alloy:commandButton>
 					<alloy:icon name="user" />
@@ -144,7 +144,7 @@
 				</alloy:commandButton>
 				<div style="clear: both;" />
 			</showcase:example>
-		</h:form>
+		</alloy:form>
 	</ui:define>
 
 </ui:composition>
