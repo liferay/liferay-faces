@@ -2,6 +2,10 @@
 	margin-top: 20px;
 }
 
+.aui div.showcase-home span.alloy-panel-title {
+	font-weight: bold;
+}
+
 .aui .showcase-grid {
 	width: 100%;
 }
