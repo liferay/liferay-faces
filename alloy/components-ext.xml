@@ -1667,6 +1667,28 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="Panel" extendsTags="PanelGroup" parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
+		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupRenderer">
+		<description>
+			<![CDATA[Panel is a UIPanel component that renders a <div> element with three child <div> elements (one for header, body, and footer). Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The text to place in the footer of the component.]]>
+				</description>
+				<name>footerText</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The text to place in the header of the component.]]>
+				</description>
+				<name>headerText</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="PanelGroup" extendsTags="HTMLCommonEvents" parentClass="javax.faces.component.html.HtmlPanelGroup"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
