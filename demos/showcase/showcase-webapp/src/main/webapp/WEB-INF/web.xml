@@ -6,7 +6,7 @@
 	<!-- Inform the JSF runtime of additional faces-config.xml files. -->
 	<context-param>
 		<param-name>javax.faces.CONFIG_FILES</param-name>
-		<param-value>WEB-INF/navigation-rule.xml</param-value>
+		<param-value>/WEB-INF/navigation-rule.xml</param-value>
 	</context-param>
 	<!-- Inform the JSF runtime (Mojarra) that this application has a custom Facelet tag library. -->
 	<context-param>

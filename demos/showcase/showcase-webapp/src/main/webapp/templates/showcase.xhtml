@@ -21,7 +21,7 @@
 					</f:facet>
 					<aui:list styleClass="nav nav-list">
 						<ui:repeat value="#{listModelBean.showcaseCategoryMap[showcaseCategory]}" var="showcaseComponent">
-							<aui:list-item class="#{(selectedComponentKey == showcaseComponent.key) ? 'active' : ''}">
+							<aui:list-item styleClass="#{(selectedComponentKey == showcaseComponent.key) ? 'active' : ''}">
 								<alloy:link outcome="component" value="#{showcaseComponent}">
 									<f:param name="componentPrefix" value="#{showcaseComponent.prefix}" />
 									<f:param name="componentName" value="#{showcaseComponent.lowerCaseName}" />
@@ -29,9 +29,9 @@
 									<alloy:icon name="chevron-right" />
 								</alloy:link>
 								<ui:fragment rendered="#{selectedComponentKey == showcaseComponent.key}">
-									<aui:list class="nav nav-list">
+									<aui:list styleClass="nav nav-list">
 										<ui:repeat value="#{selectedComponent.useCases}" var="useCase">
-											<aui:list-item class="#{(selectedComponentUseCaseName == useCase.name) ? 'active' : ''}"
+											<aui:list-item styleClass="#{(selectedComponentUseCaseName == useCase.name) ? 'active' : ''}"
 												style="white-space: nowrap;">
 												<alloy:link value="#{i18n[useCase.name]}">
 													<f:param name="componentPrefix" value="#{selectedComponent.prefix}" />
