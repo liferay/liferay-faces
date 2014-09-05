@@ -38,7 +38,7 @@ public class TimeSelectEvent extends AjaxBehaviorEvent {
 	public TimeSelectEvent(UIComponent uiComponent, Behavior behavior, Date time) {
 		super(uiComponent, behavior);
 		this.time = time;
-		setPhaseId(PhaseId.APPLY_REQUEST_VALUES);
+		setPhaseId(PhaseId.PROCESS_VALIDATIONS);
 	}
 
 	public Date getTime() {
