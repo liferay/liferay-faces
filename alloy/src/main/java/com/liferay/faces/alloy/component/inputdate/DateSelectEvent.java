@@ -38,7 +38,7 @@ public class DateSelectEvent extends AjaxBehaviorEvent {
 	public DateSelectEvent(UIComponent uiComponent, Behavior behavior, Date date) {
 		super(uiComponent, behavior);
 		this.date = date;
-		setPhaseId(PhaseId.APPLY_REQUEST_VALUES);
+		setPhaseId(PhaseId.PROCESS_VALIDATIONS);
 	}
 
 	public Date getDate() {
