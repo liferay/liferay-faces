@@ -37,7 +37,6 @@ import javax.faces.event.FacesEvent;
 import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
 
-import com.liferay.faces.alloy.component.commandlink.CommandLink;
 import com.liferay.faces.alloy.component.nodemenunav.NodeMenuNav;
 import com.liferay.faces.alloy.component.nodemenunav.internal.NodeMenuNavRendererBase;
 import com.liferay.faces.util.component.ComponentUtil;
@@ -46,15 +45,12 @@ import com.liferay.faces.util.component.ComponentUtil;
 /**
  * @author  Vernon Singleton
  */
-public class SplitCommandButton extends CommandLink implements NodeMenuNav {
+public class SplitCommandButton extends SplitCommandButtonCompat implements NodeMenuNav {
 
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.button.SplitCommandButtonRenderer";
 
 	// Private constants
 	private static final String BUTTON_PREFIX = "btn-";
-
-	// Private Data Members
-	private CommandButton wrappedCommandButton;
 
 	private String rendererType;
 
@@ -568,11 +564,6 @@ public class SplitCommandButton extends CommandLink implements NodeMenuNav {
 	}
 
 	@Override
-	public Map<String, Object> getPassThroughAttributes(boolean create) {
-		return wrappedCommandButton.getPassThroughAttributes(create);
-	}
-
-	@Override
 	public String getRel() {
 		return null;
 	}
@@ -615,16 +606,6 @@ public class SplitCommandButton extends CommandLink implements NodeMenuNav {
 	@Override
 	public void setRev(String rev) {
 		// no-op
-	}
-
-	@Override
-	public String getRole() {
-		return wrappedCommandButton.getRole();
-	}
-
-	@Override
-	public void setRole(String role) {
-		wrappedCommandButton.setRole(role);
 	}
 
 	@Override
