@@ -8,7 +8,7 @@
 				<alloy:tabView id="wizard" selectedIndex="#{tabViewWizardBean.selectedTabIndex}"
 					tabSelectListener="#{tabViewWizardBean.tabSelectListener}">
 					<f:ajax event="tabSelect" />
-					<alloy:tab label="#{i18n['step-1']}">
+					<alloy:tab headerText="#{i18n['step-1']}">
 						<alloy:fieldset id="step1">
 							<alloy:field label="#{i18n['first-name']}">
 								<alloy:inputText id="firstName" required="true" value="#{tabViewWizardBean.firstName}" />

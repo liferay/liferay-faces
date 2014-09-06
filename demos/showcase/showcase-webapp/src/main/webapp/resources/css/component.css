@@ -1,3 +1,7 @@
+.aui .alloy-tab-view .tab img {
+	height: 24px;
+}
+
 .aui code {
 	color: rgb(0, 22, 142);
 }

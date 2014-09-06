@@ -383,13 +383,11 @@ public class TabViewRenderer extends TabViewRendererBase {
 
 		// Otherwise, render the label of the specified tab.
 		else {
-			String label = (String) tab.getLabel();
+			String headerText = (String) tab.getHeaderText();
 
-			if (label == null) {
-				label = StringPool.LABEL;
+			if (headerText != null) {
+				responseWriter.write(headerText);
 			}
-
-			responseWriter.write(label);
 		}
 
 		responseWriter.endElement("a");
