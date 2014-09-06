@@ -8664,14 +8664,14 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A unique identifier for this component.]]></description>
-			<name>id</name>
+			<description><![CDATA[The text to place in the header of the component.]]></description>
+			<name>headerText</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The visible label for the tab.]]></description>
-			<name>label</name>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>

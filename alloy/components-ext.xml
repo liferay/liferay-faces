@@ -1920,9 +1920,9 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The visible label for the tab.]]>
+					<![CDATA[The text to place in the header of the component.]]>
 				</description>
-				<name>label</name>
+				<name>headerText</name>
 				<type>java.lang.String</type>
 			</attribute>
 		</attributes>

@@ -32,7 +32,7 @@
 			src="/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/#{selectedComponentUseCaseName}/#{selectedComponentCamelCaseName}.xhtml" />
 		<h3>#{i18n['source-code']}</h3>
 		<alloy:tabView value="#{showcaseModelBean.selectedComponent.useCaseCodeExamples}" var="useCaseCodeExample">
-			<alloy:tab label="#{useCaseCodeExample.fileName}">
+			<alloy:tab headerText="#{useCaseCodeExample.fileName}">
 				<alloy:inputSourceCode mode="#{useCaseCodeExample.fileExtension}" readOnly="true" showPrintMargin="false"
 					useWrapMode="false" height="600" width="1100" value="#{useCaseCodeExample.rawText}" />
 			</alloy:tab>

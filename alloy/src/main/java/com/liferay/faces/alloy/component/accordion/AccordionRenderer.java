@@ -385,13 +385,11 @@ public class AccordionRenderer extends AccordionRendererBase {
 
 		// Otherwise, render the label of the specified tab.
 		else {
-			String label = (String) tab.getLabel();
+			String headerText = (String) tab.getHeaderText();
 
-			if (label == null) {
-				label = StringPool.LABEL;
+			if (headerText != null) {
+				responseWriter.write(headerText);
 			}
-
-			responseWriter.write(label);
 		}
 
 		// Encode the closing </div> element for the specified tab.

@@ -61,16 +61,17 @@ public class AccordionBackingBean {
 
 	public void tabCollapseListener(TabCollapseEvent tabCollapseEvent) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		FacesMessage facesMessage = new FacesMessage("Received 'tabCollapseEvent' for tab with label '" +
-				tabCollapseEvent.getTab().getLabel() + "' in the " + tabCollapseEvent.getPhaseId().getName() +
+		FacesMessage facesMessage = new FacesMessage("Received 'tabCollapseEvent' for tab with header '" +
+				tabCollapseEvent.getTab().getHeaderText() + "' in the " + tabCollapseEvent.getPhaseId().getName() +
 				" phase.");
 		facesContext.addMessage(null, facesMessage);
 	}
 
 	public void tabExpandListener(TabExpandEvent tabExpandEvent) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		FacesMessage facesMessage = new FacesMessage("Received 'tabExpandEvent' for tab with label '" +
-				tabExpandEvent.getTab().getLabel() + "' in the " + tabExpandEvent.getPhaseId().getName() + " phase.");
+		FacesMessage facesMessage = new FacesMessage("Received 'tabExpandEvent' for tab with header '" +
+				tabExpandEvent.getTab().getHeaderText() + "' in the " + tabExpandEvent.getPhaseId().getName() +
+				" phase.");
 		facesContext.addMessage(null, facesMessage);
 	}
 

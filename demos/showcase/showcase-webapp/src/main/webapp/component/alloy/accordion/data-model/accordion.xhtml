@@ -3,7 +3,7 @@
 
 	<showcase:example>
 		<alloy:accordion value="#{accordionModelBean.liferayBenefits}" var="liferayBenefit">
-			<alloy:tab label="#{liferayBenefit.label}">
+			<alloy:tab headerText="#{liferayBenefit.label}">
 				<alloy:image name="icon-#{liferayBenefit.imageName}" library="images" />
 				<span>#{liferayBenefit.description}</span>
 			</alloy:tab>

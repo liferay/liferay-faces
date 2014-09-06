@@ -60,8 +60,9 @@ public class TabViewBackingBean {
 
 	public void tabSelectListener(TabSelectEvent tabSelectEvent) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		FacesMessage facesMessage = new FacesMessage("Received 'tabSelectEvent' for tab with label '" +
-				tabSelectEvent.getTab().getLabel() + "' in the " + tabSelectEvent.getPhaseId().getName() + " phase.");
+		FacesMessage facesMessage = new FacesMessage("Received 'tabSelectEvent' for tab with header '" +
+				tabSelectEvent.getTab().getHeaderText() + "' in the " + tabSelectEvent.getPhaseId().getName() +
+				" phase.");
 		facesContext.addMessage(null, facesMessage);
 	}
 

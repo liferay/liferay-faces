@@ -31,7 +31,7 @@ public abstract class TabBase extends UIColumn implements Styleable {
 		contentClass,
 		disabled,
 		headerClass,
-		label,
+		headerText,
 		style,
 		styleClass
 	}
@@ -60,12 +60,12 @@ public abstract class TabBase extends UIColumn implements Styleable {
 		getStateHelper().put(TabPropertyKeys.headerClass, headerClass);
 	}
 
-	public String getLabel() {
-		return (String) getStateHelper().eval(TabPropertyKeys.label, null);
+	public String getHeaderText() {
+		return (String) getStateHelper().eval(TabPropertyKeys.headerText, null);
 	}
 
-	public void setLabel(String label) {
-		getStateHelper().put(TabPropertyKeys.label, label);
+	public void setHeaderText(String headerText) {
+		getStateHelper().put(TabPropertyKeys.headerText, headerText);
 	}
 
 	@Override
