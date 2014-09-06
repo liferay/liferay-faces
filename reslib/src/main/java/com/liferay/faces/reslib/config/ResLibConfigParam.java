@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.config;
+package com.liferay.faces.reslib.config;
 
 import javax.faces.context.ExternalContext;
 
@@ -23,9 +23,9 @@ import com.liferay.faces.util.helper.BooleanHelper;
 /**
  * @author  Neil Griffin
  */
-public enum AlloyConfigParam implements ConfigParam<ExternalContext> {
+public enum ResLibConfigParam implements ConfigParam<ExternalContext> {
 
-	ComboAllowedFileExtensions("com.liferay.faces.alloy.comboAllowedFileExtensions", ".css,.js");
+	ComboAllowedFileExtensions("com.liferay.faces.reslib.comboAllowedFileExtensions", ".css,.js");
 
 	// Private Data Members
 	private boolean defaultBooleanValue;
@@ -33,7 +33,7 @@ public enum AlloyConfigParam implements ConfigParam<ExternalContext> {
 	private int defaultIntegerValue;
 	private String name;
 
-	private AlloyConfigParam(String name, String defaultStringValue) {
+	private ResLibConfigParam(String name, String defaultStringValue) {
 		this.name = name;
 
 		if (BooleanHelper.isTrueToken(defaultStringValue)) {
@@ -48,7 +48,7 @@ public enum AlloyConfigParam implements ConfigParam<ExternalContext> {
 		this.defaultStringValue = defaultStringValue;
 	}
 
-	private AlloyConfigParam(String name, boolean defaultBooleanValue) {
+	private ResLibConfigParam(String name, boolean defaultBooleanValue) {
 		this.name = name;
 
 		if (defaultBooleanValue) {

@@ -30,7 +30,7 @@ import com.liferay.faces.util.lang.StringPool;
  */
 //J-
 @FacesRenderer(componentFamily = Panel.COMPONENT_FAMILY, rendererType = Panel.RENDERER_TYPE)
-@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
+@ResourceDependency(library = "liferay-faces-reslib", name = "liferay.js")
 //J+
 public class PanelRenderer extends PanelRendererBase {
 

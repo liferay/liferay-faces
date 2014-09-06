@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+	<name>LiferayFacesResLib</name>
+	<ordering>
+		<after>
+			<name>LiferayFacesUtil</name>
+		</after>
+	</ordering>
+	<application>
+		<resource-handler>com.liferay.faces.reslib.application.internal.ResLibResourceHandler</resource-handler>
+	</application>
+	<factory>
+		<factory-extension>
+			<component-resource-factory>com.liferay.faces.reslib.component.internal.ComponentResourceFactoryResLibImpl</component-resource-factory>
+		</factory-extension>
+	</factory>
+
+</faces-config>

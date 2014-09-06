@@ -10,7 +10,6 @@
 	</ordering>
 	<application>
 		<el-resolver>com.liferay.faces.alloy.el.AUIELResolver</el-resolver>
-		<resource-handler>com.liferay.faces.alloy.application.AlloyResourceHandler</resource-handler>
 		<system-event-listener>
 			<system-event-listener-class>com.liferay.faces.alloy.event.ApplicationStartupListener</system-event-listener-class>
 			<system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
@@ -76,11 +75,6 @@
 		<converter-id>convertLongList</converter-id>
 		<converter-class>com.liferay.faces.alloy.converter.LongListConverter</converter-class>
 	</converter>
-	<factory>
-		<factory-extension>
-			<component-resource-factory>com.liferay.faces.alloy.component.ComponentResourceFactoryAlloyImpl</component-resource-factory>
-		</factory-extension>
-	</factory>
 	<render-kit>
 		<renderer>
 			<description>Overrides the BodyRenderer that comes with the JSF implementation</description>

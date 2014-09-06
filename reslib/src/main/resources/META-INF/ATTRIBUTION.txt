@@ -1,8 +1,4 @@
-The source code found in the com.liferay.faces.alloy package is unique to the
-Liferay Faces Alloy project and is subject to the license terms found in
-the lgpl-2.1.txt file.
-------------------------------------------------------------------------------
-The AlloyUI project is packaged with the liferay-faces-alloy.jar dependency
+The AlloyUI project is packaged with the liferay-faces-reslib.jar dependency
 and is subject to the license terms found in the alloyui-bsd-license.md file.
 ------------------------------------------------------------------------------
 The AlloyUI project packages YUI3 which is subject to the license terms found

@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.application;
+package com.liferay.faces.reslib.application.internal;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,7 +41,7 @@ public class ScriptResource extends Resource {
 	private String requestPath;
 
 	public ScriptResource() {
-		setLibraryName(AlloyResourceHandler.LIBRARY_NAME);
+		setLibraryName(ResLibResourceHandler.LIBRARY_NAME);
 		setResourceName(RESOURCE_NAME);
 		setContentType(ContentTypes.TEXT_JAVASCRIPT);
 	}
@@ -62,7 +62,7 @@ public class ScriptResource extends Resource {
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			ResourceHandler resourceHandlerChain = facesContext.getApplication().getResourceHandler();
 			String resourceName = BASE_PATH + modulePath;
-			internalResource = resourceHandlerChain.createResource(resourceName, AlloyResourceHandler.LIBRARY_NAME);
+			internalResource = resourceHandlerChain.createResource(resourceName, ResLibResourceHandler.LIBRARY_NAME);
 		}
 
 		return internalResource;

@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.application;
+package com.liferay.faces.reslib.application.internal;
 
 import java.io.IOException;
 

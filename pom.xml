@@ -68,6 +68,7 @@
 		<module>bridge-impl</module>
 		<module>cdi-compat</module>
 		<module>portal</module>
+		<module>reslib</module>
 		<module>demos</module>
 		<module>issues</module>
 		<module>support</module>

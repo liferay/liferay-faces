@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.application;
+package com.liferay.faces.reslib.application.internal;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.liferay.faces.alloy.config.AlloyConfigParam;
+import com.liferay.faces.reslib.config.ResLibConfigParam;
 import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.application.ResourceHandlerWrapperBase;
 import com.liferay.faces.util.config.ApplicationConfig;
@@ -48,10 +48,10 @@ import com.liferay.faces.util.render.HttpHeaders;
  *
  * @author  Neil Griffin
  */
-public class AlloyResourceHandler extends ResourceHandlerWrapperBase {
+public class ResLibResourceHandler extends ResourceHandlerWrapperBase {
 
 	// Public Constants
-	public static final String LIBRARY_NAME = "liferay-faces-alloy";
+	public static final String LIBRARY_NAME = "liferay-faces-reslib";
 
 	// Private Constants
 	private static final String LIFERAY_JS = "liferay.js";
@@ -70,7 +70,7 @@ public class AlloyResourceHandler extends ResourceHandlerWrapperBase {
 		PROTECTED_PARAMTERS.add("t");
 	}
 
-	public AlloyResourceHandler(ResourceHandler resourceHandler) {
+	public ResLibResourceHandler(ResourceHandler resourceHandler) {
 		super(resourceHandler);
 	}
 
@@ -106,7 +106,7 @@ public class AlloyResourceHandler extends ResourceHandlerWrapperBase {
 			String libraryName = requestParameterMap.get(ResourceConstants.LN);
 
 			if (LIBRARY_NAME.equals(libraryName)) {
-				
+
 				String resourceName = getResourceName(externalContext);
 
 				// If the resource that is to be rendered is "liferay.js" then let this resource handler have an
@@ -167,7 +167,7 @@ public class AlloyResourceHandler extends ResourceHandlerWrapperBase {
 	}
 
 	protected boolean validateModulePathExtensions(ExternalContext externalContext, List<String> modulePaths) {
-		String[] comboAllowedFileExtensions = AlloyConfigParam.ComboAllowedFileExtensions.getStringValue(
+		String[] comboAllowedFileExtensions = ResLibConfigParam.ComboAllowedFileExtensions.getStringValue(
 				externalContext).split(StringPool.COMMA);
 
 		boolean modulePathExtensionsValid = true;

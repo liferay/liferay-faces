@@ -33,8 +33,8 @@ import com.liferay.faces.util.render.RendererUtil;
 @FacesRenderer(componentFamily = Row.COMPONENT_FAMILY, rendererType = Row.RENDERER_TYPE)
 @ResourceDependencies(
 	{
-		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
-		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap-responsive.min.css")
+		@ResourceDependency(library = "liferay-faces-reslib", name = "build/aui-css/css/bootstrap.min.css"),
+		@ResourceDependency(library = "liferay-faces-reslib", name = "build/aui-css/css/bootstrap-responsive.min.css")
 	}
 )
 //J+
