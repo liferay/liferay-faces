@@ -1,8 +1,8 @@
 ;(function() {
 	window.YUI_config = {
-		base: "#{resource['liferay-faces-alloy:script']}&",
+		base: "#{resource['liferay-faces-reslib:script']}&",
 		combine: true,
-		comboBase: "#{resource['liferay-faces-alloy:combo']}&",
+		comboBase: "#{resource['liferay-faces-reslib:combo']}&",
 		root: 'build/',
 	};
 })();

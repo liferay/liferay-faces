@@ -37,9 +37,9 @@ import com.liferay.faces.util.lang.StringPool;
 )
 @ResourceDependencies(
 	{
-		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
-		@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
-		@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
+		@ResourceDependency(library = "liferay-faces-reslib", name = "build/aui-css/css/bootstrap.min.css"),
+		@ResourceDependency(library = "liferay-faces-reslib", name = "build/aui/aui-min.js"),
+		@ResourceDependency(library = "liferay-faces-reslib", name = "liferay.js")
 	}
 )
 //J+

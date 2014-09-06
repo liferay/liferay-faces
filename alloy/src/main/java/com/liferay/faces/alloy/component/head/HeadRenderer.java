@@ -27,9 +27,9 @@ import javax.faces.render.FacesRenderer;
 		{
 			@ResourceDependency(library = "liferay-faces-alloy", name = "alloy.css"),
 			@ResourceDependency(library = "liferay-faces-alloy", name = "alloy.js"),
-			@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css"),
-			@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui/aui-min.js"),
-			@ResourceDependency(library = "liferay-faces-alloy", name = "liferay.js")
+			@ResourceDependency(library = "liferay-faces-reslib", name = "build/aui-css/css/bootstrap.min.css"),
+			@ResourceDependency(library = "liferay-faces-reslib", name = "build/aui/aui-min.js"),
+			@ResourceDependency(library = "liferay-faces-reslib", name = "liferay.js")
 		}
 	)
 //J+

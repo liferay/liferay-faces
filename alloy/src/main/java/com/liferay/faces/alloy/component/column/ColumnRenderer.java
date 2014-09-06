@@ -31,7 +31,7 @@ import com.liferay.faces.util.render.RendererUtil;
  * @author  Kyle Stiemann
  */
 @FacesRenderer(componentFamily = Column.COMPONENT_FAMILY, rendererType = Column.RENDERER_TYPE)
-@ResourceDependency(library = "liferay-faces-alloy", name = "build/aui-css/css/bootstrap.min.css")
+@ResourceDependency(library = "liferay-faces-reslib", name = "build/aui-css/css/bootstrap.min.css")
 public class ColumnRenderer extends ColumnRendererBase {
 
 	protected static Integer getColumnUnitSize(Integer width) {
