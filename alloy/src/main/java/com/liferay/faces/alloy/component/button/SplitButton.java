@@ -36,7 +36,6 @@ import javax.faces.event.FacesEvent;
 import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
 
-import com.liferay.faces.alloy.component.link.Link;
 import com.liferay.faces.alloy.component.nodemenunav.NodeMenuNav;
 import com.liferay.faces.alloy.component.nodemenunav.internal.NodeMenuNavRendererBase;
 import com.liferay.faces.util.component.ComponentUtil;
@@ -45,15 +44,12 @@ import com.liferay.faces.util.component.ComponentUtil;
 /**
  * @author  Neil Griffin
  */
-public class SplitButton extends Link implements NodeMenuNav {
+public class SplitButton extends SplitButtonCompat implements NodeMenuNav {
 
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.button.SplitButtonRenderer";
 
 	// Private constants
 	private static final String BUTTON_PREFIX = "btn-";
-
-	// Private Data Members
-	private Button wrappedButton;
 
 	private String rendererType;
 
@@ -160,11 +156,6 @@ public class SplitButton extends Link implements NodeMenuNav {
 	@Override
 	public void queueEvent(FacesEvent event) {
 		wrappedButton.queueEvent(event);
-	}
-
-	@Override
-	public void resetValue() {
-		wrappedButton.resetValue();
 	}
 
 	@Override
@@ -310,11 +301,6 @@ public class SplitButton extends Link implements NodeMenuNav {
 	@Override
 	public void setDir(String dir) {
 		wrappedButton.setDir(dir);
-	}
-
-	@Override
-	public void setDisableClientWindow(boolean disableClientWindow) {
-		wrappedButton.setDisableClientWindow(disableClientWindow);
 	}
 
 	@Override
@@ -548,11 +534,6 @@ public class SplitButton extends Link implements NodeMenuNav {
 	}
 
 	@Override
-	public Map<String, Object> getPassThroughAttributes(boolean create) {
-		return wrappedButton.getPassThroughAttributes(create);
-	}
-
-	@Override
 	public String getRel() {
 		return null;
 	}
@@ -595,16 +576,6 @@ public class SplitButton extends Link implements NodeMenuNav {
 	@Override
 	public void setRev(String rev) {
 		// no-op
-	}
-
-	@Override
-	public String getRole() {
-		return wrappedButton.getRole();
-	}
-
-	@Override
-	public void setRole(String role) {
-		wrappedButton.setRole(role);
 	}
 
 	@Override
@@ -750,11 +721,6 @@ public class SplitButton extends Link implements NodeMenuNav {
 	@Override
 	public void setValueExpression(String name, ValueExpression binding) {
 		wrappedButton.setValueExpression(name, binding);
-	}
-
-	@Override
-	public boolean isDisableClientWindow() {
-		return wrappedButton.isDisableClientWindow();
 	}
 
 	@Override
