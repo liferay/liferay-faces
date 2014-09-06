@@ -5,41 +5,51 @@
 	<ui:define name="content">
 		<h:outputStylesheet name="home.css" library="css" />
 		<div class="showcase-home">
-			<h2>Liferay Faces Showcase</h2>
+			<alloy:image library="images" name="component-showcase.png" />
 			<p>
 				<alloy:image library="images" name="laptop.png" style="float: right;" />
-				<a href="https://www.liferay.com/community/liferay-projects/liferay-faces">Liferay Faces</a> is an umbrella project
-				that provides support for the JavaServer<sup>TM</sup> Faces (JSF) standard within Liferay Portal. This showcase
-				application demonstrates usage of Facelet component tags provided by the following sub-projects:
+				<a href="https://www.liferay.com/community/liferay-projects/liferay-faces">Liferay Faces</a> is an <strong>umbrella
+					project</strong> that provides support for the JavaServer<sup>TM</sup> Faces (JSF) standard within Liferay Portal. This
+				showcase application demonstrates usage of Facelet component tags provided by the following <strong>sub-projects</strong>:
 			</p>
-			<alloy:panel headerText="Liferay Faces Alloy">
+			<alloy:panel>
+				<f:facet name="header">
+					<alloy:image library="images" name="liferay-faces-alloy.png" />
+				</f:facet>
 				<p>
-					The <a href="https://www.liferay.com/community/liferay-projects/liferay-faces/alloy">Liferay Faces Alloy</a>
-					sub-project provides a suite of JSF UI components that utilize <a href="http://alloyui.com/">Alloy UI</a>.
+					The <a href="https://www.liferay.com/community/liferay-projects/liferay-faces/alloy" target="_blank">Liferay
+						Faces Alloy</a> sub-project provides a suite of JSF UI components that utilize <a href="http://alloyui.com/"
+						target="_blank">Alloy UI</a>.
 				</p>
 				<p>
-					The Facelet component tags provided by Liferay Faces Alloy are prefixed with the <strong>alloy:</strong> namespace.
-				</p>
-			</alloy:panel>
-			<alloy:panel headerText="Liferay Faces Bridge">
-				<p>
-					The <a href="https://www.liferay.com/community/liferay-projects/liferay-faces/bridge">Liferay Faces Bridge</a> is a
-					portlet bridge for JSF which provides the ability to deploy JSF web applications as portlets within Liferay Portal.
-				</p>
-				<p>
-					The Facelet component tags provided by Liferay Faces Bridge are prefixed with the <strong>bridge:</strong> and <strong>portlet:</strong>
-					namespaces.
+					The Facelet component tags are prefixed with the <strong>alloy:</strong> namespace.
 				</p>
 			</alloy:panel>
-			<alloy:panel headerText="Liferay Faces Portal">
+			<alloy:panel>
+				<f:facet name="header">
+					<alloy:image library="images" name="liferay-faces-bridge.png" />
+				</f:facet>
 				<p>
-					The <a href="https://www.liferay.com/community/liferay-projects/liferay-faces/portal">Liferay Faces Portal</a>
-					sub-project provides JSF utilities, EL keywords, and a suite of JSF UI components that are Facelet equivalents of
-					the JSP tag libraries provided by Liferay Portal.
+					The <a href="https://www.liferay.com/community/liferay-projects/liferay-faces/bridge" target="_blank">Liferay
+						Faces Bridge</a> sub-project includes a <a href="https://www.jcp.org/en/jsr/detail?id=329" target="_blank">JSR 329</a>
+					certified portlet bridge which provides the ability to deploy JSF 2.2 web applications as portlets within Liferay
+					Portal.
 				</p>
 				<p>
-					The Facelet component tags provided by Liferay Faces Portal are prefixed with the <strong>liferay-ui:</strong>, <strong>liferay-util</strong>,
-					and <strong>liferay-security:</strong> namespaces.
+					The Facelet component tags are prefixed with the <strong>bridge:</strong> and <strong>portlet:</strong> namespaces.
+				</p>
+			</alloy:panel>
+			<alloy:panel>
+				<f:facet name="header">
+					<alloy:image library="images" name="liferay-faces-portal.png" />
+				</f:facet>
+				<p>
+					The <a href="https://www.liferay.com/community/liferay-projects/liferay-faces/portal" target="_blank">Liferay
+						Faces Portal</a> sub-project provides JSF utilities, EL keywords, and a suite of JSF UI components for use with <a
+						href="http://www.liferay.com/community/liferay-projects/liferay-portal" target="_blank">Liferay Portal</a>.
+				</p>
+				<p>
+					The Facelet component tags are prefixed with the <strong>portal:</strong> namespace.
 				</p>
 			</alloy:panel>
 		</div>
