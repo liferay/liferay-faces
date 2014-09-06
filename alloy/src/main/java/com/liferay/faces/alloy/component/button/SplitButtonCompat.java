@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.alloy.component.button;
 
-import java.util.Map;
-
 import com.liferay.faces.alloy.component.link.Link;
 
 
@@ -27,34 +25,4 @@ public abstract class SplitButtonCompat extends Link {
 
 	// Protected Data Members
 	protected Button wrappedButton;
-
-	@Override
-	public void resetValue() {
-		wrappedButton.resetValue();
-	}
-
-	@Override
-	public void setDisableClientWindow(boolean disableClientWindow) {
-		wrappedButton.setDisableClientWindow(disableClientWindow);
-	}
-
-	@Override
-	public Map<String, Object> getPassThroughAttributes(boolean create) {
-		return wrappedButton.getPassThroughAttributes(create);
-	}
-
-	@Override
-	public String getRole() {
-		return wrappedButton.getRole();
-	}
-
-	@Override
-	public void setRole(String role) {
-		wrappedButton.setRole(role);
-	}
-
-	@Override
-	public boolean isDisableClientWindow() {
-		return wrappedButton.isDisableClientWindow();
-	}
 }
