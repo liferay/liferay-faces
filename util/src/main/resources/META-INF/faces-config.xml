@@ -7,7 +7,6 @@
 	</application>
 	<factory>
 		<factory-extension>
-			<util:component-resource-factory>com.liferay.faces.util.component.ComponentResourceFactoryImpl</util:component-resource-factory>
 			<util:client-script-factory>com.liferay.faces.util.client.ClientScriptFactoryImpl</util:client-script-factory>
 			<util:template-factory>com.liferay.faces.util.template.internal.TemplateFactoryImpl</util:template-factory>
 			<util:uploaded-file-factory>com.liferay.faces.util.model.internal.UploadedFileFactoryImpl</util:uploaded-file-factory>
