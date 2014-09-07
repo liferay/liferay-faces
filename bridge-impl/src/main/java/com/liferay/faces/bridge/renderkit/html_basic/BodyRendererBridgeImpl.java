@@ -24,9 +24,9 @@ import javax.faces.render.Renderer;
 import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 
 import com.liferay.faces.bridge.renderkit.bridge.BridgeRenderer;
-import com.liferay.faces.util.component.ComponentResource;
-import com.liferay.faces.util.component.ComponentResourceFactory;
-import com.liferay.faces.util.component.ComponentResourceUtil;
+import com.liferay.faces.util.application.ComponentResource;
+import com.liferay.faces.util.application.ComponentResourceFactory;
+import com.liferay.faces.util.application.ComponentResourceUtil;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
