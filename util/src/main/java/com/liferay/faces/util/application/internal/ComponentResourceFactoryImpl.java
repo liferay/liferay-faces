@@ -11,12 +11,15 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.component;
+package com.liferay.faces.util.application.internal;
 
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
 
+import com.liferay.faces.util.application.ComponentResource;
+import com.liferay.faces.util.application.ComponentResourceFactory;
+import com.liferay.faces.util.application.ComponentResourceUtil;
 import com.liferay.faces.util.application.ResourceConstants;
 
 

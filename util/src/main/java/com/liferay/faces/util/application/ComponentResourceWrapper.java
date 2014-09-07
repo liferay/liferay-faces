@@ -11,40 +11,36 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.component;
+package com.liferay.faces.util.application;
+
+import javax.faces.FacesWrapper;
+
 
 /**
  * @author  Neil Griffin
  */
-public class ComponentResourceImpl implements ComponentResource {
-
-	// Private Data Members
-	private String id;
-	private String library;
-	private String name;
-	private boolean renderable;
-
-	public ComponentResourceImpl(String id, String library, String name, boolean renderable) {
-		this.id = id;
-		this.library = library;
-		this.name = name;
-		this.renderable = renderable;
-	}
+public abstract class ComponentResourceWrapper implements ComponentResource, FacesWrapper<ComponentResource> {
 
 	@Override
 	public boolean isRenderable() {
-		return renderable;
+		return getWrapped().isRenderable();
 	}
 
+	@Override
 	public String getId() {
-		return id;
+		return getWrapped().getId();
 	}
 
+	@Override
 	public String getLibrary() {
-		return library;
+		return getWrapped().getLibrary();
 	}
 
+	@Override
 	public String getName() {
-		return name;
+		return getWrapped().getName();
 	}
+
+	@Override
+	public abstract ComponentResource getWrapped();
 }

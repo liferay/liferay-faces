@@ -11,36 +11,21 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.component;
-
-import javax.faces.FacesWrapper;
-
+package com.liferay.faces.util.application;
 
 /**
+ * This interface defines a contract for getting information about a {@link javax.faces.component.UIComponent}} resource
+ * such as its name, library, and whether or not it should be rendered.
+ *
  * @author  Neil Griffin
  */
-public abstract class ComponentResourceWrapper implements ComponentResource, FacesWrapper<ComponentResource> {
+public interface ComponentResource {
 
-	@Override
-	public boolean isRenderable() {
-		return getWrapped().isRenderable();
-	}
+	public boolean isRenderable();
 
-	@Override
-	public String getId() {
-		return getWrapped().getId();
-	}
+	public String getId();
 
-	@Override
-	public String getLibrary() {
-		return getWrapped().getLibrary();
-	}
+	public String getLibrary();
 
-	@Override
-	public String getName() {
-		return getWrapped().getName();
-	}
-
-	@Override
-	public abstract ComponentResource getWrapped();
+	public String getName();
 }
