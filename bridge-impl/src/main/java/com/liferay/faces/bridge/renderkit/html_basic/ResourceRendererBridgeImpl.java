@@ -28,8 +28,8 @@ import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.util.component.ComponentResource;
-import com.liferay.faces.util.component.ComponentResourceFactory;
+import com.liferay.faces.util.application.ComponentResource;
+import com.liferay.faces.util.application.ComponentResourceFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
