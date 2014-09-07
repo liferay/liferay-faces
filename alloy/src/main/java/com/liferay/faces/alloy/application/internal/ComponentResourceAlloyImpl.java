@@ -11,13 +11,13 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.reslib.component.internal;
+package com.liferay.faces.alloy.application.internal;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.liferay.faces.util.component.ComponentResource;
-import com.liferay.faces.util.component.ComponentResourceWrapper;
+import com.liferay.faces.util.application.ComponentResource;
+import com.liferay.faces.util.application.ComponentResourceWrapper;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
@@ -29,7 +29,7 @@ import com.liferay.faces.util.product.ProductMap;
  *
  * @author  Neil Griffin
  */
-public class ComponentResourceResLibImpl extends ComponentResourceWrapper {
+public class ComponentResourceAlloyImpl extends ComponentResourceWrapper {
 
 	// Private Constants
 	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
@@ -45,7 +45,7 @@ public class ComponentResourceResLibImpl extends ComponentResourceWrapper {
 	// Private Data Members
 	private ComponentResource wrappedComponentResource;
 
-	public ComponentResourceResLibImpl(ComponentResource componentResource) {
+	public ComponentResourceAlloyImpl(ComponentResource componentResource) {
 		this.wrappedComponentResource = componentResource;
 	}
 

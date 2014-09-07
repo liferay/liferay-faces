@@ -17,10 +17,10 @@ import java.util.Map;
 
 import javax.faces.component.UIComponent;
 
+import com.liferay.faces.util.application.ComponentResource;
+import com.liferay.faces.util.application.ComponentResourceUtil;
 import com.liferay.faces.util.application.ResourceConstants;
-import com.liferay.faces.util.component.ComponentResource;
-import com.liferay.faces.util.component.ComponentResourceImpl;
-import com.liferay.faces.util.component.ComponentResourceUtil;
+import com.liferay.faces.util.application.internal.ComponentResourceImpl;
 
 
 /**
