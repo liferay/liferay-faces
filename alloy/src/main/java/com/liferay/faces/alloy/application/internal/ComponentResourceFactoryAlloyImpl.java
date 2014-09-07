@@ -11,23 +11,23 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.reslib.component.internal;
+package com.liferay.faces.alloy.application.internal;
 
 import javax.faces.component.UIComponent;
 
-import com.liferay.faces.util.component.ComponentResource;
-import com.liferay.faces.util.component.ComponentResourceFactory;
+import com.liferay.faces.util.application.ComponentResource;
+import com.liferay.faces.util.application.ComponentResourceFactory;
 
 
 /**
  * @author  Neil Griffin
  */
-public class ComponentResourceFactoryResLibImpl extends ComponentResourceFactory {
+public class ComponentResourceFactoryAlloyImpl extends ComponentResourceFactory {
 
 	// Private Data Members
 	private ComponentResourceFactory wrapppedComponentResourceFactory;
 
-	public ComponentResourceFactoryResLibImpl(ComponentResourceFactory componentResourceFactory) {
+	public ComponentResourceFactoryAlloyImpl(ComponentResourceFactory componentResourceFactory) {
 		this.wrapppedComponentResourceFactory = componentResourceFactory;
 	}
 
@@ -36,7 +36,7 @@ public class ComponentResourceFactoryResLibImpl extends ComponentResourceFactory
 
 		ComponentResource wrappedComponentResource = getWrapped().getComponentResource(uiComponentResource);
 
-		return new ComponentResourceResLibImpl(wrappedComponentResource);
+		return new ComponentResourceAlloyImpl(wrappedComponentResource);
 	}
 
 	@Override
