@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"	xmlns:portal="http://liferay.com/faces/portal" 
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<showcase:example description="#{i18n['portal-permissionsurl-general-example-1']}" number="1">
+			<portal:permissionsURL resourcePrimKey="#{permissionsURLModelBean.primaryKey}" var="permissionsURL1" />
+			<alloy:outputText escape="false" value="#{i18n['portal-permissionsurl-var-attribute']}" /><br />
+			<alloy:button onclick="document.location='#{permissionsURL1}';" 
+				rendered="#{liferay.userHasPortletPermission['PERMISSIONS']}" value="Permissions" />
+		</showcase:example>
+		<showcase:outputAttribute>
+			<alloy:outputText id="attributeValue1" binding="#{attributeValue1}" />
+		</showcase:outputAttribute>
+		<alloy:outputScript use="event">
+			A.on('domready', function(event) {
+				document.getElementById('#{attributeValue1.clientId}').innerHTML = '#{permissionsURL1}';
+			});
+		</alloy:outputScript>
+	</ui:define>
+	
+	<ui:define name="col2">
+		<showcase:example description="#{i18n['portal-permissionsurl-general-example-2']}" number="2">
+			<alloy:importConstants classType="com.liferay.portal.model.RoleConstants" var="roleConstants" />
+			<portal:permissionsURL resourcePrimKey="#{permissionsURLModelBean.primaryKey}" 
+				roleTypes="#{roleConstants.TYPES_ORGANIZATION_AND_REGULAR_AND_SITE}" var="permissionsURL2" />
+			<alloy:outputText escape="false" value="#{i18n['portal-permissionsurl-var-attribute']}" /><br />
+			<alloy:button onclick="document.location='#{permissionsURL2}';" 
+				rendered="#{liferay.userHasPortletPermission['PERMISSIONS']}" value="Permissions" />
+		</showcase:example>
+		<showcase:outputAttribute>
+			<alloy:outputText id="attributeValue2" binding="#{attributeValue2}" />
+		</showcase:outputAttribute>
+		<alloy:outputScript use="event">
+			A.on('domready', function(event) {
+				document.getElementById('#{attributeValue2.clientId}').innerHTML = '#{permissionsURL2}';
+			});
+		</alloy:outputScript>
+	</ui:define>
+
+</ui:composition>

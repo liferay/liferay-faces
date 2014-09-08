@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"	xmlns:portal="http://liferay.com/faces/portal" 
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/templates/component-2col.xhtml">
+	
+	<ui:define name="col1">
+		<showcase:example>
+			<ui:repeat value="#{permissionsURLModelBean.groups}" var="group">
+				<portal:permissionsURL 
+					modelResource="com.liferay.portal.model.Group"
+					modelResourceDescription="groupId: #{group.groupId}, className: #{group.className}, friendlyURL: #{group.friendlyURL}"
+					resourcePrimKey="#{group.groupId}"
+					var="permissionsURL" />
+				<alloy:outputText escape="false" value="#{i18n['portal-permissionsurl-var-attribute']}" /><br />
+				<alloy:button onclick="document.location='#{permissionsURL}'; return false;" 
+					rendered="#{liferay.userHasPortletPermission['PERMISSIONS']}" value="Permissions for #{event.title}" />
+				<alloy:outputScript use="event">
+					A.on('domready', function(event) {
+						document.getElementById('#{attributeValue.clientId}').innerHTML = '#{permissionsURL}';
+					});
+				</alloy:outputScript>
+			</ui:repeat>
+		</showcase:example>
+		<showcase:outputAttribute>
+			<alloy:outputText id="attributeValue" binding="#{attributeValue}" />
+		</showcase:outputAttribute>
+	</ui:define>
+
+</ui:composition>
