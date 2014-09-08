@@ -216,13 +216,10 @@ div.yui3-splitbuttonnav .yui3-menu-content li {
 
 div.yui3-menu-horizontal a.yui3-menu-label,div.yui3-menu-horizontal .yui3-menu-content span.yui3-menu-label,div.yui3-menu-horizontal a.yui3-menuitem-content {
 	border: 0;
-}
-
-/* yui3-splitbuttonnav: remove negative margin-left values */
-div.yui3-splitbuttonnav span.yui3-menu-label-active {
 	margin-left: 0;
 }
 
+/* yui3-splitbuttonnav: remove negative margin-left values */
 div.yui3-splitbuttonnav span.yui3-menu-label-menuvisible {
 	margin-left: 0;
 }
