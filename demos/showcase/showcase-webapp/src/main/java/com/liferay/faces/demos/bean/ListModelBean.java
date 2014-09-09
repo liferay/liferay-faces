@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -88,7 +87,7 @@ public class ListModelBean {
 		showcaseCategoryList.add("multimedia");
 		showcaseCategoryList.add("output");
 		showcaseCategoryList.add("panel");
-		
+
 		if (LIFERAY_PORTAL_DETECTED) {
 			showcaseCategoryList.add("portal");
 		}
@@ -279,16 +278,6 @@ public class ListModelBean {
 		String key = prefix + StringPool.UNDERLINE + name;
 
 		return showcaseComponentMap.get(key);
-	}
-
-	public String getCopyrightInfo() {
-
-		if (copyrightInfo == null) {
-			copyrightInfo = "Copyright (c) 2000-" + Calendar.getInstance().get(Calendar.YEAR) +
-				" Liferay, Inc. All rights reserved.";
-		}
-
-		return copyrightInfo;
 	}
 
 	public String getDependencyInfo() {
