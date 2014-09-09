@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components>
+<components extends="../util/common-components.xml">
+	<description>
+		<![CDATA[The Liferay Faces Portal facelet component tags with the <code>portal:</code> tag name prefix.]]>
+	</description>
+	<component name="PermissionsURL" parentClass="javax.faces.component.UIOutput" styleable="false">
+		<description>
+			<![CDATA[PermissionsURL is a UIOutput component that generates a URL pointing to the Liferay Portal Permissions UI. If the var attribute is present, the component introduces a variable into the EL. Otherwise, the URL is written to the response.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<!-- Non-null default value is required in order to prevent java.lang.IllegalArgumentException -->
+				<!-- http://portals.apache.org/pluto/portlet-2.0-apidocs/javax/portlet/BaseURL.html#setParameter(java.lang.String, java.lang.String) -->
+				<defaultValue>""</defaultValue>
+				<description>
+					<![CDATA[The Fully-Qualified Class Name (FQCN) of the ServiceBuilder model.]]>
+				</description>
+				<name>modelResource</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<!-- Non-null default value is required in order to prevent java.lang.IllegalArgumentException -->
+				<!-- http://portals.apache.org/pluto/portlet-2.0-apidocs/javax/portlet/BaseURL.html#setParameter(java.lang.String, java.lang.String) -->
+				<defaultValue>""</defaultValue>
+				<description>
+					<![CDATA[The description of the model resource that is to be displayed in the Liferay Portal Permissions UI.]]>
+				</description>
+				<name>modelResourceDescription</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The URL that should be redirected-to when the user clicks on the "Return to Full Page" link in the Liferay Portal Permissions UI.]]>
+				</description>
+				<name>redirect</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The scope group id for the resource. The default value is LiferayFacesContext.getInstance().getScopeGroupId()]]>
+				</description>
+				<name>resourceGroupId</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The primary key used to identify the resource.]]>
+				</description>
+				<name>resourcePrimKey</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[An array of type int that corresponds to the roles that are to be displayed in the Liferay Portal Permissions UI. For more info, see <a href="http://docs.liferay.com/portal/6.2/javadocs/com/liferay/portal/model/RoleConstants.html" target="_blank">com.liferay.portal.model.RoleConstants</a>.]]>
+				</description>
+				<name>roleTypes</name>
+				<type>int[]</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The name of the variable that is to be introduced into the EL that contains the value of the generated permissions URL. If not specified, then the generated permissions URL is written directly to the response.]]>
+				</description>
+				<name>var</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The portlet window state for which the Liferay Portal Permissions UI should be displayed. Valid values include: "maximized", "pop_up", and "exclusive". The default value is "maximized".]]>
+				</description>
+				<name>windowState</name>
+				<type>String</type>
+			</attribute>
+		</attributes>
+	</component>
+</components>

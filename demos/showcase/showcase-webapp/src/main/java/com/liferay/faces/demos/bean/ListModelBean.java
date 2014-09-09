@@ -88,6 +88,10 @@ public class ListModelBean {
 		showcaseCategoryList.add("multimedia");
 		showcaseCategoryList.add("output");
 		showcaseCategoryList.add("panel");
+		
+		if (LIFERAY_PORTAL_DETECTED) {
+			showcaseCategoryList.add("portal");
+		}
 
 		if (LIFERAY_FACES_BRIDGE_DETECTED) {
 			showcaseCategoryList.add("portlet");
@@ -119,7 +123,7 @@ public class ListModelBean {
 		}
 
 		if (LIFERAY_PORTAL_DETECTED) {
-			namespaces.add("liferay-ui");
+			namespaces.add("portal");
 		}
 
 		if (LIFERAY_FACES_BRIDGE_DETECTED) {

@@ -291,6 +291,22 @@
 				<name>hideIconRendered</name>
 				<type>boolean</type>
 			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The height of the dialog/popover.]]>
+				</description>
+				<name>height</name>
+				<type>String</type>
+				<yui>true</yui>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The width of the dialog/popover.]]>
+				</description>
+				<name>width</name>
+				<type>String</type>
+				<yui>true</yui>
+			</attribute>
 		</attributes>
 	</component>
 	<component name="InputDateTimeCommon"

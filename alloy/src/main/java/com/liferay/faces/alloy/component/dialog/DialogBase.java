@@ -33,8 +33,10 @@ public abstract class DialogBase extends PanelGroupBlockLayout implements Stylea
 		clientKey,
 		dismissible,
 		headerText,
+		height,
 		hideIconRendered,
 		modal,
+		width,
 		zIndex
 	}
 
@@ -72,6 +74,14 @@ public abstract class DialogBase extends PanelGroupBlockLayout implements Stylea
 		getStateHelper().put(DialogPropertyKeys.headerText, headerText);
 	}
 
+	public String getHeight() {
+		return (String) getStateHelper().eval(DialogPropertyKeys.height, null);
+	}
+
+	public void setHeight(String height) {
+		getStateHelper().put(DialogPropertyKeys.height, height);
+	}
+
 	public boolean isHideIconRendered() {
 		return (Boolean) getStateHelper().eval(DialogPropertyKeys.hideIconRendered, true);
 	}
@@ -86,6 +96,14 @@ public abstract class DialogBase extends PanelGroupBlockLayout implements Stylea
 
 	public void setModal(boolean modal) {
 		getStateHelper().put(DialogPropertyKeys.modal, modal);
+	}
+
+	public String getWidth() {
+		return (String) getStateHelper().eval(DialogPropertyKeys.width, null);
+	}
+
+	public void setWidth(String width) {
+		getStateHelper().put(DialogPropertyKeys.width, width);
 	}
 
 	public Integer getzIndex() {
