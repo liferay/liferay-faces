@@ -36,8 +36,10 @@ public abstract class PopoverRendererBase extends OverlayRendererBase {
 	protected static final String DISMISSIBLE = "dismissible";
 	protected static final String FOR = "for";
 	protected static final String HEADER_TEXT = "headerText";
+	protected static final String HEIGHT = "height";
 	protected static final String HIDE_ICON_RENDERED = "hideIconRendered";
 	protected static final String POSITION = "position";
+	protected static final String WIDTH = "width";
 	protected static final String Z_INDEX = "zIndex";
 
 	// Private Constants
@@ -53,11 +55,27 @@ public abstract class PopoverRendererBase extends OverlayRendererBase {
 		Popover popover = (Popover) uiComponent;
 		boolean first = true;
 
+		String height = popover.getHeight();
+
+		if (height != null) {
+
+			encodeHeight(responseWriter, popover, height, first);
+			first = false;
+		}
+
 		String position = popover.getPosition();
 
 		if (position != null) {
 
 			encodePosition(responseWriter, popover, position, first);
+			first = false;
+		}
+
+		String width = popover.getWidth();
+
+		if (width != null) {
+
+			encodeWidth(responseWriter, popover, width, first);
 			first = false;
 		}
 
@@ -82,8 +100,16 @@ public abstract class PopoverRendererBase extends OverlayRendererBase {
 		return MODULES;
 	}
 
+	protected void encodeHeight(ResponseWriter responseWriter, Popover popover, String height, boolean first) throws IOException {
+		encodeString(responseWriter, HEIGHT, height, first);
+	}
+
 	protected void encodePosition(ResponseWriter responseWriter, Popover popover, String position, boolean first) throws IOException {
 		encodeString(responseWriter, POSITION, position, first);
+	}
+
+	protected void encodeWidth(ResponseWriter responseWriter, Popover popover, String width, boolean first) throws IOException {
+		encodeString(responseWriter, WIDTH, width, first);
 	}
 
 	protected void encodeZIndex(ResponseWriter responseWriter, Popover popover, Integer zIndex, boolean first) throws IOException {

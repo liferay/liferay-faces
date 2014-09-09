@@ -76,8 +76,8 @@ public class ShowcaseUtil {
 	private static final String NAMESPACE_PREFIX_C = "c";
 	private static final String NAMESPACE_PREFIX_F = "f";
 	private static final String NAMESPACE_PREFIX_H = "h";
-	private static final String NAMESPACE_PREFIX_LIFERAY_UI = "liferay-ui";
 	private static final String NAMESPACE_PREFIX_PORTET = "portlet";
+	private static final String NAMESPACE_PREFIX_PORTAL = "portal";
 	private static final String NAMESPACE_PREFIX_UI = "ui";
 	private static final String PORTLET_API_PACKAGE_PREFIX = "javax.portlet";
 	private static final String PORTLET_API_JAVADOC_BASE_URL = "http://docs.liferay.com/portlet-api/2.0/javadocs/";
@@ -258,7 +258,7 @@ public class ShowcaseUtil {
 			vdldocURL.append(JSF_VDLDOC_BASE_URL);
 		}
 		else if (tagPrefix.equals(NAMESPACE_PREFIX_ALLOY) || tagPrefix.equals(NAMESPACE_PREFIX_BRIDGE) ||
-				tagPrefix.equals(NAMESPACE_PREFIX_PORTET) || tagPrefix.equals(NAMESPACE_PREFIX_LIFERAY_UI)) {
+				tagPrefix.equals(NAMESPACE_PREFIX_PORTET) || tagPrefix.equals(NAMESPACE_PREFIX_PORTAL)) {
 			vdldocURL.append(LIFERAY_FACES_VDLDOC_BASE_URL);
 		}
 		else {

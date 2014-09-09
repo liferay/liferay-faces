@@ -131,6 +131,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 		String headerText = overlay.getHeaderText();
 
 		if (headerText != null) {
+			headerText = "<span class=\"alloy-overlay-title\">" + headerText + "</span>";
 			encodeString(responseWriter, AlloyRendererUtil.HEADER_CONTENT, headerText, first);
 		}
 

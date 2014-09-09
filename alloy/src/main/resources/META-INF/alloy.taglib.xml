@@ -1277,6 +1277,12 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[The height of the dialog/popover.]]></description>
+			<name>height</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[When true, an "x" is placed in the upper right corner that the user can click on to hide/dismiss the overlay window. The default is true.]]></description>
 			<name>hideIconRendered</name>
 			<required>false</required>
@@ -1371,6 +1377,12 @@
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The width of the dialog/popover.]]></description>
+			<name>width</name>
+			<required>false</required>
+			<type>String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Specifies the stack order of the component. The default value is a constant from the Liferay.zIndex JavaScript object.]]></description>
@@ -6109,6 +6121,12 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[The height of the dialog/popover.]]></description>
+			<name>height</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[When true, an "x" is placed in the upper right corner that the user can click on to hide/dismiss the overlay window. The default is true.]]></description>
 			<name>hideIconRendered</name>
 			<required>false</required>
@@ -6203,6 +6221,12 @@ java.lang.Object)</method-signature>
 			<name>styleClass</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The width of the dialog/popover.]]></description>
+			<name>width</name>
+			<required>false</required>
+			<type>String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Specifies the stack order of the component. The default value is a constant from the Liferay.zIndex JavaScript object.]]></description>

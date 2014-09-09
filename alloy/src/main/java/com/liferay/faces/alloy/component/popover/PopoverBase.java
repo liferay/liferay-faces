@@ -34,8 +34,10 @@ public abstract class PopoverBase extends PanelGroupBlockLayout implements Style
 		dismissible,
 		for_,
 		headerText,
+		height,
 		hideIconRendered,
 		position,
+		width,
 		zIndex
 	}
 
@@ -81,6 +83,14 @@ public abstract class PopoverBase extends PanelGroupBlockLayout implements Style
 		getStateHelper().put(PopoverPropertyKeys.headerText, headerText);
 	}
 
+	public String getHeight() {
+		return (String) getStateHelper().eval(PopoverPropertyKeys.height, null);
+	}
+
+	public void setHeight(String height) {
+		getStateHelper().put(PopoverPropertyKeys.height, height);
+	}
+
 	public boolean isHideIconRendered() {
 		return (Boolean) getStateHelper().eval(PopoverPropertyKeys.hideIconRendered, true);
 	}
@@ -95,6 +105,14 @@ public abstract class PopoverBase extends PanelGroupBlockLayout implements Style
 
 	public void setPosition(String position) {
 		getStateHelper().put(PopoverPropertyKeys.position, position);
+	}
+
+	public String getWidth() {
+		return (String) getStateHelper().eval(PopoverPropertyKeys.width, null);
+	}
+
+	public void setWidth(String width) {
+		getStateHelper().put(PopoverPropertyKeys.width, width);
 	}
 
 	public Integer getzIndex() {

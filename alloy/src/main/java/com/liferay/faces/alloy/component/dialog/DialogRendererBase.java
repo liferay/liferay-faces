@@ -35,8 +35,10 @@ public abstract class DialogRendererBase extends OverlayRendererBase {
 	protected static final String CLIENT_KEY = "clientKey";
 	protected static final String DISMISSIBLE = "dismissible";
 	protected static final String HEADER_TEXT = "headerText";
+	protected static final String HEIGHT = "height";
 	protected static final String HIDE_ICON_RENDERED = "hideIconRendered";
 	protected static final String MODAL = "modal";
+	protected static final String WIDTH = "width";
 	protected static final String Z_INDEX = "zIndex";
 
 	// Private Constants
@@ -52,11 +54,27 @@ public abstract class DialogRendererBase extends OverlayRendererBase {
 		Dialog dialog = (Dialog) uiComponent;
 		boolean first = true;
 
+		String height = dialog.getHeight();
+
+		if (height != null) {
+
+			encodeHeight(responseWriter, dialog, height, first);
+			first = false;
+		}
+
 		Boolean modal = dialog.isModal();
 
 		if (modal != null) {
 
 			encodeModal(responseWriter, dialog, modal, first);
+			first = false;
+		}
+
+		String width = dialog.getWidth();
+
+		if (width != null) {
+
+			encodeWidth(responseWriter, dialog, width, first);
 			first = false;
 		}
 
@@ -81,8 +99,16 @@ public abstract class DialogRendererBase extends OverlayRendererBase {
 		return MODULES;
 	}
 
+	protected void encodeHeight(ResponseWriter responseWriter, Dialog dialog, String height, boolean first) throws IOException {
+		encodeString(responseWriter, HEIGHT, height, first);
+	}
+
 	protected void encodeModal(ResponseWriter responseWriter, Dialog dialog, Boolean modal, boolean first) throws IOException {
 		encodeBoolean(responseWriter, MODAL, modal, first);
+	}
+
+	protected void encodeWidth(ResponseWriter responseWriter, Dialog dialog, String width, boolean first) throws IOException {
+		encodeString(responseWriter, WIDTH, width, first);
 	}
 
 	protected void encodeZIndex(ResponseWriter responseWriter, Dialog dialog, Integer zIndex, boolean first) throws IOException {
