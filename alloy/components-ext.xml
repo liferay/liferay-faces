@@ -435,6 +435,9 @@
 		parentClass="com.liferay.faces.alloy.component.inputtext.InputText"
 		rendererParentClass="com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase" yui="true"
 		module="autocomplete">
+		<description>
+			<![CDATA[AutoComplete is a UIInput component that renders an <code>&lt;input&gt;</code> element and a popup list. Suggestions (list items) can be added by specifying f:selectItem or f:selectItems tags as children. Since it extends HtmlInputText, it supports all the features of h:inputText.]]>
+		</description>
 		<attributes>
 			<attribute>
 				<defaultValue>true</defaultValue>
