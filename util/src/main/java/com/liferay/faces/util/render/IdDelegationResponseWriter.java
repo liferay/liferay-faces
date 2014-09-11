@@ -23,7 +23,8 @@ import com.liferay.faces.util.lang.StringPool;
 
 /**
  * This class is a {@link DelegationResponseWriter} that ensures the "id" attribute is always written to a particular
- * element.
+ * element. There are two general use cases for this class: 1. Ensure that the id is always rendered for a specific
+ * element. 2. Render a different id than the delegating renderer would normally render.
  *
  * @author  Neil Griffin
  */

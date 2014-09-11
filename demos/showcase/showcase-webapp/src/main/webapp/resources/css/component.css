@@ -75,3 +75,8 @@
 .tab-content p {
 	text-align: middle;
 }
+
+.aui .alloy-auto-complete .yui3-aclist-item-active {
+	background: whitesmoke;
+	color: #000;
+}

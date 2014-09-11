@@ -132,7 +132,7 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 			else {
 
 				String use = null;
-				String[] modules = getModules();
+				String[] modules = getModules(uiComponent);
 
 				if (modules != null) {
 
@@ -162,7 +162,7 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 		return false;
 	}
 
-	protected String[] getModules() {
+	protected String[] getModules(UIComponent uiComponent) {
 		return null;
 	}
 

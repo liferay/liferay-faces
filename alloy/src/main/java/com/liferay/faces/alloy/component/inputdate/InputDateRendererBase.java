@@ -75,7 +75,7 @@ public abstract class InputDateRendererBase extends InputDateTimeRenderer {
 	}
 
 	@Override
-	protected String[] getModules() {
+	protected String[] getModules(UIComponent uiComponent) {
 		return MODULES;
 	}
 

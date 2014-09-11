@@ -154,7 +154,7 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 	}
 
 	@Override
-	protected String[] getModules() {
+	protected String[] getModules(UIComponent uiComponent) {
 		return MODULES;
 	}
 

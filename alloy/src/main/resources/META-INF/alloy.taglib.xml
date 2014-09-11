@@ -104,6 +104,377 @@
 		</tag-extension>
 	</tag>
 	<tag>
+		<description><![CDATA[]]></description>
+		<tag-name>autoComplete</tag-name>
+		<component>
+			<component-type>com.liferay.faces.alloy.component.autocomplete.AutoComplete</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.autocomplete.AutoCompleteRenderer</renderer-type>
+			<handler-class>com.liferay.faces.alloy.component.autocomplete.AutoCompleteHandler</handler-class>
+		</component>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
+			<name>accesskey</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the first item in the list will be activated so that users can press TAB or ENTER to select it. Default is <code>true</code>.]]></description>
+			<name>activateFirstItem</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]></description>
+			<name>alt</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying whether autocomplete is turned on or off for the rendered HTML element. Valid values include <code>off</code> (default) and <code>on</code>.]]></description>
+			<name>autocomplete</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, if the active option of the autoComplete is not in view, the view will be scrolled to ensure that the active option is displayed to the user.]]></description>
+			<name>autoScroll</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the autoComplete list will wrap around allowing users to use keyboard navigation to move from the top of the list to the bottom and vice versa. Defaults to <code>true</code>.]]></description>
+			<name>circular</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A callback which filters the client-side results. The callback must be a function which takes <code>query</code> and <code>source</code> arguments and returns an array of <code>String</code>s as a result. The <code>source</code> argument recieved by this callback is an <code>Array</code> of <code>Object</code>s which contain three properties: <code>display</code>, <code>raw</code>, and <code>text</code>. <strong>Note:</strong> This attribute will be ignored if the <code>serverCustomFilter</code> or <code>serverFilterType</code> attributes are used.]]></description>
+			<name>clientCustomFilter</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Specifies the type of filter that will be used for the autoComplete results. Valid values include:       <ul>        <li>charMatch</li>        <li>charMatchCase</li>        <li>phraseMatch</li>        <li>phraseMatchCase</li>        <li>startsWith</li>        <li>startsWithCase</li>        <li>subWordMatch</li>        <li>subWordMatchCase</li>        <li>wordMatch</li>        <li>wordMatchCase</li>       </ul>      <strong>Note:</strong> This attribute will be ignored if the <code>serverCustomFilter</code>, <code>serverFilterType</code>, or <code>clientCustomFilter</code> attributes are used.]]></description>
+			<name>clientFilterType</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The key name that can be used to reference the component on the client.]]></description>
+			<name>clientKey</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The class name of the converter instance that is to be used by this component.]]></description>
+			<name>converter</name>
+			<required>false</required>
+			<type>javax.faces.convert.Converter</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the converter message instead of any message that comes from the registered converter for this component.]]></description>
+			<name>converterMessage</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The delay in milliseconds before a request for filtering occurs. After the <code>autoComplete</code> receives input, it waits the specified number of milliseconds before sending a request for filtering it's source. If input occurs before the specified number of milliseconds has elapsed, the timer is reset.]]></description>
+			<name>delay</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The string which delimits the part of the text that will have completion. For example, if <code>delimiter=" "</code>, then only the text after the final space will have completion. <strong>Note:<strong> if <code>listItemRequired="true"</code>, this attribute is ignored.]]></description>
+			<name>delimiter</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the reading direction for the element For example, right to left (RTL), or left to right (LTR).]]></description>
+			<name>dir</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, the component will be disabled, and the user will be unable to interact with the component.]]></description>
+			<name>disabled</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The the height (in pixels) of the rendered autoComplete list.]]></description>
+			<name>height</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Specifies the type of highlighter that will be used for the autoComplete results. Valid values include:       <ul>        <li>charMatch</li>        <li>charMatchCase</li>        <li>phraseMatch</li>        <li>phraseMatchCase</li>        <li>startsWith</li>        <li>startsWithCase</li>        <li>subWordMatch</li>        <li>subWordMatchCase</li>        <li>wordMatch</li>        <li>wordMatchCase</li>       </ul>]]></description>
+			<name>highlighterType</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component's value must be converted and validated (immediately) during the Apply Request Values phase, instead of (later) during the PROCESS_VALIDATIONS phase.]]></description>
+			<name>immediate</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A method that is executed when an autoComplete item is selected. The method must be <code>public</code>, return <code>void</code>, and take an <code>com.liferay.faces.alloy.component.autocomplete.ItemSelectEvent</code> argument.]]></description>
+			<name>itemSelectListener</name>
+			<required>false</required>
+			<type>javax.el.MethodExpression</type>
+			<method-signature>void itemSelectListener(com.liferay.faces.alloy.component.autocomplete.ItemSelectEvent)</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A localized label for this component that is typically only rendered in a FacesMessage when validation fails.]]></description>
+			<name>label</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the language code used in the element.]]></description>
+			<name>lang</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the component will perform server-side validation to ensure that the value entered is on the list of completion items. Default is <code>false</code>.]]></description>
+			<name>listItemRequired</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The maximum amount of autoComplete results.]]></description>
+			<name>maxItems</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the maximum length of characters allowed in the element.]]></description>
+			<name>maxlength</name>
+			<required>false</required>
+			<type>int</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The minimum length of input required to trigger a query.]]></description>
+			<name>minChars</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
+			<name>onblur</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]></description>
+			<name>onchange</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when this component is clicked.]]></description>
+			<name>onclick</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a double click event occurs.]]></description>
+			<name>ondblclick</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when this component gets focus.]]></description>
+			<name>onfocus</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keydown event occurs.]]></description>
+			<name>onkeydown</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keypress event occurs.]]></description>
+			<name>onkeypress</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a keyup event occurs.]]></description>
+			<name>onkeyup</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mousedown event occurs.]]></description>
+			<name>onmousedown</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mousemove event occurs.]]></description>
+			<name>onmousemove</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseout event occurs.]]></description>
+			<name>onmouseout</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseover event occurs.]]></description>
+			<name>onmouseover</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when a mouseup event occurs.]]></description>
+			<name>onmouseup</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Javascript to execute when the user selects this component.]]></description>
+			<name>onselect</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
+			<name>readonly</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, and a value has not been specified for this component, then the PROCESS_VALIDATIONS phase will fail and a FacesMessage will be added to the FacesContext for this component.]]></description>
+			<name>required</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component when required="true" and no value is selected by the user.]]></description>
+			<name>requiredMessage</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
+			<name>role</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A method that is executed when a query occurs. The method must be <code>public</code>, return a <code>java.util.List&lt;java.lang.String&gt;</code>, and takes a <code>java.lang.String</code> and a <code>java.util.List&lt;java.lang.String&gt;</code> as a arguments. The <code>String</code> passed to the method is the current query. The <code>List&lt;String&gt;</code> is an immutable list of unfiltered results. The method must return a <code>List&lt;String&gt;</code> which contains the filtered results.]]></description>
+			<name>serverCustomFilter</name>
+			<required>false</required>
+			<type>javax.el.MethodExpression</type>
+			<method-signature>java.util.List filterResults(java.lang.String, java.util.List)</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Specifies the type of filter that will be used for the autoComplete results. Valid values include:       <ul>        <li>charMatch</li>        <li>charMatchCase</li>        <li>phraseMatch</li>        <li>phraseMatchCase</li>        <li>startsWith</li>        <li>startsWithCase</li>        <li>subWordMatch</li>        <li>subWordMatchCase</li>        <li>wordMatch</li>        <li>wordMatchCase</li>       </ul>      <strong>Note:</strong> This attribute will be ignored if the <code>serverCustomFilter</code> attribute is used.]]></description>
+			<name>serverFilterType</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the visual length of the element.]]></description>
+			<name>size</name>
+			<required>false</required>
+			<type>int</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying where the element is located in the tabbing progression.]]></description>
+			<name>tabindex</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When <code>true</code>, pressing TAB selects the active autoComplete option. Defaults to <code>true</code>.]]></description>
+			<name>tabSelect</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
+			<name>title</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
+			<name>validator</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+java.lang.Object)</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[This message or the result of the specified expression, will be used as the text of the validation error message instead of any message that comes from the resulting validation error for this component.]]></description>
+			<name>validatorMessage</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property.]]></description>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
+			<name>valueChangeListener</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The the width (in pixels) of the rendered autoComplete list.]]></description>
+			<name>width</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>3.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
 		<description><![CDATA[Body is a UIOutput that renders a <body> element for webapps and a <div> for portlets. Since it extends HtmlBody, it supports all the features of h:body.]]></description>
 		<tag-name>body</tag-name>
 		<component>

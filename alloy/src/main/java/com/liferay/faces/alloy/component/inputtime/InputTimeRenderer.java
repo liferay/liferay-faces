@@ -364,7 +364,7 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 	}
 
 	@Override
-	protected String[] getModules() {
+	protected String[] getModules(UIComponent uiComponent) {
 		return TIME_PICKER_MODULES;
 	}
 }
