@@ -71,7 +71,6 @@ public class ListModelBean {
 	private List<ShowcaseComponent> showcaseComponents;
 	private Map<String, List<ShowcaseComponent>> showcaseCategoryMap;
 	private Map<String, ShowcaseComponent> showcaseComponentMap;
-	private String copyrightInfo;
 	private String dependencyInfo;
 
 	public ListModelBean() {
