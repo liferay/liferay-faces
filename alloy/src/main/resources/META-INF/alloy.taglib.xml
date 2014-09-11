@@ -104,7 +104,7 @@
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[]]></description>
+		<description><![CDATA[AutoComplete is a UIInput component that renders an <code>&lt;input&gt;</code> element and a popup list. Suggestions (list items) can be added by specifying f:selectItem or f:selectItems tags as children. Since it extends HtmlInputText, it supports all the features of h:inputText.]]></description>
 		<tag-name>autoComplete</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.autocomplete.AutoComplete</component-type>
