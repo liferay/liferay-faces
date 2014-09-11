@@ -1,0 +1,2 @@
+The files found under META-INF/resources/liferay-faces-alloy/yui3 are subject
+to the license terms found in the yui3-bsd-license.txt file.

@@ -55,7 +55,7 @@ public abstract class DataTableRendererBase extends DelegatingAlloyRendererBase 
 	}
 
 	@Override
-	protected String[] getModules() {
+	protected String[] getModules(UIComponent uiComponent) {
 		return MODULES;
 	}
 

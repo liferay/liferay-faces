@@ -75,8 +75,8 @@ public abstract class DelegatingAlloyRendererBase extends DelegatingClientCompon
 
 	@Override
 	public void encodeJavaScriptBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-		AlloyRendererUtil.encodeJavaScriptBegin(facesContext, uiComponent, this, getModules(), isAjax(facesContext),
-			isForceInline(facesContext, uiComponent));
+		AlloyRendererUtil.encodeJavaScriptBegin(facesContext, uiComponent, this, getModules(uiComponent),
+			isAjax(facesContext), isForceInline(facesContext, uiComponent));
 	}
 
 	@Override

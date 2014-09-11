@@ -346,7 +346,7 @@ public class InputFileRenderer extends InputFileRendererCompat implements System
 	}
 
 	@Override
-	protected String[] getModules() {
+	protected String[] getModules(UIComponent uiComponent) {
 		return MODULES;
 	}
 
