@@ -4,6 +4,126 @@
 	<description>
 		<![CDATA[The Liferay Faces Portal facelet component tags with the <code>portal:</code> tag name prefix.]]>
 	</description>
+	<component name="Aria" generateJava="false" generateTaglibXML="false">
+		<description>
+			<![CDATA[TODO]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The WAI-ARIA label which can help users with disabilities when a text label is not visible.]]>
+				</description>
+				<name>ariaLabel</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The WAI-ARIA role which can help users with disabilities understand the purpose of an element, such as whether it is a menu, progress indicator, or some other type of component.]]>
+				</description>
+				<name>ariaRole</name>
+				<type>String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="Nav" extendsTags="Aria Styleable UIComponentBase UIData" parentClass="javax.faces.component.UIData">
+		<description>
+			<![CDATA[Nav is a UIData (iterator) component that renders a <code>&lt;ul&gt;...&lt;/ul&gt;</code> (unordered) list. It is designed to be used in conjunction with portal:navItem child component tags.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[When true, the unordered list will be surrounded by <code>&lt;div class="collapse nav-collapse"&gt;...&lt;/div&gt;</code>.]]>
+				</description>
+				<name>collapsible</name>
+				<type>boolean</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="NavBar" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIPanel">
+		<description>
+			<![CDATA[NavBar is a UIPanel component that renders a <code>&lt;div&gt;...&lt;/div&gt;</code> element. It is designed to be used in conjunction with portal:nav and portal:navItem child component tags.]]>
+		</description>
+	</component>
+	<component name="NavItem" extendsTags="Aria Styleable UIComponentBase" parentClass="javax.faces.component.UIColumn">
+		<description>
+			<![CDATA[NavItem is a UIColumn component that renders an <code>&lt;li&gt;...&lt;/li&gt;</code> (list item) element. If the href attribute is specified, then an <a>...</a> anchor tag is rendered inside the list item element.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[If the href attribute has a value, then this is the value of the "class" attribute for the anchor tag rendered inside the list item element.]]>
+				</description>
+				<name>anchorCssClass</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[If the href attribute has a value, then this is the child text of the anchor tag rendered inside the list item element.]]>
+				</description>
+				<name>anchorData</name>
+				<type>Object</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[If the href attribute has a value, then this is the value of the "id" attribute for the anchor tag rendered inside the list item element.]]>
+				</description>
+				<name>anchorId</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML5 data- attributes for the rendered list item element.]]>
+				</description>
+				<name>data</name>
+				<type>Object</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The URL of the anchor tag rendered inside the list item element. If not specified, then an anchor tag is not rendered.]]>
+				</description>
+				<name>href</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The name of the CSS class of the icon that is to be rendered inside the list item element.]]>
+				</description>
+				<name>iconCssClass</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The label of the anchor tag rendered inside the list item element.]]>
+				</description>
+				<name>label</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[When true, the list item will be rendered with <code>class="active"</code>.]]>
+				</description>
+				<name>selected</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The title of the anchor tag rendered inside the list item element.]]>
+				</description>
+				<name>title</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[When true, clicking on the href hyperlink will cause the resulting URL to popup in a modal dialog that contains an <code>iframe</code>.]]>
+				</description>
+				<name>useDialog</name>
+				<type>boolean</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="PermissionsURL" parentClass="javax.faces.component.UIOutput" styleable="false">
 		<description>
 			<![CDATA[PermissionsURL is a UIOutput component that generates a URL pointing to the Liferay Portal Permissions UI. If the var attribute is present, the component introduces a variable into the EL. Otherwise, the URL is written to the response.]]>
