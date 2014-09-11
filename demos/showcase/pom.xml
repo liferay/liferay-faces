@@ -13,6 +13,7 @@
 	<name>Liferay Faces Showcase Demos</name>
 
 	<modules>
+		<module>showcase-common</module>
 		<module>showcase-webapp</module>
 		<module>showcase-portlet</module>
 	</modules>
