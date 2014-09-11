@@ -31,6 +31,7 @@
 								<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay-security.taglib.xml</taglib>
 								<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay-ui.taglib.xml</taglib>
 								<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay-util.taglib.xml</taglib>
+								<taglib>${project.basedir}/../portal/src/main/resources/META-INF/portal.taglib.xml</taglib>
 								<taglib>${project.basedir}/../bridge-impl/src/main/resources/META-INF/resources/portlet.taglib.xml</taglib>
 							</taglibs>
 						</configuration>
