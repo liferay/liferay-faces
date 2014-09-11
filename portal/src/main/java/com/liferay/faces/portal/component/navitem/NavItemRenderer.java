@@ -51,11 +51,8 @@ public class NavItemRenderer extends PortalTagRenderer<NavItem, NavItemTag> {
 		navItemTag.setIconCssClass(navItem.getIconCssClass());
 		navItemTag.setLabel(navItem.getLabel());
 		navItemTag.setSelected(navItem.isSelected());
-		navItemTag.setState(navItem.getState());
 		navItemTag.setTitle(navItem.getTitle());
-		navItemTag.setToggle(navItem.isToggle());
 		navItemTag.setUseDialog(navItem.isUseDialog());
-		navItemTag.setWrapDropDownMenu(navItem.isWrapDropDownMenu());
 	}
 
 	@Override
