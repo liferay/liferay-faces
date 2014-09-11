@@ -14,22 +14,16 @@
 package com.liferay.faces.portal.component.permissionsurl;
 
 import java.io.IOException;
+import java.util.Map;
 
-import javax.el.ELContext;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
 
-import com.liferay.faces.util.jsp.PageContextAdapter;
-import com.liferay.faces.util.jsp.StringJspWriter;
-
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.faces.portal.render.internal.PortalTagRenderer;
 
 import com.liferay.taglib.security.PermissionsURLTag;
 
@@ -41,26 +35,20 @@ import com.liferay.taglib.security.PermissionsURLTag;
 //J-
 @FacesRenderer(componentFamily = PermissionsURL.COMPONENT_FAMILY, rendererType = PermissionsURL.RENDERER_TYPE)
 //J+
-public class PermissionsURLRenderer extends PermissionsURLRendererBase {
+public class PermissionsURLRenderer extends PortalTagRenderer<PermissionsURL, PermissionsURLTag> {
 
 	@Override
-	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	public PermissionsURL cast(UIComponent uiComponent) {
+		return (PermissionsURL) uiComponent;
+	}
 
-		// Setup the Facelet -> JSP tag adapter
-		ExternalContext externalContext = facesContext.getExternalContext();
-		PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
-		HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
-		PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
-		HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(portletResponse);
-		ELContext elContext = facesContext.getELContext();
-		StringJspWriter stringJspWriter = new StringJspWriter();
-		PageContextAdapter pageContextAdapter = new PageContextAdapter(httpServletRequest, httpServletResponse,
-				elContext, stringJspWriter);
+	@Override
+	public void copyFrameworkAttributes(PermissionsURL permissionsURL, PermissionsURLTag permissionsURLTag) {
+		permissionsURLTag.setId(permissionsURL.getClientId());
+	}
 
-		// Copy the attributes from the Facelet tag to the JSP tag.
-		PermissionsURL permissionsURL = (PermissionsURL) uiComponent;
-		PermissionsURLTag permissionsURLTag = new PermissionsURLTag();
-		permissionsURLTag.setPageContext(pageContextAdapter);
+	@Override
+	public void copyNonFrameworkAttributes(PermissionsURL permissionsURL, PermissionsURLTag permissionsURLTag) {
 		permissionsURLTag.setModelResource(permissionsURL.getModelResource());
 		permissionsURLTag.setModelResourceDescription(permissionsURL.getModelResourceDescription());
 		permissionsURLTag.setRedirect(permissionsURL.getRedirect());
@@ -68,32 +56,40 @@ public class PermissionsURLRenderer extends PermissionsURLRendererBase {
 		permissionsURLTag.setResourcePrimKey(permissionsURL.getResourcePrimKey());
 		permissionsURLTag.setRoleTypes(permissionsURL.getRoleTypes());
 		permissionsURLTag.setWindowState(permissionsURL.getWindowState());
+	}
+
+	@Override
+	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		try {
 
-			// Invoke the JSP tag lifecycle directly (rather than using the tag from a JSP).
-			permissionsURLTag.doStartTag();
-			permissionsURLTag.doEndTag();
-
 			// Get the URL from the tag output.
-			String url = stringJspWriter.toString();
+			String tagOutput = getTagOutput(facesContext, uiComponent);
 
 			// If the user didn't specify a value for the "var" attribute, then write the URL to the response.
+			PermissionsURL permissionsURL = (PermissionsURL) uiComponent;
 			String varName = permissionsURL.getVar();
 
 			if (varName == null) {
 				ResponseWriter responseWriter = facesContext.getResponseWriter();
-				responseWriter.write(url);
+				responseWriter.write(tagOutput);
 			}
 
 			// Otherwise, place the URL into the request scope so that it can be resolved via EL with the name
 			// specified in the "var" attribute.
 			else {
-				externalContext.getRequestMap().put(varName, url);
+				ExternalContext externalContext = facesContext.getExternalContext();
+				Map<String, Object> requestMap = externalContext.getRequestMap();
+				requestMap.put(varName, tagOutput);
 			}
 		}
-		catch (Exception e) {
+		catch (JspException e) {
 			throw new IOException(e);
 		}
+	}
+
+	@Override
+	public PermissionsURLTag newTag() {
+		return new PermissionsURLTag();
 	}
 }

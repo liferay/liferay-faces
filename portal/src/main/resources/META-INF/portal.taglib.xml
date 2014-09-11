@@ -3,8 +3,233 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
    http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://vdldoc.googlecode.com/hg/src/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
 	version="2.0">
-	<description><![CDATA[The Liferay Faces Bridge facelet component tags with the <code>bridge:</code> tag name prefix.]]></description>
+	<description><![CDATA[The Liferay Faces Portal facelet component tags with the <code>portal:</code> tag name prefix.]]></description>
 	<namespace>http://liferay.com/faces/portal</namespace>
+	<tag>
+		<description><![CDATA[Nav is a UIData (iterator) component that renders a <code>&lt;ul&gt;...&lt;/ul&gt;</code> (unordered) list. It is designed to be used in conjunction with portal:navItem child component tags.]]></description>
+		<tag-name>nav</tag-name>
+		<component>
+			<component-type>com.liferay.faces.portal.component.nav.Nav</component-type>
+			<renderer-type>com.liferay.faces.portal.component.nav.NavRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[The WAI-ARIA label which can help users with disabilities when a text label is not visible.]]></description>
+			<name>ariaLabel</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The WAI-ARIA role which can help users with disabilities understand the purpose of an element, such as whether it is a menu, progress indicator, or some other type of component.]]></description>
+			<name>ariaRole</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the unordered list will be surrounded by <code>&lt;div class="collapse nav-collapse"&gt;...&lt;/div&gt;</code>.]]></description>
+			<name>collapsible</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The value of this component, which is typically bound via EL to a model bean property. The value can be any of the following types:<ul><li>Any concrete subclass of <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/DataModel.html" target="_blank"><code>DataModel</code></a></li><li>Array (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ArrayDataModel.html" target="_blank"><code>ArrayDataModel</code></a>)</li><li>java.util.Collection (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/CollectionDataModel.html" target="_blank"><code>CollectionDataModel</code></a>)</li><li>java.util.List (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ListDataModel.html" target="_blank"><code>ListDataModel</code></a>)</li><li>java.sql.ResultSet (automatically wrapped with <a href="http://docs.oracle.com/javaee/7/api/javax/faces/model/ResultSetDataModel.html" target="_blank"><code>ResultSetDataModel</code></a>)</li></ul>]]></description>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the variable that is to be introduced into the EL representing the current iteration.]]></description>
+			<name>var</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[NavBar is a UIPanel component that renders a <code>&lt;div&gt;...&lt;/div&gt;</code> element. It is designed to be used in conjunction with portal:nav and portal:navItem child component tags.]]></description>
+		<tag-name>navBar</tag-name>
+		<component>
+			<component-type>com.liferay.faces.portal.component.navbar.NavBar</component-type>
+			<renderer-type>com.liferay.faces.portal.component.navbar.NavBarRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[NavItem is a UIColumn component that renders an <code>&lt;li&gt;...&lt;/li&gt;</code> (list item) element. If the href attribute is specified, then an <a>...</a> anchor tag is rendered inside the list item element.]]></description>
+		<tag-name>navItem</tag-name>
+		<component>
+			<component-type>com.liferay.faces.portal.component.navitem.NavItem</component-type>
+			<renderer-type>com.liferay.faces.portal.component.navitem.NavItemRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[If the href attribute has a value, then this is the value of the "class" attribute for the anchor tag rendered inside the list item element.]]></description>
+			<name>anchorCssClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If the href attribute has a value, then this is the child text of the anchor tag rendered inside the list item element.]]></description>
+			<name>anchorData</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[If the href attribute has a value, then this is the value of the "id" attribute for the anchor tag rendered inside the list item element.]]></description>
+			<name>anchorId</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The WAI-ARIA label which can help users with disabilities when a text label is not visible.]]></description>
+			<name>ariaLabel</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The WAI-ARIA role which can help users with disabilities understand the purpose of an element, such as whether it is a menu, progress indicator, or some other type of component.]]></description>
+			<name>ariaRole</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML5 data- attributes for the rendered list item element.]]></description>
+			<name>data</name>
+			<required>false</required>
+			<type>Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The URL of the anchor tag rendered inside the list item element. If not specified, then an anchor tag is not rendered.]]></description>
+			<name>href</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The name of the CSS class of the icon that is to be rendered inside the list item element.]]></description>
+			<name>iconCssClass</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The label of the anchor tag rendered inside the list item element.]]></description>
+			<name>label</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the list item will be rendered with <code>class="active"</code>.]]></description>
+			<name>selected</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The title of the anchor tag rendered inside the list item element.]]></description>
+			<name>title</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, clicking on the href hyperlink will cause the resulting URL to popup in a modal dialog that contains an <code>iframe</code>.]]></description>
+			<name>useDialog</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
 	<tag>
 		<description><![CDATA[PermissionsURL is a UIOutput component that generates a URL pointing to the Liferay Portal Permissions UI. If the var attribute is present, the component introduces a variable into the EL. Otherwise, the URL is written to the response.]]></description>
 		<tag-name>permissionsURL</tag-name>
@@ -25,7 +250,7 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When true, the URL will specify that the user should be redirected to the permissions page.]]></description>
+			<description><![CDATA[The URL that should be redirected-to when the user clicks on the "Return to Full Page" link in the Liferay Portal Permissions UI.]]></description>
 			<name>redirect</name>
 			<required>false</required>
 			<type>String</type>
@@ -43,19 +268,19 @@
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A list of integers cooresponding to roleTypes that the url would permit the user to adjust.]]></description>
+			<description><![CDATA[An array of type int that corresponds to the roles that are to be displayed in the Liferay Portal Permissions UI. For more info, see <a href="http://docs.liferay.com/portal/6.2/javadocs/com/liferay/portal/model/RoleConstants.html" target="_blank">com.liferay.portal.model.RoleConstants</a>.]]></description>
 			<name>roleTypes</name>
 			<required>false</required>
 			<type>int[]</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The name of the variable to introduce into the expression language to use the resulting url.]]></description>
+			<description><![CDATA[The name of the variable that is to be introduced into the EL that contains the value of the generated permissions URL. If not specified, then the generated permissions URL is written directly to the response.]]></description>
 			<name>var</name>
 			<required>false</required>
 			<type>String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Specifys the resulting windowState of the permissions portlet.]]></description>
+			<description><![CDATA[The portlet window state for which the Liferay Portal Permissions UI should be displayed. Valid values include: "maximized", "pop_up", and "exclusive". The default value is "maximized".]]></description>
 			<name>windowState</name>
 			<required>false</required>
 			<type>String</type>
