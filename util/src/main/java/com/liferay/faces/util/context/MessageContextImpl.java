@@ -125,7 +125,7 @@ public class MessageContextImpl extends MessageContext {
 			// ignore
 		}
 
-		if (resourceBundle == null) {
+		if (message == null) {
 			resourceBundle = getFacesResourceBundle(locale);
 
 			if (resourceBundle != null) {
