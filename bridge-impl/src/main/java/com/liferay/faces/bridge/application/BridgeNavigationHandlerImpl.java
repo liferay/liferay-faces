@@ -28,6 +28,7 @@ import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.BridgeActionURL;
+import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -71,38 +72,44 @@ public class BridgeNavigationHandlerImpl extends BridgeNavigationHandler {
 			// the BridgeContext#redirect(String) method. It would be nice to handle the redirect case here but it needs
 			// to stay in BridgeContext#redirect(String) since it's possible for developers to call
 			// ExternalContext.redirect(String) directly from their application.
-			boolean navigationCaseRedirect = bridgeContext.getBridgeRequestScope().isRedirectOccurred();
+			BridgeRequestScope bridgeRequestScope = bridgeContext.getBridgeRequestScope();
 
-			if (!navigationCaseRedirect) {
+			// FACES-1986: In the case of ICEfaces 1.8 Ajax Push, the bridgeRequestScope can be null.
+			if (bridgeRequestScope != null) {
 
-				PortletResponse portletResponse = bridgeContext.getPortletResponse();
+				boolean navigationCaseRedirect = bridgeRequestScope.isRedirectOccurred();
 
-				if (portletResponse instanceof StateAwareResponse) {
+				if (!navigationCaseRedirect) {
 
-					BridgeActionURL bridgeActionURL = bridgeContext.encodeActionURL(toViewId);
+					PortletResponse portletResponse = bridgeContext.getPortletResponse();
 
-					try {
+					if (portletResponse instanceof StateAwareResponse) {
 
-						BridgeNavigationCase bridgeNavigationCase = new BridgeNavigationCaseImpl(toViewId);
-						String portletMode = bridgeNavigationCase.getPortletMode();
+						BridgeActionURL bridgeActionURL = bridgeContext.encodeActionURL(toViewId);
 
-						if (portletMode != null) {
-							bridgeActionURL.setParameter(Bridge.PORTLET_MODE_PARAMETER, portletMode);
+						try {
+
+							BridgeNavigationCase bridgeNavigationCase = new BridgeNavigationCaseImpl(toViewId);
+							String portletMode = bridgeNavigationCase.getPortletMode();
+
+							if (portletMode != null) {
+								bridgeActionURL.setParameter(Bridge.PORTLET_MODE_PARAMETER, portletMode);
+							}
+
+							String windowState = bridgeNavigationCase.getWindowState();
+
+							if (windowState != null) {
+								bridgeActionURL.setParameter(Bridge.PORTLET_WINDOWSTATE_PARAMETER, windowState);
+							}
+
+							bridgeActionURL.applyToResponse((StateAwareResponse) portletResponse);
 						}
-
-						String windowState = bridgeNavigationCase.getWindowState();
-
-						if (windowState != null) {
-							bridgeActionURL.setParameter(Bridge.PORTLET_WINDOWSTATE_PARAMETER, windowState);
+						catch (PortletModeException e) {
+							logger.error(e.getMessage());
 						}
-
-						bridgeActionURL.applyToResponse((StateAwareResponse) portletResponse);
-					}
-					catch (PortletModeException e) {
-						logger.error(e.getMessage());
-					}
-					catch (WindowStateException e) {
-						logger.error(e.getMessage());
+						catch (WindowStateException e) {
+							logger.error(e.getMessage());
+						}
 					}
 				}
 			}
