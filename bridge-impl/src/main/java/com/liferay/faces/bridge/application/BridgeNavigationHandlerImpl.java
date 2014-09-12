@@ -53,8 +53,6 @@ public class BridgeNavigationHandlerImpl extends BridgeNavigationHandler {
 
 		logger.debug("fromAction=[{0}] outcome=[{1}]", fromAction, outcome);
 
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-
 		UIViewRoot uiViewRoot = facesContext.getViewRoot();
 		String fromViewId = uiViewRoot.getViewId();
 
@@ -67,15 +65,17 @@ public class BridgeNavigationHandlerImpl extends BridgeNavigationHandler {
 
 		if (!fromViewId.equals(toViewId)) {
 
-			// If the navigation-case is NOT a redirect, then directly encode the {@link PortletMode} and {@link
-			// WindowState} to the response. Don't need to worry about the redirect case here because that's handled in
-			// the BridgeContext#redirect(String) method. It would be nice to handle the redirect case here but it needs
-			// to stay in BridgeContext#redirect(String) since it's possible for developers to call
-			// ExternalContext.redirect(String) directly from their application.
-			BridgeRequestScope bridgeRequestScope = bridgeContext.getBridgeRequestScope();
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
-			// FACES-1986: In the case of ICEfaces 1.8 Ajax Push, the bridgeRequestScope can be null.
-			if (bridgeRequestScope != null) {
+			// FACES-1986: In the case of ICEfaces 1.8 Ajax Push, the bridgeContext can be null.
+			if (bridgeContext != null) {
+
+				// If the navigation-case is NOT a redirect, then directly encode the {@link PortletMode} and {@link
+				// WindowState} to the response. Don't need to worry about the redirect case here because that's handled
+				// in the BridgeContext#redirect(String) method. It would be nice to handle the redirect case here but
+				// it needs to stay in BridgeContext#redirect(String) since it's possible for developers to call
+				// ExternalContext.redirect(String) directly from their application.
+				BridgeRequestScope bridgeRequestScope = bridgeContext.getBridgeRequestScope();
 
 				boolean navigationCaseRedirect = bridgeRequestScope.isRedirectOccurred();
 
