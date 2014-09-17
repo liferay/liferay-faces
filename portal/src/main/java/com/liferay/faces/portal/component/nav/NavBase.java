@@ -16,14 +16,18 @@ package com.liferay.faces.portal.component.nav;
 
 import javax.annotation.Generated;
 import javax.faces.component.UIData;
+import javax.servlet.jsp.tagext.Tag;
 
 import com.liferay.faces.util.component.Styleable;
+import com.liferay.faces.util.component.Taggeable;
+import com.liferay.taglib.aui.NavTag;
 
 /**
  * @author	Neil Griffin
+ * @author Juan Gonzalez
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class NavBase extends UIData implements Styleable {
+public abstract class NavBase extends UIData implements Styleable, Taggeable<NavTag> {
 
 	// Protected Enumerations
 	protected enum NavPropertyKeys {
@@ -33,6 +37,9 @@ public abstract class NavBase extends UIData implements Styleable {
 		style,
 		styleClass
 	}
+
+	private Tag parentTag;
+	private NavTag tag;
 
 	public String getAriaLabel() {
 		return (String) getStateHelper().eval(NavPropertyKeys.ariaLabel, null);
@@ -76,6 +83,25 @@ public abstract class NavBase extends UIData implements Styleable {
 	@Override
 	public void setStyleClass(String styleClass) {
 		getStateHelper().put(NavPropertyKeys.styleClass, styleClass);
+	}
+	@Override
+	public Tag getParentTag() {
+		return parentTag;
+	}
+
+	@Override
+	public void setParentTag(Tag tag) {
+		this.parentTag = tag;
+	}
+
+	@Override
+	public NavTag getTag() {
+		return tag;
+	}
+
+	@Override
+	public void setTag(NavTag tag) {
+		this.tag = tag;
 	}
 }
 //J+

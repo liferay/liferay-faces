@@ -16,19 +16,47 @@ package com.liferay.faces.portal.component.navbar;
 
 import javax.annotation.Generated;
 import javax.faces.component.UIPanel;
+import javax.servlet.jsp.tagext.Tag;
 
 import com.liferay.faces.util.component.Styleable;
+import com.liferay.faces.util.component.Taggeable;
+import com.liferay.taglib.aui.NavBarTag;
 
 /**
  * @author	Neil Griffin
+ * @author	Juan Gonzalez
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class NavBarBase extends UIPanel implements Styleable {
+public abstract class NavBarBase extends UIPanel implements Styleable, Taggeable<NavBarTag> {
 
 	// Protected Enumerations
 	protected enum NavBarPropertyKeys {
 		style,
 		styleClass
+	}
+
+	private Tag parentTag;
+
+	private NavBarTag tag;
+
+	@Override
+	public Tag getParentTag() {
+		return parentTag;
+	}
+
+	@Override
+	public void setParentTag(Tag tag) {
+		this.parentTag = tag;
+	}
+
+	@Override
+	public NavBarTag getTag() {
+		return tag;
+	}
+
+	@Override
+	public void setTag(NavBarTag tag) {
+		this.tag = tag;
 	}
 
 	@Override

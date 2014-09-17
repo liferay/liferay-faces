@@ -23,6 +23,7 @@ import com.liferay.taglib.aui.NavBarTag;
 
 /**
  * @author  Neil Griffin
+ * @author	 Juan Gonzalez
  */
 //J-
 @FacesRenderer(componentFamily = NavBar.COMPONENT_FAMILY, rendererType = NavBar.RENDERER_TYPE)
@@ -36,7 +37,6 @@ public class NavBarRenderer extends PortalTagRenderer<NavBar, NavBarTag> {
 
 	@Override
 	public void copyFrameworkAttributes(NavBar navBar, NavBarTag navBarTag) {
-		navBarTag.setId(navBar.getClientId());
 		navBarTag.setCssClass(navBar.getStyleClass());
 	}
 
@@ -64,5 +64,10 @@ public class NavBarRenderer extends PortalTagRenderer<NavBar, NavBarTag> {
 		// </div>
 		//J+
 		return "</div>";
+	}
+
+	@Override
+	public boolean getRendersChildren() {
+		return true;
 	}
 }
