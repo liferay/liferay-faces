@@ -14,12 +14,14 @@
 package com.liferay.faces.portal.component.nav;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIData;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.portal.component.nav.internal.NavStringJspWriter;
@@ -32,6 +34,7 @@ import com.liferay.taglib.aui.NavTag;
 
 /**
  * @author  Neil Griffin
+ * @author  Juan Gonzalez
  */
 //J-
 @FacesRenderer(componentFamily = Nav.COMPONENT_FAMILY, rendererType = Nav.RENDERER_TYPE)
@@ -45,7 +48,7 @@ public class NavRenderer extends PortalTagRenderer<Nav, NavTag> {
 
 	@Override
 	public void copyFrameworkAttributes(FacesContext facesContext, Nav nav, NavTag navTag) {
-		navTag.setId(nav.getClientId());
+		navTag.setId(nav.getId());
 		navTag.setCssClass(nav.getStyleClass());
 	}
 
@@ -71,13 +74,24 @@ public class NavRenderer extends PortalTagRenderer<Nav, NavTag> {
 			prototypeChildNavItem = getFirstChildNavItem(nav);
 		}
 
+		ResponseWriter originalWriter = facesContext.getResponseWriter();
+		StringWriter writer = new StringWriter();
+
 		// Encode the content for each tab.
 		if ((iterateOverDataModel) && (prototypeChildNavItem != null)) {
 			int rowCount = nav.getRowCount();
 
 			for (int i = 0; i < rowCount; i++) {
 				nav.setRowIndex(i);
+				facesContext.setResponseWriter(getStringResponseWriter(facesContext, writer));
 				prototypeChildNavItem.encodeAll(facesContext);
+
+				if (originalWriter != null) {
+					facesContext.setResponseWriter(originalWriter);
+				}
+
+				String output = writer.toString();
+				facesContext.getAttributes().put(getFQCNChildrenKey(), output);
 			}
 		}
 		else {
@@ -87,7 +101,15 @@ public class NavRenderer extends PortalTagRenderer<Nav, NavTag> {
 				UIComponent child = children.get(i);
 
 				if (child.isRendered()) {
+					facesContext.setResponseWriter(getStringResponseWriter(facesContext, writer));
 					child.encodeAll(facesContext);
+
+					if (originalWriter != null) {
+						facesContext.setResponseWriter(originalWriter);
+					}
+
+					String output = writer.toString();
+					facesContext.getAttributes().put(getFQCNChildrenKey(), output);
 				}
 			}
 		}

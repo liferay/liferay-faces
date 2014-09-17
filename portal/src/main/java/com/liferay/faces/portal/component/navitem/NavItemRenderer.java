@@ -24,6 +24,7 @@ import com.liferay.taglib.aui.NavItemTag;
 
 /**
  * @author  Neil Griffin
+ * @author  Juan Gonzalez
  */
 //J-
 @FacesRenderer(componentFamily = NavItem.COMPONENT_FAMILY, rendererType = NavItem.RENDERER_TYPE)
@@ -65,5 +66,10 @@ public class NavItemRenderer extends PortalTagRenderer<NavItem, NavItemTag> {
 	@Override
 	public String getChildInsertionMarker() {
 		return "</li>";
+	}
+
+	@Override
+	public boolean getRendersChildren() {
+		return true;
 	}
 }
