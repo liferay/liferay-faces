@@ -22,6 +22,7 @@ import javax.faces.component.EditableValueHolder;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
+import javax.faces.component.UIMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.context.PartialViewContext;
 
@@ -59,6 +60,17 @@ public class Field extends FieldBase {
 		if (uiComponent instanceof EditableValueHolder) {
 			editableValueHolders = new ArrayList<EditableValueHolder>();
 			editableValueHolders.add((EditableValueHolder) uiComponent);
+		}
+		else if (uiComponent instanceof UIMessage) {
+			UIMessage uiMessage = (UIMessage) uiComponent;
+			String forId = uiMessage.getFor();
+			if (forId != null) {
+				UIComponent forComponent = uiComponent.findComponent(forId);
+				if ((forComponent != null) && (forComponent instanceof EditableValueHolder)) {
+					editableValueHolders = new ArrayList<EditableValueHolder>();
+					editableValueHolders.add((EditableValueHolder) forComponent);
+				}
+			}
 		}
 		else {
 			List<UIComponent> children = uiComponent.getChildren();
