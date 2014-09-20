@@ -17,7 +17,7 @@ import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
-import com.liferay.faces.alloy.component.AlloyComponentUtil;
+import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
@@ -43,7 +43,7 @@ public class InputHidden extends InputHiddenBase {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 
 		if (facesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
-			return AlloyComponentUtil.getComponentLabel(this);
+			return ComponentUtil.getComponentLabel(this);
 		}
 		else {
 			return null;
