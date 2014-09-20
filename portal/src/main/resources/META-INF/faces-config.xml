@@ -4,6 +4,10 @@
 	<application>
 		<resource-handler>com.liferay.faces.portal.resource.LiferayFacesResourceHandler</resource-handler>
 		<resource-handler>com.liferay.faces.portal.resource.LiferayPortalResourceHandler</resource-handler>
+		<system-event-listener>
+			<system-event-listener-class>com.liferay.faces.portal.component.inputrichtext.InputRichTextRenderer</system-event-listener-class>
+			<system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
+		</system-event-listener>
 	</application>
 	<factory>
 		<partial-view-context-factory>com.liferay.faces.util.context.PartialViewContextFactoryCleanupImpl</partial-view-context-factory>

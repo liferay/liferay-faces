@@ -5,9 +5,6 @@
 		<![CDATA[The Liferay Faces Portal facelet component tags with the <code>portal:</code> tag name prefix.]]>
 	</description>
 	<component name="Aria" generateJava="false" generateTaglibXML="false">
-		<description>
-			<![CDATA[TODO]]>
-		</description>
 		<attributes>
 			<attribute>
 				<description>
@@ -21,6 +18,78 @@
 					<![CDATA[The WAI-ARIA role which can help users with disabilities understand the purpose of an element, such as whether it is a menu, progress indicator, or some other type of component.]]>
 				</description>
 				<name>ariaRole</name>
+				<type>String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="InputRichText" generateJavaComponent="true" generateJavaRenderer="false" extendsTags="FacesMessageLabel Styleable UIInput"
+		parentClass="javax.faces.component.UIInput" parentRendererClass="com.liferay.faces.portal.render.internal.PortalTagRenderer&lt;InputEditor, InputEditorTag&gt;">
+		<description><![CDATA[InputRichText is a UIInput component that renders a field for editing rich text.]]></description>
+		<attributes>
+			<attribute>
+				<description><![CDATA[Optional map of configuration parameters. For example usage, see the Wiki portlet <a href="https://github.com/liferay/liferay-portal/blob/6.2.1-ga2/portal-web/docroot/html/portlet/wiki/edit/editor_config.jspf#L28" target="_blank">editor_config.jsp</a> source code.]]></description>
+				<name>configParams</name>
+				<type>java.util.Map&lt;String,String&gt;</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[The locale (language id) of the rich text content.]]></description>
+				<name>contentsLanguageId</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>"editor.wysiwyg.default"</defaultValue>
+				<description><![CDATA[Liferay Portal property key name (typically found in portal.properties or portal-ext.properties). Valid property key values are "ckeditor", "ckeditor_bbcode", and "ckeditor_creole". The default key name is "editor.wysiwyg.default" which has a value of "ckeditor".]]></description>
+				<name>editorKey</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[Optional map of file browser parameters. For example usage, see the Wiki portlet <a href="https://github.com/liferay/liferay-portal/blob/6.2.1-ga2/portal-web/docroot/html/portlet/wiki/edit/editor_config.jspf#L33" target="_blank">editor_config.jsp</a> source code.]]></description>
+				<name>fileBrowserParams</name>
+				<type>java.util.Map&lt;String,String&gt;</type>
+			</attribute>
+			<attribute>
+				<defaultValue>Integer.MAX_VALUE</defaultValue>
+				<description><![CDATA[The maximum number of plain text characters, meaning characters that do not include HTML tags such as <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, and <code>&lt;a href="..."&gt;</code>.]]></description>
+				<name>maxPlainTextChars</name>
+				<type>int</type>
+			</attribute>
+			<attribute>
+				<defaultValue>0</defaultValue>
+				<description><![CDATA[The minimum number of plain text characters, meaning characters that do not include HTML tags such as <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, and <code>&lt;a href="..."&gt;</code>.]]></description>
+				<name>minPlainTextChars</name>
+				<type>int</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[Javascript to execute after this component loses focus.]]></description>
+				<name>onblur</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[Javascript to execute after this component's value has changed, and then it loses focus.]]></description>
+				<name>onchange</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[Javascript to execute when this component gets focus.]]></description>
+				<name>onfocus</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description><![CDATA[When true, the will be resizable by the end-user when dragging on the bottom-right resize handle. The default value is true.]]></description>
+				<name>resizable</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description><![CDATA[When true, the resources necessary for loading the CKEditor will not be added to the <code>&lt;head&gt;...&lt;/head&gt;</code> section of the portal page. The default value is false.]]></description>
+				<name>skipEditorLoading</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<defaultValue>"liferay"</defaultValue>
+				<description><![CDATA[The name of the set of toolbars that are to be displayed above the rich text input area. Valid values are "bbcode", "creole", "editInPlace", "email", "liferay", "liferayArticle", "phone", "simple", and "tablet". The default value depends on the value of the editorKey attribute. If editorKey's property evaluates to "ckeditor" then the default value is "liferay". If editorKey's property evaluates to "ckeditor_bbcode" then the default value is "bbcode". If editorKey's property evaluates to "ckeditor_creole" then the default value is "creole".]]></description>
+				<name>toolbarSet</name>
 				<type>String</type>
 			</attribute>
 		</attributes>
