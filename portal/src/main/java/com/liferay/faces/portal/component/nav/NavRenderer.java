@@ -42,13 +42,13 @@ public class NavRenderer extends PortalTagRenderer<Nav, NavTag> {
 	}
 
 	@Override
-	public void copyFrameworkAttributes(Nav nav, NavTag navTag) {
+	public void copyFrameworkAttributes(FacesContext facesContext, Nav nav, NavTag navTag) {
 		navTag.setId(nav.getClientId());
 		navTag.setCssClass(nav.getStyleClass());
 	}
 
 	@Override
-	public void copyNonFrameworkAttributes(Nav nav, NavTag navTag) {
+	public void copyNonFrameworkAttributes(FacesContext facesContext, Nav nav, NavTag navTag) {
 		navTag.setAriaLabel(nav.getAriaLabel());
 		navTag.setAriaRole(nav.getAriaRole());
 		navTag.setCollapsible(nav.isCollapsible());

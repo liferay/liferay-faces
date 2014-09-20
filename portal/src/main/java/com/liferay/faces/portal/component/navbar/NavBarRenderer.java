@@ -14,10 +14,10 @@
 package com.liferay.faces.portal.component.navbar;
 
 import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.portal.render.internal.PortalTagRenderer;
-
 import com.liferay.taglib.aui.NavBarTag;
 
 
@@ -35,13 +35,13 @@ public class NavBarRenderer extends PortalTagRenderer<NavBar, NavBarTag> {
 	}
 
 	@Override
-	public void copyFrameworkAttributes(NavBar navBar, NavBarTag navBarTag) {
+	public void copyFrameworkAttributes(FacesContext facesContext, NavBar navBar, NavBarTag navBarTag) {
 		navBarTag.setId(navBar.getClientId());
 		navBarTag.setCssClass(navBar.getStyleClass());
 	}
 
 	@Override
-	public void copyNonFrameworkAttributes(NavBar u, NavBarTag t) {
+	public void copyNonFrameworkAttributes(FacesContext facesContext, NavBar u, NavBarTag t) {
 		// no-op
 	}
 
