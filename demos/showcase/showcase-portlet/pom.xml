@@ -71,6 +71,12 @@
 			<artifactId>showcase-webapp</artifactId>
 			<version>${project.version}</version>
 			<type>war</type>
+			<exclusions>
+				<exclusion>
+					<groupId>com.liferay.faces</groupId>
+					<artifactId>liferay-faces-reslib</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
