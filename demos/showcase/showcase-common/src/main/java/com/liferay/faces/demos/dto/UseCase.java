@@ -11,25 +11,34 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.demos.bean;
+package com.liferay.faces.demos.dto;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import java.io.Serializable;
+import java.util.List;
 
 
 /**
  * @author  Neil Griffin
  */
-@ManagedBean
-@RequestScoped
-public class ShowcaseBackingBean {
+public class UseCase implements Serializable {
 
-	// Injections
-	@ManagedProperty(value = "#{showcaseModelBean}")
-	private ShowcaseModelBean showcaseModelBean;
+	// serialVersionUID
+	private static final long serialVersionUID = 5675514126286108464L;
 
-	public void setShowcaseModelBean(ShowcaseModelBean showcaseModelBean) {
-		this.showcaseModelBean = showcaseModelBean;
+	// Private Data Members
+	private String name;
+	private List<CodeExample> codeExamples;
+
+	public UseCase(String name, List<CodeExample> codeExamples) {
+		this.name = name;
+		this.codeExamples = codeExamples;
+	}
+
+	public List<CodeExample> getCodeExamples() {
+		return codeExamples;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

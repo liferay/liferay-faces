@@ -78,6 +78,7 @@ public class ListModelBean {
 		FacesContext startupFacesContext = FacesContext.getCurrentInstance();
 		boolean developmentMode = startupFacesContext.isProjectStage(ProjectStage.Development);
 		boolean systemTestMode = startupFacesContext.isProjectStage(ProjectStage.SystemTest);
+		boolean productionMode = startupFacesContext.isProjectStage(ProjectStage.Production);
 		showcaseCategoryList = new ArrayList<String>();
 		showcaseCategoryList.add("buttonlink");
 		showcaseCategoryList.add("data");
@@ -203,6 +204,9 @@ public class ListModelBean {
 									String sourcePath = File.separator + "WEB-INF" + File.separator + sourceFileName;
 									sourceFileURL = startupExternalContext.getResource(sourcePath);
 								}
+								else if (sourceFileName.endsWith(".properties")) {
+									sourceFileURL = getClass().getClassLoader().getResource(sourceFileName);
+								}
 								else {
 
 									for (int i = 0; ((i < PACKAGE_NAMES.length) && (sourceFileURL == null)); i++) {
@@ -223,7 +227,8 @@ public class ListModelBean {
 
 								if (sourceFileURL != null) {
 
-									CodeExample codeExample = CodeExampleUtil.read(sourceFileURL, sourceFileName);
+									startupFacesContext.getApplication().getProjectStage();
+									CodeExample codeExample = CodeExampleUtil.read(sourceFileURL, sourceFileName, productionMode);
 									codeExamples.add(codeExample);
 
 									logger.debug("Loaded source file=[{0}]", sourceFileName);
