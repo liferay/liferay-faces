@@ -27,7 +27,6 @@
 								<taglib>${project.basedir}/../alloy/src/main/resources/META-INF/alloy.taglib.xml</taglib>
 								<taglib>${project.basedir}/../alloy/src/main/resources/META-INF/aui.taglib.xml</taglib>
 								<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay.taglib.xml</taglib>
-								<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay-security.taglib.xml</taglib>
 								<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay-ui.taglib.xml</taglib>
 								<taglib>${project.basedir}/../portal/src/main/resources/META-INF/liferay-util.taglib.xml</taglib>
 								<taglib>${project.basedir}/../portal/src/main/resources/META-INF/portal.taglib.xml</taglib>
