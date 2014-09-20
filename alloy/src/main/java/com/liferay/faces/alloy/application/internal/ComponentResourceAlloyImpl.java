@@ -39,6 +39,7 @@ public class ComponentResourceAlloyImpl extends ComponentResourceWrapper {
 	static {
 		PORTAL_RESOURCE_IDS.add("liferay-faces-reslib:build/aui/aui-min.js");
 		PORTAL_RESOURCE_IDS.add("liferay-faces-reslib:build/aui-css/css/bootstrap.min.css");
+		PORTAL_RESOURCE_IDS.add("liferay-faces-reslib:build/aui-css/css/bootstrap-responsive.min.css");
 		PORTAL_RESOURCE_IDS.add("liferay-faces-reslib:liferay.js");
 	}
 
