@@ -7,8 +7,8 @@
 	<c:set value="#{selectedComponent.key}" var="selectedComponentKey" />
 	<c:set value="#{selectedComponent.useCaseName}" var="selectedComponentUseCaseName" />
 	<h:outputStylesheet name="showcase.css" library="css" />
-	<alloy:panelGrid columns="2" columnClasses="showcase-nav-column,showcase-content-column" styleClass="showcase-grid">
-		<alloy:panelGroup layout="block">
+	<alloy:row>
+		<alloy:column styleClass="showcase-nav-col" width="15">
 			<alloy:link outcome="home">
 				<alloy:image library="images" name="liferay-faces-logo-nav.png" styleClass="logo" />
 			</alloy:link>
@@ -16,10 +16,10 @@
 				var="showcaseCategory">
 				<alloy:tab>
 					<f:facet name="header">
-						<alloy:image library="images" name="icon-#{showcaseCategory}.png" />
-						<h3>
+						<alloy:panelGroup layout="block">
+							<alloy:image library="images" name="icon-#{showcaseCategory}.png" />
 							<alloy:outputText styleClass="category-name" value="#{i18n[showcaseCategory]}" />
-						</h3>
+						</alloy:panelGroup>
 					</f:facet>
 					<aui:list styleClass="nav nav-list">
 						<ui:repeat value="#{listModelBean.showcaseCategoryMap[showcaseCategory]}" var="showcaseComponent">
@@ -50,15 +50,14 @@
 					</aui:list>
 				</alloy:tab>
 			</alloy:accordion>
-		</alloy:panelGroup>
-		<alloy:panelGroup layout="block">
+		</alloy:column>
+		<alloy:column style="margin-left: 1px;" width="85">
 			<alloy:panelGroup layout="block" styleClass="showcase-container">
 				<ui:insert name="content" />
 			</alloy:panelGroup>
 			<alloy:panelGroup layout="block" styleClass="showcase-container showcase-info">
 				<alloy:outputText escape="false" value="#{listModelBean.dependencyInfo}" />
 			</alloy:panelGroup>
-		</alloy:panelGroup>
-	</alloy:panelGrid>
-
+		</alloy:column>
+	</alloy:row>
 </ui:composition>
