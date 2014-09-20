@@ -32,16 +32,20 @@ import com.liferay.faces.util.lang.StringPool;
 public class CodeExampleUtil {
 
 	// Private Constants
+//	private static final Pattern BLANK_LINE_PATTERN = Pattern.compile("\\t+\\r\\n");
 	private static final String JAVA = "java";
 	private static final String JAVA_EXTENSION = ".java";
 	private static final Pattern JAVA_MULTILINE_COMMENTS_PATTERN = Pattern.compile("/[*][*].*[*]/", Pattern.DOTALL);
 	private static final String OUTPUTMODEL_MODELVALUE = ":outputModel:modelValue";
 	private static final Pattern TEMPLATE_ATTRIBUTE_PATTERN = Pattern.compile("\\s*template=\".*\"");
 	private static final String RENDER_EXAMPLE_FORM = "render=\":example:exampleForm:";
+	private static final String RENDER_FORM_EXAMPLE = "render=\":exampleForm:example";
 	private static final Pattern SHOWCASE_NAMESPACE_PATTERN = Pattern.compile("\\s*xmlns:showcase=\".*\"");
+	private static final String RENDERED = "rendered=\"#{showcaseModelBean.selectedComponent.rendered}\"";
 	private static final String XML = "xml";
 
-	public static CodeExample read(URL sourceFileURL, String sourceFileName) throws IOException {
+	public static CodeExample read(URL sourceFileURL, String sourceFileName, boolean productionMode)
+		throws IOException {
 
 		TextResource textResource = TextResourceUtil.read(sourceFileURL);
 		String sourceCodeText = textResource.getText();
@@ -100,12 +104,34 @@ public class CodeExampleUtil {
 							}
 
 							pos = line.indexOf(RENDER_EXAMPLE_FORM);
+
 							if (pos > 0) {
 								line = line.substring(0, pos) + "render=\"" +
-										line.substring(pos + RENDER_EXAMPLE_FORM.length());
+									line.substring(pos + RENDER_EXAMPLE_FORM.length());
 							}
-							buf.append(line);
-							buf.append(StringPool.NEW_LINE);
+
+							pos = line.indexOf(RENDER_FORM_EXAMPLE);
+
+							if (pos > 0) {
+								line = line.substring(0, pos) + "render=\":exampleForm" +
+									line.substring(pos + RENDER_FORM_EXAMPLE.length());
+							}
+
+							if (productionMode) {
+								pos = line.indexOf(RENDERED);
+
+								if (pos > 0) {
+									line = line.substring(0, pos) + line.substring(pos + RENDERED.length());
+								}
+							}
+
+							// Strip empty lines
+							Pattern BLANK_LINE_PATTERN = Pattern.compile("\\t+$");
+							Matcher matcher = BLANK_LINE_PATTERN.matcher(line);
+							if (!matcher.matches()) {
+								buf.append(line);
+								buf.append(StringPool.NEW_LINE);
+							}
 						}
 					}
 				}

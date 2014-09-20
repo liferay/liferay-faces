@@ -67,10 +67,12 @@ public class CodeExample implements Serializable {
 	public String getRawText() {
 
 		boolean developmentMode = false;
+		boolean productionMode = false;
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 
 		if (facesContext != null) {
 			developmentMode = facesContext.isProjectStage(ProjectStage.Development);
+			productionMode = facesContext.isProjectStage(ProjectStage.Production);
 		}
 
 		if (developmentMode) {
@@ -81,7 +83,7 @@ public class CodeExample implements Serializable {
 
 				if (lastModified > this.lastModified) {
 
-					CodeExample updatedCodeExample = CodeExampleUtil.read(url, fileName);
+					CodeExample updatedCodeExample = CodeExampleUtil.read(url, fileName, productionMode);
 					this.lastModified = lastModified;
 					this.rawText = updatedCodeExample.getRawText();
 				}
