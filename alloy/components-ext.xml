@@ -310,7 +310,7 @@
 		</attributes>
 	</component>
 	<component name="InputDateTimeCommon"
-		extendsTags="AltInherited DisabledInherited FacesMessageLabel InputCommon SizeInherited"
+		extendsTags="AltInherited DisabledInherited FacesMessageLabelInherited InputCommon SizeInherited"
 		generateJava="false" generateTaglibXML="false">
 		<!-- This component exists so that InputDate and InputTime can extend it. It includes all the attributes of -->
 		<!-- InputDateTime with <generateJava>false</generateJava>. If InputDate and InputTime extended -->
@@ -743,7 +743,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="CommandButton" extendsTags="ButtonCommon FacesMessageLabel UICommand" parentClass="javax.faces.component.html.HtmlCommandButton"
+	<component name="CommandButton" extendsTags="ButtonCommon FacesMessageLabelInherited UICommand" parentClass="javax.faces.component.html.HtmlCommandButton"
 		rendererParentClass="com.liferay.faces.alloy.component.button.ButtonRenderer">
 		<description>
 			<![CDATA[CommandButton is a UICommand component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is submit. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlCommandButton.html" target="_blank"><code>HtmlCommandButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/commandButton.html" target="_blank"><code>h:commandButton</code></a>. The component must be a child of h:form in order to trigger the action or actionListener.]]>
@@ -1377,7 +1377,7 @@
 		</description>
 	</component>
 	<component name="InputSecret"
-		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabel InputCommon SizeInherited"
+		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelInherited InputCommon SizeInherited"
 		parentClass="javax.faces.component.html.HtmlInputSecret" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[InputSecret is a UIInput component that renders an <code>&lt;input&gt;</code> element with type="password". Since it extends HtmlInputSecret, it supports all the features of h:inputSecret.]]>
@@ -1495,13 +1495,13 @@
 		</attributes>
 	</component>
 	<component name="InputText"
-		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabel InputCommon SizeInherited"
+		extendsTags="AltInherited AutocompleteInherited DisabledInherited FacesMessageLabelInherited InputCommon SizeInherited"
 		parentClass="javax.faces.component.html.HtmlInputText" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[InputText is a UIInput component that renders a field for editing single-line text. Since it extends HtmlInputText, it supports all the features of h:inputText.]]>
 		</description>
 	</component>
-	<component name="InputTextarea" extendsTags="FacesMessageLabel DisabledInherited InputCommon" parentClass="javax.faces.component.html.HtmlInputTextarea"
+	<component name="InputTextarea" extendsTags="FacesMessageLabelInherited DisabledInherited InputCommon" parentClass="javax.faces.component.html.HtmlInputTextarea"
 		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[InputTextarea is a UIInput component that renders a field for editing multi-line text. Since it extends HtmlInputTextarea, it supports all the features of h:inputTextarea.]]>
@@ -1971,13 +1971,13 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectBooleanCheckbox" extendsTags="DisabledInherited FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectBooleanCheckbox" extendsTags="DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectBooleanCheckbox" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectBooleanCheckbox is a UISelectOne component that renders a check box. Since it extends HtmlSelectBooleanCheckbox, it supports all the features of h:selectBooleanCheckbox such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
-	<component name="SelectManyCheckbox" extendsTags="UISelectMany DisabledInherited FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectManyCheckbox" extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyCheckbox" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyCheckbox is a UISelectMany component that renders checkboxes and enables the user to select multiple values. Since it extends HtmlSelectManyCheckbox, it supports all the features of h:selectManyCheckbox such as accepting f:selectItem or f:selectItems as child tags.]]>
@@ -2017,7 +2017,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectManyListbox" extendsTags="UISelectMany DisabledInherited FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectManyListbox" extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyListbox" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyListbox is a UISelectMany component that renders a select element and enables the user to select multiple values. Since it extends HtmlSelectManyListbox, it supports all the features of h:selectManyListbox such as accepting f:selectItem or f:selectItems as child tags.]]>
@@ -2033,13 +2033,13 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectManyMenu" extendsTags="UISelectMany DisabledInherited FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectManyMenu" extendsTags="UISelectMany DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectManyMenu" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectManyMenu is a UISelectMany component that renders a select element and enables the user to select multiple values. It has the same basic features of alloy:selectManyListbox except that there is no size attribute because JSF "select*menu" components always render size=1. Since it extends HtmlSelectManyMenu, it supports all the features of h:selectManyMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
-	<component name="SelectOneListbox" extendsTags="UISelect DisabledInherited FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectOneListbox" extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneListbox" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectOneListbox is a UISelectOne component that renders a `select` element (multi-item list) and enables the user to select one value. Since it extends HtmlSelectOneListbox, it supports all the features of h:selectOneListbox such as accepting f:selectItem or f:selectItems as child tags.]]>
@@ -2055,13 +2055,13 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="SelectOneMenu" extendsTags="UISelect DisabledInherited FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectOneMenu" extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneMenu" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectOneMenu is a UISelectOne component that renders a select element (drop down list) and enables the user to select one value. Since it extends HtmlSelectOneMenu, it supports all the features of h:selectOneMenu such as accepting f:selectItem or f:selectItems as child tags.]]>
 		</description>
 	</component>
-	<component name="SelectOneRadio" extendsTags="UISelect DisabledInherited FacesMessageLabel HTMLAccessibilityEvents HTMLInputEvents"
+	<component name="SelectOneRadio" extendsTags="UISelect DisabledInherited FacesMessageLabelInherited HTMLAccessibilityEvents HTMLInputEvents"
 		parentClass="javax.faces.component.html.HtmlSelectOneRadio" rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[SelectOneRadio is a UISelectOne component that renders radio buttons. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlSelectOneRadio.html" target="_blank"><code>HtmlSelectOneRadio</code></a>, it supports all the features of h:selectOneRadio such as accepting f:selectItem or f:selectItems as child tags.]]>
