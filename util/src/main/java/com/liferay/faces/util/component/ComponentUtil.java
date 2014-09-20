@@ -13,7 +13,9 @@
  */
 package com.liferay.faces.util.component;
 
+import java.lang.reflect.Method;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.el.ELContext;
 import javax.el.ValueExpression;
@@ -22,6 +24,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UINamingContainer;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.ValueHolder;
+import javax.faces.component.html.HtmlOutputLabel;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
@@ -208,5 +211,92 @@ public class ComponentUtil {
 		String clientVarName = clientId.replaceAll(regex, StringPool.UNDERLINE);
 
 		return clientVarName;
+	}
+
+	public static String getComponentLabel(UIComponent uiComponent) {
+
+		String componentLabel = null;
+
+		if (uiComponent != null) {
+
+			componentLabel = getParentFieldLabelValue(uiComponent);
+
+			if (componentLabel == null) {
+				componentLabel = getSiblingLabelValue((uiComponent));
+			}
+		}
+
+		return componentLabel;
+	}
+
+	private static String getParentFieldLabelValue(UIComponent uiComponent) {
+
+		String parentFieldLabel = null;
+
+		if (uiComponent != null) {
+			UIComponent parent = uiComponent.getParent();
+
+			if (parent != null) {
+
+				Method method = null;
+
+				try {
+					method = parent.getClass().getMethod("getLabel", (Class<?>[]) null);
+				}
+				catch (NoSuchMethodException e) {
+					// ignore
+				}
+
+				if (method != null) {
+
+					try {
+						parentFieldLabel = (String) method.invoke(parent, (Object[]) null);
+					}
+					catch (Exception e) {
+						// ignore
+					}
+				}
+				else {
+					parentFieldLabel = getParentFieldLabelValue(parent);
+				}
+			}
+		}
+
+		return parentFieldLabel;
+	}
+
+	private static String getSiblingLabelValue(UIComponent uiComponent) {
+
+		String siblingLabelValue = null;
+
+		if (uiComponent != null) {
+
+			UIComponent parent = uiComponent.getParent();
+
+			if (parent != null) {
+
+				List<UIComponent> children = parent.getChildren();
+
+				if (children != null) {
+
+					for (UIComponent child : children) {
+
+						if (child instanceof HtmlOutputLabel) {
+							HtmlOutputLabel htmlOutputLabel = (HtmlOutputLabel) child;
+
+							if (uiComponent.getId().equals(htmlOutputLabel.getFor())) {
+								Object labelValue = htmlOutputLabel.getValue();
+
+								if (labelValue != null) {
+									siblingLabelValue = labelValue.toString();
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return siblingLabelValue;
 	}
 }
