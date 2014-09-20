@@ -23,6 +23,7 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 import javax.servlet.jsp.JspException;
 
+import com.liferay.faces.portal.render.internal.PortalTagOutput;
 import com.liferay.faces.portal.render.internal.PortalTagRenderer;
 
 import com.liferay.taglib.security.PermissionsURLTag;
@@ -43,12 +44,14 @@ public class PermissionsURLRenderer extends PortalTagRenderer<PermissionsURL, Pe
 	}
 
 	@Override
-	public void copyFrameworkAttributes(PermissionsURL permissionsURL, PermissionsURLTag permissionsURLTag) {
+	public void copyFrameworkAttributes(FacesContext facesContext, PermissionsURL permissionsURL,
+		PermissionsURLTag permissionsURLTag) {
 		permissionsURLTag.setId(permissionsURL.getClientId());
 	}
 
 	@Override
-	public void copyNonFrameworkAttributes(PermissionsURL permissionsURL, PermissionsURLTag permissionsURLTag) {
+	public void copyNonFrameworkAttributes(FacesContext facesContext, PermissionsURL permissionsURL,
+		PermissionsURLTag permissionsURLTag) {
 		permissionsURLTag.setModelResource(permissionsURL.getModelResource());
 		permissionsURLTag.setModelResourceDescription(permissionsURL.getModelResourceDescription());
 		permissionsURLTag.setRedirect(permissionsURL.getRedirect());
@@ -64,7 +67,8 @@ public class PermissionsURLRenderer extends PortalTagRenderer<PermissionsURL, Pe
 		try {
 
 			// Get the URL from the tag output.
-			String tagOutput = getTagOutput(facesContext, uiComponent);
+			PortalTagOutput portalTagOutput = getPortalTagOutput(facesContext, uiComponent);
+			String url = portalTagOutput.getMarkup();
 
 			// If the user didn't specify a value for the "var" attribute, then write the URL to the response.
 			PermissionsURL permissionsURL = (PermissionsURL) uiComponent;
@@ -72,7 +76,7 @@ public class PermissionsURLRenderer extends PortalTagRenderer<PermissionsURL, Pe
 
 			if (varName == null) {
 				ResponseWriter responseWriter = facesContext.getResponseWriter();
-				responseWriter.write(tagOutput);
+				responseWriter.write(url);
 			}
 
 			// Otherwise, place the URL into the request scope so that it can be resolved via EL with the name
@@ -80,7 +84,7 @@ public class PermissionsURLRenderer extends PortalTagRenderer<PermissionsURL, Pe
 			else {
 				ExternalContext externalContext = facesContext.getExternalContext();
 				Map<String, Object> requestMap = externalContext.getRequestMap();
-				requestMap.put(varName, tagOutput);
+				requestMap.put(varName, url);
 			}
 		}
 		catch (JspException e) {

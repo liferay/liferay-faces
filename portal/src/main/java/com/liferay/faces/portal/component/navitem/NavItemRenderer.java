@@ -14,9 +14,11 @@
 package com.liferay.faces.portal.component.navitem;
 
 import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.portal.render.internal.PortalTagRenderer;
+
 import com.liferay.taglib.aui.NavItemTag;
 
 
@@ -34,13 +36,13 @@ public class NavItemRenderer extends PortalTagRenderer<NavItem, NavItemTag> {
 	}
 
 	@Override
-	public void copyFrameworkAttributes(NavItem navItem, NavItemTag navItemTag) {
+	public void copyFrameworkAttributes(FacesContext facesContext, NavItem navItem, NavItemTag navItemTag) {
 		navItemTag.setId(navItem.getClientId());
 		navItemTag.setCssClass(navItem.getStyleClass());
 	}
 
 	@Override
-	public void copyNonFrameworkAttributes(NavItem navItem, NavItemTag navItemTag) {
+	public void copyNonFrameworkAttributes(FacesContext facesContext, NavItem navItem, NavItemTag navItemTag) {
 		navItemTag.setAnchorCssClass(navItem.getAnchorCssClass());
 		navItemTag.setAnchorData(navItem.getAnchorData());
 		navItemTag.setAnchorId(navItem.getAnchorId());
