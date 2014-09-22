@@ -27,6 +27,7 @@ import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.component.button.Button;
 import com.liferay.faces.alloy.component.icon.Icon;
+import com.liferay.faces.alloy.component.inputdate.internal.MobileBrowserSnifferUtil;
 import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
@@ -57,10 +58,10 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 
 		// Start the encoding of the outermost <div> element.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		String clientId = uiComponent.getClientId(facesContext);
 		responseWriter.startElement(StringPool.DIV, uiComponent);
 
 		// Encode the "id" attribute on the outermost <div> element.
-		String clientId = uiComponent.getClientId(facesContext);
 		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
 
 		// Encode the "class" and "style" attributes on the outermost <div> element.
@@ -68,35 +69,36 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 		RendererUtil.encodeStyleable(responseWriter, styleable);
 
 		// Start the encoding of the text input by delegating to the renderer from the JSF runtime.
-		InputDateTimeResponseWriter inputDateTimeResponseWriter = new InputDateTimeResponseWriter(responseWriter,
-				StringPool.INPUT, clientId.concat(INPUT_SUFFIX));
+		String inputClientId = clientId.concat(INPUT_SUFFIX);
+		boolean mobile = MobileBrowserSnifferUtil.isMobile(facesContext);
+		InputDateTimeResponseWriter inputDateTimeResponseWriter = getInputDateTimeResponseWriter(responseWriter,
+				inputClientId, mobile);
 		super.encodeMarkupBegin(facesContext, uiComponent, inputDateTimeResponseWriter);
 	}
 
 	@Override
 	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		// Finish the encoding of the text input by delegating to the renderer from the JSF runtime.
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		String clientId = uiComponent.getClientId(facesContext);
 		String inputClientId = clientId.concat(INPUT_SUFFIX);
-		InputDateTimeResponseWriter inputDateTimeResponseWriter = new InputDateTimeResponseWriter(responseWriter,
-				StringPool.INPUT, inputClientId);
+		boolean mobile = MobileBrowserSnifferUtil.isMobile(facesContext);
+		InputDateTimeResponseWriter inputDateTimeResponseWriter = getInputDateTimeResponseWriter(responseWriter,
+				inputClientId, mobile);
 		super.encodeMarkupEnd(facesContext, uiComponent, inputDateTimeResponseWriter);
 
-		// Determine the escaped "id" of the text input.
-		ApplicationFactory applicationFactory = (ApplicationFactory) FactoryFinder.getFactory(
-				FactoryFinder.APPLICATION_FACTORY);
-		Application application = applicationFactory.getApplication();
-
 		// Determine whether or not the text input is enabled.
-		InputDateTime inputDateTimeBase = (InputDateTime) uiComponent;
-		boolean disabled = inputDateTimeBase.isDisabled();
+		InputDateTime inputDateTime = (InputDateTime) uiComponent;
+		boolean disabled = inputDateTime.isDisabled();
 
-		// If the "showOn" attribute indicates that a button is to be rendered, then
-		String showOn = inputDateTimeBase.getShowOn();
+		// If the "showOn" attribute indicates that a button is to be rendered and the component is not being rendered
+		// for a mobile browser, then render the button.
+		String showOn = inputDateTime.getShowOn();
 
-		if ("both".equals(showOn) || "button".equals(showOn)) {
+		if (("both".equals(showOn) || "button".equals(showOn)) && !mobile) {
+			ApplicationFactory applicationFactory = (ApplicationFactory) FactoryFinder.getFactory(
+					FactoryFinder.APPLICATION_FACTORY);
+			Application application = applicationFactory.getApplication();
 
 			// Create an icon component that is to remain detached from the component tree.
 			Icon icon = (Icon) application.createComponent(Icon.COMPONENT_TYPE);
@@ -114,7 +116,7 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 
 				if ("button".equals(showOn)) {
 
-					String buttonClientId = getButtonClientId(facesContext, inputDateTimeBase);
+					String buttonClientId = getButtonClientId(facesContext, inputDateTime);
 					button.setId(buttonClientId);
 				}
 				else {
@@ -136,11 +138,11 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 			responseWriter.startElement(StringPool.DIV, uiComponent);
 
 			String boundingBoxClientId = clientId.concat(BOUNDING_BOX_SUFFIX);
-			responseWriter.writeAttribute(StringPool.ID, boundingBoxClientId, StringPool.ID);
+			responseWriter.writeAttribute(StringPool.ID, boundingBoxClientId, null);
 			responseWriter.startElement(StringPool.DIV, uiComponent);
 
 			String contentBoxClientId = clientId.concat(CONTENT_BOX_SUFFIX);
-			responseWriter.writeAttribute(StringPool.ID, contentBoxClientId, StringPool.ID);
+			responseWriter.writeAttribute(StringPool.ID, contentBoxClientId, null);
 			responseWriter.endElement(StringPool.DIV);
 			responseWriter.endElement(StringPool.DIV);
 		}
@@ -149,7 +151,7 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 		responseWriter.endElement(StringPool.DIV);
 	}
 
-	protected void encodeInputDateTimeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter,
+	protected void encodeHiddenAttributesInputDateTime(FacesContext facesContext, ResponseWriter responseWriter,
 		InputDateTime inputDateTime, boolean first) throws IOException {
 
 		encodePopover(facesContext, responseWriter, inputDateTime, first);
@@ -233,6 +235,9 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 
 		return !locale.equals(viewRootLocale);
 	}
+
+	protected abstract InputDateTimeResponseWriter getInputDateTimeResponseWriter(ResponseWriter responseWriter,
+		String inputClientId, boolean mobile);
 
 	@Override
 	public String getYUIConfig(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)

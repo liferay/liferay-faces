@@ -167,5 +167,38 @@ var LFAI = {
 
 		// Set the value of the hidden input to null so that there is no query value if the component is re-rendered.
 		document.getElementById(hiddenClientId).value = '';
+	},
+
+	initDateTimePickerMobile: function(dateTimePicker, inputClientId, max, min) {
+
+		dateTimePicker.brokenDestroy = dateTimePicker.destroy;
+		dateTimePicker.destroy = function (destroyAllNodes) {
+
+			 try {
+			   dateTimePicker.brokenDestroy(destroyAllNodes);
+			}
+			catch (e) {
+				if (e instanceof TypeError) {
+					// Workaround for "Cannot read property 'detach' of undefined" TypeError which is throw every
+					// time a DatePickerNative is destroyed.
+				}
+				else {
+					throw e;
+				}
+			}
+		};
+
+		if (max || min) {
+
+			var input = document.getElementById(inputClientId);
+
+			if (max) {
+				input.setAttribute('max', max);
+			}
+
+			if (min) {
+				input.setAttribute('min', min);
+			}
+		}
 	}
 }

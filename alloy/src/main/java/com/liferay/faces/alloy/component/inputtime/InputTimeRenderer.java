@@ -16,6 +16,7 @@ package com.liferay.faces.alloy.component.inputtime;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -34,11 +35,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.alloy.component.inputdate.internal.MobileBrowserSnifferUtil;
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTime;
+import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeResponseWriter;
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
 import com.liferay.faces.alloy.component.inputtext.InputText;
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.helper.StringHelper;
+import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 
@@ -62,10 +65,6 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 	// Private Constants
 	private static final String BUTTON_ON_SELECT_TEMPLATE = "A.one('#{0}').set('value', event.result.text);";
 	private static final Pattern TIMESTAMP_PATTERN = Pattern.compile("([0-1][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]");
-
-	// TODO come back to this when conditional loading is available
-	private static final String[] TIME_PICKER_MODULES = StringHelper.append(MODULES, "autocomplete-filters",
-			"autocomplete-highlighters");
 	private static final String TOKEN_0 = "{0}";
 
 	// Private Constants used in getMaskFromTimePattern()
@@ -134,7 +133,6 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		InputTime inputTime = (InputTime) uiComponent;
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		String clientVarName = ComponentUtil.getClientVarName(facesContext, inputTime);
 		String clientKey = inputTime.getClientKey();
 
@@ -142,70 +140,88 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 			clientKey = clientVarName;
 		}
 
-		encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		// Replace the default TimePicker._setValues() method with setValues() (defined in alloy.js) which simply
-		// passes values through to the autocomplete without processing them.
-		responseWriter.write(clientVarName);
-		responseWriter.write("._setValues=LFAI.timePickerSetValues;");
+		if (MobileBrowserSnifferUtil.isMobile(facesContext)) {
 
-		// Set the values of the timePicker.
-		responseWriter.write(clientVarName);
-		responseWriter.write(".set('values',[");
+			JavaScriptFragment liferayComponent = new JavaScriptFragment("Liferay.component('" + clientKey + "')");
+			String clientId = uiComponent.getClientId(facesContext);
+			String inputClientId = clientId.concat(INPUT_SUFFIX);
 
-		String minTimeStamp = inputTime.getMinTime();
-		String maxTimeStamp = inputTime.getMaxTime();
-
-		long minTime;
-		long maxTime;
-
-		try {
-			minTime = getMillisFromTimeStamp(minTimeStamp);
-			maxTime = getMillisFromTimeStamp(maxTimeStamp);
+			// Get the max and min times in the HTML5 format which does not include seconds.
+			int defaultHTML5PatternLength = InputTime.DEFAULT_HTML5_TIME_PATTERN.length();
+			String maxTime = inputTime.getMaxTime().substring(0, defaultHTML5PatternLength);
+			String minTime = inputTime.getMinTime().substring(0, defaultHTML5PatternLength);
+			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initDateTimePickerMobile", liferayComponent,
+				inputClientId, maxTime, minTime);
 		}
-		catch (ParseException e) {
-			throw new IOException(e);
-		}
+		else {
 
-		if (minTime > maxTime) {
-			throw new IOException("minTime must not be later than maxTime.");
-		}
+			encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
 
-		String timePattern = inputTime.getTimePattern();
-		Object objectLocale = inputTime.getLocale();
-		Locale locale = InputDateTimeUtil.getObjectAsLocale(objectLocale);
-		TimeZone timeZone = TimeZone.getTimeZone(InputDateTime.GREENWICH);
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(timePattern, locale);
-		simpleDateFormat.setTimeZone(timeZone);
+			// Replace the default TimePicker._setValues() method with setValues() (defined in alloy.js) which simply
+			// passes values through to the autocomplete without processing them.
+			responseWriter.write(clientVarName);
+			responseWriter.write("._setValues=LFAI.timePickerSetValues;");
 
-		Integer millisecondStep = inputTime.getStep() * 1000;
-		boolean firstTimeStamp = true;
+			// Set the values of the timePicker.
+			responseWriter.write(clientVarName);
+			responseWriter.write(".set('values',[");
 
-		if (millisecondStep < 1) {
-			throw new IOException("step cannot be less than 1.");
-		}
+			String minTimeStamp = inputTime.getMinTime();
+			String maxTimeStamp = inputTime.getMaxTime();
 
-		// The values of the timePicker are determined by iterating from minTime to maxTime by the value of
-		// step, and printing each resulting value.
-		for (long milliseconds = minTime; milliseconds <= maxTime; milliseconds = milliseconds + millisecondStep) {
+			long minTime;
+			long maxTime;
 
-			if (!firstTimeStamp) {
-				responseWriter.write(StringPool.COMMA);
+			try {
+				minTime = getMillisFromTimeStamp(minTimeStamp);
+				maxTime = getMillisFromTimeStamp(maxTimeStamp);
 			}
-			else {
-				firstTimeStamp = false;
+			catch (ParseException e) {
+				throw new IOException(e);
 			}
 
-			Date time = new Date(milliseconds);
-			String dateString = simpleDateFormat.format(time);
-			String escapedDateString = RendererUtil.escapeJavaScript(dateString);
+			if (minTime > maxTime) {
+				throw new IOException("minTime must not be later than maxTime.");
+			}
 
-			responseWriter.write(StringPool.APOSTROPHE);
-			responseWriter.write(escapedDateString);
-			responseWriter.write(StringPool.APOSTROPHE);
+			String timePattern = inputTime.getTimePattern();
+			Object objectLocale = inputTime.getLocale();
+			Locale locale = InputDateTimeUtil.getObjectAsLocale(objectLocale);
+			TimeZone timeZone = TimeZone.getTimeZone(InputDateTime.GREENWICH);
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(timePattern, locale);
+			simpleDateFormat.setTimeZone(timeZone);
+
+			Integer millisecondStep = inputTime.getStep() * 1000;
+			boolean firstTimeStamp = true;
+
+			if (millisecondStep < 1) {
+				throw new IOException("step cannot be less than 1.");
+			}
+
+			// The values of the timePicker are determined by iterating from minTime to maxTime by the value of
+			// step, and printing each resulting value.
+			for (long milliseconds = minTime; milliseconds <= maxTime; milliseconds = milliseconds + millisecondStep) {
+
+				if (!firstTimeStamp) {
+					responseWriter.write(StringPool.COMMA);
+				}
+				else {
+					firstTimeStamp = false;
+				}
+
+				Date time = new Date(milliseconds);
+				String dateString = simpleDateFormat.format(time);
+				String escapedDateString = RendererUtil.escapeJavaScript(dateString);
+
+				responseWriter.write(StringPool.APOSTROPHE);
+				responseWriter.write(escapedDateString);
+				responseWriter.write(StringPool.APOSTROPHE);
+			}
+
+			responseWriter.write("]);");
 		}
-
-		responseWriter.write("]);");
 	}
 
 	protected void encodeAutocomplete(FacesContext facesContext, ResponseWriter responseWriter, InputTime inputTime,
@@ -333,11 +349,14 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, InputTime inputTime,
 		boolean first) throws IOException {
 
-		encodeInputDateTimeHiddenAttributes(facesContext, responseWriter, inputTime, first);
-		first = false;
+		if (!MobileBrowserSnifferUtil.isMobile(facesContext)) {
 
-		encodeAutocomplete(facesContext, responseWriter, inputTime, first);
-		first = false;
+			encodeAutocomplete(facesContext, responseWriter, inputTime, first);
+			first = false;
+
+			encodeHiddenAttributesInputDateTime(facesContext, responseWriter, inputTime, first);
+			first = false;
+		}
 	}
 
 	@Override
@@ -346,6 +365,19 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 
 		String timePatternMask = getMaskFromTimePattern(timePattern);
 		super.encodeMask(responseWriter, inputTime, timePatternMask, first);
+	}
+
+	@Override
+	public String getAlloyClassName() {
+
+		String alloyClassName = super.getAlloyClassName();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+
+		if (MobileBrowserSnifferUtil.isMobile(facesContext)) {
+			alloyClassName = alloyClassName.concat("Native");
+		}
+
+		return alloyClassName;
 	}
 
 	@Override
@@ -364,7 +396,40 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 	}
 
 	@Override
+	protected InputDateTimeResponseWriter getInputDateTimeResponseWriter(ResponseWriter responseWriter,
+		String inputClientId, boolean mobile) {
+		return new InputTimeResponseWriter(responseWriter, StringPool.INPUT, inputClientId, mobile);
+	}
+
+	@Override
 	protected String[] getModules(UIComponent uiComponent) {
-		return TIME_PICKER_MODULES;
+
+		List<String> modules = new ArrayList<String>();
+		String[] oldModules = super.getModules(uiComponent);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+
+		if (MobileBrowserSnifferUtil.isMobile(facesContext)) {
+			String nativeAlloyModuleName = oldModules[0].concat("-native");
+			modules.add(nativeAlloyModuleName);
+		}
+		else {
+
+			modules.add(oldModules[0]);
+
+			InputTime inputTime = (InputTime) uiComponent;
+			String filterType = inputTime.getFilterType();
+
+			if ((filterType != null) && (filterType.length() > 0)) {
+				modules.add("autocomplete-filters");
+			}
+
+			String highlighterType = inputTime.getHighlighterType();
+
+			if ((highlighterType != null) && (highlighterType.length() > 0)) {
+				modules.add("autocomplete-highlighters");
+			}
+		}
+
+		return modules.toArray(new String[] {});
 	}
 }
