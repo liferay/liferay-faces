@@ -14,6 +14,7 @@
 package com.liferay.faces.portal.render.internal;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.el.ELContext;
 import javax.faces.component.UIComponent;
@@ -46,26 +47,14 @@ import com.liferay.portal.util.PortalUtil;
  */
 public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> extends Renderer {
 
+	// Protected Constants
+	protected static final String CORRESPONDING_JSP_TAG = "correspondingJspTag";
+
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(PortalTagRenderer.class);
 
 	// Self-Injections
 	private static PortalTagOutputParser portalTagOutputParser = new PortalTagOutputParserImpl();
-
-	/**
-	 * Casts a UIComponent to a concrete instance of UIComponent.
-	 */
-	public abstract U cast(UIComponent uiComponent);
-
-	/**
-	 * Copy attributes from the JSF component to the JSP tag that are common between JSF and JSP.
-	 */
-	public abstract void copyFrameworkAttributes(FacesContext facesContext, U u, T t);
-
-	/**
-	 * Copy attributes from the JSF component to the JSP tag that are not common between JSF and JSP.
-	 */
-	public abstract void copyNonFrameworkAttributes(FacesContext facesContext, U u, T t);
 
 	/**
 	 * Creates a new instance of the JSP tag.
@@ -76,7 +65,13 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		try {
-			PortalTagOutput portalTagOutput = getPortalTagOutput(facesContext, uiComponent);
+
+			// Create an instance of the JSP tag that corresponds to the JSF component.
+			T tag = newTag();
+			copyAttributes(facesContext, cast(uiComponent), tag);
+			uiComponent.getAttributes().put(CORRESPONDING_JSP_TAG, tag);
+
+			PortalTagOutput portalTagOutput = getPortalTagOutput(facesContext, uiComponent, tag);
 			String preChildMarkup = portalTagOutput.getMarkup();
 			logger.debug(preChildMarkup);
 
@@ -119,6 +114,29 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 		if (postChildMarkup != null) {
 			responseWriter.write(postChildMarkup);
 		}
+
+		uiComponent.getAttributes().remove(CORRESPONDING_JSP_TAG);
+	}
+
+	/**
+	 * Casts a UIComponent to a concrete instance of UIComponent.
+	 */
+	protected abstract U cast(UIComponent uiComponent);
+
+	/**
+	 * Copy attributes from the JSF component to the JSP tag that are common between JSF and JSP.
+	 */
+	protected abstract void copyFrameworkAttributes(FacesContext facesContext, U u, T t);
+
+	/**
+	 * Copy attributes from the JSF component to the JSP tag that are not common between JSF and JSP.
+	 */
+	protected abstract void copyNonFrameworkAttributes(FacesContext facesContext, U u, T t);
+
+	protected void copyAttributes(FacesContext facesContext, U u, T t) {
+		copyFrameworkAttributes(facesContext, u, t);
+		copyNonFrameworkAttributes(facesContext, u, t);
+		t.setParent(getParentTag(facesContext, u, t));
 	}
 
 	public String getChildInsertionMarker() {
@@ -133,7 +151,16 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 		return new HttpServletResponseTagSafeImpl(PortalUtil.getHttpServletResponse(portletResponse));
 	}
 
-	protected PortalTagOutput getPortalTagOutput(FacesContext facesContext, UIComponent uiComponent)
+	protected Tag getParentTag(FacesContext facesContext, U u, T t) {
+
+		UIComponent uiComponent = cast(u);
+		UIComponent parentComponent = uiComponent.getParent();
+		Map<String, Object> parentComponentAttributes = parentComponent.getAttributes();
+
+		return (Tag) parentComponentAttributes.get(CORRESPONDING_JSP_TAG);
+	}
+
+	protected PortalTagOutput getPortalTagOutput(FacesContext facesContext, UIComponent uiComponent, Tag tag)
 		throws JspException {
 
 		// Setup the Facelet -> JSP tag adapter.
@@ -143,17 +170,12 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 		PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
 		HttpServletResponse httpServletResponse = getHttpServletResponse(portletResponse);
 		ELContext elContext = facesContext.getELContext();
-		StringJspWriter stringJspWriter = getStringJspWriter();
+		StringJspWriter stringJspWriter = new StringJspWriter();
 		PageContextAdapter pageContextAdapter = new PageContextAdapter(httpServletRequest, httpServletResponse,
 				elContext, stringJspWriter);
 
-		// Create an instance of the JSP tag that corresponds to the JSF component.
-		T tag = newTag();
-		tag.setPageContext(pageContextAdapter);
-		copyFrameworkAttributes(facesContext, cast(uiComponent), tag);
-		copyNonFrameworkAttributes(facesContext, cast(uiComponent), tag);
-
 		// Invoke the JSP tag lifecycle directly (rather than using the tag from a JSP).
+		tag.setPageContext(pageContextAdapter);
 		tag.doStartTag();
 		tag.doEndTag();
 
@@ -188,9 +210,5 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 		PortalTagOutput portalTagOutput = portalTagOutputParser.parse(pageContextAdapter);
 
 		return portalTagOutput;
-	}
-
-	protected StringJspWriter getStringJspWriter() {
-		return new StringJspWriter();
 	}
 }
