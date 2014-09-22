@@ -22,8 +22,10 @@ import javax.faces.component.UIData;
 import javax.faces.context.FacesContext;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.portal.component.nav.internal.NavStringJspWriter;
 import com.liferay.faces.portal.component.navitem.NavItem;
 import com.liferay.faces.portal.render.internal.PortalTagRenderer;
+import com.liferay.faces.util.jsp.StringJspWriter;
 
 import com.liferay.taglib.aui.NavTag;
 
@@ -135,5 +137,10 @@ public class NavRenderer extends PortalTagRenderer<Nav, NavTag> {
 	@Override
 	public boolean getRendersChildren() {
 		return true;
+	}
+
+	@Override
+	protected StringJspWriter getStringJspWriter() {
+		return new NavStringJspWriter();
 	}
 }

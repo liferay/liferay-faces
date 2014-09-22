@@ -143,7 +143,7 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 		PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
 		HttpServletResponse httpServletResponse = getHttpServletResponse(portletResponse);
 		ELContext elContext = facesContext.getELContext();
-		StringJspWriter stringJspWriter = new StringJspWriter();
+		StringJspWriter stringJspWriter = getStringJspWriter();
 		PageContextAdapter pageContextAdapter = new PageContextAdapter(httpServletRequest, httpServletResponse,
 				elContext, stringJspWriter);
 
@@ -188,5 +188,9 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 		PortalTagOutput portalTagOutput = portalTagOutputParser.parse(pageContextAdapter);
 
 		return portalTagOutput;
+	}
+
+	protected StringJspWriter getStringJspWriter() {
+		return new StringJspWriter();
 	}
 }
