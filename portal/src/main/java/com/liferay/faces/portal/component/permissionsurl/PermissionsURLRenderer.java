@@ -67,7 +67,10 @@ public class PermissionsURLRenderer extends PortalTagRenderer<PermissionsURL, Pe
 		try {
 
 			// Get the URL from the tag output.
-			PortalTagOutput portalTagOutput = getPortalTagOutput(facesContext, uiComponent);
+			PermissionsURLTag permissionsURLTag = newTag();
+			copyAttributes(facesContext, cast(uiComponent), permissionsURLTag);
+
+			PortalTagOutput portalTagOutput = getPortalTagOutput(facesContext, uiComponent, permissionsURLTag);
 			String url = portalTagOutput.getMarkup();
 
 			// If the user didn't specify a value for the "var" attribute, then write the URL to the response.
