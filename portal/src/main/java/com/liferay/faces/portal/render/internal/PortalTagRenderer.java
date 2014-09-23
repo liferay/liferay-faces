@@ -14,6 +14,8 @@
 package com.liferay.faces.portal.render.internal;
 
 import java.io.IOException;
+import java.io.StringWriter;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.el.ELContext;
@@ -34,6 +36,7 @@ import javax.servlet.jsp.tagext.Tag;
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringJspWriter;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.portal.ScriptTagUtil;
@@ -44,6 +47,7 @@ import com.liferay.portal.util.PortalUtil;
 
 /**
  * @author  Neil Griffin
+ * @author  Juan Gonzalez
  */
 public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> extends Renderer {
 
@@ -64,12 +68,42 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
+		// Create an instance of the JSP tag that corresponds to the JSF component.
+		T tag = newTag();
+		copyAttributes(facesContext, cast(uiComponent), tag);
+		uiComponent.getAttributes().put(CORRESPONDING_JSP_TAG, tag);
+	}
+
+	@Override
+	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		if (uiComponent.getChildCount() > 0) {
+			Iterator<UIComponent> kids = uiComponent.getChildren().iterator();
+
+			while (kids.hasNext()) {
+				UIComponent kid = kids.next();
+
+				ResponseWriter originalWriter = facesContext.getResponseWriter();
+				StringWriter writer = new StringWriter();
+				facesContext.setResponseWriter(getStringResponseWriter(facesContext, writer));
+				kid.encodeAll(facesContext);
+
+				if (originalWriter != null) {
+					facesContext.setResponseWriter(originalWriter);
+				}
+
+				String output = writer.toString();
+				facesContext.getAttributes().put(getFQCNChildrenKey(), output);
+			}
+		}
+	}
+
+	@Override
+	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
 		try {
 
-			// Create an instance of the JSP tag that corresponds to the JSF component.
-			T tag = newTag();
-			copyAttributes(facesContext, cast(uiComponent), tag);
-			uiComponent.getAttributes().put(CORRESPONDING_JSP_TAG, tag);
+			T tag = (T) uiComponent.getAttributes().get(CORRESPONDING_JSP_TAG);
 
 			PortalTagOutput portalTagOutput = getPortalTagOutput(facesContext, uiComponent, tag);
 			String preChildMarkup = portalTagOutput.getMarkup();
@@ -98,24 +132,26 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 				LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 				liferayFacesContext.getJavaScriptMap().put(uiComponent.getClientId(), scripts);
 			}
+
+			String fqcn = getClass().getName();
+
+			String childrenMarkup = (String) facesContext.getAttributes().remove(getFQCNChildrenKey());
+
+			if (childrenMarkup != null) {
+				responseWriter.write(childrenMarkup);
+			}
+
+			String postChildMarkup = (String) facesContext.getAttributes().remove(fqcn);
+
+			if (postChildMarkup != null) {
+				responseWriter.write(postChildMarkup);
+			}
+
+			uiComponent.getAttributes().remove(CORRESPONDING_JSP_TAG);
 		}
 		catch (JspException e) {
 			throw new IOException(e);
 		}
-	}
-
-	@Override
-	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		String fqcn = getClass().getName();
-		String postChildMarkup = (String) facesContext.getAttributes().remove(fqcn);
-
-		if (postChildMarkup != null) {
-			responseWriter.write(postChildMarkup);
-		}
-
-		uiComponent.getAttributes().remove(CORRESPONDING_JSP_TAG);
 	}
 
 	/**
@@ -141,6 +177,10 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 
 	public String getChildInsertionMarker() {
 		return null;
+	}
+
+	protected String getFQCNChildrenKey() {
+		return getClass().getName() + "_children";
 	}
 
 	protected HttpServletRequest getHttpServletRequest(PortletRequest portletRequest) {
@@ -210,5 +250,14 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 		PortalTagOutput portalTagOutput = portalTagOutputParser.parse(pageContextAdapter);
 
 		return portalTagOutput;
+	}
+
+	@Override
+	public boolean getRendersChildren() {
+		return true;
+	}
+
+	protected ResponseWriter getStringResponseWriter(FacesContext facesContext, StringWriter writer) {
+		return facesContext.getRenderKit().createResponseWriter(writer, null, StringPool.UTF8);
 	}
 }

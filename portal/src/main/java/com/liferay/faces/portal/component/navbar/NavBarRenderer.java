@@ -13,22 +13,19 @@
  */
 package com.liferay.faces.portal.component.navbar;
 
-import java.io.IOException;
-
 import javax.faces.component.UIComponent;
 import javax.faces.component.UINamingContainer;
 import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.portal.render.internal.PortalTagRenderer;
-import com.liferay.faces.util.lang.StringPool;
 
 import com.liferay.taglib.aui.NavBarTag;
 
 
 /**
  * @author  Neil Griffin
+ * @author  Juan Gonzalez
  */
 //J-
 @FacesRenderer(componentFamily = NavBar.COMPONENT_FAMILY, rendererType = NavBar.RENDERER_TYPE)
@@ -52,31 +49,6 @@ public class NavBarRenderer extends PortalTagRenderer<NavBar, NavBarTag> {
 	@Override
 	public void copyNonFrameworkAttributes(FacesContext facesContext, NavBar u, NavBarTag t) {
 		// no-op
-	}
-
-	@Override
-	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		// Encode the starting <div> element that represents the navBar. In addition, write the id attribute. This is
-		// necessary because portal-web/docroot/html/taglib/aui/nav_bar/page.jsp encodes a <div> layer that needs an id
-		// attribute that does not contain colons (which is the default JSF NamingContainer separator character).
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.startElement(StringPool.DIV, uiComponent);
-		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(), StringPool.ID);
-
-		// Delegate to PortalTagRenderer so that the JSP tag output will get encoded.
-		super.encodeBegin(facesContext, uiComponent);
-	}
-
-	@Override
-	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-
-		// Delegate to PortalTagRenderer so that the JSP tag output will get encoded.
-		super.encodeEnd(facesContext, uiComponent);
-
-		// Encode the closing </div> element for the navBar.
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		responseWriter.endElement(StringPool.DIV);
 	}
 
 	@Override
