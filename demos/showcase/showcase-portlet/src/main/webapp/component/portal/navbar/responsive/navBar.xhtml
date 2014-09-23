@@ -1,12 +1,12 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:portal="http://liferay.com/faces/portal" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/templates/component-2col.xhtml">
+	xmlns:portal="http://liferay.com/faces/portal" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
 		<alloy:form>
-			<showcase:example renderedCheckbox="true">
+			<showcase:example description="#{i18n['portal-navbar-responsive-example-1']}" renderedCheckbox="true">
 				<portal:navBar rendered="#{showcaseModelBean.selectedComponent.rendered}">
-					<portal:nav>
+					<portal:nav collapsible="true">
 						<portal:navItem>
 							<alloy:commandLink value="Compatible" />
 						</portal:navItem>

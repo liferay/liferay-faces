@@ -21,9 +21,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.portal.render.internal.PortalTagRenderer;
+import com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer;
 import com.liferay.faces.util.lang.StringPool;
-
 import com.liferay.taglib.aui.NavBarTag;
 
 
@@ -33,7 +32,7 @@ import com.liferay.taglib.aui.NavBarTag;
 //J-
 @FacesRenderer(componentFamily = NavBar.COMPONENT_FAMILY, rendererType = NavBar.RENDERER_TYPE)
 //J+
-public class NavBarRenderer extends PortalTagRenderer<NavBar, NavBarTag> {
+public class NavBarRenderer extends DelayedPortalTagRenderer<NavBar, NavBarTag> {
 
 	@Override
 	public NavBar cast(UIComponent uiComponent) {
@@ -58,7 +57,7 @@ public class NavBarRenderer extends PortalTagRenderer<NavBar, NavBarTag> {
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		// Encode the starting <div> element that represents the navBar. In addition, write the id attribute. This is
-		// necessary because portal-web/docroot/html/taglib/aui/nav_bar/page.jsp encodes a <div> layer that needs an id
+		// necessary because portal-web/docroot/html/taglib/aui/nav_bar/page.jsp encodes a <div> element that needs an id
 		// attribute that does not contain colons (which is the default JSF NamingContainer separator character).
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.startElement(StringPool.DIV, uiComponent);

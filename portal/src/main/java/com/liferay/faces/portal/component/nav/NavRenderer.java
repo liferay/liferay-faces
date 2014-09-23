@@ -19,17 +19,21 @@ import java.util.List;
 
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIData;
+import javax.faces.component.UINamingContainer;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.portal.component.navitem.NavItem;
 import com.liferay.faces.portal.render.internal.PortalTagRenderer;
+import com.liferay.faces.util.lang.StringPool;
 
 import com.liferay.taglib.aui.NavTag;
 
 
 /**
  * @author  Neil Griffin
+ * @author  Juan Gonzalez
  */
 //J-
 @FacesRenderer(componentFamily = Nav.COMPONENT_FAMILY, rendererType = Nav.RENDERER_TYPE)
@@ -43,7 +47,9 @@ public class NavRenderer extends PortalTagRenderer<Nav, NavTag> {
 
 	@Override
 	public void copyFrameworkAttributes(FacesContext facesContext, Nav nav, NavTag navTag) {
-		navTag.setId(nav.getClientId());
+		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+		String id = nav.getClientId().replace(separatorChar, '_').concat("_jsptag");
+		navTag.setId(id);
 		navTag.setCssClass(nav.getStyleClass());
 	}
 
@@ -52,6 +58,20 @@ public class NavRenderer extends PortalTagRenderer<Nav, NavTag> {
 		navTag.setAriaLabel(nav.getAriaLabel());
 		navTag.setAriaRole(nav.getAriaRole());
 		navTag.setCollapsible(nav.isCollapsible());
+	}
+
+	@Override
+	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		// Encode the starting <div> element that represents the nav. In addition, write the id attribute. This is
+		// necessary because portal-web/docroot/html/taglib/aui/nav/start.jsp encodes a <ul> element that needs an id
+		// attribute that does not contain colons (which is the default JSF NamingContainer separator character).
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		responseWriter.startElement(StringPool.DIV, uiComponent);
+		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(), StringPool.ID);
+
+		// Delegate to PortalTagRenderer so that the JSP tag output will get encoded.
+		super.encodeBegin(facesContext, uiComponent);
 	}
 
 	@Override
@@ -91,6 +111,17 @@ public class NavRenderer extends PortalTagRenderer<Nav, NavTag> {
 		}
 
 		nav.setRowIndex(-1);
+	}
+
+	@Override
+	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		// Delegate to PortalTagRenderer so that the JSP tag output will get encoded.
+		super.encodeEnd(facesContext, uiComponent);
+
+		// Encode the closing </div> element for the nav.
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		responseWriter.endElement(StringPool.DIV);
 	}
 
 	@Override
