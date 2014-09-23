@@ -3,9 +3,9 @@
 	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
-		<showcase:example description="#{i18n['portal-nav-general-example-1']}" number="1">
-			<alloy:form>
-				<portal:nav>
+		<alloy:form>
+			<showcase:example description="#{i18n['portal-nav-general-example-1']}" number="1" renderedCheckbox="true">
+				<portal:nav rendered="#{showcaseModelBean.selectedComponent.rendered}">
 					<portal:navItem>
 						<alloy:commandLink value="Compatible" />
 					</portal:navItem>
@@ -22,19 +22,19 @@
 						<alloy:commandLink value="Open Source" />
 					</portal:navItem>
 				</portal:nav>
-			</alloy:form>
-		</showcase:example>
+			</showcase:example>
+		</alloy:form>
 	</ui:define>
 
 	<ui:define name="col2">
-		<showcase:example description="#{i18n['portal-nav-general-example-2']}" number="2">
-			<alloy:form>
+		<alloy:form>
+			<showcase:example description="#{i18n['portal-nav-general-example-2']}" number="2">
 				<portal:nav styleClass="nav-list">
 					<portal:navItem iconCssClass="icon-github" href="https://github.com/liferay/liferay-faces" label="Source Code" />
 					<portal:navItem iconCssClass="icon-twitter" href="https://twitter.com/liferayfaces" label="@liferayfaces" />
 				</portal:nav>
-			</alloy:form>
-		</showcase:example>
+			</showcase:example>
+		</alloy:form>
 	</ui:define>
 
 </ui:composition>

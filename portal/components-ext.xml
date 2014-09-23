@@ -102,7 +102,7 @@
 			<attribute>
 				<defaultValue>false</defaultValue>
 				<description>
-					<![CDATA[When true, the unordered list will be surrounded by <code>&lt;div class="collapse nav-collapse"&gt;...&lt;/div&gt;</code>.]]>
+					<![CDATA[When true, the unordered list will be surrounded by <code>&lt;div class="collapse nav-collapse"&gt;...&lt;/div&gt;</code>. This is a responsive layout feature (that works in conjunction with an alloy:navBar parent tag) for small/mobile displays that causes the child alloy:navItem links to "collapse", meaning that an icon is displayed with a popup menu containing the links.]]>
 				</description>
 				<name>collapsible</name>
 				<type>boolean</type>
