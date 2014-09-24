@@ -11,76 +11,67 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-
 package com.liferay.faces.util.client;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * See http://www.zytrax.com/tech/web/browser_ids.htm for examples.
  *
- * @author Brian Wing Shun Chan
+ * @author  Brian Wing Shun Chan
  */
 public interface BrowserSniffer {
 
-	public static final String BROWSER_ID_FIREFOX = "firefox";
+	public boolean acceptsGzip();
 
-	public static final String BROWSER_ID_IE = "ie";
+	public boolean isIeOnWin32();
 
-	public static final String BROWSER_ID_OTHER = "other";
+	public boolean isIeOnWin64();
 
-	public boolean acceptsGzip(HttpServletRequest request);
+	public boolean isMozilla();
 
-	public String getBrowserId(HttpServletRequest request);
+	public boolean isOpera();
 
-	public float getMajorVersion(HttpServletRequest request);
+	public String getBrowserId();
 
-	public String getRevision(HttpServletRequest request);
+	public boolean isMac();
 
-	public String getVersion(HttpServletRequest request);
+	public boolean isAndroid();
 
-	public boolean isAir(HttpServletRequest request);
+	public boolean isChrome();
 
-	public boolean isAndroid(HttpServletRequest request);
+	public boolean isIe();
 
-	public boolean isChrome(HttpServletRequest request);
+	public boolean isIphone();
 
-	public boolean isFirefox(HttpServletRequest request);
+	public boolean isMobile();
 
-	public boolean isGecko(HttpServletRequest request);
+	public boolean isRtf();
 
-	public boolean isIe(HttpServletRequest request);
+	public boolean isSafari();
 
-	public boolean isIeOnWin32(HttpServletRequest request);
+	public boolean isWapXhtml();
 
-	public boolean isIeOnWin64(HttpServletRequest request);
+	public boolean isWml();
 
-	public boolean isIphone(HttpServletRequest request);
+	public float getMajorVersion();
 
-	public boolean isLinux(HttpServletRequest request);
+	public boolean isSun();
 
-	public boolean isMac(HttpServletRequest request);
+	public boolean isGecko();
 
-	public boolean isMobile(HttpServletRequest request);
+	public boolean isWap();
 
-	public boolean isMozilla(HttpServletRequest request);
+	public boolean isAir();
 
-	public boolean isOpera(HttpServletRequest request);
+	public String getRevision();
 
-	public boolean isRtf(HttpServletRequest request);
+	public boolean isWindows();
 
-	public boolean isSafari(HttpServletRequest request);
+	public boolean isWebKit();
 
-	public boolean isSun(HttpServletRequest request);
+	public String getVersion();
 
-	public boolean isWap(HttpServletRequest request);
+	public boolean isFirefox();
 
-	public boolean isWapXhtml(HttpServletRequest request);
-
-	public boolean isWebKit(HttpServletRequest request);
-
-	public boolean isWindows(HttpServletRequest request);
-
-	public boolean isWml(HttpServletRequest request);
+	public boolean isLinux();
 
 }
