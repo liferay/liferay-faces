@@ -11,18 +11,21 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.client;
+package com.liferay.faces.util.client.internal;
 
 import java.util.Map;
 
 import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
 
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.BrowserSnifferFactory;
+import com.liferay.faces.util.client.ClientScript;
+import com.liferay.faces.util.client.ClientScriptFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.portal.WebKeys;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
-
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 
 
