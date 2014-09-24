@@ -18,19 +18,27 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
+import javax.faces.component.UIComponent;
 import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.component.behavior.ClientBehaviorContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeResponseWriter;
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
 import com.liferay.faces.alloy.component.inputtext.InputText;
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.BrowserSnifferFactory;
+import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.RendererUtil;
 
@@ -87,12 +95,62 @@ public class InputDateRenderer extends InputDateRendererBase {
 		return mask;
 	}
 
+	@Override
+	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+				BrowserSnifferFactory.class);
+		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+
+		if (browserSniffer.isMobile()) {
+
+			InputDate inputDate = (InputDate) uiComponent;
+			String clientVarName = ComponentUtil.getClientVarName(facesContext, inputDate);
+			String clientKey = inputDate.getClientKey();
+
+			if (clientKey == null) {
+				clientKey = clientVarName;
+			}
+
+			JavaScriptFragment liferayComponent = new JavaScriptFragment("Liferay.component('" + clientKey + "')");
+			String clientId = uiComponent.getClientId(facesContext);
+			String inputClientId = clientId.concat(INPUT_SUFFIX);
+
+			Object maxDateObject = inputDate.getMaxDate();
+			Object minDateObject = inputDate.getMinDate();
+			String maxDateString = null;
+			String minDateString = null;
+
+			if ((maxDateObject != null) || (minDateObject != null)) {
+
+				String datePattern = inputDate.getDatePattern();
+				String timeZoneString = inputDate.getTimeZone();
+				TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(InputDate.DEFAULT_HTML5_DATE_PATTERN,
+						Locale.ENGLISH);
+
+				if (maxDateObject != null) {
+					Date maxDate = InputDateTimeUtil.getObjectAsDate(maxDateObject, datePattern, timeZone);
+					maxDateString = simpleDateFormat.format(maxDate);
+				}
+
+				if (maxDateObject != null) {
+					Date minDate = InputDateTimeUtil.getObjectAsDate(minDateObject, datePattern, timeZone);
+					minDateString = simpleDateFormat.format(minDate);
+				}
+			}
+
+			ResponseWriter responseWriter = facesContext.getResponseWriter();
+			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initDateTimePickerMobile", liferayComponent,
+				inputClientId, maxDateString, minDateString);
+		}
+	}
+
 	protected void encodeCalendar(FacesContext facesContext, ResponseWriter responseWriter, InputDate inputDate,
 		boolean first) throws IOException {
 
-		// The calendar attribute value provides the opportunity to specify dateClick events, selectionMode,
-		// minDate, maxDate as key:value pairs via JSON syntax.
-		// For example: "calendar: {selectionMode: 'multiple'}"
+		// The calendar attribute value provides the opportunity to specify dateClick events, minDate, maxDate as
+		// key:value pairs via JSON syntax. For example: "calendar: {minDate: new Date(2015,1,1,0,0,0,0)}"
 		boolean calendarFirst = true;
 
 		encodeNonEscapedObject(responseWriter, "calendar", StringPool.BLANK, first);
@@ -196,11 +254,18 @@ public class InputDateRenderer extends InputDateRendererBase {
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, InputDate inputDate,
 		boolean first) throws IOException {
 
-		encodeInputDateTimeHiddenAttributes(facesContext, responseWriter, inputDate, first);
-		first = false;
+		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+				BrowserSnifferFactory.class);
+		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 
-		encodeCalendar(facesContext, responseWriter, inputDate, first);
-		first = false;
+		if (!browserSniffer.isMobile()) {
+
+			encodeCalendar(facesContext, responseWriter, inputDate, first);
+			first = false;
+
+			encodeHiddenAttributesInputDateTime(facesContext, responseWriter, inputDate, first);
+			first = false;
+		}
 	}
 
 	@Override
@@ -210,6 +275,22 @@ public class InputDateRenderer extends InputDateRendererBase {
 		String datePatternMask = getMaskFromDatePattern(datePattern);
 
 		super.encodeMask(responseWriter, inputDate, datePatternMask, first);
+	}
+
+	@Override
+	public String getAlloyClassName() {
+
+		String alloyClassName = super.getAlloyClassName();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+				BrowserSnifferFactory.class);
+		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+
+		if (browserSniffer.isMobile()) {
+			alloyClassName = alloyClassName.concat("Native");
+		}
+
+		return alloyClassName;
 	}
 
 	@Override
@@ -225,5 +306,28 @@ public class InputDateRenderer extends InputDateRendererBase {
 	@Override
 	public String getDelegateRendererType() {
 		return InputText.DELEGATE_RENDERER_TYPE;
+	}
+
+	@Override
+	protected InputDateTimeResponseWriter getInputDateTimeResponseWriter(ResponseWriter responseWriter,
+		String inputClientId, boolean mobile) {
+		return new InputDateResponseWriter(responseWriter, StringPool.INPUT, inputClientId, mobile);
+	}
+
+	@Override
+	protected String[] getModules(UIComponent uiComponent) {
+
+		String[] modules = super.getModules(uiComponent);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+				BrowserSnifferFactory.class);
+		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+
+		if (browserSniffer.isMobile()) {
+			String nativeAlloyModuleName = modules[0].concat("-native");
+			modules = new String[] { nativeAlloyModuleName };
+		}
+
+		return modules;
 	}
 }

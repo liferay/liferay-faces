@@ -32,7 +32,10 @@ import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -44,6 +47,7 @@ public class InputTime extends InputTimeBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputtime.InputTime";
+	public static final String DEFAULT_HTML5_TIME_PATTERN = "HH:mm";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputtime.InputTimeRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-input-time";
 
@@ -122,7 +126,19 @@ public class InputTime extends InputTimeBase {
 
 	@Override
 	protected String getPattern() {
-		return getTimePattern();
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+
+		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+				BrowserSnifferFactory.class);
+		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+
+		if (browserSniffer.isMobile()) {
+			return DEFAULT_HTML5_TIME_PATTERN;
+		}
+		else {
+			return getTimePattern();
+		}
 	}
 
 	@Override

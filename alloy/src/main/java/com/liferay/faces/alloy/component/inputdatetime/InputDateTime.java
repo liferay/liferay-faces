@@ -39,6 +39,7 @@ import com.liferay.faces.util.context.MessageContext;
 public abstract class InputDateTime extends InputDateTimeBase implements ClientComponent {
 
 	// Public Constants
+	public static final String FOCUS = "focus";
 	public static final String GREENWICH = "Greenwich";
 
 	@Override
@@ -164,7 +165,7 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 
 	@Override
 	public String getShowOn() {
-		return (String) getStateHelper().eval(InputDateTimePropertyKeys.showOn, "focus");
+		return (String) getStateHelper().eval(InputDateTimePropertyKeys.showOn, FOCUS);
 	}
 
 	@Override
