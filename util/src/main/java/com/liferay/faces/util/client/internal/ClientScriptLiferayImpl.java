@@ -11,16 +11,16 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.client;
+package com.liferay.faces.util.client.internal;
 
 import java.lang.reflect.Method;
 
+import com.liferay.faces.util.client.ClientScript;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
-
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 
 
