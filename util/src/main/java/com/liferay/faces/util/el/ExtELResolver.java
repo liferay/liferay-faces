@@ -16,8 +16,11 @@ package com.liferay.faces.util.el;
 import javax.el.ELContext;
 import javax.el.ELException;
 import javax.el.PropertyNotWritableException;
+import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.el.ELResolverBase;
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.BrowserSnifferFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -27,14 +30,16 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 public class ExtELResolver extends ELResolverBase {
 
-	public static final String VAR_NAME_I18N = "i18n";
+	public static final String BROWSER_SNIFFER = "browserSniffer";
+	public static final String I18N = "i18n";
 
 	private static final Logger logger = LoggerFactory.getLogger(ExtELResolver.class);
 
 	static {
 
 		// Initialize the list of static feature descriptors.
-		addFeatureDescriptor(VAR_NAME_I18N, String.class);
+		addFeatureDescriptor(BROWSER_SNIFFER, BrowserSniffer.class);
+		addFeatureDescriptor(I18N, String.class);
 	}
 
 	private I18N i18n;
@@ -52,13 +57,20 @@ public class ExtELResolver extends ELResolverBase {
 
 		try {
 
-			if (varName.equals(VAR_NAME_I18N)) {
+			if (varName.equals(I18N)) {
 
 				if (i18n == null) {
 					i18n = new I18N();
 				}
 
 				value = i18n;
+			}
+			else if (varName.equals(BROWSER_SNIFFER)) {
+
+				FacesContext currentInstance = FacesContext.getCurrentInstance();
+				BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+						BrowserSnifferFactory.class);
+				value = browserSnifferFactory.getBrowserSniffer(currentInstance.getExternalContext());
 			}
 		}
 		catch (Exception e) {
@@ -101,7 +113,10 @@ public class ExtELResolver extends ELResolverBase {
 		if ((property != null) && (property instanceof String)) {
 			String propertyAsString = (String) property;
 
-			if (propertyAsString.equals(VAR_NAME_I18N)) {
+			if (propertyAsString.equals(I18N)) {
+				throw new PropertyNotWritableException(propertyAsString);
+			}
+			else if (propertyAsString.equals(BROWSER_SNIFFER)) {
 				throw new PropertyNotWritableException(propertyAsString);
 			}
 		}
