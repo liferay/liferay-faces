@@ -18,9 +18,16 @@ package com.liferay.faces.util.render;
  */
 public interface HttpHeaders {
 
+	public static final String ACCEPT = "ACCEPT";
+
+	public static final String ACCEPT_ENCODING = "Accept-Encoding";
+
 	public static final String CACHE_CONTROL = "Cache-Control";
 
 	public static final String CACHE_CONTROL_NO_CACHE_VALUE = "private, no-cache, no-store, must-revalidate";
 
 	public static final String CONTENT_DISPOSITION = "Content-Disposition";
+
+	public static final String USER_AGENT = "User-Agent";
+
 }
