@@ -23,9 +23,9 @@ import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
-import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.faces.util.client.BrowserSnifferUtil;
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.client.ClientScript;
 import com.liferay.faces.util.client.ClientScriptFactory;
 import com.liferay.faces.util.component.ComponentUtil;
@@ -34,7 +34,6 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.FacesConstants;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.portal.LiferayPortletUtil;
-import com.liferay.faces.util.portal.PortalUtil;
 import com.liferay.faces.util.portal.WebKeys;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
@@ -280,19 +279,20 @@ public class RendererUtil {
 		boolean browserIE = false;
 		float browserMajorVersion = 1;
 
+		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+				BrowserSnifferFactory.class);
+		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+
 		if (LIFERAY_PORTAL_DETECTED) {
-			HttpServletRequest httpServletRequest = PortalUtil.getHttpServeletRequest(
-					facesContext.getExternalContext());
-			browserIE = BrowserSnifferUtil.isIe(httpServletRequest);
-			browserMajorVersion = BrowserSnifferUtil.getMajorVersion(httpServletRequest);
+			browserIE = browserSniffer.isIe();
+			browserMajorVersion = browserSniffer.getMajorVersion();
 		}
 		else if (LIFERAY_FACES_BRIDGE_DETECTED) {
 			// no-op because there is no way to obtain the underlying HttpServletRequest.
 		}
 		else {
-			HttpServletRequest httpServletRequest = (HttpServletRequest) facesContext.getExternalContext().getRequest();
-			browserIE = BrowserSnifferUtil.isIe(httpServletRequest);
-			browserMajorVersion = BrowserSnifferUtil.getMajorVersion(httpServletRequest);
+			browserIE = browserSniffer.isIe();
+			browserMajorVersion = browserSniffer.getMajorVersion();
 		}
 
 		return getAlloyBeginScript(modules, config, browserMajorVersion, browserIE);
