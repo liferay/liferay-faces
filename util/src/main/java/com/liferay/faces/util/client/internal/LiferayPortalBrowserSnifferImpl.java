@@ -15,13 +15,8 @@ package com.liferay.faces.util.client.internal;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.portal.kernel.servlet.HttpHeaders;
-import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.HttpHeaders;
 
 //J-
 /**
@@ -30,7 +25,7 @@ import com.liferay.portal.kernel.util.WebKeys;
  * @author Eduardo Lundgren
  * @author Nate Cavanaugh
  */
-public class LiferayPortalBrowserSnifferImpl implements LiferayPortalBrowserSniffer {
+public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSnifferCompat implements LiferayPortalBrowserSniffer {
 	@Override
 	public boolean acceptsGzip(HttpServletRequest request) {
 		String acceptEncoding = request.getHeader(HttpHeaders.ACCEPT_ENCODING);
