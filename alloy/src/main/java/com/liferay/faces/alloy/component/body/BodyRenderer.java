@@ -16,14 +16,14 @@ package com.liferay.faces.alloy.component.body;
 import java.io.IOException;
 
 import javax.faces.component.UIComponent;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 import javax.faces.render.Renderer;
-import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.faces.util.client.BrowserSnifferUtil;
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.BrowserSnifferFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.Product;
@@ -77,11 +77,12 @@ public class BodyRenderer extends BodyRendererBase {
 			super.encodeEnd(facesContext, uiComponent);
 		}
 		else {
+			BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+					BrowserSnifferFactory.class);
+			BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+			boolean browserIE = browserSniffer.isIe();
+			float browserMajorVersion = browserSniffer.getMajorVersion();
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
-			ExternalContext externalContext = facesContext.getExternalContext();
-			HttpServletRequest httpServletRequest = (HttpServletRequest) externalContext.getRequest();
-			boolean browserIE = BrowserSnifferUtil.isIe(httpServletRequest);
-			float browserMajorVersion = BrowserSnifferUtil.getMajorVersion(httpServletRequest);
 			BodyResponseWriter delegationResponseWriter = new BodyResponseWriter(responseWriter, browserIE,
 					browserMajorVersion);
 			super.encodeEnd(facesContext, uiComponent, delegationResponseWriter);
