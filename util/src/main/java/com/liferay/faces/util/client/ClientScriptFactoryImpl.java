@@ -17,8 +17,8 @@ import java.util.Map;
 
 import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
-import javax.servlet.http.HttpServletRequest;
 
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.portal.WebKeys;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
@@ -71,9 +71,11 @@ public class ClientScriptFactoryImpl extends ClientScriptFactory {
 
 			if (attributeValue == null) {
 
-				HttpServletRequest httpServletRequest = (HttpServletRequest) externalContext.getRequest();
-				boolean browserIE = BrowserSnifferUtil.isIe(httpServletRequest);
-				float browserMajorVersion = BrowserSnifferUtil.getMajorVersion(httpServletRequest);
+				BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+						BrowserSnifferFactory.class);
+				BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(externalContext);
+				boolean browserIE = browserSniffer.isIe();
+				float browserMajorVersion = browserSniffer.getMajorVersion();
 				clientScript = new ClientScriptImpl(browserIE, browserMajorVersion);
 				requestMap.put(WebKeys.AUI_SCRIPT_DATA, clientScript);
 			}
