@@ -11,12 +11,13 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.client;
+package com.liferay.faces.util.client.internal;
 
 import java.io.Serializable;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.liferay.faces.util.client.ClientScript;
 import com.liferay.faces.util.lang.StringPool;
 
 
