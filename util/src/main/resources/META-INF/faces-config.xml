@@ -7,6 +7,7 @@
 	</application>
 	<factory>
 		<factory-extension>
+			<util:browser-sniffer-factory>com.liferay.faces.util.client.internal.BrowserSnifferFactoryImpl</util:browser-sniffer-factory>
 			<util:client-script-factory>com.liferay.faces.util.client.ClientScriptFactoryImpl</util:client-script-factory>
 			<util:rich-text-counter-factory>com.liferay.faces.util.text.internal.RichTextCounterFactoryImpl</util:rich-text-counter-factory>
 			<util:template-factory>com.liferay.faces.util.template.internal.TemplateFactoryImpl</util:template-factory>
