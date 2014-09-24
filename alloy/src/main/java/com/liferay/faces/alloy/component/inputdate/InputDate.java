@@ -35,7 +35,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -46,6 +49,7 @@ public class InputDate extends InputDateBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputdate.InputDate";
+	public static final String DEFAULT_HTML5_DATE_PATTERN = "yyyy-MM-dd";
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputdate.InputDateRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-input-date";
 
@@ -171,7 +175,18 @@ public class InputDate extends InputDateBase {
 
 	@Override
 	protected String getPattern() {
-		return getDatePattern();
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+				BrowserSnifferFactory.class);
+		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+
+		if (browserSniffer.isMobile()) {
+			return DEFAULT_HTML5_DATE_PATTERN;
+		}
+		else {
+			return getDatePattern();
+		}
 	}
 
 	@Override

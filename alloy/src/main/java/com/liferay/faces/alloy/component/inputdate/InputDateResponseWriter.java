@@ -11,50 +11,33 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.inputdatetime;
+package com.liferay.faces.alloy.component.inputdate;
 
 import java.io.IOException;
 
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.component.Styleable;
+import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeResponseWriter;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.IdDelegationResponseWriter;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class InputDateTimeResponseWriter extends IdDelegationResponseWriter {
+public class InputDateResponseWriter extends InputDateTimeResponseWriter {
 
-	// Private Data Members
-	private boolean mobile;
-
-	public InputDateTimeResponseWriter(ResponseWriter responseWriter, String idElement, String idValue,
-		boolean mobile) {
-		super(responseWriter, idElement, idValue);
-		this.mobile = mobile;
+	public InputDateResponseWriter(ResponseWriter responseWriter, String idElement, String idValue, boolean mobile) {
+		super(responseWriter, idElement, idValue, mobile);
 	}
 
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if (StringPool.CLASS.equalsIgnoreCase(name) || Styleable.STYLE.equalsIgnoreCase(name)) {
-
-			if (mobile) {
-				super.writeAttribute(name, "input-medium", property);
-			}
-			else {
-				// no-op because the writing of these attributes needs to be controlled directly by
-				// InputDateTimeRendererBase.
-			}
+		if (StringPool.TYPE.equals(name) && isMobile()) {
+			super.writeAttribute(name, "date", property);
 		}
 		else {
 			super.writeAttribute(name, value, property);
 		}
-	}
-
-	public boolean isMobile() {
-		return mobile;
 	}
 }
