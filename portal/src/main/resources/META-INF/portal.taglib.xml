@@ -207,12 +207,6 @@ java.lang.Object)</method-signature>
 			<type>javax.faces.component.UIComponent</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When true, the unordered list will be surrounded by <code>&lt;div class="collapse nav-collapse"&gt;...&lt;/div&gt;</code>.]]></description>
-			<name>collapsible</name>
-			<required>false</required>
-			<type>boolean</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[A unique identifier for this component.]]></description>
 			<name>id</name>
 			<required>false</required>
@@ -221,6 +215,12 @@ java.lang.Object)</method-signature>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
 			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the unordered list will be surrounded by <code>&lt;div class="collapse nav-collapse"&gt;...&lt;/div&gt;</code>. This is a responsive layout feature (that works in conjunction with an alloy:navBar parent tag) for small/mobile displays that causes the child alloy:navItem links to be displayed in a popup menu.]]></description>
+			<name>responsive</name>
 			<required>false</required>
 			<type>boolean</type>
 		</attribute>

@@ -29,7 +29,7 @@ public abstract class NavBase extends UIData implements Styleable {
 	protected enum NavPropertyKeys {
 		ariaLabel,
 		ariaRole,
-		collapsible,
+		responsive,
 		style,
 		styleClass
 	}
@@ -50,12 +50,12 @@ public abstract class NavBase extends UIData implements Styleable {
 		getStateHelper().put(NavPropertyKeys.ariaRole, ariaRole);
 	}
 
-	public boolean isCollapsible() {
-		return (Boolean) getStateHelper().eval(NavPropertyKeys.collapsible, false);
+	public boolean isResponsive() {
+		return (Boolean) getStateHelper().eval(NavPropertyKeys.responsive, true);
 	}
 
-	public void setCollapsible(boolean collapsible) {
-		getStateHelper().put(NavPropertyKeys.collapsible, collapsible);
+	public void setResponsive(boolean responsive) {
+		getStateHelper().put(NavPropertyKeys.responsive, responsive);
 	}
 
 	@Override
