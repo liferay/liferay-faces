@@ -432,7 +432,7 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 	}
 
 	@Override
-	protected String[] getModules(UIComponent uiComponent) {
+	protected String[] getModules(FacesContext facesContext, UIComponent uiComponent) {
 
 		List<String> modules = new ArrayList<String>(Arrays.asList(MODULES));
 		AutoComplete autoComplete = (AutoComplete) uiComponent;

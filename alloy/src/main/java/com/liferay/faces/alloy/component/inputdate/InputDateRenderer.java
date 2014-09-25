@@ -257,7 +257,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
-		
+
 		if (!(browserSniffer.isMobile() && inputDate.isResponsive())) {
 
 			encodeCalendar(facesContext, responseWriter, inputDate, first);
@@ -278,18 +278,15 @@ public class InputDateRenderer extends InputDateRendererBase {
 	}
 
 	@Override
-	public String getAlloyClassName() {
+	public String getAlloyClassName(FacesContext facesContext, UIComponent uiComponent) {
 
-		String alloyClassName = super.getAlloyClassName();
-		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String alloyClassName = super.getAlloyClassName(facesContext, uiComponent);
 		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+		InputDate inputDate = (InputDate) uiComponent;
+		boolean responsive = inputDate.isResponsive();
 
-		// TODO: Need to pass UIComponent as parameter
-		// InputDate inputDate = (InputDate) uiComponent;
-		// boolean responsive = inputDate.isResponsive();
-		boolean responsive = true;
 		if (browserSniffer.isMobile() && responsive) {
 			alloyClassName = alloyClassName.concat("Native");
 		}
@@ -319,17 +316,16 @@ public class InputDateRenderer extends InputDateRendererBase {
 	}
 
 	@Override
-	protected String[] getModules(UIComponent uiComponent) {
+	protected String[] getModules(FacesContext facesContext, UIComponent uiComponent) {
 
-		String[] modules = super.getModules(uiComponent);
-		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String[] modules = super.getModules(facesContext, uiComponent);
 		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
-
 		InputDate inputDate = (InputDate) uiComponent;
+		boolean responsive = inputDate.isResponsive();
 
-		if (browserSniffer.isMobile() && inputDate.isResponsive()) {
+		if (browserSniffer.isMobile() && responsive) {
 			String nativeAlloyModuleName = modules[0].concat("-native");
 			modules = new String[] { nativeAlloyModuleName };
 		}

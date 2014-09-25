@@ -58,7 +58,7 @@ public interface AlloyRenderer {
 
 	public void encodeWidgetRender(ResponseWriter responseWriter, boolean first) throws IOException;
 
-	public String getAlloyClassName();
+	public String getAlloyClassName(FacesContext facesContext, UIComponent uiComponent);
 
 	public String getYUIConfig(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
 		throws IOException;

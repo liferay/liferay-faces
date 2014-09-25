@@ -83,7 +83,7 @@ public abstract class AlloyRendererBase extends ClientComponentRendererBase impl
 
 	@Override
 	public void encodeJavaScriptBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-		AlloyRendererUtil.encodeJavaScriptBegin(facesContext, uiComponent, this, getModules(uiComponent),
+		AlloyRendererUtil.encodeJavaScriptBegin(facesContext, uiComponent, this, getModules(facesContext, uiComponent),
 			isAjax(facesContext), isForceInline(facesContext, uiComponent));
 	}
 
@@ -100,7 +100,8 @@ public abstract class AlloyRendererBase extends ClientComponentRendererBase impl
 
 	@Override
 	public void encodeJavaScriptMain(FacesContext facesContext, UIComponent uiComponent) throws IOException {
-		AlloyRendererUtil.encodeJavaScriptMain(facesContext, uiComponent, getAlloyClassName(), this);
+		AlloyRendererUtil.encodeJavaScriptMain(facesContext, uiComponent, getAlloyClassName(facesContext, uiComponent),
+			this);
 	}
 
 	@Override
@@ -132,7 +133,7 @@ public abstract class AlloyRendererBase extends ClientComponentRendererBase impl
 	}
 
 	@Override
-	public abstract String getAlloyClassName();
+	public abstract String getAlloyClassName(FacesContext facesContext, UIComponent uiComponent);
 
 	@Override
 	public String getYUIConfig(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
