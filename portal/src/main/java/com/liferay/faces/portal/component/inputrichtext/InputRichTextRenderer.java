@@ -39,10 +39,8 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.ContentTypes;
 import com.liferay.faces.util.render.RendererUtil;
-
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
-
 import com.liferay.taglib.ui.InputEditorTag;
 
 
@@ -76,12 +74,16 @@ public class InputRichTextRenderer extends PortalTagRenderer<InputRichText, Inpu
 		// textarea element. Since this renderer creates its own textarea, it is necessary to set a name that will
 		// not interfere when decoding.
 		String editorType = getEditorType(inputRichText);
-
+		String escapedEditorName = inputRichText.getClientId();
+		
+		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+		escapedEditorName = escapedEditorName.replace(separatorChar, '_').concat("_jsptag");
+		
 		if ("bbcode".equals(editorType)) {
-			inputEditorTag.setName(inputRichText.getClientId() + "_bbcodeInput");
+			inputEditorTag.setName(escapedEditorName + "_bbcodeInput");
 		}
 		else {
-			inputEditorTag.setName(inputRichText.getClientId() + "_nonInput");
+			inputEditorTag.setName(escapedEditorName + "_nonInput");
 		}
 	}
 
@@ -112,10 +114,13 @@ public class InputRichTextRenderer extends PortalTagRenderer<InputRichText, Inpu
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
 		String clientId = uiComponent.getClientId();
-		String submittedValue = requestParameterMap.get(clientId + "_bbcodeInput");
+		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+		String escapedEditorName = clientId.replace(separatorChar, '_').concat("_jsptag");
+
+		String submittedValue = requestParameterMap.get(escapedEditorName + "_bbcodeInput");
 
 		if (submittedValue == null) {
-			submittedValue = requestParameterMap.get(clientId);
+			submittedValue = requestParameterMap.get(escapedEditorName);
 		}
 
 		InputRichText inputRichText = (InputRichText) uiComponent;
@@ -130,6 +135,8 @@ public class InputRichTextRenderer extends PortalTagRenderer<InputRichText, Inpu
 		responseWriter.startElement(StringPool.DIV, uiComponent);
 
 		String clientId = uiComponent.getClientId();
+		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+		String escapedEditorName = clientId.replace(separatorChar, '_').concat("_jsptag");
 		responseWriter.writeAttribute(StringPool.ID, clientId, null);
 		RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent);
 
@@ -138,7 +145,7 @@ public class InputRichTextRenderer extends PortalTagRenderer<InputRichText, Inpu
 
 		responseWriter.startElement("textarea", uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, clientId + "_input", null);
-		responseWriter.writeAttribute(StringPool.NAME, clientId, null);
+		responseWriter.writeAttribute(StringPool.NAME, escapedEditorName, null);
 		responseWriter.writeAttribute(Styleable.STYLE, "display:none;", null);
 
 		// Encode the onblur/onchange/onfocus attributes and any associated client behavior scripts.
