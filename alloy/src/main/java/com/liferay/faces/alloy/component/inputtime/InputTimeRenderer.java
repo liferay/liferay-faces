@@ -148,7 +148,7 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 
-		if (browserSniffer.isMobile()) {
+		if (browserSniffer.isMobile() && inputTime.isResponsive()) {
 
 			JavaScriptFragment liferayComponent = new JavaScriptFragment("Liferay.component('" + clientKey + "')");
 			String clientId = uiComponent.getClientId(facesContext);
@@ -359,7 +359,7 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 
-		if (!browserSniffer.isMobile()) {
+		if (!(browserSniffer.isMobile() && inputTime.isResponsive())) {
 
 			encodeAutocomplete(facesContext, responseWriter, inputTime, first);
 			first = false;
@@ -386,7 +386,11 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 
-		if (browserSniffer.isMobile()) {
+		// TODO: Need to pass UIComponent as parameter
+		// InputTime inputTime = (InputTime) uiComponent;
+		// boolean responsive = inputTime.isResponsive();
+		boolean responsive = true;
+		if (browserSniffer.isMobile() && responsive) {
 			alloyClassName = alloyClassName.concat("Native");
 		}
 
@@ -410,8 +414,8 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 
 	@Override
 	protected InputDateTimeResponseWriter getInputDateTimeResponseWriter(ResponseWriter responseWriter,
-		String inputClientId, boolean mobile) {
-		return new InputTimeResponseWriter(responseWriter, StringPool.INPUT, inputClientId, mobile);
+		String inputClientId, boolean mobile, boolean responsive) {
+		return new InputTimeResponseWriter(responseWriter, StringPool.INPUT, inputClientId, mobile, responsive);
 	}
 
 	@Override
@@ -424,7 +428,8 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 
-		if (browserSniffer.isMobile()) {
+		InputTime inputTime = (InputTime) uiComponent;
+		if (browserSniffer.isMobile() && inputTime.isResponsive()) {
 			String nativeAlloyModuleName = oldModules[0].concat("-native");
 			modules.add(nativeAlloyModuleName);
 		}
@@ -432,7 +437,6 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 
 			modules.add(oldModules[0]);
 
-			InputTime inputTime = (InputTime) uiComponent;
 			String filterType = inputTime.getFilterType();
 
 			if ((filterType != null) && (filterType.length() > 0)) {

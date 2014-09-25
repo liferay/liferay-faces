@@ -153,6 +153,9 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 	}
 
 	@Override
+	public abstract boolean isResponsive();
+
+	@Override
 	public Object getLocale() {
 		return getLocale(FacesContext.getCurrentInstance());
 	}

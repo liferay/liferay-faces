@@ -342,6 +342,14 @@
 				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When true, the component will render an HTML5 <code>&lt;input type="date" /&gt;</code> element on small/mobile displays in order to enable selection of a date with the mobile device's native UI. The default is true.]]>
+				</description>
+				<name>responsive</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
 				<description>
 					<![CDATA[Specifies which event will pop up the picker. Valid values are <code>focus</code> (the default), <code>button</code>, and <code>both</code>.]]>
 				</description>
@@ -1627,6 +1635,14 @@
 				<description><![CDATA[The delay in milliseconds before a query occurs. After the <code>autoComplete</code> receives input, it waits the specified number of milliseconds before querying it's source. If input occurs before the specified number of milliseconds has elapsed, the timer is reset.]]></description>
 				<name>queryDelay</name>
 				<type>java.lang.Integer</type>
+			</attribute>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When true, the component will render an HTML5 <code>&lt;input type="time" /&gt;</code> element on small/mobile displays in order to enable selection of a time with the mobile device's native UI. The default is true.]]>
+				</description>
+				<name>responsive</name>
+				<type>boolean</type>
 			</attribute>
 			<attribute>
 				<description><![CDATA[When true, if the active option of the autoComplete is not in view, the view will be scrolled to make the active option is displayed to the user.]]></description>

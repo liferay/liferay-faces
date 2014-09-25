@@ -33,7 +33,8 @@ public abstract class InputDateBase extends InputDateTime implements Styleable, 
 		dateSelectListener,
 		maxDate,
 		minDate,
-		panes
+		panes,
+		responsive
 	}
 
 	public String getDatePattern() {
@@ -74,6 +75,14 @@ public abstract class InputDateBase extends InputDateTime implements Styleable, 
 
 	public void setPanes(Integer panes) {
 		getStateHelper().put(InputDatePropertyKeys.panes, panes);
+	}
+
+	public boolean isResponsive() {
+		return (Boolean) getStateHelper().eval(InputDatePropertyKeys.responsive, true);
+	}
+
+	public void setResponsive(boolean responsive) {
+		getStateHelper().put(InputDatePropertyKeys.responsive, responsive);
 	}
 }
 //J+

@@ -41,6 +41,7 @@ public abstract class InputTimeRendererBase extends InputDateTimeRenderer {
 	protected static final String MAX_TIME = "maxTime";
 	protected static final String MIN_TIME = "minTime";
 	protected static final String QUERY_DELAY = "queryDelay";
+	protected static final String RESPONSIVE = "responsive";
 	protected static final String SCROLL_INTO_VIEW = "scrollIntoView";
 	protected static final String STEP = "step";
 	protected static final String TIME_SELECT_LISTENER = "timeSelectListener";

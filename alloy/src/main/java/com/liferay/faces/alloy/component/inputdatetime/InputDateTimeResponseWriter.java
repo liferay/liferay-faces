@@ -29,11 +29,13 @@ public class InputDateTimeResponseWriter extends IdDelegationResponseWriter {
 
 	// Private Data Members
 	private boolean mobile;
+	private boolean responsive;
 
 	public InputDateTimeResponseWriter(ResponseWriter responseWriter, String idElement, String idValue,
-		boolean mobile) {
+		boolean mobile, boolean responsive) {
 		super(responseWriter, idElement, idValue);
 		this.mobile = mobile;
+		this.responsive = responsive;
 	}
 
 	@Override
@@ -41,7 +43,7 @@ public class InputDateTimeResponseWriter extends IdDelegationResponseWriter {
 
 		if (StringPool.CLASS.equalsIgnoreCase(name) || Styleable.STYLE.equalsIgnoreCase(name)) {
 
-			if (mobile) {
+			if (mobile && responsive) {
 				super.writeAttribute(name, "input-medium", property);
 			}
 			else {
@@ -56,5 +58,9 @@ public class InputDateTimeResponseWriter extends IdDelegationResponseWriter {
 
 	public boolean isMobile() {
 		return mobile;
+	}
+	
+	public boolean isResponsive() {
+		return responsive;
 	}
 }

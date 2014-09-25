@@ -67,17 +67,16 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 		responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
 
 		// Encode the "class" and "style" attributes on the outermost <div> element.
-		Styleable styleable = (Styleable) uiComponent;
-		RendererUtil.encodeStyleable(responseWriter, styleable);
+		RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent);
 
 		// Start the encoding of the text input by delegating to the renderer from the JSF runtime.
 		String inputClientId = clientId.concat(INPUT_SUFFIX);
 		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
-		boolean mobile = browserSniffer.isMobile();
+		InputDateTime inputDateTime = (InputDateTime) uiComponent;
 		InputDateTimeResponseWriter inputDateTimeResponseWriter = getInputDateTimeResponseWriter(responseWriter,
-				inputClientId, mobile);
+				inputClientId, browserSniffer.isMobile(), inputDateTime.isResponsive());
 		super.encodeMarkupBegin(facesContext, uiComponent, inputDateTimeResponseWriter);
 	}
 
@@ -90,20 +89,21 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+		InputDateTime inputDateTime = (InputDateTime) uiComponent;
 		boolean mobile = browserSniffer.isMobile();
+		boolean responsive = inputDateTime.isResponsive();
 		InputDateTimeResponseWriter inputDateTimeResponseWriter = getInputDateTimeResponseWriter(responseWriter,
-				inputClientId, mobile);
+				inputClientId, mobile, responsive);
 		super.encodeMarkupEnd(facesContext, uiComponent, inputDateTimeResponseWriter);
 
 		// Determine whether or not the text input is enabled.
-		InputDateTime inputDateTime = (InputDateTime) uiComponent;
 		boolean disabled = inputDateTime.isDisabled();
 
 		// If the "showOn" attribute indicates that a button is to be rendered and the component is not being rendered
 		// for a mobile browser, then render the button.
 		String showOn = inputDateTime.getShowOn();
 
-		if (("both".equals(showOn) || "button".equals(showOn)) && !mobile) {
+		if (("both".equals(showOn) || "button".equals(showOn)) && !(mobile && responsive)) {
 			ApplicationFactory applicationFactory = (ApplicationFactory) FactoryFinder.getFactory(
 					FactoryFinder.APPLICATION_FACTORY);
 			Application application = applicationFactory.getApplication();
@@ -245,7 +245,7 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 	}
 
 	protected abstract InputDateTimeResponseWriter getInputDateTimeResponseWriter(ResponseWriter responseWriter,
-		String inputClientId, boolean mobile);
+		String inputClientId, boolean mobile, boolean responsive);
 
 	@Override
 	public String getYUIConfig(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)

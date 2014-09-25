@@ -133,7 +133,7 @@ public class InputTime extends InputTimeBase {
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 
-		if (browserSniffer.isMobile()) {
+		if (browserSniffer.isMobile() && isResponsive()) {
 			return DEFAULT_HTML5_TIME_PATTERN;
 		}
 		else {

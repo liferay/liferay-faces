@@ -101,10 +101,10 @@ public class InputDateRenderer extends InputDateRendererBase {
 		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+		InputDate inputDate = (InputDate) uiComponent;
 
-		if (browserSniffer.isMobile()) {
+		if (browserSniffer.isMobile() && inputDate.isResponsive()) {
 
-			InputDate inputDate = (InputDate) uiComponent;
 			String clientVarName = ComponentUtil.getClientVarName(facesContext, inputDate);
 			String clientKey = inputDate.getClientKey();
 
@@ -257,8 +257,8 @@ public class InputDateRenderer extends InputDateRendererBase {
 		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
-
-		if (!browserSniffer.isMobile()) {
+		
+		if (!(browserSniffer.isMobile() && inputDate.isResponsive())) {
 
 			encodeCalendar(facesContext, responseWriter, inputDate, first);
 			first = false;
@@ -286,7 +286,11 @@ public class InputDateRenderer extends InputDateRendererBase {
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 
-		if (browserSniffer.isMobile()) {
+		// TODO: Need to pass UIComponent as parameter
+		// InputDate inputDate = (InputDate) uiComponent;
+		// boolean responsive = inputDate.isResponsive();
+		boolean responsive = true;
+		if (browserSniffer.isMobile() && responsive) {
 			alloyClassName = alloyClassName.concat("Native");
 		}
 
@@ -310,8 +314,8 @@ public class InputDateRenderer extends InputDateRendererBase {
 
 	@Override
 	protected InputDateTimeResponseWriter getInputDateTimeResponseWriter(ResponseWriter responseWriter,
-		String inputClientId, boolean mobile) {
-		return new InputDateResponseWriter(responseWriter, StringPool.INPUT, inputClientId, mobile);
+		String inputClientId, boolean mobile, boolean responsive) {
+		return new InputDateResponseWriter(responseWriter, StringPool.INPUT, inputClientId, mobile, responsive);
 	}
 
 	@Override
@@ -323,7 +327,9 @@ public class InputDateRenderer extends InputDateRendererBase {
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 
-		if (browserSniffer.isMobile()) {
+		InputDate inputDate = (InputDate) uiComponent;
+
+		if (browserSniffer.isMobile() && inputDate.isResponsive()) {
 			String nativeAlloyModuleName = modules[0].concat("-native");
 			modules = new String[] { nativeAlloyModuleName };
 		}

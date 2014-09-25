@@ -38,6 +38,7 @@ public abstract class InputTimeBase extends InputDateTime implements Styleable, 
 		maxTime,
 		minTime,
 		queryDelay,
+		responsive,
 		scrollIntoView,
 		step,
 		timePattern,
@@ -114,6 +115,14 @@ public abstract class InputTimeBase extends InputDateTime implements Styleable, 
 
 	public void setQueryDelay(Integer queryDelay) {
 		getStateHelper().put(InputTimePropertyKeys.queryDelay, queryDelay);
+	}
+
+	public boolean isResponsive() {
+		return (Boolean) getStateHelper().eval(InputTimePropertyKeys.responsive, true);
+	}
+
+	public void setResponsive(boolean responsive) {
+		getStateHelper().put(InputTimePropertyKeys.responsive, responsive);
 	}
 
 	public Boolean isScrollIntoView() {
