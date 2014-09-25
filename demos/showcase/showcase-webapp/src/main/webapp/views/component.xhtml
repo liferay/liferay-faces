@@ -24,13 +24,13 @@
 		<alloy:button onclick="window.open('#{showcase-fn:encodeVDLDocURL(selectedComponentDocKey)}')" style="float: right;"
 			value="#{i18n['vdl-documentation']}" />
 		<ui:include src="/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/header.xhtml" />
-		<h2>#{selectedComponentFullName}</h2>
+		<h3>#{selectedComponentFullName}</h3>
 		<alloy:outputText escape="false" value="#{selectedComponentDescription}" />
-		<h3>#{i18n[selectedComponentUseCaseName]} #{i18n['usage']}</h3>
+		<h4>#{i18n[selectedComponentUseCaseName]} #{i18n['usage']}</h4>
 		<alloy:outputText escape="false" value="#{selectedComponentUseCaseDescription}" />
 		<ui:include
 			src="/component/#{selectedComponentPrefix}/#{selectedComponentLowerCaseName}/#{selectedComponentUseCaseName}/#{selectedComponentCamelCaseName}.xhtml" />
-		<h3>#{i18n['source-code']}</h3>
+		<h4>#{i18n['source-code']}</h4>
 		<alloy:tabView value="#{showcaseModelBean.selectedComponent.useCaseCodeExamples}" var="useCaseCodeExample">
 			<alloy:tab headerText="#{useCaseCodeExample.fileName}">
 				<alloy:inputSourceCode mode="#{useCaseCodeExample.fileExtension}" readOnly="true" showPrintMargin="false"
