@@ -26,14 +26,14 @@ import com.liferay.faces.util.lang.StringPool;
  */
 public class InputTimeResponseWriter extends InputDateTimeResponseWriter {
 
-	public InputTimeResponseWriter(ResponseWriter responseWriter, String idElement, String idValue, boolean mobile) {
-		super(responseWriter, idElement, idValue, mobile);
+	public InputTimeResponseWriter(ResponseWriter responseWriter, String idElement, String idValue, boolean mobile, boolean responsive) {
+		super(responseWriter, idElement, idValue, mobile, responsive);
 	}
 
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
-		if (StringPool.TYPE.equalsIgnoreCase(name) && isMobile()) {
+		if (StringPool.TYPE.equalsIgnoreCase(name) && isMobile() & isResponsive()) {
 			super.writeAttribute(name, "time", property);
 		}
 		else {

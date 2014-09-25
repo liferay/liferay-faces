@@ -36,6 +36,7 @@ public abstract class InputDateRendererBase extends InputDateTimeRenderer {
 	protected static final String MAX_DATE = "maxDate";
 	protected static final String MIN_DATE = "minDate";
 	protected static final String PANES = "panes";
+	protected static final String RESPONSIVE = "responsive";
 
 	// Private Constants
 	private static final String ALLOY_CLASS_NAME = "DatePicker";

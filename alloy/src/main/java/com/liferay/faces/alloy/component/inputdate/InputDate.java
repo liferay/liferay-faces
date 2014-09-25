@@ -181,7 +181,7 @@ public class InputDate extends InputDateBase {
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 
-		if (browserSniffer.isMobile()) {
+		if (browserSniffer.isMobile() && isResponsive()) {
 			return DEFAULT_HTML5_DATE_PATTERN;
 		}
 		else {

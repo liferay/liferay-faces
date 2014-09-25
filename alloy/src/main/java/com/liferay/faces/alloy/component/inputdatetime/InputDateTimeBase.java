@@ -31,6 +31,7 @@ public abstract class InputDateTimeBase extends InputText implements Styleable {
 		autoHide,
 		clientKey,
 		locale,
+		responsive,
 		showOn,
 		timeZone,
 		zIndex
@@ -58,6 +59,14 @@ public abstract class InputDateTimeBase extends InputText implements Styleable {
 
 	public void setLocale(Object locale) {
 		getStateHelper().put(InputDateTimePropertyKeys.locale, locale);
+	}
+
+	public boolean isResponsive() {
+		return (Boolean) getStateHelper().eval(InputDateTimePropertyKeys.responsive, true);
+	}
+
+	public void setResponsive(boolean responsive) {
+		getStateHelper().put(InputDateTimePropertyKeys.responsive, responsive);
 	}
 
 	public String getShowOn() {
