@@ -31,6 +31,9 @@
 		<param-value>true</param-value>
 	</context-param>
 	-->
+	<listener>
+		<listener-class>com.liferay.faces.demos.servlet.UploadedFileCleanupListener</listener-class>
+	</listener>
 	<!-- Although the FacesServlet will not be invoked by any portlet requests, it is required to initialize JSF. -->
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
