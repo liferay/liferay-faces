@@ -313,7 +313,7 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 	}
 
 	@Override
-	public String getAlloyClassName() {
+	public String getAlloyClassName(FacesContext facesContext, UIComponent uiComponent) {
 		return null;
 	}
 
@@ -333,7 +333,7 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 
 	// Needed when yui="false"
 	@Override
-	protected String[] getModules(UIComponent uiComponent) {
+	protected String[] getModules(FacesContext facesContext, UIComponent uiComponent) {
 		return MODULES;
 	}
 

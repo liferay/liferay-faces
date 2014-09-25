@@ -15,6 +15,8 @@ package com.liferay.faces.alloy.component.selectthumbrating;
 
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.selectstarrating.SelectStarRatingRenderer;
@@ -39,7 +41,7 @@ public class SelectThumbRatingRenderer extends SelectStarRatingRenderer {
 	private static final String THUMBRATING_CLASS_NAME = "ThumbRating";
 
 	@Override
-	public String getAlloyClassName() {
+	public String getAlloyClassName(FacesContext facesContext, UIComponent uiCompnent) {
 		return THUMBRATING_CLASS_NAME;
 	}
 }

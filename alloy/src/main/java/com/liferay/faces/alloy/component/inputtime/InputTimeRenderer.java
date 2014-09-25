@@ -378,19 +378,15 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 	}
 
 	@Override
-	public String getAlloyClassName() {
+	public String getAlloyClassName(FacesContext facesContext, UIComponent uiComponent) {
 
-		String alloyClassName = super.getAlloyClassName();
-		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String alloyClassName = super.getAlloyClassName(facesContext, uiComponent);
 		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+		InputTime inputTime = (InputTime) uiComponent;
 
-		// TODO: Need to pass UIComponent as parameter
-		// InputTime inputTime = (InputTime) uiComponent;
-		// boolean responsive = inputTime.isResponsive();
-		boolean responsive = true;
-		if (browserSniffer.isMobile() && responsive) {
+		if (browserSniffer.isMobile() && inputTime.isResponsive()) {
 			alloyClassName = alloyClassName.concat("Native");
 		}
 
@@ -419,17 +415,17 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 	}
 
 	@Override
-	protected String[] getModules(UIComponent uiComponent) {
+	protected String[] getModules(FacesContext facesContext, UIComponent uiComponent) {
 
 		List<String> modules = new ArrayList<String>();
-		String[] oldModules = super.getModules(uiComponent);
-		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String[] oldModules = super.getModules(facesContext, uiComponent);
 		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
-
 		InputTime inputTime = (InputTime) uiComponent;
-		if (browserSniffer.isMobile() && inputTime.isResponsive()) {
+		boolean responsive = inputTime.isResponsive();
+
+		if (browserSniffer.isMobile() && responsive) {
 			String nativeAlloyModuleName = oldModules[0].concat("-native");
 			modules.add(nativeAlloyModuleName);
 		}
