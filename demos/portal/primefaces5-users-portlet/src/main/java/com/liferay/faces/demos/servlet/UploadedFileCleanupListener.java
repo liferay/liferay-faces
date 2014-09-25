@@ -49,12 +49,17 @@ public class UploadedFileCleanupListener implements HttpSessionListener {
 			String parent = UploadedFileUtil.getTempDir();
 			String folderName = sessionId;
 			File folder = new File(parent, folderName);
-			File[] fileList = folder.listFiles().clone();
+			File[] fileList = folder.listFiles();
 
-			for (File file : fileList) {
+			if (fileList != null) {
 
-				if (file.getName().startsWith(UploadedFileUtil.USER_PORTRAIT)) {
-					file.delete();
+				fileList = fileList.clone();
+
+				for (File file : fileList) {
+
+					if (file.getName().startsWith(UploadedFileUtil.USER_PORTRAIT)) {
+						file.delete();
+					}
 				}
 			}
 
