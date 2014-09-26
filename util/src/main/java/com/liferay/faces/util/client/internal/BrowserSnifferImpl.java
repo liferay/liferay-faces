@@ -55,11 +55,9 @@ public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implemen
 		String userAgent = getUserAgent(httpServletRequest);
 
 		if (userAgent.contains("ipad")) {
-			System.err.println("yep ipad!");
 			return true;
 		}
 
-		System.err.println("NOPE NOT ipad!");
 		return false;
 	}
 
