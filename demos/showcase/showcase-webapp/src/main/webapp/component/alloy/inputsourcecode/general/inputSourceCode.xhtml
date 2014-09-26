@@ -10,7 +10,7 @@
 				<f:selectItem itemLabel="XML" itemValue="xml" />
 				<f:ajax render="componentField modelValue" />
 			</alloy:selectOneMenu>
-			<alloy:field label="#{i18n['source-code']}">
+			<alloy:field id="componentField" label="#{i18n['source-code']}">
 				<alloy:inputSourceCode id="inputSourceCode" height="100" mode="#{inputSourceCodeModelBean.mode}"
 					rendered="#{showcaseModelBean.selectedComponent.rendered}"
 					required="#{showcaseModelBean.selectedComponent.required}" value="#{inputSourceCodeModelBean.sourceCode}" />
