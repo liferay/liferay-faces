@@ -8,7 +8,7 @@
 		<h:form>
 			<showcase:example description="#{i18n['alloy-autocomplete-custom-filter-example-1']}" number="1">
 				<alloy:field label="#{i18n['favorite-liferay-benefit']}">
-					<alloy:autoComplete mode="server" serverCustomFilter="#{autoCompleteBackingBean.serverCustomFilter}"
+					<alloy:autoComplete serverCustomFilter="#{autoCompleteBackingBean.serverCustomFilter}"
 						value="#{autoCompleteModelBean.text}">
 						<f:selectItem itemValue="Compatible" />
 						<f:selectItem itemValue="Enterprise Ready" />
@@ -34,7 +34,7 @@
 		<h:form>
 			<showcase:example description="#{i18n['alloy-autocomplete-custom-filter-example-2']}" number="2">
 				<alloy:field label="#{i18n['favorite-liferay-benefit']}">
-					<alloy:autoComplete mode="client" clientCustomFilter="clientCustomFilter"
+					<alloy:autoComplete clientCustomFilter="clientCustomFilter"
 						value="#{autoCompleteModelBean.text}">
 						<f:selectItem itemValue="Compatible" />
 						<f:selectItem itemValue="Enterprise Ready" />
