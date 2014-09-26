@@ -1,11 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.liferay.faces</groupId>
 		<artifactId>liferay-faces</artifactId>
-		<version>4.2.0-m2-SNAPSHOT</version>
+		<version>4.2.0-m2</version>
 	</parent>
 	<artifactId>liferay-faces-reslib</artifactId>
 	<name>Liferay Faces Resource Library</name>
@@ -42,42 +41,30 @@
 						</goals>
 						<configuration>
 							<target>
-								<move file="${project.build.directory}/classes/META-INF/resources/alloy-${alloyui.version}/LICENSE.md"
-									tofile="${project.build.directory}/classes/META-INF/alloyui-bsd-license.md" />
+								<move file="${project.build.directory}/classes/META-INF/resources/alloy-${alloyui.version}/LICENSE.md" tofile="${project.build.directory}/classes/META-INF/alloyui-bsd-license.md" />
 								<move file="${project.build.directory}/classes/META-INF/resources/alloy-${alloyui.version}/build" todir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib" />
 								<delete dir="${project.build.directory}/classes/META-INF/resources/alloy-${alloyui.version}" />
-								<replace token="../img/" value="#{resource['liferay-faces-reslib:build/aui-css/img/"
-									dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/aui-css/css">
+								<replace token="../img/" value="#{resource['liferay-faces-reslib:build/aui-css/img/" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/aui-css/css">
 									<include name="bootstrap.min.css" />
 								</replace>
-								<replace token=".png)" value=".png']})"
-									dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/aui-css/css">
+								<replace token=".png)" value=".png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/aui-css/css">
 									<include name="bootstrap.min.css" />
 								</replace>
 								<!-- for dialog -->
-								<replace token="url(arrows.png)" value="url(#{resource['liferay-faces-reslib:build/resize-base/assets/skins/sam/arrows.png']})"
-									dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/resize-base/assets/skins/sam">
+								<replace token="url(arrows.png)" value="url(#{resource['liferay-faces-reslib:build/resize-base/assets/skins/sam/arrows.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/resize-base/assets/skins/sam">
 									<include name="resize-base.css" />
 								</replace>
 								<!-- menus -->
-								<replace token="url(vertical-menu-submenu-indicator.png)"
-									value="url(#{resource['liferay-faces-reslib:build/node-menunav/assets/skins/sam/vertical-menu-submenu-indicator.png']})"
-									dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
+								<replace token="url(vertical-menu-submenu-indicator.png)" value="url(#{resource['liferay-faces-reslib:build/node-menunav/assets/skins/sam/vertical-menu-submenu-indicator.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
 									<include name="node-menunav-skin.css" />
 								</replace>
-								<replace token="url(vertical-menu-submenu-indicator.png)"
-									value="url(#{resource['liferay-faces-reslib:build/node-menunav/assets/skins/sam/vertical-menu-submenu-indicator.png']})"
-									dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
+								<replace token="url(vertical-menu-submenu-indicator.png)" value="url(#{resource['liferay-faces-reslib:build/node-menunav/assets/skins/sam/vertical-menu-submenu-indicator.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
 									<include name="node-menunav.css" />
 								</replace>
-								<replace token="url(../../../../assets/skins/sam/sprite.png)"
-									value="url(#{resource['liferay-faces-reslib:build/aui-color-palette/assets/skins/sam/sprite.png']})"
-									dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
+								<replace token="url(../../../../assets/skins/sam/sprite.png)" value="url(#{resource['liferay-faces-reslib:build/aui-color-palette/assets/skins/sam/sprite.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
 									<include name="node-menunav-skin.css" />
 								</replace>
-								<replace token="url(../../../../assets/skins/sam/sprite.png)"
-									value="url(#{resource['liferay-faces-reslib:build/aui-color-palette/assets/skins/sam/sprite.png']})"
-									dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
+								<replace token="url(../../../../assets/skins/sam/sprite.png)" value="url(#{resource['liferay-faces-reslib:build/aui-color-palette/assets/skins/sam/sprite.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
 									<include name="node-menunav.css" />
 								</replace>
 							</target>
@@ -106,7 +93,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>

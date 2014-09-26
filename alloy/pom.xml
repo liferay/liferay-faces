@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.faces</groupId>
 		<artifactId>liferay-faces</artifactId>
-		<version>4.2.0-m2-SNAPSHOT</version>
+		<version>4.2.0-m2</version>
 	</parent>
 	<artifactId>liferay-faces-alloy</artifactId>
 	<name>Liferay Faces Alloy</name>
@@ -121,7 +121,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
