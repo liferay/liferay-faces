@@ -40,6 +40,8 @@ public interface BrowserSniffer {
 
 	public boolean isIe();
 
+	public boolean isIpad();
+
 	public boolean isIphone();
 
 	public boolean isMobile();
