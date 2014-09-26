@@ -20,7 +20,7 @@
 							<f:ajax execute="step1" render="@form" />
 						</alloy:commandButton>
 					</alloy:tab>
-					<alloy:tab disabled="#{tabViewWizardBean.selectedTabIndex lt 1}" label="#{i18n['step-2']}">
+					<alloy:tab disabled="#{tabViewWizardBean.selectedTabIndex lt 1}" headerText="#{i18n['step-2']}">
 						<alloy:fieldset id="step2">
 							<alloy:field label="#{i18n['last-name']}">
 								<alloy:inputText id="lastName" required="true" value="#{tabViewWizardBean.lastName}" />
@@ -32,7 +32,7 @@
 							<f:ajax execute="step2" render="@form" />
 						</alloy:commandButton>
 					</alloy:tab>
-					<alloy:tab disabled="#{tabViewWizardBean.selectedTabIndex lt 2}" label="#{i18n['step-3']}">
+					<alloy:tab disabled="#{tabViewWizardBean.selectedTabIndex lt 2}" headerText="#{i18n['step-3']}">
 						<alloy:fieldset>
 							<alloy:field label="#{i18n['first-name']}">
 								<alloy:outputText value="#{tabViewWizardBean.firstName}" />
