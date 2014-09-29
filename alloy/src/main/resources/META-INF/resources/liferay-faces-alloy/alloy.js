@@ -234,5 +234,18 @@ var LFAI = {
 				input.setAttribute('min', min);
 			}
 		}
+	},
+
+	inputDateTimePickerSelect: function(A, escapeInputClientId, selectable, selection, valueChangeClientBehaviors) {
+
+		var inputNode = A.one('#' + escapeInputClientId);
+
+		if (selectable && selection) {
+			inputNode.set('value', selection);
+		}
+
+		if (selectable && valueChangeClientBehaviors) {
+			inputNode.simulate('change');
+		}
 	}
 };

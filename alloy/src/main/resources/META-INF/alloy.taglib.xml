@@ -2473,7 +2473,6 @@ java.lang.Object)</method-signature>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.inputdate.InputDate</component-type>
 			<renderer-type>com.liferay.faces.alloy.component.inputdate.internal.InputDateRenderer</renderer-type>
-			<handler-class>com.liferay.faces.alloy.component.inputdate.internal.InputDateHandler</handler-class>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
@@ -4141,7 +4140,6 @@ java.lang.Object)</method-signature>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.inputtime.InputTime</component-type>
 			<renderer-type>com.liferay.faces.alloy.component.inputtime.internal.InputTimeRenderer</renderer-type>
-			<handler-class>com.liferay.faces.alloy.component.inputtime.internal.InputTimeHandler</handler-class>
 		</component>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying a hot key character for the element.]]></description>
