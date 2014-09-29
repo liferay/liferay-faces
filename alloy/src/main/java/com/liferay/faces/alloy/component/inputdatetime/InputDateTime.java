@@ -16,18 +16,13 @@ package com.liferay.faces.alloy.component.inputdatetime;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
 import java.util.TimeZone;
 
 import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.component.behavior.Behavior;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.DateTimeConverter;
-import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.event.FacesEvent;
 
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.context.MessageContext;
@@ -43,41 +38,6 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 	// Public Constants
 	public static final String FOCUS = "focus";
 	public static final String GREENWICH = "Greenwich";
-
-	@Override
-	public void queueEvent(FacesEvent facesEvent) {
-
-		if (facesEvent instanceof AjaxBehaviorEvent) {
-
-			AjaxBehaviorEvent ajaxBehaviorEvent = (AjaxBehaviorEvent) facesEvent;
-
-			UIComponent uiComponent = ajaxBehaviorEvent.getComponent();
-			Behavior behavior = ajaxBehaviorEvent.getBehavior();
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
-
-			String clientId = getClientId(facesContext);
-			String selectedString = requestParameterMap.get(clientId);
-
-			Date selected = null;
-
-			if ((selectedString != null) && (selectedString.length() > 0)) {
-
-				InputDateTime inputDateTime = (InputDateTime) uiComponent;
-				String pattern = inputDateTime.getPattern();
-				String timeZoneString = inputDateTime.getTimeZone();
-				TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
-				selected = InputDateTimeUtil.getObjectAsDate(selectedString, pattern, timeZone);
-			}
-
-			facesEvent = newSelectEvent(uiComponent, behavior, selected);
-		}
-
-		super.queueEvent(facesEvent);
-	}
-
-	protected abstract AjaxBehaviorEvent newSelectEvent(UIComponent uiComponent, Behavior behavior, Date selected);
 
 	protected void validateValue(FacesContext facesContext, Object newValue, Date minDate, Date maxDate,
 		TimeZone timeZone) {
