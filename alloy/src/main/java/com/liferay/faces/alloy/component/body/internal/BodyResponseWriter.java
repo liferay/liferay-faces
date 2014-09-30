@@ -47,11 +47,9 @@ public class BodyResponseWriter extends DelegationResponseWriterBase {
 			super.startElement(StringPool.SCRIPT, uiComponent);
 			super.writeAttribute(StringPool.TYPE, ContentTypes.TEXT_JAVASCRIPT, null);
 
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			ExternalContext externalContext = facesContext.getExternalContext();
 			ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
 					ClientScriptFactory.class);
-			ClientScript clientScript = clientScriptFactory.getClientScript(externalContext);
+			ClientScript clientScript = clientScriptFactory.getClientScript();
 			super.write(clientScript.toString());
 			super.endElement(StringPool.SCRIPT);
 		}

@@ -35,6 +35,7 @@ import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.portal.ScriptTagUtil;
+import com.liferay.faces.util.render.internal.RendererUtil;
 
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PortalUtil;
@@ -98,8 +99,7 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 			String scripts = portalTagOutput.getScripts();
 
 			if (scripts != null) {
-				LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-				liferayFacesContext.getJavaScriptMap().put(uiComponent.getClientId(), scripts);
+				RendererUtil.renderScript(scripts, null);
 			}
 		}
 		catch (JspException e) {
