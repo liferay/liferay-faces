@@ -17,6 +17,7 @@ import java.util.Map;
 
 import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
@@ -26,6 +27,7 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.portal.WebKeys;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
+
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 
 
@@ -41,14 +43,15 @@ public class ClientScriptFactoryImpl extends ClientScriptFactory {
 	private static final String SCRIPT_DATA_FQCN = "com.liferay.portal.kernel.servlet.taglib.aui.ScriptData";
 
 	@Override
-	public ClientScript getClientScript(ExternalContext externalContext) throws FacesException {
+	public ClientScript getClientScript(FacesContext facesContext) throws FacesException {
 
 		ClientScript clientScript = null;
 
+		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, Object> requestMap = externalContext.getRequestMap();
 		Object attributeValue = requestMap.get(WebKeys.AUI_SCRIPT_DATA);
 
-		if (LIFERAY_PORTAL_DETECTED) {
+		if (LIFERAY_PORTAL_DETECTED && !facesContext.getPartialViewContext().isAjaxRequest()) {
 
 			Object scriptData = null;
 

@@ -231,7 +231,7 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 	protected abstract String getButtonIconName();
 
 	@Override
-	protected boolean isForceInline(FacesContext facesContext, UIComponent uiComponent) {
+	protected boolean isSandboxed(FacesContext facesContext, UIComponent uiComponent) {
 
 		// In order to support the "lang" attribute of the YUI object, it is necessary to determine if the user has
 		// specified a locale other than that of the server or view root. If so, then the javascript must be rendered

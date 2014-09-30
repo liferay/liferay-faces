@@ -14,14 +14,12 @@
 package com.liferay.faces.util.render;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.util.context.ExtFacesContext;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -86,79 +84,51 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 		encodeClientState(facesContext, responseWriter, uiComponent);
-
 		encodeMarkupEnd(facesContext, uiComponent);
-
-		if (!isAjax(facesContext) && isForceInline(facesContext, uiComponent)) {
-
-			responseWriter.startElement(StringPool.SCRIPT, uiComponent);
-			responseWriter.writeAttribute(StringPool.TYPE, ContentTypes.TEXT_JAVASCRIPT, null);
-		}
-
 		encodeJavaScript(facesContext, uiComponent);
-
-		if (!isAjax(facesContext) && isForceInline(facesContext, uiComponent)) {
-			responseWriter.endElement(StringPool.SCRIPT);
-		}
 	}
 
 	protected void encodeJavaScript(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		boolean bufferResponse = (isAjax(facesContext) || !isForceInline(facesContext, uiComponent));
-
-		BufferedScriptResponseWriter bufferedScriptResponseWriter = null;
-
-		if (bufferResponse) {
-			bufferedScriptResponseWriter = new BufferedScriptResponseWriter();
-			facesContext.setResponseWriter(bufferedScriptResponseWriter);
-		}
+		BufferedScriptResponseWriter bufferedScriptResponseWriter = new BufferedScriptResponseWriter();
+		facesContext.setResponseWriter(bufferedScriptResponseWriter);
 
 		encodeJavaScriptBegin(facesContext, uiComponent);
 		encodeJavaScriptMain(facesContext, uiComponent);
 		encodeJavaScriptCustom(facesContext, uiComponent);
 		encodeJavaScriptEnd(facesContext, uiComponent);
 
-		if (bufferResponse) {
+		String use = null;
 
-			// If running in an Ajax request, then it is not possible to render the scripts at the bottom of the
-			// portal page. Instead, store the script in the JavaScript map so that PartialViewContextCleanupImpl
-			// knows to include it in the <eval>...</eval> section of the JSF partial-response.
-			if (isAjax(facesContext)) {
-				Map<String, String> javaScriptMap = ExtFacesContext.getInstance().getJavaScriptMap();
-				javaScriptMap.put(uiComponent.getClientId(facesContext), bufferedScriptResponseWriter.toString());
-			}
-			else {
+		if (!isSandboxed(facesContext, uiComponent)) {
 
-				String use = null;
-				String[] modules = getModules(facesContext, uiComponent);
+			String[] modules = getModules(facesContext, uiComponent);
 
-				if (modules != null) {
+			if (modules != null) {
 
-					StringBuilder stringBuilder = new StringBuilder();
+				StringBuilder stringBuilder = new StringBuilder();
 
-					for (int i = 0; i < modules.length; i++) {
+				for (int i = 0; i < modules.length; i++) {
 
-						if (i > 0) {
-							stringBuilder.append(StringPool.COMMA);
-						}
-
-						stringBuilder.append(modules[i]);
+					if (i > 0) {
+						stringBuilder.append(StringPool.COMMA);
 					}
 
-					use = stringBuilder.toString();
+					stringBuilder.append(modules[i]);
 				}
 
-				String bufferedScript = bufferedScriptResponseWriter.toString();
-				RendererUtil.renderScript(facesContext, uiComponent, bufferedScript, use);
+				use = stringBuilder.toString();
 			}
-
-			facesContext.setResponseWriter(responseWriter);
 		}
+
+		String bufferedScript = bufferedScriptResponseWriter.toString();
+		RendererUtil.renderScript(facesContext, uiComponent, bufferedScript, use);
+		facesContext.setResponseWriter(responseWriter);
 	}
 
-	protected boolean isForceInline(FacesContext facesContext, UIComponent uiComponent) {
+	protected boolean isSandboxed(FacesContext facesContext, UIComponent uiComponent) {
 		return false;
 	}
 

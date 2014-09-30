@@ -236,12 +236,12 @@ public class RendererUtil {
 	public static void renderScript(FacesContext facesContext, UIComponent uiComponent, String script, String use) {
 
 		// Render the script at the bottom of the page by setting the WebKeys.AUI_SCRIPT_DATA request attribute.
-		ExternalContext externalContext = facesContext.getExternalContext();
 		ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
 				ClientScriptFactory.class);
-		ClientScript clientScript = clientScriptFactory.getClientScript(externalContext);
+		ClientScript clientScript = clientScriptFactory.getClientScript(facesContext);
 
 		String portletId = StringPool.BLANK;
+		ExternalContext externalContext = facesContext.getExternalContext();
 		Object portlet = externalContext.getRequestMap().get(WebKeys.RENDER_PORTLET);
 
 		if (portlet != null) {
