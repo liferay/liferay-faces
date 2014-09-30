@@ -28,6 +28,7 @@ import javax.servlet.jsp.tagext.Tag;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.internal.RendererUtil;
 
 
 /**
@@ -99,8 +100,7 @@ public abstract class DelayedPortalTagRenderer<U extends UIComponent, T extends 
 			String scripts = portalTagOutput.getScripts();
 
 			if (scripts != null) {
-				LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-				liferayFacesContext.getJavaScriptMap().put(uiComponent.getClientId(), scripts);
+				RendererUtil.renderScript(scripts, null);
 			}
 
 			// Encode the children markup.

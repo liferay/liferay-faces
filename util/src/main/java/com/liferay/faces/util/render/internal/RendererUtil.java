@@ -233,22 +233,18 @@ public class RendererUtil {
 		return javaScript;
 	}
 
-	public static void renderScript(FacesContext facesContext, UIComponent uiComponent, String script, String use) {
+	public static void renderBufferedScript(BufferedScriptResponseWriter bufferedScriptResponseWriter, String use) {
 
-		// Render the script at the bottom of the page by setting the WebKeys.AUI_SCRIPT_DATA request attribute.
-		ExternalContext externalContext = facesContext.getExternalContext();
+		String bufferedScript = bufferedScriptResponseWriter.toString();
+		renderScript(bufferedScript, use);
+	}
+
+	public static void renderScript(String script, String use) {
+
 		ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
 				ClientScriptFactory.class);
-		ClientScript clientScript = clientScriptFactory.getClientScript(externalContext);
-
-		String portletId = StringPool.BLANK;
-		Object portlet = externalContext.getRequestMap().get(WebKeys.RENDER_PORTLET);
-
-		if (portlet != null) {
-			portletId = LiferayPortletUtil.getPortletId(portlet);
-		}
-
-		clientScript.append(portletId, script, use);
+		ClientScript clientScript = clientScriptFactory.getClientScript();
+		clientScript.append(script, use);
 	}
 
 	private static String toHexString(int i) {
