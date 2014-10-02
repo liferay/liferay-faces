@@ -68,7 +68,7 @@ public class ShowcaseUtil {
 	private static final String LIFERAY_FACES_PORTAL_VERSION = LIFERAY_FACES_PORTAL_PRODUCT.getMajorVersion() +
 		StringPool.PERIOD + LIFERAY_FACES_PORTAL_PRODUCT.getMinorVersion();
 	private static final String LIFERAY_FACES_PORTAL_JAVADOC_BASE_URL = "http://www.liferayfaces.org/doc/faces/" +
-		LIFERAY_FACES_PORTAL_VERSION + "/javadoc/alloy/";
+		LIFERAY_FACES_PORTAL_VERSION + "/javadoc/portal/";
 	private static final String LIFERAY_FACES_VDLDOC_BASE_URL = "http://www.liferayfaces.org/doc/faces/" +
 		LIFERAY_FACES_ALLOY_VERSION + "/vdldoc/";
 	private static final String NAMESPACE_PREFIX_ALLOY = "alloy";
