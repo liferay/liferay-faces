@@ -30,7 +30,7 @@ public class AUICol extends AUIPanel implements NamingContainer {
 	public static final String LAST = "last";
 	public static final String OFFSET = "offset";
 	public static final String OFFSET_WIDTH = "offsetWidth";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.renderkit.ColRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.renderkit.internal.ColRenderer";
 	public static final String WIDTH = "width";
 
 	// Private Constants

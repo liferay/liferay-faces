@@ -23,6 +23,6 @@ public class AUIFieldSet extends AUIPanel implements NamingContainer {
 
 	@Override
 	public String getRendererType() {
-		return "com.liferay.faces.alloy.renderkit.FieldSetRenderer";
+		return "com.liferay.faces.alloy.renderkit.internal.FieldSetRenderer";
 	}
 }

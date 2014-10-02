@@ -28,7 +28,8 @@ public class OutputFormat extends OutputFormatBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputformat.OutputFormat";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Format";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputformat.OutputFormatRenderer";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.alloy.component.outputformat.internal.OutputFormatRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-output-format";
 
 	public OutputFormat() {

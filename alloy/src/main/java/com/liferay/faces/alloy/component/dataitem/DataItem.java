@@ -17,15 +17,16 @@ import javax.faces.component.FacesComponent;
 
 import com.liferay.faces.util.component.ComponentUtil;
 
+
 /**
- * @author	Vernon Singleton
+ * @author  Vernon Singleton
  */
 @FacesComponent(value = DataItem.COMPONENT_TYPE)
 public class DataItem extends DataItemBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.dataitem.DataItem";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.dataitem.DataItemRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.dataitem.internal.DataItemRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-data-item";
 
 	public DataItem() {

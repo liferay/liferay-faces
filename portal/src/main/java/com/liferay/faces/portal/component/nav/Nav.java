@@ -24,7 +24,7 @@ public class Nav extends NavBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.nav.Nav";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.nav.NavRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.nav.internal.NavRenderer";
 
 	public Nav() {
 		super();

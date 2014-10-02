@@ -50,7 +50,8 @@ public class AutoComplete extends AutoCompleteBase implements ClientBehaviorHold
 	// Public Constants
 	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.autocomplete";
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.autocomplete.AutoComplete";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.autocomplete.AutoCompleteRenderer";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.alloy.component.autocomplete.internal.AutoCompleteRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-auto-complete";
 
 	public AutoComplete() {

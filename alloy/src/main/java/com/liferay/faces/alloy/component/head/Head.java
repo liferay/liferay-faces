@@ -28,7 +28,7 @@ public class Head extends HeadBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.head.Head";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Head";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.head.HeadRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.head.internal.HeadRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-head";
 
 	public Head() {

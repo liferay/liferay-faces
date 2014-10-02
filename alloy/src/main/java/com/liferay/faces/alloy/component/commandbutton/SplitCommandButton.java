@@ -38,7 +38,6 @@ import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
 
 import com.liferay.faces.alloy.component.nodemenunav.NodeMenuNav;
-import com.liferay.faces.alloy.component.nodemenunav.internal.NodeMenuNavRendererBase;
 import com.liferay.faces.util.component.ComponentUtil;
 
 
@@ -47,10 +46,9 @@ import com.liferay.faces.util.component.ComponentUtil;
  */
 public class SplitCommandButton extends SplitCommandButtonCompat implements NodeMenuNav {
 
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.button.SplitCommandButtonRenderer";
-
-	// Private constants
-	private static final String BUTTON_PREFIX = "btn-";
+	// Public Constants
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.alloy.component.button.internal.SplitCommandButtonRenderer";
 
 	private String rendererType;
 
@@ -634,13 +632,13 @@ public class SplitCommandButton extends SplitCommandButtonCompat implements Node
 		String styleClass = wrappedCommandButton.getStyleClass();
 
 		if (styleClass == null) {
-			styleClass = NodeMenuNavRendererBase.DEFAULT_BUTTON;
+			styleClass = DEFAULT_BUTTON;
 		}
 
 		String defaultCommandButtonClass = null;
 
 		if (!styleClass.contains(BUTTON_PREFIX)) {
-			defaultCommandButtonClass = NodeMenuNavRendererBase.DEFAULT_BUTTON;
+			defaultCommandButtonClass = DEFAULT_BUTTON;
 		}
 
 		String disabledClass = null;
@@ -650,8 +648,7 @@ public class SplitCommandButton extends SplitCommandButtonCompat implements Node
 			disabledClass = "disabled";
 		}
 
-		styleClass = ComponentUtil.concatCssClasses(NodeMenuNavRendererBase.DEFAULT_BTN, defaultCommandButtonClass,
-				disabledClass, styleClass);
+		styleClass = ComponentUtil.concatCssClasses(DEFAULT_BTN, defaultCommandButtonClass, disabledClass, styleClass);
 
 		return styleClass;
 	}

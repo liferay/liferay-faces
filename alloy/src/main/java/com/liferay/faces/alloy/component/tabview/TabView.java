@@ -44,8 +44,9 @@ public class TabView extends TabViewBase implements ClientBehaviorHolder {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.tabview.TabView";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.tabview.TabViewRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.tabview.internal.TabViewRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-tab-view";
+	public static final String SELECTED_INDEX = "selectedIndex";
 
 	// Private Constants
 	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList(
@@ -86,8 +87,7 @@ public class TabView extends TabViewBase implements ClientBehaviorHolder {
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
 			String clientId = getClientId(facesContext);
-			int selectedIndex = IntegerHelper.toInteger(requestParameterMap.get(
-						clientId + TabViewRenderer.SELECTED_INDEX));
+			int selectedIndex = IntegerHelper.toInteger(requestParameterMap.get(clientId + SELECTED_INDEX));
 
 			// If iterating over a data model, then determine the row data and tab associated with the data model
 			// iteration.

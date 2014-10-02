@@ -25,7 +25,7 @@ public class AUITextBoxListItemTag extends AUIComponentELTag {
 
 	@Override
 	public String getRendererType() {
-		return "com.liferay.faces.alloy.renderkit.TextBoxListItemRenderer";
+		return "com.liferay.faces.alloy.renderkit.internal.TextBoxListItemRenderer";
 	}
 
 }

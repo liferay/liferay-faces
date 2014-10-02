@@ -18,7 +18,7 @@ import java.net.URL;
 
 import com.liferay.faces.util.io.TextResource;
 import com.liferay.faces.util.io.TextResourceUtil;
-import com.liferay.faces.util.render.ContentTypes;
+import com.liferay.faces.util.render.internal.ContentTypes;
 import com.liferay.faces.util.template.Template;
 import com.liferay.faces.util.template.TemplateFactory;
 

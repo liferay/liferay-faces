@@ -44,12 +44,12 @@ public class AjaxParametersTest {
 		ajaxParameters = newAjaxParameters(clientId, formClientId, "@form", "@form");
 		Assert.assertTrue(ajaxParameters.getExecute().equals(clientId + StringPool.SPACE + formClientId));
 		Assert.assertTrue(ajaxParameters.getRender().equals(formClientId));
-		
+
 		// Test that @all maps to @all
 		ajaxParameters = newAjaxParameters(clientId, formClientId, "@all", "@all");
 		Assert.assertTrue(ajaxParameters.getExecute().equals("@all"));
 		Assert.assertTrue(ajaxParameters.getRender().equals("@all"));
-		
+
 		// Test that the presence of @all removes all others
 		ajaxParameters = newAjaxParameters(clientId, formClientId, "@this @all @form", "@this @all @form");
 		Assert.assertTrue(ajaxParameters.getExecute().equals("@all"));
@@ -59,7 +59,7 @@ public class AjaxParametersTest {
 		ajaxParameters = newAjaxParameters(clientId, formClientId, "@none", "@none");
 		Assert.assertTrue(ajaxParameters.getExecute().equals(StringPool.BLANK));
 		Assert.assertTrue(ajaxParameters.getRender().equals(StringPool.BLANK));
-		
+
 		// Test that the presence of @non removes all others.
 		ajaxParameters = newAjaxParameters(clientId, formClientId, "@this @none @form", "@this @none @form");
 		Assert.assertTrue(ajaxParameters.getExecute().equals(StringPool.BLANK));

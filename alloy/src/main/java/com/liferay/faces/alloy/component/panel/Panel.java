@@ -17,16 +17,17 @@ import javax.faces.component.FacesComponent;
 
 import com.liferay.faces.util.component.ComponentUtil;
 
+
 /**
- * @author	Bruno Basto
- * @author	Kyle Stiemann
+ * @author  Bruno Basto
+ * @author  Kyle Stiemann
  */
 @FacesComponent(value = Panel.COMPONENT_TYPE)
 public class Panel extends PanelBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.panel.Panel";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.panel.PanelRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.panel.internal.PanelRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-panel alloy-panel-default";
 
 	public Panel() {

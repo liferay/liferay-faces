@@ -36,7 +36,7 @@ public class DataTable extends DataTableBase {
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Table";
 	public static final String HEADER_CLASS = "headerClass";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.datatable.DataTableRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.datatable.internal.DataTableRenderer";
 	public static final String ROW_CLASSES = "rowClasses";
 	public static final String STYLE_CLASS_NAME = "yui3-datatable-table alloy-datatable";
 	public static final String YUI3_DATATABLE_CELL = "yui3-datatable-cell";

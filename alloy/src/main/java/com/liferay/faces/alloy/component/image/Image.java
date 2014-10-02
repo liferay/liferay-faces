@@ -26,7 +26,7 @@ public class Image extends ImageBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.image.Image";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.image.ImageRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.image.internal.ImageRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-image";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Image";

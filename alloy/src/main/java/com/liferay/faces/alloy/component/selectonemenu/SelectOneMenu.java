@@ -30,7 +30,8 @@ public class SelectOneMenu extends SelectOneMenuBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectonemenu.SelectOneMenu";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Menu";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.selectonemenu.SelectOneMenuRenderer";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.alloy.component.selectonemenu.internal.SelectOneMenuRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-select-one-menu";
 
 	public SelectOneMenu() {
