@@ -25,5 +25,18 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class SelectManyMenuBase extends HtmlSelectManyMenu implements Styleable {
+
+	// Protected Enumerations
+	protected enum SelectManyMenuPropertyKeys {
+		responsive
+	}
+
+	public boolean isResponsive() {
+		return (Boolean) getStateHelper().eval(SelectManyMenuPropertyKeys.responsive, true);
+	}
+
+	public void setResponsive(boolean responsive) {
+		getStateHelper().put(SelectManyMenuPropertyKeys.responsive, responsive);
+	}
 }
 //J+

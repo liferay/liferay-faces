@@ -35,6 +35,7 @@ public abstract class InputFileBase extends HtmlInputFile implements Styleable, 
 		fileUploadListener,
 		location,
 		multiple,
+		responsive,
 		showPreview,
 		showProgress
 	}
@@ -87,6 +88,14 @@ public abstract class InputFileBase extends HtmlInputFile implements Styleable, 
 
 	public void setMultiple(String multiple) {
 		getStateHelper().put(InputFilePropertyKeys.multiple, multiple);
+	}
+
+	public boolean isResponsive() {
+		return (Boolean) getStateHelper().eval(InputFilePropertyKeys.responsive, true);
+	}
+
+	public void setResponsive(boolean responsive) {
+		getStateHelper().put(InputFilePropertyKeys.responsive, responsive);
 	}
 
 	public boolean isShowPreview() {

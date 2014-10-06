@@ -25,5 +25,18 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class InputTextBase extends HtmlInputText implements Styleable {
+
+	// Protected Enumerations
+	protected enum InputTextPropertyKeys {
+		responsive
+	}
+
+	public boolean isResponsive() {
+		return (Boolean) getStateHelper().eval(InputTextPropertyKeys.responsive, true);
+	}
+
+	public void setResponsive(boolean responsive) {
+		getStateHelper().put(InputTextPropertyKeys.responsive, responsive);
+	}
 }
 //J+

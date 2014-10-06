@@ -25,5 +25,18 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class InputTextareaBase extends HtmlInputTextarea implements Styleable {
+
+	// Protected Enumerations
+	protected enum InputTextareaPropertyKeys {
+		responsive
+	}
+
+	public boolean isResponsive() {
+		return (Boolean) getStateHelper().eval(InputTextareaPropertyKeys.responsive, true);
+	}
+
+	public void setResponsive(boolean responsive) {
+		getStateHelper().put(InputTextareaPropertyKeys.responsive, responsive);
+	}
 }
 //J+

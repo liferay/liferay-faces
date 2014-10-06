@@ -25,5 +25,18 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class SelectManyListboxBase extends HtmlSelectManyListbox implements Styleable {
+
+	// Protected Enumerations
+	protected enum SelectManyListboxPropertyKeys {
+		responsive
+	}
+
+	public boolean isResponsive() {
+		return (Boolean) getStateHelper().eval(SelectManyListboxPropertyKeys.responsive, true);
+	}
+
+	public void setResponsive(boolean responsive) {
+		getStateHelper().put(SelectManyListboxPropertyKeys.responsive, responsive);
+	}
 }
 //J+

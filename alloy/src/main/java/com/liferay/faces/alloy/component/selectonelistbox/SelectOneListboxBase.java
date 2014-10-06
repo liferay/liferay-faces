@@ -25,5 +25,18 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class SelectOneListboxBase extends HtmlSelectOneListbox implements Styleable {
+
+	// Protected Enumerations
+	protected enum SelectOneListboxPropertyKeys {
+		responsive
+	}
+
+	public boolean isResponsive() {
+		return (Boolean) getStateHelper().eval(SelectOneListboxPropertyKeys.responsive, true);
+	}
+
+	public void setResponsive(boolean responsive) {
+		getStateHelper().put(SelectOneListboxPropertyKeys.responsive, responsive);
+	}
 }
 //J+

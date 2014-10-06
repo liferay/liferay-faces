@@ -25,5 +25,18 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class InputSecretBase extends HtmlInputSecret implements Styleable {
+
+	// Protected Enumerations
+	protected enum InputSecretPropertyKeys {
+		responsive
+	}
+
+	public boolean isResponsive() {
+		return (Boolean) getStateHelper().eval(InputSecretPropertyKeys.responsive, true);
+	}
+
+	public void setResponsive(boolean responsive) {
+		getStateHelper().put(InputSecretPropertyKeys.responsive, responsive);
+	}
 }
 //J+

@@ -383,6 +383,12 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[When true, the component will render different markup depending on the device browsing the page.]]></description>
+			<name>responsive</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
 			<name>role</name>
 			<required>false</required>
@@ -2725,7 +2731,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When true, the component will render an HTML5 <code>&lt;input type="date" /&gt;</code> element on small/mobile displays in order to enable selection of a date with the mobile device's native UI. The default is true.]]></description>
+			<description><![CDATA[When true, the component will render different markup depending on the device browsing the page.]]></description>
 			<name>responsive</name>
 			<required>false</required>
 			<type>boolean</type>
@@ -3045,6 +3051,12 @@ java.lang.Object)</method-signature>
 			<name>requiredMessage</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the component will render different markup depending on the device browsing the page.]]></description>
+			<name>responsive</name>
+			<required>false</required>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
@@ -3409,6 +3421,12 @@ java.lang.Object)</method-signature>
 			<name>requiredMessage</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the component will render different markup depending on the device browsing the page.]]></description>
+			<name>responsive</name>
+			<required>false</required>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
@@ -3835,6 +3853,12 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[When true, the component will render different markup depending on the device browsing the page.]]></description>
+			<name>responsive</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
 			<name>role</name>
 			<required>false</required>
@@ -4087,6 +4111,12 @@ java.lang.Object)</method-signature>
 			<name>requiredMessage</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the component will render different markup depending on the device browsing the page.]]></description>
+			<name>responsive</name>
+			<required>false</required>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
@@ -7116,6 +7146,12 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[When true, the component will render different markup depending on the device browsing the page.]]></description>
+			<name>responsive</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
 			<name>role</name>
 			<required>false</required>
@@ -7388,6 +7424,12 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[When true, the component will render different markup depending on the device browsing the page.]]></description>
+			<name>responsive</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
 			<name>role</name>
 			<required>false</required>
@@ -7654,6 +7696,12 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[When true, the component will render different markup depending on the device browsing the page.]]></description>
+			<name>responsive</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
 			<name>role</name>
 			<required>false</required>
@@ -7906,6 +7954,12 @@ java.lang.Object)</method-signature>
 			<name>requiredMessage</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the component will render different markup depending on the device browsing the page.]]></description>
+			<name>responsive</name>
+			<required>false</required>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>
@@ -8166,6 +8220,12 @@ java.lang.Object)</method-signature>
 			<name>requiredMessage</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When true, the component will render different markup depending on the device browsing the page.]]></description>
+			<name>responsive</name>
+			<required>false</required>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the various WAI-ARIA roles that the element is used for.]]></description>

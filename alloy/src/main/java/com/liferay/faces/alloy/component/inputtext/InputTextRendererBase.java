@@ -25,5 +25,8 @@ import com.liferay.faces.util.render.DelegatingRendererBase;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class InputTextRendererBase extends DelegatingRendererBase {
+
+	// Protected Constants
+	protected static final String RESPONSIVE = "responsive";
 }
 //J+
