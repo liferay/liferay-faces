@@ -39,6 +39,8 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
+import com.liferay.portal.util.PortalUtil;
+
 
 /**
  * @author  Neil Griffin
@@ -516,5 +518,15 @@ public class GenericFacesPortlet extends GenericPortlet {
 		}
 
 		return preserveActionParameters;
+	}
+	
+	@Override
+	protected String getTitle(RenderRequest renderRequest) {
+		try {
+			return PortalUtil.getPortletTitle(renderRequest);
+		}
+		catch (Exception e) {
+			return super.getTitle(renderRequest);
+		}
 	}
 }
