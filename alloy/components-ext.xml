@@ -96,6 +96,304 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="AudioVideoCommon" extendsTags="KeyboardDOMEventsInherited MouseDOMEventsInherited StyleableInherited" generateJava="false" generateTaglibXML="false">
+		<!-- This component exists so that Audio and Video can extend it. It includes all the attributes of -->
+		<!-- Media with <generateJava>false</generateJava>. If Audio and Video extended -->
+		<!-- Media directly, <generateJava> would be true, so getters and setters would be generated -->
+		<!-- unnecessarily. -->
+		<attributes>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[HTML5 passthrough attribute specifying whether the media will begin playing automatically. Defaults to false.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>autoplay</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The content type of the media. This attribute is required when the <code>value</code> attribute is used to specify the media URL. Otherwise, the contentType defaults to to the content type determined by the JSF runtime for the resource.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>contentType</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[HTML5 passthrough attribute specifying whether controls should be rendered for the media. Defaults to false.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>controls</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When true the component will gracefully degrade to a Flash player for older browsers. Defaults to true. Defaults to true.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>degrade</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A context-relative path, resource URL, or FacesResource that can be used to retrieve the Flash player. Defaults to the AlloyUI Flash player. <strong>Note:</strong> The AlloyUI Flash player does not support <code>.ogv</code> or <code>.webm</code> vides.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>flashPlayer</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<defaultValue>"9,0,0,0"</defaultValue>
+				<description>
+					<![CDATA[The version of Flash required to play this media. Defaults to <code>"9,0,0,0"</code>.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>flashPlayerVersion</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[The name of the library which contains the resource.]]></description>
+				<generateJava>false</generateJava>
+				<name>library</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[HTML5 passthrough attribute specifying whether the media will restart after it has completed playing. Defaults to false.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>loop</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[The name of the resource file to be included on the page.]]></description>
+				<generateJava>false</generateJava>
+				<name>name</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[HTML5 passthrough attribute specifying whether the media will be muted initially. Defaults to false.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>muted</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a abort event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onabort</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute after this component loses focus.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onblur</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a canplay event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>oncanplay</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a canplaythrough event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>oncanplaythrough</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a durationchange event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>ondurationchange</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a emptied event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onemptied</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a ended event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onended</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a error event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onerror</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when this component gets focus.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onfocus</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a loadeddata event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onloadeddata</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a loadedmetadata event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onloadedmetadata</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a loadstart event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onloadstart</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a pause event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onpause</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a play event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onplay</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a playing event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onplaying</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a progress event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onprogress</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a ratechange event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onratechange</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a seeked event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onseeked</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a seeking event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onseeking</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a stalled event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onstalled</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a suspend event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onsuspend</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a timeupdate event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>ontimeupdate</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a volumechange event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onvolumechange</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a waiting event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onwaiting</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML5 passthrough attribute specifying how the media should be loaded in the page.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>preload</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A context-relative path, resource URL, <code>FacesResource</code>, or <code>List&lt;FacesResouce&gt;</code> that can be used to retrieve the media(s).]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>value</name>
+				<type>java.lang.Object</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="ButtonCommon" extendsTags="AltInherited StyleableInherited UIComponentBase" generateJava="false"
 		generateTaglibXML="false">
 		<attributes>
@@ -238,8 +536,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="OutputScriptStylesheetCommon" extendsTags="UIOutput" generateJava="false"
-		generateTaglibXML="false">
+	<component name="ResourceCommon" generateJava="false" generateTaglibXML="false">
 		<attributes>
 			<attribute>
 				<description><![CDATA[The name of the library which contains the resource.]]></description>
@@ -315,7 +612,7 @@
 		<!-- This component exists so that InputDate and InputTime can extend it. It includes all the attributes of -->
 		<!-- InputDateTime with <generateJava>false</generateJava>. If InputDate and InputTime extended -->
 		<!-- InputDateTime directly, <generateJava> would be true, so getters and setters would be generated -->
-		<!-- incorrectly. -->
+		<!-- unnecessarily. -->
 		<attributes>
 			<attribute>
 				<description>
@@ -434,6 +731,20 @@
 					void tabExpandListener(com.liferay.faces.alloy.component.tab.TabExpandEvent)
 				</method-signature>
 				<type>javax.el.MethodExpression</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="Audio" extendsTags="AudioVideoCommon" parentClass="com.liferay.faces.alloy.component.media.Media" rendererParentClass="com.liferay.faces.alloy.component.media.internal.MediaRenderer">
+		<description>
+			<![CDATA[Audio is a UIComponent that renders a <code>&lt;div&gt;</code> that contains an HTML5 <code>&lt;audio&gt;</code> element. It also supports graceful degradation for older browsers using the Flash audio player. For degradation, if no audio is specified in the <code>&lt;alloy:audio&gt;</code> tag, then the audio from the first child <code>&lt;alloy:resource&gt;</code> tag is used.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[HTML5 passthrough attribute specifying the initial volume of the player.]]>
+				</description>
+				<name>volume</name>
+				<type>java.lang.String</type>
 			</attribute>
 		</attributes>
 	</component>
@@ -909,7 +1220,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Fieldset" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIPanel">
+	<component name="Fieldset" extendsTags="KeyboardDOMEvents MouseDOMEvents Styleable UIComponentBase" parentClass="javax.faces.component.UIPanel">
 		<description>
 			<![CDATA[Fieldset is a UIPanel component that renders a &lt;fieldset&gt; element in order to group form elements.]]>
 		</description>
@@ -927,76 +1238,6 @@
 					<![CDATA[The text value for the rendered &lt;legend&gt; element.]]>
 				</description>
 				<name>legend</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute when this component is clicked.]]>
-				</description>
-				<name>onclick</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute when a double click event occurs.]]>
-				</description>
-				<name>ondblclick</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute when a keydown event occurs.]]>
-				</description>
-				<name>onkeydown</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute when a keypress event occurs.]]>
-				</description>
-				<name>onkeypress</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute when a keyup event occurs.]]>
-				</description>
-				<name>onkeyup</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute when a mousedown event occurs.]]>
-				</description>
-				<name>onmousedown</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute when a mousemove event occurs.]]>
-				</description>
-				<name>onmousemove</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute when a mouseout event occurs.]]>
-				</description>
-				<name>onmouseout</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute when a mouseover event occurs.]]>
-				</description>
-				<name>onmouseover</name>
-				<type>java.lang.String</type>
-			</attribute>
-			<attribute>
-				<description>
-					<![CDATA[Javascript to execute when a mouseup event occurs.]]>
-				</description>
-				<name>onmouseup</name>
 				<type>java.lang.String</type>
 			</attribute>
 		</attributes>
@@ -1653,6 +1894,254 @@
 			<![CDATA[Link is a UIOutcomeTarget component that renders an <code>&lt;a&gt;</code> element (hyperlink). Since it extends HtmlLink, it supports all the features of h:link.]]>
 		</description>
 	</component>
+	<component name="Media" extendsTags="KeyboardDOMEvents MouseDOMEvents Styleable ResourceCommon" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[HTML5 passthrough attribute specifying whether the media will begin playing automatically. Defaults to false.]]>
+				</description>
+				<name>autoplay</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The content type of the media. This attribute is required when the <code>value</code> attribute is used to specify the media URL. Otherwise, the contentType defaults to to the content type determined by the JSF runtime for the resource.]]>
+				</description>
+				<name>contentType</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[HTML5 passthrough attribute specifying whether controls should be rendered for the media. Defaults to false.]]>
+				</description>
+				<name>controls</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When true the component will gracefully degrade to a Flash player for older browsers. Defaults to true. Defaults to true.]]>
+				</description>
+				<name>degrade</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A context-relative path, resource URL, or FacesResource that can be used to retrieve the Flash player. Defaults to the AlloyUI Flash player. <strong>Note:</strong> The AlloyUI Flash player does not support <code>.ogv</code> or <code>.webm</code> vides.]]>
+				</description>
+				<name>flashPlayer</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<defaultValue>"9,0,0,0"</defaultValue>
+				<description>
+					<![CDATA[The version of Flash required to play this media. Defaults to <code>"9,0,0,0"</code>.]]>
+				</description>
+				<name>flashPlayerVersion</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[HTML5 passthrough attribute specifying whether the media will restart after it has completed playing. Defaults to false.]]>
+				</description>
+				<name>loop</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[HTML5 passthrough attribute specifying whether the media will be muted initially. Defaults to false.]]>
+				</description>
+				<name>muted</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a abort event occurs.]]>
+				</description>
+				<name>onabort</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute after this component loses focus.]]>
+				</description>
+				<name>onblur</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a canplay event occurs.]]>
+				</description>
+				<name>oncanplay</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a canplaythrough event occurs.]]>
+				</description>
+				<name>oncanplaythrough</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a durationchange event occurs.]]>
+				</description>
+				<name>ondurationchange</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a emptied event occurs.]]>
+				</description>
+				<name>onemptied</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a ended event occurs.]]>
+				</description>
+				<name>onended</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a error event occurs.]]>
+				</description>
+				<name>onerror</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when this component gets focus.]]>
+				</description>
+				<name>onfocus</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a loadeddata event occurs.]]>
+				</description>
+				<name>onloadeddata</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a loadedmetadata event occurs.]]>
+				</description>
+				<name>onloadedmetadata</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a loadstart event occurs.]]>
+				</description>
+				<name>onloadstart</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a pause event occurs.]]>
+				</description>
+				<name>onpause</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a play event occurs.]]>
+				</description>
+				<name>onplay</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a playing event occurs.]]>
+				</description>
+				<name>onplaying</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a progress event occurs.]]>
+				</description>
+				<name>onprogress</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a ratechange event occurs.]]>
+				</description>
+				<name>onratechange</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a seeked event occurs.]]>
+				</description>
+				<name>onseeked</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a seeking event occurs.]]>
+				</description>
+				<name>onseeking</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a stalled event occurs.]]>
+				</description>
+				<name>onstalled</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a suspend event occurs.]]>
+				</description>
+				<name>onsuspend</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a timeupdate event occurs.]]>
+				</description>
+				<name>ontimeupdate</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a volumechange event occurs.]]>
+				</description>
+				<name>onvolumechange</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a waiting event occurs.]]>
+				</description>
+				<name>onwaiting</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[HTML5 passthrough attribute specifying how the media should be loaded in the page.]]>
+				</description>
+				<name>preload</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A context-relative path, resource URL, <code>FacesResource</code>, or <code>List&lt;FacesResouce&gt;</code> that can be used to retrieve the media(s).]]>
+				</description>
+				<name>value</name>
+				<type>java.lang.Object</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="Message" extendsTags="MessageCommon" parentClass="javax.faces.component.html.HtmlMessage"
 		rendererParentClass="com.liferay.faces.util.render.internal.DelegatingRendererBase">
 		<description>
@@ -1746,7 +2235,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="OutputScript" extendsTags="OutputScriptStylesheetCommon"
+	<component name="OutputScript" extendsTags="UIOutput ResourceCommon"
 		parentClass="javax.faces.component.UIOutput" styleable="false"
 		rendererParentClass="com.liferay.faces.alloy.component.outputscriptstylesheet.internal.OutputScriptStylesheetRendererBase">
 		<description>
@@ -1765,7 +2254,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="OutputStylesheet" extendsTags="OutputScriptStylesheetCommon"
+	<component name="OutputStylesheet" extendsTags="UIOutput ResourceCommon"
 		parentClass="javax.faces.component.UIOutput" styleable="false"
 		rendererParentClass="com.liferay.faces.alloy.component.outputscriptstylesheet.internal.OutputScriptStylesheetRendererBase">
 		<description>
@@ -1983,6 +2472,30 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="Resource" styleable="false" generateRenderer="false">
+		<description><![CDATA[A generic resource tag for use with <code>&lt;alloy:audio&gt;</code> and <code>&lt;alloy:video&gt;</code>.]]></description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The content type of the resource.]]>
+				</description>
+				<name>contentType</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[The name of the library which contains the resource.]]></description>
+				<name>library</name>
+				<required>true</required>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[The name of the resource file to be included on the page.]]></description>
+				<name>name</name>
+				<required>true</required>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component> 
 	<component name="Row" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIPanel">
 		<description>
 			<![CDATA[Row is a UIPanel component that renders a <code>&lt;div&gt;</code> and is designed to be used in conjunction with alloy:column child component tags.]]>
@@ -2248,6 +2761,34 @@
 				</description>
 				<name>maxFileSize</name>
 				<type>java.lang.Long</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="Video" extendsTags="AudioVideoCommon" parentClass="com.liferay.faces.alloy.component.media.Media" rendererParentClass="com.liferay.faces.alloy.component.media.internal.MediaRenderer">
+		<description>
+			<![CDATA[Video is a UIComponent that renders a <code>&lt;div&gt;</code> that contains an HTML5 <code>&lt;video&gt;</code> element. It also supports graceful degradation for older browsers using the Flash video player. For degradation, if no video is specified in the <code>&lt;alloy:video&gt;</code> tag, then the video from the first child <code>&lt;alloy:resource&gt;</code> tag is used.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[The height (in pixels) of the video, this attribute will also be applied to the Flash player's <code>&lt;object&gt;</code> tag.]]>
+				</description>
+				<name>height</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A context-relative path, resource URL, or <code>FacesResource</code> that can be used to retrieve the poster image.]]>
+				</description>
+				<name>poster</name>
+				<type>java.lang.Object</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The width (in pixels) of the video, this attribute will also be applied to the Flash player's <code>&lt;object&gt;</code> tag.]]>
+				</description>
+				<name>width</name>
+				<type>java.lang.String</type>
 			</attribute>
 		</attributes>
 	</component>
