@@ -216,6 +216,12 @@ div.yui3-menu>div.yui3-menu-content>ul div.yui3-menu>div.yui3-menu-content>ul {
 .yui3-menu-horizontal div.yui3-menu-content {
 	border: 0;
 }
+ 
+div.yui3-splitbuttonnav .yui3-menu-content ul {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
 
 div.yui3-splitbuttonnav .yui3-menu-content li {
 	border: 0;
