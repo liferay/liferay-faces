@@ -37,6 +37,7 @@ public abstract class InputFileRendererBase extends DelegatingAlloyRendererBase 
 	protected static final String FILE_UPLOAD_LISTENER = "fileUploadListener";
 	protected static final String LOCATION = "location";
 	protected static final String MULTIPLE = "multiple";
+	protected static final String RESPONSIVE = "responsive";
 	protected static final String SHOW_PREVIEW = "showPreview";
 	protected static final String SHOW_PROGRESS = "showProgress";
 

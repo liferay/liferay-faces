@@ -17,7 +17,10 @@ import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -63,6 +66,18 @@ public class SelectManyListbox extends SelectManyListboxBase {
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
+		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+				BrowserSnifferFactory.class);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+
+		if (isResponsive() && browserSniffer.isMobile()) {
+			styleClass = ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME, "input-medium");
+		}
+		else {
+			styleClass = ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
+		}
+
+		return styleClass;
 	}
 }

@@ -43,6 +43,7 @@ public abstract class AutoCompleteBase extends InputText implements Styleable, C
 		listItemRequired,
 		maxItems,
 		minChars,
+		responsive,
 		serverCustomFilter,
 		serverFilterType,
 		tabSelect,
@@ -161,6 +162,14 @@ public abstract class AutoCompleteBase extends InputText implements Styleable, C
 
 	public void setMinChars(Integer minChars) {
 		getStateHelper().put(AutoCompletePropertyKeys.minChars, minChars);
+	}
+
+	public boolean isResponsive() {
+		return (Boolean) getStateHelper().eval(AutoCompletePropertyKeys.responsive, true);
+	}
+
+	public void setResponsive(boolean responsive) {
+		getStateHelper().put(AutoCompletePropertyKeys.responsive, responsive);
 	}
 
 	public javax.el.MethodExpression getServerCustomFilter() {

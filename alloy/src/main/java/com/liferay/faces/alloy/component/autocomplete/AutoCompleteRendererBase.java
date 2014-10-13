@@ -42,6 +42,7 @@ public abstract class AutoCompleteRendererBase extends DelegatingAlloyRendererBa
 	protected static final String MIN_QUERY_LENGTH = "minQueryLength";
 	protected static final String QUERY_DELAY = "queryDelay";
 	protected static final String QUERY_DELIMITER = "queryDelimiter";
+	protected static final String RESPONSIVE = "responsive";
 	protected static final String RESULT_FILTERS = "resultFilters";
 	protected static final String RESULT_HIGHLIGHTER = "resultHighlighter";
 	protected static final String SCROLL_INTO_VIEW = "scrollIntoView";

@@ -25,5 +25,8 @@ import com.liferay.faces.util.render.DelegatingRendererBase;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class SelectManyCheckboxRendererBase extends DelegatingRendererBase {
+
+	// Protected Constants
+	protected static final String RESPONSIVE = "responsive";
 }
 //J+
