@@ -8,7 +8,7 @@
 	<c:set value="#{selectedComponent.useCaseName}" var="selectedComponentUseCaseName" />
 	<h:outputStylesheet name="showcase.css" library="css" />
 	<alloy:row>
-		<alloy:column styleClass="showcase-nav-col" width="#{browserSniffer.ipad ? '30' : '20'}">
+		<alloy:column styleClass="showcase-nav-col" width="#{browserSniffer.ipad ? '30' : '25'}">
 			<alloy:link outcome="home">
 				<alloy:image library="images" name="liferay-faces-logo-nav.png" styleClass="logo" />
 			</alloy:link>
@@ -51,7 +51,7 @@
 				</alloy:tab>
 			</alloy:accordion>
 		</alloy:column>
-		<alloy:column style="margin-left: 4px;" width="#{browserSniffer.ipad ? '70' : '80'}">
+		<alloy:column style="margin-left: 4px;" width="#{browserSniffer.ipad ? '70' : '75'}">
 			<alloy:panelGroup layout="block" styleClass="showcase-container">
 				<ui:insert name="content" />
 			</alloy:panelGroup>
