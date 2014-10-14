@@ -7,7 +7,8 @@
 			<alloy:outputLabel styleClass="alloy-output-label" for="inputSourceCode" value="#{i18n['source-code']}" />
 			<alloy:inputSourceCode id="inputSourceCode" height="100" mode="xml"
 				rendered="#{showcaseModelBean.selectedComponent.rendered}"
-				required="#{showcaseModelBean.selectedComponent.required}" value="#{inputSourceCodeModelBean.sourceText}" />
+				required="#{showcaseModelBean.selectedComponent.required}" width="100%"
+				value="#{inputSourceCodeModelBean.sourceText}" />
 			<alloy:message for="inputSourceCode" />
 			<hr />
 			<alloy:commandButton action="#{inputSourceCodeBackingBean.submit}" value="#{i18n['submit']}">

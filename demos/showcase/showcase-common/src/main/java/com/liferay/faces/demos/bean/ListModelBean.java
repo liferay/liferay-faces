@@ -87,6 +87,7 @@ public class ListModelBean {
 		showcaseCategoryList.add("multimedia");
 		showcaseCategoryList.add("output");
 		showcaseCategoryList.add("panel");
+		showcaseCategoryList.add("select");
 
 		if (LIFERAY_PORTAL_DETECTED) {
 			showcaseCategoryList.add("portal");
@@ -96,7 +97,6 @@ public class ListModelBean {
 			showcaseCategoryList.add("portlet");
 		}
 
-		showcaseCategoryList.add("select");
 		showcaseCategoryList.add("jstl");
 		showcaseCategoryList.add("facescore");
 		showcaseCategoryList.add("facelets");

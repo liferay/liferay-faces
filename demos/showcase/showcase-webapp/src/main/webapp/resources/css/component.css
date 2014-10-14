@@ -1,3 +1,7 @@
+.aui .side-by-side .alloy-auto-complete, .aui .side-by-side .alloy-input-date input, .aui .side-by-side .alloy-input-text, .aui .side-by-side .alloy-input-secret, .aui .side-by-side .alloy-input-time input, .aui .side-by-side .alloy-input-textarea, .aui .side-by-side .alloy-select-one-menu, .aui .side-by-side .alloy-select-many-listbox, .aui .side-by-side .alloy-select-many-menu, .aui .side-by-side .alloy-select-one-listbox {
+	width: 150px;
+}
+
 .aui .alloy-tab-view .tab img {
 	height: 24px;
 }
