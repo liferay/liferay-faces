@@ -20,7 +20,7 @@
 	<ui:define name="col2">
 		<alloy:form>
 			<showcase:example description="#{i18n['alloy-inputtextarea-size-example-2']}" number="2">
-				<alloy:inputTextarea id="textarea" value="#{inputTextModelBean.text}" style="width: 200px; height: 150px;" />
+				<alloy:inputTextarea id="textarea" value="#{inputTextModelBean.text}" style="width: 150px; height: 150px;" />
 				<hr />
 				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />

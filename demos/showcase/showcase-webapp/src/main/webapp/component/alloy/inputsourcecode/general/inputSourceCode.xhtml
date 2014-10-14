@@ -13,7 +13,8 @@
 			<alloy:field id="componentField" label="#{i18n['source-code']}">
 				<alloy:inputSourceCode id="inputSourceCode" height="100" mode="#{inputSourceCodeModelBean.mode}"
 					rendered="#{showcaseModelBean.selectedComponent.rendered}"
-					required="#{showcaseModelBean.selectedComponent.required}" value="#{inputSourceCodeModelBean.sourceCode}" />
+					required="#{showcaseModelBean.selectedComponent.required}" width="100%"
+					value="#{inputSourceCodeModelBean.sourceCode}" />
 				<alloy:message for="inputSourceCode" />
 			</alloy:field>
 			<hr />
