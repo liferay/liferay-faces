@@ -99,7 +99,11 @@ public class PopoverRenderer extends PopoverRendererBase {
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
 		String for_ = popover.getFor();
-		encodeClientId(responseWriter, NODE, for_, popover, true);
+		boolean noOnAttributes = AlloyRendererUtil.encodeClientIdAndCheck(responseWriter, NODE, for_, popover, true);
+		if (noOnAttributes) {
+			logger.warn(popover.getClientKey() + " is *for* " + for_ + ". But, " + for_ + " has no onclick or onmousover attributes.");
+		}
+		
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 	}
 

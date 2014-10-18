@@ -19,6 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.alloy.component.button.Button;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
@@ -67,6 +68,35 @@ import com.liferay.faces.util.render.internal.RendererUtil;
 		}
 
 		encodeClientId(responseWriter, attributeName, escapedClientId, first);
+	}
+	
+	public static boolean encodeClientIdAndCheck(ResponseWriter responseWriter, String attributeName, String clientId,
+		UIComponent uiComponent, boolean first) throws IOException {
+
+		UIComponent forComponent = uiComponent.findComponent(clientId);
+		String escapedClientId = clientId;
+		boolean noOnAttributes = true;
+
+		if (forComponent != null) {
+			
+			if (forComponent instanceof Button) {
+				Button button = (Button) forComponent;
+				String onclick = button.getOnclick();
+				String onmouseover = button.getOnmouseover();
+				if (onclick == null && onmouseover == null) {
+					noOnAttributes = true;
+				} else {
+					noOnAttributes = false;
+				}
+			}
+			
+			escapedClientId = forComponent.getClientId();
+			
+		}
+
+		encodeClientId(responseWriter, attributeName, escapedClientId, first);
+		
+		return noOnAttributes;
 	}
 
 	/* package-private */ static void encodeEventCallback(ResponseWriter responseWriter, String varName, String methodName,
