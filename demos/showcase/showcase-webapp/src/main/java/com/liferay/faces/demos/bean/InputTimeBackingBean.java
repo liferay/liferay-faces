@@ -46,7 +46,7 @@ public class InputTimeBackingBean {
 
 		String selectedTimeFormatted = simpleDateFormat.format(selectedTime);
 		FacesMessage facesMessage = new FacesMessage("Received 'timeSelectEvent' for date with value '" +
-				selectedTimeFormatted + "' in the " + timeSelectEvent.getPhaseId().getName() + " phase.");
+				selectedTimeFormatted + "' in the " + timeSelectEvent.getPhaseId().toString() + " phase.");
 		facesContext.addMessage(null, facesMessage);
 	}
 }

@@ -35,7 +35,7 @@ public class InputDateBackingBean {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		Date selectedDate = dateSelectEvent.getDate();
 		FacesMessage facesMessage = new FacesMessage("Received 'dateSelectEvent' for date with value '" + selectedDate +
-				"' in the " + dateSelectEvent.getPhaseId().getName() + " phase.");
+				"' in the " + dateSelectEvent.getPhaseId().toString() + " phase.");
 		facesContext.addMessage(null, facesMessage);
 	}
 }

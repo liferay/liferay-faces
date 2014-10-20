@@ -78,7 +78,7 @@ public class InputFileBackingBean {
 		uploadedFiles.add(uploadedFile);
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		FacesMessage facesMessage = new FacesMessage("Received fileUploadEvent for file named '" +  uploadedFile.getName() + "' in the " +
-				fileUploadEvent.getPhaseId().getName() + " phase.");
+				fileUploadEvent.getPhaseId().toString() + " phase.");
 		facesContext.addMessage(null, facesMessage);
 		logger.debug("Received fileName=[{0}] absolutePath=[{1}]", uploadedFile.getName(),
 			uploadedFile.getAbsolutePath());
