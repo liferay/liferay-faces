@@ -71,12 +71,11 @@
 		<module>alloy</module>
 		<module>bridge-api</module>
 		<module>bridge-impl</module>
-		<module>cdi-compat</module>
 		<module>portal</module>
 		<module>reslib</module>
+		<module>support</module>
 		<module>demos</module>
 		<module>issues</module>
-		<module>support</module>
 		<module>test</module>
 		<module>doc</module>
 	</modules>
@@ -430,6 +429,19 @@
 									</pluginExecutionFilter>
 									<action>
 										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.portals.pluto</groupId>
+										<artifactId>maven-pluto-plugin</artifactId>
+										<versionRange>[2.0.3,)</versionRange>
+										<goals>
+											<goal>assemble</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
