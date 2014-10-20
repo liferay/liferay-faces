@@ -4,7 +4,7 @@
 	template="/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
-		<!-- Example 1: Styling sub-menus via the label attribute -->
+		<!-- Example 1: Creating menus via the menu tag -->
 		<alloy:form>
 			<showcase:example description="#{i18n['alloy-button-menu-example-1']}" number="1">
 				<alloy:button includeViewParams="true">
@@ -15,22 +15,6 @@
 							<alloy:icon name="pencil" />
 							<alloy:outputText value="#{i18n['edit']}" />
 						</alloy:link>
-						<hr />
-						<alloy:menu label="#{i18n['purchases']}">
-							<alloy:menu label="#{i18n['online']}">
-								<alloy:commandLink>
-									<alloy:icon name="folder-open" />
-									<alloy:outputText value="#{i18n['open-orders']}" />
-								</alloy:commandLink>
-								<alloy:commandLink>
-									<alloy:icon name="folder-close" />
-									<alloy:outputText value="#{i18n['completed-orders']}" />
-								</alloy:commandLink>
-							</alloy:menu>
-							<alloy:commandLink>
-								<alloy:outputText value="#{i18n['in-store']}" />
-							</alloy:commandLink>
-						</alloy:menu>
 						<hr />
 						<alloy:commandLink>
 							<alloy:icon name="ok-sign" />
@@ -53,67 +37,9 @@
 	</ui:define>
 
 	<ui:define name="col2">
-		<!-- Example 2: Styling sub-menus via the f:facet tag -->
+		<!-- Example 2: Styling the button with f:facet -->
 		<alloy:form>
 			<showcase:example description="#{i18n['alloy-button-menu-example-2']}" number="2">
-				<alloy:button includeViewParams="true">
-					<alloy:icon name="user" />
-					<alloy:outputText value="#{i18n['user']}" />
-					<alloy:menu>
-						<alloy:link includeViewParams="true">
-							<alloy:icon name="pencil" />
-							<alloy:outputText value="#{i18n['edit']}" />
-						</alloy:link>
-						<hr />
-						<alloy:menu>
-							<f:facet name="label">
-								<alloy:icon name="shopping-cart" />
-								<alloy:outputText value="#{i18n['purchases']}" />
-							</f:facet>
-							<alloy:menu>
-								<f:facet name="label">
-									<alloy:icon name="signal" />
-									<alloy:outputText value="#{i18n['online']}" />
-								</f:facet>
-								<alloy:commandLink>
-									<alloy:icon name="folder-open" />
-									<alloy:outputText value="#{i18n['open-orders']}" />
-								</alloy:commandLink>
-								<alloy:commandLink>
-									<alloy:icon name="folder-close" />
-									<alloy:outputText value="#{i18n['completed-orders']}" />
-								</alloy:commandLink>
-							</alloy:menu>
-							<alloy:commandLink>
-								<alloy:icon name="road" />
-								<alloy:outputText value="#{i18n['in-store']}" />
-							</alloy:commandLink>
-						</alloy:menu>
-						<hr />
-						<alloy:commandLink>
-							<alloy:icon name="ok-sign" />
-							<alloy:outputText value="#{i18n['enable']}" />
-						</alloy:commandLink>
-						<alloy:commandLink>
-							<alloy:icon name="minus-sign" />
-							<alloy:outputText value="#{i18n['disable']}" />
-						</alloy:commandLink>
-						<hr />
-						<alloy:commandLink>
-							<alloy:icon name="trash" />
-							<alloy:outputText value="#{i18n['delete']}" />
-						</alloy:commandLink>
-					</alloy:menu>
-				</alloy:button>
-				<div style="clear: both;" />
-			</showcase:example>
-		</alloy:form>
-	</ui:define>
-
-	<ui:define name="col3">
-		<!-- Example 3: Styling the button with f:facet -->
-		<alloy:form>
-			<showcase:example description="#{i18n['alloy-button-menu-example-3']}" number="3">
 				<alloy:button includeViewParams="true">
 					<alloy:icon name="user" />
 					<alloy:outputText value="#{i18n['user']}" />

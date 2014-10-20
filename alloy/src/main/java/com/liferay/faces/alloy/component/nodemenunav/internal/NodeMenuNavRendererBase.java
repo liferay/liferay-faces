@@ -281,21 +281,16 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 
 		for (UIComponent child : children) {
 
-			if (child instanceof Menu) {
-				encodeMenuRecurse(child, responseWriter, disabled, styleClass, optionsDivId, (depth + 1), facesContext);
-			}
-			else {
-				responseWriter.startElement(StringPool.LI, uiComponent);
-				responseWriter.writeAttribute(StringPool.CLASS, "yui3-menuitem", StringPool.CLASS);
+			responseWriter.startElement(StringPool.LI, uiComponent);
+			responseWriter.writeAttribute(StringPool.CLASS, "yui3-menuitem", StringPool.CLASS);
 
-				ResponseWriter originalResponseWriter = facesContext.getResponseWriter();
-				DelegationResponseWriter delegationResponseWriter = new NodeMenuNavMenuResponseWriter(
-						originalResponseWriter);
-				facesContext.setResponseWriter(delegationResponseWriter);
-				child.encodeAll(facesContext);
-				facesContext.setResponseWriter(originalResponseWriter);
-				responseWriter.endElement(StringPool.LI);
-			}
+			ResponseWriter originalResponseWriter = facesContext.getResponseWriter();
+			DelegationResponseWriter delegationResponseWriter = new NodeMenuNavMenuResponseWriter(
+					originalResponseWriter);
+			facesContext.setResponseWriter(delegationResponseWriter);
+			child.encodeAll(facesContext);
+			facesContext.setResponseWriter(originalResponseWriter);
+			responseWriter.endElement(StringPool.LI);
 		}
 
 		responseWriter.endElement(StringPool.UL);
