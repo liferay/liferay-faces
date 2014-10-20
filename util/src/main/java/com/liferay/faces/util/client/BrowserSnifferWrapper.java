@@ -21,140 +21,140 @@ import javax.faces.FacesWrapper;
  */
 public abstract class BrowserSnifferWrapper implements BrowserSniffer, FacesWrapper<BrowserSniffer> {
 
-	@Override
+	// Java 6: @Override
 	public boolean acceptsGzip() {
 		return getWrapped().acceptsGzip();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isIeOnWin32() {
 		return getWrapped().isIeOnWin32();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isIeOnWin64() {
 		return getWrapped().isIeOnWin64();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isMozilla() {
 		return getWrapped().isMozilla();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isOpera() {
 		return getWrapped().isOpera();
 	}
 
-	@Override
+	// Java 6: @Override
 	public String getBrowserId() {
 		return getWrapped().getBrowserId();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isMac() {
 		return getWrapped().isMac();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isAndroid() {
 		return getWrapped().isAndroid();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isChrome() {
 		return getWrapped().isChrome();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isIe() {
 		return getWrapped().isIe();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isIphone() {
 		return getWrapped().isIphone();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isMobile() {
 		return getWrapped().isMobile();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isRtf() {
 		return getWrapped().isRtf();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isSafari() {
 		return getWrapped().isSafari();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isWapXhtml() {
 		return getWrapped().isWapXhtml();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isWml() {
 		return getWrapped().isWml();
 	}
 
-	@Override
+	// Java 6: @Override
 	public float getMajorVersion() {
 		return getWrapped().getMajorVersion();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isSun() {
 		return getWrapped().isSun();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isGecko() {
 		return getWrapped().isGecko();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isWap() {
 		return getWrapped().isWap();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isAir() {
 		return getWrapped().isAir();
 	}
 
-	@Override
+	// Java 6: @Override
 	public String getRevision() {
 		return getWrapped().getRevision();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isWindows() {
 		return getWrapped().isWindows();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isWebKit() {
 		return getWrapped().isWebKit();
 	}
 
-	@Override
+	// Java 6: @Override
 	public String getVersion() {
 		return getWrapped().getVersion();
 	}
 
-	@Override
+	// Java 6: @Override
 	public abstract BrowserSniffer getWrapped();
 
-	@Override
+	// Java 6: @Override
 	public boolean isFirefox() {
 		return getWrapped().isFirefox();
 	}
 
-	@Override
+	// Java 6: @Override
 	public boolean isLinux() {
 		return getWrapped().isLinux();
 	}

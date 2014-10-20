@@ -22,7 +22,7 @@ public class RichTextCreoleImpl extends RichTextBaseImpl {
 		super(value);
 	}
 
-	@Override
+	// Java 6: @Override
 	public Type getType() {
 		return Type.CREOLE;
 	}

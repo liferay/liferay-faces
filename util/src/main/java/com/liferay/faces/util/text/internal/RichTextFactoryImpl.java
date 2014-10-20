@@ -41,7 +41,7 @@ public class RichTextFactoryImpl extends RichTextFactory {
 		}
 	}
 
-	@Override
+	// Java 6: @Override
 	public RichTextFactory getWrapped() {
 
 		// Since this is the factory instance provided by default, it will never wrap another factory.
