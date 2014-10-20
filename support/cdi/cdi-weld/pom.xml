@@ -5,26 +5,29 @@
 		<groupId>com.liferay.faces</groupId>
 		<artifactId>liferay-faces</artifactId>
 		<version>3.1.5-ga6-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>../../../pom.xml</relativePath>
 	</parent>
-	<artifactId>liferay-faces-cdi-compat</artifactId>
-	<name>Liferay Faces CDI Compat</name>
-	<description>Compatibility Library for CDI Portlet Bridge</description>
+	<artifactId>liferay-faces-cdi-weld</artifactId>
+	<name>Liferay Faces CDI Weld</name>
+	<description>JSF Portlet Compatibility for JBoss Weld</description>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.liferay.faces</groupId>
-			<artifactId>liferay-faces-bridge-impl</artifactId>
-			<version>${project.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>com.liferay.faces</groupId>
 			<artifactId>liferay-faces-util</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.liferay.cdi</groupId>
+			<artifactId>cdi-portlet-bridge-shared</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>javax.faces-api</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
+			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.portlet</groupId>
