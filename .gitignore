@@ -2,10 +2,11 @@
 .project
 .settings
 doc/src/main/docbook/style
+overlays
 target
 rebel.xml
 *.sh
-.idea/*
+.idea
 *.iml
 faces-config.pageflow
 nb-configuration.xml
