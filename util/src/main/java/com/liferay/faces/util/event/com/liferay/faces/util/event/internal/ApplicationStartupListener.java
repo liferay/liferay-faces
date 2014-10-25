@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.event;
+package com.liferay.faces.util.event.com.liferay.faces.util.event.internal;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,6 +32,7 @@ import com.liferay.faces.util.config.ApplicationConfigInitializerImpl;
 import com.liferay.faces.util.config.ConfiguredElement;
 import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.config.WebConfigParam;
+import com.liferay.faces.util.event.PostConstructApplicationConfigEvent;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.BooleanHelper;
 
