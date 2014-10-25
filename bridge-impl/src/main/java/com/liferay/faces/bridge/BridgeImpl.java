@@ -34,11 +34,8 @@ import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 import javax.portlet.faces.BridgeUninitializedException;
 
-import com.liferay.faces.bridge.config.PortletConfigParam;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
-import com.liferay.faces.util.config.ApplicationConfig;
-import com.liferay.faces.util.config.ApplicationConfigUtil;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -55,7 +52,6 @@ public class BridgeImpl implements Bridge {
 
 	// Private Data Members
 	private boolean initialized = false;
-	private BridgePhaseFactory bridgePhaseFactory;
 	private PortletConfig portletConfig;
 
 	public void destroy() {
@@ -81,6 +77,8 @@ public class BridgeImpl implements Bridge {
 		checkNull(actionRequest, actionResponse);
 
 		if (initialized) {
+			BridgePhaseFactory bridgePhaseFactory = (BridgePhaseFactory) FactoryExtensionFinder.getFactory(
+					BridgePhaseFactory.class);
 			BridgePhase bridgePhase = bridgePhaseFactory.getBridgeActionPhase(actionRequest, actionResponse,
 					portletConfig);
 			bridgePhase.execute();
@@ -96,6 +94,8 @@ public class BridgeImpl implements Bridge {
 		checkNull(eventRequest, eventResponse);
 
 		if (initialized) {
+			BridgePhaseFactory bridgePhaseFactory = (BridgePhaseFactory) FactoryExtensionFinder.getFactory(
+					BridgePhaseFactory.class);
 			BridgePhase bridgePhase = bridgePhaseFactory.getBridgeEventPhase(eventRequest, eventResponse,
 					portletConfig);
 			bridgePhase.execute();
@@ -112,6 +112,8 @@ public class BridgeImpl implements Bridge {
 		checkNull(renderRequest, renderResponse);
 
 		if (initialized) {
+			BridgePhaseFactory bridgePhaseFactory = (BridgePhaseFactory) FactoryExtensionFinder.getFactory(
+					BridgePhaseFactory.class);
 			BridgePhase bridgePhase = bridgePhaseFactory.getBridgeRenderPhase(renderRequest, renderResponse,
 					portletConfig);
 			bridgePhase.execute();
@@ -128,6 +130,8 @@ public class BridgeImpl implements Bridge {
 		checkNull(resourceRequest, resourceResponse);
 
 		if (initialized) {
+			BridgePhaseFactory bridgePhaseFactory = (BridgePhaseFactory) FactoryExtensionFinder.getFactory(
+					BridgePhaseFactory.class);
 			BridgePhase bridgePhase = bridgePhaseFactory.getBridgeResourcePhase(resourceRequest, resourceResponse,
 					portletConfig);
 			bridgePhase.execute();
@@ -156,19 +160,6 @@ public class BridgeImpl implements Bridge {
 		System.out.println(logMessage.toString());
 		this.initialized = true;
 		this.portletConfig = portletConfig;
-
-		ApplicationConfig applicationConfig = ApplicationConfigUtil.getApplicationConfig();
-
-		if (applicationConfig == null) {
-
-			// Determine whether or not entities should be resolved. Due to slow performance in the
-			// SAXEventHandler.resolveEntity(String, String) method it's best to set the default value of this to false.
-			boolean resolveEntities = PortletConfigParam.ResolveXMLEntities.getBooleanValue(portletConfig);
-
-			ApplicationConfigUtil.initializeApplicationConfig(resolveEntities);
-		}
-
-		this.bridgePhaseFactory = (BridgePhaseFactory) FactoryExtensionFinder.getFactory(BridgePhaseFactory.class);
 	}
 
 	protected void checkNull(PortletRequest portletRequest, PortletResponse portletResponse) {

@@ -33,9 +33,11 @@ public class ApplicationConfigInitializerImpl implements ApplicationConfigInitia
 	private static final Logger logger = LoggerFactory.getLogger(ApplicationConfigInitializerImpl.class);
 
 	// Private Data Members
+	private String contextPath;
 	private boolean resolveEntities;
 
-	public ApplicationConfigInitializerImpl(boolean resolveEntities) {
+	public ApplicationConfigInitializerImpl(String contextPath, boolean resolveEntities) {
+		this.contextPath = contextPath;
 		this.resolveEntities = resolveEntities;
 	}
 
@@ -49,8 +51,7 @@ public class ApplicationConfigInitializerImpl implements ApplicationConfigInitia
 
 		// Obtain a SAX Parser Factory.
 		SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
-		boolean validating = false;
-		saxParserFactory.setValidating(validating);
+		saxParserFactory.setValidating(false);
 		saxParserFactory.setNamespaceAware(true);
 
 		try {
@@ -67,9 +68,8 @@ public class ApplicationConfigInitializerImpl implements ApplicationConfigInitia
 			FacesConfigScanner facesConfigScanner = newFacesConfigScanner(classLoader, resourceReader, saxParser,
 					resolveEntities, webConfig);
 			FacesConfig facesConfig = facesConfigScanner.scan();
-			ApplicationConfig applicationConfig = new ApplicationConfigImpl(facesConfig, webConfig);
 
-			return applicationConfig;
+			return new ApplicationConfigImpl(contextPath, facesConfig, webConfig);
 		}
 		catch (Exception e) {
 
@@ -88,9 +88,8 @@ public class ApplicationConfigInitializerImpl implements ApplicationConfigInitia
 	protected ResourceReader newResourceReader() {
 		FacesContext startupFacesContext = FacesContext.getCurrentInstance();
 		ExternalContext startupExternalContext = startupFacesContext.getExternalContext();
-		ResourceReader resourceReader = new ResourceReaderExternalContextImpl(startupExternalContext);
 
-		return resourceReader;
+		return new ResourceReaderExternalContextImpl(startupExternalContext);
 	}
 
 	protected WebConfigScanner newWebConfigScanner(ClassLoader classLoader, ResourceReader resourceReader,

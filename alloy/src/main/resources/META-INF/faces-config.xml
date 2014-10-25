@@ -2,8 +2,18 @@
 <faces-config version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
 
+	<name>LiferayFacesAlloy</name>
+	<ordering>
+		<after>
+			<name>LiferayFacesUtil</name>
+		</after>
+	</ordering>
 	<application>
 		<el-resolver>com.liferay.faces.alloy.el.AUIELResolver</el-resolver>
+		<system-event-listener>
+			<system-event-listener-class>com.liferay.faces.alloy.event.ApplicationStartupListener</system-event-listener-class>
+			<system-event-class>com.liferay.faces.util.event.PostConstructApplicationConfigEvent</system-event-class>
+		</system-event-listener>
 	</application>
 	<component>
 		<component-type>com.liferay.faces.alloy.AUIButtonRow</component-type>
