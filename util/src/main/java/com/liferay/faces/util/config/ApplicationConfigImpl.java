@@ -19,15 +19,22 @@ package com.liferay.faces.util.config;
 public class ApplicationConfigImpl implements ApplicationConfig {
 
 	// Private Data Members
+    private String contextPath;
 	private FacesConfig facesConfig;
 	private WebConfig webConfig;
 
-	public ApplicationConfigImpl(FacesConfig facesConfig, WebConfig webConfig) {
+	public ApplicationConfigImpl(String contextPath, FacesConfig facesConfig, WebConfig webConfig) {
+        this.contextPath = contextPath;
 		this.facesConfig = facesConfig;
 		this.webConfig = webConfig;
 	}
 
-	public FacesConfig getFacesConfig() {
+    @Override
+    public String getContextPath() {
+        return contextPath;
+    }
+
+    public FacesConfig getFacesConfig() {
 		return facesConfig;
 	}
 

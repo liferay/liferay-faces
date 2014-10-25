@@ -14,12 +14,11 @@
 package com.liferay.faces.bridge.bean;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.bridge.application.MojarraApplicationAssociate;
-import com.liferay.faces.bridge.servlet.BridgeSessionListener;
 import com.liferay.faces.util.config.ConfiguredManagedBean;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -46,23 +45,11 @@ public class BeanManagerMojarraImpl extends BeanManagerImpl {
 		if (preferPreDestroy) {
 
 			// Get the Mojarra InjectionProvider singleton instance that was hopefully discovered at startup.
-			MojarraInjectionProvider mojarraInjectionProvider = BridgeSessionListener.getMojarraInjectionProvider();
-
-			// If the Mojarra InjectionProvider singleton instance was not discovered at startup, then discover it now.
-			if (mojarraInjectionProvider == null) {
-				FacesContext facesContext = FacesContext.getCurrentInstance();
-
-				// Note: The FacesContext ThreadLocal singleton can be null if this method is called from
-				// BridgeSessionListener.
-				if (facesContext != null) {
-					ExternalContext externalContext = facesContext.getExternalContext();
-
-					if (externalContext != null) {
-						mojarraInjectionProvider = MojarraApplicationAssociate.getInjectionProvider(externalContext);
-						BridgeSessionListener.setMojarraInjectionProvider(mojarraInjectionProvider);
-					}
-				}
-			}
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			ExternalContext externalContext = facesContext.getExternalContext();
+			Map<String, Object> applicationMap = externalContext.getApplicationMap();
+			MojarraInjectionProvider mojarraInjectionProvider = (MojarraInjectionProvider) applicationMap.get(
+					MojarraInjectionProvider.class.getName());
 
 			if (mojarraInjectionProvider == null) {
 
