@@ -86,15 +86,6 @@ public enum PortletConfigParam implements ConfigParam<PortletConfig> {
 	 */
 	RenderRedirectEnabled("com.liferay.faces.bridge.renderRedirectEnabled", false),
 
-	/**
-	 * Flag indicating whether or not XML entities are resolved when parsing faces-config.xml files. Default value is
-	 * false.
-	 */
-	ResolveXMLEntities("com.liferay.faces.bridge.resolveXMLEntities", WebConfigParam.ResolveXMLEntities.getName(),
-		false),
-
-	/** Size in bytes for the buffer that is used to deliver resources back to the browser. Default value is 1024. */
-
 	/** Size in bytes for the buffer that is used to deliver resources back to the browser. Default value is 1024. */
 	ResourceBufferSize("com.liferay.faces.bridge.resourceBufferSize", "org.portletfaces.bridge.resourceBufferSize",
 		1024),
