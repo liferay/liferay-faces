@@ -28,7 +28,7 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 import javax.servlet.http.Cookie;
 
-import com.liferay.faces.bridge.servlet.BridgeSessionListener;
+import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -43,6 +43,7 @@ public abstract class ExternalContextCompat_2_2_Impl extends ExternalContextComp
 	private static final String COOKIE_PROPERTY_HTTP_ONLY = "httpOnly";
 
 	// Private Data Members
+	private String applicationContextPath;
 	private ClientWindow clientWindow;
 
 	public ExternalContextCompat_2_2_Impl(PortletContext portletContext, PortletRequest portletRequest,
@@ -174,7 +175,14 @@ public abstract class ExternalContextCompat_2_2_Impl extends ExternalContextComp
 	 */
 	@Override
 	public String getApplicationContextPath() {
-		return BridgeSessionListener.getServletContextPath();
+
+		if (applicationContextPath == null) {
+			String appConfigAttrName = ApplicationConfig.class.getName();
+			ApplicationConfig applicationConfig = (ApplicationConfig) getApplicationMap().get(appConfigAttrName);
+			applicationContextPath = applicationConfig.getContextPath();
+		}
+
+		return applicationContextPath;
 	}
 
 	/**

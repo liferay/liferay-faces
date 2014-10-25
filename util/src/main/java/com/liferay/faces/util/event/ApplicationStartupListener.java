@@ -13,6 +13,10 @@
  */
 package com.liferay.faces.util.event;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 import javax.faces.application.Application;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -20,12 +24,16 @@ import javax.faces.event.AbortProcessingException;
 import javax.faces.event.PostConstructApplicationEvent;
 import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
+import javax.servlet.ServletContext;
 
-import com.liferay.faces.util.config.ApplicationConfigUtil;
+import com.liferay.faces.util.config.ApplicationConfig;
+import com.liferay.faces.util.config.ApplicationConfigInitializer;
+import com.liferay.faces.util.config.ApplicationConfigInitializerImpl;
+import com.liferay.faces.util.config.ConfiguredElement;
+import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.config.WebConfigParam;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.BooleanHelper;
-import com.liferay.faces.util.product.ProductConstants;
-import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -33,26 +41,49 @@ import com.liferay.faces.util.product.ProductMap;
  */
 public class ApplicationStartupListener implements SystemEventListener {
 
-	// Private Constants
-	private static final boolean LIFERAY_FACES_BRIDGE_DETECTED = ProductMap.getInstance().get(
-			ProductConstants.LIFERAY_FACES_BRIDGE).isDetected();
-
 	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
 
-		// If Liferay Faces Bridge is not present in the classpath, then proceed with processing the configuration
-		// files. The reason is because Liferay Faces Bridge has its own configuration file processing that takes place
-		// during portlet initialization, rather than at JSF application startup.
-		if (!LIFERAY_FACES_BRIDGE_DETECTED) {
+		if (systemEvent instanceof PostConstructApplicationEvent) {
 
-			if (systemEvent instanceof PostConstructApplicationEvent) {
+			PostConstructApplicationEvent postConstructApplicationEvent = (PostConstructApplicationEvent) systemEvent;
+			Application application = postConstructApplicationEvent.getApplication();
+			FacesContext initFacesContext = FacesContext.getCurrentInstance();
+			ExternalContext externalContext = initFacesContext.getExternalContext();
+			Map<String, Object> applicationMap = externalContext.getApplicationMap();
+			String appConfigAttrName = ApplicationConfig.class.getName();
+			ApplicationConfig applicationConfig = (ApplicationConfig) applicationMap.get(appConfigAttrName);
 
-				if (ApplicationConfigUtil.getApplicationConfig() == null) {
-					FacesContext initFacesContext = FacesContext.getCurrentInstance();
-					ExternalContext externalContext = initFacesContext.getExternalContext();
-					String initParam = WebConfigParam.ResolveXMLEntities.getStringValue(externalContext);
-					boolean resolveEntities = BooleanHelper.toBoolean(initParam, false);
-					ApplicationConfigUtil.initializeApplicationConfig(resolveEntities);
+			if (applicationConfig == null) {
+				ServletContext servletContext = (ServletContext) externalContext.getContext();
+
+				boolean resolveEntities = WebConfigParam.ResolveXMLEntities.getBooleanValue(externalContext);
+				String requestServletPath = externalContext.getRequestServletPath();
+				ApplicationConfigInitializer applicationConfigInitializer = new ApplicationConfigInitializerImpl(
+						requestServletPath, resolveEntities);
+
+				try {
+					applicationConfig = applicationConfigInitializer.initialize();
+					applicationMap.put(appConfigAttrName, applicationConfig);
+
+					// Register the configured factories with the factory extension finder.
+					FacesConfig facesConfig = applicationConfig.getFacesConfig();
+					List<ConfiguredElement> configuredFactoryExtensions = facesConfig.getConfiguredFactoryExtensions();
+
+					if (configuredFactoryExtensions != null) {
+
+						FactoryExtensionFinder factoryExtensionFinder = FactoryExtensionFinder.getInstance();
+
+						for (ConfiguredElement configuredFactoryExtension : configuredFactoryExtensions) {
+							factoryExtensionFinder.registerFactory(configuredFactoryExtension);
+						}
+					}
 				}
+				catch (IOException e) {
+					throw new AbortProcessingException(e);
+				}
+
+				application.publishEvent(initFacesContext, PostConstructApplicationConfigEvent.class,
+					ApplicationConfig.class, applicationConfig);
 			}
 		}
 	}
