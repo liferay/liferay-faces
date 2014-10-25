@@ -29,11 +29,12 @@ import javax.portlet.faces.Bridge.PortletPhase;
 import com.liferay.faces.bridge.bean.BeanManager;
 import com.liferay.faces.bridge.bean.BeanManagerFactory;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
- * <p>According to the JSF 2.0 JavaDocs for {@link ExternalContext.getApplicationMap}, before a managed-bean is removed
+ * <p>According to the JSF 2.0 JavaDocs for {@link ExternalContext#getApplicationMap}, before a managed-bean is removed
  * from the map, any public no-argument void return methods annotated with javax.annotation.PreDestroy must be called
  * first. This would be equally true of any custom JSF 2.0 scope, such as the bridgeRequestScope. This class is a JSF
  * PhaseListener that listens after the RENDER_RESPONSE phase completes. Its purpose is to force the managed-beans in
@@ -71,15 +72,19 @@ public class ManagedBeanScopePhaseListener implements PhaseListener {
 				// are called. The JavaDocs also state that this should only be the case for objects that are actually
 				// managed-beans.
 				FacesContext facesContext = FacesContext.getCurrentInstance();
-				Map<String, Object> requestScope = facesContext.getExternalContext().getRequestMap();
+				ExternalContext externalContext = facesContext.getExternalContext();
+				Map<String, Object> requestScope = externalContext.getRequestMap();
 				List<String> managedBeanKeysToRemove = new ArrayList<String>();
 				Set<Map.Entry<String, Object>> mapEntries = requestScope.entrySet();
 
 				if (mapEntries != null) {
 
+					String appConfigAttrName = ApplicationConfig.class.getName();
+					Map<String, Object> applicationMap = externalContext.getApplicationMap();
+					ApplicationConfig applicationConfig = (ApplicationConfig) applicationMap.get(appConfigAttrName);
 					BeanManagerFactory beanManagerFactory = (BeanManagerFactory) FactoryExtensionFinder.getFactory(
 							BeanManagerFactory.class);
-					BeanManager beanManager = beanManagerFactory.getBeanManager();
+					BeanManager beanManager = beanManagerFactory.getBeanManager(applicationConfig.getFacesConfig());
 
 					for (Map.Entry<String, Object> mapEntry : mapEntries) {
 						String potentialManagedBeanName = mapEntry.getKey();
