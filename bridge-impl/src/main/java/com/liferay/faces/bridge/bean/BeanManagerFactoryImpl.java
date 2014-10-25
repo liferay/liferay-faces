@@ -13,11 +13,11 @@
  */
 package com.liferay.faces.bridge.bean;
 
-import java.util.List;
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.config.ApplicationConfig;
-import com.liferay.faces.util.config.ApplicationConfigUtil;
-import com.liferay.faces.util.config.ConfiguredManagedBean;
 import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
@@ -32,25 +32,29 @@ public class BeanManagerFactoryImpl extends BeanManagerFactory {
 	private static final boolean MOJARRA_DETECTED = ProductMap.getInstance().get(ProductConstants.JSF).getTitle()
 		.equals(ProductConstants.MOJARRA);
 
-	// Private Data Members
-	List<ConfiguredManagedBean> configuredManagedBeans;
+	@Deprecated
+	@Override
+	public BeanManager getBanManager() {
 
-	public BeanManagerFactoryImpl() {
-		ApplicationConfig applicationConfig = ApplicationConfigUtil.getApplicationConfig();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		Map<String, Object> applicationMap = facesContext.getExternalContext().getApplicationMap();
+		String appConfigAttrName = ApplicationConfig.class.getName();
+		ApplicationConfig applicationConfig = (ApplicationConfig) applicationMap.get(appConfigAttrName);
 		FacesConfig facesConfig = applicationConfig.getFacesConfig();
-		this.configuredManagedBeans = facesConfig.getConfiguredManagedBeans();
+
+		return getBeanManager(facesConfig);
 	}
 
 	@Override
-	public BeanManager getBeanManager() {
+	public BeanManager getBeanManager(FacesConfig facesConfig) {
 
 		BeanManager beanManager = null;
 
 		if (MOJARRA_DETECTED) {
-			beanManager = new BeanManagerMojarraImpl(configuredManagedBeans);
+			beanManager = new BeanManagerMojarraImpl(facesConfig.getConfiguredManagedBeans());
 		}
 		else {
-			beanManager = new BeanManagerImpl(configuredManagedBeans);
+			beanManager = new BeanManagerImpl(facesConfig.getConfiguredManagedBeans());
 		}
 
 		return beanManager;

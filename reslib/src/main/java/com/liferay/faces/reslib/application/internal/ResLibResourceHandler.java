@@ -32,7 +32,6 @@ import com.liferay.faces.reslib.config.ResLibConfigParam;
 import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.application.ResourceHandlerWrapperBase;
 import com.liferay.faces.util.config.ApplicationConfig;
-import com.liferay.faces.util.config.ApplicationConfigUtil;
 import com.liferay.faces.util.config.ConfiguredServletMapping;
 import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.io.ResourceOutputStream;
@@ -222,7 +221,9 @@ public class ResLibResourceHandler extends ResourceHandlerWrapperBase {
 
 		if ((servletPath != null) && servletPath.startsWith(RESOURCE_IDENTIFIER)) {
 
-			ApplicationConfig applicationConfig = ApplicationConfigUtil.getApplicationConfig();
+			Map<String, Object> applicationMap = externalContext.getApplicationMap();
+			String appConfigAttrName = ApplicationConfig.class.getName();
+			ApplicationConfig applicationConfig = (ApplicationConfig) applicationMap.get(appConfigAttrName);
 			FacesConfig facesConfig = applicationConfig.getFacesConfig();
 			List<ConfiguredServletMapping> configuredFacesServletMappings =
 				facesConfig.getConfiguredFacesServletMappings();

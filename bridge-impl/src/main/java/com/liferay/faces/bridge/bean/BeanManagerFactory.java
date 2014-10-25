@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.bean;
 
+import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.factory.FactoryExtension;
 
 
@@ -21,5 +22,12 @@ import com.liferay.faces.util.factory.FactoryExtension;
  */
 public abstract class BeanManagerFactory implements FactoryExtension<BeanManagerFactory> {
 
-	public abstract BeanManager getBeanManager();
+	/**
+	 * @deprecated  Call {@link #getBeanManager(com.liferay.faces.util.config.FacesConfig)} instead.
+	 */
+	@Deprecated
+	public abstract BeanManager getBanManager();
+
+	public abstract BeanManager getBeanManager(FacesConfig facesConfig);
+
 }

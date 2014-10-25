@@ -23,6 +23,7 @@ import java.util.Set;
 
 import javax.faces.context.ExternalContext;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.BridgeConstants;
@@ -31,6 +32,7 @@ import com.liferay.faces.bridge.bean.BeanManagerFactory;
 import com.liferay.faces.bridge.config.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
+import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.map.AbstractPropertyMap;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
@@ -70,9 +72,12 @@ public class RequestScopeMap extends AbstractPropertyMap<Object> {
 
 	public RequestScopeMap(BridgeContext bridgeContext) {
 
+		String appConfigAttrName = ApplicationConfig.class.getName();
+		PortletContext portletContext = bridgeContext.getPortletContext();
+		ApplicationConfig applicationConfig = (ApplicationConfig) portletContext.getAttribute(appConfigAttrName);
 		BeanManagerFactory beanManagerFactory = (BeanManagerFactory) FactoryExtensionFinder.getFactory(
 				BeanManagerFactory.class);
-		this.beanManager = beanManagerFactory.getBeanManager();
+		this.beanManager = beanManagerFactory.getBeanManager(applicationConfig.getFacesConfig());
 
 		// Determines whether or not JSF @ManagedBean classes annotated with @RequestScoped should be distinct for
 		// each portlet when running under Liferay Portal.
@@ -106,7 +111,7 @@ public class RequestScopeMap extends AbstractPropertyMap<Object> {
 	}
 
 	/**
-	 * According to the JSF 2.0 JavaDocs for {@link ExternalContext.getRequestMap}, before a managed-bean is removed
+	 * According to the JSF 2.0 JavaDocs for {@link ExternalContext#getRequestMap}, before a managed-bean is removed
 	 * from the map, any public no-argument void return methods annotated with javax.annotation.PreDestroy must be
 	 * called first.
 	 */

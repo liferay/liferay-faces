@@ -25,6 +25,7 @@ import com.liferay.faces.bridge.bean.BeanManager;
 import com.liferay.faces.bridge.bean.BeanManagerFactory;
 import com.liferay.faces.bridge.config.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.map.AbstractPropertyMap;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
@@ -44,9 +45,11 @@ public class ApplicationScopeMap extends AbstractPropertyMap<Object> {
 
 		BeanManagerFactory beanManagerFactory = (BeanManagerFactory) FactoryExtensionFinder.getFactory(
 				BeanManagerFactory.class);
-		this.beanManager = beanManagerFactory.getBeanManager();
-
 		this.portletContext = bridgeContext.getPortletContext();
+
+		String appConfigAttrName = ApplicationConfig.class.getName();
+		ApplicationConfig applicationConfig = (ApplicationConfig) this.portletContext.getAttribute(appConfigAttrName);
+		this.beanManager = beanManagerFactory.getBeanManager(applicationConfig.getFacesConfig());
 
 		// Determines whether or not methods annotated with the @PreDestroy annotation are preferably invoked
 		// over the @BridgePreDestroy annotation.
@@ -55,7 +58,7 @@ public class ApplicationScopeMap extends AbstractPropertyMap<Object> {
 	}
 
 	/**
-	 * According to the JSF 2.0 JavaDocs for {@link ExternalContext.getApplicationMap}, before a managed-bean is removed
+	 * According to the JSF 2.0 JavaDocs for {@link ExternalContext#getApplicationMap}, before a managed-bean is removed
 	 * from the map, any public no-argument void return methods annotated with javax.annotation.PreDestroy must be
 	 * called first.
 	 */
@@ -79,7 +82,7 @@ public class ApplicationScopeMap extends AbstractPropertyMap<Object> {
 	}
 
 	/**
-	 * According to the JSF 2.0 JavaDocs for {@link ExternalContext.getApplicationMap}, before a managed-bean is removed
+	 * According to the JSF 2.0 JavaDocs for {@link ExternalContext#getApplicationMap}, before a managed-bean is removed
 	 * from the map, any public no-argument void return methods annotated with javax.annotation.PreDestroy must be
 	 * called first.
 	 */

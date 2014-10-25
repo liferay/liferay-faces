@@ -43,6 +43,7 @@ import com.liferay.faces.alloy.component.inputfile.internal.PreviewTableTemplate
 import com.liferay.faces.alloy.component.inputfile.internal.ProgressTableTemplate;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
+import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.map.MultiPartFormData;
 import com.liferay.faces.util.js.JavaScriptArray;
@@ -265,10 +266,10 @@ public class InputFileRenderer extends InputFileRendererCompat implements System
 	}
 
 	@Override
-	public void processEvent(SystemEvent postConstructApplicationEvent) throws AbortProcessingException {
+	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
 
 		// Due to ClassLoader problems during static initialization, it is necessary to delay creation of singleton
-		// instances of template classes until the PostConstructApplicationEvent is sent.
+		// instances of template classes until the PostConstructApplicationConfigEvent is sent.
 		try {
 			FacesContext startupFacesContext = FacesContext.getCurrentInstance();
 			boolean minified = startupFacesContext.isProjectStage(ProjectStage.Production);
@@ -325,7 +326,7 @@ public class InputFileRenderer extends InputFileRendererCompat implements System
 
 	@Override
 	public boolean isListenerForSource(Object source) {
-		return ((source != null) && (source instanceof Application));
+		return ((source != null) && (source instanceof ApplicationConfig));
 	}
 
 	protected InputFileValidator getInputFileValidator(InputFile inputFile) {

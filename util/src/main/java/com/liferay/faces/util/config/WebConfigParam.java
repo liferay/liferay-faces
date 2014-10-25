@@ -23,7 +23,9 @@ import com.liferay.faces.util.helper.BooleanHelper;
  */
 public enum WebConfigParam implements ConfigParam<ExternalContext> {
 
-	ResolveXMLEntities("com.liferay.faces.util.resolveXMLEntities", false),
+    /** Boolean indicating whether or not XML entities should be resolved */
+	ResolveXMLEntities("com.liferay.faces.util.resolveXMLEntities", "com.liferay.faces.bridge.resolveXMLEntities",
+		false),
 
 	/**
 	 * Absolute path to a directory (folder) in which the uploaded file data should be written to. Default value is the
@@ -63,9 +65,9 @@ public enum WebConfigParam implements ConfigParam<ExternalContext> {
 		this.defaultStringValue = Integer.toString(defaultIntegerValue);
 	}
 
-	private WebConfigParam(String name, boolean defaultBooleanValue) {
+	private WebConfigParam(String name, String alternateName, boolean defaultBooleanValue) {
 		this.name = name;
-		this.alternateName = null;
+		this.alternateName = alternateName;
 
 		if (defaultBooleanValue) {
 			this.defaultBooleanValue = true;
