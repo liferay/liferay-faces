@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.event;
+package com.liferay.faces.alloy.event.com.liferay.faces.alloy.event.internal;
 
 import javax.faces.application.Application;
 import javax.faces.event.AbortProcessingException;

@@ -11,7 +11,7 @@
 	<application>
 		<el-resolver>com.liferay.faces.alloy.el.AUIELResolver</el-resolver>
 		<system-event-listener>
-			<system-event-listener-class>com.liferay.faces.alloy.event.ApplicationStartupListener</system-event-listener-class>
+			<system-event-listener-class>com.liferay.faces.alloy.event.com.liferay.faces.alloy.event.internal.ApplicationStartupListener</system-event-listener-class>
 			<system-event-class>com.liferay.faces.util.event.PostConstructApplicationConfigEvent</system-event-class>
 		</system-event-listener>
 		<system-event-listener>
