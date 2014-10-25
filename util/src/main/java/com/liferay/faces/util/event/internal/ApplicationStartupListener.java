@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.event.com.liferay.faces.util.event.internal;
+package com.liferay.faces.util.event.internal;
 
 import java.io.IOException;
 import java.util.List;
