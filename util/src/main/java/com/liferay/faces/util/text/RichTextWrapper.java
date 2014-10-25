@@ -13,13 +13,13 @@
  */
 package com.liferay.faces.util.text;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class RichTextWrapper implements RichText, FacesWrapper<RichText> {
+public abstract class RichTextWrapper implements RichText, Wrapper<RichText> {
 
 	@Override
 	public int getPlainTextLength() {

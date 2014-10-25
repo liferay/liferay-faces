@@ -13,13 +13,13 @@
  */
 package com.liferay.faces.util.client;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class BrowserSnifferWrapper implements BrowserSniffer, FacesWrapper<BrowserSniffer> {
+public abstract class BrowserSnifferWrapper implements BrowserSniffer, Wrapper<BrowserSniffer> {
 
 	@Override
 	public boolean acceptsGzip() {
