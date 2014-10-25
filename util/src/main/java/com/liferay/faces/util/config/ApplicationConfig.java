@@ -18,6 +18,8 @@ package com.liferay.faces.util.config;
  */
 public interface ApplicationConfig {
 
+	public String getContextPath();
+
 	public FacesConfig getFacesConfig();
 
 	public WebConfig getWebConfig();
