@@ -61,7 +61,7 @@ public class RichTextHTMLImpl extends RichTextBaseImpl {
 		return count;
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public Type getType() {
 		return Type.HTML;
 	}

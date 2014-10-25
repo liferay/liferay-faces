@@ -30,7 +30,7 @@ public class BrowserSnifferFactoryImpl extends BrowserSnifferFactory {
 		return new BrowserSnifferImpl(externalContext);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public BrowserSnifferFactory getWrapped() {
 
 		// Since this is the default factory instance, it will never wrap another factory.

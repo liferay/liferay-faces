@@ -33,7 +33,7 @@ public abstract class RichTextBaseImpl implements RichText {
 		return value;
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public int getPlainTextLength() {
 
 		int count = 0;

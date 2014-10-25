@@ -50,137 +50,137 @@ public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implemen
 		}
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean acceptsGzip() {
 		return acceptsGzip(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isIeOnWin32() {
 		return isIeOnWin32(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isIeOnWin64() {
 		return isIeOnWin64(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isMozilla() {
 		return isMozilla(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isOpera() {
 		return isOpera(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public String getBrowserId() {
 		return getBrowserId(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isMac() {
 		return isMac(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isAndroid() {
 		return isAndroid(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isChrome() {
 		return isChrome(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isIe() {
 		return isIe(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isIphone() {
 		return isIphone(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isMobile() {
 		return isMobile(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isRtf() {
 		return isRtf(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isSafari() {
 		return isSafari(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isWapXhtml() {
 		return isWapXhtml(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isWml() {
 		return isWml(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public float getMajorVersion() {
 		return getMajorVersion(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isSun() {
 		return isSun(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isGecko() {
 		return isGecko(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isWap() {
 		return isWap(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isAir() {
 		return isAir(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public String getRevision() {
 		return getRevision(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isWindows() {
 		return isWindows(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isWebKit() {
 		return isWebKit(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public String getVersion() {
 		return getVersion(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isFirefox() {
 		return isFirefox(httpServletRequest);
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public boolean isLinux() {
 		return isLinux(httpServletRequest);
 	}

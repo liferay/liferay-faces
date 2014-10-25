@@ -29,7 +29,7 @@ public class ApplicationConfigImpl implements ApplicationConfig {
 		this.webConfig = webConfig;
 	}
 
-    @Override
+	// Java 1.6+: @Override
     public String getContextPath() {
         return contextPath;
     }

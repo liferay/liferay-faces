@@ -21,11 +21,11 @@ import javax.faces.FacesWrapper;
  */
 public abstract class RichTextWrapper implements RichText, FacesWrapper<RichText> {
 
-	@Override
+	// Java 1.6+: @Override
 	public int getPlainTextLength() {
 		return getWrapped().getPlainTextLength();
 	}
 
-	@Override
+	// Java 1.6+: @Override
 	public abstract RichText getWrapped();
 }
