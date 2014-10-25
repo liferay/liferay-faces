@@ -27,15 +27,18 @@ public class RendererReloader {
 		// Call the specified renderer's processEvent(SystemEvent) method in order to refresh the templates.
 		Class<?> systemEventClass = Class.forName("javax.faces.event.SystemEvent");
 		Class<?> systemEventListenerInterface = Class.forName("javax.faces.event.SystemEventListener");
-		Class<?> postConstructApplicationEventClass = Class.forName("javax.faces.event.PostConstructApplicationEvent");
-		Class<?> applicationClass = Class.forName("javax.faces.application.Application");
+		Class<?> postConstructApplicationConfigEventClass = Class.forName(
+				"com.liferay.faces.util.event.PostConstructApplicationConfigEvent");
+		Class<?> applicationConfigClass = Class.forName("com.liferay.faces.util.config.ApplicationConfig");
 		Method processEventMethod = systemEventListenerInterface.getDeclaredMethod("processEvent",
 				new Class[] { systemEventClass });
-		Method getApplicationMethod = facesContext.getClass().getDeclaredMethod("getApplication", new Class[] {});
-		Object application = getApplicationMethod.invoke(facesContext, new Object[] {});
-		Constructor<?> postConstructApplicationEventConstructor =
-			postConstructApplicationEventClass.getDeclaredConstructor(applicationClass);
-		Object postConstructApplicationEvent = postConstructApplicationEventConstructor.newInstance(application);
-		processEventMethod.invoke(renderer, new Object[] { postConstructApplicationEvent });
+		Method getApplicationConfigMethod = facesContext.getClass().getDeclaredMethod("getApplicationConfig",
+				new Class[] {});
+		Object applicationConfig = getApplicationConfigMethod.invoke(facesContext, new Object[] {});
+		Constructor<?> postConstructApplicationConfigEventConstructor =
+			postConstructApplicationConfigEventClass.getDeclaredConstructor(applicationConfigClass);
+		Object postConstructApplicationConfigEvent = postConstructApplicationConfigEventConstructor.newInstance(
+				applicationConfig);
+		processEventMethod.invoke(renderer, new Object[] { postConstructApplicationConfigEvent });
 	}
 }

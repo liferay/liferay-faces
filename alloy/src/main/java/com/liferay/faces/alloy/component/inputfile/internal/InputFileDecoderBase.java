@@ -22,7 +22,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.webapp.FacesServlet;
 
 import com.liferay.faces.util.config.ApplicationConfig;
-import com.liferay.faces.util.config.ApplicationConfigUtil;
 import com.liferay.faces.util.config.ConfiguredServlet;
 import com.liferay.faces.util.config.MultiPartConfig;
 import com.liferay.faces.util.config.WebConfig;
@@ -74,11 +73,13 @@ public abstract class InputFileDecoderBase implements InputFileDecoder {
 		return strippedFileName;
 	}
 
-	protected MultiPartConfig getFacesServletMultiPartConfig() {
+	protected MultiPartConfig getFacesServletMultiPartConfig(ExternalContext externalContext) {
 
 		MultiPartConfig facesServletMultiPartConfig = null;
 
-		ApplicationConfig applicationConfig = ApplicationConfigUtil.getApplicationConfig();
+		String appConfigAttrName = ApplicationConfig.class.getName();
+		Map<String, Object> applicationMap = externalContext.getApplicationMap();
+		ApplicationConfig applicationConfig = (ApplicationConfig) applicationMap.get(appConfigAttrName);
 		WebConfig webConfig = applicationConfig.getWebConfig();
 		List<ConfiguredServlet> configuredServlets = webConfig.getConfiguredServlets();
 
@@ -99,7 +100,7 @@ public abstract class InputFileDecoderBase implements InputFileDecoder {
 			uploadedFilesDir = location;
 		}
 		else {
-			MultiPartConfig facesServletMultiPartConfig = getFacesServletMultiPartConfig();
+			MultiPartConfig facesServletMultiPartConfig = getFacesServletMultiPartConfig(externalContext);
 
 			if (facesServletMultiPartConfig != null) {
 				uploadedFilesDir = facesServletMultiPartConfig.getLocation();

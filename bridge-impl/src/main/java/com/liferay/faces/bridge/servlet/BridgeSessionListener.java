@@ -15,8 +15,6 @@ package com.liferay.faces.bridge.servlet;
 
 import java.util.Enumeration;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.portlet.faces.BridgeException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -25,12 +23,11 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import com.liferay.faces.bridge.application.MojarraApplicationAssociate;
 import com.liferay.faces.bridge.bean.BeanManager;
 import com.liferay.faces.bridge.bean.BeanManagerFactory;
-import com.liferay.faces.bridge.bean.MojarraInjectionProvider;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
+import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -54,34 +51,12 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 	private static final String MOJARRA_PACKAGE_PREFIX = "com.sun.faces";
 	private static final String MOJARRA_VIEW_SCOPE_MANAGER = "com.sun.faces.application.view.viewScopeManager";
 
-	// Private Static Data Members
-	private static String servletContextPath;
-	private static MojarraInjectionProvider mojarraInjectionProvider;
-
 	// Private Data Members
 	private boolean firstInstance;
-	private ServletContext servletContext;
 
-	/**
-	 * Returns the Mojarra InjectionProvider instance that was discovered during startup.
-	 */
-	public static MojarraInjectionProvider getMojarraInjectionProvider() {
-		return mojarraInjectionProvider;
-	}
-
-	public static synchronized void setMojarraInjectionProvider(MojarraInjectionProvider injectionProvider) {
-		mojarraInjectionProvider = injectionProvider;
-	}
-
-	/**
-	 * Returns the value of {@link ServletContext#getContextPath()} that was discovered during startup.
-	 */
-	public static String getServletContextPath() {
-		return servletContextPath;
-	}
-
+	@Override
 	public void contextDestroyed(ServletContextEvent servletContextEvent) {
-		this.servletContext = null;
+		// no-op
 	}
 
 	/**
@@ -89,7 +64,7 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 	 */
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 
-		this.servletContext = servletContextEvent.getServletContext();
+		ServletContext servletContext = servletContextEvent.getServletContext();
 
 		if (servletContext.getAttribute(BridgeSessionListener.class.getName()) == null) {
 
@@ -99,33 +74,6 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 			servletContext.setAttribute(BridgeSessionListener.class.getName(), Boolean.TRUE);
 			firstInstance = true;
 
-			if (servletContextPath == null) {
-				servletContextPath = servletContext.getContextPath();
-			}
-
-			// If the Mojarra InjectionProvider hasn't been discovered by a prior portlet instance in this context, then
-			// attempt to discover it.
-			if (mojarraInjectionProvider == null) {
-
-				Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
-
-				if (jsf.isDetected() && ProductConstants.MOJARRA.equals(jsf.getTitle())) {
-
-					FacesContext facesContext = FacesContext.getCurrentInstance();
-
-					if (facesContext != null) {
-						ExternalContext externalContext = facesContext.getExternalContext();
-						mojarraInjectionProvider = MojarraApplicationAssociate.getInjectionProvider(externalContext);
-					}
-
-					if (mojarraInjectionProvider == null) {
-						logger.debug("Unable to discover Mojarra InjectionProvider during startup");
-					}
-					else {
-						logger.debug("Mojarra injectionProvider=[{0}]", mojarraInjectionProvider);
-					}
-				}
-			}
 		}
 		else {
 			logger.debug("Preventing multiple instantiation for contextPath=[{0}]", servletContext.getContextPath());
@@ -195,7 +143,11 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 				bridgeRequestScopeManager.removeBridgeRequestScopesBySession(httpSession);
 
 				// For each session attribute:
-				BeanManager beanManager = beanManagerFactory.getBeanManager();
+				String appConfigAttrName = ApplicationConfig.class.getName();
+				ServletContext servletContext = httpSession.getServletContext();
+				ApplicationConfig applicationConfig = (ApplicationConfig) servletContext.getAttribute(
+						appConfigAttrName);
+				BeanManager beanManager = beanManagerFactory.getBeanManager(applicationConfig.getFacesConfig());
 
 				try {
 					@SuppressWarnings("unchecked")

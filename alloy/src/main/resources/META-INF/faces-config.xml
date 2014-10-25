@@ -12,11 +12,11 @@
 		<el-resolver>com.liferay.faces.alloy.el.AUIELResolver</el-resolver>
 		<system-event-listener>
 			<system-event-listener-class>com.liferay.faces.alloy.event.ApplicationStartupListener</system-event-listener-class>
-			<system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
+			<system-event-class>com.liferay.faces.util.event.PostConstructApplicationConfigEvent</system-event-class>
 		</system-event-listener>
 		<system-event-listener>
 			<system-event-listener-class>com.liferay.faces.alloy.component.inputfile.InputFileRenderer</system-event-listener-class>
-			<system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
+			<system-event-class>com.liferay.faces.util.event.PostConstructApplicationConfigEvent</system-event-class>
 		</system-event-listener>
 	</application>
 	<component>

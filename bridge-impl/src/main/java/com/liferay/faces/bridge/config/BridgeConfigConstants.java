@@ -13,6 +13,9 @@
  */
 package com.liferay.faces.bridge.config;
 
+import com.liferay.faces.util.config.WebConfigParam;
+
+
 /**
  * This class contains constant names for various implementation-specific contex-param entries that portlet developers
  * can use in the WEB-INF/web.xml descriptor.
@@ -68,11 +71,10 @@ public class BridgeConfigConstants {
 	public static final String PARAM_RENDER_REDIRECT_ENABLED = PortletConfigParam.RenderRedirectEnabled.getName();
 
 	@Deprecated
-	public static String PARAM_REQUIRED_TO_RESOLVE_XML_ENTITIES1 = PortletConfigParam.ResolveXMLEntities.getName();
+	public static String PARAM_REQUIRED_TO_RESOLVE_XML_ENTITIES1 = WebConfigParam.ResolveXMLEntities.getName();
 
 	@Deprecated
-	public static String PARAM_REQUIRED_TO_RESOLVE_XML_ENTITIES2 = PortletConfigParam.ResolveXMLEntities
-		.getAlternateName();
+	public static String PARAM_REQUIRED_TO_RESOLVE_XML_ENTITIES2 = WebConfigParam.ResolveXMLEntities.getAlternateName();
 
 	@Deprecated
 	public static final String PARAM_RESOURCE_BUFFER_SIZE1 = PortletConfigParam.ResourceBufferSize.getName();
