@@ -38,7 +38,7 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public class ApplicationStartupListener extends ApplicationStartupListenerCompat {
 
 	@Override
-	protected void processSystemEvent(EventObject systemEvent) throws AbortProcessingException {
+	public void processSystemEvent(EventObject systemEvent) throws AbortProcessingException {
 
 		Application application = (Application) systemEvent.getSource();
 		FacesContext initFacesContext = FacesContext.getCurrentInstance();
