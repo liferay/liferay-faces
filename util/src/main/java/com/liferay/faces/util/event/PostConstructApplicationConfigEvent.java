@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.util.event;
 
-import javax.faces.event.SystemEvent;
+import java.util.EventObject;
 
 import com.liferay.faces.util.config.ApplicationConfig;
 
@@ -26,7 +26,7 @@ import com.liferay.faces.util.config.ApplicationConfig;
  *
  * @author  Neil Griffin
  */
-public class PostConstructApplicationConfigEvent extends SystemEvent {
+public class PostConstructApplicationConfigEvent extends EventObject {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 8134490708842412398L;

@@ -16,26 +16,12 @@ package com.liferay.faces.bridge.event.internal;
 import java.util.EventObject;
 
 import javax.faces.event.AbortProcessingException;
-import javax.faces.event.SystemEvent;
-import javax.faces.event.SystemEventListener;
-
-import com.liferay.faces.util.config.ApplicationConfig;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class PostConstructApplicationConfigListenerCompat implements SystemEventListener {
+public abstract class PostConstructApplicationConfigListenerCompat {
 
 	public abstract void processSystemEvent(EventObject systemEvent) throws AbortProcessingException;
-
-	@Override
-	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
-		processSystemEvent(systemEvent);
-	}
-
-	@Override
-	public boolean isListenerForSource(Object source) {
-		return ((source != null) && (source instanceof ApplicationConfig));
-	}
 }
