@@ -22,7 +22,6 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.SystemEvent;
-import javax.faces.event.SystemEventListener;
 import javax.servlet.ServletContext;
 
 import com.liferay.faces.util.config.ApplicationConfig;
@@ -31,7 +30,6 @@ import com.liferay.faces.util.config.ApplicationConfigInitializerImpl;
 import com.liferay.faces.util.config.ConfiguredElement;
 import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.config.WebConfigParam;
-import com.liferay.faces.util.event.PostConstructApplicationConfigEvent;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
