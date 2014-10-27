@@ -14,6 +14,7 @@
 package com.liferay.faces.util.event.internal;
 
 import java.io.IOException;
+import java.util.EventObject;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +22,6 @@ import javax.faces.application.Application;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
-import javax.faces.event.SystemEvent;
-import javax.servlet.ServletContext;
 
 import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.config.ApplicationConfigInitializer;
@@ -38,7 +37,8 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
  */
 public class ApplicationStartupListener extends ApplicationStartupListenerCompat {
 
-	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
+	@Override
+	protected void processSystemEvent(EventObject systemEvent) throws AbortProcessingException {
 
 		Application application = (Application) systemEvent.getSource();
 		FacesContext initFacesContext = FacesContext.getCurrentInstance();
@@ -48,7 +48,6 @@ public class ApplicationStartupListener extends ApplicationStartupListenerCompat
 		ApplicationConfig applicationConfig = (ApplicationConfig) applicationMap.get(appConfigAttrName);
 
 		if (applicationConfig == null) {
-			ServletContext servletContext = (ServletContext) externalContext.getContext();
 
 			boolean resolveEntities = WebConfigParam.ResolveXMLEntities.getBooleanValue(externalContext);
 			String requestServletPath = externalContext.getRequestServletPath();
@@ -77,16 +76,6 @@ public class ApplicationStartupListener extends ApplicationStartupListenerCompat
 			}
 
 			publishEvent(application, initFacesContext, applicationConfig);
-		}
-	}
-
-	public boolean isListenerForSource(Object source) {
-
-		if ((source != null) && (source instanceof Application)) {
-			return true;
-		}
-		else {
-			return false;
 		}
 	}
 }
