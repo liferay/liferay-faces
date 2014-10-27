@@ -13,8 +13,12 @@
  */
 package com.liferay.faces.util.event.internal;
 
+import java.util.EventObject;
+
 import javax.faces.application.Application;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AbortProcessingException;
+import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
 
 import com.liferay.faces.util.config.ApplicationConfig;
@@ -22,14 +26,26 @@ import com.liferay.faces.util.event.PostConstructApplicationConfigEvent;
 
 
 /**
+ * This class isolates differences between JSF1 <> JSF 2 in order to minimize diffs across branches.
+ *
  * @author  Neil Griffin
  */
 public abstract class ApplicationStartupListenerCompat implements SystemEventListener {
+
+	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
+		processSystemEvent(systemEvent);
+	}
+
+	protected abstract void processSystemEvent(EventObject systemEvent);
 
 	protected void publishEvent(Application application, FacesContext facesContext,
 		ApplicationConfig applicationConfig) {
 
 		application.publishEvent(facesContext, PostConstructApplicationConfigEvent.class, ApplicationConfig.class,
 			applicationConfig);
+	}
+
+	public boolean isListenerForSource(Object source) {
+		return ((source != null) && (source instanceof Application));
 	}
 }
