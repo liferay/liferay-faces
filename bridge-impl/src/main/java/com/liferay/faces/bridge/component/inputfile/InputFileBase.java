@@ -98,7 +98,7 @@ public abstract class InputFileBase extends HtmlInputText implements Styleable {
 
 		public Object eval(PropertyKeys propertyKey, String defaultValue) {
 			if (propertyKey == PropertyKeys.styleClass) {
-				return getStyleClass();
+				return InputFileBase.super.getStyleClass();
 			}
 			else {
 				return null;
