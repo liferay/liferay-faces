@@ -18,7 +18,7 @@ import javax.el.MethodExpression;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.FacesEvent;
-import javax.faces.event.PhaseId;
+// import javax.faces.event.PhaseId;
 
 import com.liferay.faces.bridge.event.FileUploadEvent;
 import com.liferay.faces.util.component.ComponentUtil;
@@ -33,7 +33,7 @@ public class InputFile extends InputFileBase {
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.bridge.component.inputfile.InputFile";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
-	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.File";
+	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Text";
 	public static final String RENDERER_TYPE = "com.liferay.faces.bridge.component.inputfile.InputFileRenderer";
 	public static final String STYLE_CLASS_NAME = "bridge-input-file";
 
@@ -65,14 +65,14 @@ public class InputFile extends InputFileBase {
 
 		String label = super.getLabel();
 
-		if (label == null) {
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-
-			if (facesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
-				label = ComponentUtil.getComponentLabel(this);
-			}
-		}
+		//if (label == null) {
+		//
+		//	FacesContext facesContext = FacesContext.getCurrentInstance();
+		//
+		//	if (facesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
+		//		label = ComponentUtil.getComponentLabel(this);
+		//	}
+		//}
 
 		return label;
 	}
