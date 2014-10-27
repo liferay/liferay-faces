@@ -38,7 +38,7 @@ import com.liferay.faces.util.render.DelegationResponseWriter;
 //J-
 @FacesRenderer(componentFamily = InputFile.COMPONENT_FAMILY, rendererType = InputFile.RENDERER_TYPE)
 //J+
-public class InputFileRenderer extends InputFileRendererBase {
+public class InputFileRenderer extends InputFileRendererCompat {
 
 	@Override
 	public void decode(FacesContext facesContext, UIComponent uiComponent) {
