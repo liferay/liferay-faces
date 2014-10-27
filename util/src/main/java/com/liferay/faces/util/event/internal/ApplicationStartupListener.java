@@ -34,7 +34,6 @@ import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.config.WebConfigParam;
 import com.liferay.faces.util.event.PostConstructApplicationConfigEvent;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.helper.BooleanHelper;
 
 
 /**
@@ -44,48 +43,45 @@ public class ApplicationStartupListener implements SystemEventListener {
 
 	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
 
-		if (systemEvent instanceof PostConstructApplicationEvent) {
+		PostConstructApplicationEvent postConstructApplicationEvent = (PostConstructApplicationEvent) systemEvent;
+		Application application = postConstructApplicationEvent.getApplication();
+		FacesContext initFacesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = initFacesContext.getExternalContext();
+		Map<String, Object> applicationMap = externalContext.getApplicationMap();
+		String appConfigAttrName = ApplicationConfig.class.getName();
+		ApplicationConfig applicationConfig = (ApplicationConfig) applicationMap.get(appConfigAttrName);
 
-			PostConstructApplicationEvent postConstructApplicationEvent = (PostConstructApplicationEvent) systemEvent;
-			Application application = postConstructApplicationEvent.getApplication();
-			FacesContext initFacesContext = FacesContext.getCurrentInstance();
-			ExternalContext externalContext = initFacesContext.getExternalContext();
-			Map<String, Object> applicationMap = externalContext.getApplicationMap();
-			String appConfigAttrName = ApplicationConfig.class.getName();
-			ApplicationConfig applicationConfig = (ApplicationConfig) applicationMap.get(appConfigAttrName);
+		if (applicationConfig == null) {
+			ServletContext servletContext = (ServletContext) externalContext.getContext();
 
-			if (applicationConfig == null) {
-				ServletContext servletContext = (ServletContext) externalContext.getContext();
+			boolean resolveEntities = WebConfigParam.ResolveXMLEntities.getBooleanValue(externalContext);
+			String requestServletPath = externalContext.getRequestServletPath();
+			ApplicationConfigInitializer applicationConfigInitializer = new ApplicationConfigInitializerImpl(
+					requestServletPath, resolveEntities);
 
-				boolean resolveEntities = WebConfigParam.ResolveXMLEntities.getBooleanValue(externalContext);
-				String requestServletPath = externalContext.getRequestServletPath();
-				ApplicationConfigInitializer applicationConfigInitializer = new ApplicationConfigInitializerImpl(
-						requestServletPath, resolveEntities);
+			try {
+				applicationConfig = applicationConfigInitializer.initialize();
+				applicationMap.put(appConfigAttrName, applicationConfig);
 
-				try {
-					applicationConfig = applicationConfigInitializer.initialize();
-					applicationMap.put(appConfigAttrName, applicationConfig);
+				// Register the configured factories with the factory extension finder.
+				FacesConfig facesConfig = applicationConfig.getFacesConfig();
+				List<ConfiguredElement> configuredFactoryExtensions = facesConfig.getConfiguredFactoryExtensions();
 
-					// Register the configured factories with the factory extension finder.
-					FacesConfig facesConfig = applicationConfig.getFacesConfig();
-					List<ConfiguredElement> configuredFactoryExtensions = facesConfig.getConfiguredFactoryExtensions();
+				if (configuredFactoryExtensions != null) {
 
-					if (configuredFactoryExtensions != null) {
+					FactoryExtensionFinder factoryExtensionFinder = FactoryExtensionFinder.getInstance();
 
-						FactoryExtensionFinder factoryExtensionFinder = FactoryExtensionFinder.getInstance();
-
-						for (ConfiguredElement configuredFactoryExtension : configuredFactoryExtensions) {
-							factoryExtensionFinder.registerFactory(configuredFactoryExtension);
-						}
+					for (ConfiguredElement configuredFactoryExtension : configuredFactoryExtensions) {
+						factoryExtensionFinder.registerFactory(configuredFactoryExtension);
 					}
 				}
-				catch (IOException e) {
-					throw new AbortProcessingException(e);
-				}
-
-				application.publishEvent(initFacesContext, PostConstructApplicationConfigEvent.class,
-					ApplicationConfig.class, applicationConfig);
 			}
+			catch (IOException e) {
+				throw new AbortProcessingException(e);
+			}
+
+			application.publishEvent(initFacesContext, PostConstructApplicationConfigEvent.class,
+				ApplicationConfig.class, applicationConfig);
 		}
 	}
 
