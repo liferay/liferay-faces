@@ -13,17 +13,15 @@
  */
 package com.liferay.faces.bridge.event.internal;
 
+import java.util.EventObject;
 import java.util.Map;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
-import javax.faces.event.SystemEvent;
-import javax.faces.event.SystemEventListener;
 
 import com.liferay.faces.bridge.application.MojarraApplicationAssociate;
 import com.liferay.faces.bridge.bean.MojarraInjectionProvider;
-import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.event.PostConstructApplicationConfigEvent;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -58,13 +56,13 @@ import com.liferay.faces.util.product.ProductMap;
  *
  * @author  Neil Griffin
  */
-public class PostConstructApplicationConfigListener implements SystemEventListener {
+public class PostConstructApplicationConfigListener extends PostConstructApplicationConfigListenerCompat {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(PostConstructApplicationConfigListener.class);
 
 	@Override
-	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
+	public void processSystemEvent(EventObject systemEvent) throws AbortProcessingException {
 
 		Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);
 
@@ -84,10 +82,5 @@ public class PostConstructApplicationConfigListener implements SystemEventListen
 				logger.debug("Mojarra injectionProvider=[{0}]", mojarraInjectionProvider);
 			}
 		}
-	}
-
-	@Override
-	public boolean isListenerForSource(Object source) {
-		return ((source != null) && (source instanceof ApplicationConfig));
 	}
 }
