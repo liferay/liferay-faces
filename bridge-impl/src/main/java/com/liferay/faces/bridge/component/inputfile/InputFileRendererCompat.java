@@ -13,10 +13,22 @@
  */
 package com.liferay.faces.bridge.component.inputfile;
 
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.convert.ConverterException;
+
+
 /**
  * This class provides a compatibility layer that isolates differences between 2.2 and earlier.
  *
  * @author  Neil Griffin
  */
 public abstract class InputFileRendererCompat extends InputFileRendererBase {
+
+	@Override
+	public Object getConvertedValue(FacesContext facesContext, UIComponent uiComponent, Object submittedValue)
+		throws ConverterException {
+
+		return submittedValue;
+	}
 }
