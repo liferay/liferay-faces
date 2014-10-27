@@ -83,6 +83,29 @@ public class FacesConfigParserImpl extends SAXHandlerBase implements FacesConfig
 			if (localName.equals(APPLICATION_EXTENSION)) {
 				parsingApplicationExtension = false;
 			}
+
+			// NOTE: system-event-listener can appear inside of application-extension for backward compatibility with
+			// JSF 1.x
+			else if (parsingSourceClass) {
+				sourceClass = content.toString().trim();
+				parsingSourceClass = false;
+			}
+			else if (parsingSystemEventClass) {
+				systemEventClass = content.toString().trim();
+				parsingSystemEventClass = false;
+			}
+			else if (parsingSystemEventListenerClass) {
+				systemEventListenerClass = content.toString().trim();
+				parsingSystemEventListenerClass = false;
+			}
+			else if (parsingSystemEventListener) {
+
+				// NOTE: This has to appear last since system-event-listener is the surrounding element.
+				ConfiguredSystemEventListener configuredSystemEventListener = new ConfiguredSystemEventListenerImpl(
+						sourceClass, systemEventClass, systemEventListenerClass);
+				configuredSystemEventListeners.add(configuredSystemEventListener);
+				parsingSystemEventListener = false;
+			}
 			else {
 				String elementValue = null;
 
