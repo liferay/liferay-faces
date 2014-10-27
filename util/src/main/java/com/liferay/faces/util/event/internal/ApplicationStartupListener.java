@@ -38,7 +38,7 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 /**
  * @author  Neil Griffin
  */
-public class ApplicationStartupListener implements SystemEventListener {
+public class ApplicationStartupListener extends ApplicationStartupListenerCompat {
 
 	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
 
@@ -78,8 +78,7 @@ public class ApplicationStartupListener implements SystemEventListener {
 				throw new AbortProcessingException(e);
 			}
 
-			application.publishEvent(initFacesContext, PostConstructApplicationConfigEvent.class,
-				ApplicationConfig.class, applicationConfig);
+			publishEvent(application, initFacesContext, applicationConfig);
 		}
 	}
 
