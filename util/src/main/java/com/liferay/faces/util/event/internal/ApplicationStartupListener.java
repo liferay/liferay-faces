@@ -21,7 +21,6 @@ import javax.faces.application.Application;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
-import javax.faces.event.PostConstructApplicationEvent;
 import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
 import javax.servlet.ServletContext;
@@ -43,8 +42,7 @@ public class ApplicationStartupListener implements SystemEventListener {
 
 	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
 
-		PostConstructApplicationEvent postConstructApplicationEvent = (PostConstructApplicationEvent) systemEvent;
-		Application application = postConstructApplicationEvent.getApplication();
+		Application application = (Application) systemEvent.getSource();
 		FacesContext initFacesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = initFacesContext.getExternalContext();
 		Map<String, Object> applicationMap = externalContext.getApplicationMap();
