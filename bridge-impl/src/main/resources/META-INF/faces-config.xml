@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
-	xmlns:bridge="http://www.liferay.com/xml/ns/liferay-faces-bridge-2.0-extension">
+	xmlns:bridge="http://www.liferay.com/xml/ns/liferay-faces-bridge-2.0-extension" xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 	<application>
 		<application-extension>
 			<bridge:excluded-attributes>
@@ -12,10 +12,18 @@
 				<bridge:render-response-wrapper-class>com.liferay.faces.bridge.application.view.BridgeWriteBehindResponseRenderImpl</bridge:render-response-wrapper-class>
 				<bridge:resource-response-wrapper-class>com.liferay.faces.bridge.application.view.BridgeWriteBehindResponseResourceImpl</bridge:resource-response-wrapper-class>
 			</bridge:write-behind-response-wrappers>
+	        <util:system-event-listener>
+	            <util:system-event-listener-class>com.liferay.faces.bridge.event.internal.PostConstructApplicationConfigListener</util:system-event-listener-class>
+	            <util:system-event-class>com.liferay.faces.util.event.PostConstructApplicationConfigEvent</util:system-event-class>
+	        </util:system-event-listener>
 		</application-extension>
 		<el-resolver>com.liferay.faces.bridge.el.ELResolverImpl</el-resolver>
 		<view-handler>com.liferay.faces.bridge.application.ViewHandlerImpl</view-handler>
 	</application>
+	<component>
+		<component-type>com.liferay.faces.bridge.component.inputfile.InputFile</component-type>
+		<component-class>com.liferay.faces.bridge.component.inputfile.InputFile</component-class>
+	</component>
 	<component>
 		<component-type>javax.faces.HtmlMessage</component-type>
 		<component-class>com.liferay.faces.bridge.component.html.HtmlMessageBridgeImpl</component-class>
@@ -70,29 +78,29 @@
 	</lifecycle>
 	<render-kit>
 		<renderer>
+			<description>Default renderer for bridge:inputFile tag</description>
+			<component-family>javax.faces.Input</component-family>
+			<renderer-type>com.liferay.faces.bridge.component.inputfile.InputFileRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.bridge.component.inputfile.InputFileRenderer</renderer-class>
+		</renderer>
+		<renderer>
 			<description>Default renderer for portlet:renderURL tag</description>
 			<component-family>javax.faces.Output</component-family>
 			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.RenderURLRenderer</renderer-type>
 			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.RenderURLRenderer</renderer-class>
 		</renderer>
-	</render-kit>
-	<render-kit>
 		<renderer>
 			<description>Default renderer for portlet:actionURL tag</description>
 			<component-family>javax.faces.Output</component-family>
 			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.ActionURLRenderer</renderer-type>
 			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.ActionURLRenderer</renderer-class>
 		</renderer>
-	</render-kit>
-	<render-kit>
 		<renderer>
 			<description>Default renderer for portlet:resourceURL tag</description>
 			<component-family>javax.faces.Output</component-family>
 			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.ResourceURLRenderer</renderer-type>
 			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.ResourceURLRenderer</renderer-class>
 		</renderer>
-	</render-kit>
-	<render-kit>
 		<renderer>
 			<description>Default renderer for portlet:namespace tag</description>
 			<component-family>javax.faces.Output</component-family>

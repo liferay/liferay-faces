@@ -6,6 +6,7 @@
 		<el-resolver>com.liferay.faces.util.el.ExtELResolver</el-resolver>
 	</application>
 	<factory>
+		<application-factory>com.liferay.faces.util.application.internal.ApplicationFactoryImpl</application-factory>
 		<factory-extension>
 			<util:browser-sniffer-factory>com.liferay.faces.util.client.internal.BrowserSnifferFactoryImpl</util:browser-sniffer-factory>
 			<util:client-script-factory>com.liferay.faces.util.client.internal.ClientScriptFactoryImpl</util:client-script-factory>

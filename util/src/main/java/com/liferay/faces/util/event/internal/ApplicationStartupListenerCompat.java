@@ -13,16 +13,19 @@
  */
 package com.liferay.faces.util.event.internal;
 
+import java.lang.reflect.Method;
 import java.util.EventObject;
+import java.util.List;
 
 import javax.faces.application.Application;
 import javax.faces.context.FacesContext;
-import javax.faces.event.AbortProcessingException;
-import javax.faces.event.SystemEvent;
-import javax.faces.event.SystemEventListener;
 
 import com.liferay.faces.util.config.ApplicationConfig;
+import com.liferay.faces.util.config.ConfiguredSystemEventListener;
+import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.event.PostConstructApplicationConfigEvent;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -30,22 +33,49 @@ import com.liferay.faces.util.event.PostConstructApplicationConfigEvent;
  *
  * @author  Neil Griffin
  */
-public abstract class ApplicationStartupListenerCompat implements SystemEventListener {
+public abstract class ApplicationStartupListenerCompat {
+
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(ApplicationStartupListenerCompat.class);
 
 	public abstract void processSystemEvent(EventObject systemEvent);
-
-	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
-		processSystemEvent(systemEvent);
-	}
 
 	protected void publishEvent(Application application, FacesContext facesContext,
 		ApplicationConfig applicationConfig) {
 
-		application.publishEvent(facesContext, PostConstructApplicationConfigEvent.class, ApplicationConfig.class,
-			applicationConfig);
-	}
+		FacesConfig facesConfig = applicationConfig.getFacesConfig();
+		List<ConfiguredSystemEventListener> configuredSystemEventListeners =
+			facesConfig.getConfiguredSystemEventListeners();
 
-	public boolean isListenerForSource(Object source) {
-		return ((source != null) && (source instanceof Application));
+		if (configuredSystemEventListeners != null) {
+
+			for (ConfiguredSystemEventListener configuredSystemEventListener : configuredSystemEventListeners) {
+
+				String systemEventClass = configuredSystemEventListener.getSystemEventClass();
+
+				if (PostConstructApplicationConfigEvent.class.getName().equals(systemEventClass)) {
+					String systemEventListenerFQCN = configuredSystemEventListener.getSystemEventListenerClass();
+
+					try {
+						Class<?> systemEventListenerClass = Class.forName(systemEventListenerFQCN);
+						Object systemEventListener = systemEventListenerClass.newInstance();
+
+						try {
+							Method processSystemEventMethod = systemEventListenerClass.getMethod("processSystemEvent",
+									new Class[] { EventObject.class });
+							processSystemEventMethod.invoke(systemEventListener,
+								new Object[] { new PostConstructApplicationConfigEvent(applicationConfig) });
+						}
+						catch (NoSuchMethodException e) {
+							// ignore
+						}
+					}
+					catch (Exception e) {
+						logger.error(e);
+					}
+				}
+			}
+		}
+
 	}
 }
