@@ -27,6 +27,7 @@ import javax.faces.component.NamingContainer;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIForm;
 import javax.faces.component.UIViewRoot;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.convert.ConverterException;
@@ -81,11 +82,6 @@ public class InputFileRenderer extends InputFileRendererCompat implements System
 	// Private Constants
 	private static final boolean LIFERAY_FACES_BRIDGE_DETECTED = ProductMap.getInstance().get(
 			ProductConstants.LIFERAY_FACES_BRIDGE).isDetected();
-	private static final String MULTIPART_FORM_DATA_FQCN = MultiPartFormData.class.getName();
-
-	// Templates
-	private static PreviewTableTemplate previewTableTemplate;
-	private static ProgressTableTemplate progressTableTemplate;
 
 	// Protected Constants
 	protected static final String[] MODULES = { "uploader", "aui-datatable", "datatype-xml" };
@@ -204,6 +200,7 @@ public class InputFileRenderer extends InputFileRendererCompat implements System
 			Locale locale = facesContext.getViewRoot().getLocale();
 
 			if (inputFile.isShowProgress()) {
+				ProgressTableTemplate progressTableTemplate = getProgressTableTemplate(facesContext);
 				String progressTableHTML = progressTableTemplate.format(locale, clientId, inputFile.isAuto());
 				responseWriter.write(progressTableHTML);
 			}
@@ -249,6 +246,7 @@ public class InputFileRenderer extends InputFileRendererCompat implements System
 			// Format the preview-table.html template and write it to the response.
 			Locale locale = facesContext.getViewRoot().getLocale();
 			String clientId = uiComponent.getClientId(facesContext);
+			PreviewTableTemplate previewTableTemplate = getPreviewTableTemplate(facesContext);
 			String previewTableHTML = previewTableTemplate.format(locale, clientId, false);
 			responseWriter.write(previewTableHTML);
 
@@ -266,15 +264,20 @@ public class InputFileRenderer extends InputFileRendererCompat implements System
 	}
 
 	@Override
-	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
+	public void processEvent(SystemEvent postConstructApplicationConfigEvent) throws AbortProcessingException {
 
 		// Due to ClassLoader problems during static initialization, it is necessary to delay creation of singleton
-		// instances of template classes until the PostConstructApplicationConfigEvent is sent.
+		// instances of template classes until the PostConstructApplicationConfigEvent is sent. Although template text
+		// is the same for each webapp context, the template must be stored as a ServletContext (application scoped)
+		// attribute in order to avoid a race condition when contexts are started up in parallel. For example:
+		// http://wiki.apache.org/tomcat/HowTo/FasterStartUp#Starting_several_web_applications_in_parallel
 		try {
 			FacesContext startupFacesContext = FacesContext.getCurrentInstance();
+			ExternalContext externalContext = startupFacesContext.getExternalContext();
+			Map<String, Object> applicationMap = externalContext.getApplicationMap();
 			boolean minified = startupFacesContext.isProjectStage(ProjectStage.Production);
-			previewTableTemplate = new PreviewTableTemplate(minified);
-			progressTableTemplate = new ProgressTableTemplate(minified);
+			applicationMap.put(PreviewTableTemplate.class.getName(), new PreviewTableTemplate(minified));
+			applicationMap.put(ProgressTableTemplate.class.getName(), new ProgressTableTemplate(minified));
 		}
 		catch (Exception e) {
 			logger.error(e);
@@ -368,13 +371,28 @@ public class InputFileRenderer extends InputFileRendererCompat implements System
 		return parentFormClientId;
 	}
 
+	protected PreviewTableTemplate getPreviewTableTemplate(FacesContext facesContext) {
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Map<String, Object> applicationMap = externalContext.getApplicationMap();
+
+		return (PreviewTableTemplate) applicationMap.get(PreviewTableTemplate.class.getName());
+	}
+
+	protected ProgressTableTemplate getProgressTableTemplate(FacesContext facesContext) {
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Map<String, Object> applicationMap = externalContext.getApplicationMap();
+
+		return (ProgressTableTemplate) applicationMap.get(ProgressTableTemplate.class.getName());
+	}
+
 	protected Map<String, List<UploadedFile>> getUploadedFileMap(FacesContext facesContext, String location) {
 
-		Map<String, List<UploadedFile>> uploadedFileMap = null;
+		Map<String, List<UploadedFile>> uploadedFileMap;
 
 		if (LIFERAY_FACES_BRIDGE_DETECTED) {
 			Map<String, Object> requestAttributeMap = facesContext.getExternalContext().getRequestMap();
-			MultiPartFormData multiPartFormData = (MultiPartFormData) requestAttributeMap.get(MULTIPART_FORM_DATA_FQCN);
+			MultiPartFormData multiPartFormData = (MultiPartFormData) requestAttributeMap.get(MultiPartFormData.class
+					.getName());
 			uploadedFileMap = multiPartFormData.getUploadedFileMap();
 		}
 		else {
