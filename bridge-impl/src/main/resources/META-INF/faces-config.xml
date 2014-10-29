@@ -76,6 +76,7 @@
 		<exception-handler-factory>com.liferay.faces.bridge.context.ExceptionHandlerFactoryImpl</exception-handler-factory>
 		<external-context-factory>com.liferay.faces.bridge.context.ExternalContextFactoryImpl</external-context-factory>
 		<view-declaration-language-factory>com.liferay.faces.bridge.application.view.ViewDeclarationLanguageFactoryImpl</view-declaration-language-factory>
+		<visit-context-factory>com.liferay.faces.bridge.component.visit.internal.VisitContextFactoryImpl</visit-context-factory>
 		<factory-extension>
 			<bridge:bean-manager-factory>com.liferay.faces.bridge.bean.BeanManagerFactoryImpl</bridge:bean-manager-factory>
 			<bridge:bridge-config-factory>com.liferay.faces.bridge.config.BridgeConfigFactoryImpl</bridge:bridge-config-factory>
