@@ -31,6 +31,8 @@ import javax.faces.event.FacesEvent;
 
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.context.MessageContext;
+import com.liferay.faces.util.context.MessageContextFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -98,14 +100,13 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 					facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, validatorMessage, validatorMessage);
 				}
 				else {
-					MessageContext messageContext = MessageContext.getInstance();
 					SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 					simpleDateFormat.setTimeZone(timeZone);
 
 					String minDateString = simpleDateFormat.format(minDate);
 					String maxDateString = simpleDateFormat.format(maxDate);
 					Locale locale = InputDateTimeUtil.getObjectAsLocale(getLocale(facesContext));
-					String message = messageContext.getMessage(locale, "please-enter-a-value-between-x-and-x",
+					String message = getMessageContext().getMessage(locale, "please-enter-a-value-between-x-and-x",
 							minDateString, maxDateString);
 					facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
 				}
@@ -126,6 +127,14 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 			String clientId = getClientId(facesContext);
 			facesContext.addMessage(clientId, facesMessage);
 		}
+	}
+
+	protected MessageContext getMessageContext() {
+
+		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+			MessageContextFactory.class);
+
+		return messageContextFactory.getMessageContext();
 	}
 
 	@Override

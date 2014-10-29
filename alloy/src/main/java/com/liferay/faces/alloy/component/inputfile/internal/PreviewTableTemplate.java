@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.Locale;
 
 import com.liferay.faces.util.context.MessageContext;
+import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.template.Template;
@@ -42,7 +43,9 @@ public class PreviewTableTemplate {
 				"${i18n['progress']}", "${i18n['no-files-selected']}", "${i18n['upload-files']}",
 				"${uploadFilesButtonClass}"
 			};
-		MessageContext messageContext = MessageContext.getInstance();
+		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+				MessageContextFactory.class);
+		MessageContext messageContext = messageContextFactory.getMessageContext();
 		String i18nFileName = messageContext.getMessage(locale, "file-name");
 		String i18nFileType = messageContext.getMessage(locale, "file-type");
 		String i18nFileSize = messageContext.getMessage(locale, "file-size");
