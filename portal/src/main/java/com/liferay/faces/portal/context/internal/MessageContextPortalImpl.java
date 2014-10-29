@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.context;
+package com.liferay.faces.portal.context.internal;
 
 import java.util.Locale;
 
@@ -24,13 +24,15 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 /**
  * @author  Neil Griffin
  */
-public class MessageContextLiferayImpl extends MessageContextWrapper {
+public class MessageContextPortalImpl extends MessageContextWrapper {
 
 	// Private Data Members
 	private MessageContext wrappedMessageContext;
 
-	public MessageContextLiferayImpl(MessageContext messageContext) {
+	@SuppressWarnings("deprecation")
+	public MessageContextPortalImpl(MessageContext messageContext) {
 		this.wrappedMessageContext = messageContext;
+		setInstance(this);
 	}
 
 	@Override

@@ -24,6 +24,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+
 
 /**
  * @author  Neil Griffin
@@ -31,6 +33,11 @@ import javax.faces.context.FacesContext;
 public class MessageContextImpl extends MessageContext {
 
 	private Map<Locale, ResourceBundle> facesResourceBundleMap = new ConcurrentHashMap<Locale, ResourceBundle>();
+
+	@SuppressWarnings("deprecation")
+	public MessageContextImpl() {
+		setInstance(this);
+	}
 
 	@Override
 	public FacesMessage newFacesMessage(FacesContext facesContext, Severity severity, String key) {
@@ -48,7 +55,12 @@ public class MessageContextImpl extends MessageContext {
 		facesMessage.setSummary(messageId);
 		facesMessage.setDetail(null);
 
-		String summary = getInstance().getMessage(locale, messageId);
+		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+				MessageContextFactory.class);
+
+		MessageContext messageContext = messageContextFactory.getMessageContext();
+
+		String summary = messageContext.getMessage(locale, messageId);
 
 		if (summary != null) {
 			facesMessage.setSummary(summary);
