@@ -13,41 +13,34 @@
  */
 package com.liferay.faces.demos.context;
 
-import java.util.Locale;
+import javax.faces.FacesException;
 
-import com.liferay.faces.demos.util.ShowcaseUtil;
 import com.liferay.faces.util.context.MessageContext;
-import com.liferay.faces.util.context.MessageContextWrapper;
+import com.liferay.faces.util.context.MessageContextFactory;
 
 
 /**
  * @author  Neil Griffin
  */
-public class ShowcaseMessageContext extends MessageContextWrapper {
+public class ShowcaseMessageContextFactory extends MessageContextFactory {
 
 	// Private Data Members
-	private MessageContext wrappedMessageContext;
+	private MessageContext messageContext;
+	private MessageContextFactory wrappedMessageContextFactory;
 
-	@SuppressWarnings("deprecation")
-	public ShowcaseMessageContext(MessageContext messageContext) {
-		this.wrappedMessageContext = messageContext;
-		setInstance(this);
+	public ShowcaseMessageContextFactory(MessageContextFactory messageContextFactory) {
+		MessageContext wrappedMessageContext = messageContextFactory.getMessageContext();
+		this.messageContext = new ShowcaseMessageContext(wrappedMessageContext);
+		this.wrappedMessageContextFactory = messageContextFactory;
 	}
 
 	@Override
-	public String getMessage(Locale locale, String messageId) {
-
-		String message = super.getMessage(locale, messageId);
-
-		if (message != null) {
-			message = ShowcaseUtil.encodeDescription(message);
-		}
-
-		return message;
+	public MessageContext getMessageContext() throws FacesException {
+		return messageContext;
 	}
 
 	@Override
-	public MessageContext getWrapped() {
-		return wrappedMessageContext;
+	public MessageContextFactory getWrapped() {
+		return wrappedMessageContextFactory;
 	}
 }

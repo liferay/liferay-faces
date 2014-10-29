@@ -27,6 +27,7 @@ import javax.faces.validator.LengthValidator;
 
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.context.MessageContext;
+import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -74,7 +75,7 @@ public class InputRichText extends InputRichTextBase implements ClientBehaviorHo
 				editorType = PropsUtil.get(editorKey);
 			}
 
-			RichText.Type richTextType = null;
+			RichText.Type richTextType;
 
 			if ("ckeditor_bbcode".equals(editorType)) {
 				richTextType = RichText.Type.BBCODE;
@@ -99,8 +100,7 @@ public class InputRichText extends InputRichTextBase implements ClientBehaviorHo
 
 				Object label = getAttributes().get(StringPool.LABEL);
 				Locale locale = facesContext.getViewRoot().getLocale();
-				MessageContext messageContext = MessageContext.getInstance();
-				FacesMessage facesMessage = messageContext.newFacesMessage(locale, FacesMessage.SEVERITY_ERROR,
+				FacesMessage facesMessage = getMessageContext().newFacesMessage(locale, FacesMessage.SEVERITY_ERROR,
 						LengthValidator.MINIMUM_MESSAGE_ID, minimum, label);
 				facesContext.addMessage(getClientId(), facesMessage);
 				setValid(false);
@@ -110,8 +110,7 @@ public class InputRichText extends InputRichTextBase implements ClientBehaviorHo
 
 				Object label = getAttributes().get(StringPool.LABEL);
 				Locale locale = facesContext.getViewRoot().getLocale();
-				MessageContext messageContext = MessageContext.getInstance();
-				FacesMessage facesMessage = messageContext.newFacesMessage(locale, FacesMessage.SEVERITY_ERROR,
+				FacesMessage facesMessage = getMessageContext().newFacesMessage(locale, FacesMessage.SEVERITY_ERROR,
 						LengthValidator.MAXIMUM_MESSAGE_ID, maximum, label);
 				facesContext.addMessage(getClientId(), facesMessage);
 				setValid(false);
@@ -144,6 +143,14 @@ public class InputRichText extends InputRichTextBase implements ClientBehaviorHo
 		}
 
 		return label;
+	}
+
+	protected MessageContext getMessageContext() {
+
+		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+				MessageContextFactory.class);
+
+		return messageContextFactory.getMessageContext();
 	}
 
 	@Override

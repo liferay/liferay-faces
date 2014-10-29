@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 
 	<name>LiferayFacesAlloy</name>
 	<ordering>
@@ -11,11 +13,8 @@
 	<application>
 		<el-resolver>com.liferay.faces.alloy.el.AUIELResolver</el-resolver>
 		<system-event-listener>
-			<system-event-listener-class>com.liferay.faces.alloy.event.internal.ApplicationStartupListener</system-event-listener-class>
-			<system-event-class>com.liferay.faces.util.event.PostConstructApplicationConfigEvent</system-event-class>
-		</system-event-listener>
-		<system-event-listener>
-			<system-event-listener-class>com.liferay.faces.alloy.component.inputfile.InputFileRenderer</system-event-listener-class>
+			<system-event-listener-class>com.liferay.faces.alloy.component.inputfile.InputFileRenderer
+			</system-event-listener-class>
 			<system-event-class>com.liferay.faces.util.event.PostConstructApplicationConfigEvent</system-event-class>
 		</system-event-listener>
 	</application>
@@ -77,7 +76,8 @@
 	</converter>
 	<factory>
 		<factory-extension>
-			<component-resource-factory>com.liferay.faces.alloy.application.internal.ComponentResourceFactoryAlloyImpl</component-resource-factory>
+			<util:component-resource-factory>com.liferay.faces.alloy.application.internal.ComponentResourceFactoryAlloyImpl</util:component-resource-factory>
+			<util:message-context-factory>com.liferay.faces.alloy.context.internal.MessageContextFactoryAlloyImpl</util:message-context-factory>
 		</factory-extension>
 	</factory>
 	<render-kit>

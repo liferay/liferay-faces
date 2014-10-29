@@ -25,12 +25,20 @@ import javax.faces.context.FacesContext;
  */
 public abstract class MessageContext {
 
-	protected static MessageContext instance = new MessageContextImpl();
+	protected static MessageContext instance;
 
+	/**
+	 * @deprecated  Call {@link com.liferay.faces.util.context.MessageContextFactory#getMessageContext()} instead.
+	 */
+	@Deprecated
 	public static MessageContext getInstance() {
 		return instance;
 	}
 
+	/**
+	 * @deprecated  Register an instance of {@link com.liferay.faces.util.context.MessageContextFactory} instead.
+	 */
+	@Deprecated
 	public static void setInstance(MessageContext messageContext) {
 		instance = messageContext;
 	}

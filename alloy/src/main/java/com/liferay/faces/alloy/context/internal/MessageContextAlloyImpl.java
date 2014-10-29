@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.context;
+package com.liferay.faces.alloy.context.internal;
 
 import java.text.MessageFormat;
 import java.util.Locale;
@@ -40,9 +40,11 @@ public class MessageContextAlloyImpl extends MessageContextWrapper {
 	private MessageContext wrappedMessageContext;
 	private Map<String, String> messageMap;
 
+	@SuppressWarnings("deprecation")
 	public MessageContextAlloyImpl(MessageContext messageContext) {
 		this.wrappedMessageContext = messageContext;
 		this.messageMap = new ConcurrentHashMap<String, String>();
+		setInstance(this);
 	}
 
 	@Override

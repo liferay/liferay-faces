@@ -46,7 +46,9 @@ import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.context.MessageContext;
+import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.context.map.MultiPartFormData;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.js.JavaScriptArray;
 import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
@@ -163,8 +165,7 @@ public class InputFileRenderer extends InputFileRendererCompat implements System
 			String execute = ajaxParameters.getExecute();
 			String render = ajaxParameters.getRender();
 
-			MessageContext messageContext = MessageContext.getInstance();
-			String notStartedMessage = messageContext.getMessage(locale, "not-started");
+			String notStartedMessage = getMessageContext().getMessage(locale, "not-started");
 			JavaScriptFragment clientComponent = new JavaScriptFragment("Liferay.component('" + clientKey + "')");
 			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initProgressUploader", alloyNamespace,
 				clientComponent, contentTypes, clientId, formClientId, namingContainerId, inputFile.isAuto(), execute,
@@ -299,8 +300,7 @@ public class InputFileRenderer extends InputFileRendererCompat implements System
 
 		// selectFilesButton
 		Locale locale = facesContext.getViewRoot().getLocale();
-		MessageContext messageContext = MessageContext.getInstance();
-		String chooseFiles = messageContext.getMessage(locale, "choose-files");
+		String chooseFiles = getMessageContext().getMessage(locale, "choose-files");
 		StringBuilder selectFilesButtonScript = new StringBuilder();
 		selectFilesButtonScript.append(
 			"A.Node.create(\"<button type='button' class='yui3-widget btn btn-content' role='button' aria-label='");
@@ -347,6 +347,14 @@ public class InputFileRenderer extends InputFileRendererCompat implements System
 		}
 
 		return inputFileValidator;
+	}
+
+	protected MessageContext getMessageContext() {
+
+		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+				MessageContextFactory.class);
+
+		return messageContextFactory.getMessageContext();
 	}
 
 	@Override
