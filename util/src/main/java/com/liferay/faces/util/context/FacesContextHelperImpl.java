@@ -37,6 +37,8 @@ import javax.servlet.http.HttpSession;
 
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.context.map.JavaScriptMap;
+import com.liferay.faces.util.factory.FactoryExtension;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.helper.IntegerHelper;
 import com.liferay.faces.util.helper.LongHelper;
@@ -132,21 +134,21 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	public void addMessage(String clientId, Severity severity, String messageId) {
 
 		Locale locale = getLocale();
-		FacesMessage facesMessage = MessageContext.getInstance().newFacesMessage(locale, severity, messageId);
+		FacesMessage facesMessage = getMessageContext().newFacesMessage(locale, severity, messageId);
 		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
 	}
 
 	public void addMessage(String clientId, Severity severity, String messageId, Object argument) {
 
 		Locale locale = getLocale();
-		FacesMessage facesMessage = MessageContext.getInstance().newFacesMessage(locale, severity, messageId, argument);
+		FacesMessage facesMessage = getMessageContext().newFacesMessage(locale, severity, messageId, argument);
 		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
 	}
 
 	public void addMessage(String clientId, Severity severity, String messageId, Object... arguments) {
 
 		Locale locale = getLocale();
-		FacesMessage facesMessage = MessageContext.getInstance().newFacesMessage(locale, severity, messageId, arguments);
+		FacesMessage facesMessage = getMessageContext().newFacesMessage(locale, severity, messageId, arguments);
 		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
 	}
 
@@ -292,15 +294,23 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public String getMessage(String messageId, Object... arguments) {
-		return MessageContext.getInstance().getMessage(getLocale(), messageId, arguments);
+
+		return getMessageContext().getMessage(getLocale(), messageId, arguments);
 	}
 
 	public String getMessage(Locale locale, String messageId) {
-		return MessageContext.getInstance().getMessage(locale, messageId);
+		return getMessageContext().getMessage(locale, messageId);
 	}
 
 	public String getMessage(Locale locale, String messageId, Object... arguments) {
-		return MessageContext.getInstance().getMessage(locale, messageId, arguments);
+		return getMessageContext().getMessage(locale, messageId, arguments);
+	}
+
+	protected MessageContext getMessageContext() {
+		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+				MessageContextFactory.class);
+
+		return messageContextFactory.getMessageContext();
 	}
 
 	public String getNamespace() {

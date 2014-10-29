@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 
 	<application>
 		<el-resolver>com.liferay.faces.alloy.el.AUIELResolver</el-resolver>
@@ -57,6 +58,11 @@
 		<converter-id>convertLongList</converter-id>
 		<converter-class>com.liferay.faces.alloy.converter.LongListConverter</converter-class>
 	</converter>
+	<factory>
+		<factory-extension>
+			<util:message-context-factory>com.liferay.faces.alloy.context.internal.MessageContextFactoryAlloyImpl</util:message-context-factory>
+		</factory-extension>
+	</factory>
 	<render-kit>
 		<renderer>
 			<component-family>javax.faces.Panel</component-family>

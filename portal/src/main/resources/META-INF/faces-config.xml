@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 	<lifecycle>
 		<phase-listener>com.liferay.faces.portal.lifecycle.LiferayLocalePhaseListener</phase-listener>
 	</lifecycle>
@@ -17,6 +18,11 @@
 		<component-type>com.liferay.faces.portal.InputEditorInternal</component-type>
 		<component-class>com.liferay.faces.portal.component.InputEditorInternal</component-class>
 	</component>
+	<factory>
+		<factory-extension>
+			<util:message-context-factory>com.liferay.faces.portal.context.internal.MessageContextFactoryPortalImpl</util:message-context-factory>
+		</factory-extension>
+	</factory>
 	<render-kit>
 		<renderer>
 			<component-family>com.liferay.faces.portal.PermissionsURL</component-family>
