@@ -25,7 +25,9 @@ import javax.faces.event.ActionListener;
 import javax.faces.model.DataModel;
 
 import com.liferay.faces.util.context.MessageContext;
+import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.el.FaceletUtil;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.model.RowMarker;
@@ -116,12 +118,19 @@ public class RowMarksActionListener implements ActionListener {
 
 	protected void addGlobalSuccessInfoMessage() {
 
-		MessageContext.getInstance().newFacesMessage(FacesContext.getCurrentInstance(), FacesMessage.SEVERITY_INFO,
+		getMessageContext().newFacesMessage(FacesContext.getCurrentInstance(), FacesMessage.SEVERITY_INFO,
 			"your-request-processed-successfully");
 	}
 
 	protected void addGlobalUnexpectedErrorMessage() {
-		MessageContext.getInstance().newFacesMessage(FacesContext.getCurrentInstance(), FacesMessage.SEVERITY_INFO,
+		getMessageContext().newFacesMessage(FacesContext.getCurrentInstance(), FacesMessage.SEVERITY_INFO,
 			"an-unexpected-error-occurred");
+	}
+
+	protected MessageContext getMessageContext() {
+		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+				MessageContextFactory.class);
+
+		return messageContextFactory.getMessageContext();
 	}
 }
