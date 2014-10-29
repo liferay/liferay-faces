@@ -26,8 +26,9 @@
 		<partial-view-context-factory>com.liferay.faces.util.context.PartialViewContextFactoryScriptImpl</partial-view-context-factory>
 		<factory-extension>
 			<util:browser-sniffer-factory>com.liferay.faces.util.client.internal.BrowserSnifferFactoryImpl</util:browser-sniffer-factory>
-			<util:component-resource-factory>com.liferay.faces.util.application.internal.ComponentResourceFactoryImpl</util:component-resource-factory>
 			<util:client-script-factory>com.liferay.faces.util.client.internal.ClientScriptFactoryImpl</util:client-script-factory>
+			<util:component-resource-factory>com.liferay.faces.util.application.internal.ComponentResourceFactoryImpl</util:component-resource-factory>
+			<util:message-context-factory>com.liferay.faces.util.context.internal.MessageContextFactoryImpl</util:message-context-factory>
 			<util:rich-text-factory>com.liferay.faces.util.text.internal.RichTextFactoryImpl</util:rich-text-factory>
 			<util:template-factory>com.liferay.faces.util.template.internal.TemplateFactoryImpl</util:template-factory>
 			<util:uploaded-file-factory>com.liferay.faces.util.model.internal.UploadedFileFactoryImpl</util:uploaded-file-factory>
