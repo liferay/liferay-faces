@@ -11,9 +11,6 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-/**
- * Copyright (c) 2011 tritonsvc.com All rights reserved.
- */
 package com.liferay.faces.alloy.el;
 
 import java.beans.FeatureDescriptor;
