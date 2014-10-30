@@ -18,6 +18,7 @@
 		<!-- jsf2-cdi-portlet cannot be tested on WebLogic 10.x since it implements Servlet 2.5 -->
 		<module>jsf2-cdi-portlet</module>
 		<module>jsf2-spring-portlet</module>
+		<module>liferayfaces3-portlet</module>
 		<module>primefaces3-portlet</module>
 		<module>primefaces4-portlet</module>
 		<module>primefaces5-portlet</module>

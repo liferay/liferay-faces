@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<alloy:form>
+
+		<alloy:messages globalOnly="true" />
+
+		<table>
+			<tr>
+				<td><alloy:outputLabel for="datePattern" value="#{i18n['date-format']}" /></td>
+				<td><alloy:inputText id="datePattern" value="#{mutablePortletPreferencesValues['datePattern'].value}" /></td>
+				<td><alloy:message for="datePattern" /></td>
+			</tr>
+		</table>
+
+		<hr />
+
+		<alloy:commandButton actionListener="#{portletPreferencesBackingBean.submit}" value="#{i18n['submit']}" />
+		<alloy:commandButton actionListener="#{portletPreferencesBackingBean.reset}" value="#{i18n['reset']}" />
+
+	</alloy:form>
+
+</ui:composition>
