@@ -11,9 +11,6 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-/**
- * Copyright (c) 2011 tritonsvc.com All rights reserved.
- */
 package com.liferay.faces.alloy.el;
 
 import java.lang.reflect.Method;
@@ -29,7 +26,7 @@ public class AUI {
 	private static final String METHOD_GET_BUILD_NUMBER = "getBuildNumber";
 
 	// Singleton Instance
-	private static AUI instance = new AUI();
+	private static final AUI instance = new AUI();
 
 	// Private Data Members
 	private Boolean provided;
@@ -37,7 +34,7 @@ public class AUI {
 
 	public AUI() {
 
-		liferayBuildNumber = new Integer(0);
+		liferayBuildNumber = 0;
 
 		try {
 			Class<?> clazz = Class.forName(FQCN_RELEASE_INFO);
@@ -59,11 +56,6 @@ public class AUI {
 	}
 
 	public static AUI getInstance() {
-
-		if (instance == null) {
-			instance = new AUI();
-		}
-
 		return instance;
 	}
 
@@ -77,6 +69,6 @@ public class AUI {
 	}
 
 	public int getLiferayBuildNumber() {
-		return liferayBuildNumber.intValue();
+		return liferayBuildNumber;
 	}
 }
