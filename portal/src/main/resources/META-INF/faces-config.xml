@@ -15,7 +15,12 @@
 	<application>
 		<resource-handler>com.liferay.faces.portal.resource.LiferayPortalResourceHandler</resource-handler>
 	</application>
+	<component>
+		<component-type>com.liferay.faces.portal.PermissionsURL</component-type>
+		<component-class>com.liferay.faces.portal.component.PermissionsURL</component-class>
+	</component>
 	<factory>
+		<partial-view-context-factory>com.liferay.faces.util.context.PartialViewContextFactoryCleanupImpl</partial-view-context-factory>
 		<factory-extension>
 			<util:message-context-factory>com.liferay.faces.portal.context.internal.MessageContextFactoryPortalImpl</util:message-context-factory>
 		</factory-extension>
@@ -23,4 +28,11 @@
 	<lifecycle>
 		<phase-listener>com.liferay.faces.portal.lifecycle.LiferayLocalePhaseListener</phase-listener>
 	</lifecycle>
+	<render-kit>
+		<renderer>
+			<component-family>com.liferay.faces.portal.PermissionsURL</component-family>
+			<renderer-type>com.liferay.faces.portal.renderkit.PermissionsURLRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.portal.renderkit.PermissionsURLRenderer</renderer-class>
+		</renderer>
+	</render-kit>
 </faces-config>
