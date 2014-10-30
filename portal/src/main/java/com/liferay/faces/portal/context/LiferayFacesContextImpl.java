@@ -54,7 +54,6 @@ import javax.portlet.WindowState;
 
 import com.liferay.faces.portal.security.AuthorizationException;
 import com.liferay.faces.util.context.FacesContextHelper;
-import com.liferay.faces.util.context.MessageContext;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ReleaseInfo;
@@ -87,9 +86,6 @@ public class LiferayFacesContextImpl extends LiferayFacesContext implements Seri
 
 	public LiferayFacesContextImpl() {
 		setInstance(this);
-
-		MessageContext messageContext = MessageContext.getInstance();
-		MessageContext.setInstance(new MessageContextLiferayImpl(messageContext));
 	}
 
 	/**
@@ -668,7 +664,7 @@ public class LiferayFacesContextImpl extends LiferayFacesContext implements Seri
 	}
 
 	/**
-	 * @see  FacesContextHelper#getPortletNamespace()
+	 * @see  FacesContextHelper#getNamespace()
 	 */
 	public String getNamespace() {
 		return facesContextHelper.getNamespace();
@@ -792,7 +788,7 @@ public class LiferayFacesContextImpl extends LiferayFacesContext implements Seri
 	 * @see  PortletHelper#getPortletPreferenceAsShort(String, short)
 	 */
 	public short getPortletPreferenceAsShort(String preferenceName, short defaultValue) {
-		return getPortletPreferenceAsShort(preferenceName, defaultValue);
+		return portletHelper.getPortletPreferenceAsShort(preferenceName, defaultValue);
 	}
 
 	/**
