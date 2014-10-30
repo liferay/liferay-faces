@@ -22,12 +22,6 @@ import com.liferay.faces.util.factory.FactoryExtension;
  */
 public abstract class BeanManagerFactory implements FactoryExtension<BeanManagerFactory> {
 
-	/**
-	 * @deprecated  Call {@link #getBeanManager(com.liferay.faces.util.config.FacesConfig)} instead.
-	 */
-	@Deprecated
-	public abstract BeanManager getBanManager();
-
 	public abstract BeanManager getBeanManager(FacesConfig facesConfig);
 
 }
