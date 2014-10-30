@@ -13,11 +13,6 @@
  */
 package com.liferay.faces.bridge.bean;
 
-import java.util.Map;
-
-import javax.faces.context.FacesContext;
-
-import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
@@ -31,19 +26,6 @@ public class BeanManagerFactoryImpl extends BeanManagerFactory {
 	// Private Constants
 	private static final boolean MOJARRA_DETECTED = ProductMap.getInstance().get(ProductConstants.JSF).getTitle()
 		.equals(ProductConstants.MOJARRA);
-
-	@Deprecated
-	@Override
-	public BeanManager getBanManager() {
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		Map<String, Object> applicationMap = facesContext.getExternalContext().getApplicationMap();
-		String appConfigAttrName = ApplicationConfig.class.getName();
-		ApplicationConfig applicationConfig = (ApplicationConfig) applicationMap.get(appConfigAttrName);
-		FacesConfig facesConfig = applicationConfig.getFacesConfig();
-
-		return getBeanManager(facesConfig);
-	}
 
 	@Override
 	public BeanManager getBeanManager(FacesConfig facesConfig) {
