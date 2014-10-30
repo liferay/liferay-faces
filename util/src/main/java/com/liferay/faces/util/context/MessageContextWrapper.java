@@ -24,7 +24,7 @@ import javax.faces.context.FacesContext;
 /**
  * @author  Neil Griffin
  */
-public abstract class MessageContextWrapper extends MessageContext implements FacesWrapper<MessageContext> {
+public abstract class MessageContextWrapper implements MessageContext, FacesWrapper<MessageContext> {
 
 	@Override
 	public FacesMessage newFacesMessage(Locale locale, Severity severity, String messageId) {

@@ -40,11 +40,9 @@ public class MessageContextAlloyImpl extends MessageContextWrapper {
 	private MessageContext wrappedMessageContext;
 	private Map<String, String> messageMap;
 
-	@SuppressWarnings("deprecation")
 	public MessageContextAlloyImpl(MessageContext messageContext) {
 		this.wrappedMessageContext = messageContext;
 		this.messageMap = new ConcurrentHashMap<String, String>();
-		setInstance(this);
 	}
 
 	@Override

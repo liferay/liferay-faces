@@ -30,14 +30,9 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 /**
  * @author  Neil Griffin
  */
-public class MessageContextImpl extends MessageContext {
+public class MessageContextImpl implements MessageContext {
 
 	private Map<Locale, ResourceBundle> facesResourceBundleMap = new ConcurrentHashMap<Locale, ResourceBundle>();
-
-	@SuppressWarnings("deprecation")
-	public MessageContextImpl() {
-		setInstance(this);
-	}
 
 	@Override
 	public FacesMessage newFacesMessage(FacesContext facesContext, Severity severity, String key) {
