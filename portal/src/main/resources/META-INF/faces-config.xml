@@ -16,7 +16,16 @@
 		<resource-handler>com.liferay.faces.portal.resource.LiferayFacesResourceHandler</resource-handler>
 		<resource-handler>com.liferay.faces.portal.resource.LiferayPortalResourceHandler</resource-handler>
 	</application>
+	<component>
+		<component-type>com.liferay.faces.portal.PermissionsURL</component-type>
+		<component-class>com.liferay.faces.portal.component.PermissionsURL</component-class>
+	</component>
+	<component>
+		<component-type>com.liferay.faces.portal.InputEditorInternal</component-type>
+		<component-class>com.liferay.faces.portal.component.InputEditorInternal</component-class>
+	</component>
 	<factory>
+		<partial-view-context-factory>com.liferay.faces.util.context.PartialViewContextFactoryCleanupImpl</partial-view-context-factory>
 		<factory-extension>
 			<util:message-context-factory>com.liferay.faces.portal.context.internal.MessageContextFactoryPortalImpl</util:message-context-factory>
 		</factory-extension>
@@ -24,8 +33,24 @@
 	<lifecycle>
 		<phase-listener>com.liferay.faces.portal.lifecycle.LiferayLocalePhaseListener</phase-listener>
 	</lifecycle>
+	<render-kit>
+		<renderer>
+			<component-family>com.liferay.faces.portal.PermissionsURL</component-family>
+			<renderer-type>com.liferay.faces.portal.renderkit.PermissionsURLRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.portal.renderkit.PermissionsURLRenderer</renderer-class>
+		</renderer>
+		<renderer>
+			<component-family>com.liferay.faces.portal.InputEditorInternal</component-family>
+			<renderer-type>com.liferay.faces.portal.renderkit.InputEditorInternalRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.portal.renderkit.InputEditorInternalRenderer</renderer-class>
+		</renderer>
+	</render-kit>
 	<validator>
 		<validator-id>com.liferay.faces.portal.CaptchaValidator</validator-id>
 		<validator-class>com.liferay.faces.portal.validator.CaptchaValidator</validator-class>
+	</validator>
+	<validator>
+		<validator-id>com.liferay.faces.portal.RichTextLengthValidator</validator-id>
+		<validator-class>com.liferay.faces.portal.validator.RichTextLengthValidator</validator-class>
 	</validator>
 </faces-config>
