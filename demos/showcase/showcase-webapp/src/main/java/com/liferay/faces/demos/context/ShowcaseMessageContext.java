@@ -28,10 +28,8 @@ public class ShowcaseMessageContext extends MessageContextWrapper {
 	// Private Data Members
 	private MessageContext wrappedMessageContext;
 
-	@SuppressWarnings("deprecation")
 	public ShowcaseMessageContext(MessageContext messageContext) {
 		this.wrappedMessageContext = messageContext;
-		setInstance(this);
 	}
 
 	@Override

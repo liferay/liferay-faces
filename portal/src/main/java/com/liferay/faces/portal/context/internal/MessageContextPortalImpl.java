@@ -29,10 +29,8 @@ public class MessageContextPortalImpl extends MessageContextWrapper {
 	// Private Data Members
 	private MessageContext wrappedMessageContext;
 
-	@SuppressWarnings("deprecation")
 	public MessageContextPortalImpl(MessageContext messageContext) {
 		this.wrappedMessageContext = messageContext;
-		setInstance(this);
 	}
 
 	@Override
