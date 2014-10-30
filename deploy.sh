@@ -186,8 +186,10 @@ fi
 
 if [ "$REBUILD_SHOWCASE" = "true" ] ; then
 	if [ -z $EXTRA_PROFILE_NAMES ] ; then
+		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/demos/showcase/showcase-common; mvn clean install; popd
 		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/demos/showcase/showcase-webapp; mvn clean install; popd
 	else
+		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/demos/showcase/showcase-common; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
 		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/demos/showcase/showcase-webapp; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
 	fi
 fi
