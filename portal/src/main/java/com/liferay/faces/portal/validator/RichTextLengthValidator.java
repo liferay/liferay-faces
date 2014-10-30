@@ -24,8 +24,9 @@ import javax.faces.validator.LengthValidator;
 import javax.faces.validator.ValidatorException;
 
 import com.liferay.faces.portal.component.UIComponentHelper;
-import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.context.MessageContext;
+import com.liferay.faces.util.context.MessageContextFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -69,6 +70,11 @@ public class RichTextLengthValidator extends LengthValidator {
 
 		if (value != null) {
 
+			Locale locale = facesContext.getViewRoot().getLocale();
+			MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+					MessageContextFactory.class);
+			MessageContext messageContext = messageContextFactory.getMessageContext();
+
 			int length = getPlainTextStringLength(value);
 			int minimum = getMinimum();
 			int maximum = getMaximum();
@@ -77,9 +83,6 @@ public class RichTextLengthValidator extends LengthValidator {
 
 			if ((minimum > 0) && (length < minimum)) {
 				Object label = UIComponentHelper.getLabel(facesContext, uiComponent);
-				LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-				Locale locale = liferayFacesContext.getLocale();
-				MessageContext messageContext = MessageContext.getInstance();
 				FacesMessage facesMessage = messageContext.newFacesMessage(locale, FacesMessage.SEVERITY_ERROR,
 						MINIMUM_MESSAGE_ID, maximum, label);
 				throw new ValidatorException(facesMessage);
@@ -87,9 +90,6 @@ public class RichTextLengthValidator extends LengthValidator {
 
 			if ((maximum > 0) && (length > maximum)) {
 				Object label = UIComponentHelper.getLabel(facesContext, uiComponent);
-				LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-				Locale locale = liferayFacesContext.getLocale();
-				MessageContext messageContext = MessageContext.getInstance();
 				FacesMessage facesMessage = messageContext.newFacesMessage(locale, FacesMessage.SEVERITY_ERROR,
 						MAXIMUM_MESSAGE_ID, maximum, label);
 				throw new ValidatorException(facesMessage);
