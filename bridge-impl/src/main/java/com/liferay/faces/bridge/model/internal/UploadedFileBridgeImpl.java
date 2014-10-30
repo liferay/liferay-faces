@@ -15,6 +15,7 @@ package com.liferay.faces.bridge.model.internal;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 
@@ -24,7 +25,10 @@ import com.liferay.faces.bridge.model.UploadedFile;
 /**
  * @author  Neil Griffin
  */
-public class UploadedFileBridgeImpl implements UploadedFile {
+public class UploadedFileBridgeImpl implements Serializable, UploadedFile {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 2492812271137403881L;
 
 	// Private Data Members
 	private com.liferay.faces.util.model.UploadedFile wrappedUploadedFile;
