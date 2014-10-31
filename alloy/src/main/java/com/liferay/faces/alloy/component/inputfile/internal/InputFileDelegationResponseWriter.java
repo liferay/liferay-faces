@@ -29,7 +29,7 @@ import com.liferay.faces.util.render.DelegationResponseWriterBase;
  *
  * @author  Neil Griffin
  */
-public class InputFileDelegationResponseWriter extends DelegationResponseWriterBase {
+public class InputFileDelegationResponseWriter extends InputFileDelegationResponseWriterCompat {
 
 	// Private Data Members
 	private boolean auto;
