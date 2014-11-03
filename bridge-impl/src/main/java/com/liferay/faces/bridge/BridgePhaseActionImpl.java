@@ -18,10 +18,15 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.faces.Bridge;
+import javax.portlet.faces.Bridge.PortletPhase;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
+import com.liferay.faces.bridge.container.PortletContainer;
+import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -37,13 +42,22 @@ public class BridgePhaseActionImpl extends BridgePhaseCompat_2_2_Impl {
 
 	// Private Data Members
 	private ActionRequest actionRequest;
-	private ActionResponse actionResponse;
+	private BridgeActionResponse actionResponse;
 
 	public BridgePhaseActionImpl(ActionRequest actionRequest, ActionResponse actionResponse,
 		PortletConfig portletConfig) {
 		super(portletConfig);
 		this.actionRequest = actionRequest;
-		this.actionResponse = actionResponse;
+		this.actionResponse = new BridgeActionResponse(actionResponse);
+	}
+
+	@Override
+	protected void initBridgeRequestScope(
+		PortletRequest portletRequest, PortletResponse portletResponse, PortletPhase portletPhase,
+		PortletContainer portletContainer, IncongruityContext incongruityContext) {
+
+		super.initBridgeRequestScope(portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
+		actionResponse.setRequestScope(bridgeRequestScope);
 	}
 
 	public void execute() throws BridgeDefaultViewNotSpecifiedException, BridgeException {
