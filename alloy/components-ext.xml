@@ -1212,7 +1212,6 @@
 		</attributes>
 	</component>
 	<component name="InputDate" extendsTags="InputDateTimeCommon"
-		handlerClass="com.liferay.faces.alloy.component.inputdate.InputDateHandler"
 		parentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTime"
 		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRenderer"
 		module="aui-datepicker" yui="true" yuiName="DatePicker">
@@ -1534,7 +1533,6 @@
 		</attributes>
 	</component>
 	<component name="InputTime" extendsTags="InputDateTimeCommon"
-		handlerClass="com.liferay.faces.alloy.component.inputtime.InputTimeHandler"
 		parentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTime"
 		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.InputDateTimeRenderer"
 		module="aui-timepicker" yui="true" yuiName="TimePicker">

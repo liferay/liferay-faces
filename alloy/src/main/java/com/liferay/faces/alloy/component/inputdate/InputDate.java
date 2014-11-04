@@ -15,24 +15,14 @@ package com.liferay.faces.alloy.component.inputdate;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.component.UIComponent;
-import javax.faces.component.behavior.AjaxBehavior;
-import javax.faces.component.behavior.Behavior;
-import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.context.FacesContext;
-import javax.faces.event.AjaxBehaviorEvent;
 
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
 import com.liferay.faces.util.client.BrowserSniffer;
@@ -53,10 +43,6 @@ public class InputDate extends InputDateBase {
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputdate.InputDateRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-input-date";
 
-	// Private Constants
-	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList(
-				DateSelectEvent.DATE_SELECT));
-
 	public InputDate() {
 		super();
 		setRendererType(RENDERER_TYPE);
@@ -72,25 +58,6 @@ public class InputDate extends InputDateBase {
 				locale);
 
 		return simpleDateFormat.toPattern();
-	}
-
-	@Override
-	public void addClientBehavior(String eventName, ClientBehavior clientBehavior) {
-
-		// If the specified client behavior is an Ajax behavior, then the alloy:inputDate component tag has an f:ajax
-		// child tag. Register a behavior listener that can respond to the Ajax behavior by invoking the
-		// dateSelectListener that may have been specified.
-		if (clientBehavior instanceof AjaxBehavior) {
-			AjaxBehavior ajaxBehavior = (AjaxBehavior) clientBehavior;
-			ajaxBehavior.addAjaxBehaviorListener(new InputDateBehaviorListener());
-		}
-
-		super.addClientBehavior(eventName, clientBehavior);
-	}
-
-	@Override
-	protected AjaxBehaviorEvent newSelectEvent(UIComponent uiComponent, Behavior behavior, Date selected) {
-		return new DateSelectEvent(uiComponent, behavior, selected);
 	}
 
 	@Override
@@ -156,21 +123,6 @@ public class InputDate extends InputDateBase {
 		}
 
 		return datePattern;
-	}
-
-	@Override
-	public String getDefaultEventName() {
-		return DateSelectEvent.DATE_SELECT;
-	}
-
-	@Override
-	public Collection<String> getEventNames() {
-
-		List<String> eventNames = new ArrayList<String>();
-		eventNames.addAll(super.getEventNames());
-		eventNames.addAll(EVENT_NAMES);
-
-		return Collections.unmodifiableList(eventNames);
 	}
 
 	@Override

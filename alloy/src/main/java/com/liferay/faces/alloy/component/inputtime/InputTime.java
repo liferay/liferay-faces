@@ -15,22 +15,12 @@ package com.liferay.faces.alloy.component.inputtime;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.TimeZone;
 
 import javax.faces.FacesException;
 import javax.faces.component.FacesComponent;
-import javax.faces.component.UIComponent;
-import javax.faces.component.behavior.AjaxBehavior;
-import javax.faces.component.behavior.Behavior;
-import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.context.FacesContext;
-import javax.faces.event.AjaxBehaviorEvent;
 
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
@@ -52,32 +42,11 @@ public class InputTime extends InputTimeBase {
 	public static final String STYLE_CLASS_NAME = "alloy-input-time";
 
 	// Private Constants
-	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList(
-				TimeSelectEvent.TIME_SELECT));
 	private static final String MIN_MAX_TIME_PATTERN = "HH:mm:ss";
 
 	public InputTime() {
 		super();
 		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public void addClientBehavior(String eventName, ClientBehavior clientBehavior) {
-
-		// If the specified client behavior is an Ajax behavior, then the alloy:inputTime component tag has an f:ajax
-		// child tag. Register a behavior listener that can respond to the Ajax behavior by invoking the
-		// timeSelectListener that may have been specified.
-		if (clientBehavior instanceof AjaxBehavior) {
-			AjaxBehavior ajaxBehavior = (AjaxBehavior) clientBehavior;
-			ajaxBehavior.addAjaxBehaviorListener(new InputTimeBehaviorListener());
-		}
-
-		super.addClientBehavior(eventName, clientBehavior);
-	}
-
-	@Override
-	protected AjaxBehaviorEvent newSelectEvent(UIComponent uiComponent, Behavior behavior, Date selected) {
-		return new TimeSelectEvent(uiComponent, behavior, selected);
 	}
 
 	@Override
@@ -107,21 +76,6 @@ public class InputTime extends InputTimeBase {
 				throw facesException;
 			}
 		}
-	}
-
-	@Override
-	public String getDefaultEventName() {
-		return TimeSelectEvent.TIME_SELECT;
-	}
-
-	@Override
-	public Collection<String> getEventNames() {
-
-		List<String> eventNames = new ArrayList<String>();
-		eventNames.addAll(super.getEventNames());
-		eventNames.addAll(EVENT_NAMES);
-
-		return Collections.unmodifiableList(eventNames);
 	}
 
 	@Override

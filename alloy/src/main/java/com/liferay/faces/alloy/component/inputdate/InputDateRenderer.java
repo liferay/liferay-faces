@@ -15,7 +15,6 @@ package com.liferay.faces.alloy.component.inputdate;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -26,11 +25,11 @@ import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
 import javax.faces.component.behavior.ClientBehavior;
-import javax.faces.component.behavior.ClientBehaviorContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.alloy.component.inputdatetime.InputDateTime;
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeResponseWriter;
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
 import com.liferay.faces.alloy.component.inputtext.InputText;
@@ -58,11 +57,6 @@ import com.liferay.faces.util.render.RendererUtil;
 )
 //J+
 public class InputDateRenderer extends InputDateRendererBase {
-
-	// This is a javascript function that sets the value of the input to the new date. It is used when
-	// showOn="button".
-	private static final String BUTTON_ON_DATE_CLICK_TEMPLATE = "var input=A.one('#{0}');" +
-		"input.set('value',A.Date.format(event.date,{format:'{1}'}));";
 
 	// Private Constants used in getMaskFromDatePattern()
 	private static final String REGEX_TOKEN = "\\{0\\}";
@@ -172,60 +166,37 @@ public class InputDateRenderer extends InputDateRendererBase {
 			calendarFirst = false;
 		}
 
-		String dateSelectClientBehaviorScript = null;
-		Map<String, List<ClientBehavior>> clientBehaviorMap = inputDate.getClientBehaviors();
-		Collection<String> eventNames = inputDate.getEventNames();
-
-		for (String eventName : eventNames) {
-
-			if (DateSelectEvent.DATE_SELECT.equals(eventName)) {
-
-				List<ClientBehavior> clientBehaviorsForEvent = clientBehaviorMap.get(eventName);
-
-				if (clientBehaviorsForEvent != null) {
-
-					for (ClientBehavior clientBehavior : clientBehaviorsForEvent) {
-
-						String clientId = inputDate.getClientId(facesContext);
-						ClientBehaviorContext clientBehaviorContext = ClientBehaviorContext.createClientBehaviorContext(
-								facesContext, inputDate, eventName, clientId, null);
-						dateSelectClientBehaviorScript = clientBehavior.getScript(clientBehaviorContext);
-					}
-				}
-
-				break;
-			}
-		}
-
 		String showOn = inputDate.getShowOn();
+		boolean showOnButton = "button".equals(showOn);
+		Map<String, List<ClientBehavior>> clientBehaviorMap = inputDate.getClientBehaviors();
+		List<ClientBehavior> valueChangeClientBehaviors = clientBehaviorMap.get(VALUE_CHANGE);
+		boolean valueChangeClientBehaviorsNotEmpty = (valueChangeClientBehaviors != null) &&
+			!valueChangeClientBehaviors.isEmpty();
 
-		if ("button".equals(showOn) || (dateSelectClientBehaviorScript != null)) {
+		if (showOnButton || valueChangeClientBehaviorsNotEmpty) {
 
 			encodeNonEscapedObject(responseWriter, "on", StringPool.BLANK, calendarFirst);
 			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
-			StringBuilder stringBuilder = new StringBuilder();
-			stringBuilder.append("function(event){if(this._canBeSelected(event.date)){");
+			encodeNonEscapedObject(responseWriter, "dateClick", StringPool.BLANK, true);
+			responseWriter.write("function(event){");
 
-			if ("button".equals(showOn)) {
+			String clientId = inputDate.getClientId(facesContext);
+			String inputClientId = clientId.concat(INPUT_SUFFIX);
+			String escapedInputClientId = RendererUtil.escapeClientId(inputClientId);
+			JavaScriptFragment selectable = new JavaScriptFragment("this._canBeSelected(event.date)");
+			JavaScriptFragment date = null;
 
-				// Each time a date is clicked, the input must be updated via javascript because the datePicker is not
-				// attached to the input.
-				String clientId = inputDate.getClientId(facesContext);
-				String escapedInputClientId = RendererUtil.escapeClientId(clientId.concat(INPUT_SUFFIX));
-				String buttonOnDateClick = BUTTON_ON_DATE_CLICK_TEMPLATE.replace("{0}", escapedInputClientId);
+			if (showOnButton) {
+
 				String datePattern = inputDate.getDatePattern();
 				String mask = getMaskFromDatePattern(datePattern);
-				String onDateClick = buttonOnDateClick.replace("{1}", mask);
-				stringBuilder.append(onDateClick);
+				date = new JavaScriptFragment("A.Date.format(event.date,{format:'" + mask + "'})");
 			}
 
-			if (dateSelectClientBehaviorScript != null) {
-				stringBuilder.append(dateSelectClientBehaviorScript);
-			}
-
-			stringBuilder.append("}}");
-			encodeNonEscapedObject(responseWriter, "dateClick", stringBuilder.toString(), true);
+			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.inputDateTimePickerSelect", 'A', escapedInputClientId,
+				selectable, date, valueChangeClientBehaviorsNotEmpty);
+			responseWriter.append(";}");
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 			calendarFirst = false;
 		}
@@ -316,19 +287,11 @@ public class InputDateRenderer extends InputDateRendererBase {
 
 	@Override
 	protected String[] getModules(FacesContext facesContext, UIComponent uiComponent) {
+		return getModules(MODULES, facesContext, uiComponent);
+	}
 
-		String[] modules = super.getModules(facesContext, uiComponent);
-		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
-				BrowserSnifferFactory.class);
-		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
-		InputDate inputDate = (InputDate) uiComponent;
-		boolean responsive = inputDate.isResponsive();
-
-		if (browserSniffer.isMobile() && responsive) {
-			String nativeAlloyModuleName = modules[0].concat("-native");
-			modules = new String[] { nativeAlloyModuleName };
-		}
-
+	@Override
+	protected List<String> getModules(List<String> modules, InputDateTime inputDateTime) {
 		return modules;
 	}
 }
