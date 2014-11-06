@@ -80,30 +80,32 @@
                         </alloy:column>
                     </alloy:row>
                 </alloy:fieldset>
-                <alloy:fieldset>
-                    <alloy:row>
-                        <alloy:column>
-                            <alloy:field id="commentsField" label="#{i18n['comments']}">
-                                <alloy:panelGroup id="showHide" layout="block">
-                                    <f:ajax render="commentsField">
-                                        <alloy:commandLink actionListener="#{applicantViewBean.toggleComments}"
+				<alloy:fieldset>
+					<alloy:row>
+						<alloy:column>
+							<alloy:field id="commentsField" label="#{i18n['comments']}">
+								<alloy:panelGroup id="showHide" layout="block">
+									<f:ajax render="commentsField">
+										<alloy:commandLink
+											actionListener="#{applicantViewBean.toggleComments}"
 											rendered="#{!applicantViewBean.commentsRendered}"
 											value="#{i18n['show']} #{i18n['comments']}" />
-                                        <alloy:commandLink actionListener="#{applicantViewBean.toggleComments}"
+										<alloy:commandLink
+											actionListener="#{applicantViewBean.toggleComments}"
 											rendered="#{applicantViewBean.commentsRendered}"
 											value="#{i18n['hide']} #{i18n['comments']}" />
-                                    </f:ajax>
-                                </alloy:panelGroup>
-                                <alloy:inputTextarea id="comments" cols="50" rows="10"
+									</f:ajax>
+								</alloy:panelGroup>
+								<alloy:inputTextarea id="comments" cols="50" rows="10"
 									rendered="#{applicantViewBean.commentsRendered}"
 									value="#{applicantModelBean.comments}">
-                                    <f:ajax />
-                                </alloy:inputTextarea>
-                            </alloy:field>
-                        </alloy:column>
-                    </alloy:row>
-                </alloy:fieldset>
-                <hr />
+									<f:ajax />
+								</alloy:inputTextarea>
+							</alloy:field>
+						</alloy:column>
+					</alloy:row>
+				</alloy:fieldset>
+				<hr />
                 <alloy:commandButton action="#{applicantBackingBean.submit}" value="#{i18n['submit']}">
                     <f:ajax execute="@form" render="@form" />
                 </alloy:commandButton>
@@ -116,34 +118,46 @@
         <alloy:column id="c2" width="33">
             <alloy:row>
                 <alloy:column id="c2a" styleClass="uploaded-files">
-                    <alloy:form id="f2">
-                        <h3>#{i18n['attachments']}</h3>
-                        <alloy:dataTable headerClass="portlet-section-header results-header"
-							rowClasses="portlet-section-body results-row, portlet-section-alternate results-row alt"
-							value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
-                            <alloy:column>
-                                <alloy:commandButton actionListener="#{applicantBackingBean.deleteUploadedFile}"
-									image="#{resource['example:icon-delete.png']}"
-									onclick="if (! confirm('#{i18n['are-you-sure-you-want-to-delete-this']}')) {return false;}"
-									value="#{uploadedFile.id}">
-                                    <f:ajax render="@form" />
-                                </alloy:commandButton>
-                            </alloy:column>
-                            <alloy:column>
-                                <f:facet name="header">
-                                    <alloy:outputText value="#{i18n['file-name']}" />
-                                </f:facet>
-                                <alloy:outputText value="#{uploadedFile.name}" />
-                            </alloy:column>
-                            <alloy:column>
-                                <f:facet name="header">
-                                    <alloy:outputText value="#{i18n['size']}" />
-                                </f:facet>
-                                <alloy:outputText value="#{uploadedFile.size}" />
-                            </alloy:column>
-                        </alloy:dataTable>
-                    </alloy:form>
-                    <hr />
+					<alloy:form id="f2">
+						<alloy:dialog clientKey="dialogKey" dismissible="true">
+							<alloy:field styleClass="dialog-content">
+								<alloy:outputText
+									value="#{i18n['are-you-sure-you-want-to-delete-this']}" />
+							</alloy:field>
+							<alloy:commandButton
+								actionListener="#{applicantBackingBean.deleteFile}"
+								value="#{i18n['yes']}">
+								<f:ajax render="@form" />
+							</alloy:commandButton>
+							<alloy:button onclick="Liferay.component('dialogKey').hide();"
+								value="#{i18n['no']}" />
+						</alloy:dialog>
+						<h3>#{i18n['attachments']}</h3>
+						<alloy:dataTable value="#{applicantModelBean.uploadedFiles}"
+							var="uploadedFile">
+							<alloy:column>
+								<alloy:commandButton
+									action="#{applicantBackingBean.fileToDelete(uploadedFile)}"
+									onclick="Liferay.component('dialogKey').show();">
+									<alloy:icon name="trash" />
+									<f:ajax />
+								</alloy:commandButton>
+							</alloy:column>
+							<alloy:column>
+								<f:facet name="header">
+									<alloy:outputText value="#{i18n['file-name']}" />
+								</f:facet>
+								<alloy:outputText value="#{uploadedFile.name}" />
+							</alloy:column>
+							<alloy:column>
+								<f:facet name="header">
+									<alloy:outputText value="#{i18n['size']}" />
+								</f:facet>
+								<alloy:outputText value="#{uploadedFile.size}" />
+							</alloy:column>
+						</alloy:dataTable>
+					</alloy:form>
+					<hr />
                     <alloy:form id="f3" enctype="multipart/form-data">
                         <alloy:inputFile fileUploadListener="#{applicantBackingBean.handleFileUpload}"
 							multiple="multiple">
