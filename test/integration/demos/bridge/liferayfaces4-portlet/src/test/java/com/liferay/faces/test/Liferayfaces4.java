@@ -38,7 +38,7 @@ public class Liferayfaces4 extends TesterBase {
 
 	// preferences elements
 	private static final String datePatternFieldXpath = "//input[contains(@id,':datePattern')]";
-	private static final String resetButtonXpath = "//input[@type='submit' and @value='Reset']";
+	private static final String resetButtonXpath = "//button[@value='Reset']";
 
 	// elements for Job Applicants
 	private static final String logoXpath = "//img[contains(@src,'liferay-logo.png')]";
@@ -74,12 +74,12 @@ public class Liferayfaces4 extends TesterBase {
 	private static final String commentsXpath = "//textarea[contains(@id,':comments')]";
 
 	private static final String fileUploadChooserXpath = "//input[@type='file' and @multiple='multiple']";
-	private static final String submitFileXpath = "//form[@method='post' and @enctype='multipart/form-data']/input[@type='submit' and @value='Submit']";
-	private static final String uploadedFileXpath = "//tr[@class='portlet-section-body results-row']/td[2]";
+	private static final String submitFileXpath = "//form[@method='post' and @enctype='multipart/form-data']/button[@value='Submit']";
+	private static final String uploadedFileXpath = "//h3[contains(text(),'Attachments')]/following-sibling::table/tbody/tr[contains(@class,'datatable-cell')]/td[2]";
 
-	private static final String submitButtonXpath = "//input[@type='submit' and @value='Submit']";
-	private static final String preferencesSubmitButtonXpath = "//input[@type='submit' and @value='Submit']";
-	private static final String editPreferencesButtonXpath = "//input[@type='submit' and @value='Edit Preferences']";
+	private static final String submitButtonXpath = "//button[@value='Submit']";
+	private static final String preferencesSubmitButtonXpath = "//button[@value='Submit']";
+	private static final String editPreferencesButtonXpath = "//button[@value='Edit Preferences']";
 	private static final String returnLinkXpath = "//a[contains(text(),'Return to Full Page')]";
 
 	private static final String mojarraVersionXpath = "//*[contains(text(),'Mojarra')]";
@@ -88,7 +88,7 @@ public class Liferayfaces4 extends TesterBase {
 	private static final String bridgeVersionXpath = "//*[contains(text(),'Liferay Faces Bridge')]";
 
 	// xpath for specific tests
-	protected static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../child::node()";
+	protected static final String dateValidationXpath = "//div[contains(@id,':dateOfBirthField')]/*";
 
 	static final String url = baseUrl + webContext + "/lf4";
 
@@ -169,6 +169,6 @@ public class Liferayfaces4 extends TesterBase {
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
 	
-	protected int dateValidationXpathModifier = 1;
+	protected int dateValidationXpathModifier = 0;
 
 }
