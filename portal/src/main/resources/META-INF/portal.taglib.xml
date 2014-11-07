@@ -371,31 +371,13 @@ java.lang.Object)</method-signature>
 		<component>
 			<component-type>com.liferay.faces.portal.component.navbarsearch.NavBarSearch</component-type>
 			<renderer-type>com.liferay.faces.portal.component.navbarsearch.NavBarSearchRenderer</renderer-type>
-		</component>
-		<attribute>
-			<description><![CDATA[TODO.]]></description>
-			<name>cssClass</name>
-			<required>false</required>
-			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[TODO.]]></description>
-			<name>file</name>
-			<required>false</required>
-			<type>String</type>
-		</attribute>
+		</component>		
 		<attribute>
 			<description><![CDATA[TODO.]]></description>
 			<name>id</name>
 			<required>false</required>
 			<type>String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[TODO.]]></description>
-			<name>searchContainer</name>
-			<required>false</required>
-			<type>String</type>
-		</attribute>
+		</attribute>		
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
