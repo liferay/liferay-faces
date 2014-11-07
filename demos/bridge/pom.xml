@@ -25,6 +25,7 @@
         <module>liferayfaces4-portlet</module>
 		<module>primefaces4-portlet</module>
 		<module>primefaces5-portlet</module>
+		<module>richfaces4-portlet</module>
 	</modules>
 
 	<profiles>
