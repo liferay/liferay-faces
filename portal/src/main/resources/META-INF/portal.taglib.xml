@@ -180,7 +180,79 @@ java.lang.Object)</method-signature>
 		<tag-extension>
 			<vdldoc:since>4.2.0-m2</vdldoc:since>
 		</tag-extension>
-	</tag>	
+	</tag>
+	<tag>
+		<description><![CDATA[TODO.]]></description>
+		<tag-name>inputSearch</tag-name>
+		<component>
+			<component-type>com.liferay.faces.portal.component.inputsearch.InputSearch</component-type>
+			<renderer-type>com.liferay.faces.portal.component.inputsearch.InputSearchRenderer</renderer-type>
+			<handler-class>com.liferay.faces.portal.component.inputsearch.InputSearchHandler</handler-class>
+		</component>
+		<attribute>
+			<description><![CDATA[.]]></description>
+			<name>action</name>
+			<required>false</required>
+			<type>javax.el.MethodExpression</type>			
+		</attribute>
+		<attribute>
+			<description><![CDATA[.]]></description>
+			<name>actionListener</name>
+			<required>false</required>
+			<type>javax.el.MethodExpression</type>			
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO.]]></description>
+			<name>autoFocus</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO.]]></description>
+			<name>buttonLabel</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>		
+		<attribute>
+			<description><![CDATA[TODO.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>		
+		<attribute>
+			<description><![CDATA[TODO.]]></description>
+			<name>placeholder</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO.]]></description>
+			<name>showButton</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO.]]></description>
+			<name>title</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m2</vdldoc:since>
+		</tag-extension>
+	</tag>
 	<tag>
 		<description><![CDATA[Nav is a UIData (iterator) component that renders a <code>&lt;ul&gt;...&lt;/ul&gt;</code> (unordered) list. It is designed to be used in conjunction with portal:navItem child component tags.]]></description>
 		<tag-name>nav</tag-name>
