@@ -26,8 +26,11 @@ import javax.faces.render.Renderer;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.Tag;
 
+import com.liferay.faces.portal.component.inputrichtext.InputRichText;
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -39,6 +42,9 @@ import com.liferay.faces.util.lang.StringPool;
  */
 public abstract class DelayedPortalTagRenderer<U extends UIComponent, T extends Tag> extends PortalTagRenderer<U, T> {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(DelayedPortalTagRenderer.class);
+		
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
@@ -92,8 +98,9 @@ public abstract class DelayedPortalTagRenderer<U extends UIComponent, T extends 
 			}
 
 			// Encode the output of the JSP tag up until the point at which children should be inserted.
-			ResponseWriter responseWriter = facesContext.getResponseWriter();
-			responseWriter.write(preChildMarkup);
+			StringBuilder markup = new StringBuilder(3);
+			
+			markup.append(preChildMarkup);
 
 			// Ensure that scripts are rendered at the bottom of the page.
 			String scripts = portalTagOutput.getScripts();
@@ -107,15 +114,21 @@ public abstract class DelayedPortalTagRenderer<U extends UIComponent, T extends 
 			String childrenMarkup = bufferedChildrenMarkupWriter.toString();
 
 			if (childrenMarkup != null) {
-				responseWriter.write(childrenMarkup);
+				markup.append(childrenMarkup);
 			}
 
 			// Encode the output of the JSP tag that is to appear after the children.
 			if (postChildMarkup != null) {
-				responseWriter.write(postChildMarkup);
+				markup.append(postChildMarkup);
 			}
+
+			ResponseWriter responseWriter = facesContext.getResponseWriter();
+			logger.debug("Markup before transformation:{0}", markup);
+			StringBuilder processedMarkup = getMarkup(uiComponent, markup);
+			logger.debug("Markup after transformation:{0}", processedMarkup);
+			responseWriter.write(processedMarkup.toString());
 		}
-		catch (JspException e) {
+		catch (Exception e) {
 			throw new IOException(e);
 		}
 	}
@@ -128,5 +141,9 @@ public abstract class DelayedPortalTagRenderer<U extends UIComponent, T extends 
 	@Override
 	public boolean getRendersChildren() {
 		return true;
+	}
+	
+	protected StringBuilder getMarkup(UIComponent uiComponent, StringBuilder markup) throws Exception{
+		return markup;
 	}
 }
