@@ -348,6 +348,92 @@ java.lang.Object)</method-signature>
 		</tag-extension>
 	</tag>
 	<tag>
+		<description><![CDATA[TODO.]]></description>
+		<tag-name>inputSearch</tag-name>
+		<component>
+			<component-type>com.liferay.faces.portal.component.inputsearch.InputSearch</component-type>
+			<renderer-type>com.liferay.faces.portal.component.inputsearch.internal.InputSearchRenderer</renderer-type>
+			<handler-class>com.liferay.faces.portal.component.inputsearch.internal.InputSearchHandler</handler-class>
+		</component>
+		<attribute>
+			<description><![CDATA[.]]></description>
+			<name>action</name>
+			<required>false</required>
+			<type>javax.el.MethodExpression</type>
+			<method-signature>java.lang.Object action()</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[.]]></description>
+			<name>actionListener</name>
+			<required>false</required>
+			<type>javax.el.MethodExpression</type>
+			<method-signature>void actionListener(javax.faces.event.ActionEvent)</method-signature>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO.]]></description>
+			<name>autoFocus</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO.]]></description>
+			<name>buttonLabel</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO.]]></description>
+			<name>placeholder</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO.]]></description>
+			<name>showButton</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO.]]></description>
+			<name>title</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
 		<description><![CDATA[Nav is a UIData (iterator) component that renders a <code>&lt;ul&gt;...&lt;/ul&gt;</code> (unordered) list. It is designed to be used in conjunction with portal:navItem child component tags.]]></description>
 		<tag-name>nav</tag-name>
 		<component>
@@ -457,6 +543,47 @@ java.lang.Object)</method-signature>
 		</attribute>
 		<tag-extension>
 			<vdldoc:since>4.2.0</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[TODO.]]></description>
+		<tag-name>navBarSearch</tag-name>
+		<component>
+			<component-type>com.liferay.faces.portal.component.navbarsearch.NavBarSearch</component-type>
+			<renderer-type>com.liferay.faces.portal.component.navbarsearch.internal.NavBarSearchRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
