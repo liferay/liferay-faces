@@ -1,0 +1,12 @@
+.icefaces4-portlet .uploaded-files table {
+    width: 100%;
+}
+
+.icefaces4-portlet .uploaded-files-table th, .uploaded-files td {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.icefaces4-portlet .ui-inputfield {
+	width: 190px;
+}
