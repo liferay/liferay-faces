@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<!-- This file is read by the download-licenses goal of the license-maven-plugin -->
+<!DOCTYPE project>
+<licenseSummary>
+  <dependencies>
+   <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+      <licenses>
+        <license>
+          <name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) 1.0</name>
+          <url>http://opensource.org/licenses/cddl1.txt</url>
+          <distribution>repo</distribution>
+        </license>
+      </licenses>
+    </dependency>
+  </dependencies>
+</licenseSummary>
