@@ -178,7 +178,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-beta1</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -193,13 +193,15 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[.]]></description>
 			<name>action</name>
 			<required>false</required>
-			<type>javax.el.MethodExpression</type>			
+			<type>javax.el.MethodExpression</type>
+			<method-signature>java.lang.Object action()</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[.]]></description>
 			<name>actionListener</name>
 			<required>false</required>
-			<type>javax.el.MethodExpression</type>			
+			<type>javax.el.MethodExpression</type>
+			<method-signature>void actionListener(javax.faces.event.ActionEvent)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[TODO.]]></description>
@@ -208,28 +210,40 @@ java.lang.Object)</method-signature>
 			<type>boolean</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[TODO.]]></description>
 			<name>buttonLabel</name>
 			<required>false</required>
-			<type>String</type>
-		</attribute>		
+			<type>java.lang.String</type>
+		</attribute>
 		<attribute>
-			<description><![CDATA[TODO.]]></description>
+			<description><![CDATA[A unique identifier for this component.]]></description>
 			<name>id</name>
 			<required>false</required>
-			<type>String</type>
-		</attribute>		
+			<type>java.lang.String</type>
+		</attribute>
 		<attribute>
 			<description><![CDATA[TODO.]]></description>
 			<name>placeholder</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[TODO.]]></description>
 			<name>showButton</name>
 			<required>false</required>
-			<type>String</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
@@ -247,10 +261,10 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[TODO.]]></description>
 			<name>title</name>
 			<required>false</required>
-			<type>String</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-beta1</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -321,7 +335,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-beta1</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -362,7 +376,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-beta1</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -371,13 +385,25 @@ java.lang.Object)</method-signature>
 		<component>
 			<component-type>com.liferay.faces.portal.component.navbarsearch.NavBarSearch</component-type>
 			<renderer-type>com.liferay.faces.portal.component.navbarsearch.NavBarSearchRenderer</renderer-type>
-		</component>		
+		</component>
 		<attribute>
-			<description><![CDATA[TODO.]]></description>
+			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
+			<name>binding</name>
+			<required>false</required>
+			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[A unique identifier for this component.]]></description>
 			<name>id</name>
 			<required>false</required>
-			<type>String</type>
-		</attribute>		
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
+			<name>rendered</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
 			<name>style</name>
@@ -391,7 +417,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-beta1</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -504,7 +530,7 @@ java.lang.Object)</method-signature>
 			<type>boolean</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-beta1</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -563,7 +589,7 @@ java.lang.Object)</method-signature>
 			<type>String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-beta1</vdldoc:since>
 		</tag-extension>
 	</tag>
 </facelet-taglib>

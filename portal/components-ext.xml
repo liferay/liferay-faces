@@ -94,6 +94,52 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="InputSearch" extendsTags="Styleable UIComponentBase" handlerClass="com.liferay.faces.portal.component.inputsearch.InputSearchHandler" parentClass="javax.faces.component.UIInput" rendererParentClass="com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer&lt;com.liferay.faces.portal.component.inputsearch.InputSearch, com.liferay.taglib.ui.InputSearchTag&gt;">
+		<description><![CDATA[TODO.]]></description>
+		<attributes>
+			<attribute>
+				<description><![CDATA[.]]></description>
+				<name>action</name>
+				<method-signature>java.lang.Object action()</method-signature>
+				<type>javax.el.MethodExpression</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[.]]></description>
+				<name>actionListener</name>
+				<method-signature>
+					void actionListener(javax.faces.event.ActionEvent)
+				</method-signature>
+				<type>javax.el.MethodExpression</type>
+			</attribute>
+			<attribute>
+				<defaultValue>false</defaultValue>
+				<description><![CDATA[TODO.]]></description>
+				<name>autoFocus</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[TODO.]]></description>
+				<name>buttonLabel</name>
+				<type>java.lang.String</type>
+			</attribute>		
+			<attribute>
+				<description><![CDATA[TODO.]]></description>
+				<name>placeholder</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description><![CDATA[TODO.]]></description>
+				<name>showButton</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<description><![CDATA[TODO.]]></description>
+				<name>title</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
 	<component name="Nav" extendsTags="Aria Styleable UIComponentBase UIData" parentClass="javax.faces.component.UIData"
 		rendererParentClass="com.liferay.faces.portal.render.internal.PortalTagRenderer&lt;com.liferay.faces.portal.component.nav.Nav, com.liferay.taglib.aui.NavTag&gt;">
 		<description>
@@ -115,6 +161,9 @@
 		<description>
 			<![CDATA[NavBar is a UIPanel component that renders a <code>&lt;div&gt;...&lt;/div&gt;</code> element. It is designed to be used in conjunction with portal:nav and portal:navItem child component tags.]]>
 		</description>
+	</component>
+	<component name="NavBarSearch" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIPanel" rendererParentClass="com.liferay.faces.portal.render.internal.PortalTagRenderer&lt;com.liferay.faces.portal.component.navbarsearch.NavBarSearch, com.liferay.taglib.aui.NavBarSearchTag&gt;">
+		<description><![CDATA[TODO.]]></description>
 	</component>
 	<component name="NavItem" extendsTags="Aria Styleable UIComponentBase" parentClass="javax.faces.component.UIColumn"
 		rendererParentClass="com.liferay.faces.portal.render.internal.PortalTagRenderer&lt;com.liferay.faces.portal.component.navitem.NavItem, com.liferay.taglib.aui.NavItemTag&gt;">

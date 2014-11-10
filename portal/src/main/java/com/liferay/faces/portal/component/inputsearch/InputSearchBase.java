@@ -15,28 +15,43 @@ package com.liferay.faces.portal.component.inputsearch;
 //J-
 
 import javax.annotation.Generated;
-import javax.el.MethodExpression;
 import javax.faces.component.UIInput;
 
 import com.liferay.faces.util.component.Styleable;
 
 /**
- * @author Juan Gonzalez
+ * @author	Neil Griffin
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class InputSearchBase  extends UIInput implements Styleable{
+public abstract class InputSearchBase extends UIInput implements Styleable {
 
 	// Protected Enumerations
 	protected enum InputSearchPropertyKeys {
 		action,
 		actionListener,
 		autoFocus,
-		buttonLabel,		
+		buttonLabel,
 		placeholder,
 		showButton,
 		style,
 		styleClass,
 		title
+	}
+
+	public javax.el.MethodExpression getAction() {
+		return (javax.el.MethodExpression) getStateHelper().eval(InputSearchPropertyKeys.action, null);
+	}
+
+	public void setAction(javax.el.MethodExpression action) {
+		getStateHelper().put(InputSearchPropertyKeys.action, action);
+	}
+
+	public javax.el.MethodExpression getActionListener() {
+		return (javax.el.MethodExpression) getStateHelper().eval(InputSearchPropertyKeys.actionListener, null);
+	}
+
+	public void setActionListener(javax.el.MethodExpression actionListener) {
+		getStateHelper().put(InputSearchPropertyKeys.actionListener, actionListener);
 	}
 
 	public boolean isAutoFocus() {
@@ -71,18 +86,22 @@ public abstract class InputSearchBase  extends UIInput implements Styleable{
 		getStateHelper().put(InputSearchPropertyKeys.showButton, showButton);
 	}
 
+	@Override
 	public String getStyle() {
 		return (String) getStateHelper().eval(InputSearchPropertyKeys.style, null);
 	}
 
+	@Override
 	public void setStyle(String style) {
 		getStateHelper().put(InputSearchPropertyKeys.style, style);
 	}
 
+	@Override
 	public String getStyleClass() {
 		return (String) getStateHelper().eval(InputSearchPropertyKeys.styleClass, null);
 	}
 
+	@Override
 	public void setStyleClass(String styleClass) {
 		getStateHelper().put(InputSearchPropertyKeys.styleClass, styleClass);
 	}
@@ -93,23 +112,6 @@ public abstract class InputSearchBase  extends UIInput implements Styleable{
 
 	public void setTitle(String title) {
 		getStateHelper().put(InputSearchPropertyKeys.title, title);
-	}	
-	
-	public MethodExpression getActionListener() {
-		return (MethodExpression) getStateHelper().eval(InputSearchPropertyKeys.actionListener, null);
-	}	
-
-	public void setActionListener(MethodExpression actionListener) {
-		getStateHelper().put(InputSearchPropertyKeys.actionListener, actionListener);
 	}
-
-	public MethodExpression getAction() {
-		return (MethodExpression) getStateHelper().eval(InputSearchPropertyKeys.action);
-	}
-	
-	public void setAction(MethodExpression action) {
-		getStateHelper().put(InputSearchPropertyKeys.action, action);
-	}
-
 }
 //J+

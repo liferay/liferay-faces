@@ -15,13 +15,12 @@ package com.liferay.faces.portal.component.navbarsearch;
 //J-
 
 import javax.annotation.Generated;
-import javax.faces.component.UIComponent;
 import javax.faces.component.UIPanel;
 
 import com.liferay.faces.util.component.Styleable;
 
 /**
- * @author	Juan Gonzalez
+ * @author	Neil Griffin
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class NavBarSearchBase extends UIPanel implements Styleable {
