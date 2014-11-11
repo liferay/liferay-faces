@@ -20,6 +20,6 @@ public class AUIField extends AUIPanel {
 
 	@Override
 	public String getRendererType() {
-		return "com.liferay.faces.alloy.renderkit.FieldRenderer";
+		return "com.liferay.faces.alloy.renderkit.internal.FieldRenderer";
 	}
 }

@@ -25,7 +25,7 @@ public class AUIListTag extends AUIComponentELTag {
 
 	@Override
 	public String getRendererType() {
-		return "com.liferay.faces.alloy.renderkit.ListRenderer";
+		return "com.liferay.faces.alloy.renderkit.internal.ListRenderer";
 	}
 
 }
