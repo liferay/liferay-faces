@@ -16,21 +16,21 @@
 		<tag-name>button-row</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIButtonRow</component-type>
-			<renderer-type>com.liferay.faces.alloy.renderkit.ButtonRowRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.ButtonRowRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>col</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUICol</component-type>
-			<renderer-type>com.liferay.faces.alloy.renderkit.ColRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.ColRenderer</renderer-type>
 		</component>
 	</tag>	
 	<tag>
 		<tag-name>column</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIColumn</component-type>
-			<renderer-type>com.liferay.faces.alloy.renderkit.ColumnRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.ColumnRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
@@ -50,14 +50,14 @@
 		<tag-name>field</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIField</component-type>
-			<renderer-type>com.liferay.faces.alloy.renderkit.FieldRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.FieldRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>fieldset</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIFieldSet</component-type>
-			<renderer-type>com.liferay.faces.alloy.renderkit.FieldSetRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.FieldSetRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
@@ -71,49 +71,49 @@
 		<tag-name>layout</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUILayout</component-type>
-			<renderer-type>com.liferay.faces.alloy.renderkit.LayoutRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.LayoutRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>list</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIList</component-type>
-			<renderer-type>com.liferay.faces.alloy.renderkit.ListRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.ListRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>list-item</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIListItem</component-type>
-			<renderer-type>com.liferay.faces.alloy.renderkit.ListItemRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.ListItemRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>row</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIRow</component-type>
-			<renderer-type>com.liferay.faces.alloy.renderkit.RowRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.RowRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>text-box-list</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUITextBoxList</component-type>
-			<renderer-type>com.liferay.faces.alloy.renderkit.TextBoxListRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.TextBoxListRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>text-box-list-item</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUITextBoxListItem</component-type>
-			<renderer-type>com.liferay.faces.alloy.renderkit.TextBoxListItemRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.TextBoxListItemRenderer</renderer-type>
 		</component>
 	</tag>
 	<tag>
 		<tag-name>script</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.AUIScript</component-type>
-			<renderer-type>com.liferay.faces.alloy.renderkit.ScriptRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.ScriptRenderer</renderer-type>
 		</component>
 	</tag>
 </facelet-taglib>

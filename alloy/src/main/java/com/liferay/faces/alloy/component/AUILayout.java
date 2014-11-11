@@ -23,7 +23,7 @@ public class AUILayout extends AUIPanel implements NamingContainer {
 
 	@Override
 	public String getRendererType() {
-		return "com.liferay.faces.alloy.renderkit.LayoutRenderer";
+		return "com.liferay.faces.alloy.renderkit.internal.LayoutRenderer";
 	}
 
 }

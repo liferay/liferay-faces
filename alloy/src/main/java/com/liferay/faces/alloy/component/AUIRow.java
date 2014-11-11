@@ -26,7 +26,7 @@ public class AUIRow extends AUIPanel implements NamingContainer {
 
 	// Public Constants
 	public static final String FLUID = "fluid";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.renderkit.RowRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.renderkit.internal.RowRenderer";
 
 	// Private Constants
 	private static final String CSS_CLASS = "cssClass";

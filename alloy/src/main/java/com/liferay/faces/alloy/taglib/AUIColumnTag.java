@@ -25,7 +25,7 @@ public class AUIColumnTag extends AUIComponentELTag {
 
 	@Override
 	public String getRendererType() {
-		return "com.liferay.faces.alloy.renderkit.ColumnRenderer";
+		return "com.liferay.faces.alloy.renderkit.internal.ColumnRenderer";
 	}
 
 }
