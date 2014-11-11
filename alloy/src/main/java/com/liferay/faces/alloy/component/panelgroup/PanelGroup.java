@@ -28,7 +28,8 @@ public class PanelGroup extends PanelGroupBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.panelgroup.PanelGroup";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Group";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.panelgroup.PanelGroupRenderer";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.alloy.component.panelgroup.internal.PanelGroupRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-panel-group";
 
 	public PanelGroup() {

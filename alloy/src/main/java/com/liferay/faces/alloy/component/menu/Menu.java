@@ -26,7 +26,7 @@ public class Menu extends MenuBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.menu.Menu";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.menu.MenuRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.menu.internal.MenuRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-menu";
 
 	public Menu() {

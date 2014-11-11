@@ -28,7 +28,7 @@ public class Link extends LinkBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.link.Link";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Link";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.link.LinkRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.link.internal.LinkRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-link";
 
 	public Link() {

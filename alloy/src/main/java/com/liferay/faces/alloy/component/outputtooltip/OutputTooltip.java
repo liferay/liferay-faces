@@ -16,7 +16,6 @@ package com.liferay.faces.alloy.component.outputtooltip;
 import javax.faces.component.FacesComponent;
 
 import com.liferay.faces.alloy.component.overlay.Overlay;
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -29,7 +28,8 @@ public class OutputTooltip extends OutputTooltipBase implements Overlay {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputtooltip.OutputTooltip";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputtooltip.OutputTooltipRenderer";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.alloy.component.outputtooltip.internal.OutputTooltipRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-output-tooltip";
 
 	public OutputTooltip() {
@@ -54,10 +54,10 @@ public class OutputTooltip extends OutputTooltipBase implements Overlay {
 		// Initially style the outermost <div> (which is the contentBox) with "display:none;" in order to prevent
 		// blinking when Alloy's JavaScript attempts to hide the contentBox.
 		if (style == null) {
-			style = AlloyRendererUtil.DISPLAY_NONE;
+			style = "display:none;";
 		}
 		else {
-			style = style + StringPool.SEMICOLON + AlloyRendererUtil.DISPLAY_NONE;
+			style = style + StringPool.SEMICOLON + "display:none;";
 		}
 
 		return style;

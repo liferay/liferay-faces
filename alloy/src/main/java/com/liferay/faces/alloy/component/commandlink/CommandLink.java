@@ -19,7 +19,7 @@ import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
- * @author	Vernon Singleton
+ * @author  Vernon Singleton
  */
 @FacesComponent(value = CommandLink.COMPONENT_TYPE)
 public class CommandLink extends CommandLinkBase {
@@ -28,7 +28,8 @@ public class CommandLink extends CommandLinkBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.commandlink.CommandLink";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Link";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.commandlink.CommandLinkRenderer";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.alloy.component.commandlink.internal.CommandLinkRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-command-link";
 
 	public CommandLink() {

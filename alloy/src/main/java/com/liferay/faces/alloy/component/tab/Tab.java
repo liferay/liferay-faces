@@ -50,7 +50,7 @@ public class Tab extends TabBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.tab.Tab";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.tab.TabRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.tab.internal.TabRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-tab";
 
 	public Tab() {

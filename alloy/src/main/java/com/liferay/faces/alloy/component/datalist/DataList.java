@@ -17,15 +17,16 @@ import javax.faces.component.FacesComponent;
 
 import com.liferay.faces.util.component.ComponentUtil;
 
+
 /**
- * @author	Vernon Singleton
+ * @author  Vernon Singleton
  */
 @FacesComponent(value = DataList.COMPONENT_TYPE)
 public class DataList extends DataListBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.datalist.DataList";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.datalist.DataListRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.datalist.internal.DataListRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-data-list";
 
 	public DataList() {

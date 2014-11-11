@@ -30,7 +30,8 @@ public class InputHidden extends InputHiddenBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputhidden.InputHidden";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Hidden";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputhidden.InputHiddenRenderer";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.alloy.component.inputhidden.internal.InputHiddenRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-input-hidden";
 
 	public InputHidden() {

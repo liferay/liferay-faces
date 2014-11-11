@@ -32,7 +32,7 @@ public class Column extends ColumnBase {
 	// Public Constants
 	public static final int COLUMNS = 12;
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.column.Column";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.column.ColumnRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.column.internal.ColumnRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-column";
 
 	public Column() {

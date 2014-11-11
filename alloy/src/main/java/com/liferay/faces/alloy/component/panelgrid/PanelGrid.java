@@ -28,7 +28,7 @@ public class PanelGrid extends PanelGridBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.panelgrid.PanelGrid";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Grid";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.panelgrid.PanelGridRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.panelgrid.internal.PanelGridRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-panel-grid";
 
 	public PanelGrid() {

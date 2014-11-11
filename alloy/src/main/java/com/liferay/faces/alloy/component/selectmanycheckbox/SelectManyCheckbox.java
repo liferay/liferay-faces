@@ -32,7 +32,7 @@ public class SelectManyCheckbox extends SelectManyCheckboxBase {
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Checkbox";
 	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.selectmanycheckbox.SelectManyCheckboxRenderer";
+		"com.liferay.faces.alloy.component.selectmanycheckbox.internal.SelectManyCheckboxRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-select-many-checkbox radio";
 
 	public SelectManyCheckbox() {

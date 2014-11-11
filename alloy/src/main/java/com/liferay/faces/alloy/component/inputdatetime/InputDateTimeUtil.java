@@ -20,8 +20,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.faces.FacesException;
-import javax.faces.component.UIViewRoot;
-import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.lang.StringPool;
 
@@ -30,17 +28,6 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Kyle Stiemann
  */
 public class InputDateTimeUtil {
-
-	public static Object determineLocale(FacesContext facesContext, Object locale) {
-
-		if (locale == null) {
-
-			UIViewRoot viewRoot = facesContext.getViewRoot();
-			locale = viewRoot.getLocale();
-		}
-
-		return locale;
-	}
 
 	public static Date getObjectAsDate(Object dateAsObject, String datePattern, TimeZone timeZone)
 		throws FacesException {

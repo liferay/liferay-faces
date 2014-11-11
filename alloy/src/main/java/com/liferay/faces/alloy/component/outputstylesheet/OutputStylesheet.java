@@ -28,7 +28,7 @@ public class OutputStylesheet extends OutputStylesheetBase {
 	public static final String DELEGATE_COMPONENT_FAMILY = UIOutput.COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.resource.Stylesheet";
 	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.outputstylesheet.OutputStylesheetRenderer";
+		"com.liferay.faces.alloy.component.outputstylesheet.internal.OutputStylesheetRenderer";
 
 	public OutputStylesheet() {
 		super();

@@ -31,7 +31,7 @@ public class SelectOneListbox extends SelectOneListboxBase {
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Listbox";
 	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.selectonelistbox.SelectOneListboxRenderer";
+		"com.liferay.faces.alloy.component.selectonelistbox.internal.SelectOneListboxRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-select-one-listbox";
 
 	public SelectOneListbox() {

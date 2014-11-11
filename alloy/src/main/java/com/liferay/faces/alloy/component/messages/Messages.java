@@ -28,7 +28,7 @@ public class Messages extends MessagesBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.messages.Messages";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Messages";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.messages.MessagesRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.messages.internal.MessagesRenderer";
 	public static final String ERROR_CLASS_NAME = "text-error";
 	public static final String FATAL_CLASS_NAME = ERROR_CLASS_NAME;
 	public static final String INFO_CLASS_NAME = "text-info";

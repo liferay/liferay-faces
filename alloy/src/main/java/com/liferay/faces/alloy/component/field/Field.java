@@ -38,7 +38,7 @@ public class Field extends FieldBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.field.Field";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.field.FieldRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.field.internal.FieldRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-field";
 
 	// Private Constants
@@ -64,8 +64,10 @@ public class Field extends FieldBase {
 		else if (uiComponent instanceof UIMessage) {
 			UIMessage uiMessage = (UIMessage) uiComponent;
 			String forId = uiMessage.getFor();
+
 			if (forId != null) {
 				UIComponent forComponent = uiComponent.findComponent(forId);
+
 				if ((forComponent != null) && (forComponent instanceof EditableValueHolder)) {
 					editableValueHolders = new ArrayList<EditableValueHolder>();
 					editableValueHolders.add((EditableValueHolder) forComponent);
@@ -158,13 +160,15 @@ public class Field extends FieldBase {
 				if (editableValueHolder.isValid()) {
 
 					if (editableValueHolder.isRequired()) {
-						
+
 						if (editableValueHolder.isLocalValueSet()) {
 							editableValueHoldersValid = true;
 						}
 						else {
+
 							if (editableValueHolder instanceof UIInput) {
 								UIInput uiInput = (UIInput) editableValueHolder;
+
 								if (!UIInput.isEmpty(uiInput.getValue())) {
 									editableValueHoldersValid = true;
 								}

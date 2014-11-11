@@ -28,7 +28,8 @@ public class OutputText extends OutputTextBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputtext.OutputText";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Text";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputtext.OutputTextRenderer";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.alloy.component.outputtext.internal.OutputTextRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-output-text";
 
 	public OutputText() {

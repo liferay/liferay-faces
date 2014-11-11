@@ -28,7 +28,7 @@ public class Body extends BodyBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.body.Body";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Body";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.body.BodyRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.body.internal.BodyRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-body";
 
 	public Body() {
