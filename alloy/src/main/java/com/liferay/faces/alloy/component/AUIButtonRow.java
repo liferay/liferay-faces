@@ -23,7 +23,7 @@ public class AUIButtonRow extends AUIPanel implements NamingContainer {
 
 	@Override
 	public String getRendererType() {
-		return "com.liferay.faces.alloy.renderkit.ButtonRowRenderer";
+		return "com.liferay.faces.alloy.renderkit.internal.ButtonRowRenderer";
 	}
 
 }
