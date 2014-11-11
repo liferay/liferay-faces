@@ -23,6 +23,6 @@ public class AUIScript extends UIOutput {
 
 	@Override
 	public String getRendererType() {
-		return "com.liferay.faces.alloy.renderkit.ScriptRenderer";
+		return "com.liferay.faces.alloy.renderkit.internal.ScriptRenderer";
 	}
 }
