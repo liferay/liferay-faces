@@ -23,7 +23,7 @@ public class AUIColumn extends AUIPanel implements NamingContainer {
 
 	@Override
 	public String getRendererType() {
-		return "com.liferay.faces.alloy.renderkit.ColumnRenderer";
+		return "com.liferay.faces.alloy.renderkit.internal.ColumnRenderer";
 	}
 
 }

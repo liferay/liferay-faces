@@ -25,7 +25,7 @@ public class AUIScriptTag extends AUIComponentELTag {
 
 	@Override
 	public String getRendererType() {
-		return "com.liferay.faces.alloy.renderkit.ScriptRenderer";
+		return "com.liferay.faces.alloy.renderkit.internal.ScriptRenderer";
 	}
 
 }

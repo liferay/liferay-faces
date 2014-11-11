@@ -25,7 +25,7 @@ public class AUIFormTag extends AUIComponentELTag {
 
 	@Override
 	public String getRendererType() {
-		return "com.liferay.faces.alloy.renderkit.FormRenderer";
+		return "com.liferay.faces.alloy.renderkit.internal.FormRenderer";
 	}
 
 }
