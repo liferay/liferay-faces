@@ -23,7 +23,7 @@ public class AUIList extends AUIPanel implements NamingContainer {
 
 	@Override
 	public String getRendererType() {
-		return "com.liferay.faces.alloy.renderkit.ListRenderer";
+		return "com.liferay.faces.alloy.renderkit.internal.ListRenderer";
 	}
 
 }

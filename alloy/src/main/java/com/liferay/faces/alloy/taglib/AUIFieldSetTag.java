@@ -25,7 +25,7 @@ public class AUIFieldSetTag extends AUIComponentELTag {
 
 	@Override
 	public String getRendererType() {
-		return "com.liferay.faces.alloy.renderkit.FieldSetRenderer";
+		return "com.liferay.faces.alloy.renderkit.internal.FieldSetRenderer";
 	}
 
 }

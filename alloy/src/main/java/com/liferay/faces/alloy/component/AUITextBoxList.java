@@ -23,7 +23,7 @@ public class AUITextBoxList extends AUIPanel implements NamingContainer {
 
 	@Override
 	public String getRendererType() {
-		return "com.liferay.faces.alloy.renderkit.TextBoxListRenderer";
+		return "com.liferay.faces.alloy.renderkit.internal.TextBoxListRenderer";
 	}
 
 }
