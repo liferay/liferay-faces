@@ -21,6 +21,11 @@ import com.liferay.faces.util.component.ClientComponent;
  */
 public interface NodeMenuNav extends ClientComponent {
 
+	// Public Constants
+	public static final String BUTTON_PREFIX = "btn-";
+	public static final String DEFAULT_BTN = "btn";
+	public static final String DEFAULT_BUTTON = "btn-default";
+
 	public String getClientKey();
 
 	public void setClientKey(String clientKey);

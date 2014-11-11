@@ -36,7 +36,7 @@ public class OutputRemainingChars extends OutputRemainingCharsBase {
 	public static final String COMPONENT_TYPE =
 		"com.liferay.faces.alloy.component.outputremainingchars.OutputRemainingChars";
 	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.outputremainingchars.OutputRemainingCharsRenderer";
+		"com.liferay.faces.alloy.component.outputremainingchars.internal.OutputRemainingCharsRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-output-remaining-chars";
 
 	public OutputRemainingChars() {

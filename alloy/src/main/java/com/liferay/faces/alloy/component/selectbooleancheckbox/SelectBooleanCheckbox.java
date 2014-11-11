@@ -32,7 +32,7 @@ public class SelectBooleanCheckbox extends SelectBooleanCheckboxBase {
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Checkbox";
 	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.selectbooleancheckbox.SelectBooleanCheckboxRenderer";
+		"com.liferay.faces.alloy.component.selectbooleancheckbox.internal.SelectBooleanCheckboxRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-select-boolean-checkbox radio";
 
 	public SelectBooleanCheckbox() {

@@ -30,7 +30,8 @@ public class InputTextarea extends InputTextareaBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputtextarea.InputTextarea";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Textarea";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputtextarea.InputTextareaRenderer";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.alloy.component.inputtextarea.internal.InputTextareaRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-input-textarea";
 
 	public InputTextarea() {

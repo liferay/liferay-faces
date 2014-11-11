@@ -27,7 +27,7 @@ public class Icon extends IconBase {
 	// Public Constants
 	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.icon";
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.icon.Icon";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.icon.IconRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.icon.internal.IconRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-icon";
 
 	public Icon() {

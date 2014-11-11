@@ -16,7 +16,6 @@ package com.liferay.faces.alloy.component.popover;
 import javax.faces.component.FacesComponent;
 
 import com.liferay.faces.alloy.component.overlay.Overlay;
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -29,7 +28,7 @@ public class Popover extends PopoverBase implements Overlay {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.popover.Popover";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.popover.PopoverRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.popover.internal.PopoverRenderer";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Group";
 	public static final String STYLE_CLASS_NAME = "alloy-popover";
@@ -56,10 +55,10 @@ public class Popover extends PopoverBase implements Overlay {
 		// Initially style the outermost <div> (which is the contentBox) with "display:none;" in order to prevent
 		// blinking when Alloy's JavaScript attempts to hide the contentBox.
 		if (style == null) {
-			style = AlloyRendererUtil.DISPLAY_NONE;
+			style = "display:none;";
 		}
 		else {
-			style = style + StringPool.SEMICOLON + AlloyRendererUtil.DISPLAY_NONE;
+			style = style + StringPool.SEMICOLON + "display:none;";
 		}
 
 		return style;

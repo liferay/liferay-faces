@@ -31,7 +31,7 @@ public class SelectOneRadio extends SelectOneRadioBase {
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Radio";
 	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.selectoneradio.SelectOneRadioRenderer";
+		"com.liferay.faces.alloy.component.selectoneradio.internal.SelectOneRadioRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-select-one-radio radio";
 
 	public SelectOneRadio() {

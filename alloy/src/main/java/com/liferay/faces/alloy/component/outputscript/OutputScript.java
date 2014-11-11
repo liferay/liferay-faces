@@ -27,7 +27,8 @@ public class OutputScript extends OutputScriptBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputscript.OutputScript";
 	public static final String DELEGATE_COMPONENT_FAMILY = UIOutput.COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.resource.Script";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputscript.OutputScriptRenderer";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.alloy.component.outputscript.internal.OutputScriptRenderer";
 
 	public OutputScript() {
 		super();

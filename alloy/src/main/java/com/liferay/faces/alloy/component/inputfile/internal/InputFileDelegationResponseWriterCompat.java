@@ -15,7 +15,7 @@ package com.liferay.faces.alloy.component.inputfile.internal;
 
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.render.DelegationResponseWriterBase;
+import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
 
 
 /**

@@ -28,7 +28,8 @@ public class OutputLink extends OutputLinkBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputlink.OutputLink";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Link";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.outputlink.OutputLinkRenderer";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.alloy.component.outputlink.internal.OutputLinkRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-output-link";
 
 	public OutputLink() {

@@ -22,6 +22,7 @@ import java.util.TimeZone;
 import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
 import javax.faces.component.behavior.Behavior;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -170,7 +171,16 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 	}
 
 	public Object getLocale(FacesContext facesContext) {
-		return InputDateTimeUtil.determineLocale(facesContext, super.getLocale());
+
+		Object locale = super.getLocale();
+
+		if (locale == null) {
+
+			UIViewRoot viewRoot = facesContext.getViewRoot();
+			locale = viewRoot.getLocale();
+		}
+
+		return locale;
 	}
 
 	protected abstract String getPattern();

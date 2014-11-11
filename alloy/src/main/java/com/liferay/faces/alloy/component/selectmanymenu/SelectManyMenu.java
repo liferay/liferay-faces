@@ -31,7 +31,7 @@ public class SelectManyMenu extends SelectManyMenuBase {
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.Menu";
 	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.selectmanymenu.SelectManyMenuRenderer";
+		"com.liferay.faces.alloy.component.selectmanymenu.internal.SelectManyMenuRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-select-many-menu";
 
 	public SelectManyMenu() {

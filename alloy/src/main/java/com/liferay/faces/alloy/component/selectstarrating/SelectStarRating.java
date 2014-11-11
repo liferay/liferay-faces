@@ -29,7 +29,7 @@ public class SelectStarRating extends SelectStarRatingBase {
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectstarrating.SelectStarRating";
 	public static final String RENDERER_TYPE =
-		"com.liferay.faces.alloy.component.selectstarrating.SelectStarRatingRenderer";
+		"com.liferay.faces.alloy.component.selectstarrating.internal.SelectStarRatingRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-select-star-rating";
 
 	public SelectStarRating() {

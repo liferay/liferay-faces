@@ -48,7 +48,7 @@ public class InputTime extends InputTimeBase {
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputtime.InputTime";
 	public static final String DEFAULT_HTML5_TIME_PATTERN = "HH:mm";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputtime.InputTimeRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputtime.internal.InputTimeRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-input-time";
 
 	// Private Constants

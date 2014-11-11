@@ -22,11 +22,10 @@ import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.component.menu.Menu;
 import com.liferay.faces.alloy.component.nodemenunav.NodeMenuNav;
-import com.liferay.faces.alloy.renderkit.AlloyRendererUtil;
-import com.liferay.faces.alloy.renderkit.DelegatingAlloyRendererBase;
+import com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.DelegationResponseWriter;
-import com.liferay.faces.util.render.RendererUtil;
+import com.liferay.faces.util.render.internal.DelegationResponseWriter;
+import com.liferay.faces.util.render.internal.RendererUtil;
 
 
 /**
@@ -39,10 +38,7 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 
 	// Public constants
 	public static final String COLON_OPTIONS = ":options";
-	public static final String DEFAULT_BTN = "btn";
-	public static final String DEFAULT_BUTTON = "btn-default";
 	public static final String IMAGE = "image";
-	public static final String LIFERAY_COMPONENT = AlloyRendererUtil.LIFERAY_COMPONENT;
 
 	// Needed when yui="false"
 	// Modules
@@ -86,7 +82,7 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 			// AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY
 			responseWriter.write("A.one('#");
 			responseWriter.write(escapedOptionsDivId);
-			responseWriter.write("')._node['style'].zIndex=" + AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY + ";");
+			responseWriter.write("')._node['style'].zIndex=" + LIFERAY_Z_INDEX_OVERLAY + ";");
 
 			// The <div> containing menu items was initially styled with "display:none;" in order to prevent blinking
 			// when JavaScript attempts to hide it. At this point in JavaScript execution, JavaScript is done

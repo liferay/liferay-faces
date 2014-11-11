@@ -50,7 +50,7 @@ public class InputDate extends InputDateBase {
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputdate.InputDate";
 	public static final String DEFAULT_HTML5_DATE_PATTERN = "yyyy-MM-dd";
-	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputdate.InputDateRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.inputdate.internal.InputDateRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-input-date";
 
 	// Private Constants
