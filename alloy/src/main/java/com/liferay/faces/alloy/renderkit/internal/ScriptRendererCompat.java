@@ -46,6 +46,6 @@ public abstract class ScriptRendererCompat extends Renderer {
 	}
 
 	protected boolean isAjaxRequest(FacesContext facesContext) {
-		return facesContext.getPartialViewContext().isAjaxRequest();
+		return false; // Ajax not supported with JSF 1.2
 	}
 }
