@@ -102,6 +102,7 @@
 		<faces.version>${mojarra.version}</faces.version>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
 		<icefaces3.version>3.3.0</icefaces3.version>
+		<icefaces.mojarra.version>2.1.21</icefaces.mojarra.version>
 		<jstl.version>1.2</jstl.version>
 		<liferay.version>6.0.6</liferay.version>
 		<liferay.app.server.deploy.dir>${liferay.app.server.dir}/webapps</liferay.app.server.deploy.dir>
@@ -125,7 +126,7 @@
 		<liferay.weblogic.version>unsupported</liferay.weblogic.version>
 		<liferay.websphere.version>unsupported</liferay.websphere.version>
 		<log4j.version>1.2.14</log4j.version>
-		<mojarra.version>2.1.21</mojarra.version>
+		<mojarra.version>2.1.29</mojarra.version>
 		<myfaces.version>2.1.8</myfaces.version>
 		<pluto.deploy.dir>${pluto.tomcat.dir}/webapps</pluto.deploy.dir>
 		<pluto.home>${env.PORTALS_HOME}/liferay.com/${pluto.portal}-jsf-${faces.spec.version}</pluto.home>

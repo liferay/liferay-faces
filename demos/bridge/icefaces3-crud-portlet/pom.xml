@@ -8,8 +8,12 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>icefaces3-crud-portlet</artifactId>
-	<packaging>war</packaging>
 	<name>ICEfaces3 CRUD Portlet</name>
+	<packaging>war</packaging>
+	<properties>
+		<mojarra.version>${icefaces.mojarra.version}</mojarra.version>
+	</properties>
+
 	<description>This plugin is an example CRUD (Create, Read, Update, Delete) portlet built with ICEfaces.</description>
 
 	<profiles>
