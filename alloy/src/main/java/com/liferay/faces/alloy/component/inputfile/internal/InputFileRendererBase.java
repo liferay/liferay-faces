@@ -23,8 +23,6 @@ import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.component.inputfile.InputFile;
 
-import com.liferay.faces.alloy.component.inputfile.internal.InputFileRendererCompat;
-
 
 /**
  * @author	Bruno Basto

@@ -13,8 +13,7 @@
  */
 package com.liferay.faces.alloy.component.inputfile.internal;
 
-import com.liferay.faces.alloy.component.inputfile.internal.InputFileDecoder;
-import com.liferay.faces.alloy.component.inputfile.internal.InputFileDecoderCommonsImpl;
+import com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase;
 
 
 /**
@@ -22,7 +21,7 @@ import com.liferay.faces.alloy.component.inputfile.internal.InputFileDecoderComm
  *
  * @author  Neil Griffin
  */
-public abstract class InputFileRendererCompat extends InputFileRendererBase {
+public abstract class InputFileRendererCompat extends DelegatingAlloyRendererBase {
 
 	protected InputFileDecoder getInputFileDecoder() {
 
