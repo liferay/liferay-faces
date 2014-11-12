@@ -11,6 +11,9 @@
 	<packaging>war</packaging>
 	<name>ICEfaces3 Chat Portlet</name>
 	<description>This plugin is a chat portlet that utilizes ICEfaces Ajax Push Inter-Portlet Communication (IPC).</description>
+	<properties>
+		<mojarra.version>${icefaces.mojarra.version}</mojarra.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
