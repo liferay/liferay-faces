@@ -8,8 +8,11 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>icefaces3-ipc-ajax-push-portlet</artifactId>
-	<packaging>war</packaging>
 	<name>ICEfaces3 IPC Ajax Push Portlet</name>
+	<packaging>war</packaging>
+	<properties>
+		<mojarra.version>${icefaces.mojarra.version}</mojarra.version>
+	</properties>
 
 	<profiles>
 		<profile>
