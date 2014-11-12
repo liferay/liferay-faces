@@ -14,12 +14,8 @@
 package com.liferay.faces.util.render.internal;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 import javax.faces.component.UIComponent;
-import javax.faces.component.behavior.ClientBehavior;
-import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
@@ -31,7 +27,6 @@ import com.liferay.faces.util.client.ClientScriptFactory;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.FacesConstants;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.portal.LiferayPortletUtil;
 import com.liferay.faces.util.portal.WebKeys;
@@ -63,38 +58,6 @@ public class RendererUtil {
 	private static final char[] _HEX_DIGITS = {
 			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
 		};
-
-	public static void decodeClientBehaviors(FacesContext facesContext, UIComponent uiComponent) {
-
-		if (uiComponent instanceof ClientBehaviorHolder) {
-
-			ClientBehaviorHolder clientBehaviorHolder = (ClientBehaviorHolder) uiComponent;
-			Map<String, List<ClientBehavior>> clientBehaviorMap = clientBehaviorHolder.getClientBehaviors();
-
-			Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
-			String behaviorEvent = requestParameterMap.get(FacesConstants.JAVAX_FACES_BEHAVIOR_EVENT);
-
-			if (behaviorEvent != null) {
-
-				List<ClientBehavior> clientBehaviors = clientBehaviorMap.get(behaviorEvent);
-
-				if (clientBehaviors != null) {
-					String source = requestParameterMap.get(FacesConstants.JAVAX_FACES_SOURCE);
-
-					if (source != null) {
-						String clientId = uiComponent.getClientId(facesContext);
-
-						if (clientId.startsWith(source)) {
-
-							for (ClientBehavior behavior : clientBehaviors) {
-								behavior.decode(facesContext, uiComponent);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
 
 	public static void encodeFunctionCall(ResponseWriter responseWriter, String functionName, Object... parameters)
 		throws IOException {
