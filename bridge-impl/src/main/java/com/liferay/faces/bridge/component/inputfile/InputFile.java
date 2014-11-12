@@ -34,7 +34,8 @@ public class InputFile extends InputFileBase {
 	public static final String COMPONENT_TYPE = "com.liferay.faces.bridge.component.inputfile.InputFile";
 	public static final String DELEGATE_COMPONENT_FAMILY = COMPONENT_FAMILY;
 	public static final String DELEGATE_RENDERER_TYPE = "javax.faces.File";
-	public static final String RENDERER_TYPE = "com.liferay.faces.bridge.component.inputfile.InputFileRenderer";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.bridge.component.inputfile.internal.InputFileRenderer";
 	public static final String STYLE_CLASS_NAME = "bridge-input-file";
 
 	public InputFile() {
