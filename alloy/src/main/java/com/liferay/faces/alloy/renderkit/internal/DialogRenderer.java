@@ -14,7 +14,7 @@
 /**
  * Copyright (c) 2011 American Automobile Association. All rights reserved.
  */
-package com.liferay.faces.alloy.renderkit;
+package com.liferay.faces.alloy.renderkit.internal;
 
 import java.io.IOException;
 import java.util.Map;
