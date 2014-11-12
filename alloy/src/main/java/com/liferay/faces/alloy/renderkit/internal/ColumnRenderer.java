@@ -43,30 +43,26 @@ public class ColumnRenderer extends Renderer {
 		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
 
 		StringBuilder classNames = new StringBuilder();
-
-		// aui_deprecated.css: column
-		classNames.append("column");
+		classNames.append("aui-column");
 
 		String columnWidth = (String) attributes.get("columnWidth");
 
 		if ((columnWidth != null) && (columnWidth.length() > 0)) {
-
-			// aui_deprecated.css: w
-			classNames.append(" w");
+			classNames.append(" aui-w");
 			classNames.append(columnWidth);
 		}
 
 		String cssClass = (String) attributes.get("cssClass");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(cssClass);
 		}
 
 		String styleClass = (String) attributes.get("styleClass");
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
+			classNames.append(" ");
 			classNames.append(styleClass);
 		}
 
@@ -81,9 +77,7 @@ public class ColumnRenderer extends Renderer {
 		}
 
 		if (firstFlag) {
-
-			// aui_deprecated.css: column-first
-			classNames.append(" column-first");
+			classNames.append(" aui-column-first");
 		}
 
 		Boolean lastFlag = Boolean.FALSE;
@@ -97,29 +91,21 @@ public class ColumnRenderer extends Renderer {
 		}
 
 		if (lastFlag) {
-
-			// aui_deprecated.css: column-last
-			classNames.append(" column-last");
+			classNames.append(" aui-column-last");
 		}
 
 		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
 		responseWriter.startElement(StringPool.DIV, null);
 		classNames = new StringBuilder();
-
-		// Used to be aui-column-content, but has been replaced by non-deprecated column-content
-		classNames.append("column-content");
+		classNames.append("aui-column-content");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
-
-			// "-content" classes may be deprecated
+			classNames.append(" ");
 			classNames.append(ComponentUtil.appendToCssClasses(cssClass, "-content"));
 		}
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
-			classNames.append(StringPool.SPACE);
-
-			// "-content" classes may be deprecated
+			classNames.append(" ");
 			classNames.append(ComponentUtil.appendToCssClasses(styleClass, "-content"));
 		}
 
