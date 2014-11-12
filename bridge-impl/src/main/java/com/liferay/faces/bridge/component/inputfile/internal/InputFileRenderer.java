@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.component.inputfile;
+package com.liferay.faces.bridge.component.inputfile.internal;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,14 +22,14 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.bridge.component.inputfile.internal.InputFileDelegationResponseWriter;
+import com.liferay.faces.bridge.component.inputfile.InputFile;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.map.ContextMapFactory;
 import com.liferay.faces.bridge.event.FileUploadEvent;
 import com.liferay.faces.bridge.model.internal.UploadedFileBridgeImpl;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.model.UploadedFile;
-import com.liferay.faces.util.render.DelegationResponseWriter;
+import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 
 
 /**
