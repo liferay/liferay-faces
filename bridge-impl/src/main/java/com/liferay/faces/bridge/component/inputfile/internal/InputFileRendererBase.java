@@ -11,24 +11,25 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.component.inputfile;
+package com.liferay.faces.bridge.component.inputfile.internal;
+//J-
 
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.convert.ConverterException;
+
+import javax.annotation.Generated;
+
+
+import com.liferay.faces.util.render.internal.DelegatingRendererBase;
 
 
 /**
- * This class provides a compatibility layer that isolates differences between 2.2 and earlier.
- *
- * @author  Neil Griffin
+ * @author	Neil Griffin
  */
-public abstract class InputFileRendererCompat extends InputFileRendererBase {
+@Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
+public abstract class InputFileRendererBase extends DelegatingRendererBase {
 
-	@Override
-	public Object getConvertedValue(FacesContext facesContext, UIComponent uiComponent, Object submittedValue)
-		throws ConverterException {
-
-		return submittedValue;
-	}
+	// Protected Constants
+	protected static final String AUTO = "auto";
+	protected static final String FILE_UPLOAD_LISTENER = "fileUploadListener";
+	protected static final String MULTIPLE = "multiple";
 }
+//J+
