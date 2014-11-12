@@ -66,58 +66,63 @@
 	<render-kit>
 		<renderer>
 			<component-family>javax.faces.Panel</component-family>
-			<renderer-type>com.liferay.faces.alloy.renderkit.ButtonRowRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.alloy.renderkit.ButtonRowRenderer</renderer-class>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.ButtonRowRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.alloy.renderkit.internal.ButtonRowRenderer</renderer-class>
 		</renderer>
 		<renderer>
 			<component-family>javax.faces.Panel</component-family>
-			<renderer-type>com.liferay.faces.alloy.renderkit.ColumnRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.alloy.renderkit.ColumnRenderer</renderer-class>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.ColumnRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.alloy.renderkit.internal.ColumnRenderer</renderer-class>
 		</renderer>
 		<renderer>
 			<component-family>javax.faces.Panel</component-family>
-			<renderer-type>com.liferay.faces.alloy.renderkit.DialogRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.alloy.renderkit.DialogRenderer</renderer-class>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.DialogRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.alloy.renderkit.internal.DialogRenderer</renderer-class>
 		</renderer>
 		<renderer>
 			<component-family>javax.faces.Panel</component-family>
-			<renderer-type>com.liferay.faces.alloy.renderkit.FieldRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.alloy.renderkit.FieldRenderer</renderer-class>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.FieldRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.alloy.renderkit.internal.FieldRenderer</renderer-class>
 		</renderer>
 		<renderer>
 			<component-family>javax.faces.Panel</component-family>
-			<renderer-type>com.liferay.faces.alloy.renderkit.FieldSetRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.alloy.renderkit.FieldSetRenderer</renderer-class>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.FieldRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.alloy.renderkit.internal.FieldRenderer</renderer-class>
 		</renderer>
 		<renderer>
 			<component-family>javax.faces.Panel</component-family>
-			<renderer-type>com.liferay.faces.alloy.renderkit.LayoutRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.alloy.renderkit.LayoutRenderer</renderer-class>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.FieldSetRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.alloy.renderkit.internal.FieldSetRenderer</renderer-class>
 		</renderer>
 		<renderer>
 			<component-family>javax.faces.Panel</component-family>
-			<renderer-type>com.liferay.faces.alloy.renderkit.ListRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.alloy.renderkit.ListRenderer</renderer-class>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.LayoutRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.alloy.renderkit.internal.LayoutRenderer</renderer-class>
 		</renderer>
 		<renderer>
 			<component-family>javax.faces.Panel</component-family>
-			<renderer-type>com.liferay.faces.alloy.renderkit.ListItemRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.alloy.renderkit.ListItemRenderer</renderer-class>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.ListRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.alloy.renderkit.internal.ListRenderer</renderer-class>
 		</renderer>
 		<renderer>
 			<component-family>javax.faces.Panel</component-family>
-			<renderer-type>com.liferay.faces.alloy.renderkit.TextBoxListRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.alloy.renderkit.TextBoxListRenderer</renderer-class>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.ListItemRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.alloy.renderkit.internal.ListItemRenderer</renderer-class>
 		</renderer>
 		<renderer>
 			<component-family>javax.faces.Panel</component-family>
-			<renderer-type>com.liferay.faces.alloy.renderkit.TextBoxListItemRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.alloy.renderkit.TextBoxListItemRenderer</renderer-class>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.TextBoxListRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.alloy.renderkit.internal.TextBoxListRenderer</renderer-class>
+		</renderer>
+		<renderer>
+			<component-family>javax.faces.Panel</component-family>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.TextBoxListItemRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.alloy.renderkit.internal.TextBoxListItemRenderer</renderer-class>
 		</renderer>
 		<renderer>
 			<component-family>javax.faces.Output</component-family>
-			<renderer-type>com.liferay.faces.alloy.renderkit.ScriptRenderer</renderer-type>
-			<renderer-class>com.liferay.faces.alloy.renderkit.ScriptRenderer</renderer-class>
+			<renderer-type>com.liferay.faces.alloy.renderkit.internal.ScriptRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.alloy.renderkit.internal.ScriptRenderer</renderer-class>
 		</renderer>
 	</render-kit>
 
