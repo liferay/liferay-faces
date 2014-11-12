@@ -32,8 +32,8 @@ import com.liferay.faces.util.model.UploadedFile;
 import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
-import com.liferay.faces.util.render.DelegatingRendererBase;
-import com.liferay.faces.util.render.RendererUtil;
+import com.liferay.faces.util.render.internal.DelegatingRendererBase;
+import com.liferay.faces.util.render.internal.RendererUtil;
 
 
 /**
