@@ -23,6 +23,7 @@ import javax.faces.render.Renderer;
 
 import com.liferay.faces.util.context.ExtFacesContext;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.ContentTypes;
 
 
 /**
