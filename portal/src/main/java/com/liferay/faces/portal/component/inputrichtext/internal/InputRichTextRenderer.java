@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.component.inputrichtext;
+package com.liferay.faces.portal.component.inputrichtext.internal;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,14 +31,13 @@ import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.portal.component.inputrichtext.internal.WYSIWYGTemplate;
-import com.liferay.faces.portal.render.internal.PortalTagRenderer;
+import com.liferay.faces.portal.component.inputrichtext.InputRichText;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.ContentTypes;
-import com.liferay.faces.util.render.RendererUtil;
+import com.liferay.faces.util.render.internal.RendererUtil;
 
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -52,8 +51,7 @@ import com.liferay.taglib.ui.InputEditorTag;
 //J-
 @FacesRenderer(componentFamily = InputRichText.COMPONENT_FAMILY, rendererType = InputRichText.RENDERER_TYPE)
 //J+
-public class InputRichTextRenderer extends PortalTagRenderer<InputRichText, InputEditorTag>
-	implements SystemEventListener {
+public class InputRichTextRenderer extends InputRichTextRendererBase implements SystemEventListener {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(InputRichTextRenderer.class);
