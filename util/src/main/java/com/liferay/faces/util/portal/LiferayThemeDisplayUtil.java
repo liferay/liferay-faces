@@ -20,15 +20,8 @@ public class LiferayThemeDisplayUtil {
 
 	public static boolean isIsolated(Object themeDisplayObject) {
 
-		boolean isolated = false;
-
-		if (themeDisplayObject instanceof com.liferay.portal.theme.ThemeDisplay) {
-			com.liferay.portal.theme.ThemeDisplay themeDislpay = (com.liferay.portal.theme.ThemeDisplay)
-				themeDisplayObject;
-			isolated = themeDislpay.isIsolated();
-		}
-
-		return isolated;
+		// Unsupported for Liferay Portal 5.2
+		return false;
 	}
 
 	public static boolean isStateExclusive(Object themeDisplayObject) {
