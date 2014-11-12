@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.render;
+package com.liferay.faces.util.render.internal;
 
 import javax.faces.context.ResponseWriter;
 import javax.faces.context.ResponseWriterWrapper;
