@@ -11,23 +11,24 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.component.nav;
+package com.liferay.faces.portal.component.navbar.internal;
+//J-
 
-import javax.faces.component.FacesComponent;
+
+import javax.annotation.Generated;
+
+
+import com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer;
 
 
 /**
- * @author  Neil Griffin
+ * @author	Neil Griffin
  */
-@FacesComponent(value = Nav.COMPONENT_TYPE)
-public class Nav extends NavBase {
+@Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
+public abstract class NavBarRendererBase extends DelayedPortalTagRenderer<com.liferay.faces.portal.component.navbar.NavBar, com.liferay.taglib.aui.NavBarTag> {
 
-	// Public Constants
-	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.nav.Nav";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.nav.internal.NavRenderer";
-
-	public Nav() {
-		super();
-		setRendererType(RENDERER_TYPE);
-	}
+	// Protected Constants
+	protected static final String STYLE = "style";
+	protected static final String STYLE_CLASS = "styleClass";
 }
+//J+

@@ -11,13 +11,13 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.component.navitem;
+package com.liferay.faces.portal.component.navitem.internal;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.portal.render.internal.PortalTagRenderer;
+import com.liferay.faces.portal.component.navitem.NavItem;
 
 import com.liferay.taglib.aui.NavItemTag;
 
@@ -28,7 +28,7 @@ import com.liferay.taglib.aui.NavItemTag;
 //J-
 @FacesRenderer(componentFamily = NavItem.COMPONENT_FAMILY, rendererType = NavItem.RENDERER_TYPE)
 //J+
-public class NavItemRenderer extends PortalTagRenderer<NavItem, NavItemTag> {
+public class NavItemRenderer extends NavItemRendererBase {
 
 	@Override
 	public NavItem cast(UIComponent uiComponent) {

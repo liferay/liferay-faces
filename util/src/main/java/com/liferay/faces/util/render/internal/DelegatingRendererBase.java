@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.render;
+package com.liferay.faces.util.render.internal;
 
 import java.io.IOException;
 
@@ -61,6 +61,7 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 
 		ResponseWriter originalResponseWriter = facesContext.getResponseWriter();
 		facesContext.setResponseWriter(delegationResponseWriter);
+
 		Renderer delegateRenderer = getDelegateRenderer(facesContext);
 		delegateRenderer.encodeBegin(facesContext, uiComponent);
 		delegateRenderer.encodeChildren(facesContext, uiComponent);

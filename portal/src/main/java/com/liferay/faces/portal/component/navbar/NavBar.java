@@ -24,7 +24,7 @@ public class NavBar extends NavBarBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.navbar.NavBar";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.navbar.NavBarRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.navbar.internal.NavBarRenderer";
 
 	public NavBar() {
 		super();

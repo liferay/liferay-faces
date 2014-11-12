@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.component.permissionsurl;
+package com.liferay.faces.portal.component.permissionsurl.internal;
 
 import java.io.IOException;
 import java.util.Map;
@@ -23,8 +23,8 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 import javax.servlet.jsp.JspException;
 
+import com.liferay.faces.portal.component.permissionsurl.PermissionsURL;
 import com.liferay.faces.portal.render.internal.PortalTagOutput;
-import com.liferay.faces.portal.render.internal.PortalTagRenderer;
 
 import com.liferay.taglib.security.PermissionsURLTag;
 
@@ -36,7 +36,7 @@ import com.liferay.taglib.security.PermissionsURLTag;
 //J-
 @FacesRenderer(componentFamily = PermissionsURL.COMPONENT_FAMILY, rendererType = PermissionsURL.RENDERER_TYPE)
 //J+
-public class PermissionsURLRenderer extends PortalTagRenderer<PermissionsURL, PermissionsURLTag> {
+public class PermissionsURLRenderer extends PermissionsURLRendererBase {
 
 	@Override
 	public PermissionsURL cast(UIComponent uiComponent) {

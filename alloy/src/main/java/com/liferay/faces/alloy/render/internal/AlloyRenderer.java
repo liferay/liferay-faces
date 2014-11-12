@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.renderkit;
+package com.liferay.faces.alloy.render.internal;
 
 import java.io.IOException;
 
@@ -19,11 +19,27 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.util.render.internal.ClientComponentRenderer;
+
 
 /**
  * @author  Kyle Stiemann
  */
-public interface AlloyRenderer {
+public interface AlloyRenderer extends ClientComponentRenderer {
+
+	// Public Constants
+	public static final String A_DOT_ONE = "A.one";
+	public static final String BOUNDING_BOX = "boundingBox";
+	public static final String CONTENT_BOX = "contentBox";
+	public static final String CSS_CLASS = "cssClass";
+	public static final String DISPLAY_NONE = "display:none;";
+	public static final String FUNCTION_EVENT = "function(event)";
+	public static final String HEADER_CONTENT = "headerContent";
+	public static final String LIFERAY_COMPONENT = "Liferay.component";
+	public static final String LIFERAY_Z_INDEX_OVERLAY = "Liferay.zIndex.OVERLAY";
+	public static final String LIFERAY_Z_INDEX_TOOLTIP = "Liferay.zIndex.TOOLTIP";
+	public static final String RENDER = "render";
+	public static final String VISIBLE = "visible";
 
 	public void decodeClientBehaviors(FacesContext facesContext, UIComponent uiComponent);
 

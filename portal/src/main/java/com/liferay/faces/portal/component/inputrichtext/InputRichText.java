@@ -46,7 +46,8 @@ public class InputRichText extends InputRichTextBase implements ClientBehaviorHo
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.inputrichtext.InputRichText";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.inputrichtext.InputRichTextRenderer";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.portal.component.inputrichtext.internal.InputRichTextRenderer";
 	public static final String STYLE_CLASS_NAME = "portal-input-rich-text";
 
 	// Private Constants
