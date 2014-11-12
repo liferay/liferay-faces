@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.component.nav;
+package com.liferay.faces.portal.component.nav.internal;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,8 +24,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.portal.component.nav.Nav;
 import com.liferay.faces.portal.component.navitem.NavItem;
-import com.liferay.faces.portal.render.internal.PortalTagRenderer;
 import com.liferay.faces.util.lang.StringPool;
 
 import com.liferay.taglib.aui.NavTag;
@@ -38,7 +38,7 @@ import com.liferay.taglib.aui.NavTag;
 //J-
 @FacesRenderer(componentFamily = Nav.COMPONENT_FAMILY, rendererType = Nav.RENDERER_TYPE)
 //J+
-public class NavRenderer extends PortalTagRenderer<Nav, NavTag> {
+public class NavRenderer extends NavRendererBase {
 
 	@Override
 	public Nav cast(UIComponent uiComponent) {

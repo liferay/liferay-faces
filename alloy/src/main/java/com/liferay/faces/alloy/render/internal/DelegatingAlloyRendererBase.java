@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.renderkit;
+package com.liferay.faces.alloy.render.internal;
 
 import java.io.IOException;
 
@@ -19,31 +19,19 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.render.ClientComponentRendererBase;
-import com.liferay.faces.util.render.RendererUtil;
+import com.liferay.faces.util.render.internal.DelegatingClientComponentRendererBase;
+import com.liferay.faces.util.render.internal.RendererUtil;
 
 
 /**
- * This is an abstract class that provides base rendering functionality for AlloyUI JavaScript components.
- *
- * @author  Kyle Stiemann
+ * @author  Neil Griffin
  */
-public abstract class AlloyRendererBase extends ClientComponentRendererBase implements AlloyRenderer {
-
-	@Override
-	public abstract void encodeAlloyAttributes(FacesContext facesContext, ResponseWriter respoonseWriter,
-		UIComponent uiComponent) throws IOException;
-
-	@Override
-	public abstract void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException;
-
-	@Override
-	public abstract void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException;
+public abstract class DelegatingAlloyRendererBase extends DelegatingClientComponentRendererBase
+	implements AlloyRenderer {
 
 	@Override
 	public void decode(FacesContext facesContext, UIComponent uiComponent) {
 		super.decode(facesContext, uiComponent);
-		decodeClientBehaviors(facesContext, uiComponent);
 	}
 
 	@Override
@@ -131,9 +119,6 @@ public abstract class AlloyRendererBase extends ClientComponentRendererBase impl
 	public void encodeWidgetRender(ResponseWriter responseWriter, boolean first) throws IOException {
 		AlloyRendererUtil.encodeWidgetRender(responseWriter, first);
 	}
-
-	@Override
-	public abstract String getAlloyClassName(FacesContext facesContext, UIComponent uiComponent);
 
 	@Override
 	public String getYUIConfig(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)

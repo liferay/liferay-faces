@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.component.navbar;
+package com.liferay.faces.portal.component.navbar.internal;
 
 import java.io.IOException;
 
@@ -21,8 +21,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer;
+import com.liferay.faces.portal.component.navbar.NavBar;
 import com.liferay.faces.util.lang.StringPool;
+
 import com.liferay.taglib.aui.NavBarTag;
 
 
@@ -32,7 +33,7 @@ import com.liferay.taglib.aui.NavBarTag;
 //J-
 @FacesRenderer(componentFamily = NavBar.COMPONENT_FAMILY, rendererType = NavBar.RENDERER_TYPE)
 //J+
-public class NavBarRenderer extends DelayedPortalTagRenderer<NavBar, NavBarTag> {
+public class NavBarRenderer extends NavBarRendererBase {
 
 	@Override
 	public NavBar cast(UIComponent uiComponent) {
@@ -57,8 +58,8 @@ public class NavBarRenderer extends DelayedPortalTagRenderer<NavBar, NavBarTag> 
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		// Encode the starting <div> element that represents the navBar. In addition, write the id attribute. This is
-		// necessary because portal-web/docroot/html/taglib/aui/nav_bar/page.jsp encodes a <div> element that needs an id
-		// attribute that does not contain colons (which is the default JSF NamingContainer separator character).
+		// necessary because portal-web/docroot/html/taglib/aui/nav_bar/page.jsp encodes a <div> element that needs an
+		// id attribute that does not contain colons (which is the default JSF NamingContainer separator character).
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		responseWriter.startElement(StringPool.DIV, uiComponent);
 		responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(), StringPool.ID);
