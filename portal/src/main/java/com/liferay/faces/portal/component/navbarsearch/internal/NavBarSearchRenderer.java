@@ -11,15 +11,15 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.component.navbarsearch;
+package com.liferay.faces.portal.component.navbarsearch.internal;
 
 import javax.faces.component.UIComponent;
 import javax.faces.component.UINamingContainer;
 import javax.faces.context.FacesContext;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.portal.component.navbarsearch.NavBarSearch;
 import com.liferay.faces.portal.render.internal.PortalTagRenderer;
-
 import com.liferay.taglib.aui.NavBarSearchTag;
 
 

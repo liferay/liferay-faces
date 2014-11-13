@@ -50,7 +50,8 @@ public class InputSearch extends InputSearchBase implements ClientBehaviorHolder
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.inputsearch.InputSearch";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.inputsearch.InputSearchRenderer";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.portal.component.inputsearch.internal.InputSearchRenderer";
 	public static final String CHILD_COMPONENTS_ADDED = "childComponentsAdded";
 
 	private static Logger _logger = LoggerFactory.getLogger(InputSearch.class);

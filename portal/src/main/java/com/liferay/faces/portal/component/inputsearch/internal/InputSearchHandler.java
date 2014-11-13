@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.component.inputsearch;
+package com.liferay.faces.portal.component.inputsearch.internal;
 
 import java.lang.reflect.Method;
 
@@ -24,6 +24,7 @@ import javax.faces.view.facelets.Metadata;
 import javax.faces.view.facelets.MetadataTarget;
 import javax.faces.view.facelets.TagAttribute;
 
+import com.liferay.faces.portal.component.inputsearch.InputSearch;
 import com.liferay.faces.util.view.facelets.MethodMetadata;
 
 

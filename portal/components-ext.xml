@@ -94,7 +94,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="InputSearch" extendsTags="Styleable UIComponentBase" handlerClass="com.liferay.faces.portal.component.inputsearch.InputSearchHandler" parentClass="javax.faces.component.UIInput" rendererParentClass="com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer&lt;com.liferay.faces.portal.component.inputsearch.InputSearch, com.liferay.taglib.ui.InputSearchTag&gt;">
+	<component name="InputSearch" extendsTags="Styleable UIComponentBase" handlerClass="com.liferay.faces.portal.component.inputsearch.internal.InputSearchHandler" parentClass="javax.faces.component.UIInput" rendererParentClass="com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer&lt;com.liferay.faces.portal.component.inputsearch.InputSearch, com.liferay.taglib.ui.InputSearchTag&gt;">
 		<description><![CDATA[TODO.]]></description>
 		<attributes>
 			<attribute>

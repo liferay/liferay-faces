@@ -186,8 +186,8 @@ java.lang.Object)</method-signature>
 		<tag-name>inputSearch</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.component.inputsearch.InputSearch</component-type>
-			<renderer-type>com.liferay.faces.portal.component.inputsearch.InputSearchRenderer</renderer-type>
-			<handler-class>com.liferay.faces.portal.component.inputsearch.InputSearchHandler</handler-class>
+			<renderer-type>com.liferay.faces.portal.component.inputsearch.internal.InputSearchRenderer</renderer-type>
+			<handler-class>com.liferay.faces.portal.component.inputsearch.internal.InputSearchHandler</handler-class>
 		</component>
 		<attribute>
 			<description><![CDATA[.]]></description>
@@ -384,7 +384,7 @@ java.lang.Object)</method-signature>
 		<tag-name>navBarSearch</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.component.navbarsearch.NavBarSearch</component-type>
-			<renderer-type>com.liferay.faces.portal.component.navbarsearch.NavBarSearchRenderer</renderer-type>
+			<renderer-type>com.liferay.faces.portal.component.navbarsearch.internal.NavBarSearchRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>

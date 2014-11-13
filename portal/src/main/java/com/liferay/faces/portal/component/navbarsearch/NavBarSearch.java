@@ -24,7 +24,8 @@ public class NavBarSearch extends NavBarSearchBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.navbarsearch.NavBarSearch";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.navbarsearch.NavBarSearchRenderer";
+	public static final String RENDERER_TYPE =
+		"com.liferay.faces.portal.component.navbarsearch.internal.NavBarSearchRenderer";
 
 	public NavBarSearch() {
 		super();

@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.component.inputsearch;
+package com.liferay.faces.portal.component.inputsearch.internal;
 
 import java.util.Iterator;
 import java.util.List;
@@ -23,14 +23,13 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.portal.component.inputsearch.InputSearch;
 import com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer;
-
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-
 import com.liferay.taglib.ui.InputSearchTag;
 
 
