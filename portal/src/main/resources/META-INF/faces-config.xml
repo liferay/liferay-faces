@@ -16,8 +16,7 @@
 		<resource-handler>com.liferay.faces.portal.resource.LiferayFacesResourceHandler</resource-handler>
 		<resource-handler>com.liferay.faces.portal.resource.LiferayPortalResourceHandler</resource-handler>
 		<system-event-listener>
-			<system-event-listener-class>com.liferay.faces.portal.component.inputrichtext.internal.InputRichTextRenderer
-			</system-event-listener-class>
+			<system-event-listener-class>com.liferay.faces.portal.component.inputrichtext.internal.InputRichTextRenderer</system-event-listener-class>
 			<system-event-class>com.liferay.faces.util.event.PostConstructApplicationConfigEvent</system-event-class>
 		</system-event-listener>
 	</application>
