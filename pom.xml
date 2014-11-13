@@ -139,7 +139,7 @@
 		<primefaces3.version>3.5</primefaces3.version>
 		<primefaces4.version>4.0</primefaces4.version>
 		<project.stage>Production</project.stage>
-		<richfaces4.version>4.3.2.Final</richfaces4.version>
+		<richfaces4.version>4.5.0.Final</richfaces4.version>
 		<selenium.version>2.35.0</selenium.version>
 		<spring.version>3.0.7.RELEASE</spring.version>
 		<surefire.version>2.12</surefire.version>
@@ -1023,23 +1023,8 @@
 				</exclusions>
 			</dependency>
 			<dependency>
-				<groupId>org.richfaces.ui</groupId>
-				<artifactId>richfaces-components-api</artifactId>
-				<version>${richfaces4.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.richfaces.ui</groupId>
-				<artifactId>richfaces-components-ui</artifactId>
-				<version>${richfaces4.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.richfaces.core</groupId>
-				<artifactId>richfaces-core-api</artifactId>
-				<version>${richfaces4.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.richfaces.core</groupId>
-				<artifactId>richfaces-core-impl</artifactId>
+				<groupId>org.richfaces</groupId>
+				<artifactId>richfaces</artifactId>
 				<version>${richfaces4.version}</version>
 			</dependency>
 			<dependency>
