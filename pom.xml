@@ -97,8 +97,8 @@
 		<faces.spec.version>2.2</faces.spec.version>
 		<faces.version>${mojarra.version}</faces.version>
 		<full.version>${project.version} (${codename} / ${timestamp} AD)</full.version>
-		<icefaces3.version>3.3.0</icefaces3.version>
-		<icefaces.mojarra.version>${mojarra.version}</icefaces.mojarra.version>
+		<icefaces4.version>4.0.0</icefaces4.version>
+		<icefaces.mojarra.version>2.2.7</icefaces.mojarra.version>
 		<jstl.version>1.2</jstl.version>
 		<liferay.version>6.2.1</liferay.version>
 		<liferay.app.server.deploy.dir>${liferay.app.server.dir}/webapps</liferay.app.server.deploy.dir>
@@ -846,7 +846,7 @@
 					<dependency>
 						<groupId>org.icefaces</groupId>
 						<artifactId>icefaces</artifactId>
-						<version>${icefaces3.version}</version>
+						<version>${icefaces4.version}</version>
 						<exclusions>
 							<!-- FACES-1725/FACES-1598/PUSH-247: Exclude icepush.jar on WebLogic -->
 							<exclusion>
@@ -1013,7 +1013,7 @@
 			<dependency>
 				<groupId>org.icefaces</groupId>
 				<artifactId>icefaces</artifactId>
-				<version>${icefaces3.version}</version>
+				<version>${icefaces4.version}</version>
 				<exclusions>
 					<exclusion>
 						<groupId>org.glassfish</groupId>
@@ -1032,17 +1032,12 @@
 			<dependency>
 				<groupId>org.icefaces</groupId>
 				<artifactId>icefaces-ace</artifactId>
-				<version>${icefaces3.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.icefaces</groupId>
-				<artifactId>icefaces-compat</artifactId>
-				<version>${icefaces3.version}</version>
+				<version>${icefaces4.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.icepush</groupId>
 				<artifactId>icepush</artifactId>
-				<version>${icefaces3.version}</version>
+				<version>${icefaces4.version}</version>
 				<exclusions>
 					<exclusion>
 						<artifactId>jsp-api</artifactId>

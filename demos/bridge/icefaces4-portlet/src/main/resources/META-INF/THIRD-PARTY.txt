@@ -1,0 +1,7 @@
+
+Lists of 5 third-party dependencies.
+     (COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) plus GPL) Oracle's implementation of the JSF 2.2 specification API. (com.sun.faces:jsf-api:2.2.7 - http://java.sun.com/javaee/javaserverfaces/)
+     (COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) plus GPL) Oracle's implementation of the JSF 2.2 specification. (com.sun.faces:jsf-impl:2.2.7 - http://java.sun.com/javaee/javaserverfaces/)
+     (Apache License Version 2.0) ICEfaces Core (org.icefaces:icefaces:4.0.0 - http://www.icesoft.org)
+     (Apache License Version 2.0) ICEfaces ACE Components (org.icefaces:icefaces-ace:4.0.0 - http://www.icesoft.org)
+     (The Apache Software License, Version 2.0) jboss-el (org.jboss.seam:jboss-el:2.0.0.GA - no url defined)
