@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.application.Application;
 import javax.faces.application.ProjectStage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UINamingContainer;
@@ -33,6 +32,7 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.portal.component.inputrichtext.InputRichText;
 import com.liferay.faces.util.component.Styleable;
+import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -248,7 +248,7 @@ public class InputRichTextRenderer extends InputRichTextRendererBase implements 
 	}
 
 	@Override
-	public void processEvent(SystemEvent postConstructApplicationConfigEvent) throws AbortProcessingException {
+	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
 
 		// Due to ClassLoader problems during static initialization, it is necessary to delay creation of singleton
 		// instances of template classes until the PostConstructApplicationConfigEvent is sent. Although template text
@@ -269,7 +269,7 @@ public class InputRichTextRenderer extends InputRichTextRendererBase implements 
 
 	@Override
 	public boolean isListenerForSource(Object source) {
-		return ((source != null) && (source instanceof Application));
+		return ((source != null) && (source instanceof ApplicationConfig));
 	}
 
 	protected String getEditorType(InputRichText inputRichText) {
