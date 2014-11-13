@@ -34,10 +34,14 @@ import javax.faces.event.ListenerFor;
 import javax.faces.event.MethodExpressionActionListener;
 import javax.faces.event.PreRenderComponentEvent;
 
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
-/** This component would render same markup as Liferay portal's inputSearch tag, but with
- * some JSF features (action, actionListener and AJAX events)
- * 
+
+/**
+ * This component would render same markup as Liferay portal's inputSearch tag, but with some JSF features (action,
+ * actionListener and AJAX events)
+ *
  * @author  Juan Gonzalez
  */
 @FacesComponent(value = InputSearch.COMPONENT_TYPE)
@@ -48,6 +52,8 @@ public class InputSearch extends InputSearchBase implements ClientBehaviorHolder
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.inputsearch.InputSearch";
 	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.inputsearch.InputSearchRenderer";
 	public static final String CHILD_COMPONENTS_ADDED = "childComponentsAdded";
+
+	private static Logger _logger = LoggerFactory.getLogger(InputSearch.class);
 
 	private Collection<String> eventNames;
 
@@ -60,10 +66,10 @@ public class InputSearch extends InputSearchBase implements ClientBehaviorHolder
 		super.processEvent(event);
 
 		//
-		//Before rendering the component we should create some "wrapped" child JSF components.
-		//We do this for maintaining the same AJAX (f:ajax)/Non AJAX (action, actionListener) behaviour 
-		//In RENDER_PHASE we will move the needed attributes accordingly from the JSF markup to the portal markup
-				
+		// Before rendering the component we should create some "wrapped" child JSF components.
+		// We do this for maintaining the same AJAX (f:ajax)/Non AJAX (action, actionListener) behaviour
+		// In RENDER_PHASE we will move the needed attributes accordingly from the JSF markup to the portal markup
+
 		Boolean added = (Boolean) this.getAttributes().get(CHILD_COMPONENTS_ADDED);
 
 		if (!(event instanceof PreRenderComponentEvent) || ((added != null) && added.booleanValue())) {
@@ -78,6 +84,8 @@ public class InputSearch extends InputSearchBase implements ClientBehaviorHolder
 
 		Set<String> client = clientBehaviours.keySet();
 
+		boolean hasButtonAjaxBehaviour = false;
+
 		for (String key : client) {
 
 			List<ClientBehavior> clients = clientBehaviours.get(key);
@@ -89,11 +97,14 @@ public class InputSearch extends InputSearchBase implements ClientBehaviorHolder
 				}
 			}
 			else {
+
 				// If event is "search" (default) then if would act as button "action"
 
 				for (ClientBehavior clientBehavior : clients) {
 
 					if (clientBehavior instanceof AjaxBehavior) {
+
+						hasButtonAjaxBehaviour = true;
 
 						// As the JSF tag is an inputText and the action tag is a button,
 						// we have to add the inputText as another element to execute
@@ -125,6 +136,20 @@ public class InputSearch extends InputSearchBase implements ClientBehaviorHolder
 			}
 		}
 
+		if (!isShowButton() && (hasButtonAjaxBehaviour || (getAction() != null) || (getActionListener() != null))) {
+			_logger.warn(
+				"'showButton' should be true when using action, actionListener or ajax in this component. A similar button will be added anyway");
+			button.setStyleClass("btn btn-default");
+
+			String label = getButtonLabel();
+
+			if (label != null) {
+				button.setValue(label);
+			}
+
+			button.setType("submit");
+		}
+
 		this.getChildren().add(inputText);
 		this.getChildren().add(button);
 	}
@@ -147,7 +172,8 @@ public class InputSearch extends InputSearchBase implements ClientBehaviorHolder
 
 	protected HtmlInputText createHtmlInputText(final FacesContext facesContext) {
 		HtmlInputText inputText = (HtmlInputText) facesContext.getApplication().createComponent(
-				HtmlInputText.COMPONENT_TYPE);		
+				HtmlInputText.COMPONENT_TYPE);
+
 		return inputText;
 	}
 
