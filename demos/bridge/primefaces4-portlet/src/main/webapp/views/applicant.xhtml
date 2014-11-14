@@ -118,7 +118,6 @@
 							widgetVar="confirmation">
 							<p:commandButton id="confirm" actionListener="#{applicantBackingBean.deleteUploadedFile}"
 								oncomplete="confirmation.hide()" update="uploadedFilesTable" value="#{i18n['yes']}">
-								<f:param name="uploadedFileId" value="#{uploadedFile.id}" />
 							</p:commandButton>
 							<p:commandButton id="decline" oncomplete="confirmation.hide()" value="#{i18n['no']}" type="button" />
 						</p:confirmDialog>
