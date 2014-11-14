@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:alloy="http://liferay.com/faces/alloy" xmlns:portal="http://liferay.com/faces/portal"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase">
+
+	<alloy:form>		
+		<showcase:example>
+		   <alloy:messages/>
+			<portal:navBar>
+				<portal:navBarSearch>
+					<portal:inputSearch value="#{inputSearchBacking.searchText}">
+						<f:ajax listener="#{inputSearchBacking.ajaxSearch}" render="@form"/>
+					</portal:inputSearch>					
+				</portal:navBarSearch>
+			</portal:navBar>
+		</showcase:example>
+		<showcase:outputModel>
+				<alloy:outputText value="#{inputSearchBacking.searchText}"/>
+		</showcase:outputModel>		
+	</alloy:form>	
+</ui:composition>
