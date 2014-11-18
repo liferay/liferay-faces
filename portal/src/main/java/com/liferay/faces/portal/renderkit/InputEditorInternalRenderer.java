@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UINamingContainer;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
@@ -108,6 +109,9 @@ public class InputEditorInternalRenderer extends Renderer {
 		queryString.append(StringPool.EQUAL);
 
 		String editorName = (String) attributes.get(StringPool.NAME);
+		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+		editorName = editorName.replace(separatorChar, '_').concat("_jsptag");
+
 		queryString.append(editorName);
 		queryString.append(StringPool.AMPERSAND);
 		queryString.append("onBlurMethod");
