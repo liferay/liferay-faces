@@ -233,22 +233,18 @@ public class RendererUtil {
 		return javaScript;
 	}
 
-	public static void renderScript(FacesContext facesContext, UIComponent uiComponent, String script, String use) {
+	public static void renderBufferedScript(BufferedScriptResponseWriter bufferedScriptResponseWriter, String use) {
 
-		// Render the script at the bottom of the page by setting the WebKeys.AUI_SCRIPT_DATA request attribute.
-		ExternalContext externalContext = facesContext.getExternalContext();
+		String bufferedScript = bufferedScriptResponseWriter.toString();
+		renderScript(bufferedScript, use);
+	}
+
+	public static void renderScript(String script, String use) {
+
 		ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
 				ClientScriptFactory.class);
-		ClientScript clientScript = clientScriptFactory.getClientScript(externalContext);
-
-		String portletId = StringPool.BLANK;
-		Object portlet = externalContext.getRequestMap().get(WebKeys.RENDER_PORTLET);
-
-		if (portlet != null) {
-			portletId = LiferayPortletUtil.getPortletId(portlet);
-		}
-
-		clientScript.append(portletId, script, use);
+		ClientScript clientScript = clientScriptFactory.getClientScript();
+		clientScript.append(script, use);
 	}
 
 	private static String toHexString(int i) {
@@ -268,10 +264,6 @@ public class RendererUtil {
 
 	public static String getAlloyBeginScript(FacesContext facesContext, String[] modules) {
 		return getAlloyBeginScript(facesContext, modules, null);
-	}
-
-	public static String getAlloyBeginScript(String[] modules, float browserMajorVersion, boolean browserIE) {
-		return getAlloyBeginScript(modules, null, browserMajorVersion, browserIE);
 	}
 
 	public static String getAlloyBeginScript(FacesContext facesContext, String[] modules, String config) {
@@ -298,7 +290,11 @@ public class RendererUtil {
 		return getAlloyBeginScript(modules, config, browserMajorVersion, browserIE);
 	}
 
-	public static String getAlloyBeginScript(String[] modules, String config, float browserMajorVersion,
+	public static String getAlloyBeginScript(String[] modules, float browserMajorVersion, boolean browserIE) {
+		return getAlloyBeginScript(modules, null, browserMajorVersion, browserIE);
+	}
+
+	private static String getAlloyBeginScript(String[] modules, String config, float browserMajorVersion,
 		boolean browserIE) {
 
 		StringBuilder stringBuilder = new StringBuilder();
@@ -308,11 +304,17 @@ public class RendererUtil {
 			loadMethod = READY;
 		}
 
-		stringBuilder.append(AUI);
-		stringBuilder.append(StringPool.OPEN_PARENTHESIS);
-
+		// If there is config render a YUI sandbox to avoid using the preconfigured AUI sandbox in Liferay Portal.
 		if ((config != null) && (config.length() > 0)) {
+
+			stringBuilder.append("YUI");
+			stringBuilder.append(StringPool.OPEN_PARENTHESIS);
 			stringBuilder.append(config);
+		}
+		else {
+
+			stringBuilder.append(AUI);
+			stringBuilder.append(StringPool.OPEN_PARENTHESIS);
 		}
 
 		stringBuilder.append(StringPool.CLOSE_PARENTHESIS);

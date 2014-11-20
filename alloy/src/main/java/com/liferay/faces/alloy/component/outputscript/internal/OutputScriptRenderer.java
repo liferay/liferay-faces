@@ -80,8 +80,7 @@ public class OutputScriptRenderer extends OutputScriptRendererBase {
 				}
 
 				// Render the script at the bottom of the page immediately before the closing </body> tag.
-				String bufferedScript = bufferedScriptResponseWriter.toString();
-				RendererUtil.renderScript(facesContext, uiComponent, bufferedScript, use);
+				RendererUtil.renderBufferedScript(bufferedScriptResponseWriter, use);
 				facesContext.setResponseWriter(responseWriter);
 			}
 
