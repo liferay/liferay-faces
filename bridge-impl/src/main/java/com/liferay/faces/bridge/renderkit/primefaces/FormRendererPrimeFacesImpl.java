@@ -14,41 +14,55 @@
 package com.liferay.faces.bridge.renderkit.primefaces;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.faces.application.ViewHandler;
+import javax.faces.component.ActionSource;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
+import javax.faces.event.ActionListener;
 import javax.faces.render.Renderer;
+import javax.faces.render.RendererWrapper;
 
+import com.liferay.faces.bridge.BridgeExt;
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
-import com.liferay.faces.util.render.RendererWrapper;
+import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
 
 
 /**
- * This class is a workaround for a bug in PrimeFaces such that the p:fileUpload component uses the value of the form
- * "action" attribute as the postback URL, rather than the "javax.faces.encodedURL" hidden field.
+ * This class provides a workarounds for FACES-1194 and FACES-1513.
  *
- * @see     http://code.google.com/p/primefaces/issues/detail?id=2905
  * @author  Neil Griffin
  */
 public class FormRendererPrimeFacesImpl extends RendererWrapper {
 
 	// Private Constants
-	private static final String ENCTYPE = "enctype";
-	private static final String MULTIPART = "multipart";
+	private static final String DATA_EXPORTER_FQCN = "org.primefaces.component.export.DataExporter";
+	private static final String FILE_DOWNLOAD_FQCN = "org.primefaces.component.filedownload.FileDownloadActionListener";
 
 	// Private Data Members
+	private int majorVersion;
+	private int minorVersion;
 	private Renderer wrappedRenderer;
 
-	public FormRendererPrimeFacesImpl(Renderer renderer) {
+	public FormRendererPrimeFacesImpl(int majorVersion, int minorVersion, Renderer renderer) {
+		this.majorVersion = majorVersion;
+		this.minorVersion = minorVersion;
 		this.wrappedRenderer = renderer;
 	}
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		if (isMultiPartForm(uiComponent)) {
+		// FACES-1194: If running PrimeFaces 3.2 or older, then p:fileUpload must be forced to use a ResourceURL. This
+		// is because the component uses the value of the form "action" attribute as the postback URL, rather than the
+		// "javax.faces.encodedURL" hidden field.
+		if ((majorVersion == 3) && (minorVersion < 3) && isMultiPartForm(uiComponent)) {
+
 			boolean hasPrimeFacesAjaxFileUploadChild = false;
 			UIComponent childComponent = getChildWithRendererType(uiComponent, PrimeFacesFileUpload.RENDERER_TYPE);
 
@@ -71,9 +85,73 @@ public class FormRendererPrimeFacesImpl extends RendererWrapper {
 				facesContext.getAttributes().remove(PrimeFacesFileUpload.AJAX_FILE_UPLOAD);
 			}
 		}
+
+		// Otherwise, if the specified form has a non-Ajax action listener child like p:dataExporter or p:fileDownload,
+		// then ensure that the value of "action" attribute of the rendered form is a javax.portlet.ResourceURL that
+		// will invoke the RESOURCE_PHASE portlet lifecycle rather than a default javax.portlet.ActionURL that invokes
+		// the ACTION_PHASE of the portlet lifecycle.
+		else if (hasNonAjaxActionListener(uiComponent)) {
+			ViewHandler viewHandler = facesContext.getApplication().getViewHandler();
+			String viewId = facesContext.getViewRoot().getViewId();
+			String facesActionURL = viewHandler.getActionURL(facesContext, viewId);
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			BridgePartialActionURL partialActionURL = bridgeContext.encodePartialActionURL(facesActionURL);
+			partialActionURL.removeParameter(BridgeExt.FACES_AJAX_PARAMETER);
+
+			String nonAjaxPartialActionURL = partialActionURL.toString();
+			ResponseWriter responseWriter = facesContext.getResponseWriter();
+			ResponseWriter primeFacesResponseWriter = new ResponseWriterPrimeFacesImpl(responseWriter,
+					nonAjaxPartialActionURL);
+			facesContext.setResponseWriter(primeFacesResponseWriter);
+			super.encodeBegin(facesContext, uiComponent);
+			facesContext.setResponseWriter(responseWriter);
+		}
+
+		// Otherwise, delegate encoding to the wrapped renderer.
 		else {
 			super.encodeBegin(facesContext, uiComponent);
 		}
+	}
+
+	protected boolean hasNonAjaxActionListener(UIComponent uiComponent) {
+
+		boolean nonAjaxActionListener = false;
+
+		Iterator<UIComponent> facetsAndChildren = uiComponent.getFacetsAndChildren();
+
+		if (facetsAndChildren != null) {
+
+			while (facetsAndChildren.hasNext()) {
+
+				UIComponent facetOrChild = facetsAndChildren.next();
+
+				if (facetOrChild instanceof ActionSource) {
+					ActionSource actionSource = (ActionSource) facetOrChild;
+					ActionListener[] actionListeners = actionSource.getActionListeners();
+
+					if (actionListeners != null) {
+
+						for (ActionListener actionListener : actionListeners) {
+
+							String actionListenerFQCN = actionListener.getClass().getName();
+
+							if (DATA_EXPORTER_FQCN.equals(actionListenerFQCN) ||
+									FILE_DOWNLOAD_FQCN.equals(actionListener.getClass().getName())) {
+								nonAjaxActionListener = true;
+
+								break;
+							}
+						}
+					}
+				}
+
+				if (!nonAjaxActionListener) {
+					nonAjaxActionListener = hasNonAjaxActionListener(facetOrChild);
+				}
+			}
+		}
+
+		return nonAjaxActionListener;
 	}
 
 	protected UIComponent getChildWithRendererType(UIComponent uiComponent, String rendererType) {
@@ -107,14 +185,9 @@ public class FormRendererPrimeFacesImpl extends RendererWrapper {
 
 	protected boolean isMultiPartForm(UIComponent uiComponent) {
 
-		String enctype = (String) uiComponent.getAttributes().get(ENCTYPE);
+		String enctype = (String) uiComponent.getAttributes().get("enctype");
 
-		if ((enctype != null) && (enctype.toLowerCase().indexOf(MULTIPART) >= 0)) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return (enctype != null) && (enctype.toLowerCase().contains("multipart"));
 	}
 
 	@Override
