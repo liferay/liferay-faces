@@ -121,8 +121,11 @@
 							<p:commandButton id="decline" oncomplete="confirmation.hide()" value="#{i18n['no']}" type="button" />
 						</p:confirmDialog>
 						<h3>#{i18n['attachments']}</h3>
+						<p:commandButton id="exportButton" ajax="false" icon="ui-icon-disk" value="#{i18n['export-as-csv']}">
+							<p:dataExporter fileName="uploaded-files" target="uploadedFilesTable" type="csv" />
+						</p:commandButton>
 						<p:dataTable id="uploadedFilesTable" value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
-							<p:column>
+							<p:column exportable="false">
 								<p:commandButton id="showDialogButton" icon="ui-icon-trash" onclick="confirmation.show()">
 									<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantViewBean.uploadedFileId}" />
 								</p:commandButton>

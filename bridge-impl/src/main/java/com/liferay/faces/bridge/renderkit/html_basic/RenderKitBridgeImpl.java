@@ -53,6 +53,7 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 	private static final String RICHFACES_FILE_UPLOAD_RENDERER_TYPE = "org.richfaces.FileUploadRenderer";
 	private static final String SCRIPT_RENDERER_TYPE = "javax.faces.resource.Script";
 	private static final String STYLESHEET_RENDERER_TYPE = "javax.faces.resource.Stylesheet";
+	private static final Product PRIMEFACES = ProductMap.getInstance().get(ProductConstants.PRIMEFACES);
 
 	// Private Data Members
 	private RenderKit wrappedRenderKit;
@@ -68,9 +69,8 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 	public ResponseWriter createResponseWriter(Writer writer, String contentTypeList, String characterEncoding) {
 		ResponseWriter wrappedResponseWriter = wrappedRenderKit.createResponseWriter(writer, contentTypeList,
 				characterEncoding);
-		ResponseWriter responseWriter = new ResponseWriterBridgeImpl(wrappedResponseWriter);
 
-		return responseWriter;
+		return new ResponseWriterBridgeImpl(wrappedResponseWriter);
 	}
 
 	@Override
@@ -80,9 +80,10 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 
 		if (JAVAX_FACES_OUTPUT.equals(family) && JAVAX_FACES_HEAD.equals(rendererType)) {
 
-			// For some reason Mojarra will cause the ICEfaces and PrimeFaces HeadRenderer instances to win, even though
-			// the bridge's faces-config has <ordering><before><others/></before></ordering>. Need to override them with
-			// renderers that are compatible with a portlet environment.
+			// The ICEfaces and PrimeFaces HeadRenderer instances wrap/decorate the one supplied by the JSF runtime. But
+			// since the bridge's faces-config has <ordering><before><others/></before></ordering>, it is not possible
+			// for the bridge to decorate with renderers that are compatible with a portlet environment. Therefore it is
+			// necessary to have the bridge intercede at the RenderKit level.
 			String rendererClassName = renderer.getClass().getName();
 
 			if (ICEFACES_HEAD_RENDERER.equals(rendererClassName)) {
@@ -95,15 +96,11 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 				renderer = new HeadRendererBridgeImpl();
 			}
 		}
-		else if (UIForm.COMPONENT_FAMILY.equals(family) && JAVAX_FACES_FORM.equals(rendererType)) {
+		else if (UIForm.COMPONENT_FAMILY.equals(family) && JAVAX_FACES_FORM.equals(rendererType) &&
+				PRIMEFACES.isDetected()) {
 
-			// If the PrimeFaces p:fileUpload should be forced to use a ResourceURL, then return a special
-			// form renderer. http://issues.liferay.com/browse/FACES-1194
-			Product primeFaces = ProductMap.getInstance().get(ProductConstants.PRIMEFACES);
-
-			if (primeFaces.isDetected() && (primeFaces.getMajorVersion() == 3) && (primeFaces.getMinorVersion() < 3)) {
-				renderer = new FormRendererPrimeFacesImpl(renderer);
-			}
+			renderer = new FormRendererPrimeFacesImpl(PRIMEFACES.getMajorVersion(), PRIMEFACES.getMinorVersion(),
+					renderer);
 		}
 		else if (UIOutput.COMPONENT_FAMILY.equals(family) &&
 				(SCRIPT_RENDERER_TYPE.equals(rendererType) || STYLESHEET_RENDERER_TYPE.equals(rendererType))) {
