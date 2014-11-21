@@ -14,8 +14,11 @@
 package com.liferay.faces.util.client.internal;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
+
+import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.client.ClientScript;
 import com.liferay.faces.util.lang.StringPool;
@@ -31,40 +34,37 @@ public class ClientScriptImpl implements ClientScript, Serializable {
 	private static final long serialVersionUID = 875641899489661794L;
 
 	// Private Data Members
-	private boolean browserIE;
-	private float browserMajorVersion;
-	private StringBuilder callbackSB;
-	private StringBuilder rawSB;
+	private StringBuilder alloyJavaScript;
+	private StringBuilder javascript;
 	private Set<String> useSet;
 
-	public ClientScriptImpl(boolean browserIE, float browserMajorVersion) {
-		this.browserIE = browserIE;
-		this.browserMajorVersion = browserMajorVersion;
-		this.callbackSB = new StringBuilder();
-		this.rawSB = new StringBuilder();
+	public ClientScriptImpl() {
+		this.alloyJavaScript = new StringBuilder();
+		this.javascript = new StringBuilder();
 		this.useSet = new TreeSet<String>();
 	}
 
+	@Override
 	public void append(String content, String use) {
 
 		if ((use == null) || (use.trim().length() == 0)) {
-			rawSB.append(content);
+			javascript.append(content);
 		}
 		else {
-			callbackSB.append("(function() {");
-			callbackSB.append(content);
-			callbackSB.append("})();");
+			alloyJavaScript.append("(function() {");
+			alloyJavaScript.append(content);
+			alloyJavaScript.append("})();");
 
 			String[] useArray = use.split(StringPool.COMMA);
-
-			for (int i = 0; i < useArray.length; i++) {
-				useSet.add(useArray[i]);
-			}
+			useSet.addAll(Arrays.asList(useArray));
 		}
 	}
 
-	public void append(String portletId, String content, String use) {
-		append(content, use);
+	@Override
+	public void clear() {
+		alloyJavaScript.setLength(0);
+		javascript.setLength(0);
+		useSet.clear();
 	}
 
 	@Override
@@ -72,15 +72,15 @@ public class ClientScriptImpl implements ClientScript, Serializable {
 
 		StringBuilder value = new StringBuilder();
 
-		value.append(rawSB.toString());
+		value.append(javascript.toString());
 
-		if (callbackSB.length() > 0) {
+		if (alloyJavaScript.length() > 0) {
 
+			FacesContext facesContext = FacesContext.getCurrentInstance();
 			String[] useArray = new String[useSet.size()];
-			String alloyBeginScript = RendererUtil.getAlloyBeginScript(useSet.toArray(useArray), browserMajorVersion,
-					browserIE);
+			String alloyBeginScript = RendererUtil.getAlloyBeginScript(facesContext, useSet.toArray(useArray));
 			value.append(alloyBeginScript);
-			value.append(callbackSB.toString());
+			value.append(alloyJavaScript.toString());
 			value.append(RendererUtil.ALLOY_END_SCRIPT);
 		}
 
