@@ -7,8 +7,6 @@
 	<ordering>
 		<after>
 			<name>LiferayFacesAlloy</name>
-		</after>
-		<after>
 			<name>LiferayFacesUtil</name>
 		</after>
 	</ordering>
