@@ -16,7 +16,6 @@ package com.liferay.faces.bridge.config;
 import javax.portlet.PortletConfig;
 
 import com.liferay.faces.util.config.ConfigParam;
-import com.liferay.faces.util.config.WebConfigParam;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.ProductConstants;
@@ -124,13 +123,9 @@ public enum PortletConfigParam implements ConfigParam<PortletConfig> {
 		this(name, null, defaultBooleanValue);
 	}
 
-	private PortletConfigParam(String name, int defaultIntegerValue) {
-		this(name, null, defaultIntegerValue);
-	}
-
 	private PortletConfigParam(String name, String alternateName, int defaultIntegerValue) {
 		this.name = name;
-		this.alternateName = name;
+		this.alternateName = alternateName;
 		this.defaultBooleanValue = (defaultIntegerValue != 0);
 		this.defaultIntegerValue = defaultIntegerValue;
 		this.defaultStringValue = Integer.toString(defaultIntegerValue);
