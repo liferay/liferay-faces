@@ -196,6 +196,10 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 
 			if (editorType.indexOf(CKEDITOR) >= 0) {
 
+				ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
+						ClientScriptFactory.class);
+				ClientScript clientScript = clientScriptFactory.getClientScript();
+
 				// FACES-1441: The liferay-ui:input-editor JSP tag (and associated ckeditor.jsp file) do not provide a
 				// way to hook-in to the "onblur" callback feature of the CKEditor. In order to overcome this
 				// limitation, it is necessary to append a <script>...</script> to the response that provides this
@@ -220,10 +224,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 				// Otherwise, append the script to the WebKeys.AUI_SCRIPT_DATA request attribute, which will cause the
 				// script to be rendered at the bottom of the portal page.
 				else {
-					ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-							ClientScriptFactory.class);
-					ClientScript clientScript = clientScriptFactory.getClientScript(externalContext);
-					clientScript.append(getPortletId(portletRequest), onBlurScript, "aui-base");
+					clientScript.append(onBlurScript, "aui-base");
 				}
 
 				// FACES-1439: If the component was rendered on the page on the previous JSF lifecycle, then prevent it
@@ -251,9 +252,7 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 					bufferedResponse = parsedResponse.getNonScripts();
 
 					String scripts = parsedResponse.getScripts();
-
-					LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-					liferayFacesContext.getJavaScriptMap().put(clientId, scripts);
+					clientScript.append(scripts, null);
 					logger.trace(scripts);
 				}
 			}
@@ -380,8 +379,10 @@ public class InputEditorInternalRenderer extends Renderer implements CleanupRend
 
 		String script = scriptBuilder.toString();
 
-		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-		liferayFacesContext.getJavaScriptMap().put(editorName, script);
+		ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
+				ClientScriptFactory.class);
+		ClientScript clientScript = clientScriptFactory.getClientScript();
+		clientScript.append(script, null);
 
 		logger.trace(script);
 	}
