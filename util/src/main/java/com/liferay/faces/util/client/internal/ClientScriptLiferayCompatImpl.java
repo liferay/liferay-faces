@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.util.client.internal;
 
-import java.io.Writer;
+import java.io.StringWriter;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -35,23 +35,38 @@ public abstract class ClientScriptLiferayCompatImpl implements ClientScript {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ClientScriptLiferayCompatImpl.class);
 
-	// Protected Data Members
-	protected ScriptData scriptData;
-
-	protected void appendScriptData(String portletId, String content, String use) {
+	protected void appendScriptData(ScriptData scriptData, String portletId, String content, String use) {
 		scriptData.append(portletId, content, use);
 	}
 
-	protected void writeScriptData(FacesContext facesContext, Writer writer) {
+	protected String getScriptText(FacesContext facesContext, ScriptData scriptData) {
 
-		ExternalContext externalContext = facesContext.getExternalContext();
-		HttpServletRequest httpServeletRequest = PortalUtil.getHttpServeletRequest(externalContext);
+		ClientScriptWriter clientScriptWriter = new ClientScriptWriter();
 
-		try {
-			scriptData.writeTo(httpServeletRequest, writer);
+		if (scriptData != null) {
+
+			ExternalContext externalContext = facesContext.getExternalContext();
+			HttpServletRequest httpServletRequest = PortalUtil.getHttpServeletRequest(externalContext);
+
+			try {
+				scriptData.writeTo(httpServletRequest, clientScriptWriter);
+			}
+			catch (Exception e) {
+				logger.error(e);
+			}
 		}
-		catch (Exception e) {
-			logger.error(e);
+
+		return clientScriptWriter.toString();
+	}
+
+	private class ClientScriptWriter extends StringWriter {
+
+		@Override
+		public void write(String string) {
+
+			if (!(string.startsWith("<script") || string.endsWith("script>"))) {
+				super.write(string);
+			}
 		}
 	}
 }
