@@ -44,7 +44,7 @@ public class ClientScriptImpl implements ClientScript, Serializable {
 		this.useSet = new TreeSet<String>();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public void append(String content, String use) {
 
 		if ((use == null) || (use.trim().length() == 0)) {
@@ -60,7 +60,7 @@ public class ClientScriptImpl implements ClientScript, Serializable {
 		}
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public void clear() {
 		alloyJavaScript.setLength(0);
 		javascript.setLength(0);

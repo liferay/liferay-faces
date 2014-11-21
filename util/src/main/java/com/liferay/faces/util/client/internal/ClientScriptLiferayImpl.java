@@ -21,9 +21,9 @@ import javax.faces.context.FacesContext;
 import com.liferay.faces.util.context.ExtFacesContext;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.portal.LiferayPortletUtil;
+import com.liferay.faces.util.portal.ScriptData;
 import com.liferay.faces.util.portal.WebKeys;
 
-import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 
 
 /**
