@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.util.client.internal;
 
-import java.io.StringWriter;
 import java.util.Map;
 
 import javax.faces.context.ExternalContext;
@@ -31,6 +30,9 @@ import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
  * @author  Neil Griffin
  */
 public class ClientScriptLiferayImpl extends ClientScriptLiferayCompatImpl {
+
+	// Private Data Members
+	private ScriptData scriptData;
 
 	@Override
 	public void append(String content, String use) {
@@ -52,7 +54,7 @@ public class ClientScriptLiferayImpl extends ClientScriptLiferayCompatImpl {
 			portletId = LiferayPortletUtil.getPortletId(portlet);
 		}
 
-		appendScriptData(portletId, content, use);
+		appendScriptData(scriptData, portletId, content, use);
 	}
 
 	@Override
@@ -66,27 +68,6 @@ public class ClientScriptLiferayImpl extends ClientScriptLiferayCompatImpl {
 
 	@Override
 	public String toString() {
-
-		ClientScriptLiferayWriter clientScriptLiferayWriter = new ClientScriptLiferayWriter();
-
-		if (scriptData != null) {
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			writeScriptData(facesContext, clientScriptLiferayWriter);
-		}
-
-		return clientScriptLiferayWriter.toString();
+		return getScriptText(FacesContext.getCurrentInstance(), scriptData);
 	}
-
-	private class ClientScriptLiferayWriter extends StringWriter {
-
-		@Override
-		public void write(String string) {
-
-			if (!(string.startsWith("<script") || string.endsWith("script>"))) {
-				super.write(string);
-			}
-		}
-	}
-
 }
