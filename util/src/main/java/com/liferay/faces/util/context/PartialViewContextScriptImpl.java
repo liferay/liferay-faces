@@ -14,17 +14,14 @@
 package com.liferay.faces.util.context;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.PartialViewContext;
 import javax.faces.context.PartialViewContextWrapper;
 
-import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.product.ProductConstants;
-import com.liferay.faces.util.product.ProductMap;
+import com.liferay.faces.util.client.ClientScript;
+import com.liferay.faces.util.client.ClientScriptFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -35,11 +32,6 @@ import com.liferay.faces.util.product.ProductMap;
  * @author  Neil Griffin
  */
 public class PartialViewContextScriptImpl extends PartialViewContextWrapper {
-
-	// Private Constants
-	private static final boolean ICEFACES_DETECTED = ProductMap.getInstance().get(ProductConstants.ICEFACES)
-		.isDetected();
-	private static final String SCRIPT_TAG_BEGIN_REGEX = "<script[^>]*>";
 
 	// Private Data Members
 	private PartialResponseWriter partialResponseWriter;
@@ -60,17 +52,11 @@ public class PartialViewContextScriptImpl extends PartialViewContextWrapper {
 	@Override
 	public PartialResponseWriter getPartialResponseWriter() {
 
-		if (ICEFACES_DETECTED) {
-			return super.getPartialResponseWriter();
+		if (partialResponseWriter == null) {
+			partialResponseWriter = new PartialResponseWriterScriptImpl(super.getPartialResponseWriter());
 		}
-		else {
 
-			if (partialResponseWriter == null) {
-				partialResponseWriter = new PartialResponseWriterScriptImpl(super.getPartialResponseWriter());
-			}
-
-			return partialResponseWriter;
-		}
+		return partialResponseWriter;
 	}
 
 	@Override
@@ -98,12 +84,20 @@ public class PartialViewContextScriptImpl extends PartialViewContextWrapper {
 
 			if (!wroteEval) {
 
-				ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
-				Map<String, String> javaScriptMap = extFacesContext.getJavaScriptMap();
+				ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
+						ClientScriptFactory.class);
+				ClientScript clientScript = clientScriptFactory.getClientScript();
+				String clientScriptString = clientScript.toString();
+				clientScript.clear();
 
-				if ((javaScriptMap != null) && (javaScriptMap.size() > 0)) {
+				if (clientScriptString.length() > 0) {
+
 					super.startEval();
-					writeJavaScriptMap(javaScriptMap);
+
+					if (clientScriptString.length() > 0) {
+						super.write(clientScriptString);
+					}
+
 					super.endEval();
 				}
 			}
@@ -114,30 +108,18 @@ public class PartialViewContextScriptImpl extends PartialViewContextWrapper {
 		@Override
 		public void endEval() throws IOException {
 
-			ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
-			Map<String, String> javaScriptMap = extFacesContext.getJavaScriptMap();
+			ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
+					ClientScriptFactory.class);
+			ClientScript clientScript = clientScriptFactory.getClientScript();
+			String clientScriptString = clientScript.toString();
+			clientScript.clear();
 
-			if ((javaScriptMap != null) && (javaScriptMap.size() > 0)) {
-				writeJavaScriptMap(javaScriptMap);
+			if (clientScriptString.length() > 0) {
+				super.write(clientScriptString);
 			}
 
 			super.endEval();
 			wroteEval = true;
-		}
-
-		protected void writeJavaScriptMap(Map<String, String> javaScriptMap) throws IOException {
-
-			Set<Entry<String, String>> entrySet = javaScriptMap.entrySet();
-
-			for (Map.Entry<String, String> mapEntry : entrySet) {
-				String mapEntryValue = mapEntry.getValue();
-
-				if (mapEntryValue != null) {
-					mapEntryValue = mapEntryValue.replaceAll(SCRIPT_TAG_BEGIN_REGEX, StringPool.BLANK);
-					mapEntryValue = mapEntryValue.replaceAll(StringPool.SCRIPT_TAG_END, StringPool.BLANK);
-					super.write(mapEntryValue);
-				}
-			}
 		}
 	}
 }

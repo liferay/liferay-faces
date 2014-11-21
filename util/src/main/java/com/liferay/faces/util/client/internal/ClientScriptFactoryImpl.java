@@ -17,16 +17,12 @@ import java.util.Map;
 
 import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.client.BrowserSniffer;
-import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.client.ClientScript;
 import com.liferay.faces.util.client.ClientScriptFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.portal.WebKeys;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
-import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 
 
 /**
@@ -37,54 +33,30 @@ public class ClientScriptFactoryImpl extends ClientScriptFactory {
 	// Private Constants
 	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
 		.isDetected();
-
-	private static final String SCRIPT_DATA_FQCN = "com.liferay.portal.kernel.servlet.taglib.aui.ScriptData";
+	private static final boolean ICEFACES_DETECTED = ProductMap.getInstance().get(ProductConstants.ICEFACES)
+		.isDetected();
 
 	@Override
-	public ClientScript getClientScript(ExternalContext externalContext) throws FacesException {
+	public ClientScript getClientScript() throws FacesException {
 
-		ClientScript clientScript = null;
-
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, Object> requestMap = externalContext.getRequestMap();
-		Object attributeValue = requestMap.get(WebKeys.AUI_SCRIPT_DATA);
+		ClientScript clientScript = (ClientScript) requestMap.get(ClientScriptFactoryImpl.class.getName());
 
-		if (LIFERAY_PORTAL_DETECTED) {
+		if (clientScript == null) {
 
-			Object scriptData = null;
-
-			if (attributeValue == null) {
-
-				try {
-					Class<?> scriptDataClass = Class.forName(SCRIPT_DATA_FQCN);
-					scriptData = scriptDataClass.newInstance();
-				}
-				catch (Exception e) {
-					throw new FacesException(e);
-				}
-
-				requestMap.put(WebKeys.AUI_SCRIPT_DATA, scriptData);
+			if (ICEFACES_DETECTED) {
+				clientScript = new ClientScriptIcefacesImpl();
+			}
+			else if (LIFERAY_PORTAL_DETECTED) {
+				clientScript = new ClientScriptLiferayImplCompat();
 			}
 			else {
-				scriptData = (ScriptData) attributeValue;
+				clientScript = new ClientScriptImpl();
 			}
 
-			clientScript = new ClientScriptLiferayImpl(scriptData);
-		}
-		else {
-
-			if (attributeValue == null) {
-
-				BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
-						BrowserSnifferFactory.class);
-				BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(externalContext);
-				boolean browserIE = browserSniffer.isIe();
-				float browserMajorVersion = browserSniffer.getMajorVersion();
-				clientScript = new ClientScriptImpl(browserIE, browserMajorVersion);
-				requestMap.put(WebKeys.AUI_SCRIPT_DATA, clientScript);
-			}
-			else {
-				clientScript = (ClientScript) attributeValue;
-			}
+			requestMap.put(ClientScriptFactoryImpl.class.getName(), clientScript);
 		}
 
 		return clientScript;
