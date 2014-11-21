@@ -21,10 +21,11 @@ import javax.faces.FacesWrapper;
  */
 public abstract class ClientScriptWrapper implements ClientScript, FacesWrapper<ClientScript> {
 
-	// Java 6: @Override
-	public void append(String portletId, String content, String use) {
-		getWrapped().append(portletId, content, use);
+	// Java 1.6+: @Override
+	public void append(String content, String use) {
+		getWrapped().append(content, use);
 	}
 
+	// Java 1.6+: @Override
 	public abstract ClientScript getWrapped();
 }

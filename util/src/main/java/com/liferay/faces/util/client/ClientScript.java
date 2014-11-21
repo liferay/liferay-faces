@@ -18,5 +18,10 @@ package com.liferay.faces.util.client;
  */
 public interface ClientScript {
 
-	public void append(String portletId, String content, String use);
+	public void append(String content, String use);
+
+	public void clear();
+
+	@Override
+	public String toString();
 }
