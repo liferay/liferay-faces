@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.util.client.internal;
 
-import java.io.Writer;
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 import javax.faces.context.ExternalContext;
@@ -86,10 +86,7 @@ public abstract class ClientScriptLiferayCompatImpl implements ClientScript {
 		}
 	}
 
-	// Protected Data Members
-	protected ScriptData scriptData;
-
-	protected void appendScriptData(String portletId, String content, String use) {
+	protected void appendScriptData(ScriptData scriptData, String portletId, String content, String use) {
 
 		try {
 
@@ -105,15 +102,32 @@ public abstract class ClientScriptLiferayCompatImpl implements ClientScript {
 		}
 	}
 
-	protected void writeScriptData(FacesContext facesContext, Writer writer) {
+	protected String getScriptText(FacesContext facesContext, ScriptData scriptData) {
 
-		ExternalContext externalContext = facesContext.getExternalContext();
-		PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
-		PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
-		HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
-		HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(portletResponse);
-		PageContextAdapter pageContextAdapter = new PageContextAdapter(httpServletRequest, httpServletResponse,
-				facesContext.getELContext(), (StringJspWriter) writer);
-		ScriptTagUtil.flushScriptData(pageContextAdapter);
+		ClientScriptWriter clientScriptWriter = new ClientScriptWriter();
+
+		if (scriptData != null) {
+			ExternalContext externalContext = facesContext.getExternalContext();
+			PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
+			PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
+			HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
+			HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(portletResponse);
+			PageContextAdapter pageContextAdapter = new PageContextAdapter(httpServletRequest, httpServletResponse,
+					facesContext.getELContext(), (StringJspWriter) clientScriptWriter);
+			ScriptTagUtil.flushScriptData(pageContextAdapter);
+		}
+
+		return clientScriptWriter.toString();
+	}
+
+	private class ClientScriptWriter extends StringJspWriter {
+
+		@Override
+		public void write(String string) throws IOException {
+
+			if (!(string.startsWith("<script") || string.endsWith("script>"))) {
+				super.write(string);
+			}
+		}
 	}
 }
