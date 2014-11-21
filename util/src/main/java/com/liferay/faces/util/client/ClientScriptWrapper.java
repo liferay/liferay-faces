@@ -22,9 +22,10 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class ClientScriptWrapper implements ClientScript, Wrapper<ClientScript> {
 
 	@Override
-	public void append(String portletId, String content, String use) {
-		getWrapped().append(portletId, content, use);
+	public void append(String content, String use) {
+		getWrapped().append(content, use);
 	}
 
+	@Override
 	public abstract ClientScript getWrapped();
 }
