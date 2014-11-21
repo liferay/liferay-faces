@@ -100,17 +100,15 @@ import com.liferay.faces.util.render.internal.RendererUtil;
 	}
 
 	/* package-private */ static void encodeJavaScriptBegin(FacesContext facesContext, UIComponent uiComponent, AlloyRenderer alloyRenderer,
-		String[] modules, boolean ajax, boolean forceInline) throws IOException {
+		String[] modules, boolean ajax, boolean sandboxed) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		if (!ajax && forceInline) {
+		if (sandboxed) {
 
-			responseWriter.write(StringPool.FORWARD_SLASH);
-			responseWriter.write(StringPool.STAR);
-			responseWriter.write(StringPool.CDATA_OPEN);
-			responseWriter.write(StringPool.STAR);
-			responseWriter.write(StringPool.FORWARD_SLASH);
+			String yuiConfig = alloyRenderer.getYUIConfig(facesContext, responseWriter, uiComponent);
+			String alloyBeginScript = RendererUtil.getAlloyBeginScript(facesContext, modules, yuiConfig);
+			responseWriter.write(alloyBeginScript);
 		}
 
 		if (ajax) {
@@ -137,33 +135,18 @@ import com.liferay.faces.util.render.internal.RendererUtil;
 			responseWriter.write(StringPool.SEMICOLON);
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 		}
-
-		if (ajax || forceInline) {
-
-			String yuiConfig = alloyRenderer.getYUIConfig(facesContext, responseWriter, uiComponent);
-			String alloyBeginScript = RendererUtil.getAlloyBeginScript(facesContext, modules, yuiConfig);
-			responseWriter.write(alloyBeginScript);
-		}
-
 	}
 
 	/* package-private */ static void encodeJavaScriptEnd(FacesContext facesContext, UIComponent uiComponent, boolean ajax,
-		boolean forceInline) throws IOException {
+		boolean sandboxed) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		if (ajax || forceInline) {
+		if (sandboxed) {
 
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 			responseWriter.write(StringPool.CLOSE_PARENTHESIS);
 			responseWriter.write(StringPool.SEMICOLON);
-		}
-
-		if (!ajax && forceInline) {
-
-			responseWriter.write(StringPool.FORWARD_SLASH);
-			responseWriter.write(StringPool.FORWARD_SLASH);
-			responseWriter.write(StringPool.CDATA_CLOSE);
 		}
 	}
 

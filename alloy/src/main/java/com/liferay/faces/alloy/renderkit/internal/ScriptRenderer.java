@@ -20,7 +20,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.context.ExtFacesContext;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.ContentTypes;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
@@ -112,22 +111,9 @@ public class ScriptRenderer extends ScriptRendererCompat {
 			super.encodeChildren(facesContext, uiComponent);
 			facesContext.setResponseWriter(backupResponseWriter);
 
-			// If running in an Ajax request, then it is not possible to render the scripts at the bottom of the
-			// portal page. Instead, store the script in the JavaScript map so that PartialViewContextCleanupImpl
-			// knows to include it in the <eval>...</eval> section of the JSF partial-response.
-			if (isAjaxRequest(facesContext)) {
-				Map<String, String> javaScriptMap = ExtFacesContext.getInstance().getJavaScriptMap();
-				javaScriptMap.put(uiComponent.getClientId(facesContext), bufferedScriptResponseWriter.toString());
-			}
-
-			// Otherwise, render the script at the bottom of the portal page by setting the WebKeys.AUI_SCRIPT_DATA
-			// request attribute.
-			else {
-				Map<String, Object> attributes = uiComponent.getAttributes();
-				String use = (String) attributes.get(USE);
-				String bufferedScript = bufferedScriptResponseWriter.toString();
-				RendererUtil.renderScript(facesContext, uiComponent, bufferedScript, use);
-			}
+			Map<String, Object> attributes = uiComponent.getAttributes();
+			String use = (String) attributes.get(USE);
+			RendererUtil.renderScript(bufferedScriptResponseWriter.toString(), use);
 		}
 	}
 

@@ -72,7 +72,7 @@ public abstract class DelegatingAlloyRendererBase extends DelegatingClientCompon
 	@Override
 	public void encodeJavaScriptBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 		AlloyRendererUtil.encodeJavaScriptBegin(facesContext, uiComponent, this, getModules(facesContext, uiComponent),
-			isAjax(facesContext), isForceInline(facesContext, uiComponent));
+			isAjax(facesContext), isSandboxed(facesContext, uiComponent));
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public abstract class DelegatingAlloyRendererBase extends DelegatingClientCompon
 	@Override
 	public void encodeJavaScriptEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 		AlloyRendererUtil.encodeJavaScriptEnd(facesContext, uiComponent, isAjax(facesContext),
-			isForceInline(facesContext, uiComponent));
+			isSandboxed(facesContext, uiComponent));
 	}
 
 	@Override
