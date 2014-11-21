@@ -14,7 +14,6 @@
 package com.liferay.faces.util.client;
 
 import javax.faces.FacesException;
-import javax.faces.context.ExternalContext;
 
 import com.liferay.faces.util.factory.FactoryExtension;
 
@@ -24,5 +23,5 @@ import com.liferay.faces.util.factory.FactoryExtension;
  */
 public abstract class ClientScriptFactory implements FactoryExtension<ClientScriptFactory> {
 
-	public abstract ClientScript getClientScript(ExternalContext externalContext) throws FacesException;
+	public abstract ClientScript getClientScript() throws FacesException;
 }

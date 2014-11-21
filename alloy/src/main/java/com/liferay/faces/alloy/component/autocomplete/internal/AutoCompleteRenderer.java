@@ -35,7 +35,6 @@ import com.liferay.faces.alloy.component.autocomplete.AutoComplete;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.context.ExtFacesContext;
 import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
@@ -342,9 +341,19 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 				RendererUtil.encodeFunctionCall(bufferedScriptResponseWriter, "LFAI.setAutoCompleteServerResults",
 					liferayComponentJavaScriptFragment, resultArrayStringBuilder, hiddenClientId);
 
-				String bufferedScriptString = bufferedScriptResponseWriter.toString();
-				Map<String, String> javaScriptMap = ExtFacesContext.getInstance().getJavaScriptMap();
-				javaScriptMap.put(clientId, bufferedScriptString);
+				String[] modules = getModules(facesContext, uiComponent);
+				StringBuilder useStringBuilder = new StringBuilder();
+
+				for (int i = 0; i < modules.length; i++) {
+
+					if (i > 0) {
+						useStringBuilder.append(", ");
+					}
+
+					useStringBuilder.append(modules[i]);
+				}
+
+				RendererUtil.renderScript(bufferedScriptResponseWriter.toString(), useStringBuilder.toString());
 			}
 			else {
 				super.encodeJavaScript(facesContext, uiComponent);
