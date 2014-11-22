@@ -28,6 +28,7 @@ import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.renderkit.bridge.ResponseWriterBridgeImpl;
 import com.liferay.faces.bridge.renderkit.icefaces.DataPaginatorRenderer;
 import com.liferay.faces.bridge.renderkit.icefaces.HeadRendererICEfacesImpl;
+import com.liferay.faces.bridge.renderkit.primefaces.BodyRendererPrimeFacesImpl;
 import com.liferay.faces.bridge.renderkit.primefaces.FileUploadRendererPrimeFacesImpl;
 import com.liferay.faces.bridge.renderkit.primefaces.FormRendererPrimeFacesImpl;
 import com.liferay.faces.bridge.renderkit.primefaces.HeadRendererPrimeFacesImpl;
@@ -43,9 +44,9 @@ import com.liferay.faces.util.product.ProductMap;
 public class RenderKitBridgeImpl extends RenderKitWrapper {
 
 	// Private Constants
+	private static final String JAVAX_FACES_BODY = "javax.faces.Body";
 	private static final String JAVAX_FACES_FORM = "javax.faces.Form";
 	private static final String JAVAX_FACES_HEAD = "javax.faces.Head";
-	private static final String JAVAX_FACES_OUTPUT = UIOutput.COMPONENT_FAMILY;
 	private static final Object ICEFACES_HEAD_RENDERER = "org.icefaces.ace.renderkit.HeadRenderer";
 	private static final String PRIMEFACES_FAMILY = "org.primefaces.component";
 	private static final String PRIMEFACES_HEAD_RENDERER = "org.primefaces.renderkit.HeadRenderer";
@@ -78,22 +79,32 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 
 		Renderer renderer = super.getRenderer(family, rendererType);
 
-		if (JAVAX_FACES_OUTPUT.equals(family) && JAVAX_FACES_HEAD.equals(rendererType)) {
+		if (UIOutput.COMPONENT_FAMILY.equals(family)) {
 
-			// The ICEfaces and PrimeFaces HeadRenderer instances wrap/decorate the one supplied by the JSF runtime. But
-			// since the bridge's faces-config has <ordering><before><others/></before></ordering>, it is not possible
-			// for the bridge to decorate with renderers that are compatible with a portlet environment. Therefore it is
-			// necessary to have the bridge intercede at the RenderKit level.
-			String rendererClassName = renderer.getClass().getName();
+			if (JAVAX_FACES_HEAD.equals(rendererType)) {
 
-			if (ICEFACES_HEAD_RENDERER.equals(rendererClassName)) {
-				renderer = new HeadRendererICEfacesImpl();
+				// The ICEfaces and PrimeFaces HeadRenderer instances wrap/decorate the one supplied by the JSF runtime.
+				// But since the bridge's faces-config has <ordering><before><others/></before></ordering>, it is not
+				// possible for the bridge to decorate with renderers that are compatible with a portlet environment.
+				// Therefore it is necessary to have the bridge intercede at the RenderKit level.
+				String rendererClassName = renderer.getClass().getName();
+
+				if (ICEFACES_HEAD_RENDERER.equals(rendererClassName)) {
+					renderer = new HeadRendererICEfacesImpl();
+				}
+				else if (PRIMEFACES_HEAD_RENDERER.equals(rendererClassName)) {
+					renderer = new HeadRendererPrimeFacesImpl();
+				}
+				else {
+					renderer = new HeadRendererBridgeImpl();
+				}
 			}
-			else if (PRIMEFACES_HEAD_RENDERER.equals(rendererClassName)) {
-				renderer = new HeadRendererPrimeFacesImpl();
+			else if (JAVAX_FACES_BODY.equals(rendererType) && PRIMEFACES.isDetected() &&
+					(PRIMEFACES.getMajorVersion() >= 5)) {
+				renderer = new BodyRendererPrimeFacesImpl();
 			}
-			else {
-				renderer = new HeadRendererBridgeImpl();
+			else if (SCRIPT_RENDERER_TYPE.equals(rendererType) || STYLESHEET_RENDERER_TYPE.equals(rendererType)) {
+				renderer = new ResourceRendererBridgeImpl(renderer);
 			}
 		}
 		else if (UIForm.COMPONENT_FAMILY.equals(family) && JAVAX_FACES_FORM.equals(rendererType) &&
@@ -101,10 +112,6 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 
 			renderer = new FormRendererPrimeFacesImpl(PRIMEFACES.getMajorVersion(), PRIMEFACES.getMinorVersion(),
 					renderer);
-		}
-		else if (UIOutput.COMPONENT_FAMILY.equals(family) &&
-				(SCRIPT_RENDERER_TYPE.equals(rendererType) || STYLESHEET_RENDERER_TYPE.equals(rendererType))) {
-			renderer = new ResourceRendererBridgeImpl(renderer);
 		}
 		else if (UIPanel.COMPONENT_FAMILY.equals(family) && DataPaginator.RENDERER_TYPE.equals(rendererType)) {
 
@@ -126,5 +133,4 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 	public RenderKit getWrapped() {
 		return wrappedRenderKit;
 	}
-
 }
