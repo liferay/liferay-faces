@@ -394,7 +394,7 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 	}
 
 	@Override
-	protected List<String> getModules(List<String> modules, InputDateTime inputDateTime) {
+	protected List<String> getModules(List<String> modules, FacesContext facesContext, InputDateTime inputDateTime) {
 
 		List<String> inputTimeModules = new ArrayList<String>(modules);
 		InputTime inputTime = (InputTime) inputDateTime;
