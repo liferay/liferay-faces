@@ -15,6 +15,7 @@ package com.liferay.faces.alloy.component.inputdate.internal;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -97,8 +98,9 @@ public class InputDateRenderer extends InputDateRendererBase {
 				BrowserSnifferFactory.class);
 		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
 		InputDate inputDate = (InputDate) uiComponent;
+		String showOn = inputDate.getShowOn();
 
-		if (browserSniffer.isMobile() && inputDate.isResponsive()) {
+		if ((browserSniffer.isMobile() && inputDate.isResponsive()) || "button".equals(showOn)) {
 
 			String clientVarName = ComponentUtil.getClientVarName(facesContext, inputDate);
 			String clientKey = inputDate.getClientKey();
@@ -108,36 +110,49 @@ public class InputDateRenderer extends InputDateRendererBase {
 			}
 
 			JavaScriptFragment liferayComponent = new JavaScriptFragment("Liferay.component('" + clientKey + "')");
-			String clientId = uiComponent.getClientId(facesContext);
-			String inputClientId = clientId.concat(INPUT_SUFFIX);
-
-			Object maxDateObject = inputDate.getMaxDate();
-			Object minDateObject = inputDate.getMinDate();
-			String maxDateString = null;
-			String minDateString = null;
-
-			if ((maxDateObject != null) || (minDateObject != null)) {
-
-				String datePattern = inputDate.getPattern();
-				String timeZoneString = inputDate.getTimeZone();
-				TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(InputDate.DEFAULT_HTML5_DATE_PATTERN,
-						Locale.ENGLISH);
-
-				if (maxDateObject != null) {
-					Date maxDate = InputDateTimeUtil.getObjectAsDate(maxDateObject, datePattern, timeZone);
-					maxDateString = simpleDateFormat.format(maxDate);
-				}
-
-				if (maxDateObject != null) {
-					Date minDate = InputDateTimeUtil.getObjectAsDate(minDateObject, datePattern, timeZone);
-					minDateString = simpleDateFormat.format(minDate);
-				}
-			}
-
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
-			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initDateTimePickerMobile", liferayComponent,
-				inputClientId, maxDateString, minDateString);
+
+			if (browserSniffer.isMobile() && inputDate.isResponsive()) {
+
+				String clientId = uiComponent.getClientId(facesContext);
+				String inputClientId = clientId.concat(INPUT_SUFFIX);
+
+				Object maxDateObject = inputDate.getMaxDate();
+				Object minDateObject = inputDate.getMinDate();
+				String maxDateString = null;
+				String minDateString = null;
+
+				if ((maxDateObject != null) || (minDateObject != null)) {
+
+					String datePattern = inputDate.getPattern();
+					String timeZoneString = inputDate.getTimeZone();
+					TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat(InputDate.DEFAULT_HTML5_DATE_PATTERN,
+							Locale.ENGLISH);
+
+					if (maxDateObject != null) {
+						Date maxDate = InputDateTimeUtil.getObjectAsDate(maxDateObject, datePattern, timeZone);
+						maxDateString = simpleDateFormat.format(maxDate);
+					}
+
+					if (maxDateObject != null) {
+						Date minDate = InputDateTimeUtil.getObjectAsDate(minDateObject, datePattern, timeZone);
+						minDateString = simpleDateFormat.format(minDate);
+					}
+				}
+
+				RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initDateTimePickerMobile", liferayComponent,
+					inputClientId, maxDateString, minDateString);
+			}
+			else if ("button".equals(showOn)) {
+
+				String clientId = inputDate.getClientId(facesContext);
+				String inputClientId = clientId.concat(INPUT_SUFFIX);
+				String escapedInputClientId = RendererUtil.escapeClientId(inputClientId);
+
+				RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initDatePickerShowOnButton", 'A',
+					escapedInputClientId, liferayComponent);
+			}
 		}
 	}
 
@@ -294,7 +309,16 @@ public class InputDateRenderer extends InputDateRendererBase {
 	}
 
 	@Override
-	protected List<String> getModules(List<String> modules, InputDateTime inputDateTime) {
-		return modules;
+	protected List<String> getModules(List<String> modules, FacesContext facesContext, InputDateTime inputDateTime) {
+
+		InputDate inputDate = (InputDate) inputDateTime;
+		String showOn = inputDate.getShowOn();
+		List<String> modulesList = new ArrayList<String>(modules);
+
+		if ("button".equals(showOn)) {
+			modulesList.add("aui-datatype-date-parse");
+		}
+
+		return modulesList;
 	}
 }
