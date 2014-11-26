@@ -32,7 +32,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.portal.component.InputEditorInternal;
-import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.portal.servlet.ScriptCapturingHttpServletRequest;
 import com.liferay.faces.util.jsp.JspIncludeResponse;
 import com.liferay.faces.util.jsp.PageContextAdapter;
@@ -43,6 +42,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.portal.EditorUtil;
 import com.liferay.faces.util.portal.ScriptTagUtil;
 import com.liferay.faces.util.portal.WebKeys;
+import com.liferay.faces.util.render.internal.RendererUtil;
 
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -210,8 +210,7 @@ public class InputEditorInternalRenderer extends Renderer {
 
 					String scripts = parsedResponse.getScripts();
 
-					LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-					liferayFacesContext.getJavaScriptMap().put(clientId, scripts);
+					RendererUtil.renderScript(scripts, null);
 					logger.trace(scripts);
 				}
 			}
