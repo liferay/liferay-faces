@@ -32,7 +32,6 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.inputdate.InputDate;
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTime;
-import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
 import com.liferay.faces.alloy.component.inputdatetime.internal.InputDateTimeResponseWriter;
 import com.liferay.faces.alloy.component.inputtext.InputText;
 import com.liferay.faces.util.client.BrowserSniffer;
@@ -131,12 +130,12 @@ public class InputDateRenderer extends InputDateRendererBase {
 							Locale.ENGLISH);
 
 					if (maxDateObject != null) {
-						Date maxDate = InputDateTimeUtil.getObjectAsDate(maxDateObject, datePattern, timeZone);
+						Date maxDate = inputDate.getObjectAsDate(maxDateObject, datePattern, timeZone);
 						maxDateString = simpleDateFormat.format(maxDate);
 					}
 
 					if (maxDateObject != null) {
-						Date minDate = InputDateTimeUtil.getObjectAsDate(minDateObject, datePattern, timeZone);
+						Date minDate = inputDate.getObjectAsDate(minDateObject, datePattern, timeZone);
 						minDateString = simpleDateFormat.format(minDate);
 					}
 				}
@@ -229,7 +228,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 		String datePattern = inputDate.getPattern();
 		String timeZoneString = inputDate.getTimeZone();
 		TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
-		Date date = InputDateTimeUtil.getObjectAsDate(dateObject, datePattern, timeZone);
+		Date date = inputDate.getObjectAsDate(dateObject, datePattern, timeZone);
 
 		// Note: The JavaScript date object expects zero-based month numbers, so it is necessary to offset the month
 		// by 1.
