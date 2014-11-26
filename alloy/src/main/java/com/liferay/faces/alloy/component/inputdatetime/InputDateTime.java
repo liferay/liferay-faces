@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.alloy.component.inputdatetime;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -31,6 +32,7 @@ import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.lang.StringPool;
 
 
 /**
@@ -46,7 +48,7 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 		TimeZone timeZone) {
 
 		String pattern = getPattern();
-		Date submittedDate = InputDateTimeUtil.getObjectAsDate(newValue, pattern, timeZone);
+		Date submittedDate = getObjectAsDate(newValue, pattern, timeZone);
 
 		try {
 
@@ -68,7 +70,7 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 
 					String minDateString = simpleDateFormat.format(minDate);
 					String maxDateString = simpleDateFormat.format(maxDate);
-					Locale locale = InputDateTimeUtil.getObjectAsLocale(getLocale(facesContext));
+					Locale locale = getObjectAsLocale(getLocale(facesContext));
 					String message = getMessageContext().getMessage(locale, "please-enter-a-value-between-x-and-x",
 							minDateString, maxDateString);
 					facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
@@ -104,7 +106,7 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 			dateTimeConverter.setPattern(pattern);
 
 			Object objectLocale = getLocale();
-			Locale locale = InputDateTimeUtil.getObjectAsLocale(objectLocale);
+			Locale locale = getObjectAsLocale(objectLocale);
 			dateTimeConverter.setLocale(locale);
 
 			String timeZoneString = getTimeZone();
@@ -153,6 +155,81 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 				MessageContextFactory.class);
 
 		return messageContextFactory.getMessageContext();
+	}
+
+	public final Date getObjectAsDate(Object dateAsObject, String datePattern, TimeZone timeZone)
+		throws FacesException {
+
+		Date date = null;
+
+		if (dateAsObject != null) {
+
+			if (dateAsObject instanceof Date) {
+				date = (Date) dateAsObject;
+			}
+			else if (dateAsObject instanceof String) {
+
+				String dateAsString = (String) dateAsObject;
+
+				if (dateAsString.length() > 0) {
+
+					try {
+
+						SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
+						simpleDateFormat.setTimeZone(timeZone);
+						date = simpleDateFormat.parse(dateAsString);
+					}
+					catch (ParseException e) {
+
+						FacesException facesException = new FacesException(e);
+						throw facesException;
+					}
+				}
+			}
+			else {
+
+				String message = "Unable to convert value to Date.";
+				FacesException facesException = new FacesException(message);
+				throw facesException;
+			}
+		}
+
+		return date;
+	}
+
+	public final Locale getObjectAsLocale(Object localeAsObject) throws FacesException {
+
+		Locale locale = null;
+
+		if (localeAsObject != null) {
+
+			if (localeAsObject instanceof Locale) {
+				locale = (Locale) localeAsObject;
+			}
+			else if (localeAsObject instanceof String) {
+
+				String localeAsString = (String) localeAsObject;
+
+				if (localeAsString.length() > 0) {
+					String[] locales = localeAsString.split(StringPool.DASH);
+
+					if (locales.length > 1) {
+						locale = new Locale(locales[0], locales[1]);
+					}
+					else {
+						locale = new Locale(locales[0]);
+					}
+				}
+			}
+			else {
+
+				String message = "Unable to convert value to locale.";
+				FacesException facesException = new FacesException(message);
+				throw facesException;
+			}
+		}
+
+		return locale;
 	}
 
 	public abstract String getPattern();
