@@ -266,4 +266,34 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="Runtime" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIPanel"
+		rendererParentClass="com.liferay.faces.portal.render.internal.PortalTagRenderer&lt;com.liferay.faces.portal.component.runtime.Runtime, com.liferay.taglib.portletext.RuntimeTag&gt;">
+		<description>
+			<![CDATA[Runtime is a UIOutput component that generates the markup of an specific Liferay portlet.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[TODO.]]>
+				</description>
+				<name>defaultPreferences</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[TODO.]]>
+				</description>
+				<name>portletName</name>
+				<required>true</required>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[TODO.]]>
+				</description>
+				<name>queryString</name>
+				<type>String</type>
+			</attribute>
+		</attributes>
+	</component>
 </components>
