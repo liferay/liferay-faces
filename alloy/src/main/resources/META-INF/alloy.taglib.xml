@@ -121,7 +121,7 @@
 			<description><![CDATA[When true, the first item in the list will be activated so that users can press TAB or ENTER to select it. Default is <code>true</code>.]]></description>
 			<name>activateFirstItem</name>
 			<required>false</required>
-			<type>java.lang.Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]></description>
@@ -254,7 +254,7 @@
 			<description><![CDATA[When true, the component will perform server-side validation to ensure that the value entered is on the list of completion items. Default is <code>false</code>.]]></description>
 			<name>listItemRequired</name>
 			<required>false</required>
-			<type>java.lang.Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The maximum amount of autoComplete results.]]></description>
@@ -429,7 +429,7 @@
 			<description><![CDATA[When <code>true</code>, pressing TAB selects the active autoComplete option. Defaults to <code>true</code>.]]></description>
 			<name>tabSelect</name>
 			<required>false</required>
-			<type>java.lang.Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the title of the element.]]></description>
@@ -4153,7 +4153,7 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[When true, the first item in the list will be activated so that users can press TAB or ENTER to select it. Default is <code>true</code>.]]></description>
 			<name>activateFirstItem</name>
 			<required>false</required>
-			<type>java.lang.Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]></description>
@@ -6644,7 +6644,7 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[When this flag is true, the element will have the CSS class <code>row-fluid</code>. Otherwise, the element will have the CSS class <code>row</code>. The default value is true.]]></description>
 			<name>fluid</name>
 			<required>false</required>
-			<type>java.lang.Boolean</type>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A unique identifier for this component.]]></description>

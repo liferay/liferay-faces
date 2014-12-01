@@ -64,7 +64,7 @@ public abstract class TabViewRendererBase extends AlloyRendererBase {
 			first = false;
 		}
 
-		Boolean stacked = tabView.isStacked();
+		Boolean stacked = tabView.getStacked();
 
 		if (stacked != null) {
 

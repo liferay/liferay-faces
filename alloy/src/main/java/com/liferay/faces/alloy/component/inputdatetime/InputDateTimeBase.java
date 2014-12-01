@@ -37,7 +37,7 @@ public abstract class InputDateTimeBase extends InputText implements Styleable {
 		zIndex
 	}
 
-	public Boolean isAutoHide() {
+	public Boolean getAutoHide() {
 		return (Boolean) getStateHelper().eval(InputDateTimePropertyKeys.autoHide, null);
 	}
 
