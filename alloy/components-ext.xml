@@ -451,7 +451,7 @@
 					<![CDATA[When true, the first item in the list will be activated so that users can press TAB or ENTER to select it. Default is <code>true</code>.]]>
 				</description>
 				<name>activateFirstItem</name>
-				<type>java.lang.Boolean</type>
+				<type>boolean</type>
 				<yui>true</yui>
 			</attribute>
 			<attribute>
@@ -577,7 +577,7 @@
 					<![CDATA[When true, the component will perform server-side validation to ensure that the value entered is on the list of completion items. Default is <code>false</code>.]]>
 				</description>
 				<name>listItemRequired</name>
-				<type>java.lang.Boolean</type>
+				<type>boolean</type>
 				<yui>true</yui>
 			</attribute>
 			<attribute>
@@ -633,7 +633,7 @@
 					<![CDATA[When <code>true</code>, pressing TAB selects the active autoComplete option. Defaults to <code>true</code>.]]>
 				</description>
 				<name>tabSelect</name>
-				<type>java.lang.Boolean</type>
+				<type>boolean</type>
 				<yui>true</yui>
 			</attribute>
 			<attribute>
@@ -1515,7 +1515,7 @@
 				<defaultValue>true</defaultValue>
 				<description><![CDATA[When true, the first item in the list will be activated so that users can press TAB or ENTER to select it. Default is <code>true</code>.]]></description>
 				<name>activateFirstItem</name>
-				<type>java.lang.Boolean</type>
+				<type>boolean</type>
 			</attribute>
 			<attribute>
 				<description><![CDATA[When true, the autoComplete list will wrap around allowing users to use keyboard navigation to move from the top of the list to the bottom and vice versa. Defaults to <code>true</code>.]]></description>
@@ -1980,9 +1980,10 @@
 		</description>
 		<attributes>
 			<attribute>
+				<defaultValue>true</defaultValue>
 				<description><![CDATA[When this flag is true, the element will have the CSS class <code>row-fluid</code>. Otherwise, the element will have the CSS class <code>row</code>. The default value is true.]]></description>
 				<name>fluid</name>
-				<type>java.lang.Boolean</type>
+				<type>boolean</type>
 			</attribute>
 		</attributes>
 	</component>

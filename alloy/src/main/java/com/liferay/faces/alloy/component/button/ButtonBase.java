@@ -33,7 +33,7 @@ public abstract class ButtonBase extends HtmlOutcomeTargetButton implements Styl
 		type
 	}
 
-	public Boolean isAutofocus() {
+	public Boolean getAutofocus() {
 		return (Boolean) getStateHelper().eval(ButtonPropertyKeys.autofocus, null);
 	}
 
