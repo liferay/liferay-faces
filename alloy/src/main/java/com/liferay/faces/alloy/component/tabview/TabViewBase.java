@@ -65,7 +65,7 @@ public abstract class TabViewBase extends UIData implements Styleable, ClientCom
 		getStateHelper().put(TabViewPropertyKeys.selectedIndex, selectedIndex);
 	}
 
-	public Boolean isStacked() {
+	public Boolean getStacked() {
 		return (Boolean) getStateHelper().eval(TabViewPropertyKeys.stacked, null);
 	}
 

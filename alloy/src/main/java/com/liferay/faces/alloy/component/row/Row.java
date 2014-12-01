@@ -35,11 +35,6 @@ public class Row extends RowBase {
 	}
 
 	@Override
-	public Boolean isFluid() {
-		return (Boolean) getStateHelper().eval(RowPropertyKeys.fluid, true);
-	}
-
-	@Override
 	public String getStyleClass() {
 
 		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the

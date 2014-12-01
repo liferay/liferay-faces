@@ -234,14 +234,11 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
 		boolean autoCompleteFirst = true;
-		Boolean activateFirstItem = inputTime.isActivateFirstItem();
+		boolean activateFirstItem = inputTime.isActivateFirstItem();
+		encodeBoolean(responseWriter, ACTIVATE_FIRST_ITEM, activateFirstItem, autoCompleteFirst);
+		autoCompleteFirst = false;
 
-		if (activateFirstItem != null) {
-			encodeBoolean(responseWriter, ACTIVATE_FIRST_ITEM, activateFirstItem, autoCompleteFirst);
-			autoCompleteFirst = false;
-		}
-
-		Boolean circular = inputTime.isCircular();
+		Boolean circular = inputTime.getCircular();
 
 		if (circular != null) {
 			encodeBoolean(responseWriter, CIRCULAR, circular, autoCompleteFirst);
@@ -283,7 +280,7 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 			autoCompleteFirst = false;
 		}
 
-		Boolean scrollIntoView = inputTime.isScrollIntoView();
+		Boolean scrollIntoView = inputTime.getScrollIntoView();
 
 		if (scrollIntoView != null) {
 			encodeBoolean(responseWriter, SCROLL_INTO_VIEW, scrollIntoView, autoCompleteFirst);
