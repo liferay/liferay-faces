@@ -68,7 +68,7 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 			first = false;
 		}
 
-		Boolean highlightActiveLine = inputSourceCode.isHighlightActiveLine();
+		Boolean highlightActiveLine = inputSourceCode.getHighlightActiveLine();
 
 		if (highlightActiveLine != null) {
 
@@ -92,7 +92,7 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 			first = false;
 		}
 
-		Boolean readOnly = inputSourceCode.isReadOnly();
+		Boolean readOnly = inputSourceCode.getReadOnly();
 
 		if (readOnly != null) {
 
@@ -100,7 +100,7 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 			first = false;
 		}
 
-		Boolean showPrintMargin = inputSourceCode.isShowPrintMargin();
+		Boolean showPrintMargin = inputSourceCode.getShowPrintMargin();
 
 		if (showPrintMargin != null) {
 
@@ -116,7 +116,7 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 			first = false;
 		}
 
-		Boolean useSoftTabs = inputSourceCode.isUseSoftTabs();
+		Boolean useSoftTabs = inputSourceCode.getUseSoftTabs();
 
 		if (useSoftTabs != null) {
 
@@ -124,7 +124,7 @@ public abstract class InputSourceCodeRendererBase extends DelegatingAlloyRendere
 			first = false;
 		}
 
-		Boolean useWrapMode = inputSourceCode.isUseWrapMode();
+		Boolean useWrapMode = inputSourceCode.getUseWrapMode();
 
 		if (useWrapMode != null) {
 

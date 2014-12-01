@@ -53,7 +53,7 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 		InputSourceCode inputSourceCode = (InputSourceCode) uiComponent;
-		Boolean readOnly = inputSourceCode.isReadOnly();
+		Boolean readOnly = inputSourceCode.getReadOnly();
 
 		if ((readOnly == null) || (!readOnly)) {
 
