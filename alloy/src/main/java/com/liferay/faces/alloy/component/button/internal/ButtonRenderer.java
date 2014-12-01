@@ -100,7 +100,7 @@ public class ButtonRenderer extends ButtonRendererBase {
 			responseWriter.startElement(FacesButton.BUTTON, uiComponent);
 
 			HTML5Button html5Button = (HTML5Button) uiComponent;
-			Boolean autofocus = html5Button.isAutofocus();
+			Boolean autofocus = html5Button.getAutofocus();
 
 			if (autofocus != null) {
 				responseWriter.writeAttribute(HTML5Button.AUTOFOCUS, autofocus, HTML5Button.AUTOFOCUS);

@@ -33,11 +33,11 @@ public abstract class RowBase extends UIPanel implements Styleable {
 		styleClass
 	}
 
-	public Boolean isFluid() {
-		return (Boolean) getStateHelper().eval(RowPropertyKeys.fluid, null);
+	public boolean isFluid() {
+		return (Boolean) getStateHelper().eval(RowPropertyKeys.fluid, true);
 	}
 
-	public void setFluid(Boolean fluid) {
+	public void setFluid(boolean fluid) {
 		getStateHelper().put(RowPropertyKeys.fluid, fluid);
 	}
 

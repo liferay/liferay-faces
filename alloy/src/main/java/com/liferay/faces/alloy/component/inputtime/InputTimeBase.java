@@ -45,15 +45,15 @@ public abstract class InputTimeBase extends InputDateTime implements Styleable, 
 		timeSelectListener
 	}
 
-	public Boolean isActivateFirstItem() {
+	public boolean isActivateFirstItem() {
 		return (Boolean) getStateHelper().eval(InputTimePropertyKeys.activateFirstItem, true);
 	}
 
-	public void setActivateFirstItem(Boolean activateFirstItem) {
+	public void setActivateFirstItem(boolean activateFirstItem) {
 		getStateHelper().put(InputTimePropertyKeys.activateFirstItem, activateFirstItem);
 	}
 
-	public Boolean isCircular() {
+	public Boolean getCircular() {
 		return (Boolean) getStateHelper().eval(InputTimePropertyKeys.circular, null);
 	}
 
@@ -125,7 +125,7 @@ public abstract class InputTimeBase extends InputDateTime implements Styleable, 
 		getStateHelper().put(InputTimePropertyKeys.responsive, responsive);
 	}
 
-	public Boolean isScrollIntoView() {
+	public Boolean getScrollIntoView() {
 		return (Boolean) getStateHelper().eval(InputTimePropertyKeys.scrollIntoView, null);
 	}
 

@@ -21,7 +21,7 @@ public interface HTML5Button {
 	// Public Constants
 	public static final String AUTOFOCUS = "autofocus";
 
-	public void setAutofocus(Boolean autofocus);
+	public Boolean getAutofocus();
 
-	public Boolean isAutofocus();
+	public void setAutofocus(Boolean autofocus);
 }
