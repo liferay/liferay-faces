@@ -15,6 +15,7 @@ package com.liferay.faces.alloy.component.button.internal;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
@@ -28,8 +29,6 @@ import javax.faces.render.RenderKit;
 import javax.faces.render.Renderer;
 
 import com.liferay.faces.alloy.component.button.Button;
-import com.liferay.faces.alloy.component.button.FacesButton;
-import com.liferay.faces.alloy.component.button.HTML5Button;
 import com.liferay.faces.alloy.component.button.SplitButton;
 import com.liferay.faces.alloy.component.commandbutton.CommandButton;
 import com.liferay.faces.alloy.component.commandbutton.SplitCommandButton;
@@ -57,12 +56,18 @@ import com.liferay.faces.util.render.internal.RendererUtil;
 public class ButtonRenderer extends ButtonRendererBase {
 
 	// Private Constants
+	private static final String BUTTON = "button";
 	private static final String DEFAULT_ONBLUR = "this.className=this.className.replace(' btn-focus','');";
 	private static final String DEFAULT_ONFOCUS = "this.className+=' btn-focus';";
 	private static final String DEFAULT_BUTTON_CSS_CLASSES = "yui3-widget btn btn-content";
 	private static final String DISABLED_BUTTON_CSS_CLASSES = "btn-disabled disabled";
 	private static final String FACES_RUNTIME_SRC = "facesRuntimeSrc";
+	private static final String IMAGE = "image";
 	private static final String RETURN_FALSE = "return false;";
+
+	// Package-private Constants
+	/* package-private */ static final String ONFOCUS = "onfocus";
+	/* package-private */ static final String ONBLUR = "onblur";
 
 	@Override
 	public void decode(FacesContext facesContext, UIComponent uiComponent) {
@@ -97,23 +102,38 @@ public class ButtonRenderer extends ButtonRendererBase {
 			// rendered by the JSF runtime, because endElement("input") may be called in either encodeBegin() or
 			// encodeEnd(). Button requires that endElement() be called in encodeEnd(), so that children can be added to
 			// the button if neccessary.
-			responseWriter.startElement(FacesButton.BUTTON, uiComponent);
+			responseWriter.startElement(BUTTON, uiComponent);
 
-			HTML5Button html5Button = (HTML5Button) uiComponent;
-			Boolean autofocus = html5Button.isAutofocus();
+			Boolean autofocus = null;
 
-			if (autofocus != null) {
-				responseWriter.writeAttribute(HTML5Button.AUTOFOCUS, autofocus, HTML5Button.AUTOFOCUS);
+			// The following code is used in place of a common interface because the interface would need to be public
+			// API. The following code is used in place of uiComponent.getAttributes().get("autofocus") because that
+			// will eventually use reflection to get the getter method. Specifically, it will call
+			// propertyDescriptor.getReadMethod() which assumes that all read methods are prefixed with "get" unless
+			// type == boolean.class (and in this case type == Boolean.class). See
+			// java.beans.PropertyDescriptor.getReadMethod() (Line: 216) for more details.
+			if (uiComponent instanceof Button) {
+
+				Button button = (Button) uiComponent;
+				autofocus = button.isAutofocus();
+			}
+			else if (uiComponent instanceof CommandButton) {
+
+				CommandButton commandButton = (CommandButton) uiComponent;
+				autofocus = commandButton.isAutofocus();
 			}
 
-			FacesButton facesButton = (FacesButton) uiComponent;
+			if (autofocus != null) {
+				responseWriter.writeAttribute(AUTOFOCUS, autofocus, AUTOFOCUS);
+			}
 
 			// Do not delegate the writing of the class or style attributes because we need to apply certain default
 			// classes.
 			StringBuilder classNames = new StringBuilder();
 			classNames.append(DEFAULT_BUTTON_CSS_CLASSES);
 
-			boolean disabled = facesButton.isDisabled();
+			Map<String, Object> attributes = uiComponent.getAttributes();
+			boolean disabled = (Boolean) attributes.get(DISABLED);
 
 			if (disabled) {
 
@@ -121,14 +141,15 @@ public class ButtonRenderer extends ButtonRendererBase {
 				classNames.append(DISABLED_BUTTON_CSS_CLASSES);
 			}
 
-			RendererUtil.encodeStyleable(responseWriter, (Styleable) facesButton, classNames.toString());
+			RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent, classNames.toString());
 
 			// Do not delegate the writing of the disabled attribute because the JSF runtime may disable the button
 			// programmatically based on navigation case matching.
 			responseWriter.writeAttribute(StringPool.DISABLED, disabled, StringPool.DISABLED);
 
 			// Do not delegate the writing of the type attribute because the JSF runtime hard codes the type for button.
-			responseWriter.writeAttribute(StringPool.TYPE, facesButton.getType(), StringPool.TYPE);
+			String type = (String) attributes.get(StringPool.TYPE);
+			responseWriter.writeAttribute(StringPool.TYPE, type, StringPool.TYPE);
 
 			// Determine if we should delegate the rendering of onclick or render it ourselves.
 			Boolean delegateOnclick = Boolean.TRUE;
@@ -154,7 +175,7 @@ public class ButtonRenderer extends ButtonRendererBase {
 
 			// Do not delegate the writing of the onfocus attribute because we need to supply a script to modify the css
 			// class.
-			String onfocus = facesButton.getOnfocus();
+			String onfocus = (String) attributes.get(ONFOCUS);
 
 			if (onfocus == null) {
 				onfocus = RETURN_FALSE;
@@ -163,11 +184,11 @@ public class ButtonRenderer extends ButtonRendererBase {
 			StringBuilder onfocusBuilder = new StringBuilder();
 			onfocusBuilder.append(DEFAULT_ONFOCUS);
 			onfocusBuilder.append(onfocus);
-			responseWriter.writeAttribute(FacesButton.ONFOCUS, onfocusBuilder.toString(), FacesButton.ONFOCUS);
+			responseWriter.writeAttribute(ONFOCUS, onfocusBuilder.toString(), ONFOCUS);
 
 			// Do not delegate the writing of the onblur attribute because we need to supply a script to modify the css
 			// class.
-			String onblur = facesButton.getOnblur();
+			String onblur = (String) attributes.get(ONBLUR);
 
 			if (onblur == null) {
 				onblur = RETURN_FALSE;
@@ -176,10 +197,10 @@ public class ButtonRenderer extends ButtonRendererBase {
 			StringBuilder onblurBuilder = new StringBuilder();
 			onblurBuilder.append(DEFAULT_ONBLUR);
 			onblurBuilder.append(onblur);
-			responseWriter.writeAttribute(FacesButton.ONBLUR, onblurBuilder.toString(), FacesButton.ONBLUR);
+			responseWriter.writeAttribute(ONBLUR, onblurBuilder.toString(), ONBLUR);
 
 			// Do not delegate the writing of the value attribute because the JSF runtime may not render value
-			Object value = facesButton.getValue();
+			Object value = (Object) attributes.get(StringPool.VALUE);
 
 			if (value != null) {
 				responseWriter.writeAttribute(StringPool.VALUE, value.toString(), StringPool.VALUE);
@@ -205,18 +226,18 @@ public class ButtonRenderer extends ButtonRendererBase {
 		}
 		else {
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
-			FacesButton facesButton = (FacesButton) uiComponent;
+			Map<String, Object> attributes = uiComponent.getAttributes();
 
 			// Do not delegate the writing of the image attribute because the image needs to be a child rather than an
 			// attribute of the button.
-			String image = facesButton.getImage();
+			String image = (String) attributes.get(IMAGE);
 
 			if (image != null) {
 				String src = (String) facesContext.getAttributes().remove(FACES_RUNTIME_SRC);
 
 				if (src != null) {
 					responseWriter.startElement(StringPool.IMG, uiComponent);
-					responseWriter.writeAttribute(StringPool.SRC, src, FacesButton.IMAGE);
+					responseWriter.writeAttribute(StringPool.SRC, src, IMAGE);
 					responseWriter.endElement(StringPool.IMG);
 				}
 			}
@@ -226,7 +247,7 @@ public class ButtonRenderer extends ButtonRendererBase {
 
 					// Do not delegate the writing of the value attribute because the value needs to be a child rather
 					// than an attribute of the button.
-					Object value = facesButton.getValue();
+					Object value = (String) attributes.get(StringPool.VALUE);
 
 					if (value != null) {
 						responseWriter.writeText(value.toString(), StringPool.VALUE);
@@ -251,7 +272,7 @@ public class ButtonRenderer extends ButtonRendererBase {
 		else {
 
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
-			responseWriter.endElement(FacesButton.BUTTON);
+			responseWriter.endElement(BUTTON);
 		}
 	}
 
