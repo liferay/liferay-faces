@@ -15,8 +15,6 @@ package com.liferay.faces.alloy.component.commandbutton;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.alloy.component.button.FacesButton;
-import com.liferay.faces.alloy.component.button.HTML5Button;
 import com.liferay.faces.util.component.ComponentUtil;
 
 
@@ -24,7 +22,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = CommandButton.COMPONENT_TYPE)
-public class CommandButton extends CommandButtonBase implements FacesButton, HTML5Button {
+public class CommandButton extends CommandButtonBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.commandbutton.CommandButton";

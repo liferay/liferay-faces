@@ -15,7 +15,6 @@ package com.liferay.faces.alloy.component.popover;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.alloy.component.overlay.Overlay;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -24,7 +23,7 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = Popover.COMPONENT_TYPE)
-public class Popover extends PopoverBase implements Overlay {
+public class Popover extends PopoverBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.popover.Popover";
@@ -41,11 +40,6 @@ public class Popover extends PopoverBase implements Overlay {
 	@Override
 	public String getHeaderText() {
 		return (String) getStateHelper().eval(PopoverPropertyKeys.headerText, StringPool.NBSP);
-	}
-
-	@Override
-	public boolean isModal() {
-		return false;
 	}
 
 	@Override

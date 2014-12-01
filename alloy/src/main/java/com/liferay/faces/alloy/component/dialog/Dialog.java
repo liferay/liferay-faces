@@ -15,7 +15,6 @@ package com.liferay.faces.alloy.component.dialog;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.alloy.component.overlay.Overlay;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -24,7 +23,7 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = Dialog.COMPONENT_TYPE)
-public class Dialog extends DialogBase implements Overlay {
+public class Dialog extends DialogBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.dialog.Dialog";

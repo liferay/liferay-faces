@@ -85,7 +85,10 @@ public class PopoverRenderer extends PopoverRendererBase {
 			responseWriter.write(StringPool.SEMICOLON);
 		}
 
-		encodeOverlayDismissible(responseWriter, popover, clientKey);
+		if (popover.isDismissible()) {
+			encodeOverlayDismissible(responseWriter, popover, clientKey);
+		}
+
 		encodeOverlayJavaScriptCustom(responseWriter, facesContext, popover);
 
 		if ((popover.getFor() == null) && facesContext.isProjectStage(ProjectStage.Development)) {

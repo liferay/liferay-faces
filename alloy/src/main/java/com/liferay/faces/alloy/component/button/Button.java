@@ -23,7 +23,7 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Button.COMPONENT_TYPE)
-public class Button extends ButtonBase implements FacesButton, HTML5Button {
+public class Button extends ButtonBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.button.Button";
@@ -49,6 +49,6 @@ public class Button extends ButtonBase implements FacesButton, HTML5Button {
 
 	@Override
 	public String getType() {
-		return (String) getStateHelper().eval(StringPool.TYPE, BUTTON);
+		return (String) getStateHelper().eval(StringPool.TYPE, "button");
 	}
 }
