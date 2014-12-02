@@ -527,7 +527,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The string which delimits the part of the text that will have completion. For example, if <code>delimiter=" "</code>, then only the text after the final space will have completion. <strong>Note:<strong> if <code>listItemRequired="true"</code>, this attribute is ignored.]]>
+					<![CDATA[The string which delimits the part of the text that will have completion. For example, if <code>delimiter=" "</code>, then only the text after the final space will have completion. <strong>Note:</strong> if <code>listItemRequired="true"</code>, this attribute is ignored.]]>
 				</description>
 				<name>delimiter</name>
 				<type>java.lang.String</type>
@@ -653,7 +653,7 @@
 	<component name="Body" extendsTags="StyleableInherited" parentClass="javax.faces.component.html.HtmlBody"
 		rendererParentClass="com.liferay.faces.util.render.internal.DelegatingRendererBase">
 		<description>
-			<![CDATA[Body is a UIOutput that renders a <body> element for webapps and a <div> for portlets. Since it extends HtmlBody, it supports all the features of h:body.]]>
+			<![CDATA[Body is a UIOutput that renders a <code>&lt;body&gt;</code> element for webapps and a <code>&lt;div&gt;</code> for portlets. Since it extends HtmlBody, it supports all the features of h:body.]]>
 		</description>
 	</component>
 	<component name="Button" extendsTags="ButtonCommon UIOutcomeTarget" parentClass="javax.faces.component.html.HtmlOutcomeTargetButton"
@@ -881,7 +881,7 @@
 	<component name="Field" extendsTags="PanelGroup" parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
 		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.internal.PanelGroupRenderer">
 		<description>
-			<![CDATA[Field is a UIPanel component that renders a <code>&lt;div&gt;</code> element and a <label> element in order to wrap a field. Since it extends PanelGroup, it supports all the features of alloy:panelGroup.]]>
+			<![CDATA[Field is a UIPanel component that renders a <code>&lt;div&gt;</code> element and a <code>&lt;label&gt;</code> element in order to wrap a field. Since it extends PanelGroup, it supports all the features of alloy:panelGroup.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -1059,7 +1059,7 @@
 	</component>
 	<component name="Head" extendsTags="Styleable UIOutput" parentClass="javax.faces.component.html.HtmlHead"
 		rendererParentClass="com.liferay.faces.util.render.internal.DelegatingRendererBase">
-		<description><![CDATA[Head is a UIOutput that renders a <head> element for webapps, but not for portlets. In the case of portlets, the presence of alloy:head informs the JSF portlet bridge that JSF resources with target="head" should be included in the <head> element rendered by the portal. Since it extends HtmlHead, it supports all the features of h:head.]]></description>
+		<description><![CDATA[Head is a UIOutput that renders a <code>&lt;head&gt;</code> element for webapps, but not for portlets. In the case of portlets, the presence of alloy:head informs the JSF portlet bridge that JSF resources with target="head" should be included in the <code>&lt;head&gt;</code> element rendered by the portal. Since it extends HtmlHead, it supports all the features of h:head.]]></description>
 		<attributes>
 			<attribute>
 				<description>
@@ -1193,7 +1193,7 @@
 		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.internal.InputDateTimeRenderer"
 		module="aui-datepicker" yui="true" yuiName="DatePicker">
 		<description>
-			<![CDATA[InputDate is a UIInput component that renders an <input type="text"> element and a calendar-popover with selectable dates. The component attempts to automatically convert the submitted value to a Date via a built-in DateTimeConverter.]]>
+			<![CDATA[InputDate is a UIInput component that renders an <code>&lt;input type="text"&gt;</code> element and a calendar-popover with selectable dates. The component attempts to automatically convert the submitted value to a Date via a built-in DateTimeConverter.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -1514,7 +1514,7 @@
 		rendererParentClass="com.liferay.faces.alloy.component.inputdatetime.internal.InputDateTimeRenderer"
 		module="aui-timepicker" yui="true" yuiName="TimePicker">
 		<description>
-			<![CDATA[InputTime is a UIInput component that renders an <input type="text"> element and a list-popover with selectable times. The component attempts to automatically convert the submitted value to a Date via a built-in DateTimeConverter.]]>
+			<![CDATA[InputTime is a UIInput component that renders an <code>&lt;input type="text"&gt;</code> element and a list-popover with selectable times. The component attempts to automatically convert the submitted value to a Date via a built-in DateTimeConverter.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -1786,7 +1786,7 @@
 	<component name="OutputLabel" extendsTags="HTMLAccessibilityEvents HTMLPassthrough UIOutput EscapeInherited"
 		parentClass="javax.faces.component.html.HtmlOutputLabel" rendererParentClass="com.liferay.faces.util.render.internal.DelegatingRendererBase">
 		<description>
-			<![CDATA[OutputLabel is a UIOutput component that renders its value attribute within a <label> element. Since it extends HtmlOutputLabel, it supports all the features of h:outputLabel.]]>
+			<![CDATA[OutputLabel is a UIOutput component that renders its value attribute within a <code>&lt;label&gt;</code> element. Since it extends HtmlOutputLabel, it supports all the features of h:outputLabel.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -1921,7 +1921,7 @@
 	<component name="Panel" extendsTags="PanelGroup" parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
 		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.internal.PanelGroupRenderer">
 		<description>
-			<![CDATA[Panel is a UIPanel component that renders a <div> element with three child <div> elements (one for header, body, and footer). Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
+			<![CDATA[Panel is a UIPanel component that renders a <code>&lt;div&gt;</code> element with three child <code>&lt;div&gt;</code> elements (one for header, body, and footer). Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
 		</description>
 		<attributes>
 			<attribute>

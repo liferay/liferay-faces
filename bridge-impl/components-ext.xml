@@ -11,7 +11,7 @@
 		rendererParentClass="com.liferay.faces.util.render.internal.DelegatingRendererBase"
 		styleable="false">
 		<description>
-			<![CDATA[InputFile is a UIInput component that renders an <input> element with type=file. Since it extends HtmlInputFile, it supports all the features of h:inputFile and also supports multi-file uploads.]]>
+			<![CDATA[InputFile is a UIInput component that renders an <code>&lt;input&gt;</code> element with type=file. Since it extends HtmlInputFile, it supports all the features of h:inputFile and also supports multi-file uploads.]]>
 		</description>
 		<attributes>
 			<attribute>
