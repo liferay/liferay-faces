@@ -30,7 +30,6 @@
 				<method-signature>
 					void fileUploadListener(com.liferay.faces.util.component.inputfile.FileUploadEvent)
 				</method-signature>
-				<type>javax.el.MethodExpression</type>
 			</attribute>
 			<attribute>
 				<description>

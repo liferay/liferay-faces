@@ -423,7 +423,6 @@
 				<method-signature>
 					void tabCollapseListener(com.liferay.faces.alloy.component.tab.TabCollapseEvent)
 				</method-signature>
-				<type>javax.el.MethodExpression</type>
 			</attribute>
 			<attribute>
 				<description>
@@ -433,7 +432,6 @@
 				<method-signature>
 					void tabExpandListener(com.liferay.faces.alloy.component.tab.TabExpandEvent)
 				</method-signature>
-				<type>javax.el.MethodExpression</type>
 			</attribute>
 		</attributes>
 	</component>
@@ -572,7 +570,6 @@
 				<method-signature>
 					void itemSelectListener(com.liferay.faces.alloy.component.autocomplete.ItemSelectEvent)
 				</method-signature>
-				<type>javax.el.MethodExpression</type>
 			</attribute>
 			<attribute>
 				<defaultValue>false</defaultValue>
@@ -606,10 +603,9 @@
 					<![CDATA[A method that is executed when a query occurs. The method must be <code>public</code>, return a <code>java.util.List&lt;java.lang.String&gt;</code>, and takes a <code>java.lang.String</code> and a <code>java.util.List&lt;java.lang.String&gt;</code> as a arguments. The <code>String</code> passed to the method is the current query. The <code>List&lt;String&gt;</code> is an immutable list of unfiltered results. The method must return a <code>List&lt;String&gt;</code> which contains the filtered results.]]>
 				</description>
 				<method-signature>
-					java.util.List filterResults(java.lang.String, java.util.List)
+					java.util.List&lt;java.lang.String&gt; filterResults(java.lang.String, java.util.List&lt;java.lang.String&gt;)
 				</method-signature>
 				<name>serverCustomFilter</name>
-				<type>javax.el.MethodExpression</type>
 			</attribute>
 			<attribute>
 				<description>
@@ -1214,7 +1210,6 @@
 				<method-signature>
 					void dateSelectListener(com.liferay.faces.alloy.component.inputdate.DateSelectEvent)
 				</method-signature>
-				<type>javax.el.MethodExpression</type>
 			</attribute>
 			<attribute>
 				<description>
@@ -1321,7 +1316,6 @@
 				<method-signature>
 					void fileUploadListener(com.liferay.faces.util.component.inputfile.FileUploadEvent)
 				</method-signature>
-				<type>javax.el.MethodExpression</type>
 			</attribute>
 			<attribute>
 				<description>
@@ -1585,7 +1579,6 @@
 				<method-signature>
 					void timeSelectListener(com.liferay.faces.alloy.component.inputtime.TimeSelectEvent)
 				</method-signature>
-				<type>javax.el.MethodExpression</type>
 			</attribute>
 			<attribute>
 				<description><![CDATA[The maximum amount of autoComplete results.]]></description>
@@ -2218,7 +2211,6 @@
 				<method-signature>
 					void tabSelectListener(com.liferay.faces.alloy.component.tab.TabSelectEvent)
 				</method-signature>
-				<type>javax.el.MethodExpression</type>
 			</attribute>
 			<attribute>
 				<description>
