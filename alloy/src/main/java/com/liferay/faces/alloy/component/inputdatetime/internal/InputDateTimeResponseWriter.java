@@ -42,14 +42,7 @@ public class InputDateTimeResponseWriter extends IdDelegationResponseWriter {
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
 		if (StringPool.CLASS.equalsIgnoreCase(name) || Styleable.STYLE.equalsIgnoreCase(name)) {
-
-			if (mobile && responsive) {
-				super.writeAttribute(name, "input-medium", property);
-			}
-			else {
-				// no-op because the writing of these attributes needs to be controlled directly by
-				// InputDateTimeRendererBase.
-			}
+			super.writeAttribute(name, "input-medium", property);
 		}
 		else {
 			super.writeAttribute(name, value, property);
