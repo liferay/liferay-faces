@@ -21,6 +21,7 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
+import com.liferay.faces.portal.context.LiferayFacesContextImpl;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -59,6 +60,10 @@ public class LiferayLocalePhaseListener implements PhaseListener {
 	private void setLocale() {
 
 		try {
+            //just needed if the JSF libraries are deployed with the portlet inside JBoss EAP 6.0.0
+            if (LiferayFacesContext.getInstance() == null) {
+                new LiferayFacesContextImpl();
+            }
 			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 
 			// It's possible that the FacesServlet was invoked directly, and so this PhaseListener
