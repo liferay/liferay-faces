@@ -17,16 +17,13 @@ import java.io.Writer;
 
 import javax.faces.component.UIForm;
 import javax.faces.component.UIOutput;
-import javax.faces.component.UIPanel;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.RenderKit;
 import javax.faces.render.RenderKitWrapper;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.bridge.component.icefaces.DataPaginator;
 import com.liferay.faces.bridge.component.primefaces.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.renderkit.bridge.ResponseWriterBridgeImpl;
-import com.liferay.faces.bridge.renderkit.icefaces.DataPaginatorRenderer;
 import com.liferay.faces.bridge.renderkit.icefaces.HeadRendererICEfacesImpl;
 import com.liferay.faces.bridge.renderkit.primefaces.BodyRendererPrimeFacesImpl;
 import com.liferay.faces.bridge.renderkit.primefaces.FileUploadRendererPrimeFacesImpl;
@@ -112,11 +109,6 @@ public class RenderKitBridgeImpl extends RenderKitWrapper {
 
 			renderer = new FormRendererPrimeFacesImpl(PRIMEFACES.getMajorVersion(), PRIMEFACES.getMinorVersion(),
 					renderer);
-		}
-		else if (UIPanel.COMPONENT_FAMILY.equals(family) && DataPaginator.RENDERER_TYPE.equals(rendererType)) {
-
-			// Workaround for: http://jira.icesoft.org/browse/ICE-6398
-			renderer = new DataPaginatorRenderer(renderer);
 		}
 		else if (PRIMEFACES_FAMILY.equals(family) && PrimeFacesFileUpload.RENDERER_TYPE.equals(rendererType)) {
 			renderer = new FileUploadRendererPrimeFacesImpl(renderer);
