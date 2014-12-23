@@ -17,18 +17,27 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 
 /**
  * @author  Kyle Stiemann
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class InputTimeModelBean {
 
+	private String highlighterType = "charMatch";
 	private Date time;
 	private Locale locale;
+	
+	public String getHighlighterType() {
+		return highlighterType;
+	}
+
+	public void setHighlighterType(String highlighterType) {
+		this.highlighterType = highlighterType;
+	}
 
 	public Locale getLocale() {
 

@@ -6,9 +6,19 @@
 	<ui:define name="col1">
 		<h:form>
 			<showcase:example>
+				<alloy:field label="#{i18n['highlighter-type']}">
+					<alloy:selectOneMenu value="#{autoCompleteViewBean.serverFilterType}" hideNoSelectionOption="true">
+						<f:selectItem itemValue="charMatch" />
+						<f:selectItem itemValue="phraseMatch" />
+						<f:selectItem itemValue="startsWith" />
+						<f:selectItem itemValue="subWordMatch" />
+						<f:selectItem itemValue="wordMatch" />
+						<f:ajax render="autoComplete" />
+					</alloy:selectOneMenu>
+				</alloy:field>
 				<alloy:field label="#{i18n['favorite-liferay-benefit']}">
-					<alloy:autoComplete highlighterType="phraseMatch" serverFilterType="phraseMatch"
-						value="#{autoCompleteModelBean.text}">
+					<alloy:autoComplete id="autoComplete" highlighterType="#{autoCompleteViewBean.serverFilterType}"
+						serverFilterType="phraseMatch" value="#{autoCompleteModelBean.text}">
 						<f:selectItem itemValue="Compatible" />
 						<f:selectItem itemValue="Enterprise Ready" />
 						<f:selectItem itemValue="Powerful Integration" />
