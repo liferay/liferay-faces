@@ -21,6 +21,7 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.commandlink.CommandLink;
+import com.liferay.faces.util.render.internal.DelegatingRendererBase;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 
 
@@ -28,7 +29,7 @@ import com.liferay.faces.util.render.internal.DelegationResponseWriter;
  * @author  Vernon Singleton
  */
 @FacesRenderer(componentFamily = CommandLink.COMPONENT_FAMILY, rendererType = CommandLink.RENDERER_TYPE)
-public class CommandLinkRenderer extends CommandLinkRendererBase {
+public class CommandLinkRenderer extends DelegatingRendererBase {
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {

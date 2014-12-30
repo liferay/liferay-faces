@@ -16,13 +16,14 @@ package com.liferay.faces.alloy.component.inputsecret.internal;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.inputsecret.InputSecret;
+import com.liferay.faces.util.render.internal.DelegatingRendererBase;
 
 
 /**
  * @author  Vernon Singleton
  */
 @FacesRenderer(componentFamily = InputSecret.COMPONENT_FAMILY, rendererType = InputSecret.RENDERER_TYPE)
-public class InputSecretRenderer extends InputSecretRendererBase {
+public class InputSecretRenderer extends DelegatingRendererBase {
 
 	@Override
 	public String getDelegateComponentFamily() {

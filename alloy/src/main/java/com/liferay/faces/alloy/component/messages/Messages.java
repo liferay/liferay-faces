@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.messages;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlMessages;
 
 import com.liferay.faces.util.component.ComponentUtil;
 
@@ -22,7 +23,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Neil Griffin
  */
 @FacesComponent(value = Messages.COMPONENT_TYPE)
-public class Messages extends MessagesBase {
+public class Messages extends HtmlMessages {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.messages.Messages";

@@ -16,13 +16,14 @@ package com.liferay.faces.alloy.component.inputhidden.internal;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.inputhidden.InputHidden;
+import com.liferay.faces.util.render.internal.DelegatingRendererBase;
 
 
 /**
  * @author  Vernon Singleton
  */
 @FacesRenderer(componentFamily = InputHidden.COMPONENT_FAMILY, rendererType = InputHidden.RENDERER_TYPE)
-public class InputHiddenRenderer extends InputHiddenRendererBase {
+public class InputHiddenRenderer extends DelegatingRendererBase {
 
 	@Override
 	public String getDelegateComponentFamily() {

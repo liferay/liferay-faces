@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.selectmanymenu;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlSelectManyMenu;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
@@ -24,7 +25,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = SelectManyMenu.COMPONENT_TYPE)
-public class SelectManyMenu extends SelectManyMenuBase {
+public class SelectManyMenu extends HtmlSelectManyMenu {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectmanymenu.SelectManyMenu";

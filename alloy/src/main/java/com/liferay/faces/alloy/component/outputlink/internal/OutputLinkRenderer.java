@@ -16,13 +16,14 @@ package com.liferay.faces.alloy.component.outputlink.internal;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.outputlink.OutputLink;
+import com.liferay.faces.util.render.internal.DelegatingRendererBase;
 
 
 /**
  * @author  Vernon Singleton
  */
 @FacesRenderer(componentFamily = OutputLink.COMPONENT_FAMILY, rendererType = OutputLink.RENDERER_TYPE)
-public class OutputLinkRenderer extends OutputLinkRendererBase {
+public class OutputLinkRenderer extends DelegatingRendererBase {
 
 	@Override
 	public String getDelegateComponentFamily() {
