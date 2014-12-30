@@ -16,8 +16,6 @@ package com.liferay.faces.alloy.component.body.internal;
 import java.io.IOException;
 
 import javax.faces.component.UIComponent;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.client.ClientScript;
@@ -36,7 +34,7 @@ public class BodyResponseWriter extends DelegationResponseWriterBase {
 	// Private Data Members
 	private UIComponent uiComponent;
 
-	public BodyResponseWriter(ResponseWriter responseWriter, boolean browserIE, float browserMajorVersion) {
+	public BodyResponseWriter(ResponseWriter responseWriter) {
 		super(responseWriter);
 	}
 

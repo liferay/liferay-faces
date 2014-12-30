@@ -78,14 +78,8 @@ public class BodyRenderer extends BodyRendererBase {
 			super.encodeEnd(facesContext, uiComponent);
 		}
 		else {
-			BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
-					BrowserSnifferFactory.class);
-			BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
-			boolean browserIE = browserSniffer.isIe();
-			float browserMajorVersion = browserSniffer.getMajorVersion();
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
-			BodyResponseWriter delegationResponseWriter = new BodyResponseWriter(responseWriter, browserIE,
-					browserMajorVersion);
+			BodyResponseWriter delegationResponseWriter = new BodyResponseWriter(responseWriter);
 			super.encodeEnd(facesContext, uiComponent, delegationResponseWriter);
 		}
 	}
