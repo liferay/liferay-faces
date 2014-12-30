@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.outputlabel;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlOutputLabel;
 
 import com.liferay.faces.util.component.ComponentUtil;
 
@@ -22,7 +23,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = OutputLabel.COMPONENT_TYPE)
-public class OutputLabel extends OutputLabelBase {
+public class OutputLabel extends HtmlOutputLabel {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputlabel.OutputLabel";

@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.image;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlGraphicImage;
 
 import com.liferay.faces.util.component.ComponentUtil;
 
@@ -22,7 +23,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = Image.COMPONENT_TYPE)
-public class Image extends ImageBase {
+public class Image extends HtmlGraphicImage {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.image.Image";

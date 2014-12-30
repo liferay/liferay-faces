@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.outputlink;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlOutputLink;
 
 import com.liferay.faces.util.component.ComponentUtil;
 
@@ -22,7 +23,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = OutputLink.COMPONENT_TYPE)
-public class OutputLink extends OutputLinkBase {
+public class OutputLink extends HtmlOutputLink {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputlink.OutputLink";

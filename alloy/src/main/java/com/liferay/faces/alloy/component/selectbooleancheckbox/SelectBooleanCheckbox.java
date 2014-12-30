@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.selectbooleancheckbox;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlSelectBooleanCheckbox;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
@@ -24,7 +25,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = SelectBooleanCheckbox.COMPONENT_TYPE)
-public class SelectBooleanCheckbox extends SelectBooleanCheckboxBase {
+public class SelectBooleanCheckbox extends HtmlSelectBooleanCheckbox {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE =

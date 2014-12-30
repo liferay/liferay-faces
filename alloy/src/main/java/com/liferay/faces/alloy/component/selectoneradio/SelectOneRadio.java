@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.selectoneradio;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlSelectOneRadio;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
@@ -24,7 +25,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = SelectOneRadio.COMPONENT_TYPE)
-public class SelectOneRadio extends SelectOneRadioBase {
+public class SelectOneRadio extends HtmlSelectOneRadio {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio";

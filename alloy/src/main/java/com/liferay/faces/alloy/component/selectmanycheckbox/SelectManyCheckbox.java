@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.selectmanycheckbox;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlSelectManyCheckbox;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
@@ -24,7 +25,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = SelectManyCheckbox.COMPONENT_TYPE)
-public class SelectManyCheckbox extends SelectManyCheckboxBase {
+public class SelectManyCheckbox extends HtmlSelectManyCheckbox {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE =

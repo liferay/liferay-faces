@@ -16,13 +16,14 @@ package com.liferay.faces.alloy.component.panelgrid.internal;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.panelgrid.PanelGrid;
+import com.liferay.faces.util.render.internal.DelegatingRendererBase;
 
 
 /**
  * @author  Neil Griffin
  */
 @FacesRenderer(componentFamily = PanelGrid.COMPONENT_FAMILY, rendererType = PanelGrid.RENDERER_TYPE)
-public class PanelGridRenderer extends PanelGridRendererBase {
+public class PanelGridRenderer extends DelegatingRendererBase {
 
 	@Override
 	public String getDelegateComponentFamily() {

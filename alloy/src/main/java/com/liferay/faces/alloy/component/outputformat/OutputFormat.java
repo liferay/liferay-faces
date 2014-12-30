@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.outputformat;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlOutputFormat;
 
 import com.liferay.faces.util.component.ComponentUtil;
 
@@ -22,7 +23,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = OutputFormat.COMPONENT_TYPE)
-public class OutputFormat extends OutputFormatBase {
+public class OutputFormat extends HtmlOutputFormat {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputformat.OutputFormat";

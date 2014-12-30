@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.inputhidden;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlInputHidden;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
@@ -24,7 +25,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = InputHidden.COMPONENT_TYPE)
-public class InputHidden extends InputHiddenBase {
+public class InputHidden extends HtmlInputHidden {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputhidden.InputHidden";

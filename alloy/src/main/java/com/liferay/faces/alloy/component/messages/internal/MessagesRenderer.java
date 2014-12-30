@@ -24,6 +24,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.messages.Messages;
+import com.liferay.faces.util.render.internal.DelegatingRendererBase;
 
 
 /**
@@ -31,7 +32,7 @@ import com.liferay.faces.alloy.component.messages.Messages;
  */
 @FacesRenderer(componentFamily = Messages.COMPONENT_FAMILY, rendererType = Messages.RENDERER_TYPE)
 @ResourceDependency(library = "liferay-faces-alloy", name = "alloy.css")
-public class MessagesRenderer extends MessagesRendererBase {
+public class MessagesRenderer extends DelegatingRendererBase {
 
 	// Private Constants
 	private static final String MOJARRA_BOGUS_WARNING = "needs to have a UIForm in its ancestry";

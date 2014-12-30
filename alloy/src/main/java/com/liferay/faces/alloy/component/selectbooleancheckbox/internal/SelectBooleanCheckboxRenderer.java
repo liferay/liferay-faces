@@ -15,12 +15,14 @@ package com.liferay.faces.alloy.component.selectbooleancheckbox.internal;
 
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
+import javax.faces.component.html.HtmlSelectBooleanCheckbox;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.ConverterException;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.selectbooleancheckbox.SelectBooleanCheckbox;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.internal.DelegatingRendererBase;
 
 
 /**
@@ -36,7 +38,7 @@ import com.liferay.faces.util.lang.StringPool;
 	componentFamily = SelectBooleanCheckbox.COMPONENT_FAMILY, rendererType = SelectBooleanCheckbox.RENDERER_TYPE
 )
 @ResourceDependency(library = "liferay-faces-alloy", name = "alloy.css")
-public class SelectBooleanCheckboxRenderer extends SelectBooleanCheckboxRendererBase {
+public class SelectBooleanCheckboxRenderer extends DelegatingRendererBase {
 
 	@Override
 	public void decode(FacesContext facesContext, UIComponent uiComponent) {

@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.link;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlOutcomeTargetLink;
 
 import com.liferay.faces.util.component.ComponentUtil;
 
@@ -22,7 +23,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = Link.COMPONENT_TYPE)
-public class Link extends LinkBase {
+public class Link extends HtmlOutcomeTargetLink {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.link.Link";

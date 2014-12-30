@@ -16,13 +16,14 @@ package com.liferay.faces.alloy.component.image.internal;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.image.Image;
+import com.liferay.faces.util.render.internal.DelegatingRendererBase;
 
 
 /**
  * @author  Vernon Singleton
  */
 @FacesRenderer(componentFamily = Image.COMPONENT_FAMILY, rendererType = Image.RENDERER_TYPE)
-public class ImageRenderer extends ImageRendererBase {
+public class ImageRenderer extends DelegatingRendererBase {
 
 	@Override
 	public String getDelegateComponentFamily() {

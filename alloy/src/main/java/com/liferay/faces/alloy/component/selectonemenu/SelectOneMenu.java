@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.selectonemenu;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlSelectOneMenu;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
@@ -24,7 +25,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = SelectOneMenu.COMPONENT_TYPE)
-public class SelectOneMenu extends SelectOneMenuBase {
+public class SelectOneMenu extends HtmlSelectOneMenu {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectonemenu.SelectOneMenu";

@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.selectonelistbox;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlSelectOneListbox;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
@@ -24,7 +25,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = SelectOneListbox.COMPONENT_TYPE)
-public class SelectOneListbox extends SelectOneListboxBase {
+public class SelectOneListbox extends HtmlSelectOneListbox {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectonelistbox.SelectOneListbox";

@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.selectmanylistbox;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlSelectManyListbox;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
@@ -24,7 +25,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = SelectManyListbox.COMPONENT_TYPE)
-public class SelectManyListbox extends SelectManyListboxBase {
+public class SelectManyListbox extends HtmlSelectManyListbox {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.selectmanylistbox.SelectManyListbox";

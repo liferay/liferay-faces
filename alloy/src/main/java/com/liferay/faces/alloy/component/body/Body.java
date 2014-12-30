@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.body;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlBody;
 
 import com.liferay.faces.util.component.ComponentUtil;
 
@@ -22,7 +23,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Neil Griffin
  */
 @FacesComponent(value = Body.COMPONENT_TYPE)
-public class Body extends BodyBase {
+public class Body extends HtmlBody {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.body.Body";

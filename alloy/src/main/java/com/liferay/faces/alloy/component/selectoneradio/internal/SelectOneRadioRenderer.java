@@ -17,6 +17,7 @@ import javax.faces.application.ResourceDependency;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio;
+import com.liferay.faces.util.render.internal.DelegatingRendererBase;
 
 
 /**
@@ -24,7 +25,7 @@ import com.liferay.faces.alloy.component.selectoneradio.SelectOneRadio;
  */
 @FacesRenderer(componentFamily = SelectOneRadio.COMPONENT_FAMILY, rendererType = SelectOneRadio.RENDERER_TYPE)
 @ResourceDependency(library = "liferay-faces-alloy", name = "alloy.css")
-public class SelectOneRadioRenderer extends SelectOneRadioRendererBase {
+public class SelectOneRadioRenderer extends DelegatingRendererBase {
 
 	@Override
 	public String getDelegateComponentFamily() {

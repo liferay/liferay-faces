@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.inputtext;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
@@ -24,7 +25,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Neil Griffin
  */
 @FacesComponent(value = InputText.COMPONENT_TYPE)
-public class InputText extends InputTextBase {
+public class InputText extends HtmlInputText {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputtext.InputText";

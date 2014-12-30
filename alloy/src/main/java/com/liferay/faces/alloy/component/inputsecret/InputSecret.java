@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.inputsecret;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlInputSecret;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
@@ -24,7 +25,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = InputSecret.COMPONENT_TYPE)
-public class InputSecret extends InputSecretBase {
+public class InputSecret extends HtmlInputSecret {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.inputsecret.InputSecret";

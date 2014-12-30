@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.outputtext;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlOutputText;
 
 import com.liferay.faces.util.component.ComponentUtil;
 
@@ -22,7 +23,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = OutputText.COMPONENT_TYPE)
-public class OutputText extends OutputTextBase {
+public class OutputText extends HtmlOutputText {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputtext.OutputText";

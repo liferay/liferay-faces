@@ -16,13 +16,14 @@ package com.liferay.faces.alloy.component.message.internal;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.message.Message;
+import com.liferay.faces.util.render.internal.DelegatingRendererBase;
 
 
 /**
  * @author  Neil Griffin
  */
 @FacesRenderer(componentFamily = Message.COMPONENT_FAMILY, rendererType = Message.RENDERER_TYPE)
-public class MessageRenderer extends MessageRendererBase {
+public class MessageRenderer extends DelegatingRendererBase {
 
 	@Override
 	public String getDelegateComponentFamily() {

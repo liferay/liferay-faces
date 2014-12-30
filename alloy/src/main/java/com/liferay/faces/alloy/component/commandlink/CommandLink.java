@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.commandlink;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlCommandLink;
 
 import com.liferay.faces.util.component.ComponentUtil;
 
@@ -22,7 +23,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = CommandLink.COMPONENT_TYPE)
-public class CommandLink extends CommandLinkBase {
+public class CommandLink extends HtmlCommandLink {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.commandlink.CommandLink";

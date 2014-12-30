@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.panelgroup;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlPanelGroup;
 
 import com.liferay.faces.util.component.ComponentUtil;
 
@@ -22,7 +23,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = PanelGroup.COMPONENT_TYPE)
-public class PanelGroup extends PanelGroupBase {
+public class PanelGroup extends HtmlPanelGroup {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.panelgroup.PanelGroup";
