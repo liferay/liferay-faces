@@ -35,10 +35,10 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * @author  Neil Griffin
  * @author  Kyle Stiemann
  */
-public class ImportConstants extends TagHandler {
+public class LoadConstants extends TagHandler {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(ImportConstants.class);
+	private static final Logger logger = LoggerFactory.getLogger(LoadConstants.class);
 
 	// Private Cache
 	private static final Map<String, Map<String, Object>> CONSTANT_MAP_CACHE =
@@ -58,11 +58,11 @@ public class ImportConstants extends TagHandler {
 	private String var;
 
 	// Workaround for https://issues.liferay.com/browse/FACES-1576
-	public ImportConstants() throws Exception {
+	public LoadConstants() throws Exception {
 		super(new JspTagConfig());
 	}
 
-	public ImportConstants(TagConfig config) throws Exception {
+	public LoadConstants(TagConfig config) throws Exception {
 
 		super(config);
 

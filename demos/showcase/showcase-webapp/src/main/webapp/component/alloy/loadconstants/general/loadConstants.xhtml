@@ -3,8 +3,8 @@
 	template="/templates/component-3col.xhtml">
 
 	<ui:define name="col1">
-		<showcase:example number="1" description="#{i18n['alloy-importconstants-general-example-1']}">
-			<alloy:importConstants classType="com.liferay.faces.demos.constants.ClassConstants" var="classConstants" />
+		<showcase:example number="1" description="#{i18n['alloy-loadconstants-general-example-1']}">
+			<alloy:loadConstants classType="com.liferay.faces.demos.constants.ClassConstants" var="classConstants" />
 			<ul>
 				<li>#{classConstants.BLUE}</li>
 				<li>#{classConstants.GREEN}</li>
@@ -14,8 +14,8 @@
 	</ui:define>
 
 	<ui:define name="col2">
-		<showcase:example number="2" description="#{i18n['alloy-importconstants-general-example-2']}">
-			<alloy:importConstants classType="com.liferay.faces.demos.constants.EnumConstants" var="enumConstants" />
+		<showcase:example number="2" description="#{i18n['alloy-loadconstants-general-example-2']}">
+			<alloy:loadConstants classType="com.liferay.faces.demos.constants.EnumConstants" var="enumConstants" />
 			<ul>
 				<li>#{enumConstants.blue}</li>
 				<li>#{enumConstants.green}</li>
@@ -25,8 +25,8 @@
 	</ui:define>
 
 	<ui:define name="col3">
-		<showcase:example number="3" description="#{i18n['alloy-importconstants-general-example-3']}">
-			<alloy:importConstants classType="com.liferay.faces.demos.constants.InterfaceConstants" var="interfaceConstants" />
+		<showcase:example number="3" description="#{i18n['alloy-loadconstants-general-example-3']}">
+			<alloy:loadConstants classType="com.liferay.faces.demos.constants.InterfaceConstants" var="interfaceConstants" />
 			<ul>
 				<li>#{interfaceConstants.BLUE}</li>
 				<li>#{interfaceConstants.GREEN}</li>
