@@ -37,11 +37,11 @@ public abstract class InputTimeBase extends InputDateTime implements Styleable, 
 		maxResults,
 		maxTime,
 		minTime,
+		pattern,
 		queryDelay,
 		responsive,
 		scrollIntoView,
 		step,
-		timePattern,
 		timeSelectListener
 	}
 
@@ -109,6 +109,14 @@ public abstract class InputTimeBase extends InputDateTime implements Styleable, 
 		getStateHelper().put(InputTimePropertyKeys.minTime, minTime);
 	}
 
+	public String getPattern() {
+		return (String) getStateHelper().eval(InputTimePropertyKeys.pattern, "hh:mm a");
+	}
+
+	public void setPattern(String pattern) {
+		getStateHelper().put(InputTimePropertyKeys.pattern, pattern);
+	}
+
 	public Integer getQueryDelay() {
 		return (Integer) getStateHelper().eval(InputTimePropertyKeys.queryDelay, null);
 	}
@@ -139,14 +147,6 @@ public abstract class InputTimeBase extends InputDateTime implements Styleable, 
 
 	public void setStep(Integer step) {
 		getStateHelper().put(InputTimePropertyKeys.step, step);
-	}
-
-	public String getTimePattern() {
-		return (String) getStateHelper().eval(InputTimePropertyKeys.timePattern, "hh:mm a");
-	}
-
-	public void setTimePattern(String timePattern) {
-		getStateHelper().put(InputTimePropertyKeys.timePattern, timePattern);
 	}
 
 	public javax.el.MethodExpression getTimeSelectListener() {

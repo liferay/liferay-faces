@@ -30,6 +30,8 @@ import javax.faces.convert.DateTimeConverter;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
 
+import com.liferay.faces.util.client.BrowserSniffer;
+import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
@@ -130,14 +132,6 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 		}
 	}
 
-	protected MessageContext getMessageContext() {
-
-		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
-			MessageContextFactory.class);
-
-		return messageContextFactory.getMessageContext();
-	}
-
 	@Override
 	public Converter getConverter() {
 		Converter converter = super.getConverter();
@@ -165,6 +159,16 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 	@Override
 	public abstract boolean isResponsive();
 
+	protected boolean isResponsiveMobile() {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+				BrowserSnifferFactory.class);
+		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+
+		return browserSniffer.isMobile() && isResponsive();
+	}
+
 	@Override
 	public Object getLocale() {
 		return getLocale(FacesContext.getCurrentInstance());
@@ -183,7 +187,15 @@ public abstract class InputDateTime extends InputDateTimeBase implements ClientC
 		return locale;
 	}
 
-	protected abstract String getPattern();
+	protected MessageContext getMessageContext() {
+
+		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+				MessageContextFactory.class);
+
+		return messageContextFactory.getMessageContext();
+	}
+
+	public abstract String getPattern();
 
 	@Override
 	public String getShowOn() {

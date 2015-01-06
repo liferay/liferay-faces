@@ -125,7 +125,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 
 			if ((maxDateObject != null) || (minDateObject != null)) {
 
-				String datePattern = inputDate.getDatePattern();
+				String datePattern = inputDate.getPattern();
 				String timeZoneString = inputDate.getTimeZone();
 				TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(InputDate.DEFAULT_HTML5_DATE_PATTERN,
@@ -216,7 +216,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 				String clientId = inputDate.getClientId(facesContext);
 				String escapedInputClientId = RendererUtil.escapeClientId(clientId.concat(INPUT_SUFFIX));
 				String buttonOnDateClick = BUTTON_ON_DATE_CLICK_TEMPLATE.replace("{0}", escapedInputClientId);
-				String datePattern = inputDate.getDatePattern();
+				String datePattern = inputDate.getPattern();
 				String mask = getMaskFromDatePattern(datePattern);
 				String onDateClick = buttonOnDateClick.replace("{1}", mask);
 				stringBuilder.append(onDateClick);
@@ -238,7 +238,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 	protected void encodeDate(ResponseWriter responseWriter, InputDate inputDate, String attributeName,
 		Object dateObject, boolean first) throws IOException {
 
-		String datePattern = inputDate.getDatePattern();
+		String datePattern = inputDate.getPattern();
 		String timeZoneString = inputDate.getTimeZone();
 		TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
 		Date date = InputDateTimeUtil.getObjectAsDate(dateObject, datePattern, timeZone);

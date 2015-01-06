@@ -29,20 +29,12 @@ public abstract class InputDateBase extends InputDateTime implements Styleable, 
 
 	// Protected Enumerations
 	protected enum InputDatePropertyKeys {
-		datePattern,
 		dateSelectListener,
 		maxDate,
 		minDate,
 		panes,
+		pattern,
 		responsive
-	}
-
-	public String getDatePattern() {
-		return (String) getStateHelper().eval(InputDatePropertyKeys.datePattern, null);
-	}
-
-	public void setDatePattern(String datePattern) {
-		getStateHelper().put(InputDatePropertyKeys.datePattern, datePattern);
 	}
 
 	public javax.el.MethodExpression getDateSelectListener() {
@@ -75,6 +67,14 @@ public abstract class InputDateBase extends InputDateTime implements Styleable, 
 
 	public void setPanes(Integer panes) {
 		getStateHelper().put(InputDatePropertyKeys.panes, panes);
+	}
+
+	public String getPattern() {
+		return (String) getStateHelper().eval(InputDatePropertyKeys.pattern, null);
+	}
+
+	public void setPattern(String pattern) {
+		getStateHelper().put(InputDatePropertyKeys.pattern, pattern);
 	}
 
 	public boolean isResponsive() {
