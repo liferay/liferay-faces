@@ -94,11 +94,14 @@ var LFAI = {
 				}
 			});
 
+			var options = { execute : '@none', render : render };
+
+			if (namingContainerId) {
+				options['com.sun.faces.namingContainerId'] = namingContainerId;
+			}
+
 			clientComponent.on('uploadcomplete', function(event) {
-				jsf.ajax.request(clientId, 'valueChange', {
-					execute: '@none',
-					render: render
-				});
+				jsf.ajax.request(clientId, 'valueChange', options);
 			});
 
 			clientComponent.on('uploadprogress', function(event) {
@@ -167,7 +170,7 @@ var LFAI = {
 		}
 	},
 
-	initAutoCompleteServerMode: function(autoComplete, hiddenClientId, clientId) {
+	initAutoCompleteServerMode: function(autoComplete, hiddenClientId, clientId, namingContainerId) {
 
 		// When the autoComplete is cleared, set querying to false in order to cancel any queries that have been sent.
 		autoComplete.on('clear', function(event) {
@@ -181,10 +184,14 @@ var LFAI = {
 			autoComplete.set('querying', true);
 			document.getElementById(hiddenClientId).value = event.query;
 
+			var options = { render: clientId };
+
+			if (namingContainerId) {
+				options['com.sun.faces.namingContainerId'] = namingContainerId;
+			}
+
 			// jsf.ajax is a global javascript object in JSF.
-			jsf.ajax.request(clientId, null, {
-				render: clientId
-			});
+			jsf.ajax.request(clientId, null, options);
 		});
 	},
 
