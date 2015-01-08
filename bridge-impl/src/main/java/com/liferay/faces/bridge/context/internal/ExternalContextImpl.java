@@ -67,7 +67,6 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 	private Map<String, Object> applicationMap;
 	private ContextMapFactory contextMapFactory;
 	private Map<String, Object> requestAttributeMap;
-	private Iterator<Locale> requestLocales;
 	private Map<String, Object> sessionMap;
 
 	// Lazily-Initialized Data Members
@@ -190,9 +189,6 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 
 		// Initialize the request context path.
 		requestContextPath = portletRequest.getContextPath();
-
-		// Initialize the request locales.
-		requestLocales = new LocaleIterator(portletRequest.getLocales());
 	}
 
 	@Override
@@ -417,7 +413,7 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 
 	@Override
 	public Iterator<Locale> getRequestLocales() {
-		return requestLocales;
+		return new LocaleIterator(portletRequest.getLocales());
 	}
 
 	@Override
