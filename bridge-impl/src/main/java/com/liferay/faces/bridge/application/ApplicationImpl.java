@@ -52,6 +52,15 @@ public class ApplicationImpl extends ApplicationCompatImpl {
 		super(application);
 	}
 
+    @Override
+    public UIComponent createComponent(FacesContext facesContext, String componentType, String rendererType) {
+        if (componentType.equals(UIViewRoot.COMPONENT_TYPE) && BridgeUtil.isPortletRequest()) {
+            return createComponent(componentType);
+        } else {
+            return super.createComponent(facesContext, componentType, rendererType);
+        }
+    }
+
 	/**
 	 * This method provides the ability to supply an instance of the bridge API's {@link
 	 * PortletNamingContainerUIViewRoot} class which properly handles namespacing of "id" attributes for portlets.
