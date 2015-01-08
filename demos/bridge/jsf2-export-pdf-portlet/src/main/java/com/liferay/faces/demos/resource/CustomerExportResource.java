@@ -126,7 +126,7 @@ public class CustomerExportResource extends Resource {
 			String author = "Author Name";
 			htmlFragment = htmlFragment.replaceAll("[\\n]", " ");
 			htmlFragment = htmlFragment.replaceAll("[\\t]", " ");
-			byteArray = PDFUtil.TXT2PDF(headMarkup, headMarkup, pdfTile, description, author);
+			byteArray = PDFUtil.TXT2PDF(htmlFragment, headMarkup, pdfTile, description, author);
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
