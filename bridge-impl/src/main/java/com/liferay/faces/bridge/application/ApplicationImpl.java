@@ -107,20 +107,6 @@ public class ApplicationImpl extends ApplicationCompatImpl {
 		}
 	}
 
-	@Override
-	public UIComponent createComponent(FacesContext facesContext, String componentType, String rendererType) {
-
-		if (componentType.equals(UIViewRoot.COMPONENT_TYPE) && BridgeUtil.isPortletRequest()) {
-
-			// FACES-1967: Apache MyFaces calls this 3-arg overload of createComponent rather than the 1-arg version
-			// when creating a UIViewRoot.
-			return createComponent(componentType);
-		}
-		else {
-			return super.createComponent(facesContext, componentType, rendererType);
-		}
-	}
-
 	/**
 	 * The normal way of adding a {@link NavigationHandler} to a JSF application is to have a navigation-handler element
 	 * in the faces-config.xml descriptor. Unfortunately the bridge can't use this mechanism, because it must ensure
