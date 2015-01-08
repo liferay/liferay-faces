@@ -35,7 +35,7 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 /**
  * @author  Neil Griffin
  */
-public class ApplicationStartupListener extends ApplicationStartupListenerCompat {
+public class ApplicationStartupListener extends ApplicationStartupListenerCompat_2_2 {
 
 	@Override
 	public void processSystemEvent(EventObject systemEvent) throws AbortProcessingException {
@@ -50,9 +50,10 @@ public class ApplicationStartupListener extends ApplicationStartupListenerCompat
 		if (applicationConfig == null) {
 
 			boolean resolveEntities = WebConfigParam.ResolveXMLEntities.getBooleanValue(externalContext);
-			String requestServletPath = externalContext.getRequestServletPath();
+
+			String contextPath = getApplicationContextPath(externalContext);
 			ApplicationConfigInitializer applicationConfigInitializer = new ApplicationConfigInitializerImpl(
-					requestServletPath, resolveEntities);
+					contextPath, resolveEntities);
 
 			try {
 				applicationConfig = applicationConfigInitializer.initialize();
