@@ -42,9 +42,7 @@ public class ButtonRowRenderer extends Renderer {
 		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
 
 		StringBuilder classNames = new StringBuilder();
-
-		// aui_deprecated.css: button-holder
-		classNames.append("button-holder");
+		classNames.append("aui-button-holder");
 
 		String cssClass = (String) attributes.get("cssClass");
 

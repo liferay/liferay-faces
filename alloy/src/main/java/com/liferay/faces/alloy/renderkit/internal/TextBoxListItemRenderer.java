@@ -47,11 +47,7 @@ public class TextBoxListItemRenderer extends Renderer {
 		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
 
 		StringBuilder classNames = new StringBuilder();
-
-		// aui_deprecated.css: textboxlistentry textboxlistentry-focused
-		// aui-widget not found in 6.2
-		// aui-component found in 6.2 only in javascript TODO
-		classNames.append("aui-widget aui-component textboxlistentry textboxlistentry-focused");
+		classNames.append("aui-widget aui-component aui-textboxlistentry aui-textboxlistentry-focused");
 
 		String cssClass = (String) attributes.get(CSS_CLASS);
 
