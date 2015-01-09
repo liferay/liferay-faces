@@ -26,7 +26,7 @@
 			<modules>
 				<module>cdi/cdi-compat</module>
 				<module>cdi/cdi-weld</module>
-				<module>weblogic</module>
+				<!-- Can't support JSF 2.2 <module>weblogic</module> -->
 			</modules>
 		</profile>
 
@@ -35,7 +35,7 @@
 		<profile>
 			<id>weblogic</id>
 			<modules>
-				<module>weblogic</module>
+				<!-- Can't support JSF 2.2 <module>weblogic</module> -->
 			</modules>
 		</profile>
 
