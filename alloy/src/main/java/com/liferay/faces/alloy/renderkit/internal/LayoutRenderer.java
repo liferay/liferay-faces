@@ -44,9 +44,7 @@ public class LayoutRenderer extends Renderer {
 		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
 
 		StringBuilder classNames = new StringBuilder();
-
-		// aui_deprecated.css: layout
-		classNames.append("layout");
+		classNames.append("aui-layout");
 
 		String cssClass = (String) attributes.get("cssClass");
 
@@ -65,21 +63,15 @@ public class LayoutRenderer extends Renderer {
 		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);
 		responseWriter.startElement(StringPool.DIV, null);
 		classNames = new StringBuilder();
-
-		// aui_deprecated.css: layout-content
-		classNames.append("layout-content");
+		classNames.append("aui-layout-content");
 
 		if ((cssClass != null) && (cssClass.length() > 0)) {
 			classNames.append(StringPool.SPACE);
-
-			// "-content" tags may be deprecated
 			classNames.append(ComponentUtil.appendToCssClasses(cssClass, "-content"));
 		}
 
 		if ((styleClass != null) && (styleClass.length() > 0)) {
 			classNames.append(StringPool.SPACE);
-
-			// "-content" tags may be deprecated
 			classNames.append(ComponentUtil.appendToCssClasses(styleClass, "-content"));
 		}
 
