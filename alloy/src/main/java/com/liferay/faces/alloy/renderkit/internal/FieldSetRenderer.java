@@ -44,9 +44,7 @@ public class FieldSetRenderer extends Renderer {
 		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
 
 		StringBuilder classNames = new StringBuilder();
-
-		// aui_deprecated.css: fieldset
-		classNames.append("fieldset");
+		classNames.append("aui-fieldset");
 
 		Boolean columnFlag = Boolean.FALSE;
 		String column = (String) attributes.get("column");
@@ -59,10 +57,7 @@ public class FieldSetRenderer extends Renderer {
 		}
 
 		if (columnFlag) {
-
-			// aui_deprecated.css: column
-			// aui-form-column not found in 6.2 (all form-column are nested css classes)
-			classNames.append(" column aui-form-column");
+			classNames.append(" aui-column aui-form-column");
 		}
 
 		String cssClass = (String) attributes.get("cssClass");
@@ -86,15 +81,11 @@ public class FieldSetRenderer extends Renderer {
 
 		if ((label != null) && (label.length() > 0)) {
 			responseWriter.startElement("legend", uiComponent);
-
-			// aui_deprecated.css: fieldset-legend
-			responseWriter.writeAttribute(StringPool.CLASS, "fieldset-legend", null);
+			responseWriter.writeAttribute(StringPool.CLASS, "aui-fieldset-legend", null);
 
 			// <span> inside the <legend>
 			responseWriter.startElement(StringPool.SPAN, uiComponent);
-
-			// Used to be aui-legend, but has been replaced by non-deprecated legend
-			responseWriter.writeAttribute(StringPool.CLASS, "legend", null);
+			responseWriter.writeAttribute(StringPool.CLASS, "aui-legend", null);
 			responseWriter.writeText(label, uiComponent, StringPool.LABEL);
 			responseWriter.endElement(StringPool.SPAN);
 			responseWriter.endElement("legend");
@@ -103,14 +94,10 @@ public class FieldSetRenderer extends Renderer {
 		// Inner <div>
 		responseWriter.startElement(StringPool.DIV, null);
 		classNames = new StringBuilder();
-
-		// aui-fieldset-content not found in 6.2 (all fieldset-content are nested css classes)
 		classNames.append("aui-fieldset-content");
 
 		if (columnFlag) {
-
-			// column-content not found in 6.2 (all column-content are nested css classes)
-			classNames.append(" column-content");
+			classNames.append(" aui-column-content");
 		}
 
 		responseWriter.writeAttribute(StringPool.CLASS, classNames.toString(), null);

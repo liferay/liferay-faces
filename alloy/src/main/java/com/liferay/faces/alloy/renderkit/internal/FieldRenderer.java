@@ -44,9 +44,7 @@ public class FieldRenderer extends Renderer {
 		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
 
 		StringBuilder classNames = new StringBuilder();
-
-		// aui_deprecated.css: field
-		classNames.append("field");
+		classNames.append("aui-field");
 
 		String type = (String) attributes.get(StringPool.TYPE);
 
@@ -54,19 +52,13 @@ public class FieldRenderer extends Renderer {
 			String lowerCaseType = type.trim().toLowerCase();
 
 			if (lowerCaseType.equals("checkbox") || lowerCaseType.equals("boolean")) {
-
-				// aui-field-choice not found in 6.2 (all field-choice are nested css classes)
 				classNames.append(" aui-field-choice");
 			}
 			else if (lowerCaseType.equals("menu") || lowerCaseType.equals("select")) {
-
-				// aui-field-menu not found in 6.2
 				classNames.append(" aui-field-menu");
 			}
 		}
 		else {
-
-			// aui-field-text not found in 6.2 (all field-text are nested css classes)
 			classNames.append(" aui-field-text");
 		}
 
@@ -88,9 +80,7 @@ public class FieldRenderer extends Renderer {
 
 		// Inner <span>
 		responseWriter.startElement(StringPool.SPAN, null);
-
-		// aui_deprecated.css: field-content
-		responseWriter.writeAttribute(StringPool.CLASS, "field-content", null);
+		responseWriter.writeAttribute(StringPool.CLASS, "aui-field-content", null);
 
 		String lowerCaseInlineLabel = "left";
 		String inlineLabel = (String) attributes.get("inlineLabel");
@@ -102,9 +92,7 @@ public class FieldRenderer extends Renderer {
 		// Left-aligned <label>
 		if (lowerCaseInlineLabel.equals("left")) {
 			responseWriter.startElement(StringPool.LABEL, null);
-
-			// aui_deprecated.css: field-label
-			responseWriter.writeAttribute(StringPool.CLASS, "field-label", null);
+			responseWriter.writeAttribute(StringPool.CLASS, "aui-field-label", null);
 
 			String label = (String) attributes.get(StringPool.LABEL);
 
@@ -118,8 +106,6 @@ public class FieldRenderer extends Renderer {
 		// Inner-inner <span>
 		responseWriter.startElement(StringPool.SPAN, null);
 		classNames = new StringBuilder();
-
-		// aui-field-element not found in 6.2 (all field-element are nested css classes)
 		classNames.append("aui-field-element");
 
 		if (lowerCaseInlineLabel.equalsIgnoreCase(StringPool.RIGHT)) {
@@ -150,9 +136,7 @@ public class FieldRenderer extends Renderer {
 		// Right-aligned <label>
 		if (lowerCaseInlineLabel.equals(StringPool.RIGHT)) {
 			responseWriter.startElement(StringPool.LABEL, null);
-
-			// aui_deprecated.css: field-label
-			responseWriter.writeAttribute(StringPool.CLASS, "field-label", null);
+			responseWriter.writeAttribute(StringPool.CLASS, "aui-field-label", null);
 
 			String label = (String) attributes.get(StringPool.LABEL);
 

@@ -43,8 +43,6 @@ public class ListRenderer extends Renderer {
 		responseWriter.writeAttribute(StringPool.ID, id, StringPool.ID);
 
 		StringBuilder classNames = new StringBuilder();
-
-		// aui-list not found in 6.2
 		classNames.append("aui-list");
 
 		String cssClass = (String) attributes.get("cssClass");
