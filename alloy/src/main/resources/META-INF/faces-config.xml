@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+<faces-config version="2.1" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
 	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 
 	<name>LiferayFacesAlloy</name>
@@ -12,10 +12,6 @@
 	</ordering>
 	<application>
 		<el-resolver>com.liferay.faces.alloy.el.AUIELResolver</el-resolver>
-		<system-event-listener>
-			<system-event-listener-class>com.liferay.faces.alloy.component.inputfile.internal.InputFileRenderer</system-event-listener-class>
-			<system-event-class>com.liferay.faces.util.event.PostConstructApplicationConfigEvent</system-event-class>
-		</system-event-listener>
 	</application>
 	<component>
 		<component-type>com.liferay.faces.alloy.AUIButtonRow</component-type>
@@ -71,7 +67,6 @@
 	</converter>
 	<factory>
 		<factory-extension>
-			<util:component-resource-factory>com.liferay.faces.alloy.application.internal.ComponentResourceFactoryAlloyImpl</util:component-resource-factory>
 			<util:message-context-factory>com.liferay.faces.alloy.context.internal.MessageContextFactoryAlloyImpl</util:message-context-factory>
 		</factory-extension>
 	</factory>
