@@ -100,7 +100,7 @@ public class FormRendererPrimeFacesImpl extends RendererWrapper {
 
 			String nonAjaxPartialActionURL = partialActionURL.toString();
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
-			ResponseWriter primeFacesResponseWriter = new ResponseWriterPrimeFacesImpl(responseWriter,
+			ResponseWriter primeFacesResponseWriter = new ResponseWriterPrimeFacesBodyImpl(responseWriter,
 					nonAjaxPartialActionURL);
 			facesContext.setResponseWriter(primeFacesResponseWriter);
 			super.encodeBegin(facesContext, uiComponent);
