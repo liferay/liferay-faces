@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.renderkit.primefaces;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +21,17 @@ import javax.el.ELContext;
 import javax.el.ExpressionFactory;
 import javax.el.ValueExpression;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
+import javax.faces.render.Renderer;
 
 import com.liferay.faces.bridge.component.ResourceComponent;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadRendererBridgeImpl;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -36,12 +42,71 @@ import com.liferay.faces.util.lang.StringPool;
  */
 public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(HeadRendererPrimeFacesImpl.class);
+
 	// Private Constants
 	private static final String PRIMEFACES_THEME_DEFAULT = "aristo";
 	private static final String PRIMEFACES_THEME_PARAM = "primefaces.THEME";
 	private static final String PRIMEFACES_THEME_NONE = "none";
 	private static final String PRIMEFACES_THEME_PREFIX = "primefaces-";
 	private static final String PRIMEFACES_THEME_RESOURCE_NAME = "theme.css";
+	private static final Renderer PRIMEFACES_HEAD_RENDERER;
+
+	static {
+
+		Renderer primeFacesHeadRenderer = null;
+
+		try {
+			Class<?> headRendererClass = Class.forName("org.primefaces.renderkit.HeadRenderer");
+			primeFacesHeadRenderer = (Renderer) headRendererClass.newInstance();
+		}
+		catch (Exception e) {
+			logger.error(e);
+		}
+
+		PRIMEFACES_HEAD_RENDERER = primeFacesHeadRenderer;
+	}
+
+	@Override
+	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		// Invoke the PrimeFaces HeadRenderer so that it has the opportunity to add css and/or script resources to the
+		// view root. However, the PrimeFaces HeadRenderer must be captured (and thus prevented from actually rendering
+		// any resources) so that they can instead be rendered by the superclass.
+		ResponseWriter origResponseWriter = facesContext.getResponseWriter();
+		PrimeFacesHeadResponseWriter primeFacesHeadResponseWriter = new PrimeFacesHeadResponseWriter();
+		facesContext.setResponseWriter(primeFacesHeadResponseWriter);
+
+		UIViewRoot originalUIViewRoot = facesContext.getViewRoot();
+		ResourceCapturingUIViewRoot resourceCapturingUIViewRoot = new ResourceCapturingUIViewRoot();
+		facesContext.setViewRoot(resourceCapturingUIViewRoot);
+		PRIMEFACES_HEAD_RENDERER.encodeBegin(facesContext, uiComponent);
+		facesContext.setViewRoot(originalUIViewRoot);
+		facesContext.setResponseWriter(origResponseWriter);
+
+		// Add each component resources that was captured to the real view root so that they will be rendered by the
+		// superclass.
+		List<UIComponent> capturedResources = resourceCapturingUIViewRoot.getCapturedComponentResources("head");
+
+		for (UIComponent componentResource : capturedResources) {
+			originalUIViewRoot.addComponentResource(facesContext, componentResource, "head");
+		}
+
+		// FACES-2061: If the PrimeFaces HeadRenderer attempted to render an inline script (as is the case when
+		// PrimeFaces client side validation is activated) then add a component that can render the script to the view
+		// root.
+		String inlineScriptText = primeFacesHeadResponseWriter.toString();
+
+		if ((inlineScriptText != null) && (inlineScriptText.length() > 0)) {
+			PrimeFacesInlineScript primeFacesInlineScript = new PrimeFacesInlineScript(inlineScriptText);
+			originalUIViewRoot.addComponentResource(facesContext, primeFacesInlineScript, "head");
+		}
+
+		// Delegate rendering to the superclass so that it can write resources found in the view root to the head
+		// section of the portal page.
+		super.encodeBegin(facesContext, uiComponent);
+	}
 
 	@Override
 	protected List<UIComponent> getFirstResources(FacesContext facesContext, UIComponent uiComponent) {
