@@ -14,21 +14,29 @@
 package com.liferay.faces.bridge.renderkit.primefaces;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
 import javax.el.ValueExpression;
+import javax.faces.application.Application;
+import javax.faces.application.ResourceHandler;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIOutput;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
+import javax.portlet.PortletResponse;
 
 import com.liferay.faces.bridge.component.ResourceComponent;
 import com.liferay.faces.bridge.renderkit.html_basic.HeadRendererBridgeImpl;
+import com.liferay.faces.bridge.util.URLUtil;
+import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -85,10 +93,68 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 		facesContext.setViewRoot(originalUIViewRoot);
 		facesContext.setResponseWriter(origResponseWriter);
 
-		// Add each component resources that was captured to the real view root so that they will be rendered by the
-		// superclass.
+		// Get the list of captured resources.
 		List<UIComponent> capturedResources = resourceCapturingUIViewRoot.getCapturedComponentResources("head");
 
+		// The PrimeFaces 5.1+ HeadRenderer properly adds resources like "validation/validation.js" to the view root,
+		// which makes it possible to easily capture the resources that it wants to add to the head. However, the
+		// PrimeFaces 5.0/4.0 HeadRenderer does not add resources to the view root. Instead, it encodes a <script>
+		// element to the response writer with a "src" attribute containing a URL (an external script). When this
+		// occurs, it is necessary to reverse-engineer the URL of each external script in order to determine the
+		// name/library of the corresponding JSF2 resource.
+		List<String> externalScriptURLs = primeFacesHeadResponseWriter.getExternalScriptURLs();
+
+		// For each external script URL:
+		if (externalScriptURLs.size() > 0) {
+
+			ExternalContext externalContext = facesContext.getExternalContext();
+			PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
+			String namespace = portletResponse.getNamespace();
+			String resourceNameParam = namespace + ResourceConstants.JAVAX_FACES_RESOURCE;
+			String libraryNameParam = namespace + ResourceConstants.LN;
+
+			for (String externalScriptURL : externalScriptURLs) {
+
+				// Determine the value of the "javax.faces.resource" and "ln" parameters from the URL.
+				String resourceName = null;
+				String libraryName = null;
+				String decodedExternalScriptURL = URLDecoder.decode(externalScriptURL, StringPool.UTF8);
+				Map<String, String[]> parsedParameterMapValuesArray = URLUtil.parseParameterMapValuesArray(
+						decodedExternalScriptURL);
+
+				if (parsedParameterMapValuesArray != null) {
+					String[] resourceNameParamValues = parsedParameterMapValuesArray.get(resourceNameParam);
+
+					if ((resourceNameParamValues != null) && (resourceNameParamValues.length > 0)) {
+						resourceName = resourceNameParamValues[0];
+					}
+
+					String[] libraryNameParamValues = parsedParameterMapValuesArray.get(libraryNameParam);
+
+					if ((libraryNameParamValues != null) && (libraryNameParamValues.length > 0)) {
+						libraryName = libraryNameParamValues[0];
+					}
+				}
+
+				// If the "javax.faces.resource" and "ln" parameters were found, then create the corresponding JSF2
+				// resource and add it to the view root.
+				if ((resourceName != null) && (libraryName != null)) {
+					Application application = facesContext.getApplication();
+					ResourceHandler resourceHandler = application.getResourceHandler();
+					UIComponent outputScript = application.createComponent(UIOutput.COMPONENT_TYPE);
+					String rendererType = resourceHandler.getRendererTypeForResourceName(resourceName);
+					outputScript.setRendererType(rendererType);
+					outputScript.setTransient(true);
+					outputScript.getAttributes().put("name", resourceName);
+					outputScript.getAttributes().put("library", libraryName);
+					outputScript.getAttributes().put("target", "head");
+					capturedResources.add(outputScript);
+				}
+			}
+		}
+
+		// Add each component resources that was captured to the real view root so that they will be rendered by the
+		// superclass.
 		for (UIComponent componentResource : capturedResources) {
 			originalUIViewRoot.addComponentResource(facesContext, componentResource, "head");
 		}
