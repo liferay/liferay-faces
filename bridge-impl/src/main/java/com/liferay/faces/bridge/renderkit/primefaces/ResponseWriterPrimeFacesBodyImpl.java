@@ -23,14 +23,14 @@ import javax.faces.context.ResponseWriterWrapper;
 /**
  * @author  Neil Griffin
  */
-public class ResponseWriterPrimeFacesImpl extends ResponseWriterWrapper {
+public class ResponseWriterPrimeFacesBodyImpl extends ResponseWriterWrapper {
 
 	// Private Data Members
 	private String nonAjaxPartialActionURL;
 	private ResponseWriter wrappedResponseWriter;
 	private boolean writingForm;
 
-	public ResponseWriterPrimeFacesImpl(ResponseWriter responseWriter, String nonAjaxPartialActionURL) {
+	public ResponseWriterPrimeFacesBodyImpl(ResponseWriter responseWriter, String nonAjaxPartialActionURL) {
 		this.wrappedResponseWriter = responseWriter;
 		this.nonAjaxPartialActionURL = nonAjaxPartialActionURL;
 	}
