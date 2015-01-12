@@ -16,6 +16,8 @@ package com.liferay.faces.bridge.renderkit.primefaces;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
@@ -30,11 +32,13 @@ import javax.faces.context.ResponseWriter;
 public class PrimeFacesHeadResponseWriter extends ResponseWriter {
 
 	// Private Data Members
-	private boolean writingScript;
+	private List<String> externalScriptURLs;
 	private boolean inlineScript;
 	private StringWriter stringWriter;
+	private boolean writingScript;
 
 	public PrimeFacesHeadResponseWriter() {
+		this.externalScriptURLs = new ArrayList<String>();
 		this.inlineScript = true;
 		this.stringWriter = new StringWriter();
 	}
@@ -99,6 +103,11 @@ public class PrimeFacesHeadResponseWriter extends ResponseWriter {
 
 			if ("src".equals(name)) {
 				inlineScript = false;
+
+				if (value != null) {
+					String externalScriptURL = value.toString();
+					externalScriptURLs.add(externalScriptURL);
+				}
 			}
 		}
 	}
@@ -140,5 +149,9 @@ public class PrimeFacesHeadResponseWriter extends ResponseWriter {
 	@Override
 	public String getContentType() {
 		return null;
+	}
+
+	public List<String> getExternalScriptURLs() {
+		return externalScriptURLs;
 	}
 }
