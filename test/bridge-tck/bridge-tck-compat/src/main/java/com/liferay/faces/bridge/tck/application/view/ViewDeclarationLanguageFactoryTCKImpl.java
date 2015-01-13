@@ -16,7 +16,7 @@ package com.liferay.faces.bridge.tck.application.view;
 import javax.faces.view.ViewDeclarationLanguage;
 import javax.faces.view.ViewDeclarationLanguageFactory;
 
-import com.liferay.faces.bridge.application.view.ViewDeclarationLanguageJspImpl;
+import com.liferay.faces.bridge.application.view.internal.ViewDeclarationLanguageJspImpl;
 
 
 /**

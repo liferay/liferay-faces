@@ -28,7 +28,6 @@ import java.util.Map;
 import javax.faces.FacesWrapper;
 
 import com.liferay.faces.bridge.model.UploadedFile;
-import com.liferay.faces.bridge.renderkit.primefaces.FileUploadRendererPrimeFacesImpl;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 

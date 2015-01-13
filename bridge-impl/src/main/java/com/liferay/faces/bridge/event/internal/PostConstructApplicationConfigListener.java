@@ -20,8 +20,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 
-import com.liferay.faces.bridge.application.MojarraApplicationAssociate;
-import com.liferay.faces.bridge.bean.MojarraInjectionProvider;
+import com.liferay.faces.bridge.application.internal.MojarraApplicationAssociate;
+import com.liferay.faces.bridge.bean.internal.MojarraInjectionProvider;
 import com.liferay.faces.util.event.PostConstructApplicationConfigEvent;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
