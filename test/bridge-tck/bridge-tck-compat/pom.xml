@@ -28,6 +28,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
+		<!-- Because the Bridge-TCK portlet is not an OSGi module, this jar (Bridge TCK Compat) can rely on the bridge-impl jar without concerns about breaking OSGi or modularity. -->
 		<dependency>
 			<groupId>com.liferay.faces</groupId>
 			<artifactId>liferay-faces-bridge-impl</artifactId>

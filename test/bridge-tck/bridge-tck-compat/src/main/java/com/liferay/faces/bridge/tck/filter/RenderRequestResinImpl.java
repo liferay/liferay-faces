@@ -16,7 +16,7 @@ package com.liferay.faces.bridge.tck.filter;
 import javax.portlet.RenderRequest;
 import javax.portlet.filter.RenderRequestWrapper;
 
-import com.liferay.faces.bridge.BridgeConstants;
+import com.liferay.faces.bridge.internal.BridgeConstants;
 
 
 /**

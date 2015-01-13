@@ -19,8 +19,8 @@ import javax.portlet.PortletResponse;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainer;
-import com.liferay.faces.bridge.container.PortletContainerDetector;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
+import com.liferay.faces.bridge.container.internal.PortletContainerDetector;
 
 
 /**
