@@ -66,25 +66,30 @@ public class BodyRendererPrimeFacesImpl extends BodyRendererBridgeImpl {
 	@SuppressWarnings("unchecked")
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
+		// Delegate to the superclass to render any resources with target="body" and also the closing </div> tag.
 		super.encodeEnd(facesContext, uiComponent);
 
-		Object requestContext = getRequestContextCurrentInstance();
+		// If this is not an Ajax request, then render each of the PrimeFaces scripts at the bottom of the portal page.
+		if (!facesContext.getPartialViewContext().isAjaxRequest()) {
 
-		try {
-			List<String> scriptsToExecute = (List<String>) GET_SCRIPTS_TO_EXECUTE_METHOD.invoke(requestContext);
+			Object requestContext = getRequestContextCurrentInstance();
 
-			if (scriptsToExecute != null) {
-				ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-						ClientScriptFactory.class);
-				ClientScript clientScript = clientScriptFactory.getClientScript();
+			try {
+				List<String> scriptsToExecute = (List<String>) GET_SCRIPTS_TO_EXECUTE_METHOD.invoke(requestContext);
 
-				for (String scriptToExecute : scriptsToExecute) {
-					clientScript.append(scriptToExecute, null);
+				if (scriptsToExecute != null) {
+					ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
+							ClientScriptFactory.class);
+					ClientScript clientScript = clientScriptFactory.getClientScript();
+
+					for (String scriptToExecute : scriptsToExecute) {
+						clientScript.append(scriptToExecute, null);
+					}
 				}
 			}
-		}
-		catch (Exception e) {
-			logger.error(e);
+			catch (Exception e) {
+				logger.error(e);
+			}
 		}
 	}
 
