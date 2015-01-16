@@ -82,13 +82,13 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 		// Invoke the PrimeFaces HeadRenderer so that it has the opportunity to add css and/or script resources to the
 		// view root. However, the PrimeFaces HeadRenderer must be captured (and thus prevented from actually rendering
 		// any resources) so that they can instead be rendered by the superclass.
-		ResponseWriter origResponseWriter = facesContext.getResponseWriter();
+		FacesContext primeFacesContext = new FacesContextPrimeFacesHeadImpl(facesContext);
+		ResponseWriter origResponseWriter = primeFacesContext.getResponseWriter();
 		PrimeFacesHeadResponseWriter primeFacesHeadResponseWriter = new PrimeFacesHeadResponseWriter();
-		facesContext.setResponseWriter(primeFacesHeadResponseWriter);
+		primeFacesContext.setResponseWriter(primeFacesHeadResponseWriter);
 
 		UIViewRoot originalUIViewRoot = facesContext.getViewRoot();
 		ResourceCapturingUIViewRoot resourceCapturingUIViewRoot = new ResourceCapturingUIViewRoot();
-		FacesContext primeFacesContext = new FacesContextPrimeFacesHeadImpl(facesContext);
 		primeFacesContext.setViewRoot(resourceCapturingUIViewRoot);
 		PRIMEFACES_HEAD_RENDERER.encodeBegin(primeFacesContext, uiComponent);
 		primeFacesContext.setViewRoot(originalUIViewRoot);
