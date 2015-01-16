@@ -88,10 +88,11 @@ public class HeadRendererPrimeFacesImpl extends HeadRendererBridgeImpl {
 
 		UIViewRoot originalUIViewRoot = facesContext.getViewRoot();
 		ResourceCapturingUIViewRoot resourceCapturingUIViewRoot = new ResourceCapturingUIViewRoot();
-		facesContext.setViewRoot(resourceCapturingUIViewRoot);
-		PRIMEFACES_HEAD_RENDERER.encodeBegin(facesContext, uiComponent);
-		facesContext.setViewRoot(originalUIViewRoot);
-		facesContext.setResponseWriter(origResponseWriter);
+		FacesContext primeFacesContext = new FacesContextPrimeFacesHeadImpl(facesContext);
+		primeFacesContext.setViewRoot(resourceCapturingUIViewRoot);
+		PRIMEFACES_HEAD_RENDERER.encodeBegin(primeFacesContext, uiComponent);
+		primeFacesContext.setViewRoot(originalUIViewRoot);
+		primeFacesContext.setResponseWriter(origResponseWriter);
 
 		// Get the list of captured resources.
 		List<UIComponent> capturedResources = resourceCapturingUIViewRoot.getCapturedComponentResources("head");
