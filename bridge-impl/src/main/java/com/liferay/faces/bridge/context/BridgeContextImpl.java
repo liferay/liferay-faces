@@ -437,7 +437,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 						getBridgeRequestScope().setRedirectOccurred(true);
 
 						// Redirect to the targeted view.
-						bridgeRedirectURL.setParameter(Bridge.VIEW_ID, newViewId);
+						bridgeRedirectURL.setParameter(Bridge.FACES_VIEW_ID_PARAMETER, newViewId);
 
 						PortletURL redirectURL = portletContainer.createRedirectURL(bridgeRedirectURL.toString(), null);
 						portletContainer.redirect(redirectURL.toString());
