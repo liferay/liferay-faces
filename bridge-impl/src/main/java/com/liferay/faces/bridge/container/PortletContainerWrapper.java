@@ -76,8 +76,8 @@ public abstract class PortletContainerWrapper implements PortletContainer, Wrapp
 	}
 
 	@Deprecated
-	@SuppressWarnings("deprecation")
 	public void redirect(String url) throws IOException {
+		//noinspection deprecation
 		getWrapped().redirect(url);
 	}
 
