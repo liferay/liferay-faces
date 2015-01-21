@@ -14,6 +14,7 @@
 package com.liferay.faces.bridge.context;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -26,6 +27,7 @@ import java.util.Map;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
+import javax.portlet.ActionResponse;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -36,6 +38,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
+import javax.portlet.ResourceResponse;
 import javax.portlet.StateAwareResponse;
 import javax.portlet.WindowStateException;
 import javax.portlet.faces.Bridge;
@@ -414,7 +417,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 					bridgeRequestScope.setRedirectOccurred(true);
 
 					// TCK NOTE: The TCK does not appear to have a test that invokes this condition.
-					portletContainer.redirect(bridgeRedirectURL.toString());
+					ActionResponse actionResponse = (ActionResponse) portletResponse;
+					actionResponse.sendRedirect(bridgeRedirectURL.toString());
 				}
 
 				// Otherwise,
@@ -426,21 +430,13 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 					// If running in the ACTION_PHASE of the portlet lifecycle, then
 					if (portletPhase == Bridge.PortletPhase.ACTION_PHASE) {
 
-						// Update the PartialViewContext.
-						partialViewContextRenderAll(facesContext);
-
-						// Set the response as "complete" in the FacesContext.
-						facesContext.responseComplete();
-
-						// Set a flag on the {@link BridgeRequestScope} indicating that a <redirect />
-						// occurred which means that the request attributes should not be preserved.
-						getBridgeRequestScope().setRedirectOccurred(true);
-
 						// Redirect to the targeted view.
 						bridgeRedirectURL.setParameter(Bridge.FACES_VIEW_ID_PARAMETER, newViewId);
 
 						PortletURL redirectURL = portletContainer.createRedirectURL(bridgeRedirectURL.toString(), null);
-						portletContainer.redirect(redirectURL.toString());
+
+						ActionResponse actionResponse = (ActionResponse) getPortletResponse();
+						actionResponse.sendRedirect(redirectURL.toString());
 					}
 
 					// Otherwise, if running in the EVENT_PHASE of the portlet lifecycle, then simply navigate to the
@@ -526,7 +522,16 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 				// NOTE: The Bridge Spec indicates that the redirect is to be ignored, but JSF 2 has the ability to
 				// redirect during Ajax.
-				portletContainer.redirect(bridgeRedirectURL.toString());
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+
+				if (isJSF2PartialRequest(facesContext)) {
+					redirectJSF2PartialResponse(facesContext, (ResourceResponse) portletResponse,
+						bridgeRedirectURL.toString());
+				}
+				else {
+					throw new UnsupportedEncodingException(
+						"Can only redirect during RESOURCE_PHASE if a JSF partial/Ajax request has been triggered");
+				}
 			}
 		}
 		else {
