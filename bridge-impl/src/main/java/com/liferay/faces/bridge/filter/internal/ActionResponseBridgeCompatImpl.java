@@ -11,12 +11,11 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.context;
-
-import java.io.IOException;
+package com.liferay.faces.bridge.filter.internal;
 
 import javax.faces.context.FacesContext;
-import javax.portlet.ResourceResponse;
+import javax.portlet.ActionResponse;
+import javax.portlet.filter.ActionResponseWrapper;
 
 
 /**
@@ -24,18 +23,13 @@ import javax.portlet.ResourceResponse;
  *
  * @author  Neil Griffin
  */
-public abstract class BridgeContextCompatImpl extends BridgeContext {
+public abstract class ActionResponseBridgeCompatImpl extends ActionResponseWrapper {
+
+	public ActionResponseBridgeCompatImpl(ActionResponse response) {
+		super(response);
+	}
 
 	protected void partialViewContextRenderAll(FacesContext facesContext) {
 		// no-op for JSF 1.2
-	}
-
-	protected void redirectJSF2PartialResponse(FacesContext facesContext, ResourceResponse resourceResponse, String url)
-		throws IOException {
-		// no-op for JSF 1.2
-	}
-
-	protected boolean isJSF2PartialRequest(FacesContext facesContext) {
-		return false;
 	}
 }
