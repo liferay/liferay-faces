@@ -107,8 +107,14 @@ public interface PortletContainer extends PhaseListener {
 	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse);
 
 	/**
-	 * Delegates to the underlying ActionResponse to perform a redirect to the specified URL.
+	 * @deprecated  <p>Replaced by calling the {@link javax.portlet.ActionResponse#sendRedirect(String)} method on the
+	 *              object returned by {@link
+	 *              com.liferay.faces.bridge.filter.BridgePortletResponseFactory#getActionResponse(javax.portlet.ActionResponse)
+	 *              }</p>
+	 *
+	 *              <p>Delegates to the underlying ActionResponse to perform a redirect to the specified URL.</p>
 	 */
+	@Deprecated
 	public void redirect(String url) throws IOException;
 
 	/**

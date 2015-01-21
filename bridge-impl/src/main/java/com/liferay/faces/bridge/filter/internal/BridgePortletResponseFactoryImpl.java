@@ -28,7 +28,7 @@ public class BridgePortletResponseFactoryImpl extends BridgePortletResponseFacto
 
 	@Override
 	public ActionResponse getActionResponse(ActionResponse actionResponse) {
-		return actionResponse;
+		return new ActionResponseBridgeImpl(actionResponse);
 	}
 
 	@Override

@@ -323,6 +323,7 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 		}
 	}
 
+	@Deprecated
 	public void redirect(String url) throws IOException {
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
