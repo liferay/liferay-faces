@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.bridge.container.liferay;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 
 import javax.portlet.PortletResponse;
@@ -31,7 +30,6 @@ public class LiferayPortletResponse {
 
 	// Private Constants
 	private static final String METHOD_NAME_CREATE_RENDER_URL = "createRenderURL";
-	private static final String METHOD_NAME_SET_REDIRECT_LOCATION = "setRedirectLocation";
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(LiferayPortletResponse.class);
@@ -66,24 +64,5 @@ public class LiferayPortletResponse {
 		}
 
 		return renderURL;
-	}
-
-	/**
-	 * The Liferay ActionResponseImpl.sendRedirect(String) method throws exceptions under some circumstances that occur
-	 * during the execution of the JSF lifecycle, so this method is necessary in order to bypass all those exceptions
-	 * and to call the ActionResponseImpl.sendRedirect.setRedirectLocation(String) method reflectively in order to have
-	 * the redirect work.
-	 */
-	public void sendRedirect(String url) throws IOException {
-
-		try {
-			Method method = wrappedPortletResponse.getClass().getMethod(METHOD_NAME_SET_REDIRECT_LOCATION,
-					new Class[] { String.class });
-			method.invoke(wrappedPortletResponse, new Object[] { url });
-		}
-		catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-
 	}
 }

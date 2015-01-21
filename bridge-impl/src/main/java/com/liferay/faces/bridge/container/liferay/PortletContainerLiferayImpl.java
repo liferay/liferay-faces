@@ -219,22 +219,6 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	}
 
 	@Override
-	public void redirect(String url) throws IOException {
-
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-
-		PortletResponse portletResponse = bridgeContext.getPortletResponse();
-
-		if (portletResponse instanceof ActionResponse) {
-			LiferayPortletResponse liferayActionResponse = new LiferayPortletResponse(portletResponse);
-			liferayActionResponse.sendRedirect(url);
-		}
-		else {
-			super.redirect(url);
-		}
-	}
-
-	@Override
 	protected PortletURL createActionURL(MimeResponse mimeResponse) {
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
