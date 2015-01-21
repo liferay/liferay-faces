@@ -116,7 +116,13 @@ public class BridgePhaseActionImpl extends BridgePhaseCompat_2_2_Impl {
 			// Save the faces view root and any messages in the faces context so that they can be restored during
 			// the RENDER_PHASE of the portlet lifecycle.
 			bridgeRequestScope.saveState(facesContext);
-			maintainBridgeRequestScope(actionRequest, actionResponse, BridgeRequestScope.Transport.RENDER_PARAMETER);
+
+			// In accordance with Section 5.1.2 of the Spec, the bridge request scope must only be maintained if a
+			// redirect or portlet mode change has not occurred.
+			if (!bridgeRequestScope.isRedirectOccurred() || !bridgeRequestScope.isPortletModeChanged()) {
+				maintainBridgeRequestScope(actionRequest, actionResponse,
+					BridgeRequestScope.Transport.RENDER_PARAMETER);
+			}
 
 			// Spec 6.6 (Namespacing)
 			indicateNamespacingToConsumers(facesContext.getViewRoot(), actionResponse);
