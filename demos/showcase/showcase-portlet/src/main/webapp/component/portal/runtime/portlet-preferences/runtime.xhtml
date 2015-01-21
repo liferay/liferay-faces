@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:alloy="http://liferay.com/faces/alloy" xmlns:portal="http://liferay.com/faces/portal"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase">
+			
+	<showcase:example id="example1">
+		<alloy:messages id="messages"/>
+
+		<portal:runtime id="runtimePortlet" portletName="#{runtimeModelBean.portletNamePreferences}" defaultPreferences="#{runtimeModelBean.defaultPreferences}"/>
+
+		<alloy:form>
+			<alloy:commandButton actionListener="#{runtimeBacking.togglePortletBorder}" value="#{i18n['portal-runtime-portlet-preferences-toggleBorder']}">
+				<f:ajax render=":example1:messages :example1:runtimePortlet"/>
+			</alloy:commandButton>
+		</alloy:form>
+	</showcase:example>
+
+</ui:composition>
