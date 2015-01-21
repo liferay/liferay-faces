@@ -21,7 +21,10 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
+import com.liferay.faces.bridge.filter.BridgePortletRequestFactory;
+import com.liferay.faces.bridge.filter.BridgePortletResponseFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -41,9 +44,16 @@ public class BridgePhaseResourceImpl extends BridgePhaseCompat_2_2_Impl {
 
 	public BridgePhaseResourceImpl(ResourceRequest resourceRequest, ResourceResponse resourceResponse,
 		PortletConfig portletConfig) {
+
 		super(portletConfig);
-		this.resourceRequest = resourceRequest;
-		this.resourceResponse = resourceResponse;
+
+		BridgePortletRequestFactory bridgePortletRequestFactory = (BridgePortletRequestFactory) FactoryExtensionFinder
+			.getFactory(BridgePortletRequestFactory.class);
+		this.resourceRequest = bridgePortletRequestFactory.getResourceRequest(resourceRequest);
+
+		BridgePortletResponseFactory bridgePortletResponseFactory = (BridgePortletResponseFactory)
+			FactoryExtensionFinder.getFactory(BridgePortletResponseFactory.class);
+		this.resourceResponse = bridgePortletResponseFactory.getResourceResponse(resourceResponse);
 	}
 
 	public void execute() throws BridgeDefaultViewNotSpecifiedException, BridgeException {
