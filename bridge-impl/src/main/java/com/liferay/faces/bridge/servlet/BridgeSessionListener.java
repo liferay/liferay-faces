@@ -15,16 +15,25 @@ package com.liferay.faces.bridge.servlet;
 
 import java.util.Enumeration;
 
+import javax.faces.FactoryFinder;
+import javax.faces.context.FacesContext;
+import javax.faces.context.FacesContextFactory;
+import javax.faces.lifecycle.Lifecycle;
+import javax.faces.lifecycle.LifecycleFactory;
 import javax.portlet.faces.BridgeException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 import com.liferay.faces.bridge.bean.BeanManager;
 import com.liferay.faces.bridge.bean.BeanManagerFactory;
+import com.liferay.faces.bridge.filter.HttpServletRequestAdapter;
+import com.liferay.faces.bridge.filter.HttpServletResponseAdapter;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
 import com.liferay.faces.util.config.ApplicationConfig;
@@ -180,7 +189,23 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 									// would have the same session attribute names for managed-beans, and only the last
 									// one would get cleaned-up by Mojarra.
 									if (beanManager.isManagedBean(attributeName, attributeValue)) {
+
+										// NOTE: The BeanManager implementation utilizes FacesContext in order to
+										// determine the Mojarra injection provider. For this reason it is necessary to
+										// create a special FacesContext instance (that can function during session
+										// expiration) before invoking any methods on the BeanManager.
+										LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
+												FactoryFinder.LIFECYCLE_FACTORY);
+										Lifecycle lifecycle = lifecycleFactory.getLifecycle(
+												LifecycleFactory.DEFAULT_LIFECYCLE);
+										FacesContextFactory facesContextFactory = (FacesContextFactory) FactoryFinder
+											.getFactory(FactoryFinder.FACES_CONTEXT_FACTORY);
+
+										FacesContext facesContext = facesContextFactory.getFacesContext(servletContext,
+												null, null, lifecycle);
+
 										beanManager.invokePreDestroyMethods(attributeValue, true);
+										facesContext.release();
 									}
 
 									// Otherwise,
