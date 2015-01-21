@@ -43,6 +43,9 @@ import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.context.RenderRedirectWriter;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.event.IPCPhaseListener;
+import com.liferay.faces.bridge.filter.BridgePortletRequestFactory;
+import com.liferay.faces.bridge.filter.BridgePortletResponseFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -62,9 +65,16 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 
 	public BridgePhaseRenderImpl(RenderRequest renderRequest, RenderResponse renderResponse,
 		PortletConfig portletConfig) {
+
 		super(portletConfig);
-		this.renderRequest = renderRequest;
-		this.renderResponse = renderResponse;
+
+		BridgePortletRequestFactory bridgePortletRequestFactory = (BridgePortletRequestFactory) FactoryExtensionFinder
+			.getFactory(BridgePortletRequestFactory.class);
+		this.renderRequest = bridgePortletRequestFactory.getRenderRequest(renderRequest);
+
+		BridgePortletResponseFactory bridgePortletResponseFactory = (BridgePortletResponseFactory)
+			FactoryExtensionFinder.getFactory(BridgePortletResponseFactory.class);
+		this.renderResponse = bridgePortletResponseFactory.getRenderResponse(renderResponse);
 	}
 
 	public void execute() throws BridgeDefaultViewNotSpecifiedException, BridgeException {
