@@ -74,6 +74,8 @@ public abstract class PortletContainerWrapper implements PortletContainer, Faces
 		getWrapped().maintainRenderParameters(eventRequest, eventResponse);
 	}
 
+	@Deprecated
+	@SuppressWarnings("deprecation")
 	public void redirect(String url) throws IOException {
 		getWrapped().redirect(url);
 	}
