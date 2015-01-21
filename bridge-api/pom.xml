@@ -24,6 +24,11 @@
 			<groupId>javax.faces</groupId>
 			<artifactId>jsf-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.liferay.faces</groupId>
+			<artifactId>liferay-faces-util</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
