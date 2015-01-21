@@ -32,6 +32,8 @@ public abstract class PortletContainerCompatImpl implements PortletContainer {
 	// serialVersionUID
 	private static final long serialVersionUID = 2694729758648266705L;
 
+	// This is a utility method called by a subclass with a deprecated public method.
+	@Deprecated
 	protected void redirectJSF2PartialResponse(FacesContext facesContext, ResourceResponse resourceResponse, String url)
 		throws IOException {
 		// no-op for JSF 1.x
@@ -43,6 +45,8 @@ public abstract class PortletContainerCompatImpl implements PortletContainer {
 		return null;
 	}
 
+	// This is a utility method called by a subclass with a deprecated public method.
+	@Deprecated
 	protected boolean isJSF2PartialRequest(FacesContext facesContext) {
 
 		// no-op for JSF 1.x
