@@ -21,11 +21,13 @@ import javax.portlet.ClientDataRequest;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 
 import com.liferay.faces.bridge.BridgeConstants;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.context.map.internal.ServletContextAttributeMap;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.context.map.FacesRequestParameterMap;
 import com.liferay.faces.util.context.map.MultiPartFormData;
@@ -151,6 +153,11 @@ public class ContextMapFactoryImpl extends ContextMapFactory {
 	@Override
 	public Map<String, Object> getRequestScopeMap(BridgeContext bridgeContext) {
 		return new RequestScopeMap(bridgeContext);
+	}
+
+	@Override
+	public Map<String, Object> getServletContextAttributeMap(ServletContext servletContext) {
+		return new ServletContextAttributeMap(servletContext);
 	}
 
 	@Override
