@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletContext;
+import javax.servlet.ServletContext;
 
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.factory.FactoryExtension;
@@ -80,6 +81,11 @@ public abstract class ContextMapFactory implements FactoryExtension<ContextMapFa
 	 * Returns a {@link Map} of request-scoped attributes stored in the underlying {@link javax.portlet.PortletRequest}.
 	 */
 	public abstract Map<String, Object> getRequestScopeMap(BridgeContext bridgeContext);
+
+	/**
+	 * Returns a {@link Map} of attributes stored in the underlying {@link javax.servlet.ServletContext}.
+	 */
+	public abstract Map<String, Object> getServletContextAttributeMap(ServletContext servletContext);
 
 	/**
 	 * Returns a {@link Map} of session-scoped attributes stored in the underlying {@link javax.portlet.PortletSession}.
