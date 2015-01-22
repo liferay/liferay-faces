@@ -113,7 +113,7 @@ public class ExternalContextExpirationImpl extends ExternalContext {
 	}
 
 	@Override
-	public Map getInitParameterMap() {
+	public Map<String, String> getInitParameterMap() {
 		throw new UnsupportedOperationException();
 	}
 
