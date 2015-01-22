@@ -11,9 +11,10 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.context;
+package com.liferay.faces.bridge.context.internal;
 
 import javax.faces.FacesException;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.FacesContextFactory;
 import javax.faces.lifecycle.Lifecycle;
@@ -24,6 +25,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import com.liferay.faces.bridge.context.ExternalContextImpl;
 import com.liferay.faces.util.helper.Wrapper;
 
 
@@ -43,8 +45,8 @@ public class FacesContextFactoryImpl extends FacesContextFactory implements Wrap
 	public FacesContext getFacesContext(Object context, Object request, Object response, Lifecycle lifecycle)
 		throws FacesException {
 
-		FacesContext facesContext = null;
-
+		// If this is a request coming from the portlet container, then return an instance of FacesContext that is
+		// compatible with the portlet lifecycle.
 		if (context instanceof PortletContext) {
 			PortletContext portletContext = (PortletContext) context;
 			PortletRequest portletRequest = (PortletRequest) request;
@@ -53,16 +55,27 @@ public class FacesContextFactoryImpl extends FacesContextFactory implements Wrap
 			ServletContext servletContext = new ServletContextAdapterImpl(portletContext, requestContextPath);
 			ServletRequest servletRequest = new ServletRequestAdapterImpl(portletRequest);
 			ServletResponse servletResponse = new HttpServletResponseAdapterImpl(portletResponse);
-			facesContext = wrappedFacesContextFactory.getFacesContext(servletContext, servletRequest, servletResponse,
-					lifecycle);
-			facesContext = new FacesContextImpl(facesContext, portletContext, portletRequest, portletResponse,
-					lifecycle);
-		}
-		else {
-			facesContext = wrappedFacesContextFactory.getFacesContext(context, request, response, lifecycle);
+			FacesContext wrappedFacesContext = wrappedFacesContextFactory.getFacesContext(servletContext,
+					servletRequest, servletResponse, lifecycle);
+
+			ExternalContext externalContext = new ExternalContextImpl(portletContext, portletRequest, portletResponse);
+
+			return new FacesContextImpl(wrappedFacesContext, externalContext);
 		}
 
-		return facesContext;
+		// Otherwise, if the session is expiring, then return an instance of FacesContext that can function in a
+		// limited manner during session expiration.
+		else if ((context instanceof ServletContext) && (request == null) && (response == null)) {
+
+			ExternalContext externalContext = new ExternalContextExpirationImpl((ServletContext) context);
+
+			return new FacesContextExpirationImpl(externalContext);
+		}
+
+		// Otherwise, delegate to the wrapped factory.
+		else {
+			return wrappedFacesContextFactory.getFacesContext(context, request, response, lifecycle);
+		}
 	}
 
 	public FacesContextFactory getWrapped() {
