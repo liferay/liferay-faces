@@ -1,1 +1,1 @@
-com.liferay.faces.bridge.context.FacesContextFactoryImpl
+com.liferay.faces.bridge.context.internal.FacesContextFactoryImpl

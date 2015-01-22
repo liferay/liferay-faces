@@ -11,14 +11,10 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.context;
+package com.liferay.faces.bridge.context.internal;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.lifecycle.Lifecycle;
-import javax.portlet.PortletContext;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 
 import com.liferay.faces.util.context.FacesContextWrapper;
 
@@ -32,11 +28,10 @@ public class FacesContextImpl extends FacesContextWrapper {
 	private ExternalContext externalContext;
 	private FacesContext wrappedFacesContext;
 
-	public FacesContextImpl(FacesContext facesContext, PortletContext portletContext, PortletRequest portletRequest,
-		PortletResponse portletResponse, Lifecycle lifecycle) {
+	public FacesContextImpl(FacesContext facesContext, ExternalContext externalContext) {
 
 		this.wrappedFacesContext = facesContext;
-		this.externalContext = new ExternalContextImpl(portletContext, portletRequest, portletResponse);
+		this.externalContext = externalContext;
 		setCurrentInstance(this);
 	}
 
