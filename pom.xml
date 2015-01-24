@@ -844,6 +844,18 @@
 								<groupId>org.icepush</groupId>
 								<artifactId>icepush</artifactId>
 							</exclusion>
+							<exclusion>
+								<groupId>org.glassfish</groupId>
+								<artifactId>javax.faces</artifactId>
+							</exclusion>
+							<exclusion>
+								<groupId>javax.mail</groupId>
+								<artifactId>mail</artifactId>
+							</exclusion>
+							<exclusion>
+								<groupId>javax.activation</groupId>
+								<artifactId>javax.activation</artifactId>
+							</exclusion>
 						</exclusions>
 					</dependency>
 				</dependencies>
