@@ -14,13 +14,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.liferay.faces</groupId>
-			<artifactId>liferay-faces-bridge-impl</artifactId>
+			<artifactId>liferay-faces-util</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.liferay.faces</groupId>
-			<artifactId>liferay-faces-util</artifactId>
-			<version>${project.version}</version>
+			<groupId>javax.faces</groupId>
+			<artifactId>javax.faces-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
