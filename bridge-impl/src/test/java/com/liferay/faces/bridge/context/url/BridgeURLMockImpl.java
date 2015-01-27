@@ -19,6 +19,8 @@ import java.util.HashMap;
 import javax.portlet.BaseURL;
 
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.context.url.internal.BaseURLNonEncodedStringImpl;
+import com.liferay.faces.bridge.context.url.internal.BridgeURLBaseImpl;
 
 
 /**
