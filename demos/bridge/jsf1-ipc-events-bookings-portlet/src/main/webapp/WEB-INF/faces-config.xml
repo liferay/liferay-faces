@@ -8,7 +8,7 @@
 			<base-name>i18n</base-name>
 			<var>i18n</var>
 		</resource-bundle>
-		<view-handler>com.liferay.faces.bridge.application.ViewHandlerFaceletImpl</view-handler>
+		<view-handler>com.liferay.faces.bridge.application.internal.ViewHandlerFaceletImpl</view-handler>
 	</application>
 	<lifecycle>
 		<phase-listener>com.liferay.faces.util.lifecycle.DebugPhaseListener</phase-listener>
