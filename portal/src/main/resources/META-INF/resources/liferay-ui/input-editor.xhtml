@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:component xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:aui="http://liferay.com/faces/aui" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:alloy="http://liferay.com/faces/alloy" xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:cc="http://java.sun.com/jsf/composite"
 	xmlns:liferay-ui="http://liferay.com/faces/ui"
@@ -198,14 +198,14 @@ hiddenField.onfocus();
 										</h:inputTextarea>
 									</h:panelGroup>
 								</h:panelGroup>
-								<aui:script position="bottom" use="liferay-bbcode-editor">
+								<alloy:outputScript position="bottom" use="liferay-bbcode-editor">
 if (!window['#{editorName}']) {
 window['#{editorName}'] = new Liferay.Editor.bbCode(
 {textarea: '##{editorName}'}
 );
 window['#{editorName}'].setHTML(#{prefixedInitMethod}());
 }
-								</aui:script>
+								</alloy:outputScript>
 							</c:when>
 							<c:otherwise>
 								<h:inputHidden id="firstTime" type="hidden" />
