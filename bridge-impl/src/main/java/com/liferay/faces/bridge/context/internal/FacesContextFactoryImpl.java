@@ -25,7 +25,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import com.liferay.faces.bridge.context.ExternalContextImpl;
 import com.liferay.faces.util.helper.Wrapper;
 
 
