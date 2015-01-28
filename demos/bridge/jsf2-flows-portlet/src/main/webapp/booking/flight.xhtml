@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-	<aui:field id="departureField" label="#{i18n['departure-airport']}" required="true">
+	<alloy:field id="departureField" label="#{i18n['departure-airport']}" required="true">
 		<h:selectOneMenu id="departureId" value="#{bookingFlowModelBean.bookingDepartureId}">
 			<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
 			<f:selectItems itemValue="#{airport.airportId}" itemLabel="#{airport.city}: #{airport.name}"
@@ -10,22 +10,22 @@
 			<f:ajax render="departureField" />
 		</h:selectOneMenu>
 		<h:message for="departureId" />
-	</aui:field>
-	<aui:field id="arrivalField" label="#{i18n['arrival-airport']}" required="true">
+	</alloy:field>
+	<alloy:field id="arrivalField" label="#{i18n['arrival-airport']}" required="true">
 		<h:selectOneMenu id="arrivalId" value="#{bookingFlowModelBean.bookingArrivalId}">
 			<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
 			<f:selectItems itemValue="#{airport.airportId}" itemLabel="#{airport.city}: #{airport.name}"
 				value="#{airportService.airports}" var="airport" />
 			<f:ajax render="arrivalField" />
 		</h:selectOneMenu>
-	</aui:field>
-	<aui:field id="departureDateField" label="#{i18n['departure-date']}" required="true">
+	</alloy:field>
+	<alloy:field id="departureDateField" label="#{i18n['departure-date']}" required="true">
 		<input jsf:id="departureDate" jsf:value="#{bookingFlowModelBean.bookingDepartureDate}" type="date">
 			<f:convertDateTime pattern="yyyy-MM-dd" />
 			<f:ajax render="departureDateField" />
 		</input>
 		<h:message for="departureDate" />
-	</aui:field>
+	</alloy:field>
 	<hr />
 	<h:commandButton action="flightSearch" value="#{i18n['search-flights']}">
 		<f:ajax execute="@form" />
