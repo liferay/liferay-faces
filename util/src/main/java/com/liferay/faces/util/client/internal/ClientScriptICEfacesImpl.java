@@ -81,9 +81,9 @@ public class ClientScriptICEfacesImpl implements ClientScript {
 		try {
 			Class<?> jsRunnerClass = Class.forName(FQCN_ICEFACES_JS_RUNNER);
 			Method collateScriptsMethod = jsRunnerClass.getMethod(METHOD_COLLATESCRIPTS,
-					new Class[] { FacesContext.class, String.class });
+					new Class[] { FacesContext.class });
 			FacesContext facesContext = FacesContext.getCurrentInstance();
-			toString = (String) collateScriptsMethod.invoke(null, new Object[] { facesContext, });
+			toString = (String) collateScriptsMethod.invoke(null, new Object[] { facesContext });
 		}
 		catch (Exception e) {
 			logger.error(e);
