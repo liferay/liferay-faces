@@ -25,7 +25,7 @@ public class Header extends HeaderBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.header.Header";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.header.HeaderRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.header.internal.HeaderRenderer";
 	public static final String STYLE_CLASS_NAME = "portal-header";
 
 	public Header() {

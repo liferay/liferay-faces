@@ -26,7 +26,7 @@ public class ButtonRow extends ButtonRowBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.buttonrow.ButtonRow";
-	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.buttonrow.ButtonRowRenderer";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.buttonrow.internal.ButtonRowRenderer";
 	public static final String STYLE_CLASS_NAME = "button-holder portal-button-row";
 	
 	// Public Constants
