@@ -18,6 +18,7 @@ import java.util.GregorianCalendar;
 
 import org.junit.Test;
 
+import com.liferay.faces.bridge.container.liferay.internal.LiferaySharedPageTop;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.portal.StringBundler;

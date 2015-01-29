@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.test;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,14 +21,19 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
+
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
+
 import org.junit.runner.RunWith;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.liferay.faces.bridge.renderkit.html_basic.HeadResource;
+import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadResource;
 import com.liferay.faces.test.util.TesterBase;
 
 
@@ -46,7 +49,7 @@ public class FACES1635ResourcesTest extends TesterBase {
 
 	@FindBy(xpath = textarea1Xpath)
 	private WebElement textarea1;
-	
+
 	@Drone
 	WebDriver browser;
 
@@ -84,22 +87,30 @@ public class FACES1635ResourcesTest extends TesterBase {
 
 				if ("".equals(url)) {
 					// logger.log(Level.INFO, "convertToHeadResources: ignoring inline " + type + " ...");
-				} else {
+				}
+				else {
+
 					if ("link".equals(type)) {
 						String rel = webElement.getAttribute("rel");
+
 						if (rel == null) {
 							logger.log(Level.INFO, "rel == null, type = " + type);
-						} else {
+						}
+						else {
+
 							if ("stylesheet".equals(rel)) {
-//								logger.log(Level.INFO, "convertToHeadResources: url = " + url);
+//                              logger.log(Level.INFO, "convertToHeadResources: url = " + url);
 								resources.add(new HeadResource(type, url));
 							}
 						}
-					} else { // "script".equals(type)
-						 if (url.contains("jsf.js")) {
-							 logger.log(Level.INFO, "convertToHeadResources: type = " + type + " url = " + url);
-						 }
-						 resources.add(new HeadResource(type, url));
+					}
+					else { // "script".equals(type)
+
+						if (url.contains("jsf.js")) {
+							logger.log(Level.INFO, "convertToHeadResources: type = " + type + " url = " + url);
+						}
+
+						resources.add(new HeadResource(type, url));
 					}
 				}
 			}
@@ -117,52 +128,55 @@ public class FACES1635ResourcesTest extends TesterBase {
 		browser.navigate().to(url);
 		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle());
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
-		
+
 		getPortletDisplayName();
+
 		if (isThere(browser, displayNameXpath)) {
-		
+
 			logger.log(Level.INFO, "displayName.getText() = " + displayName.getText());
 			waitForElement(browser, displayNameXpath);
-	
+
 			// check that scriptsInHead only occur once
 			List<WebElement> scriptsInHead = browser.findElements(By.xpath("//head/script"));
 			ArrayList<HeadResource> scriptResourcesInHead = convertToHeadResources(scriptsInHead, "src");
 			logger.log(Level.INFO, "scriptResourcesInHead.size() = " + scriptResourcesInHead.size());
 			checkResourcesForDuplicates(scriptResourcesInHead, "scriptResourcesInHead");
-	
+
 			// check that scriptsInBody only occur once
 			List<WebElement> scriptsInBody = browser.findElements(By.xpath("//body/script"));
 			ArrayList<HeadResource> scriptResourcesInBody = convertToHeadResources(scriptsInBody, "src");
 			logger.log(Level.INFO, "scriptResourcesInBody.size() = " + scriptResourcesInBody.size());
 			checkResourcesForDuplicates(scriptResourcesInBody, "scriptResourcesInBody");
-	
+
 			// check that styleSheetsInHead only occur once
 			List<WebElement> styleSheetsInHead = browser.findElements(By.xpath("//head/link"));
 			ArrayList<HeadResource> styleSheetResourcesInHead = convertToHeadResources(styleSheetsInHead, "href");
 			logger.log(Level.INFO, "styleSheetResourcesInHead.size() = " + styleSheetResourcesInHead.size());
 			checkResourcesForDuplicates(styleSheetResourcesInHead, "styleSheetResourcesInHead");
-	
+
 			// check that styleSheetsInBody only occur once
 			List<WebElement> styleSheetsInBody = browser.findElements(By.xpath("//body/link"));
 			ArrayList<HeadResource> styleSheetResourcesInBody = convertToHeadResources(styleSheetsInBody, "href");
 			logger.log(Level.INFO, "styleSheetResourcesInBody.size() = " + styleSheetResourcesInBody.size());
 			checkResourcesForDuplicates(styleSheetResourcesInBody, "styleSheetResourcesInBody");
-	
+
 			// check that scripts only occur once
 			List<WebElement> scripts = browser.findElements(By.xpath("//script"));
 			ArrayList<HeadResource> scriptResources = convertToHeadResources(scripts, "src");
 			logger.log(Level.INFO, "scriptResources.size() = " + scriptResources.size());
 			checkResourcesForDuplicates(scriptResources, "scriptResources");
-	
+
 			// check that styleSheets only occur once
 			List<WebElement> styleSheets = browser.findElements(By.xpath("//link"));
 			ArrayList<HeadResource> styleSheetResources = convertToHeadResources(styleSheets, "href");
 			logger.log(Level.INFO, "styleSheetResources.size() = " + styleSheetResources.size());
 			checkResourcesForDuplicates(styleSheetResources, "styleSheetResources");
-		
-		} else {
+
+		}
+		else {
 			logger.log(Level.SEVERE, "ERROR: Perhaps the portlets for this tester were not deployed ...");
-			assertTrue("No portlets found on the page.  Perhaps the portlets for this tester were not deployed.", false);
+			assertTrue("No portlets found on the page.  Perhaps the portlets for this tester were not deployed.",
+				false);
 		}
 	}
 }
