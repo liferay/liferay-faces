@@ -16,16 +16,10 @@ package com.liferay.faces.bridge.application;
 import javax.faces.application.Application;
 import javax.faces.application.ApplicationWrapper;
 import javax.faces.application.ResourceHandler;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIViewRoot;
-import javax.faces.context.FacesContext;
 import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
-import javax.portlet.faces.BridgeUtil;
 
 import com.liferay.faces.bridge.component.UIViewRootBridgeImpl;
-import com.liferay.faces.bridge.component.icefaces.DataPaginator;
-import com.liferay.faces.bridge.component.icefaces.DataPaginatorBridgeImpl;
 import com.liferay.faces.util.config.ConfiguredSystemEventListener;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -46,52 +40,6 @@ public abstract class ApplicationCompatImpl extends ApplicationWrapper {
 
 	public ApplicationCompatImpl(Application application) {
 		this.wrappedApplication = application;
-	}
-
-	@Override
-	public UIComponent createComponent(FacesContext facesContext, String componentType, String rendererType) {
-
-		UIComponent uiComponent = null;
-
-		if (BridgeUtil.isPortletRequest()) {
-
-			if (componentType.equals(UIViewRoot.COMPONENT_TYPE)) {
-
-				// FACES-1967: Apache MyFaces calls this 3-arg overload of createComponent rather than the 1-arg version
-				// when creating a UIViewRoot.
-				uiComponent = createComponent(componentType);
-			}
-			else if (componentType.equals(DataPaginator.COMPONENT_TYPE)) {
-
-				uiComponent = createDataPaginator(facesContext, componentType, rendererType);
-			}
-			else {
-				uiComponent = super.createComponent(facesContext, componentType, rendererType);
-			}
-		}
-		else {
-			uiComponent = super.createComponent(facesContext, componentType, rendererType);
-		}
-
-		return uiComponent;
-	}
-
-	// Workaround for: http://jira.icesoft.org/browse/ICE-6398
-	protected UIComponent createDataPaginator(FacesContext facesContext, String componentType, String rendererType) {
-
-		UIComponent uiComponent = super.createComponent(facesContext, componentType, rendererType);
-
-		DataPaginator dataPaginator = new DataPaginatorBridgeImpl(uiComponent);
-
-		try {
-			dataPaginator.setUIData(dataPaginator.findUIData(facesContext));
-			uiComponent = dataPaginator;
-		}
-		catch (Exception e) {
-			logger.error(e);
-		}
-
-		return uiComponent;
 	}
 
 	protected void subscribeToJSF2SystemEvent(ConfiguredSystemEventListener configuredSystemEventListener) {
