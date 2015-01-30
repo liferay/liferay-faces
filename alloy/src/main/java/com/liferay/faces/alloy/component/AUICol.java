@@ -19,9 +19,11 @@ import com.liferay.faces.util.lang.StringPool;
 
 
 /**
- * @author  Neil Griffin
- * @author  Kyle Stiemann
+ * @author      Neil Griffin
+ * @author      Kyle Stiemann
+ * @deprecated  Replaced by {@link com.liferay.faces.alloy.component.column.Column}.
  */
+@Deprecated
 public class AUICol extends AUIPanel implements NamingContainer {
 
 	// Public Constants

@@ -25,8 +25,10 @@ import com.liferay.faces.util.lang.StringPool;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  No replacement available.
  */
+@Deprecated
 public class TextBoxListItemRenderer extends Renderer {
 
 	// Private Constants

@@ -24,7 +24,9 @@ import com.liferay.portal.util.PortalUtil;
 
 /**
  * @author  Neil Griffin
+ * @deprecated No replacement available.
  */
+@Deprecated
 public class FaceletUtil {
 
 	public static String getEditorValue(String editorImpl) {

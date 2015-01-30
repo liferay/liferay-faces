@@ -48,6 +48,7 @@ public abstract class ApplicationCompatImpl extends ApplicationWrapper {
 		this.wrappedApplication = application;
 	}
 
+	@Deprecated
 	@Override
 	public UIComponent createComponent(FacesContext facesContext, String componentType, String rendererType) {
 

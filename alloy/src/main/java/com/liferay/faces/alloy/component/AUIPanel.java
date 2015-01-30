@@ -17,8 +17,10 @@ import javax.faces.component.UIPanel;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Replaced by {@link com.liferay.faces.alloy.component.panelgroup.PanelGroup}.
  */
+@Deprecated
 public abstract class AUIPanel extends UIPanel {
 
 }

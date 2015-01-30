@@ -25,8 +25,10 @@ import com.liferay.faces.util.lang.StringPool;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Replaced by {@link com.liferay.faces.alloy.component.datalist.DataList}.
  */
+@Deprecated
 public class ListRenderer extends Renderer {
 
 	@Override

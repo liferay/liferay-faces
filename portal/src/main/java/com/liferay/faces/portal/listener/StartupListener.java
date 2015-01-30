@@ -31,7 +31,9 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * This listener provides the ability to use the liferay-ui:input-editor in a JSF portlet.
  *
  * @author  Neil Griffin
+ * @deprecated No replacement available.
  */
+@Deprecated
 public class StartupListener implements ServletContextListener {
 
 	// Logger

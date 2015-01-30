@@ -21,9 +21,11 @@ import com.liferay.faces.util.lang.StringPool;
 
 
 /**
- * @author  Neil Griffin
- * @author  Kyle Stiemann
+ * @author      Neil Griffin
+ * @author      Kyle Stiemann
+ * @deprecated  No replacement available.
  */
+@Deprecated
 public class AUIColTag extends AUIComponentELTag {
 
 	// Private Data Members

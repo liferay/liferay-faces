@@ -26,8 +26,11 @@ import com.liferay.faces.util.lang.StringPool;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  Replaced by {@link com.liferay.faces.alloy.component.row.RowRenderer} and {@link
+ *              com.liferay.faces.alloy.component.column.ColumnRenderer}.
  */
+@Deprecated
 public class ColumnRenderer extends Renderer {
 
 	@Override

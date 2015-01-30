@@ -20,7 +20,7 @@ import com.liferay.faces.alloy.taghandler.ImportConstants;
 
 /**
  * @author      Neil Griffin
- * @deprecated  Replaced by {@link ImportConstants}.
+ * @deprecated  Replaced by {@link com.liferay.faces.alloy.taghandler.LoadConstants}.
  */
 @Deprecated
 public class ImportConstantsTagHandler extends ImportConstants {

@@ -17,8 +17,10 @@ import javax.faces.component.NamingContainer;
 
 
 /**
- * @author  Neil Griffin
+ * @author      Neil Griffin
+ * @deprecated  No replacement available.
  */
+@Deprecated
 public class AUITextBoxList extends AUIPanel implements NamingContainer {
 
 	@Override
