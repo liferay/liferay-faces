@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:aui-cc="http://liferay.com/faces/aui-cc" xmlns:liferay-ui="http://liferay.com/faces/ui"
 	xmlns:liferay-util="http://liferay.com/faces/util" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:portlet="http://java.sun.com/portlet_2_0">
-	<aui:form id="f">
+	xmlns:portlet="http://java.sun.com/portlet_2_0" xmlns:portal="http://liferay.com/faces/portal">
+	<alloy:form id="f">
 		<h1 class="header-title">#{i18n['new-user-registration']}</h1>
 		<aui-cc:messages globalOnly="true" layout="table" />
-		<aui:row>
-			<aui:col width="20">
-				<aui:fieldset label="#{i18n['identification']}">
+		<alloy:row>
+			<alloy:column width="20">
+				<alloy:fieldset label="#{i18n['identification']}">
 					<aui-cc:input inlineMessage="true" label="#{i18n['first-name']}"
 						value="#{registrantModelBean.registrant.firstName}" required="true" />
 					<aui-cc:input inlineMessage="true" label="#{i18n['middle-name']}"
@@ -21,20 +21,20 @@
 
 					<aui-cc:input inlineMessage="true" label="#{i18n['screen-name']}"
 						value="#{registrantModelBean.registrant.screenName}" required="true" />
-				</aui:fieldset>
-			</aui:col>
-			<aui:col width="20">
-				<aui:fieldset label="#{i18n['additional-info']}">
+				</alloy:fieldset>
+			</alloy:column>
+			<alloy:column width="20">
+				<alloy:fieldset label="#{i18n['additional-info']}">
 					<aui-cc:input inlineMessage="true" label="#{i18n['company-name']}"
 						value="#{registrantModelBean.registrant.companyName}" required="true" />
 					<aui-cc:input inlineMessage="true" label="#{i18n['mobile-phone']}"
 						value="#{registrantModelBean.registrant.mobilePhone}" required="true" />
 					<aui-cc:input inlineMessage="true" label="#{i18n['favorite-color']}"
 						value="#{registrantModelBean.registrant.favoriteColor}" required="false" />
-				</aui:fieldset>
-			</aui:col>
-			<aui:col width="20">
-				<aui:fieldset label="#{i18n['security']}">
+				</alloy:fieldset>
+			</alloy:column>
+			<alloy:column width="20">
+				<alloy:fieldset label="#{i18n['security']}">
 					<aui-cc:input inlineMessage="true" label="#{i18n['password']}" type="password"
 						value="#{registrantModelBean.registrant.password1}" required="true" />
 					<aui-cc:input inlineMessage="true" label="#{i18n['confirm-password']}" type="password"
@@ -44,13 +44,13 @@
 						value="#{registrantModelBean.registrant.captchaText}" required="true">
 						<liferay-util:validateCaptcha for="inputText" />
 					</aui-cc:input>
-				</aui:fieldset>
-			</aui:col>
-		</aui:row>
-		<aui:button-row>
+				</alloy:fieldset>
+			</alloy:column>
+		</alloy:row>
+		<portal:buttonRow>
 			<h:commandButton actionListener="#{registrantBackingBean.submit}"
 				styleClass="aui-button-input aui-button-input-submit" value="#{i18n['submit']}" />
-		</aui:button-row>
-	</aui:form>
+		</portal:buttonRow>
+	</alloy:form>
 
 </ui:composition>

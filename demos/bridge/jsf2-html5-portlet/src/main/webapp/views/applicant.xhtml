@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:bridge="http://liferay.com/faces/bridge" xmlns:example-cc="http://xmlns.jcp.org/jsf/composite/example-cc"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-	<aui:layout id="l1">
+	<alloy:layout id="l1">
 		<example-cc:html5 label="#{i18n['job-application']}" />
 		<example-cc:sponsorButton />
 		<example-cc:divider />
-		<aui:column id="c1">
+		<alloy:column id="c1">
 			<form jsf:id="f1">
 				<h:messages globalOnly="true" layout="table" />
 				<fieldset jsf:id="fs1">
-					<aui:column id="c1a">
-						<aui:field id="firstNameField" label="#{i18n['first-name']}">
+					<alloy:column id="c1a">
+						<alloy:field id="firstNameField" label="#{i18n['first-name']}">
 							<input jsf:id="firstName" jsf:required="true" jsf:value="#{applicantModelBean.firstName}" type="text">
 							<f:ajax render="firstNameField" />
 							</input>
 							<h:message for="firstName" />
-						</aui:field>
-						<aui:field id="lastNameField" label="#{i18n['last-name']}">
+						</alloy:field>
+						<alloy:field id="lastNameField" label="#{i18n['last-name']}">
 							<input jsf:id="lastName" jsf:required="true" jsf:value="#{applicantModelBean.lastName}" type="text">
 							<f:ajax render="lastNameField" />
 							</input>
 							<h:message for="lastName" />
-						</aui:field>
-						<aui:field id="emailAddressField" label="#{i18n['email-address']}">
+						</alloy:field>
+						<alloy:field id="emailAddressField" label="#{i18n['email-address']}">
 							<input jsf:id="emailAddress" jsf:required="true" jsf:validatorMessage="#{i18n['invalid-email-address']}"
 								jsf:value="#{applicantModelBean.emailAddress}" type="text">
 							<f:validateRegex pattern=".+[@].+[.].+" />
 							<f:ajax render="emailAddressField" />
 							</input>
 							<h:message for="emailAddress" />
-						</aui:field>
-						<aui:field id="phoneNumberField" label="#{i18n['phone-number']}">
+						</alloy:field>
+						<alloy:field id="phoneNumberField" label="#{i18n['phone-number']}">
 							<input jsf:id="phoneNumber" jsf:required="true" jsf:value="#{applicantModelBean.phoneNumber}" type="text">
 							<f:ajax render="phoneNumberField" />
 							</input>
 							<h:message for="phoneNumber" />
-						</aui:field>
-					</aui:column>
-					<aui:column id="c1b">
-						<aui:field id="dateOfBirthField" label="#{i18n['birthday']}">
+						</alloy:field>
+					</alloy:column>
+					<alloy:column id="c1b">
+						<alloy:field id="dateOfBirthField" label="#{i18n['birthday']}">
 							<input jsf:id="dateOfBirth" jsf:required="true" jsf:value="#{applicantModelBean.dateOfBirth}" type="date">
 							<f:convertDateTime pattern="yyyy-MM-dd" />
 							<f:ajax render="dateOfBirthField" />
 							</input>
 							<h:message for="dateOfBirth" />
-						</aui:field>
-						<aui:field id="cityField" label="#{i18n['city']}">
+						</alloy:field>
+						<alloy:field id="cityField" label="#{i18n['city']}">
 							<input jsf:id="city" jsf:required="true" jsf:value="#{applicantModelBean.city}" type="text">
 							<f:ajax render="cityField" />
 							</input>
 							<h:message id="cityMessage" for="city" />
-						</aui:field>
-						<aui:field id="provinceIdField" label="#{i18n['state-province']}">
+						</alloy:field>
+						<alloy:field id="provinceIdField" label="#{i18n['state-province']}">
 							<select jsf:id="provinceId" jsf:required="true" jsf:value="#{applicantModelBean.provinceId}" size="1">
 								<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
 								<f:selectItems itemValue="#{province.provinceId}" itemLabel="#{province.provinceName}"
@@ -63,20 +63,20 @@
 								<f:ajax render="provinceIdField" />
 							</select>
 							<h:message id="provinceIdMessage" for="provinceId" />
-						</aui:field>
-						<aui:field id="postalCodeField" label="#{i18n['zip-postal']}">
+						</alloy:field>
+						<alloy:field id="postalCodeField" label="#{i18n['zip-postal']}">
 							<input jsf:id="postalCode" jsf:required="true" jsf:value="#{applicantModelBean.postalCode}"
 								jsf:valueChangeListener="#{applicantBackingBean.postalCodeListener}" type="text">
 							<f:ajax render="cityField provinceIdField postalCodeField" />
 							</input>
 							<img src="#{resource['example:icon-help.png']}" title="#{i18n['postal-code-hint']}" />
 							<h:message id="postalCodeMessage" for="postalCode" />
-						</aui:field>
-					</aui:column>
+						</alloy:field>
+					</alloy:column>
 				</fieldset>
 				<fieldset>
-					<aui:column>
-						<aui:field id="commentsField" label="#{i18n['comments']}">
+					<alloy:column>
+						<alloy:field id="commentsField" label="#{i18n['comments']}">
 							<h:panelGroup id="showHide" layout="block">
 								<f:ajax render="commentsField">
 									<a jsf:actionListener="#{applicantViewBean.toggleComments}"
@@ -89,8 +89,8 @@
 								jsf:value="#{applicantModelBean.comments}">
 								<f:ajax />
 							</textarea>
-						</aui:field>
-					</aui:column>
+						</alloy:field>
+					</alloy:column>
 				</fieldset>
 				<hr />
 				<input jsf:action="#{applicantBackingBean.submit}" jsf:value="#{i18n['submit']}" type="submit">
@@ -101,9 +101,9 @@
 					jsf:action="/views/portletEditMode.xhtml?javax.portlet.faces.PortletMode=edit&amp;javax.portlet.faces.WindowState=maximized"
 					jsf:immediate="true" jsf:value="#{i18n['edit-preferences']}" type="submit" />
 			</form>
-		</aui:column>
-		<aui:column id="c2">
-			<aui:column id="c2a" styleClass="uploaded-files">
+		</alloy:column>
+		<alloy:column id="c2">
+			<alloy:column id="c2a" styleClass="uploaded-files">
 				<form jsf:id="f2">
 					<h3>#{i18n['attachments']}</h3>
 					<h:dataTable headerClass="portlet-section-header results-header"
@@ -138,8 +138,8 @@
 					</h:panelGrid>
 					<input jsf:value="#{i18n['submit']}" type="submit" />
 				</form>
-			</aui:column>
-		</aui:column>
-	</aui:layout>
+			</alloy:column>
+		</alloy:column>
+	</alloy:layout>
 
 </ui:composition>

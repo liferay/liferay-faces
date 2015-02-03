@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	<h:head />
 	<h:body>
 		<h:form>
-			<aui:layout id="l1">
-				<aui:column>
-					<aui:fieldset>
-						<aui:field id="titleField" label="#{i18n['title']}">
+			<alloy:layout id="l1">
+				<alloy:column>
+					<alloy:fieldset>
+						<alloy:field id="titleField" label="#{i18n['title']}">
 							<h:selectOneMenu id="titleId" value="#{bookingFlowModelBean.customer.titleId}">
 								<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
 								<f:selectItems itemValue="#{title.titleId}" itemLabel="#{title.abbreviation}" value="#{titleService.titles}"
@@ -16,50 +16,50 @@
 								<f:ajax render="titleField" />
 							</h:selectOneMenu>
 							<h:message for="titleId" />
-						</aui:field>
-						<aui:field id="firstNameField" label="#{i18n['first-name']}" required="true">
+						</alloy:field>
+						<alloy:field id="firstNameField" label="#{i18n['first-name']}" required="true">
 							<h:inputText id="firstName" value="#{bookingFlowModelBean.customer.firstName}">
 								<ui:remove><f:ajax render="firstNameField" /></ui:remove>
 							</h:inputText>
 							<h:message for="firstName" />
-						</aui:field>
-						<aui:field id="lastNameField" label="#{i18n['last-name']}" required="true">
+						</alloy:field>
+						<alloy:field id="lastNameField" label="#{i18n['last-name']}" required="true">
 							<h:inputText id="lastName" value="#{bookingFlowModelBean.customer.lastName}">
 								<ui:remove><f:ajax render="lastNameField" /></ui:remove>
 							</h:inputText>
 							<h:message for="lastName" />
-						</aui:field>
-						<aui:field id="emailAddressField" label="#{i18n['email-address']}" required="true">
+						</alloy:field>
+						<alloy:field id="emailAddressField" label="#{i18n['email-address']}" required="true">
 							<h:inputText id="emailAddress" validatorMessage="#{i18n['invalid-email-address']}"
 								value="#{bookingFlowModelBean.customer.emailAddress}">
 								<f:validateRegex pattern=".+[@].+[.].+" />
 								<ui:remove><f:ajax render="emailAddressField" /></ui:remove>
 							</h:inputText>
 							<h:message for="emailAddress" />
-						</aui:field>
-						<aui:field id="phoneNumberField" label="#{i18n['phone-number']}" required="true">
+						</alloy:field>
+						<alloy:field id="phoneNumberField" label="#{i18n['phone-number']}" required="true">
 							<h:inputText id="phoneNumber" value="#{bookingFlowModelBean.customer.phoneNumber}">
 								<f:ajax render="phoneNumberField" />
 							</h:inputText>
 							<h:message for="phoneNumber" />
-						</aui:field>
-					</aui:fieldset>
-				</aui:column>
-				<aui:column>
-					<aui:fieldset>
-						<aui:field id="addressLine1Field" label="#{i18n['address-line-1']}" required="true">
+						</alloy:field>
+					</alloy:fieldset>
+				</alloy:column>
+				<alloy:column>
+					<alloy:fieldset>
+						<alloy:field id="addressLine1Field" label="#{i18n['address-line-1']}" required="true">
 							<h:inputText id="addressLine1" value="#{bookingFlowModelBean.customer.addressLine1}">
 								<f:ajax render="addressLine1Field" />
 							</h:inputText>
 							<h:message for="addressLine1" />
-						</aui:field>
-						<aui:field id="addressLine2Field" label="#{i18n['address-line-2']}">
+						</alloy:field>
+						<alloy:field id="addressLine2Field" label="#{i18n['address-line-2']}">
 							<h:inputText id="addressLine2" value="#{bookingFlowModelBean.customer.addressLine2}">
 								<f:ajax render="addressLine2Field" />
 							</h:inputText>
 							<h:message for="addressLine2" />
-						</aui:field>
-						<aui:field id="countryField" label="#{i18n['country']}">
+						</alloy:field>
+						<alloy:field id="countryField" label="#{i18n['country']}">
 							<h:selectOneMenu id="country" value="#{bookingFlowModelBean.customer.countryId}">
 								<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
 								<f:selectItems itemValue="#{country.countryId}" itemLabel="#{country.countryName}"
@@ -67,14 +67,14 @@
 								<f:ajax render="countryField provinceIdField" />
 							</h:selectOneMenu>
 							<h:message for="country" />
-						</aui:field>
-						<aui:field id="cityField" label="#{i18n['city']}">
+						</alloy:field>
+						<alloy:field id="cityField" label="#{i18n['city']}">
 							<h:inputText id="city" value="#{bookingFlowModelBean.customer.city}">
 								<f:ajax render="cityField" />
 							</h:inputText>
 							<h:message for="city" />
-						</aui:field>
-						<aui:field id="provinceIdField" label="#{i18n['province']}">
+						</alloy:field>
+						<alloy:field id="provinceIdField" label="#{i18n['province']}">
 							<h:selectOneMenu id="provinceId" value="#{bookingFlowModelBean.customer.provinceId}">
 								<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
 								<f:selectItems itemValue="#{province.provinceId}" itemLabel="#{province.provinceName}"
@@ -82,12 +82,12 @@
 								<f:ajax render="provinceIdField" />
 							</h:selectOneMenu>
 							<h:message for="provinceIdField" />
-						</aui:field>
-					</aui:fieldset>
-				</aui:column>
-				<aui:column>
-					<aui:fieldset>
-						<aui:field id="paymentTypeIdField" label="#{i18n['payment-method']}">
+						</alloy:field>
+					</alloy:fieldset>
+				</alloy:column>
+				<alloy:column>
+					<alloy:fieldset>
+						<alloy:field id="paymentTypeIdField" label="#{i18n['payment-method']}">
 							<h:selectOneMenu id="paymentTypeId" value="#{bookingFlowModelBean.customer.paymentTypeId}">
 								<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
 								<f:selectItems itemValue="#{paymentType.paymentTypeId}" itemLabel="#{i18n[paymentType.name]}"
@@ -95,29 +95,29 @@
 								<f:ajax render="paymentTypeIdField" />
 							</h:selectOneMenu>
 							<h:message for="paymentTypeIdField" />
-						</aui:field>
-						<aui:field id="accountNumberField" label="#{i18n['account-number']}">
+						</alloy:field>
+						<alloy:field id="accountNumberField" label="#{i18n['account-number']}">
 							<h:inputText id="accountNumber" value="#{bookingFlowModelBean.customer.accountNumber}">
 								<f:ajax render="accountNumber" />
 							</h:inputText>
 							<h:message for="accountNumberField" />
-						</aui:field>
-						<aui:field id="expirationMonthField" label="#{i18n['expiration-month']}" required="true">
+						</alloy:field>
+						<alloy:field id="expirationMonthField" label="#{i18n['expiration-month']}" required="true">
 							<input jsf:id="expirationMonth" jsf:value="#{bookingFlowModelBean.customer.expirationMonth}" type="month">
 								<f:convertDateTime pattern="yyyy-MM" />
 								<f:ajax render="expirationMonthField" />
 							</input>
 							<h:message for="expirationMonth" />
-						</aui:field>
-						<aui:field id="cvvField" label="#{i18n['cvv']}">
+						</alloy:field>
+						<alloy:field id="cvvField" label="#{i18n['cvv']}">
 							<h:inputText id="cvv" value="#{bookingFlowModelBean.customer.cvv}">
 								<f:ajax render="cvv" />
 							</h:inputText>
 							<h:message for="cvvField" />
-						</aui:field>
-					</aui:fieldset>
-				</aui:column>
-			</aui:layout>
+						</alloy:field>
+					</alloy:fieldset>
+				</alloy:column>
+			</alloy:layout>
 			<hr />
 			<h:commandButton action="receipt" value="#{i18n['purchase']}">
 				<f:ajax execute="@form" />

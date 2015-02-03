@@ -1,71 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:liferay-ui="http://liferay.com/faces/ui" xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:portal="http://liferay.com/faces/portal" xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 	<h:form id="f1" styleClass="aui-form">
 		<h:messages globalOnly="true" layout="table" />
 		<h:panelGroup layout="block" rendered="#{usersViewBean.formRendered}">
-			<aui:row>
-				<aui:col first="true" width="15">
-					<aui:fieldset label="#{i18n['personal']}">
-						<aui:field id="firstNameField" label="#{i18n['first-name']}">
+			<alloy:row>
+				<alloy:column first="true" width="15">
+					<alloy:fieldset label="#{i18n['personal']}">
+						<alloy:field id="firstNameField" label="#{i18n['first-name']}">
 							<p:inputText id="firstName" required="true" value="#{usersModelBean.selectedUser.firstName}" />
 							<h:message for="firstName" />
-						</aui:field>
-						<aui:field id="middleNameField" label="#{i18n['middle-name']}">
+						</alloy:field>
+						<alloy:field id="middleNameField" label="#{i18n['middle-name']}">
 							<p:inputText id="middleName" value="#{usersModelBean.selectedUser.middleName}" />
-						</aui:field>
-						<aui:field id="lastNameField" label="#{i18n['last-name']}">
+						</alloy:field>
+						<alloy:field id="lastNameField" label="#{i18n['last-name']}">
 							<p:inputText id="lastName" required="true" value="#{usersModelBean.selectedUser.lastName}" />
 							<h:message for="lastName" />
-						</aui:field>
-						<aui:field id="emailAddressField" label="#{i18n['email-address']}">
+						</alloy:field>
+						<alloy:field id="emailAddressField" label="#{i18n['email-address']}">
 							<p:inputText id="emailAddress" inlineMessage="true" label="#{i18n['email-address']}" required="true"
 								validatorMessage="#{i18n['invalid-email-address']}" value="#{usersModelBean.selectedUser.emailAddress}">
 								<f:validateRegex pattern=".+[@].+[.].+" />
 							</p:inputText>
 							<h:message for="emailAddress" />
-						</aui:field>
-						<aui:field id="jobTitleField" label="#{i18n['job-title']}">
+						</alloy:field>
+						<alloy:field id="jobTitleField" label="#{i18n['job-title']}">
 							<p:inputText id="jobTitle" inlineMessage="true" label="#{i18n['job-title']}" required="false"
 								value="#{usersModelBean.selectedUser.jobTitle}" />
 							<h:message for="jobTitle" />
-						</aui:field>
-					</aui:fieldset>
-				</aui:col>
-				<aui:col width="15">
-					<aui:fieldset label="#{i18n['administration']}">
+						</alloy:field>
+					</alloy:fieldset>
+				</alloy:column>
+				<alloy:column width="15">
+					<alloy:fieldset label="#{i18n['administration']}">
 						<h:selectOneMenu id="status" label="#{i18n['status']}" required="true"
 							value="#{usersModelBean.selectedUser.status}">
 							<f:selectItems value="#{usersModelBean.statusSelectItems}" />
 							<f:converter converterId="javax.faces.Integer" />
 						</h:selectOneMenu>
 						<h:message for="status" />
-					</aui:fieldset>
-				</aui:col>
-				<aui:col width="20">
-					<aui:fieldset label="#{i18n['portrait']}">
-						<aui:field>
+					</alloy:fieldset>
+				</alloy:column>
+				<alloy:column width="20">
+					<alloy:fieldset label="#{i18n['portrait']}">
+						<alloy:field>
 							<h:graphicImage id="portrait" value="#{usersModelBean.selectedUserPortraitURL}" style="width:100px;" />
 							<p:fileUpload id="fileEntryComp" absolutePath="#{usersBackingBean.fileUploadAbsolutePath}" auto="true"
 								update="portrait" fileUploadListener="#{usersBackingBean.handleFileUpload}" />
-						</aui:field>
-					</aui:fieldset>
-				</aui:col>
-			</aui:row>
-			<aui:button-row>
+						</alloy:field>
+					</alloy:fieldset>
+				</alloy:column>
+			</alloy:row>
+			<portal:buttonRow>
 				<p:commandButton id="pushButtonSubmit" actionListener="#{usersBackingBean.save}" value="#{i18n['submit']}"
 					update=":f1" />
 				<p:commandButton id="pushButtonCancel" actionListener="#{usersBackingBean.cancel}" immediate="true" update=":f1"
 					value="#{i18n['cancel']}" />
-			</aui:button-row>
+			</portal:buttonRow>
 			<hr />
 		</h:panelGroup>
 		<h:panelGroup layout="block" rendered="#{!usersViewBean.formRendered}">
-			<aui:row>
-				<aui:col styleClass="aui-w100 pfusers">
+			<alloy:row>
+				<alloy:column styleClass="aui-w100 pfusers">
 					<div class="separator" />
 					<p:dataTable id="users" lazy="true" paginator="true" paginatorPosition="top" rowKey="#{user.userId}"
 						rows="#{usersModelBean.dataModel.pageSize}" selectionMode="single" selection="#{usersModelBean.selectedUser}"
@@ -97,8 +97,8 @@
 						</p:column>
 					</p:dataTable>
 					<liferay-ui:info message="there-are-no-results" rendered="#{usersModelBean.dataModel.rowCount == 0}" />
-				</aui:col>
-			</aui:row>
+				</alloy:column>
+			</alloy:row>
 		</h:panelGroup>
 	</h:form>
 
