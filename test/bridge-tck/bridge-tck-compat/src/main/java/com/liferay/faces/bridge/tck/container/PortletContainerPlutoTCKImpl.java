@@ -17,7 +17,7 @@ import javax.faces.context.ExternalContext;
 import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.container.pluto.PortletContainerPlutoImpl;
+import com.liferay.faces.bridge.container.pluto.internal.PortletContainerPlutoImpl;
 
 
 /**
