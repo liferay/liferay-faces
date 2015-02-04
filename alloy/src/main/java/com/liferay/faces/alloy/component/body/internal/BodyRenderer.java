@@ -52,7 +52,7 @@ public class BodyRenderer extends BodyRendererBase {
 		String delegateBodyRendererFQCN = "com.sun.faces.renderkit.html_basic.BodyRenderer";
 
 		if (LIFERAY_FACES_BRIDGE_DETECTED) {
-			delegateBodyRendererFQCN = "com.liferay.faces.bridge.renderkit.html_basic.BodyRendererBridgeImpl";
+			delegateBodyRendererFQCN = "com.liferay.faces.bridge.renderkit.html_basic.internal.BodyRendererBridgeImpl";
 		}
 		else {
 			Product jsf = ProductMap.getInstance().get(ProductConstants.JSF);

@@ -16,7 +16,7 @@ package com.liferay.portal.util;
 import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.faces.bridge.filter.HttpServletRequestAdapter;
+import com.liferay.cdi.portlet.bridge.filter.HttpServletRequestAdapter;
 
 
 /**
