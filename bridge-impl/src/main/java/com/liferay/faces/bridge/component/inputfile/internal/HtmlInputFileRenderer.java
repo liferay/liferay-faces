@@ -24,7 +24,7 @@ import javax.servlet.http.Part;
 
 import com.liferay.faces.bridge.component.inputfile.InputFile;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.context.map.ContextMapFactory;
+import com.liferay.faces.bridge.context.map.internal.ContextMapFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
