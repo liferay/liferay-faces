@@ -2,11 +2,11 @@
 <faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
 	<application>
-		<el-resolver>com.liferay.faces.bridge.el.ELResolverImpl</el-resolver>
+		<el-resolver>com.liferay.faces.bridge.el.internal.ELResolverImpl</el-resolver>
 	</application>
 	<managed-bean>
 		<managed-bean-name>bridgeContext</managed-bean-name>
-		<managed-bean-class>com.liferay.faces.bridge.context.BridgeContextImpl</managed-bean-class>
+		<managed-bean-class>com.liferay.faces.bridge.context.internal.BridgeContextImpl</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 </faces-config>
