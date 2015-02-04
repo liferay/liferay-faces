@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -11,13 +12,13 @@
 	<example-cc:clipboard label="#{i18n['job-application']}" />
 	<example-cc:sponsorButton />
 	<example-cc:divider />
-	<aui:row>
-		<aui:col id="c1" width="66">
+	<alloy:row>
+		<alloy:column id="c1" width="66">
 			<h:form id="f1">
 				<h:messages globalOnly="true" layout="table" />
 				<aui:fieldset id="fs1">
-					<aui:row>
-						<aui:col id="c1a" width="50">
+					<alloy:row>
+						<alloy:column id="c1a" width="50">
 							<aui:field id="firstNameField" label="#{i18n['first-name']}">
 								<h:inputText id="firstName" required="true"
 									value="#{applicantModelBean.firstName}" />
@@ -40,8 +41,8 @@
 									value="#{applicantModelBean.phoneNumber}" />
 								<h:message for="phoneNumber" />
 							</aui:field>
-						</aui:col>
-						<aui:col id="c1b" width="50">
+						</alloy:column>
+						<alloy:column id="c1b" width="50">
 							<aui:field id="dateOfBirthField" label="#{i18n['birthday']}">
 								<h:inputText id="dateOfBirth" required="true"
 									value="#{applicantModelBean.dateOfBirth}">
@@ -75,12 +76,12 @@
 									title="#{i18n['postal-code-hint']}" />
 								<h:message id="postalCodeMessage" for="postalCode" />
 							</aui:field>
-						</aui:col>
-					</aui:row>
+						</alloy:column>
+					</alloy:row>
 				</aui:fieldset>
 				<aui:fieldset>
-					<aui:row>
-						<aui:col>
+					<alloy:row>
+						<alloy:column>
 							<aui:field id="commentsField" label="#{i18n['comments']}">
 								<h:panelGroup id="showHide" layout="block">
 									<h:commandLink
@@ -98,8 +99,8 @@
 									rendered="#{applicantViewBean.commentsRendered}"
 									value="#{applicantModelBean.comments}" />
 							</aui:field>
-						</aui:col>
-					</aui:row>
+						</alloy:column>
+					</alloy:row>
 				</aui:fieldset>
 				<hr />
 				<h:commandButton action="#{applicantBackingBean.submit}"
@@ -108,10 +109,10 @@
 				<h:commandButton action="edit-preferences" immediate="true"
 					value="#{i18n['edit-preferences']}" />
 			</h:form>
-		</aui:col>
-		<aui:col id="c2" width="33">
-			<aui:row>
-				<aui:col id="c2a" styleClass="uploaded-files">
+		</alloy:column>
+		<alloy:column id="c2" width="33">
+			<alloy:row>
+				<alloy:column id="c2a" styleClass="uploaded-files">
 					<h:form id="f2">
 						<h3>#{i18n['attachments']}</h3>
 						<h:dataTable headerClass="portlet-section-header results-header"
@@ -147,9 +148,9 @@
 						</h:panelGrid>
 						<h:commandButton value="#{i18n['submit']}" />
 					</h:form>
-				</aui:col>
-			</aui:row>
-		</aui:col>
-	</aui:row>
+				</alloy:column>
+			</alloy:row>
+		</alloy:column>
+	</alloy:row>
 
 </ui:composition>
