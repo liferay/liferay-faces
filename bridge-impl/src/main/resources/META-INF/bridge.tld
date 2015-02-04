@@ -6,7 +6,7 @@
 	<short-name>bridge</short-name>
 	<uri>http://liferay.com/faces/bridge</uri>
 	<listener>
-		<listener-class>com.liferay.faces.bridge.servlet.BridgeSessionListener</listener-class>
+		<listener-class>com.liferay.faces.bridge.servlet.internal.BridgeSessionListener</listener-class>
 	</listener>
 	<tag>
 		<description>File Upload</description>
