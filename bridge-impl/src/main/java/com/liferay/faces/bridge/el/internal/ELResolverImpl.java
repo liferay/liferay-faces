@@ -30,7 +30,7 @@ import javax.portlet.faces.BridgeUtil;
 import javax.servlet.jsp.JspContext;
 
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.context.map.internal.ContextMapFactory;
+import com.liferay.faces.bridge.context.map.ContextMapFactory;
 import com.liferay.faces.bridge.filter.internal.HttpServletRequestAdapter;
 import com.liferay.faces.bridge.filter.internal.HttpServletResponseAdapter;
 import com.liferay.faces.bridge.preference.internal.MutablePreferenceMap;
