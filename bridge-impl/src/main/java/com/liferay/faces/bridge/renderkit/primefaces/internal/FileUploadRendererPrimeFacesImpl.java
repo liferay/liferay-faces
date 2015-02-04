@@ -28,7 +28,7 @@ import org.apache.commons.fileupload.FileItem;
 
 import com.liferay.faces.bridge.component.primefaces.internal.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.context.map.internal.ContextMapFactory;
+import com.liferay.faces.bridge.context.map.ContextMapFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
