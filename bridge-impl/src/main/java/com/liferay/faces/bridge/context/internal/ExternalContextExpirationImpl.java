@@ -26,7 +26,7 @@ import java.util.Set;
 import javax.faces.context.ExternalContext;
 import javax.servlet.ServletContext;
 
-import com.liferay.faces.bridge.context.map.internal.ContextMapFactory;
+import com.liferay.faces.bridge.context.map.ContextMapFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
