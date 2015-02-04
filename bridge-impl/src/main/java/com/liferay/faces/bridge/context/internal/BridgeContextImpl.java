@@ -51,7 +51,7 @@ import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.IncongruityContext;
-import com.liferay.faces.bridge.context.map.internal.ContextMapFactory;
+import com.liferay.faces.bridge.context.map.ContextMapFactory;
 import com.liferay.faces.bridge.context.map.internal.RequestHeaderMap;
 import com.liferay.faces.bridge.context.map.internal.RequestHeaderValuesMap;
 import com.liferay.faces.bridge.context.url.BridgeActionURL;
