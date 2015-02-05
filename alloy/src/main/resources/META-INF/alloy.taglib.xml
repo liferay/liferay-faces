@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vdldoc="http://vdldoc.org/vdldoc"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-   http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://raw.githubusercontent.com/omnifaces/vdldoc/master/src/main/resources/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:vdldoc="http://vdldoc.org/vdldoc"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd http://vdldoc.org/vdldoc https://raw.githubusercontent.com/omnifaces/vdldoc/master/src/main/resources/org/omnifaces/vdldoc/resources/vdldoc.taglib.xml.xsd"
 	version="2.0">
 	<description><![CDATA[The Liferay Faces Alloy facelet component tags with the <code>alloy:</code> tag name prefix.]]></description>
 	<namespace>http://liferay.com/faces/alloy</namespace>
@@ -100,7 +100,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -471,7 +471,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -494,7 +494,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -703,7 +703,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -804,7 +804,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Integer</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1033,7 +1033,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1262,7 +1262,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1303,7 +1303,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1362,7 +1362,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1607,7 +1607,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1762,7 +1762,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Integer</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1789,6 +1789,12 @@ java.lang.Object)</method-signature>
 			<name>label</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[When this flag is true, the label will be rendered before the rendered children.]]></description>
+			<name>labelFirst</name>
+			<required>false</required>
+			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Specifies whether the HTML element rendered by this component will be a <code>div</code> (default) or a <code>span</code>. If the value of this attribute is <code>block</code>, the rendered element will be a <code>div</code>.]]></description>
@@ -1875,7 +1881,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -1988,7 +1994,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -2149,7 +2155,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -2220,7 +2226,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -2273,7 +2279,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -2458,7 +2464,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -2484,7 +2490,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -2812,7 +2818,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Integer</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -3122,7 +3128,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -3208,7 +3214,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -3474,7 +3480,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -3638,7 +3644,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -3898,7 +3904,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -4152,7 +4158,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -4528,7 +4534,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Integer</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -4761,7 +4767,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -4808,7 +4814,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -4945,7 +4951,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -5094,7 +5100,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -5177,7 +5183,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -5350,7 +5356,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -5565,7 +5571,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -5678,7 +5684,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -5743,7 +5749,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -5802,7 +5808,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -5885,7 +5891,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Object</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -6010,7 +6016,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Integer</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -6129,7 +6135,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -6350,7 +6356,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -6457,7 +6463,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -6618,7 +6624,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Integer</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -6665,7 +6671,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -6901,7 +6907,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -7185,7 +7191,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -7451,7 +7457,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -7711,7 +7717,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -7971,7 +7977,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -8225,7 +8231,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -8491,7 +8497,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -8763,7 +8769,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -9035,7 +9041,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -9101,7 +9107,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -9192,7 +9198,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -9214,7 +9220,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Long</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m2</vdldoc:since>
+			<vdldoc:since>4.2.0-m3</vdldoc:since>
 		</tag-extension>
 	</tag>
 </facelet-taglib>
