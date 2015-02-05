@@ -892,6 +892,14 @@
 				<type>java.lang.String</type>
 			</attribute>
 			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When this flag is true, the label will be rendered before the rendered children.]]>
+				</description>
+				<name>labelFirst</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
 				<description>
 					<![CDATA[Specifies whether the HTML element rendered by this component will be a <code>div</code> (default) or a <code>span</code>. If the value of this attribute is <code>block</code>, the rendered element will be a <code>div</code>.]]>
 				</description>
