@@ -65,6 +65,9 @@ public class SelectBooleanCheckboxRenderer extends SelectBooleanCheckboxRenderer
 		UIComponent parent = uiComponent.getParent();
 
 		if (parent instanceof Field) {
+
+			// Force the JSF runtime to output the "id" attribute so that the FieldRenderer can encode a label
+			// element with a "for" attribute that associates the label with this checkbox.
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
 			IdDelegationResponseWriter idDelegationResponseWriter = new IdDelegationResponseWriter(responseWriter,
 					"input", uiComponent.getClientId(facesContext));
