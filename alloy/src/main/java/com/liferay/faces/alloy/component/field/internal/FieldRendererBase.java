@@ -30,5 +30,6 @@ public abstract class FieldRendererBase extends PanelGroupRenderer {
 
 	// Protected Constants
 	protected static final String LABEL = "label";
+	protected static final String LABEL_FIRST = "labelFirst";
 }
 //J+
