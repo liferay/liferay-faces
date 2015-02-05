@@ -13,14 +13,20 @@
  */
 package com.liferay.faces.alloy.component.selectbooleancheckbox.internal;
 
+import java.io.IOException;
+
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
+import javax.faces.component.html.HtmlSelectBooleanCheckbox;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 import javax.faces.convert.ConverterException;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.alloy.component.field.Field;
 import com.liferay.faces.alloy.component.selectbooleancheckbox.SelectBooleanCheckbox;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.internal.IdDelegationResponseWriter;
 
 
 /**
@@ -50,6 +56,22 @@ public class SelectBooleanCheckboxRenderer extends SelectBooleanCheckboxRenderer
 		if (selectBooleanCheckbox.isRequired() && submittedValue.getClass().equals(Boolean.class) &&
 				Boolean.FALSE.equals(submittedValue)) {
 			selectBooleanCheckbox.setSubmittedValue(StringPool.BLANK);
+		}
+	}
+
+	@Override
+	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		UIComponent parent = uiComponent.getParent();
+
+		if (parent instanceof Field) {
+			ResponseWriter responseWriter = facesContext.getResponseWriter();
+			IdDelegationResponseWriter idDelegationResponseWriter = new IdDelegationResponseWriter(responseWriter,
+					"input", uiComponent.getClientId(facesContext));
+			super.encodeBegin(facesContext, uiComponent, idDelegationResponseWriter);
+		}
+		else {
+			super.encodeBegin(facesContext, uiComponent);
 		}
 	}
 
