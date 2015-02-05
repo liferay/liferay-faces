@@ -23,7 +23,7 @@ import com.liferay.faces.util.helper.BooleanHelper;
  */
 public enum WebConfigParam implements ConfigParam<ExternalContext> {
 
-    /** Boolean indicating whether or not XML entities should be resolved */
+	/** Boolean indicating whether or not XML entities should be resolved */
 	ResolveXMLEntities("com.liferay.faces.util.resolveXMLEntities", "com.liferay.faces.bridge.resolveXMLEntities",
 		false),
 
@@ -41,6 +41,7 @@ public enum WebConfigParam implements ConfigParam<ExternalContext> {
 	private boolean defaultBooleanValue;
 	private String defaultStringValue;
 	private int defaultIntegerValue;
+	private long defaultLongValue;
 	private String name;
 
 	private WebConfigParam(String name, String defaultStringValue) {
@@ -62,7 +63,26 @@ public enum WebConfigParam implements ConfigParam<ExternalContext> {
 		this.name = name;
 		this.defaultBooleanValue = (defaultIntegerValue != 0);
 		this.defaultIntegerValue = defaultIntegerValue;
+		this.defaultLongValue = defaultIntegerValue;
 		this.defaultStringValue = Integer.toString(defaultIntegerValue);
+	}
+
+	private WebConfigParam(String name, long defaultLongValue) {
+		this.name = name;
+		this.defaultBooleanValue = (defaultLongValue != 0);
+
+		if (defaultLongValue < Integer.MIN_VALUE) {
+			this.defaultIntegerValue = Integer.MIN_VALUE;
+		}
+		else if (defaultLongValue > Integer.MAX_VALUE) {
+			this.defaultIntegerValue = Integer.MAX_VALUE;
+		}
+		else {
+			this.defaultIntegerValue = (int) defaultLongValue;
+		}
+
+		this.defaultLongValue = defaultLongValue;
+		this.defaultStringValue = Long.toString(defaultLongValue);
 	}
 
 	private WebConfigParam(String name, String alternateName, boolean defaultBooleanValue) {
@@ -72,11 +92,13 @@ public enum WebConfigParam implements ConfigParam<ExternalContext> {
 		if (defaultBooleanValue) {
 			this.defaultBooleanValue = true;
 			this.defaultIntegerValue = 1;
+			this.defaultLongValue = 1L;
 			this.defaultStringValue = Boolean.TRUE.toString();
 		}
 		else {
 			this.defaultBooleanValue = false;
 			this.defaultIntegerValue = 0;
+			this.defaultLongValue = 0L;
 			this.defaultStringValue = Boolean.FALSE.toString();
 		}
 	}
@@ -108,6 +130,11 @@ public enum WebConfigParam implements ConfigParam<ExternalContext> {
 		return defaultIntegerValue;
 	}
 
+	@Override
+	public long getDefaultLongValue() {
+		return defaultLongValue;
+	}
+
 	public String getDefaultStringValue() {
 		return defaultStringValue;
 	}
@@ -115,6 +142,11 @@ public enum WebConfigParam implements ConfigParam<ExternalContext> {
 	// Java 1.6+ @Override
 	public int getIntegerValue(ExternalContext externalContext) {
 		return WebConfigParamUtil.getIntegerValue(externalContext, name, alternateName, defaultIntegerValue);
+	}
+
+	@Override
+	public long getLongValue(ExternalContext externalContext) {
+		return WebConfigParamUtil.getLongValue(externalContext, name, alternateName, defaultLongValue);
 	}
 
 	public String getName() {
