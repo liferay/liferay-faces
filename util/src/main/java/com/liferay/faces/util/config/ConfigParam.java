@@ -52,6 +52,11 @@ public interface ConfigParam<T> {
 	public int getDefaultIntegerValue();
 
 	/**
+	 * Returns the default long value of the config param.
+	 */
+	public long getDefaultLongValue();
+
+	/**
 	 * Returns the default String value of the config param.
 	 */
 	public String getDefaultStringValue();
@@ -61,6 +66,12 @@ public interface ConfigParam<T> {
 	 * #getDefaultIntegerValue()} is returned.
 	 */
 	public int getIntegerValue(T config);
+
+	/**
+	 * Returns the long value of the config param. If not specified in the config file, then the value of {@link
+	 * #getDefaultLongValue()} is returned.
+	 */
+	public long getLongValue(T config);
 
 	/**
 	 * Returns the name of the config param.

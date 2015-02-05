@@ -97,7 +97,8 @@ public enum PortletConfigParam implements ConfigParam<PortletConfig> {
 		System.getProperty("java.io.tmpdir")),
 
 	/** Maximum file size for an uploaded file. Default is 104857600 bytes (100MB) */
-	UploadedFileMaxSize("com.liferay.faces.bridge.uploadedFileMaxSize", "javax.faces.UPLOADED_FILE_MAX_SIZE", 104857600),
+	UploadedFileMaxSize("com.liferay.faces.bridge.uploadedFileMaxSize", "javax.faces.UPLOADED_FILE_MAX_SIZE",
+		104857600L),
 
 	/** Name of the render parameter used to encode the viewId. Default value is "_facesViewIdRender". */
 	ViewIdRenderParameterName("com.liferay.faces.bridge.viewIdRenderParameterName", "_facesViewIdRender"),
@@ -113,6 +114,7 @@ public enum PortletConfigParam implements ConfigParam<PortletConfig> {
 	private boolean defaultBooleanValue;
 	private String defaultStringValue;
 	private int defaultIntegerValue;
+	private long defaultLongValue;
 	private String name;
 
 	private PortletConfigParam(String name, String defaultStringValue) {
@@ -128,7 +130,27 @@ public enum PortletConfigParam implements ConfigParam<PortletConfig> {
 		this.alternateName = alternateName;
 		this.defaultBooleanValue = (defaultIntegerValue != 0);
 		this.defaultIntegerValue = defaultIntegerValue;
+		this.defaultLongValue = defaultIntegerValue;
 		this.defaultStringValue = Integer.toString(defaultIntegerValue);
+	}
+
+	private PortletConfigParam(String name, String alternateName, long defaultLongValue) {
+		this.name = name;
+		this.alternateName = alternateName;
+		this.defaultBooleanValue = (defaultLongValue != 0);
+
+		if (defaultLongValue < Integer.MIN_VALUE) {
+			this.defaultIntegerValue = Integer.MIN_VALUE;
+		}
+		else if (defaultLongValue > Integer.MAX_VALUE) {
+			this.defaultIntegerValue = Integer.MAX_VALUE;
+		}
+		else {
+			this.defaultIntegerValue = (int) defaultLongValue;
+		}
+
+		this.defaultLongValue = defaultLongValue;
+		this.defaultStringValue = Long.toString(defaultLongValue);
 	}
 
 	private PortletConfigParam(String name, String alternateName, String defaultStringValue) {
@@ -138,10 +160,12 @@ public enum PortletConfigParam implements ConfigParam<PortletConfig> {
 		if (BooleanHelper.isTrueToken(defaultStringValue)) {
 			this.defaultBooleanValue = true;
 			this.defaultIntegerValue = 1;
+			this.defaultLongValue = 1L;
 		}
 		else {
 			this.defaultBooleanValue = false;
 			this.defaultIntegerValue = 0;
+			this.defaultLongValue = 0L;
 		}
 
 		this.defaultStringValue = defaultStringValue;
@@ -154,10 +178,12 @@ public enum PortletConfigParam implements ConfigParam<PortletConfig> {
 
 		if (defaultBooleanValue) {
 			this.defaultIntegerValue = 1;
+			this.defaultLongValue = 1L;
 			this.defaultStringValue = Boolean.TRUE.toString();
 		}
 		else {
 			this.defaultIntegerValue = 0;
+			this.defaultLongValue = 0L;
 			this.defaultStringValue = Boolean.FALSE.toString();
 		}
 	}
@@ -189,6 +215,11 @@ public enum PortletConfigParam implements ConfigParam<PortletConfig> {
 		return defaultIntegerValue;
 	}
 
+	@Override
+	public long getDefaultLongValue() {
+		return defaultLongValue;
+	}
+
 	public String getDefaultStringValue() {
 		return defaultStringValue;
 	}
@@ -196,6 +227,11 @@ public enum PortletConfigParam implements ConfigParam<PortletConfig> {
 	@Override
 	public int getIntegerValue(PortletConfig portletConfig) {
 		return PortletConfigParamUtil.getIntegerValue(portletConfig, name, alternateName, defaultIntegerValue);
+	}
+
+	@Override
+	public long getLongValue(PortletConfig portletConfig) {
+		return PortletConfigParamUtil.getLongValue(portletConfig, name, alternateName, defaultLongValue);
 	}
 
 	public String getName() {

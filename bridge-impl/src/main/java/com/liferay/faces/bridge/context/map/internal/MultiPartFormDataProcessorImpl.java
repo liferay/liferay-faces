@@ -103,7 +103,7 @@ public class MultiPartFormDataProcessorImpl implements MultiPartFormDataProcesso
 		diskFileItemFactory.setSizeThreshold(0);
 
 		// Determine the max file upload size threshold (in bytes).
-		int uploadedFileMaxSize = PortletConfigParam.UploadedFileMaxSize.getIntegerValue(portletConfig);
+		long uploadedFileMaxSize = PortletConfigParam.UploadedFileMaxSize.getLongValue(portletConfig);
 
 		// Parse the request parameters and save all uploaded files in a map.
 		PortletFileUpload portletFileUpload = new PortletFileUpload(diskFileItemFactory);

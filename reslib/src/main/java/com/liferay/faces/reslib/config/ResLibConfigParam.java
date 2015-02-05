@@ -31,6 +31,7 @@ public enum ResLibConfigParam implements ConfigParam<ExternalContext> {
 	private boolean defaultBooleanValue;
 	private String defaultStringValue;
 	private int defaultIntegerValue;
+	private long defaultLongValue;
 	private String name;
 
 	private ResLibConfigParam(String name, String defaultStringValue) {
@@ -39,10 +40,12 @@ public enum ResLibConfigParam implements ConfigParam<ExternalContext> {
 		if (BooleanHelper.isTrueToken(defaultStringValue)) {
 			this.defaultBooleanValue = true;
 			this.defaultIntegerValue = 1;
+			this.defaultLongValue = 1L;
 		}
 		else {
 			this.defaultBooleanValue = false;
 			this.defaultIntegerValue = 0;
+			this.defaultLongValue = 0L;
 		}
 
 		this.defaultStringValue = defaultStringValue;
@@ -54,11 +57,13 @@ public enum ResLibConfigParam implements ConfigParam<ExternalContext> {
 		if (defaultBooleanValue) {
 			this.defaultBooleanValue = true;
 			this.defaultIntegerValue = 1;
+			this.defaultLongValue = 1L;
 			this.defaultStringValue = Boolean.TRUE.toString();
 		}
 		else {
 			this.defaultBooleanValue = false;
 			this.defaultIntegerValue = 0;
+			this.defaultLongValue = 0L;
 			this.defaultStringValue = Boolean.FALSE.toString();
 		}
 	}
@@ -90,6 +95,11 @@ public enum ResLibConfigParam implements ConfigParam<ExternalContext> {
 		return defaultIntegerValue;
 	}
 
+	@Override
+	public long getDefaultLongValue() {
+		return defaultLongValue;
+	}
+
 	public String getDefaultStringValue() {
 		return defaultStringValue;
 	}
@@ -97,6 +107,11 @@ public enum ResLibConfigParam implements ConfigParam<ExternalContext> {
 	@Override
 	public int getIntegerValue(ExternalContext externalContext) {
 		return WebConfigParamUtil.getIntegerValue(externalContext, name, null, defaultIntegerValue);
+	}
+
+	@Override
+	public long getLongValue(ExternalContext externalContext) {
+		return WebConfigParamUtil.getLongValue(externalContext, name, null, defaultLongValue);
 	}
 
 	public String getName() {
