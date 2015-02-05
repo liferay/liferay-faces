@@ -28,7 +28,8 @@ public abstract class FieldBase extends PanelGroupBlockLayout implements Styleab
 
 	// Protected Enumerations
 	protected enum FieldPropertyKeys {
-		label
+		label,
+		labelFirst
 	}
 
 	public String getLabel() {
@@ -37,6 +38,14 @@ public abstract class FieldBase extends PanelGroupBlockLayout implements Styleab
 
 	public void setLabel(String label) {
 		getStateHelper().put(FieldPropertyKeys.label, label);
+	}
+
+	public boolean isLabelFirst() {
+		return (Boolean) getStateHelper().eval(FieldPropertyKeys.labelFirst, true);
+	}
+
+	public void setLabelFirst(boolean labelFirst) {
+		getStateHelper().put(FieldPropertyKeys.labelFirst, labelFirst);
 	}
 }
 //J+

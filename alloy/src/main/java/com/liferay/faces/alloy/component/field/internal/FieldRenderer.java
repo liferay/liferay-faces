@@ -14,6 +14,8 @@
 package com.liferay.faces.alloy.component.field.internal;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -21,6 +23,7 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.field.Field;
+import com.liferay.faces.alloy.component.selectbooleancheckbox.SelectBooleanCheckbox;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -36,18 +39,99 @@ public class FieldRenderer extends FieldRendererBase {
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		Field field = (Field) uiComponent;
 		String label = field.getLabel();
 
 		if (label != null) {
 
-			responseWriter.startElement(LABEL, uiComponent);
-			responseWriter.writeAttribute(StringPool.CLASS, CONTROL_LABEL, null);
-			responseWriter.writeText(label, LABEL);
-			responseWriter.endElement(LABEL);
+			ResponseWriter responseWriter = facesContext.getResponseWriter();
+			UIComponent checkboxChild = getSelectBooleanCheckboxChild(uiComponent.getChildren());
+			boolean labelFirst = field.isLabelFirst();
+
+			if (checkboxChild != null) {
+
+				responseWriter.startElement(LABEL, field);
+
+				String checkboxChildClientId = checkboxChild.getClientId(facesContext);
+
+				if (labelFirst) {
+
+					encodeCheckboxLabelInnerHTML(responseWriter, label, checkboxChildClientId);
+					super.encodeChildren(facesContext, field);
+				}
+				else {
+
+					super.encodeChildren(facesContext, field);
+					encodeCheckboxLabelInnerHTML(responseWriter, label, checkboxChildClientId);
+				}
+
+				responseWriter.endElement(LABEL);
+			}
+			else {
+
+				if (labelFirst) {
+
+					encodeLabel(responseWriter, field, label);
+					super.encodeChildren(facesContext, field);
+				}
+				else {
+
+					super.encodeChildren(facesContext, field);
+					encodeLabel(responseWriter, field, label);
+				}
+			}
+		}
+		else {
+			super.encodeChildren(facesContext, field);
+		}
+	}
+
+	protected void encodeCheckboxLabelInnerHTML(ResponseWriter responseWriter, String label, String checkboxClientId)
+		throws IOException {
+
+		responseWriter.writeAttribute(StringPool.CLASS, CONTROL_LABEL + " checkbox", null);
+		responseWriter.writeAttribute("for", checkboxClientId, null);
+		responseWriter.writeText(label, LABEL);
+	}
+
+	protected void encodeLabel(ResponseWriter responseWriter, Field field, String label) throws IOException {
+
+		responseWriter.startElement(LABEL, field);
+		responseWriter.writeAttribute(StringPool.CLASS, CONTROL_LABEL, null);
+		responseWriter.writeText(label, LABEL);
+		responseWriter.endElement(LABEL);
+	}
+
+	protected void encodeLabel(ResponseWriter responseWriter, Field field, String label, String labelCSSClass)
+		throws IOException {
+
+		String labelCSSClasses;
+
+		if (labelCSSClass != null) {
+			labelCSSClasses = labelCSSClass + " " + CONTROL_LABEL;
+		}
+		else {
+			labelCSSClasses = CONTROL_LABEL;
 		}
 
-		super.encodeChildren(facesContext, uiComponent);
+		responseWriter.writeAttribute(StringPool.CLASS, labelCSSClasses, null);
+		responseWriter.writeText(label, LABEL);
+	}
+
+	private UIComponent getSelectBooleanCheckboxChild(List<UIComponent> children) {
+
+		Iterator iterator = children.iterator();
+		UIComponent selectBooleanCheckboxChild = null;
+
+		while (iterator.hasNext() && (selectBooleanCheckboxChild == null)) {
+
+			UIComponent child = (UIComponent) iterator.next();
+
+			if (child instanceof SelectBooleanCheckbox) {
+				selectBooleanCheckboxChild = child;
+			}
+		}
+
+		return selectBooleanCheckboxChild;
 	}
 }
