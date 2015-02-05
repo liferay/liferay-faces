@@ -54,19 +54,19 @@ public abstract class InputDateRendererBase extends InputDateTimeRenderer {
 		InputDate inputDate = (InputDate) uiComponent;
 		boolean first = true;
 
-		String datePattern = inputDate.getDatePattern();
-
-		if (datePattern != null) {
-
-			encodeMask(responseWriter, inputDate, datePattern, first);
-			first = false;
-		}
-
 		Integer panes = inputDate.getPanes();
 
 		if (panes != null) {
 
 			encodePanes(responseWriter, inputDate, panes, first);
+			first = false;
+		}
+
+		String pattern = inputDate.getPattern();
+
+		if (pattern != null) {
+
+			encodeMask(responseWriter, inputDate, pattern, first);
 			first = false;
 		}
 
@@ -83,12 +83,12 @@ public abstract class InputDateRendererBase extends InputDateTimeRenderer {
 		return MODULES;
 	}
 
-	protected void encodeMask(ResponseWriter responseWriter, InputDate inputDate, String datePattern, boolean first) throws IOException {
-		encodeString(responseWriter, MASK, datePattern, first);
-	}
-
 	protected void encodePanes(ResponseWriter responseWriter, InputDate inputDate, Integer panes, boolean first) throws IOException {
 		encodeInteger(responseWriter, PANES, panes, first);
+	}
+
+	protected void encodeMask(ResponseWriter responseWriter, InputDate inputDate, String pattern, boolean first) throws IOException {
+		encodeString(responseWriter, MASK, pattern, first);
 	}
 
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, InputDate inputDate, boolean first) throws IOException {

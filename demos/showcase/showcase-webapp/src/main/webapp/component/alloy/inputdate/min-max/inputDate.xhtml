@@ -6,7 +6,7 @@
 		<alloy:form>
 			<showcase:example
 				description="#{i18n['valid-date-range']}: #{inputDateModelBean.formattedMinDate} - #{inputDateModelBean.formattedMaxDate}">
-				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" maxDate="#{inputDateModelBean.maxDate}"
+				<alloy:inputDate id="birthday" pattern="MM/dd/yyyy" maxDate="#{inputDateModelBean.maxDate}"
 					minDate="#{inputDateModelBean.minDate}" showOn="button" value="#{inputDateModelBean.birthday}" />
 				<alloy:message for="birthday" />
 				<hr />

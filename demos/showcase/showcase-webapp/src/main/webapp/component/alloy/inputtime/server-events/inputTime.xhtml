@@ -6,7 +6,7 @@
 		<alloy:form>
 			<showcase:example>
 				<alloy:messages globalOnly="true" layout="table" />
-				<alloy:inputTime id="time" timeSelectListener="#{inputTimeBackingBean.timeSelectListener}" timePattern="hh:mm a"
+				<alloy:inputTime id="time" timeSelectListener="#{inputTimeBackingBean.timeSelectListener}" pattern="hh:mm a"
 					value="#{inputTimeModelBean.time}">
 					<f:ajax event="timeSelect" render="@form" />
 				</alloy:inputTime>

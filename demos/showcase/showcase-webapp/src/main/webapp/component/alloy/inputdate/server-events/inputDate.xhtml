@@ -6,7 +6,7 @@
 		<alloy:form>
 			<showcase:example>
 				<alloy:messages globalOnly="true" layout="table" />
-				<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy"
+				<alloy:inputDate id="birthday" pattern="MM/dd/yyyy"
 					dateSelectListener="#{inputDateBackingBean.dateSelectListener}" value="#{inputDateModelBean.birthday}">
 					<f:ajax event="dateSelect" render="@form" />
 				</alloy:inputDate>

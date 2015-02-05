@@ -5,7 +5,7 @@
 	<ui:define name="col1">
 		<alloy:form>
 			<showcase:example>
-				<alloy:inputTime id="time" value="#{inputTimeModelBean.time}" timePattern="hh:mm a" step="1800" />
+				<alloy:inputTime id="time" value="#{inputTimeModelBean.time}" pattern="hh:mm a" step="1800" />
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
