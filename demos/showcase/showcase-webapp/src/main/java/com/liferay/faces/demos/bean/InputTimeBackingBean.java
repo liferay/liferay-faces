@@ -38,7 +38,7 @@ public class InputTimeBackingBean {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		Date selectedTime = timeSelectEvent.getTime();
 		InputTime inputTime = (InputTime) timeSelectEvent.getComponent();
-		String timePattern = inputTime.getTimePattern();
+		String timePattern = inputTime.getPattern();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(timePattern);
 		String timeZoneString = inputTime.getTimeZone();
 		TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);

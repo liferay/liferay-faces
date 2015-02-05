@@ -6,7 +6,7 @@
 		<alloy:form>
 			<showcase:example description="#{i18n['valid-time-range']}: 09:00:00 - 17:00:00">
 				<alloy:inputTime id="time" value="#{inputTimeModelBean.time}" showOn="button" maxTime="17:00:00" minTime="09:00:00"
-					timePattern="hh:mm a" />
+					pattern="hh:mm a" />
 				<alloy:message for="time" />
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">

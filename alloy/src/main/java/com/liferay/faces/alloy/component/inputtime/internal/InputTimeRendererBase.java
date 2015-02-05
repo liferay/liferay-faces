@@ -62,11 +62,11 @@ public abstract class InputTimeRendererBase extends InputDateTimeRenderer {
 		InputTime inputTime = (InputTime) uiComponent;
 		boolean first = true;
 
-		String timePattern = inputTime.getTimePattern();
+		String pattern = inputTime.getPattern();
 
-		if (timePattern != null) {
+		if (pattern != null) {
 
-			encodeMask(responseWriter, inputTime, timePattern, first);
+			encodeMask(responseWriter, inputTime, pattern, first);
 			first = false;
 		}
 
@@ -83,8 +83,8 @@ public abstract class InputTimeRendererBase extends InputDateTimeRenderer {
 		return MODULES;
 	}
 
-	protected void encodeMask(ResponseWriter responseWriter, InputTime inputTime, String timePattern, boolean first) throws IOException {
-		encodeString(responseWriter, MASK, timePattern, first);
+	protected void encodeMask(ResponseWriter responseWriter, InputTime inputTime, String pattern, boolean first) throws IOException {
+		encodeString(responseWriter, MASK, pattern, first);
 	}
 
 	protected void encodeHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter, InputTime inputTime, boolean first) throws IOException {

@@ -9,7 +9,7 @@
 			<showcase:example description="#{i18n['alloy-inputdate-general-example-1']}" number="1" renderedCheckbox="true"
 				requiredCheckbox="true">
 				<alloy:field label="#{i18n['birthday']}">
-					<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+					<alloy:inputDate id="birthday" pattern="MM/dd/yyyy" rendered="#{showcaseModelBean.selectedComponent.rendered}"
 						required="#{showcaseModelBean.selectedComponent.required}" value="#{inputDateModelBean.birthday}" />
 					<alloy:message for="birthday" />
 				</alloy:field>
@@ -32,7 +32,7 @@
 			<alloy:form>
 				<showcase:example description="#{i18n['alloy-inputdate-general-example-2']}" number="2" renderedCheckbox="true">
 					<alloy:field label="#{i18n['birthday']}">
-						<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" showOn="button"
+						<alloy:inputDate id="birthday" pattern="MM/dd/yyyy" showOn="button"
 							rendered="#{showcaseModelBean.selectedComponent.rendered}" value="#{inputDateModelBean.birthday}" />
 						<alloy:message for="birthday" />
 					</alloy:field>
@@ -56,7 +56,7 @@
 			<alloy:form>
 				<showcase:example description="#{i18n['alloy-inputdate-general-example-3']}" number="3" renderedCheckbox="true">
 					<alloy:field label="#{i18n['birthday']}">
-						<alloy:inputDate id="birthday" datePattern="MM/dd/yyyy" showOn="both"
+						<alloy:inputDate id="birthday" pattern="MM/dd/yyyy" showOn="both"
 							rendered="#{showcaseModelBean.selectedComponent.rendered}" value="#{inputDateModelBean.birthday}" />
 						<alloy:message for="birthday" />
 					</alloy:field>

@@ -10,7 +10,7 @@
 				renderedCheckbox="true" requiredCheckbox="true">
 				<alloy:field label="#{i18n['time']}">
 					<alloy:inputTime id="time" rendered="#{showcaseModelBean.selectedComponent.rendered}"
-						required="#{showcaseModelBean.selectedComponent.required}" timePattern="hh:mm a"
+						required="#{showcaseModelBean.selectedComponent.required}" pattern="hh:mm a"
 						value="#{inputDateModelBean.birthday}" />
 					<alloy:message for="time" />
 				</alloy:field>
@@ -35,7 +35,7 @@
 					renderedCheckbox="true">
 					<alloy:field label="#{i18n['time']}">
 						<alloy:inputTime id="time" showOn="button" rendered="#{showcaseModelBean.selectedComponent.rendered}"
-							timePattern="hh:mm a" value="#{inputDateModelBean.birthday}" />
+							pattern="hh:mm a" value="#{inputDateModelBean.birthday}" />
 						<alloy:message for="time" />
 					</alloy:field>
 					<hr />
@@ -60,7 +60,7 @@
 					renderedCheckbox="true">
 					<alloy:field label="#{i18n['time']}">
 						<alloy:inputTime id="time" showOn="both" rendered="#{showcaseModelBean.selectedComponent.rendered}"
-							timePattern="hh:mm a" value="#{inputDateModelBean.birthday}" />
+							pattern="hh:mm a" value="#{inputDateModelBean.birthday}" />
 						<alloy:message for="time" />
 					</alloy:field>
 					<hr />

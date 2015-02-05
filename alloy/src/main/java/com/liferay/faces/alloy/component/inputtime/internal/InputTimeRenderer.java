@@ -194,7 +194,7 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 				throw new IOException("minTime must not be later than maxTime.");
 			}
 
-			String timePattern = inputTime.getTimePattern();
+			String timePattern = inputTime.getPattern();
 			Object objectLocale = inputTime.getLocale();
 			Locale locale = InputDateTimeUtil.getObjectAsLocale(objectLocale);
 			TimeZone timeZone = TimeZone.getTimeZone(InputDateTime.GREENWICH);

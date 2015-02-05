@@ -2512,12 +2512,6 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]></description>
-			<name>datePattern</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[A method that is executed when an date is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>com.liferay.faces.alloy.component.inputdate.InputDateEvent</code> argument.]]></description>
 			<name>dateSelectListener</name>
 			<required>false</required>
@@ -2673,6 +2667,12 @@ java.lang.Object)</method-signature>
 			<name>panes</name>
 			<required>false</required>
 			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]></description>
+			<name>pattern</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
@@ -4360,6 +4360,12 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[The format of the time that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>. The default is <code>hh:mm a</code>.]]></description>
+			<name>pattern</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The delay in milliseconds before a query occurs. After the <code>autoComplete</code> receives input, it waits the specified number of milliseconds before querying it's source. If input occurs before the specified number of milliseconds has elapsed, the timer is reset.]]></description>
 			<name>queryDelay</name>
 			<required>false</required>
@@ -4440,12 +4446,6 @@ java.lang.Object)</method-signature>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying where the element is located in the tabbing progression.]]></description>
 			<name>tabindex</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[The format of the time that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>. The default is <code>hh:mm a</code>.]]></description>
-			<name>timePattern</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>

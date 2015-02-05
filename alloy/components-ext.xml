@@ -1193,7 +1193,7 @@
 				<description>
 					<![CDATA[The format of the date that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>.]]>
 				</description>
-				<name>datePattern</name>
+				<name>pattern</name>
 				<type>java.lang.String</type>
 				<yui>true</yui>
 				<yuiName>mask</yuiName>
@@ -1631,7 +1631,7 @@
 				<description>
 					<![CDATA[The format of the time that corresponds to patterns described in the javadoc for <code>java.text.SimpleDateFormat</code>. The default is <code>hh:mm a</code>.]]>
 				</description>
-				<name>timePattern</name>
+				<name>pattern</name>
 				<type>java.lang.String</type>
 				<yui>true</yui>
 				<yuiName>mask</yuiName>

@@ -35,10 +35,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
-import com.liferay.faces.util.client.BrowserSniffer;
-import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -101,7 +98,7 @@ public class InputDate extends InputDateBase {
 		if (isValid() && (newValue != null)) {
 
 			// Get all necessary dates.
-			String datePattern = getDatePattern();
+			String datePattern = getPattern();
 			Object minDateObject = getMinDate();
 			String timeZoneString = getTimeZone();
 			TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
@@ -144,21 +141,6 @@ public class InputDate extends InputDateBase {
 	}
 
 	@Override
-	public String getDatePattern() {
-
-		String datePattern = super.getDatePattern();
-
-		if (datePattern == null) {
-
-			// Provide a default datePattern based on the locale.
-			Object locale = getLocale();
-			datePattern = getDefaultDatePattern(locale);
-		}
-
-		return datePattern;
-	}
-
-	@Override
 	public String getDefaultEventName() {
 		return DateSelectEvent.DATE_SELECT;
 	}
@@ -174,19 +156,26 @@ public class InputDate extends InputDateBase {
 	}
 
 	@Override
-	protected String getPattern() {
+	public String getPattern() {
 
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
-				BrowserSnifferFactory.class);
-		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+		String datePattern;
 
-		if (browserSniffer.isMobile() && isResponsive()) {
-			return DEFAULT_HTML5_DATE_PATTERN;
+		if (isResponsiveMobile()) {
+			datePattern = DEFAULT_HTML5_DATE_PATTERN;
 		}
 		else {
-			return getDatePattern();
+
+			datePattern = super.getPattern();
+
+			if (datePattern == null) {
+
+				// Provide a default datePattern based on the locale.
+				Object locale = getLocale();
+				datePattern = getDefaultDatePattern(locale);
+			}
 		}
+
+		return datePattern;
 	}
 
 	@Override

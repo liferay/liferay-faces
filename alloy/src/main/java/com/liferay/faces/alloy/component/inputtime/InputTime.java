@@ -32,10 +32,7 @@ import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
-import com.liferay.faces.util.client.BrowserSniffer;
-import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -125,20 +122,18 @@ public class InputTime extends InputTimeBase {
 	}
 
 	@Override
-	protected String getPattern() {
+	public String getPattern() {
 
-		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String timePattern;
 
-		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
-				BrowserSnifferFactory.class);
-		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
-
-		if (browserSniffer.isMobile() && isResponsive()) {
-			return DEFAULT_HTML5_TIME_PATTERN;
+		if (isResponsiveMobile()) {
+			timePattern = DEFAULT_HTML5_TIME_PATTERN;
 		}
 		else {
-			return getTimePattern();
+			timePattern = super.getPattern();
 		}
+
+		return timePattern;
 	}
 
 	@Override
