@@ -8,6 +8,8 @@ rebel.xml
 *.sh
 .idea
 *.iml
+*.ipr
+*.iws
 faces-config.pageflow
 nb-configuration.xml
 navigation-rule.NavData
