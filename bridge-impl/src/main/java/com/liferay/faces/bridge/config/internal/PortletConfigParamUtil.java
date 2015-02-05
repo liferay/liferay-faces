@@ -21,6 +21,7 @@ import javax.portlet.PortletContext;
 
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.helper.IntegerHelper;
+import com.liferay.faces.util.helper.LongHelper;
 
 
 /**
@@ -133,6 +134,43 @@ public class PortletConfigParamUtil {
 		}
 
 		return integerValue;
+	}
+
+	public static long getLongValue(PortletConfig portletConfig, String name, String alternateName,
+		long defaultLongValue) {
+
+		long longValue = defaultLongValue;
+
+		String portletName = portletConfig.getPortletName();
+
+		if (portletName == null) {
+			String configuredValue = getConfiguredValue(portletConfig, name, alternateName);
+
+			if (configuredValue != null) {
+				longValue = LongHelper.toLong(configuredValue);
+			}
+		}
+		else {
+			String configParamName = portletName + name;
+			Object cachedValue = configParamCache.get(configParamName);
+
+			if ((cachedValue != null) && (cachedValue instanceof Long)) {
+				longValue = (Long) cachedValue;
+			}
+			else {
+				String configuredValue = getConfiguredValue(portletConfig, name, alternateName);
+
+				if (configuredValue != null) {
+					longValue = LongHelper.toLong(configuredValue);
+				}
+
+				synchronized (configParamCache) {
+					configParamCache.put(configParamName, Long.valueOf(longValue));
+				}
+			}
+		}
+
+		return longValue;
 	}
 
 	public static String getStringValue(PortletConfig portletConfig, String name, String alternateName,
