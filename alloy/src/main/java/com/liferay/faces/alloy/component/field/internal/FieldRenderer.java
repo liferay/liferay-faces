@@ -14,7 +14,6 @@
 package com.liferay.faces.alloy.component.field.internal;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.component.UIComponent;
@@ -102,33 +101,17 @@ public class FieldRenderer extends FieldRendererBase {
 		responseWriter.endElement(LABEL);
 	}
 
-	protected void encodeLabel(ResponseWriter responseWriter, Field field, String label, String labelCSSClass)
-		throws IOException {
-
-		String labelCSSClasses;
-
-		if (labelCSSClass != null) {
-			labelCSSClasses = labelCSSClass + " " + CONTROL_LABEL;
-		}
-		else {
-			labelCSSClasses = CONTROL_LABEL;
-		}
-
-		responseWriter.writeAttribute(StringPool.CLASS, labelCSSClasses, null);
-		responseWriter.writeText(label, LABEL);
-	}
-
 	private UIComponent getSelectBooleanCheckboxChild(List<UIComponent> children) {
 
-		Iterator iterator = children.iterator();
 		UIComponent selectBooleanCheckboxChild = null;
 
-		while (iterator.hasNext() && (selectBooleanCheckboxChild == null)) {
-
-			UIComponent child = (UIComponent) iterator.next();
+		for (UIComponent child : children) {
 
 			if (child instanceof SelectBooleanCheckbox) {
+
 				selectBooleanCheckboxChild = child;
+
+				break;
 			}
 		}
 
