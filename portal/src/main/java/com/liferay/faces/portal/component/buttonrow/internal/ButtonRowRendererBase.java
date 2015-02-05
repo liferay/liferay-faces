@@ -17,7 +17,9 @@ package com.liferay.faces.portal.component.buttonrow.internal;
 
 import javax.annotation.Generated;
 
+
 import com.liferay.faces.util.render.internal.DelegatingRendererBase;
+
 
 /**
  * @author	Neil Griffin
