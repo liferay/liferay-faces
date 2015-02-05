@@ -1313,10 +1313,10 @@
 	</component>
 	<component name="InputFile" extendsTags="ClientComponent InputText"
 		handlerClass="com.liferay.faces.alloy.component.inputfile.internal.InputFileHandler" module="uploader"
-		parentClass="javax.faces.component.html.HtmlInputFile" rendererParentClass="com.liferay.faces.alloy.component.inputfile.internal.InputFileRendererCompat"
+		parentClass="javax.faces.component.html.HtmlInputText" rendererParentClass="com.liferay.faces.alloy.component.inputfile.internal.InputFileRendererCompat"
 		yui="true" yuiName="Uploader">
 		<description>
-			<![CDATA[InputFile is a UIInput component that renders an <code>&lt;input&gt;</code> element with type=file. Since it extends HtmlInputFile, it supports all the features of h:inputFile and also supports multi-file uploads, instant-Ajax, preview, upload progress, and validation.]]>
+			<![CDATA[InputFile is a UIInput component that renders an <code>&lt;input&gt;</code> element with type=file. Since it extends HtmlInputText, it supports all the features of h:inputText and also supports multi-file uploads, instant-Ajax, preview, upload progress, and validation.]]>
 		</description>
 		<attributes>
 			<attribute>
