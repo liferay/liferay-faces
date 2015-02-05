@@ -15,7 +15,7 @@ package com.liferay.faces.alloy.taglib;
 
 import javax.faces.view.facelets.TagConfig;
 
-import com.liferay.faces.alloy.taghandler.ImportConstants;
+import com.liferay.faces.alloy.taghandler.LoadConstants;
 
 
 /**
@@ -23,7 +23,7 @@ import com.liferay.faces.alloy.taghandler.ImportConstants;
  * @deprecated  Replaced by {@link com.liferay.faces.alloy.taghandler.LoadConstants}.
  */
 @Deprecated
-public class ImportConstantsTagHandler extends ImportConstants {
+public class ImportConstantsTagHandler extends LoadConstants {
 
 	public ImportConstantsTagHandler() throws Exception {
 		super(new JspTagConfig());
