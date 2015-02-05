@@ -15,24 +15,22 @@ package com.liferay.faces.portal.component.header.internal;
 //J-
 
 
-import com.liferay.faces.portal.component.header.Header;
-import com.liferay.faces.portal.render.internal.PortalTagRenderer;
-import com.liferay.taglib.ui.HeaderTag;
-
 import javax.annotation.Generated;
+
+
+import com.liferay.faces.portal.render.internal.PortalTagRenderer;
+
 
 /**
  * @author	Neil Griffin
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class HeaderRendererBase extends PortalTagRenderer<Header, HeaderTag> {
+public abstract class HeaderRendererBase extends PortalTagRenderer<com.liferay.faces.portal.component.header.Header, com.liferay.taglib.ui.HeaderTag> {
 
 	// Protected Constants
 	protected static final String BACK_LABEL = "backLabel";
 	protected static final String BACK_URL = "backURL";
-	protected static final String CSS_CLASS = "cssClass";
 	protected static final String ESCAPE_XML = "escapeXml";
-	protected static final String LOCALIZE_TITLE = "localizeTitle";
 	protected static final String SHOW_BACK_URL = "showBackURL";
 	protected static final String STYLE = "style";
 	protected static final String STYLE_CLASS = "styleClass";
