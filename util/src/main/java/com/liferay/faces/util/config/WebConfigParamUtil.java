@@ -21,6 +21,7 @@ import javax.servlet.ServletContext;
 
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.helper.IntegerHelper;
+import com.liferay.faces.util.helper.LongHelper;
 
 
 /**
@@ -98,6 +99,31 @@ public class WebConfigParamUtil {
 		}
 
 		return integerValue;
+	}
+
+	public static long getLongValue(ExternalContext externalContext, String name, String alternateName,
+		long defaultLongValue) {
+
+		long longValue = defaultLongValue;
+
+		Object cachedValue = configParamCache.get(name);
+
+		if ((cachedValue != null) && (cachedValue instanceof Long)) {
+			longValue = (Long) cachedValue;
+		}
+		else {
+			String configuredValue = getConfiguredValue(externalContext, name, alternateName);
+
+			if (configuredValue != null) {
+				longValue = LongHelper.toLong(configuredValue);
+			}
+
+			synchronized (configParamCache) {
+				configParamCache.put(name, Long.valueOf(longValue));
+			}
+		}
+
+		return longValue;
 	}
 
 	public static String getStringValue(ExternalContext externalContext, String name, String alternateName,
