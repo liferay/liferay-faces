@@ -70,7 +70,7 @@ public class HeadPhaseListener implements PhaseListener {
 		Bridge.PortletPhase portletRequestPhase = BridgeUtil.getPortletRequestPhase();
 
 		if ((portletRequestPhase == Bridge.PortletPhase.RESOURCE_PHASE) ||
-				(portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE)) {
+			(portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE)) {
 
 			if (phaseEvent.getPhaseId() == PhaseId.APPLY_REQUEST_VALUES) {
 				beforeApplyRequestValuesPhase(phaseEvent);
@@ -162,7 +162,12 @@ public class HeadPhaseListener implements PhaseListener {
 			// Note that in the case where a portlet RESOURCE_PHASE was invoked with a "portlet:resource" type of URL,
 			// there will be no HeadManagedBean available.
 			if (headManagedBean != null) {
-				flash.put(HEAD_RESOURCE_IDS, headManagedBean.getHeadResourceIds());
+
+				Set<String> headResourceIds = headManagedBean.getHeadResourceIds();
+
+				if ((flash != null) && (headResourceIds != null) && (headResourceIds.size() > 0)) {
+					flash.put(HEAD_RESOURCE_IDS, headManagedBean.getHeadResourceIds());
+				}
 			}
 		}
 	}
