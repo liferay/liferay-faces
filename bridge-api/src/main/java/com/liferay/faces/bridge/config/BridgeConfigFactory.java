@@ -14,9 +14,8 @@
 package com.liferay.faces.bridge.config;
 
 import javax.faces.FacesException;
+import javax.faces.FacesWrapper;
 import javax.portlet.PortletConfig;
-
-import com.liferay.faces.bridge.FactoryWrapper;
 
 
 /**
@@ -25,8 +24,7 @@ import com.liferay.faces.bridge.FactoryWrapper;
  *
  * @author  Neil Griffin
  */
-@SuppressWarnings("deprecation")
-public abstract class BridgeConfigFactory implements FactoryWrapper<BridgeConfigFactory> {
+public abstract class BridgeConfigFactory implements FacesWrapper<BridgeConfigFactory> {
 
 	public abstract BridgeConfig getBridgeConfig(PortletConfig portletConfig) throws FacesException;
 }

@@ -14,16 +14,13 @@
 package com.liferay.faces.util.context;
 
 import javax.faces.FacesException;
-import javax.faces.context.ExternalContext;
-
-import com.liferay.faces.util.client.ClientScript;
-import com.liferay.faces.util.factory.FactoryExtension;
+import javax.faces.FacesWrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class MessageContextFactory implements FactoryExtension<MessageContextFactory> {
+public abstract class MessageContextFactory implements FacesWrapper<MessageContextFactory> {
 
 	public abstract MessageContext getMessageContext() throws FacesException;
 }
