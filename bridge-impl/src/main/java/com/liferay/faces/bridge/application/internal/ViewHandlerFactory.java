@@ -15,7 +15,7 @@ package com.liferay.faces.bridge.application.internal;
 
 import javax.faces.application.ViewHandler;
 
-import com.liferay.faces.util.factory.FactoryExtension;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
@@ -24,7 +24,7 @@ import com.liferay.faces.util.factory.FactoryExtension;
  *
  * @author  Neil Griffin
  */
-public abstract class ViewHandlerFactory implements FactoryExtension<ViewHandlerFactory> {
+public abstract class ViewHandlerFactory implements Wrapper<ViewHandlerFactory> {
 
 	public abstract ViewHandler getViewHandler();
 }

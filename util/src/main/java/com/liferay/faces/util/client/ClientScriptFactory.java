@@ -14,13 +14,14 @@
 package com.liferay.faces.util.client;
 
 import javax.faces.FacesException;
-import javax.faces.FacesWrapper;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class ClientScriptFactory implements FacesWrapper<ClientScriptFactory> {
+public abstract class ClientScriptFactory implements Wrapper<ClientScriptFactory> {
 
 	public abstract ClientScript getClientScript() throws FacesException;
 }

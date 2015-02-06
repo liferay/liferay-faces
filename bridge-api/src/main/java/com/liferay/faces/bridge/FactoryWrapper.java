@@ -13,14 +13,14 @@
  */
 package com.liferay.faces.bridge;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
- * @deprecated  Will be replaced by {@link FacesWrapper<T>} in future major releases.
+ * @deprecated  Will be replaced by {@link Wrapper<T>} in future major releases.
  * @author      Neil Griffin
  */
 @Deprecated
-public interface FactoryWrapper<T> extends FacesWrapper<T> {
+public interface FactoryWrapper<T> extends Wrapper<T> {
 
 }
