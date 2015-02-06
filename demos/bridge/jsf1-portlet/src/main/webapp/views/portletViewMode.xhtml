@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <f:view xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
@@ -9,8 +9,8 @@
 		<ui:include src="applicant.xhtml" />
 	</h:panelGroup>
 	<br />
-	<aui:row>
-		<aui:col>
+	<alloy:row>
+		<alloy:column>
 			<ul>
 				<li><em><h:outputText
 							value="#{bridgeContext.bridgeConfig.attributes['JSF']}" /></em></li>
@@ -19,6 +19,6 @@
 				<li><em><h:outputText
 							value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Bridge']}" /></em></li>
 			</ul>
-		</aui:col>
-	</aui:row>
+		</alloy:column>
+	</alloy:row>
 </f:view>

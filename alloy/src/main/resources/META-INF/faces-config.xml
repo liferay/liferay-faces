@@ -62,6 +62,14 @@
 		<component-type>com.liferay.faces.alloy.AUIScript</component-type>
 		<component-class>com.liferay.faces.alloy.component.AUIScript</component-class>
 	</component>
+	<component>
+		<component-type>com.liferay.faces.alloy.component.column.Column</component-type>
+		<component-class>com.liferay.faces.alloy.component.column.Column</component-class>
+	</component>
+	<component>
+		<component-type>com.liferay.faces.alloy.component.row.Row</component-type>
+		<component-class>com.liferay.faces.alloy.component.row.Row</component-class>
+	</component>
 	<converter>
 		<converter-id>convertLongList</converter-id>
 		<converter-class>com.liferay.faces.alloy.converter.LongListConverter</converter-class>
@@ -84,6 +92,11 @@
 		</renderer>
 		<renderer>
 			<component-family>javax.faces.Panel</component-family>
+			<renderer-type>com.liferay.faces.alloy.component.column.internal.ColumnRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.alloy.component.column.internal.ColumnRenderer</renderer-class>
+		</renderer>
+		<renderer>
+			<component-family>javax.faces.Panel</component-family>
 			<renderer-type>com.liferay.faces.alloy.renderkit.internal.ColRenderer</renderer-type>
 			<renderer-class>com.liferay.faces.alloy.renderkit.internal.ColRenderer</renderer-class>
 		</renderer>
@@ -91,6 +104,11 @@
 			<component-family>javax.faces.Panel</component-family>
 			<renderer-type>com.liferay.faces.alloy.renderkit.internal.RowRenderer</renderer-type>
 			<renderer-class>com.liferay.faces.alloy.renderkit.internal.RowRenderer</renderer-class>
+		</renderer>
+		<renderer>
+			<component-family>javax.faces.Panel</component-family>
+			<renderer-type>com.liferay.faces.alloy.component.row.internal.RowRenderer</renderer-type>
+			<renderer-class>com.liferay.faces.alloy.component.row.internal.RowRenderer</renderer-class>
 		</renderer>
 		<renderer>
 			<component-family>javax.faces.Panel</component-family>
