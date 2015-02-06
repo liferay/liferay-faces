@@ -13,17 +13,16 @@
  */
 package com.liferay.faces.bridge.container.liferay.internal;
 
+import javax.faces.FacesWrapper;
 import javax.portlet.MimeResponse;
 
-import com.liferay.faces.bridge.FactoryWrapper;
 import com.liferay.faces.bridge.context.BridgeContext;
 
 
 /**
  * @author  Neil Griffin
  */
-@SuppressWarnings("deprecation")
-public abstract class LiferayURLFactory implements FactoryWrapper<LiferayURLFactory> {
+public abstract class LiferayURLFactory implements FacesWrapper<LiferayURLFactory> {
 
 	public abstract LiferayActionURL getLiferayActionURL(BridgeContext bridgeContext, MimeResponse mimeResponse,
 		String responseNamespace, boolean friendlyURLMapperEnabled);

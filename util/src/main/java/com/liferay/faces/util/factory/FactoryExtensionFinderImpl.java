@@ -32,8 +32,7 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 	private static final Logger logger = LoggerFactory.getLogger(FactoryExtensionFinderImpl.class);
 
 	// Private Data Members
-	private Map<Class<? extends FactoryExtension<?>>, FactoryExtension<?>> factoryExtensionCache =
-		new HashMap<Class<? extends FactoryExtension<?>>, FactoryExtension<?>>();
+	private Map<Class<?>, Object> factoryExtensionCache = new HashMap<Class<?>, Object>();
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -44,19 +43,14 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 			String factoryClassFQCN = configuredFactoryExtension.getValue();
 
 			try {
-				Class<?> factoryClass = Class.forName(factoryClassFQCN);
 
-				if (FactoryExtension.class.isAssignableFrom(factoryClass)) {
+				Class<?> factoryExtensionClass = Class.forName(factoryClassFQCN);
+				Class<?> baseFactoryExtensionClass = getBaseFactoryExtensionClass(factoryExtensionClass);
+				Object existingFactoryInstance = getFactoryInstance(baseFactoryExtensionClass);
+				Object factoryInstance = newFactoryInstance(factoryExtensionClass, baseFactoryExtensionClass,
+						existingFactoryInstance);
 
-					Class<FactoryExtension<?>> factoryExtensionClass = (Class<FactoryExtension<?>>) factoryClass;
-					Class<FactoryExtension<?>> baseFactoryExtensionClass = getBaseFactoryExtensionClass(
-							factoryExtensionClass);
-					FactoryExtension<?> existingFactoryInstance = getFactoryInstance(baseFactoryExtensionClass);
-					FactoryExtension<?> factoryInstance = (FactoryExtension<?>) newFactoryInstance(
-							factoryExtensionClass, baseFactoryExtensionClass, existingFactoryInstance);
-
-					factoryExtensionCache.put(baseFactoryExtensionClass, factoryInstance);
-				}
+				factoryExtensionCache.put(baseFactoryExtensionClass, factoryInstance);
 			}
 			catch (Exception e) {
 				logger.error(e);
@@ -64,9 +58,9 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 		}
 	}
 
-	protected Object newFactoryInstance(Class<FactoryExtension<?>> factoryExtensionClass,
-		Class<FactoryExtension<?>> baseFactoryExtensionClass, Object wrappedFactory) throws ClassNotFoundException,
-		InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	protected Object newFactoryInstance(Class<?> factoryExtensionClass, Class<?> baseFactoryExtensionClass,
+		Object wrappedFactory) throws ClassNotFoundException, InstantiationException, IllegalAccessException,
+		IllegalArgumentException, InvocationTargetException {
 
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		Object classInstance = null;
@@ -93,7 +87,7 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 				else {
 					logger.debug("Creating instance with one-arg constructor since wrapperConstructor=[{0}]",
 						wrapperConstructor);
-					classInstance = wrapperConstructor.newInstance(new Object[] { wrappedFactory });
+					classInstance = wrapperConstructor.newInstance(wrappedFactory);
 				}
 			}
 		}
@@ -102,23 +96,21 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected Class<FactoryExtension<?>> getBaseFactoryExtensionClass(Class<FactoryExtension<?>> factoryClass) {
+	protected Class<?> getBaseFactoryExtensionClass(Class<?> factoryClass) {
 
-		Class<FactoryExtension<?>> baseFactoryExtensionClass = factoryClass;
-
+		Class<?> baseFactoryExtensionClass = factoryClass;
 		Class<?> factorySuperclass = factoryClass.getSuperclass();
 
-		if (FactoryExtension.class.isAssignableFrom(factorySuperclass)) {
-			Class<FactoryExtension<?>> superClassAsFactoryExtension = (Class<FactoryExtension<?>>) factorySuperclass;
-			baseFactoryExtensionClass = getBaseFactoryExtensionClass(superClassAsFactoryExtension);
+		if (!Object.class.getName().equals(factorySuperclass.getName())) {
+			baseFactoryExtensionClass = getBaseFactoryExtensionClass(factorySuperclass);
 		}
 
 		return baseFactoryExtensionClass;
 	}
 
 	@Override
-	public FactoryExtension<?> getFactoryInstance(Class<? extends FactoryExtension<?>> clazz) {
-		FactoryExtension<?> factory = null;
+	public Object getFactoryInstance(Class<?> clazz) {
+		Object factory = null;
 
 		if (clazz != null) {
 			factory = factoryExtensionCache.get(clazz);
