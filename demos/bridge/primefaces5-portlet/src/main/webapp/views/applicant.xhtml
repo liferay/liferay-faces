@@ -18,13 +18,13 @@
 							<alloy:field id="firstNameField" label="#{i18n['first-name']}">
 								<p:inputText id="firstName" label="#{i18n['first-name']}" required="true"
 									value="#{applicantModelBean.firstName}">
-									<f:ajax render="firstNameField" />
+									<p:ajax update="firstNameField" />
 								</p:inputText>
 								<p:message id="firstNameMessage" for="firstName" />
 							</alloy:field>
 							<alloy:field id="lastNameField" label="#{i18n['last-name']}">
 								<p:inputText id="lastName" label="#{i18n['last-name']}" required="true" value="#{applicantModelBean.lastName}">
-									<f:ajax render="lastNameField" />
+									<p:ajax update="lastNameField" />
 								</p:inputText>
 								<p:message for="lastName" />
 							</alloy:field>
@@ -32,14 +32,14 @@
 								<p:inputText id="emailAddress" label="#{i18n['email-address']}" required="true"
 									validatorMessage="#{i18n['invalid-email-address']}" value="#{applicantModelBean.emailAddress}">
 									<f:validateRegex pattern=".+[@].+[.].+" />
-									<f:ajax render="emailAddressField" />
+									<p:ajax update="emailAddressField" />
 								</p:inputText>
 								<p:message for="emailAddress" />
 							</alloy:field>
 							<alloy:field id="phoneNumberField" label="#{i18n['phone-number']}">
 								<p:inputText id="phoneNumber" label="#{i18n['phone-number']}" required="true"
 									value="#{applicantModelBean.phoneNumber}">
-									<f:ajax render="phoneNumberField" />
+									<p:ajax update="phoneNumberField" />
 								</p:inputText>
 								<p:message for="phoneNumber" />
 							</alloy:field>
@@ -50,13 +50,13 @@
 									pattern="#{portletPreferencesValues['datePattern'][0]}" showOn="button"
 									value="#{applicantModelBean.dateOfBirth}">
 									<f:convertDateTime pattern="#{portletPreferencesValues['datePattern'][0]}" />
-									<f:ajax render="dateOfBirthField" />
+									<p:ajax update="dateOfBirthField" />
 								</p:calendar>
 								<p:message for="dateOfBirth" />
 							</alloy:field>
 							<alloy:field id="cityField" label="#{i18n['city']}">
 								<p:inputText id="city" label="#{i18n['city']}" required="true" value="#{applicantModelBean.city}">
-									<f:ajax render="cityField" />
+									<p:ajax update="cityField" />
 								</p:inputText>
 								<p:message id="cityMessage" for="city" />
 							</alloy:field>
@@ -66,14 +66,14 @@
 									<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
 									<f:selectItems itemValue="#{province.provinceId}" itemLabel="#{province.provinceName}"
 										value="#{listModelBean.provinces}" var="province" />
-									<f:ajax render="provinceIdField" />
+									<p:ajax update="provinceIdField" />
 								</h:selectOneMenu>
 								<p:message id="provinceIdMessage" for="provinceId" />
 							</alloy:field>
 							<alloy:field id="postalCodeField" label="#{i18n['zip-postal']}">
 								<p:inputText id="postalCode" label="#{i18n['zip-postal']}" required="true" style="width: 100px;"
 									value="#{applicantModelBean.postalCode}" valueChangeListener="#{applicantBackingBean.postalCodeListener}">
-									<f:ajax render="cityField provinceIdField postalCodeField" />
+									<p:ajax update="cityField provinceIdField postalCodeField" />
 								</p:inputText>
 								<img src="#{resource['example:icon-help.png']}" title="#{i18n['postal-code-hint']}" />
 								<p:message id="postalCodeMessage" for="postalCode" />
@@ -85,17 +85,19 @@
 					<alloy:row>
 						<alloy:column>
 							<alloy:field id="commentsField" label="#{i18n['comments']}">
-								<h:panelGroup id="showHide" layout="block">
-									<f:ajax render="commentsField">
-										<h:commandLink actionListener="#{applicantViewBean.toggleComments}"
-											rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
-										<h:commandLink actionListener="#{applicantViewBean.toggleComments}"
-											rendered="#{applicantViewBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}" />
-									</f:ajax>
+								<h:panelGroup id="showHide" layout="block">									
+									<h:commandLink actionListener="#{applicantViewBean.toggleComments}"
+										rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}">
+											<p:ajax update="commentsField"/>
+									</h:commandLink>
+									<h:commandLink actionListener="#{applicantViewBean.toggleComments}"
+										rendered="#{applicantViewBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}">
+											<p:ajax update="commentsField"/>
+									</h:commandLink>
 								</h:panelGroup>
 								<p:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantViewBean.commentsRendered}"
 									value="#{applicantModelBean.comments}">
-									<f:ajax />
+									<p:ajax />
 								</p:inputTextarea>
 							</alloy:field>
 						</alloy:column>
