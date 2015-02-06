@@ -13,16 +13,15 @@
  */
 package com.liferay.faces.util.model;
 
+import javax.faces.FacesWrapper;
 import java.util.List;
 import java.util.Map;
-
-import com.liferay.faces.util.factory.FactoryExtension;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class UploadedFileFactory implements FactoryExtension<UploadedFileFactory> {
+public abstract class UploadedFileFactory implements FacesWrapper<UploadedFileFactory> {
 
 	public abstract UploadedFile getUploadedFile(Exception e);
 

@@ -67,7 +67,7 @@ public abstract class FactoryExtensionFinder {
 		return classPathResourceAsString;
 	}
 
-	public static FactoryExtension<?> getFactory(Class<? extends FactoryExtension<?>> clazz) {
+	public static Object getFactory(Class<?> clazz) {
 		return getInstance().getFactoryInstance(clazz);
 	}
 
@@ -100,5 +100,5 @@ public abstract class FactoryExtensionFinder {
 
 	public abstract void registerFactory(ConfiguredElement configuredFactoryExtension);
 
-	public abstract FactoryExtension<?> getFactoryInstance(Class<? extends FactoryExtension<?>> clazz);
+	public abstract Object getFactoryInstance(Class<?> clazz);
 }
