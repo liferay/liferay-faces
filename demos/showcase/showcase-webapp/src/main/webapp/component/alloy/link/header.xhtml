@@ -1,24 +1,23 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:aui="http://liferay.com/faces/aui" xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase">
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase">
 
 	<showcase:note>
 		<h2>#{i18n['note']}</h2>
-		<aui:list>
-			<aui:list-item>
+		<alloy:dataList>
+			<alloy:dataItem>
 				<alloy:link includeViewParams="true" value="alloy:link" />
 				<alloy:outputText escape="false" value=" #{i18n['alloy-link-benefits-description']}" />
-			</aui:list-item>
-			<aui:list-item>
+			</alloy:dataItem>
+			<alloy:dataItem>
 				<alloy:link includeViewParams="true" value="alloy:outputLink">
 					<f:param name="componentPrefix" value="alloy" />
 					<f:param name="componentName" value="outputLink" />
 					<f:param name="componentUseCase" value="general" />
 				</alloy:link>
 				<alloy:outputText escape="false" value=" #{i18n['alloy-outputlink-benefits-description']}" />
-			</aui:list-item>
-		</aui:list>
+			</alloy:dataItem>
+		</alloy:dataList>
 	</showcase:note>
 
 </ui:composition>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:example-cc="http://java.sun.com/jsf/composite/example-cc"
 	xmlns:ice="http://www.icesoft.com/icefaces/component" xmlns:icecore="http://www.icefaces.org/icefaces/core"
@@ -9,67 +9,67 @@
 	<example-cc:clipboard label="#{i18n['job-application']}" />
 	<example-cc:sponsorButton />
 	<example-cc:divider />
-	<aui:row>
-		<aui:col id="c1" width="66">
+	<alloy:row>
+		<alloy:column id="c1" width="66">
 			<h:form id="f1">
 				<icecore:singleSubmit />
 				<h:messages globalOnly="true" layout="table" />
-				<aui:fieldset id="fs1">
-					<aui:row>
-						<aui:col id="c1a" width="50">
-							<aui:field label="#{i18n['first-name']}">
+				<alloy:fieldset id="fs1">
+					<alloy:row>
+						<alloy:column id="c1a" width="50">
+							<alloy:field label="#{i18n['first-name']}">
 								<ice:inputText id="firstName" required="true" value="#{applicantModelBean.firstName}" />
 								<h:message for="firstName" />
-							</aui:field>
-							<aui:field label="#{i18n['last-name']}">
+							</alloy:field>
+							<alloy:field label="#{i18n['last-name']}">
 								<ice:inputText id="lastName" required="true" value="#{applicantModelBean.lastName}" />
 								<h:message for="lastName" />
-							</aui:field>
-							<aui:field label="#{i18n['email-address']}">
+							</alloy:field>
+							<alloy:field label="#{i18n['email-address']}">
 								<ice:inputText id="emailAddress" required="true" validatorMessage="#{i18n['invalid-email-address']}"
 									value="#{applicantModelBean.emailAddress}">
 									<f:validateRegex pattern=".+[@].+[.].+" />
 								</ice:inputText>
 								<h:message for="emailAddress" />
-							</aui:field>
-							<aui:field label="#{i18n['phone-number']}">
+							</alloy:field>
+							<alloy:field label="#{i18n['phone-number']}">
 								<ice:inputText id="phoneNumber" required="true" value="#{applicantModelBean.phoneNumber}" />
 								<h:message for="phoneNumber" />
-							</aui:field>
-						</aui:col>
-						<aui:col id="c1b" width="50">
-							<aui:field label="#{i18n['birthday']}">
+							</alloy:field>
+						</alloy:column>
+						<alloy:column id="c1b" width="50">
+							<alloy:field label="#{i18n['birthday']}">
 								<ice:selectInputDate id="dateOfBirth" renderAsPopup="true" required="true"
 									value="#{applicantModelBean.dateOfBirth}">
 									<f:convertDateTime pattern="#{portletPreferencesValues['datePattern'][0]}" />
 								</ice:selectInputDate>
 								<h:message for="dateOfBirth" />
-							</aui:field>
-							<aui:field label="#{i18n['city']}">
+							</alloy:field>
+							<alloy:field label="#{i18n['city']}">
 								<ice:inputText id="city" required="true" value="#{applicantModelBean.city}" />
 								<h:message id="cityMessage" for="city" />
-							</aui:field>
-							<aui:field label="#{i18n['state-province']}">
+							</alloy:field>
+							<alloy:field label="#{i18n['state-province']}">
 								<ice:selectOneMenu id="provinceId" required="true" value="#{applicantModelBean.provinceId}">
 									<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
 									<f:selectItems itemValue="#{province.provinceId}" itemLabel="#{province.provinceName}"
 										value="#{listModelBean.provinces}" var="province" />
 								</ice:selectOneMenu>
 								<h:message id="provinceIdMessage" for="provinceId" />
-							</aui:field>
-							<aui:field label="#{i18n['zip-postal']}">
+							</alloy:field>
+							<alloy:field label="#{i18n['zip-postal']}">
 								<ice:inputText id="postalCode" required="true" style="width: 100px;" value="#{applicantModelBean.postalCode}"
 									valueChangeListener="#{applicantBackingBean.postalCodeListener}" />
 								<img src="#{resource['example:icon-help.png']}" title="#{i18n['postal-code-hint']}" />
 								<h:message id="postalCodeMessage" for="postalCode" />
-							</aui:field>
-						</aui:col>
-					</aui:row>
-				</aui:fieldset>
-				<aui:fieldset>
-					<aui:row>
-						<aui:col>
-							<aui:field id="commentsField" label="#{i18n['comments']}">
+							</alloy:field>
+						</alloy:column>
+					</alloy:row>
+				</alloy:fieldset>
+				<alloy:fieldset>
+					<alloy:row>
+						<alloy:column>
+							<alloy:field id="commentsField" label="#{i18n['comments']}">
 								<ice:panelGroup id="showHide" layout="block">
 									<ice:commandLink actionListener="#{applicantViewBean.toggleComments}" immediate="true"
 										rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}" />
@@ -80,17 +80,17 @@
 									value="#{applicantModelBean.comments}">
 									<f:ajax />
 								</ice:inputTextarea>
-							</aui:field>
-						</aui:col>
-					</aui:row>
-				</aui:fieldset>
+							</alloy:field>
+						</alloy:col>
+					</alloy:row>
+				</alloy:fieldset>
 				<hr />
 				<ice:commandButton action="#{applicantBackingBean.submit}" partialSubmit="false" value="#{i18n['submit']}" />
 			</h:form>
-		</aui:col>
-		<aui:col id="c2" width="33">
-			<aui:row>
-				<aui:col id="c2a" styleClass="uploaded-files">
+		</alloy:column>
+		<alloy:column id="c2" width="33">
+			<alloy:row>
+				<alloy:column id="c2a" styleClass="uploaded-files">
 					<h:form id="f2">
 						<ice:panelPopup visible="#{applicantViewBean.popupRendered}" rendered="#{applicantViewBean.popupRendered}"
 							modal="true">
@@ -133,9 +133,9 @@
 							fileEntryListener="#{applicantBackingBean.handleFileUpload}" />
 						<h:commandButton value="#{i18n['add-attachment']}" />
 					</h:form>
-				</aui:col>
-			</aui:row>
-		</aui:col>
-	</aui:row>
+				</alloy:column>
+			</alloy:row>
+		</alloy:column>
+	</alloy:row>
 
 </ui:composition>

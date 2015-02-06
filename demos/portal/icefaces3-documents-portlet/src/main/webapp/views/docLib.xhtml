@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:ace="http://www.icefaces.org/icefaces/components"
-	xmlns:aui="http://liferay.com/faces/aui" xmlns:aui-cc="http://liferay.com/faces/aui-cc"
+	xmlns:alloy="http://liferay.com/faces/alloy" xmlns:aui-cc="http://liferay.com/faces/aui-cc"
 	xmlns:liferay-ui="http://liferay.com/faces/ui" xmlns:ice="http://www.icesoft.com/icefaces/component"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:icecore="http://www.icefaces.org/icefaces/core">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:portal="http://liferay.com/faces/portal">
 
 	<h:messages globalOnly="true" />
 	<h:form id="f1" styleClass="aui-form dlp">
@@ -13,30 +14,30 @@
 			<ace:fileEntry id="fileEntryComp" absolutePath="#{docLibBackingBean.fileUploadAbsolutePath}"
 				fileEntryListener="#{docLibBackingBean.handleFileUpload}" />
 			<hr />
-			<aui:button-row>
+			<portal:buttonRow>
 				<h:commandButton onclick="uploadDialog.hide()" value="#{i18n['upload-document']}" />
-			</aui:button-row>
+			</portal:buttonRow>
 		</ace:dialog>
 		<ace:dialog id="addFolderDialog" header="#{i18n['add-folder']}" modal="true" widgetVar="addFolderDialog"
 			message="#{i18n.replace('upload-documents-no-larger-than-x-k', docUploadBackingBean.maxFileSizeKB)}" width="640"
 			height="480" closable="true" position="center">
 			<aui-cc:messages globalOnly="true" layout="table" />
-			<aui:fieldset label="#{i18n['add-folder']}">
+			<alloy:fieldset label="#{i18n['add-folder']}">
 				<aui-cc:input inlineMessage="true" label="#{i18n['folder-name']}" required="#{docLibViewBean.popupRendered}"
 					value="#{docLibBackingBean.folderName}" />
 				<aui-cc:input inlineMessage="true" label="#{i18n['description']}" required="false" cols="100" rows="10"
 					type="textarea" value="#{docLibBackingBean.folderDescription}" />
-				<aui:button-row>
+				<portal:buttonRow>
 					<h:commandButton actionListener="#{docLibBackingBean.addFolder}" onclick="addFolderDialog.hide()"
 						value="#{i18n['submit']}" />
-				</aui:button-row>
-			</aui:fieldset>
+				</portal:buttonRow>
+			</alloy:fieldset>
 		</ace:dialog>
 	</h:form>
 	<h:form id="f2">
 		<ice:panelGroup>
-			<aui:row>
-				<aui:col width="25" first="true">
+			<alloy:row>
+				<alloy:column width="25">
 					<liferay-ui:panel-container>
 						<liferay-ui:panel title="#{i18n['folders']}">
 							<ice:tree id="tree" value="#{docLibModelBean.folderTreeModel}" var="treeNode" hideRootNode="false"
@@ -60,8 +61,8 @@
 							</ice:tree>
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>
-				</aui:col>
-				<aui:col width="50">
+				</alloy:column>
+				<alloy:column width="50">
 					<liferay-ui:panel-container>
 						<liferay-ui:panel styleClass="docPanel" title="#{i18n['documents']}">
 							<liferay-ui:ice-page-iterator for="documents" />
@@ -111,9 +112,9 @@
 							<liferay-ui:info message="there-are-no-documents" rendered="#{docLibModelBean.documentDataModel.rowCount == 0}" />
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>
-				</aui:col>
+				</alloy:column>
 				<c:set value="#{docLibModelBean.selectedFolderUserObject.text}" var="selectedFolderName" />
-				<aui:col width="25" last="true" styleClass="lfr-asset-column lfr-asset-column-actions">
+				<alloy:column width="25" last="true" styleClass="lfr-asset-column lfr-asset-column-actions">
 					<h:panelGroup layout="block" styleClass="lfr-asset-summary">
 						<h:panelGroup styleClass="lfr-asset-avatar">
 							<h:graphicImage alt="#{selectedFolderName}"
@@ -131,8 +132,8 @@
 						<liferay-ui:icon href="javascript:uploadDialog.show();" image="../document_library/add_document"
 							message="add-document" rendered="#{docLibBackingBean.permittedToAddDocument}" />
 					</liferay-ui:icon-menu>
-				</aui:col>
-			</aui:row>
+				</alloy:column>
+			</alloy:row>
 		</ice:panelGroup>
 	</h:form>
 </ui:composition>

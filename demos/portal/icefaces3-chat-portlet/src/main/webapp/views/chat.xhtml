@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns:ace="http://www.icefaces.org/icefaces/components" xmlns:aui="http://liferay.com/faces/aui"
+<ui:composition xmlns:ace="http://www.icefaces.org/icefaces/components" xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
 
@@ -53,16 +53,13 @@
 				</h:panelGroup>
 			</ace:dialog>
 			<h:panelGroup id="chatBar" layout="block" styleClass="chat-bar">
-				<h:panelGroup layout="block" styleClass="chat-tabs-container">
-					<aui:list styleClass="chat-tabs">
-						<aui:list-item styleClass="buddy-list">
-							<h:panelGroup layout="block" styleClass="panel-trigger aui-helper-unselectable">
-								<h:commandLink onclick="onlineFriends.show()" styleClass="trigger-name"
-									value="#{i18n.replace('online-friends-x', chatModelBean.onlineUsers.rowCount)}" />
-							</h:panelGroup>
-						</aui:list-item>
-						<ui:repeat value="#{chatModelBean.scopedChatRooms}" var="scopedChatRoom">
-							<aui:list-item styleClass="user user_#{scopedChatRoom.friendUserId} #{scopedChatRoom.friendWaiting}">
+				<h:panelGroup layout="block" styleClass="chat-tabs-container">					
+					<h:panelGroup layout="block" styleClass="buddy-list panel-trigger aui-helper-unselectable">
+						<h:commandLink onclick="onlineFriends.show()" styleClass="trigger-name"
+							value="#{i18n.replace('online-friends-x', chatModelBean.onlineUsers.rowCount)}" />
+					</h:panelGroup>						
+					<alloy:dataList styleClass="chat-tabs" value="#{chatModelBean.scopedChatRooms}" var="scopedChatRoom">
+							<alloy:dataItem styleClass="user user_#{scopedChatRoom.friendUserId} #{scopedChatRoom.friendWaiting}">
 								<h:panelGroup layout="block" styleClass="panel-trigger aui-helper-unselectable">
 									<h:commandLink styleClass="" value="#{scopedChatRoom.friendFullName}">
 										<ace:ajax onComplete="currentScopedChatRoom.show()" />
@@ -72,9 +69,8 @@
 										<h:outputText value="#{scopedChatRoom.totalUnread}" />
 									</h:panelGroup>
 								</h:panelGroup>
-							</aui:list-item>
-						</ui:repeat>
-					</aui:list>
+							</alloy:dataItem>						
+					</alloy:dataList>
 				</h:panelGroup>
 			</h:panelGroup>
 		</h:panelGroup>
