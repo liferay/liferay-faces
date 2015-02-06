@@ -14,13 +14,13 @@
 package com.liferay.faces.bridge.context;
 
 import javax.faces.FacesException;
+import javax.faces.FacesWrapper;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.faces.Bridge;
 
-import com.liferay.faces.bridge.FactoryWrapper;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
@@ -36,8 +36,7 @@ import com.liferay.faces.bridge.scope.BridgeRequestScope;
  *
  * @author  Neil Griffin
  */
-@SuppressWarnings("deprecation")
-public abstract class BridgeContextFactory implements FactoryWrapper<BridgeContextFactory> {
+public abstract class BridgeContextFactory implements FacesWrapper<BridgeContextFactory> {
 
 	public abstract BridgeContext getBridgeContext(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
 		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,

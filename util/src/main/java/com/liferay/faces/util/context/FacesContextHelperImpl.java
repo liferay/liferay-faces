@@ -37,7 +37,6 @@ import javax.servlet.http.HttpSession;
 
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.context.map.JavaScriptMap;
-import com.liferay.faces.util.factory.FactoryExtension;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.helper.IntegerHelper;
