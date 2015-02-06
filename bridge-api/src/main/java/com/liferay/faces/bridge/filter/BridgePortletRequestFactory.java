@@ -13,18 +13,17 @@
  */
 package com.liferay.faces.bridge.filter;
 
+import javax.faces.FacesWrapper;
 import javax.portlet.ActionRequest;
 import javax.portlet.EventRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.ResourceRequest;
 
-import com.liferay.faces.util.factory.FactoryExtension;
-
 
 /**
  * @author  Neil Griffin
  */
-public abstract class BridgePortletRequestFactory implements FactoryExtension<BridgePortletRequestFactory> {
+public abstract class BridgePortletRequestFactory implements FacesWrapper<BridgePortletRequestFactory> {
 
 	public abstract ActionRequest getActionRequest(ActionRequest actionRequest);
 

@@ -16,14 +16,15 @@ package com.liferay.faces.bridge.context.url;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.FacesWrapper;
+
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.util.factory.FactoryExtension;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class BridgeURLFactory implements FactoryExtension<BridgeURLFactory> {
+public abstract class BridgeURLFactory implements FacesWrapper<BridgeURLFactory> {
 
 	public abstract BridgeActionURL getBridgeActionURL(String url, String currentFacesViewId,
 		BridgeContext bridgeContext);

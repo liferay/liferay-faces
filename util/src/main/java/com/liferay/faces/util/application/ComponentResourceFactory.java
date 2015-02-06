@@ -13,9 +13,8 @@
  */
 package com.liferay.faces.util.application;
 
+import javax.faces.FacesWrapper;
 import javax.faces.component.UIComponent;
-
-import com.liferay.faces.util.factory.FactoryExtension;
 
 
 /**
@@ -28,7 +27,7 @@ import com.liferay.faces.util.factory.FactoryExtension;
  *
  * @author  Neil Griffin
  */
-public abstract class ComponentResourceFactory implements FactoryExtension<ComponentResourceFactory> {
+public abstract class ComponentResourceFactory implements FacesWrapper<ComponentResourceFactory> {
 
 	/**
 	 * Gets an instance of ComponentResourceInfo according to the specified UIComponent resource.

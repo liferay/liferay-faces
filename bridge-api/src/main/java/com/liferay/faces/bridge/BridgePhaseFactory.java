@@ -14,6 +14,7 @@
 package com.liferay.faces.bridge;
 
 import javax.faces.FacesException;
+import javax.faces.FacesWrapper;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.EventRequest;
@@ -23,8 +24,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-
-import com.liferay.faces.util.factory.FactoryExtension;
 
 
 /**
@@ -37,7 +36,7 @@ import com.liferay.faces.util.factory.FactoryExtension;
  *
  * @author  Neil Griffin
  */
-public abstract class BridgePhaseFactory implements FactoryExtension<BridgePhaseFactory> {
+public abstract class BridgePhaseFactory implements FacesWrapper<BridgePhaseFactory> {
 
 	public abstract BridgePhase getBridgeActionPhase(ActionRequest actionRequest, ActionResponse actionResponse,
 		PortletConfig portletConfig) throws FacesException;
