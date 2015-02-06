@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:alloy="http://liferay.com/faces/alloy"
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:example-cc="http://liferay.com/faces/composite/example-cc"
@@ -10,13 +11,13 @@
 	<example-cc:clipboard label="#{i18n['job-application']}" />
 	<example-cc:sponsorButton />
 	<example-cc:divider />
-	<aui:row>
-		<aui:col id="c1" width="66">
+	<alloy:row>
+		<alloy:column id="c1" width="66">
 			<ice:form id="f1" partialSubmit="true">
 				<ice:messages globalOnly="true" layout="table" />
 				<aui:fieldset id="fs1">
-					<aui:row>
-						<aui:col id="c1a" width="50">
+					<alloy:row>
+						<alloy:column id="c1a" width="50">
 							<aui:field label="#{i18n['first-name']}">
 								<ice:inputText id="firstName" required="true"
 									value="#{applicantModelBean.firstName}" />
@@ -38,8 +39,8 @@
 									value="#{applicantModelBean.phoneNumber}" />
 								<ice:message for="phoneNumber" />
 							</aui:field>
-						</aui:col>
-						<aui:col id="c1b" width="50">
+						</alloy:column>
+						<alloy:column id="c1b" width="50">
 							<aui:field label="#{i18n['birthday']}">
 								<ice:selectInputDate id="dateOfBirth" renderAsPopup="true"
 									required="true" value="#{applicantModelBean.dateOfBirth}">
@@ -86,12 +87,12 @@
 									title="#{i18n['postal-code-hint']}" />
 								<ice:message id="postalCodeMessage" for="postalCode" />
 							</aui:field>
-						</aui:col>
-					</aui:row>
+						</alloy:column>
+					</alloy:row>
 				</aui:fieldset>
 				<aui:fieldset>
-					<aui:row>
-						<aui:col>
+					<alloy:row>
+						<alloy:column>
 							<aui:field id="commentsField" label="#{i18n['comments']}">
 								<ice:panelGroup id="showHide" layout="block">
 									<ice:commandLink
@@ -109,15 +110,15 @@
 									rendered="#{applicantViewBean.commentsRendered}"
 									value="#{applicantModelBean.comments}" />
 							</aui:field>
-						</aui:col>
-					</aui:row>
+						</alloy:column>
+					</alloy:row>
 				</aui:fieldset>
 				<hr />
 				<ice:commandButton action="#{applicantBackingBean.submit}"
 					partialSubmit="false" value="#{i18n['submit']}" />
 			</ice:form>
-		</aui:col>
-		<aui:col id="c2" width="33">
+		</alloy:column>
+		<alloy:column id="c2" width="33">
 			<ice:form id="f2">
 				<ice:panelPopup visible="#{applicantViewBean.popupRendered}"
 					rendered="#{applicantViewBean.popupRendered}" modal="true">
@@ -138,7 +139,7 @@
 						</ice:panelGroup>
 					</f:facet>
 				</ice:panelPopup>
-				<aui:col id="c2a" styleClass="uploaded-files">
+				<alloy:column id="c2a" styleClass="uploaded-files">
 					<h3>#{i18n['attachments']}</h3>
 					<ice:dataTable headerClass="portlet-section-header results-header"
 						rowClasses="portlet-section-body results-row, portlet-section-alternate results-row alt"
@@ -169,9 +170,9 @@
 						actionListener="#{applicantBackingBean.fileUploadActionListener}" />
 					<ice:outputProgress value="#{applicantViewBean.percentComplete}"
 						labelComplete="0%" />
-				</aui:col>
+				</alloy:column>
 			</ice:form>
-		</aui:col>
-	</aui:row>
+		</alloy:column>
+	</alloy:row>
 
 </ui:composition>
