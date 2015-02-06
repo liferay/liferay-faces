@@ -16,8 +16,6 @@ package com.liferay.faces.alloy.component.body.internal;
 import java.io.IOException;
 
 import javax.faces.component.UIComponent;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.client.ClientScript;
