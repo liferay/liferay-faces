@@ -14,14 +14,15 @@
 package com.liferay.faces.util.client;
 
 import javax.faces.FacesException;
-import javax.faces.FacesWrapper;
 import javax.faces.context.ExternalContext;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class BrowserSnifferFactory implements FacesWrapper<BrowserSnifferFactory> {
+public abstract class BrowserSnifferFactory implements Wrapper<BrowserSnifferFactory> {
 
 	public abstract BrowserSniffer getBrowserSniffer(ExternalContext externalContext) throws FacesException;
 }

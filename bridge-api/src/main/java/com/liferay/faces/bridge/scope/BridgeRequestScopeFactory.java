@@ -14,10 +14,11 @@
 package com.liferay.faces.bridge.scope;
 
 import javax.faces.FacesException;
-import javax.faces.FacesWrapper;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
@@ -30,7 +31,7 @@ import javax.portlet.PortletRequest;
  *
  * @author  Neil Griffin
  */
-public abstract class BridgeRequestScopeFactory implements FacesWrapper<BridgeRequestScopeFactory> {
+public abstract class BridgeRequestScopeFactory implements Wrapper<BridgeRequestScopeFactory> {
 
 	public abstract BridgeRequestScope getBridgeRequestScope(PortletConfig portletConfig, PortletContext portletContext,
 		PortletRequest portletRequest) throws FacesException;

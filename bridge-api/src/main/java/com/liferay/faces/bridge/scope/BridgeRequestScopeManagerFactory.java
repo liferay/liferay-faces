@@ -14,7 +14,8 @@
 package com.liferay.faces.bridge.scope;
 
 import javax.faces.FacesException;
-import javax.faces.FacesWrapper;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
@@ -27,7 +28,7 @@ import javax.faces.FacesWrapper;
  *
  * @author  Neil Griffin
  */
-public abstract class BridgeRequestScopeManagerFactory implements FacesWrapper<BridgeRequestScopeManagerFactory> {
+public abstract class BridgeRequestScopeManagerFactory implements Wrapper<BridgeRequestScopeManagerFactory> {
 
 	public abstract BridgeRequestScopeManager getBridgeRequestScopeManager() throws FacesException;
 }

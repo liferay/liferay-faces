@@ -15,13 +15,13 @@ package com.liferay.faces.util.template;
 
 import java.io.IOException;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class TemplateFactory implements FacesWrapper<TemplateFactory> {
+public abstract class TemplateFactory implements Wrapper<TemplateFactory> {
 
 	public abstract Template getTemplate(String text, String contentType);
 

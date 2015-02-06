@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.bridge.context;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
@@ -26,7 +26,7 @@ import javax.faces.FacesWrapper;
  *
  * @author  Neil Griffin
  */
-public abstract class IncongruityContextFactory implements FacesWrapper<IncongruityContextFactory> {
+public abstract class IncongruityContextFactory implements Wrapper<IncongruityContextFactory> {
 
 	public abstract IncongruityContext getIncongruityContext();
 }
