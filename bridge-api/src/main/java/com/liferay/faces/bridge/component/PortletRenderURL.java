@@ -25,7 +25,7 @@ import javax.faces.component.UIOutput;
 public class PortletRenderURL extends UIOutput {
 
 	public static final String COMPONENT_TYPE = "com.liferay.faces.bridge.component.PortletRenderURL";
-	public static final String DEFAULT_RENDERER_TYPE = "com.liferay.faces.bridge.renderkit.portlet.RenderURLRenderer";
+	public static final String DEFAULT_RENDERER_TYPE = "com.liferay.faces.bridge.renderkit.portlet.internal.RenderURLRenderer";
 
 	public String getComponentType() {
 		return COMPONENT_TYPE;
