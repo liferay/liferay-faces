@@ -16,11 +16,11 @@ package com.liferay.faces.demos.bean;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UICommand;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -39,7 +39,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 
 @Named
-@RequestScoped
+@ViewScoped
 public class ApplicantBackingBean implements Serializable {
 
 	// serialVersionUID
