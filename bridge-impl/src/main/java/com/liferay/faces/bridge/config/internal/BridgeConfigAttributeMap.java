@@ -23,6 +23,11 @@ import com.liferay.faces.util.product.ProductMap;
  */
 public class BridgeConfigAttributeMap extends HashMap<String, Object> {
 
+	// Public Constants
+	public static final String CONFIGURED_FACES_SERVLET_MAPPINGS = "configuredFacesServletMappings";
+	public static final String CONFIGURED_SYSTEM_EVENT_LISTENERS = "configuredSystemEventListeners";
+	public static final String CONFIGURED_SUFFIXES = "configuredSuffixes";
+
 	// serialVersionUID
 	private static final long serialVersionUID = 7385067508147506114L;
 

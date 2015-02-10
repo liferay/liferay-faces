@@ -32,6 +32,8 @@ import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortalContext;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
@@ -40,7 +42,6 @@ import javax.portlet.ResourceURL;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.PortletPhase;
 
-import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.internal.BridgeConstants;
@@ -71,17 +72,18 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 
 	// Private Data Members
 	private Boolean ableToSetHttpStatusCode;
-	private BridgeConfig bridgeConfig;
 	private boolean markupHeadElementSupported;
+	private PortletConfig portletConfig;
 	private String requestQueryString;
 	private String requestURL;
 	private String responseNamespace;
 
-	public PortletContainerImpl(PortletRequest portletRequest, BridgeConfig bridgeConfig) {
+	public PortletContainerImpl(PortletRequest portletRequest, PortletConfig portletConfig) {
+
 		String portalVendorClaim = portletRequest.getPortalContext().getProperty(
 				PortalContext.MARKUP_HEAD_ELEMENT_SUPPORT);
-		this.bridgeConfig = bridgeConfig;
 		this.markupHeadElementSupported = (portalVendorClaim != null);
+		this.portletConfig = portletConfig;
 	}
 
 	public void afterPhase(PhaseEvent phaseEvent) {
@@ -124,7 +126,7 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 	public PortletURL createRedirectURL(String fromURL, Map<String, List<String>> parameters)
 		throws MalformedURLException {
 
-		PortletURL redirectURL = null;
+		PortletURL redirectURL;
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
@@ -403,7 +405,7 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 			if (pos >= 0) {
 				String queryString = url.substring(pos + 1);
 
-				if ((queryString != null) && (queryString.length() > 0)) {
+				if (queryString.length() > 0) {
 					requestParameters = new ArrayList<RequestParameter>();
 
 					String[] queryParameters = queryString.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
@@ -411,16 +413,13 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 					for (String queryParameter : queryParameters) {
 						String[] nameValueArray = queryParameter.split("[=]");
 
-						if (nameValueArray != null) {
-
-							if (nameValueArray.length == 2) {
-								String name = nameValueArray[0];
-								String value = nameValueArray[1];
-								requestParameters.add(new RequestParameter(name, value));
-							}
-							else {
-								throw new MalformedURLException("invalid name/value pair: " + queryParameter);
-							}
+						if (nameValueArray.length == 2) {
+							String name = nameValueArray[0];
+							String value = nameValueArray[1];
+							requestParameters.add(new RequestParameter(name, value));
+						}
+						else {
+							throw new MalformedURLException("invalid name/value pair: " + queryParameter);
 						}
 					}
 				}
@@ -432,11 +431,12 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 
 	protected boolean getContextParamAbleToSetHttpStatusCode(boolean defaultValue) {
 
-		String contextParamValue = bridgeConfig.getContextParameter(PortletConfigParam.ContainerAbleToSetHttpStatusCode
-				.getName());
+		PortletContext portletContext = portletConfig.getPortletContext();
+		String contextParamValue = portletContext.getInitParameter(PortletConfigParam.ContainerAbleToSetHttpStatusCode
+			.getName());
 
 		if (contextParamValue == null) {
-			contextParamValue = bridgeConfig.getContextParameter(PortletConfigParam.ContainerAbleToSetHttpStatusCode
+			contextParamValue = portletContext.getInitParameter(PortletConfigParam.ContainerAbleToSetHttpStatusCode
 					.getAlternateName());
 		}
 
@@ -478,8 +478,7 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 			// implemented this feature. That way, the ResourceHandlerImpl will always deliver stuff like jsf.js back
 			// to the browser. As we support more portlet containers in the future (Pluto, etc.) we can create
 			// implementations that override this.
-			boolean defaultValue = false;
-			ableToSetHttpStatusCode = getContextParamAbleToSetHttpStatusCode(defaultValue);
+			ableToSetHttpStatusCode = getContextParamAbleToSetHttpStatusCode(false);
 		}
 
 		return ableToSetHttpStatusCode;

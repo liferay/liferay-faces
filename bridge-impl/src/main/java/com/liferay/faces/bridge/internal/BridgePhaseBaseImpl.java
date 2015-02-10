@@ -171,7 +171,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		PortletContainerFactory portletContainerFactory = (PortletContainerFactory) FactoryExtensionFinder.getFactory(
 				PortletContainerFactory.class);
 		PortletContainer portletContainer = portletContainerFactory.getPortletContainer(portletRequest, portletResponse,
-				portletContext, bridgeConfig);
+				portletContext, portletConfig);
 
 		// Initialize the bridge request scope.
 		initBridgeRequestScope(portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
@@ -201,12 +201,8 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 
 		// If not set by a previous request, then set the default viewIdHistory for the portlet modes.
 		for (String portletMode : PortletModeHelper.PORTLET_MODE_NAMES) {
-			StringBuilder buf = new StringBuilder();
-			buf.append(Bridge.VIEWID_HISTORY);
-			buf.append(StringPool.PERIOD);
-			buf.append(portletMode);
 
-			String attributeName = buf.toString();
+			String attributeName = Bridge.VIEWID_HISTORY + StringPool.PERIOD + portletMode;
 			PortletSession portletSession = portletRequest.getPortletSession();
 
 			if (portletSession.getAttribute(attributeName) == null) {
@@ -234,7 +230,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 
 			// If there is a render parameter value found for the "id", then return the cached bridge request scope
 			// associated with the "id".
-			String bridgeRequestScopeId = (String) portletRequest.getParameter(bridgeRequestScopeKey);
+			String bridgeRequestScopeId = portletRequest.getParameter(bridgeRequestScopeKey);
 
 			if (bridgeRequestScopeId != null) {
 
@@ -293,8 +289,8 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 			if (bridgeRequestScope == null) {
 				BridgeRequestScopeFactory bridgeRequestScopeFactory = (BridgeRequestScopeFactory) FactoryExtensionFinder
 					.getFactory(BridgeRequestScopeFactory.class);
-				bridgeRequestScope = bridgeRequestScopeFactory.getBridgeRequestScope(portletConfig, portletContext,
-						portletRequest);
+				bridgeRequestScope = bridgeRequestScopeFactory.getBridgeRequestScope(portletRequest, portletConfig,
+						bridgeConfig);
 			}
 		}
 	}

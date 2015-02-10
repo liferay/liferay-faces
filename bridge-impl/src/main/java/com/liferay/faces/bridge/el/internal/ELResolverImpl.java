@@ -30,7 +30,7 @@ import javax.portlet.faces.BridgeUtil;
 import javax.servlet.jsp.JspContext;
 
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.context.map.ContextMapFactory;
+import com.liferay.faces.bridge.context.map.internal.ContextMapFactory;
 import com.liferay.faces.bridge.filter.internal.HttpServletRequestAdapter;
 import com.liferay.faces.bridge.filter.internal.HttpServletResponseAdapter;
 import com.liferay.faces.bridge.preference.internal.MutablePreferenceMap;
@@ -243,9 +243,9 @@ public class ELResolverImpl extends ELResolverCompatImpl {
 
 				// Determines whether or not methods annotated with the &#064;PreDestroy annotation are preferably
 				// invoked over the &#064;BridgePreDestroy annotation.
-				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 				ContextMapFactory contextMapFactory = (ContextMapFactory) FactoryExtensionFinder.getFactory(
 						ContextMapFactory.class);
+				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 				value = contextMapFactory.getSessionScopeMap(bridgeContext, PortletSession.APPLICATION_SCOPE);
 			}
 			else if (varName.equals(MUTABLE_PORTLET_PREFERENCES_VALUES)) {
@@ -338,9 +338,7 @@ public class ELResolverImpl extends ELResolverCompatImpl {
 
 	@Override
 	public Class<?> getCommonPropertyType(ELContext elContext, Object base) {
-		Class<?> commonPropertyType = null;
-
-		return commonPropertyType;
+		return null;
 	}
 
 	@Override
@@ -402,7 +400,7 @@ public class ELResolverImpl extends ELResolverCompatImpl {
 		}
 		else {
 
-			Object value = null;
+			Object value;
 
 			// If running inside a JSP context, meaning evaluation of a JSP-syntax (dollar-sign prefixed) EL expression
 			// like ${portletConfig} then
