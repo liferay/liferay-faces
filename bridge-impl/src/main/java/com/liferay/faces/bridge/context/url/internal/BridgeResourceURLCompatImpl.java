@@ -24,8 +24,8 @@ import com.liferay.faces.bridge.context.url.BridgeResourceURL;
  */
 public abstract class BridgeResourceURLCompatImpl extends BridgeURLBaseImpl implements BridgeResourceURL {
 
-	public BridgeResourceURLCompatImpl(String url, String currentFacesViewId, BridgeContext bridgeContext) {
-		super(url, currentFacesViewId, bridgeContext);
+	public BridgeResourceURLCompatImpl(BridgeContext bridgeContext, String url, String viewId) {
+		super(bridgeContext, url, viewId);
 	}
 
 	public boolean isEncodedFaces2ResourceURL() {

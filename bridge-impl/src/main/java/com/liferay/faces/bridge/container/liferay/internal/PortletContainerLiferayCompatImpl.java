@@ -16,9 +16,9 @@ package com.liferay.faces.bridge.container.liferay.internal;
 import javax.faces.context.ResponseWriter;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 
-import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.internal.PortletContainerImpl;
 import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadResponseWriter;
 
@@ -35,8 +35,8 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 	// serialVersionUID
 	private static final long serialVersionUID = 8713570232856573935L;
 
-	public PortletContainerLiferayCompatImpl(PortletRequest portletRequest, BridgeConfig bridgeConfig) {
-		super(portletRequest, bridgeConfig);
+	public PortletContainerLiferayCompatImpl(PortletRequest portletRequest, PortletConfig portletConfig) {
+		super(portletRequest, portletConfig);
 	}
 
 	@Override
