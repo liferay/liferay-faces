@@ -23,6 +23,7 @@ import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 import javax.portlet.faces.Bridge;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.BridgeResponseURL;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
@@ -33,8 +34,8 @@ import com.liferay.faces.bridge.scope.BridgeRequestScope;
  */
 public abstract class BridgeResponseURLImpl extends BridgeURLBaseImpl implements BridgeResponseURL {
 
-	public BridgeResponseURLImpl(String url, String currentFacesViewId, BridgeContext bridgeContext) {
-		super(url, currentFacesViewId, bridgeContext);
+	public BridgeResponseURLImpl(BridgeContext bridgeContext, String url, String viewId) {
+		super(bridgeContext, url, viewId);
 	}
 
 	public void applyToResponse(StateAwareResponse stateAwareResponse) throws PortletModeException,

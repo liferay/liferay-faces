@@ -14,9 +14,9 @@
 package com.liferay.faces.bridge.scope.internal;
 
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeFactory;
 import com.liferay.faces.util.product.ProductConstants;
@@ -33,14 +33,14 @@ public class BridgeRequestScopeFactoryImpl extends BridgeRequestScopeFactory {
 		.isDetected();
 
 	@Override
-	public BridgeRequestScope getBridgeRequestScope(PortletConfig portletConfig, PortletContext portletContext,
-		PortletRequest portletRequest) {
+	public BridgeRequestScope getBridgeRequestScope(PortletRequest portletRequest, PortletConfig portletConfig,
+		BridgeConfig bridgeConfig) {
 
 		if (LIFERAY_PORTAL_DETECTED) {
-			return new BridgeRequestScopeLiferayImpl(portletConfig, portletContext, portletRequest);
+			return new BridgeRequestScopeLiferayImpl(portletRequest, portletConfig, bridgeConfig);
 		}
 		else {
-			return new BridgeRequestScopeImpl(portletConfig, portletContext, portletRequest);
+			return new BridgeRequestScopeImpl(portletRequest, portletConfig, bridgeConfig);
 		}
 	}
 

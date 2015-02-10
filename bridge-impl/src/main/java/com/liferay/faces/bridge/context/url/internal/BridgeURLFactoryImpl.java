@@ -19,6 +19,7 @@ import java.util.Map;
 import com.liferay.faces.bridge.container.internal.PortletContainerDetector;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.BridgeActionURL;
+import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
 import com.liferay.faces.bridge.context.url.BridgeURLFactory;
@@ -31,24 +32,29 @@ import com.liferay.faces.bridge.context.url.liferay.internal.BridgeResourceURLLi
 public class BridgeURLFactoryImpl extends BridgeURLFactory {
 
 	@Override
-	public BridgeActionURL getBridgeActionURL(String url, String currentFacesViewId, BridgeContext bridgeContext) {
-		return new BridgeActionURLImpl(url, currentFacesViewId, bridgeContext);
+	public BridgeActionURL getBridgeActionURL(BridgeContext bridgeContext, String url, String viewId) {
+		return new BridgeActionURLImpl(bridgeContext, url, viewId);
 	}
 
 	@Override
-	public BridgeRedirectURL getBridgeRedirectURL(String url, Map<String, List<String>> parameters,
-		String currentFacesViewId, BridgeContext bridgeContext) {
-		return new BridgeRedirectURLImpl(url, parameters, currentFacesViewId, bridgeContext);
+	public BridgePartialActionURL getBridgePartialActionURL(BridgeContext bridgeContext, String url, String viewId) {
+		return new BridgePartialActionURLImpl(bridgeContext, url, viewId);
 	}
 
 	@Override
-	public BridgeResourceURL getBridgeResourceURL(String url, String currentFacesViewId, BridgeContext bridgeContext) {
+	public BridgeRedirectURL getBridgeRedirectURL(BridgeContext bridgeContext, String url,
+		Map<String, List<String>> parameters, String viewId) {
+		return new BridgeRedirectURLImpl(bridgeContext, url, parameters, viewId);
+	}
+
+	@Override
+	public BridgeResourceURL getBridgeResourceURL(BridgeContext bridgeContext, String url, String viewId) {
 
 		if (PortletContainerDetector.isLiferayPortletRequest(bridgeContext.getPortletRequest())) {
-			return new BridgeResourceURLLiferayImpl(url, currentFacesViewId, bridgeContext);
+			return new BridgeResourceURLLiferayImpl(bridgeContext, url, viewId);
 		}
 		else {
-			return new BridgeResourceURLImpl(url, currentFacesViewId, bridgeContext);
+			return new BridgeResourceURLImpl(bridgeContext, url, viewId);
 		}
 	}
 

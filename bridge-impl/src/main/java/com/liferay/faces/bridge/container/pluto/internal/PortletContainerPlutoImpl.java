@@ -16,11 +16,12 @@ package com.liferay.faces.bridge.container.pluto.internal;
 import java.net.MalformedURLException;
 
 import javax.portlet.MimeResponse;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 import javax.portlet.ResourceURL;
 
-import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.internal.PortletContainerImpl;
+import com.liferay.faces.bridge.context.BridgeContext;
 
 
 /**
@@ -35,8 +36,8 @@ public class PortletContainerPlutoImpl extends PortletContainerImpl {
 	private static final String CONTENT_TYPE_APPLICATION_XHTML_XML = "application/xhtml+xml";
 	private static final String CONTENT_TYPE_TEXT_HTML = "text/html";
 
-	public PortletContainerPlutoImpl(PortletRequest portletRequest, BridgeConfig bridgeConfig) {
-		super(portletRequest, bridgeConfig);
+	public PortletContainerPlutoImpl(PortletRequest portletRequest, PortletConfig portletConfig) {
+		super(portletRequest, portletConfig);
 	}
 
 	/**
@@ -51,7 +52,7 @@ public class PortletContainerPlutoImpl extends PortletContainerImpl {
 	@Override
 	public void setMimeResponseContentType(MimeResponse mimeResponse, String contentType) {
 
-		String contentTypeForPluto = null;
+		String contentTypeForPluto;
 
 		// If the specified contentType is "application/xhtml+xml" then use "text/html" instead. That's the only value
 		// that Pluto's RenderResponseImpl.setContentType(String) will be happy with, even though Pluto's "ACCEPT"

@@ -19,6 +19,8 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
+
 
 /**
  * This abstract class provides a contract for defining a factory that knows how to create instances of type {@link
@@ -32,6 +34,6 @@ import javax.portlet.PortletRequest;
  */
 public abstract class BridgeRequestScopeFactory implements FacesWrapper<BridgeRequestScopeFactory> {
 
-	public abstract BridgeRequestScope getBridgeRequestScope(PortletConfig portletConfig, PortletContext portletContext,
-		PortletRequest portletRequest) throws FacesException;
+	public abstract BridgeRequestScope getBridgeRequestScope(PortletRequest portletRequest, PortletConfig portletConfig,
+		BridgeConfig bridgeConfig) throws FacesException;
 }

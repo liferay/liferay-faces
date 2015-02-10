@@ -32,6 +32,7 @@ import javax.faces.application.ResourceWrapper;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
+import com.liferay.faces.bridge.config.internal.BridgeConfigAttributeMap;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.application.ResourceConstants;
@@ -283,8 +284,8 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 				BridgeConfig bridgeConfig = bridgeContext.getBridgeConfig();
 
-				List<ConfiguredServletMapping> configuredFacesServletMappings =
-					bridgeConfig.getConfiguredFacesServletMappings();
+				List<ConfiguredServletMapping> configuredFacesServletMappings = (List<ConfiguredServletMapping>)
+					bridgeConfig.getAttributes().get(BridgeConfigAttributeMap.CONFIGURED_FACES_SERVLET_MAPPINGS);
 
 				if (configuredFacesServletMappings != null) {
 

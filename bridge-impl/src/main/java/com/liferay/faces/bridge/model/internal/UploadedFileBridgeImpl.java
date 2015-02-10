@@ -114,6 +114,8 @@ public class UploadedFileBridgeImpl implements Serializable, UploadedFile {
 
 	@Override
 	public Status getStatus() {
-		return wrappedUploadedFile.getStatus();
+
+		com.liferay.faces.util.model.UploadedFile.Status wrappedStatus = wrappedUploadedFile.getStatus();
+		return UploadedFile.Status.valueOf(wrappedStatus.name());
 	}
 }

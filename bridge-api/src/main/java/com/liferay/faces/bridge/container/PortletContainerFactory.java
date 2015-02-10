@@ -14,11 +14,10 @@
 package com.liferay.faces.bridge.container;
 
 import javax.faces.FacesWrapper;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
-
-import com.liferay.faces.bridge.config.BridgeConfig;
 
 
 /**
@@ -38,5 +37,5 @@ public abstract class PortletContainerFactory implements FacesWrapper<PortletCon
 	 * the specified portletRequest.
 	 */
 	public abstract PortletContainer getPortletContainer(PortletRequest portletRequest, PortletResponse portletResponse,
-		PortletContext portletContext, BridgeConfig bridgeConfig);
+		PortletContext portletContext, PortletConfig portletConfig);
 }

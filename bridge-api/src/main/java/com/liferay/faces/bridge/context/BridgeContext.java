@@ -78,7 +78,7 @@ public abstract class BridgeContext {
 	 *
 	 * @param   url  The URL to be encoded.
 	 *
-	 * @return  A new instance of {@link BrideActionURL} that conforms to the proper encoding.
+	 * @return  A new instance of {@link BridgeActionURL} that conforms to the proper encoding.
 	 */
 	public abstract BridgeActionURL encodeActionURL(String url);
 

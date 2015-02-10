@@ -63,11 +63,11 @@ public class BridgeConfigMockImpl implements BridgeConfig {
 	}
 
 	public String getViewIdRenderParameterName() {
-		throw new UnsupportedOperationException();
+		return "";
 	}
 
 	public String getViewIdResourceParameterName() {
-		throw new UnsupportedOperationException();
+		return "";
 	}
 
 	public String getWriteBehindRenderResponseWrapper() {

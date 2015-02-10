@@ -32,10 +32,10 @@ import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
  */
 public class BridgeRedirectURLImpl extends BridgeResponseURLImpl implements BridgeRedirectURL {
 
-	public BridgeRedirectURLImpl(String url, Map<String, List<String>> parameters, String currentFacesViewId,
-		BridgeContext bridgeContext) {
+	public BridgeRedirectURLImpl(BridgeContext bridgeContext, String url, Map<String, List<String>> parameters,
+		String viewId) {
 
-		super(url, currentFacesViewId, bridgeContext);
+		super(bridgeContext, url, viewId);
 
 		if (parameters != null) {
 
