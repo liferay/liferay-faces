@@ -52,11 +52,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.config.BridgeConfigFactory;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.util.internal.FacesMessageWrapper;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -112,8 +110,8 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 	private boolean redirect;
 	private Set<String> removedAttributeNames;
 
-	public BridgeRequestScopeImpl(PortletConfig portletConfig, PortletContext portletContext,
-		PortletRequest portletRequest) {
+	public BridgeRequestScopeImpl(PortletRequest portletRequest, PortletConfig portletConfig,
+		BridgeConfig bridgeConfig) {
 
 		Calendar calendar = new GregorianCalendar();
 		this.dateCreated = calendar.getTimeInMillis();
@@ -125,20 +123,17 @@ public class BridgeRequestScopeImpl extends BridgeRequestScopeCompat_2_2_Impl im
 		this.idPrefix = portletName + ":::" + sessionId + ":::";
 		this.idSuffix = Long.toString(this.dateCreated);
 
-		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) FactoryExtensionFinder.getFactory(
-				BridgeConfigFactory.class);
-		BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig(portletConfig);
 		this.excludedAttributeNames = new ArrayList<String>();
 
-		// Get the list of excluded BridgeRequestScope attributes from the faces-config.xml descriptors.
-		Set<String> facesConfigExcludedAttributeNames = bridgeConfig.getExcludedRequestAttributes();
-
 		// Get the list of excluded BridgeRequestScope attributes from the WEB-INF/portlet.xml descriptor.
+		PortletContext portletContext = portletConfig.getPortletContext();
 		@SuppressWarnings("unchecked")
 		List<String> portletContextExcludedAttributeNames = (List<String>) portletContext.getAttribute(
 				Bridge.BRIDGE_PACKAGE_PREFIX + portletName + StringPool.PERIOD + Bridge.EXCLUDED_REQUEST_ATTRIBUTES);
 
 		// Combine the two lists into a single list of excluded BridgeRequestScope attributes.
+		Set<String> facesConfigExcludedAttributeNames = bridgeConfig.getExcludedRequestAttributes();
+
 		if (facesConfigExcludedAttributeNames != null) {
 			this.excludedAttributeNames.addAll(facesConfigExcludedAttributeNames);
 		}

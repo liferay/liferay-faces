@@ -14,21 +14,19 @@
 package com.liferay.faces.bridge.component.inputfile;
 
 import javax.el.MethodExpression;
-
-// import javax.faces.component.FacesComponent;
+import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.FacesEvent;
-// import javax.faces.event.PhaseId;
+import javax.faces.event.PhaseId;
 
 import com.liferay.faces.bridge.event.FileUploadEvent;
-import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
  * @author  Neil Griffin
  */
-// @FacesComponent(value = InputFile.COMPONENT_TYPE)
+@FacesComponent(value = InputFile.COMPONENT_TYPE)
 public class InputFile extends InputFileBase {
 
 	// Public Constants
@@ -62,21 +60,31 @@ public class InputFile extends InputFileBase {
 		}
 	}
 
-	@Override
-	public String getLabel() {
+	private String concatCssClasses(String... classNames) {
 
-		String label = super.getLabel();
+		StringBuilder cssClassBuilder = new StringBuilder();
+		boolean first = true;
 
-		// if (label == null) {
-		//
-		// FacesContext facesContext = FacesContext.getCurrentInstance();
-		//
-		// if (facesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
-		// label = ComponentUtil.getComponentLabel(this);
-		// }
-		// }
+		for (String className : classNames) {
 
-		return label;
+			if (className != null) {
+
+				if (!first) {
+					cssClassBuilder.append(" ");
+				}
+
+				cssClassBuilder.append(className);
+				first = false;
+			}
+		}
+
+		String allClasses = cssClassBuilder.toString();
+
+		if (allClasses.length() == 0) {
+			allClasses = null;
+		}
+
+		return allClasses;
 	}
 
 	@Override
@@ -86,6 +94,7 @@ public class InputFile extends InputFileBase {
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
+		return concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
+
 }

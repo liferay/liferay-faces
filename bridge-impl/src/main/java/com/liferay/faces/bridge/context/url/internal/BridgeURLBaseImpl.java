@@ -65,8 +65,6 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 	protected static final String RELATIVE_PATH_PREFIX = "../";
 
 	// Private Data Members
-	private String contextPath;
-	private String currentFacesViewId;
 	private String contextRelativePath;
 	private Boolean escaped;
 	private Boolean external;
@@ -77,24 +75,26 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 	private Boolean pathRelative;
 	private Boolean portletScheme;
 	private Bridge.PortletPhase portletPhase;
-	private Map<String, String[]> preservedActionParams;
 	private boolean secure;
 	private URI uri;
+	private String viewId;
+	String viewIdRenderParameterName;
+	String viewIdResourceParameterName;
 
 	// Protected Data Members
-	protected BridgeConfig bridgeConfig;
 	protected String url;
 
 	// Protected Data Members
 	protected BridgeContext bridgeContext;
 
-	public BridgeURLBaseImpl(String url, String currentFacesViewId, BridgeContext bridgeContext) {
-		this.url = url;
+	public BridgeURLBaseImpl(BridgeContext bridgeContext, String url, String viewId) {
 		this.bridgeContext = bridgeContext;
-		this.contextPath = bridgeContext.getPortletRequest().getContextPath();
-		this.bridgeConfig = bridgeContext.getBridgeConfig();
-		this.currentFacesViewId = currentFacesViewId;
-		this.preservedActionParams = bridgeContext.getPreservedActionParams();
+		this.url = url;
+		this.viewId = viewId;
+
+		BridgeConfig bridgeConfig = bridgeContext.getBridgeConfig();
+		this.viewIdRenderParameterName = bridgeConfig.getViewIdRenderParameterName();
+		this.viewIdResourceParameterName = bridgeConfig.getViewIdResourceParameterName();
 	}
 
 	public String removeParameter(String name) {
@@ -257,7 +257,6 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 					}
 
 					buf.append(getViewIdParameterName());
-
 					buf.append(StringPool.EQUAL);
 					buf.append(getContextRelativePath());
 				}
@@ -270,8 +269,8 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 	/**
 	 * Determines whether or not the specified files have the same path (prefix) and extension (suffix).
 	 *
-	 * @param   filePath1  The first file to compare.
-	 * @param   filePath2  The second file to compare.
+	 * @param   file1  The first file to compare.
+	 * @param   file2  The second file to compare.
 	 *
 	 * @return  <code>true</code> if the specified files have the same path (prefix) and extension (suffix), otherwise
 	 *          <code>false</code>.
@@ -336,6 +335,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 					// If the context-path is present, then remove it since we want the return value to be a path that
 					// is relative to the context-path.
+					String contextPath = bridgeContext.getPortletRequest().getContextPath();
 					int contextPathPos = path.indexOf(contextPath);
 
 					if (contextPathPos >= 0) {
@@ -346,7 +346,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 					}
 				}
 				else {
-					contextRelativePath = currentFacesViewId;
+					contextRelativePath = viewId;
 				}
 			}
 		}
@@ -581,6 +581,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 		Map<String, String[]> urlParameterMap = getParameterMap();
 
 		// Copy the public render parameters of the current view to the BaseURL.
+		Map<String, String[]> preservedActionParams = bridgeContext.getPreservedActionParams();
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
 		Map<String, String[]> publicParameterMap = portletRequest.getPublicParameterMap();
 
@@ -655,7 +656,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 			String potentialFacesViewId = getContextRelativePath();
 
-			if ((currentFacesViewId != null) && (currentFacesViewId.equals(potentialFacesViewId))) {
+			if ((viewId != null) && (viewId.equals(potentialFacesViewId))) {
 				facesViewTarget = Boolean.TRUE;
 			}
 			else {
@@ -676,11 +677,10 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 					// appropriate extension mapped suffix like <to-view-id>/somepath/foo.jsf</to-view-id>.
 					potentialFacesViewId = getContextRelativePath();
 
-					if ((currentFacesViewId != null) &&
-							(matchPathAndExtension(currentFacesViewId, potentialFacesViewId))) {
+					if ((viewId != null) && (matchPathAndExtension(viewId, potentialFacesViewId))) {
 						logger.debug(
 							"Regarding path=[{0}] as a Faces view since it has the same path and extension as the current viewId=[{1}]",
-							potentialFacesViewId, currentFacesViewId);
+							potentialFacesViewId, viewId);
 						facesViewTarget = Boolean.TRUE;
 					}
 					else {
@@ -719,10 +719,10 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 	protected String getViewIdParameterName() {
 
 		if (isPortletScheme() && (getPortletPhase() == Bridge.PortletPhase.RESOURCE_PHASE)) {
-			return bridgeConfig.getViewIdResourceParameterName();
+			return viewIdResourceParameterName;
 		}
 		else {
-			return bridgeConfig.getViewIdRenderParameterName();
+			return viewIdRenderParameterName;
 		}
 	}
 
