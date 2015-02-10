@@ -43,7 +43,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 	// Private Data Members
 	private Map<String, Object> bridgeConfigAttributeMap;
 	private Set<String> excludedRequestAttributes;
-	private PortletConfig portletConfig;
 	private Map<String, String[]> publicParameterMappings;
 	private String viewIdRenderParameterName;
 	private String viewIdResourceParameterName;
@@ -51,9 +50,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 	private String writeBehindResourceResponseWrapper;
 
 	public BridgeConfigImpl(PortletConfig portletConfig) {
-
-		// portletContext
-		this.portletConfig = portletConfig;
 
 		// bridgeConfigAttributeMap
 		this.bridgeConfigAttributeMap = new BridgeConfigAttributeMap();
