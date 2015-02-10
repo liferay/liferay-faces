@@ -13,12 +13,12 @@
  */
 package com.liferay.faces.bridge.container;
 
-import javax.faces.FacesWrapper;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
+import com.liferay.faces.util.helper.Wrapper;
 
 /**
  * This abstract class provides a contract for defining a factory that knows how to create instances of type {@link
@@ -30,7 +30,7 @@ import javax.portlet.PortletResponse;
  *
  * @author  Neil Griffin
  */
-public abstract class PortletContainerFactory implements FacesWrapper<PortletContainerFactory> {
+public abstract class PortletContainerFactory implements Wrapper<PortletContainerFactory> {
 
 	/**
 	 * Gets an instance of PortletContainer according to the type of portlet container (Liferay, etc.) that created in

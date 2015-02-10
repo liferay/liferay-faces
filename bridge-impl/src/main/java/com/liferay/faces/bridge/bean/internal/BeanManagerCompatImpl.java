@@ -13,9 +13,6 @@
  */
 package com.liferay.faces.bridge.bean.internal;
 
-import javax.faces.bean.ManagedBean;
-
-
 /**
  * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
  *
@@ -32,12 +29,8 @@ public abstract class BeanManagerCompatImpl implements BeanManager {
 	 */
 	protected boolean hasManagedBeanAnnotation(Object object) {
 
-		if ((object != null) && (object.getClass().getAnnotation(ManagedBean.class) != null)) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		// This is a no-op for JSF 1.2 since the @ManagedBean annotation was introduced in JSF 2.0.
+		return false;
 	}
 
 }
