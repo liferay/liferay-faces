@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.context.map;
+package com.liferay.faces.bridge.context.map.internal;
 
 import java.util.List;
 import java.util.Map;

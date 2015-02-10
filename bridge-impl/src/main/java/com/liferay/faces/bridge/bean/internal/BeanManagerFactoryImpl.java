@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.bridge.bean.internal;
 
-import com.liferay.faces.bridge.application.view.BeanManager;
-import com.liferay.faces.bridge.application.view.BeanManagerFactory;
 import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;

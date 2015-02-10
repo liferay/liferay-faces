@@ -13,9 +13,53 @@
  */
 package com.liferay.faces.bridge.model;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
+import java.util.Map;
+
+
 /**
  * @author  Neil Griffin
  */
-public interface UploadedFile extends com.liferay.faces.util.model.UploadedFile {
+public interface UploadedFile {
 
+	/**
+	 * @author  Neil Griffin
+	 */
+	public static enum Status {
+		ERROR, FILE_SIZE_LIMIT_EXCEEDED, FILE_INVALID_NAME_PATTERN, FILE_SAVED, REQUEST_SIZE_LIMIT_EXCEEDED
+	}
+
+	public void delete() throws IOException;
+
+	public void write(String fileName) throws IOException;
+
+	public String getAbsolutePath();
+
+	public Map<String, Object> getAttributes();
+
+	public byte[] getBytes() throws IOException;
+
+	public String getCharSet();
+
+	public String getContentType();
+
+	public String getHeader(String name);
+
+	public Collection<String> getHeaderNames();
+
+	public Collection<String> getHeaders(String name);
+
+	public String getId();
+
+	public InputStream getInputStream() throws IOException;
+
+	public String getMessage();
+
+	public String getName();
+
+	public long getSize();
+
+	public Status getStatus();
 }

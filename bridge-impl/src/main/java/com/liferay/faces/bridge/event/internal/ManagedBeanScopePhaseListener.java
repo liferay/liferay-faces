@@ -26,8 +26,8 @@ import javax.faces.event.PhaseListener;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.PortletPhase;
 
-import com.liferay.faces.bridge.application.view.BeanManager;
-import com.liferay.faces.bridge.application.view.BeanManagerFactory;
+import com.liferay.faces.bridge.bean.internal.BeanManager;
+import com.liferay.faces.bridge.bean.internal.BeanManagerFactory;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;

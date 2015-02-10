@@ -33,6 +33,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.liferay.internal.LiferayConstants;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -88,9 +89,9 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 		LIFERAY_ATTRIBUTE_NAMES = fieldList.toArray(new String[fieldList.size()]);
 	}
 
-	public BridgeRequestScopeLiferayImpl(PortletConfig portletConfig, PortletContext portletContext,
-		PortletRequest portletRequest) {
-		super(portletConfig, portletContext, portletRequest);
+	public BridgeRequestScopeLiferayImpl(PortletRequest portletRequest, PortletConfig portletConfig,
+		BridgeConfig bridgeConfig) {
+		super(portletRequest, portletConfig, bridgeConfig);
 	}
 
 	/**

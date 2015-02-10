@@ -129,6 +129,6 @@ public class BridgeURLTest {
 	}
 
 	protected BridgeURL newBridgeURL(String url) throws URISyntaxException {
-		return new BridgeURLMockImpl(url, CURRENT_FACES_VIEW_ID, bridgeContext);
+		return new BridgeURLMockImpl(bridgeContext, url, CURRENT_FACES_VIEW_ID);
 	}
 }

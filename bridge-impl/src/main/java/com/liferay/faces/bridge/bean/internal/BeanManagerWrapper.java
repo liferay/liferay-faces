@@ -13,31 +13,21 @@
  */
 package com.liferay.faces.bridge.bean.internal;
 
-import javax.faces.bean.ManagedBean;
+import javax.faces.FacesWrapper;
 
 
 /**
- * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
- *
  * @author  Neil Griffin
  */
-public abstract class BeanManagerCompatImpl implements BeanManager {
+public abstract class BeanManagerWrapper implements BeanManager, FacesWrapper<BeanManager> {
 
-	/**
-	 * Determines whether or not the specified object is annotated as a JSF managed-bean.
-	 *
-	 * @param   obj  The object to check.
-	 *
-	 * @return  true if the specified object is annotated as a JSF managed-bean, otherwise false.
-	 */
-	protected boolean hasManagedBeanAnnotation(Object object) {
-
-		if ((object != null) && (object.getClass().getAnnotation(ManagedBean.class) != null)) {
-			return true;
-		}
-		else {
-			return false;
-		}
+	public void invokePreDestroyMethods(Object managedBean, boolean preferPreDestroy) {
+		getWrapped().invokePreDestroyMethods(managedBean, preferPreDestroy);
 	}
 
+	public boolean isManagedBean(String name, Object value) {
+		return getWrapped().isManagedBean(name, value);
+	}
+
+	public abstract BeanManager getWrapped();
 }

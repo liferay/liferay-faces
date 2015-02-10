@@ -15,17 +15,14 @@ package com.liferay.faces.bridge.component.inputfile;
 //J-
 
 import javax.annotation.Generated;
-import javax.el.MethodExpression;
-import javax.faces.component.html.HtmlInputText;
-import javax.faces.context.FacesContext;
+import javax.faces.component.html.HtmlInputFile;
 
-import com.liferay.faces.util.component.Styleable;
 
 /**
  * @author	Neil Griffin
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class InputFileBase extends HtmlInputText implements Styleable {
+public abstract class InputFileBase extends HtmlInputFile {
 
 	// Protected Enumerations
 	protected enum InputFilePropertyKeys {
@@ -34,76 +31,28 @@ public abstract class InputFileBase extends HtmlInputText implements Styleable {
 		multiple
 	}
 
-	protected enum PropertyKeys {
-		styleClass
-	}
-
-	// Public Constants
-	public static final String FILE_UPLOAD_LISTENER = "fileUploadListener";
-
-	// Private Data Members
-	private boolean auto;
-	private MethodExpression fileUploadListener;
-	private String multiple;
-
-	@Override
-	public void restoreState(FacesContext context, Object state) {
-		Object[] values = (Object[]) state;
-		super.restoreState(context, values[0]);
-		auto = (java.lang.Boolean)values[1];
-		fileUploadListener = (javax.el.MethodExpression) values[2];
-		multiple = (java.lang.String) values[3];
-	}
-
-	@Override
-	public Object saveState(FacesContext context) {
-		Object[] values = new Object[4];
-		values[0] = super.saveState(context);
-		values[1] = auto;
-		values[2] = fileUploadListener;
-		values[3] = multiple;
-
-		return ((Object) values);
-	}
-
 	public boolean isAuto() {
-		return auto;
+		return (Boolean) getStateHelper().eval(InputFilePropertyKeys.auto, false);
 	}
 
 	public void setAuto(boolean auto) {
-		this.auto = auto;
+		getStateHelper().put(InputFilePropertyKeys.auto, auto);
 	}
 
-	public MethodExpression getFileUploadListener() {
-		return fileUploadListener;
+	public javax.el.MethodExpression getFileUploadListener() {
+		return (javax.el.MethodExpression) getStateHelper().eval(InputFilePropertyKeys.fileUploadListener, null);
 	}
 
-	public void setFileUploadListener(MethodExpression fileUploadListener) {
-		this.fileUploadListener = fileUploadListener;
+	public void setFileUploadListener(javax.el.MethodExpression fileUploadListener) {
+		getStateHelper().put(InputFilePropertyKeys.fileUploadListener, fileUploadListener);
 	}
 
 	public String getMultiple() {
-		return multiple;
+		return (String) getStateHelper().eval(InputFilePropertyKeys.multiple, null);
 	}
 
 	public void setMultiple(String multiple) {
-		this.multiple = multiple;
-	}
-
-	public StateHelperCompat getStateHelper() {
-		return new StateHelperCompat();
-	}
-
-	protected class StateHelperCompat {
-
-		public Object eval(PropertyKeys propertyKey, String defaultValue) {
-			if (propertyKey == PropertyKeys.styleClass) {
-				return InputFileBase.super.getStyleClass();
-			}
-			else {
-				return null;
-			}
-		}
+		getStateHelper().put(InputFilePropertyKeys.multiple, multiple);
 	}
 }
 //J+

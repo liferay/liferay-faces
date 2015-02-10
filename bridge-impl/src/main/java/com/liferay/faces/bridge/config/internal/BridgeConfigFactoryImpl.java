@@ -27,7 +27,7 @@ import com.liferay.faces.bridge.config.BridgeConfigFactory;
 public class BridgeConfigFactoryImpl extends BridgeConfigFactory {
 
 	// Private Constants
-	private static final String BRIDGE_CONFIG = "com.liferay.faces.bridge.config.bridgeConfig";
+	private static final String BRIDGE_CONFIG = BridgeConfig.class.getName();
 
 	@Override
 	public BridgeConfig getBridgeConfig(PortletConfig portletConfig) throws FacesException {

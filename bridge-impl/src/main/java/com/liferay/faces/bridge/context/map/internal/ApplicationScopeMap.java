@@ -21,8 +21,8 @@ import javax.faces.context.ExternalContext;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 
-import com.liferay.faces.bridge.application.view.BeanManager;
-import com.liferay.faces.bridge.application.view.BeanManagerFactory;
+import com.liferay.faces.bridge.bean.internal.BeanManager;
+import com.liferay.faces.bridge.bean.internal.BeanManagerFactory;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.config.ApplicationConfig;

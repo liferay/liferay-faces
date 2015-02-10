@@ -26,6 +26,7 @@ package com.liferay.faces.bridge.context;
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
@@ -33,12 +34,12 @@ import java.util.Map;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
-import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.faces.Bridge.PortletPhase;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
+import com.liferay.faces.bridge.config.BridgeConfigMockImpl;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.url.BridgeActionURL;
 import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
@@ -222,20 +223,8 @@ public class BridgeContextMockImpl extends BridgeContext {
 		throw new UnsupportedOperationException();
 	}
 
-	public void setRenderRedirect(boolean renderRedirect) {
-		throw new UnsupportedOperationException();
-	}
-
 	@Override
 	public void setRenderRedirectAfterDispatch(boolean renderRedirectAfterDispatch) {
-		throw new UnsupportedOperationException();
-	}
-
-	public String getRenderRedirectQueryString() {
-		throw new UnsupportedOperationException();
-	}
-
-	public void setRenderRedirectQueryString(String renderRedirectQueryString) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -311,10 +300,6 @@ public class BridgeContextMockImpl extends BridgeContext {
 
 	@Override
 	public boolean isRenderRedirect() {
-		throw new UnsupportedOperationException();
-	}
-
-	public void setViewHistory(PortletMode portletMode, String viewId) {
 		throw new UnsupportedOperationException();
 	}
 }
