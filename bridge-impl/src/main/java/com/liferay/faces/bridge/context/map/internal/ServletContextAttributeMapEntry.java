@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.bridge.context.map.internal;
 
-import javax.portlet.PortletContext;
 import javax.servlet.ServletContext;
 
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
