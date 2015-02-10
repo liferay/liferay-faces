@@ -14,7 +14,7 @@
 package com.liferay.faces.bridge.component.inputfile;
 
 import javax.el.MethodExpression;
-import javax.faces.component.FacesComponent;
+//JSF 2.0+: import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.FacesEvent;
@@ -25,7 +25,7 @@ import com.liferay.faces.bridge.event.FileUploadEvent;
 /**
  * @author  Neil Griffin
  */
-@FacesComponent(value = InputFile.COMPONENT_TYPE)
+// JSF 2.0+: @FacesComponent(value = InputFile.COMPONENT_TYPE)
 public class InputFile extends InputFileBase {
 
 	// Public Constants

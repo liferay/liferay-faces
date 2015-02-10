@@ -13,15 +13,14 @@
  */
 package com.liferay.faces.bridge.bean.internal;
 
-import javax.faces.FacesWrapper;
-
 import com.liferay.faces.util.config.FacesConfig;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class BeanManagerFactory implements FacesWrapper<BeanManagerFactory> {
+public abstract class BeanManagerFactory implements Wrapper<BeanManagerFactory> {
 
 	public abstract BeanManager getBeanManager(FacesConfig facesConfig);
 

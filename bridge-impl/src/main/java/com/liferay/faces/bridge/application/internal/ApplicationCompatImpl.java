@@ -15,6 +15,8 @@ package com.liferay.faces.bridge.application.internal;
 
 import javax.faces.application.Application;
 
+import com.liferay.faces.util.config.ConfiguredSystemEventListener;
+
 
 /**
  * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
@@ -30,9 +32,7 @@ public abstract class ApplicationCompatImpl extends ApplicationWrapper {
 		this.wrappedApplication = application;
 	}
 
-	@SuppressWarnings("deprecation")
-	protected void subscribeToJSF2SystemEvent(
-		com.liferay.faces.bridge.config.ConfiguredSystemEventListener configuredSystemEventListener) {
+	protected void subscribeToJSF2SystemEvent(ConfiguredSystemEventListener configuredSystemEventListener) {
 		// This is a no-op for JSF 1.2
 	}
 
