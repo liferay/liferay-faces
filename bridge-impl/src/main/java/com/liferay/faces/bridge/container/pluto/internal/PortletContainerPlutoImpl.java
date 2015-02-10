@@ -21,7 +21,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.ResourceURL;
 
 import com.liferay.faces.bridge.container.internal.PortletContainerImpl;
-import com.liferay.faces.bridge.context.BridgeContext;
 
 
 /**
