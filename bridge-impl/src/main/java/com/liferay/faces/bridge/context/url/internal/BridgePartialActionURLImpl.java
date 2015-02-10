@@ -17,6 +17,7 @@ import java.net.MalformedURLException;
 
 import javax.portlet.BaseURL;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
 import com.liferay.faces.util.logging.Logger;
@@ -31,8 +32,14 @@ public class BridgePartialActionURLImpl extends BridgeURLBaseImpl implements Bri
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgePartialActionURLImpl.class);
 
-	public BridgePartialActionURLImpl(String url, String currentFacesViewId, BridgeContext bridgeContext) {
-		super(url, currentFacesViewId, bridgeContext);
+	// Private Data Members
+	private String viewIdResourceParameterName;
+
+	public BridgePartialActionURLImpl(BridgeContext bridgeContext, String url, String viewId) {
+		super(bridgeContext, url, viewId);
+
+		BridgeConfig bridgeConfig = bridgeContext.getBridgeConfig();
+		this.viewIdResourceParameterName = bridgeConfig.getViewIdResourceParameterName();
 	}
 
 	@Override
@@ -60,6 +67,6 @@ public class BridgePartialActionURLImpl extends BridgeURLBaseImpl implements Bri
 
 	@Override
 	protected String getViewIdParameterName() {
-		return bridgeConfig.getViewIdResourceParameterName();
+		return viewIdResourceParameterName;
 	}
 }

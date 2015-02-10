@@ -21,7 +21,6 @@ import javax.faces.event.FacesEvent;
 import javax.faces.event.PhaseId;
 
 import com.liferay.faces.bridge.event.FileUploadEvent;
-import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
@@ -61,21 +60,31 @@ public class InputFile extends InputFileBase {
 		}
 	}
 
-	@Override
-	public String getLabel() {
+	private String concatCssClasses(String... classNames) {
 
-		String label = super.getLabel();
+		StringBuilder cssClassBuilder = new StringBuilder();
+		boolean first = true;
 
-		if (label == null) {
+		for (String className : classNames) {
 
-			FacesContext facesContext = FacesContext.getCurrentInstance();
+			if (className != null) {
 
-			if (facesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
-				label = ComponentUtil.getComponentLabel(this);
+				if (!first) {
+					cssClassBuilder.append(" ");
+				}
+
+				cssClassBuilder.append(className);
+				first = false;
 			}
 		}
 
-		return label;
+		String allClasses = cssClassBuilder.toString();
+
+		if (allClasses.length() == 0) {
+			allClasses = null;
+		}
+
+		return allClasses;
 	}
 
 	@Override
@@ -85,6 +94,7 @@ public class InputFile extends InputFileBase {
 		// STYLE_CLASS_NAME of the super class.
 		String styleClass = (String) getStateHelper().eval(PropertyKeys.styleClass, null);
 
-		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
+		return concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
+
 }

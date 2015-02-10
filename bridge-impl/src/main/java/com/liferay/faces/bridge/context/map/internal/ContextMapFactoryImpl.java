@@ -26,7 +26,6 @@ import javax.servlet.http.Cookie;
 
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.context.map.ContextMapFactory;
 import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.context.map.FacesRequestParameterMap;
@@ -167,11 +166,11 @@ public class ContextMapFactoryImpl extends ContextMapFactory {
 
 	@Override
 	public Map<String, List<UploadedFile>> getUploadedFileMap(BridgeContext bridgeContext) {
+
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
 		MultiPartFormData multiPartFormData = (MultiPartFormData) portletRequest.getAttribute(MULTIPART_FORM_DATA_FQCN);
-		Map<String, List<UploadedFile>> uploadedFileMap = multiPartFormData.getUploadedFileMap();
 
-		return uploadedFileMap;
+		return multiPartFormData.getUploadedFileMap();
 	}
 
 	// Java 1.6+ @Override

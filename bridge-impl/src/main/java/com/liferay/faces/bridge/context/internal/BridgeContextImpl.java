@@ -47,11 +47,12 @@ import javax.portlet.faces.BridgeInvalidViewPathException;
 import javax.portlet.faces.GenericFacesPortlet;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
+import com.liferay.faces.bridge.config.internal.BridgeConfigAttributeMap;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.IncongruityContext;
-import com.liferay.faces.bridge.context.map.ContextMapFactory;
+import com.liferay.faces.bridge.context.map.internal.ContextMapFactory;
 import com.liferay.faces.bridge.context.map.internal.RequestHeaderMap;
 import com.liferay.faces.bridge.context.map.internal.RequestHeaderValuesMap;
 import com.liferay.faces.bridge.context.url.BridgeActionURL;
@@ -59,7 +60,6 @@ import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
 import com.liferay.faces.bridge.context.url.BridgeURLFactory;
-import com.liferay.faces.bridge.context.url.internal.BridgePartialActionURLImpl;
 import com.liferay.faces.bridge.internal.BridgeExt;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.config.ConfiguredServletMapping;
@@ -75,9 +75,6 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 public class BridgeContextImpl extends BridgeContextCompatImpl {
 
-	// Public Constants
-	public static final String ATTR_RESPONSE_NAMESPACE = "com.liferay.faces.bridge.responseNamespace";
-
 	// Private Constants
 	private static final String NON_NUMERIC_NAMESPACE_PREFIX = "A";
 
@@ -90,6 +87,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	private Boolean bridgeRequestScopePreserved;
 	private BridgeRequestScope bridgeRequestScope;
 	private BridgeURLFactory bridgeURLFactory;
+	private List<String> configuredSuffixes;
+	private List<ConfiguredServletMapping> configuredFacesServletMappings;
 	private ContextMapFactory contextMapFactory;
 	private String defaultRenderKitId;
 	private Map<String, String> defaultViewIdMap;
@@ -120,12 +119,17 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	private String savedViewState;
 	private String viewIdAndQueryString;
 
+	@SuppressWarnings("unchecked")
 	public BridgeContextImpl(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
 		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,
 		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, PortletContainer portletContainer,
 		IncongruityContext incongruityContext) {
 
 		this.bridgeConfig = bridgeConfig;
+		this.configuredFacesServletMappings = (List<ConfiguredServletMapping>) bridgeConfig.getAttributes().get(
+				BridgeConfigAttributeMap.CONFIGURED_FACES_SERVLET_MAPPINGS);
+		this.configuredSuffixes = (List<String>) bridgeConfig.getAttributes().get(
+			BridgeConfigAttributeMap.CONFIGURED_SUFFIXES);
 		this.bridgeRequestScope = bridgeRequestScope;
 		this.portletConfig = portletConfig;
 		this.portletContext = portletContext;
@@ -205,16 +209,15 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 		logger.debug("encodeActionURL fromURL=[{0}]", url);
 
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		String currentFacesViewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-
-		BridgeActionURL bridgeActionURL = bridgeURLFactory.getBridgeActionURL(url, currentFacesViewId, this);
+		BridgeActionURL bridgeActionURL = bridgeURLFactory.getBridgeActionURL(bridgeContext, url, currentFacesViewId);
 
 		// Determine the target of the specified URL, which could be a Faces-View or a
 		// Non-Faces-View.
 		String contextRelativeViewPath = bridgeActionURL.getContextRelativePath();
-		List<String> defaultSuffixes = bridgeConfig.getConfiguredSuffixes();
-		List<ConfiguredServletMapping> facesServletMappings = bridgeConfig.getConfiguredFacesServletMappings();
-		FacesView targetFacesView = new FacesViewImpl(contextRelativeViewPath, defaultSuffixes, facesServletMappings);
+		FacesView targetFacesView = new FacesViewImpl(contextRelativeViewPath, configuredSuffixes,
+				configuredFacesServletMappings);
 
 		// If the specified URL starts with "portlet:", then
 		if (bridgeActionURL.isPortletScheme()) {
@@ -267,10 +270,10 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 		logger.debug("encodePartialActionURL fromURL=[{0}]", url);
 
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		String currentFacesViewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-
-		BridgePartialActionURL bridgePartialActionURL = new BridgePartialActionURLImpl(url, currentFacesViewId, this);
-
+		BridgePartialActionURL bridgePartialActionURL = bridgeURLFactory.getBridgePartialActionURL(bridgeContext, url,
+				currentFacesViewId);
 		bridgePartialActionURL.setParameter(BridgeExt.FACES_AJAX_PARAMETER, Boolean.TRUE.toString());
 
 		return bridgePartialActionURL;
@@ -281,9 +284,10 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 		logger.debug("encodeRedirectURL fromURL=[{0}]", baseUrl);
 
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		String currentFacesViewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
 
-		return bridgeURLFactory.getBridgeRedirectURL(baseUrl, parameters, currentFacesViewId, this);
+		return bridgeURLFactory.getBridgeRedirectURL(bridgeContext, baseUrl, parameters, currentFacesViewId);
 	}
 
 	@Override
@@ -298,7 +302,9 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			currentFacesViewId = uiViewRoot.getViewId();
 		}
 
-		BridgeResourceURL bridgeResourceURL = bridgeURLFactory.getBridgeResourceURL(url, currentFacesViewId, this);
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+		BridgeResourceURL bridgeResourceURL = bridgeURLFactory.getBridgeResourceURL(bridgeContext, url,
+				currentFacesViewId);
 
 		// If the "javax.portlet.faces.ViewLink" parameter is found and set to "true", then
 		String viewLinkParam = bridgeResourceURL.getParameter(Bridge.VIEW_LINK);
@@ -400,10 +406,10 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		if (url != null) {
 			logger.debug("redirect url=[{0}]", url);
 
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 			String currentFacesViewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-
-			BridgeRedirectURL bridgeRedirectURL = bridgeURLFactory.getBridgeRedirectURL(url, null, currentFacesViewId,
-					this);
+			BridgeRedirectURL bridgeRedirectURL = bridgeURLFactory.getBridgeRedirectURL(bridgeContext, url, null,
+					currentFacesViewId);
 
 			// If currently executing the ACTION_PHASE, EVENT_PHASE, or RENDER_PHASE of the portlet lifecycle, then
 			if ((portletPhase == Bridge.PortletPhase.ACTION_PHASE) ||
@@ -504,8 +510,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 								renderRedirect = true;
 								viewIdRenderParameterValue = URLDecoder.decode(viewIdRenderParameterValue,
 										StringPool.UTF8);
-								bridgeRedirectURL = bridgeURLFactory.getBridgeRedirectURL(viewIdRenderParameterValue,
-										null, currentFacesViewId, this);
+								bridgeRedirectURL = bridgeURLFactory.getBridgeRedirectURL(bridgeContext,
+										viewIdRenderParameterValue, null, currentFacesViewId);
 								renderRedirectURL = bridgeRedirectURL;
 							}
 
@@ -548,6 +554,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		this.bridgeRequestScopePreserved = null;
 		this.bridgeRequestScope = null;
 		this.bridgeURLFactory = null;
+		this.configuredFacesServletMappings = null;
+		this.configuredSuffixes = null;
 		this.contextMapFactory = null;
 		this.defaultRenderKitId = null;
 		this.defaultViewIdMap = null;
@@ -662,9 +670,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 				}
 			}
 
-			List<String> configuredSuffixes = bridgeConfig.getConfiguredSuffixes();
-			List<ConfiguredServletMapping> configuredFacesServletMappings =
-				bridgeConfig.getConfiguredFacesServletMappings();
 			facesView = new FacesViewImpl(viewId, navigationQueryString, configuredSuffixes,
 					configuredFacesServletMappings);
 		}
@@ -709,12 +714,12 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		if (viewIdAndQueryString == null) {
 
 			// Try#1: Get the viewId the "javax.portlet.faces.viewId" request attribute.
-			viewIdAndQueryString = (String) getFacesViewIdRequestAttribute(Bridge.VIEW_ID);
+			viewIdAndQueryString = getFacesViewIdRequestAttribute(Bridge.VIEW_ID);
 
 			if (viewIdAndQueryString == null) {
 
 				// Try#2: Get the viewId from the "javax.portlet.faces.viewPath" request attribute.
-				String viewPath = (String) getFacesViewIdRequestAttribute(Bridge.VIEW_PATH);
+				String viewPath = getFacesViewIdRequestAttribute(Bridge.VIEW_PATH);
 
 				if (viewPath != null) {
 
@@ -753,7 +758,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 						// Try#4: Get the viewId from a request parameter, the name of which is dynamic depending on
 						// the portlet phase.
-						String requestParameterName = null;
+						String requestParameterName;
 
 						if (portletPhase == Bridge.PortletPhase.RESOURCE_PHASE) {
 							requestParameterName = bridgeConfig.getViewIdResourceParameterName();
@@ -805,9 +810,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		String facesViewId = null;
 
 		// Try to determine the viewId by examining the servlet-mapping entries for the Faces Servlet.
-		List<ConfiguredServletMapping> configuredFacesServletMappings =
-			bridgeConfig.getConfiguredFacesServletMappings();
-
 		// For each servlet-mapping:
 		for (ConfiguredServletMapping configuredFacesServletMapping : configuredFacesServletMappings) {
 
@@ -822,9 +824,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 					// Iterate through each of the valid extensions (.jsp, .jspx, etc.) that the developer
 					// may have specified in the web.xml descriptor. For each extension, see if file exists
 					// within the filesystem of this context.
-					List<String> defaultSuffixes = bridgeConfig.getConfiguredSuffixes();
-
-					for (String defaultSuffix : defaultSuffixes) {
+					for (String defaultSuffix : configuredSuffixes) {
 
 						int pos = viewPath.lastIndexOf(StringPool.PERIOD);
 
@@ -858,8 +858,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 					if (facesViewId == null) {
 						logger.error(
-							"Matched EXTENSION MAPPING for for urlPattern=[{0}] and viewPath=[{1}] but unable to find a facesViewId with extensions[{3}]",
-							configuredFacesServletMapping.getUrlPattern(), viewPath, defaultSuffixes);
+							"Matched EXTENSION MAPPING for for urlPattern=[{0}] and viewPath=[{1}] but unable to find a facesViewId with extensions[{2}]",
+							configuredFacesServletMapping.getUrlPattern(), viewPath, configuredSuffixes);
 					}
 				}
 
@@ -1065,7 +1065,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	@Override
 	public String getRequestPathInfo() {
 
-		String returnValue;
+		String returnValue = null;
 
 		if (requestPathInfo == null) {
 
@@ -1075,9 +1075,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			// If the facesView is extension-mapped (like *.faces), then return a null value as required by Section
 			// 6.1.3.1 of the spec.
 			if (facesView.isExtensionMapped()) {
-				returnValue = null;
-				logger.debug("requestPathInfo=[{0}] EXTENSION=[{1}] viewId=[{2}]", returnValue,
-					facesView.getExtension(), viewId);
+				logger.debug("requestPathInfo=[null] EXTENSION=[{1}] viewId=[{2}]", facesView.getExtension(), viewId);
 			}
 
 			// Otherwise, if the facesViewId (like /faces/foo/bar/test.jspx) is path-mapped (like /faces/*), then return

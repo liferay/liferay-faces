@@ -28,8 +28,8 @@ import com.liferay.faces.bridge.context.url.internal.BridgeURLBaseImpl;
  */
 public class BridgeURLMockImpl extends BridgeURLBaseImpl {
 
-	public BridgeURLMockImpl(String url, String currentViewId, BridgeContext bridgeContext) {
-		super(url, currentViewId, bridgeContext);
+	public BridgeURLMockImpl(BridgeContext bridgeContext, String url, String viewId) {
+		super(bridgeContext, url, viewId);
 	}
 
 	@Override

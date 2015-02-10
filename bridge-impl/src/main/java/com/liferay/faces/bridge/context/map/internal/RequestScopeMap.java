@@ -26,8 +26,8 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 
-import com.liferay.faces.bridge.bean.BeanManager;
-import com.liferay.faces.bridge.bean.BeanManagerFactory;
+import com.liferay.faces.bridge.bean.internal.BeanManager;
+import com.liferay.faces.bridge.bean.internal.BeanManagerFactory;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.internal.BridgeConstants;
