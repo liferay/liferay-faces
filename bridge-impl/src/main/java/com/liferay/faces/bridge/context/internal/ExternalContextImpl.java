@@ -41,7 +41,7 @@ import com.liferay.faces.bridge.application.internal.ViewHandlerImpl;
 import com.liferay.faces.bridge.application.view.internal.BridgeAfterViewContentRequest;
 import com.liferay.faces.bridge.application.view.internal.BridgeAfterViewContentResponse;
 import com.liferay.faces.bridge.application.view.internal.BridgeWriteBehindSupportFactory;
-import com.liferay.faces.bridge.context.map.ContextMapFactory;
+import com.liferay.faces.bridge.context.map.internal.ContextMapFactory;
 import com.liferay.faces.bridge.util.internal.LocaleIterator;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;

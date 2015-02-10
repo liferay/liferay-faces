@@ -22,6 +22,7 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.PortletPhase;
 import javax.portlet.faces.BridgeUtil;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.BridgeActionURL;
@@ -38,8 +39,8 @@ public class BridgeActionURLImpl extends BridgeResponseURLImpl implements Bridge
 	private PortletContainer portletContainer;
 	private PortletRequest portletRequest;
 
-	public BridgeActionURLImpl(String url, String currentFacesViewId, BridgeContext bridgeContext) {
-		super(url, currentFacesViewId, bridgeContext);
+	public BridgeActionURLImpl(BridgeContext bridgeContext, String url, String viewId) {
+		super(bridgeContext, url, viewId);
 		this.portletRequest = bridgeContext.getPortletRequest();
 		this.portletContainer = bridgeContext.getPortletContainer();
 	}
@@ -47,7 +48,7 @@ public class BridgeActionURLImpl extends BridgeResponseURLImpl implements Bridge
 	@Override
 	protected BaseURL toBaseURL() throws MalformedURLException {
 
-		BaseURL baseURL = null;
+		BaseURL baseURL;
 
 		// If this is executing during the ACTION_PHASE of the portlet lifecycle, then
 		PortletPhase portletRequestPhase = BridgeUtil.getPortletRequestPhase();

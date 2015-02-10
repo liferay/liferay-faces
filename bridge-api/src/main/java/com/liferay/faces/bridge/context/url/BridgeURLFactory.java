@@ -26,12 +26,13 @@ import com.liferay.faces.bridge.context.BridgeContext;
  */
 public abstract class BridgeURLFactory implements FacesWrapper<BridgeURLFactory> {
 
-	public abstract BridgeActionURL getBridgeActionURL(String url, String currentFacesViewId,
-		BridgeContext bridgeContext);
+	public abstract BridgeActionURL getBridgeActionURL(BridgeContext bridgeContext, String url, String viewId);
 
-	public abstract BridgeRedirectURL getBridgeRedirectURL(String url, Map<String, List<String>> parameters,
-		String currentFacesViewId, BridgeContext bridgeContext);
+	public abstract BridgePartialActionURL getBridgePartialActionURL(BridgeContext bridgeContext, String url,
+		String viewId);
 
-	public abstract BridgeResourceURL getBridgeResourceURL(String url, String currentFacesViewId,
-		BridgeContext bridgeContext);
+	public abstract BridgeRedirectURL getBridgeRedirectURL(BridgeContext bridgeContext, String url,
+		Map<String, List<String>> parameters, String viewId);
+
+	public abstract BridgeResourceURL getBridgeResourceURL(BridgeContext bridgeContext, String url, String viewId);
 }
