@@ -60,8 +60,8 @@ public class BridgeResourceURLImpl extends BridgeURLBaseImpl implements BridgeRe
 	private PortletContainer portletContainer;
 	private boolean viewLink;
 
-	public BridgeResourceURLImpl(String url, String currentFacesViewId, BridgeContext bridgeContext) {
-		super(url, currentFacesViewId, bridgeContext);
+	public BridgeResourceURLImpl(BridgeContext bridgeContext, String url, String viewId) {
+		super(bridgeContext, url, viewId);
 		this.portletContainer = bridgeContext.getPortletContainer();
 	}
 
@@ -85,7 +85,7 @@ public class BridgeResourceURLImpl extends BridgeURLBaseImpl implements BridgeRe
 	@Override
 	protected BaseURL toBaseURL() throws MalformedURLException {
 
-		BaseURL baseURL = null;
+		BaseURL baseURL;
 
 		// If the URL is opaque, meaning it starts with something like "portlet:" or "mailto:" and
 		// doesn't have the double-forward-slash like "http://" does, then

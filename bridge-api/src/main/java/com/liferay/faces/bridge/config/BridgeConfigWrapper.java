@@ -13,14 +13,10 @@
  */
 package com.liferay.faces.bridge.config;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.faces.FacesWrapper;
-
-import com.liferay.faces.util.config.ConfiguredServletMapping;
-import com.liferay.faces.util.config.ConfiguredSystemEventListener;
 
 
 /**
@@ -30,22 +26,6 @@ public abstract class BridgeConfigWrapper implements BridgeConfig, FacesWrapper<
 
 	public Map<String, Object> getAttributes() {
 		return getWrapped().getAttributes();
-	}
-
-	public List<ConfiguredServletMapping> getConfiguredFacesServletMappings() {
-		return getWrapped().getConfiguredFacesServletMappings();
-	}
-
-	public List<String> getConfiguredSuffixes() {
-		return getWrapped().getConfiguredSuffixes();
-	}
-
-	public List<ConfiguredSystemEventListener> getConfiguredSystemEventListeners() {
-		return getWrapped().getConfiguredSystemEventListeners();
-	}
-
-	public String getContextParameter(String name) {
-		return getWrapped().getContextParameter(name);
 	}
 
 	public Set<String> getExcludedRequestAttributes() {

@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.bridge.container.liferay.internal;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URLEncoder;
@@ -21,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.portlet.ActionResponse;
 import javax.portlet.MimeResponse;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -32,7 +31,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
 
-import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
@@ -74,7 +72,6 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	private boolean ableToAddStyleSheetResourceToHead;
 	private boolean ableToSetHttpStatusCode;
 	private boolean friendlyURLMapperEnabled;
-	private int liferayBuildNumber;
 	private LiferayURLFactory liferayURLFactory;
 	private LiferayPortletRequest liferayPortletRequest;
 	private boolean namespacedParameters;
@@ -83,10 +80,10 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	private String responseNamespace;
 
 	public PortletContainerLiferayImpl(PortletRequest portletRequest, PortletResponse portletResponse,
-		PortletContext portletContext, BridgeConfig bridgeConfig) {
+		PortletContext portletContext, PortletConfig portletConfig) {
 
 		// Initialize the superclass.
-		super(portletRequest, bridgeConfig);
+		super(portletRequest, portletConfig);
 
 		try {
 
@@ -113,7 +110,7 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 
 			// Determine the Liferay version number.
 			Product liferayPortal = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
-			liferayBuildNumber = liferayPortal.getBuildId();
+			int liferayBuildNumber = liferayPortal.getBuildId();
 
 			if (logger.isDebugEnabled()) {
 				logger.debug("Detected Liferay build number {0}", Long.toString(liferayBuildNumber));
@@ -248,10 +245,6 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	/**
 	 * Liferay Hack: Need to save some stuff that's only available at RenderRequest time in order to have
 	 * getResourceURL() work properly later.
-	 *
-	 * @param  renderRequest      The current RenderRequest.
-	 * @param  responseNamespace  The current response namespace.
-	 * @param  applicationMap     The current ApplicationMap.
 	 */
 	protected void saveRenderAttributes(PortletMode portletMode, WindowState windowState, ThemeDisplay themeDisplay,
 		String responseNamespace, PortletContext portletContext) {

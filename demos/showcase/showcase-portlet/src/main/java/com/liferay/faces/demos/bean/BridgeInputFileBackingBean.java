@@ -22,9 +22,9 @@ import javax.faces.component.UICommand;
 import javax.faces.event.ActionEvent;
 
 import com.liferay.faces.bridge.event.FileUploadEvent;
+import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.model.UploadedFile;
 
 
 /**

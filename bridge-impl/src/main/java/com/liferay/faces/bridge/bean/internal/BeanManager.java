@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.bean;
+package com.liferay.faces.bridge.bean.internal;
 
 /**
  * This interface defines a contract for utility methods for beans that are managed by the JSF managed-bean facility.

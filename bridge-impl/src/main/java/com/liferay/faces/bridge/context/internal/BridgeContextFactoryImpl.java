@@ -38,10 +38,8 @@ public class BridgeContextFactoryImpl extends BridgeContextFactory {
 		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, PortletContainer portletContainer,
 		IncongruityContext incongruityContext) {
 
-		BridgeContext bridgeContext = new BridgeContextImpl(bridgeConfig, bridgeRequestScope, portletConfig,
+		return new BridgeContextImpl(bridgeConfig, bridgeRequestScope, portletConfig,
 				portletContext, portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
-
-		return bridgeContext;
 	}
 
 	public BridgeContextFactory getWrapped() {

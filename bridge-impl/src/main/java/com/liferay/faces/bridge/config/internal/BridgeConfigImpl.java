@@ -25,8 +25,6 @@ import javax.portlet.PortletContext;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.config.ConfiguredElement;
-import com.liferay.faces.util.config.ConfiguredServletMapping;
-import com.liferay.faces.util.config.ConfiguredSystemEventListener;
 import com.liferay.faces.util.config.FacesConfig;
 
 
@@ -44,9 +42,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 	// Private Data Members
 	private Map<String, Object> bridgeConfigAttributeMap;
-	private List<ConfiguredServletMapping> configuredFacesServletMappings;
-	private List<ConfiguredSystemEventListener> configuredSystemEventListeners;
-	private List<String> defaultSuffixes;
 	private Set<String> excludedRequestAttributes;
 	private PortletConfig portletConfig;
 	private Map<String, String[]> publicParameterMappings;
@@ -68,13 +63,15 @@ public class BridgeConfigImpl implements BridgeConfig {
 		PortletContext portletContext = portletConfig.getPortletContext();
 		ApplicationConfig applicationConfig = (ApplicationConfig) portletContext.getAttribute(appConfigAttrName);
 		FacesConfig facesConfig = applicationConfig.getFacesConfig();
-		this.configuredFacesServletMappings = facesConfig.getConfiguredFacesServletMappings();
+		bridgeConfigAttributeMap.put(BridgeConfigAttributeMap.CONFIGURED_FACES_SERVLET_MAPPINGS,
+			facesConfig.getConfiguredFacesServletMappings());
 
 		// configuredSystemEventListeners
-		this.configuredSystemEventListeners = facesConfig.getConfiguredSystemEventListeners();
+		bridgeConfigAttributeMap.put(BridgeConfigAttributeMap.CONFIGURED_SYSTEM_EVENT_LISTENERS,
+			facesConfig.getConfiguredSystemEventListeners());
 
-		// defaultSuffixes
-		this.defaultSuffixes = facesConfig.getConfiguredSuffixes();
+		// configuredSuffixes
+		bridgeConfigAttributeMap.put(BridgeConfigAttributeMap.CONFIGURED_SUFFIXES, facesConfig.getConfiguredSuffixes());
 
 		// excludedRequestAttributes
 		this.excludedRequestAttributes = new HashSet<String>();
@@ -156,24 +153,6 @@ public class BridgeConfigImpl implements BridgeConfig {
 
 	public Map<String, Object> getAttributes() {
 		return bridgeConfigAttributeMap;
-	}
-
-	public List<ConfiguredServletMapping> getConfiguredFacesServletMappings() {
-		return configuredFacesServletMappings;
-	}
-
-	public List<String> getConfiguredSuffixes() {
-		return defaultSuffixes;
-	}
-
-	public List<ConfiguredSystemEventListener> getConfiguredSystemEventListeners() {
-		return configuredSystemEventListeners;
-	}
-
-	public String getContextParameter(String name) {
-		PortletContext portletContext = portletConfig.getPortletContext();
-
-		return portletContext.getInitParameter(name);
 	}
 
 	public Set<String> getExcludedRequestAttributes() {

@@ -27,6 +27,7 @@ import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 
 import com.liferay.faces.bridge.component.internal.UIViewRootBridgeImpl;
 import com.liferay.faces.bridge.config.BridgeConfig;
+import com.liferay.faces.bridge.config.internal.BridgeConfigAttributeMap;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.config.ConfiguredSystemEventListener;
 
@@ -82,7 +83,8 @@ public class ApplicationImpl extends ApplicationCompatImpl {
 						BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 						BridgeConfig bridgeConfig = bridgeContext.getBridgeConfig();
 						List<ConfiguredSystemEventListener> configuredSystemEventListeners =
-							bridgeConfig.getConfiguredSystemEventListeners();
+							(List<ConfiguredSystemEventListener>) bridgeConfig.getAttributes().get(
+								BridgeConfigAttributeMap.CONFIGURED_SYSTEM_EVENT_LISTENERS);
 
 						if (configuredSystemEventListeners != null) {
 

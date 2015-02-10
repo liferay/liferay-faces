@@ -11,18 +11,23 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.bean;
+package com.liferay.faces.bridge.bean.internal;
 
 import javax.faces.FacesWrapper;
-
-import com.liferay.faces.util.config.FacesConfig;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class BeanManagerFactory implements FacesWrapper<BeanManagerFactory> {
+public abstract class BeanManagerWrapper implements BeanManager, FacesWrapper<BeanManager> {
 
-	public abstract BeanManager getBeanManager(FacesConfig facesConfig);
+	public void invokePreDestroyMethods(Object managedBean, boolean preferPreDestroy) {
+		getWrapped().invokePreDestroyMethods(managedBean, preferPreDestroy);
+	}
 
+	public boolean isManagedBean(String name, Object value) {
+		return getWrapped().isManagedBean(name, value);
+	}
+
+	public abstract BeanManager getWrapped();
 }

@@ -26,8 +26,8 @@ public class BridgeResourceURLLiferayImpl extends BridgeResourceURLImpl {
 	// Private Data Members
 	private Boolean external;
 
-	public BridgeResourceURLLiferayImpl(String url, String currentFacesViewId, BridgeContext bridgeContext) {
-		super(url, currentFacesViewId, bridgeContext);
+	public BridgeResourceURLLiferayImpl(BridgeContext bridgeContext, String url, String viewId) {
+		super(bridgeContext, url, viewId);
 	}
 
 	@Override
