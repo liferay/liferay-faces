@@ -18,23 +18,17 @@ import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
-import javax.servlet.http.HttpServletRequest;
 
 import com.liferay.faces.bridge.container.internal.PortletContainerImpl;
-import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadResponseWriter;
-import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadResponseWriterLiferayImpl;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.servlet.taglib.util.OutputData;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 
 
 /**
@@ -50,88 +44,30 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(PortletContainerLiferayCompatImpl.class);
 
-	// Private Data Members
-	private int liferaySharedPageTopLength;
-
 	public PortletContainerLiferayCompatImpl(PortletRequest portletRequest, PortletConfig portletConfig) {
 		super(portletRequest, portletConfig);
 	}
 
-	/**
-	 * This method is called after the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle.
-	 */
 	@Override
 	public void afterPhase(PhaseEvent phaseEvent) {
-
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-
-		// Remove duplicate resources from the LIFERAY_SHARED_PAGE_TOP request attribute. For more information, see:
-		// http://issues.liferay.com/browse/FACES-1216
-		if (liferaySharedPageTopLength > 0) {
-
-			PortletRequest portletRequest = bridgeContext.getPortletRequest();
-
-			StringBundler pageTop = getPageTop(portletRequest);
-
-			if (pageTop != null) {
-
-				LiferaySharedPageTop liferaySharedPageTop = new LiferaySharedPageTop(pageTop);
-				liferaySharedPageTop.removeDuplicates();
-				pageTop = liferaySharedPageTop.toStringBundler();
-
-				setPageTop(portletRequest, pageTop);
-			}
-		}
+		// no-op for JSF 1.2
 	}
 
 	/**
-	 * This method is called prior to the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle.
+	 * This method is called prior to the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle. It's purpose is to
+	 * determine if there are any resources in the LIFERAY_SHARED_PAGE_TOP request attribute, so that execution of the
+	 * {@link #afterPhase(PhaseEvent)} can be optimized.
 	 */
 	@Override
 	public void beforePhase(PhaseEvent phaseEvent) {
-
-		// Determine if there are any resources in the LIFERAY_SHARED_PAGE_TOP request attribute, so that execution of
-		// the {@link #afterPhase(PhaseEvent)} can be optimized.
-		liferaySharedPageTopLength = 0;
-
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		PortletRequest portletRequest = bridgeContext.getPortletRequest();
-		StringBundler pageTop = getPageTop(portletRequest);
-
-		if (pageTop != null) {
-			liferaySharedPageTopLength = pageTop.length();
-		}
+		// no-op for JSF 1.2
 	}
 
 	@Override
 	public HeadResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter) {
-		return new HeadResponseWriterLiferayImpl(wrappableResponseWriter);
-	}
 
-	protected StringBundler getPageTop(PortletRequest portletRequest) {
-
-		StringBundler pageTop = null;
-
-		OutputData outputData = (OutputData) portletRequest.getAttribute(WebKeys.OUTPUT_DATA);
-
-		if (outputData != null) {
-
-			pageTop = outputData.getData(null, WebKeys.PAGE_TOP);
-		}
-
-		return pageTop;
-	}
-
-	protected void setPageTop(PortletRequest portletRequest, StringBundler pageTop) {
-
-		OutputData outputData = (OutputData) portletRequest.getAttribute(WebKeys.OUTPUT_DATA);
-
-		if (outputData != null) {
-			outputData.setData(null, WebKeys.PAGE_TOP, pageTop);
-
-			HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
-			httpServletRequest.setAttribute(WebKeys.PAGE_TOP, pageTop);
-		}
+		// no-op for JSF 1.2
+		return null;
 	}
 
 	@Override
