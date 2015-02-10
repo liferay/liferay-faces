@@ -25,10 +25,10 @@ import javax.faces.context.FacesContext;
  * to execution of methods on the {@link ExternalContext}. This class is designed to compensate for these incongruous
  * actions as much as possible.</p>
  *
- * <p>Example: Sometimes the JSF implementation or a JSF {@link ActionListener} will call methods like {@link
- * ExternalContext#setResponseStatus(int)} during the Portlet {@link javax.portlet.PortletRequest#ACTION_PHASE}. In this
- * case, the Portlet lifecycle is working with a {@link javax.portlet.ActionResponse} but there is no corresponding
- * method. Technically the only time such a method could be called would be during the {@link
+ * <p>Example: Sometimes the JSF implementation or a JSF {@link javax.faces.event.ActionListener} will call methods like
+ * {@link ExternalContext#setResponseStatus(int)} during the Portlet {@link javax.portlet.PortletRequest#ACTION_PHASE}.
+ * In this case, the Portlet lifecycle is working with a {@link javax.portlet.ActionResponse} but there is no
+ * corresponding method. Technically the only time such a method could be called would be during the {@link
  * javax.portlet.PortletRequest#RESOURCE_PHASE} because the {@link javax.portlet.ResourceResponse} class has a
  * setReponseStatus(int) method.</p>
  *

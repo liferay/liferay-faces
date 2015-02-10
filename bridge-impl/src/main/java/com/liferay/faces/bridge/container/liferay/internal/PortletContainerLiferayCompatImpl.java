@@ -16,10 +16,10 @@ package com.liferay.faces.bridge.container.liferay.internal;
 import javax.faces.context.ResponseWriter;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.internal.PortletContainerImpl;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadResponseWriter;
@@ -44,8 +44,8 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 	// Private Data Members
 	private int liferaySharedPageTopLength;
 
-	public PortletContainerLiferayCompatImpl(PortletRequest portletRequest, BridgeConfig bridgeConfig) {
-		super(portletRequest, bridgeConfig);
+	public PortletContainerLiferayCompatImpl(PortletRequest portletRequest, PortletConfig portletConfig) {
+		super(portletRequest, portletConfig);
 	}
 
 	/**
@@ -96,9 +96,7 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 
 	@Override
 	public HeadResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter) {
-		HeadResponseWriter headResponseWriter = new HeadResponseWriterLiferayImpl(wrappableResponseWriter);
-
-		return headResponseWriter;
+		return new HeadResponseWriterLiferayImpl(wrappableResponseWriter);
 	}
 
 	protected StringBundler getPageTop(PortletRequest portletRequest) {

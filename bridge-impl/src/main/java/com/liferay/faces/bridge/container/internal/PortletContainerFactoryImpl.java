@@ -13,16 +13,15 @@
  */
 package com.liferay.faces.bridge.container.internal;
 
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
-import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
 import com.liferay.faces.bridge.container.liferay.internal.PortletContainerLiferayImpl;
 import com.liferay.faces.bridge.container.pluto.internal.PortletContainerPlutoImpl;
-import com.liferay.faces.bridge.context.BridgeContext;
 
 
 /**
@@ -30,12 +29,9 @@ import com.liferay.faces.bridge.context.BridgeContext;
  */
 public class PortletContainerFactoryImpl extends PortletContainerFactory {
 
-	/**
-	 * @see  {@link PortletContainerFactory#getPortletContainer(BridgeContext)}
-	 */
 	@Override
 	public PortletContainer getPortletContainer(PortletRequest portletRequest, PortletResponse portletResponse,
-		PortletContext portletContext, BridgeConfig bridgeConfig) {
+		PortletContext portletContext, PortletConfig portletConfig) {
 
 		PortletContainer portletContainer = null;
 
@@ -43,13 +39,13 @@ public class PortletContainerFactoryImpl extends PortletContainerFactory {
 
 			if (PortletContainerDetector.isLiferayPortletRequest(portletRequest)) {
 				portletContainer = new PortletContainerLiferayImpl(portletRequest, portletResponse, portletContext,
-						bridgeConfig);
+						portletConfig);
 			}
 			else if (PortletContainerDetector.isPlutoPortletRequest(portletRequest)) {
-				portletContainer = new PortletContainerPlutoImpl(portletRequest, bridgeConfig);
+				portletContainer = new PortletContainerPlutoImpl(portletRequest, portletConfig);
 			}
 			else {
-				portletContainer = new PortletContainerImpl(portletRequest, bridgeConfig);
+				portletContainer = new PortletContainerImpl(portletRequest, portletConfig);
 			}
 		}
 

@@ -28,8 +28,8 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import com.liferay.faces.bridge.bean.BeanManager;
-import com.liferay.faces.bridge.bean.BeanManagerFactory;
+import com.liferay.faces.bridge.bean.internal.BeanManager;
+import com.liferay.faces.bridge.bean.internal.BeanManagerFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
 import com.liferay.faces.util.config.ApplicationConfig;

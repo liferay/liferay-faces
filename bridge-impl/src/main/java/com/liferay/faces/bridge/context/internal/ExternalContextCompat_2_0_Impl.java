@@ -257,7 +257,7 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 	}
 
 	/**
-	 * The Portlet API does not have an equivalent to {@link HttpServletResponse.sendError(int, String)}. Since the
+	 * The Portlet API does not have an equivalent to {@link javax.servlet.http.HttpServletResponse.sendError(int, String)}. Since the
 	 * Mojarra JSF implementation basically only calls this when a Facelet is not found, better in a portlet environment
 	 * to simply log an error and throw an IOException up the call stack so that the portlet will give the portlet
 	 * container a chance to render an error message.
