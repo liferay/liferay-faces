@@ -60,6 +60,7 @@ public class ApplicationImpl extends ApplicationCompatImpl {
 	 * @see  Application#createComponent(String)
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public UIComponent createComponent(String componentType) throws FacesException {
 
 		if (componentType.equals(UIViewRoot.COMPONENT_TYPE) && BridgeUtil.isPortletRequest()) {

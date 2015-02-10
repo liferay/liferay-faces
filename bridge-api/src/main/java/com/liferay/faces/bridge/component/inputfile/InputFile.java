@@ -18,7 +18,6 @@ import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.FacesEvent;
-import javax.faces.event.PhaseId;
 
 import com.liferay.faces.bridge.event.FileUploadEvent;
 

@@ -54,6 +54,7 @@ public class ServletContextAttributeMap extends AbstractPropertyMap<Object> {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	protected Enumeration<String> getPropertyNames() {
 		return servletContext.getAttributeNames();
 	}
