@@ -32,9 +32,6 @@ import com.liferay.faces.util.helper.Wrapper;
  */
 public abstract class PortletContainerWrapper implements PortletContainer, Wrapper<PortletContainer> {
 
-	// serialVersionUID
-	private static final long serialVersionUID = 528379462567078842L;
-
 	public PortletURL createActionURL(String fromURL) throws MalformedURLException {
 		return getWrapped().createActionURL(fromURL);
 	}
