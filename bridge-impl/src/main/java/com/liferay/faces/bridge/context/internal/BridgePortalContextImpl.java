@@ -53,10 +53,10 @@ public class BridgePortalContextImpl implements BridgePortalContext {
 		propertyNameList.add(ADD_SCRIPT_TEXT_TO_HEAD_SUPPORT);
 		propertyNameList.add(ADD_STYLE_SHEET_RESOURCE_TO_HEAD_SUPPORT);
 		propertyNameList.add(FORWARD_ON_DISPATCH_SUPPORT);
-		propertyNameList.add(NAMESPACED_PARAMETERS_SUPPORT);
 		propertyNameList.add(POST_REDIRECT_GET_SUPPORT);
 		propertyNameList.add(SET_HTTP_STATUS_CODE_SUPPORT);
 		propertyNameList.add(SET_RESOURCE_RESPONSE_BUFFER_SIZE_SUPPORT);
+		propertyNameList.add(STRICT_NAMESPACED_PARAMETERS_SUPPORT);
 	}
 
 	protected String getAddScriptResourceToHead() {
@@ -107,7 +107,7 @@ public class BridgePortalContextImpl implements BridgePortalContext {
 		else if (FORWARD_ON_DISPATCH_SUPPORT.equals(name)) {
 			return getForwardOnDispatch();
 		}
-		else if (NAMESPACED_PARAMETERS_SUPPORT.equals(name)) {
+		else if (STRICT_NAMESPACED_PARAMETERS_SUPPORT.equals(name)) {
 			return getNamespacedParametersRequired();
 		}
 		else if (POST_REDIRECT_GET_SUPPORT.equals(name)) {
