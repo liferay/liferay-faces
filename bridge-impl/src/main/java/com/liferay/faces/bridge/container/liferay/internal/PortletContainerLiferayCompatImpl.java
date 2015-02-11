@@ -41,9 +41,6 @@ import com.liferay.portal.util.PortalUtil;
  */
 public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 
-	// serialVersionUID
-	private static final long serialVersionUID = 8713570232856573935L;
-
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(PortletContainerLiferayCompatImpl.class);
 
@@ -57,7 +54,6 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 	/**
 	 * This method is called after the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle.
 	 */
-	@Override
 	public void afterPhase(PhaseEvent phaseEvent) {
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
@@ -84,7 +80,6 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 	/**
 	 * This method is called prior to the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle.
 	 */
-	@Override
 	public void beforePhase(PhaseEvent phaseEvent) {
 
 		// Determine if there are any resources in the LIFERAY_SHARED_PAGE_TOP request attribute, so that execution of
