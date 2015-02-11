@@ -24,7 +24,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.portlet.ActionResponse;
 import javax.portlet.BaseURL;
@@ -58,9 +57,6 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 public class PortletContainerImpl extends PortletContainerCompatImpl {
 
-	// serialVersionUID
-	private static final long serialVersionUID = 293072155166625509L;
-
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(PortletContainerImpl.class);
 
@@ -84,14 +80,6 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 				PortalContext.MARKUP_HEAD_ELEMENT_SUPPORT);
 		this.markupHeadElementSupported = (portalVendorClaim != null);
 		this.portletConfig = portletConfig;
-	}
-
-	public void afterPhase(PhaseEvent phaseEvent) {
-		// no-op
-	}
-
-	public void beforePhase(PhaseEvent event) {
-		// no-op
 	}
 
 	public PortletURL createActionURL(String fromURL) throws MalformedURLException {
@@ -433,7 +421,7 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 
 		PortletContext portletContext = portletConfig.getPortletContext();
 		String contextParamValue = portletContext.getInitParameter(PortletConfigParam.ContainerAbleToSetHttpStatusCode
-			.getName());
+				.getName());
 
 		if (contextParamValue == null) {
 			contextParamValue = portletContext.getInitParameter(PortletConfigParam.ContainerAbleToSetHttpStatusCode
