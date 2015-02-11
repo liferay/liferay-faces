@@ -68,34 +68,6 @@ public abstract class PortletContainerWrapper implements PortletContainer, Wrapp
 		getWrapped().redirect(url);
 	}
 
-	public boolean isAbleToAddScriptResourceToHead() {
-		return getWrapped().isAbleToAddScriptResourceToHead();
-	}
-
-	public boolean isAbleToAddScriptTextToHead() {
-		return getWrapped().isAbleToAddScriptTextToHead();
-	}
-
-	public boolean isAbleToAddStyleSheetResourceToHead() {
-		return getWrapped().isAbleToAddStyleSheetResourceToHead();
-	}
-
-	public boolean isPostRedirectGetSupported() {
-		return getWrapped().isPostRedirectGetSupported();
-	}
-
-	public boolean isAbleToSetHttpStatusCode() {
-		return getWrapped().isAbleToSetHttpStatusCode();
-	}
-
-	public boolean isAbleToSetResourceResponseBufferSize() {
-		return getWrapped().isAbleToSetResourceResponseBufferSize();
-	}
-
-	public boolean isAbleToForwardOnDispatch() {
-		return getWrapped().isAbleToForwardOnDispatch();
-	}
-
 	public String[] getHeader(String name) {
 		return getWrapped().getHeader(name);
 	}
@@ -126,10 +98,6 @@ public abstract class PortletContainerWrapper implements PortletContainer, Wrapp
 
 	public String getResponseNamespace() {
 		return getWrapped().getResponseNamespace();
-	}
-
-	public boolean isNamespacedParameters() {
-		return getWrapped().isNamespacedParameters();
 	}
 
 	public abstract PortletContainer getWrapped();

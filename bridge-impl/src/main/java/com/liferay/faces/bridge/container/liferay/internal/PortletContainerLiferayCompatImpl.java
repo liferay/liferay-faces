@@ -16,18 +16,8 @@ package com.liferay.faces.bridge.container.liferay.internal;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.container.internal.PortletContainerImpl;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
-
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.theme.ThemeDisplay;
 
 
 /**
@@ -39,13 +29,6 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl impl
 
 	// serialVersionUID
 	private static final long serialVersionUID = 8713570232856573935L;
-
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(PortletContainerLiferayCompatImpl.class);
-
-	public PortletContainerLiferayCompatImpl(PortletRequest portletRequest, PortletConfig portletConfig) {
-		super(portletRequest, portletConfig);
-	}
 
 	@Override
 	public void afterPhase(PhaseEvent phaseEvent) {
@@ -66,22 +49,4 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl impl
 	public PhaseId getPhaseId() {
 		return PhaseId.RENDER_RESPONSE;
 	}
-
-	protected boolean isPortletRequiresNamespacedParameters(PortletRequest portletRequest, ThemeDisplay themeDisplay) {
-
-		boolean portletRequiresNamespacedParameters = false;
-
-		String portletId = (String) portletRequest.getAttribute(WebKeys.PORTLET_ID);
-
-		try {
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(themeDisplay.getCompanyId(), portletId);
-			portletRequiresNamespacedParameters = portlet.isRequiresNamespacedParameters();
-		}
-		catch (SystemException e) {
-			logger.error(e);
-		}
-
-		return portletRequiresNamespacedParameters;
-	}
-
 }
