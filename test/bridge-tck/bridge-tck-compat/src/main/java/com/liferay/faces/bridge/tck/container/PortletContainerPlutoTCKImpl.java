@@ -18,7 +18,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.container.pluto.internal.PortletContainerPlutoImpl;
-import com.liferay.faces.bridge.context.BridgeContext;
 
 
 /**
@@ -28,9 +27,6 @@ import com.liferay.faces.bridge.context.BridgeContext;
  * @author  Neil Griffin
  */
 public class PortletContainerPlutoTCKImpl extends PortletContainerPlutoImpl {
-
-	// serialVersionUID
-	private static final long serialVersionUID = 3044933521403224720L;
 
 	// Private Constants
 	private static final String[] USER_AGENT_HEADER_VALUES = new String[] {
