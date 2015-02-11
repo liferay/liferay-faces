@@ -16,15 +16,14 @@ package com.liferay.faces.bridge.container.liferay.internal;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
-import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import com.liferay.faces.bridge.container.internal.PortletContainerImpl;
 import com.liferay.faces.bridge.context.BridgeContext;
+
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 
 
@@ -40,10 +39,6 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl impl
 
 	// Private Data Members
 	private int liferaySharedPageTopLength;
-
-	public PortletContainerLiferayCompatImpl(PortletRequest portletRequest, PortletConfig portletConfig) {
-		super(portletRequest, portletConfig);
-	}
 
 	/**
 	 * This method is called after the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle.
@@ -107,11 +102,4 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl impl
 	public PhaseId getPhaseId() {
 		return PhaseId.RENDER_RESPONSE;
 	}
-
-	protected boolean isPortletRequiresNamespacedParameters(PortletRequest portletRequest, ThemeDisplay themeDisplay) {
-
-		// Versions of Liferay Portal prior to 6.2 do not support strict namespacing of parameters.
-		return false;
-	}
-
 }

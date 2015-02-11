@@ -14,8 +14,6 @@
 package com.liferay.faces.bridge.tck.container;
 
 import javax.faces.context.ExternalContext;
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.container.pluto.internal.PortletContainerPlutoImpl;
 
@@ -32,10 +30,6 @@ public class PortletContainerPlutoTCKImpl extends PortletContainerPlutoImpl {
 	private static final String[] USER_AGENT_HEADER_VALUES = new String[] {
 			"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:13.0) Gecko/20100101 Firefox/13.0.1"
 		};
-
-	public PortletContainerPlutoTCKImpl(PortletRequest portletRequest, PortletConfig portletConfig) {
-		super(portletRequest, portletConfig);
-	}
 
 	/**
 	 * The JSF 2.x version of the TCK has a dependency on Trinidad 2.x, which needs to be able to detect the browser

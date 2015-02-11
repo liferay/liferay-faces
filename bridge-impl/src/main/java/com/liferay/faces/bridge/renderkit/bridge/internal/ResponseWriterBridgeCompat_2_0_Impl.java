@@ -20,8 +20,10 @@ import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.ResponseWriter;
 import javax.faces.context.ResponseWriterWrapper;
 import javax.faces.render.ResponseStateManager;
+import javax.portlet.PortalContext;
+import javax.portlet.PortletRequest;
 
-import com.liferay.faces.bridge.container.PortletContainer;
+import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -79,9 +81,11 @@ public abstract class ResponseWriterBridgeCompat_2_0_Impl extends ResponseWriter
 	public ResponseWriterBridgeCompat_2_0_Impl(ResponseWriter wrappedResponseWriter) {
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		PortletContainer portletContainer = bridgeContext.getPortletContainer();
-		boolean portletContainerNamespacesParameters = portletContainer.isNamespacedParameters();
-		this.namespacedParameters = portletContainerNamespacesParameters && JSF_RUNTIME_SUPPORTS_NAMESPACING_VIEWSTATE;
+		PortletRequest portletRequest = bridgeContext.getPortletRequest();
+		PortalContext portalContext = portletRequest.getPortalContext();
+		String namespacedParametersSupport = portalContext.getProperty(
+				BridgePortalContext.NAMESPACED_PARAMETERS_SUPPORT);
+		this.namespacedParameters = (namespacedParametersSupport != null) && JSF_RUNTIME_SUPPORTS_NAMESPACING_VIEWSTATE;
 	}
 
 	/**

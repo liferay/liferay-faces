@@ -24,15 +24,11 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseId;
 import javax.portlet.ActionResponse;
 import javax.portlet.BaseURL;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.MimeResponse;
-import javax.portlet.PortalContext;
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
@@ -41,12 +37,10 @@ import javax.portlet.ResourceURL;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.PortletPhase;
 
-import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.util.internal.RequestParameter;
 import com.liferay.faces.util.application.ResourceConstants;
-import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -67,20 +61,9 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 	private static final String REQUEST_ATTR_QUERY_STRING = "javax.servlet.forward.query_string";
 
 	// Private Data Members
-	private Boolean ableToSetHttpStatusCode;
-	private boolean markupHeadElementSupported;
-	private PortletConfig portletConfig;
 	private String requestQueryString;
 	private String requestURL;
 	private String responseNamespace;
-
-	public PortletContainerImpl(PortletRequest portletRequest, PortletConfig portletConfig) {
-
-		String portalVendorClaim = portletRequest.getPortalContext().getProperty(
-				PortalContext.MARKUP_HEAD_ELEMENT_SUPPORT);
-		this.markupHeadElementSupported = (portalVendorClaim != null);
-		this.portletConfig = portletConfig;
-	}
 
 	public PortletURL createActionURL(String fromURL) throws MalformedURLException {
 
@@ -417,69 +400,6 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 		return requestParameters;
 	}
 
-	protected boolean getContextParamAbleToSetHttpStatusCode(boolean defaultValue) {
-
-		PortletContext portletContext = portletConfig.getPortletContext();
-		String contextParamValue = portletContext.getInitParameter(PortletConfigParam.ContainerAbleToSetHttpStatusCode
-				.getName());
-
-		if (contextParamValue == null) {
-			contextParamValue = portletContext.getInitParameter(PortletConfigParam.ContainerAbleToSetHttpStatusCode
-					.getAlternateName());
-		}
-
-		return BooleanHelper.toBoolean(contextParamValue, defaultValue);
-	}
-
-	public boolean isAbleToAddScriptResourceToHead() {
-		return isMarkupHeadElementSupported();
-	}
-
-	public boolean isAbleToAddScriptTextToHead() {
-		return isMarkupHeadElementSupported();
-	}
-
-	public boolean isAbleToAddStyleSheetResourceToHead() {
-		return isMarkupHeadElementSupported();
-	}
-
-	public boolean isPostRedirectGetSupported() {
-		return true;
-	}
-
-	/**
-	 * Determines whether or not the portlet container supports the standard Portlet 2.0 mechanism for adding resources
-	 * to the <head>...</head> section of the rendered portal page. Section PLT.12.5.4 of the Portlet 2.0 spec indicates
-	 * that this is an "optional" feature for vendors to implement.
-	 *
-	 * @return  True if the portlet container supports the standard Portlet 2.0 mechanism for adding resources.
-	 */
-	protected boolean isMarkupHeadElementSupported() {
-		return markupHeadElementSupported;
-	}
-
-	public boolean isAbleToSetHttpStatusCode() {
-
-		if (ableToSetHttpStatusCode == null) {
-
-			// Although it's not the most performant option, it's safest to assume that the portlet container has not
-			// implemented this feature. That way, the ResourceHandlerImpl will always deliver stuff like jsf.js back
-			// to the browser. As we support more portlet containers in the future (Pluto, etc.) we can create
-			// implementations that override this.
-			ableToSetHttpStatusCode = getContextParamAbleToSetHttpStatusCode(false);
-		}
-
-		return ableToSetHttpStatusCode;
-	}
-
-	public boolean isAbleToSetResourceResponseBufferSize() {
-		return true;
-	}
-
-	public boolean isAbleToForwardOnDispatch() {
-		return true;
-	}
-
 	public String[] getHeader(String name) {
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
@@ -588,9 +508,5 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 		}
 
 		return responseNamespace;
-	}
-
-	public boolean isNamespacedParameters() {
-		return false;
 	}
 }
