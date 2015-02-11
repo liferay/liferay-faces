@@ -28,9 +28,6 @@ import com.liferay.faces.bridge.container.PortletContainer;
  */
 public abstract class PortletContainerCompatImpl implements PortletContainer {
 
-	// serialVersionUID
-	private static final long serialVersionUID = 2694729758648266705L;
-
 	// This is a utility method called by a subclass with a deprecated public method.
 	@Deprecated
 	protected void redirectJSF2PartialResponse(FacesContext facesContext, ResourceResponse resourceResponse, String url)
