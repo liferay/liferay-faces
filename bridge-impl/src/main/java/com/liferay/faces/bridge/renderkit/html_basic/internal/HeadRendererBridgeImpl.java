@@ -29,6 +29,8 @@ import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.context.HeadResponseWriter;
+import com.liferay.faces.bridge.context.HeadResponseWriterFactory;
 import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.renderkit.bridge.internal.BridgeRenderer;
 import com.liferay.faces.util.application.ComponentResource;
@@ -236,7 +238,10 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 					HeadResponseWriter.class.getName());
 
 			if (headResponseWriter == null) {
-				headResponseWriter = (HeadResponseWriter) portletContainer.getHeadResponseWriter(responseWriterBackup);
+				HeadResponseWriterFactory headResponseWriterFactory = headResponseWriterFactory =
+						(HeadResponseWriterFactory) FactoryExtensionFinder.getFactory(HeadResponseWriterFactory.class);
+				headResponseWriter = headResponseWriterFactory.getHeadResponseWriter(bridgeContext,
+						responseWriterBackup);
 			}
 
 			portletRequest.setAttribute(HeadResponseWriter.class.getName(), headResponseWriter);
