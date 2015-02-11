@@ -503,12 +503,6 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 		mimeResponse.setContentType(contentType);
 	}
 
-	public PhaseId getPhaseId() {
-
-		// no-op
-		return null;
-	}
-
 	public String getRequestParameter(String name) {
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
