@@ -39,7 +39,6 @@ import javax.portlet.PortletResponse;
 import javax.portlet.faces.Bridge.PortletPhase;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.config.BridgeConfigMockImpl;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.url.BridgeActionURL;
 import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
