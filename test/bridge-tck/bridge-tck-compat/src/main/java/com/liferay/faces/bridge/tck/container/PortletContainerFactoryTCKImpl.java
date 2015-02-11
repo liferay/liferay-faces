@@ -21,7 +21,6 @@ import javax.portlet.PortletResponse;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
 import com.liferay.faces.bridge.container.internal.PortletContainerDetector;
-import com.liferay.faces.bridge.context.BridgeContext;
 
 
 /**
@@ -43,7 +42,7 @@ public class PortletContainerFactoryTCKImpl extends PortletContainerFactory {
 		PortletContainer portletContainer = null;
 
 		if (PortletContainerDetector.isPlutoPortletRequest(portletRequest)) {
-			portletContainer = new PortletContainerPlutoTCKImpl(portletRequest, portletConfig);
+			portletContainer = new PortletContainerPlutoTCKImpl();
 		}
 		else {
 
