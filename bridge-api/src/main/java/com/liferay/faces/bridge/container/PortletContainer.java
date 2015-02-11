@@ -18,7 +18,6 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.event.PhaseListener;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.MimeResponse;
@@ -30,7 +29,7 @@ import javax.portlet.ResourceURL;
 /**
  * @author  Neil Griffin
  */
-public interface PortletContainer extends PhaseListener {
+public interface PortletContainer {
 
 	/**
 	 * Creates a portlet action URL and copies query parameters that might be present in the specified URL.

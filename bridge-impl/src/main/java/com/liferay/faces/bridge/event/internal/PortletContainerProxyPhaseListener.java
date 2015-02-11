@@ -18,11 +18,13 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
 import com.liferay.faces.bridge.container.PortletContainer;
+import com.liferay.faces.bridge.container.PortletContainerWrapper;
 import com.liferay.faces.bridge.context.BridgeContext;
 
 
 /**
- * This class serves as a thread-safe {@link PhaseListener} that acts as a proxy to the {@link PortletContainer}.
+ * This class serves as a thread-safe {@link PhaseListener} that acts as a proxy to the {@link PortletContainer}
+ * implementation that might need to listen to phase events.
  *
  * @author  Neil Griffin
  */
@@ -32,27 +34,53 @@ public class PortletContainerProxyPhaseListener implements PhaseListener {
 	private static final long serialVersionUID = 3383713726298508807L;
 
 	public void afterPhase(PhaseEvent phaseEvent) {
+
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		PortletContainer portletContainer = bridgeContext.getPortletContainer();
-		PhaseId phaseId = portletContainer.getPhaseId();
+		PhaseListener phaseListener = getPortletContainerPhaseListener(portletContainer);
 
-		if ((phaseId != null) && ((phaseId == PhaseId.ANY_PHASE) || (phaseId == phaseEvent.getPhaseId()))) {
-			portletContainer.afterPhase(phaseEvent);
+		if (phaseListener != null) {
+
+			PhaseId phaseId = phaseListener.getPhaseId();
+
+			if ((phaseId != null) && ((phaseId == PhaseId.ANY_PHASE) || (phaseId == phaseEvent.getPhaseId()))) {
+				phaseListener.afterPhase(phaseEvent);
+			}
 		}
 	}
 
 	public void beforePhase(PhaseEvent phaseEvent) {
+
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		PortletContainer portletContainer = bridgeContext.getPortletContainer();
-		PhaseId phaseId = portletContainer.getPhaseId();
+		PhaseListener phaseListener = getPortletContainerPhaseListener(portletContainer);
 
-		if ((phaseId != null) && ((phaseId == PhaseId.ANY_PHASE) || (phaseId == phaseEvent.getPhaseId()))) {
-			portletContainer.beforePhase(phaseEvent);
+		if (phaseListener != null) {
+			PhaseId phaseId = phaseListener.getPhaseId();
+
+			if ((phaseId != null) && ((phaseId == PhaseId.ANY_PHASE) || (phaseId == phaseEvent.getPhaseId()))) {
+				phaseListener.beforePhase(phaseEvent);
+			}
 		}
 	}
 
 	public PhaseId getPhaseId() {
 		return PhaseId.ANY_PHASE;
+	}
+
+	protected PhaseListener getPortletContainerPhaseListener(PortletContainer portletContainer) {
+
+		if (portletContainer instanceof PhaseListener) {
+			return (PhaseListener) portletContainer;
+		}
+		else if (portletContainer instanceof PortletContainerWrapper) {
+			PortletContainerWrapper portletContainerWrapper = (PortletContainerWrapper) portletContainer;
+
+			return getPortletContainerPhaseListener(portletContainerWrapper.getWrapped());
+		}
+		else {
+			return null;
+		}
 	}
 
 }
