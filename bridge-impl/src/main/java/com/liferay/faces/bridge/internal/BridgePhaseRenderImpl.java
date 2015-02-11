@@ -23,6 +23,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
+import javax.portlet.PortalContext;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -35,6 +36,7 @@ import javax.portlet.faces.Bridge.PortletPhase;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
+import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.application.internal.BridgeNavigationHandler;
 import com.liferay.faces.bridge.application.internal.BridgeNavigationHandlerImpl;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
@@ -294,7 +296,10 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 		// org.apache.myfaces.trinidadinternal.context.FacesContextFactoryImpl.CacheRenderKit} constructor, which
 		// consults a request attribute named "org.apache.myfaces.trinidad.util.RequestStateMap" that must first be
 		// excluded.
-		if (!portletContainer.isPostRedirectGetSupported() &&
+		PortalContext portalContext = portletRequest.getPortalContext();
+		String postRedirectGetSupport = portalContext.getProperty(BridgePortalContext.POST_REDIRECT_GET_SUPPORT);
+
+		if ((postRedirectGetSupport == null) &&
 				(bridgeRequestScope.getBeganInPhase() == Bridge.PortletPhase.ACTION_PHASE)) {
 			bridgeRequestScope.removeExcludedAttributes(renderRequest);
 		}

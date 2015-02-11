@@ -16,12 +16,8 @@ package com.liferay.faces.bridge.container.liferay.internal;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.container.internal.PortletContainerImpl;
-
-import com.liferay.portal.theme.ThemeDisplay;
 
 
 /**
@@ -33,10 +29,6 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl impl
 
 	// serialVersionUID
 	private static final long serialVersionUID = 8713570232856573935L;
-
-	public PortletContainerLiferayCompatImpl(PortletRequest portletRequest, PortletConfig portletConfig) {
-		super(portletRequest, portletConfig);
-	}
 
 	@Override
 	public void afterPhase(PhaseEvent phaseEvent) {
@@ -56,11 +48,5 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl impl
 	@Override
 	public PhaseId getPhaseId() {
 		return PhaseId.RENDER_RESPONSE;
-	}
-
-	protected boolean isPortletRequiresNamespacedParameters(PortletRequest portletRequest, ThemeDisplay themeDisplay) {
-
-		// Versions of Liferay Portal prior to 6.2 do not support strict namespacing of parameters.
-		return false;
 	}
 }
