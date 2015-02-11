@@ -15,6 +15,7 @@ package com.liferay.faces.bridge.container.liferay.internal;
 
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
+import javax.faces.event.PhaseListener;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,10 @@ import com.liferay.portal.util.PortalUtil;
  *
  * @author  Neil Griffin
  */
-public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
+public class PortletContainerLiferayCompatImpl extends PortletContainerImpl implements PhaseListener {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 8713570232856573935L;
 
 	// Private Data Members
 	private int liferaySharedPageTopLength;
