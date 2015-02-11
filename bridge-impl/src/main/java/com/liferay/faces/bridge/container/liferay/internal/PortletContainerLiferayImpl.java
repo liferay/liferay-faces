@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.faces.event.PhaseListener;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -48,7 +49,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 /**
  * @author  Neil Griffin
  */
-public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatImpl {
+public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatImpl implements PhaseListener {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 4751433245905676075L;
