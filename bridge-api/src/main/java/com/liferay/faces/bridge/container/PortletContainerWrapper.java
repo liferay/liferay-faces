@@ -18,8 +18,6 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.event.PhaseEvent;
-import javax.faces.event.PhaseId;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.MimeResponse;
@@ -36,14 +34,6 @@ public abstract class PortletContainerWrapper implements PortletContainer, Wrapp
 
 	// serialVersionUID
 	private static final long serialVersionUID = 528379462567078842L;
-
-	public void afterPhase(PhaseEvent event) {
-		getWrapped().afterPhase(event);
-	}
-
-	public void beforePhase(PhaseEvent event) {
-		getWrapped().beforePhase(event);
-	}
 
 	public PortletURL createActionURL(String fromURL) throws MalformedURLException {
 		return getWrapped().createActionURL(fromURL);
@@ -119,10 +109,6 @@ public abstract class PortletContainerWrapper implements PortletContainer, Wrapp
 
 	public void setMimeResponseContentType(MimeResponse mimeResponse, String contentType) {
 		getWrapped().setMimeResponseContentType(mimeResponse, contentType);
-	}
-
-	public PhaseId getPhaseId() {
-		return getWrapped().getPhaseId();
 	}
 
 	public String getRequestParameter(String name) {
