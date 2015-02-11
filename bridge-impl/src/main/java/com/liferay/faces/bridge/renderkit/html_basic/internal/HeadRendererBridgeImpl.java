@@ -24,9 +24,11 @@ import javax.faces.component.UIComponentBase;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
+import javax.portlet.PortalContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 
+import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.HeadResponseWriter;
@@ -139,7 +141,10 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 		PortletContainer portletContainer = bridgeContext.getPortletContainer();
 
 		// Determine whether or not the portlet container is able to add script resources to the head.
-		boolean portletContainerAbleToAddScriptResourceToHead = portletContainer.isAbleToAddScriptResourceToHead();
+		PortalContext portalContext = portletRequest.getPortalContext();
+		String addScriptResourceToHeadSupport = portalContext.getProperty(
+				BridgePortalContext.ADD_SCRIPT_RESOURCE_TO_HEAD_SUPPORT);
+		boolean portletContainerAbleToAddScriptResourceToHead = (addScriptResourceToHeadSupport != null);
 
 		// Determine whether or not this might be a Liferay runtime portlet (which does not have the ability to add
 		// script resources to the head).
