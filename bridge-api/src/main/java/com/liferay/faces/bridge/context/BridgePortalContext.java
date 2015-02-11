@@ -45,6 +45,12 @@ public interface BridgePortalContext extends PortalContext {
 		"com.liferay.faces.bridge.add.style.sheet.resource.to.head.support";
 
 	/**
+	 * Property indicating if the portal application supports issuing a forward when a dispatch occurs. A non-null value
+	 * indicates that the portal application provides support.
+	 */
+	public static final String FORWARD_ON_DISPATCH_SUPPORT = "com.liferay.faces.bridge.forward.on.dispatch.support";
+
+	/**
 	 * Property indicating if the portal application supports/implements the POST-REDIRECT-GET design pattern, meaning
 	 * that the {@link javax.portlet.PortletRequest#ACTION_PHASE} originates from an HTTP POST request, and the {@link
 	 * javax.portlet.PortletRequest#RENDER_PHASE} is caused by a subsequent HTTP GET request. A non-null value indicates
@@ -69,14 +75,9 @@ public interface BridgePortalContext extends PortalContext {
 		"com.liferay.faces.bridge.set.resource.response.buffer.size.support";
 
 	/**
-	 * Property indicating if the portal application supports issuing a forward when a dispatch occurs. A non-null value
-	 * indicates that the portal application provides support.
-	 */
-	public static final String FORWARD_ON_DISPATCH_SUPPORT = "com.liferay.faces.bridge.forward.on.dispatch.support";
-
-	/**
 	 * Property indicating if the portal application requires parameters to be namespaced. A non-null value indicates
 	 * that the portal application provides support.
 	 */
-	public static final String NAMESPACED_PARAMETERS_SUPPORT = "com.liferay.faces.bridge.namespaced.paramters.support";
+	public static final String STRICT_NAMESPACED_PARAMETERS_SUPPORT =
+		"com.liferay.faces.bridge.strict.namespaced.paramters.support";
 }
