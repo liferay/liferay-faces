@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.renderkit.html_basic.internal;
+package com.liferay.faces.bridge.context.internal;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -21,6 +21,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 import javax.faces.context.ResponseWriterWrapper;
 
+import com.liferay.faces.bridge.context.HeadResponseWriter;
+import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementWriterStack;
 import org.w3c.dom.Element;
 
 import com.liferay.faces.util.lang.StringPool;
@@ -29,13 +31,13 @@ import com.liferay.faces.util.lang.StringPool;
 /**
  * @author  Neil Griffin
  */
-public abstract class HeadResponseWriter extends ResponseWriterWrapper {
+public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 
 	// Private Data Members
 	ResponseWriter wrappedResponseWriter;
 	ElementWriterStack elementWriterStack;
 
-	public HeadResponseWriter(ResponseWriter wrappedResponseWriter) {
+	public HeadResponseWriterBase(ResponseWriter wrappedResponseWriter) {
 		this.wrappedResponseWriter = wrappedResponseWriter;
 		this.elementWriterStack = new ElementWriterStack();
 	}

@@ -21,9 +21,6 @@ import javax.faces.context.ResponseWriter;
 import javax.portlet.ResourceResponse;
 
 import com.liferay.faces.bridge.container.PortletContainer;
-import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadResponseWriter;
-import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadResponseWriterImpl;
 
 
 /**
@@ -57,15 +54,6 @@ public abstract class PortletContainerCompatImpl implements PortletContainer {
 		partialResponseWriter.redirect(url);
 		partialResponseWriter.endDocument();
 		facesContext.responseComplete();
-	}
-
-	public HeadResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter) {
-
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		HeadResponseWriter headResponseWriter = new HeadResponseWriterImpl(wrappableResponseWriter,
-				bridgeContext.getPortletResponse());
-
-		return headResponseWriter;
 	}
 
 	// This is a utility method called by a subclass with a deprecated public method.

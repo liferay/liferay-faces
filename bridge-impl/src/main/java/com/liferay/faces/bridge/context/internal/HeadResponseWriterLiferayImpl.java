@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.renderkit.html_basic.internal;
+package com.liferay.faces.bridge.context.internal;
 
 import java.io.IOException;
 import java.util.EmptyStackException;
@@ -27,6 +27,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.tagext.BodyContent;
 
+import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementImpl;
+import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementWriter;
 import org.w3c.dom.Element;
 
 import com.liferay.faces.bridge.taglib.liferay.internal.HtmlTopTag;
@@ -46,7 +48,7 @@ import com.liferay.portal.util.PortalUtil;
  *
  * @author  Neil Griffin
  */
-public class HeadResponseWriterLiferayImpl extends HeadResponseWriter {
+public class HeadResponseWriterLiferayImpl extends HeadResponseWriterBase {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(HeadResponseWriterLiferayImpl.class);
