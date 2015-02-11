@@ -20,10 +20,12 @@ import javax.faces.application.Resource;
 import javax.faces.application.ResourceHandler;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.portlet.PortalContext;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
 
+import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
-import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.application.ResourceHandlerWrapperBase;
@@ -187,9 +189,11 @@ public class ResourceHandlerBridgeImpl extends ResourceHandlerWrapperBase {
 	protected boolean isAbleToSetHttpStatusCode(FacesContext facesContext) {
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		PortletContainer portletContainer = bridgeContext.getPortletContainer();
+		PortletRequest portletRequest = bridgeContext.getPortletRequest();
+		PortalContext portalContext = portletRequest.getPortalContext();
+		String setHttpStatusCodeSupport = portalContext.getProperty(BridgePortalContext.SET_HTTP_STATUS_CODE_SUPPORT);
 
-		return portletContainer.isAbleToSetHttpStatusCode();
+		return (setHttpStatusCodeSupport != null);
 	}
 
 	@Override

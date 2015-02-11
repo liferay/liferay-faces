@@ -16,8 +16,6 @@ package com.liferay.faces.bridge.container.pluto.internal;
 import java.net.MalformedURLException;
 
 import javax.portlet.MimeResponse;
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletRequest;
 import javax.portlet.ResourceURL;
 
 import com.liferay.faces.bridge.container.internal.PortletContainerImpl;
@@ -31,10 +29,6 @@ public class PortletContainerPlutoImpl extends PortletContainerImpl {
 	// Private Constants
 	private static final String CONTENT_TYPE_APPLICATION_XHTML_XML = "application/xhtml+xml";
 	private static final String CONTENT_TYPE_TEXT_HTML = "text/html";
-
-	public PortletContainerPlutoImpl(PortletRequest portletRequest, PortletConfig portletConfig) {
-		super(portletRequest, portletConfig);
-	}
 
 	/**
 	 * This method overrides the default implementation in order wrap Pluto's ResourceURL implementation with a wrapper

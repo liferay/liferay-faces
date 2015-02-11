@@ -22,7 +22,6 @@ import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletURL;
-import javax.portlet.ResourceResponse;
 import javax.portlet.ResourceURL;
 
 
@@ -116,61 +115,6 @@ public interface PortletContainer {
 	public void redirect(String url) throws IOException;
 
 	/**
-	 * Determines whether or not the portlet container has the ability (standard or vendor-specific) to add &lt;script
-	 * src=".." /&gt; resource to the &lt;head&gt;...&lt;/head&gt; section of the rendered portal page.
-	 *
-	 * @return  True if the portlet container supports it.
-	 */
-	public boolean isAbleToAddScriptResourceToHead();
-
-	/**
-	 * Determines whether or not the portlet container has the ability (standard or vendor-specific) to add
-	 * &lt;script&gt; text to the &lt;head&gt;...&lt;/head&gt; section of the rendered portal page.
-	 *
-	 * @return  True if the portlet container supports it.
-	 */
-	public boolean isAbleToAddScriptTextToHead();
-
-	/**
-	 * Determines whether or not the portlet container has the ability (standard or vendor-specific) to add stylesheet
-	 * &lt;link&gt; tags to the &lt;head&gt;...&lt;/head&gt; section of the rendered portal page.
-	 *
-	 * @return  True if the portlet container supports it.
-	 */
-	public boolean isAbleToAddStyleSheetResourceToHead();
-
-	/**
-	 * Flag indicating whether or not the portlet container supports/implements the POST-REDIRECT-GET design pattern,
-	 * meaning that the ACTION_PHASE originates from an HTTP POST request, and the RENDER_PHASE is a subsequent HTTP GET
-	 * request.
-	 *
-	 * @return  <code>true</code> if the POST-REDIRECT-GET design pattern is supported, otherwise <code>false</code>.
-	 */
-	public boolean isPostRedirectGetSupported();
-
-	/**
-	 * Determines whether or not the portlet container has the ability to support the Portlet 2.0 standard mechanism of
-	 * setting the {@link ResourceResponse.HTTP_STATUS_CODE} property on the {@link ResourceResponse}.
-	 */
-	public boolean isAbleToSetHttpStatusCode();
-
-	/**
-	 * Determines whether or not the portlet container has the ability to set the buffer size on its
-	 * javax.portlet.ResourceResponse implementation.
-	 *
-	 * @return  True if the portlet container supports it.
-	 */
-	public boolean isAbleToSetResourceResponseBufferSize();
-
-	/**
-	 * Determines whether or not the portlet container has the ability to issue a forward when a dispatch occurs. If
-	 * unable to forward, then an include must happen during the dispatch instead.
-	 *
-	 * @return  <code>true</code> if able, otherwise <code>false</code>.
-	 */
-	public boolean isAbleToForwardOnDispatch();
-
-	/**
 	 * Returns the value of the header with the specified name from the underlying HttpServletRequest.
 	 */
 	public String[] getHeader(String name);
@@ -230,11 +174,4 @@ public interface PortletContainer {
 	 * Returns the response namespace.
 	 */
 	public String getResponseNamespace();
-
-	/**
-	 * Determines whether or not the portlet container requires parameters to be namespaced.
-	 *
-	 * @return  True if the portlet container requires parameters to be namespaced. Otherwise, returns false.
-	 */
-	public boolean isNamespacedParameters();
 }
