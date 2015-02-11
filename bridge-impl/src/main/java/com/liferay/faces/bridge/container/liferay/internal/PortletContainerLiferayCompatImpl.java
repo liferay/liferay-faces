@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.bridge.container.liferay.internal;
 
-import javax.faces.event.PhaseEvent;
-import javax.faces.event.PhaseId;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 
@@ -30,31 +28,8 @@ import com.liferay.portal.theme.ThemeDisplay;
  */
 public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 
-	// serialVersionUID
-	private static final long serialVersionUID = 8713570232856573935L;
-
 	public PortletContainerLiferayCompatImpl(PortletRequest portletRequest, PortletConfig portletConfig) {
 		super(portletRequest, portletConfig);
-	}
-
-	@Override
-	public void afterPhase(PhaseEvent phaseEvent) {
-		// no-op for JSF 1.2
-	}
-
-	/**
-	 * This method is called prior to the {@link PhaseId#RENDER_RESPONSE} phase of the JSF lifecycle. It's purpose is to
-	 * determine if there are any resources in the LIFERAY_SHARED_PAGE_TOP request attribute, so that execution of the
-	 * {@link #afterPhase(PhaseEvent)} can be optimized.
-	 */
-	@Override
-	public void beforePhase(PhaseEvent phaseEvent) {
-		// no-op for JSF 1.2
-	}
-
-	@Override
-	public PhaseId getPhaseId() {
-		return PhaseId.RENDER_RESPONSE;
 	}
 
 	protected boolean isPortletRequiresNamespacedParameters(PortletRequest portletRequest, ThemeDisplay themeDisplay) {
@@ -62,5 +37,4 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 		// Versions of Liferay Portal prior to 6.2 do not support strict namespacing of parameters.
 		return false;
 	}
-
 }
