@@ -29,6 +29,7 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.portlet.ActionResponse;
 import javax.portlet.MimeResponse;
+import javax.portlet.PortalContext;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
@@ -46,6 +47,7 @@ import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeInvalidViewPathException;
 import javax.portlet.faces.GenericFacesPortlet;
 
+import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.internal.BridgeConfigAttributeMap;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
@@ -129,7 +131,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		this.configuredFacesServletMappings = (List<ConfiguredServletMapping>) bridgeConfig.getAttributes().get(
 				BridgeConfigAttributeMap.CONFIGURED_FACES_SERVLET_MAPPINGS);
 		this.configuredSuffixes = (List<String>) bridgeConfig.getAttributes().get(
-			BridgeConfigAttributeMap.CONFIGURED_SUFFIXES);
+				BridgeConfigAttributeMap.CONFIGURED_SUFFIXES);
 		this.bridgeRequestScope = bridgeRequestScope;
 		this.portletConfig = portletConfig;
 		this.portletContext = portletContext;
@@ -158,7 +160,11 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			if (portletRequestDispacher != null) {
 
 				// If the underlying portlet container has the ability to forward (like Pluto), then
-				if (portletContainer.isAbleToForwardOnDispatch()) {
+				PortalContext portalContext = portletRequest.getPortalContext();
+				String forwardOnDispatchSupport = portalContext.getProperty(
+						BridgePortalContext.FORWARD_ON_DISPATCH_SUPPORT);
+
+				if (forwardOnDispatchSupport != null) {
 
 					// If a render-redirect has occurred after dispatching to a JSP, that means that the previous
 					// dispatch called PortletRequestDispatcher#forward(String) which marked the response as "complete",

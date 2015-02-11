@@ -38,14 +38,13 @@ public class PortletContainerFactoryImpl extends PortletContainerFactory {
 		if (portletContainer == null) {
 
 			if (PortletContainerDetector.isLiferayPortletRequest(portletRequest)) {
-				portletContainer = new PortletContainerLiferayImpl(portletRequest, portletResponse, portletContext,
-						portletConfig);
+				portletContainer = new PortletContainerLiferayImpl(portletRequest, portletResponse, portletContext);
 			}
 			else if (PortletContainerDetector.isPlutoPortletRequest(portletRequest)) {
-				portletContainer = new PortletContainerPlutoImpl(portletRequest, portletConfig);
+				portletContainer = new PortletContainerPlutoImpl();
 			}
 			else {
-				portletContainer = new PortletContainerImpl(portletRequest, portletConfig);
+				portletContainer = new PortletContainerImpl();
 			}
 		}
 
