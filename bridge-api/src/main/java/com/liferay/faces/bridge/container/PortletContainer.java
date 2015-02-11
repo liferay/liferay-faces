@@ -18,7 +18,6 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.context.ResponseWriter;
 import javax.faces.event.PhaseListener;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
@@ -176,8 +175,6 @@ public interface PortletContainer extends PhaseListener {
 	 * Returns the value of the header with the specified name from the underlying HttpServletRequest.
 	 */
 	public String[] getHeader(String name);
-
-	public ResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter);
 
 	/**
 	 * Returns the value of the specified header name from the HttpServletRequest that is wrapped by the current
