@@ -31,9 +31,6 @@ import javax.portlet.ResourceURL;
  */
 public abstract class PortletContainerWrapper implements PortletContainer, FacesWrapper<PortletContainer> {
 
-	// serialVersionUID
-	private static final long serialVersionUID = 528379462567078842L;
-
 	public PortletURL createActionURL(String fromURL) throws MalformedURLException {
 		return getWrapped().createActionURL(fromURL);
 	}
