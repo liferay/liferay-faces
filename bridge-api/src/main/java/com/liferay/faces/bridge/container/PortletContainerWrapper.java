@@ -18,7 +18,6 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.context.ResponseWriter;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.portlet.EventRequest;
@@ -112,10 +111,6 @@ public abstract class PortletContainerWrapper implements PortletContainer, Wrapp
 
 	public String[] getHeader(String name) {
 		return getWrapped().getHeader(name);
-	}
-
-	public ResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter) {
-		return getWrapped().getHeadResponseWriter(wrappableResponseWriter);
 	}
 
 	public long getHttpServletRequestDateHeader(String name) {

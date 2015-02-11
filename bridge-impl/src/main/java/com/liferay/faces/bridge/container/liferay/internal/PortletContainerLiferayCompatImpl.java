@@ -13,14 +13,12 @@
  */
 package com.liferay.faces.bridge.container.liferay.internal;
 
-import javax.faces.context.ResponseWriter;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 
 import com.liferay.faces.bridge.container.internal.PortletContainerImpl;
-import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadResponseWriter;
 
 import com.liferay.portal.theme.ThemeDisplay;
 
@@ -52,13 +50,6 @@ public class PortletContainerLiferayCompatImpl extends PortletContainerImpl {
 	@Override
 	public void beforePhase(PhaseEvent phaseEvent) {
 		// no-op for JSF 1.2
-	}
-
-	@Override
-	public HeadResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter) {
-
-		// no-op for JSF 1.2
-		return null;
 	}
 
 	@Override

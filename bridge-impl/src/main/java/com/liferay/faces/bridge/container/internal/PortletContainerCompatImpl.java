@@ -16,11 +16,9 @@ package com.liferay.faces.bridge.container.internal;
 import java.io.IOException;
 
 import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
 import javax.portlet.ResourceResponse;
 
 import com.liferay.faces.bridge.container.PortletContainer;
-import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadResponseWriter;
 
 
 /**
@@ -38,12 +36,6 @@ public abstract class PortletContainerCompatImpl implements PortletContainer {
 	protected void redirectJSF2PartialResponse(FacesContext facesContext, ResourceResponse resourceResponse, String url)
 		throws IOException {
 		// no-op for JSF 1.x
-	}
-
-	public HeadResponseWriter getHeadResponseWriter(ResponseWriter wrappableResponseWriter) {
-
-		// no-op for JSF 1.x
-		return null;
 	}
 
 	// This is a utility method called by a subclass with a deprecated public method.
