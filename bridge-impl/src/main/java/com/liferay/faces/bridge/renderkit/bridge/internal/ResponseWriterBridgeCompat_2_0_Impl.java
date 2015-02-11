@@ -84,7 +84,7 @@ public abstract class ResponseWriterBridgeCompat_2_0_Impl extends ResponseWriter
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
 		PortalContext portalContext = portletRequest.getPortalContext();
 		String namespacedParametersSupport = portalContext.getProperty(
-				BridgePortalContext.NAMESPACED_PARAMETERS_SUPPORT);
+				BridgePortalContext.STRICT_NAMESPACED_PARAMETERS_SUPPORT);
 		this.namespacedParameters = (namespacedParametersSupport != null) && JSF_RUNTIME_SUPPORTS_NAMESPACING_VIEWSTATE;
 	}
 
