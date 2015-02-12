@@ -49,9 +49,6 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(PortletContainerLiferayImpl.class);
 
-	// Private Constants
-	private static final String REQ_PARAM_LIFERAY_BROWSERID = "?browserId=";
-
 	// Private Pseudo-Constants Initialized at Construction-Time
 	private String NAMESPACED_P_P_COL_ID;
 	private String NAMESPACED_P_P_COL_POS;
@@ -124,28 +121,6 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 		}
 
 		return redirectURL;
-	}
-
-	/**
-	 * There is a bug in some versions of Liferay's PortalImpl.getStaticResourceURL(...) method in which it appends
-	 * request parameters with a question-mark instead of an ampersand. This method is a hack-fix for that bug.
-	 *
-	 * @param   value  The request parameter value that may need to be fixed.
-	 *
-	 * @return  The fixed request parameter value.
-	 */
-	@Override
-	public String fixRequestParameterValue(String value) {
-
-		if (value != null) {
-			int pos = value.indexOf(REQ_PARAM_LIFERAY_BROWSERID);
-
-			if (pos > 0) {
-				value = value.substring(0, pos);
-			}
-		}
-
-		return value;
 	}
 
 	@Override

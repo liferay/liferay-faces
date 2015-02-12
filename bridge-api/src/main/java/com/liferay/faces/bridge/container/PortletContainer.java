@@ -89,16 +89,6 @@ public interface PortletContainer {
 	public ResourceURL createResourceURL(String fromURL) throws MalformedURLException;
 
 	/**
-	 * This method provides the portlet conainer with an opportunity to fix/correct/massage the specified request
-	 * parameter value.
-	 *
-	 * @param   value  The request parameter value that needs to be fixed.
-	 *
-	 * @return  The fixed value.
-	 */
-	public String fixRequestParameterValue(String value);
-
-	/**
 	 * Maintains (copies) the render parameters found in the specified EventRequest to the specified EventResponse.
 	 */
 	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse);
@@ -131,31 +121,6 @@ public interface PortletContainer {
 	 * @param  contentType  The contentType that is to be set on the specified MimeResponse.
 	 */
 	public void setMimeResponseContentType(MimeResponse mimeResponse, String contentType);
-
-	/**
-	 * This is a convenience method that gets the specified request parameter value. While this could normally be done
-	 * by simply calling PortletRequest.getParameter(String), this method provides the portlet container abstraction
-	 * layer with an opportunity to fix/correct/massage the parameter value as required. Therefore, any implementing
-	 * class of this method must call the {@link #fixRequestParameterValue(String)} method before returning a value.
-	 *
-	 * @param   name  The request parameter name.
-	 *
-	 * @return  The request parameter value.
-	 */
-	public String getRequestParameter(String name);
-
-	/**
-	 * This is a convenience method that gets the specified request parameter values. While this could normally be done
-	 * by simply calling PortletRequest.getParameterValues(String), this method provides the portlet container
-	 * abstraction layer with an opportunity to fix/correct/massage the parameter values as required. Therefore, any
-	 * implementing class of this method must call the {@link getRequestParameter(String)} method before returning a
-	 * value.
-	 *
-	 * @param   name  The request parameter name.
-	 *
-	 * @return  The request parameter value.
-	 */
-	public String[] getRequestParameterValues(String name);
 
 	/**
 	 * Gets the query string part of the URL requested by the user-agent (browser) by getting the attribute named
