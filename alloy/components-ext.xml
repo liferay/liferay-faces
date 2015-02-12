@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE components>
-<components extends="../util/common-components.xml">
+<components extends="../util/common-components.xml" defaultYUIRendererParentClass="com.liferay.faces.alloy.render.internal.AlloyRendererBase">
 	<description>
 		<![CDATA[The Liferay Faces Alloy facelet component tags with the <code>alloy:</code> tag name prefix.]]>
 	</description>
