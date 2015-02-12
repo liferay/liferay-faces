@@ -212,12 +212,6 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 		}
 	}
 
-	public String fixRequestParameterValue(String value) {
-
-		// In this default implementation, there's nothing to fix, so just return the specified value.
-		return value;
-	}
-
 	/**
 	 * FACES-1453: Since {@link EventResponse#setRenderParameters(EventRequest)} would end up clobbering existing
 	 * public/private render parameters, it is necessary to iterate through all of them and only maintain the ones that
@@ -421,28 +415,6 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 
 	public void setMimeResponseContentType(MimeResponse mimeResponse, String contentType) {
 		mimeResponse.setContentType(contentType);
-	}
-
-	public String getRequestParameter(String name) {
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-
-		return fixRequestParameterValue(bridgeContext.getPortletRequest().getParameter(name));
-	}
-
-	public String[] getRequestParameterValues(String name) {
-		String[] values = null;
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		String[] originalValues = bridgeContext.getPortletRequest().getParameterValues(name);
-
-		if (originalValues != null) {
-			values = new String[originalValues.length];
-
-			for (int i = 0; i < originalValues.length; i++) {
-				values[i] = fixRequestParameterValue(originalValues[i]);
-			}
-		}
-
-		return values;
 	}
 
 	public String getRequestQueryString() {

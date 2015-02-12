@@ -24,7 +24,6 @@ import javax.portlet.PortletResponse;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 
-import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
@@ -56,7 +55,6 @@ public class ContextMapFactoryImpl extends ContextMapFactory {
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
 		PortletResponse portletResponse = bridgeContext.getPortletResponse();
 		String namespace = portletResponse.getNamespace();
-		PortletContainer portletContainer = bridgeContext.getPortletContainer();
 		BridgeRequestScope bridgeRequestScope = bridgeContext.getBridgeRequestScope();
 		String defaultRenderKitId = bridgeContext.getDefaultRenderKitId();
 		Map<String, String> facesViewParameterMap = getFacesViewParameterMap(bridgeContext);
@@ -74,8 +72,8 @@ public class ContextMapFactoryImpl extends ContextMapFactory {
 						MULTIPART_FORM_DATA_FQCN);
 
 				if (multiPartFormData == null) {
-					facesRequestParameterMap = new FacesRequestParameterMapImpl(namespace, portletContainer,
-							bridgeRequestScope, facesViewParameterMap, defaultRenderKitId);
+					facesRequestParameterMap = new FacesRequestParameterMapImpl(namespace, bridgeRequestScope,
+							facesViewParameterMap, defaultRenderKitId);
 
 					MultiPartFormDataProcessor multiPartFormDataProcessor = new MultiPartFormDataProcessorImpl();
 					Map<String, List<UploadedFile>> uploadedFileMap = multiPartFormDataProcessor.process(
@@ -95,8 +93,8 @@ public class ContextMapFactoryImpl extends ContextMapFactory {
 
 		if (facesRequestParameterMap == null) {
 			Map<String, String[]> parameterMap = portletRequest.getParameterMap();
-			facesRequestParameterMap = new FacesRequestParameterMapImpl(parameterMap, namespace, portletContainer,
-					bridgeRequestScope, facesViewParameterMap, defaultRenderKitId);
+			facesRequestParameterMap = new FacesRequestParameterMapImpl(parameterMap, namespace, bridgeRequestScope,
+					facesViewParameterMap, defaultRenderKitId);
 		}
 
 		return facesRequestParameterMap;
