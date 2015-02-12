@@ -24,34 +24,14 @@
 		<param-value>true</param-value>
 	</context-param>
 	-->
-	<filter>
-		<filter-name>CDICrossContextFilter</filter-name>
-		<filter-class>com.liferay.cdi.portlet.bridge.CDICrossContextFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>CDICrossContextFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-		<dispatcher>INCLUDE</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>ERROR</dispatcher>
-	</filter-mapping>
-	<filter>
-		<filter-name>WeldCrossContextFilter</filter-name>
-		<filter-class>org.jboss.weld.servlet.WeldCrossContextFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>WeldCrossContextFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-		<dispatcher>INCLUDE</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>ERROR</dispatcher>
-	</filter-mapping>
 	<listener>
 		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
 	</listener>
-	<listener>
-		<listener-class>com.liferay.cdi.portlet.bridge.CDIContextListener</listener-class>
-	</listener>
+    <resource-env-ref>
+        <resource-env-ref-name>BeanManager</resource-env-ref-name>
+        <resource-env-ref-type>javax.enterprise.inject.spi.BeanManager</resource-env-ref-type>
+    </resource-env-ref>
+	
 	<!-- Although the FacesServlet will not be invoked by any portlet requests, it is required to initialize JSF. -->
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
