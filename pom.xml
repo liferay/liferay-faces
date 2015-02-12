@@ -877,6 +877,77 @@
 				</war.packaging.excludes>
 			</properties>
 		</profile>
+		<profile>
+			<id>generate-components</id>
+			<!-- Note: this profile can only be actived from the alloy/, bridge-impl/, or portal/ directories. -->
+			<properties>
+				<authors>Neil Griffin</authors>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>2.7</version>
+						<executions>
+							<execution>
+								<id>copy-resources</id>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<phase>initialize</phase>
+								<configuration>
+									<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+									<resources>
+										<resource>
+											<directory>../util</directory>
+											<includes>
+												<include>generator.properties</include>
+											</includes>
+											<filtering>true</filtering>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.2.1</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>java</goal>
+								</goals>
+								<phase>generate-sources</phase>
+								<configuration>
+									<includeProjectDependencies>false</includeProjectDependencies>
+									<includePluginDependencies>true</includePluginDependencies>
+									<mainClass>com.liferay.alloy.tools.builder.faces.FacesBuilder</mainClass>
+									<systemProperties>
+										<systemProperty>
+											<key>build-ext</key>
+											<value>${project.build.outputDirectory}/generator.properties</value>
+										</systemProperty>
+									</systemProperties>
+									<executableDependency>
+										<groupId>com.liferay.alloy</groupId>
+										<artifactId>alloy-generator</artifactId>
+									</executableDependency>
+								</configuration>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>com.liferay.alloy</groupId>
+								<artifactId>alloy-generator</artifactId>
+								<version>0.1.0</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
 
 	<dependencyManagement>
