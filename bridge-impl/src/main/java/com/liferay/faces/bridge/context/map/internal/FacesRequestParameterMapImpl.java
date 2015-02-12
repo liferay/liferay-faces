@@ -24,7 +24,6 @@ import java.util.Set;
 
 import javax.faces.render.ResponseStateManager;
 
-import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.internal.BridgeExt;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.context.map.FacesRequestParameterMap;
@@ -47,34 +46,26 @@ public class FacesRequestParameterMapImpl implements FacesRequestParameterMap {
 
 	// Private Data Members
 	private BridgeRequestScope bridgeRequestScope;
-	private PortletContainer portletContainer;
 	private String defaultRenderKitId;
 	private Map<String, String> facesViewParameterMap;
 	private String namespace;
 	private Map<String, String[]> wrappedParameterMap;
 
-	public FacesRequestParameterMapImpl(String namespace, PortletContainer portletContainer,
-		BridgeRequestScope bridgeRequestScope, Map<String, String> facesViewParameterMap, String defaultRenderKitId) {
-		this(new HashMap<String, String[]>(), namespace, portletContainer, bridgeRequestScope, facesViewParameterMap,
-			defaultRenderKitId);
+	public FacesRequestParameterMapImpl(String namespace, BridgeRequestScope bridgeRequestScope,
+		Map<String, String> facesViewParameterMap, String defaultRenderKitId) {
+		this(new HashMap<String, String[]>(), namespace, bridgeRequestScope, facesViewParameterMap, defaultRenderKitId);
 	}
 
 	public FacesRequestParameterMapImpl(Map<String, String[]> parameterMap, String namespace,
-		PortletContainer portletContainer, BridgeRequestScope bridgeRequestScope,
-		Map<String, String> facesViewParameterMap, String defaultRenderKitId) {
+		BridgeRequestScope bridgeRequestScope, Map<String, String> facesViewParameterMap, String defaultRenderKitId) {
 		this.wrappedParameterMap = parameterMap;
 		this.namespace = namespace;
-		this.portletContainer = portletContainer;
 		this.bridgeRequestScope = bridgeRequestScope;
 		this.facesViewParameterMap = facesViewParameterMap;
 		this.defaultRenderKitId = defaultRenderKitId;
 	}
 
 	public void addValue(String key, String value) {
-
-		if (value != null) {
-			value = portletContainer.fixRequestParameterValue(value);
-		}
 
 		boolean namespacedKey = ((key != null) && key.startsWith(namespace));
 
@@ -127,7 +118,7 @@ public class FacesRequestParameterMapImpl implements FacesRequestParameterMap {
 				// portlet in which NamespaceServletRequest.getParameterMap().containsKey(String) erroneously returns
 				// false. Just in case, try again by seeing if the parameter has a value. If it does, then let this
 				// method return true.
-				String[] values = wrappedParameterMap.get(key);
+				String[] values = wrappedParameterMap.get(key.toString());
 
 				if (values != null) {
 
@@ -225,13 +216,6 @@ public class FacesRequestParameterMapImpl implements FacesRequestParameterMap {
 
 			if (specialParameterValue != null) {
 				values = new String[] { specialParameterValue };
-			}
-		}
-
-		if (values != null) {
-
-			for (int i = 0; i < values.length; i++) {
-				values[i] = portletContainer.fixRequestParameterValue(values[i]);
 			}
 		}
 
@@ -338,10 +322,6 @@ public class FacesRequestParameterMapImpl implements FacesRequestParameterMap {
 
 			if (firstValue == null) {
 				firstValue = getSpecialParameterValue(key.toString());
-			}
-
-			if (firstValue != null) {
-				firstValue = portletContainer.fixRequestParameterValue(firstValue);
 			}
 		}
 
