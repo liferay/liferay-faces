@@ -52,10 +52,6 @@ public abstract class PortletContainerWrapper implements PortletContainer, Faces
 		return getWrapped().createResourceURL(fromURL);
 	}
 
-	public String fixRequestParameterValue(String value) {
-		return getWrapped().fixRequestParameterValue(value);
-	}
-
 	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse) {
 		getWrapped().maintainRenderParameters(eventRequest, eventResponse);
 	}
@@ -77,14 +73,6 @@ public abstract class PortletContainerWrapper implements PortletContainer, Faces
 
 	public void setMimeResponseContentType(MimeResponse mimeResponse, String contentType) {
 		getWrapped().setMimeResponseContentType(mimeResponse, contentType);
-	}
-
-	public String getRequestParameter(String name) {
-		return getWrapped().getRequestParameter(name);
-	}
-
-	public String[] getRequestParameterValues(String name) {
-		return getWrapped().getRequestParameterValues(name);
 	}
 
 	public String getRequestQueryString() {
