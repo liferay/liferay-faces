@@ -34,7 +34,7 @@ public class BodyResponseWriter extends DelegationResponseWriterBase {
 	// Private Data Members
 	private UIComponent uiComponent;
 
-	public BodyResponseWriter(ResponseWriter responseWriter, boolean browserIE, float browserMajorVersion) {
+	public BodyResponseWriter(ResponseWriter responseWriter) {
 		super(responseWriter);
 	}
 
