@@ -20,6 +20,7 @@ import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.renderkit.html_basic.internal.BodyRendererBridgeImpl;
 import com.liferay.faces.util.client.ClientScript;
 import com.liferay.faces.util.client.ClientScriptFactory;
@@ -78,8 +79,8 @@ public class BodyRendererPrimeFacesImpl extends BodyRendererBridgeImpl {
 				List<String> scriptsToExecute = (List<String>) GET_SCRIPTS_TO_EXECUTE_METHOD.invoke(requestContext);
 
 				if (scriptsToExecute != null) {
-					ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
-							ClientScriptFactory.class);
+					ClientScriptFactory clientScriptFactory = (ClientScriptFactory) BridgeFactoryFinder.getFactory(
+						ClientScriptFactory.class);
 					ClientScript clientScript = clientScriptFactory.getClientScript();
 
 					for (String scriptToExecute : scriptsToExecute) {

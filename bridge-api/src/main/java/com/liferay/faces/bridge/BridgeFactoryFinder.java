@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.util.factory;
+package com.liferay.faces.bridge;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,16 +20,14 @@ import java.io.InputStreamReader;
 
 import javax.faces.FacesException;
 
-import com.liferay.faces.util.config.ConfiguredElement;
-
 
 /**
  * @author  Neil Griffin
  */
-public abstract class FactoryExtensionFinder {
+public abstract class BridgeFactoryFinder {
 
 	// Private Static Data Members
-	private static FactoryExtensionFinder instance;
+	private static BridgeFactoryFinder instance;
 
 	public static String getClassPathResourceAsString(String resourcePath) {
 		String classPathResourceAsString = null;
@@ -71,23 +69,22 @@ public abstract class FactoryExtensionFinder {
 		return getInstance().getFactoryInstance(clazz);
 	}
 
-	public static FactoryExtensionFinder getInstance() throws FacesException {
+	public static BridgeFactoryFinder getInstance() throws FacesException {
 
 		if (instance == null) {
 
 			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
 			try {
-				String facesFactoryFinderService =
-					"META-INF/services/com.liferay.faces.util.factory.FactoryExtensionFinder";
-				String facesFactoryFinderClassName = getClassPathResourceAsString(facesFactoryFinderService);
+				String factoryFinderService = "META-INF/services/com.liferay.faces.bridge.BridgeFactoryFinder";
+				String facesFactoryFinderClassName = getClassPathResourceAsString(factoryFinderService);
 
 				if (facesFactoryFinderClassName != null) {
 					Class<?> facesFactoryFinderClass = classLoader.loadClass(facesFactoryFinderClassName);
-					instance = (FactoryExtensionFinder) facesFactoryFinderClass.newInstance();
+					instance = (BridgeFactoryFinder) facesFactoryFinderClass.newInstance();
 				}
 				else {
-					throw new FacesException("Unable to load resource=[" + facesFactoryFinderService + "]");
+					throw new FacesException("Unable to load resource=[" + factoryFinderService + "]");
 				}
 			}
 			catch (Exception e) {
@@ -97,8 +94,6 @@ public abstract class FactoryExtensionFinder {
 
 		return instance;
 	}
-
-	public abstract void registerFactory(ConfiguredElement configuredFactoryExtension);
 
 	public abstract Object getFactoryInstance(Class<?> clazz);
 }
