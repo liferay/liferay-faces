@@ -36,11 +36,12 @@ import javax.portlet.faces.Bridge.PortletPhase;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
-import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.application.internal.BridgeNavigationHandler;
 import com.liferay.faces.bridge.application.internal.BridgeNavigationHandlerImpl;
+import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.container.PortletContainer;
+import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.context.internal.RenderRedirectWriter;
 import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
@@ -66,9 +67,9 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 	private RenderResponse renderResponse;
 
 	public BridgePhaseRenderImpl(RenderRequest renderRequest, RenderResponse renderResponse,
-		PortletConfig portletConfig) {
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) {
 
-		super(portletConfig);
+		super(portletConfig, bridgeConfig);
 
 		BridgePortletRequestFactory bridgePortletRequestFactory = (BridgePortletRequestFactory) FactoryExtensionFinder
 			.getFactory(BridgePortletRequestFactory.class);
