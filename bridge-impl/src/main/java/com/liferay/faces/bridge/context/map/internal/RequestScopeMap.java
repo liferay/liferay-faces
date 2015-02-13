@@ -92,7 +92,7 @@ public class RequestScopeMap extends AbstractPropertyMap<Object> {
 
 		this.distinctRequestScopedManagedBeans = distinctRequestScopedManagedBeans;
 
-		this.namespace = bridgeContext.getResponseNamespace();
+		this.namespace = bridgeContext.getPortletResponse().getNamespace();
 
 		this.portletRequest = bridgeContext.getPortletRequest();
 
