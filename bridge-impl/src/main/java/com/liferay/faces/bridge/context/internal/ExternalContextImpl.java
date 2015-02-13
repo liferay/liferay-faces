@@ -117,7 +117,7 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 	public String encodeNamespace(String name) {
 
 		if (name == null) {
-			return bridgeContext.getResponseNamespace();
+			return portletResponse.getNamespace();
 		}
 		else if (RICHFACES_DETECTED && (name.equals(ORG_RICHFACES_EXTENSION))) {
 
@@ -125,7 +125,7 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 			return name;
 		}
 		else {
-			return bridgeContext.getResponseNamespace() + name;
+			return portletResponse.getNamespace() + name;
 		}
 	}
 
