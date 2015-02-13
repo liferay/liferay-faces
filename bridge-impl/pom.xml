@@ -79,6 +79,7 @@
 			<id>generate-components</id>
 			<properties>
 				<namespace>bridge</namespace>
+				<component.api.output.dir>../bridge-api/${component.impl.output.dir}</component.api.output.dir>
 			</properties>
 		</profile>
 	</profiles>
