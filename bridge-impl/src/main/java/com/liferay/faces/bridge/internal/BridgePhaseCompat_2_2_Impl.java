@@ -17,6 +17,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.lifecycle.Lifecycle;
 import javax.portlet.PortletConfig;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
+
 
 /**
  * This class provides a compatibility layer that isolates differences related to JSF 2.2.
@@ -25,8 +27,8 @@ import javax.portlet.PortletConfig;
  */
 public abstract class BridgePhaseCompat_2_2_Impl extends BridgePhaseCompat_2_0_Impl {
 
-	public BridgePhaseCompat_2_2_Impl(PortletConfig portletConfig) {
-		super(portletConfig);
+	public BridgePhaseCompat_2_2_Impl(PortletConfig portletConfig, BridgeConfig bridgeConfig) {
+		super(portletConfig, bridgeConfig);
 	}
 
 	protected void attachClientWindowToLifecycle(FacesContext facesContext, Lifecycle lifecycle) {

@@ -33,7 +33,6 @@ import javax.portlet.faces.annotation.PortletNamingContainer;
 
 import com.liferay.faces.bridge.BridgePhase;
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.config.BridgeConfigFactory;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
@@ -80,14 +79,12 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 	private String pathInfo;
 	private String servletPath;
 
-	public BridgePhaseBaseImpl(PortletConfig portletConfig) {
+	public BridgePhaseBaseImpl(PortletConfig portletConfig, BridgeConfig bridgeConfig) {
+
 		this.portletConfig = portletConfig;
+		this.bridgeConfig = bridgeConfig;
 		this.portletContext = portletConfig.getPortletContext();
 		this.portletName = portletConfig.getPortletName();
-
-		BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) FactoryExtensionFinder.getFactory(
-				BridgeConfigFactory.class);
-		this.bridgeConfig = bridgeConfigFactory.getBridgeConfig(portletConfig);
 
 		// Initialize the incongruity context implementation.
 		IncongruityContextFactory incongruityContextFactory = (IncongruityContextFactory) FactoryExtensionFinder

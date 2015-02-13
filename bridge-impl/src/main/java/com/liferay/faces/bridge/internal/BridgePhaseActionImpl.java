@@ -22,6 +22,7 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.filter.BridgePortletRequestFactory;
 import com.liferay.faces.bridge.filter.BridgePortletResponseFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
@@ -43,9 +44,9 @@ public class BridgePhaseActionImpl extends BridgePhaseCompat_2_2_Impl {
 	private ActionResponse actionResponse;
 
 	public BridgePhaseActionImpl(ActionRequest actionRequest, ActionResponse actionResponse,
-		PortletConfig portletConfig) {
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) {
 
-		super(portletConfig);
+		super(portletConfig, bridgeConfig);
 
 		BridgePortletRequestFactory bridgePortletRequestFactory = (BridgePortletRequestFactory) FactoryExtensionFinder
 			.getFactory(BridgePortletRequestFactory.class);
