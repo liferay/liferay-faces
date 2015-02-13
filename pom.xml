@@ -891,6 +891,8 @@
 			<!-- Note: this profile can only be actived from the alloy/, bridge-impl/, or portal/ directories. -->
 			<properties>
 				<authors>Neil Griffin</authors>
+				<component.impl.output.dir>src/main/java</component.impl.output.dir>
+				<component.api.output.dir>${component.impl.output.dir}</component.api.output.dir>
 			</properties>
 			<build>
 				<plugins>
