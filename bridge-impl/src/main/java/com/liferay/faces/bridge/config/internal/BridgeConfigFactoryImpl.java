@@ -50,13 +50,6 @@ public class BridgeConfigFactoryImpl extends BridgeConfigFactory {
 
 	@Override
 	public PortletConfig getPortletConfig(PortletConfig portletConfig) throws FacesException {
-
-		if ((LIFERAY_PORTAL_DETECTED) && (LIFERAY_PORTAL.getMajorVersion() < 6)) {
-
-			// Workaround LPS-3311 and LPS-8355 (both fixed in Liferay Portal 6.0).
-			portletConfig = new PortletConfigBridgeLiferayImpl(portletConfig);
-		}
-
 		return portletConfig;
 	}
 
