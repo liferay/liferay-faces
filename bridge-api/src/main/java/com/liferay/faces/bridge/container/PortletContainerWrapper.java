@@ -84,9 +84,5 @@ public abstract class PortletContainerWrapper implements PortletContainer, Wrapp
 		return getWrapped().getRequestURL();
 	}
 
-	public String getResponseNamespace() {
-		return getWrapped().getResponseNamespace();
-	}
-
 	public abstract PortletContainer getWrapped();
 }

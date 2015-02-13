@@ -25,6 +25,8 @@ import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgeContextFactory;
 import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -32,14 +34,24 @@ import com.liferay.faces.bridge.scope.BridgeRequestScope;
  */
 public class BridgeContextFactoryImpl extends BridgeContextFactory {
 
+	// Private Constants
+	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
+		.isDetected();
+
 	@Override
 	public BridgeContext getBridgeContext(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
 		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,
 		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, PortletContainer portletContainer,
 		IncongruityContext incongruityContext) {
 
-		return new BridgeContextImpl(bridgeConfig, bridgeRequestScope, portletConfig,
-				portletContext, portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
+		if (LIFERAY_PORTAL_DETECTED) {
+			return new BridgeContextLiferayImpl(bridgeConfig, bridgeRequestScope, portletConfig, portletContext,
+					portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
+		}
+		else {
+			return new BridgeContextImpl(bridgeConfig, bridgeRequestScope, portletConfig, portletContext,
+					portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
+		}
 	}
 
 	public BridgeContextFactory getWrapped() {

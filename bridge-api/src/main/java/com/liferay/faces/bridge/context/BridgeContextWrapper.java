@@ -241,11 +241,6 @@ public abstract class BridgeContextWrapper extends BridgeContext implements Wrap
 	}
 
 	@Override
-	public String getResponseNamespace() {
-		return getWrapped().getResponseNamespace();
-	}
-
-	@Override
 	public Writer getResponseOutputWriter() throws IOException {
 		return getWrapped().getResponseOutputWriter();
 	}

@@ -27,6 +27,9 @@ import com.liferay.faces.bridge.scope.BridgeRequestScope;
  */
 public class ActionResponseBridgeImpl extends ActionResponseBridgeCompatImpl {
 
+	// Private Data Members
+	private String namespace;
+
 	public ActionResponseBridgeImpl(ActionResponse actionResponse) {
 		super(actionResponse);
 	}
@@ -59,5 +62,14 @@ public class ActionResponseBridgeImpl extends ActionResponseBridgeCompatImpl {
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 		BridgeRequestScope bridgeRequestScope = bridgeContext.getBridgeRequestScope();
 		bridgeRequestScope.setRedirectOccurred(true);
+	}
+
+	@Override
+	public String getNamespace() {
+
+		if (namespace == null) {
+			namespace = PortletResponseUtil.getNamespace(getResponse());
+		}
+		return namespace;
 	}
 }
