@@ -282,7 +282,7 @@ java.lang.Object)</method-signature>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0-m3</vdldoc:since>
+			<vdldoc:since>4.2.0</vdldoc:since>
 		</tag-extension>
 	</tag>
 </facelet-taglib>
