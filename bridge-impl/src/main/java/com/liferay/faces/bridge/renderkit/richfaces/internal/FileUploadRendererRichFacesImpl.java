@@ -30,9 +30,9 @@ import javax.faces.event.FacesEvent;
 import javax.faces.render.Renderer;
 import javax.faces.render.RendererWrapper;
 
+import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.map.internal.ContextMapFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.model.UploadedFile;
@@ -71,7 +71,7 @@ public class FileUploadRendererRichFacesImpl extends RendererWrapper {
 		try {
 
 			// Get the UploadedFile from the request attribute map.
-			ContextMapFactory contextMapFactory = (ContextMapFactory) FactoryExtensionFinder.getFactory(
+			ContextMapFactory contextMapFactory = (ContextMapFactory) BridgeFactoryFinder.getFactory(
 					ContextMapFactory.class);
 			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 			Map<String, List<UploadedFile>> uploadedFileMap = contextMapFactory.getUploadedFileMap(bridgeContext);

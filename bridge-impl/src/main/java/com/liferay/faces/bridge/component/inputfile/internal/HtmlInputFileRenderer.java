@@ -22,10 +22,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.render.Renderer;
 import javax.servlet.http.Part;
 
+import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.component.inputfile.InputFile;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.map.internal.ContextMapFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.model.UploadedFile;
@@ -106,7 +106,7 @@ public class HtmlInputFileRenderer extends DelegatingRendererBase {
 
 	protected Map<String, List<UploadedFile>> getUploadedFileMap(FacesContext facesContext) {
 
-		ContextMapFactory contextMapFactory = (ContextMapFactory) FactoryExtensionFinder.getFactory(
+		ContextMapFactory contextMapFactory = (ContextMapFactory) BridgeFactoryFinder.getFactory(
 				ContextMapFactory.class);
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 

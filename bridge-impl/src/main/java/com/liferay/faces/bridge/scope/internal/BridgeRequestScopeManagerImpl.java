@@ -24,12 +24,12 @@ import javax.portlet.PortletContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeCache;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeCacheFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 import com.liferay.faces.bridge.servlet.BridgeSessionListener;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -45,7 +45,7 @@ public class BridgeRequestScopeManagerImpl implements BridgeRequestScopeManager 
 	public void removeBridgeRequestScopesByPortlet(PortletConfig portletConfig) {
 		String portletNameToRemove = portletConfig.getPortletName();
 		BridgeRequestScopeCacheFactory bridgeRequestScopeCacheFactory = (BridgeRequestScopeCacheFactory)
-			FactoryExtensionFinder.getFactory(BridgeRequestScopeCacheFactory.class);
+			BridgeFactoryFinder.getFactory(BridgeRequestScopeCacheFactory.class);
 		PortletContext portletContext = portletConfig.getPortletContext();
 		BridgeRequestScopeCache bridgeRequestScopeCache = bridgeRequestScopeCacheFactory.getBridgeRequestScopeCache(
 				portletContext);
