@@ -26,11 +26,11 @@ import javax.faces.event.PhaseListener;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.PortletPhase;
 
+import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.bean.internal.BeanManager;
 import com.liferay.faces.bridge.bean.internal.BeanManagerFactory;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.config.ApplicationConfig;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -82,7 +82,7 @@ public class ManagedBeanScopePhaseListener implements PhaseListener {
 					String appConfigAttrName = ApplicationConfig.class.getName();
 					Map<String, Object> applicationMap = externalContext.getApplicationMap();
 					ApplicationConfig applicationConfig = (ApplicationConfig) applicationMap.get(appConfigAttrName);
-					BeanManagerFactory beanManagerFactory = (BeanManagerFactory) FactoryExtensionFinder.getFactory(
+					BeanManagerFactory beanManagerFactory = (BeanManagerFactory) BridgeFactoryFinder.getFactory(
 							BeanManagerFactory.class);
 					BeanManager beanManager = beanManagerFactory.getBeanManager(applicationConfig.getFacesConfig());
 
