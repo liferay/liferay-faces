@@ -37,13 +37,13 @@ import javax.portlet.faces.BridgeWriteBehindResponse;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
+import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.application.internal.ViewHandlerImpl;
 import com.liferay.faces.bridge.application.view.internal.BridgeAfterViewContentRequest;
 import com.liferay.faces.bridge.application.view.internal.BridgeAfterViewContentResponse;
 import com.liferay.faces.bridge.application.view.internal.BridgeWriteBehindSupportFactory;
 import com.liferay.faces.bridge.context.map.internal.ContextMapFactory;
 import com.liferay.faces.bridge.util.internal.LocaleIterator;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.ProductConstants;
@@ -84,7 +84,7 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 
 		super(portletContext, portletRequest, portletResponse);
 
-		this.contextMapFactory = (ContextMapFactory) FactoryExtensionFinder.getFactory(ContextMapFactory.class);
+		this.contextMapFactory = (ContextMapFactory) BridgeFactoryFinder.getFactory(ContextMapFactory.class);
 
 		try {
 			boolean requestChanged = false;
@@ -250,7 +250,7 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 					(bridgeAfterViewContentRequest.getWrapped() != portletRequest)) {
 
 				BridgeWriteBehindSupportFactory bridgeWriteBehindSupportFactory = (BridgeWriteBehindSupportFactory)
-					FactoryExtensionFinder.getFactory(BridgeWriteBehindSupportFactory.class);
+					BridgeFactoryFinder.getFactory(BridgeWriteBehindSupportFactory.class);
 				bridgeAfterViewContentRequest = bridgeWriteBehindSupportFactory.getBridgeAfterViewContentRequest(
 						portletRequest);
 			}
@@ -485,7 +485,7 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 				if ((bridgeAfterViewContentResponse == null) ||
 						(bridgeAfterViewContentResponse.getWrapped() != portletResponse)) {
 					BridgeWriteBehindSupportFactory bridgeWriteBehindSupportFactory = (BridgeWriteBehindSupportFactory)
-						FactoryExtensionFinder.getFactory(BridgeWriteBehindSupportFactory.class);
+						BridgeFactoryFinder.getFactory(BridgeWriteBehindSupportFactory.class);
 					bridgeAfterViewContentResponse = bridgeWriteBehindSupportFactory.getBridgeAfterViewContentResponse(
 							portletResponse, getRequestLocale());
 				}
@@ -537,7 +537,7 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 					PortletResponse wrappedPortletResponse = bridgeAfterViewContentPreResponse.getWrapped();
 
 					BridgeWriteBehindSupportFactory bridgeWriteBehindSupportFactory = (BridgeWriteBehindSupportFactory)
-						FactoryExtensionFinder.getFactory(BridgeWriteBehindSupportFactory.class);
+						BridgeFactoryFinder.getFactory(BridgeWriteBehindSupportFactory.class);
 					BridgeWriteBehindResponse bridgeWriteBehindResponse =
 						bridgeWriteBehindSupportFactory.getBridgeWriteBehindResponse((MimeResponse)
 							wrappedPortletResponse, facesImplementationServletResponse);

@@ -47,12 +47,13 @@ import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeInvalidViewPathException;
 import javax.portlet.faces.GenericFacesPortlet;
 
-import com.liferay.faces.bridge.context.BridgePortalContext;
+import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.internal.BridgeConfigAttributeMap;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.context.map.internal.ContextMapFactory;
 import com.liferay.faces.bridge.context.map.internal.RequestHeaderMap;
@@ -65,7 +66,6 @@ import com.liferay.faces.bridge.context.url.BridgeURLFactory;
 import com.liferay.faces.bridge.internal.BridgeExt;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.config.ConfiguredServletMapping;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -142,8 +142,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		this.incongruityContext = incongruityContext;
 
 		// Get the BridgeURLFactory instance.
-		this.bridgeURLFactory = (BridgeURLFactory) FactoryExtensionFinder.getFactory(BridgeURLFactory.class);
-		this.contextMapFactory = (ContextMapFactory) FactoryExtensionFinder.getFactory(ContextMapFactory.class);
+		this.bridgeURLFactory = (BridgeURLFactory) BridgeFactoryFinder.getFactory(BridgeURLFactory.class);
+		this.contextMapFactory = (ContextMapFactory) BridgeFactoryFinder.getFactory(ContextMapFactory.class);
 
 		setCurrentInstance(this);
 	}

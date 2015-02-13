@@ -21,12 +21,12 @@ import javax.faces.context.ExternalContext;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 
+import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.bean.internal.BeanManager;
 import com.liferay.faces.bridge.bean.internal.BeanManagerFactory;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.config.ApplicationConfig;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.map.AbstractPropertyMap;
 import com.liferay.faces.util.map.AbstractPropertyMapEntry;
 
@@ -43,7 +43,7 @@ public class ApplicationScopeMap extends AbstractPropertyMap<Object> {
 
 	public ApplicationScopeMap(BridgeContext bridgeContext) {
 
-		BeanManagerFactory beanManagerFactory = (BeanManagerFactory) FactoryExtensionFinder.getFactory(
+		BeanManagerFactory beanManagerFactory = (BeanManagerFactory) BridgeFactoryFinder.getFactory(
 				BeanManagerFactory.class);
 		this.portletContext = bridgeContext.getPortletContext();
 

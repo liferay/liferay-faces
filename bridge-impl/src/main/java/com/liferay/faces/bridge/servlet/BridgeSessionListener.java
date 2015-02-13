@@ -28,12 +28,12 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
+import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.bean.internal.BeanManager;
 import com.liferay.faces.bridge.bean.internal.BeanManagerFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
 import com.liferay.faces.util.config.ApplicationConfig;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.Product;
@@ -131,8 +131,8 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 			BridgeRequestScopeManagerFactory bridgeRequestScopeManagerFactory = null;
 
 			try {
-				beanManagerFactory = (BeanManagerFactory) FactoryExtensionFinder.getFactory(BeanManagerFactory.class);
-				bridgeRequestScopeManagerFactory = (BridgeRequestScopeManagerFactory) FactoryExtensionFinder.getFactory(
+				beanManagerFactory = (BeanManagerFactory) BridgeFactoryFinder.getFactory(BeanManagerFactory.class);
+				bridgeRequestScopeManagerFactory = (BridgeRequestScopeManagerFactory) BridgeFactoryFinder.getFactory(
 						BridgeRequestScopeManagerFactory.class);
 			}
 			catch (BridgeException e) {
