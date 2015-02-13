@@ -28,6 +28,7 @@ import javax.portlet.faces.BridgeEventHandler;
 import javax.portlet.faces.BridgeException;
 import javax.portlet.faces.event.EventNavigationResult;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.event.EventPayloadWrapper;
 import com.liferay.faces.bridge.event.internal.IPCPhaseListener;
 import com.liferay.faces.bridge.filter.BridgePortletRequestFactory;
@@ -50,9 +51,10 @@ public class BridgePhaseEventImpl extends BridgePhaseCompat_2_2_Impl {
 	private EventRequest eventRequest;
 	private EventResponse eventResponse;
 
-	public BridgePhaseEventImpl(EventRequest eventRequest, EventResponse eventResponse, PortletConfig portletConfig) {
+	public BridgePhaseEventImpl(EventRequest eventRequest, EventResponse eventResponse, PortletConfig portletConfig,
+		BridgeConfig bridgeConfig) {
 
-		super(portletConfig);
+		super(portletConfig, bridgeConfig);
 
 		BridgePortletRequestFactory bridgePortletRequestFactory = (BridgePortletRequestFactory) FactoryExtensionFinder
 			.getFactory(BridgePortletRequestFactory.class);
