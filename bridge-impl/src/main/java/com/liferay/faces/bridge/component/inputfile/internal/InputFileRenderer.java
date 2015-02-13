@@ -21,12 +21,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.component.inputfile.InputFile;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.map.internal.ContextMapFactory;
 import com.liferay.faces.bridge.event.FileUploadEvent;
 import com.liferay.faces.bridge.model.internal.UploadedFileBridgeImpl;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.model.UploadedFile;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 
@@ -88,7 +88,7 @@ public class InputFileRenderer extends InputFileRendererCompat {
 
 	protected Map<String, List<UploadedFile>> getUploadedFileMap(FacesContext facesContext) {
 
-		ContextMapFactory contextMapFactory = (ContextMapFactory) FactoryExtensionFinder.getFactory(
+		ContextMapFactory contextMapFactory = (ContextMapFactory) BridgeFactoryFinder.getFactory(
 				ContextMapFactory.class);
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 

@@ -31,6 +31,7 @@ import javax.portlet.StateAwareResponse;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.annotation.PortletNamingContainer;
 
+import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.BridgePhase;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
@@ -93,7 +94,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 
 		// Get the bridge request scope cache from the factory.
 		BridgeRequestScopeCacheFactory bridgeRequestScopeCacheFactory = (BridgeRequestScopeCacheFactory)
-			FactoryExtensionFinder.getFactory(BridgeRequestScopeCacheFactory.class);
+			BridgeFactoryFinder.getFactory(BridgeRequestScopeCacheFactory.class);
 		this.bridgeRequestScopeCache = bridgeRequestScopeCacheFactory.getBridgeRequestScopeCache(portletContext);
 
 		// Get the default lifecycle instance from the factory.
@@ -165,7 +166,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		portletRequest.setAttribute(Bridge.PORTLET_LIFECYCLE_PHASE, portletPhase);
 
 		// Initialize the portlet container implementation.
-		PortletContainerFactory portletContainerFactory = (PortletContainerFactory) FactoryExtensionFinder.getFactory(
+		PortletContainerFactory portletContainerFactory = (PortletContainerFactory) BridgeFactoryFinder.getFactory(
 				PortletContainerFactory.class);
 		PortletContainer portletContainer = portletContainerFactory.getPortletContainer(portletRequest, portletResponse,
 				portletContext, portletConfig);
@@ -174,7 +175,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		initBridgeRequestScope(portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
 
 		// Get the bridge context.
-		BridgeContextFactory bridgeContextFactory = (BridgeContextFactory) FactoryExtensionFinder.getFactory(
+		BridgeContextFactory bridgeContextFactory = (BridgeContextFactory) BridgeFactoryFinder.getFactory(
 				BridgeContextFactory.class);
 		bridgeContext = bridgeContextFactory.getBridgeContext(bridgeConfig, bridgeRequestScope, portletConfig,
 				portletContext, portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
