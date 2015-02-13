@@ -49,9 +49,9 @@ import org.apache.commons.fileupload.portlet.PortletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
 import org.apache.commons.io.FileUtils;
 
+import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.util.context.map.FacesRequestParameterMap;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.model.UploadedFile;
@@ -126,7 +126,7 @@ public class MultiPartFormDataProcessorImpl implements MultiPartFormDataProcesso
 			}
 		}
 
-		UploadedFileFactory uploadedFileFactory = (UploadedFileFactory) FactoryExtensionFinder.getFactory(
+		UploadedFileFactory uploadedFileFactory = (UploadedFileFactory) BridgeFactoryFinder.getFactory(
 				UploadedFileFactory.class);
 
 		// Begin parsing the request for file parts:
