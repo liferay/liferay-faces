@@ -25,6 +25,8 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
+
 
 /**
  * This abstract class provides a contract for defining a factory that knows how to create instances of type {@link
@@ -39,14 +41,15 @@ import javax.portlet.ResourceResponse;
 public abstract class BridgePhaseFactory implements FacesWrapper<BridgePhaseFactory> {
 
 	public abstract BridgePhase getBridgeActionPhase(ActionRequest actionRequest, ActionResponse actionResponse,
-		PortletConfig portletConfig) throws FacesException;
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException;
 
 	public abstract BridgePhase getBridgeEventPhase(EventRequest eventRequest, EventResponse eventResponse,
-		PortletConfig portletConfig) throws FacesException;
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException;
 
 	public abstract BridgePhase getBridgeRenderPhase(RenderRequest renderRequest, RenderResponse renderResponse,
-		PortletConfig portletConfig) throws FacesException;
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException;
 
 	public abstract BridgePhase getBridgeResourcePhase(ResourceRequest resourceRequest,
-		ResourceResponse resourceResponse, PortletConfig portletConfig) throws FacesException;
+		ResourceResponse resourceResponse, PortletConfig portletConfig, BridgeConfig bridgeConfig)
+		throws FacesException;
 }

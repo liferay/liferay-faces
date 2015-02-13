@@ -24,6 +24,7 @@ import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
 import javax.portlet.PortletConfig;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadManagedBean;
 
 
@@ -34,8 +35,8 @@ import com.liferay.faces.bridge.renderkit.html_basic.internal.HeadManagedBean;
  */
 public abstract class BridgePhaseCompat_2_0_Impl extends BridgePhaseCompat_1_2_Impl {
 
-	public BridgePhaseCompat_2_0_Impl(PortletConfig portletConfig) {
-		super(portletConfig);
+	public BridgePhaseCompat_2_0_Impl(PortletConfig portletConfig, BridgeConfig bridgeConfig) {
+		super(portletConfig, bridgeConfig);
 	}
 
 	protected void clearHeadManagedBeanResources(FacesContext facesContext) {

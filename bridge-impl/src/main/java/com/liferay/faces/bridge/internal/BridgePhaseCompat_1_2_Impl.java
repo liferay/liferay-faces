@@ -15,6 +15,8 @@ package com.liferay.faces.bridge.internal;
 
 import javax.portlet.PortletConfig;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
+
 
 /**
  * This class provides a compatibility layer that isolates differences related to JSF 1.2.
@@ -23,7 +25,7 @@ import javax.portlet.PortletConfig;
  */
 public abstract class BridgePhaseCompat_1_2_Impl extends BridgePhaseBaseImpl {
 
-	public BridgePhaseCompat_1_2_Impl(PortletConfig portletConfig) {
-		super(portletConfig);
+	public BridgePhaseCompat_1_2_Impl(PortletConfig portletConfig, BridgeConfig bridgeConfig) {
+		super(portletConfig, bridgeConfig);
 	}
 }
