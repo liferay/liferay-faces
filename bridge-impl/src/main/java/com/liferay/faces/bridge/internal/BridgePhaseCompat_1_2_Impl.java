@@ -20,6 +20,8 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.faces.Bridge.PortletPhase;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
+
 
 /**
  * This class provides a compatibility layer that isolates differences related to JSF 1.2.
@@ -32,8 +34,8 @@ public abstract class BridgePhaseCompat_1_2_Impl extends BridgePhaseBaseImpl {
 	private static final String MOJARRA_REQUEST_STATE_MANAGER = "com.sun.faces.util.RequestStateManager";
 	private static final String MOJARRA_RENDER_KIT_IMPL_FOR_REQUEST = "com.sun.faces.renderKitImplForRequest";
 
-	public BridgePhaseCompat_1_2_Impl(PortletConfig portletConfig) {
-		super(portletConfig);
+	public BridgePhaseCompat_1_2_Impl(PortletConfig portletConfig, BridgeConfig bridgeConfig) {
+		super(portletConfig, bridgeConfig);
 	}
 
 	@Override

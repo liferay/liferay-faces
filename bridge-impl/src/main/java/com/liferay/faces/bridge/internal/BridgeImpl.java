@@ -36,6 +36,8 @@ import javax.portlet.faces.BridgeUninitializedException;
 
 import com.liferay.faces.bridge.BridgePhase;
 import com.liferay.faces.bridge.BridgePhaseFactory;
+import com.liferay.faces.bridge.config.BridgeConfig;
+import com.liferay.faces.bridge.config.BridgeConfigFactory;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManager;
 import com.liferay.faces.bridge.scope.BridgeRequestScopeManagerFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
@@ -79,10 +81,15 @@ public class BridgeImpl implements Bridge {
 		checkNull(actionRequest, actionResponse);
 
 		if (initialized) {
+
+			BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) FactoryExtensionFinder.getFactory(
+					BridgeConfigFactory.class);
+			BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig(portletConfig);
+			PortletConfig wrappedPortletConfig = bridgeConfigFactory.getPortletConfig(portletConfig);
 			BridgePhaseFactory bridgePhaseFactory = (BridgePhaseFactory) FactoryExtensionFinder.getFactory(
 					BridgePhaseFactory.class);
 			BridgePhase bridgePhase = bridgePhaseFactory.getBridgeActionPhase(actionRequest, actionResponse,
-					portletConfig);
+					wrappedPortletConfig, bridgeConfig);
 			bridgePhase.execute();
 		}
 		else {
@@ -96,10 +103,14 @@ public class BridgeImpl implements Bridge {
 		checkNull(eventRequest, eventResponse);
 
 		if (initialized) {
+			BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) FactoryExtensionFinder.getFactory(
+					BridgeConfigFactory.class);
+			BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig(portletConfig);
+			PortletConfig wrappedPortletConfig = bridgeConfigFactory.getPortletConfig(portletConfig);
 			BridgePhaseFactory bridgePhaseFactory = (BridgePhaseFactory) FactoryExtensionFinder.getFactory(
 					BridgePhaseFactory.class);
 			BridgePhase bridgePhase = bridgePhaseFactory.getBridgeEventPhase(eventRequest, eventResponse,
-					portletConfig);
+					wrappedPortletConfig, bridgeConfig);
 			bridgePhase.execute();
 		}
 		else {
@@ -114,10 +125,14 @@ public class BridgeImpl implements Bridge {
 		checkNull(renderRequest, renderResponse);
 
 		if (initialized) {
+			BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) FactoryExtensionFinder.getFactory(
+					BridgeConfigFactory.class);
+			BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig(portletConfig);
+			PortletConfig wrappedPortletConfig = bridgeConfigFactory.getPortletConfig(portletConfig);
 			BridgePhaseFactory bridgePhaseFactory = (BridgePhaseFactory) FactoryExtensionFinder.getFactory(
 					BridgePhaseFactory.class);
 			BridgePhase bridgePhase = bridgePhaseFactory.getBridgeRenderPhase(renderRequest, renderResponse,
-					portletConfig);
+					wrappedPortletConfig, bridgeConfig);
 			bridgePhase.execute();
 		}
 		else {
@@ -132,10 +147,14 @@ public class BridgeImpl implements Bridge {
 		checkNull(resourceRequest, resourceResponse);
 
 		if (initialized) {
+			BridgeConfigFactory bridgeConfigFactory = (BridgeConfigFactory) FactoryExtensionFinder.getFactory(
+					BridgeConfigFactory.class);
+			BridgeConfig bridgeConfig = bridgeConfigFactory.getBridgeConfig(portletConfig);
+			PortletConfig wrappedPortletConfig = bridgeConfigFactory.getPortletConfig(portletConfig);
 			BridgePhaseFactory bridgePhaseFactory = (BridgePhaseFactory) FactoryExtensionFinder.getFactory(
 					BridgePhaseFactory.class);
 			BridgePhase bridgePhase = bridgePhaseFactory.getBridgeResourcePhase(resourceRequest, resourceResponse,
-					portletConfig);
+					wrappedPortletConfig, bridgeConfig);
 			bridgePhase.execute();
 		}
 		else {
