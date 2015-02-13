@@ -18,6 +18,8 @@ import java.io.IOException;
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletConfig;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
+
 
 /**
  * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
@@ -26,8 +28,8 @@ import javax.portlet.PortletConfig;
  */
 public abstract class BridgePhaseCompat_2_0_Impl extends BridgePhaseCompat_1_2_Impl {
 
-	public BridgePhaseCompat_2_0_Impl(PortletConfig portletConfig) {
-		super(portletConfig);
+	public BridgePhaseCompat_2_0_Impl(PortletConfig portletConfig, BridgeConfig bridgeConfig) {
+		super(portletConfig, bridgeConfig);
 	}
 
 	public void handleJSF2ResourceRequest(FacesContext facesContext) throws IOException {

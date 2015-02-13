@@ -24,6 +24,7 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
+import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.util.helper.Wrapper;
 
 
@@ -40,14 +41,15 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class BridgePhaseFactory implements Wrapper<BridgePhaseFactory> {
 
 	public abstract BridgePhase getBridgeActionPhase(ActionRequest actionRequest, ActionResponse actionResponse,
-		PortletConfig portletConfig) throws FacesException;
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException;
 
 	public abstract BridgePhase getBridgeEventPhase(EventRequest eventRequest, EventResponse eventResponse,
-		PortletConfig portletConfig) throws FacesException;
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException;
 
 	public abstract BridgePhase getBridgeRenderPhase(RenderRequest renderRequest, RenderResponse renderResponse,
-		PortletConfig portletConfig) throws FacesException;
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException;
 
 	public abstract BridgePhase getBridgeResourcePhase(ResourceRequest resourceRequest,
-		ResourceResponse resourceResponse, PortletConfig portletConfig) throws FacesException;
+		ResourceResponse resourceResponse, PortletConfig portletConfig, BridgeConfig bridgeConfig)
+		throws FacesException;
 }
