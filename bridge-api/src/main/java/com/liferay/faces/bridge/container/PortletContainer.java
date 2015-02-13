@@ -134,9 +134,4 @@ public interface PortletContainer {
 	 * Returns the URL requested by the user-agent (browser).
 	 */
 	public String getRequestURL();
-
-	/**
-	 * Returns the response namespace.
-	 */
-	public String getResponseNamespace();
 }
