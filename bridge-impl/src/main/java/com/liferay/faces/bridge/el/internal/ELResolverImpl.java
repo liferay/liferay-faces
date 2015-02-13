@@ -29,6 +29,7 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeUtil;
 import javax.servlet.jsp.JspContext;
 
+import com.liferay.faces.bridge.config.internal.PortletConfigWrapper;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.map.internal.ContextMapFactory;
 import com.liferay.faces.bridge.filter.internal.HttpServletRequestAdapter;
@@ -260,7 +261,13 @@ public class ELResolverImpl extends ELResolverCompatImpl {
 				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
 				if (bridgeContext != null) {
+
 					value = bridgeContext.getPortletConfig();
+
+					while (value instanceof PortletConfigWrapper) {
+						PortletConfigWrapper portletConfigWrapper = (PortletConfigWrapper) value;
+						value = portletConfigWrapper.getWrapped();
+					}
 				}
 			}
 			else if (varName.equals(PORTLET_SESSION)) {
