@@ -242,11 +242,6 @@ public abstract class BridgeContextWrapper extends BridgeContext implements Face
 	}
 
 	@Override
-	public String getResponseNamespace() {
-		return getWrapped().getResponseNamespace();
-	}
-
-	@Override
 	public Writer getResponseOutputWriter() throws IOException {
 		return getWrapped().getResponseOutputWriter();
 	}

@@ -63,7 +63,6 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 	// Private Data Members
 	private String requestQueryString;
 	private String requestURL;
-	private String responseNamespace;
 
 	public PortletURL createActionURL(String fromURL) throws MalformedURLException {
 
@@ -464,21 +463,5 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 		}
 
 		return requestURL;
-	}
-
-	public String getResponseNamespace() {
-
-		if (responseNamespace == null) {
-
-			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-			responseNamespace = bridgeContext.getPortletResponse().getNamespace();
-
-			if (BridgeConstants.WSRP_REWRITE.equals(responseNamespace)) {
-				responseNamespace = bridgeContext.getPortletConfig().getPortletName() +
-					bridgeContext.getPortletContext().getPortletContextName();
-			}
-		}
-
-		return responseNamespace;
 	}
 }

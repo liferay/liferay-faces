@@ -329,8 +329,6 @@ public abstract class BridgeContext {
 	 */
 	public abstract String getRequestServletPath();
 
-	public abstract String getResponseNamespace();
-
 	/**
 	 * Returns a {@link Writer} that is meant to be used as a return value for {@link
 	 * ExternalContext#getResponseOutputWriter()}.
