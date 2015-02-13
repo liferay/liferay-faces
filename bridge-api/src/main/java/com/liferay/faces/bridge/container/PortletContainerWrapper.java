@@ -83,9 +83,5 @@ public abstract class PortletContainerWrapper implements PortletContainer, Faces
 		return getWrapped().getRequestURL();
 	}
 
-	public String getResponseNamespace() {
-		return getWrapped().getResponseNamespace();
-	}
-
 	public abstract PortletContainer getWrapped();
 }

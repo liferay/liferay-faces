@@ -33,17 +33,17 @@ public class BridgePortletResponseFactoryImpl extends BridgePortletResponseFacto
 
 	@Override
 	public EventResponse getEventResponse(EventResponse eventResponse) {
-		return eventResponse;
+		return new EventResponseBridgeImpl(eventResponse);
 	}
 
 	@Override
 	public RenderResponse getRenderResponse(RenderResponse renderResponse) {
-		return renderResponse;
+		return new RenderResponseBridgeImpl(renderResponse);
 	}
 
 	@Override
 	public ResourceResponse getResourceResponse(ResourceResponse resourceResponse) {
-		return resourceResponse;
+		return new ResourceResponseBridgeImpl(resourceResponse);
 	}
 
 	@Override

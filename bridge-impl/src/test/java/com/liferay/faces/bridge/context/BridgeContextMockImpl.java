@@ -268,11 +268,6 @@ public class BridgeContextMockImpl extends BridgeContext {
 	}
 
 	@Override
-	public String getResponseNamespace() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public Writer getResponseOutputWriter() throws IOException {
 		throw new UnsupportedOperationException();
 	}
