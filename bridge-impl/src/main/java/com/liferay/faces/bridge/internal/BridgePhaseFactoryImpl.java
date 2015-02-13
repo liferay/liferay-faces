@@ -26,6 +26,7 @@ import javax.portlet.ResourceResponse;
 
 import com.liferay.faces.bridge.BridgePhase;
 import com.liferay.faces.bridge.BridgePhaseFactory;
+import com.liferay.faces.bridge.config.BridgeConfig;
 
 
 /**
@@ -35,27 +36,27 @@ public class BridgePhaseFactoryImpl extends BridgePhaseFactory {
 
 	@Override
 	public BridgePhase getBridgeActionPhase(ActionRequest actionRequest, ActionResponse actionResponse,
-		PortletConfig portletConfig) throws FacesException {
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException {
 
-		return new BridgePhaseActionImpl(actionRequest, actionResponse, portletConfig);
+		return new BridgePhaseActionImpl(actionRequest, actionResponse, portletConfig, bridgeConfig);
 	}
 
 	@Override
 	public BridgePhase getBridgeEventPhase(EventRequest eventRequest, EventResponse eventResponse,
-		PortletConfig portletConfig) throws FacesException {
-		return new BridgePhaseEventImpl(eventRequest, eventResponse, portletConfig);
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException {
+		return new BridgePhaseEventImpl(eventRequest, eventResponse, portletConfig, bridgeConfig);
 	}
 
 	@Override
 	public BridgePhase getBridgeRenderPhase(RenderRequest renderRequest, RenderResponse renderResponse,
-		PortletConfig portletConfig) throws FacesException {
-		return new BridgePhaseRenderImpl(renderRequest, renderResponse, portletConfig);
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException {
+		return new BridgePhaseRenderImpl(renderRequest, renderResponse, portletConfig, bridgeConfig);
 	}
 
 	@Override
 	public BridgePhase getBridgeResourcePhase(ResourceRequest resourceRequest, ResourceResponse resourceResponse,
-		PortletConfig portletConfig) throws FacesException {
-		return new BridgePhaseResourceImpl(resourceRequest, resourceResponse, portletConfig);
+		PortletConfig portletConfig, BridgeConfig bridgeConfig) throws FacesException {
+		return new BridgePhaseResourceImpl(resourceRequest, resourceResponse, portletConfig, bridgeConfig);
 	}
 
 	public BridgePhaseFactory getWrapped() {
@@ -63,5 +64,4 @@ public class BridgePhaseFactoryImpl extends BridgePhaseFactory {
 		// Since this is the factory instance provided by the bridge, it will never wrap another factory.
 		return null;
 	}
-
 }
