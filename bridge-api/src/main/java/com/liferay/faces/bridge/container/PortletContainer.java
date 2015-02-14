@@ -20,7 +20,6 @@ import java.util.Map;
 
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
-import javax.portlet.MimeResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceURL;
 
@@ -114,11 +113,4 @@ public interface PortletContainer {
 	 * PortletRequest.
 	 */
 	public long getHttpServletRequestDateHeader(String name);
-
-	/**
-	 * Layer of abstraction over the {@link MimeResponse#setContentType(String)} method.
-	 *
-	 * @param  contentType  The contentType that is to be set on the specified MimeResponse.
-	 */
-	public void setMimeResponseContentType(MimeResponse mimeResponse, String contentType);
 }
