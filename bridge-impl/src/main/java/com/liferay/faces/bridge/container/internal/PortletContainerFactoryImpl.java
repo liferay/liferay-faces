@@ -22,6 +22,7 @@ import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
 import com.liferay.faces.bridge.container.liferay.internal.PortletContainerLiferayImpl;
 import com.liferay.faces.bridge.container.pluto.internal.PortletContainerPlutoImpl;
+import com.liferay.faces.bridge.filter.internal.PortletContainerDetector;
 
 
 /**

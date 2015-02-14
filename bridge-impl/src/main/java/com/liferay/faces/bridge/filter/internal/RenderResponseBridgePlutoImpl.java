@@ -14,28 +14,30 @@
 package com.liferay.faces.bridge.filter.internal;
 
 import javax.portlet.RenderResponse;
-import javax.portlet.filter.RenderResponseWrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public class RenderResponseBridgeImpl extends RenderResponseWrapper {
+public class RenderResponseBridgePlutoImpl extends RenderResponseBridgeImpl {
 
-	// Private Data Members
-	private String namespace;
-
-	public RenderResponseBridgeImpl(RenderResponse renderResponse) {
+	public RenderResponseBridgePlutoImpl(RenderResponse renderResponse) {
 		super(renderResponse);
 	}
 
 	@Override
-	public String getNamespace() {
+	public void setContentType(String type) {
 
-		if (namespace == null) {
-			namespace = PortletResponseUtil.getNamespace(getResponse());
+		// If the specified contentType is "application/xhtml+xml" then use "text/html" instead. That's the only value
+		// that Pluto's RenderResponseImpl.setContentType(String) will be happy with, even though Pluto's "ACCEPT"
+		// header claims it can accept "application/xhtml+xml".
+		if ("application/xhtml+xml".equals(type)) {
+			super.setContentType("text/html");
 		}
 
-		return namespace;
+		// Otherwise, use the specified contentType.
+		else {
+			super.setContentType(type);
+		}
 	}
 }
