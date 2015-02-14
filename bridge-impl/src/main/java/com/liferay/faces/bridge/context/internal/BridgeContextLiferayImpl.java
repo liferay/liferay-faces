@@ -25,12 +25,12 @@ import javax.portlet.faces.Bridge;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.container.liferay.internal.LiferayConstants;
-import com.liferay.faces.bridge.container.liferay.internal.LiferayPortletRequest;
 import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 
@@ -50,6 +50,9 @@ public class BridgeContextLiferayImpl extends BridgeContextImpl {
 	private String NAMESPACED_P_P_MODE;
 	private String NAMESPACED_P_P_STATE;
 
+	// Private Data Members
+	private String requestURL;
+
 	public BridgeContextLiferayImpl(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
 		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,
 		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, PortletContainer portletContainer,
@@ -59,9 +62,6 @@ public class BridgeContextLiferayImpl extends BridgeContextImpl {
 			portletPhase, portletContainer, incongruityContext);
 
 		String namespace = portletResponse.getNamespace();
-
-		LiferayPortletRequest liferayPortletRequest = new LiferayPortletRequest(portletRequest);
-		ThemeDisplay themeDisplay = liferayPortletRequest.getThemeDisplay();
 
 		// Initialize the pseudo-constants.
 		NAMESPACED_P_P_COL_ID = namespace + LiferayConstants.P_P_COL_ID;
@@ -74,10 +74,23 @@ public class BridgeContextLiferayImpl extends BridgeContextImpl {
 		if (portletRequest instanceof RenderRequest) {
 			PortletMode portletMode = portletRequest.getPortletMode();
 			WindowState windowState = portletRequest.getWindowState();
-			saveRenderAttributes(portletMode, windowState, themeDisplay.getPortletDisplay(), portletContext);
+			ThemeDisplay themeDisplay = (ThemeDisplay) portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+			saveRenderAttributes(portletMode, windowState, portletDisplay, portletContext);
 		}
 
 		setCurrentInstance(this);
+	}
+
+	@Override
+	public void release() {
+		super.release();
+		this.NAMESPACED_P_P_COL_COUNT = null;
+		this.NAMESPACED_P_P_COL_ID = null;
+		this.NAMESPACED_P_P_COL_POS = null;
+		this.NAMESPACED_P_P_MODE = null;
+		this.NAMESPACED_P_P_STATE = null;
+		this.requestURL = null;
 	}
 
 	/**
@@ -111,5 +124,19 @@ public class BridgeContextLiferayImpl extends BridgeContextImpl {
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
+	}
+
+	@Override
+	protected String getRequestURL() {
+
+		if (requestURL == null) {
+			StringBuilder buf = new StringBuilder();
+			ThemeDisplay themeDisplay = (ThemeDisplay) getPortletRequest().getAttribute(WebKeys.THEME_DISPLAY);
+			buf.append(themeDisplay.getURLPortal());
+			buf.append(themeDisplay.getURLCurrent());
+			requestURL = buf.toString();
+		}
+
+		return requestURL;
 	}
 }
