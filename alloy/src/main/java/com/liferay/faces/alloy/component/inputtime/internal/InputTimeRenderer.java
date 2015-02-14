@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -30,7 +29,6 @@ import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
 import javax.faces.component.behavior.ClientBehavior;
-import javax.faces.component.behavior.ClientBehaviorContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
@@ -40,7 +38,6 @@ import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
 import com.liferay.faces.alloy.component.inputdatetime.internal.InputDateTimeResponseWriter;
 import com.liferay.faces.alloy.component.inputtext.InputText;
 import com.liferay.faces.alloy.component.inputtime.InputTime;
-import com.liferay.faces.alloy.component.inputtime.TimeSelectEvent;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ComponentUtil;
@@ -67,9 +64,7 @@ import com.liferay.faces.util.render.internal.RendererUtil;
 public class InputTimeRenderer extends InputTimeRendererBase {
 
 	// Private Constants
-	private static final String BUTTON_ON_SELECT_TEMPLATE = "A.one('#{0}').set('value', event.result.text);";
 	private static final Pattern TIMESTAMP_PATTERN = Pattern.compile("([0-1][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]");
-	private static final String TOKEN_0 = "{0}";
 
 	// Private Constants used in getMaskFromTimePattern()
 	private static final String TOKEN_REGEX = "\\{0\\}";
@@ -295,57 +290,34 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 			autoCompleteFirst = false;
 		}
 
-		String timeSelectClientBehaviorScript = null;
-		Map<String, List<ClientBehavior>> clientBehaviorMap = inputTime.getClientBehaviors();
-		Collection<String> eventNames = inputTime.getEventNames();
-
-		for (String eventName : eventNames) {
-
-			if (TimeSelectEvent.TIME_SELECT.equals(eventName)) {
-
-				List<ClientBehavior> clientBehaviorsForEvent = clientBehaviorMap.get(eventName);
-
-				if (clientBehaviorsForEvent != null) {
-
-					for (ClientBehavior clientBehavior : clientBehaviorsForEvent) {
-
-						String clientId = inputTime.getClientId(facesContext);
-						ClientBehaviorContext clientBehaviorContext = ClientBehaviorContext.createClientBehaviorContext(
-								facesContext, inputTime, eventName, clientId, null);
-						timeSelectClientBehaviorScript = clientBehavior.getScript(clientBehaviorContext);
-
-						break;
-					}
-				}
-
-				break;
-			}
-		}
-
 		String showOn = inputTime.getShowOn();
+		boolean showOnButton = "button".equals(showOn);
+		Map<String, List<ClientBehavior>> clientBehaviorMap = inputTime.getClientBehaviors();
+		List<ClientBehavior> valueChangeClientBehaviors = clientBehaviorMap.get(VALUE_CHANGE);
+		boolean valueChangeClientBehaviorsNotEmpty = (valueChangeClientBehaviors != null) &&
+			!valueChangeClientBehaviors.isEmpty();
 
-		if ("button".equals(showOn) || (timeSelectClientBehaviorScript != null)) {
+		if (showOnButton || valueChangeClientBehaviorsNotEmpty) {
 
 			encodeNonEscapedObject(responseWriter, "after", StringPool.BLANK, autoCompleteFirst);
 			responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
-			StringBuilder stringBuilder = new StringBuilder();
-			stringBuilder.append("function(event){");
+			encodeNonEscapedObject(responseWriter, "select", StringPool.BLANK, true);
+			responseWriter.write("function(event){");
 
-			if ("button".equals(showOn)) {
+			String clientId = inputTime.getClientId(facesContext);
+			String inputClientId = clientId.concat(INPUT_SUFFIX);
+			String escapedInputClientId = RendererUtil.escapeClientId(inputClientId);
+			boolean selectable = true;
+			JavaScriptFragment time = null;
 
-				String clientId = inputTime.getClientId(facesContext);
-				String escapedInputClientId = RendererUtil.escapeClientId(clientId.concat(INPUT_SUFFIX));
-				String onSelect = BUTTON_ON_SELECT_TEMPLATE.replace(TOKEN_0, escapedInputClientId);
-				stringBuilder.append(onSelect);
+			if (showOnButton) {
+				time = new JavaScriptFragment("event.result.text");
 			}
 
-			if (timeSelectClientBehaviorScript != null) {
-				stringBuilder.append(timeSelectClientBehaviorScript);
-			}
-
-			stringBuilder.append("}");
-			encodeNonEscapedObject(responseWriter, "select", stringBuilder.toString(), true);
+			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.inputDateTimePickerSelect", 'A', escapedInputClientId,
+				selectable, time, valueChangeClientBehaviorsNotEmpty);
+			responseWriter.append(";}");
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 			autoCompleteFirst = false;
 		}
@@ -418,36 +390,26 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 
 	@Override
 	protected String[] getModules(FacesContext facesContext, UIComponent uiComponent) {
+		return getModules(MODULES, facesContext, uiComponent);
+	}
 
-		List<String> modules = new ArrayList<String>();
-		String[] oldModules = super.getModules(facesContext, uiComponent);
-		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
-				BrowserSnifferFactory.class);
-		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
-		InputTime inputTime = (InputTime) uiComponent;
-		boolean responsive = inputTime.isResponsive();
+	@Override
+	protected List<String> getModules(List<String> modules, InputDateTime inputDateTime) {
 
-		if (browserSniffer.isMobile() && responsive) {
-			String nativeAlloyModuleName = oldModules[0].concat("-native");
-			modules.add(nativeAlloyModuleName);
-		}
-		else {
+		List<String> inputTimeModules = new ArrayList<String>(modules);
+		InputTime inputTime = (InputTime) inputDateTime;
+		String filterType = inputTime.getFilterType();
 
-			modules.add(oldModules[0]);
-
-			String filterType = inputTime.getFilterType();
-
-			if ((filterType != null) && (filterType.length() > 0)) {
-				modules.add("autocomplete-filters");
-			}
-
-			String highlighterType = inputTime.getHighlighterType();
-
-			if ((highlighterType != null) && (highlighterType.length() > 0)) {
-				modules.add("autocomplete-highlighters");
-			}
+		if ((filterType != null) && (filterType.length() > 0)) {
+			inputTimeModules.add("autocomplete-filters");
 		}
 
-		return modules.toArray(new String[] {});
+		String highlighterType = inputTime.getHighlighterType();
+
+		if ((highlighterType != null) && (highlighterType.length() > 0)) {
+			inputTimeModules.add("autocomplete-highlighters");
+		}
+
+		return inputTimeModules;
 	}
 }
