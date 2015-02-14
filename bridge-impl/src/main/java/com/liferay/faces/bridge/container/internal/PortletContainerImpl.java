@@ -41,7 +41,6 @@ import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.util.internal.RequestParameter;
 import com.liferay.faces.util.application.ResourceConstants;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -53,16 +52,6 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(PortletContainerImpl.class);
-
-	/** Portlet-API request attribute that contains an instance of javax.portlet.PortletRequest */
-	private static final String REQUEST_ATTR_PORTLET_REQUEST = "javax.portlet.request";
-
-	/** Servlet-API request attribute that indicates the query part of the URL requested by the user-agent */
-	private static final String REQUEST_ATTR_QUERY_STRING = "javax.servlet.forward.query_string";
-
-	// Private Data Members
-	private String requestQueryString;
-	private String requestURL;
 
 	public PortletURL createActionURL(String fromURL) throws MalformedURLException {
 
@@ -414,54 +403,5 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 
 	public void setMimeResponseContentType(MimeResponse mimeResponse, String contentType) {
 		mimeResponse.setContentType(contentType);
-	}
-
-	public String getRequestQueryString() {
-
-		if (requestQueryString == null) {
-			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-			PortletRequest portletRequest = bridgeContext.getPortletRequest();
-			requestQueryString = (String) portletRequest.getAttribute(REQUEST_ATTR_QUERY_STRING);
-
-			if (requestQueryString == null) {
-
-				// Some portlet bridges wrap the portal's PortletRequest implementation instance (which prevents us from
-				// getting the query_string). As a workaround, we might still be able to get  the original
-				// PortletRequest instance, because the Portlet spec says it must be stored in the
-				// "javax.portlet.request" attribute.
-				Object portletRequestAsObject = portletRequest.getAttribute(REQUEST_ATTR_PORTLET_REQUEST);
-
-				if ((portletRequestAsObject != null) && (portletRequestAsObject instanceof PortletRequest)) {
-					portletRequest = (PortletRequest) portletRequestAsObject;
-					requestQueryString = (String) portletRequest.getAttribute(REQUEST_ATTR_QUERY_STRING);
-				}
-			}
-		}
-
-		return requestQueryString;
-	}
-
-	public String getRequestURL() {
-
-		if (requestURL == null) {
-
-			// Note that this is an approximation (best guess) of the original URL.
-			StringBuilder buf = new StringBuilder();
-			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-			PortletRequest portletRequest = bridgeContext.getPortletRequest();
-			buf.append(portletRequest.getScheme());
-			buf.append(StringPool.COLON);
-			buf.append(StringPool.FORWARD_SLASH);
-			buf.append(StringPool.FORWARD_SLASH);
-			buf.append(portletRequest.getServerName());
-			buf.append(StringPool.COLON);
-			buf.append(portletRequest.getServerPort());
-			buf.append(portletRequest.getContextPath());
-			buf.append(StringPool.QUESTION);
-			buf.append(getRequestQueryString());
-			requestURL = buf.toString();
-		}
-
-		return requestURL;
 	}
 }
