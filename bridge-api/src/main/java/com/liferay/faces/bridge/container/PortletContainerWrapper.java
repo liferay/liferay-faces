@@ -75,13 +75,5 @@ public abstract class PortletContainerWrapper implements PortletContainer, Faces
 		getWrapped().setMimeResponseContentType(mimeResponse, contentType);
 	}
 
-	public String getRequestQueryString() {
-		return getWrapped().getRequestQueryString();
-	}
-
-	public String getRequestURL() {
-		return getWrapped().getRequestURL();
-	}
-
 	public abstract PortletContainer getWrapped();
 }
