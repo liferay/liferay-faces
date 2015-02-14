@@ -20,7 +20,7 @@ import javax.portlet.PortletResponse;
 
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
-import com.liferay.faces.bridge.container.internal.PortletContainerDetector;
+import com.liferay.faces.bridge.filter.internal.PortletContainerDetector;
 
 
 /**

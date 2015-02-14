@@ -16,7 +16,7 @@ package com.liferay.faces.bridge.context.url.internal;
 import java.util.List;
 import java.util.Map;
 
-import com.liferay.faces.bridge.container.internal.PortletContainerDetector;
+import com.liferay.faces.bridge.filter.internal.PortletContainerDetector;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.BridgeActionURL;
 import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
