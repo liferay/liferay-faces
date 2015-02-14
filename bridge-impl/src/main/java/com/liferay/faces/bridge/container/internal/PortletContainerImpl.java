@@ -400,8 +400,4 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 		// Unsupported by default implementation.
 		return -1L;
 	}
-
-	public void setMimeResponseContentType(MimeResponse mimeResponse, String contentType) {
-		mimeResponse.setContentType(contentType);
-	}
 }
