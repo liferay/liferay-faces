@@ -14,14 +14,19 @@
 package com.liferay.faces.alloy.component.inputdatetime.internal;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.faces.FactoryFinder;
 import javax.faces.application.Application;
 import javax.faces.application.ApplicationFactory;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
+import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
@@ -46,15 +51,15 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 
 	// Protected Constants
 	protected static final String INPUT_SUFFIX = "_input";
+	protected static final String NODE_EVENT_SIMULATE = "node-event-simulate";
+	protected static final String VALUE_CHANGE = "valueChange";
 
 	// Private Constants
 	private static final String BOUNDING_BOX_SUFFIX = "_boundingBox";
-	private static final String BUTTON_SUFFIX = "_button";
-	private static final String CONTENT_BOX_SUFFIX = "_contentBox";
-
-	// Private Constants
 	private static final String BUTTON_ON_CLICK_EVENT =
 		"var input=document.getElementById('{0}');input.focus();input.click();";
+	private static final String BUTTON_SUFFIX = "_button";
+	private static final String CONTENT_BOX_SUFFIX = "_contentBox";
 
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -247,6 +252,38 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 
 	protected abstract InputDateTimeResponseWriter getInputDateTimeResponseWriter(ResponseWriter responseWriter,
 		String inputClientId, boolean mobile, boolean responsive);
+
+	protected abstract List<String> getModules(List<String> modules, InputDateTime inputDateTime);
+
+	protected String[] getModules(String[] defaultModules, FacesContext facesContext, UIComponent uiComponent) {
+
+		List<String> modules = new ArrayList<String>();
+		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+				BrowserSnifferFactory.class);
+		BrowserSniffer browserSniffer = browserSnifferFactory.getBrowserSniffer(facesContext.getExternalContext());
+		InputDateTime inputDateTime = (InputDateTime) uiComponent;
+		boolean responsive = inputDateTime.isResponsive();
+
+		if (browserSniffer.isMobile() && responsive) {
+			String nativeAlloyModuleName = defaultModules[0].concat("-native");
+			modules.add(nativeAlloyModuleName);
+		}
+		else {
+
+			modules.addAll(Arrays.asList(defaultModules));
+
+			Map<String, List<ClientBehavior>> clientBehaviorMap = inputDateTime.getClientBehaviors();
+			List<ClientBehavior> valueChangeClientBehaviors = clientBehaviorMap.get(VALUE_CHANGE);
+
+			if ((valueChangeClientBehaviors != null) && !valueChangeClientBehaviors.isEmpty()) {
+				modules.add(NODE_EVENT_SIMULATE);
+			}
+
+			modules = getModules(Collections.unmodifiableList(modules), inputDateTime);
+		}
+
+		return modules.toArray(new String[] {});
+	}
 
 	@Override
 	public String getYUIConfig(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)

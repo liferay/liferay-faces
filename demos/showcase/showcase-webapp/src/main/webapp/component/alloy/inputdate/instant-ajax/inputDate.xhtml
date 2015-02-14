@@ -3,38 +3,16 @@
 	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
-		<!-- Example 1: Instant-Ajax when a date is selected -->
-		<alloy:form>
-			<showcase:example description="#{i18n['alloy-inputdate-instant-ajax-example-1']}" number="1">
+		<alloy:form id="myForm">
+			<showcase:example number="1">
 				<alloy:field label="#{i18n['birthday']}">
 					<alloy:inputDate id="birthday" pattern="MM/dd/yyyy" value="#{inputDateModelBean.birthday}">
-						<f:ajax render="@form" />
+						<f:ajax render="myForm:outputModel:modelValue" />
 					</alloy:inputDate>
-					<alloy:message for="birthday" />
 				</alloy:field>
 			</showcase:example>
-			<showcase:outputModel>
-				<alloy:outputText value="#{inputDateModelBean.birthday}">
-					<f:convertDateTime pattern="MM/dd/yyyy" />
-				</alloy:outputText>
-			</showcase:outputModel>
-		</alloy:form>
-	</ui:define>
-
-	<ui:define name="col2">
-		<!-- Example 2: Instant-Ajax when a date is selected or when the user enters a value -->
-		<alloy:form>
-			<showcase:example description="#{i18n['alloy-inputdate-instant-ajax-example-2']}" number="2">
-				<alloy:field label="#{i18n['birthday']}">
-					<alloy:inputDate id="birthday" pattern="MM/dd/yyyy" value="#{inputDateModelBean.birthday}">
-						<f:ajax event="change" render="@form" />
-						<f:ajax event="dateSelect" render="@form" />
-					</alloy:inputDate>
-					<alloy:message for="birthday" />
-				</alloy:field>
-			</showcase:example>
-			<showcase:outputModel>
-				<alloy:outputText value="#{inputDateModelBean.birthday}">
+			<showcase:outputModel id="outputModel">
+				<alloy:outputText id="modelValue" value="#{inputDateModelBean.birthday}">
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</alloy:outputText>
 			</showcase:outputModel>
