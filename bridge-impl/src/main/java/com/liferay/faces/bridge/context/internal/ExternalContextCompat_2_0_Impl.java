@@ -32,9 +32,9 @@ import javax.portlet.faces.Bridge;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 
-import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.util.internal.FileNameUtil;
 import com.liferay.faces.util.logging.Logger;
@@ -555,7 +555,7 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 
 		if (portletResponse instanceof MimeResponse) {
 			MimeResponse mimeResponse = (MimeResponse) portletResponse;
-			bridgeContext.getPortletContainer().setMimeResponseContentType(mimeResponse, contentType);
+			mimeResponse.setContentType(contentType);
 		}
 		else {
 
