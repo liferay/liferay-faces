@@ -20,7 +20,6 @@ import java.util.Map;
 
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
-import javax.portlet.MimeResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceURL;
 
@@ -70,10 +69,6 @@ public abstract class PortletContainerWrapper implements PortletContainer, Wrapp
 
 	public long getHttpServletRequestDateHeader(String name) {
 		return getWrapped().getHttpServletRequestDateHeader(name);
-	}
-
-	public void setMimeResponseContentType(MimeResponse mimeResponse, String contentType) {
-		getWrapped().setMimeResponseContentType(mimeResponse, contentType);
 	}
 
 	public abstract PortletContainer getWrapped();

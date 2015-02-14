@@ -15,7 +15,6 @@ package com.liferay.faces.bridge.container.pluto.internal;
 
 import java.net.MalformedURLException;
 
-import javax.portlet.MimeResponse;
 import javax.portlet.ResourceURL;
 
 import com.liferay.faces.bridge.container.internal.PortletContainerImpl;
@@ -26,10 +25,6 @@ import com.liferay.faces.bridge.container.internal.PortletContainerImpl;
  */
 public class PortletContainerPlutoImpl extends PortletContainerImpl {
 
-	// Private Constants
-	private static final String CONTENT_TYPE_APPLICATION_XHTML_XML = "application/xhtml+xml";
-	private static final String CONTENT_TYPE_TEXT_HTML = "text/html";
-
 	/**
 	 * This method overrides the default implementation in order wrap Pluto's ResourceURL implementation with a wrapper
 	 * that overrides the toString() method.
@@ -37,25 +32,5 @@ public class PortletContainerPlutoImpl extends PortletContainerImpl {
 	@Override
 	public ResourceURL createResourceURL(String fromURL) throws MalformedURLException {
 		return new PlutoResourceURL(super.createResourceURL(fromURL));
-	}
-
-	@Override
-	public void setMimeResponseContentType(MimeResponse mimeResponse, String contentType) {
-
-		String contentTypeForPluto;
-
-		// If the specified contentType is "application/xhtml+xml" then use "text/html" instead. That's the only value
-		// that Pluto's RenderResponseImpl.setContentType(String) will be happy with, even though Pluto's "ACCEPT"
-		// header claims it can accept "application/xhtml+xml".
-		if (CONTENT_TYPE_APPLICATION_XHTML_XML.equals(contentType)) {
-			contentTypeForPluto = CONTENT_TYPE_TEXT_HTML;
-		}
-
-		// Otherwise, use the specified contentType.
-		else {
-			contentTypeForPluto = contentType;
-		}
-
-		mimeResponse.setContentType(contentTypeForPluto);
 	}
 }
