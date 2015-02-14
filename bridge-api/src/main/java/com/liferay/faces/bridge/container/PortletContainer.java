@@ -121,17 +121,4 @@ public interface PortletContainer {
 	 * @param  contentType  The contentType that is to be set on the specified MimeResponse.
 	 */
 	public void setMimeResponseContentType(MimeResponse mimeResponse, String contentType);
-
-	/**
-	 * Gets the query string part of the URL requested by the user-agent (browser) by getting the attribute named
-	 * "javax.servlet.forward.query_string" from the request.
-	 *
-	 * @return  The query_string part of the URL requested by the user-agent (browser).
-	 */
-	public String getRequestQueryString();
-
-	/**
-	 * Returns the URL requested by the user-agent (browser).
-	 */
-	public String getRequestURL();
 }
