@@ -11,10 +11,12 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.container.internal;
+package com.liferay.faces.bridge.filter.internal;
 
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.filter.PortletRequestWrapper;
+import javax.portlet.filter.PortletResponseWrapper;
 
 import com.liferay.faces.bridge.container.liferay.internal.LiferayConstants;
 
@@ -26,6 +28,31 @@ public class PortletContainerDetector {
 
 	// Private Constants
 	private static final String PLUTO_PACKAGE_NAMESPACE = "org.apache.pluto";
+
+	/**
+	 * Determines whether or not the specified {@link PortletResponse} is one created by Liferay Portal. If the
+	 * specified {@link PortletResponse} is an instance of {@link javax.portlet.filter.PortletResponseWrapper} then it
+	 * will work with the wrapped {@link PortletResponse}.
+	 *
+	 * @param   portletResponse  The current {@link PortletResponse}.
+	 *
+	 * @return  true if the specified portletResponse was created by Pluto.
+	 */
+	public static boolean isPlutoPortletResponse(PortletResponse portletResponse) {
+
+		if (portletResponse != null) {
+
+			while (portletResponse instanceof PortletResponseWrapper) {
+				PortletResponseWrapper portletResponseWrapper = (PortletResponseWrapper) portletResponse;
+				portletResponse = portletResponseWrapper.getResponse();
+			}
+
+			return portletResponse.getClass().getName().startsWith(PLUTO_PACKAGE_NAMESPACE);
+		}
+		else {
+			return false;
+		}
+	}
 
 	/**
 	 * Determines whether or not the specified {@link PortletRequest} is one created by Liferay Portal. If the specified

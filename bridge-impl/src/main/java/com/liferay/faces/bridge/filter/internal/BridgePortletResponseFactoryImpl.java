@@ -38,12 +38,24 @@ public class BridgePortletResponseFactoryImpl extends BridgePortletResponseFacto
 
 	@Override
 	public RenderResponse getRenderResponse(RenderResponse renderResponse) {
-		return new RenderResponseBridgeImpl(renderResponse);
+
+		if (PortletContainerDetector.isPlutoPortletResponse(renderResponse)) {
+			return new RenderResponseBridgePlutoImpl(renderResponse);
+		}
+		else {
+			return new RenderResponseBridgeImpl(renderResponse);
+		}
 	}
 
 	@Override
 	public ResourceResponse getResourceResponse(ResourceResponse resourceResponse) {
-		return new ResourceResponseBridgeImpl(resourceResponse);
+
+		if (PortletContainerDetector.isPlutoPortletResponse(resourceResponse)) {
+			return new ResourceResponseBridgePlutoImpl(resourceResponse);
+		}
+		else {
+			return new ResourceResponseBridgeImpl(resourceResponse);
+		}
 	}
 
 	@Override
