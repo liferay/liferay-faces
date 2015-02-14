@@ -33,22 +33,15 @@ public class PortletContainerFactoryImpl extends PortletContainerFactory {
 	public PortletContainer getPortletContainer(PortletRequest portletRequest, PortletResponse portletResponse,
 		PortletContext portletContext, PortletConfig portletConfig) {
 
-		PortletContainer portletContainer = null;
-
-		if (portletContainer == null) {
-
-			if (PortletContainerDetector.isLiferayPortletRequest(portletRequest)) {
-				portletContainer = new PortletContainerLiferayImpl(portletRequest, portletResponse, portletContext);
-			}
-			else if (PortletContainerDetector.isPlutoPortletRequest(portletRequest)) {
-				portletContainer = new PortletContainerPlutoImpl();
-			}
-			else {
-				portletContainer = new PortletContainerImpl();
-			}
+		if (PortletContainerDetector.isLiferayPortletRequest(portletRequest)) {
+			return new PortletContainerLiferayImpl(portletRequest);
 		}
-
-		return portletContainer;
+		else if (PortletContainerDetector.isPlutoPortletRequest(portletRequest)) {
+			return new PortletContainerPlutoImpl();
+		}
+		else {
+			return new PortletContainerImpl();
+		}
 	}
 
 	public PortletContainerFactory getWrapped() {

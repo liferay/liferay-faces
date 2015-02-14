@@ -77,6 +77,12 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 public class BridgeContextImpl extends BridgeContextCompatImpl {
 
+	/** Portlet-API request attribute that contains an instance of javax.portlet.PortletRequest */
+	private static final String REQUEST_ATTR_PORTLET_REQUEST = "javax.portlet.request";
+
+	/** Servlet-API request attribute that indicates the query part of the URL requested by the user-agent */
+	private static final String REQUEST_ATTR_QUERY_STRING = "javax.servlet.forward.query_string";
+
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgeContextImpl.class);
 
@@ -113,7 +119,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	private Map<String, String[]> requestParameterValuesMap;
 	private StringWrapper requestPathInfo;
 	private String requestServletPath;
-	private String responseNamespace;
+	private String requestQueryString;
+	private String requestURL;
 	private Writer responseOutputWriter;
 	private String savedViewState;
 	private String viewIdAndQueryString;
@@ -141,6 +148,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		// Get the BridgeURLFactory instance.
 		this.bridgeURLFactory = (BridgeURLFactory) BridgeFactoryFinder.getFactory(BridgeURLFactory.class);
 		this.contextMapFactory = (ContextMapFactory) BridgeFactoryFinder.getFactory(ContextMapFactory.class);
+
+		logger.debug("User-Agent requested URL=[{0}]", getRequestURL());
 
 		setCurrentInstance(this);
 	}
@@ -582,7 +591,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		this.requestParameterValuesMap = null;
 		this.requestPathInfo = null;
 		this.requestServletPath = null;
-		this.responseNamespace = null;
+		this.requestQueryString = null;
+		this.requestURL = null;
 		this.responseOutputWriter = null;
 		this.savedViewState = null;
 		this.viewIdAndQueryString = null;
@@ -1223,6 +1233,54 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	@Override
 	public boolean isRenderRedirect() {
 		return renderRedirect;
+	}
+	protected String getRequestQueryString() {
+
+		if (requestQueryString == null) {
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			PortletRequest portletRequest = bridgeContext.getPortletRequest();
+			requestQueryString = (String) portletRequest.getAttribute(REQUEST_ATTR_QUERY_STRING);
+
+			if (requestQueryString == null) {
+
+				// Some portlet bridges wrap the portal's PortletRequest implementation instance (which prevents us from
+				// getting the query_string). As a workaround, we might still be able to get  the original
+				// PortletRequest instance, because the Portlet spec says it must be stored in the
+				// "javax.portlet.request" attribute.
+				Object portletRequestAsObject = portletRequest.getAttribute(REQUEST_ATTR_PORTLET_REQUEST);
+
+				if ((portletRequestAsObject != null) && (portletRequestAsObject instanceof PortletRequest)) {
+					portletRequest = (PortletRequest) portletRequestAsObject;
+					requestQueryString = (String) portletRequest.getAttribute(REQUEST_ATTR_QUERY_STRING);
+				}
+			}
+		}
+
+		return requestQueryString;
+	}
+
+	protected String getRequestURL() {
+
+		if (requestURL == null) {
+
+			// Note that this is an approximation (best guess) of the original URL.
+			StringBuilder buf = new StringBuilder();
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			PortletRequest portletRequest = bridgeContext.getPortletRequest();
+			buf.append(portletRequest.getScheme());
+			buf.append(StringPool.COLON);
+			buf.append(StringPool.FORWARD_SLASH);
+			buf.append(StringPool.FORWARD_SLASH);
+			buf.append(portletRequest.getServerName());
+			buf.append(StringPool.COLON);
+			buf.append(portletRequest.getServerPort());
+			buf.append(portletRequest.getContextPath());
+			buf.append(StringPool.QUESTION);
+			buf.append(getRequestQueryString());
+			requestURL = buf.toString();
+		}
+
+		return requestURL;
 	}
 
 	protected class StringWrapper {

@@ -19,9 +19,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.portlet.MimeResponse;
-import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceURL;
 
@@ -29,8 +27,6 @@ import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-
-import com.liferay.portal.theme.ThemeDisplay;
 
 
 /**
@@ -48,17 +44,13 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	private boolean friendlyURLMapperEnabled;
 	private LiferayURLFactory liferayURLFactory;
 	private LiferayPortletRequest liferayPortletRequest;
-	private String requestURL;
 
-	public PortletContainerLiferayImpl(PortletRequest portletRequest, PortletResponse portletResponse,
-		PortletContext portletContext) {
+	public PortletContainerLiferayImpl(PortletRequest portletRequest) {
 
 		try {
 			this.liferayPortletRequest = new LiferayPortletRequest(portletRequest);
-			;
 			this.friendlyURLMapperEnabled = (liferayPortletRequest.getPortlet().getFriendlyURLMapperInstance() != null);
 			this.liferayURLFactory = (LiferayURLFactory) BridgeFactoryFinder.getFactory(LiferayURLFactory.class);
-			logger.debug("User-Agent requested URL=[{0}]", getRequestURL());
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -124,19 +116,5 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 	@Override
 	public long getHttpServletRequestDateHeader(String name) {
 		return liferayPortletRequest.getDateHeader(name);
-	}
-
-	@Override
-	public String getRequestURL() {
-
-		if (requestURL == null) {
-			StringBuilder buf = new StringBuilder();
-			ThemeDisplay themeDisplay = liferayPortletRequest.getThemeDisplay();
-			buf.append(themeDisplay.getURLPortal());
-			buf.append(themeDisplay.getURLCurrent());
-			requestURL = buf.toString();
-		}
-
-		return requestURL;
 	}
 }
