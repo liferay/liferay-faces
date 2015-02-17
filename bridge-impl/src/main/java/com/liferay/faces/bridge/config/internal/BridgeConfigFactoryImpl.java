@@ -19,6 +19,9 @@ import javax.portlet.PortletContext;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigFactory;
+import com.liferay.faces.util.product.Product;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -28,6 +31,8 @@ public class BridgeConfigFactoryImpl extends BridgeConfigFactory {
 
 	// Private Constants
 	private static final String BRIDGE_CONFIG = BridgeConfig.class.getName();
+	private static final Product LIFERAY_PORTAL = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
+	private static final boolean LIFERAY_PORTAL_DETECTED = LIFERAY_PORTAL.isDetected();
 
 	@Override
 	public BridgeConfig getBridgeConfig(PortletConfig portletConfig) throws FacesException {
