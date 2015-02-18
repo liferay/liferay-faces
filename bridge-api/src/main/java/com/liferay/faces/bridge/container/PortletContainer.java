@@ -93,17 +93,6 @@ public interface PortletContainer {
 	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse);
 
 	/**
-	 * @deprecated  <p>Replaced by calling the {@link javax.portlet.ActionResponse#sendRedirect(String)} method on the
-	 *              object returned by {@link
-	 *              com.liferay.faces.bridge.filter.BridgePortletResponseFactory#getActionResponse(javax.portlet.ActionResponse)
-	 *              }</p>
-	 *
-	 *              <p>Delegates to the underlying ActionResponse to perform a redirect to the specified URL.</p>
-	 */
-	@Deprecated
-	public void redirect(String url) throws IOException;
-
-	/**
 	 * Returns the value of the header with the specified name from the underlying HttpServletRequest.
 	 */
 	public String[] getHeader(String name);
