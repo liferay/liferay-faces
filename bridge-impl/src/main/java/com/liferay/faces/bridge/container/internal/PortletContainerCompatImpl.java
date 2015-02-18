@@ -13,11 +13,6 @@
  */
 package com.liferay.faces.bridge.container.internal;
 
-import java.io.IOException;
-
-import javax.faces.context.FacesContext;
-import javax.portlet.ResourceResponse;
-
 import com.liferay.faces.bridge.container.PortletContainer;
 
 
@@ -28,18 +23,4 @@ import com.liferay.faces.bridge.container.PortletContainer;
  */
 public abstract class PortletContainerCompatImpl implements PortletContainer {
 
-	// This is a utility method called by a subclass with a deprecated public method.
-	@Deprecated
-	protected void redirectJSF2PartialResponse(FacesContext facesContext, ResourceResponse resourceResponse, String url)
-		throws IOException {
-		// no-op for JSF 1.x
-	}
-
-	// This is a utility method called by a subclass with a deprecated public method.
-	@Deprecated
-	protected boolean isJSF2PartialRequest(FacesContext facesContext) {
-
-		// no-op for JSF 1.x
-		return false;
-	}
 }
