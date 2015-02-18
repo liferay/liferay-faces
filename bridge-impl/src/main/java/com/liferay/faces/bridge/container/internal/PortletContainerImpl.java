@@ -13,8 +13,6 @@
  */
 package com.liferay.faces.bridge.container.internal;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -23,16 +21,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.faces.context.FacesContext;
-import javax.portlet.ActionResponse;
 import javax.portlet.BaseURL;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
-import javax.portlet.ResourceResponse;
 import javax.portlet.ResourceURL;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.PortletPhase;
@@ -275,33 +269,6 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 					logger.trace("Maintaining private render parameter name=[{0}] values=[{1}]", key, values);
 				}
 			}
-		}
-	}
-
-	@Deprecated
-	public void redirect(String url) throws IOException {
-
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		PortletResponse portletResponse = bridgeContext.getPortletResponse();
-
-		if (portletResponse instanceof ActionResponse) {
-			ActionResponse actionResponse = (ActionResponse) portletResponse;
-			actionResponse.sendRedirect(url);
-		}
-		else if (portletResponse instanceof ResourceResponse) {
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-
-			if (isJSF2PartialRequest(facesContext)) {
-				redirectJSF2PartialResponse(facesContext, (ResourceResponse) portletResponse, url);
-			}
-			else {
-				throw new UnsupportedEncodingException(
-					"Can only redirect during RESOURCE_PHASE if a JSF partial/Ajax request has been triggered");
-			}
-		}
-		else {
-			throw new UnsupportedEncodingException("Unable to redirect during " +
-				bridgeContext.getPortletRequestPhase());
 		}
 	}
 
