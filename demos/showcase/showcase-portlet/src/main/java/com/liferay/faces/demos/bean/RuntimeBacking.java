@@ -13,60 +13,101 @@
  */
 package com.liferay.faces.demos.bean;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
-import javax.faces.event.PhaseId;
+import java.util.Locale;
+import java.util.Map;
 
-import com.liferay.faces.portal.context.LiferayFacesContext;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+
+import com.liferay.faces.demos.util.WebContentUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
+
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.journal.model.JournalArticle;
 
 
 /**
  * @author  Juan Gonzalez
  */
 @ManagedBean
-@RequestScoped
+@ApplicationScoped
 public class RuntimeBacking {
 
+	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(RuntimeBacking.class);
 
-	@ManagedProperty(value = "#{runtimeModelBean}")
-	private RuntimeModelBean runtimeModelBean;
+	// Private Data Members
+	private String preferencesArticle1;
+	private String preferencesArticle2;
+	private String preferencesArticle3;
 
-	public void togglePortletBorder(ActionEvent actionEvent) {
-
-		long plid = LiferayFacesContext.getInstance().getPlid();
-
-		try {
-			PortletPreferencesLocalServiceUtil.deletePortletPreferencesByPlid(plid);
-		}
-		catch (SystemException e) {
-			logger.error(e);
-		}
-
-		this.runtimeModelBean.setShowBorders(!runtimeModelBean.isShowBorders());
+	@PostConstruct
+	public void postConstruct() {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		PhaseId phaseId = facesContext.getCurrentPhaseId();
-		logger.debug("togglePortletBorder: phaseId=[{0}]", phaseId.toString());
+		Map<String, Object> requestAttributeMap = facesContext.getExternalContext().getRequestMap();
+		ThemeDisplay themeDisplay = (ThemeDisplay) requestAttributeMap.get(WebKeys.THEME_DISPLAY);
 
-		FacesMessage facesMessage = new FacesMessage("Show borders:" + this.runtimeModelBean.isShowBorders());
-		facesContext.addMessage(null, facesMessage);
+		try {
+			long companyId = themeDisplay.getCompanyId();
+			long userId = themeDisplay.getUserId();
+			long groupId = themeDisplay.getScopeGroupId();
+			long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+			Locale locale = themeDisplay.getLocale();
+
+			JournalArticle article1 = WebContentUtil.getArticle(companyId, userId, groupId, folderId, locale,
+					"Liferay Portal",
+					"Liferay Portal is an enterprise web platform for building business solutions that deliver " +
+					"immediate results and long-term value.");
+			this.preferencesArticle1 = getPreferences(article1.getGroupId(), article1.getArticleId());
+
+			JournalArticle article2 = WebContentUtil.getArticle(companyId, userId, groupId, folderId, locale,
+					"Liferay Faces",
+					"Liferay Faces is an umbrella project that provides support for the JavaServer™ Faces (JSF) " +
+					"standard within Liferay Portal.");
+			this.preferencesArticle2 = getPreferences(article2.getGroupId(), article2.getArticleId());
+		}
+		catch (Exception e) {
+			logger.error(e);
+		}
 	}
 
-	public RuntimeModelBean getRuntimeModelBean() {
-		return runtimeModelBean;
+	protected String getPreferences(long groupId, String articleId) {
+
+		StringBuilder buf = new StringBuilder();
+		buf.append("<portlet-preferences>");
+		buf.append("<preference>");
+		buf.append("<name>groupId</name>");
+		buf.append("<value>");
+		buf.append(groupId);
+		buf.append("</value>");
+		buf.append("</preference>");
+		buf.append("<preference>");
+		buf.append("<name>articleId</name>");
+		buf.append("<value>");
+		buf.append(articleId);
+		buf.append("</value>");
+		buf.append("</preference>");
+		buf.append("<preference>");
+		buf.append("<name>portletSetupShowBorders</name>");
+		buf.append("<value>true</value>");
+		buf.append("</preference>");
+		buf.append("</portlet-preferences>");
+
+		return buf.toString();
 	}
 
-	public void setRuntimeModelBean(RuntimeModelBean runtimeModelBean) {
-		this.runtimeModelBean = runtimeModelBean;
+	public String getPreferencesArticle1() {
+		return preferencesArticle1;
+	}
+
+	public String getPreferencesArticle2() {
+		return preferencesArticle2;
 	}
 }
