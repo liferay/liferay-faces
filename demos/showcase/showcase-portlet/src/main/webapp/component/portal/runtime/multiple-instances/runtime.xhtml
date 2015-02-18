@@ -1,0 +1,15 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:portal="http://liferay.com/faces/portal"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase">
+
+	<showcase:example id="example1">
+
+		<!-- Embed Web Content Display portlet for "Liferay Portal" article. -->
+		<portal:runtime portletName="56_INSTANCE_ABCD1234"
+			defaultPreferences="#{runtimeBacking.preferencesArticle1}" />
+
+		<!-- Embed Web Content Display portlet for "Liferay Faces" article. -->
+		<portal:runtime portletName="56_INSTANCE_WXYZ0987"
+			defaultPreferences="#{runtimeBacking.preferencesArticle2}" />
+	</showcase:example>
+
+</ui:composition>

@@ -321,4 +321,34 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="Runtime" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIPanel"
+		rendererParentClass="com.liferay.faces.portal.render.internal.PortalTagRenderer&lt;com.liferay.faces.portal.component.runtime.Runtime, com.liferay.taglib.portletext.RuntimeTag&gt;">
+		<description>
+			<![CDATA[Runtime is a UIPanel component that embeds the markup of a different portlet within the current portlet.]]>
+		</description>
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[XML markup in the form <preferences><preference><name></name><value></value></preference></preferences>. This value is persisted in the Liferay database when the embedded portlet is rendered for the first time.]]>
+				</description>
+				<name>defaultPreferences</name>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The name of the portlet. For out-of-the-box portlets, refer to the portlet-name element of the <a href="https://github.com/liferay/liferay-portal/blob/6.2.2-ga3/portal-web/docroot/WEB-INF/liferay-portlet.xml">liferay-portlet.xml</a> descriptor.]]>
+				</description>
+				<name>portletName</name>
+				<required>true</required>
+				<type>String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Optional query string parameters that will be added to the request dispatcher that invokes the portlet's RENDER_PHASE.]]>
+				</description>
+				<name>queryString</name>
+				<type>String</type>
+			</attribute>
+		</attributes>
+	</component>
 </components>
