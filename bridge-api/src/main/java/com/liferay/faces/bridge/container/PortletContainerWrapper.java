@@ -13,13 +13,10 @@
  */
 package com.liferay.faces.bridge.container;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
 
-import javax.portlet.EventRequest;
-import javax.portlet.EventResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceURL;
 
@@ -50,10 +47,6 @@ public abstract class PortletContainerWrapper implements PortletContainer, Wrapp
 
 	public ResourceURL createResourceURL(String fromURL) throws MalformedURLException {
 		return getWrapped().createResourceURL(fromURL);
-	}
-
-	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse) {
-		getWrapped().maintainRenderParameters(eventRequest, eventResponse);
 	}
 
 	public String[] getHeader(String name) {
