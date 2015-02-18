@@ -15,11 +15,9 @@ package com.liferay.faces.portal.component.runtime;
 //J-
 
 import javax.annotation.Generated;
-import javax.faces.component.UIOutput;
 import javax.faces.component.UIPanel;
 
 import com.liferay.faces.util.component.Styleable;
-
 
 /**
  * @author	Neil Griffin
@@ -59,7 +57,7 @@ public abstract class RuntimeBase extends UIPanel implements Styleable {
 	public void setQueryString(String queryString) {
 		getStateHelper().put(RuntimePropertyKeys.queryString, queryString);
 	}
-	
+
 	@Override
 	public String getStyle() {
 		return (String) getStateHelper().eval(RuntimePropertyKeys.style, null);

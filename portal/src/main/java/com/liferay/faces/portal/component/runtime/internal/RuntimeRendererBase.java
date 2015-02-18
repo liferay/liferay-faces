@@ -31,5 +31,7 @@ public abstract class RuntimeRendererBase extends PortalTagRenderer<com.liferay.
 	protected static final String DEFAULT_PREFERENCES = "defaultPreferences";
 	protected static final String PORTLET_NAME = "portletName";
 	protected static final String QUERY_STRING = "queryString";
+	protected static final String STYLE = "style";
+	protected static final String STYLE_CLASS = "styleClass";
 }
 //J+
