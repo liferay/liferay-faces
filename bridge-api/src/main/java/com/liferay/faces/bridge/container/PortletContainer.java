@@ -13,13 +13,10 @@
  */
 package com.liferay.faces.bridge.container;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
 
-import javax.portlet.EventRequest;
-import javax.portlet.EventResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceURL;
 
@@ -86,11 +83,6 @@ public interface PortletContainer {
 	 * @throws  MalformedURLException
 	 */
 	public ResourceURL createResourceURL(String fromURL) throws MalformedURLException;
-
-	/**
-	 * Maintains (copies) the render parameters found in the specified EventRequest to the specified EventResponse.
-	 */
-	public void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse);
 
 	/**
 	 * Returns the value of the header with the specified name from the underlying HttpServletRequest.

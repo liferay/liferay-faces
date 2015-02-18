@@ -14,6 +14,8 @@
 package com.liferay.faces.bridge.internal;
 
 import java.io.Serializable;
+import java.util.Map;
+import java.util.Set;
 
 import javax.faces.application.NavigationHandler;
 import javax.faces.event.PhaseListener;
@@ -164,7 +166,7 @@ public class BridgePhaseEventImpl extends BridgePhaseCompat_2_2_Impl {
 			}
 
 			// Maintain the render parameters set in the ACTION_PHASE so that they carry over to the RENDER_PHASE.
-			bridgeContext.getPortletContainer().maintainRenderParameters(eventRequest, eventResponse);
+			maintainRenderParameters(eventRequest, eventResponse);
 
 			// Spec 6.6 (Namespacing)
 			indicateNamespacingToConsumers(facesContext.getViewRoot(), eventResponse);
@@ -174,6 +176,85 @@ public class BridgePhaseEventImpl extends BridgePhaseCompat_2_2_Impl {
 		}
 		finally {
 			cleanup();
+		}
+	}
+
+	/**
+	 * Maintains (copies) the render parameters found in the specified EventRequest to the specified EventResponse.
+	 * FACES-1453: Since {@link EventResponse#setRenderParameters(EventRequest)} would end up clobbering existing
+	 * public/private render parameters, it is necessary to iterate through all of them and only maintain the ones that
+	 * don't already exist in {@link EventResponse#getRenderParameterMap()}.
+	 */
+	protected void maintainRenderParameters(EventRequest eventRequest, EventResponse eventResponse) {
+
+		Map<String, String[]> existingResponseRenderParameterMap = eventResponse.getRenderParameterMap();
+
+		// Maintain the public render parameters.
+		Map<String, String[]> publicParameterMap = eventRequest.getPublicParameterMap();
+
+		if (publicParameterMap != null) {
+
+			Set<Map.Entry<String, String[]>> entrySet = publicParameterMap.entrySet();
+
+			for (Map.Entry<String, String[]> mapEntry : entrySet) {
+				String key = mapEntry.getKey();
+
+				boolean alreadyExists = false;
+
+				if (existingResponseRenderParameterMap != null) {
+					alreadyExists = existingResponseRenderParameterMap.containsKey(key);
+				}
+
+				if (alreadyExists) {
+
+					// FACES-1453: Avoid clobbering existing public render parameters set on the EventResponse.
+					if (logger.isTraceEnabled()) {
+						String[] existingValues = existingResponseRenderParameterMap.get(key);
+
+						logger.trace(
+							"Not maintaining public render parameter name=[{0}] values=[{1}] because it already exists",
+							key, existingValues);
+					}
+				}
+				else {
+					String[] values = mapEntry.getValue();
+					eventResponse.setRenderParameter(key, values);
+					logger.trace("Maintaining public render parameter name=[{0}] values=[{1}]", key, values);
+				}
+			}
+		}
+
+		// Maintain the private render parameters.
+		Map<String, String[]> privateParameterMap = eventRequest.getPrivateParameterMap();
+
+		if (privateParameterMap != null) {
+			Set<Map.Entry<String, String[]>> entrySet = privateParameterMap.entrySet();
+
+			for (Map.Entry<String, String[]> mapEntry : entrySet) {
+				String key = mapEntry.getKey();
+				boolean alreadyExists = false;
+
+				if (existingResponseRenderParameterMap != null) {
+					alreadyExists = existingResponseRenderParameterMap.containsKey(key);
+				}
+
+				if (alreadyExists) {
+
+					// FACES-1453: Avoid clobbering existing private render parameters set on the EventResponse.
+					if (logger.isTraceEnabled()) {
+						String[] existingValues = existingResponseRenderParameterMap.get(key);
+
+						logger.trace(
+							"Not maintaining private render parameter name=[{0}] values=[{1}] because it already exists",
+							key, existingValues);
+					}
+				}
+				else {
+					String[] values = mapEntry.getValue();
+					eventResponse.setRenderParameter(key, values);
+					logger.trace("Maintaining private render parameter name=[{0}] values=[{1}]", key, values);
+				}
+			}
 		}
 	}
 
