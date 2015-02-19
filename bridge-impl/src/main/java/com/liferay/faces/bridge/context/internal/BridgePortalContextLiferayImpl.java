@@ -111,6 +111,11 @@ public class BridgePortalContextLiferayImpl extends BridgePortalContextLiferayCo
 	}
 
 	@Override
+	public String getCreateRenderUrlDuringActionPhase() {
+		return "true";
+	}
+
+	@Override
 	protected String getForwardOnDispatch() {
 		return null;
 	}
