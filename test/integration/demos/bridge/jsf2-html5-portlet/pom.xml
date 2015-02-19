@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>test-jsf2-html5-portlet</artifactId>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<name>jsf2-html5-portlet integration tests</name>
 
 </project>
