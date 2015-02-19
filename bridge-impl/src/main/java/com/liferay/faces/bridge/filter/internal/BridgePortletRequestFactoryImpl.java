@@ -41,64 +41,72 @@ public class BridgePortletRequestFactoryImpl extends BridgePortletRequestFactory
 	public ActionRequest getActionRequest(ActionRequest actionRequest) {
 
 		PortalContext portalContext = actionRequest.getPortalContext();
-		BridgePortalContext bridgePortalContext;
 
 		if (LIFERAY_PORTAL_DETECTED) {
-			bridgePortalContext = new BridgePortalContextLiferayImpl(portalContext, actionRequest, LIFERAY_PORTAL);
+			BridgePortalContext bridgePortalContext = new BridgePortalContextLiferayImpl(portalContext, actionRequest,
+					LIFERAY_PORTAL);
+
+			return new ActionRequestBridgeLiferayImpl(actionRequest, bridgePortalContext);
 		}
 		else {
-			bridgePortalContext = new BridgePortalContextImpl(portalContext);
-		}
+			BridgePortalContext bridgePortalContext = new BridgePortalContextImpl(portalContext);
 
-		return new ActionRequestBridgeImpl(actionRequest, bridgePortalContext);
+			return new ActionRequestBridgeImpl(actionRequest, bridgePortalContext);
+		}
 	}
 
 	@Override
 	public EventRequest getEventRequest(EventRequest eventRequest) {
 
 		PortalContext portalContext = eventRequest.getPortalContext();
-		BridgePortalContext bridgePortalContext;
 
 		if (LIFERAY_PORTAL_DETECTED) {
-			bridgePortalContext = new BridgePortalContextLiferayImpl(portalContext, eventRequest, LIFERAY_PORTAL);
+			BridgePortalContext bridgePortalContext = new BridgePortalContextLiferayImpl(portalContext, eventRequest,
+					LIFERAY_PORTAL);
+
+			return new EventRequestBridgeLiferayImpl(eventRequest, bridgePortalContext);
 		}
 		else {
-			bridgePortalContext = new BridgePortalContextImpl(portalContext);
-		}
+			BridgePortalContext bridgePortalContext = new BridgePortalContextImpl(portalContext);
 
-		return new EventRequestBridgeImpl(eventRequest, bridgePortalContext);
+			return new EventRequestBridgeImpl(eventRequest, bridgePortalContext);
+		}
 	}
 
 	@Override
 	public RenderRequest getRenderRequest(RenderRequest renderRequest) {
 
 		PortalContext portalContext = renderRequest.getPortalContext();
-		BridgePortalContext bridgePortalContext;
 
 		if (LIFERAY_PORTAL_DETECTED) {
-			bridgePortalContext = new BridgePortalContextLiferayImpl(portalContext, renderRequest, LIFERAY_PORTAL);
+			BridgePortalContext bridgePortalContext = new BridgePortalContextLiferayImpl(portalContext, renderRequest,
+					LIFERAY_PORTAL);
+
+			return new RenderRequestBridgeLiferayImpl(renderRequest, bridgePortalContext);
 		}
 		else {
-			bridgePortalContext = new BridgePortalContextImpl(portalContext);
-		}
+			BridgePortalContext bridgePortalContext = new BridgePortalContextImpl(portalContext);
 
-		return new RenderRequestBridgeImpl(renderRequest, bridgePortalContext);
+			return new RenderRequestBridgeImpl(renderRequest, bridgePortalContext);
+		}
 	}
 
 	@Override
 	public ResourceRequest getResourceRequest(ResourceRequest resourceRequest) {
 
 		PortalContext portalContext = resourceRequest.getPortalContext();
-		BridgePortalContext bridgePortalContext;
 
 		if (LIFERAY_PORTAL_DETECTED) {
-			bridgePortalContext = new BridgePortalContextLiferayImpl(portalContext, resourceRequest, LIFERAY_PORTAL);
+			BridgePortalContext bridgePortalContext = new BridgePortalContextLiferayImpl(portalContext, resourceRequest,
+					LIFERAY_PORTAL);
+
+			return new ResourceRequestBridgeLiferayImpl(resourceRequest, bridgePortalContext);
 		}
 		else {
-			bridgePortalContext = new BridgePortalContextImpl(portalContext);
-		}
+			BridgePortalContext bridgePortalContext = new BridgePortalContextImpl(portalContext);
 
-		return new ResourceRequestBridgeImpl(resourceRequest, bridgePortalContext);
+			return new ResourceRequestBridgeImpl(resourceRequest, bridgePortalContext);
+		}
 	}
 
 	@Override
