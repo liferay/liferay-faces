@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>test-liferayfaces4-portlet</artifactId>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<name>liferayfaces4-portlet integration tests</name>
 
 	<build>
