@@ -33,13 +33,13 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.internal.BridgeConfigAttributeMap;
-import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.config.ConfiguredServletMapping;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.render.HttpHeaders;
 
 
 /**
@@ -56,7 +56,6 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 	private static final Logger logger = LoggerFactory.getLogger(ResourceImpl.class);
 
 	// Private Constants
-	private static final String HEADER_IF_MODIFIED_SINCE = "If-Modified-Since";
 	private static final String HTTP_SPEC_DATE_PATTERN = "EEE, dd MMM yyyy HH:mm:ss zzz";
 
 	// Private Constants: Resources that can't be cached.
@@ -143,10 +142,10 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 							inputStream = urlConnection.getInputStream();
 
 							long lastModifiedInMilliSeconds = urlConnection.getLastModified();
-							lastModifiedInSeconds = new Long((long) (lastModifiedInMilliSeconds / 1000));
+							lastModifiedInSeconds = (lastModifiedInMilliSeconds / 1000);
 						}
 						catch (IOException e) {
-							lastModifiedInSeconds = new Long(0L);
+							lastModifiedInSeconds = 0L;
 						}
 						finally {
 
@@ -169,13 +168,14 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 				}
 
 				if (lastModifiedInSeconds != null) {
+
 					long ifModifiedHeaderInSeconds = 0L;
 					Map<String, String> requestHeaderMap = facesContext.getExternalContext().getRequestHeaderMap();
 
-					if (requestHeaderMap.containsKey(HEADER_IF_MODIFIED_SINCE)) {
+					// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.25
+					String requestHeaderValue = requestHeaderMap.get(HttpHeaders.IF_MODIFIED_SINCE);
 
-						// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.25
-						String requestHeaderValue = requestHeaderMap.get(HEADER_IF_MODIFIED_SINCE);
+					if (requestHeaderValue != null) {
 
 						try {
 
@@ -188,7 +188,7 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 
 							long ifModifiedHeaderInMilliSeconds = httpSpecDateFormat.parse(requestHeaderValue)
 								.getTime();
-							ifModifiedHeaderInSeconds = (long) (ifModifiedHeaderInMilliSeconds / 1000L);
+							ifModifiedHeaderInSeconds = (ifModifiedHeaderInMilliSeconds / 1000L);
 
 							if (logger.isDebugEnabled()) {
 								logger.debug(
@@ -197,23 +197,8 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 							}
 						}
 						catch (ParseException e) {
-							logger.error("Unable to parse request-header=[{0}] value=[{1}]", HEADER_IF_MODIFIED_SINCE,
-								requestHeaderValue);
-						}
-					}
-					else {
-
-						// FACES-1496: Need to get the BridgeContext from the ThreadLocal in order to prevent memory
-						// leaks with Mojarra.
-						BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-						PortletContainer portletContainer = bridgeContext.getPortletContainer();
-						long ifModifiedHeaderInMilliSeconds = portletContainer.getHttpServletRequestDateHeader(
-								HEADER_IF_MODIFIED_SINCE);
-						ifModifiedHeaderInSeconds = (long) (ifModifiedHeaderInMilliSeconds / 1000);
-
-						if (logger.isDebugEnabled()) {
-							logger.debug("resourceName=[{0}] portletContainer ifModifiedHeaderInSeconds=[{1}]",
-								resourceName, Long.toString(ifModifiedHeaderInSeconds));
+							logger.error("Unable to parse request-header=[{0}] value=[{1}]",
+								HttpHeaders.IF_MODIFIED_SINCE, requestHeaderValue);
 						}
 					}
 
@@ -351,9 +336,7 @@ public class ResourceImpl extends ResourceWrapper implements Serializable {
 
 		// In order to have Mojarra's ScriptRenderer and StylesheetRenderer function properly, this method first encodes
 		// the URL returned by the wrapped resource.
-		String encodedResourceURL = facesContext.getExternalContext().encodeResourceURL(wrappedRequestPath);
-
-		return encodedResourceURL;
+		return facesContext.getExternalContext().encodeResourceURL(wrappedRequestPath);
 	}
 
 	/**

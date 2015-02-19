@@ -28,6 +28,7 @@ public interface HttpHeaders {
 
 	public static final String CONTENT_DISPOSITION = "Content-Disposition";
 
-	public static final String USER_AGENT = "User-Agent";
+	public static final String IF_MODIFIED_SINCE = "If-Modified-Since";
 
+	public static final String USER_AGENT = "User-Agent";
 }
