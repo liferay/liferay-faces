@@ -13,13 +13,6 @@
  */
 package com.liferay.faces.bridge.renderkit.richfaces.internal;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.io.RandomAccessFile;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.List;
 import java.util.Map;
@@ -61,9 +54,9 @@ public class FileUploadRendererRichFacesImpl extends RendererWrapper {
 	}
 
 	/**
-	 * This method overrides the {@link #decode(FacesContext, UIComponent)} method so that it can avoid a Servlet-API
-	 * dependency in the RichFaces FileUploadRenderer. Note that rich:fileUpload will do an Ajax postback and invoke the
-	 * JSF lifecycle for each individual file.
+	 * This method overrides the {@link RendererWrapper#decode(FacesContext, UIComponent)} method so that it can avoid a
+	 * Servlet-API dependency in the RichFaces FileUploadRenderer. Note that rich:fileUpload will do an Ajax postback
+	 * and invoke the JSF lifecycle for each individual file.
 	 */
 	@Override
 	public void decode(FacesContext facesContext, UIComponent uiComponent) {
@@ -112,85 +105,4 @@ public class FileUploadRendererRichFacesImpl extends RendererWrapper {
 	public Renderer getWrapped() {
 		return wrappedRenderer;
 	}
-
-	public class RichFacesUploadedFileHandler implements InvocationHandler {
-
-		// Private Constants
-		private static final String METHOD_DELETE = "delete";
-		private static final String METHOD_GET_CONTENT_TYPE = "getContentType";
-		private static final String METHOD_GET_DATA = "getData";
-		private static final String METHOD_GET_INPUT_STREAM = "getInputStream";
-		private static final String METHOD_GET_NAME = "getName";
-		private static final String METHOD_GET_SIZE = "getSize";
-		private static final String METHOD_WRITE = "write";
-
-		// Private Data Members
-		private UploadedFile uploadedFile;
-
-		public RichFacesUploadedFileHandler(UploadedFile uploadedFile) {
-			this.uploadedFile = uploadedFile;
-		}
-
-		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
-			String methodName = method.getName();
-
-			if (METHOD_DELETE.equals(methodName)) {
-				File file = new File(uploadedFile.getAbsolutePath());
-				file.delete();
-
-				return null;
-			}
-			else if (METHOD_GET_CONTENT_TYPE.equals(methodName)) {
-				return uploadedFile.getContentType();
-			}
-			else if (METHOD_GET_DATA.equals(methodName)) {
-				return getBytes();
-			}
-			else if (METHOD_GET_INPUT_STREAM.equals(methodName)) {
-				return new FileInputStream(uploadedFile.getAbsolutePath());
-			}
-			else if (METHOD_GET_NAME.equals(methodName)) {
-				return uploadedFile.getName();
-			}
-			else if (METHOD_GET_SIZE.equals(methodName)) {
-				return uploadedFile.getSize();
-			}
-			else if (METHOD_WRITE.equals(methodName)) {
-				String fileName = (String) args[0];
-				OutputStream outputStream = new FileOutputStream(fileName);
-				outputStream.write(getBytes());
-				outputStream.close();
-
-				return null;
-			}
-			else {
-
-				// Unsupported method.
-				return null;
-			}
-		}
-
-		protected byte[] getBytes() {
-			byte[] bytes = null;
-
-			try {
-				File file = new File(uploadedFile.getAbsolutePath());
-
-				if (file.exists()) {
-					RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
-					bytes = new byte[(int) randomAccessFile.length()];
-					randomAccessFile.readFully(bytes);
-					randomAccessFile.close();
-				}
-			}
-			catch (Exception e) {
-				logger.error(e);
-			}
-
-			return bytes;
-		}
-
-	}
-
 }
