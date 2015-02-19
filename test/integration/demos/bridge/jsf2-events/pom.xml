@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>test-jsf2-events</artifactId>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<name>jsf2-events integration tests</name>
 
 </project>
