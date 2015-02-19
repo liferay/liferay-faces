@@ -447,8 +447,14 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 					FacesContext facesContext = FacesContext.getCurrentInstance();
 					String newViewId = bridgeRedirectURL.getContextRelativePath();
 
-					// If running in the ACTION_PHASE of the portlet lifecycle, then
-					if (portletPhase == Bridge.PortletPhase.ACTION_PHASE) {
+					// If running in the ACTION_PHASE of the portlet lifecycle and the portlet container has the
+					// ability to create a render URL during the ACTION_PHASE, then
+					PortalContext portalContext = bridgeContext.getPortletRequest().getPortalContext();
+					String createRenderUrlDuringActionPhaseSupport = portalContext.getProperty(
+							BridgePortalContext.CREATE_RENDER_URL_DURING_ACTION_PHASE_SUPPORT);
+
+					if ((portletPhase == Bridge.PortletPhase.ACTION_PHASE) &&
+							(createRenderUrlDuringActionPhaseSupport != null)) {
 
 						// Redirect to the targeted view.
 						bridgeRedirectURL.setParameter(Bridge.FACES_VIEW_ID_PARAMETER, newViewId);
@@ -461,7 +467,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 					// Otherwise, if running in the EVENT_PHASE of the portlet lifecycle, then simply navigate to the
 					// target view since it is not possible to redirect during the EVENT_PHASE.
-					else if (portletPhase == Bridge.PortletPhase.EVENT_PHASE) {
+					else if ((portletPhase == Bridge.PortletPhase.ACTION_PHASE) ||
+							(portletPhase == Bridge.PortletPhase.EVENT_PHASE)) {
 
 						// TCK NOTE: The TCK will invoke this condition during the
 						// TestPage039-requestNoScopeOnRedirectTest and TestPage176-redirectActionTest.
