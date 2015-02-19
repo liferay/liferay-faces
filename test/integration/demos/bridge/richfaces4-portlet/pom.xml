@@ -11,7 +11,7 @@
 	</parent>
 	
 	<artifactId>test-richfaces4-portlet</artifactId>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<name>richfaces4-portlet integration tests</name>
 	
 </project>
