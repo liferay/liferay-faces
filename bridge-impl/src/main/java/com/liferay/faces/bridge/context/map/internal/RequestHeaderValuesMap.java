@@ -20,7 +20,6 @@ import javax.portlet.ClientDataRequest;
 import javax.portlet.PortletRequest;
 import javax.portlet.ResourceRequest;
 
-import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.internal.BridgeExt;
 import com.liferay.faces.util.helper.BooleanHelper;
@@ -163,9 +162,7 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 			}
 		}
 
-		PortletContainer portletContainer = bridgeContext.getPortletContainer();
-
-		addJSF1Headers(portletContainer);
+		addJSF1Headers(portletRequest);
 	}
 
 	/**

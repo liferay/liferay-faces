@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.bridge.context.map.internal;
 
-import com.liferay.faces.bridge.container.PortletContainer;
+import javax.portlet.PortletRequest;
 
 
 /**
@@ -26,7 +26,7 @@ public abstract class RequestHeaderValuesMapCompat extends CaseInsensitiveHashMa
 	// serialVersionUID
 	private static final long serialVersionUID = 5256297252491398013L;
 
-	protected void addJSF1Headers(PortletContainer portletContainer) {
+	protected void addJSF1Headers(PortletRequest portletRequest) {
 
 		// This is a no-op for JSF 2.x
 	}
