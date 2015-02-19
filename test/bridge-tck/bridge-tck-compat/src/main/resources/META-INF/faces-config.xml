@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+	xmlns:bridge="http://www.liferay.com/xml/ns/liferay-faces-bridge-2.0-extension">
+	<faces-config-extension>
+		<name>LiferayFacesBridgeTCKCommon</name>
+	</faces-config-extension>
+	<factory>
+		<factory-extension>
+			<bridge:bridge-portlet-request-factory>com.liferay.faces.bridge.tck.filter.BridgePortletRequestFactoryTCKImpl</bridge:bridge-portlet-request-factory>
+			<bridge:bridge-portlet-response-factory>com.liferay.faces.bridge.tck.filter.BridgePortletResponseFactoryTCKImpl</bridge:bridge-portlet-response-factory>
+		</factory-extension>
+	</factory>
+</faces-config>

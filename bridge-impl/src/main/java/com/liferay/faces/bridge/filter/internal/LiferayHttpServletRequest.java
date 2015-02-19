@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.container.liferay.internal;
+package com.liferay.faces.bridge.filter.internal;
 
 import java.util.List;
 
@@ -24,10 +24,10 @@ import javax.servlet.http.HttpServletRequestWrapper;
  * This class wraps an instance of javax.servlet.http.HttpServletRequest which represents the "original" request that
  * Liferay received that initiated the rendering of the current portlet.
  */
-public class OriginalHttpServletRequest extends HttpServletRequestWrapper {
+public class LiferayHttpServletRequest extends HttpServletRequestWrapper {
 	private HttpServletRequest wrappedHttpServletRequest;
 
-	public OriginalHttpServletRequest(HttpServletRequest httpServletRequest) {
+	public LiferayHttpServletRequest(HttpServletRequest httpServletRequest) {
 		super(httpServletRequest);
 		this.wrappedHttpServletRequest = httpServletRequest;
 	}
