@@ -83,15 +83,4 @@ public interface PortletContainer {
 	 * @throws  MalformedURLException
 	 */
 	public ResourceURL createResourceURL(String fromURL) throws MalformedURLException;
-
-	/**
-	 * Returns the value of the header with the specified name from the underlying HttpServletRequest.
-	 */
-	public String[] getHeader(String name);
-
-	/**
-	 * Returns the value of the specified header name from the HttpServletRequest that is wrapped by the current
-	 * PortletRequest.
-	 */
-	public long getHttpServletRequestDateHeader(String name);
 }

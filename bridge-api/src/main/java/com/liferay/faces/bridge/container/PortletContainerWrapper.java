@@ -49,13 +49,5 @@ public abstract class PortletContainerWrapper implements PortletContainer, Wrapp
 		return getWrapped().createResourceURL(fromURL);
 	}
 
-	public String[] getHeader(String name) {
-		return getWrapped().getHeader(name);
-	}
-
-	public long getHttpServletRequestDateHeader(String name) {
-		return getWrapped().getHttpServletRequestDateHeader(name);
-	}
-
 	public abstract PortletContainer getWrapped();
 }
