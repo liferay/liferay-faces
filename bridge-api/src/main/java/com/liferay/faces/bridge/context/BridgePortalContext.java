@@ -75,6 +75,13 @@ public interface BridgePortalContext extends PortalContext {
 		"com.liferay.faces.bridge.set.resource.response.buffer.size.support";
 
 	/**
+	 * Property indicating if the portal application supports creation of a render URL during the {@link
+	 * javax.portlet.PortletRequest#ACTION_PHASE} of the portlet lifecycle.
+	 */
+	public static final String CREATE_RENDER_URL_DURING_ACTION_PHASE_SUPPORT =
+		"com.liferay.faces.bridge.create.render.url.during.action.phase.support";
+
+	/**
 	 * Property indicating if the portal application requires parameters to be namespaced. A non-null value indicates
 	 * that the portal application provides support.
 	 */
