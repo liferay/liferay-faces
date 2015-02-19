@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>test-jsf2-ipc-pub-render-params-portlet</artifactId>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<name>jsf2-ipc-pub-render-params-portlet integration tests</name>
 
 </project>
