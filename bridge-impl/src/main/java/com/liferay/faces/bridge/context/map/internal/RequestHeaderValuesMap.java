@@ -49,7 +49,6 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 	private static final String HEADER_ACCEPT_LANGUAGE = "Accept-Language";
 	private static final String HEADER_CONTENT_TYPE = "Content-Type";
 	private static final String HEADER_FACES_REQUEST = "Faces-Request";
-	private static final String HEADER_USER_AGENT = "User-Agent";
 
 	public RequestHeaderValuesMap(BridgeContext bridgeContext) {
 
@@ -58,7 +57,6 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 		boolean foundAccept = false;
 		boolean foundContentType = false;
 		boolean foundFacesRequest = false;
-		boolean foundUserAgent = false;
 
 		if (propertyNames != null) {
 
@@ -119,7 +117,7 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 					// NOTE: Need to check that the portlet container actually provided a value before the bridge can
 					// claim that it has detected "Accept", "Content-Type", or "Faces-Request".
 					// http://issues.liferay.com/browse/FACES-34
-					if ((values != null) && (values.length() > 0)) {
+					if (values.length() > 0) {
 
 						if (!foundAccept) {
 							foundAccept = name.equalsIgnoreCase(HEADER_ACCEPT);
@@ -131,10 +129,6 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 
 						if (!foundFacesRequest) {
 							foundFacesRequest = name.equalsIgnoreCase(HEADER_FACES_REQUEST);
-						}
-
-						if (!foundUserAgent) {
-							foundUserAgent = name.equalsIgnoreCase(HEADER_USER_AGENT);
 						}
 					}
 				}
@@ -171,10 +165,6 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 
 		PortletContainer portletContainer = bridgeContext.getPortletContainer();
 
-		if (!foundUserAgent) {
-			put(HEADER_USER_AGENT, portletContainer.getHeader(HEADER_USER_AGENT));
-		}
-
 		addJSF1Headers(portletContainer);
 	}
 
@@ -184,7 +174,7 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 	 *
 	 * @param  portletRequest  The current portlet request.
 	 *
-	 * @see    http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
+	 * @see    <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1">RFC2616</a>
 	 */
 	protected void addAcceptHeader(PortletRequest portletRequest) {
 		StringBuilder header = new StringBuilder();
@@ -214,7 +204,7 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 	 *
 	 * @param  portletRequest  The current portlet request.
 	 *
-	 * @see    http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
+	 * @see    <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">RFC2616</a>
 	 */
 	protected void addContentTypeHeader(PortletRequest portletRequest) {
 
@@ -247,9 +237,4 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 			// TCK TestPage142: getRequestHeaderMapRenderTest
 		}
 	}
-
-	protected void addFacesRequestPartialAjaxHeader(PortletRequest portletRequest) {
-		// TODO: This method was stubbed-out but was never implemented?
-	}
-
 }

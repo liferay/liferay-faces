@@ -25,6 +25,7 @@ import javax.portlet.ResourceURL;
 
 import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.filter.internal.LiferayPortletRequest;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -106,15 +107,5 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 
 		return liferayURLFactory.getLiferayResourceURL(bridgeContext, mimeResponse, mimeResponse.getNamespace(),
 				friendlyURLMapperEnabled);
-	}
-
-	@Override
-	public String[] getHeader(String name) {
-		return liferayPortletRequest.getHeader(name);
-	}
-
-	@Override
-	public long getHttpServletRequestDateHeader(String name) {
-		return liferayPortletRequest.getDateHeader(name);
 	}
 }
