@@ -15,14 +15,12 @@ package com.liferay.faces.bridge.container.internal;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.portlet.BaseURL;
 import javax.portlet.MimeResponse;
-import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceURL;
 import javax.portlet.faces.Bridge;
@@ -266,24 +264,5 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 		}
 
 		return requestParameters;
-	}
-
-	public String[] getHeader(String name) {
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		PortletRequest portletRequest = bridgeContext.getPortletRequest();
-		Enumeration<String> properties = portletRequest.getProperties(name);
-		List<String> propertyList = new ArrayList<String>();
-
-		while (properties.hasMoreElements()) {
-			propertyList.add(properties.nextElement());
-		}
-
-		return propertyList.toArray(new String[propertyList.size()]);
-	}
-
-	public long getHttpServletRequestDateHeader(String name) {
-
-		// Unsupported by default implementation.
-		return -1L;
 	}
 }

@@ -11,10 +11,11 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.container.liferay.internal;
+package com.liferay.faces.bridge.filter.internal;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -24,10 +25,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.render.HttpHeaders;
 
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.theme.ThemeDisplay;
 
 
 /**
@@ -44,9 +44,9 @@ public class LiferayPortletRequest {
 	private static final Logger logger = LoggerFactory.getLogger(LiferayPortletRequest.class);
 
 	// Private Data Members
-	private OriginalHttpServletRequest originalHttpServletRequest;
+	private LiferayHttpServletRequest liferayHttpServletRequest;
 	private Portlet portlet;
-	private ThemeDisplay themeDisplay;
+	private List<String> propertyNameList;
 	private PortletRequest wrappedPortletRequest;
 
 	public LiferayPortletRequest(PortletRequest portletRequest) {
@@ -73,46 +73,57 @@ public class LiferayPortletRequest {
 		try {
 			Method method = wrappedPortletRequest.getClass().getMethod(METHOD_NAME_GET_ORIGINAL_HTTP_SERVLET_REQUEST,
 					(Class[]) null);
-			this.originalHttpServletRequest = new OriginalHttpServletRequest((HttpServletRequest) method.invoke(
+			this.liferayHttpServletRequest = new LiferayHttpServletRequest((HttpServletRequest) method.invoke(
 						wrappedPortletRequest, (Object[]) null));
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
 
-	}
+		this.propertyNameList = new ArrayList<String>();
 
-	public long getDateHeader(String name) {
-		return originalHttpServletRequest.getDateHeader(name);
-	}
+		boolean foundIfModifiedSince = false;
+		boolean foundUserAgent = false;
+		Enumeration<String> propertyNames = portletRequest.getPropertyNames();
 
-	public String[] getHeader(String name) {
-		String[] values = null;
-		Enumeration<?> headers = originalHttpServletRequest.getHeaders(name);
+		while (propertyNames.hasMoreElements() && !foundUserAgent) {
+			String propertyName = propertyNames.nextElement();
+			propertyNameList.add(propertyName);
 
-		if (headers != null) {
-			List<String> valueList = new ArrayList<String>();
-
-			while (headers.hasMoreElements()) {
-				valueList.add((String) headers.nextElement());
+			if (HttpHeaders.IF_MODIFIED_SINCE.equals(propertyName)) {
+				foundIfModifiedSince = true;
 			}
-
-			values = valueList.toArray(new String[valueList.size()]);
+			else if (HttpHeaders.USER_AGENT.equals(propertyName)) {
+				foundUserAgent = true;
+			}
 		}
 
-		return values;
+		if (!foundIfModifiedSince) {
+			propertyNameList.add(HttpHeaders.IF_MODIFIED_SINCE);
+		}
+
+		if (!foundUserAgent) {
+			propertyNameList.add(HttpHeaders.USER_AGENT);
+		}
 	}
 
 	public Portlet getPortlet() {
 		return portlet;
 	}
 
-	public ThemeDisplay getThemeDisplay() {
+	public Enumeration<String> getProperties(String name) {
 
-		if (themeDisplay == null) {
-			themeDisplay = (ThemeDisplay) wrappedPortletRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		Enumeration<String> properties = wrappedPortletRequest.getProperties(name);
+
+		if (!properties.hasMoreElements() &&
+				(HttpHeaders.USER_AGENT.equals(name) || HttpHeaders.IF_MODIFIED_SINCE.equals(name))) {
+			properties = liferayHttpServletRequest.getHeaders(name);
 		}
 
-		return themeDisplay;
+		return properties;
+	}
+
+	public Enumeration<String> getPropertyNames() {
+		return Collections.enumeration(propertyNameList);
 	}
 }
