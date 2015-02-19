@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.bridge.context.map.internal;
 
-import com.liferay.faces.bridge.container.PortletContainer;
+import javax.portlet.PortletRequest;
 
 
 /**
@@ -27,13 +27,13 @@ public abstract class RequestHeaderValuesMapCompat extends CaseInsensitiveHashMa
 	// Private Constants
 	private static final String HEADER_TRINIDAD_PPR = "Tr-XHR-Message";
 
-	protected void addJSF1Headers(PortletContainer portletContainer) {
+	protected void addJSF1Headers(PortletRequest portletRequest) {
 
 		String[] trinidadPPRHeader = get(HEADER_TRINIDAD_PPR);
 
 		if (trinidadPPRHeader == null) {
 
-			trinidadPPRHeader = portletContainer.getHeader(HEADER_TRINIDAD_PPR);
+			trinidadPPRHeader = new String[] { portletRequest.getProperty(HEADER_TRINIDAD_PPR) };
 
 			if (trinidadPPRHeader != null) {
 				put(HEADER_TRINIDAD_PPR, trinidadPPRHeader);
