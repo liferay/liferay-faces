@@ -11,46 +11,52 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.tck.container;
+package com.liferay.faces.bridge.tck.filter;
 
-import javax.faces.context.ExternalContext;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
 
-import com.liferay.faces.bridge.container.pluto.internal.PortletContainerPlutoImpl;
+import javax.portlet.ResourceRequest;
+import javax.portlet.filter.ResourceRequestWrapper;
 
 
 /**
- * This class provides some additional functionality to the Pluto PortletContainer implementation when running in the
- * TCK.
- *
  * @author  Neil Griffin
  */
-public class PortletContainerPlutoTCKImpl extends PortletContainerPlutoImpl {
+public class ResourceRequestPlutoTCKImpl extends ResourceRequestWrapper {
 
 	// Private Constants
 	private static final String[] USER_AGENT_HEADER_VALUES = new String[] {
 			"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:13.0) Gecko/20100101 Firefox/13.0.1"
 		};
 
+	public ResourceRequestPlutoTCKImpl(ResourceRequest resourceRequest) {
+		super(resourceRequest);
+	}
+
 	/**
 	 * The JSF 2.x version of the TCK has a dependency on Trinidad 2.x, which needs to be able to detect the browser
 	 * (user-agent) that issued the request in order to determine whether-or-not Partial Page Rendering (PPR) is
 	 * enabled/disabled. Specifically, the {@link
 	 * org.apache.myfaces.trinidadinternal.agent.AgentFactoryImpl#_getUserAgentHeader(Map<String, String>))} method will
-	 * call {@link ExternalContext#getRequestHeaderMap()} in order to get the "User-Agent" header. Liferay provides a
-	 * way of determining this header from the underlying HttpServletRequest, but Pluto does not. Therefore in order for
-	 * PPR tests like TestPage073 (scopeAfterRedisplayResourcePPRTest) to work with PPR, it is necessary to return a
-	 * bogus value here.
+	 * call {@link javax.faces.context.ExternalContext#getRequestHeaderMap()} in order to get the "User-Agent" header.
+	 * Liferay provides a way of determining this header from the underlying HttpServletRequest, but Pluto does not.
+	 * Therefore in order for PPR tests like TestPage073 (scopeAfterRedisplayResourcePPRTest) to work with PPR, it is
+	 * necessary to return a bogus value here.
 	 */
 	@Override
-	public String[] getHeader(String name) {
+	public Enumeration<String> getProperties(String name) {
 
-		String[] header = super.getHeader(name);
+		if ("User-Agent".equalsIgnoreCase(name)) {
+			List<String> propertyList = new ArrayList<String>();
+			propertyList.add("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:13.0) Gecko/20100101 Firefox/13.0.1");
 
-		if ((header == null) && "User-Agent".equalsIgnoreCase(name)) {
-			header = USER_AGENT_HEADER_VALUES;
+			return Collections.enumeration(propertyList);
 		}
-
-		return header;
+		else {
+			return super.getProperties(name);
+		}
 	}
-
 }
