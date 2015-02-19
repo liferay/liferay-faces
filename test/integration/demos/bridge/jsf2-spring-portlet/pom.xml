@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>test-jsf2-spring-portlet</artifactId>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<name>jsf2-spring-portlet integration tests</name>
 
 </project>
