@@ -4958,28 +4958,7 @@
         <portlet-info>
                 <title>chapter6_9Tests-usesConfiguredRenderKitTest-portlet</title>
         </portlet-info>
-    </portlet>    
-    
-    <!-- BEGIN: LIFERAY PORTAL -->
-    <filter>
-    	<filter-name>TCKCompatPortletFilter</filter-name>
-    	<filter-class>com.liferay.faces.bridge.tck.filter.PortletFilterTCKImpl</filter-class>
-    	<lifecycle>ACTION_PHASE</lifecycle>
-    	<lifecycle>RENDER_PHASE</lifecycle>
-    </filter>
-    <filter-mapping>
-    	<filter-name>TCKCompatPortletFilter</filter-name>
-    	<portlet-name>chapter5_1_2Tests-requestNoScopeOnRedirectTest-portlet</portlet-name>
-    </filter-mapping>
-    <filter-mapping>
-    	<filter-name>TCKCompatPortletFilter</filter-name>
-    	<portlet-name>chapter6_1_3_1Tests-redirectActionTest-portlet</portlet-name>
-    </filter-mapping>
-    <filter-mapping>
-    	<filter-name>TCKCompatPortletFilter</filter-name>
-    	<portlet-name>chapter6_1_3_1Tests-requestMapCoreTest-portlet</portlet-name>
-    </filter-mapping>
-    <!-- BEGIN: END PORTAL -->
+    </portlet>
 
     <event-definition>
   	<qname xmlns:bridge="http://myfaces.apache.org/portlet-bridge/event_ns">bridge:myfaces.apache.org.tck.testEvent</qname>
