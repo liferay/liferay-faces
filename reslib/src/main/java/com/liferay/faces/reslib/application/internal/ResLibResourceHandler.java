@@ -212,39 +212,49 @@ public class ResLibResourceHandler extends ResourceHandlerWrapperBase {
 
 	protected String getResourceName(ExternalContext externalContext) {
 
-		String resourceName = null;
+		// Attempt to get the resource name from the "javax.faces.resource" request parameter. If it exists, then
+		// this is probably a non-Liferay portlet environment like Pluto.
+		String resourceName = externalContext.getRequestParameterMap().get("javax.faces.resource");
 
-		// If the specified request was extension-mapped (suffix-mapped), then determine the resource name based
-		// on the configured mappings to the Faces Servlet.
-		HttpServletRequest httpServletRequest = (HttpServletRequest) externalContext.getRequest();
-		String servletPath = httpServletRequest.getServletPath();
+		if (resourceName == null) {
 
-		if ((servletPath != null) && servletPath.startsWith(RESOURCE_IDENTIFIER)) {
+			// If the specified request was extension-mapped (suffix-mapped), then determine the resource name based
+			// on the configured mappings to the Faces Servlet.
+			Object request = externalContext.getRequest();
 
-			Map<String, Object> applicationMap = externalContext.getApplicationMap();
-			String appConfigAttrName = ApplicationConfig.class.getName();
-			ApplicationConfig applicationConfig = (ApplicationConfig) applicationMap.get(appConfigAttrName);
-			FacesConfig facesConfig = applicationConfig.getFacesConfig();
-			List<ConfiguredServletMapping> configuredFacesServletMappings =
-				facesConfig.getConfiguredFacesServletMappings();
+			if (request instanceof HttpServletRequest) {
+				HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+				String servletPath = httpServletRequest.getServletPath();
 
-			resourceName = servletPath.substring(RESOURCE_IDENTIFIER.length() + 1);
+				if ((servletPath != null) && servletPath.startsWith(RESOURCE_IDENTIFIER)) {
 
-			for (ConfiguredServletMapping configuredFacesServletMapping : configuredFacesServletMappings) {
+					Map<String, Object> applicationMap = externalContext.getApplicationMap();
+					String appConfigAttrName = ApplicationConfig.class.getName();
+					ApplicationConfig applicationConfig = (ApplicationConfig) applicationMap.get(appConfigAttrName);
+					FacesConfig facesConfig = applicationConfig.getFacesConfig();
+					List<ConfiguredServletMapping> configuredFacesServletMappings =
+						facesConfig.getConfiguredFacesServletMappings();
 
-				String configuredExtension = configuredFacesServletMapping.getExtension();
+					resourceName = servletPath.substring(RESOURCE_IDENTIFIER.length() + 1);
 
-				if (servletPath.endsWith(configuredExtension)) {
-					resourceName = resourceName.substring(0, resourceName.length() - configuredExtension.length());
+					for (ConfiguredServletMapping configuredFacesServletMapping : configuredFacesServletMappings) {
 
-					break;
+						String configuredExtension = configuredFacesServletMapping.getExtension();
+
+						if (servletPath.endsWith(configuredExtension)) {
+							resourceName = resourceName.substring(0,
+									resourceName.length() - configuredExtension.length());
+
+							break;
+						}
+					}
+				}
+
+				// Otherwise, it must be path-mapped.
+				else {
+					resourceName = httpServletRequest.getPathInfo();
 				}
 			}
-		}
-
-		// Otherwise, it must be path-mapped.
-		else {
-			resourceName = httpServletRequest.getPathInfo();
 		}
 
 		return resourceName;
