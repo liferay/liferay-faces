@@ -133,9 +133,10 @@ PORTLET_MVN_CMD="mvn -P $PORTAL_PROFILE_NAME,$FACES_IMPL,$SERVER_PROFILE_NAME,re
 if [ "$PORTAL_PROFILE_NAME" = "liferay" ] ; then
 	if [ "$LIFERAY_FACES_VERSION" = "3.0.x-legacy" ] ; then
 		# liferay-maven-plugin not supported for Liferay 5.2.x
-		PORTLET_MVN_CMD="$PORTLET_MVN_CMD"
+		PORTLET_MVN_CMD="$PORTLET_MVN_CMD liferay-faces:deploy"
 	else
-		PORTLET_MVN_CMD="$PORTLET_MVN_CMD liferay:deploy"
+		# Can't use liferay:deploy until MAVEN-136 is fixed
+		PORTLET_MVN_CMD="$PORTLET_MVN_CMD liferay-faces:deploy"
 	fi
 fi
 echo "==============================================================================================================="
