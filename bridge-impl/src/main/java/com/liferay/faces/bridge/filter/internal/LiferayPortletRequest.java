@@ -99,11 +99,31 @@ public class LiferayPortletRequest {
 		}
 
 		if (!foundIfModifiedSince) {
-			propertyNameList.add(HttpHeaders.IF_MODIFIED_SINCE);
+
+			Enumeration<String> headerNames = liferayHttpServletRequest.getHeaderNames();
+
+			while (headerNames.hasMoreElements() && !foundIfModifiedSince) {
+				String headerName = headerNames.nextElement();
+				foundIfModifiedSince = (HttpHeaders.IF_MODIFIED_SINCE.equalsIgnoreCase(headerName));
+			}
+
+			if (foundIfModifiedSince) {
+				propertyNameList.add(HttpHeaders.IF_MODIFIED_SINCE);
+			}
 		}
 
 		if (!foundUserAgent) {
-			propertyNameList.add(HttpHeaders.USER_AGENT);
+
+			Enumeration<String> headerNames = liferayHttpServletRequest.getHeaderNames();
+
+			while (headerNames.hasMoreElements() && !foundUserAgent) {
+				String headerName = headerNames.nextElement();
+				foundUserAgent = (HttpHeaders.USER_AGENT.equalsIgnoreCase(headerName));
+			}
+
+			if (foundUserAgent) {
+				propertyNameList.add(HttpHeaders.USER_AGENT);
+			}
 		}
 	}
 
