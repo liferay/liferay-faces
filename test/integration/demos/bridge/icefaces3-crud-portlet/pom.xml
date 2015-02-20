@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>test-icefaces3-crud-portlet</artifactId>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<name>icefaces3-crud-portlet integration tests</name>
 
 </project>
