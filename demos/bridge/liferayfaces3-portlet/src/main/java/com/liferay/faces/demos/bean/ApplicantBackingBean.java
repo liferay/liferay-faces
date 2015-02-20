@@ -13,13 +13,8 @@
  */
 package com.liferay.faces.demos.bean;
 
-
-import com.liferay.faces.alloy.component.inputfile.FileUploadEvent;
-import com.liferay.faces.demos.dto.City;
-import com.liferay.faces.demos.util.FacesMessageUtil;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.model.UploadedFile;
+import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -28,8 +23,14 @@ import javax.faces.component.UICommand;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
-import java.io.Serializable;
-import java.util.List;
+
+import com.liferay.faces.alloy.component.inputfile.FileUploadEvent;
+import com.liferay.faces.demos.dto.City;
+import com.liferay.faces.demos.util.FacesMessageUtil;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.model.UploadedFile;
+
 
 /**
  * This is a JSF backing managed-bean for the applicant.xhtml composition.
@@ -49,27 +50,17 @@ public class ApplicantBackingBean implements Serializable {
 	// Injections
 	@ManagedProperty(value = "#{applicantModelBean}")
 	private transient ApplicantModelBean applicantModelBean;
+	@ManagedProperty(value = "#{applicantViewBean}")
+	private transient ApplicantViewBean applicantViewBean;
 	@ManagedProperty(value = "#{listModelBean}")
 	private transient ListModelBean listModelBean;
 
-	public void deleteUploadedFile(ActionEvent actionEvent) {
-
-		UICommand uiCommand = (UICommand) actionEvent.getComponent();
-		String fileId = (String) uiCommand.getValue();
+	public void deleteFile(ActionEvent actionEvent) {
 
 		try {
+
 			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
-
-			UploadedFile uploadedFileToDelete = null;
-
-			for (UploadedFile uploadedFile : uploadedFiles) {
-
-				if (uploadedFile.getId().equals(fileId)) {
-					uploadedFileToDelete = uploadedFile;
-
-					break;
-				}
-			}
+			UploadedFile uploadedFileToDelete = applicantViewBean.getFileToDelete();
 
 			if (uploadedFileToDelete != null) {
 				uploadedFileToDelete.delete();
@@ -80,6 +71,11 @@ public class ApplicantBackingBean implements Serializable {
 		catch (Exception e) {
 			logger.error(e);
 		}
+	}
+
+	public void fileToDelete(UploadedFile uploadedFileToDelete) {
+		applicantViewBean.setFileToDelete(uploadedFileToDelete);
+		logger.debug("preparing to delete file=[{0}]", uploadedFileToDelete.getName());
 	}
 
 	public void handleFileUpload(FileUploadEvent fileUploadEvent) throws Exception {
@@ -158,6 +154,12 @@ public class ApplicantBackingBean implements Serializable {
 
 		// Injected via @ManagedProperty annotation
 		this.applicantModelBean = applicantModelBean;
+	}
+
+	public void setApplicantViewBean(ApplicantViewBean applicantViewBean) {
+
+		// Injected via @ManagedProperty annotation
+		this.applicantViewBean = applicantViewBean;
 	}
 
 	public void setListModelBean(ListModelBean listModelBean) {

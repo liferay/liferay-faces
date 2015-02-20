@@ -46,7 +46,7 @@ public class Liferayfaces3PortletTest extends TesterBase {
 	
 	// preferences elements
 	private static final String datePatternFieldXpath = "//input[contains(@id,':datePattern')]";
-	private static final String resetButtonXpath = "//input[@type='submit' and @value='Reset']";
+	private static final String resetButtonXpath = "//button[@value='Reset']";
 
 	// elements for Job Applicants
 	private static final String logoXpath = "//img[contains(@src,'liferay-logo.png')]";
@@ -82,12 +82,12 @@ public class Liferayfaces3PortletTest extends TesterBase {
 	private static final String commentsXpath = "//textarea[contains(@id,':comments')]";
 
 	private static final String fileUploadChooserXpath = "//input[@type='file' and @multiple='multiple']";
-	private static final String submitFileXpath = "//form[@method='post' and @enctype='multipart/form-data']/input[@type='submit' and @value='Submit']";
-	private static final String uploadedFileXpath = "//tr[@class='portlet-section-body results-row']/td[2]";
+	private static final String submitFileXpath = "//form[@method='post' and @enctype='multipart/form-data']/button[@value='Submit']";
+	private static final String uploadedFileXpath = "//h3[contains(text(),'Attachments')]/following-sibling::table/tbody/tr[contains(@class,'datatable')]/td[2]";
 
-	private static final String submitButtonXpath = "//input[@type='submit' and @value='Submit']";
-	private static final String preferencesSubmitButtonXpath = "//input[@type='submit' and @value='Submit']";
-	private static final String editPreferencesButtonXpath = "//input[@type='submit' and @value='Edit Preferences']";
+	private static final String submitButtonXpath = "//button[@value='Submit']";
+	private static final String preferencesSubmitButtonXpath = "//button[@value='Submit']";
+	private static final String editPreferencesButtonXpath = "//button[@value='Edit Preferences']";
 	private static final String returnLinkXpath = "//a[contains(text(),'Return to Full Page')]";
 
 	private static final String mojarraVersionXpath = "//*[contains(text(),'Mojarra')]";
@@ -96,7 +96,7 @@ public class Liferayfaces3PortletTest extends TesterBase {
 	private static final String bridgeVersionXpath = "//*[contains(text(),'Liferay Faces Bridge')]";
 
 	// xpath for specific tests
-	private static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../child::node()";
+	protected static final String dateValidationXpath = "//div[contains(@id,':dateOfBirthField')]/*";
 
 	static final String url = baseUrl + webContext + "/lf3";
 
@@ -172,7 +172,7 @@ public class Liferayfaces3PortletTest extends TesterBase {
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
 	
-	protected int dateValidationXpathModifier = 1;
+	protected int dateValidationXpathModifier = 0;
 	
 	@Drone
 	WebDriver browser;
@@ -273,7 +273,7 @@ public class Liferayfaces3PortletTest extends TesterBase {
 		logger.log(Level.INFO, "entering 'asdf' into the firstNameField and then tabbing out of it...");
 		firstNameField.sendKeys("asdf");
 		firstNameField.sendKeys(Keys.TAB);
-//		Thread.sleep(50);
+		Thread.sleep(50);
 		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
 		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
 		assertTrue("The data 'asdf' should be in the firstNameField after tabbing out of it",
@@ -291,7 +291,7 @@ public class Liferayfaces3PortletTest extends TesterBase {
 		firstNameField.sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(150);
 		firstNameField.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(150);
+		Thread.sleep(250);
 		firstNameField.sendKeys(Keys.TAB);
 		Thread.sleep(150);
 		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
@@ -360,7 +360,21 @@ public class Liferayfaces3PortletTest extends TesterBase {
 		
 		logger.log(Level.INFO, "done with selectEditMode: isThere(browser, datePatternFieldXpath) = " + isThere(browser, datePatternFieldXpath));
 		logger.log(Level.INFO, "datePatternField.getAttribute('value') = " + datePatternField.getAttribute("value"));
-		logger.log(Level.INFO, "resetButton.isDisplayed() = " + resetButton.isDisplayed());
+		logger.log(Level.INFO, "datePatternField.getAttribute('value') should have been logged at this point ...");
+		
+		logger.log(Level.INFO, "waiting 5 seconds resetButton should be displayed right now");
+        Thread.sleep(200);
+
+		try {
+			logger.log(Level.INFO, "resetButton.isDisplayed() = " + resetButton.isDisplayed());
+		}
+		catch (Exception e) {
+			logger.log(Level.WARNING, "Exception e.getMessage() = " + e.getMessage());
+		} finally {
+			logger.log(Level.INFO, "waiting 5 seconds resetButton.isDisplayed() should have been logged just now ...");
+		}
+
+		Thread.sleep(200);
 
 		// MM/dd/yyyy
 		datePatternField.clear();
@@ -374,7 +388,7 @@ public class Liferayfaces3PortletTest extends TesterBase {
 
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
-//		Thread.sleep(1000);
+
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO,
 			"dateOfBirthField.getAttribute('value').length() = " + dateOfBirthField.getAttribute("value").length());
@@ -399,7 +413,6 @@ public class Liferayfaces3PortletTest extends TesterBase {
 
 		resetButton.click();
 		logger.log(Level.INFO, "resetButton.click() ...");
-//		Thread.sleep(1000);
 
 		// TODO after clicking the resetButton all of the job applicant demos need to end up on the same page Here is a
 		// log statement that should give you a clue between the different tester as to which ones are different from
@@ -550,8 +563,8 @@ public class Liferayfaces3PortletTest extends TesterBase {
 
 		String testing123 = "testing 1, 2, 3";
 		int tags = 0;
-		int tagsWhileHidden = 1;
-		int tagsWhileShowing = 2;
+		int tagsWhileHidden = 2;
+		int tagsWhileShowing = 3;
 
 		showCommentsLink.click();
 		Thread.sleep(500);
@@ -563,7 +576,7 @@ public class Liferayfaces3PortletTest extends TesterBase {
 		assertTrue("comments textarea is displayed", comments.isDisplayed());
 		tags = browser.findElements(By.xpath("//a[contains(text(),'Hide Comments')]/../../child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
-		assertTrue("tag for Hide and tag for textarea are showing", tags == tagsWhileShowing);
+		assertTrue("count of tags when Hide link is showing(" + tags + ") and count of tags for textarea when showing(" + tagsWhileShowing + ") should be equal", tags == tagsWhileShowing);
 
 		comments.sendKeys(testing123);
 		phoneNumberField.click();
@@ -572,7 +585,7 @@ public class Liferayfaces3PortletTest extends TesterBase {
 		Thread.sleep(500);
 		tags = browser.findElements(By.xpath("//a[contains(text(),'Show Comments')]/../../child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
-		assertTrue("no textarea is showing", tags == tagsWhileHidden);
+		assertTrue("no textarea should be showing at this point.  Tags counted at this pint("+ tags +") should equal tags neeeded to be in the DOM when the textarea is hidden("+ tagsWhileHidden +")", tags == tagsWhileHidden);
 		logger.log(Level.INFO, "showCommentsLink.isDisplayed() = " + showCommentsLink.isDisplayed());
 		showCommentsLink.click();
 		waitForElement(browser, commentsXpath);
@@ -588,7 +601,7 @@ public class Liferayfaces3PortletTest extends TesterBase {
 	public void dateValidation() throws Exception {
 
 		int tags = 0;
-		int tagsWhileValid = 0;
+		int tagsWhileValid = 2;
 		String foo = "";
 
 		// checks an invalid dateOfBirth
@@ -654,6 +667,7 @@ public class Liferayfaces3PortletTest extends TesterBase {
 			"01/02/3456".equals(dateOfBirthField.getAttribute("value")));
 		tags = browser.findElements(By.xpath(dateValidationXpath)).size() - dateValidationXpathModifier;
 		logger.log(Level.INFO, "tags = " + tags);
+		logger.log(Level.INFO, "tagsWhileValid = " + tagsWhileValid);
 
 		if (tags > tagsWhileValid) {
 			foo = dateOfBirthFieldError.getText();
