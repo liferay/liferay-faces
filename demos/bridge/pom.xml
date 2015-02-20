@@ -39,6 +39,11 @@
 					<groupId>log4j</groupId>
 					<artifactId>log4j</artifactId>
 				</dependency>
+				<dependency>
+					<groupId>com.liferay.faces</groupId>
+					<artifactId>liferay-faces-reslib</artifactId>
+					<version>${project.version}</version>
+				</dependency>
 			</dependencies>
 		</profile>
 	</profiles>
