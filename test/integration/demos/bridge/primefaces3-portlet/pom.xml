@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>test-primefaces3-portlet</artifactId>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<name>primefaces3-portlet integration tests</name>
 
 </project>
