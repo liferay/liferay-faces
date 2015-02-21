@@ -11,6 +11,7 @@
 	</parent>
 
 	<artifactId>test-FACES-1439-portlet</artifactId>
+	<packaging>pom</packaging>
 	<name>FACES-1439 integration tests</name>
 
 </project>
