@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:alloy="http://liferay.com/faces/alloy" xmlns:portal="http://liferay.com/faces/portal"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase">
+
+	<alloy:form id="exampleForm">
+		<alloy:messages id="feedback" globalOnly="true" layout="table" />
+		<showcase:example id="example" description="#{i18n['portal-inputsearch-general-example-1']}">
+			<portal:navBar>
+				<portal:navBarSearch>
+					<portal:inputSearch value="#{inputSearchBacking.searchText}"  actionListener="#{inputSearchBacking.searchActionListener}" buttonLabel="#{i18n['portal-inputsearch-general-buttonlabel']}" placeholder="#{i18n['portal-inputsearch-general-placeholder']}"/>					
+				</portal:navBarSearch>
+			</portal:navBar>			
+		</showcase:example>
+	</alloy:form>
+	<showcase:outputModel id="outputModel">
+		<alloy:outputText id="modelValue" value="#{inputSearchBacking.searchText}" />
+	</showcase:outputModel>
+</ui:composition>
