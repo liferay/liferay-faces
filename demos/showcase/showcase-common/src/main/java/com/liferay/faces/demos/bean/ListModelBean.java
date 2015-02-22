@@ -63,7 +63,7 @@ public class ListModelBean {
 		.isDetected();
 	private static final String[] PACKAGE_NAMES = new String[] {
 			"com.liferay.faces.demos.bean", "com.liferay.faces.demos.constants", "com.liferay.faces.demos.dto",
-			"com.liferay.faces.demos.converter", "com.liferay.faces.demos.portlet"
+			"com.liferay.faces.demos.converter", "com.liferay.faces.demos.portlet", "com.liferay.faces.demos.validator"
 		};
 
 	// Private Data Members
