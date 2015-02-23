@@ -14,10 +14,8 @@
 package com.liferay.faces.bridge.context.internal;
 
 import java.io.IOException;
-import java.util.EmptyStackException;
 
 import javax.el.ELContext;
-import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
@@ -27,15 +25,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.tagext.BodyContent;
 
-import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementImpl;
-import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementWriter;
 import org.w3c.dom.Element;
 
+import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementImpl;
 import com.liferay.faces.bridge.taglib.liferay.internal.HtmlTopTag;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringBodyContent;
 import com.liferay.faces.util.jsp.StringJspWriter;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -63,59 +59,36 @@ public class HeadResponseWriterLiferayImpl extends HeadResponseWriterBase {
 	}
 
 	@Override
-	public void endElement(String name) throws IOException {
+	protected void addResourceToHeadSection(Element element, String nodeName) throws IOException {
+
+		// Get the underlying HttpServletRequest and HttpServletResponse
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
+		HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
+		PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
+		HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(portletResponse);
+		ELContext elContext = facesContext.getELContext();
+
+		// Invoke the Liferay HtmlTopTag class directly (rather than using liferay-util:html-top from a JSP).
+		StringJspWriter stringJspWriter = new StringJspWriter();
+		BodyContent bodyContent = new StringBodyContent(stringJspWriter);
+		String elementAsString = element.toString();
+		HtmlTopTag htmlTopTag = new HtmlTopTag();
+		PageContextAdapter pageContextAdapter = new PageContextAdapter(httpServletRequest, httpServletResponse,
+				elContext, stringJspWriter);
+		htmlTopTag.setPageContext(pageContextAdapter);
+		htmlTopTag.doStartTag();
+		bodyContent.print(elementAsString);
+		htmlTopTag.setBodyContent(bodyContent);
 
 		try {
-			ElementWriter elementWriter = elementWriterStack.pop();
-			Element element = elementWriter.getElement();
-			String nodeName = element.getNodeName();
-			logger.trace("POPPED element name=[{0}]", nodeName);
-
-			if (!StringPool.HEAD.equals(element.getNodeName())) {
-
-				// Get the underlying HttpServletRequest and HttpServletResponse
-				FacesContext facesContext = FacesContext.getCurrentInstance();
-				ExternalContext externalContext = facesContext.getExternalContext();
-				PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
-				HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(portletRequest);
-				PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
-				HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(portletResponse);
-				ELContext elContext = facesContext.getELContext();
-
-				// Invoke the Liferay HtmlTopTag class directly (rather than using liferay-util:html-top from a JSP).
-				StringJspWriter stringJspWriter = new StringJspWriter();
-				BodyContent bodyContent = new StringBodyContent(stringJspWriter);
-				String elementAsString = element.toString();
-				HtmlTopTag htmlTopTag = new HtmlTopTag();
-				PageContextAdapter pageContextAdapter = new PageContextAdapter(httpServletRequest, httpServletResponse,
-						elContext, stringJspWriter);
-				htmlTopTag.setPageContext(pageContextAdapter);
-				htmlTopTag.doStartTag();
-				bodyContent.print(elementAsString);
-				htmlTopTag.setBodyContent(bodyContent);
-
-				try {
-					htmlTopTag.doEndTag();
-				}
-				catch (Exception e) {
-					throw new IOException(e.getMessage());
-				}
-
-				logger.debug("Added resource to Liferay's <head>...</head> section, element=[{0}]", elementAsString);
-			}
+			htmlTopTag.doEndTag();
 		}
-		catch (EmptyStackException e) {
-			throw new IOException(EmptyStackException.class.getSimpleName());
+		catch (Exception e) {
+			throw new IOException(e.getMessage());
 		}
+
+		logger.debug(ADDED_RESOURCE_TO_HEAD, "Liferay", nodeName);
 	}
-
-	@Override
-	public void startElement(String name, UIComponent component) throws IOException {
-
-		Element element = createElement(name);
-		ElementWriter elementWriter = new ElementWriter(element);
-		elementWriterStack.push(elementWriter);
-		logger.trace("PUSHED element name=[{0}]", name);
-	}
-
 }
