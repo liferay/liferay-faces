@@ -12,7 +12,7 @@
 	</parent>
 
 	<artifactId>test-job-application-portlet</artifactId>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	<name>job-application-portlet integration tests</name>
 
 	<build>
