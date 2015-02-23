@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>test-FACES-1618-portlet</artifactId>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	<name>FACES-1618-portlet integration tests</name>
 
 </project>

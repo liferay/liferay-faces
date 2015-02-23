@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>test-jsf2-cdi-portlet</artifactId>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	<name>jsf2-cdi-portlet integration tests</name>
 
 </project>
