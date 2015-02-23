@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>test-icefaces4-portlet</artifactId>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	<name>icefaces4-portlet integration tests</name>
 
 </project>
