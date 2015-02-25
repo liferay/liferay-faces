@@ -38,7 +38,7 @@ import com.liferay.faces.util.event.PreRenderComponentEventListener;
 @ListenersFor(
 	{
 		@ListenerFor(systemEventClass = PreRenderComponentEvent.class),
-		@ListenerFor(systemEventClass = PostRestoreStateEvent.class),
+		@ListenerFor(systemEventClass = PostRestoreStateEvent.class)
 	}
 )
 public class InputSearch extends InputSearchBase implements ClientBehaviorHolder {
