@@ -30,6 +30,7 @@ import com.liferay.faces.util.view.facelets.MethodMetadata;
 
 /**
  * Class for managing the MethodExpression attributes
+ *
  * @author  Juan Gonzalez
  */
 public class InputSearchHandler extends ComponentHandler {
@@ -56,12 +57,12 @@ public class InputSearchHandler extends ComponentHandler {
 
 			if ((metadataTarget != null) && (metadataTarget.isTargetInstanceOf(InputSearch.class))) {
 
-				if (InputSearchRenderer.ACTION.equals(name)) {
+				if ("action".equals(name)) {
 					Method writeMethod = metadataTarget.getWriteMethod(name);
 					Class<?>[] args = new Class[] {};
 					metadata = new MethodMetadata(tagAttribute, writeMethod, args);
 				}
-				else if (InputSearchRenderer.ACTION_LISTENER.equals(name)) {
+				else if ("actionListener".equals(name)) {
 					Method writeMethod = metadataTarget.getWriteMethod(name);
 					Class<?>[] args = new Class[] { ActionEvent.class };
 					metadata = new MethodMetadata(tagAttribute, writeMethod, args);

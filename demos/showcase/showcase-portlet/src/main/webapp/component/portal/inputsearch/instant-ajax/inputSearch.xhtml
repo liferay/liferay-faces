@@ -4,17 +4,15 @@
 
 	<alloy:form>		
 		<showcase:example>
-		   <alloy:messages id="messages"/>
-			<portal:navBar>
-				<portal:navBarSearch>
-					<portal:inputSearch value="#{inputSearchBacking.searchText}">
-						<f:ajax listener="#{inputSearchBacking.ajaxSearch}" render="messages :outputModel:modelValue"/>
-					</portal:inputSearch>					
-				</portal:navBarSearch>
-			</portal:navBar>
+		<alloy:messages id="feedback" globalOnly="true" layout="table" />
+			<portal:inputSearch actionListener="#{inputSearchBacking.searchActionListener}"
+				value="#{inputSearchBacking.searchText}">
+				<f:ajax render="feedback :outputModel:modelValue" />
+			</portal:inputSearch>
 		</showcase:example>
 	</alloy:form>
 	<showcase:outputModel id="outputModel">
-				<alloy:outputText value="#{inputSearchBacking.searchText}" id="modelValue"/>
+		<alloy:outputText value="#{inputSearchBacking.searchText}" id="modelValue" />
 	</showcase:outputModel>
+
 </ui:composition>

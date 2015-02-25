@@ -150,16 +150,16 @@
 		</attributes>
 	</component>
 	<component name="InputSearch" extendsTags="Styleable UIComponentBase" handlerClass="com.liferay.faces.portal.component.inputsearch.internal.InputSearchHandler" parentClass="javax.faces.component.UIInput" rendererParentClass="com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer&lt;com.liferay.faces.portal.component.inputsearch.InputSearch, com.liferay.taglib.ui.InputSearchTag&gt;">
-		<description><![CDATA[TODO.]]></description>
+		<description><![CDATA[InputSearch is a UIInput component that renders a text field and optional button for submitting search criteria.]]></description>
 		<attributes>
 			<attribute>
-				<description><![CDATA[.]]></description>
+				<description><![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return an <code>Object</code>, and take no arguments. The <code>toString()</code> method of the returned object is used to determine where to navigate (if at all) after the action has been performed.]]></description>
 				<name>action</name>
 				<method-signature>java.lang.Object action()</method-signature>
 				<type>javax.el.MethodExpression</type>
 			</attribute>
 			<attribute>
-				<description><![CDATA[.]]></description>
+				<description><![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return <code>void</code>, and take either no arguments or one <code>ActionEvent</code> argument.]]></description>
 				<name>actionListener</name>
 				<method-signature>
 					void actionListener(javax.faces.event.ActionEvent)
@@ -168,28 +168,28 @@
 			</attribute>
 			<attribute>
 				<defaultValue>false</defaultValue>
-				<description><![CDATA[TODO.]]></description>
+				<description><![CDATA[Sets whether the search field gets focus by default. The default value is <code>false</code>.]]></description>
 				<name>autoFocus</name>
 				<type>boolean</type>
 			</attribute>
 			<attribute>
-				<description><![CDATA[TODO.]]></description>
+				<description><![CDATA[Sets the text value for the search button's label. The default value is <code>Search</code>.]]></description>
 				<name>buttonLabel</name>
 				<type>java.lang.String</type>
 			</attribute>		
 			<attribute>
-				<description><![CDATA[TODO.]]></description>
+				<description><![CDATA[Sets the placeholder text for the search field. The default value is the value of the <code>buttonLabel</code> attribute.]]></description>
 				<name>placeholder</name>
 				<type>java.lang.String</type>
 			</attribute>
 			<attribute>
 				<defaultValue>true</defaultValue>
-				<description><![CDATA[TODO.]]></description>
+				<description><![CDATA[Sets whether to show the search button. The default value is <code>true</code>.]]></description>
 				<name>showButton</name>
 				<type>boolean</type>
 			</attribute>
 			<attribute>
-				<description><![CDATA[TODO.]]></description>
+				<description><![CDATA[Sets the search box's title.]]></description>
 				<name>title</name>
 				<type>java.lang.String</type>
 			</attribute>
@@ -218,7 +218,7 @@
 		</description>
 	</component>
 	<component name="NavBarSearch" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.UIPanel" rendererParentClass="com.liferay.faces.portal.render.internal.PortalTagRenderer&lt;com.liferay.faces.portal.component.navbarsearch.NavBarSearch, com.liferay.taglib.aui.NavBarSearchTag&gt;">
-		<description><![CDATA[TODO.]]></description>
+		<description><![CDATA[NavBarSearch is a UIPanel component that is designed (for CSS purposes) to simply be the parent of an InputSearch component.]]></description>
 	</component>
 	<component name="NavItem" extendsTags="Aria Styleable UIComponentBase" parentClass="javax.faces.component.UIColumn"
 		rendererParentClass="com.liferay.faces.portal.render.internal.PortalTagRenderer&lt;com.liferay.faces.portal.component.navitem.NavItem, com.liferay.taglib.aui.NavItemTag&gt;">

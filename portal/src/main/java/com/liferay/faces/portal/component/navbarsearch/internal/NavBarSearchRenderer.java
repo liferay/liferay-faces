@@ -20,6 +20,7 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.portal.component.navbarsearch.NavBarSearch;
 import com.liferay.faces.portal.render.internal.PortalTagRenderer;
+
 import com.liferay.taglib.aui.NavBarSearchTag;
 
 

@@ -13,185 +13,91 @@
  */
 package com.liferay.faces.portal.component.inputsearch;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import javax.el.MethodExpression;
 import javax.faces.component.FacesComponent;
-import javax.faces.component.behavior.AjaxBehavior;
-import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.component.html.HtmlCommandButton;
-import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ListenerFor;
-import javax.faces.event.MethodExpressionActionListener;
+import javax.faces.event.ListenersFor;
+import javax.faces.event.PostRestoreStateEvent;
 import javax.faces.event.PreRenderComponentEvent;
+import javax.faces.render.Renderer;
 
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.event.PostRestoreStateEventListener;
+import com.liferay.faces.util.event.PreRenderComponentEventListener;
 
 
 /**
- * This component would render same markup as Liferay portal's inputSearch tag, but with some JSF features (action,
- * actionListener and AJAX events)
- *
  * @author  Juan Gonzalez
  */
 @FacesComponent(value = InputSearch.COMPONENT_TYPE)
-@ListenerFor(systemEventClass = PreRenderComponentEvent.class)
+@ListenersFor(
+	{
+		@ListenerFor(systemEventClass = PreRenderComponentEvent.class),
+		@ListenerFor(systemEventClass = PostRestoreStateEvent.class),
+	}
+)
 public class InputSearch extends InputSearchBase implements ClientBehaviorHolder {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.inputsearch.InputSearch";
 	public static final String RENDERER_TYPE =
 		"com.liferay.faces.portal.component.inputsearch.internal.InputSearchRenderer";
-	public static final String CHILD_COMPONENTS_ADDED = "childComponentsAdded";
 
-	private static Logger _logger = LoggerFactory.getLogger(InputSearch.class);
-
+	// Private Data Members
+	private String defaultEventName;
 	private Collection<String> eventNames;
 
 	public InputSearch() {
 		super();
 		setRendererType(RENDERER_TYPE);
+
+		HtmlCommandButton htmlCommandButton = new HtmlCommandButton();
+		this.defaultEventName = htmlCommandButton.getDefaultEventName();
+		this.eventNames = htmlCommandButton.getEventNames();
 	}
 
-	public void processEvent(ComponentSystemEvent event) throws AbortProcessingException {
-		super.processEvent(event);
+	@Override
+	public void processEvent(ComponentSystemEvent componentSystemEvent) throws AbortProcessingException {
 
-		//
-		// Before rendering the component we should create some "wrapped" child JSF components.
-		// We do this for maintaining the same AJAX (f:ajax)/Non AJAX (action, actionListener) behaviour
-		// In RENDER_PHASE we will move the needed attributes accordingly from the JSF markup to the portal markup
+		super.processEvent(componentSystemEvent);
 
-		Boolean added = (Boolean) this.getAttributes().get(CHILD_COMPONENTS_ADDED);
+		if (componentSystemEvent instanceof PostRestoreStateEvent) {
 
-		if (!(event instanceof PreRenderComponentEvent) || ((added != null) && added.booleanValue())) {
-			return;
-		}
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			Renderer renderer = getRenderer(facesContext);
 
-		HtmlInputText inputText = createHtmlInputText(getFacesContext());
+			if (renderer instanceof PostRestoreStateEventListener) {
 
-		HtmlCommandButton button = createHtmlCommandButton(getFacesContext(), getAction(), getActionListener());
-
-		Map<String, List<ClientBehavior>> clientBehaviours = this.getClientBehaviors();
-
-		Set<String> client = clientBehaviours.keySet();
-
-		boolean hasButtonAjaxBehaviour = false;
-
-		for (String key : client) {
-
-			List<ClientBehavior> clients = clientBehaviours.get(key);
-
-			if (!key.equals("search")) {
-
-				for (ClientBehavior clientBehavior : clients) {
-					inputText.addClientBehavior(key, clientBehavior);
-				}
-			}
-			else {
-
-				// If event is "search" (default) then if would act as button "action"
-
-				for (ClientBehavior clientBehavior : clients) {
-
-					if (clientBehavior instanceof AjaxBehavior) {
-
-						hasButtonAjaxBehaviour = true;
-
-						// As the JSF tag is an inputText and the action tag is a button,
-						// we have to add the inputText as another element to execute
-						AjaxBehavior ajaxBehavior = (AjaxBehavior) clientBehavior;
-						String id = this.getId();
-						Collection<String> execute = new ArrayList<String>();
-						execute.addAll(ajaxBehavior.getExecute());
-
-						if (execute.contains("@this") || !execute.contains(id)) {
-							execute.add(id);
-							ajaxBehavior.setExecute(execute);
-						}
-
-						// As the JSF tag is an inputText and the action tag is a button,
-						// we have to add the inputText as another element to render, only
-						// in case of @this
-						Collection<String> render = new ArrayList<String>();
-						render.addAll(ajaxBehavior.getRender());
-
-						if (render.contains("@this")) {
-							render.remove("@this");
-							render.add(id);
-							ajaxBehavior.setRender(render);
-						}
-					}
-
-					button.addClientBehavior("action", clientBehavior);
-				}
+				PostRestoreStateEventListener postRestoreStateEventListener = (PostRestoreStateEventListener) renderer;
+				postRestoreStateEventListener.processEvent((PostRestoreStateEvent) componentSystemEvent);
 			}
 		}
+		else if (componentSystemEvent instanceof PreRenderComponentEvent) {
 
-		if (!isShowButton() && (hasButtonAjaxBehaviour || (getAction() != null) || (getActionListener() != null))) {
-			_logger.warn(
-				"'showButton' should be true when using action, actionListener or ajax in this component. A similar button will be added anyway");
-			button.setStyleClass("btn btn-default");
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			Renderer renderer = getRenderer(facesContext);
 
-			String label = getButtonLabel();
+			if (renderer instanceof PreRenderComponentEventListener) {
 
-			if (label != null) {
-				button.setValue(label);
+				PreRenderComponentEventListener preRenderComponentEventListener = (PreRenderComponentEventListener)
+					renderer;
+				preRenderComponentEventListener.processEvent((PreRenderComponentEvent) componentSystemEvent);
 			}
-
-			button.setType("submit");
 		}
-
-		this.getChildren().add(inputText);
-		this.getChildren().add(button);
 	}
 
-	protected HtmlCommandButton createHtmlCommandButton(FacesContext facesContext, MethodExpression action,
-		MethodExpression listener) {
-		HtmlCommandButton button = (HtmlCommandButton) facesContext.getApplication().createComponent(
-				HtmlCommandButton.COMPONENT_TYPE);
-
-		if (action != null) {
-			button.setActionExpression(action);
-		}
-
-		if (listener != null) {
-			button.addActionListener(new MethodExpressionActionListener(listener));
-		}
-
-		return button;
-	}
-
-	protected HtmlInputText createHtmlInputText(final FacesContext facesContext) {
-		HtmlInputText inputText = (HtmlInputText) facesContext.getApplication().createComponent(
-				HtmlInputText.COMPONENT_TYPE);
-
-		return inputText;
-	}
-
+	@Override
 	public String getDefaultEventName() {
-		return "search";
+		return defaultEventName;
 	}
 
 	@Override
 	public Collection<String> getEventNames() {
-
-		if (eventNames == null) {
-			eventNames = new ArrayList<String>();
-			eventNames.addAll(new HtmlInputText().getEventNames());
-			eventNames.add("search");
-			eventNames = Collections.unmodifiableCollection(eventNames);
-		}
-
 		return eventNames;
 	}
 }

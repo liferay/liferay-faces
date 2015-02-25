@@ -5,9 +5,8 @@
 	<alloy:form>
 		<alloy:messages globalOnly="true" layout="table" />
 		<showcase:example>
-			<portal:inputSearch value="#{inputSearchBacking.searchText}"
-				actionListener="#{inputSearchBacking.searchActionListener}" buttonLabel="#{i18n['submit-search']}"
-				placeholder="#{i18n['enter-your-search-here']}" />
+			<portal:inputSearch value="#{inputSearchBacking.searchText}" placeholder="#{i18n['search']}"
+				showButton="false" />
 		</showcase:example>
 	</alloy:form>
 	<showcase:outputModel id="outputModel">

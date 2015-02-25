@@ -5,9 +5,13 @@
 	<alloy:form>
 		<alloy:messages globalOnly="true" layout="table" />
 		<showcase:example>
-			<portal:inputSearch value="#{inputSearchBacking.searchText}"
-				actionListener="#{inputSearchBacking.searchActionListener}" buttonLabel="#{i18n['submit-search']}"
-				placeholder="#{i18n['enter-your-search-here']}" />
+			<portal:navBar>
+				<portal:navBarSearch styleClass="pull-right">
+					<portal:inputSearch value="#{inputSearchBacking.searchText}"
+						actionListener="#{inputSearchBacking.searchActionListener}"
+						buttonLabel="#{i18n['search']}" placeholder="#{i18n['enter-your-search-here']}" />
+				</portal:navBarSearch>
+			</portal:navBar>			
 		</showcase:example>
 	</alloy:form>
 	<showcase:outputModel id="outputModel">

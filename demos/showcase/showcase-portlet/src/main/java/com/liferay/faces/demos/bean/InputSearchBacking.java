@@ -18,7 +18,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.PhaseId;
 
 import com.liferay.faces.util.logging.Logger;
@@ -47,24 +46,12 @@ public class InputSearchBacking {
 				phaseName + " phase of the JSF lifecycle.");
 		facesContext.addMessage(null, facesMessage);
 	}
-	
-	public void ajaxSearch(AjaxBehaviorEvent ajaxEvent) {
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		PhaseId phaseId = facesContext.getCurrentPhaseId();
-		logger.debug("ajaxSearch: phaseId=[{0}]", phaseId.toString());
-
-		String phaseName = phaseId.getName();
-		FacesMessage facesMessage = new FacesMessage("The ajaxSearch method was called during the " +
-				phaseName + " phase of the JSF lifecycle.");
-		facesContext.addMessage(null, facesMessage);
-	}
 
 	public String getSearchText() {
 		return searchText;
 	}
 
 	public void setSearchText(String searchText) {
-		this.searchText =searchText;
+		this.searchText = searchText;
 	}
 }
