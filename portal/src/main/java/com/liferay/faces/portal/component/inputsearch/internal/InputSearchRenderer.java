@@ -268,7 +268,7 @@ public class InputSearchRenderer extends DelayedPortalTagRenderer<InputSearch, I
 				logger.error("Set showButton=\"true\" when using action/actionListener or f:ajax.");
 			}
 
-			facesContext.getViewRoot().markInitialState();
+			inputSearch.markInitialState();
 		}
 
 	}
