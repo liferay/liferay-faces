@@ -26,6 +26,14 @@
 	</profiles>
 
 	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-install-plugin</artifactId>
+				<configuration>
+					<skip>false</skip>
+				</configuration>
+			</plugin>
+		</plugins>
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>

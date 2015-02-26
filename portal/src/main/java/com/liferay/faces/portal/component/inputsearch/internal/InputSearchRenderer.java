@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.portal.component.inputsearch.internal;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -29,18 +30,19 @@ import javax.faces.component.html.HtmlCommandButton;
 import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.MethodExpressionActionListener;
-import javax.faces.event.PostRestoreStateEvent;
 import javax.faces.event.PreRenderComponentEvent;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.portal.component.inputsearch.InputSearch;
 import com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer;
-import com.liferay.faces.util.event.PostRestoreStateEventListener;
 import com.liferay.faces.util.event.PreRenderComponentEventListener;
+import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.render.internal.RendererUtil;
 
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
@@ -67,7 +69,7 @@ import com.liferay.taglib.ui.InputSearchTag;
 @FacesRenderer(componentFamily = InputSearch.COMPONENT_FAMILY, rendererType = InputSearch.RENDERER_TYPE)
 //J+
 public class InputSearchRenderer extends DelayedPortalTagRenderer<InputSearch, InputSearchTag>
-	implements PreRenderComponentEventListener, PostRestoreStateEventListener {
+	implements PreRenderComponentEventListener {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(InputSearchRenderer.class);
@@ -75,12 +77,36 @@ public class InputSearchRenderer extends DelayedPortalTagRenderer<InputSearch, I
 	@Override
 	public void decode(FacesContext facesContext, UIComponent uiComponent) {
 
+		RendererUtil.decodeClientBehaviors(facesContext, uiComponent);
+
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
 		String clientId = uiComponent.getClientId();
 		String submittedValue = requestParameterMap.get(clientId);
 		InputSearch inputSearch = cast(uiComponent);
 		inputSearch.setSubmittedValue(submittedValue);
+	}
+
+	@Override
+	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		responseWriter.startElement(StringPool.DIV, uiComponent);
+		responseWriter.writeAttribute(StringPool.CLASS, "form-search", StringPool.CLASS);
+
+		// Delegate to PortalTagRenderer so that the JSP tag output will get encoded.
+		super.encodeBegin(facesContext, uiComponent);
+	}
+
+	@Override
+	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+
+		// Delegate to PortalTagRenderer so that the JSP tag output will get encoded.
+		super.encodeEnd(facesContext, uiComponent);
+
+		// Encode the closing </div> element
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		responseWriter.endElement(StringPool.DIV);
 	}
 
 	@Override
@@ -94,13 +120,37 @@ public class InputSearchRenderer extends DelayedPortalTagRenderer<InputSearch, I
 	}
 
 	@Override
-	public void processEvent(PostRestoreStateEvent postRestoreStateEvent) throws AbortProcessingException {
-		dynamicallyAddChildComponents((InputSearch) postRestoreStateEvent.getComponent());
-	}
-
-	@Override
 	protected InputSearch cast(UIComponent uiComponent) {
 		return (InputSearch) uiComponent;
+	}
+
+	protected void changeClientBehaviorIds(ClientBehavior clientBehavior, String id) {
+
+		// Determine whether or not the developer added an f:ajax child tag.
+		if (clientBehavior instanceof AjaxBehavior) {
+
+			// Add the element Id to the list of components that participate in the "execute" portion
+			// of the JSF partial request lifecycle.
+			AjaxBehavior ajaxBehavior = (AjaxBehavior) clientBehavior;
+			Collection<String> execute = new ArrayList<String>();
+			execute.addAll(ajaxBehavior.getExecute());
+
+			if (execute.contains("@this") || !execute.contains(id)) {
+				execute.add(id);
+				ajaxBehavior.setExecute(execute);
+			}
+
+			// Add the element Id to the list of components that participate in the "render" portion
+			// of the JSF partial request lifecycle.
+			Collection<String> render = new ArrayList<String>();
+			render.addAll(ajaxBehavior.getRender());
+
+			if (render.contains("@this")) {
+				render.remove("@this");
+				render.add(id);
+				ajaxBehavior.setRender(render);
+			}
+		}
 	}
 
 	@Override
@@ -146,15 +196,14 @@ public class InputSearchRenderer extends DelayedPortalTagRenderer<InputSearch, I
 			// Dynamically create the HtmlInputText JSF child
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Application application = facesContext.getApplication();
+
 			HtmlInputText htmlInputText = (HtmlInputText) application.createComponent(HtmlInputText.COMPONENT_TYPE);
 			children.add(htmlInputText);
-			htmlInputText.setId("htmlInputText");
 
 			// Dynamically create the HtmlCommandButton JSF child and set JSF attributes accordingly.
 			HtmlCommandButton htmlCommandButton = (HtmlCommandButton) application.createComponent(
 					HtmlCommandButton.COMPONENT_TYPE);
 			children.add(htmlCommandButton);
-			htmlCommandButton.setId("htmlCommandButton");
 
 			MethodExpression action = inputSearch.getAction();
 
@@ -193,34 +242,9 @@ public class InputSearchRenderer extends DelayedPortalTagRenderer<InputSearch, I
 					// For each client behavior associated with the "action" event:
 					for (ClientBehavior clientBehavior : clientBehaviors) {
 
-						// Determine whether or not the developer added an f:ajax child tag.
-						if (clientBehavior instanceof AjaxBehavior) {
+						hasButtonAjaxBehavior = true;
 
-							hasButtonAjaxBehavior = true;
-
-							// Add the InputSearch to the list of components that participate in the "execute" portion
-							// of the JSF partial request lifecycle.
-							AjaxBehavior ajaxBehavior = (AjaxBehavior) clientBehavior;
-							String inputSearchId = inputSearch.getId();
-							Collection<String> execute = new ArrayList<String>();
-							execute.addAll(ajaxBehavior.getExecute());
-
-							if (execute.contains("@this") || !execute.contains(inputSearchId)) {
-								execute.add(inputSearchId);
-								ajaxBehavior.setExecute(execute);
-							}
-
-							// Add the InputSearch to the list of components that participate in the "render" portion
-							// of the JSF partial request lifecycle.
-							Collection<String> render = new ArrayList<String>();
-							render.addAll(ajaxBehavior.getRender());
-
-							if (render.contains("@this")) {
-								render.remove("@this");
-								render.add(inputSearchId);
-								ajaxBehavior.setRender(render);
-							}
-						}
+						changeClientBehaviorIds(clientBehavior, inputSearch.getId());
 
 						htmlCommandButton.addClientBehavior(defaultEventName, clientBehavior);
 					}
@@ -231,6 +255,8 @@ public class InputSearchRenderer extends DelayedPortalTagRenderer<InputSearch, I
 				else {
 
 					for (ClientBehavior clientBehavior : clientBehaviors) {
+						changeClientBehaviorIds(clientBehavior, inputSearch.getId());
+
 						htmlInputText.addClientBehavior(eventName, clientBehavior);
 					}
 				}
@@ -241,7 +267,10 @@ public class InputSearchRenderer extends DelayedPortalTagRenderer<InputSearch, I
 			if (!showButton && (hasButtonAjaxBehavior || (action != null) || (actionListener != null))) {
 				logger.error("Set showButton=\"true\" when using action/actionListener or f:ajax.");
 			}
+
+			facesContext.getViewRoot().markInitialState();
 		}
+
 	}
 
 	@Override

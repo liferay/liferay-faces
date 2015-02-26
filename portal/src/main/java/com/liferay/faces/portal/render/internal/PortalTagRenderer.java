@@ -31,12 +31,10 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.Tag;
 
-import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.portal.ScriptTagUtil;
 import com.liferay.faces.util.render.internal.RendererUtil;
-
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PortalUtil;
 
@@ -211,8 +209,6 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 		}
 
 		// Return the tag output.
-		PortalTagOutput portalTagOutput = portalTagOutputParser.parse(pageContextAdapter);
-
-		return portalTagOutput;
+		return portalTagOutputParser.parse(pageContextAdapter);
 	}
 }
