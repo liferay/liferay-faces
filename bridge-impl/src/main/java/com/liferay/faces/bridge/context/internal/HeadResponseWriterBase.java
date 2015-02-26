@@ -19,7 +19,6 @@ import java.util.EmptyStackException;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
-import javax.faces.context.ResponseWriterWrapper;
 
 import org.w3c.dom.Element;
 
@@ -94,7 +93,7 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 		}
 	}
 
-	// In order to stay compatible with JSF1, must not specify @Override annotation
+	@Override
 	public void endCDATA() throws IOException {
 
 		try {
@@ -121,7 +120,7 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 		}
 	}
 
-	// In order to stay compatible with JSF1, must not specify @Override annotation
+	@Override
 	public void startCDATA() throws IOException {
 
 		try {
@@ -280,35 +279,28 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 	@Override
 	public void writeURIAttribute(String name, Object value, String property) throws IOException {
 
-		String escapedURI = null;
-
 		if (value != null) {
-			escapedURI = escapeURI(value.toString());
+			value = escapeURI(value.toString());
 		}
 
-		writeAttribute(name, escapedURI, property);
+		writeAttribute(name, value, property);
 	}
 
-	private String escapeURI(String text) {
+	protected String escapeURI(String uri) {
 
-		if (text == null) {
-			return null;
-		}
-
-		if (text.length() == 0) {
+		if (uri.length() == 0) {
 			return StringPool.BLANK;
 		}
 
 		// Escape using XSS recommendations from
 		// http://www.owasp.org/index.php/Cross_Site_Scripting#How_to_Protect_Yourself
-
 		StringBuilder sb = null;
 
 		int lastReplacementIndex = 0;
 
-		for (int i = 0; i < text.length(); i++) {
-			char c = text.charAt(i);
+		for (int i = 0; i < uri.length(); i++) {
 
+			char c = uri.charAt(i);
 			String replacement = null;
 
 			switch (c) {
@@ -344,8 +336,6 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 			}
 
 			case '\u00bb': {
-
-				// '�'
 				replacement = "&#187;";
 
 				break;
@@ -371,7 +361,7 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 				}
 
 				if (i > lastReplacementIndex) {
-					sb.append(text.substring(lastReplacementIndex, i));
+					sb.append(uri.substring(lastReplacementIndex, i));
 				}
 
 				sb.append(replacement);
@@ -381,11 +371,11 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 		}
 
 		if (sb == null) {
-			return text;
+			return uri;
 		}
 
-		if (lastReplacementIndex < text.length()) {
-			sb.append(text.substring(lastReplacementIndex));
+		if (lastReplacementIndex < uri.length()) {
+			sb.append(uri.substring(lastReplacementIndex));
 		}
 
 		return sb.toString();
