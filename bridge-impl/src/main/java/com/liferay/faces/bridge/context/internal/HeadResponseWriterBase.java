@@ -21,10 +21,10 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 import javax.faces.context.ResponseWriterWrapper;
 
-import com.liferay.faces.bridge.context.HeadResponseWriter;
-import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementWriterStack;
 import org.w3c.dom.Element;
 
+import com.liferay.faces.bridge.context.HeadResponseWriter;
+import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementWriterStack;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -280,9 +280,115 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 	@Override
 	public void writeURIAttribute(String name, Object value, String property) throws IOException {
 
-		// Mojarra only treats this differently if it's a javascript: URL, which should never be the case for
-		// the <head>...</head> section of a page, so just pass-thru to the writeAttribute method.
-		writeAttribute(name, value, property);
+		String escapedURI = null;
+
+		if (value != null) {
+			escapedURI = escapeURI(value.toString());
+		}
+
+		writeAttribute(name, escapedURI, property);
+	}
+
+	private String escapeURI(String text) {
+
+		if (text == null) {
+			return null;
+		}
+
+		if (text.length() == 0) {
+			return StringPool.BLANK;
+		}
+
+		// Escape using XSS recommendations from
+		// http://www.owasp.org/index.php/Cross_Site_Scripting#How_to_Protect_Yourself
+
+		StringBuilder sb = null;
+
+		int lastReplacementIndex = 0;
+
+		for (int i = 0; i < text.length(); i++) {
+			char c = text.charAt(i);
+
+			String replacement = null;
+
+			switch (c) {
+
+			case '<': {
+				replacement = "&lt;";
+
+				break;
+			}
+
+			case '>': {
+				replacement = "&gt;";
+
+				break;
+			}
+
+			case '&': {
+				replacement = "&amp;";
+
+				break;
+			}
+
+			case '"': {
+				replacement = "&#034;";
+
+				break;
+			}
+
+			case '\'': {
+				replacement = "&#039;";
+
+				break;
+			}
+
+			case '\u00bb': {
+
+				// '�'
+				replacement = "&#187;";
+
+				break;
+			}
+
+			case '\u2013': {
+				replacement = "&#x2013;";
+
+				break;
+			}
+
+			case '\u2014': {
+				replacement = "&#x2014;";
+
+				break;
+			}
+			}
+
+			if (replacement != null) {
+
+				if (sb == null) {
+					sb = new StringBuilder();
+				}
+
+				if (i > lastReplacementIndex) {
+					sb.append(text.substring(lastReplacementIndex, i));
+				}
+
+				sb.append(replacement);
+
+				lastReplacementIndex = i + 1;
+			}
+		}
+
+		if (sb == null) {
+			return text;
+		}
+
+		if (lastReplacementIndex < text.length()) {
+			sb.append(text.substring(lastReplacementIndex));
+		}
+
+		return sb.toString();
 	}
 
 	@Override
