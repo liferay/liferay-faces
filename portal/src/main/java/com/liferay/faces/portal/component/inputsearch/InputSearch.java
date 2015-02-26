@@ -23,11 +23,9 @@ import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.ListenersFor;
-import javax.faces.event.PostRestoreStateEvent;
 import javax.faces.event.PreRenderComponentEvent;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.util.event.PostRestoreStateEventListener;
 import com.liferay.faces.util.event.PreRenderComponentEventListener;
 
 
@@ -37,8 +35,7 @@ import com.liferay.faces.util.event.PreRenderComponentEventListener;
 @FacesComponent(value = InputSearch.COMPONENT_TYPE)
 @ListenersFor(
 	{
-		@ListenerFor(systemEventClass = PreRenderComponentEvent.class),
-		@ListenerFor(systemEventClass = PostRestoreStateEvent.class)
+		@ListenerFor(systemEventClass = PreRenderComponentEvent.class)
 	}
 )
 public class InputSearch extends InputSearchBase implements ClientBehaviorHolder {
@@ -66,18 +63,7 @@ public class InputSearch extends InputSearchBase implements ClientBehaviorHolder
 
 		super.processEvent(componentSystemEvent);
 
-		if (componentSystemEvent instanceof PostRestoreStateEvent) {
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			Renderer renderer = getRenderer(facesContext);
-
-			if (renderer instanceof PostRestoreStateEventListener) {
-
-				PostRestoreStateEventListener postRestoreStateEventListener = (PostRestoreStateEventListener) renderer;
-				postRestoreStateEventListener.processEvent((PostRestoreStateEvent) componentSystemEvent);
-			}
-		}
-		else if (componentSystemEvent instanceof PreRenderComponentEvent) {
+		if (componentSystemEvent instanceof PreRenderComponentEvent) {
 
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Renderer renderer = getRenderer(facesContext);
