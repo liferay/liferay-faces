@@ -33,7 +33,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.MethodExpressionActionListener;
-import javax.faces.event.PostRestoreStateEvent;
 import javax.faces.event.PreRenderComponentEvent;
 import javax.faces.render.FacesRenderer;
 
@@ -123,6 +122,35 @@ public class InputSearchRenderer extends DelayedPortalTagRenderer<InputSearch, I
 	@Override
 	protected InputSearch cast(UIComponent uiComponent) {
 		return (InputSearch) uiComponent;
+	}
+
+	protected void changeClientBehaviorIds(ClientBehavior clientBehavior, String id) {
+
+		// Determine whether or not the developer added an f:ajax child tag.
+		if (clientBehavior instanceof AjaxBehavior) {
+
+			// Add the element Id to the list of components that participate in the "execute" portion
+			// of the JSF partial request lifecycle.
+			AjaxBehavior ajaxBehavior = (AjaxBehavior) clientBehavior;
+			Collection<String> execute = new ArrayList<String>();
+			execute.addAll(ajaxBehavior.getExecute());
+
+			if (execute.contains("@this") || !execute.contains(id)) {
+				execute.add(id);
+				ajaxBehavior.setExecute(execute);
+			}
+
+			// Add the element Id to the list of components that participate in the "render" portion
+			// of the JSF partial request lifecycle.
+			Collection<String> render = new ArrayList<String>();
+			render.addAll(ajaxBehavior.getRender());
+
+			if (render.contains("@this")) {
+				render.remove("@this");
+				render.add(id);
+				ajaxBehavior.setRender(render);
+			}
+		}
 	}
 
 	@Override
@@ -216,7 +244,7 @@ public class InputSearchRenderer extends DelayedPortalTagRenderer<InputSearch, I
 
 						hasButtonAjaxBehavior = true;
 
-						RendererUtil.changeClientBehaviorIds(clientBehavior, inputSearch.getId());
+						changeClientBehaviorIds(clientBehavior, inputSearch.getId());
 
 						htmlCommandButton.addClientBehavior(defaultEventName, clientBehavior);
 					}
@@ -227,7 +255,7 @@ public class InputSearchRenderer extends DelayedPortalTagRenderer<InputSearch, I
 				else {
 
 					for (ClientBehavior clientBehavior : clientBehaviors) {
-						RendererUtil.changeClientBehaviorIds(clientBehavior, inputSearch.getId());
+						changeClientBehaviorIds(clientBehavior, inputSearch.getId());
 
 						htmlInputText.addClientBehavior(eventName, clientBehavior);
 					}

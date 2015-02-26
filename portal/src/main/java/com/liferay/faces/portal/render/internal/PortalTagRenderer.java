@@ -14,13 +14,10 @@
 package com.liferay.faces.portal.render.internal;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.el.ELContext;
 import javax.faces.component.UIComponent;
-import javax.faces.component.behavior.ClientBehavior;
-import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.PartialViewContext;
@@ -34,7 +31,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.Tag;
 
-import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.portal.ScriptTagUtil;
@@ -213,8 +209,6 @@ public abstract class PortalTagRenderer<U extends UIComponent, T extends Tag> ex
 		}
 
 		// Return the tag output.
-		PortalTagOutput portalTagOutput = portalTagOutputParser.parse(pageContextAdapter);
-
-		return portalTagOutput;
+		return portalTagOutputParser.parse(pageContextAdapter);
 	}
 }

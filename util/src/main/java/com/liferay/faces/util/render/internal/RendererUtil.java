@@ -14,13 +14,10 @@
 package com.liferay.faces.util.render.internal;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
-import javax.faces.component.behavior.AjaxBehavior;
 import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.context.FacesContext;
@@ -63,35 +60,6 @@ public class RendererUtil {
 	private static final char[] _HEX_DIGITS = {
 			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
 		};
-
-	public static void changeClientBehaviorIds(ClientBehavior clientBehavior, String id) {
-
-		// Determine whether or not the developer added an f:ajax child tag.
-		if (clientBehavior instanceof AjaxBehavior) {
-
-			// Add the element Id to the list of components that participate in the "execute" portion
-			// of the JSF partial request lifecycle.
-			AjaxBehavior ajaxBehavior = (AjaxBehavior) clientBehavior;
-			Collection<String> execute = new ArrayList<String>();
-			execute.addAll(ajaxBehavior.getExecute());
-
-			if (execute.contains("@this") || !execute.contains(id)) {
-				execute.add(id);
-				ajaxBehavior.setExecute(execute);
-			}
-
-			// Add the element Id to the list of components that participate in the "render" portion
-			// of the JSF partial request lifecycle.
-			Collection<String> render = new ArrayList<String>();
-			render.addAll(ajaxBehavior.getRender());
-
-			if (render.contains("@this")) {
-				render.remove("@this");
-				render.add(id);
-				ajaxBehavior.setRender(render);
-			}
-		}
-	}
 
 	public static void decodeClientBehaviors(FacesContext facesContext, UIComponent uiComponent) {
 
@@ -287,10 +255,6 @@ public class RendererUtil {
 
 	public static String getAlloyBeginScript(FacesContext facesContext, String[] modules) {
 		return getAlloyBeginScript(facesContext, modules, null);
-	}
-
-	public static String getAlloyBeginScript(String[] modules, float browserMajorVersion, boolean browserIE) {
-		return getAlloyBeginScript(modules, null, browserMajorVersion, browserIE);
 	}
 
 	public static String getAlloyBeginScript(FacesContext facesContext, String[] modules, String config) {
