@@ -68,7 +68,12 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 	private static final Logger logger = LoggerFactory.getLogger(HeadRendererBridgeImpl.class);
 
 	@Override
-	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
+		// no-op because Portlets are forbidden from rendering the <head>...</head> section.
+	}
+
+	@Override
+	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		// Build up a list of components that are intended for the <head> section of the portal page.
 		PortletNamingContainerUIViewRoot uiViewRoot = (PortletNamingContainerUIViewRoot) facesContext.getViewRoot();
@@ -294,6 +299,8 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 
 			}
 
+			super.encodeChildren(facesContext, uiComponent);
+
 			// Restore the temporary ResponseWriter reference.
 			facesContext.setResponseWriter(responseWriterBackup);
 		}
@@ -321,6 +328,11 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 			}
 		}
 
+	}
+
+	@Override
+	public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
+		// no-op because Portlets are forbidden from rendering the <head>...</head> section.
 	}
 
 	protected List<UIComponent> getFirstResources(FacesContext facesContext, UIComponent uiComponent) {
@@ -363,5 +375,10 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 		}
 
 		return resources;
+	}
+
+	@Override
+	public boolean getRendersChildren() {
+		return true;
 	}
 }
