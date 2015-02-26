@@ -44,11 +44,8 @@ import com.liferay.faces.util.product.ProductMap;
  *
  *   <tbody>
  *     <tr>
- *       <td>com.liferay.faces.bridge.bean.MojarraInjectionProvider</td>
+ *       <td>com.liferay.faces.bridge.bean.internal.MojarraInjectionProvider.</td>
  *       <td>Singleton instance of the Mojarra injection provider.</td>
- *     </tr>
- *     <tr>
- *       <td>com.liferay.faces.bridge.context.</td>
  *     </tr>
  *   </tbody>
  * </table>
