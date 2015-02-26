@@ -14,10 +14,13 @@
 package com.liferay.faces.portal.render.internal;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.el.ELContext;
 import javax.faces.component.UIComponent;
+import javax.faces.component.behavior.ClientBehavior;
+import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.PartialViewContext;
@@ -36,7 +39,6 @@ import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringJspWriter;
 import com.liferay.faces.util.portal.ScriptTagUtil;
 import com.liferay.faces.util.render.internal.RendererUtil;
-
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PortalUtil;
 
