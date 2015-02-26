@@ -61,13 +61,13 @@
 								<p:message id="cityMessage" for="city" />
 							</alloy:field>
 							<alloy:field id="provinceIdField" label="#{i18n['state-province']}">
-								<h:selectOneMenu id="provinceId" label="#{i18n['state-province']}" required="true"
+								<p:selectOneMenu id="provinceId" label="#{i18n['state-province']}" required="true"
 									value="#{applicantModelBean.provinceId}">
 									<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
 									<f:selectItems itemValue="#{province.provinceId}" itemLabel="#{province.provinceName}"
 										value="#{listModelBean.provinces}" var="province" />
 									<p:ajax update="provinceIdField" />
-								</h:selectOneMenu>
+								</p:selectOneMenu>
 								<p:message id="provinceIdMessage" for="provinceId" />
 							</alloy:field>
 							<alloy:field id="postalCodeField" label="#{i18n['zip-postal']}">
@@ -85,15 +85,13 @@
 					<alloy:row>
 						<alloy:column>
 							<alloy:field id="commentsField" label="#{i18n['comments']}">
-								<h:panelGroup id="showHide" layout="block">									
-									<h:commandLink actionListener="#{applicantViewBean.toggleComments}"
-										rendered="#{!applicantViewBean.commentsRendered}" value="#{i18n['show']} #{i18n['comments']}">
-										<p:ajax update="commentsField"/>
-									</h:commandLink>
-									<h:commandLink actionListener="#{applicantViewBean.toggleComments}"
-										rendered="#{applicantViewBean.commentsRendered}" value="#{i18n['hide']} #{i18n['comments']}">
-										<p:ajax update="commentsField"/>
-									</h:commandLink>
+								<h:panelGroup id="showHide" layout="block">
+									<p:commandLink actionListener="#{applicantViewBean.toggleComments}"
+										immediate="true" rendered="#{!applicantViewBean.commentsRendered}"
+										value="#{i18n['show']} #{i18n['comments']}" update="commentsField" />
+									<p:commandLink actionListener="#{applicantViewBean.toggleComments}"
+										immediate="true" rendered="#{applicantViewBean.commentsRendered}"
+										value="#{i18n['hide']} #{i18n['comments']}" update="commentsField" />
 								</h:panelGroup>
 								<p:inputTextarea id="comments" cols="50" rows="10" rendered="#{applicantViewBean.commentsRendered}"
 									value="#{applicantModelBean.comments}">
