@@ -30,11 +30,38 @@ public class PortletContainerDetector {
 	private static final String PLUTO_PACKAGE_NAMESPACE = "org.apache.pluto";
 
 	/**
-	 * Determines whether or not the specified {@link PortletResponse} is one created by Liferay Portal. If the
-	 * specified {@link PortletResponse} is an instance of {@link javax.portlet.filter.PortletResponseWrapper} then it
-	 * will work with the wrapped {@link PortletResponse}.
+	 * Determines whether or not the specified {@link javax.portlet.PortletResponse} is one created by Liferay Portal.
+	 * If the specified {@link javax.portlet.PortletResponse} is an instance of {@link
+	 * javax.portlet.filter.PortletResponseWrapper} then it will work with the wrapped {@link
+	 * javax.portlet.PortletResponse}.
 	 *
-	 * @param   portletResponse  The current {@link PortletResponse}.
+	 * @param   portletResponse  The current {@link javax.portlet.PortletResponse}.
+	 *
+	 * @return  true if the specified portletRequest was created by Liferay Portal.
+	 */
+	public static boolean isLiferayPortletResponse(PortletResponse portletResponse) {
+
+		if (portletResponse != null) {
+
+			while (portletResponse instanceof PortletResponseWrapper) {
+				PortletResponseWrapper portletResponseWrapper = (PortletResponseWrapper) portletResponse;
+				portletResponse = portletResponseWrapper.getResponse();
+			}
+
+			return portletResponse.getClass().getName().startsWith(LiferayConstants.PACKAGE_NAMESPACE);
+		}
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 * Determines whether or not the specified {@link javax.portlet.PortletResponse} is one created by Liferay Portal.
+	 * If the specified {@link javax.portlet.PortletResponse} is an instance of {@link
+	 * javax.portlet.filter.PortletResponseWrapper} then it will work with the wrapped {@link
+	 * javax.portlet.PortletResponse}.
+	 *
+	 * @param   portletResponse  The current {@link javax.portlet.PortletResponse}.
 	 *
 	 * @return  true if the specified portletResponse was created by Pluto.
 	 */
@@ -55,11 +82,12 @@ public class PortletContainerDetector {
 	}
 
 	/**
-	 * Determines whether or not the specified {@link PortletRequest} is one created by Liferay Portal. If the specified
-	 * {@link PortletRequest} is an instance of {@link PortletRequestWrapper} then it will work with the wrapped {@link
-	 * PortletRequest}.
+	 * Determines whether or not the specified {@link javax.portlet.PortletRequest} is one created by Liferay Portal. If
+	 * the specified {@link javax.portlet.PortletRequest} is an instance of {@link
+	 * javax.portlet.filter.PortletRequestWrapper} then it will work with the wrapped {@link
+	 * javax.portlet.PortletRequest}.
 	 *
-	 * @param   portletRequest  The current {@link PortletRequest}.
+	 * @param   portletRequest  The current {@link javax.portlet.PortletRequest}.
 	 *
 	 * @return  true if the specified portletRequest was created by Liferay Portal.
 	 */
@@ -80,11 +108,12 @@ public class PortletContainerDetector {
 	}
 
 	/**
-	 * Determines whether or not the specified {@link PortletRequest} is one created by Liferay Portal. If the specified
-	 * {@link PortletRequest} is an instance of {@link PortletRequestWrapper} then it will work with the wrapped {@link
-	 * PortletRequest}.
+	 * Determines whether or not the specified {@link javax.portlet.PortletRequest} is one created by Liferay Portal. If
+	 * the specified {@link javax.portlet.PortletRequest} is an instance of {@link
+	 * javax.portlet.filter.PortletRequestWrapper} then it will work with the wrapped {@link
+	 * javax.portlet.PortletRequest}.
 	 *
-	 * @param   portletRequest  The current {@link PortletRequest}.
+	 * @param   portletRequest  The current {@link javax.portlet.PortletRequest}.
 	 *
 	 * @return  true if the specified portletRequest was created by Pluto.
 	 */
