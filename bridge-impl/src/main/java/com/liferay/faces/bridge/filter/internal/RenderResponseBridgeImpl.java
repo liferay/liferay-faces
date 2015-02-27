@@ -13,8 +13,14 @@
  */
 package com.liferay.faces.bridge.filter.internal;
 
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
 import javax.portlet.RenderResponse;
 import javax.portlet.filter.RenderResponseWrapper;
+
+import com.liferay.faces.bridge.config.internal.PortletConfigParam;
+import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.internal.BridgeConstants;
 
 
 /**
@@ -24,6 +30,7 @@ public class RenderResponseBridgeImpl extends RenderResponseWrapper {
 
 	// Private Data Members
 	private String namespace;
+	private String namespaceWSRP;
 
 	public RenderResponseBridgeImpl(RenderResponse renderResponse) {
 		super(renderResponse);
@@ -33,9 +40,40 @@ public class RenderResponseBridgeImpl extends RenderResponseWrapper {
 	public String getNamespace() {
 
 		if (namespace == null) {
-			namespace = PortletResponseUtil.getNamespace(getResponse());
+
+			namespace = super.getNamespace();
+
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+
+			if (namespace.startsWith(BridgeConstants.WSRP_REWRITE)) {
+				namespace = getNamespaceWSRP(bridgeContext);
+			}
+			else {
+				PortletConfig portletConfig = bridgeContext.getPortletConfig();
+				boolean optimizePortletNamespace = PortletConfigParam.OptimizePortletNamespace.getBooleanValue(
+						portletConfig);
+
+				if (optimizePortletNamespace) {
+					namespace = PortletResponseUtil.getOptimizedResponseNamespace(namespace);
+				}
+			}
 		}
 
 		return namespace;
+	}
+
+	protected String getNamespaceWSRP(BridgeContext bridgeContext) {
+
+		if (namespaceWSRP == null) {
+
+			PortletConfig portletConfig = bridgeContext.getPortletConfig();
+			String portletName = portletConfig.getPortletName();
+			PortletContext portletContext = bridgeContext.getPortletContext();
+			String portletContextName = portletContext.getPortletContextName();
+
+			namespaceWSRP = portletName + portletContextName;
+		}
+
+		return namespaceWSRP;
 	}
 }

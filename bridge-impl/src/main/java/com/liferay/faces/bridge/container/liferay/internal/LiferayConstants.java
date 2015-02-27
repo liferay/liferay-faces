@@ -19,14 +19,6 @@ package com.liferay.faces.bridge.container.liferay.internal;
 public class LiferayConstants {
 
 	// Public Constants
-	public static final String CONTROL_PANEL_CATEGORY = "controlPanelCategory";
-	public static final String DO_AS_GROUP_ID = "doAsGroupId";
-	public static final String DO_AS_USER_ID = "doAsUserId";
-	public static final String DO_AS_USER_LANGUAGE_ID = "doAsUserLanguageId";
-	public static final String INSTANCE_SEPARATOR = "_INSTANCE_";
-	public static final String LIFECYCLE_ACTION_PHASE_ID = "1";
-	public static final String LIFECYCLE_RENDER_PHASE_ID = "0";
-	public static final String LIFECYCLE_RESOURCE_PHASE_ID = "2";
 	public static final String P_AUTH = "p_auth";
 	public static final String P_L_ID = "p_l_id";
 	public static final String P_P_AUTH = "p_p_auth";
@@ -42,7 +34,4 @@ public class LiferayConstants {
 	public static final String P_P_STATE = "p_p_state";
 	public static final String P_P_STATE_RCV = "p_p_state_rcv";
 	public static final String PACKAGE_NAMESPACE = "com.liferay";
-	public static final String REFERER_GROUP_ID = "refererGroupId";
-	public static final String REFERER_PLID = "refererPlid";
-	public static final String WAR_SEPARATOR = "_WAR_";
 }
