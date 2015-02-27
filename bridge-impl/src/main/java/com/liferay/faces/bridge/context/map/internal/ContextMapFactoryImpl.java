@@ -167,8 +167,13 @@ public class ContextMapFactoryImpl extends ContextMapFactory {
 
 		PortletRequest portletRequest = bridgeContext.getPortletRequest();
 		MultiPartFormData multiPartFormData = (MultiPartFormData) portletRequest.getAttribute(MULTIPART_FORM_DATA_FQCN);
+		Map<String, List<UploadedFile>> uploadedFileMap = null;
 
-		return multiPartFormData.getUploadedFileMap();
+		if (multiPartFormData != null) {
+			uploadedFileMap = multiPartFormData.getUploadedFileMap();
+		}
+
+		return uploadedFileMap;
 	}
 
 	@Override
