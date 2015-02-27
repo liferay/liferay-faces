@@ -56,7 +56,7 @@
 			<bridge:bridge-url-factory>com.liferay.faces.bridge.context.url.internal.BridgeURLFactoryImpl</bridge:bridge-url-factory>
 			<bridge:context-map-factory>com.liferay.faces.bridge.context.map.internal.ContextMapFactoryImpl</bridge:context-map-factory>
 			<bridge:incongruity-context-factory>com.liferay.faces.bridge.context.internal.IncongruityContextFactoryImpl</bridge:incongruity-context-factory>
-			<bridge:liferay-url-factory>com.liferay.faces.bridge.container.liferay.internal.LiferayURLFactoryImpl</bridge:liferay-url-factory>
+			<bridge:liferay-url-factory>com.liferay.faces.bridge.filter.liferay.internal.LiferayURLFactoryImpl</bridge:liferay-url-factory>
 			<bridge:portlet-container-factory>com.liferay.faces.bridge.container.internal.PortletContainerFactoryImpl</bridge:portlet-container-factory>
 			<bridge:view-handler-factory>com.liferay.faces.bridge.application.internal.ViewHandlerFactoryImpl</bridge:view-handler-factory>
 		</factory-extension>
