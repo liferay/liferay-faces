@@ -21,7 +21,6 @@ import javax.portlet.PortletResponse;
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
 import com.liferay.faces.bridge.container.liferay.internal.PortletContainerLiferayImpl;
-import com.liferay.faces.bridge.container.pluto.internal.PortletContainerPlutoImpl;
 import com.liferay.faces.bridge.filter.internal.PortletContainerDetector;
 
 
@@ -36,9 +35,6 @@ public class PortletContainerFactoryImpl extends PortletContainerFactory {
 
 		if (PortletContainerDetector.isLiferayPortletRequest(portletRequest)) {
 			return new PortletContainerLiferayImpl(portletRequest);
-		}
-		else if (PortletContainerDetector.isPlutoPortletRequest(portletRequest)) {
-			return new PortletContainerPlutoImpl();
 		}
 		else {
 			return new PortletContainerImpl();

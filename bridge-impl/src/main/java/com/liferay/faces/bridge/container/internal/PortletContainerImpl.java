@@ -49,8 +49,8 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 
 			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 			MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
-			PortletURL actionURL = createActionURL(mimeResponse);
-			copyRequestParameters(fromURL, actionURL);
+			PortletURL actionURL = mimeResponse.createActionURL();
+			copyParameters(fromURL, actionURL);
 
 			return actionURL;
 		}
@@ -87,7 +87,7 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 
 				MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
 				redirectURL = mimeResponse.createRenderURL();
-				copyRequestParameters(fromURL, redirectURL);
+				copyParameters(fromURL, redirectURL);
 
 				if (parameters != null) {
 					Set<String> parameterNames = parameters.keySet();
@@ -122,8 +122,8 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 				logger.debug("createRenderURL fromURL=[" + fromURL + "]");
 
 				MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
-				PortletURL renderURL = createRenderURL(mimeResponse);
-				copyRequestParameters(fromURL, renderURL);
+				PortletURL renderURL = mimeResponse.createRenderURL();
+				copyParameters(fromURL, renderURL);
 
 				return renderURL;
 			}
@@ -145,7 +145,7 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 			// Ask the portlet container to create a portlet resource URL.
 			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 			MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
-			ResourceURL resourceURL = createResourceURL(mimeResponse);
+			ResourceURL resourceURL = mimeResponse.createResourceURL();
 
 			// If the "javax.faces.resource" token is found in the URL, then
 			int tokenPos = fromURL.indexOf(ResourceConstants.JAVAX_FACES_RESOURCE);
@@ -180,7 +180,7 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 			}
 
 			// Copy the request parameters to the portlet resource URL.
-			copyRequestParameters(fromURL, resourceURL);
+			copyParameters(fromURL, resourceURL);
 
 			return resourceURL;
 		}
@@ -197,7 +197,7 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 	 *
 	 * @throws  MalformedURLException
 	 */
-	protected void copyRequestParameters(String fromURL, BaseURL toURL) throws MalformedURLException {
+	protected void copyParameters(String fromURL, BaseURL toURL) throws MalformedURLException {
 		List<RequestParameter> requestParameters = parseRequestParameters(fromURL);
 
 		if (requestParameters != null) {
@@ -209,18 +209,6 @@ public class PortletContainerImpl extends PortletContainerCompatImpl {
 				logger.debug("Copied parameter to portletURL name=[{0}] value=[{1}]", name, value);
 			}
 		}
-	}
-
-	protected PortletURL createActionURL(MimeResponse mimeResponse) {
-		return mimeResponse.createActionURL();
-	}
-
-	protected PortletURL createRenderURL(MimeResponse mimeResponse) {
-		return mimeResponse.createRenderURL();
-	}
-
-	protected ResourceURL createResourceURL(MimeResponse mimeResponse) {
-		return mimeResponse.createResourceURL();
 	}
 
 	/**
