@@ -28,18 +28,33 @@ public class BridgePortletResponseFactoryImpl extends BridgePortletResponseFacto
 
 	@Override
 	public ActionResponse getActionResponse(ActionResponse actionResponse) {
-		return new ActionResponseBridgeImpl(actionResponse);
+
+		if (PortletContainerDetector.isLiferayPortletResponse(actionResponse)) {
+			return new ActionResponseBridgeLiferayImpl(actionResponse);
+		}
+		else {
+			return new ActionResponseBridgeImpl(actionResponse);
+		}
 	}
 
 	@Override
 	public EventResponse getEventResponse(EventResponse eventResponse) {
-		return new EventResponseBridgeImpl(eventResponse);
+
+		if (PortletContainerDetector.isLiferayPortletResponse(eventResponse)) {
+			return new EventResponseBridgeLiferayImpl(eventResponse);
+		}
+		else {
+			return new EventResponseBridgeImpl(eventResponse);
+		}
 	}
 
 	@Override
 	public RenderResponse getRenderResponse(RenderResponse renderResponse) {
 
-		if (PortletContainerDetector.isPlutoPortletResponse(renderResponse)) {
+		if (PortletContainerDetector.isLiferayPortletResponse(renderResponse)) {
+			return new RenderResponseBridgeLiferayImpl(renderResponse);
+		}
+		else if (PortletContainerDetector.isPlutoPortletResponse(renderResponse)) {
 			return new RenderResponseBridgePlutoImpl(renderResponse);
 		}
 		else {
@@ -50,7 +65,10 @@ public class BridgePortletResponseFactoryImpl extends BridgePortletResponseFacto
 	@Override
 	public ResourceResponse getResourceResponse(ResourceResponse resourceResponse) {
 
-		if (PortletContainerDetector.isPlutoPortletResponse(resourceResponse)) {
+		if (PortletContainerDetector.isLiferayPortletResponse(resourceResponse)) {
+			return new ResourceResponseBridgeLiferayImpl(resourceResponse);
+		}
+		else if (PortletContainerDetector.isPlutoPortletResponse(resourceResponse)) {
 			return new ResourceResponseBridgePlutoImpl(resourceResponse);
 		}
 		else {

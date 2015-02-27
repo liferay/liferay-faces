@@ -22,7 +22,7 @@ import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 
-import com.liferay.faces.bridge.container.internal.PortletURLWrapper;
+import com.liferay.faces.bridge.filter.internal.PortletURLWrapper;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
