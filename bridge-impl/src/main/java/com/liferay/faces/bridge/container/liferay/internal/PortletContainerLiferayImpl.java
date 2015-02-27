@@ -43,19 +43,9 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 
 	// Private Data Members
 	private boolean friendlyURLMapperEnabled;
-	private LiferayURLFactory liferayURLFactory;
 	private LiferayPortletRequest liferayPortletRequest;
 
 	public PortletContainerLiferayImpl(PortletRequest portletRequest) {
-
-		try {
-			this.liferayPortletRequest = new LiferayPortletRequest(portletRequest);
-			this.friendlyURLMapperEnabled = (liferayPortletRequest.getPortlet().getFriendlyURLMapperInstance() != null);
-			this.liferayURLFactory = (LiferayURLFactory) BridgeFactoryFinder.getFactory(LiferayURLFactory.class);
-		}
-		catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
 	}
 
 	@Override
@@ -67,7 +57,7 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 
 		PortletURL redirectURL = liferayPortletResponse.createRenderURL();
 
-		copyRequestParameters(fromURL, redirectURL);
+		copyParameters(fromURL, redirectURL);
 
 		if (parameters != null) {
 			Set<String> parameterNames = parameters.keySet();
@@ -80,32 +70,5 @@ public class PortletContainerLiferayImpl extends PortletContainerLiferayCompatIm
 		}
 
 		return redirectURL;
-	}
-
-	@Override
-	protected PortletURL createActionURL(MimeResponse mimeResponse) {
-
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-
-		return liferayURLFactory.getLiferayActionURL(bridgeContext, mimeResponse, mimeResponse.getNamespace(),
-				friendlyURLMapperEnabled);
-	}
-
-	@Override
-	protected PortletURL createRenderURL(MimeResponse mimeResponse) {
-
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-
-		return liferayURLFactory.getLiferayRenderURL(bridgeContext, mimeResponse, mimeResponse.getNamespace(),
-				friendlyURLMapperEnabled);
-	}
-
-	@Override
-	protected ResourceURL createResourceURL(MimeResponse mimeResponse) {
-
-		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-
-		return liferayURLFactory.getLiferayResourceURL(bridgeContext, mimeResponse, mimeResponse.getNamespace(),
-				friendlyURLMapperEnabled);
 	}
 }
