@@ -27,7 +27,7 @@
 	<!--  The following listener is required to handle the BridgeRequestScopeAttributeAdded annotation, but really -->
 	<!--  is only necessary for remote WSRP portlets. -->
 	<listener>
-		<listener-class>com.liferay.faces.bridge.servlet.BridgeRequestAttributeListener</listener-class>
+		<listener-class>com.liferay.faces.bridge.servlet.internal.BridgeRequestAttributeListener</listener-class>
 	</listener>
 	<!-- Although the FacesServlet will not be invoked by any portlet requests, it is required to initialize JSF. -->
 	<servlet>
