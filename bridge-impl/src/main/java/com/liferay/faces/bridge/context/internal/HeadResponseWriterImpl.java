@@ -14,17 +14,13 @@
 package com.liferay.faces.bridge.context.internal;
 
 import java.io.IOException;
-import java.util.EmptyStackException;
 
-import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletResponse;
 
-import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementWriter;
 import org.w3c.dom.Element;
 
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -54,36 +50,15 @@ public class HeadResponseWriterImpl extends HeadResponseWriterBase {
 	}
 
 	@Override
-	public void endElement(String name) throws IOException {
+	protected void addResourceToHeadSection(Element element, String nodeName) throws IOException {
 
-		try {
-			ElementWriter elementWriter = elementWriterStack.pop();
-			Element element = elementWriter.getElement();
-			String nodeName = element.getNodeName();
-			logger.trace("POPPED element name=[{0}]", nodeName);
-
-			if (!StringPool.HEAD.equals(nodeName)) {
-
-				// NOTE: The Portlet 2.0 Javadocs for the addProperty method indicate that if the key already exists,
-				// then the element will be added to any existing elements under that key name. There is a risk that
-				// multiple portlet instances on the same portal page could cause multiple <script /> elements to be
-				// added to the <head>...</head> section of the rendered portal page. See:
-				// http://portals.apache.org/pluto/portlet-2.0-apidocs/javax/portlet/PortletResponse.html#addProperty(java.lang.String,
-				// org.w3c.dom.Element)
-				portletResponse.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT, element);
-				logger.debug("Added resource to portal's <head>...</head> section nodeName=[{0}]", nodeName);
-			}
-		}
-		catch (EmptyStackException e) {
-			throw new IOException(EmptyStackException.class.getSimpleName());
-		}
-	}
-
-	@Override
-	public void startElement(String name, UIComponent component) throws IOException {
-
-		Element element = createElement(name);
-		ElementWriter elementWriter = new ElementWriter(element);
-		elementWriterStack.push(elementWriter);
+		// NOTE: The Portlet 2.0 Javadocs for the addProperty method indicate that if the key already exists,
+		// then the element will be added to any existing elements under that key name. There is a risk that
+		// multiple portlet instances on the same portal page could cause multiple <script /> elements to be
+		// added to the <head>...</head> section of the rendered portal page. See:
+		// http://portals.apache.org/pluto/portlet-2.0-apidocs/javax/portlet/PortletResponse.html#addProperty(java.lang.String,
+		// org.w3c.dom.Element)
+		portletResponse.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT, element);
+		logger.debug(ADDED_RESOURCE_TO_HEAD, "portal", nodeName);
 	}
 }

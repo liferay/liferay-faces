@@ -21,10 +21,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.bridge.context.HeadResponseWriter;
+import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementWriter;
 import com.liferay.faces.bridge.renderkit.html_basic.internal.ElementWriterStack;
 import org.w3c.dom.Element;
 
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -32,9 +35,16 @@ import com.liferay.faces.util.lang.StringPool;
  */
 public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(HeadResponseWriterBase.class);
+
+	protected static final String ADDED_RESOURCE_TO_HEAD =
+		"Added resource to {0}'s <head>...</head> section, element=[{1}]";
+
 	// Private Data Members
 	ResponseWriter wrappedResponseWriter;
 	ElementWriterStack elementWriterStack;
+	private boolean titleElement = false;
 
 	public HeadResponseWriterBase(ResponseWriter wrappedResponseWriter) {
 		this.wrappedResponseWriter = wrappedResponseWriter;
@@ -110,6 +120,30 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 	}
 
 	@Override
+	public void endElement(String name) throws IOException {
+
+		if ("title".equals(name)) {
+			titleElement = false;
+		}
+		else {
+
+			try {
+				ElementWriter elementWriter = elementWriterStack.pop();
+				Element element = elementWriter.getElement();
+				String nodeName = element.getNodeName();
+				logger.trace("POPPED element name=[{0}]", nodeName);
+
+				if (!StringPool.HEAD.equals(nodeName)) {
+					addResourceToHeadSection(element, nodeName);
+				}
+			}
+			catch (EmptyStackException e) {
+				throw new IOException(EmptyStackException.class.getSimpleName());
+			}
+		}
+	}
+
+	@Override
 	public void flush() throws IOException {
 
 		try {
@@ -134,6 +168,23 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 	@Override
 	public void startDocument() throws IOException {
 		// no-op
+	}
+
+	@Override
+	public void startElement(String name, UIComponent component) throws IOException {
+
+		if ("title".equals(name)) {
+
+			logger.warn(
+				"Title removed because multiple <title> elements are invalid and the portlet container controls the <title>.");
+			titleElement = true;
+		}
+		else {
+			Element element = createElement(name);
+			ElementWriter elementWriter = new ElementWriter(element);
+			elementWriterStack.push(elementWriter);
+			logger.trace("PUSHED element name=[{0}]", name);
+		}
 	}
 
 	@Override
@@ -237,7 +288,7 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 	@Override
 	public void writeText(Object text, String property) throws IOException {
 
-		if (text != null) {
+		if ((text != null) && !titleElement) {
 
 			try {
 				elementWriterStack.safePeek().write(text.toString());
@@ -285,6 +336,8 @@ public abstract class HeadResponseWriterBase extends HeadResponseWriter {
 
 		writeAttribute(name, value, property);
 	}
+
+	protected abstract void addResourceToHeadSection(Element element, String nodeName) throws IOException;
 
 	protected String escapeURI(String uri) {
 
