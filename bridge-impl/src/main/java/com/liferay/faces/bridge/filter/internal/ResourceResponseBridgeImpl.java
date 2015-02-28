@@ -18,7 +18,6 @@ import javax.portlet.PortletContext;
 import javax.portlet.ResourceResponse;
 import javax.portlet.filter.ResourceResponseWrapper;
 
-import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.internal.BridgeConstants;
 
@@ -43,19 +42,10 @@ public class ResourceResponseBridgeImpl extends ResourceResponseWrapper {
 
 			namespace = super.getNamespace();
 
-			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-
 			if (namespace.startsWith(BridgeConstants.WSRP_REWRITE)) {
-				namespace = getNamespaceWSRP(bridgeContext);
-			}
-			else {
-				PortletConfig portletConfig = bridgeContext.getPortletConfig();
-				boolean optimizePortletNamespace = PortletConfigParam.OptimizePortletNamespace.getBooleanValue(
-						portletConfig);
 
-				if (optimizePortletNamespace) {
-					namespace = PortletResponseUtil.getOptimizedResponseNamespace(namespace);
-				}
+				BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+				namespace = getNamespaceWSRP(bridgeContext);
 			}
 		}
 
