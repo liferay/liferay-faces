@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.servlet.internal;
+package com.liferay.faces.bridge.servlet;
 
 import java.lang.reflect.Method;
 import java.util.Set;
