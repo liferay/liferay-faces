@@ -188,7 +188,7 @@ foreach my $class (@class) {
             print "WARNING: variable undefined after finding /private..*Xpath/ in $template: line = $_\n";
          } else {
             if (not defined $xpaths{$variable}) {
-               print "INFO: not xpaths found for variable = $variable: line = $_\n";
+               print "INFO: no xpath found for variable = $variable: line = $_\n";
                $xpath = join " ", @path;
                $xpaths{$variable} = $xpath;
                print "INFO: inserting the one found in the template file ... check it :-)\n";
