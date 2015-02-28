@@ -17,9 +17,6 @@ import javax.portlet.PortletConfig;
 
 import com.liferay.faces.util.config.ConfigParam;
 import com.liferay.faces.util.helper.BooleanHelper;
-import com.liferay.faces.util.product.Product;
-import com.liferay.faces.util.product.ProductConstants;
-import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -61,16 +58,6 @@ public enum PortletConfigParam implements ConfigParam<PortletConfig> {
 	 * lifecycle. The default is true.
 	 */
 	ManageIncongruities("com.liferay.faces.bridge.manageIncongruities", true),
-
-	/**
-	 * Flag indicating whether or not the portlet namespace should be optimized (minimized) in order to provide the
-	 * shortest possible rendered clientIds. Default value is true unless running on Liferay Portal 6.2 (or newer) which
-	 * is not compatible with the bridge's namespace optimization feature.
-	 */
-	OptimizePortletNamespace("com.liferay.faces.bridge.optimizePortletNamespace",
-		"org.portletfaces.bridge.optimizePortletNamespace",
-		(Liferay.PORTAL.isDetected() && (Liferay.PORTAL.getMajorVersion() <= 6) &&
-			(Liferay.PORTAL.getMinorVersion() <= 1)) || !Liferay.PORTAL.isDetected()),
 
 	/**
 	 * Flag indicating whether or not methods annotated with the &#064;PreDestroy annotation are preferably invoked over
@@ -241,9 +228,5 @@ public enum PortletConfigParam implements ConfigParam<PortletConfig> {
 	@Override
 	public String getStringValue(PortletConfig portletConfig) {
 		return PortletConfigParamUtil.getStringValue(portletConfig, name, alternateName, defaultStringValue);
-	}
-
-	protected static class Liferay {
-		private static final Product PORTAL = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL);
 	}
 }
