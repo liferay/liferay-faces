@@ -54,14 +54,6 @@ public class BridgeConfigConstants {
 	public static final String PARAM_MANAGE_INCONGRUITIES = PortletConfigParam.ManageIncongruities.getName();
 
 	@Deprecated
-	public static final String PARAM_OPTIMIZE_PORTLET_NAMESPACE1 = PortletConfigParam.OptimizePortletNamespace
-		.getName();
-
-	@Deprecated
-	public static final String PARAM_OPTIMIZE_PORTLET_NAMESPACE2 = PortletConfigParam.OptimizePortletNamespace
-		.getAlternateName();
-
-	@Deprecated
 	public static final String PARAM_PREFER_PRE_DESTROY1 = PortletConfigParam.PreferPreDestroy.getName();
 
 	@Deprecated
