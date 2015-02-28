@@ -142,8 +142,6 @@ public class MultiPartFormDataProcessorImpl implements MultiPartFormDataProcesso
 				fileItemIterator = portletFileUpload.getItemIterator(actionRequest);
 			}
 
-			boolean optimizeNamespace = PortletConfigParam.OptimizePortletNamespace.getBooleanValue(portletConfig);
-
 			if (fileItemIterator != null) {
 
 				int totalFiles = 0;
@@ -160,16 +158,6 @@ public class MultiPartFormDataProcessorImpl implements MultiPartFormDataProcesso
 
 						// Get field name from the field stream.
 						String fieldName = fieldStream.getFieldName();
-
-						// If namespace optimization is enabled and the namespace is present in the field name,
-						// then remove the portlet namespace from the field name.
-						if (optimizeNamespace) {
-							int pos = fieldName.indexOf(namespace);
-
-							if (pos >= 0) {
-								fieldName = fieldName.substring(pos + namespace.length());
-							}
-						}
 
 						// Get the content-type, and file-name from the field stream.
 						String contentType = fieldStream.getContentType();
