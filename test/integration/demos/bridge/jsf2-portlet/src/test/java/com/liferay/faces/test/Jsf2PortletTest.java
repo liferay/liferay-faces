@@ -71,6 +71,8 @@ public class Jsf2PortletTest extends TesterBase {
 
 	private static final String provinceIdFieldXpath = "//select[contains(@id,':provinceId')]";
 	private static final String provinceIdFieldErrorXpath = "//select[contains(@id,':provinceId')]/following-sibling::*[1]";
+	
+	private static final String provinceIdSelectorXpath = "";
 
 	private static final String postalCodeFieldXpath = "//input[contains(@id,':postalCode')]";
 	private static final String postalCodeFieldErrorXpath = "//input[contains(@id,':postalCode')]/following-sibling::*[1]/following-sibling::*[1]";
@@ -135,6 +137,8 @@ public class Jsf2PortletTest extends TesterBase {
 	private WebElement cityFieldError;
 	@FindBy(xpath = provinceIdFieldXpath)
 	private WebElement provinceIdField;
+	@FindBy(xpath = provinceIdSelectorXpath)
+	private WebElement provinceIdSelector;
 	@FindBy(xpath = provinceIdFieldErrorXpath)
 	private WebElement provinceIdFieldError;
 	@FindBy(xpath = postalCodeFieldXpath)
@@ -172,7 +176,7 @@ public class Jsf2PortletTest extends TesterBase {
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
 	
-	protected int dateValidationXpathModifier = 1;
+	protected int dateValidationXpathModifier = 2;
 	
 	@Drone
 	WebDriver browser;
@@ -211,7 +215,7 @@ public class Jsf2PortletTest extends TesterBase {
 
 		assertTrue("dateOfBirthField.isDisplayed()", dateOfBirthField.isDisplayed());
 		assertTrue("cityField.isDisplayed()", cityField.isDisplayed());
-		assertTrue("provinceIdField.isDisplayed()", provinceIdField.isDisplayed());
+		assertTrue("isThere(browser, provinceIdFieldXpath)", isThere(browser, provinceIdFieldXpath));
 		assertTrue("postalCodeField.isDisplayed()", postalCodeField.isDisplayed());
 		if (isThere(browser, postalCodeToolTipXpath)) {
 			assertTrue("postalCodeToolTip.isDisplayed()", postalCodeToolTip.isDisplayed());
@@ -367,7 +371,7 @@ public class Jsf2PortletTest extends TesterBase {
 		datePatternField.sendKeys("MM/dd/yy");
 		preferencesSubmitButton.click();
 
-		// TODO after clicking the preferencesSubmitButton, all of the job applicant demos need to end up on the same
+		// after clicking the preferencesSubmitButton, all of the job applicant demos need to end up on the same
 		// page.  Here is a log statement that should give you a clue between the different testers as to which ones are
 		// different from others
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
@@ -401,8 +405,8 @@ public class Jsf2PortletTest extends TesterBase {
 		logger.log(Level.INFO, "resetButton.click() ...");
 //		Thread.sleep(1000);
 
-		// TODO after clicking the resetButton all of the job applicant demos need to end up on the same page Here is a
-		// log statement that should give you a clue between the different tester as to which ones are different from
+		// after clicking the resetButton all of the job applicant demos need to end up on the same page Here is a
+		// log statement that should give you a clue between the different testers as to which ones are different from
 		// others
 		logger.log(Level.INFO, "browser.getCurrentUrl() = " + browser.getCurrentUrl());
 
@@ -492,8 +496,9 @@ public class Jsf2PortletTest extends TesterBase {
 		logger.log(Level.INFO, "phoneNumberFieldError.getText() = " + phoneNumberFieldError.getText());
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
 		logger.log(Level.INFO, "cityFieldError.getText() = " + cityFieldError.getText());
-		logger.log(Level.INFO, "provinceIdFieldError.getText() = " + provinceIdFieldError.getText());
-		logger.log(Level.INFO, "postalCodeFieldError.getText() = " + postalCodeFieldError.getText());
+		
+		logger.log(Level.INFO, "isThere(browser, provinceIdFieldXpath) = " + isThere(browser, provinceIdFieldXpath));
+		logger.log(Level.INFO, "isThere(browser, provinceIdFieldErrorXpath) = " + isThere(browser, provinceIdFieldErrorXpath));
 
 		assertTrue("firstNameFieldError should contain 'Value is required', but instead contains '" +
 			firstNameFieldError.getText() + "'", firstNameFieldError.getText().contains("Value is required"));
@@ -524,21 +529,35 @@ public class Jsf2PortletTest extends TesterBase {
 			"before provinceIdField.getAttribute('value') = " + provinceIdField.getAttribute("value"));
 		logger.log(Level.INFO,
 			"before postalCodeField.getAttribute('value') = " + postalCodeField.getAttribute("value"));
-		assertTrue("cityField is empty", (cityField.getAttribute("value").length() == 0));
-		assertTrue("provinceIdField is empty", (provinceIdField.getAttribute("value").length() == 0));
-		assertTrue("postalCodeField is empty", (postalCodeField.getAttribute("value").length() == 0));
+		assertTrue("cityField is empty", (cityField.getAttribute("value") == null || cityField.getAttribute("value").length() == 0));
+		assertTrue("provinceIdField is empty", (provinceIdField.getAttribute("value") == null || provinceIdField.getAttribute("value").length() == 0));
+		assertTrue("postalCodeField is empty", (postalCodeField.getAttribute("value") == null || postalCodeField.getAttribute("value").length() == 0));
 
 		postalCodeField.sendKeys("32801");
+
 		phoneNumberField.click();
+
 		Thread.sleep(250);
 		logger.log(Level.INFO, "after cityField.getAttribute('value') = " + cityField.getAttribute("value"));
-		logger.log(Level.INFO,
-			"after provinceIdField.getAttribute('value') = " + provinceIdField.getAttribute("value"));
 		logger.log(Level.INFO,
 			"after postalCodeField.getAttribute('value') = " + postalCodeField.getAttribute("value"));
 		assertTrue("cityField should contain 'Orlando' after auto populating from postalCode, but instead contains '" +
 			cityField.getAttribute("value") + "'", cityField.getAttribute("value").contains("Orlando"));
-		assertTrue("provinceIdField contains 3", provinceIdField.getAttribute("value").contains("3"));
+		
+		// If the (primefaces) selector is empty
+		if ("".equals(provinceIdSelectorXpath)) {
+			logger.log(Level.INFO, " provinceIdFieldXpath tagName = " + browser.findElement(By.xpath(provinceIdFieldXpath)).getTagName());
+			logger.log(Level.INFO, " provinceIdFieldXpath id = " + browser.findElement(By.xpath(provinceIdFieldXpath)).getAttribute("id"));
+			logger.log(Level.INFO, " provinceIdField value = " + provinceIdField.getAttribute("value"));
+			assertTrue("provinceIdField should contain 3, but instead it contains '" + provinceIdField.getAttribute("value") + "'", provinceIdField.getAttribute("value").contains("3"));
+		}
+		// otherwise, use the (primefaces) selector
+		else {
+			logger.log(Level.INFO, " provinceIdSelectorXpath tagName = " + browser.findElement(By.xpath(provinceIdSelectorXpath)).getTagName());
+			logger.log(Level.INFO, " provinceIdSelectorXpath id = " + browser.findElement(By.xpath(provinceIdSelectorXpath)).getAttribute("id"));
+			logger.log(Level.INFO, " provinceIdSelectorXpath value = " + browser.findElement(By.xpath(provinceIdSelectorXpath)).getAttribute("value"));
+			assertTrue("provinceIdSelector should contain 3, but instead it contains '" + provinceIdSelector.getAttribute("value") + "'", provinceIdSelector.getAttribute("value").contains("3"));
+		}
 		assertTrue("postalCodeField contains 32801", postalCodeField.getAttribute("value").contains("32801"));
 
 	}
@@ -550,8 +569,8 @@ public class Jsf2PortletTest extends TesterBase {
 
 		String testing123 = "testing 1, 2, 3";
 		int tags = 0;
-		int tagsWhileHidden = 1;
-		int tagsWhileShowing = 2;
+		int tagsWhileHidden = 2;
+		int tagsWhileShowing = 3;
 
 		showCommentsLink.click();
 		Thread.sleep(500);
@@ -563,6 +582,9 @@ public class Jsf2PortletTest extends TesterBase {
 		assertTrue("comments textarea is displayed", comments.isDisplayed());
 		tags = browser.findElements(By.xpath("//a[contains(text(),'Hide Comments')]/../../child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
+		if (tags != tagsWhileShowing) {
+			logger.log(Level.INFO, "tagsWhileShowing = " + tagsWhileShowing);
+		}
 		assertTrue("tag for Hide and tag for textarea are showing", tags == tagsWhileShowing);
 
 		comments.sendKeys(testing123);
@@ -573,6 +595,9 @@ public class Jsf2PortletTest extends TesterBase {
 		tags = browser.findElements(By.xpath("//a[contains(text(),'Show Comments')]/../../child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
 		assertTrue("no textarea is showing", tags == tagsWhileHidden);
+		if (tags != tagsWhileHidden) {
+			logger.log(Level.INFO, "tagsWhileHidden = " + tagsWhileHidden);
+		}
 		logger.log(Level.INFO, "showCommentsLink.isDisplayed() = " + showCommentsLink.isDisplayed());
 		showCommentsLink.click();
 		waitForElement(browser, commentsXpath);
@@ -612,6 +637,10 @@ public class Jsf2PortletTest extends TesterBase {
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
 		assertTrue("dateOfBirthFieldError should contain 'Invalid date format', but insteead contains '" +
 			dateOfBirthFieldError.getText() + "'", dateOfBirthFieldError.getText().contains("Invalid date format"));
+		
+		logger.log(Level.INFO, " dateValidationXpath tagName = " + browser.findElement(By.xpath(dateValidationXpath)).getTagName());
+		logger.log(Level.INFO, " dateValidationXpath id = " + browser.findElement(By.xpath(dateValidationXpath)).getAttribute("id"));
+		
 		tags = browser.findElements(By.xpath(dateValidationXpath)).size() - dateValidationXpathModifier;
 		logger.log(Level.INFO, "tags = " + tags);
 		logger.log(Level.INFO, "asserting: tags > tagsWhileValid? " + tags + " > " + tagsWhileValid + "? ...");
@@ -627,11 +656,11 @@ public class Jsf2PortletTest extends TesterBase {
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthFieldError.isDisplayed() = " + dateOfBirthFieldError.isDisplayed());
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
-
 		// Should I be this lenient?
 		assertTrue("dateOfBirthField validation message should be displayed when no date is entered",
 			dateOfBirthFieldError.getText().contains("Value is required") ||
 			dateOfBirthFieldError.getText().contains("Invalid date format"));
+		
 		tags = browser.findElements(By.xpath(dateValidationXpath)).size() - dateValidationXpathModifier;
 		logger.log(Level.INFO, "tags = " + tags);
 		logger.log(Level.INFO, "asserting: tags > tagsWhileValid? " + tags + " > " + tagsWhileValid + "? ...");
@@ -654,9 +683,13 @@ public class Jsf2PortletTest extends TesterBase {
 			"01/02/3456".equals(dateOfBirthField.getAttribute("value")));
 		tags = browser.findElements(By.xpath(dateValidationXpath)).size() - dateValidationXpathModifier;
 		logger.log(Level.INFO, "tags = " + tags);
-
+		
+		logger.log(Level.INFO, "isThere(browser, dateOfBirthFieldErrorXpath) = " + isThere(browser, dateOfBirthFieldErrorXpath));
+		
 		if (tags > tagsWhileValid) {
-			foo = dateOfBirthFieldError.getText();
+			if (isThere(browser, dateOfBirthFieldErrorXpath)) {
+				foo = dateOfBirthFieldError.getText();
+			}
 		}
 
 		assertTrue("There should be no dateOfBirth validation errors showing when a valid date has been submitted, " +
