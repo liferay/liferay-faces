@@ -46,6 +46,11 @@ public class RendererUtil {
 	public static final String BACKSLASH_COLON = "\\\\:";
 	public static final String REGEX_COLON = "[:]";
 
+	public static final String[] MOUSE_DOM_EVENTS = {
+			"onclick", "ondblclick", "onmousedown", "onmousemove", "onmouseout", "onmouseover", "onmouseup"
+		};
+	public static final String[] KEYBOARD_DOM_EVENTS = { "onkeydown", "onkeypress", "onkeyup" };
+
 	// Private Constants
 	private static final String FUNCTION_A = "function(A)";
 	private static final String JAVA_SCRIPT_HEX_PREFIX = "\\x";
@@ -154,6 +159,26 @@ public class RendererUtil {
 			}
 			else {
 				responseWriter.write(parameter.toString());
+			}
+		}
+	}
+
+	/**
+	 * This method exists as a convenience for Component developers to encode attributes that pass through to the DOM in
+	 * JSF 2.1.
+	 */
+	public static void encodePassThroughAttributes(ResponseWriter responseWriter, UIComponent uiComponent,
+		final String[] PASS_THROUGH_ATTRIBUTES) throws IOException {
+
+		Map<String, Object> attributes = uiComponent.getAttributes();
+
+		for (final String PASS_THROUGH_ATTRIBUTE : PASS_THROUGH_ATTRIBUTES) {
+
+			Object passThroughAttributeValue = attributes.get(PASS_THROUGH_ATTRIBUTE);
+
+			if (passThroughAttributeValue != null) {
+				responseWriter.writeAttribute(PASS_THROUGH_ATTRIBUTE, passThroughAttributeValue,
+					PASS_THROUGH_ATTRIBUTE);
 			}
 		}
 	}
