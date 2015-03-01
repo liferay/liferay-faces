@@ -15,6 +15,7 @@ package com.liferay.faces.test;
 
 import java.util.logging.Logger;
 
+
 // import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.WebElement;
@@ -63,6 +64,8 @@ public class Jsf2Html5 extends TesterBase {
 
 	private static final String provinceIdFieldXpath = "//select[contains(@id,':provinceId')]";
 	private static final String provinceIdFieldErrorXpath = "//select[contains(@id,':provinceId')]/following-sibling::*[1]";
+	
+	private static final String provinceIdSelectorXpath = "";
 
 	private static final String postalCodeFieldXpath = "//input[contains(@id,':postalCode')]";
 	private static final String postalCodeFieldErrorXpath = "//input[contains(@id,':postalCode')]/following-sibling::*[1]/following-sibling::*[1]";
@@ -132,6 +135,8 @@ public class Jsf2Html5 extends TesterBase {
 	private WebElement cityFieldError;
 	@FindBy(xpath = provinceIdFieldXpath)
 	private WebElement provinceIdField;
+	@FindBy(xpath = provinceIdSelectorXpath)
+	private WebElement provinceIdSelector;
 	@FindBy(xpath = provinceIdFieldErrorXpath)
 	private WebElement provinceIdFieldError;
 	@FindBy(xpath = postalCodeFieldXpath)

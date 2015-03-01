@@ -63,6 +63,8 @@ public class Liferayfaces4 extends TesterBase {
 
 	private static final String provinceIdFieldXpath = "//select[contains(@id,':provinceId')]";
 	private static final String provinceIdFieldErrorXpath = "//select[contains(@id,':provinceId')]/following-sibling::*[1]";
+	
+	private static final String provinceIdSelectorXpath = "";
 
 	private static final String postalCodeFieldXpath = "//input[contains(@id,':postalCode')]";
 	private static final String postalCodeFieldErrorXpath = "//input[contains(@id,':postalCode')]/following-sibling::*[1]/following-sibling::*[1]";
@@ -75,7 +77,7 @@ public class Liferayfaces4 extends TesterBase {
 
 	private static final String fileUploadChooserXpath = "//input[@type='file' and @multiple='multiple']";
 	private static final String submitFileXpath = "//form[@method='post' and @enctype='multipart/form-data']/button[@value='Submit']";
-	private static final String uploadedFileXpath = "//h3[contains(text(),'Attachments')]/following-sibling::table/tbody/tr[contains(@class,'datatable-cell')]/td[2]";
+	private static final String uploadedFileXpath = "//*[contains(text(),'jersey')]";
 
 	private static final String submitButtonXpath = "//button[@value='Submit']";
 	private static final String preferencesSubmitButtonXpath = "//button[@value='Submit']";
@@ -132,6 +134,8 @@ public class Liferayfaces4 extends TesterBase {
 	private WebElement cityFieldError;
 	@FindBy(xpath = provinceIdFieldXpath)
 	private WebElement provinceIdField;
+	@FindBy(xpath = provinceIdSelectorXpath)
+	private WebElement provinceIdSelector;
 	@FindBy(xpath = provinceIdFieldErrorXpath)
 	private WebElement provinceIdFieldError;
 	@FindBy(xpath = postalCodeFieldXpath)
@@ -169,6 +173,6 @@ public class Liferayfaces4 extends TesterBase {
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
 	
-	protected int dateValidationXpathModifier = 0;
+	protected int dateValidationXpathModifier = 2;
 
 }

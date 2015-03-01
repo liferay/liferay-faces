@@ -72,7 +72,7 @@ public class Icefaces4PortletTest extends TesterBase {
 	private static final String provinceIdFieldXpath = "//select[contains(@id,':provinceId')]";
 	private static final String provinceIdFieldErrorXpath = "//select[contains(@id,':provinceId')]/following-sibling::*[1]";
 	
-	private static final String provinceIdSelectorXpath = "//select[contains(@id,':provinceId')]";
+	private static final String provinceIdSelectorXpath = "";
 
 	private static final String postalCodeFieldXpath = "//input[contains(@id,':postalCode_input')]";
 	private static final String postalCodeFieldErrorXpath = "//input[contains(@id,':postalCode_input')]/../../following-sibling::*[1]/following-sibling::*[1]";
@@ -726,44 +726,20 @@ public class Icefaces4PortletTest extends TesterBase {
 		logger.log(Level.INFO, "fileUploadChooser.getCssValue(transform) = " + fileUploadChooser.getCssValue("transform"));
 
 		fileUploadChooser.sendKeys(getPathToJerseyFile());
+		
+		// submitFileXpath
+		logger.log(Level.INFO, " submitFileXpath tagName = " + browser.findElement(By.xpath(submitFileXpath)).getTagName());
+		logger.log(Level.INFO, " submitFileXpath type = " + browser.findElement(By.xpath(submitFileXpath)).getAttribute("type"));
 
 		Thread.sleep(50);
 		logger.log(Level.INFO, "submitting the uploaded file ...");
 		submitFile.click();
+		
+		waitForElement(browser, uploadedFileXpath);
 
 		if (isThere(browser, uploadedFileXpath)) {
-			logger.log(Level.INFO, "uploadedFile.getText() = " + uploadedFile.getText() + " was there immediately");
+			logger.log(Level.INFO, "uploadedFile.getText() = " + uploadedFile.getText() + " is there.");
 			uploaded = true;
-		}
-		else {
-			Thread.sleep(1000);
-
-			if (isThere(browser, uploadedFileXpath)) {
-				logger.log(Level.INFO,
-					"uploadedFile.getText() = " + uploadedFile.getText() + " was there after 1 second");
-				uploaded = true;
-			}
-			else {
-				Thread.sleep(1000);
-
-				if (isThere(browser, uploadedFileXpath)) {
-					logger.log(Level.INFO,
-						"uploadedFile.getText() = " + uploadedFile.getText() + " was there after 2 seconds");
-					uploaded = true;
-				}
-				else {
-					Thread.sleep(1000);
-
-					if (isThere(browser, uploadedFileXpath)) {
-						logger.log(Level.INFO,
-							"uploadedFile.getText() = " + uploadedFile.getText() + " was there after 3 seconds");
-						uploaded = true;
-					}
-					else {
-						logger.log(Level.INFO, "uploadedFile was NOT there after 3 seconds");
-					}
-				}
-			}
 		}
 
 		if (uploaded) {
