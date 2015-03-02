@@ -23,6 +23,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.alloy.component.button.Button;
 import com.liferay.faces.alloy.component.popover.Popover;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
@@ -99,12 +100,24 @@ public class PopoverRenderer extends PopoverRendererBase {
 		responseWriter.write(StringPool.OPEN_CURLY_BRACE);
 
 		String for_ = popover.getFor();
-		boolean noOnAttributes = AlloyRendererUtil.encodeClientIdAndCheck(responseWriter, NODE, for_, popover, true);
-		if (noOnAttributes) {
-			logger.warn(popover.getClientKey() + " is *for* " + for_ + ". But, " + for_ + " has no onclick or onmousover attributes.");
-		}
-		
+		encodeClientId(responseWriter, NODE, for_, popover, true);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+
+		UIComponent forComponent = popover.findComponent(for_);
+
+		if (forComponent != null) {
+
+			if (forComponent instanceof Button) {
+				Button button = (Button) forComponent;
+
+				if ((button.getOnclick() == null) && (button.getOnmouseover() == null)) {
+					logger.warn(
+						"Popover [{0}] is *for* button [{1}] but the button does not have an onclick or onmouseover attribute.",
+						popover.getClientKey(), for_);
+				}
+			}
+
+		}
 	}
 
 	@Override
