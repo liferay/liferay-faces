@@ -41,7 +41,7 @@ import com.liferay.faces.util.model.UploadedFile;
 public class ApplicantBackingBean implements Serializable {
 
 	// serialVersionUID
-	private static final long serialVersionUID = 2947548873495692163L;
+	private static final long serialVersionUID = 2847548873495692163L;
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ApplicantBackingBean.class);
@@ -54,12 +54,23 @@ public class ApplicantBackingBean implements Serializable {
 	@ManagedProperty(value = "#{listModelBean}")
 	private transient ListModelBean listModelBean;
 
-	public void deleteFile(ActionEvent actionEvent) {
+	public void deleteUploadedFile(ActionEvent actionEvent) {
 
 		try {
-
 			List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
-			UploadedFile uploadedFileToDelete = applicantViewBean.getFileToDelete();
+
+			String uploadedFileId = applicantViewBean.getUploadedFileId();
+
+			UploadedFile uploadedFileToDelete = null;
+
+			for (UploadedFile uploadedFile : uploadedFiles) {
+
+				if (uploadedFile.getId().equals(uploadedFileId)) {
+					uploadedFileToDelete = uploadedFile;
+
+					break;
+				}
+			}
 
 			if (uploadedFileToDelete != null) {
 				uploadedFileToDelete.delete();
@@ -70,11 +81,6 @@ public class ApplicantBackingBean implements Serializable {
 		catch (Exception e) {
 			logger.error(e);
 		}
-	}
-
-	public void fileToDelete(UploadedFile uploadedFileToDelete) {
-		applicantViewBean.setFileToDelete(uploadedFileToDelete);
-		logger.debug("preparing to delete file=[{0}]", uploadedFileToDelete.getName());
 	}
 
 	public void handleFileUpload(FileUploadEvent fileUploadEvent) throws Exception {

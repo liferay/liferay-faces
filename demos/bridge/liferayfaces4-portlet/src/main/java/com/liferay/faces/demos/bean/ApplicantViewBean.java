@@ -32,11 +32,12 @@ import com.liferay.faces.util.model.UploadedFile;
 public class ApplicantViewBean implements Serializable {
 
 	// serialVersionUID
-	private static final long serialVersionUID = 6063667782815767889L;
+	private static final long serialVersionUID = 6163667782815767889L;
 
 	// JavaBean Properties for UI
 	private boolean commentsRendered;
 	private UploadedFile fileToDelete;
+	private String uploadedFileId;
 
 	public void toggleComments(ActionEvent actionEvent) {
 		commentsRendered = !commentsRendered;
@@ -50,12 +51,12 @@ public class ApplicantViewBean implements Serializable {
 		return commentsRendered;
 	}
 
-	public UploadedFile getFileToDelete() {
-		return fileToDelete;
+	public String getUploadedFileId() {
+		return uploadedFileId;
 	}
 
-	public void setFileToDelete(UploadedFile fileToDelete) {
-		this.fileToDelete = fileToDelete;
+	public void setUploadedFileId(String uploadedFileId) {
+		this.uploadedFileId = uploadedFileId;
 	}
 
 }
