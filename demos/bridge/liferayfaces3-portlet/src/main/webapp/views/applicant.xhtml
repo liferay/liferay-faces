@@ -116,39 +116,47 @@
         <alloy:column id="c2" width="33">
             <alloy:row>
                 <alloy:column id="c2a" styleClass="uploaded-files">
-                    <alloy:form id="f2">
-                        <h3>#{i18n['attachments']}</h3>
-                        <alloy:dataTable headerClass="portlet-section-header results-header"
-							rowClasses="portlet-section-body results-row, portlet-section-alternate results-row alt"
-							value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
-                            <alloy:column>
-                                <alloy:commandButton actionListener="#{applicantBackingBean.deleteUploadedFile}"
-									image="#{resource['example:icon-delete.png']}"
-									onclick="if (! confirm('#{i18n['are-you-sure-you-want-to-delete-this']}')) {return false;}"
-									value="#{uploadedFile.id}">
-                                    <f:ajax render="@form" />
-                                </alloy:commandButton>
-                            </alloy:column>
-                            <alloy:column>
-                                <f:facet name="header">
-                                    <alloy:outputText value="#{i18n['file-name']}" />
-                                </f:facet>
-                                <alloy:outputText value="#{uploadedFile.name}" />
-                            </alloy:column>
-                            <alloy:column>
-                                <f:facet name="header">
-                                    <alloy:outputText value="#{i18n['size']}" />
-                                </f:facet>
-                                <alloy:outputText value="#{uploadedFile.size}" />
-                            </alloy:column>
-                        </alloy:dataTable>
-                    </alloy:form>
-                    <hr />
+					<alloy:form id="f2">
+						<alloy:dialog clientKey="dialogKey" dismissible="true" headerText="#{i18n['confirm']}">
+							<alloy:field styleClass="dialog-content">
+								<alloy:outputText value="#{i18n['are-you-sure-you-want-to-delete-this']}" />
+							</alloy:field>
+							<alloy:commandButton actionListener="#{applicantBackingBean.deleteUploadedFile}" value="#{i18n['yes']}">
+								<f:ajax render="@form" />
+							</alloy:commandButton>
+							<alloy:button onclick="Liferay.component('dialogKey').hide();" value="#{i18n['no']}" />
+						</alloy:dialog>
+						<h3>#{i18n['attachments']}</h3>
+						<alloy:dataTable value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
+							<alloy:column>
+								<alloy:commandButton action="#{applicantBackingBean.fileToDelete(uploadedFile)}"
+									onclick="Liferay.component('dialogKey').show();">
+									<alloy:icon name="trash" />
+									<f:ajax />
+									<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantViewBean.uploadedFileId}" />
+								</alloy:commandButton>
+							</alloy:column>
+							<alloy:column>
+								<f:facet name="header">
+									<alloy:outputText value="#{i18n['file-name']}" />
+								</f:facet>
+								<alloy:outputText value="#{uploadedFile.name}" />
+							</alloy:column>
+							<alloy:column>
+								<f:facet name="header">
+									<alloy:outputText value="#{i18n['size']}" />
+								</f:facet>
+								<alloy:outputText value="#{uploadedFile.size}" />
+							</alloy:column>
+						</alloy:dataTable>
+					</alloy:form>
+					<hr />
                     <alloy:form id="f3" enctype="multipart/form-data">
                         <alloy:inputFile fileUploadListener="#{applicantBackingBean.handleFileUpload}"
-							multiple="multiple">
-                        </alloy:inputFile>
-                        <alloy:commandButton value="#{i18n['submit']}" />
+							multiple="multiple" />
+                        <alloy:commandButton value="#{i18n['submit']}">
+							<f:ajax execute="@form" render="c2a" />
+						</alloy:commandButton>
                     </alloy:form>
                 </alloy:column>
             </alloy:row>

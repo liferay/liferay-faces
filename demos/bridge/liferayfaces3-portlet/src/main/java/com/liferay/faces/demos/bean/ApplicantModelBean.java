@@ -35,7 +35,7 @@ import java.util.List;
 public class ApplicantModelBean implements Serializable {
 
 	// serialVersionUID
-	private static final long serialVersionUID = 7459628254337818761L;
+	private static final long serialVersionUID = 7559628254337818761L;
 
 	// Private Data Members
 	private List<UploadedFile> uploadedFiles;

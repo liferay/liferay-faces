@@ -17,6 +17,9 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
+
+import com.liferay.faces.util.model.UploadedFile;
 
 
 /**
@@ -29,13 +32,14 @@ import javax.faces.bean.ViewScoped;
 public class ApplicantViewBean implements Serializable {
 
 	// serialVersionUID
-	private static final long serialVersionUID = 6063667782815767889L;
+	private static final long serialVersionUID = 6163667782815767889L;
 
 	// JavaBean Properties for UI
 	private boolean commentsRendered;
+	private UploadedFile fileToDelete;
 	private String uploadedFileId;
 
-	public void toggleComments() {
+	public void toggleComments(ActionEvent actionEvent) {
 		commentsRendered = !commentsRendered;
 	}
 
