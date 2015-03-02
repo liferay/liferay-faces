@@ -19,16 +19,20 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
+import javax.portlet.PortletSession;
 
-import com.liferay.faces.alloy.component.inputfile.FileUploadEvent;
+import org.primefaces.event.FileUploadEvent;
+
+import com.liferay.faces.bridge.model.UploadedFile;
 import com.liferay.faces.demos.dto.City;
+import com.liferay.faces.demos.dto.UploadedFileWrapper;
 import com.liferay.faces.demos.util.FacesMessageUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.model.UploadedFile;
 
 
 /**
@@ -41,7 +45,7 @@ import com.liferay.faces.util.model.UploadedFile;
 public class ApplicantBackingBean implements Serializable {
 
 	// serialVersionUID
-	private static final long serialVersionUID = 2847548873495692163L;
+	private static final long serialVersionUID = 2947548873495692163L;
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ApplicantBackingBean.class);
@@ -83,12 +87,17 @@ public class ApplicantBackingBean implements Serializable {
 		}
 	}
 
-	public void handleFileUpload(FileUploadEvent fileUploadEvent) throws Exception {
+	public void handleFileUpload(FileUploadEvent event) {
 		List<UploadedFile> uploadedFiles = applicantModelBean.getUploadedFiles();
-		UploadedFile uploadedFile = fileUploadEvent.getUploadedFile();
-		uploadedFiles.add(uploadedFile);
-		logger.debug("Received fileName=[{0}] absolutePath=[{1}]", uploadedFile.getName(),
-			uploadedFile.getAbsolutePath());
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		PortletSession portletSession = (PortletSession) externalContext.getSession(false);
+		String uniqueFolderName = portletSession.getId();
+		org.primefaces.model.UploadedFile uploadedFile = event.getFile();
+		UploadedFileWrapper uploadedFileWrapper = new UploadedFileWrapper(uploadedFile, UploadedFile.Status.FILE_SAVED,
+				uniqueFolderName);
+		uploadedFiles.add(uploadedFileWrapper);
+		logger.debug("Received fileName=[{0}] absolutePath=[{1}]", uploadedFileWrapper.getName(),
+			uploadedFileWrapper.getAbsolutePath());
 	}
 
 	public void postalCodeListener(ValueChangeEvent valueChangeEvent) {
@@ -172,4 +181,5 @@ public class ApplicantBackingBean implements Serializable {
 		// Injected via @ManagedProperty annotation
 		this.listModelBean = listModelBean;
 	}
+
 }
