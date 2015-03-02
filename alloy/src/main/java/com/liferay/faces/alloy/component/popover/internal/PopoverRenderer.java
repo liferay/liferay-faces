@@ -23,6 +23,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.alloy.component.button.Button;
 import com.liferay.faces.alloy.component.popover.Popover;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
@@ -101,6 +102,22 @@ public class PopoverRenderer extends PopoverRendererBase {
 		String for_ = popover.getFor();
 		encodeClientId(responseWriter, NODE, for_, popover, true);
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
+
+		UIComponent forComponent = popover.findComponent(for_);
+
+		if (forComponent != null) {
+
+			if (forComponent instanceof Button) {
+				Button button = (Button) forComponent;
+
+				if ((button.getOnclick() == null) && (button.getOnmouseover() == null)) {
+					logger.warn(
+						"Popover [{0}] is *for* button [{1}] but the button does not have an onclick or onmouseover attribute.",
+						popover.getClientKey(), for_);
+				}
+			}
+
+		}
 	}
 
 	@Override
