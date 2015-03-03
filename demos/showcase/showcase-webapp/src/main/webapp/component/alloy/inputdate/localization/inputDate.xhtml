@@ -15,7 +15,7 @@
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="portugueseSelection" value="#{inputDateModelBean.birthday}">
-					<f:convertDateTime pattern="#{portugueseInputDate.datePattern}" locale="pt-BR" />
+					<f:convertDateTime pattern="#{portugueseInputDate.pattern}" locale="pt-BR" />
 				</alloy:outputText>
 			</showcase:outputModel>
 		</alloy:form>
@@ -34,7 +34,7 @@
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="japaneseSelection" value="#{inputDateModelBean.birthday}">
-					<f:convertDateTime pattern="#{japaneseInputDate.datePattern}" locale="#{inputDateModelBean.locale}" />
+					<f:convertDateTime pattern="#{japaneseInputDate.pattern}" locale="#{inputDateModelBean.locale}" />
 				</alloy:outputText>
 			</showcase:outputModel>
 		</alloy:form>
