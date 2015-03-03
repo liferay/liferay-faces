@@ -29,9 +29,11 @@ public class MessageContextFactoryAlloyImpl extends MessageContextFactory {
 	private MessageContextFactory wrappedMessageContextFactory;
 
 	public MessageContextFactoryAlloyImpl(MessageContextFactory messageContextFactory) {
-		MessageContext wrappedMessageContext = messageContextFactory.getMessageContext();
-		this.messageContext = new MessageContextAlloyImpl(wrappedMessageContext);
-		this.wrappedMessageContextFactory = messageContextFactory;
+		if (messageContextFactory != null) {
+			MessageContext wrappedMessageContext = messageContextFactory.getMessageContext();
+			this.messageContext = new MessageContextAlloyImpl(wrappedMessageContext);
+			this.wrappedMessageContextFactory = messageContextFactory;
+		}
 	}
 
 	@Override
