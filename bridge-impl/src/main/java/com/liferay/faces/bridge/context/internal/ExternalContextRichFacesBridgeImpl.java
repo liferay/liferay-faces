@@ -18,9 +18,8 @@ import javax.faces.context.ExternalContextWrapper;
 
 
 /**
- * This class exists as a workaround for FACES-2133. It returns a special value from {@link
- * ExternalContextRichFacesBridgeImpl#getRequestServletPath()} in order to work around an implicit servlet dependency in
- * the a4j:mediaOutput component.
+ * This class serves as a fix for FACES-2133 such that the {@link #getRequestPathInfo()} and {@link
+ * #getRequestServletPath()} methods work around an implicit servlet dependency in the a4j:mediaOutput component.
  *
  * @author  Kyle Stiemann
  */
