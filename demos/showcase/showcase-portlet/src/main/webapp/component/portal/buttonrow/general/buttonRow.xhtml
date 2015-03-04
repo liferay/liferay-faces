@@ -3,11 +3,10 @@
 	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
-		<!-- Use portal:buttonRow to contain a row of buttons in Liferay. -->
 		<showcase:example>
 			<portal:buttonRow>
-				<alloy:button value="Go" />
-				<alloy:button value="Cancel" />
+				<alloy:button styleClass="btn btn-primary" value="#{i18n['save']}" />
+				<alloy:button styleClass="btn btn-cancel" value="#{i18n['cancel']}" />
 			</portal:buttonRow>
 		</showcase:example>
 	</ui:define>
