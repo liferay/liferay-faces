@@ -5,7 +5,18 @@
 	<ui:define name="col1">
 		<alloy:form>
 			<showcase:example description="#{i18n['alloy-inputtime-highlighter-example']}">
-				<alloy:inputTime id="time" value="#{inputTimeModelBean.time}" pattern="hh:mm a" highlighterType="phraseMatch" />
+				<alloy:field label="#{i18n['highlighter-type']}">
+					<alloy:selectOneMenu value="#{inputTimeModelBean.highlighterType}" hideNoSelectionOption="true">
+						<f:selectItem itemValue="charMatch" />
+						<f:selectItem itemValue="phraseMatch" />
+						<f:selectItem itemValue="startsWith" />
+						<f:selectItem itemValue="subWordMatch" />
+						<f:selectItem itemValue="wordMatch" />
+						<f:ajax render="time" />
+					</alloy:selectOneMenu>
+				</alloy:field>
+				<alloy:inputTime id="time" highlighterType="#{inputTimeModelBean.highlighterType}"
+					pattern="hh:mm a" value="#{inputTimeModelBean.time}" />
 				<hr />
 				<alloy:commandButton value="#{i18n['submit']}">
 					<f:ajax execute="@form" render="@form" />
