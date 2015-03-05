@@ -24,8 +24,11 @@ import javax.el.ELContext;
 import javax.el.MethodExpression;
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
+import javax.faces.component.NamingContainer;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
 import javax.faces.component.behavior.ClientBehavior;
+import javax.faces.component.behavior.ClientBehaviorContext;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
@@ -95,11 +98,19 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 			String clientId = uiComponent.getClientId(facesContext);
 			String hiddenClientId = clientId + HIDDEN_SUFFIX;
 
+			String namingContainerId = null;
+			UIViewRoot viewRoot = facesContext.getViewRoot();
+
+			if (viewRoot instanceof NamingContainer) {
+				namingContainerId = viewRoot.getContainerClientId(facesContext);
+			}
+
 			//J-
-			// LFAI.setAutoCompleteEventListeners(A, clientVarName, 'escapedHiddenClientId', 'clientId');
+			// LFAI.setAutoCompleteEventListeners(A, clientVarName, 'escapedHiddenClientId', 'clientId',
+			//	'namingContainerId');
 			//J+
 			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initAutoCompleteServerMode", clientVarNameJSFragment,
-				hiddenClientId, clientId);
+				hiddenClientId, clientId, namingContainerId);
 		}
 	}
 
