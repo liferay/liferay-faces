@@ -223,7 +223,7 @@
 	<component name="NavItem" extendsTags="Aria Styleable UIComponentBase" parentClass="javax.faces.component.UIColumn"
 		rendererParentClass="com.liferay.faces.portal.render.internal.PortalTagRenderer&lt;com.liferay.faces.portal.component.navitem.NavItem, com.liferay.taglib.aui.NavItemTag&gt;">
 		<description>
-			<![CDATA[NavItem is a UIColumn component that renders an <code>&lt;li&gt;...&lt;/li&gt;</code> (list item) element. If the href attribute is specified, then an <a>...</a> anchor tag is rendered inside the list item element.]]>
+			<![CDATA[NavItem is a UIColumn component that renders an <code>&lt;li&gt;...&lt;/li&gt;</code> (list item) element. If the href attribute is specified, then an <code>&lt;a&gt;...&lt;/a&gt;</code> anchor tag is rendered inside the list item element.]]>
 		</description>
 		<attributes>
 			<attribute>
