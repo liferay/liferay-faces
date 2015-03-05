@@ -6,7 +6,7 @@
 	<description><![CDATA[The Liferay Faces Bridge facelet component tags with the <code>bridge:</code> tag name prefix.]]></description>
 	<namespace>http://liferay.com/faces/bridge</namespace>
 	<tag>
-		<description><![CDATA[InputFile is a UIInput component that renders an <input> element with type=file. Since it extends HtmlInputFile, it supports all the features of h:inputFile and also supports multi-file uploads.]]></description>
+		<description><![CDATA[InputFile is a UIInput component that renders an <code>&lt;input&gt;</code> element with type=file. Since it extends HtmlInputFile, it supports all the features of h:inputFile and also supports multi-file uploads.]]></description>
 		<tag-name>inputFile</tag-name>
 		<component>
 			<component-type>com.liferay.faces.bridge.component.inputfile.InputFile</component-type>
