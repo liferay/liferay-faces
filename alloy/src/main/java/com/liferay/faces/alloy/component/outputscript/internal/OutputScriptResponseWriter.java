@@ -39,7 +39,7 @@ public class OutputScriptResponseWriter extends DelegationResponseWriterBase {
 
 	@Override
 	public void endElement(String name) throws IOException {
-		write(RendererUtil.ALLOY_END_SCRIPT);
+		write("});");
 		super.endElement(name);
 	}
 
