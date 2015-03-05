@@ -21,7 +21,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.servlet.ServletContext;
 
-import com.liferay.faces.bridge.context.internal.ExternalContextExpirationImpl;
+import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -50,8 +50,18 @@ public class ExternalContextFactoryImpl extends ExternalContextFactory {
 		// NOTE: Can't use BridgeUtil.isPortletRequest() here because the FacesContext is in the process of
 		// initialization.
 		if (context instanceof PortletContext) {
-			return new ExternalContextImpl((PortletContext) context, (PortletRequest) request,
-					(PortletResponse) response);
+
+			ExternalContext externalContext = new ExternalContextImpl((PortletContext) context,
+					(PortletRequest) request, (PortletResponse) response);
+			String resourceName = externalContext.getRequestParameterMap().get(ResourceConstants.JAVAX_FACES_RESOURCE);
+
+			// Workaround for FACES-2133
+			if ("org.richfaces.resource.MediaOutputResource".equals(resourceName)) {
+				return new ExternalContextRichFacesBridgeImpl(externalContext);
+			}
+			else {
+				return externalContext;
+			}
 		}
 
 		// Otherwise, if the session is expiring, then return an instance of FacesContext that can function in a
