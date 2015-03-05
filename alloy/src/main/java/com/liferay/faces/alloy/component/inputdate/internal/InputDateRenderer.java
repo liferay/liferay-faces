@@ -209,7 +209,8 @@ public class InputDateRenderer extends InputDateRendererBase {
 				// attached to the input.
 				String datePattern = inputDate.getPattern();
 				String mask = getMaskFromDatePattern(datePattern);
-				date = new JavaScriptFragment("A.Date.format(event.date,{format:'" + mask + "'})");
+				String escapedMask = RendererUtil.escapeJavaScript(mask);
+				date = new JavaScriptFragment("A.Date.format(event.date,{format:'" + escapedMask + "'})");
 			}
 
 			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.inputDateTimePickerSelect", 'A', escapedInputClientId,
