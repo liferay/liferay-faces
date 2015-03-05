@@ -39,6 +39,7 @@ public class MessageAttributes extends AttributesWrapper {
 
 	@Override
 	public Object get(Object key) {
+
 		Object value = super.get(key);
 
 		if (key != null) {
@@ -46,68 +47,42 @@ public class MessageAttributes extends AttributesWrapper {
 			String styleClass = (String) super.get("styleClass");
 
 			if (ERROR_CLASS.equals(key) || FATAL_CLASS.equals(key)) {
-
-				if (value == null) {
-
-					if (styleClass == null) {
-						value = PORTLET_MSG_ERROR;
-					}
-					else {
-						value = PORTLET_MSG_ERROR.concat(" ").concat(styleClass);
-					}
-				}
-				else {
-
-					String valueAsString = (String) value;
-
-					if (!valueAsString.contains(PORTLET_MSG_ERROR)) {
-						value = valueAsString.concat(" ").concat(PORTLET_MSG_ERROR);
-					}
-				}
+				value = getClassAttributeValue(value, PORTLET_MSG_ERROR, styleClass);
 			}
 			else if (INFO_CLASS.equals(key)) {
-
-				if (value == null) {
-
-					if (styleClass == null) {
-						value = PORTLET_MSG_INFO;
-					}
-					else {
-						value = PORTLET_MSG_INFO.concat(" ").concat(styleClass);
-					}
-				}
-				else {
-
-					String valueAsString = (String) value;
-
-					if (!valueAsString.contains(PORTLET_MSG_INFO)) {
-						value = valueAsString.concat(" ").concat(PORTLET_MSG_INFO);
-					}
-				}
+				value = getClassAttributeValue(value, PORTLET_MSG_INFO, styleClass);
 			}
 			else if (WARN_CLASS.equals(key)) {
-
-				if (value == null) {
-
-					if (styleClass == null) {
-						value = PORTLET_MSG_WARN;
-					}
-					else {
-						value = PORTLET_MSG_WARN.concat(" ").concat(styleClass);
-					}
-				}
-				else {
-
-					String valueAsString = (String) value;
-
-					if (!valueAsString.contains(PORTLET_MSG_WARN)) {
-						value = valueAsString.concat(" ").concat(PORTLET_MSG_WARN);
-					}
-				}
+				value = getClassAttributeValue(value, PORTLET_MSG_WARN, styleClass);
 			}
 		}
 
 		return value;
+	}
+
+	protected String getClassAttributeValue(Object value, String defaultValue, String styleClass) {
+
+		String classAttributeValue = null;
+
+		if (value == null) {
+
+			if (styleClass == null) {
+				classAttributeValue = PORTLET_MSG_WARN;
+			}
+			else {
+				classAttributeValue = PORTLET_MSG_WARN.concat(" ").concat(styleClass);
+			}
+		}
+		else {
+
+			String valueAsString = value.toString();
+
+			if (!valueAsString.contains(PORTLET_MSG_WARN)) {
+				classAttributeValue = PORTLET_MSG_WARN.concat(" ").concat(valueAsString);
+			}
+		}
+
+		return classAttributeValue;
 	}
 
 	public Map<String, Object> getWrapped() {
