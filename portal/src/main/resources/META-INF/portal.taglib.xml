@@ -320,7 +320,6 @@
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -340,7 +339,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>

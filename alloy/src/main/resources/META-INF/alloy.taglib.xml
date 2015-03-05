@@ -77,14 +77,12 @@
 			<description><![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take a <code>TabCollapseEvent</code> argument.]]></description>
 			<name>tabCollapseListener</name>
 			<required>false</required>
-			<type>javax.el.MethodExpression</type>
 			<method-signature>void tabCollapseListener(com.liferay.faces.alloy.component.tab.TabCollapseEvent)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take a <code>TabExpandEvent</code> argument.]]></description>
 			<name>tabExpandListener</name>
 			<required>false</required>
-			<type>javax.el.MethodExpression</type>
 			<method-signature>void tabExpandListener(com.liferay.faces.alloy.component.tab.TabExpandEvent)</method-signature>
 		</attribute>
 		<attribute>
@@ -235,7 +233,6 @@
 			<description><![CDATA[A method that is executed when an autoComplete item is selected. The method must be <code>public</code>, return <code>void</code>, and take an <code>com.liferay.faces.alloy.component.autocomplete.ItemSelectEvent</code> argument.]]></description>
 			<name>itemSelectListener</name>
 			<required>false</required>
-			<type>javax.el.MethodExpression</type>
 			<method-signature>void itemSelectListener(com.liferay.faces.alloy.component.autocomplete.ItemSelectEvent)</method-signature>
 		</attribute>
 		<attribute>
@@ -392,8 +389,7 @@
 			<description><![CDATA[A method that is executed when a query occurs. The method must be <code>public</code>, return a <code>java.util.List&lt;java.lang.String&gt;</code>, and takes a <code>java.lang.String</code> and a <code>java.util.List&lt;java.lang.String&gt;</code> as a arguments. The <code>String</code> passed to the method is the current query. The <code>List&lt;String&gt;</code> is an immutable list of unfiltered results. The method must return a <code>List&lt;String&gt;</code> which contains the filtered results.]]></description>
 			<name>serverCustomFilter</name>
 			<required>false</required>
-			<type>javax.el.MethodExpression</type>
-			<method-signature>java.util.List filterResults(java.lang.String, java.util.List)</method-signature>
+			<method-signature>java.util.List&lt;java.lang.String&gt; filterResults(java.lang.String, java.util.List&lt;java.lang.String&gt;)</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Specifies the type of filter that will be used for the autoComplete results. Valid values include:       <ul>        <li>charMatch</li>        <li>charMatchCase</li>        <li>phraseMatch</li>        <li>phraseMatchCase</li>        <li>startsWith</li>        <li>startsWithCase</li>        <li>subWordMatch</li>        <li>subWordMatchCase</li>        <li>wordMatch</li>        <li>wordMatchCase</li>       </ul>      <strong>Note:</strong> This attribute will be ignored if the <code>serverCustomFilter</code> attribute is used.]]></description>
@@ -441,7 +437,6 @@
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -461,7 +456,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<attribute>
@@ -824,14 +818,12 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return an <code>Object</code>, and take no arguments. The <code>toString()</code> method of the returned object is used to determine where to navigate (if at all) after the action has been performed.]]></description>
 			<name>action</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>java.lang.Object action()</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return <code>void</code>, and take either no arguments or one <code>ActionEvent</code> argument.]]></description>
 			<name>actionListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void actionListener(javax.faces.event.ActionEvent)</method-signature>
 		</attribute>
 		<attribute>
@@ -1053,14 +1045,12 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return an <code>Object</code>, and take no arguments. The <code>toString()</code> method of the returned object is used to determine where to navigate (if at all) after the action has been performed.]]></description>
 			<name>action</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>java.lang.Object action()</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return <code>void</code>, and take either no arguments or one <code>ActionEvent</code> argument.]]></description>
 			<name>actionListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void actionListener(javax.faces.event.ActionEvent)</method-signature>
 		</attribute>
 		<attribute>
@@ -2520,7 +2510,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when an date is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>com.liferay.faces.alloy.component.inputdate.InputDateEvent</code> argument.]]></description>
 			<name>dateSelectListener</name>
 			<required>false</required>
-			<type>javax.el.MethodExpression</type>
 			<method-signature>void dateSelectListener(com.liferay.faces.alloy.component.inputdate.DateSelectEvent)</method-signature>
 		</attribute>
 		<attribute>
@@ -2761,7 +2750,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -2781,7 +2769,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<attribute>
@@ -2872,7 +2859,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when a file is uploaded. The method must be <code>public</code>, return <code>void</code>, and take a <code>FileUploadEvent</code> argument.]]></description>
 			<name>fileUploadListener</name>
 			<required>false</required>
-			<type>javax.el.MethodExpression</type>
 			<method-signature>void fileUploadListener(com.liferay.faces.util.component.inputfile.FileUploadEvent)</method-signature>
 		</attribute>
 		<attribute>
@@ -3077,7 +3063,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -3097,7 +3082,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
@@ -3163,7 +3147,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -3183,7 +3166,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
@@ -3429,7 +3411,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -3449,7 +3430,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
@@ -3587,7 +3567,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -3607,7 +3586,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<attribute>
@@ -3853,7 +3831,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -3873,7 +3850,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
@@ -4107,7 +4083,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -4127,7 +4102,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
@@ -4457,7 +4431,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when an date is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>com.liferay.faces.alloy.component.inputtime.TimeSelectEvent</code> argument.]]></description>
 			<name>timeSelectListener</name>
 			<required>false</required>
-			<type>javax.el.MethodExpression</type>
 			<method-signature>void timeSelectListener(com.liferay.faces.alloy.component.inputtime.TimeSelectEvent)</method-signature>
 		</attribute>
 		<attribute>
@@ -4476,7 +4449,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -4496,7 +4468,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<attribute>
@@ -6881,7 +6852,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -6901,7 +6871,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
@@ -7165,7 +7134,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -7185,7 +7153,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
@@ -7431,7 +7398,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -7451,7 +7417,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
@@ -7691,7 +7656,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -7711,7 +7675,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
@@ -7951,7 +7914,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -7971,7 +7933,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
@@ -8205,7 +8166,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -8225,7 +8185,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
@@ -8471,7 +8430,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -8491,7 +8449,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
@@ -8743,7 +8700,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -8763,7 +8719,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
@@ -9015,7 +8970,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed in the PROCESS_VALIDATIONS phase of the lifecycle. The method must be <code>public</code>, return <code>void</code>, and take three arguments of <code>FacesContext</code>, <code>UIComponent</code>, and <code>Object</code>.]]></description>
 			<name>validator</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
 java.lang.Object)</method-signature>
 		</attribute>
@@ -9035,7 +8989,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when the value of this component changes. The method must be <code>public</code>, return <code>void</code>, and take no arguments or one argument of <code>ValueChangeEvent</code>.]]></description>
 			<name>valueChangeListener</name>
 			<required>false</required>
-			<type>java.lang.Object</type>
 			<method-signature>void valueChange(javax.faces.event.ValueChangeEvent)</method-signature>
 		</attribute>
 		<tag-extension>
@@ -9174,7 +9127,6 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when a tab is clicked. The method must be <code>public</code>, return <code>void</code>, and take an <code>TabSelectEvent</code> argument.]]></description>
 			<name>tabSelectListener</name>
 			<required>false</required>
-			<type>javax.el.MethodExpression</type>
 			<method-signature>void tabSelectListener(com.liferay.faces.alloy.component.tab.TabSelectEvent)</method-signature>
 		</attribute>
 		<attribute>
