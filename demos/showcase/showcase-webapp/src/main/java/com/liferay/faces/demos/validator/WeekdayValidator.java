@@ -11,13 +11,8 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-
 package com.liferay.faces.demos.validator;
 
-import com.liferay.faces.alloy.component.inputdate.InputDate;
-import com.liferay.faces.util.context.MessageContext;
-import com.liferay.faces.util.context.MessageContextFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,6 +20,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
+
 import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -32,6 +28,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
+
+import com.liferay.faces.alloy.component.inputdate.InputDate;
+import com.liferay.faces.util.context.MessageContext;
+import com.liferay.faces.util.context.MessageContextFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -73,9 +74,10 @@ public class WeekdayValidator implements Validator {
 
 			Calendar calendar = new GregorianCalendar(timeZone);
 			calendar.setTime(date);
-			final int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-			
-			if (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY) {
+
+			int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+			if ((dayOfWeek == Calendar.SATURDAY) || (dayOfWeek == Calendar.SUNDAY)) {
 
 				String message = getMessage(facesContext, inputDate, "sat-and-sun-are-not-valid");
 				FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_WARN, message, message);
@@ -87,10 +89,11 @@ public class WeekdayValidator implements Validator {
 	private String getMessage(FacesContext facesContext, InputDate inputDate, String messageId) {
 
 		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
-			MessageContextFactory.class);
-		final MessageContext messageContext = messageContextFactory.getMessageContext();
-		final Object localeObject = inputDate.getLocale(facesContext);
+				MessageContextFactory.class);
+		MessageContext messageContext = messageContextFactory.getMessageContext();
+		Object localeObject = inputDate.getLocale(facesContext);
 		Locale locale = getObjectAsLocale(localeObject);
+
 		return messageContext.getMessage(locale, messageId);
 	}
 
@@ -119,10 +122,7 @@ public class WeekdayValidator implements Validator {
 				}
 			}
 			else {
-
-				String message = "Unable to convert value to locale.";
-				FacesException facesException = new FacesException(message);
-				throw facesException;
+				throw new FacesException("Unable to convert value to locale.");
 			}
 		}
 
