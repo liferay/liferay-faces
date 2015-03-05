@@ -21,15 +21,6 @@ import java.util.Map;
  */
 public class MessageAttributes extends AttributesWrapper {
 
-	// Private Constants
-	private static final String ERROR_CLASS = "errorClass";
-	private static final String FATAL_CLASS = "fatalClass";
-	private static final String INFO_CLASS = "infoClass";
-	private static final String PORTLET_MSG_ERROR = "portlet-msg-error";
-	private static final String PORTLET_MSG_INFO = "portlet-msg-info";
-	private static final String PORTLET_MSG_WARN = "portlet-msg-warn";
-	private static final String WARN_CLASS = "warnClass";
-
 	// Private Data Members
 	private Map<String, Object> wrappedAttributes;
 
@@ -46,14 +37,14 @@ public class MessageAttributes extends AttributesWrapper {
 
 			String styleClass = (String) super.get("styleClass");
 
-			if (ERROR_CLASS.equals(key) || FATAL_CLASS.equals(key)) {
-				value = getClassAttributeValue(value, PORTLET_MSG_ERROR, styleClass);
+			if ("errorClass".equals(key) || "fatalClass".equals(key)) {
+				value = getClassAttributeValue(value, "portlet-msg-error", styleClass);
 			}
-			else if (INFO_CLASS.equals(key)) {
-				value = getClassAttributeValue(value, PORTLET_MSG_INFO, styleClass);
+			else if ("infoClass".equals(key)) {
+				value = getClassAttributeValue(value, "portlet-msg-info", styleClass);
 			}
-			else if (WARN_CLASS.equals(key)) {
-				value = getClassAttributeValue(value, PORTLET_MSG_WARN, styleClass);
+			else if ("warnClass".equals(key)) {
+				value = getClassAttributeValue(value, "portlet-msg-warn", styleClass);
 			}
 		}
 
@@ -67,18 +58,18 @@ public class MessageAttributes extends AttributesWrapper {
 		if (value == null) {
 
 			if (styleClass == null) {
-				classAttributeValue = PORTLET_MSG_WARN;
+				classAttributeValue = defaultValue;
 			}
 			else {
-				classAttributeValue = PORTLET_MSG_WARN.concat(" ").concat(styleClass);
+				classAttributeValue = defaultValue.concat(" ").concat(styleClass);
 			}
 		}
 		else {
 
 			String valueAsString = value.toString();
 
-			if (!valueAsString.contains(PORTLET_MSG_WARN)) {
-				classAttributeValue = PORTLET_MSG_WARN.concat(" ").concat(valueAsString);
+			if (!valueAsString.contains(defaultValue)) {
+				classAttributeValue = defaultValue.concat(" ").concat(valueAsString);
 			}
 		}
 
