@@ -124,7 +124,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 			if (inlineUse != null) {
-				responseWriter.write(RendererUtil.ALLOY_END_SCRIPT);
+				responseWriter.write("});");
 			}
 
 			responseWriter.write(StringPool.FORWARD_SLASH);
