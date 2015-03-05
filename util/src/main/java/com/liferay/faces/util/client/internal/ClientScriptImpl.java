@@ -81,7 +81,7 @@ public class ClientScriptImpl implements ClientScript, Serializable {
 			String alloyBeginScript = RendererUtil.getAlloyBeginScript(facesContext, useSet.toArray(useArray));
 			value.append(alloyBeginScript);
 			value.append(alloyJavaScript.toString());
-			value.append(RendererUtil.ALLOY_END_SCRIPT);
+			value.append("});");
 		}
 
 		return value.toString();
