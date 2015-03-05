@@ -42,11 +42,20 @@ public class MessageAttributes extends AttributesWrapper {
 		Object value = super.get(key);
 
 		if (key != null) {
+			
+			String styleClass = (String) super.get("styleClass");
+
+			if (styleClass != null) {
+				styleClass = styleClass + " ";
+			}
+			else {
+				styleClass = "";
+			}
 
 			if (ERROR_CLASS.equals(key) || FATAL_CLASS.equals(key)) {
 
 				if (value == null) {
-					value = PORTLET_MSG_ERROR;
+					value = styleClass + PORTLET_MSG_ERROR;
 				}
 				else {
 
@@ -60,7 +69,7 @@ public class MessageAttributes extends AttributesWrapper {
 			else if (INFO_CLASS.equals(key)) {
 
 				if (value == null) {
-					value = PORTLET_MSG_INFO;
+					value = styleClass + PORTLET_MSG_INFO;
 				}
 				else {
 
@@ -74,7 +83,7 @@ public class MessageAttributes extends AttributesWrapper {
 			else if (WARN_CLASS.equals(key)) {
 
 				if (value == null) {
-					value = PORTLET_MSG_WARN;
+					value = styleClass + PORTLET_MSG_WARN;
 				}
 				else {
 
