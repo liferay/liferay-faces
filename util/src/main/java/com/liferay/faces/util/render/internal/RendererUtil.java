@@ -42,7 +42,6 @@ import com.liferay.faces.util.product.ProductMap;
 public class RendererUtil {
 
 	// Public Constants
-	public static final String ALLOY_END_SCRIPT = "});";
 	public static final String BACKSLASH_COLON = "\\\\:";
 	public static final String REGEX_COLON = "[:]";
 
