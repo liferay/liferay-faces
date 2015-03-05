@@ -28,8 +28,6 @@ import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.portal.LiferayPortletUtil;
-import com.liferay.faces.util.portal.WebKeys;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
@@ -220,10 +218,6 @@ public class RendererUtil {
 
 	public static String getAlloyBeginScript(FacesContext facesContext, String[] modules) {
 		return getAlloyBeginScript(facesContext, modules, null);
-	}
-
-	public static String getAlloyBeginScript(String[] modules, float browserMajorVersion, boolean browserIE) {
-		return getAlloyBeginScript(modules, null, browserMajorVersion, browserIE);
 	}
 
 	public static String getAlloyBeginScript(FacesContext facesContext, String[] modules, String config) {
