@@ -54,7 +54,7 @@ public class ClientScriptICEfacesImpl implements ClientScript {
 			String[] useArray = use.split(StringPool.COMMA);
 			stringBuilder.append(RendererUtil.getAlloyBeginScript(facesContext, useArray));
 			stringBuilder.append(content);
-			stringBuilder.append(RendererUtil.ALLOY_END_SCRIPT);
+			stringBuilder.append("});");
 		}
 
 		try {
