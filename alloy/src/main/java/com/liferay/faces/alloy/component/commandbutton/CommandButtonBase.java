@@ -33,7 +33,7 @@ public abstract class CommandButtonBase extends HtmlCommandButton implements Sty
 		type
 	}
 
-	public Boolean isAutofocus() {
+	public Boolean getAutofocus() {
 		return (Boolean) getStateHelper().eval(CommandButtonPropertyKeys.autofocus, null);
 	}
 

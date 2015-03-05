@@ -49,15 +49,15 @@ public abstract class AutoCompleteBase extends InputText implements Styleable, C
 		width
 	}
 
-	public Boolean isActivateFirstItem() {
+	public boolean isActivateFirstItem() {
 		return (Boolean) getStateHelper().eval(AutoCompletePropertyKeys.activateFirstItem, true);
 	}
 
-	public void setActivateFirstItem(Boolean activateFirstItem) {
+	public void setActivateFirstItem(boolean activateFirstItem) {
 		getStateHelper().put(AutoCompletePropertyKeys.activateFirstItem, activateFirstItem);
 	}
 
-	public Boolean isAutoScroll() {
+	public Boolean getAutoScroll() {
 		return (Boolean) getStateHelper().eval(AutoCompletePropertyKeys.autoScroll, null);
 	}
 
@@ -65,7 +65,7 @@ public abstract class AutoCompleteBase extends InputText implements Styleable, C
 		getStateHelper().put(AutoCompletePropertyKeys.autoScroll, autoScroll);
 	}
 
-	public Boolean isCircular() {
+	public Boolean getCircular() {
 		return (Boolean) getStateHelper().eval(AutoCompletePropertyKeys.circular, null);
 	}
 
@@ -139,11 +139,11 @@ public abstract class AutoCompleteBase extends InputText implements Styleable, C
 		getStateHelper().put(AutoCompletePropertyKeys.itemSelectListener, itemSelectListener);
 	}
 
-	public Boolean isListItemRequired() {
+	public boolean isListItemRequired() {
 		return (Boolean) getStateHelper().eval(AutoCompletePropertyKeys.listItemRequired, false);
 	}
 
-	public void setListItemRequired(Boolean listItemRequired) {
+	public void setListItemRequired(boolean listItemRequired) {
 		getStateHelper().put(AutoCompletePropertyKeys.listItemRequired, listItemRequired);
 	}
 
@@ -179,11 +179,11 @@ public abstract class AutoCompleteBase extends InputText implements Styleable, C
 		getStateHelper().put(AutoCompletePropertyKeys.serverFilterType, serverFilterType);
 	}
 
-	public Boolean isTabSelect() {
+	public boolean isTabSelect() {
 		return (Boolean) getStateHelper().eval(AutoCompletePropertyKeys.tabSelect, true);
 	}
 
-	public void setTabSelect(Boolean tabSelect) {
+	public void setTabSelect(boolean tabSelect) {
 		getStateHelper().put(AutoCompletePropertyKeys.tabSelect, tabSelect);
 	}
 

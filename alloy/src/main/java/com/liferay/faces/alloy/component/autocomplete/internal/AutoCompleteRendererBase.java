@@ -74,7 +74,7 @@ public abstract class AutoCompleteRendererBase extends DelegatingAlloyRendererBa
 			first = false;
 		}
 
-		Boolean autoScroll = autoComplete.isAutoScroll();
+		Boolean autoScroll = autoComplete.getAutoScroll();
 
 		if (autoScroll != null) {
 
@@ -82,7 +82,7 @@ public abstract class AutoCompleteRendererBase extends DelegatingAlloyRendererBa
 			first = false;
 		}
 
-		Boolean circular = autoComplete.isCircular();
+		Boolean circular = autoComplete.getCircular();
 
 		if (circular != null) {
 

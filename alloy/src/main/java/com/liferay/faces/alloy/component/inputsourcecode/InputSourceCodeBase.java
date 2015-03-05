@@ -60,7 +60,7 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 		getStateHelper().put(InputSourceCodePropertyKeys.height, height);
 	}
 
-	public Boolean isHighlightActiveLine() {
+	public Boolean getHighlightActiveLine() {
 		return (Boolean) getStateHelper().eval(InputSourceCodePropertyKeys.highlightActiveLine, null);
 	}
 
@@ -84,7 +84,7 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 		getStateHelper().put(InputSourceCodePropertyKeys.mode, mode);
 	}
 
-	public Boolean isReadOnly() {
+	public Boolean getReadOnly() {
 		return (Boolean) getStateHelper().eval(InputSourceCodePropertyKeys.readOnly, null);
 	}
 
@@ -92,7 +92,7 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 		getStateHelper().put(InputSourceCodePropertyKeys.readOnly, readOnly);
 	}
 
-	public Boolean isShowPrintMargin() {
+	public Boolean getShowPrintMargin() {
 		return (Boolean) getStateHelper().eval(InputSourceCodePropertyKeys.showPrintMargin, null);
 	}
 
@@ -108,7 +108,7 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 		getStateHelper().put(InputSourceCodePropertyKeys.tabSize, tabSize);
 	}
 
-	public Boolean isUseSoftTabs() {
+	public Boolean getUseSoftTabs() {
 		return (Boolean) getStateHelper().eval(InputSourceCodePropertyKeys.useSoftTabs, null);
 	}
 
@@ -116,7 +116,7 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 		getStateHelper().put(InputSourceCodePropertyKeys.useSoftTabs, useSoftTabs);
 	}
 
-	public Boolean isUseWrapMode() {
+	public Boolean getUseWrapMode() {
 		return (Boolean) getStateHelper().eval(InputSourceCodePropertyKeys.useWrapMode, null);
 	}
 
