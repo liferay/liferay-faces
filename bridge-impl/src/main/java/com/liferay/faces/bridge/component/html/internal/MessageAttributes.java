@@ -43,45 +43,65 @@ public class MessageAttributes extends AttributesWrapper {
 
 		if (key != null) {
 
+			String styleClass = (String) super.get("styleClass");
+
 			if (ERROR_CLASS.equals(key) || FATAL_CLASS.equals(key)) {
 
 				if (value == null) {
-					value = PORTLET_MSG_ERROR;
+
+					if (styleClass == null) {
+						value = PORTLET_MSG_ERROR;
+					}
+					else {
+						value = PORTLET_MSG_ERROR.concat(" ").concat(styleClass);
+					}
 				}
 				else {
 
 					String valueAsString = (String) value;
 
-					if (valueAsString.indexOf(PORTLET_MSG_ERROR) < 0) {
-						value = valueAsString + " " + PORTLET_MSG_ERROR;
+					if (!valueAsString.contains(PORTLET_MSG_ERROR)) {
+						value = valueAsString.concat(" ").concat(PORTLET_MSG_ERROR);
 					}
 				}
 			}
 			else if (INFO_CLASS.equals(key)) {
 
 				if (value == null) {
-					value = PORTLET_MSG_INFO;
+
+					if (styleClass == null) {
+						value = PORTLET_MSG_INFO;
+					}
+					else {
+						value = PORTLET_MSG_INFO.concat(" ").concat(styleClass);
+					}
 				}
 				else {
 
 					String valueAsString = (String) value;
 
-					if (valueAsString.indexOf(PORTLET_MSG_INFO) < 0) {
-						value = valueAsString + " " + PORTLET_MSG_INFO;
+					if (!valueAsString.contains(PORTLET_MSG_INFO)) {
+						value = valueAsString.concat(" ").concat(PORTLET_MSG_INFO);
 					}
 				}
 			}
 			else if (WARN_CLASS.equals(key)) {
 
 				if (value == null) {
-					value = PORTLET_MSG_WARN;
+
+					if (styleClass == null) {
+						value = PORTLET_MSG_WARN;
+					}
+					else {
+						value = PORTLET_MSG_WARN.concat(" ").concat(styleClass);
+					}
 				}
 				else {
 
 					String valueAsString = (String) value;
 
-					if (valueAsString.indexOf(PORTLET_MSG_WARN) < 0) {
-						value = valueAsString + " " + PORTLET_MSG_WARN;
+					if (!valueAsString.contains(PORTLET_MSG_WARN)) {
+						value = valueAsString.concat(" ").concat(PORTLET_MSG_WARN);
 					}
 				}
 			}
