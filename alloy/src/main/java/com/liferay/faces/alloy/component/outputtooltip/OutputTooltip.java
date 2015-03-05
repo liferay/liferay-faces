@@ -15,7 +15,6 @@ package com.liferay.faces.alloy.component.outputtooltip;
 
 import javax.faces.component.FacesComponent;
 
-import com.liferay.faces.alloy.component.overlay.Overlay;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -24,7 +23,7 @@ import com.liferay.faces.util.lang.StringPool;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = OutputTooltip.COMPONENT_TYPE)
-public class OutputTooltip extends OutputTooltipBase implements Overlay {
+public class OutputTooltip extends OutputTooltipBase {
 
 	// Public Constants
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.outputtooltip.OutputTooltip";
@@ -35,16 +34,6 @@ public class OutputTooltip extends OutputTooltipBase implements Overlay {
 	public OutputTooltip() {
 		super();
 		setRendererType(RENDERER_TYPE);
-	}
-
-	@Override
-	public boolean isDismissible() {
-		return false;
-	}
-
-	@Override
-	public boolean isModal() {
-		return false;
 	}
 
 	@Override

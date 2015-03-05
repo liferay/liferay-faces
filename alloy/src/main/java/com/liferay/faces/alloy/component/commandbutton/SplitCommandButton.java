@@ -37,14 +37,13 @@ import javax.faces.event.FacesEvent;
 import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
 
-import com.liferay.faces.alloy.component.nodemenunav.NodeMenuNav;
 import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
  * @author  Vernon Singleton
  */
-public class SplitCommandButton extends SplitCommandButtonCompat implements NodeMenuNav {
+public class SplitCommandButton extends SplitCommandButtonCompat {
 
 	// Public Constants
 	public static final String RENDERER_TYPE =
@@ -632,13 +631,13 @@ public class SplitCommandButton extends SplitCommandButtonCompat implements Node
 		String styleClass = wrappedCommandButton.getStyleClass();
 
 		if (styleClass == null) {
-			styleClass = DEFAULT_BUTTON;
+			styleClass = "btn-default";
 		}
 
 		String defaultCommandButtonClass = null;
 
-		if (!styleClass.contains(BUTTON_PREFIX)) {
-			defaultCommandButtonClass = DEFAULT_BUTTON;
+		if (!styleClass.contains("btn-")) {
+			defaultCommandButtonClass = "btn-default";
 		}
 
 		String disabledClass = null;
@@ -648,7 +647,7 @@ public class SplitCommandButton extends SplitCommandButtonCompat implements Node
 			disabledClass = "disabled";
 		}
 
-		styleClass = ComponentUtil.concatCssClasses(DEFAULT_BTN, defaultCommandButtonClass, disabledClass, styleClass);
+		styleClass = ComponentUtil.concatCssClasses("btn", defaultCommandButtonClass, disabledClass, styleClass);
 
 		return styleClass;
 	}

@@ -21,11 +21,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.component.menu.Menu;
-import com.liferay.faces.alloy.component.nodemenunav.NodeMenuNav;
 import com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase;
+import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 import com.liferay.faces.util.render.internal.RendererUtil;
+import java.util.Map;
 
 
 /**
@@ -69,10 +70,10 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 	@Override
 	public void encodeJavaScriptCustom(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		NodeMenuNav nodeMenuNav = (NodeMenuNav) uiComponent;
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		boolean disabled = nodeMenuNav.isDisabled();
+		Map<String, Object> attributes = uiComponent.getAttributes();
+		boolean disabled = (Boolean) attributes.get("disabled");
 
 		if (!disabled) {
 
@@ -139,7 +140,6 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		NodeMenuNav nodeMenuNav = (NodeMenuNav) uiComponent;
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 		String clientId = uiComponent.getClientId(facesContext);
@@ -162,8 +162,10 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 		responseWriter.writeAttribute(StringPool.CLASS, "yui3-menu-label btn-group", StringPool.CLASS);
 
 		// ResponseWriter blocks the text value and blocks writing of URIAttributes, if necessary
-		boolean disabled = nodeMenuNav.isDisabled();
-		String styleClass = nodeMenuNav.getStyleClass();
+		Map<String, Object> attributes = uiComponent.getAttributes();
+		boolean disabled = (Boolean) attributes.get("disabled");
+		Styleable styleable = (Styleable) uiComponent;
+		String styleClass = styleable.getStyleClass();
 		DelegationResponseWriter delegationResponseWriter = new NodeMenuNavResponseWriter(responseWriter, disabled,
 				uiComponent.getClientId(facesContext), styleClass);
 
@@ -190,9 +192,10 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 		super.encodeMarkupEnd(facesContext, uiComponent);
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		NodeMenuNav nodeMenuNav = (NodeMenuNav) uiComponent;
-		boolean disabled = nodeMenuNav.isDisabled();
-		String styleClass = nodeMenuNav.getStyleClass();
+		Map<String, Object> attributes = uiComponent.getAttributes();
+		boolean disabled = (Boolean) attributes.get("disabled");
+		Styleable styleable = (Styleable) uiComponent;
+		String styleClass = styleable.getStyleClass();
 		String defaultOptionsDivId = getDefaultOptionsId(facesContext, uiComponent);
 
 		responseWriter.startElement("a", uiComponent);

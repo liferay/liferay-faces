@@ -77,7 +77,9 @@ public class DialogRenderer extends DialogRendererBase {
 			responseWriter.write(StringPool.SEMICOLON);
 		}
 
-		encodeOverlayDismissible(responseWriter, dialog, clientKey);
+		if (!dialog.isModal() && dialog.isDismissible()) {
+			encodeOverlayDismissible(responseWriter, dialog, clientKey);
+		}
 
 		encodeOverlayJavaScriptCustom(responseWriter, facesContext, dialog);
 	}

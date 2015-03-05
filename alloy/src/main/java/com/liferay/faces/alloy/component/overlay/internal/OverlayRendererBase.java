@@ -20,12 +20,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.alloy.component.overlay.Overlay;
 import com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 import com.liferay.faces.util.render.internal.IdDelegationResponseWriter;
 import com.liferay.faces.util.render.internal.RendererUtil;
+import java.util.Map;
 
 
 /**
@@ -65,7 +65,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 		super.encodeMarkupEnd(facesContext, uiComponent);
 	}
 
-	public void encodeOverlayJavaScriptCustom(ResponseWriter responseWriter, FacesContext facesContext, Overlay overlay)
+	public void encodeOverlayJavaScriptCustom(ResponseWriter responseWriter, FacesContext facesContext, UIComponent overlay)
 		throws IOException {
 
 		// The outermost <div> (which is the boundingBox) was initially styled with "display:none;" in order to prevent
@@ -80,43 +80,41 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 		responseWriter.write("').setStyle('display',null);");
 	}
 
-	protected void encodeOverlayDismissible(ResponseWriter responseWriter, Overlay overlay, String clientKey)
+	protected void encodeOverlayDismissible(ResponseWriter responseWriter, UIComponent overlay, String clientKey)
 		throws IOException {
 
-		if (!overlay.isModal() && overlay.isDismissible()) {
-			responseWriter.write("var ");
-			responseWriter.write(clientKey);
-			responseWriter.write("_switched=false;");
-			responseWriter.write("Liferay.component('");
-			responseWriter.write(clientKey);
-			responseWriter.write("').get('boundingBox').on('clickoutside',function(event){if(");
-			responseWriter.write(clientKey);
-			responseWriter.write("_switched){");
-			responseWriter.write(clientKey);
-			responseWriter.write("_switched=false;}else{if(Liferay.component('");
-			responseWriter.write(clientKey);
-			responseWriter.write("').get('visible')){Liferay.component('");
-			responseWriter.write(clientKey);
-			responseWriter.write("').hide();}}});");
-			responseWriter.write("A.Do.after(function(stuff){if(Liferay.component('");
-			responseWriter.write(clientKey);
-			responseWriter.write("').get('visible')){");
-			responseWriter.write(clientKey);
-			responseWriter.write("_switched=true;}},Liferay.component('");
-			responseWriter.write(clientKey);
-			responseWriter.write("'),'toggle');");
-			responseWriter.write("A.Do.after(function(stuff){if(Liferay.component('");
-			responseWriter.write(clientKey);
-			responseWriter.write("').get('visible')){");
-			responseWriter.write(clientKey);
-			responseWriter.write("_switched=true;}},Liferay.component('");
-			responseWriter.write(clientKey);
-			responseWriter.write("'),'show');");
-		}
+		responseWriter.write("var ");
+		responseWriter.write(clientKey);
+		responseWriter.write("_switched=false;");
+		responseWriter.write("Liferay.component('");
+		responseWriter.write(clientKey);
+		responseWriter.write("').get('boundingBox').on('clickoutside',function(event){if(");
+		responseWriter.write(clientKey);
+		responseWriter.write("_switched){");
+		responseWriter.write(clientKey);
+		responseWriter.write("_switched=false;}else{if(Liferay.component('");
+		responseWriter.write(clientKey);
+		responseWriter.write("').get('visible')){Liferay.component('");
+		responseWriter.write(clientKey);
+		responseWriter.write("').hide();}}});");
+		responseWriter.write("A.Do.after(function(stuff){if(Liferay.component('");
+		responseWriter.write(clientKey);
+		responseWriter.write("').get('visible')){");
+		responseWriter.write(clientKey);
+		responseWriter.write("_switched=true;}},Liferay.component('");
+		responseWriter.write(clientKey);
+		responseWriter.write("'),'toggle');");
+		responseWriter.write("A.Do.after(function(stuff){if(Liferay.component('");
+		responseWriter.write(clientKey);
+		responseWriter.write("').get('visible')){");
+		responseWriter.write(clientKey);
+		responseWriter.write("_switched=true;}},Liferay.component('");
+		responseWriter.write(clientKey);
+		responseWriter.write("'),'show');");
 	}
 
 	protected void encodeOverlayHiddenAttributes(FacesContext facesContext, ResponseWriter responseWriter,
-		Overlay overlay, boolean first) throws IOException {
+		UIComponent overlay, boolean first) throws IOException {
 
 		// Encode the "contentBox" Alloy hidden attribute.
 		String clientId = overlay.getClientId(facesContext);
@@ -128,7 +126,8 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 		first = false;
 
 		// Encode the "headerContent" Alloy hidden attribute.
-		String headerText = overlay.getHeaderText();
+		Map<String, Object> attributes = overlay.getAttributes();
+		String headerText = (String) attributes.get("headerText");
 
 		if (headerText != null) {
 			headerText = "<span class=\"alloy-overlay-title\">" + headerText + "</span>";
@@ -139,14 +138,14 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 		encodeWidgetRender(responseWriter, first);
 
 		// Encode the "visible" Alloy hidden attribute.
-		Boolean autoShow = overlay.isAutoShow();
+		Boolean autoShow = (Boolean) attributes.get("autoShow");
 
 		if (autoShow != null) {
 			encodeBoolean(responseWriter, VISIBLE, autoShow, first);
 		}
 	}
 
-	protected void encodeOverlayZIndex(ResponseWriter responseWriter, Overlay overlay, Integer zIndex,
+	protected void encodeOverlayZIndex(ResponseWriter responseWriter, UIComponent overlay, Integer zIndex,
 		String defaultZIndex, boolean first) throws IOException {
 
 		if (zIndex.equals(Integer.MIN_VALUE)) {
