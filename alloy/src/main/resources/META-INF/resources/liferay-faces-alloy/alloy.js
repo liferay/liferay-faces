@@ -204,6 +204,37 @@ var LFAI = {
 		document.getElementById(hiddenClientId).value = '';
 	},
 
+	initDatePickerShowOnButton: function(A, escapedInputId, datePicker) {
+
+		var input = A.one('#' + escapedInputId);
+
+		input.on('change', function(){
+
+			var value = input.get('value');
+
+			if (value) {
+
+				var mask = datePicker.get('mask'),
+				dateParser = new A.DateParser(mask),
+				date = dateParser.parse(value),
+				button = A.one(datePicker.get('trigger')),
+				calendar = datePicker.getCalendar();
+
+				value = '';
+				calendar.deselectDates();
+
+				if (date) {
+
+					value = A.Date.format(date,{format:mask});
+					calendar.selectDates(date);
+				}
+
+				button.set('value', value);
+				input.set('value', value);
+			}
+		});
+	},
+
 	initDateTimePickerMobile: function(dateTimePicker, inputClientId, max, min) {
 
 		dateTimePicker.brokenDestroy = dateTimePicker.destroy;

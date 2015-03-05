@@ -253,7 +253,7 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 	protected abstract InputDateTimeResponseWriter getInputDateTimeResponseWriter(ResponseWriter responseWriter,
 		String inputClientId, boolean mobile, boolean responsive);
 
-	protected abstract List<String> getModules(List<String> modules, InputDateTime inputDateTime);
+	protected abstract List<String> getModules(List<String> modules, FacesContext facesContext, InputDateTime inputDateTime);
 
 	protected String[] getModules(String[] defaultModules, FacesContext facesContext, UIComponent uiComponent) {
 
@@ -279,7 +279,7 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 				modules.add(NODE_EVENT_SIMULATE);
 			}
 
-			modules = getModules(Collections.unmodifiableList(modules), inputDateTime);
+			modules = getModules(Collections.unmodifiableList(modules), facesContext, inputDateTime);
 		}
 
 		return modules.toArray(new String[] {});

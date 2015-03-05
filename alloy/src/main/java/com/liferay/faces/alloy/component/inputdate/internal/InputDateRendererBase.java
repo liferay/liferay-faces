@@ -34,16 +34,14 @@ import com.liferay.faces.alloy.component.inputdatetime.internal.InputDateTimeRen
 public abstract class InputDateRendererBase extends InputDateTimeRenderer {
 
 	// Protected Constants
+	protected static final String ALLOY_CLASS_NAME = "DatePicker";
+	protected static final String ALLOY_MODULE_NAME = "aui-datepicker";
 	protected static final String DATE_SELECT_LISTENER = "dateSelectListener";
 	protected static final String MASK = "mask";
 	protected static final String MAX_DATE = "maxDate";
 	protected static final String MIN_DATE = "minDate";
 	protected static final String PANES = "panes";
 	protected static final String RESPONSIVE = "responsive";
-
-	// Private Constants
-	private static final String ALLOY_CLASS_NAME = "DatePicker";
-	private static final String ALLOY_MODULE_NAME = "aui-datepicker";
 
 	// Modules
 	protected static final String[] MODULES = {ALLOY_MODULE_NAME};
