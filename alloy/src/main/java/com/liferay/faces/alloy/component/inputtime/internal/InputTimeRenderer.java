@@ -34,7 +34,6 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTime;
-import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
 import com.liferay.faces.alloy.component.inputdatetime.internal.InputDateTimeResponseWriter;
 import com.liferay.faces.alloy.component.inputtext.InputText;
 import com.liferay.faces.alloy.component.inputtime.InputTime;
@@ -191,7 +190,7 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 
 			String timePattern = inputTime.getPattern();
 			Object objectLocale = inputTime.getLocale();
-			Locale locale = InputDateTimeUtil.getObjectAsLocale(objectLocale);
+			Locale locale = inputTime.getObjectAsLocale(objectLocale);
 			TimeZone timeZone = TimeZone.getTimeZone(InputDateTime.GREENWICH);
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(timePattern, locale);
 			simpleDateFormat.setTimeZone(timeZone);

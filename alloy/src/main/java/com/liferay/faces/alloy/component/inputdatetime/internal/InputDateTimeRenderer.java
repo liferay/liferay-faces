@@ -33,7 +33,6 @@ import javax.faces.context.ResponseWriter;
 import com.liferay.faces.alloy.component.button.Button;
 import com.liferay.faces.alloy.component.icon.Icon;
 import com.liferay.faces.alloy.component.inputdatetime.InputDateTime;
-import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.component.ClientComponent;
@@ -243,7 +242,7 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 		// specified a locale other than that of the server or view root. If so, then the javascript must be rendered
 		// inline.
 		InputDateTime inputDateTime = (InputDateTime) uiComponent;
-		Locale locale = InputDateTimeUtil.getObjectAsLocale(inputDateTime.getLocale(facesContext));
+		Locale locale = inputDateTime.getObjectAsLocale(inputDateTime.getLocale(facesContext));
 		UIViewRoot viewRoot = facesContext.getViewRoot();
 		Locale viewRootLocale = viewRoot.getLocale();
 
@@ -290,7 +289,7 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 		throws IOException {
 
 		InputDateTime inputDateTime = (InputDateTime) uiComponent;
-		Locale locale = InputDateTimeUtil.getObjectAsLocale(inputDateTime.getLocale(facesContext));
+		Locale locale = inputDateTime.getObjectAsLocale(inputDateTime.getLocale(facesContext));
 
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(StringPool.OPEN_CURLY_BRACE);

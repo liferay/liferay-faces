@@ -24,7 +24,6 @@ import java.util.TimeZone;
 import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.alloy.component.inputdatetime.InputDateTimeUtil;
 import com.liferay.faces.util.component.ComponentUtil;
 
 
@@ -45,18 +44,6 @@ public class InputDate extends InputDateBase {
 		setRendererType(RENDERER_TYPE);
 	}
 
-	protected static String getDefaultDatePattern(Object componentLocale) {
-
-		Locale locale = InputDateTimeUtil.getObjectAsLocale(componentLocale);
-
-		// Note: The following usage of SimpleDateFormat is thread-safe, since only the result of the toPattern()
-		// method is utilized.
-		SimpleDateFormat simpleDateFormat = (SimpleDateFormat) SimpleDateFormat.getDateInstance(DateFormat.MEDIUM,
-				locale);
-
-		return simpleDateFormat.toPattern();
-	}
-
 	@Override
 	protected void validateValue(FacesContext facesContext, Object newValue) {
 
@@ -70,9 +57,9 @@ public class InputDate extends InputDateBase {
 			String timeZoneString = getTimeZone();
 			TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
 
-			Date minDate = InputDateTimeUtil.getObjectAsDate(minDateObject, datePattern, timeZone);
+			Date minDate = getObjectAsDate(minDateObject, datePattern, timeZone);
 			Object maxDateObject = getMaxDate();
-			Date maxDate = InputDateTimeUtil.getObjectAsDate(maxDateObject, datePattern, timeZone);
+			Date maxDate = getObjectAsDate(maxDateObject, datePattern, timeZone);
 
 			if ((minDate == null) && (maxDate == null)) {
 				setValid(true);
@@ -105,6 +92,18 @@ public class InputDate extends InputDateBase {
 		calendar.set(Calendar.MILLISECOND, 0);
 
 		return calendar.getTime();
+	}
+
+	protected final String getDefaultDatePattern(Object componentLocale) {
+
+		Locale locale = getObjectAsLocale(componentLocale);
+
+		// Note: The following usage of SimpleDateFormat is thread-safe, since only the result of the toPattern()
+		// method is utilized.
+		SimpleDateFormat simpleDateFormat = (SimpleDateFormat) SimpleDateFormat.getDateInstance(DateFormat.MEDIUM,
+				locale);
+
+		return simpleDateFormat.toPattern();
 	}
 
 	@Override
