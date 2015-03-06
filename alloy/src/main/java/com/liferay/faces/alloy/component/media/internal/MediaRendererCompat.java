@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
+import javax.faces.application.ResourceHandler;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.component.media.Media;
@@ -38,5 +39,9 @@ public class MediaRendererCompat extends MediaRendererBase {
 			Object passThroughAttributeValue = passThroughAttributesMap.get(passThroughAttribute);
 			responseWriter.writeAttribute(passThroughAttribute, passThroughAttributeValue, passThroughAttribute);
 		}
+	}
+
+	protected boolean isFacesResourceURL(ResourceHandler resourceHandler, String value) {
+		return resourceHandler.isResourceURL(value);
 	}
 }
