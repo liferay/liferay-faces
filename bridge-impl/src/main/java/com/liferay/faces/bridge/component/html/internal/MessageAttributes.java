@@ -53,9 +53,9 @@ public class MessageAttributes extends AttributesWrapper {
 
 	protected String getClassAttributeValue(Object value, String defaultValue, String styleClass) {
 
-		String classAttributeValue = null;
+		String classAttributeValue = (String) value;
 
-		if (value == null) {
+		if (classAttributeValue == null) {
 
 			if (styleClass == null) {
 				classAttributeValue = defaultValue;
@@ -64,13 +64,8 @@ public class MessageAttributes extends AttributesWrapper {
 				classAttributeValue = defaultValue.concat(" ").concat(styleClass);
 			}
 		}
-		else {
-
-			String valueAsString = value.toString();
-
-			if (!valueAsString.contains(defaultValue)) {
-				classAttributeValue = defaultValue.concat(" ").concat(valueAsString);
-			}
+		else if (!classAttributeValue.contains(defaultValue)) {
+			classAttributeValue = defaultValue.concat(" ").concat(classAttributeValue);
 		}
 
 		return classAttributeValue;
