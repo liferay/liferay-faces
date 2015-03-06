@@ -131,7 +131,7 @@
 			<attribute>
 				<defaultValue>true</defaultValue>
 				<description>
-					<![CDATA[When true the component will gracefully degrade to a Flash player for older browsers. Defaults to true. Defaults to true.]]>
+					<![CDATA[When true the component will gracefully degrade to the Adobe&reg; Flash&reg; player for older browsers. Defaults to true. Defaults to true.]]>
 				</description>
 				<generateJava>false</generateJava>
 				<name>degrade</name>
@@ -139,7 +139,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[A context-relative path, resource URL, or FacesResource that can be used to retrieve the Flash player. Defaults to the AlloyUI Flash player. <strong>Note:</strong> The AlloyUI Flash player does not support <code>.ogv</code> or <code>.webm</code> vides.]]>
+					<![CDATA[A context-relative path, resource URL, or FacesResource that can be used to retrieve the Adobe&reg; Flash&reg; player. Defaults to the player that comes bundled with AlloyUI. <strong>Note:</strong> The AlloyUI player does not support <code>.ogv</code> or <code>.webm</code> formats.]]>
 				</description>
 				<generateJava>false</generateJava>
 				<name>flashPlayer</name>
@@ -148,7 +148,7 @@
 			<attribute>
 				<defaultValue>"9,0,0,0"</defaultValue>
 				<description>
-					<![CDATA[The version of Flash required to play this media. Defaults to <code>"9,0,0,0"</code>.]]>
+					<![CDATA[The version of Adobe&reg; Flash&reg; required to play this media. Defaults to <code>"9,0,0,0"</code>.]]>
 				</description>
 				<generateJava>false</generateJava>
 				<name>flashPlayerVersion</name>
@@ -734,7 +734,7 @@
 	</component>
 	<component name="Audio" extendsTags="AudioVideoCommon" parentClass="com.liferay.faces.alloy.component.media.Media" rendererParentClass="com.liferay.faces.alloy.component.media.internal.MediaRenderer">
 		<description>
-			<![CDATA[Audio is a UIComponent that renders a <code>&lt;div&gt;</code> that contains an HTML5 <code>&lt;audio&gt;</code> element. It also supports graceful degradation for older browsers using the Flash audio player. For degradation, if no audio is specified in the <code>&lt;alloy:audio&gt;</code> tag, then the audio from the first child <code>&lt;alloy:resource&gt;</code> tag is used.]]>
+			<![CDATA[Audio is a UIComponent that renders a <code>&lt;div&gt;</code> that contains an HTML5 <code>&lt;audio&gt;</code> element. It also supports graceful degradation for older browsers.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -1913,14 +1913,14 @@
 			<attribute>
 				<defaultValue>true</defaultValue>
 				<description>
-					<![CDATA[When true the component will gracefully degrade to a Flash player for older browsers. Defaults to true. Defaults to true.]]>
+					<![CDATA[When true the component will gracefully degrade to the Adobe&reg; Flash&reg; player for older browsers. Defaults to true.]]>
 				</description>
 				<name>degrade</name>
 				<type>boolean</type>
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[A context-relative path, resource URL, or FacesResource that can be used to retrieve the Flash player. Defaults to the AlloyUI Flash player. <strong>Note:</strong> The AlloyUI Flash player does not support <code>.ogv</code> or <code>.webm</code> vides.]]>
+					<![CDATA[A context-relative path, resource URL, or FacesResource that can be used to retrieve the Adobe&reg; Flash&reg; player. Defaults to the player that comes bundled with AlloyUI. <strong>Note:</strong> The AlloyUI player does not support <code>.ogv</code> or <code>.webm</code> formats.]]>
 				</description>
 				<name>flashPlayer</name>
 				<type>java.lang.Object</type>
@@ -1928,7 +1928,7 @@
 			<attribute>
 				<defaultValue>"9,0,0,0"</defaultValue>
 				<description>
-					<![CDATA[The version of Flash required to play this media. Defaults to <code>"9,0,0,0"</code>.]]>
+					<![CDATA[The version of Adobe&reg; Flash&reg; required to play this media. Defaults to <code>"9,0,0,0"</code>.]]>
 				</description>
 				<name>flashPlayerVersion</name>
 				<type>java.lang.String</type>
@@ -2757,12 +2757,12 @@
 	</component>
 	<component name="Video" extendsTags="AudioVideoCommon" parentClass="com.liferay.faces.alloy.component.media.Media" rendererParentClass="com.liferay.faces.alloy.component.media.internal.MediaRenderer">
 		<description>
-			<![CDATA[Video is a UIComponent that renders a <code>&lt;div&gt;</code> that contains an HTML5 <code>&lt;video&gt;</code> element. It also supports graceful degradation for older browsers using the Flash video player. For degradation, if no video is specified in the <code>&lt;alloy:video&gt;</code> tag, then the video from the first child <code>&lt;alloy:resource&gt;</code> tag is used.]]>
+			<![CDATA[Video is a UIComponent that renders a <code>&lt;div&gt;</code> that contains an HTML5 <code>&lt;video&gt;</code> element. It also supports graceful degradation for older browsers.]]>
 		</description>
 		<attributes>
 			<attribute>
 				<description>
-					<![CDATA[The height (in pixels) of the video, this attribute will also be applied to the Flash player's <code>&lt;object&gt;</code> tag.]]>
+					<![CDATA[The height (in pixels) of the video, this attribute will also be applied to the Adobe&reg; Flash&reg; player's <code>&lt;object&gt;</code> tag.]]>
 				</description>
 				<name>height</name>
 				<type>java.lang.String</type>
@@ -2776,7 +2776,7 @@
 			</attribute>
 			<attribute>
 				<description>
-					<![CDATA[The width (in pixels) of the video, this attribute will also be applied to the Flash player's <code>&lt;object&gt;</code> tag.]]>
+					<![CDATA[The width (in pixels) of the video, this attribute will also be applied to the Adobe&reg; Flash&reg; player's <code>&lt;object&gt;</code> tag.]]>
 				</description>
 				<name>width</name>
 				<type>java.lang.String</type>

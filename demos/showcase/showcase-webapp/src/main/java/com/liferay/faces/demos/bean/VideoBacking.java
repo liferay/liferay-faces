@@ -81,10 +81,6 @@ public class VideoBacking {
 		return videos;
 	}
 
-	public VideoService getVideoService() {
-		return videoService;
-	}
-
 	public void setVideoService(VideoService videoService) {
 		this.videoService = videoService;
 	}

@@ -21,7 +21,7 @@ import javax.faces.view.facelets.TagAttribute;
 import javax.faces.view.facelets.TagAttributes;
 import javax.faces.view.facelets.TagDecorator;
 
-import com.liferay.faces.alloy.config.AlloyWebConfigParam;
+import com.liferay.faces.alloy.config.internal.AlloyWebConfigParam;
 
 
 /**

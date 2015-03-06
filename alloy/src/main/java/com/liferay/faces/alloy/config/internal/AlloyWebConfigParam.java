@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.config;
+package com.liferay.faces.alloy.config.internal;
 
 import javax.faces.context.ExternalContext;
 
