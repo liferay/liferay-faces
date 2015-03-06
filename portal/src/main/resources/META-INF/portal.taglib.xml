@@ -357,14 +357,12 @@ java.lang.Object)</method-signature>
 			<description><![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return an <code>Object</code>, and take no arguments. The <code>toString()</code> method of the returned object is used to determine where to navigate (if at all) after the action has been performed.]]></description>
 			<name>action</name>
 			<required>false</required>
-			<type>javax.el.MethodExpression</type>
 			<method-signature>java.lang.Object action()</method-signature>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A method that is executed when this component is clicked. The method must be <code>public</code>, return <code>void</code>, and take either no arguments or one <code>ActionEvent</code> argument.]]></description>
 			<name>actionListener</name>
 			<required>false</required>
-			<type>javax.el.MethodExpression</type>
 			<method-signature>void actionListener(javax.faces.event.ActionEvent)</method-signature>
 		</attribute>
 		<attribute>
