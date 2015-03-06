@@ -15,6 +15,7 @@ package com.liferay.faces.alloy.component.media.internal;
 
 import java.io.IOException;
 
+import javax.faces.application.ResourceHandler;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.alloy.component.media.Media;
@@ -29,5 +30,9 @@ public class MediaRendererCompat extends MediaRendererBase {
 
 	protected void encodeJSF22PassthroughAttributes(Media media, ResponseWriter responseWriter) throws IOException {
 		// no-op
+	}
+
+	protected boolean isFacesResourceURL(ResourceHandler resourceHandler, String value) {
+		return ((value != null) && value.contains("javax.faces.resource"));
 	}
 }
