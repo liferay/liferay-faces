@@ -68,7 +68,10 @@ public class MessageAttributes extends AttributesWrapper {
 
 			String valueAsString = value.toString();
 
-			if (!valueAsString.contains(defaultValue)) {
+			if (valueAsString.contains(defaultValue)) {
+				classAttributeValue = valueAsString;
+			}
+			else {
 				classAttributeValue = defaultValue.concat(" ").concat(valueAsString);
 			}
 		}
