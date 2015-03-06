@@ -13,9 +13,8 @@
  */
 package com.liferay.faces.demos.bean;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.List;
+import com.liferay.faces.demos.service.AudioService;
+import com.liferay.faces.util.application.FacesResource;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.Application;
@@ -26,9 +25,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-
-import com.liferay.faces.demos.service.AudioService;
-import com.liferay.faces.util.application.FacesResource;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.List;
 
 
 /**
@@ -53,10 +52,6 @@ public class AudioBacking {
 
 	public List<FacesResource> getAudios() {
 		return audios;
-	}
-
-	public AudioService getAudioService() {
-		return audioService;
 	}
 
 	public void setAudioService(AudioService audioService) {

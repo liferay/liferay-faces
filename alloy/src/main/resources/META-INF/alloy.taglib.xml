@@ -102,7 +102,7 @@
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[Audio is a UIComponent that renders a <code>&lt;div&gt;</code> that contains an HTML5 <code>&lt;audio&gt;</code> element. It also supports graceful degradation for older browsers using the Flash audio player. For degradation, if no audio is specified in the <code>&lt;alloy:audio&gt;</code> tag, then the audio from the first child <code>&lt;alloy:resource&gt;</code> tag is used.]]></description>
+		<description><![CDATA[Audio is a UIComponent that renders a <code>&lt;div&gt;</code> that contains an HTML5 <code>&lt;audio&gt;</code> element. It also supports graceful degradation for older browsers.]]></description>
 		<tag-name>audio</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.audio.Audio</component-type>
@@ -127,19 +127,19 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When true the component will gracefully degrade to a Flash player for older browsers. Defaults to true. Defaults to true.]]></description>
+			<description><![CDATA[When true the component will gracefully degrade to the Adobe&reg; Flash&reg; player for older browsers. Defaults to true. Defaults to true.]]></description>
 			<name>degrade</name>
 			<required>false</required>
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A context-relative path, resource URL, or FacesResource that can be used to retrieve the Flash player. Defaults to the AlloyUI Flash player. <strong>Note:</strong> The AlloyUI Flash player does not support <code>.ogv</code> or <code>.webm</code> vides.]]></description>
+			<description><![CDATA[A context-relative path, resource URL, or FacesResource that can be used to retrieve the Adobe&reg; Flash&reg; player. Defaults to the player that comes bundled with AlloyUI. <strong>Note:</strong> The AlloyUI player does not support <code>.ogv</code> or <code>.webm</code> formats.]]></description>
 			<name>flashPlayer</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The version of Flash required to play this media. Defaults to <code>"9,0,0,0"</code>.]]></description>
+			<description><![CDATA[The version of Adobe&reg; Flash&reg; required to play this media. Defaults to <code>"9,0,0,0"</code>.]]></description>
 			<name>flashPlayerVersion</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -6906,6 +6906,7 @@ java.lang.Object)</method-signature>
 		<tag-name>resource</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.resource.Resource</component-type>
+			<renderer-type>com.liferay.faces.alloy.component.resource.internal.ResourceRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[The content type of the resource.]]></description>
@@ -9507,7 +9508,7 @@ java.lang.Object)</method-signature>
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[Video is a UIComponent that renders a <code>&lt;div&gt;</code> that contains an HTML5 <code>&lt;video&gt;</code> element. It also supports graceful degradation for older browsers using the Flash video player. For degradation, if no video is specified in the <code>&lt;alloy:video&gt;</code> tag, then the video from the first child <code>&lt;alloy:resource&gt;</code> tag is used.]]></description>
+		<description><![CDATA[Video is a UIComponent that renders a <code>&lt;div&gt;</code> that contains an HTML5 <code>&lt;video&gt;</code> element. It also supports graceful degradation for older browsers.]]></description>
 		<tag-name>video</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.video.Video</component-type>
@@ -9532,25 +9533,25 @@ java.lang.Object)</method-signature>
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[When true the component will gracefully degrade to a Flash player for older browsers. Defaults to true. Defaults to true.]]></description>
+			<description><![CDATA[When true the component will gracefully degrade to the Adobe&reg; Flash&reg; player for older browsers. Defaults to true. Defaults to true.]]></description>
 			<name>degrade</name>
 			<required>false</required>
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[A context-relative path, resource URL, or FacesResource that can be used to retrieve the Flash player. Defaults to the AlloyUI Flash player. <strong>Note:</strong> The AlloyUI Flash player does not support <code>.ogv</code> or <code>.webm</code> vides.]]></description>
+			<description><![CDATA[A context-relative path, resource URL, or FacesResource that can be used to retrieve the Adobe&reg; Flash&reg; player. Defaults to the player that comes bundled with AlloyUI. <strong>Note:</strong> The AlloyUI player does not support <code>.ogv</code> or <code>.webm</code> formats.]]></description>
 			<name>flashPlayer</name>
 			<required>false</required>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The version of Flash required to play this media. Defaults to <code>"9,0,0,0"</code>.]]></description>
+			<description><![CDATA[The version of Adobe&reg; Flash&reg; required to play this media. Defaults to <code>"9,0,0,0"</code>.]]></description>
 			<name>flashPlayerVersion</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The height (in pixels) of the video, this attribute will also be applied to the Flash player's <code>&lt;object&gt;</code> tag.]]></description>
+			<description><![CDATA[The height (in pixels) of the video, this attribute will also be applied to the Adobe&reg; Flash&reg; player's <code>&lt;object&gt;</code> tag.]]></description>
 			<name>height</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -9814,7 +9815,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[The width (in pixels) of the video, this attribute will also be applied to the Flash player's <code>&lt;object&gt;</code> tag.]]></description>
+			<description><![CDATA[The width (in pixels) of the video, this attribute will also be applied to the Adobe&reg; Flash&reg; player's <code>&lt;object&gt;</code> tag.]]></description>
 			<name>width</name>
 			<required>false</required>
 			<type>java.lang.String</type>

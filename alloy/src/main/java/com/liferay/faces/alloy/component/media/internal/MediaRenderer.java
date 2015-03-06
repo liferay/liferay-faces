@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.alloy.component.media.internal;
 
-import com.liferay.faces.alloy.component.media.Media;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -28,6 +27,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.alloy.component.media.Media;
 import com.liferay.faces.util.application.FacesResource;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
@@ -77,25 +77,25 @@ public abstract class MediaRenderer extends MediaRendererCompat {
 		boolean autoplay = media.isAutoplay();
 
 		if (autoplay) {
-			responseWriter.writeAttribute(AUTOPLAY, Boolean.toString(autoplay), AUTOPLAY);
+			responseWriter.writeAttribute(AUTOPLAY, "true", AUTOPLAY);
 		}
 
 		boolean controls = media.isControls();
 
 		if (controls) {
-			responseWriter.writeAttribute(CONTROLS, Boolean.toString(controls), CONTROLS);
+			responseWriter.writeAttribute(CONTROLS, "true", CONTROLS);
 		}
 
 		boolean loop = media.isLoop();
 
 		if (loop) {
-			responseWriter.writeAttribute(LOOP, Boolean.toString(loop), LOOP);
+			responseWriter.writeAttribute(LOOP, "true", LOOP);
 		}
 
 		boolean muted = media.isMuted();
 
 		if (muted) {
-			responseWriter.writeAttribute(MUTED, Boolean.toString(muted), MUTED);
+			responseWriter.writeAttribute(MUTED, "true", MUTED);
 		}
 
 		String preload = media.getPreload();
@@ -119,6 +119,7 @@ public abstract class MediaRenderer extends MediaRendererCompat {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
 		Media media = (Media) uiComponent;
