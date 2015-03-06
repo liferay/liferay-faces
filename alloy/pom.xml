@@ -12,6 +12,25 @@
 	<build>
 		<plugins>
 			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<!-- TODO maybe create dir structiure here and copy liscense as well -->
+								<!-- TODO also possible make the dir structure parallel -->
+								<copy file="${basedir}/../reslib/target/classes/META-INF/resources/liferay-faces-reslib/build/aui-video/assets/player.swf" tofile="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/aui/video/player.swf" />
+								<copy file="${basedir}/../reslib/target/classes/META-INF/resources/liferay-faces-reslib/build/aui-audio/assets/player.swf" tofile="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/aui/audio/player.swf" />
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>com.tunyk.mvn.plugins.htmlcompressor</groupId>
 				<artifactId>htmlcompressor-maven-plugin</artifactId>
 				<executions>

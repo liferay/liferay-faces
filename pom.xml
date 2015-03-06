@@ -74,11 +74,11 @@
 		<module>util</module>
 		<module>jrebel</module>
 		<module>maven</module>
+		<module>reslib</module>
 		<module>alloy</module>
 		<module>bridge-api</module>
 		<module>bridge-impl</module>
 		<module>portal</module>
-		<module>reslib</module>
 		<module>support</module>
 		<module>demos</module>
 		<module>issues</module>

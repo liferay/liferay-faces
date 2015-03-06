@@ -734,6 +734,172 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="KeyboardDOMEvents" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keydown event occurs.]]>
+				</description>
+				<name>onkeydown</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keypress event occurs.]]>
+				</description>
+				<name>onkeypress</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keyup event occurs.]]>
+				</description>
+				<name>onkeyup</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="KeyboardDOMEventsInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keydown event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onkeydown</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keypress event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onkeypress</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a keyup event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onkeyup</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="MouseDOMEvents" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when this component is clicked.]]>
+				</description>
+				<name>onclick</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a double click event occurs.]]>
+				</description>
+				<name>ondblclick</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mousedown event occurs.]]>
+				</description>
+				<name>onmousedown</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mousemove event occurs.]]>
+				</description>
+				<name>onmousemove</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseout event occurs.]]>
+				</description>
+				<name>onmouseout</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseover event occurs.]]>
+				</description>
+				<name>onmouseover</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseup event occurs.]]>
+				</description>
+				<name>onmouseup</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="MouseDOMEventsInherited" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when this component is clicked.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onclick</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a double click event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>ondblclick</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mousedown event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onmousedown</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mousemove event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onmousemove</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseout event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onmouseout</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseover event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onmouseover</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Javascript to execute when a mouseup event occurs.]]>
+				</description>
+				<generateJava>false</generateJava>
+				<name>onmouseup</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
 	<!-- /HTML Component Heirarchy -->
 	<!-- /generateTaglibXML="false" tags for common attributes -->
 </components>

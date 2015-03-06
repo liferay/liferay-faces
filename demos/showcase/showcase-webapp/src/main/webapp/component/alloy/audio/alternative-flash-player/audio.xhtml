@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	xmlns:f="http://java.sun.com/jsf/core" template="/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<showcase:example>
+			<alloy:audio styleClass="showcase-audio" contentType="audio/mp3" controls="true"
+				flashPlayer="#{resource['liferay-faces-alloy:aui/audio/player.swf']}"
+				value="#{resource['audios:example.mp3']}">
+				<f:facet name="flash">
+					<param name="flashVars" value="mp3=#{audioBacking.encodedMp3ResourceURL}" />
+				</f:facet>
+			</alloy:audio>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>
