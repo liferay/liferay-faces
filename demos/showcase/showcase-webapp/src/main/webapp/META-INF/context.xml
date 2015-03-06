@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project>
-<Context allowCasualMultipartParsing="true" antiJARLocking="false" antiResourceLocking="false" path="/showcase-webapp">
+<Context allowCasualMultipartParsing="true" antiJARLocking="false" antiResourceLocking="false">
 </Context>
