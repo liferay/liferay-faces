@@ -6906,7 +6906,6 @@ java.lang.Object)</method-signature>
 		<tag-name>resource</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.resource.Resource</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.resource.internal.ResourceRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[The content type of the resource.]]></description>
