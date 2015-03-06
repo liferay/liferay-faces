@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.faces.application.Application;
 import javax.faces.application.Resource;
@@ -43,7 +41,7 @@ import com.liferay.faces.util.render.internal.RendererUtil;
 /**
  * @author  Kyle Stiemann
  */
-public abstract class MediaRenderer extends MediaRendererBase {
+public abstract class MediaRenderer extends MediaRendererCompat {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(MediaRenderer.class);
@@ -115,13 +113,7 @@ public abstract class MediaRenderer extends MediaRendererBase {
 
 		// Encode JSF 2.2 passthrough attributes (attributes prefixed with the http://xmlns.jcp.org/jsf/passthrough
 		// namespace)
-		Map<String, Object> passThroughAttributesMap = media.getPassThroughAttributes();
-		Set<String> passThroughAttributes = passThroughAttributesMap.keySet();
-
-		for (String passThroughAttribute : passThroughAttributes) {
-			Object passThroughAttributeValue = passThroughAttributesMap.get(passThroughAttribute);
-			responseWriter.writeAttribute(passThroughAttribute, passThroughAttributeValue, passThroughAttribute);
-		}
+		encodeJSF22PassthroughAttributes(media, responseWriter);
 
 		encodeCustomMediaAttributes(facesContext, responseWriter, media);
 	}
