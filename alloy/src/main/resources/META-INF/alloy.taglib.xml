@@ -7006,7 +7006,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>4.2.0</vdldoc:since>
+			<vdldoc:since>3.2.0</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
