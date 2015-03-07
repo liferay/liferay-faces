@@ -2468,14 +2468,13 @@
 		parentClass="javax.faces.component.UIComponentBase"
 		rendererParentClass="com.liferay.faces.alloy.render.internal.AlloyRendererBase" yui="true">
 		<description>
-			<![CDATA[ProgressBar is a UIComponent that displays a progress bar.
-				<br />
-				This component includes a client-side JavaScript API which can be accessed using the <code>clientKey</code> attribute and the <code>Liferay.component()</code> method:
+			<![CDATA[<p>ProgressBar is a UIComponent that displays a progress bar and can operate as a server-side or client-side progress indicator.</p>
+				<p>This component includes a client-side JavaScript API which can be accessed using the <code>clientKey</code> attribute and the <code>Liferay.component()</code> method:
 				<ul>
 					<li><code>set()</code> - The <code>set()</code> method can be used to set the client-side value of the component e.g. <code>Liferay.component('progressBar').set('value', value);</code>.</li>
-					<li><code>start()</code> - The <code>start()</code> method begins polling the server for the value of the component.</li>
-					<li><code>stop()</code> - The <code>stop()</code> method ends the component's polling of the server.</li>
-				</ul>]]>
+					<li><code>start()</code> - The <code>start()</code> method starts polling the server for the value of the component.</li>
+					<li><code>stop()</code> - The <code>stop()</code> method stops the component's polling of the server.</li>
+				</ul></p>]]>
 		</description>
 		<attributes>
 			<attribute>

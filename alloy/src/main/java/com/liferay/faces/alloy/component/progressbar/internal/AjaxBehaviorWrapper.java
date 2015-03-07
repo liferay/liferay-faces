@@ -26,7 +26,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.AjaxBehaviorListener;
 import javax.faces.event.BehaviorEvent;
-import javax.faces.render.ClientBehaviorRenderer;
 
 
 /**
@@ -171,16 +170,7 @@ public abstract class AjaxBehaviorWrapper extends AjaxBehavior implements FacesW
 
 	@Override
 	public String getScript(ClientBehaviorContext behaviorContext) {
-
-		String script = null;
-		FacesContext facesContext = behaviorContext.getFacesContext();
-		ClientBehaviorRenderer clientBehaviorRenderer = getRenderer(facesContext);
-
-		if (clientBehaviorRenderer != null) {
-			script = clientBehaviorRenderer.getScript(behaviorContext, this);
-		}
-
-		return script;
+		return getWrapped().getScript(behaviorContext);
 	}
 
 	@Override

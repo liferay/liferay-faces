@@ -13,12 +13,14 @@
  */
 package com.liferay.faces.alloy.component.progressbar.internal;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import javax.faces.component.behavior.AjaxBehavior;
+import javax.faces.component.behavior.ClientBehaviorContext;
+import javax.faces.context.FacesContext;
+import javax.faces.render.ClientBehaviorRenderer;
 
 import com.liferay.faces.util.lang.StringPool;
 
@@ -77,14 +79,7 @@ public class ProgressBarAjaxBehavior extends AjaxBehaviorWrapper {
 
 		// Add the onsuccess() callback to the onevent() callback in order to allow for a recursive call to our
 		// polling function.
-		StringBuilder oneventCallbackStringBuilder = new StringBuilder();
-		oneventCallbackStringBuilder.append("function(data){if(data.status==='success'){");
-		oneventCallbackStringBuilder.append(onsuccessCallback);
-		oneventCallbackStringBuilder.append("();}");
-		oneventCallbackStringBuilder.append(onevent);
-		oneventCallbackStringBuilder.append("}");
-
-		return oneventCallbackStringBuilder.toString();
+		return "function(data){if(data.status==='success'){" + onsuccessCallback + "();}" + onevent + "}";
 	}
 
 	@Override
@@ -97,7 +92,21 @@ public class ProgressBarAjaxBehavior extends AjaxBehaviorWrapper {
 			renderList.add(clientId);
 		}
 
-		return (AbstractList<String>) renderList;
+		return renderList;
+	}
+
+	@Override
+	public String getScript(ClientBehaviorContext behaviorContext) {
+
+		String script = null;
+		FacesContext facesContext = behaviorContext.getFacesContext();
+		ClientBehaviorRenderer clientBehaviorRenderer = getRenderer(facesContext);
+
+		if (clientBehaviorRenderer != null) {
+			script = clientBehaviorRenderer.getScript(behaviorContext, this);
+		}
+
+		return script;
 	}
 
 	@Override

@@ -39,14 +39,13 @@ public class ProgressBar extends ProgressBarBase implements ClientBehaviorHolder
 	// Public Constants
 	public static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.progressbar";
 	public static final String COMPONENT_TYPE = "com.liferay.faces.alloy.component.progressbar.ProgressBar";
-	public static final String POLL = "poll";
 	public static final String RENDERER_TYPE =
 		"com.liferay.faces.alloy.component.progressbar.internal.ProgressBarRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-progress-bar";
 
 	// Private Constants
 	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList(
-				ProgressCompleteEvent.PROGRESS_COMPLETE, POLL));
+				"progressComplete", "poll"));
 
 	public ProgressBar() {
 		super();
@@ -80,7 +79,7 @@ public class ProgressBar extends ProgressBarBase implements ClientBehaviorHolder
 
 	@Override
 	public String getDefaultEventName() {
-		return POLL;
+		return "poll";
 	}
 
 	@Override

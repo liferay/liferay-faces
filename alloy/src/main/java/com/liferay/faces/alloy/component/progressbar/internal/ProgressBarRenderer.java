@@ -29,10 +29,8 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.progressbar.ProgressBar;
-import com.liferay.faces.alloy.component.progressbar.ProgressCompleteEvent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.context.ExtFacesContext;
 import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
@@ -77,7 +75,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 		}
 
 		Map<String, List<ClientBehavior>> clientBehaviorMap = progressBar.getClientBehaviors();
-		List<ClientBehavior> pollEventClientBehaviors = clientBehaviorMap.get(ProgressBar.POLL);
+		List<ClientBehavior> pollEventClientBehaviors = clientBehaviorMap.get("poll");
 
 		// If the developer has specified <f:ajax event="poll" />, then
 		if ((pollEventClientBehaviors != null) && !pollEventClientBehaviors.isEmpty()) {
@@ -105,15 +103,15 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 			StringBuilder buf = new StringBuilder();
 			buf.append("function(pollingFunction){");
 
-			// ClientBehavior.getScript(ClientBehaviorContext clientBehaviorContext) renders javascript which expects
-			// a javascript variable named 'event' to have been initilized and contain the DOM event which triggered the
+			// ClientBehavior.getScript(ClientBehaviorContext clientBehaviorContext) renders javascript which expects a
+			// javascript variable named 'event' to have been initilized and contain the DOM event which triggered the
 			// request. Since there is no DOM event which triggers the progressBar events, render javascript
 			// initializing event to null;
 			buf.append("var event = null;");
 
 			String clientId = progressBar.getClientId(facesContext);
 			ClientBehaviorContext clientBehaviorContext = ClientBehaviorContext.createClientBehaviorContext(
-					facesContext, progressBar, ProgressBar.POLL, clientId, null);
+					facesContext, progressBar, "poll", clientId, null);
 			int size = pollEventClientBehaviors.size();
 
 			// It is possible to specify multiple <f:ajax event="poll" /> tags (even though there is no benefit).
@@ -238,7 +236,6 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 		String clientId = progressBar.getClientId(facesContext);
 		String contentBoxClientId = clientId.concat(CONTENT_BOX_SUFFIX);
 		encodeClientId(responseWriter, CONTENT_BOX, contentBoxClientId, first);
-		first = false;
 
 		// Begin encoding event listeners that occur on the event.
 		encodeNonEscapedObject(responseWriter, StringPool.ON, StringPool.BLANK, first);
@@ -248,8 +245,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 		boolean onFirst = true;
 		String oncomplete = progressBar.getOncomplete();
 		Map<String, List<ClientBehavior>> clientBehaviorMap = progressBar.getClientBehaviors();
-		List<ClientBehavior> clientBehaviorsForComplete = clientBehaviorMap.get(
-				ProgressCompleteEvent.PROGRESS_COMPLETE);
+		List<ClientBehavior> clientBehaviorsForComplete = clientBehaviorMap.get("progressComplete");
 
 		if ((oncomplete != null) || ((clientBehaviorsForComplete != null) && !clientBehaviorsForComplete.isEmpty())) {
 
@@ -272,7 +268,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 			if ((clientBehaviorsForComplete != null) && !clientBehaviorsForComplete.isEmpty()) {
 
 				ClientBehaviorContext clientBehaviorContext = ClientBehaviorContext.createClientBehaviorContext(
-						facesContext, progressBar, ProgressCompleteEvent.PROGRESS_COMPLETE, clientId, null);
+						facesContext, progressBar, "progressComplete", clientId, null);
 
 				for (ClientBehavior clientBehaviorForComplete : clientBehaviorsForComplete) {
 					onCompleteBuilder.append(clientBehaviorForComplete.getScript(clientBehaviorContext));
@@ -299,17 +295,14 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 		if ((label != null) && label.contains(TOKEN)) {
 
 			String escapedLabel = RendererUtil.escapeJavaScript(label);
-			StringBuilder onValueChangeStringBuilder = new StringBuilder();
-			onValueChangeStringBuilder.append("function(event){this.set('label','");
-			onValueChangeStringBuilder.append(escapedLabel);
-			onValueChangeStringBuilder.append("'.replace(LFAI.TOKEN_REGEX, event.newVal));}");
-			encodeNonEscapedObject(responseWriter, VALUE_CHANGE, onValueChangeStringBuilder.toString(), onFirst);
+			encodeNonEscapedObject(responseWriter, VALUE_CHANGE,
+				"function(event){this.set('label','".concat(escapedLabel).concat(
+					"'.replace(LFAI.TOKEN_REGEX, event.newVal));}"), onFirst);
 			onFirst = false;
 		}
 
 		// Finish encoding event listeners that occur on the event.
 		responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
-		first = false;
 	}
 
 	/**
@@ -375,7 +368,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 
 		ProgressBar progressBar = (ProgressBar) uiComponent;
 		Map<String, List<ClientBehavior>> clientBehaviorMap = progressBar.getClientBehaviors();
-		List<ClientBehavior> clientBehaviorsForPolling = clientBehaviorMap.get(ProgressBar.POLL);
+		List<ClientBehavior> clientBehaviorsForPolling = clientBehaviorMap.get("poll");
 
 		return ((clientBehaviorsForPolling != null) && !clientBehaviorsForPolling.isEmpty());
 	}
