@@ -36,4 +36,14 @@ public class StringHelper {
 			return defaultValue;
 		}
 	}
+
+	public static String toString(String[] values, String defaultValue) {
+
+		if ((values != null) && (values.length > 0)) {
+			return values[0];
+		}
+		else {
+			return defaultValue;
+		}
+	}
 }
