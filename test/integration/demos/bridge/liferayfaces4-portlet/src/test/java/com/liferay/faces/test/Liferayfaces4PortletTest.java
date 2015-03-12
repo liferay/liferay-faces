@@ -98,7 +98,7 @@ public class Liferayfaces4PortletTest extends TesterBase {
 	private static final String bridgeVersionXpath = "//*[contains(text(),'Liferay Faces Bridge')]";
 
 	// xpath for specific tests
-	protected static final String dateValidationXpath = "//div[contains(@id,':dateOfBirthField')]/*";
+	private static final String dateValidationXpath = "//div[contains(@id,':dateOfBirthField')]/*";
 
 	static final String url = baseUrl + webContext + "/lf4";
 
@@ -277,7 +277,7 @@ public class Liferayfaces4PortletTest extends TesterBase {
 		logger.log(Level.INFO, "entering 'asdf' into the firstNameField and then tabbing out of it...");
 		firstNameField.sendKeys("asdf");
 		firstNameField.sendKeys(Keys.TAB);
-		Thread.sleep(50);
+//		Thread.sleep(50);
 		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
 		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
 		assertTrue("The data 'asdf' should be in the firstNameField after tabbing out of it",
@@ -295,7 +295,7 @@ public class Liferayfaces4PortletTest extends TesterBase {
 		firstNameField.sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(150);
 		firstNameField.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(250);
+		Thread.sleep(150);
 		firstNameField.sendKeys(Keys.TAB);
 		Thread.sleep(150);
 		logger.log(Level.INFO, "firstNameField.getAttribute('value') = " + firstNameField.getAttribute("value"));
@@ -304,7 +304,6 @@ public class Liferayfaces4PortletTest extends TesterBase {
 			"But we see '" + firstNameField.getAttribute("value") + "'",
 			"".equals(firstNameField.getAttribute("value")));
 		logger.log(Level.INFO, "isThere(browser, firstNameFieldErrorXpath) = " + isThere(browser, firstNameFieldErrorXpath));
-		
 		assertTrue("The firstNameFieldError should at least be in the DOM somewhere by this point, but it is not there",
 			isThere(browser, firstNameFieldErrorXpath));
 		logger.log(Level.INFO, "firstNameFieldError.getText() = " + firstNameFieldError.getText());
@@ -364,24 +363,8 @@ public class Liferayfaces4PortletTest extends TesterBase {
 		selectEditMode(browser, portal);
 		
 		logger.log(Level.INFO, "done with selectEditMode: isThere(browser, datePatternFieldXpath) = " + isThere(browser, datePatternFieldXpath));
-	
 		logger.log(Level.INFO, "datePatternField.getAttribute('value') = " + datePatternField.getAttribute("value"));
-		logger.log(Level.INFO, "datePatternField.getAttribute('value') should have been logged at this point ...");
-	
-		logger.log(Level.INFO, "waiting 5 seconds resetButton should be displayed right now");
-		Thread.sleep(200);
-	
-	try {
 		logger.log(Level.INFO, "resetButton.isDisplayed() = " + resetButton.isDisplayed());
-	}
-	catch (Exception e) {
-		logger.log(Level.WARNING, "Exception e.getMessage() = " + e.getMessage());
-	} finally {
-		
-		logger.log(Level.INFO, "waiting 5 seconds resetButton.isDisplayed() should have been logged just now ...");
-	}
-	
-	Thread.sleep(200);
 
 		// MM/dd/yyyy
 		datePatternField.clear();
@@ -395,6 +378,7 @@ public class Liferayfaces4PortletTest extends TesterBase {
 
 		logger.log(Level.INFO, "browser.navigate().to(" + url + ")");
 		browser.navigate().to(url);
+//		Thread.sleep(1000);
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO,
 			"dateOfBirthField.getAttribute('value').length() = " + dateOfBirthField.getAttribute("value").length());
@@ -419,6 +403,7 @@ public class Liferayfaces4PortletTest extends TesterBase {
 
 		resetButton.click();
 		logger.log(Level.INFO, "resetButton.click() ...");
+//		Thread.sleep(1000);
 
 		// after clicking the resetButton all of the job applicant demos need to end up on the same page Here is a
 		// log statement that should give you a clue between the different testers as to which ones are different from
@@ -628,7 +613,7 @@ public class Liferayfaces4PortletTest extends TesterBase {
 	public void dateValidation() throws Exception {
 
 		int tags = 0;
-		int tagsWhileValid = 2;
+		int tagsWhileValid = 0;
 		String foo = "";
 
 		// checks an invalid dateOfBirth
@@ -650,7 +635,6 @@ public class Liferayfaces4PortletTest extends TesterBase {
 		logger.log(Level.INFO, "dateOfBirthField.getAttribute('value') = " + dateOfBirthField.getAttribute("value"));
 		logger.log(Level.INFO, "dateOfBirthFieldError.isDisplayed() = " + dateOfBirthFieldError.isDisplayed());
 		logger.log(Level.INFO, "dateOfBirthFieldError.getText() = " + dateOfBirthFieldError.getText());
-		
 		assertTrue("dateOfBirthFieldError should contain 'Invalid date format', but insteead contains '" +
 			dateOfBirthFieldError.getText() + "'", dateOfBirthFieldError.getText().contains("Invalid date format"));
 		
@@ -699,7 +683,7 @@ public class Liferayfaces4PortletTest extends TesterBase {
 			"01/02/3456".equals(dateOfBirthField.getAttribute("value")));
 		tags = browser.findElements(By.xpath(dateValidationXpath)).size() - dateValidationXpathModifier;
 		logger.log(Level.INFO, "tags = " + tags);
-		logger.log(Level.INFO, "tagsWhileValid = " + tagsWhileValid);
+		
 		logger.log(Level.INFO, "isThere(browser, dateOfBirthFieldErrorXpath) = " + isThere(browser, dateOfBirthFieldErrorXpath));
 		
 		if (tags > tagsWhileValid) {

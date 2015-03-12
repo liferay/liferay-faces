@@ -585,7 +585,7 @@ public class Jsf2JspPortletTest extends TesterBase {
 		if (tags != tagsWhileShowing) {
 			logger.log(Level.INFO, "tagsWhileShowing = " + tagsWhileShowing);
 		}
-		assertTrue("tag for Hide and tag for textarea are showing", tags == tagsWhileShowing);
+		assertTrue("count of tags when Hide link is showing(" + tags + ") and count of tags for textarea when showing(" + tagsWhileShowing + ") should be equal", tags == tagsWhileShowing);
 
 		comments.sendKeys(testing123);
 		phoneNumberField.click();
@@ -594,7 +594,7 @@ public class Jsf2JspPortletTest extends TesterBase {
 		Thread.sleep(500);
 		tags = browser.findElements(By.xpath("//a[contains(text(),'Show Comments')]/../../child::node()")).size();
 		logger.log(Level.INFO, "tags = " + tags);
-		assertTrue("no textarea is showing", tags == tagsWhileHidden);
+		assertTrue("no textarea should be showing at this point.  Tags counted at this pint("+ tags +") should equal tags neeeded to be in the DOM when the textarea is hidden("+ tagsWhileHidden +")", tags == tagsWhileHidden);
 		if (tags != tagsWhileHidden) {
 			logger.log(Level.INFO, "tagsWhileHidden = " + tagsWhileHidden);
 		}
