@@ -195,7 +195,7 @@
 			<plugin>
 				<artifactId>maven-install-plugin</artifactId>
 				<configuration>
-					<skip>true</skip>
+					<skip>false</skip>
 				</configuration>
 			</plugin>
 		</plugins>
