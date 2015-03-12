@@ -31,6 +31,7 @@ import com.liferay.faces.bridge.container.liferay.internal.LiferayConstants;
 import com.liferay.faces.bridge.filter.liferay.LiferayURLGenerator;
 import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.util.internal.URLParameter;
+import com.liferay.faces.util.helper.StringHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -79,6 +80,26 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 
 	// Protected Constants
 	protected static final String LIFECYCLE_RESOURCE_PHASE_ID = "2";
+
+	private static final ArrayList<String> LIFERAY_NON_NAMESPACED_PARAMS = new ArrayList<String>(5);
+
+	static {
+		LIFERAY_NON_NAMESPACED_PARAMS.add(LiferayConstants.P_AUTH);
+		LIFERAY_NON_NAMESPACED_PARAMS.add(LiferayConstants.P_L_ID);
+		LIFERAY_NON_NAMESPACED_PARAMS.add(LiferayConstants.P_P_AUTH);
+		LIFERAY_NON_NAMESPACED_PARAMS.add(LiferayConstants.P_P_ID);
+		LIFERAY_NON_NAMESPACED_PARAMS.add(LiferayConstants.P_P_STATE);
+		LIFERAY_NON_NAMESPACED_PARAMS.add(LiferayConstants.P_P_STATE_RCV);
+		LIFERAY_NON_NAMESPACED_PARAMS.add(LiferayConstants.P_P_MODE);
+		LIFERAY_NON_NAMESPACED_PARAMS.add(LiferayConstants.P_P_CACHEABILITY);
+		LIFERAY_NON_NAMESPACED_PARAMS.add(LiferayConstants.P_O_P_ID);
+		LIFERAY_NON_NAMESPACED_PARAMS.add(DO_AS_USER_ID);
+		LIFERAY_NON_NAMESPACED_PARAMS.add(DO_AS_USER_LANGUAGE_ID);
+		LIFERAY_NON_NAMESPACED_PARAMS.add(DO_AS_GROUP_ID);
+		LIFERAY_NON_NAMESPACED_PARAMS.add(REFERER_GROUP_ID);
+		LIFERAY_NON_NAMESPACED_PARAMS.add(REFERER_PLID);
+		LIFERAY_NON_NAMESPACED_PARAMS.add(CONTROL_PANEL_CATEGORY);
+	}
 
 	// Private Data Members
 	private String baseURL;
@@ -152,7 +173,9 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 
 			// Possibly add the p_auth parameter.
 			boolean firstParameter = true;
-			String portalAuthToken = parameterMap.get(LiferayConstants.P_AUTH);
+
+			String portalAuthToken = StringHelper.toString(additionalParameterMap.get(LiferayConstants.P_AUTH),
+					parameterMap.get(LiferayConstants.P_AUTH));
 
 			if (portalAuthToken != null) {
 
@@ -161,7 +184,8 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			}
 
 			// Possibly add the p_l_id parameter.
-			String plid = parameterMap.get(LiferayConstants.P_L_ID);
+			String plid = StringHelper.toString(additionalParameterMap.get(LiferayConstants.P_L_ID),
+					parameterMap.get(LiferayConstants.P_L_ID));
 
 			if (plid != null) {
 
@@ -170,7 +194,8 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			}
 
 			// Possibly add the p_p_auth parameter.
-			String portletAuthToken = parameterMap.get(LiferayConstants.P_P_AUTH);
+			String portletAuthToken = StringHelper.toString(additionalParameterMap.get(LiferayConstants.P_P_AUTH),
+					parameterMap.get(LiferayConstants.P_P_AUTH));
 
 			if (portletAuthToken != null) {
 
@@ -204,7 +229,8 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			}
 
 			// Always add the p_p_id parameter
-			String parameterValue = responseNamespace;
+			String parameterValue = StringHelper.toString(additionalParameterMap.get(LiferayConstants.P_P_ID),
+					responseNamespace);
 
 			if (parameterValue.startsWith(StringPool.UNDERLINE)) {
 				parameterValue = parameterValue.substring(1);
@@ -228,6 +254,10 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 
 			WindowState urlWindowState = initialWindowState;
 
+			if (additionalParameterMap.get(LiferayConstants.P_P_STATE) != null) {
+				urlWindowState = new WindowState(additionalParameterMap.get(LiferayConstants.P_P_STATE)[0]);
+			}
+
 			if (windowState != null) {
 				urlWindowState = windowState;
 			}
@@ -242,7 +272,8 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			appendParameterToURL(LiferayConstants.P_P_STATE, parameterValue, url);
 
 			// Possibly add the p_p_state_rcv parameter.
-			String stateRestoreCurrentView = parameterMap.get(LiferayConstants.P_P_STATE_RCV);
+			String stateRestoreCurrentView = StringHelper.toString(additionalParameterMap.get(
+						LiferayConstants.P_P_STATE_RCV), parameterMap.get(LiferayConstants.P_P_STATE_RCV));
 
 			if (stateRestoreCurrentView != null) {
 				appendParameterToURL(LiferayConstants.P_P_STATE_RCV, stateRestoreCurrentView, url);
@@ -250,6 +281,10 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 
 			// Add the p_p_mode parameter.
 			PortletMode urlPortletMode = initialPortletMode;
+
+			if (additionalParameterMap.get(LiferayConstants.P_P_MODE) != null) {
+				urlPortletMode = new PortletMode(additionalParameterMap.get(LiferayConstants.P_P_MODE)[0]);
+			}
 
 			if (portletMode != null) {
 				urlPortletMode = portletMode;
@@ -266,7 +301,8 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 
 			// Possibly add the p_p_cacheability parameter
 			if (LIFECYCLE_RESOURCE_PHASE_ID.equals(portletLifecycleId)) {
-				String cacheability = parameterMap.get(LiferayConstants.P_P_CACHEABILITY);
+				String cacheability = StringHelper.toString(additionalParameterMap.get(
+							LiferayConstants.P_P_CACHEABILITY), parameterMap.get(LiferayConstants.P_P_CACHEABILITY));
 
 				if (cacheability != null) {
 					appendParameterToURL(LiferayConstants.P_P_CACHEABILITY, cacheability, url);
@@ -300,49 +336,56 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 			}
 
 			// Possibly add the p_o_p_id parameter.
-			String outerPortletId = parameterMap.get(LiferayConstants.P_O_P_ID);
+			String outerPortletId = StringHelper.toString(additionalParameterMap.get(LiferayConstants.P_O_P_ID),
+					parameterMap.get(LiferayConstants.P_O_P_ID));
 
 			if (outerPortletId != null) {
 				appendParameterToURL(LiferayConstants.P_O_P_ID, outerPortletId, url);
 			}
 
 			// Possibly add the doAsUserId parameter.
-			String doAsUserId = parameterMap.get(DO_AS_USER_ID);
+			String doAsUserId = StringHelper.toString(additionalParameterMap.get(DO_AS_USER_ID),
+					parameterMap.get(DO_AS_USER_ID));
 
 			if (doAsUserId != null) {
 				appendParameterToURL(DO_AS_USER_ID, doAsUserId, url);
 			}
 
 			// Possibly add the doAsUserLanguageId parameter.
-			String doAsUserLanguageId = parameterMap.get(DO_AS_USER_LANGUAGE_ID);
+			String doAsUserLanguageId = StringHelper.toString(additionalParameterMap.get(DO_AS_USER_LANGUAGE_ID),
+					parameterMap.get(DO_AS_USER_LANGUAGE_ID));
 
 			if (doAsUserLanguageId != null) {
 				appendParameterToURL(DO_AS_USER_LANGUAGE_ID, doAsUserLanguageId, url);
 			}
 
 			// Possibly add the doAsGroupId parameter.
-			String doAsGroupId = parameterMap.get(DO_AS_GROUP_ID);
+			String doAsGroupId = StringHelper.toString(additionalParameterMap.get(DO_AS_GROUP_ID),
+					parameterMap.get(DO_AS_GROUP_ID));
 
 			if (doAsGroupId != null) {
 				appendParameterToURL(DO_AS_GROUP_ID, doAsGroupId, url);
 			}
 
 			// Possibly add the refererGroupId parameter.
-			String refererGroupId = parameterMap.get(REFERER_GROUP_ID);
+			String refererGroupId = StringHelper.toString(additionalParameterMap.get(REFERER_GROUP_ID),
+					parameterMap.get(REFERER_GROUP_ID));
 
 			if (refererGroupId != null) {
 				appendParameterToURL(REFERER_GROUP_ID, refererGroupId, url);
 			}
 
 			// Possibly add the refererPlid parameter.
-			String refererPlid = parameterMap.get(REFERER_PLID);
+			String refererPlid = StringHelper.toString(additionalParameterMap.get(REFERER_PLID),
+					parameterMap.get(REFERER_PLID));
 
 			if (refererPlid != null) {
 				appendParameterToURL(REFERER_PLID, refererPlid, url);
 			}
 
 			// Possibly add the controlPanelCategory parameter.
-			String controlPanelCategory = parameterMap.get(CONTROL_PANEL_CATEGORY);
+			String controlPanelCategory = StringHelper.toString(additionalParameterMap.get(CONTROL_PANEL_CATEGORY),
+					parameterMap.get(CONTROL_PANEL_CATEGORY));
 
 			if (controlPanelCategory != null) {
 				appendParameterToURL(CONTROL_PANEL_CATEGORY, controlPanelCategory, url);
@@ -362,13 +405,16 @@ public abstract class LiferayURLGeneratorBaseImpl implements LiferayURLGenerator
 
 						String parameterName = mapEntry.getKey();
 
-						for (String curParameterValue : parameterValues) {
+						if (!LIFERAY_NON_NAMESPACED_PARAMS.contains(parameterName)) {
 
-							if (curParameterValue != null) {
+							for (String curParameterValue : parameterValues) {
 
-								String encodedParameterValue = encode(curParameterValue);
-								appendParameterToURL(firstParameter, namespaced, parameterName, encodedParameterValue,
-									url);
+								if (curParameterValue != null) {
+
+									String encodedParameterValue = encode(curParameterValue);
+									appendParameterToURL(firstParameter, namespaced, parameterName,
+										encodedParameterValue, url);
+								}
 							}
 						}
 					}
