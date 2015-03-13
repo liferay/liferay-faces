@@ -18,7 +18,9 @@ package com.liferay.faces.util.client;
  */
 public interface ClientScript {
 
-	public void append(String content, String use);
+	public void append(String content);
+
+	public void append(String content, String options);
 
 	public void clear();
 

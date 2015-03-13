@@ -15,7 +15,7 @@ package com.liferay.faces.bridge.config.internal;
 
 import com.liferay.faces.bridge.config.ServletMapping;
 import com.liferay.faces.util.config.ConfiguredServletMapping;
-import com.liferay.faces.util.config.ConfiguredServletMappingImpl;
+import com.liferay.faces.util.config.internal.ConfiguredServletMappingImpl;
 
 
 /**

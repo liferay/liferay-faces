@@ -10,7 +10,7 @@
 		</resource-bundle>
 	</application>
 	<factory>
-		<partial-view-context-factory>com.liferay.faces.util.context.PartialViewContextFactoryOnChangeImpl</partial-view-context-factory>
+		<partial-view-context-factory>com.liferay.faces.util.context.internal.PartialViewContextFactoryOnChangeImpl</partial-view-context-factory>
 	</factory>
 	<lifecycle>
 		<phase-listener>com.liferay.faces.util.lifecycle.DebugPhaseListener</phase-listener>
