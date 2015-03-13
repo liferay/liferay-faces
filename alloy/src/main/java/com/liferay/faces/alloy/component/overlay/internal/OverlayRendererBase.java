@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.overlay.internal;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.faces.component.NamingContainer;
 import javax.faces.component.UIComponent;
@@ -24,8 +25,6 @@ import com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 import com.liferay.faces.util.render.internal.IdDelegationResponseWriter;
-import com.liferay.faces.util.render.internal.RendererUtil;
-import java.util.Map;
 
 
 /**
@@ -65,8 +64,8 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 		super.encodeMarkupEnd(facesContext, uiComponent);
 	}
 
-	public void encodeOverlayJavaScriptCustom(ResponseWriter responseWriter, FacesContext facesContext, UIComponent overlay)
-		throws IOException {
+	public void encodeOverlayJavaScriptCustom(ResponseWriter responseWriter, FacesContext facesContext,
+		UIComponent overlay) throws IOException {
 
 		// The outermost <div> (which is the boundingBox) was initially styled with "display:none;" in order to prevent
 		// blinking when Alloy's JavaScript attempts to hide the boundingBox. At this point in JavaScript execution,
@@ -75,7 +74,7 @@ public abstract class OverlayRendererBase extends DelegatingAlloyRendererBase im
 		responseWriter.write("A.one('#");
 
 		String clientId = overlay.getClientId(facesContext);
-		String escapedBoundingBoxClientId = RendererUtil.escapeClientId(clientId);
+		String escapedBoundingBoxClientId = escapeClientId(clientId);
 		responseWriter.write(escapedBoundingBoxClientId);
 		responseWriter.write("').setStyle('display',null);");
 	}

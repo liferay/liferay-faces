@@ -17,8 +17,8 @@ import java.io.IOException;
 
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.util.render.RendererUtil;
 import com.liferay.faces.util.render.internal.DelegationResponseWriterBase;
-import com.liferay.faces.util.render.internal.RendererUtil;
 
 
 /**

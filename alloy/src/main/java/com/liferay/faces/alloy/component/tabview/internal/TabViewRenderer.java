@@ -40,7 +40,7 @@ import com.liferay.faces.util.helper.IntegerHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.render.internal.RendererUtil;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -211,7 +211,7 @@ public class TabViewRenderer extends TabViewRendererBase {
 		responseWriter.write(StringPool.APOSTROPHE);
 
 		String clientId = uiComponent.getClientId(facesContext);
-		String escapedClientId = StringPool.POUND + RendererUtil.escapeClientId(clientId);
+		String escapedClientId = StringPool.POUND + escapeClientId(clientId);
 		responseWriter.write(escapedClientId);
 		responseWriter.write("')._node['style'].display='block';");
 

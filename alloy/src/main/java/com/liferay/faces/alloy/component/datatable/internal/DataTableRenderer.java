@@ -54,7 +54,7 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.model.SortCriterion;
 import com.liferay.faces.util.model.Sortable;
-import com.liferay.faces.util.render.internal.RendererUtil;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -207,9 +207,9 @@ public class DataTableRenderer extends DataTableRendererBase {
 		if ("checkbox".equals(selectionMode) || "radio".equals(selectionMode)) {
 
 			String dataTableClientId = dataTable.getClientId(facesContext);
-			String escapedDataTableClientId = RendererUtil.escapeClientId(dataTableClientId);
+			String escapedDataTableClientId = escapeClientId(dataTableClientId);
 			String hiddenFieldClientId = dataTableClientId.concat("_selectedRowIndexes");
-			String escapedHiddenFieldClientId = RendererUtil.escapeClientId(hiddenFieldClientId);
+			String escapedHiddenFieldClientId = escapeClientId(hiddenFieldClientId);
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 			// rowSelect
@@ -232,20 +232,20 @@ public class DataTableRenderer extends DataTableRendererBase {
 
 				// Register the onclick event callback for the "Select All" checkbox.
 				String selectAllCheckboxClientId = dataTableClientId.concat("_selectAll");
-				String escapedSelectAllCheckboxClientId = RendererUtil.escapeClientId(selectAllCheckboxClientId);
-				RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initDataTableSelectAllCheckbox", 'A',
+				String escapedSelectAllCheckboxClientId = escapeClientId(selectAllCheckboxClientId);
+				encodeFunctionCall(responseWriter, "LFAI.initDataTableSelectAllCheckbox", 'A',
 					escapedDataTableClientId, escapedSelectAllCheckboxClientId, rowSelectRangeClientBehaviorScript,
 					rowDeselectRangeClientBehaviorScript);
 
 				// Register the onclick event callback for each row-level checkbox.
-				RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initDataTableCheckboxSelection", 'A',
+				encodeFunctionCall(responseWriter, "LFAI.initDataTableCheckboxSelection", 'A',
 					escapedDataTableClientId, escapedHiddenFieldClientId, rowSelectClientBehaviorScript,
 					rowDeselectClientBehaviorScript);
 			}
 			else if ("radio".equals(selectionMode)) {
 
 				// Register the onclick event callback for each row-level radio button.
-				RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initDataTableRadioSelection", 'A',
+				encodeFunctionCall(responseWriter, "LFAI.initDataTableRadioSelection", 'A',
 					escapedDataTableClientId, escapedHiddenFieldClientId, rowSelectClientBehaviorScript,
 					rowDeselectClientBehaviorScript);
 			}

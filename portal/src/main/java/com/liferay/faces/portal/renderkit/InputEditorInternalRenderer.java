@@ -33,6 +33,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.faces.portal.component.InputEditorInternal;
 import com.liferay.faces.portal.servlet.ScriptCapturingHttpServletRequest;
+import com.liferay.faces.util.client.ClientScript;
+import com.liferay.faces.util.client.ClientScriptFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.jsp.JspIncludeResponse;
 import com.liferay.faces.util.jsp.PageContextAdapter;
 import com.liferay.faces.util.jsp.StringJspWriter;
@@ -42,7 +45,6 @@ import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.portal.EditorUtil;
 import com.liferay.faces.util.portal.ScriptTagUtil;
 import com.liferay.faces.util.portal.WebKeys;
-import com.liferay.faces.util.render.internal.RendererUtil;
 
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -210,7 +212,10 @@ public class InputEditorInternalRenderer extends Renderer {
 
 					String scripts = parsedResponse.getScripts();
 
-					RendererUtil.renderScript(scripts, null);
+					ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
+							ClientScriptFactory.class);
+					ClientScript clientScript = clientScriptFactory.getClientScript();
+					clientScript.append(scripts);
 					logger.trace(scripts);
 				}
 			}

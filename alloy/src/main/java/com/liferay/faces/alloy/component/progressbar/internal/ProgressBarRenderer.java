@@ -30,13 +30,15 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.progressbar.ProgressBar;
 import com.liferay.faces.alloy.component.progressbar.ProgressCompleteEvent;
+import com.liferay.faces.util.client.ClientScript;
+import com.liferay.faces.util.client.ClientScriptFactory;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.context.ExtFacesContext;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.RendererUtil;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
-import com.liferay.faces.util.render.internal.RendererUtil;
 
 
 /**
@@ -161,8 +163,8 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 			//		}
 			//	);
 			//J+
-			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initProgressBarServerMode", liferayComponent,
-				clientId, pollingDelay, anonymousFunction);
+			encodeFunctionCall(responseWriter, "LFAI.initProgressBarServerMode", liferayComponent, clientId,
+				pollingDelay, buf);
 		}
 
 		// Otherwise the component is in client mode.
@@ -172,7 +174,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 			//	LFAI.initProgressBarClientMode(Liferay.component('clientKey'), projectStageDevelopment);
 			//J+
 			JavaScriptFragment liferayComponent = new JavaScriptFragment("Liferay.component('" + clientKey + "')");
-			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initProgressBarClientMode", liferayComponent);
+			encodeFunctionCall(responseWriter, "LFAI.initProgressBarClientMode", liferayComponent);
 		}
 	}
 
@@ -344,10 +346,13 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 			//J-
 			//	LFAI.setProgressBarServerValue('hiddenClientId', Liferay.component('clientKey'), value);
 			//J+
-			RendererUtil.encodeFunctionCall(bufferedScriptResponseWriter, "LFAI.setProgressBarServerValue",
-				hiddenClientId, liferayComponent, value);
+			encodeFunctionCall(bufferedScriptResponseWriter, "LFAI.setProgressBarServerValue", hiddenClientId,
+				liferayComponent, value);
 
-			RendererUtil.renderScript(bufferedScriptResponseWriter.toString(), null);
+			ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
+					ClientScriptFactory.class);
+			ClientScript clientScript = clientScriptFactory.getClientScript();
+			clientScript.append(bufferedScriptResponseWriter.toString());
 		}
 		else {
 			super.encodeJavaScript(facesContext, uiComponent);

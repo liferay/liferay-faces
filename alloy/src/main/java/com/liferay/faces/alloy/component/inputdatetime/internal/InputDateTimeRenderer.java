@@ -40,7 +40,7 @@ import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.internal.RendererUtil;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -252,7 +252,8 @@ public abstract class InputDateTimeRenderer extends InputDateTimeRendererBase {
 	protected abstract InputDateTimeResponseWriter getInputDateTimeResponseWriter(ResponseWriter responseWriter,
 		String inputClientId, boolean mobile, boolean responsive);
 
-	protected abstract List<String> getModules(List<String> modules, FacesContext facesContext, InputDateTime inputDateTime);
+	protected abstract List<String> getModules(List<String> modules, FacesContext facesContext,
+		InputDateTime inputDateTime);
 
 	protected String[] getModules(String[] defaultModules, FacesContext facesContext, UIComponent uiComponent) {
 

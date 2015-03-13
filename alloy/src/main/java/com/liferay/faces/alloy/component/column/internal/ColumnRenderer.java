@@ -32,7 +32,7 @@ import javax.faces.render.FacesRenderer;
 import com.liferay.faces.alloy.component.column.Column;
 import com.liferay.faces.alloy.component.datatable.DataTable;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.internal.RendererUtil;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
