@@ -24,8 +24,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 
 import com.liferay.faces.util.config.ApplicationConfig;
-import com.liferay.faces.util.config.ApplicationConfigInitializer;
-import com.liferay.faces.util.config.ApplicationConfigInitializerImpl;
+import com.liferay.faces.util.config.internal.ApplicationConfigInitializer;
+import com.liferay.faces.util.config.internal.ApplicationConfigInitializerImpl;
 import com.liferay.faces.util.config.ConfiguredElement;
 import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.config.WebConfigParam;

@@ -13,6 +13,9 @@
  */
 package com.liferay.faces.util.logging;
 
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.internal.LoggerDefaultImpl;
+import com.liferay.faces.util.logging.internal.LoggerLog4JImpl;
 import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
