@@ -14,76 +14,45 @@
 package com.liferay.faces.util.client.internal;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Set;
-import java.util.TreeSet;
-
-import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.client.ClientScript;
-import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.internal.RendererUtil;
 
 
 /**
- * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
 public class ClientScriptImpl implements ClientScript, Serializable {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 875641899489661794L;
 
-	// Private Data Members
-	private StringBuilder alloyJavaScript;
-	private StringBuilder javascript;
-	private Set<String> useSet;
+	// Private Members
+	private StringBuilder scripts;
 
 	public ClientScriptImpl() {
-		this.alloyJavaScript = new StringBuilder();
-		this.javascript = new StringBuilder();
-		this.useSet = new TreeSet<String>();
+		scripts = new StringBuilder();
 	}
 
-	// Java 1.6+ @Override
-	public void append(String content, String use) {
+	// Java 1.6+: @Override
+	public void append(String content) {
 
-		if ((use == null) || (use.trim().length() == 0)) {
-			javascript.append(content);
-		}
-		else {
-			alloyJavaScript.append("(function() {");
-			alloyJavaScript.append(content);
-			alloyJavaScript.append("})();");
-
-			String[] useArray = use.split(StringPool.COMMA);
-			useSet.addAll(Arrays.asList(useArray));
-		}
+		scripts.append("(function() {");
+		scripts.append(content);
+		scripts.append("})();");
 	}
 
-	// Java 1.6+ @Override
+	// Java 1.6+: @Override
+	public void append(String content, String options) {
+		append(content);
+	}
+
+	// Java 1.6+: @Override
 	public void clear() {
-		alloyJavaScript.setLength(0);
-		javascript.setLength(0);
-		useSet.clear();
+		scripts.setLength(0);
 	}
 
 	@Override
 	public String toString() {
-
-		StringBuilder value = new StringBuilder();
-
-		value.append(javascript.toString());
-
-		if (alloyJavaScript.length() > 0) {
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			String[] useArray = new String[useSet.size()];
-			String alloyBeginScript = RendererUtil.getAlloyBeginScript(facesContext, useSet.toArray(useArray));
-			value.append(alloyBeginScript);
-			value.append(alloyJavaScript.toString());
-			value.append("});");
-		}
-
-		return value.toString();
+		return scripts.toString();
 	}
 }
