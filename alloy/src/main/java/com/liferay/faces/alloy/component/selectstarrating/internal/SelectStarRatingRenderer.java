@@ -28,7 +28,7 @@ import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.internal.RendererUtil;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**

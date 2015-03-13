@@ -18,7 +18,7 @@ import javax.faces.component.UIParameter;
 import javax.faces.component.UIViewAction;
 import javax.faces.component.UIViewParameter;
 
-import com.liferay.faces.util.render.internal.DelegatingRendererBase;
+import com.liferay.faces.util.render.DelegatingRendererBase;
 
 
 /**

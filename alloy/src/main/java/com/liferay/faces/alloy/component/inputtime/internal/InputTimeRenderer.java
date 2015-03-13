@@ -43,7 +43,7 @@ import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.internal.RendererUtil;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -155,8 +155,8 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 			int defaultHTML5PatternLength = InputTime.DEFAULT_HTML5_TIME_PATTERN.length();
 			String maxTime = inputTime.getMaxTime().substring(0, defaultHTML5PatternLength);
 			String minTime = inputTime.getMinTime().substring(0, defaultHTML5PatternLength);
-			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initDateTimePickerMobile", liferayComponent,
-				inputClientId, maxTime, minTime);
+			encodeFunctionCall(responseWriter, "LFAI.initDateTimePickerMobile", liferayComponent, inputClientId,
+				maxTime, minTime);
 		}
 		else {
 
@@ -304,7 +304,7 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 
 			String clientId = inputTime.getClientId(facesContext);
 			String inputClientId = clientId.concat(INPUT_SUFFIX);
-			String escapedInputClientId = RendererUtil.escapeClientId(inputClientId);
+			String escapedInputClientId = escapeClientId(inputClientId);
 			boolean selectable = true;
 			JavaScriptFragment time = null;
 
@@ -312,8 +312,8 @@ public class InputTimeRenderer extends InputTimeRendererBase {
 				time = new JavaScriptFragment("event.result.text");
 			}
 
-			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.inputDateTimePickerSelect", 'A', escapedInputClientId,
-				selectable, time, valueChangeClientBehaviorsNotEmpty);
+			encodeFunctionCall(responseWriter, "LFAI.inputDateTimePickerSelect", 'A', escapedInputClientId, selectable,
+				time, valueChangeClientBehaviorsNotEmpty);
 			responseWriter.append(";}");
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 			autoCompleteFirst = false;

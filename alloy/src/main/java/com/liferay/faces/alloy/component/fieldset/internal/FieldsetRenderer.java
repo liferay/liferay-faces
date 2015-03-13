@@ -23,7 +23,7 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.fieldset.Fieldset;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.internal.RendererUtil;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**

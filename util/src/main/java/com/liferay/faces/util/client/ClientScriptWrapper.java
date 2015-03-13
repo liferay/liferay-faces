@@ -22,8 +22,23 @@ import javax.faces.FacesWrapper;
 public abstract class ClientScriptWrapper implements ClientScript, FacesWrapper<ClientScript> {
 
 	@Override
+	public void append(String content) {
+		getWrapped().append(content);
+	}
+
+	@Override
 	public void append(String content, String use) {
 		getWrapped().append(content, use);
+	}
+
+	@Override
+	public void clear() {
+		getWrapped().clear();
+	}
+
+	@Override
+	public String toString() {
+		return getWrapped().toString();
 	}
 
 	@Override

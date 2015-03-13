@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2015 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -11,28 +11,21 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.faces.util.client.internal;
 
+import com.liferay.faces.util.client.ClientScript;
+import com.liferay.faces.util.client.ClientScriptFactory;
 import java.util.Map;
-
 import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.client.ClientScript;
-import com.liferay.faces.util.client.ClientScriptFactory;
-import com.liferay.faces.util.product.ProductConstants;
-import com.liferay.faces.util.product.ProductMap;
-
 
 /**
- * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
 public class ClientScriptFactoryImpl extends ClientScriptFactory {
-
-	// Private Constants
-	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
-		.isDetected();
 
 	@Override
 	public ClientScript getClientScript() throws FacesException {
@@ -40,18 +33,12 @@ public class ClientScriptFactoryImpl extends ClientScriptFactory {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, Object> requestMap = externalContext.getRequestMap();
-		ClientScript clientScript = (ClientScript) requestMap.get(ClientScriptFactoryImpl.class.getName());
+		ClientScript clientScript = (ClientScript) requestMap.get(ClientScriptFactory.class.getName());
 
 		if (clientScript == null) {
 
-			if (LIFERAY_PORTAL_DETECTED) {
-				clientScript = new ClientScriptLiferayImpl();
-			}
-			else {
-				clientScript = new ClientScriptImpl();
-			}
-
-			requestMap.put(ClientScriptFactoryImpl.class.getName(), clientScript);
+			clientScript = new ClientScriptImpl();
+			requestMap.put(ClientScriptFactory.class.getName(), clientScript);
 		}
 
 		return clientScript;
@@ -63,5 +50,4 @@ public class ClientScriptFactoryImpl extends ClientScriptFactory {
 		// Since this is the default factory instance, it will never wrap another factory.
 		return null;
 	}
-
 }

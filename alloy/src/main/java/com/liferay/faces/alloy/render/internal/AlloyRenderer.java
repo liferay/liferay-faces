@@ -19,8 +19,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.render.internal.ClientComponentRenderer;
-
 
 /**
  * @author  Kyle Stiemann
@@ -58,6 +56,9 @@ public interface AlloyRenderer extends ClientComponentRenderer {
 	public void encodeEventCallback(ResponseWriter responseWriter, String varName, String methodName, String eventName,
 		String callback) throws IOException;
 
+	public void encodeFunctionCall(ResponseWriter responseWriter, String functionName, Object... parameters)
+		throws IOException;
+
 	public void encodeInteger(ResponseWriter responseWriter, String attributeName, Integer attributeValue,
 		boolean first) throws IOException;
 
@@ -73,6 +74,8 @@ public interface AlloyRenderer extends ClientComponentRenderer {
 		throws IOException;
 
 	public void encodeWidgetRender(ResponseWriter responseWriter, boolean first) throws IOException;
+
+	public String escapeClientId(String clientId);
 
 	public String getAlloyClassName(FacesContext facesContext, UIComponent uiComponent);
 

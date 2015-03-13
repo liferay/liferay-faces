@@ -35,13 +35,16 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.autocomplete.AutoComplete;
+import com.liferay.faces.util.client.ClientScript;
+import com.liferay.faces.util.client.ClientScriptFactory;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.RendererUtil;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
-import com.liferay.faces.util.render.internal.RendererUtil;
 
 
 /**
@@ -109,7 +112,7 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 			// LFAI.setAutoCompleteEventListeners(A, clientVarName, 'escapedHiddenClientId', 'clientId',
 			//	'namingContainerId');
 			//J+
-			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initAutoCompleteServerMode", clientVarNameJSFragment,
+			encodeFunctionCall(responseWriter, "LFAI.initAutoCompleteServerMode", clientVarNameJSFragment,
 				hiddenClientId, clientId, namingContainerId);
 		}
 	}
@@ -349,7 +352,7 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 				// LFAI.recieveAutoCompleteResults(Liferay.component('clientKey'), ['item1', 'item2', 'item3'],
 				//		'hiddenClientId')
 				//J+
-				RendererUtil.encodeFunctionCall(bufferedScriptResponseWriter, "LFAI.setAutoCompleteServerResults",
+				encodeFunctionCall(bufferedScriptResponseWriter, "LFAI.setAutoCompleteServerResults",
 					liferayComponentJavaScriptFragment, resultArrayStringBuilder, hiddenClientId);
 
 				String[] modules = getModules(facesContext, uiComponent);
@@ -364,7 +367,10 @@ public class AutoCompleteRenderer extends AutoCompleteRendererBase {
 					useStringBuilder.append(modules[i]);
 				}
 
-				RendererUtil.renderScript(bufferedScriptResponseWriter.toString(), useStringBuilder.toString());
+				ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
+						ClientScriptFactory.class);
+				ClientScript clientScript = clientScriptFactory.getClientScript();
+				clientScript.append(bufferedScriptResponseWriter.toString(), useStringBuilder.toString());
 			}
 			else {
 				super.encodeJavaScript(facesContext, uiComponent);
