@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
-	xmlns:bridge="http://www.liferay.com/xml/ns/liferay-faces-bridge-2.0-extension">
+	xmlns:bridge="http://www.liferay.com/xml/ns/liferay-faces-bridge-2.0-extension"
+	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 	<name>LiferayFacesBridge</name>
 	<ordering>
 		<after>
@@ -98,6 +99,7 @@
 			<bridge:head-response-writer-factory>com.liferay.faces.bridge.context.internal.HeadResponseWriterFactoryImpl</bridge:head-response-writer-factory>
 			<bridge:incongruity-context-factory>com.liferay.faces.bridge.context.internal.IncongruityContextFactoryImpl</bridge:incongruity-context-factory>
 			<bridge:liferay-url-factory>com.liferay.faces.bridge.filter.liferay.internal.LiferayURLFactoryImpl</bridge:liferay-url-factory>
+			<util:client-script-factory>com.liferay.faces.bridge.client.internal.ClientScriptFactoryLiferayImpl</util:client-script-factory>
 		</factory-extension>
 	</factory>
 	<lifecycle>
