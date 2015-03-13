@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.alloy.renderkit.internal;
 
+import com.liferay.faces.alloy.client.internal.AlloyClientScriptUtil;
 import java.io.IOException;
 import java.util.Map;
 
@@ -23,7 +24,6 @@ import javax.faces.context.ResponseWriter;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.ContentTypes;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
-import com.liferay.faces.util.render.internal.RendererUtil;
 
 
 /**
@@ -87,7 +87,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 
 			if (inlineUse != null) {
 				String[] useArray = new String[] { inlineUse };
-				String alloyBeginScript = RendererUtil.getAlloyBeginScript(facesContext, useArray);
+				String alloyBeginScript = AlloyClientScriptUtil.getAlloyBeginScript(facesContext, useArray);
 				responseWriter.write(alloyBeginScript);
 			}
 		}
@@ -113,7 +113,7 @@ public class ScriptRenderer extends ScriptRendererCompat {
 
 			Map<String, Object> attributes = uiComponent.getAttributes();
 			String use = (String) attributes.get(USE);
-			RendererUtil.renderScript(bufferedScriptResponseWriter.toString(), use);
+			AlloyClientScriptUtil.renderScript(bufferedScriptResponseWriter.toString(), use);
 		}
 	}
 
