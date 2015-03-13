@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.util.io;
 
+import com.liferay.faces.util.io.internal.TextResourceImpl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;

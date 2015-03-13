@@ -21,11 +21,26 @@ import com.liferay.faces.util.helper.Wrapper;
  */
 public abstract class ClientScriptWrapper implements ClientScript, Wrapper<ClientScript> {
 
-	@Override
+	// Java 1.6+: @Override
+	public void append(String content) {
+		getWrapped().append(content);
+	}
+
+	// Java 1.6+: @Override
 	public void append(String content, String use) {
 		getWrapped().append(content, use);
 	}
 
+	// Java 1.6+: @Override
+	public void clear() {
+		getWrapped().clear();
+	}
+
 	@Override
+	public String toString() {
+		return getWrapped().toString();
+	}
+
+	// Java 1.6+: @Override
 	public abstract ClientScript getWrapped();
 }
