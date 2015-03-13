@@ -18,7 +18,7 @@ package com.liferay.faces.alloy.component.selectmanylistbox.internal;
 import javax.annotation.Generated;
 
 
-import com.liferay.faces.util.render.internal.DelegatingRendererBase;
+import com.liferay.faces.util.render.DelegatingRendererBase;
 
 
 /**

@@ -16,7 +16,7 @@
 		</system-event-listener>
 	</application>
 	<factory>
-		<partial-view-context-factory>com.liferay.faces.util.context.PartialViewContextFactoryScriptImpl</partial-view-context-factory>
+		<partial-view-context-factory>com.liferay.faces.util.context.internal.PartialViewContextFactoryScriptImpl</partial-view-context-factory>
 		<factory-extension>
 			<util:browser-sniffer-factory>com.liferay.faces.util.client.internal.BrowserSnifferFactoryImpl</util:browser-sniffer-factory>
 			<util:client-script-factory>com.liferay.faces.util.client.internal.ClientScriptFactoryImpl</util:client-script-factory>

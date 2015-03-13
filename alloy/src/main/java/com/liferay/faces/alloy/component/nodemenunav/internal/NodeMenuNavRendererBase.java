@@ -15,6 +15,7 @@ package com.liferay.faces.alloy.component.nodemenunav.internal;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -24,9 +25,8 @@ import com.liferay.faces.alloy.component.menu.Menu;
 import com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.RendererUtil;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
-import com.liferay.faces.util.render.internal.RendererUtil;
-import java.util.Map;
 
 
 /**
@@ -77,7 +77,7 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 
 		if (!disabled) {
 
-			String escapedOptionsDivId = RendererUtil.escapeClientId(getDefaultOptionsId(facesContext, uiComponent) +
+			String escapedOptionsDivId = escapeClientId(getDefaultOptionsId(facesContext, uiComponent) +
 					StringPool.COLON + "0");
 
 			// AlloyRendererUtil.LIFERAY_Z_INDEX_OVERLAY
@@ -100,7 +100,7 @@ public abstract class NodeMenuNavRendererBase extends DelegatingAlloyRendererBas
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 		String clientId = uiComponent.getClientId(facesContext);
-		String escapeClientId = RendererUtil.escapeClientId(clientId);
+		String escapeClientId = escapeClientId(clientId);
 
 		responseWriter.write("A.one('#");
 		responseWriter.write(escapeClientId);

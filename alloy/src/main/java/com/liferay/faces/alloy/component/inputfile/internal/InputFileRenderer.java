@@ -55,8 +55,8 @@ import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.model.UploadedFile;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
+import com.liferay.faces.util.render.RendererUtil;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
-import com.liferay.faces.util.render.internal.RendererUtil;
 
 
 /**
@@ -165,17 +165,17 @@ public class InputFileRenderer extends InputFileRendererBase implements SystemEv
 
 			String notStartedMessage = getMessageContext().getMessage(locale, "not-started");
 			JavaScriptFragment clientComponent = new JavaScriptFragment("Liferay.component('" + clientKey + "')");
-			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initProgressUploader", alloyNamespace,
-				clientComponent, contentTypes, clientId, formClientId, namingContainerId, inputFile.isAuto(), execute,
-				render, partialActionURL, maxFileSize, notStartedMessage);
+			encodeFunctionCall(responseWriter, "LFAI.initProgressUploader", alloyNamespace, clientComponent,
+				contentTypes, clientId, formClientId, namingContainerId, inputFile.isAuto(), execute, render,
+				partialActionURL, maxFileSize, notStartedMessage);
 		}
 
 		// Otherwise, if the component should render the upload preview table, then format the preview-uploader.js
 		// template and write it to the response.
 		else if (inputFile.isShowPreview()) {
 
-			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initPreviewUploader", alloyNamespace, contentTypes,
-				clientId, maxFileSize);
+			encodeFunctionCall(responseWriter, "LFAI.initPreviewUploader", alloyNamespace, contentTypes, clientId,
+				maxFileSize);
 		}
 	}
 

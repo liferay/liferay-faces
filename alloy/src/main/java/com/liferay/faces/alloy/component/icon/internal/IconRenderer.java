@@ -22,7 +22,7 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.icon.Icon;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.internal.RendererUtil;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**

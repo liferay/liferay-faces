@@ -19,7 +19,7 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ComponentSystemEventListener;
 import javax.faces.render.Renderer;
 
-import com.liferay.faces.util.render.internal.DelegatingRendererBase;
+import com.liferay.faces.util.render.DelegatingRendererBase;
 
 
 /**

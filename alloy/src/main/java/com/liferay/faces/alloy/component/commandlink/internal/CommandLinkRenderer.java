@@ -28,7 +28,7 @@ import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.commandlink.CommandLink;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
-import com.liferay.faces.util.render.internal.RendererUtil;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**

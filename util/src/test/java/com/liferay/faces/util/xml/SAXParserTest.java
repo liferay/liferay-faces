@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.util.xml;
 
+import com.liferay.faces.util.xml.internal.SAXParserImpl;
 import java.net.URL;
 
 import javax.xml.parsers.SAXParser;
