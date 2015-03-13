@@ -28,10 +28,10 @@ import javax.xml.parsers.SAXParser;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.liferay.faces.util.config.FacesConfigDescriptor;
-import com.liferay.faces.util.config.FacesConfigDescriptorParser;
-import com.liferay.faces.util.config.FacesConfigDescriptorParserImpl;
-import com.liferay.faces.util.config.Ordering;
+import com.liferay.faces.util.config.internal.FacesConfigDescriptor;
+import com.liferay.faces.util.config.internal.FacesConfigDescriptorParser;
+import com.liferay.faces.util.config.internal.FacesConfigDescriptorParserImpl;
+import com.liferay.faces.util.config.internal.Ordering;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 

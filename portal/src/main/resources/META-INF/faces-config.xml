@@ -22,7 +22,7 @@
 		<component-class>com.liferay.faces.portal.component.InputEditorInternal</component-class>
 	</component>
 	<factory>
-		<partial-view-context-factory>com.liferay.faces.util.context.PartialViewContextFactoryCleanupImpl</partial-view-context-factory>
+		<partial-view-context-factory>com.liferay.faces.util.context.internal.PartialViewContextFactoryCleanupImpl</partial-view-context-factory>
 		<factory-extension>
 			<util:message-context-factory>com.liferay.faces.portal.context.internal.MessageContextFactoryPortalImpl</util:message-context-factory>
 		</factory-extension>
