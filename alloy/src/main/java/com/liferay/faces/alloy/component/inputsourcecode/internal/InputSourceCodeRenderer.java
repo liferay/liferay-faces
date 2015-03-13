@@ -27,9 +27,9 @@ import com.liferay.faces.alloy.component.inputsourcecode.InputSourceCode;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.RendererUtil;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 import com.liferay.faces.util.render.internal.HiddenTextResponseWriter;
-import com.liferay.faces.util.render.internal.RendererUtil;
 
 
 /**
@@ -68,7 +68,7 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 		if ((readOnly == null) || (!readOnly)) {
 
 			String hiddenInputClientId = getHiddenInputClientId(facesContext, uiComponent);
-			String escapedHiddenInputClientId = StringPool.POUND + RendererUtil.escapeClientId(hiddenInputClientId);
+			String escapedHiddenInputClientId = StringPool.POUND + escapeClientId(hiddenInputClientId);
 
 			responseWriter.write(clientVarName);
 			responseWriter.write(".getSession().on('change', function() {A.one('");

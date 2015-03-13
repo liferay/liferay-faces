@@ -40,7 +40,7 @@ import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.render.internal.RendererUtil;
+import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
@@ -141,17 +141,17 @@ public class InputDateRenderer extends InputDateRendererBase {
 					}
 				}
 
-				RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initDateTimePickerMobile", liferayComponent,
-					inputClientId, maxDateString, minDateString);
+				encodeFunctionCall(responseWriter, "LFAI.initDateTimePickerMobile", liferayComponent, inputClientId,
+					maxDateString, minDateString);
 			}
 			else if ("button".equals(showOn)) {
 
 				String clientId = inputDate.getClientId(facesContext);
 				String inputClientId = clientId.concat(INPUT_SUFFIX);
-				String escapedInputClientId = RendererUtil.escapeClientId(inputClientId);
+				String escapedInputClientId = escapeClientId(inputClientId);
 
-				RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initDatePickerShowOnButton", 'A',
-					escapedInputClientId, liferayComponent);
+				encodeFunctionCall(responseWriter, "LFAI.initDatePickerShowOnButton", 'A', escapedInputClientId,
+					liferayComponent);
 			}
 		}
 	}
@@ -199,7 +199,7 @@ public class InputDateRenderer extends InputDateRendererBase {
 
 			String clientId = inputDate.getClientId(facesContext);
 			String inputClientId = clientId.concat(INPUT_SUFFIX);
-			String escapedInputClientId = RendererUtil.escapeClientId(inputClientId);
+			String escapedInputClientId = escapeClientId(inputClientId);
 			JavaScriptFragment selectable = new JavaScriptFragment("this._canBeSelected(event.date)");
 			JavaScriptFragment date = null;
 
@@ -213,8 +213,8 @@ public class InputDateRenderer extends InputDateRendererBase {
 				date = new JavaScriptFragment("A.Date.format(event.date,{format:'".concat(escapedMask).concat("'})"));
 			}
 
-			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.inputDateTimePickerSelect", 'A', escapedInputClientId,
-				selectable, date, valueChangeClientBehaviorsNotEmpty);
+			encodeFunctionCall(responseWriter, "LFAI.inputDateTimePickerSelect", 'A', escapedInputClientId, selectable,
+				date, valueChangeClientBehaviorsNotEmpty);
 			responseWriter.append(";}");
 			responseWriter.write(StringPool.CLOSE_CURLY_BRACE);
 			calendarFirst = false;

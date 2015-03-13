@@ -22,10 +22,14 @@ import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 import javax.faces.render.FacesRenderer;
 
+import com.liferay.faces.alloy.client.internal.AlloyClientScriptUtil;
 import com.liferay.faces.alloy.component.outputscript.OutputScript;
+import com.liferay.faces.util.client.ClientScript;
+import com.liferay.faces.util.client.ClientScriptFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.render.RendererUtil;
 import com.liferay.faces.util.render.internal.BufferedScriptResponseWriter;
-import com.liferay.faces.util.render.internal.RendererUtil;
 
 
 /**
@@ -80,7 +84,10 @@ public class OutputScriptRenderer extends OutputScriptRendererBase {
 				}
 
 				// Render the script at the bottom of the page immediately before the closing </body> tag.
-				RendererUtil.renderScript(bufferedScriptResponseWriter.toString(), use);
+				ClientScriptFactory clientScriptFactory = (ClientScriptFactory) FactoryExtensionFinder.getFactory(
+						ClientScriptFactory.class);
+				ClientScript clientScript = clientScriptFactory.getClientScript();
+				clientScript.append(bufferedScriptResponseWriter.toString(), use);
 				facesContext.setResponseWriter(responseWriter);
 			}
 
@@ -95,7 +102,7 @@ public class OutputScriptRenderer extends OutputScriptRendererBase {
 				// In order to determine the exact YUI sandbox string to write, the modules and browser information
 				// must be passed to RendererUtil.getAlloyBeginScript().
 				String[] modules = use.split(StringPool.COMMA);
-				String alloyBeginScript = RendererUtil.getAlloyBeginScript(facesContext, modules);
+				String alloyBeginScript = AlloyClientScriptUtil.getAlloyBeginScript(facesContext, modules);
 				OutputScriptResponseWriter outputScriptResponseWriter = new OutputScriptResponseWriter(responseWriter,
 						alloyBeginScript);
 				super.encodeChildren(facesContext, uiComponent, outputScriptResponseWriter);
