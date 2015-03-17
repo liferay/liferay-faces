@@ -20,7 +20,6 @@ import javax.portlet.PortletResponse;
 
 import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.container.PortletContainerFactory;
-import com.liferay.faces.bridge.container.liferay.internal.PortletContainerLiferayImpl;
 import com.liferay.faces.bridge.filter.internal.PortletContainerDetector;
 
 
@@ -34,7 +33,7 @@ public class PortletContainerFactoryImpl extends PortletContainerFactory {
 		PortletContext portletContext, PortletConfig portletConfig) {
 
 		if (PortletContainerDetector.isLiferayPortletRequest(portletRequest)) {
-			return new PortletContainerLiferayImpl(portletRequest);
+			return new com.liferay.faces.bridge.container.liferay.internal.PortletContainerLiferayImpl();
 		}
 		else {
 			return new PortletContainerImpl();

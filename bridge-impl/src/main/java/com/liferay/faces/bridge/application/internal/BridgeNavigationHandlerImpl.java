@@ -33,7 +33,7 @@ import javax.portlet.WindowStateException;
 import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.context.url.BridgeActionURL;
+import com.liferay.faces.bridge.context.url.BridgeURL;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -94,7 +94,7 @@ public class BridgeNavigationHandlerImpl extends BridgeNavigationHandler {
 
 					if (portletResponse instanceof StateAwareResponse) {
 
-						BridgeActionURL bridgeActionURL = bridgeContext.encodeActionURL(toViewId);
+						BridgeURL bridgeActionURL = bridgeContext.encodeActionURL(toViewId);
 
 						try {
 
@@ -111,7 +111,9 @@ public class BridgeNavigationHandlerImpl extends BridgeNavigationHandler {
 								bridgeActionURL.setParameter(Bridge.PORTLET_WINDOWSTATE_PARAMETER, windowState);
 							}
 
-							bridgeActionURL.applyToResponse((StateAwareResponse) portletResponse);
+							BridgeNavigationUtil.navigate(bridgeContext.getPortletRequest(),
+								(StateAwareResponse) portletResponse, bridgeContext.getBridgeRequestScope(),
+								bridgeActionURL);
 						}
 						catch (PortletModeException e) {
 							logger.error(e.getMessage());

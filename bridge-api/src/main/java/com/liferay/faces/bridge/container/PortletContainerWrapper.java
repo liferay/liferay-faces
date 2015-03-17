@@ -13,40 +13,13 @@
  */
 package com.liferay.faces.bridge.container;
 
-import java.net.MalformedURLException;
-import java.util.List;
-import java.util.Map;
-
 import javax.faces.FacesWrapper;
-import javax.portlet.PortletURL;
-import javax.portlet.ResourceURL;
 
 
 /**
  * @author  Neil Griffin
  */
 public abstract class PortletContainerWrapper implements PortletContainer, FacesWrapper<PortletContainer> {
-
-	public PortletURL createActionURL(String fromURL) throws MalformedURLException {
-		return getWrapped().createActionURL(fromURL);
-	}
-
-	public ResourceURL createPartialActionURL(String fromURL) throws MalformedURLException {
-		return getWrapped().createPartialActionURL(fromURL);
-	}
-
-	public PortletURL createRedirectURL(String fromURL, Map<String, List<String>> parameters)
-		throws MalformedURLException {
-		return getWrapped().createRedirectURL(fromURL, parameters);
-	}
-
-	public PortletURL createRenderURL(String fromURL) throws MalformedURLException {
-		return getWrapped().createRenderURL(fromURL);
-	}
-
-	public ResourceURL createResourceURL(String fromURL) throws MalformedURLException {
-		return getWrapped().createResourceURL(fromURL);
-	}
 
 	public abstract PortletContainer getWrapped();
 }

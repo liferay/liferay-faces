@@ -13,13 +13,6 @@
  */
 package com.liferay.faces.bridge.container.internal;
 
-import java.io.IOException;
-
-import javax.faces.context.FacesContext;
-import javax.faces.context.PartialResponseWriter;
-import javax.faces.context.ResponseWriter;
-import javax.portlet.ResourceResponse;
-
 import com.liferay.faces.bridge.container.PortletContainer;
 
 
@@ -29,7 +22,4 @@ import com.liferay.faces.bridge.container.PortletContainer;
  * @author  Neil Griffin
  */
 public abstract class PortletContainerCompatImpl implements PortletContainer {
-
-	// serialVersionUID
-	private static final long serialVersionUID = 2694729758648266705L;
 }
