@@ -20,7 +20,6 @@ import javax.portlet.PortletResponse;
 import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgeContextFactory;
 import com.liferay.faces.bridge.context.IncongruityContext;
@@ -41,16 +40,15 @@ public class BridgeContextFactoryImpl extends BridgeContextFactory {
 	@Override
 	public BridgeContext getBridgeContext(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
 		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,
-		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, PortletContainer portletContainer,
-		IncongruityContext incongruityContext) {
+		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, IncongruityContext incongruityContext) {
 
 		if (LIFERAY_PORTAL_DETECTED) {
 			return new BridgeContextLiferayImpl(bridgeConfig, bridgeRequestScope, portletConfig, portletContext,
-					portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
+					portletRequest, portletResponse, portletPhase, incongruityContext);
 		}
 		else {
 			return new BridgeContextImpl(bridgeConfig, bridgeRequestScope, portletConfig, portletContext,
-					portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
+					portletRequest, portletResponse, portletPhase, incongruityContext);
 		}
 	}
 

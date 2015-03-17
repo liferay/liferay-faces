@@ -35,8 +35,6 @@ import com.liferay.faces.bridge.BridgeFactoryFinder;
 import com.liferay.faces.bridge.BridgePhase;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
-import com.liferay.faces.bridge.container.PortletContainer;
-import com.liferay.faces.bridge.container.PortletContainerFactory;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgeContextFactory;
 import com.liferay.faces.bridge.context.IncongruityContext;
@@ -165,20 +163,14 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 		// BridgeRequestAttributeListener.
 		portletRequest.setAttribute(Bridge.PORTLET_LIFECYCLE_PHASE, portletPhase);
 
-		// Initialize the portlet container implementation.
-		PortletContainerFactory portletContainerFactory = (PortletContainerFactory) BridgeFactoryFinder.getFactory(
-				PortletContainerFactory.class);
-		PortletContainer portletContainer = portletContainerFactory.getPortletContainer(portletRequest, portletResponse,
-				portletContext, portletConfig);
-
 		// Initialize the bridge request scope.
-		initBridgeRequestScope(portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
+		initBridgeRequestScope(portletRequest, portletResponse, portletPhase);
 
 		// Get the bridge context.
 		BridgeContextFactory bridgeContextFactory = (BridgeContextFactory) BridgeFactoryFinder.getFactory(
 				BridgeContextFactory.class);
 		bridgeContext = bridgeContextFactory.getBridgeContext(bridgeConfig, bridgeRequestScope, portletConfig,
-				portletContext, portletRequest, portletResponse, portletPhase, portletContainer, incongruityContext);
+				portletContext, portletRequest, portletResponse, portletPhase, incongruityContext);
 
 		// Save the BridgeContext as a request attribute for legacy versions of ICEfaces.
 		portletRequest.setAttribute(BridgeExt.BRIDGE_CONTEXT_ATTRIBUTE, bridgeContext);
@@ -210,7 +202,7 @@ public abstract class BridgePhaseBaseImpl implements BridgePhase {
 	}
 
 	protected void initBridgeRequestScope(PortletRequest portletRequest, PortletResponse portletResponse,
-		Bridge.PortletPhase portletPhase, PortletContainer portletContainer, IncongruityContext incongruityContext) {
+		Bridge.PortletPhase portletPhase) {
 
 		boolean bridgeRequestScopeEnabled = true;
 
