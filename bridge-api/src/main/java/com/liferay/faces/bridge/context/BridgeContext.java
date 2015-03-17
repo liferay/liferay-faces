@@ -29,7 +29,6 @@ import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeInvalidViewPathException;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
 import com.liferay.faces.bridge.context.url.BridgeURL;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
@@ -237,11 +236,6 @@ public abstract class BridgeContext {
 	 * Return the current {@link PortletConfig}.
 	 */
 	public abstract PortletConfig getPortletConfig();
-
-	/**
-	 * Returns the {@link PortletContainer} associated with the current request.
-	 */
-	public abstract PortletContainer getPortletContainer();
 
 	/**
 	 * Returns the {@link PortletContext} associated with the current portlet.
