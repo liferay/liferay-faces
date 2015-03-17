@@ -47,12 +47,10 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 	private String url;
 	private Map<String, String[]> parameterMap;
 	private String query;
-	private String main;
 	private String toStringValue;
 
 	public BaseURLNonEncodedStringImpl(String urlWithParameters) {
 		this.url = urlWithParameters;
-		this.parameterMap = new HashMap<String, String[]>();
 	}
 
 	public BaseURLNonEncodedStringImpl(String url, Map<String, String[]> parameterMap) {
@@ -68,14 +66,28 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 	public String toString() {
 
 		if (toStringValue == null) {
+
 			StringBuilder buf = new StringBuilder();
-			buf.append(getMain());
+			int queryPos = url.indexOf(StringPool.QUESTION);
 
-			String queryString = getQuery();
+			if (queryPos >= 0) {
 
-			if (queryString.length() > 0) {
-				buf.append(StringPool.QUESTION);
-				buf.append(queryString);
+				if (parameterMap == null) {
+					buf.append(url);
+				}
+				else {
+					buf.append(url.substring(0, queryPos));
+
+					String queryString = getQuery();
+
+					if (queryString.length() > 0) {
+						buf.append(StringPool.QUESTION);
+						buf.append(queryString);
+					}
+				}
+			}
+			else {
+				buf.append(url);
 			}
 
 			toStringValue = buf.toString();
@@ -92,25 +104,6 @@ public class BaseURLNonEncodedStringImpl implements BaseURL {
 
 		// Note: Ignore the escapeXML parameter because this class is simply supposed to return the original URL string.
 		out.write(url);
-	}
-
-	/**
-	 * Returns the main part of the URL, which is everything up until the question mark.
-	 */
-	protected String getMain() {
-
-		if (main == null) {
-			int queryPos = url.indexOf(StringPool.QUESTION);
-
-			if (queryPos >= 0) {
-				main = url.substring(0, queryPos);
-			}
-			else {
-				main = url;
-			}
-		}
-
-		return main;
 	}
 
 	public void setParameter(String name, String value) {

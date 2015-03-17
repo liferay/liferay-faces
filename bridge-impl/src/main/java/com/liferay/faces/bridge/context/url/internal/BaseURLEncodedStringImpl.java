@@ -19,7 +19,6 @@ import java.util.Map;
 import javax.portlet.BaseURL;
 import javax.portlet.PortletResponse;
 
-import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -39,9 +38,9 @@ public abstract class BaseURLEncodedStringImpl extends BaseURLNonEncodedStringIm
 	// Private Data Members
 	private PortletResponse portletResponse;
 
-	public BaseURLEncodedStringImpl(String url, Map<String, String[]> parameterMap, BridgeContext bridgeContext) {
+	public BaseURLEncodedStringImpl(String url, Map<String, String[]> parameterMap, PortletResponse portletResponse) {
 		super(url, parameterMap);
-		this.portletResponse = bridgeContext.getPortletResponse();
+		this.portletResponse = portletResponse;
 	}
 
 	@Override

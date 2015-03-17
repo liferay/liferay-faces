@@ -13,74 +13,8 @@
  */
 package com.liferay.faces.bridge.container;
 
-import java.net.MalformedURLException;
-import java.util.List;
-import java.util.Map;
-
-import javax.portlet.PortletURL;
-import javax.portlet.ResourceURL;
-
-
 /**
  * @author  Neil Griffin
  */
 public interface PortletContainer {
-
-	/**
-	 * Creates a portlet action URL and copies query parameters that might be present in the specified URL.
-	 *
-	 * @param   fromURL  The URL to copy from.
-	 *
-	 * @return  The resulting portlet action URL.
-	 *
-	 * @throws  MalformedURLException
-	 */
-	public PortletURL createActionURL(String fromURL) throws MalformedURLException;
-
-	/**
-	 * Creates a portlet resource URL that is suitable for partial requests (Ajax).
-	 *
-	 * @param   fromURL  The URL to copy from.
-	 *
-	 * @return  The resulting partial action resource URL.
-	 *
-	 * @throws  MalformedURLException
-	 */
-	public ResourceURL createPartialActionURL(String fromURL) throws MalformedURLException;
-
-	/**
-	 * Creates a portlet redirect URL and copies query parameters that might be present in the specified URL.
-	 *
-	 * @param   fromURL  The URL to copy from.
-	 *
-	 * @return  The resulting portlet action URL.
-	 *
-	 * @throws  MalformedURLException
-	 */
-	public PortletURL createRedirectURL(String fromURL, Map<String, List<String>> parameters)
-		throws MalformedURLException;
-
-	/**
-	 * Creates a portlet render URL and copies query parameters that might be present in the specified URL.
-	 *
-	 * @param   fromURL  The URL to copy from.
-	 *
-	 * @return  The resulting portlet action URL.
-	 *
-	 * @throws  MalformedURLException
-	 */
-	public PortletURL createRenderURL(String fromURL) throws MalformedURLException;
-
-	/**
-	 * Creates a portlet resource URL and copies the javax.faces.resource value and query parameters that might be
-	 * present in the specified URL.
-	 *
-	 * @param   fromURL  The URL to copy from. Example expected value:
-	 *                   /portlet-context-path/*\/javax.faces.resource/jsf.js?ln=javax.faces
-	 *
-	 * @return  The resulting portlet resource URL.
-	 *
-	 * @throws  MalformedURLException
-	 */
-	public ResourceURL createResourceURL(String fromURL) throws MalformedURLException;
 }

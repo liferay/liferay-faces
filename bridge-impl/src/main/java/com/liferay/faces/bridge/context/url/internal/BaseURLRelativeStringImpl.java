@@ -47,11 +47,11 @@ public class BaseURLRelativeStringImpl extends BaseURLNonEncodedStringImpl {
 		if (toStringValue == null) {
 			toStringValue = super.toString();
 
-			if (toStringValue.startsWith(BridgeURLBaseImpl.RELATIVE_PATH_PREFIX)) {
+			if (toStringValue.startsWith(BridgeURLBase.RELATIVE_PATH_PREFIX)) {
 				StringBuilder buf = new StringBuilder();
 				buf.append(contextPath);
 				buf.append(StringPool.FORWARD_SLASH);
-				buf.append(toStringValue.substring(BridgeURLBaseImpl.RELATIVE_PATH_PREFIX.length()));
+				buf.append(toStringValue.substring(BridgeURLBase.RELATIVE_PATH_PREFIX.length()));
 				toStringValue = buf.toString();
 			}
 		}
