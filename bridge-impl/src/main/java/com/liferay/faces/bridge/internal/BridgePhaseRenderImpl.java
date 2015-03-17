@@ -20,6 +20,7 @@ import java.net.URISyntaxException;
 import javax.faces.application.NavigationHandler;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
@@ -124,7 +125,9 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 	}
 
 	protected void doFacesHeaders(RenderRequest renderRequest, RenderResponse renderResponse) {
-		logger.trace("doFacesHeaders(RenderRequest, RenderResponse) this=[{0}]", this);
+		logger.trace(
+			"doFacesHeaders(RenderRequest, RenderResponse) this=[{0}], renderRequest=[{1}], renderResponse=[{2}]", this,
+			renderRequest, renderResponse);
 	}
 
 	protected void execute(BridgeURL renderRedirectURL) throws BridgeException, IOException {
@@ -170,8 +173,10 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 		// Bridge.IS_POSTBACK_ATTRIBUTE from the Bridge API, because JSF 2.0 introduced the
 		// FacesContext#isPostBack() method.
 		// http://javaserverfaces.java.net/nonav/docs/2.0/javadocs/javax/faces/context/FacesContext.html#isPostback()
+		ExternalContext externalContext = facesContext.getExternalContext();
+
 		if (bridgeRequestScope.getBeganInPhase() == Bridge.PortletPhase.ACTION_PHASE) {
-			facesContext.getExternalContext().getRequestMap().put(Bridge.IS_POSTBACK_ATTRIBUTE, Boolean.TRUE);
+			externalContext.getRequestMap().put(Bridge.IS_POSTBACK_ATTRIBUTE, Boolean.TRUE);
 		}
 
 		logger.debug("portletName=[{0}] facesLifecycleExecuted=[{1}]", portletName, facesLifecycleExecuted);
@@ -260,7 +265,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 		indicateNamespacingToConsumers(facesContext.getViewRoot(), renderResponse);
 
 		// If a render-redirect occurred, then
-		Writer writer = bridgeContext.getResponseOutputWriter();
+		Writer writer = externalContext.getResponseOutputWriter();
 
 		if (bridgeContext.isRenderRedirect()) {
 

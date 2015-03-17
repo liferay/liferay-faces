@@ -14,7 +14,6 @@
 package com.liferay.faces.bridge.context;
 
 import java.io.IOException;
-import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
@@ -38,11 +37,6 @@ import com.liferay.faces.util.helper.Wrapper;
  * @author  Neil Griffin
  */
 public abstract class BridgeContextWrapper extends BridgeContext implements Wrapper<BridgeContext> {
-	@Override
-	public void dispatch(String path) throws IOException {
-		getWrapped().dispatch(path);
-	}
-
 	@Override
 	public BridgeURL encodeActionURL(String url) {
 		return getWrapped().encodeActionURL(url);
@@ -206,41 +200,6 @@ public abstract class BridgeContextWrapper extends BridgeContext implements Wrap
 	@Override
 	public void setRenderRedirectURL(BridgeURL renderRedirectURL) {
 		getWrapped().setRenderRedirectURL(renderRedirectURL);
-	}
-
-	@Override
-	public Map<String, String> getRequestHeaderMap() {
-		return getWrapped().getRequestHeaderMap();
-	}
-
-	@Override
-	public Map<String, String[]> getRequestHeaderValuesMap() {
-		return getWrapped().getRequestHeaderValuesMap();
-	}
-
-	@Override
-	public Map<String, String> getRequestParameterMap() {
-		return getWrapped().getRequestParameterMap();
-	}
-
-	@Override
-	public Map<String, String[]> getRequestParameterValuesMap() {
-		return getWrapped().getRequestParameterValuesMap();
-	}
-
-	@Override
-	public String getRequestPathInfo() {
-		return getWrapped().getRequestPathInfo();
-	}
-
-	@Override
-	public String getRequestServletPath() {
-		return getWrapped().getRequestServletPath();
-	}
-
-	@Override
-	public Writer getResponseOutputWriter() throws IOException {
-		return getWrapped().getResponseOutputWriter();
 	}
 
 	@Override
