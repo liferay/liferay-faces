@@ -67,6 +67,7 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 	private Map<String, Object> applicationMap;
 	private ContextMapFactory contextMapFactory;
 	private Map<String, Object> requestAttributeMap;
+	private String requestContextPath;
 	private Map<String, Object> sessionMap;
 
 	// Lazily-Initialized Data Members

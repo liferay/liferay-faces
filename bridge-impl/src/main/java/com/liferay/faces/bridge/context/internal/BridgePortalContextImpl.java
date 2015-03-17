@@ -74,7 +74,7 @@ public class BridgePortalContextImpl implements BridgePortalContext {
 
 	public String getCreateRenderUrlDuringActionPhase() {
 
-		// Portlet 2.0 does not support this feature but perhaps Portet 3.0 will.
+		// Portlet 2.0 does not support this feature but perhaps Portlet 3.0 will.
 		// https://java.net/jira/browse/PORTLETSPEC3-49
 		return null;
 	}

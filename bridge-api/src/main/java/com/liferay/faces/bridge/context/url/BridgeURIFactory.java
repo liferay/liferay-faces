@@ -13,14 +13,15 @@
  */
 package com.liferay.faces.bridge.context.url;
 
+import java.net.URISyntaxException;
+
+import javax.faces.FacesWrapper;
+
+
 /**
- * This interface represents a bridge "action" URL, meaning a URL according to the deviation requirements of {@link
- * javax.faces.context.ExternalContext#encodeActionURL(String)} listed in Section 6.1.3.1 of the Bridge Spec. Since this
- * interface provides no additional method signatures, it serves as a marker interface of sorts that provides easier
- * code readability.
- *
  * @author  Neil Griffin
  */
-public interface BridgeActionURL extends BridgeResponseURL {
+public abstract class BridgeURIFactory implements FacesWrapper<BridgeURIFactory> {
 
+	public abstract BridgeURI getBridgeURI(String uri) throws URISyntaxException;
 }

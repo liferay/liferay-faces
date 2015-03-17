@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.context.url.internal;
+package com.liferay.faces.bridge.application.internal;
 
 import java.util.Set;
 
@@ -23,38 +23,37 @@ import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 import javax.portlet.faces.Bridge;
 
-import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.context.url.BridgeResponseURL;
+import com.liferay.faces.bridge.context.url.BridgeURL;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class BridgeResponseURLImpl extends BridgeURLBaseImpl implements BridgeResponseURL {
+public class BridgeNavigationUtil {
 
-	public BridgeResponseURLImpl(BridgeContext bridgeContext, String url, String viewId) {
-		super(bridgeContext, url, viewId);
-	}
-
-	public void applyToResponse(StateAwareResponse stateAwareResponse) throws PortletModeException,
-		WindowStateException {
+	/**
+	 * Convenience method that applies the parameters found in the specified URL to the specified {@link
+	 * StateAwareResponse} by calling methods such as {@link
+	 * StateAwareResponse#setPortletMode(javax.portlet.PortletMode)} and {@link
+	 * StateAwareResponse#setWindowState(javax.portlet.WindowState)}, etc.
+	 */
+	public static void navigate(PortletRequest portletRequest, StateAwareResponse stateAwareResponse,
+		BridgeRequestScope bridgeRequestScope, BridgeURL bridgeURL) throws PortletModeException, WindowStateException {
 
 		// For each parameter found in the encoded <to-view-id> Action-URL:
-		Set<String> urlParameterNames = getParameterNames();
+		Set<String> urlParameterNames = bridgeURL.getParameterMap().keySet();
 
 		for (String urlParameterName : urlParameterNames) {
 
-			String parameterValue = getParameter(urlParameterName);
+			String parameterValue = bridgeURL.getParameter(urlParameterName);
 
 			// If the URL contains the "javax.portlet.faces.PortletMode" parameter, then set the
 			// PortletMode on the ActionResponse.
 			if (Bridge.PORTLET_MODE_PARAMETER.equals(urlParameterName)) {
 				PortletMode portletMode = new PortletMode(parameterValue);
-				BridgeRequestScope bridgeRequestScope = bridgeContext.getBridgeRequestScope();
 
 				if (bridgeRequestScope != null) {
-					PortletRequest portletRequest = bridgeContext.getPortletRequest();
 
 					if (!portletRequest.getPortletMode().equals(portletMode) &&
 							portletRequest.isPortletModeAllowed(portletMode)) {
@@ -69,7 +68,6 @@ public abstract class BridgeResponseURLImpl extends BridgeURLBaseImpl implements
 			else if (Bridge.PORTLET_WINDOWSTATE_PARAMETER.equals(urlParameterName)) {
 
 				WindowState windowState = new WindowState(parameterValue);
-				PortletRequest portletRequest = bridgeContext.getPortletRequest();
 
 				if (portletRequest.isWindowStateAllowed(windowState)) {
 					stateAwareResponse.setWindowState(windowState);

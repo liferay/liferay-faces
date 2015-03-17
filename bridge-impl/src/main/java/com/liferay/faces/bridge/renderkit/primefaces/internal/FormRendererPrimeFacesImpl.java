@@ -28,7 +28,7 @@ import javax.faces.render.Renderer;
 
 import com.liferay.faces.bridge.component.primefaces.internal.PrimeFacesFileUpload;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
+import com.liferay.faces.bridge.context.url.BridgeURL;
 import com.liferay.faces.bridge.internal.BridgeExt;
 import com.liferay.faces.util.render.RendererWrapper;
 
@@ -95,8 +95,8 @@ public class FormRendererPrimeFacesImpl extends RendererWrapper {
 			String viewId = facesContext.getViewRoot().getViewId();
 			String facesActionURL = viewHandler.getActionURL(facesContext, viewId);
 			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-			BridgePartialActionURL partialActionURL = bridgeContext.encodePartialActionURL(facesActionURL);
-			partialActionURL.removeParameter(BridgeExt.FACES_AJAX_PARAMETER);
+			BridgeURL partialActionURL = bridgeContext.encodePartialActionURL(facesActionURL);
+			partialActionURL.getParameterMap().remove(BridgeExt.FACES_AJAX_PARAMETER);
 
 			String nonAjaxPartialActionURL = partialActionURL.toString();
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
