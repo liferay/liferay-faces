@@ -15,7 +15,6 @@ package com.liferay.faces.bridge.context.internal;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -29,15 +28,12 @@ import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.portlet.ActionResponse;
-import javax.portlet.MimeResponse;
 import javax.portlet.PortalContext;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
-import javax.portlet.PortletException;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.PortletResponse;
 import javax.portlet.ResourceResponse;
 import javax.portlet.StateAwareResponse;
@@ -117,7 +113,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	private boolean renderRedirect;
 	private boolean renderRedirectAfterDispatch;
 	private BridgeURL renderRedirectURL;
-	private Boolean renderRedirectEnabled;
 	private Map<String, String> requestHeaderMap;
 	private Map<String, String[]> requestHeaderValuesMap;
 	private Map<String, String> requestParameterMap;
@@ -126,7 +121,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	private String requestServletPath;
 	private String requestQueryString;
 	private String requestURL;
-	private Writer responseOutputWriter;
 	private String savedViewState;
 	private String viewIdAndQueryString;
 
@@ -158,68 +152,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		logger.debug("User-Agent requested URL=[{0}]", getRequestURL());
 
 		setCurrentInstance(this);
-	}
-
-	@Override
-	public void dispatch(String path) throws IOException {
-
-		logger.debug("Acquiring dispatcher for JSP path=[{0}]", path);
-
-		PortletRequestDispatcher portletRequestDispacher = portletContext.getRequestDispatcher(path);
-
-		try {
-
-			if (portletRequestDispacher != null) {
-
-				// If the underlying portlet container has the ability to forward (like Pluto), then
-				PortalContext portalContext = portletRequest.getPortalContext();
-				String forwardOnDispatchSupport = portalContext.getProperty(
-						BridgePortalContext.FORWARD_ON_DISPATCH_SUPPORT);
-
-				if (forwardOnDispatchSupport != null) {
-
-					// If a render-redirect has occurred after dispatching to a JSP, that means that the previous
-					// dispatch called PortletRequestDispatcher#forward(String) which marked the response as "complete",
-					// thereby making it impossible to forward again. In such cases, need to "include" instead of
-					// "forward".
-					if (renderRedirectAfterDispatch) {
-						portletRequestDispacher.include(portletRequest, portletResponse);
-					}
-
-					// Otherwise,
-					else {
-
-						// If running in the RESOURCE_PHASE of the portlet lifecycle, then need to "include" instead of
-						// "forward" or else the markup will not be properly rendered to the ResourceResponse.
-						if (portletPhase == Bridge.PortletPhase.RESOURCE_PHASE) {
-							portletRequestDispacher.include(portletRequest, portletResponse);
-						}
-
-						// Otherwise, "forward" to the specified path.
-						else {
-							portletRequestDispacher.forward(portletRequest, portletResponse);
-						}
-					}
-				}
-
-				// Otherwise, must be a portlet container like Liferay, and so need to "include" the specified path.
-				else {
-
-					// Note: Liferay does not have the ability to wrap/decorate the PortletRequest and PortletResponse.
-					// This makes it impossible for Liferay to support the BridgeWriteBehindResponse feature of the
-					// bridge so that AFTER_VIEW_CONTENT (markup that appears after the closing </f:view> component tag)
-					// renders in the correct location. It only works in Pluto.
-					portletRequestDispacher.include(portletRequest, portletResponse);
-				}
-			}
-			else {
-				throw new IOException("Unable to acquire PortletRequestDispatcher for path=[" + path + "]");
-			}
-		}
-		catch (PortletException e) {
-			logger.error(e);
-			throw new IOException(e.getMessage());
-		}
 	}
 
 	@Override
@@ -602,7 +534,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 							try {
 								StateAwareResponse stateAwareResponse = (StateAwareResponse) portletResponse;
 								BridgeURL bridgeRedirectURL = bridgeURLFactory.getBridgeRedirectURL(bridgeContext,
-									bridgeURI, null, null);
+										bridgeURI, null, null);
 								BridgeNavigationUtil.navigate(portletRequest, stateAwareResponse, bridgeRequestScope,
 									bridgeRedirectURL);
 							}
@@ -720,7 +652,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		this.renderRedirect = false;
 		this.renderRedirectAfterDispatch = false;
 		this.renderRedirectURL = null;
-		this.renderRedirectEnabled = null;
 		this.requestHeaderMap = null;
 		this.requestHeaderValuesMap = null;
 		this.requestParameterMap = null;
@@ -729,7 +660,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		this.requestServletPath = null;
 		this.requestQueryString = null;
 		this.requestURL = null;
-		this.responseOutputWriter = null;
 		this.savedViewState = null;
 		this.viewIdAndQueryString = null;
 		setCurrentInstance(null);
@@ -1043,7 +973,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 		String value = getPortletRequest().getParameter(name);
 
-		if ((value != null) && (value.indexOf(StringPool.COLON) >= 0)) {
+		if ((value != null) && (value.contains(StringPool.COLON))) {
 
 			logger.warn("Invalid character in request parameter {0}=[{1}]", name, value);
 			value = null;
@@ -1347,36 +1277,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		}
 
 		return requestURL;
-	}
-
-	@Override
-	public Writer getResponseOutputWriter() throws IOException {
-
-		if (responseOutputWriter == null) {
-
-			MimeResponse mimeResponse = (MimeResponse) portletResponse;
-
-			if (portletPhase == Bridge.PortletPhase.RENDER_PHASE) {
-
-				if (renderRedirectEnabled == null) {
-					renderRedirectEnabled = PortletConfigParam.RenderRedirectEnabled.getBooleanValue(portletConfig);
-				}
-
-				if (renderRedirectEnabled) {
-					responseOutputWriter = new RenderRedirectWriterImpl(mimeResponse.getWriter());
-				}
-				else {
-					responseOutputWriter = mimeResponse.getWriter();
-				}
-
-			}
-			else {
-				responseOutputWriter = mimeResponse.getWriter();
-			}
-
-		}
-
-		return responseOutputWriter;
 	}
 
 	@Override
