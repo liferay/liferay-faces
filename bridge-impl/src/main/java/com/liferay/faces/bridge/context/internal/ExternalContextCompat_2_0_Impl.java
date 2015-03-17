@@ -31,7 +31,6 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 	// Protected Data Members
 	protected ServletResponse facesImplementationServletResponse;
 	protected Bridge.PortletPhase portletPhase;
-	protected String requestContextPath;
 
 	public ExternalContextCompat_2_0_Impl(PortletContext portletContext, PortletRequest portletRequest,
 		PortletResponse portletResponse) {

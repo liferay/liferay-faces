@@ -17,8 +17,7 @@ import java.io.Writer;
 import java.util.Map;
 
 import javax.portlet.BaseURL;
-
-import com.liferay.faces.bridge.context.BridgeContext;
+import javax.portlet.PortletResponse;
 
 
 /**
@@ -35,14 +34,14 @@ public class BaseURLEncodedExternalStringImpl extends BaseURLEncodedStringImpl {
 	/**
 	 * Constructs a new instance of this class.
 	 *
-	 * @param  externalURL    This is a URL "external" to this application, like http://www.foo.bar/foo.png
-	 * @param  parameterMap   The current map of URL parameters.
-	 * @param  bridgeContext  The current {@link BridgeContext}.
+	 * @param  externalURL      This is a URL "external" to this application, like http://www.foo.bar/foo.png
+	 * @param  parameterMap     The current map of URL parameters.
+	 * @param  portletResponse  The current {@link PortletResponse}.
 	 */
 	public BaseURLEncodedExternalStringImpl(String externalURL, Map<String, String[]> parameterMap,
-		BridgeContext bridgeContext) {
+		PortletResponse portletResponse) {
 
-		super(externalURL, parameterMap, bridgeContext);
+		super(externalURL, parameterMap, portletResponse);
 	}
 
 }

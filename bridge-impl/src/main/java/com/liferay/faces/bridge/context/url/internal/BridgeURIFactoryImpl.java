@@ -13,31 +13,31 @@
  */
 package com.liferay.faces.bridge.context.url.internal;
 
-import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.context.url.BridgeResourceURL;
 import com.liferay.faces.bridge.context.url.BridgeURI;
+import com.liferay.faces.bridge.context.url.BridgeURIFactory;
+
+import java.net.URISyntaxException;
 
 
 /**
- * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
- *
  * @author  Neil Griffin
  */
-public abstract class BridgeResourceURLCompatImpl extends BridgeURLBase implements BridgeResourceURL {
+public class BridgeURIFactoryImpl extends BridgeURIFactory {
 
-	public BridgeResourceURLCompatImpl(BridgeContext bridgeContext, BridgeURI bridgeURI, String viewId) {
-		super(bridgeContext, bridgeURI, viewId);
+	// Private Data Members
+	private BridgeURIFactory wrappedBridgeURIFactory;
+
+	public BridgeURIFactoryImpl(BridgeURIFactory bridgeURIFactory) {
+		this.wrappedBridgeURIFactory = bridgeURIFactory;
 	}
 
-	public boolean isEncodedFaces2ResourceURL() {
-
-		// no-op for JSF 1.2
-		return false;
+	@Override
+	public BridgeURI getBridgeURI(String uri) throws URISyntaxException {
+		return new BridgeURIImpl(uri);
 	}
 
-	public boolean isFaces2ResourceURL() {
-
-		// no-op for JSF 1.2
-		return false;
+	@Override
+	public BridgeURIFactory getWrapped() {
+		return wrappedBridgeURIFactory;
 	}
 }
