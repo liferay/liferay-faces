@@ -42,9 +42,7 @@ import com.liferay.faces.bridge.application.internal.BridgeNavigationHandler;
 import com.liferay.faces.bridge.application.internal.BridgeNavigationHandlerImpl;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
-import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgePortalContext;
-import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.context.internal.RenderRedirectWriter;
 import com.liferay.faces.bridge.context.url.BridgeURI;
 import com.liferay.faces.bridge.context.url.BridgeURIFactory;
@@ -300,10 +298,9 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 
 	@Override
 	protected void initBridgeRequestScope(PortletRequest portletRequest, PortletResponse portletResponse,
-		PortletPhase portletPhase, PortletContainer portletContainer, IncongruityContext incongruityContext) {
+		PortletPhase portletPhase) {
 
-		super.initBridgeRequestScope(portletRequest, portletResponse, portletPhase, portletContainer,
-			incongruityContext);
+		super.initBridgeRequestScope(portletRequest, portletResponse, portletPhase);
 
 		// If the portlet container does not support the POST-REDIRECT-GET design pattern, then the ACTION_PHASE and
 		// RENDER_PHASE are both part of a single HTTP POST request. In such cases, the excluded request attributes must

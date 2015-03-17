@@ -39,7 +39,6 @@ import javax.portlet.PortletResponse;
 import javax.portlet.faces.Bridge.PortletPhase;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
 import com.liferay.faces.bridge.context.url.BridgeURL;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
@@ -167,11 +166,6 @@ public class BridgeContextMockImpl extends BridgeContext {
 
 	@Override
 	public PortletConfig getPortletConfig() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public PortletContainer getPortletContainer() {
 		throw new UnsupportedOperationException();
 	}
 
