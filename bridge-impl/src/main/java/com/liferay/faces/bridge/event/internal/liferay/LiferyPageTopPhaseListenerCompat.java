@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.container.liferay.internal;
+package com.liferay.faces.bridge.event.internal.liferay;
 
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
@@ -19,7 +19,6 @@ import javax.faces.event.PhaseListener;
 import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.faces.bridge.container.internal.PortletContainerImpl;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.portal.StringBundler;
 
@@ -32,7 +31,7 @@ import com.liferay.portal.util.PortalUtil;
  *
  * @author  Neil Griffin
  */
-public class PortletContainerLiferayCompatImpl extends PortletContainerImpl implements PhaseListener {
+public class LiferyPageTopPhaseListenerCompat implements PhaseListener {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 8713570232856573935L;
