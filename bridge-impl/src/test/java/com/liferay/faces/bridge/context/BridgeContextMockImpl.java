@@ -28,6 +28,7 @@ package com.liferay.faces.bridge.context;
  */
 
 import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
@@ -261,6 +262,11 @@ public class BridgeContextMockImpl extends BridgeContext {
 
 	@Override
 	public String getRequestServletPath() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Writer getResponseOutputWriter() throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
