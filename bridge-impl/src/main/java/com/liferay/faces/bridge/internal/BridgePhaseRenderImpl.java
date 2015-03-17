@@ -173,9 +173,9 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 		// Bridge.IS_POSTBACK_ATTRIBUTE from the Bridge API, because JSF 2.0 introduced the
 		// FacesContext#isPostBack() method.
 		// http://javaserverfaces.java.net/nonav/docs/2.0/javadocs/javax/faces/context/FacesContext.html#isPostback()
-		ExternalContext externalContext = facesContext.getExternalContext();
-
 		if (bridgeRequestScope.getBeganInPhase() == Bridge.PortletPhase.ACTION_PHASE) {
+
+			ExternalContext externalContext = facesContext.getExternalContext();
 			externalContext.getRequestMap().put(Bridge.IS_POSTBACK_ATTRIBUTE, Boolean.TRUE);
 		}
 
@@ -265,7 +265,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 		indicateNamespacingToConsumers(facesContext.getViewRoot(), renderResponse);
 
 		// If a render-redirect occurred, then
-		Writer writer = externalContext.getResponseOutputWriter();
+		Writer writer = bridgeContext.getResponseOutputWriter();
 
 		if (bridgeContext.isRenderRedirect()) {
 

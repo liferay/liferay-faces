@@ -15,6 +15,7 @@ package com.liferay.faces.bridge.context.internal;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -28,6 +29,7 @@ import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.portlet.ActionResponse;
+import javax.portlet.MimeResponse;
 import javax.portlet.PortalContext;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -112,6 +114,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	private boolean processingAfterViewContent;
 	private boolean renderRedirect;
 	private boolean renderRedirectAfterDispatch;
+	private Boolean renderRedirectEnabled;
 	private BridgeURL renderRedirectURL;
 	private Map<String, String> requestHeaderMap;
 	private Map<String, String[]> requestHeaderValuesMap;
@@ -121,6 +124,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	private String requestServletPath;
 	private String requestQueryString;
 	private String requestURL;
+	private Writer responseOutputWriter;
 	private String savedViewState;
 	private String viewIdAndQueryString;
 
@@ -153,7 +157,35 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 		setCurrentInstance(this);
 	}
+	@Override
+	public Writer getResponseOutputWriter() throws IOException {
 
+		if (responseOutputWriter == null) {
+
+			MimeResponse mimeResponse = (MimeResponse) portletResponse;
+
+			if (portletPhase == Bridge.PortletPhase.RENDER_PHASE) {
+
+				if (renderRedirectEnabled == null) {
+					renderRedirectEnabled = PortletConfigParam.RenderRedirectEnabled.getBooleanValue(portletConfig);
+				}
+
+				if (renderRedirectEnabled) {
+					responseOutputWriter = new RenderRedirectWriterImpl(mimeResponse.getWriter());
+				}
+				else {
+					responseOutputWriter = mimeResponse.getWriter();
+				}
+
+			}
+			else {
+				responseOutputWriter = mimeResponse.getWriter();
+			}
+
+		}
+
+		return responseOutputWriter;
+	}
 	@Override
 	public BridgeURL encodeActionURL(String url) {
 

@@ -14,6 +14,7 @@
 package com.liferay.faces.bridge.context;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
@@ -321,6 +322,14 @@ public abstract class BridgeContext {
 	 * Returns the servletPath associated with the current viewId.
 	 */
 	public abstract String getRequestServletPath();
+
+	/**
+	 * Returns a {@link Writer} that is meant to be used as a return value for {@link
+	 * javax.faces.context.ExternalContext#getResponseOutputWriter()}.
+	 *
+	 * @throws  IOException
+	 */
+	public abstract Writer getResponseOutputWriter() throws IOException;
 
 	/**
 	 * Determines whether or not the "javax.portlet.faces.preserveActionParams" init-param has been configured in the
