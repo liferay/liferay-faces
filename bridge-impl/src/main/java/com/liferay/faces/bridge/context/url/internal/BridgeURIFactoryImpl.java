@@ -13,18 +13,31 @@
  */
 package com.liferay.faces.bridge.context.url.internal;
 
-import java.net.MalformedURLException;
+import com.liferay.faces.bridge.context.url.BridgeURI;
+import com.liferay.faces.bridge.context.url.BridgeURIFactory;
 
-import javax.portlet.PortletURL;
+import java.net.URISyntaxException;
 
 
 /**
  * @author  Neil Griffin
  */
-public class PortletURLFacesTargetActionImpl extends PortletURLFacesTarget {
+public class BridgeURIFactoryImpl extends BridgeURIFactory {
 
-	public PortletURLFacesTargetActionImpl(PortletURL actionURL, String portletMode, String windowState, boolean secure)
-		throws MalformedURLException {
-		super(actionURL, portletMode, windowState, secure);
+	// Private Data Members
+	private BridgeURIFactory wrappedBridgeURIFactory;
+
+	public BridgeURIFactoryImpl(BridgeURIFactory bridgeURIFactory) {
+		this.wrappedBridgeURIFactory = bridgeURIFactory;
+	}
+
+	@Override
+	public BridgeURI getBridgeURI(String uri) throws URISyntaxException {
+		return new BridgeURIImpl(uri);
+	}
+
+	@Override
+	public BridgeURIFactory getWrapped() {
+		return wrappedBridgeURIFactory;
 	}
 }

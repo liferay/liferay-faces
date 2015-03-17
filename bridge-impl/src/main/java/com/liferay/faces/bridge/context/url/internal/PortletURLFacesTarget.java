@@ -23,7 +23,6 @@ import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 
 import com.liferay.faces.bridge.filter.internal.PortletURLWrapper;
-import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -39,10 +38,10 @@ public abstract class PortletURLFacesTarget extends PortletURLWrapper {
 	// Private Data Members
 	private PortletURL wrappedPortletURL;
 
-	public PortletURLFacesTarget(BridgeContext bridgeContext, String url, String portletMode, String windowState,
-		boolean secure) throws MalformedURLException {
+	public PortletURLFacesTarget(PortletURL portletURL, String portletMode, String windowState, boolean secure)
+		throws MalformedURLException {
 
-		this.wrappedPortletURL = createPortletURL(bridgeContext, url);
+		this.wrappedPortletURL = portletURL;
 
 		if (portletMode != null) {
 
@@ -50,7 +49,13 @@ public abstract class PortletURLFacesTarget extends PortletURLWrapper {
 				this.wrappedPortletURL.setPortletMode(new PortletMode(portletMode));
 			}
 			catch (PortletModeException e) {
-				logger.error(e.getMessage());
+
+				if (portletMode == null) {
+					logger.error(e.getMessage());
+				}
+				else {
+					logger.error(e.getMessage() + " portletMode=[" + portletMode + "]");
+				}
 			}
 		}
 
@@ -60,7 +65,13 @@ public abstract class PortletURLFacesTarget extends PortletURLWrapper {
 				this.wrappedPortletURL.setWindowState(new WindowState(windowState));
 			}
 			catch (WindowStateException e) {
-				logger.error(e.getMessage());
+
+				if (windowState == null) {
+					logger.error(e.getMessage());
+				}
+				else {
+					logger.error(e.getMessage() + " windowState=[" + windowState + "]");
+				}
 			}
 		}
 
@@ -72,8 +83,6 @@ public abstract class PortletURLFacesTarget extends PortletURLWrapper {
 		}
 
 	}
-
-	public abstract PortletURL createPortletURL(BridgeContext bridgeContext, String url) throws MalformedURLException;
 
 	@Override
 	public PortletURL getWrapped() {

@@ -89,6 +89,7 @@
 			<bridge:bridge-request-scope-cache-factory>com.liferay.faces.bridge.scope.internal.BridgeRequestScopeCacheFactoryImpl</bridge:bridge-request-scope-cache-factory>
 			<bridge:bridge-request-scope-manager-factory>com.liferay.faces.bridge.scope.internal.BridgeRequestScopeManagerFactoryImpl</bridge:bridge-request-scope-manager-factory>
 			<bridge:bridge-write-behind-support-factory>com.liferay.faces.bridge.application.view.internal.BridgeWriteBehindSupportFactoryImpl</bridge:bridge-write-behind-support-factory>
+			<bridge:bridge-uri-factory>com.liferay.faces.bridge.context.url.internal.BridgeURIFactoryImpl</bridge:bridge-uri-factory>
 			<bridge:bridge-url-factory>com.liferay.faces.bridge.context.url.internal.BridgeURLFactoryImpl</bridge:bridge-url-factory>
 			<bridge:context-map-factory>com.liferay.faces.bridge.context.map.internal.ContextMapFactoryImpl</bridge:context-map-factory>
 			<bridge:head-response-writer-factory>com.liferay.faces.bridge.context.internal.HeadResponseWriterFactoryImpl</bridge:head-response-writer-factory>

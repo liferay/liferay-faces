@@ -22,8 +22,6 @@ import javax.portlet.PortletMode;
 import javax.portlet.RenderRequest;
 import javax.portlet.faces.Bridge;
 
-import com.liferay.faces.bridge.container.PortletContainer;
-
 
 /**
  * Section 5.1.2 of the JSR 329 Spec describes a concept called the "bridge request scope," the purpose of which is to
@@ -61,9 +59,9 @@ public interface BridgeRequestScope {
 	/**
 	 * This method removes the excluded request attributes. It is designed to be called at the beginning of the
 	 * RENDER_PHASE of the portlet lifecycle. However, it is only necessary to call this method if {@link
-	 * PortletContainer#isPostRedirectGetSupported()} returns <code>false</code>. This is because portlet containers
-	 * that do indeed implement the POST-REDIRECT-GET design pattern would not have any excluded request attributes
-	 * carry-over from the ActionRequest to the RenderRequest.
+	 * com.liferay.faces.bridge.context.BridgePortalContext#POST_REDIRECT_GET_SUPPORT} evaluates to <code>false</code>.
+	 * This is because portlet containers that do indeed implement the POST-REDIRECT-GET design pattern would not have
+	 * any excluded request attributes carry-over from the ActionRequest to the RenderRequest.
 	 */
 	void removeExcludedAttributes(RenderRequest renderRequest);
 
@@ -86,9 +84,11 @@ public interface BridgeRequestScope {
 	void saveState(FacesContext facesContext);
 
 	/**
-	 * Determines the {@link Bridge#PortletPhase} in which the bridge request scope instance was created.
+	 * Determines the {@link javax.portlet.faces.Bridge.PortletPhase} in which the bridge request scope instance was
+	 * created.
 	 *
-	 * @return  The {@link Bridge#PortletPhase} in which the bridge request scope instance was created.
+	 * @return  The {@link javax.portlet.faces.Bridge.PortletPhase} in which the bridge request scope instance was
+	 *          created.
 	 */
 	public Bridge.PortletPhase getBeganInPhase();
 
