@@ -50,7 +50,6 @@ import com.liferay.faces.bridge.application.internal.BridgeNavigationUtil;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.internal.BridgeConfigAttributeMap;
 import com.liferay.faces.bridge.config.internal.PortletConfigParam;
-import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.context.IncongruityContext;
@@ -104,7 +103,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	private IncongruityContext incongruityContext;
 	private List<String> preFacesRequestAttrNames;
 	private PortletConfig portletConfig;
-	private PortletContainer portletContainer;
 	private PortletContext portletContext;
 	private PortletRequest portletRequest;
 	private Bridge.PortletPhase portletPhase;
@@ -131,8 +129,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	@SuppressWarnings("unchecked")
 	public BridgeContextImpl(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
 		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,
-		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, PortletContainer portletContainer,
-		IncongruityContext incongruityContext) {
+		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, IncongruityContext incongruityContext) {
 
 		this.bridgeConfig = bridgeConfig;
 		this.configuredFacesServletMappings = (List<ConfiguredServletMapping>) bridgeConfig.getAttributes().get(
@@ -145,7 +142,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		this.portletRequest = portletRequest;
 		this.portletResponse = portletResponse;
 		this.portletPhase = portletPhase;
-		this.portletContainer = portletContainer;
 		this.incongruityContext = incongruityContext;
 
 		// Get the BridgeURLFactory instance.
@@ -157,35 +153,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 		setCurrentInstance(this);
 	}
-	@Override
-	public Writer getResponseOutputWriter() throws IOException {
 
-		if (responseOutputWriter == null) {
-
-			MimeResponse mimeResponse = (MimeResponse) portletResponse;
-
-			if (portletPhase == Bridge.PortletPhase.RENDER_PHASE) {
-
-				if (renderRedirectEnabled == null) {
-					renderRedirectEnabled = PortletConfigParam.RenderRedirectEnabled.getBooleanValue(portletConfig);
-				}
-
-				if (renderRedirectEnabled) {
-					responseOutputWriter = new RenderRedirectWriterImpl(mimeResponse.getWriter());
-				}
-				else {
-					responseOutputWriter = mimeResponse.getWriter();
-				}
-
-			}
-			else {
-				responseOutputWriter = mimeResponse.getWriter();
-			}
-
-		}
-
-		return responseOutputWriter;
-	}
 	@Override
 	public BridgeURL encodeActionURL(String url) {
 
@@ -674,7 +642,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		this.facesView = null;
 		this.preFacesRequestAttrNames = null;
 		this.portletConfig = null;
-		this.portletContainer = null;
 		this.portletContext = null;
 		this.portletRequest = null;
 		this.portletPhase = null;
@@ -1047,11 +1014,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 	}
 
 	@Override
-	public PortletContainer getPortletContainer() {
-		return portletContainer;
-	}
-
-	@Override
 	public PortletContext getPortletContext() {
 		return portletContext;
 	}
@@ -1309,6 +1271,36 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		}
 
 		return requestURL;
+	}
+
+	@Override
+	public Writer getResponseOutputWriter() throws IOException {
+
+		if (responseOutputWriter == null) {
+
+			MimeResponse mimeResponse = (MimeResponse) portletResponse;
+
+			if (portletPhase == Bridge.PortletPhase.RENDER_PHASE) {
+
+				if (renderRedirectEnabled == null) {
+					renderRedirectEnabled = PortletConfigParam.RenderRedirectEnabled.getBooleanValue(portletConfig);
+				}
+
+				if (renderRedirectEnabled) {
+					responseOutputWriter = new RenderRedirectWriterImpl(mimeResponse.getWriter());
+				}
+				else {
+					responseOutputWriter = mimeResponse.getWriter();
+				}
+
+			}
+			else {
+				responseOutputWriter = mimeResponse.getWriter();
+			}
+
+		}
+
+		return responseOutputWriter;
 	}
 
 	@Override

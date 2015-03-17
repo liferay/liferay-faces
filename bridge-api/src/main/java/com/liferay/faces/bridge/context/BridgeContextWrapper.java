@@ -27,7 +27,6 @@ import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeInvalidViewPathException;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
 import com.liferay.faces.bridge.context.url.BridgeURL;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
@@ -141,11 +140,6 @@ public abstract class BridgeContextWrapper extends BridgeContext implements Wrap
 	@Override
 	public PortletConfig getPortletConfig() {
 		return getWrapped().getPortletConfig();
-	}
-
-	@Override
-	public PortletContainer getPortletContainer() {
-		return getWrapped().getPortletContainer();
 	}
 
 	@Override

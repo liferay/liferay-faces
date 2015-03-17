@@ -34,7 +34,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.container.liferay.internal.LiferayConstants;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -148,7 +147,7 @@ public class BridgeRequestScopeLiferayImpl extends BridgeRequestScopeImpl {
 				// Can only exclude attributes that are not Liferay objects. For example, Liferay Portal includes
 				// a request attribute named "com.liferay.portal.kernel.servlet.PortletServletRequest" that must not be
 				// excluded.
-				if (!attributeValue.getClass().getName().startsWith(LiferayConstants.PACKAGE_NAMESPACE)) {
+				if (!attributeValue.getClass().getName().startsWith("com.liferay")) {
 					excluded = true;
 				}
 			}
