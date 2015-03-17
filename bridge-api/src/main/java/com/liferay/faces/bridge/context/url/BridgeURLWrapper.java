@@ -13,44 +13,10 @@
  */
 package com.liferay.faces.bridge.context.url;
 
-import java.util.Map;
-import java.util.Set;
-
-import javax.portlet.faces.Bridge.PortletPhase;
-
-
 /**
  * @author  Neil Griffin
  */
 public abstract class BridgeURLWrapper implements BridgeURL {
-
-	public String removeParameter(String name) {
-		return getWrapped().removeParameter(name);
-	}
-
-	public String getContextRelativePath() {
-		return getWrapped().getContextRelativePath();
-	}
-
-	public boolean isEscaped() {
-		return getWrapped().isEscaped();
-	}
-
-	public boolean isAbsolute() {
-		return getWrapped().isAbsolute();
-	}
-
-	public boolean isOpaque() {
-		return getWrapped().isOpaque();
-	}
-
-	public boolean isPathRelative() {
-		return getWrapped().isPathRelative();
-	}
-
-	public boolean isPortletScheme() {
-		return getWrapped().isPortletScheme();
-	}
 
 	public boolean isSecure() {
 		return getWrapped().isSecure();
@@ -58,14 +24,6 @@ public abstract class BridgeURLWrapper implements BridgeURL {
 
 	public boolean isSelfReferencing() {
 		return getWrapped().isSelfReferencing();
-	}
-
-	public boolean isExternal() {
-		return getWrapped().isExternal();
-	}
-
-	public boolean isHierarchical() {
-		return getWrapped().isHierarchical();
 	}
 
 	public String getParameter(String name) {
@@ -78,18 +36,6 @@ public abstract class BridgeURLWrapper implements BridgeURL {
 
 	public void setParameter(String name, String[] value) {
 		getWrapped().setParameter(name, value);
-	}
-
-	public Map<String, String[]> getParameterMap() {
-		return getWrapped().getParameterMap();
-	}
-
-	public Set<String> getParameterNames() {
-		return getWrapped().getParameterNames();
-	}
-
-	public PortletPhase getPortletPhase() {
-		return getWrapped().getPortletPhase();
 	}
 
 	public void setSecure(boolean secure) {

@@ -40,10 +40,8 @@ import javax.portlet.faces.Bridge.PortletPhase;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainer;
-import com.liferay.faces.bridge.context.url.BridgeActionURL;
-import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
-import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
+import com.liferay.faces.bridge.context.url.BridgeURL;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 
 
@@ -70,17 +68,22 @@ public class BridgeContextMockImpl extends BridgeContext {
 	}
 
 	@Override
-	public BridgeActionURL encodeActionURL(String url) {
+	public BridgeURL encodeActionURL(String url) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public BridgePartialActionURL encodePartialActionURL(String url) {
+	public BridgeURL encodeBookmarkableURL(String baseURL, Map<String, List<String>> parameters) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public BridgeRedirectURL encodeRedirectURL(String baseUrl, Map<String, List<String>> parameters) {
+	public BridgeURL encodePartialActionURL(String url) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public BridgeURL encodeRedirectURL(String baseUrl, Map<String, List<String>> parameters) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -228,12 +231,12 @@ public class BridgeContextMockImpl extends BridgeContext {
 	}
 
 	@Override
-	public BridgeRedirectURL getRenderRedirectURL() {
+	public BridgeURL getRenderRedirectURL() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void setRenderRedirectURL(BridgeRedirectURL renderRedirectURL) {
+	public void setRenderRedirectURL(BridgeURL renderRedirectURL) {
 		throw new UnsupportedOperationException();
 	}
 

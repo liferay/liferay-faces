@@ -23,6 +23,7 @@ import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigMockImpl;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgeContextMockImpl;
+import com.liferay.faces.bridge.context.url.internal.BridgeURIImpl;
 import com.liferay.faces.portlet.PortletRequestMockImpl;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -51,10 +52,10 @@ public class BridgeURLTest {
 	public void testEscaped() {
 
 		try {
-			Assert.assertFalse(newBridgeURL("http://www.liferay.com/foo").isEscaped());
-			Assert.assertFalse(newBridgeURL("http://www.liferay.com/foo?a=1&b=2").isEscaped());
-			Assert.assertFalse(newBridgeURL("http://www.liferay.com/foo?a=1&b=2&amp;c=3").isEscaped());
-			Assert.assertTrue(newBridgeURL("http://www.liferay.com/foo?a=1&amp;b=2&amp;c=3").isEscaped());
+			Assert.assertFalse(newBridgeURI("http://www.liferay.com/foo").isEscaped());
+			Assert.assertFalse(newBridgeURI("http://www.liferay.com/foo?a=1&b=2").isEscaped());
+			Assert.assertFalse(newBridgeURI("http://www.liferay.com/foo?a=1&b=2&amp;c=3").isEscaped());
+			Assert.assertTrue(newBridgeURI("http://www.liferay.com/foo?a=1&amp;b=2&amp;c=3").isEscaped());
 		}
 		catch (URISyntaxException e) {
 			Assert.fail(e.getMessage());
@@ -65,9 +66,9 @@ public class BridgeURLTest {
 	public void testExternal() {
 
 		try {
-			Assert.assertTrue(newBridgeURL("http://www.liferay.com").isExternal());
-			Assert.assertFalse(newBridgeURL(CONTEXT_PATH).isExternal());
-			Assert.assertFalse(newBridgeURL("/relativeToContextPath?someurl=" + CONTEXT_PATH).isExternal());
+			Assert.assertTrue(newBridgeURI("http://www.liferay.com").isExternal());
+			Assert.assertFalse(newBridgeURI(CONTEXT_PATH).isExternal());
+			Assert.assertFalse(newBridgeURI("/relativeToContextPath?someurl=" + CONTEXT_PATH).isExternal());
 		}
 		catch (URISyntaxException e) {
 			Assert.fail(e.getMessage());
@@ -78,11 +79,11 @@ public class BridgeURLTest {
 	public void testHierarchical() {
 
 		try {
-			Assert.assertTrue(newBridgeURL("http://www.liferay.com").isHierarchical());
-			Assert.assertTrue(newBridgeURL("/foo/bar.gif").isHierarchical());
-			Assert.assertTrue(newBridgeURL("foo/bar.gif").isHierarchical());
-			Assert.assertFalse(newBridgeURL("mailto:foo@liferay.com").isHierarchical());
-			Assert.assertFalse(newBridgeURL("portlet:render").isHierarchical());
+			Assert.assertTrue(newBridgeURI("http://www.liferay.com").isHierarchical());
+			Assert.assertTrue(newBridgeURI("/foo/bar.gif").isHierarchical());
+			Assert.assertTrue(newBridgeURI("foo/bar.gif").isHierarchical());
+			Assert.assertFalse(newBridgeURI("mailto:foo@liferay.com").isHierarchical());
+			Assert.assertFalse(newBridgeURI("portlet:render").isHierarchical());
 		}
 		catch (URISyntaxException e) {
 			Assert.fail(e.getMessage());
@@ -93,8 +94,8 @@ public class BridgeURLTest {
 	public void testOpaque() {
 
 		try {
-			Assert.assertFalse(newBridgeURL("http://www.liferay.com").isOpaque());
-			Assert.assertTrue(newBridgeURL("mailto:foo@liferay.com").isOpaque());
+			Assert.assertFalse(newBridgeURI("http://www.liferay.com").isOpaque());
+			Assert.assertTrue(newBridgeURI("mailto:foo@liferay.com").isOpaque());
 		}
 		catch (URISyntaxException e) {
 			Assert.fail(e.getMessage());
@@ -105,9 +106,9 @@ public class BridgeURLTest {
 	public void testPathRelative() {
 
 		try {
-			Assert.assertFalse(newBridgeURL("http://www.liferay.com").isPathRelative());
-			Assert.assertFalse(newBridgeURL("/foo/bar.gif").isPathRelative());
-			Assert.assertTrue(newBridgeURL("foo/bar.gif").isPathRelative());
+			Assert.assertFalse(newBridgeURI("http://www.liferay.com").isPathRelative());
+			Assert.assertFalse(newBridgeURI("/foo/bar.gif").isPathRelative());
+			Assert.assertTrue(newBridgeURI("foo/bar.gif").isPathRelative());
 		}
 		catch (URISyntaxException e) {
 			Assert.fail(e.getMessage());
@@ -118,17 +119,23 @@ public class BridgeURLTest {
 	public void testViewPath() {
 
 		try {
-			Assert.assertTrue(newBridgeURL("http://www.liferay.com").getContextRelativePath().equals(StringPool.BLANK));
-			Assert.assertTrue(newBridgeURL("/views/foo.xhtml").getContextRelativePath().equals("/views/foo.xhtml"));
-			Assert.assertTrue(newBridgeURL(CONTEXT_PATH + "/views/foo.xhtml").getContextRelativePath().equals(
+			newBridgeURI("http://www.liferay.com");
+			Assert.assertTrue(newBridgeURI("http://www.liferay.com").getContextRelativePath(StringPool.BLANK) == null);
+			Assert.assertTrue(newBridgeURI("/views/foo.xhtml").getContextRelativePath(StringPool.BLANK).equals(
 					"/views/foo.xhtml"));
+			Assert.assertTrue(newBridgeURI(CONTEXT_PATH + "/views/foo.xhtml").getContextRelativePath(CONTEXT_PATH)
+				.equals("/views/foo.xhtml"));
 		}
 		catch (URISyntaxException e) {
 			Assert.fail(e.getMessage());
 		}
 	}
 
+	protected BridgeURI newBridgeURI(String uri) throws URISyntaxException {
+		return new BridgeURIImpl(uri);
+	}
+
 	protected BridgeURL newBridgeURL(String url) throws URISyntaxException {
-		return new BridgeURLMockImpl(bridgeContext, url, CURRENT_FACES_VIEW_ID);
+		return new BridgeURLMockImpl(bridgeContext, newBridgeURI(url), CURRENT_FACES_VIEW_ID);
 	}
 }

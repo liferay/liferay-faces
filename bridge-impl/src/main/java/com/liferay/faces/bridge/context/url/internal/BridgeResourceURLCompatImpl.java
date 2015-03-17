@@ -16,6 +16,7 @@ package com.liferay.faces.bridge.context.url.internal;
 import com.liferay.faces.bridge.application.internal.ResourceHandlerInnerImpl;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
+import com.liferay.faces.bridge.context.url.BridgeURI;
 
 
 /**
@@ -23,18 +24,18 @@ import com.liferay.faces.bridge.context.url.BridgeResourceURL;
  *
  * @author  Neil Griffin
  */
-public abstract class BridgeResourceURLCompatImpl extends BridgeURLBaseImpl implements BridgeResourceURL {
+public abstract class BridgeResourceURLCompatImpl extends BridgeURLBase implements BridgeResourceURL {
 
-	public BridgeResourceURLCompatImpl(BridgeContext bridgeContext, String url, String viewId) {
-		super(bridgeContext, url, viewId);
+	public BridgeResourceURLCompatImpl(BridgeContext bridgeContext, BridgeURI bridgeURI, String viewId) {
+		super(bridgeContext, bridgeURI, viewId);
 	}
 
 	public boolean isEncodedFaces2ResourceURL() {
-		return ResourceHandlerInnerImpl.isEncodedFacesResourceURL(url);
+		return ResourceHandlerInnerImpl.isEncodedFacesResourceURL(bridgeURI.toString());
 	}
 
 	public boolean isFaces2ResourceURL() {
-		return ResourceHandlerInnerImpl.isFacesResourceURL(url);
+		return ResourceHandlerInnerImpl.isFacesResourceURL(bridgeURI.toString());
 	}
 
 }

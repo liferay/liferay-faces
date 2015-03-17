@@ -20,21 +20,21 @@ import javax.portlet.BaseURL;
 
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.url.internal.BaseURLNonEncodedStringImpl;
-import com.liferay.faces.bridge.context.url.internal.BridgeURLBaseImpl;
+import com.liferay.faces.bridge.context.url.internal.BridgeURLBase;
 
 
 /**
  * @author  Neil Griffin
  */
-public class BridgeURLMockImpl extends BridgeURLBaseImpl {
+public class BridgeURLMockImpl extends BridgeURLBase {
 
-	public BridgeURLMockImpl(BridgeContext bridgeContext, String url, String viewId) {
-		super(bridgeContext, url, viewId);
+	public BridgeURLMockImpl(BridgeContext bridgeContext, BridgeURI bridgeURI, String viewId) {
+		super(bridgeContext, bridgeURI, viewId);
 	}
 
 	@Override
 	public BaseURL toBaseURL() throws MalformedURLException {
-		return new BaseURLNonEncodedStringImpl(url, new HashMap<String, String[]>());
+		return new BaseURLNonEncodedStringImpl(bridgeURI.toString(), new HashMap<String, String[]>());
 	}
 
 }

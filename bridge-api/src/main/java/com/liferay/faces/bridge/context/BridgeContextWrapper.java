@@ -29,10 +29,8 @@ import javax.portlet.faces.BridgeInvalidViewPathException;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainer;
-import com.liferay.faces.bridge.context.url.BridgeActionURL;
-import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
-import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
+import com.liferay.faces.bridge.context.url.BridgeURL;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 
 
@@ -47,17 +45,17 @@ public abstract class BridgeContextWrapper extends BridgeContext implements Face
 	}
 
 	@Override
-	public BridgeActionURL encodeActionURL(String url) {
+	public BridgeURL encodeActionURL(String url) {
 		return getWrapped().encodeActionURL(url);
 	}
 
 	@Override
-	public BridgePartialActionURL encodePartialActionURL(String url) {
+	public BridgeURL encodePartialActionURL(String url) {
 		return getWrapped().encodePartialActionURL(url);
 	}
 
 	@Override
-	public BridgeRedirectURL encodeRedirectURL(String baseUrl, Map<String, List<String>> parameters) {
+	public BridgeURL encodeRedirectURL(String baseUrl, Map<String, List<String>> parameters) {
 		return getWrapped().encodeRedirectURL(baseUrl, parameters);
 	}
 
@@ -202,12 +200,12 @@ public abstract class BridgeContextWrapper extends BridgeContext implements Face
 	}
 
 	@Override
-	public BridgeRedirectURL getRenderRedirectURL() {
+	public BridgeURL getRenderRedirectURL() {
 		return getWrapped().getRenderRedirectURL();
 	}
 
 	@Override
-	public void setRenderRedirectURL(BridgeRedirectURL renderRedirectURL) {
+	public void setRenderRedirectURL(BridgeURL renderRedirectURL) {
 		getWrapped().setRenderRedirectURL(renderRedirectURL);
 	}
 
