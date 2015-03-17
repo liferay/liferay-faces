@@ -26,14 +26,11 @@ import javax.portlet.PortalContext;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
-import javax.portlet.PortletURL;
 import javax.portlet.ResourceResponse;
 import javax.portlet.faces.Bridge;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 
-import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.util.internal.FileNameUtil;
@@ -68,7 +65,6 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 	// Protected Data Members
 	protected ServletResponse facesImplementationServletResponse;
 	protected Bridge.PortletPhase portletPhase;
-	protected String requestContextPath;
 
 	public ExternalContextCompat_2_0_Impl(PortletContext portletContext, PortletRequest portletRequest,
 		PortletResponse portletResponse) {
@@ -110,72 +106,7 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 	 */
 	@Override
 	public String encodeBookmarkableURL(String baseUrl, Map<String, List<String>> parameters) {
-
-		String renderURL = null;
-
-		if (baseUrl != null) {
-			String viewId = baseUrl;
-
-			if (baseUrl.startsWith(requestContextPath)) {
-				viewId = baseUrl.substring(requestContextPath.length());
-			}
-
-			try {
-
-				if ((portletPhase == Bridge.PortletPhase.RENDER_PHASE) ||
-						(portletPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
-					PortletURL portletRenderURL = bridgeContext.getPortletContainer().createRenderURL(baseUrl);
-					BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-					BridgeConfig bridgeConfig = bridgeContext.getBridgeConfig();
-					portletRenderURL.setParameter(bridgeConfig.getViewIdRenderParameterName(), viewId);
-
-					if (parameters != null) {
-
-						for (Map.Entry<String, List<String>> parameter : parameters.entrySet()) {
-							String name = parameter.getKey();
-
-							if (name != null) {
-								List<String> values = parameter.getValue();
-
-								if (values != null) {
-									int size = values.size();
-
-									if (size > 0) {
-
-										if (size == 1) {
-											String value = values.get(0);
-
-											if (value != null) {
-												portletRenderURL.setParameter(name, value);
-											}
-										}
-										else {
-											logger.warn("Unable to append multiple values for parameter name=[{0]",
-												name);
-										}
-									}
-								}
-							}
-						}
-					}
-
-					renderURL = portletRenderURL.toString();
-				}
-				else {
-					logger.error(
-						"Unable to encode bookmarkable URL during Bridge.PortletPhase.[{0}] -- you should call BridgeUtil.getPortletRequestPhase() and check for Bridge.PortletPhase.RENDER_PHASE or Bridge.PortletPhase.RESOURCE_PHASE before calling ExternalContext.encodeBookmarkableURL(...).",
-						portletPhase);
-				}
-			}
-			catch (Exception e) {
-				logger.error(e.getMessage(), e);
-			}
-		}
-		else {
-			logger.warn("Unable to encode RenderURL for url=[null]");
-		}
-
-		return renderURL;
+		return bridgeContext.encodeBookmarkableURL(baseUrl, parameters).toString();
 	}
 
 	/**

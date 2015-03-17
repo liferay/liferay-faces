@@ -114,7 +114,7 @@ public class FacesViewImpl implements FacesView {
 					// For each of the valid extensions (.jsp, .jspx, etc.) that the developer may have specified:
 					for (String configuredSuffix : configuredSuffixes) {
 
-						if (viewId.contains(configuredSuffix)) {
+						if ((viewId != null) && viewId.contains(configuredSuffix)) {
 							this.extension = configuredSuffix;
 							this.extensionMapped = true;
 

@@ -15,6 +15,7 @@ package com.liferay.faces.bridge.internal;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.net.URISyntaxException;
 
 import javax.faces.application.NavigationHandler;
 import javax.faces.application.ViewHandler;
@@ -33,7 +34,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.PortletPhase;
-import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
 import javax.portlet.faces.BridgeException;
 
 import com.liferay.faces.bridge.BridgeFactoryFinder;
@@ -45,12 +45,13 @@ import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.context.internal.RenderRedirectWriter;
-import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
+import com.liferay.faces.bridge.context.url.BridgeURI;
+import com.liferay.faces.bridge.context.url.BridgeURIFactory;
+import com.liferay.faces.bridge.context.url.BridgeURL;
 import com.liferay.faces.bridge.event.internal.IPCPhaseListener;
 import com.liferay.faces.bridge.filter.BridgePortletRequestFactory;
 import com.liferay.faces.bridge.filter.BridgePortletResponseFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -81,7 +82,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 		this.renderResponse = bridgePortletResponseFactory.getRenderResponse(renderResponse);
 	}
 
-	public void execute() throws BridgeDefaultViewNotSpecifiedException, BridgeException {
+	public void execute() throws BridgeException {
 
 		logger.debug(Logger.SEPARATOR);
 		logger.debug("execute(RenderRequest, RenderResponse) portletName=[{0}] portletMode=[{1}]", portletName,
@@ -126,8 +127,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 		logger.trace("doFacesHeaders(RenderRequest, RenderResponse) this=[{0}]", this);
 	}
 
-	protected void execute(BridgeRedirectURL renderRedirectURL) throws BridgeDefaultViewNotSpecifiedException,
-		BridgeException, IOException {
+	protected void execute(BridgeURL renderRedirectURL) throws BridgeException, IOException {
 
 		init(renderRequest, renderResponse, Bridge.PortletPhase.RENDER_PHASE);
 
@@ -148,11 +148,22 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 			bridgeContext.setRenderRedirectAfterDispatch(true);
 
 			ViewHandler viewHandler = facesContext.getApplication().getViewHandler();
-			UIViewRoot uiViewRoot = viewHandler.createView(facesContext, renderRedirectURL.getContextRelativePath());
-			facesContext.setViewRoot(uiViewRoot);
+			BridgeURIFactory bridgeURIFactory = (BridgeURIFactory) BridgeFactoryFinder.getFactory(
+					BridgeURIFactory.class);
 
-			String viewId = bridgeContext.getFacesViewId();
-			logger.debug("Performed render-redirect to viewId=[{0}]", viewId);
+			try {
+				BridgeURI bridgeURI = bridgeURIFactory.getBridgeURI(renderRedirectURL.toString());
+				String contextPath = bridgeContext.getPortletRequest().getContextPath();
+				String contextRelativePath = bridgeURI.getContextRelativePath(contextPath);
+				UIViewRoot uiViewRoot = viewHandler.createView(facesContext, contextRelativePath);
+				facesContext.setViewRoot(uiViewRoot);
+
+				String viewId = bridgeContext.getFacesViewId();
+				logger.debug("Performed render-redirect to viewId=[{0}]", viewId);
+			}
+			catch (URISyntaxException e) {
+				throw new IOException(e.getMessage());
+			}
 		}
 
 		// NOTE: PROPOSE-FOR-BRIDGE3-API Actually, the proposal would be to REMOVE
@@ -308,7 +319,7 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 	}
 
 	protected BridgeNavigationHandler getBridgeNavigationHandler(FacesContext facesContext) {
-		BridgeNavigationHandler bridgeNavigationHandler = null;
+		BridgeNavigationHandler bridgeNavigationHandler;
 		NavigationHandler navigationHandler = facesContext.getApplication().getNavigationHandler();
 
 		if (navigationHandler instanceof BridgeNavigationHandler) {
@@ -329,12 +340,8 @@ public class BridgePhaseRenderImpl extends BridgePhaseCompat_2_2_Impl {
 	 * @param  viewId  The current Faces viewId.
 	 */
 	protected void setViewHistory(String viewId) {
-		StringBuilder buf = new StringBuilder();
-		buf.append(Bridge.VIEWID_HISTORY);
-		buf.append(StringPool.PERIOD);
-		buf.append(renderRequest.getPortletMode());
 
-		String attributeName = buf.toString();
+		String attributeName = Bridge.VIEWID_HISTORY.concat(".").concat(renderRequest.getPortletMode().toString());
 		PortletSession portletSession = renderRequest.getPortletSession();
 		portletSession.setAttribute(attributeName, viewId);
 	}

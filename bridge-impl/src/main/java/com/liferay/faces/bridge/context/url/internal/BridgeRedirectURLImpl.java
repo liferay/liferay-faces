@@ -24,18 +24,18 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeUtil;
 
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
+import com.liferay.faces.bridge.context.url.BridgeURI;
 
 
 /**
  * @author  Neil Griffin
  */
-public class BridgeRedirectURLImpl extends BridgeResponseURLImpl implements BridgeRedirectURL {
+public class BridgeRedirectURLImpl extends BridgeURLBase {
 
-	public BridgeRedirectURLImpl(BridgeContext bridgeContext, String url, Map<String, List<String>> parameters,
+	public BridgeRedirectURLImpl(BridgeContext bridgeContext, BridgeURI bridgeURI, Map<String, List<String>> parameters,
 		String viewId) {
 
-		super(bridgeContext, url, viewId);
+		super(bridgeContext, bridgeURI, viewId);
 
 		if (parameters != null) {
 
@@ -60,7 +60,7 @@ public class BridgeRedirectURLImpl extends BridgeResponseURLImpl implements Brid
 	@Override
 	protected BaseURL toBaseURL() throws MalformedURLException {
 
-		BaseURL baseURL = null;
+		BaseURL baseURL;
 
 		// If this is executing during the ACTION_PHASE of the portlet lifecycle, then
 		if (BridgeUtil.getPortletRequestPhase() == Bridge.PortletPhase.ACTION_PHASE) {
@@ -73,7 +73,7 @@ public class BridgeRedirectURLImpl extends BridgeResponseURLImpl implements Brid
 			// ExternalContext.encodeActionURL(ExternalContext.encodeResourceURL(url)). The return value of those calls
 			// will ultimately be passed to the ExternalContext.redirect(String) method. For this reason, need to return
 			// a simple string-based representation of the URL.
-			baseURL = new BaseURLNonEncodedStringImpl(url, getParameterMap());
+			baseURL = new BaseURLNonEncodedStringImpl(bridgeURI.toString(), getParameterMap());
 		}
 
 		// Otherwise,
@@ -81,7 +81,7 @@ public class BridgeRedirectURLImpl extends BridgeResponseURLImpl implements Brid
 
 			// So far, under all circumstances it seems appropriate to return a simple string-based representation of
 			// the URL. This is the same code as above but keep it this way for now for TCK documentation purposes.
-			baseURL = new BaseURLNonEncodedStringImpl(url, getParameterMap());
+			baseURL = new BaseURLNonEncodedStringImpl(bridgeURI.toString(), getParameterMap());
 		}
 
 		return baseURL;

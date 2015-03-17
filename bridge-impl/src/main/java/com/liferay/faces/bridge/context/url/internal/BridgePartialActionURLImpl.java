@@ -19,7 +19,7 @@ import javax.portlet.BaseURL;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
+import com.liferay.faces.bridge.context.url.BridgeURI;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -27,16 +27,19 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class BridgePartialActionURLImpl extends BridgeURLBaseImpl implements BridgePartialActionURL {
+public class BridgePartialActionURLImpl extends BridgeURLBase {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BridgePartialActionURLImpl.class);
 
 	// Private Data Members
+	private String uri;
 	private String viewIdResourceParameterName;
 
-	public BridgePartialActionURLImpl(BridgeContext bridgeContext, String url, String viewId) {
-		super(bridgeContext, url, viewId);
+	public BridgePartialActionURLImpl(BridgeContext bridgeContext, BridgeURI bridgeURI, String viewId) {
+
+		super(bridgeContext, bridgeURI, viewId);
+		this.uri = bridgeURI.toString();
 
 		BridgeConfig bridgeConfig = bridgeContext.getBridgeConfig();
 		this.viewIdResourceParameterName = bridgeConfig.getViewIdResourceParameterName();
@@ -47,15 +50,15 @@ public class BridgePartialActionURLImpl extends BridgeURLBaseImpl implements Bri
 
 		BaseURL baseURL = null;
 
-		if (url != null) {
+		if (uri != null) {
 
-			if (url.startsWith("http")) {
-				baseURL = new BaseURLNonEncodedStringImpl(url, getParameterMap());
-				logger.debug("URL starts with http so assuming that it has already been encoded: url=[{0}]", url);
+			if (uri.startsWith("http")) {
+				baseURL = new BaseURLNonEncodedStringImpl(uri, getParameterMap());
+				logger.debug("URL starts with http so assuming that it has already been encoded: url=[{0}]", uri);
 			}
 			else {
 				String urlWithModifiedParameters = _toString(false);
-				baseURL = bridgeContext.getPortletContainer().createPartialActionURL(urlWithModifiedParameters);
+				baseURL = createPartialActionURL(urlWithModifiedParameters);
 			}
 		}
 		else {
