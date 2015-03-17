@@ -32,10 +32,8 @@ import javax.portlet.faces.BridgeInvalidViewPathException;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.container.PortletContainer;
-import com.liferay.faces.bridge.context.url.BridgeActionURL;
-import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
-import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
+import com.liferay.faces.bridge.context.url.BridgeURL;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 
 
@@ -78,9 +76,17 @@ public abstract class BridgeContext {
 	 *
 	 * @param   url  The URL to be encoded.
 	 *
-	 * @return  A new instance of {@link BridgeActionURL} that conforms to the proper encoding.
+	 * @return  A new instance of {@link BridgeURL} that conforms to the proper encoding.
 	 */
-	public abstract BridgeActionURL encodeActionURL(String url);
+	public abstract BridgeURL encodeActionURL(String url);
+
+	/**
+	 * Encodes a bridge "bookmarkable" URL, meaning a URL that can be bookmarked.
+	 *
+	 * @param  baseURL     The URL to be encoded.
+	 * @param  parameters  The URL parameters that are to be included as part of the encoding.
+	 */
+	public abstract BridgeURL encodeBookmarkableURL(String baseURL, Map<String, List<String>> parameters);
 
 	/**
 	 * Encodes a bridge "partial action" URL, meaning a URL that is intended to be used for Ajax (partial request)
@@ -89,20 +95,20 @@ public abstract class BridgeContext {
 	 *
 	 * @param   url  The URL to be encoded.
 	 *
-	 * @return  A new instance of {@link BridgePartialActionURL} that conforms to the proper encoding.
+	 * @return  A new instance of {@link BridgeURL} that conforms to the proper encoding.
 	 */
-	public abstract BridgePartialActionURL encodePartialActionURL(String url);
+	public abstract BridgeURL encodePartialActionURL(String url);
 
 	/**
 	 * Encodes a bridge "redirect" URL, meaning a URL that conforms to the deviation requirements of {@link
 	 * javax.faces.context.ExternalContext#redirect(String)} listed in Section 6.1.3.1 of the Bridge Spec.
 	 *
-	 * @param   baseUrl     The URL to be encoded.
+	 * @param   baseURL     The URL to be encoded.
 	 * @param   parameters  The URL parameters that are to be included as part of the encoding.
 	 *
-	 * @return  A new instance of {@link BridgeRedirectURL} that conforms to the proper encoding.
+	 * @return  A new instance of {@link BridgeURL} that conforms to the proper encoding.
 	 */
-	public abstract BridgeRedirectURL encodeRedirectURL(String baseUrl, Map<String, List<String>> parameters);
+	public abstract BridgeURL encodeRedirectURL(String baseURL, Map<String, List<String>> parameters);
 
 	/**
 	 * Encodes a bridge "resource" URL, meaning a URL that conforms to the deviation requirements of {@link
@@ -175,8 +181,6 @@ public abstract class BridgeContext {
 	  &lt;/init-param&gt;
 	 * </pre>
 	 * </code>
-	 *
-	 * @return
 	 */
 	public abstract Map<String, String> getDefaultViewIdMap();
 
@@ -304,12 +308,12 @@ public abstract class BridgeContext {
 	/**
 	 * Gets the render-redirect URL that was set during a render-redirect.
 	 */
-	public abstract BridgeRedirectURL getRenderRedirectURL();
+	public abstract BridgeURL getRenderRedirectURL();
 
 	/**
 	 * Sets the render-redirect URL that is associated with a render-redirect.
 	 */
-	public abstract void setRenderRedirectURL(BridgeRedirectURL renderRedirectURL);
+	public abstract void setRenderRedirectURL(BridgeURL renderRedirectURL);
 
 	public abstract Map<String, String> getRequestHeaderMap();
 

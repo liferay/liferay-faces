@@ -13,16 +13,15 @@
  */
 package com.liferay.faces.bridge.context.url;
 
+import java.net.URISyntaxException;
+
 import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class BridgePartialActionURLWrapper extends BridgeURLWrapper implements BridgePartialActionURL,
-	Wrapper<BridgePartialActionURL> {
+public abstract class BridgeURIFactory implements Wrapper<BridgeURIFactory> {
 
-	@Override
-	public abstract BridgePartialActionURL getWrapped();
-
+	public abstract BridgeURI getBridgeURI(String uri) throws URISyntaxException;
 }

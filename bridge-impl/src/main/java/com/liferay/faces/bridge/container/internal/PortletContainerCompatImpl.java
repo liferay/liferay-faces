@@ -22,5 +22,4 @@ import com.liferay.faces.bridge.container.PortletContainer;
  * @author  Neil Griffin
  */
 public abstract class PortletContainerCompatImpl implements PortletContainer {
-
 }

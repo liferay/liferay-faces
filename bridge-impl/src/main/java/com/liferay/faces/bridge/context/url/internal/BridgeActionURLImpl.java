@@ -22,9 +22,9 @@ import javax.portlet.faces.Bridge;
 import javax.portlet.faces.Bridge.PortletPhase;
 import javax.portlet.faces.BridgeUtil;
 
-import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.context.url.BridgeActionURL;
+import com.liferay.faces.bridge.context.url.BridgeURI;
+import com.liferay.faces.bridge.context.url.BridgeURL;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.lang.StringPool;
 
@@ -32,22 +32,21 @@ import com.liferay.faces.util.lang.StringPool;
 /**
  * @author  Neil Griffin
  */
-public class BridgeActionURLImpl extends BridgeResponseURLImpl implements BridgeActionURL {
+public class BridgeActionURLImpl extends BridgeURLBase implements BridgeURL {
 
 	// Private Data Members
-	private PortletContainer portletContainer;
 	private PortletRequest portletRequest;
 
-	public BridgeActionURLImpl(BridgeContext bridgeContext, String url, String viewId) {
-		super(bridgeContext, url, viewId);
+	public BridgeActionURLImpl(BridgeContext bridgeContext, BridgeURI bridgeURI, String viewId) {
+		super(bridgeContext, bridgeURI, viewId);
 		this.portletRequest = bridgeContext.getPortletRequest();
-		this.portletContainer = bridgeContext.getPortletContainer();
 	}
 
 	@Override
 	protected BaseURL toBaseURL() throws MalformedURLException {
 
 		BaseURL baseURL;
+		String uri = bridgeURI.toString();
 
 		// If this is executing during the ACTION_PHASE of the portlet lifecycle, then
 		PortletPhase portletRequestPhase = BridgeUtil.getPortletRequestPhase();
@@ -58,7 +57,7 @@ public class BridgeActionURLImpl extends BridgeResponseURLImpl implements Bridge
 			// ExternalContext.encodeActionURL(ExternalContext.encodeResourceURL(url)). The return value of those calls
 			// will ultimately be passed to the ExternalContext.redirect(String) method. For this reason, need to return
 			// a simple string-based representation of the URL.
-			baseURL = new BaseURLNonEncodedStringImpl(url, getParameterMap());
+			baseURL = new BaseURLNonEncodedStringImpl(uri);
 		}
 
 		// Otherwise,
@@ -66,22 +65,22 @@ public class BridgeActionURLImpl extends BridgeResponseURLImpl implements Bridge
 
 			// If the URL string starts with "http" then assume that it has already been encoded and simply return the
 			// URL string.
-			if (url.startsWith("http")) {
-				baseURL = new BaseURLNonEncodedStringImpl(url, getParameterMap());
+			if (uri.startsWith("http")) {
+				baseURL = new BaseURLNonEncodedStringImpl(uri, getParameterMap());
 			}
 
 			// Otherwise, if the URL string starts with a "#" character, or it's an absolute URL that is external to
 			// this portlet, then simply return the URL string as required by the Bridge Spec.
-			else if (url.startsWith(StringPool.POUND) || (isAbsolute() && isExternal())) {
+			else if (uri.startsWith(StringPool.POUND) || (bridgeURI.isAbsolute() && bridgeURI.isExternal())) {
 
 				// TCK TestPage084: encodeActionURLPoundCharTest
-				baseURL = new BaseURLNonEncodedStringImpl(url, getParameterMap());
+				baseURL = new BaseURLNonEncodedStringImpl(uri, getParameterMap());
 			}
 
 			// Otherwise, if the URL string has a "javax.portlet.faces.DirectLink" parameter with a value of "true",
 			// then return an absolute path (to the path in the URL string) as required by the Bridge Spec.
-			else if (isExternal() || BooleanHelper.isTrueToken(getParameter(Bridge.DIRECT_LINK))) {
-				baseURL = new BaseURLDirectStringImpl(url, getParameterMap(), getURI().getPath(), portletRequest);
+			else if (bridgeURI.isExternal() || BooleanHelper.isTrueToken(getParameter(Bridge.DIRECT_LINK))) {
+				baseURL = new BaseURLDirectStringImpl(uri, getParameterMap(), bridgeURI.getPath(), portletRequest);
 			}
 			else {
 				String portletMode = removeParameter(Bridge.PORTLET_MODE_PARAMETER);
@@ -92,18 +91,18 @@ public class BridgeActionURLImpl extends BridgeResponseURLImpl implements Bridge
 				// Note: If the URL string starts with "portlet:", then the type of URL the portlet container creates is
 				// determined by what follows the scheme, such as "portlet:action" "portlet:render" and
 				// "portlet:resource".
-				if (isPortletScheme()) {
+				if (bridgeURI.isPortletScheme()) {
 					String urlWithModifiedParameters = _toString(modeChanged);
-					Bridge.PortletPhase urlPortletPhase = getPortletPhase();
+					Bridge.PortletPhase urlPortletPhase = bridgeURI.getPortletPhase();
 
 					if (urlPortletPhase == Bridge.PortletPhase.ACTION_PHASE) {
-						baseURL = portletContainer.createActionURL(urlWithModifiedParameters);
+						baseURL = createActionURL(urlWithModifiedParameters);
 					}
 					else if (urlPortletPhase == Bridge.PortletPhase.RENDER_PHASE) {
-						baseURL = portletContainer.createRenderURL(urlWithModifiedParameters);
+						baseURL = createRenderURL(urlWithModifiedParameters);
 					}
 					else {
-						baseURL = portletContainer.createResourceURL(urlWithModifiedParameters);
+						baseURL = createResourceURL(urlWithModifiedParameters);
 					}
 				}
 				else {
@@ -113,7 +112,7 @@ public class BridgeActionURLImpl extends BridgeResponseURLImpl implements Bridge
 						baseURL = new BaseURLNonEncodedStringImpl(urlWithModifiedParameters);
 					}
 					else {
-						baseURL = portletContainer.createActionURL(urlWithModifiedParameters);
+						baseURL = createActionURL(urlWithModifiedParameters);
 					}
 				}
 

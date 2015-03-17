@@ -17,22 +17,14 @@ import java.net.MalformedURLException;
 
 import javax.portlet.PortletURL;
 
-import com.liferay.faces.bridge.context.BridgeContext;
-
 
 /**
  * @author  Neil Griffin
  */
 public class PortletURLFacesTargetActionImpl extends PortletURLFacesTarget {
 
-	public PortletURLFacesTargetActionImpl(BridgeContext bridgeContext, String url, String portletMode,
-		String windowState, boolean secure) throws MalformedURLException {
-		super(bridgeContext, url, portletMode, windowState, secure);
+	public PortletURLFacesTargetActionImpl(PortletURL actionURL, String portletMode, String windowState, boolean secure)
+		throws MalformedURLException {
+		super(actionURL, portletMode, windowState, secure);
 	}
-
-	@Override
-	public PortletURL createPortletURL(BridgeContext bridgeContext, String url) throws MalformedURLException {
-		return bridgeContext.getPortletContainer().createActionURL(url);
-	}
-
 }

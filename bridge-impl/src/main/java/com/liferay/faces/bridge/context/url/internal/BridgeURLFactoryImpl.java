@@ -16,14 +16,14 @@ package com.liferay.faces.bridge.context.url.internal;
 import java.util.List;
 import java.util.Map;
 
-import com.liferay.faces.bridge.filter.internal.PortletContainerDetector;
 import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.context.url.BridgeActionURL;
-import com.liferay.faces.bridge.context.url.BridgePartialActionURL;
-import com.liferay.faces.bridge.context.url.BridgeRedirectURL;
 import com.liferay.faces.bridge.context.url.BridgeResourceURL;
+import com.liferay.faces.bridge.context.url.BridgeURI;
+import com.liferay.faces.bridge.context.url.BridgeURL;
 import com.liferay.faces.bridge.context.url.BridgeURLFactory;
-import com.liferay.faces.bridge.context.url.liferay.internal.BridgeResourceURLLiferayImpl;
+import com.liferay.faces.bridge.context.url.internal.liferay.BridgeRedirectURLLiferayImpl;
+import com.liferay.faces.util.product.ProductConstants;
+import com.liferay.faces.util.product.ProductMap;
 
 
 /**
@@ -31,31 +31,41 @@ import com.liferay.faces.bridge.context.url.liferay.internal.BridgeResourceURLLi
  */
 public class BridgeURLFactoryImpl extends BridgeURLFactory {
 
+	// Private Constants
+	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
+		.isDetected();
+
 	@Override
-	public BridgeActionURL getBridgeActionURL(BridgeContext bridgeContext, String url, String viewId) {
-		return new BridgeActionURLImpl(bridgeContext, url, viewId);
+	public BridgeURL getBridgeActionURL(BridgeContext bridgeContext, BridgeURI bridgeURI, String viewId) {
+		return new BridgeActionURLImpl(bridgeContext, bridgeURI, viewId);
 	}
 
 	@Override
-	public BridgePartialActionURL getBridgePartialActionURL(BridgeContext bridgeContext, String url, String viewId) {
-		return new BridgePartialActionURLImpl(bridgeContext, url, viewId);
-	}
-
-	@Override
-	public BridgeRedirectURL getBridgeRedirectURL(BridgeContext bridgeContext, String url,
+	public BridgeURL getBridgeBookmarkableURL(BridgeContext bridgeContext, BridgeURI bridgeURI,
 		Map<String, List<String>> parameters, String viewId) {
-		return new BridgeRedirectURLImpl(bridgeContext, url, parameters, viewId);
+		return new BridgeBookmarkableURLImpl(bridgeContext, bridgeURI, parameters, viewId);
 	}
 
 	@Override
-	public BridgeResourceURL getBridgeResourceURL(BridgeContext bridgeContext, String url, String viewId) {
+	public BridgeURL getBridgePartialActionURL(BridgeContext bridgeContext, BridgeURI bridgeURI, String viewId) {
+		return new BridgePartialActionURLImpl(bridgeContext, bridgeURI, viewId);
+	}
 
-		if (PortletContainerDetector.isLiferayPortletRequest(bridgeContext.getPortletRequest())) {
-			return new BridgeResourceURLLiferayImpl(bridgeContext, url, viewId);
+	@Override
+	public BridgeURL getBridgeRedirectURL(BridgeContext bridgeContext, BridgeURI bridgeURI,
+		Map<String, List<String>> parameters, String viewId) {
+
+		if (LIFERAY_PORTAL_DETECTED) {
+			return new BridgeRedirectURLLiferayImpl(bridgeContext, bridgeURI, parameters, viewId);
 		}
 		else {
-			return new BridgeResourceURLImpl(bridgeContext, url, viewId);
+			return new BridgeRedirectURLImpl(bridgeContext, bridgeURI, parameters, viewId);
 		}
+	}
+
+	@Override
+	public BridgeResourceURL getBridgeResourceURL(BridgeContext bridgeContext, BridgeURI bridgeURI, String viewId) {
+		return new BridgeResourceURLImpl(bridgeContext, bridgeURI, viewId);
 	}
 
 	public BridgeURLFactory getWrapped() {

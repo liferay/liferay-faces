@@ -16,20 +16,23 @@ package com.liferay.faces.bridge.context.url.internal;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.faces.render.ResponseStateManager;
 import javax.portlet.BaseURL;
+import javax.portlet.MimeResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletSecurityException;
 import javax.portlet.PortletURL;
+import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 import javax.portlet.faces.Bridge;
@@ -37,9 +40,12 @@ import javax.portlet.faces.Bridge;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.internal.ExternalContextImpl;
+import com.liferay.faces.bridge.context.url.BridgeURI;
 import com.liferay.faces.bridge.context.url.BridgeURL;
 import com.liferay.faces.bridge.helper.internal.WindowStateHelper;
-import com.liferay.faces.bridge.util.internal.URLUtil;
+import com.liferay.faces.bridge.internal.BridgeConstants;
+import com.liferay.faces.bridge.util.internal.RequestParameter;
+import com.liferay.faces.util.application.ResourceConstants;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -53,59 +59,36 @@ import com.liferay.faces.util.logging.LoggerFactory;
  *
  * @author  Neil Griffin
  */
-public abstract class BridgeURLBaseImpl implements BridgeURL {
+public abstract class BridgeURLBase implements BridgeURL {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(BridgeURLBaseImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(BridgeURLBase.class);
 
-	// Protected Constants
-	protected static final String PORTLET_ACTION = "portlet:action";
-	protected static final String PORTLET_RENDER = "portlet:render";
-	protected static final String PORTLET_RESOURCE = "portlet:resource";
 	protected static final String RELATIVE_PATH_PREFIX = "../";
 
 	// Private Data Members
-	private String contextRelativePath;
-	private Boolean escaped;
-	private Boolean external;
 	private Boolean facesViewTarget;
-	private Boolean hierarchical;
 	private boolean selfReferencing;
-	private Map<String, String[]> parameters;
-	private Boolean pathRelative;
-	private Boolean portletScheme;
-	private Bridge.PortletPhase portletPhase;
+	private Map<String, String[]> parameterMap;
 	private boolean secure;
-	private URI uri;
-	private String viewId;
 	String viewIdRenderParameterName;
 	String viewIdResourceParameterName;
 
 	// Protected Data Members
-	protected String url;
+	protected BridgeURI bridgeURI;
+	protected String viewId;
 
 	// Protected Data Members
 	protected BridgeContext bridgeContext;
 
-	public BridgeURLBaseImpl(BridgeContext bridgeContext, String url, String viewId) {
+	public BridgeURLBase(BridgeContext bridgeContext, BridgeURI bridgeURI, String viewId) {
 		this.bridgeContext = bridgeContext;
-		this.url = url;
+		this.bridgeURI = bridgeURI;
 		this.viewId = viewId;
 
 		BridgeConfig bridgeConfig = bridgeContext.getBridgeConfig();
 		this.viewIdRenderParameterName = bridgeConfig.getViewIdRenderParameterName();
 		this.viewIdResourceParameterName = bridgeConfig.getViewIdResourceParameterName();
-	}
-
-	public String removeParameter(String name) {
-		String[] values = getParameterMap().remove(name);
-		String value = null;
-
-		if ((values != null) && (values.length > 0)) {
-			value = values[0];
-		}
-
-		return value;
 	}
 
 	@Override
@@ -120,7 +103,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 			// If the URL string has escaped characters (like %20 for space, etc) then ask the
 			// portlet container to create an escaped representation of the URL string.
-			if (isEscaped()) {
+			if (bridgeURI.isEscaped()) {
 				StringWriter urlWriter = new StringWriter();
 
 				try {
@@ -162,35 +145,36 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 		StringBuilder buf = new StringBuilder();
 
-		int endPos = url.indexOf(StringPool.QUESTION);
+		String uri = bridgeURI.toString();
+
+		int endPos = uri.indexOf(StringPool.QUESTION);
 
 		if (endPos < 0) {
-			endPos = url.length();
+			endPos = uri.length();
 		}
 
-		if (isPortletScheme()) {
-			Bridge.PortletPhase urlPortletPhase = getPortletPhase();
+		if (bridgeURI.isPortletScheme()) {
+			Bridge.PortletPhase urlPortletPhase = bridgeURI.getPortletPhase();
 
 			if (urlPortletPhase == Bridge.PortletPhase.ACTION_PHASE) {
-				buf.append(url.substring(PORTLET_ACTION.length(), endPos));
+				buf.append(uri.substring("portlet:action".length(), endPos));
 			}
 			else if (urlPortletPhase == Bridge.PortletPhase.RENDER_PHASE) {
-				buf.append(url.substring(PORTLET_RENDER.length(), endPos));
+				buf.append(uri.substring("portlet:render".length(), endPos));
 			}
 			else {
-				buf.append(url.substring(PORTLET_RESOURCE.length(), endPos));
+				buf.append(uri.substring("portlet:resource".length(), endPos));
 			}
 		}
 		else {
-			buf.append(url.subSequence(0, endPos));
+			buf.append(uri.subSequence(0, endPos));
 		}
 
 		boolean firstParam = true;
 
 		buf.append(StringPool.QUESTION);
 
-		Set<String> parameterNames = getParameterNames();
-
+		Set<String> parameterNames = getParameterMap().keySet();
 		boolean foundFacesViewIdParam = false;
 		boolean foundFacesViewPathParam = false;
 
@@ -246,7 +230,7 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 		// parameter that indicates the target Faces viewId.
 		if (!foundFacesViewIdParam && !foundFacesViewPathParam && isFacesViewTarget()) {
 
-			if (!isPortletScheme()) {
+			if (!bridgeURI.isPortletScheme()) {
 
 				// Note that if the "javax.portlet.faces.PortletMode" parameter is specified, then a mode change is
 				// being requested and the target Faces viewId parameter must NOT be added.
@@ -258,12 +242,133 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 					buf.append(getViewIdParameterName());
 					buf.append(StringPool.EQUAL);
-					buf.append(getContextRelativePath());
+
+					String contextPath = bridgeContext.getPortletRequest().getContextPath();
+					String contextRelativePath = bridgeURI.getContextRelativePath(contextPath);
+					buf.append(contextRelativePath);
 				}
 			}
 		}
 
 		return buf.toString();
+	}
+
+	/**
+	 * Copies any query paramters present in the specified "from" URL to the specified "to" URL.
+	 */
+	protected void copyParameters(String fromURL, BaseURL toURL) throws MalformedURLException {
+		List<RequestParameter> requestParameters = parseRequestParameters(fromURL);
+
+		if (requestParameters != null) {
+
+			for (RequestParameter requestParameter : requestParameters) {
+				String name = requestParameter.getName();
+				String value = requestParameter.getValue();
+				toURL.setParameter(name, value);
+				logger.debug("Copied parameter to portletURL name=[{0}] value=[{1}]", name, value);
+			}
+		}
+	}
+
+	protected PortletURL createActionURL(String fromURL) throws MalformedURLException {
+
+		try {
+			logger.debug("createActionURL fromURL=[" + fromURL + "]");
+
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
+			PortletURL actionURL = mimeResponse.createActionURL();
+			copyParameters(fromURL, actionURL);
+
+			return actionURL;
+		}
+		catch (ClassCastException e) {
+			throw new MalformedURLException(e.getMessage());
+		}
+	}
+
+	protected ResourceURL createPartialActionURL(String fromURL) throws MalformedURLException {
+		logger.debug("createPartialActionURL fromURL=[" + fromURL + "]");
+
+		return createResourceURL(fromURL);
+	}
+
+	protected PortletURL createRenderURL(String fromURL) throws MalformedURLException {
+		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+		Bridge.PortletPhase portletRequestPhase = bridgeContext.getPortletRequestPhase();
+
+		if ((portletRequestPhase == Bridge.PortletPhase.RENDER_PHASE) ||
+				(portletRequestPhase == Bridge.PortletPhase.RESOURCE_PHASE)) {
+
+			try {
+				logger.debug("createRenderURL fromURL=[" + fromURL + "]");
+
+				MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
+				PortletURL renderURL = mimeResponse.createRenderURL();
+				copyParameters(fromURL, renderURL);
+
+				return renderURL;
+			}
+			catch (ClassCastException e) {
+				throw new MalformedURLException(e.getMessage());
+			}
+		}
+		else {
+			throw new MalformedURLException("Unable to create a RenderURL during " + portletRequestPhase.toString());
+		}
+
+	}
+
+	protected ResourceURL createResourceURL(String fromURL) throws MalformedURLException {
+
+		try {
+			logger.debug("createResourceURL fromURL=[" + fromURL + "]");
+
+			// Ask the portlet container to create a portlet resource URL.
+			BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
+			MimeResponse mimeResponse = (MimeResponse) bridgeContext.getPortletResponse();
+			ResourceURL resourceURL = mimeResponse.createResourceURL();
+
+			// If the "javax.faces.resource" token is found in the URL, then
+			int tokenPos = fromURL.indexOf(ResourceConstants.JAVAX_FACES_RESOURCE);
+
+			if (tokenPos >= 0) {
+
+				// Parse-out the resourceId
+				String resourceId = fromURL.substring(tokenPos);
+
+				// Parse-out the resourceName and convert it to a URL parameter on the portlet resource URL.
+				int queryStringPos = resourceId.indexOf('?');
+
+				String resourceName = resourceId;
+
+				if (queryStringPos > 0) {
+					resourceName = resourceName.substring(0, queryStringPos);
+				}
+
+				int slashPos = resourceName.indexOf('/');
+
+				if (slashPos > 0) {
+					resourceName = resourceName.substring(slashPos + 1);
+				}
+				else {
+					logger.error("There is no slash after the [{0}] token in resourceURL=[{1}]",
+						ResourceConstants.JAVAX_FACES_RESOURCE, fromURL);
+				}
+
+				resourceURL.setParameter(ResourceConstants.JAVAX_FACES_RESOURCE, resourceName);
+				logger.debug("Added parameter to portletURL name=[{0}] value=[{1}]",
+					ResourceConstants.JAVAX_FACES_RESOURCE, resourceName);
+			}
+
+			// Copy the request parameters to the portlet resource URL.
+			copyParameters(fromURL, resourceURL);
+
+			return resourceURL;
+		}
+		catch (ClassCastException e) {
+			throw new MalformedURLException(e.getMessage());
+		}
 	}
 
 	/**
@@ -317,169 +422,66 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 		return match;
 	}
 
-	public String getContextRelativePath() {
-
-		if (contextRelativePath == null) {
-
-			// If the URL is external, then there is no such thing as a context-relative path in this URL. In this case,
-			// return an empty string so that lazy-initialization doesn't take place again.
-			if (isExternal()) {
-				contextRelativePath = StringPool.BLANK;
-			}
-
-			// Otherwise,
-			else {
-				String path = getURI().getPath();
-
-				if ((path != null) && (path.length() > 0)) {
-
-					// If the context-path is present, then remove it since we want the return value to be a path that
-					// is relative to the context-path.
-					String contextPath = bridgeContext.getPortletRequest().getContextPath();
-					int contextPathPos = path.indexOf(contextPath);
-
-					if (contextPathPos >= 0) {
-						contextRelativePath = path.substring(contextPathPos + contextPath.length());
-					}
-					else {
-						contextRelativePath = path;
-					}
-				}
-				else {
-					contextRelativePath = viewId;
-				}
-			}
-		}
-
-		return contextRelativePath;
-	}
-
-	public boolean isEscaped() {
-
-		if (escaped == null) {
-
-			escaped = Boolean.FALSE;
-
-			int questionMarkPos = url.indexOf(StringPool.QUESTION);
-
-			if (questionMarkPos > 0) {
-
-				int ampersandPos = url.indexOf(StringPool.AMPERSAND, questionMarkPos);
-
-				while (ampersandPos > questionMarkPos) {
-
-					String subURL = url.substring(ampersandPos);
-
-					if (subURL.startsWith(StringPool.AMPERSAND_ENCODED)) {
-						escaped = Boolean.TRUE;
-						ampersandPos = url.indexOf(StringPool.AMPERSAND, ampersandPos + 1);
-					}
-					else {
-						escaped = Boolean.FALSE;
-
-						break;
-					}
-				}
-			}
-		}
-
-		return escaped;
-	}
-
 	/**
-	 * Determines whether or not the URL is absolute, meaning it contains a scheme component. Note that according to the
-	 * class-level documentation of {@link java.net.URI} an absolute URL is non-relative.
+	 * Parses the specified URL and returns a list of query parameters that are found.
 	 *
-	 * @return  Returns true if the URL is absolute, otherwise returns false.
+	 * @param   url  The URL to parse.
+	 *
+	 * @return  The list of query parameters found.
+	 *
+	 * @throws  MalformedURLException
 	 */
-	public boolean isAbsolute() {
-		return getURI().isAbsolute();
-	}
+	protected List<RequestParameter> parseRequestParameters(String url) throws MalformedURLException {
 
-	public boolean isOpaque() {
-		return getURI().isOpaque();
-	}
+		List<RequestParameter> requestParameters = null;
 
-	public boolean isPathRelative() {
+		if (url != null) {
+			int pos = url.indexOf("?");
 
-		if (pathRelative == null) {
+			if (pos >= 0) {
+				String queryString = url.substring(pos + 1);
 
-			pathRelative = Boolean.FALSE;
+				if (queryString.length() > 0) {
+					requestParameters = new ArrayList<RequestParameter>();
 
-			String path = getURI().getPath();
+					String[] queryParameters = queryString.split(BridgeConstants.REGEX_AMPERSAND_DELIMITER);
 
-			if ((path != null) && (path.length() > 0) &&
-					(!path.startsWith(StringPool.FORWARD_SLASH) || path.startsWith(RELATIVE_PATH_PREFIX))) {
-				pathRelative = Boolean.TRUE;
+					for (String queryParameter : queryParameters) {
+						String[] nameValueArray = queryParameter.split("[=]");
+
+						if (nameValueArray.length == 2) {
+							String name = nameValueArray[0];
+							String value = nameValueArray[1];
+							requestParameters.add(new RequestParameter(name, value));
+						}
+						else {
+							throw new MalformedURLException("invalid name/value pair: " + queryParameter);
+						}
+					}
+				}
 			}
-
 		}
 
-		return pathRelative;
+		return requestParameters;
 	}
 
-	public boolean isPortletScheme() {
+	protected String removeParameter(String name) {
+		String[] values = getParameterMap().remove(name);
+		String value = null;
 
-		if (portletScheme == null) {
-			portletScheme = "portlet".equals(getURI().getScheme());
+		if ((values != null) && (values.length > 0)) {
+			value = values[0];
 		}
 
-		return portletScheme;
+		return value;
 	}
 
 	public boolean isSecure() {
 		return secure;
 	}
 
-	/**
-	 * Determines whether or not the URL is relative, meaning it does not have a scheme component. Note that according
-	 * to the class-level documentation of {@link java.net.URI} a relative URL is non-absolute.
-	 *
-	 * @return  Returns true if the URL is relative, otherwise returns false.
-	 */
-	protected boolean isRelative() {
-		return !isAbsolute();
-	}
-
 	public boolean isSelfReferencing() {
 		return selfReferencing;
-	}
-
-	public boolean isExternal() {
-
-		if (external == null) {
-
-			external = Boolean.FALSE;
-
-			if (!isPortletScheme()) {
-
-				if (isAbsolute()) {
-					external = Boolean.TRUE;
-				}
-				else {
-
-					if (!url.startsWith(StringPool.FORWARD_SLASH) && !url.startsWith(RELATIVE_PATH_PREFIX)) {
-						external = Boolean.TRUE;
-					}
-				}
-			}
-		}
-
-		return external;
-	}
-
-	public boolean isHierarchical() {
-
-		if (hierarchical == null) {
-
-			hierarchical = Boolean.FALSE;
-
-			if ((isAbsolute() && getSchemeSpecificPart().startsWith(StringPool.FORWARD_SLASH)) || isRelative()) {
-				hierarchical = Boolean.TRUE;
-			}
-		}
-
-		return hierarchical;
 	}
 
 	public String getParameter(String name) {
@@ -510,17 +512,11 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 	public Map<String, String[]> getParameterMap() {
 
-		if (parameters == null) {
-			parameters = URLUtil.parseParameterMapValuesArray(url);
+		if (parameterMap == null) {
+			parameterMap = new LinkedHashMap<String, String[]>(bridgeURI.getParameterMap());
 		}
 
-		return parameters;
-	}
-
-	public Set<String> getParameterNames() {
-		Map<String, String[]> parameterMap = getParameterMap();
-
-		return parameterMap.keySet();
+		return parameterMap;
 	}
 
 	protected void setPortletModeParameter(String portletMode, PortletURL portletURL) {
@@ -541,38 +537,6 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 				logger.error(e);
 			}
 		}
-	}
-
-	public Bridge.PortletPhase getPortletPhase() {
-
-		if (portletPhase == null) {
-
-			if (url != null) {
-
-				if (isPortletScheme()) {
-
-					if (url.startsWith(PORTLET_ACTION)) {
-						portletPhase = Bridge.PortletPhase.ACTION_PHASE;
-					}
-					else if (url.startsWith(PORTLET_RENDER)) {
-						portletPhase = Bridge.PortletPhase.RENDER_PHASE;
-					}
-					else if (url.startsWith(PORTLET_RESOURCE)) {
-						portletPhase = Bridge.PortletPhase.RESOURCE_PHASE;
-					}
-					else {
-						portletPhase = Bridge.PortletPhase.RESOURCE_PHASE;
-						logger.warn("Invalid keyword after 'portlet:' in URL=[{0}]", url);
-					}
-				}
-			}
-			else {
-				portletPhase = Bridge.PortletPhase.RESOURCE_PHASE;
-				logger.warn("Unable to determine portlet phase in null URL");
-			}
-		}
-
-		return portletPhase;
 	}
 
 	protected void setRenderParameters(BaseURL baseURL) {
@@ -621,14 +585,6 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 		}
 	}
 
-	/**
-	 * Returns the scheme-specific part of the URI. For example, the URI "http://www.liferay.com/foo/bar.png" would
-	 * return "//www.liferay.com/foo/bar.png".
-	 */
-	protected String getSchemeSpecificPart() {
-		return getURI().getSchemeSpecificPart();
-	}
-
 	public void setSecure(boolean secure) {
 		this.secure = secure;
 	}
@@ -654,7 +610,9 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 
 		if (facesViewTarget == null) {
 
-			String potentialFacesViewId = getContextRelativePath();
+			String contextPath = bridgeContext.getPortletRequest().getContextPath();
+			String contextRelativePath = bridgeURI.getContextRelativePath(contextPath);
+			String potentialFacesViewId = contextRelativePath;
 
 			if ((viewId != null) && (viewId.equals(potentialFacesViewId))) {
 				facesViewTarget = Boolean.TRUE;
@@ -675,7 +633,12 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 					// NOTE: It might be (as in the case of the TCK) that a navigation-rule has fired, and the developer
 					// specified something like <to-view-id>/somepath/foo.jsp</to-view-id> instead of using the
 					// appropriate extension mapped suffix like <to-view-id>/somepath/foo.jsf</to-view-id>.
-					potentialFacesViewId = getContextRelativePath();
+					if (contextRelativePath == null) {
+						potentialFacesViewId = viewId;
+					}
+					else {
+						potentialFacesViewId = contextRelativePath;
+					}
 
 					if ((viewId != null) && (matchPathAndExtension(viewId, potentialFacesViewId))) {
 						logger.debug(
@@ -694,31 +657,9 @@ public abstract class BridgeURLBaseImpl implements BridgeURL {
 		return facesViewTarget;
 	}
 
-	protected URI getURI() {
-
-		if (uri == null) {
-
-			try {
-				uri = new URI(url);
-			}
-			catch (URISyntaxException e1) {
-				logger.error(e1.getMessage());
-
-				try {
-					uri = new URI(StringPool.BLANK);
-				}
-				catch (URISyntaxException e2) {
-					// ignore -- will never happen
-				}
-			}
-		}
-
-		return uri;
-	}
-
 	protected String getViewIdParameterName() {
 
-		if (isPortletScheme() && (getPortletPhase() == Bridge.PortletPhase.RESOURCE_PHASE)) {
+		if (bridgeURI.isPortletScheme() && (bridgeURI.getPortletPhase() == Bridge.PortletPhase.RESOURCE_PHASE)) {
 			return viewIdResourceParameterName;
 		}
 		else {
