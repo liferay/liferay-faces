@@ -23,8 +23,6 @@ import javax.portlet.WindowState;
 import javax.portlet.faces.Bridge;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
-import com.liferay.faces.bridge.container.PortletContainer;
-import com.liferay.faces.bridge.container.liferay.internal.LiferayConstants;
 import com.liferay.faces.bridge.context.IncongruityContext;
 import com.liferay.faces.bridge.scope.BridgeRequestScope;
 import com.liferay.faces.util.logging.Logger;
@@ -55,20 +53,19 @@ public class BridgeContextLiferayImpl extends BridgeContextImpl {
 
 	public BridgeContextLiferayImpl(BridgeConfig bridgeConfig, BridgeRequestScope bridgeRequestScope,
 		PortletConfig portletConfig, PortletContext portletContext, PortletRequest portletRequest,
-		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, PortletContainer portletContainer,
-		IncongruityContext incongruityContext) {
+		PortletResponse portletResponse, Bridge.PortletPhase portletPhase, IncongruityContext incongruityContext) {
 
 		super(bridgeConfig, bridgeRequestScope, portletConfig, portletContext, portletRequest, portletResponse,
-			portletPhase, portletContainer, incongruityContext);
+			portletPhase, incongruityContext);
 
 		String namespace = portletResponse.getNamespace();
 
 		// Initialize the pseudo-constants.
-		NAMESPACED_P_P_COL_ID = namespace + LiferayConstants.P_P_COL_ID;
-		NAMESPACED_P_P_COL_POS = namespace + LiferayConstants.P_P_COL_POS;
-		NAMESPACED_P_P_COL_COUNT = namespace + LiferayConstants.P_P_COL_COUNT;
-		NAMESPACED_P_P_MODE = namespace + LiferayConstants.P_P_MODE;
-		NAMESPACED_P_P_STATE = namespace + LiferayConstants.P_P_STATE;
+		NAMESPACED_P_P_COL_ID = namespace.concat("p_p_col_id");
+		NAMESPACED_P_P_COL_POS = namespace.concat("p_p_col_pos");
+		NAMESPACED_P_P_COL_COUNT = namespace.concat("p_p_col_count");
+		NAMESPACED_P_P_MODE = namespace.concat("p_p_mode");
+		NAMESPACED_P_P_STATE = namespace.concat("p_p_state");
 
 		// Save the render attributes.
 		if (portletRequest instanceof RenderRequest) {

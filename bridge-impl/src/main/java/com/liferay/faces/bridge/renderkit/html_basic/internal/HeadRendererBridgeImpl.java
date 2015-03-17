@@ -29,7 +29,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 
 import com.liferay.faces.bridge.BridgeFactoryFinder;
-import com.liferay.faces.bridge.container.PortletContainer;
 import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.context.HeadResponseWriter;
@@ -144,7 +143,6 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 		ExternalContext externalContext = facesContext.getExternalContext();
 		PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
-		PortletContainer portletContainer = bridgeContext.getPortletContainer();
 
 		// Determine whether or not the portlet container is able to add script resources to the head.
 		PortalContext portalContext = portletRequest.getPortalContext();
@@ -162,7 +160,7 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 		// there is no h:head JSP component tag in JSF 2.x.
 		HeadManagedBean headManagedBean = HeadManagedBean.getInstance(facesContext);
 
-		Set<String> headResourceIdsFromManagedBean = null;
+		Set<String> headResourceIdsFromManagedBean;
 
 		if (headManagedBean == null) {
 			headResourceIdsFromManagedBean = new HashSet<String>();
@@ -249,8 +247,8 @@ public class HeadRendererBridgeImpl extends BridgeRenderer {
 					HeadResponseWriter.class.getName());
 
 			if (headResponseWriter == null) {
-				HeadResponseWriterFactory headResponseWriterFactory = headResponseWriterFactory =
-						(HeadResponseWriterFactory) BridgeFactoryFinder.getFactory(HeadResponseWriterFactory.class);
+				HeadResponseWriterFactory headResponseWriterFactory = (HeadResponseWriterFactory) BridgeFactoryFinder
+					.getFactory(HeadResponseWriterFactory.class);
 				headResponseWriter = headResponseWriterFactory.getHeadResponseWriter(bridgeContext,
 						responseWriterBackup);
 			}
