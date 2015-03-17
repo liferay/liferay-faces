@@ -58,7 +58,6 @@
 			<bridge:context-map-factory>com.liferay.faces.bridge.context.map.internal.ContextMapFactoryImpl</bridge:context-map-factory>
 			<bridge:incongruity-context-factory>com.liferay.faces.bridge.context.internal.IncongruityContextFactoryImpl</bridge:incongruity-context-factory>
 			<bridge:liferay-url-factory>com.liferay.faces.bridge.filter.liferay.internal.LiferayURLFactoryImpl</bridge:liferay-url-factory>
-			<bridge:portlet-container-factory>com.liferay.faces.bridge.container.internal.PortletContainerFactoryImpl</bridge:portlet-container-factory>
 			<bridge:view-handler-factory>com.liferay.faces.bridge.application.internal.ViewHandlerFactoryImpl</bridge:view-handler-factory>
 		</factory-extension>
 	</factory>
@@ -73,7 +72,6 @@
 		<!-- Section 5.2.6 also indicates that the bridge must proactively ensure that only the- RESTORE_VIEW phase -->
 		<!-- executes, and Section 6.4 indicates that a PhaseListener must be used. The RenderRequestPhaseListener -->
 		<!-- satisfies this requirement. -->
-		<phase-listener>com.liferay.faces.bridge.event.internal.PortletContainerProxyPhaseListener</phase-listener>
 		<!-- Add the ManagedBeanScopePhaseListener so that after the RENDER_RESPONSE phase, the managed-beans in -->
 		<!-- bridgeRequestScope will go out-of-scope which will in turn cause any annotated PreDestroy methods to -->
 		<!-- be called. -->
