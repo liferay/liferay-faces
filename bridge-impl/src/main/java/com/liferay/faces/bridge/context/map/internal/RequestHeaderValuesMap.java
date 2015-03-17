@@ -16,6 +16,8 @@ package com.liferay.faces.bridge.context.map.internal;
 import java.util.Enumeration;
 import java.util.Locale;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.PortletRequest;
 import javax.portlet.ResourceRequest;
@@ -154,7 +156,9 @@ public class RequestHeaderValuesMap extends RequestHeaderValuesMapCompat {
 				// so that the Ajax-based PartialResponseWriter renders XML. Otherwise, since the URL was probably setup
 				// with "portlet:resource" don't setup the header because it needs to fully run the JSF lifecycle with a
 				// real (non-parital) ResponseWriter that renders HTML.
-				String facesAjaxParam = bridgeContext.getRequestParameterMap().get(BridgeExt.FACES_AJAX_PARAMETER);
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				ExternalContext externalContext = facesContext.getExternalContext();
+				String facesAjaxParam = externalContext.getRequestParameterMap().get(BridgeExt.FACES_AJAX_PARAMETER);
 
 				if ((facesAjaxParam != null) && BooleanHelper.isTrueToken(facesAjaxParam)) {
 					put(HEADER_FACES_REQUEST, new String[] { PARTIAL_AJAX });

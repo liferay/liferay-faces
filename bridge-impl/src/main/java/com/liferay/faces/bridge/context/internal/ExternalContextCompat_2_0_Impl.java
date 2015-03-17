@@ -23,6 +23,7 @@ import javax.faces.context.ExternalContext;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortalContext;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -31,6 +32,7 @@ import javax.portlet.faces.Bridge;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 
+import com.liferay.faces.bridge.config.internal.PortletConfigParam;
 import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.internal.BridgeConstants;
 import com.liferay.faces.bridge.util.internal.FileNameUtil;
@@ -61,6 +63,8 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 	// Lazy-Initialized Data Members
 	private Boolean iceFacesLegacyMode;
 	private String portletContextName;
+	private Boolean renderRedirectEnabled;
+	private Writer responseOutputWriter;
 
 	// Protected Data Members
 	protected ServletResponse facesImplementationServletResponse;
@@ -556,7 +560,34 @@ public abstract class ExternalContextCompat_2_0_Impl extends ExternalContextComp
 				return facesImplementationServletResponse.getWriter();
 			}
 			else {
-				return bridgeContext.getResponseOutputWriter();
+
+				if (responseOutputWriter == null) {
+
+					MimeResponse mimeResponse = (MimeResponse) portletResponse;
+
+					if (portletPhase == Bridge.PortletPhase.RENDER_PHASE) {
+
+						if (renderRedirectEnabled == null) {
+							PortletConfig portletConfig = bridgeContext.getPortletConfig();
+							renderRedirectEnabled = PortletConfigParam.RenderRedirectEnabled.getBooleanValue(
+									portletConfig);
+						}
+
+						if (renderRedirectEnabled) {
+							responseOutputWriter = new RenderRedirectWriterImpl(mimeResponse.getWriter());
+						}
+						else {
+							responseOutputWriter = mimeResponse.getWriter();
+						}
+
+					}
+					else {
+						responseOutputWriter = mimeResponse.getWriter();
+					}
+
+				}
+
+				return responseOutputWriter;
 			}
 
 		}
