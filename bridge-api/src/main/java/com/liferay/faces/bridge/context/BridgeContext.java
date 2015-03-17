@@ -14,17 +14,14 @@
 package com.liferay.faces.bridge.context;
 
 import java.io.IOException;
-import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.PortletResponse;
 import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeDefaultViewNotSpecifiedException;
@@ -63,14 +60,6 @@ public abstract class BridgeContext {
 	}
 
 	/**
-	 * Creates a {@link PortletRequestDispatcher} for the specified <code>path</code> and issues a forward/include as
-	 * appropriate.
-	 *
-	 * @throws  IOException
-	 */
-	public abstract void dispatch(String path) throws IOException;
-
-	/**
 	 * Encodes a bridge "action" URL, meaning a URL that conforms to the deviation requirements of {@link
 	 * javax.faces.context.ExternalContext#encodeActionURL(String)} listed in Section 6.1.3.1 of the Bridge Spec.
 	 *
@@ -90,8 +79,8 @@ public abstract class BridgeContext {
 
 	/**
 	 * Encodes a bridge "partial action" URL, meaning a URL that is intended to be used for Ajax (partial request)
-	 * processing. Note that {@link ExternalContext#encodePartialActionURL(String)} was added in JSF 2.0 which means
-	 * there are no Bridge Spec deviation requirements yet.
+	 * processing. Note that {@link javax.faces.context.ExternalContext#encodePartialActionURL(String)} was added in JSF
+	 * 2.0 which means there are no Bridge Spec deviation requirements yet.
 	 *
 	 * @param   url  The URL to be encoded.
 	 *
@@ -332,14 +321,6 @@ public abstract class BridgeContext {
 	 * Returns the servletPath associated with the current viewId.
 	 */
 	public abstract String getRequestServletPath();
-
-	/**
-	 * Returns a {@link Writer} that is meant to be used as a return value for {@link
-	 * ExternalContext#getResponseOutputWriter()}.
-	 *
-	 * @throws  IOException
-	 */
-	public abstract Writer getResponseOutputWriter() throws IOException;
 
 	/**
 	 * Determines whether or not the "javax.portlet.faces.preserveActionParams" init-param has been configured in the
