@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.container.liferay.internal;
+package com.liferay.faces.bridge.event.internal.liferay;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;

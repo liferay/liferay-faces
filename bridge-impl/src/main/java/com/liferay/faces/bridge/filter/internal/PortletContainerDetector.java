@@ -18,8 +18,6 @@ import javax.portlet.PortletResponse;
 import javax.portlet.filter.PortletRequestWrapper;
 import javax.portlet.filter.PortletResponseWrapper;
 
-import com.liferay.faces.bridge.container.liferay.internal.LiferayConstants;
-
 
 /**
  * @author  Neil Griffin
@@ -48,7 +46,7 @@ public class PortletContainerDetector {
 				portletResponse = portletResponseWrapper.getResponse();
 			}
 
-			return portletResponse.getClass().getName().startsWith(LiferayConstants.PACKAGE_NAMESPACE);
+			return portletResponse.getClass().getName().startsWith("com.liferay");
 		}
 		else {
 			return false;
@@ -100,7 +98,7 @@ public class PortletContainerDetector {
 				portletRequest = portletRequestWrapper.getRequest();
 			}
 
-			return portletRequest.getClass().getName().startsWith(LiferayConstants.PACKAGE_NAMESPACE);
+			return portletRequest.getClass().getName().startsWith("com.liferay");
 		}
 		else {
 			return false;
