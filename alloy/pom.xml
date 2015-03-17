@@ -21,6 +21,9 @@
 						</goals>
 						<configuration>
 							<target>
+								<copy file="${basedir}/../reslib/target/classes/META-INF/yui3-bsd-license.txt" tofile="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/yui/yui3-bsd-license.txt" />
+								<copy file="${basedir}/../reslib/target/classes/META-INF/resources/liferay-faces-reslib/build/text-data-wordbreak/text-data-wordbreak.js" tofile="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/yui/autocomplete/text-data-wordbreak.js" />
+								<copy file="${basedir}/../reslib/target/classes/META-INF/alloyui-bsd-license.md" tofile="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/aui/alloyui-bsd-license.md" />
 								<copy file="${basedir}/../reslib/target/classes/META-INF/resources/liferay-faces-reslib/build/aui-video/assets/player.swf" tofile="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/aui/video/player.swf" />
 								<copy file="${basedir}/../reslib/target/classes/META-INF/resources/liferay-faces-reslib/build/aui-audio/assets/player.swf" tofile="${project.build.directory}/classes/META-INF/resources/liferay-faces-alloy/aui/audio/player.swf" />
 							</target>
