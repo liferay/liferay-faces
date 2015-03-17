@@ -13,6 +13,7 @@
  */
 package com.liferay.faces.bridge.internal;
 
+import javax.faces.context.ExternalContext;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.ResourceRequest;
@@ -94,7 +95,8 @@ public class BridgePhaseResourceImpl extends BridgePhaseCompat_2_2_Impl {
 
 				if (logger.isDebugEnabled()) {
 
-					String facesAjaxParameter = bridgeContext.getRequestParameterMap().get(
+					ExternalContext externalContext = facesContext.getExternalContext();
+					String facesAjaxParameter = externalContext.getRequestParameterMap().get(
 							BridgeExt.FACES_AJAX_PARAMETER);
 
 					if (BooleanHelper.isTrueToken(facesAjaxParameter)) {

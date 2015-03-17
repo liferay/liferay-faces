@@ -27,12 +27,16 @@ import java.util.Set;
 import javax.faces.context.ExternalContext;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.MimeResponse;
+import javax.portlet.PortalContext;
 import javax.portlet.PortletContext;
+import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 import javax.portlet.ResourceResponse;
 import javax.portlet.StateAwareResponse;
+import javax.portlet.faces.Bridge;
 import javax.portlet.faces.BridgeWriteBehindResponse;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
@@ -42,6 +46,7 @@ import com.liferay.faces.bridge.application.internal.ViewHandlerImpl;
 import com.liferay.faces.bridge.application.view.internal.BridgeAfterViewContentRequest;
 import com.liferay.faces.bridge.application.view.internal.BridgeAfterViewContentResponse;
 import com.liferay.faces.bridge.application.view.internal.BridgeWriteBehindSupportFactory;
+import com.liferay.faces.bridge.context.BridgePortalContext;
 import com.liferay.faces.bridge.context.map.internal.ContextMapFactory;
 import com.liferay.faces.bridge.util.internal.LocaleIterator;
 import com.liferay.faces.util.logging.Logger;
@@ -108,7 +113,63 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 
 		logger.debug("De-activated JSP AFTER_VIEW_CONTENT");
 
-		bridgeContext.dispatch(path);
+		logger.debug("Acquiring dispatcher for JSP path=[{0}]", path);
+
+		PortletRequestDispatcher portletRequestDispacher = portletContext.getRequestDispatcher(path);
+
+		try {
+
+			if (portletRequestDispacher != null) {
+
+				// If the underlying portlet container has the ability to forward (like Pluto), then
+				PortalContext portalContext = portletRequest.getPortalContext();
+				String forwardOnDispatchSupport = portalContext.getProperty(
+						BridgePortalContext.FORWARD_ON_DISPATCH_SUPPORT);
+
+				if (forwardOnDispatchSupport != null) {
+
+					// If a render-redirect has occurred after dispatching to a JSP, that means that the previous
+					// dispatch called PortletRequestDispatcher#forward(String) which marked the response as "complete",
+					// thereby making it impossible to forward again. In such cases, need to "include" instead of
+					// "forward".
+					if (bridgeContext.isRenderRedirectAfterDispatch()) {
+						portletRequestDispacher.include(portletRequest, portletResponse);
+					}
+
+					// Otherwise,
+					else {
+
+						// If running in the RESOURCE_PHASE of the portlet lifecycle, then need to "include" instead of
+						// "forward" or else the markup will not be properly rendered to the ResourceResponse.
+						if (portletPhase == Bridge.PortletPhase.RESOURCE_PHASE) {
+							portletRequestDispacher.include(portletRequest, portletResponse);
+						}
+
+						// Otherwise, "forward" to the specified path.
+						else {
+							portletRequestDispacher.forward(portletRequest, portletResponse);
+						}
+					}
+				}
+
+				// Otherwise, must be a portlet container like Liferay, and so need to "include" the specified path.
+				else {
+
+					// Note: Liferay does not have the ability to wrap/decorate the PortletRequest and PortletResponse.
+					// This makes it impossible for Liferay to support the BridgeWriteBehindResponse feature of the
+					// bridge so that AFTER_VIEW_CONTENT (markup that appears after the closing </f:view> component tag)
+					// renders in the correct location. It only works in Pluto.
+					portletRequestDispacher.include(portletRequest, portletResponse);
+				}
+			}
+			else {
+				throw new IOException("Unable to acquire PortletRequestDispatcher for path=[" + path + "]");
+			}
+		}
+		catch (PortletException e) {
+			logger.error(e);
+			throw new IOException(e.getMessage());
+		}
 	}
 
 	/**
@@ -348,7 +409,7 @@ public class ExternalContextImpl extends ExternalContextCompat_2_2_Impl {
 
 			// If using ICEfaces 3.0.x/2.0.x then need to return the legacy value.
 			// http://issues.liferay.com/browse/FACES-1228
-			String requestContentType = null;
+			String requestContentType;
 
 			if (isICEfacesLegacyMode(clientDataRequest)) {
 				requestContentType = clientDataRequest.getResponseContentType();
