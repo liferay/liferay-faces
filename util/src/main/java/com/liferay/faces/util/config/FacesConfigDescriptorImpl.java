@@ -13,28 +13,83 @@
  */
 package com.liferay.faces.util.config;
 
-import java.net.URL;
+import java.io.Serializable;
+import java.util.List;
 
 
 /**
  * @author  Neil Griffin
  */
-public class FacesConfigDescriptorImpl implements FacesConfigDescriptor {
+public class FacesConfigDescriptorImpl implements FacesConfigDescriptor, Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 5479857091609259746L;
 
 	// Private Data Members
 	private String name;
-	private URL url;
 
-	public FacesConfigDescriptorImpl(String name, URL url) {
+	private boolean isWebInfFacesConfig;
+	private List<String> absoluteOrdering;
+	private Ordering ordering;
+
+	private String url;
+
+	public FacesConfigDescriptorImpl(FacesConfigDescriptor facesConfigDescriptor) {
+		this.name = facesConfigDescriptor.getName();
+		this.isWebInfFacesConfig = facesConfigDescriptor.isWebInfFacesConfig();
+		this.absoluteOrdering = facesConfigDescriptor.getAbsoluteOrdering();
+		this.ordering = facesConfigDescriptor.getOrdering();
+
+//      String[][] routes = ordering.getRoutes();
+//      System.err.println("FacesConfigDescriptorImpl: name = " + name + " routes[1][1] = " + routes[1][1]);
+		this.url = facesConfigDescriptor.getURL();
+	}
+
+	public FacesConfigDescriptorImpl(String name, String url, boolean isWebInfFacesConfig,
+		List<String> absoluteOrdering, Ordering ordering) {
 		this.name = name;
+		this.isWebInfFacesConfig = isWebInfFacesConfig;
+		this.absoluteOrdering = absoluteOrdering;
+		this.ordering = ordering;
 		this.url = url;
 	}
 
+	@Override
+	public List<String> getAbsoluteOrdering() {
+		return absoluteOrdering;
+	}
+
+	@Override
+	public boolean isWebInfFacesConfig() {
+		return isWebInfFacesConfig;
+	}
+
+	@Override
 	public String getName() {
+
+		if (name == null) {
+			name = "";
+		}
+
 		return name;
 	}
 
-	public URL getURL() {
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public Ordering getOrdering() {
+		return ordering;
+	}
+
+	public void setOrdering(Ordering ordering) {
+		this.ordering = ordering;
+	}
+
+	@Override
+	public String getURL() {
 		return url;
 	}
+
 }
