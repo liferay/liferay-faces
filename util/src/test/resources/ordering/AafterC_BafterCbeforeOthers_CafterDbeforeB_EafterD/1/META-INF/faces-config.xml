@@ -1,0 +1,16 @@
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+	<name>a</name>
+	<ordering>
+		<after>
+			<name>c</name>
+		</after>
+	</ordering>
+	<application>
+		<view-handler>com.a.ViewHandlerImpl</view-handler>
+	</application>
+	<lifecycle>
+		<phase-listener>com.a.PhaseListenerImpl</phase-listener>
+	</lifecycle>
+</faces-config>

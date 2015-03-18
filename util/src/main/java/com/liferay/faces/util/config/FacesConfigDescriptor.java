@@ -13,7 +13,7 @@
  */
 package com.liferay.faces.util.config;
 
-import java.net.URL;
+import java.util.List;
 
 
 /**
@@ -21,7 +21,14 @@ import java.net.URL;
  */
 public interface FacesConfigDescriptor {
 
+	public List<String> getAbsoluteOrdering();
+
+	public boolean isWebInfFacesConfig();
+
 	public String getName();
 
-	public URL getURL();
+	public Ordering getOrdering();
+
+	public String getURL();
+
 }
