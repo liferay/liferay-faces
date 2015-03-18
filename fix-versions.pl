@@ -247,11 +247,13 @@ sub do_inplace_edits {
 	}
 
 	#
-	# Otherwise, if the current file is named generator.properties, then potentially fix the current version.
+	# Otherwise, if the current file is named generator.properties, then potentially fix the copyright year and the
+	# current version.
 	#
 	elsif ($file eq "generator.properties") {
 		print "$File::Find::name\n";
 		`perl -pi -e 's/builder\\.faces\\.version=.*/builder\\.faces\\.version=$liferayFacesVersionWithoutSnapshot/' $file`;
+		`perl -pi -e 's/builder[.]copyright[.]year=[0-9]+/builder.copyright.year=${year}/' $file`;
 	}
 }
 
