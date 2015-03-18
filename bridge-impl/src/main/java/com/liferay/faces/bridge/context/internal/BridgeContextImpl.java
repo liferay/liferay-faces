@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.FacesException;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
@@ -258,11 +259,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			return bridgeURLFactory.getBridgeBookmarkableURL(bridgeContext, bridgeURI, parameters, viewId);
 		}
 		catch (URISyntaxException e) {
-
-			// TODO: HANDLE THIS BETTER WHEN MOVED TO EXTERNALCONTEXT.
-			logger.error(e);
-
-			return null;
+			throw new FacesException(e);
 		}
 	}
 
@@ -285,11 +282,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			return bridgePartialActionURL;
 		}
 		catch (URISyntaxException e) {
-
-			// TODO: HANDLE THIS BETTER WHEN MOVED TO EXTERNALCONTEXT.
-			logger.error(e);
-
-			return null;
+			throw new FacesException(e);
 		}
 	}
 
@@ -314,11 +307,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			return bridgeURLFactory.getBridgeRedirectURL(bridgeContext, bridgeURI, parameters, redirectViewId);
 		}
 		catch (URISyntaxException e) {
-
-			// TODO: HANDLE THIS BETTER WHEN MOVED TO EXTERNALCONTEXT.
-			logger.error(e);
-
-			return null;
+			throw new FacesException(e);
 		}
 	}
 
@@ -434,11 +423,7 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 			return bridgeResourceURL;
 		}
 		catch (URISyntaxException e) {
-
-			// TODO: HANDLE THIS BETTER WHEN MOVED TO EXTERNALCONTEXT.
-			logger.error(e);
-
-			return null;
+			throw new FacesException(e);
 		}
 	}
 
