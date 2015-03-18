@@ -19,11 +19,6 @@
 
 	<build>
 		<plugins>
-			<!-- FACES-2159: Liferay IDE requires liferay-maven-plugin to be specified -->
-			<plugin>
-				<groupId>com.liferay.maven.plugins</groupId>
-				<artifactId>liferay-maven-plugin</artifactId>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
