@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
+	<name>LiferayFacesUtil</name>
+	<ordering>
+		<!-- Ordering must be "after" ICEfacesCore because com.liferay.faces.util.context.PartialViewContexCleanupImpl -->
+		<!-- needs to be able to wrap org.icefaces.impl.context.DOMPartialViewContext. -->
+		<after>
+			<name>ICEfacesCore</name>
+		</after>
+		<!-- Ordering must be "before" richfaces_core because org.richfaces.context.ExtendedPartialViewContextImpl  -->
+		<!-- needs to be able to wrap com.liferay.faces.util.context.PartialViewContextFactoryScriptImpl. -->
+		<before>
+			<name>LiferayFacesBridge</name>
+			<name>richfaces_core</name>
+		</before>
+	</ordering>
+	<application>
+		<el-resolver>com.liferay.faces.util.el.ExtELResolver</el-resolver>
+		<system-event-listener>
+			<system-event-listener-class>com.liferay.faces.util.event.internal.ApplicationStartupListener</system-event-listener-class>
+			<system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
+		</system-event-listener>
+	</application>
+	<factory>
+		<partial-view-context-factory>com.liferay.faces.util.context.PartialViewContextFactoryScriptImpl</partial-view-context-factory>
+		<factory-extension>
+			<util:browser-sniffer-factory>com.liferay.faces.util.client.internal.BrowserSnifferFactoryImpl</util:browser-sniffer-factory>
+			<util:client-script-factory>com.liferay.faces.util.client.internal.ClientScriptFactoryImpl</util:client-script-factory>
+			<util:component-resource-factory>com.liferay.faces.util.application.internal.ComponentResourceFactoryImpl</util:component-resource-factory>
+			<util:message-context-factory>com.liferay.faces.util.context.internal.MessageContextFactoryImpl</util:message-context-factory>
+			<util:rich-text-factory>com.liferay.faces.util.text.internal.RichTextFactoryImpl</util:rich-text-factory>
+			<util:template-factory>com.liferay.faces.util.template.internal.TemplateFactoryImpl</util:template-factory>
+			<util:uploaded-file-factory>com.liferay.faces.util.model.internal.UploadedFileFactoryImpl</util:uploaded-file-factory>
+		</factory-extension>
+	</factory>
+</faces-config>
