@@ -2,6 +2,17 @@
 <faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
 	xmlns:bridge="http://www.liferay.com/xml/ns/liferay-faces-bridge-2.0-extension" xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
+	<faces-config-extension>
+		<name>LiferayFacesBridge</name>
+		<ordering>
+			<after>
+				<name>LiferayFacesUtil</name>
+			</after>
+			<before>
+				<others />
+			</before>
+		</ordering>
+	</faces-config-extension>
 	<application>
 		<application-extension>
 			<bridge:excluded-attributes>
