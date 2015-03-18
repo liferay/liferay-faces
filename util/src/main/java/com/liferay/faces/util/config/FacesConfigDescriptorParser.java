@@ -28,4 +28,6 @@ public interface FacesConfigDescriptorParser {
 	 * the responsibility of the caller.
 	 */
 	public FacesConfigDescriptor parse(InputStream inputStream, URL url) throws IOException;
+
+	public FacesConfigDescriptor parse(InputStream inputStream, String path) throws IOException;
 }
