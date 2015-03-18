@@ -211,6 +211,8 @@ sub do_inplace_edits {
 	elsif (($file =~ m/.*\.taglib\.xml/) and ($File::Find::name =~ /\/src/)) {
 		print "$File::Find::name\n";
 		`perl -pi -e 's/vdldoc:since>[0-9]\\.[0-9]/vdldoc:since>$liferayFacesVersionShortMajor1DotMajor2/' $file`;
+		`perl -pi -e 's/version="[0-9]\\.[0-9]"/version="$facesVersion"/' $file`;
+		`perl -pi -e 's/web-facelettaglibrary_[0-9]_[0-9]\\.xsd/web-facelettaglibrary_${facesMajor}_${facesMinor}.xsd/' $file`;
 	}
 
 	#
