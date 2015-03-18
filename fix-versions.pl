@@ -171,6 +171,16 @@ sub do_inplace_edits {
 	}
 
 	#
+	# Otherwise, if the current file is named "friendly-url-routes.xml" then potentially fix the version
+	# numbers specified in DOCTYPE line for the DTD.
+	#
+	elsif ($file eq "friendly-url-routes.xml" and ($File::Find::name =~ /\/src/)) {
+		print "$File::Find::name\n";
+		`perl -pi -e 's/DTD Friendly URL Routes [0-9][.][0-9][.][0-9]/DTD Friendly URL Routes $portalDtdDisplay/' $file`;
+		`perl -pi -e 's/liferay-friendly-url-routes_[0-9]_[0-9]_[0-9][.]dtd/liferay-friendly-url-routes_$portalDtdUrl.dtd/' $file`;
+	}
+
+	#
 	# Otherwise, if the current file is named "faces-config.xml" then potentially fix the version number that
 	# will appear in the version attribute faces config tag and potentially fix the version number that will appear in
 	# the xsi:schemaLocation attribute URL of the faces config tag.
