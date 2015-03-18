@@ -12,6 +12,7 @@
 		<!-- Ordering must be "before" richfaces_core because org.richfaces.context.ExtendedPartialViewContextImpl  -->
 		<!-- needs to be able to wrap com.liferay.faces.util.context.PartialViewContextFactoryScriptImpl. -->
 		<before>
+			<name>LiferayFacesBridge</name>
 			<name>richfaces_core</name>
 		</before>
 	</ordering>
