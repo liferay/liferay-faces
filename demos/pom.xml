@@ -186,11 +186,6 @@
 	</profiles>
 	<build>
 		<plugins>
-			<!-- FACES-2159: Liferay IDE requires liferay-maven-plugin to be specified -->
-			<plugin>
-				<groupId>com.liferay.maven.plugins</groupId>
-				<artifactId>liferay-maven-plugin</artifactId>
-			</plugin>
 			<plugin>
 				<artifactId>maven-install-plugin</artifactId>
 				<configuration>
