@@ -156,7 +156,7 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 
 				try {
 
-					Enumeration<String> attributeNames = (Enumeration<String>) httpSession.getAttributeNames();
+					Enumeration<String> attributeNames = httpSession.getAttributeNames();
 
 					while (attributeNames.hasMoreElements()) {
 
@@ -208,9 +208,10 @@ public class BridgeSessionListener implements HttpSessionListener, ServletContex
 									else {
 
 										// If the current session attribute is Mojarra-vendor-specific, then
-										String fqcn = attributeValue.getClass().getName();
+										String attributeValueClassName = attributeValue.getClass().getName();
 
-										if ((fqcn != null) && (fqcn.contains(MOJARRA_PACKAGE_PREFIX))) {
+										if (attributeName.contains(MOJARRA_ACTIVE_VIEW_MAPS) ||
+												attributeValueClassName.contains(MOJARRA_PACKAGE_PREFIX)) {
 
 											// Rename the namespaced attribute by stripping off the standard portlet
 											// prefix. This will enable Mojarra's session expiration features to find
