@@ -418,7 +418,7 @@ public class OrderingTest {
 
 		// Parse the WEB-INF/faces-config.xml to get any absolute-ordering, if any.
 		List<FacesConfigDescriptor> webInfFacesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
-		parseConfigurationResources("ordering/GetAbsoluteOrdering", webInfFacesConfigDescriptors,
+		parseConfigurationResources("ordering/GetAbsoluteOrdering_01", webInfFacesConfigDescriptors,
 			WEB_INF_FACES_CONFIG_XML);
 
 		FacesConfigDescriptor facesConfig = webInfFacesConfigDescriptors.get(0);
@@ -433,7 +433,11 @@ public class OrderingTest {
 		Assert.assertTrue(message, expected.equals(actually));
 		logger.info("test03_getAbsoluteOrdering: " + message);
 
-		facesConfig = webInfFacesConfigDescriptors.get(1);
+		webInfFacesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
+		parseConfigurationResources("ordering/GetAbsoluteOrdering_02", webInfFacesConfigDescriptors,
+			WEB_INF_FACES_CONFIG_XML);
+		
+		facesConfig = webInfFacesConfigDescriptors.get(0);
 		absoluteOrdering = facesConfig.getAbsoluteOrdering();
 
 //      actually = Arrays.asList(absoluteOrdering.get(0), absoluteOrdering.get(1), absoluteOrdering.get(2),
@@ -445,7 +449,11 @@ public class OrderingTest {
 		Assert.assertTrue(message, expected.equals(actually));
 		logger.info("test03_getAbsoluteOrdering: " + message);
 
-		facesConfig = webInfFacesConfigDescriptors.get(2);
+		webInfFacesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
+		parseConfigurationResources("ordering/GetAbsoluteOrdering_03", webInfFacesConfigDescriptors,
+			WEB_INF_FACES_CONFIG_XML);
+		
+		facesConfig = webInfFacesConfigDescriptors.get(0);
 		absoluteOrdering = facesConfig.getAbsoluteOrdering();
 
 		Assert.assertTrue("absoluteOrdering != null. But it should be null.", absoluteOrdering == null);
@@ -459,15 +467,15 @@ public class OrderingTest {
 //      logger.info("test04_absoluteOrdering: beginning ...");
 
 		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
-		parseConfigurationResources("ordering/AbsoluteOrdering", facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
+		parseConfigurationResources("ordering/AbsoluteOrdering_01", facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
 		Collections.shuffle(facesConfigDescriptors);
 
 		// Parse the WEB-INF/faces-config.xml to get any absolute-ordering, if any.
 		List<FacesConfigDescriptor> webInfFacesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
-		parseConfigurationResources("ordering/AbsoluteOrdering", webInfFacesConfigDescriptors,
+		parseConfigurationResources("ordering/AbsoluteOrdering_01", webInfFacesConfigDescriptors,
 			WEB_INF_FACES_CONFIG_XML);
 
-		FacesConfigDescriptor facesConfig = webInfFacesConfigDescriptors.get(1);
+		FacesConfigDescriptor facesConfig = webInfFacesConfigDescriptors.get(0);
 		List<String> absoluteOrdering = facesConfig.getAbsoluteOrdering();
 
 		String[] originalOrder = Ordering.extractNames(facesConfigDescriptors);
@@ -492,6 +500,10 @@ public class OrderingTest {
 		Assert.assertTrue(message, expected.equals(actually));
 		logger.info("test04_absoluteOrdering: " + message);
 
+		webInfFacesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
+		parseConfigurationResources("ordering/AbsoluteOrdering_02", webInfFacesConfigDescriptors,
+			WEB_INF_FACES_CONFIG_XML);
+		
 		facesConfig = webInfFacesConfigDescriptors.get(0);
 		absoluteOrdering = facesConfig.getAbsoluteOrdering();
 		
