@@ -5,12 +5,12 @@
 
 	<url-mapping id="welcome">
 		<pattern value="/" />
-		<view-id value="/views/home.faces" />
+		<view-id value="/WEB-INF/views/home.faces" />
 	</url-mapping>
 
 	<url-mapping id="liferay-friendly-url">
 		<pattern value="/web/guest/showcase/-/component/#{componentPrefix}/#{componentName}/#{componentUseCase}" />
-		<view-id value="/views/component.faces" />
+		<view-id value="/WEB-INF/views/component.faces" />
 	</url-mapping>
 
 </pretty-config>

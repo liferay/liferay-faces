@@ -11,6 +11,10 @@
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>${project.stage}</param-value>
 	</context-param>
+	<context-param>
+		<param-name>javax.faces.WEBAPP_RESOURCES_DIRECTORY</param-name>
+		<param-value>/WEB-INF/resources</param-value>
+	</context-param>
 	<!-- Instruct Mojarra to utilize JBoss-EL instead of the EL implementation provided by the servlet container. -->
 	<context-param>
 		<param-name>com.sun.faces.expressionFactory</param-name>
@@ -46,17 +50,4 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
-	<!-- Prevent direct access to Facelet view XHTML by the userAgent (browser). --> 
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Facelet View XHTML</web-resource-name>
-			<url-pattern>*.xhtml</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>nobody</role-name>
-		</auth-constraint>
-	</security-constraint>
-	<security-role>
-		<role-name>nobody</role-name>
-	</security-role>
 </web-app>

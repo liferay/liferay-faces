@@ -22,7 +22,7 @@
 					<h:message for="titleId" />
 				</alloy:field>
 				<ui:include src="#{bookingFlowModelBean.bookingTypeName}.xhtml" />
-				<h:commandButton action="/views/portletViewMode.xhtml" value="#{i18n['exit-booking-flow']}">
+				<h:commandButton action="/WEB-INF/views/portletViewMode.xhtml" value="#{i18n['exit-booking-flow']}">
 					<f:ajax execute="@form" />
 				</h:commandButton>
 			</alloy:fieldset>

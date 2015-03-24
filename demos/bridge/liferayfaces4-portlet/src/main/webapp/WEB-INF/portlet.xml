@@ -9,15 +9,15 @@
 		<portlet-class>javax.portlet.faces.GenericFacesPortlet</portlet-class>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.view</name>
-			<value>/views/portletViewMode.xhtml</value>
+			<value>/WEB-INF/views/portletViewMode.xhtml</value>
 		</init-param>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.edit</name>
-			<value>/views/portletEditMode.xhtml</value>
+			<value>/WEB-INF/views/portletEditMode.xhtml</value>
 		</init-param>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.help</name>
-			<value>/views/portletHelpMode.xhtml</value>
+			<value>/WEB-INF/views/portletHelpMode.xhtml</value>
 		</init-param>
 		<supports>
 			<mime-type>text/html</mime-type>
