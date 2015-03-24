@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 	<flow-definition id="booking">
 		<flow-return id="returnFromBookingFlow">
-			<from-outcome>/views/portletViewMode.xhtml</from-outcome>
+			<from-outcome>/WEB-INF/views/portletViewMode.xhtml</from-outcome>
 		</flow-return>
 		<flow-call id="callSurveyFlow">
 			<flow-reference>
