@@ -3,6 +3,7 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
+
 	<!-- Instruct Mojarra to utilize JBoss-EL instead of the EL implementation provided by the servlet container. -->
 	<context-param>
 		<param-name>com.sun.faces.expressionFactory</param-name>
@@ -19,17 +20,4 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
-	<!-- Prevent direct access to Facelet view XHTML by the userAgent (browser). --> 
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Facelet View XHTML</web-resource-name>
-			<url-pattern>*.xhtml</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>nobody</role-name>
-		</auth-constraint>
-	</security-constraint>
-	<security-role>
-		<role-name>nobody</role-name>
-	</security-role>
 </web-app>
