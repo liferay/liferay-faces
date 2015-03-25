@@ -51,13 +51,20 @@ public class ElementWriterStack extends Stack<ElementWriter> {
 			Element peekedElement = peek().getElement();
 
 			if (peekedElement instanceof ElementBlankImpl) {
+
 				StringBuilder prependedTextContent = new StringBuilder();
-				
+
 				String peekedTextContent = peekedElement.getTextContent();
+
+				if (peekedTextContent != null) {
+					prependedTextContent.append(peekedTextContent);
+				}
+
 				String topTextContent = topElement.getTextContent();
 
-				prependedTextContent.append(peekedTextContent == null ? "" : peekedTextContent);
-				prependedTextContent.append(topTextContent == null ? "" : topTextContent);
+				if (topTextContent != null) {
+					prependedTextContent.append(topTextContent);
+				}
 
 				topElement.setTextContent(prependedTextContent.toString());
 				super.pop();
