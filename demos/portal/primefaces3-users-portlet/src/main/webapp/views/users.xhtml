@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:aui-cc="http://liferay.com/faces/aui-cc" xmlns:liferay-ui="http://liferay.com/faces/ui"
-	xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:portal="http://liferay.com/faces/portal">
+	xmlns:liferay-ui="http://liferay.com/faces/ui" xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:portal="http://liferay.com/faces/portal">
 
 	<h:form id="f1" styleClass="aui-form">
-		<aui-cc:messages globalOnly="true" layout="table" />
+		<h:messages globalOnly="true" layout="table" />
 		<h:panelGroup layout="block" rendered="#{usersViewBean.formRendered}">
 			<alloy:row>
 				<alloy:column width="15">
@@ -38,11 +37,12 @@
 				</alloy:column>
 				<alloy:column width="15">
 					<alloy:fieldset label="#{i18n['administration']}">
-						<aui-cc:select inlineMessage="true" label="#{i18n['status']}" required="true"
+						<h:selectOneMenu id="status" label="#{i18n['status']}" required="true"
 							value="#{usersModelBean.selectedUser.status}">
 							<f:selectItems value="#{usersModelBean.statusSelectItems}" />
-							<f:converter for="selectOneMenu" converterId="javax.faces.Integer" />
-						</aui-cc:select>
+							<f:converter converterId="javax.faces.Integer" />
+						</h:selectOneMenu>
+						<h:message for="status" />
 					</alloy:fieldset>
 				</alloy:column>
 				<alloy:column width="20">
