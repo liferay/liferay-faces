@@ -24,6 +24,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -125,37 +126,37 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 
 	// Elements for column 1 of the test user's detailed user view
 	private static final String firstNameFieldXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':firstName')]";
+		"//input[contains(@id,':firstName')]";
 	private static final String firstNameFieldErrorXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':firstName')]/../span[@class='portlet-msg-error' and text()='Value is required']";
+		"//input[contains(@id,':firstName')]/../span[@class='portlet-msg-error' and text()='Value is required']";
 	private static final String middleNameFieldXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':middleName')]";
+		"//input[contains(@id,':middleName')]";
 	private static final String lastNameFieldXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':lastName')]";
+		"//input[contains(@id,':lastName')]";
 	private static final String lastNameFieldErrorXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':lastName')]/../span[@class='portlet-msg-error' and text()='Value is required']";
+		"//input[contains(@id,':lastName')]/../span[@class='portlet-msg-error' and text()='Value is required']";
 	private static final String emailAddressFieldXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':emailAddress')]";
+		"//input[contains(@id,':emailAddress')]";
 	private static final String emailAddressFieldErrorXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':emailAddress')]/../span[@class='portlet-msg-error' and text()='Value is required']";
+		"//input[contains(@id,':emailAddress')]/../span[@class='portlet-msg-error' and text()='Value is required']";
 	private static final String jobTitleFieldXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':jobTitle')]";
+		"//input[contains(@id,':jobTitle')]";
 	private static final String submitButtonXpath = "//button[contains(@id, ':pushButtonSubmit') and @type='submit']";
 	private static final String cancelButtonXpath = "//button[contains(@id, ':pushButtonCancel') and @type='submit']";
 
 	// Elements for column 2 of John Adam's detailed user view
-	private static final String dropdownActiveFieldXpath = "//select[contains(@id,':s1')]/option[text()='Active']";
+	private static final String dropdownActiveFieldXpath = "//select[contains(@id,':status')]/option[text()='Active']";
 	private static final String dropdownActiveSelectedFieldXpath =
-		"//select[contains(@id,':s1')]/option[@selected='selected' and text()='Active']";
-	private static final String dropdownInactiveFieldXpath = "//select[contains(@id,':s1')]/option[text()='Inactive']";
+		"//select[contains(@id,':status')]/option[@selected='selected' and text()='Active']";
+	private static final String dropdownInactiveFieldXpath = "//select[contains(@id,':status')]/option[text()='Inactive']";
 	private static final String dropdownInactiveSelectedFieldXpath =
-		"//select[contains(@id,':s1')]/option[@selected='selected' and text()='Inactive']";
+		"//select[contains(@id,':status')]/option[@selected='selected' and text()='Inactive']";
 
 	// Elements for column 3 of the test user's detailed user view
 	private static final String portraitXpath =
 		"//img[contains(@id, ':portrait') and contains(@src, 'user_male_portrait')]";
 	private static final String fileUploadButtonXpath =
-		"//label[@role='button']/span[text()='Choose' and contains(@class, 'ui-button-text')]/following-sibling::input[@type='file' and contains(@id, ':fileEntryComp_input')]/..";
+		"//input[@type='file' and contains(@id, ':fileEntryComp_input')]/../span[contains(@class, 'ui-button-text')]";
 	private static final String changedPortraitXpath =
 		"//input[@type='file' and contains(@id, ':fileEntryComp_input')]/../../../../img[contains(@id, ':portrait') and not(contains(@src, 'user_male_portrait'))]";
 	private static final String fileEntryXpath = "//input[@type='file' and contains(@id, ':fileEntryComp_input')]";
@@ -625,6 +626,13 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 
 		waitForElement(browser, cancelButtonXpath);
 
+		// This was the magic that fixed the primefaces4 fileupload component the transform needed to be set to 'none'
+		((JavascriptExecutor)browser).executeScript("arguments[0].style.transform = 'none';", fileEntry);
+
+		// when transform is NOT set to 'none' then we get:
+		// fileEntry.getCssValue(transform) = matrix(4, 0, 0, 4, -300, 0)
+		logger.log(Level.INFO, "fileEntry.getCssValue(transform) = " + fileEntry.getCssValue("transform"));
+
 		fileEntry.sendKeys(getPathToJerseyFile());
 		fileUploadButton.click();
 
@@ -645,6 +653,13 @@ public class Primefaces3UsersPortletTest extends TesterBase {
 		logger.log(Level.INFO, "portrait.isDisplayed() = " + portrait.isDisplayed());
 		assertTrue("The User Portrait should be displayed on the page at this point but it is not.",
 			portrait.isDisplayed());
+
+		// This was the magic that fixed the primefaces4 fileupload component the transform needed to be set to 'none'
+		((JavascriptExecutor)browser).executeScript("arguments[0].style.transform = 'none';", fileEntry);
+
+		// when transform is NOT set to 'none' then we get:
+		// fileEntry.getCssValue(transform) = matrix(4, 0, 0, 4, -300, 0)
+		logger.log(Level.INFO, "fileEntry.getCssValue(transform) = " + fileEntry.getCssValue("transform"));
 
 		fileEntry.sendKeys(getPathToJerseyFile());
 		fileUploadButton.click();
