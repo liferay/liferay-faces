@@ -126,21 +126,21 @@ public class Primefaces5UsersPortletTest extends TesterBase {
 
 	// Elements for column 1 of the test user's detailed user view
 	private static final String firstNameFieldXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':firstName')]";
+		"//input[contains(@id,':firstName')]";
 	private static final String firstNameFieldErrorXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':firstName')]/../span[@class='portlet-msg-error' and text()='Value is required']";
+		"//input[contains(@id,':firstName')]/../span[@class='portlet-msg-error' and text()='Value is required']";
 	private static final String middleNameFieldXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':middleName')]";
+		"//input[contains(@id,':middleName')]";
 	private static final String lastNameFieldXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':lastName')]";
+		"//input[contains(@id,':lastName')]";
 	private static final String lastNameFieldErrorXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':lastName')]/../span[@class='portlet-msg-error' and text()='Value is required']";
+		"//input[contains(@id,':lastName')]/../span[@class='portlet-msg-error' and text()='Value is required']";
 	private static final String emailAddressFieldXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':emailAddress')]";
+		"//input[contains(@id,':emailAddress')]";
 	private static final String emailAddressFieldErrorXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':emailAddress')]/../span[@class='portlet-msg-error' and text()='Value is required']";
+		"//input[contains(@id,':emailAddress')]/../span[@class='portlet-msg-error' and text()='Value is required']";
 	private static final String jobTitleFieldXpath =
-		"//span[@class='aui-field-element']/input[contains(@id,':jobTitle')]";
+		"//input[contains(@id,':jobTitle')]";
 	private static final String submitButtonXpath = "//button[contains(@id, ':pushButtonSubmit') and @type='submit']";
 	private static final String cancelButtonXpath = "//button[contains(@id, ':pushButtonCancel') and @type='submit']";
 
@@ -156,7 +156,7 @@ public class Primefaces5UsersPortletTest extends TesterBase {
 	private static final String portraitXpath =
 		"//img[contains(@id, ':portrait') and contains(@src, 'user_male_portrait')]";
 	private static final String fileUploadButtonXpath =
-		"//span[@role='button']/span[text()='Choose' and contains(@class, 'ui-button-text')]/following-sibling::input[@type='file' and contains(@id, ':fileEntryComp_input')]/..";
+		"//input[@type='file' and contains(@id, ':fileEntryComp_input')]/../span[contains(@class, 'ui-button-text')]";
 	private static final String changedPortraitXpath =
 		"//input[@type='file' and contains(@id, ':fileEntryComp_input')]/../../../../img[contains(@id, ':portrait') and not(contains(@src, 'user_male_portrait'))]";
 	private static final String fileEntryXpath = "//input[@type='file' and contains(@id, ':fileEntryComp_input')]";
