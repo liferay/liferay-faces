@@ -7,7 +7,7 @@
 	<h:form id="f1" styleClass="aui-form">
 		<h:messages globalOnly="true" layout="table" />
 		<h:panelGroup layout="block" rendered="#{usersViewBean.formRendered}">
-			<aui:column first="true" width="15">
+			<aui:column first="true" columnWidth="15">
 				<aui:fieldset label="#{i18n['personal']}">
 					<aui:field id="firstNameField" label="#{i18n['first-name']}">
 						<p:inputText id="firstName" required="true" value="#{usersModelBean.selectedUser.firstName}" />
@@ -34,7 +34,7 @@
 					</aui:field>
 				</aui:fieldset>
 			</aui:column>
-			<aui:column width="15">
+			<aui:column columnWidth="15">
 				<aui:fieldset label="#{i18n['administration']}">
 					<h:selectOneMenu id="status" label="#{i18n['status']}" required="true"
 						value="#{usersModelBean.selectedUser.status}">
@@ -44,7 +44,7 @@
 					<h:message for="status" />
 				</aui:fieldset>
 			</aui:column>
-			<aui:column width="20">
+			<aui:column columnWidth="20">
 				<aui:fieldset label="#{i18n['portrait']}">
 					<aui:field>
 						<h:graphicImage id="portrait" value="#{usersModelBean.selectedUserPortraitURL}" style="width:100px;" />
