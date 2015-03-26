@@ -403,7 +403,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0</vdldoc:since>
+			<vdldoc:since>3.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -3087,7 +3087,7 @@ java.lang.Object)</method-signature>
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[InputFile is a UIInput component that renders an <code>&lt;input&gt;</code> element with type=file. Since it extends HtmlInputFile, it supports all the features of h:inputFile and also supports multi-file uploads, instant-Ajax, preview, upload progress, and validation.]]></description>
+		<description><![CDATA[InputFile is a UIInput component that renders an <code>&lt;input&gt;</code> element with type=file. Since it extends HtmlInputText, it supports all the features of h:inputText and also supports multi-file uploads, instant-Ajax, preview, upload progress, and validation.]]></description>
 		<tag-name>inputFile</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.inputfile.InputFile</component-type>
@@ -7006,7 +7006,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0</vdldoc:since>
+			<vdldoc:since>3.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -7014,7 +7014,6 @@ java.lang.Object)</method-signature>
 		<tag-name>resource</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.resource.Resource</component-type>
-			<renderer-type>com.liferay.faces.alloy.component.resource.internal.ResourceRenderer</renderer-type>
 		</component>
 		<attribute>
 			<description><![CDATA[The content type of the resource.]]></description>
@@ -7035,7 +7034,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0</vdldoc:since>
+			<vdldoc:since>3.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 	<tag>
@@ -9929,7 +9928,7 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<tag-extension>
-			<vdldoc:since>3.2.0</vdldoc:since>
+			<vdldoc:since>3.2.5-ga6</vdldoc:since>
 		</tag-extension>
 	</tag>
 </facelet-taglib>
