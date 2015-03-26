@@ -8,7 +8,7 @@
 		<h:messages globalOnly="true" layout="table" />
 		<h:panelGroup layout="block" rendered="#{usersViewBean.formRendered}">
 			<alloy:row>
-				<alloy:column first="true" width="15">
+				<alloy:column width="15">
 					<alloy:fieldset label="#{i18n['personal']}">
 						<alloy:field id="firstNameField" label="#{i18n['first-name']}">
 							<p:inputText id="firstName" required="true" value="#{usersModelBean.selectedUser.firstName}" />
