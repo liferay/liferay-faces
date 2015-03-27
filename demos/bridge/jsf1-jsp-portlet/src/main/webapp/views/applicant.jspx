@@ -80,7 +80,7 @@
 				</h:form>
 			</aui:col>
 			<aui:col id="c2" width="33">
-				<h:form id="f1">
+				<h:form id="f2">
 					<aui:row>
 						<aui:col id="c2a" styleClass="uploaded-files">
 							<h3>
