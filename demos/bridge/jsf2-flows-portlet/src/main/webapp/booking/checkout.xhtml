@@ -5,8 +5,8 @@
 	<h:head />
 	<h:body>
 		<h:form>
-			<alloy:layout id="l1">
-				<alloy:column>
+			<alloy:row>
+				<alloy:column width="33">
 					<alloy:fieldset>
 						<alloy:field id="titleField" label="#{i18n['title']}">
 							<h:selectOneMenu id="titleId" value="#{bookingFlowModelBean.customer.titleId}">
@@ -45,7 +45,7 @@
 						</alloy:field>
 					</alloy:fieldset>
 				</alloy:column>
-				<alloy:column>
+				<alloy:column width="33">
 					<alloy:fieldset>
 						<alloy:field id="addressLine1Field" label="#{i18n['address-line-1']}" required="true">
 							<h:inputText id="addressLine1" value="#{bookingFlowModelBean.customer.addressLine1}">
@@ -85,7 +85,7 @@
 						</alloy:field>
 					</alloy:fieldset>
 				</alloy:column>
-				<alloy:column>
+				<alloy:column width="33">
 					<alloy:fieldset>
 						<alloy:field id="paymentTypeIdField" label="#{i18n['payment-method']}">
 							<h:selectOneMenu id="paymentTypeId" value="#{bookingFlowModelBean.customer.paymentTypeId}">
@@ -117,7 +117,7 @@
 						</alloy:field>
 					</alloy:fieldset>
 				</alloy:column>
-			</alloy:layout>
+			</alloy:row>
 			<hr />
 			<h:commandButton action="receipt" value="#{i18n['purchase']}">
 				<f:ajax execute="@form" />
