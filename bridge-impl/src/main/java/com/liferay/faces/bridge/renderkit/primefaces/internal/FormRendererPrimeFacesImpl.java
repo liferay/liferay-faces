@@ -13,10 +13,9 @@
  */
 package com.liferay.faces.bridge.renderkit.primefaces.internal;
 
-import com.liferay.faces.bridge.component.primefaces.internal.PrimeFacesFileUpload;
-import com.liferay.faces.bridge.context.BridgeContext;
-import com.liferay.faces.bridge.context.url.BridgeURL;
-import com.liferay.faces.bridge.internal.BridgeExt;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.faces.application.ViewHandler;
 import javax.faces.component.ActionSource;
@@ -27,9 +26,11 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.event.ActionListener;
 import javax.faces.render.Renderer;
 import javax.faces.render.RendererWrapper;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
+
+import com.liferay.faces.bridge.component.primefaces.internal.PrimeFacesFileUpload;
+import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.context.url.BridgeURL;
+import com.liferay.faces.bridge.internal.BridgeExt;
 
 
 /**
@@ -40,8 +41,10 @@ import java.util.List;
 public class FormRendererPrimeFacesImpl extends RendererWrapper {
 
 	// Private Constants
-	private static final String DATA_EXPORTER_FQCN = "org.primefaces.component.export.DataExporter";
-	private static final String FILE_DOWNLOAD_FQCN = "org.primefaces.component.filedownload.FileDownloadActionListener";
+	private static final String P_DATA_EXPORTER_FQCN = "org.primefaces.component.export.DataExporter";
+	private static final String P_FILE_DOWNLOAD_FQCN =
+		"org.primefaces.component.filedownload.FileDownloadActionListener";
+	private static final String PE_EXPORTER_FQCN = "org.primefaces.extensions.component.exporter.DataExporter";
 
 	// Private Data Members
 	private int majorVersion;
@@ -134,8 +137,9 @@ public class FormRendererPrimeFacesImpl extends RendererWrapper {
 
 							String actionListenerFQCN = actionListener.getClass().getName();
 
-							if (DATA_EXPORTER_FQCN.equals(actionListenerFQCN) ||
-									FILE_DOWNLOAD_FQCN.equals(actionListener.getClass().getName())) {
+							if (P_DATA_EXPORTER_FQCN.equals(actionListenerFQCN) ||
+									P_FILE_DOWNLOAD_FQCN.equals(actionListenerFQCN) ||
+									PE_EXPORTER_FQCN.equals(actionListenerFQCN)) {
 								nonAjaxActionListener = true;
 
 								break;
