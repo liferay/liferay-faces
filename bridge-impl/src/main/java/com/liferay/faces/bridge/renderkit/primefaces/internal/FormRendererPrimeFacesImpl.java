@@ -41,8 +41,10 @@ import com.liferay.faces.util.render.RendererWrapper;
 public class FormRendererPrimeFacesImpl extends RendererWrapper {
 
 	// Private Constants
-	private static final String DATA_EXPORTER_FQCN = "org.primefaces.component.export.DataExporter";
-	private static final String FILE_DOWNLOAD_FQCN = "org.primefaces.component.filedownload.FileDownloadActionListener";
+	private static final String P_DATA_EXPORTER_FQCN = "org.primefaces.component.export.DataExporter";
+	private static final String P_FILE_DOWNLOAD_FQCN =
+		"org.primefaces.component.filedownload.FileDownloadActionListener";
+	private static final String PE_EXPORTER_FQCN = "org.primefaces.extensions.component.exporter.DataExporter";
 
 	// Private Data Members
 	private int majorVersion;
@@ -135,8 +137,9 @@ public class FormRendererPrimeFacesImpl extends RendererWrapper {
 
 							String actionListenerFQCN = actionListener.getClass().getName();
 
-							if (DATA_EXPORTER_FQCN.equals(actionListenerFQCN) ||
-									FILE_DOWNLOAD_FQCN.equals(actionListener.getClass().getName())) {
+							if (P_DATA_EXPORTER_FQCN.equals(actionListenerFQCN) ||
+									P_FILE_DOWNLOAD_FQCN.equals(actionListenerFQCN) ||
+									PE_EXPORTER_FQCN.equals(actionListenerFQCN)) {
 								nonAjaxActionListener = true;
 
 								break;
