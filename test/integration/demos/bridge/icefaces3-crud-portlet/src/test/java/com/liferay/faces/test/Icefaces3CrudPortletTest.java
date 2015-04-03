@@ -68,11 +68,11 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 
 	private static final String cityFieldXpath = "//input[contains(@id,':city')]";
 	private static final String cityFieldErrorXpath =
-		"//input[contains(@id,':city')]/following-sibling::span[text()='Value is required']";
+		"//input[contains(@id,':city')]/following-sibling::span[1]/child::span[text()='Value is required']";
 
 	private static final String provinceIdFieldXpath = "//select[contains(@id,':provinceId')]";
 	private static final String provinceIdFieldErrorXpath =
-		"//select[contains(@id,':provinceId')]/following-sibling::span[text()='Value is required']";
+		"//select[contains(@id,':provinceId')]/following-sibling::span[1]/child::span[text()='Value is required']";
 
 	// FL element of dropdown
 	private static final String provinceFlXpath =
@@ -80,7 +80,7 @@ public class Icefaces3CrudPortletTest extends TesterBase {
 
 	private static final String postalCodeFieldXpath = "//input[contains(@id,':postalCode')]";
 	private static final String postalCodeFieldErrorXpath =
-		"//input[contains(@id,':postalCode')]/following-sibling::span[text()='Value is required']";
+		"//input[contains(@id,':postalCode')]/following-sibling::span[1]/child::span[text()='Value is required']";
 
 	// Save button
 	private static final String saveButtonXpath = "//input[@type='submit' and @value='Save']";
