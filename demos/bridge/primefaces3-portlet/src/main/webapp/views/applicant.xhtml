@@ -61,13 +61,13 @@
 								<p:message id="cityMessage" for="city" />
 							</alloy:field>
 							<alloy:field id="provinceIdField" label="#{i18n['state-province']}">
-								<p:selectOneMenu id="provinceId" label="#{i18n['state-province']}" required="true"
+								<h:selectOneMenu id="provinceId" label="#{i18n['state-province']}" required="true"
 									value="#{applicantModelBean.provinceId}">
 									<f:selectItem itemLabel="#{i18n['select']}" itemValue="" />
 									<f:selectItems itemValue="#{province.provinceId}" itemLabel="#{province.provinceName}"
 										value="#{listModelBean.provinces}" var="province" />
-									<p:ajax update="provinceIdField" />
-								</p:selectOneMenu>
+									<f:ajax render="provinceIdField" />
+								</h:selectOneMenu>
 								<p:message id="provinceIdMessage" for="provinceId" />
 							</alloy:field>
 							<alloy:field id="postalCodeField" label="#{i18n['zip-postal']}">
