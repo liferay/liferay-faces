@@ -60,7 +60,7 @@ public class FACES1427PortletTest extends TesterBase {
 	// <img alt="Bold" buttonid="b" src="http://localhost:8080/html/themes/classic/images/message_boards/bold.png">
 	private static final String bold1Xpath = "//img[@alt='Bold' and @buttonid='b' and contains(@src, 'bold.png')]";
 
-	private static final String iframe1Xpath = "//div[contains(@id,':comments2')]/div/div/iframe";
+	private static final String iframe1Xpath = "//div[contains(@id,'_comments2')]/div/div/iframe";
 
 	private static final String bold2Xpath = "//a[@title='Bold' and @role='button']";
 
