@@ -9,6 +9,12 @@
 	padding: 4px;
 }
 
+/* alloy-datatable */
+table.alloy-datatable thead th.facet, table.alloy-datatable tfoot td.facet {
+    padding: 2px;
+    text-align: center;
+}
+
 /* alloy-dialog */
 div.alloy-dialog {
 	padding: 6px;
@@ -62,6 +68,11 @@ ul.alloy-messages {
 	list-style-position: inside;
 	margin: 0px;
 	padding: 4px;
+}
+
+/* alloy-paginator */
+div.alloy-paginator div.pagination {
+    margin: 0px;
 }
 
 /* alloy-panel: bootstrap 3 backport */

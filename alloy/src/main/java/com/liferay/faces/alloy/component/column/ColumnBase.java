@@ -33,6 +33,7 @@ public abstract class ColumnBase extends HtmlColumn implements Styleable {
 		offset,
 		offsetWidth,
 		sortBy,
+		sortOrder,
 		span,
 		style,
 		styleClass,
@@ -77,6 +78,14 @@ public abstract class ColumnBase extends HtmlColumn implements Styleable {
 
 	public void setSortBy(Object sortBy) {
 		getStateHelper().put(ColumnPropertyKeys.sortBy, sortBy);
+	}
+
+	public String getSortOrder() {
+		return (String) getStateHelper().eval(ColumnPropertyKeys.sortOrder, null);
+	}
+
+	public void setSortOrder(String sortOrder) {
+		getStateHelper().put(ColumnPropertyKeys.sortOrder, sortOrder);
 	}
 
 	public Integer getSpan() {

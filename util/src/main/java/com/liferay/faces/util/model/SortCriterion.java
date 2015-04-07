@@ -11,21 +11,42 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.column;
-
-import javax.faces.component.html.HtmlOutputText;
-
+package com.liferay.faces.util.model;
 
 /**
  * @author  Neil Griffin
  */
-public class ColumnHeaderFacet extends HtmlOutputText {
+public class SortCriterion {
 
-	@Override
-	public Object getValue() {
+	/**
+	 * @author  Neil Griffin
+	 */
+	public enum Order {
+		ASCENDING, DESCENDING, NONE
+	}
 
-		Column parentColumn = (Column) getParent();
+	// Private Data Members
+	private String columnId;
+	private Order order;
 
-		return parentColumn.getHeaderText();
+	public SortCriterion(String columnId, Order order) {
+		this.columnId = columnId;
+		this.order = order;
+	}
+
+	public String getColumnId() {
+		return columnId;
+	}
+
+	public void setColumnId(String columnId) {
+		this.columnId = columnId;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 }

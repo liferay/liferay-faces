@@ -29,7 +29,14 @@ public abstract class DataTableBase extends HtmlDataTable implements Styleable, 
 
 	// Protected Enumerations
 	protected enum DataTablePropertyKeys {
-		clientKey
+		clientKey,
+		multiColumnSort,
+		rowDeselectListener,
+		rowDeselectRangeListener,
+		rowSelectListener,
+		rowSelectRangeListener,
+		selectedRowIndexes,
+		selectionMode
 	}
 
 	@Override
@@ -40,6 +47,62 @@ public abstract class DataTableBase extends HtmlDataTable implements Styleable, 
 	@Override
 	public void setClientKey(String clientKey) {
 		getStateHelper().put(DataTablePropertyKeys.clientKey, clientKey);
+	}
+
+	public boolean isMultiColumnSort() {
+		return (Boolean) getStateHelper().eval(DataTablePropertyKeys.multiColumnSort, false);
+	}
+
+	public void setMultiColumnSort(boolean multiColumnSort) {
+		getStateHelper().put(DataTablePropertyKeys.multiColumnSort, multiColumnSort);
+	}
+
+	public javax.el.MethodExpression getRowDeselectListener() {
+		return (javax.el.MethodExpression) getStateHelper().eval(DataTablePropertyKeys.rowDeselectListener, null);
+	}
+
+	public void setRowDeselectListener(javax.el.MethodExpression rowDeselectListener) {
+		getStateHelper().put(DataTablePropertyKeys.rowDeselectListener, rowDeselectListener);
+	}
+
+	public javax.el.MethodExpression getRowDeselectRangeListener() {
+		return (javax.el.MethodExpression) getStateHelper().eval(DataTablePropertyKeys.rowDeselectRangeListener, null);
+	}
+
+	public void setRowDeselectRangeListener(javax.el.MethodExpression rowDeselectRangeListener) {
+		getStateHelper().put(DataTablePropertyKeys.rowDeselectRangeListener, rowDeselectRangeListener);
+	}
+
+	public javax.el.MethodExpression getRowSelectListener() {
+		return (javax.el.MethodExpression) getStateHelper().eval(DataTablePropertyKeys.rowSelectListener, null);
+	}
+
+	public void setRowSelectListener(javax.el.MethodExpression rowSelectListener) {
+		getStateHelper().put(DataTablePropertyKeys.rowSelectListener, rowSelectListener);
+	}
+
+	public javax.el.MethodExpression getRowSelectRangeListener() {
+		return (javax.el.MethodExpression) getStateHelper().eval(DataTablePropertyKeys.rowSelectRangeListener, null);
+	}
+
+	public void setRowSelectRangeListener(javax.el.MethodExpression rowSelectRangeListener) {
+		getStateHelper().put(DataTablePropertyKeys.rowSelectRangeListener, rowSelectRangeListener);
+	}
+
+	public String getSelectedRowIndexes() {
+		return (String) getStateHelper().eval(DataTablePropertyKeys.selectedRowIndexes, null);
+	}
+
+	public void setSelectedRowIndexes(String selectedRowIndexes) {
+		getStateHelper().put(DataTablePropertyKeys.selectedRowIndexes, selectedRowIndexes);
+	}
+
+	public String getSelectionMode() {
+		return (String) getStateHelper().eval(DataTablePropertyKeys.selectionMode, null);
+	}
+
+	public void setSelectionMode(String selectionMode) {
+		getStateHelper().put(DataTablePropertyKeys.selectionMode, selectionMode);
 	}
 }
 //J+

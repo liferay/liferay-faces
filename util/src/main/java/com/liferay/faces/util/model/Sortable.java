@@ -13,16 +13,15 @@
  */
 package com.liferay.faces.util.model;
 
+import java.util.List;
+
+
 /**
  * @author  Neil Griffin
  */
 public interface Sortable {
 
-	public boolean isSortAscending();
+	public List<SortCriterion> getSortCriteria();
 
-	public void setSortAscending(boolean sortAscending);
-
-	public String getSortColumn();
-
-	public void setSortColumn(String sortColumn);
+	public void setSortCriteria(List<SortCriterion> sortCriteria);
 }

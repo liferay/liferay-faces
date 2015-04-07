@@ -6,7 +6,7 @@
 		<alloy:form>
 			<showcase:example renderedCheckbox="true">
 				<alloy:dataTable rendered="#{showcaseModelBean.selectedComponent.rendered}" rows="10"
-					value="#{dataTableModelBean.customers}" var="customer">
+					value="#{dataTableBacking.customerDataModel}" var="customer">
 					<f:facet name="header">
 						<alloy:outputText value="#{i18n['customers']}" />
 					</f:facet>
@@ -26,6 +26,9 @@
 							<f:converter converterId="convertCountry" />
 						</alloy:outputText>
 					</alloy:column>
+					<f:facet name="footer">
+						<alloy:outputText value="#{i18n['footer']}" />
+					</f:facet>
 				</alloy:dataTable>
 			</showcase:example>
 		</alloy:form>
