@@ -3,32 +3,36 @@
 	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/templates/component-1col-80.xhtml">
 
 	<ui:define name="col1">
-		<alloy:form>
-			<showcase:example renderedCheckbox="true">
-				<alloy:dataTable rendered="#{showcaseModelBean.selectedComponent.rendered}" rows="10"
-					value="#{dataTableBacking.customerDataModel}" var="customer">
+		<alloy:form id="myForm">
+			<showcase:example id="ex1" renderedCheckbox="true">
+				<alloy:dataTable id="customerTable" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+					rows="#{dataTableBacking.rowsPerPage}" value="#{dataTableBacking.customerOnDemandDataModel}"
+					var="customer">
 					<f:facet name="header">
 						<alloy:outputText value="#{i18n['customers']}" />
+						<alloy:paginator>
+							<f:ajax execute="@form" render="@form" />
+						</alloy:paginator>
 					</f:facet>
-					<alloy:column headerText="#{i18n['first-name']}">
+					<alloy:column headerText="#{i18n['first-name']}" sortBy="#{customer.firstName}">
 						<alloy:outputText value="#{customer.firstName}" />
+						<f:ajax render="customerTable" />
 					</alloy:column>
-					<alloy:column headerText="#{i18n['last-name']}">
+					<alloy:column headerText="#{i18n['last-name']}" sortBy="#{customer.lastName}">
 						<alloy:outputText value="#{customer.lastName}" />
+						<f:ajax render="customerTable" />
 					</alloy:column>
-					<alloy:column headerText="#{i18n['date-of-birth']}">
+					<alloy:column headerText="#{i18n['date-of-birth']}" sortBy="#{customer.dateOfBirth}">
 						<alloy:outputText value="#{customer.dateOfBirth}">
 							<f:convertDateTime pattern="MMM dd, yyyy" />
 						</alloy:outputText>
+						<f:ajax render="customerTable" />
 					</alloy:column>
 					<alloy:column headerText="#{i18n['country']}">
 						<alloy:outputText value="#{customer.countryId}">
 							<f:converter converterId="convertCountry" />
 						</alloy:outputText>
 					</alloy:column>
-					<f:facet name="footer">
-						<alloy:outputText value="#{i18n['footer']}" />
-					</f:facet>
 				</alloy:dataTable>
 			</showcase:example>
 		</alloy:form>

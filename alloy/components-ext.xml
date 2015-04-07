@@ -1044,6 +1044,13 @@
 			</attribute>
 			<attribute>
 				<description>
+					<![CDATA[Indicates the sort order for the column. Valid values are <code>ascending</code>, <code>descending</code>, and <code>none</code>.]]>
+				</description>
+				<name>sortOrder</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
 					<![CDATA[When alloy:column is a child of alloy:row, this is the width of this column as a unit from 1 to 12. This value is rendered as a CSS class as <code>span#</code> (for example if span="4", the CSS class rendered will be <code>span4</code>). If both the width and span attributes are present, the width attribute determines the value of the span number. Please consider using width.]]>
 				</description>
 				<name>span</name>
@@ -1135,8 +1142,9 @@
 		</attributes>
 	</component>
 	<component name="DataTable" extendsTags="ClientComponent UIData HTMLCommonEvents HTMLPassthrough HTMLTable"
-		module="aui-datatable" parentClass="javax.faces.component.html.HtmlDataTable" rendererParentClass="com.liferay.faces.alloy.render.internal.DelegatingAlloyRendererBase"
-		yui="true">
+		handlerClass="com.liferay.faces.alloy.component.datatable.internal.DataTableHandler"
+		module="aui-datatable" parentClass="javax.faces.component.html.HtmlDataTable"
+		rendererParentClass="com.liferay.faces.alloy.render.internal.AlloyRendererBase" yui="true">
 		<description>
 			<![CDATA[DataTable is a UIData (iterator) component that renders a <code>&lt;table&gt;</code> element representing tabular data. Since it extends HtmlDataTable, it supports all the features of h:dataTable.]]>
 		</description>
@@ -1150,12 +1158,70 @@
 				<generateJava>false</generateJava>
 			</attribute>
 			<attribute>
+				<defaultValue>false</defaultValue>
+				<description>
+					<![CDATA[When true, multiple columns can be selected by the user when the meta key is held down during a left click on a sortable column header. The default is false.]]>
+				</description>
+				<name>multiColumnSort</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when a row is deselected. The method must be <code>public</code>, return <code>void</code>, and take an <code>RowDeselectEvent</code> argument.]]>
+				</description>
+				<name>rowDeselectListener</name>
+				<method-signature>
+					void rowDeselectListener(com.liferay.faces.alloy.component.datatable.RowDeselectEvent)
+				</method-signature>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when a range of rows is deselected. The method must be <code>public</code>, return <code>void</code>, and take an <code>RowDeselectRangeEvent</code> argument.]]>
+				</description>
+				<name>rowDeselectRangeListener</name>
+				<method-signature>
+					void rowDeselectRangeListener(com.liferay.faces.alloy.component.datatable.RowDeselectRangeEvent)
+				</method-signature>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when a row is selected. The method must be <code>public</code>, return <code>void</code>, and take an <code>RowSelectEvent</code> argument.]]>
+				</description>
+				<name>rowSelectListener</name>
+				<method-signature>
+					void rowSelectListener(com.liferay.faces.alloy.component.datatable.RowSelectEvent)
+				</method-signature>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[A method that is executed when a range of rows is selected. The method must be <code>public</code>, return <code>void</code>, and take an <code>RowSelectRangeEvent</code> argument.]]>
+				</description>
+				<name>rowSelectRangeListener</name>
+				<method-signature>
+					void rowSelectRangeListener(com.liferay.faces.alloy.component.datatable.RowSelectRangeEvent)
+				</method-signature>
+			</attribute>
+			<attribute>
 				<description>
 					<![CDATA[The total number of rows that are to be displayed. If not set, then all rows are displayed.]]>
 				</description>
 				<name>rows</name>
 				<type>int</type>
 				<generateJava>false</generateJava>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Indicates the type of row selection. Valid values are <code>"checkbox"</code>, <code>"radio"</code>.]]>
+				</description>
+				<name>selectionMode</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[Comma-delimited list of row indexes that indicate which rows are selected.]]>
+				</description>
+				<name>selectedRowIndexes</name>
+				<type>java.lang.String</type>
 			</attribute>
 		</attributes>
 	</component>
@@ -2381,6 +2447,124 @@
 				<name>opacity</name>
 				<type>java.lang.String</type>
 				<yui>true</yui>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="Paginator" extendsTags="Styleable UIComponentBase ValueInherited" parentClass="javax.faces.component.UIComponentBase">
+		<description>
+			<![CDATA[Paginator ...]]>
+		</description>
+		<attributes>
+			<attribute>
+				<defaultValue>1</defaultValue>
+				<description>
+					<![CDATA[Integer representing the first page number that is to be displayed in the list of page number controls. The default value is 1.]]>
+				</description>
+				<name>firstPage</name>
+				<type>int</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[The id of the UIData component that is to be paginated.]]>
+				</description>
+				<name>for</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue><![CDATA["&laquo;"]]></defaultValue>
+				<description>
+					<![CDATA[The label of the control that causes the first page to be displayed. The default value is the &amp;laquo; character code.]]>
+				</description>
+				<name>firstPageLabel</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue><![CDATA["&raquo;"]]></defaultValue>
+				<description>
+					<![CDATA[The label of the control that causes the last page to be displayed. The default value is the &amp;raquo; character code.]]>
+				</description>
+				<name>lastPageLabel</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue><![CDATA["&rsaquo;"]]></defaultValue>
+				<description>
+					<![CDATA[The label of the control that causes the next page to be displayed. The default value is the &amp;rsaquo; character code.]]>
+				</description>
+				<name>nextPageLabel</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue><![CDATA["&lsaquo;"]]></defaultValue>
+				<description>
+					<![CDATA[The label of the control that causes the previous page to be displayed. The default value is the &amp;lsaquo; character code.]]>
+				</description>
+				<name>previousPageLabel</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>10</defaultValue>
+				<description>
+					<![CDATA[Integer representing the maximum number of page number controls that will be displayed. The default value is 10.]]>
+				</description>
+				<name>maxPageNumberControls</name>
+				<type>int</type>
+			</attribute>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When true, a control will be rendered that will cause the associated UIData component to display the first page . This is true by default.]]>
+				</description>
+				<name>showFirstPageControl</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When true, a control will be rendered that will cause the associated UIData component to display the last page. This is true by default.]]>
+				</description>
+				<name>showLastPageControl</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When true, a control will be rendered that will cause the associated UIData component to display the next page. This is true by default.]]>
+				</description>
+				<name>showNextPageControl</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When true, controls will be rendered for each page number (limited by the maxPageNumberControls attribute). This is true by default.]]>
+				</description>
+				<name>showPageNumberControls</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When true, a control will be rendered that will cause the associated UIData component to display the previous page. This is true by default.]]>
+				</description>
+				<name>showPreviousPageControl</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<defaultValue>"bottom"</defaultValue>
+				<description>
+					<![CDATA[When true, a row summary such as "Page 1 of 7." will be displayed based on the <code>results-x-x-of-x-page-x-of-x</code> internationalized language key. This is true by default.]]>
+				</description>
+				<name>summaryPosition</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<description>
+					<![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute. Valid values are <code>pagination-large</code>, <code>pagination-small</code>, and <code>pagination-mini</code>.]]>
+				</description>
+				<name>styleClass</name>
+				<type>java.lang.String</type>
+				<override>true</override>
 			</attribute>
 		</attributes>
 	</component>

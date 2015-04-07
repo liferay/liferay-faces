@@ -67,6 +67,15 @@
 								<replace token="url(../../../../assets/skins/sam/sprite.png)" value="url(#{resource['liferay-faces-reslib:build/aui-color-palette/assets/skins/sam/sprite.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/node-menunav/assets/skins/sam">
 									<include name="node-menunav.css" />
 								</replace>
+								<!-- dataTable -->
+								<replace token="url(sort-arrow-sprite.png)" value="url(#{resource['liferay-faces-reslib:build/aui-datatable-core/assets/skins/sam/sort-arrow-sprite.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/aui-datatable-core/assets/skins/sam">
+									<include name="aui-datatable-core.css" />
+									<include name="aui-datatable-core-skin.css" />
+								</replace>
+								<replace token="url(sort-arrow-sprite-ie.png)" value="url(#{resource['liferay-faces-reslib:build/aui-datatable-core/assets/skins/sam/sort-arrow-sprite-ie.png']})" dir="${project.build.directory}/classes/META-INF/resources/liferay-faces-reslib/build/aui-datatable-core/assets/skins/sam">
+									<include name="aui-datatable-core.css" />
+									<include name="aui-datatable-core-skin.css" />
+								</replace>
 							</target>
 						</configuration>
 					</execution>

@@ -213,6 +213,159 @@ var LFAI = {
 		document.getElementById(hiddenClientId).value = '';
 	},
 
+	initDataTableSelectAllCheckbox: function(A, escapedDataTableId, escapedSelectAllCheckboxId,
+											 rowSelectRangeClientBehavior, rowDeselectRangeClientBehavior) {
+
+		var dataTable = A.one('#' + escapedDataTableId),
+		selectAllCheckbox = A.one('#' + escapedSelectAllCheckboxId);
+
+		selectAllCheckbox.on('change', function() {
+
+			var checkboxes = dataTable.one('tbody').all('input[type=checkbox]');
+
+			if (selectAllCheckbox.get('checked')) {
+				var rowIndexRange = null;
+				checkboxes.each(function(checkbox) {
+					var idParts = checkbox.get('id').split(':'),
+						rowIndex = idParts[idParts.length-1];
+					if (rowIndexRange) {
+						rowIndexRange += ',' + rowIndex;
+					}
+					else {
+						rowIndexRange = rowIndex;
+					}
+					if (!checkbox.get('checked')) {
+						console.log('checkbox=' + checkbox);
+						checkbox.addClass('preventClientBehavior');
+						checkbox.simulate('click');
+						checkbox.removeClass('preventClientBehavior');
+					}
+				});
+				rowSelectRangeClientBehavior(rowIndexRange);
+			}
+			else {
+				var rowIndexRange = null;
+				checkboxes.each(function(checkbox) {
+					var idParts = checkbox.get('id').split(':'),
+						rowIndex = idParts[idParts.length-1];
+					if (rowIndexRange) {
+						rowIndexRange += ',' + rowIndex;
+					}
+					else {
+						rowIndexRange = rowIndex;
+					}
+					if (checkbox.get('checked')) {
+						checkbox.addClass('preventClientBehavior');
+						checkbox.simulate('click');
+						checkbox.removeClass('preventClientBehavior');
+					}
+				});
+				rowDeselectRangeClientBehavior(rowIndexRange);
+			}
+		});
+	},
+
+	initDataTableCheckboxSelection: function(A, escapedDataTableId, escapedHiddenFieldClientId, rowSelectClientBehavior,
+											 rowDeselectClientBehavior) {
+
+		var dataTable = A.one('#' + escapedDataTableId),
+		checkboxes = dataTable.one('tbody').all('input[type=checkbox]');
+
+		checkboxes.each(
+			function(checkbox) {
+				checkbox.on('click', function(e) {
+					var found = false,
+						hiddenField = A.one('#' + escapedHiddenFieldClientId),
+						hiddenFieldValue = hiddenField.get('value'),
+						i, idParts = checkbox.get('id').split(':'),
+						rowIndex = idParts[idParts.length-1],
+						rowIndexes = hiddenFieldValue.split(','),
+						skip = false,
+						totalAdded = 0;
+					if (hiddenFieldValue) {
+						hiddenFieldValue = '';
+						for (i = 0; i < rowIndexes.length; i++) {
+
+							skip = false;
+							if (rowIndexes[i] === rowIndex) {
+								found = true;
+								skip = !checkbox.get('checked');
+							}
+							if (!skip) {
+								if (totalAdded > 0) {
+									hiddenFieldValue += ',';
+								}
+								hiddenFieldValue += rowIndexes[i];
+								totalAdded++;
+							}
+						}
+						if (!found) {
+							if (totalAdded > 0) {
+								hiddenFieldValue += ',';
+							}
+							hiddenFieldValue += rowIndex;
+						}
+					}
+					else {
+						hiddenFieldValue = rowIndex;
+					}
+					hiddenField.set('value', hiddenFieldValue);
+
+					if (checkbox.get('checked')) {
+						checkbox.ancestor("tr").addClass('info');
+						if (!checkbox.hasClass('preventClientBehavior')) {
+							rowSelectClientBehavior(rowIndex);
+						}
+					}
+					else {
+						checkbox.ancestor("tr").removeClass('info');
+						if (!checkbox.hasClass('preventClientBehavior')) {
+							rowDeselectClientBehavior(rowIndex);
+						}
+					}
+				});
+			}
+		);
+	},
+
+	initDataTableRadioSelection: function(A, escapedDataTableId, escapedHiddenFieldClientId, rowSelectClientBehavior,
+										  rowDeselectClientBehavior) {
+
+		var dataTable = A.one('#' + escapedDataTableId), radios = dataTable.one('tbody').all('input[type=radio]');
+
+		radios.each(
+			function(checkbox) {
+				checkbox.on('click', function(e) {
+					var hiddenField = A.one('#' + escapedHiddenFieldClientId),
+						idParts = checkbox.get('id').split(':'),
+						rowIndex = idParts[idParts.length-1];
+					radios.each(
+						function(radio) {
+							if (radio === e.target) {
+								if ((e.metaKey) && radio.get('checked')) {
+									radio.set('checked', false);
+									hiddenField.set('value', '');
+									radio.ancestor("tr").removeClass('info');
+									rowDeselectClientBehavior(rowIndex);
+								}
+								else {
+									radio.set('checked', true);
+									hiddenField.set('value', rowIndex);
+									radio.ancestor("tr").addClass('info');
+									rowSelectClientBehavior(rowIndex);
+								}
+							}
+							else {
+								radio.set('checked', false);
+								radio.ancestor("tr").removeClass('info');
+							}
+						}
+					);
+				});
+			}
+		);
+	},
+
 	initDatePickerShowOnButton: function(A, escapedInputId, datePicker) {
 
 		var input = A.one('#' + escapedInputId);

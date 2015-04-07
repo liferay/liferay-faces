@@ -13,32 +13,32 @@
  */
 package com.liferay.faces.util.model;
 
+import java.util.Collection;
 import java.util.List;
+
+import javax.faces.model.DataModel;
 
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
- * This abstract class provides the ability to supply JSF UI components with a {@link javax.faces.model.DataModel} that
- * loads data in a lazy (on-demand) manner. It also provides for the ability to mark underlying rows for deletion.
- *
  * @author  Neil Griffin
  */
-public abstract class LazyDataModel<E> extends RowMarkerDataModel<E> implements Paginated {
+public abstract class OnDemandDataModel<E> extends DataModel<E> implements Paginated, Sortable {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(LazyDataModel.class);
+	private static final Logger logger = LoggerFactory.getLogger(OnDemandDataModel.class);
 
 	// Private Data Members
+	private int finishRowIndex = -1;
 	private int rowCount = -1;
 	private int rowIndex = -1;
 	private int rowsPerPage;
-	private boolean sortAscending = true;
-	private String sortColumn;
+	private List<SortCriterion> sortCriteria;
+
+	private int startRowIndex = -1;
 	private List<E> wrappedData;
-	private int wrappedDataStartRowIndex = -1;
-	private int wrappedDataFinishRowIndex = -1;
 
 	/**
 	 * Returns the total number of rows. Note that this method is called only when necessary, and so the return value
@@ -49,21 +49,20 @@ public abstract class LazyDataModel<E> extends RowMarkerDataModel<E> implements 
 	/**
 	 * Returns a list of rows that is a subset of the entire list of rows.
 	 *
-	 * @param  startRow   The starting row index.
-	 * @param  finishRow  The finishing row index.
+	 * @param  startRow       The starting row index.
+	 * @param  finishRow      The finishing row index.
+	 * @param  sortCritieria  The sort criteria that is to be applied to the order of the results.
 	 */
-	public abstract List<E> findRows(int startRow, int finishRow);
+	public abstract Collection<E> findRows(int startRow, int finishRow, List<SortCriterion> sortCritieria);
 
 	/**
-	 * @see  {@link RowMarkerDataModel#reset()}
+	 * Resets (clears) the underlying wrapped data.
 	 */
-	@Override
 	public void reset() {
 		setRowCount(-1);
 		setWrappedData(null);
-		setWrappedDataStartRowIndex(-1);
-		setWrappedDataFinishRowIndex(-1);
-		setRowMarks(null);
+		setStartRowIndex(-1);
+		setFinishRowIndex(-1);
 	}
 
 	/**
@@ -71,13 +70,24 @@ public abstract class LazyDataModel<E> extends RowMarkerDataModel<E> implements 
 	 */
 	@Override
 	public boolean isRowAvailable() {
+
 		int rowIndex = getRowIndex();
 
 		return (rowIndex >= 0) && (rowIndex < getRowCount());
 	}
 
-	public boolean isSortAscending() {
-		return sortAscending;
+	/**
+	 * Returns the index of the finishing row associated with the underlying wrapped data.
+	 */
+	public int getFinishRowIndex() {
+		return finishRowIndex;
+	}
+
+	/**
+	 * Sets the finishing row associated with the underlying wrapped data.
+	 */
+	public void setFinishRowIndex(int finishRowIndex) {
+		this.finishRowIndex = finishRowIndex;
 	}
 
 	/**
@@ -107,8 +117,9 @@ public abstract class LazyDataModel<E> extends RowMarkerDataModel<E> implements 
 	public E getRowData() {
 
 		if (getRowIndex() >= 0) {
+
 			int adjustedRowIndex = getRowIndex() % getRowsPerPage();
-			List<E> wrappedData = getWrappedData();
+			Collection<E> wrappedData = getWrappedData();
 
 			if (adjustedRowIndex >= wrappedData.size()) {
 				logger.error("adjustedRowIndex=[{0}] higher than wrappedData.size=[{1}]", adjustedRowIndex,
@@ -143,17 +154,21 @@ public abstract class LazyDataModel<E> extends RowMarkerDataModel<E> implements 
 		// associated with the specified rowIndex.
 		if (rowIndex >= 0) {
 
-			int wrappedDataStartRowIndex = getWrappedDataStartRowIndex();
-			int wrappedDataFinishRowIndex = getWrappedDataFinishRowIndex();
+			int startRowIndex = getStartRowIndex();
+			int finishRowIndex = getFinishRowIndex();
 
-			if ((wrappedDataStartRowIndex >= 0) && (wrappedDataFinishRowIndex >= 0)) {
+			if ((startRowIndex >= 0) && (finishRowIndex >= 0)) {
 
-				int wrappedDataMaxFinishRowIndex = wrappedDataStartRowIndex + getRowsPerPage() - 1;
+				int maxFinishRowIndex = startRowIndex + getRowsPerPage() - 1;
 
-				if ((rowIndex < wrappedDataStartRowIndex) || (rowIndex > wrappedDataMaxFinishRowIndex)) {
+				if ((rowIndex < startRowIndex) || (rowIndex > maxFinishRowIndex)) {
+
+					System.err.println("Clearing cache since rowIndex=[" + rowIndex +
+						"] is outside the range of cached rows");
 
 					if (logger.isDebugEnabled()) {
-						logger.debug("rowIndex=[" + rowIndex + "] outside the range of cached rows so clearing cache");
+						logger.debug("Clearing cache since rowIndex=[{0}] is outside the range of cached rows.",
+							rowIndex);
 					}
 
 					reset();
@@ -178,31 +193,35 @@ public abstract class LazyDataModel<E> extends RowMarkerDataModel<E> implements 
 		this.rowsPerPage = rowsPerPage;
 	}
 
-	public void setSortAscending(boolean sortAscending) {
-
-		if (this.sortAscending != sortAscending) {
-			reset();
-		}
-
-		this.sortAscending = sortAscending;
-	}
-
-	public String getSortColumn() {
-		return sortColumn;
-	}
-
-	public void setSortColumn(String sortColumn) {
-
-		if ((this.sortColumn != null) && !this.sortColumn.equals(sortColumn)) {
-			reset();
-		}
-
-		this.sortColumn = sortColumn;
-	}
-
+	/**
+	 * @see  {@link Sortable#getSortCriteria()}
+	 */
 	@Override
-	public boolean isReset() {
-		return (wrappedData == null);
+	public List<SortCriterion> getSortCriteria() {
+		return sortCriteria;
+	}
+
+	/**
+	 * @see  {@link Sortable#setSortCriteria(java.util.List)}
+	 */
+	@Override
+	public void setSortCriteria(List<SortCriterion> sortCriteria) {
+		this.sortCriteria = sortCriteria;
+		reset();
+	}
+
+	/**
+	 * Returns the index of the starting row associated with the underlying wrapped data.
+	 */
+	public int getStartRowIndex() {
+		return startRowIndex;
+	}
+
+	/**
+	 * Sets the starting row associated with the underlying wrapped data.
+	 */
+	public void setStartRowIndex(int startRowIndex) {
+		this.startRowIndex = startRowIndex;
 	}
 
 	/**
@@ -213,15 +232,14 @@ public abstract class LazyDataModel<E> extends RowMarkerDataModel<E> implements 
 
 		if (wrappedData == null) {
 
-			int wrappedDataStartRowIndex = rowIndex;
-			int wrappedDataFinishRowIndex = Math.min(rowIndex + getRowsPerPage() - 1, getRowCount() - 1);
+			int startRowIndex = rowIndex;
+			int finishRowIndex = Math.min(rowIndex + getRowsPerPage() - 1, getRowCount() - 1);
 
-			logger.debug("finding new wrappedDataStartRowIndex=[{0}] wrappedDataFinishRowIndex=[{1}]",
-				wrappedDataStartRowIndex, wrappedDataFinishRowIndex);
+			logger.debug("finding new startRowIndex=[{0}] finishRowIndex=[{1}]", startRowIndex, finishRowIndex);
 
-			setWrappedData(findRows(wrappedDataStartRowIndex, wrappedDataFinishRowIndex));
-			setWrappedDataFinishRowIndex(wrappedDataFinishRowIndex);
-			setWrappedDataStartRowIndex(wrappedDataStartRowIndex);
+			setWrappedData(findRows(startRowIndex, finishRowIndex, sortCriteria));
+			setFinishRowIndex(finishRowIndex);
+			setStartRowIndex(startRowIndex);
 		}
 
 		return wrappedData;
@@ -241,53 +259,4 @@ public abstract class LazyDataModel<E> extends RowMarkerDataModel<E> implements 
 			this.wrappedData = (List<E>) wrappedData;
 		}
 	}
-
-	/**
-	 * Returns the index of the finishing row associated with the underlying wrapped data.
-	 */
-	public int getWrappedDataFinishRowIndex() {
-		return wrappedDataFinishRowIndex;
-	}
-
-	/**
-	 * Sets the finishing row associated with the underlying wrapped data.
-	 */
-	public void setWrappedDataFinishRowIndex(int wrappedDataFinishRowIndex) {
-		this.wrappedDataFinishRowIndex = wrappedDataFinishRowIndex;
-	}
-
-	/**
-	 * Returns the index of the starting row associated with the underlying wrapped data.
-	 */
-	public int getWrappedDataStartRowIndex() {
-		return wrappedDataStartRowIndex;
-	}
-
-	/**
-	 * Sets the starting row associated with the underlying wrapped data.
-	 */
-	public void setWrappedDataStartRowIndex(int wrappedDataStartRowIndex) {
-		this.wrappedDataStartRowIndex = wrappedDataStartRowIndex;
-	}
-
-	/**
-	 * Searches through the cached/wrapped data for the row that corresponds to the specified primaryKey and returns the
-	 * row.
-	 */
-	public E getWrappedRow(Object primaryKey) {
-
-		E wrappedRow = null;
-
-		for (E row : wrappedData) {
-
-			if (getPrimaryKey(row).equals(primaryKey)) {
-				wrappedRow = row;
-
-				break;
-			}
-		}
-
-		return wrappedRow;
-	}
-
 }

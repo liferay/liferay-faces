@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/templates/component-1col-80.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form id="myForm">
+			<showcase:example id="ex1" renderedCheckbox="true">
+				<alloy:row>
+					<alloy:column width="50">
+						<alloy:field label="#{i18n['summary-position']}">
+							<alloy:selectOneMenu value="#{dataTableBacking.summaryPosition}">
+								<f:selectItem itemLabel="#{i18n['top']}" itemValue="top" />
+								<f:selectItem itemLabel="#{i18n['bottom']}" itemValue="bottom" />
+								<f:selectItem itemLabel="#{i18n['left']}" itemValue="left" />
+								<f:selectItem itemLabel="#{i18n['right']}" itemValue="right" />
+								<f:selectItem itemLabel="#{i18n['none']}" itemValue="none" />
+								<f:ajax render="@form" />
+							</alloy:selectOneMenu>
+						</alloy:field>
+					</alloy:column>
+					<alloy:column width="50">
+						<alloy:field label="#{i18n['rows-per-page']}">
+							<alloy:selectOneMenu value="#{dataTableBacking.rowsPerPage}">
+								<f:selectItem itemLabel="5" itemValue="5" />
+								<f:selectItem itemLabel="10" itemValue="10" />
+								<f:selectItem itemLabel="15" itemValue="15" />
+								<f:selectItem itemLabel="20" itemValue="20" />
+								<f:ajax render="@form" />
+							</alloy:selectOneMenu>
+						</alloy:field>
+					</alloy:column>
+				</alloy:row>
+				<alloy:dataTable id="customerTable" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+					rows="#{dataTableBacking.rowsPerPage}" value="#{dataTableBacking.customerDataModel}" var="customer">
+					<f:facet name="header">
+						<alloy:outputText value="#{i18n['customers']}" />
+						<alloy:paginator summaryPosition="#{dataTableBacking.summaryPosition}">
+							<f:ajax execute="@form" render="@form" />
+						</alloy:paginator>
+					</f:facet>
+					<alloy:column headerText="#{i18n['first-name']}">
+						<alloy:outputText value="#{customer.firstName}" />
+					</alloy:column>
+					<alloy:column headerText="#{i18n['last-name']}">
+						<alloy:outputText value="#{customer.lastName}" />
+					</alloy:column>
+					<alloy:column headerText="#{i18n['date-of-birth']}">
+						<alloy:outputText value="#{customer.dateOfBirth}">
+							<f:convertDateTime pattern="MMM dd, yyyy" />
+						</alloy:outputText>
+					</alloy:column>
+					<alloy:column headerText="#{i18n['country']}">
+						<alloy:outputText value="#{customer.countryId}">
+							<f:converter converterId="convertCountry" />
+						</alloy:outputText>
+					</alloy:column>
+					<f:facet name="footer">
+						<alloy:paginator firstPageLabel="#{i18n['first']}" lastPageLabel="#{i18n['last']}"
+							maxPageNumberControls="7" nextPageLabel="#{i18n['next']}"
+							previousPageLabel="#{i18n['previous']}" summaryPosition="none">
+						</alloy:paginator>
+					</f:facet>
+				</alloy:dataTable>
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

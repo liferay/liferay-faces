@@ -13,21 +13,21 @@
  */
 package com.liferay.faces.alloy.component.column;
 
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.component.UIComponent;
-import javax.faces.component.html.HtmlDataTable;
+import javax.faces.component.behavior.ClientBehaviorHolder;
 
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.lang.StringPool;
 
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Column.COMPONENT_TYPE)
-public class Column extends ColumnBase {
+public class Column extends ColumnBase implements ClientBehaviorHolder {
 
 	// Public Constants
 	public static final int COLUMNS = 12;
@@ -35,27 +35,22 @@ public class Column extends ColumnBase {
 	public static final String RENDERER_TYPE = "com.liferay.faces.alloy.component.column.internal.ColumnRenderer";
 	public static final String STYLE_CLASS_NAME = "alloy-column";
 
+	// Private Constants
+	private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList("sortBy"));
+
 	public Column() {
 		super();
 		setRendererType(RENDERER_TYPE);
 	}
 
 	@Override
-	public void setParent(UIComponent parent) {
-		super.setParent(parent);
+	public String getDefaultEventName() {
+		return "sortBy";
+	}
 
-		if ((parent != null) && (parent instanceof HtmlDataTable)) {
-
-			Map<String, UIComponent> facetMap = getFacets();
-
-			if (facetMap != null) {
-				UIComponent headerFacet = facetMap.get(StringPool.HEADER);
-
-				if (headerFacet == null) {
-					facetMap.put(StringPool.HEADER, new ColumnHeaderFacet());
-				}
-			}
-		}
+	@Override
+	public Collection<String> getEventNames() {
+		return EVENT_NAMES;
 	}
 
 	@Override
