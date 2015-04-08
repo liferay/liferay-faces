@@ -134,6 +134,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 			}
 
 			buf.append("}");
+			JavaScriptFragment anonymousFunction = new JavaScriptFragment(buf.toString());
 
 			//J-
 			//	Liferay.component('clientKey')
@@ -161,7 +162,7 @@ public class ProgressBarRenderer extends ProgressBarRendererBase {
 			//	);
 			//J+
 			RendererUtil.encodeFunctionCall(responseWriter, "LFAI.initProgressBarServerMode", liferayComponent,
-				clientId, pollingDelay, buf);
+				clientId, pollingDelay, anonymousFunction);
 		}
 
 		// Otherwise the component is in client mode.
