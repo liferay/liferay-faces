@@ -28,7 +28,7 @@ import com.liferay.faces.alloy.component.datatable.DataTable;
 public class DataTableInfo {
 
 	// Private Data members
-	private int totalColumns;
+	private int totalRenderedColumns;
 	private boolean footerFacetPresentInColumn;
 	private boolean headerFacetOrTextPresentInColumn;
 
@@ -57,7 +57,11 @@ public class DataTableInfo {
 					footerFacetPresentInColumn = (child.getFacet("footer") != null);
 				}
 
-				totalColumns++;
+				UIColumn uiColumn = (UIColumn) child;
+
+				if (uiColumn.isRendered()) {
+					totalRenderedColumns++;
+				}
 			}
 		}
 	}
@@ -70,7 +74,7 @@ public class DataTableInfo {
 		return headerFacetOrTextPresentInColumn;
 	}
 
-	public int getTotalColumns() {
-		return totalColumns;
+	public int getTotalRenderedColumns() {
+		return totalRenderedColumns;
 	}
 }

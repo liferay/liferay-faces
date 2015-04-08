@@ -107,7 +107,7 @@ public class DataTable extends DataTableBase implements ClientBehaviorHolder {
 			else {
 
 				String rowIndexRange = requestParameterMap.get(clientId + "_rowIndexRange");
-				int[] rowIndexArray = toArray(rowIndexRange);
+				int[] rowIndexArray = toIntArray(rowIndexRange);
 
 				if (RowSelectRangeEvent.ROW_SELECT_RANGE.equals(eventName)) {
 					facesEvent = new RowSelectRangeEvent(this, behavior, rowIndexArray, getRowDataList(rowIndexArray));
@@ -128,11 +128,12 @@ public class DataTable extends DataTableBase implements ClientBehaviorHolder {
 		getAttributes().put("oldRows", getRows());
 	}
 
-	protected int[] toArray(String commaDelimitedValue) {
+	public int[] toIntArray(String commaDelimitedValue) {
 
 		int[] intArray = null;
 
 		if ((commaDelimitedValue != null) && (commaDelimitedValue.length() > 0)) {
+
 			String[] stringArray = commaDelimitedValue.split(",");
 			intArray = new int[stringArray.length];
 
