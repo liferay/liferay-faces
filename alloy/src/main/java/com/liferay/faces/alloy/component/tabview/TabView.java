@@ -25,7 +25,6 @@ import javax.faces.component.behavior.Behavior;
 import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.context.FacesContext;
-import javax.faces.event.AbortProcessingException;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
 
@@ -68,11 +67,6 @@ public class TabView extends TabViewBase implements ClientBehaviorHolder {
 		}
 
 		super.addClientBehavior(eventName, clientBehavior);
-	}
-
-	@Override
-	public void broadcast(FacesEvent event) throws AbortProcessingException {
-		super.broadcast(event);
 	}
 
 	@Override
