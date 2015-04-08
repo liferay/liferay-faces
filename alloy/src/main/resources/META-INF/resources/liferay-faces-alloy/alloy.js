@@ -2,9 +2,9 @@ var LFA = {
 	escapeClientId: function(clientId) {
 		return clientId.replace(/:/g, '\\:');
 	}
-};
+},
 
-var LFAI = {
+LFAI = {
 
 	TOKEN_REGEX: new RegExp('\\{0\\}'),
 
@@ -27,8 +27,8 @@ var LFAI = {
 			fileTableBody.setHTML('');
 			fileTable.one('tfoot').setStyle('display', 'none');
 			A.each(fileList, function(curFile) {
-				var tableRow = '<tr id="' + curFile.id + '_row">';
-				tableRow += '<td class="yui3-datatable-cell">' + curFile.name + '</td>';
+				var tableRow = '<tr id="' + curFile.id + '_row">' +
+					'<td class="yui3-datatable-cell">' + curFile.name + '</td>';
 
 				if ((contentTypeArray.length === 0) || contentTypeArray.indexOf(curFile.type) >=
 					0) {
@@ -59,8 +59,8 @@ var LFAI = {
 		if (A.Uploader.TYPE !== 'none' && !A.UA.ios) {
 			var contentTypeArray = A.Array(contentTypes),
 				escapedClientId = LFA.escapeClientId(clientId),
-				escapedFormClientId = LFA
-				.escapeClientId(formClientId),
+				escapedFormClientId = LFA.escapeClientId(formClientId),
+				options = { execute : '@none', render : render},
 				uploadComplete = false;
 
 			A.Uploader.HTML5FILEFIELD_TEMPLATE =
@@ -96,13 +96,11 @@ var LFAI = {
 				}
 			});
 
-			var options = { execute : '@none', render : render };
-
 			if (namingContainerId) {
 				options['com.sun.faces.namingContainerId'] = namingContainerId;
 			}
 
-			clientComponent.on('uploadcomplete', function(event) {
+			clientComponent.on('uploadcomplete', function() {
 				jsf.ajax.request(clientId, 'valueChange', options);
 			});
 
@@ -111,7 +109,7 @@ var LFAI = {
 				tableRow.one('.percent-complete').set('text', event.percentLoaded + '%');
 			});
 
-			clientComponent.on('uploadstart', function(event) {
+			clientComponent.on('uploadstart', function() {
 				clientComponent.set('enabled', false);
 				A.one('#' + escapedClientId + '_uploadFilesButton').addClass('yui3-button-disabled').detach(
 					'click');
@@ -121,8 +119,7 @@ var LFAI = {
 
 				var fileList = event.fileList,
 					fileTable = A.one('#' + escapedClientId + '_table'),
-					fileTableBody = fileTable
-					.one('tbody'),
+					fileTableBody = fileTable.one('tbody'),
 					appendNewFiles = clientComponent.get('appendNewFiles');
 
 				if (!appendNewFiles) {
@@ -175,7 +172,7 @@ var LFAI = {
 	initAutoCompleteServerMode: function(autoComplete, hiddenClientId, clientId, namingContainerId) {
 
 		// When the autoComplete is cleared, set querying to false in order to cancel any queries that have been sent.
-		autoComplete.on('clear', function(event) {
+		autoComplete.on('clear', function() {
 			autoComplete.set('source', []);
 			autoComplete.set('querying', false);
 		});
@@ -183,10 +180,11 @@ var LFAI = {
 		// On query set querying to true, put the query in the hidden input, and send an ajax request to re-render the
 		// component.
 		autoComplete.on('query', function(event) {
-			autoComplete.set('querying', true);
-			document.getElementById(hiddenClientId).value = event.query;
 
 			var options = { render: clientId };
+
+			autoComplete.set('querying', true);
+			document.getElementById(hiddenClientId).value = event.query;
 
 			if (namingContainerId) {
 				options['com.sun.faces.namingContainerId'] = namingContainerId;
@@ -221,10 +219,10 @@ var LFAI = {
 
 		selectAllCheckbox.on('change', function() {
 
-			var checkboxes = dataTable.one('tbody').all('input[type=checkbox]');
+			var checkboxes = dataTable.one('tbody').all('input[type=checkbox]'),
+				rowIndexRange = null;
 
 			if (selectAllCheckbox.get('checked')) {
-				var rowIndexRange = null;
 				checkboxes.each(function(checkbox) {
 					var idParts = checkbox.get('id').split(':'),
 						rowIndex = idParts[idParts.length-1];
@@ -244,7 +242,6 @@ var LFAI = {
 				rowSelectRangeClientBehavior(rowIndexRange);
 			}
 			else {
-				var rowIndexRange = null;
 				checkboxes.each(function(checkbox) {
 					var idParts = checkbox.get('id').split(':'),
 						rowIndex = idParts[idParts.length-1];
@@ -370,18 +367,16 @@ var LFAI = {
 
 		var input = A.one('#' + escapedInputId);
 
-		input.on('change', function(){
+		input.on('change', function() {
 
-			var value = input.get('value');
+			var button = A.one(datePicker.get('trigger')),
+				calendar = datePicker.getCalendar(),
+				mask = datePicker.get('mask'),
+				dateParser = new A.DateParser(mask),
+				value = input.get('value'),
+				date = dateParser.parse(value);
 
 			if (value) {
-
-				var mask = datePicker.get('mask'),
-				dateParser = new A.DateParser(mask),
-				date = dateParser.parse(value),
-				button = A.one(datePicker.get('trigger')),
-				calendar = datePicker.getCalendar();
-
 				value = '';
 				calendar.deselectDates();
 
@@ -450,8 +445,8 @@ var LFAI = {
 		progressBar.startPolling = function() {
 
 			var hiddenInput = document.getElementById(hiddenClientId),
-			value = progressBar.get('value'),
-			max = progressBar.get('max');
+				value = progressBar.get('value'),
+				max = progressBar.get('max');
 
 			// If the component is rendered and the component is not already polling and the component has not reached
 			// the maximum value, then begin polling.
@@ -465,7 +460,7 @@ var LFAI = {
 
 						// Redefine hiddenInput and value because each time this function is run, current data
 						// needs to be used.
-						var hiddenInput = document.getElementById(hiddenClientId);
+						hiddenInput = document.getElementById(hiddenClientId);
 
 						// If the component is still rendered and hasn't completed polling, poll the server for
 						// the current progress.
