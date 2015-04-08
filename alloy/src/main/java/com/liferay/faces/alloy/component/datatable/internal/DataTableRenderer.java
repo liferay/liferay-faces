@@ -48,7 +48,6 @@ import com.liferay.faces.alloy.component.datatable.RowSelectEvent;
 import com.liferay.faces.alloy.component.datatable.RowSelectRangeEvent;
 import com.liferay.faces.alloy.component.outputtext.OutputText;
 import com.liferay.faces.util.helper.BooleanHelper;
-import com.liferay.faces.util.helper.IntegerHelper;
 import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
@@ -98,7 +97,9 @@ public class DataTableRenderer extends DataTableRendererBase {
 		DataTableInfo dataTableInfo = new DataTableInfo(dataTable);
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-		if (dataTableInfo.getTotalColumns() == 0) {
+		int totalRenderedColumns = dataTableInfo.getTotalRenderedColumns();
+
+		if (totalRenderedColumns == 0) {
 			responseWriter.startElement("tbody", dataTable);
 			responseWriter.endElement("tbody");
 		}
@@ -108,7 +109,7 @@ public class DataTableRenderer extends DataTableRendererBase {
 			int rowIndex = dataTable.getFirst() - 1;
 			int totalRowsEncoded = 0;
 
-			int[] bodyRows = getBodyRows(dataTable);
+			int[] bodyRows = dataTable.toIntArray(dataTable.getBodyrows());
 
 			boolean wroteTBody = false;
 
@@ -119,10 +120,14 @@ public class DataTableRenderer extends DataTableRendererBase {
 
 			if (rows > 0) {
 
+				ItemCycler rowClasses = new ItemCycler(dataTable.getRowClasses());
+				ItemCycler columnClasses = new ItemCycler(dataTable.getColumnClasses());
+
 				while (totalRowsEncoded < rows) {
 
 					rowIndex++;
 					dataTable.setRowIndex(rowIndex);
+					columnClasses.reset();
 
 					// If there is data in the model for the current row index, then encode the row.
 					if (dataTable.isRowAvailable()) {
@@ -131,7 +136,6 @@ public class DataTableRenderer extends DataTableRendererBase {
 
 							for (int bodyRow : bodyRows) {
 
-								// TODO: MIGHT NEED TO BE rowIndex - 1; -- NEED TO TEST!
 								if (bodyRow == rowIndex) {
 
 									if (wroteTBody) {
@@ -146,7 +150,7 @@ public class DataTableRenderer extends DataTableRendererBase {
 							}
 						}
 
-						encodeRow(facesContext, responseWriter, dataTable);
+						encodeRow(facesContext, responseWriter, dataTable, rowIndex, rowClasses, columnClasses);
 
 						totalRowsEncoded++;
 					}
@@ -157,6 +161,17 @@ public class DataTableRenderer extends DataTableRendererBase {
 						break;
 					}
 				}
+			}
+
+			if (totalRowsEncoded == 0) {
+
+				String selectionMode = dataTable.getSelectionMode();
+
+				if ("checkbox".equals(selectionMode)) {
+					totalRenderedColumns += 1;
+				}
+
+				encodeEmptyTableRow(responseWriter, dataTable, totalRenderedColumns);
 			}
 
 			responseWriter.endElement("tbody");
@@ -425,6 +440,19 @@ public class DataTableRenderer extends DataTableRendererBase {
 		}
 	}
 
+	protected void encodeEmptyTableRow(ResponseWriter responseWriter, DataTable dataTable, int totalColumns)
+		throws IOException {
+
+		responseWriter.startElement("tr", dataTable);
+
+		for (int i = 0; i < totalColumns; i++) {
+			responseWriter.startElement("td", dataTable);
+			responseWriter.endElement("td");
+		}
+
+		responseWriter.endElement("tr");
+	}
+
 	protected void encodeFooter(FacesContext facesContext, ResponseWriter responseWriter, DataTable dataTable,
 		DataTableInfo dataTableInfo) throws IOException {
 
@@ -447,32 +475,36 @@ public class DataTableRenderer extends DataTableRendererBase {
 				if (child instanceof HtmlColumn) {
 
 					HtmlColumn htmlColumn = (HtmlColumn) child;
-					responseWriter.startElement("td", null);
 
-					String columnFooterClass = htmlColumn.getFooterClass();
+					if (htmlColumn.isRendered()) {
 
-					if (columnFooterClass != null) {
-						responseWriter.writeAttribute("class", columnFooterClass, "columnFooterClass");
+						responseWriter.startElement("td", null);
+
+						String columnFooterClass = htmlColumn.getFooterClass();
+
+						if (columnFooterClass != null) {
+							responseWriter.writeAttribute("class", columnFooterClass, "columnFooterClass");
+						}
+						else if (footerClass != null) {
+							responseWriter.writeAttribute("class", footerClass, "footerClass");
+						}
+
+						UIComponent columnFooterFacet = htmlColumn.getFacet("footer");
+
+						if (columnFooterFacet != null) {
+							encodeRecurse(facesContext, columnFooterFacet);
+						}
+
+						responseWriter.endElement("td");
 					}
-					else if (footerClass != null) {
-						responseWriter.writeAttribute("class", footerClass, "footerClass");
-					}
-
-					UIComponent columnFooterFacet = htmlColumn.getFacet("footer");
-
-					if (columnFooterFacet != null) {
-						encodeRecurse(facesContext, columnFooterFacet);
-					}
-
-					responseWriter.endElement("td");
 				}
 			}
 
 			responseWriter.endElement("tr");
 		}
 
-		int totalColumns = dataTableInfo.getTotalColumns();
-		int colspan = totalColumns;
+		int totalRenderedColumns = dataTableInfo.getTotalRenderedColumns();
+		int colspan = totalRenderedColumns;
 		String selectionMode = dataTable.getSelectionMode();
 
 		if ("checkbox".equals(selectionMode) || "radio".equals(selectionMode)) {
@@ -491,7 +523,7 @@ public class DataTableRenderer extends DataTableRendererBase {
 				responseWriter.writeAttribute("class", footerClass.concat(" facet"), "footerClass");
 			}
 
-			if (totalColumns > 1) {
+			if (totalRenderedColumns > 1) {
 				responseWriter.writeAttribute("colspan", colspan, null);
 			}
 
@@ -515,8 +547,8 @@ public class DataTableRenderer extends DataTableRendererBase {
 			responseWriter.writeAttribute("class", "table-columns", null);
 		}
 
-		int totalColumns = dataTableInfo.getTotalColumns();
-		int colspan = totalColumns;
+		int totalRenderedColumns = dataTableInfo.getTotalRenderedColumns();
+		int colspan = totalRenderedColumns;
 		String selectionMode = dataTable.getSelectionMode();
 
 		if ("checkbox".equals(selectionMode) || "radio".equals(selectionMode)) {
@@ -537,7 +569,7 @@ public class DataTableRenderer extends DataTableRendererBase {
 				responseWriter.writeAttribute("class", headerClass.concat(" facet"), "headerClass");
 			}
 
-			if (totalColumns > 1) {
+			if (totalRenderedColumns > 1) {
 				responseWriter.writeAttribute("colspan", colspan, null);
 			}
 
@@ -581,70 +613,74 @@ public class DataTableRenderer extends DataTableRendererBase {
 
 				if (child instanceof UIColumn) {
 
-					responseWriter.startElement("th", null);
+					UIColumn uiColumn = (UIColumn) child;
 
-					if (child instanceof HtmlColumn) {
+					if (uiColumn.isRendered()) {
+						responseWriter.startElement("th", null);
 
-						HtmlColumn htmlColumn = (HtmlColumn) child;
-						String columnHeaderClass = htmlColumn.getHeaderClass();
+						if (child instanceof HtmlColumn) {
 
-						String sortClass = null;
-						Column alloyColumn = null;
+							HtmlColumn htmlColumn = (HtmlColumn) child;
+							String columnHeaderClass = htmlColumn.getHeaderClass();
 
-						if (child instanceof Column) {
+							String sortClass = null;
+							Column alloyColumn = null;
 
-							alloyColumn = (Column) htmlColumn;
+							if (child instanceof Column) {
 
-							String sortOrder = alloyColumn.getSortOrder();
+								alloyColumn = (Column) htmlColumn;
 
-							if ("ASCENDING".equals(sortOrder)) {
-								sortClass = " table-sortable-column table-sorted";
-							}
-							else if ("DESCENDING".equals(sortOrder)) {
-								sortClass = " table-sortable-column table-sorted table-sorted-desc";
-							}
-						}
+								String sortOrder = alloyColumn.getSortOrder();
 
-						if (columnHeaderClass != null) {
-
-							if (sortClass != null) {
-								columnHeaderClass = columnHeaderClass.concat(sortClass);
+								if ("ASCENDING".equals(sortOrder)) {
+									sortClass = " table-sortable-column table-sorted";
+								}
+								else if ("DESCENDING".equals(sortOrder)) {
+									sortClass = " table-sortable-column table-sorted table-sorted-desc";
+								}
 							}
 
-							responseWriter.writeAttribute("class", columnHeaderClass, "columnHeaderClass");
-						}
-						else if (headerClass != null) {
+							if (columnHeaderClass != null) {
 
-							if (sortClass != null) {
-								headerClass = headerClass.concat(sortClass);
+								if (sortClass != null) {
+									columnHeaderClass = columnHeaderClass.concat(sortClass);
+								}
+
+								responseWriter.writeAttribute("class", columnHeaderClass, "columnHeaderClass");
+							}
+							else if (headerClass != null) {
+
+								if (sortClass != null) {
+									headerClass = headerClass.concat(sortClass);
+								}
+
+								responseWriter.writeAttribute("class", headerClass, "headerClass");
+							}
+							else if (sortClass != null) {
+								responseWriter.writeAttribute("class", sortClass, null);
 							}
 
-							responseWriter.writeAttribute("class", headerClass, "headerClass");
-						}
-						else if (sortClass != null) {
-							responseWriter.writeAttribute("class", sortClass, null);
-						}
+							responseWriter.writeAttribute("scope", "col", null);
 
-						responseWriter.writeAttribute("scope", "col", null);
+							if (alloyColumn != null) {
 
-						if (alloyColumn != null) {
+								String headerText = alloyColumn.getHeaderText();
 
-							String headerText = alloyColumn.getHeaderText();
+								if (headerText != null) {
+									encodeHeaderText(facesContext, responseWriter, dataTable, alloyColumn, headerText,
+										namingContainerId);
+								}
+							}
 
-							if (headerText != null) {
-								encodeHeaderText(facesContext, responseWriter, dataTable, alloyColumn, headerText,
-									namingContainerId);
+							UIComponent columnHeaderFacet = htmlColumn.getFacet("header");
+
+							if (columnHeaderFacet != null) {
+								encodeRecurse(facesContext, columnHeaderFacet);
 							}
 						}
 
-						UIComponent columnHeaderFacet = htmlColumn.getFacet("header");
-
-						if (columnHeaderFacet != null) {
-							encodeRecurse(facesContext, columnHeaderFacet);
-						}
+						responseWriter.endElement("th");
 					}
-
-					responseWriter.endElement("th");
 				}
 			}
 
@@ -747,12 +783,16 @@ public class DataTableRenderer extends DataTableRendererBase {
 		}
 	}
 
-	protected void encodeRow(FacesContext facesContext, ResponseWriter responseWriter, DataTable dataTable)
-		throws IOException {
+	protected void encodeRow(FacesContext facesContext, ResponseWriter responseWriter, DataTable dataTable,
+		int rowIndex, ItemCycler rowClasses, ItemCycler columnClasses) throws IOException {
 
 		responseWriter.startElement("tr", dataTable);
 
-		// TODO: Render the class attribute for this table row according to rowClasses attribute
+		String rowClass = rowClasses.getNextItem();
+
+		if (rowClass != null) {
+			responseWriter.writeAttribute("class", rowClass, "rowClasses");
+		}
 
 		String selectionMode = dataTable.getSelectionMode();
 
@@ -766,9 +806,9 @@ public class DataTableRenderer extends DataTableRendererBase {
 				selectedRowIndexSet = new HashSet<String>(Arrays.asList(selectedRowIndexArray));
 			}
 
-			String rowIndex = Integer.toString(dataTable.getRowIndex());
+			String rowIndexAsString = Integer.toString(rowIndex);
 
-			if (selectedRowIndexSet.contains(rowIndex)) {
+			if (selectedRowIndexSet.contains(rowIndexAsString)) {
 				responseWriter.writeAttribute("class", "info", null);
 			}
 
@@ -779,7 +819,7 @@ public class DataTableRenderer extends DataTableRendererBase {
 			responseWriter.writeAttribute("id", checkboxClientId, null);
 			responseWriter.writeAttribute("type", selectionMode, null);
 
-			if (selectedRowIndexSet.contains(rowIndex)) {
+			if (selectedRowIndexSet.contains(rowIndexAsString)) {
 				responseWriter.writeAttribute("checked", "checked", null);
 			}
 
@@ -795,26 +835,34 @@ public class DataTableRenderer extends DataTableRendererBase {
 
 				HtmlColumn htmlColumn = (HtmlColumn) child;
 
-				if (htmlColumn.isRowHeader()) {
-					responseWriter.startElement("th", htmlColumn);
-					responseWriter.writeAttribute("scope", "row", null);
-				}
-				else {
-					responseWriter.startElement("td", htmlColumn);
-				}
+				if (htmlColumn.isRendered()) {
 
-				// TODO: Render the class attribute for this table cell according to the columnClasses attribute
-				List<UIComponent> htmlColumnChildren = htmlColumn.getChildren();
+					if (htmlColumn.isRowHeader()) {
+						responseWriter.startElement("th", htmlColumn);
+						responseWriter.writeAttribute("scope", "row", null);
+					}
+					else {
+						responseWriter.startElement("td", htmlColumn);
+					}
 
-				for (UIComponent htmlColumnChild : htmlColumnChildren) {
-					encodeRecurse(facesContext, htmlColumnChild);
-				}
+					String columnClass = columnClasses.getNextItem();
 
-				if (htmlColumn.isRowHeader()) {
-					responseWriter.endElement("th");
-				}
-				else {
-					responseWriter.endElement("td");
+					if (columnClass != null) {
+						responseWriter.writeAttribute("class", columnClass, "columnClasses");
+					}
+
+					List<UIComponent> htmlColumnChildren = htmlColumn.getChildren();
+
+					for (UIComponent htmlColumnChild : htmlColumnChildren) {
+						encodeRecurse(facesContext, htmlColumnChild);
+					}
+
+					if (htmlColumn.isRowHeader()) {
+						responseWriter.endElement("th");
+					}
+					else {
+						responseWriter.endElement("td");
+					}
 				}
 			}
 		}
@@ -847,23 +895,6 @@ public class DataTableRenderer extends DataTableRendererBase {
 		}
 
 		return columnFieldName;
-	}
-
-	protected int[] getBodyRows(DataTable dataTable) {
-
-		int[] bodyRows = null;
-
-		if (dataTable.getBodyrows() != null) {
-
-			String[] bodyRowList = dataTable.getBodyrows().split(",");
-			bodyRows = new int[bodyRowList.length];
-
-			for (int i = 0; i < bodyRowList.length; i++) {
-				bodyRows[i] = IntegerHelper.toInteger(bodyRowList[i]);
-			}
-		}
-
-		return bodyRows;
 	}
 
 	protected String getColumnClientBehaviorScript(FacesContext facesContext, DataTable dataTable, Column column,
