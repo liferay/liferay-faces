@@ -79,7 +79,7 @@ public class TesterBase {
 		
 	// elements for switching to edit mode in liferay
 	private static final String menuButtonXpath = "//*[contains(text(),'Options')]/..";
-	private static final String menuPreferencesXpath = "//img[contains(@src,'/edit.png')]";
+	private static final String menuPreferencesXpath = "//a[contains(@href,'p_p_mode=edit')]";
 	
 	@FindBy(xpath = menuButtonXpath)
 	private WebElement menuButton;
@@ -158,7 +158,7 @@ public class TesterBase {
 			logger.log(Level.INFO, "menuPreferences is already displayed ... why is that? ");
 		} else {
 			menuButton.click();
-		}
+			}
 		logger.log(Level.INFO, "menuPreferences.click() ... ");
 		if (menuPreferences.isDisplayed()) {
 			menuPreferences.click();

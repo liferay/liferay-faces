@@ -176,7 +176,7 @@ public class Jsf2PortletTest extends TesterBase {
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
 	
-	protected int dateValidationXpathModifier = 2;
+	protected int dateValidationXpathModifier = 1;
 	
 	@Drone
 	WebDriver browser;
@@ -569,8 +569,8 @@ public class Jsf2PortletTest extends TesterBase {
 
 		String testing123 = "testing 1, 2, 3";
 		int tags = 0;
-		int tagsWhileHidden = 2;
-		int tagsWhileShowing = 3;
+		int tagsWhileHidden = 1;
+		int tagsWhileShowing = 2;
 
 		showCommentsLink.click();
 		Thread.sleep(500);

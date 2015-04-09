@@ -569,8 +569,8 @@ public class Primefaces4PortletTest extends TesterBase {
 
 		String testing123 = "testing 1, 2, 3";
 		int tags = 0;
-		int tagsWhileHidden = 2;
-		int tagsWhileShowing = 3;
+		int tagsWhileHidden = 1;
+		int tagsWhileShowing = 2;
 
 		showCommentsLink.click();
 		Thread.sleep(500);
