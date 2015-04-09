@@ -5,11 +5,6 @@
 	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 
 	<name>LiferayFacesAlloy</name>
-	<ordering>
-		<after>
-			<name>LiferayFacesUtil</name>
-		</after>
-	</ordering>
 	<application>
 		<system-event-listener>
 			<system-event-listener-class>com.liferay.faces.alloy.component.inputfile.internal.InputFileRenderer</system-event-listener-class>

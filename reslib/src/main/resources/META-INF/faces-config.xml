@@ -3,11 +3,6 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
 	<name>LiferayFacesResLib</name>
-	<ordering>
-		<after>
-			<name>LiferayFacesUtil</name>
-		</after>
-	</ordering>
 	<application>
 		<resource-handler>com.liferay.faces.reslib.application.internal.ResLibResourceHandler</resource-handler>
 	</application>
