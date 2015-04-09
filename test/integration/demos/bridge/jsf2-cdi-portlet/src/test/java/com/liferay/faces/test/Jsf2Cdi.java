@@ -168,6 +168,6 @@ public class Jsf2Cdi extends TesterBase {
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
 	
-	protected int dateValidationXpathModifier = 2;
+	protected int dateValidationXpathModifier = 1;
 
 }
