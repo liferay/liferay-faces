@@ -33,8 +33,6 @@ public class ClientScriptFactoryImpl extends ClientScriptFactory {
 	// Private Constants
 	private static final boolean LIFERAY_PORTAL_DETECTED = ProductMap.getInstance().get(ProductConstants.LIFERAY_PORTAL)
 		.isDetected();
-	private static final boolean ICEFACES_DETECTED = ProductMap.getInstance().get(ProductConstants.ICEFACES)
-		.isDetected();
 
 	@Override
 	public ClientScript getClientScript() throws FacesException {
@@ -46,10 +44,7 @@ public class ClientScriptFactoryImpl extends ClientScriptFactory {
 
 		if (clientScript == null) {
 
-			if (ICEFACES_DETECTED) {
-				clientScript = new ClientScriptICEfacesImpl();
-			}
-			else if (LIFERAY_PORTAL_DETECTED) {
+			if (LIFERAY_PORTAL_DETECTED) {
 				clientScript = new ClientScriptLiferayImpl();
 			}
 			else {
