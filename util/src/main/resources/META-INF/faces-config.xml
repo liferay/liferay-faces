@@ -4,15 +4,8 @@
 	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 	<name>LiferayFacesUtil</name>
 	<ordering>
-		<!-- Ordering must be "after" ICEfacesCore because com.liferay.faces.util.context.PartialViewContexCleanupImpl -->
-		<!-- needs to be able to wrap org.icefaces.impl.context.DOMPartialViewContext. -->
-		<after>
-			<name>ICEfacesCore</name>
-		</after>
-		<!-- Ordering must be "before" richfaces_core because org.richfaces.context.ExtendedPartialViewContextImpl  -->
-		<!-- needs to be able to wrap com.liferay.faces.util.context.PartialViewContextFactoryScriptImpl. -->
 		<before>
-			<name>richfaces_core</name>
+			<others/>
 		</before>
 	</ordering>
 	<application>
