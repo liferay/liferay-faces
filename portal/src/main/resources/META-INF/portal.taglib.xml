@@ -120,6 +120,35 @@
 	</tag>
 	<tag>
 		<description><![CDATA[TODO.]]></description>
+		<tag-name>captcha</tag-name>
+		<component>
+			<component-type>com.liferay.faces.portal.component.captcha.Captcha</component-type>
+			<renderer-type>com.liferay.faces.portal.component.captcha.internal.CaptchaRenderer</renderer-type>
+		</component>
+		<attribute>
+			<description><![CDATA[HTML passthrough attribute specifying the css style of the element.]]></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
+			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[TODO.]]></description>
+			<name>url</name>
+			<required>false</required>
+			<type>String</type>
+		</attribute>
+		<tag-extension>
+			<vdldoc:since>4.2.0</vdldoc:since>
+		</tag-extension>
+	</tag>
+	<tag>
+		<description><![CDATA[TODO.]]></description>
 		<tag-name>header</tag-name>
 		<component>
 			<component-type>com.liferay.faces.portal.component.header.Header</component-type>
