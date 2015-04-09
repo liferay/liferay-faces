@@ -118,12 +118,12 @@ public class DataTableRenderer extends DataTableRendererBase {
 				wroteTBody = true;
 			}
 
-			if (rows > 0) {
+			if (rows >= 0) {
 
 				ItemCycler rowClasses = new ItemCycler(dataTable.getRowClasses());
 				ItemCycler columnClasses = new ItemCycler(dataTable.getColumnClasses());
 
-				while (totalRowsEncoded < rows) {
+				while ((totalRowsEncoded < rows) || (rows == 0)) {
 
 					rowIndex++;
 					dataTable.setRowIndex(rowIndex);
