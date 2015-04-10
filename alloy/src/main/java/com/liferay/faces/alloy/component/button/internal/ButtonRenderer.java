@@ -14,6 +14,7 @@
 package com.liferay.faces.alloy.component.button.internal;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -96,6 +97,17 @@ public class ButtonRenderer extends ButtonRendererBase {
 		else {
 
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
+
+			// Before rendering the button we will get the markup for <script/> if any,
+			// as sometimes the JSF runtime has to render the tag for getting needed resources
+			StringWriter bufferedMarkupWriter = new StringWriter();
+			ResponseWriter stringResponseWriter = facesContext.getRenderKit().createResponseWriter(bufferedMarkupWriter,
+					null, StringPool.UTF8);
+
+			ScriptResponseWriter scriptResponseWriter = new ScriptResponseWriter(stringResponseWriter);
+			super.encodeBegin(facesContext, uiComponent, scriptResponseWriter);
+
+			responseWriter.write(bufferedMarkupWriter.toString());
 
 			// It is not possible for the ButtonResponseWriter to intercept writing of the input element that is
 			// rendered by the JSF runtime, because endElement("input") may be called in either encodeBegin() or
