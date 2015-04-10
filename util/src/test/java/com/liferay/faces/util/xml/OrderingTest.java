@@ -1119,7 +1119,7 @@ public class OrderingTest {
 		
 		facesConfigDescriptors = Ordering.getOrder(facesConfigDescriptors);
 
-		// a solution:
+		// some solutions:
 		// [f, e, d, b, a, c]
 		// [f, e, d, b, c, a]
 		// [a, b, f, e, d, c]
@@ -1145,6 +1145,67 @@ public class OrderingTest {
 		Assert.assertTrue(message, assertion);
 		logger.info("test19_FbeforeD_EbeforeDafterOthers_DbeforeCafterE_BbeforeC: Passed" + message);
 
+	}
+	
+	@Test
+	public void test20_beforeCafterOthers_BbeforeC_DafterOthers_startWith_BCDEF() throws Exception {
+
+		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
+		parseConfigurationResources("ordering/_beforeCafterOthers_BbeforeC_DafterOthers_startWithABCDEF",
+			facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
+
+		String[] originalOrder = Ordering.extractNames(facesConfigDescriptors);
+		facesConfigDescriptors = Ordering.getOrder(facesConfigDescriptors);
+
+		// some solutions:
+		// [B, E, F, , C, D]
+		// [B, E, F, D, , C]
+
+		String[] orderedNames = Ordering.extractNames(facesConfigDescriptors);
+
+		List<String> original = Arrays.asList(originalOrder);
+		List<String> actually = Arrays.asList(orderedNames);
+		
+		List<String> possibility1 = Arrays.asList("b", "e", "f", "", "c", "d");
+		List<String> possibility2 = Arrays.asList("b", "e", "f", "d", "", "c");
+
+		boolean assertion = (actually.equals(possibility1) 
+				|| actually.equals(possibility2)
+			);
+		String message = "\n original: " + original + "\n expected: " + possibility1 +
+			"\n       or: " + possibility2 +
+			"\n actually: " + actually + "\n";
+		Assert.assertTrue(message, assertion);
+		logger.info("test20_beforeCafterOthers_BbeforeC_DafterOthers_startWith_BCDEF: Passed" + message);
+
+	}
+	
+	@Test
+	public void test21_AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_startingWithABCDEF() throws Exception {
+		// AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_startingWithABCDEF
+		
+		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
+		parseConfigurationResources("ordering/AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_startingWithABCDEF",
+			facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
+		
+		String[] originalOrder = Ordering.extractNames(facesConfigDescriptors);
+		facesConfigDescriptors = Ordering.getOrder(facesConfigDescriptors);
+
+		// some solutions:
+		// [B, C, E, F, A, D]
+
+		String[] orderedNames = Ordering.extractNames(facesConfigDescriptors);
+
+		List<String> original = Arrays.asList(originalOrder);
+		List<String> actually = Arrays.asList(orderedNames);
+		
+		List<String> possibility1 = Arrays.asList("b", "c", "e", "f", "a", "d");
+
+		boolean assertion = (actually.equals(possibility1));
+		String message = "\n original: " + original + "\n expected: " + possibility1 +
+			"\n actually: " + actually + "\n";
+		Assert.assertTrue(message, assertion);
+		logger.info("test21_AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_startingWithABCDEF: Passed" + message);
 	}
 
 }
