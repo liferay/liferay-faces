@@ -37,6 +37,9 @@ public class CommandBackingBean {
 
 	private static final Logger logger = LoggerFactory.getLogger(CommandBackingBean.class);
 
+	// Private Data Members
+	private boolean ajax;
+
 	// Injections
 	@ManagedProperty(value = "#{commandModelBean}")
 	private CommandModelBean commandModelBean;
@@ -60,7 +63,15 @@ public class CommandBackingBean {
 		commandModelBean.setSelectedCustomer(customer);
 	}
 
+	public void setAjax(boolean ajax) {
+		this.ajax = ajax;
+	}
+
 	public void setCommandModelBean(CommandModelBean commandModelBean) {
 		this.commandModelBean = commandModelBean;
+	}
+
+	public boolean isAjax() {
+		return ajax;
 	}
 }
