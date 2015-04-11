@@ -22,7 +22,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.liferay.faces.util.logging.Logger;
@@ -67,7 +66,6 @@ public class Ordering {
 		if (groups[0] != null) {
 
 			if (containsOthers(groups[0])) {
-//              System.err.println("appendAndSort: retaining OTHERS ...");
 				map.put(OTHERS, 1);
 			}
 		}
@@ -88,18 +86,12 @@ public class Ordering {
 		return orderedNames;
 	}
 
-	// TODO check
 	public static void checkForSpecExceptions(List<FacesConfigDescriptor> configs) throws Exception {
-
-//      String[] names = Ordering.extractNames(configs);
-//      System.err.println("checkForSpecExceptions: names = " + Arrays.asList(names).toString());
 
 		for (FacesConfigDescriptor config : configs) {
 
 			// Check for "duplicate name exception"
 			checkForBothBeforeAndAfter(config);
-
-//			System.err.println("mapRoutes: =========================== ");
 			
 			// map the routes along both paths, checking for "circular references" along each path
 			for (int route : paths) {
@@ -194,13 +186,19 @@ public class Ordering {
 
 		return extractedNames;
 	}
+	
+	public static LinkedList<String> extractNamesList(FacesConfigDescriptor[] configs) {
+    	LinkedList<String> names = new LinkedList<String>();
+    	for (FacesConfigDescriptor config : configs) {
+    		names.add(config.getName());
+    	}
+    	return names;
+    }
 
-	// TODO check
 	public static void mapRoutes(FacesConfigDescriptor config, int route, List<FacesConfigDescriptor> facesConfigs)
 			throws Exception {
 		
 		String name = config.getName();
-//		System.err.println("mapRoutes: name: " + name + " path: " + route);
 		Ordering ordering = config.getOrdering();
 		String[][] theseNames = ordering.getRoutes();
 		
@@ -212,20 +210,16 @@ public class Ordering {
 						Ordering otherOrdering = otherConfig.getOrdering();
 						String[][] otherRoutes = otherConfig.getOrdering().getRoutes();
 						String[] otherNames = otherRoutes[route];
-//						System.err.println("mapRoutes: circular ?= " + Arrays.asList(otherNames));
 						if (Arrays.binarySearch(otherNames, name) >= 0) {
 							throwExceptionForCircularDependency(route, facesConfigs);
 						}
 						
 						// I'm before/after them, so they should know that they are after/before me, respectively.
-//						System.err.println("mapRoutes: checking (" + thisName + ") otherRoutes[path ^ 1] for name = " + Arrays.asList(otherRoutes[route ^ 1]));
 						if (Arrays.binarySearch(otherRoutes[route ^ 1], name) < 0) {
 							String[][] routes = new String[WAYS][];
 							routes[route] = otherRoutes[route];
 							routes[route ^ 1] = appendAndSort(otherRoutes[route ^ 1], new String[] { name } );
 							otherOrdering.setRoutes(routes);
-//							System.err.println("mapRoutes: otherConfig was: " + Arrays.asList(otherRoutes[BEFORE]) + " " + thisName + " " + Arrays.asList(otherRoutes[AFTER]));
-//							System.err.println("mapRoutes: otherConfig now: " + Arrays.asList(routes[BEFORE]) + " " + thisName + " " + Arrays.asList(routes[AFTER]));
 						}
 						
 						// I'm before/after them, and they are before/after others, so i should know that I am before/after those others, respectively
@@ -234,8 +228,6 @@ public class Ordering {
 							routes[route] = appendAndSort(theseNames[route], otherNames);
 							routes[route ^ 1] = theseNames[route ^ 1];
 							ordering.setRoutes(routes);
-//							System.err.println("mapRoutes: config was: " + Arrays.asList(theseNames[BEFORE]) + " " + name + " " + Arrays.asList(theseNames[AFTER]));
-//							System.err.println("mapRoutes: config now: " + Arrays.asList(routes[BEFORE]) + " " + name + " " + Arrays.asList(routes[AFTER]));
 						}
 					}
 				}
@@ -307,9 +299,9 @@ public class Ordering {
 	}
 
 	// getOrder when no absolute order is specified
-	public static List<FacesConfigDescriptor> getOrder(List<FacesConfigDescriptor> configs) throws Exception {
+	public static List<FacesConfigDescriptor> getOrder(List<FacesConfigDescriptor> configList) throws Exception {
 
-//      for (FacesConfigDescriptor config : configs) {
+//      for (FacesConfigDescriptor config : configList) {
 //          String name = config.getName();
 //          Ordering ordering = config.getOrdering();
 //
@@ -330,9 +322,9 @@ public class Ordering {
 //      }
 
 		// Check for "duplicate name exception" and "circular references" as described in 11.4.8 Ordering of Artifacts
-		checkForSpecExceptions(configs);
+		checkForSpecExceptions(configList);
 
-//      for (FacesConfigDescriptor config : configs) {
+//      for (FacesConfigDescriptor config : configList) {
 //          String name = config.getName();
 //          Ordering ordering = config.getOrdering();
 //
@@ -351,9 +343,6 @@ public class Ordering {
 //              }
 //          }
 //      }
-
-		String[] extractedNames = extractNames(configs);
-//		System.err.println("getOrder: before preSort:  extractedNames = " + Arrays.asList(extractedNames).toString());
 		
 		// Sort the documents such that specified ordering will be considered.
 		//
@@ -363,15 +352,66 @@ public class Ordering {
 		// This preSort method puts all of the documents with specified ordering as early on in the
 		// list of documents as possible for to consider it quickly, and be 
 		// able to use its ordering algorithm to the best of its ability to achieve the specified ordering.
-		configs = preSort(configs);
+		configList = preSort(configList);
 
-		extractedNames = extractNames(configs);
-//		System.err.println("getOrder: after preSort:  extractedNames = " + Arrays.asList(extractedNames).toString());
+		FacesConfigDescriptor[] configs = configList.toArray(new FacesConfigDescriptor[configList.size()]);
+
+		// innerSort
+        innerSort(configs);
+        
+        // final sort
+        for (int i = 0; i < configs.length; i++) {
+        	LinkedList<String> ids = extractNamesList(configs);
+        	if (done(configs, ids)) {
+        		break;
+        	}
+        }
+
+		List<FacesConfigDescriptor> orderedList = new ArrayList<FacesConfigDescriptor>(Arrays.asList(configs));
+
+		return orderedList;
+	}
+	
+	// Check to see if the sort is complete, and if not, finish it, if possible.
+    public static boolean done(FacesConfigDescriptor[] configs, LinkedList<String> names) {
+    	
+    	for (int i = 0; i < configs.length; i++) {
+    		int ii = 0;
+    		for(String configName : names) {
+    			if (configs[i].getName().equals(configName)) {
+    				break;
+    			}
+    			if (configs[i].getOrdering().isBefore(configName)) {
+    				
+    				// we have a document that is out of order, and his index is ii, he belongs at index i, and all the documents in between need to be shifted left.
+    				FacesConfigDescriptor temp = null;
+    				for (int j = 0; j < configs.length; j++) {
+    					// This is one that is out of order and needs to be moved.
+    					if (j==ii) {
+    						temp = configs[j];
+    					}
+    					// this is one in between that needs to be shifted left.
+    					if (temp != null && j != i) {
+    						configs[j] = configs[j+1];
+    					}
+    					// this is where the one that is out of order needs to be moved to.
+    					if (j==i) {
+    						configs[j] = temp;
+    						return false;
+    					}
+    				}
+    			}
+    			ii = ii + 1;
+    		}
+    	}
+
+    	return true;
+    }
+	
+	public static int innerSort(FacesConfigDescriptor[] configs) throws Exception {
 		
-		HashMap<String, FacesConfigDescriptor> configMap = getConfigHashMap(configs);
-
-		boolean attempting = true;
 		int attempts = 0;
+		boolean attempting = true;
 
 		while (attempting) {
 
@@ -383,9 +423,9 @@ public class Ordering {
 				attempting = false;
 			}
 
-			int last = extractedNames.length - 1;
+			int last = configs.length - 1;
 
-			for (int i = 0; i < extractedNames.length; i++) {
+			for (int i = 0; i < configs.length; i++) {
 				int first = i;
 				int second = first + 1;
 
@@ -394,43 +434,27 @@ public class Ordering {
 					first = 0;
 				}
 
-				String firstName = extractedNames[first];
-				String secondName = extractedNames[second];
-
-				FacesConfigDescriptor firstConfig = configMap.get(firstName);
-				FacesConfigDescriptor secondConfig = configMap.get(secondName);
-
-				if (disordered(firstConfig, secondConfig)) {
-					String[] thisStringArray = { firstName, secondName };
-					Arrays.sort(thisStringArray);
-					extractedNames[first] = secondName;
-					extractedNames[second] = firstName;
+				if (disordered(configs[first], configs[second])) {
+					FacesConfigDescriptor temp = configs[first];
+					configs[first] = configs[second];
+					configs[second] = temp;
 					attempting = true;
 				}
 			}
 
-//			logger.info("getOrder: during:  extractedNames = " + Arrays.asList(extractedNames).toString());
 			attempts++;
 		}
 
-		logger.warn("getOrder: " + attempts + "/" + LIMIT);
-
-		List<FacesConfigDescriptor> orderedList = new ArrayList<FacesConfigDescriptor>();
-
-//		logger.info("getOrder: after:  extractedNames = " + Arrays.asList(extractedNames).toString());
-		for (String name : extractedNames) {
-			FacesConfigDescriptor facesConfigDescriptor = configMap.get(name);
-			orderedList.add(facesConfigDescriptor);
-		}
-
-		return orderedList;
+		logger.warn("innerSort: " + attempts + "/" + LIMIT);
+		
+		return attempts;
 	}
 	
 	public static List<FacesConfigDescriptor> preSort(List<FacesConfigDescriptor> configs) {
 
 		List<FacesConfigDescriptor> newConfigList = new ArrayList<FacesConfigDescriptor>();
 		
-		List<FacesConfigDescriptor> unnamedList = new ArrayList<FacesConfigDescriptor>();
+		List<FacesConfigDescriptor> anonAndUnordered = new LinkedList<FacesConfigDescriptor>();
 		Map<String, Integer> namedMap = new LinkedHashMap<String, Integer>();
 
 		for (FacesConfigDescriptor config : configs) {
@@ -439,8 +463,8 @@ public class Ordering {
 			String[] afs = (config.getOrdering().getRoutes())[AFTER];
 			int knowledge = bfs.length + afs.length;
 
-			if (config.getName() == null || "".equals(config.getName())) {
-				unnamedList.add(config);
+			if ( (config.getName() == null || "".equals(config.getName())) && (!config.getOrdering().isOrdered()) ) {
+				anonAndUnordered.add(config);
 			} else {
 				namedMap.put(config.getName(), knowledge);
 			}
@@ -455,8 +479,8 @@ public class Ordering {
 			String key = entry.getKey();
 			newConfigList.add(configHashMap.get(key));            
 		}
-        // add unammed configs, if any, to the list in their original, incoming order
-		for (FacesConfigDescriptor config : unnamedList) {
+        // add configs that are both anonymous and unordered, to the list in their original, incoming order
+		for (FacesConfigDescriptor config : anonAndUnordered) {
 			newConfigList.add(config);  
 		}
 
