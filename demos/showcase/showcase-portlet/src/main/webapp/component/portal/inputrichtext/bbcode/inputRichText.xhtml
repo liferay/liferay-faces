@@ -1,6 +1,6 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:alloy="http://liferay.com/faces/alloy" xmlns:portal="http://liferay.com/faces/portal"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:portal="http://liferay.com/faces/portal" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase">
 
 	<alloy:outputStylesheet library="css" name="input-rich-text.css" />
 	<alloy:form id="exampleForm">
@@ -12,10 +12,10 @@
 			<!-- to prevent it from being unnecessarily reinitialized when the alloy:field is re-rendered via Ajax. -->
 			<portal:inputRichText id="comments" editorKey="com.liferay.faces.demos.showcase.ckeditor_bbcode"
 				label="#{i18n['comments']}" rendered="#{showcaseModelBean.selectedComponent.rendered}"
-				required="#{showcaseModelBean.selectedComponent.required}" value="#{inputRichTextBacking.applicant.comments}" />
-			<alloy:commandButton actionListener="#{inputRichTextBacking.submit}" value="#{i18n['submit']}">
-				<f:ajax execute="@form" render=":exampleForm:example:commentsField :outputModel:modelValue" />
-			</alloy:commandButton>
+				required="#{showcaseModelBean.selectedComponent.required}"
+				value="#{inputRichTextBacking.applicant.comments}" />
+			<alloy:commandButton actionListener="#{inputRichTextBacking.submit}"
+				render=":exampleForm:example:commentsField :outputModel:modelValue" value="#{i18n['submit']}" />
 		</showcase:example>
 	</alloy:form>
 	<showcase:outputModel id="outputModel">

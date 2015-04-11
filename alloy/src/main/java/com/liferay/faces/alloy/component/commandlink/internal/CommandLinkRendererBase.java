@@ -27,5 +27,12 @@ import com.liferay.faces.util.render.internal.DelegatingRendererBase;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class CommandLinkRendererBase extends DelegatingRendererBase {
+
+	// Protected Constants
+	protected static final String AJAX = "ajax";
+	protected static final String EXECUTE = "execute";
+	protected static final String PROCESS = "process";
+	protected static final String RENDER = "render";
+	protected static final String UPDATE = "update";
 }
 //J+

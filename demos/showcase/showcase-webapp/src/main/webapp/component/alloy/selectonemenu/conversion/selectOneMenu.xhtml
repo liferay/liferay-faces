@@ -15,9 +15,8 @@
 					<f:selectItem itemLabel="July 14, 1789 AD" itemValue="07/14/1789 AD" />
 				</alloy:selectOneMenu>
 				<hr />
-				<alloy:commandButton action="#{selectOneBackingBean.submitAnswer}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{selectOneBackingBean.submitAnswer}" render="@form"
+					value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{selectOneModelBean.date}">

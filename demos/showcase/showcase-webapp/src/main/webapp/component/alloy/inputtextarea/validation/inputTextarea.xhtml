@@ -10,9 +10,7 @@
 					validatorMessage="#{i18n['validator-message']}" value="#{inputTextModelBean.text}" />
 				<alloy:message for="textarea" />
 				<hr />
-				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{inputTextBackingBean.submit}" render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{inputTextModelBean.text}" />
@@ -30,9 +28,7 @@
 				</alloy:inputTextarea>
 				<alloy:message for="textarea" />
 				<hr />
-				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{inputTextBackingBean.submit}" render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{inputTextModelBean.text}" />

@@ -17,9 +17,8 @@
 					<alloy:message for="firstName" />
 				</alloy:panelGroup>
 				<hr />
-				<alloy:commandButton action="#{fieldBackingBean.submit}" value="#{i18n['submit-and-re-render-form']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{fieldBackingBean.submit}" render="@form"
+					value="#{i18n['submit-and-re-render-form']}" />
 			</showcase:example>
 			<showcase:outputModel id="outputModel">
 				<alloy:outputText id="modelValue" value="#{fieldModelBean.firstName}" />

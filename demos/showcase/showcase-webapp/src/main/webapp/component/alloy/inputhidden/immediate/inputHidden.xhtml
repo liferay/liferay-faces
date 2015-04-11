@@ -9,7 +9,8 @@
 				<alloy:messages globalOnly="true" styleClass="feedback" />
 				<div class="showcase-container">
 					<alloy:outputText value="#{i18n['this-is-a-div-that-contains-a-hidden-input']}" />
-					<alloy:inputHidden id="hidden1" binding="#{inputHidden1}" immediate="true" value="#{inputHiddenModelBean.text}"
+					<alloy:inputHidden id="hidden1" binding="#{inputHidden1}" immediate="true"
+						value="#{inputHiddenModelBean.text}"
 						valueChangeListener="#{inputHiddenBackingBean.valueChangeListener}" />
 					<alloy:message for="hidden1" />
 				</div>
@@ -18,9 +19,8 @@
 				<alloy:button onclick="document.getElementById('#{inputHidden.clientId}').value='';"
 					value="#{i18n['clear-the-value-of-the-hidden-input']}" />
 				<hr />
-				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" render="@form"
+					value="#{i18n['submit']}" />
 			</showcase:example>
 		</alloy:form>
 	</ui:define>
@@ -41,9 +41,8 @@
 				<alloy:button onclick="document.getElementById('#{inputHidden.clientId}').value='';"
 					value="#{i18n['clear-the-value-of-the-hidden-input']}" />
 				<hr />
-				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" render="@form"
+					value="#{i18n['submit']}" />
 			</showcase:example>
 		</alloy:form>
 	</ui:define>

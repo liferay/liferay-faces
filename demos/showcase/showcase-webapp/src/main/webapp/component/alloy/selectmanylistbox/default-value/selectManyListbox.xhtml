@@ -15,9 +15,8 @@
 					<f:selectItem itemLabel="Open Source" itemValue="5" />
 				</alloy:selectManyListbox>
 				<hr />
-				<alloy:commandButton action="#{selectManyBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{selectManyBackingBean.submit}" render="@form"
+					value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<ui:repeat id="modelValue" value="#{selectManyModelBean.benefitIds}" var="benefitId">

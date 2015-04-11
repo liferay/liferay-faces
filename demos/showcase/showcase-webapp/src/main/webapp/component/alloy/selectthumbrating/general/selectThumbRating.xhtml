@@ -7,16 +7,15 @@
 			<showcase:example requiredCheckbox="true" renderedCheckbox="true">
 				<alloy:field label="#{i18n['rating']}">
 					<alloy:selectThumbRating id="thumbRating" rendered="#{showcaseModelBean.selectedComponent.rendered}"
-						required="#{showcaseModelBean.selectedComponent.required}" value="#{selectThumbRatingModelBean.like}">
+						required="#{showcaseModelBean.selectedComponent.required}"
+						value="#{selectThumbRatingModelBean.like}">
 						<f:selectItem itemLabel="#{i18n['like']}" itemValue="true" />
 						<f:selectItem itemLabel="#{i18n['dislike']}" itemValue="false" />
 					</alloy:selectThumbRating>
 					<alloy:message for="thumbRating" />
 				</alloy:field>
 				<hr />
-				<alloy:commandButton value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{selectThumbRatingModelBean.like}" />

@@ -14,9 +14,7 @@
 					<f:selectItem itemLabel="Open Source" itemValue="5" />
 				</alloy:selectOneRadio>
 				<hr />
-				<alloy:commandButton action="#{selectOneBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{selectOneBackingBean.submit}" render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{selectOneModelBean.favoriteId}" />

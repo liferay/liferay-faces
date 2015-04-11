@@ -25,5 +25,54 @@ import com.liferay.faces.util.component.Styleable;
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
 public abstract class CommandLinkBase extends HtmlCommandLink implements Styleable {
+
+	// Protected Enumerations
+	protected enum CommandLinkPropertyKeys {
+		ajax,
+		execute,
+		process,
+		render,
+		update
+	}
+
+	public boolean isAjax() {
+		return (Boolean) getStateHelper().eval(CommandLinkPropertyKeys.ajax, true);
+	}
+
+	public void setAjax(boolean ajax) {
+		getStateHelper().put(CommandLinkPropertyKeys.ajax, ajax);
+	}
+
+	public String getExecute() {
+		return (String) getStateHelper().eval(CommandLinkPropertyKeys.execute, "@all");
+	}
+
+	public void setExecute(String execute) {
+		getStateHelper().put(CommandLinkPropertyKeys.execute, execute);
+	}
+
+	public String getProcess() {
+		return (String) getStateHelper().eval(CommandLinkPropertyKeys.process, getExecute());
+	}
+
+	public void setProcess(String process) {
+		getStateHelper().put(CommandLinkPropertyKeys.process, process);
+	}
+
+	public String getRender() {
+		return (String) getStateHelper().eval(CommandLinkPropertyKeys.render, "@none");
+	}
+
+	public void setRender(String render) {
+		getStateHelper().put(CommandLinkPropertyKeys.render, render);
+	}
+
+	public String getUpdate() {
+		return (String) getStateHelper().eval(CommandLinkPropertyKeys.update, getRender());
+	}
+
+	public void setUpdate(String update) {
+		getStateHelper().put(CommandLinkPropertyKeys.update, update);
+	}
 }
 //J+

@@ -29,8 +29,13 @@ import com.liferay.faces.alloy.component.button.internal.ButtonRenderer;
 public abstract class CommandButtonRendererBase extends ButtonRenderer {
 
 	// Protected Constants
+	protected static final String AJAX = "ajax";
 	protected static final String AUTOFOCUS = "autofocus";
 	protected static final String DISABLED = "disabled";
+	protected static final String EXECUTE = "execute";
+	protected static final String PROCESS = "process";
+	protected static final String RENDER = "render";
 	protected static final String TYPE = "type";
+	protected static final String UPDATE = "update";
 }
 //J+

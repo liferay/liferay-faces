@@ -1,6 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:bridge="http://liferay.com/faces/bridge" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:bridge="http://liferay.com/faces/bridge" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
 	template="/templates/component-1col-60.xhtml">
 
@@ -9,9 +8,7 @@
 			<showcase:example>
 				<bridge:inputFile fileUploadListener="#{bridgeInputFileBackingBean.handleFileUpload}" multiple="multiple" />
 				<hr />
-				<h:commandButton value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</h:commandButton>
+				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<ui:include src="../bridgeInputFileCommon.xhtml" />

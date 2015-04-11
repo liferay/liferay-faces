@@ -12,9 +12,8 @@
 					<alloy:field label="#{i18n['text-field']}" styleClass="dialog-content">
 						<alloy:inputText value="#{dialogModelBean.text}" />
 					</alloy:field>
-					<alloy:commandButton action="#{dialogBackingBean.submit}" value="#{i18n['submit']}">
-						<f:ajax execute="@form" render="@form" />
-					</alloy:commandButton>
+					<alloy:commandButton action="#{dialogBackingBean.submit}" render="@form"
+						value="#{i18n['submit']}" />
 					<alloy:button onclick="Liferay.component('dialogKey1').hide();" value="#{i18n['cancel']}" />
 				</alloy:dialog>
 			</showcase:example>
@@ -34,9 +33,8 @@
 					<alloy:field label="#{i18n['text-field']}" styleClass="dialog-content">
 						<alloy:inputText value="#{dialogModelBean.text}" />
 					</alloy:field>
-					<alloy:commandButton action="#{dialogBackingBean.submit}" value="#{i18n['submit']}">
-						<f:ajax execute="@form" render="@form" />
-					</alloy:commandButton>
+					<alloy:commandButton action="#{dialogBackingBean.submit}" render="@form"
+						value="#{i18n['submit']}" />
 					<alloy:button onclick="Liferay.component('dialogKey2').hide();" value="#{i18n['cancel']}" />
 				</alloy:dialog>
 			</showcase:example>
@@ -56,9 +54,8 @@
 					<alloy:field label="#{i18n['text-field']}" styleClass="dialog-content">
 						<alloy:inputText value="#{dialogModelBean.text}" />
 					</alloy:field>
-					<alloy:commandButton action="#{dialogBackingBean.submit}" value="#{i18n['submit']}">
-						<f:ajax execute="@form" render="@form" />
-					</alloy:commandButton>
+					<alloy:commandButton action="#{dialogBackingBean.submit}" render="@form"
+						value="#{i18n['submit']}" />
 					<alloy:button onclick="Liferay.component('dialogKey3').hide();" value="#{i18n['cancel']}" />
 				</alloy:dialog>
 			</showcase:example>

@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/templates/component-2col.xhtml">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Example 1: Default usage with dismissible="true" -->
@@ -12,10 +12,9 @@
 					<alloy:field label="#{i18n['text-field']}">
 						<alloy:inputText value="#{popoverModelBean.text1}" />
 					</alloy:field>
-					<alloy:commandButton action="#{popoverBackingBean.submit}" onclick="Liferay.component('popover1').hide();"
-						value="#{i18n['submit']}">
-						<f:ajax execute="@form" render="@form" />
-					</alloy:commandButton>
+					<alloy:commandButton action="#{popoverBackingBean.submit}"
+						onclick="Liferay.component('popover1').hide();"
+						render="@form" value="#{i18n['submit']}" />
 					<alloy:button onclick="Liferay.component('popover1').hide();" value="#{i18n['cancel']}" />
 				</alloy:popover>
 			</showcase:example>
@@ -36,10 +35,9 @@
 					<alloy:field label="#{i18n['text-field']}">
 						<alloy:inputText value="#{popoverModelBean.text2}" />
 					</alloy:field>
-					<alloy:commandButton action="#{popoverBackingBean.submit}" onclick="Liferay.component('popover2').hide();"
-						value="#{i18n['submit']}">
-						<f:ajax execute="@form" render="@form" />
-					</alloy:commandButton>
+					<alloy:commandButton action="#{popoverBackingBean.submit}"
+						onclick="Liferay.component('popover2').hide();"
+						render="@form" value="#{i18n['submit']}" />
 					<alloy:button onclick="Liferay.component('popover2').hide();" value="#{i18n['cancel']}" />
 				</alloy:popover>
 			</showcase:example>

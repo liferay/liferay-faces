@@ -15,20 +15,29 @@ package com.liferay.faces.alloy.component.commandlink.internal;
 
 import java.io.IOException;
 
+import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
+import javax.faces.event.AbortProcessingException;
+import javax.faces.event.ComponentSystemEvent;
+import javax.faces.event.ComponentSystemEventListener;
+import javax.faces.event.ListenerFor;
+import javax.faces.event.PostAddToViewEvent;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.commandlink.CommandLink;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
+import com.liferay.faces.util.render.internal.RendererUtil;
 
 
 /**
  * @author  Vernon Singleton
  */
 @FacesRenderer(componentFamily = CommandLink.COMPONENT_FAMILY, rendererType = CommandLink.RENDERER_TYPE)
-public class CommandLinkRenderer extends CommandLinkRendererBase {
+@ListenerFor(systemEventClass = PostAddToViewEvent.class, sourceClass = CommandLink.class)
+@ResourceDependency(library = "javax.faces", name = "jsf.js")
+public class CommandLinkRenderer extends CommandLinkRendererBase implements ComponentSystemEventListener {
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -37,6 +46,17 @@ public class CommandLinkRenderer extends CommandLinkRendererBase {
 		DelegationResponseWriter delegationResponseWriter = new CommandLinkResponseWriter(responseWriter,
 				(uiComponent.getChildCount() > 0));
 		super.encodeBegin(facesContext, uiComponent, delegationResponseWriter);
+	}
+
+	@Override
+	public void processEvent(ComponentSystemEvent componentSystemEvent) throws AbortProcessingException {
+
+		CommandLink commandLink = (CommandLink) componentSystemEvent.getComponent();
+
+		if (commandLink.isAjax()) {
+			RendererUtil.addDefaultAjaxBehavior(commandLink, commandLink.getExecute(), commandLink.getProcess(), "@all",
+				commandLink.getRender(), commandLink.getUpdate(), "@none");
+		}
 	}
 
 	@Override

@@ -1138,6 +1138,12 @@ java.lang.Object)</method-signature>
 			<method-signature>void actionListener(javax.faces.event.ActionEvent)</method-signature>
 		</attribute>
 		<attribute>
+			<description><![CDATA[When this flag is true, clicking on the button will cause the form to be submitted via XmlHttpRequest. The default is true.]]></description>
+			<name>ajax</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying alternative information about the rendered HTML element.]]></description>
 			<name>alt</name>
 			<required>false</required>
@@ -1166,6 +1172,12 @@ java.lang.Object)</method-signature>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Space-delimited list of component ids that are to participate in the APPLY_REQUEST_VALUES, PROCESS_VALIDATIONS, UPDATE_MODEL_VALUES, and INVOKE_APPLICATION phases of the JSF lifecycle. The following keywords may also appear in the list: <code>@this</code>, <code>@form</code>, <code>@all</code>, <code>@none</code>. The default value is <code>@all</code>.]]></description>
+			<name>execute</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[A unique identifier for this component.]]></description>
@@ -1282,10 +1294,22 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[Synonym for the <code>execute</code> attribute.]]></description>
+			<name>process</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[When true, this causes an attribute to be rendered as readonly="readonly", and prevents the user from changing the value of this component.]]></description>
 			<name>readonly</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Space-delimited list of component ids that are to participate in the RENDER_RESPONSE phase of the JSF lifecycle and be re-rendered in the DOM after the response is received from the XmlHttpRequest. The following keywords may also appear in the list: <code>@this</code>, <code>@form</code>, <code>@all</code>, <code>@none</code>. The default value is <code>@none</code>.]]></description>
+			<name>render</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
@@ -1330,6 +1354,12 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[Synonym for the <code>render</code> attribute.]]></description>
+			<name>update</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The value of this component.]]></description>
 			<name>value</name>
 			<required>false</required>
@@ -1365,6 +1395,12 @@ java.lang.Object)</method-signature>
 			<method-signature>void actionListener(javax.faces.event.ActionEvent)</method-signature>
 		</attribute>
 		<attribute>
+			<description><![CDATA[When this flag is true, clicking on the button will cause the form to be submitted via XmlHttpRequest. The default is true.]]></description>
+			<name>ajax</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
 			<name>binding</name>
 			<required>false</required>
@@ -1393,6 +1429,12 @@ java.lang.Object)</method-signature>
 			<name>disabled</name>
 			<required>false</required>
 			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Space-delimited list of component ids that are to participate in the APPLY_REQUEST_VALUES, PROCESS_VALIDATIONS, UPDATE_MODEL_VALUES, and INVOKE_APPLICATION phases of the JSF lifecycle. The following keywords may also appear in the list: <code>@this</code>, <code>@form</code>, <code>@all</code>, <code>@none</code>. The default value is <code>@all</code>.]]></description>
+			<name>execute</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[The language code of the resource linked to by this component.]]></description>
@@ -1491,8 +1533,20 @@ java.lang.Object)</method-signature>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[Synonym for the <code>execute</code> attribute.]]></description>
+			<name>process</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[The relationship between the current document and the one linked to by this component. This is a space-separated list of link types. Used by bots, not browsers.]]></description>
 			<name>rel</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Space-delimited list of component ids that are to participate in the RENDER_RESPONSE phase of the JSF lifecycle and be re-rendered in the DOM after the response is received from the XmlHttpRequest. The following keywords may also appear in the list: <code>@this</code>, <code>@form</code>, <code>@all</code>, <code>@none</code>. The default value is <code>@none</code>.]]></description>
+			<name>render</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -1553,6 +1607,12 @@ java.lang.Object)</method-signature>
 		<attribute>
 			<description><![CDATA[HTML passthrough attribute specifying the content type of resource located by the URL in the rendered href attribute.]]></description>
 			<name>type</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Synonym for the <code>render</code> attribute.]]></description>
+			<name>update</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>

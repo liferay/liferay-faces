@@ -7,8 +7,7 @@
 		<alloy:column>
 			<alloy:commandButton actionListener="#{bridgeInputFileBackingBean.deleteUploadedFile}"
 				onclick="if (! confirm('#{i18n['are-you-sure-you-want-to-delete-this']}')) {return false;}"
-				value="#{uploadedFile.id}">
-				<f:ajax render="@form" />
+				render="@form" value="#{uploadedFile.id}">
 				<alloy:icon name="trash" />
 			</alloy:commandButton>
 		</alloy:column>

@@ -14,10 +14,8 @@
 				<alloy:button value="#{i18n['stop-progress']}"
 					onclick="Liferay.component('progressBar').stopPolling(); return false;" />
 				<alloy:commandButton actionListener="#{progressBarBacking.resetProgress}"
-					onclick="Liferay.component('progressBar').stopPolling();"
-					value="#{i18n['reset-progress']}">
-					<f:ajax render="progressBar" />
-				</alloy:commandButton>
+					onclick="Liferay.component('progressBar').stopPolling();" render="progressBar"
+					value="#{i18n['reset-progress']}" />
 			</showcase:example>
 		</alloy:form>
 	</ui:define>

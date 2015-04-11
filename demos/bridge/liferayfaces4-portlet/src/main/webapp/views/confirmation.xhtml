@@ -12,9 +12,8 @@
 			<alloy:outputText value="#{i18n['thank-you-for-applying-for-a-job-with-our-organization']}" />
 			<hr />
 			<!-- Test JSF 2 implicit navigation -->
-			<alloy:commandButton action="/views/portletViewMode.xhtml" value="#{i18n['submit-another-application']}">
-				<f:ajax execute="@form" render="@form" />
-			</alloy:commandButton>
+			<alloy:commandButton action="/views/portletViewMode.xhtml" render="@form"
+				value="#{i18n['submit-another-application']}" />
 		</alloy:form>
 	</alloy:body>
 </f:view>

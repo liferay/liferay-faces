@@ -14,10 +14,14 @@
 package com.liferay.faces.util.render.internal;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.application.Application;
 import javax.faces.component.UIComponent;
+import javax.faces.component.behavior.AjaxBehavior;
 import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.context.FacesContext;
@@ -32,6 +36,8 @@ import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.FacesConstants;
 import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
 
@@ -50,6 +56,9 @@ public class RendererUtil {
 		};
 	public static final String[] KEYBOARD_DOM_EVENTS = { "onkeydown", "onkeypress", "onkeyup" };
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(RendererUtil.class);
+
 	// Private Constants
 	private static final String FUNCTION_A = "function(A)";
 	private static final String JAVA_SCRIPT_HEX_PREFIX = "\\x";
@@ -64,6 +73,27 @@ public class RendererUtil {
 	private static final char[] _HEX_DIGITS = {
 			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
 		};
+
+	public static void addDefaultAjaxBehavior(ClientBehaviorHolder clientBehaviorHolder, String execute, String process,
+		String defaultExecute, String render, String update, String defaultRender) {
+
+		Map<String, List<ClientBehavior>> clientBehaviorMap = clientBehaviorHolder.getClientBehaviors();
+		String defaultEventName = clientBehaviorHolder.getDefaultEventName();
+		List<ClientBehavior> clientBehaviors = clientBehaviorMap.get(defaultEventName);
+
+		if (clientBehaviors == null) {
+
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			Application application = facesContext.getApplication();
+			AjaxBehavior ajaxBehavior = (AjaxBehavior) application.createBehavior(AjaxBehavior.BEHAVIOR_ID);
+			Collection<String> executeIds = getExecuteIds(execute, process, defaultExecute);
+			ajaxBehavior.setExecute(executeIds);
+
+			Collection<String> renderIds = getRenderIds(render, update, defaultRender);
+			ajaxBehavior.setRender(renderIds);
+			clientBehaviorHolder.addClientBehavior(defaultEventName, ajaxBehavior);
+		}
+	}
 
 	public static void decodeClientBehaviors(FacesContext facesContext, UIComponent uiComponent) {
 
@@ -352,4 +382,49 @@ public class RendererUtil {
 
 		return stringBuilder.toString();
 	}
+
+	private static Collection<String> getExecuteIds(String execute, String process, String defaultValue) {
+
+		// If the values of the execute and process attributes differ, then
+		if (!execute.equals(process)) {
+
+			// If the process attribute was specified and the execute attribute was omitted, then use the value of the
+			// process attribute.
+			if (execute.equals(defaultValue)) {
+				execute = process;
+			}
+
+			// Otherwise, if both the execute and process attributes were specified with different values, then log a
+			// warning indicating that the value of the execute attribute takes precedence.
+			else if (!process.equals(defaultValue)) {
+				logger.warn(
+					"Different values were specified for the execute=[{0}] and process=[{0}]. The value for execute takes precedence.");
+			}
+		}
+
+		return Arrays.asList(execute.split(" "));
+	}
+
+	private static Collection<String> getRenderIds(String render, String update, String defaultValue) {
+
+		// If the values of the render and update attributes differ, then
+		if (!render.equals(update)) {
+
+			// If the update attribute was specified and the render attribute was omitted, then use the value of the
+			// update attribute.
+			if (render.equals(defaultValue)) {
+				render = update;
+			}
+
+			// Otherwise, if both the render and update attributes were specified with different values, then log a
+			// warning indicating that the value of the render attribute takes precedence.
+			else if (!update.equals(defaultValue)) {
+				logger.warn(
+					"Different values were specified for the render=[{0}] and update=[{0}]. The value for render takes precedence.");
+			}
+		}
+
+		return Arrays.asList(render.split(" "));
+	}
+
 }

@@ -18,9 +18,8 @@
 				<alloy:message for="inputSourceCode" />
 			</alloy:field>
 			<hr />
-			<alloy:commandButton action="#{inputSourceCodeBackingBean.submit}" value="#{i18n['submit']}">
-				<f:ajax execute="@form" render="@form" />
-			</alloy:commandButton>
+			<alloy:commandButton action="#{inputSourceCodeBackingBean.submit}" render="@form"
+				value="#{i18n['submit']}" />
 		</showcase:example>
 		<showcase:outputModel>
 			<alloy:outputText id="modelValue" value="#{inputSourceCodeModelBean.sourceCode}" />

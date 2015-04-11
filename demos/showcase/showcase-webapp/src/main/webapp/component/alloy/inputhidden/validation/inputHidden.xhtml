@@ -10,7 +10,8 @@
 					<div class="showcase-container">
 						<alloy:outputText value="#{i18n['this-is-a-div-that-contains-a-hidden-input']}" />
 						<alloy:inputHidden id="hidden1" binding="#{inputHidden1}"
-							validator="#{inputHiddenBackingBean.emailAddressValidator}" validatorMessage="#{i18n['validator-message']}"
+							validator="#{inputHiddenBackingBean.emailAddressValidator}"
+							validatorMessage="#{i18n['validator-message']}"
 							value="#{inputHiddenModelBean.text}" />
 						<alloy:message for="hidden1" />
 					</div>
@@ -26,9 +27,8 @@
 				<alloy:button onclick="document.getElementById('#{inputHidden1.clientId}').value='';"
 					value="#{i18n['clear-the-value-of-the-hidden-input']}" />
 				<hr />
-				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" render="@form"
+					value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{inputHiddenModelBean.text}" />
@@ -43,7 +43,8 @@
 				<alloy:field label="#{i18n['hidden-field']}">
 					<div class="showcase-container">
 						<alloy:outputText value="#{i18n['this-is-a-div-that-contains-a-hidden-input']}" />
-						<alloy:inputHidden id="hidden2" binding="#{inputHidden2}" validatorMessage="#{i18n['validator-message']}"
+						<alloy:inputHidden id="hidden2" binding="#{inputHidden2}"
+							validatorMessage="#{i18n['validator-message']}"
 							value="#{inputHiddenModelBean.text}">
 							<f:validateRegex pattern=".+[@].+[.].+" />
 						</alloy:inputHidden>
@@ -61,9 +62,8 @@
 				<alloy:button onclick="document.getElementById('#{inputHidden2.clientId}').value='';"
 					value="#{i18n['clear-the-value-of-the-hidden-input']}" />
 				<hr />
-				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{inputHiddenBackingBean.submit}" render="@form"
+					value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{inputHiddenModelBean.text}" />
