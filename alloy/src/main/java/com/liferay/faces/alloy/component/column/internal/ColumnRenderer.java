@@ -15,15 +15,22 @@ package com.liferay.faces.alloy.component.column.internal;
 
 import java.io.IOException;
 
+import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.component.html.HtmlPanelGrid;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
+import javax.faces.event.AbortProcessingException;
+import javax.faces.event.ComponentSystemEvent;
+import javax.faces.event.ComponentSystemEventListener;
+import javax.faces.event.ListenerFor;
+import javax.faces.event.PostAddToViewEvent;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.column.Column;
+import com.liferay.faces.alloy.component.datatable.DataTable;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.RendererUtil;
 
@@ -32,8 +39,16 @@ import com.liferay.faces.util.render.internal.RendererUtil;
  * @author  Kyle Stiemann
  */
 @FacesRenderer(componentFamily = Column.COMPONENT_FAMILY, rendererType = Column.RENDERER_TYPE)
-@ResourceDependency(library = "liferay-faces-reslib", name = "build/aui-css/css/bootstrap.min.css")
-public class ColumnRenderer extends ColumnRendererBase {
+@ListenerFor(systemEventClass = PostAddToViewEvent.class, sourceClass = Column.class)
+@ResourceDependencies(
+	{
+		@ResourceDependency(library = "javax.faces", name = "jsf.js"),
+		@ResourceDependency(
+			library = "liferay-faces-reslib", name = "build/aui-css/css/bootstrap.min.css"
+		)
+	}
+)
+public class ColumnRenderer extends ColumnRendererBase implements ComponentSystemEventListener {
 
 	protected static Integer getColumnUnitSize(Integer width) {
 		return (int) Math.round(Column.COLUMNS * ((double) width / 100));
@@ -46,13 +61,7 @@ public class ColumnRenderer extends ColumnRendererBase {
 
 		UIComponent parent = uiComponent.getParent();
 
-		if (parent instanceof HtmlDataTable) {
-			// TODO
-		}
-		else if (parent instanceof HtmlPanelGrid) {
-			// TODO
-		}
-		else {
+		if (!((parent instanceof HtmlDataTable) || (parent instanceof HtmlPanelGrid))) {
 
 			responseWriter.startElement(StringPool.DIV, uiComponent);
 
@@ -122,14 +131,20 @@ public class ColumnRenderer extends ColumnRendererBase {
 
 		UIComponent parent = uiComponent.getParent();
 
-		if (parent instanceof HtmlDataTable) {
-			// TODO
-		}
-		else if (parent instanceof HtmlPanelGrid) {
-			// TODO
-		}
-		else {
+		if (!((parent instanceof HtmlDataTable) || (parent instanceof HtmlPanelGrid))) {
 			responseWriter.endElement(StringPool.DIV);
+		}
+	}
+
+	@Override
+	public void processEvent(ComponentSystemEvent componentSystemEvent) throws AbortProcessingException {
+
+		Column column = (Column) componentSystemEvent.getComponent();
+		UIComponent parent = column.getParent();
+
+		if ((parent instanceof DataTable) && column.isAjax()) {
+			RendererUtil.addDefaultAjaxBehavior(column, column.getExecute(), column.getProcess(), "@parent",
+				column.getRender(), column.getUpdate(), "@parent");
 		}
 	}
 }

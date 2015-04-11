@@ -19,9 +19,7 @@
 					var="customer">
 					<f:facet name="header">
 						<alloy:outputText value="#{i18n['customers']}" />
-						<alloy:paginator>
-							<f:ajax execute="customers @this" render="customers" />
-						</alloy:paginator>
+						<alloy:paginator />
 					</f:facet>
 					<alloy:column headerText="#{i18n['first-name']}">
 						<alloy:outputText value="#{customer.firstName}" />

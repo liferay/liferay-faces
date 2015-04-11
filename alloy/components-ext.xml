@@ -1026,11 +1026,19 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Column" extendsTags="Styleable UIComponentBase" parentClass="javax.faces.component.html.HtmlColumn">
+	<component name="Column" extendsTags="AutoAjaxCommon Styleable UIComponentBase" parentClass="javax.faces.component.html.HtmlColumn">
 		<description>
 			<![CDATA[Column is a UIColumn component that renders a div with CSS class name <code>span#</code> (for example: <code>span1</code> or <code>span5</code>).]]>
 		</description>
 		<attributes>
+			<attribute>
+				<defaultValue>"@parent"</defaultValue>
+				<description>
+					<![CDATA[Space-delimited list of component ids that are to participate in the APPLY_REQUEST_VALUES, PROCESS_VALIDATIONS, UPDATE_MODEL_VALUES, and INVOKE_APPLICATION phases of the JSF lifecycle. The following keywords may also appear in the list: <code>@this</code>, <code>@form</code>, <code>@all</code>, <code>@none</code>, <code>@parent</code>. The default value is <code>@parent</code> (meaning, the parent alloy:dataTable).]]>
+				</description>
+				<name>execute</name>
+				<type>java.lang.String</type>
+			</attribute>
 			<attribute>
 				<description>
 					<![CDATA[When alloy:column is a child of alloy:dataTabe, this is the JavaBean property that is to be used for filtering.]]>
@@ -1074,6 +1082,14 @@
 				</description>
 				<name>offsetWidth</name>
 				<type>java.lang.Integer</type>
+			</attribute>
+			<attribute>
+				<defaultValue>"@parent"</defaultValue>
+				<description>
+					<![CDATA[Space-delimited list of component ids that are to participate in the RENDER_RESPONSE phase of the JSF lifecycle and be re-rendered in the DOM after the response is received from the XmlHttpRequest. The following keywords may also appear in the list: <code>@this</code>, <code>@form</code>, <code>@all</code>, <code>@none</code>, <code>@parent</code>. The default value is <code>@parent</code> (meaning, the parent alloy:dataTable).]]>
+				</description>
+				<name>render</name>
+				<type>java.lang.String</type>
 			</attribute>
 			<attribute>
 				<description>
@@ -1194,7 +1210,7 @@
 		module="aui-datatable" parentClass="javax.faces.component.html.HtmlDataTable"
 		rendererParentClass="com.liferay.faces.alloy.render.internal.AlloyRendererBase" yui="true">
 		<description>
-			<![CDATA[DataTable is a UIData (iterator) component that renders a <code>&lt;table&gt;</code> element representing tabular data. Since it extends HtmlDataTable, it supports all the features of h:dataTable.]]>
+			<![CDATA[DataTable is a UIData (iterator) component that renders a <code>&lt;table&gt;</code> element representing tabular data and is designed to be used in conjunction with alloy:column child component tags. Since it extends HtmlDataTable, it supports all the features of h:dataTable.]]>
 		</description>
 		<attributes>
 			<attribute>
@@ -2498,11 +2514,19 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="Paginator" extendsTags="Styleable UIComponentBase ValueInherited" parentClass="javax.faces.component.UIComponentBase">
+	<component name="Paginator" extendsTags="AutoAjaxCommon Styleable UIComponentBase ValueInherited" parentClass="javax.faces.component.UIComponentBase">
 		<description>
-			<![CDATA[Paginator ...]]>
+			<![CDATA[Paginator is a UIComponent that renders pagination controls and can be used in conjunction with alloy:dataTable in order to paginate tabular data.]]>
 		</description>
 		<attributes>
+			<attribute>
+				<defaultValue>"@this @for"</defaultValue>
+				<description>
+					<![CDATA[Space-delimited list of component ids that are to participate in the APPLY_REQUEST_VALUES, PROCESS_VALIDATIONS, UPDATE_MODEL_VALUES, and INVOKE_APPLICATION phases of the JSF lifecycle. The following keywords may also appear in the list: <code>@this</code>, <code>@form</code>, <code>@all</code>, <code>@none</code>. The default value is <code>@this @for</code> (meaning, the paginator itself and the associated alloy:dataTable).]]>
+				</description>
+				<name>execute</name>
+				<type>java.lang.String</type>
+			</attribute>
 			<attribute>
 				<defaultValue>1</defaultValue>
 				<description>
@@ -2535,6 +2559,14 @@
 				<type>java.lang.String</type>
 			</attribute>
 			<attribute>
+				<defaultValue>10</defaultValue>
+				<description>
+					<![CDATA[Integer representing the maximum number of page number controls that will be displayed. The default value is 10.]]>
+				</description>
+				<name>maxPageNumberControls</name>
+				<type>int</type>
+			</attribute>
+			<attribute>
 				<defaultValue><![CDATA["&rsaquo;"]]></defaultValue>
 				<description>
 					<![CDATA[The label of the control that causes the next page to be displayed. The default value is the &amp;rsaquo; character code.]]>
@@ -2551,12 +2583,12 @@
 				<type>java.lang.String</type>
 			</attribute>
 			<attribute>
-				<defaultValue>10</defaultValue>
+				<defaultValue>"@this @for"</defaultValue>
 				<description>
-					<![CDATA[Integer representing the maximum number of page number controls that will be displayed. The default value is 10.]]>
+					<![CDATA[Space-delimited list of component ids that are to participate in the RENDER_RESPONSE phase of the JSF lifecycle and be re-rendered in the DOM after the response is received from the XmlHttpRequest. The following keywords may also appear in the list: <code>@this</code>, <code>@form</code>, <code>@all</code>, <code>@none</code>, <code>@for</code>. The default value is <code>@this @for</code> (meaning, the paginator itself and the associated alloy:dataTable).]]>
 				</description>
-				<name>maxPageNumberControls</name>
-				<type>int</type>
+				<name>render</name>
+				<type>java.lang.String</type>
 			</attribute>
 			<attribute>
 				<defaultValue>true</defaultValue>

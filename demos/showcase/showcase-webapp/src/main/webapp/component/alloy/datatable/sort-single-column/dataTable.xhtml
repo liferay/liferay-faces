@@ -10,23 +10,18 @@
 					var="customer">
 					<f:facet name="header">
 						<alloy:outputText value="#{i18n['customers']}" />
-						<alloy:paginator>
-							<f:ajax execute="@form" render="@form" />
-						</alloy:paginator>
+						<alloy:paginator />
 					</f:facet>
 					<alloy:column headerText="#{i18n['first-name']}" sortBy="#{customer.firstName}">
 						<alloy:outputText value="#{customer.firstName}" />
-						<f:ajax render="customerTable" />
 					</alloy:column>
 					<alloy:column headerText="#{i18n['last-name']}" sortBy="#{customer.lastName}">
 						<alloy:outputText value="#{customer.lastName}" />
-						<f:ajax render="customerTable" />
 					</alloy:column>
 					<alloy:column headerText="#{i18n['date-of-birth']}" sortBy="#{customer.dateOfBirth}">
 						<alloy:outputText value="#{customer.dateOfBirth}">
 							<f:convertDateTime pattern="MMM dd, yyyy" />
 						</alloy:outputText>
-						<f:ajax render="customerTable" />
 					</alloy:column>
 					<alloy:column headerText="#{i18n['country']}">
 						<alloy:outputText value="#{customer.countryId}">

@@ -32,6 +32,11 @@ import javax.faces.component.behavior.ClientBehaviorContext;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
+import javax.faces.event.AbortProcessingException;
+import javax.faces.event.ComponentSystemEvent;
+import javax.faces.event.ComponentSystemEventListener;
+import javax.faces.event.ListenerFor;
+import javax.faces.event.PostAddToViewEvent;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.commandlink.CommandLink;
@@ -51,13 +56,15 @@ import com.liferay.faces.util.render.internal.RendererUtil;
  */
 //J-
 @FacesRenderer(componentFamily = Paginator.COMPONENT_FAMILY, rendererType = Paginator.RENDERER_TYPE)
+@ListenerFor(systemEventClass = PostAddToViewEvent.class, sourceClass = Paginator.class)
 @ResourceDependencies(
 	{
+		@ResourceDependency(library = "javax.faces", name = "jsf.js"),
 		@ResourceDependency(library = "liferay-faces-reslib", name = "build/aui-css/css/bootstrap.min.css")
 	}
 )
 //J+
-public class PaginatorRenderer extends PaginatorRendererBase {
+public class PaginatorRenderer extends PaginatorRendererBase implements ComponentSystemEventListener {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(PaginatorRenderer.class);
@@ -303,6 +310,17 @@ public class PaginatorRenderer extends PaginatorRendererBase {
 		responseWriter.endElement("div");
 	}
 
+	@Override
+	public void processEvent(ComponentSystemEvent componentSystemEvent) throws AbortProcessingException {
+
+		Paginator paginator = (Paginator) componentSystemEvent.getComponent();
+
+		if (paginator.isAjax()) {
+			RendererUtil.addDefaultAjaxBehavior(paginator, paginator.getExecute(), paginator.getProcess(), "@this",
+				paginator.getRender(), paginator.getUpdate(), "@this @for");
+		}
+	}
+
 	protected void encodeFirstPageListItem(FacesContext facesContext, ResponseWriter responseWriter,
 		Paginator paginator, String clientId, String namingContainerId, int first) throws IOException {
 
@@ -442,6 +460,8 @@ public class PaginatorRenderer extends PaginatorRendererBase {
 				Application application = facesContext.getApplication();
 				CommandLink commandLink = (CommandLink) application.createComponent(facesContext,
 						CommandLink.COMPONENT_TYPE, CommandLink.RENDERER_TYPE);
+				commandLink.setAjax(paginator.isAjax());
+
 				OutputText outputText = (OutputText) application.createComponent(facesContext,
 						OutputText.COMPONENT_TYPE, OutputText.RENDERER_TYPE);
 
@@ -507,5 +527,4 @@ public class PaginatorRenderer extends PaginatorRendererBase {
 
 		return clientBehaviorScript;
 	}
-
 }
