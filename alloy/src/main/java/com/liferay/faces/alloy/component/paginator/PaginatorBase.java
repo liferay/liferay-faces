@@ -28,6 +28,8 @@ public abstract class PaginatorBase extends UIComponentBase implements Styleable
 
 	// Protected Enumerations
 	protected enum PaginatorPropertyKeys {
+		ajax,
+		execute,
 		firstPage,
 		firstPageLabel,
 		for_,
@@ -35,6 +37,8 @@ public abstract class PaginatorBase extends UIComponentBase implements Styleable
 		maxPageNumberControls,
 		nextPageLabel,
 		previousPageLabel,
+		process,
+		render,
 		showFirstPageControl,
 		showLastPageControl,
 		showNextPageControl,
@@ -42,7 +46,24 @@ public abstract class PaginatorBase extends UIComponentBase implements Styleable
 		showPreviousPageControl,
 		style,
 		styleClass,
-		summaryPosition
+		summaryPosition,
+		update
+	}
+
+	public boolean isAjax() {
+		return (Boolean) getStateHelper().eval(PaginatorPropertyKeys.ajax, true);
+	}
+
+	public void setAjax(boolean ajax) {
+		getStateHelper().put(PaginatorPropertyKeys.ajax, ajax);
+	}
+
+	public String getExecute() {
+		return (String) getStateHelper().eval(PaginatorPropertyKeys.execute, "@this @for");
+	}
+
+	public void setExecute(String execute) {
+		getStateHelper().put(PaginatorPropertyKeys.execute, execute);
 	}
 
 	public int getFirstPage() {
@@ -99,6 +120,22 @@ public abstract class PaginatorBase extends UIComponentBase implements Styleable
 
 	public void setPreviousPageLabel(String previousPageLabel) {
 		getStateHelper().put(PaginatorPropertyKeys.previousPageLabel, previousPageLabel);
+	}
+
+	public String getProcess() {
+		return (String) getStateHelper().eval(PaginatorPropertyKeys.process, getExecute());
+	}
+
+	public void setProcess(String process) {
+		getStateHelper().put(PaginatorPropertyKeys.process, process);
+	}
+
+	public String getRender() {
+		return (String) getStateHelper().eval(PaginatorPropertyKeys.render, "@this @for");
+	}
+
+	public void setRender(String render) {
+		getStateHelper().put(PaginatorPropertyKeys.render, render);
 	}
 
 	public boolean isShowFirstPageControl() {
@@ -167,6 +204,14 @@ public abstract class PaginatorBase extends UIComponentBase implements Styleable
 
 	public void setSummaryPosition(String summaryPosition) {
 		getStateHelper().put(PaginatorPropertyKeys.summaryPosition, summaryPosition);
+	}
+
+	public String getUpdate() {
+		return (String) getStateHelper().eval(PaginatorPropertyKeys.update, getRender());
+	}
+
+	public void setUpdate(String update) {
+		getStateHelper().put(PaginatorPropertyKeys.update, update);
 	}
 }
 //J+

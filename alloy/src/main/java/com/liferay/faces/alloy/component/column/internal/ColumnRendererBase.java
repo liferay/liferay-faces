@@ -29,15 +29,20 @@ import javax.faces.render.Renderer;
 public abstract class ColumnRendererBase extends Renderer {
 
 	// Protected Constants
+	protected static final String AJAX = "ajax";
+	protected static final String EXECUTE = "execute";
 	protected static final String FILTER_BY = "filterBy";
 	protected static final String HEADER_TEXT = "headerText";
 	protected static final String OFFSET = "offset";
 	protected static final String OFFSET_WIDTH = "offsetWidth";
+	protected static final String PROCESS = "process";
+	protected static final String RENDER = "render";
 	protected static final String SORT_BY = "sortBy";
 	protected static final String SORT_ORDER = "sortOrder";
 	protected static final String SPAN = "span";
 	protected static final String STYLE = "style";
 	protected static final String STYLE_CLASS = "styleClass";
+	protected static final String UPDATE = "update";
 	protected static final String WIDTH = "width";
 }
 //J+

@@ -1013,10 +1013,22 @@ java.lang.Object)</method-signature>
 			<renderer-type>com.liferay.faces.alloy.component.column.internal.ColumnRenderer</renderer-type>
 		</component>
 		<attribute>
+			<description><![CDATA[When this flag is true, clicking on the button will cause the form to be submitted via XmlHttpRequest. The default is true.]]></description>
+			<name>ajax</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
 			<name>binding</name>
 			<required>false</required>
 			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Space-delimited list of component ids that are to participate in the APPLY_REQUEST_VALUES, PROCESS_VALIDATIONS, UPDATE_MODEL_VALUES, and INVOKE_APPLICATION phases of the JSF lifecycle. The following keywords may also appear in the list: <code>@this</code>, <code>@form</code>, <code>@all</code>, <code>@none</code>, <code>@parent</code>. The default value is <code>@parent</code> (meaning, the parent alloy:dataTable).]]></description>
+			<name>execute</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[When alloy:column is a child of alloy:dataTabe, this is the JavaBean property that is to be used for filtering.]]></description>
@@ -1061,6 +1073,18 @@ java.lang.Object)</method-signature>
 			<type>java.lang.Integer</type>
 		</attribute>
 		<attribute>
+			<description><![CDATA[Synonym for the <code>execute</code> attribute.]]></description>
+			<name>process</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Space-delimited list of component ids that are to participate in the RENDER_RESPONSE phase of the JSF lifecycle and be re-rendered in the DOM after the response is received from the XmlHttpRequest. The following keywords may also appear in the list: <code>@this</code>, <code>@form</code>, <code>@all</code>, <code>@none</code>, <code>@parent</code>. The default value is <code>@parent</code> (meaning, the parent alloy:dataTable).]]></description>
+			<name>render</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[When this flag is true, this component will be rendered to there response. When false, it will not be rendered to the response. The default value of this attribute is true.]]></description>
 			<name>rendered</name>
 			<required>false</required>
@@ -1099,6 +1123,12 @@ java.lang.Object)</method-signature>
 		<attribute>
 			<description><![CDATA[List of CSS class names (separated by spaces) that are to be rendered within the class attribute.]]></description>
 			<name>styleClass</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Synonym for the <code>render</code> attribute.]]></description>
+			<name>update</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -1727,7 +1757,7 @@ java.lang.Object)</method-signature>
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[DataTable is a UIData (iterator) component that renders a <code>&lt;table&gt;</code> element representing tabular data. Since it extends HtmlDataTable, it supports all the features of h:dataTable.]]></description>
+		<description><![CDATA[DataTable is a UIData (iterator) component that renders a <code>&lt;table&gt;</code> element representing tabular data and is designed to be used in conjunction with alloy:column child component tags. Since it extends HtmlDataTable, it supports all the features of h:dataTable.]]></description>
 		<tag-name>dataTable</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.datatable.DataTable</component-type>
@@ -6403,17 +6433,29 @@ java.lang.Object)</method-signature>
 		</tag-extension>
 	</tag>
 	<tag>
-		<description><![CDATA[Paginator ...]]></description>
+		<description><![CDATA[Paginator is a UIComponent that renders pagination controls and can be used in conjunction with alloy:dataTable in order to paginate tabular data.]]></description>
 		<tag-name>paginator</tag-name>
 		<component>
 			<component-type>com.liferay.faces.alloy.component.paginator.Paginator</component-type>
 			<renderer-type>com.liferay.faces.alloy.component.paginator.internal.PaginatorRenderer</renderer-type>
 		</component>
 		<attribute>
+			<description><![CDATA[When this flag is true, clicking on the button will cause the form to be submitted via XmlHttpRequest. The default is true.]]></description>
+			<name>ajax</name>
+			<required>false</required>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[An EL expression that binds the Java reference to this component in the component tree to a bean property.]]></description>
 			<name>binding</name>
 			<required>false</required>
 			<type>javax.faces.component.UIComponent</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Space-delimited list of component ids that are to participate in the APPLY_REQUEST_VALUES, PROCESS_VALIDATIONS, UPDATE_MODEL_VALUES, and INVOKE_APPLICATION phases of the JSF lifecycle. The following keywords may also appear in the list: <code>@this</code>, <code>@form</code>, <code>@all</code>, <code>@none</code>. The default value is <code>@this @for</code> (meaning, the paginator itself and the associated alloy:dataTable).]]></description>
+			<name>execute</name>
+			<required>false</required>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[Integer representing the first page number that is to be displayed in the list of page number controls. The default value is 1.]]></description>
@@ -6460,6 +6502,18 @@ java.lang.Object)</method-signature>
 		<attribute>
 			<description><![CDATA[The label of the control that causes the previous page to be displayed. The default value is the &amp;lsaquo; character code.]]></description>
 			<name>previousPageLabel</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Synonym for the <code>execute</code> attribute.]]></description>
+			<name>process</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Space-delimited list of component ids that are to participate in the RENDER_RESPONSE phase of the JSF lifecycle and be re-rendered in the DOM after the response is received from the XmlHttpRequest. The following keywords may also appear in the list: <code>@this</code>, <code>@form</code>, <code>@all</code>, <code>@none</code>, <code>@for</code>. The default value is <code>@this @for</code> (meaning, the paginator itself and the associated alloy:dataTable).]]></description>
+			<name>render</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
@@ -6514,6 +6568,12 @@ java.lang.Object)</method-signature>
 		<attribute>
 			<description><![CDATA[When true, a row summary such as "Page 1 of 7." will be displayed based on the <code>results-x-x-of-x-page-x-of-x</code> internationalized language key. This is true by default.]]></description>
 			<name>summaryPosition</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[Synonym for the <code>render</code> attribute.]]></description>
+			<name>update</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>

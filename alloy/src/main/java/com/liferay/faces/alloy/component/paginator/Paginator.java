@@ -56,8 +56,44 @@ public class Paginator extends PaginatorBase implements ClientBehaviorHolder {
 	}
 
 	@Override
+	public String getExecute() {
+
+		String execute = super.getExecute();
+
+		if ((execute != null) && execute.contains("@for")) {
+
+			UIData uiData = getUIData();
+
+			if (uiData != null) {
+				String uiDataClientId = uiData.getClientId();
+				execute = execute.replace("@for", uiDataClientId);
+			}
+		}
+
+		return execute;
+	}
+
+	@Override
 	public String getFamily() {
 		return COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getRender() {
+
+		String render = super.getRender();
+
+		if ((render != null) && render.contains("@for")) {
+
+			UIData uiData = getUIData();
+
+			if (uiData != null) {
+				String uiDataClientId = uiData.getClientId();
+				render = render.replace("@for", uiDataClientId);
+			}
+		}
+
+		return render;
 	}
 
 	@Override

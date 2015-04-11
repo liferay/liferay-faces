@@ -29,6 +29,8 @@ import javax.faces.render.Renderer;
 public abstract class PaginatorRendererBase extends Renderer {
 
 	// Protected Constants
+	protected static final String AJAX = "ajax";
+	protected static final String EXECUTE = "execute";
 	protected static final String FIRST_PAGE = "firstPage";
 	protected static final String FIRST_PAGE_LABEL = "firstPageLabel";
 	protected static final String FOR = "for";
@@ -36,6 +38,8 @@ public abstract class PaginatorRendererBase extends Renderer {
 	protected static final String MAX_PAGE_NUMBER_CONTROLS = "maxPageNumberControls";
 	protected static final String NEXT_PAGE_LABEL = "nextPageLabel";
 	protected static final String PREVIOUS_PAGE_LABEL = "previousPageLabel";
+	protected static final String PROCESS = "process";
+	protected static final String RENDER = "render";
 	protected static final String SHOW_FIRST_PAGE_CONTROL = "showFirstPageControl";
 	protected static final String SHOW_LAST_PAGE_CONTROL = "showLastPageControl";
 	protected static final String SHOW_NEXT_PAGE_CONTROL = "showNextPageControl";
@@ -44,5 +48,6 @@ public abstract class PaginatorRendererBase extends Renderer {
 	protected static final String STYLE = "style";
 	protected static final String STYLE_CLASS = "styleClass";
 	protected static final String SUMMARY_POSITION = "summaryPosition";
+	protected static final String UPDATE = "update";
 }
 //J+

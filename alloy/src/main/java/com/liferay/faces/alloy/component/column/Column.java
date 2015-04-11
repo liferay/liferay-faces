@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.UIComponent;
 import javax.faces.component.behavior.ClientBehaviorHolder;
 
 import com.liferay.faces.util.component.ComponentUtil;
@@ -51,6 +52,36 @@ public class Column extends ColumnBase implements ClientBehaviorHolder {
 	@Override
 	public Collection<String> getEventNames() {
 		return EVENT_NAMES;
+	}
+
+	@Override
+	public String getExecute() {
+
+		String execute = super.getExecute();
+
+		if ((execute != null) && execute.contains("@parent")) {
+
+			UIComponent parent = getParent();
+			String parentClientId = parent.getClientId();
+			execute = execute.replace("@parent", parentClientId);
+		}
+
+		return execute;
+	}
+
+	@Override
+	public String getRender() {
+
+		String render = super.getRender();
+
+		if ((render != null) && render.contains("@parent")) {
+
+			UIComponent parent = getParent();
+			String parentClientId = parent.getClientId();
+			render = render.replace("@parent", parentClientId);
+		}
+
+		return render;
 	}
 
 	@Override

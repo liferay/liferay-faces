@@ -730,6 +730,7 @@ public class DataTableRenderer extends DataTableRendererBase {
 				Application application = facesContext.getApplication();
 				CommandLink commandLink = (CommandLink) application.createComponent(facesContext,
 						CommandLink.COMPONENT_TYPE, CommandLink.RENDERER_TYPE);
+				commandLink.setAjax(column.isAjax());
 				OutputText outputText1 = (OutputText) application.createComponent(facesContext,
 						OutputText.COMPONENT_TYPE, OutputText.RENDERER_TYPE);
 				outputText1.setValue(headerText);
