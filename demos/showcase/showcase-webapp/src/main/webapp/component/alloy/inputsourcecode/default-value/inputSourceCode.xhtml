@@ -1,6 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase">
 
 	<alloy:form>
 		<showcase:example styleClass="editableAceEditor">
@@ -11,9 +10,8 @@
 				value="#{inputSourceCodeModelBean.sourceText}" />
 			<alloy:message for="inputSourceCode" />
 			<hr />
-			<alloy:commandButton action="#{inputSourceCodeBackingBean.submit}" value="#{i18n['submit']}">
-				<f:ajax execute="@form" render="@form" />
-			</alloy:commandButton>
+			<alloy:commandButton action="#{inputSourceCodeBackingBean.submit}" render="@form"
+				value="#{i18n['submit']}" />
 		</showcase:example>
 		<showcase:outputModel>
 			<alloy:outputText id="modelValue" value="#{inputSourceCodeModelBean.sourceText}" />

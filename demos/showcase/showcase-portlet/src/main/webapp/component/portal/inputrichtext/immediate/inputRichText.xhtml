@@ -11,12 +11,12 @@
 				<alloy:messages globalOnly="true" styleClass="feedback" />
 				<alloy:field id="commentsField" label="#{i18n['comments']}" styleClass="input-rich-text-field">
 					<alloy:message id="commentsMessage" for="comments" />
-					<portal:inputRichText id="comments" immediate="true" value="#{inputRichTextBacking.applicant.comments}"
+					<portal:inputRichText id="comments" immediate="true"
+						value="#{inputRichTextBacking.applicant.comments}"
 						valueChangeListener="#{inputRichTextBacking.valueChangeListener}" />
 				</alloy:field>
-				<alloy:commandButton actionListener="#{inputRichTextBacking.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton actionListener="#{inputRichTextBacking.submit}" render="@form"
+					value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel id="outputModel">
 				<alloy:outputText id="modelValue" value="#{inputRichTextBacking.applicant.comments}" />
@@ -34,9 +34,8 @@
 					<portal:inputRichText id="comments" value="#{inputRichTextBacking.applicant.comments}"
 						valueChangeListener="#{inputRichTextBacking.valueChangeListener}" />
 				</alloy:field>
-				<alloy:commandButton actionListener="#{inputRichTextBacking.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton actionListener="#{inputRichTextBacking.submit}" render="@form"
+					value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel id="outputModel">
 				<alloy:outputText id="modelValue" value="#{inputRichTextBacking.applicant.comments}" />

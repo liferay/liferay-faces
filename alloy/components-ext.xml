@@ -686,6 +686,54 @@
 			</attribute>
 		</attributes>
 	</component>
+	<component name="AutoAjaxCommon" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<defaultValue>true</defaultValue>
+				<description>
+					<![CDATA[When this flag is true, clicking on the button will cause the form to be submitted via XmlHttpRequest. The default is true.]]>
+				</description>
+				<name>ajax</name>
+				<type>boolean</type>
+			</attribute>
+			<attribute>
+				<defaultValue>getExecute()</defaultValue>
+				<description>
+					<![CDATA[Synonym for the <code>execute</code> attribute.]]>
+				</description>
+				<name>process</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>getRender()</defaultValue>
+				<description>
+					<![CDATA[Synonym for the <code>render</code> attribute.]]>
+				</description>
+				<name>update</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
+	<component name="AutoAjaxCommandCommon" extendsTags="AutoAjaxCommon" generateJava="false" generateTaglibXML="false">
+		<attributes>
+			<attribute>
+				<defaultValue>"@all"</defaultValue>
+				<description>
+					<![CDATA[Space-delimited list of component ids that are to participate in the APPLY_REQUEST_VALUES, PROCESS_VALIDATIONS, UPDATE_MODEL_VALUES, and INVOKE_APPLICATION phases of the JSF lifecycle. The following keywords may also appear in the list: <code>@this</code>, <code>@form</code>, <code>@all</code>, <code>@none</code>. The default value is <code>@all</code>.]]>
+				</description>
+				<name>execute</name>
+				<type>java.lang.String</type>
+			</attribute>
+			<attribute>
+				<defaultValue>"@none"</defaultValue>
+				<description>
+					<![CDATA[Space-delimited list of component ids that are to participate in the RENDER_RESPONSE phase of the JSF lifecycle and be re-rendered in the DOM after the response is received from the XmlHttpRequest. The following keywords may also appear in the list: <code>@this</code>, <code>@form</code>, <code>@all</code>, <code>@none</code>. The default value is <code>@none</code>.]]>
+				</description>
+				<name>render</name>
+				<type>java.lang.String</type>
+			</attribute>
+		</attributes>
+	</component>
 	<!-- /Common -->
 	<!-- /generateTaglibXML="false" tags for common attributes -->
 	<component name="Accordion" extendsTags="ClientComponent UIData Styleable UIComponentBase" handlerClass="com.liferay.faces.alloy.component.accordion.internal.AccordionHandler"
@@ -1065,7 +1113,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<component name="CommandButton" extendsTags="ButtonCommon FacesMessageLabelInherited UICommand" parentClass="javax.faces.component.html.HtmlCommandButton"
+	<component name="CommandButton" extendsTags="AutoAjaxCommandCommon ButtonCommon FacesMessageLabelInherited UICommand" parentClass="javax.faces.component.html.HtmlCommandButton"
 		rendererParentClass="com.liferay.faces.alloy.component.button.internal.ButtonRenderer">
 		<description>
 			<![CDATA[CommandButton is a UICommand component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is submit. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlCommandButton.html" target="_blank"><code>HtmlCommandButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/commandButton.html" target="_blank"><code>h:commandButton</code></a>. The component must be a child of h:form in order to trigger the action or actionListener.]]>
@@ -1114,7 +1162,7 @@
 			<!-- /h:commandButton attributes -->
 		</attributes>
 	</component>
-	<component name="CommandLink" extendsTags="AnchorLinkCommon DisabledInherited UICommand ValueInherited"
+	<component name="CommandLink" extendsTags="AnchorLinkCommon AutoAjaxCommandCommon DisabledInherited UICommand ValueInherited"
 		parentClass="javax.faces.component.html.HtmlCommandLink" rendererParentClass="com.liferay.faces.util.render.internal.DelegatingRendererBase">
 		<description>
 			<![CDATA[CommandLink is a UICommand component that renders an HTML <code>&lt;a&gt;</code> element. Since it extends HtmlCommandLink, it supports all the features of h:commandLink. The component must be a child of h:form in order to trigger the action or actionListener.]]>

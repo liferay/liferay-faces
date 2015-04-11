@@ -15,9 +15,8 @@
 								<alloy:message for="firstName" />
 							</alloy:field>
 						</alloy:fieldset>
-						<alloy:commandButton value="#{i18n['next']}">
+						<alloy:commandButton execute="step1" render="@form" value="#{i18n['next']}">
 							<f:setPropertyActionListener target="#{tabViewWizardBean.selectedTabIndex}" value="1" />
-							<f:ajax execute="step1" render="@form" />
 						</alloy:commandButton>
 					</alloy:tab>
 					<alloy:tab disabled="#{tabViewWizardBean.selectedTabIndex lt 1}" headerText="#{i18n['step-2']}">
@@ -27,9 +26,8 @@
 								<alloy:message for="lastName" />
 							</alloy:field>
 						</alloy:fieldset>
-						<alloy:commandButton value="#{i18n['next']}">
+						<alloy:commandButton execute="step2" render="@form" value="#{i18n['next']}">
 							<f:setPropertyActionListener target="#{tabViewWizardBean.selectedTabIndex}" value="2" />
-							<f:ajax execute="step2" render="@form" />
 						</alloy:commandButton>
 					</alloy:tab>
 					<alloy:tab disabled="#{tabViewWizardBean.selectedTabIndex lt 2}" headerText="#{i18n['step-3']}">

@@ -1,15 +1,15 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/templates/component-1col-60.xhtml">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	template="/templates/component-1col-60.xhtml">
 
 	<ui:define name="col1">
 		<alloy:form>
 			<showcase:example>
 				<ui:repeat value="#{commandModelBean.customers}" var="customer">
-					<alloy:commandLink actionListener="#{commandBackingBean.selectionListener}" value="#{customer}">
+					<alloy:commandLink actionListener="#{commandBackingBean.selectionListener}" render="@form"
+						value="#{customer}">
 						<alloy:icon name="edit" />
 						<alloy:outputText value=" #{customer.fullName}" />
-						<f:ajax execute="@form" render="@form" />
 					</alloy:commandLink>
 					<br />
 				</ui:repeat>

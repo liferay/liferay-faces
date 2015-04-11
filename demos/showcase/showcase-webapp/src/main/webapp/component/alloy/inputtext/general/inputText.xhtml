@@ -11,9 +11,7 @@
 					<alloy:message for="text" />
 				</alloy:field>
 				<hr />
-				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{inputTextBackingBean.submit}" update="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{inputTextModelBean.text}" />

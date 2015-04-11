@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/templates/component-4col.xhtml">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	template="/templates/component-4col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Example 1: Render all messages in a <ul> (the default) -->
@@ -11,9 +11,8 @@
 				<alloy:inputText id="inputText" label="#{i18n['text-field']}" required="true"
 					valueChangeListener="#{messageBackingBean.valueChangeListener}" />
 				<br />
-				<alloy:commandButton action="#{messageBackingBean.submit}" value="#{i18n['submit-and-re-render-form']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{messageBackingBean.submit}" render="@form"
+					value="#{i18n['submit-and-re-render-form']}" />
 			</showcase:example>
 		</alloy:form>
 	</ui:define>
@@ -27,9 +26,8 @@
 				<alloy:inputText id="inputText" label="#{i18n['text-field']}" required="true"
 					valueChangeListener="#{messageBackingBean.valueChangeListener}" />
 				<br />
-				<alloy:commandButton action="#{messageBackingBean.submit}" value="#{i18n['submit-and-re-render-form']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{messageBackingBean.submit}" render="@form"
+					value="#{i18n['submit-and-re-render-form']}" />
 			</showcase:example>
 		</alloy:form>
 	</ui:define>
@@ -43,9 +41,8 @@
 				<alloy:inputText id="inputText" label="#{i18n['text-field']}" required="true"
 					valueChangeListener="#{messageBackingBean.valueChangeListener}" />
 				<br />
-				<alloy:commandButton action="#{messageBackingBean.submit}" value="#{i18n['submit-and-re-render-form']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{messageBackingBean.submit}" render="@form"
+					value="#{i18n['submit-and-re-render-form']}" />
 			</showcase:example>
 		</alloy:form>
 	</ui:define>

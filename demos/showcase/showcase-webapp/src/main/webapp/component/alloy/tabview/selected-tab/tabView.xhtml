@@ -1,12 +1,12 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase">
 
 	<showcase:example>
 		<alloy:form>
 			<alloy:messages globalOnly="true" layout="table" />
 			<br />
-			<alloy:tabView binding="#{tabViewBackingBean.tabView}" selectedIndex="#{tabViewBackingBean.defaultSelectedIndex}">
+			<alloy:tabView binding="#{tabViewBackingBean.tabView}"
+				selectedIndex="#{tabViewBackingBean.defaultSelectedIndex}">
 				<alloy:tab headerText="Compatible">
 					<alloy:image library="images" name="icon-compatible.png" />
 					<span>Liferay lets you reuse the enterprise software and skills you already have in-house.</span>
@@ -30,9 +30,8 @@
 				</alloy:tab>
 			</alloy:tabView>
 			<br />
-			<alloy:commandButton actionListener="#{tabViewBackingBean.submit}" value="#{i18n['submit-and-re-render-form']}">
-				<f:ajax execute="@form" render="@form" />
-			</alloy:commandButton>
+			<alloy:commandButton actionListener="#{tabViewBackingBean.submit}" render="@form"
+				value="#{i18n['submit-and-re-render-form']}" />
 		</alloy:form>
 	</showcase:example>
 

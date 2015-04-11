@@ -10,9 +10,7 @@
 					validatorMessage="#{i18n['validator-message']}" value="#{inputTextModelBean.text}" />
 				<alloy:message for="text" />
 				<hr />
-				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{inputTextBackingBean.submit}" render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{inputTextModelBean.text}" />
@@ -24,14 +22,13 @@
 		<!-- Example 2: Validating an email address using an f:validateRegex child tag. -->
 		<alloy:form>
 			<showcase:example description="#{i18n['validating-an-email-address-using-f-validateregex']}" number="2">
-				<alloy:inputText id="text" validatorMessage="#{i18n['validator-message']}" value="#{inputTextModelBean.text}">
+				<alloy:inputText id="text" validatorMessage="#{i18n['validator-message']}"
+					value="#{inputTextModelBean.text}">
 					<f:validateRegex pattern=".+[@].+[.].+" />
 				</alloy:inputText>
 				<alloy:message for="text" />
 				<hr />
-				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{inputTextBackingBean.submit}" render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{inputTextModelBean.text}" />

@@ -6,7 +6,8 @@
 		<alloy:form>
 			<showcase:example>
 				<alloy:outputLabel styleClass="alloy-output-label" for="starRating" value="#{i18n['rating']}" />
-				<alloy:selectStarRating id="starRating" value="#{selectStarRatingModelBean.benefitId}" label="#{i18n['rating']}:">
+				<alloy:selectStarRating id="starRating" value="#{selectStarRatingModelBean.benefitId}"
+					label="#{i18n['rating']}:">
 					<f:converter converterId="javax.faces.Long" />
 					<f:selectItem itemLabel="Compatible" itemValue="1" />
 					<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
@@ -15,9 +16,8 @@
 					<f:selectItem itemLabel="Open Source" itemValue="5" />
 				</alloy:selectStarRating>
 				<hr />
-				<alloy:commandButton action="#{selectStarRatingBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{selectStarRatingBackingBean.submit}" render="@form"
+					value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{selectStarRatingModelBean.benefitId}" />

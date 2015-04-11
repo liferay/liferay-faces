@@ -6,8 +6,10 @@
 		<alloy:form>
 			<showcase:example renderedCheckbox="true" requiredCheckbox="true">
 				<alloy:field label="#{i18n['favorite-liferay-benefit']}">
-					<alloy:selectManyListbox id="selectManyListbox" rendered="#{showcaseModelBean.selectedComponent.rendered}"
-						required="#{showcaseModelBean.selectedComponent.required}" value="#{selectManyModelBean.favoriteIds}">
+					<alloy:selectManyListbox id="selectManyListbox"
+						rendered="#{showcaseModelBean.selectedComponent.rendered}"
+						required="#{showcaseModelBean.selectedComponent.required}"
+						value="#{selectManyModelBean.favoriteIds}">
 						<f:selectItem itemLabel="-- Select --" noSelectionOption="true" />
 						<f:selectItem itemLabel="Compatible" itemValue="1" />
 						<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
@@ -18,9 +20,8 @@
 					<alloy:message for="selectManyListbox" />
 				</alloy:field>
 				<hr />
-				<alloy:commandButton action="#{selectManyBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{selectManyBackingBean.submit}" render="@form"
+					value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<ui:repeat id="modelValue" value="#{selectManyModelBean.favoriteIds}" var="favoriteId">

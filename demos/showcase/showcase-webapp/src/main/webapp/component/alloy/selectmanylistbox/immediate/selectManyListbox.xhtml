@@ -17,9 +17,7 @@
 					<f:selectItem itemLabel="Open Source" itemValue="5" />
 				</alloy:selectManyListbox>
 				<hr />
-				<alloy:commandButton value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<ui:repeat id="modelValue" value="#{selectManyModelBean.favoriteIds}" var="favoriteId">
@@ -45,9 +43,7 @@
 					<f:selectItem itemLabel="Open Source" itemValue="5" />
 				</alloy:selectManyListbox>
 				<hr />
-				<alloy:commandButton value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<ui:repeat id="modelValue" value="#{selectManyModelBean.favoriteIds}" var="favoriteId">

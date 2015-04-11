@@ -13,16 +13,36 @@
  */
 package com.liferay.faces.alloy.component.commandbutton.internal;
 
+import javax.faces.application.ResourceDependency;
+import javax.faces.event.AbortProcessingException;
+import javax.faces.event.ComponentSystemEvent;
+import javax.faces.event.ComponentSystemEventListener;
+import javax.faces.event.ListenerFor;
+import javax.faces.event.PostAddToViewEvent;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.commandbutton.CommandButton;
+import com.liferay.faces.util.render.internal.RendererUtil;
 
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesRenderer(componentFamily = CommandButton.COMPONENT_FAMILY, rendererType = CommandButton.RENDERER_TYPE)
-public class CommandButtonRenderer extends CommandButtonRendererBase {
+@ListenerFor(systemEventClass = PostAddToViewEvent.class, sourceClass = CommandButton.class)
+@ResourceDependency(library = "javax.faces", name = "jsf.js")
+public class CommandButtonRenderer extends CommandButtonRendererBase implements ComponentSystemEventListener {
+
+	@Override
+	public void processEvent(ComponentSystemEvent componentSystemEvent) throws AbortProcessingException {
+
+		CommandButton commandButton = (CommandButton) componentSystemEvent.getComponent();
+
+		if (commandButton.isAjax()) {
+			RendererUtil.addDefaultAjaxBehavior(commandButton, commandButton.getExecute(), commandButton.getProcess(),
+				"@all", commandButton.getRender(), commandButton.getUpdate(), "@none");
+		}
+	}
 
 	@Override
 	public String getDelegateComponentFamily() {

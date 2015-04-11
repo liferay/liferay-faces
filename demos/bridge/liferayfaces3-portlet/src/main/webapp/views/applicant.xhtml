@@ -85,14 +85,14 @@
                         <alloy:column>
                             <alloy:field id="commentsField" label="#{i18n['comments']}">
                                 <alloy:panelGroup id="showHide" layout="block">
-                                    <f:ajax render="commentsField">
-                                        <alloy:commandLink actionListener="#{applicantViewBean.toggleComments}"
-											rendered="#{!applicantViewBean.commentsRendered}"
-											value="#{i18n['show']} #{i18n['comments']}" />
-                                        <alloy:commandLink actionListener="#{applicantViewBean.toggleComments}"
-											rendered="#{applicantViewBean.commentsRendered}"
-											value="#{i18n['hide']} #{i18n['comments']}" />
-                                    </f:ajax>
+                                    <alloy:commandLink actionListener="#{applicantViewBean.toggleComments}"
+                                        execute="@this" render="commentsField"
+                                        rendered="#{!applicantViewBean.commentsRendered}"
+                                        value="#{i18n['show']} #{i18n['comments']}" />
+                                    <alloy:commandLink actionListener="#{applicantViewBean.toggleComments}"
+                                        execute="@this" render="commentsField"
+                                        rendered="#{applicantViewBean.commentsRendered}"
+                                        value="#{i18n['hide']} #{i18n['comments']}" />
                                 </alloy:panelGroup>
                                 <alloy:inputTextarea id="comments" cols="50" rows="10"
 									rendered="#{applicantViewBean.commentsRendered}"
@@ -104,9 +104,7 @@
                     </alloy:row>
                 </alloy:fieldset>
                 <hr />
-                <alloy:commandButton action="#{applicantBackingBean.submit}" value="#{i18n['submit']}">
-                    <f:ajax execute="@form" render="@form" />
-                </alloy:commandButton>
+                <alloy:commandButton action="#{applicantBackingBean.submit}" render="@form" value="#{i18n['submit']}"/>
 				<!-- Test 5.4.2 Encoding PortletMode changes in Faces navigation -->
 				<alloy:commandButton
 					action="/views/portletEditMode.xhtml?javax.portlet.faces.PortletMode=edit&amp;javax.portlet.faces.WindowState=maximized"
@@ -121,18 +119,15 @@
 							<alloy:field styleClass="dialog-content">
 								<alloy:outputText value="#{i18n['are-you-sure-you-want-to-delete-this']}" />
 							</alloy:field>
-							<alloy:commandButton actionListener="#{applicantBackingBean.deleteUploadedFile}" value="#{i18n['yes']}">
-								<f:ajax render="@form" />
-							</alloy:commandButton>
+							<alloy:commandButton actionListener="#{applicantBackingBean.deleteUploadedFile}" render="@form" value="#{i18n['yes']}" />
 							<alloy:button onclick="Liferay.component('dialogKey').hide();" value="#{i18n['no']}" />
 						</alloy:dialog>
 						<h3>#{i18n['attachments']}</h3>
 						<alloy:dataTable value="#{applicantModelBean.uploadedFiles}" var="uploadedFile">
 							<alloy:column>
 								<alloy:commandButton action="#{applicantBackingBean.fileToDelete(uploadedFile)}"
-									onclick="Liferay.component('dialogKey').show();">
+									execute="@this" onclick="Liferay.component('dialogKey').show();">
 									<alloy:icon name="trash" />
-									<f:ajax />
 									<f:setPropertyActionListener value="#{uploadedFile.id}" target="#{applicantViewBean.uploadedFileId}" />
 								</alloy:commandButton>
 							</alloy:column>
@@ -154,9 +149,7 @@
                     <alloy:form id="f3" enctype="multipart/form-data">
                         <alloy:inputFile fileUploadListener="#{applicantBackingBean.handleFileUpload}"
 							multiple="multiple" />
-                        <alloy:commandButton value="#{i18n['submit']}">
-							<f:ajax execute="@form" render="c2a" />
-						</alloy:commandButton>
+                        <alloy:commandButton render="c2a" value="#{i18n['submit']}" />
                     </alloy:form>
                 </alloy:column>
             </alloy:row>

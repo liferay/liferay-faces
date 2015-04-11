@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/templates/component-2col.xhtml">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Example 1: Associate with an alloy:inputText and specify a {0} token within the value attribute. -->
@@ -12,9 +12,7 @@
 				<alloy:outputRemainingChars for="inputText" rendered="#{showcaseModelBean.selectedComponent.rendered}"
 					value="There are {0} character(s) remaining." />
 				<hr />
-				<alloy:commandButton value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{outputRemainingCharsModelBean.text}" />
@@ -29,11 +27,10 @@
 				renderedCheckbox="true">
 				<alloy:inputTextarea id="inputTextarea" maxlength="20" value="#{outputRemainingCharsModelBean.text}" />
 				<br />
-				<alloy:outputRemainingChars for="inputTextarea" rendered="#{showcaseModelBean.selectedComponent.rendered}" />
+				<alloy:outputRemainingChars for="inputTextarea"
+					rendered="#{showcaseModelBean.selectedComponent.rendered}" />
 				<hr />
-				<alloy:commandButton value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{outputRemainingCharsModelBean.text}" />

@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/templates/component-1col-60.xhtml">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	template="/templates/component-1col-60.xhtml">
 
 	<ui:define name="col1">
 		<alloy:form enctype="multipart/form-data" includeViewParams="false">
@@ -8,7 +8,7 @@
 				<alloy:messages globalOnly="true" layout="table" />
 				<alloy:inputFile fileUploadListener="#{inputFileBackingBean.handleFileUpload}" />
 				<hr />
-				<alloy:commandButton value="#{i18n['submit']}" />
+				<alloy:commandButton ajax="false" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<ui:include src="../inputFileCommon.xhtml" />

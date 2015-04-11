@@ -7,9 +7,7 @@
 			<showcase:example description="#{i18n['alloy-inputtime-time-pattern-example']}">
 				<alloy:inputTime id="time" value="#{inputTimeModelBean.time}" pattern="hh:mm:ss a" />
 				<hr />
-				<alloy:commandButton value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{inputTimeModelBean.time}">

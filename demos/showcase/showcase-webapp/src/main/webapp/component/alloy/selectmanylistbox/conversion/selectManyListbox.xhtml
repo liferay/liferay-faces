@@ -16,9 +16,8 @@
 					<f:selectItem itemLabel="July 14, 1789 AD" itemValue="07/14/1789 AD" />
 				</alloy:selectManyListbox>
 				<hr />
-				<alloy:commandButton action="#{selectManyBackingBean.submitAnswer}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{selectManyBackingBean.submitAnswer}" render="@form"
+					value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<ui:repeat id="modelValue" value="#{selectManyModelBean.dates}" var="date">

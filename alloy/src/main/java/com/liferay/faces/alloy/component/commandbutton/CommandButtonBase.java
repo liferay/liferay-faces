@@ -28,9 +28,22 @@ public abstract class CommandButtonBase extends HtmlCommandButton implements Sty
 
 	// Protected Enumerations
 	protected enum CommandButtonPropertyKeys {
+		ajax,
 		autofocus,
 		disabled,
-		type
+		execute,
+		process,
+		render,
+		type,
+		update
+	}
+
+	public boolean isAjax() {
+		return (Boolean) getStateHelper().eval(CommandButtonPropertyKeys.ajax, true);
+	}
+
+	public void setAjax(boolean ajax) {
+		getStateHelper().put(CommandButtonPropertyKeys.ajax, ajax);
 	}
 
 	public Boolean getAutofocus() {
@@ -49,12 +62,44 @@ public abstract class CommandButtonBase extends HtmlCommandButton implements Sty
 		getStateHelper().put(CommandButtonPropertyKeys.disabled, disabled);
 	}
 
+	public String getExecute() {
+		return (String) getStateHelper().eval(CommandButtonPropertyKeys.execute, "@all");
+	}
+
+	public void setExecute(String execute) {
+		getStateHelper().put(CommandButtonPropertyKeys.execute, execute);
+	}
+
+	public String getProcess() {
+		return (String) getStateHelper().eval(CommandButtonPropertyKeys.process, getExecute());
+	}
+
+	public void setProcess(String process) {
+		getStateHelper().put(CommandButtonPropertyKeys.process, process);
+	}
+
+	public String getRender() {
+		return (String) getStateHelper().eval(CommandButtonPropertyKeys.render, "@none");
+	}
+
+	public void setRender(String render) {
+		getStateHelper().put(CommandButtonPropertyKeys.render, render);
+	}
+
 	public String getType() {
 		return (String) getStateHelper().eval(CommandButtonPropertyKeys.type, null);
 	}
 
 	public void setType(String type) {
 		getStateHelper().put(CommandButtonPropertyKeys.type, type);
+	}
+
+	public String getUpdate() {
+		return (String) getStateHelper().eval(CommandButtonPropertyKeys.update, getRender());
+	}
+
+	public void setUpdate(String update) {
+		getStateHelper().put(CommandButtonPropertyKeys.update, update);
 	}
 }
 //J+

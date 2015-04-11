@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/templates/component-2col.xhtml">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	template="/templates/component-2col.xhtml">
 
 	<ui:define name="col1">
 		<!-- Example 1: ValueChangeListener execution when immediate is true -->
@@ -10,9 +10,7 @@
 				<alloy:inputTextarea id="textarea" immediate="true" value="#{inputTextModelBean.text}"
 					valueChangeListener="#{inputTextBackingBean.valueChangeListener}" />
 				<hr />
-				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{inputTextBackingBean.submit}" render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{inputTextModelBean.text}" />
@@ -28,9 +26,7 @@
 				<alloy:inputTextarea id="textarea" value="#{inputTextModelBean.text}"
 					valueChangeListener="#{inputTextBackingBean.valueChangeListener}" />
 				<hr />
-				<alloy:commandButton action="#{inputTextBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{inputTextBackingBean.submit}" render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{inputTextModelBean.text}" />

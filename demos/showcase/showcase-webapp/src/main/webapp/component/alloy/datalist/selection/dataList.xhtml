@@ -8,9 +8,10 @@
 				<alloy:dataList styleClass="unstyled" value="#{dataListModelBean.liferayBenefits}" var="liferayBenefit">
 					<alloy:dataItem>
 						<alloy:icon name="search" />
-						<alloy:commandLink onclick="Liferay.component('dialogKey').show()" value="#{liferayBenefit.label}">
-							<f:setPropertyActionListener value="#{liferayBenefit}" target="#{dataListModelBean.selectedLiferayBenefit}" />
-							<f:ajax execute="@form" render=":example:exampleForm:dialogContents" />
+						<alloy:commandLink onclick="Liferay.component('dialogKey').show()"
+							render=":example:exampleForm:dialogContents" value="#{liferayBenefit.label}">
+							<f:setPropertyActionListener value="#{liferayBenefit}"
+								target="#{dataListModelBean.selectedLiferayBenefit}" />
 						</alloy:commandLink>
 					</alloy:dataItem>
 				</alloy:dataList>

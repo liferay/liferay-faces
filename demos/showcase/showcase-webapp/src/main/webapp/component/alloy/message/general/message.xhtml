@@ -1,17 +1,16 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/templates/component-1col-60.xhtml">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:showcase="http://java.sun.com/jsf/composite/showcase"
+	template="/templates/component-1col-60.xhtml">
 
 	<ui:define name="col1">
 		<alloy:form>
 			<showcase:example description="#{i18n['alloy-message-general-example-1']}">
 				<alloy:field id="field" label="#{i18n['text-field']}">
-					<alloy:inputText id="inputText" required="true" valueChangeListener="#{messageBackingBean.valueChangeListener}" />
+					<alloy:inputText id="inputText" required="true"
+						valueChangeListener="#{messageBackingBean.valueChangeListener}" />
 					<alloy:message for="inputText" />
 				</alloy:field>
-				<alloy:commandButton value="#{i18n['submit-and-re-render-field']}">
-					<f:ajax execute="@form" render="field" />
-				</alloy:commandButton>
+				<alloy:commandButton render="field" value="#{i18n['submit-and-re-render-field']}" />
 			</showcase:example>
 		</alloy:form>
 	</ui:define>

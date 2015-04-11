@@ -7,7 +7,8 @@
 			<showcase:example renderedCheckbox="true" requiredCheckbox="true">
 				<alloy:field label="#{i18n['favorite-liferay-benefit']}">
 					<alloy:selectOneMenu id="selectOneMenu" rendered="#{showcaseModelBean.selectedComponent.rendered}"
-						required="#{showcaseModelBean.selectedComponent.required}" value="#{selectOneModelBean.favoriteId}">
+						required="#{showcaseModelBean.selectedComponent.required}"
+						value="#{selectOneModelBean.favoriteId}">
 						<f:selectItem itemLabel="-- Select --" noSelectionOption="true" />
 						<f:selectItem itemLabel="Compatible" itemValue="1" />
 						<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
@@ -18,9 +19,7 @@
 					<alloy:message for="selectOneMenu" />
 				</alloy:field>
 				<hr />
-				<alloy:commandButton action="#{selectOneBackingBean.submit}" value="#{i18n['submit']}">
-					<f:ajax execute="@form" render="@form" />
-				</alloy:commandButton>
+				<alloy:commandButton action="#{selectOneBackingBean.submit}" render="@form" value="#{i18n['submit']}" />
 			</showcase:example>
 			<showcase:outputModel>
 				<alloy:outputText id="modelValue" value="#{selectOneModelBean.favoriteId}" />
