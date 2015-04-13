@@ -81,8 +81,21 @@ public class RendererUtil {
 		String defaultEventName = clientBehaviorHolder.getDefaultEventName();
 		List<ClientBehavior> clientBehaviors = clientBehaviorMap.get(defaultEventName);
 
-		if (clientBehaviors == null) {
+		boolean doAdd = true;
 
+		if (clientBehaviors != null) {
+
+			for (ClientBehavior clientBehavior : clientBehaviors) {
+
+				if (clientBehavior instanceof AjaxBehavior) {
+					doAdd = false;
+
+					break;
+				}
+			}
+		}
+
+		if (doAdd) {
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Application application = facesContext.getApplication();
 			AjaxBehavior ajaxBehavior = (AjaxBehavior) application.createBehavior(AjaxBehavior.BEHAVIOR_ID);
