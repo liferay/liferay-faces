@@ -7,7 +7,7 @@
 		<alloy:form>
 			<showcase:example description="#{i18n['alloy-video-general-example-1']}" number="1" renderedCheckbox="true">
 				<alloy:video styleClass="showcase-video" contentType="video/mp4" controls="true"
-					value="/resources/videos/example.mp4" rendered="#{showcaseModelBean.selectedComponent.rendered}" />
+					value="/resources/videos/over-the-rainbow.mp4" rendered="#{showcaseModelBean.selectedComponent.rendered}" />
 			</showcase:example>
 		</alloy:form>
 	</ui:define>
@@ -16,7 +16,7 @@
 	<ui:define name="col2">
 		<showcase:example description="#{i18n['alloy-video-general-example-2']}" number="2">
 			<alloy:video styleClass="showcase-video" contentType="video/ogg; codecs=&quot;theora, vorbis&quot;"
-				controls="true" degrade="false" value="#{resource['videos:example.ogv']}">
+				controls="true" degrade="false" value="#{resource['videos:over-the-rainbow.ogv']}">
 				<alloy:outputText value="#{i18n['please-visit-this-website-with-an-up-to-date-browser']}" />
 			</alloy:video>
 		</showcase:example>
@@ -35,7 +35,7 @@
 	<!-- Example 4: JSF resource via the library and name attributes -->
 	<ui:define name="col4">
 		<showcase:example description="#{i18n['alloy-video-general-example-4']}" number="4">
-			<alloy:video styleClass="showcase-video" controls="true" degrade="false" library="videos" name="example.ogv">
+			<alloy:video styleClass="showcase-video" controls="true" degrade="false" library="videos" name="over-the-rainbow.ogv">
 				<alloy:outputText value="#{i18n['please-visit-this-website-with-an-up-to-date-browser']}" />
 			</alloy:video>
 		</showcase:example>

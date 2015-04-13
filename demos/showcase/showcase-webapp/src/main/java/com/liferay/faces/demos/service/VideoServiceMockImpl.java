@@ -40,9 +40,9 @@ public class VideoServiceMockImpl implements VideoService, Serializable {
 	@PostConstruct
 	public void postConstruct() {
 		videoList = new ArrayList<FacesResource>();
-		videoList.add(new FacesResource("videos", "example.mp4"));
-		videoList.add(new FacesResource("videos", "example.webm"));
-		videoList.add(new FacesResource("videos", "example.ogv"));
+		videoList.add(new FacesResource("videos", "over-the-rainbow.mp4"));
+		videoList.add(new FacesResource("videos", "over-the-rainbow.webm"));
+		videoList.add(new FacesResource("videos", "over-the-rainbow.ogv"));
 	}
 
 	@Override
