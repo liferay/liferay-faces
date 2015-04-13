@@ -15,7 +15,7 @@
 	<ui:define name="col2">
 		<!-- Example 2: Output directly to the response with specific role types (Guest, Owner, Power User, User) -->
 		<showcase:example description="#{i18n['portal-permissionsurl-general-example-2']}" number="2">
-			<alloy:importConstants classType="com.liferay.portal.model.RoleConstants" var="roleConstants" />
+			<alloy:loadConstants classType="com.liferay.portal.model.RoleConstants" var="roleConstants" />
 			<pre>
 				<portal:permissionsURL resourcePrimKey="#{permissionsURLModelBean.portletResourcePrimaryKey}"
 					roleTypes="#{roleConstants.TYPES_REGULAR}" />
