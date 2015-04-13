@@ -27,6 +27,8 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.TypeInfo;
 import org.w3c.dom.UserDataHandler;
 
+import com.liferay.faces.util.lang.StringPool;
+
 
 /**
  * @author  Neil Griffin
@@ -137,17 +139,25 @@ public class ElementImpl implements Element {
 				buf.append(SYMBOL_DOUBLE_QUOTE);
 			}
 		}
+		
+		if (StringPool.LINK.equalsIgnoreCase(nodeName)) {
 
-		buf.append(SYMBOL_GREATER_THAN);
+			buf.append(SYMBOL_BLANK_SPACE);
+			buf.append(SYMBOL_FORWARD_SLASH);
+			buf.append(SYMBOL_GREATER_THAN);
+		} else {
 
-		if (textContent != null) {
-			buf.append(textContent);
+			buf.append(SYMBOL_GREATER_THAN);
+	
+			if (textContent != null) {
+				buf.append(textContent);
+			}
+	
+			buf.append(SYMBOL_LESS_THAN);
+			buf.append(SYMBOL_FORWARD_SLASH);
+			buf.append(nodeName);
+			buf.append(SYMBOL_GREATER_THAN);
 		}
-
-		buf.append(SYMBOL_LESS_THAN);
-		buf.append(SYMBOL_FORWARD_SLASH);
-		buf.append(nodeName);
-		buf.append(SYMBOL_GREATER_THAN);
 
 		return buf.toString();
 	}
