@@ -35,14 +35,6 @@ import com.liferay.faces.util.lang.StringPool;
  */
 public class ElementImpl implements Element {
 
-	// Private Constants
-	private static final String SYMBOL_BLANK_SPACE = " ";
-	private static final String SYMBOL_DOUBLE_QUOTE = "\"";
-	private static final String SYMBOL_EQUALS = "=";
-	private static final String SYMBOL_FORWARD_SLASH = "/";
-	private static final String SYMBOL_GREATER_THAN = ">";
-	private static final String SYMBOL_LESS_THAN = "<";
-
 	// Private Data Members
 	private Map<String, String> attributes;
 	private String nodeName;
@@ -123,7 +115,7 @@ public class ElementImpl implements Element {
 	public String toString() {
 
 		StringBuilder buf = new StringBuilder();
-		buf.append(SYMBOL_LESS_THAN);
+		buf.append("<");
 		buf.append(nodeName);
 
 		Set<String> attributeNameSet = attributes.keySet();
@@ -131,32 +123,29 @@ public class ElementImpl implements Element {
 		if (attributeNameSet != null) {
 
 			for (String attributeName : attributeNameSet) {
-				buf.append(SYMBOL_BLANK_SPACE);
+				buf.append(" ");
 				buf.append(attributeName);
-				buf.append(SYMBOL_EQUALS);
-				buf.append(SYMBOL_DOUBLE_QUOTE);
+				buf.append("=\"");
 				buf.append(attributes.get(attributeName));
-				buf.append(SYMBOL_DOUBLE_QUOTE);
+				buf.append("\"");
 			}
 		}
-		
+
 		if (StringPool.LINK.equalsIgnoreCase(nodeName)) {
 
-			buf.append(SYMBOL_BLANK_SPACE);
-			buf.append(SYMBOL_FORWARD_SLASH);
-			buf.append(SYMBOL_GREATER_THAN);
-		} else {
+			buf.append(" />");
+		}
+		else {
 
-			buf.append(SYMBOL_GREATER_THAN);
-	
+			buf.append(">");
+
 			if (textContent != null) {
 				buf.append(textContent);
 			}
-	
-			buf.append(SYMBOL_LESS_THAN);
-			buf.append(SYMBOL_FORWARD_SLASH);
+
+			buf.append("</");
 			buf.append(nodeName);
-			buf.append(SYMBOL_GREATER_THAN);
+			buf.append(">");
 		}
 
 		return buf.toString();
