@@ -58,7 +58,7 @@ public class VideoBacking {
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Application application = facesContext.getApplication();
 			ResourceHandler resourceHandler = application.getResourceHandler();
-			Resource mp3AudioResource = resourceHandler.createResource("example.mp4", "videos");
+			Resource mp3AudioResource = resourceHandler.createResource("over-the-rainbow.mp4", "videos");
 			String requestPath = mp3AudioResource.getRequestPath();
 			ExternalContext externalContext = facesContext.getExternalContext();
 			String mp4ResourceURL = externalContext.encodeResourceURL(requestPath);
@@ -71,7 +71,7 @@ public class VideoBacking {
 	public FacesResource getOgvVideo() {
 
 		if (ogvVideo == null) {
-			ogvVideo = new FacesResource("videos", "example.ogv");
+			ogvVideo = new FacesResource("videos", "over-the-rainbow.ogv");
 		}
 
 		return ogvVideo;

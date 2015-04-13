@@ -40,11 +40,11 @@ public class AudioServiceMockImpl implements AudioService, Serializable {
 	@PostConstruct
 	public void postConstruct() {
 		audioList = new ArrayList<FacesResource>();
-		audioList.add(new FacesResource("audios", "example.mp3"));
-		audioList.add(new FacesResource("audios", "example.m4a"));
-		audioList.add(new FacesResource("audios", "example.wav"));
-		audioList.add(new FacesResource("audios", "example.webm"));
-		audioList.add(new FacesResource("audios", "example.ogv"));
+		audioList.add(new FacesResource("audios", "over-the-rainbow.mp3"));
+		audioList.add(new FacesResource("audios", "over-the-rainbow.m4a"));
+		audioList.add(new FacesResource("audios", "over-the-rainbow.wav"));
+		audioList.add(new FacesResource("audios", "over-the-rainbow.webm"));
+		audioList.add(new FacesResource("audios", "over-the-rainbow.ogv"));
 	}
 
 	@Override
