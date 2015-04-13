@@ -65,7 +65,7 @@ public class AudioBacking {
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Application application = facesContext.getApplication();
 			ResourceHandler resourceHandler = application.getResourceHandler();
-			Resource mp3AudioResource = resourceHandler.createResource("example.mp3", "audios");
+			Resource mp3AudioResource = resourceHandler.createResource("over-the-rainbow.mp3", "audios");
 			String requestPath = mp3AudioResource.getRequestPath();
 			ExternalContext externalContext = facesContext.getExternalContext();
 			String mp3ResourceURL = externalContext.encodeResourceURL(requestPath);
@@ -78,7 +78,7 @@ public class AudioBacking {
 	public FacesResource getOggAudio() {
 
 		if (oggAudio == null) {
-			oggAudio = new FacesResource("audios", "example.ogg");
+			oggAudio = new FacesResource("audios", "over-the-rainbow.ogg");
 		}
 
 		return oggAudio;
