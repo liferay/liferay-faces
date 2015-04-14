@@ -13,16 +13,20 @@
  */
 package com.liferay.faces.bridge.application.internal;
 
+import javax.faces.FacesException;
 import javax.faces.application.Application;
 import javax.faces.application.ApplicationWrapper;
 import javax.faces.application.ResourceHandler;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
+import javax.faces.component.behavior.AjaxBehavior;
+import javax.faces.component.behavior.Behavior;
 import javax.faces.context.FacesContext;
 import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
 import javax.portlet.faces.BridgeUtil;
 
+import com.liferay.faces.bridge.component.behavior.internal.AjaxBehaviorBridgeImpl;
 import com.liferay.faces.bridge.component.icefaces.internal.DataPaginator;
 import com.liferay.faces.bridge.component.icefaces.internal.DataPaginatorBridgeImpl;
 import com.liferay.faces.bridge.component.internal.UIViewRootBridgeImpl;
@@ -48,11 +52,28 @@ public abstract class ApplicationCompatImpl extends ApplicationWrapper {
 		this.wrappedApplication = application;
 	}
 
+	@Override
+	public Behavior createBehavior(String behaviorId) throws FacesException {
+
+		Behavior behavior = super.createBehavior(behaviorId);
+
+		if (AjaxBehavior.BEHAVIOR_ID.equals(behaviorId) && (behavior instanceof AjaxBehavior)) {
+
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			UIViewRoot viewRoot = facesContext.getViewRoot();
+			String namingContainerId = viewRoot.getContainerClientId(facesContext);
+
+			behavior = new AjaxBehaviorBridgeImpl((AjaxBehavior) behavior, namingContainerId);
+		}
+
+		return behavior;
+	}
+
 	@Deprecated
 	@Override
 	public UIComponent createComponent(FacesContext facesContext, String componentType, String rendererType) {
 
-		UIComponent uiComponent = null;
+		UIComponent uiComponent;
 
 		if (BridgeUtil.isPortletRequest()) {
 
@@ -104,7 +125,7 @@ public abstract class ApplicationCompatImpl extends ApplicationWrapper {
 			@SuppressWarnings("unchecked")
 			Class<? extends SystemEventListener> systemEventListenerClass = (Class<? extends SystemEventListener>) Class
 				.forName(configuredSystemEventListener.getSystemEventListenerClass());
-			SystemEventListener systemEventListener = (SystemEventListener) systemEventListenerClass.newInstance();
+			SystemEventListener systemEventListener = systemEventListenerClass.newInstance();
 
 			logger.debug("Subscribing UIViewRootBridgeImpl for systemEventClass=[{0}] systemEventListener=[{1}]",
 				systemEventClass, systemEventListener);
