@@ -393,13 +393,16 @@ public class InputFileRenderer extends InputFileRendererBase implements SystemEv
 
 	protected Map<String, List<UploadedFile>> getUploadedFileMap(FacesContext facesContext, String location) {
 
-		Map<String, List<UploadedFile>> uploadedFileMap;
+		Map<String, List<UploadedFile>> uploadedFileMap = null;
 
 		if (LIFERAY_FACES_BRIDGE_DETECTED) {
 			Map<String, Object> requestAttributeMap = facesContext.getExternalContext().getRequestMap();
 			MultiPartFormData multiPartFormData = (MultiPartFormData) requestAttributeMap.get(MultiPartFormData.class
 					.getName());
-			uploadedFileMap = multiPartFormData.getUploadedFileMap();
+
+			if (multiPartFormData != null) {
+				uploadedFileMap = multiPartFormData.getUploadedFileMap();
+			}
 		}
 		else {
 			InputFileDecoder inputFileDecoder = getInputFileDecoder();
