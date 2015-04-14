@@ -13,17 +13,6 @@
  */
 package com.liferay.faces.demos.list;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.primefaces.component.datatable.DataTable;
-
-import org.primefaces.model.LazyDataModel;
-import org.primefaces.model.SortOrder;
-
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -39,6 +28,19 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
+import org.primefaces.component.datatable.DataTable;
+
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortMeta;
+import org.primefaces.model.SortOrder;
+
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * This class extends the PrimeFaces {@link LazyDataModel} in order to provide a lazy-loaded list of {@link User}
@@ -47,155 +49,182 @@ import com.liferay.portal.service.UserLocalServiceUtil;
  * @author  Neil Griffin
  * @author  Kyle Stiemann
  */
-public class UserLazyDataModel extends LazyDataModel<User> implements Serializable {
+public class UserLazyDataModel extends LazyDataModel<User>
+    implements Serializable {
 
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(UserLazyDataModel.class);
+    // Logger
+    private static final Logger logger = LoggerFactory.getLogger(
+            UserLazyDataModel.class);
 
-	// serialVersionUID
-	private static final long serialVersionUID = 2087063071907939066L;
+    // serialVersionUID
+    private static final long serialVersionUID = 2087063071907939066L;
 
-	// Private Constants
-	private static final String DEFAULT_SORT_CRITERIA = "lastName";
+    // Private Constants
+    private static final String DEFAULT_SORT_CRITERIA = "lastName";
 
-	// Private Data Members
-	private long companyId;
+    // Private Data Members
+    private long companyId;
 
-	public UserLazyDataModel(long companyId, int pageSize) {
+    public UserLazyDataModel(long companyId, int pageSize) {
 
-		this.companyId = companyId;
-		setPageSize(pageSize);
-		setRowCount(countRows());
-	}
+        this.companyId = companyId;
+        setPageSize(pageSize);
+        setRowCount(countRows());
+    }
 
-	public int countRows() {
+    public int countRows() {
 
-		int totalCount = 0;
+        int totalCount = 0;
 
-		try {
-			LinkedHashMap<String, Object> params = new LinkedHashMap<String, Object>();
-			params.put("expandoAttributes", null);
+        try {
+            LinkedHashMap<String, Object> params =
+                new LinkedHashMap<String, Object>();
+            params.put("expandoAttributes", null);
 
-			Sort sort = SortFactoryUtil.getSort(User.class, DEFAULT_SORT_CRITERIA, "asc");
+            Sort sort = SortFactoryUtil.getSort(User.class,
+                    DEFAULT_SORT_CRITERIA, "asc");
 
-			boolean andSearch = true;
-			int status = WorkflowConstants.STATUS_ANY;
+            boolean andSearch = true;
+            int status = WorkflowConstants.STATUS_ANY;
 
-			String firstName = null;
-			String middleName = null;
-			String lastName = null;
-			String screenName = null;
-			String emailAddress = null;
+            String firstName = null;
+            String middleName = null;
+            String lastName = null;
+            String screenName = null;
+            String emailAddress = null;
 
-			Hits hits = UserLocalServiceUtil.search(companyId, firstName, middleName, lastName, screenName,
-					emailAddress, status, params, andSearch, QueryUtil.ALL_POS, QueryUtil.ALL_POS, sort);
-			totalCount = hits.getLength();
+            Hits hits = UserLocalServiceUtil.search(companyId, firstName,
+                    middleName, lastName, screenName, emailAddress, status,
+                    params, andSearch, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+                    sort);
+            totalCount = hits.getLength();
 
-		}
-		catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
 
-		return totalCount;
-	}
+        return totalCount;
+    }
 
-	/**
-	 * This method is called by the PrimeFaces {@link DataTable} according to the rows specified in the currently
-	 * displayed page of data.
-	 *
-	 * @param  first      The zero-relative first row index.
-	 * @param  pageSize   The number of rows to fetch.
-	 * @param  sortField  The name of the field which the table is sorted by.
-	 * @param  sortOrder  The sort order, which can be either ascending (default) or descending.
-	 * @param  filters    The query criteria. Note that in order for the filtering to work with the Liferay API, the
-	 *                    end-user must specify complete, matching words. Wildcards and partial matches are not
-	 *                    supported.
-	 */
-	@Override
-	public List<User> load(int first, int pageSize, String sortField, SortOrder sortOrder,
-		Map<String, Object> filters) {
+    /**
+     * This method is called by the PrimeFaces {@link DataTable} according to the rows specified in the currently
+     * displayed page of data.
+     *
+     * @param  first      The zero-relative first row index.
+     * @param  pageSize   The number of rows to fetch.
+     * @param  sortField  The name of the field which the table is sorted by.
+     * @param  sortOrder  The sort order, which can be either ascending (default) or descending.
+     * @param  filters    The query criteria. Note that in order for the filtering to work with the Liferay API, the
+     *                    end-user must specify complete, matching words. Wildcards and partial matches are not
+     *                    supported.
+     */
+    @Override public List<User> load(int first, int pageSize, String sortField,
+        SortOrder sortOrder, Map<String, Object> filters) {
 
-		List<User> users = null;
+        List<User> users = null;
 
-		Sort sort;
+        Sort sort;
 
-		// sort
-		if (sortField != null) {
+        // sort
+        if (sortField != null) {
 
-			if (sortOrder.equals(SortOrder.DESCENDING)) {
-				sort = SortFactoryUtil.getSort(User.class, sortField, "desc");
-			}
-			else {
-				sort = SortFactoryUtil.getSort(User.class, sortField, "asc");
-			}
-		}
-		else {
-			sort = SortFactoryUtil.getSort(User.class, DEFAULT_SORT_CRITERIA, "asc");
-		}
+            if (sortOrder.equals(SortOrder.DESCENDING)) {
+                sort = SortFactoryUtil.getSort(User.class, sortField, "desc");
+            } else {
+                sort = SortFactoryUtil.getSort(User.class, sortField, "asc");
+            }
+        } else {
+            sort = SortFactoryUtil.getSort(User.class, DEFAULT_SORT_CRITERIA,
+                    "asc");
+        }
 
-		try {
-			LinkedHashMap<String, Object> params = new LinkedHashMap<String, Object>();
-			int liferayOneRelativeFinishRow = first + pageSize + 1;
+        try {
+            LinkedHashMap<String, Object> params =
+                new LinkedHashMap<String, Object>();
+            int liferayOneRelativeFinishRow = first + pageSize + 1;
 
-			boolean andSearch = true;
-			int status = WorkflowConstants.STATUS_ANY;
+            boolean andSearch = true;
+            int status = WorkflowConstants.STATUS_ANY;
 
-			String firstName = trimExpresssion((String) filters.get("firstName"));
-			String middleName = trimExpresssion((String) filters.get("middleName"));
-			String lastName = trimExpresssion((String) filters.get("lastName"));
-			String screenName = trimExpresssion((String) filters.get("screenName"));
-			String emailAddress = trimExpresssion((String) filters.get("emailAddress"));
+            String firstName = trimExpresssion((String) filters.get(
+                        "firstName"));
+            String middleName = trimExpresssion((String) filters.get(
+                        "middleName"));
+            String lastName = trimExpresssion((String) filters.get("lastName"));
+            String screenName = trimExpresssion((String) filters.get(
+                        "screenName"));
+            String emailAddress = trimExpresssion((String) filters.get(
+                        "emailAddress"));
 
-			// For the sake of speed, search for users in the index rather than
-			// querying the database directly.
-			Hits hits = UserLocalServiceUtil.search(companyId, firstName, middleName, lastName, screenName,
-					emailAddress, status, params, andSearch, first, liferayOneRelativeFinishRow, sort);
+            // For the sake of speed, search for users in the index rather than
+            // querying the database directly.
+            Hits hits = UserLocalServiceUtil.search(companyId, firstName,
+                    middleName, lastName, screenName, emailAddress, status,
+                    params, andSearch, first, liferayOneRelativeFinishRow,
+                    sort);
 
-			List<Document> documentHits = hits.toList();
+            List<Document> documentHits = hits.toList();
 
-			logger.debug(
-				("filters firstName=[{0}] middleName=[{1}] lastName=[{2}] screenName=[{3}] emailAddress=[{4}] active=[{5}] andSearch=[{6}] startRow=[{7}] liferayOneRelativeFinishRow=[{8}] sortColumn=[{9}] reverseOrder=[{10}] hitCount=[{11}]"),
-				firstName, middleName, lastName, screenName, emailAddress, status, andSearch, first,
-				liferayOneRelativeFinishRow, sortField, sort.isReverse(), documentHits.size());
+            logger.debug(
+                ("filters firstName=[{0}] middleName=[{1}] lastName=[{2}] screenName=[{3}] emailAddress=[{4}] active=[{5}] andSearch=[{6}] startRow=[{7}] liferayOneRelativeFinishRow=[{8}] sortColumn=[{9}] reverseOrder=[{10}] hitCount=[{11}]"),
+                firstName, middleName, lastName, screenName, emailAddress,
+                status, andSearch, first, liferayOneRelativeFinishRow,
+                sortField, sort.isReverse(), documentHits.size());
 
-			// Convert the results from the search index into a list of user
-			// objects.
-			users = new ArrayList<User>(documentHits.size());
+            // Convert the results from the search index into a list of user
+            // objects.
+            users = new ArrayList<User>(documentHits.size());
 
-			for (Document document : documentHits) {
+            for (Document document : documentHits) {
 
-				long userId = GetterUtil.getLong(document.get(Field.USER_ID));
+                long userId = GetterUtil.getLong(document.get(Field.USER_ID));
 
-				try {
-					User user = UserLocalServiceUtil.getUserById(userId);
-					users.add(user);
-				}
-				catch (NoSuchUserException nsue) {
-					logger.error("User with userId=[{0}] does not exist in the search index. Please reindex.");
-				}
-			}
+                try {
+                    User user = UserLocalServiceUtil.getUserById(userId);
+                    users.add(user);
+                } catch (NoSuchUserException nsue) {
+                    logger.error(
+                        "User with userId=[{0}] does not exist in the search index. Please reindex.");
+                }
+            }
 
-		}
-		catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
 
-		return users;
+        return users;
 
-	}
+    }
 
-	protected String trimExpresssion(String value) {
+    protected String trimExpresssion(String value) {
 
-		String expression = null;
+        String expression = null;
 
-		if (value != null) {
-			String trimmedValue = value.trim();
+        if (value != null) {
+            String trimmedValue = value.trim();
 
-			if (trimmedValue.length() > 0) {
-				expression = trimmedValue.toLowerCase();
-			}
-		}
+            if (trimmedValue.length() > 0) {
+                expression = trimmedValue.toLowerCase();
+            }
+        }
 
-		return expression;
-	}
+        return expression;
+    }
+
+    @Override public User getRowData(String rowKey) {
+
+        User user = null;
+
+        try {
+            user = UserLocalServiceUtil.getUserById(Long.parseLong(rowKey));
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+
+        return user;
+    }
+
+    @Override public Object getRowKey(User user) {
+        return user.getUserId();
+    }
 }
