@@ -20,14 +20,11 @@ import javax.faces.application.Application;
 import javax.faces.application.NavigationHandler;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
-import javax.faces.component.behavior.AjaxBehavior;
-import javax.faces.component.behavior.Behavior;
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.faces.BridgeUtil;
 import javax.portlet.faces.component.PortletNamingContainerUIViewRoot;
 
-import com.liferay.faces.bridge.component.behavior.internal.AjaxBehaviorBridgeImpl;
 import com.liferay.faces.bridge.component.internal.UIViewRootBridgeImpl;
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.internal.BridgeConfigAttributeMap;
@@ -54,23 +51,6 @@ public class ApplicationImpl extends ApplicationCompatImpl {
 
 	public ApplicationImpl(Application application) {
 		super(application);
-	}
-
-	@Override
-	public Behavior createBehavior(String behaviorId) throws FacesException {
-
-		Behavior behavior = super.createBehavior(behaviorId);
-
-		if (AjaxBehavior.BEHAVIOR_ID.equals(behaviorId) && (behavior instanceof AjaxBehavior)) {
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			UIViewRoot viewRoot = facesContext.getViewRoot();
-			String namingContainerId = viewRoot.getContainerClientId(facesContext);
-
-			behavior = new AjaxBehaviorBridgeImpl((AjaxBehavior) behavior, namingContainerId);
-		}
-
-		return behavior;
 	}
 
 	/**
