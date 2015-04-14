@@ -17,12 +17,14 @@ import javax.faces.FacesException;
 import javax.faces.application.Application;
 import javax.faces.application.ApplicationWrapper;
 import javax.faces.application.ResourceHandler;
+import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.behavior.AjaxBehavior;
 import javax.faces.component.behavior.Behavior;
 import javax.faces.context.FacesContext;
 import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
+import javax.portlet.faces.BridgeUtil;
 
 import com.liferay.faces.bridge.component.behavior.internal.AjaxBehaviorBridgeImpl;
 import com.liferay.faces.bridge.component.internal.UIViewRootBridgeImpl;
@@ -65,6 +67,31 @@ public abstract class ApplicationCompatImpl extends ApplicationWrapper {
 		return behavior;
 	}
 
+	@Deprecated
+	@Override
+	public UIComponent createComponent(FacesContext facesContext, String componentType, String rendererType) {
+
+		UIComponent uiComponent;
+
+		if (BridgeUtil.isPortletRequest()) {
+
+			if (componentType.equals(UIViewRoot.COMPONENT_TYPE)) {
+
+				// FACES-1967: Apache MyFaces calls this 3-arg overload of createComponent rather than the 1-arg version
+				// when creating a UIViewRoot.
+				uiComponent = createComponent(componentType);
+			}
+			else {
+				uiComponent = super.createComponent(facesContext, componentType, rendererType);
+			}
+		}
+		else {
+			uiComponent = super.createComponent(facesContext, componentType, rendererType);
+		}
+
+		return uiComponent;
+	}
+
 	protected void subscribeToJSF2SystemEvent(ConfiguredSystemEventListener configuredSystemEventListener) {
 
 		try {
@@ -74,7 +101,7 @@ public abstract class ApplicationCompatImpl extends ApplicationWrapper {
 			@SuppressWarnings("unchecked")
 			Class<? extends SystemEventListener> systemEventListenerClass = (Class<? extends SystemEventListener>) Class
 				.forName(configuredSystemEventListener.getSystemEventListenerClass());
-			SystemEventListener systemEventListener = (SystemEventListener) systemEventListenerClass.newInstance();
+			SystemEventListener systemEventListener = systemEventListenerClass.newInstance();
 
 			logger.debug("Subscribing UIViewRootBridgeImpl for systemEventClass=[{0}] systemEventListener=[{1}]",
 				systemEventClass, systemEventListener);
