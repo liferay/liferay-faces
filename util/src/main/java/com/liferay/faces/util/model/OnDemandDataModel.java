@@ -25,7 +25,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public abstract class OnDemandDataModel<E> extends DataModel<E> implements Paginated, Sortable {
+public abstract class OnDemandDataModel<E> extends DataModel implements Paginated, Sortable {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(OnDemandDataModel.class);
