@@ -133,7 +133,8 @@ public class TesterBase {
 		pass.clear();
 		pass.sendKeys(p);
 		button.click();
-		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " after clicking the sign in button and waiting");
+		logger.log(Level.INFO, "browser.getTitle() = " + browser.getTitle() + " after clicking the sign in button.  Now waiting ...");
+		waitForElement(browser, signedInTextXpath);
 		logger.log(Level.INFO, text.getText());
 
 	}
