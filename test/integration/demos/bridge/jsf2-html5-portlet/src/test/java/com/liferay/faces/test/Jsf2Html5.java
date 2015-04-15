@@ -93,7 +93,7 @@ public class Jsf2Html5 extends TesterBase {
 	// xpath for specific tests
 	protected static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../child::node()";
 
-	static final String url = baseUrl + webContext + "/jsf2-spring";
+	static final String url = baseUrl + webContext + "/jsf2-html5";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;

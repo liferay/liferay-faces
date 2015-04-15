@@ -100,7 +100,7 @@ public class Jsf2Html5PortletTest extends TesterBase {
 	// xpath for specific tests
 	private static final String dateValidationXpath = "//input[contains(@id,':dateOfBirth')]/../child::node()";
 
-	static final String url = baseUrl + webContext + "/jsf2-spring";
+	static final String url = baseUrl + webContext + "/jsf2-html5";
 
 	@FindBy(xpath = formTagXpath)
 	private WebElement formTag;
