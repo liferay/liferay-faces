@@ -13,15 +13,40 @@
  */
 package com.liferay.faces.util.model;
 
-import java.util.List;
-
-
 /**
  * @author  Neil Griffin
  */
-public interface Sortable {
+public class SortCriterion {
 
-	public List<SortCriterion> getSortCriteria();
+	/**
+	 * @author  Neil Griffin
+	 */
+	public enum Order {
+		ASCENDING, DESCENDING, NONE
+	}
 
-	public void setSortCriteria(List<SortCriterion> sortCriteria);
+	// Private Data Members
+	private String columnId;
+	private Order order;
+
+	public SortCriterion(String columnId, Order order) {
+		this.columnId = columnId;
+		this.order = order;
+	}
+
+	public String getColumnId() {
+		return columnId;
+	}
+
+	public void setColumnId(String columnId) {
+		this.columnId = columnId;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
 }
