@@ -163,9 +163,6 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 
 				if ((rowIndex < startRowIndex) || (rowIndex > maxFinishRowIndex)) {
 
-					System.err.println("Clearing cache since rowIndex=[" + rowIndex +
-						"] is outside the range of cached rows");
-
 					if (logger.isDebugEnabled()) {
 						logger.debug("Clearing cache since rowIndex=[{0}] is outside the range of cached rows.",
 							rowIndex);
