@@ -198,4 +198,23 @@ public class UserLazyDataModel extends LazyDataModel<User> implements Serializab
 
 		return expression;
 	}
+
+	@Override
+	public User getRowData(String rowKey) {
+		User user = null;
+
+		try {
+			user = UserLocalServiceUtil.getUserById(Long.parseLong(rowKey));
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+
+		return user;
+	}
+
+	@Override
+	public Object getRowKey(User user) {
+		return user.getUserId();
+	}
 }
