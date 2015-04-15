@@ -4,6 +4,11 @@
 	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 	<faces-config-extension>
 		<name>LiferayFacesUtil</name>
+		<ordering>
+			<before>
+				<others />
+			</before>
+		</ordering>
 	</faces-config-extension>
 	<application>
 		<el-resolver>com.liferay.faces.util.el.ExtELResolver</el-resolver>

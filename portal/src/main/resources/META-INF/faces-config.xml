@@ -2,6 +2,12 @@
 <faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
 	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
+	<faces-config-extension>
+		<name>LiferayFacesPortal</name>
+		<after>
+			<name>LiferayFacesAlloy</name>
+		</after>
+	</faces-config-extension>
 	<lifecycle>
 		<phase-listener>com.liferay.faces.portal.lifecycle.LiferayLocalePhaseListener</phase-listener>
 	</lifecycle>
