@@ -55,7 +55,7 @@ public class Richfaces4 extends TesterBase {
 	private static final String phoneNumberFieldErrorXpath = "//input[contains(@id,':phoneNumber')]/following-sibling::*[1]";
 
 	private static final String dateOfBirthFieldXpath = "//input[contains(@id,':dateOfBirth')]";
-	private static final String dateOfBirthFieldErrorXpath = "//div[contains(@id,':dateOfBirthField')]/span/span[contains(@id,':dateOfBirth')]/span";
+	private static final String dateOfBirthFieldErrorXpath = "//span[contains(@id,':dateOfBirthField')]/span/span/span/span[contains(@id,':dateOfBirth')]/span";
 
 	private static final String cityFieldXpath = "//input[contains(@id,':city')]";
 	private static final String cityFieldErrorXpath = "//input[contains(@id,':city')]/following-sibling::*[1]";
@@ -87,7 +87,7 @@ public class Richfaces4 extends TesterBase {
 	private static final String bridgeVersionXpath = "//*[contains(text(),'Liferay Faces Bridge')]";
 
 	// xpath for specific tests
-	protected static final String dateValidationXpath = "//div[contains(@id,':dateOfBirthField')]/span/span[contains(@id,':dateOfBirth')]/span";
+	private static final String dateValidationXpath = "//span[contains(@id,':dateOfBirthField')]/span/span/span/span[contains(@id,':dateOfBirth')]/span";
 
 	static final String url = baseUrl + webContext + "/rich4";
 
