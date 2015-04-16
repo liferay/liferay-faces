@@ -13,11 +13,15 @@
  */
 package com.liferay.faces.demos.bean;
 
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UICommand;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIOutput;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.PhaseId;
@@ -54,6 +58,23 @@ public class CommandBackingBean {
 		FacesMessage facesMessage = new FacesMessage("The actionListener method was called during the " + phaseName +
 				" phase of the JSF lifecycle.");
 		facesContext.addMessage(null, facesMessage);
+	}
+	
+	public void feedbackListener(ActionEvent actionEvent) {
+			
+			String value = "";
+			
+			List<UIComponent> children = actionEvent.getComponent().getChildren();
+			for (UIComponent uiComponent : children) {
+				if (uiComponent instanceof UIOutput) {
+					value = (String) ((UIOutput) uiComponent).getValue();
+				}
+			}
+			
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			logger.debug("feedbackListener: You selected the '" + value + "' menu item.");
+			FacesMessage facesMessage = new FacesMessage("You selected the '" + value + "' menu item.");
+			facesContext.addMessage(null, facesMessage);
 	}
 
 	public void selectionListener(ActionEvent actionEvent) {

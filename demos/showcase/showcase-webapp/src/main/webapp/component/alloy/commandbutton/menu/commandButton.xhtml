@@ -7,25 +7,26 @@
 		<!-- Example 1: Creating menus via the alloy:menu tag -->
 		<alloy:form>
 			<showcase:example description="#{i18n['alloy-commandbutton-menu-example-1']}" number="1">
-				<alloy:commandButton>
+				<alloy:messages globalOnly="true" styleClass="feedback" />
+				<alloy:commandButton actionListener="#{commandBackingBean.feedbackListener}" render="@form">
 					<alloy:icon name="user" />
 					<alloy:outputText value="#{i18n['user']}" />
 					<alloy:menu>
-						<alloy:link includeViewParams="true">
+						<alloy:commandLink actionListener="#{commandBackingBean.feedbackListener}" render="@form">
 							<alloy:icon name="pencil" />
 							<alloy:outputText value="#{i18n['edit']}" />
-						</alloy:link>
+						</alloy:commandLink>
 						<hr />
-						<alloy:commandLink>
+						<alloy:commandLink actionListener="#{commandBackingBean.feedbackListener}" render="@form">
 							<alloy:icon name="ok-sign" />
 							<alloy:outputText value="#{i18n['enable']}" />
 						</alloy:commandLink>
-						<alloy:commandLink>
+						<alloy:commandLink actionListener="#{commandBackingBean.feedbackListener}" render="@form">
 							<alloy:icon name="minus-sign" />
 							<alloy:outputText value="#{i18n['disable']}" />
 						</alloy:commandLink>
 						<hr />
-						<alloy:commandLink>
+						<alloy:commandLink actionListener="#{commandBackingBean.feedbackListener}" render="@form">
 							<alloy:icon name="trash" />
 							<alloy:outputText value="#{i18n['delete']}" />
 						</alloy:commandLink>
@@ -40,7 +41,8 @@
 		<!-- Example 2: Styling the button with f:facet -->
 		<alloy:form>
 			<showcase:example description="#{i18n['alloy-commandbutton-menu-example-2']}" number="2">
-				<alloy:commandButton>
+				<alloy:messages globalOnly="true" styleClass="feedback" />
+				<alloy:commandButton actionListener="#{commandBackingBean.feedbackListener}" render="@form">
 					<alloy:icon name="user" />
 					<alloy:outputText value="#{i18n['user']}" />
 					<alloy:menu>
@@ -48,21 +50,21 @@
 							<alloy:icon name="chevron-down" />
 							<alloy:outputText value="#{i18n['drop-down']}" />
 						</f:facet>
-						<alloy:link includeViewParams="true">
+						<alloy:commandLink actionListener="#{commandBackingBean.feedbackListener}" render="@form">
 							<alloy:icon name="pencil" />
 							<alloy:outputText value="#{i18n['edit']}" />
-						</alloy:link>
+						</alloy:commandLink>
 						<hr />
-						<alloy:commandLink>
+						<alloy:commandLink actionListener="#{commandBackingBean.feedbackListener}" render="@form">
 							<alloy:icon name="ok-sign" />
 							<alloy:outputText value="#{i18n['enable']}" />
 						</alloy:commandLink>
-						<alloy:commandLink>
+						<alloy:commandLink actionListener="#{commandBackingBean.feedbackListener}" render="@form">
 							<alloy:icon name="minus-sign" />
 							<alloy:outputText value="#{i18n['disable']}" />
 						</alloy:commandLink>
 						<hr />
-						<alloy:commandLink>
+						<alloy:commandLink actionListener="#{commandBackingBean.feedbackListener}" render="@form">
 							<alloy:icon name="trash" />
 							<alloy:outputText value="#{i18n['delete']}" />
 						</alloy:commandLink>

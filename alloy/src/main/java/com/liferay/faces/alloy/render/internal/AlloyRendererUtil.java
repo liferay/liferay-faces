@@ -111,7 +111,7 @@ import com.liferay.faces.util.render.internal.RendererUtil;
 			responseWriter.write(alloyBeginScript);
 		}
 
-		if (ajax) {
+		if (ajax && (uiComponent instanceof ClientComponent) ) {
 
 			ClientComponent clientComponent = (ClientComponent) uiComponent;
 			String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
