@@ -17,24 +17,24 @@ import javax.portlet.MimeResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceURL;
 
+import com.liferay.faces.bridge.context.BridgeContext;
 import com.liferay.faces.bridge.filter.liferay.LiferayActionURL;
 import com.liferay.faces.bridge.filter.liferay.LiferayRenderURL;
 import com.liferay.faces.bridge.filter.liferay.LiferayResourceURL;
-import com.liferay.faces.bridge.filter.liferay.LiferayURLGenerator;
-import com.liferay.faces.bridge.context.BridgeContext;
-
 import com.liferay.faces.bridge.filter.liferay.LiferayURLFactory;
+import com.liferay.faces.bridge.filter.liferay.LiferayURLGenerator;
+
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 
 
 /**
- * This class implements the {@link com.liferay.faces.bridge.filter.liferay.LiferayURLFactory} contract for creating Liferay-compatible URLs. The design
- * provides a performance optimization that was first introduced in FACES-220 and FACES-245. The optimization prevents
- * repetitive calls to Liferay Portal's {@link PortletURL#toString()} method by ensuring that the toString() method of
- * {@link MimeResponse#createActionURL()}, {@link MimeResponse#createRenderURL()}, and {@link
- * MimeResponse#createResourceURL()} are called only once during the JSF lifecycle, and that the pertinent parts of the
- * String are cached. However, the optimization is only usable for portlets that do not have an associated Liferay
- * {@link FriendlyURLMapper}. For more info, see FACES-257.
+ * This class implements the {@link com.liferay.faces.bridge.filter.liferay.LiferayURLFactory} contract for creating
+ * Liferay-compatible URLs. The design provides a performance optimization that was first introduced in FACES-220 and
+ * FACES-245. The optimization prevents repetitive calls to Liferay Portal's {@link PortletURL#toString()} method by
+ * ensuring that the toString() method of {@link MimeResponse#createActionURL()}, {@link
+ * MimeResponse#createRenderURL()}, and {@link MimeResponse#createResourceURL()} are called only once during the JSF
+ * lifecycle, and that the pertinent parts of the String are cached. However, the optimization is only usable for
+ * portlets that do not have an associated Liferay {@link FriendlyURLMapper}. For more info, see FACES-257.
  *
  * @author  Neil Griffin
  */
@@ -49,38 +49,27 @@ public class LiferayURLFactoryImpl extends LiferayURLFactory {
 
 	@Override
 	public LiferayActionURL getLiferayActionURL(BridgeContext bridgeContext, MimeResponse mimeResponse,
-		String responseNamespace, boolean friendlyURLMapperEnabled) {
+		String responseNamespace) {
 
-		LiferayActionURL liferayActionURL = null;
+		LiferayURLGenerator liferayURLGenerator = (LiferayURLGenerator) bridgeContext.getAttributes().get(
+				ACTION_URL_GENERATOR);
 
-		if (friendlyURLMapperEnabled) {
+		if (liferayURLGenerator == null) {
 
 			PortletURL actionURL = mimeResponse.createActionURL();
-			liferayActionURL = new LiferayActionURLFriendlyImpl(actionURL, responseNamespace);
-		}
-		else {
-			LiferayURLGenerator liferayURLGenerator = (LiferayURLGenerator) bridgeContext.getAttributes().get(
-					ACTION_URL_GENERATOR);
-
-			if (liferayURLGenerator == null) {
-
-				PortletURL actionURL = mimeResponse.createActionURL();
-				liferayURLGenerator = new LiferayURLGeneratorActionImpl(actionURL.toString(),
-						actionURL.getPortletMode(), responseNamespace, actionURL.getWindowState());
-				bridgeContext.getAttributes().put(ACTION_URL_GENERATOR, liferayURLGenerator);
-			}
-
-			liferayActionURL = new LiferayActionURLImpl(liferayURLGenerator);
+			liferayURLGenerator = new LiferayURLGeneratorActionImpl(actionURL.toString(), actionURL.getPortletMode(),
+					responseNamespace, actionURL.getWindowState());
+			bridgeContext.getAttributes().put(ACTION_URL_GENERATOR, liferayURLGenerator);
 		}
 
-		return liferayActionURL;
+		return new LiferayActionURLImpl(liferayURLGenerator);
 	}
 
 	@Override
 	public LiferayRenderURL getLiferayRenderURL(BridgeContext bridgeContext, MimeResponse mimeResponse,
 		String responseNamespace, boolean friendlyURLMapperEnabled) {
 
-		LiferayRenderURL liferayRenderURL = null;
+		LiferayRenderURL liferayRenderURL;
 
 		if (friendlyURLMapperEnabled) {
 
@@ -107,30 +96,19 @@ public class LiferayURLFactoryImpl extends LiferayURLFactory {
 
 	@Override
 	public LiferayResourceURL getLiferayResourceURL(BridgeContext bridgeContext, MimeResponse mimeResponse,
-		String responseNamespace, boolean friendlyURLMapperEnabled) {
+		String responseNamespace) {
 
-		LiferayResourceURL liferayResourceURL = null;
+		LiferayURLGenerator liferayURLGenerator = (LiferayURLGenerator) bridgeContext.getAttributes().get(
+				RESOURCE_URL_GENERATOR);
 
-		if (friendlyURLMapperEnabled) {
+		if (liferayURLGenerator == null) {
 
 			ResourceURL resourceURL = mimeResponse.createResourceURL();
-			liferayResourceURL = new LiferayResourceURLFriendlyImpl(resourceURL, responseNamespace);
-		}
-		else {
-			LiferayURLGenerator liferayURLGenerator = (LiferayURLGenerator) bridgeContext.getAttributes().get(
-					RESOURCE_URL_GENERATOR);
-
-			if (liferayURLGenerator == null) {
-
-				ResourceURL resourceURL = mimeResponse.createResourceURL();
-				liferayURLGenerator = new LiferayURLGeneratorResourceImpl(resourceURL.toString(), responseNamespace);
-				bridgeContext.getAttributes().put(RESOURCE_URL_GENERATOR, liferayURLGenerator);
-			}
-
-			liferayResourceURL = new LiferayResourceURLImpl(liferayURLGenerator);
+			liferayURLGenerator = new LiferayURLGeneratorResourceImpl(resourceURL.toString(), responseNamespace);
+			bridgeContext.getAttributes().put(RESOURCE_URL_GENERATOR, liferayURLGenerator);
 		}
 
-		return liferayResourceURL;
+		return new LiferayResourceURLImpl(liferayURLGenerator);
 	}
 
 	public LiferayURLFactory getWrapped() {
