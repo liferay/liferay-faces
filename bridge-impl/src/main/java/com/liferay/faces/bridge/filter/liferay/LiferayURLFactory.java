@@ -25,11 +25,11 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class LiferayURLFactory implements Wrapper<LiferayURLFactory> {
 
 	public abstract LiferayActionURL getLiferayActionURL(BridgeContext bridgeContext, MimeResponse mimeResponse,
-		String responseNamespace, boolean friendlyURLMapperEnabled);
+		String responseNamespace);
 
 	public abstract LiferayRenderURL getLiferayRenderURL(BridgeContext bridgeContext, MimeResponse mimeResponse,
 		String responseNamespace, boolean friendlyURLMapperEnabled);
 
 	public abstract LiferayResourceURL getLiferayResourceURL(BridgeContext bridgeContext, MimeResponse mimeResponse,
-		String responseNamespace, boolean friendlyURLMapperEnabled);
+		String responseNamespace);
 }

@@ -44,8 +44,7 @@ public class ResourceResponseBridgeLiferayImpl extends ResourceResponseBridgeImp
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
-		return liferayURLFactory.getLiferayActionURL(bridgeContext, getResponse(), getNamespace(),
-				isFriendlyURLMapperEnabled(bridgeContext));
+		return liferayURLFactory.getLiferayActionURL(bridgeContext, getResponse(), getNamespace());
 	}
 
 	@Override
@@ -62,8 +61,7 @@ public class ResourceResponseBridgeLiferayImpl extends ResourceResponseBridgeImp
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
-		return liferayURLFactory.getLiferayResourceURL(bridgeContext, getResponse(), getNamespace(),
-				isFriendlyURLMapperEnabled(bridgeContext));
+		return liferayURLFactory.getLiferayResourceURL(bridgeContext, getResponse(), getNamespace());
 	}
 
 	protected boolean isFriendlyURLMapperEnabled(BridgeContext bridgeContext) {
