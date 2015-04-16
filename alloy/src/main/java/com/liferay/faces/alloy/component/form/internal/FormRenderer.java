@@ -14,18 +14,21 @@
 package com.liferay.faces.alloy.component.form.internal;
 
 import java.io.IOException;
+import java.util.Collection;
 
+import javax.el.ValueExpression;
 import javax.faces.application.Application;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewParameter;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
+import javax.faces.view.ViewMetadata;
 
 import com.liferay.faces.alloy.component.form.Form;
-import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 
 
@@ -44,20 +47,55 @@ public class FormRenderer extends FormRendererBase {
 
 		if (form.isIncludeViewParams()) {
 
-			UIViewRoot uiViewRoot = facesContext.getViewRoot();
-			String viewId = uiViewRoot.getViewId();
 			Application application = facesContext.getApplication();
 			ViewHandler viewHandler = application.getViewHandler();
-			String bookmarkableURL = viewHandler.getBookmarkableURL(facesContext, viewId, null, true);
+			UIViewRoot uiViewRoot = facesContext.getViewRoot();
+			String viewId = uiViewRoot.getViewId();
 			String actionURL = viewHandler.getActionURL(facesContext, viewId);
-			int questionMarkPos = bookmarkableURL.indexOf(StringPool.QUESTION);
+			StringBuilder actionURLBuilder = new StringBuilder(actionURL);
+			Collection<UIViewParameter> viewParameters = ViewMetadata.getViewParameters(uiViewRoot);
 
-			if (questionMarkPos > 0) {
-				actionURL += bookmarkableURL.substring(questionMarkPos);
+			if (viewParameters != null) {
+
+				boolean firstParam = true;
+
+				for (UIViewParameter uiViewParameter : viewParameters) {
+
+					String viewParameterName = uiViewParameter.getName();
+
+					if (viewParameterName != null) {
+
+						if (firstParam) {
+							actionURLBuilder.append("?");
+							firstParam = false;
+						}
+						else {
+							actionURLBuilder.append("&");
+						}
+
+						actionURLBuilder.append(viewParameterName);
+						actionURLBuilder.append("=");
+
+						String viewParameterValue = null;
+						ValueExpression valueExpression = uiViewParameter.getValueExpression("value");
+
+						if (valueExpression != null) {
+							viewParameterValue = uiViewParameter.getStringValueFromModel(facesContext);
+						}
+
+						if (viewParameterValue == null) {
+							viewParameterValue = uiViewParameter.getStringValue(facesContext);
+						}
+
+						if (viewParameterValue != null) {
+							actionURLBuilder.append(viewParameterValue);
+						}
+					}
+				}
 			}
 
 			ExternalContext externalContext = facesContext.getExternalContext();
-			String encodedActionURL = externalContext.encodeActionURL(actionURL);
+			String encodedActionURL = externalContext.encodeActionURL(actionURLBuilder.toString());
 			ResponseWriter responseWriter = facesContext.getResponseWriter();
 			DelegationResponseWriter delegationResponseWriter = new FormResponseWriter(responseWriter,
 					encodedActionURL);
