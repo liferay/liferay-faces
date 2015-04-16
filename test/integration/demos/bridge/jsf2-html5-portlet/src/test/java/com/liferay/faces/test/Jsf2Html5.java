@@ -174,6 +174,6 @@ public class Jsf2Html5 extends TesterBase {
 	@FindBy(xpath = bridgeVersionXpath)
 	private WebElement bridgeVersion;
 	
-	protected int dateValidationXpathModifier = 1;
+	protected int dateValidationXpathModifier = 2;
 
 }
