@@ -16,6 +16,7 @@ package com.liferay.faces.bridge.context.url.internal.liferay;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.BaseURL;
 import javax.portlet.PortletResponse;
@@ -58,15 +59,28 @@ public class BridgeRedirectURLLiferayImpl extends BridgeRedirectURLImpl {
 	@Override
 	protected BaseURL toBaseURL() throws MalformedURLException {
 
+		BaseURL baseURL;
+
 		if (BridgeUtil.getPortletRequestPhase() == Bridge.PortletPhase.ACTION_PHASE) {
 
-			BaseURL baseURL = createRenderURL(uri);
+			baseURL = createRenderURL(uri);
 			baseURL.setParameter(viewIdRenderParameterName, viewId);
 
-			return baseURL;
+			Map<String, String[]> parameterMap = getParameterMap();
+			Set<Map.Entry<String, String[]>> entrySet = parameterMap.entrySet();
+
+			for (Map.Entry<String, String[]> mapEntry : entrySet) {
+
+				String parameterName = mapEntry.getKey();
+				String[] parameterValues = mapEntry.getValue();
+
+				baseURL.setParameter(parameterName, parameterValues);
+			}
 		}
 		else {
-			return super.toBaseURL();
+			baseURL = super.toBaseURL();
 		}
+
+		return baseURL;
 	}
 }
