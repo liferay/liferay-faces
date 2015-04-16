@@ -19,9 +19,9 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceURL;
 
 import com.liferay.faces.bridge.BridgeFactoryFinder;
-import com.liferay.faces.bridge.filter.liferay.internal.LiferayPortalUtil;
-import com.liferay.faces.bridge.filter.liferay.LiferayURLFactory;
 import com.liferay.faces.bridge.context.BridgeContext;
+import com.liferay.faces.bridge.filter.liferay.LiferayURLFactory;
+import com.liferay.faces.bridge.filter.liferay.internal.LiferayPortalUtil;
 
 
 /**
@@ -44,8 +44,7 @@ public class RenderResponseBridgeLiferayImpl extends RenderResponseBridgeImpl {
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
-		return liferayURLFactory.getLiferayActionURL(bridgeContext, getResponse(), getNamespace(),
-				isFriendlyURLMapperEnabled(bridgeContext));
+		return liferayURLFactory.getLiferayActionURL(bridgeContext, getResponse(), getNamespace());
 	}
 
 	@Override
@@ -62,8 +61,7 @@ public class RenderResponseBridgeLiferayImpl extends RenderResponseBridgeImpl {
 
 		BridgeContext bridgeContext = BridgeContext.getCurrentInstance();
 
-		return liferayURLFactory.getLiferayResourceURL(bridgeContext, getResponse(), getNamespace(),
-				isFriendlyURLMapperEnabled(bridgeContext));
+		return liferayURLFactory.getLiferayResourceURL(bridgeContext, getResponse(), getNamespace());
 	}
 
 	protected boolean isFriendlyURLMapperEnabled(BridgeContext bridgeContext) {
