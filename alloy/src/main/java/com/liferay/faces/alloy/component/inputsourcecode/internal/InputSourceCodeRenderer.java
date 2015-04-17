@@ -78,8 +78,14 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 			responseWriter.write(".getSession().getValue())});");
 		}
 
-		responseWriter.write(clientVarName + ".editor.setOptions({ minLines: " + inputSourceCode.getMinLines() + " });");
-		responseWriter.write(clientVarName + ".editor.setOptions({ maxLines: " + inputSourceCode.getMaxLines() + " });");
+		responseWriter.write(clientVarName);
+		responseWriter.write(".editor.setOptions({ minLines: ");
+		responseWriter.write(inputSourceCode.getMinLines().toString());
+		responseWriter.write("});");
+		responseWriter.write(clientVarName);
+		responseWriter.write(".editor.setOptions({ maxLines: ");
+		responseWriter.write(inputSourceCode.getMaxLines().toString());
+		responseWriter.write("});");
 	}
 
 	@Override

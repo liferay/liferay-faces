@@ -1778,15 +1778,15 @@
 			<attribute>
 				<defaultValue>6</defaultValue>
 				<description>
-					<![CDATA[Start with this number of lines.  Default is 6.]]>
+					<![CDATA[Minimum number of lines that the editor is to display. Default is 6.]]>
 				</description>
 				<name>minLines</name>
 				<type>java.lang.Integer</type>
 			</attribute>
 			<attribute>
-				<defaultValue>1048</defaultValue>
+				<defaultValue>1024</defaultValue>
 				<description>
-					<![CDATA[Auto-resize the height of the editor up to this number of lines.  Add a vertical scroll bar, if the number of lines exceeds this value.  Default is 1048.]]>
+					<![CDATA[Specifies the maximum number of lines that the editor is to display before a vertical scrollbar appears. Default is 1024.]]>
 				</description>
 				<name>maxLines</name>
 				<type>java.lang.Integer</type>

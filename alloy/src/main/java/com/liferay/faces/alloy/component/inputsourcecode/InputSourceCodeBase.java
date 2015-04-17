@@ -79,7 +79,7 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 	}
 
 	public Integer getMaxLines() {
-		return (Integer) getStateHelper().eval(InputSourceCodePropertyKeys.maxLines, 1048);
+		return (Integer) getStateHelper().eval(InputSourceCodePropertyKeys.maxLines, 1024);
 	}
 
 	public void setMaxLines(Integer maxLines) {
