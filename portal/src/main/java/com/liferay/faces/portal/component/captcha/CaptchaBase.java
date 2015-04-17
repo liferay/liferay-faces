@@ -27,9 +27,18 @@ public abstract class CaptchaBase extends UIInput implements Styleable {
 
 	// Protected Enumerations
 	protected enum CaptchaPropertyKeys {
+		label,
 		style,
 		styleClass,
 		url
+	}
+
+	public String getLabel() {
+		return (String) getStateHelper().eval(CaptchaPropertyKeys.label, null);
+	}
+
+	public void setLabel(String label) {
+		getStateHelper().put(CaptchaPropertyKeys.label, label);
 	}
 
 	@Override

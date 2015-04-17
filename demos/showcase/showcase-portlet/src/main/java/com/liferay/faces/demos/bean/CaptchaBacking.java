@@ -26,17 +26,15 @@ import com.liferay.portal.kernel.captcha.CaptchaUtil;
  */
 @ManagedBean
 @RequestScoped
-public class CaptchaBackingBean {
+public class CaptchaBacking {
 
 	private String captchaText;
 
-	public String validateAction() {
+	public void submit() {
+
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-
-		FacesMessage facesMessage = new FacesMessage("All validations passed. You entered right captcha");
+		FacesMessage facesMessage = new FacesMessage("You entered the correct text verification code.");
 		facesContext.addMessage(null, facesMessage);
-
-		return null;
 	}
 
 	public String getCaptchaImpl() {

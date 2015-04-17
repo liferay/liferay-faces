@@ -26,7 +26,8 @@ import com.liferay.faces.portal.component.captcha.Captcha;
 import com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer;
 import com.liferay.faces.portal.resource.CaptchaResource;
 import com.liferay.faces.portal.resource.LiferayFacesResourceHandler;
-import com.liferay.faces.util.lang.StringPool;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -44,11 +45,13 @@ import com.liferay.taglib.ui.CaptchaTag;
 //J+
 public class CaptchaRenderer extends DelayedPortalTagRenderer<Captcha, CaptchaTag> {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(CaptchaRenderer.class);
+
 	static {
 
 		try {
 			String captchaClassName = PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_IMPL);
-
 			ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 
 			@SuppressWarnings("unchecked")
@@ -62,29 +65,24 @@ public class CaptchaRenderer extends DelayedPortalTagRenderer<Captcha, CaptchaTa
 			captchaUtil.setCaptcha(captcha);
 		}
 		catch (Exception e) {
-
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e);
 		}
 	}
-
-	public static final String SIMPLECAPTCHA_TEXT_PARAM = "captchaText";
-	public static final String RECAPTCHA_TEXT_PARAM = "recaptcha_response_field";
 
 	@Override
 	public void decode(FacesContext facesContext, UIComponent uiComponent) {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
-		String submittedValue = null;
+		String submittedValue;
 		Captcha captcha = cast(uiComponent);
 		String captchaImpl = CaptchaUtil.getCaptcha().getClass().getName();
 
 		if (captchaImpl.contains("ReCaptcha")) {
-			submittedValue = requestParameterMap.get(RECAPTCHA_TEXT_PARAM);
+			submittedValue = requestParameterMap.get("recaptcha_response_field");
 		}
 		else {
-			submittedValue = requestParameterMap.get(SIMPLECAPTCHA_TEXT_PARAM);
+			submittedValue = requestParameterMap.get("captchaText");
 		}
 
 		captcha.setSubmittedValue(submittedValue);
@@ -103,7 +101,7 @@ public class CaptchaRenderer extends DelayedPortalTagRenderer<Captcha, CaptchaTa
 	@Override
 	protected void copyFrameworkAttributes(FacesContext facesContext, Captcha captcha, CaptchaTag captchaTag) {
 
-		String url = StringPool.BLANK;
+		String url;
 
 		if (captcha.getUrl() != null) {
 			url = captcha.getUrl();
@@ -126,22 +124,28 @@ public class CaptchaRenderer extends DelayedPortalTagRenderer<Captcha, CaptchaTa
 	@Override
 	protected StringBuilder getMarkup(UIComponent uiComponent, StringBuilder markup) throws Exception {
 
-		//J-
-		// NOTE: This method is needed for having the refresh captcha link with the right id
-		// when using SimpleCaptcha (default in Liferay portal-ext.properties)
-		// It works using other Liferay portlets, because it internally uses the namespace and this
-		// is not populated if used through Liferay Faces
-		//J+
-
+		// Fix the refresh captcha link with the namespaced id when using SimpleCaptcha (default in
+		// portal-ext.properties). It works using out-of-the-box Liferay portlets because it internally uses the
+		// namespace and this is not populated if used through Liferay Faces.
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
-
 		PortletResponse portletResponse = (PortletResponse) externalContext.getResponse();
+		String namespace = portletResponse.getNamespace();
+		String replacement = "id=\"".concat(namespace).concat("refreshCaptcha\"");
+		String modifiedMarkup = markup.toString();
+		modifiedMarkup = modifiedMarkup.replace("id=\"refreshCaptcha\"", replacement);
 
-		String replaced = markup.toString().replace("id=\"refreshCaptcha\"",
-				"id=\"" + portletResponse.getNamespace() + "refreshCaptcha\"");
+		// Remove <label>Text Verification<span class="required">...</span></label> since it is not possible to
+		// customize the "Text Verification" label in the JSP tag. Better to let JSF developers decorate portal:captcha
+		// with alloy:field if they want to.
+		int labelStartPos = modifiedMarkup.indexOf("<label");
 
-		return new StringBuilder(replaced);
+		if (labelStartPos > 0) {
+			int labelFinishPos = modifiedMarkup.indexOf("</label>");
+			modifiedMarkup = modifiedMarkup.substring(0, labelStartPos) + modifiedMarkup.substring(labelFinishPos + 8);
+		}
+
+		return new StringBuilder(modifiedMarkup);
 	}
 
 }

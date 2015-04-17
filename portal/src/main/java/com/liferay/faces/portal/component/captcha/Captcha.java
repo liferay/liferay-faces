@@ -13,15 +13,22 @@
  */
 package com.liferay.faces.portal.component.captcha;
 
+import java.util.Locale;
+import java.util.Map;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.FacesComponent;
+import javax.faces.component.UIViewRoot;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import javax.portlet.PortletRequest;
 import javax.portlet.filter.PortletRequestWrapper;
 
-import com.liferay.faces.portal.component.captcha.internal.CaptchaRenderer;
-import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.component.ComponentUtil;
+import com.liferay.faces.util.context.MessageContext;
+import com.liferay.faces.util.context.MessageContextFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -50,7 +57,6 @@ public class Captcha extends CaptchaBase {
 	public Captcha() {
 		super();
 		setRendererType(RENDERER_TYPE);
-		setRequired(true);
 	}
 
 	@Override
@@ -60,13 +66,19 @@ public class Captcha extends CaptchaBase {
 
 		if (isValid() && (value != null)) {
 
-			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			UIViewRoot viewRoot = facesContext.getViewRoot();
+			Locale locale = viewRoot.getLocale();
+			MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+					MessageContextFactory.class);
+			MessageContext messageContext = messageContextFactory.getMessageContext();
 
 			try {
-				PortletRequest portletRequest = liferayFacesContext.getPortletRequest();
+				ExternalContext externalContext = facesContext.getExternalContext();
+				Map<String, Object> sessionMap = externalContext.getSessionMap();
+				PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
 				String userCaptchaTextValue = value.toString();
-				String correctCaptchaTextValue = (String) liferayFacesContext.getSessionAttribute(
-						WEB_KEYS_CAPTCHA_TEXT);
+				String correctCaptchaTextValue = (String) sessionMap.get(WEB_KEYS_CAPTCHA_TEXT);
 
 				CaptchaPortletRequest captchaPortletRequest = new CaptchaPortletRequest(portletRequest,
 						userCaptchaTextValue);
@@ -79,18 +91,16 @@ public class Captcha extends CaptchaBase {
 				// Liferay Captcha implementations like SimpleCaptchaUtil will remove the "CAPTCHA_TEXT" session
 				// attribute when calling the Capatcha.check(PortletRequest) method. But this will cause a problem
 				// if we're using an Ajaxified input field. As a workaround, set the value of the attribute again.
-				liferayFacesContext.setSessionAttribute(WEB_KEYS_CAPTCHA_TEXT, correctCaptchaTextValue);
+				sessionMap.put(WEB_KEYS_CAPTCHA_TEXT, correctCaptchaTextValue);
 			}
 			catch (CaptchaTextException e) {
-				String key = "text-verification-failed";
-				String summary = liferayFacesContext.getMessage(key);
+				String summary = messageContext.getMessage(locale, "text-verification-failed");
 				FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, summary);
 				context.addMessage(getClientId(context), facesMessage);
 				setValid(false);
 			}
 			catch (CaptchaMaxChallengesException e) {
-				String key = "maximum-number-of-captcha-attempts-exceeded";
-				String summary = liferayFacesContext.getMessage(key);
+				String summary = messageContext.getMessage(locale, "maximum-number-of-captcha-attempts-exceeded");
 				FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, summary);
 				context.addMessage(getClientId(context), facesMessage);
 				setValid(false);
@@ -98,13 +108,29 @@ public class Captcha extends CaptchaBase {
 			catch (Exception e) {
 				logger.error(e);
 
-				String key = "an-unexpected-error-occurred";
-				String summary = liferayFacesContext.getMessage(key);
+				String summary = messageContext.getMessage(locale, "an-unexpected-error-occurred");
 				FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, summary);
 				context.addMessage(getClientId(context), facesMessage);
 				setValid(false);
 			}
 		}
+	}
+
+	@Override
+	public String getLabel() {
+
+		String label = super.getLabel();
+
+		if (label == null) {
+
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+
+			if (facesContext.getCurrentPhaseId() == PhaseId.PROCESS_VALIDATIONS) {
+				label = ComponentUtil.getComponentLabel(this);
+			}
+		}
+
+		return label;
 	}
 
 	@Override
@@ -129,7 +155,7 @@ public class Captcha extends CaptchaBase {
 		@Override
 		public String getParameter(String name) {
 
-			if (CaptchaRenderer.SIMPLECAPTCHA_TEXT_PARAM.equals(name)) {
+			if ("captchaText".equals(name)) {
 				return userCaptchaTextValue;
 			}
 			else {
