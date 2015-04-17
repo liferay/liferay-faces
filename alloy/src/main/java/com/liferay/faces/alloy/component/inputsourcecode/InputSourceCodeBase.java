@@ -33,6 +33,8 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 		height,
 		highlightActiveLine,
 		locale,
+		maxLines,
+		minLines,
 		mode,
 		readOnly,
 		showPrintMargin,
@@ -74,6 +76,22 @@ public abstract class InputSourceCodeBase extends HtmlInputText implements Style
 
 	public void setLocale(String locale) {
 		getStateHelper().put(InputSourceCodePropertyKeys.locale, locale);
+	}
+
+	public Integer getMaxLines() {
+		return (Integer) getStateHelper().eval(InputSourceCodePropertyKeys.maxLines, 1048);
+	}
+
+	public void setMaxLines(Integer maxLines) {
+		getStateHelper().put(InputSourceCodePropertyKeys.maxLines, maxLines);
+	}
+
+	public Integer getMinLines() {
+		return (Integer) getStateHelper().eval(InputSourceCodePropertyKeys.minLines, 6);
+	}
+
+	public void setMinLines(Integer minLines) {
+		getStateHelper().put(InputSourceCodePropertyKeys.minLines, minLines);
 	}
 
 	public String getMode() {
