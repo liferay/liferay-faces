@@ -39,11 +39,7 @@
 						value="#{registrantModelBean.registrant.password1}" required="true" />
 					<aui-cc:input inlineMessage="true" label="#{i18n['confirm-password']}" type="password"
 						value="#{registrantModelBean.registrant.password2}" required="true" />
-					<liferay-ui:captcha rendered="#{registrantBackingBean.captchaRendered}" />
-					<aui-cc:input inlineMessage="true" label="#{i18n['text-verification']}"
-						value="#{registrantModelBean.registrant.captchaText}" required="true">
-						<liferay-util:validateCaptcha for="inputText" />
-					</aui-cc:input>
+					<portal:captcha rendered="#{registrantBackingBean.captchaRendered}" />					
 				</alloy:fieldset>
 			</alloy:column>
 		</alloy:row>

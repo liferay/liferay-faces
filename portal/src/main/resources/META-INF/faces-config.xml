@@ -25,8 +25,4 @@
 	<lifecycle>
 		<phase-listener>com.liferay.faces.portal.lifecycle.LiferayLocalePhaseListener</phase-listener>
 	</lifecycle>
-	<validator>
-		<validator-id>com.liferay.faces.portal.CaptchaValidator</validator-id>
-		<validator-class>com.liferay.faces.portal.validator.CaptchaValidator</validator-class>
-	</validator>
 </faces-config>
