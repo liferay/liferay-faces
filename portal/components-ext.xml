@@ -42,6 +42,17 @@
 			<![CDATA[ButtonRow is a UIPanel component that renders a <code>&lt;div&gt;</code> element for grouping purposes. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
 		</description>
 	</component>
+	<component name="Captcha" extendsTags="FacesMessageLabel Styleable UIInput" parentClass="javax.faces.component.UIInput"
+		parentRendererClass="com.liferay.faces.portal.render.internal.DelayedPortalTagRenderer&lt;com.liferay.faces.portal.component.captcha.Captcha, com.liferay.taglib.ui.CaptchaTag&gt;">
+	      <description><![CDATA[Captcha is a UIInput that renders Liferay Portal's captcha image and a field for editing single-line text. It provides built-in validation in order to make sure that the text value entered by the user matches the value in the captcha image.]]></description>
+	      <attributes>
+		 <attribute>
+		    <description><![CDATA[Specifies a custom captcha image URL. If the value is empty (default), then the image will be obtained from Liferay Portal's built-in captcha feature.]]></description>
+		    <name>url</name>
+		    <type>String</type>
+		 </attribute>
+	      </attributes>
+	</component>
 	<component name="Header" generateJavaComponent="true" generateJavaRenderer="false"
               extendsTags="Styleable"
               parentClass="javax.faces.component.html.HtmlPanelGroup"
