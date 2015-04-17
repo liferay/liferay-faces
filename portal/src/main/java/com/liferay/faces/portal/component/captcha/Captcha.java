@@ -11,17 +11,17 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.portal.validator;
+package com.liferay.faces.portal.component.captcha;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
+import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.Validator;
-import javax.faces.validator.ValidatorException;
 import javax.portlet.PortletRequest;
 import javax.portlet.filter.PortletRequestWrapper;
 
+import com.liferay.faces.portal.component.captcha.internal.CaptchaRenderer;
 import com.liferay.faces.portal.context.LiferayFacesContext;
+import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -31,19 +31,34 @@ import com.liferay.portal.kernel.captcha.CaptchaUtil;
 
 
 /**
- * @author  Neil Griffin
+ * @author  Juan Gonzalez
  */
-public class CaptchaValidator implements Validator {
+@FacesComponent(value = Captcha.COMPONENT_TYPE)
+public class Captcha extends CaptchaBase {
 
 	// Private Constants
 	private static final String WEB_KEYS_CAPTCHA_TEXT = "CAPTCHA_TEXT";
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(CaptchaValidator.class);
+	private static final Logger logger = LoggerFactory.getLogger(Captcha.class);
 
-	public void validate(FacesContext facesContext, UIComponent uiComponent, Object value) throws ValidatorException {
+	// Public Constants
+	public static final String COMPONENT_TYPE = "com.liferay.faces.portal.component.captcha.Captcha";
+	public static final String RENDERER_TYPE = "com.liferay.faces.portal.component.captcha.internal.CaptchaRenderer";
+	public static final String STYLE_CLASS_NAME = "portal-captcha";
 
-		if (value != null) {
+	public Captcha() {
+		super();
+		setRendererType(RENDERER_TYPE);
+		setRequired(true);
+	}
+
+	@Override
+	protected void validateValue(FacesContext context, Object value) {
+
+		super.validateValue(context, value);
+
+		if (isValid() && (value != null)) {
 
 			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 
@@ -70,13 +85,15 @@ public class CaptchaValidator implements Validator {
 				String key = "text-verification-failed";
 				String summary = liferayFacesContext.getMessage(key);
 				FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, summary);
-				throw new ValidatorException(facesMessage);
+				context.addMessage(getClientId(context), facesMessage);
+				setValid(false);
 			}
 			catch (CaptchaMaxChallengesException e) {
 				String key = "maximum-number-of-captcha-attempts-exceeded";
 				String summary = liferayFacesContext.getMessage(key);
 				FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, summary);
-				throw new ValidatorException(facesMessage);
+				context.addMessage(getClientId(context), facesMessage);
+				setValid(false);
 			}
 			catch (Exception e) {
 				logger.error(e);
@@ -84,9 +101,20 @@ public class CaptchaValidator implements Validator {
 				String key = "an-unexpected-error-occurred";
 				String summary = liferayFacesContext.getMessage(key);
 				FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, summary);
-				throw new ValidatorException(facesMessage);
+				context.addMessage(getClientId(context), facesMessage);
+				setValid(false);
 			}
 		}
+	}
+
+	@Override
+	public String getStyleClass() {
+
+		// getStateHelper().eval(PropertyKeys.styleClass, null) is called because super.getStyleClass() may return the
+		// STYLE_CLASS_NAME of the super class.
+		String styleClass = (String) getStateHelper().eval(CaptchaPropertyKeys.styleClass, null);
+
+		return ComponentUtil.concatCssClasses(styleClass, STYLE_CLASS_NAME);
 	}
 
 	protected class CaptchaPortletRequest extends PortletRequestWrapper {
@@ -101,7 +129,7 @@ public class CaptchaValidator implements Validator {
 		@Override
 		public String getParameter(String name) {
 
-			if ("captchaText".equals(name)) {
+			if (CaptchaRenderer.SIMPLECAPTCHA_TEXT_PARAM.equals(name)) {
 				return userCaptchaTextValue;
 			}
 			else {
@@ -110,4 +138,5 @@ public class CaptchaValidator implements Validator {
 		}
 
 	}
+
 }
