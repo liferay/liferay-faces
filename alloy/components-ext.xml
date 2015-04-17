@@ -1776,6 +1776,22 @@
 				<yui>true</yui>
 			</attribute>
 			<attribute>
+				<defaultValue>6</defaultValue>
+				<description>
+					<![CDATA[Minimum number of lines that the editor is to display. Default is 6.]]>
+				</description>
+				<name>minLines</name>
+				<type>java.lang.Integer</type>
+			</attribute>
+			<attribute>
+				<defaultValue>1024</defaultValue>
+				<description>
+					<![CDATA[Specifies the maximum number of lines that the editor is to display before a vertical scrollbar appears. Default is 1024.]]>
+				</description>
+				<name>maxLines</name>
+				<type>java.lang.Integer</type>
+			</attribute>
+			<attribute>
 				<description>
 					<![CDATA[The name of the programming language that the editor is editing or displaying.]]>
 				</description>

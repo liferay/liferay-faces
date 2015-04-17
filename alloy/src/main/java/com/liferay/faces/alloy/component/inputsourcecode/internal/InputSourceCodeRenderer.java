@@ -55,17 +55,17 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 		InputSourceCode inputSourceCode = (InputSourceCode) uiComponent;
 		Boolean readOnly = inputSourceCode.getReadOnly();
 
+		ClientComponent clientComponent = (ClientComponent) uiComponent;
+		String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
+		String clientKey = clientComponent.getClientKey();
+
+		if (clientKey == null) {
+			clientKey = clientVarName;
+		}
+
+		encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
+
 		if ((readOnly == null) || (!readOnly)) {
-
-			ClientComponent clientComponent = (ClientComponent) uiComponent;
-			String clientVarName = ComponentUtil.getClientVarName(facesContext, clientComponent);
-			String clientKey = clientComponent.getClientKey();
-
-			if (clientKey == null) {
-				clientKey = clientVarName;
-			}
-
-			encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
 
 			String hiddenInputClientId = getHiddenInputClientId(facesContext, uiComponent);
 			String escapedHiddenInputClientId = StringPool.POUND + RendererUtil.escapeClientId(hiddenInputClientId);
@@ -77,6 +77,15 @@ public class InputSourceCodeRenderer extends InputSourceCodeRendererBase {
 			responseWriter.write(clientVarName);
 			responseWriter.write(".getSession().getValue())});");
 		}
+
+		responseWriter.write(clientVarName);
+		responseWriter.write(".editor.setOptions({ minLines: ");
+		responseWriter.write(inputSourceCode.getMinLines().toString());
+		responseWriter.write("});");
+		responseWriter.write(clientVarName);
+		responseWriter.write(".editor.setOptions({ maxLines: ");
+		responseWriter.write(inputSourceCode.getMaxLines().toString());
+		responseWriter.write("});");
 	}
 
 	@Override

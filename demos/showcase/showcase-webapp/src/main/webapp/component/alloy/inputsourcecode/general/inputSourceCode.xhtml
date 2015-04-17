@@ -11,7 +11,7 @@
 				<f:ajax render="componentField modelValue" />
 			</alloy:selectOneMenu>
 			<alloy:field id="componentField" label="#{i18n['source-code']}">
-				<alloy:inputSourceCode id="inputSourceCode" height="100" mode="#{inputSourceCodeModelBean.mode}"
+				<alloy:inputSourceCode id="inputSourceCode" height="100" maxLines="15" mode="#{inputSourceCodeModelBean.mode}"
 					rendered="#{showcaseModelBean.selectedComponent.rendered}"
 					required="#{showcaseModelBean.selectedComponent.required}" width="100%"
 					value="#{inputSourceCodeModelBean.sourceCode}" />
