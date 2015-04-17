@@ -42,31 +42,28 @@
 							<alloy:outputText value="#{i18n['show-selected-customers-as-feedback']}" />
 							<f:ajax execute="customers @this" render=":exampleForm:example:feedback" />
 						</alloy:commandButton>
-						<alloy:commandButton actionListener="#{dataTableBacking.determineSelectedCustomers}">
+						<alloy:commandButton actionListener="#{dataTableBacking.determineSelectedCustomers}" 
+							onclick="Liferay.component('selectedCustomers').show();">
 							<alloy:outputText value="#{i18n['show-selected-customers-in-modal-dialog']}" />
-							<f:ajax execute="customers @this" onevent="showSelectedCustomers"
-								render=":exampleForm:selectedCustomers" />
+							<f:ajax execute="customers @this" 
+								render=":exampleForm:selectedCustomersPanel" />
 						</alloy:commandButton>
 					</f:facet>
 				</alloy:dataTable>
-				<alloy:outputScript>
-					function showSelectedCustomers(data) {
-						if (data.status == "success") {
-							Liferay.component('selectedCustomers').show();
-						}
-					}
-				</alloy:outputScript>
 			</showcase:example>
-			<alloy:dialog id="selectedCustomers" clientKey="selectedCustomers"
+			
+			<alloy:dialog clientKey="selectedCustomers" 
 				headerText="#{i18n['selected-customers']}" modal="true">
-				<alloy:outputText value="#{i18n['no-customers-selected']}"
-					rendered="#{empty dataTableBacking.selectedCustomers}" />
-				<alloy:dataList type="description" value="#{dataTableBacking.selectedCustomers}" var="selectedCustomer">
-					<alloy:dataItem>
-						<alloy:outputText value="#{selectedCustomer.firstName} #{selectedCustomer.lastName}" />
-					</alloy:dataItem>
-				</alloy:dataList>
-				<alloy:button onclick="Liferay.component('selectedCustomers').hide();" value="#{i18n['cancel']}" />
+				<alloy:panel id="selectedCustomersPanel">
+					<alloy:outputText value="#{i18n['no-customers-selected']}"
+						rendered="#{empty dataTableBacking.selectedCustomers}" />
+					<alloy:dataList type="description" value="#{dataTableBacking.selectedCustomers}" var="selectedCustomer">
+						<alloy:dataItem>
+							<alloy:outputText value="#{selectedCustomer.firstName} #{selectedCustomer.lastName}" />
+						</alloy:dataItem>
+					</alloy:dataList>
+					<alloy:button onclick="Liferay.component('selectedCustomers').hide();" value="#{i18n['cancel']}" />
+				</alloy:panel>
 			</alloy:dialog>
 		</alloy:form>
 	</ui:define>
