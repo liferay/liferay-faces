@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.liferay.faces</groupId>
 	<artifactId>liferay-faces</artifactId>
-	<version>4.2.0-beta-SNAPSHOT</version>
+	<version>4.2.0-beta</version>
 	<packaging>pom</packaging>
 	<name>Liferay Faces Parent</name>
 	<description>Parent POM for all Liferay Faces projects</description>
@@ -60,7 +60,7 @@
 		<connection>scm:git:https://github.com/liferay/liferay-faces</connection>
 		<developerConnection>scm:git:https://github.com/liferay/liferay-faces</developerConnection>
 		<url>scm:git:https://github.com/liferay/liferay-faces</url>
-		<tag>HEAD</tag>
+		<tag>4.2.0-beta</tag>
 	</scm>
 
 	<modules>
@@ -461,7 +461,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
