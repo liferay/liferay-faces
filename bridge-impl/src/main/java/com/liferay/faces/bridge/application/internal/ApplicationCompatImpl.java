@@ -13,20 +13,16 @@
  */
 package com.liferay.faces.bridge.application.internal;
 
-import javax.faces.FacesException;
 import javax.faces.application.Application;
 import javax.faces.application.ApplicationWrapper;
 import javax.faces.application.ResourceHandler;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
-import javax.faces.component.behavior.AjaxBehavior;
-import javax.faces.component.behavior.Behavior;
 import javax.faces.context.FacesContext;
 import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
 import javax.portlet.faces.BridgeUtil;
 
-import com.liferay.faces.bridge.component.behavior.internal.AjaxBehaviorBridgeImpl;
 import com.liferay.faces.bridge.component.internal.UIViewRootBridgeImpl;
 import com.liferay.faces.util.config.ConfiguredSystemEventListener;
 import com.liferay.faces.util.logging.Logger;
@@ -48,23 +44,6 @@ public abstract class ApplicationCompatImpl extends ApplicationWrapper {
 
 	public ApplicationCompatImpl(Application application) {
 		this.wrappedApplication = application;
-	}
-
-	@Override
-	public Behavior createBehavior(String behaviorId) throws FacesException {
-
-		Behavior behavior = super.createBehavior(behaviorId);
-
-		if (AjaxBehavior.BEHAVIOR_ID.equals(behaviorId) && (behavior instanceof AjaxBehavior)) {
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			UIViewRoot viewRoot = facesContext.getViewRoot();
-			String namingContainerId = viewRoot.getContainerClientId(facesContext);
-
-			behavior = new AjaxBehaviorBridgeImpl((AjaxBehavior) behavior, namingContainerId);
-		}
-
-		return behavior;
 	}
 
 	@Deprecated
