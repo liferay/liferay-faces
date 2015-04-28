@@ -433,8 +433,6 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 		if (url != null) {
 			logger.debug("redirect url=[{0}]", url);
 
-			String currentFacesViewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-
 			// If currently executing the ACTION_PHASE, EVENT_PHASE, or RENDER_PHASE of the portlet lifecycle, then
 			if ((portletPhase == Bridge.PortletPhase.ACTION_PHASE) ||
 					(portletPhase == Bridge.PortletPhase.EVENT_PHASE) ||
@@ -498,6 +496,9 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 
 							// If redirecting to a different view, then create the target view and place it into the
 							// FacesContext.
+							UIViewRoot viewRoot = facesContext.getViewRoot();
+							String currentFacesViewId = viewRoot.getViewId();
+
 							if (!currentFacesViewId.equals(newViewId)) {
 
 								ViewHandler viewHandler = facesContext.getApplication().getViewHandler();
@@ -560,6 +561,8 @@ public class BridgeContextImpl extends BridgeContextCompatImpl {
 											StringPool.UTF8);
 
 									BridgeURI redirectURI = bridgeURIFactory.getBridgeURI(viewIdRenderParameterValue);
+									UIViewRoot viewRoot = facesContext.getViewRoot();
+									String currentFacesViewId = viewRoot.getViewId();
 									bridgeRedirectURL = bridgeURLFactory.getBridgeRedirectURL(bridgeContext,
 											redirectURI, null, currentFacesViewId);
 									renderRedirectURL = bridgeRedirectURL;
