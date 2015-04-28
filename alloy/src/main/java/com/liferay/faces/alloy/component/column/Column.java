@@ -62,8 +62,8 @@ public class Column extends ColumnBase implements ClientBehaviorHolder {
 		if ((execute != null) && execute.contains("@parent")) {
 
 			UIComponent parent = getParent();
-			String parentClientId = parent.getClientId();
-			execute = execute.replace("@parent", parentClientId);
+			String parentId = parent.getId();
+			execute = execute.replace("@parent", parentId);
 		}
 
 		return execute;
@@ -77,8 +77,8 @@ public class Column extends ColumnBase implements ClientBehaviorHolder {
 		if ((render != null) && render.contains("@parent")) {
 
 			UIComponent parent = getParent();
-			String parentClientId = parent.getClientId();
-			render = render.replace("@parent", parentClientId);
+			String parentId = parent.getId();
+			render = render.replace("@parent", parentId);
 		}
 
 		return render;
