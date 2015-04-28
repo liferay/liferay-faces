@@ -8,7 +8,7 @@
 			<alloy:field label="#{i18n['text-verification-code']}">
 				<portal:captcha required="true" value="#{captchaBacking.captchaText}" />
 			</alloy:field>
-			<alloy:commandButton action="#{captchaBacking.submit}" ajax="false" render="@form"
+			<alloy:commandButton action="#{captchaBacking.submit}" ajax="true" render="@form"
 				value="#{i18n['submit']}" />
 		</showcase:example>
 	</alloy:form>
