@@ -65,8 +65,8 @@ public class Paginator extends PaginatorBase implements ClientBehaviorHolder {
 			UIData uiData = getUIData();
 
 			if (uiData != null) {
-				String uiDataClientId = uiData.getClientId();
-				execute = execute.replace("@for", uiDataClientId);
+				String uiDataId = uiData.getId();
+				execute = execute.replace("@for", uiDataId);
 			}
 		}
 
@@ -88,8 +88,8 @@ public class Paginator extends PaginatorBase implements ClientBehaviorHolder {
 			UIData uiData = getUIData();
 
 			if (uiData != null) {
-				String uiDataClientId = uiData.getClientId();
-				render = render.replace("@for", uiDataClientId);
+				String uiDataId = uiData.getId();
+				render = render.replace("@for", uiDataId);
 			}
 		}
 
