@@ -42,8 +42,7 @@ public class ResourceURLRenderer extends BaseURLRenderer {
 		ExternalContext externalContext = facesContext.getExternalContext();
 		MimeResponse mimeResponse = (MimeResponse) externalContext.getResponse();
 		Map<String, Object> attributes = uiComponent.getAttributes();
-		PortletURL portletURL = (PortletURL) mimeResponse.createResourceURL();
-		ResourceURL resourceURL = (ResourceURL) portletURL;
+		ResourceURL resourceURL = mimeResponse.createResourceURL();
 		String id = (String) attributes.get(StringPool.ID);
 		String cacheability = (String) attributes.get("cacheability");
 
