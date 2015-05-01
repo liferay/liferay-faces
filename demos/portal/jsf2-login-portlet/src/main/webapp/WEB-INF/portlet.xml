@@ -9,7 +9,7 @@
 		<portlet-class>javax.portlet.faces.GenericFacesPortlet</portlet-class>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.view</name>
-			<value>/views/login.xhtml</value>
+			<value>/WEB-INF/views/login.xhtml</value>
 		</init-param>
 		<supports>
 			<mime-type>text/html</mime-type>

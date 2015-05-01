@@ -9,7 +9,7 @@
 		<portlet-class>javax.portlet.faces.GenericFacesPortlet</portlet-class>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.view</name>
-			<value>/views/customers.xhtml</value>
+			<value>/WEB-INF/views/customers.xhtml</value>
 		</init-param>
 		<init-param>
 			<name>javax.portlet.faces.bridgeEventHandler</name>
