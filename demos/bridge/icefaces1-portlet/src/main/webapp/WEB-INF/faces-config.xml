@@ -55,17 +55,17 @@
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>
-		<from-view-id>/views/confirmation.xhtml</from-view-id>
+		<from-view-id>/WEB-INF/views/confirmation.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>submit-another-application</from-outcome>
-			<to-view-id>/views/portletViewMode.xhtml</to-view-id>
+			<to-view-id>/WEB-INF/views/portletViewMode.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<from-view-id>/views/portletViewMode.xhtml</from-view-id>
+		<from-view-id>/WEB-INF/views/portletViewMode.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>success</from-outcome>
-			<to-view-id>/views/confirmation.xhtml</to-view-id>
+			<to-view-id>/WEB-INF/views/confirmation.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
