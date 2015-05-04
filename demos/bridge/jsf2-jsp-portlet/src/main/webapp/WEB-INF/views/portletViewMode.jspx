@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jsp:root xmlns:aui="http://liferay.com/faces/aui" xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:portlet="http://java.sun.com/portlet" version="2.1">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" version="2.1">
 
 	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
 	<f:view>
@@ -12,13 +11,15 @@
 			<jsp:include page="applicant.jspx" />
 		</f:subview>
 		<br />
-		<aui:col>
-			<ul>
-				<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['JSF']}" /></em></li>
-				<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Alloy']}" /></em></li>
-				<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Bridge']}" /></em></li>
-			</ul>
-		</aui:col>
+		<h:panelGroup layout="block" styleClass="row-fluid">
+			<h:panelGroup layout="block" styleClass="span12">
+				<ul>
+					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['JSF']}" /></em></li>
+					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Alloy']}" /></em></li>
+					<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Bridge']}" /></em></li>
+				</ul>
+			</h:panelGroup>
+		</h:panelGroup>
 	</f:view>
 
 </jsp:root>
