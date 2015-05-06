@@ -11,9 +11,11 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.taglib;
+package com.liferay.faces.bridge.component.inputfile.internal;
 
 import javax.faces.webapp.UIComponentELTag;
+
+import com.liferay.faces.bridge.component.inputfile.InputFile;
 
 
 /**
@@ -23,12 +25,12 @@ public class InputFileTag extends UIComponentELTag {
 
 	@Override
 	public String getComponentType() {
-		return "javax.faces.HtmlInputFile";
+		return InputFile.COMPONENT_TYPE;
 	}
 
 	@Override
 	public String getRendererType() {
-		return "com.liferay.faces.bridge.renderkit.bridge.InputFileRenderer";
+		return InputFile.RENDERER_TYPE;
 	}
 
 }
