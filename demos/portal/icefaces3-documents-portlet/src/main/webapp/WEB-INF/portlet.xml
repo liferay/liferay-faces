@@ -15,15 +15,15 @@
 		</init-param>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.view</name>
-			<value>/views/portletModeView.xhtml</value>
+			<value>/WEB-INF/views/portletModeView.xhtml</value>
 		</init-param>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.edit</name>
-			<value>/views/portletModeEdit.xhtml</value>
+			<value>/WEB-INF/views/portletModeEdit.xhtml</value>
 		</init-param>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.help</name>
-			<value>/views/portletModeHelp.xhtml</value>
+			<value>/WEB-INF/views/portletModeHelp.xhtml</value>
 		</init-param>
 		<supports>
 			<mime-type>text/html</mime-type>
