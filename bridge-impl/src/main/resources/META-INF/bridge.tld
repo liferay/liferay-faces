@@ -11,7 +11,7 @@
 	<tag>
 		<description>File Upload</description>
 		<name>inputFile</name>
-		<tag-class>com.liferay.faces.bridge.taglib.InputFileTag</tag-class>
+		<tag-class>com.liferay.faces.bridge.component.inputfile.internal.InputFileTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<description><![CDATA[The unique ID for the component.]]></description>
