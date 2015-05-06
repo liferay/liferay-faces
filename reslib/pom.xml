@@ -24,10 +24,10 @@
 							<goal>wget</goal>
 						</goals>
 						<configuration>
-							<url>https://raw.githubusercontent.com/liferay/liferay-portal/6.2.1-ga2/portal-web/third-party/alloy-${alloyui.version}.zip</url>
+							<url>https://github.com/liferay/liferay-portal/raw/6.2.x/portal-web/third-party/alloy-${alloyui.zip.version}.zip</url>
 							<unpack>true</unpack>
 							<outputDirectory>${project.build.directory}/classes/META-INF/resources</outputDirectory>
-							<md5>904c2f0b876b6d3f732da5eed46ec977</md5>
+							<md5>37cb9069053f2e181bd26bd78a216c53</md5>
 						</configuration>
 					</execution>
 				</executions>
