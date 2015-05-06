@@ -13,10 +13,10 @@
 		<phase-listener>com.liferay.faces.util.lifecycle.ViewScopePhaseListener</phase-listener>
 	</lifecycle>
 	<navigation-rule>
-		<from-view-id>/views/portletViewMode.jspx</from-view-id>
+		<from-view-id>/WEB-INF/views/portletViewMode.jspx</from-view-id>
 		<navigation-case>
 			<from-outcome>success</from-outcome>
-			<to-view-id>/views/confirmation.jspx</to-view-id>
+			<to-view-id>/WEB-INF/views/confirmation.jspx</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>
