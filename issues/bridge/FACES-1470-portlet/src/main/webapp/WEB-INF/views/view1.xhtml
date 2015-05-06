@@ -20,10 +20,10 @@
 			<h:outputText value="#{as7LeakViewScopeInjectedBean.foo}" />
 			<br />
 			<h:outputText value="#{as7LeakViewScopeInjectedBeanInnerClass.foo}" />
-			<h:commandButton action="/views/view2.xhtml" value="Click me to navigate to view2.xhtml via Ajax">
+			<h:commandButton action="/WEB-INF/views/view2.xhtml" value="Click me to navigate to view2.xhtml via Ajax">
 				<f:ajax execute="@form" />
 			</h:commandButton>
-			<h:commandButton action="/views/view2.xhtml" value="Click me to navigate to view2.xhtml via non-Ajax (full postback)" />
+			<h:commandButton action="/WEB-INF/views/view2.xhtml" value="Click me to navigate to view2.xhtml via non-Ajax (full postback)" />
 		</h:form>
 		<aui:layout>
 			<aui:column>
