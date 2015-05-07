@@ -7,7 +7,7 @@
 		<alloy:form>
 			<showcase:example description="#{i18n['alloy-image-general-example-1']}" number="1" renderedCheckbox="true">
 				<alloy:image rendered="#{showcaseModelBean.selectedComponent.rendered}"
-					value="/resources/images/liferay-faces-logo.png" />
+					value="#{resource['images:liferay-faces-logo.png']}" />
 			</showcase:example>
 		</alloy:form>
 	</ui:define>
@@ -34,7 +34,7 @@
 		<!-- Example 4: Clickable areas via the usemap attribute -->
 		<alloy:form>
 			<showcase:example description="#{i18n['alloy-image-general-example-4']}" number="4">
-				<alloy:image usemap="#logoMapName" value="/resources/images/liferay-faces-logo.png" />
+				<alloy:image usemap="#logoMapName" value="#{resource['images:liferay-faces-logo.png']}" />
 				<map name="logoMapName">
 					<area alt="JSR 362" coords="1,1,60,136" href="https://jcp.org/en/jsr/detail?id=362" shape="rect" target="_blank"
 						title="JSR 362" />

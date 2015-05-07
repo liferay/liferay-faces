@@ -9,7 +9,7 @@
 				<alloy:button rendered="#{showcaseModelBean.selectedComponent.rendered}" value="1234">
 					<alloy:icon name="star" />
 					<alloy:outputText value=" #{i18n['Button']} " />
-					<alloy:image value="/resources/images/liferay-faces-logo-small.png" />
+					<alloy:image value="#{resource['images:liferay-faces-logo-small.png']}" />
 				</alloy:button>
 			</showcase:example>
 		</alloy:form>
@@ -19,7 +19,7 @@
 		<!-- Example 2: Styling via image attribute -->
 		<alloy:form>
 			<showcase:example description="#{i18n['alloy-button-general-example-2']}" number="2" renderedCheckbox="true">
-				<alloy:button image="/resources/images/liferay-faces-logo-small.png"
+				<alloy:button image="#{resource['images:liferay-faces-logo-small.png']}"
 					rendered="#{showcaseModelBean.selectedComponent.rendered}" value="1234" />
 			</showcase:example>
 		</alloy:form>
