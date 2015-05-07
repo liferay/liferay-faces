@@ -15,11 +15,6 @@
 		<param-name>javax.faces.WEBAPP_RESOURCES_DIRECTORY</param-name>
 		<param-value>/WEB-INF/resources</param-value>
 	</context-param>
-	<!-- Instruct Mojarra to utilize JBoss-EL instead of the EL implementation provided by the servlet container. -->
-	<context-param>
-		<param-name>com.sun.faces.expressionFactory</param-name>
-		<param-value>org.jboss.el.ExpressionFactoryImpl</param-value>
-	</context-param>
 	<!-- Workaround for http://issues.liferay.com/browse/FACES-1194 -->
 	<context-param>
 		<param-name>com.liferay.faces.bridge.primeFileUploadForceResourceURL</param-name>
