@@ -20,7 +20,7 @@
 		<alloy:form>
 			<showcase:example description="#{i18n['alloy-outputlink-general-example-2']}" number="2">
 				<alloy:outputLink target="_blank" value="https://www.liferay.com/community/liferay-projects/liferay-faces">
-					<alloy:image value="/resources/images/liferay-faces-logo-small.png" />
+					<alloy:image value="#{resource['images:liferay-faces-logo-small.png']}" />
 				</alloy:outputLink>
 			</showcase:example>
 		</alloy:form>
@@ -33,7 +33,7 @@
 				<alloy:outputLink target="_blank" value="https://www.google.com/search">
 					<alloy:icon name="star" />
 					<alloy:outputText value=" #{i18n['text-for-a-link']} " />
-					<alloy:image value="/resources/images/liferay-faces-logo-small.png" />
+					<alloy:image value="#{resource['images:liferay-faces-logo-small.png']}" />
 					<f:param name="q" value="liferay faces" />
 				</alloy:outputLink>
 			</showcase:example>
