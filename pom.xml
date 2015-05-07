@@ -1206,17 +1206,6 @@
 				<type>pom</type>
 			</dependency>
 			<dependency>
-				<groupId>org.jboss.seam</groupId>
-				<artifactId>jboss-el</artifactId>
-				<version>2.0.0.GA</version>
-				<exclusions>
-					<exclusion>
-						<groupId>javax.el</groupId>
-						<artifactId>el-api</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
 				<groupId>org.jboss.weld.servlet</groupId>
 				<artifactId>weld-servlet</artifactId>
 				<version>${weld.version}</version>
