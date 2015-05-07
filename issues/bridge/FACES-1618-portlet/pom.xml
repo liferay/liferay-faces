@@ -31,8 +31,8 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.seam</groupId>
-			<artifactId>jboss-el</artifactId>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>el-impl</artifactId>
 		</dependency>
 
 		<!-- The following ICEfaces dependencies below are specified because they produce .js resources in the head of -->
