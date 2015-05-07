@@ -29,8 +29,8 @@
 			<artifactId>portlet-api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.seam</groupId>
-			<artifactId>jboss-el</artifactId>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>el-impl</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.faces</groupId>
