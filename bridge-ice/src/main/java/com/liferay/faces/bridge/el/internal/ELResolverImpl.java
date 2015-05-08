@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.el;
+package com.liferay.faces.bridge.el.internal;
 
 import java.beans.FeatureDescriptor;
 import java.util.ArrayList;
