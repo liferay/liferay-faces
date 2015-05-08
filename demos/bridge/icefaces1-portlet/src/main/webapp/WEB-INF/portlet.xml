@@ -9,15 +9,15 @@
 		<portlet-class>com.icesoft.faces.webapp.http.portlet.MainPortlet</portlet-class>
 		<init-param>
 			<name>com.icesoft.faces.VIEW</name>
-			<value>/views/portletViewMode.iface</value>
+			<value>/WEB-INF/views/portletViewMode.iface</value>
 		</init-param>
 		<init-param>
 			<name>com.icesoft.faces.EDIT</name>
-			<value>/views/portletEditMode.iface</value>
+			<value>/WEB-INF/views/portletEditMode.iface</value>
 		</init-param>
 		<init-param>
 			<name>com.icesoft.faces.HELP</name>
-			<value>/views/portletHelpMode.iface</value>
+			<value>/WEB-INF/views/portletHelpMode.iface</value>
 		</init-param>
 		<supports>
 			<mime-type>text/html</mime-type>
