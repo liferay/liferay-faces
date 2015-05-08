@@ -228,6 +228,11 @@ sub do_inplace_edits {
 			`perl -pi -e 's/web-facelettaglibrary_[0-9]_[0-9]\\.xsd/web-facelettaglibrary_2_0.xsd/' $file`;
 			`perl -pi -e 's/version="[0-9]\\.[0-9]"/version="2.0"/' $file`;
 		}
+		elsif ($facesMajor > 2 or ($facesMajor == 2 and $facesMinor > 1)) {
+			`perl -pi -e 's/java.sun.com\\/xml\\/ns\\/javaee/xmlns.jcp.org\\/xml\\/ns\\/javaee/g' $file`;
+			`perl -pi -e 's/web-facelettaglibrary_[0-9]_[0-9]\\.xsd/web-facelettaglibrary_${facesMajor}_${facesMinor}.xsd/' $file`;
+			`perl -pi -e 's/version="[0-9]\\.[0-9]"/version="$facesVersion"/' $file`;
+		}
 		else {
 			`perl -pi -e 's/web-facelettaglibrary_[0-9]_[0-9]\\.xsd/web-facelettaglibrary_${facesMajor}_${facesMinor}.xsd/' $file`;
 			`perl -pi -e 's/version="[0-9]\\.[0-9]"/version="$facesVersion"/' $file`;
