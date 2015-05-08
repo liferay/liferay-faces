@@ -124,7 +124,7 @@ public abstract class ApplicationCompatImpl extends ApplicationWrapper {
 
 		ResourceHandler resourceHandler = super.getResourceHandler();
 
-		if (resourceHandler != null) {
+		if ((resourceHandler != null) && resourceHandler.getClass().getName().startsWith("org.richfaces.resource")) {
 			resourceHandler = new ResourceHandlerOuterImpl(resourceHandler);
 		}
 
