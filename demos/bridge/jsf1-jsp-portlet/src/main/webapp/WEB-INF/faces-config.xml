@@ -49,24 +49,24 @@
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>
-		<from-view-id>/views/portletViewMode.jspx</from-view-id>
+		<from-view-id>/WEB-INF/views/portletViewMode.jspx</from-view-id>
 		<navigation-case>
 			<from-outcome>edit-preferences</from-outcome>
-			<to-view-id>/views/portletEditMode.faces?javax.portlet.faces.PortletMode=edit&amp;javax.portlet.faces.WindowState=maximized</to-view-id>
+			<to-view-id>/WEB-INF/views/portletEditMode.faces?javax.portlet.faces.PortletMode=edit&amp;javax.portlet.faces.WindowState=maximized</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<from-view-id>/views/confirmation.jspx</from-view-id>
+		<from-view-id>/WEB-INF/views/confirmation.jspx</from-view-id>
 		<navigation-case>
 			<from-outcome>submit-another-application</from-outcome>
-			<to-view-id>/views/portletViewMode.jspx</to-view-id>
+			<to-view-id>/WEB-INF/views/portletViewMode.jspx</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<from-view-id>/views/portletViewMode.jspx</from-view-id>
+		<from-view-id>/WEB-INF/views/portletViewMode.jspx</from-view-id>
 		<navigation-case>
 			<from-outcome>success</from-outcome>
-			<to-view-id>/views/confirmation.jspx</to-view-id>
+			<to-view-id>/WEB-INF/views/confirmation.jspx</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>

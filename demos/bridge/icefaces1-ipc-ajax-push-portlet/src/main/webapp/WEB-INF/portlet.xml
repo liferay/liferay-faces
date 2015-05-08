@@ -9,7 +9,7 @@
 		<portlet-class>com.icesoft.faces.webapp.http.portlet.MainPortlet</portlet-class>
 		<init-param>
 			<name>com.icesoft.faces.VIEW</name>
-			<value>/views/customers.iface</value>
+			<value>/WEB-INF/views/customers.iface</value>
 		</init-param>
 		<supports>
 			<mime-type>text/html</mime-type>
@@ -39,7 +39,7 @@
 		<portlet-class>com.icesoft.faces.webapp.http.portlet.MainPortlet</portlet-class>
 		<init-param>
 			<name>com.icesoft.faces.VIEW</name>
-			<value>/views/bookings.iface</value>
+			<value>/WEB-INF/views/bookings.iface</value>
 		</init-param>
 		<supports>
 			<mime-type>text/html</mime-type>
