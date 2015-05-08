@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.bridge.context;
+package com.liferay.faces.bridge.context.internal;
 
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletConfig;
@@ -20,6 +20,7 @@ import com.icesoft.faces.webapp.http.portlet.PortletExternalContext;
 
 import com.liferay.faces.bridge.config.BridgeConfig;
 import com.liferay.faces.bridge.config.BridgeConfigImpl;
+import com.liferay.faces.bridge.context.BridgeContext;
 
 
 /**
