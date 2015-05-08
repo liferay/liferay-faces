@@ -72,7 +72,16 @@
 #
 ################################################################################
 
-LIFERAY_FACES_VERSION=`pwd | sed -e 's/^.*liferay-faces-//g' | sed -e 's/\/.*$//g'`
+# If $PORTALS_HOME is not defined, set it to $HOME/Portals.
+export PORTALS_HOME=${PORTALS_HOME:-$HOME/Portals}
+# If $PROJECTS_HOME is not defined, set it to $HOME/Projects.
+export PROJECTS_HOME=${PROJECTS_HOME:-$HOME/Projects}
+LIFERAY_FACES_DIR="$(dirname "$0")"
+
+if [ ! -z $(pwd | grep -m 1 "$PROJECTS_HOME/liferay.com/liferay-faces-") ]; then
+	LIFERAY_FACES_DIR=$(pwd | sed -e "s,\($PROJECTS_HOME/liferay.com/liferay-faces-[^/]*\).*,\1,")
+fi
+
 FACES_IMPL="mojarra"
 PORTAL_PROFILE_NAME="liferay"
 SERVER_PROFILE_NAME="tomcat"
@@ -131,13 +140,7 @@ if [ -e src/main/webapp/WEB-INF/portlet.xml ] ; then
 fi
 PORTLET_MVN_CMD="mvn -P $PORTAL_PROFILE_NAME,$FACES_IMPL,$SERVER_PROFILE_NAME,redeploy,$EXTRA_PROFILE_NAMES -Djava.awt.headless=true help:active-profiles clean install"
 if [ "$PORTAL_PROFILE_NAME" = "liferay" ] ; then
-	if [ "$LIFERAY_FACES_VERSION" = "3.0.x-legacy" ] ; then
-		# liferay-maven-plugin not supported for Liferay 5.2.x
-		PORTLET_MVN_CMD="$PORTLET_MVN_CMD liferay-faces:deploy"
-	else
-		# Can't use liferay:deploy until MAVEN-136 is fixed
-		PORTLET_MVN_CMD="$PORTLET_MVN_CMD liferay-faces:deploy"
-	fi
+	PORTLET_MVN_CMD="$PORTLET_MVN_CMD liferay-faces:deploy"
 fi
 echo "==============================================================================================================="
 echo "[INFO: deploy.sh] FACES_IMPL=$FACES_IMPL"
@@ -154,44 +157,44 @@ echo " "
 
 if [ "$REBUILD_UTIL" = "true" ] ; then
 	if [ -z $EXTRA_PROFILE_NAMES ] ; then
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/util; mvn clean install; popd
+		pushd $LIFERAY_FACES_DIR/util; mvn clean install; popd
 	else
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/util; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
+		pushd $LIFERAY_FACES_DIR/util; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
 	fi
 fi
 
 if [ "$REBUILD_BRIDGE" = "true" ] ; then
 	if [ -z $EXTRA_PROFILE_NAMES ] ; then
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/bridge-api; mvn clean install; popd
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/bridge-impl; mvn clean install; popd
+		pushd $LIFERAY_FACES_DIR/bridge-api; mvn clean install; popd
+		pushd $LIFERAY_FACES_DIR/bridge-impl; mvn clean install; popd
 	else
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/bridge-api; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/bridge-impl; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
+		pushd $LIFERAY_FACES_DIR/bridge-api; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
+		pushd $LIFERAY_FACES_DIR/bridge-impl; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
 	fi
 fi
 if [ "$REBUILD_ALLOY" = "true" ] ; then
 	if [ -z $EXTRA_PROFILE_NAMES ] ; then
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/alloy; mvn clean install; popd
+		pushd $LIFERAY_FACES_DIR/alloy; mvn clean install; popd
 	else
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/alloy; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
+		pushd $LIFERAY_FACES_DIR/alloy; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
 	fi
 fi
 
 if [ "$REBUILD_PORTAL" = "true" ] ; then
 	if [ -z $EXTRA_PROFILE_NAMES ] ; then
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/portal; mvn clean install; popd
+		pushd $LIFERAY_FACES_DIR/portal; mvn clean install; popd
 	else
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/portal; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
+		pushd $LIFERAY_FACES_DIR/portal; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
 	fi
 fi
 
 if [ "$REBUILD_SHOWCASE" = "true" ] ; then
 	if [ -z $EXTRA_PROFILE_NAMES ] ; then
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/demos/showcase/showcase-common; mvn clean install; popd
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/demos/showcase/showcase-webapp; mvn clean install; popd
+		pushd $LIFERAY_FACES_DIR/demos/showcase/showcase-common; mvn clean install; popd
+		pushd $LIFERAY_FACES_DIR/demos/showcase/showcase-webapp; mvn clean install; popd
 	else
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/demos/showcase/showcase-common; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
-		pushd $PROJECTS_HOME/liferay.com/liferay-faces-$LIFERAY_FACES_VERSION/demos/showcase/showcase-webapp; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
+		pushd $LIFERAY_FACES_DIR/demos/showcase/showcase-common; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
+		pushd $LIFERAY_FACES_DIR/demos/showcase/showcase-webapp; mvn -P $EXTRA_PROFILE_NAMES clean install; popd
 	fi
 fi
 
