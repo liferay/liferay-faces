@@ -143,6 +143,17 @@ public class LiferayPortletRequest {
 		return properties;
 	}
 
+	public String getProperty(String name) {
+
+		String property = wrappedPortletRequest.getProperty(name);
+
+		if (property == null) {
+			property = liferayHttpServletRequest.getHeader(name);
+		}
+
+		return property;
+	}
+
 	public Enumeration<String> getPropertyNames() {
 		return Collections.enumeration(propertyNameList);
 	}

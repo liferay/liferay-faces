@@ -34,6 +34,11 @@ public class ResourceRequestBridgeLiferayImpl extends ResourceRequestBridgeImpl 
 	}
 
 	@Override
+	public String getProperty(String name) {
+		return liferayPortletRequest.getProperty(name);
+	}
+
+	@Override
 	public Enumeration<String> getProperties(String name) {
 		return liferayPortletRequest.getProperties(name);
 	}
