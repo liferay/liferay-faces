@@ -33,10 +33,10 @@ public abstract class RequestHeaderValuesMapCompat extends CaseInsensitiveHashMa
 
 		if (trinidadPPRHeader == null) {
 
-			trinidadPPRHeader = new String[] { portletRequest.getProperty(HEADER_TRINIDAD_PPR) };
+			String pprHeader = portletRequest.getProperty(HEADER_TRINIDAD_PPR);
 
-			if (trinidadPPRHeader != null) {
-				put(HEADER_TRINIDAD_PPR, trinidadPPRHeader);
+			if (pprHeader != null) {
+				put(HEADER_TRINIDAD_PPR, new String[] { pprHeader });
 			}
 		}
 	}
