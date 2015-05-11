@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
 	<navigation-rule>
-		<from-view-id>/WEB-INF/views/component.xhtml</from-view-id>
+		<from-view-id>/views/component.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>toParam</from-outcome>
-			<to-view-id>/WEB-INF/views/component.xhtml</to-view-id>
+			<to-view-id>/views/component.xhtml</to-view-id>
 			<redirect>
 				<view-param>
 					<name>componentPrefix</name>
