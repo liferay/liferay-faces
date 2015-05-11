@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.logging.LogRecord;
 
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.logging.LogRecordFactory;
 import com.liferay.faces.util.logging.Logger;
 
 
@@ -27,9 +26,6 @@ import com.liferay.faces.util.logging.Logger;
  * @author  Neil Griffin
  */
 public class LoggerDefaultImpl implements Logger {
-
-	// Self-Injections
-	private static LogRecordFactory logRecordFactory = LogRecordFactoryImpl.getInstance();
 
 	// Private Data Members
 	private java.util.logging.Logger wrappedLogger;
@@ -44,7 +40,7 @@ public class LoggerDefaultImpl implements Logger {
 	public void debug(String message) {
 
 		if (isDebugEnabled()) {
-			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.FINE, message, null);
+			LogRecord logRecord = getLogRecord(java.util.logging.Level.FINE, message, null);
 			wrappedLogger.log(logRecord);
 		}
 	}
@@ -54,8 +50,7 @@ public class LoggerDefaultImpl implements Logger {
 		if (isDebugEnabled()) {
 			Throwable throwable = getThrowable(arguments);
 			String formattedMessage = formatMessage(message, arguments);
-			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.FINE, formattedMessage,
-					throwable);
+			LogRecord logRecord = getLogRecord(java.util.logging.Level.FINE, formattedMessage, throwable);
 			wrappedLogger.log(logRecord);
 		}
 
@@ -65,7 +60,7 @@ public class LoggerDefaultImpl implements Logger {
 
 		if (isErrorEnabled()) {
 			String message = throwable.getMessage();
-			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.SEVERE, message, throwable);
+			LogRecord logRecord = getLogRecord(java.util.logging.Level.SEVERE, message, throwable);
 			wrappedLogger.log(logRecord);
 		}
 	}
@@ -73,7 +68,7 @@ public class LoggerDefaultImpl implements Logger {
 	public void error(String message) {
 
 		if (isErrorEnabled()) {
-			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.SEVERE, message, null);
+			LogRecord logRecord = getLogRecord(java.util.logging.Level.SEVERE, message, null);
 			wrappedLogger.log(logRecord);
 		}
 	}
@@ -83,8 +78,7 @@ public class LoggerDefaultImpl implements Logger {
 		if (isErrorEnabled()) {
 			Throwable throwable = getThrowable(arguments);
 			String formattedMessage = formatMessage(message, arguments);
-			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.SEVERE, formattedMessage,
-					throwable);
+			LogRecord logRecord = getLogRecord(java.util.logging.Level.SEVERE, formattedMessage, throwable);
 			wrappedLogger.log(logRecord);
 		}
 	}
@@ -92,7 +86,7 @@ public class LoggerDefaultImpl implements Logger {
 	public void info(String message) {
 
 		if (isInfoEnabled()) {
-			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.INFO, message, null);
+			LogRecord logRecord = getLogRecord(java.util.logging.Level.INFO, message, null);
 			wrappedLogger.log(logRecord);
 		}
 	}
@@ -102,8 +96,7 @@ public class LoggerDefaultImpl implements Logger {
 		if (isInfoEnabled()) {
 			String formattedMessage = formatMessage(message, arguments);
 			Throwable throwable = getThrowable(arguments);
-			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.INFO, formattedMessage,
-					throwable);
+			LogRecord logRecord = getLogRecord(java.util.logging.Level.INFO, formattedMessage, throwable);
 			wrappedLogger.log(logRecord);
 		}
 	}
@@ -111,7 +104,7 @@ public class LoggerDefaultImpl implements Logger {
 	public void trace(String message) {
 
 		if (isTraceEnabled()) {
-			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.FINEST, message, null);
+			LogRecord logRecord = getLogRecord(java.util.logging.Level.FINEST, message, null);
 			wrappedLogger.log(logRecord);
 		}
 	}
@@ -121,8 +114,7 @@ public class LoggerDefaultImpl implements Logger {
 		if (isTraceEnabled()) {
 			String formattedMessage = formatMessage(message, arguments);
 			Throwable throwable = getThrowable(arguments);
-			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.FINEST, formattedMessage,
-					throwable);
+			LogRecord logRecord = getLogRecord(java.util.logging.Level.FINEST, formattedMessage, throwable);
 			wrappedLogger.log(logRecord);
 		}
 	}
@@ -130,7 +122,7 @@ public class LoggerDefaultImpl implements Logger {
 	public void warn(String message) {
 
 		if (isWarnEnabled()) {
-			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.WARNING, message, null);
+			LogRecord logRecord = getLogRecord(java.util.logging.Level.WARNING, message, null);
 			wrappedLogger.log(logRecord);
 		}
 	}
@@ -140,8 +132,7 @@ public class LoggerDefaultImpl implements Logger {
 		if (isWarnEnabled()) {
 			Throwable throwable = getThrowable(arguments);
 			String formattedMessage = formatMessage(message, arguments);
-			LogRecord logRecord = logRecordFactory.getLogRecord(java.util.logging.Level.WARNING, formattedMessage,
-					throwable);
+			LogRecord logRecord = getLogRecord(java.util.logging.Level.WARNING, formattedMessage, throwable);
 			wrappedLogger.log(logRecord);
 		}
 	}
@@ -224,6 +215,29 @@ public class LoggerDefaultImpl implements Logger {
 
 	public boolean isWarnEnabled() {
 		return wrappedLogger.isLoggable(java.util.logging.Level.WARNING);
+	}
+
+	protected LogRecord getLogRecord(java.util.logging.Level level, String message, Throwable thrown) {
+
+		// Create a new LogRecord instance.
+		LogRecord logRecord = new LogRecord(level, message);
+
+		// Determine the source class name and source method name.
+		Throwable source = new Throwable();
+		StackTraceElement[] stackTraceElements = source.getStackTrace();
+		StackTraceElement callerStackTraceElement = stackTraceElements[2];
+
+		// Set the source class name and source method name.
+		logRecord.setSourceClassName(callerStackTraceElement.getClassName());
+		logRecord.setSourceMethodName(callerStackTraceElement.getMethodName());
+
+		// If specified, set the throwable associated with the log event.
+		if (thrown != null) {
+			logRecord.setThrown(thrown);
+		}
+
+		// Return the new LogRecord instance.
+		return logRecord;
 	}
 
 	protected Throwable getThrowable(Object[] arguments) {
