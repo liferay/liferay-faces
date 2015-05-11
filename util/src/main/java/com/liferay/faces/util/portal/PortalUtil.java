@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class PortalUtil {
 
-	public static HttpServletRequest getHttpServeletRequest(ExternalContext externalContext) {
+	public static HttpServletRequest getHttpServletRequest(ExternalContext externalContext) {
 
 		Object request = externalContext.getRequest();
 		HttpServletRequest httpServletRequest;
