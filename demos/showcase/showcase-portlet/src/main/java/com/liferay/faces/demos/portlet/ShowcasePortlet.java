@@ -34,7 +34,7 @@ public class ShowcasePortlet extends ActionURLDemoPortlet {
 		String componentName = renderRequest.getParameter("componentName");
 
 		if ((componentPrefix != null) && (componentName != null)) {
-			String viewId = "/WEB-INF/views/component.xhtml";
+			String viewId = "/views/component.xhtml";
 			renderRequest.setAttribute(Bridge.VIEW_ID, viewId);
 		}
 
