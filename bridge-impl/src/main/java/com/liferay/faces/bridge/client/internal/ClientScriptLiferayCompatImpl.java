@@ -46,7 +46,7 @@ public abstract class ClientScriptLiferayCompatImpl implements ClientScript {
 		if (scriptData != null) {
 
 			ExternalContext externalContext = facesContext.getExternalContext();
-			HttpServletRequest httpServletRequest = PortalUtil.getHttpServeletRequest(externalContext);
+			HttpServletRequest httpServletRequest = PortalUtil.getHttpServletRequest(externalContext);
 
 			try {
 				scriptData.writeTo(httpServletRequest, clientScriptWriter);
