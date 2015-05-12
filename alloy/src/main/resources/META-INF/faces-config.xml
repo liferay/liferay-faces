@@ -5,12 +5,6 @@
 	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 
 	<name>LiferayFacesAlloy</name>
-	<application>
-		<system-event-listener>
-			<system-event-listener-class>com.liferay.faces.alloy.component.inputfile.internal.InputFileRenderer</system-event-listener-class>
-			<system-event-class>com.liferay.faces.util.event.PostConstructApplicationConfigEvent</system-event-class>
-		</system-event-listener>
-	</application>
 	<factory>
 		<factory-extension>
 			<util:component-resource-factory>com.liferay.faces.alloy.application.internal.ComponentResourceFactoryAlloyImpl</util:component-resource-factory>
