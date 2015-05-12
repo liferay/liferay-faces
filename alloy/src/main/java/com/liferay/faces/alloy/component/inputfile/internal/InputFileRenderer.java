@@ -19,7 +19,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.faces.application.Application;
-import javax.faces.application.ProjectStage;
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.application.ViewHandler;
@@ -27,13 +26,9 @@ import javax.faces.component.NamingContainer;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIForm;
 import javax.faces.component.UIViewRoot;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.convert.ConverterException;
-import javax.faces.event.AbortProcessingException;
-import javax.faces.event.SystemEvent;
-import javax.faces.event.SystemEventListener;
 import javax.faces.render.FacesRenderer;
 import javax.faces.validator.Validator;
 
@@ -42,7 +37,6 @@ import com.liferay.faces.alloy.component.inputfile.InputFile;
 import com.liferay.faces.alloy.component.inputfile.InputFileValidator;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
-import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.context.map.MultiPartFormData;
@@ -50,8 +44,6 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.js.JavaScriptArray;
 import com.liferay.faces.util.js.JavaScriptFragment;
 import com.liferay.faces.util.lang.StringPool;
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.model.UploadedFile;
 import com.liferay.faces.util.product.ProductConstants;
 import com.liferay.faces.util.product.ProductMap;
@@ -74,10 +66,7 @@ import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 		}
 	)
 //J+
-public class InputFileRenderer extends InputFileRendererBase implements SystemEventListener {
-
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(InputFileRenderer.class);
+public class InputFileRenderer extends InputFileRendererBase {
 
 	// Private Constants
 	private static final boolean LIFERAY_FACES_BRIDGE_DETECTED = ProductMap.getInstance().get(
@@ -190,18 +179,15 @@ public class InputFileRenderer extends InputFileRendererBase implements SystemEv
 
 			// Start encoding the outermost <div> element.
 			responseWriter.startElement(StringPool.DIV, uiComponent);
-			responseWriter.writeAttribute(StringPool.ID, uiComponent.getClientId(facesContext), StringPool.ID);
+
+			String clientId = uiComponent.getClientId(facesContext);
+			responseWriter.writeAttribute(StringPool.ID, clientId, StringPool.ID);
 			RendererUtil.encodeStyleable(responseWriter, (Styleable) uiComponent);
 
 			// If the component should render the upload progress table, then format the progress-table.html template
 			// and write it to the response.
-			String clientId = uiComponent.getClientId(facesContext);
-			Locale locale = facesContext.getViewRoot().getLocale();
-
 			if (inputFile.isShowProgress()) {
-				ProgressTableTemplate progressTableTemplate = getProgressTableTemplate(facesContext);
-				String progressTableHTML = progressTableTemplate.format(locale, clientId, inputFile.isAuto());
-				responseWriter.write(progressTableHTML);
+				encodeProgress(facesContext, responseWriter, uiComponent, clientId);
 			}
 
 			// Otherwise, delegate writing to the delegate renderer. Note that this effectively a no-op with Mojarra and
@@ -237,17 +223,7 @@ public class InputFileRenderer extends InputFileRendererBase implements SystemEv
 		// Otherwise, if the component should show the preview table, then
 		else if (inputFile.isShowPreview()) {
 
-			// Delegate writing of the entire <input type="file"...> ... </input> element to the delegate renderer.
-			DelegationResponseWriter delegationResponseWriter = new InputFileDelegationResponseWriter(responseWriter,
-					inputFile.isAuto());
-			super.encodeMarkupEnd(facesContext, uiComponent, delegationResponseWriter);
-
-			// Format the preview-table.html template and write it to the response.
-			Locale locale = facesContext.getViewRoot().getLocale();
-			String clientId = uiComponent.getClientId(facesContext);
-			PreviewTableTemplate previewTableTemplate = getPreviewTableTemplate(facesContext);
-			String previewTableHTML = previewTableTemplate.format(locale, clientId, false);
-			responseWriter.write(previewTableHTML);
+			encodePreview(facesContext, responseWriter, inputFile);
 
 			// Finish encoding of the outermost <div> element.
 			responseWriter.endElement(StringPool.DIV);
@@ -259,27 +235,6 @@ public class InputFileRenderer extends InputFileRendererBase implements SystemEv
 			DelegationResponseWriter delegationResponseWriter = new InputFileDelegationResponseWriter(responseWriter,
 					inputFile.isAuto());
 			super.encodeMarkupEnd(facesContext, uiComponent, delegationResponseWriter);
-		}
-	}
-
-	@Override
-	public void processEvent(SystemEvent postConstructApplicationConfigEvent) throws AbortProcessingException {
-
-		// Due to ClassLoader problems during static initialization, it is necessary to delay creation of singleton
-		// instances of template classes until the PostConstructApplicationConfigEvent is sent. Although template text
-		// is the same for each webapp context, the template must be stored as a ServletContext (application scoped)
-		// attribute in order to avoid a race condition when contexts are started up in parallel. For example:
-		// http://wiki.apache.org/tomcat/HowTo/FasterStartUp#Starting_several_web_applications_in_parallel
-		try {
-			FacesContext startupFacesContext = FacesContext.getCurrentInstance();
-			ExternalContext externalContext = startupFacesContext.getExternalContext();
-			Map<String, Object> applicationMap = externalContext.getApplicationMap();
-			boolean minified = startupFacesContext.isProjectStage(ProjectStage.Production);
-			applicationMap.put(PreviewTableTemplate.class.getName(), new PreviewTableTemplate(minified));
-			applicationMap.put(ProgressTableTemplate.class.getName(), new ProgressTableTemplate(minified));
-		}
-		catch (Exception e) {
-			logger.error(e);
 		}
 	}
 
@@ -309,6 +264,138 @@ public class InputFileRenderer extends InputFileRendererBase implements SystemEv
 		encodeNonEscapedObject(responseWriter, "selectFilesButton", selectFilesButtonScript, first);
 	}
 
+	private void encodePreview(FacesContext facesContext, ResponseWriter responseWriter, InputFile inputFile)
+		throws IOException {
+
+		// Delegate writing of the entire <input type="file"...> ... </input> element to the delegate renderer.
+		DelegationResponseWriter delegationResponseWriter = new InputFileDelegationResponseWriter(responseWriter,
+				inputFile.isAuto());
+		super.encodeMarkupEnd(facesContext, inputFile, delegationResponseWriter);
+
+		// Format the preview-table.html template and write it to the response.
+		Locale locale = facesContext.getViewRoot().getLocale();
+		String clientId = inputFile.getClientId(facesContext);
+		responseWriter.startElement("div", inputFile);
+		responseWriter.startElement("table", inputFile);
+		responseWriter.writeAttribute("id", clientId + "_table", null);
+		responseWriter.writeAttribute("class", "yui3-datatable-table", null);
+		responseWriter.startElement("thead", inputFile);
+		responseWriter.startElement("tr", inputFile);
+		responseWriter.startElement("th", inputFile);
+		responseWriter.writeAttribute("class", "yui3-datatable-header", null);
+
+		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+				MessageContextFactory.class);
+		MessageContext messageContext = messageContextFactory.getMessageContext();
+		String i18nFileName = messageContext.getMessage(locale, "file-name");
+		responseWriter.writeText(i18nFileName, null);
+		responseWriter.endElement("th");
+		responseWriter.startElement("th", inputFile);
+		responseWriter.writeAttribute("class", "yui3-datatable-header", null);
+
+		String i18nFileType = messageContext.getMessage(locale, "file-type");
+		responseWriter.writeText(i18nFileType, null);
+		responseWriter.endElement("th");
+		responseWriter.startElement("th", inputFile);
+		responseWriter.writeAttribute("class", "yui3-datatable-header", null);
+
+		String i18nFileSize = messageContext.getMessage(locale, "file-size");
+		responseWriter.writeText(i18nFileSize, null);
+		responseWriter.endElement("th");
+		responseWriter.endElement("tr");
+		responseWriter.endElement("thead");
+		responseWriter.startElement("tfoot", inputFile);
+		responseWriter.startElement("tr", inputFile);
+		responseWriter.startElement("td", inputFile);
+		responseWriter.writeAttribute("class", "yui3-datatable-cell", null);
+		responseWriter.writeAttribute("colspan", "2", null);
+
+		String i18nNoFilesSelected = messageContext.getMessage(locale, "no-files-selected");
+		responseWriter.writeText(i18nNoFilesSelected, null);
+		responseWriter.endElement("td");
+		responseWriter.endElement("tr");
+		responseWriter.endElement("tfoot");
+		responseWriter.startElement("tbody", inputFile);
+		responseWriter.startElement("tr", inputFile);
+		responseWriter.endElement("tr");
+		responseWriter.endElement("tbody");
+		responseWriter.endElement("table");
+		responseWriter.endElement("div");
+	}
+
+	private void encodeProgress(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent,
+		String clientId) throws IOException {
+
+		Locale locale = facesContext.getViewRoot().getLocale();
+		responseWriter.startElement("div", uiComponent);
+		responseWriter.writeAttribute("id", clientId + "_selectFilesBox", null);
+		responseWriter.writeAttribute("class", "select-files-box", null);
+		responseWriter.endElement("div");
+		responseWriter.startElement("div", uiComponent);
+		responseWriter.writeAttribute("id", clientId + "_uploadFilesBox", null);
+		responseWriter.writeAttribute("class", "upload-files-box", null);
+		responseWriter.startElement("button", uiComponent);
+		responseWriter.writeAttribute("id", clientId + "_uploadFilesButton", null);
+		responseWriter.writeAttribute("class", "yui3-widget btn btn-content", null);
+
+		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+				MessageContextFactory.class);
+		MessageContext messageContext = messageContextFactory.getMessageContext();
+		String i18nUploadFiles = messageContext.getMessage(locale, "upload-files");
+		responseWriter.writeText(i18nUploadFiles, null);
+		responseWriter.endElement("button");
+		responseWriter.endElement("div");
+		responseWriter.startElement("div", uiComponent);
+		responseWriter.startElement("table", uiComponent);
+		responseWriter.writeAttribute("id", clientId + "_table", null);
+		responseWriter.writeAttribute("class", "yui3-datatable-table", null);
+		responseWriter.startElement("thead", uiComponent);
+		responseWriter.startElement("tr", uiComponent);
+		responseWriter.startElement("th", uiComponent);
+		responseWriter.writeAttribute("class", "yui3-datatable-header", null);
+
+		String i18nFileName = messageContext.getMessage(locale, "file-name");
+		responseWriter.writeText(i18nFileName, null);
+		responseWriter.endElement("th");
+		responseWriter.startElement("th", uiComponent);
+		responseWriter.writeAttribute("class", "yui3-datatable-header", null);
+
+		String i18nFileType = messageContext.getMessage(locale, "file-type");
+		responseWriter.writeText(i18nFileType, null);
+		responseWriter.endElement("th");
+		responseWriter.startElement("th", uiComponent);
+		responseWriter.writeAttribute("class", "yui3-datatable-header", null);
+
+		String i18nFileSize = messageContext.getMessage(locale, "file-size");
+		responseWriter.writeText(i18nFileSize, null);
+		responseWriter.endElement("th");
+		responseWriter.startElement("th", uiComponent);
+		responseWriter.writeAttribute("class", "yui3-datatable-header", null);
+
+		String i18nProgress = messageContext.getMessage(locale, "progress");
+		responseWriter.writeText(i18nProgress, null);
+		responseWriter.endElement("th");
+		responseWriter.endElement("tr");
+		responseWriter.endElement("thead");
+		responseWriter.startElement("tfoot", uiComponent);
+		responseWriter.startElement("tr", uiComponent);
+		responseWriter.startElement("td", uiComponent);
+		responseWriter.writeAttribute("class", "yui3-datatable-cell", null);
+		responseWriter.writeAttribute("colspan", "3", null);
+
+		String i18nNoFilesSelected = messageContext.getMessage(locale, "no-files-selected");
+		responseWriter.writeText(i18nNoFilesSelected, null);
+		responseWriter.endElement("td");
+		responseWriter.endElement("tr");
+		responseWriter.endElement("tfoot");
+		responseWriter.startElement("tbody", uiComponent);
+		responseWriter.startElement("tr", uiComponent);
+		responseWriter.endElement("tr");
+		responseWriter.endElement("tbody");
+		responseWriter.endElement("table");
+		responseWriter.endElement("div");
+	}
+
 	@Override
 	public Object getConvertedValue(FacesContext facesContext, UIComponent uiComponent, Object submittedValue)
 		throws ConverterException {
@@ -323,11 +410,6 @@ public class InputFileRenderer extends InputFileRendererBase implements SystemEv
 	@Override
 	public String getDelegateRendererType() {
 		return InputFile.DELEGATE_RENDERER_TYPE;
-	}
-
-	@Override
-	public boolean isListenerForSource(Object source) {
-		return ((source != null) && (source instanceof ApplicationConfig));
 	}
 
 	protected InputFileValidator getInputFileValidator(InputFile inputFile) {
@@ -375,20 +457,6 @@ public class InputFileRenderer extends InputFileRendererBase implements SystemEv
 		}
 
 		return parentFormClientId;
-	}
-
-	protected PreviewTableTemplate getPreviewTableTemplate(FacesContext facesContext) {
-		ExternalContext externalContext = facesContext.getExternalContext();
-		Map<String, Object> applicationMap = externalContext.getApplicationMap();
-
-		return (PreviewTableTemplate) applicationMap.get(PreviewTableTemplate.class.getName());
-	}
-
-	protected ProgressTableTemplate getProgressTableTemplate(FacesContext facesContext) {
-		ExternalContext externalContext = facesContext.getExternalContext();
-		Map<String, Object> applicationMap = externalContext.getApplicationMap();
-
-		return (ProgressTableTemplate) applicationMap.get(ProgressTableTemplate.class.getName());
 	}
 
 	protected Map<String, List<UploadedFile>> getUploadedFileMap(FacesContext facesContext, String location) {

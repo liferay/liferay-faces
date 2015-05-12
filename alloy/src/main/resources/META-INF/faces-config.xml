@@ -7,10 +7,6 @@
 	<name>LiferayFacesAlloy</name>
 	<application>
 		<el-resolver>com.liferay.faces.alloy.el.AUIELResolver</el-resolver>
-		<system-event-listener>
-			<system-event-listener-class>com.liferay.faces.alloy.component.inputfile.internal.InputFileRenderer</system-event-listener-class>
-			<system-event-class>com.liferay.faces.util.event.PostConstructApplicationConfigEvent</system-event-class>
-		</system-event-listener>
 	</application>
 	<component>
 		<component-type>com.liferay.faces.alloy.AUIButtonRow</component-type>
