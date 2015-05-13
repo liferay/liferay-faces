@@ -175,21 +175,21 @@ public class ListModelBean {
 
 								if (sourceFileName.endsWith(".css")) {
 
-									String sourcePath = File.separator + "resources" + File.separator + "css" +
+									String sourcePath = File.separator + "WEB-INF" + File.separator + "resources" + File.separator + "css" +
 										File.separator + sourceFileName;
 
 									sourceFileURL = startupExternalContext.getResource(sourcePath);
 								}
 								else if (sourceFileName.endsWith(".js")) {
 
-									String sourcePath = File.separator + "resources" + File.separator + "js" +
+									String sourcePath = File.separator + "WEB-INF" + File.separator + "resources" + File.separator + "js" +
 										File.separator + sourceFileName;
 
 									sourceFileURL = startupExternalContext.getResource(sourcePath);
 								}
 								else if (sourceFileName.endsWith(".xhtml")) {
 
-									String sourcePath = File.separator + "component" + File.separator + prefix +
+									String sourcePath = File.separator + "WEB-INF" + File.separator + "component" + File.separator + prefix +
 										File.separator + lowerCaseName + File.separator;
 
 									if (!sourceFileName.toLowerCase().contains("common")) {

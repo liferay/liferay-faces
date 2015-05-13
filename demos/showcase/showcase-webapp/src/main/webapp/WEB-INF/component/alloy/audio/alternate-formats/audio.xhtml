@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<showcase:example description="#{i18n['alloy-audio-alternate-formats-example-1']}" number="1">
+			<alloy:audio styleClass="showcase-audio" controls="true">
+				<alloy:resource library="audios" name="over-the-rainbow.mp3" />
+				<alloy:resource library="audios" name="over-the-rainbow.wav" />
+				<alloy:resource library="audios" name="over-the-rainbow.m4a" />
+				<alloy:resource library="audios" name="over-the-rainbow.webm" />
+				<alloy:resource library="audios" name="over-the-rainbow.ogg" />
+			</alloy:audio>
+		</showcase:example>
+	</ui:define>
+
+	<ui:define name="col2">
+		<showcase:example description="#{i18n['alloy-audio-alternate-formats-example-2']}" number="2">
+			<alloy:audio styleClass="showcase-audio" controls="true" value="#{audioBacking.audios}" />
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

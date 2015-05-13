@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:alloy="http://liferay.com/faces/alloy" xmlns:portal="http://liferay.com/faces/portal"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+
+		<!-- Example 1: ValueChangeListener execution when immediate is true -->
+		<alloy:form>
+			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-true']}" number="1">
+				<alloy:messages globalOnly="true" styleClass="feedback" />
+				<alloy:field id="commentsField" label="#{i18n['comments']}" styleClass="input-rich-text-field">
+					<alloy:message id="commentsMessage" for="comments" />
+					<portal:inputRichText id="comments" immediate="true"
+						value="#{inputRichTextBacking.applicant.comments}"
+						valueChangeListener="#{inputRichTextBacking.valueChangeListener}" />
+				</alloy:field>
+				<alloy:commandButton actionListener="#{inputRichTextBacking.submit}" render="@form"
+					value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel id="outputModel">
+				<alloy:outputText id="modelValue" value="#{inputRichTextBacking.applicant.comments}" />
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: ValueChangeListener execution when immediate is false (the default) -->
+		<alloy:form>
+			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-false']}" number="2">
+				<alloy:messages globalOnly="true" styleClass="feedback" />
+				<alloy:field id="commentsField" label="#{i18n['comments']}" styleClass="input-rich-text-field">
+					<alloy:message id="commentsMessage" for="comments" />
+					<portal:inputRichText id="comments" value="#{inputRichTextBacking.applicant.comments}"
+						valueChangeListener="#{inputRichTextBacking.valueChangeListener}" />
+				</alloy:field>
+				<alloy:commandButton actionListener="#{inputRichTextBacking.submit}" render="@form"
+					value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel id="outputModel">
+				<alloy:outputText id="modelValue" value="#{inputRichTextBacking.applicant.comments}" />
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

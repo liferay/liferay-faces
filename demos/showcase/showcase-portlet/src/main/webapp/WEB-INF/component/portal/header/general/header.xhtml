@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:portal="http://liferay.com/faces/portal"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Specifying an internationalized key (provided by the portal) for the title attribute. -->
+		<showcase:example description="#{i18n['portal-header-general-example-1']}" number="1">
+			<portal:header title="home" />
+		</showcase:example>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: Specifying an EL expression for the title attribute. -->
+		<showcase:example description="#{i18n['portal-header-general-example-2']}" number="2">
+			<portal:header title="#{i18n['header-text']}" />
+		</showcase:example>
+	</ui:define>
+
+	<ui:define name="col3">
+		<!-- Example 3: Specifying the backLabel and backURL attributes to define the hyperlink for the back icon. -->
+		<showcase:example description="#{i18n['portal-header-general-example-3']}" number="3">
+			<portal:header backLabel="#{i18n['navigation']}" backURL="javascript:history.go(-1);"
+				title="#{i18n['header-text']}" />
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

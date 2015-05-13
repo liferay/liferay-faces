@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:portal="http://liferay.com/faces/portal"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-1col-80.xhtml">
+
+	<ui:define name="col1">
+		<showcase:example description="#{i18n['portal-permissionsurl-windowstate-example-1']}">
+			<portal:permissionsURL resourcePrimKey="#{permissionsURLModelBean.portletResourcePrimaryKey}" windowState="pop_up"
+				var="permissionsURL" />
+			<pre>#{permissionsURL}</pre>
+			<alloy:form>
+				<alloy:button onclick="Liferay.component('dialogKey').show();"
+					rendered="#{liferay.userHasPortletPermission['PERMISSIONS']}" value="#{i18n['permissions']}" />
+				<alloy:dialog clientKey="dialogKey" headerText="#{i18n['permissions']}" height="50%" modal="true" width="70%">
+					<iframe src="#{permissionsURL}" style="border: 0px; height: 100%; width: 100%;" />
+				</alloy:dialog>
+			</alloy:form>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

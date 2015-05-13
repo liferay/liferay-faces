@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Default usage with dismissible="true" -->
+		<alloy:form id="myForm1">
+			<showcase:example description="#{i18n['alloy-popover-general-example-1']}" number="1">
+				<alloy:button id="myButton1" onclick="Liferay.component('popover1').toggle();"
+					value="#{i18n['click-here-to-toggle-the-popover-and-click-outside-the-popover-to-hide']}" />
+				<alloy:popover clientKey="popover1" for="myButton1" headerText="#{i18n['header-text']}">
+					<alloy:field label="#{i18n['text-field']}">
+						<alloy:inputText value="#{popoverModelBean.text1}" />
+					</alloy:field>
+					<alloy:commandButton action="#{popoverBackingBean.submit}"
+						onclick="Liferay.component('popover1').hide();"
+						render="@form" value="#{i18n['submit']}" />
+					<alloy:button onclick="Liferay.component('popover1').hide();" value="#{i18n['cancel']}" />
+				</alloy:popover>
+			</showcase:example>
+			<showcase:outputModel id="outputModel">
+				<alloy:outputText id="modelValue" value="#{popoverModelBean.text1}" />
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: Alternate usage with dismissible="false" -->
+		<alloy:form id="myForm2">
+			<showcase:example description="#{i18n['alloy-popover-general-example-2']}" number="2">
+				<alloy:button id="myButton2" onclick="Liferay.component('popover2').show();"
+					value="#{i18n['click-here-to-show-the-popover']}" />
+				<alloy:popover autoShow="false" clientKey="popover2" dismissible="false" for="myButton2"
+					headerText="#{i18n['header-text']}">
+					<alloy:field label="#{i18n['text-field']}">
+						<alloy:inputText value="#{popoverModelBean.text2}" />
+					</alloy:field>
+					<alloy:commandButton action="#{popoverBackingBean.submit}"
+						onclick="Liferay.component('popover2').hide();"
+						render="@form" value="#{i18n['submit']}" />
+					<alloy:button onclick="Liferay.component('popover2').hide();" value="#{i18n['cancel']}" />
+				</alloy:popover>
+			</showcase:example>
+			<showcase:outputModel id="outputModel">
+				<alloy:outputText id="modelValue" value="#{popoverModelBean.text2}" />
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:portal="http://liferay.com/faces/portal" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Introducing a var into the EL with default role types (Guest, Owner, Power User, Site Member, User) -->
+		<showcase:example description="#{i18n['portal-permissionsurl-general-example-1']}" number="1">
+			<portal:permissionsURL resourcePrimKey="#{permissionsURLModelBean.portletResourcePrimaryKey}" var="permissionsURL1" />
+			<pre>#{permissionsURL1}</pre>
+			<alloy:button onclick="document.location='#{permissionsURL1}';"
+				rendered="#{liferay.userHasPortletPermission['PERMISSIONS']}" value="#{i18n['permissions']}" />
+		</showcase:example>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: Output directly to the response with specific role types (Guest, Owner, Power User, User) -->
+		<showcase:example description="#{i18n['portal-permissionsurl-general-example-2']}" number="2">
+			<alloy:loadConstants classType="com.liferay.portal.model.RoleConstants" var="roleConstants" />
+			<pre>
+				<portal:permissionsURL resourcePrimKey="#{permissionsURLModelBean.portletResourcePrimaryKey}"
+					roleTypes="#{roleConstants.TYPES_REGULAR}" />
+			</pre>
+			<portal:permissionsURL resourcePrimKey="#{permissionsURLModelBean.portletResourcePrimaryKey}"
+				roleTypes="#{roleConstants.TYPES_REGULAR}" var="permissionsURL2" />
+			<alloy:button onclick="document.location='#{permissionsURL2}';"
+				rendered="#{liferay.userHasPortletPermission['PERMISSIONS']}" value="#{i18n['permissions']}" />
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

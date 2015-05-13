@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:portal="http://liferay.com/faces/portal" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-80.xhtml">
+
+	<ui:define name="col1">
+		<showcase:example>
+			<c:set var="group" value="#{liferay.themeDisplay.scopeGroup}" />
+			<portal:permissionsURL modelResource="com.liferay.portal.model.Group" modelResourceDescription="#{group.name}"
+				resourcePrimKey="#{group.groupId}" var="permissionsURL" />
+			<pre>#{permissionsURL}</pre>
+			<alloy:button onclick="document.location='#{permissionsURL}'; return false;"
+				rendered="#{liferay.userHasPortletPermission['PERMISSIONS']}" value="#{i18n['permissions']}" />
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

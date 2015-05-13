@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-1col-80.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form enctype="multipart/form-data">
+			<showcase:example>
+				<alloy:inputFile fileUploadListener="#{inputFileBackingBean.handleFileUpload}" multiple="multiple"
+					showPreview="true">
+				</alloy:inputFile>
+				<hr />
+				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<ui:include src="../inputFileCommon.xhtml" />
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

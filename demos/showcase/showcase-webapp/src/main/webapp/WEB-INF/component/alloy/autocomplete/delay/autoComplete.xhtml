@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/templates/component-1col-60.xhtml">
+
+	<ui:define name="col1">
+		<h:form>
+			<showcase:example description="#{i18n['alloy-autocomplete-delay-example-1']}">
+				<alloy:field label="#{i18n['favorite-liferay-benefit']}">
+					<alloy:autoComplete delay="300"  serverFilterType="phraseMatch"
+						value="#{autoCompleteModelBean.text}">
+						<f:selectItem itemValue="Compatible" />
+						<f:selectItem itemValue="Enterprise Ready" />
+						<f:selectItem itemValue="Powerful Integration" />
+						<f:selectItem itemValue="Lightweight" />
+						<f:selectItem itemValue="Open Source" />
+					</alloy:autoComplete>
+				</alloy:field>
+				<hr />
+				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{autoCompleteModelBean.text}" />
+			</showcase:outputModel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

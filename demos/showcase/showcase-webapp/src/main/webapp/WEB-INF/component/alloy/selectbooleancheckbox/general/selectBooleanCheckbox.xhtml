@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-1col-60.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form>
+			<showcase:example renderedCheckbox="true" requiredCheckbox="true">
+				<alloy:field label="#{i18n['agree']}">
+					<alloy:selectBooleanCheckbox id="checkbox"
+						rendered="#{showcaseModelBean.selectedComponent.rendered}"
+						required="#{showcaseModelBean.selectedComponent.required}"
+						value="#{selectBooleanCheckboxModelBean.agree}" />
+					<alloy:outputText styleClass="radio"
+						value="#{i18n['i-agree-to-the-terms-of-the-license-agreement']}" />
+					<br />
+					<alloy:message for="checkbox" />
+				</alloy:field>
+				<hr />
+				<alloy:commandButton action="#{selectBooleanCheckboxBackingBean.submit}" render="@form"
+					value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{selectBooleanCheckboxModelBean.agree}" />
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

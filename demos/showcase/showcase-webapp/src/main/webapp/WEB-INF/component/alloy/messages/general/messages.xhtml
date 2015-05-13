@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-4col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Render all messages in a <ul> (the default) -->
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-messages-general-example-1']}" number="1">
+				<alloy:messages />
+				<alloy:outputLabel for="inputText" value="#{i18n['text-field']}" />
+				<alloy:inputText id="inputText" label="#{i18n['text-field']}" required="true"
+					valueChangeListener="#{messageBackingBean.valueChangeListener}" />
+				<br />
+				<alloy:commandButton action="#{messageBackingBean.submit}" render="@form"
+					value="#{i18n['submit-and-re-render-form']}" />
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: Render all messages in a <table> -->
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-messages-general-example-2']}" number="2">
+				<alloy:messages layout="table" />
+				<alloy:outputLabel for="inputText" value="#{i18n['text-field']}" />
+				<alloy:inputText id="inputText" label="#{i18n['text-field']}" required="true"
+					valueChangeListener="#{messageBackingBean.valueChangeListener}" />
+				<br />
+				<alloy:commandButton action="#{messageBackingBean.submit}" render="@form"
+					value="#{i18n['submit-and-re-render-form']}" />
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+	<ui:define name="col3">
+		<!-- Example 3: Render only global messages in a <ul> -->
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-messages-general-example-3']}" number="3">
+				<alloy:messages globalOnly="true" layout="table" />
+				<alloy:outputLabel for="inputText" value="#{i18n['text-field']}" />
+				<alloy:inputText id="inputText" label="#{i18n['text-field']}" required="true"
+					valueChangeListener="#{messageBackingBean.valueChangeListener}" />
+				<br />
+				<alloy:commandButton action="#{messageBackingBean.submit}" render="@form"
+					value="#{i18n['submit-and-re-render-form']}" />
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

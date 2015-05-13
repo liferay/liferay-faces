@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form>
+			<showcase:example>
+				<alloy:field label="#{i18n['please-choose-a-meeting-time-lunchtime-12-1-is-not-valid']}">
+					<alloy:inputTime id="time" minTime="09:00:00" maxTime="17:00:00" timePattern="hh:mm a"
+						validator="com.liferay.faces.demos.validator.WorkHoursValidator"
+						value="#{inputTimeModelBean.time}" />
+					<alloy:message for="time" />
+				</alloy:field>
+				<hr />
+				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{inputTimeModelBean.time}">
+					<f:convertDateTime pattern="hh:mm a" />
+				</alloy:outputText>
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

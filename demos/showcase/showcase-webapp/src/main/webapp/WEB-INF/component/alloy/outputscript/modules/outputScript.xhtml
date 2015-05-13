@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Event module -->
+		<showcase:example description="#{i18n['alloy-outputscript-modules-example-1']}" number="1">
+			<span id="example1:text"></span>
+			<alloy:outputScript use="event">
+				A.on('domready', function () {
+					document.getElementById('example1:text').innerHTML = '#{i18n['alloy-outputscript-modules-script-1']}';
+				});
+			</alloy:outputScript>
+		</showcase:example>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: Node module -->
+		<showcase:example description="#{i18n['alloy-outputscript-modules-example-2']}" number="2">
+			<span id="example2:text"></span>
+			<alloy:button id="button" binding="#{button}" value="#{i18n['click-here-to-execute-the-click-event-callback']}" />
+			<alloy:outputScript use="node" target="body">
+				A.one('##{alloy:escapeClientId(button.clientId)}').on('click', function () {
+					document.getElementById('example2:text').innerHTML = '#{i18n['alloy-outputscript-modules-script-2']}';
+				});
+			</alloy:outputScript>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:portal="http://liferay.com/faces/portal" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form>
+			<showcase:example description="#{i18n['portal-nav-general-example-1']}" number="1" renderedCheckbox="true">
+				<portal:nav rendered="#{showcaseModelBean.selectedComponent.rendered}" responsive="false">
+					<portal:navItem>
+						<alloy:commandLink value="Compatible" />
+					</portal:navItem>
+					<portal:navItem>
+						<alloy:commandLink value="Enterprise Ready" />
+					</portal:navItem>
+					<portal:navItem>
+						<alloy:commandLink value="Powerful Integration" />
+					</portal:navItem>
+					<portal:navItem>
+						<alloy:commandLink value="Lightweight" />
+					</portal:navItem>
+					<portal:navItem>
+						<alloy:commandLink value="Open Source" />
+					</portal:navItem>
+				</portal:nav>
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<alloy:form>
+			<showcase:example description="#{i18n['portal-nav-general-example-2']}" number="2">
+				<portal:nav responsive="false" styleClass="nav-list">
+					<portal:navItem iconCssClass="icon-github" href="https://github.com/liferay/liferay-faces" label="Source Code" />
+					<portal:navItem iconCssClass="icon-twitter" href="https://twitter.com/liferayfaces" label="@liferayfaces" />
+				</portal:nav>
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

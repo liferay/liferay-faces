@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-inputtextarea-size-example-1']}" number="1">
+				<alloy:inputTextarea id="textarea" cols="50" rows="6" value="#{inputTextModelBean.text}" />
+				<hr />
+				<alloy:commandButton action="#{inputTextBackingBean.submit}" render="@form" value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{inputTextModelBean.text}" />
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-inputtextarea-size-example-2']}" number="2">
+				<alloy:inputTextarea id="textarea" value="#{inputTextModelBean.text}"
+					style="width: 150px; height: 150px;" />
+				<hr />
+				<alloy:commandButton action="#{inputTextBackingBean.submit}" render="@form" value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{inputTextModelBean.text}" />
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

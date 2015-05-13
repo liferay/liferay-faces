@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="#{browserSniffer.mobile ? '/WEB-INF/templates/component-1col-60.xhtml' : '/WEB-INF/templates/component-3col.xhtml'}">
+
+	<ui:define name="col1">
+		<!--  Example 1: Specifying showOn="focus" (the default) -->
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-inputtime-general-example-1']}" longDescription="true" number="1"
+				renderedCheckbox="true" requiredCheckbox="true">
+				<alloy:field label="#{i18n['time']}">
+					<alloy:inputTime id="time" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+						required="#{showcaseModelBean.selectedComponent.required}" pattern="hh:mm a"
+						value="#{inputDateModelBean.birthday}" />
+					<alloy:message for="time" />
+				</alloy:field>
+				<hr />
+				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{inputDateModelBean.birthday}">
+					<f:convertDateTime pattern="hh:mm a" />
+				</alloy:outputText>
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<c:if test="#{!browserSniffer.mobile}">
+			<!-- Example 2: Specifying showOn="button" -->
+			<alloy:form>
+				<showcase:example description="#{i18n['alloy-inputtime-general-example-2']}" longDescription="true" number="2"
+					renderedCheckbox="true">
+					<alloy:field label="#{i18n['time']}">
+						<alloy:inputTime id="time" showOn="button" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+							pattern="hh:mm a" value="#{inputDateModelBean.birthday}" />
+						<alloy:message for="time" />
+					</alloy:field>
+					<hr />
+					<alloy:commandButton render="@form" value="#{i18n['submit']}" />
+				</showcase:example>
+				<showcase:outputModel>
+					<alloy:outputText id="modelValue" value="#{inputDateModelBean.birthday}">
+						<f:convertDateTime pattern="hh:mm a" />
+					</alloy:outputText>
+				</showcase:outputModel>
+			</alloy:form>
+		</c:if>
+	</ui:define>
+
+	<ui:define name="col3">
+		<c:if test="#{!browserSniffer.mobile}">
+			<!-- Example 3: Specifying showOn="both" -->
+			<alloy:form>
+				<showcase:example description="#{i18n['alloy-inputtime-general-example-3']}" longDescription="true" number="3"
+					renderedCheckbox="true">
+					<alloy:field label="#{i18n['time']}">
+						<alloy:inputTime id="time" showOn="both" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+							pattern="hh:mm a" value="#{inputDateModelBean.birthday}" />
+						<alloy:message for="time" />
+					</alloy:field>
+					<hr />
+					<alloy:commandButton render="@form" value="#{i18n['submit']}" />
+				</showcase:example>
+				<showcase:outputModel>
+					<alloy:outputText id="modelValue" value="#{inputDateModelBean.birthday}">
+						<f:convertDateTime pattern="hh:mm a" />
+					</alloy:outputText>
+				</showcase:outputModel>
+			</alloy:form>
+		</c:if>
+	</ui:define>
+</ui:composition>

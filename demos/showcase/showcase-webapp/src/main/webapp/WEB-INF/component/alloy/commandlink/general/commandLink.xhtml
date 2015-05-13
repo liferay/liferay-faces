@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Styling via children -->
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-commandlink-general-example-1']}" number="1"
+				renderedCheckbox="true">
+				<alloy:commandLink rendered="#{showcaseModelBean.selectedComponent.rendered}">
+					<alloy:icon name="star" />
+					<alloy:outputText value=" #{i18n['text-for-a-link']} " />
+					<alloy:image value="#{resource['images:liferay-faces-logo-small.png']}" />
+				</alloy:commandLink>
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: Styling via value attribute -->
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-commandlink-general-example-2']}" number="2">
+				<alloy:commandLink value="#{i18n['text-for-a-link']}" />
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

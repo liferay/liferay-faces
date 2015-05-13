@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:portal="http://liferay.com/faces/portal"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<showcase:example>
+			<alloy:form>
+				<portal:nav responsive="false" value="#{navModelBean.liferayBenefits}" var="liferayBenefit">
+					<portal:navItem>
+						<alloy:commandLink>
+							<alloy:image name="icon-#{liferayBenefit.imageName}" library="images" />
+							<alloy:outputText value="#{liferayBenefit.label}" />
+						</alloy:commandLink>
+					</portal:navItem>
+				</portal:nav>
+			</alloy:form>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

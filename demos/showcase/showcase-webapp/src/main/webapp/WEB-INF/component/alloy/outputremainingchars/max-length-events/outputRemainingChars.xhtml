@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: The onMaxlengthReached event occurs every time maxlength is reached. -->
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-outputremainingchars-max-length-reached-1']}" number="1">
+				<alloy:inputTextarea id="inputTextarea" maxlength="10" />
+				<br />
+				<alloy:outputRemainingChars for="inputTextarea" onMaxlengthReached="alert('Max length reached');"
+					value="There are {0} character(s) remaining." />
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: The onceMaxlengthReached event occurs the first time maxlength is reached. -->
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-outputremainingchars-max-length-reached-2']}" number="2">
+				<alloy:inputTextarea id="inputTextarea" maxlength="10" />
+				<br />
+				<alloy:outputRemainingChars for="inputTextarea" onceMaxlengthReached="alert('Max length reached once');"
+					value="There are {0} character(s) remaining." />
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

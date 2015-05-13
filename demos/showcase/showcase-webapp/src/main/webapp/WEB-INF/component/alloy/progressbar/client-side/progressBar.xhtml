@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form>
+			<showcase:example>
+				<alloy:outputScript>
+					var progressInterval;
+
+					function startProgress() {
+
+						stopProgress();
+						var progressBar = Liferay.component('progressBar');
+
+						progressInterval = setInterval(function() {
+							progressBar.set('value', progressBar.get('value') + 1);
+						}, 100);
+					};
+
+					function stopProgress() {
+
+						if (progressInterval) {
+							clearInterval(progressInterval);
+						}
+					};
+				</alloy:outputScript>
+				<alloy:progressBar clientKey="progressBar" label="{0}%"
+					oncomplete="stopProgress(); Liferay.component('progressBar').set('label', '#{i18n['complete']}!');" />
+				<alloy:button value="#{i18n['start-progress']}" onclick="startProgress(); return false;" />
+				<alloy:button value="#{i18n['stop-progress']}" onclick="stopProgress(); return false;" />
+				<alloy:button value="#{i18n['reset-progress']}"
+					onclick="stopProgress(); Liferay.component('progressBar').set('value', 0); return false;" />
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-80.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form>
+			<showcase:example>
+				<alloy:outputLabel styleClass="alloy-output-label" value="#{i18n['favorite-liferay-benefit']}" />
+				<alloy:selectManyCheckbox layout="lineDirection" value="#{selectManyModelBean.favoriteIds}">
+					<f:selectItems value="#{selectManyModelBean.liferayBenefits}" var="benefit"
+						itemValue="#{benefit.id}"
+						itemLabel="#{benefit.label}" />
+				</alloy:selectManyCheckbox>
+				<hr />
+				<alloy:commandButton action="#{selectManyBackingBean.submit}" render="@form"
+					value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<ui:repeat id="modelValue" value="#{selectManyModelBean.favoriteIds}" var="favoriteId">
+					<alloy:outputText value="#{favoriteId}" />
+					<br />
+				</ui:repeat>
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

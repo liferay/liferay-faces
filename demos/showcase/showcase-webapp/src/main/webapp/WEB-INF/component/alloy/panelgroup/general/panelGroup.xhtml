@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example#1: By default, this component renders a span. -->
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-panelgroup-general-example-1']}" number="1" renderedCheckbox="true">
+				<alloy:panelGroup rendered="#{showcaseModelBean.selectedComponent.rendered}" styleClass="showcase-panel">
+					#{i18n['this-text-is-inside-a-span-html-tag']}
+				</alloy:panelGroup>
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example#2: Specifying block for the layout attribute causes the component to render a div. -->
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-panelgroup-general-example-2']}" number="2" renderedCheckbox="true">
+				<alloy:panelGroup layout="block" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+					styleClass="showcase-panel">
+					#{i18n['this-text-is-inside-a-div-html-tag']}
+				</alloy:panelGroup>
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>
