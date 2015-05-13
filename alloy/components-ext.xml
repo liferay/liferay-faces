@@ -1130,7 +1130,7 @@
 		</attributes>
 	</component>
 	<component name="CommandButton" extendsTags="AutoAjaxCommandCommon ButtonCommon FacesMessageLabelInherited UICommand" parentClass="javax.faces.component.html.HtmlCommandButton"
-		rendererParentClass="com.liferay.faces.alloy.component.button.internal.ButtonRenderer">
+		rendererParentClass="com.liferay.faces.alloy.component.button.internal.AbstractButtonRenderer">
 		<description>
 			<![CDATA[CommandButton is a UICommand component that renders a styleable HTML <code>&lt;button&gt;</code> element. The default type is submit. Since it extends <a href="http://docs.oracle.com/javaee/7/api/javax/faces/component/html/HtmlCommandButton.html" target="_blank"><code>HtmlCommandButton</code></a> it supports all the features of <a href="https://javaserverfaces.java.net/nonav/docs/2.2/vdldocs/facelets/h/commandButton.html" target="_blank"><code>h:commandButton</code></a>. The component must be a child of h:form in order to trigger the action or actionListener.]]>
 		</description>
@@ -1316,7 +1316,7 @@
 		</attributes>
 	</component>
 	<component name="Field" extendsTags="PanelGroup" parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
-		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.internal.PanelGroupRenderer">
+		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.internal.AbstractPanelGroupRenderer">
 		<description>
 			<![CDATA[Field is a UIPanel component that renders a <code>&lt;div&gt;</code> element and a <code>&lt;label&gt;</code> element in order to wrap a field. Since it extends PanelGroup, it supports all the features of alloy:panelGroup.]]>
 		</description>
@@ -2681,7 +2681,7 @@
 		</attributes>
 	</component>
 	<component name="Panel" extendsTags="PanelGroup" parentClass="com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout"
-		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.internal.PanelGroupRenderer">
+		rendererParentClass="com.liferay.faces.alloy.component.panelgroup.internal.AbstractPanelGroupRenderer">
 		<description>
 			<![CDATA[Panel is a UIPanel component that renders a <code>&lt;div&gt;</code> element with three child <code>&lt;div&gt;</code> elements (one for header, body, and footer). Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
 		</description>
