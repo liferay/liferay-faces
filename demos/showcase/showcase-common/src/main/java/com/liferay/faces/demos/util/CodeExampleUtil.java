@@ -15,14 +15,14 @@ package com.liferay.faces.demos.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.liferay.faces.demos.dto.CodeExample;
-import com.liferay.faces.util.io.TextResource;
-import com.liferay.faces.util.io.TextResourceUtil;
 import com.liferay.faces.util.lang.StringPool;
 
 
@@ -32,7 +32,7 @@ import com.liferay.faces.util.lang.StringPool;
 public class CodeExampleUtil {
 
 	// Private Constants
-//	private static final Pattern BLANK_LINE_PATTERN = Pattern.compile("\\t+\\r\\n");
+	private static final Pattern BLANK_LINE_PATTERN = Pattern.compile("\\t+$");
 	private static final String JAVA = "java";
 	private static final String JAVA_EXTENSION = ".java";
 	private static final Pattern JAVA_MULTILINE_COMMENTS_PATTERN = Pattern.compile("/[*][*].*[*]/", Pattern.DOTALL);
@@ -47,26 +47,40 @@ public class CodeExampleUtil {
 	public static CodeExample read(URL sourceFileURL, String sourceFileName, boolean productionMode)
 		throws IOException {
 
-		TextResource textResource = TextResourceUtil.read(sourceFileURL);
-		String sourceCodeText = textResource.getText();
+		URLConnection urlConnection = sourceFileURL.openConnection();
+		InputStream resourceAsStream = urlConnection.getInputStream();
+		StringBuilder stringBuilder = new StringBuilder();
 
-		if (sourceCodeText != null) {
+		if (resourceAsStream != null) {
 
+			byte[] bytes = new byte[1024];
+			int bytesRead;
+
+			while ((bytesRead = resourceAsStream.read(bytes)) != -1) {
+				String bytesAsString = new String(bytes, 0, bytesRead);
+				stringBuilder.append(bytesAsString);
+			}
+
+			resourceAsStream.close();
+
+			String sourceCodeText = stringBuilder.toString();
 			String fileExtension;
 
 			if (sourceFileName.endsWith(JAVA_EXTENSION)) {
-				fileExtension = JAVA;
 
+				fileExtension = JAVA;
 				Matcher matcher = JAVA_MULTILINE_COMMENTS_PATTERN.matcher(sourceCodeText);
 				sourceCodeText = matcher.replaceAll(StringPool.BLANK);
 			}
 			else {
+
+				// Reset the stringBuilder
+				stringBuilder.setLength(0);
 				fileExtension = XML;
 				sourceCodeText = TEMPLATE_ATTRIBUTE_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
 				sourceCodeText = SHOWCASE_NAMESPACE_PATTERN.matcher(sourceCodeText).replaceAll(StringPool.BLANK);
 
 				StringReader stringReader = new StringReader(sourceCodeText);
-				StringBuffer buf = new StringBuffer();
 				BufferedReader bufferedReader = new BufferedReader(stringReader);
 				int trimTab = 0;
 				String line;
@@ -126,22 +140,22 @@ public class CodeExampleUtil {
 							}
 
 							// Strip empty lines
-							Pattern BLANK_LINE_PATTERN = Pattern.compile("\\t+$");
 							Matcher matcher = BLANK_LINE_PATTERN.matcher(line);
+
 							if (!matcher.matches()) {
-								buf.append(line);
-								buf.append(StringPool.NEW_LINE);
+								stringBuilder.append(line);
+								stringBuilder.append(StringPool.NEW_LINE);
 							}
 						}
 					}
 				}
 
-				sourceCodeText = buf.toString();
+				sourceCodeText = stringBuilder.toString();
 			}
 
 			sourceCodeText = sourceCodeText.trim();
 
-			return new CodeExample(sourceFileName, fileExtension, sourceFileURL, textResource.getLastModified(),
+			return new CodeExample(sourceFileName, fileExtension, sourceFileURL, urlConnection.getLastModified(),
 					sourceCodeText);
 		}
 		else {
