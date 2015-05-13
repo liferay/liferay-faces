@@ -22,15 +22,6 @@ import com.liferay.faces.alloy.component.panelgroup.PanelGroup;
  * @author  Kyle Stiemann
  */
 @FacesRenderer(componentFamily = PanelGroup.COMPONENT_FAMILY, rendererType = PanelGroup.RENDERER_TYPE)
-public class PanelGroupRenderer extends PanelGroupRendererBase {
+public class PanelGroupRenderer extends AbstractPanelGroupRenderer {
 
-	@Override
-	public String getDelegateComponentFamily() {
-		return PanelGroup.DELEGATE_COMPONENT_FAMILY;
-	}
-
-	@Override
-	public String getDelegateRendererType() {
-		return PanelGroup.DELEGATE_RENDERER_TYPE;
-	}
 }

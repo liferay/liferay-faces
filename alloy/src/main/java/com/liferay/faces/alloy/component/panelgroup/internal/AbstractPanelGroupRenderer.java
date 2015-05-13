@@ -11,25 +11,23 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.faces.alloy.component.panel.internal;
-//J-
+package com.liferay.faces.alloy.component.panelgroup.internal;
 
-
-import javax.annotation.Generated;
-
-
-import com.liferay.faces.alloy.component.panelgroup.internal.AbstractPanelGroupRenderer;
+import com.liferay.faces.alloy.component.panelgroup.PanelGroup;
 
 
 /**
- * @author	Bruno Basto
- * @author	Kyle Stiemann
+ * @author  Neil Griffin
  */
-@Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class PanelRendererBase extends AbstractPanelGroupRenderer {
+public abstract class AbstractPanelGroupRenderer extends PanelGroupRendererBase {
 
-	// Protected Constants
-	protected static final String FOOTER_TEXT = "footerText";
-	protected static final String HEADER_TEXT = "headerText";
+	@Override
+	public String getDelegateComponentFamily() {
+		return PanelGroup.DELEGATE_COMPONENT_FAMILY;
+	}
+
+	@Override
+	public String getDelegateRendererType() {
+		return PanelGroup.DELEGATE_RENDERER_TYPE;
+	}
 }
-//J+
