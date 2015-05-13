@@ -23,18 +23,14 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.RenderKit;
 import javax.faces.render.Renderer;
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.Tag;
 
-import com.liferay.faces.portal.component.inputrichtext.InputRichText;
-import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.client.ClientScript;
 import com.liferay.faces.util.client.ClientScriptFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.StringPool;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.render.RendererUtil;
 
 
 /**
