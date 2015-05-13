@@ -37,7 +37,7 @@
 		</attributes>
 	</component>
 	<component name="ButtonRow" extendsTags="HTMLCommonEvents" parentClass="javax.faces.component.html.HtmlPanelGroup"
-		rendererParentClass="com.liferay.faces.util.render.internal.DelegatingRendererBase">
+		rendererParentClass="com.liferay.faces.util.render.DelegatingRendererBase">
 		<description>
 			<![CDATA[ButtonRow is a UIPanel component that renders a <code>&lt;div&gt;</code> element for grouping purposes. Since it extends HtmlPanelGroup, it supports all the features of h:panelGroup.]]>
 		</description>
