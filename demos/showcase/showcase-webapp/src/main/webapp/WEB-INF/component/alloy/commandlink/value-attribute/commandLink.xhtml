@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-1col-60.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form>
+			<showcase:example>
+				<ui:repeat value="#{commandModelBean.customers}" var="customer">
+					<alloy:commandLink actionListener="#{commandBackingBean.selectionListener}" render="@form"
+						value="#{customer}">
+						<alloy:icon name="edit" />
+						<alloy:outputText value=" #{customer.fullName}" />
+					</alloy:commandLink>
+					<br />
+				</ui:repeat>
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{commandModelBean.selectedCustomer.fullName}" />
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

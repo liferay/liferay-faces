@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-1col-60.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form>
+			<showcase:example renderedCheckbox="true">
+				<alloy:messages globalOnly="true" layout="table" />
+				<alloy:fieldset legend="#{i18n['fieldset-legend']}"
+					rendered="#{showcaseModelBean.selectedComponent.rendered}">
+					<alloy:field label="#{i18n['text-box-1']}">
+						<alloy:inputText value="#{fieldModelBean.firstName}" />
+					</alloy:field>
+					<alloy:field label="#{i18n['text-box-2']}">
+						<alloy:inputText value="#{fieldModelBean.lastName}" />
+					</alloy:field>
+					<alloy:commandButton actionListener="#{fieldBackingBean.submit}" render="@form"
+						value="#{i18n['submit']}" />
+				</alloy:fieldset>
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

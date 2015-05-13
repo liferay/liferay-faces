@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Hard coded Brazilian Portuguese locale -->
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-inputtime-localization-example-1']}" number="1">
+				<alloy:inputTime id="portugueseDateInput" binding="#{portugueseInputTime}" value="#{inputTimeModelBean.time}"
+					locale="pt-BR" />
+				<hr />
+				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="portugueseSelection" value="#{inputTimeModelBean.time}">
+					<f:convertDateTime pattern="#{portugueseInputTime.pattern}" locale="pt-BR" />
+				</alloy:outputText>
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: Japanese Locale obtained from a bean via EL -->
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-inputtime-localization-example-2']}" number="2">
+				<alloy:messages />
+				<alloy:inputTime id="japaneseDateInput" binding="#{japaneseInputTime}" value="#{inputTimeModelBean.time}"
+					locale="#{inputTimeModelBean.locale}" />
+				<hr />
+				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="japaneseSelection" value="#{inputTimeModelBean.time}">
+					<f:convertDateTime pattern="#{japaneseInputTime.pattern}" locale="#{inputTimeModelBean.locale}" />
+				</alloy:outputText>
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

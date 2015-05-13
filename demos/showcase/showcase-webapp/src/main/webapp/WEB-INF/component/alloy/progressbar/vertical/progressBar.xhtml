@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form>
+			<showcase:example>
+				<alloy:progressBar id="progressBar" clientKey="progressBar" height="200" label="{0}%"
+					layout="pageDirection" pollingDelay="1000" width="50" value="#{progressBarBacking.progress}">
+					<f:ajax listener="#{progressBarBacking.incrementProgress}" />
+				</alloy:progressBar>
+				<alloy:button value="#{i18n['start-progress']}"
+					onclick="Liferay.component('progressBar').startPolling(); return false;" />
+				<alloy:button value="#{i18n['stop-progress']}"
+					onclick="Liferay.component('progressBar').stopPolling(); return false;" />
+				<alloy:commandButton actionListener="#{progressBarBacking.resetProgress}"
+					onclick="Liferay.component('progressBar').stopPolling();" render="progressBar"
+					value="#{i18n['reset-progress']}" />
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

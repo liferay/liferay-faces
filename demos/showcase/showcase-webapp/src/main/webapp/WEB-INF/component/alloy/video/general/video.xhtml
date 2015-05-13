@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-4col.xhtml">
+
+	<!-- Example 1: Context-relative path to a resource via the value attribute -->
+	<ui:define name="col1">
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-video-general-example-1']}" number="1" renderedCheckbox="true">
+				<alloy:video styleClass="showcase-video" contentType="video/mp4" controls="true"
+					value="/resources/videos/over-the-rainbow.mp4" rendered="#{showcaseModelBean.selectedComponent.rendered}" />
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+	<!-- Example 2: JSF resource via the #{resource} EL keyword -->
+	<ui:define name="col2">
+		<showcase:example description="#{i18n['alloy-video-general-example-2']}" number="2">
+			<alloy:video styleClass="showcase-video" contentType="video/ogg; codecs=&quot;theora, vorbis&quot;"
+				controls="true" degrade="false" value="#{resource['videos:over-the-rainbow.ogv']}">
+				<alloy:outputText value="#{i18n['please-visit-this-website-with-an-up-to-date-browser']}" />
+			</alloy:video>
+		</showcase:example>
+	</ui:define>
+
+	<!-- Example 3: JSF resource via the Alloy Resource component -->
+	<ui:define name="col3">
+		<showcase:example description="#{i18n['alloy-video-general-example-3']}" number="3">
+			<alloy:video styleClass="showcase-video" controls="true" degrade="false"
+				value="#{videoBacking.ogvVideo}">
+				<alloy:outputText value="#{i18n['please-visit-this-website-with-an-up-to-date-browser']}" />
+			</alloy:video>
+		</showcase:example>
+	</ui:define>
+
+	<!-- Example 4: JSF resource via the library and name attributes -->
+	<ui:define name="col4">
+		<showcase:example description="#{i18n['alloy-video-general-example-4']}" number="4">
+			<alloy:video styleClass="showcase-video" controls="true" degrade="false" library="videos" name="over-the-rainbow.ogv">
+				<alloy:outputText value="#{i18n['please-visit-this-website-with-an-up-to-date-browser']}" />
+			</alloy:video>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

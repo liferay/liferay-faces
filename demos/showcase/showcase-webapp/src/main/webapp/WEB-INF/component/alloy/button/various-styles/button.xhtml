@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-60.xhtml">
+
+	<ui:define name="col1">
+		<showcase:example>
+			<p>
+				<alloy:button styleClass="btn-primary">
+					<alloy:outputText value="#{i18n['primary']}" />
+				</alloy:button>
+				<alloy:button styleClass="btn-info">
+					<alloy:outputText value="#{i18n['info']}" />
+				</alloy:button>
+				<alloy:button styleClass="btn-success">
+					<alloy:outputText value="#{i18n['success']} " />
+					<alloy:icon name="ok" />
+				</alloy:button>
+				<alloy:button styleClass="btn-warning">
+					<alloy:outputText value="#{i18n['warning']}" />
+				</alloy:button>
+				<alloy:button styleClass="btn-danger">
+					<alloy:icon name="remove" />
+					<alloy:outputText value=" #{i18n['danger']}" />
+				</alloy:button>
+				<alloy:button styleClass="btn-inverse">
+					<alloy:outputText value="#{i18n['inverse']}" />
+				</alloy:button>
+				<alloy:button styleClass="btn-link">
+					<alloy:outputText value="#{i18n['link']}" />
+				</alloy:button>
+			</p>
+
+			<p>
+				<alloy:button styleClass="btn-primary btn-large">
+					<alloy:outputText value="#{i18n['large']}" />
+				</alloy:button>
+				<alloy:button styleClass="btn-large">
+					<alloy:outputText value="#{i18n['large']}" />
+				</alloy:button>
+			</p>
+
+			<p>
+				<alloy:button styleClass="btn-primary">
+					<alloy:outputText value="#{i18n['default']}" />
+				</alloy:button>
+				<alloy:button>
+					<alloy:outputText value="#{i18n['default']}" />
+				</alloy:button>
+			</p>
+
+			<p>
+				<alloy:button styleClass="btn-primary btn-small">
+					<alloy:outputText value="#{i18n['small']}" />
+				</alloy:button>
+				<alloy:button styleClass="btn-small">
+					<alloy:outputText value="#{i18n['small']}" />
+				</alloy:button>
+			</p>
+
+			<p>
+				<alloy:button styleClass="btn-primary btn-mini">
+					<alloy:outputText value="#{i18n['mini']}" />
+				</alloy:button>
+				<alloy:button styleClass="btn-mini">
+					<alloy:outputText value="#{i18n['mini']}" />
+				</alloy:button>
+			</p>
+
+			<p>
+				<alloy:button disabled="true" styleClass="btn-primary">
+					<alloy:outputText value="#{i18n['disabled']}" />
+				</alloy:button>
+				<alloy:button disabled="true">
+					<alloy:outputText value="#{i18n['disabled']}" />
+				</alloy:button>
+			</p>
+
+			<p>
+				<alloy:button styleClass="btn-primary btn-block">
+					<alloy:outputText value="#{i18n['block']}" />
+				</alloy:button>
+				<alloy:button styleClass="btn-block">
+					<alloy:outputText value="#{i18n['block']}" />
+				</alloy:button>
+			</p>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

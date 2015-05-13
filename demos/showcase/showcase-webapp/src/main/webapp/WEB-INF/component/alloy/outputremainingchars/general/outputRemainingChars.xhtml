@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Associate with an alloy:inputText and specify a {0} token within the value attribute. -->
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-outputremainingchars-general-example-1']}" number="1"
+				renderedCheckbox="true">
+				<alloy:inputText id="inputText" maxlength="10" value="#{outputRemainingCharsModelBean.text}" />
+				<br />
+				<alloy:outputRemainingChars for="inputText" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+					value="There are {0} character(s) remaining." />
+				<hr />
+				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{outputRemainingCharsModelBean.text}" />
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: Associate with an alloy:inputTextarea and simply render the number of remaining characters. -->
+		<alloy:form>
+			<showcase:example description="#{i18n['alloy-outputremainingchars-general-example-2']}" number="2"
+				renderedCheckbox="true">
+				<alloy:inputTextarea id="inputTextarea" maxlength="20" value="#{outputRemainingCharsModelBean.text}" />
+				<br />
+				<alloy:outputRemainingChars for="inputTextarea"
+					rendered="#{showcaseModelBean.selectedComponent.rendered}" />
+				<hr />
+				<alloy:commandButton render="@form" value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{outputRemainingCharsModelBean.text}" />
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

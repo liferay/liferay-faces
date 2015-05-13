@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<showcase:example description="#{i18n['alloy-audio-graceful-degradation-example-1']}" number="1">
+			<alloy:audio styleClass="showcase-audio" contentType="audio/mp3" controls="true"
+				flashPlayer="#{resource['liferay-faces-alloy:aui/audio/player.swf']}"
+				value="#{resource['audios:over-the-rainbow.mp3']}">
+				<f:facet name="flash">
+					<param name="flashVars" value="mp3=#{audioBacking.encodedMp3ResourceURL}" />
+				</f:facet>
+			</alloy:audio>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

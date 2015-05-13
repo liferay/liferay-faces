@@ -1,0 +1,16 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:portlet="http://java.sun.com/portlet_2_0" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/WEB-INF/templates/component-3col.xhtml">
+
+	<ui:define name="col1">
+		<showcase:example>
+			<portlet:renderURL var="renderURL">
+				<portlet:param name="foo" value="bar" />
+			</portlet:renderURL>
+			<alloy:outputLink value="#{renderURL}">
+				<alloy:outputText value="#{i18n['hyperlink-targeting-the-showcase-portlet']}" />
+			</alloy:outputLink>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

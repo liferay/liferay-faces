@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-1col-80.xhtml">
+
+	<ui:define name="col1">
+		<!-- This script calls a JavaScript function that is defined in the external JavaScript -->
+		<!-- resource named example.js -->
+		<showcase:example>
+			<span id="example:text"></span>
+			<alloy:outputScript>
+				exampleNamespace.exampleFunction('example:text');
+			</alloy:outputScript>
+			<alloy:outputScript library="js" name="example.js" target="head" />
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

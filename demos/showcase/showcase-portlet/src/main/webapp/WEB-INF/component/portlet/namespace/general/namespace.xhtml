@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:portlet="http://java.sun.com/portlet_2_0" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: Introducing a variable into the EL -->
+		<showcase:example description="#{i18n['portlet-namespace-general-example-1']}" number="1">
+			<portlet:namespace var="portletNamespace" />
+			<pre>
+				<alloy:outputText value="portletNamespace=#{portletNamespace}" />
+			</pre>
+		</showcase:example>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: Output directly to the response -->
+		<showcase:example description="#{i18n['portlet-namespace-general-example-2']}" number="2">
+			<pre>
+				<alloy:outputText value="portletNamespace=" />
+				<portlet:namespace />
+			</pre>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

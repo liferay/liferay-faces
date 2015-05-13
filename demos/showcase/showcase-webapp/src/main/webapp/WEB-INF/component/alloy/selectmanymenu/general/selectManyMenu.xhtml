@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-60.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form>
+			<showcase:example renderedCheckbox="true" requiredCheckbox="true">
+				<alloy:field label="#{i18n['favorite-liferay-benefit']}">
+					<alloy:selectManyMenu id="selectManyMenu" rendered="#{showcaseModelBean.selectedComponent.rendered}"
+						required="#{showcaseModelBean.selectedComponent.required}"
+						value="#{selectManyModelBean.favoriteIds}">
+						<f:selectItem itemLabel="Compatible" itemValue="1" />
+						<f:selectItem itemLabel="Enterprise Ready" itemValue="2" />
+						<f:selectItem itemLabel="Powerful Integration" itemValue="3" />
+						<f:selectItem itemLabel="Lightweight" itemValue="4" />
+						<f:selectItem itemLabel="Open Source" itemValue="5" />
+					</alloy:selectManyMenu>
+					<alloy:message for="selectManyMenu" />
+				</alloy:field>
+				<showcase:note iconSize="small" value="#{i18n['note-chromium-issue-4579']}" />
+				<hr />
+				<alloy:commandButton action="#{selectManyBackingBean.submit}" render="@form"
+					value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<ui:repeat id="modelValue" value="#{selectManyModelBean.favoriteIds}" var="favoriteId">
+					<alloy:outputText value="#{favoriteId}" />
+					<br />
+				</ui:repeat>
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

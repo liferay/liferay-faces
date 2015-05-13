@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-2col.xhtml">
+
+	<ui:define name="col1">
+		<!-- Example 1: ValueChangeListener execution when immediate is true -->
+		<alloy:form>
+			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-true']}" number="1">
+				<alloy:messages globalOnly="true" styleClass="feedback" />
+				<alloy:inputText id="text" immediate="true" value="#{inputTextModelBean.text}"
+					valueChangeListener="#{inputTextBackingBean.valueChangeListener}" />
+				<hr />
+				<alloy:commandButton action="#{inputTextBackingBean.submit}" render="@form" value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{inputTextModelBean.text}" />
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+	<ui:define name="col2">
+		<!-- Example 2: ValueChangeListener execution when immediate is false (the default) -->
+		<alloy:form>
+			<showcase:example description="#{i18n['valuechangelistener-execution-when-immediate-is-false']}" number="2">
+				<alloy:messages globalOnly="true" styleClass="feedback" />
+				<alloy:inputText id="text" value="#{inputTextModelBean.text}"
+					valueChangeListener="#{inputTextBackingBean.valueChangeListener}" />
+				<hr />
+				<alloy:commandButton action="#{inputTextBackingBean.submit}" render="@form" value="#{i18n['submit']}" />
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{inputTextModelBean.text}" />
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>

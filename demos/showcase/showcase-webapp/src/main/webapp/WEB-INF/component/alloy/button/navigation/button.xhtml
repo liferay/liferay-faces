@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase"
+	template="/WEB-INF/templates/component-1col-60.xhtml">
+
+	<ui:define name="col1">
+		<showcase:example>
+			<!-- Navigation based on outcome of navigation-case defined in navigation-rule.xml -->
+			<alloy:button outcome="toParam">
+				<alloy:outputText value="#{i18n['to-param-page']} " />
+				<alloy:icon name="arrow-right" />
+			</alloy:button>
+		</showcase:example>
+		<showcase:outputParameter>
+			<alloy:outputText id="parameterValue" value="foo=#{facesContext.externalContext.requestParameterMap['foo']}" />
+		</showcase:outputParameter>
+	</ui:define>
+
+</ui:composition>

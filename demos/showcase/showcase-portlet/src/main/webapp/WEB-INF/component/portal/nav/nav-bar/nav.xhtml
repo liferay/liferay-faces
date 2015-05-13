@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:portal="http://liferay.com/faces/portal" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:showcase="http://xmlns.jcp.org/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-80.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form>
+			<showcase:example description="#{i18n['portal-nav-nav-bar-example-1']}" renderedCheckbox="true">
+				<portal:navBar rendered="#{showcaseModelBean.selectedComponent.rendered}">
+					<portal:nav>
+						<portal:navItem>
+							<alloy:commandLink value="Compatible" />
+						</portal:navItem>
+						<portal:navItem>
+							<alloy:commandLink value="Enterprise Ready" />
+						</portal:navItem>
+						<portal:navItem>
+							<alloy:commandLink value="Powerful Integration" />
+						</portal:navItem>
+						<portal:navItem>
+							<alloy:commandLink value="Lightweight" />
+						</portal:navItem>
+						<portal:navItem>
+							<alloy:commandLink value="Open Source" />
+						</portal:navItem>
+					</portal:nav>
+				</portal:navBar>
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>
