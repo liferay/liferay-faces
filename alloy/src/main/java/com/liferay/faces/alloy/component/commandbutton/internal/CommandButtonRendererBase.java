@@ -18,7 +18,7 @@ package com.liferay.faces.alloy.component.commandbutton.internal;
 import javax.annotation.Generated;
 
 
-import com.liferay.faces.alloy.component.button.internal.ButtonRenderer;
+import com.liferay.faces.alloy.component.button.internal.AbstractButtonRenderer;
 
 
 /**
@@ -26,7 +26,7 @@ import com.liferay.faces.alloy.component.button.internal.ButtonRenderer;
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
-public abstract class CommandButtonRendererBase extends ButtonRenderer {
+public abstract class CommandButtonRendererBase extends AbstractButtonRenderer {
 
 	// Protected Constants
 	protected static final String AJAX = "ajax";
