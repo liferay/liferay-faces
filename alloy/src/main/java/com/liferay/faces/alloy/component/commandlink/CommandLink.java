@@ -13,15 +13,12 @@
  */
 package com.liferay.faces.alloy.component.commandlink;
 
-import javax.faces.component.FacesComponent;
-
 import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
  * @author  Vernon Singleton
  */
-@FacesComponent(value = CommandLink.COMPONENT_TYPE)
 public class CommandLink extends CommandLinkBase {
 
 	// Public Constants

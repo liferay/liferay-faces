@@ -13,15 +13,12 @@
  */
 package com.liferay.faces.alloy.component.panelgroup;
 
-import javax.faces.component.FacesComponent;
-
 import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
  * @author  Kyle Stiemann
  */
-@FacesComponent(value = PanelGroup.COMPONENT_TYPE)
 public class PanelGroup extends PanelGroupBase {
 
 	// Public Constants
