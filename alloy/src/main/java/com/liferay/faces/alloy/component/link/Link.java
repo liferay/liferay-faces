@@ -13,15 +13,12 @@
  */
 package com.liferay.faces.alloy.component.link;
 
-import javax.faces.component.FacesComponent;
-
 import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
  * @author  Vernon Singleton
  */
-@FacesComponent(value = Link.COMPONENT_TYPE)
 public class Link extends LinkBase {
 
 	// Public Constants

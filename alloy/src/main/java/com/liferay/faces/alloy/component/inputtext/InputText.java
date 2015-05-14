@@ -13,7 +13,6 @@
  */
 package com.liferay.faces.alloy.component.inputtext;
 
-import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
@@ -23,7 +22,6 @@ import com.liferay.faces.util.component.ComponentUtil;
 /**
  * @author  Neil Griffin
  */
-@FacesComponent(value = InputText.COMPONENT_TYPE)
 public class InputText extends InputTextBase {
 
 	// Public Constants

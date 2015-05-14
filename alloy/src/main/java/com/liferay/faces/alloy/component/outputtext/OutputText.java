@@ -13,15 +13,12 @@
  */
 package com.liferay.faces.alloy.component.outputtext;
 
-import javax.faces.component.FacesComponent;
-
 import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
  * @author  Vernon Singleton
  */
-@FacesComponent(value = OutputText.COMPONENT_TYPE)
 public class OutputText extends OutputTextBase {
 
 	// Public Constants
