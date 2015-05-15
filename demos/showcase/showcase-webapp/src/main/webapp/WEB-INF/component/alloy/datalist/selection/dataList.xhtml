@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-60.xhtml">
+
+	<ui:define name="col1">
+		<showcase:example id="example">
+			<alloy:form id="exampleForm">
+				<alloy:dataList styleClass="unstyled" value="#{dataListModelBean.liferayBenefits}" var="liferayBenefit">
+					<alloy:dataItem>
+						<alloy:icon name="search" />
+						<alloy:commandLink onclick="Liferay.component('dialogKey').show()"
+							render=":example:exampleForm:dialogContents" value="#{liferayBenefit.label}">
+							<f:setPropertyActionListener value="#{liferayBenefit}"
+								target="#{dataListModelBean.selectedLiferayBenefit}" />
+						</alloy:commandLink>
+					</alloy:dataItem>
+				</alloy:dataList>
+				<alloy:dialog headerText="#{i18n['more-info']}" clientKey="dialogKey" dismissible="true">
+					<alloy:panelGroup id="dialogContents" styleClass="dialog-content" layout="block">
+						<alloy:outputText
+							value="#{dataListModelBean.selectedLiferayBenefit.label}: #{dataListModelBean.selectedLiferayBenefit.description}" />
+					</alloy:panelGroup>
+				</alloy:dialog>
+			</alloy:form>
+		</showcase:example>
+	</ui:define>
+
+</ui:composition>

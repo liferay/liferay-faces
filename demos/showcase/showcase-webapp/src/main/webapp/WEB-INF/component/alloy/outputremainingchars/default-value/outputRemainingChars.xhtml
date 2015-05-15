@@ -1,0 +1,15 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-60.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form>
+			<showcase:example>
+				<alloy:inputTextarea id="inputTextareaInit" maxlength="140" value="Default text" />
+				<br />
+				<alloy:outputRemainingChars for="inputTextareaInit" value="There are {0} character(s) remaining." />
+			</showcase:example>
+		</alloy:form>
+	</ui:define>
+
+</ui:composition>
