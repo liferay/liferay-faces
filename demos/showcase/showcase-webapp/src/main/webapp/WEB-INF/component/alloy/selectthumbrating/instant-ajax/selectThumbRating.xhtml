@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:alloy="http://liferay.com/faces/alloy"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:showcase="http://java.sun.com/jsf/composite/showcase" template="/WEB-INF/templates/component-1col-60.xhtml">
+
+	<ui:define name="col1">
+		<alloy:form>
+			<showcase:example>
+				<alloy:outputLabel styleClass="alloy-output-label" for="thumbRating" value="#{i18n['rating']}" />
+				<alloy:selectThumbRating id="thumbRating" value="#{selectThumbRatingModelBean.like}">
+					<f:selectItem itemLabel="#{i18n['like']}" itemValue="true" />
+					<f:selectItem itemLabel="#{i18n['dislike']}" itemValue="false" />
+					<f:ajax render="@form" />
+				</alloy:selectThumbRating>
+			</showcase:example>
+			<showcase:outputModel>
+				<alloy:outputText id="modelValue" value="#{selectThumbRatingModelBean.like}" />
+			</showcase:outputModel>
+		</alloy:form>
+	</ui:define>
+</ui:composition>
