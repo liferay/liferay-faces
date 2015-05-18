@@ -15,6 +15,7 @@
 	<modules>
 		<module>cdi/cdi-compat</module>
 		<module>cdi/cdi-weld</module>
+		<module>mojarra</module>
 	</modules>
 
 	<profiles>
