@@ -18,7 +18,6 @@ table.alloy-datatable thead th.facet, table.alloy-datatable tfoot td.facet {
 /* alloy-dialog */
 div.alloy-dialog {
 	padding: 6px;
-	text-align: center;
 }
 
 div.alloy-dialog div.modal-header {
