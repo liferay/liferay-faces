@@ -185,7 +185,7 @@ sub do_inplace_edits {
 	# will appear in the version attribute faces config tag and potentially fix the version number that will appear in
 	# the xsi:schemaLocation attribute URL of the faces config tag.
 	#
-	elsif ($file eq "faces-config.xml" and ($File::Find::name =~ /\/src/)) {
+	elsif ((($file eq "faces-config.xml") or ($file eq "navigation-rule.xml")) and ($File::Find::name =~ /\/src/)) {
 		print "$File::Find::name\n";
 		`perl -pi -e 's/faces-config version=\"[0-9.]+\"/faces-config version=\"$facesVersion\"/' $file`;
 		`perl -pi -e 's/web-facesconfig[0-9_]+/web-facesconfig_$facesVersionURL/' $file`;
